@@ -330,12 +330,8 @@ class ReportsController extends Controller
     public function getActivityReport()
     {
         $log_actions = Actionlog::orderBy('created_at', 'DESC')
-                                ->with('adminlog')
-                                ->with('accessorylog')
-                                ->with('assetlog')
-                                ->with('licenselog')
-                                ->with('userlog')
-                                ->orderBy('created_at', 'DESC')
+                                ->with('user')
+                                ->with('item')
                                 ->get();
 
         return View::make('reports/activity', compact('log_actions'));
@@ -755,11 +751,11 @@ class ReportsController extends Controller
 
         foreach ($assetsForReport as $assetItem) {
             $row    = [ ];
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->model->category->name));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->model->name));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->showAssetName()));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->asset_tag));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->assigneduser->fullName()));
+            $row[]  = str_replace(',', '', e($assetItem->item->model->category->name));
+            $row[]  = str_replace(',', '', e($assetItem->item->model->name));
+            $row[]  = str_replace(',', '', e($assetItem->item->showAssetName()));
+            $row[]  = str_replace(',', '', e($assetItem->item->asset_tag));
+            $row[]  = str_replace(',', '', e($assetItem->item->assigneduser->fullName()));
             $rows[] = implode($row, ',');
         }
 

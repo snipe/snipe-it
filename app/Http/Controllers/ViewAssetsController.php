@@ -39,7 +39,7 @@ class ViewAssetsController extends Controller
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find(Auth::user()->id);
 
-        $userlog = $user->userlog->load('assetlog', 'consumablelog', 'assetlog.model', 'licenselog', 'accessorylog', 'userlog', 'adminlog');
+        $userlog = $user->userlog->load('item', 'item.model', 'user', 'target');
 
 
 
@@ -79,14 +79,15 @@ class ViewAssetsController extends Controller
         } else {
 
             $logaction = new Actionlog();
-            $logaction->asset_id = $data['asset_id'] = $asset->id;
-            $logaction->asset_type = $data['asset_type']  = 'hardware';
+            $logaction->item_id = $data['asset_id'] = $asset->id;
+            $logaction->item_type = Asset::class;
             $logaction->created_at = $data['requested_date'] = date("Y-m-d h:i:s");
-
+            $data['asset_type'] = 'hardware';
             if ($user->location_id) {
                 $logaction->location_id = $user->location_id;
             }
-            $logaction->user_id = $data['user_id'] = Auth::user()->id;
+            $logaction->target_id = $data['user_id'] = Auth::user()->id;
+            $logaction->target_type = User::class;
             $log = $logaction->logaction('requested');
 
             $data['requested_by'] = $user->fullName();
@@ -119,7 +120,7 @@ class ViewAssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'REQUESTED:',
-                                    'value' => strtoupper($logaction->asset_type).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> requested by <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->fullName().'>.'
+                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> requested by <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->fullName().'>.'
                                 ]
 
                             ]
@@ -143,7 +144,7 @@ class ViewAssetsController extends Controller
     public function getAcceptAsset($logID = null)
     {
 
-        if (!$findlog = DB::table('asset_logs')->where('id', '=', $logID)->first()) {
+        if (!$findlog = Actionlog::where('id', $logID)->first()) {
             echo 'no record';
             //return redirect()->to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
@@ -155,23 +156,7 @@ class ViewAssetsController extends Controller
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
-        // Asset
-        if (($findlog->asset_id!='') && ($findlog->asset_type=='hardware')) {
-            $item = Asset::find($findlog->asset_id);
-
-        // software
-        } elseif (($findlog->asset_id!='') && ($findlog->asset_type=='software')) {
-            $item = License::find($findlog->asset_id);
-        // accessories
-        } elseif ($findlog->accessory_id!='') {
-            $item = Accessory::find($findlog->accessory_id);
-        // consumable
-        } elseif ($findlog->consumable_id!='') {
-            $item = Consumable::find($findlog->consumable_id);
-        // components
-        } elseif ($findlog->component_id!='') {
-            $item = Component::find($findlog->component_id);
-        }
+        $item = $findlog->item;
 
         // Check if the asset exists
         if (is_null($item)) {
@@ -189,7 +174,7 @@ class ViewAssetsController extends Controller
     {
 
         // Check if the asset exists
-        if (is_null($findlog = DB::table('asset_logs')->where('id', '=', $logID)->first())) {
+        if (is_null($findlog = Actionlog::where('id', $logID)->first())) {
             // Redirect to the asset management page
             return redirect()->to('account/view-assets')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
@@ -221,56 +206,24 @@ class ViewAssetsController extends Controller
             $accepted="rejected";
             $return_msg = trans('admin/users/message.declined');
         }
-
+            $logaction->item_id      = $findlog->item_id;
+            $logaction->item_type    = $findlog->item_type;
         // Asset
-        if (($findlog->asset_id!='') && ($findlog->asset_type=='hardware')) {
-            $logaction->asset_id = $findlog->asset_id;
-            $logaction->accessory_id = null;
-            $logaction->asset_type = 'hardware';
-
+        if (($findlog->item_id!='') && ($findlog->item_type==Asset::class)) {
             if (Input::get('asset_acceptance')!='accepted') {
                 DB::table('assets')
-                ->where('id', $findlog->asset_id)
+                ->where('id', $findlog->item_id)
                 ->update(array('assigned_to' => null));
             }
-
-
-        // software
-        } elseif (($findlog->asset_id!='') && ($findlog->asset_type=='software')) {
-            $logaction->asset_id = $findlog->asset_id;
-            $logaction->accessory_id = null;
-            $logaction->component_id = null;
-            $logaction->asset_type = 'software';
-
-        // accessories
-        } elseif ($findlog->accessory_id!='') {
-            $logaction->asset_id = null;
-            $logaction->component_id = null;
-            $logaction->accessory_id = $findlog->accessory_id;
-            $logaction->asset_type = 'accessory';
-            // accessories
-        } elseif ($findlog->consumable_id!='') {
-            $logaction->asset_id = null;
-            $logaction->accessory_id = null;
-            $logaction->component_id = null;
-            $logaction->consumable_id = $findlog->consumable_id;
-            $logaction->asset_type = 'consumable';
-        } elseif ($findlog->component_id!='') {
-            $logaction->asset_id = null;
-            $logaction->accessory_id = null;
-            $logaction->consumable_id = null;
-            $logaction->component_id = $findlog->component_id;
-            $logaction->asset_type = 'component';
         }
-
-        $logaction->checkedout_to = $findlog->checkedout_to;
+        $logaction->target_id = $findlog->target_id;
 
         $logaction->note = e(Input::get('note'));
         $logaction->user_id = $user->id;
         $logaction->accepted_at = date("Y-m-d h:i:s");
         $log = $logaction->logaction($logaction_msg);
 
-        $update_checkout = DB::table('asset_logs')
+        $update_checkout = DB::table('action_logs')
         ->where('id', $findlog->id)
         ->update(array('accepted_id' => $logaction->id));
 

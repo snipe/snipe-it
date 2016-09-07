@@ -40,36 +40,36 @@
 
             @foreach ($log_actions as $log_action)
             <tr>
-                <td><a href="../admin/users/{{ $log_action->adminlog->id }}/view">{{ $log_action->adminlog->fullName() }}</a></td>
+                <td>
+                    @if($log_action->user)
+                    <a href="../admin/users/{{ $log_action->user->id }}/view">{{ $log_action->user->fullName() }}</a>
+                    @endif
+                </td>
                 <td>{{ $log_action->action_type }}</td>
                 <td>
-    	            @if ($log_action->asset_type=="hardware")
-    	            	Asset
-    	            @elseif ($log_action->asset_type=="software")
-    	            	License
-    	            @elseif ($log_action->asset_type=="accessory")
-    	            	Accessory
-                    @elseif ($log_action->asset_type=="consumable")
-        	            Consumable
-    	            @endif
+    	            {{ title_case($log_action->itemType()) }}
                 </td>
 
                 <td>
-                @if (($log_action->assetlog) && ($log_action->asset_type=="hardware"))
-                     {{ $log_action->assetlog->showAssetName() }}
-                 @elseif (($log_action->licenselog) && ($log_action->asset_type=="software"))
-                     {{ $log_action->licenselog->name }}
-                 @elseif (($log_action->consumablelog) && ($log_action->asset_type=="consumable"))
-                     {{ $log_action->consumablelog->name }}
-                 @elseif (($log_action->accessorylog) && ($log_action->asset_type=="accessory"))
-                     {{ $log_action->accessorylog->name }}
-                 @else
-                     {{ trans('general.bad_data') }}
-                 @endif
+
+                @if ($item = $log_action->item)
+                    @if ($log_action->itemType()=="asset")
+                        {{ $item->showAssetName() }}
+                    @else
+                        {{ $item->name }}
+                    @endif
+                @else
+                    {{ trans('general.bad_data') }}
+                @endif
                 </td>
                 <td>
-    	            @if ($log_action->userlog)
-    	            	<a href="../admin/users/{{ $log_action->userlog->id }}/view">{{ $log_action->userlog->fullName() }}</a>
+    	            @if ($log_action->target)
+                        @if ($log_action->target instanceof \App\Models\User)
+                        <a href="../admin/users/{{ $log_action->target->id }}/view">{{ $log_action->target->fullName() }}</a>
+                        @elseif ($log_action->target instanceof \App\Models\Asset)
+    	            	<a href="../hardware/{{ $log_action->target->id }}/view">{{ $log_action->target->showAssetName() }}</a>
+                        @endif
+
     	            @endif
                 </td>
 

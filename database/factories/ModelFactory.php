@@ -268,10 +268,11 @@ $factory->defineAs(App\Models\Actionlog::class, 'asset-checkout', function (Fake
   return [
     'user_id'      	=> 1,
     'action_type' 		=> 'checkout',
-    'asset_id' 		=> $faker->numberBetween(1, 10),
-    'checkedout_to' => 1,
+    'item_id' 		=> $faker->numberBetween(1, 10),
+    'target_id' => 1,
+    'target_type' => 'App\\Models\\User',
     'created_at'  => $faker->dateTime(),
-    'asset_type'  => 'hardware',
+    'item_type'  => 'App\\Models\\Asset',
     'note' 			=> $faker->sentence,
     'user_id' 			=> '1',
   ];
