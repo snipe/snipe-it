@@ -146,8 +146,6 @@ class LicenseImportCommand extends Command
                 } else {
                     $user_license_maintained = 0;
                 }
-
-
             } else {
                 $user_license_maintained = '';
             }
@@ -173,15 +171,12 @@ class LicenseImportCommand extends Command
                 $this->comment('User '.$user_name.' is not a name - assume this user already exists');
                 $user_username = '';
             // No name was given
-
             } elseif ($user_name=='') {
                 $this->comment('No user data provided - skipping user creation, just adding license');
                 $first_name = '';
                 $last_name = '';
                 $user_username = '';
-
             } else {
-
                     $name = explode(" ", $user_name);
                     $first_name = $name[0];
                     $email_last_name = '';
@@ -197,17 +192,13 @@ class LicenseImportCommand extends Command
                     if ($this->option('email_format')=='filastname') {
                         $email_last_name.=str_replace(' ', '', $last_name);
                         $email_prefix = $first_name[0].$email_last_name;
-
                     } elseif ($this->option('email_format')=='firstname.lastname') {
                         $email_last_name.=str_replace(' ', '', $last_name);
                         $email_prefix = $first_name.'.'.$email_last_name;
-
                     } elseif ($this->option('email_format')=='firstname') {
                         $email_last_name.=str_replace(' ', '', $last_name);
                         $email_prefix = $first_name;
                     }
-
-
                 }
 
 
@@ -245,7 +236,6 @@ class LicenseImportCommand extends Command
                 if ($user = User::where('username', $user_username)->whereNotNull('username')->first()) {
                     $this->comment('User '.$user_username.' already exists');
                 } else {
-
                     $user = new \App\Models\User;
                     $password  = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
 
@@ -284,7 +274,6 @@ class LicenseImportCommand extends Command
                 } else {
                     $this->comment('Something went wrong! Supplier '.$user_license_supplier.' was NOT created');
                 }
-
             }
 
 
@@ -337,9 +326,6 @@ class LicenseImportCommand extends Command
                 } else {
                     $this->comment('Something went wrong! NO seats for '.$user_license_name.' were created');
                 }
-
-
-
             } else {
                 $this->comment('Something went wrong! License '.$user_license_name.' was NOT created');
             }
@@ -348,10 +334,7 @@ class LicenseImportCommand extends Command
             $this->comment('=====================================');
 
             return true;
-
         });
-
-
     }
 
     /**

@@ -124,7 +124,6 @@ class AssetModelsController extends Controller
         }
 
             return redirect()->back()->withInput()->withErrors($model->getErrors());
-
     }
 
     /**
@@ -260,7 +259,6 @@ class AssetModelsController extends Controller
 
         // Redirect to the model create page
         return redirect()->to("hardware/models/$modelId/edit")->with('error', trans('admin/models/message.update.error'));
-
     }
 
     /**
@@ -283,7 +281,6 @@ class AssetModelsController extends Controller
         if ($model->assets->count() > 0) {
             // Throw an error that this model is associated with assets
             return redirect()->to('hardware/models')->with('error', trans('admin/models/message.assoc_users'));
-
         } else {
             // Delete the model
             $model->delete();
@@ -309,7 +306,6 @@ class AssetModelsController extends Controller
         $model = AssetModel::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
-
             // Restore the model
             $model->restore();
 
@@ -318,11 +314,9 @@ class AssetModelsController extends Controller
 
             // Redirect back
             return redirect()->back()->with('success', $success);
-
         } else {
             return redirect()->back()->with('error', trans('admin/models/message.not_found'));
         }
-
     }
 
 
@@ -347,8 +341,6 @@ class AssetModelsController extends Controller
             // Redirect to the user management page
             return redirect()->route('models')->with('error', $error);
         }
-
-
     }
 
     /**
@@ -381,7 +373,6 @@ class AssetModelsController extends Controller
         $view->with('model', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
-
     }
 
 

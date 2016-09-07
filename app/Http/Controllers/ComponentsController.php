@@ -112,8 +112,6 @@ class ComponentsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
-
-
     }
 
     /**
@@ -195,10 +193,6 @@ class ComponentsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
-
-
-
-
     }
 
     /**
@@ -223,7 +217,6 @@ class ComponentsController extends Controller
 
             // Redirect to the locations management page
             return redirect()->to('admin/components')->with('success', trans('admin/components/message.delete.success'));
-
     }
 
     public function postBulk($componentId = null)
@@ -251,8 +244,6 @@ class ComponentsController extends Controller
         $component = Component::find($componentId);
 
         if (isset($component->id)) {
-
-
             if (!Company::isCurrentUserHasAccess($component)) {
                 return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
             } else {
@@ -265,8 +256,6 @@ class ComponentsController extends Controller
             // Redirect to the user management page
             return redirect()->route('components')->with('error', $error);
         }
-
-
     }
 
     /**
@@ -292,7 +281,6 @@ class ComponentsController extends Controller
         $assets_list = Helper::detailedAssetList();
 
         return View::make('components/checkout', compact('component'))->with('assets_list', $assets_list);
-
     }
 
     /**
@@ -319,7 +307,7 @@ class ComponentsController extends Controller
 
 
         $max_to_checkout = $component->numRemaining();
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             "asset_id"          => "required",
             "assigned_qty"      => "required|numeric|between:1,$max_to_checkout"
         ]);
@@ -354,7 +342,6 @@ class ComponentsController extends Controller
         $settings = Setting::getSettings();
 
         if ($settings->slack_endpoint) {
-
             $slack_settings = [
                 'username' => $settings->botname,
                 'channel' => $settings->slack_channel,
@@ -377,17 +364,12 @@ class ComponentsController extends Controller
                             ],
                         ]
                     ])->send('Component Checked Out');
-
             } catch (Exception $e) {
-
             }
         }
 
       // Redirect to the new component page
         return redirect()->to("admin/components")->with('success', trans('admin/components/message.checkout.success'));
-
-
-
     }
 
 
@@ -448,18 +430,24 @@ class ComponentsController extends Controller
         foreach ($components as $component) {
             $actions = '<nobr>';
             if (Gate::allows('components.checkout')) {
-                $actions .= '<a href="' . route('checkout/component',
-                        $component->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '" ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= '<a href="' . route(
+                    'checkout/component',
+                    $component->id
+                ) . '" style="margin-right:5px;" class="btn btn-info btn-sm ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '" ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
 
             if (Gate::allows('components.edit')) {
-                $actions .= '<a href="' . route('update/component',
-                        $component->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= '<a href="' . route(
+                    'update/component',
+                    $component->id
+                ) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
 
             if (Gate::allows('components.delete')) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/component',
-                        $component->id) . '" data-content="' . trans('admin/components/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($component->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route(
+                    'delete/component',
+                    $component->id
+                ) . '" data-content="' . trans('admin/components/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($component->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
 
             $actions .='</nobr>';
@@ -485,7 +473,6 @@ class ComponentsController extends Controller
         $data = array('total' => $consumCount, 'rows' => $rows);
 
         return $data;
-
     }
 
     /**

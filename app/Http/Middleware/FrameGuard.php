@@ -19,6 +19,5 @@ class FrameGuard
             $response->headers->set('X-Frame-Options', 'SAMEORIGIN', false);
         }
         return $response;
-
     }
 }

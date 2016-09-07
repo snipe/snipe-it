@@ -29,7 +29,6 @@ class DashboardController extends Controller
     {
         // Show the page
         if (Auth::user()->hasAccess('admin')) {
-
             $recent_activity = Actionlog::latest()
                 ->with('item')
                 ->take(20)

@@ -140,7 +140,6 @@ class UsersController extends Controller
 
 
         if ($user->save()) {
-
             if ($request->has('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
@@ -164,9 +163,6 @@ class UsersController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
-
-
-
     }
 
     /**
@@ -198,7 +194,6 @@ class UsersController extends Controller
 
       // Was the user created?
         if ($user->save()) {
-
             if (Input::get('email_user') == 1) {
                 // Send the credentials through email
                 $data = array();
@@ -214,13 +209,9 @@ class UsersController extends Controller
             }
 
             return JsonResponse::create($user);
-
         } else {
             return JsonResponse::create(["error" => "Failed validation: " . print_r($user->getErrors(), true)], 500);
         }
-
-
-
     }
 
     /**
@@ -311,7 +302,7 @@ class UsersController extends Controller
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
         }
-        if ( $request->has('username')) {
+        if ($request->has('username')) {
             $user->username = e($request->input('username'));
         }
         $user->email = e($request->input('email'));
@@ -347,8 +338,6 @@ class UsersController extends Controller
 
             // Was the user updated?
         if ($user->save()) {
-
-
             // Prepare the success message
             $success = trans('admin/users/message.success.update');
 
@@ -357,7 +346,6 @@ class UsersController extends Controller
         }
 
             return redirect()->back()->withInput()->withErrors($user->getErrors());
-
     }
 
     /**
@@ -391,19 +379,16 @@ class UsersController extends Controller
             }
 
             if (count($user->assets) > 0) {
-
                 // Redirect to the user management page
                 return redirect()->route('users')->with('error', 'This user still has ' . count($user->assets) . ' assets associated with them.');
             }
 
             if (count($user->licenses) > 0) {
-
                 // Redirect to the user management page
                 return redirect()->route('users')->with('error', 'This user still has ' . count($user->licenses) . ' licenses associated with them.');
             }
 
             if (count($user->accessories) > 0) {
-
                 // Redirect to the user management page
                 return redirect()->route('users')->with('error', 'This user still has ' . count($user->accessories) . ' accessories associated with them.');
             }
@@ -466,7 +451,6 @@ class UsersController extends Controller
         } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
             return redirect()->route('users')->with('error', 'No status selected');
         } else {
-
             $user_raw_array = Input::get('edit_user');
             $asset_array = array();
 
@@ -479,7 +463,6 @@ class UsersController extends Controller
             }
 
             if (!config('app.lock_passwords')) {
-
                 $users = User::whereIn('id', $user_raw_array)->get();
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
                 $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
@@ -490,7 +473,6 @@ class UsersController extends Controller
 
 
                 foreach ($assets as $asset) {
-
                     $asset_array[] = $asset->id;
 
                     // Update the asset log
@@ -522,8 +504,6 @@ class UsersController extends Controller
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin accessory and delete user';
                     $logaction->logaction('checkin from');
-
-
                 }
 
                 foreach ($licenses as $license) {
@@ -533,7 +513,7 @@ class UsersController extends Controller
                     $logaction->item_id = $license->id;
                     $logaction->item_type = License::class;
                     $logaction->target_id = $license->assigned_to;
-                    $logaction->target_type = User::class; 
+                    $logaction->target_type = User::class;
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin license and delete user';
                     $logaction->logaction('checkin from');
@@ -553,7 +533,6 @@ class UsersController extends Controller
             } else {
                 return redirect()->route('users')->with('error', 'Bulk delete is not enabled in this installation');
             }
-
         }
     }
 
@@ -576,14 +555,12 @@ class UsersController extends Controller
         if (!Company::isCurrentUserHasAccess($user)) {
             return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
         } else {
-
             // Restore the user
             if (User::withTrashed()->where('id', $id)->restore()) {
                 return redirect()->route('users')->with('success', trans('admin/users/message.success.restored'));
             } else {
                 return redirect()->route('users')->with('error', 'User could not be restored.');
             }
-
         }
     }
 
@@ -604,7 +581,6 @@ class UsersController extends Controller
         $userlog = $user->userlog->load('item');
 
         if (isset($user->id)) {
-
             if (!Company::isCurrentUserHasAccess($user)) {
                 return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
@@ -775,7 +751,6 @@ class UsersController extends Controller
         $nbInsert = $csv->each(function ($row) use ($duplicates) {
 
             if (array_key_exists(2, $row)) {
-
                 if (Input::get('activate') == 1) {
                     $activated = '1';
                 } else {
@@ -800,7 +775,6 @@ class UsersController extends Controller
                     if ($user) {
                         $duplicates .= $row[2] . ', ';
                     } else {
-
                         $newuser = array(
                             'first_name' => trim(e($row[0])),
                             'last_name' => trim(e($row[1])),
@@ -879,7 +853,7 @@ class UsersController extends Controller
         }
 
         $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
-        ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle');
+        ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company', 'throttle');
         $users = Company::scopeCompanyables($users);
 
         switch ($status) {
@@ -927,37 +901,46 @@ class UsersController extends Controller
             }
 
 
-                if (!is_null($user->deleted_at)) {
-                    if (Gate::allows('users.delete')) {
-                        $actions .= '<a href="' . route('restore/user',
-                                $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
-                    }
-                } else {
-
-                    if (Gate::allows('users.delete')) {
-                        if ($user->accountStatus() == 'suspended') {
-                            $actions .= '<a href="' . route('unsuspend/user',
-                                    $user->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
-                        }
-                    }
-                    if (Gate::allows('users.edit')) {
-                        $actions .= '<a href="' . route('update/user',
-                                $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
-
-                        $actions .= '<a href="' . route('clone/user',
-                                $user->id) . '" class="btn btn-info btn-sm"><i class="fa fa-clone"></i></a>';
-                    }
-                    if (Gate::allows('users.delete')) {
-                        if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
-                            $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/user',
-                                    $user->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
-                        } else {
-                            $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
-                        }
-                    } else {
-                        $actions.='foo';
+            if (!is_null($user->deleted_at)) {
+                if (Gate::allows('users.delete')) {
+                    $actions .= '<a href="' . route(
+                        'restore/user',
+                        $user->id
+                    ) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
+                }
+            } else {
+                if (Gate::allows('users.delete')) {
+                    if ($user->accountStatus() == 'suspended') {
+                        $actions .= '<a href="' . route(
+                            'unsuspend/user',
+                            $user->id
+                        ) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
                     }
                 }
+                if (Gate::allows('users.edit')) {
+                    $actions .= '<a href="' . route(
+                        'update/user',
+                        $user->id
+                    ) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
+
+                    $actions .= '<a href="' . route(
+                        'clone/user',
+                        $user->id
+                    ) . '" class="btn btn-info btn-sm"><i class="fa fa-clone"></i></a>';
+                }
+                if (Gate::allows('users.delete')) {
+                    if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
+                        $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route(
+                            'delete/user',
+                            $user->id
+                        ) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+                    } else {
+                        $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+                    }
+                } else {
+                    $actions.='foo';
+                }
+            }
 
             $actions .= '</nobr>';
 
@@ -1006,13 +989,11 @@ class UsersController extends Controller
         $destinationPath = config('app.private_uploads') . '/users';
 
         if (isset($user->id)) {
-
             if (!Company::isCurrentUserHasAccess($user)) {
                 return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
             }
 
             foreach (Input::file('file') as $file) {
-
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'user-' . $user->id . '-' . str_random(8);
                 $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
@@ -1029,10 +1010,8 @@ class UsersController extends Controller
                 $logaction->filename = $filename;
                 $logaction->action_type = 'uploaded';
                 $logaction->save();
-
             }
             return JsonResponse::create($logaction);
-
         } else {
             return JsonResponse::create(["error" => "Failed validation: ".print_r($logaction->getErrors(), true)], 500);
         }
@@ -1055,7 +1034,6 @@ class UsersController extends Controller
 
         // the license is valid
         if (isset($user->id)) {
-
             if (!Company::isCurrentUserHasAccess($user)) {
                 return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
@@ -1123,19 +1101,18 @@ class UsersController extends Controller
         try {
             $ldapconn = Ldap::connectToLdap();
         } catch (\Exception $e) {
-            return redirect()->route('users')->with('error',$e->getMessage());
+            return redirect()->route('users')->with('error', $e->getMessage());
         }
 
 
         try {
             Ldap::bindAdminToLdap($ldapconn);
         } catch (\Exception $e) {
-            return redirect()->route('users')->with('error',$e->getMessage());
+            return redirect()->route('users')->with('error', $e->getMessage());
         }
 
         return View::make('users/ldap')
               ->with('location_list', $location_list);
-
     }
 
 
@@ -1180,13 +1157,13 @@ class UsersController extends Controller
         try {
             $ldapconn = Ldap::connectToLdap();
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('error',$e->getMessage());
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
 
         try {
             Ldap::bindAdminToLdap($ldapconn);
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('error',$e->getMessage());
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
 
         $summary = array();
@@ -1199,7 +1176,6 @@ class UsersController extends Controller
 
         for ($i = 0; $i < $results["count"]; $i++) {
             if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
-
                 $item = array();
                 $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
                 $item["employee_number"] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : "";
@@ -1245,7 +1221,6 @@ class UsersController extends Controller
 
                 array_push($summary, $item);
             }
-
         }
 
 

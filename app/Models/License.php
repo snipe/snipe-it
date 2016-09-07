@@ -139,8 +139,6 @@ class License extends Depreciable
                 ->orWhereNotNull('asset_id');
             })
         ->count();
-
-
     }
 
     public function remaincount()
@@ -194,7 +192,6 @@ class License extends Depreciable
         ->where('expiration_date', '>', date("Y-m-d"))
         ->orderBy('expiration_date', 'ASC')
         ->get();
-
     }
 
     /**

@@ -111,7 +111,6 @@ class Accessory extends Model
         } else {
             return null;
         }
-
     }
 
     public function numRemaining()

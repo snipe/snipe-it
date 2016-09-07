@@ -7,30 +7,33 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CustomFieldTest extends \Codeception\TestCase\Test
 {
-  protected $tester;
-  use DatabaseMigrations;
+    protected $tester;
+    use DatabaseMigrations;
 
-  public function testConstructor() {
-    $customfield = new CustomField();
-  }
+    public function testConstructor()
+    {
+        $customfield = new CustomField();
+    }
 
-  public function testFormat() {
-    $customfield = factory(CustomField::class, 'customfield-ip')->make();
-    $values = [
-      'name' => $customfield->name,
-      'format' => $customfield->format,
-      'element' => $customfield->element,
-    ];
+    public function testFormat()
+    {
+        $customfield = factory(CustomField::class, 'customfield-ip')->make();
+        $values = [
+        'name' => $customfield->name,
+        'format' => $customfield->format,
+        'element' => $customfield->element,
+        ];
 
-    $this->assertEquals($customfield->getAttributes()['format'],CustomField::$PredefinedFormats['IP']); //this seems undocumented...
-    $this->assertEquals($customfield->format,"IP");
-  }
+        $this->assertEquals($customfield->getAttributes()['format'], CustomField::$PredefinedFormats['IP']); //this seems undocumented...
+        $this->assertEquals($customfield->format, "IP");
+    }
 
-  public function testDbName() {
-    $customfield=new CustomField();
-    $customfield->name="An Example Name";
-    $this->assertEquals($customfield->db_column_name(),"_snipeit_an_example_name");
-  }
+    public function testDbName()
+    {
+        $customfield=new CustomField();
+        $customfield->name="An Example Name";
+        $this->assertEquals($customfield->db_column_name(), "_snipeit_an_example_name");
+    }
 
   // public function testValidation() {
   //   // $f=new CustomField();

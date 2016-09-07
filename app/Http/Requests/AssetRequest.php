@@ -49,7 +49,6 @@ class AssetRequest extends Request
 
 
         return $rules;
-
     }
 
     public function response(array $errors)

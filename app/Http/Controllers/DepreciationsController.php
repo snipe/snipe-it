@@ -79,7 +79,6 @@ class DepreciationsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
-
     }
 
     /**
@@ -131,8 +130,6 @@ class DepreciationsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
-
-
     }
 
     /**
@@ -153,17 +150,14 @@ class DepreciationsController extends Controller
         }
 
         if ($depreciation->has_models() > 0) {
-
             // Redirect to the asset management page
             return redirect()->to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.assoc_users'));
         } else {
-
             $depreciation->delete();
 
             // Redirect to the depreciations management page
             return redirect()->to('admin/settings/depreciations')->with('success', trans('admin/depreciations/message.delete.success'));
         }
-
     }
 
 
@@ -221,6 +215,5 @@ class DepreciationsController extends Controller
         $data = array('total' => $depreciationsCount, 'rows' => $rows);
 
         return $data;
-
     }
 }

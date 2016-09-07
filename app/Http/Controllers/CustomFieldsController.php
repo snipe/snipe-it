@@ -71,7 +71,7 @@ class CustomFieldsController extends Controller
             [
                 "name" => e($request->get("name")),
                 "user_id" => Auth::user()->id]
-            );
+        );
 
         $validator=Validator::make(Input::all(), $cfset->rules);
         if ($validator->passes()) {
@@ -305,7 +305,5 @@ class CustomFieldsController extends Controller
             $fields[$field->id] = ['required' => $field->pivot->required, 'order' => $value];
         }
         return $fieldset->fields()->sync($fields);
-
-
     }
 }

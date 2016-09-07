@@ -68,22 +68,18 @@ class Statuslabel extends Model
             $statustype['pending'] = 1;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 0;
-
         } elseif ($type == 'deployable') {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 1;
             $statustype['archived'] = 0;
-
         } elseif ($type == 'archived') {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 1;
-            
         } else {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 0;
-
         }
 
         return $statustype;

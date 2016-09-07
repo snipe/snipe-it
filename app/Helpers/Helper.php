@@ -29,7 +29,8 @@ class Helper
 {
 
 
-    public static function parseEscapedMarkedown($str) {
+    public static function parseEscapedMarkedown($str)
+    {
         $Parsedown = new \Parsedown();
 
         if ($str) {
@@ -135,8 +136,9 @@ class Helper
         $categories = Category::orderBy('name', 'asc')
                 ->whereNull('deleted_at')
                 ->orderBy('name', 'asc');
-        if(!empty($category_type))
+        if (!empty($category_type)) {
             $categories = $categories->where('category_type', '=', $category_type);
+        }
         $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
         return $category_list;
     }
@@ -205,7 +207,7 @@ class Helper
     {
         $users_list =   array( '' => trans('general.select_user')) +
                         User::where('deleted_at', '=', null)
-                        ->where('show_in_list','=',1)
+                        ->where('show_in_list', '=', 1)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
                         ->lists('complete_name', 'id')->toArray();
@@ -299,14 +301,11 @@ class Helper
                 $items_array[$all_count]['min_amt']=$consumable->min_amt;
                 $all_count++;
             }
-
-
         }
 
         foreach ($accessories as $accessory) {
             $avail = $accessory->numRemaining();
             if ($avail < ($accessory->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-
                 if ($accessory->total_qty > 0) {
                     $percent = number_format((($accessory->numRemaining() / $accessory->total_qty) * 100), 0);
                 } else {
@@ -321,7 +320,6 @@ class Helper
                 $items_array[$all_count]['min_amt']=$accessory->min_amt;
                 $all_count++;
             }
-
         }
 
         foreach ($components as $component) {
@@ -341,14 +339,11 @@ class Helper
                 $items_array[$all_count]['min_amt']=$component->min_amt;
                 $all_count++;
             }
-
         }
 
 
 
         return $items_array;
-
-
     }
 
 
@@ -390,14 +385,12 @@ class Helper
         $permissions_arr = array();
 
         foreach ($permissions as $permission) {
-
             for ($x = 0; $x < count($permission); $x++) {
                 $permission_name = $permission[$x]['permission'];
 
                 if ($permission[$x]['display'] === true) {
-
                     if ($selected_arr) {
-                        if (array_key_exists($permission_name,$selected_arr)) {
+                        if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
@@ -406,11 +399,7 @@ class Helper
                         $permissions_arr[$permission_name] = '0';
                     }
                 }
-
-
             }
-
-
         }
 
         return $permissions_arr;
@@ -428,7 +417,8 @@ class Helper
      * @since [v3.0]
      * @return boolean
      */
-    public static function checkIfRequired($class, $field) {
+    public static function checkIfRequired($class, $field)
+    {
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
@@ -437,7 +427,6 @@ class Helper
                 } else {
                     return true;
                 }
-
             }
         }
     }
@@ -455,7 +444,7 @@ class Helper
      */
     public static function array_smart_fetch(array $array, $key, $default = '')
     {
-       array_change_key_case($array, CASE_LOWER);
+        array_change_key_case($array, CASE_LOWER);
         return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[ $key ])) : $default;
     }
 
@@ -478,21 +467,17 @@ class Helper
     }
 
 
-    public static function gracefulDecrypt(CustomField $field, $string) {
+    public static function gracefulDecrypt(CustomField $field, $string)
+    {
 
         if ($field->isFieldDecryptable($string)) {
-
             try {
                 Crypt::decrypt($string);
                 return Crypt::decrypt($string);
-
             } catch (DecryptException $e) {
                 return 'Error Decrypting: '.$e->getMessage();
             }
-
         }
         return $string;
-
     }
-
 }

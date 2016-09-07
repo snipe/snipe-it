@@ -110,8 +110,6 @@ class ConsumablesController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
-
-
     }
 
     /**
@@ -192,7 +190,6 @@ class ConsumablesController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
-
     }
 
     /**
@@ -217,7 +214,6 @@ class ConsumablesController extends Controller
 
             // Redirect to the locations management page
             return redirect()->to('admin/consumables')->with('success', trans('admin/consumables/message.delete.success'));
-
     }
 
 
@@ -236,8 +232,6 @@ class ConsumablesController extends Controller
         $consumable = Consumable::find($consumableId);
 
         if (isset($consumable->id)) {
-
-
             if (!Company::isCurrentUserHasAccess($consumable)) {
                 return redirect()->to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
             } else {
@@ -250,8 +244,6 @@ class ConsumablesController extends Controller
             // Redirect to the user management page
             return redirect()->route('consumables')->with('error', $error);
         }
-
-
     }
 
     /**
@@ -277,7 +269,6 @@ class ConsumablesController extends Controller
         $users_list = Helper::usersList();
 
         return View::make('consumables/checkout', compact('consumable'))->with('users_list', $users_list);
-
     }
 
     /**
@@ -321,7 +312,6 @@ class ConsumablesController extends Controller
         $settings = Setting::getSettings();
 
         if ($settings->slack_endpoint) {
-
             $slack_settings = [
                 'username' => $settings->botname,
                 'channel' => $settings->slack_channel,
@@ -344,9 +334,7 @@ class ConsumablesController extends Controller
                             ],
                         ]
                     ])->send('Consumable Checked Out');
-
             } catch (Exception $e) {
-
             }
         }
 
@@ -362,7 +350,6 @@ class ConsumablesController extends Controller
 
 
         if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
-
             Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                 $m->subject('Confirm consumable delivery');
@@ -371,9 +358,6 @@ class ConsumablesController extends Controller
 
       // Redirect to the new consumable page
         return redirect()->to("admin/consumables")->with('success', trans('admin/consumables/message.checkout.success'));
-
-
-
     }
 
 
@@ -437,17 +421,23 @@ class ConsumablesController extends Controller
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
             if (Gate::allows('consumables.checkout')) {
-                $actions .= '<a href="' . route('checkout/consumable',
-                        $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= '<a href="' . route(
+                    'checkout/consumable',
+                    $consumable->id
+                ) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
 
             if (Gate::allows('consumables.edit')) {
-                $actions .= '<a href="' . route('update/consumable',
-                        $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= '<a href="' . route(
+                    'update/consumable',
+                    $consumable->id
+                ) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
             if (Gate::allows('consumables.delete')) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/consumable',
-                        $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route(
+                    'delete/consumable',
+                    $consumable->id
+                ) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
 
             $actions .='</nobr>';
@@ -476,7 +466,6 @@ class ConsumablesController extends Controller
         $data = array('total' => $consumCount, 'rows' => $rows);
 
         return $data;
-
     }
 
     /**

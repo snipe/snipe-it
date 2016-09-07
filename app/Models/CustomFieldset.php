@@ -34,9 +34,7 @@ class CustomFieldset extends Model
             $rule = [];
 
             if (($field->field_encrypted!='1') ||
-                  (($field->field_encrypted =='1')  && (Gate::allows('admin')) ))
-                  {
-
+                  (($field->field_encrypted =='1')  && (Gate::allows('admin')) )) {
                 if ($field->pivot->required) {
                     $rule[]="required";
                 }
@@ -47,5 +45,4 @@ class CustomFieldset extends Model
         }
         return $rules;
     }
-
 }

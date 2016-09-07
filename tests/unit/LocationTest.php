@@ -15,13 +15,12 @@ class LocationTest extends \Codeception\TestCase\Test
 
     public function testAssetAdd()
     {
-      $location = factory(Location::class, 'location')->make();
-      $values = [
+        $location = factory(Location::class, 'location')->make();
+        $values = [
         'name' => $location->name,
-      ];
+        ];
 
-      Location::create($values);
-      $this->tester->seeRecord('locations', $values);
+        Location::create($values);
+        $this->tester->seeRecord('locations', $values);
     }
-
 }

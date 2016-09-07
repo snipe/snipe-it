@@ -74,7 +74,6 @@ class Location extends Model
         $op = array();
 
         foreach ($locations as $location) {
-
             if ($location['parent_id'] == $parent_id) {
                 $op[$location['id']] =
                     array(
@@ -87,9 +86,7 @@ class Location extends Model
                 if ($children) {
                     $op[$location['id']]['children'] = $children;
                 }
-
             }
-
         }
         return $op;
     }
@@ -99,13 +96,11 @@ class Location extends Model
     {
         $location_options = array();
         foreach ($location_options_array as $id => $value) {
-
             // get the top level key value
             $location_options[$id] = $value['name'];
 
                 // If there is a key named children, it has child locations and we have to walk it
             if (array_key_exists('children', $value)) {
-
                 foreach ($value['children'] as $child_id => $child_location_array) {
                     $child_location_options = Location::flattenLocationsArray($value['children']);
 
@@ -113,9 +108,7 @@ class Location extends Model
                         $location_options[$child_id] = '--'.$child_name;
                     }
                 }
-
             }
-
         }
 
         return $location_options;
@@ -150,7 +143,6 @@ class Location extends Model
                     $query->whereRaw("parent_id IN (select id from locations where name LIKE '%".$search."%') ");
                 });
           });
-
     }
 
 

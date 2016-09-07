@@ -15,13 +15,12 @@ class ManufacturerTest extends \Codeception\TestCase\Test
 
     public function testManufacturerAdd()
     {
-      $manufacturers = factory(Manufacturer::class, 'manufacturer')->make();
-      $values = [
+        $manufacturers = factory(Manufacturer::class, 'manufacturer')->make();
+        $values = [
         'name' => $manufacturers->name,
-      ];
+        ];
 
-      Manufacturer::create($values);
-      $this->tester->seeRecord('manufacturers', $values);
+        Manufacturer::create($values);
+        $this->tester->seeRecord('manufacturers', $values);
     }
-
 }

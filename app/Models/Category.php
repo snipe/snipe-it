@@ -107,7 +107,6 @@ class Category extends Model
         } else {
             return null;
         }
-
     }
 
     /**

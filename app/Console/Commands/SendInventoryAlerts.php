@@ -43,7 +43,6 @@ class SendInventoryAlerts extends Command
     public function handle()
     {
         if ((Setting::getSettings()->alert_email!='')  && (Setting::getSettings()->alerts_enabled==1)) {
-
             $data['data'] = Helper::checkLowInventory();
             $data['count'] = count($data['data']);
 
@@ -52,9 +51,7 @@ class SendInventoryAlerts extends Command
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
                     $m->subject('Low Inventory Report');
                 });
-
             }
-
         } else {
             if (Setting::getSettings()->alert_email=='') {
                 echo "Could not send email. No alert email configured in settings. \n";
@@ -62,7 +59,5 @@ class SendInventoryAlerts extends Command
                 echo "Alerts are disabled in the settings. No mail will be sent. \n";
             }
         }
-
-
     }
 }

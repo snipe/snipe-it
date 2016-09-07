@@ -171,8 +171,8 @@ return [
             'token'  => env('PUSHOVER_APP_TOKEN'),
             'user'   => env('PUSHOVER_USER_KEY'),
             'sounds' => [
-                'success' => env('PUSHOVER_SOUND_SUCCESS','pushover'),
-                'error'   => env('PUSHOVER_SOUND_ERROR','siren'),
+                'success' => env('PUSHOVER_SOUND_SUCCESS', 'pushover'),
+                'error'   => env('PUSHOVER_SOUND_ERROR', 'siren'),
             ],
         ],
     ]

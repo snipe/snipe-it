@@ -96,7 +96,6 @@ final class Company extends Model
                     return static::getIdFromInput($unescaped_input);
                 }
             }
-
         }
     }
 

@@ -87,7 +87,6 @@ class Actionlog extends Model implements ICompanyableChild
         $file = config('app.private_uploads') . '/' . $type . '/' . $this->filename;
 
         return $file;
-
     }
 
     /**

@@ -119,7 +119,6 @@ class Consumable extends Model
         } else {
             return null;
         }
-
     }
 
     public function numRemaining()

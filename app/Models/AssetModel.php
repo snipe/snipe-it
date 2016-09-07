@@ -84,7 +84,6 @@ class AssetModel extends Model
         if ($this->note) {
             return $Parsedown->text(e($this->note));
         }
-
     }
 
     public function displayModelName()
@@ -159,6 +158,5 @@ class AssetModel extends Model
                     $query->where('name', 'LIKE', '%'.$search.'%');
                 });
             });
-
     }
 }

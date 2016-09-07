@@ -204,7 +204,6 @@ class AssetImportCommand extends Command
                 $first_name = '';
                 $last_name = '';
                 //$user_username = '';
-
             } else {
                 $user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
                 $first_name = $user_email_array['first_name'];
@@ -221,9 +220,7 @@ class AssetImportCommand extends Command
                         $user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
                         $user_username = $user_name_array['username'];
                     }
-
                 }
-
             }
 
             $this->comment('Full Name: '.$user_name);
@@ -266,7 +263,6 @@ class AssetImportCommand extends Command
                         $this->error('ERROR CREATING User '.$first_name.' '.$last_name);
                         $this->error($user->getErrors());
                     }
-
                 }
             } else {
                 $user = new User;
@@ -276,7 +272,6 @@ class AssetImportCommand extends Command
             if ($location = Location::where('name', e($user_asset_location))->first()) {
                 $this->comment('Location '.$user_asset_location.' already exists');
             } else {
-
                 $location = new Location();
 
                 if ($user_asset_location!='') {
@@ -288,21 +283,18 @@ class AssetImportCommand extends Command
                     $location->user_id = 1;
 
                     if (!$this->option('testrun')=='true') {
-
                         if ($location->save()) {
                             $this->comment('Location '.$user_asset_location.' was created');
                         } else {
                             $this->error('Something went wrong! Location '.$user_asset_location.' was NOT created');
                             $this->error($location->getErrors());
                         }
-
                     } else {
                         $this->comment('Location '.$user_asset_location.' was (not) created - test run only');
                     }
                 } else {
                     $this->comment('No location given, so none created.');
                 }
-
             }
 
             if (e($user_asset_category)=='') {
@@ -314,7 +306,6 @@ class AssetImportCommand extends Command
         // Check for the category match and create it if it doesn't exist
             if ($category = Category::where('name', e($category_name))->where('category_type', 'asset')->first()) {
                 $this->comment('Category '.$category_name.' already exists');
-
             } else {
                 $category = new Category();
                 $category->name = e($category_name);
@@ -327,7 +318,6 @@ class AssetImportCommand extends Command
                     $this->error('Something went wrong! Category '.$user_asset_category.' was NOT created');
                     $this->error($category->getErrors());
                 }
-
             }
 
         // Check for the manufacturer match and create it if it doesn't exist
@@ -343,7 +333,6 @@ class AssetImportCommand extends Command
                 } else {
                     $this->error('Something went wrong! Manufacturer '.$user_asset_mfgr.' was NOT created: '. $manufacturer->getErrors()->first());
                 }
-
             }
 
         // Check for the asset model match and create it if it doesn't exist
@@ -362,7 +351,6 @@ class AssetImportCommand extends Command
                 } else {
                     $this->error('Something went wrong! Asset Model '.$user_asset_name.' was NOT created: '.$asset_model->getErrors()->first());
                 }
-
             }
 
         // Check for the asset company match and create it if it doesn't exist
@@ -379,7 +367,6 @@ class AssetImportCommand extends Command
                         $this->error('Something went wrong! Company '.$user_asset_company_name.' was NOT created: '.$company->getErrors()->first());
                     }
                 }
-
             } else {
                 $company = new Company();
             }
@@ -420,7 +407,6 @@ class AssetImportCommand extends Command
                 } else {
                     $this->error('Something went wrong! Asset '.$user_asset_name.' was NOT created: '.$asset->getErrors()->first());
                 }
-
             }
 
 
@@ -428,10 +414,7 @@ class AssetImportCommand extends Command
             $this->comment('=====================================');
 
             return true;
-
         });
-
-
     }
 
     /**

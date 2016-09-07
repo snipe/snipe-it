@@ -100,7 +100,6 @@ class SuppliersController extends Controller
 
 
         return redirect()->back()->withInput()->withErrors($supplier->getErrors());
-
     }
 
     public function store(Request $request)
@@ -184,7 +183,6 @@ class SuppliersController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($supplier->getErrors());
-
     }
 
     /**
@@ -202,18 +200,15 @@ class SuppliersController extends Controller
         }
 
         if ($supplier->num_assets() > 0) {
-
             // Redirect to the asset management page
             return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.assoc_users'));
         } else {
-
             // Delete the supplier
             $supplier->delete();
 
             // Redirect to the suppliers management page
             return redirect()->to('admin/settings/suppliers')->with('success', trans('admin/suppliers/message.delete.success'));
         }
-
     }
 
 
@@ -236,8 +231,6 @@ class SuppliersController extends Controller
             // Redirect to the user management page
             return redirect()->route('suppliers')->with('error', $error);
         }
-
-
     }
 
     public function getDatatable()
@@ -292,6 +285,5 @@ class SuppliersController extends Controller
         $data = array('total' => $suppliersCount, 'rows' => $rows);
 
         return $data;
-
     }
 }

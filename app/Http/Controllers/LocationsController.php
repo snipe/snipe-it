@@ -103,7 +103,6 @@ class LocationsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($location->getErrors());
-
     }
 
     /**
@@ -137,13 +136,11 @@ class LocationsController extends Controller
         // Was the location created?
         if ($location->save()) {
             return JsonResponse::create($location);
-
         }
 
         // failure
         $errors = $location->errors();
         return JsonResponse::create(["error" => "Failed validation: ".print_r($location->getErrors(), true)], 500);
-
     }
 
 
@@ -213,7 +210,6 @@ class LocationsController extends Controller
 
         // Redirect to the location management page
         return redirect()->back()->withInput()->withInput()->withErrors($location->getErrors());
-
     }
 
     /**
@@ -245,9 +241,6 @@ class LocationsController extends Controller
             $location->delete();
             return redirect()->to('admin/settings/locations')->with('success', trans('admin/locations/message.delete.success'));
         }
-
-
-
     }
 
 
@@ -275,8 +268,6 @@ class LocationsController extends Controller
             // Redirect to the user management page
             return redirect()->route('locations')->with('error', $error);
         }
-
-
     }
 
 
@@ -353,7 +344,6 @@ class LocationsController extends Controller
         $data = array('total' => $locationsCount, 'rows' => $rows);
 
         return $data;
-
     }
 
 
@@ -427,6 +417,5 @@ class LocationsController extends Controller
 
         $data = array('total' => $assets->count(), 'rows' => $rows);
         return $data;
-
     }
 }

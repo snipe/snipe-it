@@ -154,7 +154,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         return false;
-
     }
 
     /**
@@ -302,7 +301,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->orWhere('username', '=', $user_email);
     }
 
-    public static function generateEmailFromFullName($name) {
+    public static function generateEmailFromFullName($name)
+    {
         $username = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }
@@ -323,23 +323,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
             // There is a last name given
         } else {
-
             $last_name = str_replace($first_name, '', $users_name);
 
             if ($format=='filastname') {
                 $email_last_name.=str_replace(' ', '', $last_name);
                 $email_prefix = $first_name[0].$email_last_name;
-
             } elseif ($format=='firstname.lastname') {
                 $email_last_name.=str_replace(' ', '', $last_name);
                 $email_prefix = $first_name.'.'.$email_last_name;
-
             } elseif ($format=='firstname') {
                 $email_last_name.=str_replace(' ', '', $last_name);
                 $email_prefix = $first_name;
             }
-
-
         }
 
         $user_username = $email_prefix;
@@ -348,8 +343,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $user['username'] = strtolower($user_username);
 
         return $user;
-
-
     }
 
 
@@ -387,7 +380,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                     $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
                 });
         });
-
     }
 
 

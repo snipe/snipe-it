@@ -69,7 +69,6 @@ class ManufacturersController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
-
     }
 
     /**
@@ -121,8 +120,6 @@ class ManufacturersController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
-
-
     }
 
     /**
@@ -142,18 +139,15 @@ class ManufacturersController extends Controller
         }
 
         if ($manufacturer->has_models() > 0) {
-
             // Redirect to the asset management page
             return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.assoc_users'));
         } else {
-
             // Delete the manufacturer
             $manufacturer->delete();
 
             // Redirect to the manufacturers management page
             return redirect()->to('admin/settings/manufacturers')->with('success', trans('admin/manufacturers/message.delete.success'));
         }
-
     }
 
 
@@ -182,8 +176,6 @@ class ManufacturersController extends Controller
             // Redirect to the user management page
             return redirect()->route('manufacturers')->with('error', $error);
         }
-
-
     }
 
     /**
@@ -240,7 +232,6 @@ class ManufacturersController extends Controller
         $data = array('total' => $manufacturersCount, 'rows' => $rows);
 
         return $data;
-
     }
 
 
@@ -271,7 +262,6 @@ class ManufacturersController extends Controller
         }
 
         throw new Exception("We shouldn't be here");
-
     }
 
     protected function getDataAssetsView(Manufacturer $manufacturer)
@@ -303,7 +293,6 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($manufacturer_assets as $asset) {
-
             $actions = '';
             if ($asset->deleted_at=='') {
                 $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
@@ -332,10 +321,10 @@ class ManufacturersController extends Controller
                 'companyName' => e(Company::getName($asset)),
                 );
 
-                if (isset($inout)) {
-                    $row['change'] = $inout;
-                }
+            if (isset($inout)) {
+                $row['change'] = $inout;
             }
+        }
             
         $data = array('total' => $count, 'rows' => $rows);
         return $data;
@@ -420,19 +409,24 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($accessories as $accessory) {
-
             $actions = '<nobr>';
             if (Gate::allows('accessories.checkout')) {
-                $actions .= '<a href="' . route('checkout/accessory',
-                        $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= '<a href="' . route(
+                    'checkout/accessory',
+                    $accessory->id
+                ) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
             if (Gate::allows('accessories.edit')) {
-                $actions .= '<a href="' . route('update/accessory',
-                        $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= '<a href="' . route(
+                    'update/accessory',
+                    $accessory->id
+                ) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
             if (Gate::allows('accessories.delete')) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/accessory',
-                        $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route(
+                    'delete/accessory',
+                    $accessory->id
+                ) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
             $actions .= '</nobr>';
             $company = $accessory->company;
@@ -480,17 +474,23 @@ class ManufacturersController extends Controller
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
             if (Gate::allows('consumables.checkout')) {
-                $actions .= '<a href="' . route('checkout/consumable',
-                        $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= '<a href="' . route(
+                    'checkout/consumable',
+                    $consumable->id
+                ) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
 
             if (Gate::allows('consumables.edit')) {
-                $actions .= '<a href="' . route('update/consumable',
-                        $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= '<a href="' . route(
+                    'update/consumable',
+                    $consumable->id
+                ) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
             if (Gate::allows('consumables.delete')) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/consumable',
-                        $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route(
+                    'delete/consumable',
+                    $consumable->id
+                ) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
 
             $actions .='</nobr>';

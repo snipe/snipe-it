@@ -72,9 +72,6 @@ class Setting extends Model
             return false;
         }
         return false;
-
-
-
     }
 
     public function lar_ver()
@@ -92,7 +89,6 @@ class Setting extends Model
         } else {
             return null;
         }
-
     }
 
     public function show_custom_css()
@@ -138,13 +134,13 @@ class Setting extends Model
                 ),
             );
 
-            foreach ($arBytes as $arItem) {
-                if ($bytes >= $arItem["VALUE"]) {
-                    $result = $bytes / $arItem["VALUE"];
-                    $result = round($result, 2) .$arItem["UNIT"];
-                    break;
-                }
+        foreach ($arBytes as $arItem) {
+            if ($bytes >= $arItem["VALUE"]) {
+                $result = $bytes / $arItem["VALUE"];
+                $result = round($result, 2) .$arItem["UNIT"];
+                break;
             }
+        }
             return $result;
     }
 }

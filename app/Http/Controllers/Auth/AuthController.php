@@ -16,8 +16,6 @@ use Redirect;
 use Log;
 use View;
 
-
-
 /**
  * This controller handles authentication for the user, including local
  * database users and LDAP users.
@@ -80,7 +78,6 @@ class AuthController extends Controller
 
         // Should we even check for LDAP users?
         if (Setting::getSettings()->ldap_enabled=='1') {
-
             LOG::debug("LDAP is enabled.");
             // Check if the user exists in the database
             $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->first();
@@ -103,7 +100,6 @@ class AuthController extends Controller
                 LOG::debug("Local user ".Input::get('username')." does not exist");
 
                 try {
-
                     if ($userattr = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'))) {
                         LOG::debug("Creating local user ".Input::get('username'));
 
@@ -112,18 +108,15 @@ class AuthController extends Controller
                         } else {
                             LOG::debug("Could not create local user.");
                         }
-
                     } else {
                         LOG::debug("User did not authenticate correctly against LDAP. No local user was created.");
                     }
-
                 } catch (\Exception $e) {
-                    return redirect()->back()->withInput()->with('error',$e->getMessage());
+                    return redirect()->back()->withInput()->with('error', $e->getMessage());
                 }
 
             // If the user exists and they were imported from LDAP already
             } else {
-
                 LOG::debug("Local user ".Input::get('username')." exists in database. Authenticating existing user against LDAP.");
 
                 if ($ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'))) {
@@ -145,11 +138,9 @@ class AuthController extends Controller
                         // Redirect to the users page
                         return redirect()->to('/home')->with('success', trans('auth/message.signin.success'));
                     }
-
                 } else {
                     LOG::debug("User ".Input::get('username')." did not authenticate correctly against LDAP. Local user was not updated.");
                 }// End LDAP auth
-
             } // End if(!user)
 
         // NO LDAP enabled - just try to login the user normally

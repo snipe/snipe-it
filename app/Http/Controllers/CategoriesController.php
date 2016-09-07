@@ -85,16 +85,12 @@ class CategoriesController extends Controller
         // Redirect to the new category  page
             return redirect()->to("admin/settings/categories")->with('success', trans('admin/categories/message.create.success'));
         } else {
-
           // The given data did not pass validation
             return redirect()->back()->withInput()->withErrors($category->getErrors());
-
         }
 
         // Redirect to the category create page
         return redirect()->to('admin/settings/categories/create')->with('error', trans('admin/categories/message.create.error'));
-
-
     }
 
     /**
@@ -164,7 +160,6 @@ class CategoriesController extends Controller
 
         // Redirect to the category management page
         return redirect()->back()->with('error', trans('admin/categories/message.update.error'));
-
     }
 
     /**
@@ -186,24 +181,18 @@ class CategoriesController extends Controller
 
         if ($category->has_models() > 0) {
             return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'model']));
-
         } elseif ($category->accessories()->count() > 0) {
                 return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory']));
-
         } elseif ($category->consumables()->count() > 0) {
                 return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable']));
-
         } elseif ($category->components()->count() > 0) {
                 return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'component']));
         } else {
-
             $category->delete();
 
             // Redirect to the locations management page
             return redirect()->to('admin/settings/categories')->with('success', trans('admin/categories/message.delete.success'));
         }
-
-
     }
 
 
@@ -231,8 +220,6 @@ class CategoriesController extends Controller
             // Redirect to the user management page
             return redirect()->route('categories')->with('error', $error);
         }
-
-
     }
 
     /**
@@ -279,7 +266,6 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($categories as $category) {
-
             $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;">';
             $actions .='<i class="fa fa-pencil icon-white"></i></a>';
             $actions .='<a data-html="false" class="btn delete-asset btn-danger btn-sm';
@@ -335,7 +321,6 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($category_assets as $asset) {
-
             $actions = '';
             $inout='';
 
@@ -405,7 +390,6 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($category_assets as $asset) {
-
             $actions = '';
             $inout='';
 
@@ -459,7 +443,6 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($category_assets as $asset) {
-
             $actions = '';
             $inout='';
 
@@ -512,7 +495,6 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($category_assets as $asset) {
-
             $actions = '';
             $inout='';
 

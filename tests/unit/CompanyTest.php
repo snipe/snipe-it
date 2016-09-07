@@ -15,13 +15,12 @@ class CompanyTest extends \Codeception\TestCase\Test
 
     public function testAssetAdd()
     {
-      $company = factory(Company::class, 'company')->make();
-      $values = [
+        $company = factory(Company::class, 'company')->make();
+        $values = [
         'name' => $company->name,
-      ];
+        ];
 
-      Company::create($values);
-      $this->tester->seeRecord('companies', $values);
+        Company::create($values);
+        $this->tester->seeRecord('companies', $values);
     }
-
 }
