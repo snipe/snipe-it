@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Setting;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -146,10 +147,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return config('app.url').'/uploads/avatars/'.$this->avatar;
         }
 
-        if ($this->email) {
-            // Generate the Gravatar hash
+        if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
             $gravatar = md5(strtolower(trim($this->email)));
-            // Return the Gravatar url
             return "//gravatar.com/avatar/".$gravatar;
         }
 
