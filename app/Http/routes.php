@@ -394,7 +394,8 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
         //     echo $requestedItem->user->username . ' requested ' . $requestedItem->requestedItem->name;
             [
             'as' => 'requests',
-            'uses' => 'ViewAssetsController@getRequestedAssets'
+            'middleware' => 'authorize:admin',
+            'uses' => 'ViewAssetsController@getRequestedIndex'
             ]);
     # Licenses
     Route::group([ 'prefix' => 'licenses', 'middleware'=>'authorize:licenses.view' ], function () {

@@ -5,12 +5,13 @@ use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CheckoutRequest;
 use App\Models\Company;
-use App\Models\Consumable;
 use App\Models\Component;
+use App\Models\Consumable;
+use App\Models\License;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\License;
 use Auth;
 use Config;
 use DB;
@@ -62,6 +63,12 @@ class ViewAssetsController extends Controller
         $models = AssetModel::with('category')->RequestableModels()->get();
 
         return View::make('account/requestable-assets', compact('user', 'assets', 'models'));
+    }
+
+    public function getRequestedIndex()
+    {
+        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
+        return View::make('admin/requested-assets', compact('requestedItems'));
     }
 
 
