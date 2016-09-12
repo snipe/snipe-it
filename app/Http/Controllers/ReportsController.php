@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
 use Redirect;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * This controller handles all actions related to Reports for
@@ -108,8 +109,8 @@ class ReportsController extends Controller
             'model.manufacturer',
             'company'
         )
-                       ->orderBy('created_at', 'DESC')
-                       ->get();
+         ->orderBy('created_at', 'DESC')
+        ->get();
 
         return View::make('reports/asset', compact('assets'))->with('settings', $settings);
     }
@@ -123,103 +124,62 @@ class ReportsController extends Controller
     */
     public function exportAssetReport()
     {
-        // Grab all the assets
-        $assets = Asset::orderBy('created_at', 'DESC')->get();
 
-        $rows = [ ];
+         \Debugbar::disable();
 
-        // Create the header row
-        $header = [
-            trans('admin/hardware/table.asset_tag'),
-            trans('admin/hardware/form.manufacturer'),
-            trans('admin/hardware/form.model'),
-            trans('general.model_no'),
-            trans('general.name'),
-            trans('admin/hardware/table.serial'),
-            trans('general.status'),
-            trans('admin/hardware/table.purchase_date'),
-            trans('admin/hardware/table.purchase_cost'),
-            trans('admin/hardware/form.order'),
-            trans('admin/hardware/form.supplier'),
-            trans('admin/hardware/table.checkoutto'),
-            trans('admin/hardware/table.location'),
-            trans('general.notes'),
-        ];
-        $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+        $response = new StreamedResponse(function(){
+            // Open output stream
+            $handle = fopen('php://output', 'w');
 
-        // Create a row per asset
-        foreach ($assets as $asset) {
-            $row   = [ ];
-            $row[] = e($asset->asset_tag);
-            if ($asset->model->manufacturer) {
-                $row[] = e($asset->model->manufacturer->name);
-            } else {
-                $row[] = '';
+            Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle) {
+            fputcsv($handle, [
+                trans('admin/hardware/table.asset_tag'),
+                trans('admin/hardware/form.manufacturer'),
+                trans('admin/hardware/form.model'),
+                trans('general.model_no'),
+                trans('general.name'),
+                trans('admin/hardware/table.serial'),
+                trans('general.status'),
+                trans('admin/hardware/table.purchase_date'),
+                trans('admin/hardware/table.purchase_cost'),
+                trans('admin/hardware/form.order'),
+                trans('admin/hardware/form.supplier'),
+                trans('admin/hardware/table.checkoutto'),
+                trans('admin/hardware/table.location'),
+                trans('general.notes'),
+             ]);
+
+            foreach ($assets as $asset) {
+                // Add a new row with data
+                fputcsv($handle, [
+                    $asset->asset_tag,
+                    ($asset->model->manufacturer) ? $asset->model->manufacturer->name : '',
+                    ($asset->model) ? $asset->model->name : '',
+                    ($asset->model->modelno) ? $asset->model->modelno : '',
+                    ($asset->name) ? $asset->name : '',
+                    ($asset->serial) ? $asset->serial : '',
+                    ($asset->assetstatus) ? e($asset->assetstatus->name) : '',
+                    ($asset->purchase_date) ? e($asset->purchase_date) : '',
+                    ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
+                    ($asset->order_number) ? e($asset->order_number) : '',
+                    ($asset->supplier) ? e($asset->supplier->name) : '',
+                    ($asset->assigneduser) ? e($asset->assigneduser->fullName()) : '',
+                    ($asset->assigneduser && $asset->assigneduser->userloc!='') ?
+                    e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
+                    ($asset->notes) ? e($asset->notes) : '',
+                ]);
             }
-            $row[] = '"' . e($asset->model->name) . '"';
-            $row[] = '"' . e($asset->model->modelno) . '"';
-            $row[] = e($asset->name);
-            $row[] = e($asset->serial);
-            if ($asset->assetstatus) {
-                $row[] = e($asset->assetstatus->name);
-            } else {
-                $row[] = '';
-            }
-            $row[] = $asset->purchase_date;
-            $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
-            if ($asset->order_number) {
-                $row[] = e($asset->order_number);
-            } else {
-                $row[] = '';
-            }
-            if ($asset->supplier_id) {
-                $row[] = e($asset->supplier->name);
-            } else {
-                $row[] = '';
-            }
+        });
 
-            if ($asset->assigned_to > 0) {
-                $user  = User::find($asset->assigned_to);
-                $row[] = e($user->fullName());
-            } else {
-                $row[] = ''; // Empty string if unassigned
-            }
-
-            if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
-                $location = Location::find($asset->assigneduser->location_id);
-                if ($location) {
-                    $row[] = e($location->name);
-                } else {
-                    $row[] = '';
-                }
-            } elseif ($asset->rtd_location_id) {
-                $location = Location::find($asset->rtd_location_id);
-                if ($location->name) {
-                    $row[] = e($location->name);
-                } else {
-                    $row[] = '';
-                }
-            } else {
-                $row[] = '';  // Empty string if location is not set
-            }
-
-            if ($asset->notes) {
-                $row[] = '"' . e($asset->notes) . '"';
-            } else {
-                $row[] = '';
-            }
-
-            $rows[] = implode($row, ',');
-        }
-
-        // spit out a csv
-        $csv      = implode($rows, "\n");
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-disposition', 'attachment;filename=report.csv');
+            // Close the output stream
+            fclose($handle);
+        }, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="assets-'.date('Y-m-d-his').'.csv"',
+        ]);
 
         return $response;
+
     }
 
     /**
