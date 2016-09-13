@@ -79,7 +79,6 @@ class DepreciationsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
-
     }
 
     /**
@@ -131,8 +130,6 @@ class DepreciationsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
-
-
     }
 
     /**
@@ -153,17 +150,14 @@ class DepreciationsController extends Controller
         }
 
         if ($depreciation->has_models() > 0) {
-
             // Redirect to the asset management page
             return redirect()->to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.assoc_users'));
         } else {
-
             $depreciation->delete();
 
             // Redirect to the depreciations management page
             return redirect()->to('admin/settings/depreciations')->with('success', trans('admin/depreciations/message.delete.success'));
         }
-
     }
 
 
@@ -178,7 +172,7 @@ class DepreciationsController extends Controller
     */
     public function getDatatable()
     {
-        $depreciations = Depreciation::select(array('id','name','months'));
+        $depreciations = Depreciation::select(['id','name','months']);
 
         if (Input::has('search')) {
             $depreciations = $depreciations->TextSearch(e(Input::get('search')));
@@ -205,22 +199,21 @@ class DepreciationsController extends Controller
         $depreciationsCount = $depreciations->count();
         $depreciations = $depreciations->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($depreciations as $depreciation) {
             $actions = '<a href="'.route('update/depreciations', $depreciation->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/depreciations', $depreciation->id).'" data-content="'.trans('admin/depreciations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($depreciation->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $depreciation->id,
                 'name'          => e($depreciation->name),
                 'months'        => e($depreciation->months),
                 'actions'       => $actions
-            );
+            ];
         }
 
-        $data = array('total' => $depreciationsCount, 'rows' => $rows);
+        $data = ['total' => $depreciationsCount, 'rows' => $rows];
 
         return $data;
-
     }
 }

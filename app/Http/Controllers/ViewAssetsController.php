@@ -52,7 +52,6 @@ class ViewAssetsController extends Controller
             // Redirect to the user management page
             return redirect()->route('users')->with('error', $error);
         }
-
     }
 
 
@@ -77,7 +76,6 @@ class ViewAssetsController extends Controller
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
             return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         } else {
-
             $logaction = new Actionlog();
             $logaction->item_id = $data['asset_id'] = $asset->id;
             $logaction->item_type = Asset::class;
@@ -104,8 +102,6 @@ class ViewAssetsController extends Controller
 
 
             if ($settings->slack_endpoint) {
-
-
                 $slack_settings = [
                     'username' => $settings->botname,
                     'channel' => $settings->slack_channel,
@@ -125,17 +121,12 @@ class ViewAssetsController extends Controller
 
                             ]
                         ])->send('Asset Requested');
-
                 } catch (Exception $e) {
-
                 }
-
             }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
-
-
     }
 
 
@@ -213,7 +204,7 @@ class ViewAssetsController extends Controller
             if (Input::get('asset_acceptance')!='accepted') {
                 DB::table('assets')
                 ->where('id', $findlog->item_id)
-                ->update(array('assigned_to' => null));
+                ->update(['assigned_to' => null]);
             }
         }
         $logaction->target_id = $findlog->target_id;
@@ -225,7 +216,7 @@ class ViewAssetsController extends Controller
 
         $update_checkout = DB::table('action_logs')
         ->where('id', $findlog->id)
-        ->update(array('accepted_id' => $logaction->id));
+        ->update(['accepted_id' => $logaction->id]);
 
             $affected_asset=$logaction->assetlog;
             $affected_asset->accepted=$accepted;
@@ -233,7 +224,6 @@ class ViewAssetsController extends Controller
 
         if ($update_checkout) {
             return redirect()->to('account/view-assets')->with('success', $return_msg);
-
         } else {
             return redirect()->to('account/view-assets')->with('error', 'Something went wrong ');
         }

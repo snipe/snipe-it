@@ -15,16 +15,15 @@ class ConsumableTest extends \Codeception\TestCase\Test
 
     public function testConsumableAdd()
     {
-      $consumable = factory(Consumable::class, 'consumable')->make();
-      $values = [
+        $consumable = factory(Consumable::class, 'consumable')->make();
+        $values = [
         'name' => $consumable->name,
         'qty' => $consumable->qty,
         'category_id' => $consumable->category_id,
         'company_id' => $consumable->company_id,
-      ];
+        ];
 
-      Consumable::create($values);
-      $this->tester->seeRecord('consumables', $values);
+        Consumable::create($values);
+        $this->tester->seeRecord('consumables', $values);
     }
-
 }

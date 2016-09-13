@@ -21,7 +21,7 @@ class License extends Depreciable
 
     protected $guarded = 'id';
     protected $table = 'licenses';
-    protected $rules = array(
+    protected $rules = [
         'name'   => 'required|string|min:3|max:255',
         'serial'   => 'required|min:5',
         'seats'   => 'required|min:1|max:10000|integer',
@@ -30,7 +30,7 @@ class License extends Depreciable
         'note'   => 'string',
         'notes'   => 'string|min:0',
         'company_id' => 'integer',
-    );
+    ];
 
     public function company()
     {
@@ -139,8 +139,6 @@ class License extends Depreciable
                 ->orWhereNotNull('asset_id');
             })
         ->count();
-
-
     }
 
     public function remaincount()
@@ -194,7 +192,6 @@ class License extends Depreciable
         ->where('expiration_date', '>', date("Y-m-d"))
         ->orderBy('expiration_date', 'ASC')
         ->get();
-
     }
 
     /**

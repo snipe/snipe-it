@@ -76,7 +76,6 @@ class ObjectImportCommand extends Command
                 $this->comment('====== TEST ONLY Asset Import for '.$filename.' ====');
                 $this->comment('============== NO DATA WILL BE WRITTEN ==============');
             } else {
-
                 $this->comment('======= Importing Assets from '.$filename.' =========');
             }
         }
@@ -129,7 +128,6 @@ class ObjectImportCommand extends Command
 
 
             foreach ($newarray as $row) {
-
                 // Let's just map some of these entries to more user friendly words
 
                 // Fetch general items here, fetch item type specific items in respective methods
@@ -187,7 +185,6 @@ class ObjectImportCommand extends Command
                             if ($item['custom_fields'][$customfield->db_column_name()] = $this->array_smart_custom_field_fetch($row, $customfield)) {
                                 $this->log('Custom Field '. $customfield->name.': '.$this->array_smart_custom_field_fetch($row, $customfield));
                             }
-
                         }
 
                         $this->createAssetIfNotExists($row, $item);
@@ -204,7 +201,6 @@ class ObjectImportCommand extends Command
                     $bar->advance();
                 }
                 $this->log('------------- Action Summary ----------------');
-
             }
         });
         if (!$this->option('web-importer')) {
@@ -363,7 +359,6 @@ class ObjectImportCommand extends Command
             $this->asset_models->add($asset_model);
             return $asset_model;
         }
-
     }
 
     private $categories;
@@ -410,7 +405,6 @@ class ObjectImportCommand extends Command
             $this->categories->add($category);
             return $category;
         }
-
     }
 
     private $companies;
@@ -534,7 +528,6 @@ class ObjectImportCommand extends Command
                 $this->jsonError('Manufacturer "'. $manufacturer->name . '"', $manufacturer->getErrors());
                 return $manufacturer;
             }
-
         } else {
             $this->manufacturers->add($manufacturer);
             return $manufacturer;
@@ -589,7 +582,6 @@ class ObjectImportCommand extends Command
             $this->log('No location given, so none created.');
             return $location;
         }
-
     }
 
     private $suppliers;
@@ -676,7 +668,6 @@ class ObjectImportCommand extends Command
                 } else {
                     $user_email = '';
                 }
-
             }
 
             if ($user_username=='') {
@@ -686,9 +677,7 @@ class ObjectImportCommand extends Command
                     $user_name_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_name);
                     $user_username = $user_name_array['username'];
                 }
-
             }
-
         }
         $this->log("--- User Data ---");
         $this->log('Full Name: ' . $user_name);
@@ -705,7 +694,6 @@ class ObjectImportCommand extends Command
         if (!empty($user_username)) {
             if ($user = User::MatchEmailOrUsername($user_username, $user_email)
                 ->whereNotNull('username')->first()) {
-
                 $this->log('User '.$user_username.' already exists');
             } elseif (( $first_name != '') && ($last_name != '') && ($user_username != '')) {
                 $user = new \App\Models\User;
@@ -721,7 +709,6 @@ class ObjectImportCommand extends Command
                 } else {
                     $this->jsonError('User "' . $first_name . '"', $user->getErrors());
                 }
-
             } else {
                 $user = new User;
             }
@@ -780,7 +767,6 @@ class ObjectImportCommand extends Command
 
         if ($item["status_label"]) {
             $status_id = $item["status_label"]->id;
-
         } else {
             // FIXME: We're already grabbing the list of statuses, we should probably not hardcode here
             $this->log("No status field found, defaulting to id 1.");
@@ -854,13 +840,11 @@ class ObjectImportCommand extends Command
             $this->assets->add($asset);
         }
         if (!$this->option('testrun')) {
-
             if ($asset->save()) {
                 $this->log('Asset ' . $item["item_name"] . ' with serial number ' . $asset_serial . ' was created');
             } else {
                 $this->jsonError('Asset', $asset->getErrors());
             }
-
         } else {
             return;
         }
@@ -943,7 +927,6 @@ class ObjectImportCommand extends Command
             if ($accessory->save()) {
                 $this->log('Accessory ' . $item["item_name"] . ' was created');
                 // $this->comment('Accessory ' . $item["item_name"] . ' was created');
-
             } else {
                 $this->jsonError('Accessory', $accessory->getErrors()) ;
             }
@@ -1027,7 +1010,6 @@ class ObjectImportCommand extends Command
             if ($consumable->save()) {
                 $this->log("Consumable " . $item["item_name"] . ' was created');
                 // $this->comment("Consumable " . $item["item_name"] . ' was created');
-
             } else {
                 $this->jsonError('Consumable', $consumable->getErrors());
             }
@@ -1045,9 +1027,9 @@ class ObjectImportCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('filename', InputArgument::REQUIRED, 'File for the CSV import.'),
-        );
+        return [
+            ['filename', InputArgument::REQUIRED, 'File for the CSV import.'],
+        ];
     }
 
 
@@ -1060,16 +1042,15 @@ class ObjectImportCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-        array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
-        array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
-        array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
-        array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
-        array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'),
-        array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
-        array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1),
-        array('update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'),
-        );
-
+        return [
+        ['email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null],
+        ['username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null],
+        ['testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null],
+        ['logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ],
+        ['item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'],
+        ['web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'],
+        ['user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1],
+        ['update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'],
+        ];
     }
 }

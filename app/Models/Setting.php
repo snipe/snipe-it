@@ -72,9 +72,6 @@ class Setting extends Model
             return false;
         }
         return false;
-
-
-
     }
 
     public function lar_ver()
@@ -92,7 +89,6 @@ class Setting extends Model
         } else {
             return null;
         }
-
     }
 
     public function show_custom_css()
@@ -115,28 +111,28 @@ class Setting extends Model
     public static function fileSizeConvert($bytes)
     {
         $bytes = floatval($bytes);
-            $arBytes = array(
-                0 => array(
+            $arBytes = [
+                0 => [
                     "UNIT" => "TB",
                     "VALUE" => pow(1024, 4)
-                ),
-                1 => array(
+                ],
+                1 => [
                     "UNIT" => "GB",
                     "VALUE" => pow(1024, 3)
-                ),
-                2 => array(
+                ],
+                2 => [
                     "UNIT" => "MB",
                     "VALUE" => pow(1024, 2)
-                ),
-                3 => array(
+                ],
+                3 => [
                     "UNIT" => "KB",
                     "VALUE" => 1024
-                ),
-                4 => array(
+                ],
+                4 => [
                     "UNIT" => "B",
                     "VALUE" => 1
-                ),
-            );
+                ],
+            ];
 
             foreach ($arBytes as $arItem) {
                 if ($bytes >= $arItem["VALUE"]) {

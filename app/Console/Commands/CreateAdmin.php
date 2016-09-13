@@ -70,10 +70,8 @@ class CreateAdmin extends Command
                 foreach ($errors->all() as $error) {
                     $this->info('ERROR:'. $error);
                 }
-
             }
         }
-
     }
 
   //   protected function getArguments()

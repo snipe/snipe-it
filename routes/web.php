@@ -31,12 +31,10 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
             } else {
                 return '0';
             }
-
         });
 
         Route::get('list', [ 'as' => 'api.statuslabels.list', 'uses' => 'StatuslabelsController@getDatatable' ]);
         Route::get('assets', [ 'as' => 'api.statuslabels.assets', 'uses' => 'StatuslabelsController@getAssetCountByStatuslabel' ]);
-
     });
 
     /*---Accessories API---*/
@@ -50,40 +48,40 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
     });
 
     /*---Consumables API---*/
-    Route::group(array('prefix'=>'consumables'), function () {
-        Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
-        Route::get('{consumableID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
+    Route::group(['prefix'=>'consumables'], function () {
+        Route::get('list', ['as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable']);
+        Route::get('{consumableID}/view', ['as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView']);
     });
 
     /*---Components API---*/
-    Route::group(array('prefix'=>'components'), function () {
-        Route::get('list', array('as'=>'api.components.list', 'uses'=>'ComponentsController@getDatatable'));
-        Route::get('{componentID}/view', array('as'=>'api.components.view', 'uses'=>'ComponentsController@getDataView'));
+    Route::group(['prefix'=>'components'], function () {
+        Route::get('list', ['as'=>'api.components.list', 'uses'=>'ComponentsController@getDatatable']);
+        Route::get('{componentID}/view', ['as'=>'api.components.view', 'uses'=>'ComponentsController@getDataView']);
     });
 
     /*---Locations API---*/
-    Route::group(array('prefix'=>'locations'), function () {
-        Route::get('list', array('as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable'));
-        Route::get('{locationID}/view', array('as'=>'api.locations.view', 'uses'=>'LocationsController@getDataView'));
-        Route::get('{locationID}/users', array('as'=>'api.locations.viewusers', 'uses'=>'LocationsController@getDataViewUsers'));
-        Route::get('{locationID}/assets', array('as'=>'api.locations.viewassets', 'uses'=>'LocationsController@getDataViewAssets'));
+    Route::group(['prefix'=>'locations'], function () {
+        Route::get('list', ['as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable']);
+        Route::get('{locationID}/view', ['as'=>'api.locations.view', 'uses'=>'LocationsController@getDataView']);
+        Route::get('{locationID}/users', ['as'=>'api.locations.viewusers', 'uses'=>'LocationsController@getDataViewUsers']);
+        Route::get('{locationID}/assets', ['as'=>'api.locations.viewassets', 'uses'=>'LocationsController@getDataViewAssets']);
     });
 
     /*---Depreciations API---*/
-    Route::group(array('prefix'=>'depreciations'), function () {
-        Route::get('list', array('as'=>'api.depreciations.list', 'uses'=>'DepreciationsController@getDatatable'));
-        Route::get('{$depreciationID}/view', array('as'=>'api.depreciations.view', 'uses'=>'DepreciationsController@getDataView'));
+    Route::group(['prefix'=>'depreciations'], function () {
+        Route::get('list', ['as'=>'api.depreciations.list', 'uses'=>'DepreciationsController@getDatatable']);
+        Route::get('{$depreciationID}/view', ['as'=>'api.depreciations.view', 'uses'=>'DepreciationsController@getDataView']);
     });
 
     /*---Manufacturers API---*/
-    Route::group(array('prefix'=>'manufacturers'), function () {
-        Route::get('list', array('as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable'));
-        Route::get('{manufacturerID}/view/{itemtype}', array('as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView'));
+    Route::group(['prefix'=>'manufacturers'], function () {
+        Route::get('list', ['as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable']);
+        Route::get('{manufacturerID}/view/{itemtype}', ['as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView']);
     });
 
     /*---Suppliers API---*/
-    Route::group(array('prefix'=>'suppliers'), function () {
-        Route::get('list', array('as'=>'api.suppliers.list', 'uses'=>'SuppliersController@getDatatable'));
+    Route::group(['prefix'=>'suppliers'], function () {
+        Route::get('list', ['as'=>'api.suppliers.list', 'uses'=>'SuppliersController@getDatatable']);
     });
 
     /*---Users API---*/
@@ -169,7 +167,6 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
             [ 'as' => 'api.customfields.order', 'uses' => 'CustomFieldsController@postReorder' ]
         );
     });
-
 });
 
 /*
@@ -287,29 +284,29 @@ Route::group(
             'uses' => 'AssetsController@displayFile'
         ]);
 
-        Route::get('import/delete-import/{filename}',  [
+        Route::get('import/delete-import/{filename}', [
                 'as' => 'assets/import/delete-file',
                 'middleware' => 'authorize:assets.create',
                 'uses' => 'AssetsController@getDeleteImportFile'
         ]);
 
-        Route::post( 'import/process/', [ 'as' => 'assets/import/process-file',
+        Route::post('import/process/', [ 'as' => 'assets/import/process-file',
                 'middleware' => 'authorize:assets.create',
                 'uses' => 'AssetsController@postProcessImportFile'
         ]);
-        Route::get( 'import/delete/{filename}', [ 'as' => 'assets/import/delete-file',
+        Route::get('import/delete/{filename}', [ 'as' => 'assets/import/delete-file',
                 'middleware' => 'authorize:assets.create', // TODO What permissions should this require?
                 'uses' => 'AssetsController@getDeleteImportFile'
         ]);
 
-        Route::get('import',[
+        Route::get('import', [
                 'as' => 'assets/import',
                 'middleware' => 'authorize:assets.create',
                 'uses' => 'AssetsController@getImportUpload'
         ]);
 
 
-        Route::post('{assetId}/edit',[
+        Route::post('{assetId}/edit', [
             'as' => 'assets/import',
             'middleware' => 'authorize:assets.edit',
             'uses' => 'AssetsController@postEdit'
@@ -341,19 +338,19 @@ Route::group(
         );
 
         # Bulk checkout / checkin
-         Route::get( 'bulkcheckout',  [
+         Route::get('bulkcheckout', [
                  'as' => 'hardware/bulkcheckout',
                  'middleware' => 'authorize:assets.checkout',
                  'uses' => 'AssetsController@getBulkCheckout'
          ]);
-        Route::post( 'bulkcheckout',  [
+         Route::post('bulkcheckout', [
             'as' => 'hardware/bulkcheckout',
             'middleware' => 'authorize:assets.checkout',
             'uses' => 'AssetsController@postBulkCheckout'
-        ]);
+         ]);
 
         # Asset Model Management
-        Route::group([ 'prefix' => 'models', 'middleware' => 'auth' ], function () {
+         Route::group([ 'prefix' => 'models', 'middleware' => 'auth' ], function () {
 
             Route::get('/', [ 'as' => 'models', 'uses' => 'AssetModelsController@getIndex' ]);
             Route::get('create', [ 'as' => 'create/model', 'uses' => 'AssetModelsController@getCreate' ]);
@@ -366,14 +363,13 @@ Route::group(
             Route::get('{modelId}/view', [ 'as' => 'view/model', 'uses' => 'AssetModelsController@getView' ]);
             Route::get('{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'AssetModelsController@getRestore' ]);
             Route::get('{modelId}/custom_fields', ['as' => 'custom_fields/model','uses' => 'AssetModelsController@getCustomFields']);
-        });
+         });
 
-        Route::get('/', [
+            Route::get('/', [
                 'as'   => 'hardware',
                 'middleware' => 'authorize:assets.view',
                 'uses' => 'AssetsController@getIndex'
             ]);
-
     }
 );
 
@@ -744,7 +740,6 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
                 [ 'as' => 'delete/statuslabel', 'uses' => 'StatuslabelsController@getDelete' ]
             );
         });
-
     });
 
     # Custom fields support
@@ -800,7 +795,6 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
         );
 
         Route::get('/', [ 'as' => 'users', 'uses' => 'UsersController@getIndex' ]);
-
     });
 
     # Group Management
@@ -818,7 +812,6 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
 
     # Dashboard
     Route::get('/', [ 'as' => 'admin', 'uses' => 'DashboardController@getIndex' ]);
-
 });
 
 /*
@@ -860,7 +853,6 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
 
     # Account Dashboard
     Route::get('/', [ 'as' => 'account', 'uses' => 'ViewAssetsController@getIndex' ]);
-
 });
 
 
@@ -973,7 +965,6 @@ Route::group([ 'prefix' => 'setup', 'middleware' => 'web'], function () {
         'as'  => 'setup',
         'uses' => 'SettingsController@getSetupIndex' ]
     );
-
 });
 
 

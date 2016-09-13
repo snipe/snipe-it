@@ -77,7 +77,7 @@ class Asset extends Depreciable
 
     public function availableForCheckout()
     {
-      return (
+        return (
           empty($this->assigned_to) &&
           $this->assetstatus->deployable == 1 &&
           empty($this->deleted_at)
@@ -101,8 +101,7 @@ class Asset extends Depreciable
 
         $this->assigneduser()->associate($user);
 
-        if($name != null)
-        {
+        if ($name != null) {
             $this->name = $name;
         }
 
@@ -115,7 +114,6 @@ class Asset extends Depreciable
 
 
         if ($this->save()) {
-
             // $action, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null
             $log = $this->createLogRecord('checkout', $this, $admin, $user, $expected_checkin, $note, $checkout_at);
 
@@ -127,10 +125,8 @@ class Asset extends Depreciable
                 $this->checkOutNotifySlack($settings, $admin, $note);
             }
             return true;
-
         }
         return false;
-
     }
 
     public function checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note)
@@ -147,20 +143,17 @@ class Asset extends Depreciable
         $data['require_acceptance'] = $this->requireAcceptance();
 
         if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && (!config('app.lock_passwords'))) {
-
             \Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                 $m->subject('Confirm asset delivery');
             });
         }
-
     }
 
     public function checkOutNotifySlack($settings, $admin, $note = null)
     {
 
         if ($settings->slack_endpoint) {
-
             $slack_settings = [
             'username' => $settings->botname,
             'channel' => $settings->slack_channel,
@@ -183,12 +176,10 @@ class Asset extends Depreciable
                 ],
                   ]
                 ])->send('Asset Checked Out');
-
             } catch (Exception $e) {
                 LOG::error($e);
             }
         }
-
     }
 
 
@@ -358,7 +349,6 @@ class Asset extends Depreciable
         return Asset::RTD()
                   ->whereNull('deleted_at')
                   ->count();
-
     }
 
   /**
@@ -370,7 +360,6 @@ class Asset extends Depreciable
         return Asset::Requestable()
                   ->whereNull('deleted_at')
                   ->count();
-
     }
 
   /**
@@ -466,7 +455,6 @@ class Asset extends Depreciable
             date_add($date, date_interval_create_from_date_string($this->model->eol . ' months'));
             return date_format($date, 'Y-m-d');
         }
-
     }
 
   /**
@@ -483,7 +471,7 @@ class Asset extends Depreciable
                 ->max('id');
 
             if ($settings->zerofill_count > 0) {
-                return $settings->auto_increment_prefix.Asset::zerofill(($asset_tag + 1),$settings->zerofill_count);
+                return $settings->auto_increment_prefix.Asset::zerofill(($asset_tag + 1), $settings->zerofill_count);
             }
             return $settings->auto_increment_prefix.($asset_tag + 1);
         } else {
@@ -492,13 +480,13 @@ class Asset extends Depreciable
     }
 
 
-    public static function zerofill ($num, $zerofill = 3)
+    public static function zerofill($num, $zerofill = 3)
     {
         return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
     }
 
 
-public function checkin_email()
+    public function checkin_email()
     {
         return $this->model->category->checkin_email;
     }
@@ -520,7 +508,6 @@ public function checkin_email()
         } else {
             return null;
         }
-
     }
 
 

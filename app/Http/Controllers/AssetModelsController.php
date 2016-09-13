@@ -124,7 +124,6 @@ class AssetModelsController extends Controller
         }
 
             return redirect()->back()->withInput()->withErrors($model->getErrors());
-
     }
 
     /**
@@ -260,7 +259,6 @@ class AssetModelsController extends Controller
 
         // Redirect to the model create page
         return redirect()->to("hardware/models/$modelId/edit")->with('error', trans('admin/models/message.update.error'));
-
     }
 
     /**
@@ -283,7 +281,6 @@ class AssetModelsController extends Controller
         if ($model->assets->count() > 0) {
             // Throw an error that this model is associated with assets
             return redirect()->to('hardware/models')->with('error', trans('admin/models/message.assoc_users'));
-
         } else {
             // Delete the model
             $model->delete();
@@ -309,7 +306,6 @@ class AssetModelsController extends Controller
         $model = AssetModel::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
-
             // Restore the model
             $model->restore();
 
@@ -318,11 +314,9 @@ class AssetModelsController extends Controller
 
             // Redirect back
             return redirect()->back()->with('success', $success);
-
         } else {
             return redirect()->back()->with('error', trans('admin/models/message.not_found'));
         }
-
     }
 
 
@@ -347,8 +341,6 @@ class AssetModelsController extends Controller
             // Redirect to the user management page
             return redirect()->route('models')->with('error', $error);
         }
-
-
     }
 
     /**
@@ -381,7 +373,6 @@ class AssetModelsController extends Controller
         $view->with('model', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
-
     }
 
 
@@ -448,7 +439,7 @@ class AssetModelsController extends Controller
         $modelCount = $models->count();
         $models = $models->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($models as $model) {
             if ($model->deleted_at == '') {
@@ -457,7 +448,7 @@ class AssetModelsController extends Controller
                 $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
-            $rows[] = array(
+            $rows[] = [
                 'id'      => $model->id,
                 'manufacturer'      => (string)link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => (string)link_to('/hardware/models/'.$model->id.'/view', $model->name),
@@ -469,10 +460,10 @@ class AssetModelsController extends Controller
                 'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
                 'note'       => $model->getNote(),
                 'actions'           => $actions
-                );
+                ];
         }
 
-        $data = array('total' => $modelCount, 'rows' => $rows);
+        $data = ['total' => $modelCount, 'rows' => $rows];
 
         return $data;
     }
@@ -516,7 +507,7 @@ class AssetModelsController extends Controller
         $assetsCount = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
 
         foreach ($assets as $asset) {
@@ -532,7 +523,7 @@ class AssetModelsController extends Controller
                 }
             }
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $asset->id,
                 'name'          => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
                 'asset_tag'     => (string)link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
@@ -540,10 +531,10 @@ class AssetModelsController extends Controller
                 'assigned_to'   => ($asset->assigned_to) ? (string)link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
                 'actions'       => $actions,
                 'companyName'   => Company::getName($asset)
-            );
+            ];
         }
 
-        $data = array('total' => $assetsCount, 'rows' => $rows);
+        $data = ['total' => $assetsCount, 'rows' => $rows];
 
         return $data;
     }

@@ -59,8 +59,6 @@ class StatuslabelsController extends Controller
                     $colors[]=$statuslabel->color;
                 }
             }
-
-
         }
         $labels[]='Deployed';
         $points[]=Asset::whereNotNull('assigned_to')->count();
@@ -120,7 +118,7 @@ class StatuslabelsController extends Controller
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
         $statuslabel->color          =  e(Input::get('color'));
-        $statuslabel->show_in_nav          =  e(Input::get('show_in_nav'),0);
+        $statuslabel->show_in_nav          =  e(Input::get('show_in_nav'), 0);
 
 
         // Was the asset created?
@@ -130,7 +128,6 @@ class StatuslabelsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($statuslabel->getErrors());
-
     }
 
     public function store(Request $request)
@@ -156,7 +153,6 @@ class StatuslabelsController extends Controller
             return JsonResponse::create($statuslabel);
         }
         return JsonResponse::create(["error" => $statuslabel->getErrors()->first()], 500);
-
     }
 
 
@@ -176,7 +172,7 @@ class StatuslabelsController extends Controller
 
         $use_statuslabel_type = $statuslabel->getStatuslabelType();
 
-        $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
+        $statuslabel_types = ['' => trans('admin/hardware/form.select_statustype')] + ['undeployable' => trans('admin/hardware/general.undeployable')] + ['pending' => trans('admin/hardware/general.pending')] + ['archived' => trans('admin/hardware/general.archived')] + ['deployable' => trans('admin/hardware/general.deployable')];
 
         return View::make('statuslabels/edit', compact('statuslabel', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
@@ -209,7 +205,7 @@ class StatuslabelsController extends Controller
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
         $statuslabel->color          =  e(Input::get('color'));
-        $statuslabel->show_in_nav          =  e(Input::get('show_in_nav'),0);
+        $statuslabel->show_in_nav          =  e(Input::get('show_in_nav'), 0);
 
 
         // Was the asset created?
@@ -223,7 +219,6 @@ class StatuslabelsController extends Controller
 
         // Redirect to the Statuslabel management page
         return redirect()->to("admin/settings/statuslabels/$statuslabelId/edit")->with('error', trans('admin/statuslabels/message.update.error'));
-
     }
 
     /**
@@ -242,25 +237,20 @@ class StatuslabelsController extends Controller
 
 
         if ($statuslabel->has_assets() > 0) {
-
             // Redirect to the asset management page
             return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.assoc_assets'));
         } else {
-
             $statuslabel->delete();
 
             // Redirect to the statuslabels management page
             return redirect()->to('admin/settings/statuslabels')->with('success', trans('admin/statuslabels/message.delete.success'));
         }
-
-
-
     }
 
 
     public function getDatatable()
     {
-        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived','color','show_in_nav'))
+        $statuslabels = Statuslabel::select(['id','name','deployable','pending','archived','color','show_in_nav'])
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -288,10 +278,9 @@ class StatuslabelsController extends Controller
         $statuslabelsCount = $statuslabels->count();
         $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($statuslabels as $statuslabel) {
-
             if ($statuslabel->deployable == 1) {
                 $label_type = trans('admin/statuslabels/table.deployable');
             } elseif ($statuslabel->pending == 1) {
@@ -311,19 +300,18 @@ class StatuslabelsController extends Controller
             }
 
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => e($statuslabel->id),
                 'type'          => e($label_type),
                 'name'          => e($statuslabel->name),
                 'color'          => $color,
                 'show_in_nav' => ($statuslabel->show_in_nav=='1') ? trans('general.yes') : trans('general.no'),
                 'actions'       => $actions
-            );
+            ];
         }
 
-        $data = array('total' => $statuslabelsCount, 'rows' => $rows);
+        $data = ['total' => $statuslabelsCount, 'rows' => $rows];
 
         return $data;
-
     }
 }

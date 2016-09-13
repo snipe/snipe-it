@@ -10,20 +10,19 @@ class AccessoryTest extends \Codeception\TestCase\Test
   /**
    * @var \UnitTester
    */
-  protected $tester;
-  use DatabaseMigrations;
+    protected $tester;
+    use DatabaseMigrations;
 
-  public function testAccessoryAdd()
-  {
-    $accessory = factory(Accessory::class, 'accessory')->make();
-    $values = [
-      'name' => $accessory->name,
-      'category_id' => $accessory->category_id,
-      'qty' => $accessory->qty,
-    ];
+    public function testAccessoryAdd()
+    {
+        $accessory = factory(Accessory::class, 'accessory')->make();
+        $values = [
+        'name' => $accessory->name,
+        'category_id' => $accessory->category_id,
+        'qty' => $accessory->qty,
+        ];
 
-    Accessory::create($values);
-    $this->tester->seeRecord('accessories', $values);
-  }
-
+        Accessory::create($values);
+        $this->tester->seeRecord('accessories', $values);
+    }
 }

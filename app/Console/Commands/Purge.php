@@ -168,11 +168,8 @@ class Purge extends Command
                 $this->info('- Status Label "'.$status_label->name.'" deleted.');
                 $status_label->forceDelete();
             }
-
-
         } else {
             $this->info('Action canceled. Nothing was purged.');
         }
-
     }
 }

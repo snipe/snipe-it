@@ -15,13 +15,12 @@ class SupplierTest extends \Codeception\TestCase\Test
 
     public function testSupplierAdd()
     {
-      $supplier = factory(Supplier::class, 'supplier')->make();
-      $values = [
+        $supplier = factory(Supplier::class, 'supplier')->make();
+        $values = [
         'name' => $supplier->name,
-      ];
+        ];
 
-      Supplier::create($values);
-      $this->tester->seeRecord('suppliers', $values);
+        Supplier::create($values);
+        $this->tester->seeRecord('suppliers', $values);
     }
-
 }

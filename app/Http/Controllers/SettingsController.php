@@ -95,7 +95,6 @@ class SettingsController extends Controller
         } else {
             $start_settings['env'] = $environment;
             $start_settings['prod'] = true;
-
         }
 
         if (function_exists('posix_getpwuid')) { // Probably Linux
@@ -153,7 +152,6 @@ class SettingsController extends Controller
         } catch (Exception $e) {
             return 'error';
         }
-
     }
 
     /**
@@ -172,7 +170,7 @@ class SettingsController extends Controller
         $user->last_name = e(Input::get('last_name'));
         $user->email = $data['email'] = e(Input::get('email'));
         $user->activated = 1;
-        $permissions = array('superuser' => 1);
+        $permissions = ['superuser' => 1];
         $user->permissions = json_encode($permissions);
         $user->username = $data['username'] = e(Input::get('username'));
         $user->password = bcrypt(Input::get('password'));
@@ -206,8 +204,6 @@ class SettingsController extends Controller
 
             return redirect()->route('setup.done');
         }
-
-
     }
 
     /**
@@ -256,7 +252,6 @@ class SettingsController extends Controller
         ->with('output', $output)
         ->with('step', 2)
         ->with('section', 'Create Database Tables');
-
     }
 
 
@@ -422,7 +417,6 @@ class SettingsController extends Controller
         // If validation fails, we'll exit the operation now.
         if ($setting->save()) {
             return redirect()->to("admin/settings/app")->with('success', trans('admin/settings/message.update.success'));
-
         } else {
             return redirect()->back()->withInput()->withErrors($setting->getErrors());
         }
@@ -430,11 +424,11 @@ class SettingsController extends Controller
 
         // Redirect to the setting management page
         return redirect()->to("admin/settings/app/edit")->with('error', trans('admin/settings/message.update.error'));
-
     }
 
 
-    public function getLdapTest() {
+    public function getLdapTest()
+    {
 
         try {
             $connection = Ldap::connectToLdap();
@@ -448,8 +442,6 @@ class SettingsController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
-
-
     }
 
 
@@ -465,21 +457,19 @@ class SettingsController extends Controller
 
         $path = storage_path().'/app/'.config('laravel-backup.backup.name');
 
-        $files = array();
+        $files = [];
 
         if ($handle = opendir($path)) {
-
             /* This is the correct way to loop over the directory. */
             while (false !== ($entry = readdir($handle))) {
                 clearstatcache();
                 if (substr(strrchr($entry, '.'), 1)=='zip') {
-                    $files[] = array(
+                    $files[] = [
                           'filename' => $entry,
                           'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
                           'modified' => filemtime($path.'/'.$entry)
-                      );
+                      ];
                 }
-
             }
             closedir($handle);
             $files = array_reverse($files);
@@ -504,11 +494,8 @@ class SettingsController extends Controller
             Artisan::call('backup:run');
             return redirect()->to("admin/settings/backups")->with('success', trans('admin/settings/message.backup.generated'));
         } else {
-
             return redirect()->to("admin/settings/backups")->with('error', trans('general.feature_disabled'));
         }
-
-
     }
 
 
@@ -527,7 +514,6 @@ class SettingsController extends Controller
             if (file_exists($file)) {
                 return Response::download($file);
             } else {
-
                 // Redirect to the backup page
                 return redirect()->route('settings/backups')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
@@ -535,8 +521,6 @@ class SettingsController extends Controller
             // Redirect to the backup page
             return redirect()->route('settings/backups')->with('error', trans('general.feature_disabled'));
         }
-
-
     }
 
     /**
@@ -550,7 +534,6 @@ class SettingsController extends Controller
     {
 
         if (!config('app.lock_passwords')) {
-
             $path = storage_path().'/app/'.config('laravel-backup.backup.name');
             $file = $path.'/'.$filename;
             if (file_exists($file)) {
@@ -562,7 +545,6 @@ class SettingsController extends Controller
         } else {
             return redirect()->route('settings/backups')->with('error', trans('general.feature_disabled'));
         }
-
     }
 
 
@@ -584,7 +566,6 @@ class SettingsController extends Controller
             } else {
                 return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));
             }
-
         } else {
             return redirect()->back()->with('error', trans('general.feature_disabled'));
         }

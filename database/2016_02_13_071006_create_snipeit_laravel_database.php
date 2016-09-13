@@ -83,7 +83,7 @@ Schema::create('asset_maintenances', function($table) {
  $table->increments('id')->unsigned();
  $table->integer('asset_id')->unsigned();
  $table->integer('supplier_id')->unsigned();
- $table->enum('asset_maintenance_type', array('Maintenance','Repair','Upgrade'));
+ $table->enum('asset_maintenance_type', ['Maintenance','Repair','Upgrade']);
  $table->string('title', 100);
  $table->boolean('is_warranty');
  $table->date('start_date');
@@ -142,7 +142,7 @@ Schema::create('assets', function($table) {
  $table->boolean('requestable');
  $table->integer('rtd_location_id')->nullable();
  $table->string('_snipeit_mac_address', 255)->nullable();
- $table->enum('accepted', array('pending','accepted','rejected'))->nullable();
+ $table->enum('accepted', ['pending','accepted','rejected'])->nullable();
  $table->dateTime('last_checkout')->nullable();
  $table->date('expected_checkin')->nullable();
  $table->integer('company_id')->nullable()->unsigned();

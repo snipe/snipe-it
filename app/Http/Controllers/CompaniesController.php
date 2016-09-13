@@ -60,7 +60,6 @@ final class CompaniesController extends Controller
         } else {
             return redirect()->back()->withInput()->withErrors($company->getErrors());
         }
-
     }
 
 
@@ -95,8 +94,6 @@ final class CompaniesController extends Controller
         if (is_null($company = Company::find($companyId))) {
             return redirect()->to('admin/settings/companies')->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
-
-
             $company->name = e(Input::get('name'));
 
             if ($company->save()) {
@@ -106,7 +103,6 @@ final class CompaniesController extends Controller
                 return redirect()->to("admin/settings/companies/$companyId/edit")
                     ->with('error', trans('admin/companies/message.update.error'));
             }
-
         }
     }
 

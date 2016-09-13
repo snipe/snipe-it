@@ -14,14 +14,13 @@ class DepreciationTest extends \Codeception\TestCase\Test
 
     public function testDepreciationAdd()
     {
-      $depreciations = factory(Depreciation::class, 'depreciation')->make();
-      $values = [
+        $depreciations = factory(Depreciation::class, 'depreciation')->make();
+        $values = [
         'name' => $depreciations->name,
         'months' => $depreciations->months,
-      ];
+        ];
 
-      Depreciation::create($values);
-      $this->tester->seeRecord('depreciations', $values);
+        Depreciation::create($values);
+        $this->tester->seeRecord('depreciations', $values);
     }
-
 }

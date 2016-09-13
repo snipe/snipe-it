@@ -15,16 +15,15 @@ class AssetModelTest extends \Codeception\TestCase\Test
 
     public function testAssetModelAdd()
     {
-      $assetmodel = factory(AssetModel::class, 'assetmodel')->make();
-      $values = [
+        $assetmodel = factory(AssetModel::class, 'assetmodel')->make();
+        $values = [
         'name' => $assetmodel->name,
         'manufacturer_id' => $assetmodel->manufacturer_id,
         'category_id' => $assetmodel->category_id,
         'eol' => $assetmodel->eol,
-      ];
+        ];
 
-      AssetModel::create($values);
-      $this->tester->seeRecord('models', $values);
+        AssetModel::create($values);
+        $this->tester->seeRecord('models', $values);
     }
-
 }

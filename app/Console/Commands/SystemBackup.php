@@ -40,6 +40,5 @@ class SystemBackup extends Command
     {
         //
         $this->call('backup:run');
-
     }
 }

@@ -44,7 +44,6 @@ class CustomField extends Model
             \Schema::table(\DB::getTablePrefix().\App\Models\CustomField::$table_name, function ($table) use ($custom_field) {
                 $table->text($custom_field->db_column_name())->nullable();
             });
-
         });
 
         self::updating(function ($custom_field) {
@@ -117,7 +116,8 @@ class CustomField extends Model
      * @since [v3.4]
      * @return Array
      */
-    public function formatFieldValuesAsArray() {
+    public function formatFieldValuesAsArray()
+    {
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
 
         $result[''] = 'Select '.strtolower($this->format);
@@ -125,27 +125,23 @@ class CustomField extends Model
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);
             if ($arr_parts[0]!='') {
-                if (key_exists('1',$arr_parts)) {
+                if (key_exists('1', $arr_parts)) {
                     $result[$arr_parts[0]] = $arr_parts[1];
                 } else {
                     $result[$arr_parts[0]] = $arr_parts[0];
                 }
             }
-
         }
 
 
         return $result;
     }
 
-    public function isFieldDecryptable($string) {
+    public function isFieldDecryptable($string)
+    {
         if (($this->field_encrypted=='1') && ($string!='')) {
             return true;
         }
         return false;
     }
-
-
-
-
 }

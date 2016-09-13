@@ -59,19 +59,19 @@ class ReportsController extends Controller
     {
         $accessories = Accessory::orderBy('created_at', 'DESC')->get();
 
-        $rows = array();
-        $header = array(
+        $rows = [];
+        $header = [
             trans('admin/accessories/table.title'),
             trans('admin/accessories/general.accessory_category'),
             trans('admin/accessories/general.total'),
             trans('admin/accessories/general.remaining')
-        );
+        ];
         $header = array_map('trim', $header);
         $rows[] = implode($header, ', ');
 
         // Row per accessory
         foreach ($accessories as $accessory) {
-            $row = array();
+            $row = [];
             $row[] = e($accessory->accessory_name);
             $row[] = e($accessory->accessory_category);
             $row[] = e($accessory->total);
@@ -277,7 +277,6 @@ class ReportsController extends Controller
 
         $csv->output('depreciation-report-' . date('Y-m-d') . '.csv');
         die;
-
     }
 
     /**
@@ -524,7 +523,6 @@ class ReportsController extends Controller
                 }
 
                 $row[] = $show_loc;
-
             }
             if (e(Input::get('assigned_to')) == '1') {
                 if ($asset->assigned_to > 0) {
@@ -611,7 +609,6 @@ class ReportsController extends Controller
             ->get();
 
         return View::make('reports/asset_maintenances', compact('assetMaintenances'));
-
     }
 
     /**
@@ -730,7 +727,6 @@ class ReportsController extends Controller
         $response->header('Content-disposition', 'attachment;filename=report.csv');
 
         return $response;
-
     }
 
     /**

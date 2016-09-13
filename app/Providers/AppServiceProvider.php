@@ -5,7 +5,6 @@ use Validator;
 use Illuminate\Support\ServiceProvider;
 use DB;
 
-
 /**
  * This service provider handles a few custom validation rules.
  *
@@ -26,43 +25,40 @@ class AppServiceProvider extends ServiceProvider
     {
 
         // Email array validator
-        Validator::extend('email_array', function($attribute, $value, $parameters, $validator) {
-            $value = str_replace(' ','',$value);
+        Validator::extend('email_array', function ($attribute, $value, $parameters, $validator) {
+            $value = str_replace(' ', '', $value);
             $array = explode(',', $value);
 
-            foreach($array as $email) //loop over values
-            {
+            foreach ($array as $email) { //loop over values
                 $email_to_validate['alert_email'][]=$email;
             }
 
-            $rules = array('alert_email.*'=>'email');
-            $messages = array(
+            $rules = ['alert_email.*'=>'email'];
+            $messages = [
                  'alert_email.*'=>trans('validation.email_array')
-            );
+            ];
 
-            $validator = Validator::make($email_to_validate,$rules,$messages);
+            $validator = Validator::make($email_to_validate, $rules, $messages);
 
             if ($validator->passes()) {
                 return true;
             } else {
                 return false;
             }
-
         });
 
         // Unique only if undeleted
         // This works around the use case where multiple deleted items have the same unique attribute.
         // (I think this is a bug in Laravel's validator?)
-        Validator::extend('unique_undeleted', function($attribute, $value, $parameters, $validator) {
+        Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
 
-            $count = DB::table($parameters[0])->select('id')->where($attribute,'=',$value)->whereNull('deleted_at')->where('id','!=',$parameters[1])->count();
+            $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
 
             if ($count < 1) {
                 return true;
             } else {
                 return false;
             }
-
         });
     }
 

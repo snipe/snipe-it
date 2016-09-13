@@ -9,9 +9,9 @@ class Group extends Model
 {
     protected $table = 'groups';
 
-    public $rules = array(
+    public $rules = [
       'name' => 'required|min:3|max:255',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique

@@ -54,7 +54,6 @@ class SendExpirationAlerts extends Command
 
 
         foreach ($expiring_assets as $asset) {
-
             $expires = $asset->warrantee_expires();
             $difference =  round(abs(strtotime($expires) - strtotime($now))/86400);
 
@@ -97,14 +96,11 @@ class SendExpirationAlerts extends Command
         }
 
         if ((Setting::getSettings()->alert_email!='')  && (Setting::getSettings()->alerts_enabled==1)) {
-
-
             if (count($expiring_assets) > 0) {
                 \Mail::send('emails.expiring-assets-report', $asset_data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
                     $m->subject('Expiring Assets Report');
                 });
-
             }
 
             if (count($expiring_licenses) > 0) {
@@ -112,22 +108,13 @@ class SendExpirationAlerts extends Command
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
                     $m->subject('Expiring Licenses Report');
                 });
-
             }
-
-
         } else {
-
             if (Setting::getSettings()->alert_email=='') {
                 echo "Could not send email. No alert email configured in settings. \n";
             } elseif (Setting::getSettings()->alerts_enabled!=1) {
                 echo "Alerts are disabled in the settings. No mail will be sent. \n";
             }
-
         }
-
-
-
-
     }
 }

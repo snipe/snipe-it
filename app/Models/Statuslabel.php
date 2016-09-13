@@ -17,13 +17,13 @@ class Statuslabel extends Model
     protected $table = 'status_labels';
 
 
-    protected $rules = array(
+    protected $rules = [
         'name'  => 'required|string|unique_undeleted',
         'notes'   => 'string',
         'deployable' => 'required',
         'pending' => 'required',
         'archived' => 'required',
-    );
+    ];
 
     protected $fillable = ['name', 'deployable', 'pending', 'archived'];
 
@@ -68,22 +68,18 @@ class Statuslabel extends Model
             $statustype['pending'] = 1;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 0;
-
         } elseif ($type == 'deployable') {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 1;
             $statustype['archived'] = 0;
-
         } elseif ($type == 'archived') {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 1;
-            
         } else {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 0;
-
         }
 
         return $statustype;

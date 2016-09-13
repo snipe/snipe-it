@@ -25,14 +25,14 @@ class Consumable extends Model
     /**
     * Category validation rules
     */
-    public $rules = array(
+    public $rules = [
         'name'        => 'required|min:3|max:255',
         'qty'         => 'required|integer|min:0',
         'category_id' => 'required|integer',
         'company_id'  => 'integer',
         'min_amt'     => 'integer|min:1',
         'purchase_cost'   => 'numeric',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique
@@ -119,7 +119,6 @@ class Consumable extends Model
         } else {
             return null;
         }
-
     }
 
     public function numRemaining()

@@ -8,7 +8,6 @@ use Exception;
 use Input;
 use Log;
 
-
 class Ldap extends Model
 {
 
@@ -36,8 +35,8 @@ class Ldap extends Model
         }
 
         // If the user specifies where CA Certs are, make sure to use them
-        if(env("LDAPTLS_CACERT")) {
-          putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
+        if (env("LDAPTLS_CACERT")) {
+            putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
         }
 
         $connection = @ldap_connect($ldap_host);
@@ -78,13 +77,10 @@ class Ldap extends Model
         $ldap_username_field     = $settings->ldap_username_field;
         $baseDn      = $settings->ldap_basedn;
 
-        if ($settings->is_ad =='1')
-        {
-
-            // Check if they are using the userprincipalname for the username field.
+        if ($settings->is_ad =='1') {
+        // Check if they are using the userprincipalname for the username field.
             // If they are, we can skip building the UPN to authenticate against AD
-            if ($ldap_username_field=='userprincipalname')
-            {
+            if ($ldap_username_field=='userprincipalname') {
                 $userDn = $username;
             } else {
                 // In case they haven't added an AD domain
@@ -94,7 +90,6 @@ class Ldap extends Model
                     $userDn      = $username.'@'.$settings->ad_domain;
                 }
             }
-
         } else {
             $userDn      = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
         }
@@ -119,7 +114,6 @@ class Ldap extends Model
         }
 
         return $user;
-
     }
 
 
@@ -143,7 +137,6 @@ class Ldap extends Model
         try {
             $ldap_pass    = \Crypt::decrypt(Setting::getSettings()->ldap_pword);
         } catch (Exception $e) {
-
             throw new Exception('Your app key has changed! Could not decrypt LDAP password using your current app key, so LDAP authentication has been disabled. Login with a local account, update the LDAP password and re-enable it in Admin > Settings.');
         }
 
@@ -151,7 +144,6 @@ class Ldap extends Model
         if (!$ldapbind = @ldap_bind($connection, $ldap_username, $ldap_pass)) {
             throw new Exception('Could not bind to LDAP: '.ldap_error($connection));
         }
-
     }
 
 
@@ -174,7 +166,7 @@ class Ldap extends Model
         $ldap_result_email = Setting::getSettings()->ldap_email;
 
         // Get LDAP user data
-        $item = array();
+        $item = [];
         $item["username"] = isset($ldapatttibutes[$ldap_result_username][0]) ? $ldapatttibutes[$ldap_result_username][0] : "";
         $item["employee_number"] = isset($ldapatttibutes[$ldap_result_emp_num][0]) ? $ldapatttibutes[$ldap_result_emp_num][0] : "";
         $item["lastname"] = isset($ldapatttibutes[$ldap_result_last_name][0]) ? $ldapatttibutes[$ldap_result_last_name][0] : "";
@@ -182,8 +174,6 @@ class Ldap extends Model
         $item["email"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
 
         return $item;
-
-
     }
 
     /**
@@ -227,7 +217,6 @@ class Ldap extends Model
         }
 
         return false;
-
     }
 
     /**
@@ -238,7 +227,8 @@ class Ldap extends Model
      * @param $ldapatttibutes
      * @return array|bool
      */
-    static function findLdapUsers() {
+    static function findLdapUsers()
+    {
 
         $ldapconn = Ldap::connectToLdap();
         $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
@@ -249,12 +239,11 @@ class Ldap extends Model
         // @author Richard Hofman
         $page_size = 500;
         $cookie = '';
-        $result_set = array();
+        $result_set = [];
         $global_count = 0;
 
         // Perform the search
         do {
-
             // Paginate (non-critical, if not supported by server)
             if (!$ldap_paging = @ldap_control_paged_result($ldapconn, $page_size, false, $cookie)) {
                 throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
@@ -278,7 +267,6 @@ class Ldap extends Model
             $result_set = array_merge($result_set, $results);
 
             ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
-
         } while ($cookie !== null && $cookie != '');
 
 
@@ -288,11 +276,5 @@ class Ldap extends Model
         ldap_control_paged_result($ldapconn, 0);
 
         return $results;
-
-
     }
-
-
-
-
 }

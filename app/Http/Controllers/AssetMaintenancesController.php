@@ -75,7 +75,7 @@ class AssetMaintenancesController extends Controller
     */
     public function getDatatable()
     {
-        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company','admin')
+        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company', 'admin')
         ->withTrashed();
 
         if (Input::has('search')) {
@@ -115,11 +115,10 @@ class AssetMaintenancesController extends Controller
         $maintenancesCount = $maintenances->count();
         $maintenances = $maintenances->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
         $settings = Setting::getSettings();
 
         foreach ($maintenances as $maintenance) {
-
             $actions = '<nobr><a href="'.route('update/asset_maintenance', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/asset_maintenance', $maintenance->id).'" data-content="'.trans('admin/asset_maintenances/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
             if (($maintenance->cost) && (isset($maintenance->asset)) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
@@ -128,7 +127,7 @@ class AssetMaintenancesController extends Controller
                 $maintenance_cost = $settings->default_currency.$maintenance->cost;
             }
             
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $maintenance->id,
                 'asset_name'    =>  ($maintenance->asset) ? (string)link_to('/hardware/'.$maintenance->asset->id.'/view', $maintenance->asset->showAssetName()) : 'Deleted Asset' ,
                 'title'         => $maintenance->title,
@@ -142,12 +141,11 @@ class AssetMaintenancesController extends Controller
                 'user_id'       => ($maintenance->admin) ? (string)link_to('/admin/users/'.$maintenance->admin->id.'/view', $maintenance->admin->fullName()) : '',
                 'actions'       => $actions,
                 'companyName'   => ($maintenance->asset) ? $maintenance->asset->company->name : ''
-            );
+            ];
         }
 
-        $data = array('total' => $maintenancesCount, 'rows' => $rows);
+        $data = ['total' => $maintenancesCount, 'rows' => $rows];
         return $data;
-
     }
 
     /**
@@ -256,17 +254,12 @@ class AssetMaintenancesController extends Controller
 
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
-
             // Redirect to the new asset maintenance page
             return redirect()->to("admin/asset_maintenances")
                            ->with('success', trans('admin/asset_maintenances/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($assetMaintenance->getErrors());
-
-
-
-
     }
 
     /**
@@ -307,7 +300,7 @@ class AssetMaintenancesController extends Controller
                                     '' => 'Select an improvement type',
                                 ] + AssetMaintenance::getImprovementOptions();
 
-        $assets = Company::scopeCompanyables(Asset::with('model','assignedUser')->get(), 'assets.company_id')->lists('detailed_name', 'id');
+        $assets = Company::scopeCompanyables(Asset::with('model', 'assignedUser')->get(), 'assets.company_id')->lists('detailed_name', 'id');
         // Get Supplier List
         $supplier_list = Helper::suppliersList();
 
@@ -318,7 +311,6 @@ class AssetMaintenancesController extends Controller
                    ->with('supplier_list', $supplier_list)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
                    ->with('assetMaintenance', $assetMaintenance);
-
     }
 
     /**
@@ -408,14 +400,11 @@ class AssetMaintenancesController extends Controller
 
       // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
-
             // Redirect to the new asset maintenance page
             return redirect()->to("admin/asset_maintenances")
                          ->with('success', trans('admin/asset_maintenances/message.create.success'));
         }
         return redirect()->back() ->withInput()->withErrors($assetMaintenance->getErrors());
-
-
     }
 
     /**

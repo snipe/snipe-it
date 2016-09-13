@@ -47,7 +47,7 @@ class GroupsController extends Controller
         $group = new Group;
         // Get all the available permissions
         $permissions = config('permissions');
-        $groupPermissions = array();
+        $groupPermissions = [];
         $selectedPermissions = Input::old('permissions', $groupPermissions);
 
         // Show the page
@@ -74,8 +74,6 @@ class GroupsController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($group->getErrors());
-
-
     }
 
     /**
@@ -110,23 +108,19 @@ class GroupsController extends Controller
         $permissions = config('permissions');
         if (!$group = Group::find($id)) {
             return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
-
         }
         $group->name = e(Input::get('name'));
         $group->permissions = json_encode(Input::get('permission'));
 
 
         if (!config('app.lock_passwords')) {
-
             if ($group->save()) {
                 return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.update'));
             }
             return redirect()->back()->withInput()->withErrors($group->getErrors());
-
         } else {
             return redirect()->route('update/group', $id)->withInput()->with('error', 'Denied! Editing groups is not allowed in the demo.');
         }
-
     }
 
     /**
@@ -206,7 +200,7 @@ class GroupsController extends Controller
 
         $groupsCount = $groups->count();
         $groups = $groups->skip($offset)->take($limit)->get();
-        $rows = array();
+        $rows = [];
 
         foreach ($groups as $group) {
             $group_names = '';
@@ -223,16 +217,16 @@ class GroupsController extends Controller
 
             $actions .= '</nobr>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'         => $group->id,
                 'name'        => $group->name,
                 'users'         => $group->users->count(),
                 'created_at'        => $group->created_at->format('Y-m-d'),
                 'actions'       => ($actions) ? $actions : '',
-            );
+            ];
         }
 
-        $data = array('total'=>$groupsCount, 'rows'=>$rows);
+        $data = ['total'=>$groupsCount, 'rows'=>$rows];
         return $data;
     }
 }

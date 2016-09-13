@@ -7,10 +7,10 @@ use Watson\Validating\ValidatingTrait;
 class Depreciation extends Model
 {
     // Declare the rules for the form validation
-    protected $rules = array(
+    protected $rules = [
         'name' => 'required|min:3|max:255|unique:depreciations,name',
         'months' => 'required|max:240|integer',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique

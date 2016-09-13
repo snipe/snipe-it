@@ -35,7 +35,7 @@ trait Loggable
             $log->target_type = User::class;
             $log->target_id = $this->assigned_to;
         }
-        $item =call_user_func(array($log->target_type, 'find'), $log->target_id);
+        $item =call_user_func([$log->target_type, 'find'], $log->target_id);
         $log->location_id = $item->location_id;
         $log->note = $note;
         $log->logaction('checkout');
@@ -80,5 +80,4 @@ trait Loggable
 
         return $log;
     }
-
 }
