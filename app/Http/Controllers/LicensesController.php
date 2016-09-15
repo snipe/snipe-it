@@ -792,7 +792,8 @@ class LicensesController extends Controller
         ->with('supplier_list', $supplier_list)
         ->with('license', $license)
         ->with('maintained_list', $maintained_list)
-        ->with('company_list', $company_list);
+        ->with('company_list', $company_list)
+        ->with('manufacturer_list', Helper::manufacturerList());
 
     }
 

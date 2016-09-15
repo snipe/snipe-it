@@ -109,8 +109,8 @@ class ReportsController extends Controller
             'model.manufacturer',
             'company'
         )
-            ->orderBy('created_at', 'DESC')
-            ->get();
+         ->orderBy('created_at', 'DESC')
+        ->get();
 
         return View::make('reports/asset', compact('assets'))->with('settings', $settings);
     }
