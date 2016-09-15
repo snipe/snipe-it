@@ -33,7 +33,7 @@ class ReportsController extends Controller
 {
 
     /**
-     * Returns a view that displaysthe accessories report.
+     * Returns a view that displays the accessories report.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
@@ -132,6 +132,9 @@ class ReportsController extends Controller
             $handle = fopen('php://output', 'w');
 
             Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle) {
+
+                //BOM
+                fputs($handle, chr(0xEF) . chr(0xBB) . chr(0xBF));
                 fputcsv($handle, [
                     trans('admin/hardware/table.asset_tag'),
                     trans('admin/hardware/form.manufacturer'),
