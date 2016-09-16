@@ -336,7 +336,7 @@ class ConsumablesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => strtoupper($logaction->item_type).' <'.config('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => 'Consumable <'.config('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',

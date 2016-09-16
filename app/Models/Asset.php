@@ -7,6 +7,7 @@ use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Loggable;
+use App\Models\Requestable;
 use App\Models\Setting;
 use Auth;
 use Config;
@@ -26,6 +27,7 @@ class Asset extends Depreciable
 {
     use Loggable;
     use SoftDeletes;
+    use Requestable;
 
   /**
   * The database table used by the model.

@@ -37,6 +37,9 @@ class Actionlog extends Model implements ICompanyableChild
     public function itemType()
     {
         // dd($this);
+        if($this->item_type == AssetModel::class) {
+            return "model";
+        }
         return camel_case(class_basename($this->item_type));
     }
 
@@ -50,8 +53,6 @@ class Actionlog extends Model implements ICompanyableChild
 
     public function userlog()
     {
-
-        // return $this->belongsTo(User::class, 'target_id')
         return $this->target();
     }
 
@@ -68,13 +69,11 @@ class Actionlog extends Model implements ICompanyableChild
 
     public function childlogs()
     {
-
         return $this->hasMany('\App\Models\ActionLog', 'thread_id');
     }
 
     public function parentlog()
     {
-
         return $this->belongsTo('\App\Models\ActionLog', 'thread_id');
     }
 

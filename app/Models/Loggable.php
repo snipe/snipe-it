@@ -80,5 +80,4 @@ trait Loggable
 
         return $log;
     }
-
 }
