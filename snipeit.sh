@@ -200,6 +200,7 @@ case $distro in
 		DB_PASSWORD=$mysqluserpw
 		APP_URL=http://$fqdn
 		APP_KEY=$random32
+		DB_DUMP_PATH='/usr/bin'
 		EOF
 
 		echo "##  Setting up hosts file."
@@ -315,6 +316,7 @@ case $distro in
 		DB_PASSWORD=$mysqluserpw
 		APP_URL=http://$fqdn
 		APP_KEY=$random32
+		DB_DUMP_PATH='/usr/bin'
 		EOF
 
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
@@ -447,6 +449,7 @@ case $distro in
 		DB_PASSWORD=$mysqluserpw
 		APP_URL=http://$fqdn
 		APP_KEY=$random32
+		DB_DUMP_PATH='/usr/bin'
 		EOF
 
 
@@ -561,7 +564,7 @@ case $distro in
 		DB_PASSWORD=$mysqluserpw
 		APP_URL=http://$fqdn
 		APP_KEY=$random32
-
+		DB_DUMP_PATH='/usr/bin'
 		EOF
 
 		# Change permissions on directories
