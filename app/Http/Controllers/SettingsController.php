@@ -482,7 +482,7 @@ class SettingsController extends Controller
 
             }
             closedir($handle);
-            rsort($files)
+            rsort($files);
         }
 
 
