@@ -195,7 +195,7 @@ class SettingsController extends Controller
         } else {
             $user->save();
             $settings->save();
-            
+
             if (Input::get('email_creds')=='1') {
                 Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
@@ -323,7 +323,7 @@ class SettingsController extends Controller
                 $setting->logo = $file_name;
             }
         }
-        
+
 
         if (config('app.lock_passwords')==false) {
             $setting->site_name = e(Input::get('site_name'));
@@ -482,7 +482,7 @@ class SettingsController extends Controller
 
             }
             closedir($handle);
-            $files = array_reverse($files);
+            rsort($files)
         }
 
 
