@@ -157,6 +157,7 @@ class UsersController extends Controller
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject('Welcome ' . $user->first_name);
                 });
             }
@@ -209,6 +210,7 @@ class UsersController extends Controller
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject('Welcome ' . $user->first_name);
                 });
             }
@@ -533,7 +535,7 @@ class UsersController extends Controller
                     $logaction->item_id = $license->id;
                     $logaction->item_type = License::class;
                     $logaction->target_id = $license->assigned_to;
-                    $logaction->target_type = User::class; 
+                    $logaction->target_type = User::class;
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin license and delete user';
                     $logaction->logaction('checkin from');
@@ -832,6 +834,7 @@ class UsersController extends Controller
                                 if ($newuser['email']) {
                                     Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
                                         $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+                                        $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                                         $m->subject('Welcome ' . $newuser['first_name']);
                                     });
                                 }

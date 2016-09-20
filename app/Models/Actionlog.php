@@ -36,7 +36,7 @@ class Actionlog extends Model implements ICompanyableChild
 
     public function itemType()
     {
-        // dd($this);
+
         if($this->item_type == AssetModel::class) {
             return "model";
         }
@@ -45,7 +45,6 @@ class Actionlog extends Model implements ICompanyableChild
 
     public function uploads()
     {
-
         return $this->morphTo('item')
                     ->where('action_type', '=', 'uploaded')
                     ->withTrashed();

@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some items did not import correctly.',
-        'errorDetail'   => 'The following Items were not imported because of errors.',
-        'success'       => "Your file has been imported",
+        'error'         => 'Einige Elemente wurden nicht korrekt importiert.',
+        'errorDetail'   => 'Die folgenden Elemente wurden aufgrund von Fehlern nicht importiert.',
+        'success'       => "Ihre Datei wurde importiert",
     ),
 
 
@@ -53,7 +53,7 @@ return array(
         'error'   		=> 'Asset konnte nicht herausgegeben werden. Bitte versuchen Sie es erneut',
         'success' 		=> 'Asset wurde erfolgreich herausgegeben.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Dieses Asset kann nicht herausgegeben werden!'
     ),
 
     'checkin' => array(

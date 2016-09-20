@@ -152,6 +152,7 @@ class Asset extends Depreciable
 
             \Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                 $m->subject('Confirm asset delivery');
             });
         }
@@ -577,12 +578,12 @@ public function checkin_email()
     public function scopeAssetsByLocation($query, $location)
     {
         return $query->where(function ($query) use ($location) {
-        
+
             $query->whereHas('assigneduser', function ($query) use ($location) {
-            
+
                 $query->where('users.location_id', '=', $location->id);
             })->orWhere(function ($query) use ($location) {
-            
+
                 $query->where('assets.rtd_location_id', '=', $location->id);
                 $query->whereNull('assets.assigned_to');
             });

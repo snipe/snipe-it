@@ -11,14 +11,26 @@ use Illuminate\Support\Facades\Auth;
 trait Loggable
 {
 
+    /**
+     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @since [v3.4]
+     * @return \App\Models\Actionlog
+     */
+
     public function log()
     {
         return $this->morphMany(Actionlog::class, 'item');
     }
 
+    /**
+     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @since [v3.4]
+     * @return \App\Models\Actionlog
+     */
     public function logCheckout($note, $target = null /*target is overridable for components*/)
     {
         $log = new Actionlog;
+
         // We need to special case licenses because of license_seat vs license.  So much for clean polymorphism :)
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
@@ -27,7 +39,9 @@ trait Loggable
             $log->item_type = static::class;
             $log->item_id = $this->id;
         }
+
         $log->user_id = Auth::user()->id;
+
         if (!is_null($this->asset_id) || isset($target)) {
             $log->target_type = Asset::class;
             $log->target_id = $this->asset_id;
@@ -35,7 +49,8 @@ trait Loggable
             $log->target_type = User::class;
             $log->target_id = $this->assigned_to;
         }
-        $item =call_user_func(array($log->target_type, 'find'), $log->target_id);
+
+        $item = call_user_func(array($log->target_type, 'find'), $log->target_id);
         $log->location_id = $item->location_id;
         $log->note = $note;
         $log->logaction('checkout');
@@ -43,6 +58,11 @@ trait Loggable
         return $log;
     }
 
+    /**
+     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @since [v3.4]
+     * @return \App\Models\Actionlog
+     */
     public function logCheckin($note)
     {
         $log = new Actionlog;
@@ -61,6 +81,11 @@ trait Loggable
         return $log;
     }
 
+    /**
+     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @since [v3.4]
+     * @return \App\Models\Actionlog
+     */
     public function logUpload($filename, $note)
     {
         $log = new Actionlog;

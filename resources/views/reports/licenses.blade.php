@@ -33,7 +33,10 @@
             <th class="col-sm-1">{{ trans('admin/licenses/form.remaining_seats') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/form.expiration') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/form.date') }}</th>
-            <th class="col-sm-1">{{ trans('admin/licenses/form.cost') }}</th>
+            <th class="col-sm-1 text-right" class="col-sm-1">{{ trans('admin/licenses/form.cost') }}</th>
+            <th class="col-sm-1">{{ trans('admin/licenses/form.depreciation') }}</th>
+            <th class="col-sm-1 text-right">{{ trans('admin/hardware/table.book_value') }}</th>
+            <th class="col-sm-1 text-right">{{ trans('admin/hardware/table.diff') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -47,9 +50,11 @@
             <td>{{ $license->remaincount() }}</td>
             <td>{{ $license->expiration_date }}</td>
             <td>{{ $license->purchase_date }}</td>
-            <td>
-            {{ \App\Models\Setting::first()->default_currency }}
-            {{ number_format($license->purchase_cost) }}</td>
+            <td class="text-right">
+            {{ \App\Models\Setting::getSettings()->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}</td>
+            <td>{{ ($license->depreciation) ? e($license->depreciation->name).' ('.$license->depreciation->months.' '.trans('general.months').')' : ''  }}</td>
+            <td class="text-right">{{ \App\Models\Setting::getSettings()->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput($license->getDepreciatedValue()) }}</td>
+            <td class="text-right">-{{ \App\Models\Setting::getSettings()->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput(($license->purchase_cost - $license->getDepreciatedValue())) }}</td>
         </tr>
         @endforeach
     </tbody>

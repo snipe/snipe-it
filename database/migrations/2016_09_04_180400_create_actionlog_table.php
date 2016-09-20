@@ -18,7 +18,7 @@ class CreateActionlogTable extends Migration
                 $table->integer('user_id')->nullable();
                 $table->string('action_type');
                 $table->integer('target_id')->nullable();  // Was checkedout_to
-                $table->integer('target_type')->nullable(); // For polymorphic thingies
+                $table->string('target_type')->nullable(); // For polymorphic thingies
                 $table->integer('location_id')->nullable();
                 $table->text('note')->nullable();
                 $table->text('filename')->nullable();

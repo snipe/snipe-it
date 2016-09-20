@@ -3,7 +3,7 @@
 return array(
 	'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
-    'bulk_checkout'             => 'Checkout Assets to User',
+    'bulk_checkout'             => 'Atribuir ativo a utilizador',
     'checkin'  					=> 'Retornar Ativo',
     'checkout'  				=> 'Registrar Ativo ao Usuário',
     'clone'  					=> 'Clonar Ativo',
