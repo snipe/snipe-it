@@ -7,7 +7,7 @@ return array(
     'cost'				=> 'Harga Beli',
     'create'                             => 'Buat Consumable',
     'date'					=> 'Tanggal Pembelian',
-    'item_no'               => 'Item No.',
+    'item_no'               => 'No Barang.',
     'order'					=> 'Nomor Pembelian',
     'remaining' 			             => 'Tersisa',
     'total' 			                 => 'Total',
