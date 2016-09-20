@@ -1087,6 +1087,8 @@ class AssetsController extends Controller
         $results = $csv->fetchAssoc();
         $item = array();
         $status = array();
+        $status['error'] = array();
+        $status['success'] = array();
 
 
         foreach($results as $row) {
@@ -1106,74 +1108,78 @@ class AssetsController extends Controller
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
                 $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
 
-                $asset = Asset::where('asset_tag','=',$asset_tag)->first();
-                $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
+                if ($asset = Asset::where('asset_tag','=',$asset_tag)->first()) {
 
-                $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format,$item[$asset_tag][$batch_counter]['name']);
-                $user = User::where('username','=',$base_username['username']);
-                $user_query = ' on username '.$base_username['username'];
+                    $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
 
-                if ($request->input('match_firstnamelastname')=='1') {
-                    $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname',$item[$asset_tag][$batch_counter]['name']);
-                    $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
-                    $user->orWhere('username','=',$firstnamedotlastname['username']);
-                    $user_query .= ', or on username '.$firstnamedotlastname['username'];
-                }
+                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format,$item[$asset_tag][$batch_counter]['name']);
+                    $user = User::where('username','=',$base_username['username']);
+                    $user_query = ' on username '.$base_username['username'];
 
-                if ($request->input('match_flastname')=='1') {
-                    $flastname = User::generateFormattedNameFromFullName('filastname',$item[$asset_tag][$batch_counter]['name']);
-                    $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
-                    $user->orWhere('username','=',$flastname['username']);
-                    $user_query .= ', or on username '.$flastname['username'];
-                }
-                if ($request->input('match_firstname')=='1') {
-                    $firstname = User::generateFormattedNameFromFullName('firstname',$item[$asset_tag][$batch_counter]['name']);
-                    $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
-                    $user->orWhere('username','=',$firstname['username']);
-                    $user_query .= ', or on username '.$firstname['username'];
-                }
-                if ($request->input('match_email')=='1') {
-                    if ($item[$asset_tag][$batch_counter]['email']=='') {
-                        $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
-                        $user->orWhere('username','=',$user_email);
-                        $user_query .= ', or on username '.$user_email;
+                    if ($request->input('match_firstnamelastname')=='1') {
+                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname',$item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
+                        $user->orWhere('username','=',$firstnamedotlastname['username']);
+                        $user_query .= ', or on username '.$firstnamedotlastname['username'];
                     }
-                }
 
-                // A matching user was found
-                if ($user = $user->first()) {
-                    $item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
+                    if ($request->input('match_flastname')=='1') {
+                        $flastname = User::generateFormattedNameFromFullName('filastname',$item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
+                        $user->orWhere('username','=',$flastname['username']);
+                        $user_query .= ', or on username '.$flastname['username'];
+                    }
+                    if ($request->input('match_firstname')=='1') {
+                        $firstname = User::generateFormattedNameFromFullName('firstname',$item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
+                        $user->orWhere('username','=',$firstname['username']);
+                        $user_query .= ', or on username '.$firstname['username'];
+                    }
+                    if ($request->input('match_email')=='1') {
+                        if ($item[$asset_tag][$batch_counter]['email']=='') {
+                            $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
+                            $user->orWhere('username','=',$user_email);
+                            $user_query .= ', or on username '.$user_email;
+                        }
+                    }
 
-                    $status['success'][] = 'Found user '.Helper::array_smart_fetch($row, "name").$user_query;
-
-                    if ($asset) {
-
+                    // A matching user was found
+                    if ($user = $user->first()) {
+                        $item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
                         $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
                         Actionlog::firstOrCreate(array(
-                            'item_id' => $asset->id,
-                            'item_type' => Asset::class,
-                            'user_id' =>  Auth::user()->id,
-                            'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
-                            'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
-                            'target_type' => User::class,
-                            'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
-                            'action_type'   => 'checkout'
+                                'item_id' => $asset->id,
+                                'item_type' => Asset::class,
+                                'user_id' =>  Auth::user()->id,
+                                'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
+                                'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
+                                'target_type' => User::class,
+                                'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
+                                'action_type'   => 'checkout'
                             )
                         );
 
                         $asset->assigned_to = $user->id;
-                        $asset->save();
+
+                        if ($asset->save()) {
+                            $status['success'][]['asset'][$asset_tag]['msg'] = 'Asset successfully matched for '.Helper::array_smart_fetch($row, "name").$user_query;
+                        } else {
+                            $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset and user was matched but could not be saved.';
+                        }
 
                     } else {
-                        $status['error'][] = 'Asset does not exist so no checkin log was created.';
+                        $item[$asset_tag][$batch_counter]['checkedout_to'] = null;
+                        $status['error'][]['user'][Helper::array_smart_fetch($row, "name")]['msg'] = 'User does not exist so no checkin log was created.';
                     }
 
-
                 } else {
-                    $item[$asset_tag][$batch_counter]['checkedout_to'] = null;
-                    $status['error'][] = 'No matching user for '.Helper::array_smart_fetch($row, "name");
+                    $item[$asset_tag][$batch_counter]['asset_id'] = null;
+                    $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset does not exist so no match was attempted.';
                 }
+
+
+
 
             }
         }
@@ -1185,7 +1191,7 @@ class AssetsController extends Controller
                 $next = $x + 1;
 
                 // Only do this if a matching user was found
-                if ($asset_batch[$x]['checkedout_to']!='') {
+                if ((array_key_exists('checkedout_to',$asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
 
                     if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next,$asset_batch))) {
                         $checkin_date = Carbon::parse($asset_batch[$next]['checkout_date'])->subDay(1)->format('Y-m-d H:i:s');
