@@ -126,6 +126,7 @@ class ViewAssetsController extends Controller
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
                 Mail::send('emails.asset-canceled', $data, function ($m) use ($user, $settings) {
                     $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject('Item Request Canceled');
                 });
             }
@@ -159,6 +160,7 @@ class ViewAssetsController extends Controller
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
                 Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
                     $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject('Item Requested');
                 });
             }
@@ -222,6 +224,7 @@ class ViewAssetsController extends Controller
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
                 Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
                     $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject('Asset Requested');
                 });
             }
@@ -311,7 +314,7 @@ class ViewAssetsController extends Controller
             // Redirect to the asset management page
             return redirect()->to('account/view-assets')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
-        
+
 
         if ($findlog->accepted_id!='') {
             // Redirect to the asset management page
