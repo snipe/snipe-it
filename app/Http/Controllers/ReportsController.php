@@ -329,7 +329,7 @@ class ReportsController extends Controller
         }
 
 
-        $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category'];
+        $allowed_columns = ['created_at'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
@@ -406,7 +406,7 @@ class ReportsController extends Controller
     public function getLicenseReport()
     {
 
-        $licenses = License::orderBy('created_at', 'DESC')
+        $licenses = License::with('depreciation')->orderBy('created_at', 'DESC')
             ->with('company')
             ->get();
 
@@ -433,6 +433,7 @@ class ReportsController extends Controller
             trans('admin/licenses/form.remaining_seats'),
             trans('admin/licenses/form.expiration'),
             trans('admin/licenses/form.date'),
+            trans('admin/licenses/form.depreciation'),
             trans('admin/licenses/form.cost')
         ];
 
@@ -448,6 +449,7 @@ class ReportsController extends Controller
             $row[] = $license->remaincount();
             $row[] = $license->expiration_date;
             $row[] = $license->purchase_date;
+            $row[] = ($license->depreciation!='') ? '' : e($license->depreciation->name);
             $row[] = '"' . Helper::formatCurrencyOutput($license->purchase_cost) . '"';
 
             $rows[] = implode($row, ',');
