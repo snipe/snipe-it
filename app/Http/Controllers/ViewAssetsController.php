@@ -97,7 +97,7 @@ class ViewAssetsController extends Controller
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
                 Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
                     $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->subject('Asset Requested');
+                    $m->subject(trans('mail.asset_requested'));
                 });
             }
 

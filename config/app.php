@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' =>  env('APP_URL', 'http://localhost'),
+    'url' =>  env('APP_URL', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => env('APP_TIMEZONE', 'Europe/Madrid'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' =>  env('APP_LOCALE', 'en'),
+    'locale' =>  env('APP_LOCALE', 'es-ES'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es-ES',
 
     /*
     |--------------------------------------------------------------------------
@@ -210,13 +210,11 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
-        MisterPhilip\MaintenanceMode\MaintenanceModeServiceProvider::class,
-        MisterPhilip\MaintenanceMode\MaintenanceCommandServiceProvider::class,
 
         /*
          * Custom service provider
          */
-         App\Providers\MacroServiceProvider::class,
+        App\Providers\MacroServiceProvider::class,
 
 
     ],

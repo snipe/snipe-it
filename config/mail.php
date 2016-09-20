@@ -28,7 +28,8 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+//    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => env('MAIL_FROM_ADDR', null), 'name' => env('MAIL_FROM_NAME', null)],
+    'from' => ['address' => env('MAIL_FROM_ADDR', ''), 'name' => env('MAIL_FROM_NAME', '')],
 
     /*
     |--------------------------------------------------------------------------
@@ -94,7 +95,6 @@ return [
     */
 
     'password' => env('MAIL_PASSWORD'),
-
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

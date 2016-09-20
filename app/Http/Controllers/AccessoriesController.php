@@ -375,7 +375,7 @@ class AccessoriesController extends Controller
 
             Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Confirm accessory delivery');
+                $m->subject(trans('mail.Confirm_accessory_delivery'));
             });
         }
 
@@ -503,7 +503,7 @@ class AccessoriesController extends Controller
 
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->subject('Confirm Accessory Checkin');
+                    $m->subject(trans('mail.Confirm_Accessory_Checkin'));
                 });
             }
 

@@ -1,15 +1,15 @@
 @extends('emails/layouts/default')
 
 @section('content')
-	<p>Hello {{ $first_name }},</p>
+	<p>{{ trans('mail.hello') }} {{ $first_name }},</p>
 
 
-	<p>A new item has been checked out under your name, details are below.</p>
+	<p>{{ trans('mail.new_item_checked') }}</p>
 
 	<table>
 		<tr>
 			<td>
-				Asset Name:
+				{{ trans('mail.asset_name') }}
 			</td>
 			<td>
 				<strong>{{ $item_name }}</strong>
@@ -18,7 +18,7 @@
 		@if (isset($item_tag))
 			<tr>
 				<td>
-					Asset Tag:
+					{{ trans('mail.asset_tag') }}
 				</td>
 				<td>
 					<strong>{{ $item_tag }}</strong>
@@ -28,7 +28,7 @@
 		@if (isset($item_serial))
 			<tr>
 				<td>
-					Serial:
+					{{ trans('mail.serial') }}
 				</td>
 				<td>
 					<strong>{{ $item_serial }}</strong>
@@ -37,7 +37,7 @@
 		@endif
 		<tr>
 			<td>
-				Checkout Date:
+				{{ trans('mail.checkout_date') }}
 			</td>
 			<td>
 				<strong>{{ $checkout_date }}</strong>
@@ -46,7 +46,7 @@
 		@if (isset($expected_checkin))
 			<tr>
 				<td>
-					Expected Checkin Date:
+					{{ trans('mail.expecting_checkin_date') }}
 				</td>
 				<td>
 					<strong>{{ $expected_checkin }}</strong>
@@ -56,7 +56,7 @@
 		@if (isset($note))
 			<tr>
 				<td>
-					Additional Notes:
+					{{ trans('mail.additional_notes') }}
 				</td>
 				<td>
 					<strong>{{ $note }}</strong>
@@ -64,27 +64,27 @@
 			</tr>
 		@endif
 	</table>
-
+	<p>
 	@if (($require_acceptance==1) && ($eula!=''))
 
-		Please read the terms of use below, and click on the link at the bottom to confirm that you read and agree to the terms of use, and have received the asset.
+		{{ trans('mail.read_the_terms_and_click') }}
 
 	@elseif (($require_acceptance==1) && ($eula==''))
 
-		Please click on the link at the bottom to confirm that you have received the asset.
+		{{ trans('mail.click_on_the_link_asset') }}
 
 	@elseif (($require_acceptance==0) && ($eula!=''))
 
-		Please read the terms of use below.
+		{{ trans('mail.read_the_terms') }}
 
-		@endif
+	@endif
 
 		</p>
 
 		<p><blockquote>{!! $eula !!}</blockquote></p>
 
 		@if ($require_acceptance==1)
-			<p><strong><a href="{{ config('app.url') }}/account/accept-asset/{{ $log_id }}">I have read and agree to the terms of use, and have received this item.</a></strong></p>
+			<p><strong><a href="{{ config('app.url') }}/account/accept-asset/{{ $log_id }}">{{ trans('mail.i_have_read') }}</a></strong></p>
 		@endif
 
 		<p>{{ \App\Models\Setting::getSettings()->site_name }}</p>
