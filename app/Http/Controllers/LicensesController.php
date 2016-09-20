@@ -979,7 +979,7 @@ class LicensesController extends Controller
 
             if (Gate::allows('licenses.create')) {
                 $actions .= '<a href="' . route('clone/license', $license->id)
-                . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
+                . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone license"><i class="fa fa-files-o"></i></a>';
             }
             if (Gate::allows('licenses.edit')) {
                 $actions .= '<a href="' . route('update/license', $license->id)
