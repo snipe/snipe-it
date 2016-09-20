@@ -88,84 +88,29 @@
           <div class="box-header with-border">
             <h3 class="box-title">{{ trans('general.recent_activity') }}</h3>
             <div class="box-tools pull-right">
-              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <a href="{{ route('reports/activity') }}"><i class="fa fa-ellipsis-h"></i></a>
             </div>
           </div><!-- /.box-header -->
           <div class="box-body">
             <div class="row">
               <div class="col-md-12">
                <div class="table-responsive">
-                <table class="table table-hover table-fixed break-word">
+                <table
+                    class="table table-striped"
+                    name="activityReport"
+                    id="table"
+                    data-url="{{route('api.activity.list', ['limit' => 20]) }}">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th class="col-md-2"><span class="line"></span>{{ trans('general.date') }}</th>
-                        <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
-                        <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
-                        <th class="col-md-3"><span class="line"></span>{{ trans('table.item') }}</th>
-                        <th class="col-md-3"><span class="line"></span>To</th>
+                        <th data-field="icon" style="width: 40px;" class="hidden-xs"></th>
+                        <th class="col-sm-2" data-field="created_at">{{ trans('general.date') }}</th>
+                        <th class="col-sm-2" data-field="admin">{{ trans('general.admin') }}</th>
+                        <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                        <th class="col-sm-4" data-field="item">{{ trans('general.item') }}</th>
+                        <th class="col-sm-2" data-field="target">To</th>
                     </tr>
                 </thead>
-                <tbody>
-                @if (count($recent_activity) > 0)
-                  @foreach ($recent_activity as $activity)
-                    <tr>
-                        <td>
-                            @if ($activity->itemType()=="asset")
-                                <i class="fa fa-barcode"></i>
-                            @elseif ($activity->itemType()=="accessory")
-                                <i class="fa fa-keyboard-o"></i>
-                            @elseif ($activity->itemType()=="consumable")
-                                <i class="fa fa-tint"></i>
-                            @elseif ($activity->itemType()=="license")
-                                <i class="fa fa-floppy-o"></i>
-                            @elseif ($activity->itemType()=="component")
-                                <i class="fa fa-hdd-o"></i>
-                            @else
-                                <i class="fa fa-paperclip"></i>
-                            @endif
-                        </td>
-                       <td>{{ date("M d, Y g:iA", strtotime($activity->created_at)) }}</td>
-                       <td>
-                                 @if (($activity->action_type!='requested') && ($activity->action_type!="request_canceled"))
-                                     @if ($activity->user)
-                                        <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->user->fullName() }}</a>
-                                     @else
-                                        Deleted Admin
-                                     @endif
-                                 @endif
 
-                                 </td>
-                        <td>
-                            {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
-                        </td>
-                       <td>
-                           @if (($activity->item) && ($activity->itemType()=="asset"))
-                              <a href="{{ route('view/hardware', $activity->item_id) }}">{{ $activity->item->asset_tag }} - {{ $activity->item->showAssetName() }}</a>
-                            @elseif ($activity->item)
-                              <a href="{{ route('view/'. $activity->itemType(), $activity->item_id) }}">{{ $activity->item->name }}</a>
-                            @endif
-
-                            </td>
-
-                       <td>
-                        @if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user"))
-                            <a href="{{ route('view/user', $activity->target_id) }}">{{ $activity->userasassetlog->fullName() }}</a>
-                        @elseif (($activity->item) && ($activity->target instanceof \App\Models\Asset))
-                           <a href="{{ route('view/hardware', $activity->target_id) }}">{{ $activity->target->showAssetName() }}</a>
-                        @elseif (($activity->item) && ($activity->target instanceof \App\Models\User))
-                            <a href="{{route('view/user', $activity->target_id) }}"> {{ $activity->target->fullName() }}</a>
-                        @elseif ($activity->action_type=='requested') <!--The user is who requested the item, not the target-->
-                            <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->user->fullName() }}</a>
-                       @endif
-
-                      </td>
-
-
-                    </tr>
-                   @endforeach
-                @endif
-                </tbody>
                 </table>
                </div><!-- /.responsive -->
               </div><!-- /.col -->
@@ -229,8 +174,24 @@
 
 </script>
 
+    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+    <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+    <script type="text/javascript">
+        $('#table').bootstrapTable({
+            classes: 'table table-responsive table-no-bordered',
+            undefinedText: '',
+            iconsPrefix: 'fa',
+            showRefresh: false,
+            search: false,
+            pagination: false,
+            sidePagination: 'server',
+            sortable: false,
+            showMultiSort: false,
+            cookie: false,
+            mobileResponsive: true,
+        });
 
-
+    </script>
 @stop
 
 
