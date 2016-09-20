@@ -396,6 +396,9 @@ class ReportsController extends Controller
         $rows   = [ ];
         $header = [ ];
 
+        if (e(Input::get('company_name')) == '1') {
+            $header[] = 'Company Name';
+        }
         if (e(Input::get('asset_name')) == '1') {
             $header[] = 'Asset Name';
         }
@@ -461,6 +464,10 @@ class ReportsController extends Controller
 
         foreach ($assets as $asset) {
             $row = [ ];
+
+            if (e(Input::get('company_name')) == '1') {
+                $row[] = is_null($asset->company) ? '' : e($asset->company->name);
+            }
             if (e(Input::get('asset_name')) == '1') {
                 $row[] = '"' .e($asset->name) . '"';
             }
