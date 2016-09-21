@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'local'),
+    'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' =>  env('APP_URL', ''),
+    'url' =>  env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'Europe/Madrid'),
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' =>  env('APP_LOCALE', 'es-ES'),
+    'locale' =>  env('APP_LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'es-ES',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -129,6 +129,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | ALLOW I-FRAMING
+    |--------------------------------------------------------------------------
+    |
+    | Normal users will never need to edit this. This option lets you run
+    | Snipe-IT within an I-Frame, which is normally disabled by default for
+    | security reasons, to prevent clickjacking. It should normally be set to false.
+    |
+    */
+
+    'allow_iframing' => env('ALLOW_IFRAMING', false),
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Demo Mode Lockdown
     |--------------------------------------------------------------------------
     |
@@ -138,7 +152,6 @@ return [
     */
 
     'lock_passwords' => env('APP_LOCKED', false),
-
 
 
     /*
@@ -197,6 +210,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
+        MisterPhilip\MaintenanceMode\MaintenanceModeServiceProvider::class,
+        MisterPhilip\MaintenanceMode\MaintenanceCommandServiceProvider::class,
 
         /*
          * Custom service provider
