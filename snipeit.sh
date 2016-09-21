@@ -289,11 +289,8 @@ case $distro in
 		echo ""
 		progress
 		if [ "$version" == "16.04" ]; then
-<<<<<<< HEAD
 			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml >> /var/log/snipeit-install.log 2>&1
-=======
 			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-xml php-zip php-mbstring >> /var/log/snipeit-install.log 2>&1
->>>>>>> 7fdd4fbe987a00138f2e4b1695d67d3069bc1359
 			#Enable mcrypt and rewrite
 			echo "##  Enabling mcrypt and rewrite"
 			sudo phpenmod mcrypt >> /var/log/snipeit-install.log 2>&1
