@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Składnik nie istnieje.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Składnik nie został utworzony, spróbuj ponownie.',
+        'success' => 'Składnik został utworzony pomyślnie.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Składnik nie został uaktualniony, spróbuj ponownie',
+        'success' => 'Składnik został zaktualizowany pomyślnie.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Czy na pewno chcesz usunąć ten składnik?',
+        'error'   => 'Wystąpił problem podczas usuwania składnika. Spróbuj ponownie.',
+        'success' => 'Składnik został usunięty pomyślnie.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Składnik nie został wydany, spróbuj ponownie',
+        'success' 		=> 'Składnik został wydany pomyślnie.',
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Składnik nie został odebrany, spróbuj ponownie',
+        'success' 		=> 'Składnik został odebrany pomyślnie.',
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Spróbuj ponownie.'
     )
 
 

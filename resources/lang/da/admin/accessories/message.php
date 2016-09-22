@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory does not exist.',
+    'does_not_exist' => 'Tilbehøret findes ikke.',
     'assoc_users'	 => 'Dette tilbehør har pt. :count emner tjekket ud til brugere. Tjek tilbehør ind og prøv igen.',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Tilbehøret blev ikke oprettet, prøv venligst igen.',
+        'success' => 'Tilbehøret blev oprettet.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Tilbehøret blev ikke opdateret, prøv venligst igen',
+        'success' => 'Tilbehøret blev opdateret med success.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Er du sikker på du vil slette dette tilbehør?',
+        'error'   => 'Der opstod et problem under sletning af tilbehøret. Prøv venligst igen.',
+        'success' => 'Tilbehøret blev slettet med success.'
     ),
 
      'checkout' => array(

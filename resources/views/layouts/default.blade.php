@@ -75,12 +75,20 @@
           };
       </script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+
+      @if (\App\Models\Setting::getSettings()->load_remote=='1')
+
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+       @else
+            <script src="{{ asset('assets/js/html5shiv.js') }}"></script>
+            <script src="{{ asset('assets/js/respond.js') }}"></script>
+       @endif
+       <![endif]-->
   </head>
   <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
     <div class="wrapper">
@@ -405,6 +413,16 @@
                   <li>
                     <a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a>
                   </li>
+
+                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav','=',1)->get(); ?>
+                    @if (count($status_navs) > 0)
+                        <li class="divider">&nbsp;</li>
+                        @foreach ($status_navs as $status_nav)
+                            <li><a href="{{ URL::to('hardware?status_id='.$status_nav->id) }}"}> {{ $status_nav->name }}</a></li>
+                        @endforeach
+                    @endif
+
+
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                     <a href="{{ URL::to('hardware?status=Deployed') }}">@lang('general.deployed')
                     </a>
@@ -489,8 +507,7 @@
                     <li><a href="{{ URL::to('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }} >@lang('general.asset_report')</a></li>
                     <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }} >@lang('general.unaccepted_asset_report')</a></li>
                     <li><a href="{{ URL::to('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }} >@lang('general.accessory_report')</a></li>
-                    <li><a href="{{ URL::to('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }} >@lang('general.custom_report')</a></li>
-
+                    <li><a href="{{ URL::to('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>@lang('general.custom_report')</a></li>
                 </ul>
             </li>
             @endcan

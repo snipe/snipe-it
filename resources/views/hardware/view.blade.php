@@ -121,15 +121,34 @@
                     @if ($asset->model->fieldset)
                       @foreach($asset->model->fieldset->fields as $field)
                         <tr>
-                          <td>{{ $field->name }}</td>
-                          <td>
+                          <td>{{ $field->name }}
 
-                              @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
-                              @else
-                                  {{ $asset->{$field->db_column_name()} }}
+
+                          </td>
+                          <td>
+                              @if ($field->field_encrypted=='1')
+                                  <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                               @endif
-                              
+
+                              @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
+
+                                  @can('admin')
+                                      @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                          <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                      @else
+                                          {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
+                                      @endif
+                                  @else
+                                      {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
+                                  @endcan
+
+                              @else
+                                  @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                      <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                                  @else
+                                      {{ $asset->{$field->db_column_name()} }}
+                                  @endif
+                              @endif
 
                            </td>
                         </tr>
@@ -269,13 +288,13 @@
             <div class="col-md-4">
 
               @if ($asset->image)
-                <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
+                <img src="{{ config('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
               @elseif ($asset->model->image!='')
-                <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
+                <img src="{{ config('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 
               @if  (App\Models\Setting::getSettings()->qr_code=='1')
-                 <img src="{{ config('get.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
+                 <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
               @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
@@ -494,26 +513,41 @@
                       <tr>
                         <td>{{ $log->created_at }}</td>
                         <td>
-                            @if (isset($log->adminlog))
-                            {{ $log->adminlog->fullName() }}
-                            @else
-                            Deleted Admin
+                            @if ($log->action_type != 'requested')
+                                @if (isset($log->user))
+                                    {{ $log->user->fullName() }}
+                                @else
+                                    Deleted Admin
+                                @endif
                             @endif
                         </td>
                         <td>{{ $log->action_type }}</td>
                         <td>
-                          @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
+                          @if ($log->action_type=='uploaded')
 
-                            @if ($log->userlog)
+                            {{ $log->filename }}
+                          @elseif ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
 
-                              @if ($log->userlog->deleted_at=='')
-                                <a href="{{ route('view/user', $log->checkedout_to) }}">
-                                {{ $log->userlog->fullName() }}
+
+                            @if ($log->target instanceof \App\Models\User)
+
+                              @if ($log->target->deleted_at=='')
+                                <a href="{{ route('view/user', $log->target_id) }}">
+                                {{ $log->target->fullName() }}
                                 </a>
 
                               @else
-                                <del>{{ $log->userlog->fullName() }}</del>
+                                <del>{{ $log->target->fullName() }}</del>
                               @endif
+                            @elseif($log->target instanceof \App\Models\Asset) 
+                              @if ($log->target->deleted_at=='')
+                                <a href="{{ route('view/hardware', $log->target_id) }}">
+                                {{ $log->target->showAssetName() }}
+                                </a>
+
+                              @else
+                                <del>{{ $log->target->showAssetName() }}</del>
+                              @endif                         
                             @else
                               Deleted User
                             @endif

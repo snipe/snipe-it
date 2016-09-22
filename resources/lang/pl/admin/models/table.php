@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
+    'create'				=> 'Utwórz model aktytwa',
     'created_at' 			=> 'Utworzone',
-    'eol'	 				=> 'EOL',
+    'eol'	 				=> 'Koniec licencji',
     'modelnumber'   		=> 'Numer Modelu',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
+    'name'      			=> 'Nazwa modelu aktywa',
+    'numassets' 			=> 'Aktywa',
+    'title'					=> 'Model aktywa',
+    'update'				=> 'Uaktualnij model aktywa',
+    'view'					=> 'Podgląd modelu aktywa',
+    'update'				=> 'Aktualizuj Model',
     'clone'				=> 'Kopiuj Model',
     'edit'				=> 'Edytuj Model',
 );

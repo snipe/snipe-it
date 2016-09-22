@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Ištrinti nuotrauką',
     'image_upload'         	=> 'Įkelti nuotrauką',
     'import'         	    => 'Įkelti',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Įrangos priežiūra',
     'asset_maintenance_report' => 'Įrangos priežiūros ataskaita',
     'asset_maintenances'       => 'Įrangos priežiūros',

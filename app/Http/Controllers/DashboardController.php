@@ -30,9 +30,9 @@ class DashboardController extends Controller
         // Show the page
         if (Auth::user()->hasAccess('admin')) {
 
-            $recent_activity = Actionlog::orderBy('created_at', 'DESC')
-                ->with('accessorylog', 'consumablelog', 'licenselog', 'assetlog', 'adminlog', 'userlog', 'componentlog')
-                ->take(30)
+            $recent_activity = Actionlog::latest()
+                ->with('item')
+                ->take(20)
                 ->get();
 
 

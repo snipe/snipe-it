@@ -51,6 +51,8 @@ return array(
     'ldap_pword'                => 'LDAP slaptažodis',
     'ldap_basedn'               => 'DN',
     'ldap_filter'               => 'LDAP filtras',
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => 'Vartotojo vardo laukelis',
     'ldap_lname_field'          => 'Pavardė',
     'ldap_fname_field'          => 'LDAP vardas',

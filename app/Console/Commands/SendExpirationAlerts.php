@@ -52,6 +52,7 @@ class SendExpirationAlerts extends Command
         $asset_data['email_content'] ='';
         $now = date("Y-m-d");
 
+
         foreach ($expiring_assets as $asset) {
 
             $expires = $asset->warrantee_expires();
@@ -99,16 +100,20 @@ class SendExpirationAlerts extends Command
 
 
             if (count($expiring_assets) > 0) {
+                $this->info('Report sent to '.Setting::getSettings()->alert_email);
                 \Mail::send('emails.expiring-assets-report', $asset_data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.Expiring_Assets_Report'));
                 });
 
             }
-            
+
             if (count($expiring_licenses) > 0) {
+                $this->info('Report sent to '.Setting::getSettings()->alert_email);
                 \Mail::send('emails.expiring-licenses-report', $license_data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.Expiring_Licenses_Report'));
                 });
 

@@ -2,7 +2,7 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
+    'asset_manufacturers'	=> 'Producenci aktywów',
     'create'				=> 'Stwórz Producenta',
     'id'   					=> 'ID',
     'name'      			=> 'Nazwa Producenta',

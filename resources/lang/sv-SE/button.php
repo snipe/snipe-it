@@ -3,14 +3,14 @@
 return array(
 
     'actions' 	                => 'Åtgärder',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'add'    	                => 'Lägg till ny',
+    'cancel'                    => 'Avbryt',
+    'checkin_and_delete'  	    => 'Checka in & radera användare',
     'delete'  	                => 'Radera',
     'edit'    	                => 'Ändra',
     'restore' 	                => 'Återställ',
-    'request'                   => 'Request',
+    'request'                   => 'Begäran',
     'submit'  	                => 'Skicka',
-    'upload'                    => 'Upload',
+    'upload'                    => 'Ladda upp',
 
 );

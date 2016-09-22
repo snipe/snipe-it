@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'send_password_link'	        => 'Envoyer un lien pour réinitialiser un mot de passe',
+    'email_reset_password'			=> 'E-mail pour réinitialiser le mot de passe',
+    'reset_password'			    => 'Réinitialiser le mot de passe',
+    'login'                         => 'Connexion',
+    'login_prompt'                  => 'Veuillez vous connecter',
+    'forgot_password'               => 'J\'ai oublié mon mot de passe',
+    'remember_me'                   => 'Rappelez-vous de moi',
     ];
 

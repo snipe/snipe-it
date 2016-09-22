@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Poista Kuva',
     'image_upload'         	=> 'Lähetä Kuva',
     'import'         	    => 'Tuo tiedot',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

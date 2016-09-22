@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'title'         => 'Asset Maintenance',
+        'title'         => 'Inventarieunderhåll',
         'asset_name'    => 'Inventarie',
         'supplier_name' => 'Leverantör',
         'is_warranty'   => 'Garanti',

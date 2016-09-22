@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'フィールドがありません。',
+        'already_added'   => 'フィールドはすでに追加されています',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'フォルダーは作成されませんでした。もう一度やり直してください。',
+            'success' => 'フィールドを正常に作成しました。',
+            'assoc_success' => 'フィールドはフィールドセットに追加されました'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'フィールドは更新されませんでした。もう一度やり直してください。',
+            'success' => 'フィールドを正常に更新しました。'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'このフィールドを削除してもよろしいですか？',
+            'error'   => 'フィールドを削除する際に問題が発生しました。もう一度、やり直して下さい。',
+            'success' => 'フィールドは削除されました。',
+            'in_use'   => 'フィールドは使用中です。',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'フィールドセットは作成されませんでした。もう一度やり直してください。',
+            'success' => 'フィールドセットを正常に作成しました。'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'フィールドセットは更新されませんでした。もう一度やり直してください。',
+            'success' => 'フィールドセットを正常に更新しました。'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'このフィールドセットを削除してもよろしいですか？',
+            'error'   => 'フィールドセットを削除する際に問題が発生しました。もう一度、やり直して下さい。',
+            'success' => 'フィールドセットは削除されました。',
+            'in_use'   => 'フィールドセットは使用中です。',
         )
 
     ),

@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => '構成部品は存在しません',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => '構成部品が作成できませんでした。もう一度やり直して下さい。',
+        'success' => '構成部品が作成されました。'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => '構成部品がが更新できませんでした。もう一度やり直して下さい。',
+        'success' => '構成部品が作成されました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'この構成部品を削除してもよろしいですか?',
+        'error'   => '構成部品を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'success' => '構成部品は削除されました。'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '構成部品はチェックアウトされませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '構成部品は正常にチェックアウトされました。',
+        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '構成部品はチェックインされませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '構成部品は正常にチェックインされました。',
+        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。'
     )
 
 

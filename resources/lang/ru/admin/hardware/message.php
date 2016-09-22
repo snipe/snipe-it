@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Некоторые элементы не были импортированы корректно.',
-        'errorDetail'   => 'Следующие элементы не были импортированы из за ошибок.',
-        'success'       => "Ваш файл был импортирован",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -52,7 +52,8 @@ return array(
     'checkout' => array(
         'error'   		=> 'Актив не был привязан, пожалуйста попробуйте снова',
         'success' 		=> 'Актив успешно привязан.',
-        'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.'
+        'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(

@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Loggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -12,8 +13,9 @@ use Watson\Validating\ValidatingTrait;
  */
 class Accessory extends Model
 {
-    use SoftDeletes;
     use CompanyableTrait;
+    use Loggable;
+    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
     protected $table = 'accessories';
@@ -68,7 +70,7 @@ class Accessory extends Model
     */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'accessory_id')->where('asset_type', '=', 'accessory')->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
 

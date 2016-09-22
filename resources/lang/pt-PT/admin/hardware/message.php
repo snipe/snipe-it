@@ -37,7 +37,7 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Alguns itens não foram importados correctamente.',
+        'error'         => 'Alguns itens não foram importados corretamente.',
         'errorDetail'   => 'Os seguintes itens não foram importados devido a erros.',
         'success'       => "O seu ficheiro foi importado",
     ),
@@ -52,7 +52,8 @@ return array(
     'checkout' => array(
         'error'   		=> 'Não foi possível alocar o artigo, por favor tente novamente',
         'success' 		=> 'Artigo alocado com sucesso.',
-        'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.'
+        'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.',
+        'not_available' => 'Esse recurso não está disponível para checkout!'
     ),
 
     'checkin' => array(

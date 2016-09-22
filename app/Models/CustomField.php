@@ -11,14 +11,14 @@ class CustomField extends Model
 
     */
     public static $PredefinedFormats=[
-    "ANY" => "",
-    "ALPHA" => "alpha",
-    "EMAIL" => "email",
-    "DATE" => "date",
-    "URL" => "url",
-    "NUMERIC" => "numeric",
-    "MAC" => "regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/",
-    "IP" => "ip"
+        "ANY" => "",
+        "ALPHA" => "alpha",
+        "EMAIL" => "email",
+        "DATE" => "date",
+        "URL" => "url",
+        "NUMERIC" => "numeric",
+        "MAC" => "regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/",
+        "IP" => "ip",
     ];
 
     public $rules=[
@@ -109,4 +109,43 @@ class CustomField extends Model
             $this->attributes['format']=$value;
         }
     }
+
+    /**
+     * Format a value string as an array for select boxes and checkboxes.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.4]
+     * @return Array
+     */
+    public function formatFieldValuesAsArray() {
+        $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
+
+        $result[''] = 'Select '.strtolower($this->format);
+
+        for ($x = 0; $x < count($arr); $x++) {
+            $arr_parts = explode('|', $arr[$x]);
+            if ($arr_parts[0]!='') {
+                if (key_exists('1',$arr_parts)) {
+                    $result[$arr_parts[0]] = $arr_parts[1];
+                } else {
+                    $result[$arr_parts[0]] = $arr_parts[0];
+                }
+            }
+
+        }
+
+
+        return $result;
+    }
+
+    public function isFieldDecryptable($string) {
+        if (($this->field_encrypted=='1') && ($string!='')) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 }

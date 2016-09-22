@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Requestable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -14,6 +15,7 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends Model
 {
     use SoftDeletes;
+    use Requestable;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
 
@@ -129,6 +131,22 @@ class AssetModel extends Model
     {
 
         return $query->whereIn('category_id', $categoryIdListing);
+    }
+
+    /**
+     * scopeRequestable
+     * Get all models that are requestable by a user.
+     *
+     * @param       $query
+     *
+     * @return $query
+     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @version v3.5
+     */
+    public function scopeRequestableModels($query)
+    {
+
+        return $query->where('requestable', '1');
     }
 
     /**

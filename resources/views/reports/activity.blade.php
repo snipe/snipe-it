@@ -17,67 +17,28 @@
   <div class="box box-default">
     <div class="box-body">
 
-      <div class="table-responsive">
-          <table
-          name="activityReport"
-          id="table"
-          class="table table-striped"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="activityReportTable">
-
+        <table
+                name="activityReport"
+                data-toolbar="#toolbar"
+                class="table table-striped"
+                id="table"
+                data-url="{{ route('api.activity.list') }}"
+                data-cookie="true"
+                data-cookie-id-table="activityReportTable">
             <thead>
-                <tr role="row">
-                <th class="col-sm-1">{{ trans('general.admin') }}</th>
-                <th class="col-sm-1"><span class="line"></span>{{ trans('general.action') }}</th>
-                <th class="col-sm-1"><span class="line"></span>{{ trans('general.type') }}</th>
-                <th class="col-sm-1"><span class="line"></span>{{ trans('general.item') }}</th>
-                <th class="col-sm-1"><span class="line"></span>{{ trans('general.user') }}</th>
-                <th class="col-sm-1"><span class="line"></span>{{ trans('general.date') }}</th
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach ($log_actions as $log_action)
             <tr>
-                <td><a href="../admin/users/{{ $log_action->adminlog->id }}/view">{{ $log_action->adminlog->fullName() }}</a></td>
-                <td>{{ $log_action->action_type }}</td>
-                <td>
-    	            @if ($log_action->asset_type=="hardware")
-    	            	Asset
-    	            @elseif ($log_action->asset_type=="software")
-    	            	License
-    	            @elseif ($log_action->asset_type=="accessory")
-    	            	Accessory
-                    @elseif ($log_action->asset_type=="consumable")
-        	            Consumable
-    	            @endif
-                </td>
-
-                <td>
-                @if (($log_action->assetlog) && ($log_action->asset_type=="hardware"))
-                     {{ $log_action->assetlog->showAssetName() }}
-                 @elseif (($log_action->licenselog) && ($log_action->asset_type=="software"))
-                     {{ $log_action->licenselog->name }}
-                 @elseif (($log_action->consumablelog) && ($log_action->asset_type=="consumable"))
-                     {{ $log_action->consumablelog->name }}
-                 @elseif (($log_action->accessorylog) && ($log_action->asset_type=="accessory"))
-                     {{ $log_action->accessorylog->name }}
-                 @else
-                     {{ trans('general.bad_data') }}
-                 @endif
-                </td>
-                <td>
-    	            @if ($log_action->userlog)
-    	            	<a href="../admin/users/{{ $log_action->userlog->id }}/view">{{ $log_action->userlog->fullName() }}</a>
-    	            @endif
-                </td>
-
-                <td>{{ $log_action->created_at }}</td>
+                <th class="col-sm-1" data-field="admin">{{ trans('general.admin') }}</th>
+                <th class="col-sm-1" data-field="action_type">{{ trans('general.action') }}</th>
+                <th class="col-sm-1" data-field="item_type">{{ trans('general.type') }}</th>
+                <th class="col-sm-1" data-field="item">{{ trans('general.item') }}</th>
+                <th class="col-sm-1" data-field="target">To</th>
+                <th class="col-sm-1" data-field="created_at">{{ trans('general.date') }}</th>
+                <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
             </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+
+        </table>
+
 
     </div>
     </div>
@@ -99,30 +60,39 @@
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
+        pageSize: 100,
         pagination: true,
-        sidePagination: 'client',
+        sidePagination: 'server',
         sortable: true,
+        showMultiSort: true,
         cookie: true,
+        cookieExpire: '2y',
         mobileResponsive: true,
         showExport: true,
         showColumns: true,
         exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
+        exportTypes: ['csv', 'excel', 'txt','json', 'xml'],
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
         paginationPreText: "{{ trans('general.previous') }}",
         paginationNextText: "{{ trans('general.next') }}",
-        pageList: ['10','25','50','100','150','200'],
+        pageList: ['10','25','50','100','150','200','500','1000'],
+        exportOptions: {
+            fileName: 'assets-export-' + (new Date()).toISOString().slice(0,10),
+        },
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',
+            sort: 'fa fa-sort-amount-desc',
+            plus: 'fa fa-plus',
+            minus: 'fa fa-minus',
             columns: 'fa-columns',
             refresh: 'fa-refresh'
         },
 
     });
+
 </script>
 @stop
 

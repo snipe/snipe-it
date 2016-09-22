@@ -7,7 +7,7 @@ return array(
     'cost'				=> 'Inköpspris',
     'create'                             => 'Skapa förbrukningvara',
     'date'					=> 'Inköpsdatum',
-    'item_no'               => 'Item No.',
+    'item_no'               => 'Artikelnummer',
     'order'					=> 'Beställningsnummer',
     'remaining' 			             => 'Återstående',
     'total' 			                 => 'Totalt',

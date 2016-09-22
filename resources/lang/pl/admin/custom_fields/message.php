@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Pole nie istnieje.',
+        'already_added'   => 'Pole już istnieje',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Pole nie zostało utworzone. Spróbuj ponownie.',
+            'success' => 'Pole utworzone pomyślnie.',
+            'assoc_success' => 'Pole pomyślnie dadane do zestawu pól.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Pole nie zostało zaktualizowane, spróbuj ponownie',
+            'success' => 'Pole zaktualizowane pomyślnie.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Czy na pewno chcesz usunąć to pole?',
+            'error'   => 'Wystąpił błąd podczas usuwania pola. Spróbuj ponownie.',
+            'success' => 'Pole zostało usunięte pomyślnie.',
+            'in_use'   => 'Pole jest wciąż w użytku.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Zestaw pól nie został utworzony, spróbuj ponownie.',
+            'success' => 'Zestaw pól utworzono pomyślnie.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Zestaw pól nie został zaktualizowany, spróbuj ponownie',
+            'success' => 'Zestaw pól zaktualizowany pomyślnie.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Czy na pewno chcesz usunąć ten zestaw pól?',
+            'error'   => 'Wystąpił błąd podczas usuwania zestawu pól. Spróbuj ponownie.',
+            'success' => 'Zestaw pól usunięto pomyślnie.',
+            'in_use'   => 'Zestaw pól jest nadal w użyciu.',
         )
 
     ),

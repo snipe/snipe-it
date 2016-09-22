@@ -2,9 +2,9 @@
 
 return array(
 
-    'id'      => 'ID',
-    'months'   => 'Months',
-    'term'   => 'Term',
-    'title'      => 'Name ',
+    'id'      => 'Id',
+    'months'   => 'Miesiące',
+    'term'   => 'Termin',
+    'title'      => 'Nazwa ',
 
 );

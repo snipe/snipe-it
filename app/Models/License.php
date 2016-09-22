@@ -2,15 +2,16 @@
 namespace App\Models;
 
 use App\Models\Company;
+use App\Models\Loggable;
 use DB;
-use Watson\Validating\ValidatingTrait;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Watson\Validating\ValidatingTrait;
 
 class License extends Depreciable
 {
     use SoftDeletes;
     use CompanyableTrait;
+    use Loggable;
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -54,8 +55,8 @@ class License extends Depreciable
     */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'asset_id')
-            ->where('asset_type', '=', 'software')
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+            ->where('item_type', '=', License::class)
             ->orderBy('created_at', 'desc');
     }
 
@@ -64,8 +65,8 @@ class License extends Depreciable
     */
     public function uploads()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'asset_id')
-            ->where('asset_type', '=', 'software')
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+            ->where('item_type', '=', License::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');

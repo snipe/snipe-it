@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> 'Aktywa', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'		=> 'Aktywa przypisane',
     'id'      		=> 'ID',
     'city'   		=> 'Miasto',
     'state'   		=> 'Województwo',
@@ -13,6 +13,6 @@ return array(
     'address'		=> 'Adres',
     'zip'			=> 'Kod Pocztowy',
     'locations'		=> 'Lokalizacje',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency',
+    'parent'		=> 'Rodzic',
+    'currency'  	=> 'Waluta lokalna',
 );

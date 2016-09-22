@@ -51,6 +51,8 @@ return array(
     'ldap_pword'                => 'LDAP парола на потребител за връзка',
     'ldap_basedn'               => 'Базов DN',
     'ldap_filter'               => 'LDAP филтър',
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => 'Поле за потребителско име',
     'ldap_lname_field'          => 'Фамилия',
     'ldap_fname_field'          => 'LDAP собствено име',

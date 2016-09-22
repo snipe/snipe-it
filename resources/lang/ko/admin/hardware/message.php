@@ -52,7 +52,8 @@ return array(
     'checkout' => array(
         'error'   		=> '자산이 반출되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '자산이 반출되었습니다.',
-        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.'
+        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
+        'not_available' => '그 자산은 반출 할 수 없습니다!'
     ),
 
     'checkin' => array(

@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Kép törlése',
     'image_upload'         	=> 'Kép feltöltése',
     'import'         	    => 'Importálás',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Eszköz karbantartás',
     'asset_maintenance_report' => 'Eszköz Karbantartás Riport',
     'asset_maintenances'       => 'Eszköz karbantartások',
