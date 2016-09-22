@@ -1,25 +1,26 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
-use Carbon\Carbon;
+use App\Models\AssetModel;
 use App\Models\Company;
+use App\Models\CustomField;
+use App\Models\License;
+use App\Models\Location;
+use App\Models\Setting;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
-use App\Models\License;
-use App\Models\Location;
-use App\Models\AssetModel;
-use App\Models\CustomField;
 use Redirect;
-use App\Models\Setting;
-use App\Models\User;
 
 /**
  * This controller handles all actions related to Reports for
@@ -166,7 +167,7 @@ class ReportsController extends Controller
                 $row[] = '';
             }
             $row[] = $asset->purchase_date;
-            $row[] = '"' . number_format($asset->purchase_cost, 2) . '"';
+            $row[] = '"' . Helper::parsePurchasedCost($asset->purchase_cost) . '"';
             if ($asset->order_number) {
                 $row[] = e($asset->order_number);
             } else {
@@ -308,9 +309,9 @@ class ReportsController extends Controller
             }
 
             $row[] = $asset->purchase_date;
-            $row[] = $currency . number_format($asset->purchase_cost, 2);
-            $row[] = $currency . number_format($asset->getDepreciatedValue(), 2);
-            $row[] = $currency . number_format(( $asset->purchase_cost - $asset->getDepreciatedValue() ), 2);
+            $row[] = $currency . Helper::formatCurrencyOutput($asset->purchase_cost);
+            $row[] = $currency . Helper::formatCurrencyOutput($asset->getDepreciatedValue());
+            $row[] = $currency . Helper::formatCurrencyOutput(( $asset->purchase_cost - $asset->getDepreciatedValue() ));
             $csv->insertOne($row);
         }
 
@@ -392,7 +393,7 @@ class ReportsController extends Controller
             $row[] = $license->remaincount();
             $row[] = $license->expiration_date;
             $row[] = $license->purchase_date;
-            $row[] = '"' . number_format($license->purchase_cost, 2) . '"';
+            $row[] = '"' . Helper::formatCurrencyOutput($license->purchase_cost) . '"';
 
             $rows[] = implode($row, ',');
         }
@@ -416,7 +417,7 @@ class ReportsController extends Controller
     public function getCustomReport()
     {
         $customfields = CustomField::get();
-        return View::make('reports/custom')->with('customfields',$customfields);
+        return View::make('reports/custom')->with('customfields', $customfields);
     }
 
     /**
@@ -528,7 +529,7 @@ class ReportsController extends Controller
                 $row[] = e($asset->purchase_date);
             }
             if (e(Input::get('purchase_cost')) == '1' && ( e(Input::get('depreciation')) != '1' )) {
-                $row[] = '"' . number_format($asset->purchase_cost, 2) . '"';
+                $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
             if (e(Input::get('order')) == '1') {
                 if ($asset->order_number) {
@@ -605,9 +606,9 @@ class ReportsController extends Controller
             }
             if (e(Input::get('depreciation')) == '1') {
                 $depreciation = $asset->getDepreciatedValue();
-                $row[]        = '"' . number_format($asset->purchase_cost, 2) . '"';
-                $row[]        = '"' . number_format($depreciation, 2) . '"';
-                $row[]        = '"' . number_format($asset->purchase_cost - $depreciation, 2) . '"';
+                $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
+                $row[]        = '"' . Helper::formatCurrencyOutput($depreciation) . '"';
+                $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
 
             foreach ($customfields as $customfield) {
@@ -698,7 +699,7 @@ class ReportsController extends Controller
                 $improvementTime = intval($assetMaintenance->asset_maintenance_time);
             }
             $row[]  = $improvementTime;
-            $row[]  = trans('general.currency') . number_format($assetMaintenance->cost, 2);
+            $row[]  = trans('general.currency') . Helper::formatCurrencyOutput($assetMaintenance->cost);
             $rows[] = implode($row, ',');
         }
 

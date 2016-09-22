@@ -83,6 +83,15 @@
                 </div>
         @endif
 
+        <!-- Manufacturer -->
+        <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
+        <label for="manufacturer_id" class="col-md-3 control-label">{{ trans('general.manufacturer') }}
+        </label>
+          <div class="col-md-7 required">
+            {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $license->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+            {!! $errors->first('manufacturer_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
+          </div>
+        </div>
 
           <!-- Licensed to name -->
           <div class="form-group {{ $errors->has('license_name') ? ' has-error' : '' }}">
@@ -139,7 +148,7 @@
                   <div class="col-md-3">
                       <div class="input-group">
                           <span class="input-group-addon">{{ \App\Models\Setting::first()->default_currency }}</span>
-                          <input class="col-md-3 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($license->purchase_cost,2)) }}" />
+                          <input class="col-md-3 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost)) }}" />
                           {!! $errors->first('purchase_cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                        </div>
                    </div>
