@@ -1,7 +1,8 @@
 <?php
 
 return array(
-    'a_user_requested' => 'A user has requested an asset on the :web website.',
+    'a_user_canceled' => 'A user has canceled an item request on the website',
+    'a_user_requested' => 'A user has requested an item on the website',
     'accessory_name' => 'Accessory Name:',
     'additional_notes' => 'Additional Notes:',
     'admin_has_created' => 'An administrator has created an account for you on the :web website.',
@@ -13,7 +14,8 @@ return array(
                                     expiring in the next 60 days.',
     'assigned_to' => 'Assigned To',
     'best_regards' => 'Best regards,',
-    'checkin_date:' => 'Checkin Date:',
+    'canceled' => 'Canceled:',
+    'checkin_date' => 'Checkin Date:',
     'checkout_date' => 'Checkout Date:',
     'click_to_confirm' => 'Please click on the following link to confirm your :web account:',
     'click_on_the_link_accessory' => 'Please click on the link at the bottom to confirm that you have received the accessory.',
@@ -33,8 +35,11 @@ return array(
     'hello' => 'Hello',
     'hi' => 'Hi',
     'i_have_read' => 'I have read and agree to the terms of use, and have received this item.',
+    'item' => 'Item:',
     'items_below_minimum' => '{1} item that is below minimum inventory or will soon be low.|[2,Inf] items that are below minimum
                               inventory or will soon be low.',
+    'Item_Request_Canceled' => 'Item Request Canceled',
+    'Item_Requested' => 'Item Requested',
     'licenses_expiring' => '{1} license expiring next 60 days.|[2,Inf] licenses expiring next 60 days.',
     'link_to_update_password' => 'Please click on the following link to update your :web password:',
     'login_first_admin' => 'Login to your new Snipe-IT installation using the credentials below:',
@@ -45,10 +50,12 @@ return array(
     'new_item_checked' => 'A new item has been checked out under your name, details are below.',
     'password' => 'Password:',
     'password_reset' => 'Password Reset',
+
     'read_the_terms' => 'Please read the terms of use below.',
     'read_the_terms_and_click' => 'Please read the terms of use below, and click on the link at the bottom to confirm that you read
                          and agree to the terms of use, and have received the asset.',
     'requested' => 'Requested:',
+    'reset_link' => 'Your Password Reset Link',
     'reset_password' => 'Click here to reset your password:',
     'serial' => 'Serial:',
     'supplier' => 'Supplier',

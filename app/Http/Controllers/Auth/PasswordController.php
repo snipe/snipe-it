@@ -35,6 +35,7 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
+        $this->subject = \Lang::get('mail.reset_link');
         $this->middleware('guest');
     }
 }
