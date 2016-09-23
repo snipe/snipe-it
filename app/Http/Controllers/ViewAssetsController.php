@@ -38,21 +38,11 @@ class ViewAssetsController extends Controller
      */
     public function getIndex()
     {
-
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find(Auth::user()->id);
-
-        $userlog = $user->userlog->load('item', 'user', 'target');
-
-        if (isset($user->id)) {
-            return View::make('account/view-assets', compact('user', 'userlog'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
-        }
-
+        $user = Auth::user();
+        $user->load('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed();
+        $userlog = $user->userlog;
+        $userlog->load('item', 'user');
+        return View::make('account/view-assets', compact('user', 'userlog'));
     }
 
 
@@ -62,7 +52,7 @@ class ViewAssetsController extends Controller
         $assets = Asset::with('model', 'defaultLoc', 'assetloc', 'assigneduser')->Hardware()->RequestableAssets()->get();
         $models = AssetModel::with('category')->RequestableModels()->get();
 
-        return View::make('account/requestable-assets', compact('user', 'assets', 'models'));
+        return View::make('account/requestable-assets', compact('assets', 'models'));
     }
 
     public function getRequestedIndex()
@@ -76,7 +66,7 @@ class ViewAssetsController extends Controller
     {
         $item = null;
         $fullItemType = 'App\\Models\\' . studly_case($itemType);
-        if($itemType == "asset_model") {
+        if ($itemType == "asset_model") {
             $itemType = "model";
         }
         $item = call_user_func(array($fullItemType, 'find'), $itemId);

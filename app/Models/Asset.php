@@ -690,7 +690,6 @@ public function checkin_email()
 
     public function scopeRequestableAssets($query)
     {
-
         return Company::scopeCompanyables($query->where('requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
 

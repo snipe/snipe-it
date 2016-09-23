@@ -58,7 +58,6 @@ final class Company extends Model
         } else {
             $company_id = null;
         }
-
         return $query->where($column, '=', $company_id);
     }
 
@@ -157,7 +156,6 @@ final class Company extends Model
 
             $q = $query->where(function ($q) use ($companyable_names, $f) {
                 $q2 = $q->whereHas($companyable_names[0], $f);
-
                 for ($i = 1; $i < count($companyable_names); $i++) {
                     $q2 = $q2->orWhereHas($companyable_names[$i], $f);
                 }
