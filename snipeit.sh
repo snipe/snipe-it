@@ -31,8 +31,30 @@ file=master.zip
 tmp=/tmp/$name
 fileName=snipe-it-master
 
+spin[0]="-"
+spin[1]="\\"
+spin[2]="|"
+spin[3]="/"
+
 rm -rf $tmp/
 mkdir $tmp
+
+# Debian/Ubuntu friendly f(x)
+progress () {
+	while kill -0 $pid > /dev/null 2>&1
+        do
+        	for i in "${spin[@]}"
+                do
+                	if [ -e /proc/$pid ]; then
+                        echo -ne "\b$i"
+                        sleep .1
+                        else
+                        echo -ne "\n\n"
+                        fi
+                done
+        done
+}
+
 
 function isinstalled {
   if yum list installed "$@" >/dev/null 2>&1; then
@@ -116,9 +138,9 @@ case $setpw in
                 echo -n  "  Q. What do you want your snipeit user password to be?"
                 read -s mysqluserpw
                 echo ""
-				ans="no"
+		ans="no"
                 ;;
-        *) 		echo "  Invalid answer. Please type y or n"
+        *) 	echo "  Invalid answer. Please type y or n"
                 ;;
 esac
 done
@@ -149,14 +171,17 @@ case $distro in
 		echo "##  Updating Debian packages in the background. Please be patient."
 		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
-		sudo apt-get update >> /var/log/snipeit-install.log 2>&1
-		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
-
+		sudo apt-get update >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
+		sudo apt-get -y upgrade >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
 		echo "##  Installing packages."
 		sudo apt-get -y install mariadb-server mariadb-client
 		echo "## Going to suppress more messages that you don't need to worry about. Please wait."
-		sudo apt-get -y install apache2 >> /var/log/snipeit-install.log 2>&1
-		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl >> /var/log/snipeit-install.log 2>&1
+		sudo apt-get -y install apache2 >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
 
 		#  Get files and extract to web dir
 		echo ""
@@ -209,14 +234,13 @@ case $distro in
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-
 		echo "##  Securing Mysql"
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
 		/usr/bin/mysql_secure_installation
 
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
-		
+
 		echo "Creating Mysql Database and User."
 		echo "##  Please Input your MySQL/MariaDB root password: "
 		echo ""
@@ -250,16 +274,22 @@ case $distro in
 		echo ""
 		echo "##  Updating ubuntu in the background. Please be patient."
 		echo ""
+		echo -n "Updating with apt-get update... ${spin[0]}"
+		sudo apt-get update >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
+		echo -n "Upgrading packages with apt-get upgrade... ${spin[0]}"
+		sudo apt-get -y upgrade >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
 		apachefile=/etc/apache2/sites-available/$name.conf
-		sudo apt-get update >> /var/log/snipeit-install.log 2>&1
-		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
 		echo "##  Installing packages."
 
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Setting up LAMP."
-		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
-
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log & pid=$! 2>&1 
+		echo ""
+		progress
 		if [ "$version" == "16.04" ]; then
+			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml >> /var/log/snipeit-install.log 2>&1
 			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-xml php-zip php-mbstring >> /var/log/snipeit-install.log 2>&1
 			#Enable mcrypt and rewrite
 			echo "##  Enabling mcrypt and rewrite"
@@ -282,8 +312,6 @@ case $distro in
 
 		##  TODO make sure apache is set to start on boot and go ahead and start it
 
-
-
 		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1
 
 		#Create a new virtual host for Apache.
@@ -305,7 +333,7 @@ case $distro in
 		echo "##  Setting up hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
-		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
+		a2ensite $name.conf >> /var/log/snipeit-install.log
 
 		cat > $webdir/$name/.env <<-EOF
 		#Created By Snipe-it Installer
@@ -320,7 +348,7 @@ case $distro in
 		EOF
 
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
-
+		echo "## MySQL Phase next."
 		# Setup Mysql, then run the command.
 		/usr/bin/mysql_secure_installation
 		echo "##  Creating MySQL Database and user. "

@@ -231,7 +231,7 @@ class AssetsController extends Controller
             $directory= public_path('uploads/assets/');
             // Check if the uploads directory exists.  If not, try to create it.
             if (!file_exists($directory)) {
-                mkdir($directory, 0755);
+                mkdir($directory, 0755, true);
             }
             $path = public_path('uploads/assets/'.$file_name);
             try {
@@ -288,7 +288,7 @@ class AssetsController extends Controller
     */
     public function getEdit($assetId = null)
     {
-        
+
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page
@@ -407,7 +407,7 @@ class AssetsController extends Controller
             $directory= public_path('uploads/assets/');
             // Check if the uploads directory exists.  If not, try to create it.
             if (!file_exists($directory)) {
-                mkdir($directory, 0755);
+                mkdir($directory, 0755, true);
             }
 
             $file_name = str_random(25).".".$extension;
@@ -840,7 +840,7 @@ class AssetsController extends Controller
 
         // Check if the uploads directory exists.  If not, try to create it.
         if (!file_exists($path)) {
-            mkdir($path, 0755);
+            mkdir($path, 0755, true);
         }
         if ($handle = opendir($path)) {
 
@@ -1424,7 +1424,7 @@ class AssetsController extends Controller
 
                     return View::make('hardware/labels')->with('assets', $assets)->with('settings', $settings)->with('count', $count)->with('settings', $settings);
 
-                
+
 
             } elseif (Input::get('bulk_actions')=='delete') {
 
@@ -1854,12 +1854,12 @@ class AssetsController extends Controller
           $users_list = Helper::usersList();
           // Filter out assets that are not deployable.
           $assets = Asset::RTD()->get();
-  
+
           $assets_list = Company::scopeCompanyables($assets, 'assets.company_id')->lists('detailed_name', 'id')->toArray();
-  
+
           return View::make('hardware/bulk-checkout')->with('users_list', $users_list)->with('assets_list', $assets_list);
       }
-  
+
       public function postBulkCheckout(Request $request)
       {
 
@@ -1869,31 +1869,31 @@ class AssetsController extends Controller
 
           $user = User::find(e(Input::get('assigned_to')));
           $admin = Auth::user();
-  
+
           $asset_ids = array_filter(Input::get('selected_assets'));
-  
+
           if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
               $checkout_at = e(Input::get('checkout_at'));
           } else {
               $checkout_at = date("Y-m-d H:i:s");
           }
-  
+
           if (Input::has('expected_checkin')) {
               $expected_checkin = e(Input::get('expected_checkin'));
           } else {
               $expected_checkin = '';
           }
-  
+
           $has_errors = false;
           $errors = [];
           DB::transaction(function() use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids)
-          {          
+          {
               foreach($asset_ids as $asset_id)
               {
                   $asset = Asset::find($asset_id);
-  
+
                   $error = $asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
-  
+
                   if($error)
                   {
                       $has_errors = true;
@@ -1901,12 +1901,12 @@ class AssetsController extends Controller
                   }
               }
             });
-  
+
           if (!$errors) {
             // Redirect to the new asset page
               return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
           }
-  
+
         // Redirect to the asset management page with error
           return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
       }
