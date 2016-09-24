@@ -492,11 +492,18 @@ case $distro in
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R apache:apache $webdir/$name
 
-#TODO detect if SELinux and firewall are enabled to decide what to do
-		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
+#TODO detect if SELinux is enabled to decide what to do.
 		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
-		# firewall-cmd --zone=public --add-port=80/tcp --permanent
-		# firewall-cmd --reload
+
+    #Check if iptables is running
+    /sbin/service iptables status >/dev/null 2>&1
+    if [ $? = 0 ]; then
+      #Open http/https port
+      iptables -I INPUT 1 -p tcp -m tcp --dport 80 -j ACCEPT
+      iptables -I INPUT 1 -p tcp -m tcp --dport 443 -j ACCEPT
+      #Save iptables
+      service iptables save
+    fi
 
 		service httpd restart
 
