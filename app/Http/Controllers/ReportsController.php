@@ -14,7 +14,9 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
+use Auth;
 use Carbon\Carbon;
+use Db;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
@@ -306,7 +308,7 @@ class ReportsController extends Controller
      * Returns Activity Report JSON.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
+     * @since [v3.5]
      * @return View
      */
     public function getActivityReportDataTable()
@@ -324,52 +326,131 @@ class ReportsController extends Controller
         } else {
             $limit = 50;
         }
+        $scopeCompanies = ($settings && $settings->full_multiple_companies_support == 1) && (\Auth::check() && !\Auth::user()->isSuperUser());
 
-        if (!$settings || $settings->full_multiple_companies_support == 0 || (\Auth::check() && \Auth::user()->isSuperUser())) {
-            $activitylogs = Actionlog::orderBy('created_at', 'DESC');
-            $activitylogs = $activitylogs->skip($offset)->take($limit)->get();
-        } else {
-            $assets = Company::scopeCompanyables(Asset::with('model', 'log', 'log.item', 'log.user'))->get();
-            // dd($assets);
-            $logs = array();
-            foreach($assets as $asset) {
-                if(!$asset->log) {
-                    continue;
-                }
-                $logs[] = $asset->log;
-            }
-
-            $accessories  = Company::scopeCompanyables(Accessory::with('log', 'log.item', 'log.user'))->get();
-            foreach($accessories as $accessory) {
-                if(!$accessory->log) {
-                    continue;
-                }
-                $logs[] = $accessory->log;
-            }
-
-            $consumables  = Company::scopeCompanyables(Consumable::with('log', 'log.item', 'log.user'))->get();
-            foreach($consumables as $consumable) {
-                if(!$consumable->log) {
-                    continue;
-                }
-                $logs[] = $consumable->log;
-            }
-
-            $licenses  = Company::scopeCompanyables(License::with('log', 'log.item', 'log.user'))->get();
-            foreach($licenses as $license) {
-                if(!$license->log) {
-                    continue;
-                }
-                $logs[] = $license->log();
-            }
-
-            $activitylogs = collect(array_flatten($logs))->sortByDesc('updated_at');
-            $activitylogs = $activitylogs->slice($offset)->take($limit);
+        $assets = \DB::table('assets')
+            ->join('action_logs', 'assets.id', '=', 'action_logs.item_id')
+            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+            ->select('assets.*',
+                    'action_logs.item_type',
+                    'action_logs.updated_at as al_updated_at',
+                    'action_logs.item_id',
+                    'action_logs.action_type',
+                    'action_logs.target_type',
+                    'action_logs.target_id',
+                    'action_logs.user_id as admin_id',
+                    'action_logs.note',
+                    'users.first_name',
+                    'users.last_name'
+                    )
+            ->where('action_logs.item_type', 'App\Models\Asset')
+            ->orderBy('al_updated_at', 'DESC')
+            ->skip($offset)
+            ->take($limit);
+        if($scopeCompanies) {
+            $assets->where('assets.company_id', Auth::user()->company_id);
         }
 
-        if (Input::has('search')) {
-            $activity = $activity->TextSearch(e(Input::get('search')));
+
+        $accessories = \DB::table('accessories')
+            ->join('action_logs', 'accessories.id', '=', 'action_logs.item_id')
+            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+            ->select('accessories.*',
+                    'action_logs.item_type',
+                    'action_logs.updated_at as al_updated_at',
+                    'action_logs.item_id',
+                    'action_logs.action_type',
+                    'action_logs.target_type',
+                    'action_logs.target_id',
+                    'action_logs.user_id as admin_id',
+                    'action_logs.note',
+                    'users.first_name',
+                    'users.last_name'
+                    )
+            ->orderBy('al_updated_at', 'DESC')
+            ->where('action_logs.item_type', 'App\Models\Accessory')
+            ->skip($offset)
+            ->take($limit);
+
+        if($scopeCompanies) {
+            $accessories->where('accessories.company_id', Auth::user()->company_id);
         }
+
+
+        $consumables = \DB::table('consumables')
+            ->join('action_logs', 'consumables.id', '=', 'action_logs.item_id')
+            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+            ->select('consumables.*',
+                    'action_logs.item_type',
+                    'action_logs.updated_at as al_updated_at',
+                    'action_logs.item_id',
+                    'action_logs.action_type',
+                    'action_logs.target_type',
+                    'action_logs.target_id',
+                    'action_logs.user_id as admin_id',
+                    'action_logs.note',
+                    'users.first_name',
+                    'users.last_name'
+                    )
+            ->orderBy('al_updated_at', 'DESC')
+            ->where('action_logs.item_type', 'App\Models\Consumable')
+            ->skip($offset)
+            ->take($limit);
+
+        if($scopeCompanies) {
+            $consumables->where('consumables.company_id', Auth::user()->company_id);
+        }
+
+        $licenses  = \DB::table('licenses')
+            ->join('action_logs', 'licenses.id', '=', 'action_logs.item_id')
+            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+            ->select('licenses.*',
+                    'action_logs.item_type',
+                    'action_logs.updated_at as al_updated_at',
+                    'action_logs.item_id',
+                    'action_logs.action_type',
+                    'action_logs.target_type',
+                    'action_logs.target_id',
+                    'action_logs.user_id as admin_id',
+                    'action_logs.note',
+                    'users.first_name',
+                    'users.last_name'
+                    )
+            ->orderBy('al_updated_at', 'DESC')
+            ->where('action_logs.item_type', 'App\Models\License')
+            ->skip($offset)
+            ->take($limit);
+
+        if($scopeCompanies) {
+            $licenses->where('licenses.company_id', Auth::user()->company_id);
+        }
+
+        $components  = \DB::table('components')
+            ->join('action_logs', 'components.id', '=', 'action_logs.item_id')
+            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+            ->select('components.*',
+                    'action_logs.item_type',
+                    'action_logs.updated_at as al_updated_at',
+                    'action_logs.item_id',
+                    'action_logs.action_type',
+                    'action_logs.target_type',
+                    'action_logs.target_id',
+                    'action_logs.user_id as admin_id',
+                    'action_logs.note',
+                    'users.first_name',
+                    'users.last_name'
+                    )
+            ->orderBy('al_updated_at', 'DESC')
+            ->where('action_logs.item_type', 'App\Models\Component')
+            ->skip($offset)
+            ->take($limit);
+
+        if($scopeCompanies) {
+            $components->where('components.company_id', Auth::user()->company_id);
+        }
+
+        $activitylogs = collect($assets->get(), $accessories->get(), $consumables->get(), $licenses->get(), $components->get())->sortByDesc('al_updated_at');
+        $activitylogs = $activitylogs->slice($offset)->take($limit);
 
 
         $allowed_columns = ['created_at'];
@@ -383,39 +464,42 @@ class ReportsController extends Controller
 
         foreach ($activitylogs as $activity) {
 
-            if ($activity->itemType() == "asset") {
+            if ($activity->item_type == "App\Models\Asset") {
                 $activity_icons = '<i class="fa fa-barcode"></i>';
-            } elseif ($activity->itemType() == "accessory") {
+            } elseif ($activity->item_type == "App\Models\Accessory") {
                 $activity_icons = '<i class="fa fa-keyboard-o"></i>';
-            } elseif ($activity->itemType()=="consumable") {
+            } elseif ($activity->item_type=="App\Models\Consumable") {
                 $activity_icons = '<i class="fa fa-tint"></i>';
-            } elseif ($activity->itemType()=="license"){
+            } elseif ($activity->item_type=="App\Models\LicenseSeat"){
                 $activity_icons = '<i class="fa fa-floppy-o"></i>';
-            } elseif ($activity->itemType()=="component") {
+            } elseif ($activity->item_type=="App\Models\Component") {
                 $activity_icons = '<i class="fa fa-hdd-o"></i>';
             } else {
                 $activity_icons = '<i class="fa fa-paperclip"></i>';
             }
 
-            if (($activity->item) && ($activity->itemType()=="asset")) {
-              $actvity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
+            if ($activity->item_type =='App\Models\Asset') {
+                $displayName = $activity->name ? e($activity->asset_tag) . ' - ' . e($activity->name) : e($activity->asset_tag);
+                $actvity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.$displayName.'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
-                $actvity_item = '<a href="'.route('view/'. $activity->itemType(), $activity->item_id).'">'.e($activity->item->name).'</a>';
-                $item_type = $activity->itemType();
+                $item_type = $activity->item_type == AssetModel::class ? 'model' : camel_case(class_basename($activity->item_type));
+                $actvity_item = '<a href="'.route('view/'. $item_type, $activity->item_id).'">'.e($activity->name).'</a>';
             }
             
-
-            if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
-                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->userasassetlog->fullName().'</a>';
-            } elseif (($activity->item) && ($activity->target instanceof \App\Models\Asset)) {
-                $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
-            } elseif (($activity->item) && ($activity->target instanceof \App\Models\User)) {
-                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
+            if (($activity->action_type=="uploaded") && ($activity->item_type =="App\Models\User")) {
+                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user_name.'</a>';
+            } elseif ($activity->target_type == 'App\Models\Asset') {
+                $target_asset = Asset::find($activity->target_id);
+                $displayName = $activity->name ? e($activity->asset_tag) . ' - ' . e($activity->name) : e($activity->asset_tag);
+                $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$target_asset->showAssetName().'</a>';
+            } elseif ($activity->target_type == 'App\Models\User') {
+                $target_user = User::find($activity->target_id);
+                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$target_user->fullName().'</a>';
             } elseif ($activity->action_type=='requested') {
-                $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
+                $activity_target =  '<a href="'.route('view/user', $activity->admin_id).'">'."{$activity->first_name} {$activity->last_name}".'</a>';
             } else {
-                $activity_target = $activity->target;
+                $activity_target = null;
             }
 
 
@@ -423,7 +507,7 @@ class ReportsController extends Controller
                 'icon'          => $activity_icons,
                 'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
                 'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
-                'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : 'Deleted Admin',
+                'admin'         =>  $activity->admin_id ? (string) link_to('/admin/users/'.$activity->user_id.'/view', "{$activity->first_name} {$activity->last_name}") : 'Deleted Admin',
                 'target'          => $activity_target,
                 'item'          => $actvity_item,
                 'item_type'     => $item_type,
