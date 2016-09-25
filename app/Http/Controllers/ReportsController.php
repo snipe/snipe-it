@@ -328,21 +328,23 @@ class ReportsController extends Controller
         }
         $scopeCompanies = ($settings && $settings->full_multiple_companies_support == 1) && (\Auth::check() && !\Auth::user()->isSuperUser());
 
+        $commonSelects = [
+            'action_logs.item_type',
+            'action_logs.updated_at as al_updated_at',
+            'action_logs.item_id',
+            'action_logs.action_type',
+            'action_logs.target_type',
+            'action_logs.target_id',
+            'action_logs.user_id as admin_id',
+            'action_logs.note',
+            'users.first_name',
+            'users.last_name',
+        ];
         $assets = \DB::table('assets')
             ->join('action_logs', 'assets.id', '=', 'action_logs.item_id')
             ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('assets.*',
-                    'action_logs.item_type',
-                    'action_logs.updated_at as al_updated_at',
-                    'action_logs.item_id',
-                    'action_logs.action_type',
-                    'action_logs.target_type',
-                    'action_logs.target_id',
-                    'action_logs.user_id as admin_id',
-                    'action_logs.note',
-                    'users.first_name',
-                    'users.last_name'
-                    )
+            ->select('assets.*')
+            ->addSelect($commonSelects)
             ->where('action_logs.item_type', 'App\Models\Asset')
             ->orderBy('al_updated_at', 'DESC')
             ->skip($offset)
@@ -355,18 +357,8 @@ class ReportsController extends Controller
         $accessories = \DB::table('accessories')
             ->join('action_logs', 'accessories.id', '=', 'action_logs.item_id')
             ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('accessories.*',
-                    'action_logs.item_type',
-                    'action_logs.updated_at as al_updated_at',
-                    'action_logs.item_id',
-                    'action_logs.action_type',
-                    'action_logs.target_type',
-                    'action_logs.target_id',
-                    'action_logs.user_id as admin_id',
-                    'action_logs.note',
-                    'users.first_name',
-                    'users.last_name'
-                    )
+            ->select('accessories.*')
+            ->addSelect($commonSelects)
             ->orderBy('al_updated_at', 'DESC')
             ->where('action_logs.item_type', 'App\Models\Accessory')
             ->skip($offset)
@@ -380,18 +372,8 @@ class ReportsController extends Controller
         $consumables = \DB::table('consumables')
             ->join('action_logs', 'consumables.id', '=', 'action_logs.item_id')
             ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('consumables.*',
-                    'action_logs.item_type',
-                    'action_logs.updated_at as al_updated_at',
-                    'action_logs.item_id',
-                    'action_logs.action_type',
-                    'action_logs.target_type',
-                    'action_logs.target_id',
-                    'action_logs.user_id as admin_id',
-                    'action_logs.note',
-                    'users.first_name',
-                    'users.last_name'
-                    )
+            ->select('consumables.*')
+            ->addSelect($commonSelects)
             ->orderBy('al_updated_at', 'DESC')
             ->where('action_logs.item_type', 'App\Models\Consumable')
             ->skip($offset)
@@ -404,18 +386,8 @@ class ReportsController extends Controller
         $licenses  = \DB::table('licenses')
             ->join('action_logs', 'licenses.id', '=', 'action_logs.item_id')
             ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('licenses.*',
-                    'action_logs.item_type',
-                    'action_logs.updated_at as al_updated_at',
-                    'action_logs.item_id',
-                    'action_logs.action_type',
-                    'action_logs.target_type',
-                    'action_logs.target_id',
-                    'action_logs.user_id as admin_id',
-                    'action_logs.note',
-                    'users.first_name',
-                    'users.last_name'
-                    )
+            ->select('licenses.*')
+            ->addSelect($commonSelects)
             ->orderBy('al_updated_at', 'DESC')
             ->where('action_logs.item_type', 'App\Models\License')
             ->skip($offset)
@@ -428,18 +400,8 @@ class ReportsController extends Controller
         $components  = \DB::table('components')
             ->join('action_logs', 'components.id', '=', 'action_logs.item_id')
             ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('components.*',
-                    'action_logs.item_type',
-                    'action_logs.updated_at as al_updated_at',
-                    'action_logs.item_id',
-                    'action_logs.action_type',
-                    'action_logs.target_type',
-                    'action_logs.target_id',
-                    'action_logs.user_id as admin_id',
-                    'action_logs.note',
-                    'users.first_name',
-                    'users.last_name'
-                    )
+            ->select('components.*')
+            ->addSelect($commonSelects)
             ->orderBy('al_updated_at', 'DESC')
             ->where('action_logs.item_type', 'App\Models\Component')
             ->skip($offset)
@@ -449,21 +411,20 @@ class ReportsController extends Controller
             $components->where('components.company_id', Auth::user()->company_id);
         }
 
-        $activitylogs = collect($assets->get(), $accessories->get(), $consumables->get(), $licenses->get(), $components->get())->sortByDesc('al_updated_at');
-        $activitylogs = $activitylogs->slice($offset)->take($limit);
-
-
+        $activitylogs = collect([$assets->get(), $accessories->get(), $consumables->get(), $licenses->get(), $components->get()]);
         $allowed_columns = ['created_at'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
+        $sort = 'al_updated_at';
+        $order === 'asc' ? $activitylogs->sortBy($sort) : $activitylogs->sortByDesc($sort);
+       return $activitylogs;
+        $activitylogs = collect(array_flatten($activitylogs));
+        $activitylogs = $activitylogs->slice($offset)->take($limit);
+ $activityCount = $activitylogs->count();
+        
 
-
-        $activityCount = $activitylogs->count();
 
         $rows = array();
-
         foreach ($activitylogs as $activity) {
-
             if ($activity->item_type == "App\Models\Asset") {
                 $activity_icons = '<i class="fa fa-barcode"></i>';
             } elseif ($activity->item_type == "App\Models\Accessory") {
@@ -482,7 +443,7 @@ class ReportsController extends Controller
                 $displayName = $activity->name ? e($activity->asset_tag) . ' - ' . e($activity->name) : e($activity->asset_tag);
                 $actvity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.$displayName.'</a>';
                 $item_type = 'asset';
-            } elseif ($activity->item) {
+            } else {
                 $item_type = $activity->item_type == AssetModel::class ? 'model' : camel_case(class_basename($activity->item_type));
                 $actvity_item = '<a href="'.route('view/'. $item_type, $activity->item_id).'">'.e($activity->name).'</a>';
             }
@@ -491,7 +452,7 @@ class ReportsController extends Controller
                 $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user_name.'</a>';
             } elseif ($activity->target_type == 'App\Models\Asset') {
                 $target_asset = Asset::find($activity->target_id);
-                $displayName = $activity->name ? e($activity->asset_tag) . ' - ' . e($activity->name) : e($activity->asset_tag);
+                $displayName = $activity->name ? e($target_asset->asset_tag) . ' - ' . e($activity->name) : e($target_asset->asset_tag);
                 $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$target_asset->showAssetName().'</a>';
             } elseif ($activity->target_type == 'App\Models\User') {
                 $target_user = User::find($activity->target_id);
