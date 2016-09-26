@@ -687,7 +687,7 @@ class AssetsController extends Controller
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject('Confirm Asset Checkin');
+                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
                 });
             }
 

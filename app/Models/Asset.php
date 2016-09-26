@@ -153,7 +153,7 @@ class Asset extends Depreciable
             \Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                 $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject('Confirm asset delivery');
+                $m->subject(trans('mail.Confirm_asset_delivery'));
             });
         }
 

@@ -148,7 +148,7 @@ class SettingsController extends Controller
             Mail::send('emails.test', [], function ($m) {
                 $m->to(config('mail.from.address'), config('mail.from.name'));
                 $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject('Test Email from Snipe-IT');
+                $m->subject(trans('mail.test_email'));
             });
             return 'success';
         } catch (Exception $e) {
@@ -201,7 +201,7 @@ class SettingsController extends Controller
                 Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject('Your Snipe-IT credentials');
+                    $m->subject(trans('mail.your_credentials'));
                 });
             }
 
