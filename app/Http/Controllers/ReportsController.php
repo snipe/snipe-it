@@ -16,7 +16,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
-use Db;
+use DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
@@ -327,7 +327,7 @@ class ReportsController extends Controller
             $limit = 50;
         }
         $scopeCompanies = ($settings && $settings->full_multiple_companies_support == 1) && (\Auth::check() && !\Auth::user()->isSuperUser());
-
+        $activityCount = 0;
         $commonSelects = [
             'action_logs.item_type',
             'action_logs.updated_at as al_updated_at',
@@ -340,89 +340,148 @@ class ReportsController extends Controller
             'users.first_name',
             'users.last_name',
         ];
-        $assets = \DB::table('assets')
+
+        // Assets
+        $assetsCount = DB::table('assets')
             ->join('action_logs', 'assets.id', '=', 'action_logs.item_id')
-            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('assets.*')
-            ->addSelect($commonSelects)
-            ->where('action_logs.item_type', 'App\Models\Asset')
-            ->orderBy('al_updated_at', 'DESC')
-            ->skip($offset)
-            ->take($limit);
+            ->where('action_logs.item_type', 'App\Models\Asset');
+
         if($scopeCompanies) {
-            $assets->where('assets.company_id', Auth::user()->company_id);
+            $assetsCount->where('assets.company_id', Auth::user()->company_id);
         }
 
+        $assetsCount = $assetsCount->count();
+        $assets = array();
+        if ($assetsCount > 0 ) {
+            $assets = DB::table('assets')
+                ->join('action_logs', 'assets.id', '=', 'action_logs.item_id')
+                ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+                ->select('assets.*')
+                ->addSelect($commonSelects)
+                ->where('action_logs.item_type', 'App\Models\Asset')
+                ->orderBy('al_updated_at', 'DESC');
 
-        $accessories = \DB::table('accessories')
+            if($scopeCompanies) {
+                $assets->where('assets.company_id', Auth::user()->company_id);
+            }
+            $assets = $assets->get();
+        }
+
+        //Accessories
+        $accessoriesCount = DB::table('accessories')
             ->join('action_logs', 'accessories.id', '=', 'action_logs.item_id')
-            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('accessories.*')
-            ->addSelect($commonSelects)
-            ->orderBy('al_updated_at', 'DESC')
-            ->where('action_logs.item_type', 'App\Models\Accessory')
-            ->skip($offset)
-            ->take($limit);
+            ->where('action_logs.item_type', 'App\Models\Accessory');
 
         if($scopeCompanies) {
-            $accessories->where('accessories.company_id', Auth::user()->company_id);
+            $accessoriesCount->where('accessories.company_id', Auth::user()->company_id);
         }
 
+        $accessoriesCount = $accessoriesCount->count();
+        $accessories = array();
+        if ($accessoriesCount > 0 ) {
+            $accessories = DB::table('accessories')
+                ->join('action_logs', 'accessories.id', '=', 'action_logs.item_id')
+                ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+                ->select('accessories.*')
+                ->addSelect($commonSelects)
+                ->orderBy('al_updated_at', 'DESC')
+                ->where('action_logs.item_type', 'App\Models\Accessory');
 
-        $consumables = \DB::table('consumables')
+            if($scopeCompanies) {
+                $accessories->where('accessories.company_id', Auth::user()->company_id);
+            }
+            $accessories = $accessories->get();
+        }
+        // Consumables
+        $consumablesCount = DB::table('consumables')
             ->join('action_logs', 'consumables.id', '=', 'action_logs.item_id')
-            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('consumables.*')
-            ->addSelect($commonSelects)
-            ->orderBy('al_updated_at', 'DESC')
-            ->where('action_logs.item_type', 'App\Models\Consumable')
-            ->skip($offset)
-            ->take($limit);
+            ->where('action_logs.item_type', 'App\Models\Consumable');
 
         if($scopeCompanies) {
-            $consumables->where('consumables.company_id', Auth::user()->company_id);
+            $consumablesCount->where('consumables.company_id', Auth::user()->company_id);
         }
 
-        $licenses  = \DB::table('licenses')
+        $consumablesCount = $consumablesCount->count();
+        $consumables = array();
+        if ($consumablesCount > 0 ) {
+            $consumables = DB::table('consumables')
+                ->join('action_logs', 'consumables.id', '=', 'action_logs.item_id')
+                ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+                ->select('consumables.*')
+                ->addSelect($commonSelects)
+                ->orderBy('al_updated_at', 'DESC')
+                ->where('action_logs.item_type', 'App\Models\Consumable');
+
+            if($scopeCompanies) {
+                $consumables->where('consumables.company_id', Auth::user()->company_id);
+            }
+
+            $consumables = $consumables->get();
+        }
+
+        // Licenses
+        $licensesCount = DB::table('licenses')
             ->join('action_logs', 'licenses.id', '=', 'action_logs.item_id')
-            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('licenses.*')
-            ->addSelect($commonSelects)
-            ->orderBy('al_updated_at', 'DESC')
-            ->where('action_logs.item_type', 'App\Models\License')
-            ->skip($offset)
-            ->take($limit);
+            ->where('action_logs.item_type', 'App\Models\License');
 
         if($scopeCompanies) {
-            $licenses->where('licenses.company_id', Auth::user()->company_id);
+            $licensesCount->where('licenses.company_id', Auth::user()->company_id);
+        }
+        $licensesCount = $licensesCount->count();
+
+        $licenses = array();
+        if ($licensesCount > 0 ) {
+            $licenses  = DB::table('licenses')
+                ->join('action_logs', 'licenses.id', '=', 'action_logs.item_id')
+                ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+                ->addSelect($commonSelects)
+                ->orderBy('al_updated_at', 'DESC')
+                ->where('action_logs.item_type', 'App\Models\License');
+
+            if($scopeCompanies) {
+                $licenses->where('licenses.company_id', Auth::user()->company_id);
+            }
+
+            $licenses = $licenses->get();
         }
 
-        $components  = \DB::table('components')
+        // Components
+        $componentsCount = DB::table('components')
             ->join('action_logs', 'components.id', '=', 'action_logs.item_id')
-            ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
-            ->select('components.*')
-            ->addSelect($commonSelects)
-            ->orderBy('al_updated_at', 'DESC')
-            ->where('action_logs.item_type', 'App\Models\Component')
-            ->skip($offset)
-            ->take($limit);
+            ->where('action_logs.item_type', 'App\Models\Component');
 
         if($scopeCompanies) {
-            $components->where('components.company_id', Auth::user()->company_id);
+            $componentsCount->where('components.company_id', Auth::user()->company_id);
+        }
+        $componentsCount = $componentsCount->count();
+        
+        $components = array();
+        if ($componentsCount > 0) {
+            $components  = \DB::table('components')
+                ->join('action_logs', 'components.id', '=', 'action_logs.item_id')
+                ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+                ->select('components.*')
+                ->addSelect($commonSelects)
+                ->orderBy('al_updated_at', 'DESC')
+                ->where('action_logs.item_type', 'App\Models\Component');
+
+            if($scopeCompanies) {
+                $components->where('components.company_id', Auth::user()->company_id);
+            }
+            $components = $components->get();
         }
 
-        $activitylogs = collect([$assets->get(), $accessories->get(), $consumables->get(), $licenses->get(), $components->get()]);
+        $activitylogs = collect([$assets, $accessories, $consumables, $licenses, $components]);
+
+        $activityCount = $assetsCount + $accessoriesCount + $consumablesCount + $licensesCount + $componentsCount;
+
         $allowed_columns = ['created_at'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = 'al_updated_at';
         $order === 'asc' ? $activitylogs->sortBy($sort) : $activitylogs->sortByDesc($sort);
-       return $activitylogs;
         $activitylogs = collect(array_flatten($activitylogs));
-        $activitylogs = $activitylogs->slice($offset)->take($limit);
- $activityCount = $activitylogs->count();
-        
-
-
+        $activitylogs = $activitylogs->slice($offset,$limit);
+       
         $rows = array();
         foreach ($activitylogs as $activity) {
             if ($activity->item_type == "App\Models\Asset") {
@@ -445,7 +504,7 @@ class ReportsController extends Controller
                 $item_type = 'asset';
             } else {
                 $item_type = $activity->item_type == AssetModel::class ? 'model' : camel_case(class_basename($activity->item_type));
-                $actvity_item = '<a href="'.route('view/'. $item_type, $activity->item_id).'">'.e($activity->name).'</a>';
+                $actvity_item = '<a href="'.route("view/{$item_type}", $activity->item_id).'">'.e($activity->name).'</a>';
             }
             
             if (($activity->action_type=="uploaded") && ($activity->item_type =="App\Models\User")) {
@@ -473,8 +532,8 @@ class ReportsController extends Controller
                 'item'          => $actvity_item,
                 'item_type'     => $item_type,
                 'note'     => e($activity->note),
-
             );
+
         }
 
         $data = array('total'=>$activityCount, 'rows'=>$rows);
