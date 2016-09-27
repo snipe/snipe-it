@@ -467,7 +467,7 @@ class ReportsController extends Controller
             $row = [ ];
 
             if (e(Input::get('company')) == '1') {
-                $row[] = is_null($asset->company) ? '' : '"'.e($asset->company->name).'"';
+                $row[] = is_null($asset->company) ? '' : '"'.$asset->company->name.'"';
             }
 
             if (e(Input::get('asset_name')) == '1') {
