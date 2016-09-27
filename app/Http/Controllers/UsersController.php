@@ -1028,7 +1028,7 @@ class UsersController extends Controller
                 $logaction->user_id = Auth::user()->id;
                 $logaction->note = e(Input::get('notes'));
                 $logaction->target_id = null;
-                $logaction->created_at = date("Y-m-d h:i:s");
+                $logaction->created_at = date("Y-m-d H:i:s");
                 $logaction->filename = $filename;
                 $logaction->action_type = 'uploaded';
                 $logaction->save();

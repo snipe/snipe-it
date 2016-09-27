@@ -86,7 +86,7 @@ class ViewAssetsController extends Controller
         $logaction = new Actionlog();
         $logaction->item_id = $data['asset_id'] = $item->id;
         $logaction->item_type = $fullItemType;
-        $logaction->created_at = $data['requested_date'] = date("Y-m-d h:i:s");
+        $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
         if ($user->location_id) {
             $logaction->location_id = $user->location_id;
         }
@@ -207,7 +207,7 @@ class ViewAssetsController extends Controller
             $logaction = new Actionlog();
             $logaction->item_id = $data['asset_id'] = $asset->id;
             $logaction->item_type = Asset::class;
-            $logaction->created_at = $data['requested_date'] = date("Y-m-d h:i:s");
+            $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
             $data['asset_type'] = 'hardware';
             if ($user->location_id) {
                 $logaction->location_id = $user->location_id;
@@ -356,7 +356,7 @@ class ViewAssetsController extends Controller
 
         $logaction->note = e(Input::get('note'));
         $logaction->user_id = $user->id;
-        $logaction->accepted_at = date("Y-m-d h:i:s");
+        $logaction->accepted_at = date("Y-m-d H:i:s");
         $log = $logaction->logaction($logaction_msg);
 
         $update_checkout = DB::table('action_logs')

@@ -267,7 +267,7 @@ class AssetsController extends Controller
 
             if (Input::get('assigned_to')!='') {
                 $user = User::find(e(Input::get('assigned_to')));
-                $asset->checkOutToUser($user, Auth::user(), date('Y-m-d h:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
+                $asset->checkOutToUser($user, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
@@ -1588,7 +1588,7 @@ class AssetsController extends Controller
 
             foreach ($assets as $asset) {
           //echo '<li>'.$asset;
-                $update_array['deleted_at'] = date('Y-m-d h:i:s');
+                $update_array['deleted_at'] = date('Y-m-d H:i:s');
                 $update_array['assigned_to'] = null;
 
                 if (DB::table('assets')
