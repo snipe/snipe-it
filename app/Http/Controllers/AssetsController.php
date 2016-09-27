@@ -1843,7 +1843,13 @@ class AssetsController extends Controller
                 }
 
             }
-            $rows[]=$row;
+
+            if (($request->has('report')) && ($request->get('report')=='true')) {
+                $rows[]= Helper::stripTagsFromJSON($row);
+            } else {
+                $rows[]= $row;
+            }
+
         }
 
         $data = array('total'=>$assetCount, 'rows'=>$rows);

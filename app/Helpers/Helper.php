@@ -495,4 +495,16 @@ class Helper
 
     }
 
+
+    public static function stripTagsFromJSON(Array $array) {
+
+        foreach ($array as $key => $value) {
+            $clean_value = strip_tags($value);
+            $clean_array[$key] = $clean_value;
+        }
+        return $clean_array;
+
+    }
+
+
 }

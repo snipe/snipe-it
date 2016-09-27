@@ -89,7 +89,7 @@ class ReportsController extends Controller
     }
 
     /**
-    * Display asset report.
+    * Display asset report view.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
@@ -98,22 +98,10 @@ class ReportsController extends Controller
     public function getAssetsReport()
     {
         $settings = \App\Models\Setting::first();
-        // Grab all the assets
-        $assets = Asset::with(
-            'model',
-            'assigneduser.userLoc',
-            'assetstatus',
-            'defaultLoc',
-            'assetlog',
-            'supplier',
-            'model.manufacturer',
-            'company'
-        )
-         ->orderBy('created_at', 'DESC')
-        ->get();
-
         return View::make('reports/asset', compact('assets'))->with('settings', $settings);
     }
+
+
 
     /**
     * Exports the assets to CSV
