@@ -381,24 +381,25 @@ class ReportsController extends Controller
     }
 
     /**
-    * Exports the custom report to CSV
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ReportsController::getCustomReport() method that generates form view
-    * @since [v1.0]
-    * @return \Illuminate\Http\Response
-    */
+     * Exports the custom report to CSV
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ReportsController::getCustomReport() method that generates form view
+     * @since [v1.0]
+     * @return \Illuminate\Http\Response
+     */
     public function postCustom()
     {
-        $assets = Asset::orderBy('created_at', 'DESC')->get();
+        $assets = Asset::orderBy('created_at', 'DESC')->with('company','assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->get();
         $customfields = CustomField::get();
 
         $rows   = [ ];
         $header = [ ];
 
-        if (e(Input::get('company_name')) == '1') {
+        if (e(Input::get('company')) == '1') {
             $header[] = 'Company Name';
         }
+
         if (e(Input::get('asset_name')) == '1') {
             $header[] = 'Asset Name';
         }
@@ -465,9 +466,10 @@ class ReportsController extends Controller
         foreach ($assets as $asset) {
             $row = [ ];
 
-            if (e(Input::get('company_name')) == '1') {
+            if (e(Input::get('company')) == '1') {
                 $row[] = is_null($asset->company) ? '' : e($asset->company->name);
             }
+
             if (e(Input::get('asset_name')) == '1') {
                 $row[] = '"' .e($asset->name) . '"';
             }
@@ -594,14 +596,15 @@ class ReportsController extends Controller
             $csv      = implode($rows, "\n");
             $response = Response::make($csv, 200);
             $response->header('Content-Type', 'text/csv');
-            $response->header('Content-disposition', 'attachment;filename=report.csv');
+            $response->header('Content-disposition', 'attachment;filename='.date('Y-m-d-His').'-custom-asset-report.csv');
 
             return $response;
         } else {
             return redirect()->to("reports/custom")
-                           ->with('error', trans('admin/reports/message.error'));
+                ->with('error', trans('admin/reports/message.error'));
         }
     }
+    
 
     /**
      * getImprovementsReport
