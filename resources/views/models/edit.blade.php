@@ -87,14 +87,16 @@
 
                 <div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
                     <label for="eol" class="col-md-3 control-label">{{ trans('general.eol') }}</label>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="input-group">
-                        <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Input::old('eol', isset($model->eol)) ? $model->eol : 0  }}" />
-                        <span class="input-group-addon">
-                            {{ trans('general.months') }}
-                        </span>
-                        {!! $errors->first('eol', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
+                            <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Input::old('eol', isset($model->eol)) ? $model->eol : ''  }}" />
+                            <span class="input-group-addon">
+                                {{ trans('general.months') }}
+                            </span>
                         </div>
+                    </div>
+                    <div class="col-md-9 col-md-offset-3">
+                        {!! $errors->first('eol', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
                 </div>
 

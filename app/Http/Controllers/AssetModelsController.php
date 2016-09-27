@@ -141,7 +141,7 @@ class AssetModelsController extends Controller
         $model = new AssetModel;
 
         $settings=Input::all();
-        $settings['eol']=0;
+        $settings['eol']= null;
 
         $model->name=e(Input::get('name'));
         $model->manufacturer_id = e(Input::get('manufacturer_id'));
@@ -149,7 +149,7 @@ class AssetModelsController extends Controller
         $model->modelno = e(Input::get('modelno'));
         $model->user_id = Auth::user()->id;
         $model->note            = e(Input::get('note'));
-        $model->eol=0;
+        $model->eol= null;
 
         if (Input::get('fieldset_id')=='') {
             $model->fieldset_id = null;
@@ -217,7 +217,7 @@ class AssetModelsController extends Controller
         }
 
         if (e(Input::get('eol')) == '') {
-            $model->eol =  0;
+            $model->eol =  null;
         } else {
             $model->eol = e(Input::get('eol'));
         }
