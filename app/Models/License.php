@@ -213,6 +213,7 @@ class License extends Depreciable
                 ->orWhere('serial', 'LIKE', '%'.$search.'%')
                 ->orWhere('notes', 'LIKE', '%'.$search.'%')
                 ->orWhere('order_number', 'LIKE', '%'.$search.'%')
+                ->orWhere('purchase_order', 'LIKE', '%'.$search.'%')
                 ->orWhere('purchase_date', 'LIKE', '%'.$search.'%')
                 ->orWhere('purchase_cost', 'LIKE', '%'.$search.'%');
         });
