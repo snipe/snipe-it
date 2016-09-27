@@ -47,6 +47,7 @@
             <th class="col-sm-1">{{ trans('admin/hardware/form.order') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/form.supplier') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.checkoutto') }}</th>
+            <th class="col-sm-1">{{ trans('admin/hardware/table.checkout_date') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.location') }}</th>
         </tr>
     </thead>
@@ -98,6 +99,13 @@
 
             @endif
             </td>
+
+            <td>
+                @if (($asset->assigneduser) && ($asset->last_checkout!=''))
+                    {{ $asset->last_checkout }}
+                @endif
+            </td>
+
             <td>
             @if (($asset->assigneduser) && ($asset->assigneduser->userLoc))
               {{ $asset->assigneduser->userLoc->name }}

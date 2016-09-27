@@ -133,6 +133,7 @@ class ReportsController extends Controller
 
             Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle) {
             fputcsv($handle, [
+                trans('general.company'),
                 trans('admin/hardware/table.asset_tag'),
                 trans('admin/hardware/form.manufacturer'),
                 trans('admin/hardware/form.model'),
@@ -145,6 +146,7 @@ class ReportsController extends Controller
                 trans('admin/hardware/form.order'),
                 trans('admin/hardware/form.supplier'),
                 trans('admin/hardware/table.checkoutto'),
+                trans('admin/hardware/table.checkout_date'),
                 trans('admin/hardware/table.location'),
                 trans('general.notes'),
              ]);
@@ -152,6 +154,7 @@ class ReportsController extends Controller
             foreach ($assets as $asset) {
                 // Add a new row with data
                 fputcsv($handle, [
+                    ($asset->company) ? $asset->company->name : '',
                     $asset->asset_tag,
                     ($asset->model->manufacturer) ? $asset->model->manufacturer->name : '',
                     ($asset->model) ? $asset->model->name : '',
@@ -164,6 +167,7 @@ class ReportsController extends Controller
                     ($asset->order_number) ? e($asset->order_number) : '',
                     ($asset->supplier) ? e($asset->supplier->name) : '',
                     ($asset->assigneduser) ? e($asset->assigneduser->fullName()) : '',
+                    ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
                     ($asset->assigneduser && $asset->assigneduser->userloc!='') ?
                     e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
                     ($asset->notes) ? e($asset->notes) : '',
