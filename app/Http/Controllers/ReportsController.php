@@ -115,53 +115,63 @@ class ReportsController extends Controller
 
          \Debugbar::disable();
 
+        $customfields = CustomField::get();
+
         $response = new StreamedResponse(function(){
             // Open output stream
             $handle = fopen('php://output', 'w');
 
             Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle) {
-            fputcsv($handle, [
-                trans('general.company'),
-                trans('admin/hardware/table.asset_tag'),
-                trans('admin/hardware/form.manufacturer'),
-                trans('admin/hardware/form.model'),
-                trans('general.model_no'),
-                trans('general.name'),
-                trans('admin/hardware/table.serial'),
-                trans('general.status'),
-                trans('admin/hardware/table.purchase_date'),
-                trans('admin/hardware/table.purchase_cost'),
-                trans('admin/hardware/form.order'),
-                trans('admin/hardware/form.supplier'),
-                trans('admin/hardware/table.checkoutto'),
-                trans('admin/hardware/table.checkout_date'),
-                trans('admin/hardware/table.location'),
-                trans('general.notes'),
-             ]);
+                $headers=[
+                    trans('general.company'),
+                    trans('admin/hardware/table.asset_tag'),
+                    trans('admin/hardware/form.manufacturer'),
+                    trans('admin/hardware/form.model'),
+                    trans('general.model_no'),
+                    trans('general.name'),
+                    trans('admin/hardware/table.serial'),
+                    trans('general.status'),
+                    trans('admin/hardware/table.purchase_date'),
+                    trans('admin/hardware/table.purchase_cost'),
+                    trans('admin/hardware/form.order'),
+                    trans('admin/hardware/form.supplier'),
+                    trans('admin/hardware/table.checkoutto'),
+                    trans('admin/hardware/table.checkout_date'),
+                    trans('admin/hardware/table.location'),
+                    trans('general.notes'),
+                ];
+                foreach($customfields as $field) {
+                    $headers[]=$field->name;
+                }
+                fputcsv($handle, $headers);
 
-            foreach ($assets as $asset) {
-                // Add a new row with data
-                fputcsv($handle, [
-                    ($asset->company) ? $asset->company->name : '',
-                    $asset->asset_tag,
-                    ($asset->model->manufacturer) ? $asset->model->manufacturer->name : '',
-                    ($asset->model) ? $asset->model->name : '',
-                    ($asset->model->modelno) ? $asset->model->modelno : '',
-                    ($asset->name) ? $asset->name : '',
-                    ($asset->serial) ? $asset->serial : '',
-                    ($asset->assetstatus) ? e($asset->assetstatus->name) : '',
-                    ($asset->purchase_date) ? e($asset->purchase_date) : '',
-                    ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
-                    ($asset->order_number) ? e($asset->order_number) : '',
-                    ($asset->supplier) ? e($asset->supplier->name) : '',
-                    ($asset->assigneduser) ? e($asset->assigneduser->fullName()) : '',
-                    ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                    ($asset->assigneduser && $asset->assigneduser->userloc!='') ?
-                    e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
-                    ($asset->notes) ? e($asset->notes) : '',
-                ]);
-            }
-        });
+                foreach ($assets as $asset) {
+                    // Add a new row with data
+                    $values=[
+                        ($asset->company) ? $asset->company->name : '',
+                        $asset->asset_tag,
+                        ($asset->model->manufacturer) ? $asset->model->manufacturer->name : '',
+                        ($asset->model) ? $asset->model->name : '',
+                        ($asset->model->modelno) ? $asset->model->modelno : '',
+                        ($asset->name) ? $asset->name : '',
+                        ($asset->serial) ? $asset->serial : '',
+                        ($asset->assetstatus) ? e($asset->assetstatus->name) : '',
+                        ($asset->purchase_date) ? e($asset->purchase_date) : '',
+                        ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
+                        ($asset->order_number) ? e($asset->order_number) : '',
+                        ($asset->supplier) ? e($asset->supplier->name) : '',
+                        ($asset->assigneduser) ? e($asset->assigneduser->fullName()) : '',
+                        ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
+                        ($asset->assigneduser && $asset->assigneduser->userloc!='') ?
+                            e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
+                        ($asset->notes) ? e($asset->notes) : '',
+                    ];
+                    foreach($customfields as $field) {
+                        $values[]=$asset->{$field->db_column_name()};
+                    }
+                    fputcsv($handle, $values);
+                }
+            });
 
             // Close the output stream
             fclose($handle);
