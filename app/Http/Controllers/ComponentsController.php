@@ -345,7 +345,7 @@ class ComponentsController extends Controller
         $component->assets()->attach($component->id, array(
         'component_id' => $component->id,
         'user_id' => $admin_user->id,
-        'created_at' => date('Y-m-d h:i:s'),
+        'created_at' => date('Y-m-d H:i:s'),
         'assigned_qty' => e(Input::get('assigned_qty')),
         'asset_id' => $asset_id));
 
