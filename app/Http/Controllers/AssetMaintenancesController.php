@@ -141,7 +141,7 @@ class AssetMaintenancesController extends Controller
                 'completion_date'     => $maintenance->completion_date,
                 'user_id'       => ($maintenance->admin) ? (string)link_to('/admin/users/'.$maintenance->admin->id.'/view', $maintenance->admin->fullName()) : '',
                 'actions'       => $actions,
-                'companyName'   => ($maintenance->asset) ? $maintenance->asset->company->name : ''
+                'companyName'   => ($maintenance->asset->company) ? $maintenance->asset->company->name : ''
             );
         }
 
