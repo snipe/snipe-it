@@ -23,91 +23,55 @@
       <div class="table-responsive">
 
       <table
-      name="assetReport"
-      id="table"
-      class="table table-striped"
-      data-cookie="true"
-      data-click-to-select="true"
-      data-cookie-id-table="assetReportTable">
+                  name="assetsReport"
+                  {{-- data-row-style="rowStyle" --}}
+                  data-toolbar="#toolbar"
+                  class="table table-striped"
+                  id="table"
+                  data-url="{{route('api.hardware.list', array(''=>e(Input::get('status')),'order_number'=>e(Input::get('order_number')), 'status_id'=>e(Input::get('status_id')), 'report'=>'true'))}}"
+                  data-cookie="true"
+                  data-click-to-select="true"
+                  data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">
+              <thead>
+              <tr>
+                  @if (Input::get('status')!='Deleted')
+                      <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+                  @endif
+                  <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+                  <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
+                  <th data-sortable="true" data-field="name" data-visible="false">{{ trans('admin/hardware/form.name') }}</th>
+                  <th data-sortable="true" data-field="asset_tag">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                  <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
+                  <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+                  <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
+                  <th data-sortable="true" data-field="status_label">{{ trans('admin/hardware/table.status') }}</th>
+                  <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
+                  <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
+                  <th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
+                  <th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
+                  <th data-sortable="true" data-field="purchase_cost" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.cost') }}</th>
+                  <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
+                  <th data-sortable="false" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
+                  <th data-sortable="true" data-searchable="true" data-field="notes">{{ trans('general.notes') }}</th>
+                  <th data-sortable="true" data-searchable="true"  data-field="order_number">{{ trans('admin/hardware/form.order') }}</th>
+                  <th data-sortable="true" data-searchable="true" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                  <th data-sortable="true" data-field="expected_checkin" data-searchable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
+                  @foreach(\App\Models\CustomField::all() AS $field)
 
-        <thead>
-            <tr role="row">
-            <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/form.manufacturer') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/form.model') }}</th>
-            <th class="col-sm-1">{{ trans('general.model_no') }}</th>
-            @if ($settings->display_asset_name)
-                <th class="col-sm-1">{{ trans('general.name') }}</th>
-            @endif
-            <th class="col-sm-1">{{ trans('admin/hardware/table.serial') }}</th>
-             <th class="col-sm-1">{{ trans('admin/hardware/table.status') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_date') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_cost') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/form.order') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/form.supplier') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/table.checkoutto') }}</th>
-            <th class="col-sm-1">{{ trans('admin/hardware/table.location') }}</th>
-        </tr>
-    </thead>
-    <tbody>
 
-        @foreach ($assets as $asset)
-        <tr>
-            <td>{{ is_null($asset->company) ? '' : $asset->company->name }}</td>
-            <td>{{ $asset->asset_tag }}</td>
-            <td>
-            @if ($asset->model->manufacturer)
-                {{ $asset->model->manufacturer->name }}
-            @endif
-            </td>
-            <td>{{ $asset->model->name }}</td>
-            <td>{{ $asset->model->modelno }}</td>
-            @if ($settings->display_asset_name)
-                <td>{{ $asset->name }}</td>
-            @endif
-            <td>{{ $asset->serial }}</td>
-            <td>
-                {{ ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : '')  }}
-            </td>
-            <td>{{ $asset->purchase_date }}</td>
-            <td class="align-right">{{ $settings->default_currency }}
-                {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
-            </td>
-            <td>
-                @if ($asset->order_number)
-                    {{ $asset->order_number }}
-                @endif
-            </td>
-            <td>
-                @if ($asset->supplier_id)
-                    <a href="{{ route('view/supplier', $asset->supplier_id) }}">
-                    {{ $asset->supplier->name }}
-                    </a>
-                @endif
-            </td>
-            <td>
-             @if ($asset->assigneduser)
-            	 @if ($asset->assigneduser->deleted_at!='')
-            	 	<del>{{ $asset->assigneduser->fullName() }}</del>
-            	 @else
-            	 	<a href="{{ route('view/user', $asset->assigned_to) }}">
-					{{ $asset->assigneduser->fullName() }}
-					</a>
-            	 @endif
+                      <th data-sortable="{{ ($field->field_encrypted=='1' ? 'false' : 'true') }}" data-visible="false" data-field="{{$field->db_column_name()}}">
+                          @if ($field->field_encrypted=='1')
+                              <i class="fa fa-lock"></i>
+                          @endif
 
-            @endif
-            </td>
-            <td>
-            @if (($asset->assigneduser) && ($asset->assigneduser->userLoc))
-              {{ $asset->assigneduser->userLoc->name }}
-            @elseif ($asset->defaultLoc)
-              {{ $asset->defaultLoc->name }}
-            @endif
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
+                          {{$field->name}}
+                      </th>
+
+                  @endforeach
+                  <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
+
+              </tr>
+              </thead>
 </table>
 </div>
 </div>
@@ -122,6 +86,7 @@
 <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
@@ -129,30 +94,39 @@
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,
-        pageSize: {{ $settings->per_page }},
+        pageSize: 100,
         pagination: true,
-        sidePagination: 'client',
+        sidePagination: 'server',
         sortable: true,
+        showMultiSort: true,
         cookie: true,
+        cookieExpire: '2y',
         mobileResponsive: true,
         showExport: true,
         showColumns: true,
         exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
+        exportTypes: ['csv', 'excel', 'txt','json', 'xml'],
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
         paginationPreText: "{{ trans('general.previous') }}",
         paginationNextText: "{{ trans('general.next') }}",
-        pageList: ['10','25','50','100','150','200'],
+        pageList: ['10','25','50','100','150','200','500','1000'],
+        exportOptions: {
+            fileName: 'assets-export-' + (new Date()).toISOString().slice(0,10),
+        },
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',
+            sort: 'fa fa-sort-amount-desc',
+            plus: 'fa fa-plus',
+            minus: 'fa fa-minus',
             columns: 'fa-columns',
             refresh: 'fa-refresh'
         },
 
     });
+
 </script>
 @stop
 

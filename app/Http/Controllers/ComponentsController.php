@@ -99,7 +99,7 @@ class ComponentsController extends Controller
         if (e(Input::get('purchase_cost')) == '0.00') {
             $component->purchase_cost       =  null;
         } else {
-            $component->purchase_cost       = e(Input::get('purchase_cost'));
+            $component->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
         $component->total_qty                    = e(Input::get('total_qty'));
@@ -183,7 +183,7 @@ class ComponentsController extends Controller
         if (e(Input::get('purchase_cost')) == '0.00') {
             $component->purchase_cost       =  null;
         } else {
-            $component->purchase_cost       = e(Input::get('purchase_cost'));
+            $component->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
         $component->total_qty                    = e(Input::get('total_qty'));

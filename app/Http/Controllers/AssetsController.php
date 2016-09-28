@@ -178,7 +178,7 @@ class AssetsController extends Controller
         if (e(Input::get('purchase_cost')) == '') {
             $asset->purchase_cost =  null;
         } else {
-            $asset->purchase_cost = (e(Input::get('purchase_cost')));
+            $asset->purchase_cost = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
         if (e(Input::get('purchase_date')) == '') {
@@ -354,7 +354,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('purchase_cost')) {
-            $asset->purchase_cost = e(Helper::formatCurrencyOutput($request->input('purchase_cost')));
+            $asset->purchase_cost = Helper::ParseFloat(e($request->input('purchase_cost')));
         } else {
             $asset->purchase_cost =  null;
         }
@@ -1492,7 +1492,7 @@ class AssetsController extends Controller
                     }
 
                     if (Input::has('purchase_cost')) {
-                        $update_array['purchase_cost'] =  e(Input::get('purchase_cost'));
+                        $update_array['purchase_cost'] =  Helper::ParseFloat(e(Input::get('purchase_cost')));
                     }
 
                     if (Input::has('supplier_id')) {
@@ -1840,7 +1840,13 @@ class AssetsController extends Controller
                 }
 
             }
-            $rows[]=$row;
+
+            if (($request->has('report')) && ($request->get('report')=='true')) {
+                $rows[]= Helper::stripTagsFromJSON($row);
+            } else {
+                $rows[]= $row;
+            }
+
         }
 
         $data = array('total'=>$assetCount, 'rows'=>$rows);
