@@ -126,7 +126,7 @@ class AccessoriesController extends Controller
         }
 
         return View::make('accessories/edit', compact('accessory'))
-          ->with('category_list', erper::categoryList('accessory'))
+          ->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
           ->with('location_list', Helper::locationsList())
           ->with('manufacturer_list', Helper::manufacturerList());
