@@ -97,7 +97,7 @@ class ConsumablesController extends Controller
         if (e(Input::get('purchase_cost')) == '0.00') {
             $consumable->purchase_cost       =  null;
         } else {
-            $consumable->purchase_cost       = e(Input::get('purchase_cost'));
+            $consumable->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
         $consumable->qty                    = e(Input::get('qty'));
@@ -182,10 +182,10 @@ class ConsumablesController extends Controller
         if (e(Input::get('purchase_cost')) == '0.00') {
             $consumable->purchase_cost       =  null;
         } else {
-            $consumable->purchase_cost       = e(Input::get('purchase_cost'));
+            $consumable->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
-        $consumable->qty                    = e(Input::get('qty'));
+        $consumable->qty                    = Helper::ParseFloat(e(Input::get('qty')));
 
         if ($consumable->save()) {
             return redirect()->to("admin/consumables")->with('success', trans('admin/consumables/message.update.success'));

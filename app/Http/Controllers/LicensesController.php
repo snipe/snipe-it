@@ -87,17 +87,13 @@ class LicensesController extends Controller
     public function postCreate()
     {
 
-
-        // get the POST data
-        $new = Input::all();
-
         // create a new model instance
         $license = new License();
 
         if (e(Input::get('purchase_cost')) == '') {
             $license->purchase_cost =  null;
         } else {
-            $license->purchase_cost = e(Input::get('purchase_cost'));
+            $license->purchase_cost = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
         if (e(Input::get('supplier_id')) == '') {
@@ -289,10 +285,9 @@ class LicensesController extends Controller
         }
 
         if (e(Input::get('purchase_cost')) == '') {
-              $license->purchase_cost =  null;
+            $license->purchase_cost =  null;
         } else {
-              $license->purchase_cost = e(Input::get('purchase_cost'));
-              //$license->purchase_cost = e(Input::get('purchase_cost'));
+            $license->purchase_cost = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
         if (e(Input::get('maintained')) == '') {

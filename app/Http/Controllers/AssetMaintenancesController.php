@@ -215,7 +215,7 @@ class AssetMaintenancesController extends Controller
         if (e(Input::get('cost')) == '') {
             $assetMaintenance->cost = '';
         } else {
-            $assetMaintenance->cost =  e(Input::get('cost'));
+            $assetMaintenance->cost =  Helper::ParseFloat(e(Input::get('cost')));
         }
 
         if (e(Input::get('notes')) == '') {
@@ -363,7 +363,7 @@ class AssetMaintenancesController extends Controller
         if (e(Input::get('cost')) == '') {
             $assetMaintenance->cost = '';
         } else {
-            $assetMaintenance->cost =  e(Input::get('cost'));
+            $assetMaintenance->cost =  Helper::ParseFloat(e(Input::get('cost')));
         }
 
         if (e(Input::get('notes')) == '') {
