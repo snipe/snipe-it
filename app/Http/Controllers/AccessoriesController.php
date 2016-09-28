@@ -92,7 +92,7 @@ class AccessoriesController extends Controller
         if (e(Input::get('purchase_cost')) == '0.00') {
             $accessory->purchase_cost       =  null;
         } else {
-            $accessory->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')))p;
+            $accessory->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
         $accessory->qty                     = e(Input::get('qty'));
