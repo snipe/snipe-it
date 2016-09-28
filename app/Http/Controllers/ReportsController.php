@@ -331,6 +331,7 @@ class ReportsController extends Controller
         $commonSelects = [
             'action_logs.item_type',
             'action_logs.updated_at as al_updated_at',
+            'action_logs.created_at as al_created_at',
             'action_logs.item_id',
             'action_logs.action_type',
             'action_logs.target_type',
@@ -434,6 +435,7 @@ class ReportsController extends Controller
             $licenses  = DB::table('licenses')
                 ->join('action_logs', 'licenses.id', '=', 'action_logs.item_id')
                 ->leftJoin('users', 'action_logs.user_id', '=', 'users.id')
+                ->select('licenses.*')
                 ->addSelect($commonSelects)
                 ->orderBy('al_updated_at', 'DESC')
                 ->where('action_logs.item_type', 'App\Models\License');
@@ -443,6 +445,7 @@ class ReportsController extends Controller
             }
 
             $licenses = $licenses->get();
+            // return $licenses;
         }
 
         // Components
@@ -481,7 +484,6 @@ class ReportsController extends Controller
         $order === 'asc' ? $activitylogs->sortBy($sort) : $activitylogs->sortByDesc($sort);
         $activitylogs = collect(array_flatten($activitylogs));
         $activitylogs = $activitylogs->slice($offset,$limit);
-       
         $rows = array();
         foreach ($activitylogs as $activity) {
             if ($activity->item_type == "App\Models\Asset") {
@@ -490,7 +492,7 @@ class ReportsController extends Controller
                 $activity_icons = '<i class="fa fa-keyboard-o"></i>';
             } elseif ($activity->item_type=="App\Models\Consumable") {
                 $activity_icons = '<i class="fa fa-tint"></i>';
-            } elseif ($activity->item_type=="App\Models\LicenseSeat"){
+            } elseif ($activity->item_type=="App\Models\License"){
                 $activity_icons = '<i class="fa fa-floppy-o"></i>';
             } elseif ($activity->item_type=="App\Models\Component") {
                 $activity_icons = '<i class="fa fa-hdd-o"></i>';
@@ -503,16 +505,23 @@ class ReportsController extends Controller
                 $actvity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.$displayName.'</a>';
                 $item_type = 'asset';
             } else {
+                // User
                 $item_type = $activity->item_type == AssetModel::class ? 'model' : camel_case(class_basename($activity->item_type));
-                $actvity_item = '<a href="'.route("view/{$item_type}", $activity->item_id).'">'.e($activity->name).'</a>';
+                $actvity_item = '<a href="'.route("view/{$item_type}", $activity->item_id).'">'.e("{$activity->first_name} {$activity->last_name}").'</a>';
             }
             
             if (($activity->action_type=="uploaded") && ($activity->item_type =="App\Models\User")) {
                 $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user_name.'</a>';
             } elseif ($activity->target_type == 'App\Models\Asset') {
                 $target_asset = Asset::find($activity->target_id);
-                $displayName = $activity->name ? e($target_asset->asset_tag) . ' - ' . e($activity->name) : e($target_asset->asset_tag);
-                $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$target_asset->showAssetName().'</a>';
+                if(!$target_asset) {
+                    $displayName = "Unknown";
+                    $activity_target = null;
+                } else {
+                    // var_dump($target_asset);
+                    $displayName = $activity->name ? e($target_asset->asset_tag) . ' - ' . e($activity->name) : e($target_asset->asset_tag);
+                    $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$target_asset->showAssetName().'</a>';
+                }
             } elseif ($activity->target_type == 'App\Models\User') {
                 $target_user = User::find($activity->target_id);
                 $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$target_user->fullName().'</a>';
@@ -525,7 +534,7 @@ class ReportsController extends Controller
 
             $rows[] = array(
                 'icon'          => $activity_icons,
-                'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
+                'created_at'    => date("M d, Y g:iA", strtotime($activity->al_created_at)),
                 'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
                 'admin'         =>  $activity->admin_id ? (string) link_to('/admin/users/'.$activity->user_id.'/view', "{$activity->first_name} {$activity->last_name}") : 'Deleted Admin',
                 'target'          => $activity_target,
