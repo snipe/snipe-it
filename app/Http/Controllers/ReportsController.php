@@ -117,11 +117,11 @@ class ReportsController extends Controller
 
         $customfields = CustomField::get();
 
-        $response = new StreamedResponse(function(){
+        $response = new StreamedResponse(function() use ($customfields) {
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle) {
+            Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
                 $headers=[
                     trans('general.company'),
                     trans('admin/hardware/table.asset_tag'),
