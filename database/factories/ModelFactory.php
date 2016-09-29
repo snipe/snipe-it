@@ -266,18 +266,68 @@ $factory->defineAs(App\Models\LicenseSeat::class, 'license-seat', function (Fake
 
 $factory->defineAs(App\Models\Actionlog::class, 'asset-checkout', function (Faker\Generator $faker) {
   return [
-    'user_id'      	=> 1,
+    'user_id'      	=> \App\Models\User::inRandomOrder()->first()->id,
     'action_type' 		=> 'checkout',
-    'item_id' 		=> $faker->numberBetween(1, 10),
-    'target_id' => 1,
+    'item_id' 		=> \App\Models\Asset::inRandomOrder()->first()->id,
+    'target_id' => \App\Models\User::inRandomOrder()->first()->id,
     'target_type' => 'App\\Models\\User',
     'created_at'  => $faker->dateTime(),
     'item_type'  => 'App\\Models\\Asset',
     'note' 			=> $faker->sentence,
-    'user_id' 			=> '1',
   ];
 });
 
+$factory->defineAs(App\Models\Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
+  return [
+    'user_id'      	=> \App\Models\User::inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> \App\Models\License::inRandomOrder()->first()->id,
+    'target_id' => \App\Models\Asset::inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\Asset',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\License',
+    'note' 			=> $faker->sentence,
+  ];
+});
+
+$factory->defineAs(App\Models\Actionlog::class, 'accessory-checkout', function (Faker\Generator $faker) {
+  return [
+    'user_id'      	=> \App\Models\User::inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> \App\Models\Accessory::inRandomOrder()->first()->id,
+    'target_id' => \App\Models\User::inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\User',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\Accessory',
+    'note' 			=> $faker->sentence,
+  ];
+});
+
+$factory->defineAs(App\Models\Actionlog::class, 'consumable-checkout', function (Faker\Generator $faker) {
+  return [
+    'user_id'      	=> \App\Models\User::inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> \App\Models\Consumable::inRandomOrder()->first()->id,
+    'target_id' => \App\Models\User::inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\User',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\Consumable',
+    'note' 			=> $faker->sentence,
+  ];
+});
+
+$factory->defineAs(App\Models\Actionlog::class, 'component-checkout', function (Faker\Generator $faker) {
+  return [
+    'user_id'      	=> \App\Models\User::inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> \App\Models\Component::inRandomOrder()->first()->id,
+    'target_id' => \App\Models\User::inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\User',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\Component',
+    'note' 			=> $faker->sentence,
+  ];
+});
 
 $factory->defineAs(App\Models\CustomField::class, 'customfield-ip', function (Faker\Generator $faker) {
   return [
