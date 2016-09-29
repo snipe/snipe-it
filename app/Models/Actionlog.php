@@ -2,9 +2,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -12,10 +13,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @version    v1.0
  */
-class Actionlog extends Model implements ICompanyableChild
+class Actionlog extends Model
 {
     use SoftDeletes;
-    use CompanyableChildTrait;
 
     protected $dates = [ 'deleted_at' ];
 
@@ -23,11 +23,16 @@ class Actionlog extends Model implements ICompanyableChild
     public $timestamps = true;
     protected $fillable   = [ 'created_at', 'item_type','user_id','item_id','action_type','note','target_id', 'target_type' ];
 
-    public function getCompanyableParents()
+    // Overridden from Builder to automatically add the company
+    public static function boot()
     {
-        return [ 'accessorylog', 'assetlog', 'licenselog', 'consumablelog' ];
+        parent::boot();
+        static::creating( function (Actionlog $actionlog) {
+            if (Auth::user() && Auth::user()->company) {
+                $actionlog->company_id = Auth::user()->company->id;
+            }
+        });
     }
-
     // Eloquent Relationships below
     public function item()
     {

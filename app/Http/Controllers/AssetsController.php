@@ -1156,7 +1156,7 @@ class AssetsController extends Controller
                                 'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
                                 'target_type' => User::class,
                                 'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
-                                'action_type'   => 'checkout'
+                                'action_type'   => 'checkout',
                             )
                         );
 

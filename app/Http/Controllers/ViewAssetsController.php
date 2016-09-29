@@ -41,7 +41,7 @@ class ViewAssetsController extends Controller
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find(Auth::user()->id);
 
-        $userlog = $user->userlog->load('item', 'user', 'target');
+        $userlog = Company::scopeCompanyables($user->userlog)->load('item', 'user', 'target');
 
         if (isset($user->id)) {
             return View::make('account/view-assets', compact('user', 'userlog'));
