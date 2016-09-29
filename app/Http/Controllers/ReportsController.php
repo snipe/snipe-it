@@ -333,10 +333,10 @@ class ReportsController extends Controller
 
 
         $activityCount = $activitylogs->count();
-        $activitylogs = $activitylogs->skip($offset)->take($limit)->get();
+        // dd("Offset:" . $offset . " Limit " . $limit);
+        $activitylogs = $activitylogs->offset($offset)->limit($limit)->get();
 
         $rows = array();
-
         foreach ($activitylogs as $activity) {
 
             if ($activity->itemType() == "asset") {
@@ -354,24 +354,27 @@ class ReportsController extends Controller
             }
 
             if (($activity->item) && ($activity->itemType()=="asset")) {
-              $actvity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
+              $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
                 $item_type = 'asset';
-            } elseif ($activity->item) {
-                $actvity_item = '<a href="'.route('view/'. $activity->itemType(), $activity->item_id).'">'.e($activity->item->name).'</a>';
+            } elseif ($activity->item()) {
+                $activity_item = '<a href="'.route('view/'. $activity->itemType(), $activity->item_id).'">'.e($activity->item->name).'</a>';
                 $item_type = $activity->itemType();
+            } else {
+                $activity_item = "unkonwn";
+                $item_type = "null";
             }
             
 
-            if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
+            if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
                 $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user->fullName().'</a>';
-            } elseif (($activity->item) && ($activity->target instanceof \App\Models\Asset)) {
+            } elseif (($activity->item) && ($activity->target_type === "App\Models\Asset")) {
                 $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
-            } elseif (($activity->item) && ($activity->target instanceof \App\Models\User)) {
+            } elseif ( $activity->target_type === "App\Models\User") {
                 $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
             } elseif ($activity->action_type=='requested') {
                 $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
             } else {
-                $activity_target = $activity->target;
+                $activity_target = $activity->target->id;
             }
 
             
@@ -381,7 +384,7 @@ class ReportsController extends Controller
                 'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
                 'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : 'Deleted Admin',
                 'target'          => $activity_target,
-                'item'          => $actvity_item,
+                'item'          => $activity_item,
                 'item_type'     => $item_type,
                 'note'     => e($activity->note),
 
