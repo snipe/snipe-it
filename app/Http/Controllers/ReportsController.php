@@ -518,7 +518,7 @@ class ReportsController extends Controller
             }
             if (e(Input::get('location')) == '1') {
                 $show_loc = '';
-                if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id !='' )) {
+                if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser) && ( $asset->assigneduser->location_id !='' )) {
                     $location = Location::find($asset->assigneduser->location_id);
                     if ($location) {
                         $show_loc .= '"' .e($location->name). '"';
