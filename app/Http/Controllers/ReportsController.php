@@ -308,7 +308,7 @@ class ReportsController extends Controller
      */
     public function getActivityReportDataTable()
     {
-        $activitylogs = Actionlog::orderBy('created_at', 'DESC');
+        $activitylogs = Company::scopeCompanyables(Actionlog::with('item', 'user', 'target'))->orderBy('created_at', 'DESC');
 
         if (Input::has('search')) {
             $activity = $activity->TextSearch(e(Input::get('search')));
@@ -363,7 +363,7 @@ class ReportsController extends Controller
             
 
             if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
-                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->userasassetlog->fullName().'</a>';
+                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user->fullName().'</a>';
             } elseif (($activity->item) && ($activity->target instanceof \App\Models\Asset)) {
                 $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
             } elseif (($activity->item) && ($activity->target instanceof \App\Models\User)) {
