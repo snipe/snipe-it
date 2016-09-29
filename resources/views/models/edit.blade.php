@@ -129,6 +129,15 @@
                     </div>
                 </div>
 
+                       <!-- Requestable -->
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <label>
+                            <input type="checkbox" value="1" name="requestable" id="requestable" class="minimal" {{ Input::old('requestable', $model->requestable) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/models/general.requestable') }}
+                        </label>
+                    </div>
+                </div>
+
                 <!-- Image -->
                 @if ($model->image)
                     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
