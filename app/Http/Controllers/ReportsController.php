@@ -382,7 +382,7 @@ class ReportsController extends Controller
                 'icon'          => $activity_icons,
                 'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
                 'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
-                'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : 'Deleted Admin',
+                'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : '',
                 'target'          => $activity_target,
                 'item'          => $activity_item,
                 'item_type'     => $item_type,
