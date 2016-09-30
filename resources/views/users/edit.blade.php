@@ -296,12 +296,22 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
                 <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
             @endif
 
-
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-2"><span class="line"></span>Permission</th>
+                    <th class="col-md-1"><span class="line"></span>Grant</th>
+                    <th class="col-md-1"><span class="line"></span>Deny</th>
+                    <th class="col-md-1"><span class="line"></span>Inherit</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php $counter = 1; ?>
         @foreach ($permissions as $area => $permission)
 
-
+            
             @for ($i = 0; $i < count($permission); $i++)
+            <tr>
                 <?php
                 $permission_name = $permission[$i]['permission'];
 
@@ -313,45 +323,45 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 
 
                 @if ($permission[$i]['display'])
-                    <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
-                    <p>{{ $permission[$i]['note'] }}</p>
+                    <td class="col-md-2" 
+                        data-toggle="tooltip"
+                        data-placement="right"
+                        title="{{ $permission[$i]['note'] }}">
+                        {{ $area }}: {{ $permission[$i]['label'] }}
+                    </td>
 
                     <!-- radio -->
                     <div class="form-group" style="padding-left: 15px;">
-
-                        <label class="radio-padding">
-
+<td class="col-md-1">
                             @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
-                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['disabled'=>'disabled']) }}
+                                {{ Form::radio('', '1', $userPermissions[$permission_name] == '1', ['disabled'=>'disabled']) }}
                             @else
-                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => "$permission_name"]) }}
+                                {{ Form::radio('', '1', $userPermissions[$permission_name] == '1', ['class' => "$permission_name"]) }}
                             @endif
-
-                            Grant</label>
-
-                        <label class="radio-padding">
-
+</td>
+<td class="col-md-1">
                             @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
-                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['disabled'=>'disabled']) }}
+                                {{ Form::radio('', '-1', $userPermissions[$permission_name] == '-1', ['disabled'=>'disabled']) }}
 
                             @else
-                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => "$permission_name"]) }}
+                                {{ Form::radio('', $userPermissions[$permission_name] == '-1', ['class' => "$permission_name"]) }}
+
 
                             @endif
-                            Deny</label>
-
-                        <label class="radio-padding">
+</td>
+<td class="col-md-1">
                             @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
-                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['disabled'=>'disabled']) }}
+                                {{ Form::radio('', '0', $userPermissions[$permission_name] =='0', ['disabled'=>'disabled']) }}
                             @else
-                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => "$permission_name"]) }}
+                                {{ Form::radio('', $userPermissions[$permission_name] =='0', ['class' => "$permission_name"]) }}
                             @endif
+</td>
 
-                              Inherit</label>
                     </div>
                     <hr>
                 @endif
 
+                    </tr>
             @endfor
                         @if ($counter == count($permissions))
                             
@@ -359,6 +369,8 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
                     @endif
         <?php $counter++; ?>
         @endforeach
+        </tbody>
+        </table>
             </div>
 
 
