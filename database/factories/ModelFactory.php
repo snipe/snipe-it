@@ -255,6 +255,7 @@ $factory->defineAs(App\Models\License::class, 'license', function (Faker\Generat
     'purchase_date' 		=> $faker->dateTime(),
     'purchase_cost' 		=> $faker->randomFloat(2),
     'notes'   => $faker->sentence,
+    'company_id' => \App\Models\Company::inRandomOrder()->first()->id
   ];
 });
 
@@ -269,8 +270,7 @@ $factory->defineAs(App\Models\LicenseSeat::class, 'license-seat', function (Fake
 });
 
 $factory->defineAs(App\Models\Actionlog::class, 'asset-checkout', function (Faker\Generator $faker) {
-  $company = \App\Models\Company::has('users', 'assets')->inRandomOrder()->first();
-  return $company;
+  $company = \App\Models\Company::has('users')->has('assets')->inRandomOrder()->first();
   return [
     'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
     'action_type' 		=> 'checkout',
@@ -285,6 +285,8 @@ $factory->defineAs(App\Models\Actionlog::class, 'asset-checkout', function (Fake
 });
 
 $factory->defineAs(App\Models\Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
+  $company = \App\Models\Company::has('users')->has('licenses')->inRandomOrder()->first();
+
   return [
     'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
     'action_type' 		=> 'checkout',
@@ -299,6 +301,7 @@ $factory->defineAs(App\Models\Actionlog::class, 'license-checkout-asset', functi
 });
 
 $factory->defineAs(App\Models\Actionlog::class, 'accessory-checkout', function (Faker\Generator $faker) {
+    $company = \App\Models\Company::has('users')->has('accessories')->inRandomOrder()->first();    
   return [
     'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
     'action_type' 		=> 'checkout',
@@ -313,6 +316,8 @@ $factory->defineAs(App\Models\Actionlog::class, 'accessory-checkout', function (
 });
 
 $factory->defineAs(App\Models\Actionlog::class, 'consumable-checkout', function (Faker\Generator $faker) {
+    $company = \App\Models\Company::has('users')->has('consumables')->inRandomOrder()->first();    
+
   return [
     'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
     'action_type' 		=> 'checkout',
@@ -327,6 +332,8 @@ $factory->defineAs(App\Models\Actionlog::class, 'consumable-checkout', function 
 });
 
 $factory->defineAs(App\Models\Actionlog::class, 'component-checkout', function (Faker\Generator $faker) {
+   $company = \App\Models\Company::has('users')->has('components')->inRandomOrder()->first();    
+
   return [
     'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
     'action_type' 		=> 'checkout',
