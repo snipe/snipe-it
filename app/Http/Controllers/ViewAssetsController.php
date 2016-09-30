@@ -39,9 +39,18 @@ class ViewAssetsController extends Controller
     public function getIndex()
     {
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find(Auth::user()->id);
+        $user = User::with(
+            'assets',
+            'assets.model',
+            'consumables',
+            'accessories',
+            'licenses',
+            'userloc',
+            'userlog'
+        )->withTrashed()->find(Auth::user()->id);
 
-        $userlog = Company::scopeCompanyables($user->userlog)->load('item', 'user', 'target');
+
+        $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
             return View::make('account/view-assets', compact('user', 'userlog'));
@@ -76,7 +85,7 @@ class ViewAssetsController extends Controller
     {
         $item = null;
         $fullItemType = 'App\\Models\\' . studly_case($itemType);
-        if($itemType == "asset_model") {
+        if ($itemType == "asset_model") {
             $itemType = "model";
         }
         $item = call_user_func(array($fullItemType, 'find'), $itemId);

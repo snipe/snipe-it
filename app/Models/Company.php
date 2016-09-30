@@ -198,6 +198,6 @@ final class Company extends Model
     }
 
     public function components() {
-        return $this->hasMany(Components::class);
+        return $this->hasMany(Component::class);
     }
 }
