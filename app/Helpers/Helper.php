@@ -204,7 +204,7 @@ class Helper
     public static function usersList()
     {
         $users_list =   array( '' => trans('general.select_user')) +
-                        User::where('deleted_at', '=', null)
+                        Company::scopeCompanyables(User::where('deleted_at', '=', null))
                         ->where('show_in_list','=',1)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
