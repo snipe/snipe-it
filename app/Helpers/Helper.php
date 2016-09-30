@@ -1,24 +1,25 @@
 <?php
 namespace App\Helpers;
 
-use DB;
-use App\Models\Statuslabel;
-use App\Models\Location;
-use App\Models\AssetModel;
-use App\Models\Company;
-use App\Models\User;
-use App\Models\Manufacturer;
-use App\Models\Supplier;
-use App\Models\Category;
-use App\Models\Depreciation;
-use App\Models\CustomFieldset;
-use App\Models\CustomField;
-use App\Models\Component;
 use App\Models\Accessory;
-use App\Models\Consumable;
 use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Category;
+use App\Models\Company;
+use App\Models\Component;
+use App\Models\Consumable;
+use App\Models\CustomField;
+use App\Models\CustomFieldset;
+use App\Models\Depreciation;
+use App\Models\Location;
+use App\Models\Manufacturer;
+use App\Models\Statuslabel;
+use App\Models\Supplier;
+use App\Models\User;
 use Crypt;
+use DB;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Auth;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,7 +30,8 @@ class Helper
 {
 
 
-    public static function parseEscapedMarkedown($str) {
+    public static function parseEscapedMarkedown($str)
+    {
         $Parsedown = new \Parsedown();
 
         if ($str) {
@@ -135,8 +137,9 @@ class Helper
         $categories = Category::orderBy('name', 'asc')
                 ->whereNull('deleted_at')
                 ->orderBy('name', 'asc');
-        if(!empty($category_type))
+        if (!empty($category_type)) {
             $categories = $categories->where('category_type', '=', $category_type);
+        }
         $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
         return $category_list;
     }
@@ -201,15 +204,23 @@ class Helper
         return $category_types;
     }
 
-    public static function usersList()
+    public static function usersList($company_id = null)
     {
-        $users_list =   array( '' => trans('general.select_user')) +
-                        Company::scopeCompanyables(User::where('deleted_at', '=', null))
-                        ->where('show_in_list','=',1)
-                        ->orderBy('last_name', 'asc')
-                        ->orderBy('first_name', 'asc')->get()
-                        ->lists('complete_name', 'id')->toArray();
-
+        $query =    User::where('deleted_at', '=', null)
+                    ->where('show_in_list', '=', 1)
+                    ->orderBy('last_name', 'asc')
+                    ->orderBy('first_name', 'asc');
+        if (Company::isFullMultipleCompanySupportEnabled()) {
+            if ($company_id != null) {
+                $query->where('company_id', $company_id);
+            } else { // If a company id wasn't explicitly specified, let's maintain traditional behavior.
+                Company::scopeCompanyables($query);
+            }
+        }
+        $users_list = array( '' => trans('general.select_user')) +
+                        $query->get()
+                        ->lists('complete_name', 'id')
+                        ->toArray();
         return $users_list;
     }
 

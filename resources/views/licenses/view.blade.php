@@ -57,7 +57,6 @@
                   <?php $count=1; ?>
                       @if ($license->licenseseats)
                         @foreach ($license->licenseseats as $licensedto)
-
                         <tr>
                             <td>Seat {{ $count }} </td>
                             <td>
@@ -376,10 +375,17 @@
                           <td>{{ $log->action_type }}</td>
 
                           <td>
-                              @if (($log->target) && ($log->target->id!='0'))
-                              <a href="{{ route('view/user', $log->target_id) }}">
-                              {{ $log->userlog->fullName() }}
-                              </a>
+                              @if ($log->target)
+                                @if ($log->target_type === \App\Models\User::class)
+                                  <a href="{{ route('view/user', $log->target_id) }}">
+                                  {{ $log->target->fullName() }}
+                                  </a>
+                                @elseif ($log->target_type === \App\Models\Asset::class)
+                                  <a href="{{ route('view/hardware', $log->target_id) }}">
+                                  {{ $log->target->showAssetName() }}
+                                  </a>
+                                @endif
+                              
 
                               @elseif ($log->action_type=='uploaded')
 

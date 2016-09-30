@@ -516,7 +516,7 @@ class AssetsController extends Controller
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = Helper::usersList();
+        $users_list = Helper::usersList($asset->company_id);
 
         return View::make('hardware/checkout', compact('asset'))->with('users_list', $users_list);
 

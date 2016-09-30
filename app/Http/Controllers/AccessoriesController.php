@@ -270,7 +270,7 @@ class AccessoriesController extends Controller
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = Helper::usersList();
+        $users_list = Helper::usersList($accessory->company_id);
 
         return View::make('accessories/checkout', compact('accessory'))->with('users_list', $users_list);
 
