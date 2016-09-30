@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Actionlog extends Model implements ICompanyableChild
 {
     use SoftDeletes;
-    use CompanyableChildTrait;
 
     protected $dates = [ 'deleted_at' ];
 
@@ -25,7 +24,8 @@ class Actionlog extends Model implements ICompanyableChild
 
     public function getCompanyableParents()
     {
-        return [ 'accessorylog', 'assetlog', 'licenselog', 'consumablelog' ];
+        return ['item'];
+        // return [''];
     }
 
     // Eloquent Relationships below
@@ -66,19 +66,9 @@ class Actionlog extends Model implements ICompanyableChild
         return $this->morphTo('target');
     }
 
-    public function childlogs()
-    {
-        return $this->hasMany('\App\Models\ActionLog', 'thread_id');
-    }
-
-    public function parentlog()
-    {
-        return $this->belongsTo('\App\Models\ActionLog', 'thread_id');
-    }
-
     /**
-       * Check if the file exists, and if it does, force a download
-       **/
+      * Check if the file exists, and if it does, force a download
+      **/
     public function get_src($type = 'assets')
     {
 
@@ -102,6 +92,7 @@ class Actionlog extends Model implements ICompanyableChild
             return false;
         }
     }
+
 
     /**
        * getListingOfActionLogsChronologicalOrder

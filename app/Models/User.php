@@ -201,7 +201,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function userlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'target_id')->orderBy('created_at', 'DESC')->withTrashed();
+        return $this->morphMany(Actionlog::class, 'target')->orderBy('created_at', 'DESC')->withTrashed();
     }
 
     /**
@@ -244,18 +244,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
     }
 
-    public function assetlog()
-    {
-        return $this->hasMany('\App\Models\Asset', 'id')->withTrashed();
-    }
-
     /**
      * Get uploads for this asset
      */
     public function uploads()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', User::class)
+        return $this->morphMany('\App\Models\Actionlog', 'target')
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');

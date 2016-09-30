@@ -8,6 +8,7 @@ use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\AssetModel;
 use App\Models\Company;
+use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\License;
 use App\Models\Location;
@@ -308,11 +309,7 @@ class ReportsController extends Controller
      */
     public function getActivityReportDataTable()
     {
-        $activitylogs = Actionlog::orderBy('created_at', 'DESC');
-
-        if (Input::has('search')) {
-            $activity = $activity->TextSearch(e(Input::get('search')));
-        }
+        $settings = Setting::getSettings();
 
         if (Input::has('offset')) {
             $offset = e(Input::get('offset'));
@@ -326,6 +323,52 @@ class ReportsController extends Controller
             $limit = 50;
         }
 
+        if (!$settings || $settings->full_multiple_companies_support == 0 || (\Auth::check() && \Auth::user()->isSuperUser())) {
+            $activitylogs = Actionlog::orderBy('created_at', 'DESC');
+            $activitylogs = $activitylogs->skip($offset)->take($limit)->get();
+        } else {
+            $assets = Company::scopeCompanyables(Asset::with('model', 'log', 'log.item', 'log.user'))->get();
+            // dd($assets);
+            $logs = array();
+            foreach($assets as $asset) {
+                if(!$asset->log) {
+                    continue;
+                }
+                $logs[] = $asset->log;
+            }
+
+            $accessories  = Company::scopeCompanyables(Accessory::with('log', 'log.item', 'log.user'))->get();
+            foreach($accessories as $accessory) {
+                if(!$accessory->log) {
+                    continue;
+                }
+                $logs[] = $accessory->log;
+            }
+
+            $consumables  = Company::scopeCompanyables(Consumable::with('log', 'log.item', 'log.user'))->get();
+            foreach($consumables as $consumable) {
+                if(!$consumable->log) {
+                    continue;
+                }
+                $logs[] = $consumable->log;
+            }
+
+            $licenses  = Company::scopeCompanyables(License::with('log', 'log.item', 'log.user'))->get();
+            foreach($licenses as $license) {
+                if(!$license->log) {
+                    continue;
+                }
+                $logs[] = $license->log();
+            }
+
+            $activitylogs = collect(array_flatten($logs))->sortByDesc('updated_at');
+            $activitylogs = $activitylogs->slice($offset)->take($limit);
+        }
+
+        if (Input::has('search')) {
+            $activity = $activity->TextSearch(e(Input::get('search')));
+        }
+
 
         $allowed_columns = ['created_at'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
@@ -333,7 +376,6 @@ class ReportsController extends Controller
 
 
         $activityCount = $activitylogs->count();
-        $activitylogs = $activitylogs->skip($offset)->take($limit)->get();
 
         $rows = array();
 
@@ -374,7 +416,7 @@ class ReportsController extends Controller
                 $activity_target = $activity->target;
             }
 
-            
+
             $rows[] = array(
                 'icon'          => $activity_icons,
                 'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
