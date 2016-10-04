@@ -39,7 +39,7 @@ final class Company extends Model
      */
     protected $fillable = ['name'];
 
-    private static function isFullMultipleCompanySupportEnabled()
+    public static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();
 

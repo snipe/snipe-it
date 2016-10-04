@@ -274,7 +274,7 @@ class ConsumablesController extends Controller
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = Helper::usersList();
+        $users_list = Helper::usersList($consumable->company_id);
 
         return View::make('consumables/checkout', compact('consumable'))->with('users_list', $users_list);
 
