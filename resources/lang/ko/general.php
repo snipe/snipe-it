@@ -127,6 +127,7 @@
     'remove_company'        => '공급자 연결 제거',
     'reports'				=> '보고서',
     'requested'				=> '요청됨',
+    'request_canceled'      => '요청 취소',
     'save'  				=> '저장',
     'select'				=> '선택',
     'search'				=> '찾기',

@@ -8,6 +8,7 @@ return array(
     'custom_format'             => 'Format Tambahan...',
     'encrypt_field'      	        => 'Enkripsi nilai kolom ini di database',
     'encrypt_field_help'      => 'PERINGATAN: Mengenkripsi kolom menjadikan tidak bisa ditemukan.',
+    'encrypted'      	        => 'Encrypted',
     'fieldset'      	        => 'Set Kolom',
     'qty_fields'      	      => 'Kolom Jumlah',
     'fieldsets'      	        => 'Kumpulan Set Kolom',
@@ -25,4 +26,5 @@ return array(
     'order'   		            => 'Urutan',
     'create_fieldset'         => 'Set Kolom Baru',
     'create_field'            => 'Tambah Kolom Ubahan',
+    'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',
 );

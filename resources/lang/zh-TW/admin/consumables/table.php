@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Consumable Name',
+    'title'      				=> '耗材名稱',
 );

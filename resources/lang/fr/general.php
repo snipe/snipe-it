@@ -127,6 +127,7 @@
     'remove_company'        => 'Retirer l\'association avec l\'organisation',
     'reports'				=> 'Rapports',
     'requested'				=> 'Demandé',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Sauvegarder',
     'select'				=> 'Sélectionner',
     'search'				=> 'Rechercher',

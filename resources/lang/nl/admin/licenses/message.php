@@ -23,7 +23,7 @@ return array(
         'error'   => 'Bestand(en) zijn niet geüpload. Probeer het opnieuw.',
         'success' => 'Bestand(en) zijn met succes geüpload.',
         'nofiles' => 'Je hebt geen bestanden geselecteerd om te uploaden, of het bestand wat je probeert te uploaden is te groot',
-        'invalidfiles' => 'Een of meer van uw bestanden is te groot of is een bestandstype dat niet is toegestaan. Toegestaande bestandstypen png, gif, jpg, doc, docx, pdf en txt.',
+        'invalidfiles' => 'Een van de bestanden is te groot of van een niet toegestaan bestandsformaat. Toegestane bestandsformaten zijn: png, gif, jpg, docx, pdf, txt, zip, rar en rtf.',
     ),
 
     'update' => array(

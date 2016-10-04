@@ -8,6 +8,7 @@ return array(
     'custom_format'             => 'Formato personalizado...',
     'encrypt_field'      	        => 'Encriptar valor deste campo na base de dados',
     'encrypt_field_help'      => 'AVISO: Criptografar um campo torna-o não pesquisável.',
+    'encrypted'      	        => 'Criptografado',
     'fieldset'      	        => 'Conjunto de campos',
     'qty_fields'      	      => 'Qtd de campos',
     'fieldsets'      	        => 'Conjuntos de campos',
@@ -25,4 +26,5 @@ return array(
     'order'   		            => 'Ordem',
     'create_fieldset'         => 'Novo conjunto de campos',
     'create_field'            => 'Novo conjunto de campos personalizado',
+    'value_encrypted'      	        => 'O valor deste campo é encriptado no banco de dados. Somente usuários administradores podem ver o valor descriptografado',
 );

@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Rapoarte',
     'requested'				=> 'Cereri',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Salveaza',
     'select'				=> 'Selectați',
     'search'				=> 'Căutare',

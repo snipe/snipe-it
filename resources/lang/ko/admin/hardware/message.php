@@ -37,9 +37,11 @@ return array(
     ),
 
     'import' => array(
-        'error'         => '몇몇 품목들을 정확하게 읽어오지 못했습니다.',
-        'errorDetail'   => '다음 품목들은 오류로 읽어오지 못했습니다.',
-        'success'       => "파일에서 읽어오기가 완료되었습니다",
+        'error'                 => '몇몇 품목들을 정확하게 읽어오지 못했습니다.',
+        'errorDetail'           => '다음 품목들은 오류로 읽어오지 못했습니다.',
+        'success'               => "파일에서 읽어오기가 완료되었습니다",
+        'file_delete_success'   => "파일 삭제가 완료되었습니다",
+        'file_delete_error'      => "파일을 삭제할 수 없습니다",
     ),
 
 
@@ -67,6 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> '자산을 불러오지 못했습니다. 재시도해 주십시오.',
         'success' 		=> '자산을 불러왔습니다.',
+        'canceled'      => '반출 요청이 취소되었습니다'
     )
 
 );

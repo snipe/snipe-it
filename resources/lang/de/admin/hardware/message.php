@@ -37,9 +37,11 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Einige Elemente wurden nicht korrekt importiert.',
-        'errorDetail'   => 'Die folgenden Elemente wurden aufgrund von Fehlern nicht importiert.',
-        'success'       => "Ihre Datei wurde importiert",
+        'error'                 => 'Einige Elemente wurden nicht korrekt importiert.',
+        'errorDetail'           => 'Die folgenden Elemente wurden aufgrund von Fehlern nicht importiert.',
+        'success'               => "Ihre Datei wurde importiert",
+        'file_delete_success'   => "Die Datei wurde erfolgreich gelöscht",
+        'file_delete_error'      => "Die Datei konnte nicht gelöscht werden",
     ),
 
 
@@ -67,6 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuchen Sie es erneut',
         'success' 		=> 'Asset erfolgreich angefordert.',
+        'canceled'      => 'Herausgeben erfolgreich abgebrochen'
     )
 
 );

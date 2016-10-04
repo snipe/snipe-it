@@ -8,6 +8,7 @@ return array(
     'custom_format'             => 'Benutzerdefiniertes Format...',
     'encrypt_field'      	        => 'Den Wert dieses Feldes in der Datenbank verschlüsseln',
     'encrypt_field_help'      => 'Warnung: Ein verschlüsseltes Feld kann nicht durchsucht werden.',
+    'encrypted'      	        => 'Verschlüsselt',
     'fieldset'      	        => 'Feldsatz',
     'qty_fields'      	      => 'Anzahl Felder',
     'fieldsets'      	        => 'Feldsätze',
@@ -25,4 +26,5 @@ return array(
     'order'   		            => 'Reihenfolge',
     'create_fieldset'         => 'Neuer Feldsatz',
     'create_field'            => 'Neues benutzerdefiniertes Feld',
+    'value_encrypted'      	        => 'Der Wert dieses Feldes ist in der Datenbank verschlüsselt. Nur Benutzer mit Administratorrechten können den entschlüsselten Wert anzeigen',
 );

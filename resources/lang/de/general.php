@@ -127,6 +127,7 @@
     'remove_company'        => 'Firmenzuordnung entfernen',
     'reports'				=> 'Berichte',
     'requested'				=> 'Angefragt',
+    'request_canceled'      => 'Anfrage abgebrochen',
     'save'  				=> 'Speichern',
     'select'				=> 'auswählen',
     'search'				=> 'Suche',

@@ -127,6 +127,7 @@
     'remove_company'        => 'Hapus Asosiasi Perusahaan',
     'reports'				=> 'Laporan',
     'requested'				=> 'Diminta',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Simpan',
     'select'				=> 'Pilih',
     'search'				=> 'Cari',

@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Asset Models',
     'update'				=> 'עדכון דגם הנכס',
     'view'					=> 'View Asset Model',
-    'update'				=> 'עדכון הדגם',
+    'update'				=> 'עדכון דגם הנכס',
     'clone'				=> 'שיבוט המודל',
     'edit'				=> 'עריכת מודל',
 );

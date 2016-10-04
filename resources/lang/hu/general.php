@@ -127,6 +127,7 @@
     'remove_company'        => 'Vállati kapcsolat megszüntetése',
     'reports'				=> 'Jelentések',
     'requested'				=> 'Kérve',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Mentés',
     'select'				=> 'Választ',
     'search'				=> 'Keresés',

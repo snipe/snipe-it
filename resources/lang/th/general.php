@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'รายงาน',
     'requested'				=> 'คำร้องขอ',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'บันทึก',
     'select'				=> 'เลือก',
     'search'				=> 'ค้นหา',

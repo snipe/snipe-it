@@ -127,6 +127,7 @@
     'remove_company'        => 'Удалить привязку компании',
     'reports'				=> 'Отчеты',
     'requested'				=> 'Запрошено',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Сохранить',
     'select'				=> 'Выбор',
     'search'				=> 'Поиск',

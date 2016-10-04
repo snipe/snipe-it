@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Laporan',
     'requested'				=> 'Requested',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Simpan',
     'select'				=> 'Select',
     'search'				=> 'Search',

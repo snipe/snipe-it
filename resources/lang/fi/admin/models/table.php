@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Laitemallit',
     'update'				=> 'Päivitä Laitemalli',
     'view'					=> 'Näytä Laitemalli',
-    'update'				=> 'Päivitä Malli',
+    'update'				=> 'Päivitä Laitemalli',
     'clone'				=> 'Monista Malli',
     'edit'				=> 'Muokkaa Mallia',
 );

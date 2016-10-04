@@ -131,6 +131,7 @@
     'remove_company'        => 'حذف انجمن شرکت',
     'reports'				=> 'گزارش‌ها',
     'requested'				=> 'در خواست شده',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'ذخیره کردن',
     'select'				=> 'انتخاب',
     'search'				=> 'جستوجو',

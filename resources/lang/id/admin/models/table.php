@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Model Aset',
     'update'				=> 'Perbarui Model Aset',
     'view'					=> 'Tampilkan Model Aset',
-    'update'				=> 'Pebarui Model',
+    'update'				=> 'Perbarui Model Aset',
     'clone'				=> 'Duplikat Model',
     'edit'				=> 'Sunting Model',
 );

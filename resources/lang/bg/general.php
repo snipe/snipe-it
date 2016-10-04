@@ -127,6 +127,7 @@
     'remove_company'        => 'Премахване на асоциация към компания',
     'reports'				=> 'Справки',
     'requested'				=> 'Изискан',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Запис',
     'select'				=> 'Избор',
     'search'				=> 'Търсене',

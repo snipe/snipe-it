@@ -127,6 +127,7 @@
     'remove_company'        => 'Fjern tilknytning til bedrift',
     'reports'				=> 'Rapporter',
     'requested'				=> 'Forespurt',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Lagre',
     'select'				=> 'Velg',
     'search'				=> 'Søk',

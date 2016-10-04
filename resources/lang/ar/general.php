@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'التقارير',
     'requested'				=> 'Requested',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'حفظ',
     'select'				=> 'Select',
     'search'				=> 'Search',

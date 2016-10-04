@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Product modellen',
     'update'				=> 'Wijzig product model',
     'view'					=> 'Bekijk product model',
-    'update'				=> 'Wijzig model',
+    'update'				=> 'Wijzig product model',
     'clone'				=> 'Kopieer model',
     'edit'				=> 'Bewerk model',
 );

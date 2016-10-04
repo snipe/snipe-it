@@ -37,9 +37,11 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Beberapa item tidak terimpor dengan benar.',
-        'errorDetail'   => 'Item berikut tidak terimpor karena ada kesalahan.',
-        'success'       => "Berkas Anda berhasil terimpor",
+        'error'                 => 'Beberapa item tidak terimpor dengan benar.',
+        'errorDetail'           => 'Item berikut tidak terimpor karena ada kesalahan.',
+        'success'               => "Berkas Anda berhasil terimpor",
+        'file_delete_success'   => "Your file has been been successfully deleted",
+        'file_delete_error'      => "The file was unable to be deleted",
     ),
 
 
@@ -67,6 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Aset gagal di minta, silahkan coba kembali',
         'success' 		=> 'Sukses meminta aset.',
+        'canceled'      => 'Checkout request successfully canceled'
     )
 
 );

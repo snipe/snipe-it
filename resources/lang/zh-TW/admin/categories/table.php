@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> '最終使用者許可協議',
     'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'parent'   					=> '父類',
+    'require_acceptance'      	=> '接受',
+    'title'      				=> '資產類別名稱',
 
 );

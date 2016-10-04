@@ -127,6 +127,7 @@
     'remove_company'        => '会社の団体を取り除く',
     'reports'				=> 'レポート',
     'requested'				=> '要求済',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> '保存',
     'select'				=> '選択',
     'search'				=> '検索',

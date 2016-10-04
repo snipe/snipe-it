@@ -36,9 +36,11 @@ return array(
     ),
 
     'import' => array(
-        'error'         => '某些字段没有正确导入',
-        'errorDetail'   => '以下项由于错误未被导入',
-        'success'       => "您的文件已被导入",
+        'error'                 => '某些字段没有正确导入',
+        'errorDetail'           => '以下项由于错误未被导入',
+        'success'               => "您的文件已被导入",
+        'file_delete_success'   => "Your file has been been successfully deleted",
+        'file_delete_error'      => "The file was unable to be deleted",
     ),
 
 
@@ -66,6 +68,7 @@ return array(
     'requests' => array(
         'error'   		=> '未能成功请求分配资产，请重试。',
         'success' 		=> '成功请求资产',
+        'canceled'      => 'Checkout request successfully canceled'
     )
 
 );

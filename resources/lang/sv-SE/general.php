@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Rapporter',
     'requested'				=> 'Requested',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Spara',
     'select'				=> 'Välj',
     'search'				=> 'Sök',
