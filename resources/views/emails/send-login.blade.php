@@ -1,16 +1,16 @@
 @extends('emails/layouts/default')
 
 @section('content')
-<p>Hello {{ $first_name }},</p>
+<p>{{ trans('mail.hello') }} {{ $first_name }},</p>
 
-<p>An administrator has created an account for you on the {{ \App\Models\Setting::getSettings()->site_name }} website. </p>
+<p>{{ trans('mail.admin_has_created', ['web' => \App\Models\Setting::getSettings()->site_name]) }} </p>
 
 <p>URL: <a href="{{ config('app.url') }}">{{ config('app.url') }}</a><br>
-Login: {{ $username }} <br>
-Password: {{ $password }}
+{{ trans('mail.login') }} {{ $username }} <br>
+{{ trans('mail.password') }} {{ $password }}
 </p>
 
-<p>Best regards,</p>
+<p>{{ trans('mail.best_regards') }}</p>
 
 <p>{{ \App\Models\Setting::getSettings()->site_name }}</p>
 @stop

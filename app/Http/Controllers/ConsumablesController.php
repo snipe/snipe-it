@@ -316,14 +316,7 @@ class ConsumablesController extends Controller
         'user_id' => $admin_user->id,
         'assigned_to' => e(Input::get('assigned_to'))));
 
-        $logaction = new Actionlog();
-        $logaction->consumable_id = $consumable->id;
-        $logaction->checkedout_to = $consumable->assigned_to;
-        $logaction->asset_type = 'consumable';
-        $logaction->asset_id = 0;
-        $logaction->location_id = $user->location_id;
-        $logaction->user_id = Auth::user()->id;
-        $logaction->note = e(Input::get('note'));
+        $logaction = $consumable->logCheckout(e(Input::get('note')));
 
         $settings = Setting::getSettings();
 
@@ -343,7 +336,7 @@ class ConsumablesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => 'Consumable <'.config('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -356,9 +349,6 @@ class ConsumablesController extends Controller
 
             }
         }
-
-
-        $log = $logaction->logaction('checkout');
 
         $consumable_user = DB::table('consumables_users')->where('assigned_to', '=', $consumable->assigned_to)->where('consumable_id', '=', $consumable->id)->first();
 
@@ -375,7 +365,8 @@ class ConsumablesController extends Controller
 
             Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Confirm consumable delivery');
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.Confirm_consumable_delivery'));
             });
         }
 

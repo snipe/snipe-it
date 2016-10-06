@@ -37,9 +37,11 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some items did not import correctly.',
-        'errorDetail'   => 'The following Items were not imported because of errors.',
-        'success'       => "Your file has been imported",
+        'error'                 => 'Some items did not import correctly.',
+        'errorDetail'           => 'The following Items were not imported because of errors.',
+        'success'               => "Your file has been imported",
+        'file_delete_success'   => "Your file has been been successfully deleted",
+        'file_delete_error'      => "The file was unable to be deleted",
     ),
 
 
@@ -67,6 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> 'L\'asset non è stato richiesto, si prega di riprovare',
         'success' 		=> 'Asset richiesto con successo.',
+        'canceled'      => 'Checkout request successfully canceled'
     )
 
 );

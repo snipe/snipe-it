@@ -127,6 +127,7 @@
     'remove_company'        => 'Rimuovi associazioni azienda',
     'reports'				=> 'Reports',
     'requested'				=> 'Richiesto',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Salva',
     'select'				=> 'Seleziona',
     'search'				=> 'Cerca',

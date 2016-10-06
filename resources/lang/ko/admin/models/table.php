@@ -11,7 +11,7 @@ return array(
     'title'					=> '자산 모델',
     'update'				=> '자산 모델 갱신',
     'view'					=> '자산 모델 보기',
-    'update'				=> '모델 갱신',
+    'update'				=> '자산 모델 갱신',
     'clone'				=> '모델 복제',
     'edit'				=> '모델 편집',
 );

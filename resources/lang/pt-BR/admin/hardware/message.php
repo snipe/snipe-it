@@ -36,9 +36,11 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some items did not import correctly.',
-        'errorDetail'   => 'The following Items were not imported because of errors.',
-        'success'       => "Your file has been imported",
+        'error'                 => 'Alguns itens não foram importados corretamente.',
+        'errorDetail'           => 'Os seguintes itens não foram importados devido a erros.',
+        'success'               => "O seu arquivo foi importado",
+        'file_delete_success'   => "O arquivo foi excluído com sucesso",
+        'file_delete_error'      => "Não foi possível excluir o arquivo",
     ),
 
 
@@ -52,7 +54,7 @@ return array(
         'error'   		=> 'Ativo não foi registrado, favor tentar novamente',
         'success' 		=> 'Ativo registrado com sucesso.',
         'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Esse recurso não está disponível para checkout!'
     ),
 
     'checkin' => array(
@@ -66,6 +68,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
         'success' 		=> 'Ativo solicitado com sucesso.',
+        'canceled'      => 'Checkout request successfully canceled'
     )
 
 );

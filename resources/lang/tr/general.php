@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Raporlar',
     'requested'				=> 'Requested',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Kaydet',
     'select'				=> 'Seç',
     'search'				=> 'Ara',

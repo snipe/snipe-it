@@ -23,7 +23,7 @@ return array(
         'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
         'success' => 'Failas (-ai) sėkmingai įkelti.',
         'nofiles' => 'Jūs nepasirinkote įkelti jokių failų arba failas, kurį ketinate įkelti yra per didelis',
-        'invalidfiles' => 'Vienas ar keli failai yra per didelis arba neleidžiamas šis failų formatas. primename, kad leidžiami sekantys formatai png, gif, jpg, doc, docx, pdf, txt.',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
     ),
 
     'update' => array(

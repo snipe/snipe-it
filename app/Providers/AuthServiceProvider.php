@@ -255,6 +255,18 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        $gate->define('components.checkout', function ($user) {
+            if (($user->hasAccess('components.checkout')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
+        $gate->define('components.checkout', function ($user) {
+            if (($user->hasAccess('components.checkout')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
         // Checks for some level of management
         $gate->define('components.manage', function ($user) {
             if (($user->hasAccess('components.edit')) || ($user->hasAccess('components.delete')) || ($user->hasAccess('components.checkout')) || ($user->hasAccess('admin'))) {

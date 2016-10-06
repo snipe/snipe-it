@@ -231,7 +231,7 @@ class AssetsController extends Controller
             $directory= public_path('uploads/assets/');
             // Check if the uploads directory exists.  If not, try to create it.
             if (!file_exists($directory)) {
-                mkdir($directory, 0755);
+                mkdir($directory, 0755, true);
             }
             $path = public_path('uploads/assets/'.$file_name);
             try {
@@ -407,7 +407,7 @@ class AssetsController extends Controller
             $directory= public_path('uploads/assets/');
             // Check if the uploads directory exists.  If not, try to create it.
             if (!file_exists($directory)) {
-                mkdir($directory, 0755);
+                mkdir($directory, 0755, true);
             }
 
             $file_name = str_random(25).".".$extension;
@@ -659,7 +659,7 @@ class AssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => strtoupper($logaction->asset_type).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
+                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -686,7 +686,8 @@ class AssetsController extends Controller
             if ((($asset->checkin_email()=='1')) && ($user) && (!config('app.lock_passwords'))) {
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->subject('Confirm Asset Checkin');
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
                 });
             }
 
@@ -839,7 +840,7 @@ class AssetsController extends Controller
 
         // Check if the uploads directory exists.  If not, try to create it.
         if (!file_exists($path)) {
-            mkdir($path, 0755);
+            mkdir($path, 0755, true);
         }
         if ($handle = opendir($path)) {
 
@@ -1086,6 +1087,8 @@ class AssetsController extends Controller
         $results = $csv->fetchAssoc();
         $item = array();
         $status = array();
+        $status['error'] = array();
+        $status['success'] = array();
 
 
         foreach($results as $row) {
@@ -1105,73 +1108,78 @@ class AssetsController extends Controller
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
                 $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
 
-                $asset = Asset::where('asset_tag','=',$asset_tag)->first();
-                $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
+                if ($asset = Asset::where('asset_tag','=',$asset_tag)->first()) {
 
-                $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format,$item[$asset_tag][$batch_counter]['name']);
-                $user = User::where('username','=',$base_username['username']);
-                $user_query = ' on username '.$base_username['username'];
+                    $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
 
-                if ($request->input('match_firstnamelastname')=='1') {
-                    $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname',$item[$asset_tag][$batch_counter]['name']);
-                    $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
-                    $user->orWhere('username','=',$firstnamedotlastname['username']);
-                    $user_query .= ', or on username '.$firstnamedotlastname['username'];
-                }
+                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format,$item[$asset_tag][$batch_counter]['name']);
+                    $user = User::where('username','=',$base_username['username']);
+                    $user_query = ' on username '.$base_username['username'];
 
-                if ($request->input('match_flastname')=='1') {
-                    $flastname = User::generateFormattedNameFromFullName('filastname',$item[$asset_tag][$batch_counter]['name']);
-                    $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
-                    $user->orWhere('username','=',$flastname['username']);
-                    $user_query .= ', or on username '.$flastname['username'];
-                }
-                if ($request->input('match_firstname')=='1') {
-                    $firstname = User::generateFormattedNameFromFullName('firstname',$item[$asset_tag][$batch_counter]['name']);
-                    $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
-                    $user->orWhere('username','=',$firstname['username']);
-                    $user_query .= ', or on username '.$firstname['username'];
-                }
-                if ($request->input('match_email')=='1') {
-                    if ($item[$asset_tag][$batch_counter]['email']=='') {
-                        $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
-                        $user->orWhere('username','=',$user_email);
-                        $user_query .= ', or on username '.$user_email;
+                    if ($request->input('match_firstnamelastname')=='1') {
+                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname',$item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
+                        $user->orWhere('username','=',$firstnamedotlastname['username']);
+                        $user_query .= ', or on username '.$firstnamedotlastname['username'];
                     }
-                }
 
-                // A matching user was found
-                if ($user = $user->first()) {
-                    $item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
+                    if ($request->input('match_flastname')=='1') {
+                        $flastname = User::generateFormattedNameFromFullName('filastname',$item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
+                        $user->orWhere('username','=',$flastname['username']);
+                        $user_query .= ', or on username '.$flastname['username'];
+                    }
+                    if ($request->input('match_firstname')=='1') {
+                        $firstname = User::generateFormattedNameFromFullName('firstname',$item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
+                        $user->orWhere('username','=',$firstname['username']);
+                        $user_query .= ', or on username '.$firstname['username'];
+                    }
+                    if ($request->input('match_email')=='1') {
+                        if ($item[$asset_tag][$batch_counter]['email']=='') {
+                            $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
+                            $user->orWhere('username','=',$user_email);
+                            $user_query .= ', or on username '.$user_email;
+                        }
+                    }
 
-                    $status['success'][] = 'Found user '.Helper::array_smart_fetch($row, "name").$user_query;
-
-                    if ($asset) {
-
+                    // A matching user was found
+                    if ($user = $user->first()) {
+                        $item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
                         $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
                         Actionlog::firstOrCreate(array(
-                            'asset_id' => $asset->id,
-                            'asset_type' => 'hardware',
-                            'user_id' =>  Auth::user()->id,
-                            'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
-                            'checkedout_to' => $item[$asset_tag][$batch_counter]['user_id'],
-                            'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
-                            'action_type'   => 'checkout'
+                                'item_id' => $asset->id,
+                                'item_type' => Asset::class,
+                                'user_id' =>  Auth::user()->id,
+                                'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
+                                'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
+                                'target_type' => User::class,
+                                'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
+                                'action_type'   => 'checkout',
                             )
                         );
 
                         $asset->assigned_to = $user->id;
-                        $asset->save();
+
+                        if ($asset->save()) {
+                            $status['success'][]['asset'][$asset_tag]['msg'] = 'Asset successfully matched for '.Helper::array_smart_fetch($row, "name").$user_query.' on '.$item[$asset_tag][$batch_counter]['checkout_date'];
+                        } else {
+                            $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset and user was matched but could not be saved.';
+                        }
 
                     } else {
-                        $status['error'][] = 'Asset does not exist so no checkin log was created.';
+                        $item[$asset_tag][$batch_counter]['checkedout_to'] = null;
+                        $status['error'][]['user'][Helper::array_smart_fetch($row, "name")]['msg'] = 'User does not exist so no checkin log was created.';
                     }
 
-
                 } else {
-                    $item[$asset_tag][$batch_counter]['checkedout_to'] = null;
-                    $status['error'][] = 'No matching user for '.Helper::array_smart_fetch($row, "name");
+                    $item[$asset_tag][$batch_counter]['asset_id'] = null;
+                    $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset does not exist so no match was attempted.';
                 }
+
+
+
 
             }
         }
@@ -1183,18 +1191,18 @@ class AssetsController extends Controller
                 $next = $x + 1;
 
                 // Only do this if a matching user was found
-                if ($asset_batch[$x]['checkedout_to']!='') {
+                if ((array_key_exists('checkedout_to',$asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
 
                     if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next,$asset_batch))) {
                         $checkin_date = Carbon::parse($asset_batch[$next]['checkout_date'])->subDay(1)->format('Y-m-d H:i:s');
                         $asset_batch[$x]['real_checkin'] = $checkin_date;
 
                         Actionlog::firstOrCreate(array(
-                                'asset_id' => $asset_batch[$x]['asset_id'],
-                                'asset_type' => 'hardware',
+                                'item_id' => $asset_batch[$x]['asset_id'],
+                                'item_type' => Asset::class,
                                 'user_id' => Auth::user()->id,
                                 'note' => 'Checkin imported by ' . Auth::user()->fullName() . ' from history importer',
-                                'checkedout_to' => null,
+                                'target_id' => null,
                                 'created_at' => $checkin_date,
                                 'action_type' => 'checkin'
                             )
@@ -1272,15 +1280,8 @@ class AssetsController extends Controller
                 $upload_success = $file->move($destinationPath, $filename);
 
                 //Log the deletion of seats to the log
-                $logaction = new Actionlog();
-                $logaction->asset_id = $asset->id;
-                $logaction->asset_type = 'hardware';
-                $logaction->user_id = Auth::user()->id;
-                $logaction->note = e(Input::get('notes'));
-                $logaction->checkedout_to =  null;
-                $logaction->created_at =  date("Y-m-d H:i:s");
-                $logaction->filename =  $filename;
-                $log = $logaction->logaction('uploaded');
+                $asset->logUpload($filename, e(Input::get('notes')));
+
             }
         } else {
             return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
@@ -1537,8 +1538,8 @@ class AssetsController extends Controller
                     ->update($update_array)) {
 
                         $logaction = new Actionlog();
-                        $logaction->asset_id = $key;
-                        $logaction->asset_type = 'hardware';
+                        $logaction->item_type = Asset::class;
+                        $logaction->item_id = $key;
                         $logaction->created_at =  date("Y-m-d H:i:s");
 
                         if (Input::has('rtd_location_id')) {
@@ -1595,8 +1596,8 @@ class AssetsController extends Controller
                 ->update($update_array)) {
 
                     $logaction = new Actionlog();
-                    $logaction->asset_id = $asset->id;
-                    $logaction->asset_type = 'hardware';
+                    $logaction->item_type = Asset::class;
+                    $logaction->item_id = $asset->id;
                     $logaction->created_at =  date("Y-m-d H:i:s");
                     $logaction->user_id = Auth::user()->id;
                     $log = $logaction->logaction('deleted');
@@ -1676,10 +1677,6 @@ class AssetsController extends Controller
             case 'Deployed':
                 $assets->Deployed();
                 break;
-            default:
-                $assets->NotArchived();
-                break;
-
         }
 
         if ($request->has('status_id')) {
@@ -1804,7 +1801,7 @@ class AssetsController extends Controller
             'model_number'  => ($asset->model && $asset->model->modelno) ? (string)$asset->model->modelno : '',
             'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
             'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
-            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', e($asset->defaultLoc->name)) : ''),
+            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
             'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
             'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',

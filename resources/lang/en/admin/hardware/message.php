@@ -69,6 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Asset was not requested, please try again',
         'success' 		=> 'Asset requested successfully.',
+        'canceled'      => 'Checkout request successfully canceled'
     )
 
 );

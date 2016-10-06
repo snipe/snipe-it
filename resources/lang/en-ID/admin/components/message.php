@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponen tidak ada.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponen belum dibuat, silahkan coba lagi.',
+        'success' => 'Komponen berhasil dibuat.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponen gagal diubah, silahkan coba lagi',
+        'success' => 'Komponen berhasil diubah.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Anda yakin akan mengahpus komponen ini?',
+        'error'   => 'Ada masalah untuk hapus komponen, silahkan coba kembali.',
+        'success' => 'Komponen berhasil dihapus.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponen tidak bisa dikeluarkan, silahkan coba kembali',
+        'success' 		=> 'Komponen berhasil dikeluarkan.',
+        'user_does_not_exist' => 'Pengguna tidak cocok. Silahkan coba lagi.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponen tidak bisa dimasukan, silahkan coba lagi',
+        'success' 		=> 'Komponen berhasil dimasukan.',
+        'user_does_not_exist' => 'Pengguna tidak cocok. Silahkan coba lagi.'
     )
 
 

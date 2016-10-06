@@ -309,14 +309,7 @@ class AccessoriesController extends Controller
         'user_id' => Auth::user()->id,
         'assigned_to' => e(Input::get('assigned_to'))));
 
-        $logaction = new Actionlog();
-        $logaction->accessory_id = $accessory->id;
-        $logaction->asset_id = 0;
-        $logaction->checkedout_to = $accessory->assigned_to;
-        $logaction->asset_type = 'accessory';
-        $logaction->location_id = $user->location_id;
-        $logaction->user_id = Auth::user()->id;
-        $logaction->note = e(Input::get('note'));
+        $logaction = $accessory->logCheckout(e(Input::get('note')));
 
 
 
@@ -340,11 +333,11 @@ class AccessoriesController extends Controller
                 'fields' => [
                   [
                   'title' => 'Checked Out:',
-                  'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                  'value' => 'Accessory <'.config('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                   ],
                   [
                       'title' => 'Note:',
-                      'value' => e($logaction->note)
+                      'value' => e(Input::get('note'))
                   ],
                 ]
                 ])->send('Accessory Checked Out');
@@ -354,9 +347,6 @@ class AccessoriesController extends Controller
 
         }
 
-
-
-        $log = $logaction->logaction('checkout');
 
         $accessory_user = DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
@@ -375,7 +365,8 @@ class AccessoriesController extends Controller
 
             Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Confirm accessory delivery');
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.Confirm_accessory_delivery'));
             });
         }
 
@@ -435,20 +426,13 @@ class AccessoriesController extends Controller
             return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
-        $logaction = new Actionlog();
-        $logaction->checkedout_to = e($accessory_user->assigned_to);
+        $logaction = $accessory->logCheckin(e(Input::get('note')));
         $return_to = e($accessory_user->assigned_to);
         $admin_user = Auth::user();
 
 
       // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-
-            $logaction->accessory_id = e($accessory->id);
-            $logaction->location_id = null;
-            $logaction->asset_type = 'accessory';
-            $logaction->user_id = e($admin_user->id);
-            $logaction->note = e(Input::get('note'));
 
             $settings = Setting::getSettings();
 
@@ -469,7 +453,7 @@ class AccessoriesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked In:',
-                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.config('app.url').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.config('app.url').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.config('app.url').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -484,9 +468,6 @@ class AccessoriesController extends Controller
                 }
 
             }
-
-
-            $log = $logaction->logaction('checkin from');
 
             if (!is_null($accessory_user->assigned_to)) {
                 $user = User::find($accessory_user->assigned_to);
@@ -503,7 +484,8 @@ class AccessoriesController extends Controller
 
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->subject('Confirm Accessory Checkin');
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                    $m->subject(trans('mail.Confirm_Accessory_Checkin'));
                 });
             }
 

@@ -66,7 +66,7 @@ class SendExpirationAlerts extends Command
             $asset_data['email_content'] .= '<td><a href="'.config('app.url').'/hardware/'.e($asset->id).'/view">';
             $asset_data['email_content'] .= $asset->showAssetName().'</a></td><td>'.e($asset->asset_tag).'</td>';
             $asset_data['email_content'] .= '<td>'.e($asset->warrantee_expires()).'</td>';
-            $asset_data['email_content'] .= '<td>'.$difference.' days</td>';
+            $asset_data['email_content'] .= '<td>'.$difference.' '.trans('mail.days').'</td>';
             $asset_data['email_content'] .= '<td>'.($asset->supplier ? e($asset->supplier->name) : '').'</td>';
             $asset_data['email_content'] .= '<td>'.($asset->assigneduser ? e($asset->assigneduser->fullName()) : '').'</td>';
             $asset_data['email_content'] .= '</tr>';
@@ -100,17 +100,21 @@ class SendExpirationAlerts extends Command
 
 
             if (count($expiring_assets) > 0) {
+                $this->info('Report sent to '.Setting::getSettings()->alert_email);
                 \Mail::send('emails.expiring-assets-report', $asset_data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
-                    $m->subject('Expiring Assets Report');
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                    $m->subject(trans('mail.Expiring_Assets_Report'));
                 });
 
             }
 
             if (count($expiring_licenses) > 0) {
+                $this->info('Report sent to '.Setting::getSettings()->alert_email);
                 \Mail::send('emails.expiring-licenses-report', $license_data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
-                    $m->subject('Expiring Licenses Report');
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                    $m->subject(trans('mail.Expiring_Licenses_Report'));
                 });
 
             }

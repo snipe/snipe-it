@@ -127,6 +127,7 @@
     'remove_company'        => 'Panaikinti kompanijos asociaciją',
     'reports'				=> 'Ataskaitos',
     'requested'				=> 'Užklausta',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Išsaugoti',
     'select'				=> 'Pasirinkite',
     'search'				=> 'Ieškoti',

@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Reporty',
     'requested'				=> 'Požadováno',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Uložit',
     'select'				=> 'Zvolit',
     'search'				=> 'Hledat',

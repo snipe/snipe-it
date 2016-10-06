@@ -23,7 +23,7 @@ return array(
         'error'   => 'Soubor(y) se nepodařilo nahrát. Prosím zkuste to znovu.',
         'success' => 'File(s) successfully uploaded.',
         'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
     ),
 
     'update' => array(

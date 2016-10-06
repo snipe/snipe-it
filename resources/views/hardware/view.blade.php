@@ -513,26 +513,41 @@
                       <tr>
                         <td>{{ $log->created_at }}</td>
                         <td>
-                            @if (isset($log->adminlog))
-                            {{ $log->adminlog->fullName() }}
-                            @else
-                            Deleted Admin
+                            @if ($log->action_type != 'requested')
+                                @if (isset($log->user))
+                                    {{ $log->user->fullName() }}
+                                @else
+                                    Deleted Admin
+                                @endif
                             @endif
                         </td>
                         <td>{{ $log->action_type }}</td>
                         <td>
-                          @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
+                          @if ($log->action_type=='uploaded')
 
-                            @if ($log->userlog)
+                            {{ $log->filename }}
+                          @elseif ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
 
-                              @if ($log->userlog->deleted_at=='')
-                                <a href="{{ route('view/user', $log->checkedout_to) }}">
-                                {{ $log->userlog->fullName() }}
+
+                            @if ($log->target instanceof \App\Models\User)
+
+                              @if ($log->target->deleted_at=='')
+                                <a href="{{ route('view/user', $log->target_id) }}">
+                                {{ $log->target->fullName() }}
                                 </a>
 
                               @else
-                                <del>{{ $log->userlog->fullName() }}</del>
+                                <del>{{ $log->target->fullName() }}</del>
                               @endif
+                            @elseif($log->target instanceof \App\Models\Asset) 
+                              @if ($log->target->deleted_at=='')
+                                <a href="{{ route('view/hardware', $log->target_id) }}">
+                                {{ $log->target->showAssetName() }}
+                                </a>
+
+                              @else
+                                <del>{{ $log->target->showAssetName() }}</del>
+                              @endif                         
                             @else
                               Deleted User
                             @endif

@@ -349,13 +349,7 @@ class ComponentsController extends Controller
         'assigned_qty' => e(Input::get('assigned_qty')),
         'asset_id' => $asset_id));
 
-        $logaction = new Actionlog();
-        $logaction->component_id = $component->id;
-        $logaction->asset_id = $asset_id;
-        $logaction->asset_type = 'component';
-        $logaction->location_id = $asset->location_id;
-        $logaction->user_id = Auth::user()->id;
-        $logaction->note = e(Input::get('note'));
+        $logaction = $component->logCheckout(e(Input::get('note')), $asset_id);
 
         $settings = Setting::getSettings();
 
@@ -375,7 +369,7 @@ class ComponentsController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/components/'.$component->id.'/view'.'|'.$component->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.config('app.url').'/admin/components/'.$component->id.'/view'.'|'.$component->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -388,9 +382,6 @@ class ComponentsController extends Controller
 
             }
         }
-
-
-        $log = $logaction->logaction('checkout');
 
       // Redirect to the new component page
         return redirect()->to("admin/components")->with('success', trans('admin/components/message.checkout.success'));

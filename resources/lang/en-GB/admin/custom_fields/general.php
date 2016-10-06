@@ -8,6 +8,7 @@ return array(
     'custom_format'             => 'Custom format...',
     'encrypt_field'      	        => 'Encrypt the value of this field in the database',
     'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
+    'encrypted'      	        => 'Encrypted',
     'fieldset'      	        => 'Fieldset',
     'qty_fields'      	      => 'Qty Fields',
     'fieldsets'      	        => 'Fieldsets',
@@ -25,4 +26,5 @@ return array(
     'order'   		            => 'Order',
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'New Custom Field',
+    'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',
 );

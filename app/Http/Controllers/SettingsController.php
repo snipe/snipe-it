@@ -52,29 +52,18 @@ class SettingsController extends Controller
 
         $protocol = array_key_exists('HTTPS', $_SERVER) && ( $_SERVER['HTTPS'] == "on") ? 'https://' : 'http://';
 
-
-        $pageURL = $protocol;
-        if ($_SERVER["SERVER_PORT"] != "80") {
-            $main_page = $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"];
-            $pageURL .= $main_page.$_SERVER["REQUEST_URI"];
-        } else {
-            $main_page = $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-            $pageURL .= $main_page;
+        $host = $_SERVER['SERVER_NAME'];
+        if (($protocol === 'http://' && $_SERVER['SERVER_PORT'] != '80') || ($protocol === 'https://' && $_SERVER['SERVER_PORT'] != '443')) {
+          $host .= ':' . $_SERVER['SERVER_PORT'];
         }
+        $pageURL = $protocol . $host . $_SERVER['REQUEST_URI'];
 
-        $start_settings['env_location'] = $pageURL.'../.env';
+        $start_settings['url_valid'] = (config('app.url').'/setup' === $pageURL);
 
+        $start_settings['url_config'] = config('app.url');
+        $start_settings['real_url'] = $pageURL;
 
-        if (config('app.url').'/setup'!=$pageURL) {
-            $start_settings['url_valid']= false;
-        } else {
-            $start_settings['url_valid']= true;
-        }
-
-        $start_settings['url_config']= config('app.url');
-        $start_settings['real_url']= $pageURL;
-
-        $exposed_env = @file_get_contents($main_page.'/.env');
+        $exposed_env = @file_get_contents($protocol . $host.'/.env');
 
         if ($exposed_env) {
             $start_settings['env_exposed'] = true;
@@ -147,7 +136,8 @@ class SettingsController extends Controller
         try {
             Mail::send('emails.test', [], function ($m) {
                 $m->to(config('mail.from.address'), config('mail.from.name'));
-                $m->subject('Test Email from Snipe-IT');
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.test_email'));
             });
             return 'success';
         } catch (Exception $e) {
@@ -195,11 +185,12 @@ class SettingsController extends Controller
         } else {
             $user->save();
             $settings->save();
-            
+
             if (Input::get('email_creds')=='1') {
                 Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
-                    $m->subject('Your Snipe-IT credentials');
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                    $m->subject(trans('mail.your_credentials'));
                 });
             }
 
@@ -323,7 +314,7 @@ class SettingsController extends Controller
                 $setting->logo = $file_name;
             }
         }
-        
+
 
         if (config('app.lock_passwords')==false) {
             $setting->site_name = e(Input::get('site_name'));
@@ -482,7 +473,7 @@ class SettingsController extends Controller
 
             }
             closedir($handle);
-            $files = array_reverse($files);
+            rsort($files);
         }
 
 

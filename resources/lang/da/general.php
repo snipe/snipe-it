@@ -127,6 +127,7 @@
     'remove_company'        => 'Fjern association med selskab',
     'reports'				=> 'Rapporter',
     'requested'				=> 'Requested',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Gem',
     'select'				=> 'Select',
     'search'				=> 'Search',

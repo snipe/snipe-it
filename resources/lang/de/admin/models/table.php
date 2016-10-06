@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Asset Modelle',
     'update'				=> 'Asset Modell aktualisieren',
     'view'					=> 'Asset Modell ansehen',
-    'update'				=> 'Modell aktualisieren',
+    'update'				=> 'Asset Modell aktualisieren',
     'clone'				=> 'Modell duplizieren',
     'edit'				=> 'Modell bearbeiten',
 );

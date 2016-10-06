@@ -64,39 +64,39 @@
         public function up()
         {
 
-            if (!Schema::hasColumn('asset_logs', 'thread_id')) {
+            // if (!Schema::hasColumn('asset_logs', 'thread_id')) {
 
-                Schema::table( 'asset_logs', function ( Blueprint $table ) {
+            //     Schema::table( 'asset_logs', function ( Blueprint $table ) {
 
-                    $table->integer( 'thread_id' )
-                          ->nullable()
-                          ->default( null );
-                    $table->index( 'thread_id' );
-                } );
-            }
+            //         $table->integer( 'thread_id' )
+            //               ->nullable()
+            //               ->default( null );
+            //         $table->index( 'thread_id' );
+            //     } );
+            // }
 
-            $this->actionlog = new App\Models\Actionlog();
-            $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
+            // $this->actionlog = new App\Models\Actionlog();
+            // $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
 
-            foreach ($this->assetLogs as $assetLog) {
+            // foreach ($this->assetLogs as $assetLog) {
 
-                if ($this->hasAssetChanged( $assetLog )) {
-                    $this->resetCurrentAssetInformation( $assetLog );
-                }
+            //     if ($this->hasAssetChanged( $assetLog )) {
+            //         $this->resetCurrentAssetInformation( $assetLog );
+            //     }
 
-                if ($this->hasBegunNewChain( $assetLog )) {
-                    $this->startOfCurrentThread = false;
-                    continue;
-                }
+            //     if ($this->hasBegunNewChain( $assetLog )) {
+            //         $this->startOfCurrentThread = false;
+            //         continue;
+            //     }
 
-                $this->updateAssetLogWithThreadInformation( $assetLog );
+            //     $this->updateAssetLogWithThreadInformation( $assetLog );
 
-                if ($this->hasReachedEndOfChain( $assetLog )
-                ) {
-                    $this->clearCurrentAssetInformation();
-                }
+            //     if ($this->hasReachedEndOfChain( $assetLog )
+            //     ) {
+            //         $this->clearCurrentAssetInformation();
+            //     }
 
-            }
+            // }
         }
 
 

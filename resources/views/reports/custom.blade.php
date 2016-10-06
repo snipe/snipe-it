@@ -42,6 +42,20 @@
           </div>
 
         <div class="checkbox col-md-12">
+          <label>
+            {{ Form::checkbox('company_name', '1') }}
+            {{ trans('general.company') }}
+          </label>
+        </div>
+
+        <div class="checkbox col-md-12">
+          <label>
+            {{ Form::checkbox('company_name', '1') }}
+            {{ trans('general.company') }}
+          </label>
+        </div>
+
+        <div class="checkbox col-md-12">
         	<label>
         	{{ Form::checkbox('asset_tag', '1') }}
             {{ trans('general.asset_tag') }}

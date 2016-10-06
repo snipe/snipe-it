@@ -1,6 +1,7 @@
 <?php
-use App\Models\Statuslabel;
+use App\Models\CheckoutRequest;
 use App\Models\Location;
+use App\Models\Statuslabel;
 
 /*
 |--------------------------------------------------------------------------
@@ -388,6 +389,14 @@ Route::group(
 
 Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () {
 
+    Route::get('requests',
+        // foreach( CheckoutRequest::with('user')->get() as $requestedItem) {
+        //     echo $requestedItem->user->username . ' requested ' . $requestedItem->requestedItem->name;
+            [
+            'as' => 'requests',
+            'middleware' => 'authorize:admin',
+            'uses' => 'ViewAssetsController@getRequestedIndex'
+            ]);
     # Licenses
     Route::group([ 'prefix' => 'licenses', 'middleware'=>'authorize:licenses.view' ], function () {
 
@@ -858,6 +867,11 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
         [ 'as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset' ]
     );
 
+    Route::post(
+        'request/{itemType}/{itemId}',
+        [ 'as' => 'account/request-item', 'uses' => 'ViewAssetsController@getRequestItem']
+    );
+
     # Account Dashboard
     Route::get('/', [ 'as' => 'account', 'uses' => 'ViewAssetsController@getIndex' ]);
 
@@ -910,6 +924,12 @@ Route::group(['middleware' => ['web','auth','authorize:reports.view']], function
         'reports/activity',
         [ 'as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport' ]
     );
+
+    Route::get(
+        'reports/activity/json',
+        [ 'as' => 'api.activity.list', 'uses' => 'ReportsController@getActivityReportDataTable' ]
+    );
+    
     Route::get(
         'reports/unaccepted_assets',
         [ 'as' => 'reports/unaccepted_assets', 'uses' => 'ReportsController@getAssetAcceptanceReport' ]

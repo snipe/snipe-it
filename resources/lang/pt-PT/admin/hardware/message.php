@@ -37,9 +37,11 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some items did not import correctly.',
-        'errorDetail'   => 'The following Items were not imported because of errors.',
-        'success'       => "Your file has been imported",
+        'error'                 => 'Alguns itens não foram importados corretamente.',
+        'errorDetail'           => 'Os seguintes itens não foram importados devido a erros.',
+        'success'               => "O seu ficheiro foi importado",
+        'file_delete_success'   => "Your file has been been successfully deleted",
+        'file_delete_error'      => "The file was unable to be deleted",
     ),
 
 
@@ -53,7 +55,7 @@ return array(
         'error'   		=> 'Não foi possível alocar o artigo, por favor tente novamente',
         'success' 		=> 'Artigo alocado com sucesso.',
         'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Esse recurso não está disponível para checkout!'
     ),
 
     'checkin' => array(
@@ -67,6 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
         'success' 		=> 'Ativo solicitado com sucesso.',
+        'canceled'      => 'Checkout request successfully canceled'
     )
 
 );

@@ -127,6 +127,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Các báo cáo',
     'requested'				=> 'Đã yêu cầu',
+    'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Lưu',
     'select'				=> 'Chọn',
     'search'				=> 'Tìm kiếm',
