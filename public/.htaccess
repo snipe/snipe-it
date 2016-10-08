@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+		RewriteBase /snipe-it
 
     # Uncomment these two lines to force SSL redirect
     # RewriteCond %{HTTPS} off

@@ -40,7 +40,7 @@
     'consumable'			=> 'Verbrauchsmaterial',
     'consumables'			=> 'Verbrauchsmaterialien',
     'country'  				=> 'Land',
-    'create'				=> 'Create Location',
+    'create'				=> 'Neu Erstellen',
     'created_asset'			=> 'Asset angelegt',
     'created_at' 			=> 'Erstellt am',
     'currency'  			=> '€', // this is deprecated
@@ -167,7 +167,7 @@
     'welcome'				=> 'Wilkommen, :name',
     'years'					=> 'Jahre',
     'yes' 					=> 'Ja',
-    'zip'  					=> 'Postal Code',
+    'zip'  					=> 'Postleitzahl',
     'noimage'					=> 'Kein Bild hochgeladen oder kein Bild gefunden.',
     'token_expired'             => 'Ihre Formularsitzung ist abgelaufen. Bitte versuchen sie es erneut.',
     ];
