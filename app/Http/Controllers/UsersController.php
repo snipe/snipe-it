@@ -81,6 +81,7 @@ class UsersController extends Controller
 
         $permissions = config('permissions');
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+        $permissions = $this->filterDisplayable($permissions);
 
         $location_list = Helper::locationsList();
         $manager_list = Helper::managerList();
