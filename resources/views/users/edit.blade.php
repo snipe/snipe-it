@@ -39,7 +39,11 @@
       flex-direction:column;
     }
 
-    .permissions.table > thead, .permissions.table > tbody, .permissions.table > tbody+tbody {
+    .permissions.table > thead, .permissions.table > tbody {
+      margin: 15px;
+      margin-top: 0px;
+    }
+    .permissions.table > tbody+tbody {
       margin: 15px;
     }
     .header-row {
@@ -60,6 +64,10 @@
     }
     table, tbody {
       border: 1px solid #ccc;
+    }
+    
+    .header-name {
+      cursor: pointer;
     }
 
 </style>
@@ -389,7 +397,7 @@
             @foreach ($permissions as $area => $permissionsArray)
               <tbody class="permissions-group">
               <tr class="header-row permissions-row">
-                <td class="col-md-2">
+                <td class="col-md-2 header-name">
                   <h3>{{ $area }}</h3>
                 </td>
                 <td class="col-md-1 permissions-item">
@@ -476,6 +484,10 @@ $('tr.header-row input:radio').click(function() {
     $(this).find('td input:radio[value='+value+']').prop("checked", true);
   })
 });
+
+$('.header-name').click(function() {
+  $(this).parent().nextUntil('tr.header-row').slideToggle(500);
+})
 </script>
 
 <script src="{{ asset('assets/js/pGenerator.jquery.js') }}"></script>
