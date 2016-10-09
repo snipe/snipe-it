@@ -30,6 +30,38 @@
       color: #555555;
       cursor:text;
     }
+    table.permissions {
+      display:flex;
+      flex-direction: column;
+    }
+    tbody.permissions-group {
+      display:flex;
+      flex-direction:column;
+    }
+
+    .permissions.table > thead, .permissions.table > tbody, .permissions.table > tbody+tbody {
+      margin: 15px;
+    }
+    .header-row {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .header-row h3 {
+      margin:0px;
+    }
+    .permissions-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .table > tbody > tr > td.permissions-item {
+      padding: 1px;
+      padding-left: 8px;
+    }
+    table, tbody {
+      border: 1px solid #ccc;
+    }
+
 </style>
 
 <div class="row">
@@ -75,16 +107,16 @@
             <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
             <div class="col-md-8{{  (\App\Helpers\Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
               @if ($user->ldap_import!='1')
-                <input 
-                  class="form-control" 
-                  type="text" 
-                  name="username" 
-                  id="username" 
+                <input
+                  class="form-control"
+                  type="text"
+                  name="username"
+                  id="username"
                   value="{{ Input::old('username', $user->username) }}"
-                  autocomplete="false" 
-                  readonly 
+                  autocomplete="false"
+                  readonly
                   onfocus="this.removeAttribute('readonly');"
-                  {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} 
+                  {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                 >
                 @if (config('app.lock_passwords') && ($user->id))
                   <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
@@ -104,8 +136,8 @@
             </label>
             <div class="col-md-5{{  (\App\Helpers\Helper::checkIfRequired($user, 'password')) ? ' required' : '' }}">
               @if ($user->ldap_import!='1')
-                <input 
-                  type="password" 
+                <input
+                  type="password"
                   name="password"
                   class="form-control"
                   id="password"
@@ -142,7 +174,7 @@
               class="form-control"
               value=""
               autocomplete="off"
-              {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} 
+              {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
               >
               @if (config('app.lock_passwords') && ($user->id))
               <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
@@ -206,7 +238,7 @@
                 type="text"
                 name="employee_num"
                 id="employee_num"
-                value="{{ Input::old('employee_num', $user->employee_num) }}" 
+                value="{{ Input::old('employee_num', $user->employee_num) }}"
               />
               {!! $errors->first('employee_num', '<span class="alert-msg">:message</span>') !!}
             </div>
@@ -345,53 +377,64 @@
                 <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
             @endif
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped permissions">
           <thead>
-            <tr>
+            <tr class="permissions-row">
               <th class="col-md-2"><span class="line"></span>Permission</th>
               <th class="col-md-1"><span class="line"></span>Grant</th>
               <th class="col-md-1"><span class="line"></span>Deny</th>
               <th class="col-md-1"><span class="line"></span>Inherit</th>
             </tr>
           </thead>
-            {{-- @foreach ($permissions as $area => $permission) --}}
             @foreach ($permissions as $area => $permissionsArray)
-            {{-- <tr><td class="col-md-5"><h3>{{ $area }}</h3></td></tr> --}}
-              {{-- @for ($i = 0; $i < count($permission); $i++) --}}
-              <tbody>
+              <tbody class="permissions-group">
+              <tr class="header-row permissions-row">
+                <td class="col-md-2">
+                  <h3>{{ $area }}</h3>
+                </td>
+                <td class="col-md-1 permissions-item">
+                    {{ Form::radio("$area", '1',false,['value'=>"grant"]) }}
+                  </td>
+                  <td class="col-md-1 permissions-item">
+                    {{ Form::radio("$area", '-1',false,['value'=>"deny"]) }}
+                  </td>
+                  <td class="col-md-1 permissions-item">
+                    {{ Form::radio("$area", '0',false,['value'=>"inherit"] ) }}
+                  </td>
               @foreach ($permissionsArray as $index => $permission)
-              <tr>
+              <tr class="permissions-row">
                 @if ($permission['display'])
                   <td
-                    class="col-md-2 tooltip-base" 
+                    class="col-md-2 tooltip-base permissions-item"
                     data-toggle="tooltip"
                     data-placement="right"
-                    title="{{ $permission['note'] }}">
-                    {{ $area }}: {{ $permission['label'] }}
+                    title="{{ $permission['note'] }}"
+                  >
+                    {{ $permission['label'] }}
                   </td>
-                  <td class="col-md-1">
+                  <td class="col-md-1 permissions-item">
                     @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                    {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[$permission['permission'] ] == '1', ['disabled'=>'disabled']) }}
+                    {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[$permission['permission'] ] == '1', ["value"=>"grant", 'disabled'=>'disabled']) }}
                     @else
-                    {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[ $permission['permission'] ] == '1', ['class' => $permission["permission"] ]) }}
+                    {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[ $permission['permission'] ] == '1', ["value"=>"grant"]) }}
                     @endif
                   </td>
-                  <td class="col-md-1">
+                  <td class="col-md-1 permissions-item">
                     @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                    {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ['disabled'=>'disabled']) }}
+                    {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny", 'disabled'=>'disabled']) }}
 
                     @else
-                    {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ['class' => $permission["permission"] ]) }}
+                    {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny"]) }}
                     @endif
                   </td>
-                  <td class="col-md-1">
+                  <td class="col-md-1 permissions-item">
                     @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                    {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ['disabled'=>'disabled']) }}
+                    {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit", 'disabled'=>'disabled']) }}
                     @else
-                    {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ['class' => $permission["permission"]]) }}
+                    {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit"]) }}
                     @endif
                   </td>
-                  
+
                 @endif
               </tr>
               @endforeach
@@ -423,6 +466,15 @@ $(document).ready(function() {
 	    }
 
 	});
+});
+</script>
+
+<script>
+$('tr.header-row input:radio').click(function() {
+  value = $(this).attr('value');
+  $(this).parent().parent().siblings().each(function() {
+    $(this).find('td input:radio[value='+value+']').prop("checked", true);
+  })
 });
 </script>
 
