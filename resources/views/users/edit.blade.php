@@ -34,10 +34,6 @@
       display:flex;
       flex-direction: column;
     }
-    tbody.permissions-group {
-      display:flex;
-      flex-direction:column;
-    }
 
     .permissions.table > thead, .permissions.table > tbody {
       margin: 15px;
@@ -382,7 +378,7 @@
     <div class="tab-pane" id="tab_2">
         <div class="col-md-10 col-md-offset-2">
             @if (!Auth::user()->isSuperUser())
-                <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
+              <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
             @endif
         </div>
         <table class="table table-striped permissions">
@@ -395,6 +391,31 @@
             </tr>
           </thead>
             @foreach ($permissions as $area => $permissionsArray)
+            @if (count($permissionsArray) == 1)
+              <tbody class="permissions-group">
+              <?php $localPermission = $permissionsArray[0] ?>
+                <tr class="header-row permissions-row">
+                  <td class="col-md-2 tooltip-base permissions-item"
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="{{ $localPermission['note'] }}"
+                  >
+                    <h4>{{ $area . ': ' . $localPermission['label'] }}</h4>
+                  </td>
+                  <td class="col-md-1 permissions-item">
+
+                      {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['value'=>"grant"]) }}
+
+                    </td>
+                    <td class="col-md-1 permissions-item">
+                      {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['value'=>"deny"]) }}
+                    </td>
+                    <td class="col-md-1 permissions-item">
+                      {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['value'=>"inherit"] ) }}
+                    </td>
+                  </tr>
+                </tbody>
+            @else
               <tbody class="permissions-group">
               <tr class="header-row permissions-row">
                 <td class="col-md-2 header-name">
@@ -409,6 +430,7 @@
                   <td class="col-md-1 permissions-item">
                     {{ Form::radio("$area", '0',false,['value'=>"inherit"] ) }}
                   </td>
+                </tr>
               @foreach ($permissionsArray as $index => $permission)
               <tr class="permissions-row">
                 @if ($permission['display'])
@@ -447,6 +469,7 @@
               </tr>
               @endforeach
               </tbody>
+              @endif
             @endforeach
         </table>
     </div><!-- /.tab-pane -->
