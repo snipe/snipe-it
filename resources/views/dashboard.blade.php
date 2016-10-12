@@ -51,7 +51,7 @@
         <div class="small-box bg-orange">
           <div class="inner">
             <h3> {{ number_format(\App\Models\Accessory::count()) }}</h3>
-            <p>total accessories</p>
+              <p>{{ trans('general.total_accessories') }}</p>
           </div>
           <div class="icon">
             <i class="fa fa-keyboard-o"></i>
@@ -67,7 +67,7 @@
         <div class="small-box bg-purple">
           <div class="inner">
             <h3> {{ number_format(\App\Models\Consumable::count()) }}</h3>
-            <p>total consumables</p>
+              <p>{{ trans('general.total_consumables') }}</p>
           </div>
           <div class="icon">
             <i class="fa fa-tint"></i>

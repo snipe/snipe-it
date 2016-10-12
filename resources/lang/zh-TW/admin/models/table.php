@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> '新增資產樣板',
+    'created_at' 			=> '新增於',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> '型號',
+    'name'      			=> '資產樣板名稱',
+    'numassets' 			=> '資產',
+    'title'					=> '資產樣板',
+    'update'				=> '更新資產樣板',
+    'view'					=> '檢視資產樣板',
+    'update'				=> '更新資產樣板',
+    'clone'				=> '複製樣板',
+    'edit'				=> '編輯樣板',
 );

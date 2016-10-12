@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Tiekėjai',
     'total_assets'			=> 'įrangos iš viso',
     'total_licenses'		=> 'iš viso licenzijų',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Tipas',
     'undeployable'			=> 'Nepanaudojamas',
     'unknown_admin'			=> 'Nežinomas administratorius',

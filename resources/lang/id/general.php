@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Pemasok',
     'total_assets'			=> 'total aset',
     'total_licenses'		=> 'total lisensi',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Tipe',
     'undeployable'			=> 'Belum siap digunakan',
     'unknown_admin'			=> 'Admin tidak diketahui',

@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Furnizori',
     'total_assets'			=> 'Total active',
     'total_licenses'		=> 'Total licente',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Tipul',
     'undeployable'			=> 'Nelansabil',
     'unknown_admin'			=> 'Admin necunoscut',

@@ -1,7 +1,7 @@
 <?php
 return array(
     'does_not_exist' => '公司不存在',
-    'assoc_users'    => '至少還有一個資產關聯在此公司下，目前不能被删除，請您確定您的所有資產不在此公司下，然後重試。 ',
+    'assoc_users'    => '至少還有一個資產與此公司關聯，目前不能被删除，請檢查後重試。 ',
     'create' => array(
         'error'   => '新增公司失敗，請重試。',
         'success' => '新增公司成功。'

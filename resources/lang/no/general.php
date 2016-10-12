@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Leverandører',
     'total_assets'			=> 'eiendeler totalt',
     'total_licenses'		=> 'lisener totalt',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Type',
     'undeployable'			=> 'Ikke utleverbar',
     'unknown_admin'			=> 'Ukjent admin',

@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Доставчици',
     'total_assets'			=> 'общо активи',
     'total_licenses'		=> 'общо лицензи',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Тип',
     'undeployable'			=> 'Не може да бъде предоставян',
     'unknown_admin'			=> 'Непознат администратор',

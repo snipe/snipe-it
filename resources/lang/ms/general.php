@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Pembekal',
     'total_assets'			=> 'jumlah harta',
     'total_licenses'		=> 'jumlah lesen',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Type',
     'undeployable'			=> 'Tidak Boleh Agih',
     'unknown_admin'			=> 'Pentadbir Tidak Dikenali',

@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Beszállítók',
     'total_assets'			=> 'eszköz összesen',
     'total_licenses'		=> 'licensz összesen',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Típus',
     'undeployable'			=> 'Nem kiadható',
     'unknown_admin'			=> 'Ismeretlen Admin',

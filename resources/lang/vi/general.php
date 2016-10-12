@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Nhà cung cấp',
     'total_assets'			=> 'tổng số tài sản',
     'total_licenses'		=> 'tổng số bản quyền',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Loại',
     'undeployable'			=> 'Không cho phép cấp phát',
     'unknown_admin'			=> 'Unknown Admin',

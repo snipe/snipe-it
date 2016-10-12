@@ -152,6 +152,8 @@
     'suppliers'  			=> 'ตัวแทนจำหน่าย',
     'total_assets'			=> 'ทรัพย์สินทั้งหมด',
     'total_licenses'		=> 'ลิขสิทธิ์ทั้งหมด',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'ประเภท',
     'undeployable'			=> 'ไม่สามารถใช้งานได้',
     'unknown_admin'			=> 'ผู้ดูแลระบบที่ไม่รู้จัก',

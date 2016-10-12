@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Toimittajat',
     'total_assets'			=> 'laitteita yhteensä',
     'total_licenses'		=> 'lisenssejä yhteensä',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Tyyppi',
     'undeployable'			=> 'Ei-käyttöönotettavissa',
     'unknown_admin'			=> 'Tuntematon Ylläpitäjä',

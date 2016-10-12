@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'eula_text'      			=> '最終使用者許可協議',
+	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
     'parent'   					=> '父類',
     'require_acceptance'      	=> '接受',

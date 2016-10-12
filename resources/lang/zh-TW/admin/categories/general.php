@@ -9,7 +9,7 @@ return array(
     'clone'                             => '複製類別',
     'create'  							=> '新建類別',
     'edit'                              => '編輯類別',
-    'eula_text'							=> '分類的最終用戶許可協議',
+    'eula_text'							=> '類別的最終用戶許可協議',
     'eula_text_help'					=> '此欄位允許您為指定類型的資產自訂ELUA（最終用戶許可協議）。如果您所有資產只套用一個EULA（最終用戶許可協議），您可以核取下方框將其設為預設。',
     'require_acceptance'				=> '要求使用者確認接受此類別的資產',
     'required_acceptance'				=> '使用者會收到包含確認接收連結的郵件',

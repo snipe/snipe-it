@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => '折舊類別不存在',
+    'assoc_users'	 => '至少還有一個資產與此折舊關聯，請檢查後重試。 ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => '新增折舊類別失敗，請重試。',
+        'success' => '新增折舊類別成功。'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => '更新折舊類別失敗，請重試。',
+        'success' => '更新折舊類別成功。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => '您確定要刪除此折舊類別嗎？',
+        'error'   => '刪除折舊類別時發生問題。請再試一次。',
+        'success' => '刪除折舊類別成功。'
     )
 
 );

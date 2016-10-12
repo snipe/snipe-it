@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'actions'	 	=> '操作',
+    'action' 		=> '操作',
+    'by'      		=> '經由',
+    'item' 			=> '項目',
 
 );

@@ -152,6 +152,8 @@
     'suppliers'  			=> 'الموردون',
     'total_assets'			=> 'إجمالي الأصول',
     'total_licenses'		=> 'إجمالي الرخص',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Type',
     'undeployable'			=> 'غير قابلة للتوزيع',
     'unknown_admin'			=> 'إداري غير معروف',

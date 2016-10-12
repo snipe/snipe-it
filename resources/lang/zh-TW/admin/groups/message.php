@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => '群組已存在',
+    'group_not_found'     => '群組 [:id] 不存在',
+    'group_name_required' => '名稱欄位必填',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => '新增群組成功。',
+        'update' => '更新群組成功。',
+        'delete' => '刪除群組成功。',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => '您確定要刪除此群組嗎？',
+        'create' => '新增群組時發生問題。請重試。',
+        'update' => '更新群組時發生問題。請重試。',
+        'delete' => '刪除群組時發生問題。請重試。',
     ),
 
 );

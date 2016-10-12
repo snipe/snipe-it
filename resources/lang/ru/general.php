@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Поставщики',
     'total_assets'			=> 'Всего активов',
     'total_licenses'		=> 'Всего лицензий',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Тип',
     'undeployable'			=> 'Не развертываемый',
     'unknown_admin'			=> 'Неизвестный администратор',

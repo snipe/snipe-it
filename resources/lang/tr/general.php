@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Tedarikçiler',
     'total_assets'			=> 'Toplam Demirbaşlar',
     'total_licenses'		=> 'Toplam Lisanslar',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Tip',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',

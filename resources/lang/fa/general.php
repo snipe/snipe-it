@@ -156,6 +156,8 @@
     'suppliers'  			=> 'تامین کننده',
     'total_assets'			=> 'کل دارایی',
     'total_licenses'		=> 'کل مجوزهای',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'نوع',
     'undeployable'			=> 'غیر قابل استقرار',
     'unknown_admin'			=> 'نامشخص مدیریت',

@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Dodavatelé',
     'total_assets'			=> 'celkem zařízení',
     'total_licenses'		=> 'celkem licencí',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Typ',
     'undeployable'			=> 'Ne-přiřaditelné',
     'unknown_admin'			=> 'Neznámy správce',

@@ -152,6 +152,8 @@
     'suppliers'  			=> 'Fornecedores',
     'total_assets'			=> 'ativos no total',
     'total_licenses'		=> 'licenças no total',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'Tipo',
     'undeployable'			=> 'Não implantável',
     'unknown_admin'			=> 'Administrador Desconhecido',

@@ -152,6 +152,8 @@
     'suppliers'  			=> '仕入先',
     'total_assets'			=> '資産の合計',
     'total_licenses'		=> 'ライセンスの合計',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> 'タイプ',
     'undeployable'			=> '未配備',
     'unknown_admin'			=> '不明な管理者',

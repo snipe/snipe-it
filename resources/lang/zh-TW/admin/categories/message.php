@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => '類別不存在',
-    'assoc_models'	 => '至少還有一個資產關聯在此類別下，目前不能被刪除，請您確定您的所有資產不在此類別下，然後重試。 ',
-    'assoc_items'	 => '至少還有一個資產 :asset_type 關聯在此類別下，目前不能被刪除，請您確定您的所有資產不在此類別下，然後重試。 ',
+    'assoc_models'	 => '至少還有一個樣板與此類別關聯，目前不能被刪除，請檢查後重試。 ',
+    'assoc_items'	 => '至少還有一個 :asset_type 與此類別關聯，目前不能被刪除，請您檢查 :asset_type 後重試。 ',
 
     'create' => array(
         'error'   => '新增類別失敗，請重試。',

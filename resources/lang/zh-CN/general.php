@@ -152,6 +152,8 @@
     'suppliers'  			=> '供应商',
     'total_assets'			=> '共计资产',
     'total_licenses'		=> '共计许可证',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> '类型',
     'undeployable'			=> '无法被分配',
     'unknown_admin'			=> '未知管理员',

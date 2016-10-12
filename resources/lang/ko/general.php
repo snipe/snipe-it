@@ -152,6 +152,8 @@
     'suppliers'  			=> '공급자',
     'total_assets'			=> '총 자산',
     'total_licenses'		=> '총 라이선스',
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
     'type'  				=> '유형',
     'undeployable'			=> '사용불가',
     'unknown_admin'			=> '알수없는 관리자',
