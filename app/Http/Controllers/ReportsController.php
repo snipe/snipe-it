@@ -681,7 +681,7 @@ class ReportsController extends Controller
             foreach ($customfields as $customfield) {
                 $column_name = $customfield->db_column_name();
                 if (e(Input::get($customfield->db_column_name())) == '1') {
-                    $row[] = $asset->$column_name;
+                    $row[] = str_replace(",", "\,", $asset->$column_name);
                 }
             }
 
