@@ -61,7 +61,8 @@
                         <tr>
                             <td>Seat {{ $count }} </td>
                             <td>
-                                @if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
+
+                                @if (($licensedto->user) && ($licensedto->deleted_at == NULL))
                                     @can('users.view')
                                         <a href="{{ route('view/user', $licensedto->assigned_to) }}">
                                             {{ $licensedto->user->fullName() }}
@@ -70,9 +71,9 @@
                                         {{ $licensedto->user->fullName() }}
                                      @endcan
 
-                                @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
+                                @elseif (($licensedto->user) && ($licensedto->deleted_at != NULL))
                                     <del>{{ $licensedto->user->fullName() }}</del>
-                                @elseif ($licensedto->asset_id)
+                                @elseif ($licensedto->asset)
                                     @if ($licensedto->asset->assigned_to != 0)
                                         @can('users.view')
                                             <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
@@ -377,9 +378,17 @@
 
                           <td>
                               @if (($log->target) && ($log->target->id!='0'))
-                              <a href="{{ route('view/user', $log->target_id) }}">
-                              {{ $log->userlog->fullName() }}
-                              </a>
+
+                                  @if ($log->target_type == 'App\Models\User')
+                                      <a href="{{ route('view/user', $log->target_id) }}">
+                                          {{ $log->userlog->fullName() }}
+                                      </a>
+                                  @elseif ($log->target_type == 'App\Models\Asset')
+                                      <a href="{{ route('view/hardware', $log->target_id) }}">
+                                          {{ $log->userlog->showAssetName() }}
+                                      </a>
+                                  @endif
+
 
                               @elseif ($log->action_type=='uploaded')
 
