@@ -755,6 +755,7 @@ class ReportsController extends Controller
         $rows = [ ];
 
         $header = [
+            trans('admin/hardware/table.asset_tag'),
             trans('admin/asset_maintenances/table.asset_name'),
             trans('admin/asset_maintenances/table.supplier_name'),
             trans('admin/asset_maintenances/form.asset_maintenance_type'),
@@ -770,6 +771,7 @@ class ReportsController extends Controller
 
         foreach ($assetMaintenances as $assetMaintenance) {
             $row   = [ ];
+            $row[] = str_replace(',', '', e($assetMaintenance->asset->asset_tag));
             $row[] = str_replace(',', '', e($assetMaintenance->asset->name));
             $row[] = str_replace(',', '', e($assetMaintenance->supplier->name));
             $row[] = e($assetMaintenance->improvement_type);
