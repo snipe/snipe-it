@@ -367,14 +367,30 @@ class ReportsController extends Controller
 
             if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
                 $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user->fullName().'</a>';
-            } elseif (($activity->item) && ($activity->target_type === "App\Models\Asset")) {
-                $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
+            } elseif ($activity->target_type === "App\Models\Asset") {
+                if($activity->target) {
+                    $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
+                } else {
+                    $activity_target = "Unknown Item";
+                }
             } elseif ( $activity->target_type === "App\Models\User") {
-                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
+                if($activity->target()) {
+                   $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
+                } else {
+                    $activity_target = 'Unknown User';
+                }
             } elseif ($activity->action_type=='requested') {
-                $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
+                if ($activity->user) {
+                    $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
+                } else {
+                    $activity_target = 'Unknown User';
+                }
             } else {
-                $activity_target = $activity->target->id;
+                if($activity->target) {
+                    $activity_target = $activity->target->id;
+                } else {
+                    $activity_target = "Unknown";
+                }
             }
 
             
@@ -681,7 +697,7 @@ class ReportsController extends Controller
             foreach ($customfields as $customfield) {
                 $column_name = $customfield->db_column_name();
                 if (e(Input::get($customfield->db_column_name())) == '1') {
-                    $row[] = $asset->$column_name;
+                    $row[] = str_replace(",", "\,", $asset->$column_name);
                 }
             }
 
