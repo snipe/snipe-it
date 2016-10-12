@@ -354,19 +354,19 @@ Route::group(
         ]);
 
         # Asset Model Management
-        Route::group([ 'prefix' => 'models', 'middleware' => 'auth' ], function () {
+        Route::group([ 'prefix' => 'models', 'middleware' => ['auth'] ], function () {
 
-            Route::get('/', [ 'as' => 'models', 'uses' => 'AssetModelsController@getIndex' ]);
-            Route::get('create', [ 'as' => 'create/model', 'uses' => 'AssetModelsController@getCreate' ]);
+            Route::get('create', [ 'as' => 'create/model', 'uses' => 'AssetModelsController@getCreate', 'middleware' => ['authorize:superuser'] ]);
             Route::post('create', 'AssetModelsController@postCreate');
-            Route::get('{modelId}/edit', [ 'as' => 'update/model', 'uses' => 'AssetModelsController@getEdit' ]);
-            Route::post('{modelId}/edit', 'AssetModelsController@postEdit');
+            Route::get('{modelId}/edit', [ 'as' => 'update/model', 'uses' => 'AssetModelsController@getEdit' , 'middleware' => ['authorize:superuser']]);
+            Route::post('{modelId}/edit', [ 'uses' => 'AssetModelsController@postEdit', 'middleware' => ['authorize:superuser']]);
             Route::get('{modelId}/clone', [ 'as' => 'clone/model', 'uses' => 'AssetModelsController@getClone' ]);
             Route::post('{modelId}/clone', 'AssetModelsController@postCreate');
-            Route::get('{modelId}/delete', [ 'as' => 'delete/model', 'uses' => 'AssetModelsController@getDelete' ]);
+            Route::get('{modelId}/delete', [ 'as' => 'delete/model', 'uses' => 'AssetModelsController@getDelete', 'middleware' => ['authorize:superuser'] ]);
             Route::get('{modelId}/view', [ 'as' => 'view/model', 'uses' => 'AssetModelsController@getView' ]);
-            Route::get('{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'AssetModelsController@getRestore' ]);
+            Route::get('{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'AssetModelsController@getRestore', 'middleware' => ['authorize:superuser'] ]);
             Route::get('{modelId}/custom_fields', ['as' => 'custom_fields/model','uses' => 'AssetModelsController@getCustomFields']);
+            Route::get('/', [ 'as' => 'models', 'uses' => 'AssetModelsController@getIndex' ,'middleware' => ['authorize:superuser'] ]);
         });
 
         Route::get('/', [
@@ -730,7 +730,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
                 [ 'as' => 'update/location', 'uses' => 'LocationsController@getEdit' ]
             );
             Route::post('{locationId}/edit', 'LocationsController@postEdit');
-            Route::get('{locationId}/view', 'LocationsController@getView');
+            Route::get('{locationId}/view', [ 'as' => 'view/location', 'uses' => 'LocationsController@getView' ]);
             Route::get(
                 '{locationId}/delete',
                 [ 'as' => 'delete/location', 'uses' => 'LocationsController@getDelete' ]

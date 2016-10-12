@@ -94,28 +94,40 @@
                       </tr>
                     @endif
                     @if ($asset->model->manufacturer)
-                      <tr>
-                        <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
-                        <td>
-                          <a href="{{ route('view/manufacturer', $asset->model->manufacturer->id) }}">
-                          {{ $asset->model->manufacturer->name }}
-                          </a>
-                         </td>
-                      </tr>
-                      <tr>
-                        <td>{{ trans('admin/hardware/form.model') }}</td>
-                        <td>
-                          <a href="{{ route('view/model', $asset->model->id) }}">
-                          {{ $asset->model->name }}
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>{{ trans('admin/models/table.modelnumber') }}</td>
-                        <td>
-                          {{ $asset->model->modelno }}
-                         </td>
-                      </tr>
+
+                          <tr>
+                            <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
+                            <td>
+                             @can('superuser')
+                              <a href="{{ route('view/manufacturer', $asset->model->manufacturer->id) }}">
+                              {{ $asset->model->manufacturer->name }}
+                              </a>
+                             @else
+                                    {{ $asset->model->manufacturer->name }}
+                              @endcan
+                             </td>
+                          </tr>
+                          <tr>
+                            <td>
+                                {{ trans('admin/hardware/form.model') }}</td>
+                            <td>
+                                @can('superuser')
+                                    <a href="{{ route('view/model', $asset->model->id) }}">
+                                    {{ $asset->model->name }}
+                                    </a>
+                                 @else
+                                    {{ $asset->model->name }}
+                                @endcan
+
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>{{ trans('admin/models/table.modelnumber') }}</td>
+                            <td>
+                              {{ $asset->model->modelno }}
+                             </td>
+                          </tr>
+
                     @endif
 
                     @if ($asset->model->fieldset)
@@ -132,7 +144,7 @@
 
                               @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
 
-                                  @can('admin')
+                                  @can('superuser')
                                       @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                           <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
                                       @else
@@ -188,9 +200,13 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.supplier') }}</td>
                         <td>
-                          <a href="{{ route('view/supplier', $asset->supplier_id) }}">
-                          {{ $asset->supplier->name }}
-                          </a>
+                            @can ('superuser')
+                                  <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+                                  {{ $asset->supplier->name }}
+                                  </a>
+                                @else
+                                {{ $asset->supplier->name }}
+                            @endcan
                         </td>
                       </tr>
                     @endif
@@ -260,6 +276,8 @@
                       </tr>
                     @endif
 
+
+
                     @if ($asset->expected_checkin!='')
                       <tr>
                         <td>{{ trans('admin/hardware/form.expected_checkin') }}</td>
@@ -280,6 +298,39 @@
                         </td>
                       </tr>
                     @endif
+
+                    @if ($asset->assetloc)
+                        <tr>
+                            <td>{{ trans('general.location') }}</td>
+                            <td>
+                                @can('superuser')
+                                    <a href="{{ route('view/location', $asset->assetloc->id) }}">
+                                    {{ $asset->assetloc->name }}
+                                    </a>
+                                @else
+                                    {{ $asset->assetloc->name }}
+                                @endcan
+                            </td>
+                        </tr>
+                    @endif
+
+                    @if ($asset->assetloc)
+                        <tr>
+                            <td>{{ trans('admin/hardware/form.default_location') }}</td>
+                            <td>
+                                @can('superuser')
+                                    <a href="{{ route('view/location', $asset->defaultLoc->id) }}">
+                                    {{ $asset->defaultLoc->name }}
+                                    </a>
+                                @else
+                                    {{ $asset->defaultLoc->name }}
+                                @endcan
+                            </td>
+                        </tr>
+                    @endif
+
+
+
                   </tbody>
                 </table>
               </div> <!-- /table-responsive -->

@@ -8,6 +8,7 @@
 @stop
 
 @section('header_right')
+    @can('superuser')
   <div class="btn-group pull-right">
      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
           <span class="caret"></span>
@@ -22,6 +23,7 @@
           @endif
       </ul>
   </div>
+    @endcan
 @stop
 
 {{-- Page content --}}
