@@ -814,7 +814,7 @@ class UsersController extends Controller
                             'phone' => trim(e($row[5])),
                             'jobtitle' => trim(e($row[6])),
                             'employee_num' => trim(e($row[7])),
-                            //'company_id' => Company::getIdForUser($row[8]),
+                            'company_id' => Company::getIdForUser($row[8]),
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
