@@ -81,6 +81,7 @@ class UsersController extends Controller
 
         $permissions = config('permissions');
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+        $permissions = $this->filterDisplayable($permissions);
 
         $location_list = Helper::locationsList();
         $manager_list = Helper::managerList();
@@ -233,6 +234,17 @@ class UsersController extends Controller
     * @param int $id
     * @return View
     */
+
+    private function filterDisplayable($permissions) {
+        $output = null;
+        foreach($permissions as $key=>$permission) {
+                $output[$key] = array_filter($permission, function($p) {
+                    return $p['display'] === true;
+                });
+            }
+        return $output;
+    }
+
     public function getEdit($id = null)
     {
         try {
@@ -249,7 +261,7 @@ class UsersController extends Controller
             $userGroups = $user->groups()->pluck('name', 'id');
             $user->permissions = $user->decodePermissions();
             $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
-
+            $permissions = $this->filterDisplayable($permissions);
             $location_list = Helper::locationsList();
             $company_list = Helper::companyList();
             $manager_list = Helper::managerList();
@@ -282,7 +294,6 @@ class UsersController extends Controller
         // permissions here before we update the user.
         $permissions = $request->input('permissions', array());
         app('request')->request->set('permissions', $permissions);
-
         // Only update the email address if locking is set to false
         if (config('app.lock_passwords')) {
             return redirect()->route('users')->with('error', 'Denied! You cannot update user information on the demo.');
@@ -332,7 +343,6 @@ class UsersController extends Controller
         $user->manager_id = e($request->input('manager_id'));
         $user->notes = e($request->input('notes'));
         $user->permissions = json_encode($request->input('permission'));
-
 
         if ($user->manager_id == "") {
             $user->manager_id = null;
