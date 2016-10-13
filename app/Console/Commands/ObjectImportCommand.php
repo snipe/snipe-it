@@ -856,6 +856,7 @@ class ObjectImportCommand extends Command
         if (!$this->option('testrun')) {
 
             if ($asset->save()) {
+                $asset->logCreate('Imported using csv importer');
                 $this->log('Asset ' . $item["item_name"] . ' with serial number ' . $asset_serial . ' was created');
             } else {
                 $this->jsonError('Asset', $asset->getErrors());
@@ -941,6 +942,7 @@ class ObjectImportCommand extends Command
 
         if (!$this->option('testrun')) {
             if ($accessory->save()) {
+                $accessory->logCreate('Imported using CSV Importer');
                 $this->log('Accessory ' . $item["item_name"] . ' was created');
                 // $this->comment('Accessory ' . $item["item_name"] . ' was created');
 
@@ -1025,6 +1027,7 @@ class ObjectImportCommand extends Command
         if (!$this->option("testrun")) {
             // dd($consumable);
             if ($consumable->save()) {
+                $consumable->logCreate('Imported using CSV Importer');
                 $this->log("Consumable " . $item["item_name"] . ' was created');
                 // $this->comment("Consumable " . $item["item_name"] . ' was created');
 

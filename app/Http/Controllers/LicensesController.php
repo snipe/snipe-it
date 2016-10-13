@@ -155,7 +155,7 @@ class LicensesController extends Controller
 
             // Was the license created?
         if ($license->save()) {
-
+            $license->logCreate();
             $insertedId = $license->id;
           // Save the license seat data
             DB::transaction(function () use (&$insertedId, &$license) {

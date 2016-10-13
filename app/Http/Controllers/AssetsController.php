@@ -264,7 +264,7 @@ class AssetsController extends Controller
 
             // Was the asset created?
         if ($asset->save()) {
-
+            $asset->logCreate();
             if (Input::get('assigned_to')!='') {
                 $user = User::find(e(Input::get('assigned_to')));
                 $asset->checkOutToUser($user, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));

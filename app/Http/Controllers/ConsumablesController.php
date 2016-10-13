@@ -105,6 +105,7 @@ class ConsumablesController extends Controller
 
         // Was the consumable created?
         if ($consumable->save()) {
+            $consumable->logCreate();
             // Redirect to the new consumable  page
             return redirect()->to("admin/consumables")->with('success', trans('admin/consumables/message.create.success'));
         }

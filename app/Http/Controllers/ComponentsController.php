@@ -107,6 +107,7 @@ class ComponentsController extends Controller
 
         // Was the component created?
         if ($component->save()) {
+            $component->logCreate();
             // Redirect to the new component  page
             return redirect()->to("admin/components")->with('success', trans('admin/components/message.create.success'));
         }
