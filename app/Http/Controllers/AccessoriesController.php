@@ -100,6 +100,7 @@ class AccessoriesController extends Controller
 
         // Was the accessory created?
         if ($accessory->save()) {
+            $accessory->logCreate();
             // Redirect to the new accessory  page
             return redirect()->to("admin/accessories")->with('success', trans('admin/accessories/message.create.success'));
         }
