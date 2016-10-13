@@ -30,7 +30,11 @@ class Actionlog extends Model
         static::creating( function (Actionlog $actionlog) {
             // If the admin is a superadmin, let's see if the target instead has a company.
             if (Auth::user() && Auth::user()->isSuperUser()) {
-                $actionlog->company_id = $actionlog->target->company_id;
+                if ($actionlog->target) {
+                    $actionlog->company_id = $actionlog->target->company_id;
+                } else if ($actionlog->item) {
+                    $actionlog->company_id = $actionlog->item->company_id;
+                }
             } else if (Auth::user() && Auth::user()->company) {
                 $actionlog->company_id = Auth::user()->company_id;
             }
