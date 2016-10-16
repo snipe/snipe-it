@@ -83,11 +83,15 @@ trait Loggable
 
     /**
      * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
-     * @since [v3.4]
+     * @since [v3.5]
      * @return \App\Models\Actionlog
      */
     public function logCreate($note = null)
     {
+        $user_id = -1;
+        if (Auth::user()) {
+            $user_id = Auth::user()->id;
+        }
         $log = new Actionlog;
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
@@ -98,9 +102,9 @@ trait Loggable
         }
         $log->location_id = null;
         $log->note = $note;
-        $log->user_id = Auth::user()->id;
+        $log->user_id = $user_id;
         $log->logaction('created');
-
+        $log->save();
         return $log;
     }
 

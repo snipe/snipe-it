@@ -371,25 +371,25 @@ class ReportsController extends Controller
                 if($activity->target) {
                     $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
                 } else {
-                    $activity_target = "Unknown Item";
+                    $activity_target = "";
                 }
             } elseif ( $activity->target_type === "App\Models\User") {
                 if($activity->target()) {
                    $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
                 } else {
-                    $activity_target = 'Unknown User';
+                    $activity_target = '';
                 }
             } elseif ($activity->action_type=='requested') {
                 if ($activity->user) {
                     $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
                 } else {
-                    $activity_target = 'Unknown User';
+                    $activity_target = '';
                 }
             } else {
                 if($activity->target) {
                     $activity_target = $activity->target->id;
                 } else {
-                    $activity_target = "Unknown";
+                    $activity_target = "";
                 }
             }
 
