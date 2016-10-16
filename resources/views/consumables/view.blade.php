@@ -64,12 +64,12 @@
 
       
     @if ($consumable->purchase_date)
-        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.date') }}: </strong>
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.purchase_date') }}: </strong>
         {{ $consumable->purchase_date }} </div>
     @endif
 
     @if ($consumable->purchase_cost)
-        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.cost') }}:</strong>
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.purchase_cost') }}:</strong>
         {{ \App\Models\Setting::first()->default_currency }}
 
         {{ \App\Helpers\Helper::formatCurrencyOutput($consumable->purchase_cost) }} </div>
@@ -80,9 +80,9 @@
             {{ $consumable->item_no }} </div>
     @endif
 
-    @if ($consumable->model_no)
+    @if ($consumable->model_number)
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.model_no') }}:</strong>
-            {{ $consumable->model_no }} </div>
+            {{ $consumable->model_number }} </div>
     @endif
 
     @if ($consumable->manufacturer)
@@ -91,7 +91,7 @@
     @endif
 
     @if ($consumable->order_number)
-        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.order') }}:</strong>
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.order_number') }}:</strong>
         {{ $consumable->order_number }} </div>
     @endif
   </div>

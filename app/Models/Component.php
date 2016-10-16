@@ -32,7 +32,7 @@ class Component extends Model
     */
     public $rules = array(
         'name'        => 'required|min:3|max:255',
-        'total_qty'     => 'required|integer|min:1',
+        'qty'     => 'required|integer|min:1',
         'category_id' => 'required|integer',
         'company_id'  => 'integer',
         'purchase_date'  => 'date',
@@ -100,7 +100,7 @@ class Component extends Model
         }
 
 
-        $total = $this->total_qty;
+        $total = $this->qty;
         $remaining = $total - $checkedout;
         return $remaining;
     }

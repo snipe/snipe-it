@@ -46,7 +46,7 @@ class DepreciationsController extends Controller
     public function getCreate()
     {
         // Show the page
-        return View::make('depreciations/edit')->with('depreciation', new Depreciation);
+        return View::make('depreciations/edit')->with('item', new Depreciation);
     }
 
 
@@ -94,12 +94,12 @@ class DepreciationsController extends Controller
     public function getEdit($depreciationId = null)
     {
         // Check if the depreciation exists
-        if (is_null($depreciation = Depreciation::find($depreciationId))) {
+        if (is_null($item = Depreciation::find($depreciationId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
-        return View::make('depreciations/edit', compact('depreciation'));
+        return View::make('depreciations/edit', compact('item'));
     }
 
 

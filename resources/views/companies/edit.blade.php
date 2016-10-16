@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-  @if ($company->id)
+  @if ($item->id)
     {{ trans('admin/companies/table.update') }}
   @else
     {{ trans('admin/companies/table.create') }}
@@ -25,36 +25,17 @@
 
 
 
-    <form class="form-horizontal" method="post" action="" autocomplete="off">
-    <!-- CSRF Token -->
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
+    <form class="form-horizontal" method="post" autocomplete="off">
+    {{ csrf_field() }}
     <div class="box box-default">
-      @if ($company->id)
-        <div class="box-header with-border">
-          <h3 class="box-title">{{ $company->name }}</h3>
-        </div><!-- /.box-header -->
-      @endif
 
        <div class="box-body">
 
-         <!-- Company Name -->
-          <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name" class="col-md-3 control-label">{{ trans('admin/companies/table.name') }}
-            <i class='fa fa-asterisk'></i></label>
-          </label>
-          <div class="col-md-9">
-              <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $company->name) }}" />
-            {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
-          <!-- /Company Name -->
-
+         @include ('partials.forms.edit.name', ['translated_name' => trans('admin/companies/table.name')])
        </div>
        <!-- /Panel body -->
-       <div class="box-footer text-right">
-           <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
-       </div>
+       @include ('partials.forms.edit.submit')
+
        <!-- /Panel footer -->
    </div>
    <!-- /Panel  -->

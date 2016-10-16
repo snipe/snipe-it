@@ -77,9 +77,9 @@
       {{ $model->manufacturer->name }}</li>
       @endif
 
-      @if ($model->modelno)
+      @if ($model->model_number)
       <li>{{ trans('general.model_no') }}:
-      {{ $model->modelno }}</li>
+      {{ $model->model_number }}</li>
       @endif
 
       @if ($model->depreciation)

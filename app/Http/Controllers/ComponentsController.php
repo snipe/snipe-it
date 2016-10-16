@@ -61,7 +61,7 @@ class ComponentsController extends Controller
         $location_list = Helper::locationsList();
 
         return View::make('components/edit')
-            ->with('component', new Component)
+            ->with('item', new Component)
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
             ->with('location_list', $location_list);
@@ -103,7 +103,7 @@ class ComponentsController extends Controller
             $component->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
-        $component->total_qty                    = e(Input::get('total_qty'));
+        $component->qty                    = e(Input::get('qty'));
         $component->user_id                = Auth::user()->id;
 
         // Was the component created?
@@ -130,10 +130,10 @@ class ComponentsController extends Controller
     public function getEdit($componentId = null)
     {
         // Check if the component exists
-        if (is_null($component = Component::find($componentId))) {
+        if (is_null($item = Component::find($componentId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($component)) {
+        } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
@@ -141,7 +141,7 @@ class ComponentsController extends Controller
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
 
-        return View::make('components/edit', compact('component'))
+        return View::make('components/edit', compact('item'))
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
             ->with('location_list', $location_list);
@@ -189,7 +189,7 @@ class ComponentsController extends Controller
             $component->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
-        $component->total_qty                    = e(Input::get('total_qty'));
+        $component->qty                    = e(Input::get('qty'));
 
         // Was the component created?
         if ($component->save()) {
@@ -474,7 +474,7 @@ class ComponentsController extends Controller
                 'name'          => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
                 'serial_number'          => $component->serial_number,
                 'location'   => ($component->location) ? e($component->location->name) : '',
-                'total_qty'           => e($component->total_qty),
+                'qty'           => e($component->qty),
                 'min_amt'           => e($component->min_amt),
                 'category'           => ($component->category) ? e($component->category->name) : 'Missing category',
                 'order_number'  => e($component->order_number),

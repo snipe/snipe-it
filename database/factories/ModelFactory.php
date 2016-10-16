@@ -35,7 +35,7 @@ $factory->defineAs(App\Models\AssetModel::class, 'assetmodel', function (Faker\G
     'name' => $faker->catchPhrase,
     'manufacturer_id' => $faker->numberBetween(1,10),
     'category_id' => $faker->numberBetween(1,9),
-    'modelno' => $faker->numberBetween(1000000,50000000),
+    'model_number' => $faker->numberBetween(1000000,50000000),
     'eol' => 1,
   ];
 });

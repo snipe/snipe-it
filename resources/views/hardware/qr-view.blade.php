@@ -80,7 +80,7 @@
             <a href="{{ route('view/model', $asset->model->id) }}">
             {{ $asset->model->name }}
             </a>
-             / {{ $asset->model->modelno }}</div>
+             / {{ $asset->model->model_number }}</div>
         @endif
 
         @if ($asset->purchase_date)

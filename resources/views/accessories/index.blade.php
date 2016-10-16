@@ -38,9 +38,9 @@
                   <th data-field="manufacturer" data-searchable="true" data-sortable="true">{{ trans('general.manufacturer') }}</th>
                   <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
                   <th data-searchable="false" data-sortable="false" data-field="qty">{{ trans('admin/accessories/general.total') }}</th>
-                  <th data-searchable="true" data-sortable="true" data-field="purchase_date" data-visible="false">{{ trans('admin/accessories/general.date') }}</th>
-                  <th data-searchable="true" data-sortable="true" data-field="purchase_cost">{{ trans('admin/accessories/general.cost') }}</th>
-                  <th data-searchable="true" data-sortable="true" data-field="order_number" data-visible="false">{{ trans('admin/accessories/general.order') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-field="purchase_date" data-visible="false">{{ trans('general.purchase_date') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-field="purchase_cost">{{ trans('general.purchase_cost') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-field="order_number" data-visible="false">{{ trans('general.order_number') }}</th>
                   <th data-searchable="false" data-sortable="true" data-field="min_amt">{{ trans('general.min_amt') }}</th>
                   <th data-searchable="false" data-sortable="false" data-field="numRemaining">{{ trans('admin/accessories/general.remaining') }}</th>
                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>

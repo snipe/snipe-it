@@ -100,7 +100,7 @@ class ObjectImportCommand extends Command
         $this->locations = Location::All(['name', 'id']);
         $this->categories = Category::All(['name', 'category_type', 'id']);
         $this->manufacturers = Manufacturer::All(['name', 'id']);
-        $this->asset_models = AssetModel::All(['name','modelno','category_id','manufacturer_id', 'id']);
+        $this->asset_models = AssetModel::All(['name','model_number','category_id','manufacturer_id', 'id']);
         $this->companies = Company::All(['name', 'id']);
         $this->status_labels = Statuslabel::All(['name', 'id']);
         $this->suppliers = Supplier::All(['name', 'id']);

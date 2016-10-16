@@ -140,7 +140,7 @@
                           <tr>
                             <td>{{ trans('admin/models/table.modelnumber') }}</td>
                             <td>
-                              {{ $asset->model->modelno }}
+                              {{ $asset->model->model_number }}
                              </td>
                           </tr>
 

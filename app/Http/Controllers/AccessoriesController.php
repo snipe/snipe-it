@@ -54,7 +54,7 @@ class AccessoriesController extends Controller
     {
         // Show the page
         return View::make('accessories/edit')
-          ->with('accessory', new Accessory)
+          ->with('item', new Accessory)
           ->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
           ->with('location_list', Helper::locationsList())
@@ -119,14 +119,14 @@ class AccessoriesController extends Controller
     public function getEdit(Request $request, $accessoryId = null)
     {
         // Check if the accessory exists
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if (is_null($item = Accessory::find($accessoryId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($accessory)) {
+        } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
-        return View::make('accessories/edit', compact('accessory'))
+        return View::make('accessories/edit', compact('item'))
           ->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
           ->with('location_list', Helper::locationsList())

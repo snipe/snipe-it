@@ -240,7 +240,7 @@
                     @if ($license->purchase_date > 0)
                     <tr>
                       <td>
-                        {{ trans('admin/licenses/form.date') }}:
+                        {{ trans('general.purchase_date') }}:
                       </td>
                       <td>
                         {{ $license->purchase_date }}
@@ -250,7 +250,7 @@
 
                     @if ($license->purchase_cost > 0)
                     <tr>
-                      <td>{{ trans('admin/licenses/form.cost') }}:
+                      <td>{{ trans('general.purchase_cost') }}:
                       </td>
                       <td>
                         {{ \App\Models\Setting::first()->default_currency }}
@@ -289,7 +289,7 @@
 
                     @if ($license->notes)
                        <tr><td>
-                         {{ trans('admin/licenses/form.notes') }}:
+                         {{ trans('general.notes') }}:
                          </td><td>
                         {!! nl2br(e($license->notes)) !!}</td></tr>
                     @endif
@@ -309,7 +309,7 @@
           <table class="table table-striped">
           <thead>
             <tr>
-                <th class="col-md-5">{{ trans('admin/licenses/form.notes') }}</th>
+                <th class="col-md-5">{{ trans('general.notes') }}</th>
                 <th class="col-md-5"><span class="line"></span>{{ trans('general.file_name') }}</th>
                 <th class="col-md-2"></th>
                 <th class="col-md-2"></th>
@@ -361,7 +361,7 @@
                           <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
                           <th class="col-md-2"><span class="line"></span>{{ trans('button.actions') }}</th>
                           <th class="col-md-2"><span class="line"></span>{{ trans('admin/licenses/general.user') }}</th>
-                          <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.notes') }}</th>
+                          <th class="col-md-4"><span class="line"></span>{{ trans('general.notes') }}</th>
                       </tr>
                   </thead>
                   <tbody>
