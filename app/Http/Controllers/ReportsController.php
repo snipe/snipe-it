@@ -628,15 +628,13 @@ class ReportsController extends Controller
                     $row[] = '';
                 }
             }
+
             if (e(Input::get('location')) == '1') {
                 $show_loc = '';
-                if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id !='' )) {
-                    $location = Location::find($asset->assigneduser->location_id);
-                    if ($location) {
-                        $show_loc .= '"' .e($location->name). '"';
-                    } else {
-                        $show_loc .= 'User location '.$asset->assigneduser->location_id.' is invalid';
-                    }
+
+
+                if (($asset->assigned_to > 0) && ($asset->assigneduser) && ($asset->assigneduser->location)) {
+                    $show_loc .= '"' .e($asset->assigneduser->location->name). '"';
                 } elseif ($asset->rtd_location_id!='') {
                     $location = Location::find($asset->rtd_location_id);
                     if ($location) {
@@ -649,19 +647,19 @@ class ReportsController extends Controller
                 $row[] = $show_loc;
 
             }
+
+
             if (e(Input::get('assigned_to')) == '1') {
-                if ($asset->assigned_to > 0) {
-                    $user  = User::find($asset->assigned_to);
-                    $row[] = '"' .e($user->fullName()). '"';
+                if ($asset->assigneduser) {
+                    $row[] = '"' .e($asset->assigneduser->fullName()). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
             }
 
             if (e(Input::get('username')) == '1') {
-                if ($asset->assigned_to > 0) {
-                    $user  = User::find($asset->assigned_to);
-                    $row[] = '"' .e($user->username). '"';
+                if ($asset->assigneduser) {
+                    $row[] = '"' .e($asset->assigneduser->username). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
