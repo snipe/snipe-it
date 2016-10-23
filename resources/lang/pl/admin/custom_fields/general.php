@@ -1,0 +1,28 @@
+<?php
+
+return array(
+    'custom_fields'		        => 'Pola niestandardowe',
+    'field'		                => 'Pole',
+    'about_fieldsets_title'		=> 'O zestawie pól',
+    'about_fieldsets_text'		=> 'Zestawy pól pozwalają tworzyć grupy pól niestandardowych, które często są używane dla specyficznych typów modeli.',
+    'custom_format'             => 'Custom format...',
+    'encrypt_field'      	        => 'Encrypt the value of this field in the database',
+    'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
+    'fieldset'      	        => 'Zestaw pól',
+    'qty_fields'      	      => 'Ilość pól',
+    'fieldsets'      	        => 'Zestaw pól',
+    'fieldset_name'           => 'Nazwa zestawu pól',
+    'field_name'              => 'Nazwa Pola',
+    'field_values'            => 'Field Values',
+    'field_values_help'       => 'Add selectable options, one per line. Blank lines other than the first line will be ignored.',
+    'field_element'           => 'Element formularza',
+    'field_element_short'     => 'Element',
+    'field_format'            => 'Format',
+    'field_custom_format'     => 'Format niestandardowy',
+    'required'   		          => 'Wymagane',
+    'req'   		              => 'Wymagane',
+    'used_by_models'   		    => 'Używane przez modele',
+    'order'   		            => 'Kolejność',
+    'create_fieldset'         => 'Nowy zestaw pól',
+    'create_field'            => 'Nowe pole niestandardowe',
+);

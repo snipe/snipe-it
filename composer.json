@@ -1,0 +1,75 @@
+{
+  "name": "snipe/snipe-it",
+  "description": "Open source asset management system built on Laravel.",
+  "keywords": ["assets", "asset-management", "laravel"],
+  "license": "AGPL-3",
+  "type": "project",
+      "require": {
+      "php": ">=5.5.9",
+      "laravel/framework": "5.2.*",
+      "intervention/image": "dev-master",
+      "league/csv": "~7.0",
+      "maknz/slack": "dev-master",
+      "erusev/parsedown": "dev-master",
+      "fideloper/proxy": "^3.1",
+      "guzzlehttp/guzzle": "6.2.1",
+      "aws/aws-sdk-php-laravel": "~3.0",
+      "tecnickcom/tc-lib-barcode": "dev-master",
+      "laravelcollective/html" : "~5.0",
+      "watson/validating": "^2.0",
+      "doctrine/cache": "v1.5.4",
+      "doctrine/common": "v2.5.3",
+      "doctrine/dbal": "v2.4.2",
+      "barryvdh/laravel-debugbar": "^2.1",
+      "spatie/laravel-backup": "3.8.1",
+      "misterphilip/maintenance-mode": "1.0.*",
+      "neitanod/forceutf8": "dev-master"
+    },
+    "require-dev": {
+      "fzaninotto/faker": "~1.4",
+      "mockery/mockery": "0.9.*",
+      "phpunit/phpunit": "~4.0",
+      "squizlabs/php_codesniffer": "2.*",
+      "phpspec/phpspec": "~2.1",
+      "codeception/codeception": "2.1.*",
+      "symfony/dom-crawler": "~3.0",
+      "symfony/css-selector": "~3.0",
+      "codeception/c3": "2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "database",
+            "app/Helpers/Helper.php"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "php artisan clear-compiled",
+            "php artisan optimize"
+        ],
+        "pre-update-cmd": [
+            "php artisan clear-compiled"
+        ],
+        "post-update-cmd": [
+            "php artisan optimize"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "stable"
+}

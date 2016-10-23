@@ -1,0 +1,28 @@
+<?php
+
+return array(
+    'custom_fields'		        => 'Speciale velden',
+    'field'		                => 'Veld',
+    'about_fieldsets_title'		=> 'Over veldverzamelingen',
+    'about_fieldsets_text'		=> 'Veldverzamelingen laat jou groepen van aangepaste velden maken die vaak worden hergebruikt voor specifieke soorten eigendoms modellen.',
+    'custom_format'             => 'Custom format...',
+    'encrypt_field'      	        => 'Encrypt the value of this field in the database',
+    'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
+    'fieldset'      	        => 'Veldverzameling',
+    'qty_fields'      	      => 'Aantal Velden',
+    'fieldsets'      	        => 'Veldverzamelingen',
+    'fieldset_name'           => 'Veldverzamelin naam',
+    'field_name'              => 'Veldnaam',
+    'field_values'            => 'Field Values',
+    'field_values_help'       => 'Add selectable options, one per line. Blank lines other than the first line will be ignored.',
+    'field_element'           => 'Formulier element',
+    'field_element_short'     => 'Element',
+    'field_format'            => 'Stijl',
+    'field_custom_format'     => 'Aangepaste stijl',
+    'required'   		          => 'Verplicht',
+    'req'   		              => 'Ndz.',
+    'used_by_models'   		    => 'Gebruikt door modellen',
+    'order'   		            => 'Bestelling',
+    'create_fieldset'         => 'Nieuwe veldset',
+    'create_field'            => 'Nieuw aangepast veld',
+);
