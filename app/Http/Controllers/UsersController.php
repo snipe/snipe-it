@@ -14,6 +14,7 @@ use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\User;
 use App\Models\Ldap;
 use Auth;
@@ -1277,5 +1278,88 @@ class UsersController extends Controller
     {
         $assets = Asset::where('assigned_to', '=', $userId)->with('model')->get();
         return response()->json($assets);
+    }
+
+    /**
+     * Exports users to CSV
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.5]
+     * @return \Illuminate\Http\Response
+     */
+    public function getExportUserCsv()
+    {
+
+        \Debugbar::disable();
+
+
+        $response = new StreamedResponse(function() {
+            // Open output stream
+            $handle = fopen('php://output', 'w');
+
+            User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
+                $headers=[
+                    // strtolower to prevent Excel from trying to open it as a SYLK file
+                    strtolower(trans('general.id')),
+                    trans('general.company'),
+                    trans('admin/companies/table.title'),
+                    trans('admin/users/table.employee_num'),
+                    trans('admin/users/table.name'),
+                    trans('admin/users/table.email'),
+                    trans('admin/users/table.manager'),
+                    trans('admin/users/table.location'),
+                    trans('general.assets'),
+                    trans('general.licenses'),
+                    trans('general.accessories'),
+                    trans('general.consumables'),
+                    trans('admin/users/table.groups'),
+                    trans('general.notes'),
+                    trans('admin/users/table.activated'),
+                    trans('general.created_at')
+                ];
+                
+                fputcsv($handle, $headers);
+
+                foreach ($users as $user) {
+                    $user_groups = '';
+
+                    foreach ($user->groups as $user_group) {
+                        $user_groups .= $user_group->name.', ';
+                    }
+
+                    // Add a new row with data
+                    $values = [
+                        $user->id,
+                        ($user->company) ? $user->company->name : '',
+                        $user->title,
+                        $user->employee_num,
+                        $user->fullName(),
+                        $user->email,
+                        ($user->manager) ? $user->manager->fullName() : '',
+                        ($user->location) ? $user->location->name : '',
+                        $user->assets->count(),
+                        $user->licenses->count(),
+                        $user->accessories->count(),
+                        $user->consumables->count(),
+                        $user_groups,
+                        $user->notes,
+                        ($user->activated=='1') ?  trans('general.yes') : trans('general.no'),
+                        $user->created_at,
+
+                    ];
+
+                    fputcsv($handle, $values);
+                }
+            });
+
+            // Close the output stream
+            fclose($handle);
+        }, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="users-'.date('Y-m-d-his').'.csv"',
+        ]);
+
+        return $response;
+
     }
 }
