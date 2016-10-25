@@ -765,6 +765,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
         Route::post('create', [ 'uses' => 'UsersController@postCreate', 'middleware' => ['authorize:users.edit']  ]);
         Route::get('import', [ 'as' => 'import/user', 'uses' => 'UsersController@getImport', 'middleware' => ['authorize:users.edit']  ]);
         Route::post('import', [ 'uses' => 'UsersController@postImport', 'middleware' => ['authorize:users.edit']  ]);
+        Route::get('export', [ 'uses' => 'UsersController@getExportUserCsv', 'middleware' => ['authorize:users.view']  ]);
         Route::get('{userId}/edit', [ 'as' => 'update/user', 'uses' => 'UsersController@getEdit', 'middleware' => ['authorize:users.edit']  ]);
         Route::post('{userId}/edit', [ 'uses' => 'UsersController@postEdit', 'middleware' => ['authorize:users.edit']  ]);
         Route::get('{userId}/clone', [ 'as' => 'clone/user', 'uses' => 'UsersController@getClone', 'middleware' => ['authorize:users.edit']  ]);

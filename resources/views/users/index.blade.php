@@ -28,6 +28,9 @@
         @else
           <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
         @endif
+    @can('users.view')
+        <a class="btn btn-default pull-right" href="{{ URL::to('admin/users/export') }}" style="margin-right: 5px;">Export</a>
+    @endcan
 
 @stop
 
@@ -80,7 +83,7 @@
                          <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
                          <th data-sortable="true" data-field="name">{{ trans('admin/users/table.name') }}</th>
                          <th data-sortable="true" data-field="email">
-                             <span class="hidden-md hidden-lg">Email</span>
+                             <span class="hidden-md hidden-lg">{{ trans('admin/users/table.email') }}</span>
                              <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                          </th>
                          <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
