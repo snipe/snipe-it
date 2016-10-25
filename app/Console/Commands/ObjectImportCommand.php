@@ -322,7 +322,9 @@ class ObjectImportCommand extends Command
 
         $asset_model_name = $this->array_smart_fetch($row, "model name");
         $asset_modelno = $this->array_smart_fetch($row, "model number");
-        if (empty($asset_model_name)) {
+        if ((empty($asset_model_name))  && (!empty($asset_modelno))) {
+            $asset_model_name = $asset_modelno;
+        } elseif ((empty($asset_model_name))  && (empty($asset_modelno))) {
             $asset_model_name ='Unknown';
         }
         if (empty($asset_modelno)) {
