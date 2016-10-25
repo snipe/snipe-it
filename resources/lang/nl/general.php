@@ -41,6 +41,7 @@
     'consumables'			=> 'Verbruiksartikelen',
     'country'  				=> 'Land',
     'create'				=> 'Nieuwe aanmaken',
+    'created'               => 'Item Created',
     'created_asset'			=> 'aangemaakt materiaal',
     'created_at' 			=> 'Aangemaakt op',
     'currency'  			=> '$', // this is deprecated
@@ -152,8 +153,8 @@
     'suppliers'  			=> 'Leveranciers',
     'total_assets'			=> 'totaal aantal materialen',
     'total_licenses'		=> 'Totale licenties',
-    'total_accessories'		=> 'total accessories',
-    'total_consumables'		=> 'total consumables',
+    'total_accessories'		=> 'totaal aantal accessoires',
+    'total_consumables'		=> 'totaal aantal verbruiksartikelen',
     'type'  				=> 'Type',
     'undeployable'			=> 'Niet-inzetbaar',
     'unknown_admin'			=> 'Onbekende Beheerder',

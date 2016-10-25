@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'a_user_canceled' => 'A user has canceled an item request on the website',
-    'a_user_requested' => 'A user has requested an item on the website',
-    'accessory_name' => 'Accessory Name:',
-    'additional_notes' => 'Additional Notes:',
-    'admin_has_created' => 'An administrator has created an account for you on the :web website.',
-    'asset' => 'Asset:',
-    'asset_name' => 'Asset Name:',
-    'asset_requested' => 'Asset requested',
+    'a_user_canceled' => 'Um usuário cancelou uma requisição no website',
+    'a_user_requested' => 'Um usuário requisitou um item no website',
+    'accessory_name' => 'Nome do Acessório:',
+    'additional_notes' => 'Comentários adicionais:',
+    'admin_has_created' => 'Um administrador criou uma conta para você em :web.',
+    'asset' => 'Ativo:',
+    'asset_name' => 'Nome do Ativo:',
+    'asset_requested' => 'Requisição de Ativo',
     'asset_tag' => 'Asset Tag:',
     'assets_warrantee_expiring' => '{1} asset with warrantee expiring in the next 60 days.|[2,Inf] assets with warrantees
                                     expiring in the next 60 days.',

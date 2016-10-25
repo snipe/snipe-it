@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Country',
     'create'				=> 'Create New',
+    'created'               => 'Item Created',
     'created_asset'			=> 'created asset',
     'created_at' 			=> 'Created at',
     'currency'  			=> '£', // this is deprecated

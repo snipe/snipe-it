@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Tara',
     'create'				=> 'Creeaza',
+    'created'               => 'Item Created',
     'created_asset'			=> 'Activ creat',
     'created_at' 			=> 'Creat la',
     'currency'  			=> 'LEI', // this is deprecated

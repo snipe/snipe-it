@@ -41,6 +41,7 @@
     'consumables'			=> '消耗品数',
     'country'  				=> '国',
     'create'				=> '新規作成',
+    'created'               => 'Item Created',
     'created_asset'			=> '資産を作成',
     'created_at' 			=> '作成者',
     'currency'  			=> '¥', // this is deprecated

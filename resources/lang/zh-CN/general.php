@@ -41,6 +41,7 @@
     'consumables'			=> '消耗品',
     'country'  				=> '国家',
     'create'				=> '新增',
+    'created'               => 'Item Created',
     'created_asset'			=> '新建资产',
     'created_at' 			=> '创建于',
     'currency'  			=> 'RMB', // this is deprecated

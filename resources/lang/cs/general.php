@@ -41,6 +41,7 @@
     'consumables'			=> 'Spotřební materiál',
     'country'  				=> 'Země',
     'create'				=> 'Vytvořit nové',
+    'created'               => 'Item Created',
     'created_asset'			=> 'vytvořit majetek',
     'created_at' 			=> 'Vytvořeno',
     'currency'  			=> 'Kč', // this is deprecated

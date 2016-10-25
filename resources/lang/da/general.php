@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Land',
     'create'				=> 'Opret ny',
+    'created'               => 'Item Created',
     'created_asset'			=> 'skabte aktiver',
     'created_at' 			=> 'Skabt den',
     'currency'  			=> '$', // this is deprecated

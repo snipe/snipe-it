@@ -41,6 +41,7 @@
     'consumables'			=> 'Vật tư phụ',
     'country'  				=> 'Nước',
     'create'				=> 'Tạo mới',
+    'created'               => 'Item Created',
     'created_asset'			=> 'tài sản đã tạo',
     'created_at' 			=> 'Đã tạo lúc',
     'currency'  			=> '$', // this is deprecated

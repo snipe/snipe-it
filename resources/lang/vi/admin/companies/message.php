@@ -3,7 +3,7 @@ return array(
     'does_not_exist' => 'Công ty này không tồn tại.',
     'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
+        'error'   => 'Công ty chưa được tạo, hãy thử lại.',
         'success' => 'Company created successfully.'
     ),
     'update' => array(

@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumabili',
     'country'  				=> 'Paese',
     'create'				=> 'Crea',
+    'created'               => 'Item Created',
     'created_asset'			=> 'Asset creato',
     'created_at' 			=> 'Creato il',
     'currency'  			=> '$', // this is deprecated

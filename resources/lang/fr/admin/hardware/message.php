@@ -40,8 +40,8 @@ return array(
         'error'                 => 'Certains éléments n\'ont pas été correctement importés.',
         'errorDetail'           => 'Les éléments suivants n\'ont pas été importés à cause d\'erreurs.',
         'success'               => "Votre fichier a bien été importé",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'file_delete_success'   => "Votre fichier a été correctement supprimé",
+        'file_delete_error'      => "Le fichier n’a pas pu être supprimé",
     ),
 
 
@@ -69,7 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Le bien n\'a pas été demandé, merci d\'essayer à nouveau',
         'success' 		=> 'Le bien a été demandé correctement.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'La demande de paiement a été annulée'
     )
 
 );

@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Kategorien eksisterer ikke.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'Denne kategorien er koblet til minst èn modell og kan ikke slettes. Vennligst oppdater dine modeller til å ikke referere til denne kategorien og prøv igjen. ',
+    'assoc_items'	 => 'Denne kategorien er knyttet til minst én :asset_type og kan ikke slettes. Oppdater din :asset_type til å ikke lenger refererer til denne kategorien, og prøv på nytt. ',
 
     'create' => array(
         'error'   => 'Kategorien ble ikke opprettet, vennligst prøv igjen.',

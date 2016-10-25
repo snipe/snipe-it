@@ -4,7 +4,7 @@ return array(
 
     'deleted'  					        => 'Šis modelis ištrintas. <a href="/hardware/models/:model_id/restore">Spauskite atkurti modelį čia</a>.',
     'restore'                   => 'Atkurti modelį',
-    'requestable'               => 'Users may request this model',
+    'requestable'               => 'Naudotojai gali užklausi šį modelį',
 	'show_mac_address'			      => 'Rodykite MAC adreso laukelį įrangoje šiam modeliui',
     'view_deleted'              => 'Peržiūrėti ištrintus',
     'view_models'               => 'Peržiūrėti modelius',

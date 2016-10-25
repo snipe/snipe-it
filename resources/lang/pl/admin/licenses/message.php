@@ -23,7 +23,7 @@ return array(
         'error'   => 'Plik(i) nie zostały wysłane. Spróbuj ponownie.',
         'success' => 'Plik(i) zostały wysłane poprawnie.',
         'nofiles' => 'Nie wybrałeś żadnych plików do przesłania, albo plik, który próbujesz przekazać jest zbyt duży',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+        'invalidfiles' => 'Jeden lub więcej Twoich plików jest zbyt duży dla tego rodzaju pliku. Dozwolone formaty to png, gif, jpg, doc, docx, pdf, txt, zip, rar i rtf',
     ),
 
     'update' => array(
@@ -38,13 +38,13 @@ return array(
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
+        'success' => 'Licencja poprawna'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
+        'success' => 'Licencja poprawna'
     ),
 
 );

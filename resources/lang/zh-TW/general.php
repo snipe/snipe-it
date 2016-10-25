@@ -41,6 +41,7 @@
     'consumables'			=> '耗材',
     'country'  				=> '國家',
     'create'				=> '新增',
+    'created'               => 'Item Created',
     'created_asset'			=> '新增資產',
     'created_at' 			=> '新增於',
     'currency'  			=> '$', // this is deprecated
@@ -152,8 +153,8 @@
     'suppliers'  			=> '供應商',
     'total_assets'			=> '總資產',
     'total_licenses'		=> '總計授權',
-    'total_accessories'		=> 'total accessories',
-    'total_consumables'		=> 'total consumables',
+    'total_accessories'		=> '配件總計',
+    'total_consumables'		=> '耗材總計',
     'type'  				=> '類型',
     'undeployable'			=> '不可佈署',
     'unknown_admin'			=> '未知管理員',

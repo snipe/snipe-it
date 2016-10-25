@@ -41,6 +41,7 @@
     'consumables'			=> 'การใช้งาน',
     'country'  				=> 'ประเทศ',
     'create'				=> 'สร้างใหม่',
+    'created'               => 'Item Created',
     'created_asset'			=> 'ทรัพย์สินที่ถูกสร้าง',
     'created_at' 			=> 'สร้างที่',
     'currency'  			=> '฿', // this is deprecated

@@ -3,7 +3,7 @@
 return array(
 	'archived'  				=> 'Archyvuota',
     'asset'  					=> 'Įranga',
-    'bulk_checkout'             => 'Checkout Assets to User',
+    'bulk_checkout'             => 'Išduoti įrangą naudotojui',
     'checkin'  					=> 'Išduota įranga',
     'checkout'  				=> 'Įranga išduota naudotojui',
     'clone'  					=> 'Kopijuoti įrangą',
@@ -13,7 +13,7 @@ return array(
 	'filetype_info'				=> 'Leidžiami dokumentų formatai png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'model_deleted'  			=> 'Įrangos modelis buvo ištrintas. Jūs privalote atkurti modelį prieš atkurdami įrangą. <br/> <a href="/hardware/models/:model_id/restore">Spauskite čia atkurti modelį</a>.',
     'requestable'               => 'Reiklaujamas',
-    'requested'				    => 'Requested',
+    'requested'				    => 'Užklausta',
     'restore'  					=> 'Atkurti įrangą',
     'pending'  					=> 'Vykdoma',
     'undeployable'  			=> 'Negalimas naudoti',

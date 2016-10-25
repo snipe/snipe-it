@@ -41,6 +41,7 @@
     'consumables'			=> 'اقلام قابل مصرف',
     'country'  				=> 'كشور',
     'create'				=> 'ایجاد مورد جدید',
+    'created'               => 'Item Created',
     'created_asset'			=> 'دارایی ایجاد شده',
     'created_at' 			=> 'ایجاد شده در',
     'currency'  			=> '$', // this is deprecated

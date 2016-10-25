@@ -41,6 +41,7 @@
     'consumables'			=> 'Sarf Malzemeleri',
     'country'  				=> 'Ülke',
     'create'				=> 'Yeni Oluştur',
+    'created'               => 'Item Created',
     'created_asset'			=> 'Oluşturulmuş Demirbaş',
     'created_at' 			=> 'Şurada oluşturuldu',
     'currency'  			=> '$', // this is deprecated

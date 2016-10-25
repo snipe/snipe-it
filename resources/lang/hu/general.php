@@ -41,6 +41,7 @@
     'consumables'			=> 'Fogyóeszközök',
     'country'  				=> 'Ország',
     'create'				=> 'Új létrehozása',
+    'created'               => 'Item Created',
     'created_asset'			=> 'létrehozott eszköz',
     'created_at' 			=> 'Létrehozva',
     'currency'  			=> 'HUF', // this is deprecated

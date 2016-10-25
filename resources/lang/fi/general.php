@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Maa',
     'create'				=> 'Luo Uusi',
+    'created'               => 'Item Created',
     'created_asset'			=> 'laite luotu',
     'created_at' 			=> 'Luontiaika',
     'currency'  			=> '€', // this is deprecated

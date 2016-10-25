@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumibles',
     'country'  				=> 'Pais',
     'create'				=> 'Crear Localización',
+    'created'               => 'Item Created',
     'created_asset'			=> 'equipo creado',
     'created_at' 			=> 'Creado el',
     'currency'  			=> '€', // this is deprecated

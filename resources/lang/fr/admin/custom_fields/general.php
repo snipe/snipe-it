@@ -8,7 +8,7 @@ return array(
     'custom_format'             => 'Format personnalisé...',
     'encrypt_field'      	        => 'Chiffrer la valeur de ce champ dans la base de données',
     'encrypt_field_help'      => 'AVERTISSEMENT: Chiffrer un champ en rend la recherche sur le contenu impossible.',
-    'encrypted'      	        => 'Encrypted',
+    'encrypted'      	        => 'Chiffré',
     'fieldset'      	        => 'Fieldset',
     'qty_fields'      	      => 'Qté de champs',
     'fieldsets'      	        => 'Fieldsets',
@@ -26,5 +26,5 @@ return array(
     'order'   		            => 'Commande',
     'create_fieldset'         => 'Nouveau Fieldset',
     'create_field'            => 'Nouveau champ personnalisé',
-    'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',
+    'value_encrypted'      	        => 'La valeur de ce champ est chiffrée dans la base de donnée. Seuls les administrateurs seront capable de voir les données déchiffrées',
 );

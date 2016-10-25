@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Land',
     'create'				=> 'Skapa Ny',
+    'created'               => 'Item Created',
     'created_asset'			=> 'skapa tillgång',
     'created_at' 			=> 'Skapad',
     'currency'  			=> 'SEK', // this is deprecated

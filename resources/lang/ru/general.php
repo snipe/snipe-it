@@ -41,6 +41,7 @@
     'consumables'			=> 'Расходные материалы',
     'country'  				=> 'Страна',
     'create'				=> 'Создать нового',
+    'created'               => 'Item Created',
     'created_asset'			=> 'Создать актив',
     'created_at' 			=> 'Создано',
     'currency'  			=> 'Руб.', // this is deprecated

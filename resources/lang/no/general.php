@@ -41,6 +41,7 @@
     'consumables'			=> 'Forbruksvarer',
     'country'  				=> 'Land',
     'create'				=> 'Opprett ny',
+    'created'               => 'Item Created',
     'created_asset'			=> 'eiendel opprettet',
     'created_at' 			=> 'Opprettet i',
     'currency'  			=> '$', // this is deprecated

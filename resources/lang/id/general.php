@@ -41,6 +41,7 @@
     'consumables'			=> 'Barang Habis Pakai',
     'country'  				=> 'Negara',
     'create'				=> 'Buat baru',
+    'created'               => 'Item Created',
     'created_asset'			=> 'Buat aset',
     'created_at' 			=> 'Dibuat di',
     'currency'  			=> '$', // this is deprecated

@@ -41,6 +41,7 @@
     'consumables'			=> 'Materiały eksploatacyjne',
     'country'  				=> 'Kraj',
     'create'				=> 'Utwórz nowe',
+    'created'               => 'Item Created',
     'created_asset'			=> 'Utworzone aktywa',
     'created_at' 			=> 'Utworzone',
     'currency'  			=> 'PLN', // this is deprecated

@@ -41,6 +41,7 @@
     'consumables'			=> '소모품',
     'country'  				=> '국가명',
     'create'				=> '새로 생성',
+    'created'               => 'Item Created',
     'created_asset'			=> '생성된 자산',
     'created_at' 			=> '생성 위치',
     'currency'  			=> '원', // this is deprecated

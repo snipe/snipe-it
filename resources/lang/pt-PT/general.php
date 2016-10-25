@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumíveis',
     'country'  				=> 'País',
     'create'				=> 'Criar Novo',
+    'created'               => 'Item Created',
     'created_asset'			=> 'artigo criado',
     'created_at' 			=> 'Criado em',
     'currency'  			=> '€', // this is deprecated

@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Negara',
     'create'				=> 'Cipta Baru',
+    'created'               => 'Item Created',
     'created_asset'			=> 'cipta harta',
     'created_at' 			=> 'Cipta Pada',
     'currency'  			=> 'RM', // this is deprecated

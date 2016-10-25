@@ -36,11 +36,11 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
+        'error'                 => 'Nepavyko teisingai importuoti kai kurių įrašų.',
         'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
+        'success'               => "Jūsų failas importuotas",
         'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'file_delete_error'      => "Nepavyko ištrinti failo",
     ),
 
 

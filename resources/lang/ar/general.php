@@ -41,6 +41,7 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'الدولة',
     'create'				=> 'إضافة',
+    'created'               => 'Item Created',
     'created_asset'			=> 'الأصول المضافة',
     'created_at' 			=> 'أنشئت في',
     'currency'  			=> '$', // this is deprecated

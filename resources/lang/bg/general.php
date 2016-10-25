@@ -41,6 +41,7 @@
     'consumables'			=> 'Консумативи',
     'country'  				=> 'Държава',
     'create'				=> 'Създаване на нов',
+    'created'               => 'Item Created',
     'created_asset'			=> 'създадени активи',
     'created_at' 			=> 'Създаден на',
     'currency'  			=> '$', // this is deprecated

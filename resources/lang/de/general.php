@@ -41,6 +41,7 @@
     'consumables'			=> 'Verbrauchsmaterialien',
     'country'  				=> 'Land',
     'create'				=> 'Create Location',
+    'created'               => 'Item Created',
     'created_asset'			=> 'Asset angelegt',
     'created_at' 			=> 'Erstellt am',
     'currency'  			=> '€', // this is deprecated
@@ -152,8 +153,8 @@
     'suppliers'  			=> 'Lieferanten',
     'total_assets'			=> 'Gesamte Assets',
     'total_licenses'		=> 'Lizenzen insgesamt',
-    'total_accessories'		=> 'total accessories',
-    'total_consumables'		=> 'total consumables',
+    'total_accessories'		=> 'gesamtes Zubehör',
+    'total_consumables'		=> 'gesamtes Verbrauchsmaterial',
     'type'  				=> 'Typ',
     'undeployable'			=> 'Nicht herausgebbar',
     'unknown_admin'			=> 'Unbekannter Administrator',
