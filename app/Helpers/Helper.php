@@ -25,12 +25,10 @@ class Helper
 
 
     /**
-     * Returns a view that invokes the ajax tables which actually contains
-     * the content for the categories listing, which is generated in getDatatable.
+     * Simple helper to invoke the markdown parser
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see CategoriesController::getDatatable() method that generates the JSON response
-     * @since [v1.0]
+     * @since [v2.0]
      * @return String
      */
     public static function parseEscapedMarkedown($str) {
@@ -42,17 +40,17 @@ class Helper
     }
 
 
-    // This doesn't do anything yet
-    public static function parseEmailList($emails)
-    {
-        $emails_array = explode(',', $emails);
-        return array_walk($emails_array, 'trim_value');
-    }
-
+    /**
+     * The importer has formatted number strings since v3,
+     * so the value might be a string, or an integer.
+     * If it's a number, format it as a string.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return String
+     */
     public static function formatCurrencyOutput($cost)
     {
-        // The importer has formatted number strings since v3, so the value might be a string, or an integer.
-        // If it's a number, format it as a string
         if (is_numeric($cost)) {
             return number_format($cost, 2, '.', '');
         }
@@ -60,13 +58,15 @@ class Helper
         return $cost;
     }
 
-    // This doesn't do anything yet
-    public static function trim_value(&$value)
-    {
-        return trim($value);
-    }
 
-    // Static colors for pie charts
+    /**
+     * Static colors for pie charts.
+     * This is inelegant, and could be refactored later.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.3]
+     * @return Array
+     */
     public static function chartColors()
     {
         $colors = [
@@ -84,8 +84,15 @@ class Helper
         return $colors;
     }
 
-    // Static background (highlight) colors for pie charts
-    // This is not currently used, but might be in the near future.
+
+    /**
+     * Static background (highlight) colors for pie charts
+     * This is inelegant, and could be refactored later.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.2]
+     * @return Array
+     */
     public static function chartBackgroundColors()
     {
         $colors = [
@@ -104,10 +111,15 @@ class Helper
     }
 
 
-
+    /**
+     * Format currency using comma for thousands until local info is property used.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.7]
+     * @return String
+     */
     public static function ParseFloat($floatString)
     {
-        // use comma for thousands until local info is property used
         $LocaleInfo = localeconv();
         $floatString = str_replace(",", "", $floatString);
         $floatString = str_replace($LocaleInfo["decimal_point"], ".", $floatString);
@@ -115,6 +127,13 @@ class Helper
     }
 
 
+    /**
+     * Get the list of models in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function modelList()
     {
         $models = AssetModel::with('manufacturer')->get();
@@ -125,6 +144,13 @@ class Helper
         return $model_array;
     }
 
+    /**
+     * Get the list of companies in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function companyList()
     {
         $company_list = array('0' => trans('general.select_company')) + DB::table('companies')
@@ -134,6 +160,13 @@ class Helper
     }
 
 
+    /**
+     * Get the list of categories in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function categoryList($category_type = null)
     {
         $categories = Category::orderBy('name', 'asc')
@@ -145,6 +178,13 @@ class Helper
         return $category_list;
     }
 
+    /**
+     * Get the list of suppliers in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function suppliersList()
     {
         $supplier_list = array('' => trans('general.select_supplier')) + Supplier::orderBy('name', 'asc')
@@ -153,6 +193,14 @@ class Helper
         return $supplier_list;
     }
 
+
+    /**
+     * Get the list of status labels in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function statusLabelList()
     {
         $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')
@@ -160,6 +208,14 @@ class Helper
         return $statuslabel_list;
     }
 
+
+    /**
+     * Get the list of locations in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function locationsList()
     {
         $location_list = array('' => trans('general.select_location')) + Location::orderBy('name', 'asc')
@@ -167,6 +223,14 @@ class Helper
         return $location_list;
     }
 
+
+    /**
+     * Get the list of manufacturers in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function manufacturerList()
     {
         $manufacturer_list = array('' => trans('general.select_manufacturer')) +
@@ -175,12 +239,26 @@ class Helper
         return $manufacturer_list;
     }
 
+    /**
+     * Get the list of status label types in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function statusTypeList()
     {
         $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
         return $statuslabel_types;
     }
 
+    /**
+     * Get the list of managers in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function managerList()
     {
         $manager_list = array('' => trans('general.select_user')) +
@@ -192,6 +270,13 @@ class Helper
         return $manager_list;
     }
 
+    /**
+     * Get the list of depreciations in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function depreciationList()
     {
         $depreciation_list = ['' => 'Do Not Depreciate'] + Depreciation::orderBy('name', 'asc')
@@ -199,12 +284,26 @@ class Helper
         return $depreciation_list;
     }
 
+    /**
+     * Get the list of category types in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function categoryTypeList()
     {
         $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
         return $category_types;
     }
 
+    /**
+     * Get the list of users in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function usersList()
     {
         $users_list =   array( '' => trans('general.select_user')) +
@@ -217,6 +316,13 @@ class Helper
         return $users_list;
     }
 
+    /**
+     * Get the list of assets in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function assetsList()
     {
         $assets_list = array('' => trans('general.select_asset')) + Asset::orderBy('name', 'asc')
@@ -225,20 +331,40 @@ class Helper
         return $assets_list;
     }
 
+    /**
+     * Get the detailed list of assets in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function detailedAssetList()
     {
-
         $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedUser', 'model'), 'assets.company_id')->get()->lists('detailed_name', 'id')->toArray();
         return $assets;
     }
 
 
+    /**
+     * Get the list of custom fields in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
     public static function customFieldsetList()
     {
         $customfields = array('' => trans('admin/models/general.no_custom_field')) + CustomFieldset::pluck('name', 'id')->toArray();
         return  $customfields;
     }
 
+    /**
+     * Get the list of custom field formats in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.4]
+     * @return Array
+     */
     public static function predefined_formats()
     {
         $keys=array_keys(CustomField::$PredefinedFormats);
@@ -246,6 +372,13 @@ class Helper
         return $stuff+["" => trans('admin/custom_fields/general.custom_format')];
     }
 
+    /**
+     * Get the list of barcode dimensions
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.3]
+     * @return Array
+     */
     public static function barcodeDimensions($barcode_type = 'QRCODE')
     {
         if ($barcode_type == 'C128') {
@@ -261,6 +394,13 @@ class Helper
         return $size;
     }
 
+    /**
+     * Generates a random string
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Array
+     */
     public static function generateRandomString($length = 10)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -272,10 +412,15 @@ class Helper
         return $randomString;
     }
 
+
     /**
      * This nasty little method gets the low inventory info for the
      * alert dropdown
-     **/
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Array
+     */
     public static function checkLowInventory()
     {
         $consumables = Consumable::with('users')->whereNotNull('min_amt')->get();
@@ -356,9 +501,16 @@ class Helper
     }
 
 
+    /**
+     * Check if the file is an image, so we can show a preview
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param File $file
+     * @return String | Boolean
+     */
     public static function checkUploadIsImage($file)
     {
-        // Check if the file is an image, so we can show a preview
         $finfo = @finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
         $filetype = @finfo_file($finfo, $file);
         finfo_close($finfo);
@@ -482,6 +634,18 @@ class Helper
     }
 
 
+    /**
+     * Gracefully handle decrypting the legacy data (encrypted via mcrypt) and use the new
+     * decryption method instead.
+     *
+     * This is not currently used, but will be.
+     *
+     * @author A. Gianotto
+     * @since 3.6
+     * @param CustomField $field
+     * @param String $string
+     * @return string
+     */
     public static function gracefulDecrypt(CustomField $field, $string) {
 
         if ($field->isFieldDecryptable($string)) {
@@ -499,7 +663,17 @@ class Helper
 
     }
 
-
+    /**
+     * Strip HTML out of returned JSON. This is pretty gross, and I'd like to find a better way
+     * to handle this, but the REST API will solve some of these problems anyway.
+     *
+     * This is not currently used, but will be.
+     *
+     * @author A. Gianotto
+     * @since 3.4
+     * @param $array array
+     * @return Array
+     */
     public static function stripTagsFromJSON(Array $array) {
 
         foreach ($array as $key => $value) {
