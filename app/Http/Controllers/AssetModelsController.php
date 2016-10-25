@@ -92,20 +92,20 @@ class AssetModelsController extends Controller
             $model->eol = e(Input::get('eol'));
         }
 
-            // Save the model data
-            $model->name                = e(Input::get('name'));
-            $model->modelno             = e(Input::get('modelno'));
-            $model->manufacturer_id     = e(Input::get('manufacturer_id'));
-            $model->category_id         = e(Input::get('category_id'));
-            $model->note            = e(Input::get('note'));
-            $model->user_id             = Auth::user()->id;
+        // Save the model data
+        $model->name                = e(Input::get('name'));
+        $model->modelno             = e(Input::get('modelno'));
+        $model->manufacturer_id     = e(Input::get('manufacturer_id'));
+        $model->category_id         = e(Input::get('category_id'));
+        $model->note                = e(Input::get('note'));
+        $model->user_id             = Auth::user()->id;
+        $model->requestable         = Input::has('requestable');
+
         if (Input::get('custom_fieldset')!='') {
             $model->fieldset_id = e(Input::get('custom_fieldset'));
         }
 
-            //$model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
 
-	// Store image
         if (Input::file('image')) {
             $image = Input::file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
@@ -116,14 +116,14 @@ class AssetModelsController extends Controller
             })->save($path);
             $model->image = $file_name;
         }
-	// Store document which was saved when a model was created / modified
 
        if (Input::file('document')) {
             $document = Request::file('document');
             $file_name = str_random(25).".".$document->getClientOriginalExtension();
             $path = public_path('uploads/models/'.$file_name);
-	    Input::file('document'->save($path));
-		$model->document = $document;
+	    $document->move($path,$file_name); 
+//            Input::file('document'->save($path));
+            $model->document = $document;
 //            $model->document = $file_name;
         }
 
@@ -151,7 +151,7 @@ class AssetModelsController extends Controller
         $model = new AssetModel;
 
         $settings=Input::all();
-        $settings['eol']=0;
+        $settings['eol']= null;
 
         $model->name=e(Input::get('name'));
         $model->manufacturer_id = e(Input::get('manufacturer_id'));
@@ -159,7 +159,7 @@ class AssetModelsController extends Controller
         $model->modelno = e(Input::get('modelno'));
         $model->user_id = Auth::user()->id;
         $model->note            = e(Input::get('note'));
-        $model->eol=0;
+        $model->eol= null;
 
         if (Input::get('fieldset_id')=='') {
             $model->fieldset_id = null;
@@ -227,7 +227,7 @@ class AssetModelsController extends Controller
         }
 
         if (e(Input::get('eol')) == '') {
-            $model->eol =  0;
+            $model->eol =  null;
         } else {
             $model->eol = e(Input::get('eol'));
         }
@@ -237,7 +237,10 @@ class AssetModelsController extends Controller
         $model->modelno             = e(Input::get('modelno'));
         $model->manufacturer_id     = e(Input::get('manufacturer_id'));
         $model->category_id         = e(Input::get('category_id'));
-        $model->note            = e(Input::get('note'));
+        $model->note                = e(Input::get('note'));
+
+        $model->requestable = Input::has('requestable');
+
         if (Input::get('custom_fieldset')=='') {
             $model->fieldset_id = null;
         } else {
@@ -254,27 +257,29 @@ class AssetModelsController extends Controller
             })->save($path);
             $model->image = $file_name;
         }
+
         if (Input::get('image_delete') == 1 && Input::file('image') == "") {
             $model->image = null;
         }
 
-	// Um yeah, just copied the stuff above.
-	// This can present an unintended problem: the user's PHP file max size limit will need to be upped _
-	// if they plan on uploading files larger than 2mb (or whatever the default limit is.)
+        // Um yeah, just copied the stuff above.
+        // This can present an unintended problem: the user's PHP file max size limit will need to be upped _
+        // if they plan on uploading files larger than 2mb (or whatever the default limit is.)
         if (Input::file('document')) {
             $document = Input::file('document');
             $file_name = str_random(25).".".$document->getClientOriginalExtension();
             $path = public_path('uploads/models/'.$file_name);
-	    $document->move(public_path('uploads/models'),$file_name);
+            $document->move(public_path('uploads/models'),$file_name);
             $model->document = $file_name;
         }
         if (Input::get('document_delete') == 1 && Input::file('document') == "") {
             $model->document = null;
         }
 
+
         // Was it created?
         if ($model->save()) {
-            // Redirect to the new model page
+            // Redirect to the new model  page
             return redirect()->to("hardware/models")->with('success', trans('admin/models/message.update.success'));
         } else {
             return redirect()->back()->withInput()->withErrors($model->getErrors());

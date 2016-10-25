@@ -26,7 +26,7 @@ class Document extends Migration
     public function down()
     {
         Schema::table('models', function (Blueprint $table) {
-		$tablet->dropColumn('document');
+		$table->dropColumn('document');
         });
     }
 }
