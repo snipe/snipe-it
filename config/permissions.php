@@ -106,7 +106,7 @@ return array(
             'display'    => true,
         ),
         array(
-            'permission' => 'accessory.create',
+            'permission' => 'accessories.create',
             'label'      => 'Create ',
             'note'       => '',
             'display'    => true,
