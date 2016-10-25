@@ -365,14 +365,14 @@ class ObjectImportCommand extends Command
         if ($editingModel && (!$asset_model_name === "Unknown")) {
             $asset_model->name = $asset_model_name;
         }
-        isset($manfacturer) && $manufacturer->exists && $asset_model->manufacturer_id = $manufacturer->id;
+        isset($manufacturer) && $manufacturer->exists && $asset_model->manufacturer_id = $manufacturer->id;
         isset($asset_modelno) && $asset_model->modelno = $asset_modelno;
-        if(isset($category) && $category->exists) {
+        if (isset($category) && $category->exists) {
             $asset_model->category_id = $category->id;
         }
         $asset_model->user_id = $this->option('user_id');
 
-        if(!$editingModel) {
+        if (!$editingModel) {
                 $this->asset_models->add($asset_model);
         }
         if (!$this->option('testrun')) {
