@@ -1285,10 +1285,11 @@ class UsersController extends Controller
                 $headers=[
                     // strtolower to prevent Excel from trying to open it as a SYLK file
                     strtolower(trans('general.id')),
-                    trans('general.company'),
                     trans('admin/companies/table.title'),
+                    trans('admin/users/table.title'),
                     trans('admin/users/table.employee_num'),
                     trans('admin/users/table.name'),
+                    trans('admin/users/table.username'),
                     trans('admin/users/table.email'),
                     trans('admin/users/table.manager'),
                     trans('admin/users/table.location'),
@@ -1315,9 +1316,10 @@ class UsersController extends Controller
                     $values = [
                         $user->id,
                         ($user->company) ? $user->company->name : '',
-                        $user->title,
+                        $user->jobtitle,
                         $user->employee_num,
                         $user->fullName(),
+                        $user->username,
                         $user->email,
                         ($user->manager) ? $user->manager->fullName() : '',
                         ($user->location) ? $user->location->name : '',
