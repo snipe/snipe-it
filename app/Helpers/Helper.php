@@ -20,15 +20,19 @@ use App\Models\Asset;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 class Helper
 {
 
 
+    /**
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the categories listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see CategoriesController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return String
+     */
     public static function parseEscapedMarkedown($str) {
         $Parsedown = new \Parsedown();
 
@@ -224,7 +228,7 @@ class Helper
     public static function detailedAssetList()
     {
 
-        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id')->toArray();
+        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedUser', 'model'), 'assets.company_id')->get()->lists('detailed_name', 'id')->toArray();
         return $assets;
     }
 
