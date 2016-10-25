@@ -374,7 +374,7 @@ class ReportsController extends Controller
                     $activity_target = "";
                 }
             } elseif ( $activity->target_type === "App\Models\User") {
-                if($activity->target()) {
+                if($activity->target) {
                    $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
                 } else {
                     $activity_target = '';
