@@ -333,7 +333,6 @@ class ReportsController extends Controller
 
 
         $activityCount = $activitylogs->count();
-        // dd("Offset:" . $offset . " Limit " . $limit);
         $activitylogs = $activitylogs->offset($offset)->limit($limit)->get();
 
         $rows = array();
@@ -356,7 +355,7 @@ class ReportsController extends Controller
             if (($activity->item) && ($activity->itemType()=="asset")) {
               $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
                 $item_type = 'asset';
-            } elseif ($activity->item()) {
+            } elseif ($activity->item) {
                 $activity_item = '<a href="'.route('view/'. $activity->itemType(), $activity->item_id).'">'.e($activity->item->name).'</a>';
                 $item_type = $activity->itemType();
             } else {
