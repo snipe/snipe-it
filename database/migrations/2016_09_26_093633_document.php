@@ -13,7 +13,7 @@ class Document extends Migration
     public function up()
     {
         Schema::table('models', function (Blueprint $table) {
-	$table->text('document')->after('deleted_at')->nullable()->default(NULL);
+	$table->text('document')->after('deleted_at')->nullable()->default(null);
             //
         });
     }
