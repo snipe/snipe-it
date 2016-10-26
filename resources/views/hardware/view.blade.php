@@ -314,7 +314,7 @@
                         </tr>
                     @endif
 
-                    @if ($asset->assetloc)
+                    @if ($asset->defaultLoc)
                         <tr>
                             <td>{{ trans('admin/hardware/form.default_location') }}</td>
                             <td>
