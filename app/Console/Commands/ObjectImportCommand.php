@@ -362,7 +362,7 @@ class ObjectImportCommand extends Command
             $this->log("No Matching Model, Creating a new one");
             $asset_model = new AssetModel();
         }
-        if ($editingModel && (!$asset_model_name === "Unknown")) {
+        if (($editingModel && (!$asset_model_name === "Unknown")) || (!$editingModel)) {
             $asset_model->name = $asset_model_name;
         }
         isset($manufacturer) && $manufacturer->exists && $asset_model->manufacturer_id = $manufacturer->id;
@@ -814,7 +814,7 @@ class ObjectImportCommand extends Command
             // Assume if we are editing, we already have a status and can ignore.
             // FIXME: We're already grabbing the list of statuses, we should probably not hardcode here
             $this->log("No status field found, defaulting to id 1.");
-            $status_id = 1;
+            $status_id = $this->status_labels->first()->id;
         }
 
         if (!$editingAsset) {
