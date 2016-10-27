@@ -892,7 +892,7 @@ class UsersController extends Controller
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
+        $users = User::select(array('users.id','users.employee_num','users.jobtitle','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
         ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle');
         $users = Company::scopeCompanyables($users);
 
@@ -918,7 +918,7 @@ class UsersController extends Controller
             default:
                 $allowed_columns =
                 [
-                 'last_name','first_name','email','username','employee_num',
+                 'last_name','first_name','email','jobtitle','username','employee_num',
                  'assets','accessories', 'consumables','licenses','groups','activated','created_at'
                 ];
 
@@ -979,6 +979,7 @@ class UsersController extends Controller
                 'id'         => $user->id,
                 'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>' : '',
                 'name'          => '<a title="'.e($user->fullName()).'" href="../admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
+                'jobtitle'          => e($user->jobtitle),
                 'email'         => ($user->email!='') ?
                             '<a href="mailto:'.e($user->email).'" class="hidden-md hidden-lg">'.e($user->email).'</a>'
                             .'<a href="mailto:'.e($user->email).'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
