@@ -82,6 +82,7 @@
                          <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                          <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
                          <th data-sortable="true" data-field="name">{{ trans('admin/users/table.name') }}</th>
+                         <th data-switchable="true" data-sortable="true" data-field="jobtitle" data-visible="false">{{ trans('admin/users/table.title') }}</th>
                          <th data-sortable="true" data-field="email">
                              <span class="hidden-md hidden-lg">{{ trans('admin/users/table.email') }}</span>
                              <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>

@@ -382,6 +382,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 ->orWhere('users.email', 'LIKE', "%$search%")
                 ->orWhere('users.username', 'LIKE', "%$search%")
                 ->orWhere('users.notes', 'LIKE', "%$search%")
+                ->orWhere('users.jobtitle', 'LIKE', "%$search%")
                 ->orWhere('users.employee_num', 'LIKE', "%$search%")
                 ->orWhere(function ($query) use ($search) {
                     $query->whereHas('userloc', function ($query) use ($search) {
