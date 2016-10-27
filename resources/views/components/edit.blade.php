@@ -96,6 +96,17 @@
 
            </div>
 
+           <!-- Serial -->
+           <div class="form-group {{ $errors->has('serial_number') ? ' has-error' : '' }}">
+
+               {{ Form::label('name', trans('admin/hardware/form.serial'), array('class' => 'col-md-3 control-label')) }}
+
+               <div class="col-md-8">
+                   <input class="form-control" type="text" name="serial_number" id="serial_number" value="{{ Input::old('serial_number', $component->serial_number) }}" />
+                   {!! $errors->first('serial_number', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+               </div>
+           </div>
+
 
            <!-- Company -->
            @if (\App\Models\Company::isCurrentUserAuthorized())

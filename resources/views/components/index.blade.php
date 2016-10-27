@@ -52,6 +52,7 @@
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                 <th data-switchable="true" data-visible="false" data-searchable="true" data-sortable="true" data-field="companyName">{{ trans('admin/companies/table.title') }}</th>
                 <th data-sortable="true" data-searchable="true" data-field="name">{{ trans('admin/components/table.title') }}</th>
+                <th data-sortable="true" data-searchable="true" data-field="serial_number" data-visible="false">{{ trans('admin/hardware/form.serial') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('general.category') }}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="total_qty"> {{ trans('admin/components/general.total') }}</th>

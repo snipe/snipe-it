@@ -89,6 +89,7 @@ class ComponentsController extends Controller
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $component->order_number           = e(Input::get('order_number'));
         $component->min_amt                = e(Input::get('min_amt'));
+        $component->serial_number             = e(Input::get('serial_number'));
 
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -174,6 +175,7 @@ class ComponentsController extends Controller
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $component->order_number           = e(Input::get('order_number'));
         $component->min_amt             = e(Input::get('min_amt'));
+        $component->serial_number             = e(Input::get('serial_number'));
 
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -422,7 +424,7 @@ class ComponentsController extends Controller
             $limit = 50;
         }
 
-        $allowed_columns = ['id','name','min_amt','order_number','purchase_date','purchase_cost','companyName','category','total_qty'];
+        $allowed_columns = ['id','name','min_amt','order_number','serial_number','purchase_date','purchase_cost','companyName','category','total_qty'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -470,6 +472,7 @@ class ComponentsController extends Controller
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="component['.$component->id.']" class="one_required"></div>',
                 'id'            => $component->id,
                 'name'          => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
+                'serial_number'          => $component->serial_number,
                 'location'   => ($component->location) ? e($component->location->name) : '',
                 'total_qty'           => e($component->total_qty),
                 'min_amt'           => e($component->min_amt),
