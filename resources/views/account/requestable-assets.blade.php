@@ -35,6 +35,9 @@
                             <thead>
                                 <tr role="row">
                                     <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
+                                    @if (\App\Models\Setting::getSettings()->display_asset_name)
+                                        <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/form.name') }}</th>
+                                    @endif
                                     <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.serial') }}</th>
                                     <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.location') }}</th>
                                     <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.status') }}</th>
