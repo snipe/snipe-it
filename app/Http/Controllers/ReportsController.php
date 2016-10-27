@@ -538,6 +538,9 @@ class ReportsController extends Controller
         if (( e(Input::get('purchase_cost')) == '1' ) && ( e(Input::get('depreciation')) != '1' )) {
             $header[] = 'Purchase Cost';
         }
+        if (e(Input::get('eol')) == '1') {
+            $header[] = 'EOL';
+        }
         if (e(Input::get('order')) == '1') {
             $header[] = 'Order Number';
         }
@@ -613,6 +616,9 @@ class ReportsController extends Controller
             if (e(Input::get('purchase_cost')) == '1' && ( e(Input::get('depreciation')) != '1' )) {
                 $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
+            if (e(Input::get('eol')) == '1') {
+                $row[] = '"' .($asset->eol_date()) ? $asset->eol_date() : ''. '"';
+            }
             if (e(Input::get('order')) == '1') {
                 if ($asset->order_number) {
                     $row[] = e($asset->order_number);
@@ -621,7 +627,7 @@ class ReportsController extends Controller
                 }
             }
             if (e(Input::get('supplier')) == '1') {
-                if ($asset->supplier_id) {
+                if ($asset->supplier) {
                     $row[] = '"' .e($asset->supplier->name) . '"';
                 } else {
                     $row[] = '';
