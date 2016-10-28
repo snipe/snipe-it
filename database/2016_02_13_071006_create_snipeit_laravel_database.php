@@ -321,7 +321,7 @@ Schema::create('license_seats', function($table) {
 Schema::create('licenses', function($table) {
  $table->increments('id')->unsigned();
  $table->string('name', 255);
- $table->text('serial')->nullable();
+ $table->strin('serial', 2048)->nullable();
  $table->date('purchase_date')->nullable();
  $table->decimal('purchase_cost', 13,4)->nullable();
  $table->string('order_number', 50)->nullable();
