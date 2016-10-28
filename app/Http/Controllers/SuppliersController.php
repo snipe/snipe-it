@@ -242,7 +242,7 @@ class SuppliersController extends Controller
 
     public function getDatatable()
     {
-        $suppliers = Supplier::select(array('id','name','address','address2','city','state','country','fax', 'phone','email','contact'))
+        $suppliers = Supplier::with('assets', 'licenses')->select(array('id','name','address','address2','city','state','country','fax', 'phone','email','contact'))
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -283,8 +283,8 @@ class SuppliersController extends Controller
                 'phone'             => e($supplier->phone),
                 'fax'             => e($supplier->fax),
                 'email'             => ($supplier->email!='') ? '<a href="mailto:'.e($supplier->email).'">'.e($supplier->email).'</a>' : '',
-                'assets'            => $supplier->num_assets(),
-                'licenses'          => $supplier->num_licenses(),
+                'assets'            => $supplier->assets->count(),
+                'licenses'          => $supplier->licenses->count(),
                 'actions'           => $actions
             );
         }
