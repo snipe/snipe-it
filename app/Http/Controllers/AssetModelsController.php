@@ -117,6 +117,16 @@ class AssetModelsController extends Controller
             $model->image = $file_name;
         }
 
+       if (Input::file('document')) {
+            $document = Request::file('document');
+            $file_name = str_random(25).".".$document->getClientOriginalExtension();
+            $path = public_path('uploads/models/'.$file_name);
+	    $document->move($path,$file_name); 
+//            Input::file('document'->save($path));
+            $model->document = $document;
+//            $model->document = $file_name;
+        }
+
             // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
@@ -251,6 +261,21 @@ class AssetModelsController extends Controller
         if (Input::get('image_delete') == 1 && Input::file('image') == "") {
             $model->image = null;
         }
+
+        // Um yeah, just copied the stuff above.
+        // This can present an unintended problem: the user's PHP file max size limit will need to be upped _
+        // if they plan on uploading files larger than 2mb (or whatever the default limit is.)
+        if (Input::file('document')) {
+            $document = Input::file('document');
+            $file_name = str_random(25).".".$document->getClientOriginalExtension();
+            $path = public_path('uploads/models/'.$file_name);
+            $document->move(public_path('uploads/models'),$file_name);
+            $model->document = $file_name;
+        }
+        if (Input::get('document_delete') == 1 && Input::file('document') == "") {
+            $model->document = null;
+        }
+
 
         // Was it created?
         if ($model->save()) {

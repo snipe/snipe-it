@@ -54,6 +54,8 @@
     'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Deployed',
     'depreciation_report'	=> 'Depreciation Report',
+    'document_upload'           => 'Upload document',
+    'document_delete'           => 'Delete document',
     'download'				=> 'Download',
     'depreciation'			=> 'Depreciation',
     'editprofile'  			=> 'Edit Your Profile',
