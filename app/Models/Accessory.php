@@ -28,7 +28,7 @@ class Accessory extends Model
         'qty'               => 'required|integer|min:1',
         'category_id'       => 'required|integer',
         'company_id'        => 'integer',
-        'min_amt'           => 'integer|min:1',
+        'min_amt'           => 'integer|min:0',
         'purchase_cost'     => 'numeric',
     );
 
