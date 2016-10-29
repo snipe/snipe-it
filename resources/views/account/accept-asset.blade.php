@@ -9,8 +9,8 @@
 {{-- Page content --}}
 @section('content')
 
-
-<link rel="stylesheet" href="/assets/css/signature-pad.css">
+    
+<link rel="stylesheet" href="{{ asset('assets/css/signature-pad.css') }}">
 
 <style>
 .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
@@ -102,7 +102,8 @@
 </form>
 
 @section('moar_scripts')
-    <script src="/assets/js/signature_pad.min.js"></script>
+
+    <script src="{{ asset('assets/js/signature_pad.min.js') }}"></script>
     <script>
         var wrapper = document.getElementById("signature-pad"),
                 clearButton = wrapper.querySelector("[data-action=clear]"),
