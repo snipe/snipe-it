@@ -260,10 +260,7 @@ class SettingsController extends Controller
     */
     public function getIndex()
     {
-        // Grab all the settings
         $settings = Setting::all();
-
-        // Show the page
         return View::make('settings/index', compact('settings'));
     }
 
