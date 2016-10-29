@@ -377,7 +377,7 @@ class SettingsController extends Controller
         }
 
         $alert_email = rtrim(Input::get('alert_email'), ',');
-        $alert_email = trim(Input::get('alert_email'));
+        $alert_email = trim($alert_email);
 
         $setting->alert_email = e($alert_email);
         $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
