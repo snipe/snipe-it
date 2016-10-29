@@ -68,7 +68,10 @@ class AuthController extends Controller
         LOG::debug("Binding user to LDAP.");
         $ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
         if(!$ldap_user) {
-          throw new Exception("Could not find user in LDAP directory");
+            LOG::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
+            throw new \Exception("Could not find user in LDAP directory");
+        } else {
+            LOG::debug("LDAP user ".$request->input('username')." successfully bound to LDAP");
         }
 
         // Check if the user exists in the database
@@ -76,21 +79,21 @@ class AuthController extends Controller
         LOG::debug("Local auth lookup complete");
 
         // The user does not exist in the database. Try to get them from LDAP.
-        // If user does not exist and authenticates sucessfully with LDAP we
+        // If user does not exist and authenticates successfully with LDAP we
         // will create it on the fly and sign in with default permissions
         if (!$user) {
             LOG::debug("Local user ".Input::get('username')." does not exist");
             LOG::debug("Creating local user ".Input::get('username'));
 
-            if ($newuser = Ldap::createUserFromLdap($userattr)) { //this handles passwords on its own
+            if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
                 LOG::debug("Local user created.");
             } else {
                 LOG::debug("Could not create local user.");
-                throw new Exception("Could not create local user");
+                throw new \Exception("Could not create local user");
             }
             // If the user exists and they were imported from LDAP already
         } else {
-            LOG::debug("Local user ".Input::get('username')." exists in database. Updating existing user against LDAP.");
+            LOG::debug("Local user ".$request->input('username')." exists in database. Updating existing user against LDAP.");
 
             $ldap_attr = Ldap::parseAndMapLdapAttributes($ldap_user);
 
@@ -124,20 +127,20 @@ class AuthController extends Controller
         if (Setting::getSettings()->ldap_enabled=='1') {
             LOG::debug("LDAP is enabled.");
             try {
-              $user=$this->login_via_ldap($request);
+              $user = $this->login_via_ldap($request);
               Auth::login($user, true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
               if(Setting::getSettings()->ldap_pw_sync!='1') {
                 return redirect()->back()->withInput()->with('error',$e->getMessage());
               }
             }
         }
+
         if(!$user) {
           LOG::debug("Authenticating user against database.");
           // Try to log the user in
           if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
               LOG::debug("Local authentication failed.");
-              // throw new Cartalyst\Sentry\Users\UserNotFoundException();
               return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
           }
         }
