@@ -307,9 +307,9 @@ class CategoriesController extends Controller
     public function getDataViewAssets($categoryID)
     {
 
-        $category = Category::with('assets.company')->find($categoryID);
+        $category = Category::find($categoryID);
+        $category = $category->load('assets.company', 'assets.model', 'assets.assetstatus', 'assets.assigneduser');
         $category_assets = $category->assets();
-
         if (Input::has('search')) {
             $category_assets = $category_assets->TextSearch(e(Input::get('search')));
         }
@@ -333,7 +333,6 @@ class CategoriesController extends Controller
         $count = $category_assets->count();
         $category_assets = $category_assets->skip($offset)->take($limit)->get();
         $rows = array();
-
         foreach ($category_assets as $asset) {
 
             $actions = '';
@@ -364,7 +363,7 @@ class CategoriesController extends Controller
                 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
                 'change' => $inout,
                 'actions' => $actions,
-                'companyName' => Company::getName($asset),
+                'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
         }
 

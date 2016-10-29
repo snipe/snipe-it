@@ -1365,4 +1365,23 @@ class UsersController extends Controller
         return $response;
 
     }
+
+
+    public function postTwoFactorReset(Request $request)
+    {
+        if (Gate::denies('users.edit')) {
+            return response()->json(['message' => trans('general.insufficient_permissions')], 500);
+        }
+
+        try {
+            $user = User::find($request->get('id'));
+            $user->two_factor_secret = null;
+            $user->two_factor_enrolled = 0;
+            $user->save();
+            return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
+        }
+
+    }
 }

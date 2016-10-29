@@ -33,7 +33,7 @@ return array(
     "digits_between"   => "il  :attribute deve essere tra :min e :max digits.",
     "email"            => "il formato del :attribute è invalido.",
     "exists"           => ":attribute selezzionato è invalido.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "email_array"      => "Una o più email sono invalidi.",
     "image"            => "il :attribute deve essere un immagine.",
     "in"               => "Il selezionato :attribute è invalido.",
     "integer"          => "L' :attribute deve essere un numero intero.",
@@ -64,8 +64,8 @@ return array(
     ),
     "unique"           => "L' :attribute è già stato preso.",
     "url"              => "Il formato dell' :attribute è invalido.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Devi selezionare un tipo di stato valido",
+    "unique_undeleted" => "L'attributo deve essere univoco.",
 
 
     /*

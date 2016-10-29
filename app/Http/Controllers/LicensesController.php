@@ -742,6 +742,7 @@ class LicensesController extends Controller
     {
 
         $license = License::find($licenseId);
+        $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
 
         if (isset($license->id)) {
 
@@ -947,7 +948,7 @@ class LicensesController extends Controller
     */
     public function getDatatable()
     {
-        $licenses = Company::scopeCompanyables(License::with('company'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'licenseSeatsRelation', 'manufacturer'));
 
         if (Input::has('search')) {
             $licenses = $licenses->TextSearch(Input::get('search'));
@@ -991,7 +992,7 @@ class LicensesController extends Controller
                 'id'                => $license->id,
                 'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
                 'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
-                'totalSeats'        => $license->totalSeatsByLicenseID(),
+                'totalSeats'        => $license->licenseSeatsCount,
                 'remaining'         => $license->remaincount(),
                 'license_name'      => e($license->license_name),
                 'license_email'     => e($license->license_email),

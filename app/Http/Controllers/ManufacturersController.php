@@ -257,7 +257,7 @@ class ManufacturersController extends Controller
     */
     public function getDataView($manufacturerId, $itemtype = null)
     {
-        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
+        $manufacturer = Manufacturer::find($manufacturerId);
 
         switch ($itemtype) {
             case "assets":
@@ -276,6 +276,7 @@ class ManufacturersController extends Controller
 
     protected function getDataAssetsView(Manufacturer $manufacturer)
     {
+        $manufacturer = $manufacturer->load('assets.model', 'assets.assigneduser', 'assets.assetstatus', 'assets.company');
         $manufacturer_assets = $manufacturer->assets;
 
         if (Input::has('search')) {
@@ -329,20 +330,22 @@ class ManufacturersController extends Controller
                 'serial' => e($asset->serial),
                 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
                 'actions' => $actions,
-                'companyName' => e(Company::getName($asset)),
+                // 'companyName' => e(Company::getName($asset)),
+                'companyName' => is_null($asset->company) ? '' : $asset->company->name
                 );
 
-                if (isset($inout)) {
-                    $row['change'] = $inout;
-                }
+            if (isset($inout)) {
+                $row['change'] = $inout;
             }
-            
+        }
+
         $data = array('total' => $count, 'rows' => $rows);
         return $data;
     }
 
     protected function getDataLicensesView(Manufacturer $manufacturer)
     {
+        $manufacturer = $manufacturer->load('licenses.company', 'licenses.manufacturer', 'licenses.licenseSeatsRelation');
         $licenses = $manufacturer->licenses;
 
         if (Input::has('search')) {
@@ -380,7 +383,7 @@ class ManufacturersController extends Controller
                 'id'                => $license->id,
                 'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
                 'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
-                'totalSeats'        => $license->totalSeatsByLicenseID(),
+                'totalSeats'        => $license->licenseSeatCount,
                 'remaining'         => $license->remaincount(),
                 'license_name'      => e($license->license_name),
                 'license_email'     => e($license->license_email),
@@ -403,6 +406,13 @@ class ManufacturersController extends Controller
 
     public function getDataAccessoriesView(Manufacturer $manufacturer)
     {
+        $manufacturer = $manufacturer->load(
+            'accessories.location',
+            'accessories.company',
+            'accessories.category',
+            'accessories.manufacturer',
+            'accessories.users'
+            );
         $accessories = $manufacturer->accessories;
 
         if (Input::has('search')) {
@@ -461,6 +471,13 @@ class ManufacturersController extends Controller
 
     public function getDataConsumablesView($manufacturer)
     {
+        $manufacturer = $manufacturer->load(
+            'consumables.location',
+            'consumables.company',
+            'consumables.category',
+            'consumables.manufacturer',
+            'consumables.users'
+        );
         $consumables = $manufacturer->consumables;
 
         if (Input::has('search')) {

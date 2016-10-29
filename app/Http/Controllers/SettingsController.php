@@ -260,10 +260,7 @@ class SettingsController extends Controller
     */
     public function getIndex()
     {
-        // Grab all the settings
         $settings = Setting::all();
-
-        // Show the page
         return View::make('settings/index', compact('settings'));
     }
 
@@ -316,10 +313,11 @@ class SettingsController extends Controller
         }
 
 
-        if (config('app.lock_passwords')==false) {
+        if (!config('app.lock_passwords')) {
             $setting->site_name = e(Input::get('site_name'));
             $setting->brand = e(Input::get('brand'));
             $setting->custom_css = e(Input::get('custom_css'));
+            $setting->two_factor_enabled = e(Input::get('two_factor_enabled'));
         }
 
         if (Input::get('per_page')!='') {
@@ -379,7 +377,7 @@ class SettingsController extends Controller
         }
 
         $alert_email = rtrim(Input::get('alert_email'), ',');
-        $alert_email = trim(Input::get('alert_email'));
+        $alert_email = trim($alert_email);
 
         $setting->alert_email = e($alert_email);
         $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));

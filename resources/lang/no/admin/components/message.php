@@ -21,15 +21,15 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponent ble ikke sjekket ut. Prøv igjen',
+        'success' 		=> 'Vellykket utsjekk av komponent.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenten ble ikke sjekket inn, vennligst prøv igjen',
+        'success' 		=> 'Vellykket innsjekk av komponent.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Prøv igjen.'
     )
 
 
