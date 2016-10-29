@@ -313,7 +313,7 @@ class SettingsController extends Controller
         }
 
 
-        if (config('app.lock_passwords')==false) {
+        if (!config('app.lock_passwords')) {
             $setting->site_name = e(Input::get('site_name'));
             $setting->brand = e(Input::get('brand'));
             $setting->custom_css = e(Input::get('custom_css'));
