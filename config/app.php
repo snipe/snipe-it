@@ -212,7 +212,7 @@ return [
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         MisterPhilip\MaintenanceMode\MaintenanceModeServiceProvider::class,
         MisterPhilip\MaintenanceMode\MaintenanceCommandServiceProvider::class,
-
+        PragmaRX\Google2FA\Vendor\Laravel\ServiceProvider::class,
         /*
          * Custom service provider
          */
@@ -269,6 +269,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => 'Collective\Html\FormFacade',
         'Html'      => 'Collective\Html\HtmlFacade',
+        'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
     ],
 
 ];
