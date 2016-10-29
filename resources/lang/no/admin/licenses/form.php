@@ -9,7 +9,7 @@ return array(
     'date'              => 'Innkjøpsdato',
     'depreciation'      => 'Avskrivning',
     'expiration'        => 'Utløpsdato',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Produktnøkkel',
     'maintained'        => 'Vedlikeholdt',
     'name'              => 'Navn programvare',
     'no_depreciation'   => 'Ingen avskrivning',

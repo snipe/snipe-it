@@ -11,7 +11,7 @@ return array(
     'filetype_info'     => 'I formati di file permessi sono png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, e rar.',
     'history_user'      => 'Storico di :name',
     'last_login'        => 'Ultimo accesso',
-    'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
+    'ldap_config_text'  => 'Le impostazioni di configurazione di LDAP possono essere trovate su Admin > Impostazioni. La posizione selezionata (facoltativa) verrà impostata per tutti gli utenti importati.',
     'software_user'     => 'Software estratto a :name',
     'view_user'         => 'Visualizza Utente :name',
     'usercsv'           => 'CSV file',
