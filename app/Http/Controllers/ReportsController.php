@@ -356,8 +356,10 @@ class ReportsController extends Controller
               $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
-                $activity_item = '<a href="'.route('view/'. $activity->itemType(), $activity->item_id).'">'.e($activity->item->name).'</a>';
+                $activity_item = '<a href="' . route('view/' . $activity->itemType(),
+                        $activity->item_id) . '">' . e($activity->item->name) . '</a>';
                 $item_type = $activity->itemType();
+
             } else {
                 $activity_item = "unkonwn";
                 $item_type = "null";
@@ -378,6 +380,9 @@ class ReportsController extends Controller
                 } else {
                     $activity_target = '';
                 }
+            } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
+                $activity_target = '<a href="' . route('view/user', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->fullName()) . '</a>';
+
             } elseif ($activity->action_type=='requested') {
                 if ($activity->user) {
                     $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';

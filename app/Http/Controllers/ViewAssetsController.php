@@ -348,7 +348,7 @@ class ViewAssetsController extends Controller
         if ($request->has('signature_output')) {
             $path = config('app.private_uploads').'/signatures';
             $sig_filename = "siglog-".$findlog->id.'-'.date('Y-m-d-his').".png";
-            $data_uri = $request->get('signature_output');
+            $data_uri = e($request->get('signature_output'));
             $encoded_image = explode(",", $data_uri);
             $decoded_image = base64_decode($encoded_image[1]);
             file_put_contents($path."/".$sig_filename, $decoded_image);

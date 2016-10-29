@@ -578,7 +578,6 @@
                           @elseif ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
 
 
-
                             @if ($log->target instanceof \App\Models\User)
 
                               @if ($log->target->deleted_at=='')
@@ -595,7 +594,9 @@
                                 </a>
                               @else
                                 <del>{{ $log->target->showAssetName() }}</del>
-                              @endif                         
+                              @endif
+                            @elseif (($log->action_type=='accepted') || ($log->action_type=='declined'))
+                                    {{ $log->item->assigneduser->fullName() }}
                             @else
 
                               Deleted User
