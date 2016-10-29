@@ -90,6 +90,7 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
     /*---Users API---*/
     Route::group([ 'prefix' => 'users' ], function () {
         Route::post('/', [ 'as' => 'api.users.store', 'uses' => 'UsersController@store' ]);
+        Route::post('two_factor_reset', [ 'as' => 'api.users.two_factor_reset', 'uses' => 'UsersController@postTwoFactorReset' ]);
         Route::get('list/{status?}', [ 'as' => 'api.users.list', 'uses' => 'UsersController@getDatatable' ]);
         Route::get('{userId}/assets', [ 'as' => 'api.users.assetlist', 'uses' => 'UsersController@getAssetList' ]);
         Route::post('{userId}/upload', [ 'as' => 'upload/user', 'uses' => 'UsersController@postUpload' ]);

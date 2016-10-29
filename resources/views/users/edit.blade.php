@@ -318,6 +318,27 @@
             </div>
           </div>
 
+            @if (\App\Models\Setting::getSettings()->two_factor_enabled!='')
+
+                <!-- Notes -->
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                            <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
+                                <span id="two_factor_reseticon">
+                              </span>
+                                <span id="two_factor_resetresult">
+                              </span>
+                                <span id="two_factor_resetstatus">
+                              </span>
+
+                        </div>
+                        <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                            <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                        </div>
+                    </div>
+
+            @endif
+
           <!-- Notes -->
           <div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
             <label for="notes" class="col-md-3 control-label">{{ trans('admin/users/table.notes') }}</label>
@@ -544,5 +565,34 @@ $(document).ready(function(){
         }
     });
 });
+
+    $("#two_factor_reset").click(function(){
+        $("#two_factor_resetrow").removeClass('success');
+        $("#two_factor_resetrow").removeClass('danger');
+        $("#two_factor_resetstatus").html('');
+        $("#two_factor_reseticon").html('<i class="fa fa-spinner spin"></i>');
+        $.ajax({
+            url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
+            type: 'POST',
+            data: {},
+            dataType: 'json',
+
+            success: function (data) {
+                $("#two_factor_reseticon").html('');
+                $("#two_factor_resetstatus").html('<i class="fa fa-check text-success"></i>' + data.message);
+            },
+
+            error: function (data) {
+                $("#two_factor_reseticon").html('');
+                $("#two_factor_reseticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                $('#two_factor_resetstatus').text(data.message);
+            }
+
+
+        });
+    });
+
+
+
 </script>
 @stop
