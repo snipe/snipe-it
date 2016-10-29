@@ -38,10 +38,10 @@ class CheckForTwoFactor
             // Otherwise make sure they're enrolled and show them the 2FA code screen
             if ((Auth::user()->two_factor_secret!='') && (Auth::user()->two_factor_enrolled=='1')) {
                 return redirect()->route('two-factor')->with('info', 'Please enter your two-factor authentication code.');
-            } else {
-                return redirect()->route('two-factor-enroll')->with('success', 'Please enroll a device in two-factor authentication.');
             }
 
+            return redirect()->route('two-factor-enroll')->with('success', 'Please enroll a device in two-factor authentication.');
+            
 
         }
 
