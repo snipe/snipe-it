@@ -97,7 +97,7 @@
     'loading'				=> 'بارگزاری',
     'lock_passwords'        => 'در این زمینه می توانید  نصب و راه اندازی را ویرایش کنید.
 ',
-    'feature_disabled'      => 'این قابلیت برای این نصب و راه اندازی غیر فعال است.',
+    'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'مکان',
     'locations'				=> 'مکانها',
     'logout'				=> 'خروج',
@@ -155,6 +155,7 @@
     'status_labels'			=> 'برچسب های وضعیت',
     'status'    			=> 'وضعیت',
     'suppliers'  			=> 'تامین کننده',
+    'submit'				=> 'Submit',
     'total_assets'			=> 'کل دارایی',
     'total_licenses'		=> 'کل مجوزهای',
     'total_accessories'		=> 'total accessories',

@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'send_password_link'	        => 'Send Passord Tilbakestillingslink',
+    'email_reset_password'			=> 'E-post Passord Tilbakestill',
+    'reset_password'			    => 'Tilbakestill Passord',
+    'login'                         => 'Logg inn',
+    'login_prompt'                  => 'Vennligst logg inn',
+    'forgot_password'               => 'Jeg har glemt passordet mitt',
+    'remember_me'                   => 'Husk meg',
     ];
 
