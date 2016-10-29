@@ -567,8 +567,6 @@
                             @if ($log->action_type != 'requested')
                                 @if (isset($log->user))
                                     {{ $log->user->fullName() }}
-                                @else
-                                    Deleted Admin
                                 @endif
                             @endif
                         </td>
@@ -580,13 +578,13 @@
                           @elseif ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
 
 
+
                             @if ($log->target instanceof \App\Models\User)
 
                               @if ($log->target->deleted_at=='')
                                 <a href="{{ route('view/user', $log->target_id) }}">
                                 {{ $log->target->fullName() }}
                                 </a>
-
                               @else
                                 <del>{{ $log->target->fullName() }}</del>
                               @endif
@@ -595,11 +593,11 @@
                                 <a href="{{ route('view/hardware', $log->target_id) }}">
                                 {{ $log->target->showAssetName() }}
                                 </a>
-
                               @else
                                 <del>{{ $log->target->showAssetName() }}</del>
                               @endif                         
                             @else
+
                               Deleted User
                             @endif
                           @endif

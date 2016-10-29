@@ -120,6 +120,8 @@ return array(
     'two_factor_enter_code'	=> 'Enter Two-Factor Code',
     'two_factor_config_complete'	=> 'Submit Code',
     'two_factor_enrollment_text'	=> "Two factor authentication is required, however your device has not been enrolled yet. Open your Google Authenticator app and scan the QR code below to enroll your device. Once you've enrolled your device, enter the code below",
+    'require_accept_signature'      => 'Require Signature',
+    'require_accept_signature_help_text'      => 'Enabling this feature will require users to physically sign off on accepting an asset.',
     'left'        => 'left',
     'right'        => 'right',
     'top'        => 'top',

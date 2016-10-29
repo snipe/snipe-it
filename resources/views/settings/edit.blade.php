@@ -116,6 +116,21 @@
                 </div>
                 <!-- /.form-group -->
 
+                <!-- Require signature for acceptance -->
+                <div class="form-group {{ $errors->has('require_accept_signature') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('full_multiple_companies_support',
+                                   trans('admin/settings/general.require_accept_signature')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {{ Form::checkbox('require_accept_signature', '1', Input::old('require_accept_signature', $setting->require_accept_signature),array('class' => 'minimal')) }}
+                    {{ trans('general.yes') }}
+                    {!! $errors->first('require_accept_signature', '<span class="alert-msg">:message</span>') !!}
+                    <p class="help-block">{{ trans('admin/settings/general.require_accept_signature_help_text') }}</p>
+                  </div>
+                </div>
+                <!-- /.form-group -->
+
                 <!-- Logo -->
                 <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
                   <div class="col-md-3">

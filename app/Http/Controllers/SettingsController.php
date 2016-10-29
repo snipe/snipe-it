@@ -343,6 +343,7 @@ class SettingsController extends Controller
         $setting->email_domain = e(Input::get('email_domain'));
         $setting->email_format = e(Input::get('email_format'));
         $setting->username_format = e(Input::get('username_format'));
+        $setting->require_accept_signature = e(Input::get('require_accept_signature'));
 
 
         $setting->labels_per_page = e(Input::get('labels_per_page'));
