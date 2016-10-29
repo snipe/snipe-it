@@ -108,6 +108,7 @@ return array(
     'two_factor_secret'        => 'Two-Factor Code',
     'two_factor_enrollment'        => 'Two-Factor Enrollment',
     'two_factor_enabled_text'        => 'Enable Two Factor',
+    'two_factor_enabled_warning'        => 'Enabling two-factor if it is not currently enabled will immediately force you to authenticate with a Google Auth enrolled device. You will have the ability to enroll your device if one is not currently enrolled.',
     'two_factor_enabled_help'        => 'This will turn on two-factor authentication using Google Authenticator.',
     'two_factor_optional'        => 'Optional (Users can enable or disable)',
     'two_factor_required'        => 'Required for all users',

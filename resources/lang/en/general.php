@@ -93,7 +93,7 @@
     'list_all'				=> 'List All',
     'loading'				=> 'Loading',
     'lock_passwords'        => 'This field cannot be edited in this installation.',
-    'feature_disabled'      => 'This feature has been disabled for this installation.',
+    'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'Location',
     'locations'				=> 'Locations',
     'logout'				=> 'Logout',
