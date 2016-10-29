@@ -320,6 +320,7 @@ class SettingsController extends Controller
             $setting->site_name = e(Input::get('site_name'));
             $setting->brand = e(Input::get('brand'));
             $setting->custom_css = e(Input::get('custom_css'));
+            $setting->two_factor_enabled = e(Input::get('two_factor_enabled'));
         }
 
         if (Input::get('per_page')!='') {

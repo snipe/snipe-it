@@ -997,6 +997,29 @@ Route::group([ 'prefix' => 'setup', 'middleware' => 'web'], function () {
 
 });
 
+Route::get(
+    'two-factor-enroll',
+    [
+        'as' => 'two-factor-enroll',
+        'middleware' => ['web'],
+        'uses' => 'Auth\AuthController@getTwoFactorEnroll' ]
+);
+
+Route::get(
+    'two-factor',
+    [
+        'as' => 'two-factor',
+        'middleware' => ['web'],
+        'uses' => 'Auth\AuthController@getTwoFactorAuth' ]
+);
+
+Route::post(
+    'two-factor',
+    [
+        'as' => 'two-factor',
+        'middleware' => ['web'],
+        'uses' => 'Auth\AuthController@postTwoFactorAuth' ]
+);
 
 Route::get(
     '/',
@@ -1006,8 +1029,24 @@ Route::get(
     'uses' => 'DashboardController@getIndex' ]
 );
 
+
+
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+    Route::get(
+        'login',
+        [
+            'as' => 'login',
+            'middleware' => ['web'],
+            'uses' => 'Auth\AuthController@showLoginForm' ]
+    );
+    Route::get(
+        'logout',
+        [
+            'as' => 'logout',
+            'uses' => 'Auth\AuthController@logout' ]
+    );
+
 });
 
 Route::get('home', function () {

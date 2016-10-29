@@ -15,6 +15,7 @@ use Input;
 use Redirect;
 use Log;
 use View;
+use PragmaRX\Google2FA\Google2FA;
 
 
 
@@ -48,7 +49,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
     }
 
 
@@ -136,6 +137,7 @@ class AuthController extends Controller
             }
         }
 
+        // If the user wasn't authenticated via LDAP, skip to local auth
         if(!$user) {
           LOG::debug("Authenticating user against database.");
           // Try to log the user in
@@ -151,22 +153,93 @@ class AuthController extends Controller
         // Unset the page we were before from the session
         \Session::forget('loginRedirect');
 
+
+
         // Redirect to the users page
         return redirect()->to($redirect)->with('success', trans('auth/message.signin.success'));
     }
+
+
+    /**
+     * Two factor enrollment page
+     *
+     * @return Redirect
+     */
+    public function getTwoFactorEnroll()
+    {
+
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in.');
+        }
+
+        $user = Auth::user();
+        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
+
+        if ($user->two_factor_secret=='') {
+            $user->two_factor_secret = $google2fa->generateSecretKey();
+            $user->save();
+        }
+
+
+        $google2fa_url = $google2fa->getQRCodeGoogleUrl(
+            Setting::getSettings()->site_name,
+            $user->username,
+            $user->two_factor_secret
+        );
+
+        return View::make('auth.two_factor_enroll')->with('google2fa_url',$google2fa_url);
+
+    }
+
+
+    /**
+     * Two factor code form page
+     *
+     * @return Redirect
+     */
+    public function getTwoFactorAuth() {
+        return View::make('auth.two_factor');
+    }
+
+    /**
+     * Two factor code submission
+     *
+     * @return Redirect
+     */
+    public function postTwoFactorAuth(Request $request) {
+
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in.');
+        }
+
+        $user = Auth::user();
+        $secret = $request->get('two_factor_secret');
+        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
+        $valid = $google2fa->verifyKey($user->two_factor_secret, $secret);
+
+        if ($valid) {
+            $user->two_factor_enrolled = 1;
+            $user->save();
+            $request->session()->put('2fa_authed', 'true');
+            return redirect()->route('home')->with('success', 'You are logged in!');
+        }
+
+        return redirect()->route('two-factor')->with('error', 'Invalid two-factor code');
+
+
+    }
+
 
     /**
      * Logout page.
      *
      * @return Redirect
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        // Log the user out
+        $request->session()->forget('2fa_authed');
         Auth::logout();
-
-        // Redirect to the users page
-        return redirect()->route('home')->with('success', 'You have successfully logged out!');
+        return redirect()->route('login')->with('success', 'You have successfully logged out!');
     }
 
 

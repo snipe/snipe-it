@@ -151,6 +151,7 @@
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Status',
     'suppliers'  			=> 'Suppliers',
+    'submit'				=> 'Submit',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
     'total_accessories'		=> 'total accessories',

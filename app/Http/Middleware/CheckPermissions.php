@@ -22,7 +22,8 @@ class CheckPermissions
    */
     public function handle($request, Closure $next, $section = null)
     {
-        
+
+
         if (Gate::allows($section)) {
             return $next($request);
         }

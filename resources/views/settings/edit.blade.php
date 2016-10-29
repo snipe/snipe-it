@@ -71,6 +71,17 @@
                   </div>
                 </div>
 
+                <!-- Two Factor -->
+                <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('two_factor_enabled', trans('admin/settings/general.two_factor_enabled_text')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {!! Form::two_factor_options('two_factor_enabled', Input::old('two_factor_enabled', $setting->two_factor_enabled), 'select2') !!}
+                    {!! $errors->first('two_factor_enabled', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
                 <!-- Languages -->
                 <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
                   <div class="col-md-3">

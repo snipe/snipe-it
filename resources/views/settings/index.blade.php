@@ -37,17 +37,28 @@
                       <td class="col-md-4">{{ trans('admin/settings/general.site_name') }}</td>
                       <td class="col-md-8">{{ $setting->site_name }} </td>
                   </tr>
-                      <tr>
-                          <td>
-                              {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
-                          </td>
+                  <tr>
+                      <td>
+                          {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
+                      </td>
 
-                          @if ($setting->full_multiple_companies_support == 1)
-                              <td>{{ trans('general.yes') }}</td>
-                          @else
-                              <td>{{ trans('general.no') }}</td>
-                          @endif
-                      </tr>
+                      @if ($setting->full_multiple_companies_support == 1)
+                          <td>{{ trans('general.yes') }}</td>
+                      @else
+                          <td>{{ trans('general.no') }}</td>
+                      @endif
+                  </tr>
+                  <tr>
+                      <td>{{ trans('admin/settings/general.two_factor_enabled_text') }}</td>
+
+                      @if ($setting->two_factor_enabled == '')
+                          <td>{{ trans('admin/settings/general.two_factor_disabled') }}</td>
+                      @elseif ($setting->two_factor_enabled == '1')
+                          <td>{{ trans('admin/settings/general.two_factor_optional') }}</td>
+                      @elseif ($setting->two_factor_enabled == '2')
+                          <td>{{ trans('admin/settings/general.two_factor_required') }}</td>
+                      @endif
+                  </tr>
                   <tr>
                       <td>{{ trans('admin/settings/general.default_currency') }}</td>
                       <td>{{ $setting->default_currency }} </td>
