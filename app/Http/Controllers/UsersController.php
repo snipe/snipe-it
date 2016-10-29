@@ -978,7 +978,7 @@ class UsersController extends Controller
             $rows[] = array(
                 'id'         => $user->id,
                 'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>' : '',
-                'name'          => '<a title="'.e($user->fullName()).'" href="../admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
+                'name'          => '<a title="'.e($user->fullName()).'" href="'.config('app.url').'/admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
                 'jobtitle'          => e($user->jobtitle),
                 'email'         => ($user->email!='') ?
                             '<a href="mailto:'.e($user->email).'" class="hidden-md hidden-lg">'.e($user->email).'</a>'
@@ -986,7 +986,7 @@ class UsersController extends Controller
                             .'</span>' : '',
                 'username'         => e($user->username),
                 'location'      => ($user->userloc) ? e($user->userloc->name) : '',
-                'manager'         => ($user->manager) ? '<a title="' . e($user->manager->fullName()) . '" href="users/' . e($user->manager->id) . '/view">' . e($user->manager->fullName()) . '</a>' : '',
+                'manager'         => ($user->manager) ? '<a title="' . e($user->manager->fullName()) . '" href="'.config('app.url').'/' . e($user->manager->id) . '/view">' . e($user->manager->fullName()) . '</a>' : '',
                 'assets'        => $user->assets->count(),
                 'employee_num'  => e($user->employee_num),
                 'licenses'        => $user->licenses->count(),
