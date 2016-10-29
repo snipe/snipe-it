@@ -2,9 +2,10 @@
 
 {{-- Page title --}}
 @section('title')
-
-@parent
+    Accept {{ $item->showAssetName() }}
+    @parent
 @stop
+
 
 {{-- Page content --}}
 @section('content')
@@ -25,13 +26,7 @@
 }
 
 </style>
-<div class="row header">
-    <div class="col-md-12">
 
-        <h3>
-        Accept {{ $item->showAssetName() }}</h3>
-    </div>
-</div>
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
     <!-- CSRF Token -->
