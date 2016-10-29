@@ -4,8 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Response;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -91,14 +90,13 @@ class Actionlog extends Model
     /**
        * Check if the file exists, and if it does, force a download
        **/
-    public function get_src($type = 'assets')
+    public function get_src($type = 'assets', $fieldname = 'filename')
     {
-
-        $file = config('app.private_uploads') . '/' . $type . '/' . $this->filename;
-
+        $file = config('app.private_uploads') . '/' . $type . '/' . $this->{$fieldname};
         return $file;
-
     }
+
+
 
     /**
        * Get the parent category name

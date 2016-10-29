@@ -556,6 +556,9 @@
                       <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
                       <th class="col-md-2"><span class="line"></span>{{ trans('general.user') }}</th>
                       <th class="col-md-3"><span class="line"></span>{{ trans('general.notes') }}</th>
+                      @if  (App\Models\Setting::getSettings()->require_accept_signature=='1')
+                      <th class="col-md-3"><span class="line"></span>{{ trans('general.signature') }}</th>
+                      @endif
                   </tr>
                 </thead>
                 <tbody>
@@ -607,6 +610,13 @@
                           @if ($log->note) {{ $log->note }}
                           @endif
                         </td>
+                          @if  (App\Models\Setting::getSettings()->require_accept_signature=='1')
+                          <td>
+                              @if (($log->accept_signature!='') && (($log->action_type=='accepted') || ($log->action_type=='declined')))
+                                  <a href="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" class="img-responsive"></a>
+                               @endif
+                          </td>
+                          @endif
                       </tr>
 
                     @endforeach
