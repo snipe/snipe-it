@@ -892,7 +892,7 @@ class UsersController extends Controller
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.employee_num','users.jobtitle','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
+        $users = User::select(array('users.id','users.employee_num','users.two_factor_enrolled','users.jobtitle','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
         ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle');
         $users = Company::scopeCompanyables($users);
 
@@ -919,7 +919,7 @@ class UsersController extends Controller
                 $allowed_columns =
                 [
                  'last_name','first_name','email','jobtitle','username','employee_num',
-                 'assets','accessories', 'consumables','licenses','groups','activated','created_at'
+                 'assets','accessories', 'consumables','licenses','groups','activated','created_at','two_factor_enrolled'
                 ];
 
                 $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
@@ -994,6 +994,7 @@ class UsersController extends Controller
                 'consumables'        => $user->consumables->count(),
                 'groups'        => $group_names,
                 'notes'         => e($user->notes),
+                'two_factor_enrolled'        => ($user->two_factor_enrolled=='1') ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>',
                 'created_at' => ($user->created_at!='')  ? e($user->created_at->format('F j, Y h:iA')) : '',
                 'activated'      => ($user->activated=='1') ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>',
                 'actions'       => ($actions) ? $actions : '',
