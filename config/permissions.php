@@ -279,6 +279,16 @@ return array(
 
     ),
 
+    'Self' => array(
+        array(
+            'permission' => 'self.two_factor',
+            'label'      => 'Two-Factor Authentication',
+            'note'       => 'The user may disable/enable two-factor authentication themselves if two-factor is enabled and set to selective.',
+            'display'    => true,
+        ),
+
+    ),
+
 
 
 

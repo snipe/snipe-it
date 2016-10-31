@@ -15,4 +15,5 @@ return array(
     'software_user'     => 'Software Checked out to :name',
     'view_user'         => 'View User :name',
     'usercsv'           => 'CSV file',
+    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
     );

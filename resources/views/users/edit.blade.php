@@ -320,7 +320,23 @@
 
             @if (\App\Models\Setting::getSettings()->two_factor_enabled!='')
 
-                <!-- Notes -->
+                @if (\App\Models\Setting::getSettings()->two_factor_enabled=='1')
+                <div class="form-group">
+                    <div class="col-md-3 control-label">
+                        {{ Form::label('two_factor_optin', trans('admin/settings/general.two_factor')) }}
+                    </div>
+                    <div class="col-md-9">
+                        {{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+                        {{ trans('admin/settings/general.two_factor_enabled_text') }}
+
+                        <p class="help-block">{{ trans('admin/users/general.two_factor_admin_optin_help') }}</p>
+                    </div>
+                </div>
+                @endif
+
+
+
+                <!-- Reset Two Factor -->
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
                             <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
@@ -405,7 +421,7 @@
         <table class="table table-striped permissions">
           <thead>
             <tr class="permissions-row">
-              <th class="col-md-2"><span class="line"></span>Permission</th>
+              <th class="col-md-5"><span class="line"></span>Permission</th>
               <th class="col-md-1"><span class="line"></span>Grant</th>
               <th class="col-md-1"><span class="line"></span>Deny</th>
               <th class="col-md-1"><span class="line"></span>Inherit</th>
@@ -416,7 +432,7 @@
               <tbody class="permissions-group">
               <?php $localPermission = $permissionsArray[0] ?>
                 <tr class="header-row permissions-row">
-                  <td class="col-md-2 tooltip-base permissions-item"
+                  <td class="col-md-5 tooltip-base permissions-item"
                     data-toggle="tooltip"
                     data-placement="right"
                     title="{{ $localPermission['note'] }}"
@@ -439,7 +455,7 @@
             @else
               <tbody class="permissions-group">
               <tr class="header-row permissions-row">
-                <td class="col-md-2 header-name">
+                <td class="col-md-5 header-name">
                   <h3>{{ $area }}</h3>
                 </td>
                 <td class="col-md-1 permissions-item">
@@ -456,7 +472,7 @@
               <tr class="permissions-row">
                 @if ($permission['display'])
                   <td
-                    class="col-md-2 tooltip-base permissions-item"
+                    class="col-md-5 tooltip-base permissions-item"
                     data-toggle="tooltip"
                     data-placement="right"
                     title="{{ $permission['note'] }}"

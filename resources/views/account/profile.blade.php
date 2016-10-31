@@ -104,19 +104,29 @@
 
       <!-- Two factor opt in -->
          @if (\App\Models\Setting::getSettings()->two_factor_enabled=='1')
+
             <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
 
                 <div class="col-md-7 col-md-offset-3">
 
-                    <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+                    @can('self.two_factor')
+                        <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+                        @else
+                            <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),['class' => 'disabled minimal', 'disabled' => 'disabled']) }}
+                        @endcan
 
                      {{ trans('admin/settings/general.two_factor_enabled_text') }}</label>
-                    <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
+                    @can('self.two_factor')
+                        <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
+                     @else
+                       <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_edit_not_allowed') }}</p>
+                     @endcan
                     @if (config('app.lock_passwords'))
                         <p class="help-block">{{ trans('general.feature_disabled') }}</p>
                     @endif
                 </div>
             </div>
+
          @endif
 
 

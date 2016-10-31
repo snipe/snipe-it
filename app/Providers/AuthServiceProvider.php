@@ -328,5 +328,15 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        # -----------------------------------------
+        # Self
+        # -----------------------------------------
+        $gate->define('self.two_factor', function ($user) {
+            if (($user->hasAccess('self.two_factor')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
+
     }
 }
