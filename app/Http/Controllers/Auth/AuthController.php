@@ -176,7 +176,7 @@ class AuthController extends Controller
         $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
 
         if ($user->two_factor_secret=='') {
-            $user->two_factor_secret = $google2fa->generateSecretKey();
+            $user->two_factor_secret = $google2fa->generateSecretKey(32);
             $user->save();
         }
 
