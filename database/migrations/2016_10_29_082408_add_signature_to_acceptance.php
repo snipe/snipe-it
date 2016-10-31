@@ -30,7 +30,6 @@ class AddSignatureToAcceptance extends Migration
     {
         Schema::table('settings', function ($table) {
             $table->dropColumn('require_accept_signature');
-            $table->dropColumn('accept_signature');
         });
 
         Schema::table('action_logs', function ($table) {
