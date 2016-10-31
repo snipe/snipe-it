@@ -317,7 +317,13 @@ class SettingsController extends Controller
             $setting->site_name = e(Input::get('site_name'));
             $setting->brand = e(Input::get('brand'));
             $setting->custom_css = e(Input::get('custom_css'));
-            $setting->two_factor_enabled = e(Input::get('two_factor_enabled'));
+
+            if (Input::get('two_factor_enabled')=='') {
+                $setting->two_factor_enabled = null;
+            } else {
+                $setting->two_factor_enabled = e(Input::get('two_factor_enabled'));
+            }
+
         }
 
         if (Input::get('per_page')!='') {
@@ -357,6 +363,7 @@ class SettingsController extends Controller
         $setting->labels_fontsize = e(Input::get('labels_fontsize'));
         $setting->labels_pagewidth = e(Input::get('labels_pagewidth'));
         $setting->labels_pageheight = e(Input::get('labels_pageheight'));
+
 
         if (Input::has('labels_display_name')) {
             $setting->labels_display_name = 1;
@@ -408,10 +415,8 @@ class SettingsController extends Controller
         $setting->ldap_tls = e(Input::get('ldap_tls', '0'));
         $setting->ldap_pw_sync = e(Input::get('ldap_pw_sync', '0'));
 
-        // If validation fails, we'll exit the operation now.
         if ($setting->save()) {
             return redirect()->to("admin/settings/app")->with('success', trans('admin/settings/message.update.success'));
-
         } else {
             return redirect()->back()->withInput()->withErrors($setting->getErrors());
         }
