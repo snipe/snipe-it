@@ -5,6 +5,8 @@
 @section('content')
 
     <form role="form" action="{{ url('/login') }}" method="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
         <div class="container">
             <div class="row">
 
@@ -25,7 +27,7 @@
 
                                 <div class="col-md-12">
                                     <!-- CSRF Token -->
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
 
                                     <fieldset>
                                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
