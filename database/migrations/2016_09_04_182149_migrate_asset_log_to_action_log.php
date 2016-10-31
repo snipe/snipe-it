@@ -59,6 +59,7 @@ class MigrateAssetLogToActionLog extends Migration
             $a->expected_checkin    = $log->expected_checkin;
             $a->thread_id           = $log->thread_id;
             $a->accepted_id         = $log->accepted_id;
+            $a->filename            = $log->filename;
 
             $a->save();
 
