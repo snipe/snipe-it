@@ -348,8 +348,16 @@ class UsersController extends Controller
         $user->company_id = e(Company::getIdForUser($request->input('company_id')));
         $user->manager_id = e($request->input('manager_id'));
         $user->notes = e($request->input('notes'));
-        $user->permissions = json_encode($request->input('permission'));
 
+        // Strip out the superuser permission if the user isn't a superadmin
+        $permissions_array = $request->input('permission');
+
+        if (!Auth::user()->isSuperUser()) {
+            unset($permissions_array['superuser']);
+        }
+
+        $user->permissions =  json_encode($permissions_array);
+        
         if ($user->manager_id == "") {
             $user->manager_id = null;
         }
