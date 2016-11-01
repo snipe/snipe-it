@@ -315,12 +315,16 @@ class UsersController extends Controller
             return redirect()->route('users')->with('error', $error);
         }
 
-        // First handle anything exclusive to editing.
-        if ($request->has('groups')) {
-            $user->groups()->sync($request->input('groups'));
-        } else {
-            $user->groups()->sync(array());
+
+        // Only save groups if the user is a super user
+        if (Auth::user()->isSuperUser()) {
+            if ($request->has('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            } else {
+                $user->groups()->sync(array());
+            }
         }
+
         // Do we want to update the user password?
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
