@@ -413,7 +413,7 @@
     </div><!-- /.tab-pane -->
 
     <div class="tab-pane" id="tab_2">
-        <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-12">
             @if (!Auth::user()->isSuperUser())
               <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
             @endif
