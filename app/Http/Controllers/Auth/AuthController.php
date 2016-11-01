@@ -182,7 +182,7 @@ class AuthController extends Controller
 
 
         $google2fa_url = $google2fa->getQRCodeGoogleUrl(
-            Setting::getSettings()->site_name,
+            urlencode(Setting::getSettings()->site_name),
             $user->username,
             $user->two_factor_secret
         );
