@@ -86,6 +86,8 @@
                               @endif
 
                               {{ $asset->assetstatus->name }}
+
+                              ({{ $asset->assetstatus->getStatuslabelType() }})
                            </td>
                       </tr>
                   @endif
