@@ -369,7 +369,7 @@
             <label class="col-md-3 control-label" for="groups"> {{ trans('general.groups') }}</label>
             <div class="col-md-5">
 
-                @if ((Config::get('app.lock_passwords') || ($user->id==Auth::user()->id) || (!Auth::user()->isSuperUser())))
+                @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
 
                     @if (count($userGroups->keys()) > 0)
                         <ul>
@@ -380,7 +380,7 @@
                     @endif
 
                     <span class="help-block">Only superadmins may edit group memberships.</p>
-                    @else
+                @else
                     <div class="controls">
                         <select
                                 name="groups[]"
