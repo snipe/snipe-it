@@ -75,6 +75,20 @@
               <div class="table-responsive" style="margin-top: 10px;">
                 <table class="table">
                   <tbody>
+                  @if ($asset->assetstatus)
+                      <tr>
+                          <td>{{ trans('general.status') }}</td>
+                          <td>
+                              @if ($asset->assetstatus->color)
+                              <span class="label label-default" style="background-color: {{ e($asset->assetstatus->color) }};">
+                                  &nbsp; &nbsp;</span>
+                              </span>
+                              @endif
+
+                              {{ $asset->assetstatus->name }}
+                           </td>
+                      </tr>
+                  @endif
                     @if ($asset->company)
                       <tr>
                         <td>{{ trans('general.company') }}</td>
