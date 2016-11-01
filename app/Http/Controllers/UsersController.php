@@ -313,6 +313,15 @@ class UsersController extends Controller
             // Get the user information
             $user = User::find($id);
 
+            // Figure out of this user was an admin before this edit
+            $orig_permissions_array = $user->decodePermissions();
+            if (array_key_exists('superuser', $orig_permissions_array)) {
+                $orig_superuser = $orig_permissions_array['superuser'];
+            } else {
+                $orig_superuser = '0';
+            }
+
+
             if (!Company::isCurrentUserHasAccess($user)) {
                 return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
             }
@@ -363,7 +372,9 @@ class UsersController extends Controller
 
         if (!Auth::user()->isSuperUser()) {
             unset($permissions_array['superuser']);
-        }
+            $permissions_array['superuser'] = $orig_superuser;
+       }
+
 
         $user->permissions =  json_encode($permissions_array);
 
