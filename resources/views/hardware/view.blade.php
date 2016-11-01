@@ -572,6 +572,9 @@
                       <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
                       <th class="col-md-2"><span class="line"></span>{{ trans('general.user') }}</th>
                       <th class="col-md-3"><span class="line"></span>{{ trans('general.notes') }}</th>
+                      @if  (App\Models\Setting::getSettings()->require_accept_signature=='1')
+                      <th class="col-md-3"><span class="line"></span>{{ trans('general.signature') }}</th>
+                      @endif
                   </tr>
                 </thead>
                 <tbody>
@@ -583,8 +586,6 @@
                             @if ($log->action_type != 'requested')
                                 @if (isset($log->user))
                                     {{ $log->user->fullName() }}
-                                @else
-                                    Deleted Admin
                                 @endif
                             @endif
                         </td>
@@ -602,7 +603,6 @@
                                 <a href="{{ route('view/user', $log->target_id) }}">
                                 {{ $log->target->fullName() }}
                                 </a>
-
                               @else
                                 <del>{{ $log->target->fullName() }}</del>
                               @endif
@@ -611,11 +611,13 @@
                                 <a href="{{ route('view/hardware', $log->target_id) }}">
                                 {{ $log->target->showAssetName() }}
                                 </a>
-
                               @else
                                 <del>{{ $log->target->showAssetName() }}</del>
-                              @endif                         
+                              @endif
+                            @elseif (($log->action_type=='accepted') || ($log->action_type=='declined'))
+                                    {{ $log->item->assigneduser->fullName() }}
                             @else
+
                               Deleted User
                             @endif
                           @endif
@@ -624,6 +626,13 @@
                           @if ($log->note) {{ $log->note }}
                           @endif
                         </td>
+                          @if  (App\Models\Setting::getSettings()->require_accept_signature=='1')
+                          <td>
+                              @if (($log->accept_signature!='') && (($log->action_type=='accepted') || ($log->action_type=='declined')))
+                                  <a href="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" class="img-responsive"></a>
+                               @endif
+                          </td>
+                          @endif
                       </tr>
 
                     @endforeach

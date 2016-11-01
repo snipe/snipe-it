@@ -145,6 +145,7 @@
     'select_asset'    		=> 'Select Asset',
     'settings'				=> 'Settings',
     'sign_in'				=> 'Sign in',
+    'signature'             => 'Signature',
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',

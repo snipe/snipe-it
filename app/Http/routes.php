@@ -381,6 +381,30 @@ Route::group(
 
 /*
 |--------------------------------------------------------------------------
+| Log Routes
+|--------------------------------------------------------------------------
+|
+| Register all the admin routes.
+|
+*/
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get(
+        'display-sig/{filename}',
+        [
+            'as' => 'log.signature.view',
+            'middleware' => 'authorize:assets.view',
+            'uses' => 'ActionlogController@displaySig' ]
+    );
+
+
+});
+
+
+
+/*
+|--------------------------------------------------------------------------
 | Admin Routes
 |--------------------------------------------------------------------------
 |

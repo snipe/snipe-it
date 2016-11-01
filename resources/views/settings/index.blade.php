@@ -102,6 +102,16 @@
                   </tr>
 
                   <tr>
+                      <td>{{ trans('admin/settings/general.require_accept_signature') }}</td>
+
+                      @if ($setting->require_accept_signature == 1)
+                          <td>{{ trans('general.yes') }}</td>
+                      @else
+                          <td>{{ trans('general.no') }}</td>
+                      @endif
+                  </tr>
+
+                  <tr>
                       <td>{{ trans('admin/settings/general.load_remote_text') }}</td>
 
                       @if ($setting->load_remote == 1)
