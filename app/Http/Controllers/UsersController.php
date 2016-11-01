@@ -920,7 +920,8 @@ class UsersController extends Controller
                 $allowed_columns =
                 [
                  'last_name','first_name','email','jobtitle','username','employee_num',
-                 'assets','accessories', 'consumables','licenses','groups','activated','created_at','two_factor_enrolled'
+                 'assets','accessories', 'consumables','licenses','groups','activated','created_at',
+                 'two_factor_enrolled','two_factor_optin'
                 ];
 
                 $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
@@ -995,9 +996,10 @@ class UsersController extends Controller
                 'consumables'        => $user->consumables->count(),
                 'groups'        => $group_names,
                 'notes'         => e($user->notes),
-                'two_factor_enrolled'        => ($user->two_factor_enrolled=='1') ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>',
+                'two_factor_enrolled'        => ($user->two_factor_enrolled=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
+                'two_factor_optin'        => (($user->two_factor_optin=='1') || (Setting::getSettings()->two_factor_enabled=='2') ) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
                 'created_at' => ($user->created_at!='')  ? e($user->created_at->format('F j, Y h:iA')) : '',
-                'activated'      => ($user->activated=='1') ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>',
+                'activated'      => ($user->activated=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
                 'actions'       => ($actions) ? $actions : '',
                 'companyName'   => is_null($user->company) ? '' : e($user->company->name)
             );
