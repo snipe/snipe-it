@@ -21,7 +21,7 @@ if (isset($_COOKIE['CODECEPTION_CODECOVERAGE'])) {
 
     if ($cookie) {    
         foreach ($cookie as $key => $value) {
-            $_SERVER["HTTP_X_CODECEPTION_".strtoupper($key)] = $value;
+            $_SERVER["HTTP_X_CODECEPTION_" . strtoupper($key)] = $value;
         }
     }
 }
@@ -38,7 +38,7 @@ if (!function_exists('__c3_error')) {
             C3_CODECOVERAGE_MEDIATE_STORAGE . DIRECTORY_SEPARATOR . 'error.txt';
         if (is_writable($errorLogFile)) {
             file_put_contents($errorLogFile, $message);
-        }else{
+        } else {
             $message = "Could not write error to log file ($errorLogFile), original message: $message";
         }
         if (!headers_sent()) {
@@ -61,7 +61,7 @@ if (class_exists('SebastianBergmann\CodeCoverage\CodeCoverage')) {
 // Autoload Codeception classes
 if (!class_exists('\\Codeception\\Codecept')) {
     if (file_exists(__DIR__ . '/codecept.phar')) {
-        require_once 'phar://'.__DIR__ . '/codecept.phar/autoload.php';
+        require_once 'phar://' . __DIR__ . '/codecept.phar/autoload.php';
     } elseif (stream_resolve_include_path(__DIR__ . '/vendor/autoload.php')) {
         require_once __DIR__ . '/vendor/autoload.php';
         // Required to load some methods only available at codeception/autoload.php
@@ -71,7 +71,7 @@ if (!class_exists('\\Codeception\\Codecept')) {
     } elseif (stream_resolve_include_path('Codeception/autoload.php')) {
         require_once 'Codeception/autoload.php';
     } else {
-        __c3_error('Codeception is not loaded. Please check that either PHAR or Composer or PEAR package can be used');
+        __c3_error('Codeception is not loaded. Please check that either PHAR or Composer package can be used');
     }
 }
 
@@ -101,8 +101,13 @@ if (!defined('C3_CODECOVERAGE_MEDIATE_STORAGE')) {
     // workaround for 'zend_mm_heap corrupted' problem
     gc_disable();
 
-    if ((integer)ini_get('memory_limit') < 384) {
-        ini_set('memory_limit', '384M');
+    $memoryLimit = ini_get('memory_limit');
+    $requiredMemory = '384M';
+    if ((substr($memoryLimit, -1) === 'M' && (int)$memoryLimit < (int)$requiredMemory)
+        || (substr($memoryLimit, -1) === 'K' && (int)$memoryLimit < (int)$requiredMemory * 1024)
+        || (ctype_digit($memoryLimit) && (int)$memoryLimit < (int)$requiredMemory * 1024 * 1024)
+    ) {
+        ini_set('memory_limit', $requiredMemory);
     }
 
     define('C3_CODECOVERAGE_MEDIATE_STORAGE', Codeception\Configuration::logDir() . 'c3tmp');
@@ -261,7 +266,7 @@ if ($requested_c3_report) {
 
                 $codeCoverage->stop();
                 if (!file_exists(dirname($current_report))) { // verify directory exists
-                    if(!mkdir(dirname($current_report), 0777, true)){
+                    if (!mkdir(dirname($current_report), 0777, true)) {
                         __c3_error("Can't write CodeCoverage report into $current_report");
                     }
                 }
