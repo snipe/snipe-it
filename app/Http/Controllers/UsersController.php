@@ -124,6 +124,7 @@ class UsersController extends Controller
         $user->manager_id = e($request->input('manager_id'));
         $user->notes = e($request->input('notes'));
         $user->permissions = json_encode($request->input('permission'));
+        $user->api_token = str_random(60);
 
 
         if ($user->manager_id == "") {
