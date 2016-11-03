@@ -10,7 +10,7 @@ class AddApiTokenToUsers extends Migration
         // Update the users table
         Schema::table('users', function ($table) {
             $table->softDeletes();
-            $table->string('api_token', 60);
+            $table->string('api_token', 60)->unique();
         });
     }
 

@@ -16,7 +16,7 @@ class ApiController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function getAllAssets()
+    public function getAllAssets(Request $request)
     {
         return response()->json(Asset::all());
     }

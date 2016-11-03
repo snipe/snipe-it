@@ -3,7 +3,7 @@ use App\Models\Statuslabel;
 use App\Models\Location;
 
 
-Route::group([ 'prefix'  => 'api/v1'], function() {
+Route::group([ 'prefix'  => 'api/v1' ], function() {
     /*--- Get All Assets Route ---*/
     Route::get('assets/all', 'ApiController@getAllAssets');
 });
