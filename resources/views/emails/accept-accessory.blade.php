@@ -57,5 +57,5 @@
 <p><strong><a href="{{ config('app.url') }}/account/accept-asset/{{ $log_id }}">{{ trans('mail.i_have_read') }}</a></strong></p>
 @endif
 
-<p>{{ \App\Models\Setting::getSettings()->site_name }}</p>
+<p>{{ $snipeSettings->site_name }}</p>
 @stop

@@ -16,7 +16,7 @@
 
 @section('header_right')
     @can('users.create')
-        @if (\App\Models\Setting::getSettings()->ldap_enabled == 1)
+        @if ($snipeSettings->ldap_enabled == 1)
           <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
         @endif
           <a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> {{ trans('general.import') }}</a>
@@ -151,7 +151,7 @@
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
+        pageSize: {{ $snipeSettings->per_page }},
         pagination: true,
         sidePagination: 'server',
         sortable: true,

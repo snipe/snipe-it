@@ -28,7 +28,7 @@
             <tr role="row">
             <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.title') }}</th>
-            @if (\App\Models\Setting::getSettings()->display_asset_name)
+            @if ($snipeSettings->display_asset_name)
                 <th class="col-sm-1">{{ trans('general.name') }}</th>
             @endif
             <th class="col-sm-1">{{ trans('admin/hardware/table.serial') }}</th>
@@ -47,7 +47,7 @@
         <tr>
             <td>{{ $asset->asset_tag }}</td>
             <td>{{ $asset->model->name }}</td>
-            @if (\App\Models\Setting::getSettings()->display_asset_name)
+            @if ($snipeSettings->display_asset_name)
                 <td>{{ $asset->name }}</td>
             @endif
             <td>{{ $asset->serial }}</td>
@@ -73,15 +73,15 @@
 
             @if ($asset->purchase_cost > 0)
             <td class="align-right">
-              {{ \App\Models\Setting::first()->default_currency }}
+              {{ $snipeSettings->default_currency }}
               {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
             </td>
             <td class="align-right">
-              {{ \App\Models\Setting::first()->default_currency }}
+              {{ $snipeSettings->default_currency }}
               {{ number_format($asset->depreciate()) }}
             </td>
             <td class="align-right">
-              {{ \App\Models\Setting::first()->default_currency }}
+              {{ $snipeSettings->default_currency }}
               -{{ number_format(($asset->purchase_cost - $asset->depreciate())) }}</td>
             @else
             <td></td>

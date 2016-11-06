@@ -54,7 +54,7 @@
                         <div class="checkbox col-md-offset-3">
                             <label>
 
-                                @if (\App\Models\Setting::getSettings()->default_eula_text!='')
+                                @if ($snipeSettings->default_eula_text!='')
                                 {{ Form::checkbox('use_default_eula', '1', Input::old('use_default_eula', $item->use_default_eula)) }}
                                 {!! trans('admin/categories/general.use_default_eula') !!}
                                 @else
@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    @if (\App\Models\Setting::getSettings()->default_eula_text!='')
+    @if ($snipeSettings->default_eula_text!='')
     <!-- Modal -->
     <div class="modal fade" id="eulaModal" tabindex="-1" role="dialog" aria-labelledby="eulaModalLabel" aria-hidden="true">
         <div class="modal-dialog">

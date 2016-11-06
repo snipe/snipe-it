@@ -20,7 +20,7 @@ LDAP User Sync
 <div class="col-md-9">
 
 
-@if (\App\Models\Setting::getSettings()->ldap_enabled == 0)
+@if ($snipeSettings->ldap_enabled == 0)
     {{ trans('admin/users/message.ldap_not_configured') }}
 @else
 

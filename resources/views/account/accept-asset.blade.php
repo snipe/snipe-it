@@ -64,7 +64,7 @@
                  </div>
                 @endif
 
-                @if (\App\Models\Setting::getSettings()->require_accept_signature=='1')
+                @if ($snipeSettings->require_accept_signature=='1')
                 <div class="col-md-12 col-sm-12 text-center" style="padding-top: 20px">
 
                     <h3>Sign below to indicate that you agree to the terms of service:</h3>

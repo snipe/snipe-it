@@ -253,7 +253,7 @@
                       <td>{{ trans('general.purchase_cost') }}:
                       </td>
                       <td>
-                        {{ \App\Models\Setting::first()->default_currency }}
+                        {{ $snipeSettings->default_currency }}
                         {{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}
                       </td>
                     </tr>

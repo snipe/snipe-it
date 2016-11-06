@@ -7,7 +7,7 @@
                 @if (isset($currency_type))
                 {{ $currency_type }}
                 @else
-               {{ \App\Models\Setting::first()->default_currency }}
+               {{ $snipeSettings->default_currency }}
                @endif
            </span>
            <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', \App\Helpers\Helper::formatCurrencyOutput($item->purchase_cost)) }}" />

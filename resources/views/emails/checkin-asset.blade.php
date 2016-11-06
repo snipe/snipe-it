@@ -45,5 +45,5 @@
 	@endif
 </table>
 
-<p>{{ \App\Models\Setting::getSettings()->site_name }}</p>
+<p>{{ $snipeSettings->site_name }}</p>
 @stop

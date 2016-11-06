@@ -90,7 +90,7 @@
 
         @if ($asset->purchase_cost)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.cost') }}:</strong>
-            {{ \App\Models\Setting::first()->default_currency }}
+            {{ $snipeSettings->default_currency }}
             {{ number_format($asset->purchase_cost,2) }} </div>
         @endif
 

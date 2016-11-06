@@ -93,8 +93,8 @@
     }
   }
 
-  @if (\App\Models\Setting::getSettings()->custom_css)
-    {{ \App\Models\Setting::getSettings()->show_custom_css() }}
+  @if ($snipeSettings->custom_css)
+    {{ $snipeSettings->show_custom_css() }}
   @endif
 
   </style>

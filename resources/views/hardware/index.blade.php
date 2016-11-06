@@ -153,7 +153,7 @@
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,
-        pageSize: 100,
+        pageSize: {{ $snipeSettings->per_page }},
         pagination: true,
         sidePagination: 'server',
         sortable: true,

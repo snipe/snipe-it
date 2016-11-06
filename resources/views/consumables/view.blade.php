@@ -70,7 +70,7 @@
 
     @if ($consumable->purchase_cost)
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.purchase_cost') }}:</strong>
-        {{ \App\Models\Setting::first()->default_currency }}
+        {{ $snipeSettings->default_currency }}
 
         {{ \App\Helpers\Helper::formatCurrencyOutput($consumable->purchase_cost) }} </div>
     @endif
@@ -113,7 +113,7 @@
         iconsPrefix: 'fa',
         showRefresh: true,
         search: false,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
+        pageSize: {{ $snipeSettings->per_page }},
         pagination: true,
         sidePagination: 'server',
         sortable: true,

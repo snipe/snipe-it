@@ -3,7 +3,7 @@
 @section('content')
 <p>{{ trans('mail.hello') }} {{ $first_name }},</p>
 
-<p>{{ trans('mail.admin_has_created', ['web' => \App\Models\Setting::getSettings()->site_name]) }} </p>
+<p>{{ trans('mail.admin_has_created', ['web' => $snipeSettings->site_name]) }} </p>
 
 <p>URL: <a href="{{ config('app.url') }}">{{ config('app.url') }}</a><br>
 {{ trans('mail.login') }} {{ $username }} <br>
@@ -12,5 +12,5 @@
 
 <p>{{ trans('mail.best_regards') }}</p>
 
-<p>{{ \App\Models\Setting::getSettings()->site_name }}</p>
+<p>{{ $snipeSettings->site_name }}</p>
 @stop
