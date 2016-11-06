@@ -1,11 +1,12 @@
 <?php
 namespace App\Models;
 
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
-class Manufacturer extends Model
+class Manufacturer extends SnipeModel
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];

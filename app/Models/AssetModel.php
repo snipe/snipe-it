@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Requestable;
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -12,7 +13,7 @@ use Watson\Validating\ValidatingTrait;
  *
  * @version    v1.0
  */
-class AssetModel extends Model
+class AssetModel extends SnipeModel
 {
     use SoftDeletes;
     use Requestable;

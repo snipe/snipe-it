@@ -1,12 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
-use App\Http\Traits\UniqueUndeletedTrait;
 
-class Statuslabel extends Model
+class Statuslabel extends SnipeModel
 {
     use SoftDeletes;
     use ValidatingTrait;

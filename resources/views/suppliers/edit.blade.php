@@ -1,101 +1,63 @@
-@extends('layouts/default')
-
-{{-- Page title --}}
-@section('title')
-@if ($item->id)
-{{ trans('admin/suppliers/table.update') }}
-@else
-{{ trans('admin/suppliers/table.create') }}
-@endif
-@parent
-@stop
-
-@section('header_right')
-    <a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
-        {{ trans('general.back') }}
-    </a>
-@stop
-
+@extends('layouts/edit-form', [
+    'createText' => trans('admin/suppliers/table.create') ,
+    'updateText' => trans('admin/suppliers/table.update'),
+    'helpTitle' => trans('admin/suppliers/table.about_suppliers_title'),
+    'helpText' => trans('admin/suppliers/table.about_suppliers_text')
+])
 
 {{-- Page content --}}
-@section('content')
+@section('inputFields')
 
-<div class="row">
-    <div class="col-md-9 col-md-offset-2">
+@include ('partials.forms.edit.name', ['translated_name' => trans('admin/suppliers/table.name')])
+@include ('partials.forms.edit.address')
 
-        <form class="form-horizontal" method="post" autocomplete="off" enctype="multipart/form-data">
+<div class="form-group {{ $errors->has('contact') ? ' has-error' : '' }}">
+    {{ Form::label('contact', trans('admin/suppliers/table.contact'), array('class' => 'col-md-3 control-label')) }}
+    <div class="col-md-7">
+        {{Form::text('contact', Input::old('contact', $item->contact), array('class' => 'form-control')) }}
+        {!! $errors->first('contact', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    </div>
+</div>
 
-        {{ csrf_field() }}
+@include ('partials.forms.edit.phone')
 
-        <div class="box box-default">
+<div class="form-group {{ $errors->has('fax') ? ' has-error' : '' }}">
+    {{ Form::label('fax', trans('admin/suppliers/table.fax'), array('class' => 'col-md-3 control-label')) }}
+    <div class="col-md-7">
+        {{Form::text('fax', Input::old('fax', $item->fax), array('class' => 'form-control')) }}
+        {!! $errors->first('fax', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    </div>
+</div>
 
-            @if ($item->id)
-            <div class="box-header with-border">
-                <div class="box-heading">
-                    <h3 class="box-title"> {{ $item->name }}</h3>
-                </div>
-            </div><!-- /.box-header -->
-            @endif
+@include ('partials.forms.edit.email')
 
+<div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
+    {{ Form::label('url', trans('admin/suppliers/table.url'), array('class' => 'col-md-3 control-label')) }}
+    <div class="col-md-7">
+        {{Form::text('url', Input::old('url', $item->url), array('class' => 'form-control')) }}
+        {!! $errors->first('url', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    </div>
+</div>
 
-            <div class="box-body">
-                <!-- Name -->
-                @include ('partials.forms.edit.name', ['translated_name' => trans('admin/suppliers/table.name')])
-                @include ('partials.forms.edit.address')
+@include ('partials.forms.edit.notes')
 
-                <div class="form-group {{ $errors->has('contact') ? ' has-error' : '' }}">
-                    {{ Form::label('contact', trans('admin/suppliers/table.contact'), array('class' => 'col-md-3 control-label')) }}
-                    <div class="col-md-7">
-                        {{Form::text('contact', Input::old('contact', $item->contact), array('class' => 'form-control')) }}
-                        {!! $errors->first('contact', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                    </div>
-                </div>
+<!-- Image -->
+@if ($item->image)
+<div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+    <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
+    <div class="col-md-5">
+        {{ Form::checkbox('image_delete') }}
+        <img src="{{ config('app.url') }}/uploads/suppliers/{{ $item->image }}" />
+        {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+    </div>
+</div>
+@endif
 
-                @include ('partials.forms.edit.phone')
-
-                <div class="form-group {{ $errors->has('fax') ? ' has-error' : '' }}">
-                    {{ Form::label('fax', trans('admin/suppliers/table.fax'), array('class' => 'col-md-3 control-label')) }}
-                    <div class="col-md-7">
-                        {{Form::text('fax', Input::old('fax', $item->fax), array('class' => 'form-control')) }}
-                        {!! $errors->first('fax', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                    </div>
-                </div>
-
-                @include ('partials.forms.edit.email')
-
-                <div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
-                    {{ Form::label('url', trans('admin/suppliers/table.url'), array('class' => 'col-md-3 control-label')) }}
-                    <div class="col-md-7">
-                        {{Form::text('url', Input::old('url', $item->url), array('class' => 'form-control')) }}
-                        {!! $errors->first('url', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                    </div>
-                </div>
-
-                @include ('partials.forms.edit.notes')
-
-                <!-- Image -->
-                @if ($item->image)
-                <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-                    <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-                    <div class="col-md-5">
-                        {{ Form::checkbox('image_delete') }}
-                        <img src="{{ config('app.url') }}/uploads/suppliers/{{ $item->image }}" />
-                        {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-                    </div>
-                </div>
-                @endif
-
-                <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                    <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
-                    <div class="col-md-5">
-                        {{ Form::file('image') }}
-                        {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
-                    </div>
-                </div>
-
-            </div>
-        </form>
-        @include ('partials.forms.edit.submit')
+<div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+    <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
+    <div class="col-md-5">
+        {{ Form::file('image') }}
+        {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
     </div>
 </div>
 

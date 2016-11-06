@@ -1,10 +1,11 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Depreciation;
+use App\Models\SnipeModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Depreciable extends Model
+class Depreciable extends SnipeModel
 {
     /**
     * Depreciation Relation, and associated helper methods

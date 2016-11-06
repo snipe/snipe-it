@@ -1,10 +1,11 @@
 <?php
 namespace App\Models;
 
+use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
-use App\Http\Traits\UniqueUndeletedTrait;
 
 /**
  * Model for Categories. Categories are a higher-level group
@@ -14,7 +15,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
  *
  * @version    v1.0
  */
-class Category extends Model
+class Category extends SnipeModel
 {
 
     use SoftDeletes;

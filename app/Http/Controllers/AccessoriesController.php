@@ -7,19 +7,19 @@ use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
+use Auth;
 use Carbon\Carbon;
 use Config;
 use DB;
+use Gate;
 use Input;
 use Lang;
 use Mail;
 use Redirect;
+use Request;
 use Slack;
 use Str;
 use View;
-use Auth;
-use Request;
-use Gate;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.

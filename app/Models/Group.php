@@ -1,11 +1,10 @@
 <?php
 namespace App\Models;
 
+use App\Models\SnipeModel;
 use Watson\Validating\ValidatingTrait;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Group extends Model
+class Group extends SnipeModel
 {
     protected $table = 'groups';
 

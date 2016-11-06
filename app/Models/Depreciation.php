@@ -1,10 +1,11 @@
 <?php
 namespace App\Models;
 
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
-class Depreciation extends Model
+class Depreciation extends SnipeModel
 {
     // Declare the rules for the form validation
     protected $rules = array(

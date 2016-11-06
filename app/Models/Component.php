@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\ConsumableAssignment;
 use App\Models\Location;
 use App\Models\Loggable;
+use App\Models\SnipeModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +18,7 @@ use Watson\Validating\ValidatingTrait;
  *
  * @version    v1.0
  */
-class Component extends Model
+class Component extends SnipeModel
 {
     use CompanyableTrait;
     use Loggable;

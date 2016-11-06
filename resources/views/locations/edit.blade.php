@@ -1,76 +1,39 @@
-@extends('layouts/default')
-
-{{-- Page title --}}
-@section('title')
-
-@if ($item->id)
-{{ trans('admin/locations/table.update') }}
-@else
-{{ trans('admin/locations/table.create') }}
-@endif
-
-@parent
-@stop
-
-@section('header_right')
-<a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
-    {{ trans('general.back') }}
-</a>
-@stop
-
+@extends('layouts/edit-form', [
+    'createText' => trans('admin/locations/table.create') ,
+    'updateText' => trans('admin/locations/table.update'),
+    'helpTitle' => trans('admin/locations/table.about_locations_title'),
+    'helpText' => trans('admin/locations/table.about_locations')
+])
 
 {{-- Page content --}}
-@section('content')
+@section('inputFields')
+@include ('partials.forms.edit.name', ['translated_name' => trans('admin/locations/table.name')])
 
-
-
-<div class="row">
-    <div class="col-md-9 col-md-offset-2">
-
-        <div class="box box-default">
-            @if ($item->name)
-            <div class="box-header with-border">
-                <h3 class="box-title">{{ $item->name }}</h3>
-            </div><!-- /.box-header -->
-            @endif
-
-
-            <div class="box-body">
-                <form class="form-horizontal" method="post" autocomplete="off">
-                    {{ csrf_field() }}
-
-                    @include ('partials.forms.edit.name', ['translated_name' => trans('admin/locations/table.name')])
-
-                    <!-- Parent-->
-                    <div class="form-group {{ $errors->has('parent_id') ? ' has-error' : '' }}">
-                        <label for="parent_id" class="col-md-3 control-label">
-                            {{ trans('admin/locations/table.parent') }}
-                        </label>
-                        <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'parent_id')) ? ' required' : '' }}">
-                            {!! Form::select('parent_id', $location_options , Input::old('parent_id', $item->parent_id), array('class'=>'select2 parent', 'style'=>'width:350px')) !!}
-                            {!! $errors->first('parent_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                        </div>
-                    </div>
-
-                    <!-- Currency -->
-                    <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
-                        <label for="currency" class="col-md-3 control-label">
-                            {{ trans('admin/locations/table.currency') }}
-                        </label>
-                        <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'currency')) ? ' required' : '' }}">
-                            {{ Form::text('currency', Input::old('currency', $item->currency), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
-                            {!! $errors->first('currency', '<span class="alert-msg">:message</span>') !!}
-                        </div>
-                    </div>
-
-                    @include ('partials.forms.edit.address')
-
-                    @include ('partials.forms.edit.submit')
-                </form>
-            </div>
-        </div>
+<!-- Parent-->
+<div class="form-group {{ $errors->has('parent_id') ? ' has-error' : '' }}">
+    <label for="parent_id" class="col-md-3 control-label">
+        {{ trans('admin/locations/table.parent') }}
+    </label>
+    <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'parent_id')) ? ' required' : '' }}">
+        {!! Form::select('parent_id', $location_options , Input::old('parent_id', $item->parent_id), array('class'=>'select2 parent', 'style'=>'width:350px')) !!}
+        {!! $errors->first('parent_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>
+
+<!-- Currency -->
+<div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
+    <label for="currency" class="col-md-3 control-label">
+        {{ trans('admin/locations/table.currency') }}
+    </label>
+    <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'currency')) ? ' required' : '' }}">
+        {{ Form::text('currency', Input::old('currency', $item->currency), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+        {!! $errors->first('currency', '<span class="alert-msg">:message</span>') !!}
+    </div>
+</div>
+
+@include ('partials.forms.edit.address')
+@stop
+
 @if (!$item->id)
 @section('moar_scripts')
 <script>
@@ -118,5 +81,3 @@ success: function(data) {
 </script>
 @stop
 @endif
-
-@stop

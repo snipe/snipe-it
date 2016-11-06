@@ -400,6 +400,11 @@ class Asset extends Depreciable
         }
     }
 
+    public function getDisplayNameAttribute()
+    {
+        return $this->showAssetName();
+    }
+
     public function warrantee_expires()
     {
         $date = date_create($this->purchase_date);
