@@ -293,7 +293,7 @@ class AssetsController extends Controller
         if (!$item = Asset::find($assetId)) {
             // Redirect to the asset management page
             return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
+        } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
