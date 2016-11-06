@@ -1,7 +1,7 @@
 <?php
 
 
-class AssetModelCest
+class ManufacturersCest
 {
     public function _before(FunctionalTester $I)
     {

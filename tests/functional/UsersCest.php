@@ -2,7 +2,7 @@
 
 class UsersCest
 {
-    public function _before(FunctionalTester $I)
+    public function _before(\FunctionalTester $I)
     {
          $I->amOnPage('/login');
          $I->fillField('username', 'snipeit');
@@ -10,12 +10,12 @@ class UsersCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
+    public function _after(\FunctionalTester $I)
     {
     }
 
     // tests
-    public function tryToTest(FunctionalTester $I)
+    public function tryToTest(\FunctionalTester $I)
     {
         $I->wantTo('ensure that the create users form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
@@ -27,7 +27,6 @@ class UsersCest
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The first name field is required.', '.alert-msg');
-        $I->see('The last name field is required.', '.alert-msg');
         $I->see('The username field is required.', '.alert-msg');
         $I->see('The password field is required.', '.alert-msg');
         $I->wantTo("Test Validation Fails with short name");

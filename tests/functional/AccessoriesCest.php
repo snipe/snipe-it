@@ -46,8 +46,9 @@ class AccessoriesCest
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name must be at least 3 characters', '.alert-msg');
+        $I->see('The category id field is required', '.alert-msg');
         $I->see('The qty must be at least 1', '.alert-msg');
-        $I->see('The min amt must be at least 1', '.alert-msg');
+        $I->see('The min amt must be at least 0', '.alert-msg');
     }
 
     public function passesCorrectValidation(FunctionalTester $I)
