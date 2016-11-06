@@ -54,6 +54,6 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'categories-export'], 'search' => true)
+@include ('partials.bootstrap-table', ['exportFile' => 'categories-export', 'search' => true])
 @stop
 
