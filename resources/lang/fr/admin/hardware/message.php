@@ -37,9 +37,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
         'error'         => 'Some items did not import correctly.',
         'errorDetail'   => 'The following Items were not imported because of errors.',
         'success'       => "Your file has been imported",
+=======
+        'error'                 => 'Certains éléments n\'ont pas été correctement importés.',
+        'errorDetail'           => 'Les éléments suivants n\'ont pas été importés à cause d\'erreurs.',
+        'success'               => "Votre fichier a bien été importé",
+        'file_delete_success'   => "Votre fichier a été correctement supprimé",
+        'file_delete_error'      => "Le fichier n’a pas pu être supprimé",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -53,7 +61,11 @@ return array(
         'error'   		=> 'Ce bien n\'a pas été sorti, veuillez réessayer',
         'success' 		=> 'Ce bien a été sorti correctement.',
         'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
+<<<<<<< HEAD
         'not_available' => 'That asset is not available for checkout!'
+=======
+        'not_available' => 'Ce bien n\'est pas disponible pour être sorti!'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(
@@ -67,6 +79,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Le bien n\'a pas été demandé, merci d\'essayer à nouveau',
         'success' 		=> 'Le bien a été demandé correctement.',
+<<<<<<< HEAD
+=======
+        'canceled'      => 'La demande de paiement a été annulée'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

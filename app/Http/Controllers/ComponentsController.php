@@ -89,6 +89,10 @@ class ComponentsController extends Controller
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $component->order_number           = e(Input::get('order_number'));
         $component->min_amt                = e(Input::get('min_amt'));
+<<<<<<< HEAD
+=======
+        $component->serial_number             = e(Input::get('serial_number'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -107,6 +111,10 @@ class ComponentsController extends Controller
 
         // Was the component created?
         if ($component->save()) {
+<<<<<<< HEAD
+=======
+            $component->logCreate();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             // Redirect to the new component  page
             return redirect()->to("admin/components")->with('success', trans('admin/components/message.create.success'));
         }
@@ -173,6 +181,10 @@ class ComponentsController extends Controller
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $component->order_number           = e(Input::get('order_number'));
         $component->min_amt             = e(Input::get('min_amt'));
+<<<<<<< HEAD
+=======
+        $component->serial_number             = e(Input::get('serial_number'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -349,6 +361,7 @@ class ComponentsController extends Controller
         'assigned_qty' => e(Input::get('assigned_qty')),
         'asset_id' => $asset_id));
 
+<<<<<<< HEAD
         $logaction = new Actionlog();
         $logaction->component_id = $component->id;
         $logaction->asset_id = $asset_id;
@@ -356,6 +369,9 @@ class ComponentsController extends Controller
         $logaction->location_id = $asset->location_id;
         $logaction->user_id = Auth::user()->id;
         $logaction->note = e(Input::get('note'));
+=======
+        $logaction = $component->logCheckout(e(Input::get('note')), $asset_id);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         $settings = Setting::getSettings();
 
@@ -375,7 +391,11 @@ class ComponentsController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
+<<<<<<< HEAD
                                 'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/components/'.$component->id.'/view'.'|'.$component->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+=======
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.config('app.url').'/admin/components/'.$component->id.'/view'.'|'.$component->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                             ],
                             [
                                 'title' => 'Note:',
@@ -389,9 +409,12 @@ class ComponentsController extends Controller
             }
         }
 
+<<<<<<< HEAD
 
         $log = $logaction->logaction('checkout');
 
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
       // Redirect to the new component page
         return redirect()->to("admin/components")->with('success', trans('admin/components/message.checkout.success'));
 
@@ -430,7 +453,11 @@ class ComponentsController extends Controller
             $limit = 50;
         }
 
+<<<<<<< HEAD
         $allowed_columns = ['id','name','min_amt','order_number','purchase_date','purchase_cost','companyName','category','total_qty'];
+=======
+        $allowed_columns = ['id','name','min_amt','order_number','serial_number','purchase_date','purchase_cost','companyName','category','total_qty'];
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -478,6 +505,10 @@ class ComponentsController extends Controller
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="component['.$component->id.']" class="one_required"></div>',
                 'id'            => $component->id,
                 'name'          => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
+<<<<<<< HEAD
+=======
+                'serial_number'          => $component->serial_number,
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 'location'   => ($component->location) ? e($component->location->name) : '',
                 'total_qty'           => e($component->total_qty),
                 'min_amt'           => e($component->min_amt),

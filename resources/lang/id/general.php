@@ -41,6 +41,10 @@
     'consumables'			=> 'Barang Habis Pakai',
     'country'  				=> 'Negara',
     'create'				=> 'Buat baru',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Buat aset',
     'created_at' 			=> 'Dibuat di',
     'currency'  			=> '$', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Hapus Asosiasi Perusahaan',
     'reports'				=> 'Laporan',
     'requested'				=> 'Diminta',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Simpan',
     'select'				=> 'Pilih',
     'search'				=> 'Cari',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Pemasok',
     'total_assets'			=> 'total aset',
     'total_licenses'		=> 'total lisensi',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tipe',
     'undeployable'			=> 'Belum siap digunakan',
     'unknown_admin'			=> 'Admin tidak diketahui',

@@ -23,7 +23,11 @@
     'avatar_upload'         => 'Carregar Avatar',
     'back'      			=> 'Voltar',
     'bad_data'      		=> 'Nada encontrado. Informações correta?',
+<<<<<<< HEAD
     'bulk_checkout'  		=> 'Bulk Checkout',
+=======
+    'bulk_checkout'  		=> 'Check-out em massa',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'cancel'  				=> 'Cancelar',
     'categories'			=> 'Categorias',
     'category'				=> 'Categoria',
@@ -41,6 +45,10 @@
     'consumables'			=> 'Consumíveis',
     'country'  				=> 'País',
     'create'				=> 'Criar Novo',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Ativo criado',
     'created_at' 			=> 'Criado em',
     'currency'  			=> '$', // this is deprecated
@@ -76,7 +84,11 @@
     'image_delete'         	=> 'Excluir Imagem',
     'image_upload'         	=> 'Carregar Imagem',
     'import'         	    => 'Importar',
+<<<<<<< HEAD
     'import-history'        => 'Import History',
+=======
+    'import-history'        => 'Importar Histórico',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => 'Manutenção de Ativo',
     'asset_maintenance_report' => 'Relatório de Manutenção em Ativo',
     'asset_maintenances'       => 'Manutenções em Ativo',
@@ -107,7 +119,11 @@
     'moreinfo'				=> 'Mais Informações',
     'name'					=> 'Nome',
     'next'					=> 'Próxima',
+<<<<<<< HEAD
     'new'					=> 'new!',
+=======
+    'new'					=> 'novo!',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'no_depreciation'		=> 'Sem Depreciação',
     'no_results'			=> 'Sem Resultados.',
     'no'  					=> 'Não',
@@ -127,6 +143,10 @@
     'remove_company'        => 'Remover associação de empresa',
     'reports'				=> 'Relatórios',
     'requested'				=> 'Solicitado',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Salvar',
     'select'				=> 'Selecionar',
     'search'				=> 'Buscar',
@@ -143,7 +163,11 @@
     'select_asset'    		=> 'Selecionar Ativo',
     'settings'				=> 'Configurações',
     'sign_in'				=> 'Entrar',
+<<<<<<< HEAD
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
+=======
+    'some_features_disabled' => 'MODO DE DEMONSTRAÇÃO: Algumas funcionalidades estão desativadas nesta instalação.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'site_name'				=> 'Nome do Site',
     'state'  				=> 'Estado',
     'status_labels'			=> 'Rótulos de Status',
@@ -151,6 +175,11 @@
     'suppliers'  			=> 'Fornecedores',
     'total_assets'			=> 'ativos no total',
     'total_licenses'		=> 'licenças no total',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tipo',
     'undeployable'			=> 'Não implantável',
     'unknown_admin'			=> 'Administrador Desconhecido',

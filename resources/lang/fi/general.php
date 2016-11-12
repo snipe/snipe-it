@@ -41,6 +41,10 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Maa',
     'create'				=> 'Luo Uusi',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'laite luotu',
     'created_at' 			=> 'Luontiaika',
     'currency'  			=> '€', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Raportit',
     'requested'				=> 'Requested',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Tallenna',
     'select'				=> 'Valitse',
     'search'				=> 'Etsi',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Toimittajat',
     'total_assets'			=> 'laitteita yhteensä',
     'total_licenses'		=> 'lisenssejä yhteensä',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tyyppi',
     'undeployable'			=> 'Ei-käyttöönotettavissa',
     'unknown_admin'			=> 'Tuntematon Ylläpitäjä',

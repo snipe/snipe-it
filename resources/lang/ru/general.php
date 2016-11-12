@@ -41,6 +41,10 @@
     'consumables'			=> 'Расходные материалы',
     'country'  				=> 'Страна',
     'create'				=> 'Создать нового',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Создать актив',
     'created_at' 			=> 'Создано',
     'currency'  			=> 'Руб.', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Удалить привязку компании',
     'reports'				=> 'Отчеты',
     'requested'				=> 'Запрошено',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Сохранить',
     'select'				=> 'Выбор',
     'search'				=> 'Поиск',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Поставщики',
     'total_assets'			=> 'Всего активов',
     'total_licenses'		=> 'Всего лицензий',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Тип',
     'undeployable'			=> 'Не развертываемый',
     'unknown_admin'			=> 'Неизвестный администратор',

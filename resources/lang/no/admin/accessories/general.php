@@ -6,8 +6,13 @@ return array(
     'accessory_category' 				=> 'Tilbehørskategori',
     'accessory_name'  					=> 'Navn tilbehør',
     'cost'					=> 'Innkjøpskostnad',
+<<<<<<< HEAD
     'checkout'  							=> 'Checkout Accessory',
     'checkin'  							=> 'Checkin Accessory',
+=======
+    'checkout'  							=> 'Sjekk ut tilbehør',
+    'checkin'  							=> 'Sjekk inn tilbehør',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'create'  							=> 'Legg til tilbehør',
     'date'					=> 'Innkjøpsdato',
     'edit'  							=> 'Rediger tilbehør',

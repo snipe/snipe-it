@@ -1,6 +1,7 @@
 <?php
 
 return array(
+<<<<<<< HEAD
     'address'               => 'Supplier Address',
     'assets'                => 'Assets',
     'city'                  => 'City',
@@ -21,5 +22,27 @@ return array(
     'view'                  => 'View Supplier',
     'view_assets_for'       => 'View Assets for',
     'zip'                   => 'Postal Code',
+=======
+    'address'               => '供應商地址',
+    'assets'                => '資產',
+    'city'                  => '城市',
+    'contact'               => '連絡人姓名',
+    'country'               => '國家',
+    'create'                => '新增供應商',
+    'email'                 => 'Email',
+    'fax'                   => '傳真',
+    'id'                    => 'ID',
+    'licenses'              => '授權',
+    'name'                  => '供應商名稱',
+    'notes'                 => '備註',
+    'phone'                 => '電話',
+    'state'                 => '省份',
+    'suppliers'             => '供應商',
+    'update'                => '更新供應商',
+    'url'                   => 'URL',
+    'view'                  => '檢視供應商',
+    'view_assets_for'       => '檢視資產關於',
+    'zip'                   => '郵遞區號',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 );

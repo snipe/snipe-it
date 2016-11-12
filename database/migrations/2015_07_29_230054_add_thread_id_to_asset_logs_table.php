@@ -64,6 +64,7 @@
         public function up()
         {
 
+<<<<<<< HEAD
             if (!Schema::hasColumn('asset_logs', 'thread_id')) {
 
                 Schema::table( 'asset_logs', function ( Blueprint $table ) {
@@ -97,6 +98,41 @@
                 }
 
             }
+=======
+            // if (!Schema::hasColumn('asset_logs', 'thread_id')) {
+
+            //     Schema::table( 'asset_logs', function ( Blueprint $table ) {
+
+            //         $table->integer( 'thread_id' )
+            //               ->nullable()
+            //               ->default( null );
+            //         $table->index( 'thread_id' );
+            //     } );
+            // }
+
+            // $this->actionlog = new App\Models\Actionlog();
+            // $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
+
+            // foreach ($this->assetLogs as $assetLog) {
+
+            //     if ($this->hasAssetChanged( $assetLog )) {
+            //         $this->resetCurrentAssetInformation( $assetLog );
+            //     }
+
+            //     if ($this->hasBegunNewChain( $assetLog )) {
+            //         $this->startOfCurrentThread = false;
+            //         continue;
+            //     }
+
+            //     $this->updateAssetLogWithThreadInformation( $assetLog );
+
+            //     if ($this->hasReachedEndOfChain( $assetLog )
+            //     ) {
+            //         $this->clearCurrentAssetInformation();
+            //     }
+
+            // }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         }
 
 

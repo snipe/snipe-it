@@ -41,6 +41,10 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Tara',
     'create'				=> 'Creeaza',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Activ creat',
     'created_at' 			=> 'Creat la',
     'currency'  			=> 'LEI', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Rapoarte',
     'requested'				=> 'Cereri',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Salveaza',
     'select'				=> 'Selectați',
     'search'				=> 'Căutare',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Furnizori',
     'total_assets'			=> 'Total active',
     'total_licenses'		=> 'Total licente',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tipul',
     'undeployable'			=> 'Nelansabil',
     'unknown_admin'			=> 'Admin necunoscut',

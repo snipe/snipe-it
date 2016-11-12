@@ -3,7 +3,11 @@
 return array(
 	'archived'  				=> '已存档',
     'asset'  					=> '资产',
+<<<<<<< HEAD
     'bulk_checkout'             => 'Checkout Assets to User',
+=======
+    'bulk_checkout'             => '借出资产给某人',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'checkin'  					=> '借入资产',
     'checkout'  				=> '借出资产给某人',
     'clone'  					=> '复制资产',
@@ -12,7 +16,12 @@ return array(
     'edit'  					=> '编辑资产',
 	'filetype_info'				=> '允许的文件类型有： png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar',
     'model_deleted'  			=> '这个资产模型将被删除，恢复资产之前需要先恢复模型。<br/> <a href="/hardware/models/:model_id/restore">单击这里备份模型</a>.',
+<<<<<<< HEAD
     'requestable'				=> '可申领',
+=======
+    'requestable'               => '可申领',
+    'requested'				    => 'Requested',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'restore'  					=> '还原资产',
     'pending'  					=> '待处理',
     'undeployable'  			=> '不可部署',

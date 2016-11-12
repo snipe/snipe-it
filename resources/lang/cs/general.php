@@ -41,6 +41,10 @@
     'consumables'			=> 'Spotřební materiál',
     'country'  				=> 'Země',
     'create'				=> 'Vytvořit nové',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'vytvořit majetek',
     'created_at' 			=> 'Vytvořeno',
     'currency'  			=> 'Kč', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Reporty',
     'requested'				=> 'Požadováno',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Uložit',
     'select'				=> 'Zvolit',
     'search'				=> 'Hledat',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Dodavatelé',
     'total_assets'			=> 'celkem zařízení',
     'total_licenses'		=> 'celkem licencí',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Typ',
     'undeployable'			=> 'Ne-přiřaditelné',
     'unknown_admin'			=> 'Neznámy správce',

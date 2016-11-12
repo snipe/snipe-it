@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 use App\Models\Statuslabel;
 use App\Models\Location;
 
@@ -7,6 +8,11 @@ Route::group([ 'prefix'  => 'api/v1' ], function() {
     /*--- Get All Assets Route ---*/
     Route::get('assets/all', 'ApiController@getAllAssets');
 });
+=======
+use App\Models\CheckoutRequest;
+use App\Models\Location;
+use App\Models\Statuslabel;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 /*
 |--------------------------------------------------------------------------
@@ -359,6 +365,7 @@ Route::group(
         ]);
 
         # Asset Model Management
+<<<<<<< HEAD
         Route::group([ 'prefix' => 'models', 'middleware' => 'auth' ], function () {
 
             Route::get('/', [ 'as' => 'models', 'uses' => 'AssetModelsController@getIndex' ]);
@@ -372,6 +379,21 @@ Route::group(
             Route::get('{modelId}/view', [ 'as' => 'view/model', 'uses' => 'AssetModelsController@getView' ]);
             Route::get('{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'AssetModelsController@getRestore' ]);
             Route::get('{modelId}/custom_fields', ['as' => 'custom_fields/model','uses' => 'AssetModelsController@getCustomFields']);
+=======
+        Route::group([ 'prefix' => 'models', 'middleware' => ['auth'] ], function () {
+
+            Route::get('create', [ 'as' => 'create/model', 'uses' => 'AssetModelsController@getCreate', 'middleware' => ['authorize:superuser'] ]);
+            Route::post('create', 'AssetModelsController@postCreate');
+            Route::get('{modelId}/edit', [ 'as' => 'update/model', 'uses' => 'AssetModelsController@getEdit' , 'middleware' => ['authorize:superuser']]);
+            Route::post('{modelId}/edit', [ 'uses' => 'AssetModelsController@postEdit', 'middleware' => ['authorize:superuser']]);
+            Route::get('{modelId}/clone', [ 'as' => 'clone/model', 'uses' => 'AssetModelsController@getClone' ]);
+            Route::post('{modelId}/clone', 'AssetModelsController@postCreate');
+            Route::get('{modelId}/delete', [ 'as' => 'delete/model', 'uses' => 'AssetModelsController@getDelete', 'middleware' => ['authorize:superuser'] ]);
+            Route::get('{modelId}/view', [ 'as' => 'view/model', 'uses' => 'AssetModelsController@getView' ]);
+            Route::get('{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'AssetModelsController@getRestore', 'middleware' => ['authorize:superuser'] ]);
+            Route::get('{modelId}/custom_fields', ['as' => 'custom_fields/model','uses' => 'AssetModelsController@getCustomFields']);
+            Route::get('/', [ 'as' => 'models', 'uses' => 'AssetModelsController@getIndex' ,'middleware' => ['authorize:superuser'] ]);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         });
 
         Route::get('/', [
@@ -394,6 +416,17 @@ Route::group(
 
 Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () {
 
+<<<<<<< HEAD
+=======
+    Route::get('requests',
+        // foreach( CheckoutRequest::with('user')->get() as $requestedItem) {
+        //     echo $requestedItem->user->username . ' requested ' . $requestedItem->requestedItem->name;
+            [
+            'as' => 'requests',
+            'middleware' => 'authorize:admin',
+            'uses' => 'ViewAssetsController@getRequestedIndex'
+            ]);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     # Licenses
     Route::group([ 'prefix' => 'licenses', 'middleware'=>'authorize:licenses.view' ], function () {
 
@@ -727,7 +760,11 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
                 [ 'as' => 'update/location', 'uses' => 'LocationsController@getEdit' ]
             );
             Route::post('{locationId}/edit', 'LocationsController@postEdit');
+<<<<<<< HEAD
             Route::get('{locationId}/view', 'LocationsController@getView');
+=======
+            Route::get('{locationId}/view', [ 'as' => 'view/location', 'uses' => 'LocationsController@getView' ]);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             Route::get(
                 '{locationId}/delete',
                 [ 'as' => 'delete/location', 'uses' => 'LocationsController@getDelete' ]
@@ -771,6 +808,10 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
         Route::post('create', [ 'uses' => 'UsersController@postCreate', 'middleware' => ['authorize:users.edit']  ]);
         Route::get('import', [ 'as' => 'import/user', 'uses' => 'UsersController@getImport', 'middleware' => ['authorize:users.edit']  ]);
         Route::post('import', [ 'uses' => 'UsersController@postImport', 'middleware' => ['authorize:users.edit']  ]);
+<<<<<<< HEAD
+=======
+        Route::get('export', [ 'uses' => 'UsersController@getExportUserCsv', 'middleware' => ['authorize:users.view']  ]);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         Route::get('{userId}/edit', [ 'as' => 'update/user', 'uses' => 'UsersController@getEdit', 'middleware' => ['authorize:users.edit']  ]);
         Route::post('{userId}/edit', [ 'uses' => 'UsersController@postEdit', 'middleware' => ['authorize:users.edit']  ]);
         Route::get('{userId}/clone', [ 'as' => 'clone/user', 'uses' => 'UsersController@getClone', 'middleware' => ['authorize:users.edit']  ]);
@@ -864,6 +905,14 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
         [ 'as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset' ]
     );
 
+<<<<<<< HEAD
+=======
+    Route::post(
+        'request/{itemType}/{itemId}',
+        [ 'as' => 'account/request-item', 'uses' => 'ViewAssetsController@getRequestItem']
+    );
+
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     # Account Dashboard
     Route::get('/', [ 'as' => 'account', 'uses' => 'ViewAssetsController@getIndex' ]);
 
@@ -916,6 +965,15 @@ Route::group(['middleware' => ['web','auth','authorize:reports.view']], function
         'reports/activity',
         [ 'as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport' ]
     );
+<<<<<<< HEAD
+=======
+
+    Route::get(
+        'reports/activity/json',
+        [ 'as' => 'api.activity.list', 'uses' => 'ReportsController@getActivityReportDataTable' ]
+    );
+    
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     Route::get(
         'reports/unaccepted_assets',
         [ 'as' => 'reports/unaccepted_assets', 'uses' => 'ReportsController@getAssetAcceptanceReport' ]

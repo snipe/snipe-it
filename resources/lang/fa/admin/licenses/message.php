@@ -24,7 +24,11 @@ return array(
         'error'   => 'فایل) آپلود نیست. لطفا دوباره تلاش کنید.',
         'success' => 'فایل (موفقیت آپلود شد.',
         'nofiles' => 'شما هر فایل برای آپلود انتخاب کنید، و یا فایل شما در حال تلاش برای آپلود بیش از حد بزرگ است',
+<<<<<<< HEAD
         'invalidfiles' => 'یک یا بیشتر از فایل های خود را بیش از حد بزرگ است یا یک نوع فایل است که مجاز است. انواع فایل های مجاز عبارتند از PNG، GIF، JPG، DOC، DOCX، PDF، TXT و.',
+=======
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

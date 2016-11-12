@@ -11,7 +11,11 @@ return array(
     'title'					=> 'Modèles d\'actif',
     'update'				=> 'Mettre à jour le modèle d\'actif',
     'view'					=> 'Voir le modèle d\'actif',
+<<<<<<< HEAD
     'update'				=> 'Mettre à jour le modèle',
+=======
+    'update'				=> 'Mettre à jour le modèle d\'actif',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'clone'				=> 'Cloner le modèle',
     'edit'				=> 'Éditer le modèle',
 );

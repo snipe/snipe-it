@@ -23,7 +23,11 @@ return array(
         'error'   => 'Berkas belum terunggah. Silakan coba kembali.',
         'success' => 'Berkas sukses terunggah.',
         'nofiles' => 'Anda belum memilih berkas untuk di unggah, atau berkas yang akan di unggah terlalu besar ukurannya',
+<<<<<<< HEAD
         'invalidfiles' => 'Satu atau lebih dari file Anda terlalu besar atau jenis berkas yang tidak diperbolehkan. Tipe file diizinkan adalah png, gif, jpg, doc, docx, pdf, dan txt.',
+=======
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

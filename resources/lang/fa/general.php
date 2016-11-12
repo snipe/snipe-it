@@ -41,6 +41,10 @@
     'consumables'			=> 'اقلام قابل مصرف',
     'country'  				=> 'كشور',
     'create'				=> 'ایجاد مورد جدید',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'دارایی ایجاد شده',
     'created_at' 			=> 'ایجاد شده در',
     'currency'  			=> '$', // this is deprecated
@@ -131,6 +135,10 @@
     'remove_company'        => 'حذف انجمن شرکت',
     'reports'				=> 'گزارش‌ها',
     'requested'				=> 'در خواست شده',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'ذخیره کردن',
     'select'				=> 'انتخاب',
     'search'				=> 'جستوجو',
@@ -155,6 +163,11 @@
     'suppliers'  			=> 'تامین کننده',
     'total_assets'			=> 'کل دارایی',
     'total_licenses'		=> 'کل مجوزهای',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'نوع',
     'undeployable'			=> 'غیر قابل استقرار',
     'unknown_admin'			=> 'نامشخص مدیریت',

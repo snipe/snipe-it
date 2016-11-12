@@ -41,6 +41,10 @@
     'consumables'			=> 'Sarf Malzemeleri',
     'country'  				=> 'Ülke',
     'create'				=> 'Yeni Oluştur',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Oluşturulmuş Demirbaş',
     'created_at' 			=> 'Şurada oluşturuldu',
     'currency'  			=> '$', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Raporlar',
     'requested'				=> 'Requested',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Kaydet',
     'select'				=> 'Seç',
     'search'				=> 'Ara',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Tedarikçiler',
     'total_assets'			=> 'Toplam Demirbaşlar',
     'total_licenses'		=> 'Toplam Lisanslar',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tip',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',

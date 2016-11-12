@@ -49,6 +49,7 @@ return array(
     'ldap_tls_help'             => 'Ta opcja powinna zaznaczony jedynie gdy używasz STARTLS w swoim serwerze LDAP. ',
     'ldap_uname'                => 'Użytkownik do łączenia się z serwerem LDAP',
     'ldap_pword'                => 'Hasło użytkownika wpisanego do łączenia się z serwerem LDAP',
+<<<<<<< HEAD
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'Filtr LDAP',
     'ldap_pw_sync'              => 'LDAP Password Sync',
@@ -66,6 +67,25 @@ return array(
     'logo'                    	=> 'Logo',
     'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
+=======
+    'ldap_basedn'               => 'DN',
+    'ldap_filter'               => 'Filtr LDAP',
+    'ldap_pw_sync'              => 'Synchronizacja haseł LDAP',
+    'ldap_pw_sync_help'         => 'Odznacz jeśli nie chcesz synchronizować haseł z LDAP z lokalnymi',
+    'ldap_username_field'       => 'Pole użytkownika',
+    'ldap_lname_field'          => 'Nazwisko',
+    'ldap_fname_field'          => 'Imię',
+    'ldap_auth_filter_query'    => 'Autoryzacja LDAP',
+    'ldap_version'              => 'Wersja LDAP',
+    'ldap_active_flag'          => 'Aktywna flaga LDAP',
+    'ldap_emp_num'              => 'Nr pracownika LDAP',
+    'ldap_email'                => 'E-mail pracownika LDAP',
+    'load_remote_text'          => 'Skrypty zdalne',
+    'load_remote_help_text'		=> 'Ta instalacja Snipe-IT może załadować skrypty z zewnętrznego świata.',
+    'logo'                    	=> 'Logo',
+    'full_multiple_companies_support_help_text' => 'Ograniczenie do użytkowników',
+    'full_multiple_companies_support_text' => 'Wsparcie dla wielu firm',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'optional'					=> 'opcjonalny',
     'per_page'                  => 'Wyników na stronie',
     'php'                       => 'Wersja PHP',
@@ -88,8 +108,13 @@ return array(
     'brand'                     => 'Nagłówek',
     'about_settings_title'      => 'O Ustawieniach',
     'about_settings_text'       => 'Te ustawienia pozwalają ci zmodyfikować najważniejsze szczegóły twojej instalacji.',
+<<<<<<< HEAD
     'labels_per_page'           => 'Labels per page',
     'label_dimensions'          => 'Label dimensions (inches)',
+=======
+    'labels_per_page'           => 'Etykieta per strona',
+    'label_dimensions'          => 'rozmiar etykiety',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'page_padding'             => 'Margines strony (cale)',
     'purge'                    => 'Wyczyść usunięte rekordy',
     'labels_display_bgutter'    => 'Label bottom gutter',

@@ -23,7 +23,11 @@
     'avatar_upload'         => 'Subir Avatar',
     'back'      			=> 'Atras',
     'bad_data'      		=> 'Ningún resultado. ¿Quizá un dato incorrecto?',
+<<<<<<< HEAD
     'bulk_checkout'  		=> 'Bulk Checkout',
+=======
+    'bulk_checkout'  		=> 'Procesar en Lote',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'cancel'  				=> 'Cancelar',
     'categories'			=> 'Categorías',
     'category'				=> 'Categoría',
@@ -41,6 +45,10 @@
     'consumables'			=> 'Consumibles',
     'country'  				=> 'Pais',
     'create'				=> 'Crear Localización',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'equipo creado',
     'created_at' 			=> 'Creado el',
     'currency'  			=> '€', // this is deprecated
@@ -76,7 +84,11 @@
     'image_delete'         	=> 'Borrar imagen',
     'image_upload'         	=> 'Enviar imagen',
     'import'         	    => 'Importar',
+<<<<<<< HEAD
     'import-history'        => 'Import History',
+=======
+    'import-history'        => 'Historial de Importación',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => 'Mantenimiento de Equipo',
     'asset_maintenance_report' => 'Reporte de Mantenimiento de Equipo',
     'asset_maintenances'       => 'Mantenimientos de Equipo',
@@ -127,6 +139,10 @@
     'remove_company'        => 'Eliminar Asociación de compañía',
     'reports'				=> 'Informes',
     'requested'				=> 'Solicitado',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Solicitud Cancelada',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Guardar',
     'select'				=> 'Seleccionar',
     'search'				=> 'Buscar',
@@ -151,6 +167,11 @@
     'suppliers'  			=> 'Proveedores',
     'total_assets'			=> 'Equipos',
     'total_licenses'		=> 'licencias totales',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tipo',
     'undeployable'			=> 'No Instalable',
     'unknown_admin'			=> 'Admin Desconocido',

@@ -273,11 +273,16 @@
                     <td>{{ $log->created_at }}</td>
                     <td>
                         @if (isset($log->user_id))
+<<<<<<< HEAD
                         {{ $log->adminlog->fullName() }}
+=======
+                        {{ $log->user->fullName() }}
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                         @endif
                     </td>
                     <td>{{ $log->action_type }}</td>
                     <td>
+<<<<<<< HEAD
                         @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
 
 	                        @if ($log->userlog->deleted_at=='')
@@ -286,6 +291,16 @@
 		                         </a>
 		                    @else
 		 						<del>{{ $log->userlog->fullName() }}</del>
+=======
+                        @if ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
+
+	                        @if ($log->target->deleted_at=='')
+		                        <a href="{{ route('view/user', $log->target_id) }}">
+		                        {{ $log->user->fullName() }}
+		                         </a>
+		                    @else
+		 						<del>{{ $log->user->fullName() }}</del>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 	                        @endif
 
                         @endif

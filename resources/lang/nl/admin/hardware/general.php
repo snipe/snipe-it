@@ -12,7 +12,12 @@ return array(
     'edit'  					=> 'Materiaal Bewerken',
 	'filetype_info'				=> 'Toegestane bestandstypes zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'model_deleted'  			=> 'Het model van dit materiaal is verwijderd. Je moet het herstellen voordat je het materiaal kan herstellen. <br/> <a href="/hardware/models/:model_id/restore">Klik hier op het model te herstellen</a>.',
+<<<<<<< HEAD
     'requestable'				=> 'Beschikbaar',
+=======
+    'requestable'               => 'Beschikbaar',
+    'requested'				    => 'Aangevraagd',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'restore'  					=> 'Herstel materiaal',
     'pending'  					=> 'In behandeling',
     'undeployable'  			=> 'Niet uitrolbaar',

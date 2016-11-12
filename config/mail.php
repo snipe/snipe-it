@@ -3,6 +3,15 @@
 return [
 
     /*
+<<<<<<< HEAD
+=======
+    | ***************************************************************************
+    | DO NOT MAKE CHANGES DIRECTLY TO THIS FILE.
+    |
+    | Instead use your .env file to set your application configuration settings.
+    | See https://snipe-it.readme.io/docs/configuration for more info.
+    |
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     |--------------------------------------------------------------------------
     | Mail Driver
     |--------------------------------------------------------------------------
@@ -11,6 +20,10 @@ return [
     | sending of e-mail. You may specify which one you're using throughout
     | your application here. By default, Laravel is setup for SMTP mail.
     |
+<<<<<<< HEAD
+=======
+    |
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     | Supported: "smtp", "mail", "sendmail", "mailgun", "mandrill", "ses", "log"
     |
     */
@@ -56,6 +69,26 @@ return [
 
     'from' => ['address' => env('MAIL_FROM_ADDR', null), 'name' => env('MAIL_FROM_NAME', null)],
 
+<<<<<<< HEAD
+=======
+
+    /*
+    |--------------------------------------------------------------------------
+    | Global "Reply-To" Address
+    |--------------------------------------------------------------------------
+    |
+    | You may wish for all e-mails sent by your application to have a different "Reply-to"
+    | address than the "From" address. If this is left blank, the application will use
+    | your MAIL_FROM information. 
+    |
+    */
+
+    'reply_to' => [
+        'address' => env('MAIL_REPLYTO_ADDR', env('MAIL_FROM_ADDR', null)),
+        'name' => env('MAIL_REPLYTO_NAME', env('MAIL_FROM_NAME', null))
+    ],
+
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol

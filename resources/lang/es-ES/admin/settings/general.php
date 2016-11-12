@@ -51,8 +51,13 @@ return array(
     'ldap_pword'                => 'Enlazar contraseña LDAP',
     'ldap_basedn'               => 'Enlazar base DN',
     'ldap_filter'               => 'Filtro LDAP',
+<<<<<<< HEAD
     'ldap_pw_sync'              => 'LDAP Password Sync',
     'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
+=======
+    'ldap_pw_sync'              => 'Sincronización de Contraseña LDAP',
+    'ldap_pw_sync_help'         => 'Desmarca esta casilla si no quieres mantener las contraseñas LDAP sincronizadas con las contraseñas locales. Desactivar esto significa que tus usuarios no podrán acceder si tu servidor LDAP no está disponible por algún motivo.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_username_field'       => 'Campo de usuario',
     'ldap_lname_field'          => 'Apellido',
     'ldap_fname_field'          => 'Nombre LDAP',
@@ -92,8 +97,13 @@ return array(
     'label_dimensions'          => 'Dimensiones de las etiquetas (pulgadas)',
     'page_padding'             => 'Margenès de pàgina (pulgadas)',
     'purge'                    => 'Purgar registros eliminados',
+<<<<<<< HEAD
     'labels_display_bgutter'    => 'Label bottom gutter',
     'labels_display_sgutter'    => 'Label side gutter',
+=======
+    'labels_display_bgutter'    => 'Borde inferior de la Etiqueta',
+    'labels_display_sgutter'    => 'Borde lateral de la Etiqueta',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'labels_fontsize'           => 'Tamaño de fuente de la etiqueta',
     'labels_pagewidth'          => 'Ancho de la hoja de etiqueta',
     'labels_pageheight'         => 'Altura de la hoja de etiqueta',
@@ -101,8 +111,13 @@ return array(
     'page_dimensions'        => 'Dimensiones de la página (pulgadas)',
     'label_fields'          => 'Campos visibles de la etiqueta',
     'inches'        => 'pulgadas',
+<<<<<<< HEAD
     'width_w'        => 'w',
     'height_h'        => 'h',
+=======
+    'width_w'        => 'an',
+    'height_h'        => 'al',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'text_pt'        => 'pt',
     'left'        => 'izquierda',
     'right'        => 'derecha',

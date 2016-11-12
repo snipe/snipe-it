@@ -13,8 +13,14 @@ return array(
     |
     */
 
+<<<<<<< HEAD
     'previous' => '&laquo; Previous',
 
     'next'     => 'Next &raquo;',
+=======
+    'previous' => '&laquo; 上一步',
+
+    'next'     => '下一步 &raquo;',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 );

@@ -25,6 +25,10 @@ $factory->defineAs(App\Models\Asset::class, 'asset', function (Faker\Generator $
     'order_number' => $faker->numberBetween(1000000,50000000),
     'supplier_id' => $faker->numberBetween(1,5),
     'requestable' => $faker->numberBetween(0,1),
+<<<<<<< HEAD
+=======
+    'company_id' => \App\Models\Company::inRandomOrder()->first()->id
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
   ];
 });
 
@@ -96,6 +100,10 @@ $factory->defineAs(App\Models\Component::class, 'component', function (Faker\Gen
     'category_id' => $faker->numberBetween(21,25),
     'total_qty' => $faker->numberBetween(3, 10),
     'min_amt' => $faker->numberBetween($min = 1, $max = 2),
+<<<<<<< HEAD
+=======
+    'company_id' => \App\Models\Company::inRandomOrder()->first()->id
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
   ];
 });
 
@@ -113,6 +121,10 @@ $factory->defineAs(App\Models\Accessory::class, 'accessory', function (Faker\Gen
     'qty' => $faker->numberBetween(5, 10),
     'location_id' => $faker->numberBetween(1,5),
     'min_amt' => $faker->numberBetween($min = 1, $max = 2),
+<<<<<<< HEAD
+=======
+    'company_id' => \App\Models\Company::inRandomOrder()->first()->id
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
   ];
 });
 
@@ -138,6 +150,10 @@ $factory->defineAs(App\Models\Consumable::class, 'consumable', function (Faker\G
     'company_id' => $faker->numberBetween(1, 10),
     'qty' => $faker->numberBetween(5, 10),
     'min_amt' => $faker->numberBetween($min = 1, $max = 2),
+<<<<<<< HEAD
+=======
+    'company_id' => \App\Models\Company::inRandomOrder()->first()->id
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
   ];
 });
@@ -251,6 +267,10 @@ $factory->defineAs(App\Models\License::class, 'license', function (Faker\Generat
     'purchase_date' 		=> $faker->dateTime(),
     'purchase_cost' 		=> $faker->randomFloat(2),
     'notes'   => $faker->sentence,
+<<<<<<< HEAD
+=======
+    'company_id' => \App\Models\Company::inRandomOrder()->first()->id
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
   ];
 });
 
@@ -265,6 +285,7 @@ $factory->defineAs(App\Models\LicenseSeat::class, 'license-seat', function (Fake
 });
 
 $factory->defineAs(App\Models\Actionlog::class, 'asset-checkout', function (Faker\Generator $faker) {
+<<<<<<< HEAD
   return [
     'user_id'      	=> 1,
     'action_type' 		=> 'checkout',
@@ -277,6 +298,84 @@ $factory->defineAs(App\Models\Actionlog::class, 'asset-checkout', function (Fake
   ];
 });
 
+=======
+  $company = \App\Models\Company::has('users')->has('assets')->inRandomOrder()->first();
+  return [
+    'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> $company->assets()->inRandomOrder()->first()->id,
+    'target_id' => $company->users()->inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\User',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\Asset',
+    'note' 			=> $faker->sentence,
+    'company_id' => $company->id
+  ];
+});
+
+$factory->defineAs(App\Models\Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
+  $company = \App\Models\Company::has('users')->has('licenses')->inRandomOrder()->first();
+
+  return [
+    'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> $company->licenses()->whereNotNull('company_id')->inRandomOrder()->first()->id,
+    'target_id' => $company->assets()->inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\Asset',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\License',
+    'note' 			=> $faker->sentence,
+    'company_id' => $company->id
+  ];
+});
+
+$factory->defineAs(App\Models\Actionlog::class, 'accessory-checkout', function (Faker\Generator $faker) {
+    $company = \App\Models\Company::has('users')->has('accessories')->inRandomOrder()->first();    
+  return [
+    'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> $company->accessories()->whereNotNull('company_id')->inRandomOrder()->first()->id,
+    'target_id' => $company->users()->inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\User',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\Accessory',
+    'note' 			=> $faker->sentence,
+    'company_id' => $company->id
+  ];
+});
+
+$factory->defineAs(App\Models\Actionlog::class, 'consumable-checkout', function (Faker\Generator $faker) {
+    $company = \App\Models\Company::has('users')->has('consumables')->inRandomOrder()->first();    
+
+  return [
+    'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> $company->consumables()->whereNotNull('company_id')->inRandomOrder()->first()->id,
+    'target_id' => $company->users()->inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\User',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\Consumable',
+    'note' 			=> $faker->sentence,
+    'company_id' => $company->id
+  ];
+});
+
+$factory->defineAs(App\Models\Actionlog::class, 'component-checkout', function (Faker\Generator $faker) {
+   $company = \App\Models\Company::has('users')->has('components')->inRandomOrder()->first();    
+
+  return [
+    'user_id'      	=> $company->users()->inRandomOrder()->first()->id,
+    'action_type' 		=> 'checkout',
+    'item_id' 		=> $company->components()->whereNotNull('company_id')->inRandomOrder()->first()->id,
+    'target_id' => $company->users()->inRandomOrder()->first()->id,
+    'target_type' => 'App\\Models\\User',
+    'created_at'  => $faker->dateTime(),
+    'item_type'  => 'App\\Models\\Component',
+    'note' 			=> $faker->sentence,
+    'company_id' => $company->id
+  ];
+});
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 $factory->defineAs(App\Models\CustomField::class, 'customfield-ip', function (Faker\Generator $faker) {
   return [
@@ -294,5 +393,9 @@ $factory->defineAs(App\Models\User::class, 'valid-user', function (Faker\Generat
     'email' => $faker->safeEmail,
     'password' => $faker->password,
     'username' => $faker->username,
+<<<<<<< HEAD
+=======
+    'company_id' => \App\Models\Company::inRandomOrder()->first()->id
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
   ];
 });

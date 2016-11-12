@@ -41,6 +41,10 @@
     'consumables'			=> 'Forbruksvarer',
     'country'  				=> 'Land',
     'create'				=> 'Opprett ny',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'eiendel opprettet',
     'created_at' 			=> 'Opprettet i',
     'currency'  			=> '$', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Fjern tilknytning til bedrift',
     'reports'				=> 'Rapporter',
     'requested'				=> 'Forespurt',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Lagre',
     'select'				=> 'Velg',
     'search'				=> 'Søk',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Leverandører',
     'total_assets'			=> 'eiendeler totalt',
     'total_licenses'		=> 'lisener totalt',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Type',
     'undeployable'			=> 'Ikke utleverbar',
     'unknown_admin'			=> 'Ukjent admin',

@@ -51,7 +51,11 @@
         <div class="small-box bg-orange">
           <div class="inner">
             <h3> {{ number_format(\App\Models\Accessory::count()) }}</h3>
+<<<<<<< HEAD
             <p>total accessories</p>
+=======
+              <p>{{ trans('general.total_accessories') }}</p>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
           </div>
           <div class="icon">
             <i class="fa fa-keyboard-o"></i>
@@ -67,7 +71,11 @@
         <div class="small-box bg-purple">
           <div class="inner">
             <h3> {{ number_format(\App\Models\Consumable::count()) }}</h3>
+<<<<<<< HEAD
             <p>total consumables</p>
+=======
+              <p>{{ trans('general.total_consumables') }}</p>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
           </div>
           <div class="icon">
             <i class="fa fa-tint"></i>
@@ -88,13 +96,18 @@
           <div class="box-header with-border">
             <h3 class="box-title">{{ trans('general.recent_activity') }}</h3>
             <div class="box-tools pull-right">
+<<<<<<< HEAD
               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+=======
+                <a href="{{ route('reports/activity') }}"><i class="fa fa-ellipsis-h"></i></a>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             </div>
           </div><!-- /.box-header -->
           <div class="box-body">
             <div class="row">
               <div class="col-md-12">
                <div class="table-responsive">
+<<<<<<< HEAD
                 <table class="table table-hover table-fixed break-word">
                 <thead>
                     <tr>
@@ -178,6 +191,24 @@
                    @endforeach
                 @endif
                 </tbody>
+=======
+                <table
+                    class="table table-striped"
+                    name="activityReport"
+                    id="table"
+                    data-url="{{route('api.activity.list', ['limit' => 20]) }}">
+                <thead>
+                    <tr>
+                        <th data-field="icon" style="width: 40px;" class="hidden-xs"></th>
+                        <th class="col-sm-2" data-field="created_at">{{ trans('general.date') }}</th>
+                        <th class="col-sm-2" data-field="admin">{{ trans('general.admin') }}</th>
+                        <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                        <th class="col-sm-4" data-field="item">{{ trans('general.item') }}</th>
+                        <th class="col-sm-2" data-field="target">To</th>
+                    </tr>
+                </thead>
+
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 </table>
                </div><!-- /.responsive -->
               </div><!-- /.col -->
@@ -241,8 +272,29 @@
 
 </script>
 
+<<<<<<< HEAD
 
 
+=======
+    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+    <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+    <script type="text/javascript">
+        $('#table').bootstrapTable({
+            classes: 'table table-responsive table-no-bordered',
+            undefinedText: '',
+            iconsPrefix: 'fa',
+            showRefresh: false,
+            search: false,
+            pagination: false,
+            sidePagination: 'server',
+            sortable: false,
+            showMultiSort: false,
+            cookie: false,
+            mobileResponsive: true,
+        });
+
+    </script>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 @stop
 
 

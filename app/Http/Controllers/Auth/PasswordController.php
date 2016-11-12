@@ -37,4 +37,16 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Get the e-mail subject line to be used for the reset link email.
+     * Overriding method "getEmailSubject()" from trait "use ResetsPasswords"
+     * @return string
+     */
+    public function getEmailSubject(){
+        return property_exists($this, 'subject') ? $this->subject : \Lang::get('mail.reset_link');
+    }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 }

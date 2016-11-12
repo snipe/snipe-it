@@ -37,9 +37,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
         'error'         => 'Some items did not import correctly.',
         'errorDetail'   => 'The following Items were not imported because of errors.',
         'success'       => "Your file has been imported",
+=======
+        'error'                 => 'Algunos elementos no se pudieron importar correctamente.',
+        'errorDetail'           => 'Estos elementos no pudieron importarse debido a errores.',
+        'success'               => "Tu archivo ha sido importado",
+        'file_delete_success'   => "Tu archivo ha sido eliminado con éxito",
+        'file_delete_error'      => "No pudimos eliminar tu archivo",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -53,7 +61,11 @@ return array(
         'error'   		=> 'Equipo no asignado, intentalo de nuevo',
         'success' 		=> 'Equipo asignado.',
         'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
+<<<<<<< HEAD
         'not_available' => 'That asset is not available for checkout!'
+=======
+        'not_available' => '¡Ese artículo no está disponible para retirada!'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(
@@ -67,6 +79,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Bien no solicitado, por favor inténtelo de nuevo',
         'success' 		=> 'Bien solicitado correctamente.',
+<<<<<<< HEAD
+=======
+        'canceled'      => 'Solicitud de retirada cancelada con éxito'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

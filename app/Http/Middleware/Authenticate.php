@@ -3,12 +3,17 @@
 namespace App\Http\Middleware;
 
 use Closure;
+<<<<<<< HEAD
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as Auth;
+=======
+use Illuminate\Contracts\Auth\Guard;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 class Authenticate
 {
     /**
+<<<<<<< HEAD
      * The authentication factory instance.
      *
      * @var \Illuminate\Contracts\Auth\Factory
@@ -24,11 +29,31 @@ class Authenticate
     {
         $this->auth = $auth;
     }
+=======
+     * The Guard implementation.
+     *
+     * @var Guard
+     */
+    protected $auth;
+
+    /**
+     * Create a new filter instance.
+     *
+     * @param  Guard  $auth
+     * @return void
+     */
+    public function __construct(Guard $auth)
+    {
+        $this->auth = $auth;
+    }
+
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+<<<<<<< HEAD
      * @param  string[]  ...$guards
      * @return mixed
      *
@@ -58,5 +83,20 @@ class Authenticate
             }
         }
         throw new AuthenticationException('Unauthenticated.', $guards);
+=======
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if ($this->auth->guest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                return redirect()->guest('login');
+            }
+        }
+
+        return $next($request);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     }
 }

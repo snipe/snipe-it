@@ -41,6 +41,10 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Land',
     'create'				=> 'Skapa Ny',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'skapa tillgång',
     'created_at' 			=> 'Skapad',
     'currency'  			=> 'SEK', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Rapporter',
     'requested'				=> 'Requested',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Spara',
     'select'				=> 'Välj',
     'search'				=> 'Sök',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Suppliers',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',

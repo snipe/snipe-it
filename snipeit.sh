@@ -31,9 +31,83 @@ file=master.zip
 tmp=/tmp/$name
 fileName=snipe-it-master
 
+<<<<<<< HEAD
 rm -rf $tmp/
 mkdir $tmp
 
+=======
+spin[0]="-"
+spin[1]="\\"
+spin[2]="|"
+spin[3]="/"
+
+rm -rf $tmp/
+mkdir $tmp
+
+# Debian/Ubuntu friendly f(x)s
+progress () {
+	while kill -0 $pid > /dev/null 2>&1
+        do
+        	for i in "${spin[@]}"
+                do
+                	if [ -e /proc/$pid ]; then
+                        echo -ne "\b$i"
+                        sleep .1
+                        else
+                        echo -ne "\n\b\n"
+                        fi
+                done
+        done
+}
+
+vhenvfile () {
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1
+		apachefile=/etc/apache2/sites-available/$name.conf
+		echo "* Create Virtual host for apache."
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $webdir/$name/public>"
+		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog /var/log/apache2/snipeIT.error.log"
+		echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
+
+		cat > $webdir/$name/.env <<-EOF
+		#Created By Snipe-it Installer
+		APP_TIMEZONE=$(cat /etc/timezone)
+		DB_HOST=localhost
+		DB_DATABASE=snipeit
+		DB_USERNAME=snipeit
+		DB_PASSWORD=$mysqluserpw
+		APP_URL=http://$fqdn
+		APP_KEY=$random32
+		EOF
+}
+
+perms () {
+		if [ $distro == "debian" ]; then
+		#Change permissions on directories
+		 chmod -R 755 $webdir/$name/storage
+		chmod -R 755 $webdir/$name/storage/private_uploads
+		chmod -R 755 $webdir/$name/public/uploads
+		chown -R www-data:www-data /var/www/$name
+		# echo "* Finished permission changes."
+		else
+		sudo chmod -R 755 $webdir/$name/storage
+		sudo chmod -R 755 $webdir/$name/storage/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R www-data:www-data /var/www/$name
+		fi
+}
+
+#CentOS Friendly f(x)s
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 function isinstalled {
   if yum list installed "$@" >/dev/null 2>&1; then
     true
@@ -70,7 +144,11 @@ echo "
 
 echo ""
 echo ""
+<<<<<<< HEAD
 echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
+=======
+echo "  Welcome to Snipe-IT Inventory Installer for Centos, Debian and Ubuntu!"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 echo ""
 shopt -s nocasematch
 case $distro in
@@ -116,9 +194,15 @@ case $setpw in
                 echo -n  "  Q. What do you want your snipeit user password to be?"
                 read -s mysqluserpw
                 echo ""
+<<<<<<< HEAD
 				ans="no"
                 ;;
         *) 		echo "  Invalid answer. Please type y or n"
+=======
+		ans="no"
+                ;;
+        *) 	echo "  Invalid answer. Please type y or n"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 ;;
 esac
 done
@@ -141,6 +225,7 @@ chmod 700 $dbsetup
 case $distro in
 	debian)
 		#####################################  Install for Debian ##############################################
+<<<<<<< HEAD
 
 		webdir=/var/www
 
@@ -262,10 +347,70 @@ case $distro in
 			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring >> /var/log/snipeit-install.log 2>&1
 			#Enable mcrypt and rewrite
 			echo "##  Enabling mcrypt and rewrite"
+=======
+		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
+		#Git clone snipeit, create vhost, edit hosts file, create .env file, mysql install
+		#composer install, set permissions, restart apache.
+		#BTW, Debian, I swear, you're such a pain.
+
+		webdir=/var/www
+		echo -e "\n* Updating Debian packages in the background... ${spin[0]}\n"
+		apt-get update >> /var/log/snipeit-install.log & pid=$! 2>&1
+		wait
+		apt-get upgrade >> /var/log/snipeit-install.log & pid=$! 2>&1
+		wait
+		echo -e "\n* Installing packages... ${spin[0]}\n"
+		echo -e "\n* Going to suppress more messages that you don't need to worry about. Please wait... ${spin[0]}"
+		DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-server mariadb-client apache2 git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
+		wait
+		echo -e "\n* Cloning Snipeit, extracting to $webdir/$name..."
+		git clone https://github.com/snipe/snipe-it $webdir/$name >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
+		php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+		a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		vhenvfile
+		wait
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		a2ensite $name.conf
+		echo -e "* Modify the Snipe-It files necessary for a production environment.\n* Securing Mysql"
+		# Have user set own root password when securing install
+		# and just set the snipeit database user at the beginning
+		/usr/bin/mysql_secure_installation
+		echo -e "* Creating Mysql Database and User.\n##  Please Input your MySQL/MariaDB root password: "
+		mysql -u root -p < $dbsetup
+		cd $webdir/$name/
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+		perms
+		service apache2 restart
+		;;
+	ubuntu)
+		#####################################  Install for Ubuntu  ##############################################
+		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
+		#Git clone snipeit, create vhost, .env file, mysql install
+		#composer install, set permissions, restart apache.
+
+		webdir=/var/www
+		echo -ne "\n* Updating with apt-get update in the background... ${spin[0]}"
+		sudo apt-get update >> /var/log/snipeit-install.log & pid=$! 2>&1
+		rm /var/lib/dpkg/lock
+		progress
+		echo -ne "\n* Upgrading packages with apt-get upgrade in the background... ${spin[0]}"
+		sudo apt-get -y upgrade >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
+		echo -ne "\n* Setting up LAMP in the background... ${spin[0]}\n"
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log & pid=$! 2>&1 
+		progress
+		if [ "$version" == "16.04" ]; then
+			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml >> /var/log/snipeit-install.log & pid=$! 2>&1
+			progress
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 			sudo phpenmod mcrypt >> /var/log/snipeit-install.log 2>&1
 			sudo phpenmod mbstring >> /var/log/snipeit-install 2>&1
 			sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
 		else
+<<<<<<< HEAD
 			sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1
 			#Enable mcrypt and rewrite
 			echo "##  Enabling mcrypt and rewrite"
@@ -345,6 +490,26 @@ case $distro in
 		# echo "##  Finished permission changes."
 
 		echo "##  Restarting apache."
+=======
+			sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log & pid=$! 2>&1
+			progress
+			sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+			sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		fi
+		echo -ne "\n* Cloning Snipeit, extracting to $webdir/$name... ${spin[0]}"
+		git clone https://github.com/snipe/snipe-it $webdir/$name >> /var/log/snipeit-install.log & pid=$! 2>&1
+		progress
+		vhenvfile
+		echo -e "* MySQL Phase next.\n"
+		/usr/bin/mysql_secure_installation
+		echo -e "* Creating MySQL Database and user.\n* Please Input your MySQL/MariaDB root password created in the previous step.: "
+		mysql -u root -p < $dbsetup
+		echo -e "\n* Securing Mysql\n* Installing and configuring composer"
+		cd $webdir/$name/
+		curl -sS https://getcomposer.org/installer  | php
+		php composer.phar install --no-dev --prefer-source
+		perms
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		service apache2 restart
 		;;
 	centos )
@@ -352,9 +517,12 @@ case $distro in
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
+<<<<<<< HEAD
 
 ##TODO make sure the repo doesnt exhist isnt already in there
 
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		#Allow us to get the mysql engine
 		echo ""
 		echo "##  Adding IUS, epel-release and mariaDB repos.";
@@ -371,7 +539,10 @@ case $distro in
 		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1
 		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
 		PACKAGES="httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
@@ -386,8 +557,12 @@ case $distro in
 			fi
 		done;
 
+<<<<<<< HEAD
         echo ""
 		echo "##  Downloading Snipe-IT from github and putting it in the web directory.";
+=======
+		echo -e "\n##  Downloading Snipe-IT from github and putting it in the web directory.";
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
@@ -405,7 +580,10 @@ case $distro in
 		echo "##  Please Input your MySQL/MariaDB root password: "
 		mysql -u root -p < $dbsetup
 
+<<<<<<< HEAD
 ##TODO make sure the apachefile doesnt exhist isnt already in there
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		#Create the new virtual host in Apache and enable rewrite
 		echo "##  Creating the new virtual host in Apache.";
 		apachefile=/etc/httpd/conf.d/$name.conf
@@ -426,7 +604,10 @@ case $distro in
 		echo >> $apachefile "        CustomLog /var/log/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 
+<<<<<<< HEAD
 ##TODO make sure hosts file doesnt already contain this info
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		echo "##  Setting up hosts file.";
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
@@ -447,10 +628,16 @@ case $distro in
 		DB_PASSWORD=$mysqluserpw
 		APP_URL=http://$fqdn
 		APP_KEY=$random32
+<<<<<<< HEAD
 		EOF
 
 
 		#Install / configure composer
+=======
+		DB_DUMP_PATH='/usr/bin'
+		EOF
+
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		echo "##  Configure composer"
 		cd $webdir/$name
 		curl -sS https://getcomposer.org/installer | php
@@ -461,6 +648,7 @@ case $distro in
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R apache:apache $webdir/$name
 
+<<<<<<< HEAD
 #TODO detect if SELinux and firewall are enabled to decide what to do
 		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
 		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
@@ -469,14 +657,32 @@ case $distro in
 
 		service httpd restart
 		
+=======
+                /sbin/service iptables status >/dev/null 2>&1
+                if [ $? = 0 ]; then
+                      #Open http/https port
+                      iptables -I INPUT 1 -p tcp -m tcp --dport 80 -j ACCEPT
+                      iptables -I INPUT 1 -p tcp -m tcp --dport 443 -j ACCEPT
+                      #Save iptables
+                      service iptables save
+                fi
+
+
+	       service httpd restart
+
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 	elif [ "$version" == "7" ]; then
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		webdir=/var/www/html
 
 		#Allow us to get the mysql engine
+<<<<<<< HEAD
 		echo ""
 		echo "##  Add IUS, epel-release and mariaDB repos.";
+=======
+		echo -e "\n##  Add IUS, epel-release and mariaDB repos.";
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1
 		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1
 		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1
@@ -495,8 +701,12 @@ case $distro in
 			fi
 		done;
 
+<<<<<<< HEAD
         echo ""
 		echo "##  Downloading Snipe-IT from github and put it in the web directory.";
+=======
+		echo -e "\n##  Downloading Snipe-IT from github and put it in the web directory.";
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
@@ -516,7 +726,12 @@ case $distro in
 		echo "##  Please Input your MySQL/MariaDB root password "
 		mysql -u root -p < $dbsetup
 
+<<<<<<< HEAD
 ##TODO make sure the apachefile doesnt exhist isnt already in there
+=======
+		##TODO make sure the apachefile doesnt exist isnt already in there
+
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		#Create the new virtual host in Apache and enable rewrite
 		apachefile=/etc/httpd/conf.d/$name.conf
 
@@ -542,13 +757,19 @@ case $distro in
 		echo "##  Setting up hosts file.";
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		echo "##  Starting the apache server.";
 		# Make apache start on boot and restart the daemon
 		systemctl enable httpd.service
 		systemctl restart httpd.service
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
 		echo "## Configuring .env file."
 
@@ -561,7 +782,11 @@ case $distro in
 		DB_PASSWORD=$mysqluserpw
 		APP_URL=http://$fqdn
 		APP_KEY=$random32
+<<<<<<< HEAD
 
+=======
+		DB_DUMP_PATH='/usr/bin'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 		EOF
 
 		# Change permissions on directories
@@ -579,11 +804,23 @@ case $distro in
 		sudo chown -R apache:apache $webdir/$name
 		# Make SeLinux happy
 		sudo chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+<<<<<<< HEAD
 #TODO detect if SELinux and firewall are enabled to decide what to do
 		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
 		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
 		# firewall-cmd --zone=public --add-port=80/tcp --permanent
 		# firewall-cmd --reload
+=======
+
+          	#Check if SELinux is enforcing
+	       	if [ $(getenforce) == "Enforcing" ]; then
+	 	       #Add SELinux and firewall exception/rules.
+		       #Required for ldap integration
+	       	       setsebool -P httpd_can_connect_ldap on
+	 	       #Sets SELinux context type so that scripts running in the web server process are allowed read/write access
+	 	       sudo chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+ 	       	fi
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 		systemctl restart httpd.service
 
@@ -599,9 +836,17 @@ echo ""
 echo "  ***Open http://$fqdn to login to Snipe-IT.***"
 echo ""
 echo ""
+<<<<<<< HEAD
 echo "##  Cleaning up..."
 rm -f snipeit.sh
 rm -f install.sh
 rm -rf $tmp/
 echo "##  Done!"
+=======
+echo "* Cleaning up..."
+rm -f snipeit.sh
+rm -f install.sh
+rm -rf $tmp/
+echo "* Finished!"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 sleep 1

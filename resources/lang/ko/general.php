@@ -23,7 +23,11 @@
     'avatar_upload'         => '아바타 올리기',
     'back'      			=> '이전',
     'bad_data'      		=> '찾을 수 없습니다. 잘못된 데이터 인가요?',
+<<<<<<< HEAD
     'bulk_checkout'  		=> 'Bulk Checkout',
+=======
+    'bulk_checkout'  		=> '대량 반출',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'cancel'  				=> '취소',
     'categories'			=> '분류',
     'category'				=> '분류',
@@ -41,6 +45,10 @@
     'consumables'			=> '소모품',
     'country'  				=> '국가명',
     'create'				=> '새로 생성',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> '생성된 자산',
     'created_at' 			=> '생성 위치',
     'currency'  			=> '원', // this is deprecated
@@ -76,7 +84,11 @@
     'image_delete'         	=> '이미지 삭제',
     'image_upload'         	=> '이미지 올리기',
     'import'         	    => '불러오기',
+<<<<<<< HEAD
     'import-history'        => 'Import History',
+=======
+    'import-history'        => '가져오기 이력',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => '자산 관리',
     'asset_maintenance_report' => '자산 관리 보고서',
     'asset_maintenances'       => '자산 관리',
@@ -107,7 +119,11 @@
     'moreinfo'				=> '추가 정보',
     'name'					=> '이름',
     'next'					=> '다음',
+<<<<<<< HEAD
     'new'					=> 'new!',
+=======
+    'new'					=> '신규!',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'no_depreciation'		=> '감가 상각 없음',
     'no_results'			=> '결과 없음.',
     'no'  					=> '아니오',
@@ -127,6 +143,10 @@
     'remove_company'        => '공급자 연결 제거',
     'reports'				=> '보고서',
     'requested'				=> '요청됨',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => '요청 취소',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> '저장',
     'select'				=> '선택',
     'search'				=> '찾기',
@@ -143,7 +163,11 @@
     'select_asset'    		=> '자산 선택',
     'settings'				=> '설정',
     'sign_in'				=> '로그인',
+<<<<<<< HEAD
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
+=======
+    'some_features_disabled' => '데모 모드: 설치 시 일부 기능은 사용할 수 없습니다.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'site_name'				=> '사이트 명',
     'state'  				=> '주',
     'status_labels'			=> '상태 딱지',
@@ -151,6 +175,11 @@
     'suppliers'  			=> '공급자',
     'total_assets'			=> '총 자산',
     'total_licenses'		=> '총 라이선스',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> '유형',
     'undeployable'			=> '사용불가',
     'unknown_admin'			=> '알수없는 관리자',

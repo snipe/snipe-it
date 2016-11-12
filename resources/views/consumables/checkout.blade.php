@@ -2,7 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
+<<<<<<< HEAD
      {{ trans('admin/hardware/general.checkout') }}
+=======
+     {{ trans('admin/consumables/general.checkout') }}
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 @parent
 @stop
 

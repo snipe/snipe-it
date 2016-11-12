@@ -64,8 +64,13 @@ return array(
     ),
     "unique"           => ":attribute 已经被采用",
     "url"              => ":attribute 格式无效",
+<<<<<<< HEAD
     "statuslabel_type" => "You must select a valid status label type",
     "unique_undeleted" => "The :attribute must be unique.",
+=======
+    "statuslabel_type" => "你必须选择一个有效的状态标签类型",
+    "unique_undeleted" => " :attribute 必须唯一",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 
     /*

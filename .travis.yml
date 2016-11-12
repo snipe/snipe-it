@@ -1,0 +1,58 @@
+addons:
+    hosts:
+        - localhost
+sudo: false
+
+# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
+language: php
+
+# list any PHP version you want to test against
+php:
+  - 5.6
+  - 7.0
+
+# execute any number of scripts before the test run, custom env's are available as variables
+before_script:
+  - phantomjs --webdriver=4444  &
+  - sleep 10
+  - mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis
+  - composer self-update
+  - composer install -n --prefer-source
+  - cp .env.testing-ci .env
+  - chmod -R 777 storage
+  - php artisan migrate --database=mysql --force
+  - ./vendor/bin/codecept build
+  - php artisan key:generate
+  - php artisan db:seed --database=mysql --force
+  - php artisan snipeit:create-admin --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
+  - php artisan serve --port=8000 --host=localhost &
+  - sleep 5
+  - pip install --user codecov
+  - sleep 5
+
+
+
+# omitting "script:" will default to phpunit
+# use the $DB env variable to determine the phpunit.xml to use
+# script: ./vendor/bin/codecept run --env testing-ci - broken :(
+script: ./vendor/bin/codecept run unit --env testing-ci
+#script: ./vendor/bin/codecept run
+
+after_success:
+  - codecov
+
+after_failure:
+  - cat tests/_output/AccessoriesCept.fail.html
+  - curl http://localhost:8000/login
+
+# configure notifications (email, IRC, campfire etc)
+notifications:
+  email: false
+  slack:
+    secure: vv9we1RxB9RsrMbomSdq6D7vz/okobw87pEkgIZjB+hj1QpQ2by90gsPsOa+NgsJEFaEP7e4KlT6SH8kK+zhbmuKaUd3d1//XdcancE22LZXi6tkiB5yuR/Jhhb1LLDqyGJTB4D92hMnnCPiUjpxNA3r437ttNeYRdYIEEP3drA=
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/5e136eb0c1965f3918d0
+    on_success: change  # options: [always|never|change] default: always
+    on_failure: change  # options: [always|never|change] default: always
+    on_start: false     # default: false

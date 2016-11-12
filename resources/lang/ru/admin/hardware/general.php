@@ -12,7 +12,12 @@ return array(
     'edit'  					=> 'Редактировать актив',
 	'filetype_info'				=> 'Разрешенные типы файлов: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'model_deleted'  			=> 'Эта модель актива была удалена. Необходимо сначала восстановить модель актива прежде чем восстанавливать сам актив.<br/> <a href="/hardware/models/:model_id/restore">Нажмите здесь, чтобы восстановить модель</a>.',
+<<<<<<< HEAD
     'requestable'				=> 'Готов к выдаче',
+=======
+    'requestable'               => 'Готов к выдаче',
+    'requested'				    => 'Requested',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'restore'  					=> 'Восстановить актив',
     'pending'  					=> 'Ожидание',
     'undeployable'  			=> 'Выданные',

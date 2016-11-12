@@ -51,8 +51,13 @@ return array(
     'ldap_pword'                => 'Senha do usuário LDAP',
     'ldap_basedn'               => 'DN de Atribuição Básico',
     'ldap_filter'               => 'Filtro LDAP',
+<<<<<<< HEAD
     'ldap_pw_sync'              => 'LDAP Password Sync',
     'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
+=======
+    'ldap_pw_sync'              => 'Sincronização de senha do LDAP',
+    'ldap_pw_sync_help'         => 'Desmarque esta caixa se não deseja guardar as passwords LDAP com passwords locais. Ao desativar esta opção quer dizer que os utilizadores poderão não conseguir fazer login se o seu servidor LDAP não estiver disponível por alguma razão.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_username_field'       => 'Nome do utilizador',
     'ldap_lname_field'          => 'Último Nome',
     'ldap_fname_field'          => 'Primeiro nome',

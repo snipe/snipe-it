@@ -41,6 +41,10 @@
     'consumables'			=> 'Materiały eksploatacyjne',
     'country'  				=> 'Kraj',
     'create'				=> 'Utwórz nowe',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Utworzone aktywa',
     'created_at' 			=> 'Utworzone',
     'currency'  			=> 'PLN', // this is deprecated
@@ -60,11 +64,19 @@
     'email_domain'			=> 'Domena poczty e-mail',
     'email_format'			=> 'Format e-mail',
     'email_domain_help'		=> 'To jest używane do generowania e-maili podczas importowania',
+<<<<<<< HEAD
     'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
     'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
     'first'					=> 'Pierwszy',
     'first_name'			=> 'Imię',
     'first_name_format'		=> 'First Name (jane@example.com)',
+=======
+    'filastname_format'			=> 'Pierwsza litera imienia i nazwisko (jsmith@example.com)',
+    'firstname_lastname_format'	=> 'Imię nazwisko (jane.smith@example.com)',
+    'first'					=> 'Pierwszy',
+    'first_name'			=> 'Imię',
+    'first_name_format'		=> 'Imię (jane@example.com)',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'file_name'				=> 'Plik',
     'file_uploads'			=> 'Dodaj plik',
     'generate'				=> 'Generuj',
@@ -76,7 +88,11 @@
     'image_delete'         	=> 'Usuń zdjęcie',
     'image_upload'         	=> 'Dodaj zdjęcie',
     'import'         	    => 'Zaimportuj',
+<<<<<<< HEAD
     'import-history'        => 'Import History',
+=======
+    'import-history'        => 'Historia importu',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => 'Utrzymanie aktywów',
     'asset_maintenance_report' => 'Raport utrzymywania aktywów',
     'asset_maintenances'       => 'Utrzymanie aktywów',
@@ -96,7 +112,11 @@
     'location'              => 'Lokalizacja',
     'locations'				=> 'Lokalizacje',
     'logout'				=> 'Wyloguj się',
+<<<<<<< HEAD
     'lookup_by_tag'     => 'Lookup by Asset Tag',
+=======
+    'lookup_by_tag'     => 'Wyszukaj poprzez znacznik aktywa',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'manufacturer'			=> 'Producent',
     'manufacturers'			=> 'Producenci',
     'markdown'				=> 'To pole pozwala na użycie <a href="https://help.github.com/articles/github-flavored-markdown/">GFM (Github flavored markdown)</a>.',
@@ -127,6 +147,10 @@
     'remove_company'        => 'Usuń powiązanie firmy',
     'reports'				=> 'Raporty',
     'requested'				=> 'Wymagane',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Żądanie anulowane',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Zapisz',
     'select'				=> 'Wybierz',
     'search'				=> 'Wyszukaj',
@@ -151,6 +175,11 @@
     'suppliers'  			=> 'Dostawcy',
     'total_assets'			=> 'Ogółem aktywów',
     'total_licenses'		=> 'Ogółem licencji',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Rodzaj',
     'undeployable'			=> 'Nie przypisane',
     'unknown_admin'			=> 'Nieznany Administrator',

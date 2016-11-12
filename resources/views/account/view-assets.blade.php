@@ -231,7 +231,11 @@ View Assets for  {{ $user->fullName() }}
         @endif
 
       <div class="box-body">
+<<<<<<< HEAD
         @if (count($user->userlog) > 0)
+=======
+        @if (count($userlog) > 0)
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         <div class="table-responsive">
         <table class="table table-striped" id="example">
             <thead>
@@ -244,6 +248,7 @@ View Assets for  {{ $user->fullName() }}
                 </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
                 @foreach ($user->userlog as $log)
                 <tr>
                     <td class="text-center">
@@ -298,14 +303,54 @@ View Assets for  {{ $user->fullName() }}
                                 <del>{{ $log->accessorylog->name }}</del> (deleted)
                             @endif
 
+=======
+                @foreach ($userlog as $log)
+                <tr>
+                    <td class="text-center">
+                        @if ($log->itemType()=="asset")
+                            <i class="fa fa-barcode"></i>
+                        @elseif ($log->itemType()=="accessory")
+                            <i class="fa fa-keyboard-o"></i>
+                        @elseif ($log->itemType()=="consumable")
+                            <i class="fa fa-tint"></i>
+                        @elseif ($log->itemType()=="license")
+                            <i class="fa fa-floppy-o"></i>
+                        @else
+                            <i class="fa fa-times"></i>
+                        @endif
+
+                    </td>
+                    <td>
+                        {{ strtolower(trans('general.'.str_replace(' ','_',$log->action_type))) }}
+                    </td>
+                    <td>
+                        @if ($log->itemType()=="asset")
+                            @if ($log->item->deleted_at=='')
+                                {{ $log->item->showAssetName() }}
+                            @else
+                                <del>{{ $log->item->showAssetName() }}</del> (deleted)
+                            @endif
+
+                        @elseif (!is_null($log->itemType()))
+                             @if ($log->item->deleted_at=='')
+                                {{ $log->item->name }}
+                             @else
+                                 <del>{{ $log->item->name }}</del> (deleted)
+                             @endif
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                          @else
                              {{ trans('general.bad_data') }}
                         @endif
 
                     </td>
                     <td>
+<<<<<<< HEAD
                         @if ($log->adminlog)
                         {{ $log->adminlog->fullName() }}
+=======
+                        @if ($log->user)
+                        {{ $log->user->fullName() }}
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                         @endif
                     </td>
                     <td>{{ $log->created_at }}</td>

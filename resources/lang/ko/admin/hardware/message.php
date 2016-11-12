@@ -37,9 +37,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
         'error'         => 'Some items did not import correctly.',
         'errorDetail'   => 'The following Items were not imported because of errors.',
         'success'       => "Your file has been imported",
+=======
+        'error'                 => '몇몇 품목들을 정확하게 읽어오지 못했습니다.',
+        'errorDetail'           => '다음 품목들은 오류로 읽어오지 못했습니다.',
+        'success'               => "파일에서 읽어오기가 완료되었습니다",
+        'file_delete_success'   => "파일 삭제가 완료되었습니다",
+        'file_delete_error'      => "파일을 삭제할 수 없습니다",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -53,7 +61,11 @@ return array(
         'error'   		=> '자산이 반출되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '자산이 반출되었습니다.',
         'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
+<<<<<<< HEAD
         'not_available' => 'That asset is not available for checkout!'
+=======
+        'not_available' => '그 자산은 반출 할 수 없습니다!'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(
@@ -67,6 +79,10 @@ return array(
     'requests' => array(
         'error'   		=> '자산을 불러오지 못했습니다. 재시도해 주십시오.',
         'success' 		=> '자산을 불러왔습니다.',
+<<<<<<< HEAD
+=======
+        'canceled'      => '반출 요청이 취소되었습니다'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

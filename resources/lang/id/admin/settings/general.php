@@ -51,8 +51,13 @@ return array(
     'ldap_pword'                => 'Katakunci LDAP',
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'Saring LDAP',
+<<<<<<< HEAD
     'ldap_pw_sync'              => 'LDAP Password Sync',
     'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
+=======
+    'ldap_pw_sync'              => 'Sinkronisasi Password LDAP',
+    'ldap_pw_sync_help'         => 'Hapus tanda centang kotak ini jika Anda tidak ingin menyimpan password LDAP disinkronkan dengan password lokal. Menonaktifkan ini berarti bahwa pengguna Anda mungkin tidak bisa login jika server LDAP Anda tidak bisa diakses untuk beberapa alasan.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_username_field'       => 'Kolom nama pengguna',
     'ldap_lname_field'          => 'Nama Belakang',
     'ldap_fname_field'          => 'LDAP Nama Depan',

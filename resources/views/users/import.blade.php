@@ -32,9 +32,15 @@ Create a User
 			<p>
 				Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as: </p>
 
+<<<<<<< HEAD
         <p><strong>firstName,lastName, username, email, location_id, phone, jobtitle, employee_num</strong>. </p>
 
         <p>Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address.
+=======
+        <p><strong>firstName,lastName, username, email, location_id, phone, jobtitle, employee_num, company_id</strong>. </p>
+
+        <p>Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address. If you wish to include a company association, you must reference the ID number of an existing company - companies will not be created on the fly.
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 			</p>
 
             @if (config('app.lock_passwords'))

@@ -18,7 +18,11 @@ return array(
     'delete' => array(
         'confirm'   => '您確定要刪除此配件嗎？',
         'error'   => '刪除配件時發生問題。請再試一次。',
+<<<<<<< HEAD
         'success' => '配件已刪除。'
+=======
+        'success' => '刪除配件成功。'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
      'checkout' => array(

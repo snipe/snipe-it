@@ -36,9 +36,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
         'error'         => 'Some items did not import correctly.',
         'errorDetail'   => 'The following Items were not imported because of errors.',
         'success'       => "Your file has been imported",
+=======
+        'error'                 => 'Some items did not import correctly.',
+        'errorDetail'           => 'The following Items were not imported because of errors.',
+        'success'               => "Your file has been imported",
+        'file_delete_success'   => "Your file has been been successfully deleted",
+        'file_delete_error'      => "The file was unable to be deleted",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -66,6 +74,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Активът не беше изискан. Моля опитайте отново.',
         'success' 		=> 'Активът изискан успешно.',
+<<<<<<< HEAD
+=======
+        'canceled'      => 'Checkout request successfully canceled'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

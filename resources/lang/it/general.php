@@ -41,6 +41,10 @@
     'consumables'			=> 'Consumabili',
     'country'  				=> 'Paese',
     'create'				=> 'Crea',
+<<<<<<< HEAD
+=======
+    'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Asset creato',
     'created_at' 			=> 'Creato il',
     'currency'  			=> '$', // this is deprecated
@@ -127,6 +131,10 @@
     'remove_company'        => 'Rimuovi associazioni azienda',
     'reports'				=> 'Reports',
     'requested'				=> 'Richiesto',
+<<<<<<< HEAD
+=======
+    'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Salva',
     'select'				=> 'Seleziona',
     'search'				=> 'Cerca',
@@ -151,6 +159,11 @@
     'suppliers'  			=> 'Fornitori',
     'total_assets'			=> 'Assets totali',
     'total_licenses'		=> 'Totale licenze',
+<<<<<<< HEAD
+=======
+    'total_accessories'		=> 'total accessories',
+    'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tipo',
     'undeployable'			=> 'Non consegnabile',
     'unknown_admin'			=> 'Amministratore sconosciuto',

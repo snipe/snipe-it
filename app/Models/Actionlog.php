@@ -2,9 +2,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\SoftDeletes;
+=======
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -12,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @version    v1.0
  */
+<<<<<<< HEAD
 class Actionlog extends Model implements ICompanyableChild
 {
     use SoftDeletes;
@@ -90,17 +98,88 @@ class Actionlog extends Model implements ICompanyableChild
 
         return $this->belongsTo('\App\Models\User', 'asset_id')
             ->withTrashed();
+=======
+class Actionlog extends Model
+{
+    use SoftDeletes;
+
+    protected $dates = [ 'deleted_at' ];
+
+    protected $table      = 'action_logs';
+    public $timestamps = true;
+    protected $fillable   = [ 'created_at', 'item_type','user_id','item_id','action_type','note','target_id', 'target_type' ];
+
+    // Overridden from Builder to automatically add the company
+    public static function boot()
+    {
+        parent::boot();
+        static::creating( function (Actionlog $actionlog) {
+            // If the admin is a superadmin, let's see if the target instead has a company.
+            if (Auth::user() && Auth::user()->isSuperUser()) {
+                if ($actionlog->target) {
+                    $actionlog->company_id = $actionlog->target->company_id;
+                } else if ($actionlog->item) {
+                    $actionlog->company_id = $actionlog->item->company_id;
+                }
+            } else if (Auth::user() && Auth::user()->company) {
+                $actionlog->company_id = Auth::user()->company_id;
+            }
+        });
+    }
+    // Eloquent Relationships below
+    public function item()
+    {
+        return $this->morphTo('item')->withTrashed();
+    }
+
+    public function itemType()
+    {
+
+        if($this->item_type == AssetModel::class) {
+            return "model";
+        }
+        return camel_case(class_basename($this->item_type));
+    }
+
+    public function uploads()
+    {
+        return $this->morphTo('item')
+                    ->where('action_type', '=', 'uploaded')
+                    ->withTrashed();
+    }
+
+    public function userlog()
+    {
+        return $this->target();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id')
+                    ->withTrashed();
+    }
+
+    public function target()
+    {
+        return $this->morphTo('target');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     }
 
     public function childlogs()
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         return $this->hasMany('\App\Models\ActionLog', 'thread_id');
     }
 
     public function parentlog()
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         return $this->belongsTo('\App\Models\ActionLog', 'thread_id');
     }
 
@@ -141,6 +220,7 @@ class Actionlog extends Model implements ICompanyableChild
     public function getListingOfActionLogsChronologicalOrder()
     {
 
+<<<<<<< HEAD
         return DB::table('asset_logs')
                  ->select('*')
                  ->where('action_type', '!=', 'uploaded')
@@ -181,4 +261,12 @@ class Actionlog extends Model implements ICompanyableChild
         return $query->where('action_type', '=', 'checkout')
                      ->where('accepted_id', '=', null);
     }
+=======
+        return $this->all()
+                 ->where('action_type', '!=', 'uploaded')
+                 ->orderBy('item_id', 'asc')
+                 ->orderBy('created_at', 'asc')
+                 ->get();
+    }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 }
