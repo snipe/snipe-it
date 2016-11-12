@@ -860,14 +860,14 @@ public function checkin_email()
     }
 
 
-        /**
-        * Query builder scope to order on assigned user
-        *
-        * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-        * @param  text                              $order       Order
-        *
-        * @return Illuminate\Database\Query\Builder          Modified query builder
-        */
+    /**
+    * Query builder scope to order on assigned user
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeOrderAssigned($query, $order)
     {
         return $query->join('users', 'assets.assigned_to', '=', 'users.id')->orderBy('users.first_name', $order)->orderBy('users.last_name', $order);
