@@ -45,6 +45,10 @@ class Actionlog extends Model
         return $this->morphTo('item')->withTrashed();
     }
 
+    public function company() {
+        return $this->hasMany('\App\Models\Company', 'id','company_id');
+    }
+
     public function itemType()
     {
 
@@ -128,5 +132,31 @@ class Actionlog extends Model
                  ->orderBy('item_id', 'asc')
                  ->orderBy('created_at', 'asc')
                  ->get();
+    }
+
+    /**
+     * Query builder scope to search on text for complex Bootstrap Tables API
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeTextSearch($query, $search)
+    {
+        $search = explode(' OR ', $search);
+
+        return $query->where(function ($query) use ($search) {
+
+            foreach ($search as $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->whereHas('company', function ($query) use ($search) {
+                        $query->where('companies.name', 'LIKE', '%'.$search.'%');
+                    });
+                })->orWhere('action_type', 'LIKE', '%'.$search.'%')
+                    ->orWhere('note', 'LIKE', '%'.$search.'%');
+            }
+
+        });
     }
 }

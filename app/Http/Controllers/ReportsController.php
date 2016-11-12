@@ -311,7 +311,7 @@ class ReportsController extends Controller
         $activitylogs = Company::scopeCompanyables(Actionlog::with('item', 'user', 'target'))->orderBy('created_at', 'DESC');
 
         if (Input::has('search')) {
-            $activity = $activity->TextSearch(e(Input::get('search')));
+            $activitylogs = $activitylogs->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
