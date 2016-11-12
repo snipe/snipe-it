@@ -54,12 +54,10 @@ COPY docker/docker.env /var/www/html/.env
 RUN chown -R docker /var/www/html
 
 RUN \
-	rm -r "/var/www/html/storage/private_uploads"      && ln -fs "/var/lib/snipeit/data/private_uploads"   "/var/www/html/storage/private_uploads"      && \
-	mkdir -p "/var/www/html/public/uploads" && \
-	rm -rf "/var/www/html/public/uploads/avatars"   && ln -fs "/var/lib/snipeit/data/uploads/avatars"   "/var/www/html/public/uploads/avatars"   && \
-	rm -rf "/var/www/html/public/uploads/models"    && ln -fs "/var/lib/snipeit/data/uploads/models"    "/var/www/html/public/uploads/models"    && \
-	rm -rf "/var/www/html/public/uploads/suppliers" && ln -fs "/var/lib/snipeit/data/uploads/suppliers" "/var/www/html/public/uploads/suppliers" && \
-	rm -r "/var/www/html/storage/app/backups"        && ln -fs "/var/lib/snipeit/dumps"                  "/var/www/html/storage/app/backups"
+	rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \ 
+  && mkdir -p "/var/lib/snipeit/data/uploads/{assets,avatars,barcodes,models,suppliers}" \
+  && rm -rf "/var/www/html/public/uploads" && ln -fs "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
+  && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups"
 
 ############## DEPENDENCIES via COMPOSER ###################
 
