@@ -310,13 +310,18 @@ class UsersController extends Controller
         }
 
         try {
-            // Get the user information
+
             $user = User::find($id);
 
             // Figure out of this user was an admin before this edit
             $orig_permissions_array = $user->decodePermissions();
-            if (array_key_exists('superuser', $orig_permissions_array)) {
-                $orig_superuser = $orig_permissions_array['superuser'];
+
+            if (is_array($orig_permissions_array)) {
+                if (array_key_exists('superuser', $orig_permissions_array)) {
+                    $orig_superuser = $orig_permissions_array['superuser'];
+                } else {
+                    $orig_superuser = '0';
+                }
             } else {
                 $orig_superuser = '0';
             }
@@ -325,11 +330,9 @@ class UsersController extends Controller
             if (!Company::isCurrentUserHasAccess($user)) {
                 return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
             }
+            
         } catch (UserNotFoundException $e) {
-            // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
-
-            // Redirect to the user management page
             return redirect()->route('users')->with('error', $error);
         }
 
