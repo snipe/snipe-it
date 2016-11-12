@@ -66,7 +66,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Share common variables with all views.
-        view()->share('snipeSettings', \App\Models\Setting::getSettings() );
+        view()->composer('*', function ($view) {
+            $view->with('snipeSettings', \App\Models\Setting::getSettings());
+        });
     }
 
     /**
