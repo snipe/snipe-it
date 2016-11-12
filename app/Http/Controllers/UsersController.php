@@ -1006,7 +1006,7 @@ class UsersController extends Controller
                             $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
                         }
                     } else {
-                        $actions.='foo';
+                        $actions.='';
                     }
                 }
 
