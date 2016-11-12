@@ -35,7 +35,7 @@
           <thead>
               <tr>
                   <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                  <th data-field="companyName" data-sortable="false" data-switchable="true">{{ trans('general.company') }}</th>
+                  <th data-field="company" data-sortable="true" data-switchable="true">{{ trans('general.company') }}</th>
                   <th data-field="name" data-sortable="true">{{ trans('admin/licenses/table.title') }}</th>
                   <th data-field="manufacturer" data-sortable="true">{{ trans('general.manufacturer') }}</th>
                   <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/table.serial') }}</th>
