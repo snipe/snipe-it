@@ -954,11 +954,22 @@ class LicensesController extends Controller
             $licenses = $licenses->TextSearch(Input::get('search'));
         }
 
-        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial'];
+        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','manufacturer','company'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
-        $licenses = $licenses->orderBy($sort, $order);
+        switch ($sort) {
+            case 'manufacturer':
+                $licenses = $licenses->OrderManufacturer($order);
+                break;
+            case 'company':
+                $licenses = $licenses->OrderCompany($order);
+                break;
+            default:
+                $licenses = $licenses->orderBy($sort, $order);
+                break;
+        }
+
 
         $licenseCount = $licenses->count();
         $licenses = $licenses->skip(Input::get('offset'))->take(Input::get('limit'))->get();
@@ -1003,7 +1014,7 @@ class LicensesController extends Controller
                 'order_number'     => ($license->order_number) ? e($license->order_number) : '',
                 'notes'     => ($license->notes) ? e($license->notes) : '',
                 'actions'           => $actions,
-                'companyName'       => is_null($license->company) ? '' : e($license->company->name),
+                'company'       => is_null($license->company) ? '' : e($license->company->name),
                 'manufacturer'      => $license->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
             );
         }

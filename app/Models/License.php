@@ -234,13 +234,51 @@ class License extends Depreciable
 
         return $query->where(function ($query) use ($search) {
 
-            $query->where('name', 'LIKE', '%'.$search.'%')
-                ->orWhere('serial', 'LIKE', '%'.$search.'%')
-                ->orWhere('notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('order_number', 'LIKE', '%'.$search.'%')
-                ->orWhere('purchase_order', 'LIKE', '%'.$search.'%')
-                ->orWhere('purchase_date', 'LIKE', '%'.$search.'%')
-                ->orWhere('purchase_cost', 'LIKE', '%'.$search.'%');
+            $query->where('licenses.name', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.serial', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.notes', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.order_number', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.purchase_order', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.purchase_date', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.purchase_cost', 'LIKE', '%'.$search.'%')
+             ->orWhereHas('manufacturer', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                    });
+                })
+            ->orWhereHas('company', function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('companies.name', 'LIKE', '%'.$search.'%');
+                });
+            });
         });
+    }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')->select('licenses.*')
+            ->orderBy('manufacturers.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on company
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderCompany($query, $order)
+    {
+        return $query->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')->select('licenses.*')
+            ->orderBy('companies.name', $order);
     }
 }
