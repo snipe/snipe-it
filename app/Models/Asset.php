@@ -870,7 +870,7 @@ public function checkin_email()
     */
     public function scopeOrderAssigned($query, $order)
     {
-        return $query->join('users', 'assets.assigned_to', '=', 'users.id')->orderBy('users.first_name', $order)->orderBy('users.last_name', $order);
+        return $query->leftJoin('users', 'assets.assigned_to', '=', 'users.id')->select('assets.*')->orderBy('users.first_name', $order)->orderBy('users.last_name', $order);
     }
 
     /**
