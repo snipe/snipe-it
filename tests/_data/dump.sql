@@ -387,7 +387,7 @@ CREATE TABLE `components` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `min_amt` int(11) DEFAULT NULL,
-  `serial_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `serial` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

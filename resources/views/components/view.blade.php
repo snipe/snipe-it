@@ -75,9 +75,9 @@
   <!-- side address column -->
   <div class="col-md-3">
 
-      @if ($component->serial_number!='')
+      @if ($component->serial!='')
           <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.serial') }}: </strong>
-              {{ $component->serial_number }} </div>
+              {{ $component->serial }} </div>
       @endif
 
     @if ($component->purchase_date)
