@@ -17,4 +17,4 @@ modules:
             password: 'snipe'
             dump: tests/_data/dump.sql
             populate: true
-            cleanup: true
+            cleanup: false
