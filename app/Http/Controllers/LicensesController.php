@@ -139,6 +139,7 @@ class LicensesController extends Controller
         $license->depreciation_id   = e(Input::get('depreciation_id'));
         $license->company_id        = Company::getIdForCurrentUser(Input::get('company_id'));
         $license->expiration_date   = e(Input::get('expiration_date'));
+        $license->termination_date  = e(Input::get('termination_date'));
         $license->user_id           = Auth::user()->id;
 
         if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {

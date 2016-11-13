@@ -84,7 +84,7 @@
     <div class="input-group col-md-3">
         <div class="input-group">
 
-            <input type="text" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" name="termination_date" id="expiration_date" value="{{ Input::old('termination_date', $item->termination_date) }}">
+            <input type="text" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" name="termination_date" id="termination_date" value="{{ Input::old('termination_date', $item->termination_date) }}">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         </div><!-- /.input group -->
 
