@@ -17,8 +17,8 @@ class Location extends SnipeModel
     protected $rules = array(
       'name'        => 'required|min:3|max:255|unique_undeleted',
       'city'        => 'min:3|max:255',
-      'state'           => 'min:2|max:32',
-      'country'     => 'min:2|max:2|max:2',
+      'state'           => 'min:0|max:2',
+      'country'     => 'min:2|max:2',
       'address'         => 'min:5|max:80',
       'address2'        => 'min:2|max:80',
       'zip'         => 'min:3|max:10',
