@@ -48,11 +48,14 @@ class DepreciationCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name'      => 'TestDepreciation',
+            'months'    => '15'
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/settings/depreciations/create');
-        $I->fillField('name', 'TestDeprecation3');
-        $I->fillField('months', '12');
-        $I->click('Save');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('depreciations', $values);
         $I->seeElement('.alert-success');
     }
 }

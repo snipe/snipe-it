@@ -45,11 +45,13 @@ class ManufacturersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name' => 'Testufacturer'
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/settings/manufacturers/create');
-        $I->fillField('name', 'TestManufacturer');
-        $I->click('Save');
-        $I->dontSee('&lt;span class=&quot;');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('manufacturers', $values);
         $I->seeElement('.alert-success');
     }
 }

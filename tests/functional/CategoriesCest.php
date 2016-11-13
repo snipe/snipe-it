@@ -37,11 +37,17 @@ class CategoryCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name'                  => 'TestModel',
+            'category_type'         => 'accessory',
+            'eula_text'             => 'lorem ipsum blah blah',
+            'require_acceptance'    => true,
+            'checkin_email'         => true,
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/settings/categories/create');
-        $I->fillField('name', 'TestCategory');
-        $I->selectOption('form select[name=category_type]', 'Asset');
-        $I->click('Save');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('categories', $values);
         $I->dontSee('&lt;span class=&quot;');
         $I->seeElement('.alert-success');
     }

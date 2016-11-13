@@ -53,15 +53,26 @@ class AccessoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'company_id'       => 3,
+            'name'          => 'TestAccessory',
+            'category_id'   => 40,
+            'manufacturer_id'  => 24,
+            'location_id'      => 38,
+            'order_number'  => '12345',
+            'purchase_date' => '2016-01-01',
+            'purchase_cost' => '25.00',
+            'qty'           => '12',
+            'min_amt'       => '6'
+        ];
+
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/accessories/create');
-        $I->fillField('name', 'TestAccessory');
-        $I->fillField('qty', '12');
-        $I->fillField('min_amt', '15');
-        $I->selectOption('form select[name=category_id]', 'Test Accessory');
-        $I->click('Save');
+
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('accessories', $values);
+
         $I->dontSee('&lt;span class=&quot;');
         $I->seeElement('.alert-success');
     }
-
 }

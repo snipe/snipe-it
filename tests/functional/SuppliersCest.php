@@ -45,11 +45,25 @@ class SuppliersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name'              => 'Test Supplier',
+            'address'           => '046t46 South Street',
+            'address2'          => 'Apt 356',
+            'city'              => 'Sutherland',
+            'state'             => 'BV',
+            'country'           => 'AF',
+            'zip'               => '30266',
+            'contact'           => 'Mr. Smith',
+            'phone'             => '032626236 x35',
+            'fax'               => '342 33 6647 3555',
+            'email'             => 'p@roar.com',
+            'url'               => 'http://snipeitapp.com',
+            'notes'             => 'lorem ipsum indigo something'
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/settings/suppliers/create');
-        $I->fillField('name', 'TestSupplier');
-        $I->click('Save');
-        $I->dontSee('&lt;span class=&quot;');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('suppliers', $values);
         $I->seeElement('.alert-success');
     }
 }

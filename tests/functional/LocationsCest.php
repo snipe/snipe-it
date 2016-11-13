@@ -50,19 +50,25 @@ class LocationsCest
         $I->see('The name must be at least 3 characters', '.alert-msg');
         $I->see('The address must be at least 5 characters', '.alert-msg');
         $I->see('The city must be at least 3 characters', '.alert-msg');
-        $I->see('The state must be at least 2 characters', '.alert-msg');
         $I->see('The zip must be at least 3 characters', '.alert-msg');
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name'              => 'Test Location',
+            'parent_id'         => 26,
+            'currency'          => 'YEN',
+            'address'           => '046t46 South Street',
+            'address2'          => 'Apt 356',
+            'city'              => 'Sutherland',
+            'state'             => 'BV',
+            'country'           => 'AF',
+            'zip'               => '30266',
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/settings/locations/create');
-        $I->fillField('name', 'TestDeprecation3');
-        $I->fillField('address', 't2da33');
-        $I->fillField('city', 'West Borough');
-        $I->fillField('state', 'tH');
-        $I->fillField('zip', 't232a');
-        $I->click('Save');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('locations', $values);
         $I->seeElement('.alert-success');
     }
 }

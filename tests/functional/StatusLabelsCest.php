@@ -36,10 +36,27 @@ class StatusLabelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $submitValues = [
+            'name'                  => 'Test Status',
+            'statuslabel_types'     => 'pending',
+            'color'                 => '#b46262',
+            'notes'                 => 'lorem ipsum something else',
+            'show_in_nav'           => true,
+        ];
+
+        $recordValues = [
+            'name'                  => 'Test Status',
+            'pending'               => 1,
+            'deployable'            => 0,
+            'archived'              => 0,
+            'color'                 => '#b46262',
+            'notes'                 => 'lorem ipsum something else',
+            'show_in_nav'           => true,
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/settings/statuslabels/create');
-        $I->fillField('name', 'TestStatus');
-        $I->click('Save');
+        $I->submitForm('form#create-form', $submitValues);
+        $I->seeRecord('status_labels', $recordValues);
         $I->seeElement('.alert-success');
-    }    
+    }
 }

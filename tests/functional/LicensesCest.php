@@ -52,12 +52,30 @@ class licensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name'              => 'Test Software',
+            'serial'            => '946346-436346-346436',
+            'seats'             => '12',
+            'company_id'        => 3,
+            'manufacturer_id'   => 24,
+            'license_name'      => 'Marco Polo',
+            'license_email'     => 'g@m.com',
+            'reassignable'      => true,
+            'supplier_id'       => 11,
+            'order_number'      => '12345',
+            'purchase_cost'     => '25.00',
+            'purchase_date'     => '2016-01-01',
+            'expiration_date'   => '2018-01-01',
+            'termination_date'  => '2020-01-01',
+            'purchase_order'    => '234562',
+            'maintained'        => true,
+            'notes'             => 'lorem ipsum omicron delta phi'
+        ];
+
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/licenses/create');
-        $I->fillField('name', 'TestAccessory');
-        $I->fillField('serial', '12a66b3-13aacd');
-        $I->fillField('seats', '15');
-        $I->click('Save');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('licenses', $values);
         $I->dontSee('&lt;span class=&quot;');
         $I->seeElement('.alert-success');
     }

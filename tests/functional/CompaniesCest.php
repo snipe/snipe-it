@@ -36,10 +36,14 @@ class CompaniesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name' => 'TestCompany'
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/settings/companies/create');
         $I->fillField('name', 'TestCompany');
-        $I->click('Save');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('companies', $values);
         $I->dontSee('&lt;span class=&quot;');
         $I->seeElement('.alert-success');
     }

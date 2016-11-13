@@ -38,13 +38,23 @@ class AssetModelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'name'              => 'TestModel',
+            'manufacturer_id'  => '24',
+            'category_id'       => '40',
+            'model_number'      => '350335',
+            'eol'               => '12',
+            'notes'             => 'lorem ipsum blah blah',
+            'requestable'       => true,
+        ];
+
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/hardware/models/create');
-        $I->fillField('name', 'TestModel');
-        $I->selectOption('form select[name=manufacturer_id]', 'Test Manufacturer');
-        $I->selectOption('form select[name=category_id]', 'Test Asset');
-        $I->click('Save');
+
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('models', $values);
         $I->dontSee('&lt;span class=&quot;');
         $I->seeElement('.alert-success');
     }
+
 }

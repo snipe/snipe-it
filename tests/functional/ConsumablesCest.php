@@ -52,13 +52,22 @@ class ConsumablesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $values = [
+            'company_id'        => 3,
+            'name'              => 'TestConsumable',
+            'category_id'       => 43,
+            'model_number'      => '032-356',
+            'item_no'           => '32503',
+            'order_number'      => '12345',
+            'purchase_date'     => '2016-01-01',
+            'purchase_cost'     => '25.00',
+            'qty'               => '12',
+            'min_amt'           => '6',
+        ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage('/admin/consumables/create');
-        $I->fillField('name', 'TestConsumable');
-        $I->fillField('qty', '12');
-        $I->fillField('min_amt', '15');
-        $I->selectOption('form select[name=category_id]', 'Test Consumable');
-        $I->click('Save');
+        $I->submitForm('form#create-form', $values);
+        $I->seeRecord('consumables', $values);
         $I->seeElement('.alert-success');
     }
 }
