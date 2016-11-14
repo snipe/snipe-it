@@ -231,7 +231,11 @@ View Assets for  {{ $user->fullName() }}
         @endif
 
       <div class="box-body">
+<<<<<<< HEAD
+        @if (count($user->userlog) > 0)
+=======
         @if (count($userlog) > 0)
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         <div class="table-responsive">
         <table class="table table-striped" id="example">
             <thead>
@@ -244,6 +248,62 @@ View Assets for  {{ $user->fullName() }}
                 </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
+                @foreach ($user->userlog as $log)
+                <tr>
+                    <td class="text-center">
+                        @if (($log->assetlog) && ($log->asset_type=="hardware"))
+                            <i class="fa fa-barcode"></i>
+                        @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                            <i class="fa fa-keyboard-o"></i>
+                        @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+                            <i class="fa fa-tint"></i>
+                        @elseif (($log->licenselog) && ($log->asset_type=="software"))
+                            <i class="fa fa-floppy-o"></i>
+                        @else
+                        <i class="fa fa-times"></i>
+                        @endif
+
+                    </td>
+                    <td>{{ $log->action_type }}</td>
+                    <td>
+
+                        @if (($log->assetlog) && ($log->asset_type=="hardware"))
+
+                            @if ($log->assetlog->deleted_at=='')
+
+                                    {{ $log->assetlog->showAssetName() }}
+
+                            @else
+                                <del>{{ $log->assetlog->showAssetName() }}</del> (deleted)
+                            @endif
+
+                        @elseif (($log->licenselog) && ($log->asset_type=="software"))
+
+                            @if ($log->licenselog->deleted_at=='')
+
+                                    {{ $log->licenselog->name }}
+
+                            @else
+                                <del>{{ $log->licenselog->name }}</del> (deleted)
+                            @endif
+
+                         @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+
+                             @if ($log->consumablelog->deleted_at=='')
+                                {{ $log->consumablelog->name }}
+                             @else
+                                 <del>{{ $log->consumablelog->name }}</del> (deleted)
+                             @endif
+
+                        @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                            @if ($log->accessorylog->deleted_at=='')
+                                {{ $log->accessorylog->name }}
+                            @else
+                                <del>{{ $log->accessorylog->name }}</del> (deleted)
+                            @endif
+
+=======
                 @foreach ($userlog as $log)
                 <tr>
                     <td class="text-center">
@@ -277,14 +337,20 @@ View Assets for  {{ $user->fullName() }}
                              @else
                                  <del>{{ $log->item->name }}</del> (deleted)
                              @endif
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                          @else
                              {{ trans('general.bad_data') }}
                         @endif
 
                     </td>
                     <td>
+<<<<<<< HEAD
+                        @if ($log->adminlog)
+                        {{ $log->adminlog->fullName() }}
+=======
                         @if ($log->user)
                         {{ $log->user->fullName() }}
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                         @endif
                     </td>
                     <td>{{ $log->created_at }}</td>

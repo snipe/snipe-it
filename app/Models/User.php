@@ -9,7 +9,10 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
+<<<<<<< HEAD
+=======
 use App\Models\Setting;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -147,8 +150,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return config('app.url').'/uploads/avatars/'.$this->avatar;
         }
 
+<<<<<<< HEAD
+        if ($this->email) {
+            // Generate the Gravatar hash
+            $gravatar = md5(strtolower(trim($this->email)));
+            // Return the Gravatar url
+=======
         if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
             $gravatar = md5(strtolower(trim($this->email)));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             return "//gravatar.com/avatar/".$gravatar;
         }
 
@@ -201,7 +211,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function userlog()
     {
+<<<<<<< HEAD
+        return $this->hasMany('\App\Models\Actionlog', 'checkedout_to')->orderBy('created_at', 'DESC')->withTrashed();
+=======
         return $this->hasMany('\App\Models\Actionlog', 'target_id')->orderBy('created_at', 'DESC')->withTrashed();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     }
 
     /**
@@ -254,13 +268,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function uploads()
     {
+<<<<<<< HEAD
+        return $this->hasMany('\App\Models\Actionlog', 'asset_id')
+            ->where('asset_type', '=', 'user')
+=======
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
             ->where('item_type', User::class)
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Fetch Items User has requested
      */
@@ -269,6 +290,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany(Asset::class, 'checkout_requests');
     }
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public function throttle()
     {
         return $this->hasOne('\App\Models\Throttle');
@@ -382,7 +404,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 ->orWhere('users.email', 'LIKE', "%$search%")
                 ->orWhere('users.username', 'LIKE', "%$search%")
                 ->orWhere('users.notes', 'LIKE', "%$search%")
+<<<<<<< HEAD
+=======
                 ->orWhere('users.jobtitle', 'LIKE', "%$search%")
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 ->orWhere('users.employee_num', 'LIKE', "%$search%")
                 ->orWhere(function ($query) use ($search) {
                     $query->whereHas('userloc', function ($query) use ($search) {

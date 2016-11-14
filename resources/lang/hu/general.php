@@ -41,7 +41,10 @@
     'consumables'			=> 'Fogyóeszközök',
     'country'  				=> 'Ország',
     'create'				=> 'Új létrehozása',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'létrehozott eszköz',
     'created_at' 			=> 'Létrehozva',
     'currency'  			=> 'HUF', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Vállati kapcsolat megszüntetése',
     'reports'				=> 'Jelentések',
     'requested'				=> 'Kérve',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Mentés',
     'select'				=> 'Választ',
     'search'				=> 'Keresés',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'Beszállítók',
     'total_assets'			=> 'eszköz összesen',
     'total_licenses'		=> 'licensz összesen',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Típus',
     'undeployable'			=> 'Nem kiadható',
     'unknown_admin'			=> 'Ismeretlen Admin',

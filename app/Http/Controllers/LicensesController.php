@@ -155,7 +155,11 @@ class LicensesController extends Controller
 
             // Was the license created?
         if ($license->save()) {
+<<<<<<< HEAD
+
+=======
             $license->logCreate();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $insertedId = $license->id;
           // Save the license seat data
             DB::transaction(function () use (&$insertedId, &$license) {
@@ -329,11 +333,19 @@ class LicensesController extends Controller
 
                   //Log the deletion of seats to the log
                     $logaction = new Actionlog();
+<<<<<<< HEAD
+                    $logaction->asset_id = $license->id;
+                    $logaction->asset_type = 'software';
+                    $logaction->user_id = Auth::user()->id;
+                    $logaction->note = abs($difference)." seats";
+                    $logaction->checkedout_to =  null;
+=======
                     $logaction->item_type = License::class;
                     $logaction->item_id = $license->id;
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = '-'.abs($difference)." seats";
                     $logaction->target_id =  null;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     $log = $logaction->logaction('delete seats');
 
                 } else {
@@ -354,11 +366,18 @@ class LicensesController extends Controller
 
                 //Log the addition of license to the log.
                 $logaction = new Actionlog();
+<<<<<<< HEAD
+                $logaction->asset_id = $license->id;
+                $logaction->asset_type = 'software';
+                $logaction->user_id = Auth::user()->id;
+                $logaction->note = abs($difference)." seats";
+=======
                 $logaction->item_type = License::class;
                 $logaction->item_id = $license->id;
                 $logaction->user_id = Auth::user()->id;
                 $logaction->note = '+'.abs($difference)." seats";
                 $logaction->target_id =  null;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $log = $logaction->logaction('add seats');
             }
             $license->seats             = e(Input::get('seats'));
@@ -539,10 +558,21 @@ class LicensesController extends Controller
         // Was the asset updated?
         if ($licenseseat->save()) {
 
+<<<<<<< HEAD
+            $logaction = new Actionlog();
+
+            //$logaction->location_id = $assigned_to->location_id;
+            $logaction->asset_type = 'software';
+            $logaction->user_id = Auth::user()->id;
+            $logaction->note = e(Input::get('note'));
+            $logaction->asset_id = $licenseseat->license_id;
+
+=======
             $licenseseat->logCheckout(e(Input::get('note')));
 
             $data['license_id'] =$licenseseat->license_id;
             $data['note'] = e(Input::get('note'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
             $license = License::find($licenseseat->license_id);
             $settings = Setting::getSettings();
@@ -550,9 +580,17 @@ class LicensesController extends Controller
 
             // Update the asset data
             if (e(Input::get('assigned_to')) == '') {
+<<<<<<< HEAD
+                $logaction->checkedout_to = null;
+                $slack_msg = strtoupper($logaction->asset_type).' license <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+            } else {
+                $logaction->checkedout_to = e(Input::get('assigned_to'));
+                $slack_msg = strtoupper($logaction->asset_type).' license <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+=======
                 $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
                 $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             }
 
 
@@ -578,7 +616,11 @@ class LicensesController extends Controller
                                 ],
                                 [
                                     'title' => 'Note:',
+<<<<<<< HEAD
+                                    'value' => e($logaction->note)
+=======
                                     'value' => e(Input::get('note'))
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                                 ],
 
 
@@ -592,6 +634,12 @@ class LicensesController extends Controller
 
             }
 
+<<<<<<< HEAD
+            $log = $logaction->logaction('checkout');
+
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             // Redirect to the new asset page
             return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
         }
@@ -670,6 +718,11 @@ class LicensesController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
         $return_to = $licenseseat->assigned_to;
+<<<<<<< HEAD
+        $logaction = new Actionlog();
+        $logaction->checkedout_to = $licenseseat->assigned_to;
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         // Update the asset data
         $licenseseat->assigned_to                   = null;
@@ -679,7 +732,15 @@ class LicensesController extends Controller
 
         // Was the asset updated?
         if ($licenseseat->save()) {
+<<<<<<< HEAD
+            $logaction->asset_id = $licenseseat->license_id;
+            $logaction->location_id = null;
+            $logaction->asset_type = 'software';
+            $logaction->note = e(Input::get('note'));
+            $logaction->user_id = $user->id;
+=======
             $licenseseat->logCheckin(e(Input::get('note')));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
             $settings = Setting::getSettings();
 
@@ -700,11 +761,19 @@ class LicensesController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
+<<<<<<< HEAD
+                                    'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
+                                ],
+                                [
+                                    'title' => 'Note:',
+                                    'value' => e($logaction->note)
+=======
                                     'value' => 'License: <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
                                     'value' => e(Input::get('note'))
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                                 ],
 
                             ]
@@ -717,6 +786,12 @@ class LicensesController extends Controller
             }
 
 
+<<<<<<< HEAD
+            $log = $logaction->logaction('checkin from');
+
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
             if ($backto=='user') {
                 return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/licenses/message.checkin.success'));
@@ -821,7 +896,11 @@ class LicensesController extends Controller
                 foreach (Input::file('licensefile') as $file) {
 
                     $rules = array(
+<<<<<<< HEAD
+                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar|max:2000'
+=======
                     'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf|max:2000'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     );
                     $validator = Validator::make(array('licensefile'=> $file), $rules);
 
@@ -832,8 +911,21 @@ class LicensesController extends Controller
                         $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
                         $upload_success = $file->move($destinationPath, $filename);
 
+<<<<<<< HEAD
+                        //Log the deletion of seats to the log
+                        $logaction = new Actionlog();
+                        $logaction->asset_id = $license->id;
+                        $logaction->asset_type = 'software';
+                        $logaction->user_id = Auth::user()->id;
+                        $logaction->note = e(Input::get('notes'));
+                        $logaction->checkedout_to =  null;
+                        $logaction->created_at =  date("Y-m-d H:i:s");
+                        $logaction->filename =  $filename;
+                        $log = $logaction->logaction('uploaded');
+=======
                         //Log the upload to the log
                         $license->logUpload($filename, e(Input::get('notes')));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     } else {
                          return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
                     }
@@ -974,7 +1066,11 @@ class LicensesController extends Controller
 
             if (Gate::allows('licenses.create')) {
                 $actions .= '<a href="' . route('clone/license', $license->id)
+<<<<<<< HEAD
+                . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
+=======
                 . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone license"><i class="fa fa-files-o"></i></a>';
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             }
             if (Gate::allows('licenses.edit')) {
                 $actions .= '<a href="' . route('update/license', $license->id)

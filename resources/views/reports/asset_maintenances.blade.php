@@ -25,7 +25,10 @@
                 <thead>
                     <tr role="row">
                         <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
+<<<<<<< HEAD
+=======
                         <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                         <th class="col-sm-1">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
                         <th class="col-sm-1">{{ trans('admin/asset_maintenances/table.supplier_name') }}</th>
                         <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
@@ -44,7 +47,10 @@
                 @foreach ($assetMaintenances as $assetMaintenance)
                     <tr>
                         <td>{{ is_null($assetMaintenance->asset->company) ? '' : $assetMaintenance->asset->company->name }}</td>
+<<<<<<< HEAD
+=======
                         <td>{{ $assetMaintenance->asset->asset_tag }}</td>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                         <td>{{ $assetMaintenance->asset->name }}</td>
                         <td>{{ $assetMaintenance->supplier->name }}</td>
                         <td>{{ $assetMaintenance->asset_maintenance_type }}</td>

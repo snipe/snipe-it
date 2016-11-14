@@ -21,7 +21,11 @@ return array(
 	'custom_css_help'			=> 'Įveskite bet kokį užsakytą CSS peržiūrėjimo norėtumėte naudoti. Neįtraukite &lt;style>&lt;/Stilius&gt; žymės.',
 	'default_currency'  		=> 'Numatytoji valiuta',
 	'default_eula_text'			=> 'Numatytasis EULA',
+<<<<<<< HEAD
+  'default_language'					=> 'Default Language',
+=======
   'default_language'					=> 'Numatyta kalba',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 	'default_eula_help_text'	=> 'Jūs taip pat galite susieti pritaikytą EULĄ specifinėms įrangos grupėms.',
     'display_asset_name'        => 'Rodyti įrangos pavadinimą',
     'display_checkout_date'     => 'Rodyti išdavimo datą',

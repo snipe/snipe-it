@@ -100,7 +100,10 @@ class AccessoriesController extends Controller
 
         // Was the accessory created?
         if ($accessory->save()) {
+<<<<<<< HEAD
+=======
             $accessory->logCreate();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             // Redirect to the new accessory  page
             return redirect()->to("admin/accessories")->with('success', trans('admin/accessories/message.create.success'));
         }
@@ -310,7 +313,18 @@ class AccessoriesController extends Controller
         'user_id' => Auth::user()->id,
         'assigned_to' => e(Input::get('assigned_to'))));
 
+<<<<<<< HEAD
+        $logaction = new Actionlog();
+        $logaction->accessory_id = $accessory->id;
+        $logaction->asset_id = 0;
+        $logaction->checkedout_to = $accessory->assigned_to;
+        $logaction->asset_type = 'accessory';
+        $logaction->location_id = $user->location_id;
+        $logaction->user_id = Auth::user()->id;
+        $logaction->note = e(Input::get('note'));
+=======
         $logaction = $accessory->logCheckout(e(Input::get('note')));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 
 
@@ -334,11 +348,19 @@ class AccessoriesController extends Controller
                 'fields' => [
                   [
                   'title' => 'Checked Out:',
+<<<<<<< HEAD
+                  'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                  ],
+                  [
+                      'title' => 'Note:',
+                      'value' => e($logaction->note)
+=======
                   'value' => 'Accessory <'.config('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                   ],
                   [
                       'title' => 'Note:',
                       'value' => e(Input::get('note'))
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                   ],
                 ]
                 ])->send('Accessory Checked Out');
@@ -349,6 +371,12 @@ class AccessoriesController extends Controller
         }
 
 
+<<<<<<< HEAD
+
+        $log = $logaction->logaction('checkout');
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $accessory_user = DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
         $data['log_id'] = $logaction->id;
@@ -366,8 +394,12 @@ class AccessoriesController extends Controller
 
             Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+<<<<<<< HEAD
+                $m->subject('Confirm accessory delivery');
+=======
                 $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                 $m->subject(trans('mail.Confirm_accessory_delivery'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             });
         }
 
@@ -427,7 +459,12 @@ class AccessoriesController extends Controller
             return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
+<<<<<<< HEAD
+        $logaction = new Actionlog();
+        $logaction->checkedout_to = e($accessory_user->assigned_to);
+=======
         $logaction = $accessory->logCheckin(e(Input::get('note')));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $return_to = e($accessory_user->assigned_to);
         $admin_user = Auth::user();
 
@@ -435,6 +472,15 @@ class AccessoriesController extends Controller
       // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
 
+<<<<<<< HEAD
+            $logaction->accessory_id = e($accessory->id);
+            $logaction->location_id = null;
+            $logaction->asset_type = 'accessory';
+            $logaction->user_id = e($admin_user->id);
+            $logaction->note = e(Input::get('note'));
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $settings = Setting::getSettings();
 
             if ($settings->slack_endpoint) {
@@ -454,7 +500,11 @@ class AccessoriesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked In:',
+<<<<<<< HEAD
+                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.config('app.url').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
+=======
                                 'value' => class_basename(strtoupper($logaction->item_type)).' <'.config('app.url').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.config('app.url').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                             ],
                             [
                                 'title' => 'Note:',
@@ -470,6 +520,12 @@ class AccessoriesController extends Controller
 
             }
 
+<<<<<<< HEAD
+
+            $log = $logaction->logaction('checkin from');
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             if (!is_null($accessory_user->assigned_to)) {
                 $user = User::find($accessory_user->assigned_to);
             }
@@ -485,8 +541,12 @@ class AccessoriesController extends Controller
 
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+<<<<<<< HEAD
+                    $m->subject('Confirm Accessory Checkin');
+=======
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.Confirm_Accessory_Checkin'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 });
             }
 

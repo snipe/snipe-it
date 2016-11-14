@@ -37,11 +37,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
+=======
         'error'                 => 'Niektóre elementy nie zostały poprawnie zaimportowane.',
         'errorDetail'           => 'Następujące elementy nie zostały zaimportowane z powodu błędów.',
         'success'               => "Twój plik został zaimportowany",
         'file_delete_success'   => "Twój plik został poprawnie usunięty",
         'file_delete_error'      => "Plik nie może zostać usunięty",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -55,7 +61,11 @@ return array(
         'error'   		=> 'Nie mogę wypisać nabytku/zasobu, proszę spróbować ponownie.',
         'success' 		=> 'Przypisano nabytek/zasób.',
         'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.',
+<<<<<<< HEAD
+        'not_available' => 'That asset is not available for checkout!'
+=======
         'not_available' => 'Ten składnik aktywów nie jest dostępny do zamówienia!'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(
@@ -69,7 +79,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Aktywo nie zostało zawnioskowane, spróbuj ponownie',
         'success' 		=> 'Aktywo zawnioskowe pomyślnie.',
+<<<<<<< HEAD
+=======
         'canceled'      => 'Żądanie przypisania zostało anulowane'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

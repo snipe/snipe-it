@@ -2,7 +2,11 @@
 
 return array(
 
+<<<<<<< HEAD
+    'does_not_exist' => 'The accessory does not exist.',
+=======
     'does_not_exist' => 'Το εξάρτημα δεν υπάρχει.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
 
     'create' => array(

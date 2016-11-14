@@ -16,9 +16,15 @@ return array(
     ),
 
     'delete' => array(
+<<<<<<< HEAD
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
+=======
         'confirm'   => 'Ar jūs tikrai norite ištrinti šį aksesuarą?',
         'error'   => 'Nepavyko ištrinti aksesuaro. Prašome bandykite dar kartą.',
         'success' => 'Aksesuaras ištrintas sėkmingai.'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
      'checkout' => array(

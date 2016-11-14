@@ -2,6 +2,39 @@
 
 return array(
 
+<<<<<<< HEAD
+    'activated'  			=> 'Active',
+    'allow'  				=> 'Allow',
+    'checkedout'  			=> 'Assets',
+    'created_at' 			=> 'Created',
+    'createuser' 			=> 'Create User',
+    'deny'  				=> 'Deny',
+    'email'      			=> 'Email',
+    'employee_num'      	=> 'Employee No.',
+    'first_name' 			=> 'First Name',
+    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned.',
+    'id'         			=> 'Id',
+    'inherit'  				=> 'Inherit',
+    'job' 					=> 'Job Title',
+    'last_login'  			=> 'Last Login',
+    'last_name'  			=> 'Last Name',
+    'location'  			=> 'Location',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
+    'manager' 				=> 'Manager',
+    'name' 					=> 'Name',
+    'notes'                 => 'Notes',
+    'password_confirm' 		=> 'Confirm Password',
+    'password' 				=> 'Password',
+    'phone'  				=> 'Phone',
+    'show_current'          => 'Show Current Users',
+    'show_deleted'          => 'Show Deleted Users',
+    'title' 				=> 'Title',
+    'updateuser' 			=> 'Update User',
+    'username' 				=> 'Username',
+    'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
+    'cloneuser'             => 'Clone User',
+    'viewusers' 			=> 'View Users',
+=======
     'activated'  			=> '啟用',
     'allow'  				=> '允許',
     'checkedout'  			=> '資產',
@@ -33,4 +66,5 @@ return array(
     'username_note' 		=> '（這是用來綁定 Active Directory，非用來登入）',
     'cloneuser'             => '複製使用者',
     'viewusers' 			=> '檢視使用者',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 );

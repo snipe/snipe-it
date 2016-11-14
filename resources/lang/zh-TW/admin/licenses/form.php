@@ -2,6 +2,32 @@
 
 return array(
 
+<<<<<<< HEAD
+    'asset'             => 'Asset',
+    'checkin'           => 'Checkin',
+    'cost'              => 'Purchase Cost',
+    'create'            => 'Create License',
+    'date'              => 'Purchase Date',
+    'depreciation'      => 'Depreciation',
+    'expiration'        => 'Expiration Date',
+    'license_key'       => 'Product Key',
+    'maintained'        => 'Maintained',
+    'name'              => 'Software Name',
+    'no_depreciation'   => 'Do Not Depreciate',
+    'notes'             => 'Notes',
+    'order'             => 'Order No.',
+    'purchase_order'    => 'Purchase Order Number',
+    'reassignable'      => 'Reassignable',
+    'remaining_seats'   => 'Remaining Seats',
+    'seats'             => 'Seats',
+    'serial'            => 'Serial',
+    'supplier'          => 'Supplier',
+    'termination_date'  => 'Termination Date',
+    'to_email'          => 'Licensed to Email',
+    'to_name'           => 'Licensed to Name',
+    'update'            => 'Update License',
+    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+=======
     'asset'             => '資產',
     'checkin'           => '繳回',
     'cost'              => '採購成本',
@@ -26,4 +52,5 @@ return array(
     'to_name'           => '授權給',
     'update'            => '更新授權',
     'checkout_help'     => '請檢查這個授權是否已經分配給某個人或某個設備。你可以複選，但資產歸屬人必須是相同的。'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 );

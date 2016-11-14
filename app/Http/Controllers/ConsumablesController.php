@@ -105,7 +105,10 @@ class ConsumablesController extends Controller
 
         // Was the consumable created?
         if ($consumable->save()) {
+<<<<<<< HEAD
+=======
             $consumable->logCreate();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             // Redirect to the new consumable  page
             return redirect()->to("admin/consumables")->with('success', trans('admin/consumables/message.create.success'));
         }
@@ -317,7 +320,18 @@ class ConsumablesController extends Controller
         'user_id' => $admin_user->id,
         'assigned_to' => e(Input::get('assigned_to'))));
 
+<<<<<<< HEAD
+        $logaction = new Actionlog();
+        $logaction->consumable_id = $consumable->id;
+        $logaction->checkedout_to = $consumable->assigned_to;
+        $logaction->asset_type = 'consumable';
+        $logaction->asset_id = 0;
+        $logaction->location_id = $user->location_id;
+        $logaction->user_id = Auth::user()->id;
+        $logaction->note = e(Input::get('note'));
+=======
         $logaction = $consumable->logCheckout(e(Input::get('note')));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         $settings = Setting::getSettings();
 
@@ -337,7 +351,11 @@ class ConsumablesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
+<<<<<<< HEAD
+                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+=======
                                 'value' => 'Consumable <'.config('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                             ],
                             [
                                 'title' => 'Note:',
@@ -351,6 +369,12 @@ class ConsumablesController extends Controller
             }
         }
 
+<<<<<<< HEAD
+
+        $log = $logaction->logaction('checkout');
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $consumable_user = DB::table('consumables_users')->where('assigned_to', '=', $consumable->assigned_to)->where('consumable_id', '=', $consumable->id)->first();
 
         $data['log_id'] = $logaction->id;
@@ -366,8 +390,12 @@ class ConsumablesController extends Controller
 
             Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+<<<<<<< HEAD
+                $m->subject('Confirm consumable delivery');
+=======
                 $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                 $m->subject(trans('mail.Confirm_consumable_delivery'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             });
         }
 

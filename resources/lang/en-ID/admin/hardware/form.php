@@ -1,7 +1,11 @@
 <?php
 
 return array(
+<<<<<<< HEAD
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+=======
 	'bulk_delete'		=> 'Konfirmasi hapus semua aset',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
   'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Perbarui Aset secara massal',

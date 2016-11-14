@@ -69,7 +69,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Asset was not requested, please try again',
         'success' 		=> 'Asset requested successfully.',
+<<<<<<< HEAD
+=======
         'canceled'      => 'Checkout request successfully canceled'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

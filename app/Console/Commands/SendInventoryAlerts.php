@@ -50,8 +50,12 @@ class SendInventoryAlerts extends Command
             if (count($data['data']) > 0) {
                 \Mail::send('emails.low-inventory', $data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
+<<<<<<< HEAD
+                    $m->subject('Low Inventory Report');
+=======
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.Low_Inventory_Report'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 });
 
             }

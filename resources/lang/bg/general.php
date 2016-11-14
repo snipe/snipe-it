@@ -41,7 +41,10 @@
     'consumables'			=> 'Консумативи',
     'country'  				=> 'Държава',
     'create'				=> 'Създаване на нов',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'създадени активи',
     'created_at' 			=> 'Създаден на',
     'currency'  			=> '$', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Премахване на асоциация към компания',
     'reports'				=> 'Справки',
     'requested'				=> 'Изискан',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Запис',
     'select'				=> 'Избор',
     'search'				=> 'Търсене',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'Доставчици',
     'total_assets'			=> 'общо активи',
     'total_licenses'		=> 'общо лицензи',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Тип',
     'undeployable'			=> 'Не може да бъде предоставян',
     'unknown_admin'			=> 'Непознат администратор',

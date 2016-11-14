@@ -41,7 +41,10 @@
     'consumables'			=> 'Verbrauchsmaterialien',
     'country'  				=> 'Land',
     'create'				=> 'Create Location',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'Asset angelegt',
     'created_at' 			=> 'Erstellt am',
     'currency'  			=> '€', // this is deprecated
@@ -77,7 +80,11 @@
     'image_delete'         	=> 'Bild löschen',
     'image_upload'         	=> 'Bild hinzufügen',
     'import'         	    => 'Import',
+<<<<<<< HEAD
+    'import-history'        => 'Import History',
+=======
     'import-history'        => 'Import Verlauf',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => 'Asset Wartung',
     'asset_maintenance_report' => 'Asset Wartungsbericht',
     'asset_maintenances'       => 'Asset Wartungen',
@@ -128,7 +135,10 @@
     'remove_company'        => 'Firmenzuordnung entfernen',
     'reports'				=> 'Berichte',
     'requested'				=> 'Angefragt',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Anfrage abgebrochen',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Speichern',
     'select'				=> 'auswählen',
     'search'				=> 'Suche',
@@ -153,8 +163,11 @@
     'suppliers'  			=> 'Lieferanten',
     'total_assets'			=> 'Gesamte Assets',
     'total_licenses'		=> 'Lizenzen insgesamt',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'gesamtes Zubehör',
     'total_consumables'		=> 'gesamtes Verbrauchsmaterial',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Typ',
     'undeployable'			=> 'Nicht herausgebbar',
     'unknown_admin'			=> 'Unbekannter Administrator',

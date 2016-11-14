@@ -66,7 +66,11 @@ class SendExpirationAlerts extends Command
             $asset_data['email_content'] .= '<td><a href="'.config('app.url').'/hardware/'.e($asset->id).'/view">';
             $asset_data['email_content'] .= $asset->showAssetName().'</a></td><td>'.e($asset->asset_tag).'</td>';
             $asset_data['email_content'] .= '<td>'.e($asset->warrantee_expires()).'</td>';
+<<<<<<< HEAD
+            $asset_data['email_content'] .= '<td>'.$difference.' days</td>';
+=======
             $asset_data['email_content'] .= '<td>'.$difference.' '.trans('mail.days').'</td>';
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $asset_data['email_content'] .= '<td>'.($asset->supplier ? e($asset->supplier->name) : '').'</td>';
             $asset_data['email_content'] .= '<td>'.($asset->assigneduser ? e($asset->assigneduser->fullName()) : '').'</td>';
             $asset_data['email_content'] .= '</tr>';
@@ -100,21 +104,33 @@ class SendExpirationAlerts extends Command
 
 
             if (count($expiring_assets) > 0) {
+<<<<<<< HEAD
+                \Mail::send('emails.expiring-assets-report', $asset_data, function ($m) {
+                    $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
+                    $m->subject('Expiring Assets Report');
+=======
                 $this->info('Report sent to '.Setting::getSettings()->alert_email);
                 \Mail::send('emails.expiring-assets-report', $asset_data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.Expiring_Assets_Report'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 });
 
             }
 
             if (count($expiring_licenses) > 0) {
+<<<<<<< HEAD
+                \Mail::send('emails.expiring-licenses-report', $license_data, function ($m) {
+                    $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
+                    $m->subject('Expiring Licenses Report');
+=======
                 $this->info('Report sent to '.Setting::getSettings()->alert_email);
                 \Mail::send('emails.expiring-licenses-report', $license_data, function ($m) {
                     $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.Expiring_Licenses_Report'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 });
 
             }

@@ -92,6 +92,15 @@ class AssetModelsController extends Controller
             $model->eol = e(Input::get('eol'));
         }
 
+<<<<<<< HEAD
+            // Save the model data
+            $model->name                = e(Input::get('name'));
+            $model->modelno             = e(Input::get('modelno'));
+            $model->manufacturer_id     = e(Input::get('manufacturer_id'));
+            $model->category_id         = e(Input::get('category_id'));
+            $model->note            = e(Input::get('note'));
+            $model->user_id             = Auth::user()->id;
+=======
         // Save the model data
         $model->name                = e(Input::get('name'));
         $model->modelno             = e(Input::get('modelno'));
@@ -101,10 +110,16 @@ class AssetModelsController extends Controller
         $model->user_id             = Auth::user()->id;
         $model->requestable         = Input::has('requestable');
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         if (Input::get('custom_fieldset')!='') {
             $model->fieldset_id = e(Input::get('custom_fieldset'));
         }
 
+<<<<<<< HEAD
+            //$model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         if (Input::file('image')) {
             $image = Input::file('image');
@@ -227,9 +242,13 @@ class AssetModelsController extends Controller
         $model->modelno             = e(Input::get('modelno'));
         $model->manufacturer_id     = e(Input::get('manufacturer_id'));
         $model->category_id         = e(Input::get('category_id'));
+<<<<<<< HEAD
+        $model->note            = e(Input::get('note'));
+=======
         $model->note                = e(Input::get('note'));
 
         $model->requestable = Input::has('requestable');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         if (Input::get('custom_fieldset')=='') {
             $model->fieldset_id = null;

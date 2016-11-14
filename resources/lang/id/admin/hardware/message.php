@@ -16,6 +16,32 @@ return array(
     'update' => array(
         'error'   			=> 'Gagal perbarui aset, silahkan coba kembali',
         'success' 			=> 'Sukses perbarui aset.',
+<<<<<<< HEAD
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
+    ),
+
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
+    'import' => array(
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
+=======
         'nothing_updated'	=>  'Tidak ada kolom yang dipilih, jadi tidak ada yang diperbaharui.',
     ),
 
@@ -42,6 +68,7 @@ return array(
         'success'               => "Berkas Anda berhasil terimpor",
         'file_delete_success'   => "Your file has been been successfully deleted",
         'file_delete_error'      => "The file was unable to be deleted",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -55,7 +82,11 @@ return array(
         'error'   		=> 'Aset gagal di berikan, silahkan coba kembali',
         'success' 		=> 'Sukses memberikan aset.',
         'user_does_not_exist' => 'Pengguna tersebut tidak terdaftar. Silahkan coba kembali.',
+<<<<<<< HEAD
+        'not_available' => 'That asset is not available for checkout!'
+=======
         'not_available' => 'Aset tersebut tidak tersedia untuk checkout!'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(
@@ -69,7 +100,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Aset gagal di minta, silahkan coba kembali',
         'success' 		=> 'Sukses meminta aset.',
+<<<<<<< HEAD
+=======
         'canceled'      => 'Checkout request successfully canceled'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

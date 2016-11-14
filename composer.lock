@@ -4,11 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "hash": "ccd3ba1012652d4058e93616e54799c2",
+=======
     "hash": "ed9f8700f2dcd943ff662a82e4d8314f",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     "content-hash": "9c0251ddc1a110d83a762483abeea079",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
+<<<<<<< HEAD
+            "version": "3.19.21",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "1ded8fb7f959e2c76d3488639f61f8e62d45cf87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1ded8fb7f959e2c76d3488639f61f8e62d45cf87",
+                "reference": "1ded8fb7f959e2c76d3488639f61f8e62d45cf87",
+=======
             "version": "3.19.2",
             "source": {
                 "type": "git",
@@ -19,6 +35,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3cb90413129da42c9d3289d542bee0ae1049892c",
                 "reference": "3cb90413129da42c9d3289d542bee0ae1049892c",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -85,7 +102,11 @@
                 "s3",
                 "sdk"
             ],
+<<<<<<< HEAD
+            "time": "2016-11-01 22:16:39"
+=======
             "time": "2016-08-23 20:58:48"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "aws/aws-sdk-php-laravel",
@@ -145,6 +166,18 @@
         },
         {
             "name": "barryvdh/laravel-debugbar",
+<<<<<<< HEAD
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "0c87981df959c7c1943abe227baf607c92f204f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/0c87981df959c7c1943abe227baf607c92f204f9",
+                "reference": "0c87981df959c7c1943abe227baf607c92f204f9",
+=======
             "version": "V2.2.3",
             "source": {
                 "type": "git",
@@ -155,18 +188,27 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd",
                 "reference": "ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "5.1.*|5.2.*|5.3.*",
+<<<<<<< HEAD
+                "maximebf/debugbar": "~1.13.0",
+=======
                 "maximebf/debugbar": "~1.11.0|~1.12.0",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "php": ">=5.5.9",
                 "symfony/finder": "~2.7|~3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "2.3-dev"
+=======
                     "dev-master": "2.2-dev"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 }
             },
             "autoload": {
@@ -195,7 +237,11 @@
                 "profiler",
                 "webprofiler"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-15 14:05:56"
+=======
             "time": "2016-07-29 15:00:36"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "classpreloader/classpreloader",
@@ -286,6 +332,18 @@
         },
         {
             "name": "doctrine/annotations",
+<<<<<<< HEAD
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/annotations.git",
+                "reference": "30e07cf03edc3cd3ef579d0dd4dd8c58250799a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/30e07cf03edc3cd3ef579d0dd4dd8c58250799a5",
+                "reference": "30e07cf03edc3cd3ef579d0dd4dd8c58250799a5",
+=======
             "version": "v1.2.7",
             "source": {
                 "type": "git",
@@ -296,25 +354,43 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/annotations/zipball/f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
                 "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
+<<<<<<< HEAD
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "1.*",
+                "phpunit/phpunit": "^5.6.1"
+=======
                 "php": ">=5.3.2"
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
                 "phpunit/phpunit": "4.*"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
+=======
                     "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Common\\Annotations\\": "lib/"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -350,7 +426,11 @@
                 "docblock",
                 "parser"
             ],
+<<<<<<< HEAD
+            "time": "2016-10-24 11:45:47"
+=======
             "time": "2015-08-31 12:32:49"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "doctrine/cache",
@@ -754,12 +834,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
+<<<<<<< HEAD
+                "reference": "e3c3e2855422d88d43be9aef098d0e07cfde9c12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/e3c3e2855422d88d43be9aef098d0e07cfde9c12",
+                "reference": "e3c3e2855422d88d43be9aef098d0e07cfde9c12",
+=======
                 "reference": "f671ae73647b6666c1442cbaac98e5d60208e409"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/erusev/parsedown/zipball/f671ae73647b6666c1442cbaac98e5d60208e409",
                 "reference": "f671ae73647b6666c1442cbaac98e5d60208e409",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -788,7 +877,11 @@
                 "markdown",
                 "parser"
             ],
+<<<<<<< HEAD
+            "time": "2016-10-25 14:39:55"
+=======
             "time": "2016-07-27 08:05:24"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "fideloper/proxy",
@@ -1018,12 +1111,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
+<<<<<<< HEAD
+                "reference": "4064a980324f6c3bfa2bd981dfb247afa705ec3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/4064a980324f6c3bfa2bd981dfb247afa705ec3c",
+                "reference": "4064a980324f6c3bfa2bd981dfb247afa705ec3c",
+=======
                 "reference": "45a41a38bd1e5290cd51ab773013e6f041b2b711"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Intervention/image/zipball/45a41a38bd1e5290cd51ab773013e6f041b2b711",
                 "reference": "45a41a38bd1e5290cd51ab773013e6f041b2b711",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -1072,7 +1174,11 @@
                 "thumbnail",
                 "watermark"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-01 17:04:03"
+=======
             "time": "2016-08-19 14:41:12"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -1462,6 +1568,22 @@
         },
         {
             "name": "league/flysystem",
+<<<<<<< HEAD
+            "version": "1.0.32",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "1b5c4a0031697f46e779a9d1b309c2e1b24daeab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
+                "reference": "1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+=======
             "version": "1.0.27",
             "source": {
                 "type": "git",
@@ -1476,6 +1598,7 @@
             },
             "require": {
                 "php": ">=5.4.0"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             },
             "conflict": {
                 "league/flysystem-sftp": "<1.0.6"
@@ -1541,7 +1664,11 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< HEAD
+            "time": "2016-10-19 20:38:46"
+=======
             "time": "2016-08-10 08:55:11"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "maknz/slack",
@@ -1549,12 +1676,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maknz/slack.git",
+<<<<<<< HEAD
+                "reference": "576e3b091dc38b473f83a113bfa0ccb180f53f0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maknz/slack/zipball/576e3b091dc38b473f83a113bfa0ccb180f53f0d",
+                "reference": "576e3b091dc38b473f83a113bfa0ccb180f53f0d",
+=======
                 "reference": "e9bab77eb7344f4697756ca55386576b05dc8e5a"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/maknz/slack/zipball/e9bab77eb7344f4697756ca55386576b05dc8e5a",
                 "reference": "e9bab77eb7344f4697756ca55386576b05dc8e5a",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -1591,6 +1727,22 @@
                 "laravel",
                 "slack"
             ],
+<<<<<<< HEAD
+            "time": "2016-10-24 22:30:39"
+        },
+        {
+            "name": "maximebf/debugbar",
+            "version": "v1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "5f49a5ed6cfde81d31d89378806670d77462526e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/5f49a5ed6cfde81d31d89378806670d77462526e",
+                "reference": "5f49a5ed6cfde81d31d89378806670d77462526e",
+=======
             "time": "2016-07-27 23:17:40"
         },
         {
@@ -1605,6 +1757,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988",
                 "reference": "e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -1623,7 +1776,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "1.12-dev"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 }
             },
             "autoload": {
@@ -1652,6 +1809,22 @@
                 "debug",
                 "debugbar"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-15 14:01:59"
+        },
+        {
+            "name": "misterphilip/maintenance-mode",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MisterPhilip/maintenance-mode.git",
+                "reference": "3b4b29c11e8c44104cde721583a273535fc4a0c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MisterPhilip/maintenance-mode/zipball/3b4b29c11e8c44104cde721583a273535fc4a0c5",
+                "reference": "3b4b29c11e8c44104cde721583a273535fc4a0c5",
+=======
             "time": "2016-05-15 13:11:34"
         },
         {
@@ -1666,6 +1839,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/MisterPhilip/maintenance-mode/zipball/35e061703edb3c0703baea677335c03085f2b179",
                 "reference": "35e061703edb3c0703baea677335c03085f2b179",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -1697,7 +1871,11 @@
                 "laravel5",
                 "maintenance"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-06 07:56:09"
+=======
             "time": "2015-12-23 07:24:42"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "monolog/monolog",
@@ -1959,6 +2137,18 @@
         },
         {
             "name": "nikic/php-parser",
+<<<<<<< HEAD
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4dd659edadffdc2143e4753df655d866dbfeedf0",
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
+=======
             "version": "v2.1.0",
             "source": {
                 "type": "git",
@@ -1969,6 +2159,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
                 "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -2006,7 +2197,11 @@
                 "parser",
                 "php"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-16 12:04:44"
+=======
             "time": "2016-04-19 13:41:41"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "paragonie/random_compat",
@@ -2108,6 +2303,32 @@
         },
         {
             "name": "psr/log",
+<<<<<<< HEAD
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+=======
             "version": "1.0.0",
             "source": {
                 "type": "git",
@@ -2124,6 +2345,7 @@
             "autoload": {
                 "psr-0": {
                     "Psr\\Log\\": ""
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2137,12 +2359,20 @@
                 }
             ],
             "description": "Common interface for logging libraries",
+<<<<<<< HEAD
+            "homepage": "https://github.com/php-fig/log",
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ],
+<<<<<<< HEAD
+            "time": "2016-10-10 12:19:37"
+=======
             "time": "2012-12-21 11:40:51"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "psy/psysh",
@@ -2500,6 +2730,18 @@
         },
         {
             "name": "symfony/event-dispatcher",
+<<<<<<< HEAD
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "28b0832b2553ffb80cabef6a7a812ff1e670c0bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/28b0832b2553ffb80cabef6a7a812ff1e670c0bc",
+                "reference": "28b0832b2553ffb80cabef6a7a812ff1e670c0bc",
+=======
             "version": "v3.1.3",
             "source": {
                 "type": "git",
@@ -2510,6 +2752,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/c0c00c80b3a69132c4e55c3e7db32b4a387615e5",
                 "reference": "c0c00c80b3a69132c4e55c3e7db32b4a387615e5",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -2556,7 +2799,11 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2016-10-13 06:28:43"
+=======
             "time": "2016-07-19 10:45:57"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "symfony/finder",
@@ -3166,17 +3413,30 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/tc-lib-barcode.git",
+<<<<<<< HEAD
+                "reference": "30c40ae0e660adf04cd302ab86043a286ba4fecf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-barcode/zipball/30c40ae0e660adf04cd302ab86043a286ba4fecf",
+                "reference": "30c40ae0e660adf04cd302ab86043a286ba4fecf",
+=======
                 "reference": "df69541618a0ebc24bc8f938e52f76a471f2e018"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/tecnickcom/tc-lib-barcode/zipball/df69541618a0ebc24bc8f938e52f76a471f2e018",
                 "reference": "df69541618a0ebc24bc8f938e52f76a471f2e018",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4",
+<<<<<<< HEAD
+                "tecnickcom/tc-lib-color": "^1.12.1"
+=======
                 "tecnickcom/tc-lib-color": "^1.12.0"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             },
             "require-dev": {
                 "apigen/apigen": "^4.1.2",
@@ -3244,6 +3504,22 @@
                 "tc-lib-barcode",
                 "upc"
             ],
+<<<<<<< HEAD
+            "time": "2016-10-13 20:36:14"
+        },
+        {
+            "name": "tecnickcom/tc-lib-color",
+            "version": "1.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/tc-lib-color.git",
+                "reference": "d86d7ca6153ce9fcde7ae4043567aaf4a184b347"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/tc-lib-color/zipball/d86d7ca6153ce9fcde7ae4043567aaf4a184b347",
+                "reference": "d86d7ca6153ce9fcde7ae4043567aaf4a184b347",
+=======
             "time": "2016-08-25 12:36:23"
         },
         {
@@ -3258,6 +3534,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/tecnickcom/tc-lib-color/zipball/176464ae7ad0256c1dfd9d742ee2461d0b660f7c",
                 "reference": "176464ae7ad0256c1dfd9d742ee2461d0b660f7c",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -3306,6 +3583,22 @@
                 "tc-lib-color",
                 "web"
             ],
+<<<<<<< HEAD
+            "time": "2016-08-30 20:12:45"
+        },
+        {
+            "name": "vlucas/phpdotenv",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/phpdotenv.git",
+                "reference": "3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c",
+                "reference": "3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c",
+=======
             "time": "2016-08-25 11:56:01"
         },
         {
@@ -3320,6 +3613,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/9ca5644c536654e9509b9d257f53c58630eb2a6a",
                 "reference": "9ca5644c536654e9509b9d257f53c58630eb2a6a",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -3331,7 +3625,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "2.4-dev"
+=======
                     "dev-master": "2.3-dev"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 }
             },
             "autoload": {
@@ -3356,7 +3654,11 @@
                 "env",
                 "environment"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-01 10:05:43"
+=======
             "time": "2016-06-14 14:14:52"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "watson/validating",
@@ -3417,6 +3719,18 @@
     "packages-dev": [
         {
             "name": "codeception/c3",
+<<<<<<< HEAD
+            "version": "2.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codeception/c3.git",
+                "reference": "d71e5d2b015169fce61c923bfbf41c3d83087604"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codeception/c3/zipball/d71e5d2b015169fce61c923bfbf41c3d83087604",
+                "reference": "d71e5d2b015169fce61c923bfbf41c3d83087604",
+=======
             "version": "2.0.7",
             "source": {
                 "type": "git",
@@ -3427,6 +3741,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/Codeception/c3/zipball/51eec2c3a8e093deb621f58004f0393dc0871983",
                 "reference": "51eec2c3a8e093deb621f58004f0393dc0871983",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -3463,7 +3778,11 @@
                 "code coverage",
                 "codecoverage"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-16 22:57:33"
+=======
             "time": "2016-06-27 16:49:12"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "codeception/codeception",
@@ -3605,6 +3924,18 @@
         },
         {
             "name": "facebook/webdriver",
+<<<<<<< HEAD
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/php-webdriver.git",
+                "reference": "af21de3ae5306a8ca0bcc02a19735dadc43e83f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/af21de3ae5306a8ca0bcc02a19735dadc43e83f3",
+                "reference": "af21de3ae5306a8ca0bcc02a19735dadc43e83f3",
+=======
             "version": "1.1.3",
             "source": {
                 "type": "git",
@@ -3615,14 +3946,23 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/b7186fb1bcfda956d237f59face250d06ef47253",
                 "reference": "b7186fb1bcfda956d237f59face250d06ef47253",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
+<<<<<<< HEAD
+                "php": "^5.5 || ~7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "php-mock/php-mock-phpunit": "^1.1",
+=======
                 "php": ">=5.3.19"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^1.11",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "phpunit/phpunit": "4.6.* || ~5.0",
                 "squizlabs/php_codesniffer": "^2.6"
             },
@@ -3647,7 +3987,11 @@
                 "selenium",
                 "webdriver"
             ],
+<<<<<<< HEAD
+            "time": "2016-10-14 15:16:51"
+=======
             "time": "2016-08-10 00:44:08"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "fzaninotto/faker",
@@ -3863,6 +4207,18 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
+<<<<<<< HEAD
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+=======
             "version": "3.1.0",
             "source": {
                 "type": "git",
@@ -3873,6 +4229,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
                 "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -3904,7 +4261,11 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+<<<<<<< HEAD
+            "time": "2016-09-30 07:12:33"
+=======
             "time": "2016-06-10 09:48:41"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -3989,6 +4350,18 @@
         },
         {
             "name": "phpspec/phpspec",
+<<<<<<< HEAD
+            "version": "2.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/phpspec.git",
+                "reference": "153ebd99d9b842e0c99a024c41f970d79db46475"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/153ebd99d9b842e0c99a024c41f970d79db46475",
+                "reference": "153ebd99d9b842e0c99a024c41f970d79db46475",
+=======
             "version": "2.5.1",
             "source": {
                 "type": "git",
@@ -3999,6 +4372,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/phpspec/phpspec/zipball/531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d",
                 "reference": "531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -4063,7 +4437,11 @@
                 "testing",
                 "tests"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-26 20:28:11"
+=======
             "time": "2016-07-16 08:34:07"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "phpspec/prophecy",
@@ -4872,6 +5250,18 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
+<<<<<<< HEAD
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "571e27b6348e5b3a637b2abc82ac0d01e6d7bbed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/571e27b6348e5b3a637b2abc82ac0d01e6d7bbed",
+                "reference": "571e27b6348e5b3a637b2abc82ac0d01e6d7bbed",
+=======
             "version": "2.6.2",
             "source": {
                 "type": "git",
@@ -4882,6 +5272,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/4edb770cb853def6e60c93abb088ad5ac2010c83",
                 "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -4946,6 +5337,22 @@
                 "phpcs",
                 "standards"
             ],
+<<<<<<< HEAD
+            "time": "2016-09-01 23:53:02"
+        },
+        {
+            "name": "symfony/browser-kit",
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/browser-kit.git",
+                "reference": "901319a31c9b3cee7857b4aeeb81b5d64dfa34fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/901319a31c9b3cee7857b4aeeb81b5d64dfa34fc",
+                "reference": "901319a31c9b3cee7857b4aeeb81b5d64dfa34fc",
+=======
             "time": "2016-07-13 23:29:13"
         },
         {
@@ -4960,6 +5367,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/browser-kit/zipball/d2a07cc11c5fa94820240b1e67592ffb18e347b9",
                 "reference": "d2a07cc11c5fa94820240b1e67592ffb18e347b9",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -5003,6 +5411,22 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2016-09-06 11:02:40"
+        },
+        {
+            "name": "symfony/css-selector",
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "ca809c64072e0fe61c1c7fb3c76cdc32265042ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/ca809c64072e0fe61c1c7fb3c76cdc32265042ac",
+                "reference": "ca809c64072e0fe61c1c7fb3c76cdc32265042ac",
+=======
             "time": "2016-07-26 08:04:17"
         },
         {
@@ -5017,6 +5441,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/css-selector/zipball/2851e1932d77ce727776154d659b232d061e816a",
                 "reference": "2851e1932d77ce727776154d659b232d061e816a",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -5056,6 +5481,22 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2016-09-06 11:02:40"
+        },
+        {
+            "name": "symfony/dom-crawler",
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "59eee3c76eb89f21857798620ebdad7a05ad14f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/59eee3c76eb89f21857798620ebdad7a05ad14f4",
+                "reference": "59eee3c76eb89f21857798620ebdad7a05ad14f4",
+=======
             "time": "2016-06-29 05:41:56"
         },
         {
@@ -5070,6 +5511,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/c7b9b8db3a6f2bac76dcd9a9db5446f2591897f9",
                 "reference": "c7b9b8db3a6f2bac76dcd9a9db5446f2591897f9",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -5112,6 +5554,22 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2016-10-18 15:46:07"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "7ff51b06c6c3d5cc6686df69004a42c69df09e27"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7ff51b06c6c3d5cc6686df69004a42c69df09e27",
+                "reference": "7ff51b06c6c3d5cc6686df69004a42c69df09e27",
+=======
             "time": "2016-07-26 08:04:17"
         },
         {
@@ -5126,6 +5584,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/1819adf2066880c7967df7180f4f662b6f0567ac",
                 "reference": "1819adf2066880c7967df7180f4f662b6f0567ac",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 "shasum": ""
             },
             "require": {
@@ -5161,7 +5620,11 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2016-10-24 18:41:13"
+=======
             "time": "2016-07-17 14:02:08"
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         },
         {
             "name": "webmozart/assert",

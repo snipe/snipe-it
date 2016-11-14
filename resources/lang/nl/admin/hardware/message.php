@@ -36,11 +36,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
+=======
         'error'                 => 'Sommige items zijn niet goed geïmporteerd.',
         'errorDetail'           => 'De volgende items zijn niet geïmporteerd vanwege fouten.',
         'success'               => "Je bestand is geïmporteerd",
         'file_delete_success'   => "Je bestand is succesvol verwijderd",
         'file_delete_error'      => "Het bestand kon niet worden verwijderd",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -54,7 +60,11 @@ return array(
         'error'   		=> 'Product is niet uitgecheckt, probeer het opnieuw',
         'success' 		=> 'Product is met succes uitgecheckt.',
         'user_does_not_exist' => 'De gebruiker is ongeldig. Probeer het opnieuw.',
+<<<<<<< HEAD
+        'not_available' => 'That asset is not available for checkout!'
+=======
         'not_available' => 'Dat item is niet beschikbaar om uit te leveren!'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(
@@ -68,7 +78,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Product is niet aangevraagd, probeer het opnieuw',
         'success' 		=> 'Product is met succes aangevraagd.',
+<<<<<<< HEAD
+=======
         'canceled'      => 'Aanvraag succesvol geannuleerd'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

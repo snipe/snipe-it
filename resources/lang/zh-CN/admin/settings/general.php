@@ -1,10 +1,17 @@
 <?php
 
 return array(
+<<<<<<< HEAD
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
+=======
     'ad'				        => 'Active Directory活动目录',
     'ad_domain'				    => 'AD域',
     'ad_domain_help'			=> '通常(但并非全部情况下)这与您的邮件域相同',
     'is_ad'				        => '这是AD域服务器',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 	'alert_email'				=> '发送警报',
 	'alerts_enabled'			=> '警报已启用',
 	'alert_interval'			=> '警报阈值(天)',
@@ -27,9 +34,15 @@ return array(
     'display_checkout_date'     => '显示借出日期',
     'display_eol'               => '以表格形式显示寿命期限',
     'display_qr'                => '显示二维码',
+<<<<<<< HEAD
+	'display_alt_barcode'		=> 'Display 1D barcode',
+	'barcode_type'				=> '2D Barcode Type',
+	'alt_barcode_type'			=> '1D barcode type',
+=======
 	'display_alt_barcode'		=> '显示条码',
 	'barcode_type'				=> '二维码类型',
 	'alt_barcode_type'			=> '条码类型',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'eula_settings'				=> '最终用户许可协议(EULA)设置',
     'eula_markdown'				=> 'EULA中可以使用<a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> '一般设置',
@@ -41,17 +54,30 @@ return array(
     'ldap_integration'          => 'LDAP集成',
     'ldap_settings'             => 'LDAP 设置',
     'ldap_server'               => 'LDAP 服务器',
+<<<<<<< HEAD
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
+	'ldap_server_cert'			=> '检验LDAP的SSL证书',
+	'ldap_server_cert_ignore'	=> '允许未通过校验的SSL证书',
+	'ldap_server_cert_help'		=> '如果你使用了自签发证书，请勾选',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
+=======
     'ldap_server_help'          => '这应以ldap:// (for unencrypted or TLS)或 ldaps:// (for SSL)开头',
 	'ldap_server_cert'			=> '检验LDAP的SSL证书',
 	'ldap_server_cert_ignore'	=> '允许未通过校验的SSL证书',
 	'ldap_server_cert_help'		=> '如果你使用了自签发证书，请勾选',
     'ldap_tls'                  => '使用TLS',
     'ldap_tls_help'             => '仅当LDAP服务器使用STARTTLS时本选项才被勾选',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_uname'                => 'LDAP 用户名',
     'ldap_pword'                => 'LDAP 密码',
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'LDAP 过滤器',
+<<<<<<< HEAD
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+=======
     'ldap_pw_sync'              => 'LDAP 密码同步',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => '用户名字段',
     'ldap_lname_field'          => '姓氏',
@@ -110,5 +136,9 @@ return array(
     'bottom'        => '底部',
     'vertical'        => '竖向',
     'horizontal'        => '水平',
+<<<<<<< HEAD
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
+=======
     'zerofill_count'        => '资产标签长度，包括补零',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 );

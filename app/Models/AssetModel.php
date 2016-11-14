@@ -1,7 +1,10 @@
 <?php
 namespace App\Models;
 
+<<<<<<< HEAD
+=======
 use App\Models\Requestable;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -15,7 +18,10 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends Model
 {
     use SoftDeletes;
+<<<<<<< HEAD
+=======
     use Requestable;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     protected $dates = ['deleted_at'];
     protected $table = 'models';
 
@@ -134,6 +140,8 @@ class AssetModel extends Model
     }
 
     /**
+<<<<<<< HEAD
+=======
      * scopeRequestable
      * Get all models that are requestable by a user.
      *
@@ -150,6 +158,7 @@ class AssetModel extends Model
     }
 
     /**
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     * Query builder scope to search on text
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance

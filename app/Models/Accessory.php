@@ -1,7 +1,10 @@
 <?php
 namespace App\Models;
 
+<<<<<<< HEAD
+=======
 use App\Models\Loggable;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -13,9 +16,14 @@ use Watson\Validating\ValidatingTrait;
  */
 class Accessory extends Model
 {
+<<<<<<< HEAD
+    use SoftDeletes;
+    use CompanyableTrait;
+=======
     use CompanyableTrait;
     use Loggable;
     use SoftDeletes;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
     protected $dates = ['deleted_at'];
     protected $table = 'accessories';
@@ -70,7 +78,11 @@ class Accessory extends Model
     */
     public function assetlog()
     {
+<<<<<<< HEAD
+        return $this->hasMany('\App\Models\Actionlog', 'accessory_id')->where('asset_type', '=', 'accessory')->orderBy('created_at', 'desc')->withTrashed();
+=======
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     }
 
 

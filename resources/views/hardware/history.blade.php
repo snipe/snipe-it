@@ -14,6 +14,8 @@
 @section('content')
 
 
+<<<<<<< HEAD
+=======
     @if (isset($status))
 
         @if (count($status['error']) > 0)
@@ -44,6 +46,7 @@
 
         @endif
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
@@ -130,6 +133,23 @@
 
 </form>
 
+<<<<<<< HEAD
+
+
+
+</div>
+
+            @if (isset($status))
+                <table class="table">
+                    @foreach($status['error'] as $type => $msg)
+                        <tr class="danger"><td>{{ $msg  }}</td></tr>
+                    @endforeach
+
+                    @foreach($status['success'] as $type => $msg)
+                        <tr class="success"><td>{{ $msg  }}</td></tr>
+                    @endforeach
+                </table>
+=======
  </div>
 
             @if (isset($status))
@@ -187,6 +207,7 @@
                             </div>
                         </div>
                 @endif
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             @endif
 
         </div></div></div>

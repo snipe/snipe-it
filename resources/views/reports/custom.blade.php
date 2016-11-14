@@ -48,12 +48,15 @@
           </label>
         </div>
         <div class="checkbox col-md-12">
+<<<<<<< HEAD
+=======
           <label>
           {{ Form::checkbox('asset_name', '1') }}
             {{ trans('admin/hardware/form.name') }}
           </label>
         </div>
         <div class="checkbox col-md-12">
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         	<label>
         	 {{ Form::checkbox('manufacturer', '1') }}
            	{{ trans('general.manufacturer') }}
@@ -90,12 +93,15 @@
              {{ trans('admin/hardware/form.cost') }}
             </label>
         </div>
+<<<<<<< HEAD
+=======
           <div class="checkbox col-md-12">
             <label>
               {{ Form::checkbox('eol', '1') }}
               {{ trans('admin/hardware/table.eol') }}
             </label>
           </div>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         <div class="checkbox col-md-12">
         	<label>
             {{ Form::checkbox('order', '1') }}

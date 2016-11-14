@@ -41,7 +41,10 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Land',
     'create'				=> 'Opret ny',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'skabte aktiver',
     'created_at' 			=> 'Skabt den',
     'currency'  			=> '$', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Fjern association med selskab',
     'reports'				=> 'Rapporter',
     'requested'				=> 'Requested',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Gem',
     'select'				=> 'Select',
     'search'				=> 'Search',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'Leverandører',
     'total_assets'			=> 'totale aktiver',
     'total_licenses'		=> 'totale licenser',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Type',
     'undeployable'			=> 'Ikke implementerbar',
     'unknown_admin'			=> 'Ukendt Admin',

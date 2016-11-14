@@ -74,12 +74,15 @@
 
   <!-- side address column -->
   <div class="col-md-3">
+<<<<<<< HEAD
+=======
 
       @if ($component->serial_number!='')
           <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.serial') }}: </strong>
               {{ $component->serial_number }} </div>
       @endif
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     @if ($component->purchase_date)
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/components/general.date') }}: </strong>
         {{ $component->purchase_date }} </div>

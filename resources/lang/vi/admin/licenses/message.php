@@ -23,7 +23,11 @@ return array(
         'error'   => 'Tập tin không tải lên được. Xin vui lòng thử lại.',
         'success' => 'Tập tin đã tải lên thành công.',
         'nofiles' => 'Bạn chưa chọn bất kỳ tập tin nào để tải lên, hoặc tập tin bạn đang cố gắng tải lên có dung lượng quá lớn',
+<<<<<<< HEAD
+        'invalidfiles' => 'Một hoặc nhiều tập tin của ban có dung lượng quá lớn hoặc loại tập tin không cho phép tải lên. Chỉ cho phép những loại tập tin png, gif, jpg, doc, docx, pdf, and txt.',
+=======
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

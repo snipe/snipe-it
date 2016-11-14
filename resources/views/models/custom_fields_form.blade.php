@@ -27,6 +27,13 @@
           @else
             <!-- Text field -->
 
+<<<<<<< HEAD
+            @if (($field->field_encrypted=='0') || (Gate::allows('admin')))
+            <input type="text" value="{{ Input::old($field->db_column_name(),(isset($asset) ? \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
+                @else
+                    <input type="text" value="{{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}" class="form-control disabled" disabled>
+            @endif
+=======
                 @if ($field->format=='DATE')
                 <!-- Purchase Date -->
 
@@ -42,6 +49,7 @@
                             <input type="text" value="{{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}" class="form-control disabled" disabled>
                     @endif
                 @endif
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
           @endif
 

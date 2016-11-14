@@ -13,6 +13,61 @@ return array(
     |
     */
 
+<<<<<<< HEAD
+    "accepted"         => "The :attribute must be accepted.",
+    "active_url"       => "屬性不是有效的URL",
+    "after"            => "The :attribute must be a date after :date.",
+    "alpha"            => "The :attribute may only contain letters.",
+    "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
+    "alpha_num"        => "The :attribute may only contain letters and numbers.",
+    "before"           => "The :attribute must be a date before :date.",
+    "between"          => array(
+        "numeric" => "The :attribute must be between :min - :max.",
+        "file"    => "The :attribute must be between :min - :max kilobytes.",
+        "string"  => "The :attribute must be between :min - :max characters.",
+    ),
+    "confirmed"        => "The :attribute confirmation does not match.",
+    "date"             => "The :attribute is not a valid date.",
+    "date_format"      => "The :attribute does not match the format :format.",
+    "different"        => "The :attribute and :other must be different.",
+    "digits"           => "The :attribute must be :digits digits.",
+    "digits_between"   => "The :attribute must be between :min and :max digits.",
+    "email"            => "The :attribute format is invalid.",
+    "exists"           => "The selected :attribute is invalid.",
+    "email_array"      => "One or more email addresses is invalid.",
+    "image"            => "The :attribute must be an image.",
+    "in"               => "The selected :attribute is invalid.",
+    "integer"          => "The :attribute must be an integer.",
+    "ip"               => "The :attribute must be a valid IP address.",
+    "max"              => array(
+        "numeric" => "The :attribute may not be greater than :max.",
+        "file"    => "The :attribute may not be greater than :max kilobytes.",
+        "string"  => "The :attribute may not be greater than :max characters.",
+    ),
+    "mimes"            => "The :attribute must be a file of type: :values.",
+    "min"              => array(
+        "numeric" => "The :attribute must be at least :min.",
+        "file"    => "The :attribute must be at least :min kilobytes.",
+        "string"  => "The :attribute must be at least :min characters.",
+    ),
+    "not_in"           => "The selected :attribute is invalid.",
+    "numeric"          => "The :attribute must be a number.",
+    "regex"            => "The :attribute format is invalid.",
+    "required"         => "The :attribute field is required.",
+    "required_if"      => "The :attribute field is required when :other is :value.",
+    "required_with"    => "The :attribute field is required when :values is present.",
+    "required_without" => "The :attribute field is required when :values is not present.",
+    "same"             => "The :attribute and :other must match.",
+    "size"             => array(
+        "numeric" => "The :attribute must be :size.",
+        "file"    => "The :attribute must be :size kilobytes.",
+        "string"  => "The :attribute must be :size characters.",
+    ),
+    "unique"           => "The :attribute has already been taken.",
+    "url"              => "The :attribute format is invalid.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
+=======
     "accepted"         => ":attribute 必須接受",
     "active_url"       => "屬性不是有效的URL",
     "after"            => ":attribute 必須在 :date 之後",
@@ -66,6 +121,7 @@ return array(
     "url"              => ":attribute 格式不正確",
     "statuslabel_type" => "您必須選擇一個有效的狀態標籤",
     "unique_undeleted" => ":attribute 必須唯一",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 
     /*
@@ -80,7 +136,11 @@ return array(
     */
 
     'custom' => array(),
+<<<<<<< HEAD
+    'alpha_space' => "The :attribute field contains a character that is not allowed.",
+=======
     'alpha_space' => ":attribute 含有無效字元",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
     /*
     |--------------------------------------------------------------------------

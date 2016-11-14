@@ -41,7 +41,10 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Negara',
     'create'				=> 'Cipta Baru',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'cipta harta',
     'created_at' 			=> 'Cipta Pada',
     'currency'  			=> 'RM', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Laporan',
     'requested'				=> 'Requested',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Simpan',
     'select'				=> 'Select',
     'search'				=> 'Search',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'Pembekal',
     'total_assets'			=> 'jumlah harta',
     'total_licenses'		=> 'jumlah lesen',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Type',
     'undeployable'			=> 'Tidak Boleh Agih',
     'unknown_admin'			=> 'Pentadbir Tidak Dikenali',

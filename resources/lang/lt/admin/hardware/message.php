@@ -36,11 +36,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
+=======
         'error'                 => 'Nepavyko teisingai importuoti kai kurių įrašų.',
         'errorDetail'           => 'The following Items were not imported because of errors.',
         'success'               => "Jūsų failas importuotas",
         'file_delete_success'   => "Your file has been been successfully deleted",
         'file_delete_error'      => "Nepavyko ištrinti failo",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -68,7 +74,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Įranga nebuvo užklausta, prašome bandyti dar kartą',
         'success' 		=> 'Įrangos užklausa sėkmingai išsiusta.',
+<<<<<<< HEAD
+=======
         'canceled'      => 'Checkout request successfully canceled'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

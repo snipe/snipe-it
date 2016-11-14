@@ -23,7 +23,11 @@ return array(
         'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
         'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+<<<<<<< HEAD
+        'invalidfiles' => 'Yksi tai useampia tiedostoja on liian iso tai sen tiedostotyyppi ei ole sallittu. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf, ja txt.',
+=======
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

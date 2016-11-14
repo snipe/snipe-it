@@ -8,7 +8,10 @@
 @stop
 
 @section('header_right')
+<<<<<<< HEAD
+=======
     @can('superuser')
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
   <div class="btn-group pull-right">
      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
           <span class="caret"></span>
@@ -23,7 +26,10 @@
           @endif
       </ul>
   </div>
+<<<<<<< HEAD
+=======
     @endcan
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 @stop
 
 {{-- Page content --}}

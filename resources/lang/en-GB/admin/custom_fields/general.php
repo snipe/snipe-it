@@ -8,7 +8,10 @@ return array(
     'custom_format'             => 'Custom format...',
     'encrypt_field'      	        => 'Encrypt the value of this field in the database',
     'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
+<<<<<<< HEAD
+=======
     'encrypted'      	        => 'Encrypted',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'fieldset'      	        => 'Fieldset',
     'qty_fields'      	      => 'Qty Fields',
     'fieldsets'      	        => 'Fieldsets',
@@ -26,5 +29,8 @@ return array(
     'order'   		            => 'Order',
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'New Custom Field',
+<<<<<<< HEAD
+=======
     'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 );

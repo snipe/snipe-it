@@ -23,7 +23,11 @@ return array(
         'error'   => 'Datei(en) wurden nicht hochgeladen. Bitte versuchen Sie es noch einmal.',
         'success' => 'Datei(en) erfolgreich hochgeladen.',
         'nofiles' => 'Es wurde keine Datei für den Upload ausgewählt, oder die Datei ist zu groß',
+<<<<<<< HEAD
+        'invalidfiles' => 'Eine oder mehrere Ihrer Datei(en) sind zu groß oder ein Dateityp ist nicht erlaubt. Erlaubte Dateitypen sind png, gif, jpg, doc, docx, pdf, and txt.',
+=======
         'invalidfiles' => 'Eine oder mehrere Dateien sind zu groß oder haben einen falschen Dateityp. Erlaubte Dateitypen sind png, gif, jpg, doc, docx, pdf, txt, zip, rar, und rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

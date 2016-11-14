@@ -51,8 +51,13 @@ return array(
     'ldap_pword'                => 'Mot de passe bind LDAP',
     'ldap_basedn'               => 'Bind de base DN',
     'ldap_filter'               => 'Filtre LDAP',
+<<<<<<< HEAD
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
+=======
     'ldap_pw_sync'              => 'Synchronisation du mot de passe LDAP',
     'ldap_pw_sync_help'         => 'Décochez cette case si vous ne souhaitez pas conserver les mots de passe LDAP synchronisés avec les mots de passe locaux. Cette désactivation signifie que vos utilisateurs ne pourront plus se connecter si votre serveur LDAP est injoignable pour une raison quelconque.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_username_field'       => 'Champ nom d\'utilisateur',
     'ldap_lname_field'          => 'Nom de famille',
     'ldap_fname_field'          => 'Prénom LDAP',

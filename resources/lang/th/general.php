@@ -41,7 +41,10 @@
     'consumables'			=> 'การใช้งาน',
     'country'  				=> 'ประเทศ',
     'create'				=> 'สร้างใหม่',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'ทรัพย์สินที่ถูกสร้าง',
     'created_at' 			=> 'สร้างที่',
     'currency'  			=> '฿', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'รายงาน',
     'requested'				=> 'คำร้องขอ',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'บันทึก',
     'select'				=> 'เลือก',
     'search'				=> 'ค้นหา',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'ตัวแทนจำหน่าย',
     'total_assets'			=> 'ทรัพย์สินทั้งหมด',
     'total_licenses'		=> 'ลิขสิทธิ์ทั้งหมด',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'ประเภท',
     'undeployable'			=> 'ไม่สามารถใช้งานได้',
     'unknown_admin'			=> 'ผู้ดูแลระบบที่ไม่รู้จัก',

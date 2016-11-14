@@ -41,7 +41,10 @@
     'consumables'			=> 'Suvartojama įranga',
     'country'  				=> 'Šalis',
     'create'				=> 'Sukurti naują',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'sukurta įranga',
     'created_at' 			=> 'Sukurta',
     'currency'  			=> '€', // this is deprecated
@@ -77,7 +80,11 @@
     'image_delete'         	=> 'Ištrinti nuotrauką',
     'image_upload'         	=> 'Įkelti nuotrauką',
     'import'         	    => 'Įkelti',
+<<<<<<< HEAD
+    'import-history'        => 'Import History',
+=======
     'import-history'        => 'Importuoti istoriją',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => 'Įrangos priežiūra',
     'asset_maintenance_report' => 'Įrangos priežiūros ataskaita',
     'asset_maintenances'       => 'Įrangos priežiūros',
@@ -101,7 +108,11 @@
     'manufacturer'			=> 'Gamintojas',
     'manufacturers'			=> 'Gamintojai',
     'markdown'				=> 'This field allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
+<<<<<<< HEAD
+    'min_amt'				=> 'Min. QTY',
+=======
     'min_amt'				=> 'Min. KIEKIS',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'min_amt_help'	=> 'Minimum number of items that should be available before an alert gets triggered.',
     'model_no'				=> 'Modelio Nr.',
     'months'				=> 'mėnesiai',
@@ -128,11 +139,18 @@
     'remove_company'        => 'Panaikinti kompanijos asociaciją',
     'reports'				=> 'Ataskaitos',
     'requested'				=> 'Užklausta',
+<<<<<<< HEAD
+    'save'  				=> 'Išsaugoti',
+    'select'				=> 'Pasirinkite',
+    'search'				=> 'Ieškoti',
+    'select_category'       => 'Select a Category',
+=======
     'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Išsaugoti',
     'select'				=> 'Pasirinkite',
     'search'				=> 'Ieškoti',
     'select_category'       => 'Pasirinkite kategoriją',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'select_depreciation'	=> 'Pasirinkti nusidėvėjimo metodą',
     'select_location'		=> 'Pasirinkti vietovę',
     'select_manufacturer'	=> 'Pasirinkti gamintoją',
@@ -142,7 +160,11 @@
     'select_date'			=> 'Pasirinkti datą',
     'select_statuslabel'	=> 'Pasirinkti būseną',
     'select_company'    	=> 'Pasirinkite kompaniją',
+<<<<<<< HEAD
+    'select_asset'    		=> 'Select Asset',
+=======
     'select_asset'    		=> 'Pasirinkite įrangą',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'settings'				=> 'Nustatymai',
     'sign_in'				=> 'Prisijungti',
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
@@ -153,8 +175,11 @@
     'suppliers'  			=> 'Tiekėjai',
     'total_assets'			=> 'įrangos iš viso',
     'total_licenses'		=> 'iš viso licenzijų',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tipas',
     'undeployable'			=> 'Nepanaudojamas',
     'unknown_admin'			=> 'Nežinomas administratorius',

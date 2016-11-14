@@ -14,7 +14,10 @@ use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+<<<<<<< HEAD
+=======
 use Symfony\Component\HttpFoundation\StreamedResponse;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 use App\Models\User;
 use App\Models\Ldap;
 use Auth;
@@ -82,7 +85,10 @@ class UsersController extends Controller
 
         $permissions = config('permissions');
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+<<<<<<< HEAD
+=======
         $permissions = $this->filterDisplayable($permissions);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         $location_list = Helper::locationsList();
         $manager_list = Helper::managerList();
@@ -126,6 +132,10 @@ class UsersController extends Controller
         $user->manager_id = e($request->input('manager_id'));
         $user->notes = e($request->input('notes'));
         $user->permissions = json_encode($request->input('permission'));
+<<<<<<< HEAD
+        $user->api_token = str_random(60);
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 
         if ($user->manager_id == "") {
@@ -159,8 +169,12 @@ class UsersController extends Controller
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+<<<<<<< HEAD
+                    $m->subject('Welcome ' . $user->first_name);
+=======
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 });
             }
             return redirect::route('users')->with('success', trans('admin/users/message.success.create'));
@@ -212,8 +226,12 @@ class UsersController extends Controller
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+<<<<<<< HEAD
+                    $m->subject('Welcome ' . $user->first_name);
+=======
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 });
             }
 
@@ -235,6 +253,8 @@ class UsersController extends Controller
     * @param int $id
     * @return View
     */
+<<<<<<< HEAD
+=======
 
     private function filterDisplayable($permissions) {
         $output = null;
@@ -246,6 +266,7 @@ class UsersController extends Controller
         return $output;
     }
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public function getEdit($id = null)
     {
         try {
@@ -262,7 +283,11 @@ class UsersController extends Controller
             $userGroups = $user->groups()->pluck('name', 'id');
             $user->permissions = $user->decodePermissions();
             $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
+<<<<<<< HEAD
+
+=======
             $permissions = $this->filterDisplayable($permissions);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $location_list = Helper::locationsList();
             $company_list = Helper::companyList();
             $manager_list = Helper::managerList();
@@ -295,6 +320,10 @@ class UsersController extends Controller
         // permissions here before we update the user.
         $permissions = $request->input('permissions', array());
         app('request')->request->set('permissions', $permissions);
+<<<<<<< HEAD
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         // Only update the email address if locking is set to false
         if (config('app.lock_passwords')) {
             return redirect()->route('users')->with('error', 'Denied! You cannot update user information on the demo.');
@@ -345,6 +374,10 @@ class UsersController extends Controller
         $user->notes = e($request->input('notes'));
         $user->permissions = json_encode($request->input('permission'));
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         if ($user->manager_id == "") {
             $user->manager_id = null;
         }
@@ -508,10 +541,16 @@ class UsersController extends Controller
 
                     // Update the asset log
                     $logaction = new Actionlog();
+<<<<<<< HEAD
+                    $logaction->asset_id = $asset->id;
+                    $logaction->checkedout_to = $asset->assigned_to;
+                    $logaction->asset_type = 'hardware';
+=======
                     $logaction->item_id = $asset->id;
                     $logaction->item_type = Asset::class;
                     $logaction->target_id = $asset->assigned_to;
                     $logaction->target_type = User::class;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin asset and delete user';
                     $logaction->logaction('checkin from');
@@ -528,10 +567,16 @@ class UsersController extends Controller
                     $accessory_array[] = $accessory->accessory_id;
                     // Update the asset log
                     $logaction = new Actionlog();
+<<<<<<< HEAD
+                    $logaction->accessory_id = $accessory->id;
+                    $logaction->checkedout_to = $accessory->assigned_to;
+                    $logaction->asset_type = 'accessory';
+=======
                     $logaction->item_id = $accessory->id;
                     $logaction->item_type = Accessory::class;
                     $logaction->target_id = $accessory->assigned_to;
                     $logaction->target_type = User::class;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin accessory and delete user';
                     $logaction->logaction('checkin from');
@@ -543,10 +588,16 @@ class UsersController extends Controller
                     $license_array[] = $license->id;
                     // Update the asset log
                     $logaction = new Actionlog();
+<<<<<<< HEAD
+                    $logaction->asset_id = $license->id;
+                    $logaction->checkedout_to = $license->assigned_to;
+                    $logaction->asset_type = 'software';
+=======
                     $logaction->item_id = $license->id;
                     $logaction->item_type = License::class;
                     $logaction->target_id = $license->assigned_to;
                     $logaction->target_type = User::class;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin license and delete user';
                     $logaction->logaction('checkin from');
@@ -614,7 +665,11 @@ class UsersController extends Controller
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId);
 
+<<<<<<< HEAD
+        $userlog = $user->userlog->load('assetlog', 'consumablelog', 'assetlog.model', 'licenselog', 'accessorylog', 'userlog', 'adminlog');
+=======
         $userlog = $user->userlog->load('item');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         if (isset($user->id)) {
 
@@ -825,7 +880,11 @@ class UsersController extends Controller
                             'phone' => trim(e($row[5])),
                             'jobtitle' => trim(e($row[6])),
                             'employee_num' => trim(e($row[7])),
+<<<<<<< HEAD
+                            //'company_id' => Company::getIdForUser($row[8]),
+=======
                             'company_id' => Company::getIdForUser($row[8]),
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
@@ -845,8 +904,12 @@ class UsersController extends Controller
                                 if ($newuser['email']) {
                                     Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
                                         $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+<<<<<<< HEAD
+                                        $m->subject('Welcome ' . $newuser['first_name']);
+=======
                                         $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                                         $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                                     });
                                 }
                             }
@@ -892,7 +955,11 @@ class UsersController extends Controller
             $sort = e(Input::get('sort'));
         }
 
+<<<<<<< HEAD
+        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
+=======
         $users = User::select(array('users.id','users.employee_num','users.jobtitle','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle');
         $users = Company::scopeCompanyables($users);
 
@@ -918,7 +985,11 @@ class UsersController extends Controller
             default:
                 $allowed_columns =
                 [
+<<<<<<< HEAD
+                 'last_name','first_name','email','username','employee_num',
+=======
                  'last_name','first_name','email','jobtitle','username','employee_num',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                  'assets','accessories', 'consumables','licenses','groups','activated','created_at'
                 ];
 
@@ -979,7 +1050,10 @@ class UsersController extends Controller
                 'id'         => $user->id,
                 'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>' : '',
                 'name'          => '<a title="'.e($user->fullName()).'" href="../admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
+<<<<<<< HEAD
+=======
                 'jobtitle'          => e($user->jobtitle),
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 'email'         => ($user->email!='') ?
                             '<a href="mailto:'.e($user->email).'" class="hidden-md hidden-lg">'.e($user->email).'</a>'
                             .'<a href="mailto:'.e($user->email).'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
@@ -1035,12 +1109,21 @@ class UsersController extends Controller
 
               //Log the deletion of seats to the log
                 $logaction = new Actionlog();
+<<<<<<< HEAD
+                $logaction->asset_id = $user->id;
+                $logaction->asset_type = 'user';
+                $logaction->user_id = Auth::user()->id;
+                $logaction->note = e(Input::get('notes'));
+                $logaction->checkedout_to = null;
+                $logaction->created_at = date("Y-m-d h:i:s");
+=======
                 $logaction->item_id = $user->id;
                 $logaction->item_type = User::class;
                 $logaction->user_id = Auth::user()->id;
                 $logaction->note = e(Input::get('notes'));
                 $logaction->target_id = null;
                 $logaction->created_at = date("Y-m-d H:i:s");
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $logaction->filename = $filename;
                 $logaction->action_type = 'uploaded';
                 $logaction->save();
@@ -1280,6 +1363,8 @@ class UsersController extends Controller
         $assets = Asset::where('assigned_to', '=', $userId)->with('model')->get();
         return response()->json($assets);
     }
+<<<<<<< HEAD
+=======
 
     /**
      * Exports users to CSV
@@ -1365,4 +1450,5 @@ class UsersController extends Controller
         return $response;
 
     }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 }

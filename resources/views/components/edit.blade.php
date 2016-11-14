@@ -96,6 +96,8 @@
 
            </div>
 
+<<<<<<< HEAD
+=======
            <!-- Serial -->
            <div class="form-group {{ $errors->has('serial_number') ? ' has-error' : '' }}">
 
@@ -107,6 +109,7 @@
                </div>
            </div>
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
            <!-- Company -->
            @if (\App\Models\Company::isCurrentUserAuthorized())

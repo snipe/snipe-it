@@ -51,8 +51,13 @@ return array(
     'ldap_pword'                => 'Password bind LDAP',
     'ldap_basedn'               => 'Base bind DN',
     'ldap_filter'               => 'Filtro LDAP',
+<<<<<<< HEAD
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
+=======
     'ldap_pw_sync'              => 'Sincronização de password LDAP',
     'ldap_pw_sync_help'         => 'Desmarque esta caixa se não deseja guardar as passwords LDAP com passwords locais. Ao desativar esta opção quer dizer que os utilizadores poderão não conseguir fazer login se o seu servidor LDAP não estiver disponível por alguma rasão.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_username_field'       => 'Campo nome de utilizador',
     'ldap_lname_field'          => 'Campo Último nome',
     'ldap_fname_field'          => 'Campo Primeiro nome',
@@ -110,5 +115,9 @@ return array(
     'bottom'        => 'fundo',
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
+<<<<<<< HEAD
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
+=======
     'zerofill_count'        => 'Comprimento de tags de artigos, incluindo zerofill',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 );

@@ -23,7 +23,11 @@ return array(
         'error'   => '파일(들)이 업로드 되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일(들)이 업로드 되었습니다.',
         'nofiles' => '업로드 하기 위한 파일이 선택되지 않았거나, 업로드 할 파일이 너무 큽니다.',
+<<<<<<< HEAD
+        'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는  형식입니다. 허용되는 형식은 png, gif, jpg, doc, docx, pdf, txt 입니다.',
+=======
         'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는 형식입니다. 허용되는 형식은 png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf 입니다.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

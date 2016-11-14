@@ -68,7 +68,11 @@ class ObjectImportCommand extends Command
         $tmp_password  = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $password = bcrypt($tmp_password);
 
+<<<<<<< HEAD
+
+=======
         $this->updating = $this->option('update');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         if (!$this->option('web-importer')) {
             $logFile = $this->option('logfile');
             \Log::useFiles($logFile);
@@ -138,7 +142,11 @@ class ObjectImportCommand extends Command
                 $item_category = $this->array_smart_fetch($row, "category");
                 $item_company_name = $this->array_smart_fetch($row, "company");
                 $item_location = $this->array_smart_fetch($row, "location");
+<<<<<<< HEAD
+
+=======
                 $item_manufacturer = $this->array_smart_fetch($row, "manufacturer");
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $item_status_name = $this->array_smart_fetch($row, "status");
 
                 $item["item_name"] = $this->array_smart_fetch($row, "item name");
@@ -162,7 +170,10 @@ class ObjectImportCommand extends Command
                 }
                 $this->log('Category: ' . $item_category);
                 $this->log('Location: ' . $item_location);
+<<<<<<< HEAD
+=======
                 $this->log('Manufacturer: ' . $item_manufacturer);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $this->log('Purchase Date: ' . $item["purchase_date"]);
                 $this->log('Purchase Cost: ' . $item["purchase_cost"]);
                 $this->log('Company Name: ' . $item_company_name);
@@ -171,6 +182,14 @@ class ObjectImportCommand extends Command
 
                 $item["user"] = $this->createOrFetchUser($row, $password);
 
+<<<<<<< HEAD
+                $item["location"] = $this->createOrFetchLocation($item_location);
+                $item["category"] = $this->createOrFetchCategory($item_category, $item_type);
+                $item["manufacturer"] = $this->createOrFetchManufacturer($row);
+                $item["company"] = $this->createOrFetchCompany($item_company_name);
+
+                $item["status_label"] = $this->createOrFetchStatusLabel($item_status_name);
+=======
                 if (!($this->updating && empty($item_location))) {
                     $item["location"] = $this->createOrFetchLocation($item_location);
                 }
@@ -187,6 +206,7 @@ class ObjectImportCommand extends Command
                 if (!($this->updating && empty($item_status_name))) {
                     $item["status_label"] = $this->createOrFetchStatusLabel($item_status_name);
                 }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
                 switch ($item_type) {
                     case "asset":
@@ -247,7 +267,11 @@ class ObjectImportCommand extends Command
     }
     // Tracks the current item for error messages
     private $current_assetId;
+<<<<<<< HEAD
+
+=======
     private $updating;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     // An array of errors encountered while parsing
     private $errors;
 
@@ -333,9 +357,13 @@ class ObjectImportCommand extends Command
 
         $asset_model_name = $this->array_smart_fetch($row, "model name");
         $asset_modelno = $this->array_smart_fetch($row, "model number");
+<<<<<<< HEAD
+        if (empty($asset_model_name)) {
+=======
         if ((empty($asset_model_name))  && (!empty($asset_modelno))) {
             $asset_model_name = $asset_modelno;
         } elseif ((empty($asset_model_name))  && (empty($asset_modelno))) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $asset_model_name ='Unknown';
         }
         if (empty($asset_modelno)) {
@@ -344,6 +372,29 @@ class ObjectImportCommand extends Command
         $this->log('Model Name: ' . $asset_model_name);
         $this->log('Model No: ' . $asset_modelno);
 
+<<<<<<< HEAD
+
+        foreach ($this->asset_models as $tempmodel) {
+            if ((strcasecmp($tempmodel->name, $asset_model_name) == 0)
+                && $tempmodel->modelno == $asset_modelno
+                && $tempmodel->category_id == $category->id
+                && $tempmodel->manufacturer_id == $manufacturer->id ) {
+                $this->log('A matching model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' already exists');
+                return $tempmodel;
+            }
+        }
+        $asset_model = new AssetModel();
+        $asset_model->name = $asset_model_name;
+        $asset_model->manufacturer_id = $manufacturer->id;
+        $asset_model->modelno = $asset_modelno;
+        $asset_model->category_id = $category->id;
+        $asset_model->user_id = $this->option('user_id');
+
+
+        if (!$this->option('testrun')) {
+            if ($asset_model->save()) {
+                $this->asset_models->add($asset_model);
+=======
         $asset_model = null;
         $editingModel = false;
         foreach ($this->asset_models as $tempmodel) {
@@ -377,6 +428,7 @@ class ObjectImportCommand extends Command
         }
         if (!$this->option('testrun')) {
             if ($asset_model->save()) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' was created');
                 return $asset_model;
             } else {
@@ -523,6 +575,25 @@ class ObjectImportCommand extends Command
      *
      * @author Daniel Melzter
      * @since 3.0
+<<<<<<< HEAD
+     * @param $row array
+     * @return Manufacturer
+     * @internal param $asset_mfgr string
+     */
+
+    public function createOrFetchManufacturer(array $row)
+    {
+        $asset_mfgr = $this->array_smart_fetch($row, "manufacturer");
+
+        if (empty($asset_mfgr)) {
+            $asset_mfgr='Unknown';
+        }
+        $this->log('Manufacturer ID: ' . $asset_mfgr);
+
+        foreach ($this->manufacturers as $tempmanufacturer) {
+            if (strcasecmp($tempmanufacturer->name, $asset_mfgr) == 0) {
+                $this->log('Manufacturer ' . $asset_mfgr . ' already exists') ;
+=======
      * @param $item_manufacturer string
      * @return Manufacturer
      */
@@ -537,6 +608,7 @@ class ObjectImportCommand extends Command
         foreach ($this->manufacturers as $tempmanufacturer) {
             if (strcasecmp($tempmanufacturer->name, $item_manufacturer) == 0) {
                 $this->log('Manufacturer ' . $item_manufacturer . ' already exists') ;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 return $tempmanufacturer;
             }
         }
@@ -544,7 +616,11 @@ class ObjectImportCommand extends Command
         //Otherwise create a manufacturer.
 
         $manufacturer = new Manufacturer();
+<<<<<<< HEAD
+        $manufacturer->name = $asset_mfgr;
+=======
         $manufacturer->name = $item_manufacturer;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $manufacturer->user_id = $this->option('user_id');
 
         if (!$this->option('testrun')) {
@@ -624,6 +700,17 @@ class ObjectImportCommand extends Command
      * @param $row array
      * @return Supplier
      */
+<<<<<<< HEAD
+    public function createOrFetchSupplier(array $row)
+    {
+        $supplier_name = $this->array_smart_fetch($row, "supplier");
+        if (empty($supplier_name)) {
+            $supplier_name='Unknown';
+        }
+        foreach ($this->suppliers as $tempsupplier) {
+            if (strcasecmp($tempsupplier->name, $supplier_name) == 0) {
+                $this->log('A matching Company ' . $supplier_name . ' already exists');
+=======
     public function createOrFetchSupplier($item_supplier)
     {
         if (empty($item_supplier)) {
@@ -632,18 +719,27 @@ class ObjectImportCommand extends Command
         foreach ($this->suppliers as $tempsupplier) {
             if (strcasecmp($tempsupplier->name, $item_supplier) == 0) {
                 $this->log('A matching Supplier ' . $item_supplier . ' already exists');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 return $tempsupplier;
             }
         }
 
         $supplier = new Supplier();
+<<<<<<< HEAD
+        $supplier->name = $supplier_name;
+=======
         $supplier->name = $item_supplier;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $supplier->user_id = $this->option('user_id');
 
         if (!$this->option('testrun')) {
             if ($supplier->save()) {
                 $this->suppliers->add($supplier);
+<<<<<<< HEAD
+                $this->log('Supplier ' . $supplier_name . ' was created');
+=======
                 $this->log('Supplier ' . $item_supplier . ' was created');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 return $supplier;
             } else {
                 $this->log('Supplier', $supplier->getErrors());
@@ -789,6 +885,10 @@ class ObjectImportCommand extends Command
             $asset_warranty_months = null;
         }
         // Check for the asset model match and create it if it doesn't exist
+<<<<<<< HEAD
+        $asset_model = $this->createOrFetchAssetModel($row, $item["category"], $item["manufacturer"]);
+        $supplier = $this->createOrFetchSupplier($row);
+=======
         if (!($editingAsset && empty($this->array_smart_fetch($row, 'model name')))) {
             // Ignore the asset_model
             isset($item["category"]) || $item["category"] = new Category();
@@ -800,6 +900,7 @@ class ObjectImportCommand extends Command
         if (!($editingAsset && empty($item_supplier))) {
             $supplier = $this->createOrFetchSupplier($item_supplier);
         }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
         $this->log('Serial No: '.$asset_serial);
         $this->log('Asset Tag: '.$item['asset_tag']);
@@ -808,6 +909,15 @@ class ObjectImportCommand extends Command
 
 
 
+<<<<<<< HEAD
+        if ($item["status_label"]) {
+            $status_id = $item["status_label"]->id;
+
+        } else {
+            // FIXME: We're already grabbing the list of statuses, we should probably not hardcode here
+            $this->log("No status field found, defaulting to id 1.");
+            $status_id = 1;
+=======
         if (isset($item["status_label"])) {
             $status_id = $item["status_label"]->id;
         } else if (!$editingAsset) {
@@ -815,6 +925,7 @@ class ObjectImportCommand extends Command
             // FIXME: We're already grabbing the list of statuses, we should probably not hardcode here
             $this->log("No status field found, defaulting to id 1.");
             $status_id = $this->status_labels->first()->id;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         }
 
         if (!$editingAsset) {
@@ -849,7 +960,11 @@ class ObjectImportCommand extends Command
             $asset->warranty_months = $asset_warranty_months;
         }
 
+<<<<<<< HEAD
+        if ($asset_model) {
+=======
         if (isset($asset_model)) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $asset->model_id = $asset_model->id;
         }
 
@@ -857,21 +972,36 @@ class ObjectImportCommand extends Command
             $asset->assigned_to = $item["user"]->id;
         }
 
+<<<<<<< HEAD
+        if ($item["location"]) {
+=======
         if (isset($item["location"])) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $asset->rtd_location_id = $item["location"]->id;
         }
 
         $asset->user_id = $this->option('user_id');
+<<<<<<< HEAD
+        if (!empty($status_id)) {
+            $asset->status_id = $status_id;
+        }
+        if ($item["company"]) {
+=======
         if (isset($status_id)) {
             $asset->status_id = $status_id;
         }
         if (isset($item["company"])) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $asset->company_id = $item["company"]->id;
         }
         if ($item["order_number"]) {
             $asset->order_number = $item["order_number"];
         }
+<<<<<<< HEAD
+        if ($supplier) {
+=======
         if (isset($supplier)) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $asset->supplier_id = $supplier->id;
         }
         if ($item["notes"]) {
@@ -886,7 +1016,10 @@ class ObjectImportCommand extends Command
         if (!$this->option('testrun')) {
 
             if ($asset->save()) {
+<<<<<<< HEAD
+=======
                 $asset->logCreate('Imported using csv importer');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $this->log('Asset ' . $item["item_name"] . ' with serial number ' . $asset_serial . ' was created');
             } else {
                 $this->jsonError('Asset', $asset->getErrors());
@@ -941,17 +1074,29 @@ class ObjectImportCommand extends Command
             $accessory->purchase_cost = Helper::ParseFloat($item["purchase_cost"]);
         }
 
+<<<<<<< HEAD
+        if ($item["location"]) {
+            $accessory->location_id = $item["location"]->id;
+        }
+        $accessory->user_id = $this->option('user_id');
+        if ($item["company"]) {
+=======
         if (isset($item["location"])) {
             $accessory->location_id = $item["location"]->id;
         }
         $accessory->user_id = $this->option('user_id');
         if (isset($item["company"])) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $accessory->company_id = $item["company"]->id;
         }
         if (!empty($item["order_number"])) {
             $accessory->order_number = $item["order_number"];
         }
+<<<<<<< HEAD
+        if ($item["category"]) {
+=======
         if (isset($item["category"])) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $accessory->category_id = $item["category"]->id;
         }
 
@@ -972,7 +1117,10 @@ class ObjectImportCommand extends Command
 
         if (!$this->option('testrun')) {
             if ($accessory->save()) {
+<<<<<<< HEAD
+=======
                 $accessory->logCreate('Imported using CSV Importer');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $this->log('Accessory ' . $item["item_name"] . ' was created');
                 // $this->comment('Accessory ' . $item["item_name"] . ' was created');
 
@@ -1027,17 +1175,29 @@ class ObjectImportCommand extends Command
         if (!empty($item["purchase_cost"])) {
             $consumable->purchase_cost = Helper::ParseFloat($item["purchase_cost"]);
         }
+<<<<<<< HEAD
+        if ($item["location"]) {
+            $consumable->location_id = $item["location"]->id;
+        }
+        $consumable->user_id = $this->option('user_id');
+        if ($item["company"]) {
+=======
         if (isset($item["location"])) {
             $consumable->location_id = $item["location"]->id;
         }
         $consumable->user_id = $this->option('user_id');
         if (isset($item["company"])) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $consumable->company_id = $item["company"]->id;
         }
         if (!empty($item["order_number"])) {
             $consumable->order_number = $item["order_number"];
         }
+<<<<<<< HEAD
+        if ($item["category"]) {
+=======
         if (isset($item["category"])) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $consumable->category_id = $item["category"]->id;
         }
         // TODO:Implement
@@ -1057,7 +1217,10 @@ class ObjectImportCommand extends Command
         if (!$this->option("testrun")) {
             // dd($consumable);
             if ($consumable->save()) {
+<<<<<<< HEAD
+=======
                 $consumable->logCreate('Imported using CSV Importer');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $this->log("Consumable " . $item["item_name"] . ' was created');
                 // $this->comment("Consumable " . $item["item_name"] . ' was created');
 

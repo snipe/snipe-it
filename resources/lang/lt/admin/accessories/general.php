@@ -10,7 +10,11 @@ return array(
     'checkin'  							=> 'Checkin Accessory',
     'create'  							=> 'Pridėti įrangą',
     'date'					=> 'Pirkimo data',
+<<<<<<< HEAD
+    'edit'  							=> 'Edit Accessory',
+=======
     'edit'  							=> 'Redaguoti aksesuarą',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'eula_text'							=> 'EULA kategorija',
     'eula_text_help'					=> 'Šis laukelis leidžia koreguoti EULA specifinėms irangos grupėms. Jei jūs turite vieną EULA visai įrangai, tuomet galite pažymeti žemiau esantį laukelį, kad būtų visuomet naudojama numatytoji.',
     'require_acceptance'				=> 'Reikalaujama naudotojo patvirtinti šios kategorijos įrangos priėmimą.',

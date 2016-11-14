@@ -20,10 +20,20 @@ use App\Models\Asset;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
+<<<<<<< HEAD
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 class Helper
 {
 
 
+<<<<<<< HEAD
+=======
     /**
      * Simple helper to invoke the markdown parser
      *
@@ -31,6 +41,7 @@ class Helper
      * @since [v2.0]
      * @return String
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function parseEscapedMarkedown($str) {
         $Parsedown = new \Parsedown();
 
@@ -40,6 +51,19 @@ class Helper
     }
 
 
+<<<<<<< HEAD
+    // This doesn't do anything yet
+    public static function parseEmailList($emails)
+    {
+        $emails_array = explode(',', $emails);
+        return array_walk($emails_array, 'trim_value');
+    }
+
+    public static function formatCurrencyOutput($cost)
+    {
+        // The importer has formatted number strings since v3, so the value might be a string, or an integer.
+        // If it's a number, format it as a string
+=======
     /**
      * The importer has formatted number strings since v3,
      * so the value might be a string, or an integer.
@@ -51,6 +75,7 @@ class Helper
      */
     public static function formatCurrencyOutput($cost)
     {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         if (is_numeric($cost)) {
             return number_format($cost, 2, '.', '');
         }
@@ -58,6 +83,15 @@ class Helper
         return $cost;
     }
 
+<<<<<<< HEAD
+    // This doesn't do anything yet
+    public static function trim_value(&$value)
+    {
+        return trim($value);
+    }
+
+    // Static colors for pie charts
+=======
 
     /**
      * Static colors for pie charts.
@@ -67,6 +101,7 @@ class Helper
      * @since [v3.3]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function chartColors()
     {
         $colors = [
@@ -84,6 +119,10 @@ class Helper
         return $colors;
     }
 
+<<<<<<< HEAD
+    // Static background (highlight) colors for pie charts
+    // This is not currently used, but might be in the near future.
+=======
 
     /**
      * Static background (highlight) colors for pie charts
@@ -93,6 +132,7 @@ class Helper
      * @since [v3.2]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function chartBackgroundColors()
     {
         $colors = [
@@ -111,6 +151,12 @@ class Helper
     }
 
 
+<<<<<<< HEAD
+
+    public static function ParseFloat($floatString)
+    {
+        // use comma for thousands until local info is property used
+=======
     /**
      * Format currency using comma for thousands until local info is property used.
      *
@@ -120,6 +166,7 @@ class Helper
      */
     public static function ParseFloat($floatString)
     {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $LocaleInfo = localeconv();
         $floatString = str_replace(",", "", $floatString);
         $floatString = str_replace($LocaleInfo["decimal_point"], ".", $floatString);
@@ -127,6 +174,8 @@ class Helper
     }
 
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of models in an array to make a dropdown menu
      *
@@ -134,6 +183,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function modelList()
     {
         $models = AssetModel::with('manufacturer')->get();
@@ -144,6 +194,8 @@ class Helper
         return $model_array;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of companies in an array to make a dropdown menu
      *
@@ -151,6 +203,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function companyList()
     {
         $company_list = array('0' => trans('general.select_company')) + DB::table('companies')
@@ -160,6 +213,8 @@ class Helper
     }
 
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of categories in an array to make a dropdown menu
      *
@@ -167,6 +222,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function categoryList($category_type = null)
     {
         $categories = Category::orderBy('name', 'asc')
@@ -178,6 +234,8 @@ class Helper
         return $category_list;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of suppliers in an array to make a dropdown menu
      *
@@ -185,6 +243,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function suppliersList()
     {
         $supplier_list = array('' => trans('general.select_supplier')) + Supplier::orderBy('name', 'asc')
@@ -193,6 +252,8 @@ class Helper
         return $supplier_list;
     }
 
+<<<<<<< HEAD
+=======
 
     /**
      * Get the list of status labels in an array to make a dropdown menu
@@ -201,6 +262,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function statusLabelList()
     {
         $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')
@@ -208,6 +270,8 @@ class Helper
         return $statuslabel_list;
     }
 
+<<<<<<< HEAD
+=======
 
     /**
      * Get the list of locations in an array to make a dropdown menu
@@ -216,6 +280,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function locationsList()
     {
         $location_list = array('' => trans('general.select_location')) + Location::orderBy('name', 'asc')
@@ -223,6 +288,8 @@ class Helper
         return $location_list;
     }
 
+<<<<<<< HEAD
+=======
 
     /**
      * Get the list of manufacturers in an array to make a dropdown menu
@@ -231,6 +298,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function manufacturerList()
     {
         $manufacturer_list = array('' => trans('general.select_manufacturer')) +
@@ -239,6 +307,8 @@ class Helper
         return $manufacturer_list;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of status label types in an array to make a dropdown menu
      *
@@ -246,12 +316,15 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function statusTypeList()
     {
         $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
         return $statuslabel_types;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of managers in an array to make a dropdown menu
      *
@@ -259,6 +332,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function managerList()
     {
         $manager_list = array('' => trans('general.select_user')) +
@@ -270,6 +344,8 @@ class Helper
         return $manager_list;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of depreciations in an array to make a dropdown menu
      *
@@ -277,6 +353,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function depreciationList()
     {
         $depreciation_list = ['' => 'Do Not Depreciate'] + Depreciation::orderBy('name', 'asc')
@@ -284,6 +361,8 @@ class Helper
         return $depreciation_list;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of category types in an array to make a dropdown menu
      *
@@ -291,12 +370,19 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function categoryTypeList()
     {
         $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
         return $category_types;
     }
 
+<<<<<<< HEAD
+    public static function usersList()
+    {
+        $users_list =   array( '' => trans('general.select_user')) +
+                        User::where('deleted_at', '=', null)
+=======
     /**
      * Get the list of users in an array to make a dropdown menu
      *
@@ -308,6 +394,7 @@ class Helper
     {
         $users_list =   array( '' => trans('general.select_user')) +
                         Company::scopeCompanyables(User::where('deleted_at', '=', null))
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                         ->where('show_in_list','=',1)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
@@ -316,6 +403,8 @@ class Helper
         return $users_list;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of assets in an array to make a dropdown menu
      *
@@ -323,6 +412,7 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function assetsList()
     {
         $assets_list = array('' => trans('general.select_asset')) + Asset::orderBy('name', 'asc')
@@ -331,6 +421,12 @@ class Helper
         return $assets_list;
     }
 
+<<<<<<< HEAD
+    public static function detailedAssetList()
+    {
+
+        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id')->toArray();
+=======
     /**
      * Get the detailed list of assets in an array to make a dropdown menu
      *
@@ -341,10 +437,13 @@ class Helper
     public static function detailedAssetList()
     {
         $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedUser', 'model'), 'assets.company_id')->get()->lists('detailed_name', 'id')->toArray();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         return $assets;
     }
 
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of custom fields in an array to make a dropdown menu
      *
@@ -352,12 +451,15 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function customFieldsetList()
     {
         $customfields = array('' => trans('admin/models/general.no_custom_field')) + CustomFieldset::pluck('name', 'id')->toArray();
         return  $customfields;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of custom field formats in an array to make a dropdown menu
      *
@@ -365,6 +467,7 @@ class Helper
      * @since [v3.4]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function predefined_formats()
     {
         $keys=array_keys(CustomField::$PredefinedFormats);
@@ -372,6 +475,8 @@ class Helper
         return $stuff+["" => trans('admin/custom_fields/general.custom_format')];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Get the list of barcode dimensions
      *
@@ -379,6 +484,7 @@ class Helper
      * @since [v3.3]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function barcodeDimensions($barcode_type = 'QRCODE')
     {
         if ($barcode_type == 'C128') {
@@ -394,6 +500,8 @@ class Helper
         return $size;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * Generates a random string
      *
@@ -401,6 +509,7 @@ class Helper
      * @since [v3.0]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function generateRandomString($length = 10)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -412,6 +521,12 @@ class Helper
         return $randomString;
     }
 
+<<<<<<< HEAD
+    /**
+     * This nasty little method gets the low inventory info for the
+     * alert dropdown
+     **/
+=======
 
     /**
      * This nasty little method gets the low inventory info for the
@@ -421,6 +536,7 @@ class Helper
      * @since [v3.0]
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function checkLowInventory()
     {
         $consumables = Consumable::with('users')->whereNotNull('min_amt')->get();
@@ -501,6 +617,11 @@ class Helper
     }
 
 
+<<<<<<< HEAD
+    public static function checkUploadIsImage($file)
+    {
+        // Check if the file is an image, so we can show a preview
+=======
     /**
      * Check if the file is an image, so we can show a preview
      *
@@ -511,6 +632,7 @@ class Helper
      */
     public static function checkUploadIsImage($file)
     {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $finfo = @finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
         $filetype = @finfo_file($finfo, $file);
         finfo_close($finfo);
@@ -634,6 +756,8 @@ class Helper
     }
 
 
+<<<<<<< HEAD
+=======
     /**
      * Gracefully handle decrypting the legacy data (encrypted via mcrypt) and use the new
      * decryption method instead.
@@ -646,6 +770,7 @@ class Helper
      * @param String $string
      * @return string
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function gracefulDecrypt(CustomField $field, $string) {
 
         if ($field->isFieldDecryptable($string)) {
@@ -663,6 +788,9 @@ class Helper
 
     }
 
+<<<<<<< HEAD
+
+=======
     /**
      * Strip HTML out of returned JSON. This is pretty gross, and I'd like to find a better way
      * to handle this, but the REST API will solve some of these problems anyway.
@@ -674,6 +802,7 @@ class Helper
      * @param $array array
      * @return Array
      */
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     public static function stripTagsFromJSON(Array $array) {
 
         foreach ($array as $key => $value) {

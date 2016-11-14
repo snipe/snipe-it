@@ -41,7 +41,10 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'Country',
     'create'				=> 'Create New',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'created asset',
     'created_at' 			=> 'Created at',
     'currency'  			=> 'IDR', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Reports',
     'requested'				=> 'Requested',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Save',
     'select'				=> 'Select',
     'search'				=> 'Search',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'Suppliers',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',

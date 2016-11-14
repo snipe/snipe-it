@@ -6,7 +6,11 @@ return array(
     'accessory_category' 				=> 'Aksesuar Kategorisi',
     'accessory_name'  					=> 'Aksesuar Adı',
     'cost'					=> 'Satın Alma Maliyeti',
+<<<<<<< HEAD
+    'checkout'  							=> 'Checkout Accessory',
+=======
     'checkout'  							=> 'Aksesuar Çıkışı',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'checkin'  							=> 'Aksesuar Atama',
     'create'  							=> 'Aksesuar oluşturun',
     'date'					=> 'Satın Alma Tarihi',

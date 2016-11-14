@@ -51,7 +51,11 @@
         <div class="small-box bg-orange">
           <div class="inner">
             <h3> {{ number_format(\App\Models\Accessory::count()) }}</h3>
+<<<<<<< HEAD
+            <p>total accessories</p>
+=======
               <p>{{ trans('general.total_accessories') }}</p>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
           </div>
           <div class="icon">
             <i class="fa fa-keyboard-o"></i>
@@ -67,7 +71,11 @@
         <div class="small-box bg-purple">
           <div class="inner">
             <h3> {{ number_format(\App\Models\Consumable::count()) }}</h3>
+<<<<<<< HEAD
+            <p>total consumables</p>
+=======
               <p>{{ trans('general.total_consumables') }}</p>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
           </div>
           <div class="icon">
             <i class="fa fa-tint"></i>
@@ -88,13 +96,102 @@
           <div class="box-header with-border">
             <h3 class="box-title">{{ trans('general.recent_activity') }}</h3>
             <div class="box-tools pull-right">
+<<<<<<< HEAD
+              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+=======
                 <a href="{{ route('reports/activity') }}"><i class="fa fa-ellipsis-h"></i></a>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             </div>
           </div><!-- /.box-header -->
           <div class="box-body">
             <div class="row">
               <div class="col-md-12">
                <div class="table-responsive">
+<<<<<<< HEAD
+                <table class="table table-hover table-fixed break-word">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="col-md-2"><span class="line"></span>{{ trans('general.date') }}</th>
+                        <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
+                        <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
+                        <th class="col-md-3"><span class="line"></span>{{ trans('table.item') }}</th>
+                        <th class="col-md-3"><span class="line"></span>To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @if (count($recent_activity) > 0)
+                  @foreach ($recent_activity as $activity)
+                    <tr>
+                        <td>
+                            @if ($activity->asset_type=="hardware")
+                                <i class="fa fa-barcode"></i>
+                            @elseif ($activity->asset_type=="accessory")
+                                <i class="fa fa-keyboard-o"></i>
+                            @elseif ($activity->asset_type=="consumable")
+                                <i class="fa fa-tint"></i>
+                            @elseif ($activity->asset_type=="license")
+                                <i class="fa fa-floppy-o"></i>
+                            @elseif ($activity->asset_type=="component")
+                                <i class="fa fa-hdd-o"></i>
+                            @else
+                                <i class="fa fa-paperclip"></i>
+                            @endif
+                        </td>
+                       <td>{{ date("M d, Y g:iA", strtotime($activity->created_at)) }}</td>
+                       <td>
+                                 @if ($activity->action_type!='requested')
+                                     @if ($activity->adminlog)
+                                        <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
+                                     @else
+                                        Deleted Admin
+                                     @endif
+                                 @endif
+
+                                 </td>
+                        <td>
+                            {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
+                        </td>
+                       <td>
+                           @if (($activity->assetlog) && ($activity->asset_type=="hardware"))
+                              <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->asset_tag }} - {{ $activity->assetlog->showAssetName() }}</a>
+                            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
+                              <a href="{{ route('view/license', $activity->asset_id) }}">{{ $activity->licenselog->name }}</a>
+                                  @elseif (($activity->consumablelog) && ($activity->asset_type=="consumable"))
+                                <a href="{{ route('view/consumable', $activity->consumable_id) }}">{{ $activity->consumablelog->name }}</a>
+                            @elseif (($activity->accessorylog) && ($activity->asset_type=="accessory"))
+                              <a href="{{ route('view/accessory', $activity->accessory_id) }}">{{ $activity->accessorylog->name }}</a>
+                            @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
+                               <a href="{{ route('view/component', $activity->component_id) }}">{{ $activity->componentlog->name }}</a>
+                            @elseif (($activity->assetlog) && ($activity->action_type=="uploaded") && ($activity->asset_type=="hardware"))
+                                   <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+
+                            @endif
+
+                            </td>
+
+                       <td>
+                        @if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->asset_type=="user"))
+                            <a href="{{ route('view/user', $activity->asset_id) }}">{{ $activity->userasassetlog->fullName() }}</a>
+                        @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
+                           <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+                        @elseif($activity->action_type=='requested')
+                            @if ($activity->adminlog)
+                                <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
+                            @endif
+                       @elseif ($activity->userlog)
+                          <a href="{{ route('view/user', $activity->checkedout_to) }}">{{ $activity->userlog->fullName() }}</a>
+
+                       @endif
+
+                      </td>
+
+
+                    </tr>
+                   @endforeach
+                @endif
+                </tbody>
+=======
                 <table
                     class="table table-striped"
                     name="activityReport"
@@ -111,6 +208,7 @@
                     </tr>
                 </thead>
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 </table>
                </div><!-- /.responsive -->
               </div><!-- /.col -->
@@ -174,6 +272,10 @@
 
 </script>
 
+<<<<<<< HEAD
+
+
+=======
     <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
     <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
     <script type="text/javascript">
@@ -192,6 +294,7 @@
         });
 
     </script>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 @stop
 
 

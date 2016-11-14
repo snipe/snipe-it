@@ -41,7 +41,10 @@
     'consumables'			=> 'Vật tư phụ',
     'country'  				=> 'Nước',
     'create'				=> 'Tạo mới',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'tài sản đã tạo',
     'created_at' 			=> 'Đã tạo lúc',
     'currency'  			=> '$', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Các báo cáo',
     'requested'				=> 'Đã yêu cầu',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Lưu',
     'select'				=> 'Chọn',
     'search'				=> 'Tìm kiếm',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'Nhà cung cấp',
     'total_assets'			=> 'tổng số tài sản',
     'total_licenses'		=> 'tổng số bản quyền',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Loại',
     'undeployable'			=> 'Không cho phép cấp phát',
     'unknown_admin'			=> 'Unknown Admin',

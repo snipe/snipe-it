@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+/node_modules
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+.idea/
+=======
 .couscous
 .DS_Store
 .env
@@ -37,3 +48,4 @@ storage/private_uploads/users/*
 tests/_data/scenarios
 tests/_output/*
 tests/_support/_generated/*
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72

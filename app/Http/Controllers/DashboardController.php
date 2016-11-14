@@ -30,6 +30,15 @@ class DashboardController extends Controller
         // Show the page
         if (Auth::user()->hasAccess('admin')) {
 
+<<<<<<< HEAD
+            $recent_activity = Actionlog::orderBy('created_at', 'DESC')
+                ->with('accessorylog', 'consumablelog', 'licenselog', 'assetlog', 'adminlog', 'userlog', 'componentlog')
+                ->take(20)
+                ->get();
+
+
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $asset_stats['total'] = Asset::Hardware()->count();
 
             $asset_stats['rtd']['total'] = Asset::Hardware()->RTD()->count();
@@ -76,7 +85,11 @@ class DashboardController extends Controller
             }
 
 
+<<<<<<< HEAD
+            return View::make('dashboard')->with('asset_stats', $asset_stats)->with('recent_activity', $recent_activity);
+=======
             return View::make('dashboard')->with('asset_stats', $asset_stats);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         } else {
         // Redirect to the profile page
             return redirect()->route('view-assets');

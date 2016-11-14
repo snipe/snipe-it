@@ -41,7 +41,10 @@
     'consumables'			=> '消耗品数',
     'country'  				=> '国',
     'create'				=> '新規作成',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> '資産を作成',
     'created_at' 			=> '作成者',
     'currency'  			=> '¥', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => '会社の団体を取り除く',
     'reports'				=> 'レポート',
     'requested'				=> '要求済',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> '保存',
     'select'				=> '選択',
     'search'				=> '検索',
@@ -153,8 +159,11 @@
     'suppliers'  			=> '仕入先',
     'total_assets'			=> '資産の合計',
     'total_licenses'		=> 'ライセンスの合計',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'タイプ',
     'undeployable'			=> '未配備',
     'unknown_admin'			=> '不明な管理者',

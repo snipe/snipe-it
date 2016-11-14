@@ -1,6 +1,14 @@
 <?php
 namespace App\Models;
 
+<<<<<<< HEAD
+use App\Models\User;
+use App\Models\ConsumableAssignment;
+use App\Models\Company;
+use App\Models\Location;
+use App\Models\Category;
+use App\Models\ActionLog;
+=======
 use App\Models\ActionLog;
 use App\Models\Category;
 use App\Models\Company;
@@ -8,6 +16,7 @@ use App\Models\ConsumableAssignment;
 use App\Models\Location;
 use App\Models\Loggable;
 use App\Models\User;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -19,9 +28,14 @@ use Watson\Validating\ValidatingTrait;
  */
 class Component extends Model
 {
+<<<<<<< HEAD
+    use SoftDeletes;
+    use CompanyableTrait;
+=======
     use CompanyableTrait;
     use Loggable;
     use SoftDeletes;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
     protected $dates = ['deleted_at'];
     protected $table = 'components';
@@ -87,7 +101,11 @@ class Component extends Model
     */
     public function assetlog()
     {
+<<<<<<< HEAD
+        return $this->hasMany('\App\Models\Actionlog', 'component_id')->where('asset_type', '=', 'component')->orderBy('created_at', 'desc')->withTrashed();
+=======
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Component::class)->orderBy('created_at', 'desc')->withTrashed();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     }
 
 
@@ -141,7 +159,10 @@ class Component extends Model
                         });
                     })->orWhere('components.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.order_number', 'LIKE', '%'.$search.'%')
+<<<<<<< HEAD
+=======
                             ->orWhere('components.serial_number', 'LIKE', '%'.$search.'%')
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                             ->orWhere('components.purchase_cost', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.purchase_date', 'LIKE', '%'.$search.'%');
             }

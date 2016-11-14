@@ -23,7 +23,11 @@ return array(
         'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
         'success' => 'Fil(er) ble slettet.',
         'nofiles' => 'Ingen fil er valgt til opplasting, eller filen er for stor',
+<<<<<<< HEAD
+        'invalidfiles' => 'En eller flere av filene dine er for store eller av en filtype som ikke er tillatt. Tillatte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
+=======
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

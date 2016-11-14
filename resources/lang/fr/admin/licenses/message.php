@@ -23,7 +23,11 @@ return array(
         'error'   => 'Le(s) fichier(s) n\'a pas pu être uploadé. Merci de réessayer.',
         'success' => 'Le(s) fichier(s) a bien été uploadé.',
         'nofiles' => 'Vous n\'avez pas sélectionné de fichier pour le téléchargement ou le fichier que vous essayez de télécharger est trop gros',
+<<<<<<< HEAD
+        'invalidfiles' => 'Un ou plusieurs de vos fichiers sont trop lourds, ou sont d\'un type non autorisé. Les types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf et txt.',
+=======
         'invalidfiles' => 'Un ou plusieurs de vos fichiers est trop grand ou le type de fichier n\'est pas autorisé. Les différents types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf, txt, zip, rar et rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

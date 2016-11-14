@@ -1,6 +1,14 @@
 <?php
 namespace App\Models;
 
+<<<<<<< HEAD
+use App\Models\User;
+use App\Models\ConsumableAssignment;
+use App\Models\Company;
+use App\Models\Location;
+use App\Models\Category;
+use App\Models\ActionLog;
+=======
 use App\Models\ActionLog;
 use App\Models\Category;
 use App\Models\Company;
@@ -8,15 +16,21 @@ use App\Models\ConsumableAssignment;
 use App\Models\Location;
 use App\Models\Loggable;
 use App\Models\User;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class Consumable extends Model
 {
+<<<<<<< HEAD
+    use SoftDeletes;
+    use CompanyableTrait;
+=======
     use CompanyableTrait;
     use Loggable;
     use SoftDeletes;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
     protected $dates = ['deleted_at'];
     protected $table = 'consumables';
@@ -87,7 +101,11 @@ class Consumable extends Model
     */
     public function assetlog()
     {
+<<<<<<< HEAD
+        return $this->hasMany('\App\Models\Actionlog', 'consumable_id')->where('asset_type', '=', 'consumable')->orderBy('created_at', 'desc')->withTrashed();
+=======
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Consumable::class)->orderBy('created_at', 'desc')->withTrashed();
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     }
 
 

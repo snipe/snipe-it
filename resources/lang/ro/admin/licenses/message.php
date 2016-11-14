@@ -23,7 +23,11 @@ return array(
         'error'   => 'Fisierul/Fisierele nu au fost uploadate. Incecati iar.',
         'success' => 'Fisierul/Fisierele au fost uploadate.',
         'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+<<<<<<< HEAD
+        'invalidfiles' => 'Unul sau mai multe fisiere sunt prea mari sau tipul de fisier este interzis. Tipurile de fisiere permise sunt png, gif, jpg, doc, docx, pdf si txt.',
+=======
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'update' => array(

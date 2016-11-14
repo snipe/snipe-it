@@ -17,13 +17,21 @@ return array(
     'delete' => array(
         'confirm'   => 'Ar tikrai norite ištrinti šį komponentą?',
         'error'   => 'There was an issue deleting the component. Please try again.',
+<<<<<<< HEAD
+        'success' => 'The component was deleted successfully.'
+=======
         'success' => 'Komponentas ištrintas sėkmingai.'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
      'checkout' => array(
         'error'   		=> 'Component was not checked out, please try again',
         'success' 		=> 'Component checked out successfully.',
+<<<<<<< HEAD
+        'user_does_not_exist' => 'That user is invalid. Please try again.'
+=======
         'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(

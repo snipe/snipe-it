@@ -37,11 +37,17 @@ return array(
     ),
 
     'import' => array(
+<<<<<<< HEAD
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
+=======
         'error'                 => 'Einige Elemente wurden nicht korrekt importiert.',
         'errorDetail'           => 'Die folgenden Elemente wurden aufgrund von Fehlern nicht importiert.',
         'success'               => "Ihre Datei wurde importiert",
         'file_delete_success'   => "Die Datei wurde erfolgreich gelöscht",
         'file_delete_error'      => "Die Datei konnte nicht gelöscht werden",
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
 
@@ -55,7 +61,11 @@ return array(
         'error'   		=> 'Asset konnte nicht herausgegeben werden. Bitte versuchen Sie es erneut',
         'success' 		=> 'Asset wurde erfolgreich herausgegeben.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
+<<<<<<< HEAD
+        'not_available' => 'That asset is not available for checkout!'
+=======
         'not_available' => 'Dieses Asset kann nicht herausgegeben werden!'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     ),
 
     'checkin' => array(
@@ -69,7 +79,10 @@ return array(
     'requests' => array(
         'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuchen Sie es erneut',
         'success' 		=> 'Asset erfolgreich angefordert.',
+<<<<<<< HEAD
+=======
         'canceled'      => 'Herausgeben erfolgreich abgebrochen'
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     )
 
 );

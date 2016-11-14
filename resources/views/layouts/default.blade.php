@@ -126,6 +126,43 @@
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
+<<<<<<< HEAD
+                          @can('assets.view')
+                              <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
+                                  <a href="{{ URL::to('hardware') }}">
+                                      <i class="fa fa-barcode"></i>
+                                  </a>
+                              </li>
+                          @endcan
+                          @can('licenses.view')
+                          <li {!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
+                              <a href="{{ URL::to('admin/licenses') }}">
+                                  <i class="fa fa-floppy-o"></i>
+                              </a>
+                          </li>
+                          @endcan
+                          @can('accessories.view')
+                          <li {!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
+                              <a href="{{ URL::to('admin/accessories') }}">
+                                  <i class="fa fa-keyboard-o"></i>
+                              </a>
+                          </li>
+                          @endcan
+                          @can('consumables.view')
+                          <li {!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
+                              <a href="{{ URL::to('admin/consumables') }}">
+                                  <i class="fa fa-tint"></i>
+                              </a>
+                          </li>
+                          @endcan
+                          @can('components.view')
+                          <li {!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
+                              <a href="{{ URL::to('admin/components') }}">
+                                  <i class="fa fa-hdd-o"></i>
+                              </a>
+                          </li>
+                          @endcan
+=======
                   @can('assets.view')
                   <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
                       <a href="{{ URL::to('hardware') }}">
@@ -161,6 +198,7 @@
                       </a>
                   </li>
                   @endcan
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
                   @can('assets.view')
                   <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
@@ -227,7 +265,11 @@
                        </li>
                        @endcan
                    </ul>
+<<<<<<< HEAD
+               </li>
+=======
                 </li>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                @endcan
 
                @can('admin')
@@ -288,6 +330,10 @@
                  </a>
                  <ul class="dropdown-menu">
                    <!-- User image -->
+<<<<<<< HEAD
+                   <li>
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                      <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                        <a href="{{ route('view-assets') }}">
                              <i class="fa fa-check fa-fw"></i> @lang('general.viewassets')
@@ -303,6 +349,10 @@
                              @lang('general.logout')
                          </a>
                      </li>
+<<<<<<< HEAD
+                   </li>
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                  </ul>
                </li>
 
@@ -432,13 +482,25 @@
                   <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Pending') }}">@lang('general.pending')</a></li>
                   <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ URL::to('hardware?status=Undeployable') }}">@lang('general.undeployable')</a></li>
                   <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Archived') }}">@lang('admin/hardware/general.archived')</a></li>
+<<<<<<< HEAD
+                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Requestable') }}"><a href="{{ URL::to('hardware?status=Requestable') }}" >@lang('admin/hardware/general.requestable')</a></li>
+=======
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Requestable') }}">@lang('admin/hardware/general.requestable')</a></li>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
                   <li class="divider">&nbsp;</li>
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
                         <a href="{{ route('hardware/bulkcheckout') }}">
                             {{ trans('general.bulk_checkout') }}</a>
                     </li>
+<<<<<<< HEAD
+                    <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware/models') }}">@lang('general.asset_models')</a></li>
+                  <li><a href="{{ URL::to('admin/settings/categories') }}" {!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
+                  <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
+                  <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
+                  <li><a href="{{ URL::to('hardware/import') }}">@lang('general.import') </a></li>
+                  <li><small class="label pull-right bg-orange">{{ trans('general.new')  }}</small><a href="{{ URL::to('hardware/history') }}">@lang('general.import-history') </a></li>
+=======
 
                     @can('superuser')
                     <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware/models') }}">@lang('general.asset_models')</a></li>
@@ -448,6 +510,7 @@
                   <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
                   <li><a href="{{ URL::to('hardware/import') }}">@lang('general.import') </a></li>
                   <li><a href="{{ URL::to('hardware/history') }}">@lang('general.import-history') </a></li>
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 </ul>
               </li>
               @endcan

@@ -23,7 +23,11 @@
     'avatar_upload'         => '上传头像',
     'back'      			=> '后退',
     'bad_data'      		=> '未发现任何东西，是否数据错误？',
+<<<<<<< HEAD
+    'bulk_checkout'  		=> 'Bulk Checkout',
+=======
     'bulk_checkout'  		=> '批量借出',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'cancel'  				=> '取消',
     'categories'			=> '目录',
     'category'				=> '类别：',
@@ -41,7 +45,10 @@
     'consumables'			=> '消耗品',
     'country'  				=> '国家',
     'create'				=> '新增',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> '新建资产',
     'created_at' 			=> '创建于',
     'currency'  			=> 'RMB', // this is deprecated
@@ -58,6 +65,16 @@
     'depreciation'			=> '折旧',
     'editprofile'  			=> '修改简介',
     'eol'					=> '寿命',
+<<<<<<< HEAD
+    'email_domain'			=> 'Email Domain',
+    'email_format'			=> 'Email Format',
+    'email_domain_help'		=> 'This is used to generate email addresses when importing',
+    'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
+    'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
+    'first'					=> '首页',
+    'first_name'			=> '名字',
+    'first_name_format'		=> 'First Name (jane@example.com)',
+=======
     'email_domain'			=> '邮件域',
     'email_format'			=> '电子邮件格式',
     'email_domain_help'		=> '这在导入时用以生成电子邮件地址',
@@ -66,18 +83,27 @@
     'first'					=> '首页',
     'first_name'			=> '名字',
     'first_name_format'		=> '名，例如 (jane@example.com)',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'file_name'				=> '文件',
     'file_uploads'			=> '文件上传',
     'generate'				=> '生成',
     'groups'				=> '分组',
     'gravatar_email'        => 'Gravatar头像邮件地址',
+<<<<<<< HEAD
+    'history'  			    => 'History',
+=======
     'history'  			    => '历史记录',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'history_for'  			=> '历史记录',
     'id'  					=> '编号',
     'image_delete'         	=> '删除图片',
     'image_upload'         	=> '上传图片',
     'import'         	    => '导入',
+<<<<<<< HEAD
+    'import-history'        => 'Import History',
+=======
     'import-history'        => '导入历史记录',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => '资产维修',
     'asset_maintenance_report' => '资产维修报表',
     'asset_maintenances'       => '资产维修',
@@ -97,7 +123,11 @@
     'location'              => '位置',
     'locations'				=> '地理位置',
     'logout'				=> '注销',
+<<<<<<< HEAD
+    'lookup_by_tag'     => 'Lookup by Asset Tag',
+=======
     'lookup_by_tag'     => '查找资产标签',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'manufacturer'			=> '制造商',
     'manufacturers'			=> '制造商',
     'markdown'				=> '该字段可以使用 <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>',
@@ -108,7 +138,11 @@
     'moreinfo'				=> '更多信息',
     'name'					=> '名称',
     'next'					=> '下一页',
+<<<<<<< HEAD
+    'new'					=> 'new!',
+=======
     'new'					=> '新！',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'no_depreciation'		=> '永久',
     'no_results'			=> '没有结果',
     'no'  					=> '否',
@@ -128,11 +162,18 @@
     'remove_company'        => '移除公司关联',
     'reports'				=> '报告',
     'requested'				=> '已申请',
+<<<<<<< HEAD
+    'save'  				=> '保存​​',
+    'select'				=> '选择',
+    'search'				=> '搜索',
+    'select_category'       => 'Select a Category',
+=======
     'request_canceled'      => '取消请求',
     'save'  				=> '保存​​',
     'select'				=> '选择',
     'search'				=> '搜索',
     'select_category'       => '选择一个类别',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'select_depreciation'	=> '选择失效类型',
     'select_location'		=> '选择地点',
     'select_manufacturer'	=> '选择生产商',
@@ -145,7 +186,11 @@
     'select_asset'    		=> '选择资产',
     'settings'				=> '设置',
     'sign_in'				=> '登录',
+<<<<<<< HEAD
+    'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
+=======
     'some_features_disabled' => '演示模式: 此安装将禁用某些功能。',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'site_name'				=> '站点名称',
     'state'  				=> '省份',
     'status_labels'			=> '状态标签',
@@ -153,12 +198,19 @@
     'suppliers'  			=> '供应商',
     'total_assets'			=> '共计资产',
     'total_licenses'		=> '共计许可证',
+<<<<<<< HEAD
+    'type'  				=> '类型',
+    'undeployable'			=> '无法被分配',
+    'unknown_admin'			=> '未知管理员',
+    'username_format'		=> 'Username Format',
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
     'type'  				=> '类型',
     'undeployable'			=> '无法被分配',
     'unknown_admin'			=> '未知管理员',
     'username_format'		=> '用户名格式',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'update'                => '更新',
     'uploaded'              => '已上传',
     'user'					=> '用户',

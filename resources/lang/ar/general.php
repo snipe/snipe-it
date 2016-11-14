@@ -41,7 +41,10 @@
     'consumables'			=> 'Consumables',
     'country'  				=> 'الدولة',
     'create'				=> 'إضافة',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'الأصول المضافة',
     'created_at' 			=> 'أنشئت في',
     'currency'  			=> '$', // this is deprecated
@@ -128,7 +131,10 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'التقارير',
     'requested'				=> 'Requested',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'حفظ',
     'select'				=> 'Select',
     'search'				=> 'Search',
@@ -153,8 +159,11 @@
     'suppliers'  			=> 'الموردون',
     'total_assets'			=> 'إجمالي الأصول',
     'total_licenses'		=> 'إجمالي الرخص',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Type',
     'undeployable'			=> 'غير قابلة للتوزيع',
     'unknown_admin'			=> 'إداري غير معروف',

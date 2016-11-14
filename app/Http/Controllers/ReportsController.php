@@ -33,7 +33,11 @@ class ReportsController extends Controller
 {
 
     /**
+<<<<<<< HEAD
+    * Returns a view that displaysthe accessories report.
+=======
     * Returns a view that displays the accessories report.
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
@@ -292,7 +296,15 @@ class ReportsController extends Controller
     public function getActivityReport()
     {
         $log_actions = Actionlog::orderBy('created_at', 'DESC')
+<<<<<<< HEAD
+                                ->with('adminlog')
+                                ->with('accessorylog')
+                                ->with('assetlog')
+                                ->with('licenselog')
+                                ->with('userlog')
+=======
                                 ->with('item')
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                                 ->orderBy('created_at', 'DESC')
                                 ->get();
 
@@ -300,6 +312,18 @@ class ReportsController extends Controller
     }
 
     /**
+<<<<<<< HEAD
+    * Displays license report
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
+    public function getLicenseReport()
+    {
+
+        $licenses = License::orderBy('created_at', 'DESC')
+=======
      * Returns Activity Report JSON.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -423,6 +447,7 @@ class ReportsController extends Controller
     {
 
         $licenses = License::with('depreciation')->orderBy('created_at', 'DESC')
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                            ->with('company')
                            ->get();
 
@@ -449,7 +474,10 @@ class ReportsController extends Controller
             trans('admin/licenses/form.remaining_seats'),
             trans('admin/licenses/form.expiration'),
             trans('admin/licenses/form.date'),
+<<<<<<< HEAD
+=======
             trans('admin/licenses/form.depreciation'),
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             trans('admin/licenses/form.cost')
         ];
 
@@ -465,7 +493,10 @@ class ReportsController extends Controller
             $row[] = $license->remaincount();
             $row[] = $license->expiration_date;
             $row[] = $license->purchase_date;
+<<<<<<< HEAD
+=======
             $row[] = ($license->depreciation!='') ? '' : e($license->depreciation->name);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $row[] = '"' . Helper::formatCurrencyOutput($license->purchase_cost) . '"';
 
             $rows[] = implode($row, ',');
@@ -538,9 +569,12 @@ class ReportsController extends Controller
         if (( e(Input::get('purchase_cost')) == '1' ) && ( e(Input::get('depreciation')) != '1' )) {
             $header[] = 'Purchase Cost';
         }
+<<<<<<< HEAD
+=======
         if (e(Input::get('eol')) == '1') {
             $header[] = 'EOL';
         }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         if (e(Input::get('order')) == '1') {
             $header[] = 'Order Number';
         }
@@ -616,9 +650,12 @@ class ReportsController extends Controller
             if (e(Input::get('purchase_cost')) == '1' && ( e(Input::get('depreciation')) != '1' )) {
                 $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
+<<<<<<< HEAD
+=======
             if (e(Input::get('eol')) == '1') {
                 $row[] = '"' .($asset->eol_date()) ? $asset->eol_date() : ''. '"';
             }
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             if (e(Input::get('order')) == '1') {
                 if ($asset->order_number) {
                     $row[] = e($asset->order_number);
@@ -627,7 +664,11 @@ class ReportsController extends Controller
                 }
             }
             if (e(Input::get('supplier')) == '1') {
+<<<<<<< HEAD
+                if ($asset->supplier_id) {
+=======
                 if ($asset->supplier) {
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     $row[] = '"' .e($asset->supplier->name) . '"';
                 } else {
                     $row[] = '';
@@ -700,7 +741,11 @@ class ReportsController extends Controller
             foreach ($customfields as $customfield) {
                 $column_name = $customfield->db_column_name();
                 if (e(Input::get($customfield->db_column_name())) == '1') {
+<<<<<<< HEAD
+                    $row[] = $asset->$column_name;
+=======
                     $row[] = str_replace(",", "\,", $asset->$column_name);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 }
             }
 
@@ -758,7 +803,10 @@ class ReportsController extends Controller
         $rows = [ ];
 
         $header = [
+<<<<<<< HEAD
+=======
             trans('admin/hardware/table.asset_tag'),
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             trans('admin/asset_maintenances/table.asset_name'),
             trans('admin/asset_maintenances/table.supplier_name'),
             trans('admin/asset_maintenances/form.asset_maintenance_type'),
@@ -774,7 +822,10 @@ class ReportsController extends Controller
 
         foreach ($assetMaintenances as $assetMaintenance) {
             $row   = [ ];
+<<<<<<< HEAD
+=======
             $row[] = str_replace(',', '', e($assetMaintenance->asset->asset_tag));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             $row[] = str_replace(',', '', e($assetMaintenance->asset->name));
             $row[] = str_replace(',', '', e($assetMaintenance->supplier->name));
             $row[] = e($assetMaintenance->improvement_type);

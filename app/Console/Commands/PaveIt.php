@@ -77,8 +77,11 @@ class PaveIt extends Command
                 DB::statement('delete from asset_logs');
                 DB::statement('delete from asset_maintenances');
                 DB::statement('delete from asset_uploads');
+<<<<<<< HEAD
+=======
                 DB::statement('delete from action_logs');
                 DB::statement('delete from checkout_requests');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 DB::statement('delete from consumables_users');
                 DB::statement('delete from custom_field_custom_fieldset');
                 DB::statement('delete from custom_fields');
@@ -94,12 +97,18 @@ class PaveIt extends Command
                 \DB::statement('drop table IF EXISTS accessories_users');
                 \DB::statement('drop table IF EXISTS accessories');
                 \DB::statement('drop table IF EXISTS asset_logs');
+<<<<<<< HEAD
+=======
                 \DB::statement('drop table IF EXISTS action_logs');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 \DB::statement('drop table IF EXISTS asset_maintenances');
                 \DB::statement('drop table IF EXISTS asset_uploads');
                 \DB::statement('drop table IF EXISTS assets');
                 \DB::statement('drop table IF EXISTS categories');
+<<<<<<< HEAD
+=======
                 \DB::statement('drop table IF EXISTS checkout_requests');
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 \DB::statement('drop table IF EXISTS companies');
                 \DB::statement('drop table IF EXISTS consumables_users');
                 \DB::statement('drop table IF EXISTS consumables');

@@ -16,7 +16,11 @@ return array(
 	'backups'					=> 'Sicherungen',
 	'barcode_settings'			=> 'Barcode Einstellungen',
     'confirm_purge'			    => 'Bereinigung bestätigen',
+<<<<<<< HEAD
+    'confirm_purge_help'		=> 'Geben Sie das Wort "Löschen" in das untere Feld ein um die gelöschten Einträge zu bereinigen. Dies kann nicht rückgängig gemacht werden.',
+=======
     'confirm_purge_help'		=> 'Geben Sie das Wort "DELETE" in das untere Feld ein um die gelöschten Einträge zu bereinigen. Dies kann nicht rückgängig gemacht werden.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 	'custom_css'				=> 'Eigenes CSS',
 	'custom_css_help'			=> 'Füge eigenes CSS hinzu. Benutze keine &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Standard Währung',
@@ -51,8 +55,13 @@ return array(
     'ldap_pword'                => 'LDAP Bind Passwort',
     'ldap_basedn'               => 'Basis Bind DN',
     'ldap_filter'               => 'LDAP Filter',
+<<<<<<< HEAD
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
+=======
     'ldap_pw_sync'              => 'LDAP Passwörter synchronisieren',
     'ldap_pw_sync_help'         => 'Deaktivieren Sie diese Option, wenn Sie nicht möchten, dass LDAP-Passwörter mit lokalen Passwörtern synchronisiert werden. Wenn Sie dies deaktivieren, kann es sein, dass Benutzer sich möglicherweise nicht anmelden können falls der LDAP-Server aus irgendeinem Grund nicht erreichbar ist.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'ldap_username_field'       => 'Benutzername',
     'ldap_lname_field'          => 'Familienname',
     'ldap_fname_field'          => 'LDAP Vorname',

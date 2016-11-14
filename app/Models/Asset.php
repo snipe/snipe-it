@@ -1,6 +1,12 @@
 <?php
 namespace App\Models;
 
+<<<<<<< HEAD
+use App\Models\Actionlog;
+use App\Models\Company;
+use App\Models\Location;
+use Config;
+=======
 use App\Helpers\Helper;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Actionlog;
@@ -12,11 +18,20 @@ use App\Models\Setting;
 use Auth;
 use Config;
 use DateTime;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Parsedown;
 use Watson\Validating\ValidatingTrait;
+<<<<<<< HEAD
+use App\Http\Traits\UniqueUndeletedTrait;
+use DateTime;
+use App\Models\Setting;
+use App\Helpers\Helper;
+use Auth;
+=======
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
 /**
  * Model for Assets.
@@ -25,9 +40,13 @@ use Watson\Validating\ValidatingTrait;
  */
 class Asset extends Depreciable
 {
+<<<<<<< HEAD
+    use SoftDeletes;
+=======
     use Loggable;
     use SoftDeletes;
     use Requestable;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 
   /**
   * The database table used by the model.
@@ -152,8 +171,12 @@ class Asset extends Depreciable
 
             \Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+<<<<<<< HEAD
+                $m->subject('Confirm asset delivery');
+=======
                 $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                 $m->subject(trans('mail.Confirm_asset_delivery'));
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
             });
         }
 
@@ -214,12 +237,19 @@ class Asset extends Depreciable
     {
 
         $logaction = new Actionlog();
+<<<<<<< HEAD
+        $logaction->asset_id = $this->id;
+        $logaction->checkedout_to = $this->assigned_to;
+        $logaction->asset_type = 'hardware';
+        $logaction->note = $note;
+=======
         $logaction->item_type = Asset::class;
         $logaction->item_id = $this->id;
         $logaction->target_type = User::class;
         $logaction->target_id = $this->assigned_to;
         $logaction->note = $note;
         $logaction->user_id = $admin->id;
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         if ($checkout_at!='') {
             $logaction->created_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', strtotime($checkout_at)));
         } else {
@@ -232,10 +262,22 @@ class Asset extends Depreciable
             }
         } else {
             // Update the asset data to null, since it's being checked in
+<<<<<<< HEAD
+            $logaction->checkedout_to = $asset->assigned_to;
+            $logaction->checkedout_to = '';
+            $logaction->asset_id = $asset->id;
+            $logaction->location_id = null;
+            $logaction->asset_type = 'hardware';
+            $logaction->note = $note;
+            $logaction->user_id = $admin->id;
+        }
+        $logaction->adminlog()->associate($admin);
+=======
             $logaction->target_id = '';
             $logaction->location_id = null;
         }
         $logaction->user()->associate($admin);
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         $log = $logaction->logaction($action);
 
         return $logaction;
@@ -272,8 +314,13 @@ class Asset extends Depreciable
     public function uploads()
     {
 
+<<<<<<< HEAD
+        return $this->hasMany('\App\Models\Actionlog', 'asset_id')
+                  ->where('asset_type', '=', 'hardware')
+=======
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
                   ->where('item_type', '=', Asset::class)
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                   ->where('action_type', '=', 'uploaded')
                   ->whereNotNull('filename')
                   ->orderBy('created_at', 'desc');
@@ -310,8 +357,13 @@ class Asset extends Depreciable
    */
     public function assetlog()
     {
+<<<<<<< HEAD
+        return $this->hasMany('\App\Models\Actionlog', 'asset_id')
+                  ->where('asset_type', '=', 'hardware')
+=======
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
                   ->where('item_type', '=', Asset::class)
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                   ->orderBy('created_at', 'desc')
                   ->withTrashed();
     }
@@ -578,12 +630,21 @@ public function checkin_email()
     public function scopeAssetsByLocation($query, $location)
     {
         return $query->where(function ($query) use ($location) {
+<<<<<<< HEAD
+        
+            $query->whereHas('assigneduser', function ($query) use ($location) {
+            
+                $query->where('users.location_id', '=', $location->id);
+            })->orWhere(function ($query) use ($location) {
+            
+=======
 
             $query->whereHas('assigneduser', function ($query) use ($location) {
 
                 $query->where('users.location_id', '=', $location->id);
             })->orWhere(function ($query) use ($location) {
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                 $query->where('assets.rtd_location_id', '=', $location->id);
                 $query->whereNull('assets.assigned_to');
             });

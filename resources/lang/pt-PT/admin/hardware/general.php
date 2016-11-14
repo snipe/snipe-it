@@ -12,8 +12,12 @@ return array(
     'edit'  					=> 'Editar artigo',
 	'filetype_info'				=> 'Os tipos de ficheiro permitidos são png, gif, jpg, jpeg, doc, docx, pdf, txt, zip e rar.',
     'model_deleted'  			=> 'Este modelo de ativo foi removido. Deve restaurar o modelo para poder restaurar o Ativo.<br/> <a href="/hardware/models/:model_id/restore">Clique aqui para restaurar o modelo</a>.',
+<<<<<<< HEAD
+    'requestable'				=> 'Solicitavel',
+=======
     'requestable'               => 'Solicitavel',
     'requested'				    => 'Requested',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'restore'  					=> 'Restaurar ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',

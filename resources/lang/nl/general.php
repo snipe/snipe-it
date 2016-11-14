@@ -41,7 +41,10 @@
     'consumables'			=> 'Verbruiksartikelen',
     'country'  				=> 'Land',
     'create'				=> 'Nieuwe aanmaken',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'aangemaakt materiaal',
     'created_at' 			=> 'Aangemaakt op',
     'currency'  			=> '$', // this is deprecated
@@ -77,7 +80,11 @@
     'image_delete'         	=> 'Afbeelding verwijderen',
     'image_upload'         	=> 'Afbeelding uploaden',
     'import'         	    => 'Importeer',
+<<<<<<< HEAD
+    'import-history'        => 'Import History',
+=======
     'import-history'        => 'Import historie',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => 'Materiaal onderhoud',
     'asset_maintenance_report' => 'Materiaal onderhoud rapport',
     'asset_maintenances'       => 'Materiaal onderhoud',
@@ -128,7 +135,10 @@
     'remove_company'        => 'Verwijder bedrijfsverbinding',
     'reports'				=> 'Rapporten',
     'requested'				=> 'Aangevraagd',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Aanvraag geannuleerd',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Opslaan',
     'select'				=> 'Selecteer',
     'search'				=> 'Zoeken',
@@ -153,8 +163,11 @@
     'suppliers'  			=> 'Leveranciers',
     'total_assets'			=> 'totaal aantal materialen',
     'total_licenses'		=> 'Totale licenties',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'totaal aantal accessoires',
     'total_consumables'		=> 'totaal aantal verbruiksartikelen',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Type',
     'undeployable'			=> 'Niet-inzetbaar',
     'unknown_admin'			=> 'Onbekende Beheerder',

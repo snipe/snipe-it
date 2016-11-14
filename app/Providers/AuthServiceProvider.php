@@ -255,6 +255,8 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+<<<<<<< HEAD
+=======
         $gate->define('components.checkout', function ($user) {
             if (($user->hasAccess('components.checkout')) || ($user->hasAccess('admin'))) {
                 return true;
@@ -267,6 +269,7 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
         // Checks for some level of management
         $gate->define('components.manage', function ($user) {
             if (($user->hasAccess('components.edit')) || ($user->hasAccess('components.delete')) || ($user->hasAccess('components.checkout')) || ($user->hasAccess('admin'))) {

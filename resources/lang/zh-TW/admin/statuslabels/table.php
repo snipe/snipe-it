@@ -1,6 +1,21 @@
 <?php
 
 return array(
+<<<<<<< HEAD
+    'about'      	=> 'About Status Labels',
+    'archived'      	=> 'Archived',
+    'create'      	=> 'Create Status Label',
+    'color'      	=> 'Chart Color',
+    'deployable'      	=> 'Deployable',
+    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'name'      	=> 'Status Name',
+    'pending'      	=> 'Pending',
+    'status_type'   => 'Status Type',
+    'show_in_nav'   => 'Show in side nav',
+    'title'      	=> 'Status Labels',
+    'undeployable'  => 'Undeployable',
+    'update'      	=> 'Update Status Label',
+=======
     'about'      	=> '關於狀態標籤',
     'archived'      	=> '已封存',
     'create'      	=> '新增狀態標籤',
@@ -14,4 +29,5 @@ return array(
     'title'      	=> '狀態標籤',
     'undeployable'  => '無法部署',
     'update'      	=> '更新狀態標籤',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
 );

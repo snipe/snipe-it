@@ -94,6 +94,30 @@
                       </tr>
                     @endif
                     @if ($asset->model->manufacturer)
+<<<<<<< HEAD
+                      <tr>
+                        <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
+                        <td>
+                          <a href="{{ route('view/manufacturer', $asset->model->manufacturer->id) }}">
+                          {{ $asset->model->manufacturer->name }}
+                          </a>
+                         </td>
+                      </tr>
+                      <tr>
+                        <td>{{ trans('admin/hardware/form.model') }}</td>
+                        <td>
+                          <a href="{{ route('view/model', $asset->model->id) }}">
+                          {{ $asset->model->name }}
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>{{ trans('admin/models/table.modelnumber') }}</td>
+                        <td>
+                          {{ $asset->model->modelno }}
+                         </td>
+                      </tr>
+=======
 
                           <tr>
                             <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
@@ -128,6 +152,7 @@
                              </td>
                           </tr>
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     @endif
 
                     @if ($asset->model->fieldset)
@@ -144,7 +169,11 @@
 
                               @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
 
+<<<<<<< HEAD
+                                  @can('admin')
+=======
                                   @can('superuser')
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                                       @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                           <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
                                       @else
@@ -200,6 +229,11 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.supplier') }}</td>
                         <td>
+<<<<<<< HEAD
+                          <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+                          {{ $asset->supplier->name }}
+                          </a>
+=======
                             @can ('superuser')
                                   <a href="{{ route('view/supplier', $asset->supplier_id) }}">
                                   {{ $asset->supplier->name }}
@@ -207,6 +241,7 @@
                                 @else
                                 {{ $asset->supplier->name }}
                             @endcan
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                         </td>
                       </tr>
                     @endif
@@ -276,8 +311,11 @@
                       </tr>
                     @endif
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                     @if ($asset->expected_checkin!='')
                       <tr>
                         <td>{{ trans('admin/hardware/form.expected_checkin') }}</td>
@@ -298,6 +336,8 @@
                         </td>
                       </tr>
                     @endif
+<<<<<<< HEAD
+=======
 
                     @if ($asset->assetloc)
                         <tr>
@@ -331,6 +371,7 @@
 
 
 
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                   </tbody>
                 </table>
               </div> <!-- /table-responsive -->
@@ -564,16 +605,37 @@
                       <tr>
                         <td>{{ $log->created_at }}</td>
                         <td>
+<<<<<<< HEAD
+                            @if (isset($log->adminlog))
+                            {{ $log->adminlog->fullName() }}
+                            @else
+                            Deleted Admin
+=======
                             @if ($log->action_type != 'requested')
                                 @if (isset($log->user))
                                     {{ $log->user->fullName() }}
                                 @else
                                     Deleted Admin
                                 @endif
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                             @endif
                         </td>
                         <td>{{ $log->action_type }}</td>
                         <td>
+<<<<<<< HEAD
+                          @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
+
+                            @if ($log->userlog)
+
+                              @if ($log->userlog->deleted_at=='')
+                                <a href="{{ route('view/user', $log->checkedout_to) }}">
+                                {{ $log->userlog->fullName() }}
+                                </a>
+
+                              @else
+                                <del>{{ $log->userlog->fullName() }}</del>
+                              @endif
+=======
                           @if ($log->action_type=='uploaded')
 
                             {{ $log->filename }}
@@ -599,6 +661,7 @@
                               @else
                                 <del>{{ $log->target->showAssetName() }}</del>
                               @endif                         
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
                             @else
                               Deleted User
                             @endif

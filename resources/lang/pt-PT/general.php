@@ -41,7 +41,10 @@
     'consumables'			=> 'Consumíveis',
     'country'  				=> 'País',
     'create'				=> 'Criar Novo',
+<<<<<<< HEAD
+=======
     'created'               => 'Item Created',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'created_asset'			=> 'artigo criado',
     'created_at' 			=> 'Criado em',
     'currency'  			=> '€', // this is deprecated
@@ -77,7 +80,11 @@
     'image_delete'         	=> 'Apagar imagem',
     'image_upload'         	=> 'Carregar Imagem',
     'import'         	    => 'Importar',
+<<<<<<< HEAD
+    'import-history'        => 'Import History',
+=======
     'import-history'        => 'Histórico de Importação',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'asset_maintenance'        => 'Manutenção de Artigo',
     'asset_maintenance_report' => 'Relatório de Manutenção de Artigos',
     'asset_maintenances'       => 'Manutenções de Artigos',
@@ -108,7 +115,11 @@
     'moreinfo'				=> 'Mais informação',
     'name'					=> 'Nome',
     'next'					=> 'Próximo',
+<<<<<<< HEAD
+    'new'					=> 'new!',
+=======
     'new'					=> 'novo!',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'no_depreciation'		=> 'Sem Depreciação',
     'no_results'			=> 'Sem Resultados.',
     'no'  					=> 'Não',
@@ -128,7 +139,10 @@
     'remove_company'        => 'Remover associação de empresa',
     'reports'				=> 'Relatórios',
     'requested'				=> 'Solicitado',
+<<<<<<< HEAD
+=======
     'request_canceled'      => 'Request Canceled',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'save'  				=> 'Guardar',
     'select'				=> 'Selecione',
     'search'				=> 'Pesquisar',
@@ -145,7 +159,11 @@
     'select_asset'    		=> 'Selecionar artigo',
     'settings'				=> 'Configurações',
     'sign_in'				=> 'Iniciar sessão',
+<<<<<<< HEAD
+    'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
+=======
     'some_features_disabled' => 'MODO DE DEMONSTRAÇÃO: Algumas funcionalidades estão desativadas para esta instalação.',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'site_name'				=> 'Nome do site',
     'state'  				=> 'Distrito',
     'status_labels'			=> 'Estados',
@@ -153,8 +171,11 @@
     'suppliers'  			=> 'Fornecedores',
     'total_assets'			=> 'artigos',
     'total_licenses'		=> 'licenças',
+<<<<<<< HEAD
+=======
     'total_accessories'		=> 'total accessories',
     'total_consumables'		=> 'total consumables',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'type'  				=> 'Tipo',
     'undeployable'			=> 'Não implementável',
     'unknown_admin'			=> 'Administrador desconhecido',

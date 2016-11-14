@@ -12,8 +12,12 @@ return array(
     'edit'  					=> 'Demirbaşı Düzenle',
 	'filetype_info'				=> 'Kabul edilen dosya türleri : png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ve rar.',
     'model_deleted'  			=> 'Bu demirbaş modeli silindi. Bu demirbaşı geri getirmek için önce modeli geri getiriniz. <br/><a href="/hardware/models/:model_id/restore">Modeli geri getirmek için tıklayınız</a>.',
+<<<<<<< HEAD
+    'requestable'				=> 'Talep edilebilir',
+=======
     'requestable'               => 'Talep edilebilir',
     'requested'				    => 'Requested',
+>>>>>>> 62f5a1b2c7934f534fc8fc8299831fc32e794a72
     'restore'  					=> 'Demirbaşı Geri Getir',
     'pending'  					=> 'Bekliyor',
     'undeployable'  			=> 'Dağtılamaz',
