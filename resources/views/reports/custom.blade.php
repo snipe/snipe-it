@@ -146,6 +146,15 @@
             {{ trans('general.depreciation') }}
             </label>
         </div>
+        <div class="checkbox col-md-12">
+          <label>
+            {{ Form::checkbox('expected_checkin', '1') }}
+            {{ trans('admin/hardware/form.expected_checkin') }}
+          </label>
+        </div>
+
+
+
 
           @foreach ($customfields as $customfield)
             <div class="checkbox col-md-12">

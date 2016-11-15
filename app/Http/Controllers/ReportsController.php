@@ -573,6 +573,10 @@ class ReportsController extends Controller
             $header[] = 'Value';
             $header[] = 'Diff';
         }
+        if (e(Input::get('expected_checkin')) == '1') {
+            $header[] = trans('admin/hardware/form.expected_checkin');
+        }
+
 
         foreach ($customfields as $customfield) {
             if (e(Input::get($customfield->db_column_name())) == '1') {
@@ -700,6 +704,13 @@ class ReportsController extends Controller
                 $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
                 $row[]        = '"' . Helper::formatCurrencyOutput($depreciation) . '"';
                 $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
+            }
+            if (e(Input::get('expected_checkin')) == '1') {
+                if ($asset->expected_checkin) {
+                    $row[] = '"' .e($asset->expected_checkin). '"';
+                } else {
+                    $row[] = ''; // Empty string if blankd
+                }
             }
 
             foreach ($customfields as $customfield) {
