@@ -318,7 +318,7 @@ class LocationsController extends Controller
                 $locations = $locations->OrderParent($order);
                 break;
             default:
-                $allowed_columns = ['id','name','address','city','state','country','currency'];
+                $allowed_columns = ['id','name','address','city','state','country','currency','zip'];
 
                 $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
                 $locations = $locations->orderBy($sort, $order);
@@ -344,6 +344,7 @@ class LocationsController extends Controller
                 'address'       => ($location->address) ? e($location->address): '',
                 'city'          => e($location->city),
                 'state'         => e($location->state),
+                'zip'           => e($location->zip),
                 'country'       => e($location->country),
                 'currency'      => e($location->currency),
                 'actions'       => $actions

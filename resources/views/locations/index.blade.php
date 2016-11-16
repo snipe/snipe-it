@@ -41,6 +41,9 @@
                 <th data-searchable="true" data-sortable="true" data-field="state">
                  {{ trans('admin/locations/table.state') }}
                 </th>
+                  <th data-searchable="true" data-sortable="true" data-field="zip">
+                      {{ trans('admin/locations/table.zip') }}
+                  </th>
                 <th data-searchable="true" data-sortable="true" data-field="country">
                 {{ trans('admin/locations/table.country') }}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
