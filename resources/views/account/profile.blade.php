@@ -19,9 +19,8 @@
         <!-- First Name -->
         <div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
             <label for="first_name" class="col-md-3 control-label">{{ trans('general.first_name') }}
-            <i class='fa fa-asterisk'></i></label>
             </label>
-            <div class="col-md-5">
+            <div class="col-md-5 required">
                 <input class="form-control" type="text" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}" />
                 {!! $errors->first('first_name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
@@ -30,16 +29,16 @@
         <!-- Last Name -->
         <div class="form-group {{ $errors->has('last_name') ? ' has-error' : '' }}">
             <label for="last_name" class="col-md-3 control-label">{{ trans('general.last_name') }}
-            <i class='fa fa-asterisk'></i></label>
+
             </label>
-            <div class="col-md-5">
+            <div class="col-md-5 required">
                 <input class="form-control" type="text" name="last_name" id="last_name" value="{{ Input::old('last_name', $user->last_name) }}" />
                 {!! $errors->first('last_name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
         </div>
 
         <!-- Location -->
-            <div class="form-group {{ $errors->has('phone') ? 'error' : '' }}">
+            <div class="form-group {{ $errors->has('location_id') ? 'error' : '' }}">
                 <label class="col-md-3 control-label" for="location_id">{{ trans('general.location') }}
                 </label>
                 <div class="col-md-5">
@@ -101,6 +100,37 @@
           {!! $errors->first('avatar', '<span class="alert-msg">:message</span>') !!}
         </div>
       </div>
+
+
+      <!-- Two factor opt in -->
+         @if (\App\Models\Setting::getSettings()->two_factor_enabled=='1')
+
+            <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
+
+                <div class="col-md-7 col-md-offset-3">
+
+                    @can('self.two_factor')
+                        <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+                        @else
+                            <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),['class' => 'disabled minimal', 'disabled' => 'disabled']) }}
+                        @endcan
+
+                     {{ trans('admin/settings/general.two_factor_enabled_text') }}</label>
+                    @can('self.two_factor')
+                        <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
+                     @else
+                       <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_edit_not_allowed') }}</p>
+                     @endcan
+                    @if (config('app.lock_passwords'))
+                        <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                    @endif
+                </div>
+            </div>
+
+         @endif
+
+
+
 
       </div>
       <div class="box-footer text-right">

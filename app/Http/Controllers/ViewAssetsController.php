@@ -22,6 +22,7 @@ use Redirect;
 use Slack;
 use Validator;
 use View;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to the ability for users
@@ -294,10 +295,14 @@ class ViewAssetsController extends Controller
             //return redirect()->to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
+        if ($findlog->accepted_id!='') {
+            return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.asset_already_accepted'));
+        }
 
         $user = Auth::user();
 
-        if ($user->id != $findlog->checkedout_to) {
+
+        if ($user->id != $findlog->item->assigned_to) {
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
@@ -310,12 +315,12 @@ class ViewAssetsController extends Controller
         } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         } else {
-            return View::make('account/accept-asset', compact('item'))->with('findlog', $findlog);
+            return View::make('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item',$item);
         }
     }
 
     // Save the acceptance
-    public function postAcceptAsset($logID = null)
+    public function postAcceptAsset(Request $request, $logID = null)
     {
 
         // Check if the asset exists
@@ -331,14 +336,24 @@ class ViewAssetsController extends Controller
         }
 
         if (!Input::has('asset_acceptance')) {
-            return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.accept_or_decline'));
+            return redirect()->back()->with('error', trans('admin/users/message.error.accept_or_decline'));
         }
 
         $user = Auth::user();
 
-        if ($user->id != $findlog->checkedout_to) {
+        if ($user->id != $findlog->item->assigned_to) {
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
+
+        if ($request->has('signature_output')) {
+            $path = config('app.private_uploads').'/signatures';
+            $sig_filename = "siglog-".$findlog->id.'-'.date('Y-m-d-his').".png";
+            $data_uri = e($request->get('signature_output'));
+            $encoded_image = explode(",", $data_uri);
+            $decoded_image = base64_decode($encoded_image[1]);
+            file_put_contents($path."/".$sig_filename, $decoded_image);
+        }
+
 
         $logaction = new Actionlog();
 
@@ -353,6 +368,7 @@ class ViewAssetsController extends Controller
         }
             $logaction->item_id      = $findlog->item_id;
             $logaction->item_type    = $findlog->item_type;
+
         // Asset
         if (($findlog->item_id!='') && ($findlog->item_type==Asset::class)) {
             if (Input::get('asset_acceptance')!='accepted') {
@@ -361,19 +377,23 @@ class ViewAssetsController extends Controller
                 ->update(array('assigned_to' => null));
             }
         }
-        $logaction->target_id = $findlog->target_id;
 
+        $logaction->target_id = $findlog->target_id;
         $logaction->note = e(Input::get('note'));
-        $logaction->user_id = $user->id;
-        $logaction->accepted_at = date("Y-m-d H:i:s");
+        $logaction->updated_at = date("Y-m-d H:i:s");
+
+
+        if ($sig_filename) {
+            $logaction->accept_signature = $sig_filename;
+        }
         $log = $logaction->logaction($logaction_msg);
 
         $update_checkout = DB::table('action_logs')
         ->where('id', $findlog->id)
         ->update(array('accepted_id' => $logaction->id));
 
-            $affected_asset=$logaction->assetlog;
-            $affected_asset->accepted=$accepted;
+            $affected_asset = $logaction->item;
+            $affected_asset->accepted = $accepted;
             $affected_asset->save();
 
         if ($update_checkout) {

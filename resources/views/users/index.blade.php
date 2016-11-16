@@ -108,6 +108,9 @@
                          </th>
                          <th data-sortable="false" data-field="groups">{{ trans('general.groups') }}</th>
                          <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
+                         <th data-sortable="true" data-field="two_factor_enrolled" data-visible="false">{{ trans('admin/users/general.two_factor_enrolled') }}</th>
+                         <th data-sortable="true" data-field="two_factor_optin" data-visible="false">{{ trans('admin/users/general.two_factor_active') }}</th>
+
                          <th data-sortable="true" data-field="activated">{{ trans('general.activated') }}</th>
                          <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
                          <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>

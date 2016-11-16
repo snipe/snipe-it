@@ -101,6 +101,20 @@ class License extends Depreciable
                    ->count();
     }
 
+    // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
+    public function licenseSeatsRelation()
+    {
+        return $this->hasMany(LicenseSeat::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
+    }
+
+    public function getLicenseSeatsCountAttribute()
+    {
+        if ($this->licenseSeatsRelation->first()) {
+            return $this->licenseSeatsRelation->first()->count;
+        }
+
+        return 0;
+    }
 
     /**
     * Get total licenses not checked out
@@ -116,37 +130,47 @@ class License extends Depreciable
     /**
      * Get the number of available seats
      */
-    public function availcount()
+    public function availCount()
     {
-        return LicenseSeat::whereNull('assigned_to')
-                    ->whereNull('asset_id')
-                    ->where('license_id', '=', $this->id)
-                    ->whereNull('deleted_at')
-                    ->count();
+        return $this->licenseSeatsRelation()
+            ->whereNull('asset_id');
+    }
+
+    public function getAvailSeatsCountAttribute()
+    {
+        if ($this->availCount->first()) {
+            return $this->availCount->first()->count;
+        }
+
+        return 0;
     }
 
     /**
      * Get the number of assigned seats
      *
      */
-    public function assignedcount()
+    public function assignedCount()
     {
+        return $this->licenseSeatsRelation()->where(function ($query) {
+            $query->whereNotNull('assigned_to')
+            ->orWhereNotNull('asset_id');
+        });
+    }
 
-        return \App\Models\LicenseSeat::where('license_id', '=', $this->id)
-            ->where(function ($query) {
+    public function getAssignedSeatsCountAttribute()
+    {
+        // dd($this->licenseSeatsRelation->first());
+        if ($this->assignedCount->first()) {
+            return $this->assignedCount->first()->count;
+        }
 
-                $query->whereNotNull('assigned_to')
-                ->orWhereNotNull('asset_id');
-            })
-        ->count();
-
-
+        return 0;
     }
 
     public function remaincount()
     {
-        $total = $this->totalSeatsByLicenseID();
-        $taken =  $this->assignedcount();
+        $total = $this->licenseSeatsCount;
+        $taken =  $this->assigned_seats;
         $diff =   ($total - $taken);
         return $diff;
     }
@@ -156,7 +180,7 @@ class License extends Depreciable
      */
     public function totalcount()
     {
-        $avail =  $this->availcount();
+        $avail =  $this->availSeatsCount;
         $taken =  $this->assignedcount();
         $diff =   ($avail + $taken);
         return $diff;
@@ -210,13 +234,51 @@ class License extends Depreciable
 
         return $query->where(function ($query) use ($search) {
 
-            $query->where('name', 'LIKE', '%'.$search.'%')
-                ->orWhere('serial', 'LIKE', '%'.$search.'%')
-                ->orWhere('notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('order_number', 'LIKE', '%'.$search.'%')
-                ->orWhere('purchase_order', 'LIKE', '%'.$search.'%')
-                ->orWhere('purchase_date', 'LIKE', '%'.$search.'%')
-                ->orWhere('purchase_cost', 'LIKE', '%'.$search.'%');
+            $query->where('licenses.name', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.serial', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.notes', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.order_number', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.purchase_order', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.purchase_date', 'LIKE', '%'.$search.'%')
+                ->orWhere('licenses.purchase_cost', 'LIKE', '%'.$search.'%')
+             ->orWhereHas('manufacturer', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                    });
+                })
+            ->orWhereHas('company', function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('companies.name', 'LIKE', '%'.$search.'%');
+                });
+            });
         });
+    }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')->select('licenses.*')
+            ->orderBy('manufacturers.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on company
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderCompany($query, $order)
+    {
+        return $query->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')->select('licenses.*')
+            ->orderBy('companies.name', $order);
     }
 }

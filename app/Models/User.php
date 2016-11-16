@@ -389,6 +389,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
                     });
                 })
+                ->orWhere(function ($query) use ($search) {
+                    $query->whereHas('groups', function ($query) use ($search) {
+                        $query->where('groups.name', 'LIKE', '%'.$search.'%');
+                    });
+                })
 
                 // Ugly, ugly code because Laravel sucks at self-joins
                 ->orWhere(function ($query) use ($search) {

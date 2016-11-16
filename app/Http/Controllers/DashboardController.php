@@ -79,7 +79,7 @@ class DashboardController extends Controller
             return View::make('dashboard')->with('asset_stats', $asset_stats);
         } else {
         // Redirect to the profile page
-            return redirect()->route('view-assets');
+            return redirect()->intended('account/view-assets');
         }
     }
 }

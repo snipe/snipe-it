@@ -4,8 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Response;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -44,6 +43,10 @@ class Actionlog extends Model
     public function item()
     {
         return $this->morphTo('item')->withTrashed();
+    }
+
+    public function company() {
+        return $this->hasMany('\App\Models\Company', 'id','company_id');
     }
 
     public function itemType()
@@ -91,14 +94,13 @@ class Actionlog extends Model
     /**
        * Check if the file exists, and if it does, force a download
        **/
-    public function get_src($type = 'assets')
+    public function get_src($type = 'assets', $fieldname = 'filename')
     {
-
-        $file = config('app.private_uploads') . '/' . $type . '/' . $this->filename;
-
+        $file = config('app.private_uploads') . '/' . $type . '/' . $this->{$fieldname};
         return $file;
-
     }
+
+
 
     /**
        * Get the parent category name
@@ -130,5 +132,31 @@ class Actionlog extends Model
                  ->orderBy('item_id', 'asc')
                  ->orderBy('created_at', 'asc')
                  ->get();
+    }
+
+    /**
+     * Query builder scope to search on text for complex Bootstrap Tables API
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeTextSearch($query, $search)
+    {
+        $search = explode(' OR ', $search);
+
+        return $query->where(function ($query) use ($search) {
+
+            foreach ($search as $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->whereHas('company', function ($query) use ($search) {
+                        $query->where('companies.name', 'LIKE', '%'.$search.'%');
+                    });
+                })->orWhere('action_type', 'LIKE', '%'.$search.'%')
+                    ->orWhere('note', 'LIKE', '%'.$search.'%');
+            }
+
+        });
     }
 }

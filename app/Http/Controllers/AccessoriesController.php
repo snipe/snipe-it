@@ -530,9 +530,11 @@ class AccessoriesController extends Controller
     **/
     public function getDatatable(Request $request)
     {
-        $accessories = Company::scopeCompanyables(Accessory::select('accessories.*')->with('category', 'company'))
-        ->whereNull('accessories.deleted_at');
-
+        $accessories = Company::scopeCompanyables(
+            Accessory::select('accessories.*')
+            ->whereNull('accessories.deleted_at')
+            ->with('category', 'company', 'manufacturer', 'users', 'location')
+        );
         if (Input::has('search')) {
             $accessories = $accessories->TextSearch(e(Input::get('search')));
         }

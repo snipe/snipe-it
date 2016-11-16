@@ -311,7 +311,7 @@ class ReportsController extends Controller
         $activitylogs = Company::scopeCompanyables(Actionlog::with('item', 'user', 'target'))->orderBy('created_at', 'DESC');
 
         if (Input::has('search')) {
-            $activity = $activity->TextSearch(e(Input::get('search')));
+            $activitylogs = $activitylogs->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
@@ -356,8 +356,10 @@ class ReportsController extends Controller
               $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
-                $activity_item = '<a href="'.route('view/'. $activity->itemType(), $activity->item_id).'">'.e($activity->item->name).'</a>';
+                $activity_item = '<a href="' . route('view/' . $activity->itemType(),
+                        $activity->item_id) . '">' . e($activity->item->name) . '</a>';
                 $item_type = $activity->itemType();
+
             } else {
                 $activity_item = "unkonwn";
                 $item_type = "null";
@@ -378,6 +380,9 @@ class ReportsController extends Controller
                 } else {
                     $activity_target = '';
                 }
+            } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
+                $activity_target = '<a href="' . route('view/user', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->fullName()) . '</a>';
+
             } elseif ($activity->action_type=='requested') {
                 if ($activity->user) {
                     $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
@@ -568,6 +573,10 @@ class ReportsController extends Controller
             $header[] = 'Value';
             $header[] = 'Diff';
         }
+        if (e(Input::get('expected_checkin')) == '1') {
+            $header[] = trans('admin/hardware/form.expected_checkin');
+        }
+
 
         foreach ($customfields as $customfield) {
             if (e(Input::get($customfield->db_column_name())) == '1') {
@@ -695,6 +704,13 @@ class ReportsController extends Controller
                 $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
                 $row[]        = '"' . Helper::formatCurrencyOutput($depreciation) . '"';
                 $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
+            }
+            if (e(Input::get('expected_checkin')) == '1') {
+                if ($asset->expected_checkin) {
+                    $row[] = '"' .e($asset->expected_checkin). '"';
+                } else {
+                    $row[] = ''; // Empty string if blankd
+                }
             }
 
             foreach ($customfields as $customfield) {

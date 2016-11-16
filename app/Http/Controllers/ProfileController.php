@@ -8,6 +8,8 @@ use App\Models\Location;
 use View;
 use Auth;
 use App\Helpers\Helper;
+use App\Models\Setting;
+use Gate;
 
 /**
  * This controller handles all actions related to User Profiles for
@@ -53,6 +55,11 @@ class ProfileController extends Controller
         $user->gravatar   = e(Input::get('gravatar'));
         $user->locale = e(Input::get('locale'));
 
+
+        if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled=='1') && (!config('app.lock_passwords')))) {
+            $user->two_factor_optin = e(Input::get('two_factor_optin', '0'));
+        }
+        
         if (Input::file('avatar')) {
             $image = Input::file('avatar');
             $file_name = str_slug($user->first_name."-".$user->last_name).".".$image->getClientOriginalExtension();

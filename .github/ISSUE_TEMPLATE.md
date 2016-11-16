@@ -13,7 +13,7 @@
 #### Please confirm you have done the following before posting your bug report:
 
 - [ ] I have enabled debug mode
-- [ ] I have read [checked the Common Issues page](http://docs.snipeitapp.com/common-issues.html)
+- [ ] I have read [checked the Common Issues page](https://snipe-it.readme.io/docs/common-issues)
 
 -----
 #### Please provide answers to these questions before posting your bug report:
@@ -21,7 +21,7 @@
 - Version of Snipe-IT you're running
 - What OS and web server you're running Snipe-IT on
 - What method you used to install Snipe-IT (install.sh, manual installation, docker, etc)
-- If you're getting an error in your browser, include that error
+- WITH DEBUG TURNED ON, if you're getting an error in your browser, include that error
 - What specific Snipe-IT page you're on, and what specific element you're interacting with to trigger the error
 - If a stacktrace is provided in the error, include that too.
 - Any errors that appear in your browser's error console.

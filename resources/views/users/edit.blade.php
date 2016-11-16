@@ -318,6 +318,43 @@
             </div>
           </div>
 
+            @if (\App\Models\Setting::getSettings()->two_factor_enabled!='')
+
+                @if (\App\Models\Setting::getSettings()->two_factor_enabled=='1')
+                <div class="form-group">
+                    <div class="col-md-3 control-label">
+                        {{ Form::label('two_factor_optin', trans('admin/settings/general.two_factor')) }}
+                    </div>
+                    <div class="col-md-9">
+                        {{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+                        {{ trans('admin/settings/general.two_factor_enabled_text') }}
+
+                        <p class="help-block">{{ trans('admin/users/general.two_factor_admin_optin_help') }}</p>
+                    </div>
+                </div>
+                @endif
+
+
+
+                <!-- Reset Two Factor -->
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                            <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
+                                <span id="two_factor_reseticon">
+                              </span>
+                                <span id="two_factor_resetresult">
+                              </span>
+                                <span id="two_factor_resetstatus">
+                              </span>
+
+                        </div>
+                        <div class="col-md-8 col-md-offset-3 two_factor_resetrow">
+                            <p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                        </div>
+                    </div>
+
+            @endif
+
           <!-- Notes -->
           <div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
             <label for="notes" class="col-md-3 control-label">{{ trans('admin/users/table.notes') }}</label>
@@ -331,27 +368,40 @@
           <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
             <label class="col-md-3 control-label" for="groups"> {{ trans('general.groups') }}</label>
             <div class="col-md-5">
-              <div class="controls">
-                <select
-                  name="groups[]"
-                  id="groups[]"
-                  multiple="multiple"
-                  class="form-control"
-                  {{ ((Config::get('app.lock_passwords') || ($user->id==Auth::user()->id) || (!Auth::user()->isSuperUser())) ? ' disabled' : '') }}
-                >
 
-                @foreach ($groups as $id => $group)
-                  <option value="{{ $id }}"
-                    {{ ($userGroups->keys()->contains($id) ? ' selected="selected"' : '') }}>
-                    {{ $group }}
-                  </option>
-                @endforeach
-                </select>
+                @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
 
-                <span class="help-block">
-                  {{ trans('admin/users/table.groupnotes') }}
-                </span>
-              </div>
+                    @if (count($userGroups->keys()) > 0)
+                        <ul>
+                        @foreach ($groups as $id => $group)
+                            {!! ($userGroups->keys()->contains($id) ? '<li>'.e($group).'</li>' : '') !!}
+                        @endforeach
+                        </ul>
+                    @endif
+
+                    <span class="help-block">Only superadmins may edit group memberships.</p>
+                @else
+                    <div class="controls">
+                        <select
+                                name="groups[]"
+                                id="groups[]"
+                                multiple="multiple"
+                                class="form-control">
+
+                            @foreach ($groups as $id => $group)
+                                <option value="{{ $id }}"
+                                        {{ ($userGroups->keys()->contains($id) ? ' selected="selected"' : '') }}>
+                                    {{ $group }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <span class="help-block">
+                          {{ trans('admin/users/table.groupnotes') }}
+                        </span>
+                    </div>
+                @endif
+
             </div>
           </div>
           <!-- Email user -->
@@ -376,7 +426,7 @@
     </div><!-- /.tab-pane -->
 
     <div class="tab-pane" id="tab_2">
-        <div class="col-md-10 col-md-offset-2">
+        <div class="col-md-12">
             @if (!Auth::user()->isSuperUser())
               <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
             @endif
@@ -384,7 +434,7 @@
         <table class="table table-striped permissions">
           <thead>
             <tr class="permissions-row">
-              <th class="col-md-2"><span class="line"></span>Permission</th>
+              <th class="col-md-5"><span class="line"></span>Permission</th>
               <th class="col-md-1"><span class="line"></span>Grant</th>
               <th class="col-md-1"><span class="line"></span>Deny</th>
               <th class="col-md-1"><span class="line"></span>Inherit</th>
@@ -395,7 +445,7 @@
               <tbody class="permissions-group">
               <?php $localPermission = $permissionsArray[0] ?>
                 <tr class="header-row permissions-row">
-                  <td class="col-md-2 tooltip-base permissions-item"
+                  <td class="col-md-5 tooltip-base permissions-item"
                     data-toggle="tooltip"
                     data-placement="right"
                     title="{{ $localPermission['note'] }}"
@@ -403,22 +453,34 @@
                     <h4>{{ $area . ': ' . $localPermission['label'] }}</h4>
                   </td>
                   <td class="col-md-1 permissions-item">
-
-                      {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['value'=>"grant"]) }}
+                      @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
+                        {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['disabled'=>"disabled"]) }}
+                      @else
+                        {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['value'=>"grant"]) }}
+                       @endif
 
                     </td>
                     <td class="col-md-1 permissions-item">
-                      {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['value'=>"deny"]) }}
+                        @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
+                            {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['disabled'=>"disabled"]) }}
+                        @else
+                            {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['value'=>"deny"]) }}
+                        @endif
+
                     </td>
                     <td class="col-md-1 permissions-item">
-                      {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['value'=>"inherit"] ) }}
+                        @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
+                            {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['disabled'=>"disabled"] ) }}
+                        @else
+                            {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['value'=>"inherit"] ) }}
+                        @endif
                     </td>
                   </tr>
                 </tbody>
             @else
               <tbody class="permissions-group">
               <tr class="header-row permissions-row">
-                <td class="col-md-2 header-name">
+                <td class="col-md-5 header-name">
                   <h3>{{ $area }}</h3>
                 </td>
                 <td class="col-md-1 permissions-item">
@@ -435,7 +497,7 @@
               <tr class="permissions-row">
                 @if ($permission['display'])
                   <td
-                    class="col-md-2 tooltip-base permissions-item"
+                    class="col-md-5 tooltip-base permissions-item"
                     data-toggle="tooltip"
                     data-placement="right"
                     title="{{ $permission['note'] }}"
@@ -544,5 +606,34 @@ $(document).ready(function(){
         }
     });
 });
+
+    $("#two_factor_reset").click(function(){
+        $("#two_factor_resetrow").removeClass('success');
+        $("#two_factor_resetrow").removeClass('danger');
+        $("#two_factor_resetstatus").html('');
+        $("#two_factor_reseticon").html('<i class="fa fa-spinner spin"></i>');
+        $.ajax({
+            url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
+            type: 'POST',
+            data: {},
+            dataType: 'json',
+
+            success: function (data) {
+                $("#two_factor_reseticon").html('');
+                $("#two_factor_resetstatus").html('<i class="fa fa-check text-success"></i>' + data.message);
+            },
+
+            error: function (data) {
+                $("#two_factor_reseticon").html('');
+                $("#two_factor_reseticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                $('#two_factor_resetstatus').text(data.message);
+            }
+
+
+        });
+    });
+
+
+
 </script>
 @stop

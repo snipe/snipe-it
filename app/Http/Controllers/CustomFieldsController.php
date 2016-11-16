@@ -11,6 +11,7 @@ use App\Models\AssetModel;
 use Lang;
 use Auth;
 use Illuminate\Http\Request;
+use Log;
 
 /**
  * This controller handles all actions related to Custom Asset Fields for
@@ -210,21 +211,15 @@ class CustomFieldsController extends Controller
     */
     public function show($id)
     {
-        //$id=$parameters[0];
-        $cfset=CustomFieldset::find($id);
+        $cfset = CustomFieldset::with('fields')->where('id','=',$id)->orderBy('id','ASC')->first();
+        $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::lists("name", "id")->toArray();
 
-        //print_r($parameters);
-        //
-        $custom_fields_list=["" => "Add New Field to Fieldset"] + CustomField::lists("name", "id")->toArray();
-        // print_r($custom_fields_list);
-        $maxid=0;
-        foreach ($cfset->fields as $field) {
-            // print "Looking for: ".$field->id;
+        $maxid = 0;
+        foreach ($cfset->fields() as $field) {
             if ($field->pivot->order > $maxid) {
                 $maxid=$field->pivot->order;
             }
             if (isset($custom_fields_list[$field->id])) {
-                // print "Found ".$field->id.", so removing it.<br>";
                 unset($custom_fields_list[$field->id]);
             }
         }
@@ -274,14 +269,14 @@ class CustomFieldsController extends Controller
     public function destroy($id)
     {
         //
-        $fieldset=CustomFieldset::find($id);
+        $fieldset = CustomFieldset::find($id);
 
         $models = AssetModel::where("fieldset_id", "=", $id);
-        if ($models->count()==0) {
+        if ($models->count() == 0) {
             $fieldset->delete();
             return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.fieldset.delete.success'));
         } else {
-            return redirect()->route("admin.custom_fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use')); //->with("models",$models);
+            return redirect()->route("admin.custom_fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use'));
         }
     }
 
@@ -294,18 +289,23 @@ class CustomFieldsController extends Controller
      * @since [v3.0]
      * @return Array
      */
-    public function postReorder($id)
+    public function postReorder(Request $request, $id)
     {
-        $fieldset=CustomFieldset::find($id);
+        $fieldset = CustomFieldset::find($id);
         $fields = array();
+        $order_array = array();
 
-        $items = Input::get('item');
-        foreach ($fieldset->fields as $field) {
-            $value = array_shift($items);
-            $fields[$field->id] = ['required' => $field->pivot->required, 'order' => $value];
+        $items = $request->input('item');
+
+        foreach ($items as $order => $field_id) {
+            $order_array[$field_id] = $order;
         }
-        return $fieldset->fields()->sync($fields);
 
+        foreach ($fieldset->fields as $field) {
+            $fields[$field->id] = ['required' => $field->pivot->required, 'order' => $order_array[$field->id]];
+        }
+
+        return $fieldset->fields()->sync($fields);
 
     }
 }

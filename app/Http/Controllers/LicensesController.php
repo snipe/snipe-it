@@ -742,6 +742,7 @@ class LicensesController extends Controller
     {
 
         $license = License::find($licenseId);
+        $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
 
         if (isset($license->id)) {
 
@@ -947,17 +948,28 @@ class LicensesController extends Controller
     */
     public function getDatatable()
     {
-        $licenses = Company::scopeCompanyables(License::with('company'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'licenseSeatsRelation', 'manufacturer'));
 
         if (Input::has('search')) {
             $licenses = $licenses->TextSearch(Input::get('search'));
         }
 
-        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial'];
+        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','manufacturer','company'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
-        $licenses = $licenses->orderBy($sort, $order);
+        switch ($sort) {
+            case 'manufacturer':
+                $licenses = $licenses->OrderManufacturer($order);
+                break;
+            case 'company':
+                $licenses = $licenses->OrderCompany($order);
+                break;
+            default:
+                $licenses = $licenses->orderBy($sort, $order);
+                break;
+        }
+
 
         $licenseCount = $licenses->count();
         $licenses = $licenses->skip(Input::get('offset'))->take(Input::get('limit'))->get();
@@ -991,7 +1003,7 @@ class LicensesController extends Controller
                 'id'                => $license->id,
                 'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
                 'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
-                'totalSeats'        => $license->totalSeatsByLicenseID(),
+                'totalSeats'        => $license->licenseSeatsCount,
                 'remaining'         => $license->remaincount(),
                 'license_name'      => e($license->license_name),
                 'license_email'     => e($license->license_email),
@@ -1002,7 +1014,7 @@ class LicensesController extends Controller
                 'order_number'     => ($license->order_number) ? e($license->order_number) : '',
                 'notes'     => ($license->notes) ? e($license->notes) : '',
                 'actions'           => $actions,
-                'companyName'       => is_null($license->company) ? '' : e($license->company->name),
+                'company'       => is_null($license->company) ? '' : e($license->company->name),
                 'manufacturer'      => $license->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
             );
         }

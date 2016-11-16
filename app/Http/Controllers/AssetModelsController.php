@@ -416,7 +416,7 @@ class AssetModelsController extends Controller
 
     public function getDatatable($status = null)
     {
-        $models = AssetModel::with('category', 'assets', 'depreciation');
+        $models = AssetModel::with('category', 'assets', 'depreciation', 'manufacturer');
 
         switch ($status) {
             case 'Deleted':
@@ -491,7 +491,7 @@ class AssetModelsController extends Controller
     */
     public function getDataView($modelID)
     {
-        $assets = Asset::where('model_id', '=', $modelID)->with('company');
+        $assets = Asset::where('model_id', '=', $modelID)->with('company', 'assetstatus');
 
         if (Input::has('search')) {
             $assets = $assets->TextSearch(e(Input::get('search')));

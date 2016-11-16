@@ -47,6 +47,21 @@ class Supplier extends Model
     protected $fillable = ['name'];
 
 
+    // Eager load counts.
+    // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
+    public function assetsRelation()
+    {
+        return $this->hasMany(Asset::class)->whereNull('deleted_at')->selectRaw('supplier_id, count(*) as count')->groupBy('supplier_id');
+    }
+
+    public function getLicenseSeatsCountAttribute()
+    {
+        if ($this->licenseSeatsRelation->first()) {
+            return $this->licenseSeatsRelation->first()->count;
+        }
+
+        return 0;
+    }
     public function assets()
     {
         return $this->hasMany('\App\Models\Asset', 'supplier_id');
@@ -59,7 +74,11 @@ class Supplier extends Model
 
     public function num_assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'supplier_id')->count();
+        if ($this->assetsRelation->first()) {
+            return $this->assetsRelation->first()->count;
+        }
+
+        return 0;
     }
 
     public function licenses()
@@ -69,7 +88,7 @@ class Supplier extends Model
 
     public function num_licenses()
     {
-        return $this->hasMany('\App\Models\License', 'supplier_id')->count();
+        return $this->licenses()->count();
     }
 
     public function addhttp($url)

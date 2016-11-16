@@ -71,6 +71,24 @@
                   </div>
                 </div>
 
+                <!-- Two Factor -->
+                <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('two_factor_enabled', trans('admin/settings/general.two_factor_enabled_text')) }}
+                  </div>
+                  <div class="col-md-9">
+
+                    {!! Form::two_factor_options('two_factor_enabled', Input::old('two_factor_enabled', $setting->two_factor_enabled), 'select2') !!}
+                    <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
+
+                    @if (config('app.lock_passwords'))
+                    <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                    @endif
+
+                    {!! $errors->first('two_factor_enabled', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
                 <!-- Languages -->
                 <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
                   <div class="col-md-3">
@@ -94,6 +112,21 @@
                     {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
                     {!! $errors->first('full_multiple_companies_support', '<span class="alert-msg">:message</span>') !!}
                     <p class="help-block">{{ trans('admin/settings/general.full_multiple_companies_support_help_text') }}</p>
+                  </div>
+                </div>
+                <!-- /.form-group -->
+
+                <!-- Require signature for acceptance -->
+                <div class="form-group {{ $errors->has('require_accept_signature') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('full_multiple_companies_support',
+                                   trans('admin/settings/general.require_accept_signature')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {{ Form::checkbox('require_accept_signature', '1', Input::old('require_accept_signature', $setting->require_accept_signature),array('class' => 'minimal')) }}
+                    {{ trans('general.yes') }}
+                    {!! $errors->first('require_accept_signature', '<span class="alert-msg">:message</span>') !!}
+                    <p class="help-block">{{ trans('admin/settings/general.require_accept_signature_help_text') }}</p>
                   </div>
                 </div>
                 <!-- /.form-group -->
