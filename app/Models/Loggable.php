@@ -63,9 +63,11 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckin($note)
+    public function logCheckin($target, $note)
     {
         $log = new Actionlog;
+        $log->target_type = get_class($target);
+        $log->target_id = $target->id;
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
             $log->item_id = $this->license_id;

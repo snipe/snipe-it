@@ -217,7 +217,8 @@ class Asset extends Depreciable
         $logaction->item_type = Asset::class;
         $logaction->item_id = $this->id;
         $logaction->target_type = User::class;
-        $logaction->target_id = $this->assigned_to;
+        // On Checkin, this is the user that previously had the asset.
+        $logaction->target_id = $user->id;
         $logaction->note = $note;
         $logaction->user_id = $admin->id;
         if ($checkout_at!='') {
@@ -232,7 +233,6 @@ class Asset extends Depreciable
             }
         } else {
             // Update the asset data to null, since it's being checked in
-            $logaction->target_id = '';
             $logaction->location_id = null;
         }
         $logaction->user()->associate($admin);

@@ -170,7 +170,7 @@ class License extends Depreciable
     public function remaincount()
     {
         $total = $this->licenseSeatsCount;
-        $taken =  $this->assigned_seats;
+        $taken =  $this->assigned_seats_count;
         $diff =   ($total - $taken);
         return $diff;
     }

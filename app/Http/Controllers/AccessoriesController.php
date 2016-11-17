@@ -427,8 +427,8 @@ class AccessoriesController extends Controller
             return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
-        $logaction = $accessory->logCheckin(e(Input::get('note')));
         $return_to = e($accessory_user->assigned_to);
+        $logaction = $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
         $admin_user = Auth::user();
 
 

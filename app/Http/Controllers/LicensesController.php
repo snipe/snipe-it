@@ -670,8 +670,10 @@ class LicensesController extends Controller
             // Ooops.. something went wrong
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        $return_to = $licenseseat->assigned_to;
-
+        $return_to = User::find($licenseseat->assigned_to);
+        if (!$return_to) {
+            $return_to = Asset::find($licenseseat->asset_id);
+        }
         // Update the asset data
         $licenseseat->assigned_to                   = null;
         $licenseseat->asset_id                      = null;
@@ -680,7 +682,7 @@ class LicensesController extends Controller
 
         // Was the asset updated?
         if ($licenseseat->save()) {
-            $licenseseat->logCheckin(e(Input::get('note')));
+            $licenseseat->logCheckin($return_to, e(Input::get('note')));
 
             $settings = Setting::getSettings();
 
@@ -720,7 +722,7 @@ class LicensesController extends Controller
 
 
             if ($backto=='user') {
-                return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/licenses/message.checkin.success'));
+                return redirect()->to("admin/users/".$return_to->id.'/view')->with('success', trans('admin/licenses/message.checkin.success'));
             } else {
                 return redirect()->to("admin/licenses/".$licenseseat->license_id."/view")->with('success', trans('admin/licenses/message.checkin.success'));
             }
