@@ -13,27 +13,27 @@ class IncreasePurchaseCostSize extends Migration
     public function up()
     {
         Schema::table('assets', function ($table) {
-            $table->string('purchase_cost',  20, 2)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
         });
 
         Schema::table('accessories', function ($table) {
-            $table->string('purchase_cost',  20, 2)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
         });
 
         Schema::table('asset_maintenances', function ($table) {
-            $table->string('cost',  20, 2)->nullable()->default(null)->change();
+            $table->decimal('cost',  20, 2)->nullable()->default(null)->change();
         });
 
         Schema::table('components', function ($table) {
-            $table->string('purchase_cost',  20, 2)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
         });
 
         Schema::table('consumables', function ($table) {
-            $table->string('purchase_cost',  20, 2)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
         });
 
         Schema::table('licenses', function ($table) {
-            $table->string('purchase_cost',  20, 2)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
         });
 
     }
@@ -46,27 +46,27 @@ class IncreasePurchaseCostSize extends Migration
     public function down()
     {
         Schema::table('assets', function ($table) {
-            $table->string('purchase_cost',  8, 2)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  8, 2)->nullable()->default(null)->change();
         });
 
         Schema::table('accessories', function ($table) {
-            $table->string('purchase_cost',  13, 4)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  13, 4)->nullable()->default(null)->change();
         });
 
         Schema::table('asset_maintenances', function ($table) {
-            $table->string('cost',  10, 2)->nullable()->default(null)->change();
+            $table->decimal('cost',  10, 2)->nullable()->default(null)->change();
         });
 
         Schema::table('components', function ($table) {
-            $table->string('purchase_cost',  13, 4)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  13, 4)->nullable()->default(null)->change();
         });
 
         Schema::table('consumables', function ($table) {
-            $table->string('purchase_cost',  13, 4)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  13, 4)->nullable()->default(null)->change();
         });
 
         Schema::table('licenses', function ($table) {
-            $table->string('purchase_cost',  8, 2)->nullable()->default(null)->change();
+            $table->decimal('purchase_cost',  8, 2)->nullable()->default(null)->change();
         });
     }
 }
