@@ -87,11 +87,11 @@ class StatuslabelsController extends Controller
     public function getCreate()
     {
         // Show the page
-        $statuslabel = new Statuslabel;
-        $use_statuslabel_type = $statuslabel->getStatuslabelType();
+        $item = new Statuslabel;
+        $use_statuslabel_type = $item->getStatuslabelType();
         $statuslabel_types = Helper::statusTypeList();
 
-        return View::make('statuslabels/edit', compact('statuslabel_types', 'statuslabel'))->with('use_statuslabel_type', $use_statuslabel_type);
+        return View::make('statuslabels/edit', compact('statuslabel_types', 'item'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
 
 
@@ -169,16 +169,16 @@ class StatuslabelsController extends Controller
     public function getEdit($statuslabelId = null)
     {
         // Check if the Statuslabel exists
-        if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
+        if (is_null($item = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
-        $use_statuslabel_type = $statuslabel->getStatuslabelType();
+        $use_statuslabel_type = $item->getStatuslabelType();
 
         $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
 
-        return View::make('statuslabels/edit', compact('statuslabel', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
+        return View::make('statuslabels/edit', compact('item', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
 
 

@@ -7,7 +7,7 @@
       @section('title')
       @show
 
-      :: {{ \App\Models\Setting::getSettings()->site_name }}
+      :: {{ $snipeSettings->site_name }}
     </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -35,26 +35,26 @@
     <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
     <style>
-    @if (\App\Models\Setting::getSettings()->header_color)
+    @if ($snipeSettings->header_color)
     .main-header .navbar, .main-header .logo {
-    background-color: {{ \App\Models\Setting::getSettings()->header_color }};
-    background: -webkit-linear-gradient(top,  {{ \App\Models\Setting::getSettings()->header_color }} 0%,{{ \App\Models\Setting::getSettings()->header_color }} 100%);
-    background: linear-gradient(to bottom, {{ \App\Models\Setting::getSettings()->header_color }} 0%,{{ \App\Models\Setting::getSettings()->header_color }} 100%);
-    border-color: {{ \App\Models\Setting::getSettings()->header_color }};
+    background-color: {{ $snipeSettings->header_color }};
+    background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+    background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+    border-color: {{ $snipeSettings->header_color }};
     }
     .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
-      border-left-color: {{ \App\Models\Setting::getSettings()->header_color }};
+      border-left-color: {{ $snipeSettings->header_color }};
     }
 
     .btn-primary {
-      background-color: {{ \App\Models\Setting::getSettings()->header_color }};
-      border-color: {{ \App\Models\Setting::getSettings()->header_color }};
+      background-color: {{ $snipeSettings->header_color }};
+      border-color: {{ $snipeSettings->header_color }};
     }
 
     @endif
 
-    @if (\App\Models\Setting::getSettings()->custom_css)
-        {{ \App\Models\Setting::getSettings()->show_custom_css() }}
+    @if ($snipeSettings->custom_css)
+        {{ $snipeSettings->show_custom_css() }}
     @endif
     @media (max-width: 400px) {
       .navbar-left {
@@ -70,7 +70,7 @@
     <script>
           window.snipeit = {
               settings: {
-                  "per_page": {{ \App\Models\Setting::getSettings()->per_page }}
+                  "per_page": {{ $snipeSettings->per_page }}
               }
           };
       </script>
@@ -79,7 +79,7 @@
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
 
-      @if (\App\Models\Setting::getSettings()->load_remote=='1')
+      @if ($snipeSettings->load_remote=='1')
 
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -106,18 +106,18 @@
           </a>
           <ul class="nav navbar-nav navbar-left">
               <li class="left-navblock">
-                 @if (\App\Models\Setting::getSettings()->brand == '3')
+                 @if ($snipeSettings->brand == '3')
                       <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
-                          {{ \App\Models\Setting::getSettings()->site_name }}
+                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}">
+                          {{ $snipeSettings->site_name }}
                       </a>
-                  @elseif (\App\Models\Setting::getSettings()->brand == '2')
+                  @elseif ($snipeSettings->brand == '2')
                       <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
+                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}">
                       </a>
                   @else
                       <a class="logo no-hover" href="{{ config('app.url') }}">
-                          {{ \App\Models\Setting::getSettings()->site_name }}
+                          {{ $snipeSettings->site_name }}
                       </a>
                   @endif
               </li>

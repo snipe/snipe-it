@@ -59,7 +59,7 @@ class ConsumablesController extends Controller
         $manufacturer_list = Helper::manufacturerList();
 
         return View::make('consumables/edit')
-            ->with('consumable', new Consumable)
+            ->with('item', new Consumable)
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
             ->with('location_list', $location_list)
@@ -85,7 +85,7 @@ class ConsumablesController extends Controller
         $consumable->order_number           = e(Input::get('order_number'));
         $consumable->min_amt                = e(Input::get('min_amt'));
         $consumable->manufacturer_id         = e(Input::get('manufacturer_id'));
-        $consumable->model_no               = e(Input::get('model_no'));
+        $consumable->model_number               = e(Input::get('model_number'));
         $consumable->item_no         = e(Input::get('item_no'));
 
         if (e(Input::get('purchase_date')) == '') {
@@ -127,10 +127,10 @@ class ConsumablesController extends Controller
     public function getEdit($consumableId = null)
     {
         // Check if the consumable exists
-        if (is_null($consumable = Consumable::find($consumableId))) {
+        if (is_null($item = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/consumables')->with('error', trans('admin/consumables/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
+        } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
         }
 
@@ -139,7 +139,7 @@ class ConsumablesController extends Controller
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
 
-        return View::make('consumables/edit', compact('consumable'))
+        return View::make('consumables/edit', compact('item'))
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
             ->with('location_list', $location_list)
@@ -171,7 +171,7 @@ class ConsumablesController extends Controller
         $consumable->order_number           = e(Input::get('order_number'));
         $consumable->min_amt                   = e(Input::get('min_amt'));
         $consumable->manufacturer_id         = e(Input::get('manufacturer_id'));
-        $consumable->model_no               = e(Input::get('model_no'));
+        $consumable->model_number               = e(Input::get('model_number'));
         $consumable->item_no         = e(Input::get('item_no'));
 
         if (e(Input::get('purchase_date')) == '') {
@@ -412,7 +412,7 @@ class ConsumablesController extends Controller
             $limit = 50;
         }
 
-        $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','companyName','category','model_no', 'item_no', 'manufacturer'];
+        $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','companyName','category','model_number', 'item_no', 'manufacturer'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -466,7 +466,7 @@ class ConsumablesController extends Controller
                 'min_amt'           => e($consumable->min_amt),
                 'qty'           => e($consumable->qty),
                 'manufacturer'  => ($consumable->manufacturer) ? (string) link_to('/admin/settings/manufacturers/'.$consumable->manufacturer_id.'/view', $consumable->manufacturer->name): '',
-                'model_no'      => e($consumable->model_no),
+                'model_number'      => e($consumable->model_number),
                 'item_no'       => e($consumable->item_no),
                 'category'      => ($consumable->category) ? (string) link_to('/admin/settings/categories/'.$consumable->category_id.'/view', $consumable->category->name) : 'Missing category',
                 'order_number'  => e($consumable->order_number),

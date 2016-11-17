@@ -53,7 +53,7 @@ class CategoriesController extends Controller
     {
         // Show the page
          $category_types= Helper::categoryTypeList();
-        return View::make('categories/edit')->with('category', new Category)
+        return View::make('categories/edit')->with('item', new Category)
         ->with('category_types', $category_types);
     }
 
@@ -109,7 +109,7 @@ class CategoriesController extends Controller
     public function getEdit($categoryId = null)
     {
         // Check if the category exists
-        if (is_null($category = Category::find($categoryId))) {
+        if (is_null($item = Category::find($categoryId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.does_not_exist'));
         }
@@ -120,7 +120,7 @@ class CategoriesController extends Controller
         $category_options = array('' => 'Top Level') + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
         $category_types= Helper::categoryTypeList();
 
-        return View::make('categories/edit', compact('category'))
+        return View::make('categories/edit', compact('item'))
         ->with('category_options', $category_options)
         ->with('category_types', $category_types);
     }

@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\ConsumableAssignment;
 use App\Models\Location;
 use App\Models\Loggable;
+use App\Models\SnipeModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +18,7 @@ use Watson\Validating\ValidatingTrait;
  *
  * @version    v1.0
  */
-class Component extends Model
+class Component extends SnipeModel
 {
     use CompanyableTrait;
     use Loggable;
@@ -32,7 +33,7 @@ class Component extends Model
     */
     public $rules = array(
         'name'        => 'required|min:3|max:255',
-        'total_qty'     => 'required|integer|min:1',
+        'qty'     => 'required|integer|min:1',
         'category_id' => 'required|integer',
         'company_id'  => 'integer',
         'purchase_date'  => 'date',
@@ -100,7 +101,7 @@ class Component extends Model
         }
 
 
-        $total = $this->total_qty;
+        $total = $this->qty;
         $remaining = $total - $checkedout;
         return $remaining;
     }
@@ -141,7 +142,7 @@ class Component extends Model
                         });
                     })->orWhere('components.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.order_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('components.serial_number', 'LIKE', '%'.$search.'%')
+                            ->orWhere('components.serial', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.purchase_cost', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.purchase_date', 'LIKE', '%'.$search.'%');
             }

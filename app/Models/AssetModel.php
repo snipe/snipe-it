@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Requestable;
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -12,7 +13,7 @@ use Watson\Validating\ValidatingTrait;
  *
  * @version    v1.0
  */
-class AssetModel extends Model
+class AssetModel extends SnipeModel
 {
     use SoftDeletes;
     use Requestable;
@@ -22,7 +23,7 @@ class AssetModel extends Model
     // Declare the rules for the model validation
     protected $rules = array(
         'name'          => 'required|min:1|max:255',
-        'modelno'           => 'min:1|max:255',
+        'model_number'      => 'min:1|max:255',
         'category_id'       => 'required|integer',
         'manufacturer_id'   => 'required|integer',
         'eol'   => 'integer:min:0|max:240',
@@ -92,8 +93,8 @@ class AssetModel extends Model
     public function displayModelName()
     {
         $name = $this->manufacturer->name.' '.$this->name;
-        if ($this->modelno) {
-            $name .=" / ".$this->modelno;
+        if ($this->model_number) {
+            $name .=" / ".$this->model_number;
         }
         return $name;
     }
@@ -161,7 +162,7 @@ class AssetModel extends Model
     {
 
         return $query->where('name', 'LIKE', "%$search%")
-            ->orWhere('modelno', 'LIKE', "%$search%")
+            ->orWhere('model_number', 'LIKE', "%$search%")
             ->orWhere(function ($query) use ($search) {
                 $query->whereHas('depreciation', function ($query) use ($search) {
                     $query->where('name', 'LIKE', '%'.$search.'%');

@@ -6,6 +6,15 @@
 
 class_name: FunctionalTester
 modules:
-    enabled:
-        - Laravel5
+    enabled: 
+        # add framework module here
         - \Helper\Functional
+        - Laravel5:
+            environment_file: .env.tests
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=snipeittests'
+            user: 'snipeit'
+            password: 'snipe'
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: false

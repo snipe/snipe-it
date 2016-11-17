@@ -51,10 +51,10 @@
             <td>{{ $license->expiration_date }}</td>
             <td>{{ $license->purchase_date }}</td>
             <td class="text-right">
-            {{ \App\Models\Setting::getSettings()->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}</td>
+            {{ $snipeSettings->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}</td>
             <td>{{ ($license->depreciation) ? e($license->depreciation->name).' ('.$license->depreciation->months.' '.trans('general.months').')' : ''  }}</td>
-            <td class="text-right">{{ \App\Models\Setting::getSettings()->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput($license->getDepreciatedValue()) }}</td>
-            <td class="text-right">-{{ \App\Models\Setting::getSettings()->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput(($license->purchase_cost - $license->getDepreciatedValue())) }}</td>
+            <td class="text-right">{{ $snipeSettings->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput($license->getDepreciatedValue()) }}</td>
+            <td class="text-right">-{{ $snipeSettings->default_currency }}{{ \App\Helpers\Helper::formatCurrencyOutput(($license->purchase_cost - $license->getDepreciatedValue())) }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -79,7 +79,7 @@
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
+        pageSize: {{ $snipeSettings->per_page }},
         pagination: true,
         sidePagination: 'client',
         sortable: true,

@@ -298,6 +298,17 @@
                   </div>
                 </div>
 
+                <!-- Per Page -->
+                <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('per_page', trans('admin/settings/general.per_page')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {{ Form::text('per_page', Input::old('per_page', $setting->per_page), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                    {!! $errors->first('per_page', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
 
               </div>
             </div>

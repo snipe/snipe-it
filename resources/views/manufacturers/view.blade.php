@@ -45,7 +45,7 @@
           <div class="tab-pane fade in active" id="assets">
             <table
               name="manufacturer_assets"
-              class="table table-striped bootstrap-table"
+              class="table table-striped bootstrap-table snipe-table"
               id="assets-table"
               data-url="{{ route('api.manufacturers.view', ['manufacturerId' => $manufacturer->id, 'itemtype' => 'assets']) }}"
               data-cookie="true"
@@ -73,7 +73,7 @@
           <div class="tab-pane fade" id="licenses">
             <table
               name="manufacturer_licenses"
-              class="table table-striped bootstrap-table"
+              class="table table-striped bootstrap-table snipe-table"
               id="licenses-table"
               data-url="{{ route('api.manufacturers.view', ['manufacturerId' => $manufacturer->id, 'itemtype' => 'licenses']) }}"
               data-cookie="true"
@@ -105,7 +105,7 @@
           <div class="tab-pane fade" id="accessories">
             <table
               name="manufacturer_licenses"
-              class="table table-striped bootstrap-table"
+              class="table table-striped bootstrap-table snipe-table"
               id="licenses-table"
               data-url="{{ route('api.manufacturers.view', ['manufacturerId' => $manufacturer->id, 'itemtype' => 'accessories']) }}"
               data-cookie="true"
@@ -133,7 +133,7 @@
           <div class="tab-pane fade" id="consumables">
             <table
               name="manufacturer_licenses"
-              class="table table-striped bootstrap-table"
+              class="table table-striped bootstrap-table snipe-table"
               id="licenses-table"
               data-url="{{ route('api.manufacturers.view', ['manufacturerId' => $manufacturer->id, 'itemtype' => 'consumables']) }}"
               data-cookie="true"
@@ -151,7 +151,7 @@
                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining"> {{ trans('admin/consumables/general.remaining') }}</th>
                   <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="min_amt"> {{ trans('general.min_amt') }}</th>
                   <th data-sortable="true" data-field="manufacturer" data-visible="false">{{ trans('general.manufacturer') }}</th>
-                  <th data-sortable="true" data-field="model_no" data-visible="false">{{ trans('general.model_no') }}</th>
+                  <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('general.model_no') }}</th>
                   <th data-sortable="true" data-field="item_no" data-visible="false">{{ trans('admin/consumables/general.item_no') }}</th>
                   <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('admin/consumables/general.order') }}</th>
                   <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('admin/consumables/general.date') }}</th>
@@ -165,48 +165,9 @@
       </div>  <!-- /.nav-tabs-custom -->
     </div><!-- /. col-md-12 -->
   </div> <!-- /.row -->
+@stop
 
-
-  @section('moar_scripts')
-    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
-    <script type="text/javascript">
-        $('.bootstrap-table').bootstrapTable({
-            classes: 'table table-responsive table-no-bordered',
-            undefinedText: '',
-            iconsPrefix: 'fa',
-            showRefresh: true,
-            //search: true,
-            pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
-            pagination: true,
-            sidePagination: 'server',
-            sortable: true,
-            cookie: true,
-            mobileResponsive: true,
-            showExport: true,
-            showColumns: true,
-            exportDataType: 'all',
-            exportTypes: ['csv', 'txt','json', 'xml'],
-            maintainSelected: true,
-            paginationFirstText: "{{ trans('general.first') }}",
-            paginationLastText: "{{ trans('general.last') }}",
-            paginationPreText: "{{ trans('general.previous') }}",
-            paginationNextText: "{{ trans('general.next') }}",
-            pageList: ['10','25','50','100','150','200'],
-            icons: {
-                paginationSwitchDown: 'fa-caret-square-o-down',
-                paginationSwitchUp: 'fa-caret-square-o-up',
-                columns: 'fa-columns',
-                refresh: 'fa-refresh'
-            },
-
-        });
-    </script>
-  @stop
-
+@section('moar_scripts')
+@include ('partials.bootstrap-table', ['exportFile' => 'manufacturer' . $manufacturer->name . '-export', 'search' => false])
 
 @stop

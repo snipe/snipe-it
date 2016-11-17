@@ -1,17 +1,18 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Watson\Validating\ValidatingTrait;
+use App\Models\SnipeModel;
 use Auth;
 use DB;
+use Illuminate\Database\Eloquent\Model;
+use Watson\Validating\ValidatingTrait;
 
 /**
  * Model for Companies.
  *
  * @version    v1.8
  */
-final class Company extends Model
+final class Company extends SnipeModel
 {
     protected $table = 'companies';
 

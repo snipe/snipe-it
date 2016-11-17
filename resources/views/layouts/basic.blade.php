@@ -34,21 +34,21 @@
     <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
 
-    @if (\App\Models\Setting::getSettings()->header_color)
+    @if ($snipeSettings->header_color)
         <style>
         .main-header .navbar, .main-header .logo {
-        background-color: {{ \App\Models\Setting::getSettings()->header_color }};
-        background: -webkit-linear-gradient(top,  {{ \App\Models\Setting::getSettings()->header_color }} 0%,{{ \App\Models\Setting::getSettings()->header_color }} 100%);
-        background: linear-gradient(to bottom, {{ \App\Models\Setting::getSettings()->header_color }} 0%,{{ \App\Models\Setting::getSettings()->header_color }} 100%);
-        border-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        background-color: {{ $snipeSettings->header_color }};
+        background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+        background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+        border-color: {{ $snipeSettings->header_color }};
         }
         .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
-        border-left-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        border-left-color: {{ $snipeSettings->header_color }};
         }
 
         .btn-primary {
-        background-color: {{ \App\Models\Setting::getSettings()->header_color }};
-        border-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        background-color: {{ $snipeSettings->header_color }};
+        border-color: {{ $snipeSettings->header_color }};
         }
         </style>
 
@@ -58,8 +58,8 @@
 
 <body class="hold-transition login-page">
 
-    @if (\App\Models\Setting::getSettings()->logo!='')
-    <center><img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}"></center>
+    @if ($snipeSettings->logo!='')
+    <center><img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}"></center>
     @endif
   <!-- Content -->
   @yield('content')

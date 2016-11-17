@@ -400,6 +400,11 @@ class Asset extends Depreciable
         }
     }
 
+    public function getDisplayNameAttribute()
+    {
+        return $this->showAssetName();
+    }
+
     public function warrantee_expires()
     {
         $date = date_create($this->purchase_date);
@@ -788,7 +793,7 @@ public function checkin_email()
                         $query->where(function ($query) use ($search) {
                             $query->where('categories.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('models.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('models.modelno', 'LIKE', '%'.$search.'%');
+                            ->orWhere('models.model_number', 'LIKE', '%'.$search.'%');
                         });
                     });
                 })->orWhereHas('model', function ($query) use ($search) {
@@ -856,7 +861,7 @@ public function checkin_email()
     */
     public function scopeOrderModelNumber($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.modelno', $order);
+        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.model_number', $order);
     }
 
 

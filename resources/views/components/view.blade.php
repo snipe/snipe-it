@@ -49,7 +49,7 @@
 
             <table
             name="component_users"
-            class="table table-striped"
+            class="table table-striped snipe-table"
             id="table"
             data-url="{{route('api.components.view', $component->id)}}"
             data-cookie="true"
@@ -75,9 +75,9 @@
   <!-- side address column -->
   <div class="col-md-3">
 
-      @if ($component->serial_number!='')
+      @if ($component->serial!='')
           <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.serial') }}: </strong>
-              {{ $component->serial_number }} </div>
+              {{ $component->serial }} </div>
       @endif
 
     @if ($component->purchase_date)
@@ -87,7 +87,7 @@
 
     @if ($component->purchase_cost)
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/components/general.cost') }}:</strong>
-        {{ \App\Models\Setting::first()->default_currency }}
+        {{ $snipeSettings->default_currency }}
 
         {{ \App\Helpers\Helper::formatCurrencyOutput($component->purchase_cost) }} </div>
     @endif
@@ -100,45 +100,8 @@
   </div>
 </div>
 
-@section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
-<script type="text/javascript">
-    $('#table').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
-        undefinedText: '',
-        iconsPrefix: 'fa',
-        showRefresh: true,
-        search: false,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
-        pagination: true,
-        sidePagination: 'server',
-        sortable: true,
-        cookie: true,
-        mobileResponsive: true,
-        showExport: true,
-        exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
-        maintainSelected: true,
-        paginationFirstText: "{{ trans('general.first') }}",
-        paginationLastText: "{{ trans('general.last') }}",
-        paginationPreText: "{{ trans('general.previous') }}",
-        paginationNextText: "{{ trans('general.next') }}",
-        pageList: ['10','25','50','100','150','200'],
-        icons: {
-            paginationSwitchDown: 'fa-caret-square-o-down',
-            paginationSwitchUp: 'fa-caret-square-o-up',
-            columns: 'fa-columns',
-            refresh: 'fa-refresh'
-        },
-
-    });
-</script>
-
 @stop
 
+@section('moar_scripts')
+@include ('partials.bootstrap-table', ['exportFile' => 'component' . $component->name . '-export', 'search' => false])
 @stop

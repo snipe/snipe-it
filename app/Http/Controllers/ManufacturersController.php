@@ -46,7 +46,7 @@ class ManufacturersController extends Controller
     */
     public function getCreate()
     {
-        return View::make('manufacturers/edit')->with('manufacturer', new Manufacturer);
+        return View::make('manufacturers/edit')->with('item', new Manufacturer);
     }
 
 
@@ -84,13 +84,13 @@ class ManufacturersController extends Controller
     public function getEdit($manufacturerId = null)
     {
         // Check if the manufacturer exists
-        if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
+        if (is_null($item = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturer  page
             return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
         // Show the page
-        return View::make('manufacturers/edit', compact('manufacturer'));
+        return View::make('manufacturers/edit', compact('item'));
     }
 
 
@@ -521,7 +521,7 @@ class ManufacturersController extends Controller
                 'min_amt'       => e($consumable->min_amt),
                 'qty'           => e($consumable->qty),
                 'manufacturer'  => ($consumable->manufacturer) ? (string) link_to('/admin/settings/manufacturers/'.$consumable->manufacturer_id.'/view', $consumable->manufacturer->name): '',
-                'model_no'      => e($consumable->model_no),
+                'model_number'  => e($consumable->model_number),
                 'item_no'       => e($consumable->item_no),
                 'category'      => ($consumable->category) ? (string) link_to('/admin/settings/categories/'.$consumable->category_id.'/view', $consumable->category->name) : 'Missing category',
                 'order_number'  => e($consumable->order_number),

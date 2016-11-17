@@ -62,7 +62,7 @@
                         @endif
                         <td>{{ $assetMaintenanceTime }}</td>
                         <td>
-                          {{ \App\Models\Setting::first()->default_currency }}
+                          {{ $snipeSettings->default_currency }}
                           {{ number_format($assetMaintenance->cost,2) }}
                         </td>
                     </tr>
@@ -77,7 +77,7 @@
                         <td colspan="6" align="right"><strong>Totals:</strong></td>
                         <td>{{number_format($totalDays)}}</td>
                         <td>
-                          {{ \App\Models\Setting::first()->default_currency }}
+                          {{ $snipeSettings->default_currency }}
                           {{ number_format($totalCost,2) }}
                         </td>
                     </tr>
@@ -104,7 +104,7 @@
       iconsPrefix: 'fa',
       showRefresh: true,
       search: true,
-      pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
+      pageSize: {{ $snipeSettings->per_page }},
       pagination: true,
       sidePagination: 'client',
       sortable: true,

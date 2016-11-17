@@ -13,6 +13,7 @@ $I->see('Users');
 $I->seeInPageSource('admin/users/create');
 $I->dontSee('Users', '.page-header');
 $I->see('Users', 'h1.pull-left');
+$I->seeLink('Create New'); // matches <a href="/logout">Logout</a>
 
 
 /* Create form */

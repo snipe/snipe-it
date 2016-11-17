@@ -5,7 +5,7 @@ $I->am('logged in user');
 $I->wantTo('ensure that the manufacturers listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/admin/settings/manufacturers');
-$I->seeNumberOfElements('tr', [1,10]);
+$I->seeNumberOfElements('table[name="manufacturers"] tr', [5,30]);
 $I->see('Manufacturers');
 $I->seeInTitle('Manufacturers');
 $I->seeInPageSource('admin/settings/manufacturers/create');

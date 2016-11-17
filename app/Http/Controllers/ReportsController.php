@@ -152,7 +152,7 @@ class ReportsController extends Controller
                         $asset->asset_tag,
                         ($asset->model->manufacturer) ? $asset->model->manufacturer->name : '',
                         ($asset->model) ? $asset->model->name : '',
-                        ($asset->model->modelno) ? $asset->model->modelno : '',
+                        ($asset->model->model_number) ? $asset->model->model_number : '',
                         ($asset->name) ? $asset->name : '',
                         ($asset->serial) ? $asset->serial : '',
                         ($asset->assetstatus) ? e($asset->assetstatus->name) : '',
@@ -610,7 +610,7 @@ class ReportsController extends Controller
             }
             if (e(Input::get('model')) == '1') {
                 $row[] = '"' . e($asset->model->name) . '"';
-                $row[] = '"' . e($asset->model->modelno) . '"';
+                $row[] = '"' . e($asset->model->model_number) . '"';
             }
             if (e(Input::get('category')) == '1') {
                 $row[] = '"' .e($asset->model->category->name) . '"';

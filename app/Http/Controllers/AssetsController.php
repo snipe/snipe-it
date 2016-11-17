@@ -124,7 +124,7 @@ class AssetsController extends Controller
         $view->with('statuslabel_list', $statuslabel_list);
         $view->with('assigned_to', $assigned_to);
         $view->with('location_list', $location_list);
-        $view->with('asset', new Asset);
+        $view->with('item', new Asset);
         $view->with('manufacturer', $manufacturer_list);
         $view->with('category', $category_list);
         $view->with('statuslabel_types', $statuslabel_types);
@@ -290,10 +290,10 @@ class AssetsController extends Controller
     {
 
         // Check if the asset exists
-        if (!$asset = Asset::find($assetId)) {
+        if (!$item = Asset::find($assetId)) {
             // Redirect to the asset management page
             return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
+        } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
@@ -308,7 +308,7 @@ class AssetsController extends Controller
         $assigned_to = Helper::usersList();
         $statuslabel_types =Helper::statusTypeList();
 
-        return View::make('hardware/edit', compact('asset'))
+        return View::make('hardware/edit', compact('item'))
         ->with('model_list', $model_list)
         ->with('supplier_list', $supplier_list)
         ->with('company_list', $company_list)
@@ -1038,7 +1038,7 @@ class AssetsController extends Controller
         ->with('statuslabel_list', $statuslabel_list)
         ->with('statuslabel_types', $statuslabel_types)
         ->with('assigned_to', $assigned_to)
-        ->with('asset', $asset)
+        ->with('item', $asset)
         ->with('location_list', $location_list)
         ->with('manufacturer', $manufacturer_list)
         ->with('category', $category_list)
@@ -1798,7 +1798,7 @@ class AssetsController extends Controller
             'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
             'serial'        => e($asset->serial),
             'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
-            'model_number'  => ($asset->model && $asset->model->modelno) ? (string)$asset->model->modelno : '',
+            'model_number'  => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
             'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
             'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),

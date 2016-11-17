@@ -38,7 +38,7 @@ final class CompaniesController extends Controller
     */
     public function getCreate()
     {
-        return View::make('companies/edit')->with('company', new Company);
+        return View::make('companies/edit')->with('item', new Company);
     }
 
     /**
@@ -74,11 +74,11 @@ final class CompaniesController extends Controller
     */
     public function getEdit($companyId)
     {
-        if (is_null($company = Company::find($companyId))) {
+        if (is_null($item = Company::find($companyId))) {
             return redirect()->to('admin/settings/companies')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
-            return View::make('companies/edit')->with('company', $company);
+            return View::make('companies/edit')->with('item', $item);
         }
     }
 

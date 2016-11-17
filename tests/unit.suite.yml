@@ -6,4 +6,4 @@ modules:
     enabled:
         - \Helper\Unit
         - Laravel5:
-            environment_file: .env
+            environment_file: .env.tests

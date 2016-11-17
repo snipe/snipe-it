@@ -1,12 +1,13 @@
 <?php
 namespace App\Models;
 
+use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
-use App\Http\Traits\UniqueUndeletedTrait;
 
-class Supplier extends Model
+class Supplier extends SnipeModel
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
@@ -14,14 +15,14 @@ class Supplier extends Model
 
     protected $rules = array(
         'name'              => 'required|min:3|max:255|unique_undeleted',
-        'address'           => 'min:3|max:255',
-        'address2'          => 'min:2|max:255',
+        'address'           => 'min:3|max:50',
+        'address2'          => 'min:2|max:50',
         'city'              => 'min:3|max:255',
-        'state'             => 'min:0|max:32',
+        'state'             => 'min:0|max:2',
         'country'           => 'min:0|max:2',
         'fax'               => 'min:7|max:20',
         'phone'             => 'min:7|max:20',
-        'contact'           => 'min:0|max:255',
+        'contact'           => 'min:0|max:100',
         'notes'             => 'min:0|max:255',
         'email'             => 'email|min:5|max:150',
         'zip'               => 'min:0|max:10',

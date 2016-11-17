@@ -80,7 +80,7 @@
             <a href="{{ route('view/model', $asset->model->id) }}">
             {{ $asset->model->name }}
             </a>
-             / {{ $asset->model->modelno }}</div>
+             / {{ $asset->model->model_number }}</div>
         @endif
 
         @if ($asset->purchase_date)
@@ -90,7 +90,7 @@
 
         @if ($asset->purchase_cost)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.cost') }}:</strong>
-            {{ \App\Models\Setting::first()->default_currency }}
+            {{ $snipeSettings->default_currency }}
             {{ number_format($asset->purchase_cost,2) }} </div>
         @endif
 

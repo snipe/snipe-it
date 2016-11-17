@@ -62,7 +62,7 @@ class AssetModelsController extends Controller
         ->with('category_list', $category_list)
         ->with('depreciation_list', $depreciation_list)
         ->with('manufacturer_list', $manufacturer_list)
-        ->with('model', new AssetModel);
+        ->with('item', new AssetModel);
     }
 
 
@@ -94,10 +94,10 @@ class AssetModelsController extends Controller
 
         // Save the model data
         $model->name                = e(Input::get('name'));
-        $model->modelno             = e(Input::get('modelno'));
+        $model->model_number             = e(Input::get('model_number'));
         $model->manufacturer_id     = e(Input::get('manufacturer_id'));
         $model->category_id         = e(Input::get('category_id'));
-        $model->note                = e(Input::get('note'));
+        $model->notes               = e(Input::get('notes'));
         $model->user_id             = Auth::user()->id;
         $model->requestable         = Input::has('requestable');
 
@@ -146,7 +146,7 @@ class AssetModelsController extends Controller
         $model->name=e(Input::get('name'));
         $model->manufacturer_id = e(Input::get('manufacturer_id'));
         $model->category_id = e(Input::get('category_id'));
-        $model->modelno = e(Input::get('modelno'));
+        $model->model_number = e(Input::get('model_number'));
         $model->user_id = Auth::user()->id;
         $model->note            = e(Input::get('note'));
         $model->eol= null;
@@ -176,7 +176,7 @@ class AssetModelsController extends Controller
     public function getEdit($modelId = null)
     {
         // Check if the model exists
-        if (is_null($model = AssetModel::find($modelId))) {
+        if (is_null($item = AssetModel::find($modelId))) {
             // Redirect to the model management page
             return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
@@ -184,7 +184,8 @@ class AssetModelsController extends Controller
         $depreciation_list = Helper::depreciationList();
         $manufacturer_list = Helper::manufacturerList();
         $category_list = Helper::categoryList('asset');
-        $view = View::make('models/edit', compact('model'));
+
+        $view = View::make('models/edit', compact('item'));
         $view->with('category_list', $category_list);
         $view->with('depreciation_list', $depreciation_list);
         $view->with('manufacturer_list', $manufacturer_list);
@@ -221,13 +222,12 @@ class AssetModelsController extends Controller
         } else {
             $model->eol = e(Input::get('eol'));
         }
-
         // Update the model data
         $model->name                = e(Input::get('name'));
-        $model->modelno             = e(Input::get('modelno'));
+        $model->model_number        = e(Input::get('model_number'));
         $model->manufacturer_id     = e(Input::get('manufacturer_id'));
         $model->category_id         = e(Input::get('category_id'));
-        $model->note                = e(Input::get('note'));
+        $model->notes               = e(Input::get('notes'));
 
         $model->requestable = Input::has('requestable');
 
@@ -442,7 +442,7 @@ class AssetModelsController extends Controller
         }
 
 
-        $allowed_columns = ['id','name','modelno'];
+        $allowed_columns = ['id','name','model_number'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
@@ -465,7 +465,7 @@ class AssetModelsController extends Controller
                 'manufacturer'      => (string)link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => (string)link_to('/hardware/models/'.$model->id.'/view', $model->name),
                 'image' => ($model->image!='') ? '<img src="'.config('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
-                'modelnumber'       => $model->modelno,
+                'modelnumber'       => $model->model_number,
                 'numassets'         => $model->assets->count(),
                 'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
                 'category'          => ($model->category) ? $model->category->name : '',

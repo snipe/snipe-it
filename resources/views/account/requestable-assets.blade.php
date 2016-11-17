@@ -35,8 +35,8 @@
                             <thead>
                                 <tr role="row">
                                     <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
-                                    @if (\App\Models\Setting::getSettings()->display_asset_name)
-                                        <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/form.name') }}</th>
+                                    @if ($snipeSettings->display_asset_name)
+                                    <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/form.name') }}</th>
                                     @endif
                                     <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.serial') }}</th>
                                     <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.location') }}</th>
@@ -53,20 +53,18 @@
                                         {{ csrf_field() }}
                                         <td>{{ $asset->model->name }}</td>
 
-                                        @if (\App\Models\Setting::getSettings()->display_asset_name)
-                                            <td>{{ $asset->name }}</td>
+                                        @if ($snipeSettings->display_asset_name)
+                                        <td>{{ $asset->name }}</td>
                                         @endif
 
                                         <td>{{ $asset->serial }}</td>
 
                                         <td>
                                             @if ($asset->assigneduser && $asset->assetloc)
-                                                    {{ $asset->assetloc->name }}
+                                            {{ $asset->assetloc->name }}
                                             @elseif ($asset->defaultLoc)
-                                                    {{ $asset->defaultLoc->name }}
-
+                                            {{ $asset->defaultLoc->name }}
                                             @endif
-
                                         </td>
                                          @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
                                             <td>Checked out</td>

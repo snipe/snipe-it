@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Loggable;
+use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -11,7 +12,7 @@ use Watson\Validating\ValidatingTrait;
  *
  * @version    v1.0
  */
-class Accessory extends Model
+class Accessory extends SnipeModel
 {
     use CompanyableTrait;
     use Loggable;

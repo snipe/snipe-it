@@ -318,9 +318,9 @@
             </div>
           </div>
 
-            @if (\App\Models\Setting::getSettings()->two_factor_enabled!='')
+            @if ($snipeSettings->two_factor_enabled!='')
 
-                @if (\App\Models\Setting::getSettings()->two_factor_enabled=='1')
+                @if ($snipeSettings->two_factor_enabled=='1')
                 <div class="form-group">
                     <div class="col-md-3 control-label">
                         {{ Form::label('two_factor_optin', trans('admin/settings/general.two_factor')) }}

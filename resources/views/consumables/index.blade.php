@@ -23,7 +23,7 @@
         <div class="box-body">
           <table
           name="consumables"
-          class="table table-striped"
+          class="table table-striped snipe-table"
           id="table"
           data-url="{{route('api.consumables.list') }}"
           data-cookie="true"
@@ -40,11 +40,11 @@
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining"> {{ trans('admin/consumables/general.remaining') }}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="min_amt"> {{ trans('general.min_amt') }}</th>
                 <th data-sortable="true" data-field="manufacturer" data-visible="false">{{ trans('general.manufacturer') }}</th>
-                <th data-sortable="true" data-field="model_no" data-visible="false">{{ trans('general.model_no') }}</th>
+                <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('general.model_no') }}</th>
                 <th data-sortable="true" data-field="item_no" data-visible="false">{{ trans('admin/consumables/general.item_no') }}</th>
-                <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('admin/consumables/general.order') }}</th>
-                <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('admin/consumables/general.date') }}</th>
-                <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('admin/consumables/general.cost') }}</th>
+                <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('general.order_number') }}</th>
+                <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('general.purchase_date') }}</th>
+                <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('general.purchase_cost') }}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"> {{ trans('table.actions') }}</th>
 
               </tr>
@@ -58,48 +58,8 @@
 
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
-<script type="text/javascript">
-    $('#table').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
-        undefinedText: '',
-        iconsPrefix: 'fa',
-        showRefresh: true,
-        search: true,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
-        pagination: true,
-        sidePagination: 'server',
-        sortable: true,
-        cookie: true,
-        cookieExpire: '2y',
-        mobileResponsive: true,
-        showExport: true,
-        showColumns: true,
-        exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
-        exportOptions: {
-            fileName: 'consumables-export-' + (new Date()).toISOString().slice(0,10),
-        },
-        maintainSelected: true,
-        paginationFirstText: "{{ trans('general.first') }}",
-        paginationLastText: "{{ trans('general.last') }}",
-        paginationPreText: "{{ trans('general.previous') }}",
-        paginationNextText: "{{ trans('general.next') }}",
-        pageList: ['10','25','50','100','150','200'],
-        icons: {
-            paginationSwitchDown: 'fa-caret-square-o-down',
-            paginationSwitchUp: 'fa-caret-square-o-up',
-            columns: 'fa-columns',
-            refresh: 'fa-refresh'
-        },
+@include ('partials.bootstrap-table', ['exportFile' => 'consumables-export', 'search' => true])
 
-    });
-</script>
 
 @stop
 

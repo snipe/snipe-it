@@ -140,7 +140,7 @@
                           <tr>
                             <td>{{ trans('admin/models/table.modelnumber') }}</td>
                             <td>
-                              {{ $asset->model->modelno }}
+                              {{ $asset->model->model_number }}
                              </td>
                           </tr>
 
@@ -201,7 +201,7 @@
                           @elseif (($asset->id) && ($asset->assetloc))
                             {{ $asset->assetloc->currency }}
                           @else
-                            {{ \App\Models\Setting::first()->default_currency }}
+                            {{ $snipeSettings->default_currency }}
                           @endif
                           {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
@@ -360,7 +360,7 @@
                 <img src="{{ config('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 
-              @if  (App\Models\Setting::getSettings()->qr_code=='1')
+              @if  ($snipeSettings->qr_code=='1')
                  <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
@@ -572,7 +572,7 @@
                       <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
                       <th class="col-md-2"><span class="line"></span>{{ trans('general.user') }}</th>
                       <th class="col-md-3"><span class="line"></span>{{ trans('general.notes') }}</th>
-                      @if  (App\Models\Setting::getSettings()->require_accept_signature=='1')
+                      @if  ($snipeSettings->require_accept_signature=='1')
                       <th class="col-md-3"><span class="line"></span>{{ trans('general.signature') }}</th>
                       @endif
                   </tr>
@@ -626,7 +626,7 @@
                           @if ($log->note) {{ $log->note }}
                           @endif
                         </td>
-                          @if  (App\Models\Setting::getSettings()->require_accept_signature=='1')
+                          @if  ($snipeSettings->require_accept_signature=='1')
                           <td>
                               @if (($log->accept_signature!='') && (($log->action_type=='accepted') || ($log->action_type=='declined')))
                                   <a href="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" class="img-responsive"></a>

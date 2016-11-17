@@ -45,7 +45,7 @@ class SuppliersController extends Controller
      */
     public function getCreate()
     {
-        return View::make('suppliers/edit')->with('supplier', new Supplier);
+        return View::make('suppliers/edit')->with('item', new Supplier);
     }
 
 
@@ -125,13 +125,13 @@ class SuppliersController extends Controller
     public function getEdit($supplierId = null)
     {
         // Check if the supplier exists
-        if (is_null($supplier = Supplier::find($supplierId))) {
+        if (is_null($item = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
             return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
         }
 
         // Show the page
-        return View::make('suppliers/edit', compact('supplier'));
+        return View::make('suppliers/edit', compact('item'));
     }
 
 

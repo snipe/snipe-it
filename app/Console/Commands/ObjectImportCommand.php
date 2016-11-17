@@ -100,7 +100,7 @@ class ObjectImportCommand extends Command
         $this->locations = Location::All(['name', 'id']);
         $this->categories = Category::All(['name', 'category_type', 'id']);
         $this->manufacturers = Manufacturer::All(['name', 'id']);
-        $this->asset_models = AssetModel::All(['name','modelno','category_id','manufacturer_id', 'id']);
+        $this->asset_models = AssetModel::All(['name','model_number','category_id','manufacturer_id', 'id']);
         $this->companies = Company::All(['name', 'id']);
         $this->status_labels = Statuslabel::All(['name', 'id']);
         $this->suppliers = Supplier::All(['name', 'id']);
@@ -348,7 +348,7 @@ class ObjectImportCommand extends Command
         $editingModel = false;
         foreach ($this->asset_models as $tempmodel) {
             if (strcasecmp($tempmodel->name, $asset_model_name) == 0
-                && $tempmodel->modelno == $asset_modelno) {
+                && $tempmodel->model_number == $asset_modelno) {
                 $this->log('A matching model ' . $asset_model_name . ' already exists');
                 if (!$this->option('update')) {
                     return $tempmodel;
@@ -366,7 +366,7 @@ class ObjectImportCommand extends Command
             $asset_model->name = $asset_model_name;
         }
         isset($manufacturer) && $manufacturer->exists && $asset_model->manufacturer_id = $manufacturer->id;
-        isset($asset_modelno) && $asset_model->modelno = $asset_modelno;
+        isset($asset_modelno) && $asset_model->model_number = $asset_modelno;
         if (isset($category) && $category->exists) {
             $asset_model->category_id = $category->id;
         }

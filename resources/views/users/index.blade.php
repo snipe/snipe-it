@@ -16,7 +16,7 @@
 
 @section('header_right')
     @can('users.create')
-        @if (\App\Models\Setting::getSettings()->ldap_enabled == 1)
+        @if ($snipeSettings->ldap_enabled == 1)
           <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
         @endif
           <a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> {{ trans('general.import') }}</a>
@@ -64,7 +64,7 @@
              <table
               name="users"
               data-toolbar="#toolbar"
-              class="table table-striped"
+              class="table table-striped snipe-table"
               id="table"
               data-toggle="table"
               data-url="{{ route('api.users.list', array(''=>e(Input::get('status')))) }}"
@@ -134,53 +134,11 @@
 
   </div>
 </div>
-
+@stop
 
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
-<script type="text/javascript">
-    $('#table').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
-        undefinedText: '',
-        iconsPrefix: 'fa',
-        showRefresh: true,
-        search: true,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
-        pagination: true,
-        sidePagination: 'server',
-        sortable: true,
-        cookie: true,
-        cookieExpire: '2y',
-        mobileResponsive: true,
-        showExport: true,
-        showColumns: true,
-        exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
-        exportOptions: {
-            fileName: 'users-export-' + (new Date()).toISOString().slice(0,10),
-        },
-        maintainSelected: true,
-        paginationFirstText: "{{ trans('general.first') }}",
-        paginationLastText: "{{ trans('general.last') }}",
-        paginationPreText: "{{ trans('general.previous') }}",
-        paginationNextText: "{{ trans('general.next') }}",
-        pageList: ['10','25','50','100','150','200'],
-        icons: {
-            paginationSwitchDown: 'fa-caret-square-o-down',
-            paginationSwitchUp: 'fa-caret-square-o-up',
-            columns: 'fa-columns',
-            refresh: 'fa-refresh'
-        },
-
-    });
-</script>
-
+@include ('partials.bootstrap-table', ['exportFile' => 'users-export', 'search' => true])
 
 <script>
 
@@ -209,6 +167,4 @@
 
 
 </script>
-@stop
-
 @stop

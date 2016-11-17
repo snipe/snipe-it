@@ -434,8 +434,8 @@ class Helper
         foreach ($consumables as $consumable) {
             $avail = $consumable->numRemaining();
             if ($avail < ($consumable->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-                if ($consumable->total_qty > 0) {
-                    $percent = number_format((($consumable->numRemaining() / $consumable->total_qty) * 100), 0);
+                if ($consumable->qty > 0) {
+                    $percent = number_format((($consumable->numRemaining() / $consumable->qty) * 100), 0);
                 } else {
                     $percent = 100;
                 }
@@ -456,8 +456,8 @@ class Helper
             $avail = $accessory->numRemaining();
             if ($avail < ($accessory->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
 
-                if ($accessory->total_qty > 0) {
-                    $percent = number_format((($accessory->numRemaining() / $accessory->total_qty) * 100), 0);
+                if ($accessory->qty > 0) {
+                    $percent = number_format((($accessory->numRemaining() / $accessory->qty) * 100), 0);
                 } else {
                     $percent = 100;
                 }
@@ -476,8 +476,8 @@ class Helper
         foreach ($components as $component) {
             $avail = $component->numRemaining();
             if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-                if ($component->total_qty > 0) {
-                    $percent = number_format((($component->numRemaining() / $component->total_qty) * 100), 0);
+                if ($component->qty > 0) {
+                    $percent = number_format((($component->numRemaining() / $component->qty) * 100), 0);
                 } else {
                     $percent = 100;
                 }

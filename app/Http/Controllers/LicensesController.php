@@ -70,7 +70,7 @@ class LicensesController extends Controller
             ->with('maintained_list', $maintained_list)
             ->with('company_list', Helper::companyList())
             ->with('manufacturer_list', Helper::manufacturerList())
-            ->with('license', new License);
+            ->with('item', new License);
 
     }
 
@@ -139,6 +139,7 @@ class LicensesController extends Controller
         $license->depreciation_id   = e(Input::get('depreciation_id'));
         $license->company_id        = Company::getIdForCurrentUser(Input::get('company_id'));
         $license->expiration_date   = e(Input::get('expiration_date'));
+        $license->termination_date  = e(Input::get('termination_date'));
         $license->user_id           = Auth::user()->id;
 
         if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
@@ -190,26 +191,26 @@ class LicensesController extends Controller
     public function getEdit($licenseId = null)
     {
         // Check if the license exists
-        if (is_null($license = License::find($licenseId))) {
+        if (is_null($item = License::find($licenseId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($license)) {
+        } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
         }
 
-        if ($license->purchase_date == "0000-00-00") {
-            $license->purchase_date = null;
+        if ($item->purchase_date == "0000-00-00") {
+            $item->purchase_date = null;
         }
 
-        if ($license->purchase_cost == "0.00") {
-            $license->purchase_cost = null;
+        if ($item->purchase_cost == "0.00") {
+            $item->purchase_cost = null;
         }
 
         // Show the page
         $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->pluck('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
 
-        return View::make('licenses/edit', compact('license'))
+        return View::make('licenses/edit', compact('item'))
             ->with('license_options', $license_options)
             ->with('depreciation_list', Helper::depreciationList())
             ->with('supplier_list', Helper::suppliersList())
@@ -786,7 +787,7 @@ class LicensesController extends Controller
         ->with('license_options', $license_options)
         ->with('depreciation_list', $depreciation_list)
         ->with('supplier_list', $supplier_list)
-        ->with('license', $license)
+        ->with('item', $license)
         ->with('maintained_list', $maintained_list)
         ->with('company_list', $company_list)
         ->with('manufacturer_list', Helper::manufacturerList());

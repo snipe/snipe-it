@@ -35,7 +35,7 @@ $factory->defineAs(App\Models\AssetModel::class, 'assetmodel', function (Faker\G
     'name' => $faker->catchPhrase,
     'manufacturer_id' => $faker->numberBetween(1,10),
     'category_id' => $faker->numberBetween(1,9),
-    'modelno' => $faker->numberBetween(1000000,50000000),
+    'model_number' => $faker->numberBetween(1000000,50000000),
     'eol' => 1,
   ];
 });
@@ -95,7 +95,7 @@ $factory->defineAs(App\Models\Component::class, 'component', function (Faker\Gen
   return [
     'name' => $faker->text(20),
     'category_id' => $faker->numberBetween(21,25),
-    'total_qty' => $faker->numberBetween(3, 10),
+    'qty' => $faker->numberBetween(3, 10),
     'min_amt' => $faker->numberBetween($min = 1, $max = 2),
     'company_id' => \App\Models\Company::inRandomOrder()->first()->id
   ];
@@ -332,7 +332,7 @@ $factory->defineAs(App\Models\Actionlog::class, 'consumable-checkout', function 
 });
 
 $factory->defineAs(App\Models\Actionlog::class, 'component-checkout', function (Faker\Generator $faker) {
-   $company = \App\Models\Company::has('users')->has('components')->inRandomOrder()->first();    
+   $company = \App\Models\Company::has('users')->has('components')->inRandomOrder()->first();
 
   return [
     'user_id'      	=> $company->users()->inRandomOrder()->first()->id,

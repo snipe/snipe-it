@@ -36,7 +36,7 @@
 
             <table
             name="consumable_users"
-            class="table table-striped"
+            class="table table-striped snipe-table"
             id="table"
             data-url="{{route('api.consumables.view', $consumable->id)}}"
             data-cookie="true"
@@ -64,13 +64,13 @@
 
       
     @if ($consumable->purchase_date)
-        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.date') }}: </strong>
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.purchase_date') }}: </strong>
         {{ $consumable->purchase_date }} </div>
     @endif
 
     @if ($consumable->purchase_cost)
-        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.cost') }}:</strong>
-        {{ \App\Models\Setting::first()->default_currency }}
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.purchase_cost') }}:</strong>
+        {{ $snipeSettings->default_currency }}
 
         {{ \App\Helpers\Helper::formatCurrencyOutput($consumable->purchase_cost) }} </div>
     @endif
@@ -80,9 +80,9 @@
             {{ $consumable->item_no }} </div>
     @endif
 
-    @if ($consumable->model_no)
+    @if ($consumable->model_number)
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.model_no') }}:</strong>
-            {{ $consumable->model_no }} </div>
+            {{ $consumable->model_number }} </div>
     @endif
 
     @if ($consumable->manufacturer)
@@ -91,53 +91,14 @@
     @endif
 
     @if ($consumable->order_number)
-        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.order') }}:</strong>
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.order_number') }}:</strong>
         {{ $consumable->order_number }} </div>
     @endif
   </div>
 </div>
 
-
-
-@section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
-<script type="text/javascript">
-    $('#table').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
-        undefinedText: '',
-        iconsPrefix: 'fa',
-        showRefresh: true,
-        search: false,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
-        pagination: true,
-        sidePagination: 'server',
-        sortable: true,
-        cookie: true,
-        mobileResponsive: true,
-        showExport: true,
-        exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
-        maintainSelected: true,
-        paginationFirstText: "{{ trans('general.first') }}",
-        paginationLastText: "{{ trans('general.last') }}",
-        paginationPreText: "{{ trans('general.previous') }}",
-        paginationNextText: "{{ trans('general.next') }}",
-        pageList: ['10','25','50','100','150','200'],
-        icons: {
-            paginationSwitchDown: 'fa-caret-square-o-down',
-            paginationSwitchUp: 'fa-caret-square-o-up',
-            columns: 'fa-columns',
-            refresh: 'fa-refresh'
-        },
-
-    });
-</script>
-
 @stop
 
+@section('moar_scripts')
+@include ('partials.bootstrap-table', ['exportFile' => 'consumable' . $consumable->name . '-export', 'search' => false])
 @stop

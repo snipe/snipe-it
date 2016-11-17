@@ -61,7 +61,7 @@ class ComponentsController extends Controller
         $location_list = Helper::locationsList();
 
         return View::make('components/edit')
-            ->with('component', new Component)
+            ->with('item', new Component)
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
             ->with('location_list', $location_list);
@@ -89,7 +89,7 @@ class ComponentsController extends Controller
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $component->order_number           = e(Input::get('order_number'));
         $component->min_amt                = e(Input::get('min_amt'));
-        $component->serial_number             = e(Input::get('serial_number'));
+        $component->serial                 = e(Input::get('serial'));
 
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -103,7 +103,7 @@ class ComponentsController extends Controller
             $component->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
-        $component->total_qty                    = e(Input::get('total_qty'));
+        $component->qty                    = e(Input::get('qty'));
         $component->user_id                = Auth::user()->id;
 
         // Was the component created?
@@ -130,10 +130,10 @@ class ComponentsController extends Controller
     public function getEdit($componentId = null)
     {
         // Check if the component exists
-        if (is_null($component = Component::find($componentId))) {
+        if (is_null($item = Component::find($componentId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($component)) {
+        } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
@@ -141,7 +141,7 @@ class ComponentsController extends Controller
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
 
-        return View::make('components/edit', compact('component'))
+        return View::make('components/edit', compact('item'))
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
             ->with('location_list', $location_list);
@@ -174,8 +174,8 @@ class ComponentsController extends Controller
         $component->location_id            = e(Input::get('location_id'));
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $component->order_number           = e(Input::get('order_number'));
-        $component->min_amt             = e(Input::get('min_amt'));
-        $component->serial_number             = e(Input::get('serial_number'));
+        $component->min_amt                = e(Input::get('min_amt'));
+        $component->serial                 = e(Input::get('serial'));
 
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -189,7 +189,7 @@ class ComponentsController extends Controller
             $component->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
 
-        $component->total_qty                    = e(Input::get('total_qty'));
+        $component->qty                    = e(Input::get('qty'));
 
         // Was the component created?
         if ($component->save()) {
@@ -424,7 +424,7 @@ class ComponentsController extends Controller
             $limit = 50;
         }
 
-        $allowed_columns = ['id','name','min_amt','order_number','serial_number','purchase_date','purchase_cost','companyName','category','total_qty'];
+        $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','companyName','category','total_qty'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -472,9 +472,9 @@ class ComponentsController extends Controller
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="component['.$component->id.']" class="one_required"></div>',
                 'id'            => $component->id,
                 'name'          => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
-                'serial_number'          => $component->serial_number,
+                'serial_number'          => $component->serial,
                 'location'   => ($component->location) ? e($component->location->name) : '',
-                'total_qty'           => e($component->total_qty),
+                'qty'           => e($component->qty),
                 'min_amt'           => e($component->min_amt),
                 'category'           => ($component->category) ? e($component->category->name) : 'Missing category',
                 'order_number'  => e($component->order_number),
