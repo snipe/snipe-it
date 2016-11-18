@@ -5,6 +5,10 @@
 
  {{ $accessory->name }}
  {{ trans('general.accessory') }}
+ @if ($accessory->model_number!='')
+     ({{ $accessory->model_number }})
+ @endif
+
 @parent
 @stop
 

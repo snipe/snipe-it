@@ -98,6 +98,19 @@
           </div>
         </div>
 
+        <!-- Model NUmber -->
+        <div class="form-group{{ $errors->has('model_number') ? ' has-error' : '' }}">
+            <div class="col-md-3">
+                {{ Form::label('name', trans('admin/models/table.modelnumber')) }}
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" type="text" name="model_number" id="model_number" value="{{ Input::old('model_number', $accessory->model_number) }}" />
+                {!! $errors->first('model_number', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            </div>
+        </div>
+
+
+
         <!--  Location -->
         <div class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}">
            <div class="col-md-3">

@@ -15,7 +15,7 @@ class IncreasePurchaseCostSize extends Migration
         $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
         $platform->registerDoctrineTypeMapping('enum', 'string');
 
-        
+
         Schema::table('assets', function ($table) {
             $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
         });
