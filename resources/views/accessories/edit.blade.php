@@ -14,6 +14,7 @@
 @include ('partials.forms.edit.category')
 @include ('partials.forms.edit.manufacturer')
 @include ('partials.forms.edit.location')
+@include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.order_number')
 @include ('partials.forms.edit.purchase_date')
 @include ('partials.forms.edit.purchase_cost')
