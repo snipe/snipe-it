@@ -35,6 +35,7 @@
                   <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                   <th data-sortable="true" data-searchable="true"  data-field="name">{{ trans('admin/accessories/table.title') }}</th>
                   <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('admin/accessories/general.accessory_category') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
                   <th data-field="manufacturer" data-searchable="true" data-sortable="true">{{ trans('general.manufacturer') }}</th>
                   <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
                   <th data-searchable="false" data-sortable="false" data-field="qty">{{ trans('admin/accessories/general.total') }}</th>

@@ -82,6 +82,7 @@ class AccessoriesController extends Controller
         $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
         $accessory->order_number            = e(Input::get('order_number'));
         $accessory->manufacturer_id         = e(Input::get('manufacturer_id'));
+        $accessory->model_number            = e(Input::get('model_number'));
 
         if (e(Input::get('purchase_date')) == '') {
             $accessory->purchase_date       =  null;
@@ -164,6 +165,7 @@ class AccessoriesController extends Controller
         $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
         $accessory->manufacturer_id         = e(Input::get('manufacturer_id'));
         $accessory->order_number            = e(Input::get('order_number'));
+        $accessory->model_number            = e(Input::get('model_number'));
 
         if (e(Input::get('purchase_date')) == '') {
             $accessory->purchase_date       =  null;
@@ -552,7 +554,7 @@ class AccessoriesController extends Controller
         }
 
 
-        $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category'];
+        $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category','model_number'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
@@ -594,6 +596,7 @@ class AccessoriesController extends Controller
             $rows[] = array(
             'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
+            'model_number'      =>  e($accessory->model_number),
             'qty'           => e($accessory->qty),
             'order_number'  => e($accessory->order_number),
             'min_amt'  => e($accessory->min_amt),
