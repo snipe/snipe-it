@@ -52,7 +52,7 @@ $factory->defineAs(App\Models\AssetModel::class, 'assetmodel', function (Faker\G
 $factory->defineAs(App\Models\Location::class, 'location', function (Faker\Generator $faker) {
     return [
         'name' => $faker->catchPhrase,
-        'address1' => $faker->streetAddress,
+        'address' => $faker->streetAddress,
         'address2' => $faker->secondaryAddress,
         'city' => $faker->city,
         'state' => $faker->stateAbbr,
@@ -290,7 +290,7 @@ $factory->defineAs(App\Models\License::class, 'license', function (Faker\Generat
         'purchase_date' 		=> $faker->dateTime(),
         'purchase_cost' 		=> $faker->randomFloat(2),
         'notes'   => $faker->sentence,
-        'supplier' => Supplier::inRandomOrder()->first()->id,
+        'supplier_id' => Supplier::inRandomOrder()->first()->id,
         'company_id' => Company::inRandomOrder()->first()->id
     ];
 });

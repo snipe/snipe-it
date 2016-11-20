@@ -57,7 +57,7 @@ class LocationsCest
             'name'              => $location->name,
             'parent_id'         => $I->getLocationId(),
             'currency'          => $location->currency,
-            'address'           => $location->address1,
+            'address'           => $location->address,
             'address2'          => $location->address2,
             'city'              => $location->city,
             'state'             => $location->state,
