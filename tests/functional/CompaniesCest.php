@@ -11,16 +11,12 @@ class CompaniesCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
         $I->wantTo('Test Company Creation');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/settings/companies/create');
+        $I->amOnPage(route('create/company'));
         $I->seeInTitle('Create Company');
         $I->see('Create Company', 'h1.pull-left');
     }
@@ -28,7 +24,7 @@ class CompaniesCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/settings/companies/create');
+        $I->amOnPage(route('create/company'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -36,11 +32,12 @@ class CompaniesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $company = factory(App\Models\Company::class, 'company')->make();
         $values = [
-            'name' => 'TestCompany'
+            'name' => $company->name
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/settings/companies/create');
+        $I->amOnPage(route('create/company'));
         $I->fillField('name', 'TestCompany');
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('companies', $values);

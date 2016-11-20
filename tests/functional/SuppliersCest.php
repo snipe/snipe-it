@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Models\Supplier;
+
 class SuppliersCest
 {
     public function _before(FunctionalTester $I)
@@ -11,16 +13,12 @@ class SuppliersCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
         $I->wantTo('ensure that the create settings/suppliers form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/settings/suppliers/create');
+        $I->amOnPage(route('create/supplier'));
         $I->dontSee('Create Supplier', '.page-header');
         $I->see('Create Supplier', 'h1.pull-left');
     }
@@ -28,7 +26,7 @@ class SuppliersCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/settings/suppliers/create');
+        $I->amOnPage(route('create/supplier'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -37,7 +35,7 @@ class SuppliersCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/settings/suppliers/create');
+        $I->amOnPage(route('create/supplier'));
         $I->fillField('name', 't2');
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -45,25 +43,33 @@ class SuppliersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $supplier = factory(App\Models\Supplier::class, 'supplier')->make();
         $values = [
-            'name'              => 'Test Supplier',
-            'address'           => '046t46 South Street',
-            'address2'          => 'Apt 356',
-            'city'              => 'Sutherland',
-            'state'             => 'BV',
-            'country'           => 'AF',
-            'zip'               => '30266',
-            'contact'           => 'Mr. Smith',
-            'phone'             => '032626236 x35',
-            'fax'               => '342 33 6647 3555',
-            'email'             => 'p@roar.com',
-            'url'               => 'http://snipeitapp.com',
-            'notes'             => 'lorem ipsum indigo something'
+            'name'              => $supplier->name,
+            'address'           => $supplier->address,
+            'address2'          => $supplier->address2,
+            'city'              => $supplier->city,
+            'state'             => $supplier->state,
+            'country'           => $supplier->country,
+            'zip'               => $supplier->zip,
+            'contact'           => $supplier->contact,
+            'phone'             => $supplier->phone,
+            'fax'               => $supplier->fax,
+            'email'             => $supplier->email,
+            'url'               => $supplier->url,
+            'notes'             => $supplier->notes
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/settings/suppliers/create');
+        $I->amOnPage(route('create/supplier'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('suppliers', $values);
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a supplier');
+        $I->amOnPage(route('delete/supplier', Supplier::doesntHave('assets')->doesntHave('licenses')->first()->id));
         $I->seeElement('.alert-success');
     }
 }

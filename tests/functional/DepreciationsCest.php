@@ -11,16 +11,12 @@ class DepreciationCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
         $I->wantTo('Test Depreciation Creation');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/settings/depreciations/create');
+        $I->amOnPage(route('create/depreciations'));
         $I->seeInTitle('Create Depreciation');
         $I->dontSee('Create Depreciation', '.page-header');
         $I->see('Create Depreciation', 'h1.pull-left');
@@ -29,7 +25,7 @@ class DepreciationCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/settings/depreciations/create');
+        $I->amOnPage(route('create/depreciations'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -39,7 +35,7 @@ class DepreciationCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/settings/depreciations/create');
+        $I->amOnPage(route('create/depreciations'));
         $I->fillField('name', 't2');
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -48,14 +44,22 @@ class DepreciationCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $depreciation = factory(App\Models\Depreciation::class, 'depreciation')->make();
         $values = [
-            'name'      => 'TestDepreciation',
-            'months'    => '15'
+            'name'      => $depreciation->name,
+            'months'    => $depreciation->months
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/settings/depreciations/create');
+        $I->amOnPage(route('create/depreciations'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('depreciations', $values);
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a depreciation');
+        $I->amOnPage(route('delete/depreciations', $I->getDepreciationId()));
         $I->seeElement('.alert-success');
     }
 }

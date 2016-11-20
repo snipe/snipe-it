@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Models\Manufacturer;
+
 class ManufacturersCest
 {
     public function _before(FunctionalTester $I)
@@ -11,16 +13,12 @@ class ManufacturersCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
         $I->wantTo('Test Manufacturer Creation');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/settings/manufacturers/create');
+        $I->amOnPage(route('create/manufacturer'));
         $I->seeInTitle('Create Manufacturer');
         $I->see('Create Manufacturer', 'h1.pull-left');
     }
@@ -28,7 +26,7 @@ class ManufacturersCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/settings/manufacturers/create');
+        $I->amOnPage(route('create/manufacturer'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -37,7 +35,7 @@ class ManufacturersCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/settings/manufacturers/create');
+        $I->amOnPage(route('create/manufacturer'));
         $I->fillField('name', 't');
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -45,13 +43,25 @@ class ManufacturersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $manufacturer = factory(App\Models\Manufacturer::class, 'manufacturer')->make();
         $values = [
-            'name' => 'Testufacturer'
+            'name' => $manufacturer->name
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/settings/manufacturers/create');
+        $I->amOnPage(route('create/manufacturer'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('manufacturers', $values);
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a manufacturer');
+        $I->amOnPage(route('delete/manufacturer', Manufacturer::doesntHave('models')
+                                                ->doesntHave('accessories')
+                                                ->doesntHave('consumables')
+                                                ->doesntHave('licenses')->first()->id
+        ));
         $I->seeElement('.alert-success');
     }
 }

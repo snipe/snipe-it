@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Models\Location;
+
 class LocationsCest
 {
     public function _before(FunctionalTester $I)
@@ -12,17 +14,13 @@ class LocationsCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
         /* Create Form */
         $I->wantTo('Test Location Creation');
         $I->lookForwardTo('Finding no Failures');
-        $I->amOnPage('/admin/settings/locations/create');
+        $I->amOnPage(route('create/location'));
         $I->dontSee('Create Location', '.page-header');
         $I->see('Create Location', 'h1.pull-left');
     }
@@ -30,7 +28,7 @@ class LocationsCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/settings/locations/create');
+        $I->amOnPage(route('create/location'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -39,7 +37,7 @@ class LocationsCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short values");
-        $I->amOnPage('/admin/settings/locations/create');
+        $I->amOnPage(route('create/location'));
         $I->fillField('name', 't2');
         $I->fillField('address', 't2da');
         $I->fillField('city', 't2');
@@ -54,21 +52,29 @@ class LocationsCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $location = factory(App\Models\Location::class, 'location')->make();
         $values = [
-            'name'              => 'Test Location',
-            'parent_id'         => 26,
-            'currency'          => 'YEN',
-            'address'           => '046t46 South Street',
-            'address2'          => 'Apt 356',
-            'city'              => 'Sutherland',
-            'state'             => 'BV',
-            'country'           => 'AF',
-            'zip'               => '30266',
+            'name'              => $location->name,
+            'parent_id'         => $I->getLocationId(),
+            'currency'          => $location->currency,
+            'address'           => $location->address1,
+            'address2'          => $location->address2,
+            'city'              => $location->city,
+            'state'             => $location->state,
+            'country'           => $location->country,
+            'zip'               => $location->zip,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/settings/locations/create');
+        $I->amOnPage(route('create/location'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('locations', $values);
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a location');
+        $I->amOnPage(route('delete/location', Location::doesntHave('assets')->doesntHave('assignedAssets')->first()->id));
         $I->seeElement('.alert-success');
     }
 }

@@ -20,7 +20,7 @@ class CategoryCest
     {
         $I->wantTo('Test Category Creation');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/settings/categories/create');
+        $I->amOnPage(route('create/category'));
         $I->seeInTitle('Create Category');
         $I->see('Create Category', 'h1.pull-left');
     }
@@ -28,7 +28,7 @@ class CategoryCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/settings/categories/create');
+        $I->amOnPage(route('create/category'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -37,18 +37,25 @@ class CategoryCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $category = factory(App\Models\Category::class, 'asset-category')->make();
         $values = [
-            'name'                  => 'TestModel',
-            'category_type'         => 'accessory',
-            'eula_text'             => 'lorem ipsum blah blah',
-            'require_acceptance'    => true,
-            'checkin_email'         => true,
+            'name'                  => $category->name,
+            'category_type'         => $category->category_type,
+            'eula_text'             => $category->eula_text,
+            'require_acceptance'    => $category->require_acceptance,
+            'checkin_email'         => $category->checkin_email,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/settings/categories/create');
+        $I->amOnPage(route('create/category'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('categories', $values);
         $I->dontSee('&lt;span class=&quot;');
+        $I->seeElement('.alert-success');
+    }
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a category');
+        $I->amOnPage(route('delete/category', $I->getEmptyCategoryId()));
         $I->seeElement('.alert-success');
     }
 }

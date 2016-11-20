@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 class UsersCest
 {
     public function _before(\FunctionalTester $I)
@@ -9,17 +11,12 @@ class UsersCest
          $I->fillField('password', 'snipeit');
          $I->click('Login');
     }
-
-    public function _after(\FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(\FunctionalTester $I)
     {
         $I->wantTo('ensure that the create users form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/users/create');
+        $I->amOnPage(route('create/user'));
         $I->dontSee('Create User', '.page-header');
         $I->see('Create User', 'h1.pull-left');
     }
@@ -27,7 +24,7 @@ class UsersCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/users/create');
+        $I->amOnPage(route('create/user'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The first name field is required.', '.alert-msg');
@@ -38,7 +35,7 @@ class UsersCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/users/create');        
+        $I->amOnPage(route('create/user'));
         $I->fillField('first_name', 't2');
         $I->fillField('last_name', 't2');
         $I->fillField('username', 'a'); // Must be 2 chars
@@ -52,42 +49,56 @@ class UsersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $user = factory(App\Models\User::class, 'valid-user')->make();
         $submitValues = [
-            'first_name'        => 'John',
-            'last_name'         => 'Smdt',
-            'username'          => 'jsmdt',
-            'password'          => 'Sutherland',
-            'password_confirm'  => 'Sutherland',
-            'email'             => 'g@roar.com',
-            'company_id'        => 3,
-            'locale'            => 'en-GB',
-            'employee_num'      => '1636 636',
-            'jobtitle'          => 'Robot',
+            'first_name'        => $user->first_name,
+            'last_name'         => $user->last_name,
+            'username'          => $user->username,
+            'password'          => $user->password,
+            'password_confirm'  => $user->password,
+            'email'             => $user->email,
+            'company_id'        => $user->company_id,
+            'locale'            => $user->locale,
+            'employee_num'      => $user->employee_num,
+            'jobtitle'          => $user->jobtitle,
             'manager_id'        => 19,
             'location_id'       => 67,
-            'phone'             => '35235 33535 x5',
+            'phone'             => $user->phone,
             'activated'         => true,
-            'notes'             => 'lorem ipsum indigo something'
+            'notes'             => $user->notes
         ];
         $storedValues = [
-            'first_name'        => 'John',
-            'last_name'         => 'Smdt',
-            'username'          => 'jsmdt',
-            'email'             => 'g@roar.com',
-            'company_id'        => 3,
-            'locale'            => 'en-GB',
-            'employee_num'      => '1636 636',
-            'jobtitle'          => 'Robot',
+            'first_name'        => $user->first_name,
+            'last_name'         => $user->last_name,
+            'username'          => $user->username,
+            'email'             => $user->email,
+            'company_id'        => $user->company_id,
+            'locale'            => $user->locale,
+            'employee_num'      => $user->employee_num,
+            'jobtitle'          => $user->jobtitle,
             'manager_id'        => 19,
             'location_id'       => 67,
-            'phone'             => '35235 33535 x5',
+            'phone'             => $user->phone,
             'activated'         => true,
-            'notes'             => 'lorem ipsum indigo something'
+            'notes'             => $user->notes
         ];
-        $I->amOnPage('/admin/users/create');
+        $I->amOnPage(route('create/user'));
         $I->wantTo("Test Validation Succeeds");
         $I->submitForm('form#userForm', $submitValues);
         $I->seeRecord('users', $storedValues);
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a user');
+        $I->amOnPage(route('delete/user', User::doesntHave('assets')
+                                        ->doesntHave('accessories')
+                                        ->doesntHave('consumables')
+                                        ->doesntHave('licenses')
+                                        ->where('username', '!=', 'snipeit')
+                                        ->first()->id
+        ));
         $I->seeElement('.alert-success');
     }
 }
