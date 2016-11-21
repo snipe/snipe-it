@@ -11,16 +11,12 @@ class ConsumablesCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
         $I->wantTo('ensure that the create consumables form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/consumables/create');
+        $I->amOnPage(route('create/consumable'));
         $I->dontSee('Create Consumable', '.page-header');
         $I->see('Create Consumable', 'h1.pull-left');
     }
@@ -28,7 +24,7 @@ class ConsumablesCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/consumables/create');
+        $I->amOnPage(route('create/consumable'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -39,7 +35,7 @@ class ConsumablesCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/consumables/create');
+        $I->amOnPage(route('create/consumable'));
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
         $I->fillField('min_amt', '-15');
@@ -52,22 +48,30 @@ class ConsumablesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $consumable = factory(App\Models\Consumable::class, 'consumable')->make();
         $values = [
-            'company_id'        => 3,
-            'name'              => 'TestConsumable',
-            'category_id'       => 43,
-            'model_number'      => '032-356',
-            'item_no'           => '32503',
-            'order_number'      => '12345',
+            'company_id'        => $consumable->company_id,
+            'name'              => $consumable->name,
+            'category_id'       => $consumable->category_id,
+            'model_number'      => $consumable->model_number,
+            'item_no'           => $consumable->item_no,
+            'order_number'      => $consumable->order_number,
             'purchase_date'     => '2016-01-01',
-            'purchase_cost'     => '25.00',
-            'qty'               => '12',
-            'min_amt'           => '6',
+            'purchase_cost'     => $consumable->purchase_cost,
+            'qty'               => $consumable->qty,
+            'min_amt'           => $consumable->min_amt,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/consumables/create');
+        $I->amOnPage(route('create/consumable'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('consumables', $values);
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a consumable');
+        $I->amOnPage(route('delete/consumable', $I->getConsumableId()));
         $I->seeElement('.alert-success');
     }
 }

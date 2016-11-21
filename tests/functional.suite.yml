@@ -11,6 +11,7 @@ modules:
         - \Helper\Functional
         - Laravel5:
             environment_file: .env.tests
+            cleanup: false
         - Db:
             dsn: 'mysql:host=localhost;dbname=snipeittests'
             user: 'snipeit'
