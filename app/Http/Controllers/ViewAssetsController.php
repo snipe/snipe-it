@@ -383,7 +383,7 @@ class ViewAssetsController extends Controller
         $logaction->updated_at = date("Y-m-d H:i:s");
 
 
-        if ($sig_filename) {
+        if (isset($sig_filename)) {
             $logaction->accept_signature = $sig_filename;
         }
         $log = $logaction->logaction($logaction_msg);
