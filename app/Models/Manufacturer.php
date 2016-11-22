@@ -47,6 +47,11 @@ class Manufacturer extends SnipeModel
         return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'manufacturer_id', 'model_id');
     }
 
+    public function models()
+    {
+        return $this->hasMany('\App\Models\AssetModel', 'manufacturer_id');
+    }
+
     public function licenses()
     {
         return $this->hasMany('\App\Models\License', 'manufacturer_id');

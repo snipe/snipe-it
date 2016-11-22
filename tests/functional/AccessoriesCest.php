@@ -11,10 +11,6 @@ class AccessoriesCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
@@ -53,17 +49,18 @@ class AccessoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $accessory = factory(App\Models\Accessory::class,'accessory')->make();
         $values = [
-            'company_id'       => 3,
-            'name'          => 'TestAccessory',
-            'category_id'   => 40,
-            'manufacturer_id'  => 24,
-            'location_id'      => 38,
-            'order_number'  => '12345',
+            'company_id'       => $accessory->company_id,
+            'name'          => $accessory->name,
+            'category_id'   => $accessory->category_id,
+            'manufacturer_id'  => $accessory->manufacturer_id,
+            'location_id'      => $accessory->location_id,
+            'order_number'  => $accessory->order_number,
             'purchase_date' => '2016-01-01',
-            'purchase_cost' => '25.00',
-            'qty'           => '12',
-            'min_amt'       => '6'
+            'purchase_cost' => $accessory->purchase_cost,
+            'qty'           => $accessory->qty,
+            'min_amt'       => $accessory->min_amt
         ];
 
         $I->wantTo("Test Validation Succeeds");
@@ -73,6 +70,13 @@ class AccessoriesCest
         $I->seeRecord('accessories', $values);
 
         $I->dontSee('&lt;span class=&quot;');
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete an accessory');
+        $I->amOnPage( route('delete/accessory', $I->getAccessoryId() ) );
         $I->seeElement('.alert-success');
     }
 }

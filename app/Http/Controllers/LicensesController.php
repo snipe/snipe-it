@@ -396,7 +396,7 @@ class LicensesController extends Controller
             return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
         }
 
-        if (($license->assignedcount()) && ($license->assignedcount() > 0)) {
+        if ($license->assigned_seats_count > 0) {
 
             // Redirect to the license management page
             return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.assoc_users'));

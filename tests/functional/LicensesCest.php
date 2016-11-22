@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Models\License;
+
 class licensesCest
 {
     public function _before(FunctionalTester $I)
@@ -11,16 +13,12 @@ class licensesCest
          $I->click('Login');
     }
 
-    public function _after(FunctionalTester $I)
-    {
-    }
-
     // tests
     public function tryToTest(FunctionalTester $I)
     {
         $I->wantTo('ensure that the create licenses form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/licenses/create');
+        $I->amOnPage(route('create/licenses'));
         $I->dontSee('Create License', '.page-header');
         $I->see('Create License', 'h1.pull-left');
     }
@@ -28,7 +26,7 @@ class licensesCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/licenses/create');
+        $I->amOnPage(route('create/licenses'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -39,7 +37,7 @@ class licensesCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/licenses/create');
+        $I->amOnPage(route('create/licenses'));
         $I->fillField('name', 't2');
         $I->fillField('serial', '13a-');
         $I->fillField('seats', '-15');
@@ -52,31 +50,39 @@ class licensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
+        $license = factory(App\Models\License::class, 'license')->make();
         $values = [
-            'name'              => 'Test Software',
-            'serial'            => '946346-436346-346436',
-            'seats'             => '12',
-            'company_id'        => 3,
-            'manufacturer_id'   => 24,
-            'license_name'      => 'Marco Polo',
-            'license_email'     => 'g@m.com',
+            'name'              => $license->name,
+            'serial'            => $license->serial,
+            'seats'             => $license->seats,
+            'company_id'        => $license->company_id,
+            'manufacturer_id'   => $license->manufacturer_id,
+            'license_name'      => $license->license_name,
+            'license_email'     => $license->license_email,
             'reassignable'      => true,
-            'supplier_id'       => 11,
-            'order_number'      => '12345',
-            'purchase_cost'     => '25.00',
+            'supplier_id'       => $license->supplier_id,
+            'order_number'      => $license->order_number,
+            'purchase_cost'     => $license->purchase_cost,
             'purchase_date'     => '2016-01-01',
             'expiration_date'   => '2018-01-01',
             'termination_date'  => '2020-01-01',
-            'purchase_order'    => '234562',
+            'purchase_order'    => $license->purchase_order,
             'maintained'        => true,
-            'notes'             => 'lorem ipsum omicron delta phi'
+            'notes'             => $license->notes
         ];
 
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/licenses/create');
+        $I->amOnPage(route('create/licenses'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('licenses', $values);
         $I->dontSee('&lt;span class=&quot;');
+        $I->seeElement('.alert-success');
+    }
+
+    public function allowsDelete(FunctionalTester $I)
+    {
+        $I->wantTo('Ensure I can delete a license');
+        $I->amOnPage(route('delete/license', License::doesntHave('assignedUsers')->first()->id));
         $I->seeElement('.alert-success');
     }
 
