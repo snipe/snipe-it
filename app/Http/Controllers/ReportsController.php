@@ -561,6 +561,9 @@ class ReportsController extends Controller
         if (e(Input::get('username')) == '1') {
             $header[] = 'Username';
         }
+        if (e(Input::get('employee_num')) == '1') {
+            $header[] = 'Employee No.';
+        }
         if (e(Input::get('status')) == '1') {
             $header[] = 'Status';
         }
@@ -674,6 +677,14 @@ class ReportsController extends Controller
             if (e(Input::get('username')) == '1') {
                 if ($asset->assigneduser) {
                     $row[] = '"' .e($asset->assigneduser->username). '"';
+                } else {
+                    $row[] = ''; // Empty string if unassigned
+                }
+            }
+
+            if (e(Input::get('employee_num')) == '1') {
+                if ($asset->assigneduser) {
+                    $row[] = '"' .e($asset->assigneduser->employee_num). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
