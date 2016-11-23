@@ -12,7 +12,7 @@ $('.snipe-table').bootstrapTable({
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        @if ($search)
+        @if (isset($search))
         search: true,
         @endif
         pageSize: {{ $snipeSettings->per_page }},
