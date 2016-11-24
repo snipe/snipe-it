@@ -50,7 +50,7 @@ class Location extends SnipeModel
 
     public function assets()
     {
-        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\Actionlog', 'location_id', 'id');
+        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\User', 'location_id', 'assigned_to', 'id');
     }
 
     public function assignedassets()
