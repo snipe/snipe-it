@@ -212,7 +212,7 @@
                       </tr>
                     @endif
 
-                    @if ($asset->supplier_id)
+                    @if ($asset->supplier)
                       <tr>
                         <td>{{ trans('admin/hardware/form.supplier') }}</td>
                         <td>
@@ -615,7 +615,12 @@
                                 <del>{{ $log->target->showAssetName() }}</del>
                               @endif
                             @elseif (($log->action_type=='accepted') || ($log->action_type=='declined'))
+                                {{-- On a declined log, the asset isn't assigned to anyone when we look this up. --}}
+                                @if ($log->item->assigneduser)
                                     {{ $log->item->assigneduser->fullName() }}
+                                @else
+                                    Unknown
+                                @endif
                             @else
 
                               Deleted User
