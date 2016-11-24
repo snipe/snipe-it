@@ -13,15 +13,11 @@ class AddMissingTargetTypeToLogsTable extends Migration
      */
     public function up()
     {
-        Schema::table('action_logs', function (Blueprint $table) {
-            // Get list of action logs with a target id but not a target type.  This fixes missing target_type in accept_asset
-            $logs = DB::table('action_logs')->where('target_type', null)->where(function($query) {
-                $query->where('action_type', 'accepted')
-                ->orWHere('action_type', 'declined');
-            })->update(['target_type'=> 'App\Models\User']);
-
-
-        });
+        // Get list of action logs with a target id but not a target type.  This fixes missing target_type in accept_asset
+        DB::table('action_logs')->where('target_type', null)->where(function($query) {
+            $query->where('action_type', 'accepted')
+            ->orWhere('action_type', 'declined');
+        })->update(['target_type'=> 'App\Models\User']);
     }
 
     /**
@@ -31,8 +27,6 @@ class AddMissingTargetTypeToLogsTable extends Migration
      */
     public function down()
     {
-        Schema::table('action_logs', function (Blueprint $table) {
-            //
-        });
+        // Nothing to do.
     }
 }
