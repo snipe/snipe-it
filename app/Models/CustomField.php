@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Schema;
 
 class CustomField extends Model
 {
@@ -22,7 +23,7 @@ class CustomField extends Model
     ];
 
     public $rules=[
-    "name" => "required|unique:custom_fields"
+      "name" => "required|unique:custom_fields"
     ];
 
     public static $table_name="assets";
@@ -36,12 +37,12 @@ class CustomField extends Model
     {
         self::creating(function ($custom_field) {
 
-            if (in_array($custom_field->db_column_name(), \Schema::getColumnListing(\DB::getTablePrefix().CustomField::$table_name))) {
+            if (Schema::hasColumn(CustomField::$table_name,$custom_field->db_column_name())) {
               //field already exists when making a new custom field; fail.
                 return false;
             }
 
-            \Schema::table(\DB::getTablePrefix().\App\Models\CustomField::$table_name, function ($table) use ($custom_field) {
+            Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                 $table->text($custom_field->db_column_name())->nullable();
             });
 
@@ -49,17 +50,21 @@ class CustomField extends Model
 
         self::updating(function ($custom_field) {
             if ($custom_field->isDirty("name")) {
-                if (in_array($custom_field->db_column_name(), \Schema::getColumnListing(CustomField::$table_name))) {
+                if (Schema::hasColumn(CustomField::$table_name,$custom_field->db_column_name())) {
                   //field already exists when renaming a custom field
                     return false;
                 }
-                return \DB::statement("UPDATE ".CustomField::$table_name." RENAME ".self::name_to_db_name($custom_field->get_original("name"))." TO ".$custom_field->db_column_name());
+                return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
+                  $table->renameColumn(self::name_to_db_name($custom_field->getOriginal("name")),$custom_field->db_column_name());
+                });
             }
             return true;
         });
 
         self::deleting(function ($custom_field) {
-            return \DB::statement("ALTER TABLE ".CustomField::$table_name." DROP COLUMN ".$custom_field->db_column_name());
+            return Schema::table(CustomField::$table_name,function ($table) use ($custom_field) {
+              $table->dropColumn(self::name_to_db_name($custom_field->getOriginal("name")));
+            });
         });
     }
 
