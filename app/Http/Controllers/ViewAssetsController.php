@@ -379,6 +379,7 @@ class ViewAssetsController extends Controller
         }
 
         $logaction->target_id = $findlog->target_id;
+        $logaction->target_type = User::class;
         $logaction->note = e(Input::get('note'));
         $logaction->updated_at = date("Y-m-d H:i:s");
 
