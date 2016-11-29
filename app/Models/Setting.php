@@ -48,13 +48,14 @@ class Setting extends Model
     public static function getSettings()
     {
         static $static_cache = null;
-
-        if (Schema::hasTable('settings')) {
+        
             if (!$static_cache) {
-                $static_cache = Setting::first();
+                if (Schema::hasTable('settings')) {
+                    $static_cache = Setting::first();
+                }
             }
             return $static_cache;
-        }
+
         return false;
 
 
