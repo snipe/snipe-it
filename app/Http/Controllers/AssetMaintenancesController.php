@@ -178,7 +178,7 @@ class AssetMaintenancesController extends Controller
                    ->with('selectedAsset', $selectedAsset)
                    ->with('supplier_list', $supplier_list)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
-                   ->with('assetMaintenance', new AssetMaintenance);
+                   ->with('item', new AssetMaintenance);
     }
 
     /**
@@ -317,7 +317,7 @@ class AssetMaintenancesController extends Controller
                    ->with('selectedAsset', null)
                    ->with('supplier_list', $supplier_list)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
-                   ->with('assetMaintenance', $assetMaintenance);
+                   ->with('item', $assetMaintenance);
 
     }
 

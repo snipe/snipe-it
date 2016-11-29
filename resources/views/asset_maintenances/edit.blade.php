@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    @if ($assetMaintenance->id)
+    @if ($item->id)
         {{ trans('admin/asset_maintenances/form.update') }}
     @else
         {{ trans('admin/asset_maintenances/form.create') }}
@@ -32,8 +32,8 @@
       <div class="box-header with-border">
 
         <h3 class="box-title">
-          @if ($assetMaintenance)
-          {{ $assetMaintenance->name }}
+          @if ($item)
+          {{ $item->name }}
           @endif
       </h3>
       </div><!-- /.box-header -->
@@ -43,9 +43,9 @@
           <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
               <label for="asset_id" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/table.asset_name') }}
                  </label>
-              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'asset_id')) ? ' required' : '' }}">
+              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_id')) ? ' required' : '' }}">
                   @if ($selectedAsset == null)
-                      {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $assetMaintenance->asset_id), ['class'=>'select2', 'style'=>'min-width:350px']) }}
+                      {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $item->asset_id), ['class'=>'select2', 'style'=>'min-width:350px']) }}
                   @else
                       {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $selectedAsset), ['class'=>'select2', 'style'=>'min-width:350px', 'enabled' => 'false']) }}
                   @endif
@@ -63,8 +63,8 @@
               <label for="title" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.title') }}
                   </label>
               </label>
-              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'title')) ? ' required' : '' }}">
-                  <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $assetMaintenance->title) }}" />
+              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'title')) ? ' required' : '' }}">
+                  <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $item->title) }}" />
                   {!! $errors->first('title', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
           </div>
@@ -73,8 +73,8 @@
           <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
               <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.start_date') }}
                   </label>
-              <div class="input-group col-md-2{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'start_date')) ? ' required' : '' }}">
-                  <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="start_date" id="start_date" value="{{ Input::old('start_date', $assetMaintenance->start_date) }}">
+              <div class="input-group col-md-2{{  (\App\Helpers\Helper::checkIfRequired($item, 'start_date')) ? ' required' : '' }}">
+                  <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="start_date" id="start_date" value="{{ Input::old('start_date', $item->start_date) }}">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   {!! $errors->first('start_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
@@ -84,7 +84,7 @@
           <div class="form-group {{ $errors->has('completion_date') ? ' has-error' : '' }}">
               <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.completion_date') }}</label>
               <div class="input-group col-md-2">
-                  <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="completion_date" id="completion_date" value="{{ Input::old('completion_date', $assetMaintenance->completion_date) }}">
+                  <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="completion_date" id="completion_date" value="{{ Input::old('completion_date', $item->completion_date) }}">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   {!! $errors->first('completion_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
@@ -95,7 +95,7 @@
               <div class="col-sm-offset-3 col-sm-9">
                   <div class="checkbox">
                       <label>
-                          <input type="checkbox" value="1" name="is_warranty" id="is_warranty" {{ Input::old('is_warranty', $assetMaintenance->is_warranty) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/asset_maintenances/form.is_warranty') }}
+                          <input type="checkbox" value="1" name="is_warranty" id="is_warranty" {{ Input::old('is_warranty', $item->is_warranty) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/asset_maintenances/form.is_warranty') }}
                       </label>
                   </div>
               </div>
@@ -107,7 +107,7 @@
               <div class="col-md-2">
                   <div class="input-group">
                       <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
-                      <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', \App\Helpers\Helper::formatCurrencyOutput($assetMaintenance->cost)) }}" />
+                      <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', \App\Helpers\Helper::formatCurrencyOutput($item->cost)) }}" />
                       {!! $errors->first('cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                   </div>
               </div>
@@ -117,7 +117,7 @@
           <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
               <label for="notes" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.notes') }}</label>
               <div class="col-md-7">
-                  <textarea class="col-md-6 form-control" id="notes" name="notes">{{ Input::old('notes', $assetMaintenance->notes) }}</textarea>
+                  <textarea class="col-md-6 form-control" id="notes" name="notes">{{ Input::old('notes', $item->notes) }}</textarea>
                   {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
           </div>
