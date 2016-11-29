@@ -16,10 +16,10 @@ class CheckForDebug
      */
     public function handle($request, Closure $next)
     {
+        view()->share('debug_in_production', false);
+
         if (((Auth::check() && (Auth::user()->isSuperUser()))) && (app()->environment()=='production') && (config('app.debug')===true)) {
           view()->share('debug_in_production', true);
-        } else {
-            view()->share('debug_in_production', false);
         }
 
         return $next($request);
