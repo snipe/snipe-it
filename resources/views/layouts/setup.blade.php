@@ -127,11 +127,14 @@
               </div>
           </div>
           <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
+
         <script>
             $(function () {
                 $(".select2").select2();
             });
         </script>
+          @section('moar_scripts')
+          @show
 
     </body>
 </html>

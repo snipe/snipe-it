@@ -170,6 +170,7 @@ Create a User ::
           </td>
           <td id="mailtestresult">
              <button class="btn btn-default" id="mailtest"> Test Email</button>
+              <span id="mailtestresult"></span>
           </td>
         </tr>
 
@@ -187,36 +188,39 @@ Create a User ::
 
 
 
+@section('moar_scripts')
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        $("#mailtest").click(function(){
+
+              $("#mailtestresult").html('<i class="fa fa-spinner fa-spin"></i> Sending Email');
+
+              $.ajax({url: "{{ route('setup.mailtest') }}", success: function(result){
+                  if (result=='success') {
+                    $("#mailrow").addClass('success');
+                    $("#mailtesticon").html('<i class="fa fa-check preflight-success"></i>');
+                    $("#mailtestresult").html('No errors on this end! Check your <code>{{ config('mail.from.address') }}</code> email account for a test email.');
+                  } else {
+                    $("#mailrow").addClass('danger');
+                    $("#mailtesticon").html('<i class="fa fa-check preflight-error"></i>');
+                    $("#mailtestresult").html('Something went wrong. Your email was not sent. Check your mail settings in your <code>.env</code> file.');
+
+                  }
 
 
-<script>
-$("#mailtest").click(function(){
-  $("#mailtestresult").html('<i class="fa fa-spinner fa-spin"></i> Sending Email');
-
-  $.ajax({url: "{{ route('setup.mailtest') }}", success: function(result){
-      if (result=='success') {
-        $("#mailrow").addClass('success');
-        $("#mailtesticon").html('<i class="fa fa-check preflight-success"></i>');
-        $("#mailtestresult").html('No errors on this end! Check your <code>{{ config('mail.from.address') }}</code> email account for a test email.');
-      } else {
-        $("#mailrow").addClass('danger');
-        $("#mailtesticon").html('<i class="fa fa-check preflight-error"></i>');
-        $("#mailtestresult").html('Something went wrong. Your email was not sent. Check your mail settings in your <code>.env</code> file.');
-
-      }
+              },
+              error: function (result) {
+                $("#mailrow").addClass('danger');
+                $("#mailtesticon").html('<i class="fa fa-check preflight-error"></i>');
+                $("#mailtestresult").html('Something went wrong. The server returned an error. Check your mail settings in your <code>.env</code> file, and check your <code>storage/logs</code> for additional information..');
+              }
 
 
-  },
-  error: function (result) {
-    $("#mailrow").addClass('danger');
-    $("#mailtesticon").html('<i class="fa fa-check preflight-error"></i>');
-    $("#mailtestresult").html('Something went wrong. The server returned an error. Check your mail settings in your <code>.env</code> file, and check your <code>storage/logs</code> for additional information..');
-  }
+            });
 
-
-});
-
-
-});
-</script>
+        });
+     });
+    </script>
+@stop
 @stop
