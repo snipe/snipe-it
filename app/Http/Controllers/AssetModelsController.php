@@ -378,7 +378,7 @@ class AssetModelsController extends Controller
         $view->with('category_list', $category_list);
         $view->with('depreciation_list', $depreciation_list);
         $view->with('manufacturer_list', $manufacturer_list);
-        $view->with('model', $model);
+        $view->with('item', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
 
