@@ -170,7 +170,7 @@
 
                     @if ($license->supplier_id)
                       <tr>
-                        <td>{{ trans('admin/licenses/form.supplier') }}:
+                        <td>{{ trans('general.supplier') }}:
                         </td>
                         <td>
                         <a href="{{ route('view/supplier', $license->supplier_id) }}">
@@ -261,7 +261,7 @@
 
                     @if ($license->order_number)
                     <tr>
-                      <td>{{ trans('admin/licenses/form.order') }}:
+                      <td>{{ trans('general.order_number') }}:
                       </td>
                       <td>
                         {{ $license->order_number }}
