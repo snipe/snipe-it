@@ -293,7 +293,6 @@ class CategoriesController extends Controller
                 'category_type' => ucwords($category->category_type),
                 'count'         => $category->itemCount(),
                 'acceptance'    => ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : '',
-                //EULA is still not working correctly
                 'eula'          => ($category->getEula()) ? '<i class="fa fa-check"></i>' : '',
                 'actions'       => $actions
             );
@@ -357,7 +356,7 @@ class CategoriesController extends Controller
             $rows[] = array(
                 'id' => $asset->id,
                 'name' => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
-                'model' => $asset->model->name,
+                'model' => ($asset->model) ? (string)link_to('hardware/models/'.$asset->model->id.'/view', $asset->model->name) : '',
                 'asset_tag' => $asset->asset_tag,
                 'serial' => $asset->serial,
                 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
