@@ -23,7 +23,6 @@ class License extends Depreciable
     protected $table = 'licenses';
     protected $rules = array(
         'name'   => 'required|string|min:3|max:255',
-        'serial'   => 'required|min:5',
         'seats'   => 'required|min:1|max:10000|integer',
         'license_email'   => 'email|min:0|max:120',
         'license_name'   => 'string|min:0|max:100',
