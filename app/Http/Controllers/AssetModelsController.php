@@ -398,7 +398,7 @@ class AssetModelsController extends Controller
     */
     public function getCustomFields($modelId)
     {
-        $model=AssetModel::find($modelId);
+        $model = AssetModel::find($modelId);
         return View::make("models.custom_fields_form")->with("model", $model);
     }
 
@@ -467,10 +467,11 @@ class AssetModelsController extends Controller
                 'image' => ($model->image!='') ? '<img src="'.config('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->model_number,
                 'numassets'         => $model->assets->count(),
-                'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
-                'category'          => ($model->category) ? $model->category->name : '',
+                'depreciation'      => (($model->depreciation) && ($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
+                'category'          => ($model->category) ? (string)link_to('admin/settings/categories/'.$model->category->id.'/view', $model->category->name) : '',
                 'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
-                'note'       => $model->getNote(),
+                'note'              => $model->getNote(),
+                'fieldset'          => ($model->fieldset) ? (string)link_to('admin/custom_fields/'.$model->fieldset->id, $model->fieldset->name) : '',
                 'actions'           => $actions
                 );
         }
