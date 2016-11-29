@@ -499,8 +499,12 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
                 'uses' => 'AssetMaintenancesController@getEdit'
             ]);
 
+        Route::post('{assetMaintenanceId}/edit',
+            [ 'as' => 'update/asset_maintenance.save',
+                'middleware' => 'authorize:assets.edit',
+                'uses' => 'AssetMaintenancesController@postEdit'
+            ]);
 
-        Route::post('{assetMaintenanceId}/edit', 'AssetMaintenancesController@postEdit');
         Route::get(
             '{assetMaintenanceId}/delete',
             [ 'as' => 'delete/asset_maintenance', 'uses' => 'AssetMaintenancesController@getDelete' ]
