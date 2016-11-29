@@ -27,7 +27,7 @@
                         <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
                         <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
                         <th class="col-sm-1">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/table.supplier_name') }}</th>
+                        <th class="col-sm-1">{{ trans('general.supplier') }}</th>
                         <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
                         <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.title') }}</th>
                         <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.start_date') }}</th>

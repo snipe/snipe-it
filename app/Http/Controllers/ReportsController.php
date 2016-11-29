@@ -787,7 +787,7 @@ class ReportsController extends Controller
         $header = [
             trans('admin/hardware/table.asset_tag'),
             trans('admin/asset_maintenances/table.asset_name'),
-            trans('admin/asset_maintenances/table.supplier_name'),
+            trans('general.supplier'),
             trans('admin/asset_maintenances/form.asset_maintenance_type'),
             trans('admin/asset_maintenances/form.title'),
             trans('admin/asset_maintenances/form.start_date'),

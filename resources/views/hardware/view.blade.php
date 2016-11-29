@@ -505,7 +505,7 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>{{ trans('admin/asset_maintenances/table.supplier_name') }}</th>
+                        <th>{{ trans('general.supplier') }}</th>
                         <th>{{ trans('admin/asset_maintenances/form.title') }}</th>
                         <th>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
                         <th>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
