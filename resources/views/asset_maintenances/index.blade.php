@@ -36,7 +36,7 @@
               <th data-field="companyName" data-sortable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
               <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
               <th data-sortable="false" data-field="asset_name">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
-              <th data-sortable="false" data-field="supplier">{{ trans('admin/asset_maintenances/table.supplier_name') }}</th>
+              <th data-sortable="false" data-field="supplier">{{ trans('general.supplier') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="asset_maintenance_type">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="title">{{ trans('admin/asset_maintenances/form.title') }}</th>
               <th data-searchable="true" data-sortable="false" data-field="start_date">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
