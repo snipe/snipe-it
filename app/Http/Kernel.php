@@ -22,6 +22,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\NosniffGuard::class,
         \App\Http\Middleware\CheckForSetup::class,
         \Fideloper\Proxy\TrustProxies::class,
+        \App\Http\Middleware\GetAppSettings::class,
     ];
 
     /**

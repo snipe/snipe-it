@@ -19,13 +19,13 @@ class CheckForTwoFactor
     public function handle($request, Closure $next)
     {
 
-        // Skip the logic if the user is on the two factor pages
-        if (($request->route()->getName()=='two-factor') || ($request->route()->getName()=='two-factor-enroll') || ($request->route()->getName()=='logout')) {
+        // Skip the logic if the user is on the two factor pages or the setup pages
+        if (($request->route()->getName()=='two-factor') || ($request->route()->getName()=='two-factor-enroll') || ($request->route()->getPrefix()=='setup') || ($request->route()->getName()=='logout')) {
             return $next($request);
         }
 
         // Two-factor is enabled (either optional or required)
-        if (Schema::hasTable('settings')) {
+        if (Setting::getSettings()) {
             if (Auth::check() && (Setting::getSettings()->two_factor_enabled!='')) {
 
                 // This user is already 2fa-authed
