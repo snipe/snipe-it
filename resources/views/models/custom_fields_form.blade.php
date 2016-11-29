@@ -8,7 +8,7 @@
               <!-- Listbox -->
               @if ($field->element=='listbox')
                   {{ Form::select($field->db_column_name(), $field->formatFieldValuesAsArray(),
-                  Input::old($field->db_column_name(),(isset($asset) ? $asset->{$field->db_column_name()} : "")), ['class'=>'format select2 form-control']) }}
+                  Input::old($field->db_column_name(),(isset($item) ? $item->{$field->db_column_name()} : "")), ['class'=>'format select2 form-control']) }}
 
               @elseif ($field->element=='checkbox')
                     <!-- Checkboxes -->
@@ -25,19 +25,17 @@
 
 
           @else
-            <!-- Text field -->
+            <!-- Date field -->
 
                 @if ($field->format=='DATE')
-                <!-- Purchase Date -->
-
                     <div class="input-group col-md-4" style="padding-left: 0px;">
-                        <input type="text" value="{{ Input::old($field->db_column_name(),(isset($asset) ? \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="datepicker form-control col-md-4" name="{{ $field->db_column_name() }}" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+
+                        <input type="text" value="{{ Input::old($field->db_column_name(),(isset($item) ? \App\Helpers\Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="datepicker form-control col-md-4" name="{{ $field->db_column_name() }}" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 @else
-
                     @if (($field->field_encrypted=='0') || (Gate::allows('admin')))
-                    <input type="text" value="{{ Input::old($field->db_column_name(),(isset($asset) ? \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
+                    <input type="text" value="{{ Input::old($field->db_column_name(),(isset($item) ? \App\Helpers\Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
                         @else
                             <input type="text" value="{{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}" class="form-control disabled" disabled>
                     @endif
