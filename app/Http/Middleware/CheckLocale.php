@@ -21,7 +21,9 @@ class CheckLocale
 
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Schema::hasTable('settings')) {
+
+
+        if (Setting::getSettings()) {
             // User's preference
             if (($request->user()) && ($request->user()->locale)) {
                 \App::setLocale($request->user()->locale);
