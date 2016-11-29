@@ -47,7 +47,7 @@
                   <th data-field="purchase_cost" data-sortable="true">{{ trans('general.purchase_cost') }}</th>
                   <th data-field="purchase_order" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.purchase_order') }}</th>
                   <th data-field="expiration_date" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.expiration') }}</th>
-                  <th data-field="notes" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.notes') }}</th>
+                  <th data-field="notes" data-sortable="true" data-visible="false">{{ trans('admin/hardware/form.notes') }}</th>
                   <th data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
           </thead>
