@@ -73,6 +73,12 @@ return [
             'dump_command_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
             'dump_command_timeout' => 60 * 5, // 5 minute timeout
             'dump_using_single_transaction' => true, // perform dump using a single transaction
+            'options' => (env('DB_SSL')) ? [
+                PDO::MYSQL_ATTR_SSL_KEY    => env('DB_SSL_KEY'),  // /path/to/key.pem
+                PDO::MYSQL_ATTR_SSL_CERT   => env('DB_SSL_CERT'), // /path/to/cert.pem
+                PDO::MYSQL_ATTR_SSL_CA     => env('DB_SSL_CA'),   // /path/to/ca.pem
+                PDO::MYSQL_ATTR_SSL_CIPHER => env('DB_SSL_CIPHER')
+            ] : []
         ],
 
         'pgsql' => [
