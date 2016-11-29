@@ -34,7 +34,7 @@
     <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
 
-    @if ($snipeSettings->header_color)
+    @if (($snipeSettings) && ($snipeSettings->header_color))
         <style>
         .main-header .navbar, .main-header .logo {
         background-color: {{ $snipeSettings->header_color }};
@@ -58,7 +58,7 @@
 
 <body class="hold-transition login-page">
 
-    @if ($snipeSettings->logo!='')
+    @if (($snipeSettings) && ($snipeSettings->logo!=''))
     <center><img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}"></center>
     @endif
   <!-- Content -->
