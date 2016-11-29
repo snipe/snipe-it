@@ -49,10 +49,15 @@ class Setting extends Model
     {
         static $static_cache = null;
 
-        if (!$static_cache) {
-            $static_cache = Setting::first();
+        if (Schema::hasTable('settings')) {
+            if (!$static_cache) {
+                $static_cache = Setting::first();
+            }
+            return $static_cache;
         }
-        return $static_cache;
+        return false;
+
+
     }
 
     public static function setupCompleted()
