@@ -15,6 +15,7 @@ use Response;
 use Artisan;
 use Crypt;
 use Mail;
+use Auth;
 use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
 
@@ -184,6 +185,7 @@ class SettingsController extends Controller
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         } else {
             $user->save();
+            Auth::login($user, true);
             $settings->save();
 
             if (Input::get('email_creds')=='1') {
@@ -193,6 +195,7 @@ class SettingsController extends Controller
                     $m->subject(trans('mail.your_credentials'));
                 });
             }
+
 
 
             return redirect()->route('setup.done');
@@ -224,6 +227,7 @@ class SettingsController extends Controller
     */
     public function getSetupDone()
     {
+
         return View::make('setup/done')
         ->with('step', 4)
         ->with('section', 'Done!');
