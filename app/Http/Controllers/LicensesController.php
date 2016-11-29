@@ -825,7 +825,7 @@ class LicensesController extends Controller
                 foreach (Input::file('licensefile') as $file) {
 
                     $rules = array(
-                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,lic|max:2000'
+                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
                     );
                     $validator = Validator::make(array('licensefile'=> $file), $rules);
 
