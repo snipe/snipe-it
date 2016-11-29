@@ -92,7 +92,7 @@
                   <th data-field="totalSeats" data-sortable="false">{{ trans('admin/licenses/form.seats') }}</th>
                   <th data-field="remaining" data-sortable="false">{{ trans('admin/licenses/form.remaining_seats') }}</th>
                   <th data-field="purchase_date" data-sortable="true">{{ trans('admin/licenses/table.purchase_date') }}</th>
-                  <th data-field="purchase_cost" data-sortable="true">{{ trans('admin/licenses/form.cost') }}</th>
+                  <th data-field="purchase_cost" data-sortable="true">{{ trans('general.purchase_cost') }}</th>
                   <th data-field="purchase_order" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.purchase_order') }}</th>
                   <th data-field="expiration_date" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.expiration') }}</th>
                   <th data-field="notes" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.notes') }}</th>

@@ -32,9 +32,9 @@
             <th class="col-sm-1">{{ trans('admin/licenses/form.seats') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/form.remaining_seats') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/form.expiration') }}</th>
-            <th class="col-sm-1">{{ trans('admin/licenses/form.date') }}</th>
-            <th class="col-sm-1 text-right" class="col-sm-1">{{ trans('admin/licenses/form.cost') }}</th>
-            <th class="col-sm-1">{{ trans('admin/licenses/form.depreciation') }}</th>
+            <th class="col-sm-1">{{ trans('general.purchase_date') }}</th>
+            <th class="col-sm-1 text-right" class="col-sm-1">{{ trans('general.purchase_cost') }}</th>
+            <th class="col-sm-1">{{ trans('general.depreciation') }}</th>
             <th class="col-sm-1 text-right">{{ trans('admin/hardware/table.book_value') }}</th>
             <th class="col-sm-1 text-right">{{ trans('admin/hardware/table.diff') }}</th>
         </tr>

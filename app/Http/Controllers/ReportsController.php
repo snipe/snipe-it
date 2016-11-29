@@ -453,9 +453,9 @@ class ReportsController extends Controller
             trans('admin/licenses/form.seats'),
             trans('admin/licenses/form.remaining_seats'),
             trans('admin/licenses/form.expiration'),
-            trans('admin/licenses/form.date'),
-            trans('admin/licenses/form.depreciation'),
-            trans('admin/licenses/form.cost')
+            trans('general.purchase_date'),
+            trans('general.depreciation'),
+            trans('general.purchase_cost')
         ];
 
         $header = array_map('trim', $header);
