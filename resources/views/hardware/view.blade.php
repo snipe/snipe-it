@@ -65,7 +65,7 @@
           <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">Files</span></a>
         </li>
         <li class="pull-right">
-          <a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> </a>
+          <!-- <a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> </a> -->
         </li>
       </ul>
       <div class="tab-content">
@@ -496,9 +496,11 @@
         <div class="tab-pane fade" id="maintenances">
           <div class="row">
             <div class="col-md-12">
+                @can('assets.edit')
               <h6>{{ trans('general.asset_maintenances') }}
                 [ <a href="{{ route('create/asset_maintenances', $asset->id) }}">{{ trans('button.add') }}</a> ]
               </h6>
+                @endcan
 
               <!-- Asset Maintenance table -->
               @if (count($asset->assetmaintenances) > 0)
@@ -514,7 +516,9 @@
                         <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
                         <th>{{ trans('admin/asset_maintenances/form.cost') }}</th>
                         <th>{{ trans('general.admin') }}</th>
-                        <th>{{ trans('table.actions') }}</th>
+                          @can('assets.edit')
+                                <th>{{ trans('table.actions') }}</th>
+                          @endcan
                       </tr>
                     </thead>
                     <tbody>
@@ -537,9 +541,11 @@
                               @endif
                             </td>
                             <?php $totalCost += $assetMaintenance->cost; ?>
+                              @can('assets.edit')
                             <td>
                               <a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                             </td>
+                              @endcan
                           </tr>
                         @endif
                       @endforeach
@@ -665,6 +671,7 @@
         <div class="tab-pane fade" id="files">
           <div class="row">
 
+              @can('assets.edit')
             {{ Form::open([
             'method' => 'POST',
             'route' => ['upload/asset', $asset->id],
@@ -688,6 +695,7 @@
             </div>
 
             {{ Form::close() }}
+              @endcan
 
             <div class="col-md-12">
 
@@ -724,7 +732,9 @@
                           @endif
                         </td>
                         <td>
+                            @can('assets.edit')
                           <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
+                            @endcan
                         </td>
                       </tr>
                     @endforeach

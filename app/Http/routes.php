@@ -481,16 +481,25 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
     # Asset Maintenances
     Route::group([ 'prefix' => 'asset_maintenances', 'middleware'=>'authorize:assets.view'  ], function () {
 
-        Route::get(
-            'create/{assetId?}',
-            [ 'as' => 'create/asset_maintenances', 'uses' => 'AssetMaintenancesController@getCreate' ]
-        );
-        Route::post('create/{assetId?}', 'AssetMaintenancesController@postCreate');
-        Route::get('/', [ 'as' => 'asset_maintenances', 'uses' => 'AssetMaintenancesController@getIndex' ]);
-        Route::get(
-            '{assetMaintenanceId}/edit',
-            [ 'as' => 'update/asset_maintenance', 'uses' => 'AssetMaintenancesController@getEdit' ]
-        );
+        Route::get('create/{assetId?}',
+            [ 'as' => 'create/asset_maintenances',
+                'middleware' => 'authorize:assets.edit',
+                'uses' => 'AssetMaintenancesController@getCreate'
+            ]);
+
+        Route::post('create/{assetId?}',
+            [ 'as' => 'create/asset_maintenances.save',
+                'middleware' => 'authorize:assets.edit',
+                'uses' => 'AssetMaintenancesController@postCreate'
+            ]);
+
+        Route::get('{assetMaintenanceId}/edit',
+            [ 'as' => 'update/asset_maintenance',
+                'middleware' => 'authorize:assets.edit',
+                'uses' => 'AssetMaintenancesController@getEdit'
+            ]);
+
+
         Route::post('{assetMaintenanceId}/edit', 'AssetMaintenancesController@postEdit');
         Route::get(
             '{assetMaintenanceId}/delete',
@@ -500,6 +509,8 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
             '{assetMaintenanceId}/view',
             [ 'as' => 'view/asset_maintenance', 'uses' => 'AssetMaintenancesController@getView' ]
         );
+
+        Route::get('/', [ 'as' => 'asset_maintenances', 'uses' => 'AssetMaintenancesController@getIndex' ]);
     });
 
     # Accessories
