@@ -23,6 +23,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\CheckForSetup::class,
         \Fideloper\Proxy\TrustProxies::class,
         \App\Http\Middleware\GetAppSettings::class,
+        \App\Http\Middleware\CheckForDebug::class,
     ];
 
     /**
