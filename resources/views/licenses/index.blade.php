@@ -38,7 +38,7 @@
                   <th data-field="company" data-sortable="true" data-switchable="true">{{ trans('general.company') }}</th>
                   <th data-field="name" data-sortable="true">{{ trans('admin/licenses/table.title') }}</th>
                   <th data-field="manufacturer" data-sortable="true">{{ trans('general.manufacturer') }}</th>
-                  <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/table.serial') }}</th>
+                  <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/form.license_key') }}</th>
                   <th data-field="license_name" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_name') }}</th>
                   <th data-field="license_email" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_email') }}</th>
                   <th data-field="totalSeats" data-sortable="false">{{ trans('admin/licenses/form.seats') }}</th>
