@@ -55,7 +55,7 @@ progress () {
 }
 
 vhenvfile () {
-		find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' >/dev/null 2>&1
 		apachefile=/etc/apache2/sites-available/$name.conf
 		echo "* Create Virtual host for apache."
 		{
@@ -72,7 +72,7 @@ vhenvfile () {
 			echo "</VirtualHost>"
 		} >> $apachefile
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		a2ensite $name.conf >/dev/null 2>&1
 
 		cat > "$webdir/$name/.env" <<-EOF
 		#Created By Snipe-it Installer
@@ -87,14 +87,18 @@ vhenvfile () {
 }
 
 perms () {
-		chmod_dirs=( "$webdir/$name/storage" )
-		chmod_dirs+=( "$webdir/$name/storage/private_uploads" )
-		chmod_dirs+=( "$webdir/$name/public/uploads" )
-		#Change permissions on directories
-		for chmod_dir in "${chmod_dirs[@]}"
-		do
-			chmod -R 755 "$chmod_dir"
-		done
+	chmod_dirs=( "$webdir/$name/storage" )
+	chmod_dirs+=( "$webdir/$name/storage/private_uploads" )
+	chmod_dirs+=( "$webdir/$name/public/uploads" )
+	#Change permissions on directories
+	for chmod_dir in "${chmod_dirs[@]}"
+	do
+		chmod -R 755 "$chmod_dir"
+	done
+}
+    
+log () {
+	eval "$@" >/dev/null 2>&1
 }
 
 #CentOS Friendly f(x)s
@@ -217,24 +221,24 @@ case $distro in
 
 		webdir=/var/www
 		echo -e "\n* Updating Debian packages in the background... ${spin[0]}\n"
-		apt-get update |& tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		log "apt-get update" & pid=$!
 		wait
-		apt-get upgrade | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		log "apt-get upgrade" & pid=$!
 		wait
 		echo -e "\n* Installing packages... ${spin[0]}\n"
 		echo -e "\n* Going to suppress more messages that you don't need to worry about. Please wait... ${spin[0]}"
-		DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-server mariadb-client apache2 git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		log "DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-server mariadb-client apache2 git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl" & pid=$!
 		progress
 		wait
 		echo -e "\n* Cloning Snipeit, extracting to $webdir/$name..."
-		git clone https://github.com/snipe/snipe-it $webdir/$name | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
 		progress
-		php5enmod mcrypt | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
-		a2enmod rewrite | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		log "php5enmod mcrypt"
+		log "a2enmod rewrite"
 		vhenvfile
 		wait
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf
+		log "a2ensite $name.conf"
 		echo -e "* Modify the Snipe-It files necessary for a production environment.\n* Securing Mysql"
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
@@ -256,31 +260,31 @@ case $distro in
 
 		webdir=/var/www
 		echo -ne "\n* Updating with apt-get update in the background... ${spin[0]}"
-		apt-get update |& tee -a /var/log/snipeit-install.log & pid=$! 2>&1
-		rm /var/lib/dpkg/lock
+		log "apt-get update" & pid=$!
+		[ -f /var/lib/dpkg/lock ] && rm -f /var/lib/dpkg/lock
 		progress
 		echo -ne "\n* Upgrading packages with apt-get upgrade in the background... ${spin[0]}"
-		apt-get -y upgrade | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		log "apt-get -y upgrade" & pid=$!
 		progress
 		echo -ne "\n* Setting up LAMP in the background... ${spin[0]}\n"
-		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list) | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
-		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
-		DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php | tee -a /var/log/snipeit-install.log & pid=$! 2>&1 
+		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list >/dev/null 2>&1)
+		log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
+		log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php" & pid=$!
 		progress
 		if [ "$version" == "16.04" ]; then
-			apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+			log "apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml" & pid=$!
 			progress
-			phpenmod mcrypt | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
-			phpenmod mbstring | tee -a /var/log/snipeit-install 2>&1
-			a2enmod rewrite | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+			log "phpenmod mcrypt"
+			log "phpenmod mbstring"
+			log "a2enmod rewrite"
 		else
-			apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+			log "apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap" & pid=$!
 			progress
-			php5enmod mcrypt | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
-			a2enmod rewrite | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+			log "php5enmod mcrypt"
+			log "a2enmod rewrite"
 		fi
 		echo -ne "\n* Cloning Snipeit, extracting to $webdir/$name... ${spin[0]}"
-		git clone https://github.com/snipe/snipe-it $webdir/$name | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
 		progress
 		vhenvfile
 		echo -e "* MySQL Phase next.\n"
@@ -314,9 +318,9 @@ case $distro in
 			echo "enable=1"
 		} >> "$mariadbRepo"
 
-		yum -y install wget epel-release | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
-		wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
-		rpm -Uvh "$tmp/ius-release*.rpm" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		yum -y install wget epel-release >/dev/null 2>&1
+		wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm >/dev/null 2>&1
+		rpm -Uvh "$tmp/ius-release*.rpm" >/dev/null 2>&1
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -327,14 +331,14 @@ case $distro in
 				echo " ## $p already installed"
 			else
 				echo -n " ## installing $p ... "
-				yum -y install "$p" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+				yum -y install "$p" >/dev/null 2>&1
 				echo "";
 			fi
 		done;
 
 		echo -e "\n##  Downloading Snipe-IT from github and putting it in the web directory.";
 
-		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" >/dev/null 2>&1
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/$fileName $webdir/$name
 
@@ -422,9 +426,9 @@ case $distro in
 
 		#Allow us to get the mysql engine
 		echo -e "\n##  Add IUS, epel-release and mariaDB repos.";
-		yum -y install wget epel-release | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
-		rpm -Uvh $tmp/ius-release*.rpm | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		yum -y install wget epel-release >/dev/null 2>&1
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >/dev/null 2>&1
+		rpm -Uvh $tmp/ius-release*.rpm >/dev/null 2>&1
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -435,14 +439,14 @@ case $distro in
 				echo " ## $p already installed"
 			else
 				echo -n " ## installing $p ... "
-				yum -y install "$p" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+				yum -y install "$p" >/dev/null 2>&1
 			echo "";
 			fi
 		done;
 
 		echo -e "\n##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" >/dev/null 2>&1
 		unzip -qo "$tmp/$file" -d "$tmp/"
 		cp -R "$tmp/$fileName" "$webdir/$name"
 
