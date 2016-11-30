@@ -1799,7 +1799,7 @@ class AssetsController extends Controller
             'serial'        => e($asset->serial),
             'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
             'model_number'  => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
-            'status_label'        => ($asset->assigneduser) ? 'Deployed'.((e($asset->assetstatus)) ? '/'.e($asset->assetstatus->name) : '') : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
+            'status_label'        => ($asset->assigneduser) ? ((e($asset->assetstatus)) ? e($asset->assetstatus->name).'+' : 'Deployed') : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
             'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
             'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
