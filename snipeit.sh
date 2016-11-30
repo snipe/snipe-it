@@ -16,7 +16,7 @@
 
 # ensure running as root
 if [ "$(id -u)" != "0" ]; then
-  exec sudo "$0" "$@"
+  exec suido "$0" "$@"
 fi
 #First things first, let's set some variables and find our distro.
 clear
@@ -55,7 +55,7 @@ progress () {
 }
 
 vhenvfile () {
-		find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' | sudo tee -a /var/log/snipeit-install.log 2>&1
+		find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' | tee -a /var/log/snipeit-install.log 2>&1
 		apachefile=/etc/apache2/sites-available/$name.conf
 		echo "* Create Virtual host for apache."
 		{
@@ -72,7 +72,7 @@ vhenvfile () {
 			echo "</VirtualHost>"
 		} >> $apachefile
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf | sudo tee -a /var/log/snipeit-install.log 2>&1
+		a2ensite $name.conf | tee -a /var/log/snipeit-install.log 2>&1
 
 		cat > "$webdir/$name/.env" <<-EOF
 		#Created By Snipe-it Installer
@@ -90,20 +90,11 @@ perms () {
 		chmod_dirs=( "$webdir/$name/storage" )
 		chmod_dirs+=( "$webdir/$name/storage/private_uploads" )
 		chmod_dirs+=( "$webdir/$name/public/uploads" )
-		if [ "$distro" == "debian" ]; then
-			#Change permissions on directories
-			for chmod_dir in "${chmod_dirs[@]}"
-			do
-				chmod -R 755 "$chmod_dir"
-			done
-			chown -R www-data:www-data "/var/www/$name"
-		else
-			for chmod_dir in "${chmod_dirs[@]}"
-			do
-				sudo chmod -R 755 "$chmod_dir"
-			done
-			sudo chown -R www-data:www-data "/var/www/$name"
-		fi
+		#Change permissions on directories
+		for chmod_dir in "${chmod_dirs[@]}"
+		do
+			chmod -R 755 "$chmod_dir"
+		done
 }
 
 #CentOS Friendly f(x)s
@@ -204,13 +195,15 @@ random32="$(< /dev/urandom tr -dc _A-Za-z-0-9 2>&1 | head -c32)"
 
 #db_setup.sql will be injected to the database during install.
 #Again, this file should be removed, which will be a prompt at the end of the script.
-dbsetup=$tmp/db_setup.sql
-echo >> $dbsetup "CREATE DATABASE snipeit;"
-echo >> $dbsetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+dbsetup="$tmp/db_setup.sql"
+{
+  echo "CREATE DATABASE snipeit;"
+  echo "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+} >> "$dbsetup"
 
 #Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
-chown root:root $dbsetup
-chmod 700 $dbsetup
+chown root:root "$dbsetup"
+chmod 700 "$dbsetup"
 
 ## TODO: Progress tracker on each step
 
@@ -224,20 +217,20 @@ case $distro in
 
 		webdir=/var/www
 		echo -e "\n* Updating Debian packages in the background... ${spin[0]}\n"
-		apt-get update | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		apt-get update | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		wait
-		apt-get upgrade | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		apt-get upgrade | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		wait
 		echo -e "\n* Installing packages... ${spin[0]}\n"
 		echo -e "\n* Going to suppress more messages that you don't need to worry about. Please wait... ${spin[0]}"
-		DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-server mariadb-client apache2 git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-server mariadb-client apache2 git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		progress
 		wait
 		echo -e "\n* Cloning Snipeit, extracting to $webdir/$name..."
-		git clone https://github.com/snipe/snipe-it $webdir/$name | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		git clone https://github.com/snipe/snipe-it $webdir/$name | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		progress
-		php5enmod mcrypt | sudo tee -a /var/log/snipeit-install.log 2>&1
-		a2enmod rewrite | sudo tee -a /var/log/snipeit-install.log 2>&1
+		php5enmod mcrypt | tee -a /var/log/snipeit-install.log 2>&1
+		a2enmod rewrite | tee -a /var/log/snipeit-install.log 2>&1
 		vhenvfile
 		wait
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
@@ -252,6 +245,7 @@ case $distro in
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		perms
+		chown -R www-data:www-data "/var/www/$name"
 		service apache2 restart
 		;;
 	ubuntu)
@@ -262,31 +256,31 @@ case $distro in
 
 		webdir=/var/www
 		echo -ne "\n* Updating with apt-get update in the background... ${spin[0]}"
-		sudo apt-get update | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		apt-get update | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		rm /var/lib/dpkg/lock
 		progress
 		echo -ne "\n* Upgrading packages with apt-get upgrade in the background... ${spin[0]}"
-		sudo apt-get -y upgrade | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		apt-get -y upgrade | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		progress
 		echo -ne "\n* Setting up LAMP in the background... ${spin[0]}\n"
-		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | sudo tee /etc/apt/sources.list.d/mariadb.list) | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
-		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
-		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1 
+		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list) | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php | tee -a /var/log/snipeit-install.log & pid=$! 2>&1 
 		progress
 		if [ "$version" == "16.04" ]; then
-			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+			apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 			progress
-			sudo phpenmod mcrypt | sudo tee -a /var/log/snipeit-install.log 2>&1
-			sudo phpenmod mbstring | sudo tee -a /var/log/snipeit-install 2>&1
-			sudo a2enmod rewrite | sudo tee -a /var/log/snipeit-install.log 2>&1
+			phpenmod mcrypt | tee -a /var/log/snipeit-install.log 2>&1
+			phpenmod mbstring | tee -a /var/log/snipeit-install 2>&1
+			a2enmod rewrite | tee -a /var/log/snipeit-install.log 2>&1
 		else
-			sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+			apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 			progress
-			sudo php5enmod mcrypt | sudo tee -a /var/log/snipeit-install.log 2>&1
-			sudo a2enmod rewrite | sudo tee -a /var/log/snipeit-install.log 2>&1
+			php5enmod mcrypt | tee -a /var/log/snipeit-install.log 2>&1
+			a2enmod rewrite | tee -a /var/log/snipeit-install.log 2>&1
 		fi
 		echo -ne "\n* Cloning Snipeit, extracting to $webdir/$name... ${spin[0]}"
-		git clone https://github.com/snipe/snipe-it $webdir/$name | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		git clone https://github.com/snipe/snipe-it $webdir/$name | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		progress
 		vhenvfile
 		echo -e "* MySQL Phase next.\n"
@@ -298,6 +292,7 @@ case $distro in
 		curl -sS https://getcomposer.org/installer  | php
 		php composer.phar install --no-dev --prefer-source
 		perms
+		chown -R www-data:www-data "/var/www/$name"
 		service apache2 restart
 		;;
 	centos)
@@ -405,10 +400,8 @@ case $distro in
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/storage
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
+		perms
+		chown -R apache:apache $webdir/$name
 
                 /sbin/service iptables status >/dev/null 2>&1
                 if [ $? = 0 ]; then
@@ -429,9 +422,9 @@ case $distro in
 
 		#Allow us to get the mysql engine
 		echo -e "\n##  Add IUS, epel-release and mariaDB repos.";
-		yum -y install wget epel-release | sudo tee -a /var/log/snipeit-install.log 2>&1
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm | sudo tee -a /var/log/snipeit-install.log 2>&1
-		rpm -Uvh $tmp/ius-release*.rpm | sudo tee -a /var/log/snipeit-install.log 2>&1
+		yum -y install wget epel-release | tee -a /var/log/snipeit-install.log 2>&1
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm | tee -a /var/log/snipeit-install.log 2>&1
+		rpm -Uvh $tmp/ius-release*.rpm | tee -a /var/log/snipeit-install.log 2>&1
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -449,7 +442,7 @@ case $distro in
 
 		echo -e "\n##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file | sudo tee -a /var/log/snipeit-install.log 2>&1
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file | tee -a /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/$fileName $webdir/$name
 
@@ -523,12 +516,10 @@ case $distro in
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		sudo chmod -R 755 $webdir/$name/storage
-		sudo chmod -R 755 $webdir/$name/storage/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
+		perms
+		chown -R apache:apache $webdir/$name
 		# Make SeLinux happy
-		sudo chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+		chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
 
           	#Check if SELinux is enforcing
 	       	if [ "$(getenforce)" == "Enforcing" ]; then
@@ -536,7 +527,7 @@ case $distro in
 		       #Required for ldap integration
 	       	       setsebool -P httpd_can_connect_ldap on
 	 	       #Sets SELinux context type so that scripts running in the web server process are allowed read/write access
-	 	       sudo chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+	 	       chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
  	       	fi
 
 		systemctl restart httpd.service
