@@ -55,7 +55,7 @@ progress () {
 }
 
 vhenvfile () {
-		find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' | tee -a /var/log/snipeit-install.log 2>&1
+		find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 		apachefile=/etc/apache2/sites-available/$name.conf
 		echo "* Create Virtual host for apache."
 		{
@@ -72,7 +72,7 @@ vhenvfile () {
 			echo "</VirtualHost>"
 		} >> $apachefile
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf | tee -a /var/log/snipeit-install.log 2>&1
+		a2ensite $name.conf | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 
 		cat > "$webdir/$name/.env" <<-EOF
 		#Created By Snipe-it Installer
@@ -122,7 +122,7 @@ elif [ -f /etc/centos-release ]; then
 	distro="Centos"
 	version="6"
 else
-    distro="unsupported"
+	distro="unsupported"
 fi
 
 
@@ -229,8 +229,8 @@ case $distro in
 		echo -e "\n* Cloning Snipeit, extracting to $webdir/$name..."
 		git clone https://github.com/snipe/snipe-it $webdir/$name | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		progress
-		php5enmod mcrypt | tee -a /var/log/snipeit-install.log 2>&1
-		a2enmod rewrite | tee -a /var/log/snipeit-install.log 2>&1
+		php5enmod mcrypt | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		a2enmod rewrite | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 		vhenvfile
 		wait
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
@@ -270,14 +270,14 @@ case $distro in
 		if [ "$version" == "16.04" ]; then
 			apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 			progress
-			phpenmod mcrypt | tee -a /var/log/snipeit-install.log 2>&1
+			phpenmod mcrypt | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 			phpenmod mbstring | tee -a /var/log/snipeit-install 2>&1
-			a2enmod rewrite | tee -a /var/log/snipeit-install.log 2>&1
+			a2enmod rewrite | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 		else
 			apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 			progress
-			php5enmod mcrypt | tee -a /var/log/snipeit-install.log 2>&1
-			a2enmod rewrite | tee -a /var/log/snipeit-install.log 2>&1
+			php5enmod mcrypt | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+			a2enmod rewrite | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 		fi
 		echo -ne "\n* Cloning Snipeit, extracting to $webdir/$name... ${spin[0]}"
 		git clone https://github.com/snipe/snipe-it $webdir/$name | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
@@ -314,9 +314,9 @@ case $distro in
 			echo "enable=1"
 		} >> "$mariadbRepo"
 
-		yum -y install wget epel-release | tee -a /var/log/snipeit-install.log 2>&1
-		wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm | tee -a /var/log/snipeit-install.log 2>&1
-		rpm -Uvh "$tmp/ius-release*.rpm" | tee -a /var/log/snipeit-install.log 2>&1
+		yum -y install wget epel-release | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		rpm -Uvh "$tmp/ius-release*.rpm" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -327,14 +327,14 @@ case $distro in
 				echo " ## $p already installed"
 			else
 				echo -n " ## installing $p ... "
-				yum -y install "$p" | tee -a /var/log/snipeit-install.log 2>&1
+				yum -y install "$p" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 				echo "";
 			fi
 		done;
 
 		echo -e "\n##  Downloading Snipe-IT from github and putting it in the web directory.";
 
-		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" | tee -a /var/log/snipeit-install.log 2>&1
+		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/$fileName $webdir/$name
 
@@ -422,9 +422,9 @@ case $distro in
 
 		#Allow us to get the mysql engine
 		echo -e "\n##  Add IUS, epel-release and mariaDB repos.";
-		yum -y install wget epel-release | tee -a /var/log/snipeit-install.log 2>&1
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm | tee -a /var/log/snipeit-install.log 2>&1
-		rpm -Uvh $tmp/ius-release*.rpm | tee -a /var/log/snipeit-install.log 2>&1
+		yum -y install wget epel-release | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		rpm -Uvh $tmp/ius-release*.rpm | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -435,16 +435,16 @@ case $distro in
 				echo " ## $p already installed"
 			else
 				echo -n " ## installing $p ... "
-				yum -y install "$p" | tee -a /var/log/snipeit-install.log 2>&1
+				yum -y install "$p" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 			echo "";
 			fi
 		done;
 
 		echo -e "\n##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file | tee -a /var/log/snipeit-install.log 2>&1
-		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/$fileName $webdir/$name
+		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" | tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+		unzip -qo "$tmp/$file" -d "$tmp/"
+		cp -R "$tmp/$fileName" "$webdir/$name"
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
@@ -458,30 +458,32 @@ case $distro in
 
 		echo "##  Creating MySQL Database/User."
 		echo "##  Please Input your MySQL/MariaDB root password "
-		mysql -u root -p < $dbsetup
+		mysql -u root -p < "$dbsetup"
 
 		##TODO make sure the apachefile doesnt exist isnt already in there
 
 		#Create the new virtual host in Apache and enable rewrite
-		apachefile=/etc/httpd/conf.d/$name.conf
+		apachefile="/etc/httpd/conf.d/$name.conf"
 
-		echo "##  Creating the new virtual host in Apache.";
-		echo ""
-		echo ""
-		echo "LoadModule rewrite_module modules/mod_rewrite.so"
-		echo ""
-		echo "<VirtualHost *:80>"
-		echo "ServerAdmin webmaster@localhost"
-		echo "    <Directory $webdir/$name/public>"
-		echo "        Allow From All"
-		echo "        AllowOverride All"
-		echo "        Options +Indexes"
-		echo "   </Directory>"
-		echo "    DocumentRoot $webdir/$name/public"
-		echo "    ServerName $fqdn"
-		echo "        ErrorLog /var/log/httpd/snipeIT.error.log"
-		echo "        CustomLog /var/log/access.log combined"
-		echo "</VirtualHost>"
+		{
+			echo "##  Creating the new virtual host in Apache.";
+			echo ""
+			echo ""
+			echo "LoadModule rewrite_module modules/mod_rewrite.so"
+			echo ""
+			echo "<VirtualHost *:80>"
+			echo "ServerAdmin webmaster@localhost"
+			echo "    <Directory $webdir/$name/public>"
+			echo "        Allow From All"
+			echo "        AllowOverride All"
+			echo "        Options +Indexes"
+			echo "   </Directory>"
+			echo "    DocumentRoot $webdir/$name/public"
+			echo "    ServerName $fqdn"
+			echo "        ErrorLog /var/log/httpd/snipeIT.error.log"
+			echo "        CustomLog /var/log/access.log combined"
+			echo "</VirtualHost>"
+		} >> "$apachefile"
 
 ##TODO make sure this isnt already in there
 		echo "##  Setting up hosts file.";
