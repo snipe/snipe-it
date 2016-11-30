@@ -98,7 +98,7 @@ perms () {
 }
     
 log () {
-	eval "$@" >/dev/null 2>&1
+	eval "$@" |& tee -a /var/log/snipeit-install.log >/dev/null 2>&1
 }
 
 #CentOS Friendly f(x)s
