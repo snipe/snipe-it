@@ -217,7 +217,7 @@ case $distro in
 
 		webdir=/var/www
 		echo -e "\n* Updating Debian packages in the background... ${spin[0]}\n"
-		apt-get update | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		apt-get update |& tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		wait
 		apt-get upgrade | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		wait
@@ -256,7 +256,7 @@ case $distro in
 
 		webdir=/var/www
 		echo -ne "\n* Updating with apt-get update in the background... ${spin[0]}"
-		apt-get update | tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		apt-get update |& tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		rm /var/lib/dpkg/lock
 		progress
 		echo -ne "\n* Upgrading packages with apt-get upgrade in the background... ${spin[0]}"
