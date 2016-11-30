@@ -119,6 +119,7 @@ if [ -f /etc/lsb-release ]; then
 	. /etc/lsb-release
 	distro="${DISTRIB_ID,,}"
 	version="$DISTRIB_RELEASE"
+	codename="$DISTRIB_CODENAME"
 elif [ -f /etc/os-release ]; then
 	. /etc/os-release
 	distro="$ID"
@@ -268,7 +269,7 @@ case $distro in
 		sudo apt-get -y upgrade | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		progress
 		echo -ne "\n* Setting up LAMP in the background... ${spin[0]}\n"
-		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/mariadb.list) | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
+		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | sudo tee /etc/apt/sources.list.d/mariadb.list) | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php | sudo tee -a /var/log/snipeit-install.log & pid=$! 2>&1 
 		progress
