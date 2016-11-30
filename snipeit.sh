@@ -242,6 +242,7 @@ case $distro in
 		echo -e "* Modify the Snipe-It files necessary for a production environment.\n* Securing Mysql"
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
+		service mysql status >/dev/null || service mysql start
 		/usr/bin/mysql_secure_installation
 		echo -e "* Creating Mysql Database and User.\n##  Please Input your MySQL/MariaDB root password: "
 		mysql -u root -p < $dbsetup
@@ -288,6 +289,7 @@ case $distro in
 		progress
 		vhenvfile
 		echo -e "* MySQL Phase next.\n"
+		service mysql status >/dev/null || service mysql start
 		/usr/bin/mysql_secure_installation
 		echo -e "* Creating MySQL Database and user.\n* Please Input your MySQL/MariaDB root password created in the previous step.: "
 		mysql -u root -p < $dbsetup
