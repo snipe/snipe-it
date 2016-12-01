@@ -264,14 +264,14 @@ View Assets for  {{ $user->fullName() }}
                         {{ strtolower(trans('general.'.str_replace(' ','_',$log->action_type))) }}
                     </td>
                     <td>
-                        @if ($log->itemType()=="asset")
+                        @if (($log->item) && ($log->itemType()=="asset"))
                             @if ($log->item->deleted_at=='')
                                 {{ $log->item->showAssetName() }}
                             @else
                                 <del>{{ $log->item->showAssetName() }}</del> (deleted)
                             @endif
 
-                        @elseif (!is_null($log->itemType()))
+                        @elseif ($log->item)
                              @if ($log->item->deleted_at=='')
                                 {{ $log->item->name }}
                              @else
