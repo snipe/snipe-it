@@ -76,8 +76,7 @@ class AssetMaintenancesController extends Controller
     */
     public function getDatatable()
     {
-        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company','admin')
-        ->withTrashed();
+        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company','admin');
 
         if (Input::has('search')) {
             $maintenances = $maintenances->TextSearch(e(Input::get('search')));

@@ -329,8 +329,7 @@ class Asset extends Depreciable
     {
 
         return $this->hasMany('\App\Models\AssetMaintenance', 'asset_id')
-                  ->orderBy('created_at', 'desc')
-                  ->withTrashed();
+                  ->orderBy('created_at', 'desc');
     }
 
   /**
