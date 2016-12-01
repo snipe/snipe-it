@@ -54,7 +54,7 @@ class AuthController extends Controller
     }
 
 
-    function showLoginForm(Request $request)
+    function showLoginForm()
     {
 
         // Is the user logged in?
