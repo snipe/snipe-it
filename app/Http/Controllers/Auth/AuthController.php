@@ -56,15 +56,12 @@ class AuthController extends Controller
 
     function showLoginForm()
     {
-
-        // Is the user logged in?
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
-
-      // Show the page
         return View::make('auth.login');
     }
+
 
     private function login_via_ldap(Request $request)
     {
@@ -179,8 +176,6 @@ class AuthController extends Controller
 
         // Unset the page we were before from the session
         \Session::forget('loginRedirect');
-
-
 
         // Redirect to the users page
         return redirect()->to($redirect)->with('success', trans('auth/message.signin.success'));
