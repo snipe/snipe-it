@@ -260,6 +260,9 @@ case $distro in
 		#composer install, set permissions, restart apache.
 
 		webdir=/var/www
+		echo -ne "\n* Adding MariaDB repoin the background... ${spin[0]}"
+		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list >/dev/null 2>&1)
+		log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
 		echo -ne "\n* Updating with apt-get update in the background... ${spin[0]}"
 		log "apt-get update" & pid=$!
 		[ -f /var/lib/dpkg/lock ] && rm -f /var/lib/dpkg/lock
@@ -268,8 +271,6 @@ case $distro in
 		log "apt-get -y upgrade" & pid=$!
 		progress
 		echo -ne "\n* Setting up LAMP in the background... ${spin[0]}\n"
-		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list >/dev/null 2>&1)
-		log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
 		log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php curl" & pid=$!
 		progress
 		if [ "$version" == "16.04" ]; then
