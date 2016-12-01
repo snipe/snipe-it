@@ -104,4 +104,21 @@ return [
         ],
     ],
 
+    /*
+   |--------------------------------------------------------------------------
+   | Login throttling
+   |--------------------------------------------------------------------------
+   |
+   | This handles the max failed login attempt throttling.
+   | You should not change the values here, but should change them in your
+   | application's .env file instead, as future changes to this file could
+   | overwrite your changes here.
+   |
+   */
+
+    'throttle' => [
+        'max_attempts' => env('LOGIN_MAX_ATTEMPTS', 10),
+        'lockout_duration' =>  env('LOGIN_LOCKOUT_DURATION', 60),
+    ],
+
 ];

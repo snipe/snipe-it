@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
@@ -30,7 +31,7 @@ use PragmaRX\Google2FA\Google2FA;
 class AuthController extends Controller
 {
 
-    use ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     // This tells the auth controller to use username instead of email address
     protected $username = 'username';
@@ -53,9 +54,10 @@ class AuthController extends Controller
     }
 
 
-    function showLoginForm()
+    function showLoginForm(Request $request)
     {
-      // Is the user logged in?
+
+        // Is the user logged in?
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
@@ -123,6 +125,20 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+        $this->maxLoginAttempts = config('auth.throttle.max_attempts');
+        $this->lockoutTime = config('auth.throttle.lockout_duration');
+
+        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
         $user = null;
 
         // Should we even check for LDAP users?
@@ -144,8 +160,17 @@ class AuthController extends Controller
           LOG::debug("Authenticating user against database.");
           // Try to log the user in
           if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+
+              if ($throttles && ! $lockedOut) {
+                  $this->incrementLoginAttempts($request);
+              }
+
               LOG::debug("Local authentication failed.");
               return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
+          } else {
+              if ($throttles) {
+                  $this->clearLoginAttempts($request);
+              }
           }
         }
 
@@ -258,4 +283,19 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
     }
+
+    /**
+     * Get the login lockout error message.
+     *
+     * @param  int  $seconds
+     * @return string
+     */
+    protected function getLockoutErrorMessage($seconds)
+    {
+        return \Lang::has('auth/message.throttle')
+            ? \Lang::get('auth/message.throttle', ['seconds' => $seconds])
+            : 'Too many login attempts. Please try again in '.$seconds.' seconds.';
+    }
+
+
 }
