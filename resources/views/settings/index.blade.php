@@ -210,7 +210,7 @@
                     <tr>
                           <td class="col-md-4">{{ trans('admin/settings/general.snipe_version') }}</td>
                           <td class="col-md-8">
-                              {{  config('version.hash_version') }}
+                              {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
                           </td>
                       </tr>
                       <tr>
