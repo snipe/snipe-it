@@ -46,4 +46,15 @@ class PasswordController extends Controller
     public function getEmailSubject(){
         return property_exists($this, 'subject') ? $this->subject : \Lang::get('mail.reset_link');
     }
+
+    /**
+     * Get the response for after the reset link has been successfully sent.
+     *
+     * @param  string  $response
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function getSendResetLinkEmailSuccessResponse($response)
+    {
+        return redirect()->route('login')->with('status', trans($response));
+    }
 }
