@@ -405,7 +405,7 @@
                         @if (($log->item) && ($log->itemType()=="asset"))
                             <a href="{{ route('view/hardware', $log->item_id) }}">{{ $log->item->asset_tag }} - {{ $log->item->showAssetName() }}</a>
                         @elseif ($log->item)
-                            <a href="{{ route('view/'. $log->itemType(), $log->item_id) }}">{{ $log->item->name }}</a
+                            <a href="{{ route('view/'. $log->itemType(), $log->item_id) }}">{{ $log->item->name }}</a>
                         @else
                             {{ trans('general.bad_data') }}
                         @endif
