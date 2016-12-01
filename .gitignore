@@ -37,3 +37,4 @@ storage/private_uploads/users/*
 tests/_data/scenarios
 tests/_output/*
 tests/_support/_generated/*
+/npm-debug.log
