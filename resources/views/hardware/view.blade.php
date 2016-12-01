@@ -214,7 +214,7 @@
 
                     @if ($asset->supplier)
                       <tr>
-                        <td>{{ trans('admin/hardware/form.supplier') }}</td>
+                        <td>{{ trans('general.supplier') }}</td>
                         <td>
                             @can ('superuser')
                                   <a href="{{ route('view/supplier', $asset->supplier_id) }}">
