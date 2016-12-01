@@ -124,16 +124,18 @@ class AuthController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
         $user = null;
+
         // Should we even check for LDAP users?
         if (Setting::getSettings()->ldap_enabled=='1') {
             LOG::debug("LDAP is enabled.");
             try {
               $user = $this->login_via_ldap($request);
               Auth::login($user, true);
+
+            // If the user was unable to login via LDAP, log the error and let them fall through to
+            // local authentication.
             } catch (\Exception $e) {
-              if(Setting::getSettings()->ldap_pw_sync!='1') {
-                return redirect()->back()->withInput()->with('error',$e->getMessage());
-              }
+                LOG::error("There was an error authenticating the LDAP user: ".$e->getMessage());
             }
         }
 
