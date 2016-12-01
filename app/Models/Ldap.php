@@ -219,7 +219,7 @@ class Ldap extends Model
             $user->notes = 'Imported on first login from LDAP';
 
             if ($user->save()) {
-                return true;
+                return $user;
             } else {
                 LOG::debug('Could not create user.'.$user->getErrors());
                 throw new Exception("Could not create user: ".$user->getErrors());
