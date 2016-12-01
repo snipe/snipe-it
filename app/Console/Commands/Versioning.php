@@ -40,20 +40,19 @@ class Versioning extends Command
      */
     public function fire()
     {
-        // Path to the file containing your version
-        // This will be overwritten everything you commit a message
+
         $versionFile = 'config/version.php';
+        $hash_version = str_replace("\n",'',shell_exec('git describe --tags'));
 
-        // The git's output
-        // get the argument passed in the git command
-         $hash_version = $this->argument('app_version');
+        $version = explode('-', $hash_version);
 
-         // discard the commit hash
-         $version = explode('-', $hash_version);
-         $realVersion = $version[0];
-
-         // save the version array to a variable
-         $array = var_export(array('app_version' => $realVersion,'hash_version' => $hash_version), true);
+        $array = var_export(
+            array(
+            'app_version' => $version[0],
+            'build_version' => $version[1],
+            'hash_version' => $version[2],
+            'full_hash' => $hash_version),
+        true);
 
 
         // Construct our file content
@@ -64,7 +63,7 @@ CON;
 
         // And finally write the file and output the current version
         \File::put($versionFile, $content);
-        $this->line('Setting version: '. \config('version.latest'));
+        $this->line('Setting version: '. config('version.app_version').' build '.config('version.build_version').' ('.config('version.hash_version').')');
     }
 
     /**
@@ -75,7 +74,6 @@ CON;
     protected function getArguments()
     {
         return array(
-            array('app_version', InputArgument::REQUIRED, 'version number is required.'),
         );
     }
 
