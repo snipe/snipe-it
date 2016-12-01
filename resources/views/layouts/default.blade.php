@@ -437,19 +437,23 @@
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Requestable') }}">@lang('admin/hardware/general.requestable')</a></li>
 
                   <li class="divider">&nbsp;</li>
+                    @can('assets.checkout')
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
                         <a href="{{ route('hardware/bulkcheckout') }}">
                             {{ trans('general.bulk_checkout') }}</a>
                     </li>
+                    @endcan
 
                     @can('superuser')
                     <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware/models') }}">@lang('general.asset_models')</a></li>
                   <li><a href="{{ URL::to('admin/settings/categories') }}" {!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
                     @endcan
-                  <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
-                  <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
-                  <li><a href="{{ URL::to('hardware/import') }}">@lang('general.import') </a></li>
-                  <li><a href="{{ URL::to('hardware/history') }}">@lang('general.import-history') </a></li>
+                    @can('assets.create')
+                      <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
+                      <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
+                      <li><a href="{{ URL::to('hardware/import') }}">@lang('general.import') </a></li>
+                      <li><a href="{{ URL::to('hardware/history') }}">@lang('general.import-history') </a></li>
+                    @endcan
                 </ul>
               </li>
               @endcan
