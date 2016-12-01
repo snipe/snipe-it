@@ -28,7 +28,7 @@
         <tr role="row">
             <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/table.title') }}</th>
-            <th class="col-sm-1">{{ trans('admin/licenses/table.serial') }}</th>
+            <th class="col-sm-1">{{ trans('admin/licenses/form.license_key') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/form.seats') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/form.remaining_seats') }}</th>
             <th class="col-sm-1">{{ trans('admin/licenses/form.expiration') }}</th>
