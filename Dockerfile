@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM debian:jessie
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
 RUN apt-get update && apt-get install -y \
@@ -13,7 +13,9 @@ patch \
 curl \
 vim \
 git \
-mysql-client
+mysql-client \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN php5enmod mcrypt
 RUN php5enmod gd
