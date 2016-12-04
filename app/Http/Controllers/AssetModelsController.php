@@ -145,7 +145,7 @@ class AssetModelsController extends Controller
         $model->category_id = e(Input::get('category_id'));
         $model->model_number = e(Input::get('model_number'));
         $model->user_id = Auth::user()->id;
-        $model->note            = e(Input::get('note'));
+        $model->notes            = e(Input::get('notes'));
         $model->eol= null;
 
         if (Input::get('fieldset_id')=='') {
