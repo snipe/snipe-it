@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'عن تصنيفات الأصول',
-    'about_categories'  				=> 'تصنيفات الأصول تساعدك على ترتيب الأصول. من الأمثلة على التصنيفات &quot; مكاتب &quot;،  &quot;أجهزة الكمبيوتر المحمولة &quot;،  &quot;الهواتف النقالة &quot;،  &quot;أجهزة لوحية &quot; وهكذا، كما يمكنك استخدام التصنيفات بأي طريقة تناسبك. ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'التصنيفات',
     'category_name'  					=> 'اسم التصنيف',
     'checkin_email'                     => 'إرسال إشعار للمستخدم عند الإدخال.',

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Categorie di beni',
-    'about_categories'  				=> 'Le categorie degli assets ti aiutano ad organizzare i tuoi beni. Alcuni esempi di categorie possono essere "Desktop", "Laptop", "Mobile Phone" e così via, ma puoi usare le categorie degli assets in qualsiasi modo abbia senso per te. ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Categorie degli Assets',
     'category_name'  					=> 'Nome categoria',
     'checkin_email'                     => 'Invia email all\'utente al momento della registrazione.',

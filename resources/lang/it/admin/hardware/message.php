@@ -37,11 +37,11 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Alcuni elementi non sono stati importati correttamente.',
+        'errorDetail'           => 'Gli elementi seguenti non sono stati importati correttamente a causa di errori.',
+        'success'               => "Il file è stato importato con successo",
+        'file_delete_success'   => "Il file è stato cancellato con successo",
+        'file_delete_error'      => "Impossibile eliminare il file",
     ),
 
 
@@ -55,21 +55,21 @@ return array(
         'error'   		=> 'Il bene non è stato estratto, per favore riprova',
         'success' 		=> 'Il bene è stato estratto con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Questo prodotto non è disponibile per il checkout!'
     ),
 
     'checkin' => array(
         'error'   		=> 'Il bene non è stato registrato, per favore riprova',
         'success' 		=> 'Il bene è stato registrato con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Il prodotto è già rientrato.',
 
     ),
 
     'requests' => array(
         'error'   		=> 'L\'asset non è stato richiesto, si prega di riprovare',
         'success' 		=> 'Asset richiesto con successo.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'Richiesta di checkout cancellata con successo'
     )
 
 );

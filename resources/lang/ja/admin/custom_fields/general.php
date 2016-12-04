@@ -7,7 +7,7 @@ return array(
     'about_fieldsets_text'		=> 'フィールドセットでは、頻繁に利用されるカスタム フィールドのグループを作成することができます。
 よく',
     'custom_format'             => 'Custom format...',
-    'encrypt_field'      	        => 'Encrypt the value of this field in the database for each asset. The decrypted value of this field will only be viewable by admins.',
+    'encrypt_field'      	        => 'Encrypt the value of this field in the database',
     'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
     'encrypted'      	        => 'Encrypted',
     'fieldset'      	        => 'フィールドセット',
@@ -16,7 +16,7 @@ return array(
     'fieldset_name'           => 'フィールドセット名',
     'field_name'              => 'フィールド名',
     'field_values'            => 'Field Values',
-    'field_values_help'       => 'Add selectable options, one per line. Blank lines other than the first line will be ignored. Separate values and labels by pipes on each line (optional).',
+    'field_values_help'       => 'Add selectable options, one per line. Blank lines other than the first line will be ignored.',
     'field_element'           => 'フォームエレメント',
     'field_element_short'     => 'エレメント',
     'field_format'            => 'フォーマット',

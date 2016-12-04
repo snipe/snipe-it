@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Bekræft massesletning af aktiver',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Gennemgå aktiver for massesletning nedenfor. Disse aktiver kan gendannes når slettet, men de vil ikke længere være forbundet med eventuelle brugere, de i øjeblikket er tildelt.',
   'bulk_delete_warn'	=> 'Du er i gang med at slette :asset_count aktiver.',
 	'bulk_update'		=> 'Masseopdater Aktiver',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Opret Aktiv',
     'date'				=> 'Købsdato',
     'depreciates_on'	=> 'Afskrives Den',
-    'depreciation'		=> 'Afskrivning',
     'default_location'	=> 'Standardplacering',
     'eol_date'			=> 'EOL Dato',
     'eol_rate'			=> 'EOL Rate',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Vælg statustype',
     'serial'			=> 'Serienummer',
     'status'			=> 'Status',
-    'supplier'			=> 'Leverandør',
     'tag'				=> 'Aktiv mærkat',
     'update'			=> 'Aktiv Opdatering',
     'warranty'			=> 'Garanti',

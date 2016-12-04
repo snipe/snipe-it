@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirmar eliminación masiva de bienes',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Revisar los bienes para eliminación masiva. Una vez eliminados, esos bienes pueden ser restaurados, pero no volverán a estar asociados con ningún usuario a los que esté asignado.',
   'bulk_delete_warn'	=> 'Está a punto de borrar :asset_count.',
 	'bulk_update'		=> 'Actualización masiva de Equipos',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Crear Equipo',
     'date'				=> 'Fecha Compra',
     'depreciates_on'	=> 'Se deprecia en',
-    'depreciation'		=> 'Depreciación',
     'default_location'	=> 'Ubicación Predeterminada',
     'eol_date'			=> 'Fecha EOL',
     'eol_rate'			=> 'Tasa de EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Selecciona estado',
     'serial'			=> 'N. Serie',
     'status'			=> 'Estado',
-    'supplier'			=> 'Proveedor',
     'tag'				=> 'Etiqueta',
     'update'			=> 'Actualizar Equipo',
     'warranty'			=> 'Garantía',

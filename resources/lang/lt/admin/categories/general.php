@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Apie įrangos kategorijas',
-    'about_categories'  				=> 'Įrangos kategorijos padeda jums suorganizuoti visą įrangą pagal tam tikrus požymius. Kai kurios pavyzdinės kategotijos gali būti &quot;Staliniai kompiuteriai&quot;, &quot;Nešiojamieji kompiuteriai&quot;, &quot;Mobilūs Telefonai&quot;, &quot;Planšetės&quot;,, bet jūs galite keisti ir kurti kategorijas pagal savo poreikį ir patogumą.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Įrangos kategorijos',
     'category_name'  					=> 'Kategorijos pavadinimas',
     'checkin_email'                     => 'Išsiųsti el. paštą naudotojui pridėti įragą.',

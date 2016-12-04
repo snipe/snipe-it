@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Massapäivitä Laitteita',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Uusi Laite',
     'date'				=> 'Ostopäivämäärä',
     'depreciates_on'	=> 'Poistoaika',
-    'depreciation'		=> 'Poistoluokka',
     'default_location'	=> 'Oletussijainti',
     'eol_date'			=> 'Poistopäivä',
     'eol_rate'			=> 'Poistonopeus',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Valitse Tilan Tyyppi',
     'serial'			=> 'Sarjanumero',
     'status'			=> 'Tila',
-    'supplier'			=> 'Toimittaja',
     'tag'				=> 'Laitetunniste',
     'update'			=> 'Laitepäivitys',
     'warranty'			=> 'Takuu',

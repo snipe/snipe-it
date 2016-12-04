@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'about_models_title'     => 'About Asset Models',
+    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
     'deleted'  					        => 'この型番は削除されました。<a href="/hardware/models/:model_id/restore">元に戻すにはココをクリックして下さい。</a>.',
     'restore'                   => '型番を復元',
     'requestable'               => 'Users may request this model',

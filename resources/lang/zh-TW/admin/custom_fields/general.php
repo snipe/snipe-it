@@ -6,7 +6,7 @@ return array(
     'about_fieldsets_title'		=> '關於欄位集',
     'about_fieldsets_text'		=> '欄位集允許您為常用的資產模型定義一組可重複使用的欄位。',
     'custom_format'             => '自訂格式',
-    'encrypt_field'      	        => '加密此欄位的值。只有管理員能夠查看原始資料。',
+    'encrypt_field'      	        => 'Encrypt the value of this field in the database',
     'encrypt_field_help'      => '警告：對欄位加密將導致此欄無法用於搜索',
     'encrypted'      	        => '已加密',
     'fieldset'      	        => '欄位集',
@@ -15,8 +15,7 @@ return array(
     'fieldset_name'           => '名稱',
     'field_name'              => '名稱',
     'field_values'            => '欄位值',
-    'field_values_help'       => '新增可選項，每行一個項目。第一行之外的空行將被忽略。
-標籤和值透過管線符號〝|〞分隔 (可選)',
+    'field_values_help'       => 'Add selectable options, one per line. Blank lines other than the first line will be ignored.',
     'field_element'           => '表單元素',
     'field_element_short'     => '表單元素',
     'field_format'            => '格式',

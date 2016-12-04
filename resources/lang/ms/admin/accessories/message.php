@@ -6,19 +6,19 @@ return array(
     'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Aksesori tidak dicipta, sila cuba lagi.',
+        'success' => 'Aksesori telah berjaya dicipta.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Aksesori gagal dikemaskini, sila cuba lagi',
+        'success' => 'Aksesori berjaya dikemaskini.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Anda pasti anda mahu membuang aksesori ini?',
+        'error'   => 'Ralat berlaku semasa membuang aksesori. Sila cuba lagi.',
+        'success' => 'Aksesori berjaya dibuang.'
     ),
 
      'checkout' => array(

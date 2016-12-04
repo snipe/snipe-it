@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'about_models_title'     => 'About Asset Models',
+    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
     'deleted'  					        => 'Ce modèle a été détruit. <a href="/hardware/models/:model_id/restore">Cliquez ici pour le restaurer</a>.',
     'restore'                   => 'Restaurer le modèle',
     'requestable'               => 'Les utilisateurs peuvent demander ce modèle',

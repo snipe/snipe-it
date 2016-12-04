@@ -4,9 +4,9 @@ return array(
     'about_asset_depreciations'  			=> 'Info Amortización Equipos',
     'about_depreciations'  					=> 'Puedes configurar clases de amortización para amortizar equipos de forma lineal.',
     'asset_depreciations'  					=> 'Amortizaciones',
-    'create_depreciation'  					=> 'Crear Amortización',
+    'create'  					            => 'Create Depreciation',
     'depreciation_name'  					=> 'Nombre Amortización',
     'number_of_months'  					=> 'Meses',
-    'update_depreciation'  					=> 'Actualizar Amortización',
+    'update'  					            => 'Update Depreciation',
 
 );

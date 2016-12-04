@@ -7,6 +7,7 @@ return array(
     'account_not_activated'  => 'Acest utilizator nu a fost activat.',
     'account_suspended'      => 'Acest utilizator este suspendat.',
     'account_banned'         => 'Acest utilizator este banat.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
 
     'signin' => array(
         'error'   => 'A aparut o problema la logare, va rugam incercati iar.',

@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'about_licenses_title'            => 'About Licenses',
+    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
     'checkin'  					=> '接入许可证数量',
     'checkout_history'  		=> '借出历史记录',
     'checkout'  				=> '借出许可证数量',

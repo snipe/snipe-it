@@ -15,4 +15,7 @@ return array(
     'software_user'     => 'Perisian diagihkan kepada :nama',
     'view_user'         => 'Papar Pengguna :nama',
     'usercsv'           => 'CSV file',
+    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
+    'two_factor_enrolled' => '2FA Device Enrolled ',
+    'two_factor_active'   => '2FA Active ',
     );

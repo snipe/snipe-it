@@ -7,6 +7,7 @@ return array(
     'account_not_activated'  => '使用者尚未啟用',
     'account_suspended'      => '使用者已被停用',
     'account_banned'         => '使用者已被禁用',
+    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
 
     'signin' => array(
         'error'   => '登入過程中發生問題，請重試',

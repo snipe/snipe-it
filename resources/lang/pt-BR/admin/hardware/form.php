@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirmo a exclusão dos ativos selecionados',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Reveja os ativos selecionados para deletar. Depois de deletados, estes ativos podem ser restaurados, mas não estarão associados aos usuários.',
   'bulk_delete_warn'	=> 'Você está prestes a excluir.',
 	'bulk_update'		=> 'Ativos da Atualização em Massa',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Criar Ativo',
     'date'				=> 'Data da Compra',
     'depreciates_on'	=> 'Deprecia em',
-    'depreciation'		=> 'Depreciação',
     'default_location'	=> 'Local Padrão',
     'eol_date'			=> 'Date de EOL',
     'eol_rate'			=> 'Classificação de EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Selecione o Tipo de Status',
     'serial'			=> 'Serial',
     'status'			=> 'Status',
-    'supplier'			=> 'Fornecedor',
     'tag'				=> 'Marcação do Ativo',
     'update'			=> 'Atualização do Ativo',
     'warranty'			=> 'Garantia',

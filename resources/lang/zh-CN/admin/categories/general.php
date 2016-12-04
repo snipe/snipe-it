@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> '关于资产分类',
-    'about_categories'  				=> '资产分类帮助你组织你的资产。例如：台式机，笔记本，手机，平板 等等，并且你可以自己去定义这些分类。 ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> '资产分类',
     'category_name'  					=> '分类名称',
     'checkin_email'                     => '发送邮件到登记的使用者',

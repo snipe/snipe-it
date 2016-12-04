@@ -8,16 +8,16 @@ return array(
 
     'create' => array(
         'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'success' => 'Nhãn trạng thái được tạo thành công.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Nhãn Tình trạng không được cập nhật, xin vui lòng thử lại',
+        'success' => 'Nhãn trạng thái được tạo thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'confirm'   => 'Bạn có chắc bạn muốn xóa nhãn tình trạng này?',
         'error'   => 'There was an issue deleting the Status Label. Please try again.',
         'success' => 'The Status Label was deleted successfully.'
     )

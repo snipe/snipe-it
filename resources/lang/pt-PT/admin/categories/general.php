@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Acerca de Categorias de Equipamentos',
-    'about_categories'  				=> 'As categorias de equipamentos ajudam na organização dos teus equipamentos. Alguns exemplos de categorias são "Computadores", "Portáteis", "Telemóveis", "Tablets", e semelhantes. De qualquer das formas, podes usar as categorias da forma que faça mais sentido para ti. ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Categorias de Equipamentos',
     'category_name'  					=> 'Nome da Categoria',
     'checkin_email'                     => 'Na devolução, enviar email ao utilizador.',

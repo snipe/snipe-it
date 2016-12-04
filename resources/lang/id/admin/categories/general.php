@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Tentang Kategori Aset',
-    'about_categories'  				=> 'Kategori aset membantu Anda mengatur aset Anda. Beberapa contoh kategori mungkin &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, dan sebagainya, tetapi Anda dapat menggunakan kategori untuk aset apapun cara yang masuk akal untuk Anda.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Kategori Aset',
     'category_name'  					=> 'Nama Kategori',
     'checkin_email'                     => 'Kirim surel ke pengguna ketika barang di berikan kepadanya.',

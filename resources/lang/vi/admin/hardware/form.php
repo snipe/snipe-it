@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Cập nhật tài sản số lượng lớn',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Tạo tài sản',
     'date'				=> 'Ngày mua',
     'depreciates_on'	=> 'Trích khấu hao',
-    'depreciation'		=> 'Khấu hao',
     'default_location'	=> 'Vị trí mặc định',
     'eol_date'			=> 'Ngày EOL',
     'eol_rate'			=> 'Tỷ lệ EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Lựa chọn loại tình trạng',
     'serial'			=> 'Số Sê-ri',
     'status'			=> 'Tình trạng',
-    'supplier'			=> 'Nhà cung cấp',
     'tag'				=> 'Thẻ tài sản',
     'update'			=> 'Cập nhật tài sản',
     'warranty'			=> 'Bảo hành',

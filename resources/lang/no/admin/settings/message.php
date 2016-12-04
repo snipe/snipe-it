@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Den backup-filen ble ikke funnet på serveren.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Det oppstod en feil under fjerning. ',
+        'validation_failed'     => 'Din fjerningsbekreftelse er feil. Vennligst skriv inn ordet "DELETE" i bekreftelsesboksen.',
+        'success'               => 'Slettede rader ble fjernet.'
     ),
 
 );

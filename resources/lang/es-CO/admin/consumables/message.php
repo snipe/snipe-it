@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'El consumible no existe.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'El consumible no fue creado, por favor intente nuevamente.',
+        'success' => 'Consumible creado con éxito.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'El consumible no fue subido, por favor intente nuevamente',
+        'success' => 'El consumible fue subido con éxito.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => '¿Está seguro que desea eliminar este consumible?',
+        'error'   => 'Hubo un error al borrar este consumible. Por favor intente nuevamente.',
+        'success' => 'El consumible ha sido eliminado correctamente.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumible no fue retirado, por favor, inténtelo de nuevo',
+        'success' 		=> 'Consumible fue retirado satisfactoriamente.',
+        'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumible no fue ingresado, por favor, inténtelo de nuevo',
+        'success' 		=> 'Consumible fue ingresado satisfactoriamente.',
+        'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
     )
 
 

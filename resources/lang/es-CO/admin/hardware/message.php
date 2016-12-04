@@ -2,74 +2,74 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Atención: </strong> Este equipo está marcado como no isntalabre.
+                        Si no es correcto, actualiza su estado.',
+    'does_not_exist' 	=> 'Equipo inexistente.',
+    'does_not_exist_or_not_requestable' => 'Buen intento. El activo no existe o no es solicitable.',
+    'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Equipo no creado, intentalo de nuevo. :(',
+        'success' 		=> 'Equipo creado. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Equipo no actualizado, intentalo de nuevo',
+        'success' 			=> 'Equipo actualizado.',
+        'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'El equipo no fue restaurado, por favor intente nuevamente',
+        'success' 		=> 'Equipo restaurado correctamente.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
+        'success' => 'Archivo eliminado correctamente.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
+        'success' => 'Archivo(s) cargado correctamente.',
+        'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
+        'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Algunos elementos no se pudieron importar correctamente.',
+        'errorDetail'           => 'Estos elementos no pudieron importarse debido a errores.',
+        'success'               => "Tu archivo ha sido importado",
+        'file_delete_success'   => "Tu archivo ha sido eliminado con éxito",
+        'file_delete_error'      => "No pudimos eliminar tu archivo",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Estás seguro que quieres eliminar el equipo?',
+        'error'   		=> 'Equipo no eliminado, intentalo de nuevo.',
+        'success' 		=> 'Equipo eliminado.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'Equipo no asignado, intentalo de nuevo',
+        'success' 		=> 'Equipo asignado.',
+        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
+        'not_available' => '¡Ese artículo no está disponible para retirada!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'No se ha quitado el equipo. Intentalo de nuevo.',
+        'success' 		=> 'Equipo quitado correctamente.',
+        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
+        'already_checked_in'  => 'Ese activo ya se quito.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'Bien no solicitado, por favor inténtelo de nuevo',
+        'success' 		=> 'Bien solicitado correctamente.',
+        'canceled'      => 'Solicitud de retirada cancelada con éxito'
     )
 
 );

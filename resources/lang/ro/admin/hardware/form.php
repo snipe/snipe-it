@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Bulk Update Assets',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Creeaza activ',
     'date'				=> 'Data achizitie',
     'depreciates_on'	=> 'Depreciere la',
-    'depreciation'		=> 'Depreciere',
     'default_location'	=> 'Locatie implicita',
     'eol_date'			=> 'Data EOL',
     'eol_rate'			=> 'Rata EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Selecteaza tip status',
     'serial'			=> 'Serie',
     'status'			=> 'Stare',
-    'supplier'			=> 'Furnizor',
     'tag'				=> 'Eticheta activ',
     'update'			=> 'Actualizeaza activ',
     'warranty'			=> 'Garantie',

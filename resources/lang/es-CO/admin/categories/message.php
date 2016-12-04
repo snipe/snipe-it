@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'Categoría inexistente.',
+    'assoc_models'	 => 'Esta categoría está asignada al menos a un modelo y no puede ser eliminada. ',
+    'assoc_items'	 => 'Esta categoría está actualmente asociada con al menos uno: asset_type y no se puede eliminar. Por favor actualice su: asset_type para ya no hacer referencia a esta categoría e inténtelo de nuevo. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'La categoría no se ha creado, intentalo de nuevo.',
+        'success' => 'Categoría creada correctamente.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'La categoría no se ha actualizado, intentalo de nuevo.',
+        'success' => 'Categoría actualizada correctamente.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Estás seguro de eliminar esta categoría?',
+        'error'   => 'Ha habido un problema eliminando la categoría. Intentalo de nuevo.',
+        'success' => 'Categoría eliminada.'
     )
 
 );

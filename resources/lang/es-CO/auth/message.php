@@ -2,35 +2,36 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Ya existe un usuario con este e-mail.',
+    'account_not_found'      => 'El nombre de usuario o contraseña es incorrecta.',
+    'account_not_activated'  => 'Este usuario no está activado.',
+    'account_suspended'      => 'Este usuario está desactivado.',
+    'account_banned'         => 'Este usuario ha sido expulsado.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Ha habido un problema al iniciar sesión. Por favor, vuelve a intentarlo.',
+        'success' => 'has iniciado sesión correctamente.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Ha habido un problema al crear la cuenta. Por favor, vuelve a intentarlo.',
+        'success' => 'Cuenta creada correctamente.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
+            'success' => 'Email de recuperación de password enviado.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
+            'success' => 'El password ha sido reseteado correctamente.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Ha habido un problema al intentar activar la cuenta. Por favor, vuelve a intentarlo..',
+        'success' => 'Cuenta correctamente activada.',
     ),
 
 );

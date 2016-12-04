@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Omkring Aktiver Kategorier',
-    'about_categories'  				=> 'Aktiver kategorier hjælper dig med at organisere dine aktiver. Eksempler på kategorier kunne være &quot;Stationære coputere&quot;, &quot;Bærbare&quot;, &quot;Mobiltelefoner&quot;, &quot;Tabletter&quot; osv., men du kan bruge aktiver kategorier på en hvilken som helst måde som giver mening for dig.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Aktiver Kategorier',
     'category_name'  					=> 'Kategorinavn',
     'checkin_email'                     => 'Send email til bruger ved tjek ind.',

@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    'about_suppliers_title' => 'About Suppliers',
+    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
     'address'               => '供应商地址',
     'assets'                => '资产',
     'city'                  => '城市',

@@ -23,7 +23,7 @@ return array(
         'error'   => '上傳檔案失敗，請重試。',
         'success' => '上傳檔案成功。',
         'nofiles' => '您尚未選擇要上傳的檔案，或上傳的檔案太大。',
-        'invalidfiles' => '一個或多個檔案太大或屬於不被允許的檔案類型。允許上傳的檔案類型：png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf。',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
     ),
 
     'update' => array(

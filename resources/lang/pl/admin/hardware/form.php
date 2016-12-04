@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Potwierdź zbiorcze usuwanie aktywów',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Przejrzyj usuwanie zbiorcze aktywów poniżej. Po usunięciu tych aktywów będą one mogły zostać przywrócone, ale nie będą one skojarzone z żadnym z użytkowników, do których są aktualnie przypisane.',
   'bulk_delete_warn'	=> 'Zamierzasz usunąć :asset_count aktywów.',
 	'bulk_update'		=> 'Zbiorcza aktualizacja aktywów',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Nowy nabytek',
     'date'				=> 'Data zakupu',
     'depreciates_on'	=> 'Amortyzacja włączona',
-    'depreciation'		=> 'Amortyzacja',
     'default_location'	=> 'Domyślna lokalizacja',
     'eol_date'			=> 'Data końca licencji',
     'eol_rate'			=> 'Szacowany koniec licencji',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Wybierz status',
     'serial'			=> 'Numer seryjny',
     'status'			=> 'Status',
-    'supplier'			=> 'Sprzedawca',
     'tag'				=> 'Tag-i zasobu/nabytku',
     'update'			=> 'Aktualizacja zasobu/nabytku',
     'warranty'			=> 'Gwarancja',

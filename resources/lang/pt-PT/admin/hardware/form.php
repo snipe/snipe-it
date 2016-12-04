@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirmar Apagar ativos seleccionados',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Reveja os ativos para apagar abaixo. Depois de apagados, estes ativos podem ser restaurados, mas não estarão associados aos utilizadores.',
   'bulk_delete_warn'	=> 'Vai apagar :asset_count ativos.',
 	'bulk_update'		=> 'Atualização de ativos em massa',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Criar Ativo',
     'date'				=> 'Data de aquisição',
     'depreciates_on'	=> 'Deprecia em',
-    'depreciation'		=> 'Depreciação',
     'default_location'	=> 'Localização padrão',
     'eol_date'			=> 'Data de EOL',
     'eol_rate'			=> 'Taxa de EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Selecionar Estado',
     'serial'			=> 'Nº de Série',
     'status'			=> 'Estado',
-    'supplier'			=> 'Fornecedor',
     'tag'				=> 'Etiqueta do Ativo',
     'update'			=> 'Atualização do ativo',
     'warranty'			=> 'Garantia',

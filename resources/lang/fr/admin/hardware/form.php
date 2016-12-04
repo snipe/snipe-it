@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirmez la suppression du lot d\'objets',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Vérifiez les objets ci-dessous pour la suppression du lot. Une fois supprimés, ces objets peuvent être restaurés, mais ils ne seront plus associés avec les utilisateurs auxquels ils sont actuellement assignés.',
   'bulk_delete_warn'	=> 'Vous allez supprimer :asset_count objets.',
 	'bulk_update'		=> 'Mise à jour en bloc d\'actifs',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Créer des actifs',
     'date'				=> 'Date d\'achat',
     'depreciates_on'	=> 'Amortit sur',
-    'depreciation'		=> 'Amortissement',
     'default_location'	=> 'Emplacement par défaut',
     'eol_date'			=> 'Date de fin de vie',
     'eol_rate'			=> 'Taux de EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Choisissez le type de statut',
     'serial'			=> 'Série ',
     'status'			=> 'Statut',
-    'supplier'			=> 'Fournisseur',
     'tag'				=> 'Numéro d\'inventaire',
     'update'			=> 'Mise à jour de l\'actif',
     'warranty'			=> 'Garantie',

@@ -2,8 +2,7 @@
 
     return [
         'title'         => 'صيانة الاُصل',
-        'asset_name'    => 'الأصل',
-        'supplier_name' => 'المورد',
+        'asset_name'    => 'Asset Name',
         'is_warranty'   => 'الضمان',
         'dl_csv'        => 'التنزيل كملف CSV'
     ];

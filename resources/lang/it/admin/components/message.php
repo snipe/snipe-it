@@ -21,15 +21,15 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Il Componente non è stato controllato, si prega di riprovare',
+        'success' 		=> 'Componente controllato con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Il Componente non è stato controllato, si prega di riprovare',
+        'success' 		=> 'Componente controllato con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     )
 
 

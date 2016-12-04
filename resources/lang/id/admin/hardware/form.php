@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Konfirmasi penghapusan aset dalam jumlah besar',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Meninjau aset untuk penghapusan massal di bawah ini. Setelah dihapus, aset-aset ini dapat dipulihkan, tetapi mereka tidak lagi akan dikaitkan dengan setiap pengguna yang mereka saat ini digunakan.',
   'bulk_delete_warn'	=> 'Anda akan menghapus :asset_count aset.',
 	'bulk_update'		=> 'Perbarui aset jumlah besar',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Membuat aset',
     'date'				=> 'Tanggal pembelian',
     'depreciates_on'	=> 'Penyusutan aktif',
-    'depreciation'		=> 'Penyusutan',
     'default_location'	=> 'Lokasi awal',
     'eol_date'			=> 'Tanggal EOL',
     'eol_rate'			=> 'Tingkat EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Memilih Tipe Status',
     'serial'			=> 'Serial',
     'status'			=> 'Status',
-    'supplier'			=> 'Pemasok',
     'tag'				=> 'Tag Aset',
     'update'			=> 'Perbarui Aset',
     'warranty'			=> 'Garansi',

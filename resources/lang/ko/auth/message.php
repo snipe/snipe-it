@@ -7,6 +7,7 @@ return array(
     'account_not_activated'  => '이 사용자는 비활성 계정입니다.',
     'account_suspended'      => '이 사용자는 보류 계정입니다.',
     'account_banned'         => '이 사용자는 금지 계정입니다.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
 
     'signin' => array(
         'error'   => '로그인 시에 문제가 발생했습니다. 다시 시도해 주세요.',

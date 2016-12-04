@@ -5,7 +5,7 @@ return array(
     'actions' 	                => 'Handlinger',
     'add'    	                => 'Opprett ny',
     'cancel'                    => 'Avbryt',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'checkin_and_delete'  	    => 'Sjekk inn & slett bruker',
     'delete'  	                => 'Slett',
     'edit'    	                => 'Rediger',
     'restore' 	                => 'Gjenopprett',

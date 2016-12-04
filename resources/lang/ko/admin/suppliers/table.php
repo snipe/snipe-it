@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    'about_suppliers_title' => 'About Suppliers',
+    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
     'address'               => '공급자 주소',
     'assets'                => '자산',
     'city'                  => '시',

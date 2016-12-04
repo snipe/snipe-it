@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'О категориях',
-    'about_categories'  				=> 'Категории активов помогают вам организовать ваше оборудование в удобные категории. К примеру: &quot;Стационарные компьютеры&quot;, &quot;Ноутбуки&quot;, &quot;Смартфоны&quot;, &quot;Планшеты&quot;, и так далее в соответствии с вашими потребностями. ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Категории активов',
     'category_name'  					=> 'Имя категории',
     'checkin_email'                     => 'Отправить email пользователю при возврате.',

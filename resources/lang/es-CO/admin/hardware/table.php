@@ -2,23 +2,23 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'asset_tag'   	=> 'Etiqueta',
+    'asset_model'       => 'Modelo',
+    'book_value'  	=> 'Valor',
+    'change' 		=> 'Operación',
+    'checkout_date' => 'Fecha de asignación',
+    'checkoutto' 	=> 'Asignado',
+    'diff' 			=> 'Diferencia',
+    'dl_csv' 		=> 'Descargar CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'location' 		=> 'Localización',
+    'purchase_cost'	=> 'Costo',
+    'purchase_date'	=> 'Comprado',
+    'serial'   		=> 'N. Serie',
+    'status'   		=> 'Estado',
+    'title'      	=> 'Equipo ',
+    'image'		=> 'Imagen de dispositivo',
+    'days_without_acceptance' => 'Días Sin Aceptación'
 
 );

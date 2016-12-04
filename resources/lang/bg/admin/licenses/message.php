@@ -23,7 +23,7 @@ return array(
         'error'   => 'Файлът (файловете) не е качен. Моля, опитайте отново.',
         'success' => 'Файлът (файловете) е качен.',
         'nofiles' => 'Не сте избрали файл за качване или файлът, който се опитвате да качите е твърде голям',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
     ),
 
     'update' => array(

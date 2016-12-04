@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> '資産カテゴリーについて',
-    'about_categories'  				=> '資産カテゴリーにより資産を分類します。カテゴリーの例としては &quot; デスクトップ &quot;、&quot; ラップトップ &quot; 、&quot； 携帯電話 &quot;、&quot; タブレット&quot; などがあります。資産カテゴリは任意に設定することができます。 ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> '資産カテゴリー',
     'category_name'  					=> 'カテゴリー名',
     'checkin_email'                     => 'チェックインの時に利用者へメールを送信',

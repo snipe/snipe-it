@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Jóváhagyni a tömeges eszközök törlését',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Tömeges törléshez tekintse át az eszközöket. Ha törli az eszközöket, azok visszaállíthatók, de többé nem lesznek hozzárendelve a korábban hozzárendelt felhasználókhoz.',
   'bulk_delete_warn'	=> 'Le akarod törölni a :asset_count eszközt.',
 	'bulk_update'		=> 'Tömeges eszköz frissítés',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Eszköz létrehozása',
     'date'				=> 'Vásárlás dátuma',
     'depreciates_on'	=> 'Leértékelődik',
-    'depreciation'		=> 'Értékcsökkenés',
     'default_location'	=> 'Alapértelmezett hely',
     'eol_date'			=> 'Lejárat Dátuma',
     'eol_rate'			=> 'EOL arány',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Állapot típusának kiválasztása',
     'serial'			=> 'Sorozatszám',
     'status'			=> 'Státusz',
-    'supplier'			=> 'Beszállító',
     'tag'				=> 'Eszköz azonosító',
     'update'			=> 'Eszköz frissítés',
     'warranty'			=> 'Garancia',
