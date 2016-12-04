@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    'about_assets_title'           => 'About Assets',
+    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
 	'archived'  				=> '已封存',
     'asset'  					=> '資產',
     'bulk_checkout'             => '借出資產給使用者',

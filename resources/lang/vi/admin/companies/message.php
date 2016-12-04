@@ -8,7 +8,7 @@ return array(
     ),
     'update' => array(
         'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'success' => 'Công ty đã được cập nhật thành công.'
     ),
     'delete' => array(
         'confirm' => 'Are you sure you wish to delete this company?',

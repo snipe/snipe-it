@@ -2,8 +2,7 @@
 
     return [
         'title'         => 'Заголовок',
-        'asset_name'    => 'Актив',
-        'supplier_name' => 'Производитель',
+        'asset_name'    => 'Asset Name',
         'is_warranty'   => 'Гарантия',
         'dl_csv'        => 'Загрузить CSV'
     ];

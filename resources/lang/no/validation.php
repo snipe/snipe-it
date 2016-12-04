@@ -33,7 +33,7 @@ return array(
     "digits_between"   => "Attributtet :attribute må være mellom :min og :max sifre.",
     "email"            => "Attributtet :attribute er ugyldig.",
     "exists"           => "Valgt attributt :attribute er ugyldig.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "email_array"      => "En eller flere e-postadresser er ugyldig.",
     "image"            => "Attributtet :attribute må være et bilde.",
     "in"               => "Det valgte attributtet :attribute er ugyldig.",
     "integer"          => "Attributtet :attribute må være et heltall.",
@@ -64,8 +64,8 @@ return array(
     ),
     "unique"           => "Attributtet :attribute er allerede tatt.",
     "url"              => "Attributt-formatet :attribute er ugyldig.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Du må velge en gyldig statusetikett-type",
+    "unique_undeleted" => ":attribute må være unik.",
 
 
     /*

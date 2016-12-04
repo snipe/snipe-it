@@ -1,6 +1,8 @@
 <?php
 
 return array(
+    'about_assets_title'           => 'About Assets',
+    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
 	'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Atribuir artigo a utilizador',
@@ -13,7 +15,7 @@ return array(
 	'filetype_info'				=> 'Os tipos de ficheiro permitidos são png, gif, jpg, jpeg, doc, docx, pdf, txt, zip e rar.',
     'model_deleted'  			=> 'Este modelo de ativo foi removido. Deve restaurar o modelo para poder restaurar o Ativo.<br/> <a href="/hardware/models/:model_id/restore">Clique aqui para restaurar o modelo</a>.',
     'requestable'               => 'Solicitavel',
-    'requested'				    => 'Requested',
+    'requested'				    => 'Requisitado',
     'restore'  					=> 'Restaurar ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',

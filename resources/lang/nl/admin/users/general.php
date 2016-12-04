@@ -15,4 +15,7 @@ return array(
     'software_user'     => 'Software toegekend aan :name',
     'view_user'         => 'Bekijk gebruiker :name',
     'usercsv'           => 'CSV bestand',
+    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
+    'two_factor_enrolled' => '2FA Device Enrolled ',
+    'two_factor_active'   => '2FA Active ',
     );

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'درباره دسته بندی دارایی',
-    'about_categories'  				=> 'دسته بندی دارایی ها به شما کمک میکند دارایی های خود را سازماندهی کنید.برخی مثال های دسته بندی ممکن است "کامپیوتر رومیزی"،"لپ تاپ ها"،"تلفن های همراه"،"تبلت ها" و ... باشند،ولی شما میتوانید از دسته بندی های دارایی به هر شکلی که برای شما مناسب است استفاده کنید.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'دسته بندی های دارایی',
     'category_name'  					=> 'نام دسته بندی',
     'checkin_email'                     => 'ارسال ایمیل به کاربر',

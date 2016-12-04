@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Thông tin về các hạng mục tài sản',
-    'about_categories'  				=> 'Danh mục tài sản giúp bạn tổ chức lại những tài sản của bạn. Một vài ví dụ mà những danh mục có thể làm &quot;Máy tính bàn&quot;, &quot;Máy tính xác tay&quot;, &quot;Điện thoại di động&quot;, &quot;Máy tính bảng&quot;, và nhiều thứ khác nữa, nhưng bạn có thể sử dụng danh mục tài sản thông mình nhất theo cách của bạn.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Danh mục tài sản',
     'category_name'  					=> 'Tên hạng mục',
     'checkin_email'                     => 'Gửi email đến người dùng đang checkin.',

@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'El campo no existe.',
+        'already_added'   => 'El campo ya fue añadido',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Campo no creado, por favor, inténtalo de nuevo.',
+            'success' => 'Campo creado correctamente.',
+            'assoc_success' => 'Campo correctamente añadido al grupo.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Campo no actualizado, por favor inténtelo de nuevo',
+            'success' => 'Campo actualizado correctamente.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> '¿Seguro que quieres eliminar este campo?',
+            'error'   => 'Hubo un problema al eliminar el campo. Inténtelo de nuevo.',
+            'success' => 'El campo se eliminó correctamente.',
+            'in_use'   => 'El campo está aún en uso.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'El grupo de campos no ha sido creado, por favor inténtelo de nuevo.',
+            'success' => 'Grupo de campos creado satisfactoriamente.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'El Grupo de campos no ha sido actualizado, por favor inténtelo de nuevo',
+            'success' => 'Grupo de campos actualizado correctamente.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> '¿Seguro que quieres eliminar el grupo de campos?',
+            'error'   => 'Hubo un problema al eliminar el grupo de campos. Inténtelo de nuevo.',
+            'success' => 'El grupo de campos se eliminó correctamente.',
+            'in_use'   => 'El grupo de campos está aún en uso.',
         )
 
     ),

@@ -2,8 +2,7 @@
 
     return [
         'title'         => 'Varlık Bakımı',
-        'asset_name'    => 'Varlık',
-        'supplier_name' => 'Tedarikçi',
+        'asset_name'    => 'Asset Name',
         'is_warranty'   => 'Garanti',
         'dl_csv'        => 'CSV olarak indir'
     ];

@@ -2,8 +2,7 @@
 
     return [
         'title'         => 'Wartungsverträge',
-        'asset_name'    => 'Name des Gegenstandes',
-        'supplier_name' => 'Hersteller',
+        'asset_name'    => 'Asset Name',
         'is_warranty'   => 'Garantie',
         'dl_csv'        => 'Als CSV herunterladen'
     ];

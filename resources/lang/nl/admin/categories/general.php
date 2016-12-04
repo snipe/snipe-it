@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Over Bezit Categorieën',
-    'about_categories'  				=> 'Bezit categorieën helpen je om jouw bezit te organiseren. Een aantal voorbeelden zijn bijvoorbeeld &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobiele Telefoons&quot;, &quot;Tablets&quot; etcetera, maar je kan bezit categorieën echter inzetten op een manier die begrijpelijk is voor jou. ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Bezit Categorieën',
     'category_name'  					=> 'Categorie Naam',
     'checkin_email'                     => 'Stuur een E-mail naar de gebruik bij een checkin.',

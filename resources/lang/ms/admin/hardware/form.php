@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
   'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Bulk Update Assets',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Cipta Harta',
     'date'				=> 'Tarikh Pembelian',
     'depreciates_on'	=> 'Susut Nilai Pada',
-    'depreciation'		=> 'Susut Nilai',
     'default_location'	=> 'Lokasi Asal',
     'eol_date'			=> 'Tarikh EOL',
     'eol_rate'			=> 'Kadar EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Siri',
     'status'			=> 'Status',
-    'supplier'			=> 'Pembekal',
     'tag'				=> 'Tag Harta',
     'update'			=> 'Kemaskini Harta',
     'warranty'			=> 'Waranti',

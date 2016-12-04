@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> '대량 자산 삭제 승인',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> '아래의 대량 자산 삭제 내용을 검토하십시오. 삭제하시면 복구할 수 없고, 현재 할당되어 있는 사용자와의 연결이 끊어집니다.',
   'bulk_delete_warn'	=> '삭제 대상: asset_count 개',
 	'bulk_update'		=> '대량 자산 갱신',
@@ -15,7 +15,6 @@ return array(
     'create'			=> '자산 생성',
     'date'				=> '구매 일자',
     'depreciates_on'	=> '감가 상각 일자',
-    'depreciation'		=> '감가 상각',
     'default_location'	=> '기본 장소',
     'eol_date'			=> '폐기 일자',
     'eol_rate'			=> '폐기 비율',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> '상태 유형 선택',
     'serial'			=> '일련번호',
     'status'			=> '상태',
-    'supplier'			=> '공급자',
     'tag'				=> '자산 태그',
     'update'			=> '자산 갱신',
     'warranty'			=> '보증',

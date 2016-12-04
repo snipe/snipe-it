@@ -7,6 +7,7 @@ return array(
     'account_not_activated'  => 'Questo account non è attivo.',
     'account_suspended'      => 'Questo account è sospeso.',
     'account_banned'         => 'Questo account è bannato.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
 
     'signin' => array(
         'error'   => 'C\'è stato un problema durante il tentativo di accesso, riprova.',

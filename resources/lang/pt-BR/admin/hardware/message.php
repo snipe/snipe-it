@@ -68,7 +68,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
         'success' 		=> 'Ativo solicitado com sucesso.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'Requisição cancelado com sucesso'
     )
 
 );

@@ -15,4 +15,7 @@ return array(
     'software_user'     => 'Phần mềm đã được checkout đến :name',
     'view_user'         => 'Xem người dùng :name',
     'usercsv'           => 'Tập tin CSV',
+    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
+    'two_factor_enrolled' => '2FA Device Enrolled ',
+    'two_factor_active'   => '2FA Active ',
     );

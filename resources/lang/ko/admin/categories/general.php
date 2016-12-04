@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> '자산 분류란',
-    'about_categories'  				=> '자산 분류는 자산들을 구성할때 유용합니다. 몇가지 예제 분류들로는 &quot;데스크탑&quot;, &quot;랩탑&quot;, &quot;휴대폰&quot;, &quot;타블렛&quot; 등이 있지만, 당신이 원하는 대로 자산 분류들을 사용할 수 있습니다.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> '자산 분류',
     'category_name'  					=> '분류 명',
     'checkin_email'                     => '입고시에 사용자에게 전자우편 보내기.',

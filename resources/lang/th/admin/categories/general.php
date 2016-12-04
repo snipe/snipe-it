@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'เกี่ยวกับหมวดหมู่ทรัพย์สิน',
-    'about_categories'  				=> 'หมวดหมู่ทรัพย์สิน ช่วยจัดระเบียบทรัพย์สินของคุณได้ เช่น การกำหนดหมวดหมู่ คอมพิวเตอร์ตั้งโต๊ะ คอมพิวเตอร์ส่วนบุคคล โทรศัพท์มือถือ แท็บเล็ต โดยใช้หมวดหมู่สินทรัพย์จะทำให้สะดวกต่อการใช้งาน',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'หมวดหมู่ทรัพย์สิน',
     'category_name'  					=> 'ชื่อหมวดหมู่',
     'checkin_email'                     => 'ส่งอีเมล์ถึงผู้ใช้เพื่อการเช็คอิน',

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Despre categoriile de active',
-    'about_categories'  				=> 'Categoriile de active te ajuta sa-ti organizezi activele. Cateva exemple de categorii pot fi &quot;Unitati PC&quot;, &quot;Laptopuri&quot; , &quot;Telefoane mobile&quot; , &quot;Tablete&quot; s.a.m.d. , dar puteti utiliza categoriile de active in orice mod credeti de cuviinta. ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Categoriile de active',
     'category_name'  					=> 'Nume categorii',
     'checkin_email'                     => 'Send email to user on checkin.',

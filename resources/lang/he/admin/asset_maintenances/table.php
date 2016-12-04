@@ -2,8 +2,7 @@
 
     return [
         'title'         => 'תחזוקת נכס',
-        'asset_name'    => 'נכס',
-        'supplier_name' => 'ספק',
+        'asset_name'    => 'Asset Name',
         'is_warranty'   => 'אחריות',
         'dl_csv'        => 'להוריד CSV'
     ];

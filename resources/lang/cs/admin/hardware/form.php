@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Potvrzení hromadného odstranění majetku',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Zkontrolujte seznam odstraňovaného majetku níže. Jakmile jej potvrdíte, nebude možné tento majetek obnovit a budou zrušeny i vazby na uživatele, kteří jej měli v držení.',
   'bulk_delete_warn'	=> 'Chystáte se odstranit :asset_count položek majetku.',
 	'bulk_update'		=> 'Hromadná aktualizace majetku',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Vytvořit záznam majetku',
     'date'				=> 'Datum pořízení',
     'depreciates_on'	=> 'Odepisuje se',
-    'depreciation'		=> 'Amortizace',
     'default_location'	=> 'Výchozí umístění',
     'eol_date'			=> 'Konec životnosti',
     'eol_rate'			=> 'Míra ukončení životnosti',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Zvolte typ stavu',
     'serial'			=> 'Sériové číslo',
     'status'			=> 'Stav',
-    'supplier'			=> 'Dodavatel',
     'tag'				=> 'Označení majetku',
     'update'			=> 'Úprava majetku',
     'warranty'			=> 'Záruka',

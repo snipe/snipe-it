@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Om tillgångskategorier',
-    'about_categories'  				=> 'Tillgång kategorier hjälper dig att organisera dina tillgångar. Exempel på tillgångar kan vara "Skrivbord", "Laptops", "Mobiltelefoner" eller "Plattor" och så vidare, men du kan använda vilken typ av tillgångs-kategori som helst som passar dig.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Tillgångskategorier',
     'category_name'  					=> 'Kategorinamn',
     'checkin_email'                     => 'Send email to user on checkin.',

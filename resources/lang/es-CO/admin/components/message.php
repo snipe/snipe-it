@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'El componente no existe.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'El componente no fuè creado, intentalo de nuevo.',
+        'success' => 'El componente se creò satisfactoriamente.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'El componente no se actualizò, intentalo de nuevo',
+        'success' => 'Componente actualizado satisfactoriamente.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Estàs seguro de que quieres borrar este componente?',
+        'error'   => 'Hubo un problema al querer borrar el componente, intentalo de nuevo.',
+        'success' => 'El componente fue borrado satisfactoriamente.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'El componente no hizo check out, intentalo de nuevo',
+        'success' 		=> 'Check out del componente satisfactorio.',
+        'user_does_not_exist' => 'El usuario es invalido, intentalo de nuevo.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'El componente no fue checked in, intentalo de nuevo',
+        'success' 		=> 'Check in de componente satisfactorio.',
+        'user_does_not_exist' => 'Es usuario es invalido, intentalo de nuevo.'
     )
 
 

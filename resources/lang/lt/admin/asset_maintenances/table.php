@@ -2,8 +2,7 @@
 
     return [
         'title'         => 'Įrangos priežiūra',
-        'asset_name'    => 'Įrangos pavadinimas',
-        'supplier_name' => 'Tiekėjo pavadinimas',
+        'asset_name'    => 'Asset Name',
         'is_warranty'   => 'Garantija',
         'dl_csv'        => 'Atsisiųti CSV fromatu'
     ];

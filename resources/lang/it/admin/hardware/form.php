@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Conferma cancellazione di massa Assets',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Rivedi gli assets sottostanti per la cancellazione massiva. Una volta cancellati, questi assets potranno essere ripristinati, ma non saranno più associati ad alcun utente cui siano attualmente assegnati.',
   'bulk_delete_warn'	=> 'Stai per cancellare :asset_count assets.',
 	'bulk_update'		=> 'Aggiornamento quantità beni',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Creare bene',
     'date'				=> 'Data di acquisto',
     'depreciates_on'	=> 'Deprezza Si',
-    'depreciation'		=> 'Ammortamento',
     'default_location'	=> 'Posizione predefinita',
     'eol_date'			=> 'Data EOL',
     'eol_rate'			=> 'Tasso EOL',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Selezionare il tipo di stato',
     'serial'			=> 'Seriale',
     'status'			=> 'Stato',
-    'supplier'			=> 'Fornitore',
     'tag'				=> 'Etichetta bene',
     'update'			=> 'Aggiornamento bene',
     'warranty'			=> 'Garanzia',

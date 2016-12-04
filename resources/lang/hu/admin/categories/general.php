@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Az eszköz kategóriákról',
-    'about_categories'  				=> 'Eszköz kategóriákba rendezheti az eszközeit. Például &quot;Desktop gép&quot;, &quot;Laptop&quot;, &quot;Mobiltelefon&quot;, &quot;Táblagép&quot;, stb, de úgy használhatja ezeket a kategóriákat, ahogy szeretné.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Eszköz kategóriák',
     'category_name'  					=> 'Kategória név',
     'checkin_email'                     => 'Küldj a felhasználónak e-mailt, leadáskor.',

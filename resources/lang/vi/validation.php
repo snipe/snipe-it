@@ -33,7 +33,7 @@ return array(
     "digits_between"   => ":attribute phải ở giữa :min và :max số.",
     "email"            => "Định dạng :attribute thì không phù hợp.",
     "exists"           => ":attribute đã chọn không phù hợp.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "email_array"      => "Một hoặc nhiều địa chỉ email không hợp lệ.",
     "image"            => ":attribute phải là một hình.",
     "in"               => ":attribute đã lựa chọn không hợp lý.",
     "integer"          => ":attribute phải là một số nguyên.",
@@ -64,8 +64,8 @@ return array(
     ),
     "unique"           => ":attribute đã sẵn sàng.",
     "url"              => "Định dạng :attribute thì không hợp lý.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Bạn phải chọn một loại nhãn trạng thái hợp lệ",
+    "unique_undeleted" => ":attribute phải là duy nhất.",
 
 
     /*

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Patvirtinti įrangos ištrinima',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Peržiūrėkite įrangos ištrinimą žemiau. Ištrinus, įranga galima atstatyti, tačiau daugiau nebus priskirta jokiam vartotojam.',
   'bulk_delete_warn'	=> 'Jūs norite ištrinti :asset_count įranga.',
 	'bulk_update'		=> 'Visa atnaujinama įranga',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Sukurti įrangą',
     'date'				=> 'Pirkimo data',
     'depreciates_on'	=> 'Nusidėvėjimo data',
-    'depreciation'		=> 'Nusidėvėjimas',
     'default_location'	=> 'Numatytoji vietovė',
     'eol_date'			=> 'Irangos naudojimo pabaigos data',
     'eol_rate'			=> 'Įrangos naudojimo pabaigos likutis',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Parinkti būklės tipą',
     'serial'			=> 'Serijinis numeris',
     'status'			=> 'Būklė',
-    'supplier'			=> 'Tiekėjas',
     'tag'				=> 'Įrangos pavadinimas',
     'update'			=> 'Įrangos atnaujinimas',
     'warranty'			=> 'Garantija',

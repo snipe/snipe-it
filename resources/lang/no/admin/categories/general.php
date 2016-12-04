@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'Om kategorier',
-    'about_categories'  				=> 'Kategorier hjelper deg å organisere dine eiendeler. Noen eksempler på kategorier kan være &quot;Stasjonære PC\'er&quot;, &quot;Bærbare&quot;, &quot;Mobiltelefoner&quot;, &quot;Tablets&quot; osv. Du kan bruke kategoriene til det som passer best for deg.',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Kategorier',
     'category_name'  					=> 'Navn',
     'checkin_email'                     => 'Send epost til bruker ved sjekk inn.',

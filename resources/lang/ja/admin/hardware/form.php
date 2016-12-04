@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> '資産一括削除',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> '以下の資産が一括削除されます。削除後のデータは戻すことができませ',
   'bulk_delete_warn'	=> ':asset_cont 件の資産を削除しました',
 	'bulk_update'		=> '資産を一括更新',
@@ -15,7 +15,6 @@ return array(
     'create'			=> '資産を作成',
     'date'				=> '購入日',
     'depreciates_on'	=> '原価償却対象',
-    'depreciation'		=> '減価償却',
     'default_location'	=> '既定の設置場所',
     'eol_date'			=> 'EOL日付',
     'eol_rate'			=> 'EOL率',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'ステータスタイプを選択',
     'serial'			=> 'シリアル',
     'status'			=> 'ステータス',
-    'supplier'			=> '仕入先',
     'tag'				=> '資産タグ',
     'update'			=> '資産アップデート',
     'warranty'			=> '保証',

@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Status-etiketten finnes ikke.',
+    'assoc_assets'	 => 'Denne status-etiketten er for øyeblikket i bruk på minst en eiendel, og kan ikke slettes. Vennligst endre dine eiendeler til å ikke bruke denne statusen, og prøv igjen. ',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Statusmerket ble ikke opprettet. Prøv igjen.',
+        'success' => 'Statusmerket ble opprettet.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Statusmerket ble ikke oppdatert. Prøv igjen',
+        'success' => 'Vellykket oppdatering av statusmerke.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'confirm'   => 'Er du sikker på at du vil slette dette statusmerket?',
+        'error'   => 'Det oppstod et problem under sletting av statusmerket. Prøv igjen.',
+        'success' => 'Vellykket sletting av statusmerke.'
     )
 
 );

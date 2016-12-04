@@ -15,4 +15,7 @@ return array(
     'software_user'     => ':name 借出的軟體',
     'view_user'         => '檢視使用者： :name',
     'usercsv'           => 'CSV 檔',
+    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
+    'two_factor_enrolled' => '2FA Device Enrolled ',
+    'two_factor_active'   => '2FA Active ',
     );

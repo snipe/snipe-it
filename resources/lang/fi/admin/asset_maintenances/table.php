@@ -2,8 +2,7 @@
 
     return [
         'title'         => 'Laitteen ylläpito',
-        'asset_name'    => 'Laitenimi',
-        'supplier_name' => 'Toimittajan Nimi',
+        'asset_name'    => 'Asset Name',
         'is_warranty'   => 'Takuu',
         'dl_csv'        => 'Lataa CSV'
     ];

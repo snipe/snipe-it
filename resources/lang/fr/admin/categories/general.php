@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'A propos des Catégories',
-    'about_categories'  				=> 'Les catégories vous aident à organiser vos biens. Des exemples de catégories peuvent être &quot;Ordinateurs de bureau&quot;, &quot;Ordinateurs portables&quot;, &quot;Téléphones portables&quot;, &quot;Tablettes&quot;, etc..., mais vous pouvez utiliser les catégories comme cela vous convient. ',
+    'about_categories_title' 			=> 'About Categories',
+    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Catégories',
     'category_name'  					=> 'Catégorie',
     'checkin_email'                     => 'Envoyer un courriel à l\'utilisateur lors de l\'attribution.',

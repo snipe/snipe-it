@@ -2,15 +2,15 @@
 
 return array(
 
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Request',
-    'submit'  	                => 'Submit',
-    'upload'                    => 'Upload',
+    'actions' 	                => 'Acciones',
+    'add'    	                => 'Agregar nuevo',
+    'cancel'                    => 'Cancelar',
+    'checkin_and_delete'  	    => 'Verificar y eliminar usuario',
+    'delete'  	                => 'Borrar',
+    'edit'    	                => 'Editar',
+    'restore' 	                => 'Restaurar',
+    'request'                   => 'Solicitud',
+    'submit'  	                => 'Enviar',
+    'upload'                    => 'Subir',
 
 );

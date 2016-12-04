@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Bekreft sletting av flere enheter',
+	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Se gjennom listen over enheter som er valgt for sletting. Etter sletting er det mulig å gjenopprette enheter, men nåværende koblinger til brukere vil ikke lenger finnes.',
   'bulk_delete_warn'	=> 'Du er i ferd med å slette :asset_count enheter.',
 	'bulk_update'		=> 'Masseoppdater eiendeler',
@@ -15,7 +15,6 @@ return array(
     'create'			=> 'Opprett eiendel',
     'date'				=> 'Innkjøpsdato',
     'depreciates_on'	=> 'Avskrivningstype',
-    'depreciation'		=> 'Avskrivning',
     'default_location'	=> 'Standard plassering',
     'eol_date'			=> 'EOL dato',
     'eol_rate'			=> 'EOL-rate',
@@ -35,7 +34,6 @@ return array(
     'select_statustype'	=> 'Velg statustype',
     'serial'			=> 'Serienummer',
     'status'			=> 'Status',
-    'supplier'			=> 'Leverandør',
     'tag'				=> 'Eiendelsmerke',
     'update'			=> 'Oppdater eiendel',
     'warranty'			=> 'Garanti',
