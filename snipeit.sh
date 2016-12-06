@@ -16,7 +16,7 @@
 
 # ensure running as root
 if [ "$(id -u)" != "0" ]; then
-  exec suido "$0" "$@"
+  exec sudo "$0" "$@"
 fi
 #First things first, let's set some variables and find our distro.
 clear
