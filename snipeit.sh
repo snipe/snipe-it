@@ -72,7 +72,7 @@ vhenvfile () {
 			echo "</VirtualHost>"
 		} >> $apachefile
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf >/dev/null 2>&1
+		log "a2ensite $name.conf"
 
 		cat > "$webdir/$name/.env" <<-EOF
 		#Created By Snipe-it Installer
@@ -116,9 +116,8 @@ if [ -f /etc/lsb-release ]; then
 	version="$DISTRIB_RELEASE"
 	codename="$DISTRIB_CODENAME"
 elif [ -f /etc/os-release ]; then
-	. /etc/os-release
-	distro="$ID"
-	version="$VERSION_ID"
+	distro="$(. /etc/os-release && echo $ID)"
+	version="$(. /etc/os-release && echo $VERSION_ID)"
 	#Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
 	#If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
 	#so lets assume that it's version 6 (Plus, who would be doing a new install of anything on centos5 at this point..)
@@ -260,7 +259,7 @@ case $distro in
 		#composer install, set permissions, restart apache.
 
 		webdir=/var/www
-		echo -ne "\n* Adding MariaDB repoin the background... ${spin[0]}"
+		echo -ne "\n* Adding MariaDB repo in the background... ${spin[0]}"
 		(echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list >/dev/null 2>&1)
 		log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
 		echo -ne "\n* Updating with apt-get update in the background... ${spin[0]}"
@@ -321,9 +320,9 @@ case $distro in
 			echo "enable=1"
 		} >> "$mariadbRepo"
 
-		yum -y install wget epel-release >/dev/null 2>&1
-		wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm >/dev/null 2>&1
-		rpm -Uvh "$tmp/ius-release*.rpm" >/dev/null 2>&1
+		log "yum -y install wget epel-release"
+		log "wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm"
+		log "rpm -Uvh "$tmp/ius-release*.rpm""
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -334,14 +333,14 @@ case $distro in
 				echo " ## $p already installed"
 			else
 				echo -n " ## installing $p ... "
-				yum -y install "$p" >/dev/null 2>&1
+				log "yum -y install $p"
 				echo "";
 			fi
 		done;
 
 		echo -e "\n##  Downloading Snipe-IT from github and putting it in the web directory.";
 
-		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" >/dev/null 2>&1
+		log "wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file"
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/$fileName $webdir/$name
 
@@ -429,9 +428,9 @@ case $distro in
 
 		#Allow us to get the mysql engine
 		echo -e "\n##  Add IUS, epel-release and mariaDB repos.";
-		yum -y install wget epel-release >/dev/null 2>&1
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >/dev/null 2>&1
-		rpm -Uvh $tmp/ius-release*.rpm >/dev/null 2>&1
+		log "yum -y install wget epel-release"
+		log "wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm"
+		log "rpm -Uvh $tmp/ius-release*.rpm"
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -442,16 +441,16 @@ case $distro in
 				echo " ## $p already installed"
 			else
 				echo -n " ## installing $p ... "
-				yum -y install "$p" >/dev/null 2>&1
+				log "yum -y install $p"
 			echo "";
 			fi
 		done;
 
 		echo -e "\n##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		wget -P "$tmp/" "https://github.com/snipe/snipe-it/archive/$file" >/dev/null 2>&1
-		unzip -qo "$tmp/$file" -d "$tmp/"
-		cp -R "$tmp/$fileName" "$webdir/$name"
+		log "wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file"
+		log "unzip -qo $tmp/$file -d $tmp/"
+		log "cp -R $tmp/$fileName $webdir/$name"
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
