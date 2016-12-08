@@ -1,5 +1,5 @@
 var elixir = require('laravel-elixir');
-require('laravel-elixir-codeception');
+require('laravel-elixir-codeception-standalone');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -38,7 +38,7 @@ elixir(function(mix) {
     mix.version(['assets/css/app.css','assets/js/all.js']);
 
 
-    mix.codeception();
+    mix.codeception(null, { flags: '--report' });
 
 
 
