@@ -18,7 +18,7 @@ class Supplier extends SnipeModel
         'address'           => 'min:3|max:50',
         'address2'          => 'min:2|max:50',
         'city'              => 'min:3|max:255',
-        'state'             => 'min:0|max:2',
+        'state'             => 'min:0|max:32',
         'country'           => 'min:0|max:2',
         'fax'               => 'min:7|max:20',
         'phone'             => 'min:7|max:20',
