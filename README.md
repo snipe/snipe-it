@@ -53,3 +53,7 @@ Please see the documentation on [contributing and developing for Snipe-IT](https
 
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+### Security
+
+To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 

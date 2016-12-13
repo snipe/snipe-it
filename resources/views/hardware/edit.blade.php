@@ -15,7 +15,6 @@
 <!-- Asset Tag -->
 <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
     <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
-</label>
 <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
     @if  ($item->id)
     <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" />
@@ -30,7 +29,6 @@
 <!-- Model -->
 <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
     <label for="parent" class="col-md-3 control-label">{{ trans('admin/hardware/form.model') }}</label>
-</label>
 <div class="col-md-7 col-sm-10{{  (\App\Helpers\Helper::checkIfRequired($item, 'model_id')) ? ' required' : '' }}">
     @if (isset($selected_model))
     {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'width:100%','id' =>'model_select_id')) }}

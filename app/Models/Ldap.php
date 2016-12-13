@@ -277,7 +277,7 @@ class Ldap extends Model
             $global_count += $results['count'];
             $result_set = array_merge($result_set, $results);
 
-            ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
+            @ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
 
         } while ($cookie !== null && $cookie != '');
 

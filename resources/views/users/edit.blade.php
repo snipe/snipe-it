@@ -117,7 +117,7 @@
                   name="username"
                   id="username"
                   value="{{ Input::old('username', $user->username) }}"
-                  autocomplete="false"
+                  autocomplete="off"
                   readonly
                   onfocus="this.removeAttribute('readonly');"
                   {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
@@ -146,7 +146,7 @@
                   class="form-control"
                   id="password"
                   value=""
-                  autocomplete="false"
+                  autocomplete="off"
                   readonly
                   onfocus="this.removeAttribute('readonly');"
                   {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}

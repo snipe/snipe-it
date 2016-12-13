@@ -4,7 +4,7 @@
 {{-- Page content --}}
 @section('content')
 
-    <form role="form" action="{{ url('/login') }}" method="POST">
+    <form role="form" action="{{ url('/login') }}" method="POST" autocomplete="off">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
         <div class="container">
@@ -35,7 +35,7 @@
                                             {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                            <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password">
+                                            <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" autocomplete="off">
                                             {!! $errors->first('password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                         <div class="checkbox">
