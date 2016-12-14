@@ -802,7 +802,9 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
     Route::post('custom_fields/{id}/associate', ['uses' => 'CustomFieldsController@associate','as' => 'admin.custom_fields.associate']);
     Route::get('custom_fields/{field_id}/{fieldset_id}/disassociate', ['uses' => 'CustomFieldsController@deleteFieldFromFieldset','as' => 'admin.custom_fields.disassociate']);
     Route::match(['DELETE'], 'custom_fields/delete-field/{id}', ['uses' => 'CustomFieldsController@deleteField','as' => 'admin.custom_fields.delete-field']);
-    Route::resource('custom_fields', 'CustomFieldsController');
+
+    Route::get('custom_fields', ['uses' =>'CustomFieldsController@index','as' => 'admin.custom_fields.index']);
+
 
     # User Management
     Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth','authorize:users.view']], function () {
@@ -970,7 +972,7 @@ Route::group(['middleware' => ['web','auth','authorize:reports.view']], function
         'reports/activity/json',
         [ 'as' => 'api.activity.list', 'uses' => 'ReportsController@getActivityReportDataTable' ]
     );
-    
+
     Route::get(
         'reports/unaccepted_assets',
         [ 'as' => 'reports/unaccepted_assets', 'uses' => 'ReportsController@getAssetAcceptanceReport' ]
@@ -1042,7 +1044,7 @@ Route::get(
     [
         'as' => 'two-factor-enroll',
         'middleware' => ['web'],
-        'uses' => 'Auth\AuthController@getTwoFactorEnroll' ]
+        'uses' => 'Auth\LoginController@getTwoFactorEnroll' ]
 );
 
 Route::get(
@@ -1050,7 +1052,7 @@ Route::get(
     [
         'as' => 'two-factor',
         'middleware' => ['web'],
-        'uses' => 'Auth\AuthController@getTwoFactorAuth' ]
+        'uses' => 'Auth\LoginController@getTwoFactorAuth' ]
 );
 
 Route::post(
@@ -1058,7 +1060,7 @@ Route::post(
     [
         'as' => 'two-factor',
         'middleware' => ['web'],
-        'uses' => 'Auth\AuthController@postTwoFactorAuth' ]
+        'uses' => 'Auth\LoginController@postTwoFactorAuth' ]
 );
 
 Route::get(
@@ -1078,13 +1080,13 @@ Route::group(['middleware' => 'web'], function () {
         [
             'as' => 'login',
             'middleware' => ['web'],
-            'uses' => 'Auth\AuthController@showLoginForm' ]
+            'uses' => 'Auth\LoginController@showLoginForm' ]
     );
     Route::get(
         'logout',
         [
             'as' => 'logout',
-            'uses' => 'Auth\AuthController@logout' ]
+            'uses' => 'Auth\LoginController@logout' ]
     );
 
 });
