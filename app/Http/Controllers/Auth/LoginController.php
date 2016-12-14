@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
@@ -28,10 +27,10 @@ use PragmaRX\Google2FA\Google2FA;
  * @author [A. Gianotto] [<snipe@snipe.net>]
  * @version    v1.0
  */
-class AuthController extends Controller
+class LoginController extends Controller
 {
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use ThrottlesLogins;
 
     // This tells the auth controller to use username instead of email address
     protected $username = 'username';
@@ -126,11 +125,11 @@ class AuthController extends Controller
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        $throttles = $this->isUsingThrottlesLoginsTrait();
+        //$throttles = $this->isUsingThrottlesLoginsTrait();
         $this->maxLoginAttempts = config('auth.throttle.max_attempts');
         $this->lockoutTime = config('auth.throttle.lockout_duration');
 
-        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+        if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
