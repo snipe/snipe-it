@@ -20,7 +20,7 @@
         "doctrine/common": "^2.7",
         "doctrine/dbal": "v2.4.2",
         "barryvdh/laravel-debugbar": "^2.3",
-        "spatie/laravel-backup": "^4.3",
+        "spatie/laravel-backup": "^3.0.0",
         "pragmarx/google2fa": "^1.0",
         "neitanod/forceutf8": "^2.0",
         "laravel/legacy-encrypter": "^1.0",

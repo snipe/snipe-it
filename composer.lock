@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "78607bda88e8eabd5d8e27131dd9c61d",
-    "content-hash": "c0e077938929f275bf25cb958ddfd6ad",
+    "hash": "d0a835c340fd6b66d96439bdf5bf00d4",
+    "content-hash": "8017fc837d313178b3496ae375ee7c9b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2806,24 +2806,24 @@
         },
         {
             "name": "spatie/db-dumper",
-            "version": "2.3.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/db-dumper.git",
-                "reference": "442009028f78e3aedde7af24f253bc2672aa390a"
+                "reference": "efdf41891a9dd4bb63fb6253044c9e51f34fff41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/442009028f78e3aedde7af24f253bc2672aa390a",
-                "reference": "442009028f78e3aedde7af24f253bc2672aa390a",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/efdf41891a9dd4bb63fb6253044c9e51f34fff41",
+                "reference": "efdf41891a9dd4bb63fb6253044c9e51f34fff41",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
-                "symfony/process": "^3.0"
+                "php": "^5.5|^7.0",
+                "symfony/process": "^2.7|^3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.5"
+                "phpunit/phpunit": "^4.8"
             },
             "type": "library",
             "autoload": {
@@ -2852,43 +2852,39 @@
                 "mysqldump",
                 "spatie"
             ],
-            "time": "2016-11-22 15:14:26"
+            "time": "2016-06-14 13:23:01"
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "4.3.1",
+            "version": "3.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "b9c68dcc1eb1f0ca8e1d887f00a1031e6a0fd136"
+                "reference": "1f9f0c55d7643aba7257aef2b2b867f2716ddfaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/b9c68dcc1eb1f0ca8e1d887f00a1031e6a0fd136",
-                "reference": "b9c68dcc1eb1f0ca8e1d887f00a1031e6a0fd136",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/1f9f0c55d7643aba7257aef2b2b867f2716ddfaf",
+                "reference": "1f9f0c55d7643aba7257aef2b2b867f2716ddfaf",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "~5.3.8",
-                "illuminate/contracts": "~5.3.8",
-                "illuminate/events": "~5.3.8",
-                "illuminate/filesystem": "~5.3.8",
-                "illuminate/notifications": "~5.3.8",
-                "illuminate/support": "~5.3.8",
-                "league/flysystem": "^1.0.27",
-                "php": "^7.0",
-                "spatie/db-dumper": "^2.1",
-                "symfony/finder": "^3.0"
+                "illuminate/console": "~5.1.0|~5.2.0|~5.3.0",
+                "illuminate/filesystem": "~5.1.20|~5.2.0|~5.3.0",
+                "illuminate/support": "~5.1.0|~5.2.0|~5.3.0",
+                "league/flysystem": "^1.0.8",
+                "php": "^5.5|^7.0",
+                "spatie/db-dumper": "^1.3",
+                "symfony/finder": "^2.7|^3.0"
             },
             "require-dev": {
-                "laravel/framework": "~5.3.8",
-                "mockery/mockery": "^0.9.5",
-                "orchestra/testbench": "^3.3.3",
-                "phpunit/phpunit": "^5.3.0",
-                "tightenco/mailthief": "^0.3.1"
+                "mockery/mockery": "^0.9.4",
+                "orchestra/testbench": "^3.2",
+                "phpunit/phpunit": "^4.8"
             },
             "suggest": {
-                "guzzlehttp/guzzle": "Allows notifications to be sent via Slack"
+                "irazasyed/telegram-bot-sdk": "Allows notifications to be sent using Telegram Bot",
+                "maknz/slack": "Allows notifications to be sent via Slack"
             },
             "type": "library",
             "autoload": {
@@ -2919,7 +2915,7 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2016-12-11 07:43:22"
+            "time": "2016-08-24 12:02:50"
         },
         {
             "name": "swiftmailer/swiftmailer",
