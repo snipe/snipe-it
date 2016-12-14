@@ -59,7 +59,10 @@
 <body class="hold-transition login-page">
 
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
-    <center><img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}"></center>
+        <center>
+            <img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ \URL::to('/') }}/uploads/{{ $snipeSettings->logo }}">
+            poop
+        </center>
     @endif
   <!-- Content -->
   @yield('content')
