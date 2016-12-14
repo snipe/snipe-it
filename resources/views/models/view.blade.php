@@ -98,13 +98,13 @@
 
       @if ($model->fieldset)
       <li>{{ trans('admin/models/general.fieldset') }}:
-          <a href="{{ config('app.url') }}/admin/custom_fields/{{ $model->fieldset->id }}">{{ $model->fieldset->name }}</a>
+          <a href="{{ URL::to('/') }}/admin/custom_fields/{{ $model->fieldset->id }}">{{ $model->fieldset->name }}</a>
       </li>
 
       @endif
 
       @if ($model->image)
-      <li><br /><img src="{{ config('app.url') }}/uploads/models/{{ $model->image }}" class="img-responsive"></li>
+      <li><br /><img src="{{ URL::to('/') }}/uploads/models/{{ $model->image }}" class="img-responsive"></li>
       @endif
 
       @if  ($model->deleted_at!='')

@@ -52,7 +52,7 @@
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
-                            <a href="{{ config('app.url') }}/password/reset">{{ trans('auth/general.forgot_password')  }}</a>
+                            <a href="{{ URL::to('/') }}/password/reset">{{ trans('auth/general.forgot_password')  }}</a>
                         </div>
                     </div> <!-- end login box -->
 

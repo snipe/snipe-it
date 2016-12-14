@@ -87,7 +87,7 @@
                 <label class="col-md-3 control-label" for="avatar_delete">{{ trans('general.avatar_delete') }}</label>
                 <div class="col-md-5">
                     {{ Form::checkbox('avatar_delete') }}
-                    <img src="{{ config('app.url') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle">
+                    <img src="{{ URL::to('/') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle">
                     {!! $errors->first('avatar_delete', '<span class="alert-msg">:message</span>') !!}
                 </div>
             </div>

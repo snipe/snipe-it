@@ -551,9 +551,9 @@ class LicensesController extends Controller
 
             // Update the asset data
             if (e(Input::get('assigned_to')) == '') {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = 'License <'.\URL::to('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.\URL::to('/').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.\URL::to('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = 'License <'.\URL::to('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.\URL::to('/').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.\URL::to('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             }
 
 
@@ -703,7 +703,7 @@ class LicensesController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => 'License: <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
+                                    'value' => 'License: <'.\URL::to('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.\URL::to('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
                                 ],
                                 [
                                     'title' => 'Note:',

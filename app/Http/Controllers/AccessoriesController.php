@@ -336,7 +336,7 @@ class AccessoriesController extends Controller
                 'fields' => [
                   [
                   'title' => 'Checked Out:',
-                  'value' => 'Accessory <'.config('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                  'value' => 'Accessory <'.\URL::to('/').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.\URL::to('/').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.\URL::to('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                   ],
                   [
                       'title' => 'Note:',
@@ -456,7 +456,7 @@ class AccessoriesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked In:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.config('app.url').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.config('app.url').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.\URL::to('/').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.\URL::to('/').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
                             ],
                             [
                                 'title' => 'Note:',

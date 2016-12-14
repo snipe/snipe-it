@@ -109,21 +109,21 @@
           <ul class="nav navbar-nav navbar-left">
               <li class="left-navblock">
                  @if ($snipeSettings->brand == '3')
-                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}">
+                      <a class="logo navbar-brand no-hover" href="{{ URL::to('/') }}">
+                          <img class="navbar-brand-img" src="{{ URL::to('/') }}/uploads/{{ $snipeSettings->logo }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @elseif ($snipeSettings->brand == '2')
-                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->logo }}">
+                      <a class="logo navbar-brand no-hover" href="{{ URL::to('/') }}">
+                          <img class="navbar-brand-img" src="{{ URL::to('/') }}/uploads/{{ $snipeSettings->logo }}">
                       </a>
                   @else
-                      <a class="logo no-hover" href="{{ config('app.url') }}">
+                      <a class="logo no-hover" href="{{ URL::to('/') }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @endif
               </li>
-            </ul> 
+            </ul>
 
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
@@ -252,7 +252,7 @@
                       @for($i=0; count($alert_items) > $i; $i++)
 
                         <li><!-- Task item -->
-                          <a href="{{ config('app.url') }}/admin/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
+                          <a href="{{ URL::to('/') }}/admin/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
                             <h3>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
                                 {{ $alert_items[$i]['remaining'] }} remaining
@@ -389,7 +389,7 @@
       </a>
        <!-- Sidebar toggle button-->
       </header>
-     
+
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->

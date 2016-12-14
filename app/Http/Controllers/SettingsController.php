@@ -59,9 +59,9 @@ class SettingsController extends Controller
         }
         $pageURL = $protocol . $host . $_SERVER['REQUEST_URI'];
 
-        $start_settings['url_valid'] = (config('app.url').'/setup' === $pageURL);
+        $start_settings['url_valid'] = (\URL::to('/').'/setup' === $pageURL);
 
-        $start_settings['url_config'] = config('app.url');
+        $start_settings['url_config'] = \URL::to('/');
         $start_settings['real_url'] = $pageURL;
 
         $exposed_env = @file_get_contents($protocol . $host.'/.env');

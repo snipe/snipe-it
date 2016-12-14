@@ -274,7 +274,7 @@
             data._token =  '{{ csrf_token() }}',
                  //   console.dir(data);
 
-                $.post("{{config('app.url') }}/api/"+model+"s",data,function (result) {
+                $.post("{{URL::to('/') }}/api/"+model+"s",data,function (result) {
                     var id=result.id;
                     var name=result.name || (result.first_name+" "+result.last_name);
                     $('.modal-body input:visible').val("");
@@ -309,7 +309,7 @@ $(function() {
       $('#current_assets_content').html("");
     } else {
 
-      $.get("{{config('app.url') }}/api/users/"+userid+"/assets",{_token: "{{ csrf_token() }}"},function (data) {
+      $.get("{{URL::to('/') }}/api/users/"+userid+"/assets",{_token: "{{ csrf_token() }}"},function (data) {
         // console.warn("Ajax call came back okay for user " + userid + "! " + data.length + " Data is: "+data);
         if (data.length > 0) {
             $('#current_assets_box').fadeIn();
@@ -320,7 +320,7 @@ $(function() {
 
             for (var i in data) {
                 var asset = data[i];
-                table_html += "<tr><td class=\"col-md-8\"><a href=\"{{ config('app.url') }}/hardware/" + asset.id + "/view\">" + asset.name;
+                table_html += "<tr><td class=\"col-md-8\"><a href=\"{{ URL::to('/') }}/hardware/" + asset.id + "/view\">" + asset.name;
                 if (asset.model.name!='') {
                     table_html += " (" + asset.model.name + ")";
 

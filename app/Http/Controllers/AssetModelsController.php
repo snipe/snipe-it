@@ -461,7 +461,7 @@ class AssetModelsController extends Controller
                 'id'      => $model->id,
                 'manufacturer'      => (string)link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => (string)link_to('/hardware/models/'.$model->id.'/view', $model->name),
-                'image' => ($model->image!='') ? '<img src="'.config('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
+                'image' => ($model->image!='') ? '<img src="'.\URL::to('/').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->model_number,
                 'numassets'         => $model->assets->count(),
                 'depreciation'      => (($model->depreciation) && ($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),

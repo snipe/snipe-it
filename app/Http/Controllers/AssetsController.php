@@ -150,7 +150,7 @@ class AssetsController extends Controller
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find(e(Input::get('model_id'))));
 
-        $checkModel = config('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
+        $checkModel = \URL::to('/').'/api/models/'.e(Input::get('model_id')).'/check';
 
         $asset->name                    = e(Input::get('name'));
         $asset->serial                  = e(Input::get('serial'));
@@ -659,7 +659,7 @@ class AssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
+                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.\URL::to('/').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.\URL::to('/').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -1793,14 +1793,14 @@ class AssetsController extends Controller
             $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
-            'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.config('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.config('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
+            'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.\URL::to('/').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.\URL::to('/').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
             'name'          => '<a title="'.e($asset->name).'" href="hardware/'.$asset->id.'/view">'.e($asset->name).'</a>',
             'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
             'serial'        => e($asset->serial),
             'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
             'model_number'  => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
             'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
-            'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
+            'assigned_to'        => ($asset->assigneduser) ? (string)link_to(\URL::to('/').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
             'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
             'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
@@ -1808,7 +1808,7 @@ class AssetsController extends Controller
             'purchase_cost'           => $purchase_cost,
             'purchase_date'           => ($asset->purchase_date) ? $asset->purchase_date : '',
             'notes'         => e($asset->notes),
-            'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
+            'order_number'  => ($asset->order_number!='') ? '<a href="'.\URL::to('/').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
             'created_at' => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',

@@ -53,7 +53,7 @@
 //start ajax request
 $.ajax({
     type: 'GET',
-    url: "{{config('app.url') }}/api/locations/"+id+"/check",
+    url: "{{URL::to('/') }}/api/locations/"+id+"/check",
 //force to handle it as text
 dataType: "text",
 success: function(data) {
