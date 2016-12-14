@@ -57,8 +57,11 @@ body {
 .content-wrapper,
 .right-side,
 .main-footer {
-  transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  -webkit-transition: margin 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transition: margin 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   margin-left: 230px;
   z-index: 820;
 }
@@ -133,6 +136,7 @@ body.hold-transition .left-side,
 body.hold-transition .main-header > .navbar,
 body.hold-transition .main-header .logo {
   /* Fix for IE */
+  -webkit-transition: none;
   transition: none;
 }
 /* Content */
@@ -190,6 +194,7 @@ a:focus {
   z-index: 1030;
 }
 .main-header > .navbar {
+  -webkit-transition: margin-left 0.3s ease-in-out;
   transition: margin-left 0.3s ease-in-out;
   margin-bottom: 0;
   margin-left: 230px;
@@ -277,6 +282,7 @@ a:focus {
   line-height: .9;
 }
 .main-header .logo {
+  -webkit-transition: width 0.3s ease-in-out;
   transition: width 0.3s ease-in-out;
   display: block;
   float: left;
@@ -427,8 +433,11 @@ a:focus {
   min-height: 100%;
   width: 230px;
   z-index: 810;
-  transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  -webkit-transition: width 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
 }
 @media (max-width: 767px) {
   .main-sidebar,
@@ -683,6 +692,7 @@ a:focus {
   top: 0;
   right: -230px;
   width: 230px;
+  -webkit-transition: right 0.3s ease-in-out;
   transition: right 0.3s ease-in-out;
 }
 .control-sidebar {
@@ -1159,12 +1169,14 @@ a:focus {
   0% {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
     transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-transition-timing-function: ease-in;
     transition-timing-function: ease-in;
     opacity: 0;
   }
   40% {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
     transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-transition-timing-function: ease-in;
     transition-timing-function: ease-in;
   }
   60% {
@@ -1385,6 +1397,7 @@ a:focus {
 }
 .progress-striped .progress-bar-light-blue,
 .progress-striped .progress-bar-primary {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-green,
@@ -1393,6 +1406,7 @@ a:focus {
 }
 .progress-striped .progress-bar-green,
 .progress-striped .progress-bar-success {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-aqua,
@@ -1401,6 +1415,7 @@ a:focus {
 }
 .progress-striped .progress-bar-aqua,
 .progress-striped .progress-bar-info {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-yellow,
@@ -1409,6 +1424,7 @@ a:focus {
 }
 .progress-striped .progress-bar-yellow,
 .progress-striped .progress-bar-warning {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-red,
@@ -1417,6 +1433,7 @@ a:focus {
 }
 .progress-striped .progress-bar-red,
 .progress-striped .progress-bar-danger {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 /*
@@ -1469,6 +1486,7 @@ a:focus {
   z-index: 5px;
 }
 .small-box .icon {
+  -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
   position: absolute;
   top: -10px;
@@ -2522,8 +2540,10 @@ table.text-center th {
 }
 .direct-chat-messages,
 .direct-chat-contacts {
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
   transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
 }
 .direct-chat-text {
   border-radius: 5px;
@@ -3943,14 +3963,17 @@ fieldset[disabled] .btn-yahoo.active {
   line-height: 30px;
 }
 .fc-color-picker > li .fa {
+  -webkit-transition: -webkit-transform linear 0.3s;
   transition: -webkit-transform linear 0.3s;
   transition: transform linear 0.3s;
+  transition: transform linear 0.3s, -webkit-transform linear 0.3s;
 }
 .fc-color-picker > li .fa:hover {
   -webkit-transform: rotate(30deg);
   transform: rotate(30deg);
 }
 #add-new-event {
+  -webkit-transition: all linear 0.3s;
   transition: all linear 0.3s;
 }
 .external-event {
@@ -4408,60 +4431,70 @@ fieldset[disabled] .btn-yahoo.active {
 }
 .bg-teal-gradient {
   background: #39CCCC !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #39CCCC), color-stop(1, #7adddd)) !important;
   background: -o-linear-gradient(#7adddd, #39CCCC) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7adddd', endColorstr='#39CCCC', GradientType=0) !important;
   color: #fff;
 }
 .bg-light-blue-gradient {
   background: #3c8dbc !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3c8dbc), color-stop(1, #67a8ce)) !important;
   background: -o-linear-gradient(#67a8ce, #3c8dbc) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67a8ce', endColorstr='#3c8dbc', GradientType=0) !important;
   color: #fff;
 }
 .bg-blue-gradient {
   background: #0073b7 !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #0073b7), color-stop(1, #0089db)) !important;
   background: -o-linear-gradient(#0089db, #0073b7) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0089db', endColorstr='#0073b7', GradientType=0) !important;
   color: #fff;
 }
 .bg-aqua-gradient {
   background: #00c0ef !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #00c0ef), color-stop(1, #14d1ff)) !important;
   background: -o-linear-gradient(#14d1ff, #00c0ef) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14d1ff', endColorstr='#00c0ef', GradientType=0) !important;
   color: #fff;
 }
 .bg-yellow-gradient {
   background: #f39c12 !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f39c12), color-stop(1, #f7bc60)) !important;
   background: -o-linear-gradient(#f7bc60, #f39c12) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f7bc60', endColorstr='#f39c12', GradientType=0) !important;
   color: #fff;
 }
 .bg-purple-gradient {
   background: #605ca8 !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #605ca8), color-stop(1, #9491c4)) !important;
   background: -o-linear-gradient(#9491c4, #605ca8) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9491c4', endColorstr='#605ca8', GradientType=0) !important;
   color: #fff;
 }
 .bg-green-gradient {
   background: #00a65a !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #00a65a), color-stop(1, #00ca6d)) !important;
   background: -o-linear-gradient(#00ca6d, #00a65a) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ca6d', endColorstr='#00a65a', GradientType=0) !important;
   color: #fff;
 }
 .bg-red-gradient {
   background: #dd4b39 !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dd4b39), color-stop(1, #e47365)) !important;
   background: -o-linear-gradient(#e47365, #dd4b39) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e47365', endColorstr='#dd4b39', GradientType=0) !important;
   color: #fff;
 }
 .bg-black-gradient {
   background: #111 !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #111), color-stop(1, #2b2b2b)) !important;
   background: -o-linear-gradient(#2b2b2b, #111) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2b2b2b', endColorstr='#111', GradientType=0) !important;
   color: #fff;
 }
 .bg-maroon-gradient {
   background: #D81B60 !important;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #D81B60), color-stop(1, #e73f7c)) !important;
   background: -o-linear-gradient(#e73f7c, #D81B60) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endColorstr='#D81B60', GradientType=0) !important;
   color: #fff;
@@ -4768,6 +4801,7 @@ fieldset[disabled] .btn-yahoo.active {
   background-color: #374850;
   border: 1px solid transparent;
   height: 35px;
+  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .skin-blue .sidebar-form input[type="text"] {
@@ -4815,6 +4849,7 @@ fieldset[disabled] .btn-yahoo.active {
 }
 .ekko-lightbox-nav-overlay a {
   opacity: 0;
+  -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
   color: #fff;
   font-size: 30px;
@@ -4968,6 +5003,7 @@ a.accordion-header {
 .btn-outline {
   color: inherit;
   background-color: transparent;
+  -webkit-transition: all .5s;
   transition: all .5s;
 }
 .btn-primary.btn-outline {
@@ -5286,7 +5322,6 @@ a.logo.no-hover a:hover {
   -ms-transform-origin-x: 90%;
   -ms-transform-origin-y: 35%;
   -ms-transform-origin-z: initial;
-  -webkit-animation: wrench 2.5s ease infinite;
   animation: wrench 2.5s ease infinite;
   transform-origin-x: 90%;
   transform-origin-y: 35%;
@@ -5388,7 +5423,6 @@ a.logo.no-hover a:hover {
   -ms-transform-origin-x: 50%;
   -ms-transform-origin-y: 0px;
   -ms-transform-origin-z: initial;
-  -webkit-animation: ring 2s ease infinite;
   animation: ring 2s ease infinite;
   transform-origin-x: 50%;
   transform-origin-y: 0px;
