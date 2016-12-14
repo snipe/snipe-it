@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Setting;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -21,6 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use CanResetPassword;
     use UniqueUndeletedTrait;
     use Notifiable;
+    use HasApiTokens;
 
     protected $dates = ['deleted_at'];
     protected $table = 'users';

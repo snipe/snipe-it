@@ -218,6 +218,7 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         PragmaRX\Google2FA\Vendor\Laravel\ServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
 
         /*
