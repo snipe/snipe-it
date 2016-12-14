@@ -10,6 +10,7 @@ use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Setting;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -19,6 +20,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable;
     use CanResetPassword;
     use UniqueUndeletedTrait;
+    use Notifiable;
 
     protected $dates = ['deleted_at'];
     protected $table = 'users';

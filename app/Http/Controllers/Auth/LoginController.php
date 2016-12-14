@@ -122,16 +122,11 @@ class LoginController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        //$throttles = $this->isUsingThrottlesLoginsTrait();
         $this->maxLoginAttempts = config('auth.throttle.max_attempts');
         $this->lockoutTime = config('auth.throttle.lockout_duration');
 
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
-
             return $this->sendLockoutResponse($request);
         }
 
@@ -157,16 +152,14 @@ class LoginController extends Controller
           // Try to log the user in
           if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
 
-              if ($throttles && ! $lockedOut) {
+              if (!$lockedOut) {
                   $this->incrementLoginAttempts($request);
               }
 
               LOG::debug("Local authentication failed.");
               return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
           } else {
-              if ($throttles) {
                   $this->clearLoginAttempts($request);
-              }
           }
         }
 
@@ -278,18 +271,31 @@ class LoginController extends Controller
         ]);
     }
 
-    /**
-     * Get the login lockout error message.
-     *
-     * @param  int  $seconds
-     * @return string
-     */
-    protected function getLockoutErrorMessage($seconds)
+
+    public function username()
     {
-        return \Lang::has('auth/message.throttle')
-            ? \Lang::get('auth/message.throttle', ['seconds' => $seconds])
-            : 'Too many login attempts. Please try again in '.$seconds.' seconds.';
+        return 'username';
     }
 
+    /**
+    * Redirect the user after determining they are locked out.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\RedirectResponse
+    */
+    protected function sendLockoutResponse(Request $request)
+    {
+    $seconds = $this->limiter()->availableIn(
+        $this->throttleKey($request)
+    );
+
+    $message = \Lang::has('auth/message.throttle')
+        ? \Lang::get('auth/message.throttle', ['seconds' => $seconds])
+        : 'Too many login attempts. Please try again in '.$seconds.' seconds.';
+
+    return redirect()->back()
+        ->withInput($request->only($this->username(), 'remember'))
+        ->withErrors([$this->username() => $message]);
+    }
 
 }
