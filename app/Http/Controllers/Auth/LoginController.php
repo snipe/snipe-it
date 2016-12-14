@@ -285,17 +285,34 @@ class LoginController extends Controller
     */
     protected function sendLockoutResponse(Request $request)
     {
-    $seconds = $this->limiter()->availableIn(
-        $this->throttleKey($request)
-    );
+        $seconds = $this->limiter()->availableIn(
+            $this->throttleKey($request)
+        );
 
-    $message = \Lang::has('auth/message.throttle')
-        ? \Lang::get('auth/message.throttle', ['seconds' => $seconds])
-        : 'Too many login attempts. Please try again in '.$seconds.' seconds.';
+        $minutes = round($seconds / 60);
 
-    return redirect()->back()
-        ->withInput($request->only($this->username(), 'remember'))
-        ->withErrors([$this->username() => $message]);
+        $message = \Lang::get('auth/message.throttle',['minutes' => $minutes]);
+
+            return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([$this->username() => $message]);
+    }
+
+
+    /**
+    * Override the lockout time and duration
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\RedirectResponse
+    */
+    protected function hasTooManyLoginAttempts(Request $request)
+    {
+        $lockoutTime = config('auth.throttle.lockout_duration');
+        $maxLoginAttempts = config('auth.throttle.max_attempts');
+
+        return $this->limiter()->tooManyAttempts(
+            $this->throttleKey($request), $maxLoginAttempts, $lockoutTime
+        );
     }
 
 }
