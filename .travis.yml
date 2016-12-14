@@ -8,7 +8,7 @@ language: php
 
 # list any PHP version you want to test against
 php:
-  - 5.6
+  - 5.6.4
   - 7.0
 
 # execute any number of scripts before the test run, custom env's are available as variables
