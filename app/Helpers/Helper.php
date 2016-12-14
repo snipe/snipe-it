@@ -155,7 +155,8 @@ class Helper
     {
         $company_list = array('0' => trans('general.select_company')) + DB::table('companies')
                 ->orderBy('name', 'asc')
-                ->pluck('name', 'id');
+                ->pluck('name', 'id')
+                ->toArray();
         return $company_list;
     }
 
@@ -265,7 +266,7 @@ class Helper
                         User::where('deleted_at', '=', null)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
-                        ->lists('complete_name', 'id')->toArray();
+                        ->pluck('complete_name', 'id')->toArray();
 
         return $manager_list;
     }
@@ -311,7 +312,7 @@ class Helper
                         ->where('show_in_list','=',1)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
-                        ->lists('complete_name', 'id')->toArray();
+                        ->pluck('complete_name', 'id')->toArray();
 
         return $users_list;
     }
@@ -340,7 +341,7 @@ class Helper
      */
     public static function detailedAssetList()
     {
-        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedUser', 'model'), 'assets.company_id')->get()->lists('detailed_name', 'id')->toArray();
+        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedUser', 'model'), 'assets.company_id')->get()->pluck('detailed_name', 'id')->toArray();
         return $assets;
     }
 

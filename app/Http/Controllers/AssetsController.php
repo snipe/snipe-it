@@ -1861,7 +1861,7 @@ class AssetsController extends Controller
           // Filter out assets that are not deployable.
           $assets = Asset::RTD()->get();
 
-          $assets_list = Company::scopeCompanyables($assets, 'assets.company_id')->lists('detailed_name', 'id')->toArray();
+          $assets_list = Company::scopeCompanyables($assets, 'assets.company_id')->pluck('detailed_name', 'id')->toArray();
 
           return View::make('hardware/bulk-checkout')->with('users_list', $users_list)->with('assets_list', $assets_list);
       }
