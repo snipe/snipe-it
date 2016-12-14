@@ -17,7 +17,7 @@
           <div class="box-header with-border">
             <h3 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h3>
             <div class="box-tools pull-right">
-              <a href="{{ route('admin.custom_fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
+              <a href="{{ route('admin.custom_fields.create-fieldset') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
             </div>
           </div><!-- /.box-header -->
          <div class="box-body">
@@ -50,7 +50,7 @@
                              @endforeach
                          </td>
                          <td>
-                             {{ Form::open(array('route' => array('admin.custom_fields.destroy', $fieldset->id), 'method' => 'delete')) }}
+                             {{ Form::open(array('route' => array('admin.custom_fields.delete-field', $fieldset->id), 'method' => 'delete')) }}
 
                              @if($fieldset->models->count() > 0)
                                <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>

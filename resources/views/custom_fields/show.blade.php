@@ -48,7 +48,10 @@
                <tfoot>
                    <tr>
                      <td colspan="5" class="text-right">
-                       {{ Form::open(['route' => ["admin.custom_fields.associate",$custom_fieldset->id], 'class'=>'form-horizontal', 'id' => 'ordering']) }}
+                       {{ Form::open(['route' =>
+                           ["admin.custom_fields.associate",$custom_fieldset->id],
+                           'class'=>'form-horizontal',
+                           'id' => 'ordering']) }}
                        {{ Form::checkbox("required","on") }}
                        {{ trans('admin/custom_fields/general.required') }}
                        {{ Form::text("order",$maxid)}}

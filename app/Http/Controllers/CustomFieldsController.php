@@ -33,13 +33,11 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function index()
+    public function getIndex()
     {
-        //
-        $fieldsets=CustomFieldset::with("fields", "models")->get();
-        //$fieldsets=CustomFieldset::all();
-        $fields=CustomField::with("fieldset")->get();
-        //$fields=CustomField::all();
+
+        $fieldsets = CustomFieldset::with("fields", "models")->get();
+        $fields = CustomField::with("fieldset")->get();
         return View::make("custom_fields.index")->with("custom_fieldsets", $fieldsets)->with("custom_fields", $fields);
     }
 
@@ -53,7 +51,6 @@ class CustomFieldsController extends Controller
     */
     public function create()
     {
-        //
         return View::make("custom_fields.create");
     }
 
@@ -74,7 +71,7 @@ class CustomFieldsController extends Controller
                 "user_id" => Auth::user()->id]
             );
 
-        $validator=Validator::make(Input::all(), $cfset->rules);
+        $validator = Validator::make(Input::all(), $cfset->rules);
         if ($validator->passes()) {
             $cfset->save();
             return redirect()->route("admin.custom_fields.show", [$cfset->id])->with('success', trans('admin/custom_fields/message.fieldset.create.success'));
@@ -209,10 +206,10 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function show($id)
+    public function getCustomFieldset($id)
     {
         $cfset = CustomFieldset::with('fields')->where('id','=',$id)->orderBy('id','ASC')->first();
-        $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::lists("name", "id")->toArray();
+        $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
 
         $maxid = 0;
         foreach ($cfset->fields() as $field) {
