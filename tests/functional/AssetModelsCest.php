@@ -57,7 +57,7 @@ class AssetModelsCest
     {
         $I->wantTo('Ensure I can delete an asset model');
         // 6 is the only one without an assigned asset.  This is fragile.
-        $I->amOnPage(route('delete/model', $I->getEmptyModelId()));
+        $I->amOnPage(route('models.destroy', $I->getEmptyModelId()));
         $I->seeElement('.alert-success');
     }
 

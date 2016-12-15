@@ -62,7 +62,7 @@ class ConsumablesCest
             'min_amt'           => $consumable->min_amt,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('consumables.index'));
+        $I->amOnPage(route('consumables.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('consumables', $values);
         $I->seeElement('.alert-success');

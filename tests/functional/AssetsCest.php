@@ -15,7 +15,7 @@ class AssetsCest
     {
         $I->wantTo('ensure that the create assets form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/hardware/create');
+        $I->amOnPage(route('hardware.create'));
         $I->dontSee('Create Asset', '.page-header');
         $I->see('Create Asset', 'h1.pull-left');
     }
@@ -51,6 +51,7 @@ class AssetsCest
             'rtd_location_id'   => $asset->rtd_location_id,
             'requestable'       => $asset->requestable,
         ];
+        print_r($values);
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage(route('hardware.create'));
         $I->submitForm('form#create-form', $values);
@@ -61,8 +62,7 @@ class AssetsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an asset');
-        $I->amOnPage(route('delete/hardware', $I->getAssetId()));
+        $I->amOnPage(route('hardware.destroy', $I->getAssetId()));
         $I->seeElement('.alert-success');
     }
 }
- 

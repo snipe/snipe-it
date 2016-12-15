@@ -16,7 +16,7 @@ class AccessoriesCest
     {
         $I->wantTo('ensure that the create accessories form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
         $I->dontSee('Create Accessory', '.page-header');
         $I->see('Create Accessory', 'h1.pull-left');
     }
@@ -24,7 +24,7 @@ class AccessoriesCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -35,7 +35,7 @@ class AccessoriesCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
         $I->fillField('min_amt', '-15');
@@ -64,7 +64,7 @@ class AccessoriesCest
         ];
 
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
 
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('accessories', $values);
