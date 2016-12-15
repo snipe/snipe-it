@@ -71,7 +71,7 @@ class Ldap extends Model
      *         array of ldap_attributes if $user is true
      *
      */
-    static function findAndBindUserLdap($username, $password)
+     static function findAndBindUserLdap($username, $password)
     {
         $settings = Setting::getSettings();
         $connection = Ldap::connectToLdap();
@@ -101,10 +101,14 @@ class Ldap extends Model
 
 
         $filterQuery = $settings->ldap_auth_filter_query . $username;
-
         if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
             return false;
         }
+
+
+        ldap_unbind($connection);
+        $connection = Ldap::connectToLdap();
+        Ldap::bindAdminToLdap($connection);
 
         if (!$results = ldap_search($connection, $baseDn, $filterQuery)) {
             throw new Exception('Could not search LDAP: ');
