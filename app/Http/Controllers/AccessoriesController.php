@@ -16,7 +16,7 @@ use Input;
 use Lang;
 use Mail;
 use Redirect;
-use Request;
+use Illuminate\Http\Request;
 use Slack;
 use Str;
 use View;
