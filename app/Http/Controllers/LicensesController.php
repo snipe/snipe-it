@@ -24,6 +24,7 @@ use Session;
 use App\Helpers\Helper;
 use Auth;
 use Gate;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Licenses for
@@ -90,56 +91,56 @@ class LicensesController extends Controller
         // create a new model instance
         $license = new License();
 
-        if (e(Input::get('purchase_cost')) == '') {
+        if (e($request->input('purchase_cost')) == '') {
             $license->purchase_cost =  null;
         } else {
-            $license->purchase_cost = Helper::ParseFloat(e(Input::get('purchase_cost')));
+            $license->purchase_cost = Helper::ParseFloat(e($request->input('purchase_cost')));
         }
 
-        if (e(Input::get('supplier_id')) == '') {
+        if (e($request->input('supplier_id')) == '') {
             $license->supplier_id = null;
         } else {
-            $license->supplier_id = e(Input::get('supplier_id'));
+            $license->supplier_id = e($request->input('supplier_id'));
         }
 
-        if (e(Input::get('maintained')) == '') {
+        if (e($request->input('maintained')) == '') {
             $license->maintained = 0;
         } else {
-            $license->maintained = e(Input::get('maintained'));
+            $license->maintained = e($request->input('maintained'));
         }
 
-        if (e(Input::get('reassignable')) == '') {
+        if (e($request->input('reassignable')) == '') {
             $license->reassignable = 0;
         } else {
-            $license->reassignable = e(Input::get('reassignable'));
+            $license->reassignable = e($request->input('reassignable'));
         }
 
-        if (e(Input::get('purchase_order')) == '') {
+        if (e($request->input('purchase_order')) == '') {
             $license->purchase_order = '';
         } else {
-            $license->purchase_order = e(Input::get('purchase_order'));
+            $license->purchase_order = e($request->input('purchase_order'));
         }
 
-        if (empty(e(Input::get('manufacturer_id')))) {
+        if (empty(e($request->input('manufacturer_id')))) {
             $license->manufacturer_id = null;
         } else {
-            $license->manufacturer_id = e(Input::get('manufacturer_id'));
+            $license->manufacturer_id = e($request->input('manufacturer_id'));
         }
 
         // Save the license data
-        $license->name              = e(Input::get('name'));
-        $license->serial            = e(Input::get('serial'));
-        $license->license_email     = e(Input::get('license_email'));
-        $license->license_name      = e(Input::get('license_name'));
-        $license->notes             = e(Input::get('notes'));
-        $license->order_number      = e(Input::get('order_number'));
-        $license->seats             = e(Input::get('seats'));
-        $license->purchase_date     = e(Input::get('purchase_date'));
-        $license->purchase_order    = e(Input::get('purchase_order'));
-        $license->depreciation_id   = e(Input::get('depreciation_id'));
-        $license->company_id        = Company::getIdForCurrentUser(Input::get('company_id'));
-        $license->expiration_date   = e(Input::get('expiration_date'));
-        $license->termination_date  = e(Input::get('termination_date'));
+        $license->name              = e($request->input('name'));
+        $license->serial            = e($request->input('serial'));
+        $license->license_email     = e($request->input('license_email'));
+        $license->license_name      = e($request->input('license_name'));
+        $license->notes             = e($request->input('notes'));
+        $license->order_number      = e($request->input('order_number'));
+        $license->seats             = e($request->input('seats'));
+        $license->purchase_date     = e($request->input('purchase_date'));
+        $license->purchase_order    = e($request->input('purchase_order'));
+        $license->depreciation_id   = e($request->input('depreciation_id'));
+        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $license->expiration_date   = e($request->input('expiration_date'));
+        $license->termination_date  = e($request->input('termination_date'));
         $license->user_id           = Auth::user()->id;
 
         if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
@@ -190,9 +191,7 @@ class LicensesController extends Controller
     */
     public function edit($licenseId = null)
     {
-        // Check if the license exists
         if (is_null($item = License::find($licenseId))) {
-            // Redirect to the blogs management page
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
@@ -206,12 +205,9 @@ class LicensesController extends Controller
             $item->purchase_cost = null;
         }
 
-        // Show the page
-        $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->pluck('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
 
         return View::make('licenses/edit', compact('item'))
-            ->with('license_options', $license_options)
             ->with('depreciation_list', Helper::depreciationList())
             ->with('supplier_list', Helper::suppliersList())
             ->with('company_list', Helper::companyList())
@@ -230,7 +226,7 @@ class LicensesController extends Controller
     * @param int $licenseId
     * @return Redirect
     */
-    public function update($licenseId = null)
+    public function update(Request $request, $licenseId = null)
     {
         // Check if the license exists
         if (is_null($license = License::find($licenseId))) {
@@ -241,78 +237,78 @@ class LicensesController extends Controller
         }
 
       // Update the license data
-        $license->name              = e(Input::get('name'));
-        $license->serial            = e(Input::get('serial'));
-        $license->license_email     = e(Input::get('license_email'));
-        $license->license_name      = e(Input::get('license_name'));
-        $license->notes             = e(Input::get('notes'));
-        $license->order_number      = e(Input::get('order_number'));
-        $license->depreciation_id   = e(Input::get('depreciation_id'));
-        $license->company_id        = Company::getIdForCurrentUser(Input::get('company_id'));
-        $license->purchase_order    = e(Input::get('purchase_order'));
-        $license->maintained        = e(Input::get('maintained'));
-        $license->reassignable      = e(Input::get('reassignable'));
+        $license->name              = e($request->input('name'));
+        $license->serial            = e($request->input('serial'));
+        $license->license_email     = e($request->input('license_email'));
+        $license->license_name      = e($request->input('license_name'));
+        $license->notes             = e($request->input('notes'));
+        $license->order_number      = e($request->input('order_number'));
+        $license->depreciation_id   = e($request->input('depreciation_id'));
+        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $license->purchase_order    = e($request->input('purchase_order'));
+        $license->maintained        = e($request->input('maintained'));
+        $license->reassignable      = e($request->input('reassignable'));
 
-        if (empty(e(Input::get('manufacturer_id')))) {
+        if (empty(e($request->input('manufacturer_id')))) {
             $license->manufacturer_id = null;
         } else {
-            $license->manufacturer_id = e(Input::get('manufacturer_id'));
+            $license->manufacturer_id = e($request->input('manufacturer_id'));
         }
 
 
-        if (e(Input::get('supplier_id')) == '') {
+        if (e($request->input('supplier_id')) == '') {
             $license->supplier_id = null;
         } else {
-            $license->supplier_id = e(Input::get('supplier_id'));
+            $license->supplier_id = e($request->input('supplier_id'));
         }
 
       // Update the asset data
-        if (e(Input::get('purchase_date')) == '') {
+        if (e($request->input('purchase_date')) == '') {
               $license->purchase_date =  null;
         } else {
-              $license->purchase_date = e(Input::get('purchase_date'));
+              $license->purchase_date = e($request->input('purchase_date'));
         }
 
-        if (e(Input::get('expiration_date')) == '') {
+        if (e($request->input('expiration_date')) == '') {
             $license->expiration_date = null;
         } else {
-            $license->expiration_date = e(Input::get('expiration_date'));
+            $license->expiration_date = e($request->input('expiration_date'));
         }
 
-        if (e(Input::get('termination_date')) == '') {
+        if (e($request->input('termination_date')) == '') {
             $license->termination_date =  null;
         } else {
-            $license->termination_date = e(Input::get('termination_date'));
+            $license->termination_date = e($request->input('termination_date'));
         }
 
-        if (e(Input::get('purchase_cost')) == '') {
+        if (e($request->input('purchase_cost')) == '') {
             $license->purchase_cost =  null;
         } else {
-            $license->purchase_cost = Helper::ParseFloat(e(Input::get('purchase_cost')));
+            $license->purchase_cost = Helper::ParseFloat(e($request->input('purchase_cost')));
         }
 
-        if (e(Input::get('maintained')) == '') {
+        if (e($request->input('maintained')) == '') {
             $license->maintained = 0;
         } else {
-            $license->maintained = e(Input::get('maintained'));
+            $license->maintained = e($request->input('maintained'));
         }
 
-        if (e(Input::get('reassignable')) == '') {
+        if (e($request->input('reassignable')) == '') {
             $license->reassignable = 0;
         } else {
-            $license->reassignable = e(Input::get('reassignable'));
+            $license->reassignable = e($request->input('reassignable'));
         }
 
-        if (e(Input::get('purchase_order')) == '') {
+        if (e($request->input('purchase_order')) == '') {
             $license->purchase_order = '';
         } else {
-            $license->purchase_order = e(Input::get('purchase_order'));
+            $license->purchase_order = e($request->input('purchase_order'));
         }
 
         //Are we changing the total number of seats?
-        if ($license->seats != e(Input::get('seats'))) {
+        if ($license->seats != e($request->input('seats'))) {
           //Determine how many seats we are dealing with
-            $difference = e(Input::get('seats')) - $license->licenseseats()->count();
+            $difference = e($request->input('seats')) - $license->licenseseats()->count();
 
             if ($difference < 0) {
                 //Filter out any license which have a user attached;
@@ -362,17 +358,16 @@ class LicensesController extends Controller
                 $logaction->target_id =  null;
                 $log = $logaction->logaction('add seats');
             }
-            $license->seats             = e(Input::get('seats'));
+            $license->seats             = e($request->input('seats'));
         }
 
-        // Was the asset created?
+
         if ($license->save()) {
             // Redirect to the new license page
-            return redirect()->to("admin/licenses/$licenseId/view")->with('success', trans('admin/licenses/message.update.success'));
+            return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
         }
 
 
-        // Redirect to the license edit page
         return redirect()->to("admin/licenses/$licenseId/edit")->with('error', trans('admin/licenses/message.update.error'));
 
     }
@@ -465,12 +460,12 @@ class LicensesController extends Controller
     * @param int $seatId
     * @return Redirect
     */
-    public function postCheckout($seatId)
+    public function postCheckout(Request $request, $seatId)
     {
 
         $licenseseat = LicenseSeat::find($seatId);
-        $assigned_to = e(Input::get('assigned_to'));
-        $asset_id = e(Input::get('asset_id'));
+        $assigned_to = e($request->input('assigned_to'));
+        $asset_id = e($request->input('asset_id'));
         $user = Auth::user();
 
         if (!Company::isCurrentUserHasAccess($licenseseat->license)) {
@@ -523,34 +518,34 @@ class LicensesController extends Controller
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
-        if (Input::get('asset_id') == '') {
+        if ($request->input('asset_id') == '') {
             $licenseseat->asset_id = null;
         } else {
-            $licenseseat->asset_id = e(Input::get('asset_id'));
+            $licenseseat->asset_id = e($request->input('asset_id'));
         }
 
         // Update the asset data
-        if (e(Input::get('assigned_to')) == '') {
+        if (e($request->input('assigned_to')) == '') {
                 $licenseseat->assigned_to =  null;
 
         } else {
-                $licenseseat->assigned_to = e(Input::get('assigned_to'));
+                $licenseseat->assigned_to = e($request->input('assigned_to'));
         }
 
         // Was the asset updated?
         if ($licenseseat->save()) {
 
-            $licenseseat->logCheckout(e(Input::get('note')));
+            $licenseseat->logCheckout(e($request->input('note')));
 
             $data['license_id'] =$licenseseat->license_id;
-            $data['note'] = e(Input::get('note'));
+            $data['note'] = e($request->input('note'));
 
             $license = License::find($licenseseat->license_id);
             $settings = Setting::getSettings();
 
 
             // Update the asset data
-            if (e(Input::get('assigned_to')) == '') {
+            if (e($request->input('assigned_to')) == '') {
                 $slack_msg = 'License <'.\URL::to('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.\URL::to('/').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.\URL::to('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
                 $slack_msg = 'License <'.\URL::to('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.\URL::to('/').'/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.\URL::to('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
@@ -579,7 +574,7 @@ class LicensesController extends Controller
                                 ],
                                 [
                                     'title' => 'Note:',
-                                    'value' => e(Input::get('note'))
+                                    'value' => e($request->input('note'))
                                 ],
 
 
@@ -682,7 +677,7 @@ class LicensesController extends Controller
 
         // Was the asset updated?
         if ($licenseseat->save()) {
-            $licenseseat->logCheckin($return_to, e(Input::get('note')));
+            $licenseseat->logCheckin($return_to, e($request->input('note')));
 
             $settings = Setting::getSettings();
 
@@ -707,7 +702,7 @@ class LicensesController extends Controller
                                 ],
                                 [
                                     'title' => 'Note:',
-                                    'value' => e(Input::get('note'))
+                                    'value' => e($request->input('note'))
                                 ],
 
                             ]
@@ -755,26 +750,19 @@ class LicensesController extends Controller
             return View::make('licenses/view', compact('license'));
 
         } else {
-            // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('licenses')->with('error', $error);
+            return redirect()->route('licenses.index')->with('error', $error);
         }
     }
 
     public function getClone($licenseId = null)
     {
-         // Check if the license exists
         if (is_null($license_to_clone = License::find($licenseId))) {
-            // Redirect to the blogs management page
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($license_to_clone)) {
             return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
-          // Show the page
-        $license_options = array('0' => 'Top Level') + License::pluck('name', 'id')->toArray();
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
         $company_list = Helper::companyList();
         //clone the orig
@@ -786,7 +774,6 @@ class LicensesController extends Controller
         $depreciation_list = Helper::depreciationList();
         $supplier_list = Helper::suppliersList();
         return View::make('licenses/edit')
-        ->with('license_options', $license_options)
         ->with('depreciation_list', $depreciation_list)
         ->with('supplier_list', $supplier_list)
         ->with('item', $license)
@@ -837,7 +824,7 @@ class LicensesController extends Controller
                         $upload_success = $file->move($destinationPath, $filename);
 
                         //Log the upload to the log
-                        $license->logUpload($filename, e(Input::get('notes')));
+                        $license->logUpload($filename, e($request->input('notes')));
                     } else {
                          return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
                     }
@@ -949,17 +936,22 @@ class LicensesController extends Controller
     * @since [v1.0]
     * @return String JSON
     */
-    public function getDatatable()
+    public function getDatatable(Request $request)
     {
         $licenses = Company::scopeCompanyables(License::with('company', 'licenseSeatsRelation', 'manufacturer'));
 
         if (Input::has('search')) {
-            $licenses = $licenses->TextSearch(Input::get('search'));
+            $licenses = $licenses->TextSearch($request->input('search'));
         }
 
+        ($request->input('offset')) ? $offset = e($request->input('offset')) : $offset = 0;
+        ($request->input('limit')) ? $limit = e($request->input('limit')) : $limit = 50;
+
+
+
         $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','manufacturer','company'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
         switch ($sort) {
             case 'manufacturer':
@@ -975,7 +967,7 @@ class LicensesController extends Controller
 
 
         $licenseCount = $licenses->count();
-        $licenses = $licenses->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+        $licenses = $licenses->skip($offset)->take($limit)->get();
 
         $rows = array();
 
@@ -992,7 +984,7 @@ class LicensesController extends Controller
                 . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone license"><i class="fa fa-files-o"></i></a>';
             }
             if (Gate::allows('licenses.edit')) {
-                $actions .= '<a href="' . route('hardware.edit', $license->id)
+                $actions .= '<a href="' . route('licenses.edit', $license->id)
                 . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
             if (Gate::allows('licenses.delete')) {

@@ -369,7 +369,7 @@ class ManufacturersController extends Controller
                 . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
             }
             if (Gate::allows('licenses.edit')) {
-                $actions .= '<a href="' . route('update/license', $license->id)
+                $actions .= '<a href="' . route('licenses.edit', ['license' => $license->id])
                 . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
             if (Gate::allows('licenses.delete')) {

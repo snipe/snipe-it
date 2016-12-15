@@ -15,7 +15,7 @@
           <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-          <li><a href="{{ route('update/license', $license->id) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
+          <li><a href="{{ route('licenses.edit', ['license' => $license->id]) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
           <li><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
       </ul>
      @endcan
