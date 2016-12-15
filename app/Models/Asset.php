@@ -52,7 +52,7 @@ class Asset extends Depreciable
     'model_id'        => 'required|integer',
     'status_id'       => 'required|integer',
     'company_id'      => 'integer|nullable',
-    'warranty_months' => 'numeric|max:240|nullable',
+    'warranty_months' => 'numeric|nullable',
     'physical'         => 'numeric|max:1|nullable',
     'checkout_date'   => 'date|max:10|min:10|nullable',
     'checkin_date'    => 'date|max:10|min:10|nullable',
