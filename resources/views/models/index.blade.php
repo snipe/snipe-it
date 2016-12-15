@@ -11,7 +11,7 @@
   @if(Input::get('status')=='Deleted')
       <a href="{{ URL::to('hardware/models') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_models') }}</a>
   @else
-      <a href="{{ route('create/model') }}" class="btn btn-primary pull-right">
+      <a href="{{ route('models.create') }}" class="btn btn-primary pull-right">
       {{ trans('general.create') }}</a>
       <a href="{{ URL::to('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_deleted') }}</a>
   @endif
@@ -30,7 +30,7 @@
         name="models"
         class="table table-striped snipe-table"
         id="table"
-        data-url="{{ route('api.models.list',array('status'=>e(Input::get('status')))) }}"
+        data-url="{{ route('api.models.index',array('status'=>e(Input::get('status')))) }}"
         data-cookie="true"
         data-click-to-select="true"
         data-cookie-id-table="modelsTable-{{ config('version.hash_version') }}">

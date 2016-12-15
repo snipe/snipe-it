@@ -36,7 +36,7 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         // Show the page
         return View::make('models/index');
@@ -49,7 +49,7 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
         // Show the page
         $depreciation_list = Helper::depreciationList();
@@ -117,7 +117,7 @@ class AssetModelsController extends Controller
             // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
-            return redirect()->to("hardware/models")->with('success', trans('admin/models/message.create.success'));
+            return redirect()->route("models.index")->with('success', trans('admin/models/message.create.success'));
         }
 
             return redirect()->back()->withInput()->withErrors($model->getErrors());
@@ -132,7 +132,7 @@ class AssetModelsController extends Controller
     * @since [v2.0]
     * @return String JSON
     */
-    public function store()
+    public function apiStore()
     {
       //COPYPASTA!!!! FIXME
         $model = new AssetModel;
@@ -170,7 +170,7 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return View
     */
-    public function getEdit($modelId = null)
+    public function edit($modelId = null)
     {
         // Check if the model exists
         if (is_null($item = AssetModel::find($modelId))) {
@@ -199,7 +199,7 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return Redirect
     */
-    public function postEdit($modelId = null)
+    public function update($modelId = null)
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
@@ -252,14 +252,14 @@ class AssetModelsController extends Controller
         // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
-            return redirect()->to("hardware/models")->with('success', trans('admin/models/message.update.success'));
+            return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
         } else {
             return redirect()->back()->withInput()->withErrors($model->getErrors());
         }
 
 
         // Redirect to the model create page
-        return redirect()->to("hardware/models/$modelId/edit")->with('error', trans('admin/models/message.update.error'));
+        return redirect()->route('models.create')->with('error', trans('admin/models/message.update.error'));
 
     }
 
@@ -272,7 +272,7 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return Redirect
     */
-    public function getDelete($modelId)
+    public function destroy($modelId)
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
@@ -282,14 +282,14 @@ class AssetModelsController extends Controller
 
         if ($model->assets->count() > 0) {
             // Throw an error that this model is associated with assets
-            return redirect()->to('hardware/models')->with('error', trans('admin/models/message.assoc_users'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.assoc_users'));
 
         } else {
             // Delete the model
             $model->delete();
 
             // Redirect to the models management page
-            return redirect()->to('hardware/models')->with('success', trans('admin/models/message.delete.success'));
+            return redirect()->route('models.index')->with('success', trans('admin/models/message.delete.success'));
         }
     }
 
@@ -317,7 +317,7 @@ class AssetModelsController extends Controller
             $success = trans('admin/models/message.restore.success');
 
             // Redirect back
-            return redirect()->back()->with('success', $success);
+            return redirect()->route('models.index')->with('success', $success);
 
         } else {
             return redirect()->back()->with('error', trans('admin/models/message.not_found'));
@@ -334,7 +334,7 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return View
     */
-    public function getView($modelId = null)
+    public function show($modelId = null)
     {
         $model = AssetModel::withTrashed()->find($modelId);
 
@@ -345,7 +345,7 @@ class AssetModelsController extends Controller
             $error = trans('admin/models/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('models')->with('error', $error);
+            return redirect()->route('models.index')->with('error', $error);
         }
 
 
@@ -452,7 +452,7 @@ class AssetModelsController extends Controller
 
         foreach ($models as $model) {
             if ($model->deleted_at == '') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/model', $model->id).'" class="btn btn-info btn-sm" title="Clone Model" data-toggle="tooltip"><i class="fa fa-clone"></i></a> <a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.trans('admin/models/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/model', $model->id).'" class="btn btn-info btn-sm" title="Clone Model" data-toggle="tooltip"><i class="fa fa-clone"></i></a> <a href="'.route('models.edit', ['model' => $model->id]).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('models.destroy', ['model' => $model->id]).'" data-content="'.trans('admin/models/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } else {
                 $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
@@ -460,7 +460,7 @@ class AssetModelsController extends Controller
             $rows[] = array(
                 'id'      => $model->id,
                 'manufacturer'      => (string)link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
-                'name'              => (string)link_to('/hardware/models/'.$model->id.'/view', $model->name),
+                'name'              => (string)link_to_route('models.show',$model->name, ['model' => $model->id]),
                 'image' => ($model->image!='') ? '<img src="'.\URL::to('/').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->model_number,
                 'numassets'         => $model->assets->count(),

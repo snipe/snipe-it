@@ -15,10 +15,6 @@ Route::resource('fields', 'CustomFieldsController', [
 
 
 
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Log Routes

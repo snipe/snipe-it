@@ -138,11 +138,12 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
 
     /*---Models API---*/
     Route::group([ 'prefix' => 'models' ], function () {
-
-        Route::resource('/', 'AssetModelsController');
-        Route::get('list/{status?}', [ 'as' => 'api.models.list', 'uses' => 'AssetModelsController@getDatatable' ]);
+        Route::get('/{status?}', [ 'as' => 'api.models.index', 'uses' => 'AssetModelsController@getDatatable' ]);
         Route::get('{modelID}/view', [ 'as' => 'api.models.view', 'uses' => 'AssetModelsController@getDataView' ]);
+
     });
+
+
 
     /*--- Categories API---*/
     Route::group([ 'prefix' => 'categories' ], function () {

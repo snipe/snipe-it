@@ -144,7 +144,7 @@ if ($item->id && $item->assetloc) {
       if(modelid=='') {
         $('#custom_fields_content').html("");
       } else {
-        $.get("{{URL::to('/') }}/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+        $.get("{{URL::to('/') }}/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
           $('#custom_fields_content').html(data);
         });
       }
@@ -168,7 +168,7 @@ if ($item->id && $item->assetloc) {
         if(status_id!=''){
             $(".status_spinner").css("display", "inline");
     	    $.ajax({
-    	        url: "{{URL::to('/') }}/api/statuslabels/"+status_id+"/deployable",
+    	        url: "{{URL::to('/') }}/api/v1/statuslabels/"+status_id+"/deployable",
     	        success: function(data) {
                     $(".status_spinner").css("display", "none");
 
@@ -372,7 +372,7 @@ $(function () {
     data._token =  '{{ csrf_token() }}',
     //console.dir(data);
 
-    $.post("{{URL::to('/') }}/api/"+model+"s",data,function (result) {
+    $.post("{{URL::to('/') }}/api/v1/"+model+"s",data,function (result) {
       var id=result.id;
       var name=result.name || (result.first_name+" "+result.last_name);
       $('.modal-body input:visible').val("");

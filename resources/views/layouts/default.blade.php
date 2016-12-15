@@ -136,14 +136,14 @@
                   </li>
                   @endcan
                   @can('licenses.view')
-                  <li {!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
+                  <li {!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('licenses.create') }}">
                           <i class="fa fa-floppy-o"></i>
                       </a>
                   </li>
                   @endcan
                   @can('accessories.view')
-                  <li {!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
+                  <li {!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('accessories.index') }}">
                           <i class="fa fa-keyboard-o"></i>
                       </a>
@@ -157,7 +157,7 @@
                   </li>
                   @endcan
                   @can('components.view')
-                  <li {!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
+                  <li {!! (Request::is('components*') ? ' class="active"' : '') !!}>
                       <a href="{{ URL::to('admin/components') }}">
                           <i class="fa fa-hdd-o"></i>
                       </a>
@@ -194,7 +194,7 @@
                       </li>
                        @endcan
                        @can('licenses.create')
-                       <li {!! (Request::is('admin/licenses/create') ? 'class="active"' : '') !!}>
+                       <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/licenses') }}">
                                <i class="fa fa-floppy-o fa-fw"></i>
                                @lang('general.license')</a>
@@ -215,14 +215,14 @@
                        </li>
                        @endcan
                        @can('users.create')
-                       <li {!! (Request::is('admin/users/create') ? 'class="active"' : '') !!}>
+                       <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/user') }}">
                            <i class="fa fa-user fa-fw"></i>
                            @lang('general.user')</a>
                        </li>
                        @endcan
                        @can('components.create')
-                       <li {!! (Request::is('admin/components/create') ? 'class="active"' : '') !!}>
+                       <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/component') }}">
                            <i class="fa fa-hdd-o"></i>
                            @lang('general.component')</a>
@@ -316,57 +316,57 @@
                        <b class="caret"></b>
                    </a>
                    <ul class="dropdown-menu">
-                       <li {!! (Request::is('admin/settings/companies*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/companies*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/companies') }}">
                                <i class="fa fa-building-o fa-fw"></i> @lang('general.companies')
                            </a>
                        </li>
-                       <li {!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('hardware/models') }}">
+                       <li {!! (Request::is('models*') ? ' class="active"' : '') !!}>
+                           <a href="{{ route('models.index') }}">
                                <i class="fa fa-th fa-fw"></i> @lang('general.asset_models')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/categories') }}">
                                <i class="fa fa-check fa-fw"></i> @lang('general.categories')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/manufacturers*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/manufacturers') }}">
                                <i class="fa fa-briefcase fa-fw"></i> @lang('general.manufacturers')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/suppliers*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/suppliers') }}">
                                <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/statuslabels*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/statuslabels') }}">
                                <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/depreciations*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/depreciations') }}">
                                <i class="fa fa-arrow-down fa-fw"></i> @lang('general.depreciation')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/settings/locations*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/locations*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/locations') }}">
                                <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/groups*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('groups*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/groups') }}">
                                <i class="fa fa-group fa-fw"></i> @lang('general.groups')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/settings/backups*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('settings/backups*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/backups') }}">
                                <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
                            </a>
                        </li>
-                       <li {!! (Request::is('admin/custom_fields*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('custom_fields*') ? ' class="active"' : '') !!}>
                            <a href="{{ route('admin.custom_fields.index') }}">
                                <i class="fa fa-wrench fa-fw"></i> @lang('admin/custom_fields/general.custom_fields')
                            </a>
@@ -445,8 +445,8 @@
                     @endcan
 
                     @can('superuser')
-                    <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware/models') }}">@lang('general.asset_models')</a></li>
-                  <li><a href="{{ URL::to('admin/settings/categories') }}" {!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
+                    <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ route('models.index') }}">@lang('general.asset_models')</a></li>
+                  <li><a href="{{ URL::to('admin/settings/categories') }}" {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
                     @endcan
                     @can('assets.create')
                       <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
@@ -458,7 +458,7 @@
               </li>
               @endcan
               @can('licenses.view')
-              <li{!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
+              <li{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('licenses.create') }}">
                     <i class="fa fa-floppy-o"></i>
                     <span>@lang('general.licenses')</span>
@@ -466,7 +466,7 @@
               </li>
               @endcan
               @can('accessories.view')
-              <li{!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
+              <li{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                 <a href="{{ route('accessories.index') }}">
                   <i class="fa fa-keyboard-o"></i>
                   <span>@lang('general.accessories')</span>
@@ -482,7 +482,7 @@
             </li>
              @endcan
              @can('components.view')
-            <li{!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
+            <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                 <a href="{{ URL::to('admin/components') }}">
                   <i class="fa fa-hdd-o"></i>
                   <span>@lang('general.components')</span>
@@ -490,7 +490,7 @@
             </li>
             @endcan
             @can('users.view')
-            <li{!! (Request::is('admin/users*') ? ' class="active"' : '') !!}>
+            <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                   <a href="{{ URL::to('admin/users') }}">
                       <i class="fa fa-users"></i>
                       <span>@lang('general.people')</span>
