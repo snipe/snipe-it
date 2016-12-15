@@ -71,7 +71,7 @@ class Ldap extends Model
      *         array of ldap_attributes if $user is true
      *
      */
-     static function findAndBindUserLdap($username, $password)
+    static function findAndBindUserLdap($username, $password)
     {
         $settings = Setting::getSettings();
         $connection = Ldap::connectToLdap();
