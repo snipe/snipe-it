@@ -9,7 +9,7 @@
 
 @section('header_right')
 @can('licenses.create')
-    <a href="{{ route('create/licenses') }}" class="btn btn-primary pull-right">
+    <a href="{{ route('licenses.create') }}" class="btn btn-primary pull-right">
       {{ trans('general.create') }}
     </a>
     @endcan
@@ -27,7 +27,7 @@
       <table
       name="licenses"
       id="table"
-      data-url="{{route('api.licenses.list') }}"
+      data-url="{{ route('api.licenses.list') }}"
       class="table table-striped snipe-table"
       data-cookie="true"
       data-click-to-select="true"

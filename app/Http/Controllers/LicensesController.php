@@ -172,7 +172,7 @@ class LicensesController extends Controller
 
 
           // Redirect to the new license page
-            return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.create.success'));
+            return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($license->getErrors());
@@ -551,9 +551,9 @@ class LicensesController extends Controller
 
             // Update the asset data
             if (e(Input::get('assigned_to')) == '') {
-                $slack_msg = 'License <'.\URL::to('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.\URL::to('/').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.\URL::to('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = 'License <'.\URL::to('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.\URL::to('/').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.\URL::to('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
-                $slack_msg = 'License <'.\URL::to('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.\URL::to('/').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.\URL::to('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = 'License <'.\URL::to('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.\URL::to('/').'/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.\URL::to('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             }
 
 
@@ -594,7 +594,7 @@ class LicensesController extends Controller
             }
 
             // Redirect to the new asset page
-            return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
+            return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
         }
 
         // Redirect to the asset management page with error
@@ -730,7 +730,7 @@ class LicensesController extends Controller
         }
 
         // Redirect to the license page with error
-        return redirect()->to("admin/licenses")->with('error', trans('admin/licenses/message.checkin.error'));
+        return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkin.error'));
     }
 
     /**
@@ -741,7 +741,7 @@ class LicensesController extends Controller
     * @param int $licenseId
     * @return View
     */
-    public function getView($licenseId = null)
+    public function show($licenseId = null)
     {
 
         $license = License::find($licenseId);
@@ -1004,8 +1004,8 @@ class LicensesController extends Controller
 
             $rows[] = array(
                 'id'                => $license->id,
-                'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
-                'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
+                'name'              => (string) link_to('/licenses/'.$license->id, $license->name),
+                'serial'            => (string) link_to('/licenses/'.$license->id, mb_strimwidth($license->serial, 0, 50, "...")),
                 'totalSeats'        => $license->licenseSeatsCount,
                 'remaining'         => $license->remaincount(),
                 'license_name'      => e($license->license_name),

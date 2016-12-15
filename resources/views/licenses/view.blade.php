@@ -89,7 +89,7 @@
                             <td>
                                 @if ($licensedto->asset_id)
                                         @can('assets.view')
-                                            <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
+                                            <a href="{{ route('hardware.show', $licensedto->asset_id) }}">
                                                 {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
                                             </a>
                                         @else
@@ -384,7 +384,7 @@
                                           {{ $log->userlog->fullName() }}
                                       </a>
                                   @elseif ($log->target_type == 'App\Models\Asset')
-                                      <a href="{{ route('view/hardware', $log->target_id) }}">
+                                      <a href="{{ route('hardware.show', $log->target_id) }}">
                                           {{ $log->userlog->showAssetName() }}
                                       </a>
                                   @endif

@@ -195,7 +195,7 @@
                        @endcan
                        @can('licenses.create')
                        <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('create/licenses') }}">
+                           <a href="{{ route('licenses.create') }}">
                                <i class="fa fa-floppy-o fa-fw"></i>
                                @lang('general.license')</a>
                        </li>
@@ -459,7 +459,7 @@
               @endcan
               @can('licenses.view')
               <li{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
-                  <a href="{{ route('licenses.create') }}">
+                  <a href="{{ route('licenses.index') }}">
                     <i class="fa fa-floppy-o"></i>
                     <span>@lang('general.licenses')</span>
                   </a>
