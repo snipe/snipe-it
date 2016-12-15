@@ -31,7 +31,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'start_date'             => 'required|date_format:Y-m-d',
         'completion_date'        => 'date_format:Y-m-d',
         'notes'                  => 'string',
-        'cost'                   => 'numeric'
+        'cost'                   => 'numeric|nullable'
     ];
 
     public function getCompanyableParents()

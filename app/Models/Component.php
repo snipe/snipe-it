@@ -35,9 +35,9 @@ class Component extends SnipeModel
         'name'        => 'required|min:3|max:255',
         'qty'     => 'required|integer|min:1',
         'category_id' => 'required|integer',
-        'company_id'  => 'integer',
-        'purchase_date'  => 'date',
-        'purchase_cost'   => 'numeric',
+        'company_id'  => 'integer|nullable',
+        'purchase_date'  => 'date|nullable',
+        'purchase_cost'   => 'numeric|nullable',
     );
 
     /**
