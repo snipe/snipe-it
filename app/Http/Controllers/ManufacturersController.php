@@ -360,7 +360,7 @@ class ManufacturersController extends Controller
             $actions = '<span style="white-space: nowrap;">';
 
             if (Gate::allows('licenses.checkout')) {
-                $actions .= '<a href="' . route('freecheckout/license', $license->id)
+                $actions .= '<a href="' . route('licenses.freecheckout', $license->id)
                 . '" class="btn btn-primary btn-sm' . (($license->remaincount() > 0) ? '' : ' disabled') . '" style="margin-right:5px;">' . trans('general.checkout') . '</a> ';
             }
 

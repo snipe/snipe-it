@@ -287,7 +287,7 @@
                             {{ trans('general.months') }}
                             )
                           @endif
-                            
+
                         </td>
                       </tr>
                     @endif
@@ -441,7 +441,7 @@
                       <td><a href="{{ route('view/license', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                       <td>{{ $seat->license->serial }}</td>
                       <td>
-                        <a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info btn-sm">{{ trans('general.checkin') }}</a>
+                        <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn-flat info btn-sm">{{ trans('general.checkin') }}</a>
                       </td>
                     </tr>
                     @endforeach
@@ -489,7 +489,7 @@
                     {{ trans('general.no_results') }}
                   </div>
                 @endif
-  
+
               </div>
           </div>
         </div> <!-- /.tab-pane components -->
@@ -612,7 +612,7 @@
                               @else
                                 <del>{{ $log->target->fullName() }}</del>
                               @endif
-                            @elseif($log->target instanceof \App\Models\Asset) 
+                            @elseif($log->target instanceof \App\Models\Asset)
                               @if ($log->target->deleted_at=='')
                                 <a href="{{ route('view/hardware', $log->target_id) }}">
                                 {{ $log->target->showAssetName() }}

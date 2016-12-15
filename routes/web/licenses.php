@@ -8,35 +8,28 @@ Route::group([ 'prefix' => 'licenses', 'middleware'=>'authorize:licenses.view' ]
     Route::post('{licenseId}/clone', [ 'as' => 'clone/license', 'middleware' => 'authorize:licenses.create', 'uses' => 'LicensesController@postCreate' ]);
 
     Route::get('{licenseId}/freecheckout', [
-    'as' => 'freecheckout/license',
+    'as' => 'licenses.freecheckout',
     'middleware' => 'authorize:licenses.checkout',
     'uses' => 'LicensesController@getFreeLicense'
     ]);
     Route::get(
     '{licenseId}/checkout',
-    [ 'as' => 'checkout/license', 'middleware' => 'authorize:licenses.checkout','uses' => 'LicensesController@getCheckout' ]
+    [ 'as' => 'licenses.checkout', 'middleware' => 'authorize:licenses.checkout','uses' => 'LicensesController@getCheckout' ]
     );
     Route::post(
     '{licenseId}/checkout',
-    [ 'as' => 'checkout/license', 'middleware' => 'authorize:licenses.checkout','uses' => 'LicensesController@postCheckout' ]
+    [ 'as' => 'licenses.checkout', 'middleware' => 'authorize:licenses.checkout','uses' => 'LicensesController@postCheckout' ]
     );
     Route::get('{licenseId}/checkin/{backto?}', [
-    'as' => 'checkin/license',
+    'as' => 'licenses.checkin',
     'middleware' => 'authorize:licenses.checkin',
     'uses' => 'LicensesController@getCheckin'
     ]);
 
     Route::post('{licenseId}/checkin/{backto?}', [
-    'as' => 'checkin/license',
+    'as' => 'licenses.checkin',
     'middleware' => 'authorize:licenses.checkin',
     'uses' => 'LicensesController@postCheckin'
-    ]);
-
-    #legacy
-    Route::get('{licenseId}/view', [
-    'as' => 'view/license',
-    'middleware' => 'authorize:licenses.view',
-    'uses' => 'LicensesController@getView'
     ]);
 
     Route::post(

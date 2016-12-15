@@ -46,7 +46,6 @@ class LicensesController extends Controller
     */
     public function index()
     {
-        // Show the page
         return View::make('licenses/index');
     }
 
@@ -848,7 +847,7 @@ class LicensesController extends Controller
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
-            return redirect()->route('licenses')->with('error', $error);
+            return redirect()->route('licenses.index')->with('error', $error);
         }
     }
 
@@ -888,7 +887,7 @@ class LicensesController extends Controller
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
-            return redirect()->route('licenses')->with('error', $error);
+            return redirect()->route('licenses.index')->with('error', $error);
         }
     }
 
@@ -923,7 +922,7 @@ class LicensesController extends Controller
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
-            return redirect()->route('licenses')->with('error', $error);
+            return redirect()->route('licenses.index')->with('error', $error);
         }
     }
 
@@ -975,7 +974,7 @@ class LicensesController extends Controller
             $actions = '<span style="white-space: nowrap;">';
 
             if (Gate::allows('licenses.checkout')) {
-                $actions .= '<a href="' . route('freecheckout/license', $license->id)
+                $actions .= '<a href="' . route('licenses.freecheckout', $license->id)
                 . '" class="btn btn-primary btn-sm' . (($license->remaincount() > 0) ? '' : ' disabled') . '" style="margin-right:5px;">' . trans('general.checkout') . '</a> ';
             }
 
@@ -1010,7 +1009,7 @@ class LicensesController extends Controller
                 'notes'     => ($license->notes) ? e($license->notes) : '',
                 'actions'           => $actions,
                 'company'       => is_null($license->company) ? '' : e($license->company->name),
-                'manufacturer'      => $license->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
+                'manufacturer'      => $license->manufacturer ? (string) link_to('settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
             );
         }
 
@@ -1034,12 +1033,10 @@ class LicensesController extends Controller
     */
     public function getFreeLicense($licenseId)
     {
-        // Check if the asset exists
         if (is_null($license = License::find($licenseId))) {
-            // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
         $seatId = $license->freeSeat($licenseId);
-        return redirect()->to('admin/licenses/'.$seatId.'/checkout');
+        return redirect()->route('licenses.checkout', $seatId);
     }
 }

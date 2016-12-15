@@ -103,14 +103,14 @@
                                         @if (($licensedto->assigned_to) || ($licensedto->asset_id))
 
                                             @if ($license->reassignable)
-                                                <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
+                                                <a href="{{ route('licenses.checkin', $licensedto->id) }}" class="btn btn-primary btn-sm">
                                                 {{ trans('general.checkin') }}
                                                 </a>
                                             @else
                                                 <span>Assigned</span>
                                             @endif
                                         @else
-                                            <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info btn-sm">
+                                            <a href="{{ route('licenses.checkout', $licensedto->id) }}" class="btn btn-info btn-sm">
                                             {{ trans('general.checkout') }}</a>
                                         @endif
                                 @endcan

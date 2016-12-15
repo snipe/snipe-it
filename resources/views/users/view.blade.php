@@ -229,7 +229,7 @@
                     <td><a href="{{ route('view/license', $license->id) }}">{{ mb_strimwidth($license->serial, 0, 50, "...") }}</a></td>
                     <td class="hidden-print">
                         @can('licenses.edit')
-                            <a href="{{ route('checkin/license', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
+                            <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
                          @endcan
                     </td>
                   </tr>

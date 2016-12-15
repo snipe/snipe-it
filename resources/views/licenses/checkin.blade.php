@@ -21,9 +21,9 @@
 <div class="col-md-10 column">
 
 @if ($backto=='user')
-	<form class="form-horizontal" method="post" action="{{ route('checkin/license', array('licenseeat_id'=> $licenseseat->id, 'backto'=>'user')) }}" autocomplete="off">
+	<form class="form-horizontal" method="post" action="{{ route('licenses.checkin', array('licenseeat_id'=> $licenseseat->id, 'backto'=>'user')) }}" autocomplete="off">
 @else
-	<form class="form-horizontal" method="post" action="{{ route('checkin/license', $licenseseat->id) }}" autocomplete="off">
+	<form class="form-horizontal" method="post" action="{{ route('licenses.checkin', $licenseseat->id) }}" autocomplete="off">
 @endif
 
     <!-- CSRF Token -->
@@ -58,7 +58,7 @@
                 <div class="form-group">
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
-                        <a class="btn btn-link" href="{{ route('licenses') }}">{{ trans('button.cancel') }}</a>
+                        <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
                     </div>
                 </div>
