@@ -137,7 +137,7 @@
                   @endcan
                   @can('licenses.view')
                   <li {!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('licenses.create') }}">
+                      <a href="{{ route('licenses.index') }}">
                           <i class="fa fa-floppy-o"></i>
                       </a>
                   </li>
