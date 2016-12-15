@@ -151,14 +151,14 @@
                   @endcan
                   @can('consumables.view')
                   <li {!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
-                      <a href="{{ URL::to('admin/consumables') }}">
+                      <a href="{{ URL::to('consumables') }}">
                           <i class="fa fa-tint"></i>
                       </a>
                   </li>
                   @endcan
                   @can('components.view')
                   <li {!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                      <a href="{{ URL::to('admin/components') }}">
+                      <a href="{{ URL::to('components') }}">
                           <i class="fa fa-hdd-o"></i>
                       </a>
                   </li>
@@ -252,7 +252,7 @@
                       @for($i=0; count($alert_items) > $i; $i++)
 
                         <li><!-- Task item -->
-                          <a href="{{ URL::to('/') }}/admin/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
+                          <a href="{{ URL::to('/') }}/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
                             <h3>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
                                 {{ $alert_items[$i]['remaining'] }} remaining
@@ -450,7 +450,7 @@
                     @endcan
                     @can('assets.create')
                       <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
-                      <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
+                      <li><a href="{{ route('maintenances.index') }}">@lang('general.asset_maintenances') </a></li>
                       <li><a href="{{ URL::to('hardware/import') }}">@lang('general.import') </a></li>
                       <li><a href="{{ URL::to('hardware/history') }}">@lang('general.import-history') </a></li>
                     @endcan
@@ -475,7 +475,7 @@
               @endcan
               @can('consumables.view')
             <li{!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
-                <a href="{{ URL::to('admin/consumables') }}">
+                <a href="{{ URL::to('consumables') }}">
                   <i class="fa fa-tint"></i>
                   <span>@lang('general.consumables')</span>
                 </a>

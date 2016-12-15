@@ -70,7 +70,7 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function store()
     {
 
         // Create a new asset model

@@ -62,7 +62,7 @@ class DepreciationsController extends Controller
     {
 
       // get the POST data
-        $new = Input::all();
+        $new = $request->all();
 
       // create a new instance
         $depreciation = new Depreciation();

@@ -9,7 +9,7 @@
 
 @section('header_right')
   @can('assets.edit')
-<a href="{{ route('create/asset_maintenances') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+<a href="{{ route('maintenances.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
   @endcan
 @stop
 

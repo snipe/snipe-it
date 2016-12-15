@@ -84,7 +84,7 @@ class LicensesController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function store()
+    public function store(Request $request)
     {
 
         // create a new model instance

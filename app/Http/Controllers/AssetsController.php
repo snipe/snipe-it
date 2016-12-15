@@ -271,7 +271,7 @@ class AssetsController extends Controller
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
-            return response()->json(['redirect_url' => route('hardware')]);
+            return response()->json(['redirect_url' => route('hardware.index')]);
         }
         \Input::flash();
         \Session::flash('errors', $asset->getErrors());

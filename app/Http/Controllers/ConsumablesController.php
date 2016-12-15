@@ -232,7 +232,7 @@ class ConsumablesController extends Controller
     * @param int $consumableId
     * @return View
     */
-    public function getView($consumableId = null)
+    public function show($consumableId = null)
     {
         $consumable = Consumable::find($consumableId);
 

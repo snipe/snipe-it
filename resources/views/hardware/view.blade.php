@@ -498,7 +498,7 @@
             <div class="col-md-12">
                 @can('assets.edit')
               <h6>{{ trans('general.asset_maintenances') }}
-                [ <a href="{{ route('create/asset_maintenances', $asset->id) }}">{{ trans('button.add') }}</a> ]
+                [ <a href="{{ route('maintenances.create', $asset->id) }}">{{ trans('button.add') }}</a> ]
               </h6>
                 @endcan
 

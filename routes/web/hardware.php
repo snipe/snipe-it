@@ -13,8 +13,8 @@ Route::group(
     function () {
 
         # Asset Maintenances
-        Route::resource('maintenance', 'AssetMaintenancesController', [
-            'parameters' => ['assetmaintenance' => 'maintenance_id', 'asset' => 'asset_id']
+        Route::resource('maintenances', 'AssetMaintenancesController', [
+            'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id']
         ]);
 
 
