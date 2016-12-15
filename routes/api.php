@@ -16,7 +16,7 @@ use App\Models\Statuslabel;
 |
 */
 
-Route::group([ 'middleware' => 'auth:api' ], function () {
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
 
     /*---Hardware API---*/
     Route::group([ 'prefix' => 'hardware','middleware' => ['web','auth','authorize:assets.view']], function () {
