@@ -29,16 +29,16 @@ class AssetRequest extends Request
           'name'            => 'min:2|max:255',
           'model_id'        => 'required|integer',
           'status_id'       => 'required|integer',
-          'company_id'      => 'integer',
-          'warranty_months' => 'integer|min:0|max:240',
-          'physical'        => 'integer',
+          'company_id'      => 'integer|nullable',
+          'warranty_months' => 'numeric|nullable',
+          'physical'        => 'integer|nullable',
           'checkout_date'   => 'date',
           'checkin_date'    => 'date',
-          'supplier_id'     => 'integer',
-          'status'          => 'integer',
+          'supplier_id'     => 'integer|nullable',
+          'status'          => 'integer|nullable',
           'asset_tag'       => 'required',
-          'purchase_cost'   => 'numeric',
-    
+          'purchase_cost'   => 'numeric|nullable',
+
         ];
 
         $model = AssetModel::find($this->request->get('model_id'));

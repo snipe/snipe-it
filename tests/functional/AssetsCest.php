@@ -51,7 +51,7 @@ class AssetsCest
             'rtd_location_id'   => $asset->rtd_location_id,
             'requestable'       => $asset->requestable,
         ];
-        ///print_r($values);
+
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage(route('hardware.create'));
         $I->submitForm('form#create-form', $values);
