@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('create/company') }}" class="btn btn-primary pull-right">
+<a href="{{ route('companies.create') }}" class="btn btn-primary pull-right">
   {{ trans('general.create') }}</a>
 @stop
 
@@ -32,11 +32,11 @@
                   <td>{{ $company->id }}</td>
                   <td>{{ $company->name }}</td>
                   <td>
-                    <form method="POST" action="{{ route('delete/company', $company->id) }}" role="form">
+                    <form method="POST" action="{{ route('companies.destroy', $company->id) }}" role="form">
 
                       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                      <a href="{{ route('update/company', $company->id) }}" class="btn btn-sm btn-warning"
+                      <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-sm btn-warning"
                          title="{{ trans('button.edit') }}">
                         <i class="fa fa-pencil icon-white"></i>
                       </a>

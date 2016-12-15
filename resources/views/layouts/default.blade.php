@@ -317,7 +317,7 @@
                    </a>
                    <ul class="dropdown-menu">
                        <li {!! (Request::is('settings/companies*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/companies') }}">
+                           <a href="{{ route('companies.index') }}">
                                <i class="fa fa-building-o fa-fw"></i> @lang('general.companies')
                            </a>
                        </li>

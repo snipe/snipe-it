@@ -13,6 +13,10 @@ Route::resource('fields', 'CustomFieldsController', [
     'parameters' => ['customfield' => 'field_id', 'fieldset' => 'fieldset_id']
 ]);
 
+Route::resource('companies', 'CompaniesController', [
+    'parameters' => ['company' => 'company_id']
+]);
+
 
 
 /*
@@ -141,17 +145,6 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
             Route::get('/', [ 'as' => 'settings/backups', 'uses' => 'SettingsController@getBackups' ]);
         });
 
-        # Companies
-        Route::group([ 'prefix' => 'companies' ], function () {
-
-            Route::get('{companyId}/edit', ['as' => 'update/company', 'uses' => 'CompaniesController@getEdit']);
-            Route::get('create', ['as' => 'create/company', 'uses' => 'CompaniesController@getCreate']);
-            Route::get('/', ['as' => 'companies', 'uses' => 'CompaniesController@getIndex']);
-
-            Route::post('{companyId}/delete', ['as' => 'delete/company', 'uses' => 'CompaniesController@postDelete']);
-            Route::post('{companyId}/edit', 'CompaniesController@postEdit');
-            Route::post('create', 'CompaniesController@postCreate');
-        });
 
 
 

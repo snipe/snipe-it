@@ -6,6 +6,7 @@ use Input;
 use Lang;
 use Redirect;
 use View;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Companies for
@@ -24,7 +25,7 @@ final class CompaniesController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         return View::make('companies/index')->with('companies', Company::all());
     }
@@ -36,7 +37,7 @@ final class CompaniesController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
         return View::make('companies/edit')->with('item', new Company);
     }
@@ -48,14 +49,13 @@ final class CompaniesController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function postCreate()
+    public function store(Request $request)
     {
         $company = new Company;
-
-            $company->name = e(Input::get('name'));
+        $company->name = e($request->input('name'));
 
         if ($company->save()) {
-            return redirect()->to('admin/settings/companies')
+            return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.create.success'));
         } else {
             return redirect()->back()->withInput()->withErrors($company->getErrors());
@@ -72,10 +72,10 @@ final class CompaniesController extends Controller
     * @param int $companyId
     * @return View
     */
-    public function getEdit($companyId)
+    public function edit($companyId)
     {
         if (is_null($item = Company::find($companyId))) {
-            return redirect()->to('admin/settings/companies')
+            return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
             return View::make('companies/edit')->with('item', $item);
@@ -90,20 +90,20 @@ final class CompaniesController extends Controller
     * @param int $companyId
     * @return Redirect
     */
-    public function postEdit($companyId)
+    public function update(Request $request, $companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return redirect()->to('admin/settings/companies')->with('error', trans('admin/companies/message.does_not_exist'));
+            return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
 
 
-            $company->name = e(Input::get('name'));
+            $company->name = e($request->input('name'));
 
             if ($company->save()) {
-                return redirect()->to('admin/settings/companies')
+                return redirect()->route('companies.index')
                     ->with('success', trans('admin/companies/message.update.success'));
             } else {
-                return redirect()->to("admin/settings/companies/$companyId/edit")
+                return redirect()->route('companies.edit', ['company' => $companyId])
                     ->with('error', trans('admin/companies/message.update.error'));
             }
 
@@ -118,15 +118,15 @@ final class CompaniesController extends Controller
     * @param int $companyId
     * @return Redirect
     */
-    public function postDelete($companyId)
+    public function destroy($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return redirect()->to('admin/settings/companies')
+            return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.not_found'));
         } else {
             try {
                 $company->delete();
-                return redirect()->to('admin/settings/companies')
+                return redirect()->route('companies.index')
                     ->with('success', trans('admin/companies/message.delete.success'));
             } catch (\Illuminate\Database\QueryException $exception) {
             /*
@@ -134,7 +134,7 @@ final class CompaniesController extends Controller
                  * For example when rows in other tables are referencing this company
                  */
                 if ($exception->getCode() == 23000) {
-                    return redirect()->to('admin/settings/companies')
+                    return redirect()->route('companies.index')
                         ->with('error', trans('admin/companies/message.assoc_users'));
                 } else {
                     throw $exception;
