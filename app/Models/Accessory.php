@@ -28,9 +28,9 @@ class Accessory extends SnipeModel
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
         'category_id'       => 'required|integer',
-        'company_id'        => 'integer',
+        'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0',
-        'purchase_cost'     => 'numeric',
+        'purchase_cost'     => 'numeric|nullable',
     );
 
 
