@@ -15,6 +15,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use Config;
 use App\Helpers\Helper;
+use Illuminate\Http\Request;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -70,36 +71,36 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function store()
+    public function store(Request $request)
     {
 
         // Create a new asset model
         $model = new AssetModel;
 
 
-        if (e(Input::get('depreciation_id')) == '') {
+        if (e($request->input('depreciation_id')) == '') {
             $model->depreciation_id =  0;
         } else {
-            $model->depreciation_id = e(Input::get('depreciation_id'));
+            $model->depreciation_id = e($request->input('depreciation_id'));
         }
 
-        if (e(Input::get('eol')) == '') {
+        if (e($request->input('eol')) == '') {
             $model->eol =  0;
         } else {
-            $model->eol = e(Input::get('eol'));
+            $model->eol = e($request->input('eol'));
         }
 
         // Save the model data
-        $model->name                = e(Input::get('name'));
-        $model->model_number             = e(Input::get('model_number'));
-        $model->manufacturer_id     = e(Input::get('manufacturer_id'));
-        $model->category_id         = e(Input::get('category_id'));
-        $model->notes               = e(Input::get('notes'));
+        $model->name                = e($request->input('name'));
+        $model->model_number             = e($request->input('model_number'));
+        $model->manufacturer_id     = e($request->input('manufacturer_id'));
+        $model->category_id         = e($request->input('category_id'));
+        $model->notes               = e($request->input('notes'));
         $model->user_id             = Auth::user()->id;
         $model->requestable         = Input::has('requestable');
 
-        if (Input::get('custom_fieldset')!='') {
-            $model->fieldset_id = e(Input::get('custom_fieldset'));
+        if ($request->input('custom_fieldset')!='') {
+            $model->fieldset_id = e($request->input('custom_fieldset'));
         }
 
 
@@ -132,7 +133,7 @@ class AssetModelsController extends Controller
     * @since [v2.0]
     * @return String JSON
     */
-    public function apiStore()
+    public function apiStore(Request $request)
     {
       //COPYPASTA!!!! FIXME
         $model = new AssetModel;
@@ -140,18 +141,18 @@ class AssetModelsController extends Controller
         $settings=Input::all();
         $settings['eol']= null;
 
-        $model->name=e(Input::get('name'));
-        $model->manufacturer_id = e(Input::get('manufacturer_id'));
-        $model->category_id = e(Input::get('category_id'));
-        $model->model_number = e(Input::get('model_number'));
+        $model->name=e($request->input('name'));
+        $model->manufacturer_id = e($request->input('manufacturer_id'));
+        $model->category_id = e($request->input('category_id'));
+        $model->model_number = e($request->input('model_number'));
         $model->user_id = Auth::user()->id;
-        $model->notes            = e(Input::get('notes'));
+        $model->notes            = e($request->input('notes'));
         $model->eol= null;
 
-        if (Input::get('fieldset_id')=='') {
+        if ($request->input('fieldset_id')=='') {
             $model->fieldset_id = null;
         } else {
-            $model->fieldset_id = e(Input::get('fieldset_id'));
+            $model->fieldset_id = e($request->input('fieldset_id'));
         }
 
         if ($model->save()) {
@@ -199,7 +200,7 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return Redirect
     */
-    public function update($modelId = null)
+    public function update(Request $request, $modelId = null)
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
@@ -208,30 +209,30 @@ class AssetModelsController extends Controller
         }
 
 
-        if (e(Input::get('depreciation_id')) == '') {
+        if (e($request->input('depreciation_id')) == '') {
             $model->depreciation_id =  0;
         } else {
-            $model->depreciation_id = e(Input::get('depreciation_id'));
+            $model->depreciation_id = e($request->input('depreciation_id'));
         }
 
-        if (e(Input::get('eol')) == '') {
+        if (e($request->input('eol')) == '') {
             $model->eol =  null;
         } else {
-            $model->eol = e(Input::get('eol'));
+            $model->eol = e($request->input('eol'));
         }
-        // Update the model data
-        $model->name                = e(Input::get('name'));
-        $model->model_number        = e(Input::get('model_number'));
-        $model->manufacturer_id     = e(Input::get('manufacturer_id'));
-        $model->category_id         = e(Input::get('category_id'));
-        $model->notes               = e(Input::get('notes'));
+
+        $model->name                = e($request->input('name'));
+        $model->model_number        = e($request->input('model_number'));
+        $model->manufacturer_id     = e($request->input('manufacturer_id'));
+        $model->category_id         = e($request->input('category_id'));
+        $model->notes               = e($request->input('notes'));
 
         $model->requestable = Input::has('requestable');
 
-        if (Input::get('custom_fieldset')=='') {
+        if ($request->input('custom_fieldset')=='') {
             $model->fieldset_id = null;
         } else {
-            $model->fieldset_id = e(Input::get('custom_fieldset'));
+            $model->fieldset_id = e($request->input('custom_fieldset'));
         }
 
         if (Input::file('image')) {
@@ -245,13 +246,12 @@ class AssetModelsController extends Controller
             $model->image = $file_name;
         }
 
-        if (Input::get('image_delete') == 1 && Input::file('image') == "") {
+        if ($request->input('image_delete') == 1 && Input::file('image') == "") {
             $model->image = null;
         }
 
-        // Was it created?
+
         if ($model->save()) {
-            // Redirect to the new model  page
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
         } else {
             return redirect()->back()->withInput()->withErrors($model->getErrors());
@@ -411,7 +411,7 @@ class AssetModelsController extends Controller
     * @return String JSON
     */
 
-    public function getDatatable($status = null)
+    public function getDatatable(Request $request, $status = null)
     {
         $models = AssetModel::with('category', 'assets', 'depreciation', 'manufacturer');
 
@@ -423,25 +423,25 @@ class AssetModelsController extends Controller
 
 
         if (Input::has('search')) {
-            $models = $models->TextSearch(Input::get('search'));
+            $models = $models->TextSearch($request->input('search'));
         }
 
         if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
 
         $allowed_columns = ['id','name','model_number'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
         $models = $models->orderBy($sort, $order);
 
@@ -492,25 +492,25 @@ class AssetModelsController extends Controller
         $assets = Asset::where('model_id', '=', $modelID)->with('company', 'assetstatus');
 
         if (Input::has('search')) {
-            $assets = $assets->TextSearch(e(Input::get('search')));
+            $assets = $assets->TextSearch(e($request->input('search')));
         }
 
         if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
 
         $allowed_columns = ['name', 'serial','asset_tag'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
         $assets = $assets->orderBy($sort, $order);
 
