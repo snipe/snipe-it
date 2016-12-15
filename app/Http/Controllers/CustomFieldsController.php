@@ -33,7 +33,7 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
 
         $fieldsets = CustomFieldset::with("fields", "models")->get();

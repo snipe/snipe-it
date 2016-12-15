@@ -71,7 +71,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         return View::make('hardware/index');
     }
@@ -104,7 +104,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getCreate($model_id = null)
+    public function create($model_id = null)
     {
         // Grab the dropdown lists
         $model_list = Helper::modelList();
@@ -144,7 +144,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate(AssetRequest $request)
+    public function store(AssetRequest $request)
     {
         // create a new model instance
         $asset = new Asset();
@@ -286,7 +286,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getEdit($assetId = null)
+    public function edit($assetId = null)
     {
 
         // Check if the asset exists
@@ -712,7 +712,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getView($assetId = null)
+    public function show($assetId = null)
     {
         $asset = Asset::withTrashed()->find($assetId);
         $settings = Setting::getSettings();
@@ -1761,11 +1761,11 @@ class AssetsController extends Controller
                             $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i></a> ';
                 }
                 if (Gate::allows('assets.edit')) {
-                    $actions .= '<a href="' . route('update/hardware',
+                    $actions .= '<a href="' . route('hardware.edit',
                             $asset->id) . '" class="btn btn-warning btn-sm" title="Edit asset" data-toggle="tooltip"><i class="fa fa-pencil icon-white"></i></a> ';
                 }
                 if (Gate::allows('assets.delete')) {
-                    $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/hardware',
+                    $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('hardware.destroy',
                             $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
                 }
             } elseif ($asset->model->deleted_at=='') {

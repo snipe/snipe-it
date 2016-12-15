@@ -43,7 +43,7 @@ class LicensesController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         // Show the page
         return View::make('licenses/index');
@@ -58,7 +58,7 @@ class LicensesController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
 
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
@@ -84,7 +84,7 @@ class LicensesController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function store()
     {
 
         // create a new model instance
@@ -188,14 +188,14 @@ class LicensesController extends Controller
     * @param int $licenseId
     * @return View
     */
-    public function getEdit($licenseId = null)
+    public function edit($licenseId = null)
     {
         // Check if the license exists
         if (is_null($item = License::find($licenseId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.does_not_exist'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
         if ($item->purchase_date == "0000-00-00") {
@@ -230,14 +230,14 @@ class LicensesController extends Controller
     * @param int $licenseId
     * @return Redirect
     */
-    public function postEdit($licenseId = null)
+    public function update($licenseId = null)
     {
         // Check if the license exists
         if (is_null($license = License::find($licenseId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.does_not_exist'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($license)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
       // Update the license data
@@ -386,20 +386,20 @@ class LicensesController extends Controller
     * @param int $licenseId
     * @return Redirect
     */
-    public function getDelete($licenseId)
+    public function destroy($licenseId)
     {
         // Check if the license exists
         if (is_null($license = License::find($licenseId))) {
             // Redirect to the license management page
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.not_found'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($license)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
         if ($license->assigned_seats_count > 0) {
 
             // Redirect to the license management page
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.assoc_users'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.assoc_users'));
 
         } else {
 
@@ -416,7 +416,7 @@ class LicensesController extends Controller
 
 
             // Redirect to the licenses management page
-            return redirect()->to('admin/licenses')->with('success', trans('admin/licenses/message.delete.success'));
+            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.delete.success'));
         }
 
 
@@ -439,9 +439,9 @@ class LicensesController extends Controller
         // Check if the license seat exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.not_found'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($licenseseat->license)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
@@ -474,7 +474,7 @@ class LicensesController extends Controller
         $user = Auth::user();
 
         if (!Company::isCurrentUserHasAccess($licenseseat->license)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Declare the rules for the form validation
@@ -497,7 +497,7 @@ class LicensesController extends Controller
         // Check if the user exists
             if (is_null($is_assigned_to = User::find($assigned_to))) {
                 // Redirect to the asset management page with error
-                return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.user_does_not_exist'));
+                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
             }
         }
 
@@ -505,12 +505,12 @@ class LicensesController extends Controller
 
             if (is_null($asset = Asset::find($asset_id))) {
                 // Redirect to the asset management page with error
-                return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
+                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
             }
 
 
             if (($asset->assigned_to!='') && (($asset->assigned_to!=$assigned_to)) && ($assigned_to!='')) {
-                return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.owner_doesnt_match_asset'));
+                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.owner_doesnt_match_asset'));
             }
 
         }
@@ -520,7 +520,7 @@ class LicensesController extends Controller
         // Check if the asset exists
         if (is_null($licenseseat)) {
             // Redirect to the asset management page with error
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.not_found'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
         if (Input::get('asset_id') == '') {
@@ -616,9 +616,9 @@ class LicensesController extends Controller
         // Check if the asset exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.not_found'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($licenseseat->license)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
         return View::make('licenses/checkin', compact('licenseseat'))->with('backto', $backto);
 
@@ -641,13 +641,13 @@ class LicensesController extends Controller
         // Check if the asset exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.not_found'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
         $license = License::find($licenseseat->license_id);
 
         if (!Company::isCurrentUserHasAccess($license)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
         if (!$license->reassignable) {
@@ -750,7 +750,7 @@ class LicensesController extends Controller
         if (isset($license->id)) {
 
             if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
             }
             return View::make('licenses/view', compact('license'));
 
@@ -768,9 +768,9 @@ class LicensesController extends Controller
          // Check if the license exists
         if (is_null($license_to_clone = License::find($licenseId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.does_not_exist'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($license_to_clone)) {
-            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
         }
 
           // Show the page
@@ -817,7 +817,7 @@ class LicensesController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
             }
 
             if (Input::hasFile('licensefile')) {
@@ -885,7 +885,7 @@ class LicensesController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
             }
 
             $log = Actionlog::find($fileId);
@@ -925,7 +925,7 @@ class LicensesController extends Controller
         if (isset($license->id)) {
 
             if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('licenses.index')->with('error', trans('general.insufficient_permissions'));
             }
 
                 $log = Actionlog::find($fileId);
@@ -1045,7 +1045,7 @@ class LicensesController extends Controller
         // Check if the asset exists
         if (is_null($license = License::find($licenseId))) {
             // Redirect to the asset management page with error
-            return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.not_found'));
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
         $seatId = $license->freeSeat($licenseId);
         return redirect()->to('admin/licenses/'.$seatId.'/checkout');
