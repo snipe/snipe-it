@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use Input;
 use Lang;
 use App\Models\Depreciation;
 use Redirect;
@@ -10,6 +9,7 @@ use DB;
 use Str;
 use View;
 use Auth;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Depreciations for
@@ -58,7 +58,7 @@ class DepreciationsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function postCreate(Request $request)
     {
 
       // get the POST data
@@ -68,8 +68,8 @@ class DepreciationsController extends Controller
         $depreciation = new Depreciation();
 
       // Depreciation data
-        $depreciation->name            = e(Input::get('name'));
-        $depreciation->months    = e(Input::get('months'));
+        $depreciation->name            = e($request->input('name'));
+        $depreciation->months    = e($request->input('months'));
         $depreciation->user_id          = Auth::user()->id;
 
       // Was the asset created?
@@ -112,7 +112,7 @@ class DepreciationsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postEdit($depreciationId = null)
+    public function postEdit(Request $request, $depreciationId = null)
     {
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
@@ -121,8 +121,8 @@ class DepreciationsController extends Controller
         }
 
         // Depreciation data
-        $depreciation->name      = e(Input::get('name'));
-        $depreciation->months    = e(Input::get('months'));
+        $depreciation->name      = e($request->input('name'));
+        $depreciation->months    = e($request->input('months'));
 
         // Was the asset created?
         if ($depreciation->save()) {
@@ -176,29 +176,29 @@ class DepreciationsController extends Controller
     * @since [v1.2]
     * @return String JSON
     */
-    public function getDatatable()
+    public function getDatatable(Request $request)
     {
         $depreciations = Depreciation::select(array('id','name','months'));
 
-        if (Input::has('search')) {
-            $depreciations = $depreciations->TextSearch(e(Input::get('search')));
+        if ($request->has('search')) {
+            $depreciations = $depreciations->TextSearch(e($request->input('search')));
         }
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+        if ($request->has('offset')) {
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+        if ($request->has('limit')) {
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
         $allowed_columns = ['id','name','months'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
         $depreciations->orderBy($sort, $order);
 
