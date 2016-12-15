@@ -15,7 +15,7 @@ class AssetModelsCest
     {
         $I->wantTo('Test Asset Model Creation');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/model'));
+        $I->amOnPage(route('models.create'));
         $I->seeInTitle('Create Asset Model');
         $I->see('Create Asset Model', 'h1.pull-left');
     }
@@ -23,7 +23,7 @@ class AssetModelsCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/model'));
+        $I->amOnPage(route('models.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -45,7 +45,7 @@ class AssetModelsCest
         ];
 
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/model'));
+        $I->amOnPage(route('models.create'));
 
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('models', $values);
