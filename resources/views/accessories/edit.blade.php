@@ -6,9 +6,6 @@
     'formAction' => ($item) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
 ])
 
-{{ ($item) ?  "route('accessories.update', ['accessory_id' => $item->id])" :  "route('accessories.store')" }}
-
-
 {{-- Page content --}}
 @section('inputFields')
 
