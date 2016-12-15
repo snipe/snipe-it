@@ -3,7 +3,8 @@
     'createText' => trans('admin/hardware/form.create'),
     'updateText' => trans('admin/hardware/form.update'),
     'helpTitle' => trans('admin/hardware/general.about_assets_title'),
-    'helpText' => trans('admin/hardware/general.about_assets_text')
+    'helpText' => trans('admin/hardware/general.about_assets_text'),
+    'formAction' => ($item) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
 ])
 
 
@@ -244,7 +245,7 @@ $(function () {
     //First check to see if there is a file before doing anything else
 
     var imageData = "";
-    var $fileInput = $('#file-upload'); 
+    var $fileInput = $('#file-upload');
     $fileInput.on('change', function(e) {
       if( $fileInput != '' ) {
         if(window.File && window.FileReader && window.FormData) {
@@ -259,7 +260,7 @@ $(function () {
         }
         else {
           console.log("File API not supported, not resizing");
-        } 
+        }
       }
     });
 
@@ -271,7 +272,7 @@ $(function () {
       processFile(reader.result, file.type);
     }
 
-    reader.onerror = function() { 
+    reader.onerror = function() {
       alert("Unable to read file");
     }
 

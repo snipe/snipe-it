@@ -36,7 +36,13 @@
             </div><!-- /.box-header -->
 
             <div class="box-body">
-                <form id="create-form" class="form-horizontal" method="post" action="{{ \Request::url() }}" autocomplete="off" role="form" enctype="multipart/form-data">
+                <form id="create-form" class="form-horizontal" method="post" action="{{ (isset($formAction)) ? $formAction : \Request::url()  }}" autocomplete="off" role="form" enctype="multipart/form-data">
+
+                    @if ($item->id)
+                    {{ method_field('PUT') }}
+                    @endif
+
+
                     <!-- CSRF Token -->
                     {{ csrf_field() }}
                     @yield('inputFields')

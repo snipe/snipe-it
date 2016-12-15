@@ -33,7 +33,7 @@
                 @elseif ($asset->status_id == 0)
                         <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkout') }}</a></li>
                 @endif
-                <li role="presentation"><a href="{{ route('update/hardware', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
+                <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
                 <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
             </ul>
         </div>

@@ -2,7 +2,8 @@
     'createText' => trans('admin/consumables/general.create') ,
     'updateText' => trans('admin/consumables/general.update'),
     'helpTitle' => trans('admin/consumables/general.about_consumables_title'),
-    'helpText' => trans('admin/consumables/general.about_consumables_text')
+    'helpText' => trans('admin/consumables/general.about_consumables_text'),
+    'formAction' => ($item) ? route('consumables.update', ['accessory' => $item->id]) : route('consumables.store'),
 ])
 {{-- Page content --}}
 @section('inputFields')

@@ -25,7 +25,7 @@
             <i class="fa fa-barcode"></i>
           </div>
             @can('assets.view')
-                <a href="{{ route('hardware') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
              @endcan
         </div>
       </div><!-- ./col -->
@@ -41,7 +41,7 @@
             <i class="fa fa-floppy-o"></i>
           </div>
             @can('licenses.view')
-                <a href="{{ route('licenses') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
             @endcan
         </div>
       </div><!-- ./col -->
@@ -57,7 +57,7 @@
             <i class="fa fa-keyboard-o"></i>
           </div>
             @can('accessories.view')
-                <a href="{{ route('accessories') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('accessories.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
             @endcan
         </div>
       </div><!-- ./col -->
@@ -73,7 +73,7 @@
             <i class="fa fa-tint"></i>
           </div>
             @can('consumables.view')
-                <a href="{{ route('consumables') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('consumables.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
             @endcan
         </div>
       </div><!-- ./col -->

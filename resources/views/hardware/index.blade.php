@@ -31,7 +31,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('create/hardware') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+<a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
 @stop
 
 {{-- Page content --}}

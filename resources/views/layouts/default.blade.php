@@ -137,20 +137,20 @@
                   @endcan
                   @can('licenses.view')
                   <li {!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
-                      <a href="{{ URL::to('admin/licenses') }}">
+                      <a href="{{ route('licenses.create') }}">
                           <i class="fa fa-floppy-o"></i>
                       </a>
                   </li>
                   @endcan
                   @can('accessories.view')
                   <li {!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
-                      <a href="{{ URL::to('admin/accessories') }}">
+                      <a href="{{ route('accessories.index') }}">
                           <i class="fa fa-keyboard-o"></i>
                       </a>
                   </li>
                   @endcan
                   @can('consumables.view')
-                  <li {!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
+                  <li {!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
                       <a href="{{ URL::to('admin/consumables') }}">
                           <i class="fa fa-tint"></i>
                       </a>
@@ -188,7 +188,7 @@
                    <ul class="dropdown-menu">
                      @can('assets.create')
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
-                              <a href="{{ route('create/hardware') }}">
+                              <a href="{{ route('hardware.create') }}">
                                   <i class="fa fa-barcode fa-fw"></i>
                                   @lang('general.asset')</a>
                       </li>
@@ -201,15 +201,15 @@
                        </li>
                        @endcan
                        @can('accessories.create')
-                       <li {!! (Request::is('admin/accessories/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('create/accessory') }}">
+                       <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
+                           <a href="{{ route('accessories.create') }}">
                                <i class="fa fa-keyboard-o fa-fw"></i>
                                @lang('general.accessory')</a>
                        </li>
                        @endcan
                        @can('consumables.create')
-                       <li {!! (Request::is('admin/consumables/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('create/consumable') }}">
+                       <li {!! (Request::is('consunmables/create') ? 'class="active"' : '') !!}>
+                           <a href="{{ route('consumables.create') }}">
                                <i class="fa fa-tint fa-fw"></i>
                                @lang('general.consumable')</a>
                        </li>
@@ -459,7 +459,7 @@
               @endcan
               @can('licenses.view')
               <li{!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
-                  <a href="{{ URL::to('admin/licenses') }}">
+                  <a href="{{ route('licenses.create') }}">
                     <i class="fa fa-floppy-o"></i>
                     <span>@lang('general.licenses')</span>
                   </a>
@@ -467,14 +467,14 @@
               @endcan
               @can('accessories.view')
               <li{!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
-                <a href="{{ URL::to('admin/accessories') }}">
+                <a href="{{ route('accessories.index') }}">
                   <i class="fa fa-keyboard-o"></i>
                   <span>@lang('general.accessories')</span>
                 </a>
               </li>
               @endcan
               @can('consumables.view')
-            <li{!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
+            <li{!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
                 <a href="{{ URL::to('admin/consumables') }}">
                   <i class="fa fa-tint"></i>
                   <span>@lang('general.consumables')</span>

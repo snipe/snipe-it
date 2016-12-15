@@ -30,7 +30,7 @@
                   @endcan
                 @endif
                     @can('accessories.edit')
-                <li role="presentation"><a href="{{ route('update/accessory', $accessory->id) }}">{{ trans('admin/accessories/general.edit') }}</a></li>
+                <li role="presentation"><a href="{{ route('accessories.edit', $accessory->id) }}">{{ trans('admin/accessories/general.edit') }}</a></li>
                         @endcan
 
           </ul>

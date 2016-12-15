@@ -2,7 +2,8 @@
     'createText' => trans('admin/models/table.create') ,
     'updateText' => trans('admin/models/table.update'),
     'helpTitle' => trans('admin/models/general.about_models_title'),
-    'helpText' => trans('admin/models/general.about_models_text')
+    'helpText' => trans('admin/models/general.about_models_text'),
+    'formAction' => ($item) ? route('models.update', ['model' => $item->id]) : route('models.store'),
 ])
 
 {{-- Page content --}}
