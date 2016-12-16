@@ -338,34 +338,12 @@ class ReportsController extends Controller
         $rows = array();
         foreach ($activitylogs as $activity) {
 
-            // This is janky AF and should be handled better.
-            if ($activity->itemType() == "asset") {
-                $routename = 'assets';
-                $activity_icons = '<i class="fa fa-barcode"></i>';
-            } elseif ($activity->itemType() == "accessory") {
-                $routename = 'accessories';
-                $activity_icons = '<i class="fa fa-keyboard-o"></i>';
-            } elseif ($activity->itemType()=="consumable") {
-                $routename = 'consumables';
-                $activity_icons = '<i class="fa fa-tint"></i>';
-            } elseif ($activity->itemType()=="license"){
-                $routename = 'licenses';
-                $activity_icons = '<i class="fa fa-floppy-o"></i>';
-            } elseif ($activity->itemType()=="component") {
-                $routename = 'components';
-                $activity_icons = '<i class="fa fa-hdd-o"></i>';
-            } else {
-                $activity_icons = '<i class="fa fa-paperclip"></i>';
-            }
-
-
             if (($activity->item) && ($activity->itemType()=="asset")) {
               $activity_item = '<a href="'.route('hardware.show', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
-                $activity_item = '<a href="' . route($routename.'.show', $activity->item_id) . '">' . e($activity->item->name) . '</a>';
+                $activity_item = '<a href="' . route($activity->parseItemRoute().'.show', $activity->item_id) . '">' . e($activity->item->name) . '</a>';
                 $item_type = $activity->itemType();
-
             } else {
                 $activity_item = "unkonwn";
                 $item_type = "null";
@@ -373,7 +351,7 @@ class ReportsController extends Controller
 
 
             if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
-                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user->fullName().'</a>';
+                $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->user->fullName().'</a>';
             } elseif ($activity->target_type === "App\Models\Asset") {
                 if($activity->target) {
                     $activity_target = '<a href="'.route('hardware.show', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
@@ -382,16 +360,16 @@ class ReportsController extends Controller
                 }
             } elseif ( $activity->target_type === "App\Models\User") {
                 if($activity->target) {
-                   $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
+                   $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->target->fullName().'</a>';
                 } else {
                     $activity_target = '';
                 }
             } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
-                $activity_target = '<a href="' . route('view/user', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->fullName()) . '</a>';
+                $activity_target = '<a href="' . route('users.show', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->fullName()) . '</a>';
 
             } elseif ($activity->action_type=='requested') {
                 if ($activity->user) {
-                    $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
+                    $activity_target =  '<a href="'.route('users.show', $activity->user_id).'">'.$activity->user->fullName().'</a>';
                 } else {
                     $activity_target = '';
                 }
@@ -405,7 +383,7 @@ class ReportsController extends Controller
 
 
             $rows[] = array(
-                'icon'          => $activity_icons,
+                'icon'          => '<i class="'.$activity->parseItemIcon().'"></i>',
                 'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
                 'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
                 'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : '',

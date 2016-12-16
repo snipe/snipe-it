@@ -57,7 +57,7 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         return View::make('users/index');
     }
@@ -69,7 +69,7 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
 
         $groups = Group::pluck('name', 'id');
@@ -102,7 +102,7 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate(SaveUserRequest $request)
+    public function store(SaveUserRequest $request)
     {
 
         $user = new User;
@@ -189,7 +189,7 @@ class UsersController extends Controller
     * @since [v1.8]
     * @return string JSON
     */
-    public function store()
+    public function apiStore()
     {
 
         $user = new User;
@@ -255,7 +255,7 @@ class UsersController extends Controller
         return $output;
     }
 
-    public function getEdit($id = null)
+    public function edit($id = null)
     {
         try {
             // Get the user information
@@ -263,7 +263,7 @@ class UsersController extends Controller
             $permissions = config('permissions');
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
             }
 
             $groups = Group::pluck('name', 'id');
@@ -280,7 +280,7 @@ class UsersController extends Controller
             $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
 
         // Show the page
@@ -298,7 +298,7 @@ class UsersController extends Controller
     * @param  int  $id
     * @return Redirect
     */
-    public function postEdit(UpdateUserRequest $request, $id = null)
+    public function update(UpdateUserRequest $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
@@ -306,7 +306,7 @@ class UsersController extends Controller
         app('request')->request->set('permissions', $permissions);
         // Only update the email address if locking is set to false
         if (config('app.lock_passwords')) {
-            return redirect()->route('users')->with('error', 'Denied! You cannot update user information on the demo.');
+            return redirect()->route('users.index')->with('error', 'Denied! You cannot update user information on the demo.');
         }
 
         try {
@@ -328,12 +328,12 @@ class UsersController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
             }
-            
+
         } catch (UserNotFoundException $e) {
             $error = trans('admin/users/message.user_not_found', compact('id'));
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
 
 
@@ -402,7 +402,7 @@ class UsersController extends Controller
             $success = trans('admin/users/message.success.update');
 
             // Redirect to the user page
-            return redirect()->route('users')->with('success', $success);
+            return redirect()->route('users.index')->with('success', $success);
         }
 
             return redirect()->back()->withInput()->withErrors($user->getErrors());
@@ -417,7 +417,7 @@ class UsersController extends Controller
     * @param  int  $id
     * @return Redirect
     */
-    public function getDelete($id = null)
+    public function destroy($id = null)
     {
         try {
             // Get user information
@@ -429,32 +429,32 @@ class UsersController extends Controller
                 $error = trans('admin/users/message.error.delete');
 
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', $error);
+                return redirect()->route('users.index')->with('error', $error);
             }
 
 
             // Do we have permission to delete this user?
             if ((!Auth::user()->isSuperUser()) || (config('app.lock_passwords'))) {
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', 'Insufficient permissions!');
+                return redirect()->route('users.index')->with('error', 'Insufficient permissions!');
             }
 
             if (count($user->assets) > 0) {
 
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', 'This user still has ' . count($user->assets) . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets) . ' assets associated with them.');
             }
 
             if (count($user->licenses) > 0) {
 
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', 'This user still has ' . count($user->licenses) . ' licenses associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->licenses) . ' licenses associated with them.');
             }
 
             if (count($user->accessories) > 0) {
 
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', 'This user still has ' . count($user->accessories) . ' accessories associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->accessories) . ' accessories associated with them.');
             }
 
             // Delete the user
@@ -464,13 +464,13 @@ class UsersController extends Controller
             $success = trans('admin/users/message.success.delete');
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('success', $success);
+            return redirect()->route('users.index')->with('success', $success);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
     }
 
@@ -513,7 +513,7 @@ class UsersController extends Controller
         if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
-            return redirect()->route('users')->with('error', 'No status selected');
+            return redirect()->route('users.index')->with('error', 'No status selected');
         } else {
 
             $user_raw_array = Input::get('edit_user');
@@ -524,7 +524,7 @@ class UsersController extends Controller
             }
 
             if (!Auth::user()->isSuperUser()) {
-                return redirect()->route('users')->with('error', trans('admin/users/message.insufficient_permissions'));
+                return redirect()->route('users.index')->with('error', trans('admin/users/message.insufficient_permissions'));
             }
 
             if (!config('app.lock_passwords')) {
@@ -595,12 +595,9 @@ class UsersController extends Controller
                     $user->delete();
                 }
 
-
-
-
-                return redirect()->route('users')->with('success', 'Your selected users have been deleted and their assets have been updated.');
+                return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
             } else {
-                return redirect()->route('users')->with('error', 'Bulk delete is not enabled in this installation');
+                return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
             }
 
         }
@@ -619,18 +616,18 @@ class UsersController extends Controller
 
             // Get user information
         if (!$user = User::onlyTrashed()->find($id)) {
-            return redirect()->route('users')->with('error', trans('admin/users/messages.user_not_found'));
+            return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
         }
 
         if (!Company::isCurrentUserHasAccess($user)) {
-            return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
         } else {
 
             // Restore the user
             if (User::withTrashed()->where('id', $id)->restore()) {
-                return redirect()->route('users')->with('success', trans('admin/users/message.success.restored'));
+                return redirect()->route('users.index')->with('success', trans('admin/users/message.success.restored'));
             } else {
-                return redirect()->route('users')->with('error', 'User could not be restored.');
+                return redirect()->route('users.index')->with('error', 'User could not be restored.');
             }
 
         }
@@ -645,7 +642,7 @@ class UsersController extends Controller
     * @param  int  $userId
     * @return View
     */
-    public function getView($userId = null)
+    public function show($userId = null)
     {
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId);
@@ -655,7 +652,7 @@ class UsersController extends Controller
         if (isset($user->id)) {
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
             } else {
                 return View::make('users/view', compact('user', 'userlog'));
             }
@@ -664,7 +661,7 @@ class UsersController extends Controller
             $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
     }
 
@@ -688,26 +685,26 @@ class UsersController extends Controller
                 $error = trans('admin/users/message.error.unsuspend');
 
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', $error);
+                return redirect()->route('users.index')->with('error', $error);
             }
 
             // Do we have permission to unsuspend this user?
             if ($user->isSuperUser() && !Auth::user()->isSuperUser()) {
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', 'Insufficient permissions!');
+                return redirect()->route('users.index')->with('error', 'Insufficient permissions!');
             }
 
             // Prepare the success message
             $success = trans('admin/users/message.success.unsuspend');
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('success', $success);
+            return redirect()->route('users.index')->with('success', $success);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
     }
 
@@ -771,7 +768,7 @@ class UsersController extends Controller
             $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
     }
 
@@ -896,7 +893,7 @@ class UsersController extends Controller
         });
 
 
-        return redirect()->route('users')->with('duplicates', $duplicates)->with('success', 'Success');
+        return redirect()->route('users.index')->with('duplicates', $duplicates)->with('success', 'Success');
     }
 
     /**
@@ -992,7 +989,7 @@ class UsersController extends Controller
                         }
                     }
                     if (Gate::allows('users.edit')) {
-                        $actions .= '<a href="' . route('update/user',
+                        $actions .= '<a href="' . route('users.edit',
                                 $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
 
                         $actions .= '<a href="' . route('clone/user',
@@ -1000,7 +997,7 @@ class UsersController extends Controller
                     }
                     if (Gate::allows('users.delete')) {
                         if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
-                            $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/user',
+                            $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('users.destroy',
                                     $user->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
                         } else {
                             $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
@@ -1015,7 +1012,7 @@ class UsersController extends Controller
             $rows[] = array(
                 'id'         => $user->id,
                 'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>' : '',
-                'name'          => '<a title="'.e($user->fullName()).'" href="'.url('/').'/admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
+                'name'          => (string)link_to_route('users.show', e($user->fullName()), ['user' => $user->id]),
                 'jobtitle'          => e($user->jobtitle),
                 'email'         => ($user->email!='') ?
                             '<a href="mailto:'.e($user->email).'" class="hidden-md hidden-lg">'.e($user->email).'</a>'
@@ -1062,7 +1059,7 @@ class UsersController extends Controller
         if (isset($user->id)) {
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
             }
 
             foreach (Input::file('file') as $file) {
@@ -1111,7 +1108,7 @@ class UsersController extends Controller
         if (isset($user->id)) {
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
             } else {
                 $log = Actionlog::find($fileId);
                 $full_filename = $destinationPath . '/' . $log->filename;
@@ -1126,7 +1123,7 @@ class UsersController extends Controller
             $error = trans('admin/users/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
     }
 
@@ -1147,7 +1144,7 @@ class UsersController extends Controller
         // the license is valid
         if (isset($user->id)) {
             if (!Company::isCurrentUserHasAccess($user)) {
-                return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
             } else {
                 $log = Actionlog::find($fileId);
                 $file = $log->get_src('users');
@@ -1158,7 +1155,7 @@ class UsersController extends Controller
             $error = trans('admin/users/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
     }
 
@@ -1177,14 +1174,14 @@ class UsersController extends Controller
         try {
             $ldapconn = Ldap::connectToLdap();
         } catch (\Exception $e) {
-            return redirect()->route('users')->with('error',$e->getMessage());
+            return redirect()->route('users.index')->with('error',$e->getMessage());
         }
 
 
         try {
             Ldap::bindAdminToLdap($ldapconn);
         } catch (\Exception $e) {
-            return redirect()->route('users')->with('error',$e->getMessage());
+            return redirect()->route('users.index')->with('error',$e->getMessage());
         }
 
         return View::make('users/ldap')
@@ -1358,7 +1355,7 @@ class UsersController extends Controller
                     trans('admin/users/table.activated'),
                     trans('general.created_at')
                 ];
-                
+
                 fputcsv($handle, $headers);
 
                 foreach ($users as $user) {

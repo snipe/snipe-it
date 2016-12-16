@@ -216,7 +216,7 @@
                        @endcan
                        @can('users.create')
                        <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('create/user') }}">
+                           <a href="{{ route('users.create') }}">
                            <i class="fa fa-user fa-fw"></i>
                            @lang('general.user')</a>
                        </li>
@@ -491,7 +491,7 @@
             @endcan
             @can('users.view')
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                  <a href="{{ url('admin/users') }}">
+                  <a href="{{ route('users.index') }}">
                       <i class="fa fa-users"></i>
                       <span>@lang('general.people')</span>
                   </a>

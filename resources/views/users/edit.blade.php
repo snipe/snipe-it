@@ -61,7 +61,7 @@
     table, tbody {
       border: 1px solid #ccc;
     }
-    
+
     .header-name {
       cursor: pointer;
     }
@@ -72,7 +72,7 @@
 <div class="col-md-8 col-md-offset-2">
 
 
-<form class="form-horizontal" method="post" autocomplete="off" id="userForm">
+<form class="form-horizontal" method="post" autocomplete="off" action="{{ ($user) ? route('users.update', ['user' => $user->id->id]) : route('users.store') }}" id="userForm">
 <!-- CSRF Token -->
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

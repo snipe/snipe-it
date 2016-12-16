@@ -368,7 +368,7 @@
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
                 <p>
                   <img src="{{ $asset->assigneduser->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->fullName() }}">
-                  <a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a>
+                  <a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a>
                 </p>
 
                 <ul class="list-unstyled">
@@ -606,7 +606,7 @@
                             @if ($log->target instanceof \App\Models\User)
 
                               @if ($log->target->deleted_at=='')
-                                <a href="{{ route('view/user', $log->target_id) }}">
+                                <a href="{{ route('users.show', $log->target_id) }}">
                                 {{ $log->target->fullName() }}
                                 </a>
                               @else

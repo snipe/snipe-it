@@ -7,7 +7,7 @@ Create a User
 @stop
 
 @section('header_right')
-<a href="{{ route('users') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
+<a href="{{ route('users.index') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
 @stop
 
 {{-- Page content --}}

@@ -31,10 +31,10 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="{{ route('update/user', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
+              <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
                <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
                @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
-                   <li><a href="{{ route('delete/user', $user->id) }}">{{ trans('button.delete') }}</a></li>
+                   <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
                @endif
             </ul>
           </li>
@@ -93,7 +93,7 @@
                     @if ($user->manager)
                     <tr>
                         <td>Manager</td>
-                        <td><a href="{{ route('view/user', $user->manager->id) }}">{{ $user->manager->fullName() }}</a></td>
+                        <td><a href="{{ route('users.show', $user->manager->id) }}">{{ $user->manager->fullName() }}</a></td>
                     </tr>
                     @endif
 
@@ -135,7 +135,7 @@
                   @can('users.edit')
                   <div class="col-md-12">
 
-                      <a href="{{ route('update/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.edit') }}</a>
+                      <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.edit') }}</a>
                   </div>
                   <div class="col-md-12" style="padding-top: 5px;">
                       <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.clone') }}</a>
@@ -146,7 +146,7 @@
 
                     @if ($user->deleted_at=='')
                         <div class="col-md-12" style="padding-top: 5px;">
-                            <a href="{{ route('delete/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning">{{ trans('button.delete') }}</a>
+                            <a href="{{ route('users.destroy', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning">{{ trans('button.delete') }}</a>
                         </div>
                         <div class="col-md-12" style="padding-top: 5px;">
                             <form action="{{ route('users/bulkedit') }}" method="POST">
@@ -274,7 +274,7 @@
                 <tbody>
                     @foreach ($user->consumables as $consumable)
                     <tr>
-                        <td><a href="{{ route('view/consumable', $consumable->id) }}">{{ $consumable->name }}</a></td>
+                        <td><a href="{{ route('consumables.show', $consumable->id) }}">{{ $consumable->name }}</a></td>
                         <td>{{ $consumable->created_at }}</td>
                     </tr>
                     @endforeach
@@ -354,7 +354,7 @@
                           </td>
                           <td>
                               @can('users.edit')
-                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/userfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('users.destroyfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
                               @endcan
                           </td>
                       </tr>
@@ -377,26 +377,15 @@
                   <th class="col-md-1"></th>
                   <th class="col-md-2">Date</th>
                   <th class="col-md-2"><span class="line"></span>{{ trans('table.action') }}</th>
-                  <th class="col-md-3"><span class="line"></span>{{ trans('general.asset') }}</th>
-                  <th class="col-md-2"><span class="line"></span>{{ trans('table.by') }}</th>
+                  <th class="col-md-4"><span class="line"></span>{{ trans('general.asset') }}</th>
+                  <th class="col-md-3"><span class="line"></span>{{ trans('table.by') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach ($userlog as $log)
                     <tr>
                       <td class="text-center">
-                        @if ($log->itemType()=="asset")
-                          <i class="fa fa-barcode"></i>
-                        @elseif ($log->itemType()=="accessory")
-                          <i class="fa fa-keyboard-o"></i>
-                        @elseif ($log->itemType()=="consumable")
-                          <i class="fa fa-tint"></i>
-                        @elseif ($log->itemType()=="license")
-                          <i class="fa fa-floppy-o"></i>
-                        @else
-                          <i class="fa fa-times"></i>
-                        @endif
-
+                            <i class="{{ ($log->parseItemIcon()) }}"></i>
                       </td>
                       <td>{{ $log->created_at }}</td>
                       <td>{{ $log->action_type }}</td>
@@ -405,7 +394,9 @@
                         @if (($log->item) && ($log->itemType()=="asset"))
                             <a href="{{ route('hardware.show', $log->item_id) }}">{{ $log->item->asset_tag }} - {{ $log->item->showAssetName() }}</a>
                         @elseif ($log->item)
-                            <a href="{{ route('view/'. $log->itemType(), $log->item_id) }}">{{ $log->item->name }}</a>
+                            <a href="{{ route($log->parseItemRoute().'.show', $log->item_id) }}">
+                                {{ $log->item->name }}
+                            </a>
                         @else
                             {{ trans('general.bad_data') }}
                         @endif
@@ -414,7 +405,7 @@
                         <td>
                            @if ($log->action_type != 'requested')
                                 @if (isset($log->user))
-                                    <a href="{{route('view/user', $log->user_id)}}">{{ $log->user->fullName() }}</a>
+                                    <a href="{{route('users.show', $log->user_id)}}">{{ $log->user->fullName() }}</a>
                                 @else
                                     Deleted Admin
                                 @endif

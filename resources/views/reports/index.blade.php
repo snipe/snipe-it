@@ -53,7 +53,7 @@
             <td>{{ $asset->serial }}</td>
             <td>
             @if ($asset->assigned_to != '')
-                <a href="{{ route('view/user', $asset->assigned_to) }}">
+                <a href="{{ route('users.show', $asset->assigned_to) }}">
                 {{ $asset->assigneduser->fullName() }}
                 </a>
             @endif

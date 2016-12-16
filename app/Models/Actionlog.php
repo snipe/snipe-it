@@ -58,6 +58,43 @@ class Actionlog extends Model
         return camel_case(class_basename($this->item_type));
     }
 
+    public function parseItemRoute() {
+        if ($this->itemType() == "asset") {
+            $itemroute = 'assets';
+        } elseif ($this->itemType() == "accessory") {
+            $itemroute = 'accessories';
+        } elseif ($this->itemType()=="consumable") {
+            $itemroute = 'consumables';
+        } elseif ($this->itemType()=="license"){
+            $itemroute = 'licenses';
+        } elseif ($this->itemType()=="component") {
+            $itemroute = 'components';
+        } else {
+            $itemroute = '';
+        }
+
+        return $itemroute;
+    }
+
+
+    public function parseItemIcon() {
+        if ($this->itemType() == "asset") {
+            $itemicon = 'fa fa-barcode';
+        } elseif ($this->itemType() == "accessory") {
+            $itemicon  = 'fa fa-keyboard-o';
+        } elseif ($this->itemType()=="consumable") {
+            $itemicon  = 'fa fa-tint';
+        } elseif ($this->itemType()=="license"){
+            $itemicon  = 'fa fa-floppy-o';
+        } elseif ($this->itemType()=="component") {
+            $itemicon  = 'fa fa-hdd-o';
+        } else {
+            $itemicon  = 'fa fa-paperclip';
+        }
+
+        return $itemicon;
+    }
+
     public function uploads()
     {
         return $this->morphTo('item')

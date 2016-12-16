@@ -20,13 +20,13 @@
           <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
         @endif
           <a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> {{ trans('general.import') }}</a>
-          <a href="{{ route('create/user') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
+          <a href="{{ route('users.create') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
     @endcan
 
         @if (Input::get('status')=='deleted')
-          <a class="btn btn-default pull-right" href="{{ url('admin/users') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
+          <a class="btn btn-default pull-right" href="{{ route('users.index') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
         @else
-          <a class="btn btn-default pull-right" href="{{ url('admin/users?status=deleted') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
+          <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
         @endif
     @can('users.view')
         <a class="btn btn-default pull-right" href="{{ url('admin/users/export') }}" style="margin-right: 5px;">Export</a>

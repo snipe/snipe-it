@@ -83,7 +83,7 @@
             	 @if ($asset->assigneduser->deleted_at!='')
             	 	<del>{{ $asset->assigneduser->fullName() }}</del>
             	 @else
-            	 	<a href="{{ route('view/user', $asset->assigned_to) }}">
+            	 	<a href="{{ route('users.show', $asset->assigned_to) }}">
 					{{ $asset->assigneduser->fullName() }}
 					</a>
             	 @endif

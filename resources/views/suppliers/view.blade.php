@@ -52,7 +52,7 @@
                             <td><a href="{{ route('hardware.show', $supplierassets->id) }}">{{ $supplierassets->showAssetName() }}</a></td>
                             <td>
                             @if ($supplierassets->assigneduser)
-                            <a href="{{ route('view/user', $supplierassets->assigned_to) }}">
+                            <a href="{{ route('users.show', $supplierassets->assigned_to) }}">
                             {{ $supplierassets->assigneduser->fullName() }}
                             </a>
                             @endif

@@ -64,7 +64,7 @@
 
                                 @if (($licensedto->user) && ($licensedto->deleted_at == NULL))
                                     @can('users.view')
-                                        <a href="{{ route('view/user', $licensedto->assigned_to) }}">
+                                        <a href="{{ route('users.show', $licensedto->assigned_to) }}">
                                             {{ $licensedto->user->fullName() }}
                                         </a>
                                      @else
@@ -76,7 +76,7 @@
                                 @elseif ($licensedto->asset)
                                     @if ($licensedto->asset->assigned_to != 0)
                                         @can('users.view')
-                                            <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
+                                            <a href="{{ route('users.show', $licensedto->asset->assigned_to) }}">
                                                 {{ $licensedto->asset->assigneduser->fullName() }}
                                             </a>
                                         @else
@@ -371,7 +371,7 @@
                           <td>{{ $log->created_at }}</td>
                           <td>
                               @if (isset($log->user_id))
-                              <a href="{{ route('view/user', $log->user_id)}}">{{ $log->user->fullName() }}</a>
+                              <a href="{{ route('users.show', $log->user_id)}}">{{ $log->user->fullName() }}</a>
                               @endif
                           </td>
                           <td>{{ $log->action_type }}</td>
@@ -380,7 +380,7 @@
                               @if (($log->target) && ($log->target->id!='0'))
 
                                   @if ($log->target_type == 'App\Models\User')
-                                      <a href="{{ route('view/user', $log->target_id) }}">
+                                      <a href="{{ route('users.show', $log->target_id) }}">
                                           {{ $log->userlog->fullName() }}
                                       </a>
                                   @elseif ($log->target_type == 'App\Models\Asset')

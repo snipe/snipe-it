@@ -281,7 +281,7 @@
                         @if ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
 
 	                        @if ($log->target->deleted_at=='')
-		                        <a href="{{ route('view/user', $log->target_id) }}">
+		                        <a href="{{ route('users.show', $log->target_id) }}">
 		                        {{ $log->user->fullName() }}
 		                         </a>
 		                    @else
@@ -346,7 +346,7 @@
                 <ul>
 
                     <li><img src="{{ $asset->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
-                    <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
+                    <li><a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
 
 
                     @if (isset($asset->assetloc->address))
