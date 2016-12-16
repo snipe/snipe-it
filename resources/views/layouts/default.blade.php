@@ -109,16 +109,16 @@
           <ul class="nav navbar-nav navbar-left">
               <li class="left-navblock">
                  @if ($snipeSettings->brand == '3')
-                      <a class="logo navbar-brand no-hover" href="{{ URL::to('/') }}">
-                          <img class="navbar-brand-img" src="{{ URL::to('/') }}/uploads/{{ $snipeSettings->logo }}">
+                      <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
+                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @elseif ($snipeSettings->brand == '2')
-                      <a class="logo navbar-brand no-hover" href="{{ URL::to('/') }}">
-                          <img class="navbar-brand-img" src="{{ URL::to('/') }}/uploads/{{ $snipeSettings->logo }}">
+                      <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
+                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
                       </a>
                   @else
-                      <a class="logo no-hover" href="{{ URL::to('/') }}">
+                      <a class="logo no-hover" href="{{ url('/') }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @endif
@@ -130,7 +130,7 @@
               <ul class="nav navbar-nav">
                   @can('assets.view')
                   <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
-                      <a href="{{ URL::to('hardware') }}">
+                      <a href="{{ url('hardware') }}">
                           <i class="fa fa-barcode"></i>
                       </a>
                   </li>
@@ -151,14 +151,14 @@
                   @endcan
                   @can('consumables.view')
                   <li {!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
-                      <a href="{{ URL::to('consumables') }}">
+                      <a href="{{ url('consumables') }}">
                           <i class="fa fa-tint"></i>
                       </a>
                   </li>
                   @endcan
                   @can('components.view')
                   <li {!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                      <a href="{{ URL::to('components') }}">
+                      <a href="{{ url('components') }}">
                           <i class="fa fa-hdd-o"></i>
                       </a>
                   </li>
@@ -252,7 +252,7 @@
                       @for($i=0; count($alert_items) > $i; $i++)
 
                         <li><!-- Task item -->
-                          <a href="{{ URL::to('/') }}/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
+                          <a href="{{ url('/') }}/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
                             <h3>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
                                 {{ $alert_items[$i]['remaining'] }} remaining
@@ -327,42 +327,42 @@
                            </a>
                        </li>
                        <li {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/categories') }}">
+                           <a href="{{ route('categories.index') }}">
                                <i class="fa fa-check fa-fw"></i> @lang('general.categories')
                            </a>
                        </li>
                        <li {!! (Request::is('settings/manufacturers*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/manufacturers') }}">
+                           <a href="{{ url('admin/settings/manufacturers') }}">
                                <i class="fa fa-briefcase fa-fw"></i> @lang('general.manufacturers')
                            </a>
                        </li>
                        <li {!! (Request::is('settings/suppliers*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/suppliers') }}">
+                           <a href="{{ url('admin/settings/suppliers') }}">
                                <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
                            </a>
                        </li>
                        <li {!! (Request::is('settings/statuslabels*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/statuslabels') }}">
+                           <a href="{{ url('admin/settings/statuslabels') }}">
                                <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
                            </a>
                        </li>
                        <li {!! (Request::is('settings/depreciations*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/depreciations') }}">
+                           <a href="{{ url('admin/settings/depreciations') }}">
                                <i class="fa fa-arrow-down fa-fw"></i> @lang('general.depreciation')
                            </a>
                        </li>
                        <li {!! (Request::is('settings/locations*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/locations') }}">
+                           <a href="{{ url('admin/settings/locations') }}">
                                <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
                            </a>
                        </li>
                        <li {!! (Request::is('groups*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/groups') }}">
+                           <a href="{{ url('admin/groups') }}">
                                <i class="fa fa-group fa-fw"></i> @lang('general.groups')
                            </a>
                        </li>
                        <li {!! (Request::is('settings/backups*') ? ' class="active"' : '') !!}>
-                           <a href="{{ URL::to('admin/settings/backups') }}">
+                           <a href="{{ url('admin/settings/backups') }}">
                                <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
                            </a>
                        </li>
@@ -411,30 +411,30 @@
                 </a>
                 <ul class="treeview-menu">
                   <li>
-                    <a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a>
+                    <a href="{{ url('hardware') }}">@lang('general.list_all')</a>
                   </li>
 
                     <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav','=',1)->get(); ?>
                     @if (count($status_navs) > 0)
                         <li class="divider">&nbsp;</li>
                         @foreach ($status_navs as $status_nav)
-                            <li><a href="{{ URL::to('hardware?status_id='.$status_nav->id) }}"}> {{ $status_nav->name }}</a></li>
+                            <li><a href="{{ url('hardware?status_id='.$status_nav->id) }}"}> {{ $status_nav->name }}</a></li>
                         @endforeach
                     @endif
 
 
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
-                    <a href="{{ URL::to('hardware?status=Deployed') }}">@lang('general.deployed')
+                    <a href="{{ url('hardware?status=Deployed') }}">@lang('general.deployed')
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
-                    <a href="{{ URL::to('hardware?status=RTD') }}">
+                    <a href="{{ url('hardware?status=RTD') }}">
                     @lang('general.ready_to_deploy')</a>
                   </li>
-                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Pending') }}">@lang('general.pending')</a></li>
-                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ URL::to('hardware?status=Undeployable') }}">@lang('general.undeployable')</a></li>
-                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Archived') }}">@lang('admin/hardware/general.archived')</a></li>
-                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Requestable') }}">@lang('admin/hardware/general.requestable')</a></li>
+                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}">@lang('general.pending')</a></li>
+                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}">@lang('general.undeployable')</a></li>
+                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}">@lang('admin/hardware/general.archived')</a></li>
+                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}">@lang('admin/hardware/general.requestable')</a></li>
 
                   <li class="divider">&nbsp;</li>
                     @can('assets.checkout')
@@ -446,13 +446,13 @@
 
                     @can('superuser')
                     <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ route('models.index') }}">@lang('general.asset_models')</a></li>
-                  <li><a href="{{ URL::to('admin/settings/categories') }}" {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
+                  <li><a href="{{ url('admin/settings/categories') }}" {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
                     @endcan
                     @can('assets.create')
-                      <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
+                      <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
                       <li><a href="{{ route('maintenances.index') }}">@lang('general.asset_maintenances') </a></li>
-                      <li><a href="{{ URL::to('hardware/import') }}">@lang('general.import') </a></li>
-                      <li><a href="{{ URL::to('hardware/history') }}">@lang('general.import-history') </a></li>
+                      <li><a href="{{ url('hardware/import') }}">@lang('general.import') </a></li>
+                      <li><a href="{{ url('hardware/history') }}">@lang('general.import-history') </a></li>
                     @endcan
                 </ul>
               </li>
@@ -475,7 +475,7 @@
               @endcan
               @can('consumables.view')
             <li{!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
-                <a href="{{ URL::to('consumables') }}">
+                <a href="{{ url('consumables') }}">
                   <i class="fa fa-tint"></i>
                   <span>@lang('general.consumables')</span>
                 </a>
@@ -483,7 +483,7 @@
              @endcan
              @can('components.view')
             <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                <a href="{{ URL::to('admin/components') }}">
+                <a href="{{ url('admin/components') }}">
                   <i class="fa fa-hdd-o"></i>
                   <span>@lang('general.components')</span>
                 </a>
@@ -491,7 +491,7 @@
             @endcan
             @can('users.view')
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                  <a href="{{ URL::to('admin/users') }}">
+                  <a href="{{ url('admin/users') }}">
                       <i class="fa fa-users"></i>
                       <span>@lang('general.people')</span>
                   </a>
@@ -499,22 +499,22 @@
             @endcan
             @can('reports.view')
             <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
-                <a href="{{ URL::to('reports') }}"  class="dropdown-toggle">
+                <a href="{{ url('reports') }}"  class="dropdown-toggle">
                     <i class="fa fa-bar-chart"></i>
                     <span>@lang('general.reports')</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
                 <ul class="treeview-menu">
-	                 <li><a href="{{ URL::to('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
+	                 <li><a href="{{ url('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
-                    <li><a href="{{ URL::to('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }} >@lang('general.depreciation_report')</a></li>
-                    <li><a href="{{ URL::to('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }} >@lang('general.license_report')</a></li>
-                    <li><a href="{{ URL::to('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }} >@lang('general.asset_maintenance_report')</a></li>
-                    <li><a href="{{ URL::to('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }} >@lang('general.asset_report')</a></li>
-                    <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }} >@lang('general.unaccepted_asset_report')</a></li>
-                    <li><a href="{{ URL::to('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }} >@lang('general.accessory_report')</a></li>
-                    <li><a href="{{ URL::to('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>@lang('general.custom_report')</a></li>
+                    <li><a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }} >@lang('general.depreciation_report')</a></li>
+                    <li><a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }} >@lang('general.license_report')</a></li>
+                    <li><a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }} >@lang('general.asset_maintenance_report')</a></li>
+                    <li><a href="{{ url('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }} >@lang('general.asset_report')</a></li>
+                    <li><a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }} >@lang('general.unaccepted_asset_report')</a></li>
+                    <li><a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }} >@lang('general.accessory_report')</a></li>
+                    <li><a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>@lang('general.custom_report')</a></li>
                 </ul>
             </li>
             @endcan

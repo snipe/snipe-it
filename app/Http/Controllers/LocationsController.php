@@ -419,7 +419,7 @@ class LocationsController extends Controller
 
         foreach ($assets as $asset) {
             $rows[] = array(
-            'name' => (string)link_to(\URL::to('/').'/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
+            'name' => (string)link_to_route('hardware.show', e($asset->showAssetName()), ['hardware' => $asset->id]),
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
             'model' => e($asset->model->name),

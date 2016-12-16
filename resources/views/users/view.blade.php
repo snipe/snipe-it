@@ -295,7 +295,7 @@
                     <i class="fa fa-plus icon-white"></i>
                     <span>Select File...</span>
                     <!-- The file input field used as target for the file upload widget -->
-                    <input id="fileupload" type="file" name="file[]" data-url="{{ URL::to('/') }}/api/users/{{ $user->id }}/upload">
+                    <input id="fileupload" type="file" name="file[]" data-url="{{ url('/') }}/api/users/{{ $user->id }}/upload">
 
                 </span>
                     @endcan

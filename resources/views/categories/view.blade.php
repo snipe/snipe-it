@@ -14,8 +14,8 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-            <li><a href="{{ route('update/category', $category->id) }}">{{ trans('admin/categories/general.edit') }}</a></li>
-            <li><a href="{{ route('create/category') }}">{{ trans('general.create') }}</a></li>
+            <li><a href="{{ route('categories.edit', ['category' => $category->id]) }}">{{ trans('admin/categories/general.edit') }}</a></li>
+            <li><a href="{{ route('categories.create') }}">{{ trans('general.create') }}</a></li>
     </ul>
 </div>
 @stop
@@ -60,7 +60,7 @@
       </div>
     </div>
 
-@stop    
+@stop
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'category-' . $category->name . '-export', 'search' => false])

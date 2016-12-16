@@ -24,12 +24,12 @@
     @endcan
 
         @if (Input::get('status')=='deleted')
-          <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
+          <a class="btn btn-default pull-right" href="{{ url('admin/users') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
         @else
-          <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
+          <a class="btn btn-default pull-right" href="{{ url('admin/users?status=deleted') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
         @endif
     @can('users.view')
-        <a class="btn btn-default pull-right" href="{{ URL::to('admin/users/export') }}" style="margin-right: 5px;">Export</a>
+        <a class="btn btn-default pull-right" href="{{ url('admin/users/export') }}" style="margin-right: 5px;">Export</a>
     @endcan
 
 @stop

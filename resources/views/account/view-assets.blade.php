@@ -46,10 +46,10 @@ View Assets for  {{ $user->fullName() }}
                           <td>
 
                           @if (($asset->image) && ($asset->image!=''))
-                            <img src="{{ URL::to('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50">
+                            <img src="{{ url('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50">
 
                           @elseif (($asset->model) && ($asset->model->image!=''))
-                            <img src="{{ URL::to('/') }}/uploads/models/{{ $asset->model->image }}" height="50" width="50">
+                            <img src="{{ url('/') }}/uploads/models/{{ $asset->model->image }}" height="50" width="50">
                           @endif
 
                          </td>

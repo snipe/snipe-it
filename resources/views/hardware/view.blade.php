@@ -355,13 +355,13 @@
             <div class="col-md-4">
 
               @if ($asset->image)
-                <img src="{{ URL::to('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
+                <img src="{{ url('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
               @elseif ($asset->model->image!='')
-                <img src="{{ URL::to('/') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
+                <img src="{{ url('/') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 
               @if  ($snipeSettings->qr_code=='1')
-                 <img src="{{ URL::to('/') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
+                 <img src="{{ url('/') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
               @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
@@ -537,7 +537,7 @@
                             <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
                             <td>
                               @if ($assetMaintenance->admin)
-                                <a href="{{ URL::to('/')  }}/admin/users/{{ $assetMaintenance->admin->id }}/view">{{ $assetMaintenance->admin->fullName() }}</a>
+                                <a href="{{ url('/')  }}/admin/users/{{ $assetMaintenance->admin->id }}/view">{{ $assetMaintenance->admin->fullName() }}</a>
                               @endif
                             </td>
                             <?php $totalCost += $assetMaintenance->cost; ?>

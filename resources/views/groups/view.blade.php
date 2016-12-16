@@ -14,7 +14,7 @@
     <div class="col-md-12">
         <a href="{{ route('update/group', $group->id) }}" class="btn-flat white pull-right">
         {{ trans('admin/groups/table.update') }}</a>
-        <a href="{{ URL::to('admin/groups') }}" class="btn-flat gray pull-right" style="margin-right:5px;"><i class="fa fa-arrow-left icon-white"></i> {{ trans('general.back') }}</a>
+        <a href="{{ url('admin/groups') }}" class="btn-flat gray pull-right" style="margin-right:5px;"><i class="fa fa-arrow-left icon-white"></i> {{ trans('general.back') }}</a>
         <h3 class="name"> {{ trans('admin/groups/titles.group_management') }} - {{ $group->name }}</h3>
     </div>
 </div>

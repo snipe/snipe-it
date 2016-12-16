@@ -119,7 +119,7 @@
               @endif
 
               @if ($supplier->image)
-              <li><br /><img src="{{ URL::to('/') }}/uploads/suppliers/{{ $supplier->image }}" /></li>
+              <li><br /><img src="{{ url('/') }}/uploads/suppliers/{{ $supplier->image }}" /></li>
               @endif
 
               </ul>

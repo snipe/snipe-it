@@ -2,7 +2,8 @@
     'createText' => trans('admin/categories/general.create') ,
     'updateText' => trans('admin/categories/general.update'),
     'helpTitle' =>  trans('admin/categories/general.about_categories_title'),
-    'helpText' => trans('admin/categories/general.about_categories')
+    'helpText' => trans('admin/categories/general.about_categories'),
+    'formAction' => ($item) ? route('categories.update', ['category' => $item->id]) : route('categories.store'),
 ])
 
 @section('inputFields')
@@ -64,6 +65,8 @@
 
 @section('content')
 @parent
+
+
 @if ($snipeSettings->default_eula_text!='')
 <!-- Modal -->
 <div class="modal fade" id="eulaModal" tabindex="-1" role="dialog" aria-labelledby="eulaModalLabel" aria-hidden="true">

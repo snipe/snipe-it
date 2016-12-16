@@ -2,9 +2,9 @@
 
 @section('content')
 
-<p>{{ trans('mail.a_user_requested') }} <a href="{{ URL::to('/') }}"> {{ $snipeSettings->site_name }}</a>. </p>
+<p>{{ trans('mail.a_user_requested') }} <a href="{{ url('/') }}"> {{ $snipeSettings->site_name }}</a>. </p>
 
-<p>{{ trans('mail.user') }} <a href="{{ URL::to('/') }}/admin/users/{{ $user_id }}/view">{{ $requested_by }}</a><br>
+<p>{{ trans('mail.user') }} <a href="{{ url('/') }}/admin/users/{{ $user_id }}/view">{{ $requested_by }}</a><br>
    {{ trans('mail.item') }} <a href="{{ $item_url }}">{{ $item_name }}</a> ({{ $item_type }}) <br>
    {{ trans('mail.requested') }} {{ $requested_date }}
 @if ($item_quantity > 1)

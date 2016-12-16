@@ -82,7 +82,7 @@ Bulk Checkin &amp; Delete
                                       </td>
                                       <td>
                                           @foreach ($user->groups as $group)
-                                              <a href=" {{ URL::to('/')  }}/admin/groups/{{ $group->id }}'/edit" class="label  label-default">
+                                              <a href=" {{ url('/')  }}/admin/groups/{{ $group->id }}'/edit" class="label  label-default">
                                               {{ $group->name  }}
                                               </a>
                                           @endforeach

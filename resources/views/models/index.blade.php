@@ -9,11 +9,11 @@
 {{-- Page title --}}
 @section('header_right')
   @if(Input::get('status')=='Deleted')
-      <a href="{{ URL::to('hardware/models') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_models') }}</a>
+      <a href="{{ url('hardware/models') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_models') }}</a>
   @else
       <a href="{{ route('models.create') }}" class="btn btn-primary pull-right">
       {{ trans('general.create') }}</a>
-      <a href="{{ URL::to('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_deleted') }}</a>
+      <a href="{{ url('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_deleted') }}</a>
   @endif
 @stop
 

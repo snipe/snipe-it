@@ -545,9 +545,9 @@ class LicensesController extends Controller
 
             // Update the asset data
             if (e($request->input('assigned_to')) == '') {
-                $slack_msg = 'License <'.\URL::to('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.\URL::to('/').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.\URL::to('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = 'License <'.url('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.url('/').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.url('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
-                $slack_msg = 'License <'.\URL::to('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.\URL::to('/').'/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.\URL::to('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = 'License <'.url('/').'/licenses/'.$license->id.'|'.$license->name.'> checked out to <'.url('/').'/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.url('/').'/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             }
 
 
@@ -697,7 +697,7 @@ class LicensesController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => 'License: <'.\URL::to('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.\URL::to('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
+                                    'value' => 'License: <'.url('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.url('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
                                 ],
                                 [
                                     'title' => 'Note:',

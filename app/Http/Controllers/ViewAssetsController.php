@@ -109,10 +109,10 @@ class ViewAssetsController extends Controller
 
         if ($fullItemType == Asset::class) {
             $data['item_url'] = route('view/hardware', $item->id);
-            $slackMessage = ' Asset <'.\URL::to('/').'/hardware/'.$item->id.'/view'.'|'.$item->showAssetName().'> requested by <'.\URL::to('/').'/users/'.$item->user_id.'/view'.'|'.$user->fullName().'>.';
+            $slackMessage = ' Asset <'.url('/').'/hardware/'.$item->id.'/view'.'|'.$item->showAssetName().'> requested by <'.url('/').'/users/'.$item->user_id.'/view'.'|'.$user->fullName().'>.';
         } else {
             $data['item_url'] = route("view/${itemType}", $item->id);
-            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.\URL::to('/').'/user/'.$item->id.'/view'.'|'.$user->fullName().'>.';
+            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.url('/').'/user/'.$item->id.'/view'.'|'.$user->fullName().'>.';
         }
 
         $settings = Setting::getSettings();
@@ -259,7 +259,7 @@ class ViewAssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'REQUESTED:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.\URL::to('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> requested by <'.\URL::to('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->fullName().'>.'
+                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->fullName().'>.'
                                 ]
 
                             ]

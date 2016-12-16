@@ -21,7 +21,7 @@ Create a User ::
             </div>
         </div>
 
-        <p>Click here to go to your app login! <a href="{{ URL::to('/') }}">{{ URL::to('/') }}</a></p>
+        <p>Click here to go to your app login! <a href="{{ url('/') }}">{{ url('/') }}</a></p>
 
       </div>
 

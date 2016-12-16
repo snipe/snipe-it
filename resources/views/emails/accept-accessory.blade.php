@@ -54,7 +54,7 @@
 <p><blockquote>{!! $eula !!}</blockquote></p>
 
 @if ($require_acceptance==1)
-<p><strong><a href="{{ URL::to('/') }}/account/accept-asset/{{ $log_id }}">{{ trans('mail.i_have_read') }}</a></strong></p>
+<p><strong><a href="{{ url('/') }}/account/accept-asset/{{ $log_id }}">{{ trans('mail.i_have_read') }}</a></strong></p>
 @endif
 
 <p>{{ $snipeSettings->site_name }}</p>

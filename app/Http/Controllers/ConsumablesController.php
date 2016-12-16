@@ -337,7 +337,7 @@ class ConsumablesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => 'Consumable <'.\URL::to('/').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.\URL::to('/').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.\URL::to('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => 'Consumable <'.url('/').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.url('/').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.url('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',

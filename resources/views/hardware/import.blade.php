@@ -100,7 +100,7 @@
                         <i class="fa fa-plus icon-white"></i>
                         <span>Select Import File...</span>
                         <!-- The file input field used as target for the file upload widget -->
-                        <input id="fileupload" type="file" name="files[]" data-url="{{ URL::to('/') }}/api/hardware/import" accept="text/csv">
+                        <input id="fileupload" type="file" name="files[]" data-url="{{ url('/') }}/api/hardware/import" accept="text/csv">
                     </span>
                 </div>
                 <div class="col-md-9" id="progress-container" style="visibility: hidden; padding-bottom: 20px;">
