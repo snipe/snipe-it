@@ -20,7 +20,7 @@ class LocationsCest
         /* Create Form */
         $I->wantTo('Test Location Creation');
         $I->lookForwardTo('Finding no Failures');
-        $I->amOnPage(route('create/location'));
+        $I->amOnPage(route('locations.create'));
         $I->dontSee('Create Location', '.page-header');
         $I->see('Create Location', 'h1.pull-left');
     }
@@ -28,7 +28,7 @@ class LocationsCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/location'));
+        $I->amOnPage(route('locations.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -37,7 +37,7 @@ class LocationsCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short values");
-        $I->amOnPage(route('create/location'));
+        $I->amOnPage(route('locations.create'));
         $I->fillField('name', 't');
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -58,7 +58,7 @@ class LocationsCest
             'zip'               => $location->zip,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/location'));
+        $I->amOnPage(route('locations.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('locations', $values);
         $I->seeElement('.alert-success');
@@ -67,7 +67,7 @@ class LocationsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a location');
-        $I->amOnPage(route('delete/location', Location::doesntHave('assets')->doesntHave('assignedAssets')->first()->id));
+        $I->amOnPage(route('locations.destroy', Location::doesntHave('assets')->doesntHave('assignedAssets')->first()->id));
         $I->seeElement('.alert-success');
     }
 }

@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('create/location') }}" class="btn btn-primary pull-right">
+<a href="{{ route('locations.create') }}" class="btn btn-primary pull-right">
   {{ trans('general.create') }}</a>
 @stop
 {{-- Page content --}}

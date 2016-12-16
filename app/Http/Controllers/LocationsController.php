@@ -33,7 +33,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         // Grab all the locations
         $locations = Location::orderBy('created_at', 'DESC')->with('parent', 'assets', 'assignedassets')->get();
@@ -51,7 +51,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
         $locations = Location::orderBy('name', 'ASC')->get();
 
@@ -74,14 +74,11 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function store()
     {
 
-    // create a new location instance
         $location = new Location();
 
-
-    // Save the location data
         $location->name             = e(Input::get('name'));
         if (Input::get('parent_id')=='') {
             $location->parent_id        = null;
@@ -98,10 +95,8 @@ class LocationsController extends Controller
         $location->user_id          = Auth::user()->id;
 
         if ($location->save()) {
-            // Redirect to the new location  page
-            return redirect()->to("admin/settings/locations")->with('success', trans('admin/locations/message.create.success'));
+            return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
         }
-
         return redirect()->back()->withInput()->withErrors($location->getErrors());
 
     }
@@ -115,7 +110,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return String JSON
     */
-    public function store()
+    public function apiStore()
     {
 
         $new['currency']=Setting::first()->default_currency;
@@ -156,7 +151,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getEdit($locationId = null)
+    public function edit($locationId = null)
     {
         // Check if the location exists
         if (is_null($item = Location::find($locationId))) {
@@ -182,7 +177,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postEdit($locationId = null)
+    public function update($locationId = null)
     {
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
@@ -224,7 +219,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function getDelete($locationId)
+    public function destroy($locationId)
     {
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
@@ -262,7 +257,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getView($locationId = null)
+    public function show($locationId = null)
     {
         $location = Location::find($locationId);
 
@@ -332,11 +327,11 @@ class LocationsController extends Controller
         $rows = array();
 
         foreach ($locations as $location) {
-            $actions = '<nobr><a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.trans('admin/locations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr><a href="'.route('locations.edit', ['location' => $location->id]).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('locations.destroy', ['location' => $location->id]).'" data-content="'.trans('admin/locations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
             $rows[] = array(
                 'id'            => $location->id,
-                'name'          => (string)link_to('admin/settings/locations/'.$location->id.'/view', e($location->name)),
+                'name'          => (string)link_to_route('locations.show', e($location->name), ['location' => $location->id]),
                 'parent'        => ($location->parent) ? e($location->parent->name) : '',
               //  'assets'        => ($location->assets->count() + $location->assignedassets->count()),
                 'assets_default' => $location->assignedassets->count(),

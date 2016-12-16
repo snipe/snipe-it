@@ -352,7 +352,7 @@
                            </a>
                        </li>
                        <li {!! (Request::is('settings/locations*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/settings/locations') }}">
+                           <a href="{{ route('locations.index') }}">
                                <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
                            </a>
                        </li>

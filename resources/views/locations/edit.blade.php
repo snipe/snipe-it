@@ -2,7 +2,8 @@
     'createText' => trans('admin/locations/table.create') ,
     'updateText' => trans('admin/locations/table.update'),
     'helpTitle' => trans('admin/locations/table.about_locations_title'),
-    'helpText' => trans('admin/locations/table.about_locations')
+    'helpText' => trans('admin/locations/table.about_locations'),
+    'formAction' => ($item) ? route('locations.update', ['location' => $item->id]) : route('locations.store'),
 ])
 
 {{-- Page content --}}

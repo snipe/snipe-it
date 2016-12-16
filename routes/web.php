@@ -27,6 +27,14 @@ Route::resource('companies', 'CompaniesController', [
      'parameters' => ['category' => 'category_id']
  ]);
 
+ /*
+ * Locations
+  */
+  Route::resource('locations', 'LocationsController', [
+      'parameters' => ['location' => 'location_id']
+  ]);
+
+
 
 
 /*
@@ -222,23 +230,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
             );
         });
 
-        # Locations
-        Route::group([ 'prefix' => 'locations' ], function () {
 
-            Route::get('/', [ 'as' => 'locations', 'uses' => 'LocationsController@getIndex' ]);
-            Route::get('create', [ 'as' => 'create/location', 'uses' => 'LocationsController@getCreate' ]);
-            Route::post('create', 'LocationsController@postCreate');
-            Route::get(
-                '{locationId}/edit',
-                [ 'as' => 'update/location', 'uses' => 'LocationsController@getEdit' ]
-            );
-            Route::post('{locationId}/edit', 'LocationsController@postEdit');
-            Route::get('{locationId}/view', [ 'as' => 'view/location', 'uses' => 'LocationsController@getView' ]);
-            Route::get(
-                '{locationId}/delete',
-                [ 'as' => 'delete/location', 'uses' => 'LocationsController@getDelete' ]
-            );
-        });
 
         # Status Labels
         Route::group([ 'prefix' => 'statuslabels' ], function () {
