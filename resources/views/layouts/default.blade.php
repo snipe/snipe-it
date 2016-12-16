@@ -609,8 +609,12 @@
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
+                <form method="post" id="deleteForm" role="form">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
                     <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">Close</button>
-                    <a class="btn btn-outline" id="dataConfirmOK">@lang('general.yes')</a>
+                    <button type="submit" class="btn btn-outline" id="dataConfirmOK">@lang('general.yes')</button>
+                </form>
                 </div>
             </div>
         </div>

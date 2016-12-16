@@ -471,7 +471,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function getDelete($assetId)
+    public function destroy($assetId)
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {

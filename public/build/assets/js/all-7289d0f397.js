@@ -34276,7 +34276,7 @@ var pieOptions = {
 
                 $('#myModalLabel').text(title);
                 $dataConfirmModal.find('.modal-body').text(message);
-                $('#dataConfirmOK').attr('href', href);
+                $('#deleteForm').attr('action', href);
                 $dataConfirmModal.modal({
                     show: true
                 });
