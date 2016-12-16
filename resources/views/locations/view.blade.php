@@ -9,7 +9,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('update/location', $location->id) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/locations/table.update') }} </a>
+<a href="{{ route('locations.edit', ['location' => $location->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/locations/table.update') }} </a>
 @stop
 
 {{-- Page content --}}

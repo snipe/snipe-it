@@ -320,7 +320,7 @@
                             <td>{{ trans('general.location') }}</td>
                             <td>
                                 @can('superuser')
-                                    <a href="{{ route('view/location', $asset->assetloc->id) }}">
+                                    <a href="{{ route('locations.show', ['location' => $asset->assetloc->id]) }}">
                                     {{ $asset->assetloc->name }}
                                     </a>
                                 @else
@@ -335,7 +335,7 @@
                             <td>{{ trans('admin/hardware/form.default_location') }}</td>
                             <td>
                                 @can('superuser')
-                                    <a href="{{ route('view/location', $asset->defaultLoc->id) }}">
+                                    <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
                                     {{ $asset->defaultLoc->name }}
                                     </a>
                                 @else
