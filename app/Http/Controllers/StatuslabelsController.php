@@ -126,7 +126,7 @@ class StatuslabelsController extends Controller
         // Was the asset created?
         if ($statuslabel->save()) {
             // Redirect to the new Statuslabel  page
-            return redirect()->to("admin/settings/statuslabels")->with('success', trans('admin/statuslabels/message.create.success'));
+            return redirect()->route('statuslabels.index')->with('success', trans('admin/statuslabels/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($statuslabel->getErrors());
@@ -171,7 +171,7 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($item = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
+            return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
         $use_statuslabel_type = $item->getStatuslabelType();
@@ -193,7 +193,7 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
+            return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
         if (!$request->has('statuslabel_types')) {
@@ -237,20 +237,20 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.not_found'));
+            return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.not_found'));
         }
 
 
         if ($statuslabel->has_assets() > 0) {
 
             // Redirect to the asset management page
-            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.assoc_assets'));
+            return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.assoc_assets'));
         } else {
 
             $statuslabel->delete();
 
             // Redirect to the statuslabels management page
-            return redirect()->to('admin/settings/statuslabels')->with('success', trans('admin/statuslabels/message.delete.success'));
+            return redirect()->route('statuslabels.index')->with('success', trans('admin/statuslabels/message.delete.success'));
         }
 
 
