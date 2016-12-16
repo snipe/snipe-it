@@ -367,7 +367,7 @@
                            </a>
                        </li>
                        <li {!! (Request::is('custom_fields*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('admin.custom_fields.index') }}">
+                           <a href="{{ route('fields.index') }}">
                                <i class="fa fa-wrench fa-fw"></i> @lang('admin/custom_fields/general.custom_fields')
                            </a>
                        </li>

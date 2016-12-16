@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('admin.custom_fields.index') }}" class="btn btn-primary pull-right">
+    <a href="{{ route('fields.index') }}" class="btn btn-primary pull-right">
         {{ trans('general.back') }}</a>
 @stop
 
@@ -49,7 +49,7 @@
                    <tr>
                      <td colspan="5" class="text-right">
                        {{ Form::open(['route' =>
-                           ["admin.custom_fields.associate",$custom_fieldset->id],
+                           ["fieldsets.associate",$custom_fieldset->id],
                            'class'=>'form-horizontal',
                            'id' => 'ordering']) }}
                        {{ Form::checkbox("required","on") }}
@@ -77,7 +77,7 @@
                    <td>{{$field->element}}</td>
                      <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
                    <td>{{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</td>
-                   <td><a href="{{ route('admin.custom_fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a></td>
+                   <td><a href="{{ route('fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a></td>
                  </tr>
                  @endforeach
                </tbody>

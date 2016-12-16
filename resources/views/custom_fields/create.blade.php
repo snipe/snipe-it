@@ -22,7 +22,7 @@
       <div class="box-body">
 
 
-        {{ Form::open(['route' => 'admin.custom_fields.store', 'class'=>'form-horizontal']) }}
+        {{ Form::open(['route' => 'fieldsets.store', 'class'=>'form-horizontal']) }}
         <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 

@@ -3,12 +3,6 @@ use App\Models\CheckoutRequest;
 use App\Models\Location;
 use App\Models\Statuslabel;
 
-/*
-* Custom Fields Routes
-*/
-Route::resource('fields', 'CustomFieldsController', [
-'parameters' => ['customfield' => 'field_id', 'fieldset' => 'fieldset_id']
-]);
 
 /*
 * Companies
@@ -188,46 +182,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
 
     });
 
-    # Custom fields support
-    Route::get('customfields/field/create',
-        ['uses' =>'CustomFieldsController@createField',
-        'as' => 'admin.custom_fields.create-field']
-    );
 
-    Route::get('customfields/fieldset/create',
-        ['as' => 'admin.custom_fields.create-fieldset',
-        'uses' => 'CustomFieldsController@create']
-    );
-
-    Route::post('customfields/field/create',
-        ['uses' => 'CustomFieldsController@storeField',
-        'as' => 'admin.custom_fields.store-field']
-    );
-
-    Route::post('customfields/field/{id}/associate',
-        ['uses' => 'CustomFieldsController@associate',
-    '    as' => 'admin.custom_fields.associate']
-    );
-
-    Route::get('customfields/fieldset/{fieldset_id}/{field_id}/disassociate',
-        ['uses' => 'CustomFieldsController@deleteFieldFromFieldset',
-        'as' => 'admin.custom_fields.disassociate']
-    );
-
-    Route::get('custom_fields/field/{id}/delete',
-        ['uses' =>'CustomFieldsController@deleteField',
-        'as' => 'admin.custom_fields.delete-field']
-    );
-
-    Route::get('customfields/fieldset/{id}/view',
-        ['uses' =>'CustomFieldsController@getCustomFieldset',
-        'as' => 'admin.custom_fields.show']
-    );
-
-    Route::get('customfields',
-        ['uses' =>'CustomFieldsController@getIndex',
-        'as' => 'admin.custom_fields.index']
-    );
 
 
     # User Management

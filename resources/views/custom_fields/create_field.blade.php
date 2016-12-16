@@ -23,7 +23,7 @@
       <div class="box-body">
 
 
-        {{ Form::open(['route' => 'admin.custom_fields.store-field', 'class'=>'form-horizontal']) }}
+        {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
 
 
           <!-- Name -->

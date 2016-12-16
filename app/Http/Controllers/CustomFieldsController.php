@@ -42,66 +42,7 @@ class CustomFieldsController extends Controller
     }
 
 
-    /**
-    * Returns a view with a form for creating a new custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
-    public function create()
-    {
-        return View::make("custom_fields.create");
-    }
 
-
-    /**
-    * Validates and stores a new custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
-    public function store(Request $request)
-    {
-        //
-        $cfset = new CustomFieldset(
-            [
-                "name" => e($request->get("name")),
-                "user_id" => Auth::user()->id]
-            );
-
-        $validator = Validator::make(Input::all(), $cfset->rules);
-        if ($validator->passes()) {
-            $cfset->save();
-            return redirect()->route("admin.custom_fields.show", [$cfset->id])->with('success', trans('admin/custom_fields/message.fieldset.create.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-    }
-
-    /**
-    * Associate the custom field with a custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
-    public function associate($id)
-    {
-
-        $set = CustomFieldset::find($id);
-
-        foreach ($set->fields as $field) {
-            if ($field->id == Input::get('field_id')) {
-                return redirect()->route("admin.custom_fields.show", [$id])->withInput()->withErrors(['field_id' => trans('admin/custom_fields/message.field.already_added')]);
-            }
-        }
-
-        $results=$set->fields()->attach(Input::get('field_id'), ["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
-
-        return redirect()->route("admin.custom_fields.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
-    }
 
 
     /**
@@ -112,7 +53,7 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function createField()
+    public function create()
     {
         return View::make("custom_fields.create_field");
     }
@@ -126,7 +67,7 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function storeField(Request $request)
+    public function store(Request $request)
     {
         $field = new CustomField([
             "name" => e($request->get("name")),
@@ -150,7 +91,7 @@ class CustomFieldsController extends Controller
         if ($validator->passes()) {
             $results = $field->save();
             if ($results) {
-                return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
+                return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
             } else {
                 dd($field);
                 return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
@@ -173,7 +114,7 @@ class CustomFieldsController extends Controller
         $field = CustomField::find($field_id);
 
         if ($field->fieldset()->detach($fieldset_id)) {
-            return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route('fieldsets.show',['fieldset' => $fieldset_id])->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
 
         return redirect()->back()->withErrors(['message' => "Field is in-use"]);
@@ -186,7 +127,7 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function deleteField($field_id)
+    public function destroy($field_id)
     {
         $field = CustomField::find($field_id);
 
@@ -194,35 +135,10 @@ class CustomFieldsController extends Controller
             return redirect()->back()->withErrors(['message' => "Field is in-use"]);
         } else {
             $field->delete();
-            return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
     }
 
-    /**
-    * Validates and stores a new custom field.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @param int $id
-    * @since [v1.8]
-    * @return View
-    */
-    public function getCustomFieldset($id)
-    {
-        $cfset = CustomFieldset::with('fields')->where('id','=',$id)->orderBy('id','ASC')->first();
-        $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
-
-        $maxid = 0;
-        foreach ($cfset->fields() as $field) {
-            if ($field->pivot->order > $maxid) {
-                $maxid=$field->pivot->order;
-            }
-            if (isset($custom_fields_list[$field->id])) {
-                unset($custom_fields_list[$field->id]);
-            }
-        }
-
-        return View::make("custom_fields.show")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
-    }
 
 
     /**
@@ -252,29 +168,6 @@ class CustomFieldsController extends Controller
     public function update($id)
     {
         //
-    }
-
-
-    /**
-    * Validates a custom fieldset and then deletes if it has no models associated.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @param  int  $id
-    * @since [v1.8]
-    * @return View
-    */
-    public function destroy($id)
-    {
-        //
-        $fieldset = CustomFieldset::find($id);
-
-        $models = AssetModel::where("fieldset_id", "=", $id);
-        if ($models->count() == 0) {
-            $fieldset->delete();
-            return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.fieldset.delete.success'));
-        } else {
-            return redirect()->route("admin.custom_fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use'));
-        }
     }
 
 
