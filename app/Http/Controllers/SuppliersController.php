@@ -28,7 +28,7 @@ class SuppliersController extends Controller
      *
      * @return View
      */
-    public function getIndex()
+    public function index()
     {
         // Grab all the suppliers
         $suppliers = Supplier::orderBy('created_at', 'DESC')->get();
@@ -43,7 +43,7 @@ class SuppliersController extends Controller
      *
      * @return View
      */
-    public function getCreate()
+    public function create()
     {
         return View::make('suppliers/edit')->with('item', new Supplier);
     }
@@ -54,7 +54,7 @@ class SuppliersController extends Controller
      *
      * @return Redirect
      */
-    public function postCreate()
+    public function store()
     {
 
         // get the POST data
@@ -103,7 +103,7 @@ class SuppliersController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function apiStore(Request $request)
     {
         $supplier = new Supplier;
         $supplier->name =  e($request->input('name'));
@@ -122,12 +122,12 @@ class SuppliersController extends Controller
      * @param  int  $supplierId
      * @return View
      */
-    public function getEdit($supplierId = null)
+    public function edit($supplierId = null)
     {
         // Check if the supplier exists
         if (is_null($item = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
-            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
+            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.does_not_exist'));
         }
 
         // Show the page
@@ -141,12 +141,12 @@ class SuppliersController extends Controller
      * @param  int  $supplierId
      * @return Redirect
      */
-    public function postEdit($supplierId = null)
+    public function update($supplierId = null)
     {
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
-            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
+            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.does_not_exist'));
         }
 
         // Save the  data
@@ -193,25 +193,25 @@ class SuppliersController extends Controller
      * @param  int  $supplierId
      * @return Redirect
      */
-    public function getDelete($supplierId)
+    public function destroy($supplierId)
     {
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the suppliers page
-            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.not_found'));
+            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.not_found'));
         }
 
         if ($supplier->num_assets() > 0) {
 
             // Redirect to the asset management page
-            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.assoc_users'));
+            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.assoc_users'));
         } else {
 
             // Delete the supplier
             $supplier->delete();
 
             // Redirect to the suppliers management page
-            return redirect()->to('admin/settings/suppliers')->with('success', trans('admin/suppliers/message.delete.success'));
+            return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.delete.success'));
         }
 
     }
@@ -223,7 +223,7 @@ class SuppliersController extends Controller
     * @param  int  $assetId
     * @return View
     **/
-    public function getView($supplierId = null)
+    public function show($supplierId = null)
     {
         $supplier = Supplier::find($supplierId);
 
@@ -273,11 +273,11 @@ class SuppliersController extends Controller
         $rows = array();
 
         foreach ($suppliers as $supplier) {
-            $actions = '<a href="'.route('update/supplier', $supplier->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/supplier', $supplier->id).'" data-content="'.trans('admin/suppliers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($supplier->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<a href="'.route('suppliers.edit', $supplier->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('suppliers.destroy', $supplier->id).'" data-content="'.trans('admin/suppliers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($supplier->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
                 'id'                => $supplier->id,
-                'name'              => (string)link_to('admin/settings/suppliers/'.$supplier->id.'/view', e($supplier->name)),
+                'name'              => (string)link_to_route('suppliers.show', e($supplier->name), ['supplier' => $supplier->id ]),
                 'contact'           => e($supplier->contact),
                 'address'           => e($supplier->address).' '.e($supplier->address2).' '.e($supplier->city).' '.e($supplier->state).' '.e($supplier->country),
                 'phone'             => e($supplier->phone),

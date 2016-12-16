@@ -438,7 +438,7 @@
                   <tbody>
                     @foreach ($asset->licenseseats as $seat)
                     <tr>
-                      <td><a href="{{ route('view/license', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
+                      <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                       <td>{{ $seat->license->serial }}</td>
                       <td>
                         <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn-flat info btn-sm">{{ trans('general.checkin') }}</a>
@@ -614,7 +614,7 @@
                               @endif
                             @elseif($log->target instanceof \App\Models\Asset)
                               @if ($log->target->deleted_at=='')
-                                <a href="{{ route('view/hardware', $log->target_id) }}">
+                                <a href="{{ route('hardware.show', $log->target_id) }}">
                                 {{ $log->target->showAssetName() }}
                                 </a>
                               @else

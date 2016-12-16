@@ -11,7 +11,7 @@
 
 
 @section('header_right')
-<a href="{{ route('create/supplier') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+<a href="{{ route('suppliers.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
 @stop
 
 

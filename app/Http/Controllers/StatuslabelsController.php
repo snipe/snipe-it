@@ -30,7 +30,7 @@ class StatuslabelsController extends Controller
      * @return View
      */
 
-    public function getIndex()
+    public function index()
     {
         // Show the page
         return View::make('statuslabels/index', compact('statuslabels'));
@@ -84,7 +84,7 @@ class StatuslabelsController extends Controller
      *
      * @return View
      */
-    public function getCreate()
+    public function create()
     {
         // Show the page
         $item = new Statuslabel;
@@ -100,7 +100,7 @@ class StatuslabelsController extends Controller
      *
      * @return Redirect
      */
-    public function postCreate(Request $request)
+    public function store(Request $request)
     {
 
         // create a new model instance
@@ -133,7 +133,7 @@ class StatuslabelsController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function apiStore(Request $request)
     {
 
         $statuslabel = new Statuslabel();
@@ -166,7 +166,7 @@ class StatuslabelsController extends Controller
      * @param  int  $statuslabelId
      * @return View
      */
-    public function getEdit($statuslabelId = null)
+    public function edit($statuslabelId = null)
     {
         // Check if the Statuslabel exists
         if (is_null($item = Statuslabel::find($statuslabelId))) {
@@ -188,7 +188,7 @@ class StatuslabelsController extends Controller
      * @param  int  $statuslabelId
      * @return Redirect
      */
-    public function postEdit(Request $request, $statuslabelId = null)
+    public function update(Request $request, $statuslabelId = null)
     {
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
@@ -232,7 +232,7 @@ class StatuslabelsController extends Controller
      * @param  int  $statuslabelId
      * @return Redirect
      */
-    public function getDelete($statuslabelId)
+    public function destroy($statuslabelId)
     {
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
@@ -302,7 +302,7 @@ class StatuslabelsController extends Controller
                 $label_type = trans('admin/statuslabels/table.undeployable');
             }
 
-            $actions = '<a href="'.route('update/statuslabel', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $statuslabel->id).'" data-content="'.trans('admin/statuslabels/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<a href="'.route('statuslabels.edit', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('statuslabels.destroy', $statuslabel->id).'" data-content="'.trans('admin/statuslabels/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             if ($statuslabel->color!='') {
                 $color = '<div class="pull-left" style="margin-right: 5px; height: 20px; width: 20px; background-color: '.e($statuslabel->color).'"></div>'.e($statuslabel->color);

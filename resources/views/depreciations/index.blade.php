@@ -7,7 +7,7 @@ Asset Depreciations
 @stop
 
 @section('header_right')
-<a href="{{ route('create/depreciations') }}" class="btn btn-primary pull-right">
+<a href="{{ route('depreciations.create') }}" class="btn btn-primary pull-right">
   {{ trans('general.create') }}</a>
 @stop
 

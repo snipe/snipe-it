@@ -193,10 +193,10 @@
                       </td>
                       <td>
                           @can('assets.view')
-                              <a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a>
+                              <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->asset_tag }}</a>
                           @endcan
                       </td>
-                      <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
+                      <td><a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->name }}</a></td>
 
                       <td class="hidden-print">
                           @can('assets.edit')
@@ -223,10 +223,10 @@
                   @foreach ($user->licenses as $license)
                   <tr>
                     <td>
-                            <a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
+                            <a href="{{ route('licenses.show', $license->id) }}">{{ $license->name }}</a>
 
                     </td>
-                    <td><a href="{{ route('view/license', $license->id) }}">{{ mb_strimwidth($license->serial, 0, 50, "...") }}</a></td>
+                    <td><a href="{{ route('licenses.show', $license->id) }}">{{ mb_strimwidth($license->serial, 0, 50, "...") }}</a></td>
                     <td class="hidden-print">
                         @can('licenses.edit')
                             <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
@@ -403,7 +403,7 @@
                       <td>
 
                         @if (($log->item) && ($log->itemType()=="asset"))
-                            <a href="{{ route('view/hardware', $log->item_id) }}">{{ $log->item->asset_tag }} - {{ $log->item->showAssetName() }}</a>
+                            <a href="{{ route('hardware.show', $log->item_id) }}">{{ $log->item->asset_tag }} - {{ $log->item->showAssetName() }}</a>
                         @elseif ($log->item)
                             <a href="{{ route('view/'. $log->itemType(), $log->item_id) }}">{{ $log->item->name }}</a>
                         @else

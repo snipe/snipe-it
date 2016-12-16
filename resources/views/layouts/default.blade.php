@@ -326,32 +326,32 @@
                                <i class="fa fa-th fa-fw"></i> @lang('general.asset_models')
                            </a>
                        </li>
-                       <li {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('categories*') ? ' class="active"' : '') !!}>
                            <a href="{{ route('categories.index') }}">
                                <i class="fa fa-check fa-fw"></i> @lang('general.categories')
                            </a>
                        </li>
-                       <li {!! (Request::is('settings/manufacturers*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/settings/manufacturers') }}">
+                       <li {!! (Request::is('manufacturers*') ? ' class="active"' : '') !!}>
+                           <a href="{{ route('manufacturers.index') }}">
                                <i class="fa fa-briefcase fa-fw"></i> @lang('general.manufacturers')
                            </a>
                        </li>
-                       <li {!! (Request::is('settings/suppliers*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/settings/suppliers') }}">
+                       <li {!! (Request::is('suppliers*') ? ' class="active"' : '') !!}>
+                           <a href="{{ route('suppliers.index') }}">
                                <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
                            </a>
                        </li>
-                       <li {!! (Request::is('settings/statuslabels*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/settings/statuslabels') }}">
+                       <li {!! (Request::is('statuslabels*') ? ' class="active"' : '') !!}>
+                           <a href="{{ route('statuslabels.index') }}">
                                <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
                            </a>
                        </li>
-                       <li {!! (Request::is('settings/depreciations*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/settings/depreciations') }}">
+                       <li {!! (Request::is('depreciations*') ? ' class="active"' : '') !!}>
+                           <a href="{{ route('depreciations.index') }}">
                                <i class="fa fa-arrow-down fa-fw"></i> @lang('general.depreciation')
                            </a>
                        </li>
-                       <li {!! (Request::is('settings/locations*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('locations*') ? ' class="active"' : '') !!}>
                            <a href="{{ route('locations.index') }}">
                                <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
                            </a>

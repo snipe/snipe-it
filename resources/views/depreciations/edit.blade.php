@@ -2,7 +2,8 @@
     'createText' => trans('admin/depreciations/general.create') ,
     'updateText' => trans('admin/depreciations/general.update'),
     'helpTitle' => trans('admin/depreciations/general.about_asset_depreciations'),
-    'helpText' => trans('admin/depreciations/general.about_depreciations')
+    'helpText' => trans('admin/depreciations/general.about_depreciations'),
+    'formAction' => ($item) ? route('about_depreciations.update', ['about_depreciation' => $item->id]) : route('about_depreciations.store'),
 ])
 
 {{-- Page content --}}

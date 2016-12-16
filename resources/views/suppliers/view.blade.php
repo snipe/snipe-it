@@ -8,7 +8,7 @@
 @stop
 
 @section('header_right')
-  <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-default pull-right">
+  <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-default pull-right">
   {{ trans('admin/suppliers/table.update') }}</a>
 @stop
 
@@ -48,8 +48,8 @@
                         @foreach ($supplier->assets as $supplierassets)
                         <tr>
 
-                            <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{ $supplierassets->asset_tag }}</a></td>
-                            <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{ $supplierassets->showAssetName() }}</a></td>
+                            <td><a href="{{ route('hardware.show', $supplierassets->id) }}">{{ $supplierassets->asset_tag }}</a></td>
+                            <td><a href="{{ route('hardware.show', $supplierassets->id) }}">{{ $supplierassets->showAssetName() }}</a></td>
                             <td>
                             @if ($supplierassets->assigneduser)
                             <a href="{{ route('view/user', $supplierassets->assigned_to) }}">
@@ -151,8 +151,8 @@
                   <tbody>
                       @foreach ($supplier->licenses as $license)
                       <tr>
-                          <td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
-                          <td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
+                          <td><a href="{{ route('licenses.show', $license->id) }}">{{ $license->name }}</a></td>
+                          <td><a href="{{ route('licenses.show', $license->id) }}">{{ $license->serial }}</a></td>
                           </td>
                       </tr>
                       @endforeach
@@ -196,7 +196,7 @@
                   @foreach ($supplier->asset_maintenances as $improvement)
                       @if (is_null($improvement->deleted_at))
                           <tr>
-                              <td><a href="{{ route('view/hardware', $improvement->asset_id) }}">{{ $improvement->asset->name }}</a></td>
+                              <td><a href="{{ route('hardware.show', $improvement->asset_id) }}">{{ $improvement->asset->name }}</a></td>
                               <td>{{ $improvement->improvement_type }}</td>
                               <td>{{ $improvement->start_date }}</td>
                               <td>{{ $improvement->completion_date }}</td>

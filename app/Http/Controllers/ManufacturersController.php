@@ -11,6 +11,7 @@ use Lang;
 use Redirect;
 use Str;
 use View;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Manufacturers for
@@ -29,7 +30,7 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         // Show the page
         return View::make('manufacturers/index', compact('manufacturers'));
@@ -44,7 +45,7 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
         return View::make('manufacturers/edit')->with('item', new Manufacturer);
     }
@@ -58,10 +59,10 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function store(Request $request)
     {
         $manufacturer = new Manufacturer;
-        $manufacturer->name            = e(Input::get('name'));
+        $manufacturer->name            = e($request->input('name'));
         $manufacturer->user_id          = Auth::user()->id;
 
         if ($manufacturer->save()) {
@@ -81,12 +82,12 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getEdit($manufacturerId = null)
+    public function edit($manufacturerId = null)
     {
         // Check if the manufacturer exists
         if (is_null($item = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturer  page
-            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.does_not_exist'));
+            return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
         // Show the page
@@ -103,16 +104,16 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function postEdit($manufacturerId = null)
+    public function update(Request $request, $manufacturerId = null)
     {
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturer  page
-            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.does_not_exist'));
+            return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
         // Save the  data
-        $manufacturer->name     = e(Input::get('name'));
+        $manufacturer->name     = e($request->input('name'));
 
         // Was it created?
         if ($manufacturer->save()) {
@@ -133,25 +134,25 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getDelete($manufacturerId)
+    public function destroy($manufacturerId)
     {
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturers page
-            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.not_found'));
+            return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.not_found'));
         }
 
         if ($manufacturer->has_models() > 0) {
 
             // Redirect to the asset management page
-            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.assoc_users'));
+            return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.assoc_users'));
         } else {
 
             // Delete the manufacturer
             $manufacturer->delete();
 
             // Redirect to the manufacturers management page
-            return redirect()->to('admin/settings/manufacturers')->with('success', trans('admin/manufacturers/message.delete.success'));
+            return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.delete.success'));
         }
 
     }
@@ -169,7 +170,7 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getView($manufacturerId = null)
+    public function show($manufacturerId = null)
     {
         $manufacturer = Manufacturer::find($manufacturerId);
 
@@ -194,30 +195,30 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return String JSON
     */
-    public function getDatatable()
+    public function getDatatable(Request $request)
     {
         $manufacturers = Manufacturer::select(array('id','name'))->with('assets')
         ->whereNull('deleted_at');
 
-        if (Input::has('search')) {
-            $manufacturers = $manufacturers->TextSearch(e(Input::get('search')));
+        if ($request->has('search')) {
+            $manufacturers = $manufacturers->TextSearch(e($request->input('search')));
         }
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+        if ($request->has('offset')) {
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+        if ($request->has('limit')) {
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
         $allowed_columns = ['id','name'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
         $manufacturers->orderBy($sort, $order);
 
@@ -227,11 +228,11 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($manufacturers as $manufacturer) {
-            $actions = '<a href="'.route('update/manufacturer', $manufacturer->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/manufacturer', $manufacturer->id).'" data-content="'.trans('admin/manufacturers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($manufacturer->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<a href="'.route('manufacturers.edit', $manufacturer->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('manufacturers.destroy', $manufacturer->id).'" data-content="'.trans('admin/manufacturers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($manufacturer->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
                 'id'              => $manufacturer->id,
-                'name'          => (string)link_to('admin/settings/manufacturers/'.$manufacturer->id.'/view', e($manufacturer->name)),
+                'name'          => (string)link_to_route('manufacturers.show', e($manufacturer->name),['manufacturer' => $manufacturer->id]),
                 'assets'              => $manufacturer->assets->count(),
                 'actions'       => $actions
             );
@@ -279,26 +280,26 @@ class ManufacturersController extends Controller
         $manufacturer = $manufacturer->load('assets.model', 'assets.assigneduser', 'assets.assetstatus', 'assets.company');
         $manufacturer_assets = $manufacturer->assets;
 
-        if (Input::has('search')) {
-            $manufacturer_assets = $manufacturer_assets->TextSearch(e(Input::get('search')));
+        if ($request->has('search')) {
+            $manufacturer_assets = $manufacturer_assets->TextSearch(e($request->input('search')));
         }
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+        if ($request->has('offset')) {
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+        if ($request->has('limit')) {
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $count = $manufacturer_assets->count();
 
         $rows = array();
@@ -348,8 +349,8 @@ class ManufacturersController extends Controller
         $manufacturer = $manufacturer->load('licenses.company', 'licenses.manufacturer', 'licenses.licenseSeatsRelation');
         $licenses = $manufacturer->licenses;
 
-        if (Input::has('search')) {
-            $licenses = $licenses->TextSearch(Input::get('search'));
+        if ($request->has('search')) {
+            $licenses = $licenses->TextSearch($request->input('search'));
         }
 
         $licenseCount = $licenses->count();
@@ -415,12 +416,12 @@ class ManufacturersController extends Controller
             );
         $accessories = $manufacturer->accessories;
 
-        if (Input::has('search')) {
-            $accessories = $accessories->TextSearch(e(Input::get('search')));
+        if ($request->has('search')) {
+            $accessories = $accessories->TextSearch(e($request->input('search')));
         }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+        if ($request->has('limit')) {
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
@@ -480,12 +481,12 @@ class ManufacturersController extends Controller
         );
         $consumables = $manufacturer->consumables;
 
-        if (Input::has('search')) {
-            $consumables = $consumables->TextSearch(e(Input::get('search')));
+        if ($request->has('search')) {
+            $consumables = $consumables->TextSearch(e($request->input('search')));
         }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+        if ($request->has('limit')) {
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }

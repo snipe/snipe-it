@@ -14,8 +14,8 @@
      <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a href="{{ route('update/manufacturer', $manufacturer->id) }}">{{ trans('admin/manufacturers/table.update') }}</a></li>
-        <li><a href="{{ route('create/manufacturer') }}">{{ trans('admin/manufacturers/table.create') }}</a></li>
+        <li><a href="{{ route('manufacturers.edit', $manufacturer->id) }}">{{ trans('admin/manufacturers/table.update') }}</a></li>
+        <li><a href="{{ route('manufacturers.create') }}">{{ trans('admin/manufacturers/table.create') }}</a></li>
       </ul>
   </div>
 @stop

@@ -2,7 +2,8 @@
     'createText' => trans('admin/suppliers/table.create') ,
     'updateText' => trans('admin/suppliers/table.update'),
     'helpTitle' => trans('admin/suppliers/table.about_suppliers_title'),
-    'helpText' => trans('admin/suppliers/table.about_suppliers_text')
+    'helpText' => trans('admin/suppliers/table.about_suppliers_text'),
+    'formAction' => ($item) ? route('suppliers.update', ['supplier' => $item->id]) : route('suppliers.store'),
 ])
 
 {{-- Page content --}}

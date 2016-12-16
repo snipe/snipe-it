@@ -73,7 +73,7 @@
 
         @if ($asset->model->manufacturer)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.manufacturer') }}: </strong>
-            <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
+            <a href="{{ route('manufacturers.edit', $asset->model->manufacturer->id) }}">
             {{ $asset->model->manufacturer->name }}
             </a> </div>
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.model') }}:</strong>
@@ -175,7 +175,7 @@
 			<tbody>
 				@foreach ($asset->licenseseats as $seat)
 				<tr>
-					<td><a href="{{ route('view/license', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
+					<td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
 					<td>{{ $seat->license->serial }}</td>
 					<td><a href="{{ route('licenses.checkin', $seat->id) }}" class="btn-flat info">{{ trans('general.checkin') }}</a>
 					</td>

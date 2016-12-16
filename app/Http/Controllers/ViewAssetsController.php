@@ -108,7 +108,7 @@ class ViewAssetsController extends Controller
         $data['item_type'] = $itemType;
 
         if ($fullItemType == Asset::class) {
-            $data['item_url'] = route('view/hardware', $item->id);
+            $data['item_url'] = route('hardware.show', $item->id);
             $slackMessage = ' Asset <'.url('/').'/hardware/'.$item->id.'/view'.'|'.$item->showAssetName().'> requested by <'.url('/').'/users/'.$item->user_id.'/view'.'|'.$user->fullName().'>.';
         } else {
             $data['item_url'] = route("view/${itemType}", $item->id);

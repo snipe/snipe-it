@@ -3,38 +3,61 @@ use App\Models\CheckoutRequest;
 use App\Models\Location;
 use App\Models\Statuslabel;
 
-
-
-
 /*
 * Custom Fields Routes
- */
+*/
 Route::resource('fields', 'CustomFieldsController', [
-    'parameters' => ['customfield' => 'field_id', 'fieldset' => 'fieldset_id']
+'parameters' => ['customfield' => 'field_id', 'fieldset' => 'fieldset_id']
 ]);
 
 /*
 * Companies
- */
+*/
 Route::resource('companies', 'CompaniesController', [
-    'parameters' => ['company' => 'company_id']
+'parameters' => ['company' => 'company_id']
 ]);
 
 /*
 * Categories
+*/
+Route::resource('categories', 'CategoriesController', [
+ 'parameters' => ['category' => 'category_id']
+]);
+
+/*
+* Locations
+*/
+Route::resource('locations', 'LocationsController', [
+  'parameters' => ['location' => 'location_id']
+]);
+
+/*
+* Manufacturers
+*/
+Route::resource('manufacturers', 'ManufacturersController', [
+   'parameters' => ['manufacturer' => 'manufacturers_id']
+]);
+
+/*
+* Suppliers
+*/
+Route::resource('suppliers', 'SuppliersController', [
+    'parameters' => ['supplier' => 'supplier_id']
+]);
+
+/*
+* Depreciations
  */
- Route::resource('categories', 'CategoriesController', [
-     'parameters' => ['category' => 'category_id']
+ Route::resource('depreciations', 'DepreciationsController', [
+     'parameters' => ['depreciation' => 'depreciation_id']
  ]);
 
  /*
- * Locations
+ * Status Labels
   */
-  Route::resource('locations', 'LocationsController', [
-      'parameters' => ['location' => 'location_id']
+  Route::resource('statuslabels', 'StatuslabelsController', [
+      'parameters' => ['statuslabel' => 'statuslabel_id']
   ]);
-
-
 
 
 /*
@@ -161,92 +184,6 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
 
 
             Route::get('/', [ 'as' => 'settings/backups', 'uses' => 'SettingsController@getBackups' ]);
-        });
-
-
-
-
-        # Manufacturers
-        Route::group([ 'prefix' => 'manufacturers' ], function () {
-
-            Route::get('/', [ 'as' => 'manufacturers', 'uses' => 'ManufacturersController@getIndex' ]);
-            Route::get(
-                'create',
-                [ 'as' => 'create/manufacturer', 'uses' => 'ManufacturersController@getCreate' ]
-            );
-            Route::post('create', 'ManufacturersController@postCreate');
-            Route::get(
-                '{manufacturerId}/edit',
-                [ 'as' => 'update/manufacturer', 'uses' => 'ManufacturersController@getEdit' ]
-            );
-            Route::post('{manufacturerId}/edit', 'ManufacturersController@postEdit');
-            Route::get(
-                '{manufacturerId}/delete',
-                [ 'as' => 'delete/manufacturer', 'uses' => 'ManufacturersController@getDelete' ]
-            );
-            Route::get(
-                '{manufacturerId}/view',
-                [ 'as' => 'view/manufacturer', 'uses' => 'ManufacturersController@getView' ]
-            );
-        });
-
-        # Suppliers
-        Route::group([ 'prefix' => 'suppliers' ], function () {
-
-            Route::get('/', [ 'as' => 'suppliers', 'uses' => 'SuppliersController@getIndex' ]);
-            Route::get('create', [ 'as' => 'create/supplier', 'uses' => 'SuppliersController@getCreate' ]);
-            Route::post('create', 'SuppliersController@postCreate');
-            Route::get(
-                '{supplierId}/edit',
-                [ 'as' => 'update/supplier', 'uses' => 'SuppliersController@getEdit' ]
-            );
-            Route::post('{supplierId}/edit', 'SuppliersController@postEdit');
-            Route::get(
-                '{supplierId}/delete',
-                [ 'as' => 'delete/supplier', 'uses' => 'SuppliersController@getDelete' ]
-            );
-            Route::get('{supplierId}/view', [ 'as' => 'view/supplier', 'uses' => 'SuppliersController@getView' ]);
-        });
-
-
-
-        # Depreciations
-        Route::group([ 'prefix' => 'depreciations' ], function () {
-
-            Route::get('/', [ 'as' => 'depreciations', 'uses' => 'DepreciationsController@getIndex' ]);
-            Route::get(
-                'create',
-                [ 'as' => 'create/depreciations', 'uses' => 'DepreciationsController@getCreate' ]
-            );
-            Route::post('create', 'DepreciationsController@postCreate');
-            Route::get(
-                '{depreciationId}/edit',
-                [ 'as' => 'update/depreciations', 'uses' => 'DepreciationsController@getEdit' ]
-            );
-            Route::post('{depreciationId}/edit', 'DepreciationsController@postEdit');
-            Route::get(
-                '{depreciationId}/delete',
-                [ 'as' => 'delete/depreciations', 'uses' => 'DepreciationsController@getDelete' ]
-            );
-        });
-
-
-
-        # Status Labels
-        Route::group([ 'prefix' => 'statuslabels' ], function () {
-
-            Route::get('/', [ 'as' => 'statuslabels', 'uses' => 'StatuslabelsController@getIndex' ]);
-            Route::get('create', [ 'as' => 'create/statuslabel', 'uses' => 'StatuslabelsController@getCreate' ]);
-            Route::post('create', 'StatuslabelsController@postCreate');
-            Route::get(
-                '{statuslabelId}/edit',
-                [ 'as' => 'update/statuslabel', 'uses' => 'StatuslabelsController@getEdit' ]
-            );
-            Route::post('{statuslabelId}/edit', 'StatuslabelsController@postEdit');
-            Route::get(
-                '{statuslabelId}/delete',
-                [ 'as' => 'delete/statuslabel', 'uses' => 'StatuslabelsController@getDelete' ]
-            );
         });
 
     });

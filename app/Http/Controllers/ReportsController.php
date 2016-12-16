@@ -353,7 +353,7 @@ class ReportsController extends Controller
             }
 
             if (($activity->item) && ($activity->itemType()=="asset")) {
-              $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
+              $activity_item = '<a href="'.route('hardware.show', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
                 $activity_item = '<a href="' . route('view/' . $activity->itemType(),
@@ -370,7 +370,7 @@ class ReportsController extends Controller
                 $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user->fullName().'</a>';
             } elseif ($activity->target_type === "App\Models\Asset") {
                 if($activity->target) {
-                    $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
+                    $activity_target = '<a href="'.route('hardware.show', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
                 } else {
                     $activity_target = "";
                 }

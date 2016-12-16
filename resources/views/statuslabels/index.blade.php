@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('create/statuslabel') }}" class="btn btn-primary pull-right">
+<a href="{{ route('statuslabels.create') }}" class="btn btn-primary pull-right">
 {{ trans('general.create') }}</a>
 @stop
 {{-- Page content --}}

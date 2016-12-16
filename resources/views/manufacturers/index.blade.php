@@ -8,7 +8,7 @@
 
 {{-- Page title --}}
 @section('header_right')
-<a href="{{ route('create/manufacturer') }}" class="btn btn-primary pull-right">
+<a href="{{ route('manufacturers.create') }}" class="btn btn-primary pull-right">
   {{ trans('general.create') }}</a>
 @stop
 

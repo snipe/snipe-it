@@ -2,7 +2,8 @@
     'createText' => trans('admin/statuslabels/table.create') ,
     'updateText' => trans('admin/statuslabels/table.update'),
     'helpTitle' => trans('admin/statuslabels/table.about'),
-    'helpText' => trans('admin/statuslabels/table.info')
+    'helpText' => trans('admin/statuslabels/table.info'),
+    'formAction' => ($item) ? route('statuslabels.update', ['statuslabel' => $item->id]) : route('statuslabels.store'),
 ])
 
 {{-- Page content --}}
