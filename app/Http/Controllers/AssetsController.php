@@ -91,7 +91,7 @@ class AssetsController extends Controller
             $topsearch = false;
         }
         if ($asset = Asset::where('asset_tag', '=', Input::get('assetTag'))->first()) {
-            return redirect()->route('view/hardware', $asset->id)->with('topsearch', $topsearch);
+            return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
         }
         return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
 
@@ -455,7 +455,7 @@ class AssetsController extends Controller
         if ($asset->save()) {
             // Redirect to the new asset page
             \Session::flash('success', trans('admin/hardware/message.update.success'));
-            return response()->json(['redirect_url' => route("view/hardware", $assetId)]);
+            return response()->json(['redirect_url' => route("hardware.show", $assetId)]);
         }
         \Input::flash();
         \Session::flash('errors', $asset->getErrors());
@@ -778,7 +778,7 @@ class AssetsController extends Controller
                     return response()->file($qr_file, $header);
                 } else {
                     $barcode = new \Com\Tecnick\Barcode\Barcode();
-                    $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
+                    $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('hardware.show', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
                     file_put_contents($qr_file, $barcode_obj->getPngData());
                     return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
                 }
