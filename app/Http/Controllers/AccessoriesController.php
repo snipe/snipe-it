@@ -267,7 +267,7 @@ class AccessoriesController extends Controller
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return redirect()->to('accessories')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->to('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
             return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
         }
@@ -294,7 +294,7 @@ class AccessoriesController extends Controller
       // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return redirect()->to('accessories')->with('error', trans('admin/accessories/message.user_not_found'));
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.user_not_found'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
             return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
         }

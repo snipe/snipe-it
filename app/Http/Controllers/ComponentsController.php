@@ -277,7 +277,7 @@ class ComponentsController extends Controller
         // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the component management page with error
-            return redirect()->to('components')->with('error', trans('admin/components/message.not_found'));
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
             return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
         }
@@ -306,7 +306,7 @@ class ComponentsController extends Controller
         // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the component management page with error
-            return redirect()->to('components')->with('error', trans('admin/components/message.not_found'));
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
             return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
         }

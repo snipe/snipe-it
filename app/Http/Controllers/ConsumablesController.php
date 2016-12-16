@@ -269,7 +269,7 @@ class ConsumablesController extends Controller
         // Check if the consumable exists
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the consumable management page with error
-            return redirect()->to('consumables')->with('error', trans('admin/consumables/message.not_found'));
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
             return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
         }
@@ -295,7 +295,7 @@ class ConsumablesController extends Controller
       // Check if the consumable exists
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the consumable management page with error
-            return redirect()->to('consumables')->with('error', trans('admin/consumables/message.not_found'));
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
             return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
         }
