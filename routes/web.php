@@ -99,48 +99,8 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
             ]);
 
 
-
-
-
-
-    # Components
-    Route::group([ 'prefix' => 'components', 'middleware'=>'authorize:components.view'  ], function () {
-
-        Route::get('create', [ 'as' => 'create/component', 'middleware'=>'authorize:components.create','uses' => 'ComponentsController@getCreate' ]);
-        Route::post('create', [ 'as' => 'create/component', 'middleware'=>'authorize:components.create','uses' => 'ComponentsController@postCreate' ]);
-        Route::get(
-            '{componentID}/edit',
-            [ 'as' => 'update/component', 'middleware'=>'authorize:components.edit','uses' => 'ComponentsController@getEdit' ]
-        );
-        Route::post(
-            '{componentID}/edit',
-            [ 'as' => 'update/component', 'middleware'=>'authorize:components.edit','uses' => 'ComponentsController@postEdit' ]
-        );
-        Route::get(
-            '{componentID}/delete',
-            [ 'as' => 'delete/component', 'middleware'=>'authorize:components.delete','uses' => 'ComponentsController@getDelete' ]
-        );
-        Route::get(
-            '{componentID}/view',
-            [ 'as' => 'view/component', 'middleware'=>'authorize:components.view','uses' => 'ComponentsController@getView' ]
-        );
-        Route::get(
-            '{componentID}/checkout',
-            [ 'as' => 'checkout/component', 'middleware'=>'authorize:components.checkout','uses' => 'ComponentsController@getCheckout' ]
-        );
-        Route::post(
-            '{componentID}/checkout',
-            [ 'as' => 'checkout/component', 'middleware'=>'authorize:components.checkout','uses' => 'ComponentsController@postCheckout' ]
-        );
-        Route::post('bulk', [ 'as' => 'component/bulk-form', 'middleware'=>'authorize:components.checkout','uses' => 'ComponentsController@postBulk' ]);
-        Route::post('bulksave', [ 'as' => 'component/bulk-save', 'middleware'=>'authorize:components.edit','uses' => 'ComponentsController@postBulkSave' ]);
-        Route::get('/', [ 'as' => 'components', 'middleware'=>'authorize:components.view','uses' => 'ComponentsController@getIndex' ]);
-    });
-
     # Admin Settings Routes (for categories, maufactureres, etc)
     Route::group([ 'prefix' => 'settings', 'middleware'=>'authorize:superuser'], function () {
-
-
 
         # Settings
         Route::group([ 'prefix' => 'app' ], function () {

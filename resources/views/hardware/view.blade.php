@@ -471,7 +471,7 @@
                       @foreach ($asset->components as $component)
                         @if (is_null($component->deleted_at))
                           <tr>
-                            <td><a href="{{ route('view/component', $component->id) }}">{{ $component->name }}</a></td>
+                            <td><a href="{{ route('components.show', $component->id) }}">{{ $component->name }}</a></td>
                           </tr>
                         @endif
                       @endforeach

@@ -158,7 +158,7 @@
                   @endcan
                   @can('components.view')
                   <li {!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                      <a href="{{ url('components') }}">
+                      <a href="{{ route('components.index') }}">
                           <i class="fa fa-hdd-o"></i>
                       </a>
                   </li>
@@ -223,7 +223,7 @@
                        @endcan
                        @can('components.create')
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('create/component') }}">
+                           <a href="{{ route('components.create') }}">
                            <i class="fa fa-hdd-o"></i>
                            @lang('general.component')</a>
                        </li>
@@ -483,7 +483,7 @@
              @endcan
              @can('components.view')
             <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                <a href="{{ url('admin/components') }}">
+                <a href="{{ route('components.index') }}">
                   <i class="fa fa-hdd-o"></i>
                   <span>@lang('general.components')</span>
                 </a>

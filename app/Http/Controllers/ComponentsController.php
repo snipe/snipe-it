@@ -39,7 +39,7 @@ class ComponentsController extends Controller
     * @since [v3.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         return View::make('components/index');
     }
@@ -53,7 +53,7 @@ class ComponentsController extends Controller
     * @since [v3.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
         // Show the page
         $category_list = Helper::categoryList('component');
@@ -76,7 +76,7 @@ class ComponentsController extends Controller
     * @since [v3.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function store()
     {
 
         // create a new model instance
@@ -110,7 +110,7 @@ class ComponentsController extends Controller
         if ($component->save()) {
             $component->logCreate();
             // Redirect to the new component  page
-            return redirect()->to("admin/components")->with('success', trans('admin/components/message.create.success'));
+            return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
@@ -127,14 +127,14 @@ class ComponentsController extends Controller
     * @param int $componentId
     * @return View
     */
-    public function getEdit($componentId = null)
+    public function edit($componentId = null)
     {
         // Check if the component exists
         if (is_null($item = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
         }
 
         $category_list =  Helper::categoryList('component');
@@ -157,14 +157,14 @@ class ComponentsController extends Controller
     * @since [v3.0]
     * @return Redirect
     */
-    public function postEdit($componentId = null)
+    public function update($componentId = null)
     {
         // Check if the blog post exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
         }
 
 
@@ -191,16 +191,11 @@ class ComponentsController extends Controller
 
         $component->qty                    = e(Input::get('qty'));
 
-        // Was the component created?
         if ($component->save()) {
-            // Redirect to the new component page
-            return redirect()->to("admin/components")->with('success', trans('admin/components/message.update.success'));
+            return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($component->getErrors());
-
-
-
 
     }
 
@@ -212,20 +207,16 @@ class ComponentsController extends Controller
     * @param int $componentId
     * @return Redirect
     */
-    public function getDelete($componentId)
+    public function destroy($componentId)
     {
-        // Check if the blog post exists
         if (is_null($component = Component::find($componentId))) {
-            // Redirect to the blogs management page
-            return redirect()->to('admin/components')->with('error', trans('admin/components/message.not_found'));
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
         }
 
-            $component->delete();
-
-            // Redirect to the locations management page
-            return redirect()->to('admin/components')->with('success', trans('admin/components/message.delete.success'));
+        $component->delete();
+        return redirect()->route('components.index')->with('success', trans('admin/components/message.delete.success'));
 
     }
 
@@ -249,7 +240,7 @@ class ComponentsController extends Controller
     * @param int $componentId
     * @return View
     */
-    public function getView($componentId = null)
+    public function show($componentId = null)
     {
         $component = Component::find($componentId);
 
@@ -257,7 +248,7 @@ class ComponentsController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($component)) {
-                return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
             } else {
                 return View::make('components/view', compact('component'));
             }
@@ -288,7 +279,7 @@ class ComponentsController extends Controller
             // Redirect to the component management page with error
             return redirect()->to('components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Get the dropdown of assets and then pass it to the checkout view
@@ -317,7 +308,7 @@ class ComponentsController extends Controller
             // Redirect to the component management page with error
             return redirect()->to('components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('components.index')->with('error', trans('general.insufficient_permissions'));
         }
 
 
@@ -339,9 +330,9 @@ class ComponentsController extends Controller
       // Check if the user exists
         if (is_null($asset = Asset::find($asset_id))) {
             // Redirect to the component management page with error
-            return redirect()->to('admin/components')->with('error', trans('admin/components/message.asset_does_not_exist'));
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.asset_does_not_exist'));
         }
-        
+
       // Update the component data
         $component->asset_id =   $asset_id;
 
@@ -372,7 +363,7 @@ class ComponentsController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.url('/').'/admin/components/'.$component->id.'/view'.'|'.$component->name.'> checked out to <'.url('/').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.url('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.route('components.show', ['component' => $component->id]).'|'.$component->name.'> checked out to <'.url('/').'/hardware/'.$asset->id.'|'.$asset->showAssetName().'> by <'.url('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -386,8 +377,7 @@ class ComponentsController extends Controller
             }
         }
 
-      // Redirect to the new component page
-        return redirect()->to("admin/components")->with('success', trans('admin/components/message.checkout.success'));
+        return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
 
 
 
@@ -456,12 +446,12 @@ class ComponentsController extends Controller
             }
 
             if (Gate::allows('components.edit')) {
-                $actions .= '<a href="' . route('update/component',
+                $actions .= '<a href="' . route('components.edit',
                         $component->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
 
             if (Gate::allows('components.delete')) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/component',
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('components.destroy',
                         $component->id) . '" data-content="' . trans('admin/components/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($component->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
 
@@ -471,10 +461,10 @@ class ComponentsController extends Controller
             $rows[] = array(
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="component['.$component->id.']" class="one_required"></div>',
                 'id'            => $component->id,
-                'name'          => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
+                'name'          => (string)link_to_route('components.show', e($component->name), ['component' => $component->id]),
                 'serial_number'          => $component->serial,
                 'location'   => ($component->location) ? e($component->location->name) : '',
-                'qty'           => e($component->qty),
+                'qty'           => number_format($component->qty),
                 'min_amt'           => e($component->min_amt),
                 'category'           => ($component->category) ? e($component->category->name) : 'Missing category',
                 'order_number'  => e($component->order_number),
@@ -515,7 +505,7 @@ class ComponentsController extends Controller
 
         foreach ($component->assets as $component_assignment) {
             $rows[] = array(
-            'name' => (string)link_to('/hardware/'.$component_assignment->id.'/view', e($component_assignment->showAssetName())),
+            'name' => (string)link_to_route('hardware.show', e($component_assignment->showAssetName()), ['hardware' => $component_assignment->id]),
             'qty' => e($component_assignment->pivot->assigned_qty),
             'created_at' => ($component_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $component_assignment->created_at->format('Y-m-d H:i:s'),
             );
