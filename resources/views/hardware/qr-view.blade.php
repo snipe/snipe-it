@@ -77,7 +77,7 @@
             {{ $asset->model->manufacturer->name }}
             </a> </div>
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.model') }}:</strong>
-            <a href="{{ route('view/model', $asset->model->id) }}">
+            <a href="{{ route('models.show', $asset->model->id) }}">
             {{ $asset->model->name }}
             </a>
              / {{ $asset->model->model_number }}</div>
@@ -101,7 +101,7 @@
 
         @if ($asset->supplier_id)
             <div class="col-md-6" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.supplier') }}: </strong>
-            <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+            <a href="{{ route('suppliers.show', $asset->supplier_id) }}">
             {{ $asset->supplier->name }}
             </a> </div>
         @endif

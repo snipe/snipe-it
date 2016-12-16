@@ -53,7 +53,7 @@ use Carbon\Carbon;
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>{{ trans('general.supplier') }}: </strong>
-                        <a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">
+                        <a href="{{ route('suppliers.show', $assetMaintenance->supplier_id) }}">
                             {{ $assetMaintenance->supplier->name }}
                         </a>
                     </div>

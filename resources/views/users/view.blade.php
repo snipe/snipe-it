@@ -250,7 +250,7 @@
                 <tbody>
                     @foreach ($user->accessories as $accessory)
                     <tr>
-                        <td><a href="{{ route('view/accessory', $accessory->id) }}">{{ $accessory->name }}</a></td>
+                        <td><a href="{{ route('accessories.show', $accessory->id) }}">{{ $accessory->name }}</a></td>
                         <td class="hidden-print">
                             @can('accessories.edit')
                                 <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>

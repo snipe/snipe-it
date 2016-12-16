@@ -115,7 +115,7 @@
                             <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
                             <td>
                              @can('superuser')
-                              <a href="{{ route('view/manufacturer', $asset->model->manufacturer->id) }}">
+                              <a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
                               {{ $asset->model->manufacturer->name }}
                               </a>
                              @else
@@ -128,7 +128,7 @@
                                 {{ trans('admin/hardware/form.model') }}</td>
                             <td>
                                 @can('superuser')
-                                    <a href="{{ route('view/model', $asset->model->id) }}">
+                                    <a href="{{ route('models.show', $asset->model->id) }}">
                                     {{ $asset->model->name }}
                                     </a>
                                  @else
@@ -217,7 +217,7 @@
                         <td>{{ trans('general.supplier') }}</td>
                         <td>
                             @can ('superuser')
-                                  <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+                                  <a href="{{ route('suppliers.show', $asset->supplier_id) }}">
                                   {{ $asset->supplier->name }}
                                   </a>
                                 @else
@@ -527,7 +527,7 @@
                       @foreach ($asset->assetmaintenances as $assetMaintenance)
                         @if (is_null($assetMaintenance->deleted_at))
                           <tr>
-                            <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a></td>
+                            <td><a href="{{ route('suppliers.show', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a></td>
                             <td>{{ $assetMaintenance->title }}</td>
                             <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
                             <td>{{ $assetMaintenance->start_date }}</td>

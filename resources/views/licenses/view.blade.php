@@ -173,7 +173,7 @@
                         <td>{{ trans('general.supplier') }}:
                         </td>
                         <td>
-                        <a href="{{ route('view/supplier', $license->supplier_id) }}">
+                        <a href="{{ route('suppliers.show', $license->supplier_id) }}">
                         {{ $license->supplier->name }}
                         </a>
                       </td>
