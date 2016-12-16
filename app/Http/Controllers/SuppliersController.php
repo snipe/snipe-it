@@ -95,7 +95,7 @@ class SuppliersController extends Controller
             // Was it created?
         if ($supplier->save()) {
           // Redirect to the new supplier  page
-            return redirect()->to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.create.success'));
+            return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.create.success'));
         }
 
 
@@ -180,7 +180,7 @@ class SuppliersController extends Controller
         }
 
         if ($supplier->save()) {
-            return redirect()->to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.update.success'));
+            return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($supplier->getErrors());

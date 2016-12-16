@@ -66,7 +66,7 @@ class ManufacturersController extends Controller
         $manufacturer->user_id          = Auth::user()->id;
 
         if ($manufacturer->save()) {
-            return redirect()->to("admin/settings/manufacturers")->with('success', trans('admin/manufacturers/message.create.success'));
+            return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
@@ -118,7 +118,7 @@ class ManufacturersController extends Controller
         // Was it created?
         if ($manufacturer->save()) {
             // Redirect to the new manufacturer page
-            return redirect()->to("admin/settings/manufacturers")->with('success', trans('admin/manufacturers/message.update.success'));
+            return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
