@@ -13,9 +13,19 @@ Route::resource('fields', 'CustomFieldsController', [
     'parameters' => ['customfield' => 'field_id', 'fieldset' => 'fieldset_id']
 ]);
 
+/*
+* Companies
+ */
 Route::resource('companies', 'CompaniesController', [
     'parameters' => ['company' => 'company_id']
 ]);
+
+/*
+* Categories
+ */
+ Route::resource('categories', 'CategoriesController', [
+     'parameters' => ['category' => 'category_id']
+ ]);
 
 
 
@@ -190,26 +200,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
             Route::get('{supplierId}/view', [ 'as' => 'view/supplier', 'uses' => 'SuppliersController@getView' ]);
         });
 
-        # Categories
-        Route::group([ 'prefix' => 'categories' ], function () {
 
-            Route::get('create', [ 'as' => 'create/category', 'uses' => 'CategoriesController@getCreate' ]);
-            Route::post('create', 'CategoriesController@postCreate');
-            Route::get(
-                '{categoryId}/edit',
-                [ 'as' => 'update/category', 'uses' => 'CategoriesController@getEdit' ]
-            );
-            Route::post('{categoryId}/edit', 'CategoriesController@postEdit');
-            Route::get(
-                '{categoryId}/delete',
-                [ 'as' => 'delete/category', 'uses' => 'CategoriesController@getDelete' ]
-            );
-            Route::get(
-                '{categoryId}/view',
-                [ 'as' => 'view/category', 'uses' => 'CategoriesController@getView' ]
-            );
-            Route::get('/', [ 'as' => 'categories', 'uses' => 'CategoriesController@getIndex' ]);
-        });
 
         # Depreciations
         Route::group([ 'prefix' => 'depreciations' ], function () {

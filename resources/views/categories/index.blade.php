@@ -8,7 +8,7 @@
 
 
 @section('header_right')
-<a href="{{ route('create/category') }}" class="btn btn-primary pull-right">
+<a href="{{ route('categories.create') }}" class="btn btn-primary pull-right">
   {{ trans('general.create') }}</a>
 @stop
 

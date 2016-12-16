@@ -34,7 +34,7 @@ class CategoriesController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         // Show the page
         return View::make('categories/index');
@@ -45,11 +45,11 @@ class CategoriesController extends Controller
     * Returns a form view to create a new category.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::postCreate() method that stores the data
+    * @see CategoriesController::store() method that stores the data
     * @since [v1.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
         // Show the page
          $category_types= Helper::categoryTypeList();
@@ -62,37 +62,33 @@ class CategoriesController extends Controller
     * Validates and stores the new category data.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::getCreate() method that makes the form.
+    * @see CategoriesController::create() method that makes the form.
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function store(Request $request)
     {
 
         // create a new model instance
         $category = new Category();
 
         // Update the category data
-        $category->name                 = e(Input::get('name'));
-        $category->category_type        = e(Input::get('category_type'));
-        $category->eula_text            = e(Input::get('eula_text'));
-        $category->use_default_eula     = e(Input::get('use_default_eula', '0'));
-        $category->require_acceptance   = e(Input::get('require_acceptance', '0'));
-        $category->checkin_email        = e(Input::get('checkin_email', '0'));
+        $category->name                 = e($request->input('name'));
+        $category->category_type        = e($request->input('category_type'));
+        $category->eula_text            = e($request->input('eula_text'));
+        $category->use_default_eula     = e($request->input('use_default_eula', '0'));
+        $category->require_acceptance   = e($request->input('require_acceptance', '0'));
+        $category->checkin_email        = e($request->input('checkin_email', '0'));
         $category->user_id              = Auth::user()->id;
 
         if ($category->save()) {
-        // Redirect to the new category  page
-            return redirect()->to("admin/settings/categories")->with('success', trans('admin/categories/message.create.success'));
+            return redirect()->route('categories.index')->with('success', trans('admin/categories/message.create.success'));
         } else {
-
-          // The given data did not pass validation
             return redirect()->back()->withInput()->withErrors($category->getErrors());
 
         }
 
-        // Redirect to the category create page
-        return redirect()->to('admin/settings/categories/create')->with('error', trans('admin/categories/message.create.error'));
+        return redirect()->route('categories.create')->with('error', trans('admin/categories/message.create.error'));
 
 
     }
@@ -106,7 +102,7 @@ class CategoriesController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getEdit($categoryId = null)
+    public function edit($categoryId = null)
     {
         // Check if the category exists
         if (is_null($item = Category::find($categoryId))) {
@@ -114,8 +110,6 @@ class CategoriesController extends Controller
             return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.does_not_exist'));
         }
 
-        // Show the page
-        //$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
 
         $category_options = array('' => 'Top Level') + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
         $category_types= Helper::categoryTypeList();
@@ -135,7 +129,7 @@ class CategoriesController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postEdit(Request $request, $categoryId = null)
+    public function update(Request $request, $categoryId = null)
     {
         // Check if the blog post exists
         if (is_null($category = Category::find($categoryId))) {
@@ -155,7 +149,7 @@ class CategoriesController extends Controller
 
         if ($category->save()) {
         // Redirect to the new category page
-            return redirect()->to("admin/settings/categories")->with('success', trans('admin/categories/message.update.success'));
+            return redirect()->route('categories.index')->with('success', trans('admin/categories/message.update.success'));
         } // attempt validation
         else {
           // The given data did not pass validation
@@ -175,7 +169,7 @@ class CategoriesController extends Controller
     * @param int $categoryId
     * @return Redirect
     */
-    public function getDelete($categoryId)
+    public function destroy($categoryId)
     {
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
@@ -218,7 +212,7 @@ class CategoriesController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function getView($categoryId = null)
+    public function show($categoryId = null)
     {
         $category = Category::find($categoryId);
 
@@ -229,7 +223,7 @@ class CategoriesController extends Controller
             $error = trans('admin/categories/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('categories')->with('error', $error);
+            return redirect()->route('categories.index')->with('error', $error);
         }
 
 
@@ -245,31 +239,31 @@ class CategoriesController extends Controller
     * @since [v1.8]
     * @return String JSON
     */
-    public function getDatatable()
+    public function getDatatable(Request $request)
     {
         // Grab all the categories
         $categories = Category::with('assets', 'accessories', 'consumables', 'components');
 
         if (Input::has('search')) {
-            $categories = $categories->TextSearch(e(Input::get('search')));
+            $categories = $categories->TextSearch(e($request->input('search')));
         }
 
         if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
 
         $allowed_columns = ['id','name','category_type'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
         $categories = $categories->orderBy($sort, $order);
 
@@ -280,16 +274,16 @@ class CategoriesController extends Controller
 
         foreach ($categories as $category) {
 
-            $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;">';
+            $actions = '<a href="'.route('categories.edit', ['category' => $category->id]).'" class="btn btn-warning btn-sm" style="margin-right:5px;">';
             $actions .='<i class="fa fa-pencil icon-white"></i></a>';
             $actions .='<a data-html="false" class="btn delete-asset btn-danger btn-sm';
             if ($category->itemCount() > 0) {
                 $actions .=' disabled';
             }
-            $actions .=' data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.trans('admin/categories/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions .=' data-toggle="modal" href="'.route('categories.destroy', ['category' => $category->id]).'" data-content="'.trans('admin/categories/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             $rows[] = array(
                 'id'      => $category->id,
-                'name'  => (string)link_to('/admin/settings/categories/'.$category->id.'/view', $category->name) ,
+                'name'  => (string)link_to_route('categories.show', $category->name, ['category' => $category->id]) ,
                 'category_type' => ucwords($category->category_type),
                 'count'         => $category->itemCount(),
                 'acceptance'    => ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : '',
@@ -303,32 +297,32 @@ class CategoriesController extends Controller
         return $data;
     }
 
-    public function getDataViewAssets($categoryID)
+    public function getDataViewAssets(Request $request, $categoryID)
     {
 
         $category = Category::find($categoryID);
         $category = $category->load('assets.company', 'assets.model', 'assets.assetstatus', 'assets.assigneduser');
         $category_assets = $category->assets();
         if (Input::has('search')) {
-            $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+            $category_assets = $category_assets->TextSearch(e($request->input('search')));
         }
 
         if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $count = $category_assets->count();
         $category_assets = $category_assets->skip($offset)->take($limit)->get();
         $rows = array();
@@ -338,7 +332,7 @@ class CategoriesController extends Controller
             $inout='';
 
             if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('hardware.edit', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('hardware.edit', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('hardware.destroy', ['aseset' => $asset->id]).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } elseif ($asset->deleted_at!='') {
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
@@ -355,7 +349,7 @@ class CategoriesController extends Controller
 
             $rows[] = array(
                 'id' => $asset->id,
-                'name' => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
+                'name' => (string)link_to_route('hardware.show', $asset->showAssetName(), ['hardware' => $asset->id]),
                 'model' => ($asset->model) ? (string)link_to('hardware/models/'.$asset->model->id.'/view', $asset->model->name) : '',
                 'asset_tag' => $asset->asset_tag,
                 'serial' => $asset->serial,
@@ -379,25 +373,25 @@ class CategoriesController extends Controller
         $category_assets = $category->accessories;
 
         if (Input::has('search')) {
-            $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+            $category_assets = $category_assets->TextSearch(e($request->input('search')));
         }
 
         if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $count = $category_assets->count();
 
         $rows = array();
@@ -433,25 +427,25 @@ class CategoriesController extends Controller
         $category_assets = $category->consumables;
 
         if (Input::has('search')) {
-            $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+            $category_assets = $category_assets->TextSearch(e($request->input('search')));
         }
 
         if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $count = $category_assets->count();
 
         $rows = array();
@@ -486,25 +480,25 @@ class CategoriesController extends Controller
         $category_assets = $category->components;
 
         if (Input::has('search')) {
-            $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+            $category_assets = $category_assets->TextSearch(e($request->input('search')));
         }
 
         if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
+            $offset = e($request->input('offset'));
         } else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
+            $limit = e($request->input('limit'));
         } else {
             $limit = 50;
         }
 
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $count = $category_assets->count();
 
         $rows = array();
