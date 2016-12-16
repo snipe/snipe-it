@@ -42,11 +42,7 @@ Route::group(
         ]);
 
         Route::post('{assetId}/clone', 'AssetsController@postCreate');
-        Route::get('{assetId}/delete', [
-            'as' => 'delete/hardware',
-            'middleware' => 'authorize:assets.delete',
-            'uses' => 'AssetsController@getDelete'
-        ]);
+
         Route::get('{assetId}/checkout', [
             'as' => 'checkout/hardware',
             'middleware' => 'authorize:assets.checkout',
