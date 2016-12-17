@@ -46,6 +46,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function hasAccess($section)
     {
+        if ($this->isSuperUser()) {
+            return true;
+        }
         $user_groups = $this->groups;
 
 
