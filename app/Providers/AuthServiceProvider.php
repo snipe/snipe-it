@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\Consumable;
 use App\Policies\AssetPolicy;
+use App\Policies\AccessoryPolicy;
+use App\Policies\ConsumablePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
@@ -20,6 +24,8 @@ class AuthServiceProvider extends ServiceProvider
         // We should switch to the below
         // App\Post::class => PostPolicy::class
         Asset::class => AssetPolicy::class,
+        Accessory::class => AccessoryPolicy::class,
+        Consumable::class => ConsumablePolicy::class
     ];
 
     /**
@@ -113,94 +119,94 @@ class AuthServiceProvider extends ServiceProvider
         # -----------------------------------------
         # Accessories
         # -----------------------------------------
-        Gate::define('accessories.view', function ($user) {
-            if (($user->hasAccess('accessories.view')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('accessories.view', function ($user) {
+        //     if (($user->hasAccess('accessories.view')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('accessories.create', function ($user) {
-            if (($user->hasAccess('accessories.create')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('accessories.create', function ($user) {
+        //     if (($user->hasAccess('accessories.create')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('accessories.edit', function ($user) {
-            if (($user->hasAccess('accessories.edit')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('accessories.edit', function ($user) {
+        //     if (($user->hasAccess('accessories.edit')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('accessories.delete', function ($user) {
-            if (($user->hasAccess('accessories.delete')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('accessories.delete', function ($user) {
+        //     if (($user->hasAccess('accessories.delete')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('accessories.checkout', function ($user) {
-            if (($user->hasAccess('accessories.checkout')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('accessories.checkout', function ($user) {
+        //     if (($user->hasAccess('accessories.checkout')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('accessories.checkin', function ($user) {
-            if (($user->hasAccess('accessories.checkin')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('accessories.checkin', function ($user) {
+        //     if (($user->hasAccess('accessories.checkin')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        // Checks for some level of management
-        Gate::define('accessories.manage', function ($user) {
-            if (($user->hasAccess('accessories.checkin')) || ($user->hasAccess('accessories.edit')) || ($user->hasAccess('accessories.checkout')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // // Checks for some level of management
+        // Gate::define('accessories.manage', function ($user) {
+        //     if (($user->hasAccess('accessories.checkin')) || ($user->hasAccess('accessories.edit')) || ($user->hasAccess('accessories.checkout')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        # -----------------------------------------
-        # Consumables
-        # -----------------------------------------
-        Gate::define('consumables.view', function ($user) {
-            if (($user->hasAccess('consumables.view')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // # -----------------------------------------
+        // # Consumables
+        // # -----------------------------------------
+        // Gate::define('consumables.view', function ($user) {
+        //     if (($user->hasAccess('consumables.view')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('consumables.create', function ($user) {
-            if (($user->hasAccess('consumables.create')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('consumables.create', function ($user) {
+        //     if (($user->hasAccess('consumables.create')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('consumables.edit', function ($user) {
-            if (($user->hasAccess('consumables.edit')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('consumables.edit', function ($user) {
+        //     if (($user->hasAccess('consumables.edit')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('consumables.delete', function ($user) {
-            if (($user->hasAccess('consumables.delete')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('consumables.delete', function ($user) {
+        //     if (($user->hasAccess('consumables.delete')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('consumables.checkout', function ($user) {
-            if (($user->hasAccess('consumables.checkout')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('consumables.checkout', function ($user) {
+        //     if (($user->hasAccess('consumables.checkout')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('consumables.checkin', function ($user) {
-            if (($user->hasAccess('consumables.checkin')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('consumables.checkin', function ($user) {
+        //     if (($user->hasAccess('consumables.checkin')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        // Checks for some level of management
-        Gate::define('consumables.manage', function ($user) {
-            if (($user->hasAccess('consumables.checkin')) || ($user->hasAccess('consumables.edit')) || ($user->hasAccess('consumables.delete')) || ($user->hasAccess('consumables.checkout')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // // Checks for some level of management
+        // Gate::define('consumables.manage', function ($user) {
+        //     if (($user->hasAccess('consumables.checkin')) || ($user->hasAccess('consumables.edit')) || ($user->hasAccess('consumables.delete')) || ($user->hasAccess('consumables.checkout')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
 
 

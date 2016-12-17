@@ -74,7 +74,7 @@ class AssetsController extends Controller
     */
     public function index()
     {
-        abort_unless(Gate::allows('assets.view'), 403);
+        $this->authorize('index', Asset::class);
         return View::make('hardware/index');
     }
 
@@ -149,7 +149,7 @@ class AssetsController extends Controller
     */
     public function store(AssetRequest $request)
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize(Asset::class);
         // create a new model instance
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find(e(Input::get('model_id'))));
@@ -292,15 +292,12 @@ class AssetsController extends Controller
     */
     public function edit($assetId = null)
     {
-
-        // Check if the asset exists
-        try {
-            $item= Asset::findOrFail($assetId);
-        } catch (ModelNotFoundException $e) {
+        if (!$item = Asset::find($assetId)) {
+            // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         //Handles company checks and permissions.
-        $this->authorize('update', $item);
+        $this->authorize($item);
 
         // Grab the dropdown lists
         $model_list = Helper::modelList();
@@ -343,7 +340,7 @@ class AssetsController extends Controller
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
-        $this->authorize('update', $asset);
+        $this->authorize($asset);
 
         if ($request->has('status_id')) {
             $asset->status_id = e($request->input('status_id'));
@@ -1429,6 +1426,9 @@ class AssetsController extends Controller
 
 
                 $assets = Asset::with('assigneduser', 'assetloc')->find($asset_ids);
+                $assets->each(function($asset) {
+                    $this->authorize('delete',$asset);
+                });
                 return View::make('hardware/bulk-delete')->with('assets', $assets);
 
              // Bulk edit
@@ -1630,7 +1630,7 @@ class AssetsController extends Controller
     public function getDatatable(Request $request, $status = null)
     {
 
-
+        $this->authorize('index', Asset::class);
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
         ->Hardware();
 
