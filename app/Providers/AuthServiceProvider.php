@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Laravel\Passport\Passport;
-use Illuminate\Support\Facades\Gate;
+use App\Models\Asset;
+use App\Policies\AssetPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
         //'App\Model' => 'App\Policies\ModelPolicy',
         // We should switch to the below
         // App\Post::class => PostPolicy::class
+        Asset::class => AssetPolicy::class,
     ];
 
     /**
@@ -28,7 +31,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
-
         // --------------------------------
         // BEFORE ANYTHING ELSE
         // --------------------------------
@@ -44,11 +46,11 @@ class AuthServiceProvider extends ServiceProvider
         // GENERAL GATES
         // These control general sections of the admin
         // --------------------------------
-        Gate::define('admin', function ($user) {
-            if ($user->hasAccess('admin')) {
-                return true;
-            }
-        });
+        // Gate::define('admin', function ($user) {
+        //     if ($user->hasAccess('admin')) {
+        //         return true;
+        //     }
+        // });
 
 
         # -----------------------------------------
@@ -70,42 +72,42 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define('assets.view.requestable', function ($user) {
-            if (($user->hasAccess('assets.view.requestable')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('assets.view.requestable', function ($user) {
+        //     if (($user->hasAccess('assets.view.requestable')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('assets.create', function ($user) {
-            if (($user->hasAccess('assets.create')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('assets.create', function ($user) {
+        //     if (($user->hasAccess('assets.create')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('assets.checkout', function ($user) {
-            if (($user->hasAccess('assets.checkout')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('assets.checkout', function ($user) {
+        //     if (($user->hasAccess('assets.checkout')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('assets.checkin', function ($user) {
-            if (($user->hasAccess('assets.checkin')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('assets.checkin', function ($user) {
+        //     if (($user->hasAccess('assets.checkin')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
-        Gate::define('assets.edit', function ($user) {
-            if (($user->hasAccess('assets.edit')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('assets.edit', function ($user) {
+        //     if (($user->hasAccess('assets.edit')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
         // Checks for some level of management
-        Gate::define('assets.manage', function ($user) {
-            if (($user->hasAccess('assets.checkin')) || ($user->hasAccess('assets.edit')) || ($user->hasAccess('assets.delete')) || ($user->hasAccess('assets.checkout')) || ($user->hasAccess('admin'))) {
-                return true;
-            }
-        });
+        // Gate::define('assets.manage', function ($user) {
+        //     if (($user->hasAccess('assets.checkin')) || ($user->hasAccess('assets.edit')) || ($user->hasAccess('assets.delete')) || ($user->hasAccess('assets.checkout')) || ($user->hasAccess('admin'))) {
+        //         return true;
+        //     }
+        // });
 
 
         # -----------------------------------------
@@ -333,8 +335,5 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
-
-
-
     }
 }

@@ -46,11 +46,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function hasAccess($section)
     {
-
-        if ($this->isSuperUser()) {
-            return true;
-        }
-
         $user_groups = $this->groups;
 
 
@@ -64,7 +59,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
             return true;
         }
-
         // If the user is explicitly denied, return false
         if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1')) {
             return false;

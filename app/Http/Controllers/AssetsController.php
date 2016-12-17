@@ -2,10 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Http\Requests\AssetRequest;
-use App\Http\Requests\AssetFileRequest;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Http\Requests\AssetCheckoutRequest;
+use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\AssetRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
@@ -14,20 +14,23 @@ use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\Location;
-use App\Models\Manufacturer; //for embedded-create
+use App\Models\Manufacturer;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Validator;
 use Artisan;
 use Auth;
+use Carbon\Carbon;
 use Config;
-use League\Csv\Reader;
 use DB;
+use Gate;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Image;
 use Input;
 use Lang;
+use League\Csv\Reader;
 use Log;
 use Mail;
 use Paginator;
@@ -35,13 +38,11 @@ use Redirect;
 use Response;
 use Slack;
 use Str;
-use Illuminate\Http\Request;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use TCPDF;
+use Validator;
 use View;
-use Carbon\Carbon;
-use Gate;
 
 /**
  * This class controls all actions related to assets for
@@ -73,6 +74,7 @@ class AssetsController extends Controller
     */
     public function index()
     {
+        abort_unless(Gate::allows('assets.view'), 403);
         return View::make('hardware/index');
     }
 
@@ -106,6 +108,7 @@ class AssetsController extends Controller
     */
     public function create($model_id = null)
     {
+        $this->authorize('create', Asset::class);
         // Grab the dropdown lists
         $model_list = Helper::modelList();
         $statuslabel_list = Helper::statusLabelList();
@@ -146,6 +149,7 @@ class AssetsController extends Controller
     */
     public function store(AssetRequest $request)
     {
+        $this->authorize('create', Asset::class);
         // create a new model instance
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find(e(Input::get('model_id'))));
@@ -290,12 +294,13 @@ class AssetsController extends Controller
     {
 
         // Check if the asset exists
-        if (!$item = Asset::find($assetId)) {
-            // Redirect to the asset management page
+        try {
+            $item= Asset::findOrFail($assetId);
+        } catch (ModelNotFoundException $e) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+        //Handles company checks and permissions.
+        $this->authorize('update', $item);
 
         // Grab the dropdown lists
         $model_list = Helper::modelList();
@@ -330,16 +335,15 @@ class AssetsController extends Controller
     * @return Redirect
     */
 
-    public function postEdit(AssetRequest $request, $assetId = null)
+    public function update(AssetRequest $request, $assetId = null)
     {
 
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+        $this->authorize('update', $asset);
 
         if ($request->has('status_id')) {
             $asset->status_id = e($request->input('status_id'));
@@ -477,9 +481,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('delete', $asset);
 
         DB::table('assets')
         ->where('id', $asset->id)
@@ -511,9 +515,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find(e($assetId)))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkout', $asset);
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = Helper::usersList();
@@ -536,11 +540,10 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         } elseif (!$asset->availableForCheckout()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
         }
+        $this->authorize('checkout', $asset);
 
         $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
@@ -583,9 +586,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkin', $asset);
         $statusLabel_list = Helper::statusLabelList();
         return View::make('hardware/checkin', compact('asset'))->with('statusLabel_list', $statusLabel_list)->with('backto', $backto);
     }
@@ -605,9 +608,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkin', $asset);
 
         $admin = Auth::user();
 
@@ -716,10 +719,8 @@ class AssetsController extends Controller
     {
         $asset = Asset::withTrashed()->find($assetId);
         $settings = Setting::getSettings();
-
-        if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif ($asset->userloc) {
+        $this->authorize('view', $asset);
+        if ($asset->userloc) {
             $use_currency = $asset->userloc->currency;
         } elseif ($asset->assetloc) {
             $use_currency = $asset->assetloc->currency;
@@ -1011,9 +1012,9 @@ class AssetsController extends Controller
         if (is_null($asset_to_clone = Asset::find($assetId))) {
             // Redirect to the asset management page
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset_to_clone)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('create',$asset_to_clone);
 
         // Grab the dropdown lists
         $model_list = Helper::modelList();
@@ -1230,12 +1231,10 @@ class AssetsController extends Controller
     public function getRestore($assetId = null)
     {
 
-        // Get user information
+        // Get asset information
         $asset = Asset::withTrashed()->find($assetId);
-
-        if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif (isset($asset->id)) {
+        $this->authorize('create',$asset); // TODO What permissions to restore a deleted asset?
+        if (isset($asset->id)) {
 
             // Restore the asset
             Asset::withTrashed()->where('id', $assetId)->restore();
@@ -1756,15 +1755,15 @@ class AssetsController extends Controller
             $inout = '';
             $actions = '<div style="white-space: nowrap;">';
             if ($asset->deleted_at=='') {
-                if (Gate::allows('assets.create')) {
+                if (Gate::allows('create', $asset)) {
                     $actions .= '<a href="' . route('clone/hardware',
                             $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i></a> ';
                 }
-                if (Gate::allows('assets.edit')) {
+                if (Gate::allows('update', $asset)) {
                     $actions .= '<a href="' . route('hardware.edit',
                             $asset->id) . '" class="btn btn-warning btn-sm" title="Edit asset" data-toggle="tooltip"><i class="fa fa-pencil icon-white"></i></a> ';
                 }
-                if (Gate::allows('assets.delete')) {
+                if (Gate::allows('delete', $asset)) {
                     $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('hardware.destroy',
                             $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
                 }

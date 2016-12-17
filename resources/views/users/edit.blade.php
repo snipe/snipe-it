@@ -75,7 +75,9 @@
 <form class="form-horizontal" method="post" autocomplete="off" action="{{ ($user) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" id="userForm">
 <!-- CSRF Token -->
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+@if($user->id)
+    {{ method_field('PUT') }}
+@endif
   <!-- Custom Tabs -->
 <div class="nav-tabs-custom">
   <ul class="nav nav-tabs">
