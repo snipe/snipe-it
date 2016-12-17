@@ -338,11 +338,11 @@ class CategoriesController extends Controller
             }
 
             if ($asset->availableForCheckout()) {
-                if (Gate::allows('assets.checkout')) {
+                if (Gate::allows('checkout', $asset)) {
                     $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
                 }
             } else {
-                if (Gate::allows('assets.checkin')) {
+                if (Gate::allows('checkin', $asset)) {
                     $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
                 }
             }

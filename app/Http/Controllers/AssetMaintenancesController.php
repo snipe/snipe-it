@@ -117,7 +117,7 @@ class AssetMaintenancesController extends Controller
 
         foreach ($maintenances as $maintenance) {
             $actions = '';
-            if (Gate::allows('assets.edit')) {
+            if (Gate::allows('update', Asset::class)) {
                 $actions .= '<nobr><a href="' . route('maintenances.edit',
                         $maintenance->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('maintenances.destroy',
                         $maintenance->id) . '" data-content="' . trans('admin/asset_maintenances/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($maintenance->title) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';

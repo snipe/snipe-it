@@ -10,27 +10,27 @@
 
 {{-- Right header --}}
 @section('header_right')
-    @can('components.manage')
-<div class="dropdown pull-right">
-  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-      <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-        @if ($component->assigned_to != '')
-          @can('components.checkin')
-          <li role="presentation"><a href="{{ route('checkin/component', $component->id) }}">{{ trans('admin/components/general.checkin') }}</a></li>
-          @endcan
-        @else
-          @can('components.checkout')
-          <li role="presentation"><a href="{{ route('checkout/component', $component->id)  }}">{{ trans('admin/components/general.checkout') }}</a></li>
-          @endcan
-        @endif
-         @can('components.edit')
-        <li role="presentation"><a href="{{ route('components.edit', $component->id) }}">{{ trans('admin/components/general.edit') }}</a></li>
-       @endcan
+    @can('manage', $component)
+        <div class="dropdown pull-right">
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+                @if ($component->assigned_to != '')
+                  @can('checkin', $component)
+                  <li role="presentation"><a href="{{ route('checkin/component', $component->id) }}">{{ trans('admin/components/general.checkin') }}</a></li>
+                  @endcan
+                @else
+                  @can('checkout', $component)
+                  <li role="presentation"><a href="{{ route('checkout/component', $component->id)  }}">{{ trans('admin/components/general.checkout') }}</a></li>
+                  @endcan
+                @endif
+                 @can('update', $component)
+                <li role="presentation"><a href="{{ route('components.edit', $component->id) }}">{{ trans('admin/components/general.edit') }}</a></li>
+               @endcan
 
-  </ul>
-</div>
+          </ul>
+        </div>
     @endcan
 @stop
 

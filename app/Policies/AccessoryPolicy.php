@@ -35,7 +35,7 @@ class AccessoryPolicy
      * @param  \App\Accessory  $accessory
      * @return mixed
      */
-    public function view(User $user, Accessory $accessory)
+    public function view(User $user, Accessory $accessory = null)
     {
         //
         return $user->hasAccess('accessories.view');
@@ -60,7 +60,7 @@ class AccessoryPolicy
      * @param  \App\Accessory  $accessory
      * @return mixed
      */
-    public function update(User $user, Accessory $accessory)
+    public function update(User $user, Accessory $accessory = null)
     {
         //
         return $user->hasAccess('accessories.edit');
@@ -73,7 +73,7 @@ class AccessoryPolicy
      * @param  \App\Accessory  $accessory
      * @return mixed
      */
-    public function delete(User $user, Accessory $accessory)
+    public function delete(User $user, Accessory $accessory = null)
     {
         //
         return $user->hasAccess('accessories.delete');
@@ -86,7 +86,7 @@ class AccessoryPolicy
      * @param  \App\Accessory  $accessory
      * @return mixed
      */
-    public function checkout(User $user, Accessory $accessory)
+    public function checkout(User $user, Accessory $accessory = null)
     {
         return $user->hasAccess('accessories.checkout');
     }
@@ -98,7 +98,7 @@ class AccessoryPolicy
      * @param  \App\Accessory  $accessory
      * @return mixed
      */
-    public function checkin(User $user, Accessory $accessory)
+    public function checkin(User $user, Accessory $accessory = null)
     {
         return $user->hasAccess('accessories.checkin');
     }
@@ -110,7 +110,7 @@ class AccessoryPolicy
      * @param  \App\Accessory  $accessory
      * @return mixed
      */
-    public function manage(User $user, Accessory $accessory)
+    public function manage(User $user, Accessory $accessory = null)
     {
         return $user->hasAccess('accessories.checkin')
              || $user->hasAccess('accessories.edit')

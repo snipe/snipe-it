@@ -11,23 +11,23 @@
 
 {{-- Right header --}}
 @section('header_right')
-    @can('assets.manage')
-<div class="dropdown pull-right">
-  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-      <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-      @if ($asset->assetstatus->deployable=='1')
-        @if ($asset->assigned_to != '')
-          <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a></li>
-        @else
-          <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a></li>
-        @endif
-      @endif
-        <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
-        <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
-  </ul>
-</div>
+    @can('manage', \App\Models\Asset::class)
+        <div class="dropdown pull-right">
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+              @if ($asset->assetstatus->deployable=='1')
+                @if ($asset->assigned_to != '')
+                  <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a></li>
+                @else
+                  <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a></li>
+                @endif
+              @endif
+                <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
+                <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
+          </ul>
+        </div>
     @endcan
 @stop
 
@@ -496,10 +496,10 @@
         <div class="tab-pane fade" id="maintenances">
           <div class="row">
             <div class="col-md-12">
-                @can('assets.edit')
-              <h6>{{ trans('general.asset_maintenances') }}
-                [ <a href="{{ route('maintenances.create', $asset->id) }}">{{ trans('button.add') }}</a> ]
-              </h6>
+                @can('update', \App\Models\Asset::class)
+                  <h6>{{ trans('general.asset_maintenances') }}
+                    [ <a href="{{ route('maintenances.create', $asset->id) }}">{{ trans('button.add') }}</a> ]
+                  </h6>
                 @endcan
 
               <!-- Asset Maintenance table -->
@@ -516,7 +516,7 @@
                         <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
                         <th>{{ trans('admin/asset_maintenances/form.cost') }}</th>
                         <th>{{ trans('general.admin') }}</th>
-                          @can('assets.edit')
+                          @can('update', \App\Models\Asset::class)
                                 <th>{{ trans('table.actions') }}</th>
                           @endcan
                       </tr>
@@ -541,10 +541,10 @@
                               @endif
                             </td>
                             <?php $totalCost += $assetMaintenance->cost; ?>
-                              @can('assets.edit')
-                            <td>
-                              <a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-                            </td>
+                              @can('update', \App\Models\Asset::class)
+                                <td>
+                                  <a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                                </td>
                               @endcan
                           </tr>
                         @endif
@@ -671,31 +671,31 @@
         <div class="tab-pane fade" id="files">
           <div class="row">
 
-              @can('assets.edit')
-            {{ Form::open([
-            'method' => 'POST',
-            'route' => ['upload/asset', $asset->id],
-            'files' => true, 'class' => 'form-horizontal' ]) }}
+            @can('update', \App\Models\Asset::class)
+                {{ Form::open([
+                'method' => 'POST',
+                'route' => ['upload/asset', $asset->id],
+                'files' => true, 'class' => 'form-horizontal' ]) }}
 
-            <div class="col-md-2">
-              <span class="btn btn-default btn-file">Browse for file...
-                  {{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
-              </span>
-            </div>
-            <div class="col-md-7">
-              {{ Form::text('notes', Input::old('notes', Input::old('notes')), array('class' => 'form-control','placeholder' => 'Notes')) }}
-            </div>
-            <div class="col-md-3">
-              <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
-            </div>
+                <div class="col-md-2">
+                  <span class="btn btn-default btn-file">Browse for file...
+                      {{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
+                  </span>
+                </div>
+                <div class="col-md-7">
+                  {{ Form::text('notes', Input::old('notes', Input::old('notes')), array('class' => 'form-control','placeholder' => 'Notes')) }}
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
+                </div>
 
-            <div class="col-md-12">
-              <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
-              <hr>
-            </div>
+                <div class="col-md-12">
+                  <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
+                  <hr>
+                </div>
 
-            {{ Form::close() }}
-              @endcan
+                {{ Form::close() }}
+            @endcan
 
             <div class="col-md-12">
 
@@ -732,8 +732,8 @@
                           @endif
                         </td>
                         <td>
-                            @can('assets.edit')
-                          <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
+                            @can('update', \App\Models\Asset::class)
+                                <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
                             @endcan
                         </td>
                       </tr>

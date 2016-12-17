@@ -23,21 +23,21 @@
           <li><a href="#files_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-paperclip"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}</span></a></li>
           <li><a href="#history_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-clock-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span></a></li>
 
-            @can('users.edit')
-          <li class="dropdown pull-right">
+            @can('update', $user)
+              <li class="dropdown pull-right">
 
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-gear"></i> {{ trans('button.actions') }}
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-               <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
-               @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
-                   <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
-               @endif
-            </ul>
-          </li>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-gear"></i> {{ trans('button.actions') }}
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
+                   <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+                   @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
+                       <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
+                   @endif
+                </ul>
+              </li>
             @endcan
         </ul>
         <div class="tab-content">
@@ -48,7 +48,7 @@
                     <div class="callout callout-warning">
                         <i class="icon fa fa-warning"></i>
                         This user has been marked as deleted.
-                        @can('users.edit')
+                        @can('update', $user)
                             <a href="{{ route('restore/user', $user->id) }}">Click here</a> to restore them.
                         @endcan
                       </div>
@@ -132,7 +132,7 @@
 
               <!-- Start button column -->
               <div class="col-md-2">
-                  @can('users.edit')
+                  @can('update', $user)
                   <div class="col-md-12">
 
                       <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.edit') }}</a>
@@ -192,14 +192,14 @@
                       @endif
                       </td>
                       <td>
-                          @can('assets.view')
+                          @can('view', $asset)
                               <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->asset_tag }}</a>
                           @endcan
                       </td>
                       <td><a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->name }}</a></td>
 
                       <td class="hidden-print">
-                          @can('assets.edit')
+                          @can('checkin', $asset)
                               <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
                           @endcan
                       </td>
@@ -228,7 +228,7 @@
                     </td>
                     <td><a href="{{ route('licenses.show', $license->id) }}">{{ mb_strimwidth($license->serial, 0, 50, "...") }}</a></td>
                     <td class="hidden-print">
-                        @can('licenses.edit')
+                        @can('update', $license)
                             <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
                          @endcan
                     </td>
@@ -252,7 +252,7 @@
                     <tr>
                         <td><a href="{{ route('accessories.show', $accessory->id) }}">{{ $accessory->name }}</a></td>
                         <td class="hidden-print">
-                            @can('accessories.edit')
+                            @can('checkin', $accessory)
                                 <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
                             @endcan
                         </td>
@@ -290,7 +290,7 @@
             </div>
             <div class="col-md-2">
             <!-- The fileinput-button span is used to style the file input field as button -->
-                @can('users.edit')
+                @can('update', $user)
                     <span class="btn btn-info fileinput-button">
                     <i class="fa fa-plus icon-white"></i>
                     <span>Select File...</span>
@@ -353,7 +353,7 @@
                             @endif
                           </td>
                           <td>
-                              @can('users.edit')
+                              @can('update', $user)
                             <a class="btn delete-asset btn-danger btn-sm" href="{{ route('users.destroyfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
                               @endcan
                           </td>

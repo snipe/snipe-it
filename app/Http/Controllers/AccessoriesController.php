@@ -570,15 +570,15 @@ class AccessoriesController extends Controller
         foreach ($accessories as $accessory) {
 
             $actions = '<nobr>';
-            if (Gate::allows('accessories.checkout')) {
+            if (Gate::allows('checkout', $accessory)) {
                 $actions .= '<a href="' . route('checkout/accessory',
                         $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
-            if (Gate::allows('accessories.edit')) {
+            if (Gate::allows('update', $accessory)) {
                 $actions .= '<a href="' . route('accessories.update',
                         $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('accessories.delete')) {
+            if (Gate::allows('delete', $accessory)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('accessories.destroy',
                         $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
@@ -586,7 +586,7 @@ class AccessoriesController extends Controller
             $company = $accessory->company;
 
             $rows[] = array(
-            'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
+            'name'          => '<a href="'.route('accessories.show',$accessory->id).'">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
             'model_number'      =>  e($accessory->model_number),
             'qty'           => e($accessory->qty),
@@ -649,12 +649,12 @@ class AccessoriesController extends Controller
 
         foreach ($accessory_users as $user) {
             $actions = '';
-            if (Gate::allows('accessories.checkin')) {
+            if (Gate::allows('checkin', $accessory)) {
                 $actions .= '<a href="' . route('checkin/accessory',
                         $user->pivot->id) . '" class="btn btn-info btn-sm">Checkin</a>';
             }
 
-            if (Gate::allows('users.view')) {
+            if (Gate::allows('view', $user)) {
                 $name = (string) link_to('/admin/users/'.$user->id.'/view', e($user->fullName()));
             } else {
                 $name = e($user->fullName());

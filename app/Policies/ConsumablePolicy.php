@@ -30,7 +30,7 @@ class ConsumablePolicy
      * @param  \App\Consumable  $consumable
      * @return mixed
      */
-    public function view(User $user, Consumable $consumable)
+    public function view(User $user, Consumable $consumable = null)
     {
         //
         return $user->hasAccess('consumables.view');
@@ -55,7 +55,7 @@ class ConsumablePolicy
      * @param  \App\Consumable  $consumable
      * @return mixed
      */
-    public function update(User $user, Consumable $consumable)
+    public function update(User $user, Consumable $consumable = null)
     {
         //
         return $user->hasAccess('consumables.edit');
@@ -68,7 +68,7 @@ class ConsumablePolicy
      * @param  \App\Consumable  $consumable
      * @return mixed
      */
-    public function delete(User $user, Consumable $consumable)
+    public function delete(User $user, Consumable $consumable = null)
     {
         //
         return $user->hasAccess('consumables.delete');
@@ -81,7 +81,7 @@ class ConsumablePolicy
      * @param  \App\Accessory  $consumable
      * @return mixed
      */
-    public function checkout(User $user, Consumable $consumable)
+    public function checkout(User $user, Consumable $consumable = null)
     {
         return $user->hasAccess('consumables.checkout');
     }
@@ -93,7 +93,7 @@ class ConsumablePolicy
      * @param  \App\Consumable  $consumable
      * @return mixed
      */
-    public function checkin(User $user, Consumable $consumable)
+    public function checkin(User $user, Consumable $consumable = null)
     {
         return $user->hasAccess('consumables.checkin');
     }
@@ -110,7 +110,7 @@ class ConsumablePolicy
      * @param  \App\Consumable  $consumable
      * @return mixed
      */
-    public function manage(User $user, Consumable $consumable)
+    public function manage(User $user, Consumable $consumable = null)
     {
         return $user->hasAccess('consumables.checkin')
              || $user->hasAccess('consumables.edit')

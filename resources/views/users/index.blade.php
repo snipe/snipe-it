@@ -15,7 +15,7 @@
 @stop
 
 @section('header_right')
-    @can('users.create')
+    @can('create', \App\Models\User::class)
         @if ($snipeSettings->ldap_enabled == 1)
           <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
         @endif
@@ -28,7 +28,7 @@
         @else
           <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
         @endif
-    @can('users.view')
+    @can('view', \App\Models\User::class)
         <a class="btn btn-default pull-right" href="{{ url('admin/users/export') }}" style="margin-right: 5px;">Export</a>
     @endcan
 
@@ -50,7 +50,7 @@
                'class' => 'form-inline' ]) }}
 
             @if (Input::get('status')!='deleted')
-                @can('users.delete')
+                @can('delete', \App\Models\User::class)
                <div id="toolbar">
                  <select name="bulk_actions" class="form-control select2" style="width: 200px;">
                      <option value="delete">Bulk Checkin &amp; Delete</option>

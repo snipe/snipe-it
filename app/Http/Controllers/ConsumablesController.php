@@ -435,16 +435,16 @@ class ConsumablesController extends Controller
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
-            if (Gate::allows('consumables.checkout')) {
+            if (Gate::allows('checkout', $consumable)) {
                 $actions .= '<a href="' . route('checkout/consumable',
                         $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
 
-            if (Gate::allows('consumables.edit')) {
+            if (Gate::allows('update', $consumable)) {
                 $actions .= '<a href="' . route('consumables.edit',
                         $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('consumables.delete')) {
+            if (Gate::allows('delete', $consumable)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('consumables.destroy',
                         $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }

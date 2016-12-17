@@ -314,11 +314,11 @@ class ManufacturersController extends Controller
             }
 
             if ($asset->availableForCheckout()) {
-                if (Gate::allows('assets.checkout')) {
+                if (Gate::allows('checkout', $asset)) {
                     $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
                 }
             } else {
-                if (Gate::allows('assets.checkin')) {
+                if (Gate::allows('checkin', $asset)) {
                     $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
                 }
             }
@@ -360,20 +360,20 @@ class ManufacturersController extends Controller
         foreach ($licenses as $license) {
             $actions = '<span style="white-space: nowrap;">';
 
-            if (Gate::allows('licenses.checkout')) {
+            if (Gate::allows('checkout', \App\Models\License::class)) {
                 $actions .= '<a href="' . route('licenses.freecheckout', $license->id)
                 . '" class="btn btn-primary btn-sm' . (($license->remaincount() > 0) ? '' : ' disabled') . '" style="margin-right:5px;">' . trans('general.checkout') . '</a> ';
             }
 
-            if (Gate::allows('licenses.create')) {
+            if (Gate::allows('create', $license)) {
                 $actions .= '<a href="' . route('clone/license', $license->id)
                 . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
             }
-            if (Gate::allows('licenses.edit')) {
+            if (Gate::allows('edit', $license)) {
                 $actions .= '<a href="' . route('licenses.edit', ['license' => $license->id])
                 . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('licenses.delete')) {
+            if (Gate::allows('delete', $license)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'
                  . route('delete/license', $license->id)
                  . '" data-content="' . trans('admin/licenses/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($license->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
@@ -433,15 +433,15 @@ class ManufacturersController extends Controller
         foreach ($accessories as $accessory) {
 
             $actions = '<nobr>';
-            if (Gate::allows('accessories.checkout')) {
+            if (Gate::allows('checkout', $accessory)) {
                 $actions .= '<a href="' . route('checkout/accessory',
                         $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
-            if (Gate::allows('accessories.edit')) {
+            if (Gate::allows('update', $accessory)) {
                 $actions .= '<a href="' . route('accessories.update',
                         $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('accessories.delete')) {
+            if (Gate::allows('delete', $accessory)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('accessories.destroy',
                         $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
@@ -497,16 +497,16 @@ class ManufacturersController extends Controller
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
-            if (Gate::allows('consumables.checkout')) {
+            if (Gate::allows('checkout', $consumable)) {
                 $actions .= '<a href="' . route('checkout/consumable',
                         $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
 
-            if (Gate::allows('consumables.edit')) {
+            if (Gate::allows('update', $consumable)) {
                 $actions .= '<a href="' . route('consumables.edit',
                         $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('consumables.delete')) {
+            if (Gate::allows('delete', $consumable)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('consumables.destroy',
                         $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }

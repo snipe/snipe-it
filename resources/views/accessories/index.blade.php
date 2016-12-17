@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    @can('accessories.create')
+    @can('create', \App\Models\Accessory::class)
         <a href="{{ route('accessories.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
     @endcan
 @stop

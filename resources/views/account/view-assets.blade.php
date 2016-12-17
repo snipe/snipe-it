@@ -102,7 +102,7 @@ View Assets for  {{ $user->fullName() }}
                       <td>{{ $license->name }}</td>
                       <td>
 
-                          @can('licenses.keys')
+                          @can('viewKeys', $license)
 
                              {{ mb_strimwidth($license->serial, 0, 50, "...") }}
                             @else

@@ -3,25 +3,24 @@
 /*
 * Accessories
  */
-Route::group([ 'prefix' => 'accessories', 'middleware'=>'authorize:accessories.view'  ], function () {
-
+Route::group([ 'prefix' => 'accessories', ], function () {
 
     Route::get(
         '{accessoryID}/checkout',
-        [ 'as' => 'checkout/accessory', 'middleware' => 'authorize:accessories.checkout','uses' => 'AccessoriesController@getCheckout' ]
+        [ 'as' => 'checkout/accessory', 'uses' => 'AccessoriesController@getCheckout' ]
     );
     Route::post(
         '{accessoryID}/checkout',
-        [ 'as' => 'checkout/accessory', 'middleware' => 'authorize:accessories.checkout','uses' => 'AccessoriesController@postCheckout' ]
+        [ 'as' => 'checkout/accessory', 'uses' => 'AccessoriesController@postCheckout' ]
     );
 
     Route::get(
         '{accessoryID}/checkin/{backto?}',
-        [ 'as' => 'checkin/accessory', 'middleware' => 'authorize:accessories.checkin','uses' => 'AccessoriesController@getCheckin' ]
+        [ 'as' => 'checkin/accessory', 'uses' => 'AccessoriesController@getCheckin' ]
     );
     Route::post(
         '{accessoryID}/checkin/{backto?}',
-        [ 'as' => 'checkin/accessory', 'middleware' => 'authorize:accessories.checkin','uses' => 'AccessoriesController@postCheckin' ]
+        [ 'as' => 'checkin/accessory', 'uses' => 'AccessoriesController@postCheckin' ]
     );
 
 });

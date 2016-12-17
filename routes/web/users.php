@@ -1,17 +1,17 @@
 <?php
 
 # User Management
-Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth','authorize:users.view']], function () {
+Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth']], function () {
 
-    Route::get('ldap', ['as' => 'ldap/user', 'uses' => 'UsersController@getLDAP', 'middleware' => ['authorize:users.edit'] ]);
+    Route::get('ldap', ['as' => 'ldap/user', 'uses' => 'UsersController@getLDAP' ]);
     Route::post('ldap', 'UsersController@postLDAP');
-    Route::get('import', [ 'as' => 'import/user', 'uses' => 'UsersController@getImport', 'middleware' => ['authorize:users.edit']  ]);
-    Route::post('import', [ 'uses' => 'UsersController@postImport', 'middleware' => ['authorize:users.edit']  ]);
-    Route::get('export', [ 'uses' => 'UsersController@getExportUserCsv', 'middleware' => ['authorize:users.view']  ]);
-    Route::get('{userId}/clone', [ 'as' => 'clone/user', 'uses' => 'UsersController@getClone', 'middleware' => ['authorize:users.edit']  ]);
-    Route::post('{userId}/clone', [ 'uses' => 'UsersController@postCreate', 'middleware' => ['authorize:users.edit']  ]);
-    Route::get('{userId}/restore', [ 'as' => 'restore/user', 'uses' => 'UsersController@getRestore', 'middleware' => ['authorize:users.edit']  ]);
-    Route::get('{userId}/unsuspend', [ 'as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend', 'middleware' => ['authorize:users.edit'] ]);
+    Route::get('import', [ 'as' => 'import/user', 'uses' => 'UsersController@getImport' ]);
+    Route::post('import', [ 'uses' => 'UsersController@postImport' ]);
+    Route::get('export', [ 'uses' => 'UsersController@getExportUserCsv' ]);
+    Route::get('{userId}/clone', [ 'as' => 'clone/user', 'uses' => 'UsersController@getClone' ]);
+    Route::post('{userId}/clone', [ 'uses' => 'UsersController@postCreate' ]);
+    Route::get('{userId}/restore', [ 'as' => 'restore/user', 'uses' => 'UsersController@getRestore' ]);
+    Route::get('{userId}/unsuspend', [ 'as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend' ]);
     Route::get(
         '{userId}/deletefile/{fileId}',
         [ 'as' => 'delete/userfile', 'uses' => 'UsersController@getDeleteFile' ]
@@ -26,7 +26,6 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth','authorize:use
         [
             'as'   => 'users/bulkedit',
             'uses' => 'UsersController@postBulkEdit',
-            'middleware' => ['authorize:users.edit'],
         ]
     );
     Route::post(
@@ -34,7 +33,6 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth','authorize:use
         [
             'as'   => 'users/bulksave',
             'uses' => 'UsersController@postBulkSave',
-            'middleware' => ['authorize:users.edit'],
         ]
     );
 

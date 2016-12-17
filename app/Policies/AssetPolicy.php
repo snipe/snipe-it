@@ -41,7 +41,7 @@ class AssetPolicy
         return $user->hasAccess('assets.view');
     }
 
-    public function viewRequestable(User $user, Asset $asset)
+    public function viewRequestable(User $user, Asset $asset=null)
     {
         return $user->hasAccess('assets.view.requestable');
     }
@@ -51,21 +51,21 @@ class AssetPolicy
         return $user->hasAccess('assets.create');
     }
 
-    public function checkout(User $user, Asset $asset)
+    public function checkout(User $user, Asset $asset = null)
     {
         return $user->hasAccess('assets.checkout');
     }
 
-    public function checkin(User $user, Asset $asset)
+    public function checkin(User $user, Asset $asset = null)
     {
         return $user->hasAccess('assets.checkin');
     }
 
-    public function delete(User $user, Asset $asset)
+    public function delete(User $user, Asset $asset = null)
     {
         return $user->hasAccess('assets.delete');
     }
-    public function manage(User $user, Asset $asset)
+    public function manage(User $user, Asset $asset = null)
     {
         return $user->hasAccess('assets.checkin')
                 || $user->hasAccess('assets.edit')
@@ -73,7 +73,7 @@ class AssetPolicy
                 || $user->hasAccess('assets.checkout');
     }
 
-    public function update(User $user, Asset $asset)
+    public function update(User $user, Asset $asset = null)
     {
         return $user->hasAccess('assets.edit');
     }

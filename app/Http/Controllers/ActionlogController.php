@@ -9,7 +9,7 @@ class ActionlogController extends Controller
 {
     public function displaySig($filename)
     {
-
+        $this->authorize('view', \App\Models\Asset::class);
         $file = config('app.private_uploads') . '/signatures/' . $filename;
         $filetype = Helper::checkUploadIsImage($file);
         $contents = file_get_contents($file);
