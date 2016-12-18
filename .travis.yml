@@ -43,7 +43,7 @@ after_success:
   - codecov
 
 after_failure:
-  - cat tests/_output/AccessoriesCept.fail.html
+  - cat tests/_output/*.fail.html
   - curl http://localhost:8000/login
   - cat storage/logs/laravel.log
 
