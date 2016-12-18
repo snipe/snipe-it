@@ -71,7 +71,7 @@ class ComponentsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a component');
-        $I->amOnPage(route('components.destroy', $I->getComponentId()));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('components.destroy', $I->getComponentId()), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

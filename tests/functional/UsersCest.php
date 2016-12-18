@@ -92,13 +92,13 @@ class UsersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a user');
-        $I->amOnPage(route('users.destroy', User::doesntHave('assets')
-                                        ->doesntHave('accessories')
-                                        ->doesntHave('consumables')
-                                        ->doesntHave('licenses')
-                                        ->where('username', '!=', 'snipeit')
-                                        ->first()->id
-        ));
-        $I->seeElement('.alert-success');
+        $userId = User::doesntHave('assets')
+                    ->doesntHave('accessories')
+                    ->doesntHave('consumables')
+                    ->doesntHave('licenses')
+                    ->where('username', '!=', 'snipeit')
+                    ->first()->id;
+        $I->sendDelete(route('users.destroy', $userId), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

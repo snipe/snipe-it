@@ -57,11 +57,11 @@ class ManufacturersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a manufacturer');
-        $I->amOnPage(route('manufacturers.destroy', Manufacturer::doesntHave('models')
-                                                ->doesntHave('accessories')
-                                                ->doesntHave('consumables')
-                                                ->doesntHave('licenses')->first()->id
-        ));
-        $I->seeElement('.alert-success');
+        $manufacturerId = Manufacturer::doesntHave('models')
+                            ->doesntHave('accessories')
+                            ->doesntHave('consumables')
+                            ->doesntHave('licenses')->first()->id;
+        $I->sendDelete(route('manufacturers.destroy', $manufacturerId), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

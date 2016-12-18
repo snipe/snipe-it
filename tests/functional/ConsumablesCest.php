@@ -71,7 +71,7 @@ class ConsumablesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a consumable');
-        $I->amOnPage(route('consumables.destroy', $I->getConsumableId()));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('consumables.destroy', $I->getConsumableId()), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

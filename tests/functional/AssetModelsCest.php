@@ -56,9 +56,8 @@ class AssetModelsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an asset model');
-        // 6 is the only one without an assigned asset.  This is fragile.
-        $I->amOnPage(route('models.destroy', $I->getEmptyModelId()));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('models.destroy', $I->getEmptyModelId()), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 
 }
