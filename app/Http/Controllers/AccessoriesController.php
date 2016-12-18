@@ -655,7 +655,7 @@ class AccessoriesController extends Controller
             }
 
             if (Gate::allows('view', $user)) {
-                $name = (string) link_to_route('users.show', e($user->fullName(), $user->id));
+                $name = (string) link_to_route('users.show', e($user->fullName()), [$user->id]);
             } else {
                 $name = e($user->fullName());
             }

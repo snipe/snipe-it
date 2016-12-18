@@ -111,27 +111,17 @@ class AssetsController extends Controller
     {
         $this->authorize('create', Asset::class);
         // Grab the dropdown lists
-        $model_list = Helper::modelList();
-        $statuslabel_list = Helper::statusLabelList();
-        $location_list = Helper::locationsList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
-        $supplier_list = Helper::suppliersList();
-        $company_list = Helper::companyList();
-        $assigned_to = Helper::usersList();
-        $statuslabel_types = Helper::statusTypeList();
-
         $view = View::make('hardware/edit');
-        $view->with('supplier_list', $supplier_list);
-        $view->with('company_list', $company_list);
-        $view->with('model_list', $model_list);
-        $view->with('statuslabel_list', $statuslabel_list);
-        $view->with('assigned_to', $assigned_to);
-        $view->with('location_list', $location_list);
+        $view->with('supplier_list', Helper::suppliersList());
+        $view->with('company_list', Helper::companyList());
+        $view->with('model_list', Helper::modelList());
+        $view->with('statuslabel_list', Helper::statusLabelList());
+        $view->with('assigned_to', Helper::usersList());
+        $view->with('location_list', Helper::locationsList());
         $view->with('item', new Asset);
-        $view->with('manufacturer', $manufacturer_list);
-        $view->with('category', $category_list);
-        $view->with('statuslabel_types', $statuslabel_types);
+        $view->with('manufacturer', Helper::manufacturerList());
+        $view->with('category', Helper::categoryList('asset'));
+        $view->with('statuslabel_types', Helper::statusTypeList());
 
         if (!is_null($model_id)) {
             $selected_model = AssetModel::find($model_id);
