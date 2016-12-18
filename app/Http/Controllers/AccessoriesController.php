@@ -333,7 +333,7 @@ class AccessoriesController extends Controller
                 'fields' => [
                   [
                   'title' => 'Checked Out:',
-                  'value' => 'Accessory <'.url('/').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.url('/').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.url('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                  'value' => 'Accessory <'.route('accessories.show', $accessory->id).'|'.$accessory->name.'> checked out to <'.route('users.show', $user->id).'|'.$user->fullName().'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->fullName().'>.'
                   ],
                   [
                       'title' => 'Note:',
@@ -447,7 +447,7 @@ class AccessoriesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked In:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.url('/').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.url('/').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.route('accessories.show', $accessory->id).'|'.e($accessory->name).'> checked in by <'.route('users.show', $admin_user->id).'|'.e($admin_user->fullName()).'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -598,7 +598,7 @@ class AccessoriesController extends Controller
             'numRemaining'  => $accessory->numRemaining(),
             'actions'       => $actions,
             'companyName'   => is_null($company) ? '' : e($company->name),
-            'manufacturer'      => $accessory->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$accessory->manufacturer_id.'/view', $accessory->manufacturer->name) : ''
+            'manufacturer'      => $accessory->manufacturer ? (string) link_to(route('manufacturers.show', $accessory->manufacturer_id), $accessory->manufacturer->name) : ''
 
             );
         }
@@ -655,7 +655,7 @@ class AccessoriesController extends Controller
             }
 
             if (Gate::allows('view', $user)) {
-                $name = (string) link_to('/admin/users/'.$user->id.'/view', e($user->fullName()));
+                $name = (string) link_to_route('users.show', e($user->fullName(), $user->id));
             } else {
                 $name = e($user->fullName());
             }

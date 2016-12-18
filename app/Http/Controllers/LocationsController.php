@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Input;
 use Lang;
 use App\Models\Location;
+use phpDocumentor\Reflection\Types\Array_;
 use Redirect;
 use App\Models\Setting;
 use App\Models\User;
@@ -354,15 +355,16 @@ class LocationsController extends Controller
 
 
     /**
-    * Returns a JSON response that contains the users association with the
-    * selected location, to be used by the location detail view.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::getView() method that creates the display view
-    * @param int $locationId
-    * @since [v1.8]
-    * @return View
-    */
+     * Returns a JSON response that contains the users association with the
+     * selected location, to be used by the location detail view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LocationsController::getView() method that creates the display view
+     * @param $locationID
+     * @return array
+     * @internal param int $locationId
+     * @since [v1.8]
+     */
     public function getDataViewUsers($locationID)
     {
         $location = Location::find($locationID);
@@ -377,7 +379,7 @@ class LocationsController extends Controller
 
         foreach ($users as $user) {
             $rows[] = array(
-              'name' => (string)link_to('/admin/users/'.$user->id.'/view', e($user->fullName()))
+              'name' => (string)link_to_route('users.show', e($user->fullName()), ['user'=>$user->id])
               );
         }
 

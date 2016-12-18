@@ -498,7 +498,7 @@
             <div class="col-md-12">
                 @can('update', \App\Models\Asset::class)
                   <h6>{{ trans('general.asset_maintenances') }}
-                    [ <a href="{{ route('maintenances.create', $asset->id) }}">{{ trans('button.add') }}</a> ]
+                    [ <a href="{{ route('maintenances.edit', ['asset_id'=>$asset->id]) }}">{{ trans('button.add') }}</a> ]
                   </h6>
                 @endcan
 
@@ -537,13 +537,13 @@
                             <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
                             <td>
                               @if ($assetMaintenance->admin)
-                                <a href="{{ url('/')  }}/admin/users/{{ $assetMaintenance->admin->id }}/view">{{ $assetMaintenance->admin->fullName() }}</a>
+                                <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->fullName() }}</a>
                               @endif
                             </td>
                             <?php $totalCost += $assetMaintenance->cost; ?>
                               @can('update', \App\Models\Asset::class)
                                 <td>
-                                  <a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                                  <a href="{{ route('maintenances.edit', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                                 </td>
                               @endcan
                           </tr>

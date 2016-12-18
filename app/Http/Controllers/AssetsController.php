@@ -660,7 +660,11 @@ class AssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.url('/').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
+                                    'value' => class_basename(
+                                        strtoupper($logaction->item_type))
+                                        .' asset <'.route('hardware.show', $asset->id).'|'.e($asset->showAssetName())
+                                        .'> checked in by <'.route('users.show',Auth::user()->id)
+                                        .'|'.e(Auth::user()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -1785,18 +1789,30 @@ class AssetsController extends Controller
 
             $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
-            'id'        => $asset->id,
-            'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.url('/').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.url('/').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
-            'name'          => '<a title="'.e($asset->name).'" href="hardware/'.$asset->id.'/view">'.e($asset->name).'</a>',
-            'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
+            'id'            => $asset->id,
+            'image'         => (($asset->image) && ($asset->image!=''))
+                                    ? '<img src="'.url('/').'/uploads/assets/'.$asset->image.'" height=50 width=50>'
+                                    : ((($asset->model) && ($asset->model->image!=''))
+                                        ? '<img src="'.url('/').'/uploads/models/'.$asset->model->image.'" height=40 width=50>'
+                                        : ''
+                                    ),
+            'name'          => (string) link_to_route('hardware.show', e($asset->name), $asset->id),
+            'asset_tag'     => (string) link_to_route('hardware.show', e($asset->asset_tag), $asset->id),
             'serial'        => e($asset->serial),
-            'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
+            'model'         => ($asset->model) ? (string)link_to_route('models.show', e($asset->model->name), ['model' => $asset->model->id]) : 'No model',
             'model_number'  => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
-            'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
-            'assigned_to'        => ($asset->assigneduser) ? (string)link_to(url('/').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
-            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
-            'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
-            'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
+            'status_label'  => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
+            'assigned_to'   => ($asset->assigneduser) ? (string)link_to_route('users.show', e($asset->assigneduser->fullName()), ['user' => $asset->assigned_to]) : '',
+            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!=''))
+                                    ? (string)link_to_route('locations.show', e($asset->assigneduser->userloc->name), ['location' => $asset->assigneduser->userloc->id])
+                                    : (($asset->defaultLoc!='')
+                                        ? (string)link_to_route('locations.show', e($asset->defaultLoc->name), ['location' => $asset->defaultLoc->id])
+                                        : ''
+                                    ),
+            'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to_route('categories.show', e($asset->model->category->name), ['category' => $asset->model->category->id]) : '',
+            'manufacturer'  => (($asset->model) && ($asset->model->manufacturer))
+                                        ? (string)link_to_route('manufacturers.show', e($asset->model->manufacturer->name), ['manufacturer' => $asset->model->manufacturer->id])
+                                        : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'purchase_cost'           => $purchase_cost,
             'purchase_date'           => ($asset->purchase_date) ? $asset->purchase_date : '',
@@ -1804,7 +1820,7 @@ class AssetsController extends Controller
             'order_number'  => ($asset->order_number!='') ? '<a href="'.url('/').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
-            'created_at' => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
+            'created_at'    => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)

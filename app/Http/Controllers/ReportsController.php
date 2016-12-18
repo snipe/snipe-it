@@ -386,7 +386,7 @@ class ReportsController extends Controller
                 'icon'          => '<i class="'.$activity->parseItemIcon().'"></i>',
                 'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
                 'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
-                'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : '',
+                'admin'         =>  $activity->user ? (string) link_to_route('users.show', $activity->user->fullName(), [$activity->user_id]) : '',
                 'target'          => $activity_target,
                 'item'          => $activity_item,
                 'item_type'     => $item_type,

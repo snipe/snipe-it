@@ -178,7 +178,9 @@ class Asset extends Depreciable
                 'fields' => [
                 [
                   'title' => 'Checked Out:',
-                  'value' => 'HARDWARE asset <'.config('app.url').'/hardware/'.$this->id.'/view'.'|'.$this->showAssetName().'> checked out to <'.config('app.url').'/admin/users/'.$this->assigned_to.'/view|'.$this->assigneduser->fullName().'> by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.$admin->fullName().'>.'
+                  'value' => 'HARDWARE asset <'.route('hardware.show', $this->id).'|'.$this->showAssetName()
+                            .'> checked out to <'.route('users.show', $this->assigned_to).'|'.$this->assigneduser->fullName()
+                            .'> by <'.route('users.show', Auth::user()->id).'|'.$admin->fullName().'>.'
                 ],
                 [
                     'title' => 'Note:',

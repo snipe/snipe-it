@@ -2,7 +2,9 @@
 
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\Component;
 use App\Models\Consumable;
+use App\Models\License;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -15,46 +17,52 @@ class PermissionsTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        $this->hardwareId = Asset::first()->id;
         $this->noHardware = [
-            'hardware.index' => 403,
-            'hardware.create' => 403,
-            'hardware.edit' => 403,
-            'hardware.show' => 403,
+            route('hardware.index') => 403,
+            route('hardware.create') => 403,
+            route('hardware.edit', $this->hardwareId) => 403,
+            route('hardware.show', $this->hardwareId) => 403,
         ];
 
+        $this->licenseId = License::first()->id;
         $this->noLicenses = [
-            'licenses.index' => 403,
-            'licenses.create' => 403,
-            'licenses.edit' => 403,
-            'licenses.show' => 403,
+            route('licenses.index') => 403,
+            route('licenses.create') => 403,
+            route('licenses.edit', $this->licenseId) => 403,
+            route('licenses.show', $this->licenseId) => 403,
         ];
 
+        $this->accessoryId = Accessory::first()->id;
         $this->noAccessories = [
-            'accessories.index' => 403,
-            'accessories.create' => 403,
-            'accessories.edit' => 403,
-            'accessories.show' => 403,
+            route('accessories.index') => 403,
+            route('accessories.create') => 403,
+            route('accessories.edit', $this->accessoryId) => 403,
+            route('accessories.show', $this->accessoryId) => 403,
         ];
 
+        $this->consumableId = Consumable::first()->id;
         $this->noConsumables = [
-            'consumables.index' => 403,
-            'consumables.create' => 403,
-            'consumables.edit' => 403,
-            'consumables.show' => 403,
+            route('consumables.index') => 403,
+            route('consumables.create') => 403,
+            route('consumables.edit', $this->consumableId) => 403,
+            route('consumables.show', $this->consumableId) => 403,
         ];
 
+        $this->componentId = Component::first()->id;
         $this->noComponents = [
-            'components.index' => 403,
-            'components.create' => 403,
-            'components.edit' => 403,
-            'components.show' => 403,
+            route('components.index') => 403,
+            route('components.create') => 403,
+            route('components.edit', $this->componentId) => 403,
+            route('components.show', $this->componentId) => 403,
         ];
 
+        $this->userId = User::first()->id;
         $this->noUsers = [
-            'users.index' => 403,
-            'users.create' => 403,
-            'users.edit' => 403,
-            'users.show' => 403,
+            route('users.index') => 403,
+            route('users.create') => 403,
+            route('users.edit', $this->userId) => 403,
+            route('users.show', $this->userId) => 403,
         ];
 
     }
@@ -68,6 +76,14 @@ class PermissionsTest extends TestCase
     private $noConsumables;
     private $noComponents;
     private $noUsers;
+
+    // An existing id for each type;
+    private $hardwareId;
+    private $licenseId;
+    private $accessoryId;
+    private $consumableId;
+    private $componentId;
+    private $userId;
     // tests
     /**
      * @test
@@ -90,10 +106,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'hardware.index' => 200,
-            'hardware.create' => 403,
-            'hardware.edit' => 403,
-            'hardware.show' => 200,
+            route('hardware.index') => 200,
+            route('hardware.create') => 403,
+            route('hardware.edit', $this->hardwareId) => 403,
+            route('hardware.show', $this->hardwareId) => 200,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -107,10 +123,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'hardware.index' => 403,
-            'hardware.create' => 200,
-            'hardware.edit' => 403,
-            'hardware.show' => 403,
+            route('hardware.index') => 403,
+            route('hardware.create') => 200,
+            route('hardware.edit', $this->hardwareId) => 403,
+            route('hardware.show', $this->hardwareId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -125,10 +141,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'hardware.index' => 403,
-            'hardware.create' => 403,
-            'hardware.edit' => 200,
-            'hardware.show' => 403,
+            route('hardware.index') => 403,
+            route('hardware.create') => 403,
+            route('hardware.edit', $this->hardwareId) => 200,
+            route('hardware.show', $this->hardwareId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -142,10 +158,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'licenses.index' => 200,
-            'licenses.create' => 403,
-            'licenses.edit' => 403,
-            'licenses.show' => 200,
+            route('licenses.index') => 200,
+            route('licenses.create') => 403,
+            route('licenses.edit', $this->licenseId) => 403,
+            route('licenses.show', $this->licenseId) => 200,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -159,10 +175,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'licenses.index' => 403,
-            'licenses.create' => 200,
-            'licenses.edit' => 403,
-            'licenses.show' => 403,
+            route('licenses.index') => 403,
+            route('licenses.create') => 200,
+            route('licenses.edit', $this->licenseId) => 403,
+            route('licenses.show', $this->licenseId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -176,10 +192,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'licenses.index' => 403,
-            'licenses.create' => 403,
-            'licenses.edit' => 200,
-            'licenses.show' => 403,
+            route('licenses.index') => 403,
+            route('licenses.create') => 403,
+            route('licenses.edit', $this->licenseId) => 200,
+            route('licenses.show', $this->licenseId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -194,10 +210,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'accessories.index' => 200,
-            'accessories.create' => 403,
-            'accessories.edit' => 403,
-            'accessories.show' => 200,
+            route('accessories.index') => 200,
+            route('accessories.create') => 403,
+            route('accessories.edit', $this->accessoryId) => 403,
+            route('accessories.show', $this->accessoryId) => 200,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -212,10 +228,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'accessories.index' => 403,
-            'accessories.create' => 200,
-            'accessories.edit' => 403,
-            'accessories.show' => 403,
+            route('accessories.index') => 403,
+            route('accessories.create') => 200,
+            route('accessories.edit', $this->accessoryId) => 403,
+            route('accessories.show', $this->accessoryId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -230,10 +246,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'accessories.index' => 403,
-            'accessories.create' => 403,
-            'accessories.edit' => 200,
-            'accessories.show' => 403,
+            route('accessories.index') => 403,
+            route('accessories.create') => 403,
+            route('accessories.edit', $this->accessoryId) => 200,
+            route('accessories.show', $this->accessoryId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -248,10 +264,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'consumables.index' => 200,
-            'consumables.create' => 403,
-            'consumables.edit' => 403,
-            'consumables.show' => 200,
+            route('consumables.index') => 200,
+            route('consumables.create') => 403,
+            route('consumables.edit', $this->consumableId) => 403,
+            route('consumables.show', $this->consumableId) => 200,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -266,10 +282,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'consumables.index' => 403,
-            'consumables.create' => 200,
-            'consumables.edit' => 403,
-            'consumables.show' => 403,
+            route('consumables.index') => 403,
+            route('consumables.create') => 200,
+            route('consumables.edit', $this->consumableId) => 403,
+            route('consumables.show', $this->consumableId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -284,10 +300,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'consumables.index' => 403,
-            'consumables.create' => 403,
-            'consumables.edit' => 200,
-            'consumables.show' => 403,
+            route('consumables.index') => 403,
+            route('consumables.create') => 403,
+            route('consumables.edit', $this->consumableId) => 200,
+            route('consumables.show', $this->consumableId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -302,10 +318,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
-            'users.index' => 200,
-            'users.create' => 403,
-            'users.edit' => 403,
-            'users.show' => 200,
+            route('users.index') => 200,
+            route('users.create') => 403,
+            route('users.edit', $this->userId) => 403,
+            route('users.show', $this->userId) => 200,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -320,10 +336,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
-            'users.index' => 403,
-            'users.create' => 200,
-            'users.edit' => 403,
-            'users.show' => 403,
+            route('users.index') => 403,
+            route('users.create') => 200,
+            route('users.edit', $this->userId) => 403,
+            route('users.show', $this->userId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -338,10 +354,10 @@ class PermissionsTest extends TestCase
                 $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
-            'users.index' => 403,
-            'users.create' => 403,
-            'users.edit' => 200,
-            'users.show' => 403,
+            route('users.index') => 403,
+            route('users.create') => 403,
+            route('users.edit', $this->userId) => 200,
+            route('users.show', $this->userId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -356,10 +372,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'components.index' => 200,
-            'components.create' => 403,
-            'components.edit' => 403,
-            'components.show' => 200,
+            route('components.index') => 200,
+            route('components.create') => 403,
+            route('components.edit', $this->componentId) => 403,
+            route('components.show', $this->componentId) => 200,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -373,10 +389,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'components.index' => 403,
-            'components.create' => 200,
-            'components.edit' => 403,
-            'components.show' => 403,
+            route('components.index') => 403,
+            route('components.create') => 200,
+            route('components.edit', $this->componentId) => 403,
+            route('components.show', $this->componentId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -391,10 +407,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            'components.index' => 403,
-            'components.create' => 403,
-            'components.edit' => 200,
-            'components.show' => 403,
+            route('components.index') => 403,
+            route('components.create') => 403,
+            route('components.edit', $this->componentId) => 200,
+            route('components.show', $this->componentId) => 403,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -405,16 +421,16 @@ class PermissionsTest extends TestCase
         // dd($user);
         foreach ($routes as $route => $response) {
             // $this->log($route);
-            if (strpos($route, 'edit') || strpos($route, 'show') || strpos($route, 'destroy')) {
-                // ($this->get(route($route,2))->dump());
-                $this->get(route($route, 1))
-                    ->assertResponseStatus($response);
-            } else {
+//            if (strpos($route, 'edit') || strpos($route, 'show') || strpos($route, 'destroy')) {
+//                // ($this->get(route($route,2))->dump());
+//                $this->get(route($route, 1))
+//                    ->assertResponseStatus($response);
+//            } else {
                 // dd($this->get(route($route)));
                 // echo($this->get(route($route))->dump());
-                $this->get(route($route))
+                $this->get($route)
                     ->assertResponseStatus($response);
-            }
+//            }
         }
     }
 

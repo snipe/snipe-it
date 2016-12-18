@@ -359,7 +359,10 @@ class ComponentsController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.route('components.show', ['component' => $component->id]).'|'.$component->name.'> checked out to <'.url('/').'/hardware/'.$asset->id.'|'.$asset->showAssetName().'> by <'.url('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type))
+                                            .' <'.route('components.show', ['component' => $component->id]).'|'.$component->name
+                                            .'> checked out to <'.route('hardware.show', $asset->id).'|'.$asset->showAssetName()
+                                            .'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',

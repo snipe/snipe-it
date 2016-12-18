@@ -944,7 +944,7 @@ class UsersController extends Controller
             $actions = '<nobr>';
 
             foreach ($user->groups as $group) {
-                $group_names .= '<a href="' . \url('/') . '/admin/groups/' . $group->id . '/edit" class="label  label-default">' . $group->name . '</a> ';
+                $group_names .= '<a href="' . route('update/group', $group->id) . '" class="label  label-default">' . $group->name . '</a> ';
             }
 
 

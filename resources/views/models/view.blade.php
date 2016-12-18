@@ -98,7 +98,7 @@
 
       @if ($model->fieldset)
       <li>{{ trans('admin/models/general.fieldset') }}:
-          <a href="{{ url('/') }}/admin/custom_fields/{{ $model->fieldset->id }}">{{ $model->fieldset->name }}</a>
+          <a href="{{ route('fieldsets.show', $model->fieldset->id) }}">{{ $model->fieldset->name }}</a>
       </li>
 
       @endif

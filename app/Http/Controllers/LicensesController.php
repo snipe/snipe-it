@@ -689,7 +689,8 @@ class LicensesController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => 'License: <'.url('/').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.url('/').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
+                                    'value' => 'License: <'.route('licenses.show', $license->id).'|'.$license->name
+                                        .'> checked in by <'.route('users.show', $user->id).'|'.$user->fullName().'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
