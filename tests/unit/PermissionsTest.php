@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PermissionsTest extends TestCase
 {
-    // use DatabaseMigrations;
+    use DatabaseMigrations;
     use DatabaseTransactions;
     public function setUp()
     {
@@ -76,7 +76,7 @@ class PermissionsTest extends TestCase
     {
         $u = factory(App\Models\User::class, 'valid-user')->create();
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
-
+        // $permissions = $this->noHardware;
         $this->hitRoutes($permissions, $u);
 
     }
@@ -402,11 +402,12 @@ class PermissionsTest extends TestCase
     private function hitRoutes(array $routes, User $user)
     {
         $this->actingAs($user);
+        // dd($user);
         foreach ($routes as $route => $response) {
             // $this->log($route);
             if (strpos($route, 'edit') || strpos($route, 'show') || strpos($route, 'destroy')) {
-                // ($this->get(route($route,1))->dump());
-                $this->get(route($route, 5))
+                // ($this->get(route($route,2))->dump());
+                $this->get(route($route, 4))
                     ->assertResponseStatus($response);
             } else {
                 // dd($this->get(route($route)));
