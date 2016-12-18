@@ -264,7 +264,7 @@ class AccessoriesController extends Controller
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return redirect()->to('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
 
         $this->authorize('checkout', $accessory);
@@ -484,9 +484,9 @@ class AccessoriesController extends Controller
             }
 
             if ($backto=='user') {
-                return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/accessories/message.checkin.success'));
+                return redirect()->route("users.show", $return_to)->with('success', trans('admin/accessories/message.checkin.success'));
             } else {
-                return redirect()->to("admin/accessories/".$accessory->id."/view")->with('success', trans('admin/accessories/message.checkin.success'));
+                return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
             }
         }
 

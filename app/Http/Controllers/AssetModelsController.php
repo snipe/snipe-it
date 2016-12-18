@@ -176,7 +176,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($item = AssetModel::find($modelId))) {
             // Redirect to the model management page
-            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $depreciation_list = Helper::depreciationList();
@@ -205,7 +205,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the models management page
-            return redirect()->to('admin/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
 
@@ -276,8 +276,7 @@ class AssetModelsController extends Controller
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
-            // Redirect to the blogs management page
-            return redirect()->to('hardware/models')->with('error', trans('admin/models/message.not_found'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.not_found'));
         }
 
         if ($model->assets->count() > 0) {
@@ -363,8 +362,7 @@ class AssetModelsController extends Controller
     {
         // Check if the model exists
         if (is_null($model_to_clone = AssetModel::find($modelId))) {
-            // Redirect to the model management page
-            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $model = clone $model_to_clone;
