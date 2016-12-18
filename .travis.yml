@@ -14,18 +14,18 @@ php:
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
   - phantomjs --webdriver=4444  &
-  - sleep 10
+  - sleep 4
   - mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis
   - composer self-update
   - composer install -n --prefer-source
-  - cp .env.testing-ci .env
   - chmod -R 777 storage
-  - php artisan migrate --database=mysql --force
+  - php artisan migrate --env=testing-ci --database=mysql --force
   - ./vendor/bin/codecept build
-  - php artisan key:generate
-  - php artisan db:seed --database=mysql --force
-  - php artisan snipeit:create-admin --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
-  - php artisan serve --port=8000 --host=localhost &
+  - php artisan key:generate --env=testing-ci
+  - php artisan db:seed --env=testing-ci --database=mysql --force
+  - php artisan --env=testing-ci snipeit:create-admin --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
+  - php artisan --env=testing-ci snipeit:travisci-install
+  - php artisan serve --env=testing-ci --port=8000 --host=localhost &
   - sleep 5
   - pip install --user codecov
   - sleep 5
@@ -34,7 +34,7 @@ before_script:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-# script: ./vendor/bin/codecept run --env testing-ci - broken :(
+# script: ./vendor/bin/codecept run --env testing-ci
 script: ./vendor/bin/codecept run unit --env testing-ci
 #script: ./vendor/bin/codecept run
 
@@ -44,6 +44,7 @@ after_success:
 after_failure:
   - cat tests/_output/AccessoriesCept.fail.html
   - curl http://localhost:8000/login
+  - cat storage/logs/laravel.log
 
 # configure notifications (email, IRC, campfire etc)
 notifications:

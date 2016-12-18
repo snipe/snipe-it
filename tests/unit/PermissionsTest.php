@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PermissionsTest extends TestCase
 {
-    use DatabaseMigrations;
+    // use DatabaseMigrations;
     use DatabaseTransactions;
     public function setUp()
     {
@@ -407,11 +407,11 @@ class PermissionsTest extends TestCase
             // $this->log($route);
             if (strpos($route, 'edit') || strpos($route, 'show') || strpos($route, 'destroy')) {
                 // ($this->get(route($route,2))->dump());
-                $this->get(route($route, 4))
+                $this->get(route($route, 1))
                     ->assertResponseStatus($response);
             } else {
                 // dd($this->get(route($route)));
-                // ($this->get(route($route))->dump());
+                // echo($this->get(route($route))->dump());
                 $this->get(route($route))
                     ->assertResponseStatus($response);
             }
