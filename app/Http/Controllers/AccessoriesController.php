@@ -77,28 +77,28 @@ class AccessoriesController extends Controller
         $accessory = new Accessory();
 
         // Update the accessory data
-        $accessory->name                    = e(Input::get('name'));
-        $accessory->category_id             = e(Input::get('category_id'));
-        $accessory->location_id             = e(Input::get('location_id'));
-        $accessory->min_amt                 = e(Input::get('min_amt'));
-        $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
-        $accessory->order_number            = e(Input::get('order_number'));
-        $accessory->manufacturer_id         = e(Input::get('manufacturer_id'));
-        $accessory->model_number            = e(Input::get('model_number'));
+        $accessory->name                    = request('name');
+        $accessory->category_id             = request('category_id');
+        $accessory->location_id             = request('location_id');
+        $accessory->min_amt                 = request('min_amt');
+        $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
+        $accessory->order_number            = request('order_number');
+        $accessory->manufacturer_id         = request('manufacturer_id');
+        $accessory->model_number            = request('model_number');
 
-        if (e(Input::get('purchase_date')) == '') {
+        if (request('purchase_date') == ''){
             $accessory->purchase_date       =  null;
         } else {
-            $accessory->purchase_date       = e(Input::get('purchase_date'));
+            $accessory->purchase_date       = request('purchase_date');
         }
 
-        if (e(Input::get('purchase_cost')) == '0.00') {
+        if (request('purchase_cost') == '0.00'){
             $accessory->purchase_cost       =  null;
         } else {
-            $accessory->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
+            $accessory->purchase_cost       = Helper::ParseFloat(request('purchase_cost'));
         }
 
-        $accessory->qty                     = e(Input::get('qty'));
+        $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
 
         // Was the accessory created?
@@ -107,8 +107,6 @@ class AccessoriesController extends Controller
             // Redirect to the new accessory  page
             return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.create.success'));
         }
-
-
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
     }
 
@@ -154,44 +152,41 @@ class AccessoriesController extends Controller
 
         $this->authorize($accessory);
 
-      // Update the accessory data
-        $accessory->name                    = e(Input::get('name'));
+        // Update the accessory data
+        $accessory->name                    = e(request('name'));
 
-        if (e(Input::get('location_id')) == '') {
+        if (e(request('location_id')) == '') {
             $accessory->location_id = null;
         } else {
-            $accessory->location_id         = e(Input::get('location_id'));
+            $accessory->location_id         = request('location_id');
         }
-        $accessory->min_amt                 = e(Input::get('min_amt'));
-        $accessory->category_id             = e(Input::get('category_id'));
-        $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
-        $accessory->manufacturer_id         = e(Input::get('manufacturer_id'));
-        $accessory->order_number            = e(Input::get('order_number'));
-        $accessory->model_number            = e(Input::get('model_number'));
+        $accessory->min_amt                 = request('min_amt');
+        $accessory->category_id             = request('category_id');
+        $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
+        $accessory->manufacturer_id         = request('manufacturer_id');
+        $accessory->order_number            = request('order_number');
+        $accessory->model_number            = request('model_number');
 
-        if (e(Input::get('purchase_date')) == '') {
+        if (request('purchase_date') == '') {
             $accessory->purchase_date       =  null;
         } else {
-            $accessory->purchase_date       = e(Input::get('purchase_date'));
+            $accessory->purchase_date       = request('purchase_date');
         }
 
-        if (e(Input::get('purchase_cost')) == '0.00') {
+        if (request('purchase_cost') == '0.00') {
             $accessory->purchase_cost       =  null;
         } else {
-            $accessory->purchase_cost       = e(Input::get('purchase_cost'));
+            $accessory->purchase_cost       = request('purchase_cost');
         }
 
-        $accessory->qty                     = e(Input::get('qty'));
+        $accessory->qty                     = request('qty');
 
       // Was the accessory updated?
         if ($accessory->save()) {
             // Redirect to the updated accessory page
             return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
         }
-
-
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
-
     }
 
   /**
@@ -214,13 +209,10 @@ class AccessoriesController extends Controller
 
         if ($accessory->hasUsers() > 0) {
              return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
-        } else {
-            $accessory->delete();
-
-            // Redirect to the locations management page
-            return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.delete.success'));
-
         }
+        $accessory->delete();
+        // Redirect to the locations management page
+        return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.delete.success'));
     }
 
 
@@ -241,15 +233,12 @@ class AccessoriesController extends Controller
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
             return View::make('accessories/view', compact('accessory'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/accessories/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('accessories')->with('error', $error);
         }
+        // Prepare the error message
+        $error = trans('admin/accessories/message.does_not_exist', compact('id'));
 
-
+        // Redirect to the user management page
+        return redirect()->route('accessories')->with('error', $error);
     }
 
   /**
@@ -270,9 +259,7 @@ class AccessoriesController extends Controller
         $this->authorize('checkout', $accessory);
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = Helper::usersList();
-
-        return View::make('accessories/checkout', compact('accessory'))->with('users_list', $users_list);
+        return View::make('accessories/checkout', compact('accessory'))->with('users_list', Helper::usersList());
 
     }
 
@@ -311,13 +298,10 @@ class AccessoriesController extends Controller
 
         $logaction = $accessory->logCheckout(e(Input::get('note')));
 
-
-
         $admin_user = Auth::user();
         $settings = Setting::getSettings();
 
         if ($settings->slack_endpoint) {
-
 
             $slack_settings = [
               'username' => $settings->botname,
@@ -372,19 +356,19 @@ class AccessoriesController extends Controller
 
       // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));
-
-
-
     }
 
 
-  /**
-  * Check the accessory back into inventory
-  *
-  * @author [A. Gianotto] [<snipe@snipe.net>]
-  * @param  int  $accessoryId
-  * @return View
-  **/
+    /**
+     * Check the accessory back into inventory
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
+     * @param integer $accessoryUserId
+     * @param string $backto
+     * @return View
+     * @internal param int $accessoryId
+     */
     public function getCheckin(Request $request, $accessoryUserId = null, $backto = null)
     {
         // Check if the accessory exists
@@ -399,14 +383,17 @@ class AccessoriesController extends Controller
     }
 
 
-  /**
-  * Check in the item so that it can be checked out again to someone else
-  *
-  * @uses Accessory::checkin_email() to determine if an email can and should be sent
-  * @author [A. Gianotto] [<snipe@snipe.net>]
-  * @param  int  $accessoryId
-  * @return Redirect
-  **/
+    /**
+     * Check in the item so that it can be checked out again to someone else
+     *
+     * @uses Accessory::checkin_email() to determine if an email can and should be sent
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
+     * @param integer $accessoryUserId
+     * @param string $backto
+     * @return Redirect
+     * @internal param int $accessoryId
+     */
     public function postCheckin(Request $request, $accessoryUserId = null, $backto = null)
     {
       // Check if the accessory exists
@@ -414,7 +401,6 @@ class AccessoriesController extends Controller
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
-
 
         $accessory = Accessory::find($accessory_user->accessory_id);
 
@@ -424,8 +410,7 @@ class AccessoriesController extends Controller
         $logaction = $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
         $admin_user = Auth::user();
 
-
-      // Was the accessory updated?
+        // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
 
             $settings = Setting::getSettings();
@@ -485,42 +470,41 @@ class AccessoriesController extends Controller
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $return_to)->with('success', trans('admin/accessories/message.checkin.success'));
-            } else {
-                return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
             }
+            return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
         }
-
         // Redirect to the accessory management page with error
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkin.error'));
     }
 
     /**
-    * Generates the JSON response for accessories listing view.
-    *
-    * Example:
-    * {
-    *  "actions": "(links to available actions)",
-    *  "category": "(link to category)",
-    *  "companyName": "My Company",
-    *  "location":  "My Location",
-    *  "min_amt": 2,
-    *  "name":  "(link to accessory),
-    *  "numRemaining": 6,
-    *  "order_number": null,
-    *  "purchase_cost": "0.00",
-    *  "purchase_date": null,
-    *  "qty": 7
-    *  },
-    *
-    * The names of the fields in the returns JSON correspond directly to the the
-    * names of the fields in the bootstrap-tables in the view.
-    *
-    * For debugging, see at /api/accessories/list
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int  $accessoryId
-    * @return string JSON containing accessories and their associated atrributes.
-    **/
+     * Generates the JSON response for accessories listing view.
+     *
+     * Example:
+     * {
+     *  "actions": "(links to available actions)",
+     *  "category": "(link to category)",
+     *  "companyName": "My Company",
+     *  "location":  "My Location",
+     *  "min_amt": 2,
+     *  "name":  "(link to accessory),
+     *  "numRemaining": 6,
+     *  "order_number": null,
+     *  "purchase_cost": "0.00",
+     *  "purchase_date": null,
+     *  "qty": 7
+     *  },
+     *
+     * The names of the fields in the returns JSON correspond directly to the the
+     * names of the fields in the bootstrap-tables in the view.
+     *
+     * For debugging, see at /api/accessories/list
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
+     * @return string JSON containing accessories and their associated atrributes.
+     * @internal param int $accessoryId
+     */
     public function getDatatable(Request $request)
     {
         $this->authorize('index', Accessory::class);
@@ -532,19 +516,8 @@ class AccessoriesController extends Controller
         if (Input::has('search')) {
             $accessories = $accessories->TextSearch(e(Input::get('search')));
         }
-
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
-
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category','model_number'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
@@ -571,16 +544,23 @@ class AccessoriesController extends Controller
 
             $actions = '<nobr>';
             if (Gate::allows('checkout', $accessory)) {
-                $actions .= '<a href="' . route('checkout/accessory',
-                        $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= Helper::generateDatatableButton(
+                    'checkout',
+                    route('checkout/accessory', $accessory->id),
+                    $accessory->numRemaining() > 0
+                );
             }
             if (Gate::allows('update', $accessory)) {
-                $actions .= '<a href="' . route('accessories.update',
-                        $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton('edit', route('accessories.update', $accessory->id));
             }
             if (Gate::allows('delete', $accessory)) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('accessories.destroy',
-                        $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('accessories.destroy', $accessory->id),
+                    $enabled = true,
+                    trans('admin/accessories/message.delete.confirm'),
+                    $accessory->name
+                );
             }
             $actions .= '</nobr>';
             $company = $accessory->company;
@@ -650,8 +630,7 @@ class AccessoriesController extends Controller
         foreach ($accessory_users as $user) {
             $actions = '';
             if (Gate::allows('checkin', $accessory)) {
-                $actions .= '<a href="' . route('checkin/accessory',
-                        $user->pivot->id) . '" class="btn btn-info btn-sm">Checkin</a>';
+                $actions .= Helper::generateDatatableButton('checkin', route('checkin/accessory', $user->pivot->id));
             }
 
             if (Gate::allows('view', $user)) {

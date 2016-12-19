@@ -419,22 +419,22 @@ class UsersController extends Controller
             // Authorize takes care of many of our logic checks now.
             $this->authorize('delete', User::class);
 
-            if (count($user->assets) > 0) {
+            if ($user->assets()->count() > 0) {
 
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets) . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
             }
 
-            if (count($user->licenses) > 0) {
+            if ($user->licenses()->count() > 0) {
 
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->licenses) . ' licenses associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->licenses()->count() . ' licenses associated with them.');
             }
 
-            if (count($user->accessories) > 0) {
+            if ($user->accessories()->count() > 0) {
 
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->accessories) . ' accessories associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->accessories()->count() . ' accessories associated with them.');
             }
 
             // Delete the user

@@ -52,15 +52,13 @@ final class CompaniesController extends Controller
     public function store(Request $request)
     {
         $company = new Company;
-        $company->name = e($request->input('name'));
+        $company->name = $request->input('name');
 
         if ($company->save()) {
             return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.create.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($company->getErrors());
         }
-
+        return redirect()->back()->withInput()->withErrors($company->getErrors());
     }
 
 
@@ -77,9 +75,8 @@ final class CompaniesController extends Controller
         if (is_null($item = Company::find($companyId))) {
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
-        } else {
-            return View::make('companies/edit')->with('item', $item);
         }
+        return View::make('companies/edit')->with('item', $item);
     }
 
     /**
@@ -94,20 +91,16 @@ final class CompaniesController extends Controller
     {
         if (is_null($company = Company::find($companyId))) {
             return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
-        } else {
-
-
-            $company->name = e($request->input('name'));
-
-            if ($company->save()) {
-                return redirect()->route('companies.index')
-                    ->with('success', trans('admin/companies/message.update.success'));
-            } else {
-                return redirect()->route('companies.edit', ['company' => $companyId])
-                    ->with('error', trans('admin/companies/message.update.error'));
-            }
-
         }
+
+        $company->name = $request->input('name');
+
+        if ($company->save()) {
+            return redirect()->route('companies.index')
+                ->with('success', trans('admin/companies/message.update.success'));
+        }
+        return redirect()->route('companies.edit', ['company' => $companyId])
+            ->with('error', trans('admin/companies/message.update.error'));
     }
 
     /**

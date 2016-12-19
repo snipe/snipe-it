@@ -61,7 +61,6 @@ class AssetMaintenancesController extends Controller
     */
     public function index()
     {
-
         return View::make('asset_maintenances/index');
     }
 
@@ -83,18 +82,8 @@ class AssetMaintenancesController extends Controller
             $maintenances = $maintenances->TextSearch(e($request->input('search')));
         }
 
-
-        if ($request->has('offset')) {
-            $offset = e($request->input('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $allowed_columns = ['id','title','asset_maintenance_time','asset_maintenance_type','cost','start_date','completion_date','notes','user_id'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
@@ -118,9 +107,14 @@ class AssetMaintenancesController extends Controller
         foreach ($maintenances as $maintenance) {
             $actions = '';
             if (Gate::allows('update', Asset::class)) {
-                $actions .= '<nobr><a href="' . route('maintenances.edit',
-                        $maintenance->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('maintenances.destroy',
-                        $maintenance->id) . '" data-content="' . trans('admin/asset_maintenances/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($maintenance->title) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+                $actions .= Helper::generateDatatableButton('edit', route('maintenances.edit', $maintenance->id));
+                $actions .= Helper::generateDatatableButton(
+                        'delete',
+                        route('maintenances.destroy', $maintenance->id),
+                        $enabled = true,
+                        trans('admin/asset_maintenances/message.delete.confirm'),
+                        $maintenance->title
+                    );
             }
 
             if (($maintenance->cost) && (isset($maintenance->asset)) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
@@ -167,17 +161,11 @@ class AssetMaintenancesController extends Controller
                                     '' => 'Select an asset maintenance type',
                                 ] + AssetMaintenance::getImprovementOptions();
         // Mark the selected asset, if it came in
-        $selectedAsset = request('asset_id');
-
-        $assets = Helper::detailedAssetList();
-
-        $supplier_list = Helper::suppliersList();
-
         // Render the view
         return View::make('asset_maintenances/edit')
-                   ->with('asset_list', $assets)
-                   ->with('selectedAsset', $selectedAsset)
-                   ->with('supplier_list', $supplier_list)
+                   ->with('asset_list', Helper::detailedAssetList())
+                   ->with('selectedAsset', request('asset_id'))
+                   ->with('supplier_list', Helper::suppliersList())
                    ->with('assetMaintenanceType', $assetMaintenanceType)
                    ->with('item', new AssetMaintenance);
     }
@@ -232,12 +220,12 @@ class AssetMaintenancesController extends Controller
         }
 
         // Save the asset maintenance data
-        $assetMaintenance->asset_id               = e($request->input('asset_id'));
-        $assetMaintenance->asset_maintenance_type = e($request->input('asset_maintenance_type'));
-        $assetMaintenance->title                  = e($request->input('title'));
-        $assetMaintenance->start_date             = e($request->input('start_date'));
-        $assetMaintenance->completion_date        = e($request->input('completion_date'));
-        $assetMaintenance->user_id                = Auth::user()->id;
+        $assetMaintenance->asset_id               = $request->input('asset_id');
+        $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
+        $assetMaintenance->title                  = $request->input('title');
+        $assetMaintenance->start_date             = $request->input('start_date');
+        $assetMaintenance->completion_date        = $request->input('completion_date');
+        $assetMaintenance->user_id                = Auth::id();
 
         if (( $assetMaintenance->completion_date == "" )
             || ( $assetMaintenance->completion_date == "0000-00-00" )
@@ -308,36 +296,30 @@ class AssetMaintenancesController extends Controller
                                     '' => 'Select an improvement type',
                                 ] + AssetMaintenance::getImprovementOptions();
 
-        $assets = Helper::detailedAssetList();
         // Get Supplier List
-        $supplier_list = Helper::suppliersList();
-
         // Render the view
         return View::make('asset_maintenances/edit')
-                   ->with('asset_list', $assets)
+                   ->with('asset_list', Helper::detailedAssetList())
                    ->with('selectedAsset', null)
-                   ->with('supplier_list', $supplier_list)
+                   ->with('supplier_list', Helper::suppliersList())
                    ->with('assetMaintenanceType', $assetMaintenanceType)
                    ->with('item', $assetMaintenance);
 
     }
 
     /**
-    *  Validates and stores an update to an asset maintenance
-    *
-    * @see AssetMaintenancesController::postEdit() method that stores the data
-    * @author  Vincent Sposato <vincent.sposato@gmail.com>
-    * @param int $assetMaintenanceId
-    * @version v1.0
-    * @since [v1.8]
-    * @return mixed
-    */
+     *  Validates and stores an update to an asset maintenance
+     *
+     * @see AssetMaintenancesController::postEdit() method that stores the data
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @param Request $request
+     * @param int $assetMaintenanceId
+     * @return mixed
+     * @version v1.0
+     * @since [v1.8]
+     */
     public function update(Request $request, $assetMaintenanceId = null)
     {
-
-        // get the POST data
-        $new = $request->all();
-
         // Check if the asset maintenance exists
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the asset maintenance management page
@@ -349,42 +331,42 @@ class AssetMaintenancesController extends Controller
 
 
 
-        if (e(Input::get('supplier_id')) == '') {
+        if (request('supplier_id') == '') {
             $assetMaintenance->supplier_id = null;
         } else {
             $assetMaintenance->supplier_id = e($request->input('supplier_id'));
         }
 
-        if (e(Input::get('is_warranty')) == '') {
+        if (request('is_warranty') == '') {
             $assetMaintenance->is_warranty = 0;
         } else {
             $assetMaintenance->is_warranty = e($request->input('is_warranty'));
         }
 
-        if (e(Input::get('cost')) == '') {
+        if (request('cost') == '') {
             $assetMaintenance->cost = '';
         } else {
             $assetMaintenance->cost =  Helper::ParseFloat(e($request->input('cost')));
         }
 
-        if (e(Input::get('notes')) == '') {
+        if (request('notes') == '') {
             $assetMaintenance->notes = null;
         } else {
             $assetMaintenance->notes = e($request->input('notes'));
         }
 
-        $asset = Asset::find(e(Input::get('asset_id')));
+        $asset = Asset::find(request('asset_id'));
 
         if (!Company::isCurrentUserHasAccess($asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
 
         // Save the asset maintenance data
-        $assetMaintenance->asset_id               = e($request->input('asset_id'));
-        $assetMaintenance->asset_maintenance_type = e($request->input('asset_maintenance_type'));
-        $assetMaintenance->title                  = e($request->input('title'));
-        $assetMaintenance->start_date             = e($request->input('start_date'));
-        $assetMaintenance->completion_date        = e($request->input('completion_date'));
+        $assetMaintenance->asset_id               = $request->input('asset_id');
+        $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
+        $assetMaintenance->title                  = $request->input('title');
+        $assetMaintenance->start_date             = $request->input('start_date');
+        $assetMaintenance->completion_date        = $request->input('completion_date');
 
         if (( $assetMaintenance->completion_date == "" )
           || ( $assetMaintenance->completion_date == "0000-00-00" )
@@ -415,8 +397,6 @@ class AssetMaintenancesController extends Controller
                          ->with('success', trans('admin/asset_maintenances/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($assetMaintenance->getErrors());
-
-
     }
 
     /**

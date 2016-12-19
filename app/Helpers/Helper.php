@@ -685,5 +685,33 @@ class Helper
 
     }
 
+    /**
+     * Generate html button for datatable actions.
+     * @author Daniel Meltzer
+     * @since 3.7
+     * @param string $type
+     * @param string $route
+     * @param boolean $enabled Used for checkin/checkout
+     * @param string $message Used for Delete Modal
+     * @param string $itemName Used for Delete Modal
+     * @return string
+     */
+    public static function generateDatatableButton($type, $route, $enabled = false, $message = null, $itemName = null)
+    {
+        switch($type) {
+            case 'checkout':
+                return '<a href="' . $route . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . $enabled . '>' . trans('general.checkout') . '</a>';
+            case 'checkin':
+                return '<a href="' . $route . '" class="btn btn-info btn-sm">'.trans('general.checkin').'</a>';
+            case 'edit':
+                return '<a href="' . $route . '" class="btn btn-warning btn-sm" title="Edit" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            case 'clone':
+                return '<a href="'.$route.'" class="btn btn-info btn-sm" title="Clone" data-toggle="tooltip"><i class="fa fa-clone"></i></a>';
+            case 'delete':
+                return '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . $route . '" data-content="' . $message . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($itemName) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            case 'restore':
+                return '<a href="'.$route.'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+        }
+    }
 
 }
