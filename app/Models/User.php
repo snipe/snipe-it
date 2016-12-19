@@ -29,6 +29,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $injectUniqueIdentifier = true;
     protected $fillable = ['first_name', 'last_name', 'email','password','username'];
 
+    protected $casts = [
+        'activated' => 'boolean',
+        'employee_num' => 'integer'
+    ];
 
     /**
      * Model validation rules
@@ -41,6 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'username'                => 'required|string|min:2|unique_undeleted',
         'email'                   => 'email',
         'password'                => 'required|min:6',
+        'locale'                  => 'max:10'
     ];
 
 
