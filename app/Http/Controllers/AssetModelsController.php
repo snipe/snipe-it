@@ -176,7 +176,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($item = AssetModel::find($modelId))) {
             // Redirect to the model management page
-            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $depreciation_list = Helper::depreciationList();
@@ -205,7 +205,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the models management page
-            return redirect()->to('admin/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
 
@@ -276,8 +276,7 @@ class AssetModelsController extends Controller
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
-            // Redirect to the blogs management page
-            return redirect()->to('hardware/models')->with('error', trans('admin/models/message.not_found'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.not_found'));
         }
 
         if ($model->assets->count() > 0) {
@@ -363,8 +362,7 @@ class AssetModelsController extends Controller
     {
         // Check if the model exists
         if (is_null($model_to_clone = AssetModel::find($modelId))) {
-            // Redirect to the model management page
-            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $model = clone $model_to_clone;
@@ -459,16 +457,16 @@ class AssetModelsController extends Controller
 
             $rows[] = array(
                 'id'      => $model->id,
-                'manufacturer'      => (string)link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
+                'manufacturer'      => (string)link_to_route('manufacturers.show', $model->manufacturer->name, ['manufacturer' => $model->manufacturer->id]),
                 'name'              => (string)link_to_route('models.show',$model->name, ['model' => $model->id]),
-                'image' => ($model->image!='') ? '<img src="'.url('/').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
+                'image'             => ($model->image!='') ? '<img src="'.url('/').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->model_number,
                 'numassets'         => $model->assets->count(),
                 'depreciation'      => (($model->depreciation) && ($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
-                'category'          => ($model->category) ? (string)link_to('admin/settings/categories/'.$model->category->id.'/view', $model->category->name) : '',
+                'category'          => ($model->category) ? (string)link_to_route('categories.show', $model->category->name, ['category' => $model->category->id]) : '',
                 'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
                 'note'              => $model->getNote(),
-                'fieldset'          => ($model->fieldset) ? (string)link_to('admin/custom_fields/'.$model->fieldset->id, $model->fieldset->name) : '',
+                'fieldset'          => ($model->fieldset) ? (string)link_to_route('custom_fields/model', $model->fieldset->name, ['model' => $model->fieldset->id]) : '',
                 'actions'           => $actions
                 );
         }
@@ -480,32 +478,24 @@ class AssetModelsController extends Controller
 
 
     /**
-    * Get the asset information to present to the model view detail page
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @param int $modelId
-    * @return String JSON
-    */
-    public function getDataView($modelID)
+     * Get the asset information to present to the model view detail page
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @param Request $request
+     * @param $modelID
+     * @return String JSON
+     * @internal param int $modelId
+     */
+    public function getDataView(Request $request, $modelID)
     {
         $assets = Asset::where('model_id', '=', $modelID)->with('company', 'assetstatus');
 
         if (Input::has('search')) {
             $assets = $assets->TextSearch(e($request->input('search')));
         }
-
-        if (Input::has('offset')) {
-            $offset = e($request->input('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset',0);
+        $limit = request('limit', 50);
 
 
         $allowed_columns = ['name', 'serial','asset_tag'];
@@ -535,10 +525,10 @@ class AssetModelsController extends Controller
 
             $rows[] = array(
                 'id'            => $asset->id,
-                'name'          => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
-                'asset_tag'     => (string)link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
+                'name'          => (string)link_to_route('hardware.show', $asset->showAssetName(), ['asset' => $asset->id]),
+                'asset_tag'     => (string)link_to_route('hardware.show', $asset->asset_tag, ['asset' => $asset->id]),
                 'serial'        => $asset->serial,
-                'assigned_to'   => ($asset->assigned_to) ? (string)link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
+                'assigned_to'   => ($asset->assigned_to) ? (string)link_to_route('users.show', $asset->assigneduser->fullName(), ['asset' =>$asset->assigned_to]) : '',
                 'actions'       => $actions,
                 'companyName'   => Company::getName($asset)
             );

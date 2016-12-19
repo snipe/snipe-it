@@ -69,7 +69,6 @@ Route::group(['middleware' => 'auth'], function () {
         'display-sig/{filename}',
         [
             'as' => 'log.signature.view',
-            'middleware' => 'authorize:assets.view',
             'uses' => 'ActionlogController@displaySig' ]
     );
 

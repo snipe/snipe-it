@@ -128,35 +128,35 @@
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
-                  @can('assets.view')
+                  @can('index', \App\Models\Asset::class)
                   <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('hardware') }}">
                           <i class="fa fa-barcode"></i>
                       </a>
                   </li>
                   @endcan
-                  @can('licenses.view')
+                  @can('view', \App\Models\License::class)
                   <li {!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('licenses.index') }}">
                           <i class="fa fa-floppy-o"></i>
                       </a>
                   </li>
                   @endcan
-                  @can('accessories.view')
+                  @can('index', \App\Models\Accessory::class)
                   <li {!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('accessories.index') }}">
                           <i class="fa fa-keyboard-o"></i>
                       </a>
                   </li>
                   @endcan
-                  @can('consumables.view')
+                  @can('index', \App\Models\Consumable::class)
                   <li {!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('consumables') }}">
                           <i class="fa fa-tint"></i>
                       </a>
                   </li>
                   @endcan
-                  @can('components.view')
+                  @can('view', \App\Models\Component::class)
                   <li {!! (Request::is('components*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('components.index') }}">
                           <i class="fa fa-hdd-o"></i>
@@ -164,7 +164,7 @@
                   </li>
                   @endcan
 
-                  @can('assets.view')
+                  @can('index', \App\Models\Asset::class)
                   <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                       <div class="col-xs-12 col-md-12">
                           <div class="col-xs-12 form-group">
@@ -186,42 +186,42 @@
                       <b class="caret"></b>
                     </a>
                    <ul class="dropdown-menu">
-                     @can('assets.create')
+                     @can('create', \App\Models\Asset::class)
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
                               <a href="{{ route('hardware.create') }}">
                                   <i class="fa fa-barcode fa-fw"></i>
                                   @lang('general.asset')</a>
                       </li>
                        @endcan
-                       @can('licenses.create')
+                       @can('create', \App\Models\License::class)
                        <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('licenses.create') }}">
                                <i class="fa fa-floppy-o fa-fw"></i>
                                @lang('general.license')</a>
                        </li>
                        @endcan
-                       @can('accessories.create')
+                       @can('create', \App\Models\Accessory::class)
                        <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('accessories.create') }}">
                                <i class="fa fa-keyboard-o fa-fw"></i>
                                @lang('general.accessory')</a>
                        </li>
                        @endcan
-                       @can('consumables.create')
+                       @can('create', \App\Models\Consumable::class)
                        <li {!! (Request::is('consunmables/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('consumables.create') }}">
                                <i class="fa fa-tint fa-fw"></i>
                                @lang('general.consumable')</a>
                        </li>
                        @endcan
-                       @can('users.create')
+                       @can('create', \App\Models\User::class)
                        <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('users.create') }}">
                            <i class="fa fa-user fa-fw"></i>
                            @lang('general.user')</a>
                        </li>
                        @endcan
-                       @can('components.create')
+                       @can('create', \App\Models\Component::class)
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('components.create') }}">
                            <i class="fa fa-hdd-o"></i>
@@ -403,7 +403,7 @@
               </a>
             </li>
             @endcan
-            @can('assets.view')
+            @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
                 <a href="#"><i class="fa fa-barcode"></i>
                   <span>{{ trans('general.assets') }}</span>
@@ -437,7 +437,7 @@
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}">@lang('admin/hardware/general.requestable')</a></li>
 
                   <li class="divider">&nbsp;</li>
-                    @can('assets.checkout')
+                    @can('checkout', \App\Models\Asset::class)
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
                         <a href="{{ route('hardware/bulkcheckout') }}">
                             {{ trans('general.bulk_checkout') }}</a>
@@ -448,7 +448,7 @@
                     <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ route('models.index') }}">@lang('general.asset_models')</a></li>
                   <li><a href="{{ url('admin/settings/categories') }}" {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
                     @endcan
-                    @can('assets.create')
+                    @can('create', \App\Models\Asset::class)
                       <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
                       <li><a href="{{ route('maintenances.index') }}">@lang('general.asset_maintenances') </a></li>
                       <li><a href="{{ url('hardware/import') }}">@lang('general.import') </a></li>
@@ -457,7 +457,7 @@
                 </ul>
               </li>
               @endcan
-              @can('licenses.view')
+              @can('view', \App\Models\License::class)
               <li{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('licenses.index') }}">
                     <i class="fa fa-floppy-o"></i>
@@ -465,7 +465,7 @@
                   </a>
               </li>
               @endcan
-              @can('accessories.view')
+              @can('index', \App\Models\Accessory::class)
               <li{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                 <a href="{{ route('accessories.index') }}">
                   <i class="fa fa-keyboard-o"></i>
@@ -473,7 +473,7 @@
                 </a>
               </li>
               @endcan
-              @can('consumables.view')
+              @can('index', \App\Models\Consumable::class)
             <li{!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
                 <a href="{{ url('consumables') }}">
                   <i class="fa fa-tint"></i>
@@ -481,7 +481,7 @@
                 </a>
             </li>
              @endcan
-             @can('components.view')
+             @can('view', \App\Models\Components::class)
             <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                 <a href="{{ route('components.index') }}">
                   <i class="fa fa-hdd-o"></i>
@@ -489,7 +489,7 @@
                 </a>
             </li>
             @endcan
-            @can('users.view')
+            @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('users.index') }}">
                       <i class="fa fa-users"></i>
@@ -518,7 +518,7 @@
                 </ul>
             </li>
             @endcan
-            @can('assets.view.requestable')
+            @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
             <a href="{{ route('requestable-assets') }}">
             <i class="fa fa-laptop"></i>

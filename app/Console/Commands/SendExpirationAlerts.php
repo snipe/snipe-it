@@ -89,7 +89,7 @@ class SendExpirationAlerts extends Command
             } else {
                 $license_data['email_content'] .= '<tr style="background-color:#d9534f;">';
             }
-                $license_data['email_content'] .= '<td><a href="'.config('app.url').'/admin/licenses/'.$license->id.'/view">';
+                $license_data['email_content'] .= '<td><a href="'.route('licenses.show', $license->id).'">';
                 $license_data['email_content'] .= $license->name.'</a></td>';
                 $license_data['email_content'] .= '<td>'.$license->expiration_date.'</td>';
                 $license_data['email_content'] .= '<td>'.$difference.' days</td>';

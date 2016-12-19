@@ -104,14 +104,15 @@ class DepreciationsController extends Controller
 
 
     /**
-    * Validates and stores the updated depreciation data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see DepreciationsController::getEdit()
-    * @param int $depreciationId
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validates and stores the updated depreciation data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see DepreciationsController::getEdit()
+     * @param Request $request
+     * @param int $depreciationId
+     * @return Redirect
+     * @since [v1.0]
+     */
     public function update(Request $request, $depreciationId = null)
     {
         // Check if the depreciation exists
@@ -127,7 +128,7 @@ class DepreciationsController extends Controller
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the depreciation page
-            return redirect()->to("admin/settings/depreciations/")->with('success', trans('admin/depreciations/message.update.success'));
+            return redirect()->route("depreciations.index")->with('success', trans('admin/depreciations/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());

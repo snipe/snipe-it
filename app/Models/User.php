@@ -29,6 +29,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $injectUniqueIdentifier = true;
     protected $fillable = ['first_name', 'last_name', 'email','password','username'];
 
+    protected $casts = [
+        'activated' => 'boolean',
+        'employee_num' => 'integer'
+    ];
 
     /**
      * Model validation rules
@@ -41,16 +45,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'username'                => 'required|string|min:2|unique_undeleted',
         'email'                   => 'email',
         'password'                => 'required|min:6',
+        'locale'                  => 'max:10'
     ];
 
 
     public function hasAccess($section)
     {
-
         if ($this->isSuperUser()) {
             return true;
         }
-
         $user_groups = $this->groups;
 
 
@@ -64,7 +67,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
             return true;
         }
-
         // If the user is explicitly denied, return false
         if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1')) {
             return false;

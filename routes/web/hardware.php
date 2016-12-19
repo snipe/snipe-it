@@ -20,7 +20,6 @@ Route::group(
 
         Route::get('history', [
             'as' => 'asset.import-history',
-            'middleware' => 'authorize:assets.checkout',
             'uses' => 'AssetsController@getImportHistory'
         ]);
 
@@ -31,13 +30,11 @@ Route::group(
 
         Route::get('/bytag', [
             'as'   => 'findbytag/hardware',
-            'middleware' => 'authorize:assets.view',
             'uses' => 'AssetsController@getAssetByTag'
         ]);
 
         Route::get('{assetId}/clone', [
             'as' => 'clone/hardware',
-            'middleware' => 'authorize:assets.create',
             'uses' => 'AssetsController@getClone'
         ]);
 
@@ -45,73 +42,56 @@ Route::group(
 
         Route::get('{assetId}/checkout', [
             'as' => 'checkout/hardware',
-            'middleware' => 'authorize:assets.checkout',
             'uses' => 'AssetsController@getCheckout'
         ]);
         Route::post('{assetId}/checkout', [
             'as' => 'checkout/hardware',
-            'middleware' => 'authorize:assets.checkout',
             'uses' => 'AssetsController@postCheckout'
         ]);
         Route::get('{assetId}/checkin/{backto?}', [
             'as' => 'checkin/hardware',
-            'middleware' => 'authorize:assets.checkin',
             'uses' => 'AssetsController@getCheckin'
         ]);
 
         Route::post('{assetId}/checkin/{backto?}', [
             'as' => 'checkin/hardware',
-            'middleware' => 'authorize:assets.checkin',
             'uses' => 'AssetsController@postCheckin'
         ]);
         Route::get('{assetId}/view', [
             'as' => 'hardware.view',
-            'middleware' => ['authorize:assets.view'],
             'uses' => 'AssetsController@show'
         ]);
         Route::get('{assetId}/qr_code', [ 'as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode' ]);
         Route::get('{assetId}/barcode', [ 'as' => 'barcode/hardware', 'uses' => 'AssetsController@getBarCode' ]);
         Route::get('{assetId}/restore', [
             'as' => 'restore/hardware',
-            'middleware' => 'authorize:assets.delete',
             'uses' => 'AssetsController@getRestore'
         ]);
         Route::post('{assetId}/upload', [
             'as' => 'upload/asset',
-            'middleware' => 'authorize:assets.edit',
             'uses' => 'AssetsController@postUpload'
         ]);
 
         Route::get('{assetId}/deletefile/{fileId}', [
             'as' => 'delete/assetfile',
-            'middleware' => 'authorize:assets.edit',
             'uses' => 'AssetsController@getDeleteFile'
         ]);
 
         Route::get('{assetId}/showfile/{fileId}', [
             'as' => 'show/assetfile',
-            'middleware' => 'authorize:assets.view',
             'uses' => 'AssetsController@displayFile'
         ]);
 
-        Route::get('import/delete-import/{filename}',  [
-                'as' => 'assets/import/delete-file',
-                'middleware' => 'authorize:assets.create',
-                'uses' => 'AssetsController@getDeleteImportFile'
-        ]);
-
         Route::post( 'import/process/', [ 'as' => 'assets/import/process-file',
-                'middleware' => 'authorize:assets.create',
                 'uses' => 'AssetsController@postProcessImportFile'
         ]);
+
         Route::get( 'import/delete/{filename}', [ 'as' => 'assets/import/delete-file',
-                'middleware' => 'authorize:assets.create', // TODO What permissions should this require?
                 'uses' => 'AssetsController@getDeleteImportFile'
         ]);
 
         Route::get('import',[
                 'as' => 'assets/import',
-                'middleware' => 'authorize:assets.create',
                 'uses' => 'AssetsController@getImportUpload'
         ]);
 
@@ -119,7 +99,6 @@ Route::group(
             'bulkedit',
             [
                 'as'   => 'hardware/bulkedit',
-                'middleware' => 'authorize:assets.edit',
                 'uses' => 'AssetsController@postBulkEdit'
             ]
         );
@@ -127,7 +106,6 @@ Route::group(
             'bulkdelete',
             [
                 'as'   => 'hardware/bulkdelete',
-                'middleware' => 'authorize:assets.delete',
                 'uses' => 'AssetsController@postBulkDelete'
             ]
         );
@@ -135,7 +113,6 @@ Route::group(
             'bulksave',
             [
                 'as'   => 'hardware/bulksave',
-                'middleware' => 'authorize:assets.edit',
                 'uses' => 'AssetsController@postBulkSave'
             ]
         );
@@ -143,12 +120,10 @@ Route::group(
         # Bulk checkout / checkin
          Route::get( 'bulkcheckout',  [
                  'as' => 'hardware/bulkcheckout',
-                 'middleware' => 'authorize:assets.checkout',
                  'uses' => 'AssetsController@getBulkCheckout'
          ]);
         Route::post( 'bulkcheckout',  [
             'as' => 'hardware/bulkcheckout',
-            'middleware' => 'authorize:assets.checkout',
             'uses' => 'AssetsController@postBulkCheckout'
         ]);
 });

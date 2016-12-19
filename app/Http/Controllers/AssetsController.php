@@ -2,10 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Http\Requests\AssetRequest;
-use App\Http\Requests\AssetFileRequest;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Http\Requests\AssetCheckoutRequest;
+use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\AssetRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
@@ -14,20 +14,23 @@ use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\Location;
-use App\Models\Manufacturer; //for embedded-create
+use App\Models\Manufacturer;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use Validator;
 use Artisan;
 use Auth;
+use Carbon\Carbon;
 use Config;
-use League\Csv\Reader;
 use DB;
+use Gate;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Image;
 use Input;
 use Lang;
+use League\Csv\Reader;
 use Log;
 use Mail;
 use Paginator;
@@ -35,13 +38,11 @@ use Redirect;
 use Response;
 use Slack;
 use Str;
-use Illuminate\Http\Request;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use TCPDF;
+use Validator;
 use View;
-use Carbon\Carbon;
-use Gate;
 
 /**
  * This class controls all actions related to assets for
@@ -73,6 +74,7 @@ class AssetsController extends Controller
     */
     public function index()
     {
+        $this->authorize('index', Asset::class);
         return View::make('hardware/index');
     }
 
@@ -90,10 +92,11 @@ class AssetsController extends Controller
         } else {
             $topsearch = false;
         }
-        if ($asset = Asset::where('asset_tag', '=', Input::get('assetTag'))->first()) {
-            return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
+        if (!$asset = Asset::where('asset_tag', '=', Input::get('assetTag'))->first()) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        $this->authorize('view', $asset);
+        return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
 
     }
 
@@ -106,28 +109,19 @@ class AssetsController extends Controller
     */
     public function create($model_id = null)
     {
+        $this->authorize('create', Asset::class);
         // Grab the dropdown lists
-        $model_list = Helper::modelList();
-        $statuslabel_list = Helper::statusLabelList();
-        $location_list = Helper::locationsList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
-        $supplier_list = Helper::suppliersList();
-        $company_list = Helper::companyList();
-        $assigned_to = Helper::usersList();
-        $statuslabel_types = Helper::statusTypeList();
-
         $view = View::make('hardware/edit');
-        $view->with('supplier_list', $supplier_list);
-        $view->with('company_list', $company_list);
-        $view->with('model_list', $model_list);
-        $view->with('statuslabel_list', $statuslabel_list);
-        $view->with('assigned_to', $assigned_to);
-        $view->with('location_list', $location_list);
+        $view->with('supplier_list', Helper::suppliersList());
+        $view->with('company_list', Helper::companyList());
+        $view->with('model_list', Helper::modelList());
+        $view->with('statuslabel_list', Helper::statusLabelList());
+        $view->with('assigned_to', Helper::usersList());
+        $view->with('location_list', Helper::locationsList());
         $view->with('item', new Asset);
-        $view->with('manufacturer', $manufacturer_list);
-        $view->with('category', $category_list);
-        $view->with('statuslabel_types', $statuslabel_types);
+        $view->with('manufacturer', Helper::manufacturerList());
+        $view->with('category', Helper::categoryList('asset'));
+        $view->with('statuslabel_types', Helper::statusTypeList());
 
         if (!is_null($model_id)) {
             $selected_model = AssetModel::find($model_id);
@@ -146,6 +140,7 @@ class AssetsController extends Controller
     */
     public function store(AssetRequest $request)
     {
+        $this->authorize(Asset::class);
         // create a new model instance
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find(e(Input::get('model_id'))));
@@ -288,14 +283,12 @@ class AssetsController extends Controller
     */
     public function edit($assetId = null)
     {
-
-        // Check if the asset exists
         if (!$item = Asset::find($assetId)) {
-            // Redirect to the asset management page
+            // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+        //Handles company checks and permissions.
+        $this->authorize($item);
 
         // Grab the dropdown lists
         $model_list = Helper::modelList();
@@ -330,16 +323,15 @@ class AssetsController extends Controller
     * @return Redirect
     */
 
-    public function postEdit(AssetRequest $request, $assetId = null)
+    public function update(AssetRequest $request, $assetId = null)
     {
 
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+        $this->authorize($asset);
 
         if ($request->has('status_id')) {
             $asset->status_id = e($request->input('status_id'));
@@ -477,9 +469,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('delete', $asset);
 
         DB::table('assets')
         ->where('id', $asset->id)
@@ -511,9 +503,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find(e($assetId)))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkout', $asset);
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = Helper::usersList();
@@ -536,11 +528,10 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         } elseif (!$asset->availableForCheckout()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
         }
+        $this->authorize('checkout', $asset);
 
         $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
@@ -583,9 +574,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkin', $asset);
         $statusLabel_list = Helper::statusLabelList();
         return View::make('hardware/checkin', compact('asset'))->with('statusLabel_list', $statusLabel_list)->with('backto', $backto);
     }
@@ -605,9 +596,9 @@ class AssetsController extends Controller
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkin', $asset);
 
         $admin = Auth::user();
 
@@ -659,7 +650,11 @@ class AssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.url('/').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
+                                    'value' => class_basename(
+                                        strtoupper($logaction->item_type))
+                                        .' asset <'.route('hardware.show', $asset->id).'|'.e($asset->showAssetName())
+                                        .'> checked in by <'.route('users.show',Auth::user()->id)
+                                        .'|'.e(Auth::user()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -716,10 +711,8 @@ class AssetsController extends Controller
     {
         $asset = Asset::withTrashed()->find($assetId);
         $settings = Setting::getSettings();
-
-        if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif ($asset->userloc) {
+        $this->authorize('view', $asset);
+        if ($asset->userloc) {
             $use_currency = $asset->userloc->currency;
         } elseif ($asset->assetloc) {
             $use_currency = $asset->assetloc->currency;
@@ -830,7 +823,7 @@ class AssetsController extends Controller
     */
     public function getImportUpload()
     {
-
+        $this->authorize('create', Asset::class);
         $path = config('app.private_uploads').'/imports/assets';
         $files = array();
 
@@ -930,10 +923,7 @@ class AssetsController extends Controller
 
     public function getDeleteImportFile($filename)
     {
-        if (!Company::isCurrentUserAuthorized()) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        }
-
+        $this->authorize('create', Asset::class);
         if (unlink(config('app.private_uploads').'/imports/assets/'.$filename)) {
             return redirect()->back()->with('success', trans('admin/hardware/message.import.file_delete_success'));
         }
@@ -956,9 +946,7 @@ class AssetsController extends Controller
         $itemType = Input::get('import-type');
         $updateItems  = Input::get('import-update');
 
-        if (!Company::isCurrentUserAuthorized()) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        }
+        $this->authorize('create', Asset::class);
         $importOptions =    ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
                                 '--email_format'=>'firstname.lastname',
                                 '--username_format'=>'firstname.lastname',
@@ -1011,9 +999,9 @@ class AssetsController extends Controller
         if (is_null($asset_to_clone = Asset::find($assetId))) {
             // Redirect to the asset management page
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($asset_to_clone)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('create',$asset_to_clone);
 
         // Grab the dropdown lists
         $model_list = Helper::modelList();
@@ -1056,7 +1044,7 @@ class AssetsController extends Controller
      */
     public function getImportHistory()
     {
-
+        $this->authorize('checkout', Asset::class);
         return View::make('hardware/history');
     }
 
@@ -1230,12 +1218,10 @@ class AssetsController extends Controller
     public function getRestore($assetId = null)
     {
 
-        // Get user information
+        // Get asset information
         $asset = Asset::withTrashed()->find($assetId);
-
-        if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif (isset($asset->id)) {
+        $this->authorize('delete', $asset);
+        if (isset($asset->id)) {
 
             // Restore the asset
             Asset::withTrashed()->where('id', $assetId)->restore();
@@ -1262,6 +1248,7 @@ class AssetsController extends Controller
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
+        $this->authorize('update', $asset);
 
         $destinationPath = config('app.private_uploads').'/assets';
 
@@ -1309,6 +1296,7 @@ class AssetsController extends Controller
     public function getDeleteFile($assetId = null, $fileId = null)
     {
         $asset = Asset::find($assetId);
+        $this->authorize('update', $asset);
         $destinationPath = config('app.private_uploads').'/imports/assets';
 
         // the asset is valid
@@ -1351,9 +1339,9 @@ class AssetsController extends Controller
     {
 
         $asset = Asset::find($assetId);
-
         // the asset is valid
         if (isset($asset->id)) {
+            $this->authorize('view', $asset);
 
 
             if (!Company::isCurrentUserHasAccess($asset)) {
@@ -1394,7 +1382,7 @@ class AssetsController extends Controller
     */
     public function postBulkEdit($assets = null)
     {
-
+        $this->authorize('update', Asset::class);
         if (!Company::isCurrentUserAuthorized()) {
             return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
 
@@ -1430,6 +1418,9 @@ class AssetsController extends Controller
 
 
                 $assets = Asset::with('assigneduser', 'assetloc')->find($asset_ids);
+                $assets->each(function($asset) {
+                    $this->authorize('delete',$asset);
+                });
                 return View::make('hardware/bulk-delete')->with('assets', $assets);
 
              // Bulk edit
@@ -1474,10 +1465,8 @@ class AssetsController extends Controller
     public function postBulkSave($assets = null)
     {
 
-        if (!Company::isCurrentUserAuthorized()) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-
-        } elseif (Input::has('bulk_edit')) {
+        $this->authorize('update', Asset::class);
+        if (Input::has('bulk_edit')) {
 
             $assets = Input::get('bulk_edit');
 
@@ -1577,10 +1566,8 @@ class AssetsController extends Controller
     */
     public function postBulkDelete($assets = null)
     {
-
-        if (!Company::isCurrentUserAuthorized()) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif (Input::has('bulk_edit')) {
+        $this->authorize('delete', Asset::class);
+        if (Input::has('bulk_edit')) {
               //$assets = Input::get('bulk_edit');
             $assets = Asset::find(Input::get('bulk_edit'));
           //print_r($assets);
@@ -1631,7 +1618,7 @@ class AssetsController extends Controller
     public function getDatatable(Request $request, $status = null)
     {
 
-
+        $this->authorize('index', Asset::class);
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
         ->Hardware();
 
@@ -1756,15 +1743,15 @@ class AssetsController extends Controller
             $inout = '';
             $actions = '<div style="white-space: nowrap;">';
             if ($asset->deleted_at=='') {
-                if (Gate::allows('assets.create')) {
+                if (Gate::allows('create', $asset)) {
                     $actions .= '<a href="' . route('clone/hardware',
                             $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i></a> ';
                 }
-                if (Gate::allows('assets.edit')) {
+                if (Gate::allows('update', $asset)) {
                     $actions .= '<a href="' . route('hardware.edit',
                             $asset->id) . '" class="btn btn-warning btn-sm" title="Edit asset" data-toggle="tooltip"><i class="fa fa-pencil icon-white"></i></a> ';
                 }
-                if (Gate::allows('assets.delete')) {
+                if (Gate::allows('delete', $asset)) {
                     $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('hardware.destroy',
                             $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
                 }
@@ -1776,13 +1763,13 @@ class AssetsController extends Controller
 
             if (($asset->availableForCheckout()))
             {
-                if (Gate::allows('assets.checkout')) {
+                if (Gate::allows('checkout', $asset)) {
                     $inout = '<a href="' . route('checkout/hardware',
                             $asset->id) . '" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">' . trans('general.checkout') . '</a>';
                 }
 
             } else {
-                if (Gate::allows('assets.checkin')) {
+                if (Gate::allows('checkin', $asset)) {
                     $inout = '<a href="' . route('checkin/hardware',
                             $asset->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
                 }
@@ -1792,18 +1779,30 @@ class AssetsController extends Controller
 
             $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
-            'id'        => $asset->id,
-            'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.url('/').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.url('/').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
-            'name'          => '<a title="'.e($asset->name).'" href="hardware/'.$asset->id.'/view">'.e($asset->name).'</a>',
-            'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
+            'id'            => $asset->id,
+            'image'         => (($asset->image) && ($asset->image!=''))
+                                    ? '<img src="'.url('/').'/uploads/assets/'.$asset->image.'" height=50 width=50>'
+                                    : ((($asset->model) && ($asset->model->image!=''))
+                                        ? '<img src="'.url('/').'/uploads/models/'.$asset->model->image.'" height=40 width=50>'
+                                        : ''
+                                    ),
+            'name'          => (string) link_to_route('hardware.show', e($asset->name), $asset->id),
+            'asset_tag'     => (string) link_to_route('hardware.show', e($asset->asset_tag), $asset->id),
             'serial'        => e($asset->serial),
-            'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
+            'model'         => ($asset->model) ? (string)link_to_route('models.show', e($asset->model->name), ['model' => $asset->model->id]) : 'No model',
             'model_number'  => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
-            'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
-            'assigned_to'        => ($asset->assigneduser) ? (string)link_to(url('/').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
-            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
-            'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
-            'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
+            'status_label'  => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
+            'assigned_to'   => ($asset->assigneduser) ? (string)link_to_route('users.show', e($asset->assigneduser->fullName()), ['user' => $asset->assigned_to]) : '',
+            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!=''))
+                                    ? (string)link_to_route('locations.show', e($asset->assigneduser->userloc->name), ['location' => $asset->assigneduser->userloc->id])
+                                    : (($asset->defaultLoc!='')
+                                        ? (string)link_to_route('locations.show', e($asset->defaultLoc->name), ['location' => $asset->defaultLoc->id])
+                                        : ''
+                                    ),
+            'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to_route('categories.show', e($asset->model->category->name), ['category' => $asset->model->category->id]) : '',
+            'manufacturer'  => (($asset->model) && ($asset->model->manufacturer))
+                                        ? (string)link_to_route('manufacturers.show', e($asset->model->manufacturer->name), ['manufacturer' => $asset->model->manufacturer->id])
+                                        : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'purchase_cost'           => $purchase_cost,
             'purchase_date'           => ($asset->purchase_date) ? $asset->purchase_date : '',
@@ -1811,7 +1810,7 @@ class AssetsController extends Controller
             'order_number'  => ($asset->order_number!='') ? '<a href="'.url('/').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
-            'created_at' => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
+            'created_at'    => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
@@ -1856,6 +1855,7 @@ class AssetsController extends Controller
 
       public function getBulkCheckout()
       {
+        $this->authorize('checkout', Asset::class);
           // Get the dropdown of users and then pass it to the checkout view
           $users_list = Helper::usersList();
           // Filter out assets that are not deployable.
@@ -1868,7 +1868,6 @@ class AssetsController extends Controller
 
       public function postBulkCheckout(Request $request)
       {
-
           $this->validate($request, [
              "assigned_to"   => 'required'
           ]);
@@ -1897,7 +1896,7 @@ class AssetsController extends Controller
               foreach($asset_ids as $asset_id)
               {
                   $asset = Asset::find($asset_id);
-
+                  $this->authorize('checkout', $asset);
                   $error = $asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
 
                   if($error)

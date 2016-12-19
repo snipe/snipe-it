@@ -8,8 +8,8 @@
 
 
 @section('header_right')
-  @can('assets.edit')
-<a href="{{ route('maintenances.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+  @can('update', \App\Models\Asset::class)
+    <a href="{{ route('maintenances.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
   @endcan
 @stop
 
@@ -47,7 +47,7 @@
               <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right">{{ trans('admin/asset_maintenances/form.cost') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="user_id">{{ trans('general.admin') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
-                @can('assets.edit')
+                @can('update', \App\Models\Asset::class)
                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               @endcan
               </tr>

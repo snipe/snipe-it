@@ -57,6 +57,8 @@ class GroupsCest
         $I->wantTo('Ensure I can delete a group');
         $I->amOnPage(route('delete/group', Group::doesntHave('users')->first()->id));
         $I->seeElement('.alert-success');
+        // $I->sendDelete(route('delete/group', Group::doesntHave('users')->first()->id), ['_token' => csrf_token()]);
+        // $I->seeResponseCodeIs(200);
     }
 
 }

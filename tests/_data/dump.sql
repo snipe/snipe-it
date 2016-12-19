@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.15, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: snipeittests
 -- ------------------------------------------------------
--- Server version	5.7.15-0ubuntu0.16.04.1
+-- Server version	5.7.16-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -795,7 +795,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES ('2012_12_06_225921_migration_cartalyst_sentry_install_users',1),('2012_12_06_225929_migration_cartalyst_sentry_install_groups',1),('2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot',1),('2012_12_06_225988_migration_cartalyst_sentry_install_throttle',1),('2013_03_23_193214_update_users_table',1),('2013_11_13_075318_create_models_table',1),('2013_11_13_075335_create_categories_table',1),('2013_11_13_075347_create_manufacturers_table',1),('2013_11_15_015858_add_user_id_to_categories',1),('2013_11_15_112701_add_user_id_to_manufacturers',1),('2013_11_15_190327_create_assets_table',1),('2013_11_15_190357_create_licenses_table',1),('2013_11_15_201848_add_license_name_to_licenses',1),('2013_11_16_040323_create_depreciations_table',1),('2013_11_16_042851_add_depreciation_id_to_models',1),('2013_11_16_084923_add_user_id_to_models',1),('2013_11_16_103258_create_locations_table',1),('2013_11_16_103336_add_location_id_to_assets',1),('2013_11_16_103407_add_checkedout_to_to_assets',1),('2013_11_16_103425_create_history_table',1),('2013_11_17_054359_drop_licenses_table',1),('2013_11_17_054526_add_physical_to_assets',1),('2013_11_17_055126_create_settings_table',1),('2013_11_17_062634_add_license_to_assets',1),('2013_11_18_134332_add_contacts_to_users',1),('2013_11_18_142847_add_info_to_locations',1),('2013_11_18_152942_remove_location_id_from_asset',1),('2013_11_18_164423_set_nullvalues_for_user',1),('2013_11_19_013337_create_asset_logs_table',1),('2013_11_19_061409_edit_added_on_asset_logs_table',1),('2013_11_19_062250_edit_location_id_asset_logs_table',1),('2013_11_20_055822_add_soft_delete_on_assets',1),('2013_11_20_121404_add_soft_delete_on_locations',1),('2013_11_20_123137_add_soft_delete_on_manufacturers',1),('2013_11_20_123725_add_soft_delete_on_categories',1),('2013_11_20_130248_create_status_labels',1),('2013_11_20_130830_add_status_id_on_assets_table',1),('2013_11_20_131544_add_status_type_on_status_labels',1),('2013_11_20_134103_add_archived_to_assets',1),('2013_11_21_002321_add_uploads_table',1),('2013_11_21_024531_remove_deployable_boolean_from_status_labels',1),('2013_11_22_075308_add_option_label_to_settings_table',1),('2013_11_22_213400_edits_to_settings_table',1),('2013_11_25_013244_create_licenses_table',1),('2013_11_25_031458_create_license_seats_table',1),('2013_11_25_032022_add_type_to_actionlog_table',1),('2013_11_25_033008_delete_bad_licenses_table',1),('2013_11_25_033131_create_new_licenses_table',1),('2013_11_25_033534_add_licensed_to_licenses_table',1),('2013_11_25_101308_add_warrantee_to_assets_table',1),('2013_11_25_104343_alter_warranty_column_on_assets',1),('2013_11_25_150450_drop_parent_from_categories',1),('2013_11_25_151920_add_depreciate_to_assets',1),('2013_11_25_152903_add_depreciate_to_licenses_table',1),('2013_11_26_211820_drop_license_from_assets_table',1),('2013_11_27_062510_add_note_to_asset_logs_table',1),('2013_12_01_113426_add_filename_to_asset_log',1),('2013_12_06_094618_add_nullable_to_licenses_table',1),('2013_12_10_084038_add_eol_on_models_table',1),('2013_12_12_055218_add_manager_to_users_table',1),('2014_01_28_031200_add_qr_code_to_settings_table',1),('2014_02_13_183016_add_qr_text_to_settings_table',1),('2014_05_24_093839_alter_default_license_depreciation_id',1),('2014_05_27_231658_alter_default_values_licenses',1),('2014_06_19_191508_add_asset_name_to_settings',1),('2014_06_20_004847_make_asset_log_checkedout_to_nullable',1),('2014_06_20_005050_make_asset_log_purchasedate_to_nullable',1),('2014_06_24_003011_add_suppliers',1),('2014_06_24_010742_add_supplier_id_to_asset',1),('2014_06_24_012839_add_zip_to_supplier',1),('2014_06_24_033908_add_url_to_supplier',1),('2014_07_08_054116_add_employee_id_to_users',1),('2014_07_09_134316_add_requestable_to_assets',1),('2014_07_17_085822_add_asset_to_software',1),('2014_07_17_161625_make_asset_id_in_logs_nullable',1),('2014_08_12_053504_alpha_0_4_2_release',1),('2014_08_17_083523_make_location_id_nullable',1),('2014_10_16_200626_add_rtd_location_to_assets',1),('2014_10_24_000417_alter_supplier_state_to_32',1),('2014_10_24_015641_add_display_checkout_date',1),('2014_10_28_222654_add_avatar_field_to_users_table',1),('2014_10_29_045924_add_image_field_to_models_table',1),('2014_11_01_214955_add_eol_display_to_settings',1),('2014_11_04_231416_update_group_field_for_reporting',1),('2014_11_05_212408_add_fields_to_licenses',1),('2014_11_07_021042_add_image_to_supplier',1),('2014_11_20_203007_add_username_to_user',1),('2014_11_20_223947_add_auto_to_settings',1),('2014_11_20_224421_add_prefix_to_settings',1),('2014_11_21_104401_change_licence_type',1),('2014_12_09_082500_add_fields_maintained_term_to_licenses',1),('2015_02_04_155757_increase_user_field_lengths',1),('2015_02_07_013537_add_soft_deleted_to_log',1),('2015_02_10_040958_fix_bad_assigned_to_ids',1),('2015_02_10_053310_migrate_data_to_new_statuses',1),('2015_02_11_044104_migrate_make_license_assigned_null',1),('2015_02_11_104406_migrate_create_requests_table',1),('2015_02_12_001312_add_mac_address_to_asset',1),('2015_02_12_024100_change_license_notes_type',1),('2015_02_17_231020_add_localonly_to_settings',1),('2015_02_19_222322_add_logo_and_colors_to_settings',1),('2015_02_24_072043_add_alerts_to_settings',1),('2015_02_25_022931_add_eula_fields',1),('2015_02_25_204513_add_accessories_table',1),('2015_02_26_091228_add_accessories_user_table',1),('2015_02_26_115128_add_deleted_at_models',1),('2015_02_26_233005_add_category_type',1),('2015_03_01_231912_update_accepted_at_to_acceptance_id',1),('2015_03_05_011929_add_qr_type_to_settings',1),('2015_03_18_055327_add_note_to_user',1),('2015_04_29_234704_add_slack_to_settings',1),('2015_05_04_085151_add_parent_id_to_locations_table',1),('2015_05_22_124421_add_reassignable_to_licenses',1),('2015_06_10_003314_fix_default_for_user_notes',1),('2015_06_10_003554_create_consumables',1),('2015_06_15_183253_move_email_to_username',1),('2015_06_23_070346_make_email_nullable',1),('2015_06_26_213716_create_asset_maintenances_table',1),('2015_07_04_212443_create_custom_fields_table',1),('2015_07_09_014359_add_currency_to_settings_and_locations',1),('2015_07_21_122022_add_expected_checkin_date_to_asset_logs',1),('2015_07_24_093845_add_checkin_email_to_category_table',1),('2015_07_25_055415_remove_email_unique_constraint',1),('2015_07_29_230054_add_thread_id_to_asset_logs_table',1),('2015_07_31_015430_add_accepted_to_assets',1),('2015_09_09_195301_add_custom_css_to_settings',1),('2015_09_21_235926_create_custom_field_custom_fieldset',1),('2015_09_22_000104_create_custom_fieldsets',1),('2015_09_22_003321_add_fieldset_id_to_assets',1),('2015_09_22_003413_migrate_mac_address',1),('2015_09_28_003314_fix_default_purchase_order',1),('2015_10_01_024551_add_accessory_consumable_price_info',1),('2015_10_12_192706_add_brand_to_settings',1),('2015_10_22_003314_fix_defaults_accessories',1),('2015_10_23_182625_add_checkout_time_and_expected_checkout_date_to_assets',1),('2015_11_05_061015_create_companies_table',1),('2015_11_05_061115_add_company_id_to_consumables_table',1),('2015_11_05_183749_image',1),('2015_11_06_092038_add_company_id_to_accessories_table',1),('2015_11_06_100045_add_company_id_to_users_table',1),('2015_11_06_134742_add_company_id_to_licenses_table',1),('2015_11_08_035832_add_company_id_to_assets_table',1),('2015_11_08_222305_add_ldap_fields_to_settings',1),('2015_11_15_151803_add_full_multiple_companies_support_to_settings_table',1),('2015_11_26_195528_import_ldap_settings',1),('2015_11_30_191504_remove_fk_company_id',1),('2015_12_21_193006_add_ldap_server_cert_ignore_to_settings_table',1),('2015_12_30_233509_add_timestamp_and_userId_to_custom_fields',1),('2015_12_30_233658_add_timestamp_and_userId_to_custom_fieldsets',1),('2016_01_28_041048_add_notes_to_models',1),('2016_02_19_070119_add_remember_token_to_users_table',1),('2016_02_19_073625_create_password_resets_table',1),('2016_03_02_193043_add_ldap_flag_to_users',1),('2016_03_02_220517_update_ldap_filter_to_longer_field',1),('2016_03_08_225351_create_components_table',1),('2016_03_09_024038_add_min_stock_to_tables',1),('2016_03_10_133849_add_locale_to_users',1),('2016_03_10_135519_add_locale_to_settings',1),('2016_03_11_185621_add_label_settings_to_settings',1),('2016_03_22_125911_fix_custom_fields_regexes',1),('2016_04_28_141554_add_show_to_users',1),('2016_05_16_164733_add_model_mfg_to_consumable',1),('2016_05_19_180351_add_alt_barcode_settings',1),('2016_05_19_191146_add_alter_interval',1),('2016_05_19_192226_add_inventory_threshold',1),('2016_05_20_024859_remove_option_keys_from_settings_table',1),('2016_05_20_143758_remove_option_value_from_settings_table',1),('2016_06_01_140218_add_email_domain_and_format_to_settings',1),('2016_06_22_160725_add_user_id_to_maintenances',1),('2016_07_13_150015_add_is_ad_to_settings',1),('2016_07_14_153609_add_ad_domain_to_settings',1),('2016_07_22_003348_fix_custom_fields_regex_stuff',1),('2016_07_22_054850_one_more_mac_addr_fix',1),('2016_07_22_143045_add_port_to_ldap_settings',1),('2016_07_22_153432_add_tls_to_ldap_settings',1),('2016_07_27_211034_add_zerofill_to_settings',1),('2016_08_02_124944_add_color_to_statuslabel',1),('2016_08_04_134500_add_disallow_ldap_pw_sync_to_settings',1),('2016_08_09_002225_add_manufacturer_to_licenses',1),('2016_08_12_121613_add_manufacturer_to_accessories_table',1),('2016_08_23_143353_add_new_fields_to_custom_fields',1),('2016_08_23_145619_add_show_in_nav_to_status_labels',1),('2016_08_30_084634_make_purchase_cost_nullable',1),('2016_09_01_141051_add_requestable_to_asset_model',1),('2016_09_02_001448_create_checkout_requests_table',1),('2016_09_04_180400_create_actionlog_table',1),('2016_09_04_182149_migrate_asset_log_to_action_log',1),('2016_09_19_235935_fix_fieldtype_for_target_type',1),('2016_09_23_140722_fix_modelno_in_consumables_to_string',1),('2016_09_28_231359_add_company_to_logs',1),('2016_10_14_130709_fix_order_number_to_varchar',1),('2016_10_19_145520_fix_order_number_in_components_to_string',1),('2016_10_27_151715_add_serial_to_components',1),('2016_10_27_213251_increase_serial_field_capacity',1),('2016_10_29_002724_enable_2fa_fields',1),('2016_10_29_082408_add_signature_to_acceptance',1),('2016_11_01_030818_fix_forgotten_filename_in_action_logs',1),('2016_10_16_015024_rename_modelno_to_model_number',2),('2016_10_16_015211_rename_consumable_modelno_to_model_number',2),('2016_10_16_143235_rename_model_note_to_notes',2),('2016_10_16_165052_rename_component_total_qty_to_qty',2),('2016_11_13_020954_rename_component_serial_number_to_serial',2),('2016_11_16_172119_increase_purchase_cost_size',3),('2016_11_17_161317_longer_state_field_in_location',3),('2016_11_17_193706_add_model_number_to_accessories',3);
+INSERT INTO `migrations` VALUES ('2012_12_06_225921_migration_cartalyst_sentry_install_users',1),('2012_12_06_225929_migration_cartalyst_sentry_install_groups',1),('2012_12_06_225945_migration_cartalyst_sentry_install_users_groups_pivot',1),('2012_12_06_225988_migration_cartalyst_sentry_install_throttle',1),('2013_03_23_193214_update_users_table',1),('2013_11_13_075318_create_models_table',1),('2013_11_13_075335_create_categories_table',1),('2013_11_13_075347_create_manufacturers_table',1),('2013_11_15_015858_add_user_id_to_categories',1),('2013_11_15_112701_add_user_id_to_manufacturers',1),('2013_11_15_190327_create_assets_table',1),('2013_11_15_190357_create_licenses_table',1),('2013_11_15_201848_add_license_name_to_licenses',1),('2013_11_16_040323_create_depreciations_table',1),('2013_11_16_042851_add_depreciation_id_to_models',1),('2013_11_16_084923_add_user_id_to_models',1),('2013_11_16_103258_create_locations_table',1),('2013_11_16_103336_add_location_id_to_assets',1),('2013_11_16_103407_add_checkedout_to_to_assets',1),('2013_11_16_103425_create_history_table',1),('2013_11_17_054359_drop_licenses_table',1),('2013_11_17_054526_add_physical_to_assets',1),('2013_11_17_055126_create_settings_table',1),('2013_11_17_062634_add_license_to_assets',1),('2013_11_18_134332_add_contacts_to_users',1),('2013_11_18_142847_add_info_to_locations',1),('2013_11_18_152942_remove_location_id_from_asset',1),('2013_11_18_164423_set_nullvalues_for_user',1),('2013_11_19_013337_create_asset_logs_table',1),('2013_11_19_061409_edit_added_on_asset_logs_table',1),('2013_11_19_062250_edit_location_id_asset_logs_table',1),('2013_11_20_055822_add_soft_delete_on_assets',1),('2013_11_20_121404_add_soft_delete_on_locations',1),('2013_11_20_123137_add_soft_delete_on_manufacturers',1),('2013_11_20_123725_add_soft_delete_on_categories',1),('2013_11_20_130248_create_status_labels',1),('2013_11_20_130830_add_status_id_on_assets_table',1),('2013_11_20_131544_add_status_type_on_status_labels',1),('2013_11_20_134103_add_archived_to_assets',1),('2013_11_21_002321_add_uploads_table',1),('2013_11_21_024531_remove_deployable_boolean_from_status_labels',1),('2013_11_22_075308_add_option_label_to_settings_table',1),('2013_11_22_213400_edits_to_settings_table',1),('2013_11_25_013244_create_licenses_table',1),('2013_11_25_031458_create_license_seats_table',1),('2013_11_25_032022_add_type_to_actionlog_table',1),('2013_11_25_033008_delete_bad_licenses_table',1),('2013_11_25_033131_create_new_licenses_table',1),('2013_11_25_033534_add_licensed_to_licenses_table',1),('2013_11_25_101308_add_warrantee_to_assets_table',1),('2013_11_25_104343_alter_warranty_column_on_assets',1),('2013_11_25_150450_drop_parent_from_categories',1),('2013_11_25_151920_add_depreciate_to_assets',1),('2013_11_25_152903_add_depreciate_to_licenses_table',1),('2013_11_26_211820_drop_license_from_assets_table',1),('2013_11_27_062510_add_note_to_asset_logs_table',1),('2013_12_01_113426_add_filename_to_asset_log',1),('2013_12_06_094618_add_nullable_to_licenses_table',1),('2013_12_10_084038_add_eol_on_models_table',1),('2013_12_12_055218_add_manager_to_users_table',1),('2014_01_28_031200_add_qr_code_to_settings_table',1),('2014_02_13_183016_add_qr_text_to_settings_table',1),('2014_05_24_093839_alter_default_license_depreciation_id',1),('2014_05_27_231658_alter_default_values_licenses',1),('2014_06_19_191508_add_asset_name_to_settings',1),('2014_06_20_004847_make_asset_log_checkedout_to_nullable',1),('2014_06_20_005050_make_asset_log_purchasedate_to_nullable',1),('2014_06_24_003011_add_suppliers',1),('2014_06_24_010742_add_supplier_id_to_asset',1),('2014_06_24_012839_add_zip_to_supplier',1),('2014_06_24_033908_add_url_to_supplier',1),('2014_07_08_054116_add_employee_id_to_users',1),('2014_07_09_134316_add_requestable_to_assets',1),('2014_07_17_085822_add_asset_to_software',1),('2014_07_17_161625_make_asset_id_in_logs_nullable',1),('2014_08_12_053504_alpha_0_4_2_release',1),('2014_08_17_083523_make_location_id_nullable',1),('2014_10_16_200626_add_rtd_location_to_assets',1),('2014_10_24_000417_alter_supplier_state_to_32',1),('2014_10_24_015641_add_display_checkout_date',1),('2014_10_28_222654_add_avatar_field_to_users_table',1),('2014_10_29_045924_add_image_field_to_models_table',1),('2014_11_01_214955_add_eol_display_to_settings',1),('2014_11_04_231416_update_group_field_for_reporting',1),('2014_11_05_212408_add_fields_to_licenses',1),('2014_11_07_021042_add_image_to_supplier',1),('2014_11_20_203007_add_username_to_user',1),('2014_11_20_223947_add_auto_to_settings',1),('2014_11_20_224421_add_prefix_to_settings',1),('2014_11_21_104401_change_licence_type',1),('2014_12_09_082500_add_fields_maintained_term_to_licenses',1),('2015_02_04_155757_increase_user_field_lengths',1),('2015_02_07_013537_add_soft_deleted_to_log',1),('2015_02_10_040958_fix_bad_assigned_to_ids',1),('2015_02_10_053310_migrate_data_to_new_statuses',1),('2015_02_11_044104_migrate_make_license_assigned_null',1),('2015_02_11_104406_migrate_create_requests_table',1),('2015_02_12_001312_add_mac_address_to_asset',1),('2015_02_12_024100_change_license_notes_type',1),('2015_02_17_231020_add_localonly_to_settings',1),('2015_02_19_222322_add_logo_and_colors_to_settings',1),('2015_02_24_072043_add_alerts_to_settings',1),('2015_02_25_022931_add_eula_fields',1),('2015_02_25_204513_add_accessories_table',1),('2015_02_26_091228_add_accessories_user_table',1),('2015_02_26_115128_add_deleted_at_models',1),('2015_02_26_233005_add_category_type',1),('2015_03_01_231912_update_accepted_at_to_acceptance_id',1),('2015_03_05_011929_add_qr_type_to_settings',1),('2015_03_18_055327_add_note_to_user',1),('2015_04_29_234704_add_slack_to_settings',1),('2015_05_04_085151_add_parent_id_to_locations_table',1),('2015_05_22_124421_add_reassignable_to_licenses',1),('2015_06_10_003314_fix_default_for_user_notes',1),('2015_06_10_003554_create_consumables',1),('2015_06_15_183253_move_email_to_username',1),('2015_06_23_070346_make_email_nullable',1),('2015_06_26_213716_create_asset_maintenances_table',1),('2015_07_04_212443_create_custom_fields_table',1),('2015_07_09_014359_add_currency_to_settings_and_locations',1),('2015_07_21_122022_add_expected_checkin_date_to_asset_logs',1),('2015_07_24_093845_add_checkin_email_to_category_table',1),('2015_07_25_055415_remove_email_unique_constraint',1),('2015_07_29_230054_add_thread_id_to_asset_logs_table',1),('2015_07_31_015430_add_accepted_to_assets',1),('2015_09_09_195301_add_custom_css_to_settings',1),('2015_09_21_235926_create_custom_field_custom_fieldset',1),('2015_09_22_000104_create_custom_fieldsets',1),('2015_09_22_003321_add_fieldset_id_to_assets',1),('2015_09_22_003413_migrate_mac_address',1),('2015_09_28_003314_fix_default_purchase_order',1),('2015_10_01_024551_add_accessory_consumable_price_info',1),('2015_10_12_192706_add_brand_to_settings',1),('2015_10_22_003314_fix_defaults_accessories',1),('2015_10_23_182625_add_checkout_time_and_expected_checkout_date_to_assets',1),('2015_11_05_061015_create_companies_table',1),('2015_11_05_061115_add_company_id_to_consumables_table',1),('2015_11_05_183749_image',1),('2015_11_06_092038_add_company_id_to_accessories_table',1),('2015_11_06_100045_add_company_id_to_users_table',1),('2015_11_06_134742_add_company_id_to_licenses_table',1),('2015_11_08_035832_add_company_id_to_assets_table',1),('2015_11_08_222305_add_ldap_fields_to_settings',1),('2015_11_15_151803_add_full_multiple_companies_support_to_settings_table',1),('2015_11_26_195528_import_ldap_settings',1),('2015_11_30_191504_remove_fk_company_id',1),('2015_12_21_193006_add_ldap_server_cert_ignore_to_settings_table',1),('2015_12_30_233509_add_timestamp_and_userId_to_custom_fields',1),('2015_12_30_233658_add_timestamp_and_userId_to_custom_fieldsets',1),('2016_01_28_041048_add_notes_to_models',1),('2016_02_19_070119_add_remember_token_to_users_table',1),('2016_02_19_073625_create_password_resets_table',1),('2016_03_02_193043_add_ldap_flag_to_users',1),('2016_03_02_220517_update_ldap_filter_to_longer_field',1),('2016_03_08_225351_create_components_table',1),('2016_03_09_024038_add_min_stock_to_tables',1),('2016_03_10_133849_add_locale_to_users',1),('2016_03_10_135519_add_locale_to_settings',1),('2016_03_11_185621_add_label_settings_to_settings',1),('2016_03_22_125911_fix_custom_fields_regexes',1),('2016_04_28_141554_add_show_to_users',1),('2016_05_16_164733_add_model_mfg_to_consumable',1),('2016_05_19_180351_add_alt_barcode_settings',1),('2016_05_19_191146_add_alter_interval',1),('2016_05_19_192226_add_inventory_threshold',1),('2016_05_20_024859_remove_option_keys_from_settings_table',1),('2016_05_20_143758_remove_option_value_from_settings_table',1),('2016_06_01_140218_add_email_domain_and_format_to_settings',1),('2016_06_22_160725_add_user_id_to_maintenances',1),('2016_07_13_150015_add_is_ad_to_settings',1),('2016_07_14_153609_add_ad_domain_to_settings',1),('2016_07_22_003348_fix_custom_fields_regex_stuff',1),('2016_07_22_054850_one_more_mac_addr_fix',1),('2016_07_22_143045_add_port_to_ldap_settings',1),('2016_07_22_153432_add_tls_to_ldap_settings',1),('2016_07_27_211034_add_zerofill_to_settings',1),('2016_08_02_124944_add_color_to_statuslabel',1),('2016_08_04_134500_add_disallow_ldap_pw_sync_to_settings',1),('2016_08_09_002225_add_manufacturer_to_licenses',1),('2016_08_12_121613_add_manufacturer_to_accessories_table',1),('2016_08_23_143353_add_new_fields_to_custom_fields',1),('2016_08_23_145619_add_show_in_nav_to_status_labels',1),('2016_08_30_084634_make_purchase_cost_nullable',1),('2016_09_01_141051_add_requestable_to_asset_model',1),('2016_09_02_001448_create_checkout_requests_table',1),('2016_09_04_180400_create_actionlog_table',1),('2016_09_04_182149_migrate_asset_log_to_action_log',1),('2016_09_19_235935_fix_fieldtype_for_target_type',1),('2016_09_23_140722_fix_modelno_in_consumables_to_string',1),('2016_09_28_231359_add_company_to_logs',1),('2016_10_14_130709_fix_order_number_to_varchar',1),('2016_10_19_145520_fix_order_number_in_components_to_string',1),('2016_10_27_151715_add_serial_to_components',1),('2016_10_27_213251_increase_serial_field_capacity',1),('2016_10_29_002724_enable_2fa_fields',1),('2016_10_29_082408_add_signature_to_acceptance',1),('2016_11_01_030818_fix_forgotten_filename_in_action_logs',1),('2016_10_16_015024_rename_modelno_to_model_number',2),('2016_10_16_015211_rename_consumable_modelno_to_model_number',2),('2016_10_16_143235_rename_model_note_to_notes',2),('2016_10_16_165052_rename_component_total_qty_to_qty',2),('2016_11_13_020954_rename_component_serial_number_to_serial',2),('2016_11_16_172119_increase_purchase_cost_size',3),('2016_11_17_161317_longer_state_field_in_location',3),('2016_11_17_193706_add_model_number_to_accessories',3),('2016_06_01_000001_create_oauth_auth_codes_table',4),('2016_06_01_000002_create_oauth_access_tokens_table',4),('2016_06_01_000003_create_oauth_refresh_tokens_table',4),('2016_06_01_000004_create_oauth_clients_table',4),('2016_06_01_000005_create_oauth_personal_access_clients_table',4),('2016_11_24_160405_add_missing_target_type_to_logs_table',4),('2016_12_07_173720_increase_size_of_state_in_suppliers',4),('2016_12_19_004212_adjust_locale_length_to_10',4);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -835,6 +835,148 @@ LOCK TABLES `models` WRITE;
 /*!40000 ALTER TABLE `models` DISABLE KEYS */;
 INSERT INTO `models` VALUES (1,'Organized zerotolerance strategy','41955019',3,1,'2016-11-20 23:07:28','2016-11-20 23:07:28',NULL,NULL,1,NULL,0,NULL,NULL,NULL,0),(2,'Operative responsive focusgroup','36408246',7,5,'2016-11-20 23:07:28','2016-11-20 23:07:28',NULL,NULL,1,NULL,0,NULL,NULL,NULL,0),(3,'Operative actuating success','44231380',8,4,'2016-11-20 23:07:28','2016-11-20 23:07:28',NULL,NULL,1,NULL,0,NULL,NULL,NULL,0),(4,'Configurable 3rdgeneration success','17070824',1,2,'2016-11-20 23:07:28','2016-11-20 23:07:28',NULL,NULL,1,NULL,0,NULL,NULL,NULL,0),(5,'Multi-channelled background model','25964380',2,2,'2016-11-20 23:07:28','2016-11-20 23:07:28',NULL,NULL,1,NULL,0,NULL,NULL,NULL,0),(6,'Test Model','',2,5,'2016-11-20 23:12:49','2016-11-21 00:33:29',0,1,0,NULL,0,'2016-11-21 00:33:29',NULL,'',0),(7,'TestModel','350335',8,11,'2016-11-21 00:33:28','2016-11-21 00:33:28',0,1,12,NULL,0,NULL,NULL,'lorem ipsum blah blah',1);
 /*!40000 ALTER TABLE `models` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_access_tokens`
+--
+
+DROP TABLE IF EXISTS `oauth_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_access_tokens` (
+  `id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `client_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `scopes` text COLLATE utf8_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_access_tokens_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_access_tokens`
+--
+
+LOCK TABLES `oauth_access_tokens` WRITE;
+/*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_auth_codes`
+--
+
+DROP TABLE IF EXISTS `oauth_auth_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_auth_codes` (
+  `id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `scopes` text COLLATE utf8_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_auth_codes`
+--
+
+LOCK TABLES `oauth_auth_codes` WRITE;
+/*!40000 ALTER TABLE `oauth_auth_codes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_auth_codes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_clients`
+--
+
+DROP TABLE IF EXISTS `oauth_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_clients` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `secret` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `redirect` text COLLATE utf8_unicode_ci NOT NULL,
+  `personal_access_client` tinyint(1) NOT NULL,
+  `password_client` tinyint(1) NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_clients_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_clients`
+--
+
+LOCK TABLES `oauth_clients` WRITE;
+/*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_personal_access_clients`
+--
+
+DROP TABLE IF EXISTS `oauth_personal_access_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_personal_access_clients` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_personal_access_clients_client_id_index` (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_personal_access_clients`
+--
+
+LOCK TABLES `oauth_personal_access_clients` WRITE;
+/*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_refresh_tokens`
+--
+
+DROP TABLE IF EXISTS `oauth_refresh_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_refresh_tokens` (
+  `id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `access_token_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_refresh_tokens`
+--
+
+LOCK TABLES `oauth_refresh_tokens` WRITE;
+/*!40000 ALTER TABLE `oauth_refresh_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1061,7 +1203,7 @@ CREATE TABLE `suppliers` (
   `address` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address2` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `state` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `country` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fax` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1157,7 +1299,7 @@ CREATE TABLE `users` (
   `company_id` int(10) unsigned DEFAULT NULL,
   `remember_token` text COLLATE utf8_unicode_ci,
   `ldap_import` tinyint(1) NOT NULL DEFAULT '0',
-  `locale` varchar(5) COLLATE utf8_unicode_ci DEFAULT 'en',
+  `locale` varchar(10) COLLATE utf8_unicode_ci DEFAULT 'en',
   `show_in_list` tinyint(1) NOT NULL DEFAULT '1',
   `two_factor_secret` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `two_factor_enrolled` tinyint(1) NOT NULL DEFAULT '0',
@@ -1210,4 +1352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-20 12:36:32
+-- Dump completed on 2016-12-18 18:48:52

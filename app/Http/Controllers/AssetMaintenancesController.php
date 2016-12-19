@@ -117,7 +117,7 @@ class AssetMaintenancesController extends Controller
 
         foreach ($maintenances as $maintenance) {
             $actions = '';
-            if (Gate::allows('assets.edit')) {
+            if (Gate::allows('update', Asset::class)) {
                 $actions .= '<nobr><a href="' . route('maintenances.edit',
                         $maintenance->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('maintenances.destroy',
                         $maintenance->id) . '" data-content="' . trans('admin/asset_maintenances/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($maintenance->title) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
@@ -134,13 +134,13 @@ class AssetMaintenancesController extends Controller
                 'asset_name'    =>  ($maintenance->asset) ? (string)link_to_route('maintenances.show', $maintenance->asset->showAssetName(), ['maintenance' => $maintenance->asset->id]) : 'Deleted Asset' ,
                 'title'         => $maintenance->title,
                 'notes'         => $maintenance->notes,
-                'supplier'      => ($maintenance->supplier) ? (string)link_to('/admin/settings/suppliers/'.$maintenance->supplier->id.'/view', $maintenance->supplier->name) : 'Deleted Supplier',
+                'supplier'      => ($maintenance->supplier) ? (string)link_to_route('suppliers.show', $maintenance->supplier->name, ['maintenance'=>$maintenance->supplier->id]) : 'Deleted Supplier',
                 'cost'          => $maintenance_cost,
                 'asset_maintenance_type'          => e($maintenance->asset_maintenance_type),
                 'start_date'         => $maintenance->start_date,
                 'asset_maintenance_time'          => $maintenance->asset_maintenance_time,
                 'completion_date'     => $maintenance->completion_date,
-                'user_id'       => ($maintenance->admin) ? (string)link_to('/admin/users/'.$maintenance->admin->id.'/view', $maintenance->admin->fullName()) : '',
+                'user_id'       => ($maintenance->admin) ? (string)link_to_route('users.show', $maintenance->admin->fullName(), ['user'=>$maintenance->admin->id]) : '',
                 'actions'       => $actions,
                 'companyName'   => ($maintenance->asset->company) ? $maintenance->asset->company->name : ''
             );
@@ -152,22 +152,22 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-    *  Returns a form view to create a new asset maintenance.
-    *
-    * @see AssetMaintenancesController::postCreate() method that stores the data
-    * @author  Vincent Sposato <vincent.sposato@gmail.com>
-    * @version v1.0
-    * @since [v1.8]
-    * @return mixed
-    */
-    public function create($assetId = null)
+     *  Returns a form view to create a new asset maintenance.
+     *
+     * @see AssetMaintenancesController::postCreate() method that stores the data
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     * @since [v1.8]
+     * @return mixed
+     */
+    public function create()
     {
         // Prepare Asset Maintenance Type List
         $assetMaintenanceType = [
                                     '' => 'Select an asset maintenance type',
                                 ] + AssetMaintenance::getImprovementOptions();
         // Mark the selected asset, if it came in
-        $selectedAsset = $assetId;
+        $selectedAsset = request('asset_id');
 
         $assets = Helper::detailedAssetList();
 
@@ -196,7 +196,7 @@ class AssetMaintenancesController extends Controller
 
         // get the POST data
         $new = $request->all();
-
+//        dd($new);
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
 
@@ -308,7 +308,7 @@ class AssetMaintenancesController extends Controller
                                     '' => 'Select an improvement type',
                                 ] + AssetMaintenance::getImprovementOptions();
 
-        $assets = Company::scopeCompanyables(Asset::with('model','assignedUser')->get(), 'assets.company_id')->lists('detailed_name', 'id');
+        $assets = Helper::detailedAssetList();
         // Get Supplier List
         $supplier_list = Helper::suppliersList();
 

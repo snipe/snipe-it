@@ -25,7 +25,7 @@ use Carbon\Carbon;
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}">{{ trans('admin/asset_maintenances/general.edit') }}</a></li>
+                        <li role="presentation"><a href="{{ route('maintenances.update', $assetMaintenance->id) }}">{{ trans('admin/asset_maintenances/general.edit') }}</a></li>
                     </ul>
                 </div>
             </div>

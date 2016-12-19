@@ -62,7 +62,7 @@ class StatusLabelsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a Status Label');
-        $I->amOnPage(route('statuslabels.destroy', Statuslabel::doesntHave('assets')->first()->id));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('statuslabels.destroy', Statuslabel::doesntHave('assets')->first()->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

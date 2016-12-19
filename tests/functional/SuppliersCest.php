@@ -69,7 +69,7 @@ class SuppliersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a supplier');
-        $I->amOnPage(route('suppliers.destroy', Supplier::doesntHave('assets')->doesntHave('licenses')->first()->id));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('suppliers.destroy', Supplier::doesntHave('assets')->doesntHave('licenses')->first()->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

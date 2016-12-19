@@ -10,7 +10,7 @@
 {{-- Right header --}}
 @section('header_right')
 <div class="btn-group pull-right">
-    @can('licenses.edit')
+    @can('update', $license)
       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
           <span class="caret"></span>
       </button>
@@ -88,7 +88,7 @@
                             </td>
                             <td>
                                 @if ($licensedto->asset_id)
-                                        @can('assets.view')
+                                        @can('view', $licensedto->asset)
                                             <a href="{{ route('hardware.show', $licensedto->asset_id) }}">
                                                 {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
                                             </a>
@@ -99,7 +99,7 @@
                                 @endif
                             </td>
                             <td>
-                                @can('licenses.checkout')
+                                @can('checkout', $licensedto)
                                         @if (($licensedto->assigned_to) || ($licensedto->asset_id))
 
                                             @if ($license->reassignable)
@@ -144,7 +144,7 @@
                     </tr>
                     @endif
 
-                    @can('licenses.keys')
+                    @can('viewKeys', $license)
                         @if (!is_null($license->serial))
                         <tr>
                           <td>{{ trans('admin/licenses/form.license_key') }}</td>

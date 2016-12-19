@@ -62,7 +62,7 @@ class AssetsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an asset');
-        $I->amOnPage(route('hardware.destroy', $I->getAssetId()));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('hardware.destroy', $I->getAssetId()), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

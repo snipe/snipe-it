@@ -40,4 +40,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('snipeit:backup')->weekly();
         $schedule->command('backup:clean')->daily();
     }
+
+    protected function commands()
+    {
+        require base_path('routes/console.php');
+    }
 }

@@ -1,18 +1,18 @@
 <?php
 
 # Components
-Route::group([ 'prefix' => 'components', 'middleware'=>'authorize:components.view'  ], function () {
+Route::group([ 'prefix' => 'components' ], function () {
 
     Route::get(
         '{componentID}/checkout',
-        [ 'as' => 'checkout/component', 'middleware'=>'authorize:components.checkout','uses' => 'ComponentsController@getCheckout' ]
+        [ 'as' => 'checkout/component', 'uses' => 'ComponentsController@getCheckout' ]
     );
     Route::post(
         '{componentID}/checkout',
-        [ 'as' => 'checkout/component', 'middleware'=>'authorize:components.checkout','uses' => 'ComponentsController@postCheckout' ]
+        [ 'as' => 'checkout/component', 'uses' => 'ComponentsController@postCheckout' ]
     );
-    Route::post('bulk', [ 'as' => 'component/bulk-form', 'middleware'=>'authorize:components.checkout','uses' => 'ComponentsController@postBulk' ]);
-    Route::post('bulksave', [ 'as' => 'component/bulk-save', 'middleware'=>'authorize:components.edit','uses' => 'ComponentsController@postBulkSave' ]);
+    Route::post('bulk', [ 'as' => 'component/bulk-form', 'uses' => 'ComponentsController@postBulk' ]);
+    Route::post('bulksave', [ 'as' => 'component/bulk-save', 'uses' => 'ComponentsController@postBulkSave' ]);
 
 });
 

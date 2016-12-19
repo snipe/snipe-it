@@ -40,6 +40,7 @@ class AccessoriesController extends Controller
     */
     public function index(Request $request)
     {
+        $this->authorize('index', Accessory::class);
         return View::make('accessories/index');
     }
 
@@ -52,6 +53,7 @@ class AccessoriesController extends Controller
    */
     public function create(Request $request)
     {
+        $this->authorize('create', Accessory::class);
         // Show the page
         return View::make('accessories/edit')
           ->with('item', new Accessory)
@@ -70,7 +72,7 @@ class AccessoriesController extends Controller
    */
     public function store(Request $request)
     {
-
+        $this->authorize(Accessory::class);
         // create a new model instance
         $accessory = new Accessory();
 
@@ -123,9 +125,9 @@ class AccessoriesController extends Controller
         if (is_null($item = Accessory::find($accessoryId))) {
             // Redirect to the blogs management page
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize($item);
 
         return View::make('accessories/edit', compact('item'))
           ->with('category_list', Helper::categoryList('accessory'))
@@ -148,9 +150,9 @@ class AccessoriesController extends Controller
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory index page
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize($accessory);
 
       // Update the accessory data
         $accessory->name                    = e(Input::get('name'));
@@ -205,9 +207,9 @@ class AccessoriesController extends Controller
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the blogs management page
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize($accessory);
 
 
         if ($accessory->hasUsers() > 0) {
@@ -236,14 +238,9 @@ class AccessoriesController extends Controller
     public function show(Request $request, $accessoryID = null)
     {
         $accessory = Accessory::find($accessoryID);
-
+        $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
-
-            if (!Company::isCurrentUserHasAccess($accessory)) {
-                return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
-            } else {
-                return View::make('accessories/view', compact('accessory'));
-            }
+            return View::make('accessories/view', compact('accessory'));
         } else {
             // Prepare the error message
             $error = trans('admin/accessories/message.does_not_exist', compact('id'));
@@ -267,10 +264,10 @@ class AccessoriesController extends Controller
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return redirect()->to('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
+
+        $this->authorize('checkout', $accessory);
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = Helper::usersList();
@@ -295,9 +292,9 @@ class AccessoriesController extends Controller
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.user_not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkout', $accessory);
 
         if (!$user = User::find(Input::get('assigned_to'))) {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
@@ -336,7 +333,7 @@ class AccessoriesController extends Controller
                 'fields' => [
                   [
                   'title' => 'Checked Out:',
-                  'value' => 'Accessory <'.url('/').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.url('/').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.url('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                  'value' => 'Accessory <'.route('accessories.show', $accessory->id).'|'.$accessory->name.'> checked out to <'.route('users.show', $user->id).'|'.$user->fullName().'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->fullName().'>.'
                   ],
                   [
                       'title' => 'Note:',
@@ -397,12 +394,8 @@ class AccessoriesController extends Controller
         }
 
         $accessory = Accessory::find($accessory_user->accessory_id);
-
-        if (!Company::isCurrentUserHasAccess($accessory)) {
-            return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
-        } else {
-            return View::make('accessories/checkin', compact('accessory'))->with('backto', $backto);
-        }
+        $this->authorize('checkin', $accessory);
+        return View::make('accessories/checkin', compact('accessory'))->with('backto', $backto);
     }
 
 
@@ -425,9 +418,7 @@ class AccessoriesController extends Controller
 
         $accessory = Accessory::find($accessory_user->accessory_id);
 
-        if (!Company::isCurrentUserHasAccess($accessory)) {
-            return redirect()->route('accessories.index')->with('error', trans('general.insufficient_permissions'));
-        }
+        $this->authorize('checkin', $accessory);
 
         $return_to = e($accessory_user->assigned_to);
         $logaction = $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
@@ -456,7 +447,7 @@ class AccessoriesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked In:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.url('/').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.url('/').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.route('accessories.show', $accessory->id).'|'.e($accessory->name).'> checked in by <'.route('users.show', $admin_user->id).'|'.e($admin_user->fullName()).'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -493,9 +484,9 @@ class AccessoriesController extends Controller
             }
 
             if ($backto=='user') {
-                return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/accessories/message.checkin.success'));
+                return redirect()->route("users.show", $return_to)->with('success', trans('admin/accessories/message.checkin.success'));
             } else {
-                return redirect()->to("admin/accessories/".$accessory->id."/view")->with('success', trans('admin/accessories/message.checkin.success'));
+                return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
             }
         }
 
@@ -532,6 +523,7 @@ class AccessoriesController extends Controller
     **/
     public function getDatatable(Request $request)
     {
+        $this->authorize('index', Accessory::class);
         $accessories = Company::scopeCompanyables(
             Accessory::select('accessories.*')
             ->whereNull('accessories.deleted_at')
@@ -578,15 +570,15 @@ class AccessoriesController extends Controller
         foreach ($accessories as $accessory) {
 
             $actions = '<nobr>';
-            if (Gate::allows('accessories.checkout')) {
+            if (Gate::allows('checkout', $accessory)) {
                 $actions .= '<a href="' . route('checkout/accessory',
                         $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
-            if (Gate::allows('accessories.edit')) {
+            if (Gate::allows('update', $accessory)) {
                 $actions .= '<a href="' . route('accessories.update',
                         $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('accessories.delete')) {
+            if (Gate::allows('delete', $accessory)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('accessories.destroy',
                         $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
@@ -594,7 +586,7 @@ class AccessoriesController extends Controller
             $company = $accessory->company;
 
             $rows[] = array(
-            'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
+            'name'          => '<a href="'.route('accessories.show',$accessory->id).'">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
             'model_number'      =>  e($accessory->model_number),
             'qty'           => e($accessory->qty),
@@ -606,7 +598,7 @@ class AccessoriesController extends Controller
             'numRemaining'  => $accessory->numRemaining(),
             'actions'       => $actions,
             'companyName'   => is_null($company) ? '' : e($company->name),
-            'manufacturer'      => $accessory->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$accessory->manufacturer_id.'/view', $accessory->manufacturer->name) : ''
+            'manufacturer'      => $accessory->manufacturer ? (string) link_to(route('manufacturers.show', $accessory->manufacturer_id), $accessory->manufacturer->name) : ''
 
             );
         }
@@ -657,13 +649,13 @@ class AccessoriesController extends Controller
 
         foreach ($accessory_users as $user) {
             $actions = '';
-            if (Gate::allows('accessories.checkin')) {
+            if (Gate::allows('checkin', $accessory)) {
                 $actions .= '<a href="' . route('checkin/accessory',
                         $user->pivot->id) . '" class="btn btn-info btn-sm">Checkin</a>';
             }
 
-            if (Gate::allows('users.view')) {
-                $name = (string) link_to('/admin/users/'.$user->id.'/view', e($user->fullName()));
+            if (Gate::allows('view', $user)) {
+                $name = (string) link_to_route('users.show', e($user->fullName()), [$user->id]);
             } else {
                 $name = e($user->fullName());
             }

@@ -38,6 +38,7 @@ class ConsumablesController extends Controller
     */
     public function index()
     {
+        $this->authorize('index', Consumable::class);
         return View::make('consumables/index');
     }
 
@@ -52,6 +53,7 @@ class ConsumablesController extends Controller
     */
     public function create()
     {
+        $this->authorize('create', Consumable::class);
         // Show the page
         $category_list = Helper::categoryList('consumable');
         $company_list = Helper::companyList();
@@ -77,6 +79,7 @@ class ConsumablesController extends Controller
     */
     public function store()
     {
+        $this->authorize('create', Consumable::class);
         $consumable = new Consumable();
         $consumable->name                   = e(Input::get('name'));
         $consumable->category_id            = e(Input::get('category_id'));
@@ -130,9 +133,9 @@ class ConsumablesController extends Controller
         if (is_null($item = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize($item);
 
         $category_list =  Helper::categoryList('consumable');
         $company_list = Helper::companyList();
@@ -160,9 +163,9 @@ class ConsumablesController extends Controller
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize($consumable);
 
         $consumable->name                   = e(Input::get('name'));
         $consumable->category_id            = e(Input::get('category_id'));
@@ -210,14 +213,14 @@ class ConsumablesController extends Controller
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
         }
 
-            $consumable->delete();
+        $this->authorize($consumable);
 
-            // Redirect to the locations management page
-            return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.delete.success'));
+        $consumable->delete();
+
+        // Redirect to the locations management page
+        return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.delete.success'));
 
     }
 
@@ -235,24 +238,15 @@ class ConsumablesController extends Controller
     public function show($consumableId = null)
     {
         $consumable = Consumable::find($consumableId);
-
+        $this->authorize($consumable);
         if (isset($consumable->id)) {
-
-
-            if (!Company::isCurrentUserHasAccess($consumable)) {
-                return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
-            } else {
-                return View::make('consumables/view', compact('consumable'));
-            }
-        } else {
-            // Prepare the error message
-            $error = trans('admin/consumables/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('consumables')->with('error', $error);
+            return View::make('consumables/view', compact('consumable'));
         }
+        // Prepare the error message
+        $error = trans('admin/consumables/message.does_not_exist', compact('id'));
 
-
+        // Redirect to the user management page
+        return redirect()->route('consumables')->with('error', $error);
     }
 
     /**
@@ -270,9 +264,8 @@ class ConsumablesController extends Controller
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the consumable management page with error
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
         }
+        $this->authorize('checkout', $consumable);
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = Helper::usersList();
@@ -296,9 +289,9 @@ class ConsumablesController extends Controller
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the consumable management page with error
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return redirect()->route('consumables.index')->with('error', trans('general.insufficient_permissions'));
         }
+
+        $this->authorize('checkout', $consumable);
 
         $admin_user = Auth::user();
         $assigned_to = e(Input::get('assigned_to'));
@@ -337,7 +330,9 @@ class ConsumablesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => 'Consumable <'.url('/').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.url('/').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.url('/').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => 'Consumable <'.route('consumables.show', $consumable->id).'|'.$consumable->name
+                                            .'> checked out to <'.route('users.show', $user->id).'|'.$user->fullName()
+                                            .'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -390,6 +385,7 @@ class ConsumablesController extends Controller
     */
     public function getDatatable()
     {
+        $this->authorize('index', Consumable::class);
         $consumables = Company::scopeCompanyables(
             Consumable::select('consumables.*')
             ->whereNull('consumables.deleted_at')
@@ -441,16 +437,16 @@ class ConsumablesController extends Controller
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
-            if (Gate::allows('consumables.checkout')) {
+            if (Gate::allows('checkout', $consumable)) {
                 $actions .= '<a href="' . route('checkout/consumable',
                         $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
 
-            if (Gate::allows('consumables.edit')) {
+            if (Gate::allows('update', $consumable)) {
                 $actions .= '<a href="' . route('consumables.edit',
                         $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('consumables.delete')) {
+            if (Gate::allows('delete', $consumable)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('consumables.destroy',
                         $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
@@ -461,14 +457,14 @@ class ConsumablesController extends Controller
 
             $rows[] = array(
                 'id'            => $consumable->id,
-                'name'          => (string)link_to('admin/consumables/'.$consumable->id.'/view', e($consumable->name)),
+                'name'          => (string)link_to_route('consumables.show', e($consumable->name), ['consumable' => $consumable->id]),
                 'location'   => ($consumable->location) ? e($consumable->location->name) : '',
                 'min_amt'           => e($consumable->min_amt),
                 'qty'           => e($consumable->qty),
-                'manufacturer'  => ($consumable->manufacturer) ? (string) link_to('/admin/settings/manufacturers/'.$consumable->manufacturer_id.'/view', $consumable->manufacturer->name): '',
+                'manufacturer'  => ($consumable->manufacturer) ? (string) link_to_route('manufacturers.show', $consumable->manufacturer->name, ['manufacturer' => $consumable->manufacturer_id]): '',
                 'model_number'      => e($consumable->model_number),
                 'item_no'       => e($consumable->item_no),
-                'category'      => ($consumable->category) ? (string) link_to('/admin/settings/categories/'.$consumable->category_id.'/view', $consumable->category->name) : 'Missing category',
+                'category'      => ($consumable->category) ? (string) link_to_route('categories.show', $consumable->category->name, ['category' => $consumable->category_id]) : 'Missing category',
                 'order_number'  => e($consumable->order_number),
                 'purchase_date'  => e($consumable->purchase_date),
                 'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
@@ -516,7 +512,7 @@ class ConsumablesController extends Controller
 
         foreach ($consumable->consumableAssigments as $consumable_assignment) {
             $rows[] = array(
-            'name' => (string)link_to('/admin/users/'.$consumable_assignment->user->id.'/view', e($consumable_assignment->user->fullName())),
+            'name' => (string)link_to_route('users.show', e($consumable_assignment->user->fullName()), ['user' => $consumable_assignment->user->id]),
             'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
             'admin' => ($consumable_assignment->admin) ? e($consumable_assignment->admin->fullName()) : '',
             );

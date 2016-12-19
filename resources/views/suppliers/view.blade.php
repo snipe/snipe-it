@@ -203,7 +203,7 @@
                               <td>{{ $improvement->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
                               <td>{{ sprintf( trans( 'general.currency' ) . '%01.2f', $improvement->cost) }}</td>
                                 <?php $totalCost += $improvement->cost; ?>
-                              <td><a href="{{ route('update/asset_maintenance', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                              <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
                               </td>
                           </tr>
                       @endif

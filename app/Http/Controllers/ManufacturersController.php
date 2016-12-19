@@ -1,9 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Company;
 use App\Models\Manufacturer;
-use App\Models\Setting;
 use Auth;
 use Gate;
 use Input;
@@ -197,7 +195,7 @@ class ManufacturersController extends Controller
     */
     public function getDatatable(Request $request)
     {
-        $manufacturers = Manufacturer::select(array('id','name'))->with('assets')
+        $manufacturers = Manufacturer::select(array('id','name'))->with('assets', 'licenses', 'accessories', 'consumables')
         ->whereNull('deleted_at');
 
         if ($request->has('search')) {
@@ -231,9 +229,12 @@ class ManufacturersController extends Controller
             $actions = '<a href="'.route('manufacturers.edit', $manufacturer->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('manufacturers.destroy', $manufacturer->id).'" data-content="'.trans('admin/manufacturers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($manufacturer->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
-                'id'              => $manufacturer->id,
+                'id'            => $manufacturer->id,
                 'name'          => (string)link_to_route('manufacturers.show', e($manufacturer->name),['manufacturer' => $manufacturer->id]),
-                'assets'              => $manufacturer->assets->count(),
+                'assets'        => $manufacturer->assets->count(),
+                'licenses'      => $manufacturer->licenses->count(),
+                'accessories'   => $manufacturer->accessories->count(),
+                'consumables'   => $manufacturer->consumables->count(),
                 'actions'       => $actions
             );
         }
@@ -246,36 +247,37 @@ class ManufacturersController extends Controller
 
 
     /**
-    * Generates the JSON used to display the manufacturer detail.
-    * This JSON returns data on all of the assets with the specified
-    * manufacturer ID number.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::getView()
-    * @param int $manufacturerId
-    * @since [v1.0]
-    * @return String JSON
-    */
-    public function getDataView($manufacturerId, $itemtype = null)
+     * Generates the JSON used to display the manufacturer detail.
+     * This JSON returns data on all of the assets with the specified
+     * manufacturer ID number.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ManufacturersController::getView()
+     * @param int $manufacturerId
+     * @param string $itemtype
+     * @param Request $request
+     * @return String JSON* @since [v1.0]
+     */
+    public function getDataView($manufacturerId, $itemtype = null, Request $request)
     {
         $manufacturer = Manufacturer::find($manufacturerId);
 
         switch ($itemtype) {
             case "assets":
-                return $this->getDataAssetsView($manufacturer);
+                return $this->getDataAssetsView($manufacturer, $request);
             case "licenses":
-                return $this->getDataLicensesView($manufacturer);
+                return $this->getDataLicensesView($manufacturer, $request);
             case "accessories":
-                return $this->getDataAccessoriesView($manufacturer);
+                return $this->getDataAccessoriesView($manufacturer, $request);
             case "consumables":
-                return $this->getDataConsumablesView($manufacturer);
+                return $this->getDataConsumablesView($manufacturer, $request);
         }
 
         throw new Exception("We shouldn't be here");
 
     }
 
-    protected function getDataAssetsView(Manufacturer $manufacturer)
+    protected function getDataAssetsView(Manufacturer $manufacturer, Request $request)
     {
         $manufacturer = $manufacturer->load('assets.model', 'assets.assigneduser', 'assets.assetstatus', 'assets.company');
         $manufacturer_assets = $manufacturer->assets;
@@ -308,30 +310,29 @@ class ManufacturersController extends Controller
 
             $actions = '';
             if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('hardware.edit', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('hardware.edit', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('hardware.destroy', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } elseif ($asset->deleted_at!='') {
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
             if ($asset->availableForCheckout()) {
-                if (Gate::allows('assets.checkout')) {
+                if (Gate::allows('checkout', $asset)) {
                     $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
                 }
             } else {
-                if (Gate::allows('assets.checkin')) {
+                if (Gate::allows('checkin', $asset)) {
                     $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
                 }
             }
 
             $rows[] = array(
                 'id' => $asset->id,
-                'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
+                'name' => (string)link_to_route('hardware.show', e($asset->showAssetName()), [$asset->id]),
                 'model' => e($asset->model->name),
                 'asset_tag' => e($asset->asset_tag),
                 'serial' => e($asset->serial),
-                'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
+                'assigned_to' => ($asset->assigneduser) ? (string)link_to_route('users.show', e($asset->assigneduser->fullName()), [$asset->assigneduser->id]): '',
                 'actions' => $actions,
-                // 'companyName' => e(Company::getName($asset)),
                 'companyName' => is_null($asset->company) ? '' : $asset->company->name
                 );
 
@@ -344,7 +345,7 @@ class ManufacturersController extends Controller
         return $data;
     }
 
-    protected function getDataLicensesView(Manufacturer $manufacturer)
+    protected function getDataLicensesView(Manufacturer $manufacturer, Request $request)
     {
         $manufacturer = $manufacturer->load('licenses.company', 'licenses.manufacturer', 'licenses.licenseSeatsRelation');
         $licenses = $manufacturer->licenses;
@@ -360,30 +361,30 @@ class ManufacturersController extends Controller
         foreach ($licenses as $license) {
             $actions = '<span style="white-space: nowrap;">';
 
-            if (Gate::allows('licenses.checkout')) {
+            if (Gate::allows('checkout', \App\Models\License::class)) {
                 $actions .= '<a href="' . route('licenses.freecheckout', $license->id)
                 . '" class="btn btn-primary btn-sm' . (($license->remaincount() > 0) ? '' : ' disabled') . '" style="margin-right:5px;">' . trans('general.checkout') . '</a> ';
             }
 
-            if (Gate::allows('licenses.create')) {
+            if (Gate::allows('create', $license)) {
                 $actions .= '<a href="' . route('clone/license', $license->id)
                 . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
             }
-            if (Gate::allows('licenses.edit')) {
+            if (Gate::allows('edit', $license)) {
                 $actions .= '<a href="' . route('licenses.edit', ['license' => $license->id])
                 . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('licenses.delete')) {
+            if (Gate::allows('delete', $license)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'
-                 . route('delete/license', $license->id)
+                 . route('licenses.destroy', $license->id)
                  . '" data-content="' . trans('admin/licenses/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($license->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
             $actions .='</span>';
 
             $rows[] = array(
                 'id'                => $license->id,
-                'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
-                'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
+                'name'              => (string) link_to_route('licenses.show', $license->name, [$license->id]),
+                'serial'            => (string) link_to_route('licenses.show', mb_strimwidth($license->serial, 0, 50, "..."), [$license->id]),
                 'totalSeats'        => $license->licenseSeatCount,
                 'remaining'         => $license->remaincount(),
                 'license_name'      => e($license->license_name),
@@ -396,7 +397,7 @@ class ManufacturersController extends Controller
                 'notes'             => ($license->notes) ? e($license->notes) : '',
                 'actions'           => $actions,
                 'companyName'       => is_null($license->company) ? '' : e($license->company->name),
-                'manufacturer'      => $license->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
+                'manufacturer'      => $license->manufacturer ? (string) link_to_route('manufacturers.show', $license->manufacturer->name, [$license->manufacturer_id]) : ''
             );
         }
 
@@ -405,7 +406,7 @@ class ManufacturersController extends Controller
         return $data;
     }
 
-    public function getDataAccessoriesView(Manufacturer $manufacturer)
+    public function getDataAccessoriesView(Manufacturer $manufacturer, Request $request)
     {
         $manufacturer = $manufacturer->load(
             'accessories.location',
@@ -433,15 +434,15 @@ class ManufacturersController extends Controller
         foreach ($accessories as $accessory) {
 
             $actions = '<nobr>';
-            if (Gate::allows('accessories.checkout')) {
+            if (Gate::allows('checkout', $accessory)) {
                 $actions .= '<a href="' . route('checkout/accessory',
                         $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
-            if (Gate::allows('accessories.edit')) {
+            if (Gate::allows('update', $accessory)) {
                 $actions .= '<a href="' . route('accessories.update',
                         $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('accessories.delete')) {
+            if (Gate::allows('delete', $accessory)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('accessories.destroy',
                         $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
@@ -449,8 +450,8 @@ class ManufacturersController extends Controller
             $company = $accessory->company;
 
             $rows[] = array(
-            'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
-            'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
+            'name'          => (string)link_to_route('accessories.show', $accessory->name, [$accessory->id]),
+            'category'      => ($accessory->category) ? (string)link_to_route('categories.show', $accessory->category->name, [$accessory->category->id]) : '',
             'qty'           => e($accessory->qty),
             'order_number'  => e($accessory->order_number),
             'min_amt'  => e($accessory->min_amt),
@@ -460,7 +461,7 @@ class ManufacturersController extends Controller
             'numRemaining'  => $accessory->numRemaining(),
             'actions'       => $actions,
             'companyName'   => is_null($company) ? '' : e($company->name),
-            'manufacturer'      => $accessory->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$accessory->manufacturer_id.'/view', $accessory->manufacturer->name) : ''
+            'manufacturer'      => $accessory->manufacturer ? (string) link_to_route('manufacturers.show', $accessory->manufacturer->name, [$accessory->manufacturer_id]) : ''
 
             );
         }
@@ -470,7 +471,7 @@ class ManufacturersController extends Controller
         return $data;
     }
 
-    public function getDataConsumablesView($manufacturer)
+    public function getDataConsumablesView($manufacturer, Request $request)
     {
         $manufacturer = $manufacturer->load(
             'consumables.location',
@@ -497,16 +498,16 @@ class ManufacturersController extends Controller
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
-            if (Gate::allows('consumables.checkout')) {
+            if (Gate::allows('checkout', $consumable)) {
                 $actions .= '<a href="' . route('checkout/consumable',
                         $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
             }
 
-            if (Gate::allows('consumables.edit')) {
+            if (Gate::allows('update', $consumable)) {
                 $actions .= '<a href="' . route('consumables.edit',
                         $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
             }
-            if (Gate::allows('consumables.delete')) {
+            if (Gate::allows('delete', $consumable)) {
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('consumables.destroy',
                         $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             }
@@ -517,14 +518,14 @@ class ManufacturersController extends Controller
 
             $rows[] = array(
                 'id'            => $consumable->id,
-                'name'          => (string)link_to('admin/consumables/'.$consumable->id.'/view', e($consumable->name)),
+                'name'          => (string)link_to_route('consumables.show', e($consumable->name), [$consumable->id]),
                 'location'      => ($consumable->location) ? e($consumable->location->name) : '',
                 'min_amt'       => e($consumable->min_amt),
                 'qty'           => e($consumable->qty),
-                'manufacturer'  => ($consumable->manufacturer) ? (string) link_to('/admin/settings/manufacturers/'.$consumable->manufacturer_id.'/view', $consumable->manufacturer->name): '',
+                'manufacturer'  => ($consumable->manufacturer) ? (string) link_to_route('manufacturers.show', $consumable->manufacturer->name, [$consumable->manufacturer_id]): '',
                 'model_number'  => e($consumable->model_number),
                 'item_no'       => e($consumable->item_no),
-                'category'      => ($consumable->category) ? (string) link_to('/admin/settings/categories/'.$consumable->category_id.'/view', $consumable->category->name) : 'Missing category',
+                'category'      => ($consumable->category) ? (string) link_to_route('categories.show', $consumable->category->name, [$consumable->category_id]) : 'Missing category',
                 'order_number'  => e($consumable->order_number),
                 'purchase_date' => e($consumable->purchase_date),
                 'purchase_cost' => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost, 2): '' ,

@@ -76,7 +76,7 @@ class AccessoriesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an accessory');
-        $I->amOnPage( route('accessories.destroy', $I->getAccessoryId() ) );
-        $I->seeElement('.alert-success');
+        $I->sendDelete( route('accessories.destroy', $I->getAccessoryId() ), ['_token' => csrf_token()] );
+        $I->seeResponseCodeIs(200);
     }
 }

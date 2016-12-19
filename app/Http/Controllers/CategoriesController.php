@@ -338,11 +338,11 @@ class CategoriesController extends Controller
             }
 
             if ($asset->availableForCheckout()) {
-                if (Gate::allows('assets.checkout')) {
+                if (Gate::allows('checkout', $asset)) {
                     $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
                 }
             } else {
-                if (Gate::allows('assets.checkin')) {
+                if (Gate::allows('checkin', $asset)) {
                     $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
                 }
             }
@@ -350,10 +350,10 @@ class CategoriesController extends Controller
             $rows[] = array(
                 'id' => $asset->id,
                 'name' => (string)link_to_route('hardware.show', $asset->showAssetName(), ['hardware' => $asset->id]),
-                'model' => ($asset->model) ? (string)link_to('hardware/models/'.$asset->model->id.'/view', $asset->model->name) : '',
+                'model' => ($asset->model) ? (string)link_to_route('models.show', $asset->model->name, ['model' => $asset->model->id]) : '',
                 'asset_tag' => $asset->asset_tag,
                 'serial' => $asset->serial,
-                'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
+                'assigned_to' => ($asset->assigneduser) ? (string)link_to_route('users.show', $asset->assigneduser->fullName(), ['user' => $asset->assigneduser->id]): '',
                 'change' => $inout,
                 'actions' => $actions,
                 'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
@@ -420,7 +420,12 @@ class CategoriesController extends Controller
     }
 
 
-    public function getDataViewConsumables($categoryID)
+    /**
+     * @param $categoryID
+     * @param Request $request
+     * @return array
+     */
+    public function getDataViewConsumables($categoryID, Request $request)
     {
 
         $category = Category::with('accessories.company')->find($categoryID);
@@ -429,18 +434,8 @@ class CategoriesController extends Controller
         if (Input::has('search')) {
             $category_assets = $category_assets->TextSearch(e($request->input('search')));
         }
-
-        if (Input::has('offset')) {
-            $offset = e($request->input('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
@@ -463,7 +458,7 @@ class CategoriesController extends Controller
 
             $rows[] = array(
                 'id' => $asset->id,
-                'name' => (string) link_to_route('view/consumable', $asset->name, [$asset->id]),
+                'name' => (string) link_to_route('consumables.show', $asset->name, [$asset->id]),
                 'actions' => $actions,
                 'companyName' => Company::getName($asset),
             );

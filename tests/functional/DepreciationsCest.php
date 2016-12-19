@@ -59,7 +59,7 @@ class DepreciationCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a depreciation');
-        $I->amOnPage(route('depreciations.destroy', $I->getDepreciationId()));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('depreciations.destroy', $I->getDepreciationId()), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }
