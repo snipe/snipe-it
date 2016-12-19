@@ -67,7 +67,8 @@ class LocationsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a location');
-        $I->sendDelete(route('locations.destroy', Location::doesntHave('assets')->doesntHave('assignedAssets')->first()->id), ['_token' => csrf_token()]);
+        $location = factory(App\Models\Location::class, 'location')->create();
+        $I->sendDelete(route('locations.destroy', $location->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 }
