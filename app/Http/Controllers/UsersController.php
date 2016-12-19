@@ -115,17 +115,17 @@ class UsersController extends Controller
             $data['password'] =  $request->input('password');
         }
         // Update the user
-        $user->first_name = e($request->input('first_name'));
-        $user->last_name = e($request->input('last_name'));
-        $user->locale = e($request->input('locale'));
-        $user->employee_num = e($request->input('employee_num'));
-        $user->activated = e($request->input('activated', $user->activated));
-        $user->jobtitle = e($request->input('jobtitle'));
-        $user->phone = e($request->input('phone'));
-        $user->location_id = e($request->input('location_id'));
-        $user->company_id = e(Company::getIdForUser($request->input('company_id')));
-        $user->manager_id = e($request->input('manager_id'));
-        $user->notes = e($request->input('notes'));
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->locale = $request->input('locale');
+        $user->employee_num = $request->input('employee_num');
+        $user->activated = $request->input('activated', $user->activated);
+        $user->jobtitle = $request->input('jobtitle');
+        $user->phone = $request->input('phone');
+        $user->location_id = $request->input('location_id');
+        $user->company_id = Company::getIdForUser($request->input('company_id'));
+        $user->manager_id = $request->input('manager_id');
+        $user->notes = $request->input('notes');
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -351,18 +351,18 @@ class UsersController extends Controller
 
 
        // Update the user
-        $user->first_name = e($request->input('first_name'));
-        $user->last_name = e($request->input('last_name'));
-        $user->two_factor_optin = e($request->input('two_factor_optin'));
-        $user->locale = e($request->input('locale'));
-        $user->employee_num = e($request->input('employee_num'));
-        $user->activated = e($request->input('activated', $user->activated));
-        $user->jobtitle = e($request->input('jobtitle'));
-        $user->phone = e($request->input('phone'));
-        $user->location_id = e($request->input('location_id'));
-        $user->company_id = e(Company::getIdForUser($request->input('company_id')));
-        $user->manager_id = e($request->input('manager_id'));
-        $user->notes = e($request->input('notes'));
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->two_factor_optin = $request->input('two_factor_optin');
+        $user->locale = $request->input('locale');
+        $user->employee_num = $request->input('employee_num');
+        $user->activated = $request->input('activated', $user->activated);
+        $user->jobtitle = $request->input('jobtitle');
+        $user->phone = $request->input('phone');
+        $user->location_id = $request->input('location_id');
+        $user->company_id = Company::getIdForUser($request->input('company_id'));
+        $user->manager_id = $request->input('manager_id');
+        $user->notes = $request->input('notes');
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
