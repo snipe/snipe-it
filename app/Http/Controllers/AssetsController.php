@@ -157,7 +157,7 @@ class AssetsController extends Controller
         $asset->depreciate                  = '0';
 
         $asset->status_id =  request('status_id',0);
-        $asset-warranty_months = request('warranty_months', null);
+        $asset->warranty_months = request('warranty_months', null);
 
         if (Input::get('purchase_cost') == '') {
             $asset->purchase_cost =  null;
