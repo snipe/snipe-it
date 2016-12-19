@@ -4,13 +4,13 @@ AcceptanceTester::test_login($I);
 $I->am('logged in user');
 $I->wantTo('ensure that the users listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
-$I->amOnPage('/admin/users');
+$I->amOnPage('/users');
 //$I->waitForJS("return $.active == 0;", 60);
 $I->waitForElement('.table', 5); // secs
 //$I->seeNumberOfElements('tr', [1,10]);
 $I->seeInTitle('Users');
 $I->see('Users');
-$I->seeInPageSource('admin/users/create');
+$I->seeInPageSource('users/create');
 $I->dontSee('Users', '.page-header');
 $I->see('Users', 'h1.pull-left');
 $I->seeLink('Create New'); // matches <a href="/logout">Logout</a>
@@ -21,7 +21,7 @@ $I->am('logged in admin');
 $I->wantTo('ensure that you get errors when you submit an incomplete form');
 $I->lookForwardTo('seeing errors display');
 $I->click(['link' => 'Create New']);
-$I->amOnPage('admin/users/create');
+$I->amOnPage('users/create');
 $I->dontSee('Create User', '.page-header');
 $I->see('Create User', 'h1.pull-left');
 

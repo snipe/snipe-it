@@ -172,7 +172,7 @@ class UsersController extends Controller
                     $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
                 });
             }
-            return redirect::route('users')->with('success', trans('admin/users/message.success.create'));
+            return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
