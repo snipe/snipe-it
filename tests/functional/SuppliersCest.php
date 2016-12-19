@@ -1,8 +1,5 @@
 <?php
 
-
-use App\Models\Supplier;
-
 class SuppliersCest
 {
     public function _before(FunctionalTester $I)
@@ -69,7 +66,8 @@ class SuppliersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a supplier');
-        $I->sendDelete(route('suppliers.destroy', Supplier::doesntHave('assets')->doesntHave('licenses')->first()->id), ['_token' => csrf_token()]);
+        $supplier = factory(App\Models\Supplier::class, 'supplier')->create();
+        $I->sendDelete(route('suppliers.destroy', $supplier->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 }

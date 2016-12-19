@@ -56,7 +56,8 @@ class AssetModelsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an asset model');
-        $I->sendDelete(route('models.destroy', $I->getEmptyModelId()), ['_token' => csrf_token()]);
+        $model = factory(App\Models\AssetModel::class, 'assetmodel')->create();
+        $I->sendDelete(route('models.destroy', $model->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 
