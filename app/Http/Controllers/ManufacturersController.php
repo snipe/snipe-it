@@ -195,24 +195,13 @@ class ManufacturersController extends Controller
     */
     public function getDatatable(Request $request)
     {
-        $manufacturers = Manufacturer::select(array('id','name'))->with('assets', 'licenses', 'accessories', 'consumables')
-        ->whereNull('deleted_at');
+        $manufacturers = Manufacturer::select(array('id','name'))->whereNull('deleted_at');
 
         if ($request->has('search')) {
             $manufacturers = $manufacturers->TextSearch(e($request->input('search')));
         }
-
-        if ($request->has('offset')) {
-            $offset = e($request->input('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if ($request->has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $allowed_columns = ['id','name'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -231,10 +220,10 @@ class ManufacturersController extends Controller
             $rows[] = array(
                 'id'            => $manufacturer->id,
                 'name'          => (string)link_to_route('manufacturers.show', e($manufacturer->name),['manufacturer' => $manufacturer->id]),
-                'assets'        => $manufacturer->assets->count(),
-                'licenses'      => $manufacturer->licenses->count(),
-                'accessories'   => $manufacturer->accessories->count(),
-                'consumables'   => $manufacturer->consumables->count(),
+                'assets'        => $manufacturer->assets()->count(),
+                'licenses'      => $manufacturer->licenses()->count(),
+                'accessories'   => $manufacturer->accessories()->count(),
+                'consumables'   => $manufacturer->consumables()->count(),
                 'actions'       => $actions
             );
         }
