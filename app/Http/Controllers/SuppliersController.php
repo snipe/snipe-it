@@ -52,37 +52,34 @@ class SuppliersController extends Controller
     /**
      * Supplier create form processing.
      *
+     * @param Request $request
      * @return Redirect
      */
-    public function store()
+    public function store(Request $request)
     {
-
-        // get the POST data
-        $new = Input::all();
-
         // Create a new supplier
         $supplier = new Supplier;
         // Save the location data
-        $supplier->name                 = e(Input::get('name'));
-        $supplier->address              = e(Input::get('address'));
-        $supplier->address2             = e(Input::get('address2'));
-        $supplier->city                 = e(Input::get('city'));
-        $supplier->state                = e(Input::get('state'));
-        $supplier->country              = e(Input::get('country'));
-        $supplier->zip                  = e(Input::get('zip'));
-        $supplier->contact              = e(Input::get('contact'));
-        $supplier->phone                = e(Input::get('phone'));
-        $supplier->fax                  = e(Input::get('fax'));
-        $supplier->email                = e(Input::get('email'));
-        $supplier->notes                = e(Input::get('notes'));
-        $supplier->url                  = $supplier->addhttp(e(Input::get('url')));
-        $supplier->user_id              = Auth::user()->id;
+        $supplier->name                 = request('name');
+        $supplier->address              = request('address');
+        $supplier->address2             = request('address2');
+        $supplier->city                 = request('city');
+        $supplier->state                = request('state');
+        $supplier->country              = request('country');
+        $supplier->zip                  = request('zip');
+        $supplier->contact              = request('contact');
+        $supplier->phone                = request('phone');
+        $supplier->fax                  = request('fax');
+        $supplier->email                = request('email');
+        $supplier->notes                = request('notes');
+        $supplier->url                  = $supplier->addhttp(request('url'));
+        $supplier->user_id              = Auth::id();
 
 
 
 
         if (Input::file('image')) {
-            $image = Input::file('image');
+            $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/suppliers/'.$file_name);
             Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
@@ -106,8 +103,8 @@ class SuppliersController extends Controller
     public function apiStore(Request $request)
     {
         $supplier = new Supplier;
-        $supplier->name =  e($request->input('name'));
-        $supplier->user_id              = Auth::user()->id;
+        $supplier->name =  $request->input('name');
+        $supplier->user_id              = Auth::id();
 
         if ($supplier->save()) {
             return JsonResponse::create($supplier);
@@ -141,7 +138,7 @@ class SuppliersController extends Controller
      * @param  int  $supplierId
      * @return Redirect
      */
-    public function update($supplierId = null)
+    public function update($supplierId = null, Request $request)
     {
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
@@ -150,22 +147,22 @@ class SuppliersController extends Controller
         }
 
         // Save the  data
-        $supplier->name                 = e(Input::get('name'));
-        $supplier->address              = e(Input::get('address'));
-        $supplier->address2             = e(Input::get('address2'));
-        $supplier->city                 = e(Input::get('city'));
-        $supplier->state                = e(Input::get('state'));
-        $supplier->country              = e(Input::get('country'));
-        $supplier->zip                  = e(Input::get('zip'));
-        $supplier->contact              = e(Input::get('contact'));
-        $supplier->phone                = e(Input::get('phone'));
-        $supplier->fax                  = e(Input::get('fax'));
-        $supplier->email                = e(Input::get('email'));
-        $supplier->url                  = $supplier->addhttp(e(Input::get('url')));
-        $supplier->notes                = e(Input::get('notes'));
+        $supplier->name                 = request('name');
+        $supplier->address              = request('address');
+        $supplier->address2             = request('address2');
+        $supplier->city                 = request('city');
+        $supplier->state                = request('state');
+        $supplier->country              = request('country');
+        $supplier->zip                  = request('zip');
+        $supplier->contact              = request('contact');
+        $supplier->phone                = request('phone');
+        $supplier->fax                  = request('fax');
+        $supplier->email                = request('email');
+        $supplier->url                  = $supplier->addhttp(request('url'));
+        $supplier->notes                = request('notes');
 
         if (Input::file('image')) {
-            $image = Input::file('image');
+            $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/suppliers/'.$file_name);
             Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
@@ -175,7 +172,7 @@ class SuppliersController extends Controller
             $supplier->image = $file_name;
         }
 
-        if (Input::get('image_delete') == 1 && Input::file('image') == "") {
+        if (request('image_delete') == 1 && $request->file('image') == "") {
             $supplier->image = null;
         }
 
