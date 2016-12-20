@@ -181,13 +181,8 @@ class AssetMaintenancesController extends Controller
     */
     public function store(Request $request)
     {
-
-        // get the POST data
-        $new = $request->all();
-//        dd($new);
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
-
 
         if (e(Input::get('supplier_id')) == '') {
             $assetMaintenance->supplier_id = null;
@@ -328,8 +323,6 @@ class AssetMaintenancesController extends Controller
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
-
-
 
         if (request('supplier_id') == '') {
             $assetMaintenance->supplier_id = null;

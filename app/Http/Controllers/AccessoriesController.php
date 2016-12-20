@@ -222,7 +222,7 @@ class AccessoriesController extends Controller
   * the content for the accessory detail view, which is generated in getDataView.
   *
   * @author [A. Gianotto] [<snipe@snipe.net>]
-  * @param  int  $accessoryId
+  * @param  int  $accessoryID
   * @see AccessoriesController::getDataView() method that generates the JSON response
   * @since [v1.0]
   * @return View
@@ -331,8 +331,7 @@ class AccessoriesController extends Controller
 
         }
 
-
-        $accessory_user = DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
+        DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
         $data['log_id'] = $logaction->id;
         $data['eula'] = $accessory->getEula();

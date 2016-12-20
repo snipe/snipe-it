@@ -517,6 +517,7 @@ class AssetsController extends Controller
 
         $this->authorize('checkin', $asset);
         return View::make('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto);
+
     }
 
 
@@ -1092,7 +1093,6 @@ class AssetsController extends Controller
         }
         return View::make('hardware/history')->with('status',$status);
     }
-
 
     /**
     * Retore a deleted asset.

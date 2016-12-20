@@ -418,6 +418,7 @@ class PermissionsTest extends TestCase
     private function hitRoutes(array $routes, User $user)
     {
         $this->actingAs($user);
+
         foreach ($routes as $route => $response) {
             // dd($this->get(route($route)));
             // echo($this->get(route($route))->dump());

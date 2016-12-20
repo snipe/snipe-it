@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Manufacturer;
 use Auth;
+use Exception;
 use Gate;
 use Input;
 use Lang;
@@ -112,16 +113,12 @@ class ManufacturersController extends Controller
 
         // Save the  data
         $manufacturer->name     = e($request->input('name'));
-
         // Was it created?
         if ($manufacturer->save()) {
             // Redirect to the new manufacturer page
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.update.success'));
         }
-
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
-
-
     }
 
     /**
@@ -141,21 +138,14 @@ class ManufacturersController extends Controller
         }
 
         if ($manufacturer->has_models() > 0) {
-
             // Redirect to the asset management page
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.assoc_users'));
-        } else {
-
-            // Delete the manufacturer
-            $manufacturer->delete();
-
-            // Redirect to the manufacturers management page
-            return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.delete.success'));
         }
-
+        // Delete the manufacturer
+        $manufacturer->delete();
+        // Redirect to the manufacturers management page
+        return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.delete.success'));
     }
-
-
 
     /**
     * Returns a view that invokes the ajax tables which actually contains
@@ -174,15 +164,11 @@ class ManufacturersController extends Controller
 
         if (isset($manufacturer->id)) {
                 return View::make('manufacturers/view', compact('manufacturer'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/manufacturers/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('manufacturers')->with('error', $error);
         }
-
-
+        // Prepare the error message
+        $error = trans('admin/manufacturers/message.does_not_exist', compact('id'));
+        // Redirect to the user management page
+        return redirect()->route('manufacturers')->with('error', $error);
     }
 
     /**
@@ -243,15 +229,15 @@ class ManufacturersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see ManufacturersController::getView()
      * @param int $manufacturerId
-     * @param string $itemtype
+     * @param string $itemType
      * @param Request $request
      * @return String JSON* @since [v1.0]
      */
-    public function getDataView($manufacturerId, $itemtype = null, Request $request)
+    public function getDataView($manufacturerId, $itemType = null, Request $request)
     {
         $manufacturer = Manufacturer::find($manufacturerId);
 
-        switch ($itemtype) {
+        switch ($itemType) {
             case "assets":
                 return $this->getDataAssetsView($manufacturer, $request);
             case "licenses":

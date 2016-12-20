@@ -420,7 +420,6 @@ class UsersController extends Controller
             $this->authorize('delete', User::class);
 
             if ($user->assets()->count() > 0) {
-
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
             }
