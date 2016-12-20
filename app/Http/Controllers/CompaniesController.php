@@ -23,8 +23,8 @@ final class CompaniesController extends Controller
     *
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return View::make('companies/index')->with('companies', Company::all());
@@ -35,32 +35,31 @@ final class CompaniesController extends Controller
     *
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         return View::make('companies/edit')->with('item', new Company);
     }
 
     /**
-    * Save data from new company form.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
+     * Save data from new company form.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $company = new Company;
-        $company->name = e($request->input('name'));
+        $company->name = $request->input('name');
 
         if ($company->save()) {
             return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.create.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($company->getErrors());
         }
-
+        return redirect()->back()->withInput()->withErrors($company->getErrors());
     }
 
 
@@ -70,44 +69,40 @@ final class CompaniesController extends Controller
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
     * @param int $companyId
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function edit($companyId)
     {
         if (is_null($item = Company::find($companyId))) {
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
-        } else {
-            return View::make('companies/edit')->with('item', $item);
         }
+        return View::make('companies/edit')->with('item', $item);
     }
 
     /**
-    * Save data from edit company form.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @param int $companyId
-    * @return Redirect
-    */
+     * Save data from edit company form.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param Request $request
+     * @param int $companyId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $companyId)
     {
         if (is_null($company = Company::find($companyId))) {
             return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
-        } else {
-
-
-            $company->name = e($request->input('name'));
-
-            if ($company->save()) {
-                return redirect()->route('companies.index')
-                    ->with('success', trans('admin/companies/message.update.success'));
-            } else {
-                return redirect()->route('companies.edit', ['company' => $companyId])
-                    ->with('error', trans('admin/companies/message.update.error'));
-            }
-
         }
+
+        $company->name = $request->input('name');
+
+        if ($company->save()) {
+            return redirect()->route('companies.index')
+                ->with('success', trans('admin/companies/message.update.success'));
+        }
+        return redirect()->route('companies.edit', ['company' => $companyId])
+            ->with('error', trans('admin/companies/message.update.error'));
     }
 
     /**
@@ -116,8 +111,8 @@ final class CompaniesController extends Controller
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
     * @param int $companyId
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($companyId)
     {
         if (is_null($company = Company::find($companyId))) {

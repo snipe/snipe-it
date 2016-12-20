@@ -26,8 +26,8 @@ class GroupsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net]
     * @see GroupsController::getDatatable() method that generates the JSON response
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getIndex()
     {
         // Show the page
@@ -40,8 +40,8 @@ class GroupsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net]
     * @see GroupsController::postCreate()
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getCreate()
     {
         $group = new Group;
@@ -60,8 +60,8 @@ class GroupsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net]
     * @see GroupsController::getCreate()
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function postCreate()
     {
         // create a new group instance
@@ -72,10 +72,7 @@ class GroupsController extends Controller
         if ($group->save()) {
             return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.create'));
         }
-
         return redirect()->back()->withInput()->withErrors($group->getErrors());
-
-
     }
 
     /**
@@ -85,8 +82,8 @@ class GroupsController extends Controller
     * @see GroupsController::postEdit()
     * @param int $id
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getEdit($id = null)
     {
         $group = Group::find($id);
@@ -103,30 +100,24 @@ class GroupsController extends Controller
     * @see GroupsController::getEdit()
     * @param int $id
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function postEdit($id = null)
     {
         $permissions = config('permissions');
         if (!$group = Group::find($id)) {
             return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
-
         }
         $group->name = e(Input::get('name'));
         $group->permissions = json_encode(Input::get('permission'));
 
-
         if (!config('app.lock_passwords')) {
-
             if ($group->save()) {
                 return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.update'));
             }
             return redirect()->back()->withInput()->withErrors($group->getErrors());
-
-        } else {
-            return redirect()->route('update/group', $id)->withInput()->with('error', 'Denied! Editing groups is not allowed in the demo.');
         }
-
+        return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
     }
 
     /**
@@ -136,25 +127,19 @@ class GroupsController extends Controller
     * @see GroupsController::getEdit()
     * @param int $id
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function getDelete($id = null)
     {
         if (!config('app.lock_passwords')) {
-            try {
-                // Get group information
-                $group = Group::find($id);
-                $group->delete();
-
-                // Redirect to the group management page
-                return redirect()->route('groups')->with('success', trans('admin/groups/message.success.delete'));
-            } catch (GroupNotFoundException $e) {
-                // Redirect to the group management page
+            if (!$group = Group::find($id)) {
                 return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
             }
-        } else {
-            return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
+            $group->delete();
+            // Redirect to the group management page
+            return redirect()->route('groups')->with('success', trans('admin/groups/message.success.delete'));
         }
+        return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
     }
 
 
@@ -168,17 +153,8 @@ class GroupsController extends Controller
     public function getDatatable()
     {
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         if (Input::get('sort')=='name') {
             $sort = 'first_name';
@@ -188,7 +164,6 @@ class GroupsController extends Controller
 
         // Grab all the groups
         $groups = Group::with('users')->orderBy('name', 'ASC');
-        //$users = Company::scopeCompanyables($users);
 
         if (Input::has('search')) {
             $groups = $users->TextSearch(e(Input::get('search')));
@@ -196,8 +171,7 @@ class GroupsController extends Controller
 
          $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
 
-        $allowed_columns =
-         [
+        $allowed_columns = [
            'name','created_at'
          ];
 
@@ -209,14 +183,17 @@ class GroupsController extends Controller
         $rows = array();
 
         foreach ($groups as $group) {
-            $group_names = '';
-            $inout = '';
             $actions = '<nobr>';
-
-            $actions .= '<a href="' . route('update/group', $group->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
+            $actions .= Helper::generateDatatableButton('edit', route('update/group', $group->id));
 
             if (!config('app.lock_passwords')) {
-                  $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/group', $group->id) . '" data-content="'.trans('admin/groups/message.delete.confirm').'" data-title="Delete ' . htmlspecialchars($group->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('delete/group', $group->id),
+                    true, /*enabled*/
+                    trans('admin/groups/message.delete.confirm'),
+                    $group->name
+                );
             } else {
                 $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
             }
@@ -231,7 +208,6 @@ class GroupsController extends Controller
                 'actions'       => ($actions) ? $actions : '',
             );
         }
-
         $data = array('total'=>$groupsCount, 'rows'=>$rows);
         return $data;
     }

@@ -34,8 +34,8 @@ class ConsumablesController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ConsumablesController::getDatatable() method that generates the JSON response
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $this->authorize('index', Consumable::class);
@@ -49,23 +49,18 @@ class ConsumablesController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ConsumablesController::postCreate() method that stores the form data
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         $this->authorize('create', Consumable::class);
         // Show the page
-        $category_list = Helper::categoryList('consumable');
-        $company_list = Helper::companyList();
-        $location_list = Helper::locationsList();
-        $manufacturer_list = Helper::manufacturerList();
-
         return View::make('consumables/edit')
             ->with('item', new Consumable)
-            ->with('category_list', $category_list)
-            ->with('company_list', $company_list)
-            ->with('location_list', $location_list)
-            ->with('manufacturer_list', $manufacturer_list);
+            ->with('category_list', Helper::categoryList('consumable'))
+            ->with('company_list', Helper::companyList())
+            ->with('location_list', Helper::locationsList())
+            ->with('manufacturer_list', Helper::manufacturerList());
     }
 
 
@@ -75,36 +70,36 @@ class ConsumablesController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ConsumablesController::getCreate() method that returns the form view
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable();
-        $consumable->name                   = e(Input::get('name'));
-        $consumable->category_id            = e(Input::get('category_id'));
-        $consumable->location_id            = e(Input::get('location_id'));
+        $consumable->name                   = Input::get('name');
+        $consumable->category_id            = Input::get('category_id');
+        $consumable->location_id            = Input::get('location_id');
         $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $consumable->order_number           = e(Input::get('order_number'));
-        $consumable->min_amt                = e(Input::get('min_amt'));
-        $consumable->manufacturer_id         = e(Input::get('manufacturer_id'));
-        $consumable->model_number               = e(Input::get('model_number'));
-        $consumable->item_no         = e(Input::get('item_no'));
+        $consumable->order_number           = Input::get('order_number');
+        $consumable->min_amt                = Input::get('min_amt');
+        $consumable->manufacturer_id         = Input::get('manufacturer_id');
+        $consumable->model_number               = Input::get('model_number');
+        $consumable->item_no         = Input::get('item_no');
 
-        if (e(Input::get('purchase_date')) == '') {
+        if (Input::get('purchase_date') == '') {
             $consumable->purchase_date       =  null;
         } else {
-            $consumable->purchase_date       = e(Input::get('purchase_date'));
+            $consumable->purchase_date       = Input::get('purchase_date');
         }
 
-        if (e(Input::get('purchase_cost')) == '0.00') {
+        if (Input::get('purchase_cost') == '0.00') {
             $consumable->purchase_cost       =  null;
         } else {
-            $consumable->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
+            $consumable->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
         }
 
-        $consumable->qty                    = e(Input::get('qty'));
-        $consumable->user_id                = Auth::user()->id;
+        $consumable->qty                    = Input::get('qty');
+        $consumable->user_id                = Auth::id();
 
         // Was the consumable created?
         if ($consumable->save()) {
@@ -125,8 +120,8 @@ class ConsumablesController extends Controller
     * @param  int $consumableId
     * @see ConsumablesController::postEdit() method that stores the form data.
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function edit($consumableId = null)
     {
         // Check if the consumable exists
@@ -137,16 +132,11 @@ class ConsumablesController extends Controller
 
         $this->authorize($item);
 
-        $category_list =  Helper::categoryList('consumable');
-        $company_list = Helper::companyList();
-        $location_list = Helper::locationsList();
-        $manufacturer_list = Helper::manufacturerList();
-
         return View::make('consumables/edit', compact('item'))
-            ->with('category_list', $category_list)
-            ->with('company_list', $company_list)
-            ->with('location_list', $location_list)
-            ->with('manufacturer_list', $manufacturer_list);
+            ->with('category_list', Helper::categoryList('consumable'))
+            ->with('company_list', Helper::companyList())
+            ->with('location_list', Helper::locationsList())
+            ->with('manufacturer_list', Helper::manufacturerList());
     }
 
 
@@ -157,8 +147,8 @@ class ConsumablesController extends Controller
     * @param  int $consumableId
     * @see ConsumablesController::getEdit() method that stores the form data.
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($consumableId = null)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
@@ -167,36 +157,34 @@ class ConsumablesController extends Controller
 
         $this->authorize($consumable);
 
-        $consumable->name                   = e(Input::get('name'));
-        $consumable->category_id            = e(Input::get('category_id'));
-        $consumable->location_id            = e(Input::get('location_id'));
+        $consumable->name                   = Input::get('name');
+        $consumable->category_id            = Input::get('category_id');
+        $consumable->location_id            = Input::get('location_id');
         $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $consumable->order_number           = e(Input::get('order_number'));
-        $consumable->min_amt                   = e(Input::get('min_amt'));
-        $consumable->manufacturer_id         = e(Input::get('manufacturer_id'));
-        $consumable->model_number               = e(Input::get('model_number'));
-        $consumable->item_no         = e(Input::get('item_no'));
+        $consumable->order_number           = Input::get('order_number');
+        $consumable->min_amt                   = Input::get('min_amt');
+        $consumable->manufacturer_id         = Input::get('manufacturer_id');
+        $consumable->model_number               = Input::get('model_number');
+        $consumable->item_no         = Input::get('item_no');
 
-        if (e(Input::get('purchase_date')) == '') {
+        if (Input::get('purchase_date') == '') {
             $consumable->purchase_date       =  null;
         } else {
-            $consumable->purchase_date       = e(Input::get('purchase_date'));
+            $consumable->purchase_date       = Input::get('purchase_date');
         }
 
-        if (e(Input::get('purchase_cost')) == '0.00') {
+        if (Input::get('purchase_cost') == '0.00') {
             $consumable->purchase_cost       =  null;
         } else {
-            $consumable->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
+            $consumable->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
         }
 
-        $consumable->qty                    = Helper::ParseFloat(e(Input::get('qty')));
+        $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
         }
-
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
-
     }
 
     /**
@@ -205,8 +193,8 @@ class ConsumablesController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param  int $consumableId
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($consumableId)
     {
         // Check if the blog post exists
@@ -214,17 +202,11 @@ class ConsumablesController extends Controller
             // Redirect to the blogs management page
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
-
         $this->authorize($consumable);
-
         $consumable->delete();
-
         // Redirect to the locations management page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.delete.success'));
-
     }
-
-
 
     /**
     * Return a view to display component information.
@@ -233,8 +215,8 @@ class ConsumablesController extends Controller
     * @see ConsumablesController::getDataView() method that generates the JSON response
     * @since [v1.0]
     * @param int $consumableId
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function show($consumableId = null)
     {
         $consumable = Consumable::find($consumableId);
@@ -256,8 +238,8 @@ class ConsumablesController extends Controller
     * @see ConsumablesController::postCheckout() method that stores the data.
     * @since [v1.0]
     * @param int $consumableId
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getCheckout($consumableId)
     {
         // Check if the consumable exists
@@ -266,12 +248,8 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
         $this->authorize('checkout', $consumable);
-
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = Helper::usersList();
-
-        return View::make('consumables/checkout', compact('consumable'))->with('users_list', $users_list);
-
+        return View::make('consumables/checkout', compact('consumable'))->with('users_list', Helper::usersList());
     }
 
     /**
@@ -281,8 +259,8 @@ class ConsumablesController extends Controller
     * @see ConsumablesController::getCheckout() method that returns the form.
     * @since [v1.0]
     * @param int $consumableId
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function postCheckout($consumableId)
     {
       // Check if the consumable exists
@@ -305,10 +283,11 @@ class ConsumablesController extends Controller
       // Update the consumable data
         $consumable->assigned_to = e(Input::get('assigned_to'));
 
-        $consumable->users()->attach($consumable->id, array(
-        'consumable_id' => $consumable->id,
-        'user_id' => $admin_user->id,
-        'assigned_to' => e(Input::get('assigned_to'))));
+        $consumable->users()->attach($consumable->id, [
+            'consumable_id' => $consumable->id,
+            'user_id' => $admin_user->id,
+            'assigned_to' => e(Input::get('assigned_to'))
+        ]);
 
         $logaction = $consumable->logCheckout(e(Input::get('note')));
 
@@ -356,7 +335,6 @@ class ConsumablesController extends Controller
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $consumable->requireAcceptance();
 
-
         if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
 
             Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
@@ -369,8 +347,6 @@ class ConsumablesController extends Controller
       // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
 
-
-
     }
 
 
@@ -380,9 +356,8 @@ class ConsumablesController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ConsumablesController::getIndex() method that returns the view that consumes the JSON.
     * @since [v1.0]
-    * @param int $consumableId
-    * @return View
-    */
+    * @return array
+     */
     public function getDatatable()
     {
         $this->authorize('index', Consumable::class);
@@ -396,18 +371,8 @@ class ConsumablesController extends Controller
             $consumables = $consumables->TextSearch(e(Input::get('search')));
         }
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
-
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
         $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','companyName','category','model_number', 'item_no', 'manufacturer'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
@@ -438,19 +403,21 @@ class ConsumablesController extends Controller
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
             if (Gate::allows('checkout', $consumable)) {
-                $actions .= '<a href="' . route('checkout/consumable',
-                        $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= Helper::generateDatatableButton('checkout', route('checkout/consumable', $consumable->id), $consumable->numRemaining() > 0);
             }
 
             if (Gate::allows('update', $consumable)) {
-                $actions .= '<a href="' . route('consumables.edit',
-                        $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton('edit', route('consumables.edit', $consumable->id));
             }
             if (Gate::allows('delete', $consumable)) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('consumables.destroy',
-                        $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('consumables.destroy', $consumable->id),
+                    true, /* enabled */
+                    trans('admin/consumables/message.delete.confirm'),
+                    $consumable->name
+                );
             }
-
             $actions .='</nobr>';
 
             $company = $consumable->company;
@@ -487,8 +454,8 @@ class ConsumablesController extends Controller
     * @see ConsumablesController::getView() method that returns the form.
     * @since [v1.0]
     * @param int $consumableId
-    * @return View
-    */
+    * @return array
+     */
     public function getDataView($consumableId)
     {
         //$consumable = Consumable::find($consumableID);
@@ -507,7 +474,7 @@ class ConsumablesController extends Controller
         if (!Company::isCurrentUserHasAccess($consumable)) {
             return ['total' => 0, 'rows' => []];
         }
-
+        $this->authorize('view', Component::class);
         $rows = array();
 
         foreach ($consumable->consumableAssigments as $consumable_assignment) {

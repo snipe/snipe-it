@@ -11,13 +11,13 @@ modules:
         - \Helper\Functional
         - Laravel5:
             environment_file: .env.tests
-            cleanup: false
+            cleanup: true
         - Db:
             dsn: 'mysql:host=localhost;dbname=snipeittests'
             user: 'snipeit_laravel'
             password: ''
             dump: tests/_data/dump.sql
             populate: true
-            cleanup: false
+            cleanup: true
         - REST:
             depends: Laravel5

@@ -53,13 +53,10 @@ class AssetModelsController extends Controller
     public function create()
     {
         // Show the page
-        $depreciation_list = Helper::depreciationList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
         return View::make('models/edit')
-        ->with('category_list', $category_list)
-        ->with('depreciation_list', $depreciation_list)
-        ->with('manufacturer_list', $manufacturer_list)
+        ->with('category_list', Helper::categoryList('asset'))
+        ->with('depreciation_list', Helper::depreciationList())
+        ->with('manufacturer_list', Helper::manufacturerList())
         ->with('item', new AssetModel);
     }
 
@@ -77,32 +74,30 @@ class AssetModelsController extends Controller
         // Create a new asset model
         $model = new AssetModel;
 
-
-        if (e($request->input('depreciation_id')) == '') {
+        if ($request->input('depreciation_id') == '') {
             $model->depreciation_id =  0;
         } else {
-            $model->depreciation_id = e($request->input('depreciation_id'));
+            $model->depreciation_id = $request->input('depreciation_id');
         }
 
-        if (e($request->input('eol')) == '') {
+        if ($request->input('eol') == '') {
             $model->eol =  0;
         } else {
-            $model->eol = e($request->input('eol'));
+            $model->eol = $request->input('eol');
         }
 
         // Save the model data
-        $model->name                = e($request->input('name'));
-        $model->model_number             = e($request->input('model_number'));
-        $model->manufacturer_id     = e($request->input('manufacturer_id'));
-        $model->category_id         = e($request->input('category_id'));
-        $model->notes               = e($request->input('notes'));
-        $model->user_id             = Auth::user()->id;
+        $model->name                = $request->input('name');
+        $model->model_number        = $request->input('model_number');
+        $model->manufacturer_id     = $request->input('manufacturer_id');
+        $model->category_id         = $request->input('category_id');
+        $model->notes               = $request->input('notes');
+        $model->user_id             = Auth::id();
         $model->requestable         = Input::has('requestable');
 
         if ($request->input('custom_fieldset')!='') {
             $model->fieldset_id = e($request->input('custom_fieldset'));
         }
-
 
         if (Input::file('image')) {
             $image = Input::file('image');
@@ -120,19 +115,18 @@ class AssetModelsController extends Controller
             // Redirect to the new model  page
             return redirect()->route("models.index")->with('success', trans('admin/models/message.create.success'));
         }
-
-            return redirect()->back()->withInput()->withErrors($model->getErrors());
-
+        return redirect()->back()->withInput()->withErrors($model->getErrors());
     }
 
     /**
-    * Validates and stores new Asset Model data created from the
-    * modal form on the Asset Creation view.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @return String JSON
-    */
+     * Validates and stores new Asset Model data created from the
+     * modal form on the Asset Creation view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @param Request $request
+     * @return String JSON
+     */
     public function apiStore(Request $request)
     {
       //COPYPASTA!!!! FIXME
@@ -141,12 +135,12 @@ class AssetModelsController extends Controller
         $settings=Input::all();
         $settings['eol']= null;
 
-        $model->name=e($request->input('name'));
-        $model->manufacturer_id = e($request->input('manufacturer_id'));
-        $model->category_id = e($request->input('category_id'));
-        $model->model_number = e($request->input('model_number'));
-        $model->user_id = Auth::user()->id;
-        $model->notes            = e($request->input('notes'));
+        $model->name=$request->input('name');
+        $model->manufacturer_id = $request->input('manufacturer_id');
+        $model->category_id = $request->input('category_id');
+        $model->model_number = $request->input('model_number');
+        $model->user_id = Auth::id();
+        $model->notes            = $request->input('notes');
         $model->eol= null;
 
         if ($request->input('fieldset_id')=='') {
@@ -179,14 +173,10 @@ class AssetModelsController extends Controller
             return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
-        $depreciation_list = Helper::depreciationList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
-
         $view = View::make('models/edit', compact('item'));
-        $view->with('category_list', $category_list);
-        $view->with('depreciation_list', $depreciation_list);
-        $view->with('manufacturer_list', $manufacturer_list);
+        $view->with('category_list', Helper::categoryList('asset'));
+        $view->with('depreciation_list', Helper::depreciationList());
+        $view->with('manufacturer_list', Helper::manufacturerList());
         return $view;
     }
 
@@ -208,31 +198,30 @@ class AssetModelsController extends Controller
             return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
-
-        if (e($request->input('depreciation_id')) == '') {
+        if ($request->input('depreciation_id') == '') {
             $model->depreciation_id =  0;
         } else {
-            $model->depreciation_id = e($request->input('depreciation_id'));
+            $model->depreciation_id = $request->input('depreciation_id');
         }
 
-        if (e($request->input('eol')) == '') {
+        if ($request->input('eol') == '') {
             $model->eol =  null;
         } else {
-            $model->eol = e($request->input('eol'));
+            $model->eol = $request->input('eol');
         }
 
-        $model->name                = e($request->input('name'));
-        $model->model_number        = e($request->input('model_number'));
-        $model->manufacturer_id     = e($request->input('manufacturer_id'));
-        $model->category_id         = e($request->input('category_id'));
-        $model->notes               = e($request->input('notes'));
+        $model->name                = $request->input('name');
+        $model->model_number        = $request->input('model_number');
+        $model->manufacturer_id     = $request->input('manufacturer_id');
+        $model->category_id         = $request->input('category_id');
+        $model->notes               = $request->input('notes');
 
         $model->requestable = Input::has('requestable');
 
         if ($request->input('custom_fieldset')=='') {
             $model->fieldset_id = null;
         } else {
-            $model->fieldset_id = e($request->input('custom_fieldset'));
+            $model->fieldset_id = $request->input('custom_fieldset');
         }
 
         if (Input::file('image')) {
@@ -250,17 +239,10 @@ class AssetModelsController extends Controller
             $model->image = null;
         }
 
-
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($model->getErrors());
         }
-
-
-        // Redirect to the model create page
-        return redirect()->route('models.create')->with('error', trans('admin/models/message.update.error'));
-
+        return redirect()->back()->withInput()->withErrors($model->getErrors());
     }
 
     /**
@@ -279,17 +261,15 @@ class AssetModelsController extends Controller
             return redirect()->route('models.index')->with('error', trans('admin/models/message.not_found'));
         }
 
-        if ($model->assets->count() > 0) {
+        if ($model->assets()->count() > 0) {
             // Throw an error that this model is associated with assets
             return redirect()->route('models.index')->with('error', trans('admin/models/message.assoc_users'));
-
-        } else {
-            // Delete the model
-            $model->delete();
-
-            // Redirect to the models management page
-            return redirect()->route('models.index')->with('success', trans('admin/models/message.delete.success'));
         }
+        // Delete the model
+        $model->delete();
+
+        // Redirect to the models management page
+        return redirect()->route('models.index')->with('success', trans('admin/models/message.delete.success'));
     }
 
 
@@ -318,9 +298,8 @@ class AssetModelsController extends Controller
             // Redirect back
             return redirect()->route('models.index')->with('success', $success);
 
-        } else {
-            return redirect()->back()->with('error', trans('admin/models/message.not_found'));
         }
+        return redirect()->back()->with('error', trans('admin/models/message.not_found'));
 
     }
 
@@ -338,16 +317,13 @@ class AssetModelsController extends Controller
         $model = AssetModel::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
-                return View::make('models/view', compact('model'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/models/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('models.index')->with('error', $error);
+            return View::make('models/view', compact('model'));
         }
+        // Prepare the error message
+        $error = trans('admin/models/message.does_not_exist', compact('id'));
 
-
+        // Redirect to the user management page
+        return redirect()->route('models.index')->with('error', $error);
     }
 
     /**
@@ -369,13 +345,10 @@ class AssetModelsController extends Controller
         $model->id = null;
 
         // Show the page
-        $depreciation_list = Helper::depreciationList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
         $view = View::make('models/edit');
-        $view->with('category_list', $category_list);
-        $view->with('depreciation_list', $depreciation_list);
-        $view->with('manufacturer_list', $manufacturer_list);
+        $view->with('category_list', Helper::categoryList('asset'));
+        $view->with('depreciation_list', Helper::depreciationList());
+        $view->with('manufacturer_list', Helper::manufacturerList());
         $view->with('item', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
@@ -424,18 +397,8 @@ class AssetModelsController extends Controller
             $models = $models->TextSearch($request->input('search'));
         }
 
-        if (Input::has('offset')) {
-            $offset = e($request->input('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
-
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $allowed_columns = ['id','name','model_number'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -449,14 +412,22 @@ class AssetModelsController extends Controller
         $rows = array();
 
         foreach ($models as $model) {
+            $actions = '<div style="white-space: nowrap;">';
             if ($model->deleted_at == '') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/model', $model->id).'" class="btn btn-info btn-sm" title="Clone Model" data-toggle="tooltip"><i class="fa fa-clone"></i></a> <a href="'.route('models.edit', ['model' => $model->id]).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('models.destroy', ['model' => $model->id]).'" data-content="'.trans('admin/models/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions .= Helper::generateDatatableButton('clone', route('clone/model', $model->id));
+                $actions .= Helper::generateDatatableButton('edit', route('models.edit', $model->id));
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('models.destroy', $model->id),
+                    trans('admin/models/message.delete.confirm'),
+                    $model->name
+                );
             } else {
-                $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton('restore', route('restore/model', $model->id));
             }
 
             $rows[] = array(
-                'id'      => $model->id,
+                'id'                => $model->id,
                 'manufacturer'      => (string)link_to_route('manufacturers.show', $model->manufacturer->name, ['manufacturer' => $model->manufacturer->id]),
                 'name'              => (string)link_to_route('models.show',$model->name, ['model' => $model->id]),
                 'image'             => ($model->image!='') ? '<img src="'.url('/').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
@@ -516,9 +487,9 @@ class AssetModelsController extends Controller
             if ($asset->assetstatus) {
                 if ($asset->assetstatus->deployable != 0) {
                     if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
+                        $actions = Helper::generateDatatableButton('checkin', route('checkin/hardware', $asset->id));
                     } else {
-                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
+                        $actions = Helper::generateDatatableButton('checkout', route('checkout/hardware', $asset->id));
                     }
                 }
             }

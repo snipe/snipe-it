@@ -57,10 +57,7 @@ class ManufacturersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a manufacturer');
-        $manufacturerId = Manufacturer::doesntHave('models')
-                            ->doesntHave('accessories')
-                            ->doesntHave('consumables')
-                            ->doesntHave('licenses')->first()->id;
+        $manufacturerId = factory(App\Models\Manufacturer::class, 'manufacturer')->create()->id;
         $I->sendDelete(route('manufacturers.destroy', $manufacturerId), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

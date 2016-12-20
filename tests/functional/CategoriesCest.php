@@ -55,7 +55,8 @@ class CategoryCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a category');
-        $I->sendDelete(route('categories.destroy', $I->getEmptyCategoryId()), ['_token' => csrf_token()]);
+        $category = factory(App\Models\Category::class, 'asset-category')->create();
+        $I->sendDelete(route('categories.destroy', $category->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 }
