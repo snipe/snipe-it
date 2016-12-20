@@ -23,8 +23,8 @@ final class CompaniesController extends Controller
     *
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return View::make('companies/index')->with('companies', Company::all());
@@ -35,20 +35,21 @@ final class CompaniesController extends Controller
     *
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         return View::make('companies/edit')->with('item', new Company);
     }
 
     /**
-    * Save data from new company form.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
+     * Save data from new company form.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $company = new Company;
@@ -68,8 +69,8 @@ final class CompaniesController extends Controller
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
     * @param int $companyId
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function edit($companyId)
     {
         if (is_null($item = Company::find($companyId))) {
@@ -80,13 +81,14 @@ final class CompaniesController extends Controller
     }
 
     /**
-    * Save data from edit company form.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @param int $companyId
-    * @return Redirect
-    */
+     * Save data from edit company form.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param Request $request
+     * @param int $companyId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $companyId)
     {
         if (is_null($company = Company::find($companyId))) {
@@ -109,8 +111,8 @@ final class CompaniesController extends Controller
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
     * @param int $companyId
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($companyId)
     {
         if (is_null($company = Company::find($companyId))) {

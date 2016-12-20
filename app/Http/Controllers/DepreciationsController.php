@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use Lang;
 use App\Models\Depreciation;
 use Redirect;
@@ -26,8 +27,8 @@ class DepreciationsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net]
     * @see DepreciationsController::getDatatable() method that generates the JSON response
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         // Show the page
@@ -41,8 +42,8 @@ class DepreciationsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net]
     * @see DepreciationsController::postCreate()
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         // Show the page
@@ -51,35 +52,29 @@ class DepreciationsController extends Controller
 
 
     /**
-    * Validates and stores the new depreciation data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see DepreciationsController::postCreate()
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validates and stores the new depreciation data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see DepreciationsController::postCreate()
+     * @since [v1.0]
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
-
-      // get the POST data
-        $new = $request->all();
-
-      // create a new instance
+        // create a new instance
         $depreciation = new Depreciation();
+        // Depreciation data
+        $depreciation->name             = $request->input('name');
+        $depreciation->months           = $request->input('months');
+        $depreciation->user_id          = Auth::id();
 
-      // Depreciation data
-        $depreciation->name            = e($request->input('name'));
-        $depreciation->months    = e($request->input('months'));
-        $depreciation->user_id          = Auth::user()->id;
-
-      // Was the asset created?
+        // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the new depreciation  page
             return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.create.success'));
         }
-
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
-
     }
 
     /**
@@ -89,8 +84,8 @@ class DepreciationsController extends Controller
     * @see DepreciationsController::postEdit()
     * @param int $depreciationId
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function edit($depreciationId = null)
     {
         // Check if the depreciation exists
@@ -110,7 +105,7 @@ class DepreciationsController extends Controller
      * @see DepreciationsController::getEdit()
      * @param Request $request
      * @param int $depreciationId
-     * @return Redirect
+     * @return \Illuminate\Http\RedirectResponse
      * @since [v1.0]
      */
     public function update(Request $request, $depreciationId = null)
@@ -122,61 +117,55 @@ class DepreciationsController extends Controller
         }
 
         // Depreciation data
-        $depreciation->name      = e($request->input('name'));
-        $depreciation->months    = e($request->input('months'));
+        $depreciation->name      = $request->input('name');
+        $depreciation->months    = $request->input('months');
 
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the depreciation page
             return redirect()->route("depreciations.index")->with('success', trans('admin/depreciations/message.update.success'));
         }
-
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
-
-
     }
 
     /**
-    * Validates and deletes a selected depreciation.
-    *
-    * This is a hard-delete. We do not currently soft-delete depreciations.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validates and deletes a selected depreciation.
+     *
+     * This is a hard-delete. We do not currently soft-delete depreciations.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @since [v1.0]
+     * @param integer $depreciationId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($depreciationId)
     {
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
-            // Redirect to the blogs management page
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.not_found'));
         }
 
         if ($depreciation->has_models() > 0) {
-
             // Redirect to the asset management page
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.assoc_users'));
-        } else {
-
-            $depreciation->delete();
-
-            // Redirect to the depreciations management page
-            return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.delete.success'));
         }
 
+        $depreciation->delete();
+        // Redirect to the depreciations management page
+        return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.delete.success'));
     }
 
 
     /**
-    * Generates the JSON used to display the depreciation listing.
-    *
-    * @see DepreciationsController::getIndex()
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  string  $status
-    * @since [v1.2]
-    * @return String JSON
-    */
+     * Generates the JSON used to display the depreciation listing.
+     *
+     * @see DepreciationsController::getIndex()
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
+     * @return String JSON
+     * @internal param string $status
+     * @since [v1.2]
+     */
     public function getDatatable(Request $request)
     {
         $depreciations = Depreciation::select(array('id','name','months'));
@@ -185,17 +174,8 @@ class DepreciationsController extends Controller
             $depreciations = $depreciations->TextSearch(e($request->input('search')));
         }
 
-        if ($request->has('offset')) {
-            $offset = e($request->input('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if ($request->has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $allowed_columns = ['id','name','months'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -209,7 +189,14 @@ class DepreciationsController extends Controller
         $rows = array();
 
         foreach ($depreciations as $depreciation) {
-            $actions = '<a href="'.route('depreciations.edit', $depreciation->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('depreciations.destroy', $depreciation->id).'" data-content="'.trans('admin/depreciations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($depreciation->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = Helper::generateDatatableButton('edit', route('depreciations.edit', $depreciation->id));
+            $actions .= Helper::generateDatatableButton(
+                'delete',
+                route('depreciations.destroy', $depreciation->id),
+                true, /*enabled*/
+                trans('admin/depreciations/message.delete.confirm'),
+                $depreciation->name
+            );
 
             $rows[] = array(
                 'id'            => $depreciation->id,

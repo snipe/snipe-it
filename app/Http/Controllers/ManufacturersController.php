@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Manufacturer;
 use Auth;
 use Exception;
@@ -27,8 +28,8 @@ class ManufacturersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ManufacturersController::getDatatable() method that generates the JSON response
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         // Show the page
@@ -42,8 +43,8 @@ class ManufacturersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ManufacturersController::postCreate()
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         return View::make('manufacturers/edit')->with('item', new Manufacturer);
@@ -51,25 +52,24 @@ class ManufacturersController extends Controller
 
 
     /**
-    * Validates and stores the data for a new manufacturer.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::postCreate()
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validates and stores the data for a new manufacturer.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ManufacturersController::postCreate()
+     * @since [v1.0]
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $manufacturer = new Manufacturer;
-        $manufacturer->name            = e($request->input('name'));
-        $manufacturer->user_id          = Auth::user()->id;
+        $manufacturer->name            = $request->input('name');
+        $manufacturer->user_id          = Auth::id();
 
         if ($manufacturer->save()) {
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.create.success'));
         }
-
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
-
     }
 
     /**
@@ -79,8 +79,8 @@ class ManufacturersController extends Controller
     * @see ManufacturersController::postEdit()
     * @param int $manufacturerId
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function edit($manufacturerId = null)
     {
         // Check if the manufacturer exists
@@ -88,21 +88,21 @@ class ManufacturersController extends Controller
             // Redirect to the manufacturer  page
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
-
         // Show the page
         return View::make('manufacturers/edit', compact('item'));
     }
 
 
     /**
-    * Validates and stores the updated manufacturer data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::getEdit()
-    * @param int $manufacturerId
-    * @since [v1.0]
-    * @return View
-    */
+     * Validates and stores the updated manufacturer data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ManufacturersController::getEdit()
+     * @param Request $request
+     * @param int $manufacturerId
+     * @return \Illuminate\Http\RedirectResponse
+     * @since [v1.0]
+     */
     public function update(Request $request, $manufacturerId = null)
     {
         // Check if the manufacturer exists
@@ -112,7 +112,7 @@ class ManufacturersController extends Controller
         }
 
         // Save the  data
-        $manufacturer->name     = e($request->input('name'));
+        $manufacturer->name     = $request->input('name');
         // Was it created?
         if ($manufacturer->save()) {
             // Redirect to the new manufacturer page
@@ -127,8 +127,8 @@ class ManufacturersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param int $manufacturerId
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($manufacturerId)
     {
         // Check if the manufacturer exists
@@ -156,14 +156,14 @@ class ManufacturersController extends Controller
     * @see ManufacturersController::getDataView()
     * @param int $manufacturerId
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function show($manufacturerId = null)
     {
         $manufacturer = Manufacturer::find($manufacturerId);
 
         if (isset($manufacturer->id)) {
-                return View::make('manufacturers/view', compact('manufacturer'));
+            return View::make('manufacturers/view', compact('manufacturer'));
         }
         // Prepare the error message
         $error = trans('admin/manufacturers/message.does_not_exist', compact('id'));
@@ -172,13 +172,14 @@ class ManufacturersController extends Controller
     }
 
     /**
-    * Generates the JSON used to display the manufacturer listings.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::getIndex()
-    * @since [v1.0]
-    * @return String JSON
-    */
+     * Generates the JSON used to display the manufacturer listings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ManufacturersController::getIndex()
+     * @since [v1.0]
+     * @param Request $request
+     * @return String JSON
+     */
     public function getDatatable(Request $request)
     {
         $manufacturers = Manufacturer::select(array('id','name'))->whereNull('deleted_at');
@@ -201,7 +202,16 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($manufacturers as $manufacturer) {
-            $actions = '<a href="'.route('manufacturers.edit', $manufacturer->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('manufacturers.destroy', $manufacturer->id).'" data-content="'.trans('admin/manufacturers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($manufacturer->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<nobr>';
+            $actions .= Helper::generateDatatableButton('edit', route('manufacturers.edit', $manufacturer->id));
+            $actions .= Helper::generateDatatableButton(
+                'delete',
+                route('manufacturers.destroy'),
+                true, /*enabled*/
+                trans('admin/manufacturers/message.delete.confirm'),
+                $manufacturer->name
+            );
+            $actions .= '</nobr>';
 
             $rows[] = array(
                 'id'            => $manufacturer->id,
@@ -248,55 +258,53 @@ class ManufacturersController extends Controller
                 return $this->getDataConsumablesView($manufacturer, $request);
         }
 
-        throw new Exception("We shouldn't be here");
+        return "We shouldn't be here";
 
     }
 
     protected function getDataAssetsView(Manufacturer $manufacturer, Request $request)
     {
         $manufacturer = $manufacturer->load('assets.model', 'assets.assigneduser', 'assets.assetstatus', 'assets.company');
-        $manufacturer_assets = $manufacturer->assets;
+        $manufacturer_assets = $manufacturer->assets();
 
         if ($request->has('search')) {
             $manufacturer_assets = $manufacturer_assets->TextSearch(e($request->input('search')));
         }
 
-        if ($request->has('offset')) {
-            $offset = e($request->input('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if ($request->has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         $allowed_columns = ['id','name','serial','asset_tag'];
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $count = $manufacturer_assets->count();
-
+        $manufacturer_assets = $manufacturer_assets->skip($offset)->take($limit)->get();
         $rows = array();
 
         foreach ($manufacturer_assets as $asset) {
-
-            $actions = '';
+            $actions = '<div style="white-space: nowrap;">';
             if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('hardware.edit', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('hardware.destroy', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions .= Helper::generateDatatableButton('clone', route('clone/hardware', $asset->id));
+                $actions .= Helper::generateDatatableButton('edit', route('hardware.edit', $asset->id));
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('hardware.destroy', $asset->id),
+                    true, /*enabled*/
+                    trans('admin/hardware/message.delete.confirm'),
+                    $asset->asset_tag
+                );
             } elseif ($asset->deleted_at!='') {
-                $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton('restore', route('restore/hardware', $asset->id));
             }
-
+            $actions .= '</div>';
             if ($asset->availableForCheckout()) {
                 if (Gate::allows('checkout', $asset)) {
-                    $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
+                    $inout = Helper::generateDatatableButton('checkout', route('checkout/hardware', $asset->id));
                 }
             } else {
                 if (Gate::allows('checkin', $asset)) {
-                    $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
+                    $inout = Helper::generateDatatableButton('checkin', route('checkin/hardware', $asset->id));
                 }
             }
 
@@ -337,22 +345,27 @@ class ManufacturersController extends Controller
             $actions = '<span style="white-space: nowrap;">';
 
             if (Gate::allows('checkout', \App\Models\License::class)) {
-                $actions .= '<a href="' . route('licenses.freecheckout', $license->id)
-                . '" class="btn btn-primary btn-sm' . (($license->remaincount() > 0) ? '' : ' disabled') . '" style="margin-right:5px;">' . trans('general.checkout') . '</a> ';
+                $actions .= Helper::generateDatatableButton(
+                    'checkout',
+                    route('licenses.freecheckout', $license->id),
+                    $license->remaincount() > 0
+                );
             }
 
             if (Gate::allows('create', $license)) {
-                $actions .= '<a href="' . route('clone/license', $license->id)
-                . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
+                $actions .= Helper::generateDatatableButton('clone', route('clone/license', $license->id));
             }
-            if (Gate::allows('edit', $license)) {
-                $actions .= '<a href="' . route('licenses.edit', ['license' => $license->id])
-                . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            if (Gate::allows('update', $license)) {
+                $actions .= Helper::generateDatatableButton('edit', route('licenses.edit', $license->id));
             }
             if (Gate::allows('delete', $license)) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'
-                 . route('licenses.destroy', $license->id)
-                 . '" data-content="' . trans('admin/licenses/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($license->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('licenses.destroy', $license->id),
+                    true, /*enabled*/
+                    trans('admin/licenses/message.delete.confirm'),
+                    $license->name
+                );
             }
             $actions .='</span>';
 
@@ -390,36 +403,40 @@ class ManufacturersController extends Controller
             'accessories.manufacturer',
             'accessories.users'
             );
-        $accessories = $manufacturer->accessories;
+        $accessories = $manufacturer->accessories();
 
         if ($request->has('search')) {
             $accessories = $accessories->TextSearch(e($request->input('search')));
         }
 
-        if ($request->has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $accessCount = $accessories->count();
-
+        $accessories = $accessories->skip($offset)->take($limit)->get();
         $rows = array();
 
         foreach ($accessories as $accessory) {
 
             $actions = '<nobr>';
             if (Gate::allows('checkout', $accessory)) {
-                $actions .= '<a href="' . route('checkout/accessory',
-                        $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= Helper::generateDatatableButton(
+                    'checkout',
+                    route('checkout/accessory', $accessory->id),
+                    $accessory->numRemaining() > 0
+                );
             }
             if (Gate::allows('update', $accessory)) {
-                $actions .= '<a href="' . route('accessories.update',
-                        $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton('edit', route('accessories.update', $accessory->id));
             }
             if (Gate::allows('delete', $accessory)) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('accessories.destroy',
-                        $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('accessories.destroy', $accessory->id),
+                    $enabled = true,
+                    trans('admin/accessories/message.delete.confirm'),
+                    $accessory->name
+                );
             }
             $actions .= '</nobr>';
             $company = $accessory->company;
@@ -455,36 +472,37 @@ class ManufacturersController extends Controller
             'consumables.manufacturer',
             'consumables.users'
         );
-        $consumables = $manufacturer->consumables;
+        $consumables = $manufacturer->consumables();
 
         if ($request->has('search')) {
             $consumables = $consumables->TextSearch(e($request->input('search')));
         }
 
-        if ($request->has('limit')) {
-            $limit = e($request->input('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
+
 
         $consumCount = $consumables->count();
-
+        $consumables = $consumables->skip($offset)->take($limit)->get();
         $rows = array();
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
             if (Gate::allows('checkout', $consumable)) {
-                $actions .= '<a href="' . route('checkout/consumable',
-                        $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+                $actions .= Helper::generateDatatableButton('checkout', route('checkout/consumable', $consumable->id), $consumable->numRemaining() > 0);
             }
 
             if (Gate::allows('update', $consumable)) {
-                $actions .= '<a href="' . route('consumables.edit',
-                        $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton('edit', route('consumables.edit', $consumable->id));
             }
             if (Gate::allows('delete', $consumable)) {
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('consumables.destroy',
-                        $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions .= Helper::generateDatatableButton(
+                    'delete',
+                    route('consumables.destroy', $consumable->id),
+                    true, /* enabled */
+                    trans('admin/consumables/message.delete.confirm'),
+                    $consumable->name
+                );
             }
 
             $actions .='</nobr>';

@@ -55,8 +55,8 @@ class UsersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see UsersController::getDatatable() method that generates the JSON response
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $this->authorize('index', User::class);
@@ -68,8 +68,8 @@ class UsersController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         $this->authorize('create', User::class);
@@ -85,14 +85,10 @@ class UsersController extends Controller
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
-        $location_list = Helper::locationsList();
-        $manager_list = Helper::managerList();
-        $company_list = Helper::companyList();
-
         return View::make('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
-        ->with('location_list', $location_list)
-        ->with('manager_list', $manager_list)
-        ->with('company_list', $company_list)
+        ->with('location_list', Helper::locationsList())
+        ->with('manager_list', Helper::managerList())
+        ->with('company_list', Helper::companyList())
         ->with('user', new User);
     }
 
@@ -101,8 +97,8 @@ class UsersController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(SaveUserRequest $request)
     {
         $this->authorize('create', User::class);
@@ -175,11 +171,7 @@ class UsersController extends Controller
             }
             return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
-
         return redirect()->back()->withInput()->withErrors($user->getErrors());
-
-
-
     }
 
     /**
@@ -198,19 +190,16 @@ class UsersController extends Controller
         $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
         $inputs['activated'] = true;
 
-        $user->first_name = e(Input::get('first_name'));
-        $user->last_name = e(Input::get('last_name'));
-        $user->username = e(Input::get('username'));
-        $user->email = e(Input::get('email'));
+        $user->first_name = Input::get('first_name');
+        $user->last_name = Input::get('last_name');
+        $user->username = Input::get('username');
+        $user->email = Input::get('email');
         if (Input::has('password')) {
             $user->password = bcrypt(Input::get('password'));
         }
-
         $user->activated = true;
 
-
-
-      // Was the user created?
+        // Was the user created?
         if ($user->save()) {
 
             if (Input::get('email_user') == 1) {
@@ -230,22 +219,19 @@ class UsersController extends Controller
 
             return JsonResponse::create($user);
 
-        } else {
-            return JsonResponse::create(["error" => "Failed validation: " . print_r($user->getErrors(), true)], 500);
         }
-
-
-
+        return JsonResponse::create(["error" => "Failed validation: " . print_r($user->getErrors(), true)], 500);
     }
 
     /**
-    * Returns a view that displays the edit user form
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @param int $id
-    * @return View
-    */
+     * Returns a view that displays the edit user form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @param $permissions
+     * @return View
+     * @internal param int $id
+     */
 
     private function filterDisplayable($permissions) {
         $output = null;
@@ -271,9 +257,6 @@ class UsersController extends Controller
             $user->permissions = $user->decodePermissions();
             $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
             $permissions = $this->filterDisplayable($permissions);
-            $location_list = Helper::locationsList();
-            $company_list = Helper::companyList();
-            $manager_list = Helper::managerList();
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
@@ -284,19 +267,20 @@ class UsersController extends Controller
 
         // Show the page
         return View::make('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
-                        ->with('location_list', $location_list)
-                        ->with('company_list', $company_list)
-                        ->with('manager_list', $manager_list);
+                        ->with('location_list', Helper::locationsList())
+                        ->with('company_list', Helper::companyList())
+                        ->with('manager_list', Helper::managerList());
     }
 
     /**
-    * Validate and save edited user data from edit form.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @param  int  $id
-    * @return Redirect
-    */
+     * Validate and save edited user data from edit form.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @param UpdateUserRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateUserRequest $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
@@ -314,15 +298,11 @@ class UsersController extends Controller
             $this->authorize('update', $user);
             // Figure out of this user was an admin before this edit
             $orig_permissions_array = $user->decodePermissions();
-
+            $orig_superuser = '0';
             if (is_array($orig_permissions_array)) {
                 if (array_key_exists('superuser', $orig_permissions_array)) {
                     $orig_superuser = $orig_permissions_array['superuser'];
-                } else {
-                    $orig_superuser = '0';
                 }
-            } else {
-                $orig_superuser = '0';
             }
 
         } catch (UserNotFoundException $e) {
@@ -372,7 +352,6 @@ class UsersController extends Controller
             $permissions_array['superuser'] = $orig_superuser;
        }
 
-
         $user->permissions =  json_encode($permissions_array);
 
         if ($user->manager_id == "") {
@@ -387,20 +366,14 @@ class UsersController extends Controller
             $user->company_id = null;
         }
 
-
-            // Was the user updated?
+        // Was the user updated?
         if ($user->save()) {
-
-
             // Prepare the success message
             $success = trans('admin/users/message.success.update');
-
             // Redirect to the user page
             return redirect()->route('users.index')->with('success', $success);
         }
-
-            return redirect()->back()->withInput()->withErrors($user->getErrors());
-
+        return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
     /**
@@ -409,8 +382,8 @@ class UsersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
     * @param  int  $id
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id = null)
     {
         try {
@@ -447,7 +420,6 @@ class UsersController extends Controller
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
-
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
         }
@@ -458,8 +430,8 @@ class UsersController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.7]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function postBulkEdit()
     {
         $this->authorize('update', User::class);
@@ -469,8 +441,6 @@ class UsersController extends Controller
             $statuslabel_list = Helper::statusLabelList();
             $user_raw_array = array_keys(Input::get('edit_user'));
             $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-
-            //print_r($licenses);
 
             $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
            // $users = Company::scopeCompanyables($users)->get();
@@ -484,8 +454,8 @@ class UsersController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function postBulkSave()
     {
         $this->authorize('update', User::class);
@@ -516,56 +486,50 @@ class UsersController extends Controller
                 $license_array = array();
                 $accessory_array = array();
 
-
-
                 foreach ($assets as $asset) {
 
                     $asset_array[] = $asset->id;
 
                     // Update the asset log
-                    $logaction = new Actionlog();
-                    $logaction->item_id = $asset->id;
-                    $logaction->item_type = Asset::class;
-                    $logaction->target_id = $asset->assigned_to;
-                    $logaction->target_type = User::class;
-                    $logaction->user_id = Auth::user()->id;
-                    $logaction->note = 'Bulk checkin asset and delete user';
-                    $logaction->logaction('checkin from');
+                    $logAction = new Actionlog();
+                    $logAction->item_id = $asset->id;
+                    $logAction->item_type = Asset::class;
+                    $logAction->target_id = $asset->assigned_to;
+                    $logAction->target_type = User::class;
+                    $logAction->user_id = Auth::user()->id;
+                    $logAction->note = 'Bulk checkin asset and delete user';
+                    $logAction->logaction('checkin from');
 
-                    Asset::whereIn('id', $asset_array)->update(
-                        array(
+                    Asset::whereIn('id', $asset_array)->update([
                                 'status_id' => e(Input::get('status_id')),
                                 'assigned_to' => null,
-                            )
-                    );
+                    ]);
                 }
 
                 foreach ($accessories as $accessory) {
                     $accessory_array[] = $accessory->accessory_id;
                     // Update the asset log
-                    $logaction = new Actionlog();
-                    $logaction->item_id = $accessory->id;
-                    $logaction->item_type = Accessory::class;
-                    $logaction->target_id = $accessory->assigned_to;
-                    $logaction->target_type = User::class;
-                    $logaction->user_id = Auth::user()->id;
-                    $logaction->note = 'Bulk checkin accessory and delete user';
-                    $logaction->logaction('checkin from');
-
-
+                    $logAction = new Actionlog();
+                    $logAction->item_id = $accessory->id;
+                    $logAction->item_type = Accessory::class;
+                    $logAction->target_id = $accessory->assigned_to;
+                    $logAction->target_type = User::class;
+                    $logAction->user_id = Auth::user()->id;
+                    $logAction->note = 'Bulk checkin accessory and delete user';
+                    $logAction->logaction('checkin from');
                 }
 
                 foreach ($licenses as $license) {
                     $license_array[] = $license->id;
                     // Update the asset log
-                    $logaction = new Actionlog();
-                    $logaction->item_id = $license->id;
-                    $logaction->item_type = License::class;
-                    $logaction->target_id = $license->assigned_to;
-                    $logaction->target_type = User::class;
-                    $logaction->user_id = Auth::user()->id;
-                    $logaction->note = 'Bulk checkin license and delete user';
-                    $logaction->logaction('checkin from');
+                    $logAction = new Actionlog();
+                    $logAction->item_id = $license->id;
+                    $logAction->item_type = License::class;
+                    $logAction->target_id = $license->assigned_to;
+                    $logAction->target_type = User::class;
+                    $logAction->user_id = Auth::user()->id;
+                    $logAction->note = 'Bulk checkin license and delete user';
+                    $logAction->logaction('checkin from');
                 }
 
                 LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => null]);
@@ -576,10 +540,8 @@ class UsersController extends Controller
                 }
 
                 return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
-            } else {
-                return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
             }
-
+            return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
         }
     }
 
@@ -589,8 +551,8 @@ class UsersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
     * @param  int  $id
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function getRestore($id = null)
     {
         $this->authorize('edit', User::class);
@@ -604,7 +566,6 @@ class UsersController extends Controller
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.restored'));
         }
         return redirect()->route('users.index')->with('error', 'User could not be restored.');
-
     }
 
 
@@ -614,13 +575,12 @@ class UsersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
     * @param  int  $userId
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function show($userId = null)
     {
         if(!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
             $error = trans('admin/users/message.user_not_found', compact('id'));
-
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
         }
@@ -631,7 +591,6 @@ class UsersController extends Controller
             $this->authorize('view', $user);
             return View::make('users/view', compact('user', 'userlog'));
         }
-
     }
 
     /**
@@ -653,7 +612,6 @@ class UsersController extends Controller
             if ($user->id === Auth::user()->id) {
                 // Prepare the error message
                 $error = trans('admin/users/message.error.unsuspend');
-
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', $error);
             }
@@ -666,13 +624,11 @@ class UsersController extends Controller
 
             // Prepare the success message
             $success = trans('admin/users/message.success.unsuspend');
-
             // Redirect to the user management page
             return redirect()->route('users.index')->with('success', $success);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
-
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
         }
@@ -686,8 +642,8 @@ class UsersController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
     * @param  int  $id
-    * @return Redirect
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getClone($id = null)
     {
         $this->authorize('create', User::class);
@@ -710,34 +666,24 @@ class UsersController extends Controller
 
             // Get this user groups
             $userGroups = $user_to_clone->groups()->lists('name', 'id');
-
-            // Get a list of all the available groups
-            $groups = Group::pluck('name', 'id');
-
             // Get all the available permissions
             $permissions = config('permissions');
             $clonedPermissions = $user_to_clone->decodePermissions();
 
             $userPermissions =Helper::selectedPermissionsArray($permissions, $clonedPermissions);
-            //$this->encodeAllPermissions($permissions);
-
-            $location_list = Helper::locationsList();
-            $company_list = Helper::companyList();
-            $manager_list = Helper::managerList();
 
             // Show the page
-            return View::make('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
-                            ->with('location_list', $location_list)
-                            ->with('company_list', $company_list)
-                            ->with('manager_list', $manager_list)
+            return View::make('users/edit', compact('permissions', 'userPermissions'))
+                            ->with('location_list', Helper::locationsList())
+                            ->with('company_list', Helper::companyList())
+                            ->with('manager_list', Helper::managerList())
                             ->with('user', $user)
-                            ->with('groups', $groups)
+                            ->with('groups', Group::pluck('name', 'id'))
                             ->with('userGroups', $userGroups)
                             ->with('clone_user', $user_to_clone);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
-
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
         }
@@ -748,23 +694,18 @@ class UsersController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getImport()
     {
         $this->authorize('update', User::class);
-        // Get all the available groups
-        //$groups = Sentry::getGroupProvider()->findAll();
         // Selected groups
         $selectedGroups = Input::old('groups', array());
         // Get all the available permissions
         $permissions = config('permissions');
-        //$this->encodeAllPermissions($permissions);
-        // Selected permissions
         $selectedPermissions = Input::old('permissions', array('superuser' => -1));
-        //$this->encodePermissions($selectedPermissions);
         // Show the page
-        return View::make('users/import', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'));
+        return View::make('users/import', compact('selectedGroups', 'permissions', 'selectedPermissions'));
     }
 
     /**
@@ -772,8 +713,8 @@ class UsersController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function postImport()
     {
         $this->authorize('update', User::class);
@@ -863,8 +804,6 @@ class UsersController extends Controller
                 return true;
             }
         });
-
-
         return redirect()->route('users.index')->with('duplicates', $duplicates)->with('success', 'Success');
     }
 
@@ -879,17 +818,9 @@ class UsersController extends Controller
     public function getDatatable(Request $request, $status = null)
     {
         $this->authorize('view', User::class);
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         if (Input::get('sort')=='name') {
             $sort = 'first_name';
@@ -939,45 +870,40 @@ class UsersController extends Controller
 
         foreach ($users as $user) {
             $group_names = '';
-            $inout = '';
             $actions = '<nobr>';
 
             foreach ($user->groups as $group) {
                 $group_names .= '<a href="' . route('update/group', $group->id) . '" class="label  label-default">' . $group->name . '</a> ';
             }
-
-
-                if (!is_null($user->deleted_at)) {
-                    if (Gate::allows('delete', $user)) {
-                        $actions .= '<a href="' . route('restore/user',
-                                $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
-                    }
-                } else {
-
-                    if (Gate::allows('delete', $user)) {
-                        if ($user->accountStatus() == 'suspended') {
-                            $actions .= '<a href="' . route('unsuspend/user',
-                                    $user->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
-                        }
-                    }
-                    if (Gate::allows('update', $user)) {
-                        $actions .= '<a href="' . route('users.edit',
-                                $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
-
-                        $actions .= '<a href="' . route('clone/user',
-                                $user->id) . '" class="btn btn-info btn-sm"><i class="fa fa-clone"></i></a>';
-                    }
-                    if (Gate::allows('delete', $user)) {
-                        if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
-                            $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('users.destroy',
-                                    $user->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
-                        } else {
-                            $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
-                        }
-                    } else {
-                        $actions.='';
+            if (!is_null($user->deleted_at)) {
+                if (Gate::allows('delete', $user)) {
+                    $actions .= Helper::generateDatatableButton('restore', route('restore/user', $user->id));
+                }
+            } else {
+                if (Gate::allows('delete', $user)) {
+                    if ($user->accountStatus() == 'suspended') {
+                        $actions .= '<a href="' . route('unsuspend/user',
+                                $user->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
                     }
                 }
+                if (Gate::allows('update', $user)) {
+                    $actions .= Helper::generateDatatableButton('edit', route('users.edit', $user->id));
+                    $actions .= Helper::generateDatatableButton('clone', route('clone/user', $user->id));
+                }
+                if (Gate::allows('delete', $user)) {
+                    if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
+                        $actions .= Helper::generateDatatableButton(
+                            'delete',
+                            route('users.destroy', $user->id),
+                            true, /*enabled*/
+                            "Are you sure you wish to delete this user?",
+                            $user->first_name
+                        );
+                    } else {
+                        $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+                    }
+                }
+            }
 
             $actions .= '</nobr>';
 
@@ -1014,13 +940,14 @@ class UsersController extends Controller
     }
 
     /**
-    * Return JSON response with a list of user details for the getIndex() view.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.6]
-    * @param int $userId
-    * @return string JSON
-    */
+     * Return JSON response with a list of user details for the getIndex() view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.6]
+     * @param AssetFileRequest $request
+     * @param int $userId
+     * @return string JSON
+     */
     public function postUpload(AssetFileRequest $request, $userId = null)
     {
 
@@ -1037,23 +964,23 @@ class UsersController extends Controller
                 $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
                 $upload_success = $file->move($destinationPath, $filename);
 
-              //Log the uploaded file to the log
-                $logaction = new Actionlog();
-                $logaction->item_id = $user->id;
-                $logaction->item_type = User::class;
-                $logaction->user_id = Auth::user()->id;
-                $logaction->note = e(Input::get('notes'));
-                $logaction->target_id = null;
-                $logaction->created_at = date("Y-m-d H:i:s");
-                $logaction->filename = $filename;
-                $logaction->action_type = 'uploaded';
-                $logaction->save();
+                //Log the uploaded file to the log
+                $logAction = new Actionlog();
+                $logAction->item_id = $user->id;
+                $logAction->item_type = User::class;
+                $logAction->user_id = Auth::user()->id;
+                $logAction->note = e(Input::get('notes'));
+                $logAction->target_id = null;
+                $logAction->created_at = date("Y-m-d H:i:s");
+                $logAction->filename = $filename;
+                $logAction->action_type = 'uploaded';
+                $logAction->save();
 
             }
-            return JsonResponse::create($logaction);
+            return JsonResponse::create($logAction);
 
         }
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($logaction->getErrors(), true)], 500);
+        return JsonResponse::create(["error" => "Failed validation: ".print_r($logAction->getErrors(), true)], 500);
     }
 
 
@@ -1064,8 +991,8 @@ class UsersController extends Controller
     * @since [v1.6]
     * @param  int  $userId
     * @param  int  $fileId
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function getDeleteFile($userId = null, $fileId = null)
     {
         $user = User::find($userId);
@@ -1084,7 +1011,6 @@ class UsersController extends Controller
         }
         // Prepare the error message
         $error = trans('admin/users/message.does_not_exist', compact('id'));
-
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);
 
@@ -1123,19 +1049,16 @@ class UsersController extends Controller
     *
     * @author Aladin Alaily
     * @since [v1.8]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getLDAP()
     {
         $this->authorize('update', User::class);
-        $location_list = Helper::locationsList();
-
         try {
             $ldapconn = Ldap::connectToLdap();
         } catch (\Exception $e) {
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }
-
 
         try {
             Ldap::bindAdminToLdap($ldapconn);
@@ -1144,8 +1067,7 @@ class UsersController extends Controller
         }
 
         return View::make('users/ldap')
-              ->with('location_list', $location_list);
-
+              ->with('location_list', Helper::locationsList());
     }
 
 
@@ -1172,8 +1094,8 @@ class UsersController extends Controller
     *
     * @author Aladin Alaily
     * @since [v1.8]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function postLDAP(Request $request)
     {
         $this->authorize('update', User::class);
@@ -1207,7 +1129,6 @@ class UsersController extends Controller
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $pass = bcrypt($tmp_pass);
 
-
         for ($i = 0; $i < $results["count"]; $i++) {
             if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
 
@@ -1226,9 +1147,7 @@ class UsersController extends Controller
                     $item["createorupdate"] = 'created';
                 }
 
-              // Create the user if they don't exist.
-
-
+                 // Create the user if they don't exist.
                 $user->first_name = e($item["firstname"]);
                 $user->last_name = e($item["lastname"]);
                 $user->username = e($item["username"]);
@@ -1253,24 +1172,20 @@ class UsersController extends Controller
                     $item["note"] = $errors;
                     $item["status"]='error';
                 }
-
                 array_push($summary, $item);
             }
-
         }
-
-
-
         return redirect()->route('ldap/user')->with('success', "LDAP Import successful.")->with('summary', $summary);
     }
 
     /**
-    * Return JSON containing a list of assets assigned to a user.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v3.0]
-    * @return string JSON
-    */
+     * Return JSON containing a list of assets assigned to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
     public function getAssetList($userId)
     {
         $this->authorize('view', User::class);
@@ -1283,13 +1198,12 @@ class UsersController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.5]
-     * @return \Illuminate\Http\Response
+     * @return StreamedResponse
      */
     public function getExportUserCsv()
     {
         $this->authorize('view', User::class);
         \Debugbar::disable();
-
 
         $response = new StreamedResponse(function() {
             // Open output stream
@@ -1363,7 +1277,6 @@ class UsersController extends Controller
 
     }
 
-
     public function postTwoFactorReset(Request $request)
     {
         if (Gate::denies('users.edit')) {
@@ -1379,8 +1292,5 @@ class UsersController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
         }
-
     }
-
-
 }

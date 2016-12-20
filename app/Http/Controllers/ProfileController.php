@@ -24,8 +24,8 @@ class ProfileController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function getIndex()
     {
         // Get the user information
@@ -39,8 +39,8 @@ class ProfileController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function postIndex()
     {
 
@@ -48,16 +48,16 @@ class ProfileController extends Controller
         $user = Auth::user();
 
       // Update the user information
-        $user->first_name = e(Input::get('first_name'));
-        $user->last_name  = e(Input::get('last_name'));
-        $user->website    = e(Input::get('website'));
-        $user->location_id    = e(Input::get('location_id'));
-        $user->gravatar   = e(Input::get('gravatar'));
-        $user->locale = e(Input::get('locale'));
+        $user->first_name = Input::get('first_name');
+        $user->last_name  = Input::get('last_name');
+        $user->website    = Input::get('website');
+        $user->location_id    = Input::get('location_id');
+        $user->gravatar   = Input::get('gravatar');
+        $user->locale = Input::get('locale');
 
 
         if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled=='1') && (!config('app.lock_passwords')))) {
-            $user->two_factor_optin = e(Input::get('two_factor_optin', '0'));
+            $user->two_factor_optin = Input::get('two_factor_optin', '0');
         }
         
         if (Input::file('avatar')) {

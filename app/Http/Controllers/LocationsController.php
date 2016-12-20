@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use Input;
 use Lang;
 use App\Models\Location;
@@ -32,8 +33,8 @@ class LocationsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see LocationsController::getDatatable() method that generates the JSON response
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         // Grab all the locations
@@ -50,8 +51,8 @@ class LocationsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see LocationsController::postCreate() method that validates and stores the data
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         $locations = Location::orderBy('name', 'ASC')->get();
@@ -61,8 +62,8 @@ class LocationsController extends Controller
         $location_options = array('' => 'Top Level') + $location_options;
 
         return View::make('locations/edit')
-        ->with('location_options', $location_options)
-        ->with('item', new Location);
+            ->with('location_options', $location_options)
+            ->with('item', new Location);
     }
 
 
@@ -73,33 +74,30 @@ class LocationsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see LocationsController::getCreate() method that makes the form
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
-
         $location = new Location();
-
-        $location->name             = e(Input::get('name'));
+        $location->name             = Input::get('name');
         if (Input::get('parent_id')=='') {
             $location->parent_id        = null;
         } else {
-            $location->parent_id        = e(Input::get('parent_id'));
+            $location->parent_id    = Input::get('parent_id');
         }
-        $location->currency             = e(Input::get('currency', '$'));
-        $location->address          = e(Input::get('address'));
-        $location->address2             = e(Input::get('address2'));
-        $location->city             = e(Input::get('city'));
-        $location->state            = e(Input::get('state'));
-        $location->country          = e(Input::get('country'));
-        $location->zip              = e(Input::get('zip'));
-        $location->user_id          = Auth::user()->id;
+        $location->currency         = Input::get('currency', '$');
+        $location->address          = Input::get('address');
+        $location->address2         = Input::get('address2');
+        $location->city             = Input::get('city');
+        $location->state            = Input::get('state');
+        $location->country          = Input::get('country');
+        $location->zip              = Input::get('zip');
+        $location->user_id          = Auth::id();
 
         if ($location->save()) {
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($location->getErrors());
-
     }
 
     /**
@@ -113,33 +111,28 @@ class LocationsController extends Controller
     */
     public function apiStore()
     {
-
         $new['currency']=Setting::first()->default_currency;
 
         // create a new location instance
         $location = new Location();
 
         // Save the location data
-        $location->name               = e(Input::get('name'));
+        $location->name               = Input::get('name');
         $location->currency           =  Setting::first()->default_currency; //e(Input::get('currency'));
         $location->address            = ''; //e(Input::get('address'));
         // $location->address2			= e(Input::get('address2'));
-        $location->city               = e(Input::get('city'));
+        $location->city               = Input::get('city');
         $location->state          = '';//e(Input::get('state'));
-        $location->country            = e(Input::get('country'));
+        $location->country            = Input::get('country');
         // $location->zip    			= e(Input::get('zip'));
-        $location->user_id          = Auth::user()->id;
+        $location->user_id          = Auth::id();
 
         // Was the location created?
         if ($location->save()) {
             return JsonResponse::create($location);
-
         }
-
         // failure
-        $errors = $location->errors();
         return JsonResponse::create(["error" => "Failed validation: ".print_r($location->getErrors(), true)], 500);
-
     }
 
 
@@ -150,8 +143,8 @@ class LocationsController extends Controller
     * @see LocationsController::postCreate() method that validates and stores
     * @param int $locationId
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function edit($locationId = null)
     {
         // Check if the location exists
@@ -176,40 +169,37 @@ class LocationsController extends Controller
     * @see LocationsController::getEdit() method that makes the form view
     * @param int $locationId
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function update($locationId = null)
     {
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
-            // Redirect to the blogs management page
             return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
         // Update the location data
-        $location->name         = e(Input::get('name'));
+        $location->name         = Input::get('name');
         if (Input::get('parent_id')=='') {
             $location->parent_id        = null;
         } else {
-            $location->parent_id        = e(Input::get('parent_id', ''));
+            $location->parent_id        = Input::get('parent_id', '');
         }
-        $location->currency             = e(Input::get('currency', '$'));
-        $location->address          = e(Input::get('address'));
-        $location->address2             = e(Input::get('address2'));
-        $location->city             = e(Input::get('city'));
-        $location->state            = e(Input::get('state'));
-        $location->country      = e(Input::get('country'));
-        $location->zip            = e(Input::get('zip'));
+        $location->currency             = Input::get('currency', '$');
+        $location->address          = Input::get('address');
+        $location->address2             = Input::get('address2');
+        $location->city             = Input::get('city');
+        $location->state            = Input::get('state');
+        $location->country      = Input::get('country');
+        $location->zip            = Input::get('zip');
 
         // Was the asset created?
         if ($location->save()) {
           // Redirect to the saved location page
-            return redirect()->to("admin/settings/locations/")->with('success', trans('admin/locations/message.update.success'));
+            return redirect()->route("locations.index")->with('success', trans('admin/locations/message.update.success'));
         }
-
         // Redirect to the location management page
         return redirect()->back()->withInput()->withInput()->withErrors($location->getErrors());
-
     }
 
     /**
@@ -218,8 +208,8 @@ class LocationsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param int $locationId
     * @since [v1.0]
-    * @return Redirect
-    */
+    * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($locationId)
     {
         // Check if the location exists
@@ -241,9 +231,6 @@ class LocationsController extends Controller
             $location->delete();
             return redirect()->to('admin/settings/locations')->with('success', trans('admin/locations/message.delete.success'));
         }
-
-
-
     }
 
 
@@ -256,23 +243,20 @@ class LocationsController extends Controller
     * @see LocationsController::getDataViewAssets() method that returns JSON for location assets
     * @param int $locationId
     * @since [v1.0]
-    * @return View
-    */
+    * @return \Illuminate\Contracts\View\View
+     */
     public function show($locationId = null)
     {
         $location = Location::find($locationId);
 
         if (isset($location->id)) {
-                return View::make('locations/view', compact('location'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/locations/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('locations')->with('error', $error);
+            return View::make('locations/view', compact('location'));
         }
+        // Prepare the error message
+        $error = trans('admin/locations/message.does_not_exist', compact('id'));
 
-
+        // Redirect to the user management page
+        return redirect()->route('locations.index')->with('error', $error);
     }
 
 
@@ -282,32 +266,31 @@ class LocationsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see LocationsController::getIndex() method that returns JSON for location index
     * @since [v1.0]
-    * @return View
-    */
+    * @return array
+     */
     public function getDatatable()
     {
-        $locations = Location::select(array('locations.id','locations.name','locations.address','locations.address2','locations.city','locations.state','locations.zip','locations.country','locations.parent_id','locations.currency'))->with('assets');
-
+        $locations = Location::select([
+            'locations.id',
+            'locations.name',
+            'locations.address',
+            'locations.address2',
+            'locations.city',
+            'locations.state',
+            'locations.zip',
+            'locations.country',
+            'locations.parent_id',
+            'locations.currency'
+        ])->with('assets');
 
         if (Input::has('search')) {
             $locations = $locations->TextSearch(e(Input::get('search')));
         }
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-
-
 
         switch (Input::get('sort')) {
             case 'parent':
@@ -321,14 +304,22 @@ class LocationsController extends Controller
                 break;
         }
 
-
         $locationsCount = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
 
         $rows = array();
 
         foreach ($locations as $location) {
-            $actions = '<nobr><a href="'.route('locations.edit', ['location' => $location->id]).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('locations.destroy', ['location' => $location->id]).'" data-content="'.trans('admin/locations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr>';
+            $actions .= Helper::generateDatatableButton('edit', route('locations.edit', $location->id));
+            $actions .= Helper::generateDatatableButton(
+                'delete',
+                route('locations.destroy', $location->id),
+                true, /*enabled*/
+                trans('admin/locations/message.delete.confirm'),
+                $location->name
+            );
+            $actions .= '</nobr>';
 
             $rows[] = array(
                 'id'            => $location->id,
@@ -346,7 +337,6 @@ class LocationsController extends Controller
                 'actions'       => $actions
             );
         }
-
         $data = array('total' => $locationsCount, 'rows' => $rows);
 
         return $data;
@@ -399,8 +389,8 @@ class LocationsController extends Controller
     * @see LocationsController::getView() method that creates the display view
     * @param int $locationID
     * @since [v1.8]
-    * @return View
-    */
+    * @return array
+     */
     public function getDataViewAssets($locationID)
     {
         $location = Location::find($locationID)->load('assignedassets.model');
@@ -415,12 +405,12 @@ class LocationsController extends Controller
         $rows = array();
 
         foreach ($assets as $asset) {
-            $rows[] = array(
-            'name' => (string)link_to_route('hardware.show', e($asset->showAssetName()), ['hardware' => $asset->id]),
-            'asset_tag' => e($asset->asset_tag),
-            'serial' => e($asset->serial),
-            'model' => e($asset->model->name),
-            );
+            $rows[] = [
+                'name' => (string)link_to_route('hardware.show', e($asset->showAssetName()), ['hardware' => $asset->id]),
+                'asset_tag' => e($asset->asset_tag),
+                'serial' => e($asset->serial),
+                'model' => e($asset->model->name),
+            ];
         }
 
         $data = array('total' => $assets->count(), 'rows' => $rows);
