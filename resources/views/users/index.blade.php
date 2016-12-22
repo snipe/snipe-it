@@ -29,7 +29,7 @@
           <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
         @endif
     @can('view', \App\Models\User::class)
-        <a class="btn btn-default pull-right" href="{{ url('admin/users/export') }}" style="margin-right: 5px;">Export</a>
+        <a class="btn btn-default pull-right" href="{{ route('users.export') }}" style="margin-right: 5px;">Export</a>
     @endcan
 
 @stop

@@ -7,7 +7,7 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth']], function ()
     Route::post('ldap', 'UsersController@postLDAP');
     Route::get('import', [ 'as' => 'import/user', 'uses' => 'UsersController@getImport' ]);
     Route::post('import', [ 'uses' => 'UsersController@postImport' ]);
-    Route::get('export', [ 'uses' => 'UsersController@getExportUserCsv' ]);
+    Route::get('export', [ 'as' => 'users.export', 'uses' => 'UsersController@getExportUserCsv' ]);
     Route::get('{userId}/clone', [ 'as' => 'clone/user', 'uses' => 'UsersController@getClone' ]);
     Route::post('{userId}/clone', [ 'uses' => 'UsersController@postCreate' ]);
     Route::get('{userId}/restore', [ 'as' => 'restore/user', 'uses' => 'UsersController@getRestore' ]);

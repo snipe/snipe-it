@@ -1250,7 +1250,7 @@ class UsersController extends Controller
                         $user->username,
                         $user->email,
                         ($user->manager) ? $user->manager->fullName() : '',
-                        ($user->location) ? $user->location->name : '',
+                        ($user->userloc) ? $user->userloc->name : '',
                         $user->assets->count(),
                         $user->licenses->count(),
                         $user->accessories->count(),

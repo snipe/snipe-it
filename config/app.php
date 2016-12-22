@@ -287,6 +287,7 @@ return [
         'Form'      => 'Collective\Html\FormFacade',
         'Html'      => 'Collective\Html\HtmlFacade',
         'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
 
     ],
