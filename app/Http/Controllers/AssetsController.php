@@ -106,10 +106,9 @@ class AssetsController extends Controller
      * @param integer $model_id
      * @return View
      */
-    public function create($model_id = null)
+    public function create(Request $request)
     {
         $this->authorize('create', Asset::class);
-        // Grab the dropdown lists
         $view = View::make('hardware/edit');
         $view->with('supplier_list', Helper::suppliersList());
         $view->with('company_list', Helper::companyList());
@@ -122,9 +121,10 @@ class AssetsController extends Controller
         $view->with('category', Helper::categoryList('asset'));
         $view->with('statuslabel_types', Helper::statusTypeList());
 
-        if (!is_null($model_id)) {
-            $selected_model = AssetModel::find($model_id);
+        if ($request->has('model_id')) {
+            $selected_model = AssetModel::find($request->input('model_id'));
             $view->with('selected_model', $selected_model);
+        } else {
         }
 
         return $view;
