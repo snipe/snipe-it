@@ -23,7 +23,6 @@ use PragmaRX\Google2FA\Google2FA;
  * This controller handles authentication for the user, including local
  * database users and LDAP users.
  *
- * @todo Move LDAP methods into user model for better separation of concerns.
  * @author [A. Gianotto] [<snipe@snipe.net>]
  * @version    v1.0
  */
