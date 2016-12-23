@@ -498,6 +498,9 @@ class ObjectImportCommand extends Command
         }
         $status = new Statuslabel();
         $status->name = $asset_statuslabel_name;
+        $status->deployable = 1;
+        $status->pending = 0;
+        $status->archived = 0;
 
         $status->deployable = 1;
         $status->pending = 0;
