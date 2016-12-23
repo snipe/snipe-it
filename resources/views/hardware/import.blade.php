@@ -66,7 +66,7 @@
                             <label for="import-type">Import Type:</label>
                         </div>
                         <div class="col-md-8 col-xs-12">
-                            {{ Form::select('import-type', array('asset' => 'Assets', 'accessory' => "Accessories", 'consumable' => "Consumables") , 'asset', array('class'=>'select2 parent', 'style'=>'width:100%','id' =>'import-type')) }}
+                            {{ Form::select('import-type', array('asset' => 'Assets', 'accessory' => "Accessories", 'consumable' => "Consumables", 'component' => "Components") , 'asset', array('class'=>'select2 parent', 'style'=>'width:100%','id' =>'import-type')) }}
                         </div>
                     </div>
                     <div class="dynamic-form-row">

@@ -111,6 +111,9 @@ class ObjectImportCommand extends Command
             case "accessory":
                 $this->accessories = Accessory::All();
                 break;
+            case "component":
+                $this->components = Component::All();
+                break;
             case "consumable":
                 $this->consumables = Consumable::All();
                 break;
