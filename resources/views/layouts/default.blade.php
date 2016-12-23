@@ -537,7 +537,7 @@
 
           @if ($debug_in_production)
               <div class="row" style="margin-bottom: 0px; background-color: red; color: white; font-size: 15px;">
-                  <div class="col-md-12" style="margin-bottom: 0px; background-color: red; color: white; padding: 10px 20px 10px 30px; font-size: 16px;">
+                  <div class="col-md-12" style="margin-bottom: 0px; background-color: #b50408 ; color: white; padding: 10px 20px 10px 30px; font-size: 16px;">
                       <i class="fa fa-warning fa-3x pull-left"></i> <strong>{{ strtoupper(trans('general.debug_warning')) }}:</strong>
                       {!! trans('general.debug_warning_text') !!}
                   </div>
