@@ -228,14 +228,14 @@
                     @endif
 
                     @if ($asset->warranty_months)
-                      <tr {!! $asset->warrantee_expires() < date("Y-m-d") ? ' class="warning"' : '' !!}>
+                      <tr {!! $asset->present()->warrantee_expires() < date("Y-m-d") ? ' class="warning"' : '' !!}>
                         <td>{{ trans('admin/hardware/form.warranty') }}</td>
                         <td>
                           {{ $asset->warranty_months }}
                           {{ trans('admin/hardware/form.months') }}
 
                           ({{ trans('admin/hardware/form.expires') }}
-                          {{ $asset->warrantee_expires() }})
+                          {{ $asset->present()->warrantee_expires() }})
                         </td>
                       </tr>
                     @endif
@@ -276,14 +276,14 @@
 
                           (
                           {{ trans('admin/hardware/form.eol_date') }}:
-                          {{ $asset->eol_date() }}
-                          @if ($asset->months_until_eol())
+                          {{ $asset->present()->eol_date() }}
+                          @if ($asset->present()->months_until_eol())
                             (
-                            @if ($asset->months_until_eol()->y > 0) {{ $asset->months_until_eol()->y }}
+                            @if ($asset->present()->months_until_eol()->y > 0) {{ $asset->present()->months_until_eol()->y }}
                             {{ trans('general.years') }},
                             @endif
 
-                            {{ $asset->months_until_eol()->m }}
+                            {{ $asset->present()->months_until_eol()->m }}
                             {{ trans('general.months') }}
                             )
                           @endif
@@ -367,8 +367,8 @@
               @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
                 <p>
-                  <img src="{{ $asset->assigneduser->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->fullName() }}">
-                  <a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a>
+                  <img src="{{ $asset->assigneduser->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->present()->fullName() }}">
+                  <a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->present()->fullName() }}</a>
                 </p>
 
                 <ul class="list-unstyled">
@@ -537,7 +537,7 @@
                             <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
                             <td>
                               @if ($assetMaintenance->admin)
-                                <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->fullName() }}</a>
+                                <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->present()->fullName() }}</a>
                               @endif
                             </td>
                             <?php $totalCost += $assetMaintenance->cost; ?>
@@ -591,7 +591,7 @@
                         <td>
                             @if ($log->action_type != 'requested')
                                 @if (isset($log->user))
-                                    {{ $log->user->fullName() }}
+                                    {{ $log->user->present()->fullName() }}
                                 @endif
                             @endif
                         </td>
@@ -607,23 +607,23 @@
 
                               @if ($log->target->deleted_at=='')
                                 <a href="{{ route('users.show', $log->target_id) }}">
-                                {{ $log->target->fullName() }}
+                                {{ $log->target->present()->fullName() }}
                                 </a>
                               @else
-                                <del>{{ $log->target->fullName() }}</del>
+                                <del>{{ $log->target->present()->fullName() }}</del>
                               @endif
                             @elseif($log->target instanceof \App\Models\Asset)
                               @if ($log->target->deleted_at=='')
                                 <a href="{{ route('hardware.show', $log->target_id) }}">
-                                {{ $log->target->showAssetName() }}
+                                {{ $log->target->present()->name() }}
                                 </a>
                               @else
-                                <del>{{ $log->target->showAssetName() }}</del>
+                                <del>{{ $log->target->present()->name() }}</del>
                               @endif
                             @elseif (($log->action_type=='accepted') || ($log->action_type=='declined'))
                                 {{-- On a declined log, the asset isn't assigned to anyone when we look this up. --}}
                                 @if ($log->item->assigneduser)
-                                    {{ $log->item->assigneduser->fullName() }}
+                                    {{ $log->item->assigneduser->present()->fullName() }}
                                 @else
                                     Unknown
                                 @endif
@@ -653,7 +653,7 @@
                     <td>{{ $asset->created_at }}</td>
                     <td>
                         @if ($asset->adminuser)
-                            {{ $asset->adminuser->fullName() }}
+                            {{ $asset->adminuser->present()->fullName() }}
                         @else
                             {{ trans('general.unknown_admin') }}
                         @endif

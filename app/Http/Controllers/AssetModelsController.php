@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\CustomField;
 use Image;
 use Input;
 use Lang;
@@ -392,7 +393,6 @@ class AssetModelsController extends Controller
                 break;
         }
 
-
         if (Input::has('search')) {
             $models = $models->TextSearch($request->input('search'));
         }
@@ -412,34 +412,7 @@ class AssetModelsController extends Controller
         $rows = array();
 
         foreach ($models as $model) {
-            $actions = '<div style="white-space: nowrap;">';
-            if ($model->deleted_at == '') {
-                $actions .= Helper::generateDatatableButton('clone', route('clone/model', $model->id));
-                $actions .= Helper::generateDatatableButton('edit', route('models.edit', $model->id));
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('models.destroy', $model->id),
-                    trans('admin/models/message.delete.confirm'),
-                    $model->name
-                );
-            } else {
-                $actions .= Helper::generateDatatableButton('restore', route('restore/model', $model->id));
-            }
-
-            $rows[] = array(
-                'id'                => $model->id,
-                'manufacturer'      => (string)link_to_route('manufacturers.show', $model->manufacturer->name, ['manufacturer' => $model->manufacturer->id]),
-                'name'              => (string)link_to_route('models.show',$model->name, ['model' => $model->id]),
-                'image'             => ($model->image!='') ? '<img src="'.url('/').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
-                'modelnumber'       => $model->model_number,
-                'numassets'         => $model->assets->count(),
-                'depreciation'      => (($model->depreciation) && ($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
-                'category'          => ($model->category) ? (string)link_to_route('categories.show', $model->category->name, ['category' => $model->category->id]) : '',
-                'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
-                'note'              => $model->getNote(),
-                'fieldset'          => ($model->fieldset) ? (string)link_to_route('custom_fields/model', $model->fieldset->name, ['model' => $model->fieldset->id]) : '',
-                'actions'           => $actions
-                );
+            $rows[] = $model->present()->forDataTable();
         }
 
         $data = array('total' => $modelCount, 'rows' => $rows);
@@ -480,29 +453,10 @@ class AssetModelsController extends Controller
 
         $rows = array();
 
-
+        $all_custom_fields = CustomField::all();
         foreach ($assets as $asset) {
-            $actions = '';
 
-            if ($asset->assetstatus) {
-                if ($asset->assetstatus->deployable != 0) {
-                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $actions = Helper::generateDatatableButton('checkin', route('checkin/hardware', $asset->id));
-                    } else {
-                        $actions = Helper::generateDatatableButton('checkout', route('checkout/hardware', $asset->id));
-                    }
-                }
-            }
-
-            $rows[] = array(
-                'id'            => $asset->id,
-                'name'          => (string)link_to_route('hardware.show', $asset->showAssetName(), ['asset' => $asset->id]),
-                'asset_tag'     => (string)link_to_route('hardware.show', $asset->asset_tag, ['asset' => $asset->id]),
-                'serial'        => $asset->serial,
-                'assigned_to'   => ($asset->assigned_to) ? (string)link_to_route('users.show', $asset->assigneduser->fullName(), ['asset' =>$asset->assigned_to]) : '',
-                'actions'       => $actions,
-                'companyName'   => Company::getName($asset)
-            );
+            $rows[] = $asset->present()->forDataTable($all_custom_fields);
         }
 
         $data = array('total' => $assetsCount, 'rows' => $rows);

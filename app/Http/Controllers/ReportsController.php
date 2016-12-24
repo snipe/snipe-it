@@ -160,7 +160,7 @@ class ReportsController extends Controller
                         ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
                         ($asset->order_number) ? e($asset->order_number) : '',
                         ($asset->supplier) ? e($asset->supplier->name) : '',
-                        ($asset->assigneduser) ? e($asset->assigneduser->fullName()) : '',
+                        ($asset->assigneduser) ? e($asset->assigneduser->present()->fullName()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
                         ($asset->assigneduser && $asset->assigneduser->userloc!='') ?
                             e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
@@ -246,7 +246,7 @@ class ReportsController extends Controller
 
             if ($asset->assigned_to > 0) {
                 $user  = User::find($asset->assigned_to);
-                $row[] = e($user->fullName());
+                $row[] = e($user->present()->fullName());
             } else {
                 $row[] = ''; // Empty string if unassigned
             }
@@ -339,7 +339,7 @@ class ReportsController extends Controller
         foreach ($activitylogs as $activity) {
 
             if (($activity->item) && ($activity->itemType()=="asset")) {
-              $activity_item = '<a href="'.route('hardware.show', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
+              $activity_item = '<a href="'.route('hardware.show', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->present()->name()).'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
                 $activity_item = '<a href="' . route($activity->parseItemRoute().'.show', $activity->item_id) . '">' . e($activity->item->name) . '</a>';
@@ -351,25 +351,25 @@ class ReportsController extends Controller
 
 
             if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
-                $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->user->fullName().'</a>';
+                $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->user->present()->fullName().'</a>';
             } elseif ($activity->target_type === "App\Models\Asset") {
                 if($activity->target) {
-                    $activity_target = '<a href="'.route('hardware.show', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
+                    $activity_target = '<a href="'.route('hardware.show', $activity->target_id).'">'.$activity->target->present()->name().'</a>';
                 } else {
                     $activity_target = "";
                 }
             } elseif ( $activity->target_type === "App\Models\User") {
                 if($activity->target) {
-                   $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->target->fullName().'</a>';
+                   $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->target->present()->fullName().'</a>';
                 } else {
                     $activity_target = '';
                 }
             } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
-                $activity_target = '<a href="' . route('users.show', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->fullName()) . '</a>';
+                $activity_target = '<a href="' . route('users.show', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->present()->fullName()) . '</a>';
 
             } elseif ($activity->action_type=='requested') {
                 if ($activity->user) {
-                    $activity_target =  '<a href="'.route('users.show', $activity->user_id).'">'.$activity->user->fullName().'</a>';
+                    $activity_target =  '<a href="'.route('users.show', $activity->user_id).'">'.$activity->user->present()->fullName().'</a>';
                 } else {
                     $activity_target = '';
                 }
@@ -386,7 +386,7 @@ class ReportsController extends Controller
                 'icon'          => '<i class="'.$activity->parseItemIcon().'"></i>',
                 'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
                 'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
-                'admin'         =>  $activity->user ? (string) link_to_route('users.show', $activity->user->fullName(), [$activity->user_id]) : '',
+                'admin'         =>  $activity->user ? (string) link_to_route('users.show', $activity->user->present()->fullName(), [$activity->user_id]) : '',
                 'target'          => $activity_target,
                 'item'          => $activity_item,
                 'item_type'     => $item_type,
@@ -613,7 +613,7 @@ class ReportsController extends Controller
                 $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
             if (e(Input::get('eol')) == '1') {
-                $row[] = '"' .($asset->eol_date()) ? $asset->eol_date() : ''. '"';
+                $row[] = '"' .($asset->present()->eol_date()) ? $asset->present()->eol_date() : ''. '"';
             }
             if (e(Input::get('order')) == '1') {
                 if ($asset->order_number) {
@@ -652,7 +652,7 @@ class ReportsController extends Controller
 
             if (e(Input::get('assigned_to')) == '1') {
                 if ($asset->assigneduser) {
-                    $row[] = '"' .e($asset->assigneduser->fullName()). '"';
+                    $row[] = '"' .e($asset->assigneduser->present()->fullName()). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
@@ -688,7 +688,7 @@ class ReportsController extends Controller
             if (e(Input::get('warranty')) == '1') {
                 if ($asset->warranty_months) {
                     $row[] = $asset->warranty_months;
-                    $row[] = $asset->warrantee_expires();
+                    $row[] = $asset->present()->warrantee_expires();
                 } else {
                     $row[] = '';
                     $row[] = '';
@@ -857,9 +857,9 @@ class ReportsController extends Controller
             $row    = [ ];
             $row[]  = str_replace(',', '', e($assetItem->assetlog->model->category->name));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->model->name));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->showAssetName()));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->present()->name()));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->asset_tag));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->assigneduser->fullName()));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->assigneduser->present()->fullName()));
             $rows[] = implode($row, ',');
         }
 

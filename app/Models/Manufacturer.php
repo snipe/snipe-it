@@ -1,13 +1,14 @@
 <?php
 namespace App\Models;
 
-use App\Models\SnipeModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class Manufacturer extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\ManufacturerPresenter';
+    use Presentable;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'manufacturers';

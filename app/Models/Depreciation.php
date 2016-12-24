@@ -1,12 +1,13 @@
 <?php
 namespace App\Models;
 
-use App\Models\SnipeModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Watson\Validating\ValidatingTrait;
 
 class Depreciation extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\DepreciationPresenter';
+    use Presentable;
     // Declare the rules for the form validation
     protected $rules = array(
         'name' => 'required|min:3|max:255|unique:depreciations,name',

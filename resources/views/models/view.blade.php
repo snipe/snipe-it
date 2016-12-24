@@ -115,8 +115,8 @@
     </ul>
 
     @if ($model->note)
-    Notesd:
-    <p>{!! $model->getNote() !!}
+    Notes:
+    <p>{!! $model->present()->note() !!}
     </p>
     @endif
 

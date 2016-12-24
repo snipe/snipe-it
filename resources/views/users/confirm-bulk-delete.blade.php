@@ -75,7 +75,7 @@ Bulk Checkin &amp; Delete
                                       </td>
 
                                       <td>
-                                          <span{{ (Auth::user()->id==$user->id ? ' style="text-decoration: line-through"' : '') }}>{{ $user->fullName() }} ({{ $user->username }})</span>
+                                          <span{{ (Auth::user()->id==$user->id ? ' style="text-decoration: line-through"' : '') }}>{{ $user->present()->fullName() }} ({{ $user->username }})</span>
 
                                           {{ (Auth::user()->id==$user->id ? ' (cannot delete yourself)' : '') }}
 

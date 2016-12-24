@@ -828,8 +828,23 @@ class UsersController extends Controller
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.employee_num','users.two_factor_enrolled','users.jobtitle','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
-        ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle');
+        $users = User::select([
+            'users.id',
+            'users.employee_num',
+            'users.two_factor_enrolled',
+            'users.jobtitle',
+            'users.email',
+            'users.username',
+            'users.location_id',
+            'users.manager_id',
+            'users.first_name',
+            'users.last_name',
+            'users.created_at',
+            'users.notes',
+            'users.company_id',
+            'users.deleted_at',
+            'users.activated'
+            ])->with('manager', 'groups', 'userloc', 'company','throttle');
         $users = Company::scopeCompanyables($users);
 
         switch ($status) {
@@ -869,70 +884,7 @@ class UsersController extends Controller
         $rows = array();
 
         foreach ($users as $user) {
-            $group_names = '';
-            $actions = '<nobr>';
-
-            foreach ($user->groups as $group) {
-                $group_names .= '<a href="' . route('update/group', $group->id) . '" class="label  label-default">' . $group->name . '</a> ';
-            }
-            if (!is_null($user->deleted_at)) {
-                if (Gate::allows('delete', $user)) {
-                    $actions .= Helper::generateDatatableButton('restore', route('restore/user', $user->id));
-                }
-            } else {
-                if (Gate::allows('delete', $user)) {
-                    if ($user->accountStatus() == 'suspended') {
-                        $actions .= '<a href="' . route('unsuspend/user',
-                                $user->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
-                    }
-                }
-                if (Gate::allows('update', $user)) {
-                    $actions .= Helper::generateDatatableButton('edit', route('users.edit', $user->id));
-                    $actions .= Helper::generateDatatableButton('clone', route('clone/user', $user->id));
-                }
-                if (Gate::allows('delete', $user)) {
-                    if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
-                        $actions .= Helper::generateDatatableButton(
-                            'delete',
-                            route('users.destroy', $user->id),
-                            true, /*enabled*/
-                            "Are you sure you wish to delete this user?",
-                            $user->first_name
-                        );
-                    } else {
-                        $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
-                    }
-                }
-            }
-
-            $actions .= '</nobr>';
-
-            $rows[] = array(
-                'id'         => $user->id,
-                'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>' : '',
-                'name'          => (string)link_to_route('users.show', e($user->fullName()), ['user' => $user->id]),
-                'jobtitle'          => e($user->jobtitle),
-                'email'         => ($user->email!='') ?
-                            '<a href="mailto:'.e($user->email).'" class="hidden-md hidden-lg">'.e($user->email).'</a>'
-                            .'<a href="mailto:'.e($user->email).'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
-                            .'</span>' : '',
-                'username'         => e($user->username),
-                'location'      => ($user->userloc) ? e($user->userloc->name) : '',
-                'manager'         => ($user->manager) ? '<a title="' . e($user->manager->fullName()) . '" href="'.url('/').'/' . e($user->manager->id) . '/view">' . e($user->manager->fullName()) . '</a>' : '',
-                'assets'        => $user->assets->count(),
-                'employee_num'  => e($user->employee_num),
-                'licenses'        => $user->licenses->count(),
-                'accessories'        => $user->accessories->count(),
-                'consumables'        => $user->consumables->count(),
-                'groups'        => $group_names,
-                'notes'         => e($user->notes),
-                'two_factor_enrolled'        => ($user->two_factor_enrolled=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
-                'two_factor_optin'        => (($user->two_factor_optin=='1') || (Setting::getSettings()->two_factor_enabled=='2') ) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
-                'created_at' => ($user->created_at!='')  ? e($user->created_at->format('F j, Y h:iA')) : '',
-                'activated'      => ($user->activated=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
-                'actions'       => ($actions) ? $actions : '',
-                'companyName'   => is_null($user->company) ? '' : e($user->company->name)
-            );
+            $row[] = $user->present()->forDataTable();
         }
 
         $data = array('total'=>$userCount, 'rows'=>$rows);
@@ -1246,10 +1198,10 @@ class UsersController extends Controller
                         ($user->company) ? $user->company->name : '',
                         $user->jobtitle,
                         $user->employee_num,
-                        $user->fullName(),
+                        $user->present()->fullName(),
                         $user->username,
                         $user->email,
-                        ($user->manager) ? $user->manager->fullName() : '',
+                        ($user->manager) ? $user->manager->present()->fullName() : '',
                         ($user->userloc) ? $user->userloc->name : '',
                         $user->assets->count(),
                         $user->licenses->count(),

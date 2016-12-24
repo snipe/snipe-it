@@ -317,7 +317,7 @@ class AccessoriesController extends Controller
                 'fields' => [
                   [
                   'title' => 'Checked Out:',
-                  'value' => 'Accessory <'.route('accessories.show', $accessory->id).'|'.$accessory->name.'> checked out to <'.route('users.show', $user->id).'|'.$user->fullName().'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->fullName().'>.'
+                  'value' => 'Accessory <'.route('accessories.show', $accessory->id).'|'.$accessory->name.'> checked out to <'.route('users.show', $user->id).'|'.$user->present()->fullName().'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->present()->fullName().'>.'
                   ],
                   [
                       'title' => 'Note:',
@@ -431,7 +431,7 @@ class AccessoriesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked In:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.route('accessories.show', $accessory->id).'|'.e($accessory->name).'> checked in by <'.route('users.show', $admin_user->id).'|'.e($admin_user->fullName()).'>.'
+                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.route('accessories.show', $accessory->id).'|'.e($accessory->name).'> checked in by <'.route('users.show', $admin_user->id).'|'.e($admin_user->present()->fullName()).'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -540,46 +540,7 @@ class AccessoriesController extends Controller
         $rows = array();
 
         foreach ($accessories as $accessory) {
-
-            $actions = '<nobr>';
-            if (Gate::allows('checkout', $accessory)) {
-                $actions .= Helper::generateDatatableButton(
-                    'checkout',
-                    route('checkout/accessory', $accessory->id),
-                    $accessory->numRemaining() > 0
-                );
-            }
-            if (Gate::allows('update', $accessory)) {
-                $actions .= Helper::generateDatatableButton('edit', route('accessories.update', $accessory->id));
-            }
-            if (Gate::allows('delete', $accessory)) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('accessories.destroy', $accessory->id),
-                    $enabled = true,
-                    trans('admin/accessories/message.delete.confirm'),
-                    $accessory->name
-                );
-            }
-            $actions .= '</nobr>';
-            $company = $accessory->company;
-
-            $rows[] = array(
-            'name'          => '<a href="'.route('accessories.show',$accessory->id).'">'. $accessory->name.'</a>',
-            'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
-            'model_number'      =>  e($accessory->model_number),
-            'qty'           => e($accessory->qty),
-            'order_number'  => e($accessory->order_number),
-            'min_amt'  => e($accessory->min_amt),
-            'location'      => ($accessory->location) ? e($accessory->location->name): '',
-            'purchase_date' => e($accessory->purchase_date),
-            'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
-            'numRemaining'  => $accessory->numRemaining(),
-            'actions'       => $actions,
-            'companyName'   => is_null($company) ? '' : e($company->name),
-            'manufacturer'      => $accessory->manufacturer ? (string) link_to(route('manufacturers.show', $accessory->manufacturer_id), $accessory->manufacturer->name) : ''
-
-            );
+            $rows[] = $accessory->present()->forDataTable();
         }
 
         $data = array('total'=>$accessCount, 'rows'=>$rows);
@@ -633,9 +594,9 @@ class AccessoriesController extends Controller
             }
 
             if (Gate::allows('view', $user)) {
-                $name = (string) link_to_route('users.show', e($user->fullName()), [$user->id]);
+                $name = (string) link_to_route('users.show', e($user->present()->fullName()), [$user->id]);
             } else {
-                $name = e($user->fullName());
+                $name = e($user->present()->fullName());
             }
 
             $rows[] = array(

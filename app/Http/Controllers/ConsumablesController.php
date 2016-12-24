@@ -401,44 +401,7 @@ class ConsumablesController extends Controller
         $rows = array();
 
         foreach ($consumables as $consumable) {
-            $actions = '<nobr>';
-            if (Gate::allows('checkout', $consumable)) {
-                $actions .= Helper::generateDatatableButton('checkout', route('checkout/consumable', $consumable->id), $consumable->numRemaining() > 0);
-            }
-
-            if (Gate::allows('update', $consumable)) {
-                $actions .= Helper::generateDatatableButton('edit', route('consumables.edit', $consumable->id));
-            }
-            if (Gate::allows('delete', $consumable)) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('consumables.destroy', $consumable->id),
-                    true, /* enabled */
-                    trans('admin/consumables/message.delete.confirm'),
-                    $consumable->name
-                );
-            }
-            $actions .='</nobr>';
-
-            $company = $consumable->company;
-
-            $rows[] = array(
-                'id'            => $consumable->id,
-                'name'          => (string)link_to_route('consumables.show', e($consumable->name), ['consumable' => $consumable->id]),
-                'location'   => ($consumable->location) ? e($consumable->location->name) : '',
-                'min_amt'           => e($consumable->min_amt),
-                'qty'           => e($consumable->qty),
-                'manufacturer'  => ($consumable->manufacturer) ? (string) link_to_route('manufacturers.show', $consumable->manufacturer->name, ['manufacturer' => $consumable->manufacturer_id]): '',
-                'model_number'      => e($consumable->model_number),
-                'item_no'       => e($consumable->item_no),
-                'category'      => ($consumable->category) ? (string) link_to_route('categories.show', $consumable->category->name, ['category' => $consumable->category_id]) : 'Missing category',
-                'order_number'  => e($consumable->order_number),
-                'purchase_date'  => e($consumable->purchase_date),
-                'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
-                'numRemaining'  => $consumable->numRemaining(),
-                'actions'       => $actions,
-                'companyName'   => is_null($company) ? '' : e($company->name),
-            );
+            $rows[] = $consumable->present()->forDataTable();
         }
 
         $data = array('total' => $consumCount, 'rows' => $rows);
@@ -478,11 +441,11 @@ class ConsumablesController extends Controller
         $rows = array();
 
         foreach ($consumable->consumableAssigments as $consumable_assignment) {
-            $rows[] = array(
-            'name' => (string)link_to_route('users.show', e($consumable_assignment->user->fullName()), ['user' => $consumable_assignment->user->id]),
-            'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
-            'admin' => ($consumable_assignment->admin) ? e($consumable_assignment->admin->fullName()) : '',
-            );
+            $rows[] = [
+                'name' => $consumable_assignment->user->present()->nameUrl(),
+                'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
+                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
+            ];
         }
 
         $consumableCount = $consumable->users->count();

@@ -65,22 +65,22 @@
                                 @if (($licensedto->user) && ($licensedto->deleted_at == NULL))
                                     @can('users.view')
                                         <a href="{{ route('users.show', $licensedto->assigned_to) }}">
-                                            {{ $licensedto->user->fullName() }}
+                                            {{ $licensedto->user->present()->fullName() }}
                                         </a>
                                      @else
-                                        {{ $licensedto->user->fullName() }}
+                                        {{ $licensedto->user->present()->fullName() }}
                                      @endcan
 
                                 @elseif (($licensedto->user) && ($licensedto->deleted_at != NULL))
-                                    <del>{{ $licensedto->user->fullName() }}</del>
+                                    <del>{{ $licensedto->user->present()->fullName() }}</del>
                                 @elseif ($licensedto->asset)
                                     @if ($licensedto->asset->assigned_to != 0)
                                         @can('users.view')
                                             <a href="{{ route('users.show', $licensedto->asset->assigned_to) }}">
-                                                {{ $licensedto->asset->assigneduser->fullName() }}
+                                                {{ $licensedto->asset->assigneduser->present()->fullName() }}
                                             </a>
                                         @else
-                                            {{ $licensedto->asset->assigneduser->fullName() }}
+                                            {{ $licensedto->asset->assigneduser->present()->fullName() }}
                                         @endcan
 
                                     @endif
@@ -371,7 +371,7 @@
                           <td>{{ $log->created_at }}</td>
                           <td>
                               @if (isset($log->user_id))
-                              <a href="{{ route('users.show', $log->user_id)}}">{{ $log->user->fullName() }}</a>
+                              <a href="{{ route('users.show', $log->user_id)}}">{{ $log->user->present()->fullName() }}</a>
                               @endif
                           </td>
                           <td>{{ $log->action_type }}</td>
@@ -381,11 +381,11 @@
 
                                   @if ($log->target_type == 'App\Models\User')
                                       <a href="{{ route('users.show', $log->target_id) }}">
-                                          {{ $log->userlog->fullName() }}
+                                          {{ $log->userlog->present()->fullName() }}
                                       </a>
                                   @elseif ($log->target_type == 'App\Models\Asset')
                                       <a href="{{ route('hardware.show', $log->target_id) }}">
-                                          {{ $log->userlog->showAssetName() }}
+                                          {{ $log->userlog->present()->name() }}
                                       </a>
                                   @endif
 
@@ -407,7 +407,7 @@
                       <tr>
                           <td>{{ $license->created_at }}</td>
                           <td>
-                          @if ($license->adminuser) {{ $license->adminuser->fullName() }}
+                          @if ($license->adminuser) {{ $license->adminuser->present()->fullName() }}
                           @else
                           {{ trans('general.unknown_admin') }}
                           @endif

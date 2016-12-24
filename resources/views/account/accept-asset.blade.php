@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Accept {{ $item->showAssetName() }}
+    Accept {{ $item->present()->name() }}
     @parent
 @stop
 

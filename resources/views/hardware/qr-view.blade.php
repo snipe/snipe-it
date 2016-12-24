@@ -111,8 +111,8 @@
             {{ $asset->warranty_months }}
             {{ trans('admin/hardware/form.months') }}
             </div>
-            <div class="col-md-12 {{ $asset->warrantee_expires() < date("Y-m-d H:i:s") ? 'ui-state-highlight' : '' }}"  style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.expires') }}:</strong>
-            {{ $asset->warrantee_expires() }}</div>
+            <div class="col-md-12 {{ $asset->present()->warrantee_expires() < date("Y-m-d H:i:s") ? 'ui-state-highlight' : '' }}"  style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.expires') }}:</strong>
+            {{ $asset->present()->warrantee_expires() }}</div>
         @endif
 
         @if ($asset->depreciation)
@@ -140,14 +140,14 @@
             {{ trans('admin/hardware/form.months') }} </div>
             <div class="col-md-12" style="padding-bottom: 5px;">
             <strong>{{ trans('admin/hardware/form.eol_date') }}: </strong>
-            {{ $asset->eol_date() }}
-            @if ($asset->months_until_eol())
+            {{ $asset->present()->eol_date() }}
+            @if ($asset->present()->months_until_eol())
                  (
-                 @if ($asset->months_until_eol()->y > 0) {{ $asset->months_until_eol()->y }}
+                 @if ($asset->present()->months_until_eol()->y > 0) {{ $asset->present()->months_until_eol()->y }}
                   {{ trans('general.years') }},
                  @endif
 
-                {{ $asset->months_until_eol()->m }}
+                {{ $asset->present()->months_until_eol()->m }}
                 {{ trans('general.months') }}
                 )
             @endif
@@ -273,7 +273,7 @@
                     <td>{{ $log->created_at }}</td>
                     <td>
                         @if (isset($log->user_id))
-                        {{ $log->user->fullName() }}
+                        {{ $log->user->present()->fullName() }}
                         @endif
                     </td>
                     <td>{{ $log->action_type }}</td>
@@ -282,10 +282,10 @@
 
 	                        @if ($log->target->deleted_at=='')
 		                        <a href="{{ route('users.show', $log->target_id) }}">
-		                        {{ $log->user->fullName() }}
+		                        {{ $log->user->present()->fullName() }}
 		                         </a>
 		                    @else
-		 						<del>{{ $log->user->fullName() }}</del>
+		 						<del>{{ $log->user->present()->fullName() }}</del>
 	                        @endif
 
                         @endif
@@ -301,7 +301,7 @@
                 <tr>
                     <td>{{ $asset->created_at }}</td>
                     <td>
-                    @if (isset($asset->adminuser->id)) {{ $asset->adminuser->fullName() }}
+                    @if (isset($asset->adminuser->id)) {{ $asset->adminuser->present()->fullName() }}
                     @else
                     {{ trans('general.unknown_admin') }}
                     @endif
@@ -345,8 +345,8 @@
                 <h6><br>{{ trans('admin/hardware/form.checkedout_to') }}</h6>
                 <ul>
 
-                    <li><img src="{{ $asset->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
-                    <li><a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
+                    <li><img src="{{ $asset->assigneduser->present()->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
+                    <li><a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->present()->fullName() }}</a></li>
 
 
                     @if (isset($asset->assetloc->address))

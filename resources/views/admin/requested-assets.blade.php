@@ -53,7 +53,7 @@
                                 "N/A"
                             @endif
                             </td>
-                            <td>{{ $request->requestingUser()->fullName() }}</td>
+                            <td>{{ $request->requestingUser()->present()->fullName() }}</td>
                             <td>{{$request->created_at}}</td>
                             <td>
                             </td>

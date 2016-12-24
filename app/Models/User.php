@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -9,21 +10,17 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\Setting;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends SnipeModel implements AuthenticatableContract, CanResetPasswordContract
 {
-
-    use SoftDeletes;
-    use ValidatingTrait;
-    use Authenticatable;
-    use CanResetPassword;
+    protected $presenter = 'App\Presenters\UserPresenter';
+    use SoftDeletes, ValidatingTrait;
+    use Authenticatable, CanResetPassword, HasApiTokens;
     use UniqueUndeletedTrait;
     use Notifiable;
-    use HasApiTokens;
-
+    use Presentable;
     protected $dates = ['deleted_at'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
@@ -112,23 +109,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isActivated()
     {
-        if ($this->activated == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    /**
-     * Returns the user full name, it simply concatenates
-     * the user first and last name.
-     *
-     * @return string
-     */
-    public function fullName()
-    {
-        return "{$this->first_name} {$this->last_name}";
+        return $this->activated ==1;
     }
 
     public function getFullNameAttribute()
@@ -141,26 +122,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
     }
 
-    /**
-     * Returns the user Gravatar image url.
-     *
-     * @return string
-     */
-    public function gravatar()
-    {
 
-        if ($this->avatar) {
-            return config('app.url').'/uploads/avatars/'.$this->avatar;
-        }
-
-        if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
-            $gravatar = md5(strtolower(trim($this->email)));
-            return "//gravatar.com/avatar/".$gravatar;
-        }
-
-        return false;
-
-    }
 
     /**
      * Get assets assigned to this user

@@ -587,9 +587,9 @@ class AssetsController extends Controller
                                     'title' => 'Checked In:',
                                     'value' => class_basename(
                                         strtoupper($logaction->item_type))
-                                        .' asset <'.route('hardware.show', $asset->id).'|'.e($asset->showAssetName())
+                                        .' asset <'.route('hardware.show', $asset->id).'|'.e($asset->present()->name())
                                         .'> checked in by <'.route('users.show',Auth::user()->id)
-                                        .'|'.e(Auth::user()->fullName()).'>.'
+                                        .'|'.e(Auth::user()->present()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -607,7 +607,7 @@ class AssetsController extends Controller
 
             $data['log_id'] = $logaction->id;
             $data['first_name'] = $user->first_name;
-            $data['item_name'] = $asset->showAssetName();
+            $data['item_name'] = $asset->present()->name();
             $data['checkin_date'] = $logaction->created_at;
             $data['item_tag'] = $asset->asset_tag;
             $data['item_serial'] = $asset->serial;
@@ -1036,7 +1036,7 @@ class AssetsController extends Controller
                                 'item_id' => $asset->id,
                                 'item_type' => Asset::class,
                                 'user_id' =>  Auth::user()->id,
-                                'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
+                                'note' => 'Checkout imported by '.Auth::user()->present()->fullName().' from history importer',
                                 'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
                                 'target_type' => User::class,
                                 'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
@@ -1081,7 +1081,7 @@ class AssetsController extends Controller
                                 'item_id' => $asset_batch[$x]['asset_id'],
                                 'item_type' => Asset::class,
                                 'user_id' => Auth::user()->id,
-                                'note' => 'Checkin imported by ' . Auth::user()->fullName() . ' from history importer',
+                                'note' => 'Checkin imported by ' . Auth::user()->present()->fullName() . ' from history importer',
                                 'target_id' => null,
                                 'created_at' => $checkin_date,
                                 'action_type' => 'checkin'
@@ -1465,9 +1465,7 @@ class AssetsController extends Controller
         'purchase_date',
         'purchase_cost'
         ];
-
         $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
-
         foreach ($all_custom_fields as $field) {
             $allowed_columns[]=$field->db_column_name();
         }
@@ -1510,108 +1508,8 @@ class AssetsController extends Controller
 
         $rows = array();
         foreach ($assets as $asset) {
-            $inout = '';
-            $actions = '<div style="white-space: nowrap;">';
-            if ($asset->deleted_at=='') {
-                if (Gate::allows('create', $asset)) {
-                    $actions .= Helper::generateDatatableButton('clone', route('clone/hardware', $asset->id));
-                }
-                if (Gate::allows('update', $asset)) {
-                    $actions .= Helper::generateDatatableButton('edit', route('hardware.edit', $asset->id));
-                }
-                if (Gate::allows('delete', $asset)) {
-                    $actions .= Helper::generateDatatableButton(
-                        'delete',
-                        route('hardware.destroy', $asset->id),
-                        $enabled = true,
-                        trans('admin/hardware/message.delete.confirm'),
-                        $asset->asset_tag
-                        );
-                }
-            } elseif ($asset->model->deleted_at=='') {
-                $actions .= Helper::generateDatatableButton('restore', route('restore/hardware', $asset->id));
-            }
 
-            $actions .= '</div>';
-
-            if (($asset->availableForCheckout()))
-            {
-                if (Gate::allows('checkout', $asset)) {
-                    $inout = '<a href="' . route('checkout/hardware',
-                            $asset->id) . '" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">' . trans('general.checkout') . '</a>';
-                }
-
-            } else {
-                if (Gate::allows('checkin', $asset)) {
-                    $inout = '<a href="' . route('checkin/hardware',
-                            $asset->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
-                }
-            }
-            $actions .= '</div>';
-            $purchase_cost = Helper::formatCurrencyOutput($asset->purchase_cost);
-
-            $row = array(
-            'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
-            'id'            => $asset->id,
-            'image'         => (($asset->image) && ($asset->image!=''))
-                                    ? '<img src="'.url('/').'/uploads/assets/'.$asset->image.'" height=50 width=50>'
-                                    : ((($asset->model) && ($asset->model->image!=''))
-                                        ? '<img src="'.url('/').'/uploads/models/'.$asset->model->image.'" height=40 width=50>'
-                                        : ''
-                                    ),
-            'name'          => (string) link_to_route('hardware.show', e($asset->name), $asset->id),
-            'asset_tag'     => (string) link_to_route('hardware.show', e($asset->asset_tag), $asset->id),
-            'serial'        => e($asset->serial),
-            'model'         => ($asset->model) ? (string)link_to_route('models.show', e($asset->model->name), ['model' => $asset->model->id]) : 'No model',
-            'model_number'  => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
-            'status_label'  => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
-            'assigned_to'   => ($asset->assigneduser) ? (string)link_to_route('users.show', e($asset->assigneduser->fullName()), ['user' => $asset->assigned_to]) : '',
-            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!=''))
-                                    ? (string)link_to_route('locations.show', e($asset->assigneduser->userloc->name), ['location' => $asset->assigneduser->userloc->id])
-                                    : (($asset->defaultLoc!='')
-                                        ? (string)link_to_route('locations.show', e($asset->defaultLoc->name), ['location' => $asset->defaultLoc->id])
-                                        : ''
-                                    ),
-            'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to_route('categories.show', e($asset->model->category->name), ['category' => $asset->model->category->id]) : '',
-            'manufacturer'  => (($asset->model) && ($asset->model->manufacturer))
-                                        ? (string)link_to_route('manufacturers.show', e($asset->model->manufacturer->name), ['manufacturer' => $asset->model->manufacturer->id])
-                                        : '',
-            'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
-            'purchase_cost'           => $purchase_cost,
-            'purchase_date'           => ($asset->purchase_date) ? $asset->purchase_date : '',
-            'notes'         => e($asset->notes),
-            'order_number'  => ($asset->order_number!='') ? '<a href="'.url('/').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
-            'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-            'expected_checkin' => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
-            'created_at'    => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
-            'change'        => ($inout) ? $inout : '',
-            'actions'       => ($actions) ? $actions : '',
-            'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
-            );
-            foreach ($all_custom_fields as $field) {
-                $column_name = $field->db_column_name();
-
-                if ($field->isFieldDecryptable($asset->{$column_name})) {
-
-                    if (Gate::allows('admin')) {
-                        if (($field->format=='URL') && ($asset->{$column_name}!='')) {
-                            $row[$column_name] = '<a href="'.Helper::gracefulDecrypt($field, $asset->{$column_name}).'" target="_blank">'.Helper::gracefulDecrypt($field, $asset->{$column_name}).'</a>';
-                        } else {
-                            $row[$column_name] = Helper::gracefulDecrypt($field, $asset->{$column_name});
-                        }
-
-                    } else {
-                        $row[$field->db_column_name()] = strtoupper(trans('admin/custom_fields/general.encrypted'));
-                    }
-                } else {
-                    if (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) {
-                        $row[$field->db_column_name()] = '<a href="'.$asset->{$field->db_column_name()}.'" target="_blank">'.$asset->{$field->db_column_name()}.'</a>';
-                    } else {
-                        $row[$field->db_column_name()] = e($asset->{$field->db_column_name()});
-                    }
-                }
-
-            }
+            $row = $asset->present()->forDataTable($all_custom_fields);
 
             if (($request->has('report')) && ($request->get('report')=='true')) {
                 $rows[]= Helper::stripTagsFromJSON($row);
