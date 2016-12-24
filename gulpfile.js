@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-codeception-standalone');
+require('laravel-elixir-phpcs');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -41,5 +42,18 @@ elixir(function(mix) {
     mix.codeception(null, { flags: '--report' });
 
 
+    mix.phpcs([
+        'app/**/*.php',
+        'tests/unit/*.php',
+        'tests/functional/*.php',
+        'tests/acceptance/*.php'
+    ], {
+        bin: 'vendor/bin/phpcs',
+        standard: 'PSR2'
+    });
+
+
 
 });
+
+
