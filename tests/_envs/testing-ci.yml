@@ -12,8 +12,8 @@ modules:
   config:
     WebDriver:
       url: 'http://localhost:8000'
-      browser: 'firefox'
+      browser: 'phantomjs'
     Laravel5:
       part: ORM
-      env_file: .env
+      environment_file: .env
 
