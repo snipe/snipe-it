@@ -333,7 +333,7 @@ class UsersController extends Controller
        // Update the user
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
-        $user->two_factor_optin = $request->input('two_factor_optin');
+        $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
         $user->locale = $request->input('locale');
         $user->employee_num = $request->input('employee_num');
         $user->activated = $request->input('activated', $user->activated);

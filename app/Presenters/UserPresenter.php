@@ -5,6 +5,7 @@ namespace App\Presenters;
 
 use App\Helpers\Helper;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 /**
@@ -19,15 +20,15 @@ class UserPresenter extends Presenter
      * @param string $status Status of User to filter on
      * @return array
      */
-    public function forDataTable($status)
+    public function forDataTable($status = null)
     {
         $group_names = '';
         $actions = '<nobr>';
 
-        foreach ($this->groups as $group) {
+        foreach ($this->model->groups as $group) {
             $group_names .= link_to_route('update/group', $group->name, $group->id, ['class' => 'label label-default']);
         }
-        if (!is_null($this->deleted_at)) {
+        if (!is_null($this->model->deleted_at)) {
             if (Gate::allows('delete', $this)) {
                 $actions .= Helper::generateDatatableButton('restore', route('restore/user', $this->id));
             }
@@ -82,7 +83,7 @@ class UserPresenter extends Presenter
             'notes'         => $this->notes,
             'two_factor_enrolled'        => ($this->two_factor_enrolled=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
             'two_factor_optin'        => (($this->two_factor_optin=='1') || (Setting::getSettings()->two_factor_enabled=='2') ) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
-            'created_at'    => ($this->created_at!='')  ? e($this->created_at->format('F j, Y h:iA')) : '',
+            'created_at'    => ($this->model->created_at!='')  ? e($this->model->created_at->format('F j, Y h:iA')) : '',
             'activated'     => ($this->activated=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
             'actions'       => $actions ?: '',
             'companyName'   => $this->company ? $this->company->name : ''
