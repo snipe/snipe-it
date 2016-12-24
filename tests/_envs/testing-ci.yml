@@ -11,8 +11,5 @@ class_name: AcceptanceTester
 modules:
     config:
         WebDriver:
-            url: http://localhost:8000
-            browser: phantomjs
-        Laravel5:
-            part: ORM
-            environment_file: .env
+            url: 'http://localhost:8000'
+            browser: 'phantomjs'
