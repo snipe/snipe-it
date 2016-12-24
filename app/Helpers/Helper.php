@@ -139,7 +139,7 @@ class Helper
         $models = AssetModel::with('manufacturer')->get();
         $model_array[''] = trans('general.select_model');
         foreach ($models as $model) {
-            $model_array[$model->id] = $model->displayModelName();
+            $model_array[$model->id] = $model->present()->modelName();
         }
         return $model_array;
     }

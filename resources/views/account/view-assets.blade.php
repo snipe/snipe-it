@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-View Assets for  {{ $user->fullName() }}
+View Assets for  {{ $user->present()->fullName() }}
 @parent
 @stop
 
@@ -266,9 +266,9 @@ View Assets for  {{ $user->fullName() }}
                     <td>
                         @if (($log->item) && ($log->itemType()=="asset"))
                             @if ($log->item->deleted_at=='')
-                                {{ $log->item->showAssetName() }}
+                                {{ $log->item->present()->name() }}
                             @else
-                                <del>{{ $log->item->showAssetName() }}</del> (deleted)
+                                <del>{{ $log->item->present()->name() }}</del> (deleted)
                             @endif
 
                         @elseif ($log->item)
@@ -284,7 +284,7 @@ View Assets for  {{ $user->fullName() }}
                     </td>
                     <td>
                         @if ($log->user)
-                        {{ $log->user->fullName() }}
+                        {{ $log->user->present()->fullName() }}
                         @endif
                     </td>
                     <td>{{ $log->created_at }}</td>

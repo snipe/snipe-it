@@ -1,9 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\Loggable;
-use App\Models\SnipeModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
@@ -14,8 +12,9 @@ use Watson\Validating\ValidatingTrait;
  */
 class Accessory extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\AccessoryPresenter';
     use CompanyableTrait;
-    use Loggable;
+    use Loggable, Presentable;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
@@ -109,10 +108,8 @@ class Accessory extends SnipeModel
             return $Parsedown->text(e($this->category->eula_text));
         } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-        } else {
-            return null;
         }
-
+            return null;
     }
 
     public function numRemaining()

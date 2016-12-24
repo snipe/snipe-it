@@ -103,16 +103,16 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
-        $data['requested_by'] = $user->fullName();
+        $data['requested_by'] = $user->present()->fullName();
         $data['item_name'] = $item->name;
         $data['item_type'] = $itemType;
 
         if ($fullItemType == Asset::class) {
             $data['item_url'] = route('hardware.show', $item->id);
-            $slackMessage = ' Asset <'.url('/').'/hardware/'.$item->id.'/view'.'|'.$item->showAssetName().'> requested by <'.url('/').'/users/'.$item->user_id.'/view'.'|'.$user->fullName().'>.';
+            $slackMessage = ' Asset <'.url('/').'/hardware/'.$item->id.'/view'.'|'.$item->present()->name().'> requested by <'.url('/').'/users/'.$item->user_id.'/view'.'|'.$user->present()->fullName().'>.';
         } else {
             $data['item_url'] = route("view/${itemType}", $item->id);
-            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.url('/').'/user/'.$item->id.'/view'.'|'.$user->fullName().'>.';
+            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.url('/').'/user/'.$item->id.'/view'.'|'.$user->present()->fullName().'>.';
         }
 
         $settings = Setting::getSettings();
@@ -226,8 +226,8 @@ class ViewAssetsController extends Controller
             $logaction->target_type = User::class;
             $log = $logaction->logaction('requested');
 
-            $data['requested_by'] = $user->fullName();
-            $data['asset_name'] = $asset->showAssetName();
+            $data['requested_by'] = $user->present()->fullName();
+            $data['asset_name'] = $asset->present()->name();
 
             $settings = Setting::getSettings();
 
@@ -259,7 +259,7 @@ class ViewAssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'REQUESTED:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->fullName().'>.'
+                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
                                 ]
 
                             ]

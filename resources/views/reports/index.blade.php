@@ -54,7 +54,7 @@
             <td>
             @if ($asset->assigned_to != '')
                 <a href="{{ route('users.show', $asset->assigned_to) }}">
-                {{ $asset->assigneduser->fullName() }}
+                {{ $asset->assigneduser->present()->fullName() }}
                 </a>
             @endif
             </td>
@@ -67,7 +67,7 @@
             <td>{{ $asset->purchase_date }}</td>
 
             <td>
-            @if ($asset->model->eol) {{ $asset->eol_date() }}
+            @if ($asset->model->eol) {{ $asset->present()->eol_date() }}
             @endif
             </td>
 

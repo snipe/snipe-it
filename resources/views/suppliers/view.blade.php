@@ -49,11 +49,11 @@
                         <tr>
 
                             <td><a href="{{ route('hardware.show', $supplierassets->id) }}">{{ $supplierassets->asset_tag }}</a></td>
-                            <td><a href="{{ route('hardware.show', $supplierassets->id) }}">{{ $supplierassets->showAssetName() }}</a></td>
+                            <td><a href="{{ route('hardware.show', $supplierassets->id) }}">{{ $supplierassets->present()->name() }}</a></td>
                             <td>
                             @if ($supplierassets->assigneduser)
                             <a href="{{ route('users.show', $supplierassets->assigned_to) }}">
-                            {{ $supplierassets->assigneduser->fullName() }}
+                            {{ $supplierassets->assigneduser->present()->fullName() }}
                             </a>
                             @endif
                             </td>

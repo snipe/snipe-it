@@ -189,21 +189,7 @@ class DepreciationsController extends Controller
         $rows = array();
 
         foreach ($depreciations as $depreciation) {
-            $actions = Helper::generateDatatableButton('edit', route('depreciations.edit', $depreciation->id));
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('depreciations.destroy', $depreciation->id),
-                true, /*enabled*/
-                trans('admin/depreciations/message.delete.confirm'),
-                $depreciation->name
-            );
-
-            $rows[] = array(
-                'id'            => $depreciation->id,
-                'name'          => e($depreciation->name),
-                'months'        => e($depreciation->months),
-                'actions'       => $actions
-            );
+            $rows[] = $depreciation->present()->forDataTable();
         }
 
         $data = array('total' => $depreciationsCount, 'rows' => $rows);

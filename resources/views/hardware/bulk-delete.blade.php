@@ -49,7 +49,7 @@
                             <tr>
                                 <td><input type="checkbox" name="bulk_edit[]" value="{{ $asset->id }}" checked="checked"></td>
                                 <td>{{ $asset->id }}</td>
-                                <td>{{ $asset->showAssetName() }}</td>
+                                <td>{{ $asset->present()->name() }}</td>
                                 <td>
                                     @if ($asset->assetloc)
                                         {{ $asset->assetloc->name }}
@@ -57,7 +57,7 @@
                                 </td>
                                 <td>
                                     @if ($asset->assigneduser)
-                                        {{ $asset->assigneduser->fullName() }} ({{ $asset->assigneduser->username }})
+                                        {{ $asset->assigneduser->present()->fullName() }} ({{ $asset->assigneduser->username }})
                                     @endif
                                 </td>
                             </tr>

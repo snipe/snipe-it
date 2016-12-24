@@ -81,10 +81,10 @@
             <td>
             @if ($asset->assigneduser)
             	 @if ($asset->assigneduser->deleted_at!='')
-            	 	<del>{{ $asset->assigneduser->fullName() }}</del>
+            	 	<del>{{ $asset->assigneduser->present()->fullName() }}</del>
             	 @else
             	 	<a href="{{ route('users.show', $asset->assigned_to) }}">
-					{{ $asset->assigneduser->fullName() }}
+					{{ $asset->assigneduser->present()->fullName() }}
 					</a>
             	 @endif
 
@@ -100,7 +100,7 @@
             <td>{{ $asset->purchase_date }}</td>
 
             <td>
-            @if ($asset->model->eol) {{ $asset->eol_date() }}
+            @if ($asset->model->eol) {{ $asset->present()->eol_date() }}
             @endif
             </td>
 

@@ -1,22 +1,15 @@
 <?php
 namespace App\Models;
 
-use App\Models\ActionLog;
-use App\Models\Category;
-use App\Models\Company;
-use App\Models\ConsumableAssignment;
-use App\Models\Location;
-use App\Models\Loggable;
-use App\Models\SnipeModel;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class Consumable extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\ConsumablePresenter';
     use CompanyableTrait;
-    use Loggable;
+    use Loggable, Presentable;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];

@@ -310,32 +310,7 @@ class LocationsController extends Controller
         $rows = array();
 
         foreach ($locations as $location) {
-            $actions = '<nobr>';
-            $actions .= Helper::generateDatatableButton('edit', route('locations.edit', $location->id));
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('locations.destroy', $location->id),
-                true, /*enabled*/
-                trans('admin/locations/message.delete.confirm'),
-                $location->name
-            );
-            $actions .= '</nobr>';
-
-            $rows[] = array(
-                'id'            => $location->id,
-                'name'          => (string)link_to_route('locations.show', e($location->name), ['location' => $location->id]),
-                'parent'        => ($location->parent) ? e($location->parent->name) : '',
-              //  'assets'        => ($location->assets->count() + $location->assignedassets->count()),
-                'assets_default' => $location->assignedassets->count(),
-                'assets_checkedout' => $location->assets->count(),
-                'address'       => ($location->address) ? e($location->address): '',
-                'city'          => e($location->city),
-                'state'         => e($location->state),
-                'zip'           => e($location->zip),
-                'country'       => e($location->country),
-                'currency'      => e($location->currency),
-                'actions'       => $actions
-            );
+            $rows[] = $location->present()->forDataTable();
         }
         $data = array('total' => $locationsCount, 'rows' => $rows);
 
@@ -369,7 +344,7 @@ class LocationsController extends Controller
 
         foreach ($users as $user) {
             $rows[] = array(
-              'name' => (string)link_to_route('users.show', e($user->fullName()), ['user'=>$user->id])
+              'name' => (string)link_to_route('users.show', e($user->present()->fullName()), ['user'=>$user->id])
               );
         }
 
@@ -406,7 +381,7 @@ class LocationsController extends Controller
 
         foreach ($assets as $asset) {
             $rows[] = [
-                'name' => (string)link_to_route('hardware.show', e($asset->showAssetName()), ['hardware' => $asset->id]),
+                'name' => (string)link_to_route('hardware.show', e($asset->present()->name()), ['hardware' => $asset->id]),
                 'asset_tag' => e($asset->asset_tag),
                 'serial' => e($asset->serial),
                 'model' => e($asset->model->name),

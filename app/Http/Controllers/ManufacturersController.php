@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\CustomField;
 use App\Models\Manufacturer;
 use Auth;
 use Exception;
@@ -202,26 +203,7 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($manufacturers as $manufacturer) {
-            $actions = '<nobr>';
-            $actions .= Helper::generateDatatableButton('edit', route('manufacturers.edit', $manufacturer->id));
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('manufacturers.destroy'),
-                true, /*enabled*/
-                trans('admin/manufacturers/message.delete.confirm'),
-                $manufacturer->name
-            );
-            $actions .= '</nobr>';
-
-            $rows[] = array(
-                'id'            => $manufacturer->id,
-                'name'          => (string)link_to_route('manufacturers.show', e($manufacturer->name),['manufacturer' => $manufacturer->id]),
-                'assets'        => $manufacturer->assets()->count(),
-                'licenses'      => $manufacturer->licenses()->count(),
-                'accessories'   => $manufacturer->accessories()->count(),
-                'consumables'   => $manufacturer->consumables()->count(),
-                'actions'       => $actions
-            );
+            $rows[] = $manufacturer->present()->forDataTable();
         }
 
         $data = array('total' => $manufacturersCount, 'rows' => $rows);
@@ -281,47 +263,9 @@ class ManufacturersController extends Controller
         $count = $manufacturer_assets->count();
         $manufacturer_assets = $manufacturer_assets->skip($offset)->take($limit)->get();
         $rows = array();
-
+        $all_custom_fields = CustomField::all(); // cached;
         foreach ($manufacturer_assets as $asset) {
-            $actions = '<div style="white-space: nowrap;">';
-            if ($asset->deleted_at=='') {
-                $actions .= Helper::generateDatatableButton('clone', route('clone/hardware', $asset->id));
-                $actions .= Helper::generateDatatableButton('edit', route('hardware.edit', $asset->id));
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('hardware.destroy', $asset->id),
-                    true, /*enabled*/
-                    trans('admin/hardware/message.delete.confirm'),
-                    $asset->asset_tag
-                );
-            } elseif ($asset->deleted_at!='') {
-                $actions .= Helper::generateDatatableButton('restore', route('restore/hardware', $asset->id));
-            }
-            $actions .= '</div>';
-            if ($asset->availableForCheckout()) {
-                if (Gate::allows('checkout', $asset)) {
-                    $inout = Helper::generateDatatableButton('checkout', route('checkout/hardware', $asset->id));
-                }
-            } else {
-                if (Gate::allows('checkin', $asset)) {
-                    $inout = Helper::generateDatatableButton('checkin', route('checkin/hardware', $asset->id));
-                }
-            }
-
-            $rows[] = array(
-                'id' => $asset->id,
-                'name' => (string)link_to_route('hardware.show', e($asset->showAssetName()), [$asset->id]),
-                'model' => e($asset->model->name),
-                'asset_tag' => e($asset->asset_tag),
-                'serial' => e($asset->serial),
-                'assigned_to' => ($asset->assigneduser) ? (string)link_to_route('users.show', e($asset->assigneduser->fullName()), [$asset->assigneduser->id]): '',
-                'actions' => $actions,
-                'companyName' => is_null($asset->company) ? '' : $asset->company->name
-                );
-
-            if (isset($inout)) {
-                $row['change'] = $inout;
-            }
+            $rows[] = $asset->present()->forDataTable($all_custom_fields);
         }
 
         $data = array('total' => $count, 'rows' => $rows);
@@ -342,51 +286,7 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($licenses as $license) {
-            $actions = '<span style="white-space: nowrap;">';
-
-            if (Gate::allows('checkout', \App\Models\License::class)) {
-                $actions .= Helper::generateDatatableButton(
-                    'checkout',
-                    route('licenses.freecheckout', $license->id),
-                    $license->remaincount() > 0
-                );
-            }
-
-            if (Gate::allows('create', $license)) {
-                $actions .= Helper::generateDatatableButton('clone', route('clone/license', $license->id));
-            }
-            if (Gate::allows('update', $license)) {
-                $actions .= Helper::generateDatatableButton('edit', route('licenses.edit', $license->id));
-            }
-            if (Gate::allows('delete', $license)) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('licenses.destroy', $license->id),
-                    true, /*enabled*/
-                    trans('admin/licenses/message.delete.confirm'),
-                    $license->name
-                );
-            }
-            $actions .='</span>';
-
-            $rows[] = array(
-                'id'                => $license->id,
-                'name'              => (string) link_to_route('licenses.show', $license->name, [$license->id]),
-                'serial'            => (string) link_to_route('licenses.show', mb_strimwidth($license->serial, 0, 50, "..."), [$license->id]),
-                'totalSeats'        => $license->licenseSeatCount,
-                'remaining'         => $license->remaincount(),
-                'license_name'      => e($license->license_name),
-                'license_email'     => e($license->license_email),
-                'purchase_date'     => ($license->purchase_date) ? $license->purchase_date : '',
-                'expiration_date'   => ($license->expiration_date) ? $license->expiration_date : '',
-                'purchase_cost'     => ($license->purchase_cost) ? number_format($license->purchase_cost, 2) : '',
-                'purchase_order'    => ($license->purchase_order) ? e($license->purchase_order) : '',
-                'order_number'      => ($license->order_number) ? e($license->order_number) : '',
-                'notes'             => ($license->notes) ? e($license->notes) : '',
-                'actions'           => $actions,
-                'companyName'       => is_null($license->company) ? '' : e($license->company->name),
-                'manufacturer'      => $license->manufacturer ? (string) link_to_route('manufacturers.show', $license->manufacturer->name, [$license->manufacturer_id]) : ''
-            );
+            $rows[] = $license->present()->forDataTable();
         }
 
         $data = array('total' => $licenseCount, 'rows' => $rows);
@@ -417,45 +317,7 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($accessories as $accessory) {
-
-            $actions = '<nobr>';
-            if (Gate::allows('checkout', $accessory)) {
-                $actions .= Helper::generateDatatableButton(
-                    'checkout',
-                    route('checkout/accessory', $accessory->id),
-                    $accessory->numRemaining() > 0
-                );
-            }
-            if (Gate::allows('update', $accessory)) {
-                $actions .= Helper::generateDatatableButton('edit', route('accessories.update', $accessory->id));
-            }
-            if (Gate::allows('delete', $accessory)) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('accessories.destroy', $accessory->id),
-                    $enabled = true,
-                    trans('admin/accessories/message.delete.confirm'),
-                    $accessory->name
-                );
-            }
-            $actions .= '</nobr>';
-            $company = $accessory->company;
-
-            $rows[] = array(
-            'name'          => (string)link_to_route('accessories.show', $accessory->name, [$accessory->id]),
-            'category'      => ($accessory->category) ? (string)link_to_route('categories.show', $accessory->category->name, [$accessory->category->id]) : '',
-            'qty'           => e($accessory->qty),
-            'order_number'  => e($accessory->order_number),
-            'min_amt'  => e($accessory->min_amt),
-            'location'      => ($accessory->location) ? e($accessory->location->name): '',
-            'purchase_date' => e($accessory->purchase_date),
-            'purchase_cost' => number_format($accessory->purchase_cost, 2),
-            'numRemaining'  => $accessory->numRemaining(),
-            'actions'       => $actions,
-            'companyName'   => is_null($company) ? '' : e($company->name),
-            'manufacturer'      => $accessory->manufacturer ? (string) link_to_route('manufacturers.show', $accessory->manufacturer->name, [$accessory->manufacturer_id]) : ''
-
-            );
+            $rows[] = $accessory->present()->forDataTable();
         }
 
         $data = array('total'=>$accessCount, 'rows'=>$rows);
@@ -487,45 +349,7 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($consumables as $consumable) {
-            $actions = '<nobr>';
-            if (Gate::allows('checkout', $consumable)) {
-                $actions .= Helper::generateDatatableButton('checkout', route('checkout/consumable', $consumable->id), $consumable->numRemaining() > 0);
-            }
-
-            if (Gate::allows('update', $consumable)) {
-                $actions .= Helper::generateDatatableButton('edit', route('consumables.edit', $consumable->id));
-            }
-            if (Gate::allows('delete', $consumable)) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('consumables.destroy', $consumable->id),
-                    true, /* enabled */
-                    trans('admin/consumables/message.delete.confirm'),
-                    $consumable->name
-                );
-            }
-
-            $actions .='</nobr>';
-
-            $company = $consumable->company;
-
-            $rows[] = array(
-                'id'            => $consumable->id,
-                'name'          => (string)link_to_route('consumables.show', e($consumable->name), [$consumable->id]),
-                'location'      => ($consumable->location) ? e($consumable->location->name) : '',
-                'min_amt'       => e($consumable->min_amt),
-                'qty'           => e($consumable->qty),
-                'manufacturer'  => ($consumable->manufacturer) ? (string) link_to_route('manufacturers.show', $consumable->manufacturer->name, [$consumable->manufacturer_id]): '',
-                'model_number'  => e($consumable->model_number),
-                'item_no'       => e($consumable->item_no),
-                'category'      => ($consumable->category) ? (string) link_to_route('categories.show', $consumable->category->name, [$consumable->category_id]) : 'Missing category',
-                'order_number'  => e($consumable->order_number),
-                'purchase_date' => e($consumable->purchase_date),
-                'purchase_cost' => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost, 2): '' ,
-                'numRemaining'  => $consumable->numRemaining(),
-                'actions'       => $actions,
-                'companyName'   => is_null($company) ? '' : e($company->name),
-            );
+            $rows[] = $consumable->present()->forDataTable();
         }
 
         $data = array('total' => $consumCount, 'rows' => $rows);
