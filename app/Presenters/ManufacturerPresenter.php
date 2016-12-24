@@ -30,13 +30,13 @@ class ManufacturerPresenter extends Presenter
         $actions .= '</nobr>';
 
         $results = [
-            'id'            => $this->id,
-            'name'          => $this->nameUrl(),
-            'assets'        => $this->assets()->count(),
-            'licenses'      => $this->licenses()->count(),
             'accessories'   => $this->accessories()->count(),
+            'actions'       => $actions,
+            'assets'        => $this->assets()->count(),
             'consumables'   => $this->consumables()->count(),
-            'actions'       => $actions
+            'id'            => $this->id,
+            'licenses'      => $this->licenses()->count(),
+            'name'          => $this->nameUrl(),
         ];
 
         return $results;

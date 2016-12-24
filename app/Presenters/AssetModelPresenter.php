@@ -42,7 +42,7 @@ class AssetModelPresenter extends Presenter
         $results = [];
 
         $results['id'] = $this->id;
-        $results['manufacturer'] = $this->model->manufacturer->present()->nameUrl();
+        $results['manufacturer'] = $this->manufacturerUrl();
         $results['name'] = $this->nameUrl();
         $results['image'] = $this->imageUrl();
         $results['model_number'] = $this->model_number;
@@ -51,8 +51,8 @@ class AssetModelPresenter extends Presenter
         if(($depreciation = $this->model->depreciation) and $depreciation->id > 0) {
             $results['depreciation'] = $depreciation->name.' ('.$depreciation->months.')';
         }
-        $results['category'] = $this->model->category ? $this->model->category->present()->nameUrl() : '';
-        $results['eol'] = $this->eol ? $this->eol.' '.trans('general.months') : '';
+        $results['category'] = $this->categoryUrl();
+        $results['eol'] = $this->eolText();
         $results['note'] = $this->note();
         $results['fieldset'] = $this->model->fieldset ? link_to_route('custom_fields/model', $this->model->fieldset->name, $this->model->fieldset->id) : '';
         $results['actions']           = $actions;
@@ -72,6 +72,14 @@ class AssetModelPresenter extends Presenter
             return $Parsedown->text($this->model->note);
         }
 
+    }
+
+    public function eolText()
+    {
+        if($this->eol) {
+            return $this->eol.' '.trans('general.months');
+        }
+        return '';
     }
 
     /**

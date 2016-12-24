@@ -29,19 +29,19 @@ class LocationPresenter extends Presenter
         $actions .= '</nobr>';
 
         $results = [
-            'id'            => $this->id,
-            'name'          => $this->nameUrl(),
-            'parent'        => ($this->model->parent) ? $this->model->parent->present()->nameUrl() : '',
-            //  'assets'        => ($this->assets->count() + $this->assignedassets->count()),
-            'assets_default' => $this->model->assignedassets()->count(),
+            'actions'           => $actions,
+            'address'           => $this->address,
             'assets_checkedout' => $this->model->assets()->count(),
-            'address'       => $this->address,
-            'city'          => $this->city,
-            'state'         => $this->state,
-            'zip'           => $this->zip,
-            'country'       => $this->country,
-            'currency'      => $this->currency,
-            'actions'       => $actions
+            'assets_default'    => $this->model->assignedassets()->count(),
+            'city'              => $this->city,
+            'country'           => $this->country,
+            'currency'          => $this->currency,
+            'id'                => $this->id,
+            'name'              => $this->nameUrl(),
+            'parent'            => ($this->model->parent) ? $this->model->parent->present()->nameUrl() : '',
+            'state'             => $this->state,
+            'zip'               => $this->zip,
+            //  'assets'        => ($this->assets->count() + $this->assignedassets->count()),
         ];
 
         return $results;

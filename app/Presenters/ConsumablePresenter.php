@@ -39,21 +39,21 @@ class ConsumablePresenter extends Presenter
         $actions .='</nobr>';
 
         $results = [
-            'id'            => $this->id,
-            'name'          => $this->nameUrl(),
-            'location'      => ($this->model->location) ? $this->model->location->present()->nameUrl() : '',
-            'min_amt'           => $this->min_amt,
-            'qty'           => $this->qty,
-            'manufacturer'  => ($this->model->manufacturer) ? $this->model->manufacturer->present()->nameUrl() : '',
-            'model_number'      => $this->model_number,
-            'item_no'       => $this->item_no,
-            'category'      => ($this->model->category) ? $this->model->category->present()->nameUrl() : 'Missing category',
-            'order_number'  => $this->order_number,
-            'purchase_date'  => $this->purchase_date,
-            'purchase_cost'  => Helper::formatCurrencyOutput($this->purchase_cost),
-            'numRemaining'  => $this->numRemaining(),
             'actions'       => $actions,
-            'companyName'   => $this->model->company ? $this->model->company->present()->nameUrl() : '',
+            'category'      => $this->categoryUrl(),
+            'companyName'   => $this->companyUrl(),
+            'id'            => $this->id,
+            'item_no'       => $this->item_no,
+            'location'      => $this->locationUrl(),
+            'manufacturer'  => $this->manufacturerUrl(),
+            'min_amt'       => $this->min_amt,
+            'model_number'  => $this->model_number,
+            'name'          => $this->nameUrl(),
+            'numRemaining'  => $this->numRemaining(),
+            'order_number'  => $this->order_number,
+            'purchase_cost'  => Helper::formatCurrencyOutput($this->purchase_cost),
+            'purchase_date'  => $this->purchase_date,
+            'qty'           => $this->qty,
         ];
         return $results;
     }
