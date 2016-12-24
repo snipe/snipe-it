@@ -884,7 +884,7 @@ class UsersController extends Controller
         $rows = array();
 
         foreach ($users as $user) {
-            $row[] = $user->present()->forDataTable();
+            $rows[] = $user->present()->forDataTable();
         }
 
         $data = array('total'=>$userCount, 'rows'=>$rows);

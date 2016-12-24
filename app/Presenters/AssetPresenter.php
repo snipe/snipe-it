@@ -37,7 +37,7 @@ class AssetPresenter extends Presenter
                 $actions .= Helper::generateDatatableButton(
                     'delete',
                     route('hardware.destroy', $this->model->id),
-                    $enabled = true,
+                    true, /*enabled*/
                     trans('admin/hardware/message.delete.confirm'),
                     $this->model->asset_tag
                 );
@@ -61,8 +61,7 @@ class AssetPresenter extends Presenter
                         $this->model->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
             }
         }
-        
-        $url = config('app.url');
+
         $results = [];
         $results['checkbox'] = '<div class="text-center"><input type="checkbox" name="edit_asset['.$this->id.']" class="one_required"></div>';
         $results['id']        = $this->id;
@@ -185,7 +184,7 @@ class AssetPresenter extends Presenter
         } else if ($this->model && !empty($this->model->image)) {
             $imagePath = $this->model->image;
         }
-
+        $url = config('app.url');
         if(!empty($imagePath)) {
             $imagePath = "<img src='{$url}/uploads/assets/{$imagePath}' height=50 width=50>";
         }

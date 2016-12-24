@@ -80,7 +80,7 @@ class AssetModelPresenter extends Presenter
      */
     public function modelName()
     {
-        $name = $this->manufacturer->name.' '.$this->name;
+        $name = $this->model->manufacturer->name.' '.$this->name;
         if ($this->model_number) {
             $name .=" / ".$this->model_number;
         }

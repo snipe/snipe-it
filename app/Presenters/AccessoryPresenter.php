@@ -123,7 +123,7 @@ class AccessoryPresenter extends Presenter
             $actions .= Helper::generateDatatableButton(
                 'delete',
                 route('accessories.destroy', $this->id),
-                $enabled = true,
+                true, /*enabled*/
                 trans('admin/accessories/message.delete.confirm'),
                 $this->name
             );
