@@ -46,22 +46,22 @@ class LicensePresenter extends Presenter
         $actions .='</span>';
 
         $results = [
+            'actions'           => $actions,
+            'company'           => $this->companyUrl(),
+            'expiration_date'   => $this->expiration_date,
             'id'                => $this->id,
+            'license_email'     => $this->license_email,
+            'license_name'      => $this->license_name,
+            'manufacturer'      => $this->manufacturerUrl(),
             'name'              => $this->nameUrl(),
+            'notes'             => $this->notes,
+            'order_number'      => $this->order_number,
+            'purchase_cost'     => Helper::formatCurrencyOutput($this->purchase_cost),
+            'purchase_date'     => $this->purchase_date,
+            'purchase_order'    => $this->purchase_order,
+            'remaining'         => $this->remaincount(),
             'serial'            => $this->serialUrl(),
             'totalSeats'        => $this->model->licenseSeatsCount,
-            'remaining'         => $this->remaincount(),
-            'license_name'      => $this->license_name,
-            'license_email'     => $this->license_email,
-            'purchase_date'     => ($this->purchase_date) ?: '',
-            'expiration_date'   => ($this->expiration_date) ?: '',
-            'purchase_cost'     => Helper::formatCurrencyOutput($this->purchase_cost),
-            'purchase_order'    => ($this->purchase_order) ?: '',
-            'order_number'      => ($this->order_number) ?: '',
-            'notes'             => ($this->notes) ?: '',
-            'actions'           => $actions,
-            'company'           => $this->model->company ? e($this->model->company->present()->nameUrl()) : '',
-            'manufacturer'      => $this->model->manufacturer ? $this->model->manufacturer->present()->nameUrl() : ''
         ];
 
         return $results;
