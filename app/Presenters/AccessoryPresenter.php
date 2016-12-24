@@ -132,17 +132,20 @@ class AccessoryPresenter extends Presenter
 
         $results = [];
         $results['name'] = $this->nameUrl();
-        $results['category'] = $this->categoryUrl();
+        $results['category'] = '';
+        if($this->model->category) {
+            $results['category'] = $this->model->category->present()->nameUrl();
+        }
         $results['model_number'] = $this->model_number;
         $results['qty'] = $this->qty;
         $results['order_number'] = $this->order_number;
         $results['min_amt'] = $this->min_amt;
-        $results['location'] = $this->locationUrl();
+        $results['location'] = $this->model->location ? $this->model->location->present()->nameUrl() : '';
         $results['purchase_date'] = $this->purchase_date;
         $results['purchase_cost'] = Helper::formatCurrencyOutput($this->purchase_cost);
         $results['numRemaining'] = $this->numRemaining();
-        $results['companyName'] = $this->companyUrl();
-        $results['manufacturer'] = $this->manufacturerUrl();
+        $results['companyName'] = $this->model->company ? $this->model->company->present()->nameUrl() : '';
+        $results['manufacturer'] = $this->model->manufacturer ? $this->model->manufacturer->present()->nameUrl() : '';
         $results['actions']       = $actions;
 
         return $results;
@@ -156,6 +159,4 @@ class AccessoryPresenter extends Presenter
     {
         return (string) link_to_route('accessories.show', $this->name, $this->id);
     }
-
-    
 }
