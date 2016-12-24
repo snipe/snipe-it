@@ -89,7 +89,9 @@ class ItemImporter extends Importer
             return strcasecmp($key->name, $asset_model_name) ==0
                 && $key->model_number == $asset_modelNumber;
         });
-        if($asset_model && !$editingModel) {
+        // We need strict compare here because the index returned above can be 0.
+        //  This casts to false and causes false positives
+        if(($asset_model !== false) && !$editingModel) {
             return $this->asset_models[$asset_model];
         } else {
             $this->log("No Matching Model, Creating a new one");
@@ -146,7 +148,9 @@ class ItemImporter extends Importer
             return (strcasecmp($key->name, $asset_category) == 0)
                 && $key->category_type === $item_type;
         });
-        if ($category) {
+        // We need strict compare here because the index returned above can be 0.
+        //  This casts to false and causes false positives
+        if ($category !== false) {
             return $this->categories[$category];
         }
 
@@ -185,8 +189,9 @@ class ItemImporter extends Importer
         $company = $this->companies->search(function ($key) use($asset_company_name) {
             return strcasecmp($key->name, $asset_company_name) == 0;
         });
-
-        if($company) {
+        // We need strict compare here because the index returned above can be 0.
+        //  This casts to false and causes false positives
+        if($company !== false) {
             $this->log('A matching Company ' . $asset_company_name . ' already exists');
             return $this->companies[$company];
         }
@@ -220,16 +225,16 @@ class ItemImporter extends Importer
         if (empty($asset_statuslabel_name)) {
             return null;
         }
-
         $status = $this->status_labels->search(function ($key) use($asset_statuslabel_name) {
             return strcasecmp($key->name, $asset_statuslabel_name) == 0;
         });
-
-        if ($status) {
+        // We need strict compare here because the index returned above can be 0.
+        //  This casts to false and causes false positives
+        if ($status !== false) {
             $this->log('A matching Status ' . $asset_statuslabel_name . ' already exists');
             return $this->status_labels[$status];
         }
-
+        $this->log("Creating a new status");
         $status = new Statuslabel();
         $status->name = $asset_statuslabel_name;
 
@@ -270,7 +275,9 @@ class ItemImporter extends Importer
         $manufacturer = $this->manufacturers->search(function ($key) use($item_manufacturer) {
             return strcasecmp($key->name, $item_manufacturer) == 0;
         });
-        if ($manufacturer) {
+        // We need strict compare here because the index returned above can be 0.
+        //  This casts to false and causes false positives
+        if ($manufacturer !== false) {
             $this->log('Manufacturer ' . $item_manufacturer . ' already exists') ;
             return $this->manufacturers[$manufacturer];
         }
@@ -313,8 +320,9 @@ class ItemImporter extends Importer
         $location = $this->locations->search(function ($key) use($asset_location) {
             return strcasecmp($key->name, $asset_location) == 0;
         });
-
-        if ($location) {
+        // We need strict compare here because the index returned above can be 0.
+        //  This casts to false and causes false positives
+        if ($location !== false) {
             $this->log('Location ' . $asset_location . ' already exists');
             return $this->locations[$location];
         }
@@ -361,8 +369,9 @@ class ItemImporter extends Importer
         $supplier = $this->suppliers->search(function ($key) use($item_supplier) {
             return strcasecmp($key->name, $item_supplier) == 0;
         });
-
-        if ($supplier) {
+        // We need strict compare here because the index returned above can be 0.
+        //  This casts to false and causes false positives
+        if ($supplier !== false) {
             $this->log('Supplier ' . $item_supplier . ' already exists');
             return $this->suppliers[$supplier];
         }

@@ -94,18 +94,15 @@ class ObjectImportCommand extends Command
             $this->option('update'),
             $this->option('username_format')
         );
-        $importer->import();
-        $this->updating = $this->option('update');
-        if (!$this->option('web-importer')) {
-            $logFile = $this->option('logfile');
-            \Log::useFiles($logFile);
-            if ($this->option('testrun')) {
-                $this->comment('====== TEST ONLY Asset Import for '.$filename.' ====');
-                $this->comment('============== NO DATA WILL BE WRITTEN ==============');
-            } else {
-                $this->comment('======= Importing Assets from '.$filename.' =========');
-            }
+        $logFile = $this->option('logfile');
+        \Log::useFiles($logFile);
+        if ($this->option('testrun')) {
+            $this->comment('====== TEST ONLY Asset Import for '.$filename.' ====');
+            $this->comment('============== NO DATA WILL BE WRITTEN ==============');
+        } else {
+            $this->comment('======= Importing Assets from '.$filename.' =========');
         }
+        $importer->import();
 
         $this->bar = null;
 
@@ -163,9 +160,6 @@ class ObjectImportCommand extends Command
     */
     public function log($string, $level = 'info')
     {
-        if ($this->option('web-importer')) {
-            return;
-        }
         if ($level === 'warning') {
             \Log::warning($string);
             $this->comment($string);

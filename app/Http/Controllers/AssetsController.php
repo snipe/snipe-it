@@ -6,6 +6,7 @@ use App\Http\Requests\AssetCheckinRequest;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Requests\AssetFileRequest;
 use App\Http\Requests\AssetRequest;
+use App\Http\Requests\ItemImportRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
@@ -853,46 +854,29 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return Redirect
     */
-    public function postProcessImportFile()
+    public function postProcessImportFile(ItemImportRequest $request)
     {
-        // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
-        $filename = config('app.private_uploads') . '/imports/assets/' . request('filename');
         $this->authorize('create', Asset::class);
-        $importOptions =    ['filename'=> $filename,
-                                '--email_format'=>'firstname.lastname',
-                                '--username_format'=>'firstname.lastname',
-                                '--web-importer' => true,
-                                '--user_id' => Auth::id(),
-                                '--item-type' => request('import-type'),
-                            ];
-        if (request('import-update')) {
-            $importOptions['--update'] = true;
-        }
+        $errors = $request->import();
 
-        $return = Artisan::call('snipeit:import', $importOptions);
-        $display_output =  Artisan::output();
-        $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
-        file_put_contents($file, $display_output);
         // We use hardware instead of asset in the url
         $redirectTo = "hardware";
         switch(request('import-type')) {
             case "asset":
-                $redirectTo = "hardware";
+                $redirectTo = "hardware.index";
                 break;
             case "accessory":
-                $redirectTo = "accessories";
+                $redirectTo = "accessories.index";
                 break;
             case "consumable":
-                $redirectTo = "consumables";
+                $redirectTo = "consumables.index";
                 break;
         }
 
-        if ($return === 0) { //Success
-            return redirect()->to(route($redirectTo))->with('success', trans('admin/hardware/message.import.success'));
-        } elseif ($return === 1) { // Failure
-            return redirect()->back()->with('import_errors', json_decode($display_output))->with('error', trans('admin/hardware/message.import.error'));
+        if ($errors) { //Failure
+            return redirect()->back()->with('import_errors', json_decode(json_encode($errors)))->with('error', trans('admin/hardware/message.import.error'));
         }
-        dd("Shouldn't be here");
+        return redirect()->to(route($redirectTo))->with('success', trans('admin/hardware/message.import.success'));
 
     }
 
