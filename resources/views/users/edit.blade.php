@@ -4,7 +4,7 @@
 @section('title')
 	@if ($user->id)
 		{{ trans('admin/users/table.updateuser') }}
-		{{ $user->fullName() }}
+		{{ $user->present()->fullName() }}
 	@else
 		{{ trans('admin/users/table.createuser') }}
 	@endif

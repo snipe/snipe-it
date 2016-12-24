@@ -1,21 +1,14 @@
 <?php
 namespace App\Models;
 
-use App\Helpers\Helper;
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\Actionlog;
-use App\Models\Company;
-use App\Models\Location;
-use App\Models\Loggable;
-use App\Models\Requestable;
-use App\Models\Setting;
+use App\Presenters\Presentable;
+use AssetPresenter;
 use Auth;
+use Carbon\Carbon;
 use Config;
-use DateTime;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
-use Parsedown;
 use Watson\Validating\ValidatingTrait;
 
 /**
@@ -25,9 +18,9 @@ use Watson\Validating\ValidatingTrait;
  */
 class Asset extends Depreciable
 {
-    use Loggable;
+    protected $presenter = 'App\Presenters\AssetPresenter';
+    use Loggable, Requestable, Presentable;
     use SoftDeletes;
-    use Requestable;
 
   /**
   * The database table used by the model.
@@ -44,8 +37,7 @@ class Asset extends Depreciable
   * @var boolean
   */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    use UniqueUndeletedTrait;
+    use ValidatingTrait, UniqueUndeletedTrait;
 
     protected $rules = [
     'name'            => 'min:2|max:255',
@@ -62,7 +54,6 @@ class Asset extends Depreciable
     'purchase_cost'   => 'numeric|nullable',
     ];
 
-
   /**
    * The attributes that are mass assignable.
    *
@@ -70,6 +61,10 @@ class Asset extends Depreciable
    */
     protected $fillable = ['name','model_id','status_id','asset_tag'];
 
+    public function getDisplayNameAttribute()
+    {
+        return $this->present()->name();
+    }
 
     public function company()
     {
@@ -86,9 +81,16 @@ class Asset extends Depreciable
         );
     }
 
-  /**
-  * Checkout asset
-  */
+    /**
+     * Checkout asset
+     * @param User $user
+     * @param User $admin
+     * @param Carbon $checkout_at
+     * @param null $expected_checkin
+     * @param string $note
+     * @param null $name
+     * @return bool
+     */
     public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
         if (!$user) {
@@ -140,7 +142,7 @@ class Asset extends Depreciable
         $data['log_id'] = $log_id;
         $data['eula'] = $this->getEula();
         $data['first_name'] = $user->first_name;
-        $data['item_name'] = $this->showAssetName();
+        $data['item_name'] = $this->present()->name();
         $data['checkout_date'] = $checkout_at;
         $data['expected_checkin'] = $expected_checkin;
         $data['item_tag'] = $this->asset_tag;
@@ -178,9 +180,9 @@ class Asset extends Depreciable
                 'fields' => [
                 [
                   'title' => 'Checked Out:',
-                  'value' => 'HARDWARE asset <'.route('hardware.show', $this->id).'|'.$this->showAssetName()
-                            .'> checked out to <'.route('users.show', $this->assigned_to).'|'.$this->assigneduser->fullName()
-                            .'> by <'.route('users.show', Auth::user()->id).'|'.$admin->fullName().'>.'
+                  'value' => 'HARDWARE asset <'.route('hardware.show', $this->id).'|'.$this->present()->name()
+                            .'> checked out to <'.route('users.show', $this->assigned_to).'|'.$this->assigneduser->present()->fullName()
+                            .'> by <'.route('users.show', Auth::user()->id).'|'.$admin->present()->fullName().'>.'
                 ],
                 [
                     'title' => 'Note:',
@@ -200,7 +202,7 @@ class Asset extends Depreciable
     public function getDetailedNameAttribute()
     {
         if ($this->assignedUser) {
-            $user_name = $this->assignedUser->fullName();
+            $user_name = $this->assignedUser->present()->fullName();
         } else {
             $user_name = "Unassigned";
         }
@@ -358,7 +360,6 @@ class Asset extends Depreciable
    */
     public static function availassetcount()
     {
-
         return Asset::RTD()
                   ->whereNull('deleted_at')
                   ->count();
@@ -384,35 +385,6 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('\App\Models\Statuslabel', 'status_id');
     }
-
-  /**
-   * Get name for EULA
-   **/
-    public function showAssetName()
-    {
-
-        if ($this->name == '') {
-            if ($this->model) {
-                return $this->model->name.' ('.$this->asset_tag.')';
-            }
-            return $this->asset_tag;
-        } else {
-            return $this->name;
-        }
-    }
-
-    public function getDisplayNameAttribute()
-    {
-        return $this->showAssetName();
-    }
-
-    public function warrantee_expires()
-    {
-        $date = date_create($this->purchase_date);
-        date_add($date, date_interval_create_from_date_string($this->warranty_months . ' months'));
-        return date_format($date, 'Y-m-d');
-    }
-
 
     public function model()
     {
@@ -451,32 +423,7 @@ class Asset extends Depreciable
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
     }
 
-    public function months_until_eol()
-    {
 
-        $today = date("Y-m-d");
-        $d1    = new DateTime($today);
-        $d2    = new DateTime($this->eol_date());
-
-        if ($this->eol_date() > $today) {
-            $interval = $d2->diff($d1);
-        } else {
-            $interval = null;
-        }
-
-        return $interval;
-    }
-
-    public function eol_date()
-    {
-
-        if (( $this->purchase_date ) && ( $this->model )) {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->eol . ' months'));
-            return date_format($date, 'Y-m-d');
-        }
-
-    }
 
   /**
    * Get auto-increment
@@ -507,7 +454,7 @@ class Asset extends Depreciable
     }
 
 
-public function checkin_email()
+    public function checkin_email()
     {
         return $this->model->category->checkin_email;
     }

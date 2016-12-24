@@ -280,8 +280,8 @@
                <!-- User Account: style can be found in dropdown.less -->
                <li class="dropdown user user-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   @if (Auth::user()->gravatar())
-                       <img src="{{ Auth::user()->gravatar() }}" class="user-image" alt="User Image">
+                   @if (Auth::user()->present()->gravatar())
+                       <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image" alt="User Image">
                    @else
                       <i class="fa fa-user fa-fws"></i>
                    @endif

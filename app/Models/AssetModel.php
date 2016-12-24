@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Models\Requestable;
 use App\Models\SnipeModel;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -16,7 +17,8 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends SnipeModel
 {
     use SoftDeletes;
-    use Requestable;
+    protected $presenter = 'App\Presenters\AssetModelPresenter';
+    use Requestable, Presentable;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
 
@@ -46,8 +48,6 @@ class AssetModel extends SnipeModel
      */
     protected $fillable = ['name','manufacturer_id','category_id','eol'];
 
-
-
     public function assets()
     {
         return $this->hasMany('\App\Models\Asset', 'model_id');
@@ -76,26 +76,6 @@ class AssetModel extends SnipeModel
     public function fieldset()
     {
         return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
-    }
-
-    public function getNote()
-    {
-
-        $Parsedown = new \Parsedown();
-
-        if ($this->note) {
-            return $Parsedown->text(e($this->note));
-        }
-
-    }
-
-    public function displayModelName()
-    {
-        $name = $this->manufacturer->name.' '.$this->name;
-        if ($this->model_number) {
-            $name .=" / ".$this->model_number;
-        }
-        return $name;
     }
 
     /**

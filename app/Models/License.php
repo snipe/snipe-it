@@ -3,15 +3,17 @@ namespace App\Models;
 
 use App\Models\Company;
 use App\Models\Loggable;
+use App\Presenters\Presentable;
 use DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class License extends Depreciable
 {
+    protected $presenter = 'App\Presenters\LicensePresenter';
     use SoftDeletes;
     use CompanyableTrait;
-    use Loggable;
+    use Loggable, Presentable;
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 

@@ -5,6 +5,7 @@ use App\Helpers\Helper;
 use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Component;
+use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Asset;
@@ -338,8 +339,8 @@ class ComponentsController extends Controller
                                 'title' => 'Checked Out:',
                                 'value' => class_basename(strtoupper($logaction->item_type))
                                             .' <'.route('components.show', ['component' => $component->id]).'|'.$component->name
-                                            .'> checked out to <'.route('hardware.show', $asset->id).'|'.$asset->showAssetName()
-                                            .'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->fullName().'>.'
+                                            .'> checked out to <'.route('hardware.show', $asset->id).'|'.$asset->present()->name()
+                                            .'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->present()->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -404,44 +405,7 @@ class ComponentsController extends Controller
         $rows = array();
 
         foreach ($components as $component) {
-            $actions = '<nobr>';
-            if (Gate::allows('checkout', $component)) {
-                $actions .= Helper::generateDatatableButton('checkout', route('checkout/component', $component->id), $component->numRemaining() > 0);
-            }
-
-            if (Gate::allows('update', $component)) {
-                $actions .= Helper::generateDatatableButton('edit', route('components.edit', $component->id));
-            }
-
-            if (Gate::allows('delete', $component)) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('components.destroy', $component->id),
-                    true, /* enabled */
-                    trans('admin/components/message.delete.confirm'),
-                    $component->name
-                );
-            }
-
-            $actions .='</nobr>';
-            $company = $component->company;
-
-            $rows[] = array(
-                'checkbox'      =>'<div class="text-center"><input type="checkbox" name="component['.$component->id.']" class="one_required"></div>',
-                'id'            => $component->id,
-                'name'          => (string)link_to_route('components.show', e($component->name), ['component' => $component->id]),
-                'serial_number'          => $component->serial,
-                'location'   => ($component->location) ? e($component->location->name) : '',
-                'qty'           => number_format($component->qty),
-                'min_amt'           => e($component->min_amt),
-                'category'           => ($component->category) ? e($component->category->name) : 'Missing category',
-                'order_number'  => e($component->order_number),
-                'purchase_date'  => e($component->purchase_date),
-                'purchase_cost'  => Helper::formatCurrencyOutput($component->purchase_cost),
-                'numRemaining'  => $component->numRemaining(),
-                'actions'       => $actions,
-                'companyName'   => is_null($company) ? '' : e($company->name),
-            );
+            $rows[] = $component->present()->forDataTable();
         }
 
         $data = array('total' => $componentsCount, 'rows' => $rows);
@@ -472,13 +436,9 @@ class ComponentsController extends Controller
         $this->authorize('view', $component);
 
         $rows = array();
-
+        $all_custom_fields = CustomField::all(); // Cached for table;
         foreach ($component->assets as $component_assignment) {
-            $rows[] = array(
-            'name' => (string)link_to_route('hardware.show', e($component_assignment->showAssetName()), ['hardware' => $component_assignment->id]),
-            'qty' => e($component_assignment->pivot->assigned_qty),
-            'created_at' => ($component_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $component_assignment->created_at->format('Y-m-d H:i:s'),
-            );
+            $rows[] = $component_assignment->present()->forDataTable($all_custom_fields);
         }
 
         $componentCount = $component->assets->count();

@@ -520,12 +520,12 @@ class LicensesController extends Controller
             // Update the asset data
             if ($request->input('assigned_to') == '') {
                 $slack_msg = 'License <'.route('licenses.show', $license->id).'|'.$license->name
-                    .'> checked out to <'.route('hardware.show',$asset->id) .'|'.$asset->showAssetName()
-                    .'> by <'.route('users.show', $user->id).'|'.$user->fullName().'>.';
+                    .'> checked out to <'.route('hardware.show',$asset->id) .'|'.$asset->present()->name()
+                    .'> by <'.route('users.show', $user->id).'|'.$user->present()->fullName().'>.';
             } else {
                 $slack_msg = 'License <'.route('licenses.show', $license->id).'|'.$license->name
-                    .'> checked out to <'.route('users.show', $user->id).'|'.$is_assigned_to->fullName()
-                    .'> by <'.route('users.show', $user->id) .'|'.$user->fullName().'>.';
+                    .'> checked out to <'.route('users.show', $user->id).'|'.$is_assigned_to->present()->fullName()
+                    .'> by <'.route('users.show', $user->id) .'|'.$user->present()->fullName().'>.';
             }
 
             if ($settings->slack_endpoint) {
@@ -665,7 +665,7 @@ class LicensesController extends Controller
                                 [
                                     'title' => 'Checked In:',
                                     'value' => 'License: <'.route('licenses.show', $license->id).'|'.$license->name
-                                        .'> checked in by <'.route('users.show', $user->id).'|'.$user->fullName().'>.'
+                                        .'> checked in by <'.route('users.show', $user->id).'|'.$user->present()->fullName().'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -894,51 +894,7 @@ class LicensesController extends Controller
         $rows = array();
 
         foreach ($licenses as $license) {
-            $actions = '<span style="white-space: nowrap;">';
-
-            if (Gate::allows('checkout', License::class)) {
-                $actions .= Helper::generateDatatableButton(
-                    'checkout',
-                    route('licenses.freecheckout', $license->id),
-                    $license->remaincount() > 0
-                );
-            }
-
-            if (Gate::allows('create', $license)) {
-                $actions .= Helper::generateDatatableButton('clone', route('clone/license', $license->id));
-            }
-            if (Gate::allows('update', $license)) {
-                $actions .= Helper::generateDatatableButton('edit', route('licenses.edit', $license->id));
-            }
-            if (Gate::allows('delete', $license)) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('licenses.destroy', $license->id),
-                    true, /*enabled*/
-                    trans('admin/licenses/message.delete.confirm'),
-                    $license->name
-                );
-            }
-            $actions .='</span>';
-
-            $rows[] = array(
-                'id'                => $license->id,
-                'name'              => (string) link_to('/licenses/'.$license->id, $license->name),
-                'serial'            => (string) link_to('/licenses/'.$license->id, mb_strimwidth($license->serial, 0, 50, "...")),
-                'totalSeats'        => $license->licenseSeatsCount,
-                'remaining'         => $license->remaincount(),
-                'license_name'      => e($license->license_name),
-                'license_email'     => e($license->license_email),
-                'purchase_date'     => ($license->purchase_date) ? $license->purchase_date : '',
-                'expiration_date'     => ($license->expiration_date) ? $license->expiration_date : '',
-                'purchase_cost'     => Helper::formatCurrencyOutput($license->purchase_cost),
-                'purchase_order'     => ($license->purchase_order) ? e($license->purchase_order) : '',
-                'order_number'     => ($license->order_number) ? e($license->order_number) : '',
-                'notes'     => ($license->notes) ? e($license->notes) : '',
-                'actions'           => $actions,
-                'company'       => is_null($license->company) ? '' : e($license->company->name),
-                'manufacturer'      => $license->manufacturer ? (string) link_to('settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
-            );
+            $rows[] = $license->present()->forDataTable();
         }
 
         $data = array('total' => $licenseCount, 'rows' => $rows);

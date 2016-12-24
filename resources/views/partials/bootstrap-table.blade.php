@@ -21,6 +21,9 @@ $('.snipe-table').bootstrapTable({
         sortable: true,
         cookie: true,
         cookieExpire: '2y',
+        @if (isset($columns))
+        columns: {!! $columns !!},
+        @endif
         mobileResponsive: true,
         @if (isset($multiSort))
         showMultiSort: true,

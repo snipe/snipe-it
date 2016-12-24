@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Category as Category;
 use App\Models\Company;
+use App\Models\CustomField;
 use App\Models\Setting;
 use Auth;
 use DB;
@@ -238,24 +239,7 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($categories as $category) {
-            $actions = Helper::generateDatatableButton('edit', route('categories.edit', $category->id));
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('categories.destroy', $category->id),
-                $category->itemCount() == 0, /* enabled */
-                trans('admin/categories/message.delete.confirm'),
-                $category->name
-            );
-
-            $rows[] = array(
-                'id'      => $category->id,
-                'name'  => (string)link_to_route('categories.show', $category->name, ['category' => $category->id]) ,
-                'category_type' => ucwords($category->category_type),
-                'count'         => $category->itemCount(),
-                'acceptance'    => ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : '',
-                'eula'          => ($category->getEula()) ? '<i class="fa fa-check"></i>' : '',
-                'actions'       => $actions
-            );
+            $rows[] = $category->present()->forDataTable();
         }
 
         $data = array('total' => $catCount, 'rows' => $rows);
@@ -282,48 +266,10 @@ class CategoriesController extends Controller
         $count = $category_assets->count();
         $category_assets = $category_assets->skip($offset)->take($limit)->get();
         $rows = array();
+        $all_custom_fields = CustomField::all();
         foreach ($category_assets as $asset) {
 
-            $actions = '';
-            $inout='';
-
-            if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;">';
-                $actions .= Helper::generateDatatableButton('clone', route('clone/hardware', $asset->id));
-                $actions .= Helper::generateDatatableButton('edit', route('hardware.edit', $asset->id));
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('hardware.destroy', $asset->id),
-                    true, /* enabled */
-                    trans('admin/hardware/message.delete.confirm'),
-                    $asset->asset_tag
-                );
-                $actions .= '</div>';
-            } elseif ($asset->deleted_at!='') {
-                $actions = Helper::generateDatatableButton('restore', route('restore/hardware', $asset->id));
-            }
-
-            if ($asset->availableForCheckout()) {
-                if (Gate::allows('checkout', $asset)) {
-                    $inout = Helper::generateDatatableButton('checkout', route('checkout/hardware', $asset->id));
-                }
-            } else {
-                if (Gate::allows('checkin', $asset)) {
-                    $inout = Helper::generateDatatableButton('checkin', route('checkin/hardware', $asset->id));
-                }
-            }
-
-            $rows[] = array(
-                'id' => $asset->id,
-                'name' => (string)link_to_route('hardware.show', $asset->showAssetName(), ['hardware' => $asset->id]),
-                'model' => ($asset->model) ? (string)link_to_route('models.show', $asset->model->name, ['model' => $asset->model->id]) : '',
-                'asset_tag' => $asset->asset_tag,
-                'serial' => $asset->serial,
-                'assigned_to' => ($asset->assigneduser) ? (string)link_to_route('users.show', $asset->assigneduser->fullName(), ['user' => $asset->assigneduser->id]): '',
-                'change' => $inout,
-                'actions' => $actions,
-                'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
-            );
+            $rows[] = $asset->present()->forDataTable($all_custom_fields);
         }
 
         $data = array('total' => $count, 'rows' => $rows);
@@ -335,7 +281,7 @@ class CategoriesController extends Controller
      * @param $categoryID
      * @return array
      */
-    public function getDataViewAccessories($categoryID)
+    public function getDataViewAccessories(Request $request, $categoryID)
     {
 
         $category = Category::with('accessories.company')->find($categoryID);
@@ -358,27 +304,7 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($category_accessories as $accessory) {
-
-            $actions = '';
-
-            if ($accessory->deleted_at=='') {
-                $actions = '<div style="white-space: nowrap;">';
-                $actions .= Helper::generateDatatableButton('edit', route('accessories.update', $accessory->id));
-                $actions .= Helper::generateDatatableButton('delete',
-                        route('accessories.destroy', $accessory->id),
-                        true, /* enabled */
-                        trans('admin/accessories/message.delete.confirm'),
-                        $accessory->name
-                    );
-                $actions .= '</div>';
-            }
-
-            $rows[] = array(
-                'id' => $asset->id,
-                'name' => (string)link_to_route('view/accessory', $asset->name, [$asset->id]),
-                'actions' => $actions,
-                'companyName' => Company::getName($asset),
-            );
+            $rows[] = $accessory->present()->forDataTable();
         }
 
         $data = array('total' => $count, 'rows' => $rows);
@@ -413,34 +339,14 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($category_consumables as $consumable) {
-
-            $actions = '';
-
-            if ($consumable->deleted_at=='') {
-                $actions = '<div style="white-space: nowrap;">';
-                $actions .= Helper::generateDatatableButton('edit', route('consumables.update', $consumable->id));
-                $actions .= Helper::generateDatatableButton('delete',
-                    route('consumables.destroy', $consumable->id),
-                    true, /* enabled */
-                    trans('admin/consumables/message.delete.confirm'),
-                    $consumable->name
-                );
-                $actions .= '</div>';
-            }
-
-            $rows[] = array(
-                'id' => $consumable->id,
-                'name' => (string) link_to_route('consumables.show', $consumable->name, [$consumable->id]),
-                'actions' => $actions,
-                'companyName' => Company::getName($consumable),
-            );
+            $rows[] = $consumable->present()->forDataTable();
         }
 
         $data = array('total' => $count, 'rows' => $rows);
         return $data;
     }
 
-    public function getDataViewComponent($categoryID)
+    public function getDataViewComponent(Request $request, $categoryID)
     {
 
         $category = Category::with('accessories.company')->find($categoryID);
@@ -462,27 +368,7 @@ class CategoriesController extends Controller
 
         $rows = array();
         foreach ($category_components as $component) {
-
-            $actions = '';
-
-            if ($component->deleted_at=='') {
-                $actions = '<div style="white-space: nowrap;">';
-                $actions .= Helper::generateDatatableButton('edit', route('components.edit', $component->id));
-                $actions .= Helper::generateDatatableButton('delete',
-                    route('components.destroy', $component->id),
-                    true, /* enabled */
-                    trans('admin/components/message.delete.confirm'),
-                    $component->name
-                );
-                $actions .= '</div>';
-            }
-
-            $rows[] = array(
-                'id' => $component->id,
-                'name' => (string)link_to_route('view/accessory', $component->name, [$component->id]),
-                'actions' => $actions,
-                'companyName' => Company::getName($component),
-            );
+            $rows[] = $component->present()->forDataTable();
         }
 
         $data = array('total' => $count, 'rows' => $rows);

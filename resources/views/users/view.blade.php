@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/users/general.view_user', array('name' => $user->fullName())) }}
+{{ trans('admin/users/general.view_user', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 
@@ -58,7 +58,7 @@
               @if ($user->avatar)
                 <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print">
               @else
-                <img src="{{ $user->gravatar() }}" class="avatar img-circle hidden-print">
+                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print">
               @endif
             </div>
             <div class="col-md-8">
@@ -74,7 +74,7 @@
 
                     <tr>
                         <td>Name</td>
-                        <td>{{ $user->fullName() }}</td>
+                        <td>{{ $user->present()->fullName() }}</td>
                     </tr>
                     @if ($user->jobtitle)
                     <tr>
@@ -93,7 +93,7 @@
                     @if ($user->manager)
                     <tr>
                         <td>Manager</td>
-                        <td><a href="{{ route('users.show', $user->manager->id) }}">{{ $user->manager->fullName() }}</a></td>
+                        <td><a href="{{ route('users.show', $user->manager->id) }}">{{ $user->manager->present()->fullName() }}</a></td>
                     </tr>
                     @endif
 
@@ -392,7 +392,7 @@
                       <td>
 
                         @if (($log->item) && ($log->itemType()=="asset"))
-                            <a href="{{ route('hardware.show', $log->item_id) }}">{{ $log->item->asset_tag }} - {{ $log->item->showAssetName() }}</a>
+                            <a href="{{ route('hardware.show', $log->item_id) }}">{{ $log->item->asset_tag }} - {{ $log->item->present()->name() }}</a>
                         @elseif ($log->item)
                             <a href="{{ route($log->parseItemRoute().'.show', $log->item_id) }}">
                                 {{ $log->item->name }}
@@ -405,7 +405,7 @@
                         <td>
                            @if ($log->action_type != 'requested')
                                 @if (isset($log->user))
-                                    <a href="{{route('users.show', $log->user_id)}}">{{ $log->user->fullName() }}</a>
+                                    <a href="{{route('users.show', $log->user_id)}}">{{ $log->user->present()->fullName() }}</a>
                                 @else
                                     Deleted Admin
                                 @endif

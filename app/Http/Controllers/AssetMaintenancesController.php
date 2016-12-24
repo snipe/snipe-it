@@ -125,7 +125,7 @@ class AssetMaintenancesController extends Controller
 
             $rows[] = array(
                 'id'            => $maintenance->id,
-                'asset_name'    =>  ($maintenance->asset) ? (string)link_to_route('maintenances.show', $maintenance->asset->showAssetName(), ['maintenance' => $maintenance->asset->id]) : 'Deleted Asset' ,
+                'asset_name'    =>  ($maintenance->asset) ? (string)link_to_route('maintenances.show', $maintenance->asset->present()->Name(), ['maintenance' => $maintenance->asset->id]) : 'Deleted Asset' ,
                 'title'         => $maintenance->title,
                 'notes'         => $maintenance->notes,
                 'supplier'      => ($maintenance->supplier) ? (string)link_to_route('suppliers.show', $maintenance->supplier->name, ['maintenance'=>$maintenance->supplier->id]) : 'Deleted Supplier',
@@ -134,7 +134,7 @@ class AssetMaintenancesController extends Controller
                 'start_date'         => $maintenance->start_date,
                 'asset_maintenance_time'          => $maintenance->asset_maintenance_time,
                 'completion_date'     => $maintenance->completion_date,
-                'user_id'       => ($maintenance->admin) ? (string)link_to_route('users.show', $maintenance->admin->fullName(), ['user'=>$maintenance->admin->id]) : '',
+                'user_id'       => ($maintenance->admin) ? (string)link_to_route('users.show', $maintenance->admin->present()->fullName(), ['user'=>$maintenance->admin->id]) : '',
                 'actions'       => $actions,
                 'companyName'   => ($maintenance->asset->company) ? $maintenance->asset->company->name : ''
             );
