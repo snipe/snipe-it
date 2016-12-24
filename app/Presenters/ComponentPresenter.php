@@ -45,16 +45,16 @@ class ComponentPresenter extends Presenter
             'id'            => $this->id,
             'name'          => $this->nameUrl(),
             'serial_number'          => $this->serial,
-            'location'      => ($this->model->location) ? $this->model->location->present()->nameUrl() : '',
+            'location'      => $this->locationUrl(),
             'qty'           => number_format($this->qty),
-            'min_amt'           => e($this->min_amt),
-            'category'           => ($this->model->category) ? $this->model->category->present()->nameUrl() : 'Missing category',
+            'min_amt'       => e($this->min_amt),
+            'category'      => $this->categoryUrl(),
             'order_number'  => $this->order_number,
-            'purchase_date'  => $this->purchase_date,
-            'purchase_cost'  => Helper::formatCurrencyOutput($this->purchase_cost),
+            'purchase_date' => $this->purchase_date,
+            'purchase_cost' => Helper::formatCurrencyOutput($this->purchase_cost),
             'numRemaining'  => $this->numRemaining(),
             'actions'       => $actions,
-            'companyName'   => $this->model->company ? $this->model->company->present()->nameUrl() : '',
+            'companyName'   => $this->companyUrl(),
         ];
 
         return $results;

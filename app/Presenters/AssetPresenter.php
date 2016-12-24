@@ -71,24 +71,10 @@ class AssetPresenter extends Presenter
         $results['serial'] = $this->serial;
         $results['image'] = $this->imageUrl();
         // Presets for when conditionals fail.
-        $results['model'] = 'No Model';
-        $results['model_number'] = '';
-        $results['category'] = '';
-        $results['manufacturer'] = '';
-        if($model = $this->model->model) {
-            $results['model'] = $model->present()->nameUrl();
-
-            if(!empty($model->model_number)) {
-                $results['model_number'] = $model->model_number;
-            }
-            if ($model->category) {
-                $results['category'] = $model->category->present()->nameUrl();
-            }
-
-            if($model->manufacturer) {
-                $results['manufacturer'] = $model->manufacturer->present()->nameUrl();
-            }
-        }
+        $results['model'] = $this->modelUrl();
+        $results['model_number'] = $this->model->model_number;
+        $results['category'] = $this->categoryUrl();
+        $results['manufacturer'] = $this->manufacturerUrl();
 
         $results['status_label'] = '';
         $results['assigned_to'] = '';
@@ -108,7 +94,7 @@ class AssetPresenter extends Presenter
         $results['eol'] = $this->eol_date() ?: '';
         $results['purchase_cost'] = Helper::formatCurrencyOutput($this->purchase_cost);
         $results['purchase_date'] = $this->purchase_date ?: '';
-        $results['notes'] = e($this->notes);
+        $results['notes'] = $this->notes;
         $results['order_number'] = '';
         if(!empty($this->order_number)) {
             $results['order_number'] = link_to_route('hardware.index', $this->order_number, ['order_number' => $this->order_number]);
@@ -120,9 +106,9 @@ class AssetPresenter extends Presenter
         if(!empty($this->created_at)) {
             $results['created_at'] = $this->created_at->format('F j, Y h:iA');
         }
-        $results['companyName'] = $this->model->company ? $this->model->company->name : '';
-        $results['actions'] = $actions ?: '';
-        $results['change'] = $inout ?: '';
+        $results['companyName'] = $this->companyUrl();
+        $results['actions'] = $actions;
+        $results['change'] = $inout;
 
 
         // Custom Field bits
@@ -170,6 +156,14 @@ class AssetPresenter extends Presenter
     public function nameUrl()
     {
         return (string) link_to_route('hardware.show', e($this->name), $this->id);
+    }
+
+    public function modelUrl()
+    {
+        if($this->model->model) {
+            return $this->model->model->present()->nameUrl();
+        }
+        return '';
     }
 
     /**

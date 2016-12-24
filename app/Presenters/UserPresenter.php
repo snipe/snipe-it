@@ -65,12 +65,9 @@ class UserPresenter extends Presenter
         $result = [
             'id'            => $this->id,
             'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($this->id).']" class="one_required"></div>' : '',
-            'name'          => $this->present()->fullName(),
+            'name'          => $this->fullName(),
             'jobtitle'      => $this->jobtitle,
-            'email'         => ($this->email!='') ?
-                '<a href="mailto:'.$this->email.'" class="hidden-md hidden-lg">'.$this->email.'</a>'
-                .'<a href="mailto:'.$this->email.'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
-                .'</span>' : '',
+            'email'         => $this->emailLink(),
             'username'      => $this->username,
             'location'      => ($this->model->userloc) ? $this->model->userloc->present()->nameUrl() : '',
             'manager'       => ($this->model->manager) ? $this->manager->present()->nameUrl() : '',
@@ -86,11 +83,20 @@ class UserPresenter extends Presenter
             'created_at'    => ($this->model->created_at!='')  ? e($this->model->created_at->format('F j, Y h:iA')) : '',
             'activated'     => ($this->activated=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
             'actions'       => $actions ?: '',
-            'companyName'   => $this->company ? $this->company->name : ''
+            'companyName'   => $this->companyUrl()
 
         ];
 
         return $result;
+    }
+
+    public function emailLink()
+    {
+        if ($this->email) {
+            return '<a href="mailto:'.$this->email.'">'.$this->email.'</a>'
+                .'<a href="mailto:'.$this->email.'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>';
+        }
+        return '';
     }
     /**
      * Returns the user full name, it simply concatenates
