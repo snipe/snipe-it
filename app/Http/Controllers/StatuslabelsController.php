@@ -281,7 +281,7 @@ class StatuslabelsController extends Controller
             $actions .= Helper::generateDatatableButton('edit', route('statuslabels.edit', $statuslabel->id));
             $actions .= Helper::generateDatatableButton(
                 'delete',
-                route('statuslabels.destroy'),
+                route('statuslabels.destroy', ['statuslabel' => $statuslabel->id]),
                 true, /*enabled*/
                 trans('admin/statuslabels/message.delete.confirm'),
                 $statuslabel->name
