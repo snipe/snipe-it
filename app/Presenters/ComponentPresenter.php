@@ -68,4 +68,12 @@ class ComponentPresenter extends Presenter
     {
         return (string) link_to_route('components.show', $this->name, $this->id);
     }
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('components.show', $this->id);
+    }
 }

@@ -55,4 +55,13 @@ class LocationPresenter extends Presenter
     {
         return (string)link_to_route('locations.show', $this->name, $this->id);
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('locations.show', $this->id);
+    }
 }

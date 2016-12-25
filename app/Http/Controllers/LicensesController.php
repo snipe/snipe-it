@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Notifications\CheckinNotification;
+use App\Notifications\CheckoutNotification;
 use Assets;
 use Input;
 use Lang;
@@ -517,49 +519,14 @@ class LicensesController extends Controller
             $license = License::find($licenseSeat->license_id);
             $settings = Setting::getSettings();
 
-            // Update the asset data
-            if ($request->input('assigned_to') == '') {
-                $slack_msg = 'License <'.route('licenses.show', $license->id).'|'.$license->name
-                    .'> checked out to <'.route('hardware.show',$asset->id) .'|'.$asset->present()->name()
-                    .'> by <'.route('users.show', $user->id).'|'.$user->present()->fullName().'>.';
-            } else {
-                $slack_msg = 'License <'.route('licenses.show', $license->id).'|'.$license->name
-                    .'> checked out to <'.route('users.show', $user->id).'|'.$is_assigned_to->present()->fullName()
-                    .'> by <'.route('users.show', $user->id) .'|'.$user->present()->fullName().'>.';
-            }
-
-            if ($settings->slack_endpoint) {
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'Checked Out:',
-                                    'value' => $slack_msg
-                                ],
-                                [
-                                    'title' => 'Note:',
-                                    'value' => e($request->input('note'))
-                                ],
-
-
-
-                            ]
-                        ])->send('License Checked Out');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
+            $target = isset($asset) ? $asset : User::find(request('assigned_to'));
+            $params = [
+                'item' => $license,
+                'target' => $target,
+                'admin' => $user,
+                'note' => request('note')
+            ];
+            $user->notify(new CheckoutNotification($params));
 
             // Redirect to the new asset page
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
@@ -643,43 +610,17 @@ class LicensesController extends Controller
 
         $user = Auth::user();
 
+
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e($request->input('note')));
+            $licenseSeat->logCheckin($return_to, e(request('note')));
 
-            $settings = Setting::getSettings();
-
-            if ($settings->slack_endpoint) {
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'Checked In:',
-                                    'value' => 'License: <'.route('licenses.show', $license->id).'|'.$license->name
-                                        .'> checked in by <'.route('users.show', $user->id).'|'.$user->present()->fullName().'>.'
-                                ],
-                                [
-                                    'title' => 'Note:',
-                                    'value' => e($request->input('note'))
-                                ],
-
-                            ]
-                        ])->send('License Checked In');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
+            $params = [
+                'item' => $license,
+                'admin' => $user,
+                'notes' => request('notes')
+            ];
+            $user->notify(new CheckinNotification($params));
 
             if ($backTo=='user') {
                 return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));

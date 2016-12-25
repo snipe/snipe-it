@@ -138,4 +138,13 @@ class UserPresenter extends Presenter
     {
         return (string) link_to_route('users.show', $this->fullName(), $this->id);
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('users.show', $this->id);
+    }
 }

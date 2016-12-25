@@ -45,4 +45,13 @@ class CategoryPresenter extends Presenter
     {
         return (string) link_to_route('categories.show', $this->name, $this->id);
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('categories.show', $this->id);
+    }
 }

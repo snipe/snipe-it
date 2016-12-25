@@ -247,4 +247,13 @@ class AssetPresenter extends Presenter
         date_add($date, date_interval_create_from_date_string($this->warranty_months . ' months'));
         return date_format($date, 'Y-m-d');
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('hardware.show', $this->id);
+    }
 }

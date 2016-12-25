@@ -115,4 +115,13 @@ class AssetModelPresenter extends Presenter
         }
         return '';
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('models.show', $this->id);
+    }
 }

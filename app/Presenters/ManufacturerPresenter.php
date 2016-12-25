@@ -50,4 +50,13 @@ class ManufacturerPresenter extends Presenter
     {
        return (string) link_to_route('manufacturers.show', $this->name, $this->id);
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('manufacturers.show', $this->id);
+    }
 }

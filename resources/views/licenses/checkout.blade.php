@@ -27,7 +27,7 @@
 
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> {{ $licenseseat->license->name }}</h3>
+                    <h3 class="box-title"> {{ $licenseSeat->license->name }}</h3>
                 </div>
                 <div class="box-body">
 
@@ -37,7 +37,7 @@
                             <div class="form-group">
                             <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
                                 <div class="col-md-6">
-                                  <p class="form-control-static">{{ $licenseseat->license->name }}</p>
+                                  <p class="form-control-static">{{ $licenseSeat->license->name }}</p>
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@
                             <div class="form-group">
                             <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.serial') }}</label>
                                 <div class="col-md-10">
-                                  <p class="form-control-static" style="word-wrap: break-word;">{{ $licenseseat->license->serial }}</p>
+                                  <p class="form-control-static" style="word-wrap: break-word;">{{ $licenseSeat->license->serial }}</p>
                                 </div>
                             </div>
 
@@ -55,7 +55,7 @@
                                  </label>
 
                                 <div class="col-md-10">
-                                    {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $licenseseat->asset_id), array('class'=>'select2', 'style'=>'min-width:600px')) }}
+                                    {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $licenseSeat->asset_id), array('class'=>'select2', 'style'=>'min-width:600px')) }}
                                     {!! $errors->first('asset_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                 </label>
 
                                 <div class="col-md-9">
-                                    {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $licenseseat->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                                    {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $licenseSeat->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                                     {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
                                     <p class="help-block">
@@ -82,7 +82,7 @@
                             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                                 <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                                 <div class="col-md-7">
-                                    <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $licenseseat->note) }}</textarea>
+                                    <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $licenseSeat->note) }}</textarea>
                                     {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                 </div>
                             </div>
