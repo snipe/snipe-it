@@ -9,11 +9,9 @@ use Input;
 use Lang;
 use Log;
 use Mail;
-use Redirect;
 use Response;
 use Slack;
 use Str;
-use App\Models\Supplier;
 use TCPDF;
 use Validator;
 use View;
@@ -183,31 +181,10 @@ class AssetMaintenancesController extends Controller
     {
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
-
-        if (e(Input::get('supplier_id')) == '') {
-            $assetMaintenance->supplier_id = null;
-        } else {
-            $assetMaintenance->supplier_id = e($request->input('supplier_id'));
-        }
-
-        if (e(Input::get('is_warranty')) == '') {
-            $assetMaintenance->is_warranty = 0;
-        } else {
-            $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        }
-
-        if (e(Input::get('cost')) == '') {
-            $assetMaintenance->cost = '';
-        } else {
-            $assetMaintenance->cost =  Helper::ParseFloat(e($request->input('cost')));
-        }
-
-        if (e(Input::get('notes')) == '') {
-            $assetMaintenance->notes = null;
-        } else {
-            $assetMaintenance->notes = e($request->input('notes'));
-        }
-
+        $assetMaintenance->supplier_id = $request->input('supplier_id');
+        $assetMaintenance->is_warranty = $request->input('is_warranty');
+        $assetMaintenance->cost =  e($request->input('cost'));
+        $assetMaintenance->notes = e($request->input('notes'));
         $asset = Asset::find(e($request->input('asset_id')));
 
         if (!Company::isCurrentUserHasAccess($asset)) {
@@ -222,14 +199,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->completion_date        = $request->input('completion_date');
         $assetMaintenance->user_id                = Auth::id();
 
-        if (( $assetMaintenance->completion_date == "" )
-            || ( $assetMaintenance->completion_date == "0000-00-00" )
-        ) {
-            $assetMaintenance->completion_date = null;
-        }
-
-        if (( $assetMaintenance->completion_date !== "" )
-            && ( $assetMaintenance->completion_date !== "0000-00-00" )
+        if (( $assetMaintenance->completion_date !== null )
             && ( $assetMaintenance->start_date !== "" )
             && ( $assetMaintenance->start_date !== "0000-00-00" )
         ) {
@@ -240,16 +210,12 @@ class AssetMaintenancesController extends Controller
 
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
-
             // Redirect to the new asset maintenance page
             return redirect()->route('maintenances.index')
                            ->with('success', trans('admin/asset_maintenances/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($assetMaintenance->getErrors());
-
-
-
 
     }
 
@@ -324,29 +290,10 @@ class AssetMaintenancesController extends Controller
             return static::getInsufficientPermissionsRedirect();
         }
 
-        if (request('supplier_id') == '') {
-            $assetMaintenance->supplier_id = null;
-        } else {
-            $assetMaintenance->supplier_id = e($request->input('supplier_id'));
-        }
-
-        if (request('is_warranty') == '') {
-            $assetMaintenance->is_warranty = 0;
-        } else {
-            $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        }
-
-        if (request('cost') == '') {
-            $assetMaintenance->cost = '';
-        } else {
-            $assetMaintenance->cost =  Helper::ParseFloat(e($request->input('cost')));
-        }
-
-        if (request('notes') == '') {
-            $assetMaintenance->notes = null;
-        } else {
-            $assetMaintenance->notes = e($request->input('notes'));
-        }
+        $assetMaintenance->supplier_id = e($request->input('supplier_id'));
+        $assetMaintenance->is_warranty = e($request->input('is_warranty'));
+        $assetMaintenance->cost =  Helper::ParseFloat(e($request->input('cost')));
+        $assetMaintenance->notes = e($request->input('notes'));
 
         $asset = Asset::find(request('asset_id'));
 
@@ -361,10 +308,8 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->start_date             = $request->input('start_date');
         $assetMaintenance->completion_date        = $request->input('completion_date');
 
-        if (( $assetMaintenance->completion_date == "" )
-          || ( $assetMaintenance->completion_date == "0000-00-00" )
+        if (( $assetMaintenance->completion_date == null )
         ) {
-            $assetMaintenance->completion_date = null;
             if (( $assetMaintenance->asset_maintenance_time !== 0 )
               || ( !is_null($assetMaintenance->asset_maintenance_time) )
             ) {
@@ -372,8 +317,7 @@ class AssetMaintenancesController extends Controller
             }
         }
 
-        if (( $assetMaintenance->completion_date !== "" )
-          && ( $assetMaintenance->completion_date !== "0000-00-00" )
+        if (( $assetMaintenance->completion_date !== null )
           && ( $assetMaintenance->start_date !== "" )
           && ( $assetMaintenance->start_date !== "0000-00-00" )
         ) {
@@ -387,7 +331,7 @@ class AssetMaintenancesController extends Controller
 
             // Redirect to the new asset maintenance page
             return redirect()->route('maintenances.index')
-                         ->with('success', trans('admin/asset_maintenances/message.create.success'));
+                         ->with('success', trans('admin/asset_maintenances/message.edit.success'));
         }
         return redirect()->back()->withInput()->withErrors($assetMaintenance->getErrors());
     }

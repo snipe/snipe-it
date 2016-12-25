@@ -118,9 +118,9 @@ class UsersController extends Controller
         $user->activated = $request->input('activated', $user->activated);
         $user->jobtitle = $request->input('jobtitle');
         $user->phone = $request->input('phone');
-        $user->location_id = $request->input('location_id');
-        $user->company_id = Company::getIdForUser($request->input('company_id'));
-        $user->manager_id = $request->input('manager_id');
+        $user->location_id = $request->input('location_id', null);
+        $user->company_id = Company::getIdForUser($request->input('company_id', null));
+        $user->manager_id = $request->input('manager_id', null);
         $user->notes = $request->input('notes');
 
         // Strip out the superuser permission if the user isn't a superadmin
@@ -129,23 +129,7 @@ class UsersController extends Controller
         if (!Auth::user()->isSuperUser()) {
             unset($permissions_array['superuser']);
         }
-
         $user->permissions =  json_encode($permissions_array);
-
-
-
-        if ($user->manager_id == "") {
-            $user->manager_id = null;
-        }
-
-        if ($user->location_id == "") {
-            $user->location_id = null;
-        }
-
-        if ($user->company_id == "") {
-            $user->company_id = null;
-        }
-
 
         if ($user->save()) {
 
@@ -339,9 +323,9 @@ class UsersController extends Controller
         $user->activated = $request->input('activated', $user->activated);
         $user->jobtitle = $request->input('jobtitle');
         $user->phone = $request->input('phone');
-        $user->location_id = $request->input('location_id');
-        $user->company_id = Company::getIdForUser($request->input('company_id'));
-        $user->manager_id = $request->input('manager_id');
+        $user->location_id = $request->input('location_id', null);
+        $user->company_id = Company::getIdForUser($request->input('company_id', null));
+        $user->manager_id = $request->input('manager_id', null);
         $user->notes = $request->input('notes');
 
         // Strip out the superuser permission if the user isn't a superadmin
@@ -353,18 +337,6 @@ class UsersController extends Controller
        }
 
         $user->permissions =  json_encode($permissions_array);
-
-        if ($user->manager_id == "") {
-            $user->manager_id = null;
-        }
-
-        if ($user->location_id == "") {
-            $user->location_id = null;
-        }
-
-        if ($user->company_id == "") {
-            $user->company_id = null;
-        }
 
         // Was the user updated?
         if ($user->save()) {
@@ -404,7 +376,6 @@ class UsersController extends Controller
             }
 
             if ($user->accessories()->count() > 0) {
-
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->accessories()->count() . ' accessories associated with them.');
             }

@@ -80,11 +80,7 @@ class LocationsController extends Controller
     {
         $location = new Location();
         $location->name             = Input::get('name');
-        if (Input::get('parent_id')=='') {
-            $location->parent_id        = null;
-        } else {
-            $location->parent_id    = Input::get('parent_id');
-        }
+        $location->parent_id        = Input::get('parent_id', null);
         $location->currency         = Input::get('currency', '$');
         $location->address          = Input::get('address');
         $location->address2         = Input::get('address2');
@@ -180,18 +176,14 @@ class LocationsController extends Controller
 
         // Update the location data
         $location->name         = Input::get('name');
-        if (Input::get('parent_id')=='') {
-            $location->parent_id        = null;
-        } else {
-            $location->parent_id        = Input::get('parent_id', '');
-        }
-        $location->currency             = Input::get('currency', '$');
-        $location->address          = Input::get('address');
-        $location->address2             = Input::get('address2');
-        $location->city             = Input::get('city');
-        $location->state            = Input::get('state');
+        $location->parent_id    = Input::get('parent_id', null);
+        $location->currency     = Input::get('currency', '$');
+        $location->address      = Input::get('address');
+        $location->address2     = Input::get('address2');
+        $location->city         = Input::get('city');
+        $location->state        = Input::get('state');
         $location->country      = Input::get('country');
-        $location->zip            = Input::get('zip');
+        $location->zip          = Input::get('zip');
 
         // Was the asset created?
         if ($location->save()) {

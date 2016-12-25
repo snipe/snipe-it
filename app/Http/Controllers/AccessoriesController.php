@@ -85,19 +85,8 @@ class AccessoriesController extends Controller
         $accessory->order_number            = request('order_number');
         $accessory->manufacturer_id         = request('manufacturer_id');
         $accessory->model_number            = request('model_number');
-
-        if (request('purchase_date') == ''){
-            $accessory->purchase_date       =  null;
-        } else {
-            $accessory->purchase_date       = request('purchase_date');
-        }
-
-        if (request('purchase_cost') == '0.00'){
-            $accessory->purchase_cost       =  null;
-        } else {
-            $accessory->purchase_cost       = Helper::ParseFloat(request('purchase_cost'));
-        }
-
+        $accessory->purchase_date           = request('purchase_date');
+        $accessory->purchase_cost           = Helper::ParseFloat(request('purchase_cost'));
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
 
@@ -153,32 +142,16 @@ class AccessoriesController extends Controller
         $this->authorize($accessory);
 
         // Update the accessory data
-        $accessory->name                    = e(request('name'));
-
-        if (e(request('location_id')) == '') {
-            $accessory->location_id = null;
-        } else {
-            $accessory->location_id         = request('location_id');
-        }
+        $accessory->name                    = request('name');
+        $accessory->location_id             = request('location_id');
         $accessory->min_amt                 = request('min_amt');
         $accessory->category_id             = request('category_id');
         $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
         $accessory->manufacturer_id         = request('manufacturer_id');
         $accessory->order_number            = request('order_number');
         $accessory->model_number            = request('model_number');
-
-        if (request('purchase_date') == '') {
-            $accessory->purchase_date       =  null;
-        } else {
-            $accessory->purchase_date       = request('purchase_date');
-        }
-
-        if (request('purchase_cost') == '0.00') {
-            $accessory->purchase_cost       =  null;
-        } else {
-            $accessory->purchase_cost       = request('purchase_cost');
-        }
-
+        $accessory->purchase_date       = request('purchase_date');
+        $accessory->purchase_cost       = request('purchase_cost');
         $accessory->qty                     = request('qty');
 
       // Was the accessory updated?
