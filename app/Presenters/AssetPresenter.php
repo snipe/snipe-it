@@ -56,9 +56,11 @@ class AssetPresenter extends Presenter
             }
 
         } else {
-            if (Gate::allows('checkin', $this->model)) {
-                $inout = '<a href="' . route('checkin/hardware',
-                        $this->model->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
+            if (!empty($this->model->assigned_to)) {
+                if (Gate::allows('checkin', $this->model)) {
+                    $inout = '<a href="' . route('checkin/hardware',
+                            $this->model->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
+                }
             }
         }
 
@@ -202,6 +204,14 @@ class AssetPresenter extends Presenter
         }
     }
 
+    /**
+     * Helper for notification polymorphism.
+     * @return mixed
+     */
+    public function fullName()
+    {
+        return $this->name();
+    }
     /**
      * Returns the date this item hits EOL.
      * @return false|string
