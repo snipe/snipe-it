@@ -150,7 +150,7 @@
                   </li>
                   @endcan
                   @can('index', \App\Models\Consumable::class)
-                  <li {!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
+                  <li {!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('consumables') }}">
                           <i class="fa fa-tint"></i>
                       </a>
