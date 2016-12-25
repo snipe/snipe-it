@@ -6,6 +6,8 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\CheckoutRequest;
 use App\Models\User;
+use App\Notifications\CheckinNotification;
+use App\Notifications\CheckoutNotification;
 use Illuminate\Support\Facades\Auth;
 
 trait Loggable
@@ -55,6 +57,14 @@ trait Loggable
         $log->note = $note;
         $log->logaction('checkout');
 
+        $params = [
+            'item' => $log->item,
+            'target' => $log->target,
+            'admin' => $log->user,
+            'note' => $note
+        ];
+        Setting::getSettings()->notify(new CheckoutNotification($params));
+
         return $log;
     }
 
@@ -79,6 +89,13 @@ trait Loggable
         $log->note = $note;
         $log->user_id = Auth::user()->id;
         $log->logaction('checkin from');
+
+        $params = [
+            'item' => $log->item,
+            'admin' => $log->user,
+            'note' => $note
+        ];
+        Setting::getSettings()->notify(new CheckinNotification($params));
 
         return $log;
     }

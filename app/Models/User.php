@@ -412,11 +412,4 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     {
         return $query->leftJoin('locations', 'users.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
     }
-
-    public static function routeNotificationForSlack()
-    {
-        // At this point the endpoint is the same for everything.
-        //  In the future this may want to be adapted for individual notifications.
-        return Setting::getSettings()->slack_endpoint;
-    }
 }

@@ -2,11 +2,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Watson\Validating\ValidatingTrait;
 use Schema;
 
 class Setting extends Model
 {
+    use Notifiable;
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -142,5 +144,17 @@ class Setting extends Model
                 }
             }
             return $result;
+    }
+
+    /**
+     * The url for slack notifications.
+     * Used by Notifiable trait.
+     * @return mixed
+     */
+    public function routeNotificationForSlack()
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        return $this->slack_endpoint;
     }
 }

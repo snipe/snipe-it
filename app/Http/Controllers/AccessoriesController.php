@@ -3,12 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Accessory;
-use App\Models\Actionlog;
 use App\Models\Company;
-use App\Models\Setting;
 use App\Models\User;
-use App\Notifications\CheckinNotification;
-use App\Notifications\CheckoutNotification;
 use Auth;
 use Carbon\Carbon;
 use Config;
@@ -300,13 +296,6 @@ class AccessoriesController extends Controller
         ]);
 
         $logaction = $accessory->logCheckout(e(Input::get('note')));
-        $admin_user = Auth::user();
-        $params = [
-            'item' => $accessory,
-            'admin' => $admin_user,
-            'target' => $user
-        ];
-        $admin_user->notify(new CheckoutNotification($params));
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
@@ -382,19 +371,10 @@ class AccessoriesController extends Controller
         $this->authorize('checkin', $accessory);
 
         $return_to = e($accessory_user->assigned_to);
-        $fromUser = User::find($return_to);
         $logaction = $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
-        $admin_user = Auth::user();
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-            $params = [
-                'item' => $accessory,
-                'admin' => $admin_user,
-                'target' => $fromUser,
-                'note' => e($logaction->note)
-            ];
-            $admin_user->notify(new CheckinNotification($params));
             if (!is_null($accessory_user->assigned_to)) {
                 $user = User::find($accessory_user->assigned_to);
             }

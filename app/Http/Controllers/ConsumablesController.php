@@ -291,16 +291,6 @@ class ConsumablesController extends Controller
         ]);
 
         $logaction = $consumable->logCheckout(e(Input::get('note')));
-        $target = User::find($consumable->assigned_to);
-        $params = [
-            'item' => $consumable,
-            'admin' => $admin_user,
-            'target' => $target,
-        ];
-        $admin_user->notify(new CheckoutNotification($params));
-
-        $consumable_user = DB::table('consumables_users')->where('assigned_to', '=', $consumable->assigned_to)->where('consumable_id', '=', $consumable->id)->first();
-
         $data['log_id'] = $logaction->id;
         $data['eula'] = $consumable->getEula();
         $data['first_name'] = $user->first_name;

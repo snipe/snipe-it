@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Notifications\CheckinNotification;
-use App\Notifications\CheckoutNotification;
 use Assets;
+use Illuminate\Support\Facades\Session;
 use Input;
 use Lang;
 use App\Models\License;
@@ -11,18 +10,13 @@ use App\Models\Asset;
 use App\Models\User;
 use App\Models\Actionlog;
 use DB;
-use Redirect;
 use App\Models\LicenseSeat;
-use App\Models\Depreciation;
 use App\Models\Company;
-use App\Models\Setting;
-use App\Models\Supplier;
 use Validator;
 use View;
 use Response;
 use Slack;
 use Config;
-use Session;
 use App\Helpers\Helper;
 use Auth;
 use Gate;
@@ -452,7 +446,6 @@ class LicensesController extends Controller
         $licenseSeat = LicenseSeat::find($seatId);
         $assigned_to = e($request->input('assigned_to'));
         $asset_id = e($request->input('asset_id'));
-        $user = Auth::user();
 
         $this->authorize('checkout', $licenseSeat);
 
@@ -515,18 +508,6 @@ class LicensesController extends Controller
 
             $data['license_id'] =$licenseSeat->license_id;
             $data['note'] = $request->input('note');
-
-            $license = License::find($licenseSeat->license_id);
-            $settings = Setting::getSettings();
-
-            $target = isset($asset) ? $asset : User::find(request('assigned_to'));
-            $params = [
-                'item' => $license,
-                'target' => $target,
-                'admin' => $user,
-                'note' => request('note')
-            ];
-            $user->notify(new CheckoutNotification($params));
 
             // Redirect to the new asset page
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
@@ -608,25 +589,15 @@ class LicensesController extends Controller
         $licenseSeat->assigned_to                   = null;
         $licenseSeat->asset_id                      = null;
 
-        $user = Auth::user();
-
-
         // Was the asset updated?
         if ($licenseSeat->save()) {
             $licenseSeat->logCheckin($return_to, e(request('note')));
-
-            $params = [
-                'item' => $license,
-                'admin' => $user,
-                'notes' => request('notes')
-            ];
-            $user->notify(new CheckinNotification($params));
-
             if ($backTo=='user') {
                 return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
             }
-            redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
+            return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
         }
+
         // Redirect to the license page with error
         return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkin.error'));
     }

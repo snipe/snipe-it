@@ -105,12 +105,9 @@ class Asset extends Depreciable
 
         $this->assigneduser()->associate($user);
 
-        if($name != null)
-        {
+        if($name != null) {
             $this->name = $name;
         }
-
-        $settings = Setting::getSettings();
 
         if ($this->requireAcceptance()) {
             $this->accepted="pending";
@@ -119,19 +116,11 @@ class Asset extends Depreciable
 
 
         if ($this->save()) {
-
-            // $action, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null
-            $log = $this->createLogRecord('checkout', $this, $admin, $user, $expected_checkin, $note, $checkout_at);
-
+            $this->logCheckout($note);
             if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
                 $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
             }
-
-            if ($settings->slack_endpoint) {
-                $this->checkOutNotifySlack($settings, $admin, $note);
-            }
             return true;
-
         }
         return false;
 
@@ -161,43 +150,6 @@ class Asset extends Depreciable
 
     }
 
-    public function checkOutNotifySlack($settings, $admin, $note = null)
-    {
-
-        if ($settings->slack_endpoint) {
-
-            $slack_settings = [
-            'username' => $settings->botname,
-            'channel' => $settings->slack_channel,
-            'link_names' => true
-            ];
-
-            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-            try {
-                $client->attach([
-                'color' => 'good',
-                'fields' => [
-                [
-                  'title' => 'Checked Out:',
-                  'value' => 'HARDWARE asset <'.route('hardware.show', $this->id).'|'.$this->present()->name()
-                            .'> checked out to <'.route('users.show', $this->assigned_to).'|'.$this->assigneduser->present()->fullName()
-                            .'> by <'.route('users.show', Auth::user()->id).'|'.$admin->present()->fullName().'>.'
-                ],
-                [
-                    'title' => 'Note:',
-                    'value' => e($note)
-                ],
-                  ]
-                ])->send('Asset Checked Out');
-
-            } catch (Exception $e) {
-                LOG::error($e);
-            }
-        }
-
-    }
-
 
     public function getDetailedNameAttribute()
     {
@@ -211,38 +163,6 @@ class Asset extends Depreciable
     public function validationRules($id = '0')
     {
         return $this->rules;
-    }
-
-
-    public function createLogRecord($action, $asset, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null)
-    {
-
-        $logaction = new Actionlog();
-        $logaction->item_type = Asset::class;
-        $logaction->item_id = $this->id;
-        $logaction->target_type = User::class;
-        // On Checkin, this is the user that previously had the asset.
-        $logaction->target_id = $user->id;
-        $logaction->note = $note;
-        $logaction->user_id = $admin->id;
-        if ($checkout_at!='') {
-            $logaction->created_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', strtotime($checkout_at)));
-        } else {
-            $logaction->created_at = \Carbon\Carbon::now();
-        }
-
-        if ($action=="checkout") {
-            if ($user) {
-                $logaction->location_id = $user->location_id;
-            }
-        } else {
-            // Update the asset data to null, since it's being checked in
-            $logaction->location_id = null;
-        }
-        $logaction->user()->associate($admin);
-        $log = $logaction->logaction($action);
-
-        return $logaction;
     }
 
 
