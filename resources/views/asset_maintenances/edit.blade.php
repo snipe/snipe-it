@@ -24,13 +24,14 @@
 
 <div class="row">
   <div class="col-md-9">
-    <form class="form-horizontal" method="post" action="{{ route('maintenances.store') }}" autocomplete="off">
+      @if ($item->id)
+          <form class="form-horizontal" method="post" action="{{ route('maintenances.update', $item->id) }}" autocomplete="off">
+          {{ method_field('PUT') }}
+      @else
+          <form class="form-horizontal" method="post" action="{{ route('maintenances.store') }}" autocomplete="off">
+      @endif
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-    @if ($item->id)
-    {{ method_field('PUT') }}
-    @endif
 
     <div class="box box-default">
       <div class="box-header with-border">
