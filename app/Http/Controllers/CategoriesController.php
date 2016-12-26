@@ -103,12 +103,9 @@ class CategoriesController extends Controller
             // Redirect to the blogs management page
             return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.does_not_exist'));
         }
-
-        $category_options = array('' => 'Top Level') + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
         $category_types= Helper::categoryTypeList();
 
         return View::make('categories/edit', compact('item'))
-        ->with('category_options', $category_options)
         ->with('category_types', $category_types);
     }
 
