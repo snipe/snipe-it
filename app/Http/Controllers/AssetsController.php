@@ -421,13 +421,14 @@ class AssetsController extends Controller
     }
 
     /**
-    * Validate and process the form data to check out an asset to a user.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validate and process the form data to check out an asset to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param AssetCheckoutRequest $request
+     * @param int $assetId
+     * @return Redirect
+     * @since [v1.0]
+     */
     public function postCheckout(AssetCheckoutRequest $request, $assetId)
     {
 
@@ -453,9 +454,8 @@ class AssetsController extends Controller
         } else {
             $expected_checkin = '';
         }
-
         if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
-          // Redirect to the new asset page
+//           Redirect to the new asset page
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
         }
 
@@ -488,13 +488,15 @@ class AssetsController extends Controller
 
 
     /**
-    * Validate and process the form data to check an asset back into inventory.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validate and process the form data to check an asset back into inventory.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param AssetCheckinRequest $request
+     * @param int $assetId
+     * @param null $backto
+     * @return Redirect
+     * @since [v1.0]
+     */
     public function postCheckin(AssetCheckinRequest $request, $assetId = null, $backto = null)
     {
         // Check if the asset exists
@@ -525,51 +527,7 @@ class AssetsController extends Controller
         }
         // Was the asset updated?
         if ($asset->save()) {
-
-            if ($request->input('checkin_at') == Carbon::now()->format('Y-m-d')) {
-                $checkin_at = Carbon::now();
-            } else {
-                $checkin_at = $request->input('checkin_at').' 00:00:00';
-            }
-            $logaction = $asset->createLogRecord('checkin', $asset, $admin, $user, null, e(Input::get('note')), $checkin_at);
-
-            $settings = Setting::getSettings();
-
-            if ($settings->slack_endpoint) {
-
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'Checked In:',
-                                    'value' => class_basename(
-                                        strtoupper($logaction->item_type))
-                                        .' asset <'.route('hardware.show', $asset->id).'|'.e($asset->present()->name())
-                                        .'> checked in by <'.route('users.show',Auth::user()->id)
-                                        .'|'.e(Auth::user()->present()->fullName()).'>.'
-                                ],
-                                [
-                                    'title' => 'Note:',
-                                    'value' => e($logaction->note)
-                                ],
-
-                            ]
-                        ])->send('Asset Checked In');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
+            $logaction = $asset->logCheckin($user, e(request('note')));
 
             $data['log_id'] = $logaction->id;
             $data['first_name'] = $user->first_name;

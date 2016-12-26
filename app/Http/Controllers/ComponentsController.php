@@ -295,43 +295,7 @@ class ComponentsController extends Controller
             'asset_id' => $asset_id
         ]);
 
-        $logaction = $component->logCheckout(e(Input::get('note')), $asset_id);
-
-        $settings = Setting::getSettings();
-
-        if ($settings->slack_endpoint) {
-
-            $slack_settings = [
-                'username' => $settings->botname,
-                'channel' => $settings->slack_channel,
-                'link_names' => true
-            ];
-
-            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-            try {
-                    $client->attach([
-                        'color' => 'good',
-                        'fields' => [
-                            [
-                                'title' => 'Checked Out:',
-                                'value' => class_basename(strtoupper($logaction->item_type))
-                                            .' <'.route('components.show', ['component' => $component->id]).'|'.$component->name
-                                            .'> checked out to <'.route('hardware.show', $asset->id).'|'.$asset->present()->name()
-                                            .'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->present()->fullName().'>.'
-                            ],
-                            [
-                                'title' => 'Note:',
-                                'value' => e($logaction->note)
-                            ],
-                        ]
-                    ])->send('Component Checked Out');
-
-            } catch (Exception $e) {
-
-            }
-        }
-
+        $component->logCheckout(e(Input::get('note')), $asset_id);
         return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
     }
 

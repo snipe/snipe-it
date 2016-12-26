@@ -66,4 +66,13 @@ class ConsumablePresenter extends Presenter
     {
         return (string)link_to_route('consumables.show', $this->name, $this->id);
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('consumables.show', $this->id);
+    }
 }

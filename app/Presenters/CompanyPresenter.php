@@ -17,4 +17,13 @@ class CompanyPresenter extends Presenter
     {
         return (string) link_to_route('companies.show', $this->name, $this->id);
     }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('companies.show', $this->id);
+    }
 }

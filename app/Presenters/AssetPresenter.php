@@ -56,9 +56,11 @@ class AssetPresenter extends Presenter
             }
 
         } else {
-            if (Gate::allows('checkin', $this->model)) {
-                $inout = '<a href="' . route('checkin/hardware',
-                        $this->model->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
+            if (!empty($this->model->assigned_to)) {
+                if (Gate::allows('checkin', $this->model)) {
+                    $inout = '<a href="' . route('checkin/hardware',
+                            $this->model->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
+                }
             }
         }
 
@@ -203,6 +205,14 @@ class AssetPresenter extends Presenter
     }
 
     /**
+     * Helper for notification polymorphism.
+     * @return mixed
+     */
+    public function fullName()
+    {
+        return $this->name();
+    }
+    /**
      * Returns the date this item hits EOL.
      * @return false|string
      */
@@ -246,5 +256,14 @@ class AssetPresenter extends Presenter
         $date = date_create($this->purchase_date);
         date_add($date, date_interval_create_from_date_string($this->warranty_months . ' months'));
         return date_format($date, 'Y-m-d');
+    }
+
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('hardware.show', $this->id);
     }
 }

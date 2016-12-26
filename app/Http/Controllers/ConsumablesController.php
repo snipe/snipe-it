@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\CheckoutNotification;
 use Auth;
 use Config;
 use DB;
@@ -267,43 +268,6 @@ class ConsumablesController extends Controller
         ]);
 
         $logaction = $consumable->logCheckout(e(Input::get('note')));
-
-        $settings = Setting::getSettings();
-
-        if ($settings->slack_endpoint) {
-
-            $slack_settings = [
-                'username' => $settings->botname,
-                'channel' => $settings->slack_channel,
-                'link_names' => true
-            ];
-
-            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-            try {
-                    $client->attach([
-                        'color' => 'good',
-                        'fields' => [
-                            [
-                                'title' => 'Checked Out:',
-                                'value' => 'Consumable <'.route('consumables.show', $consumable->id).'|'.$consumable->name
-                                            .'> checked out to <'.route('users.show', $user->id).'|'.$user->fullName()
-                                            .'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->fullName().'>.'
-                            ],
-                            [
-                                'title' => 'Note:',
-                                'value' => e($logaction->note)
-                            ],
-                        ]
-                    ])->send('Consumable Checked Out');
-
-            } catch (Exception $e) {
-
-            }
-        }
-
-        $consumable_user = DB::table('consumables_users')->where('assigned_to', '=', $consumable->assigned_to)->where('consumable_id', '=', $consumable->id)->first();
-
         $data['log_id'] = $logaction->id;
         $data['eula'] = $consumable->getEula();
         $data['first_name'] = $user->first_name;

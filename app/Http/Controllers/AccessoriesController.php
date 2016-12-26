@@ -3,9 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Accessory;
-use App\Models\Actionlog;
 use App\Models\Company;
-use App\Models\Setting;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
@@ -261,48 +259,16 @@ class AccessoriesController extends Controller
         }
 
       // Update the accessory data
-        $accessory->assigned_to                 = e(Input::get('assigned_to'));
+        $accessory->assigned_to = e(Input::get('assigned_to'));
 
-        $accessory->users()->attach($accessory->id, array(
-        'accessory_id' => $accessory->id,
-        'created_at' => Carbon::now(),
-        'user_id' => Auth::user()->id,
-        'assigned_to' => e(Input::get('assigned_to'))));
+        $accessory->users()->attach($accessory->id, [
+            'accessory_id' => $accessory->id,
+            'created_at' => Carbon::now(),
+            'user_id' => Auth::id(),
+            'assigned_to' => $request->get('assigned_to')
+        ]);
 
         $logaction = $accessory->logCheckout(e(Input::get('note')));
-
-        $admin_user = Auth::user();
-        $settings = Setting::getSettings();
-
-        if ($settings->slack_endpoint) {
-
-            $slack_settings = [
-              'username' => $settings->botname,
-              'channel' => $settings->slack_channel,
-              'link_names' => true
-            ];
-
-            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-            try {
-                $client->attach([
-                'color' => 'good',
-                'fields' => [
-                  [
-                  'title' => 'Checked Out:',
-                  'value' => 'Accessory <'.route('accessories.show', $accessory->id).'|'.$accessory->name.'> checked out to <'.route('users.show', $user->id).'|'.$user->present()->fullName().'> by <'.route('users.show', $admin_user->id).'|'.$admin_user->present()->fullName().'>.'
-                  ],
-                  [
-                      'title' => 'Note:',
-                      'value' => e(Input::get('note'))
-                  ],
-                ]
-                ])->send('Accessory Checked Out');
-            } catch (Exception $e) {
-
-            }
-
-        }
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
@@ -315,8 +281,7 @@ class AccessoriesController extends Controller
         $data['expected_checkin'] = '';
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $accessory->requireAcceptance();
-
-
+        // TODO: Port this to new mail notifications
         if (($accessory->requireAcceptance()=='1')  || ($accessory->getEula())) {
 
             Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
@@ -380,46 +345,9 @@ class AccessoriesController extends Controller
 
         $return_to = e($accessory_user->assigned_to);
         $logaction = $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
-        $admin_user = Auth::user();
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-
-            $settings = Setting::getSettings();
-
-            if ($settings->slack_endpoint) {
-
-
-                $slack_settings = [
-                'username' => e($settings->botname),
-                'channel' => e($settings->slack_channel),
-                'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                    $client->attach([
-                        'color' => 'good',
-                        'fields' => [
-                            [
-                                'title' => 'Checked In:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' <'.route('accessories.show', $accessory->id).'|'.e($accessory->name).'> checked in by <'.route('users.show', $admin_user->id).'|'.e($admin_user->present()->fullName()).'>.'
-                            ],
-                            [
-                                'title' => 'Note:',
-                                'value' => e($logaction->note)
-                            ],
-
-                        ]
-                    ])->send('Accessory Checked In');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
-
             if (!is_null($accessory_user->assigned_to)) {
                 $user = User::find($accessory_user->assigned_to);
             }
