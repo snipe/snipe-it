@@ -33,6 +33,22 @@ class License extends Depreciable
         'company_id' => 'integer|nullable',
     );
 
+    public function setExpirationDateAttribute($value)
+    {
+        if($value == '' || $value == '0000-00-00') {
+            $value = null;
+        }
+        $this->attributes['expiration_date'] = $value;
+    }
+
+    public function setTerminationDateAttribute($value)
+    {
+        if($value == '' || $value == '0000-00-00') {
+            $value = null;
+        }
+        $this->attributes['termination_date'] = $value;
+    }
+
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');

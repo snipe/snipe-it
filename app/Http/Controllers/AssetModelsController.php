@@ -75,19 +75,9 @@ class AssetModelsController extends Controller
         // Create a new asset model
         $model = new AssetModel;
 
-        if ($request->input('depreciation_id') == '') {
-            $model->depreciation_id =  0;
-        } else {
-            $model->depreciation_id = $request->input('depreciation_id');
-        }
-
-        if ($request->input('eol') == '') {
-            $model->eol =  0;
-        } else {
-            $model->eol = $request->input('eol');
-        }
-
         // Save the model data
+        $model->eol = $request->input('eol');
+        $model->depreciation_id = $request->input('depreciation_id');
         $model->name                = $request->input('name');
         $model->model_number        = $request->input('model_number');
         $model->manufacturer_id     = $request->input('manufacturer_id');
@@ -199,18 +189,8 @@ class AssetModelsController extends Controller
             return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
-        if ($request->input('depreciation_id') == '') {
-            $model->depreciation_id =  0;
-        } else {
-            $model->depreciation_id = $request->input('depreciation_id');
-        }
-
-        if ($request->input('eol') == '') {
-            $model->eol =  null;
-        } else {
-            $model->eol = $request->input('eol');
-        }
-
+        $model->depreciation_id = $request->input('depreciation_id');
+        $model->eol = $request->input('eol');
         $model->name                = $request->input('name');
         $model->model_number        = $request->input('model_number');
         $model->manufacturer_id     = $request->input('manufacturer_id');

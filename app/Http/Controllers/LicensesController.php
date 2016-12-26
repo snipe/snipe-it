@@ -95,72 +95,29 @@ class LicensesController extends Controller
         $this->authorize('create', License::class);
         // create a new model instance
         $license = new License();
-
-        if ($request->input('purchase_cost') == '') {
-            $license->purchase_cost =  null;
-        } else {
-            $license->purchase_cost = Helper::ParseFloat($request->input('purchase_cost'));
-        }
-
-        if ($request->input('supplier_id') == '') {
-            $license->supplier_id = null;
-        } else {
-            $license->supplier_id = $request->input('supplier_id');
-        }
-
-        if ($request->input('maintained') == '') {
-            $license->maintained = 0;
-        } else {
-            $license->maintained = $request->input('maintained');
-        }
-
-        if ($request->input('reassignable') == '') {
-            $license->reassignable = 0;
-        } else {
-            $license->reassignable = $request->input('reassignable');
-        }
-
-        if ($request->input('purchase_order') == '') {
-            $license->purchase_order = '';
-        } else {
-            $license->purchase_order = $request->input('purchase_order');
-        }
-
-        if (empty($request->input('manufacturer_id'))) {
-            $license->manufacturer_id = null;
-        } else {
-            $license->manufacturer_id = $request->input('manufacturer_id');
-        }
-
         // Save the license data
-        $license->name              = $request->input('name');
-        $license->serial            = $request->input('serial');
+        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $license->depreciation_id   = $request->input('depreciation_id');
+        $license->expiration_date   = $request->input('expiration_date');
         $license->license_email     = $request->input('license_email');
         $license->license_name      = $request->input('license_name');
+        $license->maintained        = $request->input('maintained', 0);
+        $license->manufacturer_id   = $request->input('manufacturer_id');
+        $license->name              = $request->input('name');
         $license->notes             = $request->input('notes');
         $license->order_number      = $request->input('order_number');
-        $license->seats             = $request->input('seats');
+        $license->purchase_cost     = $request->input('purchase_cost');
         $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
-        $license->depreciation_id   = $request->input('depreciation_id');
-        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
-        $license->expiration_date   = $request->input('expiration_date');
+        $license->purchase_order    = $request->input('purchase_order');
+        $license->reassignable      = $request->input('reassignable', 0);
+        $license->seats             = $request->input('seats');
+        $license->serial            = $request->input('serial');
+        $license->supplier_id       = $request->input('supplier_id');
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
 
-        if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
-            $license->purchase_date = null;
-        }
-
-        if (($license->expiration_date == "") || ($license->expiration_date == "0000-00-00")) {
-            $license->expiration_date = null;
-        }
-
-        if (($license->purchase_cost == "") || ($license->purchase_cost == "0.00")) {
-            $license->purchase_cost = null;
-        }
-
-            // Was the license created?
+        // Was the license created?
         if ($license->save()) {
             $license->logCreate();
             $insertedId = $license->id;
@@ -197,14 +154,6 @@ class LicensesController extends Controller
         }
 
         $this->authorize('update', $item);
-
-        if ($item->purchase_date == "0000-00-00") {
-            $item->purchase_date = null;
-        }
-
-        if ($item->purchase_cost == "0.00") {
-            $item->purchase_cost = null;
-        }
 
         $maintained_list = [
             '' => 'Maintained',
@@ -243,73 +192,24 @@ class LicensesController extends Controller
         $this->authorize('update', $license);
 
       // Update the license data
-        $license->name              = $request->input('name');
-        $license->serial            = $request->input('serial');
+        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $license->depreciation_id   = $request->input('depreciation_id');
+        $license->expiration_date   = $request->input('expiration_date');
         $license->license_email     = $request->input('license_email');
         $license->license_name      = $request->input('license_name');
+        $license->maintained        = $request->input('maintained');
+        $license->maintained = $request->input('maintained', 0);
+        $license->name              = $request->input('name');
         $license->notes             = $request->input('notes');
         $license->order_number      = $request->input('order_number');
-        $license->depreciation_id   = $request->input('depreciation_id');
-        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $license->purchase_cost     = $request->input('purchase_cost');
+        $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
-        $license->maintained        = $request->input('maintained');
+        $license->purchase_order = $request->input('purchase_order');
         $license->reassignable      = $request->input('reassignable');
-
-        if (empty($request->input('manufacturer_id'))) {
-            $license->manufacturer_id = null;
-        } else {
-            $license->manufacturer_id = $request->input('manufacturer_id');
-        }
-
-
-        if ($request->input('supplier_id') == '') {
-            $license->supplier_id = null;
-        } else {
-            $license->supplier_id = $request->input('supplier_id');
-        }
-
-      // Update the asset data
-        if ($request->input('purchase_date') == '') {
-              $license->purchase_date =  null;
-        } else {
-              $license->purchase_date = $request->input('purchase_date');
-        }
-
-        if ($request->input('expiration_date') == '') {
-            $license->expiration_date = null;
-        } else {
-            $license->expiration_date = $request->input('expiration_date');
-        }
-
-        if ($request->input('termination_date') == '') {
-            $license->termination_date =  null;
-        } else {
-            $license->termination_date = $request->input('termination_date');
-        }
-
-        if ($request->input('purchase_cost') == '') {
-            $license->purchase_cost =  null;
-        } else {
-            $license->purchase_cost = Helper::ParseFloat($request->input('purchase_cost'));
-        }
-
-        if ($request->input('maintained') == '') {
-            $license->maintained = 0;
-        } else {
-            $license->maintained = $request->input('maintained');
-        }
-
-        if ($request->input('reassignable') == '') {
-            $license->reassignable = 0;
-        } else {
-            $license->reassignable = $request->input('reassignable');
-        }
-
-        if ($request->input('purchase_order') == '') {
-            $license->purchase_order = '';
-        } else {
-            $license->purchase_order = $request->input('purchase_order');
-        }
+        $license->reassignable = $request->input('reassignable', 0);
+        $license->serial            = $request->input('serial');
+        $license->termination_date  = $request->input('termination_date');
 
         //Are we changing the total number of seats?
         if ($license->seats != $request->input('seats')) {

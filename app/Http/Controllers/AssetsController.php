@@ -153,23 +153,17 @@ class AssetsController extends Controller
         $asset->notes                   = Input::get('notes');
         $asset->asset_tag               = Input::get('asset_tag');
         $asset->user_id                 = Auth::id();
-        $asset->archived                    = '0';
-        $asset->physical                    = '1';
-        $asset->depreciate                  = '0';
-
-        $asset->status_id =  request('status_id',0);
-        $asset->warranty_months = request('warranty_months', null);
-
-        if (Input::get('purchase_cost') == '') {
-            $asset->purchase_cost =  null;
-        } else {
-            $asset->purchase_cost = Helper::ParseFloat(Input::get('purchase_cost'));
-        }
-        $asset->purchase_date = request('purchase_date', null);
-        $asset->assigned_to = request('assigned_to', null);
-        $asset->supplier_id = request('supplier_id', 0);
-        $asset->requestable = request('requestable', 0);
-        $asset->rtd_location_id = request('rtd_location_id', null);
+        $asset->archived                = '0';
+        $asset->physical                = '1';
+        $asset->depreciate              = '0';
+        $asset->status_id               =  request('status_id',0);
+        $asset->warranty_months         = request('warranty_months', null);
+        $asset->purchase_cost           = Helper::ParseFloat(Input::get('purchase_cost'));
+        $asset->purchase_date           = request('purchase_date', null);
+        $asset->assigned_to             = request('assigned_to', null);
+        $asset->supplier_id             = request('supplier_id', 0);
+        $asset->requestable             = request('requestable', 0);
+        $asset->rtd_location_id         = request('rtd_location_id', null);
 
         // Create the image (if one was chosen.)
         if (Input::has('image')) {
@@ -285,44 +279,15 @@ class AssetsController extends Controller
         }
         $this->authorize($asset);
 
-        if ($request->has('status_id')) {
-            $asset->status_id = $request->input('status_id');
-        } else {
-            $asset->status_id =  null;
-        }
-
-        if ($request->has('warranty_months')) {
-            $asset->warranty_months = $request->input('warranty_months');
-        } else {
-            $asset->warranty_months =  null;
-        }
-
-        if ($request->has('purchase_cost')) {
-            $asset->purchase_cost = Helper::ParseFloat($request->input('purchase_cost'));
-        } else {
-            $asset->purchase_cost =  null;
-        }
-
-        if ($request->has('purchase_date')) {
-            $asset->purchase_date = $request->input('purchase_date');
-        } else {
-            $asset->purchase_date =  null;
-        }
-
-        if ($request->has('supplier_id')) {
-            $asset->supplier_id = $request->input('supplier_id');
-        } else {
-            $asset->supplier_id =  null;
-        }
+        $asset->status_id = $request->input('status_id', null);
+        $asset->warranty_months = $request->input('warranty_months', null);
+        $asset->purchase_cost = Helper::ParseFloat($request->input('purchase_cost', null));
+        $asset->purchase_date = $request->input('purchase_date', null);
+        $asset->supplier_id = $request->input('supplier_id', null);
 
         // If the box isn't checked, it's not in the request at all.
         $asset->requestable = $request->has('requestable');
-
-        if ($request->has('rtd_location_id')) {
-            $asset->rtd_location_id = $request->input('rtd_location_id');
-        } else {
-            $asset->rtd_location_id =  null;
-        }
+        $asset->rtd_location_id = $request->input('rtd_location_id', null);
 
         if ($request->has('image_delete')) {
             unlink(public_path().'/uploads/assets/'.$asset->image);

@@ -90,19 +90,8 @@ class ComponentsController extends Controller
         $component->order_number           = Input::get('order_number');
         $component->min_amt                = Input::get('min_amt');
         $component->serial                 = Input::get('serial');
-
-        if (Input::get('purchase_date') == '') {
-            $component->purchase_date       =  null;
-        } else {
-            $component->purchase_date       = Input::get('purchase_date');
-        }
-
-        if (Input::get('purchase_cost') == '0.00') {
-            $component->purchase_cost       =  null;
-        } else {
-            $component->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
-        }
-
+        $component->purchase_date       = Input::get('purchase_date');
+        $component->purchase_cost       = request('purchase_cost');
         $component->qty                    = Input::get('qty');
         $component->user_id                = Auth::id();
 
@@ -169,19 +158,8 @@ class ComponentsController extends Controller
         $component->order_number           = Input::get('order_number');
         $component->min_amt                = Input::get('min_amt');
         $component->serial                 = Input::get('serial');
-
-        if (Input::get('purchase_date') == '') {
-            $component->purchase_date       =  null;
-        } else {
-            $component->purchase_date       = Input::get('purchase_date');
-        }
-
-        if (Input::get('purchase_cost') == '0.00') {
-            $component->purchase_cost       =  null;
-        } else {
-            $component->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
-        }
-
+        $component->purchase_date          = Input::get('purchase_date');
+        $component->purchase_cost          = request('purchase_cost');
         $component->qty                    = Input::get('qty');
 
         if ($component->save()) {

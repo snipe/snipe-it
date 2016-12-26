@@ -82,22 +82,11 @@ class ConsumablesController extends Controller
         $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $consumable->order_number           = Input::get('order_number');
         $consumable->min_amt                = Input::get('min_amt');
-        $consumable->manufacturer_id         = Input::get('manufacturer_id');
-        $consumable->model_number               = Input::get('model_number');
-        $consumable->item_no         = Input::get('item_no');
-
-        if (Input::get('purchase_date') == '') {
-            $consumable->purchase_date       =  null;
-        } else {
-            $consumable->purchase_date       = Input::get('purchase_date');
-        }
-
-        if (Input::get('purchase_cost') == '0.00') {
-            $consumable->purchase_cost       =  null;
-        } else {
-            $consumable->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
-        }
-
+        $consumable->manufacturer_id        = Input::get('manufacturer_id');
+        $consumable->model_number           = Input::get('model_number');
+        $consumable->item_no                = Input::get('item_no');
+        $consumable->purchase_date          = Input::get('purchase_date');
+        $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
         $consumable->qty                    = Input::get('qty');
         $consumable->user_id                = Auth::id();
 
@@ -109,7 +98,6 @@ class ConsumablesController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($consumable->getErrors());
-
 
     }
 
@@ -166,19 +154,8 @@ class ConsumablesController extends Controller
         $consumable->manufacturer_id         = Input::get('manufacturer_id');
         $consumable->model_number               = Input::get('model_number');
         $consumable->item_no         = Input::get('item_no');
-
-        if (Input::get('purchase_date') == '') {
-            $consumable->purchase_date       =  null;
-        } else {
-            $consumable->purchase_date       = Input::get('purchase_date');
-        }
-
-        if (Input::get('purchase_cost') == '0.00') {
-            $consumable->purchase_cost       =  null;
-        } else {
-            $consumable->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
-        }
-
+        $consumable->purchase_date       = Input::get('purchase_date');
+        $consumable->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
 
         if ($consumable->save()) {

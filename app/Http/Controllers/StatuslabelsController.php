@@ -112,13 +112,13 @@ class StatuslabelsController extends Controller
 
         // Save the Statuslabel data
         $statusLabel->name              = Input::get('name');
-        $statusLabel->user_id          = Auth::id();
-        $statusLabel->notes          =  Input::get('notes');
-        $statusLabel->deployable          =  $statusType['deployable'];
-        $statusLabel->pending          =  $statusType['pending'];
+        $statusLabel->user_id           = Auth::id();
+        $statusLabel->notes             =  Input::get('notes');
+        $statusLabel->deployable        =  $statusType['deployable'];
+        $statusLabel->pending           =  $statusType['pending'];
         $statusLabel->archived          =  $statusType['archived'];
-        $statusLabel->color          =  Input::get('color');
-        $statusLabel->show_in_nav          =  Input::get('show_in_nav', 0);
+        $statusLabel->color             =  Input::get('color');
+        $statusLabel->show_in_nav       =  Input::get('show_in_nav', 0);
 
 
         // Was the asset created?

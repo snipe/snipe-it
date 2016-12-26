@@ -27,4 +27,15 @@ class AssetModelTest extends \Codeception\TestCase\Test
       $this->tester->seeRecord('models', $values);
     }
 
+    /**
+     * @test
+     */
+    public function it_zeros_blank_eol_but_not_others()
+    {
+        $am = new AssetModel;
+        $am->eol = '';
+        $this->assertTrue($am->eol === 0);
+        $am->eol = '4';
+        $this->assertTrue($am->eol==4);
+    }
 }
