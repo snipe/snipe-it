@@ -89,7 +89,6 @@
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         </div><!-- /.input group -->
 
-
         {!! $errors->first('termination_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>

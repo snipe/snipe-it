@@ -15,7 +15,6 @@
 {{-- Page content --}}
 @section('content')
 
-
 <div class="row">
   <div class="col-md-12">
 
@@ -33,9 +32,11 @@
           </table>
         </div>
       </div>
+    </div>
   </div>
 </div>
 
+@stop
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', [
@@ -43,7 +44,4 @@
     'search' => true,
     'columns' => \App\Presenters\AccessoryPresenter::dataTableLayout()
     ])
-@stop
-
-
 @stop

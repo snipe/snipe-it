@@ -15,7 +15,6 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-
           <table class="table table-striped">
             <thead>
               <th>File</th>
@@ -24,20 +23,24 @@
               <th></th>
             </thead>
             <tbody>
-              @foreach ($files as $file)
-              <tr>
-                <td><a href="backups/download/{{ $file['filename'] }}">{{ $file['filename'] }}</a></td>
-                <td>{{ date("M d, Y g:i A", $file['modified']) }} </td>
-                <td>{{ $file['filesize'] }}</td>
-                <td>
-                    <a data-html="false"
-                    class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
-                        <i class="fa fa-trash icon-white"></i>
-                    </a>
-                </td>
-              </tr>
-              @endforeach
-              </tbody>
+            @foreach ($files as $file)
+            <tr>
+              <td><a href="backups/download/{{ $file['filename'] }}">{{ $file['filename'] }}</a></td>
+              <td>{{ date("M d, Y g:i A", $file['modified']) }} </td>
+              <td>{{ $file['filesize'] }}</td>
+              <td>
+                  {{ Helper::generateDatatableButton(
+                    'delete',
+                    route('settings/delete-file', $file['filename']),
+                    config('app.lock_passwords'),
+                    trans('admin/settings/message.backup.delete_confirm'),
+                    $file['filename']
+                    )
+                  }}
+              </td>
+            </tr>
+            @endforeach
+            </tbody>
           </table>
       </div>
     </div>

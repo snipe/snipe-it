@@ -20,33 +20,29 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-
-        <table
-        name="manufacturers"
-        class="table table-striped snipe-table"
-        id="table"
-        data-url="{{route('api.manufacturers.list') }}"
-        data-cookie="true"
-        data-click-to-select="true"
-        data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">
+          <table
+          name="manufacturers"
+          class="table table-striped snipe-table"
+          id="table"
+          data-url="{{route('api.manufacturers.list') }}"
+          data-cookie="true"
+          data-click-to-select="true"
+          data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">
             <thead>
-                <tr>
-                    <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-sortable="true" data-field="name">{{ trans('admin/manufacturers/table.name') }}</th>
-                    <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="assets">{{ trans('general.assets') }}</th>
-                    <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="licenses">{{ trans('general.licenses') }}</th>
-                    <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="accessories">{{ trans('general.accessories') }}</th>
-                    <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="consumables">{{ trans('general.consumables') }}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
-                </tr>
+              <tr>
+                <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+                <th data-sortable="true" data-field="name">{{ trans('admin/manufacturers/table.name') }}</th>
+                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="assets">{{ trans('general.assets') }}</th>
+                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="licenses">{{ trans('general.licenses') }}</th>
+                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="accessories">{{ trans('general.accessories') }}</th>
+                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="consumables">{{ trans('general.consumables') }}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+              </tr>
             </thead>
-        </table>
-
-      </div>
+          </table>
+        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
-
-
   </div>
 </div>
 

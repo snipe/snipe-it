@@ -8,7 +8,7 @@
 
 @section('inputFields')
 
-@include ('partials.forms.edit.name', ['translated_name' => trans('admin/categories/general.category_name')])
+@include ('partials.forms.edit.name', ['translated_name' => trans('admin/categories/general.`name')])
 
 <!-- Type -->
 <div class="form-group {{ $errors->has('category_type') ? ' has-error' : '' }}">
@@ -65,7 +65,6 @@
 
 @section('content')
 @parent
-
 
 @if ($snipeSettings->default_eula_text!='')
 <!-- Modal -->

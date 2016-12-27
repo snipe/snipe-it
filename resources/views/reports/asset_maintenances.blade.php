@@ -10,85 +10,84 @@
 @section('content')
 <div class="row">
   <div class="col-md-12">
+    <div class="box box-default">
+      <div class="box-body">
 
-  <div class="box box-default">
-    <div class="box-body">
+        <div class="table-responsive">
+          <table
+          name="maintenancesReport"
+          id="table"
+          data-cookie="true"
+          data-click-to-select="true"
+          data-cookie-id-table="maintenancesReportTable">
 
-      <div class="table-responsive">
-             <table
-             name="maintenancesReport"
-             id="table"
-             data-cookie="true"
-             data-click-to-select="true"
-             data-cookie-id-table="maintenancesReportTable">
-
-                <thead>
-                    <tr role="row">
-                        <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
-                        <th class="col-sm-1">{{ trans('general.supplier') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.title') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
-                        <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.cost') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <thead>
+              <tr role="row">
+                <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
+                <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th class="col-sm-1">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
+                <th class="col-sm-1">{{ trans('general.supplier') }}</th>
+                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
+                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.title') }}</th>
+                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
+                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
+                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
+                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.cost') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $totalDays = 0;
+              $totalCost = 0;
+              ?>
+              @foreach ($assetMaintenances as $assetMaintenance)
+              <tr>
+                <td>{{ is_null($assetMaintenance->asset->company) ? '' : $assetMaintenance->asset->company->name }}</td>
+                <td>{{ $assetMaintenance->asset->asset_tag }}</td>
+                <td>{{ $assetMaintenance->asset->name }}</td>
+                <td>{{ $assetMaintenance->supplier->name }}</td>
+                <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
+                <td>{{ $assetMaintenance->title }}</td>
+                <td>{{ $assetMaintenance->start_date }}</td>
+                <td>{{ is_null($assetMaintenance->completion_date) ? trans('admin/asset_maintenances/message.asset_maintenance_incomplete') : $assetMaintenance->completion_date }}</td>
+                @if (is_null($assetMaintenance->asset_maintenance_time))
                 <?php
-                    $totalDays = 0;
-                    $totalCost = 0;
+                $assetMaintenanceTime = intval(Carbon::now()->diffInDays(Carbon::parse($assetMaintenance->start_date)));
                 ?>
-                @foreach ($assetMaintenances as $assetMaintenance)
-                    <tr>
-                        <td>{{ is_null($assetMaintenance->asset->company) ? '' : $assetMaintenance->asset->company->name }}</td>
-                        <td>{{ $assetMaintenance->asset->asset_tag }}</td>
-                        <td>{{ $assetMaintenance->asset->name }}</td>
-                        <td>{{ $assetMaintenance->supplier->name }}</td>
-                        <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
-                        <td>{{ $assetMaintenance->title }}</td>
-                        <td>{{ $assetMaintenance->start_date }}</td>
-                        <td>{{ is_null($assetMaintenance->completion_date) ? trans('admin/asset_maintenances/message.asset_maintenance_incomplete') : $assetMaintenance->completion_date }}</td>
-                        @if (is_null($assetMaintenance->asset_maintenance_time))
-                            <?php
-                                $assetMaintenanceTime = intval(Carbon::now()->diffInDays(Carbon::parse($assetMaintenance->start_date)));
-                            ?>
-                        @else
-                            <?php
-                                $assetMaintenanceTime = intval($assetMaintenance->asset_maintenance_time);
-                            ?>
-                        @endif
-                        <td>{{ $assetMaintenanceTime }}</td>
-                        <td>
-                          {{ $snipeSettings->default_currency }}
-                          {{ number_format($assetMaintenance->cost,2) }}
-                        </td>
-                    </tr>
-                    <?php
-                        $totalDays += $assetMaintenanceTime;
-                        $totalCost += floatval($assetMaintenance->cost);
-                    ?>
-                @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="6" align="right"><strong>Totals:</strong></td>
-                        <td>{{number_format($totalDays)}}</td>
-                        <td>
-                          {{ $snipeSettings->default_currency }}
-                          {{ number_format($totalCost,2) }}
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                @else
+                <?php
+                $assetMaintenanceTime = intval($assetMaintenance->asset_maintenance_time);
+                ?>
+                @endif
+                <td>{{ $assetMaintenanceTime }}</td>
+                <td>
+                  {{ $snipeSettings->default_currency }}
+                  {{ number_format($assetMaintenance->cost,2) }}
+                </td>
+              </tr>
+              <?php
+              $totalDays += $assetMaintenanceTime;
+              $totalCost += floatval($assetMaintenance->cost);
+              ?>
+              @endforeach
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6" align="right"><strong>Totals:</strong></td>
+                <td>{{number_format($totalDays)}}</td>
+                <td>
+                  {{ $snipeSettings->default_currency }}
+                  {{ number_format($totalCost,2) }}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
-
+@stop
 
 @section('moar_scripts')
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
@@ -129,5 +128,4 @@
 
   });
 </script>
-@stop
 @stop

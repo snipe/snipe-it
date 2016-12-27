@@ -65,7 +65,7 @@ class UserPresenter extends Presenter
         $result = [
             'id'            => $this->id,
             'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($this->id).']" class="one_required"></div>' : '',
-            'name'          => $this->fullName(),
+            'name'          => $this->nameUrl(),
             'jobtitle'      => $this->jobtitle,
             'email'         => $this->emailLink(),
             'username'      => $this->username,

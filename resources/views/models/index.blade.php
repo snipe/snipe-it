@@ -53,12 +53,11 @@
         </table>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
-
-
   </div>
 </div>
 
 @stop
+
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'models-export', 'search' => true])
 

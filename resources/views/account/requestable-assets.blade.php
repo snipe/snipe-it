@@ -66,15 +66,13 @@
                                             {{ $asset->defaultLoc->name }}
                                             @endif
                                         </td>
-                                         @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
+                                        @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
                                             <td>Checked out</td>
                                         @else
-                                        <td>{{ trans('admin/hardware/general.requestable') }}</td>
+                                            <td>{{ trans('admin/hardware/general.requestable') }}</td>
                                         @endif
 
                                         <td>{{ $asset->expected_checkin }}</td>
-
-
                                         <td>
                                             @if ($asset->isRequestedBy(Auth::user()))
                                                 {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
@@ -89,7 +87,6 @@
                         </table>
                     </div>
 
-
                     @else
                     <div class="col-md-12">
                         <div class="alert alert-info alert-block">
@@ -97,8 +94,6 @@
                             {{ trans('general.no_results') }}
                         </div>
                     </div>
-
-
                     @endif
                 </div>
 
@@ -114,13 +109,12 @@
                                 <th class="col-md-2" bSortable="true">{{ trans('general.quantity') }}</th>
                                 <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
                             </tr>
-                    </thead>
+                        </thead>
 
                         <tbody>
                             @foreach($models as $requestableModel)
-
                                 <tr>
-                                     <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
+                                    <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
                                             method="POST"
                                             accept-charset="utf-8"
                                     >
@@ -155,10 +149,9 @@
         </div> <!-- .nav-tabs-custom -->
     </div> <!-- .col-md-12> -->
 </div> <!-- .row -->
-
-
-
 @stop
+
+
 @section('moar_scripts')
 <script>
 

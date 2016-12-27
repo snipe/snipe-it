@@ -24,12 +24,10 @@
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-
-
 			@if ($accessory->name)
             <!-- accessory name -->
             <div class="form-group">
-            <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
+                <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
                 <div class="col-md-6">
                   <p class="form-control-static">{{ $accessory->name }}</p>
                 </div>
@@ -40,13 +38,15 @@
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                 <div class="col-md-7">
-                    <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $accessory->note) }}</textarea>
+                    <textarea class="col-md-6 form-control" id="note" name="note">
+                        {{ Input::old('note', $accessory->note) }}
+                    </textarea>
                     {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
             </div>
             <!-- Form actions -->
                 <div class="form-group">
-                <label class="col-md-2 control-label"></label>
+                    <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
                         <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i>{{ trans('general.checkin') }}</button>
@@ -54,7 +54,7 @@
                 </div>
 
 </form>
-</div>
-</div>
+</div> <!-- .col-md-10.column -->
+</div> <!-- .row.form-wrapper -->
 
 @stop

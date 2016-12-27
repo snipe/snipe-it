@@ -39,13 +39,13 @@ Asset Depreciations
         </div>
       </div>
     </div>
-  </div>
+  </div> <!-- /.col-md-9-->
 
 
   <!-- side address column -->
   <div class="col-md-3">
-      <h4>{{ trans('admin/depreciations/general.about_asset_depreciations') }}</h4>
-      <p>{{ trans('admin/depreciations/general.about_depreciations') }} </p>
+    <h4>{{ trans('admin/depreciations/general.about_asset_depreciations') }}</h4>
+    <p>{{ trans('admin/depreciations/general.about_depreciations') }} </p>
   </div>
 
 </div>
