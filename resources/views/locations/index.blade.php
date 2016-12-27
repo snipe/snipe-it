@@ -12,13 +12,11 @@
 @stop
 {{-- Page content --}}
 @section('content')
-
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-
           <table
           name="locations"
           class="table table-striped snipe-table"
@@ -52,12 +50,12 @@
           </table>
         </div>
       </div>
+    </div>
   </div>
 </div>
+
 @stop
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'locations-export', 'search' => true])
-
-
 @stop

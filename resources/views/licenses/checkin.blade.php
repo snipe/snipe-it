@@ -7,42 +7,35 @@
 @stop
 
 @section('header_right')
-    <a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
-        {{ trans('general.back') }}</a>
+<a href="{{ URL::previous() }}" class="btn btn-primary pull-right">{{ trans('general.back') }}</a>
 @stop
 
 {{-- Page content --}}
 @section('content')
-
-
-
 <div class="row form-wrapper">
-<!-- left column -->
-<div class="col-md-10 column">
+    <!-- left column -->
+    <div class="col-md-10 column">
 
-@if ($backto=='user')
-	<form class="form-horizontal" method="post" action="{{ route('licenses.checkin', array('licenseeat_id'=> $licenseseat->id, 'backto'=>'user')) }}" autocomplete="off">
-@else
-	<form class="form-horizontal" method="post" action="{{ route('licenses.checkin', $licenseseat->id) }}" autocomplete="off">
-@endif
-
-    <!-- CSRF Token -->
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
+        @if ($backto=='user')
+        <form class="form-horizontal" method="post" action="{{ route('licenses.checkin', array('licenseeat_id'=> $licenseseat->id, 'backto'=>'user')) }}" autocomplete="off">
+        @else
+        <form class="form-horizontal" method="post" action="{{ route('licenses.checkin', $licenseseat->id) }}" autocomplete="off">
+        @endif
+        {{csrf_field()}}
 
             <!-- Asset name -->
             <div class="form-group">
-            <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
+                <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
                 <div class="col-md-6">
-                  <p class="form-control-static">{{ $licenseseat->license->name }}</p>
+                    <p class="form-control-static">{{ $licenseseat->license->name }}</p>
                 </div>
             </div>
 
             <!-- Serial -->
             <div class="form-group">
-            <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.serial') }}</label>
+                <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.serial') }}</label>
                 <div class="col-md-6">
-                  <p class="form-control-static">{{ $licenseseat->license->serial }}</p>
+                    <p class="form-control-static">{{ $licenseseat->license->serial }}</p>
                 </div>
             </div>
 
@@ -55,17 +48,15 @@
                 </div>
             </div>
             <!-- Form actions -->
-                <div class="form-group">
+            <div class="form-group">
                 <label class="col-md-2 control-label"></label>
-                    <div class="col-md-7">
-                        <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
-                    </div>
+                <div class="col-md-7">
+                    <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
                 </div>
-
-
-</form>
-</div>
+            </div>
+        </form>
+    </div> <!-- .col-md-10-->
 </div>
 
 @stop

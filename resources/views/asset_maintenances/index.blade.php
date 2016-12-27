@@ -2,8 +2,8 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/asset_maintenances/general.asset_maintenances') }}
-@parent
+  {{ trans('admin/asset_maintenances/general.asset_maintenances') }}
+  @parent
 @stop
 
 
@@ -13,28 +13,24 @@
   @endcan
 @stop
 
-
 {{-- Page content --}}
 @section('content')
 
-
-
 <div class="row">
   <div class="col-md-12">
-
     <div class="box box-default">
-        <div class="box-body">
-
-          <table
+      <div class="box-body">
+        <table
           name="maintenances"
           id="table"
           class="table table-striped snipe-table"
           data-url="{{route('api.asset_maintenances.list') }}"
           data-cookie="true"
           data-click-to-select="true"
-          data-cookie-id-table="maintenancesTable-{{ config('version.hash_version') }}">
-            <thead>
-              <tr>
+          data-cookie-id-table="maintenancesTable-{{ config('version.hash_version') }}"
+        >
+          <thead>
+            <tr>
               <th data-field="companyName" data-sortable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
               <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
               <th data-sortable="false" data-field="asset_name">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
@@ -47,16 +43,17 @@
               <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right">{{ trans('admin/asset_maintenances/form.cost') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="user_id">{{ trans('general.admin') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
-                @can('update', \App\Models\Asset::class)
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+              @can('update', \App\Models\Asset::class)
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               @endcan
-              </tr>
-            </thead>
-          </table>
+            </tr>
+          </thead>
+        </table>
 
-        </div>
+      </div>
     </div>
   </div>
+</div>
 @stop
 
 @section('moar_scripts')

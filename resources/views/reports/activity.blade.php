@@ -9,15 +9,12 @@
 {{-- Page content --}}
 @section('content')
 
-
-
 <div class="row">
-  <div class="col-md-12">
+    <div class="col-md-12">
+        <div class="box box-default">
+            <div class="box-body">
 
-  <div class="box box-default">
-    <div class="box-body">
-
-        <table
+                <table
                 name="activityReport"
                 data-toolbar="#toolbar"
                 class="table table-striped snipe-table"
@@ -25,24 +22,22 @@
                 data-url="{{ route('api.activity.list') }}"
                 data-cookie="true"
                 data-cookie-id-table="activityReportTable">
-            <thead>
-            <tr>
-                <th class="col-sm-1" data-field="admin">{{ trans('general.admin') }}</th>
-                <th class="col-sm-1" data-field="action_type">{{ trans('general.action') }}</th>
-                <th class="col-sm-1" data-field="item_type">{{ trans('general.type') }}</th>
-                <th class="col-sm-1" data-field="item">{{ trans('general.item') }}</th>
-                <th class="col-sm-1" data-field="target">To</th>
-                <th class="col-sm-1" data-field="created_at">{{ trans('general.date') }}</th>
-                <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
-            </tr>
-            </thead>
-
-        </table>
-
-
+                    <thead>
+                        <tr>
+                            <th class="col-sm-1" data-field="admin">{{ trans('general.admin') }}</th>
+                            <th class="col-sm-1" data-field="action_type">{{ trans('general.action') }}</th>
+                            <th class="col-sm-1" data-field="item_type">{{ trans('general.type') }}</th>
+                            <th class="col-sm-1" data-field="item">{{ trans('general.item') }}</th>
+                            <th class="col-sm-1" data-field="target">To</th>
+                            <th class="col-sm-1" data-field="created_at">{{ trans('general.date') }}</th>
+                            <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
-    </div>
-  </div>
+</div>
 @stop
 
 

@@ -55,7 +55,7 @@ class CategoriesController extends Controller
         // Show the page
          $category_types= Helper::categoryTypeList();
         return View::make('categories/edit')->with('item', new Category)
-        ->with('category_types', $category_types);
+            ->with('category_types', $category_types);
     }
 
 

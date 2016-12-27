@@ -193,14 +193,13 @@ class AssetPresenter extends Presenter
      **/
     public function name()
     {
-
         if (empty($this->name)) {
             if (isset($this->model)) {
                 return $this->model->name.' ('.$this->asset_tag.')';
             }
             return $this->asset_tag;
         } else {
-            return $this->name;
+            return $this->name.' ('.$this->asset_tag.')';
         }
     }
 

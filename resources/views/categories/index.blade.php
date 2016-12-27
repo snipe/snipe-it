@@ -15,21 +15,20 @@
 {{-- Page content --}}
 @section('content')
 
-
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-
           <table
-          class="table table-striped snipe-table"
-          name="categories"
-          id="table"
-          data-url="{{route('api.categories.list') }}"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="categoriesTable-{{ config('version.hash_version') }}">
+            class="table table-striped snipe-table"
+            name="categories"
+            id="table"
+            data-url="{{route('api.categories.list') }}"
+            data-cookie="true"
+            data-click-to-select="true"
+            data-cookie-id-table="categoriesTable-{{ config('version.hash_version') }}"
+          >
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
@@ -42,12 +41,9 @@
               </tr>
             </thead>
           </table>
-
-      </div>
+        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
-
-
   </div>
 </div>
 

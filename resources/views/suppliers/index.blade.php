@@ -14,8 +14,6 @@
 <a href="{{ route('suppliers.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
 @stop
 
-
-
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">

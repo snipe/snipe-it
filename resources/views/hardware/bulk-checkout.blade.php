@@ -6,125 +6,105 @@
 @parent
 @stop
 
-
 {{-- Page content --}}
 @section('content')
 
 <style>
-.input-group {
+  .input-group {
     padding-left: 0px !important;
-}
+  }
 </style>
 
 
 <div class="row">
+  <!-- left column -->
+  <div class="col-md-7">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title"> {{ trans('admin/hardware/form.tag') }} </h3>
+      </div>
+      <div class="box-body">
+        <form class="form-horizontal" method="post" action="" autocomplete="off">
+          {{ csrf_field() }}
 
-    <!-- left column -->
-    <div class="col-md-7">
+          <!-- User -->
+          <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
 
-          <div class="box box-default">
-              <div class="box-header with-border">
-                  <h3 class="box-title"> {{ trans('admin/hardware/form.tag') }} </h3>
-              </div>
-              <div class="box-body">
-                <form class="form-horizontal" method="post" action="" autocomplete="off">
-                <!-- CSRF Token -->
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            {{ Form::label('assigned_to', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+            <div class="col-md-7 required">
+              {{ Form::select('assigned_to', $users_list , Input::old('assigned_to'), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'width:100%')) }}
 
-
-                    <!-- User -->
-                    <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-
-                            {{ Form::label('assigned_to', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-
-                        <div class="col-md-7 required">
-                            {{ Form::select('assigned_to', $users_list , Input::old('assigned_to'), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'width:100%')) }}
-
-                            {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                        </div>
-                        <div class="col-md-1 col-sm-1 text-left">
-                            <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
-                        </div>
-                    </div>
-
-                    <!-- Checkout/Checkin Date -->
-                  <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
-
-                      {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
-
-                    <div class="col-md-8">
-                      <div class="col-md-4 input-group required">
-                      <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at', date('Y-m-d')) }}">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                      {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                    </div>
-                  </div>
-
-                  <!-- Expected Checkin Date -->
-                  <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
-
-                      {{ Form::label('name', trans('admin/hardware/form.expected_checkin'), array('class' => 'col-md-3 control-label')) }}
-
-                    <div class="col-md-8">
-                      <div class="col-md-4 input-group">
-                      <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                      {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                    </div>
-                  </div>
-
-
-                  <!-- Note -->
-                  <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-
-                      {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
-
-                    <div class="col-md-8">
-                      <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note') }}</textarea>
-                      {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                    </div>
-                  </div>
-
-                  <div class="form-group{{ $errors->has('selected_asset') ? ' has-error' : '' }}">
-
-                            {{ Form::label('selected_asset', trans('general.assets'), array('class' => 'col-md-3 control-label')) }}
-
-                        <div class="col-md-8 required">
-                            {{ Form::select('selected_assets[]', $assets_list , Input::old('selected_asset'), array('class'=>'select2', 'id'=>'selected_asset', 'style'=>'width:100%', 'multiple'=>'multiple')) }}
-
-                            {!! $errors->first('selected_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                        </div>
-                    </div>
-
-
-
-              </div>
-              <div class="box-footer">
-                <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
-              </div>
+              {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            </div>
+            <div class="col-md-1 col-sm-1 text-left">
+              <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
+            </div>
           </div>
-    </form>
-    </div>
 
-    <!-- right column -->
-    <div class="col-md-5" id="current_assets_box" style="display:none;">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('admin/users/general.current_assets') }}</h3>
+          <!-- Checkout/Checkin Date -->
+          <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
+            {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
+            <div class="col-md-8">
+              <div class="col-md-4 input-group required">
+                <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at', date('Y-m-d')) }}">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+              {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
-            <div class="box-body">
-                <div id="current_assets_content">
-                </div>
+          </div>
+
+          <!-- Expected Checkin Date -->
+          <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
+            {{ Form::label('name', trans('admin/hardware/form.expected_checkin'), array('class' => 'col-md-3 control-label')) }}
+            <div class="col-md-8">
+              <div class="col-md-4 input-group">
+                <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+              {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
+          </div>
+
+
+          <!-- Note -->
+          <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+            <div class="col-md-8">
+              <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note') }}</textarea>
+              {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            </div>
+          </div>
+
+          <div class="form-group{{ $errors->has('selected_asset') ? ' has-error' : '' }}">
+            {{ Form::label('selected_asset', trans('general.assets'), array('class' => 'col-md-3 control-label')) }}
+            <div class="col-md-8 required">
+              {{ Form::select('selected_assets[]', $assets_list , Input::old('selected_asset'), array('class'=>'select2', 'id'=>'selected_asset', 'style'=>'width:100%', 'multiple'=>'multiple')) }}
+              {!! $errors->first('selected_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            </div>
+          </div>
+        </form>
+      </div> <!--./box-body-->
+      <div class="box-footer">
+        <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
+        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
+      </div>
+    </div>
+  </div> <!--/.col-md-7-->
+
+  <!-- right column -->
+  <div class="col-md-5" id="current_assets_box" style="display:none;">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ trans('admin/users/general.current_assets') }}</h3>
+      </div>
+      <div class="box-body">
+        <div id="current_assets_content">
         </div>
+      </div>
     </div>
-
-
+  </div>
 </div>
-
+@stop
 
 @section('moar_scripts')
 
@@ -275,6 +255,5 @@ $(function() {
   });
 });
 </script>
-@stop
 
 @stop

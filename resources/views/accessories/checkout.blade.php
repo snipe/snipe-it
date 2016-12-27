@@ -32,28 +32,30 @@
          @if ($accessory->name)
           <!-- accessory name -->
           <div class="form-group">
-          <label class="col-sm-3 control-label">{{ trans('admin/accessories/general.accessory_name') }}</label>
-              <div class="col-md-6">
-                <p class="form-control-static">{{ $accessory->name }}</p>
-              </div>
+            <label class="col-sm-3 control-label">{{ trans('admin/accessories/general.accessory_name') }}</label>
+            <div class="col-md-6">
+              <p class="form-control-static">{{ $accessory->name }}</p>
+            </div>
           </div>
           @endif
 
           @if ($accessory->category->name)
           <!-- accessory name -->
           <div class="form-group">
-          <label class="col-sm-3 control-label">{{ trans('admin/accessories/general.accessory_category') }}</label>
-              <div class="col-md-6">
-                <p class="form-control-static">{{ $accessory->category->name }}</p>
-              </div>
+            <label class="col-sm-3 control-label">{{ trans('admin/accessories/general.accessory_category') }}</label>
+            <div class="col-md-6">
+              <p class="form-control-static">{{ $accessory->category->name }}</p>
+            </div>
           </div>
           @endif
 
           <!-- User -->
 
           <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-            <label for="assigned_to" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkout_to') }}
-             <i class='icon-asterisk'></i></label>
+            <label for="assigned_to" class="col-md-3 control-label">
+              {{ trans('admin/hardware/form.checkout_to') }}
+              <i class='icon-asterisk'></i>
+            </label>
             <div class="col-md-9">
                 {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $accessory->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                 {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -70,7 +72,6 @@
 
           @if ($accessory->getEula())
           <div class="form-group">
-
             <div class="col-md-9 col-md-offset-3">
               <p class="hint-block">{{ trans('admin/categories/general.required_eula') }}</p>
             </div>
@@ -81,10 +82,10 @@
        <div class="box-footer text-right">
          <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
        </div>
-    </div>
-  </div>
+    </div> <!-- .box.box-default -->
   </form>
-</div>
+  </div> <!-- .col-md-9-->
+</div> <!-- .row -->
 
 
 @stop

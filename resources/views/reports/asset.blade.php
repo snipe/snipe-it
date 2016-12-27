@@ -16,10 +16,8 @@
 
 <div class="row">
     <div class="col-md-12">
-
         <div class="box box-default">
             <div class="box-body">
-
                 <div class="table-responsive">
 
                     <table

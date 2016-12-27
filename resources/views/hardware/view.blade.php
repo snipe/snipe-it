@@ -6,40 +6,30 @@
 @parent
 @stop
 
-
-
-
 {{-- Right header --}}
 @section('header_right')
-    @can('manage', \App\Models\Asset::class)
-        <div class="dropdown pull-right">
-          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-              <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-              @if ($asset->assetstatus->deployable=='1')
-                @if ($asset->assigned_to != '')
-                  <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a></li>
-                @else
-                  <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a></li>
-                @endif
-              @endif
-                <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
-                <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
-          </ul>
-        </div>
-    @endcan
+@can('manage', \App\Models\Asset::class)
+<div class="dropdown pull-right">
+  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+    @if ($asset->assetstatus->deployable=='1')
+      @if ($asset->assigned_to != '')
+      <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a></li>
+      @else
+      <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a></li>
+      @endif
+    @endif
+    <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
+    <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
+  </ul>
+</div>
+@endcan
 @stop
-
-
-
 
 {{-- Page content --}}
 @section('content')
-
-
-
-
 <div class="row">
   <div class="col-md-12">
 
@@ -75,109 +65,106 @@
               <div class="table-responsive" style="margin-top: 10px;">
                 <table class="table">
                   <tbody>
-                  @if ($asset->assetstatus)
-                      <tr>
-                          <td>{{ trans('general.status') }}</td>
-                          <td>
-                              @if ($asset->assetstatus->color)
-                              <span class="label label-default" style="background-color: {{ e($asset->assetstatus->color) }};">
-                                  &nbsp; &nbsp;</span>
-                              </span>
-                              @endif
+                    @if ($asset->assetstatus)
+                    <tr>
+                      <td>{{ trans('general.status') }}</td>
+                      <td>
+                        @if ($asset->assetstatus->color)
+                        <span class="label label-default" style="background-color: {{ e($asset->assetstatus->color) }};">
+                            &nbsp; &nbsp;</span>
+                        </span>
+                        @endif
+                        {{ $asset->assetstatus->name }}
 
-                              {{ $asset->assetstatus->name }}
+                        ({{ $asset->assetstatus->getStatuslabelType() }})
+                      </td>
+                    </tr>
+                    @endif
 
-                              ({{ $asset->assetstatus->getStatuslabelType() }})
-                           </td>
-                      </tr>
-                  @endif
                     @if ($asset->company)
-                      <tr>
-                        <td>{{ trans('general.company') }}</td>
-                        <td>{{ $asset->company->name }}</td>
-                      </tr>
+                    <tr>
+                      <td>{{ trans('general.company') }}</td>
+                      <td>{{ $asset->company->name }}</td>
+                    </tr>
                     @endif
+
                     @if ($asset->name)
-                      <tr>
-                        <td>{{ trans('admin/hardware/form.name') }}</td>
-                        <td>{{ $asset->name }}</td>
-                      </tr>
+                    <tr>
+                      <td>{{ trans('admin/hardware/form.name') }}</td>
+                      <td>{{ $asset->name }}</td>
+                    </tr>
                     @endif
+
                     @if ($asset->serial)
-                      <tr>
-                        <td>{{ trans('admin/hardware/form.serial') }}</td>
-                        <td>{{ $asset->serial  }}</td>
-                      </tr>
+                    <tr>
+                      <td>{{ trans('admin/hardware/form.serial') }}</td>
+                      <td>{{ $asset->serial  }}</td>
+                    </tr>
                     @endif
+
                     @if ($asset->model->manufacturer)
-
-                          <tr>
-                            <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
-                            <td>
-                             @can('superuser')
-                              <a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
-                              {{ $asset->model->manufacturer->name }}
-                              </a>
-                             @else
-                                    {{ $asset->model->manufacturer->name }}
-                              @endcan
-                             </td>
-                          </tr>
-                          <tr>
-                            <td>
-                                {{ trans('admin/hardware/form.model') }}</td>
-                            <td>
-                                @can('superuser')
-                                    <a href="{{ route('models.show', $asset->model->id) }}">
-                                    {{ $asset->model->name }}
-                                    </a>
-                                 @else
-                                    {{ $asset->model->name }}
-                                @endcan
-
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>{{ trans('admin/models/table.modelnumber') }}</td>
-                            <td>
-                              {{ $asset->model->model_number }}
-                             </td>
-                          </tr>
-
+                    <tr>
+                      <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
+                      <td>
+                      @can('superuser')
+                        <a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
+                        {{ $asset->model->manufacturer->name }}
+                        </a>
+                      @else
+                        {{ $asset->model->manufacturer->name }}
+                      @endcan
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ trans('admin/hardware/form.model') }}</td>
+                      <td>
+                      @can('superuser')
+                        <a href="{{ route('models.show', $asset->model->id) }}">
+                          {{ $asset->model->name }}
+                        </a>
+                      @else
+                        {{ $asset->model->name }}
+                      @endcan
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>{{ trans('admin/models/table.modelnumber') }}</td>
+                      <td>
+                        {{ $asset->model->model_number }}
+                      </td>
+                    </tr>
                     @endif
 
                     @if ($asset->model->fieldset)
                       @foreach($asset->model->fieldset->fields as $field)
                         <tr>
-                          <td>{{ $field->name }}
-
-
+                          <td>
+                            {{ $field->name }}
                           </td>
                           <td>
-                              @if ($field->field_encrypted=='1')
-                                  <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
-                              @endif
+                            @if ($field->field_encrypted=='1')
+                              <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
+                            @endif
 
-                              @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
-
-                                  @can('superuser')
-                                      @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                          <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
-                                      @else
-                                          {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
-                                      @endif
-                                  @else
-                                      {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
-                                  @endcan
-
+                            @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
+                              @can('superuser')
+                                @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                  <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                @else
+                                  {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
+                                @endif
                               @else
-                                  @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                      <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
-                                  @else
-                                      {{ $asset->{$field->db_column_name()} }}
-                                  @endif
-                              @endif
+                                  {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
+                              @endcan
 
+                            @else
+                              @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                              @else
+                                {{ $asset->{$field->db_column_name()} }}
+                              @endif
+                            @endif
                            </td>
                         </tr>
                       @endforeach
@@ -188,7 +175,7 @@
                         <td>{{ trans('admin/hardware/form.date') }}</td>
                         <td>
                           {{ date('M d, Y',strtotime($asset->purchase_date)) }}
-                         </td>
+                        </td>
                       </tr>
                     @endif
 
@@ -206,7 +193,7 @@
                           {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
                           @if ($asset->order_number)
-                              (Order #{{ $asset->order_number }})
+                            (Order #{{ $asset->order_number }})
                           @endif
                         </td>
                       </tr>
@@ -216,13 +203,13 @@
                       <tr>
                         <td>{{ trans('general.supplier') }}</td>
                         <td>
-                            @can ('superuser')
-                                  <a href="{{ route('suppliers.show', $asset->supplier_id) }}">
-                                  {{ $asset->supplier->name }}
-                                  </a>
-                                @else
-                                {{ $asset->supplier->name }}
-                            @endcan
+                          @can ('superuser')
+                            <a href="{{ route('suppliers.show', $asset->supplier_id) }}">
+                              {{ $asset->supplier->name }}
+                            </a>
+                          @else
+                            {{ $asset->supplier->name }}
+                          @endcan
                         </td>
                       </tr>
                     @endif
@@ -244,13 +231,12 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.depreciation') }}</td>
                         <td>
-                            {{ $asset->depreciation->name }}
-                            ({{ $asset->depreciation->months }}
-                            {{ trans('admin/hardware/form.months') }}
-                            )
+                          {{ $asset->depreciation->name }}
+                          ({{ $asset->depreciation->months }}
+                          {{ trans('admin/hardware/form.months') }}
+                          )
                         </td>
                       </tr>
-
                       <tr>
                         <td>
                           {{ trans('admin/hardware/form.fully_depreciated') }}
@@ -302,6 +288,7 @@
                         </td>
                       </tr>
                     @endif
+
                     <tr>
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
                       <td> {!! nl2br(e($asset->notes)) !!}</td>
@@ -310,57 +297,53 @@
                       <tr>
                         <td>{{ trans('general.created_at') }}</td>
                         <td>
-                            {{ $asset->created_at->format('F j, Y h:iA') }}
+                          {{ $asset->created_at->format('F j, Y h:iA') }}
                         </td>
                       </tr>
                     @endif
 
                     @if ($asset->assetloc)
-                        <tr>
-                            <td>{{ trans('general.location') }}</td>
-                            <td>
-                                @can('superuser')
-                                    <a href="{{ route('locations.show', ['location' => $asset->assetloc->id]) }}">
-                                    {{ $asset->assetloc->name }}
-                                    </a>
-                                @else
-                                    {{ $asset->assetloc->name }}
-                                @endcan
-                            </td>
-                        </tr>
+                      <tr>
+                        <td>{{ trans('general.location') }}</td>
+                        <td>
+                          @can('superuser')
+                            <a href="{{ route('locations.show', ['location' => $asset->assetloc->id]) }}">
+                              {{ $asset->assetloc->name }}
+                            </a>
+                          @else
+                            {{ $asset->assetloc->name }}
+                          @endcan
+                        </td>
+                      </tr>
                     @endif
 
                     @if ($asset->defaultLoc)
-                        <tr>
-                            <td>{{ trans('admin/hardware/form.default_location') }}</td>
-                            <td>
-                                @can('superuser')
-                                    <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
-                                    {{ $asset->defaultLoc->name }}
-                                    </a>
-                                @else
-                                    {{ $asset->defaultLoc->name }}
-                                @endcan
-                            </td>
-                        </tr>
+                      <tr>
+                        <td>{{ trans('admin/hardware/form.default_location') }}</td>
+                        <td>
+                          @can('superuser')
+                            <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
+                              {{ $asset->defaultLoc->name }}
+                            </a>
+                          @else
+                            {{ $asset->defaultLoc->name }}
+                          @endcan
+                        </td>
+                      </tr>
                     @endif
-
-
-
                   </tbody>
                 </table>
               </div> <!-- /table-responsive -->
-            </div><!-- /col -->
+            </div><!-- /col-md-8 -->
 
             <div class="col-md-4">
-
               @if ($asset->image)
                 <img src="{{ url('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
               @elseif ($asset->model->image!='')
                 <img src="{{ url('/') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 
-              @if  ($snipeSettings->qr_code=='1')
+              @if ($snipeSettings->qr_code=='1')
                  <img src="{{ url('/') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
@@ -372,7 +355,6 @@
                 </p>
 
                 <ul class="list-unstyled">
-
                   @if ((isset($asset->assigneduser->email)) && ($asset->assigneduser->email!=''))
                     <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
                   @endif
@@ -385,7 +367,7 @@
                     <li>{{ $asset->userloc->name }}</li>
                     <li>{{ $asset->userloc->address }}
                       @if ($asset->userloc->address2!='')
-                        {{ $asset->userloc->address2 }}
+                      {{ $asset->userloc->address2 }}
                       @endif
                     </li>
 
@@ -420,12 +402,10 @@
           </div><!-- /row -->
         </div><!-- /.tab-pane asset details -->
 
-
         <div class="tab-pane fade" id="software">
           <div class="row">
             <div class="col-md-12">
               <!-- Licenses assets table -->
-
               @if (count($asset->licenses) > 0)
                 <table class="table">
                   <thead>
@@ -459,13 +439,13 @@
             </div><!-- /col -->
           </div> <!-- row -->
         </div> <!-- /.tab-pane software -->
+
         <div class="tab-pane fade" id="components">
           <!-- checked out assets table -->
           <div class="row">
               <div class="col-md-12">
                 @if(count($asset->components) > 0)
                   <table class="table table-striped">
-
                     <tbody>
                       <?php $totalCost = 0; ?>
                       @foreach ($asset->components as $component)
@@ -489,10 +469,10 @@
                     {{ trans('general.no_results') }}
                   </div>
                 @endif
-
               </div>
           </div>
         </div> <!-- /.tab-pane components -->
+
         <div class="tab-pane fade" id="maintenances">
           <div class="row">
             <div class="col-md-12">
@@ -504,58 +484,59 @@
 
               <!-- Asset Maintenance table -->
               @if (count($asset->assetmaintenances) > 0)
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>{{ trans('general.supplier') }}</th>
-                        <th>{{ trans('admin/asset_maintenances/form.title') }}</th>
-                        <th>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-                        <th>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-                        <th>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-                        <th>{{ trans('admin/asset_maintenances/form.notes') }}</th>
-                        <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
-                        <th>{{ trans('admin/asset_maintenances/form.cost') }}</th>
-                        <th>{{ trans('general.admin') }}</th>
-                          @can('update', \App\Models\Asset::class)
-                                <th>{{ trans('table.actions') }}</th>
-                          @endcan
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $totalCost = 0; ?>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>{{ trans('general.supplier') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.title') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.notes') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.cost') }}</th>
+                      <th>{{ trans('general.admin') }}</th>
 
-                      @foreach ($asset->assetmaintenances as $assetMaintenance)
-                        @if (is_null($assetMaintenance->deleted_at))
-                          <tr>
-                            <td><a href="{{ route('suppliers.show', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a></td>
-                            <td>{{ $assetMaintenance->title }}</td>
-                            <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
-                            <td>{{ $assetMaintenance->start_date }}</td>
-                            <td>{{ $assetMaintenance->completion_date }}</td>
-                            <td>{{ $assetMaintenance->notes }}</td>
-                            <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
-                            <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
-                            <td>
-                              @if ($assetMaintenance->admin)
-                                <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->present()->fullName() }}</a>
-                              @endif
-                            </td>
-                            <?php $totalCost += $assetMaintenance->cost; ?>
-                              @can('update', \App\Models\Asset::class)
-                                <td>
-                                  <a href="{{ route('maintenances.edit', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-                                </td>
-                              @endcan
-                          </tr>
-                        @endif
-                      @endforeach
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colspan="8" class="text-right">{{ is_numeric($totalCost) ? $use_currency.number_format($totalCost, 2) : $totalCost }}</td>
-                      </tr>
-                    </tfoot>
-                  </table>
+                      @can('update', \App\Models\Asset::class)
+                      <th>{{ trans('table.actions') }}</th>
+                      @endcan
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $totalCost = 0; ?>
+
+                    @foreach ($asset->assetmaintenances as $assetMaintenance)
+                      @if (is_null($assetMaintenance->deleted_at))
+                        <tr>
+                          <td><a href="{{ route('suppliers.show', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a></td>
+                          <td>{{ $assetMaintenance->title }}</td>
+                          <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
+                          <td>{{ $assetMaintenance->start_date }}</td>
+                          <td>{{ $assetMaintenance->completion_date }}</td>
+                          <td>{{ $assetMaintenance->notes }}</td>
+                          <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
+                          <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
+                          <td>
+                            @if ($assetMaintenance->admin)
+                              <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->present()->fullName() }}</a>
+                            @endif
+                          </td>
+                          <?php $totalCost += $assetMaintenance->cost; ?>
+                            @can('update', \App\Models\Asset::class)
+                              <td>
+                                <a href="{{ route('maintenances.edit', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                              </td>
+                            @endcan
+                        </tr>
+                      @endif
+                    @endforeach
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="8" class="text-right">{{ is_numeric($totalCost) ? $use_currency.number_format($totalCost, 2) : $totalCost }}</td>
+                    </tr>
+                  </tfoot>
+                </table>
               @else
                 <div class="alert alert-info alert-block">
                   <i class="fa fa-info-circle"></i>
@@ -589,22 +570,19 @@
                       <tr>
                         <td>{{ $log->created_at }}</td>
                         <td>
-                            @if ($log->action_type != 'requested')
-                                @if (isset($log->user))
-                                    {{ $log->user->present()->fullName() }}
-                                @endif
-                            @endif
+                        @if ($log->action_type != 'requested')
+                          @if (isset($log->user))
+                            {{ $log->user->present()->fullName() }}
+                          @endif
+                        @endif
                         </td>
                         <td>{{ $log->action_type }}</td>
                         <td>
                           @if ($log->action_type=='uploaded')
-
                             {{ $log->filename }}
                           @elseif ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
 
-
                             @if ($log->target instanceof \App\Models\User)
-
                               @if ($log->target->deleted_at=='')
                                 <a href="{{ route('users.show', $log->target_id) }}">
                                 {{ $log->target->present()->fullName() }}
@@ -628,35 +606,34 @@
                                     Unknown
                                 @endif
                             @else
-
                               Deleted User
                             @endif
                           @endif
                         </td>
                         <td>
-                          @if ($log->note) {{ $log->note }}
+                          @if ($log->note)
+                          {{ $log->note }}
                           @endif
                         </td>
-                          @if  ($snipeSettings->require_accept_signature=='1')
-                          <td>
-                              @if (($log->accept_signature!='') && (($log->action_type=='accepted') || ($log->action_type=='declined')))
-                                  <a href="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" class="img-responsive"></a>
-                               @endif
-                          </td>
-                          @endif
+                        @if ($snipeSettings->require_accept_signature=='1')
+                        <td>
+                          @if (($log->accept_signature!='') && (($log->action_type=='accepted') || ($log->action_type=='declined')))
+                              <a href="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" class="img-responsive"></a>
+                           @endif
+                        </td>
+                        @endif
                       </tr>
-
                     @endforeach
                   @endif
                   <!-- Add a "created asset" row to the log list.  This isn't an official log entry.-->
                   <tr>
                     <td>{{ $asset->created_at }}</td>
                     <td>
-                        @if ($asset->adminuser)
-                            {{ $asset->adminuser->present()->fullName() }}
-                        @else
-                            {{ trans('general.unknown_admin') }}
-                        @endif
+                    @if ($asset->adminuser)
+                      {{ $asset->adminuser->present()->fullName() }}
+                    @else
+                      {{ trans('general.unknown_admin') }}
+                    @endif
                     </td>
                     <td>{{ trans('general.created_asset') }}</td>
                     <td></td> <!-- User -->
@@ -672,33 +649,32 @@
           <div class="row">
 
             @can('update', \App\Models\Asset::class)
-                {{ Form::open([
-                'method' => 'POST',
-                'route' => ['upload/asset', $asset->id],
-                'files' => true, 'class' => 'form-horizontal' ]) }}
+              {{ Form::open([
+              'method' => 'POST',
+              'route' => ['upload/asset', $asset->id],
+              'files' => true, 'class' => 'form-horizontal' ]) }}
 
-                <div class="col-md-2">
-                  <span class="btn btn-default btn-file">Browse for file...
-                      {{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
-                  </span>
-                </div>
-                <div class="col-md-7">
-                  {{ Form::text('notes', Input::old('notes', Input::old('notes')), array('class' => 'form-control','placeholder' => 'Notes')) }}
-                </div>
-                <div class="col-md-3">
-                  <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
-                </div>
+              <div class="col-md-2">
+                <span class="btn btn-default btn-file">Browse for file...
+                    {{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
+                </span>
+              </div>
+              <div class="col-md-7">
+                {{ Form::text('notes', Input::old('notes', Input::old('notes')), array('class' => 'form-control','placeholder' => 'Notes')) }}
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
+              </div>
 
-                <div class="col-md-12">
-                  <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
-                  <hr>
-                </div>
+              <div class="col-md-12">
+                <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
+                <hr>
+              </div>
 
-                {{ Form::close() }}
+              {{ Form::close() }}
             @endcan
 
             <div class="col-md-12">
-
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -715,12 +691,12 @@
                       <tr>
                         <td>
                           @if ($file->note)
-                              {{ $file->note }}
+                          {{ $file->note }}
                           @endif
                         </td>
                         <td>
                           @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                               <a href="../{{ $asset->id }}/showfile/{{ $file->id }}" data-toggle="lightbox" data-type="image"><img src="../{{ $asset->id }}/showfile/{{ $file->id }}"" class="img-thumbnail" style="max-width: 50px;"></a>
+                            <a href="../{{ $asset->id }}/showfile/{{ $file->id }}" data-toggle="lightbox" data-type="image"><img src="../{{ $asset->id }}/showfile/{{ $file->id }}"" class="img-thumbnail" style="max-width: 50px;"></a>
                           @endif
                         </td>
                         <td>
@@ -732,21 +708,19 @@
                           @endif
                         </td>
                         <td>
-                            @can('update', \App\Models\Asset::class)
-                                <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
-                            @endcan
+                          @can('update', \App\Models\Asset::class)
+                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
+                          @endcan
                         </td>
                       </tr>
                     @endforeach
                   @else
-                      <tr>
-                        <td colspan="4">
-                          {{ trans('general.no_results') }}
-                        </td>
-                      </tr>
-
+                    <tr>
+                      <td colspan="4">
+                        {{ trans('general.no_results') }}
+                      </td>
+                    </tr>
                   @endif
-
                 </tbody>
               </table>
             </div> <!-- /.col-md-12 -->
@@ -756,6 +730,7 @@
     </div> <!-- /.nav-tabs-custom -->
   </div> <!-- /. col-md-12 -->
 </div> <!-- /. row -->
+@stop
 
 @section('moar_scripts')
 <script>
@@ -764,6 +739,5 @@
         $(this).ekkoLightbox();
     });
 </script>
-@stop
 
 @stop

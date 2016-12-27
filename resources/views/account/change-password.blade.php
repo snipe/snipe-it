@@ -8,7 +8,6 @@ Change your Password
 {{-- Account page content --}}
 @section('content')
 <div class="row header">
-
     <div class="col-md-12">
         <h3>{{ trans('general.changepassword') }}</h3>
     </div>
@@ -22,7 +21,7 @@ Change your Password
     <!-- Old Password -->
     <div class="form-group {{ $errors->has('old_password') ? ' has-error' : '' }}">
         <label for="old_password" class="col-md-2 control-label">Old Password
-        <i class='fa fa-asterisk'></i>
+            <i class='fa fa-asterisk'></i>
         </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="old_password" id="old_password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
@@ -42,7 +41,7 @@ Change your Password
 
     <div class="form-group {{ $errors->has('password_confirm') ? ' has-error' : '' }}">
         <label for="password_confirm" class="col-md-2 control-label">New Password
-        <i class='fa fa-asterisk'></i>
+            <i class='fa fa-asterisk'></i>
         </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password_confirm" id="password_confirm"  {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
@@ -57,12 +56,13 @@ Change your Password
 
     <!-- Form actions -->
     <div class="form-group">
-	<label class="col-md-2 control-label"></label>
-		<div class="col-md-7">
-			<a class="btn btn-link" href="{{ route('view-assets') }}">{{ trans('button.cancel') }}</a>
-			<button type="submit" class="btn btn-success" {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+        <label class="col-md-2 control-label"></label>
+        <div class="col-md-7">
+            <a class="btn btn-link" href="{{ route('view-assets') }}">{{ trans('button.cancel') }}</a>
+            <button type="submit" class="btn btn-success" {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
 		</div>
 	</div>
 
 </form>
+</div>
 @stop
