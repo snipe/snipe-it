@@ -128,7 +128,7 @@
                 <!-- /.form-group -->
 
                 <!-- Logo -->
-                <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
+                <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                   <div class="col-md-3">
                     {{ Form::label('logo', trans('admin/settings/general.logo')) }}
                   </div>
@@ -136,8 +136,8 @@
                     @if (config('app.lock_passwords'))
                       <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                     @else
-                      {{ Form::file('logo_img') }}
-                      {!! $errors->first('logo', '<span class="alert-msg">:message</span>') !!}
+                      {{ Form::file('image') }}
+                      {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
                       {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal')) }} Remove
                     @endif
                   </div>

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Input;
 use Lang;
+use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Ldap;
 use Redirect;
@@ -18,6 +19,8 @@ use Mail;
 use Auth;
 use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
+use App\Http\Requests\ImageUploadRequest;
+
 
 /**
  * This controller handles all actions related to Settings for
@@ -292,7 +295,7 @@ class SettingsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postEdit()
+    public function postEdit(ImageUploadRequest $request)
     {
 
         // Check if the asset exists
@@ -301,25 +304,10 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
-        if (Input::get('clear_logo')=='1') {
-            $setting->logo = null;
-        } elseif (Input::file('logo_img')) {
-            if (!config('app.lock_passwords')) {
-                $image = Input::file('logo_img');
-                $file_name = "logo.".$image->getClientOriginalExtension();
-                $path = public_path('uploads/'.$file_name);
-                Image::make($image->getRealPath())->resize(null, 40, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save($path);
-                $setting->logo = $file_name;
-            }
-        }
-
 
         if (!config('app.lock_passwords')) {
             $setting->site_name = e(Input::get('site_name'));
-            $setting->brand = e(Input::get('brand'));
+
             $setting->custom_css = e(Input::get('custom_css'));
 
             if (Input::get('two_factor_enabled')=='') {
@@ -419,6 +407,28 @@ class SettingsController extends Controller
         $setting->is_ad = e(Input::get('is_ad', '0'));
         $setting->ldap_tls = e(Input::get('ldap_tls', '0'));
         $setting->ldap_pw_sync = e(Input::get('ldap_pw_sync', '0'));
+
+
+        if ($request->input('clear_logo')=='1') {
+            $setting->logo = null;
+            $setting->brand = 1;
+        } elseif ($request->hasFile('image')) {
+
+            if (!config('app.lock_passwords')) {
+                $image = $request->file('image');
+                $file_name = "logo.".$image->getClientOriginalExtension();
+                $path = public_path('uploads');
+                if ($image->getClientOriginalExtension()!='svg') {
+                    Image::make($image->getRealPath())->resize(null, 40, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save($path.'/'.$file_name);
+                } else {
+                    $image->move($path, $file_name);
+                }
+                $setting->logo = $file_name;
+            }
+        }
 
         if ($setting->save()) {
             return redirect()->to("admin/settings/app")->with('success', trans('admin/settings/message.update.success'));
