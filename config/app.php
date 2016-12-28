@@ -288,6 +288,7 @@ return [
         'Html'      => 'Collective\Html\HtmlFacade',
         'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Image'     => Intervention\Image\ImageManagerStatic::class,
 
 
     ],
