@@ -160,7 +160,7 @@ class ReportsController extends Controller
                         ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
                         ($asset->order_number) ? e($asset->order_number) : '',
                         ($asset->supplier) ? e($asset->supplier->name) : '',
-                        ($asset->assigneduser) ? e($asset->assigneduser->present()->fullName()) : '',
+                        ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
                         e($asset->assetLoc->present()->name()),
                         ($asset->notes) ? e($asset->notes) : '',
@@ -362,8 +362,7 @@ class ReportsController extends Controller
                     $activity_target = '';
                 }
             } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
-                $activity_target = '<a href="' . route('users.show', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->present()->fullName()) . '</a>';
-
+                $activity_target = $activity->item->assignedTo->nameUrl();
             } elseif ($activity->action_type=='requested') {
                 if ($activity->user) {
                     $activity_target =  '<a href="'.route('users.show', $activity->user_id).'">'.$activity->user->present()->fullName().'</a>';
@@ -628,34 +627,25 @@ class ReportsController extends Controller
             }
 
             if (e(Input::get('location')) == '1') {
-                $show_loc = '';
-
-
-                if (($asset->assigned_to > 0) && ($asset->assigneduser) && ($asset->assigneduser->location)) {
-                    $show_loc .= '"' .e($asset->assigneduser->location->name). '"';
-                } elseif ($asset->rtd_location_id!='') {
-                    $location = Location::find($asset->rtd_location_id);
-                    if ($location) {
-                        $show_loc .= '"' .e($location->name). '"';
-                    } else {
-                        $show_loc .= 'Default location '.$asset->rtd_location_id.' is invalid';
-                    }
+                if($asset->assetLoc) {
+                    $show_loc = $asset->assetLoc->present()->name();
+                } else {
+                    $show_loc = 'Default location '.$asset->rtd_location_id.' is invalid';
                 }
-
                 $row[] = $show_loc;
-
             }
 
 
             if (e(Input::get('assigned_to')) == '1') {
-                if ($asset->assigneduser) {
-                    $row[] = '"' .e($asset->assigneduser->present()->fullName()). '"';
+                if ($asset->assignedTo) {
+                    $row[] = '"' .e($asset->assignedTo->present()->name()). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
             }
 
             if (e(Input::get('username')) == '1') {
+                // Only works if we're checked out to a user, not anything else.
                 if ($asset->assigneduser) {
                     $row[] = '"' .e($asset->assigneduser->username). '"';
                 } else {
@@ -664,6 +654,7 @@ class ReportsController extends Controller
             }
 
             if (e(Input::get('employee_num')) == '1') {
+                // Only works if we're checked out to a user, not anything else.
                 if ($asset->assigneduser) {
                     $row[] = '"' .e($asset->assigneduser->employee_num). '"';
                 } else {
@@ -856,7 +847,7 @@ class ReportsController extends Controller
             $row[]  = str_replace(',', '', e($assetItem->assetlog->model->name));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->present()->name()));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->asset_tag));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->assigneduser->present()->fullName()));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->assignedTo->present()->name()));
             $rows[] = implode($row, ',');
         }
 

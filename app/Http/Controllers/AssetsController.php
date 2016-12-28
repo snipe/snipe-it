@@ -518,7 +518,7 @@ class AssetsController extends Controller
 
         $admin = Auth::user();
 
-        if (is_null($user = User::find($asset->assigned_to))) {
+        if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
@@ -531,16 +531,15 @@ class AssetsController extends Controller
         $asset->accepted = null;
         $asset->name = e(Input::get('name'));
 
-
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));
         }
         // Was the asset updated?
         if ($asset->save()) {
-            $logaction = $asset->logCheckin($user, e(request('note')));
+            $logaction = $asset->logCheckin($target, e(request('note')));
 
             $data['log_id'] = $logaction->id;
-            $data['first_name'] = $user->first_name;
+            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
             $data['item_name'] = $asset->present()->name();
             $data['checkin_date'] = $logaction->created_at;
             $data['item_tag'] = $asset->asset_tag;
