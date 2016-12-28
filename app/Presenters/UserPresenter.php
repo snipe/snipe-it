@@ -110,6 +110,15 @@ class UserPresenter extends Presenter
     }
 
     /**
+     * Standard accessor.
+     * @TODO Remove presenter::fullName() entirely?
+     * @return string
+     */
+    public function name()
+    {
+        return $this->fullName();
+    }
+    /**
      * Returns the user Gravatar image url.
      *
      * @return string

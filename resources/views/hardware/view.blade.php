@@ -229,7 +229,7 @@
 
                     @if ($asset->depreciation)
                       <tr>
-                        <td>{{ trans('admin/hardware/form.depreciation') }}</td>
+                        <td>{{ trans('general.depreciation') }}</td>
                         <td>
                           {{ $asset->depreciation->name }}
                           ({{ $asset->depreciation->months }}
@@ -347,11 +347,13 @@
                  <img src="{{ url('/') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
-              @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+              @if (($asset->assignedTo) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
                 <p>
-                  <img src="{{ $asset->assigneduser->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->present()->fullName() }}">
-                  <a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->present()->fullName() }}</a>
+                  @if($asset->assigned_type == User::class) <!-- Only users have avatars currently-->
+                  <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->present()->fullName() }}">
+                  @endif
+                  {!! $asset->assignedTo->present()->nameUrl() !!}
                 </p>
 
                 <ul class="list-unstyled">

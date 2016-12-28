@@ -121,7 +121,7 @@ class ReportsController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
+            Asset::with('assignedTo', 'assetLoc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
                 $headers=[
                     trans('general.company'),
                     trans('admin/hardware/table.asset_tag'),
@@ -162,8 +162,7 @@ class ReportsController extends Controller
                         ($asset->supplier) ? e($asset->supplier->name) : '',
                         ($asset->assigneduser) ? e($asset->assigneduser->present()->fullName()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        ($asset->assigneduser && $asset->assigneduser->userloc!='') ?
-                            e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
+                        e($asset->assetLoc->present()->name()),
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
                     foreach($customfields as $field) {
@@ -244,15 +243,13 @@ class ReportsController extends Controller
             $row[] = e($asset->name);
             $row[] = e($asset->serial);
 
-            if ($asset->assigned_to > 0) {
-                $user  = User::find($asset->assigned_to);
-                $row[] = e($user->present()->fullName());
+            if ($target = $asset->assignedTo) {
+                $row[] = e($target->present()->name());
             } else {
                 $row[] = ''; // Empty string if unassigned
             }
 
-            if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
-                $location = Location::find($asset->assigneduser->location_id);
+            if (( $asset->assigned_to > 0 ) && ( $location = $asset->assetLoc )) {
                 if ($location->city) {
                     $row[] = e($location->city) . ', ' . e($location->state);
                 } elseif ($location->name) {

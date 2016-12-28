@@ -47,14 +47,40 @@
 
             <!-- User -->
             <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-              {{ Form::label('assigned_to', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+              {{ Form::label('assigned_user', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-7 required">
-                {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'width:100%')) }}
+                {{ Form::select('assigned_user', $users_list , Input::old('assigned_user', $asset->assigned_type == 'App\Models\User' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_user', 'style'=>'width:100%')) }}
 
-                {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                {!! $errors->first('assigned_user', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
               <div class="col-md-1 col-sm-1 text-left">
-                <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
+                <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user' class="btn btn-sm btn-default">New</a>
+              </div>
+            </div>
+
+            <!-- Assets -->
+            <div id="assigned_asset" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+              {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+              <div class="col-md-7 required">
+                {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
+
+                {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
+              <div class="col-md-1 col-sm-1 text-left">
+                <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_asset' class="btn btn-sm btn-default">New</a>
+              </div>
+            </div> 
+
+            <!-- Locations -->
+            <div id="assigned_location" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+              {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+              <div class="col-md-7 required">
+                {{ Form::select('assigned_location', $locations_list , Input::old('assigned_location', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_location', 'style'=>'width:100%')) }}
+
+                {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
+              <div class="col-md-1 col-sm-1 text-left">
+                <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
               </div>
             </div>
 

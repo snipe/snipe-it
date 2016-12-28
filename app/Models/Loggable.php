@@ -45,7 +45,7 @@ trait Loggable
         $log->user_id = Auth::user()->id;
 
         if (!is_null($this->asset_id) || isset($target)) {
-            $log->target_type = Asset::class;
+            $log->target_type = $this->assigned_type;
             $log->target_id = $this->asset_id;
         } else if (!is_null($this->assigned_to)) {
             $log->target_type = User::class;
@@ -53,7 +53,15 @@ trait Loggable
         }
 
         $item = call_user_func(array($log->target_type, 'find'), $log->target_id);
-        $log->location_id = $item->location_id;
+        $class = get_class($item);
+        if($class == Location::class) {
+            // We can checkout to a location
+            $log->location_id = $item->id;
+        } else if ($class== Asset::class) {
+            $log->location_id = $item->rtd_location_id;
+        } else {
+            $log->location_id = $item->location_id;
+        }
         $log->note = $note;
         $log->logaction('checkout');
 

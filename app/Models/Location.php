@@ -55,9 +55,9 @@ class Location extends SnipeModel
         return $this->hasManyThrough('\App\Models\Asset', '\App\Models\User', 'location_id', 'assigned_to', 'id');
     }
 
-    public function assignedassets()
+    public function locationAssets()
     {
-        return $this->hasMany('\App\Models\Asset', 'rtd_location_id');
+        return $this->hasMany('\App\Models\Asset', 'rtd_location_id')->orHas('assignedAssets');
     }
 
     public function parent()
@@ -68,6 +68,12 @@ class Location extends SnipeModel
     public function childLocations()
     {
         return $this->hasMany('\App\Models\Location', 'parent_id');
+    }
+
+    public function assignedAssets()
+    {
+        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        // return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
     public static function getLocationHierarchy($locations, $parent_id = null)

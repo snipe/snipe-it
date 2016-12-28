@@ -22,6 +22,9 @@ class Asset extends Depreciable
     use Loggable, Requestable, Presentable;
     use SoftDeletes;
 
+    const LOCATION = 'location';
+    const ASSET = 'asset';
+    const USER = 'user';
   /**
   * The database table used by the model.
   *
@@ -91,9 +94,9 @@ class Asset extends Depreciable
      * @param null $name
      * @return bool
      */
-    public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
+    public function checkOut($target, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
-        if (!$user) {
+        if (!$target) {
             return false;
         }
 
@@ -103,7 +106,8 @@ class Asset extends Depreciable
 
         $this->last_checkout = $checkout_at;
 
-        $this->assigneduser()->associate($user);
+        $this->assignedTo()->associate($target);
+
 
         if($name != null) {
             $this->name = $name;
@@ -112,8 +116,6 @@ class Asset extends Depreciable
         if ($this->requireAcceptance()) {
             $this->accepted="pending";
         }
-
-
 
         if ($this->save()) {
             $log = $this->logCheckout($note);
@@ -149,7 +151,6 @@ class Asset extends Depreciable
         }
 
     }
-
 
     public function getDetailedNameAttribute()
     {
@@ -209,18 +210,41 @@ class Asset extends Depreciable
                   ->withTrashed();
     }
 
+    public function assignedTo()
+    {
+      return $this->morphTo('assigned', 'assigned_type', 'assigned_to');
+    }
+
+    public function assignedAssets()
+    {
+      return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+    }
+
   /**
    * Get the asset's location based on the assigned user
    **/
-    public function assetloc()
+    public function assetLoc()
     {
-        if ($this->assigneduser) {
-            return $this->assigneduser->userloc();
-        } else {
-            return $this->belongsTo('\App\Models\Location', 'rtd_location_id');
+        if(!empty($this->assignedType())) {
+            if ($this->assignedType() == self::ASSET) {
+                return $this->assignedTo->assetloc(); // Recurse until we have a final location
+            } elseif ($this->assignedType() == self::LOCATION) {
+                return $this->assignedTo();
+            }
+            // Default to User
+//            var_dump($this);
+            if(!$this->assignedTo) {
+                dd($this);
+            }
+            return $this->assignedTo->userLoc();
         }
+        return $this->defaultLoc();
     }
 
+    public function assignedType()
+    {
+        return strtolower(class_basename($this->assigned_type));
+    }
   /**
    * Get the asset's location based on default RTD location
    **/

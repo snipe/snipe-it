@@ -416,7 +416,10 @@ class AssetsController extends Controller
         $this->authorize('checkout', $asset);
 
         // Get the dropdown of users and then pass it to the checkout view
-        return View::make('hardware/checkout', compact('asset'))->with('users_list', Helper::usersList());
+        return View::make('hardware/checkout', compact('asset'))
+            ->with('users_list', Helper::usersList())
+            ->with('assets_list', Helper::assetsList())
+            ->with('locations_list', Helper::locationsList());
 
     }
 
@@ -431,7 +434,6 @@ class AssetsController extends Controller
      */
     public function postCheckout(AssetCheckoutRequest $request, $assetId)
     {
-
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -440,7 +442,14 @@ class AssetsController extends Controller
         }
         $this->authorize('checkout', $asset);
 
-        $user = User::find(Input::get('assigned_to'));
+        if(request('assigned_user')) {
+            $target = User::find(request('assigned_user'));
+        } elseif(request('assigned_asset')) {
+            $target = Asset::find(request('assigned_asset'));
+        } elseif(request('assigned_location')) {
+            $target = Location::find(request('assigned_location'));
+        }
+        // $user = User::find(Input::get('assigned_to'));
         $admin = Auth::user();
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
@@ -454,7 +463,7 @@ class AssetsController extends Controller
         } else {
             $expected_checkin = '';
         }
-        if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
+        if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
 //           Redirect to the new asset page
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
         }
@@ -518,6 +527,7 @@ class AssetsController extends Controller
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
         $asset->assigned_to = null;
+        $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
         $asset->name = e(Input::get('name'));
 

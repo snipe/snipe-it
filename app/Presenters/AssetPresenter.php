@@ -80,14 +80,14 @@ class AssetPresenter extends Presenter
 
         $results['status_label'] = '';
         $results['assigned_to'] = '';
-        if($assigned = $this->model->assigneduser) {
+        if($assigned = $this->model->assignedTo) {
             $results['status_label'] = 'Deployed';
-            $results['assigned_to'] = (string) link_to_route('users.show', $assigned->present()->fullName(), $this->assigned_to );
+            $results['assigned_to'] = $assigned->present()->nameUrl();
         } else if($this->model->assetstatus) {
             $results['status_label'] = $this->model->assetstatus->name;
         }
         $results['location'] = '';
-        if (isset($assigned) and !empty($assignedLoc = $assigned->userloc)) {
+        if (isset($assigned) and !empty($assignedLoc = $this->model->assetLoc)) {
             $results['location'] = $assignedLoc->present()->nameUrl();
         } else if (!empty($this->model->defaultLoc)) {
             $results['location'] = $this->model->defaultLoc->present()->nameUrl();
