@@ -23,7 +23,6 @@ class AssetPolicy
 
     public function before(User $user, $ability, $asset)
     {
-        return true;
         // Lets move all company related checks here.
         if ($asset instanceof \App\Models\Asset && !Company::isCurrentUserHasAccess($asset)) {
             return false;

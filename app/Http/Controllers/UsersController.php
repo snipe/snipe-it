@@ -550,7 +550,7 @@ class UsersController extends Controller
      */
     public function show($userId = null)
     {
-        if(!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
+        if(!$user = User::with('assignedAssets', 'assignedAssets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
             $error = trans('admin/users/message.user_not_found', compact('id'));
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
