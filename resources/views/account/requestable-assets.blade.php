@@ -60,11 +60,7 @@
                                         <td>{{ $asset->serial }}</td>
 
                                         <td>
-                                            @if ($asset->assigneduser && $asset->assetloc)
                                             {{ $asset->assetloc->name }}
-                                            @elseif ($asset->defaultLoc)
-                                            {{ $asset->defaultLoc->name }}
-                                            @endif
                                         </td>
                                         @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
                                             <td>Checked out</td>

@@ -1164,7 +1164,7 @@ class AssetsController extends Controller
                 return View::make('hardware/labels')->with('assets', Asset::find($asset_ids))->with('settings', Setting::getSettings())->with('count', $count)->with('settings',
                     Setting::getSettings());
             } elseif (Input::get('bulk_actions')=='delete') {
-                $assets = Asset::with('assigneduser', 'assetloc')->find($asset_ids);
+                $assets = Asset::with('assignedTo', 'assetloc')->find($asset_ids);
                 $assets->each(function($asset) {
                     $this->authorize('delete',$asset);
                 });
@@ -1317,7 +1317,7 @@ class AssetsController extends Controller
     public function getDatatable(Request $request, $status = null)
     {
         $this->authorize('index', Asset::class);
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assignedTo', 'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'company')
         ->Hardware();
 
         if ($request->has('search')) {

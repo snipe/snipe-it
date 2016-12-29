@@ -39,9 +39,9 @@
                 <td>{{ is_null($assetItem->company) ? '' : $assetItem->company->name }}</td>
                 <td>{{ $assetItem->model->category->name }}</td>
                 <td>{{ $assetItem->model->name }}</td>
-                <td>{{ link_to_route('hardware.show',$assetItem->present()->name(), [$assetItem->id]) }}</td>
+                <td>{!! $assetItem->present()->nameUrl() !!}</td>
                 <td>{{ $assetItem->asset_tag }}</td>
-                <td>{{ link_to_route('users.show', $assetItem->assigneduser->present()->fullName(), [$assetItem->assigned_to])}}</td>
+                <td>{!! $assetItem->assignedTo->present()->nameUrl() !!}</td>
               </tr>
               @endforeach
               @endif

@@ -121,7 +121,7 @@ class ReportsController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            Asset::with('assignedTo', 'assetLoc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
+            Asset::with('assignedTo', 'assetLoc','defaultLoc','assignedTo','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
                 $headers=[
                     trans('general.company'),
                     trans('admin/hardware/table.asset_tag'),
@@ -194,7 +194,7 @@ class ReportsController extends Controller
     {
 
         // Grab all the assets
-        $assets = Asset::with('model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog', 'company')
+        $assets = Asset::with('model', 'assignedTo', 'assetstatus', 'defaultLoc', 'assetlog', 'company')
                        ->orderBy('created_at', 'DESC')->get();
 
         return View::make('reports/depreciation', compact('assets'));
@@ -212,7 +212,7 @@ class ReportsController extends Controller
     {
 
         // Grab all the assets
-        $assets = Asset::with('model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog')
+        $assets = Asset::with('model', 'assignedTo', 'assetstatus', 'defaultLoc', 'assetlog')
                        ->orderBy('created_at', 'DESC')->get();
 
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
@@ -488,7 +488,7 @@ class ReportsController extends Controller
      */
     public function postCustom()
     {
-        $assets = Asset::orderBy('created_at', 'DESC')->with('company','assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->get();
+        $assets = Asset::orderBy('created_at', 'DESC')->with('company','assignedTo', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->get();
         $customfields = CustomField::get();
 
         $rows   = [ ];

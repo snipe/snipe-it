@@ -337,11 +337,11 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.5]
-     * @return Array
+     * @return array
      */
     public static function detailedAssetList()
     {
-        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedUser', 'model'), 'assets.company_id')->get()->pluck('detailed_name', 'id')->toArray();
+        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedTo', 'model'), 'assets.company_id')->get()->pluck('detailed_name', 'id')->toArray();
         return $assets;
     }
 

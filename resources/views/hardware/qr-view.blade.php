@@ -336,13 +336,14 @@
             @endif
 
             @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+            {{-- @TODO This should be extnded for details about non users --}}
             <h6><br>{{ trans('admin/hardware/form.checkedout_to') }}</h6>
             <ul>
                 <li>
                     <img src="{{ $asset->assigneduser->present()->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br />
                 </li>
                 <li>
-                    <a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->present()->fullName() }}</a>
+                    {{ $asset->assignedTo->present()->nameUrl() }}
                 </li>
 
                 @if (isset($asset->assetloc->address))

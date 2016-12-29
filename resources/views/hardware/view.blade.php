@@ -602,8 +602,8 @@
                               @endif
                             @elseif (($log->action_type=='accepted') || ($log->action_type=='declined'))
                                 {{-- On a declined log, the asset isn't assigned to anyone when we look this up. --}}
-                                @if ($log->item->assigneduser)
-                                    {{ $log->item->assigneduser->present()->fullName() }}
+                                @if ($log->item->assignedTo)
+                                    {{ $log->item->assignedTo->present()->name() }}
                                 @else
                                     Unknown
                                 @endif

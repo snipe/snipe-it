@@ -47,8 +47,8 @@
                   @endif
                 </td>
                 <td>
-                  @if ($asset->assigneduser)
-                  {{ $asset->assigneduser->present()->fullName() }} ({{ $asset->assigneduser->username }})
+                  @if ($asset->assignedTo)
+                  {{ $asset->assignedTo->present()->name().' ' .$asset->assigneduser ? '('.$asset->assigneduser->username. ')' : ''}}
                   @endif
                 </td>
               </tr>

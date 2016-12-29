@@ -154,8 +154,8 @@ class Asset extends Depreciable
 
     public function getDetailedNameAttribute()
     {
-        if ($this->assignedUser) {
-            $user_name = $this->assignedUser->present()->fullName();
+        if ($this->assignedTo) {
+            $user_name = $this->assignedTo->present()->name();
         } else {
             $user_name = "Unassigned";
         }
@@ -204,6 +204,12 @@ class Asset extends Depreciable
                   ->orderBy('created_at', 'desc');
     }
 
+
+    /**
+     * Even though we allow allow for checkout to things beyond users
+     * this method is an easy way of seeing if we are checked out to a user.
+     * @return mixed
+     */
     public function assigneduser()
     {
         return $this->belongsTo('\App\Models\User', 'assigned_to')
@@ -233,9 +239,6 @@ class Asset extends Depreciable
             }
             // Default to User
 //            var_dump($this);
-            if(!$this->assignedTo) {
-                dd($this);
-            }
             return $this->assignedTo->userLoc();
         }
         return $this->defaultLoc();
