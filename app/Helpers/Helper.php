@@ -31,7 +31,8 @@ class Helper
      * @since [v2.0]
      * @return String
      */
-    public static function parseEscapedMarkedown($str) {
+    public static function parseEscapedMarkedown($str)
+    {
         $Parsedown = new \Parsedown();
 
         if ($str) {
@@ -173,8 +174,9 @@ class Helper
         $categories = Category::orderBy('name', 'asc')
                 ->whereNull('deleted_at')
                 ->orderBy('name', 'asc');
-        if(!empty($category_type))
+        if (!empty($category_type)) {
             $categories = $categories->where('category_type', '=', $category_type);
+        }
         $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
         return $category_list;
     }
@@ -309,7 +311,7 @@ class Helper
     {
         $users_list =   array( '' => trans('general.select_user')) +
                         Company::scopeCompanyables(User::where('deleted_at', '=', null))
-                        ->where('show_in_list','=',1)
+                        ->where('show_in_list', '=', 1)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
                         ->pluck('complete_name', 'id')->toArray();
@@ -554,7 +556,7 @@ class Helper
                 if ($permission[$x]['display'] === true) {
 
                     if ($selected_arr) {
-                        if (array_key_exists($permission_name,$selected_arr)) {
+                        if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
@@ -585,7 +587,8 @@ class Helper
      * @since [v3.0]
      * @return boolean
      */
-    public static function checkIfRequired($class, $field) {
+    public static function checkIfRequired($class, $field)
+    {
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
@@ -612,7 +615,7 @@ class Helper
      */
     public static function array_smart_fetch(array $array, $key, $default = '')
     {
-       array_change_key_case($array, CASE_LOWER);
+        array_change_key_case($array, CASE_LOWER);
         return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[ $key ])) : $default;
     }
 
@@ -647,7 +650,8 @@ class Helper
      * @param String $string
      * @return string
      */
-    public static function gracefulDecrypt(CustomField $field, $string) {
+    public static function gracefulDecrypt(CustomField $field, $string)
+    {
 
         if ($field->isFieldDecryptable($string)) {
 
@@ -675,7 +679,8 @@ class Helper
      * @param $array array
      * @return Array
      */
-    public static function stripTagsFromJSON(Array $array) {
+    public static function stripTagsFromJSON(array $array)
+    {
 
         foreach ($array as $key => $value) {
             $clean_value = strip_tags($value);
@@ -699,7 +704,7 @@ class Helper
     public static function generateDatatableButton($type, $route, $enabled = true, $message = null, $itemName = null)
     {
         $disabledString = $enabled ? '' : 'disabled';
-        switch($type) {
+        switch ($type) {
             case 'checkout':
                 return '<a href="' . $route . '" style="margin-right:5px;" class="btn btn-info btn-sm ' . $disabledString . '">' . trans('general.checkout') . '</a>';
             case 'checkin':
@@ -714,5 +719,4 @@ class Helper
                 return '<a href="'.$route.'" class="btn btn-warning btn-sm ' . $disabledString . '"><i class="fa fa-recycle icon-white"></i></a>';
         }
     }
-
 }

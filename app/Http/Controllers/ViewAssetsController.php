@@ -315,7 +315,7 @@ class ViewAssetsController extends Controller
         } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         } else {
-            return View::make('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item',$item);
+            return View::make('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item', $item);
         }
     }
 

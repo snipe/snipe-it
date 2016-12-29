@@ -277,7 +277,8 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
             ->orWhere('username', '=', $user_email);
     }
 
-    public static function generateEmailFromFullName($name) {
+    public static function generateEmailFromFullName($name)
+    {
         $username = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }

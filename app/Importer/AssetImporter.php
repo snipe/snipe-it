@@ -8,7 +8,6 @@
 
 namespace App\Importer;
 
-
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Category;
@@ -52,7 +51,7 @@ class AssetImporter extends ItemImporter
         $asset = $this->assets->search(function ($key) {
             return strcasecmp($key->asset_tag, $this->item['asset_tag']) == 0;
         });
-        if($asset) {
+        if ($asset) {
             $editingAsset = true;
             if (!$this->updating) {
                 $this->log('A matching Asset ' . $this->item['asset_tag'] . ' already exists');
@@ -91,7 +90,7 @@ class AssetImporter extends ItemImporter
 
         if (isset($this->item["status_label"])) {
             $status_id = $this->item["status_label"]->id;
-        } else if (!$editingAsset) {
+        } elseif (!$editingAsset) {
             // Assume if we are editing, we already have a status and can ignore.
             $this->log("No status field found, defaulting to first status.");
             $status_id = $this->status_labels->first()->id;

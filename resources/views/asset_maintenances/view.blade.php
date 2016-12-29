@@ -63,7 +63,7 @@ use Carbon\Carbon;
       <div class="row">
         <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
           <strong>{{ trans('admin/asset_maintenances/form.start_date') }}: </strong>
-          <?php $startDate = Carbon::parse($assetMaintenance->start_date); ?>
+            <?php $startDate = Carbon::parse($assetMaintenance->start_date); ?>
           {{ $startDate->toDateString() }}
         </div>
         <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">

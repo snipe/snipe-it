@@ -58,7 +58,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
 
     public function setIsWarrantyAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = 0;
         }
         $this->attributes['is_warranty'] = $value;
@@ -70,7 +70,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
     public function setCostAttribute($value)
     {
         $value =  Helper::ParseFloat($value);
-        if($value == '0.0') {
+        if ($value == '0.0') {
             $value = null;
         }
         $this->attributes['cost'] = $value;
@@ -81,7 +81,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function setNotesAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = null;
         }
         $this->attributes['notes'] = $value;
@@ -92,7 +92,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function setCompletionDateAttribute($value)
     {
-        if($value == '' || $value == "0000-00-00") {
+        if ($value == '' || $value == "0000-00-00") {
             $value = null;
         }
         $this->attributes['completion_date'] = $value;

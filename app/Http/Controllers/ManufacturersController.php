@@ -302,7 +302,7 @@ class ManufacturersController extends Controller
             'accessories.category',
             'accessories.manufacturer',
             'accessories.users'
-            );
+        );
         $accessories = $manufacturer->accessories();
 
         if ($request->has('search')) {

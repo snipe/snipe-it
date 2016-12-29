@@ -125,12 +125,12 @@ class ObjectImportCommand extends Command
     }
     public function progress($count)
     {
-        if(!$this->bar) {
+        if (!$this->bar) {
             $this->bar = $this->output->createProgressBar($count);
         }
         static $index =0;
         $index++;
-        if($index < $count) {
+        if ($index < $count) {
             $this->bar->advance();
         } else {
             $this->bar->finish();

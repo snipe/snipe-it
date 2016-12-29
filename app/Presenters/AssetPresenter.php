@@ -1,5 +1,6 @@
 <?php
 namespace App\Presenters;
+
 use App\Helpers\Helper;
 use App\Models\SnipeModel;
 use DateTime;
@@ -10,7 +11,6 @@ use Illuminate\Support\Facades\Gate;
  * @package App\Presenters
  */
 class AssetPresenter extends Presenter
-
 {
 
     /**
@@ -48,18 +48,21 @@ class AssetPresenter extends Presenter
 
         $actions .= '</div>';
 
-        if (($this->model->availableForCheckout()))
-        {
+        if (($this->model->availableForCheckout())) {
             if (Gate::allows('checkout', $this->model)) {
-                $inout = '<a href="' . route('checkout/hardware',
-                        $this->model->id) . '" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">' . trans('general.checkout') . '</a>';
+                $inout = '<a href="' . route(
+                    'checkout/hardware',
+                    $this->model->id
+                ) . '" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">' . trans('general.checkout') . '</a>';
             }
 
         } else {
             if (!empty($this->model->assigned_to)) {
                 if (Gate::allows('checkin', $this->model)) {
-                    $inout = '<a href="' . route('checkin/hardware',
-                            $this->model->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
+                    $inout = '<a href="' . route(
+                        'checkin/hardware',
+                        $this->model->id
+                    ) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
                 }
             }
         }
@@ -80,16 +83,16 @@ class AssetPresenter extends Presenter
 
         $results['status_label'] = '';
         $results['assigned_to'] = '';
-        if($assigned = $this->model->assigneduser) {
+        if ($assigned = $this->model->assigneduser) {
             $results['status_label'] = 'Deployed';
-            $results['assigned_to'] = (string) link_to_route('users.show', $assigned->present()->fullName(), $this->assigned_to );
-        } else if($this->model->assetstatus) {
+            $results['assigned_to'] = (string) link_to_route('users.show', $assigned->present()->fullName(), $this->assigned_to);
+        } elseif ($this->model->assetstatus) {
             $results['status_label'] = $this->model->assetstatus->name;
         }
         $results['location'] = '';
         if (isset($assigned) and !empty($assignedLoc = $assigned->userloc)) {
             $results['location'] = $assignedLoc->present()->nameUrl();
-        } else if (!empty($this->model->defaultLoc)) {
+        } elseif (!empty($this->model->defaultLoc)) {
             $results['location'] = $this->model->defaultLoc->present()->nameUrl();
         }
 
@@ -98,14 +101,14 @@ class AssetPresenter extends Presenter
         $results['purchase_date'] = $this->purchase_date ?: '';
         $results['notes'] = $this->notes;
         $results['order_number'] = '';
-        if(!empty($this->order_number)) {
+        if (!empty($this->order_number)) {
             $results['order_number'] = link_to_route('hardware.index', $this->order_number, ['order_number' => $this->order_number]);
         }
 
         $results['last_checkout'] = $this->last_checkout ?: '';
         $results['expected_checkin'] = $this->expected_checkin ?: '';
         $results['created_at'] = '';
-        if(!empty($this->created_at)) {
+        if (!empty($this->created_at)) {
             $results['created_at'] = $this->created_at->format('F j, Y h:iA');
         }
         $results['companyName'] = $this->companyUrl();
@@ -162,7 +165,7 @@ class AssetPresenter extends Presenter
 
     public function modelUrl()
     {
-        if($this->model->model) {
+        if ($this->model->model) {
             return $this->model->model->present()->nameUrl();
         }
         return '';
@@ -175,13 +178,13 @@ class AssetPresenter extends Presenter
     public function imageUrl()
     {
         $imagePath = '';
-        if($this->image && !empty($this->image)) {
+        if ($this->image && !empty($this->image)) {
             $imagePath = $this->image;
-        } else if ($this->model && !empty($this->model->image)) {
+        } elseif ($this->model && !empty($this->model->image)) {
             $imagePath = $this->model->image;
         }
         $url = config('app.url');
-        if(!empty($imagePath)) {
+        if (!empty($imagePath)) {
             $imagePath = "<img src='{$url}/uploads/assets/{$imagePath}' height=50 width=50>";
         }
         return $imagePath;

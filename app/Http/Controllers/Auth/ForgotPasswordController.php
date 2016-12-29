@@ -36,7 +36,8 @@ class ForgotPasswordController extends Controller
      * Overriding method "getEmailSubject()" from trait "use ResetsPasswords"
      * @return string
      */
-    public function getEmailSubject(){
+    public function getEmailSubject()
+    {
         return property_exists($this, 'subject') ? $this->subject : \Lang::get('mail.reset_link');
     }
 

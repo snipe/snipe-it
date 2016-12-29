@@ -51,9 +51,9 @@
       <?php $model=$item->model; ?>
       @endif
       @if (Input::old('model_id'))
-      <?php $model=\App\Models\AssetModel::find(Input::old('model_id')); ?>
+        <?php $model=\App\Models\AssetModel::find(Input::old('model_id')); ?>
       @elseif (isset($selected_model))
-      <?php $model=$selected_model; ?>
+        <?php $model=$selected_model; ?>
       @endif
       @if (isset($model) && $model)
       @include("models/custom_fields_form",["model" => $model])
@@ -84,12 +84,12 @@
   @include ('partials.forms.edit.purchase_date')
   @include ('partials.forms.edit.supplier')
   @include ('partials.forms.edit.order_number')
-  <?php
-  $currency_type=null;
-  if ($item->id && $item->assetloc) {
-      $currency_type = $item->assetloc->currency;
-  }
-  ?>
+    <?php
+    $currency_type=null;
+    if ($item->id && $item->assetloc) {
+        $currency_type = $item->assetloc->currency;
+    }
+    ?>
   @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
   @include ('partials.forms.edit.warranty')
   @include ('partials.forms.edit.notes')

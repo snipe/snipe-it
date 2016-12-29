@@ -17,8 +17,6 @@ use Log;
 use View;
 use PragmaRX\Google2FA\Google2FA;
 
-
-
 /**
  * This controller handles authentication for the user, including local
  * database users and LDAP users.
@@ -65,7 +63,7 @@ class LoginController extends Controller
     {
         LOG::debug("Binding user to LDAP.");
         $ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
-        if(!$ldap_user) {
+        if (!$ldap_user) {
             LOG::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
             throw new \Exception("Could not find user in LDAP directory");
         } else {
@@ -73,7 +71,7 @@ class LoginController extends Controller
         }
 
         // Check if the user already exists in the database and was imported via LDAP
-        $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->where('ldap_import','=',1)->first();
+        $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->first();
         LOG::debug("Local auth lookup complete");
 
         // The user does not exist in the database. Try to get them from LDAP.
@@ -135,8 +133,8 @@ class LoginController extends Controller
         if (Setting::getSettings()->ldap_enabled=='1') {
             LOG::debug("LDAP is enabled.");
             try {
-              $user = $this->login_via_ldap($request);
-              Auth::login($user, true);
+                $user = $this->login_via_ldap($request);
+                Auth::login($user, true);
 
             // If the user was unable to login via LDAP, log the error and let them fall through to
             // local authentication.
@@ -146,20 +144,20 @@ class LoginController extends Controller
         }
 
         // If the user wasn't authenticated via LDAP, skip to local auth
-        if(!$user) {
-          LOG::debug("Authenticating user against database.");
+        if (!$user) {
+            LOG::debug("Authenticating user against database.");
           // Try to log the user in
-          if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+            if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
 
-              if (!$lockedOut) {
-                  $this->incrementLoginAttempts($request);
-              }
+                if (!$lockedOut) {
+                    $this->incrementLoginAttempts($request);
+                }
 
-              LOG::debug("Local authentication failed.");
-              return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
-          } else {
+                LOG::debug("Local authentication failed.");
+                return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
+            } else {
                   $this->clearLoginAttempts($request);
-          }
+            }
         }
 
         // Get the page we were before
@@ -200,7 +198,7 @@ class LoginController extends Controller
             $user->two_factor_secret
         );
 
-        return View::make('auth.two_factor_enroll')->with('google2fa_url',$google2fa_url);
+        return View::make('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
 
     }
 
@@ -210,7 +208,8 @@ class LoginController extends Controller
      *
      * @return Redirect
      */
-    public function getTwoFactorAuth() {
+    public function getTwoFactorAuth()
+    {
         return View::make('auth.two_factor');
     }
 
@@ -219,7 +218,8 @@ class LoginController extends Controller
      *
      * @return Redirect
      */
-    public function postTwoFactorAuth(Request $request) {
+    public function postTwoFactorAuth(Request $request)
+    {
 
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be logged in.');
@@ -290,7 +290,7 @@ class LoginController extends Controller
 
         $minutes = round($seconds / 60);
 
-        $message = \Lang::get('auth/message.throttle',['minutes' => $minutes]);
+        $message = \Lang::get('auth/message.throttle', ['minutes' => $minutes]);
 
             return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
@@ -310,8 +310,9 @@ class LoginController extends Controller
         $maxLoginAttempts = config('auth.throttle.max_attempts');
 
         return $this->limiter()->tooManyAttempts(
-            $this->throttleKey($request), $maxLoginAttempts, $lockoutTime
+            $this->throttleKey($request),
+            $maxLoginAttempts,
+            $lockoutTime
         );
     }
-
 }

@@ -46,20 +46,20 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
-          return redirect()->back()->with('error', trans('general.token_expired'));
+            return redirect()->back()->with('error', trans('general.token_expired'));
         }
 
         if ($this->isHttpException($e)) {
 
-        $statusCode = $e->getStatusCode();
+            $statusCode = $e->getStatusCode();
 
-        switch ($statusCode) {
+            switch ($statusCode) {
 
-            case '404':
-              return response()->view('layouts/basic', [
+                case '404':
+                    return response()->view('layouts/basic', [
                   'content' => view('errors/404')
-              ]);
-          }
+                    ]);
+            }
         }
 
         return parent::render($request, $e);

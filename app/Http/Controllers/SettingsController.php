@@ -21,7 +21,6 @@ use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 
-
 /**
  * This controller handles all actions related to Settings for
  * the Snipe-IT Asset Management application.
@@ -58,7 +57,7 @@ class SettingsController extends Controller
 
         $host = $_SERVER['SERVER_NAME'];
         if (($protocol === 'http://' && $_SERVER['SERVER_PORT'] != '80') || ($protocol === 'https://' && $_SERVER['SERVER_PORT'] != '443')) {
-          $host .= ':' . $_SERVER['SERVER_PORT'];
+            $host .= ':' . $_SERVER['SERVER_PORT'];
         }
         $pageURL = $protocol . $host . $_SERVER['REQUEST_URI'];
 
@@ -443,7 +442,8 @@ class SettingsController extends Controller
     }
 
 
-    public function getLdapTest() {
+    public function getLdapTest()
+    {
 
         try {
             $connection = Ldap::connectToLdap();

@@ -114,7 +114,7 @@ class CustomFieldsController extends Controller
         $field = CustomField::find($field_id);
 
         if ($field->fieldset()->detach($fieldset_id)) {
-            return redirect()->route('fieldsets.show',['fieldset' => $fieldset_id])->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
 
         return redirect()->back()->withErrors(['message' => "Field is in-use"]);

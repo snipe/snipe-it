@@ -10,7 +10,7 @@ class SnipeModel extends Model
     // Setters that are appropriate across multiple models.
     public function setPurchaseDateAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = null;
         }
         $this->attributes['purchase_date'] = $value;
@@ -22,7 +22,7 @@ class SnipeModel extends Model
     public function setPurchaseCostAttribute($value)
     {
         $value =  Helper::ParseFloat($value);
-        if($value == '0.0') {
+        if ($value == '0.0') {
             $value = null;
         }
         $this->attributes['purchase_cost'] = $value;
@@ -30,7 +30,7 @@ class SnipeModel extends Model
 
     public function setLocationIdAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = null;
         }
         $this->attributes['location_id'] = $value;
@@ -38,7 +38,7 @@ class SnipeModel extends Model
 
     public function setCategoryIdAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = null;
         }
         $this->attributes['category_id'] = $value;
@@ -46,7 +46,7 @@ class SnipeModel extends Model
 
     public function setSupplierIdAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = null;
         }
         $this->attributes['supplier_id'] = $value;
@@ -54,7 +54,7 @@ class SnipeModel extends Model
 
     public function setDepreciationIdAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = null;
         }
         $this->attributes['depreciation_id'] = $value;
@@ -62,7 +62,7 @@ class SnipeModel extends Model
 
     public function setManufacturerIdAttribute($value)
     {
-        if($value == '') {
+        if ($value == '') {
             $value = null;
         }
         $this->attributes['manufacturer_id'] = $value;

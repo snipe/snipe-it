@@ -2,7 +2,6 @@
 
 namespace App\Presenters;
 
-
 use App\Helpers\Helper;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +37,8 @@ class UserPresenter extends Presenter
                     $actions .= link_to_route(
                         'unsuspend/user',
                         '<span class="fa fa-clock-o"></span>"',
-                            $this->id,
-                            ['class' => 'btn btn-default btn-sm']
+                        $this->id,
+                        ['class' => 'btn btn-default btn-sm']
                     );
                 }
             }

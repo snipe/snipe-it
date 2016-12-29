@@ -117,11 +117,11 @@ class ReportsController extends Controller
 
         $customfields = CustomField::get();
 
-        $response = new StreamedResponse(function() use ($customfields) {
+        $response = new StreamedResponse(function () use ($customfields) {
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
+            Asset::with('assigneduser', 'assetloc', 'defaultLoc', 'assigneduser.userloc', 'model', 'supplier', 'assetstatus', 'model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function ($assets) use ($handle, $customfields) {
                 $headers=[
                     trans('general.company'),
                     trans('admin/hardware/table.asset_tag'),
@@ -140,7 +140,7 @@ class ReportsController extends Controller
                     trans('admin/hardware/table.location'),
                     trans('general.notes'),
                 ];
-                foreach($customfields as $field) {
+                foreach ($customfields as $field) {
                     $headers[]=$field->name;
                 }
                 fputcsv($handle, $headers);
@@ -166,7 +166,7 @@ class ReportsController extends Controller
                             e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
-                    foreach($customfields as $field) {
+                    foreach ($customfields as $field) {
                         $values[]=$asset->{$field->db_column_name()};
                     }
                     fputcsv($handle, $values);
@@ -339,7 +339,7 @@ class ReportsController extends Controller
         foreach ($activitylogs as $activity) {
 
             if (($activity->item) && ($activity->itemType()=="asset")) {
-              $activity_item = '<a href="'.route('hardware.show', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->present()->name()).'</a>';
+                $activity_item = '<a href="'.route('hardware.show', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->present()->name()).'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
                 $activity_item = '<a href="' . route($activity->parseItemRoute().'.show', $activity->item_id) . '">' . e($activity->item->name) . '</a>';
@@ -353,14 +353,14 @@ class ReportsController extends Controller
             if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
                 $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->user->present()->fullName().'</a>';
             } elseif ($activity->target_type === "App\Models\Asset") {
-                if($activity->target) {
+                if ($activity->target) {
                     $activity_target = '<a href="'.route('hardware.show', $activity->target_id).'">'.$activity->target->present()->name().'</a>';
                 } else {
                     $activity_target = "";
                 }
-            } elseif ( $activity->target_type === "App\Models\User") {
-                if($activity->target) {
-                   $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->target->present()->fullName().'</a>';
+            } elseif ($activity->target_type === "App\Models\User") {
+                if ($activity->target) {
+                    $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->target->present()->fullName().'</a>';
                 } else {
                     $activity_target = '';
                 }
@@ -374,7 +374,7 @@ class ReportsController extends Controller
                     $activity_target = '';
                 }
             } else {
-                if($activity->target) {
+                if ($activity->target) {
                     $activity_target = $activity->target->id;
                 } else {
                     $activity_target = "";
@@ -385,7 +385,7 @@ class ReportsController extends Controller
             $rows[] = array(
                 'icon'          => '<i class="'.$activity->parseItemIcon().'"></i>',
                 'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
-                'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
+                'action_type'              => strtolower(trans('general.'.str_replace(' ', '_', $activity->action_type))),
                 'admin'         =>  $activity->user ? (string) link_to_route('users.show', $activity->user->present()->fullName(), [$activity->user_id]) : '',
                 'target'          => $activity_target,
                 'item'          => $activity_item,
@@ -492,7 +492,7 @@ class ReportsController extends Controller
      */
     public function postCustom()
     {
-        $assets = Asset::orderBy('created_at', 'DESC')->with('company','assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->get();
+        $assets = Asset::orderBy('created_at', 'DESC')->with('company', 'assigneduser', 'assetloc', 'defaultLoc', 'assigneduser.userloc', 'model', 'supplier', 'assetstatus', 'model.manufacturer')->get();
         $customfields = CustomField::get();
 
         $rows   = [ ];

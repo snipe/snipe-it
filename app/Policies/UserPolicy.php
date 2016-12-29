@@ -70,7 +70,7 @@ class UserPolicy
      */
     public function delete(User $user, User $targetUser = null)
     {
-        if($targetUser) {
+        if ($targetUser) {
             //We can't delete ourselves.
             if ($user->id == $targetUser->id) {
                 return false;

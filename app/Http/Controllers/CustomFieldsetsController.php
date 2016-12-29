@@ -34,23 +34,23 @@ class CustomFieldsetsController extends Controller
         * @since [v1.8]
         * @return View
         */
-        public function show($id)
-        {
-            $cfset = CustomFieldset::with('fields')->where('id','=',$id)->orderBy('id','ASC')->first();
-            $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
+    public function show($id)
+    {
+        $cfset = CustomFieldset::with('fields')->where('id', '=', $id)->orderBy('id', 'ASC')->first();
+        $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
 
-            $maxid = 0;
-            foreach ($cfset->fields() as $field) {
-                if ($field->pivot->order > $maxid) {
-                    $maxid=$field->pivot->order;
-                }
-                if (isset($custom_fields_list[$field->id])) {
-                    unset($custom_fields_list[$field->id]);
-                }
+        $maxid = 0;
+        foreach ($cfset->fields() as $field) {
+            if ($field->pivot->order > $maxid) {
+                $maxid=$field->pivot->order;
             }
-
-            return View::make("custom_fields.fieldset")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
+            if (isset($custom_fields_list[$field->id])) {
+                unset($custom_fields_list[$field->id]);
+            }
         }
+
+        return View::make("custom_fields.fieldset")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
+    }
 
 
     /**
@@ -80,7 +80,7 @@ class CustomFieldsetsController extends Controller
             [
                 "name" => e($request->get("name")),
                 "user_id" => Auth::user()->id]
-            );
+        );
 
         $validator = Validator::make(Input::all(), $cfset->rules);
         if ($validator->passes()) {
@@ -169,5 +169,4 @@ class CustomFieldsetsController extends Controller
 
         return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
     }
-
 }

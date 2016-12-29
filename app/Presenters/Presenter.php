@@ -2,7 +2,6 @@
 
 namespace App\Presenters;
 
-
 use App\Models\SnipeModel;
 
 abstract class Presenter
@@ -27,11 +26,11 @@ abstract class Presenter
     {
         $model = $this->model;
         // Category of Asset belongs to model.
-        if($model->model) {
+        if ($model->model) {
             $model = $this->model->model;
         }
 
-        if($model->category) {
+        if ($model->category) {
             return $model->category->present()->nameUrl();
         }
         return '';
@@ -51,12 +50,12 @@ abstract class Presenter
             return $this->model->company->present()->nameUrl();
         }
         return '';
-    }    
+    }
     public function manufacturerUrl()
     {
         $model = $this->model;
         // Category of Asset belongs to model.
-        if($model->model) {
+        if ($model->model) {
             $model = $this->model->model;
         }
 
@@ -68,7 +67,7 @@ abstract class Presenter
 
     public function __get($property)
     {
-        if( method_exists($this, $property)) {
+        if (method_exists($this, $property)) {
             return $this->{$property}();
         }
 
@@ -79,5 +78,4 @@ abstract class Presenter
     {
         return $this->model->$method($args);
     }
-
 }

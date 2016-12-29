@@ -2,7 +2,6 @@
 
 namespace App\Importer;
 
-
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -91,7 +90,7 @@ class ItemImporter extends Importer
         });
         // We need strict compare here because the index returned above can be 0.
         //  This casts to false and causes false positives
-        if(($asset_model !== false) && !$editingModel) {
+        if (($asset_model !== false) && !$editingModel) {
             return $this->asset_models[$asset_model];
         } else {
             $this->log("No Matching Model, Creating a new one");
@@ -116,7 +115,7 @@ class ItemImporter extends Importer
                 $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelNumber . ' was created');
                 return $asset_model;
             } else {
-                $this->jsonError($asset_model,'Asset Model "' . $asset_model_name . '"', $asset_model->getErrors());
+                $this->jsonError($asset_model, 'Asset Model "' . $asset_model_name . '"', $asset_model->getErrors());
                 $this->log('Asset Model "' . $asset_model_name . '"' . $asset_model->getErrors());
                 return $asset_model;
             }
@@ -186,12 +185,12 @@ class ItemImporter extends Importer
      */
     public function createOrFetchCompany($asset_company_name)
     {
-        $company = $this->companies->search(function ($key) use($asset_company_name) {
+        $company = $this->companies->search(function ($key) use ($asset_company_name) {
             return strcasecmp($key->name, $asset_company_name) == 0;
         });
         // We need strict compare here because the index returned above can be 0.
         //  This casts to false and causes false positives
-        if($company !== false) {
+        if ($company !== false) {
             $this->log('A matching Company ' . $asset_company_name . ' already exists');
             return $this->companies[$company];
         }
@@ -225,7 +224,7 @@ class ItemImporter extends Importer
         if (empty($asset_statuslabel_name)) {
             return null;
         }
-        $status = $this->status_labels->search(function ($key) use($asset_statuslabel_name) {
+        $status = $this->status_labels->search(function ($key) use ($asset_statuslabel_name) {
             return strcasecmp($key->name, $asset_statuslabel_name) == 0;
         });
         // We need strict compare here because the index returned above can be 0.
@@ -248,7 +247,7 @@ class ItemImporter extends Importer
                 $this->log('Status ' . $asset_statuslabel_name . ' was created');
                 return $status;
             } else {
-                $this->jsonError($status,'Status "'. $asset_statuslabel_name . '"', $status->getErrors());
+                $this->jsonError($status, 'Status "'. $asset_statuslabel_name . '"', $status->getErrors());
                 return $status;
             }
         } else {
@@ -272,7 +271,7 @@ class ItemImporter extends Importer
         if (empty($item_manufacturer)) {
             $item_manufacturer='Unknown';
         }
-        $manufacturer = $this->manufacturers->search(function ($key) use($item_manufacturer) {
+        $manufacturer = $this->manufacturers->search(function ($key) use ($item_manufacturer) {
             return strcasecmp($key->name, $item_manufacturer) == 0;
         });
         // We need strict compare here because the index returned above can be 0.
@@ -317,7 +316,7 @@ class ItemImporter extends Importer
             $this->log('No location given, so none created.');
             return null;
         }
-        $location = $this->locations->search(function ($key) use($asset_location) {
+        $location = $this->locations->search(function ($key) use ($asset_location) {
             return strcasecmp($key->name, $asset_location) == 0;
         });
         // We need strict compare here because the index returned above can be 0.
@@ -366,7 +365,7 @@ class ItemImporter extends Importer
             $item_supplier='Unknown';
         }
 
-        $supplier = $this->suppliers->search(function ($key) use($item_supplier) {
+        $supplier = $this->suppliers->search(function ($key) use ($item_supplier) {
             return strcasecmp($key->name, $item_supplier) == 0;
         });
         // We need strict compare here because the index returned above can be 0.
@@ -394,6 +393,4 @@ class ItemImporter extends Importer
             return $supplier;
         }
     }
-
-
 }

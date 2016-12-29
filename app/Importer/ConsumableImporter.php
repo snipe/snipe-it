@@ -8,7 +8,6 @@
 
 namespace App\Importer;
 
-
 use App\Helpers\Helper;
 use App\Models\Consumable;
 
@@ -41,7 +40,7 @@ class ConsumableImporter extends ItemImporter
         $consumable = $this->consumables->search(function ($key) {
             return strcasecmp($key->name, $this->item['item_name']) == 0;
         });
-        if($consumable) {
+        if ($consumable) {
             $editingConsumable = true;
             if (!$this->updating) {
                 $this->log('A matching Consumable ' . $this->item["item_name"] . ' already exists.  ');

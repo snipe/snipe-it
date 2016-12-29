@@ -106,7 +106,7 @@
                           @endcan
                         </td>
                       </tr>
-                      <?php $count++; ?>
+                        <?php $count++; ?>
                       @endforeach
                     @endif
                   </tbody>

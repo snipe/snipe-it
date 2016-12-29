@@ -8,7 +8,6 @@
 
 namespace App\Presenters;
 
-
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Gate;
 
@@ -133,7 +132,7 @@ class AccessoryPresenter extends Presenter
         $results = [];
         $results['name'] = $this->nameUrl();
         $results['category'] = '';
-        if($this->model->category) {
+        if ($this->model->category) {
             $results['category'] = $this->model->category->present()->nameUrl();
         }
         $results['model_number'] = $this->model_number;

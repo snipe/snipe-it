@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use DB;
 use Log;
 
-
 /**
  * This service provider handles a few custom validation rules.
  *
@@ -27,12 +26,11 @@ class AppServiceProvider extends ServiceProvider
     {
 
         // Email array validator
-        Validator::extend('email_array', function($attribute, $value, $parameters, $validator) {
-            $value = str_replace(' ','',$value);
+        Validator::extend('email_array', function ($attribute, $value, $parameters, $validator) {
+            $value = str_replace(' ', '', $value);
             $array = explode(',', $value);
 
-            foreach($array as $email) //loop over values
-            {
+            foreach ($array as $email) { //loop over values
                 $email_to_validate['alert_email'][]=$email;
             }
 
@@ -41,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
                  'alert_email.*'=>trans('validation.email_array')
             );
 
-            $validator = Validator::make($email_to_validate,$rules,$messages);
+            $validator = Validator::make($email_to_validate, $rules, $messages);
 
             if ($validator->passes()) {
                 return true;
@@ -54,9 +52,9 @@ class AppServiceProvider extends ServiceProvider
         // Unique only if undeleted
         // This works around the use case where multiple deleted items have the same unique attribute.
         // (I think this is a bug in Laravel's validator?)
-        Validator::extend('unique_undeleted', function($attribute, $value, $parameters, $validator) {
+        Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
 
-            $count = DB::table($parameters[0])->select('id')->where($attribute,'=',$value)->whereNull('deleted_at')->where('id','!=',$parameters[1])->count();
+            $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
 
             if ($count < 1) {
                 return true;
@@ -91,7 +89,7 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        foreach($monolog->getHandlers() as $handler) {
+        foreach ($monolog->getHandlers() as $handler) {
             $handler->setLevel($log_level);
         }
     }

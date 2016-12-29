@@ -217,13 +217,14 @@ class UsersController extends Controller
      * @internal param int $id
      */
 
-    private function filterDisplayable($permissions) {
+    private function filterDisplayable($permissions)
+    {
         $output = null;
-        foreach($permissions as $key=>$permission) {
-                $output[$key] = array_filter($permission, function($p) {
+        foreach ($permissions as $key => $permission) {
+                $output[$key] = array_filter($permission, function ($p) {
                     return $p['display'] === true;
                 });
-            }
+        }
         return $output;
     }
 
@@ -308,7 +309,7 @@ class UsersController extends Controller
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
         }
-        if ( $request->has('username')) {
+        if ($request->has('username')) {
             $user->username = e($request->input('username'));
         }
         $user->email = e($request->input('email'));
@@ -334,7 +335,7 @@ class UsersController extends Controller
         if (!Auth::user()->isSuperUser()) {
             unset($permissions_array['superuser']);
             $permissions_array['superuser'] = $orig_superuser;
-       }
+        }
 
         $user->permissions =  json_encode($permissions_array);
 
@@ -550,7 +551,7 @@ class UsersController extends Controller
      */
     public function show($userId = null)
     {
-        if(!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
+        if (!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
             $error = trans('admin/users/message.user_not_found', compact('id'));
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
@@ -815,7 +816,7 @@ class UsersController extends Controller
             'users.company_id',
             'users.deleted_at',
             'users.activated'
-            ])->with('manager', 'groups', 'userloc', 'company','throttle');
+            ])->with('manager', 'groups', 'userloc', 'company', 'throttle');
         $users = Company::scopeCompanyables($users);
 
         switch ($status) {
@@ -1036,13 +1037,13 @@ class UsersController extends Controller
         try {
             $ldapconn = Ldap::connectToLdap();
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('error',$e->getMessage());
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
 
         try {
             Ldap::bindAdminToLdap($ldapconn);
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('error',$e->getMessage());
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
 
         $summary = array();
@@ -1128,11 +1129,11 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         \Debugbar::disable();
 
-        $response = new StreamedResponse(function() {
+        $response = new StreamedResponse(function () {
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
+            User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company', 'throttle')->orderBy('created_at', 'DESC')->chunk(500, function ($users) use ($handle) {
                 $headers=[
                     // strtolower to prevent Excel from trying to open it as a SYLK file
                     strtolower(trans('general.id')),

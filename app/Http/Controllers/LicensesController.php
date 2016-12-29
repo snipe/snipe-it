@@ -587,7 +587,7 @@ class LicensesController extends Controller
                     $upload_success = $file->move($destinationPath, $filename);
 
                     //Log the upload to the log
-                    $license->logUpload($filename, e($request->input('notes'))); 
+                    $license->logUpload($filename, e($request->input('notes')));
                 }
 
                 if ($upload_success) {

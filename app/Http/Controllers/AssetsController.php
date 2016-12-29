@@ -156,7 +156,7 @@ class AssetsController extends Controller
         $asset->archived                = '0';
         $asset->physical                = '1';
         $asset->depreciate              = '0';
-        $asset->status_id               =  request('status_id',0);
+        $asset->status_id               =  request('status_id', 0);
         $asset->warranty_months         = request('warranty_months', null);
         $asset->purchase_cost           = Helper::ParseFloat(Input::get('purchase_cost'));
         $asset->purchase_date           = request('purchase_date', null);
@@ -784,7 +784,7 @@ class AssetsController extends Controller
 
         // We use hardware instead of asset in the url
         $redirectTo = "hardware";
-        switch(request('import-type')) {
+        switch (request('import-type')) {
             case "asset":
                 $redirectTo = "hardware.index";
                 break;
@@ -819,7 +819,7 @@ class AssetsController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
-        $this->authorize('create',$asset_to_clone);
+        $this->authorize('create', $asset_to_clone);
 
         $asset = clone $asset_to_clone;
         $asset->id = null;
@@ -882,7 +882,7 @@ class AssetsController extends Controller
         $status['success'] = array();
 
 
-        foreach($results as $row) {
+        foreach ($results as $row) {
 
             if (is_array($row)) {
 
@@ -899,37 +899,37 @@ class AssetsController extends Controller
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
                 $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
 
-                if ($asset = Asset::where('asset_tag','=',$asset_tag)->first()) {
+                if ($asset = Asset::where('asset_tag', '=', $asset_tag)->first()) {
 
                     $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
 
-                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format,$item[$asset_tag][$batch_counter]['name']);
-                    $user = User::where('username','=',$base_username['username']);
+                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $item[$asset_tag][$batch_counter]['name']);
+                    $user = User::where('username', '=', $base_username['username']);
                     $user_query = ' on username '.$base_username['username'];
 
                     if ($request->input('match_firstnamelastname')=='1') {
-                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname',$item[$asset_tag][$batch_counter]['name']);
+                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname', $item[$asset_tag][$batch_counter]['name']);
                         $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
-                        $user->orWhere('username','=',$firstnamedotlastname['username']);
+                        $user->orWhere('username', '=', $firstnamedotlastname['username']);
                         $user_query .= ', or on username '.$firstnamedotlastname['username'];
                     }
 
                     if ($request->input('match_flastname')=='1') {
-                        $flastname = User::generateFormattedNameFromFullName('filastname',$item[$asset_tag][$batch_counter]['name']);
+                        $flastname = User::generateFormattedNameFromFullName('filastname', $item[$asset_tag][$batch_counter]['name']);
                         $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
-                        $user->orWhere('username','=',$flastname['username']);
+                        $user->orWhere('username', '=', $flastname['username']);
                         $user_query .= ', or on username '.$flastname['username'];
                     }
                     if ($request->input('match_firstname')=='1') {
-                        $firstname = User::generateFormattedNameFromFullName('firstname',$item[$asset_tag][$batch_counter]['name']);
+                        $firstname = User::generateFormattedNameFromFullName('firstname', $item[$asset_tag][$batch_counter]['name']);
                         $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
-                        $user->orWhere('username','=',$firstname['username']);
+                        $user->orWhere('username', '=', $firstname['username']);
                         $user_query .= ', or on username '.$firstname['username'];
                     }
                     if ($request->input('match_email')=='1') {
                         if ($item[$asset_tag][$batch_counter]['email']=='') {
                             $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
-                            $user->orWhere('username','=',$user_email);
+                            $user->orWhere('username', '=', $user_email);
                             $user_query .= ', or on username '.$user_email;
                         }
                     }
@@ -948,8 +948,7 @@ class AssetsController extends Controller
                                 'target_type' => User::class,
                                 'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
                                 'action_type'   => 'checkout',
-                            )
-                        );
+                            ));
 
                         $asset->assigned_to = $user->id;
 
@@ -974,13 +973,13 @@ class AssetsController extends Controller
         // Loop through and backfill the checkins
         foreach ($item as $key => $asset_batch) {
             $total_in_batch = count($asset_batch);
-            for($x = 0; $x < $total_in_batch; $x++) {
+            for ($x = 0; $x < $total_in_batch; $x++) {
                 $next = $x + 1;
 
                 // Only do this if a matching user was found
-                if ((array_key_exists('checkedout_to',$asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
+                if ((array_key_exists('checkedout_to', $asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
 
-                    if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next,$asset_batch))) {
+                    if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next, $asset_batch))) {
                         $checkin_date = Carbon::parse($asset_batch[$next]['checkout_date'])->subDay(1)->format('Y-m-d H:i:s');
                         $asset_batch[$x]['real_checkin'] = $checkin_date;
 
@@ -992,13 +991,12 @@ class AssetsController extends Controller
                                 'target_id' => null,
                                 'created_at' => $checkin_date,
                                 'action_type' => 'checkin'
-                            )
-                        );
+                            ));
                     }
                 }
             }
         }
-        return View::make('hardware/history')->with('status',$status);
+        return View::make('hardware/history')->with('status', $status);
     }
 
     /**
@@ -1152,12 +1150,14 @@ class AssetsController extends Controller
             // Create labels
             if (Input::get('bulk_actions')=='labels') {
                 $count = 0;
-                return View::make('hardware/labels')->with('assets', Asset::find($asset_ids))->with('settings', Setting::getSettings())->with('count', $count)->with('settings',
-                    Setting::getSettings());
+                return View::make('hardware/labels')->with('assets', Asset::find($asset_ids))->with('settings', Setting::getSettings())->with('count', $count)->with(
+                    'settings',
+                    Setting::getSettings()
+                );
             } elseif (Input::get('bulk_actions')=='delete') {
                 $assets = Asset::with('assigneduser', 'assetloc')->find($asset_ids);
-                $assets->each(function($asset) {
-                    $this->authorize('delete',$asset);
+                $assets->each(function ($asset) {
+                    $this->authorize('delete', $asset);
                 });
                 return View::make('hardware/bulk-delete')->with('assets', $assets);
              // Bulk edit
@@ -1168,8 +1168,10 @@ class AssetsController extends Controller
                 ->with('statuslabel_list', Helper::statusLabelList())
                 ->with('location_list', Helper::locationsList())
                 ->with('models_list', Helper::modelList())
-                ->with('companies_list',
-                    array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList());
+                ->with(
+                    'companies_list',
+                    array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList()
+                );
             }
         }
         return redirect()->back()->with('error', 'No action selected');
@@ -1347,7 +1349,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('status_id')) {
-            $assets->where('status_id','=', e($request->get('status_id')));
+            $assets->where('status_id', '=', e($request->get('status_id')));
         }
 
         $allowed_columns = [
@@ -1429,60 +1431,58 @@ class AssetsController extends Controller
         return $data;
     }
 
-      public function getBulkCheckout()
-      {
+    public function getBulkCheckout()
+    {
         $this->authorize('checkout', Asset::class);
-          // Filter out assets that are not deployable.
-          $assets_list = Company::scopeCompanyables(Asset::RTD()->get(), 'assets.company_id')->pluck('detailed_name', 'id')->toArray();
-          return View::make('hardware/bulk-checkout')
-              ->with('users_list', Helper::usersList())
-              ->with('assets_list', $assets_list);
-      }
+        // Filter out assets that are not deployable.
+        $assets_list = Company::scopeCompanyables(Asset::RTD()->get(), 'assets.company_id')->pluck('detailed_name', 'id')->toArray();
+        return View::make('hardware/bulk-checkout')
+            ->with('users_list', Helper::usersList())
+            ->with('assets_list', $assets_list);
+    }
 
-      public function postBulkCheckout(Request $request)
-      {
-          $this->validate($request, [
-             "assigned_to"   => 'required'
-          ]);
+    public function postBulkCheckout(Request $request)
+    {
+        $this->validate($request, [
+           "assigned_to"   => 'required'
+        ]);
 
-          $user = User::find(e(Input::get('assigned_to')));
-          $admin = Auth::user();
+        $user = User::find(e(Input::get('assigned_to')));
+        $admin = Auth::user();
 
-          $asset_ids = array_filter(Input::get('selected_assets'));
+        $asset_ids = array_filter(Input::get('selected_assets'));
 
-          if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
-              $checkout_at = e(Input::get('checkout_at'));
-          } else {
-              $checkout_at = date("Y-m-d H:i:s");
-          }
+        if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
+            $checkout_at = e(Input::get('checkout_at'));
+        } else {
+            $checkout_at = date("Y-m-d H:i:s");
+        }
 
-          if (Input::has('expected_checkin')) {
-              $expected_checkin = e(Input::get('expected_checkin'));
-          } else {
-              $expected_checkin = '';
-          }
+        if (Input::has('expected_checkin')) {
+            $expected_checkin = e(Input::get('expected_checkin'));
+        } else {
+            $expected_checkin = '';
+        }
 
-          $errors = [];
-          DB::transaction(function() use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids)
-          {
-              foreach($asset_ids as $asset_id)
-              {
-                  $asset = Asset::find($asset_id);
-                  $this->authorize('checkout', $asset);
-                  $error = $asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+        $errors = [];
+        DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
+          
+            foreach ($asset_ids as $asset_id) {
+                $asset = Asset::find($asset_id);
+                $this->authorize('checkout', $asset);
+                $error = $asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
 
-                  if($error) {
-                      array_merge_recursive($errors, $asset->getErrors()->toArray());
-                  }
-              }
-          });
+                if ($error) {
+                    array_merge_recursive($errors, $asset->getErrors()->toArray());
+                }
+            }
+        });
 
-          if (!$errors) {
-            // Redirect to the new asset page
-              return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
-          }
+        if (!$errors) {
+          // Redirect to the new asset page
+            return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
+        }
           // Redirect to the asset management page with error
-          return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
-      }
-
+            return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
+    }
 }

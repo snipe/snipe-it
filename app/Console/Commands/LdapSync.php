@@ -70,11 +70,11 @@ class LdapSync extends Command
         $results = Ldap::findLdapUsers();
 
         if ($this->option('location')!='') {
-            $location = Location::where('name','=',$this->option('location'))->first();
+            $location = Location::where('name', '=', $this->option('location'))->first();
             LOG::debug('Location name '.$this->option('location').' passed');
             LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
         } elseif ($this->option('location_id')!='') {
-            $location = Location::where('id','=',$this->option('location_id'))->first();
+            $location = Location::where('id', '=', $this->option('location_id'))->first();
             LOG::debug('Location ID '.$this->option('location_id').' passed');
             LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
         } else {
@@ -146,7 +146,7 @@ class LdapSync extends Command
         if ($this->option('summary')) {
             for ($x = 0; $x < count($summary); $x++) {
                 if ($summary[$x]['status']=='error') {
-                    $this->error('ERROR: '.$summary[$x]['firstname'].' '.$summary[$x]['lastname'].' (username:  '.$summary[$x]['username'].' was not imported: '.$summary[$x]['note'] );
+                    $this->error('ERROR: '.$summary[$x]['firstname'].' '.$summary[$x]['lastname'].' (username:  '.$summary[$x]['username'].' was not imported: '.$summary[$x]['note']);
                 } else {
                     $this->info('User '.$summary[$x]['firstname'].' '.$summary[$x]['lastname'].' (username:  '.$summary[$x]['username'].' was '.strtoupper($summary[$x]['createorupdate']).'.');
                 }
@@ -159,6 +159,4 @@ class LdapSync extends Command
 
 
     }
-
-
 }

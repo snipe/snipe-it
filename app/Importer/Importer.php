@@ -1,7 +1,6 @@
 <?php
 namespace App\Importer;
 
-
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -69,15 +68,17 @@ abstract class Importer
      * @param bool $updating
      * @param null $usernameFormat
      */
-    function __construct(string $filename,
-                         $logCallback,
-                         $progressCallback,
-                         $errorCallback,
-                         $testRun = false,
-                         $user_id = -1,
-                         $updating = false,
-                         $usernameFormat = null)
-    {
+    function __construct(
+        string $filename,
+        $logCallback,
+        $progressCallback,
+        $errorCallback,
+        $testRun = false,
+        $user_id = -1,
+        $updating = false,
+        $usernameFormat = null
+    ) {
+    
         $this->filename = $filename;
         $this->csv = Reader::createFromPath($filename);
         $this->csv->setNewLine('\r\n');
@@ -85,7 +86,7 @@ abstract class Importer
             ini_set("auto_detect_line_endings", '1');
         }
         $this->testRun = $testRun;
-        if($user_id == -1) {
+        if ($user_id == -1) {
             $user_id = Auth::id();
         }
         $this->user_id = $user_id;
@@ -193,11 +194,13 @@ abstract class Importer
         return array_key_exists($index_name, $array) ? e(trim($array[$index_name])) : '';
     }
 
-    protected function log($string) {
+    protected function log($string)
+    {
         call_user_func($this->logCallback, $string);
     }
 
-    protected function jsonError($item, $field, $errorString) {
+    protected function jsonError($item, $field, $errorString)
+    {
         call_user_func($this->errorCallback, $item, $field, $errorString);
     }
 
@@ -276,7 +279,7 @@ abstract class Importer
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
-                    $this->jsonError($user,'User "' . $first_name . '"', $user->getErrors());
+                    $this->jsonError($user, 'User "' . $first_name . '"', $user->getErrors());
                 }
             }
         }

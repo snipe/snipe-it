@@ -41,7 +41,8 @@ class AssetModel extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
-    public function setEolAttribute($value) {
+    public function setEolAttribute($value)
+    {
         if ($value == '') {
             $value = 0;
         }

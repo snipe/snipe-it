@@ -37,7 +37,7 @@ class CustomField extends Model
     {
         self::creating(function ($custom_field) {
 
-            if (Schema::hasColumn(CustomField::$table_name,$custom_field->db_column_name())) {
+            if (Schema::hasColumn(CustomField::$table_name, $custom_field->db_column_name())) {
               //field already exists when making a new custom field; fail.
                 return false;
             }
@@ -50,20 +50,20 @@ class CustomField extends Model
 
         self::updating(function ($custom_field) {
             if ($custom_field->isDirty("name")) {
-                if (Schema::hasColumn(CustomField::$table_name,$custom_field->db_column_name())) {
+                if (Schema::hasColumn(CustomField::$table_name, $custom_field->db_column_name())) {
                   //field already exists when renaming a custom field
                     return false;
                 }
                 return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
-                  $table->renameColumn(self::name_to_db_name($custom_field->getOriginal("name")),$custom_field->db_column_name());
+                    $table->renameColumn(self::name_to_db_name($custom_field->getOriginal("name")), $custom_field->db_column_name());
                 });
             }
             return true;
         });
 
         self::deleting(function ($custom_field) {
-            return Schema::table(CustomField::$table_name,function ($table) use ($custom_field) {
-              $table->dropColumn(self::name_to_db_name($custom_field->getOriginal("name")));
+            return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
+                $table->dropColumn(self::name_to_db_name($custom_field->getOriginal("name")));
             });
         });
     }
@@ -122,7 +122,8 @@ class CustomField extends Model
      * @since [v3.4]
      * @return Array
      */
-    public function formatFieldValuesAsArray() {
+    public function formatFieldValuesAsArray()
+    {
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
 
         $result[''] = 'Select '.strtolower($this->format);
@@ -130,7 +131,7 @@ class CustomField extends Model
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);
             if ($arr_parts[0]!='') {
-                if (key_exists('1',$arr_parts)) {
+                if (key_exists('1', $arr_parts)) {
                     $result[$arr_parts[0]] = $arr_parts[1];
                 } else {
                     $result[$arr_parts[0]] = $arr_parts[0];
@@ -143,14 +144,11 @@ class CustomField extends Model
         return $result;
     }
 
-    public function isFieldDecryptable($string) {
+    public function isFieldDecryptable($string)
+    {
         if (($this->field_encrypted=='1') && ($string!='')) {
             return true;
         }
         return false;
     }
-
-
-
-
 }

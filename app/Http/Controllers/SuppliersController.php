@@ -200,8 +200,10 @@ class SuppliersController extends Controller
             // Delete the supplier
             $supplier->delete();
             // Redirect to the suppliers management page
-            return redirect()->route('suppliers.index')->with('success',
-                trans('admin/suppliers/message.delete.success'));
+            return redirect()->route('suppliers.index')->with(
+                'success',
+                trans('admin/suppliers/message.delete.success')
+            );
         }
         // Redirect to the asset management page
         return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.assoc_users'));

@@ -47,7 +47,7 @@ trait Loggable
         if (!is_null($this->asset_id) || isset($target)) {
             $log->target_type = Asset::class;
             $log->target_id = $this->asset_id;
-        } else if (!is_null($this->assigned_to)) {
+        } elseif (!is_null($this->assigned_to)) {
             $log->target_type = User::class;
             $log->target_id = $this->assigned_to;
         }

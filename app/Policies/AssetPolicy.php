@@ -41,7 +41,7 @@ class AssetPolicy
         return $user->hasAccess('assets.view');
     }
 
-    public function viewRequestable(User $user, Asset $asset=null)
+    public function viewRequestable(User $user, Asset $asset = null)
     {
         return $user->hasAccess('assets.view.requestable');
     }
@@ -77,5 +77,4 @@ class AssetPolicy
     {
         return $user->hasAccess('assets.edit');
     }
-
 }

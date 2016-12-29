@@ -207,7 +207,7 @@ class StatuslabelsController extends Controller
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
         $statuslabel->color          =  Input::get('color');
-        $statuslabel->show_in_nav          =  Input::get('show_in_nav',0);
+        $statuslabel->show_in_nav          =  Input::get('show_in_nav', 0);
 
 
         // Was the asset created?

@@ -164,26 +164,32 @@ final class Company extends SnipeModel
         }
     }
 
-    public function users() {
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 
-    public function assets() {
+    public function assets()
+    {
         return $this->hasMany(Asset::class);
     }
 
-    public function licenses() {
+    public function licenses()
+    {
         return $this->hasMany(License::class);
     }
-    public function accessories() {
+    public function accessories()
+    {
         return $this->hasMany(Accessory::class);
     }
 
-    public function consumables() {
+    public function consumables()
+    {
         return $this->hasMany(Consumable::class);
     }
 
-    public function components() {
+    public function components()
+    {
         return $this->hasMany(Component::class);
     }
 }

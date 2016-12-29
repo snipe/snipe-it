@@ -39,7 +39,7 @@
               <?php
               $totalDays = 0;
               $totalCost = 0;
-              ?>
+                ?>
               @foreach ($assetMaintenances as $assetMaintenance)
               <tr>
                 <td>{{ is_null($assetMaintenance->asset->company) ? '' : $assetMaintenance->asset->company->name }}</td>
@@ -65,10 +65,10 @@
                   {{ number_format($assetMaintenance->cost,2) }}
                 </td>
               </tr>
-              <?php
-              $totalDays += $assetMaintenanceTime;
-              $totalCost += floatval($assetMaintenance->cost);
-              ?>
+                <?php
+                $totalDays += $assetMaintenanceTime;
+                $totalCost += floatval($assetMaintenance->cost);
+                ?>
               @endforeach
             </tbody>
             <tfoot>

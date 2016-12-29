@@ -521,7 +521,7 @@
                               <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->present()->fullName() }}</a>
                             @endif
                           </td>
-                          <?php $totalCost += $assetMaintenance->cost; ?>
+                            <?php $totalCost += $assetMaintenance->cost; ?>
                             @can('update', \App\Models\Asset::class)
                               <td>
                                 <a href="{{ route('maintenances.edit', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>

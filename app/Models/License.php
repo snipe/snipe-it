@@ -35,7 +35,7 @@ class License extends Depreciable
 
     public function setExpirationDateAttribute($value)
     {
-        if($value == '' || $value == '0000-00-00') {
+        if ($value == '' || $value == '0000-00-00') {
             $value = null;
         }
         $this->attributes['expiration_date'] = $value;
@@ -43,7 +43,7 @@ class License extends Depreciable
 
     public function setTerminationDateAttribute($value)
     {
-        if($value == '' || $value == '0000-00-00') {
+        if ($value == '' || $value == '0000-00-00') {
             $value = null;
         }
         $this->attributes['termination_date'] = $value;
@@ -261,8 +261,8 @@ class License extends Depreciable
              ->orWhereHas('manufacturer', function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
                             $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                    });
-                })
+                        });
+             })
             ->orWhereHas('company', function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('companies.name', 'LIKE', '%'.$search.'%');

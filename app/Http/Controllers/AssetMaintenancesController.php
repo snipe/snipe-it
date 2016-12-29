@@ -74,7 +74,7 @@ class AssetMaintenancesController extends Controller
     */
     public function getDatatable(Request $request)
     {
-        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company','admin');
+        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company', 'admin');
 
         if (Input::has('search')) {
             $maintenances = $maintenances->TextSearch(e($request->input('search')));
@@ -107,12 +107,12 @@ class AssetMaintenancesController extends Controller
             if (Gate::allows('update', Asset::class)) {
                 $actions .= Helper::generateDatatableButton('edit', route('maintenances.edit', $maintenance->id));
                 $actions .= Helper::generateDatatableButton(
-                        'delete',
-                        route('maintenances.destroy', $maintenance->id),
-                        $enabled = true,
-                        trans('admin/asset_maintenances/message.delete.confirm'),
-                        $maintenance->title
-                    );
+                    'delete',
+                    route('maintenances.destroy', $maintenance->id),
+                    $enabled = true,
+                    trans('admin/asset_maintenances/message.delete.confirm'),
+                    $maintenance->title
+                );
             }
 
             if (($maintenance->cost) && (isset($maintenance->asset)) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {

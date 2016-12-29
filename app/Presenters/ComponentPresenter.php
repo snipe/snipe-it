@@ -2,7 +2,6 @@
 
 namespace App\Presenters;
 
-
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Gate;
 

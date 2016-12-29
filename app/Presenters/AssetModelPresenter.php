@@ -8,7 +8,6 @@
 
 namespace App\Presenters;
 
-
 use App\Helpers\Helper;
 
 /**
@@ -48,7 +47,7 @@ class AssetModelPresenter extends Presenter
         $results['model_number'] = $this->model_number;
         $results['numassets'] = $this->assets()->count();
         $results['depreciation'] = trans('general.no_depreciation');
-        if(($depreciation = $this->model->depreciation) and $depreciation->id > 0) {
+        if (($depreciation = $this->model->depreciation) and $depreciation->id > 0) {
             $results['depreciation'] = $depreciation->name.' ('.$depreciation->months.')';
         }
         $results['category'] = $this->categoryUrl();
@@ -76,7 +75,7 @@ class AssetModelPresenter extends Presenter
 
     public function eolText()
     {
-        if($this->eol) {
+        if ($this->eol) {
             return $this->eol.' '.trans('general.months');
         }
         return '';
@@ -101,7 +100,7 @@ class AssetModelPresenter extends Presenter
      */
     public function nameUrl()
     {
-        return  (string) link_to_route('models.show',$this->name, $this->id);
+        return  (string) link_to_route('models.show', $this->name, $this->id);
     }
 
     /**
@@ -110,7 +109,7 @@ class AssetModelPresenter extends Presenter
      */
     public function imageUrl()
     {
-        if(!empty($this->image)) {
+        if (!empty($this->image)) {
             return '<img src="' . url('/') . '/uploads/models/' . $this->image . '" height=50 width=50>';
         }
         return '';

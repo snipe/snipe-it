@@ -8,7 +8,6 @@
 
 namespace App\Importer;
 
-
 use App\Helpers\Helper;
 use App\Models\Accessory;
 
@@ -41,7 +40,7 @@ class AccessoryImporter extends ItemImporter
         $accessory = $this->accessories->search(function ($key) {
             return strcasecmp($key->name, $this->item['item_name']) == 0;
         });
-        if($accessory) {
+        if ($accessory) {
             $editingAccessory = true;
             if (!$this->updating) {
                 $this->log('A matching Accessory ' . $this->item["item_name"] . ' already exists.  ');
@@ -101,7 +100,7 @@ class AccessoryImporter extends ItemImporter
                 // $this->comment('Accessory ' . $this->item["item_name"] . ' was created');
 
             } else {
-                $this->jsonError($accessory,'Accessory', $accessory->getErrors()) ;
+                $this->jsonError($accessory, 'Accessory', $accessory->getErrors()) ;
             }
         } else {
             $this->log('TEST RUN - Accessory  ' . $this->item["item_name"] . ' not created');

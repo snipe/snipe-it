@@ -2,7 +2,6 @@
 
 namespace App\Presenters;
 
-
 use App\Helpers\Helper;
 
 /**
@@ -48,7 +47,7 @@ class ManufacturerPresenter extends Presenter
      */
     public function nameUrl()
     {
-       return (string) link_to_route('manufacturers.show', $this->name, $this->id);
+        return (string) link_to_route('manufacturers.show', $this->name, $this->id);
     }
 
     /**

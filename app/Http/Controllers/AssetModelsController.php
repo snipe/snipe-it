@@ -418,7 +418,7 @@ class AssetModelsController extends Controller
         if (Input::has('search')) {
             $assets = $assets->TextSearch(e($request->input('search')));
         }
-        $offset = request('offset',0);
+        $offset = request('offset', 0);
         $limit = request('limit', 50);
 
 

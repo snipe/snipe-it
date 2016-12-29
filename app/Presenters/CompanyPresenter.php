@@ -2,7 +2,6 @@
 
 namespace App\Presenters;
 
-
 /**
  * Class CompanyPresenter
  * @package App\Presenters

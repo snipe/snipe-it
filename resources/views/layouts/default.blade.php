@@ -414,7 +414,7 @@
                     <a href="{{ url('hardware') }}">@lang('general.list_all')</a>
                   </li>
 
-                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav','=',1)->get(); ?>
+                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->get(); ?>
                     @if (count($status_navs) > 0)
                         <li class="divider">&nbsp;</li>
                         @foreach ($status_navs as $status_nav)

@@ -38,13 +38,12 @@ class CheckoutNotification extends Notification
     public function via($notifiable)
     {
         $notifyBy = [];
-        if(Setting::getSettings()->slack_endpoint) {
+        if (Setting::getSettings()->slack_endpoint) {
             $notifyBy[] = 'slack';
         }
         $item = $this->params['item'];
 
-        if (
-            (method_exists($item, 'requireAcceptance') && ($item->requireAcceptance()=='1'))
+        if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance()=='1'))
             || (method_exists($item, 'getEula') && ($item->getEula()))
         ) {
             $notifyBy[] = 'mail';
@@ -68,7 +67,7 @@ class CheckoutNotification extends Notification
                 ];
                 array_key_exists('note', $this->params) && $fields['Notes'] = $this->params['note'];
 
-                $attachment->title($item->name, $item->present()->viewUrl() )
+                $attachment->title($item->name, $item->present()->viewUrl())
                 ->fields($fields);
             });
     }

@@ -51,11 +51,11 @@ class Setting extends Model
     {
         static $static_cache = null;
 
-            if (!$static_cache) {
-                if (Schema::hasTable('settings')) {
-                    $static_cache = Setting::first();
-                }
+        if (!$static_cache) {
+            if (Schema::hasTable('settings')) {
+                $static_cache = Setting::first();
             }
+        }
 
             return $static_cache;
 

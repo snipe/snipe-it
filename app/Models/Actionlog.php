@@ -26,15 +26,15 @@ class Actionlog extends Model
     public static function boot()
     {
         parent::boot();
-        static::creating( function (Actionlog $actionlog) {
+        static::creating(function (Actionlog $actionlog) {
             // If the admin is a superadmin, let's see if the target instead has a company.
             if (Auth::user() && Auth::user()->isSuperUser()) {
                 if ($actionlog->target) {
                     $actionlog->company_id = $actionlog->target->company_id;
-                } else if ($actionlog->item) {
+                } elseif ($actionlog->item) {
                     $actionlog->company_id = $actionlog->item->company_id;
                 }
-            } else if (Auth::user() && Auth::user()->company) {
+            } elseif (Auth::user() && Auth::user()->company) {
                 $actionlog->company_id = Auth::user()->company_id;
             }
         });
@@ -45,27 +45,29 @@ class Actionlog extends Model
         return $this->morphTo('item')->withTrashed();
     }
 
-    public function company() {
-        return $this->hasMany('\App\Models\Company', 'id','company_id');
+    public function company()
+    {
+        return $this->hasMany('\App\Models\Company', 'id', 'company_id');
     }
 
     public function itemType()
     {
 
-        if($this->item_type == AssetModel::class) {
+        if ($this->item_type == AssetModel::class) {
             return "model";
         }
         return camel_case(class_basename($this->item_type));
     }
 
-    public function parseItemRoute() {
+    public function parseItemRoute()
+    {
         if ($this->itemType() == "asset") {
             $itemroute = 'assets';
         } elseif ($this->itemType() == "accessory") {
             $itemroute = 'accessories';
         } elseif ($this->itemType()=="consumable") {
             $itemroute = 'consumables';
-        } elseif ($this->itemType()=="license"){
+        } elseif ($this->itemType()=="license") {
             $itemroute = 'licenses';
         } elseif ($this->itemType()=="component") {
             $itemroute = 'components';
@@ -77,14 +79,15 @@ class Actionlog extends Model
     }
 
 
-    public function parseItemIcon() {
+    public function parseItemIcon()
+    {
         if ($this->itemType() == "asset") {
             $itemicon = 'fa fa-barcode';
         } elseif ($this->itemType() == "accessory") {
             $itemicon  = 'fa fa-keyboard-o';
         } elseif ($this->itemType()=="consumable") {
             $itemicon  = 'fa fa-tint';
-        } elseif ($this->itemType()=="license"){
+        } elseif ($this->itemType()=="license") {
             $itemicon  = 'fa fa-floppy-o';
         } elseif ($this->itemType()=="component") {
             $itemicon  = 'fa fa-hdd-o';

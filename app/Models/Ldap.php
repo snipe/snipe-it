@@ -8,7 +8,6 @@ use Exception;
 use Input;
 use Log;
 
-
 class Ldap extends Model
 {
 
@@ -36,8 +35,8 @@ class Ldap extends Model
         }
 
         // If the user specifies where CA Certs are, make sure to use them
-        if(env("LDAPTLS_CACERT")) {
-          putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
+        if (env("LDAPTLS_CACERT")) {
+            putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
         }
 
         $connection = @ldap_connect($ldap_host);
@@ -78,13 +77,10 @@ class Ldap extends Model
         $ldap_username_field     = $settings->ldap_username_field;
         $baseDn      = $settings->ldap_basedn;
 
-        if ($settings->is_ad =='1')
-        {
-
-            // Check if they are using the userprincipalname for the username field.
+        if ($settings->is_ad =='1') {
+        // Check if they are using the userprincipalname for the username field.
             // If they are, we can skip building the UPN to authenticate against AD
-            if ($ldap_username_field=='userprincipalname')
-            {
+            if ($ldap_username_field=='userprincipalname') {
                 $userDn = $username;
             } else {
                 // In case they haven't added an AD domain
@@ -238,7 +234,8 @@ class Ldap extends Model
      * @param $ldapatttibutes
      * @return array|bool
      */
-    static function findLdapUsers() {
+    static function findLdapUsers()
+    {
 
         $ldapconn = Ldap::connectToLdap();
         $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
@@ -291,8 +288,4 @@ class Ldap extends Model
 
 
     }
-
-
-
-
 }

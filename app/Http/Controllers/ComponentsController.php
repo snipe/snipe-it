@@ -264,7 +264,7 @@ class ComponentsController extends Controller
         $this->authorize('checkout', $component);
 
         $max_to_checkout = $component->numRemaining();
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             "asset_id"          => "required",
             "assigned_qty"      => "required|numeric|between:1,$max_to_checkout"
         ]);
