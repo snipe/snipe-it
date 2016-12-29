@@ -347,7 +347,7 @@
                  <img src="{{ url('/') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
-              @if (($asset->assignedTo) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+              @if (($asset->assignedTo) && ($asset->deleted_at==''))
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
                 <p>
                   @if($asset->assigned_type == User::class) <!-- Only users have avatars currently-->
@@ -365,37 +365,20 @@
                     <li><i class="fa fa-phone"></i> {{ $asset->assigneduser->phone }}</li>
                   @endif
 
-                  @if (isset($asset->userloc))
-                    <li>{{ $asset->userloc->name }}</li>
-                    <li>{{ $asset->userloc->address }}
-                      @if ($asset->userloc->address2!='')
-                      {{ $asset->userloc->address2 }}
+                  @if (isset($asset->assetLoc))
+                    <li>{{ $asset->assetLoc->name }}</li>
+                    <li>{{ $asset->assetLoc->address }}
+                      @if ($asset->assetLoc->address2!='')
+                      {{ $asset->assetLoc->address2 }}
                       @endif
                     </li>
 
-                    <li>{{ $asset->userloc->city }}
-                      @if (($asset->userloc->city!='') && ($asset->userloc->state!=''))
+                    <li>{{ $asset->assetLoc->city }}
+                      @if (($asset->assetLoc->city!='') && ($asset->assetLoc->state!=''))
                           ,
                       @endif
-                      {{ $asset->userloc->state }} {{ $asset->userloc->zip }}
+                      {{ $asset->assetLoc->state }} {{ $asset->assetLoc->zip }}
                     </li>
-
-                  @elseif (isset($asset->assetloc))
-                    <li>{{ $asset->assetloc->name }}</li>
-                    <li>{{ $asset->assetloc->address }}
-                      @if ($asset->assetloc->address2!='')
-                        {{ $asset->assetloc->address2 }}
-                      @endif
-                    </li>
-
-                    <li>
-                      {{ $asset->assetloc->city }}
-                      @if (($asset->assetloc->city!='') && ($asset->assetloc->state!=''))
-                      ,
-                      @endif
-                      {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}
-                    </li>
-
                     @endif
                 </ul>
 
