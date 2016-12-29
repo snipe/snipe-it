@@ -70,7 +70,7 @@ Bulk Checkin &amp; Delete
                       @endforeach
                     </td>
                     <td>
-                      {{ number_format($user->assets()->count())  }}
+                      {{ number_format($user->assignedAssets()->count())  }}
                     </td>
                     <td>
                       {{ number_format($user->accessories()->count())  }}

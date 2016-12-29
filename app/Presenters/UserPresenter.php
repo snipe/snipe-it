@@ -72,7 +72,7 @@ class UserPresenter extends Presenter
             'location'      => ($this->model->userloc) ? $this->model->userloc->present()->nameUrl() : '',
             'manager'       => ($this->model->manager) ? $this->manager->present()->nameUrl() : '',
             'employee_num'  => $this->employee_num,
-            'assets'        => $this->model->assets()->count(),
+            'assets'        => $this->model->assignedAssets()->count(),
             'licenses'      => $this->model->licenses()->count(),
             'accessories'   => $this->model->accessories()->count(),
             'consumables'   => $this->model->consumables()->count(),

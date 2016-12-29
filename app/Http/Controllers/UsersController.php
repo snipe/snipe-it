@@ -364,9 +364,9 @@ class UsersController extends Controller
             // Authorize takes care of many of our logic checks now.
             $this->authorize('delete', User::class);
 
-            if ($user->assets()->count() > 0) {
+            if ($user->assignedAssets()->count() > 0) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assignedAssets()->count() . ' assets associated with them.');
             }
 
             if ($user->licenses()->count() > 0) {
@@ -1132,7 +1132,7 @@ class UsersController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
+            User::with('assignedAssets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
                 $headers=[
                     // strtolower to prevent Excel from trying to open it as a SYLK file
                     strtolower(trans('general.id')),
@@ -1174,7 +1174,7 @@ class UsersController extends Controller
                         $user->email,
                         ($user->manager) ? $user->manager->present()->fullName() : '',
                         ($user->userloc) ? $user->userloc->name : '',
-                        $user->assets->count(),
+                        $user->assignedAssets->count(),
                         $user->licenses->count(),
                         $user->accessories->count(),
                         $user->consumables->count(),

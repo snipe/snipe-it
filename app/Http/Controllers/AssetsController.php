@@ -1325,7 +1325,7 @@ class AssetsController extends Controller
      */
     public function getDatatable(Request $request, $status = null)
     {
-        $this->authorize('index', Asset::class);
+        $this->authorize('index', 'App\Models\Asset');
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
             'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
             'model.category', 'model.manufacturer', 'model.fieldset');

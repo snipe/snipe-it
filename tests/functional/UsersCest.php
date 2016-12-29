@@ -91,14 +91,9 @@ class UsersCest
 
     public function allowsDelete(FunctionalTester $I)
     {
+        $user = factory(App\Models\User::class, 'valid-user')->create();
         $I->wantTo('Ensure I can delete a user');
-        $userId = User::doesntHave('assets')
-                    ->doesntHave('accessories')
-                    ->doesntHave('consumables')
-                    ->doesntHave('licenses')
-                    ->where('username', '!=', 'snipeit')
-                    ->first()->id;
-        $I->sendDelete(route('users.destroy', $userId), ['_token' => csrf_token()]);
+        $I->sendDelete(route('users.destroy', $user->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 }
