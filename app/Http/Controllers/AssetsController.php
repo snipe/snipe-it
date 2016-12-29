@@ -104,23 +104,26 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @param integer $model_id
+     * @param Request $request
      * @return View
+     * @internal param int $model_id
      */
     public function create(Request $request)
     {
         $this->authorize('create', Asset::class);
-        $view = View::make('hardware/edit');
-        $view->with('supplier_list', Helper::suppliersList());
-        $view->with('company_list', Helper::companyList());
-        $view->with('model_list', Helper::modelList());
-        $view->with('statuslabel_list', Helper::statusLabelList());
-        $view->with('assigned_to', Helper::usersList());
-        $view->with('location_list', Helper::locationsList());
-        $view->with('item', new Asset);
-        $view->with('manufacturer', Helper::manufacturerList());
-        $view->with('category', Helper::categoryList('asset'));
-        $view->with('statuslabel_types', Helper::statusTypeList());
+        $view = View::make('hardware/edit')
+            ->with('supplier_list', Helper::suppliersList())
+            ->with('company_list', Helper::companyList())
+            ->with('model_list', Helper::modelList())
+            ->with('statuslabel_list', Helper::statusLabelList())
+            ->with('location_list', Helper::locationsList())
+            ->with('item', new Asset)
+            ->with('manufacturer', Helper::manufacturerList())
+            ->with('category', Helper::categoryList('asset'))
+            ->with('statuslabel_types', Helper::statusTypeList())
+            ->with('users_list', Helper::usersList())
+            ->with('assets_list', Helper::assetsList())
+            ->with('locations_list', Helper::locationsList());
 
         if ($request->has('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
@@ -217,9 +220,15 @@ class AssetsController extends Controller
             // Was the asset created?
         if ($asset->save()) {
             $asset->logCreate();
-            if (Input::get('assigned_to')!='') {
-                $user = User::find(e(Input::get('assigned_to')));
-                $asset->checkOutToUser($user, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
+            if(request('assigned_user')) {
+                $target = User::find(request('assigned_user'));
+            } elseif(request('assigned_asset')) {
+                $target = Asset::find(request('assigned_asset'));
+            } elseif(request('assigned_location')) {
+                $target = Location::find(request('assigned_location'));
+            }
+            if ($target) {
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
@@ -1317,8 +1326,9 @@ class AssetsController extends Controller
     public function getDatatable(Request $request, $status = null)
     {
         $this->authorize('index', Asset::class);
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assignedTo', 'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'company')
-        ->Hardware();
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
+            'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
+            'model.category', 'model.manufacturer', 'model.fieldset');
 
         if ($request->has('search')) {
              $assets = $assets->TextSearch(e($request->get('search')));
@@ -1424,9 +1434,7 @@ class AssetsController extends Controller
 
         $rows = array();
         foreach ($assets as $asset) {
-
             $row = $asset->present()->forDataTable($all_custom_fields);
-
             if (($request->has('report')) && ($request->get('report')=='true')) {
                 $rows[]= Helper::stripTagsFromJSON($row);
             } else {

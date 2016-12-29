@@ -64,17 +64,41 @@
 
   @if (!$item->id)
   <!-- Assigned To -->
-  <div id="assigned_user" style="display: none;" class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+  <div id="assigned_user" style="display: none;" class="form-group {{ $errors->has('assigned_user') ? ' has-error' : '' }}">
     <label for="parent" class="col-md-3 control-label">
       {{ trans('admin/hardware/form.checkout_to') }}
     </label>
     <div class="col-md-7 col-sm-12">
-      {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $item->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'width:100%')) }}
-
-      {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+      {{ Form::select('assigned_user', $users_list , Input::old('assigned_user', $item->assigned_type == 'App\Models\User' ? $item->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_user', 'style'=>'width:100%')) }}
+      {!! $errors->first('assigned_user', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
     <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
+      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user' class="btn btn-sm btn-default">New</a>
+    </div>
+  </div>
+
+  <!-- Assets -->
+  <div id="assigned_asset" style="display: none;" class="form-group{{ $errors->has('assigned_asset') ? ' has-error' : '' }}">
+    {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+    <div class="col-md-7">
+      {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $item->assigned_type == 'App\Models\Asset' ? $item->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
+      {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    </div>
+    <div class="col-md-1 col-sm-1 text-left">
+      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_asset' class="btn btn-sm btn-default">New</a>
+    </div>
+  </div>
+
+  <!-- Locations -->
+  <div id="assigned_location" style="display: none;" class="form-group{{ $errors->has('assigned_location') ? ' has-error' : '' }}">
+    {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+    <div class="col-md-7">
+      {{ Form::select('assigned_location', $locations_list , Input::old('assigned_location', $item->assigned_type == 'App\Models\Asset' ? $item->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_location', 'style'=>'width:100%')) }}
+
+      {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    </div>
+    <div class="col-md-1 col-sm-1 text-left">
+      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
     </div>
   </div>
   @endif
@@ -136,281 +160,284 @@
 <script>
 
     function fetchCustomFields() {
-      var modelid=$('#model_select_id').val();
-      if(modelid=='') {
-        $('#custom_fields_content').html("");
-      } else {
-        $.get("{{url('/') }}/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
-          $('#custom_fields_content').html(data);
-        });
-      }
+        var modelid = $('#model_select_id').val();
+        if (modelid == '') {
+            $('#custom_fields_content').html("");
+        } else {
+            $.get("{{url('/') }}/models/" + modelid + "/custom_fields", {_token: "{{ csrf_token() }}"}, function (data) {
+                $('#custom_fields_content').html(data);
+            });
+        }
     }
 
-    $(function() {
-      $('#model_select_id').on("change",fetchCustomFields);
+    $(function () {
+        $('#model_select_id').on("change", fetchCustomFields);
     });
 
-    $(function() {
+    $(function () {
         user_add($(".status_id option:selected").val());
     });
 
-	var $statusSelect = $(".status_id");
-	$statusSelect.on("change", function () {
+    var $statusSelect = $(".status_id");
+    $statusSelect.on("change", function () {
         user_add($statusSelect.val());
     });
 
-	function user_add(status_id) {
+    function user_add(status_id) {
 
-        if(status_id!=''){
+        if (status_id != '') {
             $(".status_spinner").css("display", "inline");
-    	    $.ajax({
-    	        url: "{{url('/') }}/api/v1/statuslabels/"+status_id+"/deployable",
-    	        success: function(data) {
+            $.ajax({
+                url: "{{url('/') }}/api/v1/statuslabels/" + status_id + "/deployable",
+                success: function (data) {
                     $(".status_spinner").css("display", "none");
 
-    	            if(data == true){
-    	                 $("#assigned_user").css("display", "block");
-    	            } else {
-    	                 $("#assigned_user").css("display", "none");
-    	            }
-                }
-    	    });
-        }
-	};
-
-$(function () {
-  var model,select;
-
-  $('#createModal').on("show.bs.modal",function (event) {
-    var link = $(event.relatedTarget);
-    model=link.data("dependency");
-    select=link.data("select");
-
-    var modal = $(this);
-    modal.find('.modal-title').text('Add a new ' + model);
-
-    $('.dynamic-form-row').hide();
-    function show_er(selector) {
-      //$(selector).show().parent().show();
-      $(selector).parent().parent().show();
-    }
-    show_er('#modal-name');
-    switch(model) {
-      case 'model':
-      show_er('#modal-manufacturer_id');
-      show_er('#modal-category_id');
-      show_er('#modal-modelno');
-      show_er('#modal-fieldset_id');
-      break;
-
-      case 'user':
-      $('.dynamic-form-row').hide(); //we don't want a generic "name"
-      show_er("#modal-first_name");
-      show_er("#modal-last_name");
-      show_er("#modal-username");
-      show_er("#modal-password");
-      show_er("#modal-password_confirm");
-      break;
-
-      case 'location':
-      show_er('#modal-city');
-      show_er('#modal-country');
-      break;
-
-      case 'statuslabel':
-      show_er("#modal-statuslabel_types");
-      break;
-
-      case 'supplier':
-
-      //do nothing, they just need 'name'
-    }
-
-    //console.warn("The Model is: "+model+" and the select is: "+select);
-  });
-
-   $("form").submit( function(event) {
-    event.preventDefault();
-    return sendForm();
-  });
-
-  // Resize Files when chosen
-
-
-
-    //First check to see if there is a file before doing anything else
-
-    var imageData = "";
-    var $fileInput = $('#file-upload');
-    $fileInput.on('change', function(e) {
-      if( $fileInput != '' ) {
-        if(window.File && window.FileReader && window.FormData) {
-          var file = e.target.files[0];
-          if(file) {
-            if(/^image\//i.test(file.type)) {
-              readFile(file);
-            } else {
-              alert('Invalid Image File :(');
-            }
-          }
-        }
-        else {
-          console.log("File API not supported, not resizing");
-        }
-      }
-    });
-
-
-  function readFile(file) {
-    var reader = new FileReader();
-
-    reader.onloadend = function() {
-      processFile(reader.result, file.type);
-    }
-
-    reader.onerror = function() {
-      alert("Unable to read file");
-    }
-
-    reader.readAsDataURL(file);
-  }
-
-  function processFile(dataURL, fileType) {
-    var maxWidth = 800;
-    var maxHeight = 800;
-
-    var image = new Image();
-    image.src = dataURL;
-
-    image.onload = function() {
-      var width = image.width;
-      var height = image.height;
-      var shouldResize = (width > maxWidth) || (height > maxHeight);
-
-      if(!shouldResize) {
-        imageData = dataURL;
-        return;
-      }
-
-      var newWidth;
-      var newHeight;
-
-      if( width > height) {
-        newHeight = height * (maxWidth/width);
-        newWidth = maxWidth;
-      } else {
-        newWidth = width * (maxHeight/height);
-        newHeight = maxHeight;
-      }
-      var canvas = document.createElement('canvas');
-
-      canvas.width = newWidth;
-      canvas.height = newHeight;
-
-      var context = canvas.getContext('2d');
-
-      context.drawImage(this, 0, 0, newWidth, newHeight);
-
-      dataURL = canvas.toDataURL( fileType );
-
-      imageData = dataURL;
-
-    };
-
-    image.onerror = function () {
-      alert('Unable to process file :(');
-    }
-  }
-
-  function sendForm() {
-    var form = $("#create-form").get(0);
-    var formData = $('#create-form').serializeArray();
-    formData.push({name:'image', value:imageData});
-    $.ajax({
-      type: 'POST',
-      url: form.action,
-      headers:{"X-Requested-With": 'XMLHttpRequest'},
-      data: formData,
-      dataType: 'json',
-      success: function(data) {
-        // AssetController flashes success to session, redirect to hardware page.
-         window.location.href = data.redirect_url;
-         // console.dir(data);
-         // console.log('submit was successful');
-      },
-      error: function(data) {
-        // AssetRequest Validator will flash all errors to session, this just refreshes to see them.
-        window.location.reload(true);
-        // console.log(JSON.stringify(data));
-         // console.log('error submitting');
-      }
-    });
-
-    return false;
-  }
-
-
-  $('#modal-save').on('click',function () {
-    var data={};
-    //console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
-    $('.modal-body input:visible').each(function (index,elem) {
-      //console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
-      var bits=elem.id.split("-");
-      if(bits[0]==="modal") {
-        data[bits[1]]=$(elem).val();
-      }
-    });
-    $('.modal-body select:visible').each(function (index,elem) {
-      var bits=elem.id.split("-");
-      data[bits[1]]=$(elem).val();
-    });
-
-    data._token =  '{{ csrf_token() }}',
-    //console.dir(data);
-
-    $.post("{{url('/') }}/api/v1/"+model+"s",data,function (result) {
-      var id=result.id;
-      var name=result.name || (result.first_name+" "+result.last_name);
-      $('.modal-body input:visible').val("");
-      $('#createModal').modal('hide');
-
-      //console.warn("The select ID thing we're going for is: "+select);
-      var selector=document.getElementById(select);
-      selector.options[selector.length]=new Option(name,id);
-      selector.selectedIndex=selector.length-1;
-      $(selector).trigger("change");
-      fetchCustomFields();
-
-    }).fail(function (result) {
-      //console.dir(result.responseJSON);
-      msg=result.responseJSON.error.message || result.responseJSON.error;
-      window.alert("Unable to add new "+model+" - error: "+msg);
-    });
-
-  });
-});
-</script>
-
-    <script src="{{ asset('assets/js/pGenerator.jquery.js') }}"></script>
-
-    <script>
-
-
-        $(document).ready(function(){
-
-            $('#genPassword').pGenerator({
-                'bind': 'click',
-                'passwordElement': '#modal-password',
-                'displayElement': '#generated-password',
-                'passwordLength': 16,
-                'uppercase': true,
-                'lowercase': true,
-                'numbers':   true,
-                'specialChars': true,
-                'onPasswordGenerated': function(generatedPassword) {
-                    $('#modal-password_confirm').val($('#modal-password').val());
+                    if (data == true) {
+                        $("#assigned_user").css("display", "block");
+                        $("#assigned_location").css("display", "block");
+                        $("#assigned_asset").css("display", "block");
+                    } else {
+                        $("#assigned_user").css("display", "none");
+                        $("#assigned_location").css("display", "none");
+                        $("#assigned_asset").css("display", "none");
+                    }
                 }
             });
+        }
+    }
+    ;
+
+    $(function () {
+        var model, select;
+
+        $('#createModal').on("show.bs.modal", function (event) {
+            var link = $(event.relatedTarget);
+            model = link.data("dependency");
+            select = link.data("select");
+
+            var modal = $(this);
+            modal.find('.modal-title').text('Add a new ' + model);
+
+            $('.dynamic-form-row').hide();
+            function show_er(selector) {
+                //$(selector).show().parent().show();
+                $(selector).parent().parent().show();
+            }
+
+            show_er('#modal-name');
+            switch (model) {
+                case 'model':
+                    show_er('#modal-manufacturer_id');
+                    show_er('#modal-category_id');
+                    show_er('#modal-modelno');
+                    show_er('#modal-fieldset_id');
+                    break;
+
+                case 'user':
+                    $('.dynamic-form-row').hide(); //we don't want a generic "name"
+                    show_er("#modal-first_name");
+                    show_er("#modal-last_name");
+                    show_er("#modal-username");
+                    show_er("#modal-password");
+                    show_er("#modal-password_confirm");
+                    break;
+
+                case 'location':
+                    show_er('#modal-city');
+                    show_er('#modal-country');
+                    break;
+
+                case 'statuslabel':
+                    show_er("#modal-statuslabel_types");
+                    break;
+
+                case 'supplier':
+
+                //do nothing, they just need 'name'
+            }
+
+            //console.warn("The Model is: "+model+" and the select is: "+select);
         });
-    </script>
+
+        $("form").submit(function (event) {
+            event.preventDefault();
+            return sendForm();
+        });
+
+        // Resize Files when chosen
+        //First check to see if there is a file before doing anything else
+
+        var imageData = "";
+        var $fileInput = $('#file-upload');
+        $fileInput.on('change', function (e) {
+            if ($fileInput != '') {
+                if (window.File && window.FileReader && window.FormData) {
+                    var file = e.target.files[0];
+                    if (file) {
+                        if (/^image\//i.test(file.type)) {
+                            readFile(file);
+                        } else {
+                            alert('Invalid Image File :(');
+                        }
+                    }
+                }
+                else {
+                    console.log("File API not supported, not resizing");
+                }
+            }
+        });
+
+
+        function readFile(file) {
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                processFile(reader.result, file.type);
+            }
+
+            reader.onerror = function () {
+                alert("Unable to read file");
+            }
+
+            reader.readAsDataURL(file);
+        }
+
+        function processFile(dataURL, fileType) {
+            var maxWidth = 800;
+            var maxHeight = 800;
+
+            var image = new Image();
+            image.src = dataURL;
+
+            image.onload = function () {
+                var width = image.width;
+                var height = image.height;
+                var shouldResize = (width > maxWidth) || (height > maxHeight);
+
+                if (!shouldResize) {
+                    imageData = dataURL;
+                    return;
+                }
+
+                var newWidth;
+                var newHeight;
+
+                if (width > height) {
+                    newHeight = height * (maxWidth / width);
+                    newWidth = maxWidth;
+                } else {
+                    newWidth = width * (maxHeight / height);
+                    newHeight = maxHeight;
+                }
+                var canvas = document.createElement('canvas');
+
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+
+                var context = canvas.getContext('2d');
+
+                context.drawImage(this, 0, 0, newWidth, newHeight);
+
+                dataURL = canvas.toDataURL(fileType);
+
+                imageData = dataURL;
+
+            };
+
+            image.onerror = function () {
+                alert('Unable to process file :(');
+            }
+        }
+
+        function sendForm() {
+            var form = $("#create-form").get(0);
+            var formData = $('#create-form').serializeArray();
+            formData.push({name: 'image', value: imageData});
+            $.ajax({
+                type: 'POST',
+                url: form.action,
+                headers: {"X-Requested-With": 'XMLHttpRequest'},
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    // AssetController flashes success to session, redirect to hardware page.
+                    window.location.href = data.redirect_url;
+                    // console.dir(data);
+                    // console.log('submit was successful');
+                },
+                error: function (data) {
+                    // AssetRequest Validator will flash all errors to session, this just refreshes to see them.
+                    window.location.reload(true);
+                    // console.log(JSON.stringify(data));
+                    // console.log('error submitting');
+                }
+            });
+
+            return false;
+        }
+
+
+        $('#modal-save').on('click', function () {
+            var data = {};
+            //console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
+            $('.modal-body input:visible').each(function (index, elem) {
+                //console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
+                var bits = elem.id.split("-");
+                if (bits[0] === "modal") {
+                    data[bits[1]] = $(elem).val();
+                }
+            });
+            $('.modal-body select:visible').each(function (index, elem) {
+                var bits = elem.id.split("-");
+                data[bits[1]] = $(elem).val();
+            });
+
+            data._token = '{{ csrf_token() }}',
+                //console.dir(data);
+
+                $.post("{{url('/') }}/api/v1/" + model + "s", data, function (result) {
+                    var id = result.id;
+                    var name = result.name || (result.first_name + " " + result.last_name);
+                    $('.modal-body input:visible').val("");
+                    $('#createModal').modal('hide');
+
+                    //console.warn("The select ID thing we're going for is: "+select);
+                    var selector = document.getElementById(select);
+                    selector.options[selector.length] = new Option(name, id);
+                    selector.selectedIndex = selector.length - 1;
+                    $(selector).trigger("change");
+                    fetchCustomFields();
+
+                }).fail(function (result) {
+                    //console.dir(result.responseJSON);
+                    msg = result.responseJSON.error.message || result.responseJSON.error;
+                    window.alert("Unable to add new " + model + " - error: " + msg);
+                });
+
+        });
+    });
+</script>
+
+<script src="{{ asset('assets/js/pGenerator.jquery.js') }}"></script>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#genPassword').pGenerator({
+            'bind': 'click',
+            'passwordElement': '#modal-password',
+            'displayElement': '#generated-password',
+            'passwordLength': 16,
+            'uppercase': true,
+            'lowercase': true,
+            'numbers': true,
+            'specialChars': true,
+            'onPasswordGenerated': function (generatedPassword) {
+                $('#modal-password_confirm').val($('#modal-password').val());
+            }
+        });
+    });
+</script>
 @stop
