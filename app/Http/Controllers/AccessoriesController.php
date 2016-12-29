@@ -419,7 +419,7 @@ class AccessoriesController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
-        $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category','model_number'];
+        $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category','model_number', 'manufacturer', 'location'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
@@ -429,6 +429,12 @@ class AccessoriesController extends Controller
                 break;
             case 'companyName':
                 $accessories = $accessories->OrderCompany($order);
+                break;
+            case 'location':
+                $accessories = $accessories->OrderLocation($order);
+                break;
+            case 'manufacturer':
+                $accessories = $accessories->OrderManufacturer($order);
                 break;
             default:
                 $accessories = $accessories->orderBy($sort, $order);

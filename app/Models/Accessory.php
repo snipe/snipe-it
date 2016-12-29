@@ -168,11 +168,12 @@ class Accessory extends SnipeModel
     */
     public function scopeOrderCompany($query, $order)
     {
-        return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+        return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')
+        ->orderBy('companies.name', $order);
     }
 
     /**
-    * Query builder scope to order on company
+    * Query builder scope to order on category
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
@@ -181,11 +182,12 @@ class Accessory extends SnipeModel
     */
     public function scopeOrderCategory($query, $order)
     {
-        return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
+        return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')
+        ->orderBy('categories.name', $order);
     }
 
     /**
-    * Query builder scope to order on company
+    * Query builder scope to order on location
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
@@ -194,6 +196,20 @@ class Accessory extends SnipeModel
     */
     public function scopeOrderLocation($query, $order)
     {
-        return $query->leftJoin('locations', 'consumables.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
+        return $query->leftJoin('locations', 'accessories.location_id', '=', 'locations.id')
+        ->orderBy('locations.name', $order);
+    }
+
+    /**
+    * Query builder scope to order on manufacturer
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'accessories.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
 }
