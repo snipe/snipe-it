@@ -271,31 +271,30 @@
                         </tr>
                     </thead>
                     <tbody>
+                                'icon'          => '<i class="'.$this->parseItemIcon().'"></i>',
+            'created_at'    => date("M d, Y g:iA", strtotime($this->created_at)),
+            'action_type'   => strtolower(trans('general.'.str_replace(' ', '_', $this->action_type))),
+            'admin'         =>  $this->model->user ? $this->model->user->present()->nameUrl() : '',
+            'target'        => $this->target(),
+            'item'          => $this->item(),
+            'item_type'     => $this->itemType(),
+            'note'          => e($this->note),
+
                         @if (count($asset->assetlog) > 0)
                         @foreach ($asset->assetlog as $log)
+                        @php $result = $log->present()->forDataTable();
+                        @endphp
                         <tr>
-                            <td>{{ $log->created_at }}</td>
+                            <td>{{ $result['created_at'] }}</td>
                             <td>
-                                @if (isset($log->user_id))
-                                {{ $log->user->present()->fullName() }}
-                                @endif
+                                {!! $result['admin'] !!}
                             </td>
-                            <td>{{ $log->action_type }}</td>
+                            <td>{{ $result['action_type'] }}</td>
                             <td>
-                            @if ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
-                                @if ($log->target->deleted_at=='')
-                                    <a href="{{ route('users.show', $log->target_id) }}">
-                                    {{ $log->user->present()->fullName() }}
-                                     </a>
-                                @else
-                                    <del>{{ $log->user->present()->fullName() }}</del>
-                                @endif
-                            @endif
+                            {!! $result['target'] !!}
                             </td>
                             <td>
-                                @if ($log->note)
-                                {{ $log->note }}
-                                @endif
+                                {{ $result['note'] }}
                             </td>
                         </tr>
                         @endforeach

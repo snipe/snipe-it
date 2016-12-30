@@ -237,9 +237,9 @@ class Asset extends Depreciable
             } elseif ($this->assignedType() == self::LOCATION) {
                 return $this->assignedTo();
             }
-            // Default to User
-//            var_dump($this);
-            return $this->assignedTo->userLoc();
+            if($this->assignedTo) {
+              return $this->assignedTo->userLoc();
+            }
         }
         return $this->defaultLoc();
     }

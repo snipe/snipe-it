@@ -317,46 +317,34 @@
             <div class="col-md-12">
               <table class="table table-hover table-fixed break-word">
                 <thead>
+
+
                   <tr>
                     <th class="col-md-2">{{ trans('general.date') }}</th>
                     <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
                     <th class="col-md-2"><span class="line"></span>{{ trans('button.actions') }}</th>
-                    <th class="col-md-2"><span class="line"></span>{{ trans('admin/licenses/general.user') }}</th>
+                    <th class="col-md-2"><span class="line"></span>{{ trans('general.target') }}</th>
                     <th class="col-md-4"><span class="line"></span>{{ trans('general.notes') }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   @if (count($license->assetlog) > 0)
                     @foreach ($license->assetlog as $log)
+                    @php $result = $log->present()->forDataTable()
+                    @endphp
                     <tr>
-                      <td>{{ $log->created_at }}</td>
+                      <td>{{ $result['created_at'] }}</td>
                       <td>
-                      @if (isset($log->user_id))
-                        <a href="{{ route('users.show', $log->user_id)}}">{{ $log->user->present()->fullName() }}</a>
-                      @endif
+                      {!! $result['admin'] !!}
                       </td>
-                      <td>{{ $log->action_type }}</td>
+                      <td>{{ $result['action_type'] }}</td>
 
                       <td>
-                      @if (($log->target) && ($log->target->id!='0'))
-                        @if ($log->target_type == 'App\Models\User')
-                          <a href="{{ route('users.show', $log->target_id) }}">
-                            {{ $log->userlog->present()->fullName() }}
-                          </a>
-                        @elseif ($log->target_type == 'App\Models\Asset')
-                          <a href="{{ route('hardware.show', $log->target_id) }}">
-                            {{ $log->userlog->present()->name() }}
-                          </a>
-                        @endif
-                      @elseif ($log->action_type=='uploaded')
-                        {{ $log->filename }}
-                      @endif
+                      {!! $result['target'] !!}
                       </td>
 
                       <td>
-                      @if ($log->note)
-                        {{ $log->note }}
-                      @endif
+                      {{ $result['note'] }}
                       </td>
                     </tr>
                     @endforeach

@@ -342,7 +342,7 @@
                 <i class="fa fa-plus icon-white"></i>
                 <span>Select File...</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="file[]" data-url="{{ url('/') }}/api/users/{{ $user->id }}/upload">
+                <input id="fileupload" type="file" name="file[]" data-url="{{ route('upload/user', $user->id) }}">
               </span>
               @endcan
             </div>
@@ -396,7 +396,7 @@
                       </td>
                       <td>
                         @can('update', $user)
-                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('users.destroyfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/userfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
                         @endcan
                       </td>
                     </tr>
@@ -422,31 +422,19 @@
               </thead>
               <tbody>
                 @foreach ($userlog as $log)
+                @php $result = $log->present()->forDataTable;
+                @endphp
                 <tr>
                   <td class="text-center">
-                    <i class="{{ ($log->parseItemIcon()) }}"></i>
+                    {!!$result['icon']!!}
                   </td>
-                  <td>{{ $log->created_at }}</td>
-                  <td>{{ $log->action_type }}</td>
+                  <td>{{ $result['created_at'] }}</td>
+                  <td>{{ $result['action_type'] }}</td>
                   <td>
-                    @if (($log->item) && ($log->itemType()=="asset"))
-                      {!! $log->item->present()->nameUrl() !!}
-                    @elseif ($log->item)
-                      <a href="{{ route($log->parseItemRoute().'.show', $log->item_id) }}">
-                            {{ $log->item->name }}
-                      </a>
-                    @else
-                      {{ trans('general.bad_data') }}
-                    @endif
+                    {!! $result['item'] !!}
                   </td>
                   <td>
-                    @if ($log->action_type != 'requested')
-                      @if (isset($log->user))
-                        {!! $log->user->present()->nameUrl() !!}
-                      @else
-                          Deleted Admin
-                      @endif
-                    @endif
+                    {!! $result['admin'] !!}
                 </tr>
                 @endforeach
               </tbody>

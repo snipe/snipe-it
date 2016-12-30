@@ -38,9 +38,9 @@ class AssetRequest extends Request
             'status'          => 'integer|nullable',
             'asset_tag'       => 'required',
             'purchase_cost'   => 'numeric|nullable',
-            "assigned_user"   => 'required_without_all:assigned_asset,assigned_location',
-            "assigned_asset"   => 'required_without_all:assigned_user,assigned_location',
-            "assigned_location"   => 'required_without_all:assigned_user,assigned_asset',
+            "assigned_user"   => 'sometimes:required_without_all:assigned_asset,assigned_location',
+            "assigned_asset"   => 'sometimes:required_without_all:assigned_user,assigned_location',
+            "assigned_location"   => 'sometimes:required_without_all:assigned_user,assigned_asset',
         ];
 
         $model = AssetModel::find($this->request->get('model_id'));
