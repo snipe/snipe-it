@@ -353,7 +353,7 @@
                   @if($asset->assigned_type == User::class) <!-- Only users have avatars currently-->
                   <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->present()->fullName() }}">
                   @endif
-                  {!! $asset->assignedTo->present()->nameUrl() !!}
+                  {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
                 </p>
 
                 <ul class="list-unstyled">

@@ -85,7 +85,7 @@ class AssetPresenter extends Presenter
         $results['assigned_to'] = '';
         if($assigned = $this->model->assignedTo) {
             $results['status_label'] = 'Deployed';
-            $results['assigned_to'] = $assigned->present()->nameUrl();
+            $results['assigned_to'] = $assigned->present()->glyph() . ' ' . $assigned->present()->nameUrl();
         } else if($this->model->assetstatus) {
             $results['status_label'] = $this->model->assetstatus->name;
         }
@@ -267,5 +267,10 @@ class AssetPresenter extends Presenter
     public function viewUrl()
     {
         return route('hardware.show', $this->id);
+    }
+
+    public function glyph()
+    {
+        return '<i class="fa fa-barcode"></i>';
     }
 }
