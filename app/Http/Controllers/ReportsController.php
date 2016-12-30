@@ -288,12 +288,8 @@ class ReportsController extends Controller
     */
     public function getActivityReport()
     {
-        $log_actions = Actionlog::orderBy('created_at', 'DESC')
-                                ->with('item')
-                                ->orderBy('created_at', 'DESC')
-                                ->get();
 
-        return View::make('reports/activity', compact('log_actions'));
+        return View::make('reports/activity');
     }
 
     /**
@@ -334,61 +330,7 @@ class ReportsController extends Controller
 
         $rows = array();
         foreach ($activitylogs as $activity) {
-
-            if (($activity->item) && ($activity->itemType()=="asset")) {
-                $activity_item = '<a href="'.route('hardware.show', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->present()->name()).'</a>';
-                $item_type = 'asset';
-            } elseif ($activity->item) {
-                $activity_item = '<a href="' . route($activity->parseItemRoute().'.show', $activity->item_id) . '">' . e($activity->item->name) . '</a>';
-                $item_type = $activity->itemType();
-            } else {
-                $activity_item = "unkonwn";
-                $item_type = "null";
-            }
-
-
-            if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
-                $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->user->present()->fullName().'</a>';
-            } elseif ($activity->target_type === "App\Models\Asset") {
-                if ($activity->target) {
-                    $activity_target = '<a href="'.route('hardware.show', $activity->target_id).'">'.$activity->target->present()->name().'</a>';
-                } else {
-                    $activity_target = "";
-                }
-            } elseif ($activity->target_type === "App\Models\User") {
-                if ($activity->target) {
-                    $activity_target = '<a href="'.route('users.show', $activity->target_id).'">'.$activity->target->present()->fullName().'</a>';
-                } else {
-                    $activity_target = '';
-                }
-            } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
-                $activity_target = $activity->item->assignedTo->nameUrl();
-            } elseif ($activity->action_type=='requested') {
-                if ($activity->user) {
-                    $activity_target =  '<a href="'.route('users.show', $activity->user_id).'">'.$activity->user->present()->fullName().'</a>';
-                } else {
-                    $activity_target = '';
-                }
-            } else {
-                if ($activity->target) {
-                    $activity_target = $activity->target->id;
-                } else {
-                    $activity_target = "";
-                }
-            }
-
-
-            $rows[] = array(
-                'icon'          => '<i class="'.$activity->parseItemIcon().'"></i>',
-                'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
-                'action_type'              => strtolower(trans('general.'.str_replace(' ', '_', $activity->action_type))),
-                'admin'         =>  $activity->user ? (string) link_to_route('users.show', $activity->user->present()->fullName(), [$activity->user_id]) : '',
-                'target'          => $activity_target,
-                'item'          => $activity_item,
-                'item_type'     => $item_type,
-                'note'     => e($activity->note),
-
-            );
+            $rows[] = $activity->present()->forDataTable();
         }
 
         $data = array('total'=>$activityCount, 'rows'=>$rows);

@@ -342,7 +342,7 @@
                 <i class="fa fa-plus icon-white"></i>
                 <span>Select File...</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="file[]" data-url="{{ url('/') }}/api/users/{{ $user->id }}/upload">
+                <input id="fileupload" type="file" name="file[]" data-url="{{ route('upload/user', $user->id) }}">
               </span>
               @endcan
             </div>
@@ -396,7 +396,7 @@
                       </td>
                       <td>
                         @can('update', $user)
-                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('users.destroyfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/userfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
                         @endcan
                       </td>
                     </tr>

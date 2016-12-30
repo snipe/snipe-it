@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +12,11 @@ use Response;
  *
  * @version    v1.0
  */
-class Actionlog extends Model
+class Actionlog extends SnipeModel
 {
+    protected $presenter = "App\Presenters\ActionlogPresenter";
     use SoftDeletes;
-
+    use Presentable;
     protected $dates = [ 'deleted_at' ];
 
     protected $table      = 'action_logs';
