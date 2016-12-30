@@ -34,12 +34,13 @@ class AssetsCest
     public function passesCreateAndCheckout(FunctionalTester $I)
     {
         $asset = factory(App\Models\Asset::class,'asset')->make();
+        $userId = $I->getUserId();
         $values = [
             'company_id'        => $asset->company_id,
             'asset_tag'         => $asset->asset_tag,
             'model_id'          => $asset->model_id,
             'status_id'         => $asset->status_id,
-            'assigned_user'     => $I->getUserId(),
+            'assigned_user'     => $userId,
             'serial'            => $asset->serial,
             'name'              => $asset->name,
             'purchase_date'     => '2016-01-01',
@@ -57,7 +58,7 @@ class AssetsCest
             'asset_tag'         => $asset->asset_tag,
             'model_id'          => $asset->model_id,
             'status_id'         => $asset->status_id,
-            'assigned_to'       => $I->getUserId(),
+            'assigned_to'       => $userId,
             'assigned_type'     => 'App\\Models\\User',
             'serial'            => $asset->serial,
             'name'              => $asset->name,
