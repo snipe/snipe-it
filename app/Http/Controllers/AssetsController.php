@@ -526,7 +526,7 @@ class AssetsController extends Controller
         $this->authorize('checkin', $asset);
 
         $admin = Auth::user();
-
+        $user = $asset->assignedUser;
         if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
