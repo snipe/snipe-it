@@ -61,7 +61,6 @@
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
         <center>
             <img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
-            poop
         </center>
     @endif
   <!-- Content -->
