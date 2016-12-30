@@ -58,9 +58,15 @@ class ConsumablePresenter extends Presenter
     }
 
     /**
-     * Link to this consumables name
+     * Displayable name of consumable
      * @return string
      */
+
+    public function name()
+    {
+        return $this->model->name;
+    }
+
     public function nameUrl()
     {
         return (string)link_to_route('consumables.show', $this->name, $this->id);

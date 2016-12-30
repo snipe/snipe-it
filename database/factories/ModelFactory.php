@@ -30,7 +30,6 @@ $factory->defineAs(App\Models\Asset::class, 'asset', function (Faker\Generator $
     'purchase_cost' => $faker->randomFloat(2),
     'order_number' => $faker->numberBetween(1000000, 50000000),
     'supplier_id' => $faker->numberBetween(1, 5),
-    'requestable' => $faker->numberBetween(0, 1),
     'company_id' => Company::inRandomOrder()->first()->id,
     'requestable' => $faker->boolean()
     ];
