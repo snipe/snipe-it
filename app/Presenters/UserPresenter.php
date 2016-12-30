@@ -71,7 +71,7 @@ class UserPresenter extends Presenter
             'location'      => ($this->model->userloc) ? $this->model->userloc->present()->nameUrl() : '',
             'manager'       => ($this->model->manager) ? $this->manager->present()->nameUrl() : '',
             'employee_num'  => $this->employee_num,
-            'assets'        => $this->model->assets()->count(),
+            'assets'        => $this->model->assignedAssets()->count(),
             'licenses'      => $this->model->licenses()->count(),
             'accessories'   => $this->model->accessories()->count(),
             'consumables'   => $this->model->consumables()->count(),
@@ -108,6 +108,15 @@ class UserPresenter extends Presenter
         return "{$this->first_name} {$this->last_name}";
     }
 
+    /**
+     * Standard accessor.
+     * @TODO Remove presenter::fullName() entirely?
+     * @return string
+     */
+    public function name()
+    {
+        return $this->fullName();
+    }
     /**
      * Returns the user Gravatar image url.
      *

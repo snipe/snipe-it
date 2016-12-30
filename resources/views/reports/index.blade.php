@@ -48,15 +48,12 @@
                     <td>{{ $asset->serial }}</td>
                     <td>
                         @if ($asset->assigned_to != '')
-                        <a href="{{ route('users.show', $asset->assigned_to) }}">
-                            {{ $asset->assigneduser->present()->fullName() }}
-                        </a>
+                            {!!  $asset->assignedTo->present->nameUrl()  !!}
                         @endif
                     </td>
                     <td>
-                        @if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {{ Location::find($asset->assigneduser->location_id)->city }}
-                        ,
-                        {{ Location::find($asset->assigneduser->location_id)->state }}
+                        @if (($asset->assignedTo) && ($asset->assigneduser->assetLoc))
+                            {{ $asset->assignedTo->assetLoc->city }}, {{ $asset->assignedTo->assetLoc->state}}
                         @endif
                     </td>
                     <td>{{ $asset->purchase_date }}</td>

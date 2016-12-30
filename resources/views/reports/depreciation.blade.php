@@ -74,13 +74,11 @@
                   @endif
                 </td>
                 <td>
-                  @if ($asset->assigneduser)
-                    @if ($asset->assigneduser->deleted_at!='')
-                    <del>{{ $asset->assigneduser->present()->fullName() }}</del>
+                  @if ($asset->assignedTo)
+                    @if ($asset->assignedTo->deleted_at!='')
+                    <del>{{ $asset->assignedTo->present()->name() }}</del>
                     @else
-                    <a href="{{ route('users.show', $asset->assigned_to) }}">
-                      {{ $asset->assigneduser->present()->fullName() }}
-                    </a>
+                      {!!  $asset->assignedTo->present()->nameUrl()  !!}
                     @endif
                   @endif
                 </td>

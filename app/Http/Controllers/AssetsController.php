@@ -104,23 +104,26 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @param integer $model_id
+     * @param Request $request
      * @return View
+     * @internal param int $model_id
      */
     public function create(Request $request)
     {
         $this->authorize('create', Asset::class);
-        $view = View::make('hardware/edit');
-        $view->with('supplier_list', Helper::suppliersList());
-        $view->with('company_list', Helper::companyList());
-        $view->with('model_list', Helper::modelList());
-        $view->with('statuslabel_list', Helper::statusLabelList());
-        $view->with('assigned_to', Helper::usersList());
-        $view->with('location_list', Helper::locationsList());
-        $view->with('item', new Asset);
-        $view->with('manufacturer', Helper::manufacturerList());
-        $view->with('category', Helper::categoryList('asset'));
-        $view->with('statuslabel_types', Helper::statusTypeList());
+        $view = View::make('hardware/edit')
+            ->with('supplier_list', Helper::suppliersList())
+            ->with('company_list', Helper::companyList())
+            ->with('model_list', Helper::modelList())
+            ->with('statuslabel_list', Helper::statusLabelList())
+            ->with('location_list', Helper::locationsList())
+            ->with('item', new Asset)
+            ->with('manufacturer', Helper::manufacturerList())
+            ->with('category', Helper::categoryList('asset'))
+            ->with('statuslabel_types', Helper::statusTypeList())
+            ->with('users_list', Helper::usersList())
+            ->with('assets_list', Helper::assetsList())
+            ->with('locations_list', Helper::locationsList());
 
         if ($request->has('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
@@ -217,9 +220,15 @@ class AssetsController extends Controller
             // Was the asset created?
         if ($asset->save()) {
             $asset->logCreate();
-            if (Input::get('assigned_to')!='') {
-                $user = User::find(e(Input::get('assigned_to')));
-                $asset->checkOutToUser($user, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
+            if(request('assigned_user')) {
+                $target = User::find(request('assigned_user'));
+            } elseif(request('assigned_asset')) {
+                $target = Asset::find(request('assigned_asset'));
+            } elseif(request('assigned_location')) {
+                $target = Location::find(request('assigned_location'));
+            }
+            if ($target) {
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
@@ -416,7 +425,10 @@ class AssetsController extends Controller
         $this->authorize('checkout', $asset);
 
         // Get the dropdown of users and then pass it to the checkout view
-        return View::make('hardware/checkout', compact('asset'))->with('users_list', Helper::usersList());
+        return View::make('hardware/checkout', compact('asset'))
+            ->with('users_list', Helper::usersList())
+            ->with('assets_list', Helper::assetsList())
+            ->with('locations_list', Helper::locationsList());
 
     }
 
@@ -431,7 +443,6 @@ class AssetsController extends Controller
      */
     public function postCheckout(AssetCheckoutRequest $request, $assetId)
     {
-
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -440,7 +451,14 @@ class AssetsController extends Controller
         }
         $this->authorize('checkout', $asset);
 
-        $user = User::find(Input::get('assigned_to'));
+        if(request('assigned_user')) {
+            $target = User::find(request('assigned_user'));
+        } elseif(request('assigned_asset')) {
+            $target = Asset::find(request('assigned_asset'));
+        } elseif(request('assigned_location')) {
+            $target = Location::find(request('assigned_location'));
+        }
+        // $user = User::find(Input::get('assigned_to'));
         $admin = Auth::user();
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
@@ -454,7 +472,7 @@ class AssetsController extends Controller
         } else {
             $expected_checkin = '';
         }
-        if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
+        if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
 //           Redirect to the new asset page
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
         }
@@ -509,7 +527,7 @@ class AssetsController extends Controller
 
         $admin = Auth::user();
 
-        if (is_null($user = User::find($asset->assigned_to))) {
+        if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
@@ -518,19 +536,19 @@ class AssetsController extends Controller
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
         $asset->assigned_to = null;
+        $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
         $asset->name = e(Input::get('name'));
-
 
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));
         }
         // Was the asset updated?
         if ($asset->save()) {
-            $logaction = $asset->logCheckin($user, e(request('note')));
+            $logaction = $asset->logCheckin($target, e(request('note')));
 
             $data['log_id'] = $logaction->id;
-            $data['first_name'] = $user->first_name;
+            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
             $data['item_name'] = $asset->present()->name();
             $data['checkin_date'] = $logaction->created_at;
             $data['item_tag'] = $asset->asset_tag;
@@ -1155,9 +1173,9 @@ class AssetsController extends Controller
                     Setting::getSettings()
                 );
             } elseif (Input::get('bulk_actions')=='delete') {
-                $assets = Asset::with('assigneduser', 'assetloc')->find($asset_ids);
-                $assets->each(function ($asset) {
-                    $this->authorize('delete', $asset);
+                $assets = Asset::with('assignedTo', 'assetloc')->find($asset_ids);
+                $assets->each(function($asset) {
+                    $this->authorize('delete',$asset);
                 });
                 return View::make('hardware/bulk-delete')->with('assets', $assets);
              // Bulk edit
@@ -1309,9 +1327,10 @@ class AssetsController extends Controller
      */
     public function getDatatable(Request $request, $status = null)
     {
-        $this->authorize('index', Asset::class);
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
-        ->Hardware();
+        $this->authorize('index', 'App\Models\Asset');
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
+            'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
+            'model.category', 'model.manufacturer', 'model.fieldset');
 
         if ($request->has('search')) {
              $assets = $assets->TextSearch(e($request->get('search')));
@@ -1417,9 +1436,7 @@ class AssetsController extends Controller
 
         $rows = array();
         foreach ($assets as $asset) {
-
             $row = $asset->present()->forDataTable($all_custom_fields);
-
             if (($request->has('report')) && ($request->get('report')=='true')) {
                 $rows[]= Helper::stripTagsFromJSON($row);
             } else {

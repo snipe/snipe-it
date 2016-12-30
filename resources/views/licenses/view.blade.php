@@ -68,11 +68,9 @@
                           @elseif ($licensedto->asset)
                             @if ($licensedto->asset->assigned_to != 0)
                               @can('users.view')
-                                <a href="{{ route('users.show', $licensedto->asset->assigned_to) }}">
-                                  {{ $licensedto->asset->assigneduser->present()->fullName() }}
-                                </a>
+                                {!!  $licensedto->asset->assignedTo->present()->nameUrl()  !!}
                               @else
-                                {{ $licensedto->asset->assigneduser->present()->fullName() }}
+                                {{ $licensedto->asset->assignedTo->present()->name() }}
                               @endcan
                             @endif
                           @endif

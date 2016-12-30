@@ -247,7 +247,7 @@ class CategoriesController extends Controller
     public function getDataViewAssets(Request $request, $categoryID)
     {
         $category = Category::find($categoryID);
-        $category = $category->load('assets.company', 'assets.model', 'assets.assetstatus', 'assets.assigneduser');
+        $category = $category->load('assets.company', 'assets.model', 'assets.assetstatus', 'assets.assignedTo');
         $category_assets = $category->assets();
         if (Input::has('search')) {
             $category_assets = $category_assets->TextSearch(e($request->input('search')));

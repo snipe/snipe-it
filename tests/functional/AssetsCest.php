@@ -39,7 +39,26 @@ class AssetsCest
             'asset_tag'         => $asset->asset_tag,
             'model_id'          => $asset->model_id,
             'status_id'         => $asset->status_id,
+            'assigned_user'     => $I->getUserId(),
+            'serial'            => $asset->serial,
+            'name'              => $asset->name,
+            'purchase_date'     => '2016-01-01',
+            'supplier_id'       => $asset->supplier_id,
+            'order_number'      => $asset->order_number,
+            'purchase_cost'     => $asset->purchase_cost,
+            'warranty_months'   => $asset->warranty_months,
+            'notes'             => $asset->notes,
+            'rtd_location_id'   => $asset->rtd_location_id,
+            'requestable'       => $asset->requestable,
+        ];
+
+        $seenValues = [
+            'company_id'        => $asset->company_id,
+            'asset_tag'         => $asset->asset_tag,
+            'model_id'          => $asset->model_id,
+            'status_id'         => $asset->status_id,
             'assigned_to'       => $I->getUserId(),
+            'assigned_type'     => 'App\Models\User',
             'serial'            => $asset->serial,
             'name'              => $asset->name,
             'purchase_date'     => '2016-01-01',
@@ -55,7 +74,7 @@ class AssetsCest
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage(route('hardware.create'));
         $I->submitForm('form#create-form', $values);
-        $I->seeRecord('assets', $values);
+        $I->seeRecord('assets', $seenValues);
         $I->dontSeeElement('.alert-danger'); // We should check for success, but we can't because of the stupid ajaxy way I did things.  FIXME when the asset form is rewritten.
     }
 
