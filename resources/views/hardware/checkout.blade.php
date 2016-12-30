@@ -66,9 +66,7 @@
 
                 {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
-              <div class="col-md-1 col-sm-1 text-left">
-                <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_asset' class="btn btn-sm btn-default">New</a>
-              </div>
+              
             </div> 
 
             <!-- Locations -->
@@ -79,9 +77,7 @@
 
                 {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
-              <div class="col-md-1 col-sm-1 text-left">
-                <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
-              </div>
+
             </div>
 
             <!-- Checkout/Checkin Date -->
