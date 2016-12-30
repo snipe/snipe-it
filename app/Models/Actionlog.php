@@ -119,7 +119,7 @@ class Actionlog extends SnipeModel
 
     public function target()
     {
-        return $this->morphTo('target');
+        return $this->morphTo('target')->withTrashed();
     }
 
     public function childlogs()
