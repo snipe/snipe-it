@@ -155,4 +155,9 @@ class UserPresenter extends Presenter
     {
         return route('users.show', $this->id);
     }
+
+    public function glyph()
+    {
+        return '<i class="fa fa-users"></i>';
+    }
 }

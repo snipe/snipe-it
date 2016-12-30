@@ -72,4 +72,9 @@ class LocationPresenter extends Presenter
     {
         return route('locations.show', $this->id);
     }
+
+    public function glyph()
+    {
+        return '<i class="fa fa-globe"></i>';
+    }
 }
