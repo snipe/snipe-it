@@ -236,47 +236,22 @@ View Assets for  {{ $user->present()->fullName() }}
             </thead>
             <tbody>
               @foreach ($userlog as $log)
+              @php $result = $log->present()->forDataTable();
+              @endphp
               <tr>
                 <td class="text-center">
-                  @if ($log->itemType()=="asset")
-                      <i class="fa fa-barcode"></i>
-                  @elseif ($log->itemType()=="accessory")
-                      <i class="fa fa-keyboard-o"></i>
-                  @elseif ($log->itemType()=="consumable")
-                      <i class="fa fa-tint"></i>
-                  @elseif ($log->itemType()=="license")
-                      <i class="fa fa-floppy-o"></i>
-                  @else
-                      <i class="fa fa-times"></i>
-                  @endif
+                  {!! $result['icon'] !!}
                 </td>
                 <td>
-                  {{ strtolower(trans('general.'.str_replace(' ','_',$log->action_type))) }}
+                  {{ $result['action_type'] }}
                 </td>
                 <td>
-                  @if (($log->item) && ($log->itemType()=="asset"))
-                    @if ($log->item->deleted_at=='')
-                      {{ $log->item->present()->name() }}
-                    @else
-                      <del>{{ $log->item->present()->name() }}</del> (deleted)
-                    @endif
-
-                  @elseif ($log->item)
-                    @if ($log->item->deleted_at=='')
-                      {{ $log->item->name }}
-                    @else
-                      <del>{{ $log->item->name }}</del> (deleted)
-                    @endif
-                  @else
-                    {{ trans('general.bad_data') }}
-                  @endif
+                  {!! $result['item'] !!}
                 </td>
                 <td>
-                  @if ($log->user)
-                  {{ $log->user->present()->fullName() }}
-                  @endif
+                  {!! $result['admin'] !!}
                 </td>
-                <td>{{ $log->created_at }}</td>
+                <td>{{ $result['created_at'] }}</td>
               </tr>
               @endforeach
             </tbody>

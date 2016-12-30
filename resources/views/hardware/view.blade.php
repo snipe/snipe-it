@@ -552,53 +552,15 @@
                 <tbody>
                   @if (count($asset->assetlog) > 0)
                     @foreach ($asset->assetlog as $log)
+                    @php $result = $log->present()->forDataTable();
+                    @endphp
                       <tr>
-                        <td>{{ $log->created_at }}</td>
+                        <td>{{ $result['created_at'] }}</td>
+                        <td> {!! $result['admin'] !!} </td>
+                        <td>{{ $result['action_type'] }}</td>
+                        <td>{!! $result['target'] !!} </td>
                         <td>
-                        @if ($log->action_type != 'requested')
-                          @if (isset($log->user))
-                            {{ $log->user->present()->fullName() }}
-                          @endif
-                        @endif
-                        </td>
-                        <td>{{ $log->action_type }}</td>
-                        <td>
-                          @if ($log->action_type=='uploaded')
-                            {{ $log->filename }}
-                          @elseif ((isset($log->target_id)) && ($log->target_id!=0) && ($log->target_id!=''))
-
-                            @if ($log->target instanceof \App\Models\User)
-                              @if ($log->target->deleted_at=='')
-                                <a href="{{ route('users.show', $log->target_id) }}">
-                                {{ $log->target->present()->fullName() }}
-                                </a>
-                              @else
-                                <del>{{ $log->target->present()->fullName() }}</del>
-                              @endif
-                            @elseif($log->target instanceof \App\Models\Asset)
-                              @if ($log->target->deleted_at=='')
-                                <a href="{{ route('hardware.show', $log->target_id) }}">
-                                {{ $log->target->present()->name() }}
-                                </a>
-                              @else
-                                <del>{{ $log->target->present()->name() }}</del>
-                              @endif
-                            @elseif (($log->action_type=='accepted') || ($log->action_type=='declined'))
-                                {{-- On a declined log, the asset isn't assigned to anyone when we look this up. --}}
-                                @if ($log->item->assignedTo)
-                                    {{ $log->item->assignedTo->present()->name() }}
-                                @else
-                                    Unknown
-                                @endif
-                            @else
-                              Deleted User
-                            @endif
-                          @endif
-                        </td>
-                        <td>
-                          @if ($log->note)
-                          {{ $log->note }}
-                          @endif
+                          {{ $result['note'] }}
                         </td>
                         @if ($snipeSettings->require_accept_signature=='1')
                         <td>

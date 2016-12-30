@@ -422,31 +422,19 @@
               </thead>
               <tbody>
                 @foreach ($userlog as $log)
+                @php $result = $log->present()->forDataTable;
+                @endphp
                 <tr>
                   <td class="text-center">
-                    <i class="{{ ($log->parseItemIcon()) }}"></i>
+                    {!!$result['icon']!!}
                   </td>
-                  <td>{{ $log->created_at }}</td>
-                  <td>{{ $log->action_type }}</td>
+                  <td>{{ $result['created_at'] }}</td>
+                  <td>{{ $result['action_type'] }}</td>
                   <td>
-                    @if (($log->item) && ($log->itemType()=="asset"))
-                      {!! $log->item->present()->nameUrl() !!}
-                    @elseif ($log->item)
-                      <a href="{{ route($log->parseItemRoute().'.show', $log->item_id) }}">
-                            {{ $log->item->name }}
-                      </a>
-                    @else
-                      {{ trans('general.bad_data') }}
-                    @endif
+                    {!! $result['item'] !!}
                   </td>
                   <td>
-                    @if ($log->action_type != 'requested')
-                      @if (isset($log->user))
-                        {!! $log->user->present()->nameUrl() !!}
-                      @else
-                          Deleted Admin
-                      @endif
-                    @endif
+                    {!! $result['admin'] !!}
                 </tr>
                 @endforeach
               </tbody>
