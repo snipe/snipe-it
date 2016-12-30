@@ -58,7 +58,7 @@ class AssetsCest
             'model_id'          => $asset->model_id,
             'status_id'         => $asset->status_id,
             'assigned_to'       => $I->getUserId(),
-            'assigned_type'     => 'App\Models\User',
+            'assigned_type'     => 'App\\Models\\User',
             'serial'            => $asset->serial,
             'name'              => $asset->name,
             'purchase_date'     => '2016-01-01',
