@@ -246,7 +246,7 @@ class ManufacturersController extends Controller
 
     protected function getDataAssetsView(Manufacturer $manufacturer, Request $request)
     {
-        $manufacturer = $manufacturer->load('assets.model', 'assets.assigneduser', 'assets.assetstatus', 'assets.company');
+        $manufacturer = $manufacturer->load('assets.model', 'assets.assignedTo', 'assets.assetstatus', 'assets.company');
         $manufacturer_assets = $manufacturer->assets();
 
         if ($request->has('search')) {

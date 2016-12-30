@@ -19,7 +19,7 @@ use App\Models\Statuslabel;
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
 
     /*---Hardware API---*/
-    Route::group([ 'prefix' => 'hardware','middleware' => ['web','auth','authorize:assets.view']], function () {
+    Route::group([ 'prefix' => 'hardware','middleware' => ['web','auth']], function () {
 
         Route::get('list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ]);
 

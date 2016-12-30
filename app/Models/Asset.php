@@ -22,6 +22,9 @@ class Asset extends Depreciable
     use Loggable, Requestable, Presentable;
     use SoftDeletes;
 
+    const LOCATION = 'location';
+    const ASSET = 'asset';
+    const USER = 'user';
   /**
   * The database table used by the model.
   *
@@ -91,9 +94,9 @@ class Asset extends Depreciable
      * @param null $name
      * @return bool
      */
-    public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
+    public function checkOut($target, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
-        if (!$user) {
+        if (!$target) {
             return false;
         }
 
@@ -103,7 +106,8 @@ class Asset extends Depreciable
 
         $this->last_checkout = $checkout_at;
 
-        $this->assigneduser()->associate($user);
+        $this->assignedTo()->associate($target);
+
 
         if ($name != null) {
             $this->name = $name;
@@ -113,13 +117,11 @@ class Asset extends Depreciable
             $this->accepted="pending";
         }
 
-
-
         if ($this->save()) {
             $log = $this->logCheckout($note);
-            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
-                $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
-            }
+//            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
+//                $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
+//            }
             return true;
         }
         return false;
@@ -150,11 +152,10 @@ class Asset extends Depreciable
 
     }
 
-
     public function getDetailedNameAttribute()
     {
-        if ($this->assignedUser) {
-            $user_name = $this->assignedUser->present()->fullName();
+        if ($this->assignedTo) {
+            $user_name = $this->assignedTo->present()->name();
         } else {
             $user_name = "Unassigned";
         }
@@ -203,24 +204,50 @@ class Asset extends Depreciable
                   ->orderBy('created_at', 'desc');
     }
 
+
+    /**
+     * Even though we allow allow for checkout to things beyond users
+     * this method is an easy way of seeing if we are checked out to a user.
+     * @return mixed
+     */
     public function assigneduser()
     {
         return $this->belongsTo('\App\Models\User', 'assigned_to')
                   ->withTrashed();
     }
 
+    public function assignedTo()
+    {
+      return $this->morphTo('assigned', 'assigned_type', 'assigned_to');
+    }
+
+    public function assignedAssets()
+    {
+      return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+    }
+
   /**
    * Get the asset's location based on the assigned user
    **/
-    public function assetloc()
+    public function assetLoc()
     {
-        if ($this->assigneduser) {
-            return $this->assigneduser->userloc();
-        } else {
-            return $this->belongsTo('\App\Models\Location', 'rtd_location_id');
+        if(!empty($this->assignedType())) {
+            if ($this->assignedType() == self::ASSET) {
+                return $this->assignedTo->assetloc(); // Recurse until we have a final location
+            } elseif ($this->assignedType() == self::LOCATION) {
+                return $this->assignedTo();
+            }
+            // Default to User
+//            var_dump($this);
+            return $this->assignedTo->userLoc();
         }
+        return $this->defaultLoc();
     }
 
+    public function assignedType()
+    {
+        return strtolower(class_basename($this->assigned_type));
+    }
   /**
    * Get the asset's location based on default RTD location
    **/

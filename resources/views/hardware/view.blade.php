@@ -229,7 +229,7 @@
 
                     @if ($asset->depreciation)
                       <tr>
-                        <td>{{ trans('admin/hardware/form.depreciation') }}</td>
+                        <td>{{ trans('general.depreciation') }}</td>
                         <td>
                           {{ $asset->depreciation->name }}
                           ({{ $asset->depreciation->months }}
@@ -347,11 +347,13 @@
                  <img src="{{ url('/') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
-              @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+              @if (($asset->assignedTo) && ($asset->deleted_at==''))
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
                 <p>
-                  <img src="{{ $asset->assigneduser->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->present()->fullName() }}">
-                  <a href="{{ route('users.show', $asset->assigned_to) }}">{{ $asset->assigneduser->present()->fullName() }}</a>
+                  @if($asset->assigned_type == User::class) <!-- Only users have avatars currently-->
+                  <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->present()->fullName() }}">
+                  @endif
+                  {!! $asset->assignedTo->present()->nameUrl() !!}
                 </p>
 
                 <ul class="list-unstyled">
@@ -363,37 +365,20 @@
                     <li><i class="fa fa-phone"></i> {{ $asset->assigneduser->phone }}</li>
                   @endif
 
-                  @if (isset($asset->userloc))
-                    <li>{{ $asset->userloc->name }}</li>
-                    <li>{{ $asset->userloc->address }}
-                      @if ($asset->userloc->address2!='')
-                      {{ $asset->userloc->address2 }}
+                  @if (isset($asset->assetLoc))
+                    <li>{{ $asset->assetLoc->name }}</li>
+                    <li>{{ $asset->assetLoc->address }}
+                      @if ($asset->assetLoc->address2!='')
+                      {{ $asset->assetLoc->address2 }}
                       @endif
                     </li>
 
-                    <li>{{ $asset->userloc->city }}
-                      @if (($asset->userloc->city!='') && ($asset->userloc->state!=''))
+                    <li>{{ $asset->assetLoc->city }}
+                      @if (($asset->assetLoc->city!='') && ($asset->assetLoc->state!=''))
                           ,
                       @endif
-                      {{ $asset->userloc->state }} {{ $asset->userloc->zip }}
+                      {{ $asset->assetLoc->state }} {{ $asset->assetLoc->zip }}
                     </li>
-
-                  @elseif (isset($asset->assetloc))
-                    <li>{{ $asset->assetloc->name }}</li>
-                    <li>{{ $asset->assetloc->address }}
-                      @if ($asset->assetloc->address2!='')
-                        {{ $asset->assetloc->address2 }}
-                      @endif
-                    </li>
-
-                    <li>
-                      {{ $asset->assetloc->city }}
-                      @if (($asset->assetloc->city!='') && ($asset->assetloc->state!=''))
-                      ,
-                      @endif
-                      {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}
-                    </li>
-
                     @endif
                 </ul>
 
@@ -600,8 +585,8 @@
                               @endif
                             @elseif (($log->action_type=='accepted') || ($log->action_type=='declined'))
                                 {{-- On a declined log, the asset isn't assigned to anyone when we look this up. --}}
-                                @if ($log->item->assigneduser)
-                                    {{ $log->item->assigneduser->present()->fullName() }}
+                                @if ($log->item->assignedTo)
+                                    {{ $log->item->assignedTo->present()->name() }}
                                 @else
                                     Unknown
                                 @endif

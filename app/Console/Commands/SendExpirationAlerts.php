@@ -68,7 +68,7 @@ class SendExpirationAlerts extends Command
             $asset_data['email_content'] .= '<td>'.e($asset->present()->warrantee_expires()).'</td>';
             $asset_data['email_content'] .= '<td>'.$difference.' '.trans('mail.days').'</td>';
             $asset_data['email_content'] .= '<td>'.($asset->supplier ? e($asset->supplier->name) : '').'</td>';
-            $asset_data['email_content'] .= '<td>'.($asset->assigneduser ? e($asset->assigneduser->present()->fullName()) : '').'</td>';
+            $asset_data['email_content'] .= '<td>'.($asset->assignedTo ? e($asset->assignedTo->present()->name()) : '').'</td>';
             $asset_data['email_content'] .= '</tr>';
         }
 

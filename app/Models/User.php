@@ -127,9 +127,10 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     /**
      * Get assets assigned to this user
      */
-    public function assets()
+    public function assignedAssets()
     {
-        return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
+        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        // return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
     /**

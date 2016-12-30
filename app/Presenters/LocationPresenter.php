@@ -56,6 +56,15 @@ class LocationPresenter extends Presenter
     }
 
     /**
+     * Getter for Polymorphism.
+     * @return mixed
+     */
+    public function name()
+    {
+        return $this->model->name;
+    }
+
+    /**
      * Url to view this item.
      * @return string
      */

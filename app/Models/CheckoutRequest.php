@@ -39,10 +39,8 @@ class CheckoutRequest extends Model
     {
         if ($this->itemType() == "asset") {
             $asset = $this->itemRequested();
-            if ($asset->assigneduser && $asset->assetloc) {
+            if ($asset->assignedTo) {
                 return $asset->assetloc;
-            } elseif ($asset->defaultLoc) {
-                return $asset->defaultLoc;
             }
         }
         return $this->itemRequested()->location;
