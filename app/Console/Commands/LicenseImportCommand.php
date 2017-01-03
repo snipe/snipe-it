@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Supplier;
 use App\Models\License;
 use App\Models\LicenseSeat;
+use App\Models\Asset;
 
 class LicenseImportCommand extends Command
 {
@@ -168,6 +169,12 @@ class LicenseImportCommand extends Command
                 $user_license_purchase_date = 0;
             }
 
+            if (array_key_exists('13', $row)) {
+                $user_licensed_to_asset = trim($row[13]);
+            } else {
+                $user_licensed_to_asset = '';
+            }
+
             // A number was given instead of a name
             if (is_numeric($user_name)) {
                 $this->comment('User '.$user_name.' is not a name - assume this user already exists');
@@ -238,6 +245,7 @@ class LicenseImportCommand extends Command
             $this->comment('Maintained: '.$user_license_maintained);
             $this->comment('Notes: '.$user_license_notes);
             $this->comment('Purchase Date: '.$user_license_purchase_date);
+            $this->comment('Asset ID: '.$user_licensed_to_asset);
 
             $this->comment('------------- Action Summary ----------------');
 
@@ -325,6 +333,13 @@ class LicenseImportCommand extends Command
                         $license_seat->assigned_to = $user->id;
                     } else {
                         $license_seat->assigned_to = null;
+                    }
+
+                    if($user_licensed_to_asset) {
+                        $asset = Asset::where('asset_tag', $user_licensed_to_asset)->first();
+                        if($asset) {
+                          $license_seat->asset_id = $asset->id;
+                        }
                     }
 
                     if ($license_seat->save()) {
