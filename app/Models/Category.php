@@ -28,7 +28,7 @@ class Category extends SnipeModel
     * Category validation rules
     */
     public $rules = array(
-        'user_id' => 'numeric',
+        'user_id' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|unique_undeleted',
         'category_type'   => 'required',
     );

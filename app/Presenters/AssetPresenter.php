@@ -20,7 +20,6 @@ class AssetPresenter extends Presenter
      */
     public function forDataTable($all_custom_fields)
     {
-        
         // Actions
 
         $inout = '';
@@ -80,15 +79,12 @@ class AssetPresenter extends Presenter
         $results['model_number'] = $this->model->model_number;
         $results['category'] = $this->categoryUrl();
         $results['manufacturer'] = $this->manufacturerUrl();
-
         $results['status_label'] = '';
         $results['assigned_to'] = '';
-        if($assigned = $this->model->assignedTo) {
-            $results['status_label'] = 'Deployed';
+        if ($assigned = $this->model->assignedTo) {
             $results['assigned_to'] = $assigned->present()->glyph() . ' ' . $assigned->present()->nameUrl();
-        } else if($this->model->assetstatus) {
-            $results['status_label'] = $this->model->assetstatus->name;
         }
+        $results['status_label'] = $this->statusText();
         $results['location'] = '';
         if (isset($assigned) and !empty($assignedLoc = $this->model->assetLoc)) {
             $results['location'] = $assignedLoc->present()->nameUrl();
@@ -249,6 +245,13 @@ class AssetPresenter extends Presenter
         return $interval;
     }
 
+    public function statusText()
+    {
+        if ($this->model->assignedTo) {
+            return trans('general.deployed');
+        }
+        return $this->model->assetstatus->name;
+    }
     /**
      * Date the warantee expires.
      * @return false|string
