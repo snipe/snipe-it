@@ -116,7 +116,7 @@ class AccessoryPresenter extends Presenter
             );
         }
         if (Gate::allows('update', $this->model)) {
-            $actions .= Helper::generateDatatableButton('edit', route('accessories.update', $this->id));
+            $actions .= Helper::generateDatatableButton('edit', route('accessories.edit', $this->id));
         }
         if (Gate::allows('delete', $this->model)) {
             $actions .= Helper::generateDatatableButton(
@@ -166,5 +166,10 @@ class AccessoryPresenter extends Presenter
     public function viewUrl()
     {
         return route('accessories.show', $this->id);
+    }
+
+    public function name()
+    {
+        return $this->model->name;
     }
 }
