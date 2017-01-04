@@ -74,7 +74,7 @@
                             &nbsp; &nbsp;</span>
                         </span>
                         @endif
-                        {{ $asset->assetstatus->name }}
+                        {{ $asset->present()->statusText() }}
 
                         ({{ $asset->assetstatus->getStatuslabelType() }})
                       </td>
