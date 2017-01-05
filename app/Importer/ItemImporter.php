@@ -138,7 +138,7 @@ class ItemImporter extends Importer
     public function createOrFetchCategory($asset_category)
     {
         // Magic to transform "AssetImporter" to "asset" or similar.
-        $classname = get_class($this);
+        $classname = class_basename(get_class($this));
         $item_type = strtolower(substr($classname, 0, strpos($classname, 'Importer')));
         if (empty($asset_category)) {
             $asset_category = 'Unnamed Category';
@@ -150,6 +150,7 @@ class ItemImporter extends Importer
         // We need strict compare here because the index returned above can be 0.
         //  This casts to false and causes false positives
         if ($category !== false) {
+            $this->log("A matching category: " . $asset_category . " already exists");
             return $this->categories[$category];
         }
 
