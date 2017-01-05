@@ -78,7 +78,7 @@ abstract class Importer
         $updating = false,
         $usernameFormat = null
     ) {
-    
+
         $this->filename = $filename;
         $this->csv = Reader::createFromPath($filename);
         $this->csv->setNewLine('\r\n');

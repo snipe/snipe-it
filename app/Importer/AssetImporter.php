@@ -51,7 +51,7 @@ class AssetImporter extends ItemImporter
         $asset = $this->assets->search(function ($key) {
             return strcasecmp($key->asset_tag, $this->item['asset_tag']) == 0;
         });
-        if ($asset) {
+        if ($asset !== false) {
             $editingAsset = true;
             if (!$this->updating) {
                 $this->log('A matching Asset ' . $this->item['asset_tag'] . ' already exists');

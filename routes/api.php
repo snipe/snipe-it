@@ -23,7 +23,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
 
         Route::get('list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ]);
 
-        Route::post('import', 'AssetsController@postAPIImportUpload');
+        Route::post('import', [ 'as' => 'api.hardware.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
     });
 
     /*---Status Label API---*/

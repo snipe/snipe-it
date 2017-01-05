@@ -68,23 +68,9 @@ class ObjectImportCommand extends Command
     public function fire()
     {
         $filename = $this->argument('filename');
-        $importerClass = Importer::class;
-        switch (strtolower($this->option('item-type'))) {
-            case "asset":
-                $importerClass = AssetImporter::class;
-                break;
-            case "accessory":
-                $importerClass = AccessoryImporter::class;
-                break;
-            case "component":
-                die("This is not implemented yet");
-                $importerClass = ComponentImporter::class;
-                break;
-            case "consumable":
-                $importerClass = ConsumableImporter::class;
-                break;
-        }
-        $importer = new $importerClass(
+        $class = title_case($this->option('item-type'));
+        $classString = "App\\Importer\\{$class}Importer";
+        $importer = new $classString(
             $filename,
             [$this, 'log'],
             [$this, 'progress'],
