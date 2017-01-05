@@ -31,25 +31,11 @@ class ItemImportRequest extends FormRequest
 
     public function import()
     {
-        $filename = config('app.private_uploads') . '/imports/assets/' . $this->get('filename');
 
-        $importerClass = Importer::class;
-        switch ($this->get('import-type')) {
-            case "asset":
-                $importerClass = 'App\Importer\AssetImporter';
-                break;
-            case "accessory":
-                $importerClass = 'App\Importer\AccessoryImporter';
-                break;
-            case "component":
-                die("This is not implemented yet");
-                $importerClass = ComponentImporter::class;
-                break;
-            case "consumable":
-                $importerClass = 'App\Importer\ConsumableImporter';
-                break;
-        }
-        $importer = new $importerClass(
+        $filename = config('app.private_uploads') . '/imports/assets/' . $this->get('filename');
+        $class = title_case($this->input('import-type'));
+        $classString = "App\\Importer\\{$class}Importer";
+        $importer = new $classString(
             $filename,
             [$this, 'log'],
             [$this, 'progress'],
