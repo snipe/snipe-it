@@ -812,6 +812,9 @@ class AssetsController extends Controller
             case "consumable":
                 $redirectTo = "consumables.index";
                 break;
+            case "component":
+                $redirectTo = "components.index";
+                break;
         }
 
         if ($errors) { //Failure

@@ -40,7 +40,7 @@ class AccessoryImporter extends ItemImporter
         $accessory = $this->accessories->search(function ($key) {
             return strcasecmp($key->name, $this->item['item_name']) == 0;
         });
-        if ($accessory) {
+        if ($accessory !== false) {
             $editingAccessory = true;
             if (!$this->updating) {
                 $this->log('A matching Accessory ' . $this->item["item_name"] . ' already exists.  ');

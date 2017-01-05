@@ -38,11 +38,7 @@ class ComponentImporter extends ItemImporter
         $component = null;
         $editingComponent = false;
         $this->log("Creating Component");
-        // dd($this->components->toArray());
         $component = $this->components->search(function ($key) {
-            var_dump('comparing ' . $key->name . ' to ' . $this->item['item_name']);
-            if(strcasecmp($key->name, $this->item['item_name']) == 0)
-                var_dump("Match");
             return strcasecmp($key->name, $this->item['item_name']) == 0;
         });
         if ($component !== false) {
@@ -55,6 +51,7 @@ class ComponentImporter extends ItemImporter
             $this->log("No matching component, creating one");
             $component = new Component();
         }
+
         if (!$editingComponent) {
             $component->name = $this->item["item_name"];
         }
@@ -87,34 +84,31 @@ class ComponentImporter extends ItemImporter
             $component->requestable = filter_var($this->item["requestable"], FILTER_VALIDATE_BOOLEAN);
         }
 
-        if (!empty($this->item["quantity"])) {
-            if ($this->item["quantity"] > -1) {
+        $component->qty = 1;
+        if ( (!empty($this->item["quantity"])) && ($this->item["quantity"] > -1)) {
                 $component->qty = $this->item["quantity"];
-            } else {
-                $component->qty = 1;
-            }
         }
 
-        if (!$this->testRun) {
-            if ($component->save()) {
-                $component->logCreate('Imported using CSV Importer');
-                $this->log("Component " . $this->item["item_name"] . ' was created');
-
-                // If we have an asset tag, checkout to that asset.
-                if(isset($this->item['asset_tag']) && ($asset = Asset::where('asset_tag', $this->item['asset_tag'])->first()) ) {
-                    $component->assets()->attach($component->id, [
-                        'component_id' => $component->id,
-                        'user_id' => $this->user_id,
-                        'created_at' => date('Y-m-d H:i:s'),
-                        'assigned_qty' => 1, // Only assign the first one to the asset
-                        'asset_id' => $asset->id
-                    ]);
-                }
-            } else {
-                $this->jsonError($component, 'Component', $component->getErrors());
-            }
-        } else {
+        if ($this->testRun) {
             $this->log('TEST RUN - Component ' . $this->item['item_name'] . ' not created');
+            return;
         }
+        if ($component->save()) {
+            $component->logCreate('Imported using CSV Importer');
+            $this->log("Component " . $this->item["item_name"] . ' was created');
+
+            // If we have an asset tag, checkout to that asset.
+            if(isset($this->item['asset_tag']) && ($asset = Asset::where('asset_tag', $this->item['asset_tag'])->first()) ) {
+                $component->assets()->attach($component->id, [
+                    'component_id' => $component->id,
+                    'user_id' => $this->user_id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'assigned_qty' => 1, // Only assign the first one to the asset
+                    'asset_id' => $asset->id
+                ]);
+            }
+            return;
+        }
+        $this->jsonError($component, 'Component', $component->getErrors());
     }
 }
