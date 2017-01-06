@@ -489,8 +489,10 @@ class Asset extends Depreciable
                 ->where('physical', '=', '1')
                 ->max('asset_tag');
 
-            $asset_tag_digits = number_format(preg_replace('/\D/', '', $temp_asset_tag));
+            $asset_tag_digits = preg_replace('/\D/', '', $temp_asset_tag);
+            \Log::info('New asset tag base will be:'. $asset_tag_digits;
             $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
+            \Log::info('New asset tag will be:'. $asset_tag;
 
             if ($settings->zerofill_count > 0) {
                 return $settings->auto_increment_prefix.Asset::zerofill(($asset_tag + 1),$settings->zerofill_count);
