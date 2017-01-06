@@ -425,17 +425,12 @@ class UsersController extends Controller
 
             // Check if we are not trying to delete ourselves
             if ($user->id === Auth::user()->id) {
-                // Prepare the error message
-                $error = trans('admin/users/message.error.delete');
-
                 // Redirect to the user management page
-                return redirect()->route('users')->with('error', $error);
+                return redirect()->route('users')->with('error', trans('admin/users/message.error.delete'));
             }
 
-
             // Do we have permission to delete this user?
-            if ((!Auth::user()->isSuperUser()) || (config('app.lock_passwords'))) {
-                // Redirect to the user management page
+            if ((Gate::denies('users.delete') || (config('app.lock_passwords')))) {
                 return redirect()->route('users')->with('error', 'Insufficient permissions!');
             }
 
@@ -459,18 +454,11 @@ class UsersController extends Controller
 
             // Delete the user
             $user->delete();
-
-            // Prepare the success message
             $success = trans('admin/users/message.success.delete');
-
-            // Redirect to the user management page
             return redirect()->route('users')->with('success', $success);
-        } catch (UserNotFoundException $e) {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
 
-            // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+        } catch (UserNotFoundException $e) {
+            return redirect()->route('users')->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
     }
 
@@ -865,7 +853,6 @@ class UsersController extends Controller
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
-                        //dd($newuser);
 
                         DB::table('users')->insert($newuser);
 
@@ -1107,7 +1094,6 @@ class UsersController extends Controller
         $user = User::find($userId);
         $destinationPath = config('app.private_uploads').'/users';
 
-        // the license is valid
         if (isset($user->id)) {
 
             if (!Company::isCurrentUserHasAccess($user)) {
