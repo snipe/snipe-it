@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class SnipeModel extends Model
@@ -15,6 +16,11 @@ class SnipeModel extends Model
         }
         $this->attributes['purchase_date'] = $value;
         return;
+    }
+
+    public function getPurchaseDateAttribute($value)
+    {
+        return (new Carbon($this->attributes['purchase_date']))->toDateString();
     }
 
     /**

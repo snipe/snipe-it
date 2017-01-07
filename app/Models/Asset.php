@@ -71,6 +71,7 @@ class Asset extends Depreciable
         'name',
         'notes',
         'purchase_cost',
+        'purchase_date',
         'rtd_location_id',
         'serial',
         'status_id',
