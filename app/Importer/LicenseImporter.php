@@ -65,7 +65,7 @@ class LicenseImporter extends ItemImporter
         $this->item['seats'] = $this->array_smart_fetch($row, 'seats');
 
         if ($editingLicense) {
-            $license->update($this->sanitizeItemForStoring($license));
+            $license->update($this->sanitizeItemForUpdating($license));
         } else {
             $license->fill($this->sanitizeItemForStoring($license));
         }

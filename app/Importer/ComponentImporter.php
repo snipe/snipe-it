@@ -44,7 +44,7 @@ class ComponentImporter extends ItemImporter
             }
             $this->log("Updating Component");
             $component = $this->components[$componentId];
-            $component->update($this->sanitizeItemForStoring($component, $updating = true));
+            $component->update($this->sanitizeItemFor($component));
             if (!$this->testRun) {
                 $component->save();
             }

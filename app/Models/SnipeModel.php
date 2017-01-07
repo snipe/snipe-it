@@ -18,11 +18,6 @@ class SnipeModel extends Model
         return;
     }
 
-    public function getPurchaseDateAttribute($value)
-    {
-        return (new Carbon($this->attributes['purchase_date']))->toDateString();
-    }
-
     /**
      * @param $value
      */

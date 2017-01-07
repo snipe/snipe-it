@@ -39,7 +39,7 @@ class AccessoryImporter extends ItemImporter
 
             $this->log('Updating Accessory');
             $accessory = $this->accessories[$accessoryId];
-            $accessory->update($this->sanitizeItemForStoring($accessory, $updating = true));
+            $accessory->update($this->sanitizeItemForUpdating($accessory));
             if (!$this->testRun) {
                 $accessory->save();
             }

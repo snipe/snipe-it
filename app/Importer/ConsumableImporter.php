@@ -38,7 +38,7 @@ class ConsumableImporter extends ItemImporter
             }
             $this->log('Updating Consumable');
             $consumable = $this->consumables[$consumableId];
-            $consumable->update($this->sanitizeItemForStoring($consumable, $updating = true));
+            $consumable->update($this->sanitizeItemForUpdating($consumable));
             if (!$this->testRun) {
                 $consumable->save();
             }

@@ -98,12 +98,22 @@ class ItemImporter extends Importer
         $item = $item->only($model->getFillable());
         // Then iterate through the item and, if we are updating, remove any blank values.
         if ($updating) {
-            $item = $item->reject(function ($value, $key) {
+            $item = $item->reject(function ($value) {
                 return empty($value);
             });
         }
 
         return $item->toArray();
+    }
+
+    /**
+    * Convenience function for updating that strips the empty values.
+    *
+    *
+    */
+    protected function sanitizeItemForUpdating($model)
+    {
+        return $this->sanitizeItemForStoring($model, true);
     }
 
     /**

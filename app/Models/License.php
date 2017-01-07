@@ -22,7 +22,7 @@ class License extends Depreciable
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
-    protected $dates = ['deleted_at', 'expiration_date', 'termination_date', 'purchase_date'];
+    protected $dates = ['deleted_at'];
 
     public $timestamps = true;
 
@@ -95,7 +95,7 @@ class License extends Depreciable
             // dd("Here");
             // Need to delete seats... lets see if if we have enough.
             $seatsAvailableForDelete = $license->licenseseats->reject(function ($seat) {
-                return !! $seat->assigned_to || $seat->asset_id;
+                return (!! $seat->assigned_to) || (!! $seat->asset_id);
             });
 
             if ($change > $seatsAvailableForDelete->count()) {
@@ -118,9 +118,7 @@ class License extends Depreciable
         // Else we're adding seats.
         DB::transaction(function () use ($license, $oldSeats, $newSeats) {
             for ($i = $oldSeats; $i < $newSeats; $i++) {
-                $license->licenseSeatsRelation()->save(new LicenseSeat, [
-                    'user_id' => Auth::id(),
-                ]);
+                $license->licenseSeatsRelation()->save(new LicenseSeat, ['user_id' => Auth::id()]);
             }
         });
         // On initail create, we shouldn't log the addition of seats.
@@ -151,27 +149,22 @@ class License extends Depreciable
 
         if ($value == '' || $value == '0000-00-00') {
             $value = null;
+        } else {
+            $value = (new Carbon($value))->toDateString();
         }
-        $value = new Carbon($value);
         $this->attributes['expiration_date'] = $value;
-    }
-    public function getExpirationDateAttribute()
-    {
-        return (new Carbon($this->attributes['expiration_date']))->toDateString();
     }
 
     public function setTerminationDateAttribute($value)
     {
         if ($value == '' || $value == '0000-00-00') {
             $value = null;
+        } else {
+            $value = (new Carbon($value))->toDateString();
         }
-        $value = new Carbon($value);
         $this->attributes['termination_date'] = $value;
     }
-    public function getTerminationDateAttribute()
-    {
-        return (new Carbon($this->attributes['termination_date']))->toDateString();
-    }
+
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
