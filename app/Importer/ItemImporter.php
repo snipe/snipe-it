@@ -145,9 +145,6 @@ class ItemImporter extends Importer
         } elseif ((empty($asset_model_name))  && (empty($asset_modelNumber))) {
             $asset_model_name ='Unknown';
         }
-
-        $this->log('Model Name: ' . $asset_model_name);
-        $this->log('Model No: ' . $asset_modelNumber);
         $editingModel = $this->updating;
         $asset_model_id = $this->asset_models->search(function ($key) use ($asset_model_name, $asset_modelNumber) {
             return strcasecmp($key->name, $asset_model_name) ==0

@@ -151,7 +151,13 @@ abstract class Importer
      */
     public function array_smart_fetch(array $array, $key, $default = '')
     {
-        return array_key_exists(trim($key), $array) ? e(Encoding::fixUTF8(trim($array[ $key ]))) : $default;
+        $val = $default;
+        if (array_key_exists(trim($key), $array)) {
+            $val = e(Encoding::fixUTF8(trim($array[ $key ])));
+        }
+        $key = title_case($key);
+        $this->log("${key}: ${val}");
+        return $val;
     }
 
     /**
@@ -225,13 +231,6 @@ abstract class Importer
                 }
             }
         }
-        $this->log("--- User Data ---");
-        $this->log('Full Name: ' . $user_name);
-        $this->log('First Name: ' . $first_name);
-        $this->log('Last Name: ' . $last_name);
-        $this->log('Username: ' . $user_username);
-        $this->log('Email: ' . $user_email);
-        $this->log('--- End User Data ---');
 
         $user = new User;
         if ($this->testRun) {

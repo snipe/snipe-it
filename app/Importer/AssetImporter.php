@@ -63,11 +63,6 @@ class AssetImporter extends ItemImporter
         if ($this->item['asset_model'] = $this->createOrFetchAssetModel($row)) {
             $this->item['model_id'] = $this->item['asset_model']->id;
         }
-        $this->log('Serial No: '.$this->item['serial']);
-        $this->log('Asset Tag: '.$this->item['asset_tag']);
-        $this->log('Notes: '.$this->item["notes"]);
-        $this->log('Warranty Months: ' . $this->item['warranty_months']);
-
         if (isset($this->item["status_label"])) {
             $this->item['status_id'] = $this->item["status_label"]->id;
         }
