@@ -34,71 +34,36 @@ class ConsumableImporter extends ItemImporter
      */
     public function createConsumableIfNotExists()
     {
-        $consumable = null;
-        $editingConsumable = false;
-        $this->log("Creating Consumable");
-        $consumable = $this->consumables->search(function ($key) {
-            return strcasecmp($key->name, $this->item['item_name']) == 0;
+        $consumableId = $this->consumables->search(function ($key) {
+            return strcasecmp($key->name, $this->item['name']) == 0;
         });
-        if ($consumable !== false) {
-            $editingConsumable = true;
+        if ($consumableId !== false) {
             if (!$this->updating) {
-                $this->log('A matching Consumable ' . $this->item["item_name"] . ' already exists.  ');
+                $this->log('A matching Consumable ' . $this->item["name"] . ' already exists.  ');
                 return;
             }
-        } else {
-            $this->log("No matching consumable, creating one");
-            $consumable = new Consumable();
-        }
-        if (!$editingConsumable) {
-            $consumable->name = $this->item["item_name"];
-        }
-        if (!empty($this->item["purchase_date"])) {
-            $consumable->purchase_date = $this->item["purchase_date"];
-        } else {
-            $consumable->purchase_date = null;
-        }
-
-        if (!empty($this->item["purchase_cost"])) {
-            $consumable->purchase_cost = Helper::ParseFloat($this->item["purchase_cost"]);
-        }
-        if (isset($this->item["location"])) {
-            $consumable->location_id = $this->item["location"]->id;
-        }
-        $consumable->user_id = $this->user_id;
-        if (isset($this->item["company"])) {
-            $consumable->company_id = $this->item["company"]->id;
-        }
-        if (!empty($this->item["order_number"])) {
-            $consumable->order_number = $this->item["order_number"];
-        }
-        if (isset($this->item["category"])) {
-            $consumable->category_id = $this->item["category"]->id;
-        }
-        // TODO:Implement
-        //$consumable->notes= e($this->item_notes);
-        if (!empty($this->item["requestable"])) {
-            $consumable->requestable = filter_var($this->item["requestable"], FILTER_VALIDATE_BOOLEAN);
-        }
-
-        if (!empty($this->item["quantity"])) {
-            if ($this->item["quantity"] > -1) {
-                $consumable->qty = $this->item["quantity"];
-            } else {
-                $consumable->qty = 1;
+            $this->log('Updating Consumable');
+            $consumable = $this->consumables[$consumableId];
+            $consumable->update($this->sanitizeItemForStoring($consumable, $updating = true));
+            if(!$this->testRun) {
+                $consumable->save();
             }
+            return;
         }
+        $this->log("No matching consumable, creating one");
+        $consumable = new Consumable();
+        $consumable->fill($this->sanitizeItemForStoring($consumable));
 
-        if (!$this->testRun) {
-            if ($consumable->save()) {
-                $consumable->logCreate('Imported using CSV Importer');
-                $this->log("Consumable " . $this->item["item_name"] . ' was created');
-
-            } else {
-                $this->jsonError($consumable, 'Consumable', $consumable->getErrors());
-            }
-        } else {
-            $this->log('TEST RUN - Consumable ' . $this->item['item_name'] . ' not created');
+        if ($this->testRun) {
+            $this->log('TEST RUN - Consumable ' . $this->item['name'] . ' not created');
+            return;
         }
+        if ($consumable->save()) {
+            $consumable->logCreate('Imported using CSV Importer');
+            $this->log("Consumable " . $this->item["name"] . ' was created');
+            return;
+        }
+        $this->jsonError($consumable, 'Consumable');
+        return;
     }
 }

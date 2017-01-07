@@ -112,7 +112,6 @@ abstract class Importer
 
     public function import()
     {
-//        dd($this->csv->fetchAssoc());
         $results = $this->normalizeInputArray($this->csv->fetchAssoc());
         $this->initializeLookupArrays();
         DB::transaction(function () use (&$results) {
@@ -199,9 +198,9 @@ abstract class Importer
         call_user_func($this->logCallback, $string);
     }
 
-    protected function jsonError($item, $field, $errorString)
+    protected function jsonError($item, $field)
     {
-        call_user_func($this->errorCallback, $item, $field, $errorString);
+        call_user_func($this->errorCallback, $item, $field, $item->getErrors());
     }
 
     /**
@@ -279,7 +278,7 @@ abstract class Importer
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
-                    $this->jsonError($user, 'User "' . $first_name . '"', $user->getErrors());
+                    $this->jsonError($user, 'User "' . $first_name . '"');
                 }
             }
         }

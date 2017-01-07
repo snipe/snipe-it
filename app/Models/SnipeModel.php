@@ -14,6 +14,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['purchase_date'] = $value;
+        return;
     }
 
     /**
@@ -26,6 +27,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['purchase_cost'] = $value;
+        return;
     }
 
     public function setLocationIdAttribute($value)
@@ -34,6 +36,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['location_id'] = $value;
+        return;
     }
 
     public function setCategoryIdAttribute($value)
@@ -42,6 +45,8 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['category_id'] = $value;
+        // dd($this->attributes);
+        return;
     }
 
     public function setSupplierIdAttribute($value)
@@ -50,6 +55,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['supplier_id'] = $value;
+        return;
     }
 
     public function setDepreciationIdAttribute($value)
@@ -58,6 +64,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['depreciation_id'] = $value;
+        return;
     }
 
     public function setManufacturerIdAttribute($value)
@@ -66,6 +73,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['manufacturer_id'] = $value;
+        return;
     }
 
     //

@@ -62,7 +62,21 @@ class Asset extends Depreciable
    *
    * @var array
    */
-    protected $fillable = ['name','model_id','status_id','asset_tag'];
+    protected $fillable = [
+        'asset_tag',
+        'assigned_to',
+        'company_id',
+        'image',
+        'model_id',
+        'name',
+        'notes',
+        'purchase_cost',
+        'rtd_location_id',
+        'serial',
+        'status_id',
+        'supplier_id',
+        'warranty_months',
+    ];
 
     public function getDisplayNameAttribute()
     {
