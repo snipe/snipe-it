@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: parallelgrapefruit
- * Date: 12/24/16
- * Time: 1:03 PM
- */
 
 namespace App\Importer;
 
@@ -14,9 +8,9 @@ use App\Models\Consumable;
 class ConsumableImporter extends ItemImporter
 {
     protected $consumables;
-    function __construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun = false, $user_id = -1, $updating = false, $usernameFormat = null)
+    public function __construct($filename)
     {
-        parent::__construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun, $user_id, $updating, $usernameFormat);
+        parent::__construct($filename);
         $this->consumables = Consumable::all();
     }
 
@@ -45,7 +39,7 @@ class ConsumableImporter extends ItemImporter
             $this->log('Updating Consumable');
             $consumable = $this->consumables[$consumableId];
             $consumable->update($this->sanitizeItemForStoring($consumable, $updating = true));
-            if(!$this->testRun) {
+            if (!$this->testRun) {
                 $consumable->save();
             }
             return;

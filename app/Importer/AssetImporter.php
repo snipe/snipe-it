@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: parallelgrapefruit
- * Date: 12/24/16
- * Time: 12:45 PM
- */
 
 namespace App\Importer;
 
@@ -16,9 +10,9 @@ use App\Models\Manufacturer;
 class AssetImporter extends ItemImporter
 {
     protected $assets;
-    function __construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun = false, $user_id = -1, $updating = false, $usernameFormat = null)
+    public function __construct($filename)
     {
-        parent::__construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun, $user_id, $updating, $usernameFormat);
+        parent::__construct($filename);
         $this->assets = Asset::all();
     }
 

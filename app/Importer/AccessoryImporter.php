@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: parallelgrapefruit
- * Date: 12/24/16
- * Time: 12:56 PM
- */
 
 namespace App\Importer;
 
@@ -14,9 +8,9 @@ use App\Models\Accessory;
 class AccessoryImporter extends ItemImporter
 {
     protected $accessories;
-    function __construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun = false, $user_id = -1, $updating = false, $usernameFormat = null)
+    public function __construct($filename)
     {
-        parent::__construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun, $user_id, $updating, $usernameFormat);
+        parent::__construct($filename);
         $this->accessories = Accessory::all();
     }
 

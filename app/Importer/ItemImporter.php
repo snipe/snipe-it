@@ -13,9 +13,9 @@ use App\Models\Supplier;
 class ItemImporter extends Importer
 {
     protected $item;
-    function __construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun = false, $user_id = -1, $updating = false, $usernameFormat = null)
+    public function __construct($filename)
     {
-        parent::__construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun, $user_id, $updating, $usernameFormat);
+        parent::__construct($filename);
     }
 
     protected function handle($row)
@@ -54,7 +54,6 @@ class ItemImporter extends Importer
             if ($this->item["category"] = $this->createOrFetchCategory($item_category)) {
                 $this->item["category_id"] = $this->item["category"]->id;
             }
-
         }
         if ($this->shouldUpdateField($item_manufacturer)) {
             if ($this->item["manufacturer"] = $this->createOrFetchManufacturer($item_manufacturer)) {
@@ -66,14 +65,11 @@ class ItemImporter extends Importer
                 $this->item["company_id"] = $this->item["company"]->id;
             }
         }
-
         if ($this->shouldUpdateField($item_status_name)) {
             if ($this->item["status_label"] = $this->createOrFetchStatusLabel($item_status_name)) {
                 $this->item["status_label_id"] = $this->item["status_label"]->id;
             }
         }
-
-        // If we're editing, only update if value isn't empty
         if ($this->shouldUpdateField($item_supplier)) {
             if ($this->item['supplier'] = $this->createOrFetchSupplier($item_supplier)) {
                 $this->item['supplier_id'] = $this->item['supplier']->id;
@@ -149,7 +145,6 @@ class ItemImporter extends Importer
         } elseif ((empty($asset_model_name))  && (empty($asset_modelNumber))) {
             $asset_model_name ='Unknown';
         }
-
 
         $this->log('Model Name: ' . $asset_model_name);
         $this->log('Model No: ' . $asset_modelNumber);
