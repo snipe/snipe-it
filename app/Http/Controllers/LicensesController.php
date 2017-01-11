@@ -116,19 +116,7 @@ class LicensesController extends Controller
         // Was the license created?
         if ($license->save()) {
             $license->logCreate();
-            $insertedId = $license->id;
             // Save the license seat data
-            DB::transaction(function () use (&$insertedId, &$license) {
-                for ($x=0; $x<$license->seats; $x++) {
-                    $license_seat = new LicenseSeat();
-                    $license_seat->license_id       = $insertedId;
-                    $license_seat->user_id          = Auth::id();
-                    $license_seat->assigned_to      = null;
-                    $license_seat->notes            = null;
-                    $license_seat->save();
-                }
-            });
-          // Redirect to the new license page
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($license->getErrors());
@@ -201,70 +189,16 @@ class LicensesController extends Controller
         $license->purchase_cost     = $request->input('purchase_cost');
         $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
-        $license->purchase_order = $request->input('purchase_order');
-        $license->reassignable      = $request->input('reassignable');
         $license->reassignable = $request->input('reassignable', 0);
         $license->serial            = $request->input('serial');
         $license->termination_date  = $request->input('termination_date');
-
-        //Are we changing the total number of seats?
-        if ($license->seats != $request->input('seats')) {
-          //Determine how many seats we are dealing with
-            $difference = $request->input('seats') - $license->licenseseats()->count();
-
-            if ($difference < 0) {
-                //Filter out any license which have a user attached;
-                $seats = $license->licenseseats->filter(function ($seat) {
-                    return is_null($seat->user);
-                });
-
-                //If the remaining collection is as large or larger than the number of seats we want to delete
-                if ($seats->count() >= abs($difference)) {
-                    for ($i=1; $i <= abs($difference); $i++) {
-                        //Delete the appropriate number of seats
-                        $seats->pop()->delete();
-                    }
-
-                  //Log the deletion of seats to the log
-                    $logAction = new Actionlog();
-                    $logAction->item_type = License::class;
-                    $logAction->item_id = $license->id;
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->note = '-'.abs($difference)." seats";
-                    $logAction->target_id =  null;
-                    $logAction->logaction('delete seats');
-                } else {
-                  // Redirect to the license edit page
-                    return redirect()->to("admin/licenses/$licenseId/edit")->with('error', trans('admin/licenses/message.assoc_users'));
-                }
-            } else {
-
-                for ($i=1; $i <= $difference; $i++) {
-                  //Create a seat for this license
-                    $license_seat = new LicenseSeat();
-                    $license_seat->license_id       = $license->id;
-                    $license_seat->user_id          = Auth::user()->id;
-                    $license_seat->assigned_to      = null;
-                    $license_seat->notes            = null;
-                    $license_seat->save();
-                }
-
-                //Log the addition of license to the log.
-                $logAction = new Actionlog();
-                $logAction->item_type = License::class;
-                $logAction->item_id = $license->id;
-                $logAction->user_id = Auth::user()->id;
-                $logAction->note = '+'.abs($difference)." seats";
-                $logAction->target_id =  null;
-                $logAction->logaction('add seats');
-            }
-            $license->seats             = e($request->input('seats'));
-        }
+        $license->seats             = e($request->input('seats'));
 
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
         }
-        return redirect()->to("admin/licenses/$licenseId/edit")->with('error', trans('admin/licenses/message.update.error'));
+        // If we can't adjust the number of seats, the error is flashed to the session by the event handler in License.php
+        return redirect()->back()->withInput()->withErrors($license->getErrors());
     }
 
     /**

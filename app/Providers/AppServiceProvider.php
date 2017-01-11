@@ -41,11 +41,7 @@ class AppServiceProvider extends ServiceProvider
 
             $validator = Validator::make($email_to_validate, $rules, $messages);
 
-            if ($validator->passes()) {
-                return true;
-            } else {
-                return false;
-            }
+            return $validator->passes();
 
         });
 
@@ -53,21 +49,19 @@ class AppServiceProvider extends ServiceProvider
         // This works around the use case where multiple deleted items have the same unique attribute.
         // (I think this is a bug in Laravel's validator?)
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-
             $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
-
-            if ($count < 1) {
-                return true;
-            } else {
-                return false;
-            }
-
+            return $count < 1;
         });
 
         // Share common variables with all views.
         view()->composer('*', function ($view) {
             $view->with('snipeSettings', \App\Models\Setting::getSettings());
         });
+
+        // Set the monetary locale to the configured locale to make helper::parseFloat work.
+        setlocale(LC_MONETARY, config('app.locale'));
+        setlocale(LC_NUMERIC, config('app.locale'));
+
     }
 
     /**

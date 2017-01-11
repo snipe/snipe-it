@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: parallelgrapefruit
- * Date: 12/24/16
- * Time: 12:56 PM
- */
 
 namespace App\Importer;
 
@@ -14,9 +8,9 @@ use App\Models\Accessory;
 class AccessoryImporter extends ItemImporter
 {
     protected $accessories;
-    function __construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun = false, $user_id = -1, $updating = false, $usernameFormat = null)
+    public function __construct($filename)
     {
-        parent::__construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun, $user_id, $updating, $usernameFormat);
+        parent::__construct($filename);
         $this->accessories = Accessory::all();
     }
 
@@ -34,76 +28,36 @@ class AccessoryImporter extends ItemImporter
      */
     public function createAccessoryIfNotExists()
     {
-        $accessory = null;
-        $editingAccessory = false;
-        $this->log("Creating Accessory");
-        $accessory = $this->accessories->search(function ($key) {
-            return strcasecmp($key->name, $this->item['item_name']) == 0;
+        $accessoryId = $this->accessories->search(function ($key) {
+            return strcasecmp($key->name, $this->item['name']) == 0;
         });
-        if ($accessory !== false) {
-            $editingAccessory = true;
+        if ($accessoryId !== false) {
             if (!$this->updating) {
-                $this->log('A matching Accessory ' . $this->item["item_name"] . ' already exists.  ');
+                $this->log('A matching Accessory ' . $this->item["name"] . ' already exists.  ');
                 return;
             }
-        } else {
-            $this->log("No Matching Accessory, Creating a new one");
-            $accessory = new Accessory();
-        }
 
-        if (!$editingAccessory) {
-            $accessory->name = $this->item["item_name"];
-        }
-
-        if (!empty($this->item["purchase_date"])) {
-            $accessory->purchase_date = $this->item["purchase_date"];
-        } else {
-            $accessory->purchase_date = null;
-        }
-        if (!empty($this->item["purchase_cost"])) {
-            $accessory->purchase_cost = Helper::ParseFloat($this->item["purchase_cost"]);
-        }
-
-        if (isset($this->item["location"])) {
-            $accessory->location_id = $this->item["location"]->id;
-        }
-        $accessory->user_id = $this->user_id;
-        if (isset($this->item["company"])) {
-            $accessory->company_id = $this->item["company"]->id;
-        }
-        if (!empty($this->item["order_number"])) {
-            $accessory->order_number = $this->item["order_number"];
-        }
-        if (isset($this->item["category"])) {
-            $accessory->category_id = $this->item["category"]->id;
-        }
-
-        //TODO: Implement
-//		$accessory->notes = e($item_notes);
-        if (!empty($this->item["requestable"])) {
-            $accessory->requestable = filter_var($this->item["requestable"], FILTER_VALIDATE_BOOLEAN);
-        }
-
-        //Must have at least zero of the item if we import it.
-        if (!empty($this->item["quantity"])) {
-            if ($this->item["quantity"] > -1) {
-                $accessory->qty = $this->item["quantity"];
-            } else {
-                $accessory->qty = 1;
+            $this->log('Updating Accessory');
+            $accessory = $this->accessories[$accessoryId];
+            $accessory->update($this->sanitizeItemForUpdating($accessory));
+            if (!$this->testRun) {
+                $accessory->save();
             }
+            return;
+        }
+        $this->log("No Matching Accessory, Creating a new one");
+        $accessory = new Accessory();
+        $accessory->fill($this->sanitizeItemForStoring($accessory));
+
+        if ($this->testRun) {
+            $this->log('TEST RUN - Accessory  ' . $this->item["name"] . ' not created');
+            return;
         }
 
-        if (!$this->testRun) {
-            if ($accessory->save()) {
-                $accessory->logCreate('Imported using CSV Importer');
-                $this->log('Accessory ' . $this->item["item_name"] . ' was created');
-                // $this->comment('Accessory ' . $this->item["item_name"] . ' was created');
-
-            } else {
-                $this->jsonError($accessory, 'Accessory', $accessory->getErrors()) ;
-            }
-        } else {
-            $this->log('TEST RUN - Accessory  ' . $this->item["item_name"] . ' not created');
+        if ($accessory->save()) {
+            $accessory->logCreate('Imported using CSV Importer');
+            $this->log('Accessory ' . $this->item["name"] . ' was created');
         }
+        $this->jsonError($accessory, 'Accessory');
     }
 }

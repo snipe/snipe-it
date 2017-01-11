@@ -35,16 +35,11 @@ class ItemImportRequest extends FormRequest
         $filename = config('app.private_uploads') . '/imports/assets/' . $this->get('filename');
         $class = title_case($this->input('import-type'));
         $classString = "App\\Importer\\{$class}Importer";
-        $importer = new $classString(
-            $filename,
-            [$this, 'log'],
-            [$this, 'progress'],
-            [$this, 'errorCallback'],
-            false, /*testrun*/
-            Auth::id(),
-            $this->has('import-update'),
-            'firstname.lastname'
-        );
+        $importer = new $classString($filename);
+        $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
+                 ->setUserId(Auth::id())
+                 ->setUpdating($this->has('import-update'))
+                 ->setUsernameFormat('firstname.lastname');
 
         $importer->import();
         return $this->errors;

@@ -68,16 +68,7 @@ abstract class Importer
      * @param bool $updating
      * @param null $usernameFormat
      */
-    function __construct(
-        string $filename,
-        $logCallback,
-        $progressCallback,
-        $errorCallback,
-        $testRun = false,
-        $user_id = -1,
-        $updating = false,
-        $usernameFormat = null
-    ) {
+    function __construct(string $filename) {
 
         $this->filename = $filename;
         $this->csv = Reader::createFromPath($filename);
@@ -85,17 +76,7 @@ abstract class Importer
         if (! ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
-        $this->testRun = $testRun;
-        if ($user_id == -1) {
-            $user_id = Auth::id();
-        }
-        $this->user_id = $user_id;
-        $this->updating = $updating;
-        $this->logCallback = $logCallback;
         $this->tempPassword = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
-        $this->progressCallback = $progressCallback;
-        $this->usernameFormat = $usernameFormat;
-        $this->errorCallback = $errorCallback;
     }
     // Cached Values for import lookups
     protected $locations;
@@ -112,23 +93,16 @@ abstract class Importer
 
     public function import()
     {
-//        dd($this->csv->fetchAssoc());
         $results = $this->normalizeInputArray($this->csv->fetchAssoc());
         $this->initializeLookupArrays();
         DB::transaction(function () use (&$results) {
             Model::unguard();
             $resultsCount = sizeof($results);
             foreach ($results as $row) {
-
-                // Let's just map some of these entries to more user friendly words
-
-                // Fetch general items here, fetch item type specific items in respective methods
-                /** @var Asset, License, Accessory, or Consumable $item_type */
                 $this->handle($row);
                 call_user_func($this->progressCallback, $resultsCount);
 
                 $this->log('------------- Action Summary ----------------');
-
             }
         });
     }
@@ -177,7 +151,13 @@ abstract class Importer
      */
     public function array_smart_fetch(array $array, $key, $default = '')
     {
-        return array_key_exists(trim($key), $array) ? e(Encoding::fixUTF8(trim($array[ $key ]))) : $default;
+        $val = $default;
+        if (array_key_exists(trim($key), $array)) {
+            $val = e(Encoding::fixUTF8(trim($array[ $key ])));
+        }
+        $key = title_case($key);
+        $this->log("${key}: ${val}");
+        return $val;
     }
 
     /**
@@ -199,9 +179,9 @@ abstract class Importer
         call_user_func($this->logCallback, $string);
     }
 
-    protected function jsonError($item, $field, $errorString)
+    protected function jsonError($item, $field)
     {
-        call_user_func($this->errorCallback, $item, $field, $errorString);
+        call_user_func($this->errorCallback, $item, $field, $item->getErrors());
     }
 
     /**
@@ -251,13 +231,6 @@ abstract class Importer
                 }
             }
         }
-        $this->log("--- User Data ---");
-        $this->log('Full Name: ' . $user_name);
-        $this->log('First Name: ' . $first_name);
-        $this->log('Last Name: ' . $last_name);
-        $this->log('Username: ' . $user_username);
-        $this->log('Email: ' . $user_email);
-        $this->log('--- End User Data ---');
 
         $user = new User;
         if ($this->testRun) {
@@ -279,10 +252,99 @@ abstract class Importer
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
-                    $this->jsonError($user, 'User "' . $first_name . '"', $user->getErrors());
+                    $this->jsonError($user, 'User "' . $first_name . '"');
                 }
             }
         }
         return $user;
+    }
+
+
+
+    /**
+     * Sets the value of filename.
+     *
+     * @param string $filename the filename
+     *
+     * @return self
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * Sets the Should we persist to database?.
+     *
+     * @param bool $testRun the test run
+     *
+     * @return self
+     */
+    public function setTestRun($testRun)
+    {
+        $this->testRun = $testRun;
+
+        return $this;
+    }
+
+    /**
+     * Sets the Id of User performing import.
+     *
+     * @param mixed $user_id the user id
+     *
+     * @return self
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Sets the Are we updating items in the import.
+     *
+     * @param bool $updating the updating
+     *
+     * @return self
+     */
+    public function setUpdating($updating)
+    {
+        $this->updating = $updating;
+
+        return $this;
+    }
+
+    /**
+     * Sets the callbacks for the import
+     *
+     * @param callable $logCallback Function to call when we have data to log
+     * @param callable $progressCallback Function to call to display progress
+     * @param callable $errorCallback Function to call when we have errors
+     *
+     * @return self
+     */
+    public function setCallbacks(callable $logCallback, callable $progressCallback, callable $errorCallback)
+    {
+        $this->logCallback = $logCallback;
+        $this->progressCallback = $progressCallback;
+        $this->errorCallback = $errorCallback;
+
+        return $this;
+    }
+    /**
+     * Sets the value of usernameFormat.
+     *
+     * @param string $usernameFormat the username format
+     *
+     * @return self
+     */
+    public function setUsernameFormat($usernameFormat)
+    {
+        $this->usernameFormat = $usernameFormat;
+
+        return $this;
     }
 }

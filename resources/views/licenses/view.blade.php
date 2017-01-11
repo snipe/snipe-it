@@ -166,7 +166,7 @@
                     </tr>
                     @endif
 
-                    @if ($license->expiration_date > 0)
+                    @if (isset($license->expiration_date))
                     <tr>
                       <td>{{ trans('admin/licenses/form.expiration') }}:</td>
                       <td>{{ $license->expiration_date }}</td>
@@ -220,7 +220,7 @@
                     </tr>
                     @endif
 
-                    @if ($license->purchase_date > 0)
+                    @if (isset($license->purchase_date))
                     <tr>
                       <td>{{ trans('general.purchase_date') }}:</td>
                       <td>{{ $license->purchase_date }}</td>

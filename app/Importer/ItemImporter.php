@@ -13,52 +13,124 @@ use App\Models\Supplier;
 class ItemImporter extends Importer
 {
     protected $item;
-    function __construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun = false, $user_id = -1, $updating = false, $usernameFormat = null)
+    public function __construct($filename)
     {
-        parent::__construct($filename, $logCallback, $progressCallback, $errorCallback, $testRun, $user_id, $updating, $usernameFormat);
+        parent::__construct($filename);
     }
 
     protected function handle($row)
     {
+        // TODO: CHeck if this interferes with checkout to user.. it shouldn't..
+        $this->item["user_id"] = $this->user_id;
         $item_category = $this->array_smart_fetch($row, "category");
         $item_company_name = $this->array_smart_fetch($row, "company");
         $item_location = $this->array_smart_fetch($row, "location");
         $item_manufacturer = $this->array_smart_fetch($row, "manufacturer");
         $item_status_name = $this->array_smart_fetch($row, "status");
-        $this->item["item_name"] = $this->array_smart_fetch($row, "item name");
+        $item_supplier = $this->array_smart_fetch($row, "supplier");
+        $this->item["name"] = $this->array_smart_fetch($row, "item name");
+        $this->item["purchase_date"] = null;
         if ($this->array_smart_fetch($row, "purchase date")!='') {
             $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
-        } else {
-            $this->item["purchase_date"] = null;
         }
 
         $this->item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
         $this->item["order_number"] = $this->array_smart_fetch($row, "order number");
         $this->item["notes"] = $this->array_smart_fetch($row, "notes");
-        $this->item["quantity"] = $this->array_smart_fetch($row, "quantity");
+        $this->item["qty"] = $this->array_smart_fetch($row, "quantity");
         $this->item["requestable"] = $this->array_smart_fetch($row, "requestable");
         $this->item["asset_tag"] = $this->array_smart_fetch($row, "asset tag");
 
-        $this->item["user"] = $this->createOrFetchUser($row);
-
-        if (!($this->updating && empty($item_location))) {
-            $this->item["location"] = $this->createOrFetchLocation($item_location);
-        }
-        if (!($this->updating && empty($item_category))) {
-            $this->item["category"] = $this->createOrFetchCategory($item_category);
-        }
-        if (!($this->updating && empty($item_manufacturer))) {
-            $this->item["manufacturer"] = $this->createOrFetchManufacturer($item_manufacturer);
-        }
-        if (!($this->updating && empty($item_company_name))) {
-            $this->item["company"] = $this->createOrFetchCompany($item_company_name);
+        if ($this->item["user"] = $this->createOrFetchUser($row)) {
+            $this->item['assigned_to'] = $this->item['user']->id;
         }
 
-        if (!($this->updating && empty($item_status_name))) {
-            $this->item["status_label"] = $this->createOrFetchStatusLabel($item_status_name);
+        if ($this->shouldUpdateField($item_location)) {
+            if ($this->item["location"] = $this->createOrFetchLocation($item_location)) {
+                $this->item["location_id"] = $this->item["location"]->id;
+            }
+        }
+        if ($this->shouldUpdateField($item_category)) {
+            if ($this->item["category"] = $this->createOrFetchCategory($item_category)) {
+                $this->item["category_id"] = $this->item["category"]->id;
+            }
+        }
+        if ($this->shouldUpdateField($item_manufacturer)) {
+            if ($this->item["manufacturer"] = $this->createOrFetchManufacturer($item_manufacturer)) {
+                $this->item["manufacturer_id"] = $this->item["manufacturer"]->id;
+            }
+        }
+        if ($this->shouldUpdateField($item_company_name)) {
+            if ($this->item["company"] = $this->createOrFetchCompany($item_company_name)) {
+                $this->item["company_id"] = $this->item["company"]->id;
+            }
+        }
+        if ($this->shouldUpdateField($item_status_name)) {
+            if ($this->item["status_label"] = $this->createOrFetchStatusLabel($item_status_name)) {
+                $this->item["status_label_id"] = $this->item["status_label"]->id;
+            }
+        }
+        if ($this->shouldUpdateField($item_supplier)) {
+            if ($this->item['supplier'] = $this->createOrFetchSupplier($item_supplier)) {
+                $this->item['supplier_id'] = $this->item['supplier']->id;
+            }
         }
     }
 
+    /**
+     * Cleanup the $item array before storing.
+     * We need to remove any values that are not part of the fillable fields.
+     * Also, if updating, we remove any fields from the array that are empty.
+     *
+     * @author Daniel Melzter
+     * @since 4.0
+     * @param $model SnipeModel Model that's being updated.
+     * @param $updating boolean Should we remove blank values?
+     * @return array
+     */
+
+    protected function sanitizeItemForStoring($model, $updating = false)
+    {
+        // Create a collection for all manipulations to come.
+        $item = collect($this->item);
+        // First Filter the item down to the model's fillable fields
+
+        $item = $item->only($model->getFillable());
+        // Then iterate through the item and, if we are updating, remove any blank values.
+        if ($updating) {
+            $item = $item->reject(function ($value) {
+                return empty($value);
+            });
+        }
+
+        return $item->toArray();
+    }
+
+    /**
+    * Convenience function for updating that strips the empty values.
+    *
+    *
+    */
+    protected function sanitizeItemForUpdating($model)
+    {
+        return $this->sanitizeItemForStoring($model, true);
+    }
+
+    /**
+     * Determines if a field needs updating
+     * Follows the following rules:
+     * If we are not updating, we should update the field
+     * If We are updating, we only update the field if it's not empty.
+     *
+     * @author Daniel Melzter
+     * @since 4.0
+     * @param $field string
+     * @return boolean
+     */
+    private function shouldUpdateField($field)
+    {
+        return !($this->updating && empty($field));
+    }
     /**
      * Select the asset model if it exists, otherwise create it.
      *
@@ -70,60 +142,59 @@ class ItemImporter extends Importer
      * @return AssetModel
      * @internal param $asset_modelno string
      */
-    public function createOrFetchAssetModel(array $row, $category, $manufacturer)
+    public function createOrFetchAssetModel(array $row)
     {
         $asset_model_name = $this->array_smart_fetch($row, "model name");
         $asset_modelNumber = $this->array_smart_fetch($row, "model number");
+        // TODO: At the moment, this means  we can't update the model number if the model name stays the same.
+        if (!$this->shouldUpdateField($asset_model_name)) {
+            return;
+        }
         if ((empty($asset_model_name))  && (!empty($asset_modelNumber))) {
             $asset_model_name = $asset_modelNumber;
         } elseif ((empty($asset_model_name))  && (empty($asset_modelNumber))) {
             $asset_model_name ='Unknown';
         }
-        $this->log('Model Name: ' . $asset_model_name);
-        $this->log('Model No: ' . $asset_modelNumber);
-
-        $asset_model = null;
         $editingModel = $this->updating;
-        $asset_model = $this->asset_models->search(function ($key) use ($asset_model_name, $asset_modelNumber) {
+        $asset_model_id = $this->asset_models->search(function ($key) use ($asset_model_name, $asset_modelNumber) {
             return strcasecmp($key->name, $asset_model_name) ==0
                 && $key->model_number == $asset_modelNumber;
         });
         // We need strict compare here because the index returned above can be 0.
         //  This casts to false and causes false positives
-        if (($asset_model !== false) && !$editingModel) {
-            return $this->asset_models[$asset_model];
-        } else {
-            $this->log("No Matching Model, Creating a new one");
-            $asset_model = new AssetModel();
-        }
-        if (($editingModel && ($asset_model_name != "Unknown"))
-            || (!$editingModel)) {
-            $asset_model->name = $asset_model_name;
-        }
-        isset($manufacturer) && $manufacturer->exists() && $asset_model->manufacturer_id = $manufacturer->id;
-        isset($asset_modelNumber) && $asset_model->model_number = $asset_modelNumber;
-        if (isset($category) && $category->exists()) {
-            $asset_model->category_id = $category->id;
-        }
-        $asset_model->user_id = $this->user_id;
-
-        if (!$editingModel) {
-            $this->asset_models->add($asset_model);
-        }
-        if (!$this->testRun) {
-            if ($asset_model->save()) {
-                $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelNumber . ' was created');
-                return $asset_model;
-            } else {
-                $this->jsonError($asset_model, 'Asset Model "' . $asset_model_name . '"', $asset_model->getErrors());
-                $this->log('Asset Model "' . $asset_model_name . '"' . $asset_model->getErrors());
+        $asset_model = new AssetModel;
+        $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
+        $item['name'] = $asset_model_name;
+        $item['model_number'] = $asset_modelNumber;
+        if ($asset_model_id !== false) {
+            $asset_model = $this->asset_models[$asset_model_id];
+            if (!$this->updating) {
+                $this->log("A matching model already exists, returning it.");
                 return $asset_model;
             }
-        } else {
-            $this->asset_models->add($asset_model);
+            $this->log("Matching Model found, updating it.");
+            $asset_model->update($item);
+            if (!$this->testRun) {
+                $asset_model->save();
+            }
+            return $asset_model;
+        }
+        $this->log("No Matching Model, Creating a new one");
+        $asset_model = new AssetModel();
+        $asset_model->fill($item);
+        $this->asset_models->add($asset_model);
+
+        if ($this->testRun) {
+            $this->log('TEST RUN - asset_model  ' . $asset_model->name . ' not created');
             return $asset_model;
         }
 
+        if ($asset_model->save()) {
+            $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelNumber . ' was created');
+            return $asset_model;
+        }
+        $this->jsonError($asset_model, 'Asset Model "' . $asset_model_name . '"');
+        return;
     }
 
     /**
@@ -155,25 +226,21 @@ class ItemImporter extends Importer
         }
 
         $category = new Category();
-
         $category->name = $asset_category;
         $category->category_type = $item_type;
         $category->user_id = $this->user_id;
 
-        if (!$this->testRun) {
-            if ($category->save()) {
-                $this->categories->add($category);
-                $this->log('Category ' . $asset_category . ' was created');
-                return $category;
-            } else {
-                $this->jsonError($category, 'Category "'. $asset_category. '"', $category->getErrors());
-                return $category;
-            }
-        } else {
+        if ($this->testRun) {
             $this->categories->add($category);
             return $category;
         }
+        if ($category->save()) {
+            $this->categories->add($category);
+            $this->log('Category ' . $asset_category . ' was created');
+            return $category;
+        }
 
+        $this->jsonError($category, 'Category "'. $asset_category. '"');
     }
 
     /**
@@ -198,18 +265,17 @@ class ItemImporter extends Importer
         $company = new Company();
         $company->name = $asset_company_name;
 
-        if (!$this->testRun) {
-            if ($company->save()) {
-                $this->companies->add($company);
-                $this->log('Company ' . $asset_company_name . ' was created');
-                return $company;
-            } else {
-                $this->log('Company', $company->getErrors());
-            }
-        } else {
+        if ($this->testRun) {
             $this->companies->add($company);
             return $company;
         }
+        if ($company->save()) {
+            $this->companies->add($company);
+            $this->log('Company ' . $asset_company_name . ' was created');
+            return $company;
+        }
+        $this->jsonError($company, 'Company');
+        return;
     }
 
     /**
@@ -218,7 +284,7 @@ class ItemImporter extends Importer
      * @author Daniel Melzter
      * @since 3.0
      * @param string $asset_statuslabel_name
-     * @return Statuslabel
+     * @return Statuslabel|null
      */
     public function createOrFetchStatusLabel($asset_statuslabel_name)
     {
@@ -242,19 +308,19 @@ class ItemImporter extends Importer
         $status->pending = 0;
         $status->archived = 0;
 
-        if (!$this->testRun) {
-            if ($status->save()) {
-                $this->status_labels->add($status);
-                $this->log('Status ' . $asset_statuslabel_name . ' was created');
-                return $status;
-            } else {
-                $this->jsonError($status, 'Status "'. $asset_statuslabel_name . '"', $status->getErrors());
-                return $status;
-            }
-        } else {
+        if ($this->testRun) {
             $this->status_labels->add($status);
             return $status;
         }
+
+        if ($status->save()) {
+            $this->status_labels->add($status);
+            $this->log('Status ' . $asset_statuslabel_name . ' was created');
+            return $status;
+        }
+
+        $this->jsonError($status, 'Status "'. $asset_statuslabel_name . '"');
+        return;
     }
 
     /**
@@ -287,20 +353,17 @@ class ItemImporter extends Importer
         $manufacturer->name = $item_manufacturer;
         $manufacturer->user_id = $this->user_id;
 
-        if (!$this->testRun) {
-            if ($manufacturer->save()) {
-                $this->manufacturers->add($manufacturer);
-                $this->log('Manufacturer ' . $manufacturer->name . ' was created');
-                return $manufacturer;
-            } else {
-                $this->jsonError($manufacturer, 'Manufacturer "'. $manufacturer->name . '"', $manufacturer->getErrors());
-                return $manufacturer;
-            }
-
-        } else {
+        if ($this->testRun) {
             $this->manufacturers->add($manufacturer);
             return $manufacturer;
         }
+        if ($manufacturer->save()) {
+            $this->manufacturers->add($manufacturer);
+            $this->log('Manufacturer ' . $manufacturer->name . ' was created');
+            return $manufacturer;
+        }
+        $this->jsonError($manufacturer, 'Manufacturer "'. $manufacturer->name . '"');
+        return;
     }
 
     /**
@@ -328,8 +391,6 @@ class ItemImporter extends Importer
         }
         // No matching locations in the collection, create a new one.
         $location = new Location();
-
-
         $location->name = $asset_location;
         $location->address = '';
         $location->city = '';
@@ -337,19 +398,17 @@ class ItemImporter extends Importer
         $location->country = '';
         $location->user_id = $this->user_id;
 
-        if (!$this->testRun) {
-            if ($location->save()) {
-                $this->locations->add($location);
-                $this->log('Location ' . $asset_location . ' was created');
-                return $location;
-            } else {
-                $this->log('Location', $location->getErrors()) ;
-                return $location;
-            }
-        } else {
+        if ($this->testRun) {
             $this->locations->add($location);
             return $location;
         }
+        if ($location->save()) {
+            $this->locations->add($location);
+            $this->log('Location ' . $asset_location . ' was created');
+            return $location;
+        }
+        $this->jsonError($location, 'Location');
+        return;
     }
 
     /**
@@ -380,18 +439,16 @@ class ItemImporter extends Importer
         $supplier->name = $item_supplier;
         $supplier->user_id = $this->user_id;
 
-        if (!$this->testRun) {
-            if ($supplier->save()) {
-                $this->suppliers->add($supplier);
-                $this->log('Supplier ' . $item_supplier . ' was created');
-                return $supplier;
-            } else {
-                $this->log('Supplier', $supplier->getErrors());
-                return $supplier;
-            }
-        } else {
+        if ($this->testRun) {
             $this->suppliers->add($supplier);
             return $supplier;
         }
+        if ($supplier->save()) {
+            $this->suppliers->add($supplier);
+            $this->log('Supplier ' . $item_supplier . ' was created');
+            return $supplier;
+        }
+        $this->jsonError($supplier, 'Supplier');
+        return;
     }
 }

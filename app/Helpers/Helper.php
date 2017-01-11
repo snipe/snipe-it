@@ -124,6 +124,8 @@ class Helper
         $LocaleInfo = localeconv();
         $floatString = str_replace(",", "", $floatString);
         $floatString = str_replace($LocaleInfo["decimal_point"], ".", $floatString);
+        // Strip Currency symbol
+        $floatString = str_replace($LocaleInfo['currency_symbol'], '', $floatString);
         return floatval($floatString);
     }
 

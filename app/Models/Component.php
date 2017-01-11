@@ -19,8 +19,6 @@ class Component extends SnipeModel
 
     protected $dates = ['deleted_at'];
     protected $table = 'components';
-
-
     /**
     * Category validation rules
     */
@@ -48,7 +46,15 @@ class Component extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','company_id','category_id'];
+    protected $fillable = [
+        'category_id',
+        'company_id',
+        'location_id',
+        'name',
+        'purchase_cost',
+        'purchase_date',
+        'qty',
+    ];
 
     public function location()
     {
