@@ -10,6 +10,7 @@ use App\Models\Asset;
 use App\Models\Group;
 use App\Models\Company;
 use App\Models\Location;
+use App\Models\License;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Http\Requests\SaveUserRequest;
