@@ -48,7 +48,17 @@ class Accessory extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','qty','category_id'];
+    protected $fillable = [
+        'category_id',
+        'company_id',
+        'location_id',
+        'name',
+        'order_number',
+        'purchase_cost',
+        'purchase_date',
+        'qty',
+        'requestable'
+    ];
 
     public function company()
     {

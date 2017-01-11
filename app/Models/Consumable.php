@@ -24,7 +24,7 @@ class Consumable extends SnipeModel
         'qty'         => 'required|integer|min:0',
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
-        'min_amt'     => 'integer|min:1',
+        'min_amt'     => 'integer|min:1|nullable',
         'purchase_cost'   => 'numeric|nullable',
     );
 
@@ -43,7 +43,18 @@ class Consumable extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','qty','company_id','category_id'];
+    protected $fillable = [
+        'category_id',
+        'company_id',
+        'location_id',
+        'manufacturer_id',
+        'name',
+        'order_number',
+        'purchase_cost',
+        'purchase_date',
+        'qty',
+        'requestable'
+    ];
 
 
     public function admin()

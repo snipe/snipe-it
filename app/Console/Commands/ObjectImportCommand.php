@@ -70,16 +70,13 @@ class ObjectImportCommand extends Command
         $filename = $this->argument('filename');
         $class = title_case($this->option('item-type'));
         $classString = "App\\Importer\\{$class}Importer";
-        $importer = new $classString(
-            $filename,
-            [$this, 'log'],
-            [$this, 'progress'],
-            [$this, 'errorCallback'],
-            $this->option('testrun'),
-            $this->option('user_id'),
-            $this->option('update'),
-            $this->option('username_format')
-        );
+        $importer = new $classString($filename);
+        $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
+                 ->setTestRun($this->option('testrun'))
+                 ->setUserId($this->option('user_id'))
+                 ->setUpdating($this->option('update'))
+                 ->setUsernameFormat($this->option('username_format'));
+
         $logFile = $this->option('logfile');
         \Log::useFiles($logFile);
         if ($this->option('testrun')) {
