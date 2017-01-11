@@ -2,6 +2,7 @@ var elixir = require('laravel-elixir');
 require('laravel-elixir-codeception-standalone');
 require('laravel-elixir-phpcs');
 require('laravel-elixir-vue-2');
+var bowerPath = './vendor/bower_components';
 
 /*
  |--------------------------------------------------------------------------
@@ -14,35 +15,47 @@ require('laravel-elixir-vue-2');
  |
  */
 
+
 elixir(function(mix) {
 
-    mix.less(['AdminLTE.less',
+    mix.less(
+        [
+            'AdminLTE.less',
             'skins/skin-blue.less',
             'ekko-lightbox.less',
             'overrides.less',
-            'fontawesome-animated.css'],
-            'public/assets/css')
-       .webpack('app.js');
+            'fontawesome-animated.css',
+             bowerPath + '/bootstrap-less/assets/stylesheets/**'
+         ], 'public/assets/css/')
+            .copy(bowerPath + '/bootstrap-less/assets/fonts/bootstrap/**', 'public/assets/fonts');
+
+
+
+    mix.webpack(
+            './resources/assets/js/vue.js',
+            './resources/assets/js/vue-dist.js'
+        );
+
+
+
+
     mix.scripts([
-        'plugins/jQuery/jQuery-2.1.4.min.js',
-        'plugins/jQueryUI/jquery-ui.js',
-        'plugins/jQueryUI/jquery.ui.widget.js',
-        'plugins/iframe-transport/jquery.iframe-transport.js',
-        'plugins/fileupload/jquery.fileupload.js',
-        'bootstrap-js.js',
-        'plugins/fastclick/fastclick.js',
-        'plugins/slimScroll/jquery.slimscroll.js',
-        'plugins/select2/select2.full.min.js',
-        'plugins/colorpicker/bootstrap-colorpicker.js',
-        'bootstrap-table.js',
-        'plugins/datepicker/bootstrap-datepicker.js',
-        'plugins/select2/select2.js',
-        'plugins/iCheck/icheck.js',
-        'ekko-lightbox.js',
+        'vue-dist.js',
+        bowerPath + '/bootstrap/dist/js/**',
+        bowerPath + '/jquery-slimscroll/**',
+        bowerPath + '/jquery-ui/**',
+        bowerPath + '/jquery.iframe-transport/**',
+        bowerPath + '/fileupload/**',
+        bowerPath + '/fastclick/**',
+        bowerPath + '/select2/**',
+        bowerPath + '/bootstrap-colorpicker/**',
+        bowerPath + '/bootstrap-table/**',
+        bowerPath + '/bootstrap-datepicker/**',
+        bowerPath +  '/iCheck/**',
+        bowerPath + '/ekko-lightbox/**',
         'snipeit.js'
 
-    ],'public/assets/js')
-        ;
+    ],'public/assets/js');
     mix.version(['assets/css/app.css','assets/js/all.js']);
 
 

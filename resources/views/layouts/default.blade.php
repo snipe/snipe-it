@@ -69,6 +69,8 @@
     }
     </style>
 
+
+
     <script>
           window.snipeit = {
               settings: {
@@ -293,11 +295,19 @@
                      <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                        <a href="{{ route('view-assets') }}">
                              <i class="fa fa-check fa-fw"></i> @lang('general.viewassets')
-                       </a>
+                       </a></li>
+                     <li>
                           <a href="{{ route('profile') }}">
                              <i class="fa fa-user fa-fw"></i> @lang('general.editprofile')
                          </a>
                      </li>
+                     @can('self.api')
+                     <li>
+                         <a href="{{ route('user.api') }}">
+                             <i class="fa fa-user fa-fw"></i> Manage API Keys
+                         </a>
+                     </li>
+                     @endcan
                      <li class="divider"></li>
                      <li>
                          <a href="{{ url('/logout') }}">
@@ -371,6 +381,13 @@
                                <i class="fa fa-wrench fa-fw"></i> @lang('admin/custom_fields/general.custom_fields')
                            </a>
                        </li>
+                       @can('settings.api')
+                           <li>
+                               <a href="{{ route('settings.api') }}">
+                                   <i class="fa fa-user fa-fw"></i> OAuth API Keys
+                               </a>
+                           </li>
+                       @endcan
                        <li class="divider"></li>
                        <li>
                            <a href="{{ route('app') }}">
@@ -621,55 +638,8 @@
     </div>
 
 
-    <script src="/js/app.js"></script>
+
     <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
-
-    <script>
-       $(function () {
-         //Initialize Select2 Elements
-         var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
-         if(!iOS)
-         {
-          $(".select2").select2();
-         }
-         $('.datepicker').datepicker();
-       });
-
-       //Flat blue color scheme for iCheck
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
-          radioClass: 'iradio_minimal-blue'
-        });
-     </script>
-
-     <script type="text/javascript">
-     $(document).ready(function () {
-
-         $('.slideout-menu-toggle').on('click', function(event){
-           console.log('clicked');
-         	event.preventDefault();
-         	// create menu variables
-         	var slideoutMenu = $('.slideout-menu');
-         	var slideoutMenuWidth = $('.slideout-menu').width();
-
-         	// toggle open class
-         	slideoutMenu.toggleClass("open");
-
-         	// slide menu
-         	if (slideoutMenu.hasClass("open")) {
-             slideoutMenu.show();
-     	    	slideoutMenu.animate({
-     		    	right: "0px"
-     	    	});
-         	} else {
-     	    	slideoutMenu.animate({
-     		    	right: -slideoutMenuWidth
-     	    	}, "-350px");
-             slideoutMenu.fadeOut();
-         	}
-         });
-     });
-     </script>
 
 
     @section('moar_scripts')

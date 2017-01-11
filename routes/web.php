@@ -106,7 +106,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
 
             Route::get(
                 'api',
-                array('as' => 'api',
+                array('as' => 'settings.api',
                     function () {
                         return view('settings/api');
                     }
@@ -182,6 +182,15 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
     # Profile
     Route::get('profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ]);
     Route::post('profile', 'ProfileController@postIndex');
+
+    Route::get(
+        'api',
+        array('as' => 'user.api',
+            function () {
+                return view('account/api');
+            }
+        )
+    );
 
     # View Assets
     Route::get('view-assets', [ 'as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex' ]);

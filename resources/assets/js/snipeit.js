@@ -1,3 +1,4 @@
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object
@@ -35,10 +36,7 @@ var pieOptions = {
     //String - A tooltip template
     tooltipTemplate: "<%=value %> <%=label%> "
 };
-//console.dir(pieOptions);
-//Create pie or douhnut chart
-// You can switch between pie and douhnut using the method below.
-//pieChart.Doughnut(PieData, pieOptions);
+
 //-----------------
 //- END PIE CHART -
 //-----------------
@@ -91,17 +89,46 @@ var pieOptions = {
 }(jQuery, window.snipeit.settings));
 
 
-// Vue.component(
-//     'passport-clients',
-//     require('./components/passport/Clients.vue')
-// );
-//
-// Vue.component(
-//     'passport-authorized-clients',
-//     require('./components/passport/AuthorizedClients.vue')
-// );
-//
-// Vue.component(
-//     'passport-personal-access-tokens',
-//     require('./components/passport/PersonalAccessTokens.vue')
-// );
+$(function () {
+ //Initialize Select2 Elements
+ var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
+ if(!iOS)
+ {
+  $(".select2").select2();
+ }
+ $('.datepicker').datepicker();
+});
+
+//Flat blue color scheme for iCheck
+$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+  checkboxClass: 'icheckbox_minimal-blue',
+  radioClass: 'iradio_minimal-blue'
+});
+
+
+$(document).ready(function () {
+
+         $('.slideout-menu-toggle').on('click', function(event){
+           console.log('clicked');
+         	event.preventDefault();
+         	// create menu variables
+         	var slideoutMenu = $('.slideout-menu');
+         	var slideoutMenuWidth = $('.slideout-menu').width();
+
+         	// toggle open class
+         	slideoutMenu.toggleClass("open");
+
+         	// slide menu
+         	if (slideoutMenu.hasClass("open")) {
+             slideoutMenu.show();
+     	    	slideoutMenu.animate({
+     		    	right: "0px"
+     	    	});
+         	} else {
+     	    	slideoutMenu.animate({
+     		    	right: -slideoutMenuWidth
+     	    	}, "-350px");
+             slideoutMenu.fadeOut();
+         	}
+         });
+     });
