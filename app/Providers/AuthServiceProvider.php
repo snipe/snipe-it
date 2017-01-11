@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Accessory;
+use Carbon\Carbon;
 use App\Models\Asset;
 use App\Models\Component;
 use App\Models\Consumable;
@@ -43,12 +44,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
+        Passport::tokensExpireIn(Carbon::now()->addYears(20));
+        Passport::refreshTokensExpireIn(Carbon::now()->addYears(20));
 
 
         // --------------------------------
         // BEFORE ANYTHING ELSE
         // --------------------------------
-        // If this condition is true, ANYTHING else below will be asssumed
+        // If this condition is true, ANYTHING else below will be assumed
         // to be true. This can cause weird blade behavior.
         Gate::before(function ($user) {
             if ($user->isSuperUser()) {
