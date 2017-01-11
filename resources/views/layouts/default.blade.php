@@ -304,7 +304,7 @@
                      @can('self.api')
                      <li>
                          <a href="{{ route('user.api') }}">
-                             <i class="fa fa-user fa-fw"></i> Manage API Keys
+                             <i class="fa fa-user-secret fa-fw"></i> Manage API Keys
                          </a>
                      </li>
                      @endcan
@@ -384,7 +384,7 @@
                        @can('settings.api')
                            <li>
                                <a href="{{ route('settings.api') }}">
-                                   <i class="fa fa-user fa-fw"></i> OAuth API Keys
+                                   <i class="fa fa-exchange fa-fw"></i> OAuth API Keys
                                </a>
                            </li>
                        @endcan
@@ -593,7 +593,9 @@
 
 
           <!-- Content -->
+            <div id="app">
           @yield('content')
+            </div>
 
         </section>
 
@@ -643,6 +645,24 @@
 
 
     @section('moar_scripts')
+<script>
+        $(function () {
+        //Initialize Select2 Elements
+        var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
+        if(!iOS)
+        {
+        $(".select2").select2();
+        }
+        $('.datepicker').datepicker();
+        });
+
+
+        //Flat blue color scheme for iCheck
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+        checkboxClass: 'icheckbox_minimal-blue',
+        radioClass: 'iradio_minimal-blue'
+        });
+</script>
     @show
     @if ((Session::get('topsearch')=='true') || (Request::is('/')))
     <script>

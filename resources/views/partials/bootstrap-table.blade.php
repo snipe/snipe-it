@@ -5,7 +5,6 @@
 <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/multiple-sort/bootstrap-table-multiple-sort.js') }}"></script>
 <script>
 $('.snipe-table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
