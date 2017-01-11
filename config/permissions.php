@@ -287,6 +287,13 @@ return array(
             'display'    => true,
         ),
 
+        array(
+            'permission' => 'self.api',
+            'label'      => 'Create API Keys',
+            'note'       => 'The user create personal API keys to utilize the REST API.',
+            'display'    => true,
+        ),
+
     ),
 
 
