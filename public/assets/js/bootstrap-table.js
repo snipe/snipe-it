@@ -254,7 +254,11 @@
         cache: true,
         contentType: 'application/json',
         dataType: 'json',
-        ajaxOptions: {},
+        ajaxOptions: {
+         headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        },
         queryParams: function (params) {
             return params;
         },

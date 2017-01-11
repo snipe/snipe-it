@@ -25,9 +25,7 @@
 
     <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
-      <script>
-          window.Laravel = { csrfToken: '{{ csrf_token() }}' };
-      </script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
         @if ($snipeSettings)
@@ -275,6 +273,7 @@
 
 
                <!-- User Account: style can be found in dropdown.less -->
+               @if (Auth::check())
                <li class="dropdown user user-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    @if (Auth::user()->present()->gravatar())
@@ -312,6 +311,7 @@
                      </li>
                  </ul>
                </li>
+               @endif
 
 
                @can('superadmin')
