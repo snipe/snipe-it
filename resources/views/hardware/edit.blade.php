@@ -202,7 +202,7 @@ $(function () {
       case 'model':
       show_er('#modal-manufacturer_id');
       show_er('#modal-category_id');
-      show_er('#modal-modelno');
+      show_er('#modal-model_number');
       show_er('#modal-fieldset_id');
       break;
 
