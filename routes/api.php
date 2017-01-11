@@ -16,10 +16,10 @@ use App\Models\Statuslabel;
 |
 */
 
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
+Route::group(['prefix' => 'v1'], function () {
 
     /*---Hardware API---*/
-    Route::group([ 'prefix' => 'hardware','middleware' => ['web','auth']], function () {
+    Route::group([ 'prefix' => 'hardware'], function () {
 
         Route::get('list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ]);
 
@@ -27,7 +27,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
     });
 
     /*---Status Label API---*/
-    Route::group([ 'prefix' => 'statuslabels' ,'middleware' => ['web','auth','authorize:admin']], function () {
+    Route::group([ 'prefix' => 'statuslabels' ,'middleware' => ['authorize:admin']], function () {
 
         Route::resource('/', 'StatuslabelsController');
         Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
@@ -181,4 +181,11 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
         );
     });
 
+
 });
+
+Route::get('test', function(){
+    return 'returned string from test route';
+});
+
+
