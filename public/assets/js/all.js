@@ -322,29 +322,53 @@ var pieOptions = {
 
 $(document).ready(function () {
 
-         $('.slideout-menu-toggle').on('click', function(event){
-           console.log('clicked');
-         	event.preventDefault();
-         	// create menu variables
-         	var slideoutMenu = $('.slideout-menu');
-         	var slideoutMenuWidth = $('.slideout-menu').width();
+    /*
+    * Slideout help menu
+    */
+     $('.slideout-menu-toggle').on('click', function(event){
+       console.log('clicked');
+        event.preventDefault();
+        // create menu variables
+        var slideoutMenu = $('.slideout-menu');
+        var slideoutMenuWidth = $('.slideout-menu').width();
 
-         	// toggle open class
-         	slideoutMenu.toggleClass("open");
+        // toggle open class
+        slideoutMenu.toggleClass("open");
 
-         	// slide menu
-         	if (slideoutMenu.hasClass("open")) {
-             slideoutMenu.show();
-     	    	slideoutMenu.animate({
-     		    	right: "0px"
-     	    	});
-         	} else {
-     	    	slideoutMenu.animate({
-     		    	right: -slideoutMenuWidth
-     	    	}, "-350px");
-             slideoutMenu.fadeOut();
-         	}
-         });
+        // slide menu
+        if (slideoutMenu.hasClass("open")) {
+         slideoutMenu.show();
+            slideoutMenu.animate({
+                right: "0px"
+            });
+        } else {
+            slideoutMenu.animate({
+                right: -slideoutMenuWidth
+            }, "-350px");
+         slideoutMenu.fadeOut();
+        }
      });
+
+     /*
+     * iCheck checkbox plugin
+     */
+     $('input[type="checkbox"].minimal, input[type="radio"].minimal').icheck({
+         checkboxClass: 'icheckbox_minimal-blue',
+         radioClass: 'iradio_minimal-blue'
+     });
+
+     /*
+     * Select2
+     */
+     var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
+     if(!iOS)
+     {
+         $(".select2").select2();
+     }
+     $('.datepicker').datepicker();
+
+
+});
+
 
 //# sourceMappingURL=all.js.map

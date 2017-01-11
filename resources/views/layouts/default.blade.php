@@ -642,28 +642,10 @@
 
 
     <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
-
-
+    
     @section('moar_scripts')
-<script>
-        $(function () {
-        //Initialize Select2 Elements
-        var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
-        if(!iOS)
-        {
-        $(".select2").select2();
-        }
-        $('.datepicker').datepicker();
-        });
-
-
-        //Flat blue color scheme for iCheck
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-        checkboxClass: 'icheckbox_minimal-blue',
-        radioClass: 'iradio_minimal-blue'
-        });
-</script>
     @show
+
     @if ((Session::get('topsearch')=='true') || (Request::is('/')))
     <script>
          $("#tagSearch").focus();

@@ -32,6 +32,7 @@ elixir(function(mix) {
 
 
     mix.webpack(
+            // jQuery is loaded from vue.js webpack process
             './resources/assets/js/vue.js',
             './resources/assets/js/vue-dist.js'
         );
@@ -41,17 +42,17 @@ elixir(function(mix) {
 
     mix.scripts([
         'vue-dist.js',
+        bowerPath + '/jquery-ui/**',
         bowerPath + '/bootstrap/dist/js/**',
         bowerPath + '/jquery-slimscroll/**',
-        bowerPath + '/jquery-ui/**',
         bowerPath + '/jquery.iframe-transport/**',
         bowerPath + '/fileupload/**',
         bowerPath + '/fastclick/**',
-        bowerPath + '/select2/**',
         bowerPath + '/bootstrap-colorpicker/**',
         bowerPath + '/bootstrap-table/**',
         bowerPath + '/bootstrap-datepicker/**',
         bowerPath +  '/iCheck/**',
+        bowerPath + '/select2/dist/js/select2.full.*',
         bowerPath + '/ekko-lightbox/**',
         'snipeit.js'
 
