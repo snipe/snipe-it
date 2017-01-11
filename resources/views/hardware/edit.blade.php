@@ -191,6 +191,10 @@
             $(".status_spinner").css("display", "inline");
             $.ajax({
                 url: "{{url('/') }}/api/v1/statuslabels/" + status_id + "/deployable",
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (data) {
                     $(".status_spinner").css("display", "none");
 
@@ -358,7 +362,10 @@
             $.ajax({
                 type: 'POST',
                 url: form.action,
-                headers: {"X-Requested-With": 'XMLHttpRequest'},
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
                 data: formData,
                 dataType: 'json',
                 success: function (data) {
