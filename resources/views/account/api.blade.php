@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    API Settings (test)
+    Personal API Keys
     @parent
 @stop
 
@@ -10,10 +10,5 @@
 @section('content')
 
         <passport-personal-access-tokens></passport-personal-access-tokens>
-
-
-
-
-
 
 @stop
