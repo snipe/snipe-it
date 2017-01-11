@@ -2,20 +2,20 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
+    'undeployable' 		=> '<strong>تحذير: </strong> هذا الأصل معلم كـ غير قابل للنشر.
+إذا لم يتغير هذا الوضع، يرجى تحديث الحالة الأصول.',
+    'does_not_exist' 	=> 'الأصل غير موجود.',
     'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
 
     'create' => array(
         'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'success' 		=> 'تم إنشاء الأصل بنجاح.'
     ),
 
     'update' => array(
         'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
+        'success' 			=> 'تم تحديث الأصل بنجاح.',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
@@ -25,8 +25,8 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'لم يتم حذف الملف. الرجاء المحاولة مرة اخرى.',
+        'success' => 'تم حذف الملف بنجاح.',
     ),
 
     'upload' => array(
@@ -48,7 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this asset?',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'success' 		=> 'تم حذف الأصل بنجاح.'
     ),
 
     'checkout' => array(

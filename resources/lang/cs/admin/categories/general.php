@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Upravit Kategorii',
     'eula_text'							=> 'EULA Kategorie',
     'eula_text_help'					=> 'Toto pole umožňuje upravit EULA pro různé druhy majetku. Pokud máte pouze jeden typ pro všechen majetek, můžete zaškrtnout položku níže pro použití jako výchozí.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'Žádat uživatelé o potvrzení převzetí majetku v této kategorii.',
     'required_acceptance'				=> 'Uživateli bude zaslán email s odkazem pro potvrzení přijetí této položky.',
     'required_eula'						=> 'Tomuto uživateli bude zaslána kopie EUAL emailem',

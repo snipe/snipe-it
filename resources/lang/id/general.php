@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Pemasok',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'total aset',
     'total_licenses'		=> 'total lisensi',
     'total_accessories'		=> 'total accessories',

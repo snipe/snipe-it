@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
+    'does_not_exist' => 'Licens eksistere ikke.',
     'user_does_not_exist' => 'User does not exist.',
     'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
     'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',

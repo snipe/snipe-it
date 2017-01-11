@@ -2,8 +2,8 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
+    'accepted'                  => 'لقد قبلت هذا الأصل بنجاح.',
+    'declined'                  => 'لقد رفضت هذا الأصل بنجاح.',
     'user_exists'               => 'المستخدم موجود مسبقاً!',
     'user_not_found'            => 'المستخدم [id:] غير موجود.',
     'user_login_required'       => 'حقل "الدخول" مطلوب',

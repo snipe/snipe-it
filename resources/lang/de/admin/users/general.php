@@ -15,7 +15,7 @@ return array(
     'software_user'     => 'Software herausgegeben an :name',
     'view_user'         => 'Benutze :name ansehen',
     'usercsv'           => 'CSV Datei',
-    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
-    'two_factor_enrolled' => '2FA Device Enrolled ',
-    'two_factor_active'   => '2FA Active ',
+    'two_factor_admin_optin_help' => 'Ihre aktuellen Administrator-Einstellungen erlauben die selektive Durchführung der zwei-Faktor-Authentifizierung.  ',
+    'two_factor_enrolled' => '2FA Gerät eingeschrieben ',
+    'two_factor_active'   => '2FA aktiv ',
     );

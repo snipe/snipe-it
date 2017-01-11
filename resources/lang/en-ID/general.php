@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
     'total_accessories'		=> 'total accessories',

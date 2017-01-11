@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'ตัวแทนจำหน่าย',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'ทรัพย์สินทั้งหมด',
     'total_licenses'		=> 'ลิขสิทธิ์ทั้งหมด',
     'total_accessories'		=> 'total accessories',

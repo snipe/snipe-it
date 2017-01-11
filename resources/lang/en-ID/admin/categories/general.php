@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Edit Kategori',
     'eula_text'							=> 'Kategori EULA',
     'eula_text_help'					=> 'Bidang ini memungkinkan Anda untuk menyesuaikan EULA Anda untuk jenis tertentu dari aset. Jika Anda hanya memiliki satu EULA untuk semua aset Anda, Anda dapat memeriksa kotak di bawah untuk menggunakan default primer.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'Mengharuskan pengguna untuk mengkonfirmasi penerimaan aset dalam kategori ini.',
     'required_acceptance'				=> 'Pengguna ini akan dikirimkan melalui email dengan link untuk mengkonfirmasi penerimaan item ini.',
     'required_eula'						=> 'Pengguna ini akan dikirimkan melalui email salinan EULA',

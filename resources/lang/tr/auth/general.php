@@ -2,11 +2,11 @@
 
 return [
     'send_password_link'	        => 'Parola sıfırlama bağlantısını gönder',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'email_reset_password'			=> 'Email şifre sıfırlama',
+    'reset_password'			    => 'Şifre sıfırla',
+    'login'                         => 'Giriş',
+    'login_prompt'                  => 'Lütfen giriş yapın',
+    'forgot_password'               => 'Şifremi unuttum',
+    'remember_me'                   => 'Beni hatırla',
     ];
 

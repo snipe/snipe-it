@@ -2,8 +2,8 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
+    'does_not_exist' => 'الرخصة غير موجودة.',
+    'user_does_not_exist' => 'المستخدم غير موجود.',
     'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
     'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
     'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
@@ -11,17 +11,17 @@ return array(
 
     'create' => array(
         'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'success' => 'تم إنشاء الرخصة بنجاح.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'لم يتم حذف الملف. الرجاء المحاولة مرة اخرى.',
+        'success' => 'تم حذف الملف بنجاح.',
     ),
 
     'upload' => array(
         'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
+        'success' => 'تم رفع الملف(ات) بنجاح.',
         'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
     ),
@@ -32,7 +32,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
+        'confirm'   => 'هل أنت متأكد من رغبتك في حذف هذه الرخصة؟',
         'error'   => 'There was an issue deleting the license. Please try again.',
         'success' => 'The license was deleted successfully.'
     ),

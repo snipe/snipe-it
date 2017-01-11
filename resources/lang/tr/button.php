@@ -5,7 +5,7 @@ return array(
     'actions' 	                => 'Hareketler',
     'add'    	                => 'Yeni ekle',
     'cancel'                    => 'İptal',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'checkin_and_delete'  	    => 'İade et ve Kullanıcıyı sil',
     'delete'  	                => 'Sil',
     'edit'    	                => 'Düzenle',
     'restore' 	                => 'Geri yükle',

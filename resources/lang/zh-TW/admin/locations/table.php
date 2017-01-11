@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations_title'     => '關於位置',
+    'about_locations'           => '位置用來追踪使用者、資產和其他項目的位置資訊',
     'assets_rtd'                => '資產', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => '持有人',
     'id'                        => 'ID',

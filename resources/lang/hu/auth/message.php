@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Ez a felhasználó nincs aktiválva.',
     'account_suspended'      => 'Ez a felhasználói fiók fel van függesztve.',
     'account_banned'         => 'Ez a felhasználó ki van tiltva.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
 
     'signin' => array(
         'error'   => 'Bejelentkezés közben probléma lépett fel, kérjük próbálja újra.',

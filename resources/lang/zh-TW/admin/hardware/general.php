@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => '關於資產',
+    'about_assets_text'            => '資產是按序號或資產標籤追蹤的物品。 他們往往是高價值並標示為重要的物品。',
 	'archived'  				=> '已封存',
     'asset'  					=> '資產',
     'bulk_checkout'             => '借出資產給使用者',

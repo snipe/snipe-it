@@ -11,6 +11,10 @@
             'error'   => 'Manutenzione prodotto non creata, riprova.',
             'success' => 'Manutenzione prodotto creata con successo.'
         ],
+        'edit'                       => [
+            'error'   => 'Asset Maintenance was not edited, please try again.',
+            'success' => 'Asset Maintenance edited successfully.'
+        ],
         'asset_maintenance_incomplete' => 'Non ancora completato',
         'warranty'                     => 'Garanzia',
         'not_warranty'                 => 'Senza garanzia',

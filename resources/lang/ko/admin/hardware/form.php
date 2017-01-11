@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> '대량 자산 삭제 승인',
   'bulk_delete_help'	=> '아래의 대량 자산 삭제 내용을 검토하십시오. 삭제하시면 복구할 수 없고, 현재 할당되어 있는 사용자와의 연결이 끊어집니다.',
   'bulk_delete_warn'	=> '삭제 대상: asset_count 개',
 	'bulk_update'		=> '대량 자산 갱신',

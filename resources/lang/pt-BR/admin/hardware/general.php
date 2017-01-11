@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Sobre os Ativos',
+    'about_assets_text'            => 'Ativos são itens que são controlados e rastreáveis pelo número de série ou por uma etiqueta de ativo (patrimônio). Eles tendem a ser de valor elevado onde a identificação de itens específicos é relevante.',
 	'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Atribuir ativo a utilizador',

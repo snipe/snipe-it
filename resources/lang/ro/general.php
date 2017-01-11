@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Furnizori',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'Total active',
     'total_licenses'		=> 'Total licente',
     'total_accessories'		=> 'total accessories',

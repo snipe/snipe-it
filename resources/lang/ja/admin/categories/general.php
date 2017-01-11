@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'カテゴリを編集',
     'eula_text'							=> 'EULAカテゴリー',
     'eula_text_help'					=> 'このフィールドは特殊なタイプの資産のためにEULAをカスタマイズすることが許可されています。全ての資産に一つだけEULAを適用する場合、以下の初期値を利用するにチェックすることも可能です。',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'このカテゴリの資産を承認するための利用者が必要です。',
     'required_acceptance'				=> 'このアイテムを承認すると、この利用者にメールが送信されます。',
     'required_eula'						=> 'この利用者はEULAのコピーをメールで受信します。',

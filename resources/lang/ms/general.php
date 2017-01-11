@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Pembekal',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'jumlah harta',
     'total_licenses'		=> 'jumlah lesen',
     'total_accessories'		=> 'total accessories',

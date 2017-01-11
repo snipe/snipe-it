@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Over licenties',
+    'about_licenses'                  => 'Licenties worden gebruikt om software te beheren. Deze hebben een maximum aantal wat aan gebruikers uitgeleverd kan worden',
     'checkin'  					=> 'Check werkplek licentie in',
     'checkout_history'  		=> 'Checkout historie',
     'checkout'  				=> 'Check werkplek licentie uit',

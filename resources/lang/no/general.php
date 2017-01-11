@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Leverandører',
     'submit'				=> 'Send',
+    'target'                => 'Target',
     'total_assets'			=> 'eiendeler totalt',
     'total_licenses'		=> 'lisener totalt',
     'total_accessories'		=> 'antall tilbehør',

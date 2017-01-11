@@ -15,7 +15,7 @@ return array(
     'software_user'     => '소프트웨어 반출 목록 :name',
     'view_user'         => '사용자 보기 :name',
     'usercsv'           => 'CSV 파일',
-    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
-    'two_factor_enrolled' => '2FA Device Enrolled ',
-    'two_factor_active'   => '2FA Active ',
+    'two_factor_admin_optin_help' => '현재 관리 설정이 두가지 인증방법을 선택적으로 실행하게 되어 있습니다.  ',
+    'two_factor_enrolled' => '2FA 장치 등록 ',
+    'two_factor_active'   => '2FA 활성화 ',
     );

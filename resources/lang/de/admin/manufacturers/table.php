@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_manufacturers_title'     => 'About manufacturers',
-    'about_manufacturers_text'           => 'Manufacturers make all the magic items we consume.',
+    'about_manufacturers_title'     => 'Hersteller',
+    'about_manufacturers_text'           => 'Hersteller machen die Gegenstände, die wir verbrauchen.',
     'asset_manufacturers'	=> 'Asset Hersteller',
     'create'				=> 'Hersteller anlegen',
     'id'   					=> 'ID',

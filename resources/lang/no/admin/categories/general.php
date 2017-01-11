@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Rediger kategori',
     'eula_text'							=> 'EULA-kategori',
     'eula_text_help'					=> 'Dette feltet lar deg tilpasse dine EULA for spesifikke typer eiendeler. Hvis du kun har en EULA for alle eiendeler kan du krysse av nedenfor for å bruke standard.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'Krev at brukere bekrefter aksept av eiendeler i denne kategorien.',
     'required_acceptance'				=> 'Denne brukeren vil få e-post med en lenke for å bekrefte aksept av enheten.',
     'required_eula'						=> 'Denne brukeren vil få en kopi av EULA på e-post',

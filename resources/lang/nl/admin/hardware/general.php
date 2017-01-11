@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Over materiaal',
+    'about_assets_text'            => 'Materiaal bestaat uit items die met een serienummer of identificatiesticker geregistreerd zijn. Dit zijn over het algemeen de objecten met een hogere waarde waarbij identificatie belangrijk is.',
 	'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Materiaal',
     'bulk_checkout'             => 'Materiaal aan gebruiker uitleveren',

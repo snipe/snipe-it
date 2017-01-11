@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Kategória szerkesztése',
     'eula_text'							=> 'Felhasználói engedély Kategória',
     'eula_text_help'					=> 'Ezzel a mezővel testre szabhatja a különböző eszközök EULA-ját. Ha csak egy EULA van az összes eszközhöz, akkor jelölje be a négyzetet lent, hogy az alapértelmezettet használja.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'A felhasználónak kötelező elfogadnia az eszköz(ök) átvételét ebben a kategóriában.',
     'required_acceptance'				=> 'Ennek a felhasználónak küldünk egy elfogadó linket e-mailben.',
     'required_eula'						=> 'Ennek a felhasználónak küldünk egy elfogadó linket e-mailben.',

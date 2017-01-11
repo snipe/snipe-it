@@ -13,20 +13,20 @@ return array(
     |
     */
 
-    "accepted"         => "The :attribute must be accepted.",
-    "active_url"       => "The :attribute is not a valid URL.",
-    "after"            => "The :attribute must be a date after :date.",
+    "accepted"         => ":attribute يجب ان يكون مقبولا.",
+    "active_url"       => ":attribute موقع غير صحيح.",
+    "after"            => ":attribute يجب ان يكون تاريخ قبل :date.",
     "alpha"            => "The :attribute may only contain letters.",
     "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
     "alpha_num"        => "The :attribute may only contain letters and numbers.",
-    "before"           => "The :attribute must be a date before :date.",
+    "before"           => ":attribute يجب ان يكون تاريخ قبل :date.",
     "between"          => array(
-        "numeric" => "The :attribute must be between :min - :max.",
+        "numeric" => ":attribute يجب ان يكون بين :min - :max.",
         "file"    => "The :attribute must be between :min - :max kilobytes.",
         "string"  => "The :attribute must be between :min - :max characters.",
     ),
     "confirmed"        => "The :attribute confirmation does not match.",
-    "date"             => "The :attribute is not a valid date.",
+    "date"             => ":attribute تاريخ غير صحيح.",
     "date_format"      => "The :attribute does not match the format :format.",
     "different"        => "The :attribute and :other must be different.",
     "digits"           => "The :attribute must be :digits digits.",

@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Tiekėjai',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'įrangos iš viso',
     'total_licenses'		=> 'iš viso licenzijų',
     'total_accessories'		=> 'total accessories',

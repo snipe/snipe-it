@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Detta användarkonto är inte aktiverat.',
     'account_suspended'      => 'Detta användarkontot har blivit suspenderat.',
     'account_banned'         => 'Detta användarkontot har blivit avstängt.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
 
     'signin' => array(
         'error'   => 'Det uppstod ett problem när du försökte logga in, försök igen.',

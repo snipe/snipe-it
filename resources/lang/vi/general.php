@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Nhà cung cấp',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'tổng số tài sản',
     'total_licenses'		=> 'tổng số bản quyền',
     'total_accessories'		=> 'total accessories',

@@ -4,7 +4,7 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
+        'error'                 => 'Der opstod en fejl under opdatering. ',
         'success'               => 'Settings updated successfully.'
     ),
     'backup' => array(

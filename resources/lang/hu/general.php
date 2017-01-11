@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Beszállítók',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'eszköz összesen',
     'total_licenses'		=> 'licensz összesen',
     'total_accessories'		=> 'total accessories',

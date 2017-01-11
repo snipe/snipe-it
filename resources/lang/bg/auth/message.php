@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Потребителят все още не е активиран.',
     'account_suspended'      => 'Потребителят е временно спрян.',
     'account_banned'         => 'Потребителят е неактивен.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
 
     'signin' => array(
         'error'   => 'Проблем при входа в системата. Моля опитайте отново.',

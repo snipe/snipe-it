@@ -21,7 +21,7 @@ return array(
     'lock_passwords'		=> 'لا يمكن تغيير تفاصيل الدخول بالنسبة لهذا التنصيب.',
     'manager' 				=> 'المدير',
     'name' 					=> 'الاسم',
-    'notes'                 => 'Notes',
+    'notes'                 => 'مُلاحظات',
     'password_confirm' 		=> 'تأكيد كلمة المرور',
     'password' 				=> 'كلمة المرور',
     'phone'  				=> 'رقم الهاتف',

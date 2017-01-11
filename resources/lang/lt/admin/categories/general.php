@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Keisti kategoriją',
     'eula_text'							=> 'Kategorijos EULA',
     'eula_text_help'					=> 'Šis laukelis leidžia jums keisti EULA atskiroms įrangos grupėms. Jei jūs naudotjate vieną EULA visoms įrangų grupėms, tuomet pažymėkite žemiau esantį laukelį, kad būtų naudojama pirminė numatytoji EULA.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'Reikalauja naudotojus patvirtinti šios kategorijos įrangos priėmimą.',
     'required_acceptance'				=> 'Šiam naudotojui bus išsiųstas el. laiškas su nuoroda patvritinanti šios įrangos priėmimą.',
     'required_eula'						=> 'Šiam naudotojui bus išsiųsta EULA kopija',

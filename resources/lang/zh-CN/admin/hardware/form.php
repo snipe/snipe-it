@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> '批量删除确认',
   'bulk_delete_help'	=> '请在此确认将批量删除的资产。在删除后，资产可以恢复，但一切当前的用户关联将会丢失。',
   'bulk_delete_warn'	=> '即将删除 :asset_count 项资产',
 	'bulk_update'		=> '批量更新',

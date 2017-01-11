@@ -2,7 +2,7 @@
 
 return array(
 
-    'activated'  			=> 'Active',
+    'activated'  			=> 'Aktiv',
     'allow'  				=> 'Allow',
     'checkedout'  			=> 'Assets',
     'created_at' 			=> 'Created',

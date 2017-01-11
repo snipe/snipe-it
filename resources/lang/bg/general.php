@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Доставчици',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'общо активи',
     'total_licenses'		=> 'общо лицензи',
     'total_accessories'		=> 'total accessories',

@@ -163,6 +163,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'تامین کننده',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'کل دارایی',
     'total_licenses'		=> 'کل مجوزهای',
     'total_accessories'		=> 'total accessories',

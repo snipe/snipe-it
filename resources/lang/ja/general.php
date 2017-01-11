@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> '仕入先',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> '資産の合計',
     'total_licenses'		=> 'ライセンスの合計',
     'total_accessories'		=> 'total accessories',

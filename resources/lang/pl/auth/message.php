@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Użytkownik jest nieaktywowany.',
     'account_suspended'      => 'Twoje konto zostało zawieszone.',
     'account_banned'         => 'Twoje konto zostało zablokowane.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
 
     'signin' => array(
         'error'   => 'Wystąpił problem z logowanie, proszę spróbować ponownie.',

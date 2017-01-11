@@ -15,7 +15,7 @@ return array(
     'software_user'     => ':name 借走的软件',
     'view_user'         => '查看用户： :name',
     'usercsv'           => 'CSV 档案',
-    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
-    'two_factor_enrolled' => '2FA Device Enrolled ',
-    'two_factor_active'   => '2FA Active ',
+    'two_factor_admin_optin_help' => '您当前的管理员设置允许使用双重认证。 ',
+    'two_factor_enrolled' => '双重认证设备登记',
+    'two_factor_active'   => '启用双重认证',
     );

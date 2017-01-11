@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Dodavatelé',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'celkem zařízení',
     'total_licenses'		=> 'celkem licencí',
     'total_accessories'		=> 'total accessories',

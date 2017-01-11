@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => '라이선스 란',
+    'about_licenses'                  => '라이선스는 소프트웨어를 추적하는데 사용됩니다. 개인에게 반출 할 수 있는 수량이 정의되어 있습니다',
     'checkin'  					=> '라이선스 Seat 확인',
     'checkout_history'  		=> '반출 이력',
     'checkout'  				=> '반출 라이선스 Seat',

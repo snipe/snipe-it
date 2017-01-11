@@ -11,6 +11,10 @@
             'error'   => '資產維護訊息新增失敗。請再試一次',
             'success' => '資產維護訊息已新增。'
         ],
+        'edit'                       => [
+            'error'   => 'Asset Maintenance was not edited, please try again.',
+            'success' => 'Asset Maintenance edited successfully.'
+        ],
         'asset_maintenance_incomplete' => '尚未完成',
         'warranty'                     => '保固',
         'not_warranty'                 => '無保固',

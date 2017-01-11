@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => '關於供應商',
+    'about_suppliers_text'  => '供應商用來追踪物品的來源',
     'address'               => '供應商地址',
     'assets'                => '資產',
     'city'                  => '城市',

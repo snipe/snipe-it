@@ -11,6 +11,10 @@
             'error'   => 'Įrangos priežiūra nebuvo sukurta, prašome bandykite dar kartą.',
             'success' => 'Įrangos priežiūra sukurta sėkmingai.'
         ],
+        'edit'                       => [
+            'error'   => 'Asset Maintenance was not edited, please try again.',
+            'success' => 'Asset Maintenance edited successfully.'
+        ],
         'asset_maintenance_incomplete' => 'Nebaigta',
         'warranty'                     => 'Garantija',
         'not_warranty'                 => 'Nėra garantijos',

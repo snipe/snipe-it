@@ -3,14 +3,14 @@
 return array(
 
     'actions' 	                => 'الإجراءات',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
+    'add'    	                => 'إضافة جديد',
+    'cancel'                    => 'إلغاء',
     'checkin_and_delete'  	    => 'Checkin & Delete User',
     'delete'  	                => 'حذف',
     'edit'    	                => 'تعديل',
     'restore' 	                => 'إستعادة',
-    'request'                   => 'Request',
+    'request'                   => 'طلب',
     'submit'  	                => 'إرسال',
-    'upload'                    => 'Upload',
+    'upload'                    => 'رفع',
 
 );

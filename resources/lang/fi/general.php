@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Toimittajat',
     'submit'				=> 'Submit',
+    'target'                => 'Target',
     'total_assets'			=> 'laitteita yhteensä',
     'total_licenses'		=> 'lisenssejä yhteensä',
     'total_accessories'		=> 'total accessories',

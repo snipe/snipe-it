@@ -8,7 +8,7 @@ return array(
     'clone'             => 'نسخ المستخدم',
     'contact_user'      => 'اتصل بـ :name',
     'edit'              => 'تعديل المستخدم',
-    'filetype_info'     => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'     => 'انواع صيغ الملفات المسوح بها هي png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'الأرشيف الخاص بـ :name',
     'last_login'        => 'آخر دخول للمستخدم',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',

@@ -1,16 +1,17 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
+    'about_categories_title' 			=> 'Om kategorier',
     'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Tillgångskategorier',
     'category_name'  					=> 'Kategorinamn',
-    'checkin_email'                     => 'Send email to user on checkin.',
-    'clone'                             => 'Clone Category',
+    'checkin_email'                     => 'Skicka email till användare vid incheckning.',
+    'clone'                             => 'Klona kategori',
     'create'  							=> 'Skapa kategori',
-    'edit'                              => 'Edit Category',
+    'edit'                              => 'Redigera kategori',
     'eula_text'							=> 'Category EULA',
     'eula_text_help'					=> 'This field allows you to customize your EULAs for specific types of assets. If you only have one EULA for all of your assets, you can check the box below to use the primary default.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'Require users to confirm acceptance of assets in this category.',
     'required_acceptance'				=> 'This user will be emailed with a link to confirm acceptance of this item.',
     'required_eula'						=> 'This user will be emailed a copy of the EULA',

@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'ชื่อผู้ใช้นี้ยังไม่ได้ทำการเปิดใช้งาน',
     'account_suspended'      => 'บัญชีผู้ใช้นี้ถูกระงับการใช้งาน',
     'account_banned'         => 'บัญชีผู้ใช้นี้ถูกห้ามใช้งาน',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
 
     'signin' => array(
         'error'   => 'มีปัญหาขณะกำลังเข้าสู่ระบบ กรุณาลองอีกครั้ง',
