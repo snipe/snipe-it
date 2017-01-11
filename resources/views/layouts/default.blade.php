@@ -621,6 +621,7 @@
     </div>
 
 
+    <script src="/js/app.js"></script>
     <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
 
     <script>

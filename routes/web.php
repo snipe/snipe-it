@@ -104,6 +104,16 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
         # Settings
         Route::group([ 'prefix' => 'app' ], function () {
 
+            Route::get(
+                'api',
+                array('as' => 'api',
+                    function () {
+                        return view('settings/api');
+                    }
+                )
+            );
+
+
             Route::post('purge', ['as' => 'purge', 'uses' => 'SettingsController@postPurge']);
             Route::get('edit', [ 'as' => 'edit/settings', 'uses' => 'SettingsController@getEdit' ]);
             Route::post('edit', 'SettingsController@postEdit');

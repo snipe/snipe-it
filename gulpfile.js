@@ -1,6 +1,8 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-codeception-standalone');
 require('laravel-elixir-phpcs');
+require('laravel-elixir-vue-2');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,16 +15,21 @@ require('laravel-elixir-phpcs');
  */
 
 elixir(function(mix) {
-    mix.less(['AdminLTE.less','skins/skin-blue.less','ekko-lightbox.less','overrides.less','fontawesome-animated.css'],'public/assets/css');
 
-
+    mix.less(['AdminLTE.less',
+            'skins/skin-blue.less',
+            'ekko-lightbox.less',
+            'overrides.less',
+            'fontawesome-animated.css'],
+            'public/assets/css')
+       .webpack('app.js');
     mix.scripts([
         'plugins/jQuery/jQuery-2.1.4.min.js',
         'plugins/jQueryUI/jquery-ui.js',
         'plugins/jQueryUI/jquery.ui.widget.js',
         'plugins/iframe-transport/jquery.iframe-transport.js',
         'plugins/fileupload/jquery.fileupload.js',
-        'bootstrap.js',
+        'bootstrap-js.js',
         'plugins/fastclick/fastclick.js',
         'plugins/slimScroll/jquery.slimscroll.js',
         'plugins/select2/select2.full.min.js',
@@ -32,14 +39,14 @@ elixir(function(mix) {
         'plugins/select2/select2.js',
         'plugins/iCheck/icheck.js',
         'ekko-lightbox.js',
-        'snipeit.js',
-        'app.js'
+        'snipeit.js'
 
-    ],'public/assets/js');
+    ],'public/assets/js')
+        ;
     mix.version(['assets/css/app.css','assets/js/all.js']);
 
 
-    mix.codeception(null, { flags: '--report' });
+    // mix.codeception(null, { flags: '--report' });
 
 
     // mix.phpcs([
