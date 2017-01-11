@@ -1,0 +1,17 @@
+{
+  "name": "Resizable",
+  "version": "1.0.0",
+  "description": "Plugin to support the resizable feature.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/resizable",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/resizable.html",
+
+  "plugins": [{
+    "name": "bootstrap-table-resizable",
+    "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/resizable"
+  }],
+
+  "author": {
+    "name": "djhvscf",
+    "image": "https://avatars1.githubusercontent.com/u/4496763"
+  }
+}

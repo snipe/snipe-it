@@ -1,0 +1,17 @@
+{
+  "name": "Select2 Filter",
+  "version": "1.0.0",
+  "description": "Plugin to add select2 filter on the top of the columns in order to filter the data.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/select2-filter",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/select2-filter.html",
+
+  "plugins": [{
+    "name": "bootstrap-table-select2-filter",
+    "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/select2-filter"
+  }],
+
+  "author": {
+    "name": "Jewway",
+    "image": "https://avatars0.githubusercontent.com/u/3501899"
+  }
+}
