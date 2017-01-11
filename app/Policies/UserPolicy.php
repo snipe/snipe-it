@@ -18,7 +18,7 @@ class UserPolicy
         if ($targetUser instanceof \App\Models\User && !Company::isCurrentUserHasAccess($targetUser)) {
             return false;
         }
-        // If an admin, they can do all asset related tasks.
+        // If an admin, they can do all user related tasks.
         if ($user->hasAccess('admin')) {
             return true;
         }
@@ -26,8 +26,8 @@ class UserPolicy
     /**
      * Determine whether the user can view the targetUser.
      *
-     * @param  \App\User  $user
-     * @param  \App\Consumable  $targetUser
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Consumable  $targetUser
      * @return mixed
      */
     public function view(User $user, User $targetUser = null)
@@ -39,33 +39,31 @@ class UserPolicy
     /**
      * Determine whether the user can create users.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
     {
-        //
         return $user->hasAccess('users.create');
     }
 
     /**
      * Determine whether the user can update the targetUser.
      *
-     * @param  \App\User  $user
-     * @param  \App\User  $targetUser
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $targetUser
      * @return mixed
      */
     public function update(User $user, User $targetUser = null)
     {
-        //
         return $user->hasAccess('users.edit');
     }
 
     /**
      * Determine whether the user can delete the targetUser.
      *
-     * @param  \App\User  $user
-     * @param  \App\User  $targetUser
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $targetUser
      * @return mixed
      */
     public function delete(User $user, User $targetUser = null)
