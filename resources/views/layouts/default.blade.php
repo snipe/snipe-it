@@ -25,6 +25,10 @@
 
     <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
+      <script>
+          window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+      </script>
+
     <style>
         @if ($snipeSettings)
             @if ($snipeSettings->header_color)

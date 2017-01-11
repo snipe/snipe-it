@@ -50,7 +50,6 @@ elixir(function(mix) {
         bowerPath + '/fileupload/**',
         bowerPath + '/fastclick/**',
         bowerPath + '/bootstrap-colorpicker/**',
-        bowerPath + '/bootstrap-table/**',
         bowerPath + '/bootstrap-datepicker/**',
         bowerPath +  '/iCheck/**',
         bowerPath + '/select2/dist/js/select2.full.*',
