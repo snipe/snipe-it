@@ -11,21 +11,12 @@
     </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/datepicker/bootstrap-datepicker.css') }}">
-
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iCheck/all.css') }}">
-
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-blue.css') }}">
 
     <!-- bootstrap tables CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
@@ -642,7 +633,7 @@
 
 
     <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
-    
+
     @section('moar_scripts')
     @show
 

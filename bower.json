@@ -28,6 +28,7 @@
     "ekko-lightbox": "^5.0.0",
     "jquery.iframe-transport": "^1.0.1",
     "fastclick": "^1.0.6",
-    "blueimp-file-upload": "fileupload#^9.14.2"
+    "blueimp-file-upload": "fileupload#^9.14.2",
+    "font-awesome": "fontawesome#^4.7.0"
   }
 }

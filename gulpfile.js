@@ -20,14 +20,15 @@ elixir(function(mix) {
 
     mix.less(
         [
-            'AdminLTE.less',
-            'skins/skin-blue.less',
-            'ekko-lightbox.less',
-            'overrides.less',
+            'app.less',
             'fontawesome-animated.css',
-             bowerPath + '/bootstrap-less/assets/stylesheets/**'
+             bowerPath + '/iCheck/skins/minimal/*',
+             'AdminLTE.less',
+             'skins/skin-blue.less',
+             'overrides.less'
          ], 'public/assets/css/')
-            .copy(bowerPath + '/bootstrap-less/assets/fonts/bootstrap/**', 'public/assets/fonts');
+            .copy(bowerPath + '/bootstrap-less/assets/fonts/bootstrap/**', 'public/assets/fonts')
+            .copy(bowerPath + '/font-awesome/fonts/*', 'public/assets/fonts');
 
 
 
