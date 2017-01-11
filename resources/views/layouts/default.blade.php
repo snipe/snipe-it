@@ -27,7 +27,13 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <style>
+      <script>
+          window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+      </script>
+
+
+
+      <style>
         @if ($snipeSettings)
             @if ($snipeSettings->header_color)
             .main-header .navbar, .main-header .logo {
