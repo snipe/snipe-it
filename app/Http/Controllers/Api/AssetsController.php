@@ -285,10 +285,10 @@ class AssetsController extends Controller
                 ->update(array('assigned_to' => null));
 
             $asset->delete();
-            return response()->json(['success' => trans('admin/hardware/message.delete.success')]);
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/hardware/message.delete.success')));
 
         }
-        return response()->json(['error' => trans('admin/hardware/message.does_not_exist')], 404);
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/hardware/message.does_not_exist')), 404);
 
     }
 
