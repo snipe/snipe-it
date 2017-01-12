@@ -19,7 +19,9 @@ use App\Models\Statuslabel;
 Route::group(['prefix' => 'v1'], function () {
 
     /*---Hardware API---*/
-    Route::post('assets/import', [ 'as' => 'api.hardware.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
+    Route::post('hardware/import', [ 'as' => 'api.assets.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
+
+    Route::match(['DELETE'], 'hardware/{id}', ['uses' => '\App\Http\Controllers\Api\AssetsController@destroy','as' => 'api.assets.destroy']);
 
 
     Route::resource('hardware', '\App\Http\Controllers\Api\AssetsController',
@@ -32,6 +34,8 @@ Route::group(['prefix' => 'v1'], function () {
          'parameters' =>
              ['asset' => 'asset_id']
           ]);
+
+
 
 
 
