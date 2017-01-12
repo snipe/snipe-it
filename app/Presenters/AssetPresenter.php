@@ -96,7 +96,7 @@ class AssetPresenter extends Presenter
         $results['purchase_cost'] = Helper::formatCurrencyOutput($this->purchase_cost);
         $results['purchase_date'] = $this->purchase_date ?: '';
         $results['notes'] = $this->notes;
-        $results['order_number'] = '';
+        $results['order_number'] = $this->order_number;
         if (!empty($this->order_number)) {
             $results['order_number'] = link_to_route('hardware.index', $this->order_number, ['order_number' => $this->order_number]);
         }
