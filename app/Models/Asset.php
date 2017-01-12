@@ -43,7 +43,7 @@ class Asset extends Depreciable
     use ValidatingTrait, UniqueUndeletedTrait;
 
     protected $rules = [
-    'name'            => 'min:2|max:255',
+    'name'            => 'max:255|nullable',
     'model_id'        => 'required|integer',
     'status_id'       => 'required|integer',
     'company_id'      => 'integer|nullable',
