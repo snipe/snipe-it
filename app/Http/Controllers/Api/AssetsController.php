@@ -255,6 +255,85 @@ class AssetsController extends Controller
 
 
     /**
+     * Accepts a POST request to update an asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
+     * @since [v4.0]
+     * @return JsonResponse
+     */
+    public function update(Request $request, $id)
+    {
+        $this->authorize('create', Asset::class);
+
+        if ($asset = Asset::find($id)) {
+
+            ($request->has('model_id')) ?
+                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : '';
+            ($request->has('name')) ? $asset->name = $request->get('name') : '';
+            ($request->has('serial')) ? $asset->serial = $request->get('serial') : '';
+            ($request->has('model_id')) ? $asset->model_id = $request->get('model_id') : '';
+            ($request->has('order_number')) ? $asset->order_number = $request->get('order_number') : '';
+            ($request->has('notes')) ? $asset->notes = $request->get('notes') : '';
+            ($request->has('asset_tag')) ? $asset->asset_tag = $request->get('asset_tag') : '';
+            ($request->has('archived')) ? $asset->archived = $request->get('archived') : '';
+            ($request->has('status_id')) ? $asset->status_id = $request->get('status_id') : '';
+            ($request->has('warranty_months')) ? $asset->warranty_months = $request->get('warranty_months') : '';
+            ($request->has('purchase_cost')) ?
+                $asset->purchase_cost = Helper::ParseFloat($request->get('purchase_cost')) : '';
+            ($request->has('purchase_date')) ? $asset->purchase_date = $request->get('purchase_date') : '';
+            ($request->has('assigned_to')) ? $asset->assigned_to = $request->get('assigned_to') : '';
+            ($request->has('supplier_id')) ? $asset->supplier_id = $request->get('supplier_id') : '';
+            ($request->has('requestable')) ? $asset->name = $request->get('requestable') : '';
+            ($request->has('archived')) ? $asset->name = $request->get('archived') : '';
+            ($request->has('rtd_location_id')) ? $asset->name = $request->get('rtd_location_id') : '';
+            ($request->has('company_id')) ?
+                $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
+
+            if ($request->has('model_id')) {
+                $model = AssetModel::find($request->get('model_id'));
+                if ($model->fieldset) {
+                    foreach ($model->fieldset->fields as $field) {
+                        if ($request->has(CustomField::name_to_db_name($field->name))) {
+                            $asset->{CustomField::name_to_db_name($field->name)} = e($request->input(CustomField::name_to_db_name($field->name)));
+                        }
+
+                    }
+                }
+            }
+
+
+
+            if ($asset->save()) {
+
+                $asset->logCreate();
+                if($request->get('assigned_user')) {
+                    $target = User::find(request('assigned_user'));
+                } elseif($request->get('assigned_asset')) {
+                    $target = Asset::find(request('assigned_asset'));
+                } elseif($request->get('assigned_location')) {
+                    $target = Location::find(request('assigned_location'));
+                }
+
+                if (isset($target)) {
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')));
+                }
+
+                return response()->json(Helper::formatStandardApiResponse('success', $asset,  trans('admin/hardware/message.update.success')));
+
+            }
+            return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 500);
+
+        }
+
+
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/hardware/message.does_not_exist')), 404);
+
+
+    }
+
+
+    /**
      * Delete a given asset (mark as deleted).
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
