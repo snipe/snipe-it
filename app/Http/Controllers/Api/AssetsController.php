@@ -158,7 +158,7 @@ class AssetsController extends Controller
                 $assets = $assets->orderBy($sort, $order);
                 break;
         }
-        
+
         $assets = $assets->skip($offset)->take($limit)->get();
         $assetCount = $assets->count();
 
@@ -186,7 +186,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function show($id = null)
+    public function show($id)
     {
 
         if ($asset = Asset::withTrashed()->find($id)) {
@@ -195,7 +195,7 @@ class AssetsController extends Controller
             return $asset;
         }
 
-        return response()->json(['error' => trans('admin/hardware/message.does_not_exist')], 404);
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
 
     }
 
@@ -204,9 +204,9 @@ class AssetsController extends Controller
      * Accepts a POST request to create a new asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $assetId
+     * @param Request $request
      * @since [v4.0]
-     * @return Redirect
+     * @return JsonResponse
      */
     public function store(AssetRequest $request)
     {
@@ -247,20 +247,21 @@ class AssetsController extends Controller
 
         if ($asset->save()) {
             $asset->logCreate();
-            if(request('assigned_user')) {
+            if($request->get('assigned_user')) {
                 $target = User::find(request('assigned_user'));
-            } elseif(request('assigned_asset')) {
+            } elseif($request->get('assigned_asset')) {
                 $target = Asset::find(request('assigned_asset'));
-            } elseif(request('assigned_location')) {
+            } elseif($request->get('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
             }
-            if ($target) {
+            if (isset($target)) {
                 $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
-            return response()->json(['success' =>  trans('admin/hardware/message.create.success')]);
+            return response()->json(Helper::formatStandardApiResponse('success', $asset->id,  trans('admin/hardware/message.create.success')));
 
         }
-        return response()->json(['errors' => $asset->getErrors()], 500);
+        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 500);
+
 
     }
 
@@ -271,7 +272,7 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
      * @since [v4.0]
-     * @return Redirect
+     * @return JsonResponse
      */
     public function destroy($id)
     {
