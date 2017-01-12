@@ -291,7 +291,7 @@ class AssetsController extends Controller
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
             if ($request->has('model_id')) {
-                if ($model = AssetModel::find($request->get('model_id'))) {
+                if (($model = AssetModel::find($request->get('model_id'))) && (isset($model->fieldset))) {
                     foreach ($model->fieldset->fields as $field) {
                         if ($request->has(CustomField::name_to_db_name($field->name))) {
                             $asset->{CustomField::name_to_db_name($field->name)} = e($request->input(CustomField::name_to_db_name($field->name)));
