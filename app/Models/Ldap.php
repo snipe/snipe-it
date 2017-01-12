@@ -232,18 +232,21 @@ class Ldap extends Model
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $ldapatttibutes
+     * @param $base_dn
      * @return array|bool
      */
-    static function findLdapUsers()
+    static function findLdapUsers($base_dn = null)
     {
 
         $ldapconn = Ldap::connectToLdap();
         $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
-        $base_dn = Setting::getSettings()->ldap_basedn;
+        // Default to global base DN if nothing else is provided.
+        if (is_null($base_dn)) {
+            $base_dn = Setting::getSettings()->ldap_basedn;
+        }
         $filter = Setting::getSettings()->ldap_filter;
 
         // Set up LDAP pagination for very large databases
-        // @author Richard Hofman
         $page_size = 500;
         $cookie = '';
         $result_set = array();
