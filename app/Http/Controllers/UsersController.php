@@ -1049,7 +1049,38 @@ class UsersController extends Controller
 
         $summary = array();
 
+        $ldap_specific_locations = Location::whereNotNull('ldap_ou')->get();
+        $generic_locations = Location::whereNull('ldap_ou')->get();
+
         $results = Ldap::findLdapUsers();
+
+        // Inject location information fields
+        for ($i = 0; $i < $results["count"]; $i++) {
+            $results[$i]["ldap_location_override"] = false;
+            $results[$i]["location_id"] = 0;
+        }
+
+        // Grab subsets based on location-specific DNs, and overwrite location for these users.
+        foreach ($ldap_specific_locations as $ldap_loc) {
+            $location_users = Ldap::findLdapUsers($ldap_loc->ldap_ou);
+            $usernames = array();
+            for ($i = 0; $i < $location_users["count"]; $i++) {
+                $location_users[$i]["ldap_location_override"] = true;
+                $location_users[$i]["location_id"] = $ldap_loc->id;
+                $usernames[] = $location_users[$i][$ldap_result_username][0];
+            }
+
+            // Delete located users from the general group.
+            foreach ($results as $key => $generic_entry) {
+                if (in_array($generic_entry[$ldap_result_username][0], $location_users)) {
+                    unset($results[$key]);
+                }
+            }
+
+            $global_count = $results['count'];
+            $results = array_merge($location_users, $results);
+            $results['count'] = $global_count;
+        }
 
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $pass = bcrypt($tmp_pass);
@@ -1063,6 +1094,8 @@ class UsersController extends Controller
                 $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
                 $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
+                $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
+                $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
 
                 // User exists
                 $item["createorupdate"] = 'updated';
@@ -1079,7 +1112,9 @@ class UsersController extends Controller
                 $user->email = e($item["email"]);
                 $user->employee_num = e($item["employee_number"]);
                 $user->activated = 1;
-                if ($request->input('location_id')!='') {
+                if ($item['ldap_location_override'] == true) {
+                    $user->location_id = $item['location_id'];
+                } else if ($request->input('location_id')!='') {
                     $user->location_id = e($request->input('location_id'));
                 }
                 $user->notes = 'Imported from LDAP';
