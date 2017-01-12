@@ -63,7 +63,7 @@
               data-toolbar="#toolbar"
               class="table table-striped snipe-table"
               id="table"
-              data-url="{{route('api.hardware.list', array(''=>e(Input::get('status')),'order_number'=>e(Input::get('order_number')), 'status_id'=>e(Input::get('status_id'))))}}"
+              data-url="{{route('api.assets.index', array(''=>e(Input::get('status')),'order_number'=>e(Input::get('order_number')), 'status_id'=>e(Input::get('status_id'))))}}"
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">

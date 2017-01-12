@@ -19,17 +19,31 @@ use App\Models\Statuslabel;
 Route::group(['prefix' => 'v1'], function () {
 
     /*---Hardware API---*/
-    Route::group([ 'prefix' => 'hardware'], function () {
+    Route::post('assets/import', [ 'as' => 'api.hardware.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
 
-        Route::get('list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ]);
 
-        Route::post('import', [ 'as' => 'api.hardware.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
-    });
+    Route::resource('hardware', '\App\Http\Controllers\Api\AssetsController',
+        ['names' =>
+            [
+                'index' => 'api.assets.index',
+                'create' => 'api.assets.create'
+            ],
+         'parameters' =>
+             ['asset' => 'asset_id']
+          ]);
+
+
+
+
+
 
     /*---Status Label API---*/
     Route::group([ 'prefix' => 'statuslabels' ,'middleware' => ['authorize:admin']], function () {
 
-        Route::resource('/', 'StatuslabelsController');
+        Route::resource('statuslabels', 'StatuslabelsController', [
+            'parameters' => ['statuslabel' => 'statuslabel_id']
+        ]);
+
         Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
 
             $statuslabel = Statuslabel::find($statuslabelId);
@@ -138,6 +152,7 @@ Route::group(['prefix' => 'v1'], function () {
 
     /*---Models API---*/
     Route::group([ 'prefix' => 'models' ], function () {
+        Route::resource('/', 'AssetModelsController');
         Route::get('/{status?}', [ 'as' => 'api.models.index', 'uses' => 'AssetModelsController@getDatatable' ]);
         Route::get('{modelID}/view', [ 'as' => 'api.models.view', 'uses' => 'AssetModelsController@getDataView' ]);
 
