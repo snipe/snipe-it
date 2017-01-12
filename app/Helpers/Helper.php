@@ -721,4 +721,16 @@ class Helper
                 return '<a href="'.$route.'" class="btn btn-warning btn-sm ' . $disabledString . '"><i class="fa fa-recycle icon-white"></i></a>';
         }
     }
+
+    public static function formatStandardApiResponse($status, $payload = null, $messages = null) {
+
+        $array['status'] = $status;
+        ($payload) ? $array['payload'] = $payload : '';
+
+        if (($messages) && (count($messages) > 0)) {
+            $array['messages'] = $messages;
+        }
+
+        return $array;
+    }
 }
