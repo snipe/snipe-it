@@ -158,9 +158,9 @@ class AssetsController extends Controller
                 $assets = $assets->orderBy($sort, $order);
                 break;
         }
-
-        $assetCount = $assets->count();
+        
         $assets = $assets->skip($offset)->take($limit)->get();
+        $assetCount = $assets->count();
 
         $rows = array();
         foreach ($assets as $asset) {
