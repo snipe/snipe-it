@@ -33,6 +33,20 @@
 </div>
 
 @include ('partials.forms.edit.address')
+
+<!-- LDAP Search OU -->
+@if ($snipeSettings->ldap_enabled == 1)
+    <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
+        <label for="ldap_ou" class="col-md-3 control-label">
+            {{ trans('admin/locations/table.ldap_ou') }}
+        </label>
+        <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'currency')) ? ' required' : '' }}">
+            {{ Form::text('ldap_ou', Input::old('ldap_ou', $item->ldap_ou), array('class' => 'form-control')) }}
+            {!! $errors->first('ldap_ou', '<span class="alert-msg">:message</span>') !!}
+        </div>
+    </div>
+@endif
+
 @stop
 
 @if (!$item->id)

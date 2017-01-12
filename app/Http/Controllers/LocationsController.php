@@ -184,8 +184,9 @@ class LocationsController extends Controller
         $location->state        = Input::get('state');
         $location->country      = Input::get('country');
         $location->zip          = Input::get('zip');
+        $location->ldap_ou      = Input::get('ldap_ou');
 
-        // Was the asset created?
+        // Was the location updated?
         if ($location->save()) {
           // Redirect to the saved location page
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.update.success'));
