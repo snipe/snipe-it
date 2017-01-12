@@ -159,15 +159,9 @@ class LoginController extends Controller
                   $this->clearLoginAttempts($request);
             }
         }
-
-        // Get the page we were before
-        $redirect = \Session::get('loginRedirect', 'home');
-
-        // Unset the page we were before from the session
-        \Session::forget('loginRedirect');
-
+        
         // Redirect to the users page
-        return redirect()->to($redirect)->with('success', trans('auth/message.signin.success'));
+        return redirect()->intended()->with('success', trans('auth/message.signin.success'));
     }
 
 
