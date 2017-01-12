@@ -27,8 +27,8 @@ class AssetRequest extends Request
     {
         $rules = [
             'name'            => 'max:255|nullable',
-            'model_id'        => 'required|integer',
-            'status_id'       => 'required|integer',
+            'model_id'        => 'required|integer|exists:models,id',
+            'status_id'       => 'required|integer|exists:status_labels,id',
             'company_id'      => 'integer|nullable',
             'warranty_months' => 'numeric|nullable',
             'physical'        => 'integer|nullable',
