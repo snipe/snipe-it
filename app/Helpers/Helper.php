@@ -208,7 +208,7 @@ class Helper
      */
     public static function statusLabelList()
     {
-        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')
+        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('deployable', 'desc')
                 ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
     }
@@ -253,7 +253,12 @@ class Helper
      */
     public static function statusTypeList()
     {
-        $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
+        $statuslabel_types =
+              array('' => trans('admin/hardware/form.select_statustype'))
+            + array('deployable' => trans('admin/hardware/general.deployable'))
+            + array('pending' => trans('admin/hardware/general.pending'))
+            + array('undeployable' => trans('admin/hardware/general.undeployable'))
+            + array('archived' => trans('admin/hardware/general.archived'));
         return $statuslabel_types;
     }
 

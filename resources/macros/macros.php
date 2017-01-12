@@ -367,51 +367,6 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
 });
 
 
-/**
-* Currency macro
-* Generates the dropdown menu of world currencies
-*/
-Form::macro('currencies', function ($name = "currency", $selected = null, $class = null) {
-
-      $currencies =  array(
-        'USD' => array('name'=>'US/Canadian/etc Dollar', 'symbol'=>'$','symbol_html'=>'$'),
-        'GBP' => array('name'=>'GBP - British Pounds', 'symbol'=>'£','symbol_html'=>'&pound;'),
-        'EUR' => array('name'=>'EUR - Euros', 'symbol'=>'€','symbol_html'=>'&euro;'),
-        'BGN' => array('name'=>'BGN - Bulgarian lev', 'symbol'=>'лв.','symbol_html'=>'лв.'),
-        'BRL' => array('name'=>'BRL - Brazilian Real', 'symbol'=>'R$','symbol_html'=>'R$'),
-        'CZK' => array('name'=>'CZK - Czech koruny', 'symbol'=>'Kč','symbol_html'=>'CZK'),
-        'DKK' => array('name'=>'DKK - Danish Kroner', 'symbol'=>'kr','symbol_html'=>'kr'),
-        'HUF' => array('name'=>'HUF - Hungarian Forints', 'symbol'=>'Ft','symbol_html'=>'Ft'),
-        'ILS' => array('name'=>'ILS - Israeli Shekels', 'symbol'=>'₪','symbol_html'=>'&#8362;'),
-        'JPY' => array('name'=>'JPY - Japanese Yen', 'symbol'=>'¥','symbol_html'=>'&#165;'),
-        'MYR' => array('name'=>'MYR - Malaysian Ringgits', 'symbol'=>'RM','symbol_html'=>'RM'),
-        'NOK' => array('name'=>'NOK - Norwegian Kroner', 'symbol'=>'kr','symbol_html'=>'kr'),
-        'PHP' => array('name'=>'PHP - Philippine Pesos', 'symbol'=>'Php','symbol_html'=>'Php'),
-        'PLN' => array('name'=>'PLN - Polish zloty', 'symbol'=>'zł','symbol_html'=>'PLN'),
-        'INR' => array('name'=>'INR - Indian Rupee', 'symbol'=>'Rs','symbol_html'=>'&#8360;'),
-        'RUB' => array('name'=>'RUB - Russian Rubles', 'symbol'=>'₽','symbol_html'=>'&#8381;'),
-        'SEK' => array('name'=>'SEK - Swedish Kronor', 'symbol'=>'kr','symbol_html'=>'kr'),
-        'CHF' => array('name'=>'CHF - Swiss Francs', 'symbol'=>'CHF','symbol_html'=>'CHF'),
-        'THB' => array('name'=>'THB - Thai Baht', 'symbol'=>'฿','symbol_html'=>' &#3647;'),
-        'TRY' => array('name'=>'TRY - Turkish Liras', 'symbol'=>'TL','symbol_html'=>' &#3647;'),
-        'UAH' => array('name'=>'UAH - Ukrainian Hryvnias', 'symbol'=>'₴','symbol_html'=>'&#8372;'),
-        'ZAR' => array('name'=>'ZAR - South African Rand', 'symbol'=>'R','symbol_html'=>'R'),
-        'AED' => array('name'=>'AED - United Arab Emirates Dirham', 'symbol'=>'AED','symbol_html'=>'AED'),
-        'CNY' => array('name'=>'CNY - Chinese Yuan', 'symbol'=>'¥','symbol_html'=>'&#165;'),
-  	);
-
-    $select = '<select name="'.$name.'" class="'.$class.'">';
-    foreach ($currencies as $currency) {
-        $select .= '<option value="'.$currency['symbol'].'"'.($selected == $currency['symbol'] ? ' selected="selected"' : '').'>'.$currency['name'].' ('.$currency['symbol'].')</option> ';
-    }
-
-    $select .= '</select>';
-
-    return $select;
-
-});
-
-
 
 Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = null, $class = null) {
 
