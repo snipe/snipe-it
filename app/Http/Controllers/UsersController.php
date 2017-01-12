@@ -1049,8 +1049,7 @@ class UsersController extends Controller
 
         $summary = array();
 
-        $ldap_specific_locations = Location::whereNotNull('ldap_ou')->get();
-        $generic_locations = Location::whereNull('ldap_ou')->get();
+        $ldap_ou_locations = Location::whereNotNull('ldap_ou')->get();
 
         $results = Ldap::findLdapUsers();
 
@@ -1061,7 +1060,7 @@ class UsersController extends Controller
         }
 
         // Grab subsets based on location-specific DNs, and overwrite location for these users.
-        foreach ($ldap_specific_locations as $ldap_loc) {
+        foreach ($ldap_ou_locations as $ldap_loc) {
             $location_users = Ldap::findLdapUsers($ldap_loc->ldap_ou);
             $usernames = array();
             for ($i = 0; $i < $location_users["count"]; $i++) {

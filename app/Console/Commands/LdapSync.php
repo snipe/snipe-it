@@ -69,10 +69,9 @@ class LdapSync extends Command
 
         $results = Ldap::findLdapUsers();
 
-        $ldap_specific_locations = Location::whereNotNull('ldap_ou')->get();
-        $generic_locations = Location::whereNull('ldap_ou')->get();
+        $ldap_ou_locations = Location::whereNotNull('ldap_ou')->get();
 
-        if (sizeof($ldap_specific_locations) > 0) {
+        if (sizeof($ldap_ou_locations) > 0) {
             LOG::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
         }
 
@@ -99,7 +98,7 @@ class LdapSync extends Command
         }
 
         // Grab subsets based on location-specific DNs, and overwrite location for these users.
-        foreach ($ldap_specific_locations as $ldap_loc) {
+        foreach ($ldap_ou_locations as $ldap_loc) {
             $location_users = Ldap::findLdapUsers($ldap_loc->ldap_ou);
             $usernames = array();
             for ($i = 0; $i < $location_users["count"]; $i++) {
