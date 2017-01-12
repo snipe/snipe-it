@@ -2,43 +2,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
-use App\Http\Requests\AssetCheckinRequest;
-use App\Http\Requests\AssetCheckoutRequest;
-use App\Http\Requests\AssetFileRequest;
 use App\Http\Requests\AssetRequest;
-use App\Http\Requests\ItemImportRequest;
-use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Location;
-use App\Models\Setting;
 use App\Models\User;
 use Artisan;
 use Auth;
-use Carbon\Carbon;
 use Config;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
-use Image;
 use Input;
 use Lang;
-use League\Csv\Reader;
 use Log;
 use Mail;
 use Paginator;
-use Redirect;
 use Response;
 use Slack;
 use Str;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use TCPDF;
 use Validator;
 use View;
 use App\Http\Controllers\Controller;
-use Zend\Diactoros\Response\JsonResponse;
 
 /**
  * This class controls all actions related to assets for
