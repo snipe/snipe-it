@@ -186,7 +186,7 @@ class AssetsController extends Controller
             return $asset;
         }
 
-        return response()->json(['error' => trans('admin/hardware/message.does_not_exist')]);
+        return response()->json(['error' => trans('admin/hardware/message.does_not_exist')], 404);
 
     }
 
