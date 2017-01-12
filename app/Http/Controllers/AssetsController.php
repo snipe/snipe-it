@@ -579,20 +579,21 @@ class AssetsController extends Controller
         $asset = Asset::withTrashed()->find($assetId);
         $settings = Setting::getSettings();
         $this->authorize('view', $asset);
-        if ($asset->userloc) {
-            $use_currency = $asset->userloc->currency;
-        } elseif ($asset->assetloc) {
-            $use_currency = $asset->assetloc->currency;
-        } else {
-
-            if ($settings->default_currency!='') {
-                $use_currency = $settings->default_currency;
-            } else {
-                $use_currency = trans('general.currency');
-            }
-        }
 
         if (isset($asset->id)) {
+
+            if ($asset->userloc) {
+                $use_currency = $asset->userloc->currency;
+            } elseif ($asset->assetloc) {
+                $use_currency = $asset->assetloc->currency;
+            } else {
+
+                if ($settings->default_currency!='') {
+                    $use_currency = $settings->default_currency;
+                } else {
+                    $use_currency = trans('general.currency');
+                }
+            }
 
             $qr_code = (object) array(
                 'display' => $settings->qr_code == '1',
@@ -601,11 +602,8 @@ class AssetsController extends Controller
 
             return View::make('hardware/view', compact('asset', 'qr_code', 'settings'))->with('use_currency', $use_currency);
         }
-        // Prepare the error message
-        $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
-        // Redirect to the user management page
-        return redirect()->route('hardware')->with('error', $error);
+        return redirect()->route('hardware')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
     }
 
     /**
@@ -728,7 +726,6 @@ class AssetsController extends Controller
 
         if (!Company::isCurrentUserAuthorized()) {
             return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-
         } elseif (!config('app.lock_passwords')) {
 
             $files = Input::file('files');

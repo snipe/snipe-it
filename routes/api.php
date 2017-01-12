@@ -26,7 +26,8 @@ Route::group(['prefix' => 'v1'], function () {
         ['names' =>
             [
                 'index' => 'api.assets.index',
-                'create' => 'api.assets.create'
+                'create' => 'api.assets.create',
+                'destroy' => 'api.assets.destroy'
             ],
          'parameters' =>
              ['asset' => 'asset_id']

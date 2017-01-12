@@ -38,6 +38,7 @@ use TCPDF;
 use Validator;
 use View;
 use App\Http\Controllers\Controller;
+use Zend\Diactoros\Response\JsonResponse;
 
 /**
  * This class controls all actions related to assets for
@@ -49,6 +50,14 @@ use App\Http\Controllers\Controller;
 class AssetsController extends Controller
 {
 
+    /**
+     * Returns JSON listing of all assets
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v4.0]
+     * @return JsonResponse
+     */
     public function index(Request $request, $status = null)
     {
         $this->authorize('index', 'App\Models\Asset');
@@ -174,8 +183,8 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
-     * @since [v1.0]
-     * @return View
+     * @since [v4.0]
+     * @return JsonResponse
      */
     public function show($id = null)
     {
@@ -186,6 +195,98 @@ class AssetsController extends Controller
             return $asset;
         }
 
+        return response()->json(['error' => trans('admin/hardware/message.does_not_exist')], 404);
+
+    }
+
+
+    /**
+     * Accepts a POST request to create a new asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v4.0]
+     * @return Redirect
+     */
+    public function store(AssetRequest $request)
+    {
+        $this->authorize('create', Asset::class);
+
+        $asset = new Asset();
+        $asset->model()->associate(AssetModel::find(e($request->get('model_id'))));
+
+        $asset->name                    = $request->get('name');
+        $asset->serial                  = $request->get('serial');
+        $asset->company_id              = Company::getIdForCurrentUser($request->get('company_id'));
+        $asset->model_id                = $request->get('model_id');
+        $asset->order_number            = $request->get('order_number');
+        $asset->notes                   = $request->get('notes');
+        $asset->asset_tag               = $request->get('asset_tag');
+        $asset->user_id                 = Auth::id();
+        $asset->archived                = '0';
+        $asset->physical                = '1';
+        $asset->depreciate              = '0';
+        $asset->status_id               = $request->get('status_id', 0);
+        $asset->warranty_months         = $request->get('warranty_months', null);
+        $asset->purchase_cost           = Helper::ParseFloat($request->get('purchase_cost'));
+        $asset->purchase_date           = $request->get('purchase_date', null);
+        $asset->assigned_to             = $request->get('assigned_to', null);
+        $asset->supplier_id             = $request->get('supplier_id', 0);
+        $asset->requestable             = $request->get('requestable', 0);
+        $asset->rtd_location_id         = $request->get('rtd_location_id', null);
+
+        // Update custom fields in the database.
+        // Validation for these fields is handled through the AssetRequest form request
+        // Need to investigate and fix. Using static method for now.
+        $model = AssetModel::find($request->get('model_id'));
+        if ($model->fieldset) {
+            foreach ($model->fieldset->fields as $field) {
+                $asset->{CustomField::name_to_db_name($field->name)} = e($request->input(CustomField::name_to_db_name($field->name)));
+            }
+        }
+
+        if ($asset->save()) {
+            $asset->logCreate();
+            if(request('assigned_user')) {
+                $target = User::find(request('assigned_user'));
+            } elseif(request('assigned_asset')) {
+                $target = Asset::find(request('assigned_asset'));
+            } elseif(request('assigned_location')) {
+                $target = Location::find(request('assigned_location'));
+            }
+            if ($target) {
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
+            }
+            return response()->json(['success' =>  trans('admin/hardware/message.create.success')]);
+
+        }
+        return response()->json(['errors' => $asset->getErrors()], 500);
+
+    }
+
+
+    /**
+     * Delete a given asset (mark as deleted).
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v4.0]
+     * @return Redirect
+     */
+    public function destroy($id)
+    {
+
+        if ($asset = Asset::find($id)) {
+            $this->authorize('delete', $asset);
+
+            DB::table('assets')
+                ->where('id', $asset->id)
+                ->update(array('assigned_to' => null));
+
+            $asset->delete();
+            return response()->json(['success' => trans('admin/hardware/message.delete.success')]);
+
+        }
         return response()->json(['error' => trans('admin/hardware/message.does_not_exist')], 404);
 
     }
