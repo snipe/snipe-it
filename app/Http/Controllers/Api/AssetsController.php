@@ -57,16 +57,12 @@ class AssetsController extends Controller
             'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
             'model.category', 'model.manufacturer', 'model.fieldset');
 
-        if ($request->has('search')) {
-            $assets = $assets->TextSearch(e($request->get('search')));
-        }
-
+        $request->has('search') ? $assets = $assets->TextSearch(e($request->get('search'))) : '';
         $offset = request('offset', 0);
         $limit = request('limit', 50);
+        $request->has('order_number') ? $assets->where('order_number', '=', e($request->get('order_number'))) : '';
 
-        if ($request->has('order_number')) {
-            $assets->where('order_number', '=', e($request->get('order_number')));
-        }
+
 
         switch ($status) {
             case 'Deleted':
@@ -92,9 +88,7 @@ class AssetsController extends Controller
                 break;
         }
 
-        if ($request->has('status_id')) {
-            $assets->where('status_id', '=', e($request->get('status_id')));
-        }
+        $request->has('status_id') ? $assets->where('status_id', '=', e($request->get('status_id'))) : '';
 
         $allowed_columns = [
             'id',
@@ -169,10 +163,33 @@ class AssetsController extends Controller
             }
 
         }
-        $data = array('total'=>$assetCount, 'rows'=>$rows);
+        $data = array('total' => $assetCount, 'rows' => $rows);
         return $data;
 
     }
+
+
+     /**
+     * Returns JSON with information about an asset for detail view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return View
+     */
+    public function show($id = null)
+    {
+
+        if ($asset = Asset::withTrashed()->find($id)) {
+            $this->authorize('view', $asset);
+            $asset = $asset->present()->detail();
+            return $asset;
+        }
+
+        return response()->json(['error' => trans('admin/hardware/message.does_not_exist')]);
+
+    }
+
 
 
 }

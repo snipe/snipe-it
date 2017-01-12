@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Gate;
 class AssetPresenter extends Presenter
 {
 
+    public function detail() {
+        return $this->model;
+    }
+
     /**
      * Bootstrap Table Bits
      * @param array $all_custom_fields Preloaded cache of custom fields
