@@ -2,7 +2,7 @@ var elixir = require('laravel-elixir');
 require('laravel-elixir-codeception-standalone');
 require('laravel-elixir-phpcs');
 require('laravel-elixir-vue-2');
-var bowerPath = './vendor/bower_components';
+var bowerPath = './bower_components';
 
 /*
  |--------------------------------------------------------------------------
@@ -42,18 +42,18 @@ elixir(function(mix) {
 
 
     mix.scripts([
+     bowerPath + '/tether/dist/js/tether.js',
         'vue-dist.js',
-        bowerPath + '/jquery-ui/**',
-        bowerPath + '/bootstrap/dist/js/**',
-        bowerPath + '/jquery-slimscroll/**',
-        bowerPath + '/jquery.iframe-transport/**',
-        bowerPath + '/fileupload/**',
-        bowerPath + '/fastclick/**',
-        bowerPath + '/bootstrap-colorpicker/**',
-        bowerPath + '/bootstrap-datepicker/**',
-        bowerPath +  '/iCheck/**',
-        bowerPath + '/select2/dist/js/select2.full.*',
-        bowerPath + '/ekko-lightbox/**',
+        bowerPath + '/jquery-ui/jquery-ui.js',
+        bowerPath + '/jquery-slimscroll/jquery.slimscroll.js',
+        bowerPath + '/jquery.iframe-transport/jquery.iframe-transport.js',
+        bowerPath + '/blueimp-file-upload/js/jquery.fileupload.js',
+        bowerPath + '/fastclick/lib/fastclick.js',
+        bowerPath + '/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
+        bowerPath + '/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        bowerPath + '/iCheck/icheck.js',
+        bowerPath + '/select2/dist/js/select2.full.js',
+        bowerPath + '/ekko-lightbox/dist/ekko-lightbox.js',
         'snipeit.js'
 
     ],'public/assets/js');

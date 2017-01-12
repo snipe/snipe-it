@@ -124,24 +124,24 @@ $(document).ready(function () {
      /*
      * iCheck checkbox plugin
      */
-     /*
-     $('input[type="checkbox"].minimal, input[type="radio"].minimal').icheck({
+
+     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
          checkboxClass: 'icheckbox_minimal-blue',
          radioClass: 'iradio_minimal-blue'
      });
-     */
+
 
      /*
      * Select2
      */
-     /*
+
      var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
      if(!iOS)
      {
          $(".select2").select2();
      }
      $('.datepicker').datepicker();
-     */
+
 
 
 });

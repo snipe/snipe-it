@@ -226,7 +226,6 @@
 
             $('.dynamic-form-row').hide();
             function show_er(selector) {
-                //$(selector).show().parent().show();
                 $(selector).parent().parent().show();
             }
 
@@ -259,10 +258,8 @@
 
                 case 'supplier':
 
-                //do nothing, they just need 'name'
             }
 
-            //console.warn("The Model is: "+model+" and the select is: "+select);
         });
 
         $("form").submit(function (event) {
@@ -401,28 +398,37 @@
                 data[bits[1]] = $(elem).val();
             });
 
-            data._token = '{{ csrf_token() }}',
-                //console.dir(data);
+            data._token = '{{ csrf_token() }}';
 
-                $.post("{{url('/') }}/api/v1/" + model + "s", data, function (result) {
-                    var id = result.id;
-                    var name = result.name || (result.first_name + " " + result.last_name);
-                    $('.modal-body input:visible').val("");
-                    $('#createModal').modal('hide');
 
-                    //console.warn("The select ID thing we're going for is: "+select);
-                    var selector = document.getElementById(select);
-                    selector.options[selector.length] = new Option(name, id);
-                    selector.selectedIndex = selector.length - 1;
-                    $(selector).trigger("change");
-                    fetchCustomFields();
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url('/') }}/api/v1/" + model + "s",
+                    headers: {
+                        "X-Requested-With": 'XMLHttpRequest',
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
 
-                }).fail(function (result) {
-                    //console.dir(result.responseJSON);
-                    msg = result.responseJSON.error.message || result.responseJSON.error;
-                    window.alert("Unable to add new " + model + " - error: " + msg);
-                });
+                    data: data,
+                    success: function (result) {
 
+                        var id = result.id;
+                        var name = result.name || (result.first_name + " " + result.last_name);
+                        $('.modal-body input:visible').val("");
+                        $('#createModal').modal('hide');
+                        var selector = document.getElementById(select);
+                        selector.options[selector.length] = new Option(name, id);
+                        selector.selectedIndex = selector.length - 1;
+                        $(selector).trigger("change");
+                        fetchCustomFields();
+
+                    },
+                    error: function (result) {
+                        msg = result.responseJSON.error.message || result.responseJSON.error;
+                        window.alert("Unable to add new " + model + " - error: " + msg);
+                    }
+
+        });
         });
     });
 </script>
