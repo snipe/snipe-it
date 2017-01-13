@@ -23,11 +23,28 @@ class AssetModelsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', AssetModel::class);
-        $assetmodels = AssetModel::all();
-        return (new DatatablesTransformer)->transformDatatables($assetmodels, count($assetmodels));
+        $allowed_columns = ['id','name','created_at'];
+
+        $assetmodels = AssetModel::select(['id','name','model_number','created_at'])
+            ->with('category','depreciation', 'manufacturer')
+            ->withCount('assets');
+
+        if ($request->has('search')) {
+            $assetmodels = $assetmodels->TextSearch($request->input('search'));
+        }
+
+        $offset = $request->input('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $assetmodels->orderBy($sort, $order);
+
+        $total = $assetmodels->count();
+        $assetmodels = $assetmodels->skip($offset)->take($limit)->get();
+        return (new DatatablesTransformer)->transformDatatables($assetmodels, $total);
     }
 
 
