@@ -26,7 +26,7 @@ class Accessory extends SnipeModel
     public $rules = array(
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
-        'category_id'       => 'required|integer',
+        'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0',
         'purchase_cost'     => 'numeric|nullable',
@@ -56,6 +56,7 @@ class Accessory extends SnipeModel
         'order_number',
         'purchase_cost',
         'purchase_date',
+        'model_number',
         'qty',
         'requestable'
     ];
