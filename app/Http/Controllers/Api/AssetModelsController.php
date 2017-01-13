@@ -28,8 +28,8 @@ class AssetModelsController extends Controller
         $this->authorize('view', AssetModel::class);
         $allowed_columns = ['id','name','created_at'];
 
-        $assetmodels = AssetModel::select(['id','name','model_number','created_at'])
-            ->with('category','depreciation', 'manufacturer')
+        $assetmodels = AssetModel::select(['id','image','name','model_number','eol','notes','created_at'])
+            ->with('category','depreciation', 'manufacturer','fieldset')
             ->withCount('assets');
 
         if ($request->has('search')) {
