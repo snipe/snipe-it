@@ -33,18 +33,46 @@ class AssetsController extends Controller
      */
     public function index(Request $request, $status = null)
     {
-        $this->authorize('index', 'App\Models\Asset');
-        
+
+        $this->authorize('index', Asset::class);
+
+        $allowed_columns = [
+            'id',
+            'name',
+            'asset_tag',
+            'serial',
+            'model_number',
+            'last_checkout',
+            'notes',
+            'expected_checkin',
+            'order_number',
+            'image',
+            'assigned_to',
+            'created_at',
+            'purchase_date',
+            'purchase_cost'
+        ];
+
+        $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+        foreach ($all_custom_fields as $field) {
+            $allowed_columns[]=$field->db_column_name();
+        }
+
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
             'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
             'model.category', 'model.manufacturer', 'model.fieldset');
 
-        $request->has('search') ? $assets = $assets->TextSearch(e($request->get('search'))) : '';
+        if ($request->has('search')) {
+            $assets->TextSearch($request->input('search'));
+        }
+
+        $request->has('order_number') ? $assets = $assets->where('order_number', '=', e($request->get('order_number'))) : '';
+
         $offset = request('offset', 0);
-        $limit = request('limit', 50);
-        $request->has('order_number') ? $assets->where('order_number', '=', e($request->get('order_number'))) : '';
-
-
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $assets->orderBy($sort, $order);
 
         switch ($status) {
             case 'Deleted':
@@ -70,83 +98,42 @@ class AssetsController extends Controller
                 break;
         }
 
-        $request->has('status_id') ? $assets->where('status_id', '=', e($request->get('status_id'))) : '';
 
-        $allowed_columns = [
-            'id',
-            'name',
-            'asset_tag',
-            'serial',
-            'model',
-            'model_number',
-            'last_checkout',
-            'category',
-            'manufacturer',
-            'notes',
-            'expected_checkin',
-            'order_number',
-            'companyName',
-            'location',
-            'image',
-            'status_label',
-            'assigned_to',
-            'created_at',
-            'purchase_date',
-            'purchase_cost'
-        ];
-        $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
-        foreach ($all_custom_fields as $field) {
-            $allowed_columns[]=$field->db_column_name();
-        }
-
-        $order = $request->get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'asset_tag';
 
         switch ($sort) {
             case 'model':
-                $assets = $assets->OrderModels($order);
+                $assets->OrderModels($order);
                 break;
             case 'model_number':
-                $assets = $assets->OrderModelNumber($order);
+                $assets->OrderModelNumber($order);
                 break;
             case 'category':
-                $assets = $assets->OrderCategory($order);
+                $assets->OrderCategory($order);
                 break;
             case 'manufacturer':
-                $assets = $assets->OrderManufacturer($order);
+                $assets->OrderManufacturer($order);
                 break;
-            case 'companyName':
-                $assets = $assets->OrderCompany($order);
+            case 'company':
+                $assets->OrderCompany($order);
                 break;
             case 'location':
-                $assets = $assets->OrderLocation($order);
+                $assets->OrderLocation($order);
                 break;
             case 'status_label':
-                $assets = $assets->OrderStatus($order);
+                $assets->OrderStatus($order);
                 break;
             case 'assigned_to':
-                $assets = $assets->OrderAssigned($order);
+                $assets->OrderAssigned($order);
                 break;
             default:
-                $assets = $assets->orderBy($sort, $order);
+                $assets->orderBy($sort, $order);
                 break;
         }
 
+
+        $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
-        $assetCount = $assets->count();
-
-        $rows = array();
-        foreach ($assets as $asset) {
-            $row = $asset->present()->forDataTable($all_custom_fields);
-            if (($request->has('report')) && ($request->get('report')=='true')) {
-                $rows[]= Helper::stripTagsFromJSON($row);
-            } else {
-                $rows[]= $row;
-            }
-
-        }
-        $data = array('total' => $assetCount, 'rows' => $rows);
-        return $data;
+        return (new AssetsTransformer)->transformAssets($assets, $total);
 
     }
 
