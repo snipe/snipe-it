@@ -14,7 +14,7 @@ class LocationsTransformer
         return $locations_array;
     }
 
-    public function transformLocation(Location $location = null)
+    public function transformLocation (Location $location = null)
     {
         if ($location) {
             $locations_array[] = [
