@@ -199,11 +199,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ['names' =>
             [
                 'index' => 'api.manufacturers.index',
-                'create' => 'api.manufacturers.create',
+                'show' => 'api.manufacturers.show',
+                'update' => 'api.manufacturers.update',
+                'store' => 'api.manufacturers.store',
                 'destroy' => 'api.manufacturers.destroy'
             ],
-            'parameters' =>
-                ['manufacturer' => 'manufacturer_id']
+            'except' => ['edit'],
+            'parameters' => ['manufacturer' => 'manufacturer_id']
         ]
     );
 

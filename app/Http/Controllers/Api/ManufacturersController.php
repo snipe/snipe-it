@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Manufacturer;
+use App\Http\Transformers\DatatablesTransformer;
 
 class ManufacturersController extends Controller
 {
@@ -16,10 +17,29 @@ class ManufacturersController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', Manufacturer::class);
-        $manufacturers = Manufacturer::all();
+        $allowed_columns = ['id','name'];
+
+        $manufacturers = Manufacturer::select(
+            array('id','name')
+        )->withCount('assets')->withCount('licenses')->withCount('consumables')->withCount('accessories');
+
+
+        if ($request->has('search')) {
+            $manufacturers = $manufacturers->TextSearch($request->input('search'));
+        }
+
+        $offset = request('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $manufacturers->orderBy($sort, $order);
+
+        $total = $manufacturers->count();
+        $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
+        return (new DatatablesTransformer)->transformDatatables($manufacturers, $total);
         return $manufacturers;
     }
 
