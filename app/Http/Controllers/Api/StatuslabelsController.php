@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Statuslabel;
 use App\Models\Asset;
-use App\Http\Transformers\StatuslabelsTransformer;
+use App\Http\Transformers\DatatablesTransformer;
 
 class StatuslabelsController extends Controller
 {
@@ -18,11 +18,27 @@ class StatuslabelsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', Statuslabel::class);
-        $statuslabels = Statuslabel::all();
-        return (new StatuslabelsTransformer)->transformStatuslabels($statuslabels);
+        $allowed_columns = ['id','name'];
+
+        $statuslabels = Statuslabel::select(['id','name','deployable','pending','archived','color','show_in_nav'])
+            ->withCount('assets');
+
+        if ($request->has('search')) {
+            $statuslabels = $statuslabels->TextSearch($request->input('search'));
+        }
+
+        $offset = $request->input('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $statuslabels->orderBy($sort, $order);
+
+        $total = $statuslabels->count();
+        $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
+        return (new DatatablesTransformer)->transformDatatables($statuslabels, $total);
     }
 
 
