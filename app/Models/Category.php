@@ -30,7 +30,9 @@ class Category extends SnipeModel
     public $rules = array(
         'user_id' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|unique_undeleted',
-        'category_type'   => 'required',
+        'require_acceptance'   => 'required|boolean',
+        'use_default_eula'   => 'required|boolean',
+        'category_type'   => 'required|in:asset,accessory,consumable,component',
     );
 
     /**
@@ -50,7 +52,7 @@ class Category extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','category_type', 'user_id'];
+    protected $fillable = ['name','category_type', 'user_id', 'use_default_eula','checkin_email','require_acceptance'];
 
 
     public function has_models()
