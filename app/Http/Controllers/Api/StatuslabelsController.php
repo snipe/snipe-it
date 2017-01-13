@@ -21,9 +21,9 @@ class StatuslabelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Statuslabel::class);
-        $allowed_columns = ['id','name'];
+        $allowed_columns = ['id','name','created_at'];
 
-        $statuslabels = Statuslabel::select(['id','name','deployable','pending','archived','color','show_in_nav'])
+        $statuslabels = Statuslabel::select(['id','name','deployable','pending','archived','color','show_in_nav','created_at'])
             ->withCount('assets');
 
         if ($request->has('search')) {
