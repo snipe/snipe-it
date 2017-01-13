@@ -48,7 +48,19 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     );
 
-
+    Route::resource('categories', 'CategoriesController',
+        ['names' =>
+            [
+                'index' => 'api.categories.index',
+                'show' => 'api.categories.show',
+                'update' => 'api.categories.update',
+                'store' => 'api.categories.store',
+                'destroy' => 'api.categories.destroy'
+            ],
+            'except' => ['edit', 'create'],
+            'parameters' => ['category' => 'category_id']
+        ]
+    );
 
 
     Route::resource('companies', 'CompaniesController',

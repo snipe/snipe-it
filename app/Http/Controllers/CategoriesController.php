@@ -200,49 +200,7 @@ class CategoriesController extends Controller
         // Redirect to the user management page
         return redirect()->route('categories.index')->with('error', $error);
     }
-
-    /**
-     * Returns a JSON response with the data to populate the bootstrap table on the
-     * category listing page.
-     *
-     * @todo Refactor this nastiness. Assets do not behave the same as accessories, etc.
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see CategoriesController::getIndex() method that generates the view
-     * @since [v1.8]
-     * @param Request $request
-     * @return String JSON
-     */
-    public function getDatatable(Request $request)
-    {
-        // Grab all the categories
-        $categories = Category::with('assets', 'accessories', 'consumables', 'components');
-
-        if (Input::has('search')) {
-            $categories = $categories->TextSearch(e($request->input('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name','category_type'];
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
-
-        $categories = $categories->orderBy($sort, $order);
-
-        $catCount = $categories->count();
-        $categories = $categories->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($categories as $category) {
-            $rows[] = $category->present()->forDataTable();
-        }
-
-        $data = array('total' => $catCount, 'rows' => $rows);
-
-        return $data;
-    }
+    
 
     public function getDataViewAssets(Request $request, $categoryID)
     {
