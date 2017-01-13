@@ -26,7 +26,7 @@ class AssetModelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', AssetModel::class);
-        $allowed_columns = ['id','name','created_at'];
+        $allowed_columns = ['id','image','name','model_number','eol','notes','created_at'];
 
         $assetmodels = AssetModel::select(['id','image','name','model_number','eol','notes','created_at'])
             ->with('category','depreciation', 'manufacturer','fieldset')
