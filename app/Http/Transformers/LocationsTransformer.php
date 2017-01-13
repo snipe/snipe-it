@@ -11,7 +11,7 @@ class LocationsTransformer
     {
         $locations_array = array();
             $locations_array[] = self::transformLocation($locations);
-        return $users_array;
+        return $locations_array;
     }
 
     public function transformLocation(Location $location = null)
