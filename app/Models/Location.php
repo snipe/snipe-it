@@ -44,6 +44,7 @@ class Location extends SnipeModel
      * @var array
      */
     protected $fillable = ['name'];
+    protected $hidden = ['user_id'];
 
     public function users()
     {
