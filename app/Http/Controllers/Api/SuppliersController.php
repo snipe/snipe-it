@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Supplier;
+use App\Http\Transformers\DatatablesTransformer;
 
 class SuppliersController extends Controller
 {
@@ -16,10 +17,31 @@ class SuppliersController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', Supplier::class);
-        $suppliers = Supplier::all();
+        $allowed_columns = ['id','name','address','phone','contact','fax','email'];
+
+
+        // Not sure how to access the withCount value?
+        $suppliers = Supplier::select(
+                array('id','name','address','address2','city','state','country','fax', 'phone','email','contact')
+            )->withCount('assets')->withCount('licenses')->whereNull('deleted_at');
+
+
+        if ($request->has('search')) {
+            $suppliers = $suppliers->TextSearch($request->input('search'));
+        }
+
+        $offset = request('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $suppliers->orderBy($sort, $order);
+
+        $total = $suppliers->count();
+        $suppliers = $suppliers->skip($offset)->take($limit)->get();
+        return (new DatatablesTransformer)->transformDatatables($suppliers, $total);
         return $suppliers;
     }
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Statuslabel;
 use App\Models\Asset;
+use App\Http\Transformers\StatuslabelsTransformer;
 
 class StatuslabelsController extends Controller
 {
@@ -21,7 +22,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
         $statuslabels = Statuslabel::all();
-        return $statuslabels;
+        return (new StatuslabelsTransformer)->transformStatuslabels($statuslabels);
     }
 
 

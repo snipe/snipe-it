@@ -21,7 +21,7 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $locations = Location::all();
-        return (new DatatablesTransformer)->transformDatatables($locations);
+        return (new DatatablesTransformer)->transformDatatables($locations, count($locations));
     }
 
 

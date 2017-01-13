@@ -354,54 +354,6 @@ class AssetModelsController extends Controller
 
 
     /**
-    * Get the JSON response to populate the data tables on the
-    * Asset Model listing page.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @param string $status
-    * @return String JSON
-    */
-
-    public function getDatatable(Request $request, $status = null)
-    {
-        $models = AssetModel::with('category', 'assets', 'depreciation', 'manufacturer');
-
-        switch ($status) {
-            case 'Deleted':
-                $models->withTrashed()->Deleted();
-                break;
-        }
-
-        if (Input::has('search')) {
-            $models = $models->TextSearch($request->input('search'));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name','model_number'];
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
-
-        $models = $models->orderBy($sort, $order);
-
-        $modelCount = $models->count();
-        $models = $models->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($models as $model) {
-            $rows[] = $model->present()->forDataTable();
-        }
-
-        $data = array('total' => $modelCount, 'rows' => $rows);
-
-        return $data;
-    }
-
-
-    /**
      * Get the asset information to present to the model view detail page
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

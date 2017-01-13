@@ -33,6 +33,24 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     );
 
+
+    Route::resource('models', 'AssetModelsController',
+        ['names' =>
+            [
+                'index' => 'api.models.index',
+                'show' => 'api.models.show',
+                'update' => 'api.models.update',
+                'store' => 'api.models.store',
+                'destroy' => 'api.models.destroy'
+            ],
+            'except' => ['edit', 'create'],
+            'parameters' => ['model' => 'model_id']
+        ]
+    );
+
+
+
+
     Route::resource('companies', 'CompaniesController',
         ['names' =>
             [
@@ -275,23 +293,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     });
 
 
-
-
-
-
-    /*-- Suppliers API (mostly for creating new ones in-line while creating an asset) --*/
-    Route::group([ 'prefix' => 'suppliers' ], function () {
-
-        Route::resource('/', 'SuppliersController');
-    });
-
-
-
-
-});
-
-Route::get('test', function(){
-    return 'returned string from test route';
 });
 
 
