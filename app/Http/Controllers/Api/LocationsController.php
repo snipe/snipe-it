@@ -17,11 +17,38 @@ class LocationsController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', Location::class);
-        $locations = Location::all();
-        return (new DatatablesTransformer)->transformDatatables($locations, count($locations));
+        $allowed_columns = ['id','name','address','address2','city','state','country','zip'];
+
+        $locations = Location::select([
+            'locations.id',
+            'locations.name',
+            'locations.address',
+            'locations.address2',
+            'locations.city',
+            'locations.state',
+            'locations.zip',
+            'locations.country',
+            'locations.parent_id',
+            'locations.currency'
+        ])->withCount('assets')->withCount('users');
+
+        if ($request->has('search')) {
+            $locations = $locations->TextSearch($request->input('search'));
+        }
+
+        $offset = $request->input('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $locations->orderBy($sort, $order);
+
+        $total = $locations->count();
+        $locations = $locations->skip($offset)->take($limit)->get();
+        return (new DatatablesTransformer)->transformDatatables($locations, $total);
+
     }
 
 

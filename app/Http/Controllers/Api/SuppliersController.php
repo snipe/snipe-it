@@ -21,9 +21,7 @@ class SuppliersController extends Controller
     {
         $this->authorize('view', Supplier::class);
         $allowed_columns = ['id','name','address','phone','contact','fax','email'];
-
-
-        // Not sure how to access the withCount value?
+        
         $suppliers = Supplier::select(
                 array('id','name','address','address2','city','state','country','fax', 'phone','email','contact')
             )->withCount('assets')->withCount('licenses')->whereNull('deleted_at');
