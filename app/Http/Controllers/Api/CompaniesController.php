@@ -41,7 +41,8 @@ class CompaniesController extends Controller
         if ($company->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $company, trans('admin/companies/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $company->getErrors()));
+        return response()
+            ->json(Helper::formatStandardApiResponse('error', null, $company->getErrors()));
 
     }
 
@@ -77,10 +78,12 @@ class CompaniesController extends Controller
         $company->fill($request->all());
 
         if ($company->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $company, trans('admin/companies/message.update.success')));
+            return response()
+                ->json(Helper::formatStandardApiResponse('success', $company, trans('admin/companies/message.update.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, $company->getErrors()));
+        return response()
+            ->json(Helper::formatStandardApiResponse('error', null, $company->getErrors()));
     }
 
     /**
@@ -97,7 +100,8 @@ class CompaniesController extends Controller
        $company = Company::findOrFail($id);
             $this->authorize('delete', $company);
             $company->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
+            return response()
+                ->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
 
     }
 }
