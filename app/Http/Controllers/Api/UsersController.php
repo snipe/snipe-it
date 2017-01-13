@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\UsersTransformer;
+use App\Models\User;
 
 class UsersController extends Controller
 {
@@ -17,7 +19,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view', User::class);
+        $users = User::all();
+        return (new UsersTransformer)->transformUsers($users);
     }
 
 
@@ -43,7 +47,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('view', User::class);
+        $user = User::findOrFail($id);
+        return (new UsersTransformer)->transformUser($user);
     }
 
 
