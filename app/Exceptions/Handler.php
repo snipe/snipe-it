@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Helpers\Helper;
 
 class Handler extends ExceptionHandler
 {
@@ -44,17 +45,36 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+
+        // CSRF token mismatch error
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect()->back()->with('error', trans('general.token_expired'));
         }
 
+
+        // Handle Ajax requests that fail because the model doesn't exist
+        if ($request->ajax() || $request->wantsJson()) {
+            if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+                $className = last(explode('\\', $e->getModel()));
+                return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
+            }
+        }
+
+
         if ($this->isHttpException($e)) {
+
 
             $statusCode = $e->getStatusCode();
 
             switch ($statusCode) {
 
                 case '404':
+                    if ($request->ajax() || $request->wantsJson())
+                    {
+                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' not found'), 404);
+                    }
+
                     return response()->view('layouts/basic', [
                         'content' => view('errors/404')
                     ]);
