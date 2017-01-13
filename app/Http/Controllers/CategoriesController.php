@@ -200,7 +200,7 @@ class CategoriesController extends Controller
         // Redirect to the user management page
         return redirect()->route('categories.index')->with('error', $error);
     }
-    
+
 
     public function getDataViewAssets(Request $request, $categoryID)
     {
