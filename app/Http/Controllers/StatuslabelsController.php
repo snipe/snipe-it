@@ -37,43 +37,6 @@ class StatuslabelsController extends Controller
     }
 
 
-    /**
-     * Show a count of assets by status label
-     *
-     * @return array
-     */
-
-    public function getAssetCountByStatuslabel()
-    {
-
-        $statusLabels = Statuslabel::with('assets')->get();
-        $labels=[];
-        $points=[];
-        $colors=[];
-        foreach ($statusLabels as $statusLabel) {
-            if ($statusLabel->assets()->count() > 0) {
-                $labels[]=$statusLabel->name;
-                $points[]=$statusLabel->assets()->whereNull('assigned_to')->count();
-                if ($statusLabel->color!='') {
-                    $colors[]=$statusLabel->color;
-                }
-            }
-        }
-        $labels[]='Deployed';
-        $points[]=Asset::whereNotNull('assigned_to')->count();
-
-        $colors_array = array_merge($colors, Helper::chartColors());
-
-        $result= [
-            "labels" => $labels,
-            "datasets" => [ [
-                "data" => $points,
-                "backgroundColor" => $colors_array,
-                "hoverBackgroundColor" =>  $colors_array
-            ]]
-        ];
-        return $result;
-    }
 
 
     /**

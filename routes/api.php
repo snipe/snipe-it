@@ -112,6 +112,31 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     );
 
+
+    /*---Status Label API---*/
+    Route::group([ 'prefix' => 'statuslabels'], function () {
+
+
+        Route::get('{id}/deployable', function ($statuslabelId) {
+
+            $statuslabel = Statuslabel::find($statuslabelId);
+            if (( $statuslabel->deployable == '1' ) && ( $statuslabel->pending != '1' )
+                && ( $statuslabel->archived != '1' )
+            ) {
+                return '1';
+            } else {
+                return '0';
+            }
+
+        });
+
+        // Pie chart for dashboard
+
+        Route::get('assets', [ 'as' => 'api.statuslabels.assets.bytype', 'uses' => 'StatuslabelsController@getAssetCountByStatuslabel' ]);
+
+    });
+
+
     Route::resource('statuslabels', 'StatuslabelsController',
         ['names' =>
             [
@@ -123,6 +148,10 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 ['statuslabel' => 'statuslabel_id']
         ]
     );
+
+
+
+
 
     Route::resource('consumables', 'ConsumablesController',
         ['names' =>
@@ -188,30 +217,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
 
-    /*---Status Label API---*/
-    Route::group([ 'prefix' => 'statuslabels' ,'middleware' => ['authorize:admin']], function () {
 
-        Route::resource('statuslabels', 'StatuslabelsController', [
-            'parameters' => ['statuslabel' => 'statuslabel_id']
-        ]);
-
-        Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
-
-            $statuslabel = Statuslabel::find($statuslabelId);
-            if (( $statuslabel->deployable == '1' ) && ( $statuslabel->pending != '1' )
-                && ( $statuslabel->archived != '1' )
-            ) {
-                return '1';
-            } else {
-                return '0';
-            }
-
-        });
-
-        Route::get('list', [ 'as' => 'api.statuslabels.list', 'uses' => 'StatuslabelsController@getDatatable' ]);
-        Route::get('assets', [ 'as' => 'api.statuslabels.assets', 'uses' => 'StatuslabelsController@getAssetCountByStatuslabel' ]);
-
-    });
 
     /*---Accessories API---*/
     Route::group([ 'prefix' => 'accessories' ], function () {

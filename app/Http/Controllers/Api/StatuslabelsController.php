@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Statuslabel;
+use App\Models\Asset;
 
 class StatuslabelsController extends Controller
 {
@@ -100,4 +101,47 @@ class StatuslabelsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/statuslabels/message.delete.success')));
 
     }
+
+
+
+     /**
+     * Show a count of assets by status label for pie chart
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Http\Response
+     */
+
+    public function getAssetCountByStatuslabel()
+    {
+
+        $statusLabels = Statuslabel::with('assets')->get();
+        $labels=[];
+        $points=[];
+        $colors=[];
+        foreach ($statusLabels as $statusLabel) {
+            if ($statusLabel->assets()->count() > 0) {
+                $labels[]=$statusLabel->name;
+                $points[]=$statusLabel->assets()->whereNull('assigned_to')->count();
+                if ($statusLabel->color!='') {
+                    $colors[]=$statusLabel->color;
+                }
+            }
+        }
+        $labels[]='Deployed';
+        $points[]=Asset::whereNotNull('assigned_to')->count();
+
+        $colors_array = array_merge($colors, Helper::chartColors());
+
+        $result= [
+            "labels" => $labels,
+            "datasets" => [ [
+                "data" => $points,
+                "backgroundColor" => $colors_array,
+                "hoverBackgroundColor" =>  $colors_array
+            ]]
+        ];
+        return $result;
+    }
+
 }
