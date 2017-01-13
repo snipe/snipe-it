@@ -47,7 +47,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     );
 
-    Route::resource('location', 'LocationsController',
+    Route::resource('locations', 'LocationsController',
         ['names' =>
             [
                 'index' => 'api.locations.index',

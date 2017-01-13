@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Location;
+use App\Http\Transformers\DatatablesTransformer;
 
 class LocationsController extends Controller
 {
@@ -20,7 +21,7 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $locations = Location::all();
-        return $locations;
+        return (new DatatablesTransformer)->transformDatatables($locations);
     }
 
 

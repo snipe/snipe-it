@@ -21,7 +21,11 @@ class LocationsTransformer
         if ($location) {
             $locations_array[] = [
                 'id' => e($location->id),
-                'name' => e($location->name)
+                'name' => e($location->name),
+                'address' => e($location->address),
+                'city' => e($location->city),
+                'state' => e($location->state),
+                'country' => e($location->country),
             ];
             return $locations_array;
         }

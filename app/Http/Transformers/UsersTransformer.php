@@ -13,15 +13,19 @@ class UsersTransformer
         foreach ($users as $user) {
             $users_array[] = self::transformUser($user);
         }
-        return $users_array;
+        return (new DatatablesTransformer)->transformDatatables($users_array);
     }
 
     public function transformUser(User $user)
     {
             $user_array[] = [
                 'id' => e($user->id),
-                'first_name' => e($user->first_name),
-                'last_name' => e($user->last_name),
+                'name' => e($user->first_name).' '.($user->last_name),
+                'firstname' => e($user->first_name),
+                'lastname' => e($user->last_name),
+                'username' => e($user->username),
+                'jobtitle' => e($user->jobtitle),
+                'email' => e($user->email),
                 'location' => (new LocationsTransformer)->transformLocation($user->userloc),
                 'permissions' => $user->decodePermissions(),
                 'created_at' => $user->created_at,
@@ -29,6 +33,10 @@ class UsersTransformer
             ];
 
         return $user_array;
+    }
+
+    public function transformUsersDatatable($users) {
+        return (new DatatablesTransformer)->transformDatatables($users);
     }
 
 
