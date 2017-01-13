@@ -18,6 +18,126 @@ use App\Models\Statuslabel;
 
 Route::group(['prefix' => 'v1'], function () {
 
+    Route::resource('companies', '\App\Http\Controllers\Api\CompaniesController',
+        [
+            'parameters' =>
+                ['company' => 'company_id']
+            ]
+
+    );
+
+
+    Route::resource('components', '\App\Http\Controllers\Api\ComponentsController',
+        ['names' =>
+            [
+                'index' => 'api.components.index',
+                'create' => 'api.components.create',
+                'destroy' => 'api.components.destroy'
+            ],
+            'parameters' =>
+                ['component' => 'component_id']
+        ]
+    );
+
+
+    Route::resource('suppliers', '\App\Http\Controllers\Api\SuppliersController',
+        ['names' =>
+            [
+                'index' => 'api.suppliers.index',
+                'create' => 'api.suppliers.create',
+                'destroy' => 'api.suppliers.destroy'
+            ],
+            'parameters' =>
+                ['supplier' => 'supplier_id']
+        ]
+    );
+
+    Route::resource('users', '\App\Http\Controllers\Api\UsersController',
+        ['names' =>
+            [
+                'index' => 'api.users.index',
+                'create' => 'api.users.create',
+                'destroy' => 'api.users.destroy'
+            ],
+            'parameters' =>
+                ['user' => 'user_id']
+        ]
+    );
+
+    Route::resource('settings', '\App\Http\Controllers\Api\SettingsController',
+        ['names' =>
+            [
+                'index' => 'api.settings.index',
+                'create' => 'api.settings.create'
+            ],
+            'parameters' =>
+                ['setting' => 'setting_id']
+        ]
+    );
+
+    Route::resource('statuslabels', '\App\Http\Controllers\Api\StatuslabelsController',
+        ['names' =>
+            [
+                'index' => 'api.statuslabels.index',
+                'create' => 'api.statuslabels.create',
+                'destroy' => 'api.statuslabels.destroy'
+            ],
+            'parameters' =>
+                ['statuslabel' => 'statuslabel_id']
+        ]
+    );
+
+    Route::resource('consumables', '\App\Http\Controllers\Api\ConsumablesController',
+        ['names' =>
+            [
+                'index' => 'api.consumables.index',
+                'create' => 'api.consumables.create',
+                'destroy' => 'api.consumables.destroy'
+            ],
+            'parameters' =>
+                ['consumable' => 'consumable_id']
+        ]
+    );
+
+    Route::resource('manufacturers', '\App\Http\Controllers\Api\ManufacturersController',
+        ['names' =>
+            [
+                'index' => 'api.manufacturers.index',
+                'create' => 'api.manufacturers.create',
+                'destroy' => 'api.manufacturers.destroy'
+            ],
+            'parameters' =>
+                ['manufacturer' => 'manufacturer_id']
+        ]
+    );
+
+
+    Route::resource('accessories', '\App\Http\Controllers\Api\AccessoriesController',
+        ['names' =>
+            [
+                'index' => 'api.accessories.index',
+                'create' => 'api.accessories.create',
+                'destroy' => 'api.accessories.destroy'
+            ],
+            'parameters' =>
+                ['accessory' => 'accessory_id']
+        ]
+    );
+
+    Route::resource('locations', '\App\Http\Controllers\Api\LocationsController',
+        ['names' =>
+            [
+                'index' => 'api.locations.index',
+                'create' => 'api.locations.create',
+                'destroy' => 'api.locations.destroy'
+            ],
+            'parameters' =>
+                ['locations' => 'location_id']
+        ]
+    );
+
+
+
     /*---Hardware API---*/
     Route::post('hardware/import', [ 'as' => 'api.assets.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
 
