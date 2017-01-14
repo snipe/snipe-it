@@ -254,65 +254,6 @@ class LocationsController extends Controller
 
 
     /**
-    * Returns the JSON response to populate the bootstrap tables on the locationa view.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::getIndex() method that returns JSON for location index
-    * @since [v1.0]
-    * @return array
-     */
-    public function getDatatable()
-    {
-        $locations = Location::select([
-            'locations.id',
-            'locations.name',
-            'locations.address',
-            'locations.address2',
-            'locations.city',
-            'locations.state',
-            'locations.zip',
-            'locations.country',
-            'locations.parent_id',
-            'locations.currency'
-        ])->with('assets');
-
-        if (Input::has('search')) {
-            $locations = $locations->TextSearch(e(Input::get('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-
-        switch (Input::get('sort')) {
-            case 'parent':
-                $locations = $locations->OrderParent($order);
-                break;
-            default:
-                $allowed_columns = ['id','name','address','city','state','country','currency','zip'];
-
-                $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
-                $locations = $locations->orderBy($sort, $order);
-                break;
-        }
-
-        $locationsCount = $locations->count();
-        $locations = $locations->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($locations as $location) {
-            $rows[] = $location->present()->forDataTable();
-        }
-        $data = array('total' => $locationsCount, 'rows' => $rows);
-
-        return $data;
-
-    }
-
-
-    /**
      * Returns a JSON response that contains the users association with the
      * selected location, to be used by the location detail view.
      *
