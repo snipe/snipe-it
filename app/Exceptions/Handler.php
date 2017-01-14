@@ -71,7 +71,6 @@ class Handler extends ExceptionHandler
                        break;
                     case '405':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
-                        break;
                     default:
                         return response()->json(Helper::formatStandardApiResponse('error', null, $e->getStatusCode()), 405);
 

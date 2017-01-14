@@ -31,8 +31,8 @@ class Category extends SnipeModel
     public $rules = array(
         'user_id' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|unique_undeleted',
-        'require_acceptance'   => 'required|boolean',
-        'use_default_eula'   => 'required|boolean',
+        'require_acceptance'   => 'boolean',
+        'use_default_eula'   => 'boolean',
         'category_type'   => 'required|in:asset,accessory,consumable,component',
     );
 

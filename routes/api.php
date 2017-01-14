@@ -19,9 +19,6 @@ use App\Models\Statuslabel;
 
 Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     /*---Hardware API---*/
-    Route::post('hardware/import', [ 'as' => 'api.assets.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
-    Route::delete('hardware/import/{filename}', ['as' => 'api.assets.deleteImportFile', 'uses' => '\App\Http\Controllers\Api\AssetsController@deleteImportFile' ]);
-    Route::get('hardware/import/files', ['as' => 'api.assets.importFileList', 'uses' => '\App\Http\Controllers\Api\AssetsController@getApiFileList']);
 
     Route::resource('users', 'UsersController',
         ['names' =>
@@ -37,7 +34,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     );
 
-
     Route::resource('licenses', 'LicensesController',
         ['names' =>
             [
@@ -49,6 +45,20 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ],
             'except' => ['edit'],
             'parameters' => ['license' => 'license_id']
+        ]
+    );
+    Route::post('imports/process/{import_id}', [ 'as' => 'api.imports.importFile', 'uses'=> 'ImportController@process']);
+
+    Route::resource('imports', 'ImportController',
+        ['names' =>
+            [
+                'index' => 'api.imports.index',
+                'show' => 'api.imports.show',
+                'update' => 'api.imports.update',
+                'store' => 'api.imports.store',
+                'destroy' => 'api.imports.destroy'
+            ],
+            'except' => ['edit']
         ]
     );
 
@@ -250,7 +260,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
     /*---Hardware API---*/
-    Route::post('hardware/import', [ 'as' => 'api.assets.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
 
     Route::match(['DELETE'], 'hardware/{id}', ['uses' => 'AssetsController@destroy','as' => 'api.assets.destroy']);
 

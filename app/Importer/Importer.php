@@ -60,15 +60,9 @@ abstract class Importer
     /**
      * ObjectImporter constructor.
      * @param string $filename
-     * @param callable $logCallback
-     * @param callable $progressCallback
-     * @param callable $errorCallback
-     * @param bool $testRun
-     * @param int $user_id
-     * @param bool $updating
-     * @param null $usernameFormat
      */
-    function __construct(string $filename) {
+    public function __construct(string $filename)
+    {
 
         $this->filename = $filename;
         $this->csv = Reader::createFromPath($filename);
