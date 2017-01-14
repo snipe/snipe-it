@@ -680,38 +680,8 @@ class AssetsController extends Controller
     public function getImportUpload()
     {
         $this->authorize('create', Asset::class);
-        $path = config('app.private_uploads').'/imports/assets';
-        $files = array();
-
-        if (!Company::isCurrentUserAuthorized()) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        }
-
-        // Check if the uploads directory exists.  If not, try to create it.
-        if (!file_exists($path)) {
-            mkdir($path, 0755, true);
-        }
-        if ($handle = opendir($path)) {
-
-            /* This is the correct way to loop over the directory. */
-            while (false !== ($entry = readdir($handle))) {
-                clearstatcache();
-                if (substr(strrchr($entry, '.'), 1)=='csv') {
-                    $files[] = array(
-                            'filename' => $entry,
-                            'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
-                            'modified' => filemtime($path.'/'.$entry)
-                        );
-                }
-
-            }
-            closedir($handle);
-            $files = array_reverse($files);
-        }
-
-        return View::make('hardware/import')->with('files', $files);
+        return View::make('hardware/import');
     }
-
 
     /**
      * Upload the import file via AJAX

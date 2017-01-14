@@ -53,6 +53,7 @@ elixir(function(mix) {
         bowerPath + '/iCheck/icheck.js',
         bowerPath + '/select2/dist/js/select2.full.js',
         bowerPath + '/ekko-lightbox/dist/ekko-lightbox.js',
+        bowerPath + '/vue-upload-component/dist/vue-upload-component.js',
         'snipeit.js'
 
     ],'public/assets/js');

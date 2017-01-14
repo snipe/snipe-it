@@ -2,16 +2,33 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Location;
+use App\Models\Setting;
 use App\Models\User;
+use Artisan;
+use Auth;
+use Carbon\Carbon;
+use Config;
+use DB;
+use Gate;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Transformers\AssetsTransformer;
+use Input;
+use Lang;
+use Log;
+use Mail;
+use Paginator;
+use Response;
+use Slack;
+use Str;
+use TCPDF;
+use Validator;
+use View;
 
 /**
  * This class controls all actions related to assets for
@@ -332,6 +349,47 @@ class AssetsController extends Controller
 
     }
 
+    public function getApiFileList()
+    {
+        $this->authorize('create', Asset::class);
+        $path = config('app.private_uploads').'/imports/assets';
+        $files = array();
 
+        if (!Company::isCurrentUserAuthorized()) {
+            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        // Check if the uploads directory exists.  If not, try to create it.
+        if (!file_exists($path)) {
+            mkdir($path, 0755, true);
+        }
+        if ($handle = opendir($path)) {
+            /* This is the correct way to loop over the directory. */
+            while (false !== ($entry = readdir($handle))) {
+                clearstatcache();
+                if (substr(strrchr($entry, '.'), 1)=='csv') {
+                    $files[] = array(
+                            'filename' => $entry,
+                            'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
+                            'modified' => Carbon::createFromTimestamp(filemtime($path.'/'.$entry))->diffForHumans()
+                        );
+                }
+
+            }
+            closedir($handle);
+            $files = array_reverse($files);
+        }
+        return $files;
+    }
+
+    public function deleteImportFile($filename)
+    {
+        $this->authorize('create', Asset::class);
+        if (unlink(config('app.private_uploads').'/imports/assets/'.$filename)) {
+            return redirect()->back()->with('success', trans('admin/hardware/message.import.file_delete_success'));
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('message.import.file_delete_success')));
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/hardware/message.import.file_delete_error')), 500);
+    }
 
 }

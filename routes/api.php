@@ -18,6 +18,10 @@ use App\Models\Statuslabel;
 
 
 Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
+    /*---Hardware API---*/
+    Route::post('hardware/import', [ 'as' => 'api.assets.importFile', 'uses'=> 'AssetsController@postAPIImportUpload']);
+    Route::delete('hardware/import/{filename}', ['as' => 'api.assets.deleteImportFile', 'uses' => '\App\Http\Controllers\Api\AssetsController@deleteImportFile' ]);
+    Route::get('hardware/import/files', ['as' => 'api.assets.importFileList', 'uses' => '\App\Http\Controllers\Api\AssetsController@getApiFileList']);
 
     Route::resource('users', 'UsersController',
         ['names' =>
