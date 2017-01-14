@@ -60,7 +60,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
             'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
-            'model.category', 'model.manufacturer', 'model.fieldset');
+            'model.category', 'model.manufacturer', 'model.fieldset','assigneduser');
 
         if ($request->has('search')) {
             $assets->TextSearch($request->input('search'));
