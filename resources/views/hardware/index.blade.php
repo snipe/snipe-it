@@ -70,7 +70,7 @@
                 <thead>
                   <tr>
                     @if (Input::get('status')!='Deleted')
-                    <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+                          <th data-field="checkbox" data-checkbox="true"></th>
                     @endif
                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                     <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
