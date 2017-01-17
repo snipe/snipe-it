@@ -361,7 +361,7 @@ class ReportsController extends Controller
                 $item_type = $activity->itemType();
 
             } else {
-                $activity_item = "unkonwn";
+                $activity_item = "unknown (deleted)";
                 $item_type = "null";
             }
             
