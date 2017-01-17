@@ -510,10 +510,7 @@ class UsersController extends Controller
             if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
                 unset($user_raw_array[$key]);
             }
-
-            if (!Auth::user()->isSuperUser()) {
-                return redirect()->route('users')->with('error', trans('admin/users/message.insufficient_permissions'));
-            }
+            
 
             if (!config('app.lock_passwords')) {
 
