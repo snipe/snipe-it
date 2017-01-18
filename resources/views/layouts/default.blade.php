@@ -594,7 +594,7 @@
 
 
           <!-- Content -->
-            <div id="app">
+            <div id="{!! (Request::is('*api*') ? 'app' : 'webui') !!}">
           @yield('content')
             </div>
 
