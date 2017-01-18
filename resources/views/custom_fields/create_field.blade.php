@@ -19,9 +19,10 @@
 <div class="row">
   <div class="col-md-9">
     <!-- Horizontal Form -->
+      {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
     <div class="box box-default">
       <div class="box-body">
-        {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
+
           <!-- Name -->
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-4 control-label">
@@ -96,13 +97,14 @@
             </div>
           </div>
 
-        {{ Form::close() }}
+
 
       </div> <!-- /.box-body-->
       <div class="box-footer text-right">
         <button type="submit" class="btn btn-success"> {{ trans('general.save') }}</button>
       </div>
     </div> <!--.box.box-default-->
+      {{ Form::close() }}
   </div> <!--/.col-md-9-->
   <div class="col-md-3">
     <h4>About Custom Fields</h4>
