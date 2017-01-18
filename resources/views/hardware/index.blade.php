@@ -104,10 +104,10 @@
                     </th>
 
                     @endforeach
-                    <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
+                    <th data-sortable="true" data-field="created_at" data-formatter="createdAtFormatter" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
                     <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{ trans('admin/hardware/table.change') }}</th>
 
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
+                    <th data-switchable="false" data-searchable="false" data-formatter="actionsFormatter" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
                   </tr>
                 </thead>
               </table>
@@ -144,5 +144,21 @@
             checkForChecked();
         });
     });
+
+    function actionsFormatter(value, row) {
+        return '<nobr><a href="{{ url('/') }}/hardware/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
+            + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
+            + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
+            + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
+            + '<i class="fa fa-trash"></i></a></nobr>';
+
+    }
+
+    function createdAtFormatter(value, row) {
+        if ((value) && (value.date)) {
+            return value.date;
+        }
+    }
+
 </script>
 @stop
