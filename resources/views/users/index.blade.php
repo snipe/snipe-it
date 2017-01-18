@@ -60,6 +60,7 @@
               data-toolbar="#toolbar"
               class="table table-striped snipe-table"
               id="table"
+              data-maintain-selected="true"
               data-toggle="table"
               data-url="{{ route('api.users.index', array(''=>e(Input::get('status')))) }}"
               data-cookie="true"
@@ -67,23 +68,21 @@
               data-cookie-id-table="userTableDisplay-{{ config('version.hash_version') }}">
                <thead>
                  <tr>
-                   <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox">
-                       @if (Input::get('status')!='deleted')
-                           <div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div>
-                       @endif
-                   </th>
+                     @if (Input::get('status')!='deleted')
+                        <th data-checkbox="true" data-field="checkbox" data-formatter="checkboxFormatter"></th>
+                     @endif
                    <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                    <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
-                   <th data-sortable="true" data-field="name">{{ trans('admin/users/table.name') }}</th>
+                   <th data-sortable="true" data-field="name" data-formatter="userFormatter">{{ trans('admin/users/table.name') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="jobtitle" data-visible="false">{{ trans('admin/users/table.title') }}</th>
-                   <th data-sortable="true" data-field="email">
+                   <th data-sortable="true" data-field="email" data-formatter="emailFormatter">
                        <span class="hidden-md hidden-lg">{{ trans('admin/users/table.email') }}</span>
                        <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
                    <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
                    <th data-searchable="true" data-sortable="true" data-field="manager">{{ trans('admin/users/table.manager') }}</th>
-                   <th data-sortable="true" data-field="location">{{ trans('admin/users/table.location') }}</th>
+                   <th data-sortable="true" data-field="location" data-formatter="locationFormatter">{{ trans('admin/users/table.location') }}</th>
                    <th data-sortable="false" data-field="assets">
                        <span class="hidden-md hidden-lg">Assets</span>
                        <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>
@@ -102,15 +101,17 @@
                    </th>
                    <th data-sortable="false" data-field="groups">{{ trans('general.groups') }}</th>
                    <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
-                   <th data-sortable="true" data-field="two_factor_enrolled" data-visible="false">{{ trans('admin/users/general.two_factor_enrolled') }}</th>
-                   <th data-sortable="true" data-field="two_factor_optin" data-visible="false">{{ trans('admin/users/general.two_factor_active') }}</th>
+                   <th data-sortable="true" data-field="two_factor_enrolled" data-visible="false" data-formatter="trueFalseFormatter" >{{ trans('admin/users/general.two_factor_enrolled') }}</th>
+                   <th data-sortable="true" data-field="two_factor_optin" data-formatter="trueFalseFormatter" data-visible="false">{{ trans('admin/users/general.two_factor_active') }}</th>
 
-                   <th data-sortable="true" data-field="activated">{{ trans('general.activated') }}</th>
-                   <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
-                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
+                   <th data-sortable="true" data-field="activated" data-formatter="trueFalseFormatter">{{ trans('general.activated') }}</th>
+                   <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false" data-formatter="createdAtFormatter">{{ trans('general.created_at') }}</th>
+                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-formatter="actionsFormatter" data-field="actions" >{{ trans('table.actions') }}</th>
                  </tr>
                </thead>
              </table>
+            <div id="id_collector">
+            </div>
           {{ Form::close() }}
         </div><!-- /.box-body -->
       </div><!-- /.box -->
@@ -123,29 +124,87 @@
 @include ('partials.bootstrap-table', ['exportFile' => 'users-export', 'search' => true])
 
 <script>
+    var checkedRows = 0;
 
-	$(function() {
+    $('.snipe-table').on('check.bs.table', function (e, row) {
+        checkedRows++;
+        $('#bulkEdit').removeAttr('disabled');
+        atLeastOneChecked(checkedRows);
+        addCheckedInput(row);
+    });
 
-		function checkForChecked() {
+    $('.snipe-table').on('uncheck.bs.table', function (e, row) {
+        checkedRows--;
+        atLeastOneChecked(checkedRows);
 
-	        var check_checked = $('input.one_required:checked').length;
+    });
 
-	        if (check_checked > 0) {
-	            $('#bulkEdit').removeAttr('disabled');
-	        }
-	        else {
-	            $('#bulkEdit').attr('disabled', 'disabled');
-	        }
-	    }
+    function atLeastOneChecked(checkedRows) {
+        if (checkedRows > 0) {
+            $('#bulkEdit').removeAttr('disabled');
+        }
+        else {
+            $('#bulkEdit').attr('disabled', 'disabled');
+        }
+    }
 
-	    $('table').on('change','input.one_required',checkForChecked);
+    function addCheckedInput(value, row) {
+        return '<input type="hidden" name="bulk_ids[' + value.id + ']" value="' + value.id + '" />';
+    }
 
-	    $("#checkAll").change(function () {
-			$("input:checkbox").prop('checked', $(this).prop("checked"));
-			checkForChecked();
-		});
+    function checkboxFormatter(value, row) {
+        if (value) {
+            return '<input type="hidden" name="foo[]" value="bar">';
+        }
+    }
 
-	});
+    function locationFormatter(value, row) {
+        if ((value) && (value[0].name)) {
+            return '<a href="{{ url('/') }}/locations/' + value[0].id + '"> ' + value[0].name + '</a>';
+        }
+    }
+
+    function emailFormatter(value, row) {
+        if (value) {
+            return '<a href="mailto:' + value + '"> ' + value + '</a>';
+        }
+    }
+
+    function userFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/users/' + row.id + '"> ' + value + '</a>';
+        }
+    }
+
+    function companyFormatter(value, row) {
+        if ((value) && (value[0].name)) {
+            return '<a href="{{ url('/') }}/companies/' + value[0].id + '"> ' + value[0].name + '</a>';
+        }
+    }
+
+    function createdAtFormatter(value, row) {
+        if ((value) && (value.date)) {
+            return value.date;
+        }
+    }
+
+    function trueFalseFormatter(value, row) {
+        if ((value) && ((value == 'true') || (value == '1'))) {
+            return '<i class="fa fa-check"></i>';
+        } else {
+            return '<i class="fa fa-times"></i>';
+        }
+    }
+
+    function actionsFormatter(value, row) {
+        return '<nobr><a href="{{ url('/') }}/users/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
+            + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
+            + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
+            + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
+            + '<i class="fa fa-trash"></i></a></nobr>';
+
+    }
+
 
 
 </script>
