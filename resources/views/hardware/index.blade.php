@@ -43,7 +43,8 @@
         {{ Form::open([
           'method' => 'POST',
           'route' => ['hardware/bulkedit'],
-          'class' => 'form-inline' ]) }}
+          'class' => 'form-inline',
+           'id' => 'bulkEditForm']) }}
           <div class="row">
             <div class="col-md-12">
               @if (Input::get('status')!='Deleted')
@@ -70,7 +71,7 @@
                 <thead>
                   <tr>
                     @if (Input::get('status')!='Deleted')
-                    <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+                          <th data-checkbox="true" data-field="checkbox"></th>
                     @endif
                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                     <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
@@ -128,22 +129,31 @@
 ])
 
 <script>
-    $(function() {
-        function checkForChecked() {
-            var check_checked = $('input.one_required:checked').length;
-            if (check_checked > 0) {
-                $('#bulkEdit').removeAttr('disabled');
-            }
-            else {
-                $('#bulkEdit').attr('disabled', 'disabled');
-            }
-        }
-        $('#table').on('change','input.one_required',checkForChecked);
-        $("#checkAll").change(function () {
-            $("input:checkbox").prop('checked', $(this).prop("checked"));
-            checkForChecked();
-        });
+
+    var checkedRows = 0;
+
+    $('.snipe-table').on('check.bs.table', function (e, row) {
+        $(this).val(row.id);
+        checkedRows++;
+        $('#bulkEdit').removeAttr('disabled');
+        atLeastOneChecked(checkedRows);
     });
+
+    $('.snipe-table').on('uncheck.bs.table', function (e, row) {
+        checkedRows--;
+        atLeastOneChecked(checkedRows);
+
+    });
+
+
+    function atLeastOneChecked(checkedRows) {
+        if (checkedRows > 0) {
+            $('#bulkEdit').removeAttr('disabled');
+        }
+        else {
+            $('#bulkEdit').attr('disabled', 'disabled');
+        }
+    }
 
     function actionsFormatter(value, row) {
         return '<nobr><a href="{{ url('/') }}/hardware/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
@@ -159,6 +169,20 @@
             return value.date;
         }
     }
+
+    $(function () {
+        $('#bulkEdit').click(function () {
+            var selectedIds = $('.snipe-table').bootstrapTable('getSelections');
+
+            $.each(selectedIds, function(key,value) {
+                $( "#bulkEditForm" ).append($('<input type="hidden" name="edit_asset[' + value.id + ']" value="' + value.id + '">' ));
+                //alert(value.id);
+            });
+
+            //event.preventDefault();
+            //return false;
+        });
+    });
 
 </script>
 @stop

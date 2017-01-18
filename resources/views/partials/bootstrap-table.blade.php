@@ -11,7 +11,6 @@ $('.snipe-table').bootstrapTable({
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        //selectItemName: 'bulk_ids[]',
         @if (isset($search))
         search: true,
         @endif

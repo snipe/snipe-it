@@ -42,7 +42,8 @@
           {{ Form::open([
                'method' => 'POST',
                'route' => ['users/bulkedit'],
-               'class' => 'form-inline' ]) }}
+               'class' => 'form-inline',
+                'id' => 'bulkEditForm']) }}
 
             @if (Input::get('status')!='deleted')
               @can('delete', \App\Models\User::class)
@@ -69,7 +70,7 @@
                <thead>
                  <tr>
                      @if (Input::get('status')!='deleted')
-                        <th data-checkbox="true" data-field="checkbox" data-formatter="checkboxFormatter"></th>
+                        <th data-checkbox="true" data-field="checkbox"></th>
                      @endif
                    <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                    <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
@@ -110,8 +111,7 @@
                  </tr>
                </thead>
              </table>
-            <div id="id_collector">
-            </div>
+
           {{ Form::close() }}
         </div><!-- /.box-body -->
       </div><!-- /.box -->
@@ -124,13 +124,14 @@
 @include ('partials.bootstrap-table', ['exportFile' => 'users-export', 'search' => true])
 
 <script>
+
     var checkedRows = 0;
 
     $('.snipe-table').on('check.bs.table', function (e, row) {
+        $(this).val(row.id);
         checkedRows++;
         $('#bulkEdit').removeAttr('disabled');
         atLeastOneChecked(checkedRows);
-        addCheckedInput(row);
     });
 
     $('.snipe-table').on('uncheck.bs.table', function (e, row) {
@@ -148,15 +149,7 @@
         }
     }
 
-    function addCheckedInput(value, row) {
-        return '<input type="hidden" name="bulk_ids[' + value.id + ']" value="' + value.id + '" />';
-    }
 
-    function checkboxFormatter(value, row) {
-        if (value) {
-            return '<input type="hidden" name="foo[]" value="bar">';
-        }
-    }
 
     function locationFormatter(value, row) {
         if ((value) && (value[0].name)) {
@@ -204,6 +197,20 @@
             + '<i class="fa fa-trash"></i></a></nobr>';
 
     }
+
+    $(function () {
+        $('#bulkEdit').click(function () {
+            var selectedIds = $('.snipe-table').bootstrapTable('getSelections');
+
+            $.each(selectedIds, function(key,value) {
+                $( "#bulkEditForm" ).append($('<input type="hidden" name="edit_user[' + value.id + ']" value="' + value.id + '">' ));
+                //alert(value.id);
+            });
+
+            //event.preventDefault();
+            //return false;
+        });
+    });
 
 
 
