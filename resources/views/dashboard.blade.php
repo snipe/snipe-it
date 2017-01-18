@@ -147,15 +147,34 @@
     var pieChart = new Chart(pieChartCanvas);
     var ctx = document.getElementById("statusPieChart");
 
-    $.get('{{  route('api.statuslabels.assets') }}', function (data) {
-        var myPieChart = new Chart(ctx,{
 
-            type: 'doughnut',
-            data: data,
-            options: pieOptions
-        });
-       // document.getElementById('my-doughnut-legend').innerHTML = myPieChart.generateLegend();
+
+    $.ajax({
+        type: 'GET',
+        url: '{{  route('api.statuslabels.assets.bytype') }}',
+        headers: {
+            "X-Requested-With": 'XMLHttpRequest',
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        },
+
+        dataType: 'json',
+        success: function (data) {
+            var myPieChart = new Chart(ctx,{
+
+                type: 'doughnut',
+                data: data,
+                options: pieOptions
+            });
+        },
+        error: function (data) {
+            // AssetRequest Validator will flash all errors to session, this just refreshes to see them.
+            window.location.reload(true);
+            // console.log(JSON.stringify(data));
+            // console.log('error submitting');
+        }
     });
+
+
 </script>
 
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>

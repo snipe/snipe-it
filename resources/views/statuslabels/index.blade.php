@@ -23,7 +23,7 @@
           name="statuslabels"
           id="table"
           class="snipe-table"
-          data-url="{{ route('api.statuslabels.list') }}"
+          data-url="{{ route('api.statuslabels.index') }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="statuslabelsTable-{{ config('version.hash_version') }}">

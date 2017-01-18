@@ -21,7 +21,7 @@
           name="locations"
           class="table table-striped snipe-table"
           id="table"
-          data-url="{{ route('api.locations.list') }}"
+          data-url="{{ route('api.locations.index') }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="locationsTable-{{ config('version.hash_version') }}">
@@ -44,7 +44,7 @@
                   </th>
                 <th data-searchable="true" data-sortable="true" data-field="country">
                 {{ trans('admin/locations/table.country') }}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+                <th data-switchable="false" data-formatter="actionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>
@@ -58,4 +58,15 @@
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'locations-export', 'search' => true])
+
+  <script>
+      function actionsFormatter(value, row) {
+          return '<a href="{{ url('/') }}/locations/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
+          + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
+          + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
+          + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
+          + '<i class="fa fa-trash"></i></a>';
+
+      }
+  </script>
 @stop

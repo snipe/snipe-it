@@ -23,7 +23,7 @@
       name="suppliers"
       id="table"
       class="table table-striped snipe-table"
-      data-url="{{ route('api.suppliers.list') }}"
+      data-url="{{ route('api.suppliers.index') }}"
       data-cookie="true"
       data-click-to-select="true"
       data-cookie-id-table="suppliersTable-{{ config('version.hash_version') }}">

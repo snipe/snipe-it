@@ -26,7 +26,7 @@ class Accessory extends SnipeModel
     public $rules = array(
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
-        'category_id'       => 'required|integer',
+        'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0',
         'purchase_cost'     => 'numeric|nullable',
@@ -56,6 +56,7 @@ class Accessory extends SnipeModel
         'order_number',
         'purchase_cost',
         'purchase_date',
+        'model_number',
         'qty',
         'requestable'
     ];
@@ -133,10 +134,10 @@ class Accessory extends SnipeModel
     /**
     * Query builder scope to search on text
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $search      Search term
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeTextSearch($query, $search)
     {
@@ -171,10 +172,10 @@ class Accessory extends SnipeModel
     /**
     * Query builder scope to order on company
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCompany($query, $order)
     {
@@ -185,10 +186,10 @@ class Accessory extends SnipeModel
     /**
     * Query builder scope to order on category
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCategory($query, $order)
     {
@@ -199,10 +200,10 @@ class Accessory extends SnipeModel
     /**
     * Query builder scope to order on location
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderLocation($query, $order)
     {
@@ -213,10 +214,10 @@ class Accessory extends SnipeModel
     /**
     * Query builder scope to order on manufacturer
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderManufacturer($query, $order)
     {

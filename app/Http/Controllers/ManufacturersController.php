@@ -172,47 +172,7 @@ class ManufacturersController extends Controller
         return redirect()->route('manufacturers')->with('error', $error);
     }
 
-    /**
-     * Generates the JSON used to display the manufacturer listings.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ManufacturersController::getIndex()
-     * @since [v1.0]
-     * @param Request $request
-     * @return String JSON
-     */
-    public function getDatatable(Request $request)
-    {
-        $manufacturers = Manufacturer::select(array('id','name'))->whereNull('deleted_at');
-
-        if ($request->has('search')) {
-            $manufacturers = $manufacturers->TextSearch(e($request->input('search')));
-        }
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name'];
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-
-        $manufacturers->orderBy($sort, $order);
-
-        $manufacturersCount = $manufacturers->count();
-        $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($manufacturers as $manufacturer) {
-            $rows[] = $manufacturer->present()->forDataTable();
-        }
-
-        $data = array('total' => $manufacturersCount, 'rows' => $rows);
-
-        return $data;
-
-    }
-
-
+   
     /**
      * Generates the JSON used to display the manufacturer detail.
      * This JSON returns data on all of the assets with the specified

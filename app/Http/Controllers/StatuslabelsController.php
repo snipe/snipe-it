@@ -37,43 +37,6 @@ class StatuslabelsController extends Controller
     }
 
 
-    /**
-     * Show a count of assets by status label
-     *
-     * @return array
-     */
-
-    public function getAssetCountByStatuslabel()
-    {
-
-        $statusLabels = Statuslabel::with('assets')->get();
-        $labels=[];
-        $points=[];
-        $colors=[];
-        foreach ($statusLabels as $statusLabel) {
-            if ($statusLabel->assets()->count() > 0) {
-                $labels[]=$statusLabel->name;
-                $points[]=$statusLabel->assets()->whereNull('assigned_to')->count();
-                if ($statusLabel->color!='') {
-                    $colors[]=$statusLabel->color;
-                }
-            }
-        }
-        $labels[]='Deployed';
-        $points[]=Asset::whereNotNull('assigned_to')->count();
-
-        $colors_array = array_merge($colors, Helper::chartColors());
-
-        $result= [
-            "labels" => $labels,
-            "datasets" => [ [
-                "data" => $points,
-                "backgroundColor" => $colors_array,
-                "hoverBackgroundColor" =>  $colors_array
-            ]]
-        ];
-        return $result;
-    }
 
 
     /**
@@ -242,72 +205,4 @@ class StatuslabelsController extends Controller
         return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.assoc_assets'));
     }
 
-
-    public function getDatatable()
-    {
-        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived','color','show_in_nav'))
-        ->whereNull('deleted_at');
-
-        if (Input::has('search')) {
-            $statuslabels = $statuslabels->TextSearch(e(Input::get('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
-
-        $statuslabels->orderBy($sort, $order);
-
-        $statuslabelsCount = $statuslabels->count();
-        $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($statuslabels as $statuslabel) {
-
-            if ($statuslabel->deployable == 1) {
-                $label_type = trans('admin/statuslabels/table.deployable');
-            } elseif ($statuslabel->pending == 1) {
-                $label_type = trans('admin/statuslabels/table.pending');
-            } elseif ($statuslabel->archived == 1) {
-                $label_type = trans('admin/statuslabels/table.archived');
-            } else {
-                $label_type = trans('admin/statuslabels/table.undeployable');
-            }
-            $actions = '<nobr>';
-            $actions .= Helper::generateDatatableButton('edit', route('statuslabels.edit', $statuslabel->id));
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('statuslabels.destroy', $statuslabel->id),
-                true, /*enabled*/
-                trans('admin/statuslabels/message.delete.confirm'),
-                $statuslabel->name
-            );
-            $actions .= '</nobr>';
-
-            if ($statuslabel->color!='') {
-                $color = '<div class="pull-left" style="margin-right: 5px; height: 20px; width: 20px; background-color: '.e($statuslabel->color).'"></div>'.e($statuslabel->color);
-            } else {
-                $color = '';
-            }
-
-
-            $rows[] = array(
-                'id'            => e($statuslabel->id),
-                'type'          => e($label_type),
-                'name'          => e($statuslabel->name),
-                'color'          => $color,
-                'show_in_nav' => ($statuslabel->show_in_nav=='1') ? trans('general.yes') : trans('general.no'),
-                'actions'       => $actions
-            );
-        }
-
-        $data = array('total' => $statuslabelsCount, 'rows' => $rows);
-
-        return $data;
-
-    }
 }

@@ -40,13 +40,13 @@
               <th data-sortable="true" data-field="image"  data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
               <th data-sortable="false" data-field="manufacturer">{{ trans('general.manufacturer') }}</th>
               <th data-sortable="true" data-field="name">{{ trans('admin/models/table.title') }}</th>
-              <th data-sortable="true" data-field="modelnumber">{{ trans('admin/models/table.modelnumber') }}</th>
-              <th data-sortable="false" data-field="numassets">{{ trans('admin/models/table.numassets') }}</th>
+              <th data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
+              <th data-sortable="false" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
               <th data-sortable="false" data-field="depreciation">{{ trans('general.depreciation') }}</th>
               <th data-sortable="false" data-field="category">{{ trans('general.category') }}</th>
               <th data-sortable="true" data-field="eol">{{ trans('general.eol') }}</th>
               <th data-sortable="false" data-field="fieldset">{{ trans('admin/models/general.fieldset') }}</th>
-              <th data-sortable="false" data-field="note">{{ trans('general.notes') }}</th>
+              <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
             </tr>
           </thead>

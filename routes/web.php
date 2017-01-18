@@ -1,7 +1,5 @@
 <?php
-use App\Models\CheckoutRequest;
-use App\Models\Location;
-use App\Models\Statuslabel;
+
 
 
 /*
@@ -52,6 +50,14 @@ Route::resource('suppliers', 'SuppliersController', [
   Route::resource('statuslabels', 'StatuslabelsController', [
       'parameters' => ['statuslabel' => 'statuslabel_id']
   ]);
+
+
+/*
+* Status Labels
+*/
+Route::resource('components', 'ComponentsController', [
+    'parameters' => ['component' => 'component_id']
+]);
 
 
 /*

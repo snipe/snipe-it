@@ -21,6 +21,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     use Notifiable;
     use Presentable;
     protected $dates = ['deleted_at'];
+    protected $hidden = ['password'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
     protected $fillable = ['first_name', 'last_name', 'email','password','username'];

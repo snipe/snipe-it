@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Helpers\Helper;
 
 class Handler extends ExceptionHandler
 {
@@ -44,9 +45,39 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+
+        // CSRF token mismatch error
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect()->back()->with('error', trans('general.token_expired'));
         }
+
+
+        // Handle Ajax requests that fail because the model doesn't exist
+        if ($request->ajax() || $request->wantsJson()) {
+
+            if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+                $className = last(explode('\\', $e->getModel()));
+                return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
+            }
+
+            if ($this->isHttpException($e)) {
+
+                switch ($e->getStatusCode()) {
+                    case '404':
+                       return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' not found'), 404);
+                       break;
+                    case '405':
+                        return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
+                        break;
+                    default:
+                        return response()->json(Helper::formatStandardApiResponse('error', null, $e->getStatusCode()), 405);
+
+                }
+            }
+
+        }
+
 
         if ($this->isHttpException($e)) {
 
@@ -75,7 +106,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return response()->json(['error' => 'Unauthorized.'], 401);
         }
 
         return redirect()->guest('login');

@@ -16,12 +16,11 @@
 @section('content')
 <div class="row">
   <div class="col-md-9">
+  {{ Form::open(['route' => 'fieldsets.store', 'class'=>'form-horizontal']) }}
     <!-- Horizontal Form -->
     <div class="box box-default">
       <div class="box-body">
-        {{ Form::open(['route' => 'fieldsets.store', 'class'=>'form-horizontal']) }}
-        <!-- CSRF Token -->
-        {{ csrf_field() }}
+
           <!-- Name -->
         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
           <label for="name" class="col-md-4 control-label">
@@ -33,12 +32,14 @@
             {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
         </div>
-        {{ Form::close() }}
+
       </div> <!-- /.box-body-->
       <div class="box-footer text-right">
         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
       </div>
+
     </div> <!-- /.box.box-default-->
+    {{ Form::close() }}
   </div>
   <div class="col-md-3">
     <h4>About Fieldsets</h4>
