@@ -21,14 +21,13 @@ elixir(function(mix) {
     mix.less(
         [
             'app.less',
-            'fontawesome-animated.css',
              bowerPath + '/iCheck/skins/minimal/*',
              'AdminLTE.less',
              'skins/skin-blue.less',
              'overrides.less'
          ], 'public/assets/css/')
             .copy(bowerPath + '/bootstrap-less/assets/fonts/bootstrap/**', 'public/assets/fonts')
-            .copy(bowerPath + '/font-awesome/fonts/*', 'public/assets/fonts');
+            .copy(bowerPath + '/font-awesome/fonts/*', 'public/build/fonts');
 
 
 
