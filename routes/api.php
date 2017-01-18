@@ -243,14 +243,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
           ]);
 
 
-
-
-
-
-
-
-
-
     /*---Accessories API---*/
     Route::group([ 'prefix' => 'accessories' ], function () {
 
@@ -305,6 +297,17 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             return $location;
         });
     });
+
+
+    Route::group([ 'prefix' => 'fields' ], function () {
+
+        Route::post(
+            'fieldsets/{id}/order',
+            [ 'as' => 'api.customfields.order', 'uses' => 'CustomFieldsController@postReorder' ]
+        );
+
+    });
+
 
 
 });

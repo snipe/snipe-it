@@ -22,9 +22,7 @@
       </div><!-- /.box-header -->
       <div class="box-body">
         <table
-          name="fieldsets"
-          id="sort" class="table table-responsive todo-list"
-        >
+          name="fieldsets" id="sort" class="table table-responsive todo-list">
           <thead>
             <tr>
               <th class="col-md-1"></th>
@@ -99,6 +97,10 @@
               $.ajax({
                 method: "POST",
                 url: "{{ route('api.customfields.order', $custom_fieldset->id)  }}",
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
                 data: $("#sort tbody").sortable('serialize', {
                 }),
 
