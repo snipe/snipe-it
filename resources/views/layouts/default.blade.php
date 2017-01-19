@@ -585,10 +585,7 @@
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
           <b>Version</b> {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
-          <a target="_blank" class="btn btn-default btn-xs hidden" href="https://snipe-it.readme.io">Documentation</a>
-          <a target="_blank" class="btn btn-default btn-xs hidden" href="https://snipe-it-manual.readme.io">User's Manual</a>
-          <a target="_blank" class="btn btn-default btn-xs hidden" href="https://snipeitapp.com/support/">Report a Bug</a>
-        </div>
+         </div>
         Developed By <a target="_blank" href="http://askaris.it/">Askaris Information Technology</a>
       </footer>
 
