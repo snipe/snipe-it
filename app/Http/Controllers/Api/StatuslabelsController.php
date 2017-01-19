@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Statuslabel;
 use App\Models\Asset;
 use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\AssetsTransformer;
 
 class StatuslabelsController extends Controller
 {
@@ -159,6 +160,38 @@ class StatuslabelsController extends Controller
             ]]
         ];
         return $result;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function assets(Request $request, $id)
+    {
+        $this->authorize('view', Statuslabel::class);
+        $this->authorize('index', Asset::class);
+        $assets = Asset::where('status_id','=',$id);
+
+        $allowed_columns = [
+            'id',
+            'name'
+        ];
+
+        $offset = request('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $assets->orderBy($sort, $order);
+
+        $total = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
+
+
+        return (new AssetsTransformer)->transformAssets($assets, $total);
     }
 
 }

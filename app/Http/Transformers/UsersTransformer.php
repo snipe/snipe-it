@@ -26,7 +26,8 @@ class UsersTransformer
                 'lastname' => e($user->last_name),
                 'username' => e($user->username),
                 'employee_num' => e($user->employee_num),
-                'manager' => ($user->manager) ? $user->manager->name : false,
+                'manager' => ($user->manager) ? (new UsersTransformer)->transformUser($user->manager) : '',
+                'groups' => $user->groups,
                 'jobtitle' => e($user->jobtitle),
                 'email' => e($user->email),
                 'location' => (new LocationsTransformer)->transformLocation($user->userloc),
@@ -43,6 +44,8 @@ class UsersTransformer
     public function transformUsersDatatable($users) {
         return (new DatatablesTransformer)->transformDatatables($users);
     }
+
+
 
 
 

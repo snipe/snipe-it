@@ -32,10 +32,19 @@ class StatuslabelsController extends Controller
 
     public function index()
     {
-        // Show the page
         return View::make('statuslabels/index', compact('statuslabels'));
     }
 
+    public function show($id)
+    {
+        $statuslabel = Statuslabel::find($id);
+
+        if (isset($statuslabel->id)) {
+            return View::make('statuslabels/view', compact('statuslabel'));
+        }
+
+        return redirect()->route('statuslabels.index')->with('error', trans('admin/locations/message.does_not_exist', compact('id')));
+    }
 
 
 

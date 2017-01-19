@@ -147,6 +147,9 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     Route::group([ 'prefix' => 'statuslabels'], function () {
 
 
+        Route::get('{id}/assetlist',
+            [ 'as' => 'api.statuslabels.assets', 'uses' => 'StatuslabelsController@assets' ]);
+
         Route::get('{id}/deployable', function ($statuslabelId) {
 
             $statuslabel = Statuslabel::find($statuslabelId);

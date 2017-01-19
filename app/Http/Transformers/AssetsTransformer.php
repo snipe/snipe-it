@@ -25,7 +25,7 @@ class AssetsTransformer
             'serial' => $asset->serial,
             'model' => ($asset->model) ? $asset->model->name : '',
             'model_number' => $asset->model_number,
-            'status_label' => ($asset->assetstatus) ? $asset->assetstatus->name : '',
+            'status_label' => ($asset->assetstatus) ? $asset->assetstatus : '',
             'last_checkout' => $asset->last_checkout,
             'category' => ($asset->model->category) ? $asset->model->category->name : '',
             'manufacturer' => $asset->manufacturer,
