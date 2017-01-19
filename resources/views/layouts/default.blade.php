@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iCheck/all.css') }}">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-blue.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-oesgroup.css') }}">
 
     <!-- bootstrap tables CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
@@ -585,12 +585,11 @@
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
           <b>Version</b> {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io">Documentation</a>
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it-manual.readme.io">User's Manual</a>
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/">Report a Bug</a>
+          <a target="_blank" class="btn btn-default btn-xs hidden" href="https://snipe-it.readme.io">Documentation</a>
+          <a target="_blank" class="btn btn-default btn-xs hidden" href="https://snipe-it-manual.readme.io">User's Manual</a>
+          <a target="_blank" class="btn btn-default btn-xs hidden" href="https://snipeitapp.com/support/">Report a Bug</a>
         </div>
-        <a target="_blank" href="https://snipeitapp.com">Snipe-IT</a> is an open source
-        project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
+        Developed By <a target="_blank" href="http://askaris.it/">Askaris Information Technology</a>
       </footer>
 
 
