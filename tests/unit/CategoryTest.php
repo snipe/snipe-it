@@ -15,26 +15,29 @@ class CategoryTest extends \Codeception\TestCase\Test
 
     public function testAssetCategoryAdd()
     {
-      $category = factory(Category::class, 'asset-category')->make();
-      $values = [
-        'name' => $category->name,
-        'category_type' => $category->category_type,
-      ];
+        $category = factory(Category::class, 'category')->make(['category_type' => 'asset']);
+        $values = [
+            'name' => $category->name,
+            'category_type' => $category->category_type,
+            'require_acceptance' => true,
+            'use_default_eula' => false
+        ];
 
-      Category::create($values);
-      $this->tester->seeRecord('categories', $values);
+        Category::create($values);
+        $this->tester->seeRecord('categories', $values);
     }
 
     public function testAccessoryCategoryAdd()
     {
-      $category = factory(Category::class, 'accessory-category')->make();
-      $values = [
-        'name' => $category->name,
-        'category_type' => $category->category_type,
-      ];
+        $category = factory(Category::class, 'category')->make(['category_type' => 'accessory']);
+        $values = [
+            'name' => $category->name,
+            'category_type' => $category->category_type,
+            'require_acceptance' => true,
+            'use_default_eula' => false
+        ];
 
-      Category::create($values);
-      $this->tester->seeRecord('categories', $values);
+        Category::create($values);
+        $this->tester->seeRecord('categories', $values);
     }
-
 }
