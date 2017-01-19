@@ -11,6 +11,7 @@
 |
 */
 
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Manufacturer;
@@ -61,37 +62,16 @@ $factory->defineAs(App\Models\Location::class, 'location', function (Faker\Gener
     ];
 });
 
-$factory->defineAs(App\Models\Category::class, 'asset-category', function (Faker\Generator $faker) {
+$factory->defineAs(App\Models\Category::class, 'category', function (Faker\Generator $faker) {
     return [
     'name' => $faker->text(20),
-    'category_type' => $faker->randomElement($array = array ('asset')),
+    'category_type' => $faker->randomElement(['asset', 'accessory', 'component', 'consumable']),
     'eula_text' => $faker->paragraph(),
     'require_acceptance' => $faker->boolean(),
+    'use_default_eula' => $faker->boolean(),
     'checkin_email' => $faker->boolean()
     ];
 });
-
-$factory->defineAs(App\Models\Category::class, 'accessory-category', function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->text(20),
-    'category_type' => $faker->randomElement($array = array ('accessory')),
-    ];
-});
-
-$factory->defineAs(App\Models\Category::class, 'component-category', function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->text(20),
-    'category_type' => $faker->randomElement($array = array ('component')),
-    ];
-});
-
-$factory->defineAs(App\Models\Category::class, 'consumable-category', function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->text(20),
-    'category_type' => $faker->randomElement($array = array ('consumable')),
-    ];
-});
-
 
 $factory->defineAs(App\Models\Company::class, 'company', function (Faker\Generator $faker) {
     return [
@@ -131,7 +111,7 @@ $factory->defineAs(App\Models\Accessory::class, 'accessory', function (Faker\Gen
     return [
     'company_id' => Company::inRandomOrder()->first()->id,
     'name' => $faker->text(20),
-    'category_id' => $faker->numberBetween(11, 15),
+    'category_id' => Category::where('category_type', 'accessory')->inRandomOrder()->first()->id,
     'manufacturer_id' => Manufacturer::inRandomOrder()->first()->id,
     'location_id' => $faker->numberBetween(1, 5),
     'order_number' => $faker->numberBetween(1000000, 50000000),
@@ -389,6 +369,3 @@ $factory->defineAs(App\Models\CustomField::class, 'customfield-ip', function (Fa
     'element' => 'text',
     ];
 });
-
-
-
