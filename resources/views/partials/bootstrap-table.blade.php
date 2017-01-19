@@ -99,6 +99,18 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function assetFormatter(value, row) {
+        if (value) {
+            return '<a href={{ url('/') }}/hardware/' + row.id + '"> ' + value + '</a>';
+        }
+    }
+
+    function statusFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/statuslabels/' + value.id + '"> ' + value.name + '</a>';
+        }
+    }
+
     function companyFormatter(value, row) {
         if ((value) && (value[0].name)) {
             return '<a href="{{ url('/') }}/companies/' + value[0].id + '"> ' + value[0].name + '</a>';
