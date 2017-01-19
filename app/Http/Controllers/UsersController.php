@@ -408,14 +408,14 @@ class UsersController extends Controller
     public function postBulkEdit()
     {
         $this->authorize('update', User::class);
-        if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
+        if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         } else {
             $statuslabel_list = Helper::statusLabelList();
-            $user_raw_array = array_keys(Input::get('edit_user'));
+            $user_raw_array = array_keys(Input::get('ids'));
             $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
 
-            $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
+            $users = User::whereIn('id', $user_raw_array)->with('groups', 'assignedAssets', 'licenses', 'accessories')->get();
            // $users = Company::scopeCompanyables($users)->get();
 
             return View::make('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
@@ -433,13 +433,13 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
+        if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         } else {
 
-            $user_raw_array = Input::get('edit_user');
+            $user_raw_array = Input::get('ids');
             $asset_array = array();
 
             if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {

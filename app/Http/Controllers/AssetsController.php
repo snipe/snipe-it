@@ -1145,35 +1145,46 @@ class AssetsController extends Controller
      * @internal param int $assetId
      * @since [v2.0]
      */
-    public function postBulkEdit()
+    public function postBulkEdit(Request $request)
     {
         $this->authorize('update', Asset::class);
-        if (!Input::has('edit_asset')) {
+
+
+
+        if (!$request->has('ids')) {
             return redirect()->back()->with('error', 'No assets selected');
         }
-        $asset_raw_array = Input::get('edit_asset');
+
+        $asset_raw_array = $request->input('ids');
         foreach ($asset_raw_array as $asset_id => $value) {
             $asset_ids[] = $asset_id;
         }
 
-        if (Input::has('bulk_actions')) {
-            // Create labels
-            if (Input::get('bulk_actions')=='labels') {
+
+        if ($request->has('bulk_actions')) {
+
+            if ($request->input('bulk_actions')=='labels') {
+
                 $count = 0;
-                return View::make('hardware/labels')->with('assets', Asset::find($asset_ids))->with('settings', Setting::getSettings())->with('count', $count)->with(
-                    'settings',
+                return View::make('hardware/labels')
+                    ->with('assets', Asset::find($asset_ids))
+                    ->with('settings', Setting::getSettings())
+                    ->with('count', $count)
+                    ->with('settings',
                     Setting::getSettings()
                 );
-            } elseif (Input::get('bulk_actions')=='delete') {
+
+            } elseif ($request->input('bulk_actions')=='delete') {
                 $assets = Asset::with('assignedTo', 'assetloc')->find($asset_ids);
                 $assets->each(function($asset) {
                     $this->authorize('delete',$asset);
                 });
                 return View::make('hardware/bulk-delete')->with('assets', $assets);
+
              // Bulk edit
-            } elseif (Input::get('bulk_actions')=='edit') {
+            } elseif ($request->input('bulk_actions')=='edit') {
                 return View::make('hardware/bulk')
-                ->with('assets', request('edit_asset'))
+                ->with('assets', request('ids'))
                 ->with('supplier_list', Helper::suppliersList())
                 ->with('statuslabel_list', Helper::statusLabelList())
                 ->with('location_list', Helper::locationsList())
@@ -1198,8 +1209,8 @@ class AssetsController extends Controller
     public function postBulkSave()
     {
         $this->authorize('update', Asset::class);
-        if (Input::has('bulk_edit')) {
-            $assets = Input::get('bulk_edit');
+        if (Input::has('ids')) {
+            $assets = Input::get('ids');
             if ((Input::has('purchase_date'))
                 ||  (Input::has('purchase_cost'))
                 ||  (Input::has('supplier_id'))
