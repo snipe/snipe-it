@@ -149,7 +149,7 @@
           </div>
 
           @foreach ($assets as $key => $value)
-            <input type="hidden" name="bulk_edit[{{ $key }}]" value="1">
+            <input type="hidden" name="ids[{{ $key }}]" value="1">
           @endforeach
         </div> <!--/.box-body-->
 

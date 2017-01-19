@@ -50,9 +50,9 @@ Bulk Checkin &amp; Delete
                   <tr {!! ($user->isSuperUser() ? ' class="danger"':'') !!}>
                     <td>
                       @if (Auth::id()!=$user->id)
-                      <input type="checkbox" name="edit_user[]" value="{{ $user->id }}" checked="checked">
+                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" checked="checked">
                       @else
-                      <input type="checkbox" name="edit_user[]" value="{{ $user->id }}" disabled>
+                      <input type="checkbox" name="ids[]" value="{{ $user->id }}" disabled>
                       @endif
                     </td>
 
@@ -90,7 +90,7 @@ Bulk Checkin &amp; Delete
                   </tr>
                   <tr>
                     <td colspan="6" class="warning">
-                      <label><input type="checkbox" name="edit_user['.e($user->id).']" checked> Check in all properties associated with these users</label>
+                      <label><input type="checkbox" name="ids['.e($user->id).']" checked> Check in all properties associated with these users</label>
                     </td>
                   </tr>
                 </tfoot>

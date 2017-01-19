@@ -44,7 +44,7 @@
           'method' => 'POST',
           'route' => ['hardware/bulkedit'],
           'class' => 'form-inline',
-           'id' => 'bulkEditForm']) }}
+           'id' => 'bulkForm']) }}
           <div class="row">
             <div class="col-md-12">
               @if (Input::get('status')!='Deleted')
@@ -77,13 +77,13 @@
                     <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
                     <th data-sortable="true" data-field="image" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
                     <th data-sortable="true" data-field="name" data-visible="false">{{ trans('admin/hardware/form.name') }}</th>
-                    <th data-sortable="true" data-field="asset_tag">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                    <th data-sortable="true" data-field="asset_tag" data-formatter="">{{ trans('admin/hardware/table.asset_tag') }}</th>
                     <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
                     <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
                     <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
                     <th data-sortable="true" data-field="status_label">{{ trans('admin/hardware/table.status') }}</th>
                     <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
-                    <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
+                    <th data-sortable="true" data-formatter="locationFormatter" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
                     <th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
                     <th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
                     <th data-sortable="true" data-field="purchase_cost" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.cost') }}</th>
@@ -130,31 +130,6 @@
 
 <script>
 
-    var checkedRows = 0;
-
-    $('.snipe-table').on('check.bs.table', function (e, row) {
-        $(this).val(row.id);
-        checkedRows++;
-        $('#bulkEdit').removeAttr('disabled');
-        atLeastOneChecked(checkedRows);
-    });
-
-    $('.snipe-table').on('uncheck.bs.table', function (e, row) {
-        checkedRows--;
-        atLeastOneChecked(checkedRows);
-
-    });
-
-
-    function atLeastOneChecked(checkedRows) {
-        if (checkedRows > 0) {
-            $('#bulkEdit').removeAttr('disabled');
-        }
-        else {
-            $('#bulkEdit').attr('disabled', 'disabled');
-        }
-    }
-
     function actionsFormatter(value, row) {
         return '<nobr><a href="{{ url('/') }}/hardware/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
             + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
@@ -164,25 +139,7 @@
 
     }
 
-    function createdAtFormatter(value, row) {
-        if ((value) && (value.date)) {
-            return value.date;
-        }
-    }
 
-    $(function () {
-        $('#bulkEdit').click(function () {
-            var selectedIds = $('.snipe-table').bootstrapTable('getSelections');
-
-            $.each(selectedIds, function(key,value) {
-                $( "#bulkEditForm" ).append($('<input type="hidden" name="edit_asset[' + value.id + ']" value="' + value.id + '">' ));
-                //alert(value.id);
-            });
-
-            //event.preventDefault();
-            //return false;
-        });
-    });
 
 </script>
 @stop

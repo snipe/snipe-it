@@ -38,7 +38,7 @@
             <tbody>
               @foreach ($assets as $asset)
               <tr>
-                <td><input type="checkbox" name="bulk_edit[]" value="{{ $asset->id }}" checked="checked"></td>
+                <td><input type="checkbox" name="ids[]" value="{{ $asset->id }}" checked="checked"></td>
                 <td>{{ $asset->id }}</td>
                 <td>{{ $asset->present()->name() }}</td>
                 <td>

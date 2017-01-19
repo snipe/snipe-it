@@ -43,7 +43,7 @@
                'method' => 'POST',
                'route' => ['users/bulkedit'],
                'class' => 'form-inline',
-                'id' => 'bulkEditForm']) }}
+                'id' => 'bulkForm']) }}
 
             @if (Input::get('status')!='deleted')
               @can('delete', \App\Models\User::class)
@@ -82,7 +82,7 @@
                        <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
                    <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
-                   <th data-searchable="true" data-sortable="true" data-field="manager">{{ trans('admin/users/table.manager') }}</th>
+                   <th data-searchable="true" data-sortable="true" data-field="manager" data-formatter="userFormatter">{{ trans('admin/users/table.manager') }}</th>
                    <th data-sortable="true" data-field="location" data-formatter="locationFormatter">{{ trans('admin/users/table.location') }}</th>
                    <th data-sortable="false" data-field="assets">
                        <span class="hidden-md hidden-lg">Assets</span>
@@ -100,7 +100,9 @@
                        <span class="hidden-md hidden-lg">Consumables</span>
                        <span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>
                    </th>
-                   <th data-sortable="false" data-field="groups">{{ trans('general.groups') }}</th>
+                   <th data-sortable="false" data-field="groups" data-formatter="groupsFormatter">
+                       {{ trans('general.groups') }}
+                   </th>
                    <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
                    <th data-sortable="true" data-field="two_factor_enrolled" data-visible="false" data-formatter="trueFalseFormatter" >{{ trans('admin/users/general.two_factor_enrolled') }}</th>
                    <th data-sortable="true" data-field="two_factor_optin" data-formatter="trueFalseFormatter" data-visible="false">{{ trans('admin/users/general.two_factor_active') }}</th>
@@ -125,69 +127,14 @@
 
 <script>
 
-    var checkedRows = 0;
-
-    $('.snipe-table').on('check.bs.table', function (e, row) {
-        $(this).val(row.id);
-        checkedRows++;
-        $('#bulkEdit').removeAttr('disabled');
-        atLeastOneChecked(checkedRows);
-    });
-
-    $('.snipe-table').on('uncheck.bs.table', function (e, row) {
-        checkedRows--;
-        atLeastOneChecked(checkedRows);
-
-    });
-
-    function atLeastOneChecked(checkedRows) {
-        if (checkedRows > 0) {
-            $('#bulkEdit').removeAttr('disabled');
+    function groupsFormatter(value) {
+        var groups = '';
+        for (var index = 0; index < value.length; index++) {
+            groups += '<a href="#" class="label label-default"> ' + value[index].name + '</a> ';
         }
-        else {
-            $('#bulkEdit').attr('disabled', 'disabled');
-        }
+        return groups;
     }
 
-
-
-    function locationFormatter(value, row) {
-        if ((value) && (value[0].name)) {
-            return '<a href="{{ url('/') }}/locations/' + value[0].id + '"> ' + value[0].name + '</a>';
-        }
-    }
-
-    function emailFormatter(value, row) {
-        if (value) {
-            return '<a href="mailto:' + value + '"> ' + value + '</a>';
-        }
-    }
-
-    function userFormatter(value, row) {
-        if (value) {
-            return '<a href="{{ url('/') }}/users/' + row.id + '"> ' + value + '</a>';
-        }
-    }
-
-    function companyFormatter(value, row) {
-        if ((value) && (value[0].name)) {
-            return '<a href="{{ url('/') }}/companies/' + value[0].id + '"> ' + value[0].name + '</a>';
-        }
-    }
-
-    function createdAtFormatter(value, row) {
-        if ((value) && (value.date)) {
-            return value.date;
-        }
-    }
-
-    function trueFalseFormatter(value, row) {
-        if ((value) && ((value == 'true') || (value == '1'))) {
-            return '<i class="fa fa-check"></i>';
-        } else {
-            return '<i class="fa fa-times"></i>';
-        }
-    }
 
     function actionsFormatter(value, row) {
         return '<nobr><a href="{{ url('/') }}/users/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
@@ -197,21 +144,6 @@
             + '<i class="fa fa-trash"></i></a></nobr>';
 
     }
-
-    $(function () {
-        $('#bulkEdit').click(function () {
-            var selectedIds = $('.snipe-table').bootstrapTable('getSelections');
-
-            $.each(selectedIds, function(key,value) {
-                $( "#bulkEditForm" ).append($('<input type="hidden" name="edit_user[' + value.id + ']" value="' + value.id + '">' ));
-                //alert(value.id);
-            });
-
-            //event.preventDefault();
-            //return false;
-        });
-    });
-
 
 
 </script>

@@ -53,4 +53,77 @@ $('.snipe-table').bootstrapTable({
         },
 
     });
+
+
+
+    // Handle whether or not the edit button should be disabled
+    $('.snipe-table').on('check.bs.table', function () {
+        $('#bulkEdit').removeAttr('disabled');
+    });
+
+    $('.snipe-table').on('check-all.bs.table', function () {
+        $('#bulkEdit').removeAttr('disabled');
+    });
+
+    $('.snipe-table').on('uncheck.bs.table', function () {
+        console.log($('.snipe-table').bootstrapTable('getSelections').length);
+        if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
+            $('#bulkEdit').attr('disabled', 'disabled');
+        }
+    });
+
+    $('.snipe-table').on('uncheck-all.bs.table', function (e, row) {
+        $('#bulkEdit').attr('disabled', 'disabled');
+    });
+
+
+    function createdAtFormatter(value, row) {
+        if ((value) && (value.date)) {
+            return value.date;
+        }
+    }
+
+    function trueFalseFormatter(value, row) {
+        if ((value) && ((value == 'true') || (value == '1'))) {
+            return '<i class="fa fa-check"></i>';
+        } else {
+            return '<i class="fa fa-times"></i>';
+        }
+    }
+
+    function userFormatter(value, row) {
+        if (value.name) {
+            return '<a href="{{ url('/') }}/users/' + value.id + '"> ' + value.name + '</a>';
+        } else if (value) {
+            return '<a href="{{ url('/') }}/users/' + row.id + '"> ' + value + '</a>';
+        }
+    }
+
+    function companyFormatter(value, row) {
+        if ((value) && (value[0].name)) {
+            return '<a href="{{ url('/') }}/companies/' + value[0].id + '"> ' + value[0].name + '</a>';
+        }
+    }
+
+    function locationFormatter(value, row) {
+        if ((value) && (value[0].name)) {
+            return '<a href="{{ url('/') }}/locations/' + value[0].id + '"> ' + value[0].name + '</a>';
+        }
+    }
+
+    function emailFormatter(value, row) {
+        if (value) {
+            return '<a href="mailto:' + value + '"> ' + value + '</a>';
+        }
+    }
+
+    $(function () {
+        $('#bulkEdit').click(function () {
+            var selectedIds = $('.snipe-table').bootstrapTable('getSelections');
+            $.each(selectedIds, function(key,value) {
+                $( "#bulkForm" ).append($('<input type="hidden" name="ids[' + value.id + ']" value="' + value.id + '">' ));
+            });
+
+        });
+    });
 </script>
