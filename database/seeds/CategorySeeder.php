@@ -7,10 +7,10 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::truncate();
-        factory(Category::class, 'asset-category', 10)->create();
-        factory(Category::class, 'accessory-category', 5)->create();
-        factory(Category::class, 'consumable-category', 5)->create();
-        factory(Category::class, 'component-category', 5)->create();
+        factory(Category::class, 'category', 10)->create(['category_type' => 'asset']);
+        factory(Category::class, 'category', 10)->create(['category_type' => 'accessory']);
+        factory(Category::class, 'category', 10)->create(['category_type' => 'consumable']);
+        factory(Category::class, 'category', 10)->create(['category_type' => 'component']);
     }
 
 }
