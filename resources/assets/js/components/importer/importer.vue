@@ -14,9 +14,6 @@
                       <label for="import-type">Import Type:</label>
                     </div>
                     <div class="col-md-8 col-xs-12">
-                       <!--  <select v-model="modal.importType" class="select2" style="width:100%;">
-                            <option v-for="type in modal.importTypes" v-bind:value="type.value">{{ type.text }}</option>
-                        </select> -->
                         <select2 :options="modal.importTypes" v-model="modal.importType">
                             <option disabled value="0"></option>
                         </select2>
@@ -30,12 +27,14 @@
                         <input type="checkbox" name="import-update" v-model="modal.update">
                     </div>
                   </div>
-                <div class="col-md-8 alert-success" v-if="modal.statusText">{{ this.modal.statusText }}</div>
             </div>
 
             <div slot="modal-footer" class="modal-footer">
-                <button type="button" class="btn btn-default" @click="displayImportModal = false">Cancel</button>
-                <button type="submit" class="btn btn-primary" id="modal-save" @click="postSave">Save</button>
+                <div class="row">
+                    <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="modal.statusText">{{ this.modal.statusText }}</div>
+                    <button type="button" class="btn btn-default" @click="displayImportModal = false">Cancel</button>
+                    <button type="submit" class="btn btn-primary" @click="postSave">Save</button>
+                </div>
             </div>
         </modal>
         <div class="row">
@@ -98,7 +97,7 @@
                     visible: false,
                 },
                 modal: {
-                    importType: 0,
+                    importType: 'asset',
                     update: false,
                     importTypes: [
                         { id: 'asset', text: 'Assets' },
@@ -154,7 +153,7 @@
                 console.log("Saving");
                 this.$http.post('/api/v1/imports/process/'+this.activeFile.id, {
                     'import-update': this.modal.update,
-                    'import-type': this.modal.importType.value
+                    'import-type': this.modal.importType
                 }).then( (response) => {
                     // Success
                     console.dir(response);

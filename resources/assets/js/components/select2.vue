@@ -20,21 +20,19 @@
             console.dir(this.options);
             var vm = this;
             $(this.$el)
-                .select2({ 
-                    data: [
-                    {id: 0, text: 'test'},
-                    {id: 1, text: 'test2'}
-                ]
-                });
+                .select2({
+                    data: this.options
+                })
+                .on('change', function() { vm.$emit('input', this.value) } );
         },
         watch: {
-            value() {
+            value: function (value) {
                 $(this.$el).val(value)
             },
-            options: (options) => {
+            options: function (options) {
                 $(this.$el).select2({data: options})
             },
-            destroyed() {
+            destroyed: function() {
                 $(this.$el).off().select2('destroy')
             }
         }

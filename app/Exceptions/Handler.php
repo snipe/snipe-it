@@ -68,11 +68,10 @@ class Handler extends ExceptionHandler
                 switch ($e->getStatusCode()) {
                     case '404':
                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' endpoint not found'), 404);
-                       break;
                     case '405':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
                     default:
-                        return response()->json(Helper::formatStandardApiResponse('error', null, $e->getStatusCode()), 405);
+                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode), 405);
 
                 }
             }

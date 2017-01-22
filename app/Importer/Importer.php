@@ -1,15 +1,8 @@
 <?php
 namespace App\Importer;
 
-use App\Models\AssetModel;
-use App\Models\Category;
-use App\Models\Company;
+
 use App\Models\CustomField;
-use App\Models\Location;
-use App\Models\Manufacturer;
-use App\Models\Setting;
-use App\Models\Statuslabel;
-use App\Models\Supplier;
 use App\Models\User;
 use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
@@ -73,22 +66,12 @@ abstract class Importer
         $this->tempPassword = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
     }
     // Cached Values for import lookups
-    protected $locations;
-    protected $categories;
-    protected $manufacturers;
-    protected $asset_models;
-    protected $companies;
-    protected $status_labels;
-    protected $suppliers;
-    protected $assets;
-    protected $accessories;
-    protected $consumables;
     protected $customFields;
 
     public function import()
     {
         $results = $this->normalizeInputArray($this->csv->fetchAssoc());
-        $this->initializeLookupArrays();
+        $this->customFields = CustomField::All(['name']);
         DB::transaction(function () use (&$results) {
             Model::unguard();
             $resultsCount = sizeof($results);
@@ -118,22 +101,6 @@ abstract class Importer
     }
 
     /**
-     * Load Cached versions of all used methods.
-     */
-    public function initializeLookupArrays()
-    {
-        $this->locations = Location::All(['name', 'id']);
-        $this->categories = Category::All(['name', 'category_type', 'id']);
-        $this->manufacturers = Manufacturer::All(['name', 'id']);
-        $this->asset_models = AssetModel::All(['name', 'model_number', 'category_id', 'manufacturer_id', 'id']);
-        $this->companies = Company::All(['name', 'id']);
-        $this->status_labels = Statuslabel::All(['name', 'id']);
-        $this->suppliers = Supplier::All(['name', 'id']);
-        $this->customFields = CustomField::All(['name']);
-
-    }
-
-    /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
      * @author Daniel Melzter
@@ -150,7 +117,7 @@ abstract class Importer
             $val = e(Encoding::toUTF8(trim($array[ $key ])));
         }
         $key = title_case($key);
-        $this->log("${key}: ${val}");
+        // $this->log("${key}: ${val}");
         return $val;
     }
 
