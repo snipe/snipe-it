@@ -10,9 +10,7 @@ $factory->defineAs(App\Models\User::class, 'valid-user', function (Faker\Generat
     'password' => $faker->password,
     'permissions' => '{"user":"0"}',
     'email' => $faker->safeEmail,
-    'company_id' => function () {
-        return factory(App\Models\Company::class, 'company')->create()->id;
-    },
+    'company_id' => Company::inRandomOrder()->first()->id,
     'locale' => $faker->locale,
     'employee_num' => $faker->numberBetween(3500, 35050),
     'jobtitle' => $faker->word,
