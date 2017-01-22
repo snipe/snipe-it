@@ -11,26 +11,28 @@
 |
 */
 
+use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Manufacturer;
+use App\Models\Statuslabel;
 use App\Models\Supplier;
 
 $factory->defineAs(App\Models\Asset::class, 'asset', function (Faker\Generator $faker) {
     return [
     'name' => $faker->catchPhrase,
-    'model_id' => $faker->numberBetween(1, 5),
-    'rtd_location_id' => $faker->numberBetween(1, 5),
+    'model_id' => AssetModel::inRandomOrder()->first()->id,
+    'rtd_location_id' => Location::inRandomOrder()->first()->id,
     'serial' => $faker->uuid,
-    'status_id' => 1,
+    'status_id' => Statuslabel::inRandomOrder()->first()->id,
     'user_id' => 1,
     'asset_tag' => $faker->unixTime('now'),
     'notes'   => $faker->sentence,
     'purchase_date' => $faker->dateTime(),
     'purchase_cost' => $faker->randomFloat(2),
     'order_number' => $faker->numberBetween(1000000, 50000000),
-    'supplier_id' => $faker->numberBetween(1, 5),
+    'supplier_id' => Supplier::inRandomOrder()->first()->id,
     'company_id' => Company::inRandomOrder()->first()->id,
     'requestable' => $faker->boolean()
     ];
@@ -40,8 +42,8 @@ $factory->defineAs(App\Models\Asset::class, 'asset', function (Faker\Generator $
 $factory->defineAs(App\Models\AssetModel::class, 'assetmodel', function (Faker\Generator $faker) {
     return [
     'name' => $faker->catchPhrase,
-    'manufacturer_id' => $faker->numberBetween(1, 10),
-    'category_id' => $faker->numberBetween(1, 9),
+    'manufacturer_id' => Manufacturer::inRandomOrder()->first()->id,
+    'category_id' => Category::where('category_type', 'asset')->inRandomOrder()->first()->id,
     'model_number' => $faker->numberBetween(1000000, 50000000),
     'eol' => 1,
     'notes' => $faker->paragraph(),
@@ -88,7 +90,7 @@ $factory->defineAs(App\Models\Manufacturer::class, 'manufacturer', function (Fak
 $factory->defineAs(App\Models\Component::class, 'component', function (Faker\Generator $faker) {
     return [
     'name' => $faker->text(20),
-    'category_id' => $faker->numberBetween(21, 25),
+    'category_id' => Category::where('category_type', 'component')->inRandomOrder()->first()->id,
     'location_id' => Location::inRandomOrder()->first()->id,
     'serial'   => $faker->uuid,
     'qty' => $faker->numberBetween(3, 10),
@@ -113,7 +115,7 @@ $factory->defineAs(App\Models\Accessory::class, 'accessory', function (Faker\Gen
     'name' => $faker->text(20),
     'category_id' => Category::where('category_type', 'accessory')->inRandomOrder()->first()->id,
     'manufacturer_id' => Manufacturer::inRandomOrder()->first()->id,
-    'location_id' => $faker->numberBetween(1, 5),
+    'location_id' => Location::inRandomOrder()->first()->id,
     'order_number' => $faker->numberBetween(1000000, 50000000),
     'purchase_date' => $faker->dateTime(),
     'purchase_cost' => $faker->randomFloat(2),
@@ -147,7 +149,7 @@ $factory->defineAs(App\Models\Consumable::class, 'consumable', function (Faker\G
     return [
     'name' => $faker->text(20),
     'company_id' => Company::inRandomOrder()->first()->id,
-    'category_id' => $faker->numberBetween(16, 20),
+    'category_id' => Category::where('category_type', 'consumable')->inRandomOrder()->first()->id,
     'model_number' => $faker->numberBetween(1000000, 50000000),
     'item_no' => $faker->numberBetween(1000000, 50000000),
     'order_number' => $faker->numberBetween(1000000, 50000000),
