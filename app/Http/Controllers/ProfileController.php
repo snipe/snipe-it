@@ -28,7 +28,6 @@ class ProfileController extends Controller
      */
     public function getIndex()
     {
-        // Get the user information
         $user = Auth::user();
         $location_list = Helper::locationsList();
         return View::make('account/profile', compact('user'))->with('location_list', $location_list);
@@ -44,17 +43,13 @@ class ProfileController extends Controller
     public function postIndex()
     {
 
-      // Grab the user
         $user = Auth::user();
-
-      // Update the user information
         $user->first_name = Input::get('first_name');
         $user->last_name  = Input::get('last_name');
         $user->website    = Input::get('website');
         $user->location_id    = Input::get('location_id');
         $user->gravatar   = Input::get('gravatar');
         $user->locale = Input::get('locale');
-
 
         if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled=='1') && (!config('app.lock_passwords')))) {
             $user->two_factor_optin = Input::get('two_factor_optin', '0');
@@ -76,5 +71,20 @@ class ProfileController extends Controller
             return redirect()->route('profile')->with('success', 'Account successfully updated');
         }
         return redirect()->back()->withInput()->withErrors($user->getErrors());
+    }
+
+
+    /**
+     * Returns a page with the API token generation interface.
+     *
+     * We created a controller method for this because closures aren't allowed
+     * in the routes file if you want to be able to cache the routes.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function api() {
+        return view('account/api');
     }
 }

@@ -63,6 +63,7 @@ class Statuslabel extends SnipeModel
         }
     }
 
+
     public static function getStatuslabelTypesForDB($type)
     {
         if ($type == 'pending') {

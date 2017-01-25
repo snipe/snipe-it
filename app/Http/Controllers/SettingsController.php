@@ -598,4 +598,18 @@ class SettingsController extends Controller
             return redirect()->back()->with('error', trans('general.feature_disabled'));
         }
     }
+
+    /**
+     * Returns a page with the API token generation interface.
+     *
+     * We created a controller method for this because closures aren't allowed
+     * in the routes file if you want to be able to cache the routes.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function api() {
+        return view('settings/api');
+    }
 }

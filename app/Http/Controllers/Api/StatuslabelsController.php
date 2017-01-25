@@ -9,6 +9,7 @@ use App\Models\Statuslabel;
 use App\Models\Asset;
 use App\Http\Transformers\DatatablesTransformer;
 use App\Http\Transformers\AssetsTransformer;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class StatuslabelsController extends Controller
 {
@@ -194,4 +195,24 @@ class StatuslabelsController extends Controller
         return (new AssetsTransformer)->transformAssets($assets, $total);
     }
 
+
+    /**
+     * Returns a boolean response based on whether the status label
+     * is one that is deployable.
+     *
+     * This is used by the hardware create/edit view to determine whether
+     * we should provide a dropdown of users for them to check the asset out to.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return Bool
+     */
+    public function checkIfDeployable($id) {
+        $statuslabel = Statuslabel::findOrFail($id);
+        if ($statuslabel->getStatuslabelType()=='deployable') {
+            return '1';
+        }
+
+        return '0';
+    }
 }

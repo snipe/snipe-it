@@ -150,21 +150,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         Route::get('{id}/assetlist',
             [ 'as' => 'api.statuslabels.assets', 'uses' => 'StatuslabelsController@assets' ]);
 
-        Route::get('{id}/deployable', function ($statuslabelId) {
+        Route::get('{id}/deployable',
+            [ 'as' => 'api.statuslabels.deployable', 'uses' => 'StatuslabelsController@checkIfDeployable' ]);
 
-            $statuslabel = Statuslabel::find($statuslabelId);
-            if (( $statuslabel->deployable == '1' ) && ( $statuslabel->pending != '1' )
-                && ( $statuslabel->archived != '1' )
-            ) {
-                return '1';
-            } else {
-                return '0';
-            }
 
-        });
 
         // Pie chart for dashboard
-
         Route::get('assets', [ 'as' => 'api.statuslabels.assets.bytype', 'uses' => 'StatuslabelsController@getAssetCountByStatuslabel' ]);
 
     });
@@ -263,6 +254,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
         Route::get('{locationID}/users', array('as'=>'api.locations.viewusers', 'uses'=>'LocationsController@getDataViewUsers'));
         Route::get('{locationID}/assets', array('as'=>'api.locations.viewassets', 'uses'=>'LocationsController@getDataViewAssets'));
+
+        // Do we actually still need this, now that we have an API?
+        Route::get('{id}/check',
+            [ 'as' => 'api.locations.check', 'uses' => 'LocationsController@show' ]);
+
     });
 
 
@@ -290,16 +286,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         Route::get('list', [ 'as' => 'api.licenses.list', 'uses' => 'LicensesController@getDatatable' ]);
     });
 
-    /*---Locations API---*/
-    Route::group([ 'prefix' => 'locations' ], function () {
-
-        Route::get('{locationID}/check', function ($locationID) {
-
-            $location = Location::find($locationID);
-
-            return $location;
-        });
-    });
 
 
     Route::group([ 'prefix' => 'fields' ], function () {

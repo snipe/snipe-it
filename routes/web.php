@@ -110,16 +110,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
         # Settings
         Route::group([ 'prefix' => 'app' ], function () {
 
-            Route::get(
-                'api',
-                array('as' => 'settings.api',
-                    function () {
-                        return view('settings/api');
-                    }
-                )
-            );
-
-
+            Route::get('api', [ 'as' => 'settings.api', 'uses' => 'SettingsController@api' ]);
             Route::post('purge', ['as' => 'purge', 'uses' => 'SettingsController@postPurge']);
             Route::get('edit', [ 'as' => 'edit/settings', 'uses' => 'SettingsController@getEdit' ]);
             Route::post('edit', 'SettingsController@postEdit');
@@ -188,15 +179,7 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
     # Profile
     Route::get('profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ]);
     Route::post('profile', 'ProfileController@postIndex');
-
-    Route::get(
-        'api',
-        array('as' => 'user.api',
-            function () {
-                return view('account/api');
-            }
-        )
-    );
+    Route::get('api', [ 'as' => 'user.api', 'uses' => 'ProfileController@api' ]);
 
     # View Assets
     Route::get('view-assets', [ 'as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex' ]);
@@ -411,6 +394,3 @@ Route::group(['middleware' => 'web'], function () {
 
 });
 
-Route::get('home', function () {
-    return redirect('/');
-});
