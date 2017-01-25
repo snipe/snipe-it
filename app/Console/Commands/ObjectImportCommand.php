@@ -124,13 +124,6 @@ class ObjectImportCommand extends Command
     // An array of errors encountered while parsing
     private $errors;
 
-//    public function jsonError($field, $errorString)
-//    {
-//        $this->errors[$this->current_assetId][$field] = $errorString;
-//        if ($this->option('verbose')) {
-//            parent::error($field . $errorString);
-//        }
-//    }
 
     /**
      * Log a message to file, configurable by the --log-file parameter.
