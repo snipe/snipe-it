@@ -21,25 +21,23 @@ class LicensesTransformer
     {
         $array = [
             'id' => $license->id,
-            'name' => $license->name,
-            'companyName' => $license->companyName,
+            'name' => e($license->name),
+            'companyName' => e($license->companyName),
             'manufacturer' => ($license->manufacturer) ? $license->manufacturer : null,
-            'serial' => $license->name,
-            'purchase_order' => $license->order_number,
-            'purchase_date' => $license->purchase_date,
-            'purchase_cost' => $license->purchase_cost,
+            'serial' => e($license->name),
+            'purchase_order' => e($license->order_number),
+            'purchase_date' => e($license->purchase_date),
+            'purchase_cost' => e($license->purchase_cost),
             'depreciation' => ($license->depreciation) ? $license->depreciation : null,
-            'notes' => $license->notes,
-            'expiration_date' => $license->expiration_date,
-            'totalSeats' => $license->seats,
+            'notes' => e($license->notes),
+            'expiration_date' => e($license->expiration_date),
+            'totalSeats' => e($license->seats),
             'remaining' => $license->remaincount(),
-            'license_name' => $license->license_name,
-            'license_email' => $license->license_email,
-            'maintained' => ($license->maintained==1) ? true : false,
+            'license_name' => e($license->license_name),
+            'license_email' => e($license->license_email),
+            'maintained' => ($license->maintained == 1) ? true : false,
             'supplier' => ($license->supplier) ? $license->supplier : null,
             'created_at' => $license->created_at,
-
-
         ];
 
         return $array;
