@@ -25,42 +25,58 @@ class AccessoryPresenter extends Presenter
     {
         $layout = [
             [
-                "field" => "companyName",
+                "field" => "company",
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/companies/table.title'),
                 "visible" => false,
+                "formatter" => "companiesLinkObjFormatter"
             ], [
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/accessories/table.title'),
+                "formatter" => "accessoriesLinkFormatter"
             ], [
                 "field" => "category",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/accessories/general.accessory_category'),
+                "formatter" => "categoriesLinkObjFormatter"
             ], [
                 "field" => "model_number",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/models/table.modelnumber'),
+                "formatter" => "accessoriesLinkFormatter"
             ], [
                 "field" => "manufacturer",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.manufacturer'),
+                "formatter" => "manufacturersLinkObjFormatter",
             ], [
                 "field" => "location",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.location'),
+                "formatter" => "locationsLinkObjFormatter",
             ], [
                 "field" => "qty",
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('admin/accessories/general.total'),
+            ],  [
+                "field" => "min_qty",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('general.min_amt'),
+            ], [
+                "field" => "remaining_qty",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/accessories/general.remaining'),
             ], [
                 "field" => "purchase_date",
                 "searchable" => true,
@@ -79,21 +95,12 @@ class AccessoryPresenter extends Presenter
                 "visible" => false,
                 "title" => trans('general.order_number'),
             ], [
-                "field" => "min_amt",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.min_amt'),
-            ], [
-                "field" => "numRemaining",
-                "searchable" => false,
-                "sortable" => false,
-                "title" => trans('admin/accessories/general.remaining'),
-            ], [
                 "field" => "actions",
                 "searchable" => false,
                 "sortable" => false,
                 "switchable" => false,
                 "title" => trans('table.actions'),
+                "formatter" => "accessoriesActionsFormatter",
             ]
         ];
 

@@ -190,8 +190,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
 
-
-
     Route::resource('consumables', 'ConsumablesController',
         ['names' =>
             [
@@ -219,15 +217,28 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     );
 
 
+    Route::group([ 'prefix' => 'accessories' ], function () {
+        Route::match(['DELETE'], '{id}', ['uses' => 'AccessoriessController@destroy','as' => 'api.accessories.destroy']);
+        Route::get(
+            '{id}/checkedout',
+            [ 'as' => 'api.accessories.checkedout', 'uses' => 'AccessoriesController@checkedout' ]
+        );
+
+    });
+
+
+
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
                 'index' => 'api.accessories.index',
-                'create' => 'api.accessories.create',
+                'show' => 'api.accessories.show',
+                'update' => 'api.accessories.update',
+                'store' => 'api.accessories.store',
                 'destroy' => 'api.accessories.destroy'
             ],
-            'parameters' =>
-                ['accessory' => 'accessory_id']
+            'except' => ['edit'],
+            'parameters' => ['accessory' => 'accessory_id']
         ]
     );
 
@@ -250,18 +261,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
          'parameters' =>
              ['asset' => 'asset_id']
           ]);
-
-
-    /*---Accessories API---*/
-    Route::group([ 'prefix' => 'accessories' ], function () {
-
-        Route::get('list', [ 'as' => 'api.accessories.list', 'uses' => 'AccessoriesController@getDatatable' ]);
-        Route::get(
-            '{accessoryID}/view',
-            [ 'as' => 'api.accessories.view', 'uses' => 'AccessoriesController@getDataView' ]
-        );
-    });
-
 
 
     /*---Locations API---*/

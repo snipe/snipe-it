@@ -7,6 +7,7 @@ use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Http\Transformers\AssetModelsTransformer;
 
+
 /**
  * This class controls all actions related to asset models for
  * the Snipe-IT Asset Management application.

@@ -57,14 +57,14 @@
             name="accessory_users"
             class="table table-striped snipe-table"
             id="table"
-            data-url="{{ route('api.accessories.view', $accessory->id) }}"
+            data-url="{{ route('api.accessories.show', $accessory->id) }}"
             data-cookie="true"
             data-click-to-select="true"
             data-cookie-id-table="accessoryUsersTable"
           >
             <thead>
               <tr>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                <th data-switchable="false" data-searchable="false" data-formatter="userLinkObjFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>

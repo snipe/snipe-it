@@ -25,7 +25,7 @@
           name="accessories"
           class="table table-striped snipe-table"
           id="table"
-          data-url="{{route('api.accessories.list') }}"
+          data-url="{{route('api.accessories.index') }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="accessoriesTable-{{ config('version.hash_version') }}">
