@@ -1,4 +1,4 @@
-@extends('layouts/default')
+@extends('layouts.default')
 
 {{-- Page title --}}
 @section('title')
@@ -16,6 +16,7 @@
 @section('content')
 <div class="row">
   <div class="col-md-9">
+
   {{ Form::open(['route' => 'fieldsets.store', 'class'=>'form-horizontal']) }}
     <!-- Horizontal Form -->
     <div class="box box-default">

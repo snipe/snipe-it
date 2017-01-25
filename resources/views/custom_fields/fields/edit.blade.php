@@ -1,14 +1,14 @@
 @extends('layouts/default')
 {{-- Page title --}}
 @section('title')
-  {{ trans('admin/custom_fields/general.create_field') }}
+  {{ trans('admin/custom_fields/general.custom_fields') }}
 @parent
 @stop
 
 @section('content')
 
 @section('header_right')
-<a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
+<a href="{{ route('fields.index') }}" class="btn btn-primary pull-right">
   {{ trans('general.back') }}</a>
 @stop
 
@@ -19,7 +19,13 @@
 <div class="row">
   <div class="col-md-9">
     <!-- Horizontal Form -->
-      {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
+        @if ($field->id)
+          {{ Form::open(['route' => ['fields.update', $field->id], 'class'=>'form-horizontal']) }}
+          {{ method_field('PUT') }}
+        @else
+          {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
+        @endif
+
     <div class="box box-default">
       <div class="box-body">
 
@@ -29,8 +35,8 @@
               {{ trans('admin/custom_fields/general.field_name') }}
             </label>
             <div class="col-md-6 required">
-              <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name') }}" />
-              {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                {{ Form::text('name', Input::old('name', $field->name), array('class' => 'form-control')) }}
+                {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
 
@@ -41,7 +47,7 @@
             </label>
             <div class="col-md-6 required">
 
-            {!! Form::customfield_elements('element', Input::old('element'), 'field_element select2 form-control') !!}
+            {!! Form::customfield_elements('element', Input::old('element', $field->element), 'field_element select2 form-control') !!}
             {!! $errors->first('element', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
             </div>
@@ -53,7 +59,7 @@
               {{ trans('admin/custom_fields/general.field_values') }}
             </label>
             <div class="col-md-6 required">
-              {!! Form::textarea('field_values', Input::old('field_values'), ['style' => 'width: 100%', 'rows' => 4, 'class' => 'form-control']) !!}
+              {!! Form::textarea('field_values', Input::old('name', $field->field_values), ['style' => 'width: 100%', 'rows' => 4, 'class' => 'form-control']) !!}
               {!! $errors->first('field_values', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               <p class="help-block">{{ trans('admin/custom_fields/general.field_values_help') }}</p>
             </div>
@@ -76,16 +82,17 @@
               {{ trans('admin/custom_fields/general.field_custom_format') }}
             </label>
             <div class="col-md-6 required">
-              <input class="form-control" type="text" name="custom_format" id="custom_format" value="{{ Input::old('custom_format') }}" />
+                {{ Form::text('custom_format', Input::old('custom_format', $field->custom_format), array('class' => 'form-control', 'id' => 'custom_format')) }}
               {!! $errors->first('custom_format', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
 
+         @if (!$field->id)
           <!-- Encrypted  -->
           <div class="form-group {{ $errors->has('custom_format') ? ' has-error' : '' }}">
             <div class="col-md-8 col-md-offset-4">
               <label for="field_encrypted">
-                <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted" class="minimal"{{ Input::old('field_encrypted') ? ' checked="checked"' : '' }}>
+                <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted" class="minimal"{{ (Input::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
                 {{ trans('admin/custom_fields/general.encrypt_field') }}
               </label>
             </div>
@@ -96,7 +103,7 @@
               </div>
             </div>
           </div>
-
+          @endif
 
 
       </div> <!-- /.box-body-->
@@ -120,7 +127,6 @@
         // Only display the custom format field if it's a custom format validation type
         $(".format").change(function(){
             $(this).find("option:selected").each(function(){
-                //console.warn($(this).attr("value"));
                 if (($(this).attr("value")=="") &&  $('.format').prop("selectedIndex") != 0) {
                     $("#custom_regex").show();
                 } else{
@@ -132,7 +138,6 @@
         // Only display the field element if the type is not text
         $(".field_element").change(function(){
             $(this).find("option:selected").each(function(){
-                //console.warn($(this).attr("value"));
                 if($(this).attr("value")!="text"){
                     $("#field_values_text").show();
                 } else{
