@@ -22,7 +22,7 @@ class AssetModelsTransformer
             'id' => $assetmodel->id,
             'name' => e($assetmodel->name),
             'manufacturer' => ($assetmodel->manufacturer_id) ? $assetmodel->manufacturer : null,
-            'image' => e($assetmodel->image),
+            'image' => ($assetmodel->image!='') ? url('/').'/uploads/models/'.e($assetmodel->image) : '',
             'model_number' => e($assetmodel->model_number),
             'depreciation' => ($assetmodel->depreciation) ? $assetmodel->depreciation : 'No',
             'assets_count' => $assetmodel->assets_count,

@@ -271,6 +271,17 @@ class Asset extends Depreciable
         return $this->belongsTo('\App\Models\Location', 'rtd_location_id');
     }
 
+
+    public function getImageUrl() {
+        if ($this->image && !empty($this->image)) {
+            return url('/').'/uploads/assets/'.$this->image;
+        } elseif ($this->model && !empty($this->model->image)) {
+            return url('/').'/uploads/models/'.$this->model->image;
+        }
+        return false;
+    }
+
+
   /**
    * Get action logs for this asset
    */

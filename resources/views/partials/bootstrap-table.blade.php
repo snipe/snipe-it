@@ -115,13 +115,7 @@ $('.snipe-table').bootstrapTable({
         };
     }
 
-    function genericPublicImageFormatter(destination) {
-        return function (value,row) {
-            if (value) {
-                return '<img src="{{ url('/') }}/uploads/' + destination + '/' + value + '" height="50" width="50">';
-            }
-        }
-    }
+
 
     var formatters = [
         'hardware',
@@ -142,7 +136,6 @@ $('.snipe-table').bootstrapTable({
         window[formatters[i] + 'LinkFormatter'] = genericRowLinkFormatter(formatters[i]);
         window[formatters[i] + 'LinkObjFormatter'] = genericColumnObjLinkFormatter(formatters[i]);
         window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
-        window[formatters[i] + 'ImageFormatter'] = genericPublicImageFormatter(formatters[i]);
     }
 
 
@@ -165,6 +158,13 @@ $('.snipe-table').bootstrapTable({
     function emailFormatter(value, row) {
         if (value) {
             return '<a href="mailto:' + value + '"> ' + value + '</a>';
+        }
+    }
+
+    function imageFormatter(value, row) {
+        console.log(value);
+        if (value) {
+            return '<img src="' + value + '" height="50" width="50">';
         }
     }
 
