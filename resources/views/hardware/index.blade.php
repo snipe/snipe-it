@@ -74,18 +74,18 @@
                           <th data-checkbox="true" data-field="checkbox"></th>
                     @endif
                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
+                    <th data-field="companyName" data-formatter="companiesLinkObjFormatter" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
                     <th data-sortable="true" data-field="image" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
-                    <th data-sortable="true" data-field="name" data-visible="false" data-formatter="assetFormatter">{{ trans('admin/hardware/form.name') }}</th>
-                    <th data-sortable="true" data-field="asset_tag" data-formatter="assetFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                    <th data-sortable="true" data-field="serial" data-formatter="assetFormatter">{{ trans('admin/hardware/table.serial') }}</th>
-                    <th data-sortable="true" data-field="model" data-formatter="modelFormatter">{{ trans('admin/hardware/form.model') }}</th>
+                    <th data-sortable="true" data-field="name" data-visible="false" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.name') }}</th>
+                    <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                    <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
+                    <th data-sortable="true" data-field="model" data-formatter="modelsLinkObjFormatter">{{ trans('admin/hardware/form.model') }}</th>
                     <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
-                    <th data-sortable="true" data-field="status_label" data-formatter="statusFormatter">{{ trans('admin/hardware/table.status') }}</th>
-                    <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
-                    <th data-sortable="true" data-formatter="locationFormatter" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
-                    <th data-sortable="true" data-field="category" data-searchable="true" data-formatter="categoryFormatter">{{ trans('general.category') }}</th>
-                    <th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
+                    <th data-sortable="true" data-field="status_label" data-formatter="statuslabelsLinkObjFormatter">{{ trans('admin/hardware/table.status') }}</th>
+                    <th data-sortable="true" data-formatter="usersLinkObjFormatter" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
+                    <th data-sortable="true" data-formatter="locationsLinkObjFormatter" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
+                    <th data-sortable="true" data-field="category" data-searchable="true" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
+                    <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
                     <th data-sortable="true" data-field="purchase_cost" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.cost') }}</th>
                     <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
                     <th data-sortable="false" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
@@ -108,7 +108,7 @@
                     <th data-sortable="true" data-field="created_at" data-formatter="createdAtFormatter" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
                     <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{ trans('admin/hardware/table.change') }}</th>
 
-                    <th data-switchable="false" data-searchable="false" data-formatter="actionsFormatter" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
+                    <th data-switchable="false" data-searchable="false" data-formatter="hardwareActionsFormatter" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
                   </tr>
                 </thead>
               </table>
@@ -128,18 +128,4 @@
     'multiSort' => true
 ])
 
-<script>
-
-    function actionsFormatter(value, row) {
-        return '<nobr><a href="{{ url('/') }}/hardware/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
-            + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
-            + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
-            + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
-            + '<i class="fa fa-trash"></i></a></nobr>';
-
-    }
-
-
-
-</script>
 @stop

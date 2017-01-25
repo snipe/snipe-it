@@ -28,7 +28,7 @@
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-field="name">{{ trans('admin/locations/table.name') }}</th>
+                <th data-sortable="true" data-formatter="locationsLinkFormatter" data-field="name" data-searchable="true">{{ trans('admin/locations/table.name') }}</th>
                 <th data-sortable="true" data-field="parent">{{ trans('admin/locations/table.parent') }}</th>
                 <th data-searchable="false" data-sortable="false" data-field="assets_default">{{ trans('admin/locations/table.assets_rtd') }}</th>
                 <th data-searchable="false" data-sortable="false" data-field="assets_checkedout">{{ trans('admin/locations/table.assets_checkedout') }}</th>
@@ -44,7 +44,7 @@
                   </th>
                 <th data-searchable="true" data-sortable="true" data-field="country">
                 {{ trans('admin/locations/table.country') }}</th>
-                <th data-switchable="false" data-formatter="actionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+                <th data-switchable="false" data-formatter="locationsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>
@@ -59,14 +59,4 @@
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'locations-export', 'search' => true])
 
-  <script>
-      function actionsFormatter(value, row) {
-          return '<a href="{{ url('/') }}/locations/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
-          + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
-          + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
-          + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
-          + '<i class="fa fa-trash"></i></a>';
-
-      }
-  </script>
 @stop

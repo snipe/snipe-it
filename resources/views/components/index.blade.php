@@ -37,7 +37,7 @@
           name="components"
           class="table table-striped snipe-table"
           id="table"
-          data-url="{{route('api.components.list') }}"
+          data-url="{{route('api.components.index') }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="componentsTable-{{ config('version.hash_version') }}-{{ config('version.hash_version') }}"

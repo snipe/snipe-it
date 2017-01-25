@@ -23,7 +23,7 @@
           class="table table-striped snipe-table"
           id="table"
           data-toggle="table"
-          data-url="{{ route('api.groups.list') }}"
+          data-url="{{ route('api.groups.index') }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="userGroupDisplay-{{ config('version.hash_version') }}">

@@ -44,7 +44,7 @@
         name="modelassets"
         id="table"
         class="snipe-table"
-        data-url="{{route('api.models.view', $model->id)}}"
+        data-url="{{route('api.models.show', $model->id)}}"
         data-cookie="true"
         data-click-to-select="true"
         data-cookie-id-table="modeldetailsViewTable">

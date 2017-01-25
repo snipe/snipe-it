@@ -151,8 +151,10 @@ class AssetsController extends Controller
 
         if ($asset = Asset::withTrashed()->find($id)) {
             $this->authorize('view', $asset);
+
             $asset = $asset->present()->detail();
-            return $asset;
+            return (new AssetsTransformer)->transformAsset($asset);
+
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);

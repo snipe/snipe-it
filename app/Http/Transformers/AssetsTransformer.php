@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\Collection;
+use App\Http\Transformers\UsersTransformer;
 
 class AssetsTransformer
 {
@@ -33,9 +34,9 @@ class AssetsTransformer
             'expected_checkin' => $asset->expected_checkin,
             'order_number' => $asset->order_number,
             'companyName' => $asset->companyName,
-            'location' => ($asset->assetLoc) ? $asset->assetLoc->name : '',
+            'location' => ($asset->assetLoc) ? $asset->assetLoc : '',
             'image' => $asset->image,
-            'assigned_to' => ($asset->assigneduser) ? $asset->assigneduser->present()->fullName() : '',
+            'assigned_to' => ($asset->assigneduser) ? (new UsersTransformer)->transformUser($asset->assigneduser) : null,
             'created_at' => $asset->created_at,
             'purchase_date' => $asset->purchase_date,
             'purchase_cost' => $asset->purchase_cost,

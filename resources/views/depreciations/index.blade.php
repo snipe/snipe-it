@@ -24,7 +24,7 @@ Asset Depreciations
           name="depreciations"
           class="table table-striped snipe-table"
           id="table"
-          data-url="{{ route('api.depreciations.list') }}"
+          data-url="{{ route('api.depreciations.index') }}"
           data-cookie="true"
           data-cookie-id-table="depreciationsTable-{{ config('version.hash_version') }}">
             <thead>

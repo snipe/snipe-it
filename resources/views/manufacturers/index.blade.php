@@ -36,7 +36,7 @@
                 <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="licenses_count">{{ trans('general.licenses') }}</th>
                 <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="accessories_count">{{ trans('general.accessories') }}</th>
                 <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="consumables_count">{{ trans('general.consumables') }}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+                <th data-formatter="manufacturersActionsFormatter" data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>

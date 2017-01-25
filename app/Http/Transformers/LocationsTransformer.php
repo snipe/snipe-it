@@ -17,7 +17,7 @@ class LocationsTransformer
     public function transformLocation (Location $location = null)
     {
         if ($location) {
-            $locations_array[] = [
+            $transformed = [
                 'id' => e($location->id),
                 'name' => e($location->name),
                 'address' => e($location->address),
@@ -25,7 +25,7 @@ class LocationsTransformer
                 'state' => e($location->state),
                 'country' => e($location->country),
             ];
-            return $locations_array;
+            return $transformed;
         }
 
 

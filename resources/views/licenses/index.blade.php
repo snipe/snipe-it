@@ -35,9 +35,9 @@
                 <tr>
                     <th data-checkbox="true" data-field="checkbox"></th>
                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false" data-formatter="companyFormatter">{{ trans('general.company') }}</th>
-                    <th data-sortable="true" data-field="name" data-visible="false" data-formatter="licenseFormatter">{{ trans('admin/licenses/table.title') }}</th>
-                    <th data-field="manufacturer" data-sortable="true" data-formatter="manufacturerFormatter">{{ trans('general.manufacturer') }}</th>
+                    <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('general.company') }}</th>
+                    <th data-sortable="true" data-field="name" data-visible="false" data-formatter="licensesLinkFormatter">{{ trans('admin/licenses/table.title') }}</th>
+                    <th data-field="manufacturer" data-sortable="true" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
                     <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/form.license_key') }}</th>
                     <th data-field="license_name" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_name') }}</th>
                     <th data-field="license_email" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_email') }}</th>
@@ -50,7 +50,7 @@
                     <th data-sortable="true" data-field="created_at" data-formatter="createdAtFormatter" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
                     <th data-field="notes" data-sortable="true" data-visible="false">{{ trans('admin/hardware/form.notes') }}</th>
 
-                    <th data-switchable="false" data-searchable="false" data-formatter="actionsFormatter" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
+                    <th data-switchable="false" data-searchable="false" data-formatter="licensesActionsFormatter" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
                 </tr>
             </thead>
         </table>
@@ -66,16 +66,4 @@
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'licenses-export', 'search' => true])
 
-<script>
-
-    function actionsFormatter(value, row) {
-        return '<nobr><a href="{{ url('/') }}/licenses/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
-            + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
-            + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
-            + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
-            + '<i class="fa fa-trash"></i></a></nobr>';
-
-    }
-
-</script>
 @stop

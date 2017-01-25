@@ -75,15 +75,15 @@
                    <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                    <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
-                   <th data-sortable="true" data-field="name" data-formatter="userFormatter">{{ trans('admin/users/table.name') }}</th>
+                   <th data-sortable="true" data-field="name" data-formatter="userLinkFormatter">{{ trans('admin/users/table.name') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="jobtitle" data-visible="false">{{ trans('admin/users/table.title') }}</th>
                    <th data-sortable="true" data-field="email" data-formatter="emailFormatter">
                        <span class="hidden-md hidden-lg">{{ trans('admin/users/table.email') }}</span>
                        <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
                    <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
-                   <th data-searchable="true" data-sortable="true" data-field="manager" data-formatter="userFormatter">{{ trans('admin/users/table.manager') }}</th>
-                   <th data-sortable="true" data-field="location" data-formatter="locationFormatter">{{ trans('admin/users/table.location') }}</th>
+                   <th data-searchable="true" data-sortable="true" data-field="manager" data-formatter="userLinkObjFormatter">{{ trans('admin/users/table.manager') }}</th>
+                   <th data-sortable="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('admin/users/table.location') }}</th>
                    <th data-sortable="false" data-field="assets">
                        <span class="hidden-md hidden-lg">Assets</span>
                        <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>
@@ -109,7 +109,7 @@
 
                    <th data-sortable="true" data-field="activated" data-formatter="trueFalseFormatter">{{ trans('general.activated') }}</th>
                    <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false" data-formatter="createdAtFormatter">{{ trans('general.created_at') }}</th>
-                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-formatter="actionsFormatter" data-field="actions" >{{ trans('table.actions') }}</th>
+                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-formatter="usersActionsFormatter" data-field="actions" >{{ trans('table.actions') }}</th>
                  </tr>
                </thead>
              </table>
@@ -133,16 +133,6 @@
             groups += '<a href="#" class="label label-default"> ' + value[index].name + '</a> ';
         }
         return groups;
-    }
-
-
-    function actionsFormatter(value, row) {
-        return '<nobr><a href="{{ url('/') }}/users/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
-            + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
-            + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
-            + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
-            + '<i class="fa fa-trash"></i></a></nobr>';
-
     }
 
 

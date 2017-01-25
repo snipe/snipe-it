@@ -53,13 +53,13 @@
                                     <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
                                     <th data-sortable="true" data-field="image" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
                                     <th data-sortable="true" data-field="name" data-visible="false">{{ trans('admin/hardware/form.name') }}</th>
-                                    <th data-sortable="true" data-field="asset_tag" data-formatter="assetFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                                    <th data-sortable="true" data-field="serial" data-formatter="assetFormatter">{{ trans('admin/hardware/table.serial') }}</th>
+                                    <th data-sortable="true" data-field="asset_tag" data-formatter="assetLinkFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                                    <th data-sortable="true" data-field="serial" data-formatter="assetLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
                                     <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
                                     <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
 
                                     <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
-                                    <th data-sortable="true" data-formatter="locationFormatter" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
+                                    <th data-sortable="true" data-formatter="locationsLinkObjFormatter" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
                                     <th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
                                     <th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
                                     <th data-sortable="true" data-field="purchase_cost" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.cost') }}</th>

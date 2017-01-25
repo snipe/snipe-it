@@ -78,6 +78,53 @@ $('.snipe-table').bootstrapTable({
     });
 
 
+    // This only works for model index pages because it uses the row's model ID
+    function genericRowLinkFormatter(destination) {
+        return function (value,row) {
+            if (value) {
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '"> ' + value + '</a>';
+            }
+        };
+    }
+
+    // Use this when we're introspecting into a column object and need to link
+    function genericColumnObjLinkFormatter(destination) {
+        return function (value,row) {
+            if ((value) && (value.name)) {
+                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';
+            }
+        };
+    }
+
+    function genericActionsFormatter(destination) {
+        return function (value,row) {
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
+                    + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
+                    + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
+                    + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
+                    + '<i class="fa fa-trash"></i></a></nobr>';
+        };
+    }
+
+    // Use this when we're introspecting into a column object with more than one item
+    function genericColumnArrayLinkFormatter(destination) {
+        return function (value,row) {
+            if ((value) && (value.name)) {
+                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';
+            }
+        };
+    }
+
+    var formatters = ['hardware','locations','users','manufacturers','statuslabels','models','licenses','categories','suppliers','companies'];
+
+    for (var i in formatters) {
+        window[formatters[i] + 'LinkFormatter'] = genericRowLinkFormatter(formatters[i]);
+        window[formatters[i] + 'LinkObjFormatter'] = genericColumnObjLinkFormatter(formatters[i]);
+        window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
+    }
+
+
+
     function createdAtFormatter(value, row) {
         if ((value) && (value.date)) {
             return value.date;
@@ -92,61 +139,6 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
-    function userFormatter(value, row) {
-        if (value.name) {
-            return '<a href="{{ url('/') }}/users/' + value.id + '"> ' + value.name + '</a>';
-        } else if (value) {
-            return '<a href="{{ url('/') }}/users/' + row.id + '"> ' + value + '</a>';
-        }
-    }
-
-    function assetFormatter(value, row) {
-        if (value) {
-            return '<a href="{{ url('/') }}/hardware/' + row.id + '"> ' + value + '</a>';
-        }
-    }
-
-    function manufacturerFormatter(value, row) {
-        if (value) {
-            return '<a href="{{ url('/') }}/manufacturers/' + row.id + '"> ' + value.name + '</a>';
-        }
-    }
-
-    function statusFormatter(value, row) {
-        if (value) {
-            return '<a href="{{ url('/') }}/statuslabels/' + value.id + '"> ' + value.name + '</a>';
-        }
-    }
-
-    function modelFormatter(value, row) {
-        if (value) {
-            return '<a href="{{ url('/') }}/models/' + value.id + '"> ' + value.name + '</a>';
-        }
-    }
-
-    function licenseFormatter(value, row) {
-        if (value) {
-            return '<a href="{{ url('/') }}/licenses/' + row.id + '"> ' + row.name + '</a>';
-        }
-    }
-
-    function categoryFormatter(value, row) {
-        if (value) {
-            return '<a href="{{ url('/') }}/categories/' + value.id + '"> ' + value.name + '</a>';
-        }
-    }
-
-    function companyFormatter(value, row) {
-        if ((value) && (value[0].name)) {
-            return '<a href="{{ url('/') }}/companies/' + value[0].id + '"> ' + value[0].name + '</a>';
-        }
-    }
-
-    function locationFormatter(value, row) {
-        if ((value) && (value[0].name)) {
-            return '<a href="{{ url('/') }}/locations/' + value[0].id + '"> ' + value[0].name + '</a>';
-        }
-    }
 
     function emailFormatter(value, row) {
         if (value) {
