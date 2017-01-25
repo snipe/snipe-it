@@ -33,13 +33,14 @@ $('.snipe-table').bootstrapTable({
         exportTypes: ['csv', 'excel', 'txt','json', 'xml'],
         exportOptions: {
             fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
+            ignoreColumn: ['actions','change','checkbox']
         },
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
         paginationPreText: "{{ trans('general.previous') }}",
         paginationNextText: "{{ trans('general.next') }}",
-        pageList: ['10','25','50','100','150','200'],
+        pageList: ['10','25','50','100','150','200','500','1000'],
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',
