@@ -4,9 +4,6 @@
 */
 
 
-Route::resource('fields', 'CustomFieldsController', [
-'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id']
-]);
 
 Route::group([ 'prefix' => 'fields' ], function () {
 
@@ -24,3 +21,7 @@ Route::group([ 'prefix' => 'fields' ], function () {
     'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id']
     ]);
 });
+
+Route::resource('fields', 'CustomFieldsController', [
+    'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id']
+]);

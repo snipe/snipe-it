@@ -103,6 +103,9 @@
               </td>
               <td>
                 {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete')) }}
+                <nobr>
+                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+
 
                 @if($field->fieldset->count()>0)
                 <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
@@ -110,6 +113,7 @@
                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                 @endif
                 {{ Form::close() }}
+                </nobr>
               </td>
             </tr>
             @endforeach

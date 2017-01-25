@@ -218,7 +218,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
     Route::group([ 'prefix' => 'accessories' ], function () {
-        Route::match(['DELETE'], '{id}', ['uses' => 'AccessoriessController@destroy','as' => 'api.accessories.destroy']);
+        Route::match(['DELETE'], '{id}', ['uses' => 'AccessoriesController@destroy','as' => 'api.accessories.destroy']);
         Route::get(
             '{id}/checkedout',
             [ 'as' => 'api.accessories.checkedout', 'uses' => 'AccessoriesController@checkedout' ]

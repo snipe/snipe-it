@@ -7,10 +7,6 @@ use Schema;
 class CustomField extends Model
 {
     public $guarded=["id"];
-
-    /**
-
-    */
     public static $PredefinedFormats=[
         "ANY" => "",
         "ALPHA" => "alpha",
@@ -22,7 +18,7 @@ class CustomField extends Model
         "IP" => "ip",
     ];
 
-    public $rules=[
+    public $rules = [
       "name" => "required|unique:custom_fields"
     ];
 

@@ -55,7 +55,8 @@ class CustomFieldsController extends Controller
     */
     public function create()
     {
-        return View::make("custom_fields.create_field");
+
+        return View::make("custom_fields.fields.edit")->with('field', new CustomField());
     }
 
 
@@ -85,9 +86,8 @@ class CustomFieldsController extends Controller
             $field->format = e($request->get("format"));
         }
 
+        $validator = Validator::make(Input::all(), $field->rules);
 
-
-        $validator=Validator::make(Input::all(), $field->rules);
         if ($validator->passes()) {
             $results = $field->save();
             if ($results) {
@@ -142,32 +142,56 @@ class CustomFieldsController extends Controller
 
 
     /**
-    * What the actual fuck, Brady?
+    * Return a view to edit a custom field
     *
-    * @todo Uhh, build this?
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param  int  $id
-    * @since [v1.8]
-    * @return Fuckall
+    * @since [v4.0]
+    * @return View
     */
     public function edit($id)
     {
-        //
+        $field = CustomField::find($id);
+        return View::make("custom_fields.fields.edit")->with('field', $field);
     }
 
 
     /**
-    * GET IN THE SEA BRADY.
+    * Store the updated field
     *
-    * @todo Uhh, build this too?
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @todo Allow encrypting/decrypting if encryption status changes
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param  int  $id
-    * @since [v1.8]
-    * @return Fuckall
+    * @since [v4.0]
+    * @return Redirect
     */
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        //
+        $field =  CustomField::find($id);
+
+        $field->name = e($request->get("name"));
+        $field->element = e($request->get("element"));
+        $field->field_values = e($request->get("field_values"));
+        $field->field_encrypted = e($request->get("field_encrypted", 0));
+        $field->user_id = Auth::user()->id;
+
+        if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
+            $field->format = e($request->get("custom_format"));
+        } else {
+            $field->format = e($request->get("format"));
+        }
+
+        $validator = Validator::make(Input::all(), $field->rules);
+
+        $validator = Validator::make(Input::all(), $field->rules);
+
+        if ($validator->passes()) {
+           $field->save();
+           return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.update.success'));
+        }
+
+       return redirect()->back()->withInput()->withErrors($validator);
     }
 
 
