@@ -42,7 +42,8 @@
               </td>
               <td>
                 @foreach($fieldset->models as $model)
-                {{ link_to_route("models.show",$model->name,[$model->id]) }}
+                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}</a>
+
                 @endforeach
               </td>
               <td>
@@ -98,7 +99,7 @@
               <td>{{ $field->element }}</td>
               <td>
                 @foreach($field->fieldset as $fieldset)
-                {{ link_to_route("fieldsets.show",$fieldset->name,[$fieldset->id])}}
+                  <a href="{{ route('fieldsets.show', $fieldset->id) }}" class="label label-default">{{ $fieldset->name }}</a>
                 @endforeach
               </td>
               <td>
