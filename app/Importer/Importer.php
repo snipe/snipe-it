@@ -153,7 +153,7 @@ abstract class Importer
     {
         $val = $default;
         if (array_key_exists(trim($key), $array)) {
-            $val = e(Encoding::fixUTF8(trim($array[ $key ])));
+            $val = e(Encoding::toUTF8(trim($array[ $key ])));
         }
         $key = title_case($key);
         $this->log("${key}: ${val}");
