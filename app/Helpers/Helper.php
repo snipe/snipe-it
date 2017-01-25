@@ -377,8 +377,8 @@ class Helper
      */
     public static function predefined_formats()
     {
-        $keys=array_keys(CustomField::$PredefinedFormats);
-        $stuff=array_combine($keys, $keys);
+        $keys = array_keys(CustomField::$PredefinedFormats);
+        $stuff = array_combine($keys, $keys);
         return $stuff+["" => trans('admin/custom_fields/general.custom_format')];
     }
 
@@ -626,24 +626,6 @@ class Helper
         return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[ $key ])) : $default;
     }
 
-    /**
-     * Check to see if the given key exists in the array, and trim excess white space before returning it
-     *
-     * @author A. Gianotto
-     * @since 3.2
-     * @param $array array
-     * @return string
-     */
-    public static function getLastDateFromHistoryArray(array $array)
-    {
-        foreach ($array as $key => $value) {
-//            echo '<pre>';
-//            echo 'last:'.$key;
-//            print_r($array);
-//            echo '</pre>';
-        }
-    }
-
 
     /**
      * Gracefully handle decrypting the legacy data (encrypted via mcrypt) and use the new
@@ -675,57 +657,7 @@ class Helper
 
     }
 
-    /**
-     * Strip HTML out of returned JSON. This is pretty gross, and I'd like to find a better way
-     * to handle this, but the REST API will solve some of these problems anyway.
-     *
-     * This is not currently used, but will be.
-     *
-     * @author A. Gianotto
-     * @since 3.4
-     * @param $array array
-     * @return Array
-     */
-    public static function stripTagsFromJSON(array $array)
-    {
 
-        foreach ($array as $key => $value) {
-            $clean_value = strip_tags($value);
-            $clean_array[$key] = $clean_value;
-        }
-        return $clean_array;
-
-    }
-
-    /**
-     * Generate html button for datatable actions.
-     * @author Daniel Meltzer
-     * @since 3.7
-     * @param string $type
-     * @param string $route
-     * @param boolean $enabled Used for checkin/checkout
-     * @param string $message Used for Delete Modal
-     * @param string $itemName Used for Delete Modal
-     * @return string
-     */
-    public static function generateDatatableButton($type, $route, $enabled = true, $message = null, $itemName = null)
-    {
-        $disabledString = $enabled ? '' : 'disabled';
-        switch ($type) {
-            case 'checkout':
-                return '<a href="' . $route . '" style="margin-right:5px;" class="btn btn-info btn-sm ' . $disabledString . '">' . trans('general.checkout') . '</a>';
-            case 'checkin':
-                return '<a href="' . $route . '" class="btn btn-info btn-sm ' . $disabledString . '">'.trans('general.checkin').'</a>';
-            case 'edit':
-                return '<a href="' . $route . '" class="btn btn-warning btn-sm ' . $disabledString . '" title="Edit" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
-            case 'clone':
-                return '<a href="'.$route.'" class="btn btn-info btn-sm ' . $disabledString . '" title="Clone" data-toggle="tooltip"><i class="fa fa-clone"></i></a>';
-            case 'delete':
-                return '<a data-html="false" class="btn delete-asset btn-danger btn-sm ' . $disabledString . '" data-toggle="modal" href="' . $route . '" data-content="' . $message . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($itemName) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
-            case 'restore':
-                return '<a href="'.$route.'" class="btn btn-warning btn-sm ' . $disabledString . '"><i class="fa fa-recycle icon-white"></i></a>';
-        }
-    }
 
     public static function formatStandardApiResponse($status, $payload = null, $messages = null) {
 
@@ -738,4 +670,13 @@ class Helper
 
         return $array;
     }
+
+
+    /*
+    Possible solution for unicode fieldnames
+    */
+    public static function make_slug($string) {
+        return preg_replace('/\s+/u', '_', trim($string));
+    }
+
 }
