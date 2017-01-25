@@ -8,7 +8,10 @@
 
 {{-- Page content --}}
 @section('content')
-
-        <passport-personal-access-tokens></passport-personal-access-tokens>
+     @if (!config('app.lock_passwords'))
+         <passport-personal-access-tokens></passport-personal-access-tokens>
+     @else
+         <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+    @endif
 
 @stop
