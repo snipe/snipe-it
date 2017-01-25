@@ -181,18 +181,18 @@ class LicensesController extends Controller
         $license->expiration_date   = $request->input('expiration_date');
         $license->license_email     = $request->input('license_email');
         $license->license_name      = $request->input('license_name');
-        $license->maintained        = $request->input('maintained');
-        $license->maintained = $request->input('maintained', 0);
+        $license->maintained        = $request->input('maintained',0);
         $license->name              = $request->input('name');
         $license->notes             = $request->input('notes');
         $license->order_number      = $request->input('order_number');
         $license->purchase_cost     = $request->input('purchase_cost');
         $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
-        $license->reassignable = $request->input('reassignable', 0);
+        $license->reassignable      = $request->input('reassignable', 0);
         $license->serial            = $request->input('serial');
         $license->termination_date  = $request->input('termination_date');
         $license->seats             = e($request->input('seats'));
+        $license->manufacturer_id   =  $request->input('manufacturer_id');
 
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
