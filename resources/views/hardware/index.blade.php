@@ -76,7 +76,7 @@
                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                     <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
                     <th data-sortable="true" data-field="image" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
-                    <th data-sortable="true" data-field="name" data-visible="false">{{ trans('admin/hardware/form.name') }}</th>
+                    <th data-sortable="true" data-field="name" data-visible="false" data-formatter="assetFormatter">{{ trans('admin/hardware/form.name') }}</th>
                     <th data-sortable="true" data-field="asset_tag" data-formatter="assetFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
                     <th data-sortable="true" data-field="serial" data-formatter="assetFormatter">{{ trans('admin/hardware/table.serial') }}</th>
                     <th data-sortable="true" data-field="model" data-formatter="modelFormatter">{{ trans('admin/hardware/form.model') }}</th>

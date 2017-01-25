@@ -34,6 +34,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     );
 
 
+    Route::resource('licenses', 'LicensesController',
+        ['names' =>
+            [
+                'index' => 'api.licenses.index',
+                'show' => 'api.licenses.show',
+                'update' => 'api.licenses.update',
+                'store' => 'api.licenses.store',
+                'destroy' => 'api.licenses.destroy'
+            ],
+            'except' => ['edit'],
+            'parameters' => ['license' => 'license_id']
+        ]
+    );
+
+
     Route::resource('models', 'AssetModelsController',
         ['names' =>
             [
@@ -262,8 +277,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     });
 
 
-
-
     /*---Suppliers API---*/
     Route::group(array('prefix'=>'suppliers'), function () {
         Route::get('list', array('as'=>'api.suppliers.list', 'uses'=>'SuppliersController@getDatatable'));
@@ -278,13 +291,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         Route::post('{userId}/upload', [ 'as' => 'upload/user', 'uses' => 'UsersController@postUpload' ]);
     });
 
-
-
-    /*---Licenses API---*/
-    Route::group([ 'prefix' => 'licenses' ], function () {
-
-        Route::get('list', [ 'as' => 'api.licenses.list', 'uses' => 'LicensesController@getDatatable' ]);
-    });
 
 
 

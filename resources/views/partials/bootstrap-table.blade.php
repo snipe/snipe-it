@@ -101,7 +101,13 @@ $('.snipe-table').bootstrapTable({
 
     function assetFormatter(value, row) {
         if (value) {
-            return '<a href={{ url('/') }}/hardware/' + row.id + '"> ' + value + '</a>';
+            return '<a href="{{ url('/') }}/hardware/' + row.id + '"> ' + value + '</a>';
+        }
+    }
+
+    function manufacturerFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/manufacturers/' + row.id + '"> ' + value.name + '</a>';
         }
     }
 
@@ -114,6 +120,12 @@ $('.snipe-table').bootstrapTable({
     function modelFormatter(value, row) {
         if (value) {
             return '<a href="{{ url('/') }}/models/' + value.id + '"> ' + value.name + '</a>';
+        }
+    }
+
+    function licenseFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/licenses/' + row.id + '"> ' + row.name + '</a>';
         }
     }
 
