@@ -21,6 +21,7 @@ class AssetModel extends SnipeModel
     use Requestable, Presentable;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
+    protected $hidden = ['user_id','deleted_at'];
 
     // Declare the rules for the model validation
     protected $rules = array(

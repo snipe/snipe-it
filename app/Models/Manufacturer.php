@@ -19,6 +19,10 @@ class Manufacturer extends SnipeModel
         'user_id' => 'integer',
     );
 
+    protected $hidden = ['user_id','deleted_at'];
+
+
+
     /**
     * Whether the model should inject it's identifier to the unique
     * validation rules before attempting validation. If this property

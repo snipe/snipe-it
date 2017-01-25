@@ -5,7 +5,7 @@ use App\Models\AssetModel;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\AssetModelsTransformer;
 
 /**
  * This class controls all actions related to asset models for
@@ -28,7 +28,7 @@ class AssetModelsController extends Controller
         $this->authorize('view', AssetModel::class);
         $allowed_columns = ['id','image','name','model_number','eol','notes','created_at'];
 
-        $assetmodels = AssetModel::select(['id','image','name','model_number','eol','notes','created_at'])
+        $assetmodels = AssetModel::select(['id','image','name','model_number','eol','notes','created_at','category_id','manufacturer_id','depreciation_id','fieldset_id'])
             ->with('category','depreciation', 'manufacturer','fieldset')
             ->withCount('assets');
 
@@ -44,7 +44,7 @@ class AssetModelsController extends Controller
 
         $total = $assetmodels->count();
         $assetmodels = $assetmodels->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($assetmodels, $total);
+        return (new AssetModelsTransformer)->transformAssetModels($assetmodels, $total);
     }
 
 
@@ -81,7 +81,7 @@ class AssetModelsController extends Controller
     {
         $this->authorize('view', AssetModel::class);
         $assetmodel = AssetModel::findOrFail($id);
-        return $assetmodel;
+        return (new AssetModelsTransformer)->transformAssetModel($assetmodel);
     }
 
 

@@ -16,6 +16,7 @@ class Statuslabel extends SnipeModel
     protected $injectUniqueIdentifier = true;
     protected $dates = ['deleted_at'];
     protected $table = 'status_labels';
+    protected $hidden = ['user_id','deleted_at'];
 
 
     protected $rules = array(

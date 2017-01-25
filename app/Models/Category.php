@@ -23,6 +23,7 @@ class Category extends SnipeModel
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'categories';
+    protected $hidden = ['user_id','deleted_at'];
 
     /**
     * Category validation rules

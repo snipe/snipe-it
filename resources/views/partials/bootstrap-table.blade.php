@@ -55,8 +55,6 @@ $('.snipe-table').bootstrapTable({
 
     });
 
-
-
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('check.bs.table', function () {
         $('#bulkEdit').removeAttr('disabled');
@@ -96,6 +94,7 @@ $('.snipe-table').bootstrapTable({
         };
     }
 
+    // Make the edit/delete buttons
     function genericActionsFormatter(destination) {
         return function (value,row) {
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
@@ -106,21 +105,44 @@ $('.snipe-table').bootstrapTable({
         };
     }
 
-    // Use this when we're introspecting into a column object with more than one item
-    function genericColumnArrayLinkFormatter(destination) {
+    function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
-            if ((value) && (value.name)) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';
-            }
+            return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
+                + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
+                + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
+                + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
+                + '<i class="fa fa-trash"></i></a></nobr>';
         };
     }
 
-    var formatters = ['hardware','locations','users','manufacturers','statuslabels','models','licenses','categories','suppliers','companies'];
+    function genericPublicImageFormatter(destination) {
+        return function (value,row) {
+            if (value) {
+                return '<img src="{{ url('/') }}/uploads/' + destination + '/' + value + '" height="50" width="50">';
+            }
+        }
+    }
+
+    var formatters = [
+        'hardware',
+        'locations',
+        'users',
+        'manufacturers',
+        'statuslabels',
+        'models',
+        'licenses',
+        'categories',
+        'suppliers',
+        'companies',
+        'depreciations',
+        'fieldsets'
+    ];
 
     for (var i in formatters) {
         window[formatters[i] + 'LinkFormatter'] = genericRowLinkFormatter(formatters[i]);
         window[formatters[i] + 'LinkObjFormatter'] = genericColumnObjLinkFormatter(formatters[i]);
         window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
+        window[formatters[i] + 'ImageFormatter'] = genericPublicImageFormatter(formatters[i]);
     }
 
 
