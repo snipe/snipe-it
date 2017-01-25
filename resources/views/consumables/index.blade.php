@@ -24,7 +24,7 @@
           name="consumables"
           class="table table-striped snipe-table"
           id="table"
-          data-url="{{route('api.consumables.list') }}"
+          data-url="{{route('api.consumables.index') }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="consumablesTable-{{ config('version.hash_version') }}-{{ config('version.hash_version') }}"
