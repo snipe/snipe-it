@@ -166,8 +166,23 @@
         if (modelid == '') {
             $('#custom_fields_content').html("");
         } else {
-            $.get("{{url('/') }}/models/" + modelid + "/custom_fields", {_token: "{{ csrf_token() }}"}, function (data) {
-                $('#custom_fields_content').html(data);
+
+            $.ajax({
+                type: 'GET',
+                url: "{{url('/') }}/models/" + modelid + "/custom_fields",
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                _token: "{{ csrf_token() }}",
+                dataType: 'json',
+                success: function (data) {
+                    data: data,
+                    $('#custom_fields_content').html(data);
+                },
+                error: function (data) {
+                    alert('oops');
+                }
             });
         }
     }
@@ -385,9 +400,9 @@
 
         $('#modal-save').on('click', function () {
             var data = {};
-            //console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
+            console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
             $('.modal-body input:visible').each(function (index, elem) {
-                //console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
+                console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
                 var bits = elem.id.split("-");
                 if (bits[0] === "modal") {
                     data[bits[1]] = $(elem).val();
@@ -399,7 +414,7 @@
             });
 
             data._token = '{{ csrf_token() }}';
-
+            //console.log(data);
 
                 $.ajax({
                     type: 'POST',
@@ -427,6 +442,8 @@
                         msg = result.responseJSON.error.message || result.responseJSON.error;
                         window.alert("Unable to add new " + model + " - error: " + msg);
                     }
+
+
 
         });
         });

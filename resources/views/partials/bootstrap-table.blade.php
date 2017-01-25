@@ -111,6 +111,18 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function modelFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/models/' + value.id + '"> ' + value.name + '</a>';
+        }
+    }
+
+    function categoryFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/categories/' + value.id + '"> ' + value.name + '</a>';
+        }
+    }
+
     function companyFormatter(value, row) {
         if ((value) && (value[0].name)) {
             return '<a href="{{ url('/') }}/companies/' + value[0].id + '"> ' + value[0].name + '</a>';

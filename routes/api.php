@@ -52,7 +52,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ['names' =>
             [
                 'index' => 'api.categories.index',
-                'show' => 'api.categories.show',
+                'show' => 'api.categories.asset.show',
                 'update' => 'api.categories.update',
                 'store' => 'api.categories.store',
                 'destroy' => 'api.categories.destroy'

@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('statuslabels.create') }}" class="btn btn-primary pull-right">
+    <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right">
         {{ trans('general.create') }}</a>
 @stop
 {{-- Page content --}}
@@ -57,7 +57,7 @@
                                     <th data-sortable="true" data-field="serial" data-formatter="assetFormatter">{{ trans('admin/hardware/table.serial') }}</th>
                                     <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
                                     <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
-                                    
+
                                     <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
                                     <th data-sortable="true" data-formatter="locationFormatter" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
                                     <th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
