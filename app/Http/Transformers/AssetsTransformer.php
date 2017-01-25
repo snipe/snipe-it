@@ -46,8 +46,8 @@ class AssetsTransformer
         return $array;
     }
 
-    public function transformAssetsDatatable($users) {
-        return (new DatatablesTransformer)->transformDatatables($users);
+    public function transformAssetsDatatable($assets) {
+        return (new DatatablesTransformer)->transformDatatables($assets);
     }
 
 
