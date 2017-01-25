@@ -63,9 +63,11 @@ class Handler extends ExceptionHandler
 
             if ($this->isHttpException($e)) {
 
+                $statusCode = $e->getStatusCode();
+
                 switch ($e->getStatusCode()) {
                     case '404':
-                       return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' not found'), 404);
+                       return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' endpoint not found'), 404);
                        break;
                     case '405':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
@@ -79,17 +81,10 @@ class Handler extends ExceptionHandler
         }
 
 
-        if ($this->isHttpException($e)) {
-
-            $statusCode = $e->getStatusCode();
-
-            switch ($statusCode) {
-
-                case '404':
-                    return response()->view('layouts/basic', [
-                        'content' => view('errors/404')
-                    ]);
-            }
+        if ($this->isHttpException($e) && (isset($statusCode)) && ($statusCode == '404' )) {
+            return response()->view('layouts/basic', [
+                'content' => view('errors/404')
+            ]);
         }
 
         return parent::render($request, $e);
