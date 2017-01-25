@@ -186,8 +186,7 @@ class CustomFieldsController extends Controller
 
         $validator = Validator::make(Input::all(), $field->rules);
 
-        if ($validator->passes()) {
-           $field->save();
+        if ($field->save()) {
            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.update.success'));
         }
 

@@ -3,9 +3,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Schema;
+use Watson\Validating\ValidatingTrait;
+use App\Http\Traits\UniqueUndeletedTrait;
 
 class CustomField extends Model
 {
+    use ValidatingTrait, UniqueUndeletedTrait;
     public $guarded=["id"];
     public static $PredefinedFormats=[
         "ANY" => "",
