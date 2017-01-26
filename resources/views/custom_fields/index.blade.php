@@ -85,6 +85,8 @@
           <thead>
             <tr>
               <th>{{ trans('general.name') }}</th>
+              <th>Help Text</th>
+              <th>DB Field</th>
               <th>{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th>{{ trans('admin/custom_fields/general.field_element_short') }}</th>
               <th>{{ trans('admin/custom_fields/general.fieldsets') }}</th>
@@ -92,9 +94,11 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($custom_fields AS $field)
+            @foreach($custom_fields as $field)
             <tr>
               <td>{{ $field->name }}</td>
+              <td>{{ $field->help_text }}</td>
+              <td>{{ $field->convertUnicodeDbSlug() }}</td>
               <td>{{ $field->format }}</td>
               <td>{{ $field->element }}</td>
               <td>

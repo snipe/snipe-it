@@ -43,6 +43,10 @@
 
           @endif
 
+              @if ($field->help_text!='')
+              <p class="help-block">{{ $field->help_text }}</p>
+              @endif
+
           <?php
           $errormessage=$errors->first($field->db_column_name());
           if ($errormessage) {
@@ -57,6 +61,8 @@
             <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
         </div>
         @endif
+
+
     </div>
   @endforeach
 @endif

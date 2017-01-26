@@ -87,7 +87,20 @@
             </div>
           </div>
 
-         @if (!$field->id)
+          <!-- Help Text -->
+          <div class="form-group {{ $errors->has('help_text') ? ' has-error' : '' }}">
+              <label for="help_text" class="col-md-4 control-label">
+                  Help Text
+              </label>
+              <div class="col-md-6">
+                  {{ Form::text('help_text', Input::old('help_text', $field->help_text), array('class' => 'form-control')) }}
+                  <p class="help-block">This is optional text that will appear below the form elements while editing an asset to provide context on the field.</p>
+                  {!! $errors->first('help_text', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
+          </div>
+
+
+      @if (!$field->id)
           <!-- Encrypted  -->
           <div class="form-group {{ $errors->has('custom_format') ? ' has-error' : '' }}">
             <div class="col-md-8 col-md-offset-4">
