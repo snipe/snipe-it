@@ -29,6 +29,7 @@ $('.snipe-table').bootstrapTable({
         @endif
         showExport: true,
         showColumns: true,
+        trimOnSearch: false,
         exportDataType: 'all',
         exportTypes: ['csv', 'excel', 'txt','json', 'xml'],
         exportOptions: {
