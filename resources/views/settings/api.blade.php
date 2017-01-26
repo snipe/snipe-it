@@ -16,3 +16,11 @@
     @endif
 
 @stop
+
+@section('moar_scripts')
+<script>
+    new Vue({
+        el: "#app",
+    });
+</script>
+@endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Import;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,10 +30,9 @@ class ItemImportRequest extends FormRequest
         ];
     }
 
-    public function import()
+    public function import(Import $import)
     {
-
-        $filename = config('app.private_uploads') . '/imports/assets/' . $this->get('filename');
+        $filename = config('app.private_uploads') . '/imports/' . $import->file_path;
         $class = title_case($this->input('import-type'));
         $classString = "App\\Importer\\{$class}Importer";
         $importer = new $classString($filename);
@@ -58,6 +58,7 @@ class ItemImportRequest extends FormRequest
     public function errorCallback($item, $field, $errorString)
     {
         $this->errors[$item->name][$field] = $errorString;
+        // $this->errors[$item->name] = $errorString;
     }
 
     private $errors;

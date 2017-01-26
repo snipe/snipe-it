@@ -6,14 +6,16 @@ use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Category;
 use App\Models\Manufacturer;
+use App\Models\Statuslabel;
 
 class AssetImporter extends ItemImporter
 {
-    protected $assets;
+    protected $defaultStatusLabelId;
+
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->assets = Asset::all();
+        $this->defaultStatusLabelId = Statuslabel::first()->id;
     }
 
     protected function handle($row)
@@ -41,11 +43,8 @@ class AssetImporter extends ItemImporter
     public function createAssetIfNotExists(array $row)
     {
         $editingAsset = false;
-        $asset = new Asset;
-        $asset_id = $this->assets->search(function ($key) {
-            return strcasecmp($key->asset_tag, $this->item['asset_tag']) == 0;
-        });
-        if ($asset_id !== false) {
+        $asset = Asset::where(['asset_tag'=> $this->item['asset_tag']])->first();
+        if ($asset) {
             if (!$this->updating) {
                 $this->log('A matching Asset ' . $this->item['asset_tag'] . ' already exists');
                 return;
@@ -53,9 +52,9 @@ class AssetImporter extends ItemImporter
 
             $this->log("Updating Asset");
             $editingAsset = true;
-            $asset = $this->assets[$asset_id];
         } else {
             $this->log("No Matching Asset, Creating a new one");
+            $asset = new Asset;
         }
         $this->item['serial'] = $this->array_smart_fetch($row, "serial number");
         $this->item['image'] = $this->array_smart_fetch($row, "image");
@@ -65,13 +64,11 @@ class AssetImporter extends ItemImporter
         }
         if (isset($this->item["status_label"])) {
             $this->item['status_id'] = $this->item["status_label"]->id;
+        } elseif (!$editingAsset) {
+            // Assume if we are editing, we already have a status and can ignore.
+            $this->log("No status field found, defaulting to first status.");
+            $this->item['status_id'] = $this->defaultStatusLabelId;
         }
-        // We should require a status or come up with a better way of doing this..
-        // elseif (!$editingAsset) {
-        //     // Assume if we are editing, we already have a status and can ignore.
-        //     $this->log("No status field found, defaulting to first status.");
-        //     $status_id = $this->status_labels->first()->id;
-        // }
 
 
         // By default we're set this to location_id in the item.
@@ -90,9 +87,7 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
-        if (!$editingAsset) {
-            $this->assets->add($asset);
-        }
+
         if (!$this->testRun) {
             if ($asset->save()) {
                 $asset->logCreate('Imported using csv importer');
