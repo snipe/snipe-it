@@ -7,7 +7,7 @@ use Watson\Validating\ValidatingTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use ForceUTF8\Encoding;
 use EasySlugger\Utf8Slugger;
-
+use Patchwork\Utf8;
 
 class CustomField extends Model
 {
@@ -37,7 +37,7 @@ class CustomField extends Model
 
     public static function boot()
     {
-        self::creating(function ($custom_field)
+        self::created(function ($custom_field)
         {
 
             \Log::debug("\n\nCreating Original Name: ".$custom_field->name);
@@ -52,6 +52,9 @@ class CustomField extends Model
             Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                 $table->text($custom_field->convertUnicodeDbSlug())->nullable();
             });
+
+            $custom_field->db_column = $custom_field->convertUnicodeDbSlug();
+            $custom_field->save();
 
         });
 
@@ -170,8 +173,16 @@ class CustomField extends Model
     public function convertUnicodeDbSlug($original = null)
     {
         $name = $original ? $original : $this->name;
-        $slug = '_snipeit_'.Utf8Slugger::slugify($name,'_');
-        return $slug;
+        $id = $this->id ? $this->id : 'xx';
+
+        if (!function_exists('transliterator_transliterate')) {
+            $long_slug = str_slug('_snipeit_'.\Patchwork\Utf8::utf8_encode(trim($name)),'_');
+        } else {
+            $long_slug =  '_snipeit_'.Utf8Slugger::slugify($name,'_');
+        }
+
+        return substr($long_slug, 0, 50).'_'.$id;
+
     }
 
 
