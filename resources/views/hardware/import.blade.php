@@ -15,7 +15,7 @@
 
 @section('moar_scripts')
 <script>
-    const app = new Vue({
+    new Vue({
         el: '#app'
     });
 </script>
