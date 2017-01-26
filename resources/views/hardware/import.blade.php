@@ -12,3 +12,11 @@
     <importer>
 </div>
 @stop
+
+@section('moar_scripts')
+<script>
+    const app = new Vue({
+        el: '#app'
+    });
+</script>
+@endsection
