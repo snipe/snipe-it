@@ -29,23 +29,12 @@ class ImportController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
         if (!Company::isCurrentUserAuthorized()) {
@@ -129,40 +118,6 @@ class ImportController extends Controller
         Session::flash('success', trans('admin/hardware/message.import.success'));
         return response()->json(Helper::formatStandardApiResponse('success', null, ['redirect_url' => route($redirectTo)]));
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Import  $import
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Import $import)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Import  $import
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Import $import)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Import  $import
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Import $import)
-    {
-        //
     }
 
     /**
