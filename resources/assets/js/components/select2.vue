@@ -17,7 +17,6 @@
         props: ['options', 'value'],
 
         mounted() {
-            console.dir(this.options);
             var vm = this;
             $(this.$el)
                 .select2({

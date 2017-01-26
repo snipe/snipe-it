@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <alert v-show="alert.message" :alertType="alert.type" v-on:hide="alert.visible = false">{{ alert.message }}</alert>
+        <alert v-show="alert.visible" :alertType="alert.type" v-on:hide="alert.visible = false">{{ alert.message }}</alert>
         <errors :errors="importErrors"></errors>
         <modal v-model="displayImportModal" effect="fade">
             <div slot="modal-header" class="modal-title">Import File:</div>
@@ -47,7 +47,7 @@
                                 <i class="fa fa-plus icon-white"></i>
                                 <span>Select Import File...</span>
                                 <!-- The file input field used as target for the file upload widget -->
-                                <input id="fileupload" type="file" name="files[]" data-url="/api/v1/imports">
+                                <input id="fileupload" type="file" name="files[]" data-url="/api/v1/imports" accept="text/csv">
                             </span>
                         </div>
                         <div class="col-md-9" v-show="progress.visible" style="padding-bottom:20px">
@@ -138,7 +138,7 @@
                 dataType: 'json',
                 done(e, data) {
                     vm.progress.currentClass="progress-bar-success";
-                    vm.progress.statusText = data.textStatus;
+                    vm.progress.statusText = "Success!";
                     vm.files = data.result.files.concat(vm.files);
                 },
                 add(e, data) {
@@ -155,7 +155,7 @@
                     vm.progress.statusText = progress+'% Complete';
                 },
                 fail(e, data) {
-                    vm.progress.currentClass = "progress-bar-error";
+                    vm.progress.currentClass = "progress-bar-danger";
                     vm.progress.statusText = data.errorThrown;
                 }
             })
@@ -168,8 +168,8 @@
                     //Fail
                 (response) => {
                     this.alert.type="danger";
+                    this.alert.visible=true;
                     this.alert.message="Something went wrong fetching files...";
-                    console.dir(resposne);
                 });
             },
             deleteFile(file, key) {
@@ -177,8 +177,8 @@
                 .then((response) => this.files.splice(key, 1), // Success
                     (response) => {// Fail
                         this.alert.type="danger";
+                        this.alert.visible=true;
                         this.alert.message=response.body.messages;
-                        console.dir(response);
                     }
                 );
             },
@@ -188,21 +188,22 @@
             },
 
             postSave() {
-                console.log("Saving");
                 this.$http.post('/api/v1/imports/process/'+this.activeFile.id, {
                     'import-update': this.modal.update,
                     'import-type': this.modal.importType
                 }).then( (response) => {
                     // Success
-                    console.dir(response);
-                    this.modal.statusText = "Success...";
+                    this.modal.statusText = "Success... Redirecting.";
                     window.location.href = response.body.messages.redirect_url;
                 }, (response) => {
                     // Failure
-                    console.dir(response);
-                    this.importErrors = response.body.messages;
-                    this.alert.type="danger";
-                    this.alert.message= "An error has occured";
+                    if(response.body.status == 'import-errors') {
+                        this.importErrors = response.body.messages;
+                    } else {
+                        this.alert.message= response.body.messages;
+                        this.alert.type="danger";
+                        this.alert.visible=true;
+                    }
                     this.displayImportModal=false;
                 });
             }
@@ -217,7 +218,7 @@
 
         components: {
             modal,
-            errors: require('./errors.vue'),
+            errors: require('./importer-errors.vue'),
             alert: require('../alert.vue'),
             select2: require('../select2.vue')
         }

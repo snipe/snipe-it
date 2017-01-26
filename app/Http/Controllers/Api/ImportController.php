@@ -123,7 +123,7 @@ class ImportController extends Controller
         }
 
         if ($errors) { //Failure
-            return response()->json(Helper::formatStandardApiResponse('error', null, $errors), 500);
+            return response()->json(Helper::formatStandardApiResponse('import-errors', null, $errors), 500);
         }
         //Flash message before the redirect
         Session::flash('success', trans('admin/hardware/message.import.success'));

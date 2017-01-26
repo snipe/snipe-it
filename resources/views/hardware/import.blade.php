@@ -1,5 +1,5 @@
 @extends('layouts/default')
-
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/jquery.fileupload.css') }}">
 {{-- Page title --}}
 @section('title')
 {{ trans('general.import') }}
