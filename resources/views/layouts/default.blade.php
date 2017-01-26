@@ -602,7 +602,7 @@
 
       </div><!-- /.content-wrapper -->
 
-      <footer class="main-footer">
+      <footer class="main-footer hidden-print">
         <div class="pull-right hidden-xs">
           <b>Version</b> {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
           <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview">User's Manual</a>

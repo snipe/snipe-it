@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="nav-tabs-custom">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs hidden-print">
 
         <li class="active">
           <a href="#info_tab" data-toggle="tab">
@@ -181,10 +181,10 @@
             <div class="col-md-2">
               @can('update', $user)
                 <div class="col-md-12">
-                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.edit') }}</a>
+                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.edit') }}</a>
                 </div>
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.clone') }}</a>
+                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
                 @can('delete', $user)
                   @if ($user->deleted_at=='')
@@ -192,7 +192,7 @@
                       <form action="{{route('users.destroy',$user->id)}}" method="POST">
                         {{csrf_field()}}
                         {{ method_field("DELETE")}}
-                        <button style="width: 100%;" class="btn btn-sm btn-warning">{{ trans('button.delete')}}</button>
+                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
                       </form>
                     </div>
                     <div class="col-md-12" style="padding-top: 5px;">
@@ -200,12 +200,12 @@
                         <!-- CSRF Token -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="edit_user[{{ $user->id }}]" value="{{ $user->id }}" />
-                        <button style="width: 100%;" class="btn btn-sm btn-danger">{{ trans('button.checkin_and_delete') }}</button>
+                        <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
                       </form>
                     </div>
                   @else
                     <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning">{{ trans('button.restore') }}</a>
+                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
                     </div>
                   @endif
                 @endcan
@@ -243,7 +243,7 @@
                   <td>{!! $asset->present()->nameUrl() !!}</td>
                   <td class="hidden-print">
                     @can('checkin', $asset)
-                      <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
+                      <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">Checkin</a>
                     @endcan
                   </td>
                 </tr>
@@ -274,7 +274,7 @@
                   </td>
                   <td class="hidden-print">
                     @can('update', $license)
-                      <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
+                      <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">Checkin</a>
                      @endcan
                   </td>
                 </tr>
@@ -299,7 +299,7 @@
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
-                        <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm">Checkin</a>
+                        <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">Checkin</a>
                       @endcan
                     </td>
                   </tr>
@@ -338,7 +338,7 @@
             <div class="col-md-2">
               <!-- The fileinput-button span is used to style the file input field as button -->
               @can('update', $user)
-              <span class="btn btn-info fileinput-button">
+              <span class="btn btn-info fileinput-button hidden-print">
                 <i class="fa fa-plus icon-white"></i>
                 <span>Select File...</span>
                 <!-- The file input field used as target for the file upload widget -->
@@ -396,7 +396,7 @@
                       </td>
                       <td>
                         @can('update', $user)
-                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/userfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('delete/userfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
                         @endcan
                       </td>
                     </tr>
@@ -493,7 +493,7 @@ $(function () {
                 $('.progress-bar-text').html('Finished!');
                 $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-check fa-3x icon-white" style="color: green"></i>');
                 $.each(data.result.file, function (index, file) {
-                    $('<tr><td>' + file.notes + '</td><<td>' + file.name + '</td><td>Just now</td><td>' + file.filesize + '</td><td><a class="btn btn-info btn-sm" href="import/process/' + file.name + '"><i class="fa fa-spinner process"></i> Process</a></td></tr>').prependTo("#upload-table > tbody");
+                    $('<tr><td>' + file.notes + '</td><<td>' + file.name + '</td><td>Just now</td><td>' + file.filesize + '</td><td><a class="btn btn-info btn-sm hidden-print" href="import/process/' + file.name + '"><i class="fa fa-spinner process"></i> Process</a></td></tr>').prependTo("#upload-table > tbody");
                     //$('<tr><td>').text(file.name).appendTo(document.body);
                 });
             }
