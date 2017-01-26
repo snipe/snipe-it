@@ -25,7 +25,8 @@
         "neitanod/forceutf8": "^2.0",
         "laravel/legacy-encrypter": "^1.0",
         "laravel/passport": "^1.0",
-        "javiereguiluz/easyslugger": "^1.0"
+        "javiereguiluz/easyslugger": "^1.0",
+        "patchwork/utf8": "~1.2"
 
     },
     "require-dev": {
