@@ -13,5 +13,12 @@
      @else
          <p class="help-block">{{ trans('general.feature_disabled') }}</p>
     @endif
-
 @stop
+
+@section('moar_scripts')
+<script>
+    new Vue({
+        el: "#app",
+    });
+</script>
+@endsection

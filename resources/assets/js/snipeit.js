@@ -138,7 +138,13 @@ $(document).ready(function () {
      var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
      if(!iOS)
      {
-         $(".select2").select2();
+        // Vue collision: Avoid overriding a vue select2 instance
+        // by checking to see if the item has already been select2'd.
+        $('select2:not([class^="select2-container"])').each((i,obj) => {
+            {
+                $(obj).select2();
+            }
+        });
      }
      $('.datepicker').datepicker();
 

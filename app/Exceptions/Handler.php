@@ -68,14 +68,16 @@ class Handler extends ExceptionHandler
                 switch ($e->getStatusCode()) {
                     case '404':
                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' endpoint not found'), 404);
-                       break;
                     case '405':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
-                        break;
                     default:
-                        return response()->json(Helper::formatStandardApiResponse('error', null, $e->getStatusCode()), 405);
+                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode), 405);
 
                 }
+            }
+            // Try to parse 500 Errors ina  bit nicer way when debug is enabled.
+            if (config('app.debug')) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, "An Error has occured! " . $e->getMessage()), 500);
             }
 
         }

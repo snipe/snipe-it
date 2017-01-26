@@ -15,8 +15,11 @@
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.16.2",
-    "vue": "^2.0.1",
-    "vue-resource": "^1.0.3"
+    "vue": "=2.1.6",
+    "vue-loader": "^10.0.2",
+    "vue-resource": "^1.0.3",
+    "vue-strap": "github:wffranco/vue-strap.git",
+    "vue-template-compiler": "=2.1.6"
   },
   "dependencies": {
     "jquery": "^3.1.1",

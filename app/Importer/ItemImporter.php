@@ -129,6 +129,9 @@ class ItemImporter extends Importer
      */
     private function shouldUpdateField($field)
     {
+        if (empty($field)) {
+            return false;
+        }
         return !($this->updating && empty($field));
     }
     /**
@@ -156,23 +159,18 @@ class ItemImporter extends Importer
             $asset_model_name ='Unknown';
         }
         $editingModel = $this->updating;
-        $asset_model_id = $this->asset_models->search(function ($key) use ($asset_model_name, $asset_modelNumber) {
-            return strcasecmp($key->name, $asset_model_name) ==0
-                && $key->model_number == $asset_modelNumber;
-        });
-        // We need strict compare here because the index returned above can be 0.
-        //  This casts to false and causes false positives
-        $asset_model = new AssetModel;
-        $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
-        $item['name'] = $asset_model_name;
-        $item['model_number'] = $asset_modelNumber;
-        if ($asset_model_id !== false) {
-            $asset_model = $this->asset_models[$asset_model_id];
+        $asset_model = AssetModel::where(['name' => $asset_model_name, 'model_number' => $asset_modelNumber])->first();
+
+        if ($asset_model) {
+
             if (!$this->updating) {
                 $this->log("A matching model already exists, returning it.");
                 return $asset_model;
             }
             $this->log("Matching Model found, updating it.");
+            $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
+            $item['name'] = $asset_model_name;
+            $item['model_number'] = $asset_modelNumber;
             $asset_model->update($item);
             if (!$this->testRun) {
                 $asset_model->save();
@@ -180,9 +178,13 @@ class ItemImporter extends Importer
             return $asset_model;
         }
         $this->log("No Matching Model, Creating a new one");
+
         $asset_model = new AssetModel();
+        $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
+        $item['name'] = $asset_model_name;
+        $item['model_number'] = $asset_modelNumber;
+
         $asset_model->fill($item);
-        $this->asset_models->add($asset_model);
 
         if ($this->testRun) {
             $this->log('TEST RUN - asset_model  ' . $asset_model->name . ' not created');
@@ -214,15 +216,11 @@ class ItemImporter extends Importer
         if (empty($asset_category)) {
             $asset_category = 'Unnamed Category';
         }
-        $category = $this->categories->search(function ($key) use ($asset_category, $item_type) {
-            return (strcasecmp($key->name, $asset_category) == 0)
-                && $key->category_type === $item_type;
-        });
-        // We need strict compare here because the index returned above can be 0.
-        //  This casts to false and causes false positives
-        if ($category !== false) {
+        $category = Category::where(['name' => $asset_category, 'category_type' => $item_type])->first();
+
+        if ($category) {
             $this->log("A matching category: " . $asset_category . " already exists");
-            return $this->categories[$category];
+            return $category;
         }
 
         $category = new Category();
@@ -231,11 +229,9 @@ class ItemImporter extends Importer
         $category->user_id = $this->user_id;
 
         if ($this->testRun) {
-            $this->categories->add($category);
             return $category;
         }
         if ($category->save()) {
-            $this->categories->add($category);
             $this->log('Category ' . $asset_category . ' was created');
             return $category;
         }
@@ -253,24 +249,19 @@ class ItemImporter extends Importer
      */
     public function createOrFetchCompany($asset_company_name)
     {
-        $company = $this->companies->search(function ($key) use ($asset_company_name) {
-            return strcasecmp($key->name, $asset_company_name) == 0;
-        });
-        // We need strict compare here because the index returned above can be 0.
-        //  This casts to false and causes false positives
-        if ($company !== false) {
+        $company = Company::where(['name' => $asset_company_name])->first();
+        if ($company) {
             $this->log('A matching Company ' . $asset_company_name . ' already exists');
-            return $this->companies[$company];
+            return $company;
         }
         $company = new Company();
         $company->name = $asset_company_name;
 
         if ($this->testRun) {
-            $this->companies->add($company);
+
             return $company;
         }
         if ($company->save()) {
-            $this->companies->add($company);
             $this->log('Company ' . $asset_company_name . ' was created');
             return $company;
         }
@@ -291,14 +282,11 @@ class ItemImporter extends Importer
         if (empty($asset_statuslabel_name)) {
             return null;
         }
-        $status = $this->status_labels->search(function ($key) use ($asset_statuslabel_name) {
-            return strcasecmp($key->name, $asset_statuslabel_name) == 0;
-        });
-        // We need strict compare here because the index returned above can be 0.
-        //  This casts to false and causes false positives
-        if ($status !== false) {
+        $status = Statuslabel::where(['name' => $asset_statuslabel_name])->first();
+
+        if ($status) {
             $this->log('A matching Status ' . $asset_statuslabel_name . ' already exists');
-            return $this->status_labels[$status];
+            return $status;
         }
         $this->log("Creating a new status");
         $status = new Statuslabel();
@@ -309,12 +297,10 @@ class ItemImporter extends Importer
         $status->archived = 0;
 
         if ($this->testRun) {
-            $this->status_labels->add($status);
             return $status;
         }
 
         if ($status->save()) {
-            $this->status_labels->add($status);
             $this->log('Status ' . $asset_statuslabel_name . ' was created');
             return $status;
         }
@@ -338,14 +324,11 @@ class ItemImporter extends Importer
         if (empty($item_manufacturer)) {
             $item_manufacturer='Unknown';
         }
-        $manufacturer = $this->manufacturers->search(function ($key) use ($item_manufacturer) {
-            return strcasecmp($key->name, $item_manufacturer) == 0;
-        });
-        // We need strict compare here because the index returned above can be 0.
-        //  This casts to false and causes false positives
-        if ($manufacturer !== false) {
+        $manufacturer = Manufacturer::where(['name'=> $item_manufacturer])->first();
+
+        if ($manufacturer) {
             $this->log('Manufacturer ' . $item_manufacturer . ' already exists') ;
-            return $this->manufacturers[$manufacturer];
+            return $manufacturer;
         }
 
         //Otherwise create a manufacturer.
@@ -354,11 +337,9 @@ class ItemImporter extends Importer
         $manufacturer->user_id = $this->user_id;
 
         if ($this->testRun) {
-            $this->manufacturers->add($manufacturer);
             return $manufacturer;
         }
         if ($manufacturer->save()) {
-            $this->manufacturers->add($manufacturer);
             $this->log('Manufacturer ' . $manufacturer->name . ' was created');
             return $manufacturer;
         }
@@ -380,14 +361,11 @@ class ItemImporter extends Importer
             $this->log('No location given, so none created.');
             return null;
         }
-        $location = $this->locations->search(function ($key) use ($asset_location) {
-            return strcasecmp($key->name, $asset_location) == 0;
-        });
-        // We need strict compare here because the index returned above can be 0.
-        //  This casts to false and causes false positives
+        $location = Location::where(['name' => $asset_location])->first();
+
         if ($location !== false) {
             $this->log('Location ' . $asset_location . ' already exists');
-            return $this->locations[$location];
+            return $location;
         }
         // No matching locations in the collection, create a new one.
         $location = new Location();
@@ -399,11 +377,9 @@ class ItemImporter extends Importer
         $location->user_id = $this->user_id;
 
         if ($this->testRun) {
-            $this->locations->add($location);
             return $location;
         }
         if ($location->save()) {
-            $this->locations->add($location);
             $this->log('Location ' . $asset_location . ' was created');
             return $location;
         }
@@ -425,14 +401,11 @@ class ItemImporter extends Importer
             $item_supplier='Unknown';
         }
 
-        $supplier = $this->suppliers->search(function ($key) use ($item_supplier) {
-            return strcasecmp($key->name, $item_supplier) == 0;
-        });
-        // We need strict compare here because the index returned above can be 0.
-        //  This casts to false and causes false positives
-        if ($supplier !== false) {
+        $supplier = Supplier::where(['name' => $item_supplier ])->first();
+
+        if ($supplier) {
             $this->log('Supplier ' . $item_supplier . ' already exists');
-            return $this->suppliers[$supplier];
+            return $supplier;
         }
 
         $supplier = new Supplier();
@@ -440,11 +413,9 @@ class ItemImporter extends Importer
         $supplier->user_id = $this->user_id;
 
         if ($this->testRun) {
-            $this->suppliers->add($supplier);
             return $supplier;
         }
         if ($supplier->save()) {
-            $this->suppliers->add($supplier);
             $this->log('Supplier ' . $item_supplier . ' was created');
             return $supplier;
         }

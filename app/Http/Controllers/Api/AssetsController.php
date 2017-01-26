@@ -2,16 +2,34 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
+use App\Http\Transformers\AssetsTransformer;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Location;
+use App\Models\Setting;
 use App\Models\User;
+use Artisan;
+use Auth;
+use Carbon\Carbon;
+use Config;
+use DB;
+use Gate;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Transformers\AssetsTransformer;
+use Input;
+use Lang;
+use Log;
+use Mail;
+use Paginator;
+use Response;
+use Slack;
+use Str;
+use TCPDF;
+use Validator;
+use View;
 
 /**
  * This class controls all actions related to assets for
@@ -325,13 +343,11 @@ class AssetsController extends Controller
                 ->update(array('assigned_to' => null));
 
             $asset->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/hardware/message.delete.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
 
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/hardware/message.does_not_exist')), 404);
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
 
     }
-
-
 
 }
