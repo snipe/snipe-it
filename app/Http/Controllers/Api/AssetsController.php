@@ -203,7 +203,7 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if ($model->fieldset) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{CustomField::name_to_db_name($field->name)} = e($request->input(CustomField::name_to_db_name($field->name)));
+                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
             }
         }
 
@@ -267,8 +267,8 @@ class AssetsController extends Controller
             if ($request->has('model_id')) {
                 if (($model = AssetModel::find($request->get('model_id'))) && (isset($model->fieldset))) {
                     foreach ($model->fieldset->fields as $field) {
-                        if ($request->has(CustomField::name_to_db_name($field->name))) {
-                            $asset->{CustomField::name_to_db_name($field->name)} = e($request->input(CustomField::name_to_db_name($field->name)));
+                        if ($request->has($field->convertUnicodeDbSlug())) {
+                            $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
                         }
 
                     }

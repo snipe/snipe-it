@@ -198,14 +198,15 @@ class AssetsController extends Controller
 
         }
 
+
         // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
+        // Validation for these fields is handled through the AssetRequest form request
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
         if ($model->fieldset) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{CustomField::name_to_db_name($field->name)} = e($request->input(CustomField::name_to_db_name($field->name)));
+                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
             }
         }
 
@@ -348,11 +349,11 @@ class AssetsController extends Controller
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
-                        $asset->{CustomField::name_to_db_name($field->name)} = \Crypt::encrypt(e($request->input(CustomField::name_to_db_name($field->name))));
+                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
                     }
 
                 } else {
-                    $asset->{CustomField::name_to_db_name($field->name)} = e($request->input(CustomField::name_to_db_name($field->name)));
+                    $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
                 }
             }
         }

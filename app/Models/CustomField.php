@@ -5,6 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 use Schema;
 use Watson\Validating\ValidatingTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
+use ForceUTF8\Encoding;
+use EasySlugger\Utf8Slugger;
+
 
 class CustomField extends Model
 {
@@ -34,35 +37,53 @@ class CustomField extends Model
 
     public static function boot()
     {
-        self::creating(function ($custom_field) {
+        self::creating(function ($custom_field)
+        {
 
-            if (Schema::hasColumn(CustomField::$table_name, $custom_field->db_column_name())) {
-              //field already exists when making a new custom field; fail.
+            \Log::debug("\n\nCreating Original Name: ".$custom_field->name);
+            \Log::debug('Creating Column Name: '.$custom_field->convertUnicodeDbSlug());
+
+
+            if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
+                \Log::debug('Column exists. Nothing to do here.');
                 return false;
             }
 
             Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
-                $table->text($custom_field->db_column_name())->nullable();
+                $table->text($custom_field->convertUnicodeDbSlug())->nullable();
             });
 
         });
 
-        self::updating(function ($custom_field) {
+
+        self::updating(function ($custom_field)
+        {
+            \Log::debug('Updating column name');
+            \Log::debug('Updating Original Name: '.$custom_field->getOriginal("name"));
+            \Log::debug('Updating New Column Name: '.$custom_field->convertUnicodeDbSlug());
+
             if ($custom_field->isDirty("name")) {
-                if (Schema::hasColumn(CustomField::$table_name, $custom_field->db_column_name())) {
-                  //field already exists when renaming a custom field
-                    return false;
+
+                if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug()))
+                {
+                    \Log::debug('Column already exists. Nothing to update.');
+                    return true;
                 }
+
+                \Log::debug('Updating column name to.'.$custom_field->convertUnicodeDbSlug());
                 return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
-                    $table->renameColumn(self::name_to_db_name($custom_field->getOriginal("name")), $custom_field->db_column_name());
+                    $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal("name")), $custom_field->convertUnicodeDbSlug());
                 });
+
+
             }
             return true;
         });
 
-        self::deleting(function ($custom_field) {
+        self::deleting(function ($custom_field)
+        {
             return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
-                $table->dropColumn(self::name_to_db_name($custom_field->getOriginal("name")));
+                $table->dropColumn($custom_field->convertUnicodeDbSlug());
             });
         });
     }
@@ -77,12 +98,6 @@ class CustomField extends Model
         return $this->belongsTo('\App\Models\User');
     }
 
-  //public function
-
-  //need helper to go from regex->English
-  //need helper to go from English->regex
-
-  //need helper for save() stuff - basically to alter table for the fields in question
 
     public function check_format($value)
     {
@@ -91,7 +106,7 @@ class CustomField extends Model
 
     public function db_column_name()
     {
-        return self::name_to_db_name($this->name);
+        return self::convertUnicodeDbSlug();
     }
 
     //mutators for 'format' attribute
@@ -150,4 +165,18 @@ class CustomField extends Model
         }
         return false;
     }
+
+
+    public function convertUnicodeDbSlug($original = null)
+    {
+        $name = $original ? $original : $this->name;
+        $slug = '_snipeit_'.Utf8Slugger::slugify($name,'_');
+        \Log::debug('The slugger slug is '.$slug);
+
+        return $slug;
+    }
+
+
+
+
 }

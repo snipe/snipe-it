@@ -11,6 +11,7 @@ use App\Models\AssetModel;
 use Lang;
 use Auth;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use Log;
 
 /**
@@ -181,8 +182,6 @@ class CustomFieldsController extends Controller
         } else {
             $field->format = e($request->get("format"));
         }
-
-        $validator = Validator::make(Input::all(), $field->rules);
 
         $validator = Validator::make(Input::all(), $field->rules);
 

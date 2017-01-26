@@ -24,7 +24,8 @@
         "pragmarx/google2fa": "^1.0",
         "neitanod/forceutf8": "^2.0",
         "laravel/legacy-encrypter": "^1.0",
-        "laravel/passport": "^1.0"
+        "laravel/passport": "^1.0",
+    "javiereguiluz/easyslugger": "^1.0"
 
     },
     "require-dev": {
