@@ -24,8 +24,8 @@ class CreateLocationsLdapQueryField extends Migration
      */
     public function down()
     {
-        Schema::table('locations', function ($table) {
-            $table->string('ldap_ou')->nullable()->default(null);
+        Schema::table('locations', function (Blueprint $table) {
+            $table->dropColumn('ldap_ou');
         });
     }
 }
