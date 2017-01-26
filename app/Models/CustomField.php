@@ -171,8 +171,6 @@ class CustomField extends Model
     {
         $name = $original ? $original : $this->name;
         $slug = '_snipeit_'.Utf8Slugger::slugify($name,'_');
-        \Log::debug('The slugger slug is '.$slug);
-
         return $slug;
     }
 
