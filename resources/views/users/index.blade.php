@@ -75,14 +75,14 @@
                    <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                    <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
-                   <th data-sortable="true" data-field="name" data-formatter="userLinkFormatter">{{ trans('admin/users/table.name') }}</th>
+                   <th data-sortable="true" data-field="name" data-formatter="usersLinkFormatter">{{ trans('admin/users/table.name') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="jobtitle" data-visible="false">{{ trans('admin/users/table.title') }}</th>
                    <th data-sortable="true" data-field="email" data-formatter="emailFormatter">
                        <span class="hidden-md hidden-lg">{{ trans('admin/users/table.email') }}</span>
                        <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
                    <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
-                   <th data-searchable="true" data-sortable="true" data-field="manager" data-formatter="userLinkObjFormatter">{{ trans('admin/users/table.manager') }}</th>
+                   <th data-searchable="true" data-sortable="true" data-field="manager" data-formatter="usersLinkObjFormatter">{{ trans('admin/users/table.manager') }}</th>
                    <th data-sortable="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('admin/users/table.location') }}</th>
                    <th data-sortable="false" data-field="assets">
                        <span class="hidden-md hidden-lg">Assets</span>

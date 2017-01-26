@@ -24,7 +24,7 @@ class AssetsTransformer
             'name' => $asset->name,
             'asset_tag' => $asset->asset_tag,
             'serial' => $asset->serial,
-            'model' => ($asset->model) ? $asset->model : '',
+            'model' => ($asset->model) ? ['id' => $asset->model->id,'name'=> $asset->model->name] : '',
             'model_number' => $asset->model_number,
             'status_label' => ($asset->assetstatus) ? $asset->assetstatus : null,
             'last_checkout' => $asset->last_checkout,
@@ -43,6 +43,16 @@ class AssetsTransformer
             'company' => ($asset->company) ? $asset->company->name: '',
 
         ];
+
+        if ($asset->model->fieldset) {
+
+         foreach($asset->model->fieldset->fields as $field) {
+             $fields_array = [$field->name => $asset->{$field->convertUnicodeDbSlug()}];
+             $array += $fields_array;
+             //array_push($array, $fields_array);
+         }
+
+        }
 
         return $array;
     }
