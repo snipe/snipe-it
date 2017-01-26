@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <alert v-show="alert.visible" :alertType="alert.type" v-on:hide="alert.visible = false">{{ alert.message }}</alert>
+        <alert v-show="alert.message" :alertType="alert.type" v-on:hide="alert.visible = false">{{ alert.message }}</alert>
         <errors :errors="importErrors"></errors>
         <modal v-model="displayImportModal" effect="fade">
             <div slot="modal-header" class="modal-title">Import File:</div>
@@ -45,9 +45,19 @@
                             <!-- The fileinput-button span is used to style the file input field as button -->
                             <span class="btn btn-info fileinput-button">
                                 <i class="fa fa-plus icon-white"></i>
+                                <span>Select Import File...</span>
                                 <!-- The file input field used as target for the file upload widget -->
                                 <input id="fileupload" type="file" name="files[]" data-url="/api/v1/imports">
                             </span>
+                        </div>
+                        <div class="col-md-9" v-show="progress.visible" style="padding-bottom:20px">
+                            <div class="col-md-11">
+                                <div class="progress progress-striped-active" style="margin-top: 8px">
+                                    <div class="progress-bar" :class="progress.currentClass" role="progressbar" :style="progressWidth">
+                                        <span>{{ progress.statusText }}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -108,7 +118,13 @@
                     ],
                     statusText: null,
                 },
-                importErrors: null
+                importErrors: null,
+                progress: {
+                    currentClass: "progress-bar-warning",
+                    currentPercent: "0",
+                    statusText: '',
+                    visible: false
+                }
             };
         },
 
@@ -121,6 +137,8 @@
             $('#fileupload').fileupload({
                 dataType: 'json',
                 done(e, data) {
+                    vm.progress.currentClass="progress-bar-success";
+                    vm.progress.statusText = data.textStatus;
                     vm.files = data.result.files.concat(vm.files);
                 },
                 add(e, data) {
@@ -128,9 +146,17 @@
                         "X-Requested-With": 'XMLHttpRequest',
                         "X-CSRF-TOKEN": Laravel.csrfToken
                     };
-                    if (data.autoUpload || (data.autoUpload !== false && $(this).fileupload('option', 'autoUpload'))) {
-                        data.process().done( () => {data.submit();});
-                    }
+                    data.process().done( () => {data.submit();});
+                    vm.progress.visible=true;
+                },
+                progress(e, data) {
+                    var progress = parseInt((data.loaded / data.total * 100, 10));
+                    vm.progress.currentPercent = progress;
+                    vm.progress.statusText = progress+'% Complete';
+                },
+                fail(e, data) {
+                    vm.progress.currentClass = "progress-bar-error";
+                    vm.progress.statusText = data.errorThrown;
                 }
             })
         },
@@ -138,11 +164,23 @@
         methods: {
             fetchFiles() {
                 this.$http.get('/api/v1/imports')
-                .then( ({data}) => this.files = data)
+                .then( ({data}) => this.files = data, // Success
+                    //Fail
+                (response) => {
+                    this.alert.type="danger";
+                    this.alert.message="Something went wrong fetching files...";
+                    console.dir(resposne);
+                });
             },
             deleteFile(file, key) {
                 this.$http.delete("/api/v1/imports/"+file.id)
-                .then( (response) => this.files.splice(key, 1) )
+                .then((response) => this.files.splice(key, 1), // Success
+                    (response) => {// Fail
+                        this.alert.type="danger";
+                        this.alert.message=response.body.messages;
+                        console.dir(response);
+                    }
+                );
             },
             showModal(file) {
                 this.activeFile = file;
@@ -165,11 +203,16 @@
                     this.importErrors = response.body.messages;
                     this.alert.type="danger";
                     this.alert.message= "An error has occured";
-                    this.alert.visible=true;
                     this.displayImportModal=false;
                 });
             }
 
+        },
+
+        computed: {
+            progressWidth() {
+                return "width: "+this.progress.currentPercent*10+'%';
+            }
         },
 
         components: {

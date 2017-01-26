@@ -76,7 +76,8 @@ class ImportController extends Controller
                     if (config('app.debug')) {
                         $results['error'].= ' ' . $exception->getMessage();
                     }
-                    return $results;
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
+
                 }
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
                 $import->file_path = $file_name;
@@ -174,10 +175,12 @@ class ImportController extends Controller
     {
         $this->authorize('create', Asset::class);
         $import = Import::find($import_id);
-        if (unlink(config('app.private_uploads').'/imports/'.$import->file_path)) {
+        try {
+            unlink(config('app.private_uploads').'/imports/'.$import->file_path);
             $import->delete();
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('message.import.file_delete_success')));
+        } catch (\Exception $e) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.import.file_delete_error')), 500);
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.import.file_delete_error')), 500);
     }
 }
