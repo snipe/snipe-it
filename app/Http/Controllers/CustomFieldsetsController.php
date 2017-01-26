@@ -49,7 +49,7 @@ class CustomFieldsetsController extends Controller
             }
         }
 
-        return View::make("custom_fields.fieldset")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
+        return View::make("custom_fields.fieldsets.view")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
     }
 
 
@@ -62,7 +62,7 @@ class CustomFieldsetsController extends Controller
     */
     public function create()
     {
-        return View::make("custom_fields.create");
+        return View::make("custom_fields.fieldsets.edit");
     }
 
 
@@ -75,7 +75,6 @@ class CustomFieldsetsController extends Controller
     */
     public function store(Request $request)
     {
-        //
         $cfset = new CustomFieldset(
             [
                 "name" => e($request->get("name")),
