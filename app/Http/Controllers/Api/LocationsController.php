@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Location;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\LocationsTransformer;
 
 class LocationsController extends Controller
 {
@@ -47,7 +47,7 @@ class LocationsController extends Controller
 
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($locations, $total);
+        return (new LocationsTransformer)->transformLocations($locations, $total);
 
     }
 
