@@ -85,7 +85,7 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $location = Location::findOrFail($id);
-        return $location;
+        return (new LocationsTransformer)->transformLocation($location);
     }
 
 

@@ -2,10 +2,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\AssetModel;
+use App\Models\Asset;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Http\Transformers\AssetModelsTransformer;
+use App\Http\Transformers\AssetsTransformer;
 
 
 /**
@@ -81,8 +83,23 @@ class AssetModelsController extends Controller
     public function show($id)
     {
         $this->authorize('view', AssetModel::class);
-        $assetmodel = AssetModel::findOrFail($id);
+        $assetmodel = AssetModel::withCount('assets')->findOrFail($id);
         return (new AssetModelsTransformer)->transformAssetModel($assetmodel);
+    }
+
+    /**
+     * Display the specified resource's assets
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function assets($id)
+    {
+        $this->authorize('view', AssetModel::class);
+        $assets = Asset::where('model_id','=',$id)->get();
+        return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
 
 

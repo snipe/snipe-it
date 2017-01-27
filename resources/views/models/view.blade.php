@@ -44,19 +44,19 @@
         name="modelassets"
         id="table"
         class="snipe-table"
-        data-url="{{route('api.models.show', $model->id)}}"
+        data-url="{{route('api.models.assets', $model->id)}}"
         data-cookie="true"
         data-click-to-select="true"
         data-cookie-id-table="modeldetailsViewTable">
           <thead>
               <tr>
 
-                  <th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
+                  <th data-sortable="false" data-field="company" data-searchable="false" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
                   <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
-                  <th data-sortable="true" data-field="name" data-searchable="true">{{ trans('general.name') }}</th>
-                  <th data-sortable="true" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
-                  <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
-                  <th data-sortable="false" data-field="assigned_to">{{ trans('general.user') }}</th>
+                  <th data-sortable="true" data-field="name"  data-searchable="true" data-formatter="hardwareLinkFormatter">{{ trans('general.name') }}</th>
+                  <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
+                  <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
+                  <th data-sortable="false" data-field="assigned_to" data-formatter="usersLinkObjFormatter">{{ trans('general.user') }}</th>
                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
           </thead>

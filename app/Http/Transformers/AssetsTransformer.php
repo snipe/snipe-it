@@ -33,14 +33,13 @@ class AssetsTransformer
             'notes' => $asset->notes,
             'expected_checkin' => $asset->expected_checkin,
             'order_number' => $asset->order_number,
-            'companyName' => $asset->companyName,
+            'company' => ($asset->company) ? $asset->company : null,
             'location' => ($asset->assetLoc) ? $asset->assetLoc : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($asset->assigneduser) ? (new UsersTransformer)->transformUser($asset->assigneduser) : null,
             'created_at' => $asset->created_at,
             'purchase_date' => $asset->purchase_date,
             'purchase_cost' => $asset->purchase_cost,
-            'company' => ($asset->company) ? $asset->company->name: '',
 
         ];
 

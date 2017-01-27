@@ -63,6 +63,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     );
 
 
+    Route::get('models/{id}/assets',
+        [
+            'as' => 'api.models.assets',
+            'uses'=> 'AssetModelsController@assets'
+        ]);
+
+
     Route::resource('models', 'AssetModelsController',
         ['names' =>
             [

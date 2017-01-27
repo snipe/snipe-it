@@ -19,6 +19,12 @@ class LocationsTransformer
     public function transformLocation (Location $location = null)
     {
         if ($location) {
+
+            $assets_arr = [];
+            foreach($location->assets() as $asset) {
+                $assets_arr = ['id' => $asset->id];
+            }
+
             $transformed = [
                 'id' => e($location->id),
                 'name' => e($location->name),
@@ -28,7 +34,12 @@ class LocationsTransformer
                 'assets_checkedout' => $location->assets()->count(),
                 'assets_default'    => $location->assignedassets()->count(),
                 'country' => e($location->country),
+                'assets' => $assets_arr,
             ];
+
+
+
+
             return $transformed;
         }
 

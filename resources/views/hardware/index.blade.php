@@ -74,7 +74,7 @@
                           <th data-checkbox="true" data-field="checkbox"></th>
                     @endif
                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-field="companyName" data-formatter="companiesLinkObjFormatter" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
+                    <th data-field="company" data-formatter="companiesLinkObjFormatter" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
                     <th data-sortable="true" data-field="image" data-formatter="imageFormatter" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
                     <th data-sortable="true" data-field="name" data-visible="false" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.name') }}</th>
                     <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>

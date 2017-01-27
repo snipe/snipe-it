@@ -18,6 +18,7 @@ class AssetModelsTransformer
 
     public function transformAssetModel (AssetModel $assetmodel)
     {
+
         $transformed = [
             'id' => $assetmodel->id,
             'name' => e($assetmodel->name),
@@ -29,11 +30,12 @@ class AssetModelsTransformer
             'category' => ($assetmodel->category_id) ? $assetmodel->category : null,
             'fieldset' => ($assetmodel->fieldset) ? $assetmodel->fieldset : null,
             'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol .' months': 'None',
-            'notes' => e($assetmodel->notes),
+            'notes' => e($assetmodel->notes)
 
         ];
         return $transformed;
     }
+
 
     public function transformAssetModelsDatatable($assetmodels) {
         return (new DatatablesTransformer)->transformDatatables($assetmodels);
