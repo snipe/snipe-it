@@ -32,20 +32,20 @@
           <thead>
             <tr>
               <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-              <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName">{{ trans('admin/companies/table.title') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="name">{{ trans('admin/consumables/table.title') }}</th>
-              <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
-              <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('general.category') }}</th>
+              <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="company" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
+              <th data-sortable="true" data-searchable="true" data-field="name" data-formatter="consumablesLinkFormatter">{{ trans('admin/consumables/table.title') }}</th>
+              <th data-searchable="true" data-sortable="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('general.location') }}</th>
+              <th data-searchable="true" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty"> {{ trans('admin/consumables/general.total') }}</th>
               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining"> {{ trans('admin/consumables/general.remaining') }}</th>
               <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="min_amt"> {{ trans('general.min_amt') }}</th>
-              <th data-sortable="true" data-field="manufacturer" data-visible="false">{{ trans('general.manufacturer') }}</th>
+              <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter" data-visible="false">{{ trans('general.manufacturer') }}</th>
               <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('general.model_no') }}</th>
               <th data-sortable="true" data-field="item_no" data-visible="false">{{ trans('admin/consumables/general.item_no') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('general.order_number') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('general.purchase_date') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('general.purchase_cost') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"> {{ trans('table.actions') }}</th>
+              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"  data-formatter="consumablesActionsFormatter"> {{ trans('table.actions') }}</th>
 
             </tr>
           </thead>

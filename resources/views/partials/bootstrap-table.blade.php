@@ -121,6 +121,8 @@ $('.snipe-table').bootstrapTable({
     var formatters = [
         'hardware',
         'accessories',
+        'consumables',
+        'components',
         'locations',
         'users',
         'manufacturers',

@@ -292,66 +292,6 @@ class ConsumablesController extends Controller
 
 
     /**
-    * Returns the JSON response containing the the consumables data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getIndex() method that returns the view that consumes the JSON.
-    * @since [v1.0]
-    * @return array
-     */
-    public function getDatatable()
-    {
-        $this->authorize('index', Consumable::class);
-        $consumables = Company::scopeCompanyables(
-            Consumable::select('consumables.*')
-            ->whereNull('consumables.deleted_at')
-            ->with('company', 'location', 'category', 'users', 'manufacturer')
-        );
-
-        if (Input::has('search')) {
-            $consumables = $consumables->TextSearch(e(Input::get('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-        $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','companyName','category','model_number', 'item_no', 'manufacturer'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
-
-        switch ($sort) {
-            case 'category':
-                $consumables = $consumables->OrderCategory($order);
-                break;
-            case 'location':
-                $consumables = $consumables->OrderLocation($order);
-                break;
-            case 'manufacturer':
-                $consumables = $consumables->OrderManufacturer($order);
-                break;
-            case 'companyName':
-                $consumables = $consumables->OrderCompany($order);
-                break;
-            default:
-                $consumables = $consumables->orderBy($sort, $order);
-                break;
-        }
-
-        $consumCount = $consumables->count();
-        $consumables = $consumables->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($consumables as $consumable) {
-            $rows[] = $consumable->present()->forDataTable();
-        }
-
-        $data = array('total' => $consumCount, 'rows' => $rows);
-
-        return $data;
-
-    }
-
-    /**
     * Returns a JSON response containing details on the users associated with this consumable.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
