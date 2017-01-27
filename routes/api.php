@@ -209,6 +209,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             [
                 'index' => 'api.consumables.index',
                 'create' => 'api.consumables.create',
+                'show' => 'api.consumables.show',
                 'destroy' => 'api.consumables.destroy'
             ],
             'parameters' =>

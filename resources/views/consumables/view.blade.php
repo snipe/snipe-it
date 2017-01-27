@@ -35,7 +35,7 @@
                 name="consumable_users"
                 class="table table-striped snipe-table"
                 id="table"
-                data-url="{{route('api.consumables.view', $consumable->id)}}"
+                data-url="{{route('api.consumables.show', $consumable->id)}}"
                 data-cookie="true"
                 data-click-to-select="true"
                 data-cookie-id-table="consumableDetailTable-{{ config('version.hash_version') }}"

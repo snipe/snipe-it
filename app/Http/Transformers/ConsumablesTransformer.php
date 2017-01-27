@@ -29,7 +29,7 @@ class ConsumablesTransformer
             'min_amt'       => $consumable->min_amt,
             'model_number'  => $consumable->model_number,
             'name'          => $consumable->name,
-            'numRemaining'  => $consumable->numRemaining(),
+            'remaining'  => $consumable->numRemaining(),
             'order_number'  => $consumable->order_number,
             'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
             'purchase_date'  => $consumable->purchase_date,

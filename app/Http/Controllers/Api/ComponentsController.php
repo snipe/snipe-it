@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\ComponentsTransformer;
+use App\Models\Component;
+use App\Models\Company;
+
 
 class ComponentsController extends Controller
 {
@@ -15,9 +19,41 @@ class ComponentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $this->authorize('view', Component::class);
+        $components = Company::scopeCompanyables(Component::select('components.*')->whereNull('components.deleted_at')
+            ->with('company', 'location', 'category'));
+
+        if ($request->has('search')) {
+            $components = $components->TextSearch($request->input('search'));
+        }
+
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
+
+        $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location'];
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+
+        switch ($sort) {
+            case 'category':
+                $components = $components->OrderCategory($order);
+                break;
+            case 'location':
+                $components = $components->OrderLocation($order);
+                break;
+            case 'company':
+                $components = $components->OrderCompany($order);
+                break;
+            default:
+                $components = $components->orderBy($sort, $order);
+                break;
+        }
+
+        $total = $components->count();
+        $components = $components->skip($offset)->take($limit)->get();
+        return (new ComponentsTransformer)->transformComponents($components, $total);
     }
 
 
@@ -31,7 +67,14 @@ class ComponentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', Component::class);
+        $component = new Component;
+        $component->fill($request->all());
+
+        if ($component->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $component, trans('admin/components/message.create.success')));
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, $component->getErrors()));
     }
 
     /**
@@ -43,7 +86,9 @@ class ComponentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $this->authorize('view', Component::class);
+        $component = Component::findOrFail($id);
+        return (new ComponentsTransformer)->transformComponent($component);
     }
 
 
@@ -58,7 +103,15 @@ class ComponentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('edit', Component::class);
+        $component = Component::findOrFail($id);
+        $component->fill($request->all());
+
+        if ($component->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $component, trans('admin/components/message.update.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $component->getErrors()));
     }
 
     /**
@@ -71,7 +124,11 @@ class ComponentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('delete', Component::class);
+        $component = Component::findOrFail($id);
+        $this->authorize('delete', $component);
+        $component->delete();
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.delete.success')));
     }
 
 }

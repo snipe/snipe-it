@@ -44,20 +44,21 @@
         >
           <thead>
             <tr>
-              <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+              {{--<th data-checkbox="true" data-field="checkbox"></th>--}}
+
               <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-              <th data-switchable="true" data-visible="false" data-searchable="true" data-sortable="true" data-field="companyName">{{ trans('admin/companies/table.title') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="name">{{ trans('admin/components/table.title') }}</th>
+              <th data-switchable="true" data-visible="false" data-searchable="true" data-sortable="true" data-field="company" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
+              <th data-sortable="true" data-searchable="true" data-field="name" data-formatter="componentsLinkFormatter">{{ trans('admin/components/table.title') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="serial_number" data-visible="false">{{ trans('admin/hardware/form.serial') }}</th>
-              <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
-              <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('general.category') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="total_qty"> {{ trans('admin/components/general.total') }}</th>
+              <th data-searchable="true" data-sortable="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('general.location') }}</th>
+              <th data-searchable="true" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
+              <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="qty"> {{ trans('admin/components/general.total') }}</th>
               <th data-switchable="true" data-searchable="false" data-sortable="true" data-field="min_amt"> {{ trans('general.min_amt') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining"> {{ trans('admin/components/general.remaining') }}</th>
+              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="remaining"> {{ trans('admin/components/general.remaining') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('admin/components/general.order') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('admin/components/general.date') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('admin/components/general.cost') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"> {{ trans('table.actions') }}</th>
+              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="componentsActionsFormatter"> {{ trans('table.actions') }}</th>
             </tr>
           </thead>
         </table>

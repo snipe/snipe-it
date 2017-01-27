@@ -301,62 +301,6 @@ class ComponentsController extends Controller
 
 
     /**
-    * Generates the JSON response for accessories listing view.
-    *
-    * For debugging, see at /api/accessories/list
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v3.0]
-    * @return string JSON
-    **/
-    public function getDatatable()
-    {
-        $this->authorize('view', Component::class);
-        $components = Company::scopeCompanyables(Component::select('components.*')->whereNull('components.deleted_at')
-            ->with('company', 'location', 'category'));
-
-        if (Input::has('search')) {
-            $components = $components->TextSearch(Input::get('search'));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','companyName','category','total_qty'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
-
-        switch ($sort) {
-            case 'category':
-                $components = $components->OrderCategory($order);
-                break;
-            case 'location':
-                $components = $components->OrderLocation($order);
-                break;
-            case 'companyName':
-                $components = $components->OrderCompany($order);
-                break;
-            default:
-                $components = $components->orderBy($sort, $order);
-                break;
-        }
-
-        $componentsCount = $components->count();
-        $components = $components->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($components as $component) {
-            $rows[] = $component->present()->forDataTable();
-        }
-
-        $data = array('total' => $componentsCount, 'rows' => $rows);
-
-        return $data;
-
-    }
-
-    /**
     * Return JSON data to populate the components view,
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]

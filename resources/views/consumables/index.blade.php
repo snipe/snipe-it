@@ -36,8 +36,8 @@
               <th data-sortable="true" data-searchable="true" data-field="name" data-formatter="consumablesLinkFormatter">{{ trans('admin/consumables/table.title') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('general.location') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty"> {{ trans('admin/consumables/general.total') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining"> {{ trans('admin/consumables/general.remaining') }}</th>
+              <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="qty"> {{ trans('admin/consumables/general.total') }}</th>
+              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="remaining"> {{ trans('admin/consumables/general.remaining') }}</th>
               <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="min_amt"> {{ trans('general.min_amt') }}</th>
               <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter" data-visible="false">{{ trans('general.manufacturer') }}</th>
               <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('general.model_no') }}</th>
