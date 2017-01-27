@@ -185,7 +185,7 @@ class StatuslabelsController extends Controller
         // Was the asset created?
         if ($statuslabel->save()) {
             // Redirect to the saved Statuslabel page
-            return redirect()->to("admin/settings/statuslabels/")->with('success', trans('admin/statuslabels/message.update.success'));
+            return redirect()->route("statuslabels.index")->with('success', trans('admin/statuslabels/message.update.success'));
         }
         return redirect()->back()->withInput()->withErrors($statuslabel->getErrors());
     }
