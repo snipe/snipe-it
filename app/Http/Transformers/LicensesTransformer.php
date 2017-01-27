@@ -22,7 +22,7 @@ class LicensesTransformer
         $array = [
             'id' => $license->id,
             'name' => e($license->name),
-            'companyName' => e($license->companyName),
+            'company' => e($license->company->name),
             'manufacturer' => ($license->manufacturer) ? $license->manufacturer : null,
             'serial' => e($license->name),
             'purchase_order' => e($license->order_number),

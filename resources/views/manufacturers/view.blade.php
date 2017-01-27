@@ -55,7 +55,7 @@
           >
             <thead>
               <tr>
-                <th data-searchable="false" data-sortable="false" data-field="companyName" data-visible="false">
+                <th data-searchable="false" data-sortable="false" data-field="company" data-visible="false">
                     {{ trans('admin/companies/table.title') }}
                 </th>
                 <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
@@ -84,7 +84,7 @@
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-field="companyName" data-sortable="false" data-switchable="true">{{ trans('general.company') }}</th>
+                <th data-field="company" data-sortable="false" data-switchable="true">{{ trans('general.company') }}</th>
                 <th data-field="name" data-sortable="true">{{ trans('admin/licenses/table.title') }}</th>
                 <th data-field="manufacturer" data-sortable="true">{{ trans('general.manufacturer') }}</th>
                 <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/table.serial') }}</th>
@@ -115,7 +115,7 @@
           >
             <thead>
               <tr>
-                <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
+                <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="company" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                 <th data-sortable="true" data-searchable="true"  data-field="name">{{ trans('admin/accessories/table.title') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('admin/accessories/general.accessory_category') }}</th>
                 <th data-field="manufacturer" data-searchable="true" data-sortable="true">{{ trans('general.manufacturer') }}</th>
@@ -145,7 +145,7 @@
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName">{{ trans('admin/companies/table.title') }}</th>
+                <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="company">{{ trans('admin/companies/table.title') }}</th>
                 <th data-sortable="true" data-searchable="true" data-field="name">{{ trans('admin/consumables/table.title') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('general.category') }}</th>

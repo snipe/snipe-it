@@ -73,7 +73,7 @@
                         <th data-checkbox="true" data-field="checkbox"></th>
                      @endif
                    <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                   <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
+                   <th data-switchable="true" data-sortable="false" data-field="company" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
                    <th data-sortable="true" data-field="name" data-formatter="usersLinkFormatter">{{ trans('admin/users/table.name') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="jobtitle" data-visible="false">{{ trans('admin/users/table.title') }}</th>

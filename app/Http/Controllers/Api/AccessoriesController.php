@@ -38,7 +38,7 @@ class AccessoriesController extends Controller
             case 'category':
                 $accessories = $accessories->OrderCategory($order);
                 break;
-            case 'companyName':
+            case 'company':
                 $accessories = $accessories->OrderCompany($order);
                 break;
             default:

@@ -35,7 +35,7 @@
                 <tr>
                     <th data-checkbox="true" data-field="checkbox"></th>
                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('general.company') }}</th>
+                    <th data-field="company" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('general.company') }}</th>
                     <th data-sortable="true" data-field="name" data-visible="false" data-formatter="licensesLinkFormatter">{{ trans('admin/licenses/table.title') }}</th>
                     <th data-field="manufacturer" data-sortable="true" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
                     <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/form.license_key') }}</th>

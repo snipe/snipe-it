@@ -384,7 +384,7 @@ class AccessoriesController extends Controller
      * {
      *  "actions": "(links to available actions)",
      *  "category": "(link to category)",
-     *  "companyName": "My Company",
+     *  "company": "My Company",
      *  "location":  "My Location",
      *  "min_amt": 2,
      *  "name":  "(link to accessory),
@@ -419,7 +419,7 @@ class AccessoriesController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
-        $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category','model_number', 'manufacturer', 'location'];
+        $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','company','category','model_number', 'manufacturer', 'location'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
@@ -427,7 +427,7 @@ class AccessoriesController extends Controller
             case 'category':
                 $accessories = $accessories->OrderCategory($order);
                 break;
-            case 'companyName':
+            case 'company':
                 $accessories = $accessories->OrderCompany($order);
                 break;
             case 'location':

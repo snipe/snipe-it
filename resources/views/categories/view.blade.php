@@ -37,7 +37,7 @@
         >
           <thead>
             <tr>
-              <th data-searchable="false" data-sortable="false" data-field="companyName" data-visible="false">
+              <th data-searchable="false" data-sortable="false" data-field="company" data-visible="false">
                   {{ trans('admin/companies/table.title') }}
               </th>
               <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
