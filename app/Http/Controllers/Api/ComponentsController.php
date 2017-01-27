@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\ComponentsTransformer;
 use App\Models\Component;
 use App\Models\Company;
-
+use App\Helpers\Helper;
 
 class ComponentsController extends Controller
 {
