@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Statuslabel;
 use App\Models\Asset;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\StatuslabelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use PhpParser\Node\Expr\Cast\Bool_;
 
@@ -25,8 +25,7 @@ class StatuslabelsController extends Controller
         $this->authorize('view', Statuslabel::class);
         $allowed_columns = ['id','name','created_at'];
 
-        $statuslabels = Statuslabel::select(['id','name','deployable','pending','archived','color','show_in_nav','created_at'])
-            ->withCount('assets');
+        $statuslabels = Statuslabel::withCount('assets');
 
         if ($request->has('search')) {
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
@@ -40,7 +39,7 @@ class StatuslabelsController extends Controller
 
         $total = $statuslabels->count();
         $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($statuslabels, $total);
+        return (new StatuslabelsTransformer)->transformStatuslabels($statuslabels, $total);
     }
 
 

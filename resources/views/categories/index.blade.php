@@ -27,8 +27,7 @@
             data-url="{{route('api.categories.index') }}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="categoriesTable-{{ config('version.hash_version') }}"
-          >
+            data-cookie-id-table="categoriesTable-{{ config('version.hash_version') }}">
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>

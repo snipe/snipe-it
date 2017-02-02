@@ -22,17 +22,14 @@ class StatuslabelsTransformer
             'id' => e($statuslabel->id),
             'name' => e($statuslabel->name),
             'type' => $statuslabel->getStatuslabelType(),
-            'color' => e($statuslabel->color),
+            'color' => ($statuslabel->color) ? e($statuslabel->color) : null,
             'show_in_nav' => ($statuslabel->show_in_nav=='1') ? true : false,
+            'notes' => e($statuslabel->notes),
             'created_at' => $statuslabel->created_at,
             'updated_at' => $statuslabel->updated_at,
         ];
 
         return $array;
-    }
-
-    public function transformStatuslabelsDatatable($users) {
-        return (new DatatablesTransformer)->transformDatatables($users);
     }
 
 
