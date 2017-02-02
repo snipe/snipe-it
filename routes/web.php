@@ -157,7 +157,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
 # Group Management
 Route::group([ 'prefix' => 'groups', 'middleware' => ['web','auth','authorize:superadmin'] ], function () {
 
-    Route::get('/', [ 'as' => 'groups', 'uses' => 'GroupsController@getIndex' ]);
+    Route::get('/', [ 'as' => 'groups.index', 'uses' => 'GroupsController@getIndex' ]);
     Route::get('create', [ 'as' => 'groups.create', 'uses' => 'GroupsController@getCreate']);
     Route::post('create', [ 'as' => 'groups.store', 'uses' => 'GroupsController@postCreate' ]);
     Route::get('{groupId}/edit', [ 'as' => 'groups.edit', 'uses' => 'GroupsController@getEdit' ]);

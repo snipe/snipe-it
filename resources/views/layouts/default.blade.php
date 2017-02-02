@@ -368,7 +368,7 @@
                            </a>
                        </li>
                        <li {!! (Request::is('groups*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/groups') }}">
+                           <a href="{{ route('groups.index') }}">
                                <i class="fa fa-group fa-fw"></i> @lang('general.groups')
                            </a>
                        </li>
