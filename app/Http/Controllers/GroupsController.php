@@ -64,7 +64,6 @@ class GroupsController extends Controller
      */
     public function postCreate()
     {
-        exit;
         // create a new group instance
         $group = new Group();
         $group->name = e(Input::get('name'));
