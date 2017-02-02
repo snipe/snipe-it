@@ -78,8 +78,8 @@
                    <th data-sortable="true" data-field="name" data-formatter="usersLinkFormatter">{{ trans('admin/users/table.name') }}</th>
                    <th data-switchable="true" data-sortable="true" data-field="jobtitle" data-visible="false">{{ trans('admin/users/table.title') }}</th>
                    <th data-sortable="true" data-field="email" data-formatter="emailFormatter">
-                       <span class="hidden-md hidden-lg">{{ trans('admin/users/table.email') }}</span>
-                       <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
+                       <span class="hidden-sx">{{ trans('admin/users/table.email') }}</span>
+                       <span class="hidden-lg hidden-md"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
                    <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
                    <th data-searchable="true" data-sortable="true" data-field="manager" data-formatter="usersLinkObjFormatter">{{ trans('admin/users/table.manager') }}</th>
