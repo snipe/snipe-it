@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('create/group') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+<a href="{{ route('groups.create') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
 @stop
 
 
@@ -31,9 +31,9 @@
               <tr>
                <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="name" data-visible="true">{{ trans('admin/groups/table.name') }}</th>
-               <th data-switchable="true" data-sortable="false" data-field="users" data-visible="true">{{ trans('admin/groups/table.users') }}</th>
-               <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true">{{ trans('general.created_at') }}</th>
-               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
+               <th data-switchable="true" data-sortable="false" data-field="users_count" data-visible="true">{{ trans('admin/groups/table.users') }}</th>
+               <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true" data-formatter="createdAtFormatter">{{ trans('general.created_at') }}</th>
+               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"   data-formatter="groupsActionsFormatter">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>

@@ -156,6 +156,20 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     );
 
 
+    Route::resource('groups', 'GroupsController',
+        ['names' =>
+            [
+                'index' => 'api.groups.index',
+                'create' => 'api.groups.create',
+                'store' => 'api.groups.store',
+                'destroy' => 'api.groups.destroy'
+            ],
+            'parameters' =>
+                ['group' => 'group_id']
+        ]
+    );
+
+
     Route::resource('depreciations', 'DepreciationsController',
         ['names' =>
             [

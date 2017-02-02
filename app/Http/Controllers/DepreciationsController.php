@@ -156,45 +156,4 @@ class DepreciationsController extends Controller
     }
 
 
-    /**
-     * Generates the JSON used to display the depreciation listing.
-     *
-     * @see DepreciationsController::getIndex()
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
-     * @return String JSON
-     * @internal param string $status
-     * @since [v1.2]
-     */
-    public function getDatatable(Request $request)
-    {
-        $depreciations = Depreciation::select(array('id','name','months'));
-
-        if ($request->has('search')) {
-            $depreciations = $depreciations->TextSearch(e($request->input('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name','months'];
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-
-        $depreciations->orderBy($sort, $order);
-
-        $depreciationsCount = $depreciations->count();
-        $depreciations = $depreciations->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($depreciations as $depreciation) {
-            $rows[] = $depreciation->present()->forDataTable();
-        }
-
-        $data = array('total' => $depreciationsCount, 'rows' => $rows);
-
-        return $data;
-
-    }
 }

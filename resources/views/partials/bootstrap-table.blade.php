@@ -133,7 +133,8 @@ $('.snipe-table').bootstrapTable({
         'suppliers',
         'companies',
         'depreciations',
-        'fieldsets'
+        'fieldsets',
+        'groups'
     ];
 
     for (var i in formatters) {

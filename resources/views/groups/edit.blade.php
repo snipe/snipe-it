@@ -3,7 +3,9 @@
     'updateText' => trans('admin/groups/titles.update'),
     'helpTitle' => trans('admin/groups/general.about_groups_title'),
     'helpText' => trans('admin/groups/general.about_groups_text'),
-    'item' => $group
+    'item' => $group,
+    'formAction' => ($group) ? route('groups.update', ['accessory' => $group->id]) : route('groups.store'),
+
 ])
 @section('content')
 <style>
@@ -41,11 +43,13 @@
             <div class="form-group" style="padding-left: 15px;">
                 <label class="radio-padding">
                     {{ Form::radio('permission['.$permission_name.']', 1,
-                    (array_key_exists($permission_name, $groupPermissions) && $groupPermissions[$permission_name]), ['class' => 'minimal']) }}
+                    (is_array($groupPermissions))
+                    && (array_key_exists($permission_name, $groupPermissions)
+                    && $groupPermissions[$permission_name]), ['class' => 'minimal']) }}
                     Grant
                 </label>
                 <label class="radio-padding">
-                    {{ Form::radio('permission['.$permission_name.']', 0, (!array_key_exists($permission_name, $groupPermissions) || !$groupPermissions[$permission_name]), ['class' => 'minimal']) }}
+                    {{ Form::radio('permission['.$permission_name.']', 0, ((is_array($groupPermissions) && !array_key_exists($permission_name, $groupPermissions)) || !$groupPermissions[$permission_name]), ['class' => 'minimal']) }}
                     Deny
                 </label>
             </div>

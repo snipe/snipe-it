@@ -148,23 +148,24 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
 
     });
 
-    # Group Management
-    Route::group([ 'prefix' => 'groups', 'middleware' => ['web','auth','authorize:superadmin'] ], function () {
-
-        Route::get('/', [ 'as' => 'groups', 'uses' => 'GroupsController@getIndex' ]);
-        Route::get('create', [ 'as' => 'create/group', 'uses' => 'GroupsController@getCreate' ]);
-        Route::post('create', 'GroupsController@postCreate');
-        Route::get('{groupId}/edit', [ 'as' => 'update/group', 'uses' => 'GroupsController@getEdit' ]);
-        Route::post('{groupId}/edit', 'GroupsController@postEdit');
-        Route::get('{groupId}/delete', [ 'as' => 'delete/group', 'uses' => 'GroupsController@getDelete' ]);
-        Route::get('{groupId}/restore', [ 'as' => 'restore/group', 'uses' => 'GroupsController@getRestore' ]);
-        Route::get('{groupId}/view', [ 'as' => 'view/group', 'uses' => 'GroupsController@getView' ]);
-    });
 
     # Dashboard
     Route::get('/', [ 'as' => 'admin', 'uses' => 'DashboardController@getIndex' ]);
 
 });
+
+# Group Management
+Route::group([ 'prefix' => 'groups', 'middleware' => ['web','auth','authorize:superadmin'] ], function () {
+
+    Route::get('/', [ 'as' => 'groups', 'uses' => 'GroupsController@getIndex' ]);
+    Route::get('create', [ 'as' => 'groups.create', 'uses' => 'GroupsController@getCreate']);
+    Route::post('create', [ 'as' => 'groups.store', 'uses' => 'GroupsController@postCreate' ]);
+    Route::get('{groupId}/edit', [ 'as' => 'groups.edit', 'uses' => 'GroupsController@getEdit' ]);
+    Route::post('{groupId}/edit', [ 'as' => 'groups.update', 'uses' => 'GroupsController@postEdit' ]);
+    Route::get('{groupId}/delete', [ 'as' => 'groups.delete', 'uses' => 'GroupsController@getDelete' ]);
+
+});
+
 
 /*
 |--------------------------------------------------------------------------

@@ -64,13 +64,14 @@ class GroupsController extends Controller
      */
     public function postCreate()
     {
+        exit;
         // create a new group instance
         $group = new Group();
         $group->name = e(Input::get('name'));
         $group->permissions = json_encode(Input::get('permission'));
 
         if ($group->save()) {
-            return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.create'));
+            return redirect()->route("groups.index")->with('success', trans('admin/groups/message.success.create'));
         }
         return redirect()->back()->withInput()->withErrors($group->getErrors());
     }
@@ -142,73 +143,4 @@ class GroupsController extends Controller
         return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
     }
 
-
-    /**
-    * Generates the JSON used to display the User Group listing.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @return String JSON
-    */
-    public function getDatatable()
-    {
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        if (Input::get('sort')=='name') {
-            $sort = 'first_name';
-        } else {
-            $sort = e(Input::get('sort'));
-        }
-
-        // Grab all the groups
-        $groups = Group::with('users')->orderBy('name', 'ASC');
-
-        if (Input::has('search')) {
-            $groups = $users->TextSearch(e(Input::get('search')));
-        }
-
-         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-
-        $allowed_columns = [
-           'name','created_at'
-         ];
-
-        $sort = in_array($sort, $allowed_columns) ? $sort : 'name';
-        $groups = $groups->orderBy($sort, $order);
-
-        $groupsCount = $groups->count();
-        $groups = $groups->skip($offset)->take($limit)->get();
-        $rows = array();
-
-        foreach ($groups as $group) {
-            $actions = '<nobr>';
-            $actions .= Helper::generateDatatableButton('edit', route('update/group', $group->id));
-
-            if (!config('app.lock_passwords')) {
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('delete/group', $group->id),
-                    true, /*enabled*/
-                    trans('admin/groups/message.delete.confirm'),
-                    $group->name
-                );
-            } else {
-                $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
-            }
-
-            $actions .= '</nobr>';
-
-            $rows[] = array(
-                'id'         => $group->id,
-                'name'        => $group->name,
-                'users'         => $group->users->count(),
-                'created_at'        => $group->created_at->format('Y-m-d'),
-                'actions'       => ($actions) ? $actions : '',
-            );
-        }
-        $data = array('total'=>$groupsCount, 'rows'=>$rows);
-        return $data;
-    }
 }
