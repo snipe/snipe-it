@@ -155,6 +155,20 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     );
 
+
+    Route::resource('depreciations', 'DepreciationsController',
+        ['names' =>
+            [
+                'index' => 'api.depreciations.index',
+                'create' => 'api.depreciations.create',
+                'destroy' => 'api.depreciations.destroy'
+            ],
+            'parameters' =>
+                ['depreciation' => 'depreciation_id']
+        ]
+    );
+
+
     Route::resource('users', 'UsersController',
         ['names' =>
             [
@@ -177,6 +191,9 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 ['setting' => 'setting_id']
         ]
     );
+
+
+
 
 
     /*---Status Label API---*/

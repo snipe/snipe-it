@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Statuslabel;
+use App\Models\Depreciation;
 use App\Models\Asset;
-use App\Http\Transformers\StatuslabelsTransformer;
-use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\DatatablesTransformer;
 
-class StatuslabelsController extends Controller
+class DepreciationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,24 +20,24 @@ class StatuslabelsController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', Statuslabel::class);
+        $this->authorize('view', Depreciation::class);
         $allowed_columns = ['id','name','created_at'];
 
-        $statuslabels = Statuslabel::withCount('assets');
+        $depreciations = Depreciation::select('id','name','months');
 
         if ($request->has('search')) {
-            $statuslabels = $statuslabels->TextSearch($request->input('search'));
+            $depreciations = $depreciations->TextSearch($request->input('search'));
         }
 
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $statuslabels->orderBy($sort, $order);
+        $depreciations->orderBy($sort, $order);
 
-        $total = $statuslabels->count();
-        $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
-        return (new StatuslabelsTransformer)->transformStatuslabels($statuslabels, $total);
+        $total = $depreciations->count();
+        $depreciations = $depreciations->skip($offset)->take($limit)->get();
+        return (new DatatablesTransformer)->transformDatatables($depreciations, $total);
     }
 
 
@@ -52,14 +51,14 @@ class StatuslabelsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Statuslabel::class);
-        $statuslabel = new Statuslabel;
-        $statuslabel->fill($request->all());
+        $this->authorize('create', Depreciation::class);
+        $depreciation = new Depreciation;
+        $depreciation->fill($request->all());
 
-        if ($statuslabel->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
+        if ($depreciation->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $depreciation, trans('admin/depreciations/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $statuslabel->getErrors()));
+        return response()->json(Helper::formatStandardApiResponse('error', null, $depreciation->getErrors()));
 
     }
 
@@ -73,9 +72,9 @@ class StatuslabelsController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', Statuslabel::class);
-        $statuslabel = Statuslabel::findOrFail($id);
-        return $statuslabel;
+        $this->authorize('view', Depreciation::class);
+        $depreciation = Depreciation::findOrFail($id);
+        return $depreciation;
     }
 
 
@@ -90,15 +89,15 @@ class StatuslabelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Statuslabel::class);
-        $statuslabel = Statuslabel::findOrFail($id);
-        $statuslabel->fill($request->all());
+        $this->authorize('edit', Depreciation::class);
+        $depreciation = Depreciation::findOrFail($id);
+        $depreciation->fill($request->all());
 
-        if ($statuslabel->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.update.success')));
+        if ($depreciation->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $depreciation, trans('admin/depreciations/message.update.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, $statuslabel->getErrors()));
+        return response()->json(Helper::formatStandardApiResponse('error', null, $depreciation->getErrors()));
     }
 
     /**
@@ -111,17 +110,17 @@ class StatuslabelsController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', Statuslabel::class);
-        $statuslabel = Statuslabel::findOrFail($id);
-        $this->authorize('delete', $statuslabel);
-        $statuslabel->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/statuslabels/message.delete.success')));
+        $this->authorize('delete', Depreciation::class);
+        $depreciation = Depreciation::findOrFail($id);
+        $this->authorize('delete', $depreciation);
+        $depreciation->delete();
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/depreciations/message.delete.success')));
 
     }
 
 
 
-     /**
+    /**
      * Show a count of assets by status label for pie chart
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -129,10 +128,10 @@ class StatuslabelsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function getAssetCountByStatuslabel()
+    public function getAssetCountByDepreciation()
     {
 
-        $statusLabels = Statuslabel::with('assets')->get();
+        $statusLabels = Depreciation::with('assets')->get();
         $labels=[];
         $points=[];
         $colors=[];
@@ -171,7 +170,7 @@ class StatuslabelsController extends Controller
      */
     public function assets(Request $request, $id)
     {
-        $this->authorize('view', Statuslabel::class);
+        $this->authorize('view', Depreciation::class);
         $this->authorize('index', Asset::class);
         $assets = Asset::where('status_id','=',$id);
 
@@ -206,8 +205,8 @@ class StatuslabelsController extends Controller
      * @return Bool
      */
     public function checkIfDeployable($id) {
-        $statuslabel = Statuslabel::findOrFail($id);
-        if ($statuslabel->getStatuslabelType()=='deployable') {
+        $depreciation = Depreciation::findOrFail($id);
+        if ($depreciation->getDepreciationType()=='deployable') {
             return '1';
         }
 
