@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Bulk Checkin &amp; Delete
+Bulk Checkin &amp;amp; Delete
 @parent
 @stop
 
@@ -64,9 +64,9 @@ Bulk Checkin &amp; Delete
                     </td>
                     <td>
                       @foreach ($user->groups as $group)
-                      <a href=" {{ route('update/group', $group->id) }}" class="label  label-default">
+                      <a href=" {{ route('groups.update', $group->id) }}" class="label  label-default">
                         {{ $group->name  }}
-                      </a>
+                      </a>&nbsp;
                       @endforeach
                     </td>
                     <td>
@@ -105,7 +105,6 @@ Bulk Checkin &amp; Delete
       </form>
     </div>
   </div>
-        <form class="form-horizontal" role="form" method="post" action="{{ route('users/bulksave') }}">
 </div>
 
 @stop
