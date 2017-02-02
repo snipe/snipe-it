@@ -104,10 +104,10 @@
                        {{ trans('general.groups') }}
                    </th>
                    <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
-                   <th data-sortable="true" data-field="two_factor_enrolled" data-visible="false" data-formatter="trueFalseFormatter" >{{ trans('admin/users/general.two_factor_enrolled') }}</th>
-                   <th data-sortable="true" data-field="two_factor_optin" data-formatter="trueFalseFormatter" data-visible="false">{{ trans('admin/users/general.two_factor_active') }}</th>
+                   <th data-sortable="true" data-field="two_factor_enrolled" data-visible="false" data-formatter="trueFalseFormatter" class="text-center">{{ trans('admin/users/general.two_factor_enrolled') }}</th>
+                   <th data-sortable="true" data-field="two_factor_optin" data-formatter="trueFalseFormatter" data-visible="false" class="text-center">{{ trans('admin/users/general.two_factor_active') }}</th>
 
-                   <th data-sortable="true" data-field="activated" data-formatter="trueFalseFormatter">{{ trans('general.activated') }}</th>
+                   <th data-sortable="true" data-field="activated" class="text-center" data-formatter="trueFalseFormatter">{{ trans('general.activated') }}</th>
                    <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false" data-formatter="createdAtFormatter">{{ trans('general.created_at') }}</th>
                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-formatter="usersActionsFormatter" data-field="actions" >{{ trans('table.actions') }}</th>
                  </tr>
