@@ -140,7 +140,7 @@ $(document).ready(function () {
      {
         // Vue collision: Avoid overriding a vue select2 instance
         // by checking to see if the item has already been select2'd.
-        $('select2:not([class^="select2-container"])').each((i,obj) => {
+        $('.select2:not([class^="select2-container"])').each((i,obj) => {
             {
                 $(obj).select2();
             }
@@ -151,4 +151,3 @@ $(document).ready(function () {
 
 
 });
-

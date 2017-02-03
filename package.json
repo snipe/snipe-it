@@ -9,6 +9,7 @@
     "bootstrap-sass": "^3.3.7",
     "gulp": "^3.9.1",
     "jquery": "^3.1.0",
+    "jquery-ui": "^1.12.1",
     "laravel-elixir": "^6.0.0-11",
     "laravel-elixir-browserify": "^0.8.1",
     "laravel-elixir-codeception-standalone": "^0.1.0",
@@ -24,6 +25,7 @@
     "vue-template-compiler": "=2.1.6"
   },
   "dependencies": {
+    "bower": "^1.8.0",
     "jquery": "^3.1.1",
     "laravel-elixir-codeception": "^0.2.0"
   }
