@@ -278,6 +278,13 @@ Route::group(['middleware' => ['web','auth','authorize:reports.view']], function
     );
 });
 
+Route::get(
+    'auth/signin',
+    ['uses' => 'Auth\LoginController@legacyAuthRedirect' ]
+);
+
+
+
 
 /*
 |--------------------------------------------------------------------------

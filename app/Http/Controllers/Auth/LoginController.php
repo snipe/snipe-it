@@ -309,4 +309,9 @@ class LoginController extends Controller
             $lockoutTime
         );
     }
+
+    public function legacyAuthRedirect() {
+        return redirect()->route('login');
+    }
+
 }
