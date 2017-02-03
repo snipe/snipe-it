@@ -27,6 +27,7 @@ $('.snipe-table').bootstrapTable({
         @if (isset($multiSort))
         showMultiSort: true,
         @endif
+
         showExport: true,
         showColumns: true,
         trimOnSearch: false,
@@ -41,6 +42,9 @@ $('.snipe-table').bootstrapTable({
         paginationLastText: "{{ trans('general.last') }}",
         paginationPreText: "{{ trans('general.previous') }}",
         paginationNextText: "{{ trans('general.next') }}",
+        formatLoadingMessage: function () {
+            return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+        },
         pageList: ['10','25','50','100','150','200','500','1000'],
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
