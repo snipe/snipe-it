@@ -70,7 +70,6 @@ $('.snipe-table').bootstrapTable({
     });
 
     $('.snipe-table').on('uncheck.bs.table', function () {
-        console.log($('.snipe-table').bootstrapTable('getSelections').length);
         if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
             $('#bulkEdit').attr('disabled', 'disabled');
         }
@@ -171,7 +170,6 @@ $('.snipe-table').bootstrapTable({
     }
 
     function imageFormatter(value, row) {
-        console.log(value);
         if (value) {
             return '<img src="' + value + '" height="50" width="50">';
         }
