@@ -17,6 +17,11 @@
 
 <div class="row">
   <div class="col-md-9">
+
+
+
+    <!-- start tables -->
+
     <div class="box box-default">
       @if ($supplier->id)
       <div class="box-header with-border">
@@ -29,7 +34,6 @@
 
       <div class="box-body">
         <!-- checked out suppliers table -->
-        <h6>Assets</h6>
         <br>
         <div class="table-responsive">
           <table class="display table table-hover">
