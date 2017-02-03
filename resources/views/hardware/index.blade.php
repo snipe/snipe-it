@@ -93,6 +93,8 @@
                     <th data-sortable="true" data-searchable="true"  data-field="order_number">{{ trans('admin/hardware/form.order') }}</th>
                     <th data-sortable="true" data-searchable="true" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
                     <th data-sortable="true" data-field="expected_checkin" data-searchable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
+                      <th data-sortable="false" data-field="warranty">{{ trans('admin/hardware/form.warranty') }}</th>
+                      <th data-sortable="false" data-field="warranty_expires">{{ trans('admin/hardware/form.expires') }}</th>
                     @foreach(\App\Models\CustomField::all() as $field)
 
 

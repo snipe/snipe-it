@@ -37,6 +37,8 @@ class AssetsTransformer
             'location' => ($asset->assetLoc) ? $asset->assetLoc : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($asset->assigneduser) ? (new UsersTransformer)->transformUser($asset->assigneduser) : null,
+            'warranty' =>  ($asset->warranty_months > 0) ? $asset->warranty_months.' '.trans('admin/hardware/form.months') : null,
+            'warranty_expires' => ($asset->warranty_months > 0) ?  $asset->present()->warrantee_expires() : null,
             'created_at' => $asset->created_at,
             'purchase_date' => $asset->purchase_date,
             'purchase_cost' => $asset->purchase_cost,
