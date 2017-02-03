@@ -75,7 +75,7 @@
                                             <td>{{ file.filesize }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-info" @click="showModal(file)"><i class="fa fa-spinner process"></i>Process</button>
-                                                <button class="btn btn-danger btn-sm" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
+                                                <button class="btn btn-sm btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
