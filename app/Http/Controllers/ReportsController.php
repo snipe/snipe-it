@@ -580,6 +580,10 @@ class ReportsController extends Controller
             $header[] = trans('admin/hardware/form.expected_checkin');
         }
 
+        if (e(Input::get('notes')) == '1') {
+            $header[] = trans('general.notes');
+        }
+
 
         foreach ($customfields as $customfield) {
             if (e(Input::get($customfield->db_column_name())) == '1') {
@@ -721,6 +725,14 @@ class ReportsController extends Controller
                     $row[] = '"' .e($asset->expected_checkin). '"';
                 } else {
                     $row[] = ''; // Empty string if blankd
+                }
+            }
+
+            if (e(Input::get('notes')) == '1') {
+                if ($asset->notes) {
+                    $row[] = '"' .$asset->notes . '"';
+                } else {
+                    $row[] = '';
                 }
             }
 

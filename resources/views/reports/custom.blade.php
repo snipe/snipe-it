@@ -159,11 +159,18 @@
             {{ trans('admin/hardware/form.expected_checkin') }}
           </label>
         </div>
+        <div class="checkbox col-md-12">
+          <label>
+            {{ Form::checkbox('notes', '1') }}
+            {{ trans('general.notes') }}
+          </label>
+        </div>
 
 
 
 
-          @foreach ($customfields as $customfield)
+
+        @foreach ($customfields as $customfield)
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox($customfield->db_column_name(), '1') }}
