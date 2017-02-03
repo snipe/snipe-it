@@ -175,13 +175,10 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 },
                 _token: "{{ csrf_token() }}",
-                dataType: 'json',
+                dataType: 'html',
                 success: function (data) {
                     data: data,
                     $('#custom_fields_content').html(data);
-                },
-                error: function (data) {
-                    alert('oops');
                 }
             });
         }
