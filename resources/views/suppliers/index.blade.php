@@ -30,14 +30,14 @@
         <thead>
           <tr>
             <th data-sortable="true" data-field="id" data-visible="false">{{ trans('admin/suppliers/table.id') }}</th>
-            <th data-sortable="true" data-field="name">{{ trans('admin/suppliers/table.name') }}</th>
+            <th data-sortable="true" data-field="name" data-formatter="suppliersLinkFormatter">{{ trans('admin/suppliers/table.name') }}</th>
             <th data-sortable="true" data-field="address">{{ trans('admin/suppliers/table.address') }}</th>
             <th data-searchable="true" data-sortable="true" data-field="contact">{{ trans('admin/suppliers/table.contact') }}</th>
-            <th data-searchable="true" data-sortable="true" data-field="email">{{ trans('admin/suppliers/table.email') }}</th>
+            <th data-searchable="true" data-sortable="true" data-field="email" data-formatter="emailFormatter">{{ trans('admin/suppliers/table.email') }}</th>
             <th data-searchable="true" data-sortable="true" data-field="phone">{{ trans('admin/suppliers/table.phone') }}</th>
             <th data-searchable="true" data-sortable="true" data-field="fax" data-visible="false">{{ trans('admin/suppliers/table.fax') }}</th>
-            <th data-searchable="false" data-sortable="false" data-field="assets">{{ trans('admin/suppliers/table.assets') }}</th>
-            <th data-searchable="false" data-sortable="false" data-field="licenses">{{ trans('admin/suppliers/table.licenses') }}</th>
+            <th data-searchable="false" data-sortable="false" data-field="assets_count">{{ trans('admin/suppliers/table.assets') }}</th>
+            <th data-searchable="false" data-sortable="false" data-field="licenses_count">{{ trans('admin/suppliers/table.licenses') }}</th>
             <th data-switchable="false" data-formatter="suppliersActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
           </tr>
         </thead>
