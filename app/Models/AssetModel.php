@@ -168,4 +168,19 @@ class AssetModel extends SnipeModel
             });
 
     }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
+    }
+
+
 }

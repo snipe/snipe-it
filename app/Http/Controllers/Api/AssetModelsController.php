@@ -29,21 +29,31 @@ class AssetModelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', AssetModel::class);
-        $allowed_columns = ['id','image','name','model_number','eol','notes','created_at'];
+        $allowed_columns = ['id','image','name','model_number','eol','notes','created_at','manufacturer'];
 
-        $assetmodels = AssetModel::select(['id','image','name','model_number','eol','notes','created_at','category_id','manufacturer_id','depreciation_id','fieldset_id'])
+        $assetmodels = AssetModel::select(['models.id','models.image','models.name','model_number','eol','models.notes','models.created_at','category_id','manufacturer_id','depreciation_id','fieldset_id'])
             ->with('category','depreciation', 'manufacturer','fieldset')
             ->withCount('assets');
 
         if ($request->has('search')) {
-            $assetmodels = $assetmodels->TextSearch($request->input('search'));
+            $assetmodels->TextSearch($request->input('search'));
         }
+
 
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $assetmodels->orderBy($sort, $order);
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'models.created_at';
+
+        switch ($sort) {
+            case 'manufacturer':
+                $assetmodels->OrderManufacturer($order);
+                break;
+            default:
+                $assetmodels->orderBy($sort, $order);
+                break;
+        }
+
 
         $total = $assetmodels->count();
         $assetmodels = $assetmodels->skip($offset)->take($limit)->get();

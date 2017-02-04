@@ -8,13 +8,7 @@
 
 {{-- Page title --}}
 @section('header_right')
-  @if(Input::get('status')=='Deleted')
-      <a href="{{ url('hardware/models') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_models') }}</a>
-  @else
-      <a href="{{ route('models.create') }}" class="btn btn-primary pull-right">
-      {{ trans('general.create') }}</a>
-      <a href="{{ url('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_deleted') }}</a>
-  @endif
+  <a href="{{ url('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_deleted') }}</a>
 @stop
 
 
@@ -39,7 +33,7 @@
               <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
               <th data-sortable="true" data-field="name" data-formatter="modelsLinkFormatter">{{ trans('general.name') }}</th>
               <th data-sortable="true" data-field="image" data-formatter="imageFormatter" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
-              <th data-sortable="false" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
+              <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
 
               <th data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
               <th data-sortable="false" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
