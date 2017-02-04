@@ -92,6 +92,10 @@ class AssetsController extends Controller
             $assets->InCategory($request->input('category_id'));
         }
 
+        if ($request->has('manufacturer_id')) {
+            $assets->ByManufacturer($request->input('manufacturer_id'));
+        }
+
         $request->has('order_number') ? $assets = $assets->where('order_number', '=', e($request->get('order_number'))) : '';
 
         $offset = request('offset', 0);

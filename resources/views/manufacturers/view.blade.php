@@ -48,22 +48,22 @@
             name="manufacturer_assets"
             class="table table-striped bootstrap-table snipe-table"
             id="assets-table"
-            data-url="{{ route('api.manufacturers.show', ['manufacturerId' => $manufacturer->id, 'itemtype' => 'assets']) }}"
+            data-url="{{ route('api.assets.index', ['manufacturer_id' => $manufacturer->id, 'itemtype' => 'assets']) }}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="maufacturerAssetsTable-{{config('version.hash_version') }}"
-          >
+            data-cookie-id-table="maufacturerAssetsTable-{{config('version.hash_version') }}">
             <thead>
               <tr>
-                <th data-searchable="false" data-sortable="false" data-field="company" data-visible="false">
+                <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="company" data-visible="false" data-formatter="companiesLinkObjFormatter">
                     {{ trans('admin/companies/table.title') }}
                 </th>
-                <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.name') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="assigned_to">{{ trans('general.user') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="name" data-formatter="hardwareLinkFormatter">{{ trans('general.name') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="image" data-visible="false" data-formatter="imageFormatter">{{ trans('admin/hardware/table.image') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="model" data-formatter="modelsLinkObjFormatter">{{ trans('admin/hardware/form.model') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.serial') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="assigned_to" data-formatter="usersLinkFormatter">{{ trans('general.user') }}</th>
                 <th data-searchable="false" data-sortable="false" data-field="change"  data-switchable="false">{{ trans('admin/hardware/table.change') }}</th>
                 <th data-searchable="false" data-sortable="false" data-field="actions"  data-switchable="false">{{ trans('table.actions') }}</th>
               </tr>

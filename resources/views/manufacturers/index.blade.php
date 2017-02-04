@@ -31,7 +31,8 @@
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-field="name">{{ trans('admin/manufacturers/table.name') }}</th>
+                <th data-sortable="true" data-field="name" data-formatter="manufacturersLinkFormatter">
+                  {{ trans('admin/manufacturers/table.name') }}</th>
                 <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="assets_count">{{ trans('general.assets') }}</th>
                 <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="licenses_count">{{ trans('general.licenses') }}</th>
                 <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="accessories_count">{{ trans('general.accessories') }}</th>

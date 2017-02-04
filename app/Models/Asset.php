@@ -844,6 +844,22 @@ class Asset extends Depreciable
     }
 
     /**
+     * Query builder scope to return results of a manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text $order Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeByManufacturer($query, $manufacturer_id)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->where('models.manufacturer_id','=',$manufacturer_id);
+    }
+
+
+
+    /**
     * Query builder scope to order on category
     *
     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
