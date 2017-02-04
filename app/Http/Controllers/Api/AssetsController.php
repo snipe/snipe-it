@@ -84,12 +84,20 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
+        if ($request->has('model_id')) {
+            $assets->InModelList([$request->input('model_id')]);
+        }
+
+        if ($request->has('category_id')) {
+            $assets->InCategory($request->input('category_id'));
+        }
+
         $request->has('order_number') ? $assets = $assets->where('order_number', '=', e($request->get('order_number'))) : '';
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets.created_at';
         $assets->orderBy($sort, $order);
 
         switch ($status) {

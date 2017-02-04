@@ -30,11 +30,10 @@
           name="category_assets"
           class="snipe-table"
           id="table"
-          data-url="{{ route('api.categories.'.$category->category_type.'.show', [$category->id, $category->category_type]) }}"
+          data-url="{{ ($category->category_type=='asset') ? route('api.assets.index',['category_id'=> $category->id]) : route('api'.$category->category_type.'index', ['category_id'=> $category->id]) }}
           data-cookie="true"
           data-click-to-select="true"
-          data-cookie-id-table="categoryAssetsTable"
-        >
+          data-cookie-id-table="categoryAssetsTable">
           <thead>
             <tr>
               <th data-searchable="false" data-sortable="false" data-field="company" data-visible="false">
@@ -43,10 +42,10 @@
               <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
               <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.name') }}</th>
               @if ($category->category_type=='asset')
-              <th data-searchable="false" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="assigned_to">{{ trans('general.user') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="model" data-formatter="modelsLinkObjFormatter">{{ trans('admin/hardware/form.model') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.serial') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="assigned_to" data-formatter="usersLinkFormatter">{{ trans('general.user') }}</th>
               <th data-searchable="false" data-sortable="false" data-field="change"  data-switchable="false">{{ trans('admin/hardware/table.change') }}</th>
               @endif
               <th data-searchable="false" data-sortable="false" data-field="actions"  data-switchable="false">{{ trans('table.actions') }}</th>

@@ -465,9 +465,9 @@ class Asset extends Depreciable
   /**
    * Query builder scope for hardware
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeHardware($query)
@@ -479,9 +479,9 @@ class Asset extends Depreciable
   /**
    * Query builder scope for pending assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopePending($query)
@@ -499,9 +499,9 @@ class Asset extends Depreciable
     /**
     * Query builder scope for pending assets
     *
-    * @param  Illuminate\Database\Query\Builder $query Query builder instance
+    * @param  \Illuminate\Database\Query\Builder $query Query builder instance
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
 
     public function scopeAssetsByLocation($query, $location)
@@ -523,9 +523,9 @@ class Asset extends Depreciable
     /**
     * Query builder scope for RTD assets
     *
-    * @param  Illuminate\Database\Query\Builder $query Query builder instance
+    * @param  \Illuminate\Database\Query\Builder $query Query builder instance
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
 
     public function scopeRTD($query)
@@ -543,9 +543,9 @@ class Asset extends Depreciable
   /**
    * Query builder scope for Undeployable assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeUndeployable($query)
@@ -562,9 +562,9 @@ class Asset extends Depreciable
     /**
      * Query builder scope for non-Archived assets
      *
-     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
 
     public function scopeNotArchived($query)
@@ -579,9 +579,9 @@ class Asset extends Depreciable
   /**
    * Query builder scope for Archived assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeArchived($query)
@@ -598,9 +598,9 @@ class Asset extends Depreciable
   /**
    * Query builder scope for Deployed assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeDeployed($query)
@@ -612,9 +612,9 @@ class Asset extends Depreciable
   /**
    * Query builder scope for Requestable assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeRequestableAssets($query)
@@ -633,9 +633,9 @@ class Asset extends Depreciable
   /**
   * Query builder scope for Deleted assets
   *
-  * @param  Illuminate\Database\Query\Builder $query Query builder instance
+  * @param  \Illuminate\Database\Query\Builder $query Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
 
     public function scopeDeleted($query)
@@ -662,9 +662,9 @@ class Asset extends Depreciable
   /**
   * Query builder scope to get not-yet-accepted assets
   *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
     public function scopeNotYetAccepted($query)
     {
@@ -674,9 +674,9 @@ class Asset extends Depreciable
   /**
   * Query builder scope to get rejected assets
   *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
     public function scopeRejected($query)
     {
@@ -700,10 +700,10 @@ class Asset extends Depreciable
     /**
     * Query builder scope to search on text for complex Bootstrap Tables API
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $search      Search term
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeTextSearch($query, $search)
     {
@@ -765,10 +765,10 @@ class Asset extends Depreciable
     /**
     * Query builder scope to order on model
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderModels($query, $order)
     {
@@ -778,10 +778,10 @@ class Asset extends Depreciable
     /**
     * Query builder scope to order on model number
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderModelNumber($query, $order)
     {
@@ -792,10 +792,10 @@ class Asset extends Depreciable
     /**
     * Query builder scope to order on assigned user
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderAssigned($query, $order)
     {
@@ -805,10 +805,10 @@ class Asset extends Depreciable
     /**
     * Query builder scope to order on status
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderStatus($query, $order)
     {
@@ -818,24 +818,39 @@ class Asset extends Depreciable
   /**
     * Query builder scope to order on company
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'assets.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
     }
 
-  /**
-  * Query builder scope to order on category
-  *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-  * @param  text                              $order         Order
-  *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
-  */
+
+    /**
+     * Query builder scope to return results of a category
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text $order Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeInCategory($query, $category_id)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('categories', 'models.category_id', '=', 'categories.id')->where('models.category_id','=',$category_id);
+    }
+
+    /**
+    * Query builder scope to order on category
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order         Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeOrderCategory($query, $order)
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')
@@ -847,10 +862,10 @@ class Asset extends Depreciable
     /**
      * Query builder scope to order on manufacturer
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $order         Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderManufacturer($query, $order)
     {
@@ -862,12 +877,10 @@ class Asset extends Depreciable
   /**
     * Query builder scope to order on location
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-  * TODO: Extend this method out for checked out assets as well. Right now it
-  * only checks the location name related to rtd_location_id
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderLocation($query, $order)
     {
