@@ -21,10 +21,8 @@ class GroupsTransformer
         $array = [
             'id' => e($group->id),
             'name' => e($group->name),
-            'permissions' => ($group->permissions) ? json_decode($group->permissions, true) : null,
+            'permissions' => $group->permissions,
             'users_count' => $group->users_count,
-            'created_at' => $group->created_at,
-            'updated_at' => $group->updated_at,
         ];
 
         return $array;
