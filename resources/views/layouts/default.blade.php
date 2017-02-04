@@ -469,7 +469,6 @@
                     @can('create', \App\Models\Asset::class)
                       <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
                       <li><a href="{{ route('maintenances.index') }}">@lang('general.asset_maintenances') </a></li>
-                      <li><a href="{{ url('hardware/import') }}">@lang('general.import') </a></li>
                       <li><a href="{{ url('hardware/history') }}">@lang('general.import-history') </a></li>
                     @endcan
                 </ul>
@@ -515,6 +514,15 @@
                   </a>
             </li>
             @endcan
+            @can('create', \App\Models\Asset::class)
+                <li{!! (Request::is('hardware/import*') ? ' class="active"' : '') !!}>
+                    <a href="{{ url('hardware/import') }}">
+                        <i class="fa fa-cloud-download"></i>
+                        <span>@lang('general.import')</span>
+                    </a>
+                </li>
+            @endcan
+
             @can('reports.view')
             <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
                 <a href="{{ url('reports') }}"  class="dropdown-toggle">
@@ -526,12 +534,12 @@
                 <ul class="treeview-menu">
 	                 <li><a href="{{ url('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
-                    <li><a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }} >@lang('general.depreciation_report')</a></li>
-                    <li><a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }} >@lang('general.license_report')</a></li>
+                    <li><a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}>@lang('general.depreciation_report')</a></li>
+                    <li><a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }}>@lang('general.license_report')</a></li>
                     <li><a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }} >@lang('general.asset_maintenance_report')</a></li>
-                    <li><a href="{{ url('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }} >@lang('general.asset_report')</a></li>
+                    <li><a href="{{ url('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }}>@lang('general.asset_report')</a></li>
                     <li><a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }} >@lang('general.unaccepted_asset_report')</a></li>
-                    <li><a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }} >@lang('general.accessory_report')</a></li>
+                    <li><a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>@lang('general.accessory_report')</a></li>
                     <li><a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>@lang('general.custom_report')</a></li>
                 </ul>
             </li>
