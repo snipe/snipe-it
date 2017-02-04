@@ -36,6 +36,10 @@ class UsersTransformer
                 'two_factor_activated' => ($user->activated =='1') ? true : false,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
+                'assets_count' => $user->assets_count,
+                'licenses_count' => $user->licenses_count,
+                'accessories_count' => $user->accessories_count,
+                'consumables_count' => $user->consumables_count,
             ];
 
         return $array;

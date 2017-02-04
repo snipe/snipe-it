@@ -67,50 +67,7 @@
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="userTableDisplay-{{ config('version.hash_version') }}">
-               <thead>
-                 <tr>
-                     @if (Input::get('status')!='deleted')
-                        <th data-checkbox="true" data-field="checkbox"></th>
-                     @endif
-                   <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                   <th data-switchable="true" data-sortable="false" data-field="company" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
-                   <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
-                   <th data-sortable="true" data-field="name" data-formatter="usersLinkFormatter">{{ trans('admin/users/table.name') }}</th>
-                   <th data-switchable="true" data-sortable="true" data-field="jobtitle" data-visible="false">{{ trans('admin/users/table.title') }}</th>
-                   <th data-sortable="true" data-field="email" data-formatter="emailFormatter">
-                       {{ trans('admin/users/table.email') }}
-                   </th>
-                   <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
-                   <th data-searchable="true" data-sortable="true" data-field="manager" data-formatter="usersLinkObjFormatter">{{ trans('admin/users/table.manager') }}</th>
-                   <th data-sortable="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('admin/users/table.location') }}</th>
-                   <th data-sortable="false" data-field="assets">
-                       <span class="hidden-md hidden-lg">Assets</span>
-                       <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>
-                   </th>
-                   <th data-sortable="false" data-field="licenses">
-                       <span class="hidden-md hidden-lg">Licenses</span>
-                       <span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>
-                   </th>
-                   <th data-sortable="false" data-field="accessories">
-                       <span class="hidden-md hidden-lg">Accessories</span>
-                       <span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>
-                   </th>
-                   <th data-sortable="false" data-field="consumables">
-                       <span class="hidden-md hidden-lg">Consumables</span>
-                       <span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>
-                   </th>
-                   <th data-sortable="false" data-field="groups" data-formatter="groupsFormatter">
-                       {{ trans('general.groups') }}
-                   </th>
-                   <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
-                   <th data-sortable="true" data-field="two_factor_enrolled" data-visible="false" data-formatter="trueFalseFormatter" class="text-center">{{ trans('admin/users/general.two_factor_enrolled') }}</th>
-                   <th data-sortable="true" data-field="two_factor_optin" data-formatter="trueFalseFormatter" data-visible="false" class="text-center">{{ trans('admin/users/general.two_factor_active') }}</th>
 
-                   <th data-sortable="true" data-field="activated" class="text-center" data-formatter="trueFalseFormatter">{{ trans('general.activated') }}</th>
-                   <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false" data-formatter="createdAtFormatter">{{ trans('general.created_at') }}</th>
-                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-formatter="usersActionsFormatter" data-field="actions" >{{ trans('table.actions') }}</th>
-                 </tr>
-               </thead>
              </table>
 
           {{ Form::close() }}
@@ -122,7 +79,11 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'users-export', 'search' => true])
+@include ('partials.bootstrap-table',
+    ['exportFile' => 'users-export',
+    'search' => true,
+    'columns' => \App\Presenters\UserPresenter::dataTableLayout()
+])
 
 <script>
 

@@ -228,7 +228,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($user->assignedAssets as $asset)
+                @foreach ($user->assets as $asset)
                 <tr>
                   <td>
                     @if ($asset->physical=='1')

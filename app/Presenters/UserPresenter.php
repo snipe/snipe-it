@@ -14,80 +14,187 @@ use Illuminate\Support\Facades\Gate;
 class UserPresenter extends Presenter
 {
 
+
     /**
-     * Generates json for bootstrap table.
-     * @param string $status Status of User to filter on
-     * @return array
+     * Json Column Layout for bootstrap table
+     * @return string
      */
-    public function forDataTable($status = null)
+    public static function dataTableLayout()
     {
-        $group_names = '';
-        $actions = '<nobr>';
-
-        foreach ($this->model->groups as $group) {
-            $group_names .= link_to_route('update/group', $group->name, $group->id, ['class' => 'label label-default']);
-        }
-        if (!is_null($this->model->deleted_at)) {
-            if (Gate::allows('delete', $this)) {
-                $actions .= Helper::generateDatatableButton('restore', route('restore/user', $this->id));
-            }
-        } else {
-            if (Gate::allows('delete', $this)) {
-                if ($this->accountStatus() == 'suspended') {
-                    $actions .= link_to_route(
-                        'unsuspend/user',
-                        '<span class="fa fa-clock-o"></span>"',
-                        $this->id,
-                        ['class' => 'btn btn-default btn-sm']
-                    );
-                }
-            }
-            if (Gate::allows('update', $this)) {
-                $actions .= Helper::generateDatatableButton('edit', route('users.edit', $this->id));
-                $actions .= Helper::generateDatatableButton('clone', route('clone/user', $this->id));
-            }
-            if (Gate::allows('delete', $this)) {
-                if ((Auth::user()->id !== $this->id) && (!config('app.lock_passwords'))) {
-                    $actions .= Helper::generateDatatableButton(
-                        'delete',
-                        route('users.destroy', $this->id),
-                        true, /*enabled*/
-                        "Are you sure you wish to delete this user?",
-                        $this->first_name
-                    );
-                } else {
-                    $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
-                }
-            }
-        }
-        $actions .= '</nobr>';
-        $result = [
-            'id'            => $this->id,
-            'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($this->id).']" class="one_required"></div>' : '',
-            'name'          => $this->nameUrl(),
-            'jobtitle'      => $this->jobtitle,
-            'email'         => $this->emailLink(),
-            'username'      => $this->username,
-            'location'      => ($this->model->userloc) ? $this->model->userloc->present()->nameUrl() : '',
-            'manager'       => ($this->model->manager) ? $this->manager->present()->nameUrl() : '',
-            'employee_num'  => $this->employee_num,
-            'assets'        => $this->model->assignedAssets()->count(),
-            'licenses'      => $this->model->licenses()->count(),
-            'accessories'   => $this->model->accessories()->count(),
-            'consumables'   => $this->model->consumables()->count(),
-            'groups'        => $group_names,
-            'notes'         => $this->notes,
-            'two_factor_enrolled'        => ($this->two_factor_enrolled=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
-            'two_factor_optin'        => (($this->two_factor_optin=='1') || (Setting::getSettings()->two_factor_enabled=='2') ) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
-            'created_at'    => ($this->model->created_at!='')  ? e($this->model->created_at->format('F j, Y h:iA')) : '',
-            'activated'     => ($this->activated=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times  text-danger"></i>',
-            'actions'       => $actions ?: '',
-            'companyName'   => $this->companyUrl()
-
+        $layout = [
+            [
+                "field" => "checkbox",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => false,
+                "title" => trans('admin/companies/table.title'),
+                "visible" => false,
+                "checkbox" => true
+            ],
+            [
+                "field" => "id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ],
+            [
+                "field" => "company",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/companies/table.title'),
+                "visible" => false,
+                "formatter" => "companiesLinkObjFormatter"
+            ],
+            [
+                "field" => "name",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/users/table.name'),
+                "visible" => true,
+                "formatter" => "usersLinkFormatter"
+            ],
+            [
+                "field" => "jobtitle",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/users/table.title'),
+                "visible" => true,
+                "formatter" => "usersLinkFormatter"
+            ],
+            [
+                "field" => "email",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/users/table.email'),
+                "visible" => true,
+                "formatter" => "emailFormatter"
+            ],
+            [
+                "field" => "username",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/users/table.username'),
+                "visible" => true,
+                "formatter" => "usersLinkFormatter"
+            ],
+            [
+                "field" => "location",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/users/table.location'),
+                "true" => false,
+                "formatter" => "locationsLinkObjFormatter"
+            ],
+            [
+                "field" => "assets_count",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => ' <span class="hidden-md hidden-lg">Assets</span>'
+                            .'<span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>',
+                "visible" => true,
+            ],
+            [
+                "field" => "licenses_count",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => ' <span class="hidden-md hidden-lg">Licenses</span>'
+                    .'<span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>',
+                "visible" => true,
+            ],
+            [
+                "field" => "consumables_count",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => ' <span class="hidden-md hidden-lg">Consumables</span>'
+                    .'<span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>',
+                "visible" => true,
+            ],
+            [
+                "field" => "accessories_count",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => ' <span class="hidden-md hidden-lg">Accessories</span>'
+                    .'<span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>',
+                "visible" => true,
+            ],
+            [
+                "field" => "notes",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.notes'),
+                "visible" => true,
+            ],
+            [
+                "field" => "groups",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => trans('general.groups'),
+                "visible" => true,
+                'formatter' => 'groupsFormatter'
+            ],
+            [
+                "field" => "two_factor_enrolled",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => trans('admin/users/general.two_factor_enrolled'),
+                "visible" => false,
+                'formatter' => 'trueFalseFormatter'
+            ],
+            [
+                "field" => "two_factor_active",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => trans('admin/users/general.two_factor_active'),
+                "visible" => false,
+                'formatter' => 'trueFalseFormatter'
+            ],
+            [
+                "field" => "activated",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.activated'),
+                "visible" => true,
+                'formatter' => 'trueFalseFormatter'
+            ],
+            [
+                "field" => "created_at",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.created_at'),
+                "visible" => false,
+                'formatter' => 'createdAtFormatter'
+            ],
+            [
+                "field" => "actions",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => false,
+                "title" => trans('table.actions'),
+                "visible" => true,
+                "formatter" => "accessoriesActionsFormatter",
+            ]
         ];
 
-        return $result;
+        return json_encode($layout);
     }
+
 
     public function emailLink()
     {

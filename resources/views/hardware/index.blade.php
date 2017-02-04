@@ -3,21 +3,21 @@
 @section('title0')
 
 @if (Input::get('status'))
-@if (Input::get('status')=='Pending')
-{{ trans('general.pending') }}
-@elseif (Input::get('status')=='RTD')
-{{ trans('general.ready_to_deploy') }}
-@elseif (Input::get('status')=='Undeployable')
-{{ trans('general.undeployable') }}
-@elseif (Input::get('status')=='Deployable')
-{{ trans('general.deployed') }}
-@elseif (Input::get('status')=='Requestable')
-{{ trans('admin/hardware/general.requestable') }}
-@elseif (Input::get('status')=='Archived')
-{{ trans('general.archived') }}
-@elseif (Input::get('status')=='Deleted')
-{{ trans('general.deleted') }}
-@endif
+  @if (Input::get('status')=='Pending')
+    {{ trans('general.pending') }}
+  @elseif (Input::get('status')=='RTD')
+    {{ trans('general.ready_to_deploy') }}
+  @elseif (Input::get('status')=='Undeployable')
+    {{ trans('general.undeployable') }}
+  @elseif (Input::get('status')=='Deployable')
+    {{ trans('general.deployed') }}
+  @elseif (Input::get('status')=='Requestable')
+    {{ trans('admin/hardware/general.requestable') }}
+  @elseif (Input::get('status')=='Archived')
+    {{ trans('general.archived') }}
+  @elseif (Input::get('status')=='Deleted')
+    {{ trans('general.deleted') }}
+  @endif
 @else
 {{ trans('general.all') }}
 @endif

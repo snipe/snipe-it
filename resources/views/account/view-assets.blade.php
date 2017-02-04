@@ -23,7 +23,7 @@ View Assets for  {{ $user->present()->fullName() }}
 
       <div class="box-body">
         <!-- checked out assets table -->
-        @if (count($user->assignedAssets) > 0)
+        @if (count($user->assets) > 0)
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -35,7 +35,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 </tr>
               </thead>
               <tbody>
-                @foreach ($user->assignedAssets as $asset)
+                @foreach ($user->assets as $asset)
                 <tr>
                   <td>
                     @if ($asset->physical=='1')
