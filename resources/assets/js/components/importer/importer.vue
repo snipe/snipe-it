@@ -44,7 +44,6 @@
                         <div class="col-md-3">
                             <!-- The fileinput-button span is used to style the file input field as button -->
                             <span class="btn btn-info fileinput-button">
-                                <i class="fa fa-plus icon-white"></i>
                                 <span>Select Import File...</span>
                                 <!-- The file input field used as target for the file upload widget -->
                                 <input id="fileupload" type="file" name="files[]" data-url="/api/v1/imports" accept="text/csv">
