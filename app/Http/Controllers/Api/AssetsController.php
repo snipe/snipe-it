@@ -84,6 +84,10 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
+        if ($request->has('status_id')) {
+            $assets->where('status_id', '=', $request->input('status_id'));
+        }
+
         if ($request->has('model_id')) {
             $assets->InModelList([$request->input('model_id')]);
         }

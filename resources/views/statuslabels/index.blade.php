@@ -30,7 +30,7 @@
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-field="name">{{ trans('admin/statuslabels/table.name') }}</th>
+                <th data-sortable="true" data-field="name" data-formatter="statuslabelsAssetLinkFormatter">{{ trans('admin/statuslabels/table.name') }}</th>
                 <th data-sortable="false" data-field="type" data-formatter="undeployableFormatter">{{ trans('admin/statuslabels/table.status_type') }}</th>
                 <th data-sortable="false" data-field="color" data-formatter="colorSqFormatter">{{ trans('admin/statuslabels/table.color') }}</th>
                 <th class="text-center" data-sortable="true" data-field="show_in_nav" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.show_in_nav') }}</th>
@@ -58,6 +58,12 @@
       function colorSqFormatter(value, row) {
           if (value) {
               return '<span class="label" style="background-color: ' + value + ';">&nbsp;</span> ' + value;
+          }
+      }
+
+      function statuslabelsAssetLinkFormatter(value, row) {
+          if ((row) && (row.name)) {
+              return '<a href="{{ url('/') }}/hardware/?status_id=' + row.id + '"> ' + row.name + '</a>';
           }
       }
 
