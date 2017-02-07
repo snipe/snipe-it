@@ -68,51 +68,6 @@
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">
-                <thead>
-                  <tr>
-                    @if (Input::get('status')!='Deleted')
-                          <th data-checkbox="true" data-field="checkbox"></th>
-                    @endif
-                    <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-field="company" data-formatter="companiesLinkObjFormatter" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
-                    <th data-sortable="true" data-field="image" data-formatter="imageFormatter" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
-                    <th data-sortable="true" data-field="name" data-visible="false" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.name') }}</th>
-                    <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                    <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
-                    <th data-sortable="true" data-field="model" data-formatter="modelsLinkObjFormatter">{{ trans('admin/hardware/form.model') }}</th>
-                    <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
-                    <th data-sortable="true" data-field="status_label" data-formatter="statuslabelsLinkObjFormatter">{{ trans('admin/hardware/table.status') }}</th>
-                    <th data-sortable="true" data-formatter="usersLinkObjFormatter" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
-                    <th data-sortable="true" data-formatter="locationsLinkObjFormatter" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
-                    <th data-sortable="true" data-field="category" data-searchable="true" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
-                    <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
-                    <th data-sortable="true" data-field="purchase_cost" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.cost') }}</th>
-                    <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
-                    <th data-sortable="false" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
-                    <th data-sortable="true" data-searchable="true" data-field="notes">{{ trans('general.notes') }}</th>
-                    <th data-sortable="true" data-searchable="true"  data-field="order_number">{{ trans('admin/hardware/form.order') }}</th>
-                    <th data-sortable="true" data-searchable="true" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                    <th data-sortable="true" data-field="expected_checkin" data-searchable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
-                      <th data-sortable="false" data-field="warranty">{{ trans('admin/hardware/form.warranty') }}</th>
-                      <th data-sortable="false" data-field="warranty_expires">{{ trans('admin/hardware/form.expires') }}</th>
-                    @foreach(\App\Models\CustomField::all() as $field)
-
-
-                    <th data-sortable="{{ ($field->field_encrypted=='1' ? 'false' : 'true') }}" data-visible="false" data-field="{{$field->convertUnicodeDbSlug()}}">
-                      @if ($field->field_encrypted=='1')
-                      <i class="fa fa-lock"></i>
-                      @endif
-
-                      {{$field->name}}
-                    </th>
-
-                    @endforeach
-                    <th data-sortable="true" data-field="created_at" data-formatter="createdAtFormatter" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{ trans('admin/hardware/table.change') }}</th>
-
-                    <th data-switchable="false" data-searchable="false" data-formatter="hardwareActionsFormatter" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
-                  </tr>
-                </thead>
               </table>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -127,7 +82,8 @@
 @include ('partials.bootstrap-table', [
     'exportFile' => 'assets-export',
     'search' => true,
-    'multiSort' => true
+    'multiSort' => true,
+    'columns' => \App\Presenters\AssetPresenter::dataTableLayout()
 ])
 
 @stop
