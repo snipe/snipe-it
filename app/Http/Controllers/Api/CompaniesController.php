@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Transformers\DatatablesTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
@@ -16,11 +17,28 @@ class CompaniesController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', Company::class);
-        $companies = Company::all();
-        return $companies;
+
+        $allowed_columns = ['id','name'];
+
+        $companies = Company::withCount('assets','licenses','accessories','consumables','components','users');
+
+        if ($request->has('search')) {
+            $companies->TextSearch($request->input('search'));
+        }
+
+        $offset = $request->input('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $companies->orderBy($sort, $order);
+
+        $total = $companies->count();
+        $companies = $companies->skip($offset)->take($limit)->get();
+        return (new DatatablesTransformer)->transformDatatables($companies, $total);
+
     }
 
 

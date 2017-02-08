@@ -47,6 +47,10 @@ class UsersController extends Controller
             $users = $users->TextSearch($request->input('search'));
         }
 
+        if ($request->has('company_id')) {
+            $users = $users->where('company_id','=',$request->input('company_id'));
+        }
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = request('offset', 0);
         $limit = request('limit', 50);

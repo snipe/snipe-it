@@ -49,7 +49,7 @@
               @can('delete', \App\Models\User::class)
                 <div id="toolbar">
                   <select name="bulk_actions" class="form-control select2" style="width: 200px;">
-                    <option value="delete">Bulk Checkin &amp; Delete</option>
+                    <option value="delete">Bulk Checkin &amp;amp; Delete</option>
                   </select>
                   <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
                 </div>
@@ -63,7 +63,8 @@
               id="table"
               data-maintain-selected="true"
               data-toggle="table"
-              data-url="{{ route('api.users.index', array(''=>e(Input::get('status')))) }}"
+              data-url="{{ route('api.users.index',
+              array(''=>e(Input::get('status')),'company_id'=>e(Input::get('company_id')))) }}"
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="userTableDisplay-{{ config('version.hash_version') }}">

@@ -66,10 +66,15 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
-        return View::make('hardware/index');
+        if ($request->has('company_id')) {
+            $company = Company::find($request->input('company_id'));
+        } else {
+            $company = null;
+        }
+        return View::make('hardware/index')->with('company',$company);
     }
 
     /**

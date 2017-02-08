@@ -40,6 +40,7 @@ class UsersTransformer
                 'licenses_count' => $user->licenses_count,
                 'accessories_count' => $user->accessories_count,
                 'consumables_count' => $user->consumables_count,
+                'company' => ($user->company) ? ['id' => $user->company->id,'name'=> e($user->company->name)] : null,
             ];
 
         return $array;

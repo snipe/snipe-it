@@ -4,7 +4,11 @@
 <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
 <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('assets/js/FileSaver.min.js') }}"></script>
+<script src="{{ asset('assets/js/jspdf.min.js') }}"></script>
+<script src="{{ asset('assets/js/jspdf.plugin.autotable.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+
 <script>
 $('.snipe-table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
@@ -32,10 +36,22 @@ $('.snipe-table').bootstrapTable({
         showColumns: true,
         trimOnSearch: false,
         exportDataType: 'all',
-        exportTypes: ['csv', 'excel', 'txt','json', 'xml'],
+        exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
         exportOptions: {
             fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
-            ignoreColumn: ['actions','change','checkbox']
+            ignoreColumn: ['actions','change','checkbox','checkincheckout'],
+            worksheetName: "Snipe-IT Export",
+            jspdf: {
+                autotable: {
+                    styles: {
+                        rowHeight: 20,
+                        fontSize: 10,
+                        overflow: 'linebreak',
+                    },
+                    headerStyles: {fillColor: 255, textColor: 0},
+                    //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
+                }
+            }
         },
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
@@ -111,12 +127,16 @@ $('.snipe-table').bootstrapTable({
 
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
-            return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
-                + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
-                + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
-                + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
-                + '<i class="fa fa-trash"></i></a></nobr>';
-        };
+            if (row.can_checkout === true) {
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary">{{ trans('general.checkout') }}</a>';
+            } else if (((row.can_checkout === false)) && (row.assigned_to == null)) {
+                return '<a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a>';
+            } else {
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary">{{ trans('general.checkin') }}</a>';
+            }
+        }
+
+
     }
 
 
@@ -144,6 +164,7 @@ $('.snipe-table').bootstrapTable({
         window[formatters[i] + 'LinkFormatter'] = genericRowLinkFormatter(formatters[i]);
         window[formatters[i] + 'LinkObjFormatter'] = genericColumnObjLinkFormatter(formatters[i]);
         window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
+        window[formatters[i] + 'InOutFormatter'] = genericCheckinCheckoutFormatter(formatters[i]);
     }
 
 
@@ -169,7 +190,34 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
-    function imageFormatter(value, row) {
+    function assetCompanyFilterFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '"> ' + value + '</a>';
+        }
+    }
+
+    function assetCompanyObjFilterFormatter(value, row) {
+        if (row.company) {
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '"> ' + row.company.name + '</a>';
+        }
+    }
+
+    function usersCompanyObjFilterFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/users/?company_id=' + row.id + '"> ' + value + '</a>';
+        } else {
+            return value;
+        }
+    }
+
+    function orderNumberObjFilterFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '"> ' + row.order_number + '</a>';
+        }
+    }
+
+
+   function imageFormatter(value, row) {
         if (value) {
             return '<img src="' + value + '" height="50" width="50">';
         }
@@ -184,4 +232,6 @@ $('.snipe-table').bootstrapTable({
 
         });
     });
+
+
 </script>

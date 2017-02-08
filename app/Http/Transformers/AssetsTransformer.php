@@ -43,6 +43,7 @@ class AssetsTransformer
             'created_at' => $asset->created_at,
             'purchase_date' => $asset->purchase_date,
             'purchase_cost' => $asset->purchase_cost,
+            'can_checkout' => $asset->availableForCheckout(),
 
         ];
 

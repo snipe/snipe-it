@@ -21,13 +21,13 @@ class AssetPresenter extends Presenter
             [
                 "field" => "checkbox",
                 "checkbox" => true
-            ],[
+            ], [
                 "field" => "id",
                 "searchable" => false,
                 "sortable" => true,
+                "switchable" => true,
                 "title" => trans('general.id'),
-                "visible" => false,
-                "formatter" => null
+                "visible" => false
             ], [
                 "field" => "company",
                 "searchable" => true,
@@ -35,7 +35,7 @@ class AssetPresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('general.company'),
                 "visible" => false,
-                "formatter" => "companiesLinkObjFormatter"
+                "formatter" => 'assetCompanyObjFilterFormatter'
             ], [
                 "field" => "name",
                 "searchable" => true,
@@ -138,6 +138,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.order_number'),
+                'formatter' => "orderNumberObjFilterFormatter"
             ], [
                 "field" => "notes",
                 "searchable" => true,
@@ -157,6 +158,15 @@ class AssetPresenter extends Presenter
                     '<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
                 "formatter" => null ];
         }
+
+        $layout[] = [
+            "field" => "checkincheckout",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => true,
+            "title" => 'Checkin/Checkout',
+            "formatter" => "hardwareInOutFormatter",
+        ];
         
         $layout[] = [
             "field" => "actions",

@@ -2,6 +2,12 @@
 
 @section('title0')
 
+  @if ((Input::get('company_id')) && ($company))
+    {{ $company->name }}
+  @endif
+
+
+
 @if (Input::get('status'))
   @if (Input::get('status')=='Pending')
     {{ trans('general.pending') }}
@@ -22,6 +28,10 @@
 {{ trans('general.all') }}
 @endif
 {{ trans('general.assets') }}
+
+  @if (Input::has('order_number'))
+    : Order #{{ Input::get('order_number') }}
+  @endif
 @stop
 
 {{-- Page title --}}
@@ -64,8 +74,11 @@
               data-toolbar="#toolbar"
               class="table table-striped snipe-table"
               id="table"
-              data-url="{{route('api.assets.index', array('status' => e(Input::get('status')),'order_number'=>e(Input::get('order_number')), 'status_id'=>e(Input::get('status_id'))))}}"
-              data-cookie="true"
+              data-url="{{ route('api.assets.index',
+                  array('status' => e(Input::get('status')),
+                  'order_number'=>e(Input::get('order_number')),
+                  'company_id'=>e(Input::get('company_id')),
+                  'status_id'=>e(Input::get('status_id'))))}}"
               data-click-to-select="true"
               data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">
               </table>

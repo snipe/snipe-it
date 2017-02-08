@@ -33,11 +33,12 @@ class UserPresenter extends Presenter
             ],
             [
                 "field" => "id",
-                "searchable" => false,
+                "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('general.id'),
-                "visible" => false
+                "visible" => false,
+                "formatter" => null
             ],
             [
                 "field" => "company",

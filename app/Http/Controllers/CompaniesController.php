@@ -137,4 +137,16 @@ final class CompaniesController extends Controller
             }
         }
     }
+
+    public function show($id) {
+        $this->authorize('view', Company::class);
+
+        if (is_null($company = Company::find($id))) {
+            return redirect()->route('companies.index')
+                ->with('error', trans('admin/companies/message.not_found'));
+        } else {
+            return View::make('companies/view')->with('company',$company);
+        }
+
+    }
 }
