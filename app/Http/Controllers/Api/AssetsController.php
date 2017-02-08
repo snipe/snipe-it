@@ -96,6 +96,14 @@ class AssetsController extends Controller
             $assets->InCategory($request->input('category_id'));
         }
 
+        if ($request->has('location_id')) {
+            $assets->ByLocationId($request->input('location_id'));
+        }
+
+        if ($request->has('company_id')) {
+            $assets->where('company_id','=',$request->input('company_id'));
+        }
+
         if ($request->has('manufacturer_id')) {
             $assets->ByManufacturer($request->input('manufacturer_id'));
         }

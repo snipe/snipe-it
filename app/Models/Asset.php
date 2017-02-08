@@ -246,15 +246,17 @@ class Asset extends Depreciable
    **/
     public function assetLoc()
     {
+        if($this->assignedTo) {
+            return $this->assignedTo->userLoc();
+        }
+
         if(!empty($this->assignedType())) {
             if ($this->assignedType() == self::ASSET) {
                 return $this->assignedTo->assetloc(); // Recurse until we have a final location
             } elseif ($this->assignedType() == self::LOCATION) {
                 return $this->assignedTo();
             }
-            if($this->assignedTo) {
-              return $this->assignedTo->userLoc();
-            }
+
         }
         return $this->defaultLoc();
     }
@@ -890,7 +892,7 @@ class Asset extends Depreciable
             ->orderBy('manufacturers.name', $order);
     }
 
-  /**
+   /**
     * Query builder scope to order on location
     *
     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -901,5 +903,30 @@ class Asset extends Depreciable
     public function scopeOrderLocation($query, $order)
     {
         return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
+    }
+
+    /**
+     * Query builder scope to search on location ID
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeByLocationId($query, $search)
+    {
+
+        return $query->where(function ($query) use ($search) {
+            $query->whereHas('defaultLoc', function ($query) use ($search) {
+                $query->where('locations.id', '=', $search);
+            })->whereNull('assigned_to');
+        })->orWhere(function ($query) use ($search) {
+            $query->whereHas('assigneduser', function ($query) use ($search) {
+                $query->whereHas('userloc', function ($query) use ($search) {
+                    $query->where('locations.id', '=', $search);
+                });
+            });
+        });
+
     }
 }

@@ -35,6 +35,7 @@ class AssetsTransformer
             'order_number' => $asset->order_number,
             'company' => ($asset->company) ? ['id' => $asset->company->id,'name'=> e($asset->company->name)] : null,
             'location' => ($asset->assetLoc) ? ['id' => $asset->assetLoc->id,'name'=> e($asset->assetLoc->name)]  : null,
+            'rtd_location' => ($asset->defaultLoc) ? ['id' => $asset->defaultLoc->id,'name'=> e($asset->defaultLoc->name)]  : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($asset->assigneduser) ? (new UsersTransformer)->transformUser($asset->assigneduser) : null,
             'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months).' '.trans('admin/hardware/form.months') : null,
