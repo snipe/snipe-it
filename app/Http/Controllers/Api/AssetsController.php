@@ -49,7 +49,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function index(Request $request, $status = null)
+    public function index(Request $request)
     {
 
         $this->authorize('index', Asset::class);
@@ -116,7 +116,7 @@ class AssetsController extends Controller
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets.created_at';
         $assets->orderBy($sort, $order);
 
-        switch ($status) {
+        switch ($request->input('status')) {
             case 'Deleted':
                 $assets->withTrashed()->Deleted();
                 break;
