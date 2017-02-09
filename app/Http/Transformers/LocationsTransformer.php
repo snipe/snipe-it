@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Collection;
+use Gate;
 
 class LocationsTransformer
 {
@@ -25,7 +26,7 @@ class LocationsTransformer
                 $assets_arr = ['id' => $asset->id];
             }
 
-            $transformed = [
+            $array = [
                 'id' => e($location->id),
                 'name' => e($location->name),
                 'address' => e($location->address),
@@ -37,10 +38,14 @@ class LocationsTransformer
                 'assets' => $assets_arr,
             ];
 
+            $permissions_array['available_actions'] = [
+                'update' => Gate::allows('admin') ? true : false,
+                'delete' => Gate::allows('admin') ? true : false,
+            ];
 
+            $array += $permissions_array;
 
-
-            return $transformed;
+            return $array;
         }
 
 

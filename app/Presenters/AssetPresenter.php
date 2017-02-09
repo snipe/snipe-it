@@ -165,6 +165,7 @@ class AssetPresenter extends Presenter
             "sortable" => false,
             "switchable" => true,
             "title" => 'Checkin/Checkout',
+            "visible" => true,
             "formatter" => "hardwareInOutFormatter",
         ];
         

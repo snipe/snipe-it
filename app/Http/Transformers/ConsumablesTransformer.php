@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\Consumable;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
+use Gate;
 
 class ConsumablesTransformer
 {
@@ -19,7 +20,7 @@ class ConsumablesTransformer
 
     public function transformConsumable (Consumable $consumable)
     {
-        $transformed = [
+        $array = [
             'category'      => ($consumable->category) ? ['id' => $consumable->category->id, 'name' => $consumable->category->name] : null,
             'company'   => ($consumable->company) ? ['id' => $consumable->company->id, 'name' => $consumable->company->name] : null,
             'id'            => $consumable->id,
@@ -35,7 +36,15 @@ class ConsumablesTransformer
             'purchase_date'  => $consumable->purchase_date,
             'qty'           => $consumable->qty,
         ];
-        return $transformed;
+
+        $permissions_array['available_actions'] = [
+            'checkout' => Gate::allows('checkout', Consumable::class) ? true : false,
+            'checkin' => Gate::allows('checkin', Consumable::class) ? true : false,
+            'update' => Gate::allows('update', Consumable::class) ? true : false,
+            'delete' => Gate::allows('delete', Consumable::class) ? true : false,
+        ];
+        $array += $permissions_array;
+        return $array;
     }
 
 

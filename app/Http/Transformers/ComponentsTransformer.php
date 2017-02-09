@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\Component;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
+use Gate;
 
 class ComponentsTransformer
 {
@@ -19,7 +20,7 @@ class ComponentsTransformer
 
     public function transformComponent (Component $component)
     {
-        $transformed = [
+        $array = [
 
             'id'            => $component->id,
             'name'          => e($component->name),
@@ -47,7 +48,16 @@ class ComponentsTransformer
                 ] : null,
 
         ];
-        return $transformed;
+
+        $permissions_array['available_actions'] = [
+            'checkout' => Gate::allows('checkout', Component::class) ? true : false,
+            'checkin' => Gate::allows('checkin', Component::class) ? true : false,
+            'update' => Gate::allows('update', Component::class) ? true : false,
+            'delete' => Gate::allows('delete', Component::class) ? true : false,
+        ];
+        $array += $permissions_array;
+
+        return $array;
     }
 
 

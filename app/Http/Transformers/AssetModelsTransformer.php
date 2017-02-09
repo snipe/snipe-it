@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Collection;
+use Gate;
 
 class AssetModelsTransformer
 {
@@ -19,7 +20,7 @@ class AssetModelsTransformer
     public function transformAssetModel (AssetModel $assetmodel)
     {
 
-        $transformed = [
+        $array = [
             'id' => $assetmodel->id,
             'name' => e($assetmodel->name),
             'manufacturer' => ($assetmodel->manufacturer_id) ? $assetmodel->manufacturer : null,
@@ -33,7 +34,14 @@ class AssetModelsTransformer
             'notes' => e($assetmodel->notes)
 
         ];
-        return $transformed;
+
+        $permissions_array['available_actions'] = [
+            'update' => Gate::allows('admin') ? true : false,
+            'delete' => Gate::allows('admin') ? true : false,
+        ];
+
+        $array += $permissions_array;
+        return $array;
     }
 
 

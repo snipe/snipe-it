@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Models\Statuslabel;
 use Illuminate\Database\Eloquent\Collection;
+use Gate;
 
 class StatuslabelsTransformer
 {
@@ -28,6 +29,12 @@ class StatuslabelsTransformer
             'created_at' => $statuslabel->created_at,
             'updated_at' => $statuslabel->updated_at,
         ];
+
+        $permissions_array['available_actions'] = [
+            'edit' => Gate::allows('admin') ? true : false,
+            'delete' => Gate::allows('admin') ? true : false,
+        ];
+        $array += $permissions_array;
 
         return $array;
     }

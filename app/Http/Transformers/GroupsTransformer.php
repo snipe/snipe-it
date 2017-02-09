@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Models\Group;
 use Illuminate\Database\Eloquent\Collection;
+use Gate;
 
 class GroupsTransformer
 {
@@ -24,6 +25,13 @@ class GroupsTransformer
             'permissions' => $group->permissions,
             'users_count' => $group->users_count,
         ];
+
+        $permissions_array['available_actions'] = [
+            'update' => Gate::allows('superadmin') ? true : false,
+            'delete' => Gate::allows('superadmin') ? true : false,
+        ];
+
+        $array += $permissions_array;
 
         return $array;
     }
