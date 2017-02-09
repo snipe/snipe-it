@@ -117,23 +117,41 @@ $('.snipe-table').bootstrapTable({
     // Make the edit/delete buttons
     function genericActionsFormatter(destination) {
         return function (value,row) {
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a> '
-                    + '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
+
+            var actions = '<nobr>';
+
+            if (row.available_actions.update === true) {
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>&nbsp;';
+            }
+
+            if (row.available_actions.delete === true) {
+                actions += '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
                     + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
                     + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
                     + '<i class="fa fa-trash"></i></a></nobr>';
+            }
+            return actions;
+
         };
     }
 
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
-            if (row.can_checkout === true) {
+
+            // The user is allowed to check items out, AND the item is deployable
+            if ((row.available_actions.checkout === true) && (row.can_checkout === true)) {
+
                 return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary">{{ trans('general.checkout') }}</a>';
-            } else if (((row.can_checkout === false)) && (row.assigned_to == null)) {
+
+            // The user is allowed to check items out, but the item is not deployable
+            } else if (((row.can_checkout == 'true')) && (row.available_actions.checkout == 'false') && (row.assigned_to == null)) {
                 return '<a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a>';
-            } else {
+
+            // The user is allowed to check items in
+            } else if (row.available_actions.checkin === true) {
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary">{{ trans('general.checkin') }}</a>';
             }
+
         }
 
 
