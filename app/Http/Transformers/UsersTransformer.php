@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use phpDocumentor\Reflection\Types\Integer;
+use Gate;
 
 class UsersTransformer
 {
@@ -42,6 +43,12 @@ class UsersTransformer
                 'consumables_count' => $user->consumables_count,
                 'company' => ($user->company) ? ['id' => $user->company->id,'name'=> e($user->company->name)] : null,
             ];
+
+        $permissions_array['available_actions'] = [
+            'edit' => Gate::allows('edit', User::class) ? true : false,
+            'delete' => Gate::allows('delete', User::class) ? true : false,
+        ];
+        $array += $permissions_array;
 
         return $array;
     }

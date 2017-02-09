@@ -2,7 +2,7 @@
 namespace App\Http\Transformers;
 
 use App\Models\Accessory;
-use App\Models\User;
+use Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class AccessoriesTransformer
@@ -19,7 +19,7 @@ class AccessoriesTransformer
 
     public function transformAccessory (Accessory $accessory)
     {
-        $transformed = [
+        $array = [
             'id' => $accessory->id,
             'name' => e($accessory->name),
             'company' => ($accessory->company) ? $accessory->company : null,
@@ -36,7 +36,17 @@ class AccessoriesTransformer
             'remaining_qty' => $accessory->numRemaining(),
 
         ];
-        return $transformed;
+
+        $permissions_array['available_actions'] = [
+            'checkout' => Gate::allows('checkout', Accessory::class) ? true : false,
+            'checkin' => Gate::allows('checkin', Accessory::class) ? true : false,
+            'update' => Gate::allows('update', Accessory::class) ? true : false,
+            'delete' => Gate::allows('delete', Accessory::class) ? true : false,
+        ];
+
+        $array += $permissions_array;
+
+        return $array;
     }
 
 
