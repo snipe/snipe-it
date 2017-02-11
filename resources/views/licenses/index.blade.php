@@ -31,28 +31,6 @@
         data-cookie="true"
         data-click-to-select="true"
         data-cookie-id-table="licenseTable">
-            <thead>
-                <tr>
-                    <th data-checkbox="true" data-field="checkbox"></th>
-                    <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-field="company" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('general.company') }}</th>
-                    <th data-sortable="true" data-field="name" data-visible="false" data-formatter="licensesLinkFormatter">{{ trans('admin/licenses/table.title') }}</th>
-                    <th data-field="manufacturer" data-sortable="true" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
-                    <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/form.license_key') }}</th>
-                    <th data-field="license_name" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_name') }}</th>
-                    <th data-field="license_email" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_email') }}</th>
-                    <th data-field="totalSeats" data-sortable="false">{{ trans('admin/licenses/form.seats') }}</th>
-                    <th data-field="remaining" data-sortable="false">{{ trans('admin/licenses/form.remaining_seats') }}</th>
-                    <th data-field="purchase_date" data-sortable="true">{{ trans('general.purchase_date') }}</th>
-                    <th data-field="purchase_cost" data-sortable="true">{{ trans('general.purchase_cost') }}</th>
-                    <th data-field="purchase_order" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.purchase_order') }}</th>
-                    <th data-field="expiration_date" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.expiration') }}</th>
-                    <th data-sortable="true" data-field="created_at" data-formatter="createdAtFormatter" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
-                    <th data-field="notes" data-sortable="true" data-visible="false">{{ trans('admin/hardware/form.notes') }}</th>
-
-                    <th data-switchable="false" data-searchable="false" data-formatter="licensesActionsFormatter" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
-                </tr>
-            </thead>
         </table>
       </div><!-- /.box-body -->
 
@@ -64,6 +42,9 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'licenses-export', 'search' => true])
+@include ('partials.bootstrap-table', [
+    'exportFile' => 'licenses-export',
+    'search' => true,
+    'columns' => \App\Presenters\LicensePresenter::dataTableLayout()])
 
 @stop

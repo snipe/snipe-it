@@ -35,7 +35,7 @@ class UserPresenter extends Presenter
                 "field" => "id",
                 "searchable" => true,
                 "sortable" => true,
-                "switchable" => true,
+                "switchable" => false,
                 "title" => trans('general.id'),
                 "visible" => false,
                 "formatter" => null

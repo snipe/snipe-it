@@ -16,49 +16,7 @@ use App\Helpers\Helper;
  */
 class AssetModelPresenter extends Presenter
 {
-    /**
-    * JSON representation of Accessory for datatable.
-     * @return array
-     */
-    public function forDataTable()
-    {
-
-        $actions = '<div style="white-space: nowrap;">';
-        if ($this->deleted_at == '') {
-            $actions .= Helper::generateDatatableButton('clone', route('clone/model', $this->id));
-            $actions .= Helper::generateDatatableButton('edit', route('models.edit', $this->id));
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('models.destroy', $this->id),
-                trans('admin/models/message.delete.confirm'),
-                $this->name
-            );
-        } else {
-            $actions .= Helper::generateDatatableButton('restore', route('restore/model', $this->id));
-        }
-        $actions .="</div>";
-
-        $results = [];
-
-        $results['id'] = $this->id;
-        $results['manufacturer'] = $this->manufacturerUrl();
-        $results['name'] = $this->nameUrl();
-        $results['image'] = $this->imageUrl();
-        $results['model_number'] = $this->model_number;
-        $results['numassets'] = $this->assets()->count();
-        $results['depreciation'] = trans('general.no_depreciation');
-        if (($depreciation = $this->model->depreciation) and $depreciation->id > 0) {
-            $results['depreciation'] = $depreciation->name.' ('.$depreciation->months.')';
-        }
-        $results['category'] = $this->categoryUrl();
-        $results['eol'] = $this->eolText();
-        $results['note'] = $this->note();
-        $results['fieldset'] = $this->model->fieldset ? link_to_route('custom_fields/model', $this->model->fieldset->name, $this->model->fieldset->id) : '';
-        $results['actions']           = $actions;
-
-        return $results;
-    }
-
+    
     /**
      * Formatted note for this model
      * @return string

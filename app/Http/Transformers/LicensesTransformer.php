@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\License;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
+use App\Helpers\Helper;
 
 class LicensesTransformer
 {
@@ -22,21 +23,23 @@ class LicensesTransformer
         $array = [
             'id' => $license->id,
             'name' => e($license->name),
-            'company' => e($license->company->name),
-            'manufacturer' => ($license->manufacturer) ? $license->manufacturer : null,
-            'serial' => e($license->name),
-            'purchase_order' => e($license->order_number),
+            'company' => ($license->company) ? ['id' => $license->company->id,'name'=> e($license->company->name)] : null,
+            'manufacturer' =>  ($license->manufacturer) ? ['id' => $license->manufacturer->id,'name'=> e($license->manufacturer->name)] : null,
+            'product_key' => e($license->serial),
+            'order_number' => e($license->order_number),
+            'purchase_order' => e($license->purchase_order),
             'purchase_date' => e($license->purchase_date),
             'purchase_cost' => e($license->purchase_cost),
-            'depreciation' => ($license->depreciation) ? $license->depreciation : null,
+            'depreciation' => ($license->depreciation) ? ['id' => $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
             'notes' => e($license->notes),
             'expiration_date' => e($license->expiration_date),
-            'totalSeats' => e($license->seats),
-            'remaining' => $license->remaincount(),
-            'license_name' => e($license->license_name),
+            'total_seats' => e($license->seats),
+            'remaining_qty' => $license->remaincount(),
+            'min_qty' => $license->remaincount(),
+            'license_name' => Helper::formatCurrencyOutput($license->purchase_cost),
             'license_email' => e($license->license_email),
             'maintained' => ($license->maintained == 1) ? true : false,
-            'supplier' => ($license->supplier) ? $license->supplier : null,
+            'supplier' =>  ($license->supplier) ? ['id' => $license->supplier->id,'name'=> e($license->supplier->name)] : null,
             'created_at' => $license->created_at,
         ];
 

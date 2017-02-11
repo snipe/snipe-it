@@ -29,7 +29,7 @@ class LicensesController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
-        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','manufacturer','company'];
+        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','manufacturer','company','license_name','license_email'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
@@ -44,7 +44,6 @@ class LicensesController extends Controller
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
         }
-
 
         $total = $licenses->count();
         $licenses = $licenses->skip($offset)->take($limit)->get();

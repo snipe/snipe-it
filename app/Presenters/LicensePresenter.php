@@ -12,59 +12,107 @@ use Illuminate\Support\Facades\Gate;
 class LicensePresenter extends Presenter
 {
     /**
-     * JSON representation of this license for data table.
-     * @return array
+     * Json Column Layout for bootstrap table
+     * @return string
      */
-    public function forDataTable()
+    public static function dataTableLayout()
     {
-        $actions = '<span style="white-space: nowrap;">';
-
-        if (Gate::allows('checkout', License::class)) {
-            $actions .= Helper::generateDatatableButton(
-                'checkout',
-                route('licenses.freecheckout', $this->id),
-                $this->remaincount() > 0
-            );
-        }
-
-        if (Gate::allows('create', $this->model)) {
-            $actions .= Helper::generateDatatableButton('clone', route('clone/license', $this->id));
-        }
-        if (Gate::allows('update', $this->model)) {
-            $actions .= Helper::generateDatatableButton('edit', route('licenses.edit', $this->id));
-        }
-        if (Gate::allows('delete', $this->model)) {
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('licenses.destroy', $this->id),
-                true, /*enabled*/
-                trans('admin/licenses/message.delete.confirm'),
-                $this->name
-            );
-        }
-        $actions .='</span>';
-
-        $results = [
-            'actions'           => $actions,
-            'company'           => $this->companyUrl(),
-            'expiration_date'   => $this->expiration_date,
-            'id'                => $this->id,
-            'license_email'     => $this->license_email,
-            'license_name'      => $this->license_name,
-            'manufacturer'      => $this->manufacturerUrl(),
-            'name'              => $this->nameUrl(),
-            'notes'             => $this->notes,
-            'order_number'      => $this->order_number,
-            'purchase_cost'     => Helper::formatCurrencyOutput($this->purchase_cost),
-            'purchase_date'     => $this->purchase_date,
-            'purchase_order'    => $this->purchase_order,
-            'remaining'         => $this->remaincount(),
-            'serial'            => $this->serialUrl(),
-            'totalSeats'        => $this->model->licenseSeatsCount,
+        $layout = [
+            [
+                "field" => "id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "company",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/companies/table.title'),
+                "visible" => false,
+                "formatter" => "companiesLinkObjFormatter"
+            ], [
+                "field" => "name",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/licenses/table.title'),
+                "formatter" => "licensesLinkFormatter"
+            ], [
+                "field" => "product_key",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/licenses/form.license_key'),
+                "formatter" => "licensesLinkFormatter"
+            ], [
+                "field" => "expiration_date",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/licenses/form.expiration')
+            ], [
+                "field" => "license_email",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/licenses/form.to_email')
+            ], [
+                "field" => "license_name",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/licenses/form.to_name'),
+            ], [
+                "field" => "manufacturer",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('general.manufacturer'),
+                "formatter" => "manufacturersLinkObjFormatter",
+            ], [
+                "field" => "total_seats",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/accessories/general.total'),
+            ], [
+                "field" => "remaining_qty",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/accessories/general.remaining'),
+            ], [
+                "field" => "purchase_date",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('general.purchase_date'),
+            ], [
+                "field" => "purchase_cost",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('general.purchase_cost'),
+            ], [
+                "field" => "purchase_order",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.purchase_order'),
+            ], [
+                "field" => "order_number",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('general.order_number'),
+            ], [
+                "field" => "actions",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => false,
+                "title" => trans('table.actions'),
+                "formatter" => "licensesActionsFormatter",
+            ]
         ];
 
-        return $results;
+        return json_encode($layout);
     }
+
 
     /**
      * Link to this licenses Name
