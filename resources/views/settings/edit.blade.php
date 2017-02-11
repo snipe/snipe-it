@@ -975,5 +975,11 @@
 <script>
 //color picker with addon
 $(".header-color").colorpicker();
+// toggle the disabled state of asset id prefix
+$('#auto_increment_assets').on('ifChecked', function(){
+    $('#auto_increment_prefix').prop('disabled', false).focus();
+}).on('ifUnchecked', function(){
+    $('#auto_increment_prefix').prop('disabled', true);
+});
 </script>
 @stop
