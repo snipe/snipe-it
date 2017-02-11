@@ -138,12 +138,16 @@
   <!-- Image -->
   @if ($item->image)
   <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-    <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-    <div class="col-md-5">
-      {{ Form::checkbox('image_delete'),array('class' => 'minimal') }}
-      <img src="{{ url('/') }}/uploads/assets/{{ $item->image }}" />
-      {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
-    </div>
+      <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
+      <div class="col-md-5">
+          <label class="control-label" for="image_delete">
+          <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Input::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
+          {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+          </label>
+          <div style="margin-top: 0.5em">
+              <img src="{{ url('/') }}/uploads/assets/{{ $item->image }}" class="img-responsive"/>
+          </div>
+      </div>
   </div>
   @endif
 
