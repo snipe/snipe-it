@@ -10,41 +10,6 @@ use App\Helpers\Helper;
  */
 class LocationPresenter extends Presenter
 {
-    /**
-     * JSON representation of this location for data table.
-     * @return array
-     */
-    public function forDataTable()
-    {
-        $actions = '<nobr>';
-        $actions .= Helper::generateDatatableButton('edit', route('locations.edit', $this->id));
-        $actions .= Helper::generateDatatableButton(
-            'delete',
-            route('locations.destroy', $this->id),
-            true, /*enabled*/
-            trans('admin/locations/message.delete.confirm'),
-            $this->name
-        );
-        $actions .= '</nobr>';
-
-        $results = [
-            'actions'           => $actions,
-            'address'           => $this->address,
-            'assets_checkedout' => $this->model->assets()->count(),
-            'assets_default'    => $this->model->assignedassets()->count(),
-            'city'              => $this->city,
-            'country'           => $this->country,
-            'currency'          => $this->currency,
-            'id'                => $this->id,
-            'name'              => $this->nameUrl(),
-            'parent'            => ($this->model->parent) ? $this->model->parent->present()->nameUrl() : '',
-            'state'             => $this->state,
-            'zip'               => $this->zip,
-            //  'assets'        => ($this->assets->count() + $this->assignedassets->count()),
-        ];
-
-        return $results;
-    }
 
     /**
      * Link to this locations name

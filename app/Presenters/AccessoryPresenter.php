@@ -25,6 +25,13 @@ class AccessoryPresenter extends Presenter
     {
         $layout = [
             [
+                "field" => "id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
                 "field" => "company",
                 "searchable" => true,
                 "sortable" => true,

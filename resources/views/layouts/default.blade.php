@@ -639,8 +639,9 @@
                 <form method="post" id="deleteForm" role="form">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-outline" id="dataConfirmOK">@lang('general.yes')</button>
+
+                    <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">{{ trans('general.cancel') }}</button>
+                    <button type="submit" class="btn btn-outline" id="dataConfirmOK">{{ trans('general.yes') }}</button>
                 </form>
                 </div>
             </div>
