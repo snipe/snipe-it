@@ -158,6 +158,7 @@
     'status'    			=> '状态',
     'supplier'              => '供应商',
     'suppliers'  			=> '供应商',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> '提交',
     'target'                => 'Target',
     'total_assets'			=> '共计资产',

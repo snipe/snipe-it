@@ -128,7 +128,7 @@ $('.snipe-table').bootstrapTable({
                 actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" '
                     + ' class="btn btn-danger btn-sm delete-asset" '
                     + ' data-toggle="modal" '
-                    + ' data-content="Are you sure you wish to delete ' + row.name + ' (' + row.id + ')?" '
+                    + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + ' (' + row.id + ')?" '
                     + ' data-title="{{  trans('general.delete') }}?" onClick="return false;">'
                     + '<i class="fa fa-trash"></i></a></nobr>';
             }

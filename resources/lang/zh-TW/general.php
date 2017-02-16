@@ -158,6 +158,7 @@
     'status'    			=> '狀態',
     'supplier'              => '供應商',
     'suppliers'  			=> '供應商',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> '送出',
     'target'                => 'Target',
     'total_assets'			=> '總資產',

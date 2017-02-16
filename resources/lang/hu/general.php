@@ -158,6 +158,7 @@
     'status'    			=> 'Állapot',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Beszállítók',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> 'eszköz összesen',
