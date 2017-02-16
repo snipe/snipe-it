@@ -125,9 +125,11 @@ $('.snipe-table').bootstrapTable({
             }
 
             if (row.available_actions.delete === true) {
-                actions += '<a data-html="false" class="btn delete-asset btn-danger btn-sm" ' +
-                    + 'data-toggle="modal" href="" data-content="Are you sure you wish to delete this?" '
-                    + 'data-title="{{  trans('general.delete') }}?" onClick="return false;">'
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" '
+                    + ' class="btn btn-danger btn-sm delete-asset" '
+                    + ' data-toggle="modal" '
+                    + ' data-content="Are you sure you wish to delete ' + row.name + ' (' + row.id + ')?" '
+                    + ' data-title="{{  trans('general.delete') }}?" onClick="return false;">'
                     + '<i class="fa fa-trash"></i></a></nobr>';
             }
             return actions;
