@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Category;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\CategoriesTransformer;
 
 class CategoriesController extends Controller
 {
@@ -37,7 +37,7 @@ class CategoriesController extends Controller
 
         $total = $categories->count();
         $categories = $categories->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($categories, $total);
+        return (new CategoriesTransformer)->transformCategories($categories, $total);
 
     }
 

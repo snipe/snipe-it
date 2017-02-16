@@ -187,12 +187,26 @@ class CategoriesController extends Controller
     * @since [v1.8]
     * @return \Illuminate\Contracts\View\View
      */
-    public function show($categoryId = null)
+    public function show($id)
     {
-        $category = Category::find($categoryId);
+        $category = Category::find($id);
+
 
         if (isset($category->id)) {
-                return View::make('categories/view', compact('category'));
+
+                if ($category->category_type=='asset') {
+                    $category_type = 'hardware';
+                    $category_type_route = 'assets';
+                } elseif ($category->category_type=='accessory') {
+                    $category_type = 'accessories';
+                    $category_type_route = 'accessories';
+                } else {
+                    $category_type = $category->category_type;
+                    $category_type_route = $category->category_type.'s';
+                }
+                return View::make('categories/view', compact('category'))
+                    ->with('category_type',$category_type)
+                    ->with('category_type_route',$category_type_route);
         }
 
         // Prepare the error message
