@@ -5,6 +5,7 @@ use Validator;
 use Illuminate\Support\ServiceProvider;
 use DB;
 use Log;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * This service provider handles a few custom validation rules.
