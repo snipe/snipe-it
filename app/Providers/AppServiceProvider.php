@@ -24,7 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        Schema::defaultStringLength(191);
+        
         // Email array validator
         Validator::extend('email_array', function ($attribute, $value, $parameters, $validator) {
             $value = str_replace(' ', '', $value);
