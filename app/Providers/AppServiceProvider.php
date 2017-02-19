@@ -5,6 +5,7 @@ use Validator;
 use Illuminate\Support\ServiceProvider;
 use DB;
 use Log;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * This service provider handles a few custom validation rules.
@@ -24,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        Schema::defaultStringLength(191);
+        
         // Email array validator
         Validator::extend('email_array', function ($attribute, $value, $parameters, $validator) {
             $value = str_replace(' ', '', $value);
