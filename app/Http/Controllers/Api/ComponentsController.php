@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\ComponentsTransformer;
+use App\Http\Transformers\ComponentsAssetsTransformer;
 use App\Models\Component;
 use App\Models\Company;
 use App\Helpers\Helper;
@@ -152,6 +153,6 @@ class ComponentsController extends Controller
         $limit = $request->input('limit', 50);
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
-        return (new AssetsTransformer)->transformAssets($assets, $total);
+        return (new ComponentsAssetsTransformer)->transformAssets($assets, $total);
     }
 }

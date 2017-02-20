@@ -154,9 +154,9 @@ class ApiComponentsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
-            'name' => $data['name'],
-            'id' => $component->id,
-            'qty' => $component->qty,
+            'name' => e($data['name']),
+            'id' => e($component->id),
+            'qty' => e($component->qty),
         ]);
     }
 
