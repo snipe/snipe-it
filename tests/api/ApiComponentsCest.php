@@ -12,9 +12,7 @@ class ApiComponentsCest
         $this->faker = \Faker\Factory::create();
         $this->user = \App\Models\User::find(1);
 
-        $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRjMDMyMDYyN2FkNTg1YzZiYTVkZTAzOThlMGMzYmQyNzZlNzA2YzAxMDk4ODA2NzE4YjcyNWIzNDkzODc3YzQzNWQ0Zjg1MjAxYWU1MzMzIn0.eyJhdWQiOiIxIiwianRpIjoiNGMwMzIwNjI3YWQ1ODVjNmJhNWRlMDM5OGUwYzNiZDI3NmU3MDZjMDEwOTg4MDY3MThiNzI1YjM0OTM4NzdjNDM1ZDRmODUyMDFhZTUzMzMiLCJpYXQiOjE0ODc1ODc0NzUsIm5iZiI6MTQ4NzU4NzQ3NSwiZXhwIjoxODAzMTIwMjc1LCJzdWIiOiIxMiIsInNjb3BlcyI6W119.MrRaor9nSKmndbOBjpGtAzUmk3WGfRKD4LUJTr3eepj-c5gv2A5bOO6pJ47YLZ5tqGyt7jgxErW5J3OOogSRipuIn-eRzW_pSgGj3qbOXDdEGU5HXHFGhoEpKW8Uk00eNbl1Mt-Dl-tj02rOxslhDYrXv3rZzcreeT9HJKZGZAkaRQZPWPmuAiYF06YBf4bKVogrtlG4LOFjhGnl9rsYygmylfzGhHlfq0jH9R9vNurWbQ2JEJVFFyDMK7_95jCvWrlXNQ5KncUSDrHzV3TI2UM0LWMYrTEF8CC0Em5UwUNEnG7BBpf2f-QWwt7KSR4NVdUn6hVADWWD1c1iRNbvlVehPm4fpmQ_QpODE-fg6v7cu58loePTPTd5BpXxDKXERRKxuQ47v-9iesc0YqsHFj15yuKrHodge96zIsbWasNw8gZ5q9WN7HOjK4OKXpnyHSx1s_U_XrQKZz_a6GgagQ21WABoOgBPozlbtlCVSc1uGwHnThVZKiJ4qIy1-8NDiObi6E3ncC_e3zvGRHreqZ7H5t_lCK45aEvJDxKTCgHPhNXEMvYmp5dclhhpNgybreNrVH7S2yCCkY5vdjMqjej0HIhpHBTWfvOIC7Kjh1PQkg_u7KkXUDXQw_VTAIOO7WaO5FouAMsUWnuMk88eU3kjGFHtW83wCuo6pdA73x8';
-
-        $I->amBearerAuthenticated($token);
+        $I->amBearerAuthenticated($I->getToken($this->user));
     }
 
     /** @test */
@@ -91,7 +89,7 @@ class ApiComponentsCest
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         $data = [
-            'name' => $this->faker->word,
+            'name' => $this->faker->sentence(3),
         ];
 
         $I->assertNotEquals($component->name, $data['name']);
