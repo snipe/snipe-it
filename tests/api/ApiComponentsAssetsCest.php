@@ -42,13 +42,18 @@ class ApiComponentsAssetsCest
         $I->assertEquals(2, $response->total);
         $I->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $assets);
 
-        $random_asset = $assets->random();
-        $I->seeResponseContainsJson([
-            'name' => $random_asset->name,
-            'asset_tag' => $random_asset->asset_tag,
-            'serial' => $random_asset->serial,
-            'last_checkout' => $random_asset->last_checkout,
-            'notes' => $random_asset->notes,
+        $I->seeResponseContainsJson(['rows' => [
+                0 => [
+                    'name' => $assets[0]->name,
+                    'id' => $assets[0]->id,
+                    'created_at' => $assets[0]->created_at->format('Y-m-d'),
+                ],
+                1 => [
+                    'name' => $assets[1]->name,
+                    'id' => $assets[1]->id,
+                    'created_at' => $assets[1]->created_at->format('Y-m-d'),
+                ],
+            ]
         ]);
     }
 }
