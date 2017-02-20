@@ -19,9 +19,21 @@ class ApiComponentsCest
     public function indexComponents(ApiTester $I)
     {
         $I->wantTo('Get a list of components');
+
+        // setup
+        $components = factory(\App\Models\Component::class, 'component', 10)->create(['user_id' => $this->user->id]);
+
+        // call
         $I->sendGET('/components');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
+
+        // sample verify
+        $component = $components->random();
+        $I->seeResponseContainsJson([
+            'name' => $component->name,
+            'qty' => $component->qty,
+        ]);
     }
 
     /** @test */
@@ -80,9 +92,9 @@ class ApiComponentsCest
     }
 
     /** @test */
-    public function updateComponent(ApiTester $I)
+    public function updateComponentWithPatch(ApiTester $I)
     {
-        $I->wantTo('Update a component');
+        $I->wantTo('Update a component with PATCH');
 
         // create
         $component = factory(\App\Models\Component::class, 'component')->create();
@@ -90,6 +102,7 @@ class ApiComponentsCest
 
         $data = [
             'name' => $this->faker->sentence(3),
+            'qty' => $this->faker->randomDigit,
         ];
 
         $I->assertNotEquals($component->name, $data['name']);
@@ -109,8 +122,42 @@ class ApiComponentsCest
         $I->seeResponseContainsJson([
             'name' => $data['name'],
             'id' => $component->id,
+            'qty' => $data['qty'],
         ]);
+    }
 
+    /** @test */
+    public function updateComponentWithPut(ApiTester $I)
+    {
+        $I->wantTo('Update a component with PUT');
+
+        // create
+        $component = factory(\App\Models\Component::class, 'component')->create();
+        $I->assertInstanceOf(\App\Models\Component::class, $component);
+
+        $data = [
+            'name' => $this->faker->sentence(3),
+        ];
+
+        $I->assertNotEquals($component->name, $data['name']);
+
+        // update
+        $I->sendPUT('/components/' . $component->id, $data);
+        $I->seeResponseIsJson();
+        $I->seeResponseCodeIs(200);
+
+        $response = json_decode($I->grabResponse());
+        $I->assertEquals('success', $response->status);
+
+        // verify
+        $I->sendGET('/components/' . $component->id);
+        $I->seeResponseIsJson();
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseContainsJson([
+            'name' => $data['name'],
+            'id' => $component->id,
+            'qty' => $component->qty,
+        ]);
     }
 
     /** @test */
@@ -129,7 +176,7 @@ class ApiComponentsCest
 
         // verify, expect a 404
         $I->sendGET('/components/' . $component->id);
-        // $I->seeResponseIsJson(); // @todo: response is not JSON
         $I->seeResponseCodeIs(404);
+        // $I->seeResponseIsJson(); // @todo: response is not JSON
     }
 }
