@@ -142,6 +142,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     );
 
+    Route::get('components/{id}/assets', [
+        'name' =>'api.components.assets',
+        'uses' => 'ComponentsController@getAssets',
+    ]);
+
 
     Route::resource('suppliers', 'SuppliersController',
         ['names' =>

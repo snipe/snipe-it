@@ -102,7 +102,7 @@ class ApiComponentsCest
 
         $data = [
             'name' => $this->faker->sentence(3),
-            'qty' => $this->faker->randomDigit,
+            'qty' => $this->faker->randomDigit + 1,
         ];
 
         $I->assertNotEquals($component->name, $data['name']);
