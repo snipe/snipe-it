@@ -84,7 +84,7 @@
                     @if ($asset->company)
                     <tr>
                       <td>{{ trans('general.company') }}</td>
-                      <td>{{ $asset->company->name }}</td>
+                      <td><a href="{{ url('/companies/' . $asset->company->id) }}">{{ $asset->company->name }}</a></td>
                     </tr>
                     @endif
 
