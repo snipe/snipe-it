@@ -158,6 +158,7 @@
     'status'    			=> 'Estados',
     'supplier'              => 'Proveedor',
     'suppliers'  			=> 'Proveedores',
+    'sure_to_delete'    => '¿Está seguro de que desea eliminar',
     'submit'				=> 'Enviar',
     'target'                => 'Target',
     'total_assets'			=> 'Equipos',

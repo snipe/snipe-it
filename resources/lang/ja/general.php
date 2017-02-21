@@ -158,6 +158,7 @@
     'status'    			=> 'ステータス',
     'supplier'              => 'Supplier',
     'suppliers'  			=> '仕入先',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> '資産の合計',
