@@ -53,7 +53,8 @@ elixir(function(mix) {
         bowerPath + '/iCheck/icheck.js',
         bowerPath + '/select2/dist/js/select2.full.js',
         bowerPath + '/ekko-lightbox/dist/ekko-lightbox.js',
-        'snipeit.js'
+        'snipeit.js',
+        'app.js'
 
     ],'public/assets/js');
     mix.version(['assets/css/app.css','assets/js/all.js']);
