@@ -158,6 +158,7 @@
     'status'    			=> '상태',
     'supplier'              => '공급자',
     'suppliers'  			=> '공급자',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> '제출',
     'target'                => 'Target',
     'total_assets'			=> '총 자산',

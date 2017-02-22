@@ -158,6 +158,7 @@
     'status'    			=> 'Tình trạng',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Nhà cung cấp',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> 'tổng số tài sản',
