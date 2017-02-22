@@ -4,7 +4,7 @@
     'helpTitle' => trans('admin/groups/general.about_groups_title'),
     'helpText' => trans('admin/groups/general.about_groups_text'),
     'item' => $group,
-    'formAction' => ($group->id) ? route('groups.update', ['accessory' => $group->id]) : route('groups.store'),
+    'formAction' => ($group !== null && $group->id !== null) ? route('groups.update', ['accessory' => $group->id]) : route('groups.store'),
 
 ])
 @section('content')
