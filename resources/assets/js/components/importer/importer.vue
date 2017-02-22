@@ -1,13 +1,11 @@
-
-<style scoped>
-</style>
-
 <template>
-    <div>
+    <div class="row">
         <alert v-show="alert.visible" :alertType="alert.type" v-on:hide="alert.visible = false">{{ alert.message }}</alert>
         <errors :errors="importErrors"></errors>
         <modal v-model="displayImportModal" effect="fade">
-            <div slot="modal-header" class="modal-title">Import File:</div>
+            <div slot="modal-header" class="modal-header">
+                <h4 class="modal-title">Import File:</h4>
+            </div>
             <div slot="modal-body" class="modal-body">
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12">
@@ -29,18 +27,16 @@
                   </div>
             </div>
 
-            <div slot="modal-footer" class="modal-footer">
-                <div class="row">
-                    <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="modal.statusText">{{ this.modal.statusText }}</div>
-                    <button type="button" class="btn btn-default" @click="displayImportModal = false">Cancel</button>
-                    <button type="submit" class="btn btn-primary" @click="postSave">Save</button>
-                </div>
+            <div class="modal-footer" slot="modal-footer">
+                <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="modal.statusText">{{ this.modal.statusText }}</div>
+                <button type="button" class="btn btn-default" @click="displayImportModal = false">Cancel</button>
+                <button type="submit" class="btn btn-primary" @click="postSave">Process</button>
             </div>
         </modal>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box">
-                    <div class="box-body">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="row">
                         <div class="col-md-3">
                             <!-- The fileinput-button span is used to style the file input field as button -->
                             <span class="btn btn-info fileinput-button">
@@ -58,28 +54,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-striped" id="upload-table">
-                                    <thead>
-                                        <th>File</th>
-                                        <th>Created</th>
-                                        <th>Size</th>
-                                        <th></th>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="file in files">
-                                            <td>{{ file.file_path }}</td>
-                                            <td>{{ file.created_at }} </td>
-                                            <td>{{ file.filesize }}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-info" @click="showModal(file)"><i class="fa fa-spinner process"></i>Process</button>
-                                                <button class="btn btn-sm btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped" id="upload-table">
+                                <thead>
+                                    <th>File</th>
+                                    <th>Created</th>
+                                    <th>Size</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="file in files">
+                                        <td>{{ file.file_path }}</td>
+                                        <td>{{ file.created_at }} </td>
+                                        <td>{{ file.filesize }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" @click="showModal(file)"><i class="fa fa-spinner process"></i>Process</button>
+                                            <button class="btn btn-sm btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -155,7 +151,8 @@
                 },
                 fail(e, data) {
                     vm.progress.currentClass = "progress-bar-danger";
-                    vm.progress.statusText = data.errorThrown;
+                    // Display any errors returned from the $.ajax()
+                    vm.progress.statusText = data.jqXHR.responseJSON.messages;
                 }
             })
         },
@@ -187,6 +184,7 @@
             },
 
             postSave() {
+                this.modal.statusText = "Processing...";
                 this.$http.post('/api/v1/imports/process/'+this.activeFile.id, {
                     'import-update': this.modal.update,
                     'import-type': this.modal.importType
