@@ -1,3 +1,8 @@
+<style scoped>
+td {
+    font-size: 14px;
+}
+</style>
 <template>
     <div class="row">
         <alert v-show="alert.visible" :alertType="alert.type" v-on:hide="alert.visible = false">{{ alert.message }}</alert>
