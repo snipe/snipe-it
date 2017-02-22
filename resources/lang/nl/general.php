@@ -158,6 +158,7 @@
     'status'    			=> 'Status',
     'supplier'              => 'Leverancier',
     'suppliers'  			=> 'Leveranciers',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Verzenden',
     'target'                => 'Target',
     'total_assets'			=> 'totaal aantal materialen',

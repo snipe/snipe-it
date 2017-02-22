@@ -158,6 +158,7 @@
     'status'    			=> 'Estado',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Fornecedores',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submeter',
     'target'                => 'Target',
     'total_assets'			=> 'artigos',

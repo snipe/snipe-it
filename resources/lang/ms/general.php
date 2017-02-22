@@ -158,6 +158,7 @@
     'status'    			=> 'Status',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Pembekal',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> 'jumlah harta',
