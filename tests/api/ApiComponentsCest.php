@@ -161,7 +161,7 @@ class ApiComponentsCest
     }
 
     /** @test */
-    public function deleteComponentTest(ApiTester $I)
+    public function deleteComponentTest(ApiTester $I, $scenario)
     {
         $I->wantTo('Delete a component');
 
@@ -178,5 +178,6 @@ class ApiComponentsCest
         $I->sendGET('/components/' . $component->id);
         $I->seeResponseCodeIs(404);
         // $I->seeResponseIsJson(); // @todo: response is not JSON
+        $scenario->incomplete('404 response should be JSON, receiving HTML instead');
     }
 }
