@@ -158,6 +158,7 @@
     'status'    			=> 'Statut',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Fournisseurs',
+    'sure_to_delete'    => 'Êtes-vous sûr de vouloir supprimer',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> 'actifs au total',

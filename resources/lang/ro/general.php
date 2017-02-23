@@ -158,6 +158,7 @@
     'status'    			=> 'Stare',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Furnizori',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> 'Total active',

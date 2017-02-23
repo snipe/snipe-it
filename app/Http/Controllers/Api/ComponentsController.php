@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\ComponentsTransformer;
+use App\Http\Transformers\ComponentsAssetsTransformer;
 use App\Models\Component;
 use App\Models\Company;
 use App\Helpers\Helper;
@@ -131,4 +133,26 @@ class ComponentsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.delete.success')));
     }
 
+    /**
+     * Display all assets attached to a component
+     *
+     * @author [A. Bergamasco] [@vjandrea]
+     * @since [v4.0]
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+    */
+    public function getAssets(Request $request, $id)
+    {
+        $this->authorize('index', Asset::class);
+        
+        $component = Component::findOrFail($id);
+        $assets = $component->assets();
+
+        $offset = request('offset', 0);
+        $limit = $request->input('limit', 50);
+        $total = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
+        return (new ComponentsAssetsTransformer)->transformAssets($assets, $total);
+    }
 }

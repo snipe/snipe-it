@@ -159,6 +159,7 @@
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Leverandører',
     'submit'				=> 'Submit',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'target'                => 'Target',
     'total_assets'			=> 'totale aktiver',
     'total_licenses'		=> 'totale licenser',

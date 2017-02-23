@@ -158,6 +158,7 @@
     'status'    			=> 'الحالة',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'الموردون',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> 'إجمالي الأصول',
