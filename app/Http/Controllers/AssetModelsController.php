@@ -375,7 +375,7 @@ class AssetModelsController extends Controller
         // Show the page
         $depreciation_list = Helper::depreciationList();
         $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList();Helper::categoryList('asset');
+        $category_list = Helper::categoryList();//Helper::categoryList('asset');
         $view = View::make('models/edit');
         $view->with('category_list', $category_list);
         $view->with('depreciation_list', $depreciation_list);
