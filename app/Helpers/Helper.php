@@ -134,16 +134,43 @@ class Helper
      * @since [v2.5]
      * @return Array
      */
-    public static function modelList()
+    public static function modelList($category_type = null)
     {
-        $models = AssetModel::with('manufacturer')->get();
+
+		$models = AssetModel::with('manufacturer');
+		if(!empty($category_type)) {
+			$models = $models->join('categories', 'models.category_id', '=', 'categories.id') //leftJoin
+							->where('category_type', '=', $category_type) //'component'
+							->select('models.*');
+		}
+		\Debugbar::info('$models->count(): '.$models->count());
+		$models = $models->get();
+
+	
+/*			
+			$models = AssetModel::with([ 'category' => function ($query) {
+									$query->where('category_type', '=', $category_type);
+			}])->get();
+*/
+
+		/*				
+		$models = AssetModel::with(['category' => function($query) use($category_type) {
+				$query->where('category_type', '=', 'component');
+		}])->get();
+		*/
+
+
+
         $model_array[''] = trans('general.select_model');
         foreach ($models as $model) {
+			\Debugbar::info($model->id.' --- '.$model->displayModelName());
             $model_array[$model->id] = $model->displayModelName();
         }
+
         return $model_array;
     }
 
+	
     /**
      * Get the list of companies in an array to make a dropdown menu
      *

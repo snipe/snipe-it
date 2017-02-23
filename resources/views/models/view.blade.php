@@ -53,9 +53,8 @@
           data-cookie-id-table="modeldetailsViewTable">
                 <thead>
                     <tr>
-
-                        <th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                         <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
+						<th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                         <th data-sortable="true" data-field="name" data-searchable="true">{{ trans('general.name') }}</th>
                         <th data-sortable="true" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
                         <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>

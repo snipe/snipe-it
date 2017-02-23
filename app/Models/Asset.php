@@ -255,7 +255,8 @@ class Asset extends Depreciable
      */
     public function components()
     {
-        return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id')->withTrashed();
+        //return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id')->withTrashed();
+		return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id', 'assigned_qty')->withTrashed();
     }
 
   /**
@@ -798,25 +799,30 @@ public function checkin_email()
                             ->orWhere('models.model_number', 'LIKE', '%'.$search.'%');
                         });
                     });
-                })->orWhereHas('model', function ($query) use ($search) {
+                })
+				->orWhereHas('model', function ($query) use ($search) {
                     $query->whereHas('manufacturer', function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
                             $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
                         });
                     });
-                })->orWhere(function ($query) use ($search) {
+                })
+				->orWhere(function ($query) use ($search) {
                     $query->whereHas('assetstatus', function ($query) use ($search) {
                         $query->where('status_labels.name', 'LIKE', '%'.$search.'%');
                     });
-                })->orWhere(function ($query) use ($search) {
+                })
+				->orWhere(function ($query) use ($search) {
                     $query->whereHas('company', function ($query) use ($search) {
                         $query->where('companies.name', 'LIKE', '%'.$search.'%');
                     });
-                })->orWhere(function ($query) use ($search) {
+                })
+				->orWhere(function ($query) use ($search) {
                     $query->whereHas('defaultLoc', function ($query) use ($search) {
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
                     });
-                })->orWhere(function ($query) use ($search) {
+                })
+				->orWhere(function ($query) use ($search) {
                     $query->whereHas('assigneduser', function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
                             $query->where('users.first_name', 'LIKE', '%'.$search.'%')
@@ -828,11 +834,12 @@ public function checkin_email()
                             });
                         });
                     });
-                })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
+                })
+				->orWhere('assets.name', 'LIKE', '%'.$search.'%')
+				->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
+				->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
+				->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
+				->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
             }
             foreach (CustomField::all() as $field) {
                 $query->orWhere($field->db_column_name(), 'LIKE', "%$search%");
@@ -850,7 +857,8 @@ public function checkin_email()
     */
     public function scopeOrderModels($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+					->orderBy('models.name', $order);
     }
 
     /**
@@ -863,7 +871,8 @@ public function checkin_email()
     */
     public function scopeOrderModelNumber($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.model_number', $order);
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+					->orderBy('models.model_number', $order);
     }
 
 
@@ -877,7 +886,8 @@ public function checkin_email()
     */
     public function scopeOrderAssigned($query, $order)
     {
-        return $query->leftJoin('users', 'assets.assigned_to', '=', 'users.id')->select('assets.*')->orderBy('users.first_name', $order)->orderBy('users.last_name', $order);
+        return $query->leftJoin('users', 'assets.assigned_to', '=', 'users.id')
+					->select('assets.*')->orderBy('users.first_name', $order)->orderBy('users.last_name', $order);
     }
 
     /**
@@ -890,7 +900,8 @@ public function checkin_email()
     */
     public function scopeOrderStatus($query, $order)
     {
-        return $query->join('status_labels', 'assets.status_id', '=', 'status_labels.id')->orderBy('status_labels.name', $order);
+        return $query->join('status_labels', 'assets.status_id', '=', 'status_labels.id')
+					->orderBy('status_labels.name', $order);
     }
 
   /**
@@ -933,8 +944,8 @@ public function checkin_email()
     public function scopeOrderManufacturer($query, $order)
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')
-            ->orderBy('manufacturers.name', $order);
+					->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')
+					->orderBy('manufacturers.name', $order);
     }
 
   /**
@@ -949,6 +960,7 @@ public function checkin_email()
     */
     public function scopeOrderLocation($query, $order)
     {
-        return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
+        return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')
+					->orderBy('locations.name', $order);
     }
 }

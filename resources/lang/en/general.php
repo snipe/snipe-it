@@ -13,7 +13,7 @@
     'all_assets'			=> 'All Assets',
     'all'       			=> 'All',
     'archived'              => 'Archived',
-    'asset_models'			=> 'Asset Models',
+    'asset_models'			=> 'Asset/Component Models', //'Asset Models',
     'asset'					=> 'Asset',
     'asset_report'          => 'Asset Report',
     'asset_tag'				=> 'Asset Tag',

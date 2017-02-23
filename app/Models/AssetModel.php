@@ -47,7 +47,10 @@ class AssetModel extends SnipeModel
      */
     protected $fillable = ['name','manufacturer_id','category_id','eol'];
 
-
+    public function components()
+    {
+        return $this->hasMany('\App\Models\Component', 'model_id');
+    }
 
     public function assets()
     {

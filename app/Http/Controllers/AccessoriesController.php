@@ -594,6 +594,7 @@ class AccessoriesController extends Controller
             $company = $accessory->company;
 
             $rows[] = array(
+			'id'            => $accessory->id,
             'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
             'model_number'      =>  e($accessory->model_number),

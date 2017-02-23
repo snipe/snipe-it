@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/hardware/general.view') }} {{ $asset->asset_tag }}
+{{ trans('admin/hardware/general.view') }} {{ $asset->name }} {{ $asset->asset_tag }}
 @parent
 @stop
 
@@ -427,10 +427,10 @@
               <!-- Licenses assets table -->
 
               @if (count($asset->licenses) > 0)
-                <table class="table">
+                <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="col-md-4">{{ trans('general.name') }}</th>
+                      <th class="col-md-4">{{ trans('admin/licenses/table.title') }}</th>
                       <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
                       <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
                     </tr>
@@ -441,7 +441,7 @@
                       <td><a href="{{ route('view/license', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                       <td>{{ $seat->license->serial }}</td>
                       <td>
-                        <a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info btn-sm">{{ trans('general.checkin') }}</a>
+                        <a href="{{ route('checkin/license', $seat->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm">{{ trans('general.checkin') }}</a>
                       </td>
                     </tr>
                     @endforeach
@@ -465,13 +465,33 @@
               <div class="col-md-12">
                 @if(count($asset->components) > 0)
                   <table class="table table-striped">
-
+                  <thead>
+                    <tr>
+                      <th class="col-md-2"><span class="line"></span>{{ trans('admin/components/table.title') }}</th>
+					  <th class="col-md-1"><span class="line"></span>{{ trans('admin/components/table.component_tag') }}</th>
+					  <th class="col-md-1"><span class="line"></span>{{ trans('admin/hardware/form.serial') }}</th>
+					  <th class="col-md-1"><span class="line"></span>{{ trans('general.manufacturer') }}</th>
+					  <th class="col-md-1"><span class="line"></span>{{ trans('admin/hardware/form.model') }}</th>
+                      <th class="col-md-1"><span class="line"></span>{{ trans('general.category') }}</th>
+					  <th class="col-md-1"><span class="line"></span>{{ trans('general.qty') }}</th>
+					  <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
+                    </tr>
+                  </thead>
                     <tbody>
-                      <?php $totalCost = 0; ?>
+                     <?php $totalCost = 0; ?>
                       @foreach ($asset->components as $component)
                         @if (is_null($component->deleted_at))
                           <tr>
                             <td><a href="{{ route('view/component', $component->id) }}">{{ $component->name }}</a></td>
+							<td><a href="{{ route('view/component', $component->id) }}">{{ $component->component_tag }}</a></td>
+							<td>{{ $component->serial }}</td>
+							<td>{{ $component->model->manufacturer->name }}</td>
+							<td>{{ $component->model->name }}</td>
+							<td>{{ $component->model->category->name }}</td>
+							<td>{{ $component->pivot->assigned_qty }}</td>
+						    <td>
+								<a href="{{ route('checkin/component', $component->pivot->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm">{{ trans('general.checkin') }}</a>
+						    </td>
                           </tr>
                         @endif
                       @endforeach

@@ -12,9 +12,11 @@ use Str;
 use Validator;
 use View;
 use App\Models\Asset;
+use App\Models\Component;
 use App\Models\Company;
 use Config;
 use App\Helpers\Helper;
+use Gate;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -54,12 +56,12 @@ class AssetModelsController extends Controller
         // Show the page
         $depreciation_list = Helper::depreciationList();
         $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
+        $category_list = Helper::categoryList();//Helper::categoryList('asset');
         return View::make('models/edit')
-        ->with('category_list', $category_list)
-        ->with('depreciation_list', $depreciation_list)
-        ->with('manufacturer_list', $manufacturer_list)
-        ->with('item', new AssetModel);
+				->with('category_list', $category_list)
+				->with('depreciation_list', $depreciation_list)
+				->with('manufacturer_list', $manufacturer_list)
+				->with('item', new AssetModel);
     }
 
 
@@ -180,7 +182,7 @@ class AssetModelsController extends Controller
 
         $depreciation_list = Helper::depreciationList();
         $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
+        $category_list = Helper::categoryList();//Helper::categoryList('asset');
 
         $view = View::make('models/edit', compact('item'));
         $view->with('category_list', $category_list);
@@ -373,7 +375,7 @@ class AssetModelsController extends Controller
         // Show the page
         $depreciation_list = Helper::depreciationList();
         $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
+        $category_list = Helper::categoryList();Helper::categoryList('asset');
         $view = View::make('models/edit');
         $view->with('category_list', $category_list);
         $view->with('depreciation_list', $depreciation_list);
@@ -413,7 +415,7 @@ class AssetModelsController extends Controller
 
     public function getDatatable($status = null)
     {
-        $models = AssetModel::with('category', 'assets', 'depreciation', 'manufacturer');
+        $models = AssetModel::with('category', 'assets', 'components', 'depreciation', 'manufacturer');
 
         switch ($status) {
             case 'Deleted':
@@ -464,6 +466,7 @@ class AssetModelsController extends Controller
                 'image' => ($model->image!='') ? '<img src="'.config('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->model_number,
                 'numassets'         => $model->assets->count(),
+				'numcomponents'		=> $model->components->count(),
                 'depreciation'      => (($model->depreciation) && ($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
                 'category'          => ($model->category) ? (string)link_to('admin/settings/categories/'.$model->category->id.'/view', $model->category->name) : '',
                 'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
@@ -487,65 +490,143 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return String JSON
     */
-    public function getDataView($modelID)
+    public function getDataView($modelId)
     {
-        $assets = Asset::where('model_id', '=', $modelID)->with('company', 'assetstatus');
 
-        if (Input::has('search')) {
-            $assets = $assets->TextSearch(e(Input::get('search')));
+        // Check if the model exists
+        if (is_null($model = AssetModel::find($modelId))) {
+            // Redirect to the model management page
+            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
+		\Debugbar::info("$model->category->category_type: ".$model->category->category_type);
+		
+		if ($model->category->category_type == 'asset') {
+			\Debugbar::info("getDataView: asset ");
+			$assets = Asset::where('model_id', '=', $modelId)->with('company', 'assetstatus');
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
+			if (Input::has('search')) {
+				$assets = $assets->TextSearch(e(Input::get('search')));
+			}
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
+			if (Input::has('offset')) {
+				$offset = e(Input::get('offset'));
+			} else {
+				$offset = 0;
+			}
 
-
-        $allowed_columns = ['name', 'serial','asset_tag'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
-
-        $assets = $assets->orderBy($sort, $order);
-
-        $assetsCount = $assets->count();
-        $assets = $assets->skip($offset)->take($limit)->get();
-
-        $rows = array();
+			if (Input::has('limit')) {
+				$limit = e(Input::get('limit'));
+			} else {
+				$limit = 50;
+			}
 
 
-        foreach ($assets as $asset) {
-            $actions = '';
+			$allowed_columns = ['name', 'serial','asset_tag'];
+			$order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+			$sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
-            if ($asset->assetstatus) {
-                if ($asset->assetstatus->deployable != 0) {
-                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
-                    } else {
-                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
-                    }
-                }
-            }
+			$assets = $assets->orderBy($sort, $order);
 
-            $rows[] = array(
-                'id'            => $asset->id,
-                'name'          => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
-                'asset_tag'     => (string)link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
-                'serial'        => $asset->serial,
-                'assigned_to'   => ($asset->assigned_to) ? (string)link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
-                'actions'       => $actions,
-                'companyName'   => Company::getName($asset)
-            );
-        }
+			$assetsCount = $assets->count();
+			$assets = $assets->skip($offset)->take($limit)->get();
 
-        $data = array('total' => $assetsCount, 'rows' => $rows);
+			$rows = array();
 
+
+			foreach ($assets as $asset) {
+				$actions = '';
+
+				if ($asset->assetstatus) {
+					if ($asset->assetstatus->deployable != 0) {
+						if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+							$actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
+						} else {
+							$actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
+						}
+					}
+				}
+
+				$rows[] = array(
+					'id'            => $asset->id,
+					'name'          => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
+					'asset_tag'     => (string)link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
+					'serial'        => $asset->serial,
+					'assigned_to'   => ($asset->assigned_to) ? (string)link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
+					'actions'       => $actions,
+					'companyName'   => Company::getName($asset)
+				);
+			}
+			
+			$data = array('total' => $assetsCount, 'rows' => $rows);
+			
+			
+			
+		} elseif ($model->category->category_type == 'component') {
+			\Debugbar::info("getDataView: component ");
+			$components = Component::where('model_id', '=', $modelId)->with('company');
+
+			if (Input::has('search')) {
+				$components = $components->TextSearch(e(Input::get('search')));
+			}
+
+			if (Input::has('offset')) {
+				$offset = e(Input::get('offset'));
+			} else {
+				$offset = 0;
+			}
+
+			if (Input::has('limit')) {
+				$limit = e(Input::get('limit'));
+			} else {
+				$limit = 50;
+			}
+
+
+			$allowed_columns = ['name', 'serial','component_tag'];
+			$order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+			$sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
+
+			$components = $components->orderBy($sort, $order);
+
+			$componentsCount = $components->count();
+			$components = $components->skip($offset)->take($limit)->get();
+
+			$rows = array();
+
+			\Debugbar::info("getDataView: component 1 ");
+			foreach ($components as $component) {
+				$actions = '<nobr>';
+				if (Gate::allows('components.checkout')) {
+					$actions .= '<a href="' . route('checkout/component',
+							$component->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '" ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+				}
+
+				$actions .='</nobr>';
+				/*
+				if ($component->componentstatus) {
+					if ($component->componentstatus->deployable != 0) {
+						if (($component->assigned_to !='') && ($component->assigned_to > 0)) {
+							$actions = '<a href="'.route('checkin/hardware', $component->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
+						} else {
+							$actions = '<a href="'.route('checkout/hardware', $component->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
+						}
+					}
+				}
+				*/
+
+				$rows[] = array(
+					'id'            => $component->id,
+					'name'          => (string)link_to('/admin/components/'.$component->id.'/view', $component->showComponentName()),
+					'asset_tag'     => (string)link_to('admin/components/'.$component->id.'/view', $component->component_tag),
+					'serial'        => $component->serial,
+					'assigned_to'   => '',//($component->assigned_to) ? (string)link_to('/admin/users/'.$component->assigned_to.'/view', $component->assigneduser->fullName()) : '',
+					'actions'       => $actions,
+					'companyName'   => Company::getName($component)
+				);
+			}
+			
+			$data = array('total' => $componentsCount, 'rows' => $rows);
+		}
         return $data;
     }
 }

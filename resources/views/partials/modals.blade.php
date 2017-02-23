@@ -14,16 +14,20 @@
                 </div>
 
                 <div class="dynamic-form-row">
+					@if (isset($manufacturer_list))
                     <div class="col-md-4 col-xs-12"><label for="modal-manufacturer_id">{{ trans('general.manufacturer') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:100%','id' =>'modal-manufacturer_id')) }}</div>
-                </div>
+                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-manufacturer',  $manufacturer_list, '', array('class'=>'select2 parent', 'style'=>'width:100%','id' =>'modal-manufacturer_id')) }}</div>
+					@endif
+			   </div>
 
                 <div class="dynamic-form-row">
+					@if (isset($category_list))
                     <div class="col-md-4 col-xs-12"><label for="modal-category_id">{{ trans('general.category') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:100%','id' => 'modal-category_id')) }}</div>
-                </div>
+                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-category', $category_list,'', array('class'=>'select2 parent', 'style'=>'width:100%','id' => 'modal-category_id')) }}</div>
+					@endif
+				</div>
 
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-model_number">{{ trans('general.model_no') }}:</label></div>
@@ -31,10 +35,12 @@
                 </div>
 
                 <div class="dynamic-form-row">
+					@if (isset($statuslabel_types))
                     <div class="col-md-4 col-xs-12"><label for="modal-statuslabel_types">{{ trans('admin/statuslabels/table.status_type') }}:
                         </label></div>
                     <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-statuslabel_types', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:90%','id' =>'modal-statuslabel_types')) }}</div>
-                </div>
+					@endif
+				</div>
 
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-city">{{ trans('general.city') }}:</label></div>
@@ -47,9 +53,11 @@
                 </div>
 
                 <div class="dynamic-form-row">
+					@if (isset($statuslabel_types))
                     <div class="col-md-4 col-xs-12"><label for="modal-fieldset_id">{{ trans('admin/models/general.fieldset') }}:</label></div>
-                    <div class="col-md-8 col-xs-12">{{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),Input::old('custom_fieldset'), array('class'=>'select2', 'id'=>'modal-fieldset_id', 'style'=>'width:350px')) }}</div>
-                </div>
+                    <div class="col-md-8 col-xs-12">{{ Form::select('custom_fieldset', $customfieldset_list, Input::old('custom_fieldset'), array('class'=>'select2', 'id'=>'modal-fieldset_id', 'style'=>'width:350px')) }}</div>
+					@endif
+				</div>
 
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-first_name">{{ trans('general.first_name') }}:</label></div>
