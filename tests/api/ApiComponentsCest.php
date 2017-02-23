@@ -86,7 +86,7 @@ class ApiComponentsCest
             ],
             'name' => $data['name'],
             'qty' => $data['qty'],
-            'purchase_cost' => $data['purchase_cost'],
+            'purchase_cost' => \App\Helpers\Helper::formatCurrencyOutput($data['purchase_cost']),
             'purchase_date' => $data['purchase_date'],
         ]);
     }
