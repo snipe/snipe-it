@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
                 return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
             }
 
-            if ($e instanceof \Illuminate\Validation\ValidationException) {//                return response()->json(['status' => 'error', 'message' => 'Validation error', 'payload' => $e->response['messages']]);
+            if ($e instanceof \Illuminate\Validation\ValidationException) {
                 return response()->json(Helper::formatStandardApiResponse('error', $e->response['messages'], $e->getMessage(), 400));
             }
 
