@@ -79,8 +79,7 @@ class ImportController extends Controller
                 'files' => $results
             ];
         }
-        $results['error']=trans('general.feature_disabled');
-        return $results;
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 500);
     }
     /**
      * Processes the specified Import.

@@ -120,11 +120,11 @@ $('.snipe-table').bootstrapTable({
 
             var actions = '<nobr>';
 
-            if (row.available_actions.update === true) {
+            if ((row.available_actions) && (row.available_actions.update === true)) {
                 actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>&nbsp;';
             }
 
-            if (row.available_actions.delete === true) {
+            if ((row.available_actions) && (row.available_actions.delete === true)) {
                 actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" '
                     + ' class="btn btn-danger btn-sm delete-asset" '
                     + ' data-toggle="modal" '

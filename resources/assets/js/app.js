@@ -691,11 +691,3 @@ function _init() {
   };
 
 })(jQuery);
-
-
-
-const app = new Vue({
-    el: '#app'
-});
-
-

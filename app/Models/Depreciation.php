@@ -11,7 +11,7 @@ class Depreciation extends SnipeModel
     // Declare the rules for the form validation
     protected $rules = array(
         'name' => 'required|min:3|max:255|unique:depreciations,name',
-        'months' => 'required|max:240|integer',
+        'months' => 'required|max:3600|integer',
     );
 
     /**
@@ -46,10 +46,10 @@ class Depreciation extends SnipeModel
       /**
       * Query builder scope to search on text
       *
-      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
       * @param  text                              $search      Search term
       *
-      * @return Illuminate\Database\Query\Builder          Modified query builder
+      * @return \Illuminate\Database\Query\Builder          Modified query builder
       */
     public function scopeTextSearch($query, $search)
     {

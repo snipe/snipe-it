@@ -3,7 +3,7 @@
 
 use App\Models\License;
 
-class licensesCest
+class LicensesCest
 {
     public function _before(FunctionalTester $I)
     {
