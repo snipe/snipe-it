@@ -463,4 +463,42 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
     }); // Users group
+
+
+    ### DEBUG ROUTES ###
+
+    Route::group(['prefix' => 'me'], function () {
+
+        if (env('APP_ENV') == 'production') {
+            abort(404);
+        }
+
+        Route::get('/profile', function () {
+            return json_encode([
+                'name' => \Auth::user()->first_name . ' ' . \Auth::user()->last_name,
+                'email' => \Auth::user()->email,
+            ]);
+        });
+
+        Route::get('/authenticated', function () {
+            return json_encode([
+                'authenticated' => \Auth::check()
+            ]);
+        });
+
+        Route::get('/permissions/{scope}/{action}', function ($scope, $action) {
+            return json_encode([
+                'permission' => $scope . '.' . $action,
+                'authorized' => \Auth::user()->hasAccess($scope . '.' . $action),
+            ]);
+        });
+
+        Route::get('/permissions', function () {
+            return json_encode([
+                'permissions' => Auth::user()->permissions
+            ]);
+        });
+
+
+    });
 });
