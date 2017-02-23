@@ -18,10 +18,11 @@ class ApiComponentsAssetsCest
     {
         $I->wantTo('Get a list of assets related to a component');
 
-        // generate
+        // generate component
         $component = factory(\App\Models\Component::class, 'component')
                     ->create(['user_id' => $this->user->id, 'qty' => 20]);
 
+        // generate assets and associate component
         $assets = factory(\App\Models\Asset::class, 'asset', 2)
                     ->create(['user_id' => $this->user->id])
                     ->each(function ($asset) use ($component) {
@@ -34,12 +35,14 @@ class ApiComponentsAssetsCest
                         ]);
                     });
 
+        // verify
         $I->sendGET('/components/' . $component->id . '/assets/');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        $response = json_decode($I->grabResponse());
 
+        $response = json_decode($I->grabResponse());
         $I->assertEquals(2, $response->total);
+
         $I->assertInstanceOf(\Illuminate\Database\Eloquent\Collection::class, $assets);
 
         $I->seeResponseContainsJson(['rows' => [
@@ -55,5 +58,23 @@ class ApiComponentsAssetsCest
                 ],
             ]
         ]);
+    }
+
+    /** @test */
+    public function expectEmptyResponseWithoutAssociatedAssets(ApiTester $I, $scenario)
+    {
+        $I->wantTo('See an empty response when there are no associated assets to a component');
+
+        $component = factory(\App\Models\Component::class, 'component')
+                    ->create(['user_id' => $this->user->id, 'qty' => 20]);
+
+        $I->sendGET('/components/' . $component->id . '/assets');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+
+        $response = json_decode($I->grabResponse());
+        $I->assertEquals(0, $response->total);
+        $I->assertEquals([], $response->rows);
+        $I->seeResponseContainsJson(['total' => 0, 'rows' => []]);
     }
 }
