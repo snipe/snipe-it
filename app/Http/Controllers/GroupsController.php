@@ -72,7 +72,7 @@ class GroupsController extends Controller
         if ($group->save()) {
             return redirect()->route("groups.index")->with('success', trans('admin/groups/message.success.create'));
         }
-        return redirect()->back()->withInput()->withErrors($group->getErrors());
+        return redirect(route('groups.create'))->withInput()->withErrors($group->getErrors());
     }
 
     /**

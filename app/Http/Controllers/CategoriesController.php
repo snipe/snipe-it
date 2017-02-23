@@ -173,7 +173,7 @@ class CategoriesController extends Controller
 
         $category->delete();
         // Redirect to the locations management page
-        return redirect()->to('admin/settings/categories')->with('success', trans('admin/categories/message.delete.success'));
+        return redirect()->to(route('categories.index'))->with('success', trans('admin/categories/message.delete.success'));
     }
 
 

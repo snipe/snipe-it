@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 use \Illuminate\Support\Facades\Auth;
+=======
+use Illuminate\Support\Facades\Auth;
+>>>>>>> snipe/develop
 
 class ApiComponentsCest
 {

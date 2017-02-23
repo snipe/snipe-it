@@ -208,21 +208,21 @@ class LocationsController extends Controller
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
             // Redirect to the blogs management page
-            return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.not_found'));
+            return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.not_found'));
         }
 
 
         if ($location->users->count() > 0) {
-            return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_users'));
+            return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
         } elseif ($location->childLocations->count() > 0) {
-            return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_child_loc'));
+            return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_child_loc'));
         } elseif ($location->assets->count() > 0) {
-            return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_assets'));
+            return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
         } elseif ($location->assignedassets->count() > 0) {
-            return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_assets'));
+            return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
         } else {
             $location->delete();
-            return redirect()->to('admin/settings/locations')->with('success', trans('admin/locations/message.delete.success'));
+            return redirect()->to(route('locations.index'))->with('success', trans('admin/locations/message.delete.success'));
         }
     }
 

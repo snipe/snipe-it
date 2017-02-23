@@ -327,46 +327,13 @@
                        <b class="caret"></b>
                    </a>
                    <ul class="dropdown-menu">
-                       <li {!! (Request::is('settings/companies*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('companies.index') }}">
-                               <i class="fa fa-building-o fa-fw"></i> @lang('general.companies')
-                           </a>
-                       </li>
-                       <li {!! (Request::is('models*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('models.index') }}">
-                               <i class="fa fa-th fa-fw"></i> @lang('general.asset_models')
-                           </a>
-                       </li>
-                       <li {!! (Request::is('categories*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('categories.index') }}">
-                               <i class="fa fa-check fa-fw"></i> @lang('general.categories')
-                           </a>
-                       </li>
-                       <li {!! (Request::is('manufacturers*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('manufacturers.index') }}">
-                               <i class="fa fa-briefcase fa-fw"></i> @lang('general.manufacturers')
-                           </a>
-                       </li>
-                       <li {!! (Request::is('suppliers*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('suppliers.index') }}">
-                               <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
-                           </a>
-                       </li>
+
                        <li {!! (Request::is('statuslabels*') ? ' class="active"' : '') !!}>
                            <a href="{{ route('statuslabels.index') }}">
                                <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
                            </a>
                        </li>
-                       <li {!! (Request::is('depreciations*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('depreciations.index') }}">
-                               <i class="fa fa-arrow-down fa-fw"></i> @lang('general.depreciation')
-                           </a>
-                       </li>
-                       <li {!! (Request::is('locations*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('locations.index') }}">
-                               <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
-                           </a>
-                       </li>
+
                        <li {!! (Request::is('groups*') ? ' class="active"' : '') !!}>
                            <a href="{{ route('groups.index') }}">
                                <i class="fa fa-group fa-fw"></i> @lang('general.groups')
@@ -544,6 +511,46 @@
                 </ul>
             </li>
             @endcan
+
+            @can('manage', \App\Models\Setting::class)
+                <li{!! (Request::is('hardware/import*') ? ' class="active"' : '') !!}>
+                    <a href="#">
+                        <i class="fa fa-gear"></i>
+                        <span>@lang('general.settings')</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+
+                    <ul class="treeview-menu">
+                        @can('view', \App\Models\Company::class)
+                        <li><a href="{{ route('companies.index') }}" {{ (Request::is('/companies') ? ' class="active"' : '') }} >@lang('general.companies')</a></li>
+                        @endcan
+
+                        @can('view', \App\Models\Manufacturer::class)
+                            <li><a href="{{ route('manufacturers.index') }}" {{ (Request::is('/manufacturers') ? ' class="active"' : '') }} >@lang('general.manufacturers')</a></li>
+                        @endcan
+
+                        @can('view', \App\Models\Category::class)
+                            <li><a href="{{ route('categories.index') }}" {{ (Request::is('/categories') ? ' class="active"' : '') }} >@lang('general.categories')</a></li>
+                        @endcan
+
+                        @can('view', \App\Models\AssetModel::class)
+                            <li><a href="{{ route('models.index') }}" {{ (Request::is('/assetmodels') ? ' class="active"' : '') }} >@lang('general.asset_models')</a></li>
+                        @endcan
+
+                        @can('view', \App\Models\Depreciation::class)
+                            <li><a href="{{ route('depreciations.index') }}" {{ (Request::is('/depreciations') ? ' class="active"' : '') }} >@lang('general.depreciation')</a></li>
+                        @endcan
+
+                        @can('view', \App\Models\Location::class)
+                            <li><a href="{{ route('locations.index') }}" {{ (Request::is('/locations') ? ' class="active"' : '') }} >@lang('general.locations')</a></li>
+                        @endcan
+
+                    </ul>
+
+                </li>
+            @endcan
+
+
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
             <a href="{{ route('requestable-assets') }}">

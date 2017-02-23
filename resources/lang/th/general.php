@@ -158,6 +158,7 @@
     'status'    			=> 'สถานะ',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'ตัวแทนจำหน่าย',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'total_assets'			=> 'ทรัพย์สินทั้งหมด',

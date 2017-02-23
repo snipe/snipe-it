@@ -158,6 +158,7 @@
     'status'    			=> 'Status',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Leverandører',
+    'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Send',
     'target'                => 'Target',
     'total_assets'			=> 'eiendeler totalt',
