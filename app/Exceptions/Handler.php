@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -40,7 +41,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
@@ -59,6 +60,10 @@ class Handler extends ExceptionHandler
             if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
                 $className = last(explode('\\', $e->getModel()));
                 return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
+            }
+
+            if ($e instanceof \Illuminate\Validation\ValidationException) {
+                return response()->json(Helper::formatStandardApiResponse('error', $e->response['messages'], $e->getMessage(), 400));
             }
 
             if ($this->isHttpException($e)) {

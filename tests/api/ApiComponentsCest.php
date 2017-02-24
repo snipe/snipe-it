@@ -21,7 +21,7 @@ class ApiComponentsCest
         $I->wantTo('Get a list of components');
 
         // setup
-        $components = factory(\App\Models\Component::class, 'component', 10)->create(['user_id' => $this->user->id]);
+        $components = factory(\App\Models\Component::class, 'component', 10)->create();
 
         // call
         $I->sendGET('/components');
@@ -33,6 +33,10 @@ class ApiComponentsCest
         $I->seeResponseContainsJson([
             'name' => $component->name,
             'qty' => $component->qty,
+        ]);
+
+        $I->seeResponseContainsJson([
+            'total' => \App\Models\Component::count(),
         ]);
     }
 
@@ -74,19 +78,19 @@ class ApiComponentsCest
             'id' => $id,
             'category' => [
                 'id' => $data['category_id'],
-                'name' => $category->name,
+                'name' => e($category->name),
             ],
             'company' => [
                 'id' => $data['company_id'],
-                'name' => $company->name,
+                'name' => e($company->name),
             ],
             'location' => [
                 'id' => $data['location_id'],
-                'name' => $location->name,
+                'name' => e($location->name),
             ],
             'name' => $data['name'],
             'qty' => $data['qty'],
-            'purchase_cost' => $data['purchase_cost'],
+            'purchase_cost' => \App\Helpers\Helper::formatCurrencyOutput($data['purchase_cost']),
             'purchase_date' => $data['purchase_date'],
         ]);
     }
@@ -161,7 +165,7 @@ class ApiComponentsCest
     }
 
     /** @test */
-    public function deleteComponentTest(ApiTester $I)
+    public function deleteComponentTest(ApiTester $I, $scenario)
     {
         $I->wantTo('Delete a component');
 
@@ -178,5 +182,6 @@ class ApiComponentsCest
         $I->sendGET('/components/' . $component->id);
         $I->seeResponseCodeIs(404);
         // $I->seeResponseIsJson(); // @todo: response is not JSON
+        $scenario->incomplete('404 response should be JSON, receiving HTML instead');
     }
 }

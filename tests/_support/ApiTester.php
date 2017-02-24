@@ -24,23 +24,23 @@ class ApiTester extends \Codeception\Actor
     * Define custom actions here
     */
 
-   public function getToken(\App\Models\User $user)
-   {
-       $client_repository = new \Laravel\Passport\ClientRepository();
-       $client = $client_repository->createPersonalAccessClient($user->id, 'Codeception API Test Client',
+    public function getToken(\App\Models\User $user)
+    {
+        $client_repository = new \Laravel\Passport\ClientRepository();
+        $client = $client_repository->createPersonalAccessClient($user->id, 'Codeception API Test Client',
            'http://localhost/');
 
-       \Illuminate\Support\Facades\DB::table('oauth_personal_access_clients')->insert([
+        \Illuminate\Support\Facades\DB::table('oauth_personal_access_clients')->insert([
            'client_id' => $client->id,
            'created_at' => new DateTime,
            'updated_at' => new DateTime,
-       ]);
+        ]);
 
-       $user->permissions = json_encode(['superuser' => true]);
-       $user->save();
+        $user->permissions = json_encode(['superuser' => true]);
+        $user->save();
 
-       $token = $user->createToken('CodeceptionAPItestToken')->accessToken;
+        $token = $user->createToken('CodeceptionAPItestToken')->accessToken;
 
-       return $token;
-   }
+        return $token;
+    }
 }
