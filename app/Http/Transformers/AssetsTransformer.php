@@ -40,7 +40,7 @@ class AssetsTransformer
             'location' => ($asset->assetLoc) ? ['id' => $asset->assetLoc->id,'name'=> e($asset->assetLoc->name)]  : null,
             'rtd_location' => ($asset->defaultLoc) ? ['id' => $asset->defaultLoc->id,'name'=> e($asset->defaultLoc->name)]  : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
-            'assigned_to' => ($asset->assigneduser) ? ['id' => $asset->assigneduser->id,'first_name'=> e( $asset->assigneduser->first_name), 'last_name'=> e( $asset->assigneduser->last_name)]  : null,
+            'assigned_to' => ($asset->assigneduser) ? ['id' => $asset->assigneduser->id, 'name' => $asset->assigneduser->getFullNameAttribute(), 'first_name'=> e( $asset->assigneduser->first_name), 'last_name'=> e( $asset->assigneduser->last_name)]  : null,
             'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months).' '.trans('admin/hardware/form.months') : null,
             'warranty_expires' => ($asset->warranty_months > 0) ?  $asset->present()->warrantee_expires() : null,
             'created_at' => $asset->created_at->format('Y-m-d H:i:s'),
