@@ -67,6 +67,7 @@ class AssetsController extends Controller
             'image',
             'assigned_to',
             'created_at',
+            'updated_at',
             'purchase_date',
             'purchase_cost'
         ];
