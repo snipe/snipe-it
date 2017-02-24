@@ -194,8 +194,6 @@ class AssetsController extends Controller
 
         if ($asset = Asset::withTrashed()->find($id)) {
             $this->authorize('view', $asset);
-
-            $asset = $asset->present()->detail();
             return (new AssetsTransformer)->transformAsset($asset);
 
         }
