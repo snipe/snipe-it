@@ -399,7 +399,7 @@
             @can('admin')
             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard"></i> <span>@lang('general.dashboard')</span>
               </a>
             </li>
             @endcan
