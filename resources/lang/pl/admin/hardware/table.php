@@ -3,22 +3,22 @@
 return array(
 
     'asset_tag'   	=> 'Kod',
-    'asset_model'       => 'Model',
+    'asset_model'   => 'Model',
     'book_value'  	=> 'Treść',
-    'change' 		=> 'In/Out',
+    'change' 		=> 'Zmień',
     'checkout_date' => 'Data przypisania',
-    'checkoutto' 	=> 'Data wypisania',
+    'checkoutto' 	=> 'Wydano dla',
     'diff' 			=> 'Różnica',
     'dl_csv' 		=> 'Pobierz CSV',
     'eol' 			=> 'Koniec licencji',
     'id'      		=> 'ID',
     'location' 		=> 'Lokalizacja',
-    'purchase_cost'	=> 'Koszt',
-    'purchase_date'	=> 'Zakup',
-    'serial'   		=> 'Nr. seryjny',
+    'purchase_cost'	=> 'Koszt zakupu',
+    'purchase_date'	=> 'Data zakup',
+    'serial'   		=> 'Nr seryjny',
     'status'   		=> 'Status',
     'title'      	=> 'Nabytek',
-    'image'		=> 'Zdjęcie urządzenia',
+    'image'		=> 'Zdjęcie',
     'days_without_acceptance' => 'Dni bez akceptacji'
 
 );
