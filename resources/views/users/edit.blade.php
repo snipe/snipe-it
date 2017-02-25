@@ -79,8 +79,8 @@
   <!-- Custom Tabs -->
 <div class="nav-tabs-custom">
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab_1" data-toggle="tab">Information</a></li>
-    <li><a href="#tab_2" data-toggle="tab">Permissions</a></li>
+    <li class="active"><a href="#tab_1" data-toggle="tab">{{ trans('general.information') }}</a></li>
+    <li><a href="#tab_2" data-toggle="tab">{{ trans('general.permissions') }}</a></li>
   </ul>
 
   <div class="tab-content">
@@ -434,10 +434,10 @@
         <table class="table table-striped permissions">
           <thead>
             <tr class="permissions-row">
-              <th class="col-md-5"><span class="line"></span>Permission</th>
-              <th class="col-md-1"><span class="line"></span>Grant</th>
-              <th class="col-md-1"><span class="line"></span>Deny</th>
-              <th class="col-md-1"><span class="line"></span>Inherit</th>
+              <th class="col-md-5"><span class="line"></span>{{ trans('admin/users/table.permission') }}</th>
+              <th class="col-md-1"><span class="line"></span>{{ trans('admin/users/table.grant') }}</th>
+              <th class="col-md-1"><span class="line"></span>{{ trans('admin/users/table.deny') }}</th>
+              <th class="col-md-1"><span class="line"></span>{{ trans('admin/users/table.inherit') }}</th>
             </tr>
           </thead>
             @foreach ($permissions as $area => $permissionsArray)
