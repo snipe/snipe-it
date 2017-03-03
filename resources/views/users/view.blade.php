@@ -19,7 +19,7 @@
             <span class="hidden-lg hidden-md">
             <i class="fa fa-info-circle"></i>
             </span>
-            <span class="hidden-xs hidden-sm">Info</span>
+            <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
         </li>
 
@@ -97,9 +97,9 @@
               <div class="col-md-12">
                 <div class="callout callout-warning">
                   <i class="icon fa fa-warning"></i>
-                  This user has been marked as deleted.
+                  {{ trans('general.user_deleted_text') }}
                   @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">Click here</a> to restore them.
+                      <a href="{{ route('restore/user', $user->id) }}">{{ trans('general.click_here') }}</a> {{ trans('general.to_restore_them') }}
                   @endcan
                 </div>
               </div>
@@ -117,53 +117,53 @@
                 <table class="table table-striped">
                   @if (!is_null($user->company))
                     <tr>
-                        <td>Company</td>
+                        <td>{{ trans('general.company') }}</td>
                         <td>{{ $user->company->name }}</td>
                     </tr>
                   @endif
 
                   <tr>
-                    <td>Name</td>
+                    <td>{{ trans('admin/users/table.name') }}</td>
                     <td>{{ $user->present()->fullName() }}</td>
                   </tr>
                   @if ($user->jobtitle)
                   <tr>
-                    <td>Title</td>
+                    <td>{{ trans('admin/users/table.job') }}</td>
                     <td>{{ $user->jobtitle }}</td>
                   </tr>
                   @endif
 
                   @if ($user->employee_num)
                   <tr>
-                    <td>Employee No.</td>
+                    <td>{{ trans('admin/users/table.employee_num') }}</td>
                     <td>{{ $user->employee_num }}</td>
                   </tr>
                   @endif
 
                   @if ($user->manager)
                   <tr>
-                    <td>Manager</td>
+                    <td>{{ trans('admin/users/table.manager') }}</td>
                     <td>{{$user->manager->present()->nameUrl() }}</td>
                   </tr>
                   @endif
 
                   @if ($user->email)
                   <tr>
-                    <td>Email</td>
+                    <td>{{ trans('admin/users/table.email') }}</td>
                     <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
                   </tr>
                   @endif
 
                   @if ($user->phone)
                   <tr>
-                    <td>Phone</td>
+                    <td>{{ trans('admin/users/table.phone') }}</td>
                     <td>{{ $user->phone }}</td>
                   </tr>
                   @endif
 
                   @if ($user->userloc)
                   <tr>
-                    <td>Location</td>
+                    <td>{{ trans('admin/users/table.location') }}</td>
                     <td>{{ $user->userloc->name }}</td>
                   </tr>
                   @endif
@@ -243,7 +243,7 @@
                   <td>{!! $asset->present()->nameUrl() !!}</td>
                   <td class="hidden-print">
                     @can('checkin', $asset)
-                      <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">Checkin</a>
+                      <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                     @endcan
                   </td>
                 </tr>
@@ -274,7 +274,7 @@
                   </td>
                   <td class="hidden-print">
                     @can('update', $license)
-                      <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">Checkin</a>
+                      <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                      @endcan
                   </td>
                 </tr>
@@ -289,8 +289,8 @@
             <table class="display table table-hover">
               <thead>
                 <tr>
-                  <th class="col-md-5">Name</th>
-                  <th class="col-md-1 hidden-print">Actions</th>
+                  <th class="col-md-5">{{ trans('general.name') }}</th>
+                  <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -299,7 +299,7 @@
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
-                        <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">Checkin</a>
+                        <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                       @endcan
                     </td>
                   </tr>
@@ -340,7 +340,7 @@
               @can('update', $user)
               <span class="btn btn-info fileinput-button hidden-print">
                 <i class="fa fa-plus icon-white"></i>
-                <span>Select File...</span>
+                <span>{{ trans('button.select_file') }}</span>
                 <!-- The file input field used as target for the file upload widget -->
                 <input id="fileupload" type="file" name="file[]" data-url="{{ route('upload/user', $user->id) }}">
               </span>
@@ -354,7 +354,7 @@
               <div class="col-md-11">
                 <div id="progress" class="progress progress-striped active" style="margin-top: 8px;">
                   <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                      <span id="progress-bar-text">0% Complete</span>
+                      <span id="progress-bar-text">0% {{ trans('general.complete') }}</span>
                   </div>
                 </div>
               </div>
@@ -391,7 +391,7 @@
                       </td>
                       <td>
                         @if ($file->filename)
-                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">Download</a>
+                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">{{ trans('general.download') }}</a>
                         @endif
                       </td>
                       <td>
@@ -414,7 +414,7 @@
               <thead>
                 <tr>
                   <th class="col-md-1"></th>
-                  <th class="col-md-2">Date</th>
+                  <th class="col-md-2">{{ trans('general.date') }}</th>
                   <th class="col-md-2"><span class="line"></span>{{ trans('table.action') }}</th>
                   <th class="col-md-4"><span class="line"></span>{{ trans('general.asset') }}</th>
                   <th class="col-md-3"><span class="line"></span>{{ trans('table.by') }}</th>
