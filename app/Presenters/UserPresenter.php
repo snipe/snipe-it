@@ -177,6 +177,15 @@ class UserPresenter extends Presenter
                 'formatter' => 'dateDisplayFormatter'
             ],
             [
+                "field" => "last_login",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.last_login'),
+                "visible" => false,
+                'formatter' => 'dateDisplayFormatter'
+            ],
+            [
                 "field" => "actions",
                 "searchable" => false,
                 "sortable" => false,

@@ -43,6 +43,7 @@ class UsersTransformer
                 'company' => ($user->company) ? ['id' => $user->company->id,'name'=> e($user->company->name)] : null,
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
+                'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
             ];
 
         $permissions_array['available_actions'] = [

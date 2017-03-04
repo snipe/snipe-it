@@ -88,6 +88,7 @@
     'insufficient_permissions' => 'Insufficient permissions!',
     'language'				=> 'Language',
     'last'					=> 'Last',
+    'last_login'            => 'Last Login',
     'last_name'             => 'Last Name',
     'license'				=> 'License',
     'license_report'        => 'License Report',
