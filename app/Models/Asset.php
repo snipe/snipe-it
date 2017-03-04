@@ -40,6 +40,17 @@ class Asset extends Depreciable
   * @var boolean
   */
     protected $injectUniqueIdentifier = true;
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'purchase_date',
+        'last_checkout',
+        'expected_checkin'
+    ];
+
+
     use ValidatingTrait, UniqueUndeletedTrait;
 
     protected $rules = [
