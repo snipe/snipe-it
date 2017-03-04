@@ -24,11 +24,6 @@ class UserPresenter extends Presenter
         $layout = [
             [
                 "field" => "checkbox",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('admin/companies/table.title'),
-                "visible" => false,
                 "checkbox" => true
             ],
             [
