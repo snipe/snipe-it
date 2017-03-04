@@ -43,7 +43,7 @@
               <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('general.model_no') }}</th>
               <th data-sortable="true" data-field="item_no" data-visible="false">{{ trans('admin/consumables/general.item_no') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('general.order_number') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('general.purchase_date') }}</th>
+              <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false" data-formatter="dateDisplayFormatter">{{ trans('general.purchase_date') }}</th>
               <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('general.purchase_cost') }}</th>
               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"  data-formatter="consumablesActionsFormatter"> {{ trans('table.actions') }}</th>
 
