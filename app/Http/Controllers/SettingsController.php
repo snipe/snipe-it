@@ -306,7 +306,6 @@ class SettingsController extends Controller
 
         if (!config('app.lock_passwords')) {
             $setting->site_name = e(Input::get('site_name'));
-
             $setting->custom_css = e(Input::get('custom_css'));
 
             if (Input::get('two_factor_enabled')=='') {
@@ -341,8 +340,6 @@ class SettingsController extends Controller
         $setting->email_format = e(Input::get('email_format'));
         $setting->username_format = e(Input::get('username_format'));
         $setting->require_accept_signature = e(Input::get('require_accept_signature'));
-
-
         $setting->labels_per_page = e(Input::get('labels_per_page'));
         $setting->labels_width = e(Input::get('labels_width'));
         $setting->labels_height = e(Input::get('labels_height'));
@@ -406,6 +403,9 @@ class SettingsController extends Controller
         $setting->is_ad = e(Input::get('is_ad', '0'));
         $setting->ldap_tls = e(Input::get('ldap_tls', '0'));
         $setting->ldap_pw_sync = e(Input::get('ldap_pw_sync', '0'));
+
+        $setting->date_display_format = e(Input::get('date_display_format'));
+        $setting->time_display_format = e(Input::get('time_display_format'));
 
 
         if ($request->input('clear_logo')=='1') {

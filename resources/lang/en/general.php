@@ -162,6 +162,7 @@
     'sure_to_delete'    => 'Are you sure you wish to delete',
     'submit'				=> 'Submit',
     'target'                => 'Target',
+    'time_and_date_display' => 'Time and Date Display',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
     'total_accessories'		=> 'total accessories',

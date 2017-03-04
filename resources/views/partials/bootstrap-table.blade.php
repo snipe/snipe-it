@@ -203,6 +203,12 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function dateDisplayFormatter(value, row) {
+        if (value) {
+            return  value.formatted;
+        }
+    }
+
 
     function emailFormatter(value, row) {
         if (value) {

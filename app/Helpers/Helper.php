@@ -17,6 +17,7 @@ use App\Models\Component;
 use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\Asset;
+use App\Models\Setting;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
@@ -678,5 +679,32 @@ class Helper
     public static function make_slug($string) {
         return preg_replace('/\s+/u', '_', trim($string));
     }
+
+
+    public static function getFormattedDateObject($date, $type = 'datetime', $array = true) {
+
+        if ($date=='') {
+            return null;
+        }
+
+        $settings = Setting::getSettings();
+        $tmp_date = new \Carbon($date);
+
+        if ($type == 'datetime') {
+            $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
+            $dt['formatted'] = $tmp_date->format($settings->date_display_format .' '. $settings->time_display_format);
+        } else {
+            $dt['date'] = $tmp_date->format('Y-m-d');
+            $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+        }
+
+        if ($array === 'true') {
+            return $dt;
+        }
+        return $dt['formatted'];
+
+    }
+
+
 
 }

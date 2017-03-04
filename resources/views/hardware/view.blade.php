@@ -75,7 +75,6 @@
                         </span>
                         @endif
                         {{ $asset->present()->statusText() }}
-
                         ({{ $asset->assetstatus->getStatuslabelType() }})
                       </td>
                     </tr>
@@ -174,7 +173,7 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.date') }}</td>
                         <td>
-                          {{ date('M d, Y',strtotime($asset->purchase_date)) }}
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
                         </td>
                       </tr>
                     @endif
@@ -284,7 +283,7 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.expected_checkin') }}</td>
                         <td>
-                          {{ $asset->expected_checkin }}
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                         </td>
                       </tr>
                     @endif
@@ -293,14 +292,6 @@
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
                       <td> {!! nl2br(e($asset->notes)) !!}</td>
                     </tr>
-                    @if ($asset->created_at!='')
-                      <tr>
-                        <td>{{ trans('general.created_at') }}</td>
-                        <td>
-                          {{ $asset->created_at->format('F j, Y h:iA') }}
-                        </td>
-                      </tr>
-                    @endif
 
                     @if ($asset->assetloc)
                       <tr>
@@ -328,6 +319,24 @@
                           @else
                             {{ $asset->defaultLoc->name }}
                           @endcan
+                        </td>
+                      </tr>
+                    @endif
+
+                    @if ($asset->created_at!='')
+                      <tr>
+                        <td>{{ trans('general.created_at') }}</td>
+                        <td>
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->created_at, 'datetime', false) }}
+                        </td>
+                      </tr>
+                    @endif
+
+                    @if ($asset->updated_at!='')
+                      <tr>
+                        <td>{{ trans('general.updated_at') }}</td>
+                        <td>
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->updated_at, 'datetime', false) }}
                         </td>
                       </tr>
                     @endif

@@ -127,6 +127,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.purchase_date'),
+                "formatter" => "dateDisplayFormatter"
             ], [
                 "field" => "purchase_cost",
                 "searchable" => true,
@@ -151,13 +152,29 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.created_at'),
+                "formatter" => "dateDisplayFormatter"
             ], [
                 "field" => "updated_at",
                 "searchable" => false,
                 "sortable" => true,
                 "visible" => false,
-                "title" => trans('general.updated_at')
-            ]
+                "title" => trans('general.updated_at'),
+                "formatter" => "dateDisplayFormatter"
+            ], [
+                "field" => "last_checkout",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/hardware/table.checkout_date'),
+                "formatter" => "dateDisplayFormatter"
+            ], [
+                "field" => "expected_checkin",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/hardware/form.expected_checkin'),
+                "formatter" => "dateDisplayFormatter"
+            ],
         ];
 
         $fields =  CustomField::all();

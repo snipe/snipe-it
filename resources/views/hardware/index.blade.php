@@ -95,7 +95,6 @@
 @include ('partials.bootstrap-table', [
     'exportFile' => 'assets-export',
     'search' => true,
-    'multiSort' => true,
     'columns' => \App\Presenters\AssetPresenter::dataTableLayout()
 ])
 
