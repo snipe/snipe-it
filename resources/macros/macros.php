@@ -372,8 +372,8 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
 Form::macro('time_display_format', function ($name = "time_display_format", $selected = null, $class = null) {
 
     $formats = [
-        'g:i A',
-        'h:i A',
+        'g:iA',
+        'h:iA',
         'H:i',
     ];
 
