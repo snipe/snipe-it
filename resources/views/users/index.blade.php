@@ -49,7 +49,7 @@
               @can('delete', \App\Models\User::class)
                 <div id="toolbar">
                   <select name="bulk_actions" class="form-control select2" style="width: 200px;">
-                    <option value="delete">Bulk Checkin &amp;amp; Delete</option>
+                    <option value="delete">Bulk Checkin &amp; Delete</option>
                   </select>
                   <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
                 </div>
