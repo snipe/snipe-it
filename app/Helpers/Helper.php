@@ -698,7 +698,7 @@ class Helper
             $dt['formatted'] = $tmp_date->format($settings->date_display_format);
         }
 
-        if ($array === 'true') {
+        if ($array == 'true') {
             return $dt;
         }
         return $dt['formatted'];
