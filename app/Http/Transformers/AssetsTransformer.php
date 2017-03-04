@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Http\Transformers\UsersTransformer;
 use Gate;
 use App\Helpers\Helper;
-use App\Models\Setting;
 
 
 class AssetsTransformer
@@ -24,7 +23,7 @@ class AssetsTransformer
 
     public function transformAsset (Asset $asset)
     {
-        $settings = Setting::getSettings();
+
         $array = [
             'id' => $asset->id,
             'name' => e($asset->name),

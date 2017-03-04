@@ -28,12 +28,11 @@ class UserPresenter extends Presenter
             ],
             [
                 "field" => "id",
-                "searchable" => true,
+                "searchable" => false,
                 "sortable" => true,
-                "switchable" => false,
+                "switchable" => true,
                 "title" => trans('general.id'),
-                "visible" => false,
-                "formatter" => null
+                "visible" => false
             ],
             [
                 "field" => "company",
@@ -175,7 +174,7 @@ class UserPresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('general.created_at'),
                 "visible" => false,
-                'formatter' => 'createdAtFormatter'
+                'formatter' => 'dateDisplayFormatter'
             ],
             [
                 "field" => "actions",

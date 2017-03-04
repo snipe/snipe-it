@@ -38,7 +38,7 @@ class ComponentsTransformer
                     'name' => e($component->category->name)
                 ] : null,
             'order_number'  => e($component->order_number),
-            'purchase_date' => $component->purchase_date,
+            'purchase_date' =>  Helper::getFormattedDateObject($component->purchase_date, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($component->purchase_cost),
             'remaining'  => $component->numRemaining(),
             'company'   => ($component->company) ?
@@ -46,6 +46,8 @@ class ComponentsTransformer
                     'id' => $component->company->id,
                     'name' => e($component->company->name)
                 ] : null,
+            'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
 
         ];
 

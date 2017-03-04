@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\Accessory;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
+use App\Helpers\Helper;
 
 class AccessoriesTransformer
 {
@@ -34,6 +35,8 @@ class AccessoriesTransformer
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? e($accessory->min_amt) : null,
             'remaining_qty' => $accessory->numRemaining(),
+            'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
 
         ];
 

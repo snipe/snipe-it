@@ -28,11 +28,11 @@ class LicensesTransformer
             'product_key' => e($license->serial),
             'order_number' => e($license->order_number),
             'purchase_order' => e($license->purchase_order),
-            'purchase_date' => e($license->purchase_date),
+            'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
             'purchase_cost' => e($license->purchase_cost),
             'depreciation' => ($license->depreciation) ? ['id' => $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
             'notes' => e($license->notes),
-            'expiration_date' => e($license->expiration_date),
+            'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'total_seats' => e($license->seats),
             'remaining_qty' => $license->remaincount(),
             'min_qty' => $license->remaincount(),
@@ -40,7 +40,8 @@ class LicensesTransformer
             'license_email' => e($license->license_email),
             'maintained' => ($license->maintained == 1) ? true : false,
             'supplier' =>  ($license->supplier) ? ['id' => $license->supplier->id,'name'=> e($license->supplier->name)] : null,
-            'created_at' => $license->created_at,
+            'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
         ];
 
         $permissions_array['available_actions'] = [
