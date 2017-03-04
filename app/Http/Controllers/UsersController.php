@@ -1078,6 +1078,7 @@ class UsersController extends Controller
      */
     public function getExportUserCsv()
     {
+
         $this->authorize('view', User::class);
         \Debugbar::disable();
 
@@ -1085,7 +1086,7 @@ class UsersController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            User::with('assignedAssets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
+            User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
                 $headers=[
                     // strtolower to prevent Excel from trying to open it as a SYLK file
                     strtolower(trans('general.id')),
