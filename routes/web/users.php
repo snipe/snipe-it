@@ -12,6 +12,7 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth']], function ()
     Route::post('{userId}/clone', [ 'uses' => 'UsersController@postCreate' ]);
     Route::get('{userId}/restore', [ 'as' => 'restore/user', 'uses' => 'UsersController@getRestore' ]);
     Route::get('{userId}/unsuspend', [ 'as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend' ]);
+    Route::post('{userId}/upload', [ 'as' => 'upload/user', 'uses' => 'UsersController@postUpload' ]);
     Route::get(
         '{userId}/deletefile/{fileId}',
         [ 'as' => 'delete/userfile', 'uses' => 'UsersController@getDeleteFile' ]
