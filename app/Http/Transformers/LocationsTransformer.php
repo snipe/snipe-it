@@ -39,8 +39,8 @@ class LocationsTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => Gate::allows('admin') ? true : false,
-                'delete' => Gate::allows('admin') ? true : false,
+                'update' => Gate::allows('update', Location::class) ? true : false,
+                'delete' => Gate::allows('delete', Location::class) ? true : false,
             ];
 
             $array += $permissions_array;

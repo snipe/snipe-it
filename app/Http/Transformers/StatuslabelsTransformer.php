@@ -32,8 +32,8 @@ class StatuslabelsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'edit' => Gate::allows('admin') ? true : false,
-            'delete' => Gate::allows('admin') ? true : false,
+            'update' => Gate::allows('update', Statuslabel::class) ? true : false,
+            'delete' => Gate::allows('delete', Statuslabel::class) ? true : false,
         ];
         $array += $permissions_array;
 
