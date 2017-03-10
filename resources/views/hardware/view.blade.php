@@ -234,8 +234,10 @@
                           {{ $asset->warranty_months }}
                           {{ trans('admin/hardware/form.months') }}
 
-                          ({{ trans('admin/hardware/form.expires') }}
-                          {{ $asset->warrantee_expires() }})
+                          (
+						  {{ trans('admin/hardware/form.expires') }}:
+                          {{ $asset->warrantee_expires() }}
+						  )
                         </td>
                       </tr>
                     @endif
@@ -287,6 +289,7 @@
                             {{ trans('general.months') }}
                             )
                           @endif
+						  )
                             
                         </td>
                       </tr>

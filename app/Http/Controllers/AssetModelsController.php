@@ -554,6 +554,9 @@ class AssetModelsController extends Controller
 					'assigned_to'   => ($asset->assigned_to) ? (string)link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
 					'actions'       => $actions,
 					'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
+					'warranty_months'     => ($asset->warranty_months) ? $asset->warranty_months . ' ' . trans('admin/hardware/form.months') : '',
+					'warrantee_expires'   => ($asset->warrantee_expires()) ? $asset->warrantee_expires() : '',
+					'purchase_date'       => ($asset->purchase_date) ? $asset->purchase_date : '',
 					'companyName'   => Company::getName($asset)
 				);
 			}

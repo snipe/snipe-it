@@ -48,6 +48,10 @@
                       <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
                       <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
 					  <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
+					  <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
+					  <th data-sortable="true" data-field="warranty_months" data-searchable="true">{{ trans('admin/hardware/form.warranty') }}</th>
+					  <th data-sortable="true" data-field="warrantee_expires" data-searchable="true">{{ trans('admin/hardware/form.expires') }}</th>
+					  <th data-sortable="true" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
                       <th data-searchable="false" data-sortable="false" data-field="assigned_to">{{ trans('general.user') }}</th>
                       <th data-searchable="false" data-sortable="false" data-field="change"  data-switchable="false">{{ trans('admin/hardware/table.change') }}</th>
                       @endif

@@ -89,7 +89,9 @@
                             <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
                             <th data-sortable="true" data-field="purchase_cost" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.cost') }}</th>
                             <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
-                            <th data-sortable="false" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
+							<th data-sortable="true" data-field="warranty_months" data-searchable="true">{{ trans('admin/hardware/form.warranty') }}</th>
+							<th data-sortable="true" data-field="warrantee_expires" data-searchable="true">{{ trans('admin/hardware/form.expires') }}</th>
+                            <th data-sortable="true" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
                             <th data-sortable="true" data-searchable="true" data-field="notes">{{ trans('general.notes') }}</th>
                             <th data-sortable="true" data-searchable="true"  data-field="order_number">{{ trans('admin/hardware/form.order') }}</th>
                             <th data-sortable="true" data-searchable="true" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>

@@ -363,7 +363,13 @@ class CategoriesController extends Controller
                 'change' => $inout,
                 'actions' => $actions,
 				'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
-                'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
+				
+				'eol'                 => ($asset->eol_date()) ? $asset->eol_date() : '',
+				'warranty_months'     => ($asset->warranty_months) ? $asset->warranty_months . ' ' . trans('admin/hardware/form.months') : '',
+				'warrantee_expires'   => ($asset->warrantee_expires()) ? $asset->warrantee_expires() : '',
+				'purchase_date'       => ($asset->purchase_date) ? $asset->purchase_date : '',
+				
+				'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
         }
 

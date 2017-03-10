@@ -67,6 +67,10 @@
 				  <th data-sortable="true" data-field="manufacturer" data-visible="false">{{ trans('general.manufacturer') }}</th>
 				  <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('general.category') }}</th>
 				  <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
+				  <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
+				  <th data-sortable="true" data-field="warranty_months" data-searchable="true">{{ trans('admin/hardware/form.warranty') }}</th>
+				  <th data-sortable="true" data-field="warrantee_expires" data-searchable="true">{{ trans('admin/hardware/form.expires') }}</th>
+				  <th data-sortable="true" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
                   <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
 				  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{ trans('admin/hardware/table.change') }}</th>
 				  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
