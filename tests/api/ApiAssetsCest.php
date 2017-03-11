@@ -64,7 +64,7 @@ class ApiAssetsCest
             // TODO: created_at
             'purchase_date' =>  $asset->purchase_date->format('Y-m-d'),
             'purchase_cost' =>  \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost),
-            // TODO: can_checkout
+            // TODO: user_can_checkout
             // TODO: available actions
         ]);
     }
