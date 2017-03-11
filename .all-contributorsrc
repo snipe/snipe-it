@@ -39,7 +39,9 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/3803132?v=3",
       "profile": "https://github.com/dmeltzer",
       "contributions": [
-        "code"
+        "code",
+        "test",
+        "doc"
       ]
     },
     {
