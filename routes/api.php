@@ -177,14 +177,14 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'hardware'], function () {
 
-        Route::get('{asset_id}/checkout',
+        Route::post('{asset_id}/checkout',
             [
                 'as' => 'api.assets.checkout',
                 'uses' => 'AssetsController@checkout'
             ]
         );
 
-        Route::get('{asset_id}/checkin',
+        Route::post('{asset_id}/checkin',
             [
                 'as' => 'api.assets.checkin',
                 'uses' => 'AssetsController@checkin'
