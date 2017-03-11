@@ -49,7 +49,8 @@ class LicensePresenter extends Presenter
                 "field" => "expiration_date",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => trans('admin/licenses/form.expiration')
+                "title" => trans('admin/licenses/form.expiration'),
+                'formatter' => 'dateDisplayFormatter'
             ], [
                 "field" => "license_email",
                 "searchable" => true,
@@ -82,6 +83,7 @@ class LicensePresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.purchase_date'),
+                'formatter' => 'dateDisplayFormatter'
             ], [
                 "field" => "purchase_cost",
                 "searchable" => true,
