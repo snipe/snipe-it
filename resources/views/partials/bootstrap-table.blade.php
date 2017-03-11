@@ -20,6 +20,7 @@ $('.snipe-table').bootstrapTable({
         @endif
         pageSize: {{ $snipeSettings->per_page }},
         pagination: true,
+        paginationVAlign: 'both',
         sidePagination: 'server',
         sortable: true,
         cookie: true,
