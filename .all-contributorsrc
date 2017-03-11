@@ -519,6 +519,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "burlito",
+      "name": "Andrej Manduch",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2871745?v=3",
+      "profile": "https://github.com/burlito",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }
