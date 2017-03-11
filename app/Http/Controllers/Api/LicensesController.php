@@ -26,6 +26,19 @@ class LicensesController extends Controller
         if ($request->has('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
         }
+
+        if ($request->has('company_id')) {
+            $licenses->where('company_id','=',$request->input('company_id'));
+        }
+
+        if ($request->has('manufacturer_id')) {
+            $licenses->where('manufacturer_id','=',$request->input('manufacturer_id'));
+        }
+
+        if ($request->has('supplier_id')) {
+            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+        }
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 

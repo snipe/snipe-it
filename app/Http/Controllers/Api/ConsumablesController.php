@@ -32,11 +32,21 @@ class ConsumablesController extends Controller
             $consumables = $consumables->TextSearch(e($request->input('search')));
         }
 
+        if ($request->has('company_id')) {
+            $consumables->where('company_id','=',$request->input('company_id'));
+        }
+
+        if ($request->has('manufacturer_id')) {
+            $consumables->where('manufacturer_id','=',$request->input('manufacturer_id'));
+        }
+
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
         $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','company','category','model_number', 'item_no', 'manufacturer','location','qty'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+
 
         switch ($sort) {
             case 'category':
@@ -55,6 +65,8 @@ class ConsumablesController extends Controller
                 $consumables = $consumables->orderBy($sort, $order);
                 break;
         }
+
+
 
         $total = $consumables->count();
         $consumables = $consumables->skip($offset)->take($limit)->get();
