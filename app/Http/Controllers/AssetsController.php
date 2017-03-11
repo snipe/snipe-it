@@ -225,7 +225,7 @@ class AssetsController extends Controller
             } elseif(request('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
             }
-            if ($target) {
+            if (isset($target)) {
                 $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page
