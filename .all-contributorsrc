@@ -492,6 +492,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mrshu",
+      "name": "Marek Šuppa",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/461491?v=3",
+      "profile": "http://shu.io",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
