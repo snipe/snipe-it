@@ -90,7 +90,7 @@ class ComponentsController extends Controller
 		
 		//$statuslabel_types = Helper::statusTypeList();
         
-        return View::make('components/edit')
+        $view = View::make('components/edit')
             ->with('item', new Component)
 			->with('model_list', $model_list)
 			->with('manufacturer_list', $manufacturer_list)
@@ -104,6 +104,8 @@ class ComponentsController extends Controller
             $selected_model = AssetModel::find($model_id);
             $view->with('selected_model', $selected_model);
         }
+		
+		return $view;
     }
 
 
@@ -120,7 +122,6 @@ class ComponentsController extends Controller
         // create a new model instance
         $component = new Component();
 		$component->model()->associate(AssetModel::find(e(Input::get('model_id'))));
-		
 		$checkModel = config('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
 
         // Update the component data
@@ -137,27 +138,23 @@ class ComponentsController extends Controller
         $component->location_id            = e(Input::get('location_id'));
         $component->min_amt                = e(Input::get('min_amt'));
         
-
         // if (e(Input::get('status_id')) == '') {
             // $component->status_id =  null;
         // } else {
             // $component->status_id = e(Input::get('status_id'));
         // }
 
-		
         if (e(Input::get('warranty_months')) == '') {
             $component->warranty_months =  null;
         } else {
             $component->warranty_months        = e(Input::get('warranty_months'));
         }
 
-	
         if (e(Input::get('purchase_cost')) == '0.00') {
             $component->purchase_cost       =  null;
         } else {
             $component->purchase_cost       = Helper::ParseFloat(e(Input::get('purchase_cost')));
         }
-		
 		
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -171,36 +168,27 @@ class ComponentsController extends Controller
             $component->supplier_id        = e(Input::get('supplier_id'));
         }
 		
-		
         $component->qty                    = e(Input::get('qty'));
         $component->user_id                = Auth::user()->id;
 
-        // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
-        // FIXME: No idea why this is returning a Builder error on db_column_name.
-        // Need to investigate and fix. Using static method for now.
-        /*$model = AssetModel::find($request->get('model_id'));
-		
-        if ($model->fieldset) {
-            foreach ($model->fieldset->fields as $field) {
-                $component->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
-            }
-        }
-		*/
-		
-		/*
-        // Was the component created?
-        if ($component->save()) {
-            $component->logCreate();
-            // Redirect to the new component  page
-            return redirect()->to('admin/components')->with('success', trans('admin/components/message.create.success'));
-        }
+        //// Update custom fields in the database.
+        //// Validation for these fields is handlded through the AssetRequest form request
+        //// FIXME: No idea why this is returning a Builder error on db_column_name.
+        //// Need to investigate and fix. Using static method for now.
+        //$model = AssetModel::find($request->get('model_id'));
+		//if ($model->fieldset) {
+        //    foreach ($model->fieldset->fields as $field) {
+        //        $component->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
+        //    }
+        //}
+        //// Was the component created?
+        //if ($component->save()) {
+        //    $component->logCreate();
+        //    // Redirect to the new component  page
+        //    return redirect()->to('admin/components')->with('success', trans('admin/components/message.create.success'));
+        //}
+        //return redirect()->back()->withInput()->withErrors($component->getErrors());
 
-        return redirect()->back()->withInput()->withErrors($component->getErrors());
-		*/
-		
-
-            // Was the asset created?
         if ($component->save()) {
             $component->logCreate();
             //if (Input::get('assigned_to')!='') {
@@ -214,7 +202,6 @@ class ComponentsController extends Controller
         \Input::flash();
         \Session::flash('errors', $asset->getErrors());
         return response()->json(['errors' => $asset->getErrors()], 500);
-
     }
 
     /**
@@ -289,7 +276,6 @@ class ComponentsController extends Controller
             $component->warranty_months =  null;
         }
 
-
         if ($request->has('purchase_cost')) {
             $component->purchase_cost = Helper::ParseFloat(e($request->input('purchase_cost')));
         } else {
@@ -321,51 +307,44 @@ class ComponentsController extends Controller
             // unlink(public_path().'/uploads/components/'.$component->image);
             // $component->image = '';
         // }
-/*
+        //// Update the component data
+        //$component->name                   = e(Input::get('name'));
+		////$component->manufacturer_id        = e(Input::get('manufacturer_id'));
+		//$component->model_number            = e(Input::get('model_number'));
+        //$component->category_id            = e(Input::get('category_id'));
+        //$component->location_id            = e(Input::get('location_id'));
+        //$component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
+        //$component->order_number           = e(Input::get('order_number'));
+        //$component->min_amt                = e(Input::get('min_amt'));
+        //$component->serial                 = e(Input::get('serial'));
+		//$component->qty                    = e(Input::get('qty'));
 
         // Update the component data
-        $component->name                   = e(Input::get('name'));
-		//$component->manufacturer_id        = e(Input::get('manufacturer_id'));
-		$component->model_number            = e(Input::get('model_number'));
-        $component->category_id            = e(Input::get('category_id'));
-        $component->location_id            = e(Input::get('location_id'));
-        $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $component->order_number           = e(Input::get('order_number'));
-        $component->min_amt                = e(Input::get('min_amt'));
-        $component->serial                 = e(Input::get('serial'));
-		$component->qty                    = e(Input::get('qty'));
-
-*/
-        // Update the component data
-        $component->name         = e($request->input('name'));
-        $component->serial       = e($request->input('serial'));
-        $component->company_id   = Company::getIdForCurrentUser(e($request->input('company_id')));
-        $component->model_id     = e($request->input('model_id'));
-        $component->order_number = e($request->input('order_number'));
+        $component->name          = e($request->input('name'));
+        $component->serial        = e($request->input('serial'));
+        $component->company_id    = Company::getIdForCurrentUser(e($request->input('company_id')));
+        $component->model_id      = e($request->input('model_id'));
+        $component->order_number  = e($request->input('order_number'));
         $component->component_tag = e($request->input('component_tag'));
         $component->min_amt       = e($request->input('min_amt'));
 		$component->qty           = e($request->input('qty'));
 		
-        // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
-        // FIXME: No idea why this is returning a Builder error on db_column_name.
-        // Need to investigate and fix. Using static method for now.
-        /*
-		$model = AssetModel::find($request->get('model_id'));
-        if ($model->fieldset) {
-            foreach ($model->fieldset->fields as $field) {
-
-                if ($field->field_encrypted=='1') {
-                    if (Gate::allows('admin')) {
-                        $component->{\App\Models\CustomField::name_to_db_name($field->name)} = \Crypt::encrypt(e($request->input(\App\Models\CustomField::name_to_db_name($field->name))));
-                    }
-                } else {
-                    $component->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
-                }
-            }
-        }
-		*/
-
+        //// Update custom fields in the database.
+        //// Validation for these fields is handlded through the AssetRequest form request
+        //// FIXME: No idea why this is returning a Builder error on db_column_name.
+        //// Need to investigate and fix. Using static method for now.
+		//$model = AssetModel::find($request->get('model_id'));
+        //if ($model->fieldset) {
+        //    foreach ($model->fieldset->fields as $field) {
+        //        if ($field->field_encrypted=='1') {
+        //            if (Gate::allows('admin')) {
+        //                $component->{\App\Models\CustomField::name_to_db_name($field->name)} = \Crypt::encrypt(e($request->input(\App\Models\CustomField::name_to_db_name($field->name))));
+        //            }
+        //        } else {
+        //            $component->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
+        //        }
+        //    }
+        //}
 
 		\Debugbar::info('ComponentsController::save_ing');
         if ($component->save()) {
@@ -381,8 +360,6 @@ class ComponentsController extends Controller
         \Input::flash();
         \Session::flash('errors', $asset->getErrors());
         return response()->json(['errors' => $asset->getErrors()], 500);
-
-
     }
 
     /**
