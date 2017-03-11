@@ -122,11 +122,35 @@
                     </tr>
                     @endif
 
-                    @if (!is_null($license->manufacturer))
-                    <tr>
-                      <td>{{ trans('general.manufacturer') }}</td>
-                      <td>{{ $license->manufacturer->name }}</td>
-                    </tr>
+                    @if ($license->manufacturer)
+                      <tr>
+                        <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
+                        <td>
+                          @can('view', \App\Models\Manufacturer::class)
+                            <a href="{{ route('manufacturers.show', $license->manufacturer->id) }}">
+                              {{ $license->manufacturer->name }}
+                            </a>
+                          @else
+                            {{ $license->manufacturer->name }}
+                          @endcan
+
+                          @if ($license->manufacturer->url)
+                            <br><i class="fa fa-globe"></i> <a href="{{ $license->manufacturer->url }}">{{ $license->manufacturer->url }}</a>
+                          @endif
+
+                          @if ($license->manufacturer->support_url)
+                            <br><i class="fa fa-life-ring"></i> <a href="{{ $license->manufacturer->support_url }}">{{ $license->manufacturer->support_url }}</a>
+                          @endif
+
+                          @if ($license->manufacturer->support_phone)
+                            <br><i class="fa fa-phone"></i> {{ $license->manufacturer->support_phone }}
+                          @endif
+
+                          @if ($license->manufacturer->support_email)
+                            <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
+                          @endif
+                        </td>
+                      </tr>
                     @endif
 
                     @can('viewKeys', $license)

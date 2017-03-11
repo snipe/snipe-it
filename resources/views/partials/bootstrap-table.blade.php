@@ -217,6 +217,12 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function linkFormatter(value, row) {
+        if (value) {
+            return '<a href="' + value + '"> ' + value + '</a>';
+        }
+    }
+
     function assetCompanyFilterFormatter(value, row) {
         if (value) {
             return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '"> ' + value + '</a>';

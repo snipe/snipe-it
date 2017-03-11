@@ -105,20 +105,37 @@
                     <tr>
                       <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
                       <td>
-                      @can('superuser')
+                      @can('view', \App\Models\Manufacturer::class)
                         <a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
                         {{ $asset->model->manufacturer->name }}
                         </a>
                       @else
                         {{ $asset->model->manufacturer->name }}
                       @endcan
+
+                        @if ($asset->model->manufacturer->url)
+                            <br><i class="fa fa-globe"></i> <a href="{{ $asset->model->manufacturer->url }}">{{ $asset->model->manufacturer->url }}</a>
+                        @endif
+
+                        @if ($asset->model->manufacturer->support_url)
+                            <br><i class="fa fa-life-ring"></i> <a href="{{ $asset->model->manufacturer->support_url }}">{{ $asset->model->manufacturer->support_url }}</a>
+                          @endif
+
+                          @if ($asset->model->manufacturer->support_phone)
+                            <br><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}
+                          @endif
+
+                          @if ($asset->model->manufacturer->support_email)
+                            <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $asset->model->manufacturer->support_email }}">{{ $asset->model->manufacturer->support_email }}</a>
+                          @endif
                       </td>
                     </tr>
+                    @endif
                     <tr>
                       <td>
                         {{ trans('admin/hardware/form.model') }}</td>
                       <td>
-                      @can('superuser')
+                        @can('view', \App\Models\AssetModel::class)
                         <a href="{{ route('models.show', $asset->model->id) }}">
                           {{ $asset->model->name }}
                         </a>
@@ -133,7 +150,7 @@
                         {{ $asset->model->model_number }}
                       </td>
                     </tr>
-                    @endif
+
 
                     @if ($asset->model->fieldset)
                       @foreach($asset->model->fieldset->fields as $field)
