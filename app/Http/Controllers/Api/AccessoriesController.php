@@ -95,6 +95,24 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+        $accessory_users = $accessory->users;
+
+        return (new AccessoriesTransformer)->transformAccessory($accessory);
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function accessory_detail($id)
+    {
+        $this->authorize('view', Accessory::class);
+        $accessory = Accessory::findOrFail($id);
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
 
@@ -151,7 +169,12 @@ class AccessoriesController extends Controller
     {
         $this->authorize('delete', Accessory::class);
         $accessory = Accessory::findOrFail($id);
-        $this->authorize('delete', $accessory);
+        $this->authorize($accessory);
+
+        if ($accessory->hasUsers() > 0) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers()))));
+        }
+
         $accessory->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 

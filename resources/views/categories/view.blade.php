@@ -23,6 +23,7 @@
 
 {{-- Page content --}}
 @section('content')
+
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
@@ -35,19 +36,7 @@
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="category{{ $category_type_route }}Table">
-          @if ($category->category_type!='asset')
-          <thead>
-            <tr>
-              <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="company" data-visible="false" data-formatter="companiesLinkObjFormatter">
-                {{ trans('admin/companies/table.title') }}
-              </th>
-              <th data-searchable="true" data-formatter="{{ $category_type }}LinkFormatter" data-sortable="true" data-field="name">{{ trans('general.name') }}</th>
-              <th data-searchable="false" data-sortable="false" data-formatter="{{ $category_type }}ActionsFormatter" data-field="actions"  data-switchable="false">{{ trans('table.actions') }}</th>
-            </tr>
-          </thead>
-        @endif
-        </table>
+
       </div>
     </div>
   </div>
@@ -62,12 +51,24 @@
       'exportFile' => 'category-' . $category->name . '-export',
       'search' => true,
       'columns' => \App\Presenters\AssetPresenter::dataTableLayout()])
-    @else
+  @elseif ($category->category_type=='accessory')
     @include ('partials.bootstrap-table',
     [
       'exportFile' => 'category-' . $category->name . '-export',
-      'search' => false])
-
+      'search' => true,
+      'columns' => \App\Presenters\AccessoryPresenter::dataTableLayout()])
+  @elseif ($category->category_type=='consumable')
+    @include ('partials.bootstrap-table',
+    [
+      'exportFile' => 'category-' . $category->name . '-export',
+      'search' => true,
+      'columns' => \App\Presenters\ConsumablePresenter::dataTableLayout()])
+  @elseif ($category->category_type=='component')
+    @include ('partials.bootstrap-table',
+    [
+      'exportFile' => 'category-' . $category->name . '-export',
+      'search' => true,
+      'columns' => \App\Presenters\ComponentPresenter::dataTableLayout()])
     @endif
 
 

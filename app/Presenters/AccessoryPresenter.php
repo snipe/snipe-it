@@ -43,7 +43,7 @@ class AccessoryPresenter extends Presenter
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => trans('admin/accessories/table.title'),
+                "title" => trans('general.name'),
                 "formatter" => "accessoriesLinkFormatter"
             ], [
                 "field" => "category",
@@ -90,6 +90,7 @@ class AccessoryPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.purchase_date'),
+                "formatter" => "dateDisplayFormatter"
             ], [
                 "field" => "purchase_cost",
                 "searchable" => true,
