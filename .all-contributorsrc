@@ -600,6 +600,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "desmondmorris",
+      "name": "Desmond Morris",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/129360?v=3",
+      "profile": "http://www.desmondmorris.com",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
