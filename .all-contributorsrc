@@ -263,6 +263,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "adamdunson",
+      "name": "Adam Dunson",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/768488?v=3",
+      "profile": "https://github.com/adamdunson",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
