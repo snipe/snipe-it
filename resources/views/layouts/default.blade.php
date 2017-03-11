@@ -393,7 +393,7 @@
                     @if (count($status_navs) > 0)
                         <li class="divider">&nbsp;</li>
                         @foreach ($status_navs as $status_nav)
-                            <li><a href="{{ url('hardware?status_id='.$status_nav->id) }}"}> {{ $status_nav->name }}</a></li>
+                            <li><a href="{{ route('statuslabels.show', ['id' => $status_nav->id]) }}"}> {{ $status_nav->name }}</a></li>
                         @endforeach
                     @endif
 
