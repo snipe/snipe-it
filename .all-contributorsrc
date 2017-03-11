@@ -373,6 +373,15 @@
         "question",
         "bug"
       ]
+    },
+    {
+      "login": "IDM-Helpdesk",
+      "name": "IDM Helpdesk",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/13545400?v=3",
+      "profile": "https://github.com/IDM-Helpdesk",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
