@@ -5,6 +5,7 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
+    "all-contributors-cli": "^4.0.1",
     "blueimp-file-upload": "^9.14.2",
     "bootstrap-sass": "^3.3.7",
     "gulp": "^3.9.1",

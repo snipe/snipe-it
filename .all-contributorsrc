@@ -4,9 +4,24 @@
   "files": [
     "README.md"
   ],
-  "imageSize": 100,
+  "imageSize": 110,
   "commit": true,
   "contributors": [
+   {
+        "login": "snipe",
+        "name": "snipe",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/197404?v=3",
+        "profile": "http://www.snipe.net",
+        "contributions": [
+          "code",
+          "infra",
+          "doc",
+          "test",
+          "bug",
+          "design",
+          "review"
+        ]
+    },
     {
       "login": "uberbrady",
       "name": "Brady Wetherington",
@@ -60,6 +75,96 @@
       "name": "Andrea Bergamasco",
       "avatar_url": "https://avatars0.githubusercontent.com/u/1639757?v=3",
       "profile": "https://github.com/vjandrea",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kpawelski",
+      "name": "Karol",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/10640152?v=3",
+      "profile": "https://github.com/kpawelski",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "morph027",
+      "name": "morph027",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/600106?v=3",
+      "profile": "http://blog.morph027.de/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "fvleminckx",
+      "name": "fvleminckx",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/22935755?v=3",
+      "profile": "https://github.com/fvleminckx",
+      "contributions": [
+        "infra"
+      ]
+    },
+    {
+      "login": "itsupportcmsukorg",
+      "name": "itsupportcmsukorg",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/15633547?v=3",
+      "profile": "https://github.com/itsupportcmsukorg",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "base-zero",
+      "name": "Frank",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/12373799?v=3",
+      "profile": "https://override.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ghost",
+      "name": "Deleted user",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/10137?v=3",
+      "profile": "https://github.com/ghost",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tiagom62",
+      "name": "tiagom62",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10802313?v=3",
+      "profile": "https://github.com/tiagom62",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rystaf",
+      "name": "Ryan Stafford",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2389047?v=3",
+      "profile": "https://github.com/rystaf",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ehanlon",
+      "name": "Eammon Hanlon",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10345935?v=3",
+      "profile": "https://github.com/ehanlon",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "zjean",
+      "name": "zjean",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/441924?v=3",
+      "profile": "https://github.com/zjean",
       "contributions": [
         "code"
       ]
