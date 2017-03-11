@@ -57,7 +57,8 @@
                   <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
                   <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
                   <th data-sortable="false" data-field="assigned_to" data-formatter="usersLinkObjFormatter">{{ trans('general.user') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+                  <th data-sortable="false" data-field="inout" data-formatter="hardwareInOutFormatter">{{ trans('admin/hardware/table.change') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
               </tr>
           </thead>
         </table>
