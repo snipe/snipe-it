@@ -582,6 +582,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "feeva",
+      "name": "Dylan Yi",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/319644?v=3",
+      "profile": "https://github.com/feeva",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
