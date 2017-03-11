@@ -148,6 +148,11 @@ class AssetModelsController extends Controller
         $this->authorize('delete', AssetModel::class);
         $assetmodel = AssetModel::findOrFail($id);
         $this->authorize('delete', $assetmodel);
+
+        if ($assetmodel->assets()->count() > 0) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/models/message.assoc_users')));
+        }
+
         $assetmodel->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/assetmodels/message.delete.success')));
 

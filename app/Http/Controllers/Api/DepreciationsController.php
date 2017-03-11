@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Depreciation;
-use App\Models\Asset;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\DepreciationsTransformer;
 
 class DepreciationsController extends Controller
 {
@@ -23,7 +22,7 @@ class DepreciationsController extends Controller
         $this->authorize('view', Depreciation::class);
         $allowed_columns = ['id','name','created_at'];
 
-        $depreciations = Depreciation::select('id','name','months');
+        $depreciations = Depreciation::select('id','name','months','user_id','created_at','updated_at');
 
         if ($request->has('search')) {
             $depreciations = $depreciations->TextSearch($request->input('search'));
@@ -37,7 +36,7 @@ class DepreciationsController extends Controller
 
         $total = $depreciations->count();
         $depreciations = $depreciations->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($depreciations, $total);
+        return (new DepreciationsTransformer)->transformDepreciations($depreciations, $total);
     }
 
 
@@ -74,7 +73,7 @@ class DepreciationsController extends Controller
     {
         $this->authorize('view', Depreciation::class);
         $depreciation = Depreciation::findOrFail($id);
-        return $depreciation;
+        return (new DepreciationsTransformer)->transformDepreciation($depreciation);
     }
 
 
@@ -113,6 +112,11 @@ class DepreciationsController extends Controller
         $this->authorize('delete', Depreciation::class);
         $depreciation = Depreciation::findOrFail($id);
         $this->authorize('delete', $depreciation);
+
+        if ($depreciation->has_models() > 0) {
+            return response()->json(Helper::formatStandardApiResponse('error', trans('admin/depreciations/message.assoc_users')));
+        }
+
         $depreciation->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/depreciations/message.delete.success')));
 

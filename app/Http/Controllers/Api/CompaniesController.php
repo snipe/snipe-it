@@ -117,9 +117,24 @@ class CompaniesController extends Controller
        $this->authorize('delete', Company::class);
        $company = Company::findOrFail($id);
             $this->authorize('delete', $company);
+
+        try {
             $company->delete();
             return response()
                 ->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
+        } catch (\Illuminate\Database\QueryException $exception) {
+            /*
+                 * NOTE: This happens when there's a foreign key constraint violation
+                 * For example when rows in other tables are referencing this company
+                 */
+            if ($exception->getCode() == 23000) {
+                return response()
+                    ->json(Helper::formatStandardApiResponse('error', null,  trans('admin/companies/message.assoc_users')));
+
+            } else {
+                throw $exception;
+            }
+        }
 
     }
 }
