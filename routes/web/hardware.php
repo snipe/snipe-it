@@ -9,7 +9,7 @@
 */
 Route::group(
     ['prefix' => 'hardware',
-    'middleware' => ['web','auth']],
+    'middleware' => ['auth']],
     function () {
 
         # Asset Maintenances
@@ -127,5 +127,6 @@ Route::group(
 
 
 Route::resource('hardware', 'AssetsController', [
+    'middleware' => ['auth'],
     'parameters' => ['asset' => 'asset_id']
 ]);

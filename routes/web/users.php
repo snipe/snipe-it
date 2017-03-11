@@ -1,7 +1,7 @@
 <?php
 
 # User Management
-Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth']], function () {
+Route::group([ 'prefix' => 'users', 'middleware' => ['auth']], function () {
 
     Route::get('ldap', ['as' => 'ldap/user', 'uses' => 'UsersController@getLDAP' ]);
     Route::post('ldap', 'UsersController@postLDAP');
@@ -48,5 +48,6 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth']], function ()
 });
 
 Route::resource('users', 'UsersController', [
+    'middleware' => ['auth'],
     'parameters' => ['user' => 'user_id']
 ]);

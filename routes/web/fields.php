@@ -5,7 +5,7 @@
 
 
 
-Route::group([ 'prefix' => 'fields' ], function () {
+Route::group([ 'prefix' => 'fields','middleware' => ['auth'] ], function () {
 
     Route::get('{field_id}/fieldset/{fieldset_id}/disassociate',
         ['uses' => 'CustomFieldsController@deleteFieldFromFieldset',
@@ -23,5 +23,6 @@ Route::group([ 'prefix' => 'fields' ], function () {
 });
 
 Route::resource('fields', 'CustomFieldsController', [
+    'middleware' => ['auth'],
     'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id']
 ]);

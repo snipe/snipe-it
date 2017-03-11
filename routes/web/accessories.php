@@ -3,7 +3,7 @@
 /*
 * Accessories
  */
-Route::group([ 'prefix' => 'accessories', ], function () {
+Route::group([ 'prefix' => 'accessories', 'middleware' => ['auth']], function () {
 
     Route::get(
         '{accessoryID}/checkout',
@@ -26,5 +26,6 @@ Route::group([ 'prefix' => 'accessories', ], function () {
 });
 
 Route::resource('accessories', 'AccessoriesController', [
+    'middleware' => ['auth'],
     'parameters' => ['accessory' => 'accessory_id']
 ]);

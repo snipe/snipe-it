@@ -11,5 +11,6 @@ Route::group([ 'prefix' => 'models', 'middleware' => ['auth'] ], function () {
 });
 
 Route::resource('models', 'AssetModelsController', [
+    'middleware' => ['auth'],
     'parameters' => ['model' => 'model_id']
 ]);
