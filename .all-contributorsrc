@@ -445,6 +445,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "cleathley",
+      "name": "Chris Leathley",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/724344?v=3",
+      "profile": "https://github.com/cleathley",
+      "contributions": [
+        "infra"
+      ]
     }
   ]
 }
