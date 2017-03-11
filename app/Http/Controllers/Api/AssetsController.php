@@ -384,4 +384,111 @@ class AssetsController extends Controller
 
     }
 
+
+
+    /**
+     * Checkout an asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v4.0]
+     * @return JsonResponse
+     */
+    public function checkout(Request $request, $asset_id) {
+
+        $this->authorize('checkout', Asset::class);
+        $asset = Asset::findOrFail($asset_id);
+
+        if (!$asset->availableForCheckout()) {
+            return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.not_available')));
+        }
+
+        $this->authorize('checkout', $asset);
+
+        if ($request->has('user_id')) {
+            $target = User::find($request->input('user_id'));
+        } elseif ($request->has('asset_id')) {
+            $target = Asset::find($request->input('asset_id'));
+        } elseif ($request->has('location_id')) {
+            $target = Location::find($request->input('location_id'));
+        }
+
+        if (!isset($target)) {
+            return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], 'No valid checkout target specified for asset '.e($asset->asset_tag).'.'));
+        }
+
+        $checkout_at = request('checkout_at', date("Y-m-d H:i:s"));
+        $expected_checkin = request('expected_checkin', null);
+        $note = request('note', null);
+        $asset_name = request('name', null);
+        
+
+        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name)) {
+            return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.error')))->withErrors($asset->getErrors());
+
+    }
+
+
+    /**
+     * Checkin an asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v4.0]
+     * @return JsonResponse
+     */
+    public function checkin($asset_id) {
+
+        $this->authorize('checkin', Asset::class);
+        $asset = Asset::findOrFail($asset_id);
+        $this->authorize('checkin', $asset);
+
+
+        $user = $asset->assignedUser;
+        if (is_null($target = $asset->assignedTo)) {
+            return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.already_checked_in')));
+        }
+
+        $asset->expected_checkin = null;
+        $asset->last_checkout = null;
+        $asset->assigned_to = null;
+        $asset->assignedTo()->disassociate($asset);
+        $asset->accepted = null;
+        $asset->name = e(Input::get('name'));
+
+        if (Input::has('status_id')) {
+            $asset->status_id =  e(Input::get('status_id'));
+        }
+
+        // Was the asset updated?
+        if ($asset->save()) {
+            $logaction = $asset->logCheckin($target, e(request('note')));
+
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
+            $data['item_name'] = $asset->present()->name();
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = $asset->asset_tag;
+            $data['item_serial'] = $asset->serial;
+            $data['note'] = $logaction->note;
+
+            if ((($asset->checkin_email()=='1')) && (isset($user)) && (!config('app.lock_passwords'))) {
+                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
+                });
+            }
+
+            return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));
+
+
+    }
+
 }

@@ -156,7 +156,7 @@ class AssetsController extends Controller
         $asset->archived                = '0';
         $asset->physical                = '1';
         $asset->depreciate              = '0';
-        $asset->status_id               =  request('status_id', 0);
+        $asset->status_id               = request('status_id', 0);
         $asset->warranty_months         = request('warranty_months', null);
         $asset->purchase_cost           = Helper::ParseFloat(Input::get('purchase_cost'));
         $asset->purchase_date           = request('purchase_date', null);
