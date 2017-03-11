@@ -59,8 +59,33 @@ $('.snipe-table').bootstrapTable({
         paginationPreText: "{{ trans('general.previous') }}",
         paginationNextText: "{{ trans('general.next') }}",
         formatLoadingMessage: function () {
-            return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+            return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading_wait') }} </h4>';
         },
+		formatRecordsPerPage: function (pageNumber) {
+        },
+        formatShowingRows: function (pageFrom, pageTo, totalRows) {
+        },
+        formatDetailPagination: function (totalRows) {
+        },
+        formatSearch: function () {
+            return '{{ trans('general.search') }}';
+        },
+        formatNoMatches: function () {
+        },
+        formatPaginationSwitch: function () {
+        },
+        formatRefresh: function () {
+            return '{{ trans('general.refresh') }}';
+        },
+        formatToggle: function () {
+            return '{{ trans('general.toggle') }}';
+        },
+        formatColumns: function () {
+            return '{{ trans('general.columns') }}';
+        },
+        formatAllRows: function () {
+            return '{{ trans('general.all') }}';
+        }
         pageList: ['10','25','50','100','150','200','500','1000'],
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
