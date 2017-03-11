@@ -24,21 +24,15 @@ class UserPresenter extends Presenter
         $layout = [
             [
                 "field" => "checkbox",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('admin/companies/table.title'),
-                "visible" => false,
                 "checkbox" => true
             ],
             [
                 "field" => "id",
-                "searchable" => true,
+                "searchable" => false,
                 "sortable" => true,
-                "switchable" => false,
+                "switchable" => true,
                 "title" => trans('general.id'),
-                "visible" => false,
-                "formatter" => null
+                "visible" => false
             ],
             [
                 "field" => "company",
@@ -85,13 +79,29 @@ class UserPresenter extends Presenter
                 "formatter" => "usersLinkFormatter"
             ],
             [
+                "field" => "employee_num",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/users/table.employee_num'),
+                "visible" => false
+            ],
+            [
                 "field" => "location",
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/users/table.location'),
-                "true" => false,
+                "visible" => true,
                 "formatter" => "locationsLinkObjFormatter"
+            ],
+            [
+                "field" => "manager",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/users/table.manager'),
+                "visible" => true,
+                "formatter" => "usersLinkObjFormatter"
             ],
             [
                 "field" => "assets_count",
@@ -180,7 +190,16 @@ class UserPresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('general.created_at'),
                 "visible" => false,
-                'formatter' => 'createdAtFormatter'
+                'formatter' => 'dateDisplayFormatter'
+            ],
+            [
+                "field" => "last_login",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.last_login'),
+                "visible" => false,
+                'formatter' => 'dateDisplayFormatter'
             ],
             [
                 "field" => "actions",

@@ -1,33 +1,33 @@
 <?php
 
 
-
+Route::group(['middleware' => 'auth'], function () {
 /*
 * Companies
 */
 Route::resource('companies', 'CompaniesController', [
-'parameters' => ['company' => 'company_id']
+    'parameters' => ['company' => 'company_id']
 ]);
 
 /*
 * Categories
 */
 Route::resource('categories', 'CategoriesController', [
- 'parameters' => ['category' => 'category_id']
+    'parameters' => ['category' => 'category_id']
 ]);
 
 /*
 * Locations
 */
 Route::resource('locations', 'LocationsController', [
-  'parameters' => ['location' => 'location_id']
+    'parameters' => ['location' => 'location_id']
 ]);
 
 /*
 * Manufacturers
 */
 Route::resource('manufacturers', 'ManufacturersController', [
-   'parameters' => ['manufacturer' => 'manufacturers_id']
+    'parameters' => ['manufacturer' => 'manufacturers_id']
 ]);
 
 /*
@@ -58,6 +58,9 @@ Route::resource('suppliers', 'SuppliersController', [
 Route::resource('components', 'ComponentsController', [
     'parameters' => ['component' => 'component_id']
 ]);
+
+});
+
 
 
 /*
@@ -92,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
 |
 */
 
-Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () {
+Route::group([ 'prefix' => 'admin','middleware' => ['auth']], function () {
 
     Route::get('requests',
         // foreach( CheckoutRequest::with('user')->get() as $requestedItem) {
@@ -155,7 +158,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
 });
 
 # Group Management
-Route::group([ 'prefix' => 'groups', 'middleware' => ['web','auth','authorize:superadmin'] ], function () {
+Route::group([ 'prefix' => 'groups', 'middleware' => ['auth'] ], function () {
 
     Route::get('/', [ 'as' => 'groups.index', 'uses' => 'GroupsController@getIndex' ]);
     Route::get('create', [ 'as' => 'groups.create', 'uses' => 'GroupsController@getCreate']);
@@ -175,7 +178,7 @@ Route::group([ 'prefix' => 'groups', 'middleware' => ['web','auth','authorize:su
 |
 |
 */
-Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function () {
+Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
 
     # Profile
     Route::get('profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ]);
@@ -216,7 +219,7 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
 });
 
 
-Route::group(['middleware' => ['web','auth','authorize:reports.view']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get(
         'reports/depreciation',
@@ -369,7 +372,7 @@ Route::get(
     '/',
     [
     'as' => 'home',
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['auth'],
     'uses' => 'DashboardController@getIndex' ]
 );
 

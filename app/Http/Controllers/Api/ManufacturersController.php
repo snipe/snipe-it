@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Manufacturer;
 use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\ManufacturersTransformer;
 
 class ManufacturersController extends Controller
 {
@@ -20,10 +21,10 @@ class ManufacturersController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Manufacturer::class);
-        $allowed_columns = ['id','name'];
+        $allowed_columns = ['id','name','url','support_url','support_email','support_phone','created_at','updated_at'];
 
         $manufacturers = Manufacturer::select(
-            array('id','name')
+            array('id','name','url','support_url','support_email','support_phone','created_at','updated_at')
         )->withCount('assets')->withCount('licenses')->withCount('consumables')->withCount('accessories');
 
 
@@ -39,8 +40,7 @@ class ManufacturersController extends Controller
 
         $total = $manufacturers->count();
         $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($manufacturers, $total);
-        return $manufacturers;
+        return (new ManufacturersTransformer)->transformManufacturers($manufacturers, $total);
     }
 
 

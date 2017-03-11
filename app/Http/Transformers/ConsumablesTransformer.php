@@ -33,9 +33,17 @@ class ConsumablesTransformer
             'remaining'  => $consumable->numRemaining(),
             'order_number'  => $consumable->order_number,
             'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
-            'purchase_date'  => $consumable->purchase_date,
+            'purchase_date'  => Helper::getFormattedDateObject($consumable->purchase_date, 'date'),
             'qty'           => $consumable->qty,
+            'created_at' => Helper::getFormattedDateObject($consumable->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($consumable->updated_at, 'datetime'),
         ];
+
+        $permissions_array['user_can_checkout'] = false;
+
+        if ($consumable->numRemaining() > 0) {
+            $permissions_array['user_can_checkout'] = true;
+        }
 
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', Consumable::class) ? true : false,

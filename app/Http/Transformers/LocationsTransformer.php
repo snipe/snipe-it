@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
+use App\Helpers\Helper;
 
 class LocationsTransformer
 {
@@ -36,11 +37,13 @@ class LocationsTransformer
                 'assets_default'    => $location->assignedassets()->count(),
                 'country' => e($location->country),
                 'assets' => $assets_arr,
+                'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
+                'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => Gate::allows('admin') ? true : false,
-                'delete' => Gate::allows('admin') ? true : false,
+                'update' => Gate::allows('update', Location::class) ? true : false,
+                'delete' => Gate::allows('delete', Location::class) ? true : false,
             ];
 
             $array += $permissions_array;

@@ -5,6 +5,7 @@ use App\Models\Asset;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Transformers\UsersTransformer;
 use Gate;
+use App\Helpers\Helper;
 
 
 class AssetsTransformer
@@ -22,19 +23,18 @@ class AssetsTransformer
 
     public function transformAsset (Asset $asset)
     {
+
         $array = [
             'id' => $asset->id,
             'name' => e($asset->name),
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
             'model' => ($asset->model) ? ['id' => $asset->model->id,'name'=> e($asset->model->name)] : '',
-            'model_number' => e($asset->model_number),
+            'model_number' => ($asset->model) ? e($asset->model->model_number) : null,
             'status_label' => ($asset->assetstatus) ? ['id' => $asset->assetstatus->id,'name'=> e($asset->assetstatus->name)] : null,
-            'last_checkout' => $asset->last_checkout,
             'category' => ($asset->model->category) ? ['id' => $asset->model->category->id,'name'=> e($asset->model->category->name)]  : null,
             'manufacturer' => ($asset->model->manufacturer) ? ['id' => $asset->model->manufacturer->id,'name'=> e($asset->model->manufacturer->name)] : null,
             'notes' => $asset->notes,
-            'expected_checkin' => $asset->expected_checkin,
             'order_number' => $asset->order_number,
             'company' => ($asset->company) ? ['id' => $asset->company->id,'name'=> e($asset->company->name)] : null,
             'location' => ($asset->assetLoc) ? ['id' => $asset->assetLoc->id,'name'=> e($asset->assetLoc->name)]  : null,
@@ -43,11 +43,13 @@ class AssetsTransformer
             'assigned_to' => ($asset->assigneduser) ? ['id' => $asset->assigneduser->id, 'name' => $asset->assigneduser->getFullNameAttribute(), 'first_name'=> e( $asset->assigneduser->first_name), 'last_name'=> e( $asset->assigneduser->last_name)]  : null,
             'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months).' '.trans('admin/hardware/form.months') : null,
             'warranty_expires' => ($asset->warranty_months > 0) ?  $asset->present()->warrantee_expires() : null,
-            'created_at' => $asset->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $asset->updated_at->format('Y-m-d H:i:s'),
-            'purchase_date' => $asset->purchase_date,
+            'created_at' => Helper::getFormattedDateObject($asset->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($asset->updated_at, 'datetime'),
+            'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
+            'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
+            'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => $asset->purchase_cost,
-            'can_checkout' => $asset->availableForCheckout(),
+            'user_can_checkout' => $asset->availableForCheckout(),
 
         ];
 

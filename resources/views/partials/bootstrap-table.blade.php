@@ -8,6 +8,7 @@
 <script src="{{ asset('assets/js/jspdf.min.js') }}"></script>
 <script src="{{ asset('assets/js/jspdf.plugin.autotable.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 
 <script>
 $('.snipe-table').bootstrapTable({
@@ -20,6 +21,7 @@ $('.snipe-table').bootstrapTable({
         @endif
         pageSize: {{ $snipeSettings->per_page }},
         pagination: true,
+        paginationVAlign: 'both',
         sidePagination: 'server',
         sortable: true,
         cookie: true,
@@ -53,6 +55,8 @@ $('.snipe-table').bootstrapTable({
                 }
             }
         },
+
+
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
@@ -61,6 +65,7 @@ $('.snipe-table').bootstrapTable({
         formatLoadingMessage: function () {
             return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading_wait') }} </h4>';
         },
+
 		formatRecordsPerPage: function (pageNumber) {
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
@@ -88,6 +93,7 @@ $('.snipe-table').bootstrapTable({
         }
         pageList: ['10','25','50','100','150','200','500','1000'],
         icons: {
+            advancedSearchIcon: 'fa fa-search-plus',
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',
             columns: 'fa-columns',
@@ -166,17 +172,17 @@ $('.snipe-table').bootstrapTable({
         return function (value,row) {
 
             // The user is allowed to check items out, AND the item is deployable
-            if ((row.available_actions.checkout === true) && (row.can_checkout === true)) {
-
+            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
                 return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
-            } else if (((row.can_checkout == 'true')) && (row.available_actions.checkout == 'false') && (row.assigned_to == null)) {
+            } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
                 return '<a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items in
-            } else if (row.available_actions.checkin === true) {
+            } else if ((row.available_actions.checkin == true)  && (row.assigned_to)) {
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary">{{ trans('general.checkin') }}</a>';
+
             }
 
         }
@@ -228,10 +234,22 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function dateDisplayFormatter(value, row) {
+        if (value) {
+            return  value.formatted;
+        }
+    }
+
 
     function emailFormatter(value, row) {
         if (value) {
             return '<a href="mailto:' + value + '"> ' + value + '</a>';
+        }
+    }
+
+    function linkFormatter(value, row) {
+        if (value) {
+            return '<a href="' + value + '"> ' + value + '</a>';
         }
     }
 

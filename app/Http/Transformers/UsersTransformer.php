@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use phpDocumentor\Reflection\Types\Integer;
 use Gate;
+use App\Helpers\Helper;
 
 class UsersTransformer
 {
@@ -35,19 +36,21 @@ class UsersTransformer
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated =='1') ? true : false,
                 'two_factor_activated' => ($user->activated =='1') ? true : false,
-                'created_at' => $user->created_at,
-                'updated_at' => $user->updated_at,
                 'assets_count' => $user->assets_count,
                 'licenses_count' => $user->licenses_count,
                 'accessories_count' => $user->accessories_count,
                 'consumables_count' => $user->consumables_count,
                 'company' => ($user->company) ? ['id' => $user->company->id,'name'=> e($user->company->name)] : null,
+                'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
+                'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
+                'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
             ];
 
         $permissions_array['available_actions'] = [
-            'edit' => Gate::allows('edit', User::class) ? true : false,
+            'update' => Gate::allows('update', User::class) ? true : false,
             'delete' => Gate::allows('delete', User::class) ? true : false,
         ];
+
         $array += $permissions_array;
 
         return $array;

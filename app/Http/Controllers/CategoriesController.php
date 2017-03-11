@@ -189,24 +189,21 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = Category::find($id);
+        if ($category = Category::find($id)) {
 
-
-        if (isset($category->id)) {
-
-                if ($category->category_type=='asset') {
-                    $category_type = 'hardware';
-                    $category_type_route = 'assets';
-                } elseif ($category->category_type=='accessory') {
-                    $category_type = 'accessories';
-                    $category_type_route = 'accessories';
-                } else {
-                    $category_type = $category->category_type;
-                    $category_type_route = $category->category_type.'s';
-                }
-                return View::make('categories/view', compact('category'))
-                    ->with('category_type',$category_type)
-                    ->with('category_type_route',$category_type_route);
+            if ($category->category_type=='asset') {
+                $category_type = 'hardware';
+                $category_type_route = 'assets';
+            } elseif ($category->category_type=='accessory') {
+                $category_type = 'accessories';
+                $category_type_route = 'accessories';
+            } else {
+                $category_type = $category->category_type;
+                $category_type_route = $category->category_type.'s';
+            }
+            return View::make('categories/view', compact('category'))
+                ->with('category_type',$category_type)
+                ->with('category_type_route',$category_type_route);
         }
 
         // Prepare the error message
@@ -216,131 +213,4 @@ class CategoriesController extends Controller
     }
 
 
-    public function getDataViewAssets(Request $request, $categoryID)
-    {
-        $category = Category::find($categoryID);
-        $category = $category->load('assets.company', 'assets.model', 'assets.assetstatus', 'assets.assignedTo');
-        $category_assets = $category->assets();
-        if (Input::has('search')) {
-            $category_assets = $category_assets->TextSearch(e($request->input('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
-        $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $count = $category_assets->count();
-        $category_assets = $category_assets->skip($offset)->take($limit)->get();
-        $rows = array();
-        $all_custom_fields = CustomField::all();
-        foreach ($category_assets as $asset) {
-
-            $rows[] = $asset->present()->forDataTable($all_custom_fields);
-        }
-
-        $data = array('total' => $count, 'rows' => $rows);
-        return $data;
-    }
-
-
-    /**
-     * @param $categoryID
-     * @return array
-     */
-    public function getDataViewAccessories(Request $request, $categoryID)
-    {
-
-        $category = Category::with('accessories.company')->find($categoryID);
-        $category_accessories = $category->accessories();
-
-        if (Input::has('search')) {
-            $category_accessories = $category_accessories->TextSearch(e($request->input('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
-        $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $count = $category_accessories->count();
-        $category_accessories = $category_accessories->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($category_accessories as $accessory) {
-            $rows[] = $accessory->present()->forDataTable();
-        }
-
-        $data = array('total' => $count, 'rows' => $rows);
-        return $data;
-    }
-
-
-    /**
-     * @param $categoryID
-     * @param Request $request
-     * @return array
-     */
-    public function getDataViewConsumables($categoryID, Request $request)
-    {
-
-        $category = Category::with('accessories.company')->find($categoryID);
-        $category_consumables = $category->consumables();
-
-        if (Input::has('search')) {
-            $category_consumables = $category_consumables->TextSearch(e($request->input('search')));
-        }
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
-        $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $count = $category_consumables->count();
-        $category_consumables = $category_consumables->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($category_consumables as $consumable) {
-            $rows[] = $consumable->present()->forDataTable();
-        }
-
-        $data = array('total' => $count, 'rows' => $rows);
-        return $data;
-    }
-
-    public function getDataViewComponent(Request $request, $categoryID)
-    {
-
-        $category = Category::with('accessories.company')->find($categoryID);
-        $category_components = $category->components();
-
-        if (Input::has('search')) {
-            $category_components = $category_components->TextSearch(e($request->input('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
-        $allowed_columns = ['id','name','serial','asset_tag'];
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $count = $category_components->count();
-        $category_components = $category_components->skip($offset)->take($limit)->get();
-
-        $rows = array();
-        foreach ($category_components as $component) {
-            $rows[] = $component->present()->forDataTable();
-        }
-
-        $data = array('total' => $count, 'rows' => $rows);
-        return $data;
-    }
 }

@@ -341,6 +341,55 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
 });
 
 
+
+Form::macro('date_display_format', function ($name = "date_display_format", $selected = null, $class = null) {
+
+    $formats = [
+        'Y-m-d',
+        'Y-m-d',
+        'D M d, Y',
+        'M j, Y',
+        'd M, Y',
+        'm/d/Y',
+        'n/d/y',
+        'm/j/Y',
+    ];
+
+    foreach ($formats as $format) {
+        $date_display_formats[$format] = Carbon::now()->format($format);
+    }
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px">';
+    foreach ($date_display_formats as $format => $date_display_format) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$date_display_format.'</option> ';
+    }
+
+    $select .= '</select>';
+    return $select;
+
+});
+
+
+Form::macro('time_display_format', function ($name = "time_display_format", $selected = null, $class = null) {
+
+    $formats = [
+        'g:iA',
+        'h:iA',
+        'H:i',
+    ];
+
+    foreach ($formats as $format) {
+        $time_display_formats[$format] = Carbon::now()->format($format);
+    }
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:150px">';
+    foreach ($time_display_formats as $format => $time_display_format) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$time_display_format.'</option> ';
+    }
+
+    $select .= '</select>';
+    return $select;
+
+});
+
 /**
 * Barcode macro
 * Generates the dropdown menu of available barcodes

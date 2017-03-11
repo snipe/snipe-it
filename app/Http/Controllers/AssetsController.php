@@ -156,7 +156,7 @@ class AssetsController extends Controller
         $asset->archived                = '0';
         $asset->physical                = '1';
         $asset->depreciate              = '0';
-        $asset->status_id               =  request('status_id', 0);
+        $asset->status_id               = request('status_id', 0);
         $asset->warranty_months         = request('warranty_months', null);
         $asset->purchase_cost           = Helper::ParseFloat(Input::get('purchase_cost'));
         $asset->purchase_date           = request('purchase_date', null);
@@ -225,7 +225,7 @@ class AssetsController extends Controller
             } elseif(request('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
             }
-            if ($target) {
+            if (isset($target)) {
                 $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page

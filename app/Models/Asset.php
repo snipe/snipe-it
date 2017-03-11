@@ -40,6 +40,17 @@ class Asset extends Depreciable
   * @var boolean
   */
     protected $injectUniqueIdentifier = true;
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'purchase_date',
+        'last_checkout',
+        'expected_checkin'
+    ];
+
+
     use ValidatingTrait, UniqueUndeletedTrait;
 
     protected $rules = [
@@ -763,6 +774,132 @@ class Asset extends Depreciable
             }
         });
     }
+
+
+
+    /**
+     * Query builder scope to search on text filters for complex Bootstrap Tables API
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text   $filter   JSON array of search keys and terms
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeByFilter($query, $filter)
+    {
+
+        return $query->where(function ($query) use ($filter) {
+            foreach ($filter as $key => $search_val) {
+
+                if ($key =='asset_tag') {
+                    $query->where('assets.asset_tag', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='name') {
+                    $query->where('assets.name', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='product_key') {
+                    $query->where('assets.serial', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='purchase_date') {
+                    $query->where('assets.purchase_date', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='purchase_cost') {
+                    $query->where('assets.purchase_cost', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='notes') {
+                    $query->where('assets.notes', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='order_number') {
+                    $query->where('assets.order_number', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='status_label') {
+                    $query->whereHas('assetstatus', function ($query) use ($search_val) {
+                        $query->where('status_labels.name', 'LIKE', '%' . $search_val . '%');
+                    });
+                }
+
+                if ($key =='location') {
+                    $query->whereHas('defaultLoc', function ($query) use ($search_val) {
+                        $query->where('locations.name', 'LIKE', '%' . $search_val . '%');
+                    });
+                }
+
+                if ($key =='checkedout_to') {
+                    $query->whereHas('assigneduser', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('users.first_name', 'LIKE', '%' . $search . '%')
+                                ->orWhere('users.last_name', 'LIKE', '%' . $search . '%');
+                        });
+                    });
+                }
+
+
+                if ($key =='manufacturer') {
+                    $query->whereHas('model', function ($query) use ($search_val) {
+                        $query->whereHas('manufacturer', function ($query) use ($search_val) {
+                            $query->where(function ($query) use ($search_val) {
+                                $query->where('manufacturers.name', 'LIKE', '%'.$search_val.'%');
+                            });
+                        });
+                    });
+                }
+
+                if ($key =='category') {
+                    $query->whereHas('model', function ($query) use ($search) {
+                        $query->whereHas('category', function ($query) use ($search) {
+                            $query->where(function ($query) use ($search_val) {
+                                $query->where('categories.name', 'LIKE', '%' . $search_val . '%')
+                                    ->orWhere('models.name', 'LIKE', '%' . $search_val . '%')
+                                    ->orWhere('models.model_number', 'LIKE', '%' . $search_val . '%');
+                            });
+                        });
+                    });
+                }
+
+                if ($key =='model') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('model', function ($query) use ($search_val) {
+                            $query->where('models.name', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
+
+                if ($key =='model_number') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('model', function ($query) use ($search_val) {
+                            $query->where('models.model_number', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
+
+
+                if ($key =='company') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('company', function ($query) use ($search_val) {
+                            $query->where('companies.name', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
+
+
+            }
+
+            foreach (CustomField::all() as $field) {
+                if (array_key_exists($field->db_column_name(), $filter)) {
+                    $query->orWhere($field->db_column_name(), 'LIKE', "%$search_val%");
+                }
+            }
+
+        });
+    }
+
 
     /**
     * Query builder scope to order on model

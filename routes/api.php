@@ -175,6 +175,25 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Hardware API ---*/
 
+    Route::group(['prefix' => 'hardware'], function () {
+
+        Route::get('{asset_id}/checkout',
+            [
+                'as' => 'api.assets.checkout',
+                'uses' => 'AssetsController@checkout'
+            ]
+        );
+
+        Route::get('{asset_id}/checkin',
+            [
+                'as' => 'api.assets.checkin',
+                'uses' => 'AssetsController@checkin'
+            ]
+        );
+
+    });
+
+
     Route::resource('hardware', 'AssetsController',
         [
             'names' =>

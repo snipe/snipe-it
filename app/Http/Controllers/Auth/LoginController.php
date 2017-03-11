@@ -156,10 +156,16 @@ class LoginController extends Controller
                 LOG::debug("Local authentication failed.");
                 return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
             } else {
+
                   $this->clearLoginAttempts($request);
             }
         }
-        
+
+        if ($user = Auth::user()) {
+            $user->last_login = \Carbon::now();
+            \Log::debug('Last login:'.$user->last_login);
+            $user->save();
+        }
         // Redirect to the users page
         return redirect()->intended()->with('success', trans('auth/message.signin.success'));
     }

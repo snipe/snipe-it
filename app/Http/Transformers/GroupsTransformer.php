@@ -24,6 +24,8 @@ class GroupsTransformer
             'name' => e($group->name),
             'permissions' => $group->permissions,
             'users_count' => $group->users_count,
+            'created_at' => Helper::getFormattedDateObject($group->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($group->updated_at, 'datetime'),
         ];
 
         $permissions_array['available_actions'] = [
