@@ -146,17 +146,17 @@ $('.snipe-table').bootstrapTable({
         return function (value,row) {
 
             // The user is allowed to check items out, AND the item is deployable
-            if ((row.available_actions.checkout === true) && (row.can_checkout === true)) {
-
+            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
                 return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
-            } else if (((row.can_checkout == 'true')) && (row.available_actions.checkout == 'false') && (row.assigned_to == null)) {
+            } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
                 return '<a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items in
-            } else if (row.available_actions.checkin === true) {
+            } else if ((row.available_actions.checkin == true)  && (row.assigned_to)) {
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary">{{ trans('general.checkin') }}</a>';
+
             }
 
         }
