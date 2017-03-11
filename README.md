@@ -6,7 +6,7 @@
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 5.2](http://laravel.com).
+It is built on [Laravel 5.4](http://laravel.com).
 
 Snipe-IT is actively developed and we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
 
@@ -22,12 +22,14 @@ If you're having trouble with the installation, please check the [Common Issues]
 
 -----
 ### User's Manual
-For help using Snipe-IT, check out the [user's manual](https://snipe-it-manual.readme.io/docs).
+For help using Snipe-IT, check out the [user's manual](https://snipe-it.readme.io/docs/overview).
 
 -----
 ### Bug Reports & Feature Requests
 
 Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to open a bug report or see what open issues you can help with. Please search through existing issues (open and closed) to see if your question hasn't already been answered before opening a new issue.
+
+**PLEASE see the [Getting Help Guidelines](https://snipe-it.readme.io/docs/getting-help) and [Common Issues](https://snipe-it.readme.io/docs/common-issues) before opening a ticket, and be sure to complete all of the questions in the Github Issue template to help us to help you as quickly as possible.**
 
 -----
 
