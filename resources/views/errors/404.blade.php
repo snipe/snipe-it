@@ -21,7 +21,7 @@
               <h3><i class="fa fa-warning text-yellow"></i> 404 Page not found.</h3>
               <p>
                 Sad panda. We could not find the page you were looking for.
-                You should maybe <a href="{{ route('home') }}">return to the dashboard</a>.
+                You should maybe <a href="{{ url('/') }}">return to the dashboard</a>.
               </p>
 
     </div>

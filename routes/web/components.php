@@ -1,7 +1,7 @@
 <?php
 
 # Components
-Route::group([ 'prefix' => 'components' ], function () {
+Route::group([ 'prefix' => 'components','middleware' => ['auth'] ], function () {
 
     Route::get(
         '{componentID}/checkout',
@@ -17,5 +17,6 @@ Route::group([ 'prefix' => 'components' ], function () {
 });
 
 Route::resource('components', 'ComponentsController', [
+    'middleware' => ['auth'],
     'parameters' => ['component' => 'component_id']
 ]);

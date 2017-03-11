@@ -26,6 +26,47 @@ class LicensesController extends Controller
         if ($request->has('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
         }
+
+        if ($request->has('company_id')) {
+            $licenses->where('company_id','=',$request->input('company_id'));
+        }
+
+        if ($request->has('name')) {
+            $licenses->where('licenses.name','=',$request->input('name'));
+        }
+
+        if ($request->has('product_key')) {
+            $licenses->where('licenses.serial','=',$request->input('product_key'));
+        }
+
+        if ($request->has('order_number')) {
+            $licenses->where('order_number','=',$request->input('order_number'));
+        }
+
+        if ($request->has('purchase_order')) {
+            $licenses->where('purchase_order','=',$request->input('purchase_order'));
+        }
+
+        if ($request->has('license_name')) {
+            $licenses->where('license_name','=',$request->input('license_name'));
+        }
+
+        if ($request->has('license_email')) {
+            $licenses->where('license_email','=',$request->input('license_email'));
+        }
+
+        if ($request->has('manufacturer_id')) {
+            $licenses->where('manufacturer_id','=',$request->input('manufacturer_id'));
+        }
+
+        if ($request->has('depreciation_id')) {
+            $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
+        }
+
+        if ($request->has('supplier_id')) {
+            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+        }
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 

@@ -126,6 +126,14 @@
                     <td>{{ trans('admin/users/table.name') }}</td>
                     <td>{{ $user->present()->fullName() }}</td>
                   </tr>
+
+                  @if ($user->last_login)
+                    <tr>
+                      <td>{{ trans('general.last_login') }}</td>
+                      <td>{{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}</td>
+                    </tr>
+                  @endif
+
                   @if ($user->jobtitle)
                   <tr>
                     <td>{{ trans('admin/users/table.job') }}</td>
@@ -232,12 +240,12 @@
                 <tr>
                   <td>
                     @if ($asset->physical=='1')
-                    {!! $asset->model->present()->nameUrl() !!}
+                      <a href="{{ route('models.show', $asset->model->id) }}">{{ $asset->model->name }}</a>
                     @endif
                   </td>
                   <td>
                     @can('view', $asset)
-                    {!! $asset->present()->assetTagUrl() !!}
+                      <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->asset_tag }}</a>
                     @endcan
                   </td>
                   <td>{!! $asset->present()->nameUrl() !!}</td>

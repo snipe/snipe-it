@@ -34,8 +34,8 @@ class CategoriesTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => Gate::allows('admin') ? true : false,
-                'delete' => Gate::allows('admin') ? true : false,
+                'update' => Gate::allows('update', Category::class) ? true : false,
+                'delete' => Gate::allows('delete', Category::class) ? true : false,
             ];
 
             $array += $permissions_array;

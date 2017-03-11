@@ -36,6 +36,7 @@ class UsersController extends Controller
             'users.created_at',
             'users.notes',
             'users.company_id',
+            'users.last_login',
             'users.deleted_at',
             'users.activated'
         ])->with('manager', 'groups', 'userloc', 'company', 'throttle','assets','licenses','accessories','consumables')
@@ -67,7 +68,7 @@ class UsersController extends Controller
                     [
                         'last_name','first_name','email','jobtitle','username','employee_num',
                         'assets','accessories', 'consumables','licenses','groups','activated','created_at',
-                        'two_factor_enrolled','two_factor_optin'
+                        'two_factor_enrolled','two_factor_optin','last_login'
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';

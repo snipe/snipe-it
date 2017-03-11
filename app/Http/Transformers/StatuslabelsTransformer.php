@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\Statuslabel;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
+use App\Helpers\Helper;
 
 class StatuslabelsTransformer
 {
@@ -26,13 +27,13 @@ class StatuslabelsTransformer
             'color' => ($statuslabel->color) ? e($statuslabel->color) : null,
             'show_in_nav' => ($statuslabel->show_in_nav=='1') ? true : false,
             'notes' => e($statuslabel->notes),
-            'created_at' => $statuslabel->created_at,
-            'updated_at' => $statuslabel->updated_at,
+            'created_at' => Helper::getFormattedDateObject($statuslabel->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($statuslabel->updated_at, 'datetime'),
         ];
 
         $permissions_array['available_actions'] = [
-            'edit' => Gate::allows('admin') ? true : false,
-            'delete' => Gate::allows('admin') ? true : false,
+            'update' => Gate::allows('update', Statuslabel::class) ? true : false,
+            'delete' => Gate::allows('delete', Statuslabel::class) ? true : false,
         ];
         $array += $permissions_array;
 

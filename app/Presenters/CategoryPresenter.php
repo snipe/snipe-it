@@ -30,7 +30,7 @@ class CategoryPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.name'),
-                "visible" => false,
+                "visible" => true,
                 "formatter" => 'categoriesLinkFormatter',
             ],[
                 "field" => "type",
@@ -43,13 +43,13 @@ class CategoryPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('general.assets'),
-                "visible" => false
+                "visible" => true
             ], [
                 "field" => "accessories_count",
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('general.accessories'),
-                "visible" => false
+                "visible" => true
             ], [
                 "field" => "consumables_count",
                 "searchable" => false,
@@ -74,7 +74,7 @@ class CategoryPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('admin/categories/table.require_acceptance'),
-                "visible" => false,
+                "visible" => true,
                 "formatter" => 'trueFalseFormatter',
             ], [
                 "field" => "actions",
@@ -82,6 +82,7 @@ class CategoryPresenter extends Presenter
                 "sortable" => false,
                 "switchable" => false,
                 "title" => trans('table.actions'),
+                "visible" => true,
                 "formatter" => "categoriesActionsFormatter",
             ]
         ];

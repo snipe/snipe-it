@@ -20,7 +20,8 @@ class LocationsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Location::class);
-        $allowed_columns = ['id','name','address','address2','city','state','country','zip'];
+        $allowed_columns = ['id','name','address','address2','city','state','country','zip','created_at',
+        'updated_at'];
 
         $locations = Location::select([
             'locations.id',
@@ -32,6 +33,8 @@ class LocationsController extends Controller
             'locations.zip',
             'locations.country',
             'locations.parent_id',
+            'locations.created_at',
+            'locations.updated_at',
             'locations.currency'
         ])->withCount('assets')->withCount('users');
 

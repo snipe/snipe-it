@@ -289,6 +289,7 @@ return [
         'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image'     => Intervention\Image\ImageManagerStatic::class,
+        'Carbon' => Carbon\Carbon::class,
 
 
     ],

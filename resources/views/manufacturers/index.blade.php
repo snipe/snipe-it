@@ -28,18 +28,7 @@
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">
-            <thead>
-              <tr>
-                <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-field="name" data-formatter="manufacturersLinkFormatter">
-                  {{ trans('admin/manufacturers/table.name') }}</th>
-                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="assets_count">{{ trans('general.assets') }}</th>
-                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="licenses_count">{{ trans('general.licenses') }}</th>
-                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="accessories_count">{{ trans('general.accessories') }}</th>
-                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="consumables_count">{{ trans('general.consumables') }}</th>
-                <th data-formatter="manufacturersActionsFormatter" data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
-              </tr>
-            </thead>
+
           </table>
         </div>
       </div><!-- /.box-body -->
@@ -50,5 +39,9 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'manufacturers-export', 'search' => true])
+  @include ('partials.bootstrap-table',
+      ['exportFile' => 'manufacturers-export',
+      'search' => true,
+      'columns' => \App\Presenters\ManufacturerPresenter::dataTableLayout()
+  ])
 @stop

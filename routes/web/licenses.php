@@ -2,7 +2,7 @@
 
 
 # Licenses
-Route::group([ 'prefix' => 'licenses' ], function () {
+Route::group([ 'prefix' => 'licenses', 'middleware' => ['auth'] ], function () {
 
     Route::get('{licenseId}/clone', [ 'as' => 'clone/license', 'uses' => 'LicensesController@getClone' ]);
     Route::post('{licenseId}/clone', [ 'as' => 'clone/license', 'uses' => 'LicensesController@postCreate' ]);
@@ -44,5 +44,6 @@ Route::group([ 'prefix' => 'licenses' ], function () {
 });
 
 Route::resource('licenses', 'LicensesController', [
+    'middleware' => ['auth'],
     'parameters' => ['license' => 'license_id']
 ]);

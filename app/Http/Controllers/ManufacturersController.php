@@ -27,13 +27,12 @@ class ManufacturersController extends Controller
     * the content for the manufacturers listing, which is generated in getDatatable.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::getDatatable() method that generates the JSON response
+    * @see Api\ManufacturersController::index() method that generates the JSON response
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        // Show the page
         return View::make('manufacturers/index', compact('manufacturers'));
     }
 
@@ -42,7 +41,7 @@ class ManufacturersController extends Controller
     * Returns a view that displays a form to create a new manufacturer.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::postCreate()
+    * @see ManufacturersController::store()
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
@@ -56,16 +55,23 @@ class ManufacturersController extends Controller
      * Validates and stores the data for a new manufacturer.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ManufacturersController::postCreate()
+     * @see ManufacturersController::create()
      * @since [v1.0]
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
+
         $manufacturer = new Manufacturer;
         $manufacturer->name            = $request->input('name');
-        $manufacturer->user_id          = Auth::id();
+        $manufacturer->user_id          = Auth::user()->id;
+        $manufacturer->url     = $request->input('url');
+        $manufacturer->support_url     = $request->input('support_url');
+        $manufacturer->support_phone    = $request->input('support_phone');
+        $manufacturer->support_email    = $request->input('support_email');
+
+
 
         if ($manufacturer->save()) {
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.create.success'));
@@ -77,16 +83,15 @@ class ManufacturersController extends Controller
     * Returns a view that displays a form to edit a manufacturer.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::postEdit()
+    * @see ManufacturersController::update()
     * @param int $manufacturerId
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function edit($manufacturerId = null)
+    public function edit($id = null)
     {
         // Check if the manufacturer exists
-        if (is_null($item = Manufacturer::find($manufacturerId))) {
-            // Redirect to the manufacturer  page
+        if (is_null($item = Manufacturer::find($id))) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
         // Show the page
@@ -114,9 +119,12 @@ class ManufacturersController extends Controller
 
         // Save the  data
         $manufacturer->name     = $request->input('name');
-        // Was it created?
+        $manufacturer->url     = $request->input('url');
+        $manufacturer->support_url     = $request->input('support_url');
+        $manufacturer->support_phone    = $request->input('support_phone');
+        $manufacturer->support_email    = $request->input('support_email');
+
         if ($manufacturer->save()) {
-            // Redirect to the new manufacturer page
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.update.success'));
         }
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());

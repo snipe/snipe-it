@@ -16,7 +16,9 @@ class Manufacturer extends SnipeModel
     // Declare the rules for the form validation
     protected $rules = array(
         'name'   => 'required|min:2|max:255|unique:manufacturers,name,NULL,deleted_at',
-        'user_id' => 'integer',
+        'url'   => 'url|nullable',
+        'support_url'   => 'url|nullable',
+        'support_email'   => 'email|nullable'
     );
 
     protected $hidden = ['user_id','deleted_at'];
@@ -38,7 +40,7 @@ class Manufacturer extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','url','support_url','support_phone','support_email'];
 
 
 

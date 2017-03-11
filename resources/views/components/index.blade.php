@@ -24,12 +24,6 @@
              'class' => 'form-inline' ]) }}
 
         <div id="toolbar">
-          <!-- <select name="bulk_actions" class="form-control select2" style="width: 130px;">
-            <option value="checkout">Checkout</option>
-            <option value="checkin">Checkin</option>
-          </select>
-          <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
-          -->
         </div>
 
         <table
@@ -40,27 +34,7 @@
           data-url="{{route('api.components.index') }}"
           data-cookie="true"
           data-click-to-select="true"
-          data-cookie-id-table="componentsTable-{{ config('version.hash_version') }}-{{ config('version.hash_version') }}"
-        >
-          <thead>
-            <tr>
-              {{--<th data-checkbox="true" data-field="checkbox"></th>--}}
-
-              <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-              <th data-switchable="true" data-visible="false" data-searchable="true" data-sortable="true" data-field="company" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="name" data-formatter="componentsLinkFormatter">{{ trans('admin/components/table.title') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="serial_number" data-visible="false">{{ trans('admin/hardware/form.serial') }}</th>
-              <th data-searchable="true" data-sortable="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('general.location') }}</th>
-              <th data-searchable="true" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="qty"> {{ trans('admin/components/general.total') }}</th>
-              <th data-switchable="true" data-searchable="false" data-sortable="true" data-field="min_amt"> {{ trans('general.min_amt') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="remaining"> {{ trans('admin/components/general.remaining') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('admin/components/general.order') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('admin/components/general.date') }}</th>
-              <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('admin/components/general.cost') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="componentsActionsFormatter"> {{ trans('table.actions') }}</th>
-            </tr>
-          </thead>
+          data-cookie-id-table="componentsTable-{{ config('version.hash_version') }}">
         </table>
         {{ Form::close() }}
       </div><!-- /.box-body -->
@@ -71,25 +45,8 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'components-export', 'search' => true])
+@include ('partials.bootstrap-table', ['exportFile' => 'components-export', 'search' => true, 'columns' => \App\Presenters\ComponentPresenter::dataTableLayout()])
 
-<script>
-    $(function() {
-        function checkForChecked() {
-            var check_checked = $('input.one_required:checked').length;
-            if (check_checked > 0) {
-                $('#bulkEdit').removeAttr('disabled');
-            }
-            else {
-                $('#bulkEdit').attr('disabled', 'disabled');
-            }
-        }
-        $('#table').on('change','input.one_required',checkForChecked);
-        $("#checkAll").change(function () {
-            $("input:checkbox").prop('checked', $(this).prop("checked"));
-            checkForChecked();
-        });
-    });
-</script>
+
 
 @stop

@@ -40,7 +40,6 @@ class AssetModelsController extends Controller
     */
     public function index()
     {
-        // Show the page
         return View::make('models/index');
     }
 

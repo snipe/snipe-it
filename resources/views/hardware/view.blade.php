@@ -75,7 +75,6 @@
                         </span>
                         @endif
                         {{ $asset->present()->statusText() }}
-
                         ({{ $asset->assetstatus->getStatuslabelType() }})
                       </td>
                     </tr>
@@ -106,20 +105,37 @@
                     <tr>
                       <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
                       <td>
-                      @can('superuser')
+                      @can('view', \App\Models\Manufacturer::class)
                         <a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
                         {{ $asset->model->manufacturer->name }}
                         </a>
                       @else
                         {{ $asset->model->manufacturer->name }}
                       @endcan
+
+                        @if ($asset->model->manufacturer->url)
+                            <br><i class="fa fa-globe"></i> <a href="{{ $asset->model->manufacturer->url }}">{{ $asset->model->manufacturer->url }}</a>
+                        @endif
+
+                        @if ($asset->model->manufacturer->support_url)
+                            <br><i class="fa fa-life-ring"></i> <a href="{{ $asset->model->manufacturer->support_url }}">{{ $asset->model->manufacturer->support_url }}</a>
+                          @endif
+
+                          @if ($asset->model->manufacturer->support_phone)
+                            <br><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}
+                          @endif
+
+                          @if ($asset->model->manufacturer->support_email)
+                            <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $asset->model->manufacturer->support_email }}">{{ $asset->model->manufacturer->support_email }}</a>
+                          @endif
                       </td>
                     </tr>
+                    @endif
                     <tr>
                       <td>
                         {{ trans('admin/hardware/form.model') }}</td>
                       <td>
-                      @can('superuser')
+                        @can('view', \App\Models\AssetModel::class)
                         <a href="{{ route('models.show', $asset->model->id) }}">
                           {{ $asset->model->name }}
                         </a>
@@ -134,7 +150,7 @@
                         {{ $asset->model->model_number }}
                       </td>
                     </tr>
-                    @endif
+
 
                     @if ($asset->model->fieldset)
                       @foreach($asset->model->fieldset->fields as $field)
@@ -174,7 +190,7 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.date') }}</td>
                         <td>
-                          {{ date('M d, Y',strtotime($asset->purchase_date)) }}
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
                         </td>
                       </tr>
                     @endif
@@ -284,7 +300,7 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.expected_checkin') }}</td>
                         <td>
-                          {{ $asset->expected_checkin }}
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                         </td>
                       </tr>
                     @endif
@@ -293,14 +309,6 @@
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
                       <td> {!! nl2br(e($asset->notes)) !!}</td>
                     </tr>
-                    @if ($asset->created_at!='')
-                      <tr>
-                        <td>{{ trans('general.created_at') }}</td>
-                        <td>
-                          {{ $asset->created_at->format('F j, Y h:iA') }}
-                        </td>
-                      </tr>
-                    @endif
 
                     @if ($asset->assetloc)
                       <tr>
@@ -328,6 +336,24 @@
                           @else
                             {{ $asset->defaultLoc->name }}
                           @endcan
+                        </td>
+                      </tr>
+                    @endif
+
+                    @if ($asset->created_at!='')
+                      <tr>
+                        <td>{{ trans('general.created_at') }}</td>
+                        <td>
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->created_at, 'datetime', false) }}
+                        </td>
+                      </tr>
+                    @endif
+
+                    @if ($asset->updated_at!='')
+                      <tr>
+                        <td>{{ trans('general.updated_at') }}</td>
+                        <td>
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->updated_at, 'datetime', false) }}
                         </td>
                       </tr>
                     @endif

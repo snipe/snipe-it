@@ -26,7 +26,7 @@ class ComponentsAssetsTransformer
             'name' => e($asset->name),
             'created_at' => $asset->created_at->format('Y-m-d'),
             'qty' => $asset->components()->count(),
-            'can_checkout' => $asset->availableForCheckout(),
+            'user_can_checkout' => $asset->availableForCheckout(),
         ];
 
         $permissions_array['available_actions'] = [
@@ -35,6 +35,8 @@ class ComponentsAssetsTransformer
             'update' => Gate::allows('update', Asset::class) ? true : false,
             'delete' => Gate::allows('delete', Asset::class) ? true : false,
         ];
+
+
 
         $array += $permissions_array;
 

@@ -35,4 +35,26 @@ class CustomFieldsController extends Controller
         return $fieldset->fields()->sync($fields);
 
     }
+
+
+    /**
+     * Delete a custom field.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @return Redirect
+     */
+    public function destroy($field_id)
+    {
+        $field = CustomField::find($field_id);
+
+        if ($field->fieldset->count() >0) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Field is in use.'));
+        } else {
+            $field->delete();
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.field.delete.success')));
+
+        }
+    }
+
 }

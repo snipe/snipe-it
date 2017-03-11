@@ -336,34 +336,88 @@ return array(
             ),
         ),
 
-
-
-        'Suppliers' => array(
-            array(
-                'permission' => 'suppliers.view',
-                'label'      => 'View ',
-                'note'       => '',
-                'display'    => true,
-            ),
-            array(
-                'permission' => 'suppliers.create',
-                'label'      => 'Create ',
-                'note'       => '',
-                'display'    => true,
-            ),
-            array(
-                'permission' => 'suppliers.edit',
-                'label'      => 'Edit  ',
-                'note'       => '',
-                'display'    => true,
-            ),
-            array(
-                'permission' => 'suppliers.delete',
-                'label'      => 'Delete ',
-                'note'       => '',
-                'display'    => true,
-            ),
+    'Status Labels' => array(
+        array(
+            'permission' => 'statuslabels.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
         ),
+        array(
+            'permission' => 'statuslabels.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'statuslabels.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'statuslabels.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Custom Fields' => array(
+        array(
+            'permission' => 'customfields.view',
+            'label'      => 'View',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfields.create',
+            'label'      => 'Create',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfields.edit',
+            'label'      => 'Edit',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfields.delete',
+            'label'      => 'Delete',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+
+
+    'Suppliers' => array(
+        array(
+            'permission' => 'suppliers.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'suppliers.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'suppliers.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'suppliers.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
 
 
     'Manufacturers' => array(

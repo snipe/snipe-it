@@ -50,14 +50,14 @@
         data-cookie-id-table="modeldetailsViewTable">
           <thead>
               <tr>
-
-                  <th data-sortable="false" data-field="company" data-searchable="false" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
                   <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
+                  <th data-sortable="false" data-field="company" data-searchable="false" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
                   <th data-sortable="true" data-field="name"  data-searchable="true" data-formatter="hardwareLinkFormatter">{{ trans('general.name') }}</th>
                   <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
                   <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
                   <th data-sortable="false" data-field="assigned_to" data-formatter="usersLinkObjFormatter">{{ trans('general.user') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+                  <th data-sortable="false" data-field="inout" data-formatter="hardwareInOutFormatter">{{ trans('admin/hardware/table.change') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
               </tr>
           </thead>
         </table>
@@ -72,9 +72,38 @@
       @if ($model->manufacturer)
       <li>
         {{ trans('general.manufacturer') }}:
-        {{ $model->manufacturer->name }}
+      @can('view', \App\Models\Manufacturer::class)
+          <a href="{{ route('manufacturers.show', $model->manufacturer->id) }}">
+              {{ $model->manufacturer->name }}
+          </a>
+      @else
+          {{ $model->manufacturer->name }}
+      @endcan
       </li>
       @endif
+          @if ($model->manufacturer->url)
+              <li>
+                  <i class="fa fa-globe"></i> <a href="{{ $model->manufacturer->url }}">{{ $model->manufacturer->url }}</a>
+              </li>
+          @endif
+
+          @if ($model->manufacturer->support_url)
+              <li>
+                  <i class="fa fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
+              </li>
+          @endif
+
+          @if ($model->manufacturer->support_phone)
+              <li>
+                  <i class="fa fa-phone"></i> {{ $model->manufacturer->support_phone }}
+              </li>
+          @endif
+
+          @if ($model->manufacturer->support_email)
+              <li>
+                  <i class="fa fa-envelope"></i> <a href="mailto:{{ $model->manufacturer->support_email }}">{{ $model->manufacturer->support_email }}</a>
+              </li>
+          @endif
 
       @if ($model->model_number)
       <li>
@@ -92,7 +121,7 @@
 
       @if ($model->eol)
       <li>{{ trans('general.eol') }}:
-        {{ $model->eol .' '. trans('general.months') }} {{ trans('general.months') }}
+        {{ $model->eol .' '. trans('general.months') }}
       </li>
       @endif
 
