@@ -114,7 +114,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('company_id')) {
-            $assets->where('company_id','=',$request->input('company_id'));
+            $assets->where('assets.company_id','=',$request->input('company_id'));
         }
 
         if ($request->has('manufacturer_id')) {
