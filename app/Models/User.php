@@ -28,7 +28,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     protected $casts = [
         'activated' => 'boolean',
-        'employee_num' => 'integer'
     ];
 
     /**
