@@ -344,6 +344,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "irasnyd",
+      "name": "Ira W. Snyder",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11426176?v=3",
+      "profile": "http://www.irasnyder.com/devel/",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }
