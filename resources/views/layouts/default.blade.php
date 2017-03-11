@@ -418,10 +418,11 @@
                             {{ trans('general.bulk_checkout') }}</a>
                     </li>
                     @endcan
-
-                    @can('superuser')
+                    @can('view', \App\Models\Assetmodel::class)
                     <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ route('models.index') }}">@lang('general.asset_models')</a></li>
-                  <li><a href="{{ url('admin/settings/categories') }}" {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
+                    @endcan
+                    @can('view', \App\Models\Category::class)
+                  <li><a href="{{ url('categories') }}" {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
                     @endcan
                     @can('create', \App\Models\Asset::class)
                       <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
