@@ -157,7 +157,7 @@ class Helper
      */
     public static function companyList()
     {
-        $company_list = array('0' => trans('general.select_company')) + DB::table('companies')
+        $company_list = array('' => trans('general.select_company')) + DB::table('companies')
                 ->orderBy('name', 'asc')
                 ->pluck('name', 'id')
                 ->toArray();

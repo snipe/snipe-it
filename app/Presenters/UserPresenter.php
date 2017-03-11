@@ -88,6 +88,14 @@ class UserPresenter extends Presenter
                 "formatter" => "locationsLinkObjFormatter"
             ],
             [
+                "field" => "manager",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/users/table.manager'),
+                "visible" => true,
+                "formatter" => "usersLinkObjFormatter"
+            ],
+            [
                 "field" => "assets_count",
                 "searchable" => false,
                 "sortable" => false,

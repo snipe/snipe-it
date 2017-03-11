@@ -36,6 +36,13 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth']], function ()
             'uses' => 'UsersController@postBulkSave',
         ]
     );
+    Route::post(
+        'bulkeditsave',
+        [
+            'as'   => 'users/bulkeditsave',
+            'uses' => 'UsersController@postBulkEditSave',
+        ]
+    );
 
 
 });
