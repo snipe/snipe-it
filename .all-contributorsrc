@@ -45,6 +45,15 @@
         "doc",
         "tutorial"
       ]
+    },
+    {
+      "login": "vsposato",
+      "name": "Vincent Sposato",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/894126?v=3",
+      "profile": "https://github.com/vsposato",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
