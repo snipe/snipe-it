@@ -400,6 +400,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tomcastleman",
+      "name": "Tom Castleman",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1532660?v=3",
+      "profile": "http://tomcastleman.me",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
