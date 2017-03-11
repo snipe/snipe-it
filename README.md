@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=develop)](https://travis-ci.org/snipe/snipe-it) [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready+for+dev&amp;title=Ready+for+development)](http://waffle.io/snipe/snipe-it) [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg)]() [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.png)](https://crowdin.com/project/snipe-it) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snipe/snipe-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Twitter Follow](https://img.shields.io/twitter/follow/snipeyhead.svg?style=social)](https://twitter.com/snipeyhead) [![Zenhub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.io) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://www.codacy.com/app/snipe/snipe-it?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=snipe/snipe-it&amp;utm_campaign=Badge_Grade)
-[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-24-orange.svg?style=flat-square)](#contributors)
 
 
 ## Snipe-IT - Open Source Asset Management System
@@ -48,14 +48,6 @@ Please see the [translations documentation](https://snipe-it.readme.io/docs/tran
 
 -----
 
-### Contributing
-
-Please see the documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing).
-
-
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
-
-
 ### Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
@@ -65,10 +57,21 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [<img src="https://avatars0.githubusercontent.com/u/10640152?v=3" width="110px;"/><br /><sub>Karol</sub>](https://github.com/kpawelski)<br />🌍 [💻](https://github.com/snipe/snipe-it/commits?author=kpawelski) | [<img src="https://avatars3.githubusercontent.com/u/600106?v=3" width="110px;"/><br /><sub>morph027</sub>](http://blog.morph027.de/)<br />[💻](https://github.com/snipe/snipe-it/commits?author=morph027) | [<img src="https://avatars3.githubusercontent.com/u/22935755?v=3" width="110px;"/><br /><sub>fvleminckx</sub>](https://github.com/fvleminckx)<br />🚇 | [<img src="https://avatars2.githubusercontent.com/u/15633547?v=3" width="110px;"/><br /><sub>itsupportcmsukorg</sub>](https://github.com/itsupportcmsukorg)<br />[💻](https://github.com/snipe/snipe-it/commits?author=itsupportcmsukorg) [🐛](https://github.com/snipe/snipe-it/issues?q=author%3Aitsupportcmsukorg) | [<img src="https://avatars3.githubusercontent.com/u/12373799?v=3" width="110px;"/><br /><sub>Frank</sub>](https://override.io)<br />[💻](https://github.com/snipe/snipe-it/commits?author=base-zero) | [<img src="https://avatars0.githubusercontent.com/u/10137?v=3" width="110px;"/><br /><sub>Deleted user</sub>](https://github.com/ghost)<br />🌍 | [<img src="https://avatars1.githubusercontent.com/u/10802313?v=3" width="110px;"/><br /><sub>tiagom62</sub>](https://github.com/tiagom62)<br />[💻](https://github.com/snipe/snipe-it/commits?author=tiagom62) 🚇 |
 | [<img src="https://avatars3.githubusercontent.com/u/2389047?v=3" width="110px;"/><br /><sub>Ryan Stafford</sub>](https://github.com/rystaf)<br />[💻](https://github.com/snipe/snipe-it/commits?author=rystaf) | [<img src="https://avatars2.githubusercontent.com/u/10345935?v=3" width="110px;"/><br /><sub>Eammon Hanlon</sub>](https://github.com/ehanlon)<br />[💻](https://github.com/snipe/snipe-it/commits?author=ehanlon) | [<img src="https://avatars0.githubusercontent.com/u/441924?v=3" width="110px;"/><br /><sub>zjean</sub>](https://github.com/zjean)<br />[💻](https://github.com/snipe/snipe-it/commits?author=zjean) | [<img src="https://avatars0.githubusercontent.com/u/12660103?v=3" width="110px;"/><br /><sub>Matthias Frei</sub>](http://www.frei.media)<br />[💻](https://github.com/snipe/snipe-it/commits?author=FREImedia) | [<img src="https://avatars0.githubusercontent.com/u/3767518?v=3" width="110px;"/><br /><sub>opsydev</sub>](https://github.com/opsydev)<br />[💻](https://github.com/snipe/snipe-it/commits?author=opsydev) | [<img src="https://avatars1.githubusercontent.com/u/82290?v=3" width="110px;"/><br /><sub>Daniel Dreier</sub>](http://www.ddreier.com)<br />[💻](https://github.com/snipe/snipe-it/commits?author=ddreier) | [<img src="https://avatars0.githubusercontent.com/u/23448?v=3" width="110px;"/><br /><sub>Nikolai Prokoschenko</sub>](http://rassie.org)<br />[💻](https://github.com/snipe/snipe-it/commits?author=rassie) |
-| [<img src="https://avatars0.githubusercontent.com/u/13452757?v=3" width="110px;"/><br /><sub>Drew</sub>](https://github.com/YetAnotherCodeMonkey)<br />[💻](https://github.com/snipe/snipe-it/commits?author=YetAnotherCodeMonkey) | [<img src="https://avatars0.githubusercontent.com/u/1342320?v=3" width="110px;"/><br /><sub>Walter</sub>](https://github.com/merid14)<br />[💻](https://github.com/snipe/snipe-it/commits?author=merid14) |
+| [<img src="https://avatars0.githubusercontent.com/u/13452757?v=3" width="110px;"/><br /><sub>Drew</sub>](https://github.com/YetAnotherCodeMonkey)<br />[💻](https://github.com/snipe/snipe-it/commits?author=YetAnotherCodeMonkey) | [<img src="https://avatars0.githubusercontent.com/u/1342320?v=3" width="110px;"/><br /><sub>Walter</sub>](https://github.com/merid14)<br />[💻](https://github.com/snipe/snipe-it/commits?author=merid14) | [<img src="https://avatars3.githubusercontent.com/u/11254614?v=3" width="110px;"/><br /><sub>Petr Baloun</sub>](https://github.com/balous)<br />[💻](https://github.com/snipe/snipe-it/commits?author=balous) |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+
+-----
+
+### Contributing
+
+Please see the documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing).
+
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+-----
 
 ### Security
 
