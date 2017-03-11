@@ -79,12 +79,20 @@ class UserPresenter extends Presenter
                 "formatter" => "usersLinkFormatter"
             ],
             [
+                "field" => "employee_num",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/users/table.employee_num'),
+                "visible" => false
+            ],
+            [
                 "field" => "location",
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/users/table.location'),
-                "true" => false,
+                "visible" => true,
                 "formatter" => "locationsLinkObjFormatter"
             ],
             [
