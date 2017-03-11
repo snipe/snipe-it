@@ -30,7 +30,7 @@ class AssetsTransformer
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
             'model' => ($asset->model) ? ['id' => $asset->model->id,'name'=> e($asset->model->name)] : '',
-            'model_number' => ($asset->model_number) ? e($asset->model_number) : null,
+            'model_number' => ($asset->model) ? e($asset->model->model_number) : null,
             'status_label' => ($asset->assetstatus) ? ['id' => $asset->assetstatus->id,'name'=> e($asset->assetstatus->name)] : null,
             'category' => ($asset->model->category) ? ['id' => $asset->model->category->id,'name'=> e($asset->model->category->name)]  : null,
             'manufacturer' => ($asset->model->manufacturer) ? ['id' => $asset->model->manufacturer->id,'name'=> e($asset->model->manufacturer->name)] : null,

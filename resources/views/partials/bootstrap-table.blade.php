@@ -8,6 +8,7 @@
 <script src="{{ asset('assets/js/jspdf.min.js') }}"></script>
 <script src="{{ asset('assets/js/jspdf.plugin.autotable.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 
 <script>
 $('.snipe-table').bootstrapTable({
@@ -54,6 +55,8 @@ $('.snipe-table').bootstrapTable({
                 }
             }
         },
+
+
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
@@ -64,6 +67,7 @@ $('.snipe-table').bootstrapTable({
         },
         pageList: ['10','25','50','100','150','200','500','1000'],
         icons: {
+            advancedSearchIcon: 'fa fa-search-plus',
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',
             columns: 'fa-columns',

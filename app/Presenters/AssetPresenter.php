@@ -77,8 +77,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/models/table.modelnumber'),
-                "visible" => false,
-                "formatter" => null
+                "visible" => false
             ], [
                 "field" => "category",
                 "searchable" => true,
@@ -107,14 +106,7 @@ class AssetPresenter extends Presenter
                 "title" => trans('admin/hardware/table.location'),
                 "visible" => true,
                 "formatter" => "locationsLinkObjFormatter"
-            ], [
-                "field" => "category",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.category'),
-                "visible" => true,
-                "formatter" => "categoriesLinkObjFormatter"
-            ], [
+            ],  [
                 "field" => "manufacturer",
                 "searchable" => true,
                 "sortable" => true,

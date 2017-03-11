@@ -74,6 +74,8 @@
               data-toolbar="#toolbar"
               class="table table-striped snipe-table"
               id="table"
+              data-advanced-search="true"
+              data-id-table="advancedTable"
               data-url="{{ route('api.assets.index',
                   array('status' => e(Input::get('status')),
                   'order_number'=>e(Input::get('order_number')),

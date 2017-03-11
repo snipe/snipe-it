@@ -72,6 +72,12 @@ class AssetsController extends Controller
             'purchase_cost'
         ];
 
+        $filter = array();
+        if ($request->has('filter')) {
+            $filter = json_decode($request->input('filter'));
+        }
+
+
         $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
         foreach ($all_custom_fields as $field) {
             $allowed_columns[]=$field->db_column_name();
@@ -81,8 +87,14 @@ class AssetsController extends Controller
             'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
             'model.category', 'model.manufacturer', 'model.fieldset', 'assigneduser');
 
-        if ($request->has('search')) {
+        // If we should search on everything
+        if (($request->has('search')) && (count($filter) == 0)) {
             $assets->TextSearch($request->input('search'));
+        // otherwise loop through the filters and search strictly on them
+        } else {
+            if (count($filter) > 0) {
+                $assets->ByFilter($filter);
+            }
         }
 
         if ($request->has('status_id')) {
