@@ -49,7 +49,7 @@ class AssetsTransformer
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => $asset->purchase_cost,
-            'can_checkout' => $asset->availableForCheckout(),
+            'user_can_checkout' => $asset->availableForCheckout(),
 
         ];
 

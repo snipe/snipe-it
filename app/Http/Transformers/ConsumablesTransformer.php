@@ -39,6 +39,12 @@ class ConsumablesTransformer
             'updated_at' => Helper::getFormattedDateObject($consumable->updated_at, 'datetime'),
         ];
 
+        $permissions_array['user_can_checkout'] = false;
+
+        if ($consumable->numRemaining() > 0) {
+            $permissions_array['user_can_checkout'] = true;
+        }
+
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', Consumable::class) ? true : false,
             'checkin' => Gate::allows('checkin', Consumable::class) ? true : false,

@@ -102,6 +102,13 @@ class AccessoryPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.order_number'),
+            ],[
+                "field" => "change",
+                "searchable" => false,
+                "sortable" => false,
+                "visible" => true,
+                "title" => trans('general.change'),
+                "formatter" => "accessoriesInOutFormatter",
             ], [
                 "field" => "actions",
                 "searchable" => false,
