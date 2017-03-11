@@ -7,20 +7,20 @@
   "imageSize": 110,
   "commit": true,
   "contributors": [
-   {
-        "login": "snipe",
-        "name": "snipe",
-        "avatar_url": "https://avatars3.githubusercontent.com/u/197404?v=3",
-        "profile": "http://www.snipe.net",
-        "contributions": [
-          "code",
-          "infra",
-          "doc",
-          "test",
-          "bug",
-          "design",
-          "review"
-        ]
+    {
+      "login": "snipe",
+      "name": "snipe",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/197404?v=3",
+      "profile": "http://www.snipe.net",
+      "contributions": [
+        "code",
+        "infra",
+        "doc",
+        "test",
+        "bug",
+        "design",
+        "review"
+      ]
     },
     {
       "login": "uberbrady",
@@ -58,7 +58,7 @@
       "profile": "https://github.com/madd15",
       "contributions": [
         "doc",
-        "tutorial"
+        "question"
       ]
     },
     {
@@ -85,6 +85,7 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/10640152?v=3",
       "profile": "https://github.com/kpawelski",
       "contributions": [
+        "translation",
         "code"
       ]
     },
@@ -112,7 +113,8 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/15633547?v=3",
       "profile": "https://github.com/itsupportcmsukorg",
       "contributions": [
-        "code"
+        "code",
+        "bug"
       ]
     },
     {
@@ -130,7 +132,7 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/10137?v=3",
       "profile": "https://github.com/ghost",
       "contributions": [
-        "code"
+        "translation"
       ]
     },
     {
