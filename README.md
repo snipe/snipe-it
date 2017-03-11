@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=develop)](https://travis-ci.org/snipe/snipe-it) [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready+for+dev&amp;title=Ready+for+development)](http://waffle.io/snipe/snipe-it) [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg)]() [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.png)](https://crowdin.com/project/snipe-it) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snipe/snipe-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Twitter Follow](https://img.shields.io/twitter/follow/snipeyhead.svg?style=social)](https://twitter.com/snipeyhead) [![Zenhub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.io) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://www.codacy.com/app/snipe/snipe-it?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=snipe/snipe-it&amp;utm_campaign=Badge_Grade)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 
 ## Snipe-IT - Open Source Asset Management System
@@ -64,8 +64,8 @@ To report a security vulnerability, please email security@snipeitapp.com instead
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars0.githubusercontent.com/u/36335?v=3" width="100px;"/><br /><sub>Brady Wetherington</sub>](http://www.uberbrady.com)<br />[💻](https://github.com/snipe/snipe-it/commits?author=uberbrady) [📖](https://github.com/snipe/snipe-it/commits?author=uberbrady) 🚇 |
-| :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/36335?v=3" width="100px;"/><br /><sub>Brady Wetherington</sub>](http://www.uberbrady.com)<br />[💻](https://github.com/snipe/snipe-it/commits?author=uberbrady) [📖](https://github.com/snipe/snipe-it/commits?author=uberbrady) 🚇 | [<img src="https://avatars0.githubusercontent.com/u/3803132?v=3" width="100px;"/><br /><sub>Daniel Meltzer</sub>](https://github.com/dmeltzer)<br />[💻](https://github.com/snipe/snipe-it/commits?author=dmeltzer) |
+| :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
