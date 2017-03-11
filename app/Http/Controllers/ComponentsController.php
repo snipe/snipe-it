@@ -220,7 +220,7 @@ class ComponentsController extends Controller
         // Prepare the error message
         $error = trans('admin/components/message.does_not_exist', compact('id'));
         // Redirect to the user management page
-        return redirect()->route('components')->with('error', $error);
+        return redirect()->route('components.index')->with('error', $error);
     }
 
     /**
