@@ -16,7 +16,6 @@ class Setting extends Model
           "brand"     => 'required|min:1|numeric',
           "qr_text"         => 'min:1|max:31',
           "logo_img"        => 'mimes:jpeg,bmp,png,gif',
-          "custom_css"   => 'string',
           "alert_email"   => 'email_array',
           "slack_endpoint"   => 'url',
           "default_currency"   => 'required',
