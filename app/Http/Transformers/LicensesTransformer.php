@@ -36,7 +36,7 @@ class LicensesTransformer
             'total_seats' => e($license->seats),
             'remaining_qty' => $license->remaincount(),
             'min_qty' => $license->remaincount(),
-            'license_name' => Helper::formatCurrencyOutput($license->purchase_cost),
+            'license_name' =>  e($license->license_name),
             'license_email' => e($license->license_email),
             'maintained' => ($license->maintained == 1) ? true : false,
             'supplier' =>  ($license->supplier) ? ['id' => $license->supplier->id,'name'=> e($license->supplier->name)] : null,
