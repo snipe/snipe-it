@@ -790,20 +790,16 @@ class Asset extends Depreciable
 
         return $query->where(function ($query) use ($filter) {
             foreach ($filter as $key => $search_val) {
-                \Log::debug('filter '.$key.' for '.$search_val);
 
                 if ($key =='asset_tag') {
-                    \Log::debug('search on tag for '.$search_val);
                     $query->where('assets.asset_tag', 'LIKE', '%'.$search_val.'%');
                 }
 
                 if ($key =='name') {
-                    \Log::debug('search on name for '.$search_val);
                     $query->where('assets.name', 'LIKE', '%'.$search_val.'%');
                 }
 
                 if ($key =='product_key') {
-                    \Log::debug('search on key for '.$search_val);
                     $query->where('assets.serial', 'LIKE', '%'.$search_val.'%');
                 }
 
@@ -820,7 +816,6 @@ class Asset extends Depreciable
                 }
 
                 if ($key =='order_number') {
-                    \Log::debug('search on order number for '.$search_val);
                     $query->where('assets.order_number', 'LIKE', '%'.$search_val.'%');
                 }
 
@@ -847,7 +842,6 @@ class Asset extends Depreciable
 
 
                 if ($key =='manufacturer') {
-                    \Log::debug('search on manufacturer for '.$search_val);
                     $query->whereHas('model', function ($query) use ($search_val) {
                         $query->whereHas('manufacturer', function ($query) use ($search_val) {
                             $query->where(function ($query) use ($search_val) {
@@ -858,7 +852,6 @@ class Asset extends Depreciable
                 }
 
                 if ($key =='category') {
-                    \Log::debug('search on model category for '.$search_val);
                     $query->whereHas('model', function ($query) use ($search) {
                         $query->whereHas('category', function ($query) use ($search) {
                             $query->where(function ($query) use ($search_val) {
@@ -871,7 +864,6 @@ class Asset extends Depreciable
                 }
 
                 if ($key =='model') {
-                    \Log::debug('search on model name for '.$search_val);
                     $query->where(function ($query) use ($search_val) {
                         $query->whereHas('model', function ($query) use ($search_val) {
                             $query->where('models.name', 'LIKE', '%' . $search_val . '%');
@@ -880,7 +872,6 @@ class Asset extends Depreciable
                 }
 
                 if ($key =='model_number') {
-                    \Log::debug('search on model number for '.$search_val);
                     $query->where(function ($query) use ($search_val) {
                         $query->whereHas('model', function ($query) use ($search_val) {
                             $query->where('models.model_number', 'LIKE', '%' . $search_val . '%');
@@ -890,7 +881,6 @@ class Asset extends Depreciable
 
 
                 if ($key =='company') {
-                    \Log::debug('search on company for '.$search_val);
                     $query->where(function ($query) use ($search_val) {
                         $query->whereHas('company', function ($query) use ($search_val) {
                             $query->where('companies.name', 'LIKE', '%' . $search_val . '%');
