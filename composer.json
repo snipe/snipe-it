@@ -33,7 +33,7 @@
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
-        "codeception/codeception": "^2.2",
+        "codeception/codeception": "2.2.9",
         "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
