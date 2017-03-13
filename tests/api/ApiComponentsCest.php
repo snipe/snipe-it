@@ -56,7 +56,10 @@ class ApiComponentsCest
             'location_id' => $location->id,
             'name' => $this->faker->sentence(3),
             'purchase_cost' => $this->faker->randomFloat(2, 0),
-            'purchase_date' => $this->faker->dateTime->format('Y-m-d'),
+            'purchase_date' => [
+                'datetime' => $this->faker->dateTime->format('Y-m-d H:i:s'),
+                'formatted' => $this->faker->dateTime->format('Y-m-d H:i a'),
+            ],
             'qty' => rand(1, 10),
         ];
 
@@ -178,10 +181,10 @@ class ApiComponentsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
-        // verify, expect a 404
+        // verify, expect a 200 with an error message
         $I->sendGET('/components/' . $component->id);
-        $I->seeResponseCodeIs(404);
-        // $I->seeResponseIsJson(); // @todo: response is not JSON
-        $scenario->incomplete('404 response should be JSON, receiving HTML instead');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson(); // @todo: response is not JSON
+        // $scenario->incomplete('Resource not found response should be JSON, receiving HTML instead');
     }
 }
