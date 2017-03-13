@@ -56,10 +56,7 @@ class ApiComponentsCest
             'location_id' => $location->id,
             'name' => $this->faker->sentence(3),
             'purchase_cost' => $this->faker->randomFloat(2, 0),
-            'purchase_date' => [
-                'datetime' => $this->faker->dateTime->format('Y-m-d H:i:s'),
-                'formatted' => $this->faker->dateTime->format('Y-m-d H:i a'),
-            ],
+            'purchase_date' => $this->faker->dateTime->format('Y-m-d'),
             'qty' => rand(1, 10),
         ];
 
@@ -78,23 +75,29 @@ class ApiComponentsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
-            'id' => $id,
-            'category' => [
-                'id' => $data['category_id'],
-                'name' => e($category->name),
-            ],
-            'company' => [
-                'id' => $data['company_id'],
-                'name' => e($company->name),
-            ],
+            'id' => (int) $id,
+            'name' => e($data['name']),
+            // 'serial_number' => e($component->serial),
             'location' => [
-                'id' => $data['location_id'],
+                'id' => (int) $data['location_id'],
                 'name' => e($location->name),
             ],
-            'name' => $data['name'],
-            'qty' => $data['qty'],
+            'qty' => number_format($data['qty']),
+            // 'min_amt' => e($component->min_amt),
+            'category' => [
+                'id' => (int) $data['category_id'],
+                'name' => e($category->name),
+            ],
+            // 'order_number'  => e($component->order_number),
+            'purchase_date' =>  \App\Helpers\Helper::getFormattedDateObject($data['purchase_date'], 'date'),
             'purchase_cost' => \App\Helpers\Helper::formatCurrencyOutput($data['purchase_cost']),
-            'purchase_date' => $data['purchase_date'],
+            // 'remaining' => (int) $component->numRemaining(),
+            'company' => [
+                'id' => (int) $data['company_id'],
+                'name' => e($company->name),
+            ],
+            // 'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
+            // 'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
         ]);
     }
 

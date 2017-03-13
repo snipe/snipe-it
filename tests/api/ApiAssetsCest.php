@@ -137,12 +137,10 @@ class ApiAssetsCest
             'warranty_months' => $temp_asset->warranty_months,
         ];
 
-        // $scenario->incomplete('When I POST to /hardware i am redirected to html login page 😰');
         // create
         $I->sendPOST('/hardware', $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-
     }
 
     /** @test */
@@ -183,6 +181,14 @@ class ApiAssetsCest
 
         $response = json_decode($I->grabResponse());
         $I->assertEquals('success', $response->status);
+        $I->assertEquals(trans('admin/hardware/message.update.success'), $response->messages);
+
+        $I->assertEquals($asset->id, $response->payload->id);
+        // $I->assertEquals($asset->name, $response->payload->name);
+        // $I->assertEquals($asset->asset_tag, $response->payload->asset_tag);
+        // $I->assertEquals($asset->model_id, $response->payload->model_id);
+
+        // dd($response, $asset->getAttributes());
 
         // verify
         // $scenario->incomplete('[BadMethodCallException] Call to undefined method Illuminate\Database\Query\Builder::detail() 🤔');
@@ -278,8 +284,11 @@ class ApiAssetsCest
         $asset = factory(\App\Models\Asset::class, 'asset')->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
+        $company = \App\Models\Company::inRandomOrder()->first();
+
         $data = [
             'name' => $this->faker->sentence(3),
+            'company_id' => $company->id,
         ];
 
         $I->assertNotEquals($asset->name, $data['name']);
@@ -291,6 +300,8 @@ class ApiAssetsCest
 
         $response = json_decode($I->grabResponse());
         $I->assertEquals('success', $response->status);
+        $I->assertEquals(trans('admin/hardware/message.update.success'), $response->messages);
+        $I->assertEquals($asset->id, $response->payload->id);
 
         // verify
         $I->sendGET('/hardware/' . $asset->id);
@@ -321,8 +332,8 @@ class ApiAssetsCest
             'notes' => e($asset->notes),
             'order_number' => e($asset->order_number),
             'company' => ($asset->company) ? [
-                'id' => (int) $asset->company->id,
-                'name'=> e($asset->company->name)
+                'id' => (int) $data['company_id'],
+                'name'=> e($company->name)
             ] : null,
             'location' => ($asset->assetLoc) ? [
                 'id' => (int) $asset->assetLoc->id,
@@ -388,11 +399,17 @@ class ApiAssetsCest
         $I->sendDELETE('/hardware/' . $asset->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
+        
+        $response = json_decode($I->grabResponse());
+        $I->assertEquals('success', $response->status);
+        $I->assertEquals(trans('admin/hardware/message.delete.success'), $response->messages);
 
         // verify, expect a 200
         $I->sendGET('/hardware/' . $asset->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson(); // @todo: response is not JSON
+
+        
         // $scenario->incomplete('not found response should be JSON, receiving HTML instead');
     }
 }

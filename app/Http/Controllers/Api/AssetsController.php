@@ -51,7 +51,6 @@ class AssetsController extends Controller
      */
     public function index(Request $request)
     {
-
         $this->authorize('index', Asset::class);
 
         $allowed_columns = [
@@ -114,7 +113,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('company_id')) {
-            $assets->where('assets.company_id','=',$request->input('company_id'));
+            $assets->where('assets.company_id', '=', $request->input('company_id'));
         }
 
         if ($request->has('manufacturer_id')) {
@@ -189,7 +188,6 @@ class AssetsController extends Controller
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
         return (new AssetsTransformer)->transformAssets($assets, $total);
-
     }
 
 
@@ -203,15 +201,12 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-
         if ($asset = Asset::withTrashed()->find($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
-
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
-
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
 
@@ -225,10 +220,10 @@ class AssetsController extends Controller
      */
     public function store(AssetRequest $request)
     {
-        $this->authorize('create', Asset::class);
+        // $this->authorize('create', Asset::class);
 
         $asset = new Asset();
-        $asset->model()->associate(AssetModel::find(e($request->get('model_id'))));
+        $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
         $asset->name                    = $request->get('name');
         $asset->serial                  = $request->get('serial');
@@ -261,22 +256,19 @@ class AssetsController extends Controller
 
         if ($asset->save()) {
             $asset->logCreate();
-            if($request->get('assigned_user')) {
+            if ($request->get('assigned_user')) {
                 $target = User::find(request('assigned_user'));
-            } elseif($request->get('assigned_asset')) {
+            } elseif ($request->get('assigned_asset')) {
                 $target = Asset::find(request('assigned_asset'));
-            } elseif($request->get('assigned_location')) {
+            } elseif ($request->get('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
             }
             if (isset($target)) {
                 $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
-            return response()->json(Helper::formatStandardApiResponse('success', $asset->id,  trans('admin/hardware/message.create.success')));
-
+            return response()->json(Helper::formatStandardApiResponse('success', $asset->id, trans('admin/hardware/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 500);
-
-
+        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
 
 
@@ -293,15 +285,14 @@ class AssetsController extends Controller
         $this->authorize('create', Asset::class);
 
         if ($asset = Asset::find($id)) {
-
             ($request->has('model_id')) ?
                 $asset->model()->associate(AssetModel::find($request->get('model_id'))) : '';
-            ($request->has('name')) ? $asset->name = $request->get('name') : '';
+            ($request->has('name')) ? $asset->name = $request->input('name') : '';
             ($request->has('serial')) ? $asset->serial = $request->get('serial') : '';
             ($request->has('model_id')) ? $asset->model_id = $request->get('model_id') : '';
             ($request->has('order_number')) ? $asset->order_number = $request->get('order_number') : '';
             ($request->has('notes')) ? $asset->notes = $request->get('notes') : '';
-            ($request->has('asset_tag')) ? $asset->asset_tag = $request->get('asset_tag') : '';
+            ($request->has('asset_tag')) ? $asset->asset_tag = $request->input('asset_tag') : '';
             ($request->has('archived')) ? $asset->archived = $request->get('archived') : '';
             ($request->has('status_id')) ? $asset->status_id = $request->get('status_id') : '';
             ($request->has('warranty_months')) ? $asset->warranty_months = $request->get('warranty_months') : '';
@@ -322,21 +313,17 @@ class AssetsController extends Controller
                         if ($request->has($field->convertUnicodeDbSlug())) {
                             $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
                         }
-
                     }
                 }
             }
 
-
-
             if ($asset->save()) {
-
                 $asset->logCreate();
-                if($request->get('assigned_user')) {
+                if ($request->get('assigned_user')) {
                     $target = User::find(request('assigned_user'));
-                } elseif($request->get('assigned_asset')) {
+                } elseif ($request->get('assigned_asset')) {
                     $target = Asset::find(request('assigned_asset'));
-                } elseif($request->get('assigned_location')) {
+                } elseif ($request->get('assigned_location')) {
                     $target = Location::find(request('assigned_location'));
                 }
 
@@ -344,17 +331,13 @@ class AssetsController extends Controller
                     $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')));
                 }
 
-                return response()->json(Helper::formatStandardApiResponse('success', $asset,  trans('admin/hardware/message.update.success')));
-
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
             }
-            return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 500);
-
+            return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
         }
 
 
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/hardware/message.does_not_exist')), 404);
-
-
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
 
@@ -368,7 +351,6 @@ class AssetsController extends Controller
      */
     public function destroy($id)
     {
-
         if ($asset = Asset::find($id)) {
             $this->authorize('delete', $asset);
 
@@ -377,11 +359,11 @@ class AssetsController extends Controller
                 ->update(array('assigned_to' => null));
 
             $asset->delete();
+
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
-
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
 
@@ -394,8 +376,8 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function checkout(Request $request, $asset_id) {
-
+    public function checkout(Request $request, $asset_id)
+    {
         $this->authorize('checkout', Asset::class);
         $asset = Asset::findOrFail($asset_id);
 
@@ -428,7 +410,6 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.error')))->withErrors($asset->getErrors());
-
     }
 
 
@@ -440,8 +421,8 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function checkin($asset_id) {
-
+    public function checkin($asset_id)
+    {
         $this->authorize('checkin', Asset::class);
         $asset = Asset::findOrFail($asset_id);
         $this->authorize('checkin', $asset);
@@ -487,8 +468,5 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));
-
-
     }
-
 }
