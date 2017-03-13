@@ -184,9 +184,9 @@ class ApiAssetsCest
         $I->assertEquals(trans('admin/hardware/message.update.success'), $response->messages);
 
         $I->assertEquals($asset->id, $response->payload->id);
-        // $I->assertEquals($asset->name, $response->payload->name);
-        // $I->assertEquals($asset->asset_tag, $response->payload->asset_tag);
-        // $I->assertEquals($asset->model_id, $response->payload->model_id);
+        $I->assertEquals($data['name'], $response->payload->name);
+        $I->assertEquals($data['asset_tag'], $response->payload->asset_tag);
+        $I->assertEquals($data['model_id'], $response->payload->model_id);
 
         // dd($response, $asset->getAttributes());
 
@@ -399,7 +399,7 @@ class ApiAssetsCest
         $I->sendDELETE('/hardware/' . $asset->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        
+
         $response = json_decode($I->grabResponse());
         $I->assertEquals('success', $response->status);
         $I->assertEquals(trans('admin/hardware/message.delete.success'), $response->messages);
