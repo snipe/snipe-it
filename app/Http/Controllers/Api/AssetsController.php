@@ -287,7 +287,7 @@ class AssetsController extends Controller
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?
                 $asset->model()->associate(AssetModel::find($request->get('model_id'))) : '';
-            ($request->has('name')) ? $asset->name = $request->input('name') : '';
+            ($request->has('name')) ? $asset->name = $request->get('name') : '';
             ($request->has('serial')) ? $asset->serial = $request->get('serial') : '';
             ($request->has('model_id')) ? $asset->model_id = $request->get('model_id') : '';
             ($request->has('order_number')) ? $asset->order_number = $request->get('order_number') : '';
