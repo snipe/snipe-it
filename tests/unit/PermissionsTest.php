@@ -420,10 +420,8 @@ class PermissionsTest extends TestCase
         $this->actingAs($user);
 
         foreach ($routes as $route => $response) {
-            // dd($this->get(route($route)));
-            // echo($this->get(route($route))->dump());
             $this->get($route)
-                ->assertResponseStatus($response);
+                ->assertStatus($response);
         }
     }
 }
