@@ -32,14 +32,12 @@ class CustomField extends Model
 
     public static function name_to_db_name($name)
     {
-        return "_snipeit_".preg_replace("/[^a-zA-Z0-9]/", "_", strtolower($name));
+        return "_snipeit_" . preg_replace("/[^a-zA-Z0-9]/", "_", strtolower($name));
     }
 
     public static function boot()
     {
-        self::created(function ($custom_field)
-        {
-
+        self::created(function ($custom_field) {
             \Log::debug("\n\nCreating Original Name: ".$custom_field->name);
             \Log::debug('Creating Column Name: '.$custom_field->convertUnicodeDbSlug());
 
@@ -55,36 +53,30 @@ class CustomField extends Model
 
             $custom_field->db_column = $custom_field->convertUnicodeDbSlug();
             $custom_field->save();
-
         });
 
 
-        self::updating(function ($custom_field)
-        {
+        self::updating(function ($custom_field) {
             \Log::debug('Updating column name');
             \Log::debug('Updating Original Name: '.$custom_field->getOriginal("name"));
             \Log::debug('Updating New Column Name: '.$custom_field->convertUnicodeDbSlug());
 
             if ($custom_field->isDirty("name")) {
-
-                if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug()))
-                {
+                if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
                     \Log::debug('Column already exists. Nothing to update.');
                     return true;
                 }
 
                 \Log::debug('Updating column name to.'.$custom_field->convertUnicodeDbSlug());
+
                 return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal("name")), $custom_field->convertUnicodeDbSlug());
                 });
-
-
             }
             return true;
         });
 
-        self::deleting(function ($custom_field)
-        {
+        self::deleting(function ($custom_field) {
             return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                 $table->dropColumn($custom_field->convertUnicodeDbSlug());
             });
@@ -154,7 +146,6 @@ class CustomField extends Model
                     $result[$arr_parts[0]] = $arr_parts[0];
                 }
             }
-
         }
 
 
@@ -176,16 +167,11 @@ class CustomField extends Model
         $id = $this->id ? $this->id : 'xx';
 
         if (!function_exists('transliterator_transliterate')) {
-            $long_slug = str_slug('_snipeit_'.\Patchwork\Utf8::utf8_encode(trim($name)),'_');
+            $long_slug = '_snipeit_' . str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
         } else {
-            $long_slug =  '_snipeit_'.Utf8Slugger::slugify($name,'_');
+            $long_slug =  '_snipeit_' . Utf8Slugger::slugify($name, '_');
         }
 
-        return substr($long_slug, 0, 50).'_'.$id;
-
+        return substr($long_slug, 0, 50) . '_' . $id;
     }
-
-
-
-
 }
