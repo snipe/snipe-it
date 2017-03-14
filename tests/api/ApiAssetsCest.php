@@ -184,6 +184,7 @@ class ApiAssetsCest
         $I->assertEquals($asset->id, $response->payload->id); // asset id does not change
         $I->assertEquals($temp_asset->asset_tag, $response->payload->asset_tag); // asset tag updated
         $I->assertEquals($temp_asset->name, $response->payload->name); // asset name updated
+        $I->assertEquals($temp_asset->rtd_location_id, $response->payload->rtd_location_id); // asset rtd_location_id updated
 
         // verify
         $I->sendGET('/hardware/' . $asset->id);
@@ -217,13 +218,13 @@ class ApiAssetsCest
                 'id' => (int) $temp_asset->company->id,
                 'name'=> e($temp_asset->company->name)
             ] : null,
-            'location' => ($asset->assetLoc) ? [
-                'id' => (int) $asset->assetLoc->id,
-                'name'=> e($asset->assetLoc->name)
+            'location' => ($temp_asset->assetLoc) ? [
+                'id' => (int) $temp_asset->assetLoc->id,
+                'name'=> e($temp_asset->assetLoc->name)
             ]  : null,
-            'rtd_location' => ($asset->defaultLoc) ? [
-                'id' => (int) $asset->defaultLoc->id,
-                'name'=> e($asset->defaultLoc->name)
+            'rtd_location' => ($temp_asset->defaultLoc) ? [
+                'id' => (int) $temp_asset->defaultLoc->id,
+                'name'=> e($temp_asset->defaultLoc->name)
             ]  : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($temp_asset->assigneduser) ? [
@@ -258,7 +259,7 @@ class ApiAssetsCest
             //     'formatted' => $asset->created_at->format('Y-m-d'),
             // ] : null,
             // 'purchase_cost' => (float) $asset->purchase_cost,
-            'user_can_checkout' => (bool) $asset->availableForCheckout(),
+            'user_can_checkout' => (bool) $temp_asset->availableForCheckout(),
             'available_actions' => [
                 'checkout' => (bool) Gate::allows('checkout', Asset::class),
                 'checkin' => (bool) Gate::allows('checkin', Asset::class),
@@ -315,6 +316,7 @@ class ApiAssetsCest
         $I->assertEquals($asset->id, $response->payload->id); // asset id does not change
         $I->assertEquals($temp_asset->asset_tag, $response->payload->asset_tag); // asset tag updated
         $I->assertEquals($temp_asset->name, $response->payload->name); // asset name updated
+        $I->assertEquals($temp_asset->rtd_location_id, $response->payload->rtd_location_id); // asset rtd_location_id updated
 
         // verify
         $I->sendGET('/hardware/' . $asset->id);
@@ -348,13 +350,13 @@ class ApiAssetsCest
                 'id' => (int) $temp_asset->company->id,
                 'name'=> e($temp_asset->company->name)
             ] : null,
-            'location' => ($asset->assetLoc) ? [
-                'id' => (int) $asset->assetLoc->id,
-                'name'=> e($asset->assetLoc->name)
+            'location' => ($temp_asset->assetLoc) ? [
+                'id' => (int) $temp_asset->assetLoc->id,
+                'name'=> e($temp_asset->assetLoc->name)
             ]  : null,
-            'rtd_location' => ($asset->defaultLoc) ? [
-                'id' => (int) $asset->defaultLoc->id,
-                'name'=> e($asset->defaultLoc->name)
+            'rtd_location' => ($temp_asset->defaultLoc) ? [
+                'id' => (int) $temp_asset->defaultLoc->id,
+                'name'=> e($temp_asset->defaultLoc->name)
             ]  : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($temp_asset->assigneduser) ? [
@@ -389,7 +391,7 @@ class ApiAssetsCest
             //     'formatted' => $asset->created_at->format('Y-m-d'),
             // ] : null,
             // 'purchase_cost' => (float) $asset->purchase_cost,
-            'user_can_checkout' => (bool) $asset->availableForCheckout(),
+            'user_can_checkout' => (bool) $temp_asset->availableForCheckout(),
             'available_actions' => [
                 'checkout' => (bool) Gate::allows('checkout', Asset::class),
                 'checkin' => (bool) Gate::allows('checkin', Asset::class),
