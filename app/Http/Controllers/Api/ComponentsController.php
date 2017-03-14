@@ -89,8 +89,13 @@ class ComponentsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Component::class);
-        $component = Component::findOrFail($id);
-        return (new ComponentsTransformer)->transformComponent($component);
+        $component = Component::find($id);
+
+        if ($component) {
+            return (new ComponentsTransformer)->transformComponent($component);
+        }
+        
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.does_not_exist')));
     }
 
 
