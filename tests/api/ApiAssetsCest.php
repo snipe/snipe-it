@@ -121,7 +121,7 @@ class ApiAssetsCest
 
         // setup
         $data = [
-            'asset_tag' => $this->faker->uuid,
+            'asset_tag' => $temp_asset->asset_tag,
             'assigned_to' => $temp_asset->assigned_to,
             'company_id' => $temp_asset->company->id,
             'image' => $temp_asset->image,
@@ -152,16 +152,10 @@ class ApiAssetsCest
         $asset = factory(\App\Models\Asset::class, 'asset')->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
-        $temp_asset_tag = $this->faker->uuid;
-        $temp_asset = factory(\App\Models\Asset::class, 'asset')->make([
-            'asset_tag' => $temp_asset_tag,
-        ]);
-
-        $I->assertNotNull($temp_asset->asset_tag);
-        $I->assertEquals($temp_asset_tag, $temp_asset->asset_tag);
+        $temp_asset = factory(\App\Models\Asset::class, 'asset')->make();
 
         $data = [
-            'asset_tag' => $temp_asset->tag,
+            'asset_tag' => $temp_asset->asset_tag,
             'assigned_to' => $temp_asset->assigned_to,
             'company_id' => $temp_asset->company->id,
             'image' => $temp_asset->image,
@@ -180,7 +174,7 @@ class ApiAssetsCest
         $I->assertNotEquals($asset->name, $data['name']);
 
         // update
-        $I->sendPUT('/hardware/' . $asset->id, $data);
+        $I->sendPATCH('/hardware/' . $asset->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -292,7 +286,7 @@ class ApiAssetsCest
         $I->assertEquals($temp_asset_tag, $temp_asset->asset_tag);
 
         $data = [
-            'asset_tag' => $temp_asset->tag,
+            'asset_tag' => $temp_asset->asset_tag,
             'assigned_to' => $temp_asset->assigned_to,
             'company_id' => $temp_asset->company->id,
             'image' => $temp_asset->image,
