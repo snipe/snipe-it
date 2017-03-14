@@ -284,6 +284,8 @@ class AssetsController extends Controller
     {
         $this->authorize('create', Asset::class);
 
+        \Log::debug('[Api\AssetsController] Updating asset [id = ' . $id . '] with method ' . $request->getMethod());
+
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?
                 $asset->model()->associate(AssetModel::find($request->get('model_id'))) : '';
@@ -315,8 +317,6 @@ class AssetsController extends Controller
                 $asset->supplier_id = $request->get('supplier_id') : '';
             ($request->has('requestable')) ?
                 $asset->requestable = $request->get('requestable') : '';
-            ($request->has('archived')) ?
-                $asset->archived = $request->get('archived') : '';
             ($request->has('rtd_location_id')) ?
                 $asset->rtd_location_id = $request->get('rtd_location_id') : '';
             ($request->has('company_id')) ?
