@@ -219,6 +219,7 @@ return [
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         PragmaRX\Google2FA\Vendor\Laravel\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
 
 
         /*
