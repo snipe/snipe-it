@@ -41,7 +41,7 @@
           </td>
         </tr>
         <tr{!! ($start_settings['db_conn']===true) ? ' class="success"' : ' class="danger"' !!}>
-          <td>Database</td>
+          <td>{{ trans('admin/setup/general.database') }}</td>
           <td>
             @if ($start_settings['db_conn']===true)
               <i class="fa fa-check preflight-success"></i>
@@ -51,9 +51,9 @@
           </td>
           <td>
               @if ($start_settings['db_conn']===true)
-                Great work! Connected to <code>{{ $start_settings['db_name'] }}</code>
+                {{ trans('admin/setup/general.database_correct_text') }}<code>{{ $start_settings['db_name'] }}</code>
               @else
-                D'oh! Looks like we can't connect to your database. Please update your database settings in your  <code>.env</code> file. Your database says: <code>{{ $start_settings['db_error'] }}</code>
+                {{ trans('admin/setup/general.database_incorrect_text1') }}<code>{{ $start_settings['db_error'] }}</code>
               @endif
           </td>
         </tr>
@@ -94,7 +94,7 @@
         </tr>
 
         <tr{!! (!$start_settings['owner_is_admin']) ? ' class="success"' : ' class="danger"' !!}>
-          <td>File Owner</td>
+          <td>{{ trans('admin/setup/general.file_owner') }}</td>
           <td>
             @if (!$start_settings['owner_is_admin'])
               <i class="fa fa-check preflight-success"></i>
@@ -148,7 +148,7 @@
         </tr>
 
         <tr{!! ($start_settings['gd']) ? ' class="success"' : ' class="warning"' !!}>
-          <td>Image Library</td>
+          <td>{{ trans('admin/setup/general.image_library') }}</td>
           <td>
             @if ($start_settings['gd'])
               <i class="fa fa-check preflight-success"></i>
@@ -181,7 +181,7 @@
 
         @section('button')
           <form action="{{ route('setup.migrate') }}" method="GET">
-            <button class="btn btn-primary">Next: Create Database Tables</button>
+            <button class="btn btn-primary">{{ trans('general.next') }}: {{ trans('admin/setup/general.create_database_tables') }}</button>
           </form>
         @parent
         @stop
