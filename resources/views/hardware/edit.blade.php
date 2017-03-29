@@ -240,10 +240,49 @@
             var modal = $(this);
             modal.find('.modal-title').text('Add a new ' + model);
 
+<<<<<<< HEAD
             $('.dynamic-form-row').hide();
             function show_er(selector) {
                 $(selector).parent().parent().show();
             }
+=======
+    $('.dynamic-form-row').hide();
+    function show_er(selector) {
+      //$(selector).show().parent().show();
+      $(selector).parent().parent().show();
+    }
+    show_er('#modal-name');
+    switch(model) {
+      case 'model':
+      show_er('#modal-manufacturer_id');
+      show_er('#modal-category_id');
+      show_er('#modal-model_number');
+      show_er('#modal-fieldset_id');
+      break;
+
+      case 'user':
+      $('.dynamic-form-row').hide(); //we don't want a generic "name"
+      show_er("#modal-first_name");
+      show_er("#modal-last_name");
+      show_er("#modal-username");
+      show_er("#modal-password");
+      show_er("#modal-password_confirm");
+      break;
+
+      case 'location':
+      show_er('#modal-city');
+      show_er('#modal-country');
+      break;
+
+      case 'statuslabel':
+      show_er("#modal-statuslabel_types");
+      break;
+
+      case 'supplier':
+
+      //do nothing, they just need 'name'
+    }
+>>>>>>> refs/remotes/snipe/master
 
             show_er('#modal-name');
             switch (model) {

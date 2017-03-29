@@ -366,9 +366,21 @@ class UsersController extends Controller
             // Authorize takes care of many of our logic checks now.
             $this->authorize('delete', User::class);
 
+<<<<<<< HEAD
             if ($user->assets()->count() > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
+=======
+            // Check if we are not trying to delete ourselves
+            if ($user->id === Auth::user()->id) {
+                // Redirect to the user management page
+                return redirect()->route('users')->with('error', trans('admin/users/message.error.delete'));
+            }
+
+            // Do we have permission to delete this user?
+            if ((Gate::denies('users.delete') || (config('app.lock_passwords')))) {
+                return redirect()->route('users')->with('error', 'Insufficient permissions!');
+>>>>>>> refs/remotes/snipe/master
             }
 
             if ($user->licenses()->count() > 0) {
@@ -384,9 +396,8 @@ class UsersController extends Controller
 
             // Delete the user
             $user->delete();
-
-            // Prepare the success message
             $success = trans('admin/users/message.success.delete');
+<<<<<<< HEAD
 
             // Redirect to the user management page
             return redirect()->route('users.index')->with('success', $success);
@@ -395,6 +406,12 @@ class UsersController extends Controller
             $error = trans('admin/users/message.user_not_found', compact('id'));
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
+=======
+            return redirect()->route('users')->with('success', $success);
+
+        } catch (UserNotFoundException $e) {
+            return redirect()->route('users')->with('error', trans('admin/users/message.user_not_found', compact('id')));
+>>>>>>> refs/remotes/snipe/master
         }
     }
 
@@ -519,10 +536,14 @@ class UsersController extends Controller
             if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
                 unset($user_raw_array[$key]);
             }
+<<<<<<< HEAD
 
             if (!Auth::user()->isSuperUser()) {
                 return redirect()->route('users.index')->with('error', trans('admin/users/message.insufficient_permissions'));
             }
+=======
+            
+>>>>>>> refs/remotes/snipe/master
 
             if (!config('app.lock_passwords')) {
 
@@ -822,7 +843,6 @@ class UsersController extends Controller
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
-                        //dd($newuser);
 
                         DB::table('users')->insert($newuser);
 
@@ -914,7 +934,6 @@ class UsersController extends Controller
         $user = User::find($userId);
         $destinationPath = config('app.private_uploads').'/users';
 
-        // the license is valid
         if (isset($user->id)) {
             $this->authorize('update', $user);
             $log = Actionlog::find($fileId);
