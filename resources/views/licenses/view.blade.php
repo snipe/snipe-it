@@ -53,7 +53,7 @@
                     @if ($license->licenseseats)
                       @foreach ($license->licenseseats as $licensedto)
                       <tr>
-                        <td>Seat {{ $count }} </td>
+                        <td>{{ trans('admin/licenses/general.seat') }} {{ $count }} </td>
                         <td>
                           @if (($licensedto->user) && ($licensedto->deleted_at == NULL))
                             @can('users.view')
@@ -94,7 +94,7 @@
                                   {{ trans('general.checkin') }}
                                 </a>
                               @else
-                                <span>Assigned</span>
+                                <span>{{ trans('admin/licenses/general.assigned') }}</span>
                               @endif
                             @else
                               <a href="{{ route('licenses.checkout', $licensedto->id) }}" class="btn btn-info btn-sm">
@@ -318,7 +318,7 @@
                 <td>
                 @if ($file->filename)
                   <a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">
-                    Download
+                    {{ trans('general.download') }}
                   </a>
                 @endif
                 </td>
@@ -407,7 +407,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+        <h4 class="modal-title" id="uploadFileModalLabel">{{ trans('general.upload_file') }}</h4>
       </div>
       {{ Form::open([
       'method' => 'POST',
