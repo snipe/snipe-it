@@ -75,23 +75,29 @@ class ApiComponentsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
-            'id' => $id,
-            'category' => [
-                'id' => $data['category_id'],
-                'name' => e($category->name),
-            ],
-            'company' => [
-                'id' => $data['company_id'],
-                'name' => e($company->name),
-            ],
+            'id' => (int) $id,
+            'name' => e($data['name']),
+            // 'serial_number' => e($component->serial),
             'location' => [
-                'id' => $data['location_id'],
+                'id' => (int) $data['location_id'],
                 'name' => e($location->name),
             ],
-            'name' => $data['name'],
-            'qty' => $data['qty'],
+            'qty' => number_format($data['qty']),
+            // 'min_amt' => e($component->min_amt),
+            'category' => [
+                'id' => (int) $data['category_id'],
+                'name' => e($category->name),
+            ],
+            // 'order_number'  => e($component->order_number),
+            'purchase_date' =>  \App\Helpers\Helper::getFormattedDateObject($data['purchase_date'], 'date'),
             'purchase_cost' => \App\Helpers\Helper::formatCurrencyOutput($data['purchase_cost']),
-            'purchase_date' => $data['purchase_date'],
+            // 'remaining' => (int) $component->numRemaining(),
+            'company' => [
+                'id' => (int) $data['company_id'],
+                'name' => e($company->name),
+            ],
+            // 'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
+            // 'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
         ]);
     }
 
@@ -178,10 +184,10 @@ class ApiComponentsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
-        // verify, expect a 404
+        // verify, expect a 200 with an error message
         $I->sendGET('/components/' . $component->id);
-        $I->seeResponseCodeIs(404);
-        // $I->seeResponseIsJson(); // @todo: response is not JSON
-        $scenario->incomplete('404 response should be JSON, receiving HTML instead');
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson(); // @todo: response is not JSON
+        // $scenario->incomplete('Resource not found response should be JSON, receiving HTML instead');
     }
 }
