@@ -35,7 +35,8 @@
             @if ($start_settings['url_valid'])
               {{ trans('admin/setup/general.url_correct_text') }}
             @else
-              {{ trans('admin/setup/general.url_incorrect_text') }}
+              {{ trans('admin/setup/general.url_incorrect_text1') }} {{ $start_settings['url_config'] }}{{ trans('admin/setup/general.url_incorrect_text2') }} {{ $start_settings['real_url'] }}
+              {{ trans('admin/setup/general.url_incorrect_text3') }}
             @endif
           </td>
         </tr>
