@@ -12,5 +12,5 @@ return array(
     'request'                   => 'Request',
     'submit'  	                => 'Submit',
     'upload'                    => 'Upload',
-
+	'test_email'				=> 'Test Email',
 );

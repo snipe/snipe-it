@@ -2,22 +2,22 @@
 
 {{-- Page title --}}
 @section('title')
-Create a User ::
+{{ trans('admin/setup/general.create_user') }} ::
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
 
-    <p>This page will do a system check to make sure your configuration looks correct. We'll add your first user on the next page. </p>
+    <p>{{ trans('admin/setup/general.main_info_text') }}</p>
 
 
       <table class="table">
         <thead>
         <tr>
-          <th class="col-lg-2">Setting</th>
-          <th class="col-lg-1">Valid</th>
-          <th class="col-lg-9">Notes</th>
+          <th class="col-lg-2">{{ trans('general.settings') }}</th>
+          <th class="col-lg-1">{{ trans('general.valid') }}</th>
+          <th class="col-lg-9">{{ trans('general.notes') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -33,10 +33,9 @@ Create a User ::
           </td>
           <td>
             @if ($start_settings['url_valid'])
-              That URL looks right! Good job!
+              {{ trans('admin/setup/general.url_correct_text') }}
             @else
-              Uh oh! Snipe-IT thinks your URL is {{ $start_settings['url_config'] }}, but your real URL is {{ $start_settings['real_url'] }}
-              Please update your <code>APP_URL</code> settings in your  <code>.env</code> file
+              {{ trans('admin/setup/general.url_incorrect_text') }}
             @endif
           </td>
         </tr>
@@ -76,7 +75,7 @@ Create a User ::
         </tr>
 
         <tr{!! ($start_settings['prod']) ? ' class="success"' : ' class="warning"' !!}>
-          <td>Environment</td>
+          <td>{{ trans('general.environment') }}</td>
           <td>
             @if ($start_settings['prod'])
               <i class="fa fa-check preflight-success"></i>
@@ -112,7 +111,7 @@ Create a User ::
         </tr>
 
         <tr{!! (!$start_settings['writable']) ? ' class="danger"' : ' class="success"' !!}>
-          <td>Permissions</td>
+          <td>{{ trans('general.permisions') }}</td>
           <td>
             @if ($start_settings['writable'])
               <i class="fa fa-check preflight-success"></i>
@@ -169,7 +168,7 @@ Create a User ::
           <td id="mailtesticon">
           </td>
           <td id="mailtestresult">
-             <button class="btn btn-default" id="mailtest"> Test Email</button>
+             <button class="btn btn-default" id="mailtest">{{ trans('general.test_email') }}</button>
               <span id="mailtestresult"></span>
           </td>
         </tr>
