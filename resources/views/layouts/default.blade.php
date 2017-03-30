@@ -104,7 +104,7 @@
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">{{ trans('general.toggle_navigation') }}</span>
           </a>
           <ul class="nav navbar-nav navbar-left">
               <li class="left-navblock">
@@ -244,7 +244,7 @@
                    @endif
                  </a>
                  <ul class="dropdown-menu">
-                   <li class="header">You have {{ count($alert_items) }} items below or almost below minimum quantity levels</li>
+                   <li class="header">{{ trans('general.you_have') }}{{ count($alert_items) }} {{ trans('general.items_below') }}</li>
                    <li>
                      <!-- inner menu: contains the actual data -->
                      <ul class="menu">
@@ -255,12 +255,12 @@
                           <a href="{{ config('app.url') }}/admin/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
                             <h3>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
-                                {{ $alert_items[$i]['remaining'] }} remaining
+                                {{ $alert_items[$i]['remaining'] }} {{ trans('general.remaining') }}
                               </small>
                             </h3>
                             <div class="progress xs">
                               <div class="progress-bar progress-bar-yellow" style="width: {{ $alert_items[$i]['percent'] }}%" role="progressbar" aria-valuenow="{{ $alert_items[$i]['percent'] }}" aria-valuemin="0" aria-valuemax="100">
-                                <span class="sr-only">{{ $alert_items[$i]['percent'] }}% Complete</span>
+                                <span class="sr-only">{{ $alert_items[$i]['percent'] }}% {{ trans('general.complete') }}</span>
                               </div>
                             </div>
                           </a>
@@ -270,7 +270,7 @@
                      </ul>
                    </li>
                    {{-- <li class="footer">
-                     <a href="#">View all tasks</a>
+                     <a href="#">{{ trans('general.view_all_tasks') }}</a>
                    </li> --}}
                  </ul>
                </li>
@@ -384,7 +384,7 @@
           </div>
       </nav>
        <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">{{ trans('general.toggle_navigation') }}</span>
         <i class="fa fa-bars"></i>
       </a>
        <!-- Sidebar toggle button-->
@@ -399,7 +399,7 @@
             @can('admin')
             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard"></i> <span>{{ trans('general.dashboard') }}</span>
               </a>
             </li>
             @endcan
@@ -584,12 +584,12 @@
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io">Documentation</a>
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it-manual.readme.io">User's Manual</a>
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/">Report a Bug</a>
+          <b>{{ trans('general.version') }}</b> {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
+          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io">{{ trans('general.documentation') }}</a>
+          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it-manual.readme.io">{{ trans('general.user_manual') }}</a>
+          <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/">{{ trans('general.report_bug') }}</a>
         </div>
-        <a target="_blank" href="https://snipeitapp.com">Snipe-IT</a> is an open source
+        <a target="_blank" href="https://snipeitapp.com">>{{ trans('general.application_name') }}</a> is an open source
         project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
       </footer>
 
@@ -609,7 +609,7 @@
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">{{ trans('button.close') }}</button>
                     <a class="btn btn-outline" id="dataConfirmOK">@lang('general.yes')</a>
                 </div>
             </div>

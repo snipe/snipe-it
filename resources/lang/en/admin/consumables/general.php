@@ -10,4 +10,6 @@ return array(
     'remaining' 			            => 'Remaining',
     'total' 			                => 'Total',
     'update'                            => 'Update Consumable',
+
+	
 );

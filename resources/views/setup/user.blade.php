@@ -27,7 +27,6 @@
               </div>
 
               <!-- email domain -->
-
               <div class="row">
                 <div class="form-group col-lg-6 {{ $errors->has('email_domain') ? 'error' : '' }}">
                   {{ Form::label('email_domain', trans('general.email_domain')) }}
@@ -47,7 +46,6 @@
 
 
               <!-- first name -->
-
               <div class="row">
                 <div class="form-group col-lg-6 {{ $errors->has('first_name') ? 'error' : '' }}">
                     {{ Form::label('first_name', trans('general.first_name')) }}
@@ -111,7 +109,7 @@
 @stop
 
 @section('button')
-  <button class="btn btn-primary">{{ trans('general.next') }}: Save User</button>
+  <button class="btn btn-primary">{{ trans('general.next') }}: {{ trans('admin/setup/general.save_user') }}</button>
   </form>
 @parent
 @stop

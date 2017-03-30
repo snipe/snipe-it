@@ -107,7 +107,7 @@
                         <th class="col-sm-2" data-field="admin">{{ trans('general.admin') }}</th>
                         <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
                         <th class="col-sm-4" data-field="item">{{ trans('general.item') }}</th>
-                        <th class="col-sm-2" data-field="target">To</th>
+                        <th class="col-sm-2" data-field="target">{{ trans('general.to') }}</th>
                     </tr>
                 </thead>
 

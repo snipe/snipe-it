@@ -2,14 +2,14 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/setup/general.main_info_title') }} ::
+{{ trans('admin/setup/general.pre_flight_check') }} ::
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
 
-    <p>{{ trans('admin/setup/general.main_info_text') }}</p>
+    <p>{{ trans('admin/setup/general.pre_flight_check_text') }}</p>
 
 
       <table class="table">

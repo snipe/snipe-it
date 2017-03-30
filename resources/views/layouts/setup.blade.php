@@ -3,7 +3,7 @@
     <head>
       <title>
         @section('title')
-         Snipe-IT Setup
+         {{ trans('general.application_name') }} {{ trans('admin/setup/general.setup') }}
         @show
       </title>
 
@@ -68,38 +68,38 @@
           <div class="container">
               <div class="row">
                   <div class="col-lg-10 col-lg-offset-1">
-                    <h1 class="page-header">Snipe-IT Pre-Flight</h1>
+                    <h1 class="page-header">{{ trans('general.application_name') }} {{ trans('admin/setup/general.pre_flight_check') }}</h1>
                   </div>
                   <div class="col-lg-11 col-lg-offset-1">
 
                     <div class="row bs-wizard" style="border-bottom:0;">
 
                       <div class="col-xs-3 bs-wizard-step {{ ($step > 1) ? 'complete':'active' }}">
-                        <div class="text-center bs-wizard-stepnum">Step 1</div>
+                        <div class="text-center bs-wizard-stepnum">{{ trans('admin/setup/general.step') }} 1</div>
                         <div class="progress"><div class="progress-bar"></div></div>
                         <a href="{{ route('setup') }}" class="bs-wizard-dot"></a>
-                        <div class="bs-wizard-info text-center">Configuration Check</div>
+                        <div class="bs-wizard-info text-center">{{ trans('admin/setup/general.configuration_check') }}</div>
                       </div>
 
                       <div class="col-xs-3 bs-wizard-step {{ ($step == 2) ? 'active': (($step < 2) ? 'disabled' : 'complete')  }}"><!-- complete -->
-                        <div class="text-center bs-wizard-stepnum">Step 2</div>
+                        <div class="text-center bs-wizard-stepnum">{{ trans('admin/setup/general.step') }} 2</div>
                         <div class="progress"><div class="progress-bar"></div></div>
                         <a href="{{ route('setup.migrate') }}" class="bs-wizard-dot"></a>
-                        <div class="bs-wizard-info text-center">Create Database Tables</div>
+                        <div class="bs-wizard-info text-center">{{ trans('admin/setup/general.create_database_tables') }}</div>
                       </div>
 
                       <div class="col-xs-3 bs-wizard-step {{ ($step == 3) ? 'active': (($step < 3) ? 'disabled' : 'complete')  }}"><!-- complete -->
-                        <div class="text-center bs-wizard-stepnum">Step 3</div>
+                        <div class="text-center bs-wizard-stepnum">{{ trans('admin/setup/general.step') }} 3</div>
                         <div class="progress"><div class="progress-bar"></div></div>
                         <a href="{{ route('setup.user') }}" class="bs-wizard-dot"></a>
-                        <div class="bs-wizard-info text-center">Create Admin User</div>
+                        <div class="bs-wizard-info text-center">{{ trans('admin/setup/general.create_admin_user') }}</div>
                       </div>
 
                       <div class="col-xs-3 bs-wizard-step {{ ($step == 4) ? 'active': (($step < 4) ? 'disabled' : 'complete')  }}"><!-- active -->
-                        <div class="text-center bs-wizard-stepnum">Step 4</div>
+                        <div class="text-center bs-wizard-stepnum">{{ trans('admin/setup/general.step') }} 4</div>
                         <div class="progress"><div class="progress-bar"></div></div>
                         <a href="#" class="bs-wizard-dot"></a>
-                        <div class="bs-wizard-info text-center"> Finished!</div>
+                        <div class="bs-wizard-info text-center">{{ trans('admin/setup/general.finished') }}</div>
                       </div>
                   </div>
                 </div>
