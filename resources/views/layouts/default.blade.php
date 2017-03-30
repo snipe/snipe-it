@@ -589,7 +589,7 @@
           <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it-manual.readme.io">{{ trans('general.user_manual') }}</a>
           <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/">{{ trans('general.report_bug') }}</a>
         </div>
-        <a target="_blank" href="https://snipeitapp.com">>{{ trans('general.application_name') }}</a> is an open source
+        <a target="_blank" href="https://snipeitapp.com">{{ trans('general.application_name') }}</a> is an open source
         project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
       </footer>
 

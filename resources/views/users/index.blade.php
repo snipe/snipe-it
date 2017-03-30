@@ -55,7 +55,7 @@
                  <select name="bulk_actions" class="form-control select2" style="width: 200px;">
                      <option value="delete">{{ trans('admin/users/general.bulk_checkin_and_delete') }}</option>
                  </select>
-                 <button class="btn btn-default" id="bulkEdit" disabled>{{ trans('general.go') }}</button>
+                 <button class="btn btn-default" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
              </div>
                 @endcan
             @endif
