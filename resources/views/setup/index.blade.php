@@ -68,9 +68,9 @@
           </td>
           <td>
               @if (!$start_settings['env_exposed'])
-                {{ trans('admin/setup/general.config_file_exposed_text') }}			
+                Sweet. It does not look like your <code>.env</code> file is exposed to the outside world. (You should double check this in a browser though. You do not ever want anyone able to see that file. Ever. Ever ever.) <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)		
               @else
-                {{ trans('admin/setup/general.config_file_notexposed_text') }}
+                Please make sure your <code>.env</code>. You do not ever want anyone able to see that file. Ever. Ever ever.  <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
               @endif
           </td>
         </tr>
