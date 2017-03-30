@@ -31,4 +31,7 @@ return array(
 	'admin_added' => 'Success! Your admin user has been added!',
 	'click_to_login' => 'Click here to go to your app login! ',
 	'summary' => 'Summary',
+	'migrated' => 'Migrated',
+	'admin_account_form_title' => ' This is the account information you will use to access the site for the first time. All fields are required. ',
+	'asset_management' => 'Asset Management',
 );

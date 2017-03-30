@@ -39,7 +39,7 @@
 
 @section('button')
   <form action="{{ route('setup.user') }}" method="GET">
-    <button class="btn btn-primary">{{ trans('general.next') }}: Create User</button>
+    <button class="btn btn-primary">{{ trans('general.next') }}: {{ trans('admin/setup/general.create_user') }}</button>
   </form>
 @parent
 @stop
