@@ -33,10 +33,10 @@
           </td>
           <td>
             @if ($start_settings['url_valid'])
-              {{ trans('admin/setup/general.url_correct_text') }}
+              {{ trans('admin/setup/general.url_valid_text') }}
             @else
-              {{ trans('admin/setup/general.url_incorrect_text1') }} {{ $start_settings['url_config'] }}{{ trans('admin/setup/general.url_incorrect_text2') }} {{ $start_settings['real_url'] }}
-              {{ trans('admin/setup/general.url_incorrect_text3') }}
+              {{ trans('admin/setup/general.url_notvalid_text1') }} {{ $start_settings['url_config'] }}{{ trans('admin/setup/general.url_notvalid_text2') }} {{ $start_settings['real_url'] }}
+              {{ trans('admin/setup/general.url_notvalid_text3') }}
             @endif
           </td>
         </tr>
@@ -51,14 +51,14 @@
           </td>
           <td>
               @if ($start_settings['db_conn']===true)
-                {{ trans('admin/setup/general.database_correct_text') }}<code>{{ $start_settings['db_name'] }}</code>
+                {{ trans('admin/setup/general.database_connected_text') }}<code>{{ $start_settings['db_name'] }}</code>
               @else
-                {{ trans('admin/setup/general.database_incorrect_text1') }}<code>{{ $start_settings['db_error'] }}</code>
+                {{ trans('admin/setup/general.database_notconnected_text1') }}<code>{{ $start_settings['db_error'] }}</code>
               @endif
           </td>
         </tr>
         <tr{!! (!$start_settings['env_exposed']) ? ' class="success"' : ' class="danger"' !!}>
-          <td>Config File</td>
+          <td>{{ trans('admin/setup/general.config_file') }}</td>
           <td>
             @if (!$start_settings['env_exposed'])
               <i class="fa fa-check preflight-success"></i>
@@ -68,9 +68,9 @@
           </td>
           <td>
               @if (!$start_settings['env_exposed'])
-                Sweet. It doesn't look like your <code>.env</code> file is exposed to the outside world. (You should double check this in a browser though. You don't ever want anyone able to see that file. Ever. Ever ever.) <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
+                {{ trans('admin/setup/general.config_file_exposed_text') }}			
               @else
-                Please make sure your <code>.env</code>. You don't ever want anyone able to see that file. Ever. Ever ever.  <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
+                {{ trans('admin/setup/general.config_file_notexposed_text') }}
               @endif
           </td>
         </tr>
@@ -122,9 +122,9 @@
           </td>
           <td>
               @if ($start_settings['writable'])
-                Yippee! Your app storage directory seems writable.
+                {{ trans('admin/setup/general.permisions_writable_text') }}
               @else
-                Uh-oh. Your <code>{{ storage_path() }}</code> directory (or sub-directories within) are not writable by the web-server. Those directories need to be writable by the web server in order for the app to work.
+                {{ trans('admin/setup/general.permisions_notwritable_text') }}
               @endif
           </td>
         </tr>
@@ -158,9 +158,9 @@
           </td>
           <td>
               @if ($start_settings['gd'])
-                GD is installed. Go you!
+                {{ trans('admin/setup/general.image_library_correct_text') }}
               @else
-                The GD library isn't installed. While this won't prevent the system from working, you won't be able to generate labels or upload images.
+                 {{ trans('admin/setup/general.image_library_incorrect_text') }}
               @endif
           </td>
         </tr>
@@ -169,7 +169,7 @@
           <td id="mailtesticon">
           </td>
           <td id="mailtestresult">
-             <button class="btn btn-default" id="mailtest">{{ trans('general.test_email') }}</button>
+             <button class="btn btn-default" id="mailtest">{{ trans('button.test_email') }}</button>
               <span id="mailtestresult"></span>
           </td>
         </tr>
