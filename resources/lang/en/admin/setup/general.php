@@ -23,5 +23,12 @@ return array(
 	'url_notvalid_text3' => 'Please update your <code>APP_URL</code> settings in your  <code>.env</code> file.',
 
 
-
+	'nothing_to_migrate' => 'There was nothing to migrate. Your database tables were already set up!',
+	'database_created' => 'Your database tables have been created',
+	'migration_output' => 'Migration output: ',
+	'email_credentials_text' => 'Email my credentials to the email address above',
+	'email_credentials' => 'Email credentials',
+	'admin_added' => 'Success! Your admin user has been added!',
+	'click_to_login' => 'Click here to go to your app login! ',
+	'summary' => 'Summary',
 );

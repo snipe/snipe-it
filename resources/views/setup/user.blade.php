@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Create a User ::
+{{ trans('admin/setup/general.create_user') }} ::
 @parent
 @stop
 
@@ -98,10 +98,10 @@ Create a User ::
 
               <!-- Email credentials -->
               <div class="form-group col-lg-12">
-                <label>Email credentials</label>
+                <label>{{ trans('admin/setup/general.email_credentials') }}</label>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" value="1" name="email_creds">Email my credentials to the email address above
+                        <input type="checkbox" value="1" name="email_creds">{{ trans('admin/setup/general.email_credentials_text') }}
                     </label>
                 </div>
             </div>
@@ -111,7 +111,7 @@ Create a User ::
 @stop
 
 @section('button')
-  <button class="btn btn-primary">Next: Save User</button>
+  <button class="btn btn-primary">{{ trans('general.next') }}: Save User</button>
   </form>
 @parent
 @stop

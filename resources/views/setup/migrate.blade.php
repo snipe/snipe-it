@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Create a User ::
+{{ trans('admin/setup/general.create_database_tables') }} ::
 @parent
 @stop
 
@@ -18,20 +18,20 @@ Create a User ::
         <div class="col-md-12">
             <div class="alert alert-warning">
                 <i class="fa fa-warning"></i>
-              There was nothing to migrate. Your database tables were already set up!
+              {{ trans('admin/setup/general.nothing_to_migrate') }}
             </div>
         </div>
         @else
         <div class="col-md-12">
             <div class="alert alert-success">
                 <i class="fa fa-check"></i>
-                Your database tables have been created
+                {{ trans('admin/setup/general.database_created') }}
             </div>
         </div>
 
         @endif
 
-        <p>Migration output: </p>
+        <p>{{ trans('admin/setup/general.migration_output') }}</p>
         <pre>{{ $output }}</pre>
         </div>
 
@@ -39,7 +39,7 @@ Create a User ::
 
 @section('button')
   <form action="{{ route('setup.user') }}" method="GET">
-    <button class="btn btn-primary">Next: Create User</button>
+    <button class="btn btn-primary">{{ trans('general.next') }}: Create User</button>
   </form>
 @parent
 @stop

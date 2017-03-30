@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/setup/general.create_user') }} ::
+{{ trans('admin/setup/general.main_info_title') }} ::
 @parent
 @stop
 
@@ -53,7 +53,7 @@
               @if ($start_settings['db_conn']===true)
                 {{ trans('admin/setup/general.database_connected_text') }}<code>{{ $start_settings['db_name'] }}</code>
               @else
-                {{ trans('admin/setup/general.database_notconnected_text1') }}<code>{{ $start_settings['db_error'] }}</code>
+                {{ trans('admin/setup/general.database_notconnected_text') }}<code>{{ $start_settings['db_error'] }}</code>
               @endif
           </td>
         </tr>
@@ -112,7 +112,7 @@
         </tr>
 
         <tr{!! (!$start_settings['writable']) ? ' class="danger"' : ' class="success"' !!}>
-          <td>{{ trans('general.permisions') }}</td>
+          <td>{{ trans('general.permissions') }}</td>
           <td>
             @if ($start_settings['writable'])
               <i class="fa fa-check preflight-success"></i>

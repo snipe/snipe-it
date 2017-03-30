@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Create a User ::
+{{ trans('admin/setup/general.summary') }} ::
 @parent
 @stop
 
@@ -17,11 +17,11 @@ Create a User ::
         <div class="col-md-12">
             <div class="alert alert-warning">
                 <i class="fa fa-check"></i>
-                Success! Your admin user has been added!
+                {{ trans('admin/setup/general.admin_added') }}
             </div>
         </div>
 
-        <p>Click here to go to your app login! <a href="{{ config('app.url') }}">{{ config('app.url') }}</a></p>
+        <p>{{ trans('admin/setup/general.click_to_login') }}<a href="{{ config('app.url') }}">{{ config('app.url') }}</a></p>
 
       </div>
 
