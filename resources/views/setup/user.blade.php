@@ -20,7 +20,7 @@
               <div class="row">
                 <div class="form-group col-lg-12 {{ $errors->has('site_name') ? 'error' : '' }}">
                     {{ Form::label('site_name', trans('general.site_name')) }}
-                    {{ Form::text('site_name', Input::old('site_name'), array('class' => 'form-control','placeholder' => 'Snipe-IT trans('general.asset_management'))) }}
+                    {{ Form::text('site_name', Input::old('site_name'), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
 
                     {!! $errors->first('site_name', '<span class="alert-msg">:message</span>') !!}
                 </div>
