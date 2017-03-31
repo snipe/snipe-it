@@ -287,23 +287,36 @@ class AssetsController extends Controller
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?
                 $asset->model()->associate(AssetModel::find($request->get('model_id'))) : '';
-            ($request->has('name')) ? $asset->name = $request->get('name') : '';
-            ($request->has('serial')) ? $asset->serial = $request->get('serial') : '';
-            ($request->has('model_id')) ? $asset->model_id = $request->get('model_id') : '';
-            ($request->has('order_number')) ? $asset->order_number = $request->get('order_number') : '';
-            ($request->has('notes')) ? $asset->notes = $request->get('notes') : '';
-            ($request->has('asset_tag')) ? $asset->asset_tag = $request->input('asset_tag') : '';
-            ($request->has('archived')) ? $asset->archived = $request->get('archived') : '';
-            ($request->has('status_id')) ? $asset->status_id = $request->get('status_id') : '';
-            ($request->has('warranty_months')) ? $asset->warranty_months = $request->get('warranty_months') : '';
+            ($request->has('name')) ?
+                $asset->name = $request->get('name') : '';
+            ($request->has('serial')) ?
+                $asset->serial = $request->get('serial') : '';
+            ($request->has('model_id')) ?
+                $asset->model_id = $request->get('model_id') : '';
+            ($request->has('order_number')) ?
+                $asset->order_number = $request->get('order_number') : '';
+            ($request->has('notes')) ?
+                $asset->notes = $request->get('notes') : '';
+            ($request->has('asset_tag')) ?
+                $asset->asset_tag = $request->get('asset_tag') : '';
+            ($request->has('archived')) ?
+                $asset->archived = $request->get('archived') : '';
+            ($request->has('status_id')) ?
+                $asset->status_id = $request->get('status_id') : '';
+            ($request->has('warranty_months')) ?
+                $asset->warranty_months = $request->get('warranty_months') : '';
             ($request->has('purchase_cost')) ?
                 $asset->purchase_cost = Helper::ParseFloat($request->get('purchase_cost')) : '';
-            ($request->has('purchase_date')) ? $asset->purchase_date = $request->get('purchase_date') : '';
-            ($request->has('assigned_to')) ? $asset->assigned_to = $request->get('assigned_to') : '';
-            ($request->has('supplier_id')) ? $asset->supplier_id = $request->get('supplier_id') : '';
-            ($request->has('requestable')) ? $asset->name = $request->get('requestable') : '';
-            ($request->has('archived')) ? $asset->name = $request->get('archived') : '';
-            ($request->has('rtd_location_id')) ? $asset->name = $request->get('rtd_location_id') : '';
+            ($request->has('purchase_date')) ?
+                $asset->purchase_date = $request->get('purchase_date') : '';
+            ($request->has('assigned_to')) ?
+                $asset->assigned_to = $request->get('assigned_to') : '';
+            ($request->has('supplier_id')) ?
+                $asset->supplier_id = $request->get('supplier_id') : '';
+            ($request->has('requestable')) ?
+                $asset->requestable = $request->get('requestable') : '';
+            ($request->has('rtd_location_id')) ?
+                $asset->rtd_location_id = $request->get('rtd_location_id') : '';
             ($request->has('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
@@ -335,8 +348,6 @@ class AssetsController extends Controller
             }
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
         }
-
-
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 

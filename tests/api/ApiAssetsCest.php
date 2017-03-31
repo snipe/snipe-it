@@ -121,7 +121,7 @@ class ApiAssetsCest
 
         // setup
         $data = [
-            'asset_tag' => $temp_asset->tag,
+            'asset_tag' => $temp_asset->asset_tag,
             'assigned_to' => $temp_asset->assigned_to,
             'company_id' => $temp_asset->company->id,
             'image' => $temp_asset->image,
@@ -148,14 +148,14 @@ class ApiAssetsCest
     {
         $I->wantTo('Update an asset with PATCH');
 
-        // create and store an asset
+        // create
         $asset = factory(\App\Models\Asset::class, 'asset')->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
-        // create a temporary asset to grab new data
         $temp_asset = factory(\App\Models\Asset::class, 'asset')->make();
+
         $data = [
-            'asset_tag' => $temp_asset->tag,
+            'asset_tag' => $temp_asset->asset_tag,
             'assigned_to' => $temp_asset->assigned_to,
             'company_id' => $temp_asset->company->id,
             'image' => $temp_asset->image,
@@ -171,7 +171,6 @@ class ApiAssetsCest
             'warranty_months' => $temp_asset->warranty_months,
         ];
 
-        // the asset name should be different
         $I->assertNotEquals($asset->name, $data['name']);
 
         // update
@@ -182,24 +181,19 @@ class ApiAssetsCest
         $response = json_decode($I->grabResponse());
         $I->assertEquals('success', $response->status);
         $I->assertEquals(trans('admin/hardware/message.update.success'), $response->messages);
-
-        $I->assertEquals($asset->id, $response->payload->id);
-        $I->assertEquals($data['name'], $response->payload->name);
-        $I->assertEquals($data['asset_tag'], $response->payload->asset_tag);
-        $I->assertEquals($data['model_id'], $response->payload->model_id);
-
-        // dd($response, $asset->getAttributes());
+        $I->assertEquals($asset->id, $response->payload->id); // asset id does not change
+        $I->assertEquals($temp_asset->asset_tag, $response->payload->asset_tag); // asset tag updated
+        $I->assertEquals($temp_asset->name, $response->payload->name); // asset name updated
+        $I->assertEquals($temp_asset->rtd_location_id, $response->payload->rtd_location_id); // asset rtd_location_id updated
 
         // verify
-        // $scenario->incomplete('[BadMethodCallException] Call to undefined method Illuminate\Database\Query\Builder::detail() 🤔');
         $I->sendGET('/hardware/' . $asset->id);
-
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
             'id' => (int) $asset->id,
-            'name' => e($temp_asset->name), // TODO: name should change
-            'asset_tag' => e($temp_asset->asset_tag), // TODO: asset_tag should change
+            'name' => e($temp_asset->name),
+            'asset_tag' => e($temp_asset->asset_tag),
             'serial' => e($temp_asset->serial),
             'model' => ($temp_asset->model) ? [
                 'id' => (int) $temp_asset->model->id,
@@ -220,17 +214,17 @@ class ApiAssetsCest
             ] : null,
             'notes' => e($temp_asset->notes),
             'order_number' => e($asset->order_number),
-            'company' => ($temp_asset->company) ? [
+            'company' => ($asset->company) ? [
                 'id' => (int) $temp_asset->company->id,
                 'name'=> e($temp_asset->company->name)
             ] : null,
-            'location' => ($asset->assetLoc) ? [
-                'id' => (int) $asset->assetLoc->id,
-                'name'=> e($asset->assetLoc->name)
+            'location' => ($temp_asset->assetLoc) ? [
+                'id' => (int) $temp_asset->assetLoc->id,
+                'name'=> e($temp_asset->assetLoc->name)
             ]  : null,
-            'rtd_location' => ($asset->defaultLoc) ? [
-                'id' => (int) $asset->defaultLoc->id,
-                'name'=> e($asset->defaultLoc->name)
+            'rtd_location' => ($temp_asset->defaultLoc) ? [
+                'id' => (int) $temp_asset->defaultLoc->id,
+                'name'=> e($temp_asset->defaultLoc->name)
             ]  : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($temp_asset->assigneduser) ? [
@@ -284,11 +278,29 @@ class ApiAssetsCest
         $asset = factory(\App\Models\Asset::class, 'asset')->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
-        $company = \App\Models\Company::inRandomOrder()->first();
+        $temp_asset_tag = $this->faker->uuid;
+        $temp_asset = factory(\App\Models\Asset::class, 'asset')->make([
+            'asset_tag' => $temp_asset_tag,
+        ]);
+
+        $I->assertNotNull($temp_asset->asset_tag);
+        $I->assertEquals($temp_asset_tag, $temp_asset->asset_tag);
 
         $data = [
-            'name' => $this->faker->sentence(3),
-            'company_id' => $company->id,
+            'asset_tag' => $temp_asset->asset_tag,
+            'assigned_to' => $temp_asset->assigned_to,
+            'company_id' => $temp_asset->company->id,
+            'image' => $temp_asset->image,
+            'model_id' => $temp_asset->model_id,
+            'name' => $temp_asset->name,
+            'notes' => $temp_asset->notes,
+            'purchase_cost' => $temp_asset->purchase_cost,
+            'purchase_date' => $temp_asset->purchase_date->format('Y-m-d'),
+            'rtd_location_id' => $temp_asset->rtd_location_id,
+            'serial' => $temp_asset->serial,
+            'status_id' => $temp_asset->status_id,
+            'supplier_id' => $temp_asset->supplier_id,
+            'warranty_months' => $temp_asset->warranty_months,
         ];
 
         $I->assertNotEquals($asset->name, $data['name']);
@@ -301,7 +313,10 @@ class ApiAssetsCest
         $response = json_decode($I->grabResponse());
         $I->assertEquals('success', $response->status);
         $I->assertEquals(trans('admin/hardware/message.update.success'), $response->messages);
-        $I->assertEquals($asset->id, $response->payload->id);
+        $I->assertEquals($asset->id, $response->payload->id); // asset id does not change
+        $I->assertEquals($temp_asset->asset_tag, $response->payload->asset_tag); // asset tag updated
+        $I->assertEquals($temp_asset->name, $response->payload->name); // asset name updated
+        $I->assertEquals($temp_asset->rtd_location_id, $response->payload->rtd_location_id); // asset rtd_location_id updated
 
         // verify
         $I->sendGET('/hardware/' . $asset->id);
@@ -309,46 +324,46 @@ class ApiAssetsCest
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
             'id' => (int) $asset->id,
-            'name' => e($data['name']),
-            'asset_tag' => e($asset->asset_tag),
-            'serial' => e($asset->serial),
-            'model' => ($asset->model) ? [
-                'id' => (int) $asset->model->id,
-                'name'=> e($asset->model->name)
+            'name' => e($temp_asset->name),
+            'asset_tag' => e($temp_asset->asset_tag),
+            'serial' => e($temp_asset->serial),
+            'model' => ($temp_asset->model) ? [
+                'id' => (int) $temp_asset->model->id,
+                'name'=> e($temp_asset->model->name)
             ] : null,
-            'model_number' => ($asset->model) ? e($asset->model->model_number) : null,
-            'status_label' => ($asset->assetstatus) ? [
-                'id' => (int) $asset->assetstatus->id,
-                'name'=> e($asset->assetstatus->name)
+            'model_number' => ($temp_asset->model) ? e($temp_asset->model->model_number) : null,
+            'status_label' => ($temp_asset->assetstatus) ? [
+                'id' => (int) $temp_asset->assetstatus->id,
+                'name'=> e($temp_asset->assetstatus->name)
             ] : null,
-            'category' => ($asset->model->category) ? [
-                'id' => (int) $asset->model->category->id,
-                'name'=> e($asset->model->category->name)
+            'category' => ($temp_asset->model->category) ? [
+                'id' => (int) $temp_asset->model->category->id,
+                'name'=> e($temp_asset->model->category->name)
             ]  : null,
-            'manufacturer' => ($asset->model->manufacturer) ? [
-                'id' => (int) $asset->model->manufacturer->id,
-                'name'=> e($asset->model->manufacturer->name)
+            'manufacturer' => ($temp_asset->model->manufacturer) ? [
+                'id' => (int) $temp_asset->model->manufacturer->id,
+                'name'=> e($temp_asset->model->manufacturer->name)
             ] : null,
-            'notes' => e($asset->notes),
+            'notes' => e($temp_asset->notes),
             'order_number' => e($asset->order_number),
             'company' => ($asset->company) ? [
-                'id' => (int) $data['company_id'],
-                'name'=> e($company->name)
+                'id' => (int) $temp_asset->company->id,
+                'name'=> e($temp_asset->company->name)
             ] : null,
-            'location' => ($asset->assetLoc) ? [
-                'id' => (int) $asset->assetLoc->id,
-                'name'=> e($asset->assetLoc->name)
+            'location' => ($temp_asset->assetLoc) ? [
+                'id' => (int) $temp_asset->assetLoc->id,
+                'name'=> e($temp_asset->assetLoc->name)
             ]  : null,
-            'rtd_location' => ($asset->defaultLoc) ? [
-                'id' => (int) $asset->defaultLoc->id,
-                'name'=> e($asset->defaultLoc->name)
+            'rtd_location' => ($temp_asset->defaultLoc) ? [
+                'id' => (int) $temp_asset->defaultLoc->id,
+                'name'=> e($temp_asset->defaultLoc->name)
             ]  : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
-            'assigned_to' => ($asset->assigneduser) ? [
-                'id' => (int) $asset->assigneduser->id,
-                'name' => e($asset->assigneduser->getFullNameAttribute()),
-                'first_name'=> e($asset->assigneduser->first_name),
-                'last_name'=> e($asset->assigneduser->last_name)
+            'assigned_to' => ($temp_asset->assigneduser) ? [
+                'id' => (int) $temp_asset->assigneduser->id,
+                'name' => e($temp_asset->assigneduser->getFullNameAttribute()),
+                'first_name'=> e($temp_asset->assigneduser->first_name),
+                'last_name'=> e($temp_asset->assigneduser->last_name)
             ]  : null,
             'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
             'warranty_expires' => ($asset->warranty_months > 0) ?  [
@@ -376,7 +391,7 @@ class ApiAssetsCest
             //     'formatted' => $asset->created_at->format('Y-m-d'),
             // ] : null,
             // 'purchase_cost' => (float) $asset->purchase_cost,
-            'user_can_checkout' => (bool) $asset->availableForCheckout(),
+            'user_can_checkout' => (bool) $temp_asset->availableForCheckout(),
             'available_actions' => [
                 'checkout' => (bool) Gate::allows('checkout', Asset::class),
                 'checkin' => (bool) Gate::allows('checkin', Asset::class),

@@ -135,7 +135,7 @@ class ComponentsController extends Controller
         $component = Component::findOrFail($id);
         $this->authorize('delete', $component);
         $component->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.delete.success')));
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/components/message.delete.success')));
     }
 
     /**

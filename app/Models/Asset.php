@@ -54,18 +54,18 @@ class Asset extends Depreciable
     use ValidatingTrait, UniqueUndeletedTrait;
 
     protected $rules = [
-    'name'            => 'max:255|nullable',
-    'model_id'        => 'required|integer|exists:models,id',
-    'status_id'       => 'required|integer|exists:status_labels,id',
-    'company_id'      => 'integer|nullable',
-    'warranty_months' => 'numeric|nullable',
-    'physical'         => 'numeric|max:1|nullable',
-    'checkout_date'   => 'date|max:10|min:10|nullable',
-    'checkin_date'    => 'date|max:10|min:10|nullable',
-    'supplier_id'     => 'numeric|nullable',
-    'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
-    'status'          => 'integer',
-    'purchase_cost'   => 'numeric|nullable',
+        'name'            => 'max:255|nullable',
+        'model_id'        => 'required|integer|exists:models,id',
+        'status_id'       => 'required|integer|exists:status_labels,id',
+        'company_id'      => 'integer|nullable',
+        'warranty_months' => 'numeric|nullable',
+        'physical'         => 'numeric|max:1|nullable',
+        'checkout_date'   => 'date|max:10|min:10|nullable',
+        'checkin_date'    => 'date|max:10|min:10|nullable',
+        'supplier_id'     => 'numeric|nullable',
+        'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
+        'status'          => 'integer',
+        'purchase_cost'   => 'numeric|nullable',
     ];
 
   /**
