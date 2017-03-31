@@ -117,6 +117,11 @@ class PaveIt extends Command
                 \DB::statement('drop table IF EXISTS manufacturers');
                 \DB::statement('drop table IF EXISTS models');
                 \DB::statement('drop table IF EXISTS migrations');
+                \DB::statement('drop table IF EXISTS oauth_access_tokens');
+                \DB::statement('drop table IF EXISTS oauth_auth_codes');
+                \DB::statement('drop table IF EXISTS oauth_clients');
+                \DB::statement('drop table IF EXISTS oauth_personal_access_clients');
+                \DB::statement('drop table IF EXISTS oauth_refresh_tokens');
                 \DB::statement('drop table IF EXISTS password_resets');
                 \DB::statement('drop table IF EXISTS requested_assets');
                 \DB::statement('drop table IF EXISTS requests');
