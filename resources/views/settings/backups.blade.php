@@ -18,9 +18,9 @@
 
           <table class="table table-striped">
             <thead>
-              <th>File</th>
-              <th>Created</th>
-              <th>Size</th>
+              <th>{{ trans('general.file') }}</th>
+              <th>{{ trans('general.created_at') }}</th>
+              <th>{{ trans('general.size') }}</th>
               <th></th>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
 
 
       </form>
-      <p>Backup files are located in: {{ $path  }}</p>
+      <p>{{ trans('general.backup_located_in') }}{{ $path  }}</p>
 
 
 
