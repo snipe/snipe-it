@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM debian:jessie-slim
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
 RUN apt-get update && apt-get install -y \
@@ -13,7 +13,9 @@ patch \
 curl \
 vim \
 git \
-mysql-client
+mysql-client \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN php5enmod mcrypt
 RUN php5enmod gd
@@ -55,7 +57,6 @@ RUN chown -R docker /var/www/html
 
 RUN \
 	rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
-      && mkdir -p "/var/lib/snipeit/data/uploads/{assets,avatars,barcodes,models,suppliers}" \
       && rm -rf "/var/www/html/public/uploads" && ln -fs "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
       && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups"
 
