@@ -157,7 +157,7 @@ trait Loggable
         $log->user_id = Auth::user()->id;
         $log->note = $note;
         $log->target_id =  null;
-        $log->created_at =  date("Y-m-d h:i:s");
+        $log->created_at =  date("Y-m-d H:i:s");
         $log->filename =  $filename;
         $log->logaction('uploaded');
 
