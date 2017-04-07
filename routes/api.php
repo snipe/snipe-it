@@ -366,22 +366,16 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Status Labels API ---*/
 
-    Route::resource('statuslabels', 'StatuslabelsController',
-        [
-            'names' =>
-                [
-                    'index' => 'api.statuslabels.index',
-                    'store' => 'api.statuslabels.store',
-                    'show' => 'api.statuslabels.show',
-                    'update' => 'api.statuslabels.update',
-                    'destroy' => 'api.statuslabels.destroy'
-                ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['statuslabel' => 'statuslabel_id']
-        ]
-    );
 
     Route::group(['prefix' => 'statuslabels'], function () {
+
+        // Pie chart for dashboard
+        Route::get('assets',
+            [
+                'as' => 'api.statuslabels.assets.bytype',
+                'uses' => 'StatuslabelsController@getAssetCountByStatuslabel'
+            ]
+        );
 
         Route::get('{statuslabel}/assetlist',
             [
@@ -397,14 +391,25 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
-        // Pie chart for dashboard
-        Route::get('assets',
-            [
-                'as' => 'api.statuslabels.assets.bytype',
-                'uses' => 'StatuslabelsController@getAssetCountByStatuslabel'
-            ]
-        );
-    }); // Status labels group
+
+    });
+
+    Route::resource('statuslabels', 'StatuslabelsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.statuslabels.index',
+                    'store' => 'api.statuslabels.store',
+                    'show' => 'api.statuslabels.show',
+                    'update' => 'api.statuslabels.update',
+                    'destroy' => 'api.statuslabels.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['statuslabel' => 'statuslabel_id']
+        ]
+    );
+
+    // Status labels group
 
 
     /*--- Suppliers API ---*/
