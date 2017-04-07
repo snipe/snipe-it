@@ -42,8 +42,7 @@ class ActionlogPresenter extends Presenter
     }
 
     public function item()
-    {//
-        // oute('show/userfile', [$user->id, $file->id])
+    {
         if($this->action_type=='uploaded') {
             return (string) link_to_route('show/userfile', $this->model->filename, [$this->model->item->id, $this->model->id]);
         }
