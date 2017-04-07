@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => '이 자산이 승인되었습니다.',
     'declined'                  => '이 자산이 거부되었습니다.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => '사용자가 이미 존재합니다!',
     'user_not_found'            => '사용자 [:id]는 존재하지 않습니다.',
     'user_login_required'       => '로그인 항목을 입력해 주세요.',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => '사용자가 생성되었습니다.',
         'update'    => '사용자가 갱신 되었습니다.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => '사용자가 삭제 되었습니다.',
         'ban'       => '사용자가 금지 처리 되었습니다.',
         'unban'     => '사용자의 금지 처리가 해제 되었습니다.',

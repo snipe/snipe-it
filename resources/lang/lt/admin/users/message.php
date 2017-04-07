@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Jūs sėkmingai priėmėte šią įrangą.',
     'declined'                  => 'Jūs sėkmingai atšaukėte šią įrangą.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Naudotojas jau yra!',
     'user_not_found'            => 'Naudotojas [:id] neegzistuoja.',
     'user_login_required'       => 'Prisijungimo laukelis privalomas',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Naudotojas sėkmingai sukurtas.',
         'update'    => 'Naudotojas sėkmingai atnaujintas.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Naudotojas sėkmingai ištrintas.',
         'ban'       => 'Naudotojas sėkmingai užblokuotas.',
         'unban'     => 'Naudotojas sėkmingai atblokuotas.',

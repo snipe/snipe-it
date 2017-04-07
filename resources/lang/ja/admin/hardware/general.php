@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => '資産について',
+    'about_assets_text'            => '資産はシリアル番号や資産タグで追跡します。資産は特定することが重要な、高価な物であることが多いです。',
 	'archived'  				=> 'アーカイブ',
     'asset'  					=> '資産',
     'bulk_checkout'             => '利用者に資産をチェックアウトする',
@@ -15,7 +15,7 @@ return array(
 	'filetype_info'				=> '許可するファイルタイプ（png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar）',
     'model_deleted'  			=> 'この資産型番は削除されました。資産を戻すためには型番を復元する必要があります。<br/> <a href="/hardware/models/:model_id/restore">型番を復元するにはココをクリックして下さい。</a>',
     'requestable'               => '要求可能',
-    'requested'				    => 'Requested',
+    'requested'				    => '要求済',
     'restore'  					=> '資産を復元',
     'pending'  					=> 'ペンディング',
     'undeployable'  			=> '配備不可',

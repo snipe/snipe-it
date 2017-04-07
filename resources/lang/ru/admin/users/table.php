@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Активен',
     'allow'  				=> 'Разрешить',
     'checkedout'  			=> 'Активы',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Показать текущих пользователей',
     'show_deleted'          => 'Показать удаленных пользователей',
     'title' 				=> 'Название',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Обновить пользователя',
     'username' 				=> 'Имя Пользователя',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Это используется для связи с Active Directory, а не для входа.)',
     'cloneuser'             => 'Дублировать пользователя',
     'viewusers' 			=> 'Просмотр пользователей',

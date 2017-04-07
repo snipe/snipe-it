@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute darf nur zwischen :min und :max kilobytes groß sein.",
         "string"  => ":attribute muss mindestens :min und maximal :max Zeichen enthalten.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute Bestätigung stimmt nicht überein.",
     "date"             => ":attribute ist kein gültiges Datum.",
     "date_format"      => ":attribute passt nicht zur :format Formatierung.",

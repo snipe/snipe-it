@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute tulee olla välillä :min - :max kilotavua.",
         "string"  => ":attribute tulee olla :min - :max merkkiä.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute vahvistus ei täsmää.",
     "date"             => ":attribute ei ole oikea päivämäärä.",
     "date_format"      => ":attribute ei täsmää muotoiluun :format.",

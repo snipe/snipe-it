@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Actief',
     'allow'  				=> 'Toestaan',
     'checkedout'  			=> 'Materialen',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Toon de huidige gebruikers',
     'show_deleted'          => 'Toon de verwijderde gebruikers',
     'title' 				=> 'Titel',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Gebruiker bijwerken',
     'username' 				=> 'Gebruikersnaam',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Dit wordt enkel gebruikt om te koppelen met de Active Directory, niet om aan te melden.)',
     'cloneuser'             => 'Gebruiker klonen',
     'viewusers' 			=> 'Bekijk gebruikers',

@@ -25,6 +25,7 @@ return array(
         "file"    => "L'attribut \":attribute\" doit être entre :min et :max kilo-octets.",
         "string"  => "L'attribut \":attribute\" doit contenir entre :min et :max caractères.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => "La confirmation et l'attribut \":attribute\" ne concordent pas.",
     "date"             => "L'attribut \":attribute\" n'est pas une date valide.",
     "date_format"      => "L'attribut \":attribute\" ne respecte pas le format \":format\".",

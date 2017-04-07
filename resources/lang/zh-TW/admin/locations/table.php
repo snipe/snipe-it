@@ -17,4 +17,5 @@ return array(
     'locations'                 => '位置',
     'parent'                    => '父項目',
     'currency'                  => '當地貨幣單位',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Umístění',
     'parent'                    => 'Nadřazené',
     'currency'                  => 'Měna',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

@@ -25,6 +25,7 @@ return array(
         "file"    => ": Atribut harus di antara: min -: maks kilobytes.",
         "string"  => ": Atribut harus di antara: min -: maks jumlah karakter.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => "Konfirmasi :attribute tidak cocok.",
     "date"             => "Tanggal :attribute tidak valid.",
     "date_format"      => ":attribute tidak cocok dengan format :format.",

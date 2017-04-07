@@ -25,6 +25,7 @@ return array(
         "file"    => "A :attribute :min - :max kilobájt között kell lenni.",
         "string"  => "A :attribute :min - :max karakter között kell lenni.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => "A :attribute ellenörzés nem egyezik.",
     "date"             => "A :attribute nem egy valós dátum.",
     "date_format"      => "A :attribute nem egyezik a formátummal :format.",

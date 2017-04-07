@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Bu aksesuarı başarıyla kabul ettiniz.',
     'declined'                  => 'You have successfully declined this asset.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Kullanıcı zaten var!',
     'user_not_found'            => 'Kullanıcı [:id] yok.',
     'user_login_required'       => 'The login field is required',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'User was successfully created.',
         'update'    => 'User was successfully updated.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'User was successfully deleted.',
         'ban'       => 'User was successfully banned.',
         'unban'     => 'User was successfully unbanned.',

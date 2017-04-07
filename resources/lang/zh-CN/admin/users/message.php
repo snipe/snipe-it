@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => '你已成功接受此项资产。',
     'declined'                  => '你已拒绝此项资产。',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => '用户已经存在!',
     'user_not_found'            => '用户[:id] 不存在',
     'user_login_required'       => '登陆字段是必须的',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => '用户创建成功',
         'update'    => '用户更新成功。',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => '用户已经被删除',
         'ban'       => '用户禁止成功',
         'unban'     => '用户成功解禁',

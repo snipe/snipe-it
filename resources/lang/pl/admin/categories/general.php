@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
+    'about_categories_title' 			=> 'O Kategoriach',
     'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Kategorie aktywów',
     'category_name'  					=> 'Nazwa kategorii',
@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Edytuj Kategorię',
     'eula_text'							=> 'EULA Kategorii',
     'eula_text_help'					=> 'To pole pozwala dostosować EULA dla określonych rodzajów aktywów. Jeśli masz tylko jedno EULA dla wszystkich aktywów, można zaznaczyć poniższe pole, aby korzystać z domyślnej.',
-    'name'                              => 'Category Name',
+    'name'                              => 'Nazwa Kategorii',
     'require_acceptance'				=> 'Wymaga od użytkowników, aby potwierdzić akceptację aktywów w tej kategorii.',
     'required_acceptance'				=> 'Do użytkownika zostanie wysłana wiadomość email z linkiem potwierdzającym akceptację przedmiotu.',
     'required_eula'						=> 'Do użytkownika zostanie wysłana wiadomość email z kopiąEULA',

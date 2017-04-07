@@ -2,22 +2,22 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Κατασκευαστής δεν υπάρχει.',
+    'assoc_users'	 => 'Αυτό κατασκευαστής σχετίζεται με τουλάχιστον ένα μοντέλο και δεν μπορεί να διαγραφεί. Παρακαλούμε να ενημερώσετε τα μοντέλα σας προκειμένου να μην αναφέρονται σε αυτόν τον κατασκευαστή και δοκιμάστε ξανά. ',
 
     'create' => array(
         'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'success' => 'Ο κατασκευαστής δημιουργήθηκε με επιτυχία.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Ο κατασκευαστής δεν ενημερώθηκε, παρακαλώ προσπαθήστε ξανά',
+        'success' => 'Ο κατασκευαστής ενημερώθηκε με επιτυχία.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
+        'confirm'   => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον κατασκευαστή;',
+        'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας τον κατασκευαστή. Παρακαλώ δοκιμάστε ξανά.',
         'success' => 'The Manufacturer was deleted successfully.'
     )
 

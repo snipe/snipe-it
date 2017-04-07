@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Vietovės',
     'parent'                    => 'Pagrindinė',
     'currency'                  => 'Vietos valiuta',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

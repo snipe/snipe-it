@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Активът беше приет.',
     'declined'                  => 'Активът беше отказан.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Потребителят вече съществува!',
     'user_not_found'            => 'Потребител [:id] не съществува.',
     'user_login_required'       => 'Полето за вход е задължително',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Потребителят е създаден.',
         'update'    => 'Потребителят е обновен.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Потребителят е изтрит.',
         'ban'       => 'Потребителят беше забранен успешно.',
         'unban'     => 'Потребителят възстановен успешно.',

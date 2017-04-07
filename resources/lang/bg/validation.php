@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute трябва да бъде с големина между :min и :max KB.",
         "string"  => ":attribute трябва да бъде с дължина между :min и :max символа.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute потвърждение не съвпада.",
     "date"             => ":attribute не е валидна дата.",
     "date_format"      => ":attribute не съвпада с формата :format.",
@@ -33,7 +34,7 @@ return array(
     "digits_between"   => ":attribute трябва да бъде с дължина между :min и :max цифри.",
     "email"            => ":attribute е с невалиден формат.",
     "exists"           => "Избраният :attribute е невалиден.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "email_array"      => "Един или повече email адреси е невалиден.",
     "image"            => ":attribute трябва да бъде изображение.",
     "in"               => "Избраният :attribute е невалиден.",
     "integer"          => ":attribute трябва да бъде целочислен.",
@@ -64,8 +65,8 @@ return array(
     ),
     "unique"           => ":attribute вече е вписан.",
     "url"              => "Форматът на :attribute е невалиден.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Трябва да изберете валиден тип етикет за статус",
+    "unique_undeleted" => ":attribute трябва да е единствен по рода си.",
 
 
     /*

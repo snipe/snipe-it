@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute phải nằm giữa :min - :max kilobytes.",
         "string"  => ":attribute phải nằm :min - :max ký tự.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute xác nhận không đúng.",
     "date"             => ":attribute có ngày không hợp lý.",
     "date_format"      => ":attribute không phù hợp định dạng :format.",

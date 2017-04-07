@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> '有効',
     'allow'  				=> '許可',
     'checkedout'  			=> '資産',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => '現在のユーザーを表示',
     'show_deleted'          => '削除されたユーザーを表示',
     'title' 				=> '役職',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> '利用者を更新',
     'username' 				=> 'ユーザ名',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Windows統合認証のみを利用する。)',
     'cloneuser'             => '利用者を複製',
     'viewusers' 			=> '利用者を表示',

@@ -6,7 +6,7 @@ return array(
     'checkin'           => 'Вписване',
     'create'            => 'Добавяне на лиценз',
     'expiration'        => 'Срок на валидност',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Продуктов ключ',
     'maintained'        => 'В поддръжка',
     'name'              => 'Софтуерен продукт',
     'no_depreciation'   => 'Без амортизация',

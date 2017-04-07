@@ -12,8 +12,8 @@
             'success' => 'Varlık Bakımı başarıyla oluşturuldu.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Varlık bakımı düzenlenmedi, lütfen tekrar deneyin.',
+            'success' => 'Varlık bakımı başarıyla düzenlendi.'
         ],
         'asset_maintenance_incomplete' => 'Henüz Tamamlanmadı',
         'warranty'                     => 'Garanti',

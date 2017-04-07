@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Активен',
     'allow'  				=> 'Разрешаване',
     'checkedout'  			=> 'Активи',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Преглед на текущите потребители',
     'show_deleted'          => 'Преглед на изтритите потребители',
     'title' 				=> 'Титла',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Обновяване на потребител',
     'username' 				=> 'Потребителско име',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Използва се за достъп до Active Directory, а не за вход.)',
     'cloneuser'             => 'Копиране на потребител',
     'viewusers' 			=> 'Преглед на потребителите',

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'Potvrzení hromadného odstranění majetku',
   'bulk_delete_help'	=> 'Zkontrolujte seznam odstraňovaného majetku níže. Jakmile jej potvrdíte, nebude možné tento majetek obnovit a budou zrušeny i vazby na uživatele, kteří jej měli v držení.',
   'bulk_delete_warn'	=> 'Chystáte se odstranit :asset_count položek majetku.',
 	'bulk_update'		=> 'Hromadná aktualizace majetku',

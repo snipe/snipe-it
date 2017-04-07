@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Pomyślnie zaakceptowałeś ten składnik aktywów.',
     'declined'                  => 'Pomyślnie odrzuciłeś ten składnik aktywów.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Użytkownik już istnieje!',
     'user_not_found'            => 'User [:id] nie istnieje.',
     'user_login_required'       => 'Pole login jest wymagane',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Użytkownik utworzony pomyślnie.',
         'update'    => 'Użytkownik zaktualizowany pomyślnie.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Użytkownik został usunięty pomyślnie.',
         'ban'       => 'Użytkownik został zablokowany.',
         'unban'     => 'Użytkownik został odblokowany.',

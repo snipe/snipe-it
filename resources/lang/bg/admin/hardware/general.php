@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Относно активи',
+    'about_assets_text'            => 'Активите са елементи, проследен от сериен номер или етикет. По-често, те са елементи с висока стойност, където идентифицирането на специфичен елемент е от значение.',
 	'archived'  				=> 'Архивиран',
     'asset'  					=> 'Актив',
-    'bulk_checkout'             => 'Checkout Assets to User',
+    'bulk_checkout'             => 'Отписване на активи към потребител',
     'checkin'  					=> 'Връщане на актив',
     'checkout'  				=> 'Изписване на актив към потребител',
     'clone'  					=> 'Копиране на актив',
@@ -15,7 +15,7 @@ return array(
 	'filetype_info'				=> 'Позволените типове файлове са png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'model_deleted'  			=> 'Моделът актив беше изтрит.Необходимо е да възстановите моделът, преди да възстановите актива.<br/> <a href="/hardware/models/:model_id/restore">Възстановяване на модел</a>.',
     'requestable'               => 'Може да бъде изискван',
-    'requested'				    => 'Requested',
+    'requested'				    => 'Изискан',
     'restore'  					=> 'Възстановяване на актив',
     'pending'  					=> 'Предстоящ',
     'undeployable'  			=> 'Не може да бъде предоставян',

@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktivní',
     'allow'  				=> 'Povolit',
     'checkedout'  			=> 'Zařízení',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Zobraz aktuální uživatele',
     'show_deleted'          => 'Zobraz smazané uživatele',
     'title' 				=> 'Title',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Update User',
     'username' 				=> 'Uživatelské jméno',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Duplikuj uživatele',
     'viewusers' 			=> 'Zobrazit uživatele',

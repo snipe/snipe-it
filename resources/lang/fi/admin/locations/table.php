@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Sijainnit',
     'parent'                    => 'Ylempi kategoria',
     'currency'                  => 'Valuutta',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

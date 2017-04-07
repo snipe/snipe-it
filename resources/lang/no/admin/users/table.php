@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktiv',
     'allow'  				=> 'Tillatt',
     'checkedout'  			=> 'Eiendeler',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Vis nåværende brukere',
     'show_deleted'          => 'Vis slettede brukere',
     'title' 				=> 'Tittel',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Oppdater bruker',
     'username' 				=> 'Brukernavn',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Dette brukes til binding i Active Directory, ikke for innlogging)',
     'cloneuser'             => 'Klon bruker',
     'viewusers' 			=> 'Vis brukere',

@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'دارایی با موفقیت پذیرفته شد.',
     'declined'                  => 'شما با موفقیت این دارایی را به کاهش دادید.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'کاربر "{0}" در حال حاضر وجود دارد.',
     'user_not_found'            => 'کاربر [:id] موجود نیست.',
     'user_login_required'       => 'فیلد ورود الزامی است.',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'کاربر با موفقیت ایجاد شد.',
         'update'    => 'کاربر با موفقیت به روز شد.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'کاربر با موفقیت حذف شد.',
         'ban'       => 'کاربر با موفقیت متوقف شد.',
         'unban'     => 'محرومیت کاربر با موفقیت متوقف شد.',

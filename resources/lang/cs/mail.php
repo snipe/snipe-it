@@ -3,7 +3,7 @@
 return array(
     'a_user_canceled' => 'A user has canceled an item request on the website',
     'a_user_requested' => 'A user has requested an item on the website',
-    'accessory_name' => 'Accessory Name:',
+    'accessory_name' => 'Název příslušenství:',
     'additional_notes' => 'Additional Notes:',
     'admin_has_created' => 'An administrator has created an account for you on the :web website.',
     'asset' => 'Asset:',

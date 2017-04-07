@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Active',
     'allow'  				=> 'Erlauben',
     'checkedout'  			=> 'Assets',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Zeige aktuelle Benutzer',
     'show_deleted'          => 'Zeige gelöschte Benutzer',
     'title' 				=> 'Titel',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Benutzer aktualisieren',
     'username' 				=> 'Benutzernamen',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Dies wird für den Bind an das Active Directory benutzt, nicht für die Anmeldung.)',
     'cloneuser'             => 'Benutzer kopieren',
     'viewusers' 			=> 'Benutzer anzeigen',

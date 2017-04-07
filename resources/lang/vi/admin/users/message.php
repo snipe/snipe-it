@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Bạn đã xác nhận tài sản này thành công.',
     'declined'                  => 'Bạn đã từ chối tài sản này thành công.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Người dùng thật sự tồn tại!',
     'user_not_found'            => 'Người dùng [:id] không tồn tại.',
     'user_login_required'       => 'Trường đăng nhập thì bắt buộc',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Người dùng đã được tạo thành công.',
         'update'    => 'Người dùng đã được cập nhật thành công.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Người dùng đã được xóa thành công.',
         'ban'       => 'Người dùng đã bị cấm thành công.',
         'unban'     => 'Phục hồi người dùng bị cấm thành công.',

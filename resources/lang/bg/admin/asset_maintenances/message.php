@@ -12,8 +12,8 @@
             'success' => 'Поддръжката на актив създадена успешно.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Поддръжката на активи не беше редактирана, моля опитайте отново.',
+            'success' => 'Поддръжката на активи редактирана успешно.'
         ],
         'asset_maintenance_incomplete' => 'Все още неприключила',
         'warranty'                     => 'Гаранция',

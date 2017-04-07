@@ -12,8 +12,8 @@
             'success' => 'Materiaal onderhoud is met succes aangemaakt.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Materiaal onderhoud is niet aangepast, probeer het nogmaals.',
+            'success' => 'Materiaal onderhoud is met succes aangepast.'
         ],
         'asset_maintenance_incomplete' => 'Nog niet voltooid',
         'warranty'                     => 'Garantie',

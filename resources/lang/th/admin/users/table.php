@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'ใช้งาน',
     'allow'  				=> 'อนุญาต',
     'checkedout'  			=> 'ทรัพย์สิน',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'แสดงผู้ใช้งานปัจจุบัน',
     'show_deleted'          => 'แสดงผู้ใช้งานที่ถูกลบแล้ว',
     'title' 				=> 'ชื่อเรื่อง',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'แก้ไขผู้ใช้งาน',
     'username' 				=> 'ชื่อผู้ใช้',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(ส่วนนี้มีผลเฉพาะกับ Active Directory เท่านั้น ไม่ใช่สำหรับการเข้าสู่ระบบ)',
     'cloneuser'             => 'คัดลอกผู้ใช้งาน',
     'viewusers' 			=> 'ดูผู้ใช้งาน',

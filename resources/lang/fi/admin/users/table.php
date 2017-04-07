@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktiivinen',
     'allow'  				=> 'Salli',
     'checkedout'  			=> 'Laitteet',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Näytä nykyiset käyttäjät',
     'show_deleted'          => 'Näytä poistetut käyttäjät',
     'title' 				=> 'Titteli',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Päivitä Käyttäjä',
     'username' 				=> 'Käyttäjätunnus',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Tätä käytetään vain Active Directory synkronointiin, ei kirjautumista varten.)',
     'cloneuser'             => 'Monista Käyttäjä',
     'viewusers' 			=> 'Näytä Käyttäjät',

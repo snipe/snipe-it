@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Editar Categoria',
     'eula_text'							=> 'EULA da Categoria',
     'eula_text_help'					=> 'Este campo lhe permite personalizar seus EULAs para tipos específicos de bens. Se você apenas tem um EULA para todos os seus bens, você pode selecionar a caixa abaixo para usar o padrão primário.',
-    'name'                              => 'Category Name',
+    'name'                              => 'Nome da Categoria',
     'require_acceptance'				=> 'Requer que usuários confirmem a aceitação de ativos nesta categoria.',
     'required_acceptance'				=> 'Este usuário receberá um e-mail com um link para confirmar a aceitação deste item.',
     'required_eula'						=> 'Este usuário receberá um e-mail com uma cópia do EULA',

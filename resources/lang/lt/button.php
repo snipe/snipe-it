@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Veiksmai',
     'add'    	                => 'Pridėti naują',
     'cancel'                    => 'Atšaukti',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'Užklausti',
     'submit'  	                => 'Išsaugoti',
     'upload'                    => 'Įkelti',
-
+	'select_file'				=> 'Select File...',
 );

@@ -1,12 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'     => 'Informazioni sui produttori',
-    'about_manufacturers_text'           => 'I produttori realizzano tutti i magici oggetti che usiamo.',
+    'about_manufacturers_title'    => 'Informazioni sui produttori',
+    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
     'asset_manufacturers'	=> 'Produttori Bene',
     'create'				=> 'Crea Produttore',
     'id'   					=> 'ID',
-    'name'      			=> 'Nome del produttore',
+    'name'      			=> 'Name',
+    'support_email'   		=> 'Support Email',
+    'support_phone'   		=> 'Support Phone',
+    'support_url'   		=> 'Support URL',
     'update'				=> 'Aggiorna Produttore',
+    'url'   				=> 'URL',
 
 );

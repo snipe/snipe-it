@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> '資産の一括削除',
   'bulk_delete_help'	=> '以下の資産が一括削除されます。削除後のデータは戻すことができませ',
   'bulk_delete_warn'	=> ':asset_cont 件の資産を削除しました',
 	'bulk_update'		=> '資産を一括更新',

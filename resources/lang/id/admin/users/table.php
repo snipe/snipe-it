@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktif',
     'allow'  				=> 'Izinkan',
     'checkedout'  			=> 'Aset',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Tampilkan pengguna saat ini',
     'show_deleted'          => 'Tampilkan pengguna yang di hapus',
     'title' 				=> 'Judul',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Perbarui Pengguna',
     'username' 				=> 'Nama Pengguna',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Ini digunakan untuk mengikat Active Directory saja, bukan untuk login.)',
     'cloneuser'             => 'Klon pengguna',
     'viewusers' 			=> 'Tampilkan Pengguna',

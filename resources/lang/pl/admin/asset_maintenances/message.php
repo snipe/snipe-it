@@ -12,8 +12,8 @@
             'success' => 'Konserwacja aktywa utworzona pomyślnie.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Edycja konserwacja aktywa nie została zapisana, spróbuj ponownie.',
+            'success' => 'Konserwacja aktywa edytowana pomyślnie.'
         ],
         'asset_maintenance_incomplete' => 'Nieukończone',
         'warranty'                     => 'Gwarancja',

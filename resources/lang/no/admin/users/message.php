@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Du har akseptert eiendelen.',
     'declined'                  => 'Du har avvist eiendelen.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Bruker finnes allerede!',
     'user_not_found'            => 'Bruker [:id] finnes ikke.',
     'user_login_required'       => 'Login-feltet er påkrevd',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Opprettelse av bruker vellykket.',
         'update'    => 'Oppdatering av bruker vellykket.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Sletting av bruker vellykket.',
         'ban'       => 'Vellykket forbud av bruker.',
         'unban'     => 'Forbud av bruker ble opphevet.',

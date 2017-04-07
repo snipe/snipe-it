@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'You have successfully accepted this asset.',
     'declined'                  => 'You have successfully declined this asset.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Uživatel již existuje!',
     'user_not_found'            => 'Uživatel [:id] neexistuje.',
     'user_login_required'       => 'The login field is required',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Uživatel byl úspěšně vytvořen.',
         'update'    => 'Uživatel byl úspěšně aktualizován.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'User was successfully deleted.',
         'ban'       => 'Uživatel byl úspěšně zakázán.',
         'unban'     => 'Uživatel byl úspěšně povolen.',

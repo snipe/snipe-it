@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute musí být mezi :min - :max kilobajtů.",
         "string"  => ":attribute smí obsahovat pouze :min - :max znaků.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => "Potvrzení :attribute se neshoduje.",
     "date"             => ":attribute není platným datem.",
     "date_format"      => "Atribut  :attribute nesouhlasí s formátem :format.",

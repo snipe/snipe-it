@@ -23,7 +23,7 @@ return array(
         'error'   => 'ファイルがアップロードできませんでした。もう一度、やり直して下さい。',
         'success' => 'ファイルがアップロードされました。',
         'nofiles' => 'アップロードするファイルが選択されていないか、アップロードしようとしているファイルが大き過ぎます。',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'ファイルサイズが大きすぎるか、許可されていない形式です。(png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, lic)',
     ),
 
     'update' => array(

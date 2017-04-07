@@ -7,7 +7,7 @@ return array(
 
     'create' => array(
         'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'success' => 'Το εξάρτημα δημιουργήθηκε με επιτυχία.'
     ),
 
     'update' => array(
@@ -17,20 +17,20 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας το αξεσουάρ. Παρακαλώ δοκιμάστε ξανά.',
         'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(
         'error'   		=> 'Accessory was not checked out, please try again',
         'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     ),
 
     'checkin' => array(
         'error'   		=> 'Accessory was not checked in, please try again',
         'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     )
 
 

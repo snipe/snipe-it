@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Ativo',
     'allow'  				=> 'Permitir',
     'checkedout'  			=> 'Artigos',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Mostrar Utilizadores Ativos',
     'show_deleted'          => 'Mostrar Utilizadores Removidos',
     'title' 				=> 'Título',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Atualizar utilizador',
     'username' 				=> 'Nome de utilizador',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Isto é usado apenas para vinculação com a Active Directory, para para login)',
     'cloneuser'             => 'Clonar Utilizador',
     'viewusers' 			=> 'Ver Utilizadores',

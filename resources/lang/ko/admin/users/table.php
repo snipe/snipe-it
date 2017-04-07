@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> '활성',
     'allow'  				=> '허용',
     'checkedout'  			=> '자산',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => '현재 사용자들 보기',
     'show_deleted'          => '삭제된 사용자들 보기',
     'title' 				=> '직함',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> '사용자 갱신',
     'username' 				=> '사용자명',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(이 것은 로그인이 아닌, 액티브 디렉토리에 연결할 때 사용됩니다.)',
     'cloneuser'             => '사용자 복제',
     'viewusers' 			=> '사용자 보기',

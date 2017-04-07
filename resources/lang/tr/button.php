@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Hareketler',
     'add'    	                => 'Yeni ekle',
     'cancel'                    => 'İptal',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'İstek',
     'submit'  	                => 'Gönder',
     'upload'                    => 'Yükle',
-
+	'select_file'				=> 'Select File...',
 );

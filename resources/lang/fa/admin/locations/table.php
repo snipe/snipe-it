@@ -18,4 +18,5 @@ return array(
     'locations'                 => 'مکانها',
     'parent'                    => 'مجموعه پدر',
     'currency'                  => 'مکان ارز',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

@@ -36,11 +36,11 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Някои елементи не бяха въведени правилно.',
+        'errorDetail'           => 'Следните елементи не бяха въведени поради грешки.',
+        'success'               => "Вашият файл беше въведен.",
+        'file_delete_success'   => "Вашият файл беше изтрит успешно.",
+        'file_delete_error'      => "Файлът не е в състояние да бъде изтрит",
     ),
 
 
@@ -54,21 +54,21 @@ return array(
         'error'   		=> 'Активът не беше изписан. Моля опитайте отново.',
         'success' 		=> 'Активът изписан успешно.',
         'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Този актив не е наличен за отписване!'
     ),
 
     'checkin' => array(
         'error'   		=> 'Активът не беше вписан. Моля опитайте отново.',
         'success' 		=> 'Активът вписан успешно.',
         'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Активът е вече вписан.',
 
     ),
 
     'requests' => array(
         'error'   		=> 'Активът не беше изискан. Моля опитайте отново.',
         'success' 		=> 'Активът изискан успешно.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'Заявка за отписване отказана успешно'
     )
 
 );

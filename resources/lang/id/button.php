@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Tindakan',
     'add'    	                => 'Tambah Baru',
     'cancel'                    => 'Batalkan',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'Permintaan',
     'submit'  	                => 'Kirim',
     'upload'                    => 'Unggah',
-
+	'select_file'				=> 'Select File...',
 );

@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Vous avez accepté cet actif.',
     'declined'                  => 'Vous avez refusé cet actif.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'L\'utilisateur existe déjà !',
     'user_not_found'            => 'L\'utilisateur [:id] n\'existe pas.',
     'user_login_required'       => 'Le champ identifiant est obligatoire',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'L’utilisateur a été créé avec succès.',
         'update'    => 'L’utilisateur a été mis à jour avec succès.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'L’utilisateur a été supprimé avec succès.',
         'ban'       => 'L’utilisateur a été banni avec succès.',
         'unban'     => 'L’utilisateur a été réhabilité avec succès.',

@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Localizaciones',
     'parent'                    => 'Padre',
     'currency'                  => 'Divisa de la Localización',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

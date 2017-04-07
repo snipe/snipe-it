@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Attivo',
     'allow'  				=> 'Consenti',
     'checkedout'  			=> 'Beni',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Visualizza utenti attuali',
     'show_deleted'          => 'Visualizza utenti eliminati',
     'title' 				=> 'Titolo',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Aggiornamento utente',
     'username' 				=> 'Username',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Questo è usato solo per Active Directory vincolante, non per il login.)',
     'cloneuser'             => 'Clona Utente',
     'viewusers' 			=> 'Visualizza utenti',

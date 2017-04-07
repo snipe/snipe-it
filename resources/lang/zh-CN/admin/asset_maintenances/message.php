@@ -12,8 +12,8 @@
             'success' => '资产维护信息已创建。'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => '资产维护信息编辑失败，请重试。',
+            'success' => '资产维护信息已成功编辑。'
         ],
         'asset_maintenance_incomplete' => '尚未完成',
         'warranty'                     => '有质保',

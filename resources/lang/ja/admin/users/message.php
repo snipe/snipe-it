@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'この資産を承認しました。',
     'declined'                  => 'この資産を却下しました。',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => '利用者が既に存在しています!',
     'user_not_found'            => '利用者 [:id] は、存在していません。',
     'user_login_required'       => 'ログインフィールドが必要です。',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => '利用者が正常に作成されました。',
         'update'    => '利用者が正常に更新されました。',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => '利用者が正常に削除されました。',
         'ban'       => '利用者が正常に禁止されました。',
         'unban'     => '利用者が正常に解禁されました。',

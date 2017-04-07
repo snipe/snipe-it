@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Ön sikeresen elfogadta ezt az eszközt.',
     'declined'                  => 'Az eszközt sikeresen csökkentetted.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Felhasználó már létezik!',
     'user_not_found'            => 'User [:id] does not exist.',
     'user_login_required'       => 'The login field is required',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'User was successfully created.',
         'update'    => 'A felhasználó módosítása sikeresen megtörtént.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'A felhasználó törlése sikeresen megtörtént.',
         'ban'       => 'User was successfully banned.',
         'unban'     => 'User was successfully unbanned.',

@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Categorie bewerken',
     'eula_text'							=> 'Categorie Gebruikersovereenkomst',
     'eula_text_help'					=> 'Dit veld staat aanpassingen toe voor de gebruikersovereenkomsten van verschillende goederen. Heeft u één overeenkomst voor alle goederen, vink dan het vakje hieronder aan om de standaard gebruikersovereenkomst te gebruiken.',
-    'name'                              => 'Category Name',
+    'name'                              => 'Categorie Naam',
     'require_acceptance'				=> 'Verplicht de gebruikers de overeenkomst te accepteren voor de goederen in deze catagorie.',
     'required_acceptance'				=> 'Deze gebruiker wordt gemaild met een link om de acceptatie van het artikel te verifiëren.',
     'required_eula'						=> 'De gebruiker krijgt een kopie van de gebruikersovereenkomst gemaild',

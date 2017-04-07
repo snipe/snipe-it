@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Je hebt met succes dit product geaccepteerd.',
     'declined'                  => 'Je hebt met succes dit product geweigerd.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Gebruiker bestaat reeds!',
     'user_not_found'            => 'Gebruiker [:id] bestaat niet.',
     'user_login_required'       => 'Het veld gebruikersnaam is verplicht.',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Gebruiker succesvol aangemaakt.',
         'update'    => 'Gebruiker succesvol bijgewerkt.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Gebruiker succesvol verwijderd.',
         'ban'       => 'Gebruiker succesvol verbannen.',
         'unban'     => 'Gebruiker succesvol opnieuw toegang verleend.',

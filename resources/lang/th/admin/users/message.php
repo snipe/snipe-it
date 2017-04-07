@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'คุณยอมรับสินทรัพย์นี้เรียบร้อยแล้ว',
     'declined'                  => 'คุณปฏิเสธสินทรัพย์นี้เรียบร้อยแล้ว',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'มีผู้ใช้งานนี้แล้ว',
     'user_not_found'            => 'ไม่มีชื่อผู้ใช้งานนี้',
     'user_login_required'       => 'ต้องการชื่อผู้ใช้งาน',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'สร้างผู้ใช้งานเสร็จสมบูรณ์แล้ว',
         'update'    => 'แก้ไขผู้ใช้งานเสร็จสมบูรณ์แล้ว',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'ลบผู้ใช้งานเสร็จสมบูรณ์แล้ว',
         'ban'       => 'แบนผู้ใช้งานเสร็จสมบูรณ์แล้ว',
         'unban'     => 'ยกเลิกการแบนผู้ใช้งานเสร็จสมบูรณ์แล้ว',

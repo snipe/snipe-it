@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
+    'does_not_exist' => 'Κατηγορία δεν υπάρχει.',
     'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
     'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Η κατηγορία δεν δημιουργήθηκε, παρακαλώ δοκιμάστε ξανά.',
+        'success' => 'Η κατηγορία δημιουργήθηκε με επιτυχία.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Η κατηγορία δεν ενημερώθηκε, παρακαλώ δοκιμάστε ξανά',
+        'success' => 'Η κατηγορία ενημερώθηκε με επιτυχία.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την κατηγορία;',
+        'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας αυτή την κατηγορία. Παρακαλώ δοκιμάστε ξανά.',
+        'success' => 'Η κατηγορία διαγράφηκε με επιτυχία.'
     )
 
 );

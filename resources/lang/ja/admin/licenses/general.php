@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'ライセンスについて',
+    'about_licenses'                  => 'ライセンスはソフトウェアの追跡に使用されます。指定した数を個人にチェックアウトすることができます。',
     'checkin'  					=> 'ライセンスシートをチェックイン',
     'checkout_history'  		=> '履歴をチェックアウト',
     'checkout'  				=> 'ライセンスシートをチェックアウト',

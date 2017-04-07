@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Sobre os artigos',
+    'about_assets_text'            => 'Artigos são itens seguidos por números de serie ou "asset tags". Eles tendem a ser itens de maior valor, onde a identificação de um item específico importa.',
 	'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Atribuir artigo a utilizador',

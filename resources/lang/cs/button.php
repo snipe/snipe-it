@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Akce',
     'add'    	                => 'Přidej nový',
     'cancel'                    => 'Zrušit',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'Požadavek',
     'submit'  	                => 'Odeslat',
     'upload'                    => 'Nahrát',
-
+	'select_file'				=> 'Select File...',
 );

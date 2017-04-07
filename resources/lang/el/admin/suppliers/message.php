@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Προμηθευτής δεν υπάρχει.',
+    'assoc_users'	 => 'Αυτός ο προμηθευτ σχετίζεται με τουλάχιστον ένα χρήστη και δεν μπορεί να διαγραφεί. Παρακαλούμε να ενημερώσετε τους χρήστες σας να μην αναφέρονται σε αυτήν τη θέση και δοκιμάστε ξανά. ',
 
     'create' => array(
         'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'success' => 'Ο προμηθευτής δημιουργήθηκε επιτυχώς.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Ο προμηθευτής δεν επικαιροποιήθηκε, παρακαλώ δοκιμάστε ξανά',
+        'success' => 'Οι προμηθευτές ανανεώθηκαν επιτυχώς.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό τον προμηθευτή;',
+        'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας τον προμηθευτή. Παρακαλώ δοκιμάστε ξανά.',
+        'success' => 'Ο προμηθευτής διαγράφηκε επιτυχώς.'
     )
 
 );

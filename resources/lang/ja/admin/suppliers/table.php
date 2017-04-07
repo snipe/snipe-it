@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => '仕入先について',
+    'about_suppliers_text'  => '仕入先は、アイテムの追跡に使用されます。',
     'address'               => '仕入先住所',
     'assets'                => '資産',
     'city'                  => '市区町村',

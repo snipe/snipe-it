@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'You have successfully accepted this asset.',
     'declined'                  => 'You have successfully declined this asset.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Utilizatorul exista deja!',
     'user_not_found'            => 'Utilizatorul [:id] nu exista.',
     'user_login_required'       => 'Campul de login este necesar',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Utilizatorul a fost creat.',
         'update'    => 'Utilizatorul a fost actualizat.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Utilizatorul a fost sters.',
         'ban'       => 'Utilizatorul a fost banat.',
         'unban'     => 'Utilizatorul a fost debanat.',

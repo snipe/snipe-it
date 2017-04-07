@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute 必须在 :min - :max kb 之间",
         "string"  => ":attribute 必须在 :min - :max 字符之间",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute 属性不匹配",
     "date"             => ":attribute 不是有效日期",
     "date_format"      => ":attribute 不符合 :format 的格式",

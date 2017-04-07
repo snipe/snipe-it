@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'نشط',
     'allow'  				=> 'السماح',
     'checkedout'  			=> 'الأصول',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Show Current Users',
     'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'المسمى الوظيفي',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'تحديث المستخدم',
     'username' 				=> 'اسم المستخدم',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(يستخدم فقط للربط مع الـ Active Directory وليس لغرض تسجيل الدخول.)',
     'cloneuser'             => 'نسخ المستخدم',
     'viewusers' 			=> 'عرض المستخدمين',

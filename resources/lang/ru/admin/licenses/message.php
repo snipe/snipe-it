@@ -23,7 +23,7 @@ return array(
         'error'   => 'Не удалось загрузить файл(ы). Повторите попытку.',
         'success' => 'Файл(ы) успешно загружены.',
         'nofiles' => 'Не выбрано ни одного файла для загрузки или файл, который вы пытаетесь загрузить, слишком большой',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'Один из ваших файлов слишком большой или имеет запрещенный тип файла. Резрешенные типы файлов: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, и lic.',
     ),
 
     'update' => array(

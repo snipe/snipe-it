@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Địa phương',
     'parent'                    => 'Parent',
     'currency'                  => 'Tiền tệ địa phương',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

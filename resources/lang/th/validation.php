@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute ต้องมีขนาดระหว่าง :min - :max กิโลไบต์",
         "string"  => ":attribute ต้องมีจำนวนระหว่าง :min - :max ตัวอักษร",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute ไม่ตรงกัน",
     "date"             => ":attribute เป็นรูปแบบวันที่ที่ไม่ถูกต้อง",
     "date_format"      => ":attribute ไม่ตรงตามรูปแบบ :format",

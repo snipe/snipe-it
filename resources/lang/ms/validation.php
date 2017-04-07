@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute mesti diantara :min - :max kilobytes.",
         "string"  => ":attribute mesti diantara :min - :max characters.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute pengesahan tidak sama.",
     "date"             => ":attribute  tarikh yang tidak sah.",
     "date_format"      => ":attribute tidak mengikut format :format.",

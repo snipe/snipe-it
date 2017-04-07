@@ -1,12 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'     => 'About manufacturers',
-    'about_manufacturers_text'           => 'Manufacturers make all the magic items we consume.',
+    'about_manufacturers_title'    => 'Σχετικά με τους κατασκευαστές',
+    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
     'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'create'				=> 'Δημιουργήστε Κατασκευαστή',
     'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Name',
+    'support_email'   		=> 'Support Email',
+    'support_phone'   		=> 'Support Phone',
+    'support_url'   		=> 'Support URL',
+    'update'				=> 'Ενημέρωση Κατασκευαστή',
+    'url'   				=> 'URL',
 
 );

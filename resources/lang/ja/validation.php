@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute は :min - :max キロバイトの範囲内にして下さい。",
         "string"  => ":attribute は :min - :max 文字の範囲内にして下さい。",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute が、一致しませんでした。",
     "date"             => ":attribute は、無効な日付です。",
     "date_format"      => ":attribute フォーマット :format に一致しません。",

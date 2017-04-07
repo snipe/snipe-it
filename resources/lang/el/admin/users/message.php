@@ -2,26 +2,28 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
+    'accepted'                  => 'Έχετε αποδεχθεί με επιτυχία αυτό το πάγιο.',
     'declined'                  => 'You have successfully declined this asset.',
-    'user_exists'               => 'User already exists!',
-    'user_not_found'            => 'User [:id] does not exist.',
-    'user_login_required'       => 'The login field is required',
-    'user_password_required'    => 'The password is required.',
-    'insufficient_permissions'  => 'Insufficient Permissions.',
-    'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'user_exists'               => 'Ο χρήστης υπάρχει ήδη!',
+    'user_not_found'            => 'Ο χρήστης [:id] δεν υπάρχει.',
+    'user_login_required'       => 'Το πεδίο εισόδου είναι υποχρεωτικό',
+    'user_password_required'    => 'Ο κωδικός είναι απαραίτητος.',
+    'insufficient_permissions'  => 'Δεν έχετε επαρκή δικαιώματα.',
+    'user_deleted_warning'      => 'Αυτός ο χρήστης έχει διαγραφεί. Θα πρέπει να επαναφέρετε αυτό το χρήστη για να τον επεξεργαστείτε ή να του εκχωρήσετε νέα πάγια.',
     'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
-        'ban'       => 'User was successfully banned.',
-        'unban'     => 'User was successfully unbanned.',
+        'create'    => 'Ο χρήστης δημιουργήθηκε με επιτυχία.',
+        'update'    => 'Ο χρήστης ενημερώθηκε με επιτυχία.',
+        'update_bulk'    => 'Users were successfully updated!',
+        'delete'    => 'Ο χρήστης διαφράφηκε με επιτυχία.',
+        'ban'       => 'Ο χρήστης έχει αποκλειστεί επιτυχώς.',
+        'unban'     => 'Ο Χρήστης επαναφέρθηκε με επιτυχία.',
         'suspend'   => 'User was successfully suspended.',
         'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.',
+        'restored'  => 'Ο Χρήστης επαναφέρθηκε με επιτυχία.',
         'import'    => 'Users imported successfully.',
     ),
 
@@ -41,14 +43,14 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Το αρχείο δεν έχει διαγραφεί. Παρακαλώ δοκιμάστε ξανά.',
+        'success' => 'Το αρχείο διαγράφηκε με επιτυχία.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'error'   => 'Τα αρχεία δεν μεταφορτώθηκαν. Παρακαλώ δοκιμάστε ξανά.',
+        'success' => 'Τα αρχεία ενημερώθηκαν με επιτυχία.',
+        'nofiles' => 'Δεν έχετε επιλέξει κανένα αρχείο για ενημέρωση',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 

@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Aceitou este artigo com sucesso.',
     'declined'                  => 'Recusou este artigo com sucesso.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Utilizador já existe!',
     'user_not_found'            => 'Utilizador [:id] não existe.',
     'user_login_required'       => 'O atributo login é obrigatório',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Utilizador criado com sucesso.',
         'update'    => 'Utilizador atualizado com sucesso.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Utilizador removido com sucesso.',
         'ban'       => 'Utilizador desabilitado com sucesso.',
         'unban'     => 'Utilizador reabilitado com sucesso.',

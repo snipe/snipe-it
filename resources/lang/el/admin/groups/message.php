@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Η ομάδα υπάρχει ήδη!',
+    'group_not_found'     => 'Ομάδα [: Αναγνωριστικό] δεν υπάρχει.',
+    'group_name_required' => 'Το όνομα του πεδίου είναι απαραίτητο',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Η ομάδα δημιουργήθηκε με επιτυχία.',
+        'update' => 'Ομάδα ενημερώθηκε με επιτυχία.',
+        'delete' => 'Η ομάδα διαγράφηκε επιτυχώς.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Είστε σίγουροι ότι επιθυμείτε την διαγραφή της ομάδας;',
+        'create' => 'Υπήρξε ένα ζήτημα διαγράφοντας την ομάδα. Παρακαλώ δοκιμάστε ξανά.',
+        'update' => 'Υπήρξε ένα ζήτημα ενημερώνοντας την ομάδα. Παρακαλώ δοκιμάστε ξανά.',
+        'delete' => 'Υπήρξε ένα ζήτημα διαγράφοντας την ομάδα. Παρακαλώ δοκιμάστε ξανά.',
     ),
 
 );

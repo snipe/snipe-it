@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'O Licencjach',
+    'about_licenses'                  => 'Licencje są używane do śledzenia oprogramowania.  Posiadają określoną liczbę stanowisk, które mogą być przypisane do osób fizycznych.',
     'checkin'  					=> 'Sprawdź płatność',
     'checkout_history'  		=> 'Historia płatności',
     'checkout'  				=> 'Sprawdź płatność',

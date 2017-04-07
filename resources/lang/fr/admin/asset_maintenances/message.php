@@ -12,8 +12,8 @@
             'success' => 'Le type d\'entretien d\'actif a été créé correctement.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'L\'entretien d\'actif n\'a pas été créé, merci de réessayer.',
+            'success' => 'L\'entretien d\'actif a été modifié avec succès.'
         ],
         'asset_maintenance_incomplete' => 'Pas encore complété',
         'warranty'                     => 'Garantie',

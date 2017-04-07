@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktif',
     'allow'  				=> 'Kabul Et',
     'checkedout'  			=> 'Demirbaşlar',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => 'Show Current Users',
     'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'Başlık',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Update User',
     'username' 				=> 'Kullanıcı Adı',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Kullanıcıyı Kopyala',
     'viewusers' 			=> 'Kullanıcıları Görüntüle',

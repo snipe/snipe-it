@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> '啟用',
     'allow'  				=> '允許',
     'checkedout'  			=> '資產',
@@ -28,8 +27,10 @@ return array(
     'show_current'          => '顯示當前使用者',
     'show_deleted'          => '顯示已刪除使用者',
     'title' 				=> '職稱',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> '更新使用者',
     'username' 				=> '使用者名稱',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '（這是用來綁定 Active Directory，非用來登入）',
     'cloneuser'             => '複製使用者',
     'viewusers' 			=> '檢視使用者',

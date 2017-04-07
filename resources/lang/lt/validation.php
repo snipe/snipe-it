@@ -25,6 +25,7 @@ return array(
         "file"    => ":attribute privalo būti tarp :min - :max kilobaitų.",
         "string"  => ":attribute privalo būti tarp :min - :max ženklų.",
     ),
+    "boolean"          => "The :attribute must be true or false.",
     "confirmed"        => ":attribute patvirtinimas nesutampa.",
     "date"             => ":attribute nėra galiojanti data.",
     "date_format"      => ":attribute nesutampa su formatu :format.",

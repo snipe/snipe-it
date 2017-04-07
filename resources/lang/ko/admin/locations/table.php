@@ -17,4 +17,5 @@ return array(
     'locations'                 => '위치',
     'parent'                    => '상위',
     'currency'                  => '현지 통화',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'Confirmar Apagar artigos seleccionados',
   'bulk_delete_help'	=> 'Reveja os ativos para apagar abaixo. Depois de apagados, estes ativos podem ser restaurados, mas não estarão associados aos utilizadores.',
   'bulk_delete_warn'	=> 'Vai apagar :asset_count ativos.',
 	'bulk_update'		=> 'Atualização de ativos em massa',

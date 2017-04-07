@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Компонентът не съществува.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Компонентът не беше създаден, моля опитайте отново.',
+        'success' => 'Компонентът създаден успешно.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Компонентът не беше обновен, моля опитайте отново.',
+        'success' => 'Компонентът обновен успешно.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Сигурни ли сте, че желаете да изтриете този компонент?',
+        'error'   => 'Възникна проблем при изтриването на компонента. Моля опитайте отново.',
+        'success' => 'Компонентът бе изтрит успешно.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Компонентът не беше отписан, моля опитайте отново.',
+        'success' 		=> 'Компонентът отписан успешно.',
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Компонентът не беше вписан, моля опитайте отново.',
+        'success' 		=> 'Компонентът вписан успешно.',
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
     )
 
 

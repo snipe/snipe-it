@@ -4,7 +4,7 @@ return array(
     'about_suppliers_title' => 'About Suppliers',
     'about_suppliers_text'  => 'Suppliers are used to track the source of items',
     'address'               => 'Adresa dodavatele',
-    'assets'                => 'Assets',
+    'assets'                => 'Majetek',
     'city'                  => 'Město',
     'contact'               => 'Kontaktní osoba',
     'country'               => 'Země',
