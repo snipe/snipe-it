@@ -94,7 +94,7 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'cipher' => 'rijndael-256',
+    'cipher' => env('APP_CIPHER', 'rijndael-256'),
 
     /*
     |--------------------------------------------------------------------------
