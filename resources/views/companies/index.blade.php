@@ -23,7 +23,7 @@
           <table class="table table-striped" name="companies">
             <thead>
               <tr>
-                <th class="col-md-1">{{ trans('general.id') }}</th>
+                <th class="col-md-1">{{ trans('admin/companies/table.id') }}</th>
                 <th class="col-md-9">{{ trans('admin/companies/table.name') }}</th>
                 <th class="col-md-2">{{ trans('table.actions') }}</th>
               </tr>
@@ -61,9 +61,9 @@
 
     <!-- side address column -->
     <div class="col-md-3">
-      <h4>About Companies</h4>
+      <h4>{{ trans('admin/companies/general.about_companies_title') }}</h4>
       <p>
-        You can use companies as a simple placeholder, or you can use them to restrict asset visibility and availability to users with a specific company.
+        {{ trans('admin/companies/general.about_companies_text') }}
       </p>
 
     </div>
