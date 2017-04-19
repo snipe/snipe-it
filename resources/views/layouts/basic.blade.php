@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Snipe-IT</title>
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
