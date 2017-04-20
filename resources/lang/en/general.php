@@ -107,7 +107,7 @@
     'min_amt_help'	=> 'Minimum number of items that should be available before an alert gets triggered.',
     'model_no'				=> 'Model No.',
     'months'				=> 'months',
-    'moreinfo'				=> 'More Info',
+    'more_info'				=> 'More info',
     'name'					=> 'Name',
     'next'					=> 'Next',
     'new'					=> 'new!',
