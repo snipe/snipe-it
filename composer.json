@@ -25,7 +25,8 @@
         "neitanod/forceutf8": "^2.0",
         "laravel/passport": "^1.0",
         "javiereguiluz/easyslugger": "^1.0",
-        "patchwork/utf8": "~1.2"
+        "patchwork/utf8": "~1.2",
+        "laravel/tinker": "^1.0"
 
     },
     "require-dev": {
@@ -34,8 +35,8 @@
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "codeception/codeception": "2.2.9",
-        "squizlabs/php_codesniffer": "*",
-    "laravel/tinker": "^1.0"
+        "squizlabs/php_codesniffer": "*"
+
     },
     "autoload": {
         "classmap": [
