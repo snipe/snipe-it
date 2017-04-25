@@ -102,15 +102,28 @@ class LicensePresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.order_number'),
-            ], [
-                "field" => "actions",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
-                "formatter" => "licensesActionsFormatter",
             ]
         ];
+
+        $layout[] = [
+            "field" => "checkincheckout",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => true,
+            "title" => 'Checkin/Checkout',
+            "visible" => true,
+            "formatter" => "licensesInOutFormatter",
+        ];
+
+        $layout[] = [
+            "field" => "actions",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => false,
+            "title" => trans('table.actions'),
+            "formatter" => "licensesActionsFormatter",
+        ];
+
 
         return json_encode($layout);
     }
