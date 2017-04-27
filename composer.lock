@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cd8f1bd108ed3ed653c70084ddb147e3",
-    "content-hash": "bebc983ac46d9cdecb657ac3253fadbe",
+    "hash": "4aa06f352b235f36a48cc287556af7a3",
+    "content-hash": "ccef89dfe3219e8cfee41abb55be8fbd",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.26.2",
+            "version": "3.26.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "05df1887d7b8cea9fba9ad59e1513c3815e883ae"
+                "reference": "a843acca973557ca4fefb7e4d407e6312ff0b9ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/05df1887d7b8cea9fba9ad59e1513c3815e883ae",
-                "reference": "05df1887d7b8cea9fba9ad59e1513c3815e883ae",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a843acca973557ca4fefb7e4d407e6312ff0b9ed",
+                "reference": "a843acca973557ca4fefb7e4d407e6312ff0b9ed",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 "ext-simplexml": "*",
                 "ext-spl": "*",
                 "nette/neon": "^2.3",
-                "phpunit/phpunit": "~4.0|~5.0",
+                "phpunit/phpunit": "^4.8.35|^5.4.0",
                 "psr/cache": "^1.0"
             },
             "suggest": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-21 20:25:16"
+            "time": "2017-04-26 17:47:01"
         },
         {
             "name": "aws/aws-sdk-php-laravel",
@@ -1714,16 +1714,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.38",
+            "version": "1.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482"
+                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
-                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2474325ee924134bb05848663b12531f6f2e9fbe",
+                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe",
                 "shasum": ""
             },
             "require": {
@@ -1793,7 +1793,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-04-22 18:59:19"
+            "time": "2017-04-25 15:24:43"
         },
         {
             "name": "league/oauth2-server",

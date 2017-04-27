@@ -31,7 +31,7 @@
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
-        "phpunit/phpunit": "~5.0",
+        "phpunit/phpunit": "~5.7",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "codeception/codeception": "2.2.9",
@@ -59,14 +59,6 @@
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
-        ],
-        "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
-        ],
-        "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
         ]
     },
     "config": {
