@@ -19,6 +19,7 @@ use Illuminate\Database\Schema\Blueprint;
  */
 
 function updateLegacyColumnName($customfield) {
+
     $name_to_db_name = CustomField::name_to_db_name($customfield->name);
     \Log::debug('Trying to rename '.$name_to_db_name." to ".$customfield->convertUnicodeDbSlug()."...\n");
 
@@ -48,6 +49,8 @@ class FixUtf8CustomFieldColumnNames extends Migration
      */
     public function up()
     {
+        $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
+        $platform->registerDoctrineTypeMapping('enum', 'string');
 
         Schema::table('custom_fields', function ($table) {
             $table->string('db_column')->nullable();
