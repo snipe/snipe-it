@@ -42,6 +42,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        $this->commands([
+            \Laravel\Passport\Console\InstallCommand::class,
+            \Laravel\Passport\Console\ClientCommand::class,
+            \Laravel\Passport\Console\KeysCommand::class,
+        ]);
+        
+
         $this->registerPolicies();
         Passport::routes();
         Passport::tokensExpireIn(Carbon::now()->addYears(20));
