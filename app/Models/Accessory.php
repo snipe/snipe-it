@@ -153,11 +153,6 @@ class Accessory extends SnipeModel
                             $query->where('companies.name', 'LIKE', '%'.$search.'%');
                         });
                     })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('assetlog', function ($query) use ($search) {
-                            $query->where('action_type', '=', 'checkout')
-                            ->where('created_at', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
                         $query->whereHas('location', function ($query) use ($search) {
                             $query->where('locations.name', 'LIKE', '%'.$search.'%');
                         });
