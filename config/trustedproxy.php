@@ -24,19 +24,20 @@ return [
      * how many proxies that client's request has
      * subsequently passed through.
      */
-    'proxies' => env('APP_TRUSTED_PROXIES') !== null ? explode(env('APP_TRUSTED_PROXIES'), ',') : '*',
+    'proxies' => env('APP_TRUSTED_PROXIES') !== null ?
+        explode(',', env('APP_TRUSTED_PROXIES')) : '*',
 
     /*
      * Or, to trust all proxies that connect
      * directly to your server, uncomment this:
      */
-    # 'proxies' => '*',
+    // 'proxies' => '*',
 
     /*
      * Or, to trust ALL proxies, including those that
-     * are in a chain of fowarding, uncomment this:
+     * are in a chain of forwarding, uncomment this:
     */
-    # 'proxies' => '**',
+    // 'proxies' => '**',
 
     /*
      * Default Header Names
