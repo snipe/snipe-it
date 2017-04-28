@@ -40,9 +40,7 @@
     },
     "autoload": {
         "classmap": [
-            "database",
-            "app/Helpers/Helper.php",
-            "app/Http/Transformers"
+            "database"
         ],
         "psr-4": {
             "App\\": "app/"
