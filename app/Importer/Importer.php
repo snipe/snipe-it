@@ -133,7 +133,7 @@ abstract class Importer
     public function array_smart_custom_field_fetch(array $array, $key)
     {
         $index_name = strtolower($key->name);
-        return array_key_exists($index_name, $array) ? e(trim($array[$index_name])) : '';
+        return array_key_exists($index_name, $array) ? e(trim($array[$index_name])) : false;
     }
 
     protected function log($string)
