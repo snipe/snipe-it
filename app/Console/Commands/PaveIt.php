@@ -72,6 +72,7 @@ class PaveIt extends Command
                 Statuslabel::getQuery()->delete();
                 Supplier::getQuery()->delete();
                 Group::getQuery()->delete();
+                Import::getQuery()->delete();
 
                 DB::statement('delete from accessories_users');
                 DB::statement('delete from asset_logs');
@@ -131,6 +132,7 @@ class PaveIt extends Command
                 \DB::statement('drop table IF EXISTS throttle');
                 \DB::statement('drop table IF EXISTS users_groups');
                 \DB::statement('drop table IF EXISTS users');
+                \DB::statement('drop table IF EXISTS imports');
             }
         }
     }
