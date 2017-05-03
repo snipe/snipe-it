@@ -101,7 +101,8 @@ class CustomField extends Model
 
     public function db_column_name()
     {
-        return self::convertUnicodeDbSlug();
+        return $this->db_column;
+        // return self::convertUnicodeDbSlug();
     }
 
     //mutators for 'format' attribute

@@ -24,8 +24,10 @@ class AssetImporter extends ItemImporter
         parent::handle($row);
 
         foreach ($this->customFields as $customField) {
-            if ($this->item['custom_fields'][$customField->db_column_name()] = $this->array_smart_custom_field_fetch($row, $customField)) {
-                $this->log('Custom Field '. $customField->name.': '.$this->array_smart_custom_field_fetch($row, $customField));
+            $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField);
+            if ($customFieldValue) {
+                $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
+                $this->log('Custom Field '. $customField->name.': '.$customFieldValue);
             }
         }
 
@@ -87,7 +89,6 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
-
         if (!$this->testRun) {
             if ($asset->save()) {
                 $asset->logCreate('Imported using csv importer');
