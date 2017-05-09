@@ -55,7 +55,7 @@ abstract class Importer
      * ObjectImporter constructor.
      * @param string $filename
      */
-    public function __construct(string $filename)
+    public function __construct($filename)
     {
 
         $this->filename = $filename;
@@ -91,7 +91,7 @@ abstract class Importer
      * @param $results
      * @return array
      */
-    public function normalizeInputArray($results): array
+    public function normalizeInputArray($results)
     {
         $newArray = [];
 
@@ -133,7 +133,7 @@ abstract class Importer
     public function array_smart_custom_field_fetch(array $array, $key)
     {
         $index_name = strtolower($key->name);
-        return array_key_exists($index_name, $array) ? e(trim($array[$index_name])) : '';
+        return array_key_exists($index_name, $array) ? e(trim($array[$index_name])) : false;
     }
 
     protected function log($string)

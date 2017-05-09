@@ -45,7 +45,6 @@ class ImportController extends Controller
             $results = [];
             $import = new Import;
             foreach ($files as $file) {
-
                 if (!in_array($file->getMimeType(), array(
                     'application/vnd.ms-excel',
                     'text/csv',
@@ -53,7 +52,7 @@ class ImportController extends Controller
                     'text/comma-separated-values',
                     'text/tsv'))) {
                     $results['error']='File type must be CSV';
-                    return $results;
+                    return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
 
                 $date = date('Y-m-d-his');
@@ -132,7 +131,7 @@ class ImportController extends Controller
         try {
             unlink(config('app.private_uploads').'/imports/'.$import->file_path);
             $import->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('message.import.file_delete_success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
         } catch (\Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.import.file_delete_error')), 500);
         }
