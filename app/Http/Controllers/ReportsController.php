@@ -330,7 +330,82 @@ class ReportsController extends Controller
 
         $rows = array();
         foreach ($activitylogs as $activity) {
+<<<<<<< HEAD
             $rows[] = $activity->present()->forDataTable();
+=======
+
+            if ($activity->itemType() == "asset") {
+                $activity_icons = '<i class="fa fa-barcode"></i>';
+            } elseif ($activity->itemType() == "accessory") {
+                $activity_icons = '<i class="fa fa-keyboard-o"></i>';
+            } elseif ($activity->itemType()=="consumable") {
+                $activity_icons = '<i class="fa fa-tint"></i>';
+            } elseif ($activity->itemType()=="license"){
+                $activity_icons = '<i class="fa fa-floppy-o"></i>';
+            } elseif ($activity->itemType()=="component") {
+                $activity_icons = '<i class="fa fa-hdd-o"></i>';
+            } else {
+                $activity_icons = '<i class="fa fa-paperclip"></i>';
+            }
+
+            if (($activity->item) && ($activity->itemType()=="asset")) {
+              $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
+                $item_type = 'asset';
+            } elseif ($activity->item) {
+                $activity_item = '<a href="' . route('view/' . $activity->itemType(),
+                        $activity->item_id) . '">' . e($activity->item->name) . '</a>';
+                $item_type = $activity->itemType();
+
+            } else {
+                $activity_item = "unknown (deleted)";
+                $item_type = "null";
+            }
+            
+
+            if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
+                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user->fullName().'</a>';
+            } elseif ($activity->target_type === "App\Models\Asset") {
+                if($activity->target) {
+                    $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
+                } else {
+                    $activity_target = "";
+                }
+            } elseif ( $activity->target_type === "App\Models\User") {
+                if($activity->target) {
+                   $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
+                } else {
+                    $activity_target = '';
+                }
+            } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
+                $activity_target = '<a href="' . route('view/user', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->fullName()) . '</a>';
+
+            } elseif ($activity->action_type=='requested') {
+                if ($activity->user) {
+                    $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
+                } else {
+                    $activity_target = '';
+                }
+            } else {
+                if($activity->target) {
+                    $activity_target = $activity->target->id;
+                } else {
+                    $activity_target = "";
+                }
+            }
+
+            
+            $rows[] = array(
+                'icon'          => $activity_icons,
+                'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
+                'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
+                'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : '',
+                'target'          => $activity_target,
+                'item'          => $activity_item,
+                'item_type'     => $item_type,
+                'note'     => e($activity->note),
+
+            );
+>>>>>>> refs/remotes/snipe/master
         }
 
         $data = array('total'=>$activityCount, 'rows'=>$rows);
@@ -503,7 +578,11 @@ class ReportsController extends Controller
         }
 
         if (e(Input::get('notes')) == '1') {
+<<<<<<< HEAD
             $header[] = 'Notes';
+=======
+            $header[] = trans('general.notes');
+>>>>>>> refs/remotes/snipe/master
         }
 
 
@@ -644,9 +723,15 @@ class ReportsController extends Controller
 
             if (e(Input::get('notes')) == '1') {
                 if ($asset->notes) {
+<<<<<<< HEAD
                     $row[] = '"' .$asset->notes. '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
+=======
+                    $row[] = '"' .$asset->notes . '"';
+                } else {
+                    $row[] = '';
+>>>>>>> refs/remotes/snipe/master
                 }
             }
 

@@ -36,6 +36,46 @@
                 {{ trans('general.company') }}
               </label>
             </div>
+<<<<<<< HEAD
+=======
+
+        <div class="checkbox col-md-12">
+        	<label>
+            {{ Form::checkbox('status', '1') }}
+            {{ trans('general.status') }}
+            </label>
+        </div>
+        <div class="checkbox col-md-12">
+        	<label>
+            {{ Form::checkbox('warranty', '1') }}
+            {{ trans('admin/hardware/form.warranty') }}
+            </label>
+        </div>
+        <div class="checkbox col-md-12">
+        	<label>
+            {{ Form::checkbox('depreciation', '1') }}
+            {{ trans('general.depreciation') }}
+            </label>
+        </div>
+        <div class="checkbox col-md-12">
+          <label>
+            {{ Form::checkbox('expected_checkin', '1') }}
+            {{ trans('admin/hardware/form.expected_checkin') }}
+          </label>
+        </div>
+        <div class="checkbox col-md-12">
+          <label>
+            {{ Form::checkbox('notes', '1') }}
+            {{ trans('general.notes') }}
+          </label>
+        </div>
+
+
+
+
+
+        @foreach ($customfields as $customfield)
+>>>>>>> refs/remotes/snipe/master
             <div class="checkbox col-md-12">
               <label>
               {{ Form::checkbox('asset_tag', '1') }}
