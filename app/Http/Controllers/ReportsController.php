@@ -356,8 +356,14 @@ class ReportsController extends Controller
               $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
                 $item_type = 'asset';
             } elseif ($activity->item) {
-                $activity_item = '<a href="' . route('view/' . $activity->itemType(),
-                        $activity->item_id) . '">' . e($activity->item->name) . '</a>';
+
+                if ($activity->item->deleted_at!='') {
+                    $activity_item = '<del>'. e($activity->item->name).'</del>';
+                } else {
+                    $activity_item = '<a href="' . route('view/' . $activity->itemType(),
+                    $activity->item_id) . '">' . e($activity->item->name) . '</a>';
+                }
+
                 $item_type = $activity->itemType();
 
             } else {
