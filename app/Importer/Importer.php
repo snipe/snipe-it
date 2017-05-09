@@ -91,7 +91,7 @@ abstract class Importer
      * @param $results
      * @return array
      */
-    public function normalizeInputArray($results): array
+    public function normalizeInputArray($results)
     {
         $newArray = [];
 
