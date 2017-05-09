@@ -55,7 +55,7 @@ abstract class Importer
      * ObjectImporter constructor.
      * @param string $filename
      */
-    public function __construct(string $filename)
+    public function __construct($filename)
     {
 
         $this->filename = $filename;
