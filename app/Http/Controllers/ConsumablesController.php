@@ -189,6 +189,15 @@ class ConsumablesController extends Controller
         $consumable->qty                    = Helper::ParseFloat(e(Input::get('qty')));
 
         if ($consumable->save()) {
+
+            $logaction = new Actionlog();
+            $logaction->item_type = Consumable::class;
+            $logaction->item_id = $consumable->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $log = $logaction->logaction('update');
+
+
             return redirect()->to("admin/consumables")->with('success', trans('admin/consumables/message.update.success'));
         }
 
@@ -215,6 +224,13 @@ class ConsumablesController extends Controller
         }
 
             $consumable->delete();
+
+            $logaction = new Actionlog();
+            $logaction->item_type = Consumable::class;
+            $logaction->item_id = $consumable->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $log = $logaction->logaction('deleted');
 
             // Redirect to the locations management page
             return redirect()->to('admin/consumables')->with('success', trans('admin/consumables/message.delete.success'));

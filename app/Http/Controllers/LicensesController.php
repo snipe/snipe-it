@@ -412,6 +412,13 @@ class LicensesController extends Controller
             $licenseseats->delete();
             $license->delete();
 
+            $logaction = new Actionlog();
+            $logaction->item_type = License::class;
+            $logaction->item_id = $license->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $log = $logaction->logaction('deleted');
+
 
 
 
@@ -744,7 +751,7 @@ class LicensesController extends Controller
     public function getView($licenseId = null)
     {
 
-        $license = License::find($licenseId);
+        $license = License::withTrashed()->find($licenseId);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
 
         if (isset($license->id)) {

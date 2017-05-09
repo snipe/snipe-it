@@ -183,6 +183,15 @@ class AccessoriesController extends Controller
 
       // Was the accessory updated?
         if ($accessory->save()) {
+
+            $logaction = new Actionlog();
+            $logaction->item_type = Accessory::class;
+            $logaction->item_id = $accessory->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $log = $logaction->logaction('update');
+
+
             // Redirect to the updated accessory page
             return redirect()->to("admin/accessories")->with('success', trans('admin/accessories/message.update.success'));
         }
@@ -214,6 +223,13 @@ class AccessoriesController extends Controller
              return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
         } else {
             $accessory->delete();
+
+            $logaction = new Actionlog();
+            $logaction->item_type = Accessory::class;
+            $logaction->item_id = $accessory->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $log = $logaction->logaction('deleted');
 
             // Redirect to the locations management page
             return redirect()->to('admin/accessories')->with('success', trans('admin/accessories/message.delete.success'));

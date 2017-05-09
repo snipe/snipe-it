@@ -454,7 +454,20 @@ class AssetsController extends Controller
 
         if ($asset->save()) {
             // Redirect to the new asset page
-            \Session::flash('success', trans('admin/hardware/message.update.success'));
+
+                $logaction = new Actionlog();
+                $logaction->item_type = Asset::class;
+                $logaction->item_id = $asset->id;
+                $logaction->created_at =  date("Y-m-d H:i:s");
+                if (Input::has('rtd_location_id')) {
+                    $logaction->location_id = e(Input::get('rtd_location_id'));
+                }
+                $logaction->user_id = Auth::user()->id;
+                $log = $logaction->logaction('update');
+
+                
+                
+                \Session::flash('success', trans('admin/hardware/message.update.success'));
             return response()->json(['redirect_url' => route("view/hardware", $assetId)]);
         }
         \Input::flash();
@@ -487,6 +500,13 @@ class AssetsController extends Controller
 
 
         $asset->delete();
+
+        $logaction = new Actionlog();
+        $logaction->item_type = Asset::class;
+        $logaction->item_id = $asset->id;
+        $logaction->created_at =  date("Y-m-d H:i:s");
+        $logaction->user_id = Auth::user()->id;
+        $log = $logaction->logaction('deleted');
 
         // Redirect to the asset management page
         return redirect()->to('hardware')->with('success', trans('admin/hardware/message.delete.success'));
