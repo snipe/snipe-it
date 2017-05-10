@@ -1802,7 +1802,7 @@ class AssetsController extends Controller
                 }
 
             } else {
-                if (Gate::allows('assets.checkin')) {
+                if (($asset->assigned_to!='') && (Gate::allows('assets.checkin'))) {
                     $inout = '<a href="' . route('checkin/hardware',
                             $asset->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
                 }
