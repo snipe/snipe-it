@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    "password" => "Das Passwort muss Sechs Zeichen haben und übereinstimmen.",
+    "password" => "Das Passwort muss sechs Zeichen haben und übereinstimmen.",
 
     "user"     => "Benutzername oder Email-Adresse sind falsch",
 

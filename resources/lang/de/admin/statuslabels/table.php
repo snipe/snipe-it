@@ -12,6 +12,6 @@ return array(
     'status_type'   => 'Statustyp',
     'show_in_nav'   => 'Im seitlichen Navigationsbereich zeigen',
     'title'      	=> 'Statusbezeichnungen',
-    'undeployable'  => 'nicht Einsetzbar',
+    'undeployable'  => 'nicht einsetzbar',
     'update'      	=> 'Statusbezeichnung bearbeiten',
 );

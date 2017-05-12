@@ -30,7 +30,7 @@ return array(
         ),
 
     'activate' => array(
-        'error'   => 'Beim Aktivieren Ihres Accounts ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
+        'error'   => 'Beim Aktivieren Ihres Accounts ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
         'success' => 'Ihr Account wurde erfolgreich aktiviert.',
     ),
 

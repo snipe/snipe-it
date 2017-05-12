@@ -14,9 +14,9 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Sind Sie sicher, dass Sie die Gruppe löschen wollen?',
-        'create' => 'Beim Erstellen der Gruppe ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
-        'update' => 'Beim Aktualisieren der Gruppe ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
-        'delete' => 'Beim Löschen der Gruppe ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
+        'create' => 'Beim Erstellen der Gruppe ist ein Fehler aufgetreten. Bitte versuchen Sie es noch einmal.',
+        'update' => 'Beim Aktualisieren der Gruppe ist ein Fehler aufgetreten. Bitte versuchen Sie es noch einmal.',
+        'delete' => 'Beim Löschen der Gruppe ist ein Fehler aufgetreten. Bitte versuchen Sie es noch einmal.',
     ),
 
 );

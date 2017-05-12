@@ -5,18 +5,18 @@ return array(
     'does_not_exist' => 'Komponente existiert nicht.',
 
     'create' => array(
-        'error'   => 'Komponente wurde nicht erstellt, bitte versuche es noch einmal.',
+        'error'   => 'Komponente wurde nicht erstellt, bitte versuchen Sie es noch einmal.',
         'success' => 'Komponente wurde erfolgreich erstellt.'
     ),
 
     'update' => array(
-        'error'   => 'Komponente wurde nicht geändert, bitte versuche es noch einmal',
+        'error'   => 'Komponente wurde nicht geändert, bitte versuchen Sie es noch einmal',
         'success' => 'Komponente erfolgreich geändert.'
     ),
 
     'delete' => array(
         'confirm'   => 'Sind Sie sich sicher das sie diese Komponente löschen wollen?',
-        'error'   => 'Beim Löschen der Komponente ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
+        'error'   => 'Beim Löschen der Komponente ist ein Fehler aufgetreten. Bitte versuchen Sie es noch einmal.',
         'success' => 'Die Komponente wurde erfolgreich gelöscht.'
     ),
 

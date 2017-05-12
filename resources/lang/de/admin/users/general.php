@@ -4,8 +4,8 @@
 return array(
 
     'assets_user'       => 'Assets zugewiesen an :name',
-    'bulk_update_warn'	=> 'You are about to edit the properties of :user_count users. Please note that you cannot change your own user attributes using this form, and must make edits to your own user individually.',
-    'bulk_update_help'	=> 'This form allows you to update multiple users at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged.',
+    'bulk_update_warn'	=> 'Sie sind dabei, die Eigenschaften von :user_count Benutzern zu bearbeiten. Bitte beachten Sie, dass Sie Ihre eigenen Benutzerattribute nicht über dieses Formular ändern können. Sie müssen Ihren eigenen Benutzer einzeln bearbeiten.',
+    'bulk_update_help'	=> 'Dieses Formular ermöglicht Ihnen, mehrere Benutzer auf einmal zu bearbeiten. Füllen Sie nur die Felder aus, welche geändert werden sollen. Leer gelassene Felder bleiben unverändert.',
     'current_assets'    => 'Asset wurde an nachfolgenden Benutzer ausgegeben',
     'clone'             => 'Benutzer kopieren',
     'contact_user'      => 'Kontakt :name',
