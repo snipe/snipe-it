@@ -169,3 +169,17 @@ $factory->define(App\Models\Supplier::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Models\Setting::class, function ($faker) {
+    return [
+        'user_id' => 1,
+        'per_page' => 20,
+        'site_name' => $faker->sentence,
+        'auto_increment_assets' => false,
+        'alert_email' => $faker->safeEmail(),
+        'alerts_enabled' => false,
+        'brand' => 1,
+        'default_currency' => $faker->currencyCode,
+        'locale' => $faker->locale,
+    ];
+});
+

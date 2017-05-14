@@ -295,20 +295,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'locations'], function () {
 
-        Route::get('{location}/users',
-            [
-                'as'=>'api.locations.viewusers',
-                'uses'=>'LocationsController@getDataViewUsers'
-            ]
-        );
-
-        Route::get('{location}/assets',
-            [
-                'as'=>'api.locations.viewassets',
-                'uses'=>'LocationsController@getDataViewAssets'
-            ]
-        );
-
         // Do we actually still need this, now that we have an API?
         Route::get('{location}/check',
             [

@@ -98,16 +98,14 @@ class AssetTest extends \Codeception\TestCase\Test
         $this->assertFalse($asset->isValid());
     }
 
-    public function testAnAssetBelongsToAModel()
+    public function testAnAssetHasRelationships()
     {
         $asset = factory(Asset::class)->create();
         $this->assertInstanceOf(AssetModel::class, $asset->model);
-    }
-
-    public function testAnAssetBelongsToACompany()
-    {
-        $asset = factory(Asset::class)->create();
         $this->assertInstanceOf(Company::class, $asset->company);
+        $this->assertInstanceOf(App\Models\Depreciation::class, $asset->depreciation);
+        $this->assertInstanceOf(App\Models\Statuslabel::class, $asset->assetstatus);
+        $this->assertInstanceOf(App\Models\Supplier::class, $asset->supplier);
     }
 
     public function testAnAssetCanBeAvailableForCheckout()
@@ -135,5 +133,125 @@ class AssetTest extends \Codeception\TestCase\Test
         $status = factory(App\Models\Statuslabel::class)->states('rtd')->create();
         $asset = factory(Asset::class)->create(['status_id' => $status->id]);
         $this->assertTrue($asset->availableForCheckout());
+    }
+
+    public function testAnAssetCanHaveComponents()
+    {
+        $asset = factory(Asset::class)->create();
+        $components = factory(App\Models\Component::class, 5)->create();
+        $components->each(function($component) use ($asset) {
+            $component->assets()->attach($component, [
+                'asset_id'=>$asset->id
+            ]);
+        });
+        $this->assertInstanceOf(App\Models\Component::class, $asset->components()->first());
+        $this->assertCount(5, $asset->components);
+    }
+
+    public function testAnAssetCanHaveUploads()
+    {
+        $asset = factory(Asset::class)->create();
+        $this->assertCount(0, $asset->uploads);
+        factory(App\Models\Actionlog::class, 'asset-upload')->create(['item_id' => $asset->id]);
+        $this->assertCount(1, $asset->fresh()->uploads);
+    }
+
+    // Helper Method for checking in assets.... We should extract this to the model or a trait.
+
+    private function checkin($asset, $target) {
+        $asset->expected_checkin = null;
+        $asset->last_checkout = null;
+        $asset->assigned_to = null;
+        $asset->assignedTo()->disassociate($asset);
+        $asset->accepted = null;
+        $asset->save();
+        $logaction = $asset->logCheckin($target, 'Test Checkin');
+    }
+
+    public function testAnAssetCanBeCheckedOut()
+    {
+        // This tests Asset::checkOut(), Asset::assignedTo(), Asset::assignedAssets(), Asset::assetLoc(), Asset::assignedType(), defaultLoc()
+        // Need to mock settings here to avoid issues with checkout notifications.
+        factory(App\Models\Setting::class)->create();
+        $asset = factory(Asset::class)->create();
+        $adminUser = factory(App\Models\User::class)->states('superuser')->create();
+        Auth::login($adminUser);
+
+        $target = factory(App\Models\User::class)->create();
+        // An Asset Can be checked out to a user, and this should be logged.
+        $asset->checkOut($target, $adminUser);
+        $asset->save();
+
+        $this->assertInstanceOf(App\Models\User::class, $asset->assignedTo);
+        $this->assertEquals($asset->assetLoc->id, $target->userLoc->id);
+        $this->assertEquals('user', $asset->assignedType());
+        $this->assertEquals($asset->defaultLoc->id, $asset->rtd_location_id);
+        $this->tester->seeRecord('action_logs', [
+            'action_type' => 'checkout',
+            'target_type'   => get_class($target),
+            'target_id'     => $target->id
+        ]);
+        $this->checkin($asset, $target);
+        $this->assertNull($asset->fresh()->assignedTo);
+
+        $this->tester->seeRecord('action_logs', [
+            'action_type' => 'checkin from',
+            'target_type'   => get_class($target),
+            'target_id'     => $target->id
+        ]);
+
+
+        // An Asset Can be checked out to a asset, and this should be logged.
+        $target = factory(App\Models\Asset::class)->create();
+        $asset->checkOut($target, $adminUser);
+        $asset->save();
+        $this->assertInstanceOf(App\Models\Asset::class, $asset->fresh()->assignedTo);
+        $this->assertEquals($asset->fresh()->assetLoc->id, $target->fresh()->assetLoc->id);
+        $this->assertEquals('asset', $asset->assignedType());
+        $this->assertEquals($asset->defaultLoc->id, $asset->rtd_location_id);
+        $this->tester->seeRecord('action_logs', [
+            'action_type' => 'checkout',
+            'target_type'   => get_class($target),
+            'target_id'     => $target->id
+        ]);
+
+        $this->assertCount(1, $target->assignedAssets);
+        $this->checkin($asset, $target);
+        $this->assertNull($asset->fresh()->assignedTo);
+
+        $this->tester->seeRecord('action_logs', [
+            'action_type' => 'checkin from',
+            'target_type'   => get_class($target),
+            'target_id'     => $target->id
+        ]);
+
+        // An Asset Can be checked out to a location, and this should be logged.
+        $target = factory(App\Models\Location::class)->create();
+        $asset->checkOut($target, $adminUser);
+        $asset->save();
+        $this->assertInstanceOf(App\Models\Location::class, $asset->fresh()->assignedTo);
+        $this->assertEquals($asset->fresh()->assetLoc->id, $target->fresh()->id);
+        $this->assertEquals('location', $asset->assignedType());
+        $this->assertEquals($asset->defaultLoc->id, $asset->rtd_location_id);
+        $this->tester->seeRecord('action_logs', [
+            'action_type' => 'checkout',
+            'target_type'   => get_class($target),
+            'target_id'     => $target->id
+        ]);
+        $this->checkin($asset, $target);
+        $this->assertNull($asset->fresh()->assignedTo);
+
+        $this->tester->seeRecord('action_logs', [
+            'action_type' => 'checkin from',
+            'target_type'   => get_class($target),
+            'target_id'     => $target->id
+        ]);
+    }
+
+    public function testAnAssetHasMaintenances()
+    {
+        $asset = factory(Asset::class)->create();
+        $maintenance = factory(App\Models\AssetMaintenance::class)->create(['asset_id' => $asset->id]);
+        $this->assertCount(1, $asset->assetmaintenances);
     }
 }

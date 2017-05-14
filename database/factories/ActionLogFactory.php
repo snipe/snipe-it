@@ -2,6 +2,22 @@
 
 use App\Models\Actionlog;
 
+
+$factory->defineAs(App\Models\Actionlog::class, 'asset-upload', function($faker) {
+    $asset = factory(App\Models\Asset::class)->create();
+    return [
+        'item_type' => get_class($asset),
+        'item_id' => $asset->id,
+        'user_id' => function () {
+            return factory(App\Models\User::class)->create()->id;
+        },
+        'filename' => $faker->word,
+        'action_type' => 'uploaded'
+    ];
+});
+
+// CHECKOUT LOGS
+
 // Conveninece function for action logs.
 // Expects an array with the following Keys:
 // 'company' => company associated with everything
@@ -22,7 +38,6 @@ $checkout = function ($values) {
         'company_id' => $values['company']->id,
     ];
 };
-
 $factory->defineAs(Actionlog::class, 'asset-checkout', function (Faker\Generator $faker) {
     $values = [
         'company' => factory(App\Models\Company::class)->create(),

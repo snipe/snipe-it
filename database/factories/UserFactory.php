@@ -4,20 +4,23 @@ use App\Models\Company;
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
-    'first_name' => $faker->firstName,
-    'last_name' => $faker->lastName,
-    'username' => $faker->username,
-    'password' => $faker->password,
-    'permissions' => '{"user":"0"}',
-    'email' => $faker->safeEmail,
-    'company_id' => function () {
-            return factory(App\Models\Company::class)->create()->id;
-    },
-    'locale' => $faker->locale,
-    'employee_num' => $faker->numberBetween(3500, 35050),
-    'jobtitle' => $faker->word,
-    'phone' => $faker->phoneNumber,
-    'notes' => $faker->sentence
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'username' => $faker->username,
+        'password' => $faker->password,
+        'permissions' => '{"user":"0"}',
+        'email' => $faker->safeEmail,
+        'company_id' => function () {
+                return factory(App\Models\Company::class)->create()->id;
+        },
+        'locale' => $faker->locale,
+        'employee_num' => $faker->numberBetween(3500, 35050),
+        'jobtitle' => $faker->word,
+        'phone' => $faker->phoneNumber,
+        'notes' => $faker->sentence,
+        'location_id' => function () {
+            return factory(App\Models\Location::class)->create()->id;
+        },
     ];
 });
 // USER GLOBAL PERMISSION STATES

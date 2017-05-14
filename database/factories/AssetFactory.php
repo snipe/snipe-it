@@ -88,3 +88,19 @@ $factory->define(App\Models\AssetModel::class, function (Faker\Generator $faker)
     },
     ];
 });
+
+$factory->define(App\Models\AssetMaintenance::class, function (Faker\Generator $faker) {
+    return [
+        'asset_id' => function () {
+            return factory(App\Models\Asset::class)->create()->id;
+        },
+        'supplier_id' => function () {
+            return factory(App\Models\Supplier::class)->create()->id;
+        },
+        'asset_maintenance_type' => $faker->randomElement(['maintenance', 'repair', 'upgrade']),
+        'title' => $faker->sentence,
+        'start_date' => $faker->date(),
+        'is_warranty' => $faker->boolean(),
+        'notes' => $faker->paragraph(),
+    ];
+});
