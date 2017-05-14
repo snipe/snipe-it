@@ -8,20 +8,24 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class LocationTest extends \Codeception\TestCase\Test
 {
     /**
-     * @var \UnitTester
-     */
+    * @var \UnitTester
+    */
     protected $tester;
     use DatabaseMigrations;
 
-    public function testLocationAdd()
+    protected function _before()
     {
-      $location = factory(Location::class, 'location')->make();
-      $values = [
-        'name' => $location->name,
-      ];
-
-      Location::create($values);
-      $this->tester->seeRecord('locations', $values);
+        Artisan::call('migrate');
     }
 
+    public function testAssetAdd()
+    {
+        $location = factory(Location::class)->make();
+        $values = [
+        'name' => $location->name,
+        ];
+
+        Location::create($values);
+        $this->tester->seeRecord('locations', $values);
+    }
 }

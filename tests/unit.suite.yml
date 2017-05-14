@@ -8,3 +8,6 @@ modules:
         - Asserts
         - Laravel5:
             environment_file: .env.tests
+    config:
+      Db:
+        cleanup: true

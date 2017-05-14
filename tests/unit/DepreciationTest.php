@@ -12,9 +12,14 @@ class DepreciationTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testDepreciationAdd()
     {
-      $depreciations = factory(Depreciation::class, 'depreciation')->make();
+      $depreciations = factory(Depreciation::class)->make();
       $values = [
         'name' => $depreciations->name,
         'months' => $depreciations->months,

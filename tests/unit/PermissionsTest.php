@@ -14,10 +14,11 @@ class PermissionsTest extends TestCase
 {
     // use DatabaseMigrations;
     use DatabaseTransactions;
-    public function setUp()
+
+    protected function _before()
     {
-        parent::setUp();
-        $this->hardwareId = Asset::first()->id;
+        Artisan::call('migrate');
+        $this->hardwareId = factory(App\Models\Asset::class)->create()->id;
         $this->noHardware = [
             route('hardware.index') => 403,
             route('hardware.create') => 403,
@@ -25,7 +26,7 @@ class PermissionsTest extends TestCase
             route('hardware.show', $this->hardwareId) => 403,
         ];
 
-        $this->licenseId = License::first()->id;
+        $this->licenseId = factory(App\Models\License::class)->create()>id;
         $this->noLicenses = [
             route('licenses.index') => 403,
             route('licenses.create') => 403,
@@ -33,7 +34,7 @@ class PermissionsTest extends TestCase
             route('licenses.show', $this->licenseId) => 403,
         ];
 
-        $this->accessoryId = Accessory::first()->id;
+        $this->accessoryId = factory(App\Models\Accessory::class)->create()->id;
         $this->noAccessories = [
             route('accessories.index') => 403,
             route('accessories.create') => 403,
@@ -41,7 +42,7 @@ class PermissionsTest extends TestCase
             route('accessories.show', $this->accessoryId) => 403,
         ];
 
-        $this->consumableId = Consumable::first()->id;
+        $this->consumableId = factory(App\Models\Consumable::class)->create()->id;
         $this->noConsumables = [
             route('consumables.index') => 403,
             route('consumables.create') => 403,
@@ -49,7 +50,7 @@ class PermissionsTest extends TestCase
             route('consumables.show', $this->consumableId) => 403,
         ];
 
-        $this->componentId = Component::first()->id;
+        $this->componentId = factory(App\Models\Component::class)->create()->id;
         $this->noComponents = [
             route('components.index') => 403,
             route('components.create') => 403,
@@ -57,7 +58,7 @@ class PermissionsTest extends TestCase
             route('components.show', $this->componentId) => 403,
         ];
 
-        $this->userId = User::first()->id;
+        $this->userId = factory(App\Models\User::class)->create()->id;
         $this->noUsers = [
             route('users.index') => 403,
             route('users.create') => 403,

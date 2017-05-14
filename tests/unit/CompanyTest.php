@@ -13,9 +13,14 @@ class CompanyTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testAssetAdd()
     {
-      $company = factory(Company::class, 'company')->make();
+      $company = factory(Company::class)->make();
       $values = [
         'name' => $company->name,
       ];

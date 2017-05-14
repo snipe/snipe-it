@@ -13,9 +13,14 @@ class CategoryTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testAssetCategoryAdd()
     {
-        $category = factory(Category::class, 'category')->make(['category_type' => 'asset']);
+        $category = factory(Category::class)->make(['category_type' => 'asset']);
         $values = [
             'name' => $category->name,
             'category_type' => $category->category_type,
@@ -29,7 +34,7 @@ class CategoryTest extends \Codeception\TestCase\Test
 
     public function testAccessoryCategoryAdd()
     {
-        $category = factory(Category::class, 'category')->make(['category_type' => 'accessory']);
+        $category = factory(Category::class)->make(['category_type' => 'accessory']);
         $values = [
             'name' => $category->name,
             'category_type' => $category->category_type,

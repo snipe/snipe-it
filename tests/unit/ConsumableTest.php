@@ -13,9 +13,14 @@ class ConsumableTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testConsumableAdd()
     {
-      $consumable = factory(Consumable::class, 'consumable')->make();
+      $consumable = factory(Consumable::class)->make();
       $values = [
         'name' => $consumable->name,
         'qty' => $consumable->qty,

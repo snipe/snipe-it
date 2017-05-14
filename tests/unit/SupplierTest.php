@@ -13,9 +13,14 @@ class SupplierTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testSupplierAdd()
     {
-      $supplier = factory(Supplier::class, 'supplier')->make();
+      $supplier = factory(Supplier::class)->make();
       $values = [
         'name' => $supplier->name,
       ];

@@ -14,6 +14,11 @@ class SnipeModelTest extends \Codeception\TestCase\Test
     /**
      * @test
      */
+
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
     public function it_sets_purchase_dates_appropriately()
     {
         $c = new SnipeModel;

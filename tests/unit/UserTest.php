@@ -13,6 +13,11 @@ class UserTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testUserAdd()
     {
       $user = factory(User::class, 'valid-user')->make();
