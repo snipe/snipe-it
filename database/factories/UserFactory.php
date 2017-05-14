@@ -56,7 +56,7 @@ $factory->state(App\Models\User::class, 'edit-assets', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-assets', function ($faker) {
     return [
-        'permissions' => '{"assets.delete":"1",}',
+        'permissions' => '{"assets.delete":"1"}',
     ];
 });
 
@@ -99,7 +99,7 @@ $factory->state(App\Models\User::class, 'edit-accessories', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-accessories', function ($faker) {
     return [
-        'permissions' => '{"accessories.delete":"1",}',
+        'permissions' => '{"accessories.delete":"1"}',
     ];
 });
 
@@ -136,7 +136,7 @@ $factory->state(App\Models\User::class, 'edit-consumables', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-consumables', function ($faker) {
     return [
-        'permissions' => '{"consumables.delete":"1",}',
+        'permissions' => '{"consumables.delete":"1"}',
     ];
 });
 
@@ -173,7 +173,7 @@ $factory->state(App\Models\User::class, 'edit-licenses', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-licenses', function ($faker) {
     return [
-        'permissions' => '{"licenses.delete":"1",}',
+        'permissions' => '{"licenses.delete":"1"}',
     ];
 });
 
@@ -210,7 +210,7 @@ $factory->state(App\Models\User::class, 'edit-components', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-components', function ($faker) {
     return [
-        'permissions' => '{"components.delete":"1",}',
+        'permissions' => '{"components.delete":"1"}',
     ];
 });
 
@@ -247,6 +247,6 @@ $factory->state(App\Models\User::class, 'edit-users', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-users', function ($faker) {
     return [
-        'permissions' => '{"users.delete":"1",}',
+        'permissions' => '{"users.delete":"1"}',
     ];
 });

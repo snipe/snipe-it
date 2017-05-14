@@ -10,68 +10,56 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-class PermissionsTest extends TestCase
+class PermissionsTest extends \Codeception\TestCase\Test
 {
-    // use DatabaseMigrations;
-    use DatabaseTransactions;
-    use DatabaseMigrations;
 
-    public function setUp()
+    public function _before()
     {
-        parent::setUp();
-        $this->hardwareId = factory(App\Models\Asset::class)->create()->id;
+        Artisan::call('migrate');
         $this->noHardware = [
-            route('hardware.index') => 403,
-            route('hardware.create') => 403,
-            route('hardware.edit', $this->hardwareId) => 403,
-            route('hardware.show', $this->hardwareId) => 403,
+            'assets.view' => false,
+            'assets.create' => false,
+            'assets.edit' => false,
+            'assets.delete' => false,
         ];
 
-        $this->licenseId = factory(App\Models\License::class)->create()->id;
         $this->noLicenses = [
-            route('licenses.index') => 403,
-            route('licenses.create') => 403,
-            route('licenses.edit', $this->licenseId) => 403,
-            route('licenses.show', $this->licenseId) => 403,
+            'licenses.view' => false,
+            'licenses.create' => false,
+            'licenses.edit' => false,
+            'licenses.delete' => false,
         ];
 
-        $this->accessoryId = factory(App\Models\Accessory::class)->create()->id;
         $this->noAccessories = [
-            route('accessories.index') => 403,
-            route('accessories.create') => 403,
-            route('accessories.edit', $this->accessoryId) => 403,
-            route('accessories.show', $this->accessoryId) => 403,
+            'accessories.view' => false,
+            'accessories.create' => false,
+            'accessories.edit' => false,
+            'accessories.delete' => false,
         ];
 
-        $this->consumableId = factory(App\Models\Consumable::class)->create()->id;
         $this->noConsumables = [
-            route('consumables.index') => 403,
-            route('consumables.create') => 403,
-            route('consumables.edit', $this->consumableId) => 403,
-            route('consumables.show', $this->consumableId) => 403,
+            'consumables.view' => false,
+            'consumables.create' => false,
+            'consumables.edit' => false,
+            'consumables.delete' => false,
         ];
 
-        $this->componentId = factory(App\Models\Component::class)->create()->id;
         $this->noComponents = [
-            route('components.index') => 403,
-            route('components.create') => 403,
-            route('components.edit', $this->componentId) => 403,
-            route('components.show', $this->componentId) => 403,
+            'components.view' => false,
+            'components.create' => false,
+            'components.edit' => false,
+            'components.delete' => false,
         ];
 
-        $this->userId = factory(App\Models\User::class)->create()->id;
         $this->noUsers = [
-            route('users.index') => 403,
-            route('users.create') => 403,
-            route('users.edit', $this->userId) => 403,
-            route('users.show', $this->userId) => 403,
+            'users.view' => false,
+            'users.create' => false,
+            'users.edit' => false,
+            'users.delete' => false,
         ];
 
     }
 
-    public function tearDown()
-    {
-    }
     private $noHardware;
     private $noLicenses;
     private $noAccessories;
@@ -79,13 +67,6 @@ class PermissionsTest extends TestCase
     private $noComponents;
     private $noUsers;
 
-    // An existing id for each type;
-    private $hardwareId;
-    private $licenseId;
-    private $accessoryId;
-    private $consumableId;
-    private $componentId;
-    private $userId;
     // tests
     /**
      * @test
@@ -96,7 +77,6 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
         // $permissions = $this->noHardware;
         $this->hitRoutes($permissions, $u);
-
     }
 
     /**
@@ -108,10 +88,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('hardware.index') => 200,
-            route('hardware.create') => 403,
-            route('hardware.edit', $this->hardwareId) => 403,
-            route('hardware.show', $this->hardwareId) => 200,
+            'assets.view' => true,
+            'assets.create' => false,
+            'assets.edit' => false,
+            'assets.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -125,10 +105,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('hardware.index') => 403,
-            route('hardware.create') => 200,
-            route('hardware.edit', $this->hardwareId) => 403,
-            route('hardware.show', $this->hardwareId) => 403,
+            'assets.view' => false,
+            'assets.create' => true,
+            'assets.edit' => false,
+            'assets.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -143,10 +123,26 @@ class PermissionsTest extends TestCase
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('hardware.index') => 403,
-            route('hardware.create') => 403,
-            route('hardware.edit', $this->hardwareId) => 200,
-            route('hardware.show', $this->hardwareId) => 403,
+            'assets.view' => false,
+            'assets.create' => false,
+            'assets.edit' => true,
+            'assets.delete' => false,
+        ]);
+        $this->hitRoutes($permissions, $u);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_with_delete_assets_permissions_can_delete_assets()
+    {
+        $u = factory(App\Models\User::class)->states('delete-assets')->create();
+        $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
+        $permissions = array_merge($permissions, [
+            'assets.view' => false,
+            'assets.create' => false,
+            'assets.edit' => false,
+            'assets.delete' => true,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -160,10 +156,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('licenses.index') => 200,
-            route('licenses.create') => 403,
-            route('licenses.edit', $this->licenseId) => 403,
-            route('licenses.show', $this->licenseId) => 200,
+            'licenses.view' => true,
+            'licenses.create' => false,
+            'licenses.edit' => false,
+            'licenses.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -177,10 +173,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('licenses.index') => 403,
-            route('licenses.create') => 200,
-            route('licenses.edit', $this->licenseId) => 403,
-            route('licenses.show', $this->licenseId) => 403,
+            'licenses.view' => false,
+            'licenses.create' => true,
+            'licenses.edit' => false,
+            'licenses.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -194,10 +190,27 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('licenses.index') => 403,
-            route('licenses.create') => 403,
-            route('licenses.edit', $this->licenseId) => 200,
-            route('licenses.show', $this->licenseId) => 403,
+            'licenses.view' => false,
+            'licenses.create' => false,
+            'licenses.edit' => true,
+            'licenses.delete' => false,
+        ]);
+        $this->hitRoutes($permissions, $u);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_with_delete_licenses_permissions_can_delete_licenses()
+    {
+        $u = factory(App\Models\User::class)->states('delete-licenses')->create();
+        $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
+
+        $permissions = array_merge($permissions, [
+            'licenses.view' => false,
+            'licenses.create' => false,
+            'licenses.edit' => false,
+            'licenses.delete' => true,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -212,10 +225,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('accessories.index') => 200,
-            route('accessories.create') => 403,
-            route('accessories.edit', $this->accessoryId) => 403,
-            route('accessories.show', $this->accessoryId) => 200,
+            'accessories.view' => true,
+            'accessories.create' => false,
+            'accessories.edit' => false,
+            'accessories.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -230,10 +243,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('accessories.index') => 403,
-            route('accessories.create') => 200,
-            route('accessories.edit', $this->accessoryId) => 403,
-            route('accessories.show', $this->accessoryId) => 403,
+            'accessories.view' => false,
+            'accessories.create' => true,
+            'accessories.edit' => false,
+            'accessories.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -248,10 +261,28 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('accessories.index') => 403,
-            route('accessories.create') => 403,
-            route('accessories.edit', $this->accessoryId) => 200,
-            route('accessories.show', $this->accessoryId) => 403,
+            'accessories.view' => false,
+            'accessories.create' => false,
+            'accessories.edit' => true,
+            'accessories.delete' => false,
+        ]);
+        $this->hitRoutes($permissions, $u);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_with_delete_accessories_permissions_can_delete_accessories()
+    {
+        $u = factory(App\Models\User::class)->states('delete-accessories')->create();
+
+        $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
+
+        $permissions = array_merge($permissions, [
+            'accessories.view' => false,
+            'accessories.create' => false,
+            'accessories.edit' => false,
+            'accessories.delete' => true,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -266,10 +297,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('consumables.index') => 200,
-            route('consumables.create') => 403,
-            route('consumables.edit', $this->consumableId) => 403,
-            route('consumables.show', $this->consumableId) => 200,
+            'consumables.view' => true,
+            'consumables.create' => false,
+            'consumables.edit' => false,
+            'consumables.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -284,10 +315,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('consumables.index') => 403,
-            route('consumables.create') => 200,
-            route('consumables.edit', $this->consumableId) => 403,
-            route('consumables.show', $this->consumableId) => 403,
+            'consumables.view' => false,
+            'consumables.create' => true,
+            'consumables.edit' => false,
+            'consumables.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -302,10 +333,28 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('consumables.index') => 403,
-            route('consumables.create') => 403,
-            route('consumables.edit', $this->consumableId) => 200,
-            route('consumables.show', $this->consumableId) => 403,
+            'consumables.view' => false,
+            'consumables.create' => false,
+            'consumables.edit' => true,
+            'consumables.delete' => false,
+        ]);
+        $this->hitRoutes($permissions, $u);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_with_delete_consumables_permissions_can_delete_consumables()
+    {
+        $u = factory(App\Models\User::class)->states('delete-consumables')->create();
+
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noComponents + $this->noUsers;
+
+        $permissions = array_merge($permissions, [
+            'consumables.view' => false,
+            'consumables.create' => false,
+            'consumables.edit' => false,
+            'consumables.delete' => true,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -320,10 +369,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
-            route('users.index') => 200,
-            route('users.create') => 403,
-            route('users.edit', $this->userId) => 403,
-            route('users.show', $this->userId) => 200,
+            'users.view' => true,
+            'users.create' => false,
+            'users.edit' => false,
+            'users.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -338,10 +387,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
-            route('users.index') => 403,
-            route('users.create') => 200,
-            route('users.edit', $this->userId) => 403,
-            route('users.show', $this->userId) => 403,
+            'users.view' => false,
+            'users.create' => true,
+            'users.edit' => false,
+            'users.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -356,10 +405,28 @@ class PermissionsTest extends TestCase
                 $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
-            route('users.index') => 403,
-            route('users.create') => 403,
-            route('users.edit', $this->userId) => 200,
-            route('users.show', $this->userId) => 403,
+            'users.view' => false,
+            'users.create' => false,
+            'users.edit' => true,
+            'users.delete' => false,
+        ]);
+        $this->hitRoutes($permissions, $u);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_with_delete_users_permissions_can_delete_users()
+    {
+        $u = factory(App\Models\User::class)->states('delete-users')->create();
+
+                $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
+
+        $permissions = array_merge($permissions, [
+            'users.view' => false,
+            'users.create' => false,
+            'users.edit' => false,
+            'users.delete' => true,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -374,10 +441,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('components.index') => 200,
-            route('components.create') => 403,
-            route('components.edit', $this->componentId) => 403,
-            route('components.show', $this->componentId) => 200,
+            'components.view' => true,
+            'components.create' => false,
+            'components.edit' => false,
+            'components.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -391,10 +458,10 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('components.index') => 403,
-            route('components.create') => 200,
-            route('components.edit', $this->componentId) => 403,
-            route('components.show', $this->componentId) => 403,
+            'components.view' => false,
+            'components.create' => true,
+            'components.edit' => false,
+            'components.delete' => false,
         ]);
         $this->hitRoutes($permissions, $u);
     }
@@ -409,21 +476,37 @@ class PermissionsTest extends TestCase
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
-            route('components.index') => 403,
-            route('components.create') => 403,
-            route('components.edit', $this->componentId) => 200,
-            route('components.show', $this->componentId) => 403,
+            'components.view' => false,
+            'components.create' => false,
+            'components.edit' => true,
+            'components.delete' => false,
         ]);
+        $this->hitRoutes($permissions, $u);
+    }
+
+    /**
+     * @test
+     */
+    public function a_user_with_delete_components_permissions_can_delete_components()
+    {
+        $u = factory(App\Models\User::class)->states('delete-components')->create();
+
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
+
+        $permissions = array_merge($permissions, [
+            'components.view' => false,
+            'components.create' => false,
+            'components.edit' => false,
+            'components.delete' => true,
+        ]);
+        // dd($u);
         $this->hitRoutes($permissions, $u);
     }
 
     private function hitRoutes(array $routes, User $user)
     {
-        $this->actingAs($user);
-
-        foreach ($routes as $route => $response) {
-            $this->get($route)
-                ->assertStatus($response);
+        foreach ($routes as $route => $expectation) {
+            $this->assertEquals($user->hasAccess($route), $expectation);
         }
     }
 }
