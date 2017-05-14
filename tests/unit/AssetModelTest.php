@@ -60,7 +60,7 @@ class AssetModelTest extends \Codeception\TestCase\Test
     public function testAnAssetModelContainsAssets()
     {
         $assetmodel = factory(AssetModel::class)->create();
-        $asset = factory(Asset::class, 'asset')->create([
+        $asset = factory(Asset::class)->create([
             'model_id' => $assetmodel->id,
         ]);
         $this->assertEquals(1,$assetmodel->assets()->count());

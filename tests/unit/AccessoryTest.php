@@ -79,7 +79,7 @@ class AccessoryTest extends \Codeception\TestCase\Test
         $accessory->save();
         $this->assertTrue($accessory->isValid());
         $newId = $category->id + 1;
-        $accessory = factory(Accessory::class, 'accessory')->make(['category_id' => $newId]);
+        $accessory = factory(Accessory::class)->make(['category_id' => $newId]);
         $accessory->save();
 
         $this->assertFalse($accessory->isValid());

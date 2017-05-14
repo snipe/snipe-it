@@ -14,10 +14,11 @@ class PermissionsTest extends TestCase
 {
     // use DatabaseMigrations;
     use DatabaseTransactions;
+    use DatabaseMigrations;
 
-    protected function _before()
+    public function setUp()
     {
-        Artisan::call('migrate');
+        parent::setUp();
         $this->hardwareId = factory(App\Models\Asset::class)->create()->id;
         $this->noHardware = [
             route('hardware.index') => 403,
@@ -26,7 +27,7 @@ class PermissionsTest extends TestCase
             route('hardware.show', $this->hardwareId) => 403,
         ];
 
-        $this->licenseId = factory(App\Models\License::class)->create()>id;
+        $this->licenseId = factory(App\Models\License::class)->create()->id;
         $this->noLicenses = [
             route('licenses.index') => 403,
             route('licenses.create') => 403,
@@ -91,7 +92,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_no_permissions_sees_nothing()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->create();
+        $u = factory(App\Models\User::class)->create();
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
         // $permissions = $this->noHardware;
         $this->hitRoutes($permissions, $u);
@@ -103,7 +104,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_view_asset_permissions_can_view_assets()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('view-assets')->create();
+        $u = factory(App\Models\User::class)->states('view-assets')->create();
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
@@ -120,7 +121,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_create_asset_permissions_can_create_assets()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('create-assets')->create();
+        $u = factory(App\Models\User::class)->states('create-assets')->create();
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
@@ -137,7 +138,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_edit_assets_permissions_can_edit_assets()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('edit-assets')->create();
+        $u = factory(App\Models\User::class)->states('edit-assets')->create();
 
         $permissions = $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
@@ -155,7 +156,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_view_licenses_permissions_can_view_licenses()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('view-licenses')->create();
+        $u = factory(App\Models\User::class)->states('view-licenses')->create();
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
@@ -172,7 +173,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_create_licenses_permissions_can_create_licenses()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('create-licenses')->create();
+        $u = factory(App\Models\User::class)->states('create-licenses')->create();
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
@@ -189,7 +190,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_edit_licenses_permissions_can_edit_licenses()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('edit-licenses')->create();
+        $u = factory(App\Models\User::class)->states('edit-licenses')->create();
         $permissions = $this->noHardware + $this->noAccessories + $this->noConsumables + $this->noComponents + $this->noUsers;
 
         $permissions = array_merge($permissions, [
@@ -206,7 +207,7 @@ class PermissionsTest extends TestCase
     */
     public function a_user_with_view_accessories_permissions_can_view_accessories()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('view-accessories')->create();
+        $u = factory(App\Models\User::class)->states('view-accessories')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
@@ -224,7 +225,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_create_accessories_permissions_can_create_accessories()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('create-accessories')->create();
+        $u = factory(App\Models\User::class)->states('create-accessories')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
@@ -242,7 +243,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_edit_accessories_permissions_can_edit_accessories()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('edit-accessories')->create();
+        $u = factory(App\Models\User::class)->states('edit-accessories')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
@@ -260,7 +261,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_view_consumables_permissions_can_view_consumables()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('view-consumables')->create();
+        $u = factory(App\Models\User::class)->states('view-consumables')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noComponents + $this->noUsers;
 
@@ -278,7 +279,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_create_consumables_permissions_can_create_consumables()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('create-consumables')->create();
+        $u = factory(App\Models\User::class)->states('create-consumables')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noConsumables + $this->noComponents + $this->noUsers;
 
@@ -296,7 +297,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_edit_consumables_permissions_can_edit_consumables()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('edit-consumables')->create();
+        $u = factory(App\Models\User::class)->states('edit-consumables')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noComponents + $this->noUsers;
 
@@ -314,7 +315,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_view_users_permissions_can_view_users()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('view-users')->create();
+        $u = factory(App\Models\User::class)->states('view-users')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
@@ -332,7 +333,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_create_users_permissions_can_create_users()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('create-users')->create();
+        $u = factory(App\Models\User::class)->states('create-users')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
@@ -350,7 +351,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_edit_users_permissions_can_edit_users()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('edit-users')->create();
+        $u = factory(App\Models\User::class)->states('edit-users')->create();
 
                 $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
 
@@ -368,7 +369,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_view_components_permissions_can_view_components()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('view-components')->create();
+        $u = factory(App\Models\User::class)->states('view-components')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
@@ -386,7 +387,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_create_components_permissions_can_create_components()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('create-components')->create();
+        $u = factory(App\Models\User::class)->states('create-components')->create();
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
@@ -403,7 +404,7 @@ class PermissionsTest extends TestCase
      */
     public function a_user_with_edit_components_permissions_can_edit_components()
     {
-        $u = factory(App\Models\User::class, 'valid-user')->states('edit-components')->create();
+        $u = factory(App\Models\User::class)->states('edit-components')->create();
 
         $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
 

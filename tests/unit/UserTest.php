@@ -20,7 +20,7 @@ class UserTest extends \Codeception\TestCase\Test
 
     public function testUserAdd()
     {
-      $user = factory(User::class, 'valid-user')->make();
+      $user = factory(User::class)->make();
       $values = [
         'first_name' => $user->first_name,
         'last_name' => $user->last_name,

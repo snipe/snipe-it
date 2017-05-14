@@ -72,8 +72,12 @@ $factory->define(App\Models\Component::class, function (Faker\Generator $faker) 
 $factory->define(App\Models\Consumable::class, function (Faker\Generator $faker) {
     return [
     'name' => $faker->text(20),
-    'company_id' => Company::inRandomOrder()->first()->id,
-    'category_id' => Category::where('category_type', 'consumable')->inRandomOrder()->first()->id,
+    'company_id' => function () {
+            return factory(App\Models\Company::class)->create()->id;
+        },
+    'category_id' => function () {
+            return factory(App\Models\Category::class)->create()->id;
+    },
     'model_number' => $faker->numberBetween(1000000, 50000000),
     'item_no' => $faker->numberBetween(1000000, 50000000),
     'order_number' => $faker->numberBetween(1000000, 50000000),
@@ -84,7 +88,7 @@ $factory->define(App\Models\Consumable::class, function (Faker\Generator $faker)
     ];
 });
 
-$factory->defineAs(App\Models\CustomField::class, 'customfield-ip', function (Faker\Generator $faker) {
+$factory->define(App\Models\CustomField::class, function (Faker\Generator $faker) {
     return [
     'name' => $faker->catchPhrase,
     'format' => 'IP',
