@@ -139,6 +139,7 @@ class Asset extends Depreciable
      * @param null $name
      * @return bool
      */
+    //FIXME: The admin parameter is never used. Can probably be removed.
     public function checkOut($target, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
         if (!$target) {
@@ -163,7 +164,7 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
-            $log = $this->logCheckout($note);
+            $log = $this->logCheckout($note, $target);
 //            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
 //                $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
 //            }
