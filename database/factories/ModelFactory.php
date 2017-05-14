@@ -74,9 +74,18 @@ $factory->define(App\Models\Consumable::class, function (Faker\Generator $faker)
     'name' => $faker->text(20),
     'company_id' => function () {
             return factory(App\Models\Company::class)->create()->id;
-        },
+    },
     'category_id' => function () {
             return factory(App\Models\Category::class)->create()->id;
+    },
+    'location_id' => function () {
+            return factory(App\Models\Location::class)->create()->id;
+    },
+    'manufacturer_id' => function () {
+        return factory(App\Models\Manufacturer::class)->create()->id;
+    },
+    'user_id' => function () {
+        return factory(App\Models\User::class)->create()->id;
     },
     'model_number' => $faker->numberBetween(1000000, 50000000),
     'item_no' => $faker->numberBetween(1000000, 50000000),
