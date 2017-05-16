@@ -38,7 +38,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     protected $rules = [
         'first_name'              => 'required|string|min:1',
-        'username'                => 'required|string|min:2|unique_undeleted',
+        'username'                => 'required|string|min:1|unique_undeleted',
         'email'                   => 'email',
         'password'                => 'required|min:6',
         'locale'                  => 'max:10'
