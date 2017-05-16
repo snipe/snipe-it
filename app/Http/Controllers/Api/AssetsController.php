@@ -84,7 +84,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
             'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
-            'model.category', 'model.manufacturer', 'model.fieldset', 'assigneduser');
+            'model.category', 'model.manufacturer', 'model.fieldset', 'assigneduser','supplier');
 
         // If we should search on everything
         if (($request->has('search')) && (count($filter) == 0)) {
@@ -96,6 +96,8 @@ class AssetsController extends Controller
             }
         }
 
+
+        // These are used by the API to query against specific ID numbers
         if ($request->has('status_id')) {
             $assets->where('status_id', '=', $request->input('status_id'));
         }
@@ -112,6 +114,10 @@ class AssetsController extends Controller
             $assets->ByLocationId($request->input('location_id'));
         }
 
+        if ($request->has('supplier_id')) {
+            $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
+        }
+
         if ($request->has('company_id')) {
             $assets->where('assets.company_id', '=', $request->input('company_id'));
         }
@@ -125,9 +131,9 @@ class AssetsController extends Controller
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets.created_at';
-        $assets->orderBy($sort, $order);
 
+
+        // This is used by the sidenav, mostly
         switch ($request->input('status')) {
             case 'Deleted':
                 $assets->withTrashed()->Deleted();
@@ -154,7 +160,10 @@ class AssetsController extends Controller
 
 
 
-        switch ($sort) {
+        // This handles all of the pivot sorting (versus the assets.* fields in the allowed_columns array)
+        $column_sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets.created_at';
+
+        switch ($request->input('sort')) {
             case 'model':
                 $assets->OrderModels($order);
                 break;
@@ -176,15 +185,17 @@ class AssetsController extends Controller
             case 'status_label':
                 $assets->OrderStatus($order);
                 break;
+            case 'supplier':
+                $assets->OrderSupplier($order);
+                break;
             case 'assigned_to':
                 $assets->OrderAssigned($order);
                 break;
             default:
-                $assets->orderBy($sort, $order);
+                $assets->orderBy($column_sort, $order);
                 break;
         }
-
-
+        
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
         return (new AssetsTransformer)->transformAssets($assets, $total);

@@ -727,9 +727,14 @@ class Asset extends Depreciable
                             $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
                         });
                     });
+
                 })->orWhere(function ($query) use ($search) {
                     $query->whereHas('assetstatus', function ($query) use ($search) {
                         $query->where('status_labels.name', 'LIKE', '%'.$search.'%');
+                    });
+                })->orWhere(function ($query) use ($search) {
+                    $query->whereHas('supplier', function ($query) use ($search) {
+                        $query->where('suppliers.name', 'LIKE', '%'.$search.'%');
                     });
                 })->orWhere(function ($query) use ($search) {
                     $query->whereHas('company', function ($query) use ($search) {
@@ -937,7 +942,7 @@ class Asset extends Depreciable
         return $query->join('status_labels', 'assets.status_id', '=', 'status_labels.id')->orderBy('status_labels.name', $order);
     }
 
-  /**
+    /**
     * Query builder scope to order on company
     *
     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -1025,6 +1030,20 @@ class Asset extends Depreciable
         return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
     }
 
+
+    /**
+     * Query builder scope to order on supplier name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers', 'assets.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+    }
+
     /**
      * Query builder scope to search on location ID
      *
@@ -1047,4 +1066,6 @@ class Asset extends Depreciable
             });
         });
     }
+
+
 }
