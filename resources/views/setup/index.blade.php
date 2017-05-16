@@ -70,7 +70,7 @@ Create a User ::
         @if (!$start_settings['env_exposed'])
           Sweet. It doesn't look like your <code>.env</code> file is exposed to the outside world. (You should double check this in a browser though. You don't ever want anyone able to see that file. Ever. Ever ever.) <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
         @else
-          Please make sure your <code>.env</code>. You don't ever want anyone able to see that file. Ever. Ever ever.  <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
+          Please make sure your <code>.env</code> is not readable by the outside world via web browser. You don't ever want anyone able to see that file. Ever. Ever ever. An exposed <code>.env</code> file can disclose sensitive data about your system and database. <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
         @endif
       </td>
     </tr>
