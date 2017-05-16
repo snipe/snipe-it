@@ -514,6 +514,10 @@
                             <li><a href="{{ route('manufacturers.index') }}" {{ (Request::is('/manufacturers') ? ' class="active"' : '') }} >@lang('general.manufacturers')</a></li>
                         @endcan
 
+                        @can('view', \App\Models\Supplier::class)
+                            <li><a href="{{ route('suppliers.index') }}" {{ (Request::is('/suppliers') ? ' class="active"' : '') }} >@lang('general.suppliers')</a></li>
+                        @endcan
+
                         @can('view', \App\Models\Category::class)
                             <li><a href="{{ route('categories.index') }}" {{ (Request::is('/categories') ? ' class="active"' : '') }} >@lang('general.categories')</a></li>
                         @endcan
