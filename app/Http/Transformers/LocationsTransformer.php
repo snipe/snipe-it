@@ -26,6 +26,11 @@ class LocationsTransformer
             foreach($location->assets() as $asset) {
                 $assets_arr = ['id' => $asset->id];
             }
+            
+            $children_arr = [];
+            foreach($location->childLocations() as $child) {
+                $children_arr = ['id' => $child->id];
+            }
 
             $array = [
                 'id' => e($location->id),
@@ -39,6 +44,8 @@ class LocationsTransformer
                 'assets' => $assets_arr,
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
+                'parent_id' => e($location->parent_id),
+                'children' => $children_arr,
             ];
 
             $permissions_array['available_actions'] = [

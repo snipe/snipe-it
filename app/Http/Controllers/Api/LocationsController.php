@@ -21,7 +21,7 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $allowed_columns = ['id','name','address','address2','city','state','country','zip','created_at',
-        'updated_at'];
+        'updated_at','parent_id'];
 
         $locations = Location::select([
             'locations.id',
