@@ -7,7 +7,6 @@ class ManufacturerSeeder extends Seeder
     public function run()
     {
         Manufacturer::truncate();
-        factory(Manufacturer::class, 'manufacturer', 10)->create();
+        factory(Manufacturer::class, 10)->create();
     }
-
 }

@@ -13,6 +13,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Don't truncate the user column, that might suck.
-        factory(User::class, 'valid-user', 10)->create();
+        factory(User::class, 10)->create();
     }
 }

@@ -8,7 +8,7 @@ class AssetModelSeeder extends Seeder
     public function run()
     {
         AssetModel::truncate();
-        factory(AssetModel::class, 'assetmodel',5)->create();
+        factory(AssetModel::class,5)->create();
     }
 
 }
