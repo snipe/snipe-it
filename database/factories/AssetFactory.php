@@ -22,7 +22,7 @@ $factory->define(Asset::class, function (Faker\Generator $faker) {
         },
         'serial' => $faker->uuid,
         'status_id' => function () {
-            return factory(App\Models\Statuslabel::class)->create()->id;
+            return factory(App\Models\Statuslabel::class)->states('rtd')->create()->id;
         },
         'user_id' => function () {
             return factory(App\Models\User::class)->create()->id;
@@ -42,7 +42,7 @@ $factory->define(Asset::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->state(Asset::class, 'deleted', function($faker) {
+$factory->state(Asset::class, 'deleted', function ($faker) {
     return [
         'deleted_at' => $faker->dateTime(),
     ];
