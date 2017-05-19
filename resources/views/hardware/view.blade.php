@@ -369,7 +369,7 @@
                 <img src="{{ config('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 
-              @if  (($snipeSettings->qr_code=='1') && ($asset->deleted_at!=''))
+              @if  (($snipeSettings->qr_code=='1') && ($asset->deleted_at==''))
                  <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
