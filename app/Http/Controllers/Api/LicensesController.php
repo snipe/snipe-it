@@ -117,7 +117,13 @@ class LicensesController extends Controller
      */
     public function show($id)
     {
-        //
+        $license = License::find($id);
+        if (isset($license->id)) {
+            $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
+            $this->authorize('view', $license);
+            return (new LicensesTransformer)->transformLicense($license);
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.does_not_exist')), 200);
     }
 
 
