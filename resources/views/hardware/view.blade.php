@@ -17,7 +17,7 @@
       <span class="caret"></span>
   </button>
   <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-      @if ($asset->assetstatus->deployable=='1')
+      @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
         @if ($asset->assigned_to != '')
           <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a></li>
         @else
@@ -38,6 +38,15 @@
 @section('content')
 
 
+    @if ($asset->deleted_at!='')
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+                <strong>WARNING: </strong>
+                This asset has been deleted. You must <a href="{{ route('restore/hardware', $asset->id) }}">restore it</a> before you can assign it to someone.
+            </div>
+        </div>
+    @endif
 
 
 <div class="row">
@@ -360,7 +369,7 @@
                 <img src="{{ config('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 
-              @if  ($snipeSettings->qr_code=='1')
+              @if  (($snipeSettings->qr_code=='1') && ($asset->deleted_at!=''))
                  <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
