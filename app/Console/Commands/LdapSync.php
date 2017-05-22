@@ -89,7 +89,9 @@ class LdapSync extends Command
             $location = Location::where('id', '=', $this->option('location_id'))->first();
             LOG::debug('Location ID '.$this->option('location_id').' passed');
             LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
-        }
+        } else {
+	    $location = NULL;
+	}
 
         if (!isset($location)) {
             LOG::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
