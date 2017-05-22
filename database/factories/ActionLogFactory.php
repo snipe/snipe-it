@@ -15,31 +15,17 @@ $factory->defineAs(App\Models\Actionlog::class, 'asset-upload', function ($faker
     ];
 });
 
-// CHECKOUT LOGS
-
-// Conveninece function for action logs.
-// Expects an array with the following Keys:
-// 'company' => company associated with everything
-// 'user' => user performing the action
-// 'target' => target of the action
-// 'item' => object action is being performed upon
-// 'action_type' => checkin, checkout, etc
-$checkout = function ($values) {
-    return [
-
-    ];
-};
 $factory->defineAs(Actionlog::class, 'asset-checkout', function (Faker\Generator $faker) {
     $company =  factory(App\Models\Company::class)->create();
     $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
     $target = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $item = factory(App\Models\Asset::class)->create(['company_id' => $company->id]);
+    // $item = factory(App\Models\Asset::class)->create(['company_id' => $company->id]);
 
     return [
         'user_id' => $user->id,
         'action_type' => 'checkout',
-        'item_id' => $item->id,
-        'item_type'  => get_class($item),
+        'item_id' => factory(App\Models\Asset::class)->create(['company_id' => $company->id])->id,
+        'item_type'  => App\Models\Asset::class,
         'target_id' => $target->id,
         'target_type' => get_class($target),
         'created_at'  => $faker->dateTime(),

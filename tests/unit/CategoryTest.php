@@ -78,7 +78,7 @@ class CategoryTest extends \Codeception\TestCase\Test
     public function testACategoryCanHaveAccessories()
     {
         $category = factory(Category::class)->create(['category_type' => 'accessory']);
-        $accessories = factory(App\Models\Accessory::class, 5)->create(['category_id' => $category->id]);
+        factory(App\Models\Accessory::class, 5)->create(['category_id' => $category->id]);
         $this->assertCount(5, $category->accessories);
         $this->assertEquals(5, $category->itemCount());
     }
@@ -86,7 +86,7 @@ class CategoryTest extends \Codeception\TestCase\Test
     public function testACategoryCanHaveConsumables()
     {
         $category = factory(Category::class)->create(['category_type' => 'consumable']);
-        $consumables = factory(App\Models\Consumable::class, 5)->create(['category_id' => $category->id]);
+        factory(App\Models\Consumable::class, 5)->create(['category_id' => $category->id]);
         $this->assertCount(5, $category->consumables);
         $this->assertEquals(5, $category->itemCount());
     }
@@ -94,7 +94,7 @@ class CategoryTest extends \Codeception\TestCase\Test
     public function testACategoryCanHaveComponents()
     {
         $category = factory(Category::class)->create(['category_type' => 'component']);
-        $components = factory(App\Models\Component::class, 5)->create(['category_id' => $category->id]);
+        factory(App\Models\Component::class, 5)->create(['category_id' => $category->id]);
         $this->assertCount(5, $category->components);
         $this->assertEquals(5, $category->itemCount());
     }

@@ -165,7 +165,7 @@ class AssetTest extends \Codeception\TestCase\Test
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
         $asset->save();
-        $logaction = $asset->logCheckin($target, 'Test Checkin');
+        $asset->logCheckin($target, 'Test Checkin');
     }
 
     public function testAnAssetCanBeCheckedOut()
@@ -251,7 +251,7 @@ class AssetTest extends \Codeception\TestCase\Test
     public function testAnAssetHasMaintenances()
     {
         $asset = factory(Asset::class)->create();
-        $maintenance = factory(App\Models\AssetMaintenance::class)->create(['asset_id' => $asset->id]);
+        factory(App\Models\AssetMaintenance::class)->create(['asset_id' => $asset->id]);
         $this->assertCount(1, $asset->assetmaintenances);
     }
 }

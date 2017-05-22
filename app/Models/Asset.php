@@ -164,7 +164,7 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
-            $log = $this->logCheckout($note, $target);
+            $this->logCheckout($note, $target);
 //            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
 //                $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
 //            }
