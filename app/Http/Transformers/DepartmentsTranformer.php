@@ -9,43 +9,39 @@ use App\Helpers\Helper;
 class DepartmentsTransformer
 {
 
-    public function transformDepartments (Collection $locations, $total)
+    public function transformDepartments (Collection $departments, $total)
     {
         $array = array();
-        foreach ($locations as $location) {
-            $array[] = self::transformDepartment($location);
+        foreach ($departments as $department) {
+            $array[] = self::transformDepartment($department);
         }
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformDepartment (Department $location = null)
+    public function transformDepartment (Department $department = null)
     {
-        if ($location) {
-
-            $assets_arr = [];
-            foreach($location->assets() as $asset) {
-                $assets_arr = ['id' => $asset->id];
-            }
-
-            $children_arr = [];
-            foreach($location->childDepartments() as $child) {
-                $children_arr = ['id' => $child->id];
-            }
+        if ($department) {
 
             $array = [
-                'id' => e($location->id),
-                'name' => e($location->name),
-                'address' => e($location->address),
-                'city' => e($location->city),
-                'state' => e($location->state),
-                'assets_checkedout' => $location->assets()->count(),
-                'assets_default'    => $location->assignedassets()->count(),
-                'country' => e($location->country),
-                'assets' => $assets_arr,
-                'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
-                'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
-                'parent_id' => e($location->parent_id),
-                'children' => $children_arr,
+                'id' => e($department->id),
+                'name' => e($department->name),
+                'company' => ($department->company) ? [
+                    'id' => (int) $department->company->id,
+                    'name'=> e($department->company->name)
+                ] : null,
+                'manager' => ($department->manager) ? [
+                    'id' => (int) $department->manager->id,
+                    'name' => e($department->manager->getFullNameAttribute()),
+                    'first_name'=> e($department->manager->first_name),
+                    'last_name'=> e($department->manager->last_name)
+                ] : null,
+                'location' => ($department->location) ? [
+                    'id' => (int) $department->location->id,
+                    'name' => e($department->location->name)
+                ] : null,
+                'users_count' => e($department->users_count),
+                'created_at' => Helper::getFormattedDateObject($department->created_at, 'datetime'),
+                'updated_at' => Helper::getFormattedDateObject($department->updated_at, 'datetime'),
             ];
 
             $permissions_array['available_actions'] = [
