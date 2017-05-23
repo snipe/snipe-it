@@ -530,6 +530,10 @@
                             <li><a href="{{ route('depreciations.index') }}" {{ (Request::is('/depreciations') ? ' class="active"' : '') }} >@lang('general.depreciation')</a></li>
                         @endcan
 
+                        @can('view', \App\Models\Department::class)
+                            <li><a href="{{ route('departments.index') }}" {{ (Request::is('/departments') ? ' class="active"' : '') }} >@lang('general.departments')</a></li>
+                        @endcan
+
                         @can('view', \App\Models\Location::class)
                             <li><a href="{{ route('locations.index') }}" {{ (Request::is('/locations') ? ' class="active"' : '') }} >@lang('general.locations')</a></li>
                         @endcan
