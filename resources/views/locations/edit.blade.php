@@ -21,6 +21,17 @@
     </div>
 </div>
 
+<!-- Manager-->
+<div class="form-group {{ $errors->has('manager_id') ? ' has-error' : '' }}">
+    <label for="manager_id" class="col-md-3 control-label">
+        {{ trans('admin/users/table.manager') }}
+    </label>
+    <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'manager_id')) ? ' required' : '' }}">
+        {!! Form::select('manager_id', $manager_list , Input::old('manager_id', $item->manager_id), array('class'=>'select2 parent', 'style'=>'width:350px')) !!}
+        {!! $errors->first('manager_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    </div>
+</div>
+
 <!-- Currency -->
 <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
     <label for="currency" class="col-md-3 control-label">

@@ -24,6 +24,7 @@ class Location extends SnipeModel
       'address'         => 'max:80|nullable',
       'address2'        => 'max:80|nullable',
       'zip'         => 'min:3|max:10|nullable',
+      // 'manager_id'  => 'exists:users'
     );
 
     /**
@@ -64,6 +65,11 @@ class Location extends SnipeModel
     public function parent()
     {
         return $this->belongsTo('\App\Models\Location', 'parent_id');
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo('\App\Models\User', 'manager_id');
     }
 
     public function childLocations()

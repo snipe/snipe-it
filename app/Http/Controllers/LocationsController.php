@@ -63,7 +63,8 @@ class LocationsController extends Controller
 
         return view('locations/edit')
             ->with('location_options', $location_options)
-            ->with('item', new Location);
+            ->with('item', new Location)
+            ->with('manager_list', Helper::managerList());
     }
 
 
@@ -88,6 +89,7 @@ class LocationsController extends Controller
         $location->state            = Input::get('state');
         $location->country          = Input::get('country');
         $location->zip              = Input::get('zip');
+        $location->manager_id       = Input::get('manager_id');
         $location->user_id          = Auth::id();
 
         if ($location->save()) {
@@ -154,7 +156,10 @@ class LocationsController extends Controller
         $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
 
-        return view('locations/edit', compact('item'))->with('location_options', $location_options);
+
+        return view('locations/edit', compact('item'))
+            ->with('location_options', $location_options)
+            ->with('manager_list', Helper::managerList());
     }
 
 
@@ -185,6 +190,7 @@ class LocationsController extends Controller
         $location->country      = Input::get('country');
         $location->zip          = Input::get('zip');
         $location->ldap_ou      = Input::get('ldap_ou');
+        $location->manager_id   = Input::get('manager_id');
 
         // Was the location updated?
         if ($location->save()) {

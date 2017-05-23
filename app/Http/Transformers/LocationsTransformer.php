@@ -9,7 +9,7 @@ use App\Helpers\Helper;
 class LocationsTransformer
 {
 
-    public function transformLocations (Collection $locations, $total)
+    public function transformLocations(Collection $locations, $total)
     {
         $array = array();
         foreach ($locations as $location) {
@@ -18,17 +18,16 @@ class LocationsTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLocation (Location $location = null)
+    public function transformLocation(Location $location = null)
     {
         if ($location) {
-
             $assets_arr = [];
-            foreach($location->assets() as $asset) {
+            foreach ($location->assets() as $asset) {
                 $assets_arr = ['id' => $asset->id];
             }
-            
+
             $children_arr = [];
-            foreach($location->childLocations() as $child) {
+            foreach ($location->childLocations() as $child) {
                 $children_arr = ['id' => $child->id];
             }
 
@@ -45,6 +44,7 @@ class LocationsTransformer
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
                 'parent_id' => e($location->parent_id),
+                'manager' => ($location->manager) ? (new UsersTransformer)->transformUser($location->manager) : '',
                 'children' => $children_arr,
             ];
 
@@ -54,13 +54,7 @@ class LocationsTransformer
             ];
 
             $array += $permissions_array;
-
             return $array;
         }
-
-
     }
-
-
-
 }

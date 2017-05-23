@@ -194,6 +194,14 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
+     * Get any locations the user manages.
+     **/
+    public function managedLocations()
+    {
+        return $this->hasMany('\App\Models\Location', 'manager_id')->withTrashed();
+    }
+
+    /**
      * Get user groups
      */
     public function groups()
