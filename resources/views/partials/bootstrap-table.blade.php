@@ -184,7 +184,7 @@ $('.snipe-table').bootstrapTable({
             return '<a href="{{ url('/') }}/' + item_destination +'/' + value.id + '"> ' + value.name + '</a>';
 
         } else {
-            return ':(';
+            return '';
         }
 
 
