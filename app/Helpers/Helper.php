@@ -4,6 +4,7 @@ namespace App\Helpers;
 use DB;
 use App\Models\Statuslabel;
 use App\Models\Location;
+use App\Models\Department;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\User;
@@ -183,6 +184,25 @@ class Helper
         $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
         return $category_list;
     }
+
+
+    /**
+     * Get the list of categories in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
+    public static function departmentList()
+    {
+        $departments = Department::orderBy('name', 'asc')
+            ->whereNull('deleted_at')
+            ->orderBy('name', 'asc');
+
+        return array('' => trans('general.select_department')) + $departments->pluck('name', 'id')->toArray();
+
+    }
+    
 
     /**
      * Get the list of suppliers in an array to make a dropdown menu
