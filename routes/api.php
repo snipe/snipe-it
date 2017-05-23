@@ -79,6 +79,24 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     ); // Companies resource
 
 
+    /*--- Departments API ---*/
+
+    Route::resource('departments', 'DepartmentsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.departments.index',
+                    'show' => 'api.departments.show',
+                    'store' => 'api.departments.store',
+                    'update' => 'api.departments.update',
+                    'destroy' => 'api.departments.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['department' => 'department_id']
+        ]
+    ); // Departments resource
+
+
     /*--- Components API ---*/
 
     Route::resource('components', 'ComponentsController',

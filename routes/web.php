@@ -2,62 +2,70 @@
 
 
 Route::group(['middleware' => 'auth'], function () {
-/*
-* Companies
-*/
-Route::resource('companies', 'CompaniesController', [
-    'parameters' => ['company' => 'company_id']
-]);
+    /*
+    * Companies
+    */
+    Route::resource('companies', 'CompaniesController', [
+        'parameters' => ['company' => 'company_id']
+    ]);
 
-/*
-* Categories
-*/
-Route::resource('categories', 'CategoriesController', [
-    'parameters' => ['category' => 'category_id']
-]);
+    /*
+    * Categories
+    */
+    Route::resource('categories', 'CategoriesController', [
+        'parameters' => ['category' => 'category_id']
+    ]);
 
-/*
-* Locations
-*/
-Route::resource('locations', 'LocationsController', [
-    'parameters' => ['location' => 'location_id']
-]);
+    /*
+    * Locations
+    */
+    Route::resource('locations', 'LocationsController', [
+        'parameters' => ['location' => 'location_id']
+    ]);
 
-/*
-* Manufacturers
-*/
-Route::resource('manufacturers', 'ManufacturersController', [
-    'parameters' => ['manufacturer' => 'manufacturers_id']
-]);
+    /*
+    * Manufacturers
+    */
+    Route::resource('manufacturers', 'ManufacturersController', [
+        'parameters' => ['manufacturer' => 'manufacturers_id']
+    ]);
 
-/*
-* Suppliers
-*/
-Route::resource('suppliers', 'SuppliersController', [
-    'parameters' => ['supplier' => 'supplier_id']
-]);
+    /*
+    * Suppliers
+    */
+    Route::resource('suppliers', 'SuppliersController', [
+        'parameters' => ['supplier' => 'supplier_id']
+    ]);
 
-/*
-* Depreciations
- */
- Route::resource('depreciations', 'DepreciationsController', [
-     'parameters' => ['depreciation' => 'depreciation_id']
- ]);
+    /*
+    * Depreciations
+     */
+     Route::resource('depreciations', 'DepreciationsController', [
+         'parameters' => ['depreciation' => 'depreciation_id']
+     ]);
 
- /*
- * Status Labels
-  */
-  Route::resource('statuslabels', 'StatuslabelsController', [
-      'parameters' => ['statuslabel' => 'statuslabel_id']
-  ]);
+     /*
+     * Status Labels
+      */
+      Route::resource('statuslabels', 'StatuslabelsController', [
+          'parameters' => ['statuslabel' => 'statuslabel_id']
+      ]);
 
 
-/*
-* Status Labels
-*/
-Route::resource('components', 'ComponentsController', [
-    'parameters' => ['component' => 'component_id']
-]);
+    /*
+    * Status Labels
+    */
+    Route::resource('components', 'ComponentsController', [
+        'parameters' => ['component' => 'component_id']
+    ]);
+
+    /*
+    * Departments
+    */
+    Route::resource('departments', 'DepartmentsController', [
+        'parameters' => ['department' => 'department_id']
+    ]);
+
 
 });
 
