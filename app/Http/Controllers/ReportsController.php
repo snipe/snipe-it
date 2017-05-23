@@ -6,21 +6,14 @@ use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
-use App\Models\AssetModel;
-use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\License;
-use App\Models\Location;
 use App\Models\Setting;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
-use Redirect;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -42,7 +35,6 @@ class ReportsController extends Controller
     public function getAccessoryReport()
     {
         $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
-
         return View::make('reports/accessories', compact('accessories'));
     }
 
@@ -292,52 +284,6 @@ class ReportsController extends Controller
         return View::make('reports/activity');
     }
 
-    /**
-     * Returns Activity Report JSON.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
-     * @return View
-     */
-    public function getActivityReportDataTable()
-    {
-        $activitylogs = Company::scopeCompanyables(Actionlog::with('item', 'user', 'target'))->orderBy('created_at', 'DESC');
-
-        if (Input::has('search')) {
-            $activitylogs = $activitylogs->TextSearch(e(Input::get('search')));
-        }
-
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
-
-
-        $allowed_columns = ['created_at'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
-
-
-        $activityCount = $activitylogs->count();
-        $activitylogs = $activitylogs->offset($offset)->limit($limit)->get();
-
-        $rows = array();
-        foreach ($activitylogs as $activity) {
-            $rows[] = $activity->present()->forDataTable();
-        }
-
-        $data = array('total'=>$activityCount, 'rows'=>$rows);
-
-        return $data;
-
-    }
 
     /**
      * Displays license report
