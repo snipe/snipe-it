@@ -37,7 +37,18 @@
                             </label>
                             <div class="col-md-7">
                                 {{ Form::select('location_id', $location_list , Input::old('rtd_location_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
-                                {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                {!! $errors->first('location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                            </div>
+                        </div>
+
+                        <!--  Department -->
+                        <div class="form-group {{ $errors->has('department_id') ? ' has-error' : '' }}">
+                            <label for="status_id" class="col-md-3 control-label">
+                                {{ trans('general.department') }}
+                            </label>
+                            <div class="col-md-7">
+                                {{ Form::select('department_id', $department_list , Input::old('department_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                                {!! $errors->first('department_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>
 
