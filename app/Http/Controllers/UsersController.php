@@ -90,6 +90,7 @@ class UsersController extends Controller
         ->with('location_list', Helper::locationsList())
         ->with('manager_list', Helper::managerList())
         ->with('company_list', Helper::companyList())
+        ->with('department_list', Helper::departmentList())
         ->with('user', new User);
     }
 
@@ -120,6 +121,7 @@ class UsersController extends Controller
         $user->jobtitle = $request->input('jobtitle');
         $user->phone = $request->input('phone');
         $user->location_id = $request->input('location_id', null);
+        $user->department_id = $request->input('department_id', null);
         $user->company_id = Company::getIdForUser($request->input('company_id', null));
         $user->manager_id = $request->input('manager_id', null);
         $user->notes = $request->input('notes');
@@ -167,7 +169,7 @@ class UsersController extends Controller
     * @since [v1.8]
     * @return string JSON
     */
-    public function apiStore()
+    public function apiStore(Request $request)
     {
         $this->authorize('create', User::class);
 
@@ -175,12 +177,13 @@ class UsersController extends Controller
         $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
         $inputs['activated'] = true;
 
-        $user->first_name = Input::get('first_name');
-        $user->last_name = Input::get('last_name');
-        $user->username = Input::get('username');
-        $user->email = Input::get('email');
-        if (Input::has('password')) {
-            $user->password = bcrypt(Input::get('password'));
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->department_id = $request->input('department_id', null);
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
         }
         $user->activated = true;
 
@@ -190,10 +193,10 @@ class UsersController extends Controller
             if (Input::get('email_user') == 1) {
                 // Send the credentials through email
                 $data = array();
-                $data['email'] = e(Input::get('email'));
-                $data['first_name'] = e(Input::get('first_name'));
-                $data['last_name'] = e(Input::get('last_name'));
-                $data['password'] = e(Input::get('password'));
+                $data['email'] = $request->input('email');
+                $data['first_name'] = $request->input('first_name');
+                $data['last_name'] = $request->input('last_name');
+                $data['password'] = $request->input('password');
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
@@ -229,10 +232,10 @@ class UsersController extends Controller
         return $output;
     }
 
-    public function edit($id = null)
+    public function edit($id)
     {
         try {
-            // Get the user information
+
             $user = User::find($id);
             $this->authorize('update', $user);
             $permissions = config('permissions');
@@ -243,19 +246,19 @@ class UsersController extends Controller
             $user->permissions = $user->decodePermissions();
             $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
             $permissions = $this->filterDisplayable($permissions);
+            
         } catch (UserNotFoundException $e) {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
 
-            // Redirect to the user management page
+            $error = trans('admin/users/message.user_not_found', compact('id'));
             return redirect()->route('users.index')->with('error', $error);
         }
 
         // Show the page
         return View::make('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
-                        ->with('location_list', Helper::locationsList())
-                        ->with('company_list', Helper::companyList())
-                        ->with('manager_list', Helper::managerList());
+            ->with('location_list', Helper::locationsList())
+            ->with('department_list', Helper::departmentList())
+            ->with('company_list', Helper::companyList())
+            ->with('manager_list', Helper::managerList());
     }
 
     /**
@@ -329,6 +332,7 @@ class UsersController extends Controller
         $user->company_id = Company::getIdForUser($request->input('company_id', null));
         $user->manager_id = $request->input('manager_id', null);
         $user->notes = $request->input('notes');
+        $user->department_id = $request->input('department_id', null);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -424,6 +428,7 @@ class UsersController extends Controller
                     ->with('company_list', Helper::companyList())
                     ->with('manager_list', Helper::managerList())
                     ->with('manager_list', Helper::managerList())
+                    ->with('department_list', Helper::departmentList())
                     ->with('groups', Group::pluck('name', 'id'));
             }
 
@@ -448,11 +453,15 @@ class UsersController extends Controller
 
             $user_raw_array = Input::get('ids');
             $update_array = array();
+            $manager_conflict = false;
 
             $users = User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->get();
 
             if ($request->has('location_id')) {
                 $update_array['location_id'] = $request->input('location_id');
+            }
+            if ($request->has('department_id')) {
+                $update_array['department_id'] = $request->input('department_id');
             }
             if ($request->has('company_id')) {
                 $update_array['company_id'] = $request->input('company_id');
@@ -464,7 +473,7 @@ class UsersController extends Controller
                 // edited.
                 if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
                     $update_array['manager_id'] = $request->input('manager_id');
-                    $manager_conflict = false;
+
                 } else {
                     $manager_conflict = true;
                 }
