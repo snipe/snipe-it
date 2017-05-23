@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -24,10 +24,10 @@ class Department extends SnipeModel
     use ValidatingTrait, UniqueUndeletedTrait;
 
     protected $rules = [
-        'name'            => 'max:255',
+        'name'            => 'required|max:255',
         'user_id'        => 'required',
-        'location_id'        => 'numeric',
-        'company_id'        => 'numeric',
+        'location_id'        => 'numeric|nullable',
+        'company_id'        => 'numeric|nullable',
     ];
 
     /**
@@ -59,5 +59,38 @@ class Department extends SnipeModel
     {
         return $this->hasMany('\App\Models\User', 'department_id');
     }
+
+
+    /**
+    * Return the manager in charge of the dept
+    * @return mixed
+    */
+    public function manager()
+    {
+        return $this->belongsTo('\App\Models\User', 'manager_id');
+    }
+
+
+    public function location()
+    {
+        return $this->belongsTo('\App\Models\Location', 'location_id');
+    }
+
+
+    /**
+     * Query builder scope to search on text
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeTextsearch($query, $search)
+    {
+        return $query->where('name', 'LIKE', "%$search%")
+            ->orWhere('notes', 'LIKE', "%$search%");
+
+    }
+
 
 }
