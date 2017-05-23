@@ -224,37 +224,24 @@ View Assets for  {{ $user->present()->fullName() }}
       <div class="box-body">
         @if (count($userlog) > 0)
         <div class="table-responsive">
-          <table class="table table-striped" id="example">
+          <table
+                  class="table table-striped snipe-table"
+                  name="userActivityReport"
+                  id="table"
+                  data-cookie="false"
+                  data-cookie-id-table="userHistoryTable-{{ config('version.hash_version') }}"
+                  data-url="{{route('api.activity.list', ['user_id' => $user->id, 'order' => 'desc']) }}">
             <thead>
-              <tr>
-                <th class="col-md-1"></th>
-                <th class="col-md-2"><span class="line"></span>{{ trans('table.action') }}</th>
-                <th class="col-md-4"><span class="line"></span>{{ trans('general.asset') }}</th>
-                <th class="col-md-2"><span class="line"></span>{{ trans('table.by') }}</th>
-                <th class="col-md-3">{{ trans('general.date') }}</th>
-              </tr>
+            <tr>
+              <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+              <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+              <th class="col-sm-3" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+              <th class="col-sm-3" data-field="action_type">{{ trans('general.action') }}</th>
+              <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+            </tr>
             </thead>
             <tbody>
-              @foreach ($userlog as $log)
-              @php $result = $log->present()->forDataTable();
-              @endphp
-              <tr>
-                <td class="text-center">
-                  {!! $result['icon'] !!}
-                </td>
-                <td>
-                  {{ $result['action_type'] }}
-                </td>
-                <td>
-                  {!! $result['item'] !!}
-                </td>
-                <td>
-                  {!! $result['admin'] !!}
-                </td>
-                <td>{{ $result['created_at'] }}</td>
-              </tr>
-              @endforeach
-            </tbody>
+
           </table>
         </div> <!--.table-responsive-->
 
@@ -271,4 +258,8 @@ View Assets for  {{ $user->present()->fullName() }}
   </div> <!-- .col-md-12-->
 </div> <!-- .row-->
 
+@stop
+
+@section('moar_scripts')
+  @include ('partials.bootstrap-table')
 @stop
