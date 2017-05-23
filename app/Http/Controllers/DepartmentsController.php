@@ -50,9 +50,28 @@ class DepartmentsController extends Controller
         $department->fill($request->all());
 
         if ($department->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/department/message.create.success')));
+            return redirect()->route("departments.index")->with('success', trans('admin/departments/message.create.success'));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
+        return redirect()->back()->withInput()->withErrors($department->getErrors());
 
+    }
+
+    /**
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the department detail page.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $id
+     * @since [v4.0]
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show($id)
+    {
+        $department = Department::find($id);
+
+        if (isset($department->id)) {
+            return view('departments/view', compact('department'));
+        }
+        return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist', compact('id')));
     }
 }
