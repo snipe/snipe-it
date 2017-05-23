@@ -28,6 +28,7 @@ class Department extends SnipeModel
         'user_id'        => 'required',
         'location_id'        => 'numeric|nullable',
         'company_id'        => 'numeric|nullable',
+        'manager_id'        => 'numeric|nullable',
     ];
 
     /**
