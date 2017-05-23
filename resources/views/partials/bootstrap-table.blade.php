@@ -1,6 +1,8 @@
 {{-- This Will load our default bootstrap-table settings on any table with a class of "snipe-table" and export it to the passed 'exportFile' name --}}
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+
+@if (!isset($simple_view))
 <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
 <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
@@ -9,6 +11,7 @@
 <script src="{{ asset('assets/js/jspdf.plugin.autotable.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
+@endif
 
 <script>
 $('.snipe-table').bootstrapTable({
@@ -25,10 +28,13 @@ $('.snipe-table').bootstrapTable({
         sidePagination: 'server',
         sortable: true,
 
+
        @if (!isset($simple_view))
+
+        showRefresh: true,
         pagination: true,
         pageSize: {{ $snipeSettings->per_page }},
-        showRefresh: true,
+
         cookie: true,
         cookieExpire: '2y',
         showExport: true,
@@ -68,7 +74,6 @@ $('.snipe-table').bootstrapTable({
         @endif
 
         mobileResponsive: true,
-
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
@@ -145,7 +150,7 @@ $('.snipe-table').bootstrapTable({
                 actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" '
                     + ' class="btn btn-danger btn-sm delete-asset" '
                     + ' data-toggle="modal" '
-                    + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + ' (' + row.id + ')?" '
+                    + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}?" onClick="return false;">'
                     + '<i class="fa fa-trash"></i></a></nobr>';
             }
@@ -153,6 +158,38 @@ $('.snipe-table').bootstrapTable({
 
         };
     }
+
+
+    // This handles
+    function polymorphicItemFormatter(value) {
+
+        var item_destination = '';
+
+        if ((value) && (value.type)) {
+
+            if (value.type == 'asset') {
+                item_destination = 'hardware';
+            } else if (value.type == 'accessory') {
+                item_destination = 'accessories';
+            } else if (value.type == 'component') {
+                item_destination = 'components';
+            } else if (value.type == 'consumable') {
+                item_destination = 'consumables';
+            } else if (value.type == 'license') {
+                item_destination = 'licenses';
+            } else if (value.type == 'user') {
+                item_destination = 'users';
+            }
+
+            return '<a href="{{ url('/') }}/' + item_destination +'/' + value.id + '"> ' + value.name + '</a>';
+
+        } else {
+            return ':(';
+        }
+
+
+    }
+
 
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
