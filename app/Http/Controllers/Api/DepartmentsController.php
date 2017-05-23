@@ -60,6 +60,7 @@ class DepartmentsController extends Controller
         $department = new Department;
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
+        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
 
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
