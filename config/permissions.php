@@ -309,32 +309,59 @@ return array(
 
     ),
 
-        'Categories' => array(
-            array(
-                'permission' => 'categories.view',
-                'label'      => 'View ',
-                'note'       => '',
-                'display'    => true,
-            ),
-            array(
-                'permission' => 'categories.create',
-                'label'      => 'Create ',
-                'note'       => '',
-                'display'    => true,
-            ),
-            array(
-                'permission' => 'categories.edit',
-                'label'      => 'Edit  ',
-                'note'       => '',
-                'display'    => true,
-            ),
-            array(
-                'permission' => 'categories.delete',
-                'label'      => 'Delete ',
-                'note'       => '',
-                'display'    => true,
-            ),
+    'Categories' => array(
+        array(
+            'permission' => 'categories.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
         ),
+        array(
+            'permission' => 'categories.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'categories.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'categories.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Departments' => array(
+        array(
+            'permission' => 'departments.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
 
     'Status Labels' => array(
         array(
