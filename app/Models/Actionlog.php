@@ -60,6 +60,14 @@ class Actionlog extends SnipeModel
         return camel_case(class_basename($this->item_type));
     }
 
+    public function targetType()
+    {
+        if ($this->target_type == User::class) {
+            return "user";
+        }
+        return camel_case(class_basename($this->target_type));
+    }
+
     public function parseItemRoute()
     {
         if ($this->itemType() == "asset") {
@@ -80,24 +88,7 @@ class Actionlog extends SnipeModel
     }
 
 
-    public function parseItemIcon()
-    {
-        if ($this->itemType() == "asset") {
-            $itemicon = 'fa fa-barcode';
-        } elseif ($this->itemType() == "accessory") {
-            $itemicon  = 'fa fa-keyboard-o';
-        } elseif ($this->itemType()=="consumable") {
-            $itemicon  = 'fa fa-tint';
-        } elseif ($this->itemType()=="license") {
-            $itemicon  = 'fa fa-floppy-o';
-        } elseif ($this->itemType()=="component") {
-            $itemicon  = 'fa fa-hdd-o';
-        } else {
-            $itemicon  = 'fa fa-paperclip';
-        }
 
-        return $itemicon;
-    }
 
     public function uploads()
     {
