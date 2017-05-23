@@ -13,7 +13,7 @@ class LocationTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
-    public function testAssetAdd()
+    public function testLocationAdd()
     {
       $location = factory(Location::class, 'location')->make();
       $values = [
