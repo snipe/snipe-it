@@ -83,9 +83,9 @@ class UsersController extends Controller
                 $users = $users->orderBy($sort, $order);
                 break;
         }
-        $userCount = $users->count();
+        $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
-        return (new UsersTransformer)->transformUsers($users, $userCount);
+        return (new UsersTransformer)->transformUsers($users, $total);
     }
 
 
