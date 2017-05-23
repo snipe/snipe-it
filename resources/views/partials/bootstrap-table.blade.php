@@ -15,47 +15,59 @@ $('.snipe-table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
         iconsPrefix: 'fa',
-        showRefresh: true,
+
         @if (isset($search))
-        search: true,
+            search: true,
         @endif
-        pageSize: {{ $snipeSettings->per_page }},
-        pagination: true,
+
+
         paginationVAlign: 'both',
         sidePagination: 'server',
         sortable: true,
+
+       @if (!isset($simple_view))
+        pagination: true,
+        pageSize: {{ $snipeSettings->per_page }},
+        showRefresh: true,
         cookie: true,
         cookieExpire: '2y',
-        @if (isset($columns))
-        columns: {!! $columns !!},
-        @endif
-        mobileResponsive: true,
-        @if (isset($multiSort))
-        showMultiSort: true,
-        @endif
-
         showExport: true,
         showColumns: true,
         trimOnSearch: false,
-        exportDataType: 'all',
-        exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-        exportOptions: {
-            fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
-            ignoreColumn: ['actions','change','checkbox','checkincheckout'],
-            worksheetName: "Snipe-IT Export",
-            jspdf: {
-                autotable: {
-                    styles: {
-                        rowHeight: 20,
-                        fontSize: 10,
-                        overflow: 'linebreak',
-                    },
-                    headerStyles: {fillColor: 255, textColor: 0},
-                    //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
-                }
-            }
-        },
 
+            @if (isset($multiSort))
+            showMultiSort: true,
+            @endif
+
+            @if (isset($exportFile))
+            exportDataType: 'all',
+            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+            exportOptions: {
+
+                fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
+                ignoreColumn: ['actions','change','checkbox','checkincheckout'],
+                worksheetName: "Snipe-IT Export",
+                jspdf: {
+                    autotable: {
+                        styles: {
+                            rowHeight: 20,
+                            fontSize: 10,
+                            overflow: 'linebreak',
+                        },
+                        headerStyles: {fillColor: 255, textColor: 0},
+                        //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
+                    }
+                }
+            },
+            @endif
+
+        @endif
+
+        @if (isset($columns))
+            columns: {!! $columns !!},
+        @endif
+
+        mobileResponsive: true,
 
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
@@ -215,6 +227,11 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function iconFormatter(value, row) {
+        if (value) {
+            return '<i class="' + value + '"></i>';
+        }
+    }
 
     function emailFormatter(value, row) {
         if (value) {
