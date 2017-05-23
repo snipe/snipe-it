@@ -179,6 +179,7 @@ $('.snipe-table').bootstrapTable({
         'licenses',
         'categories',
         'suppliers',
+        'departments',
         'companies',
         'depreciations',
         'fieldsets',
