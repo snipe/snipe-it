@@ -3,8 +3,11 @@
 {{-- Page title --}}
 @section('title')
 
+ {{ trans('general.location') }}:
  {{ $location->name }}
- {{ trans('general.location') }}
+ @if ($location->manager)
+    <div class="h6"> {!! trans('admin/users/table.manager') . ': ' . $location->manager->present()->nameUrl() !!}</div>
+ @endif
 @parent
 @stop
 
@@ -26,13 +29,13 @@
               name="location_users"
               id="table-users"
               class="table table-striped snipe-table"
-              data-url="{{route('api.locations.viewusers', $location->id)}}"
+              data-url="{{route('api.users.index', ['location_id' => $location->id])}}"
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="location_usersDetailTable">
                 <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-formatter="usersLinkFormatter" data-field="name">{{ trans('general.user') }}</th>
                   </tr>
                 </thead>
               </table>
@@ -54,7 +57,7 @@
               <table
               name="location_assets"
               id="table-assets"
-              data-url="{{route('api.locations.viewassets', $location->id)}}"
+              data-url="{{route('api.assets.index', ['location_id' => $location->id])}}"
               class="table table-striped snipe-table"
               data-cookie="true"
               data-click-to-select="true"
@@ -62,7 +65,7 @@
                 <thead>
                   <tr>
                     <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.name') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-formatter="modelsLinkObjFormatter" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
                   </tr>

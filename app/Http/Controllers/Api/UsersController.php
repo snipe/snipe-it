@@ -40,8 +40,8 @@ class UsersController extends Controller
             'users.deleted_at',
             'users.department_id',
             'users.activated'
-        ])->with('manager', 'groups', 'userloc', 'company', 'department','throttle','assets','licenses','accessories','consumables')
-            ->withCount('assets','licenses','accessories','consumables');
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'throttle', 'assets', 'licenses', 'accessories', 'consumables')
+            ->withCount('assets', 'licenses', 'accessories', 'consumables');
         $users = Company::scopeCompanyables($users);
 
 
@@ -50,11 +50,15 @@ class UsersController extends Controller
         }
 
         if ($request->has('company_id')) {
-            $users = $users->where('company_id','=',$request->input('company_id'));
+            $users = $users->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->has('department_id')) {
-            $users = $users->where('department_id','=',$request->input('department_id'));
+            $users = $users->where('department_id', '=', $request->input('department_id'));
+        }
+
+        if ($request->has('location_id')) {
+            $users = $users->where('location_id', '=', $request->input('location_id'));
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
