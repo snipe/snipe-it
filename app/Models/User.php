@@ -24,7 +24,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     protected $hidden = ['password'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
-    protected $fillable = ['first_name', 'last_name', 'email','password','username'];
+    protected $fillable = ['first_name', 'last_name', 'email','password','username','department_id'];
 
     protected $casts = [
         'activated' => 'boolean',
@@ -104,6 +104,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('\App\Models\Department', 'department_id');
     }
 
     public function isActivated()
@@ -359,6 +364,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
                     });
                 })
                 ->orWhere(function ($query) use ($search) {
+                    $query->whereHas('department', function ($query) use ($search) {
+                        $query->where('departments.name', 'LIKE', '%'.$search.'%');
+                    });
+                })
+                ->orWhere(function ($query) use ($search) {
                     $query->whereHas('groups', function ($query) use ($search) {
                         $query->where('groups.name', 'LIKE', '%'.$search.'%');
                     });
@@ -412,5 +422,19 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'users.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
+    }
+
+
+    /**
+     * Query builder scope to order on department
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderDepartment($query, $order)
+    {
+        return $query->leftJoin('departments', 'users.department_id', '=', 'departments.id')->orderBy('departments.name', $order);
     }
 }
