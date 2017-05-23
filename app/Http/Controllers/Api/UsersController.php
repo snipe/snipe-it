@@ -38,8 +38,9 @@ class UsersController extends Controller
             'users.company_id',
             'users.last_login',
             'users.deleted_at',
+            'users.department_id',
             'users.activated'
-        ])->with('manager', 'groups', 'userloc', 'company', 'throttle','assets','licenses','accessories','consumables')
+        ])->with('manager', 'groups', 'userloc', 'company', 'department','throttle','assets','licenses','accessories','consumables')
             ->withCount('assets','licenses','accessories','consumables');
         $users = Company::scopeCompanyables($users);
 
@@ -66,6 +67,9 @@ class UsersController extends Controller
                 break;
             case 'location':
                 $users = $users->OrderLocation($order);
+                break;
+            case 'department':
+                $users = $users->OrderDepartment($order);
                 break;
             default:
                 $allowed_columns =
