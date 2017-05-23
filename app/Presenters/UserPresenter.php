@@ -87,6 +87,15 @@ class UserPresenter extends Presenter
                 "visible" => false
             ],
             [
+                "field" => "department",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.department'),
+                "visible" => true,
+                "formatter" => "departmentsLinkObjFormatter"
+            ],
+            [
                 "field" => "location",
                 "searchable" => true,
                 "sortable" => true,
