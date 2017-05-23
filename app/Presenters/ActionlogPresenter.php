@@ -39,6 +39,8 @@ class ActionlogPresenter extends Presenter
 
     public function icon()
     {
+        $itemicon  = 'fa fa-paperclip';
+
         if ($this->itemType() == "asset") {
             $itemicon = 'fa fa-barcode';
         } elseif ($this->itemType() == "accessory") {
@@ -49,9 +51,7 @@ class ActionlogPresenter extends Presenter
             $itemicon  = 'fa fa-floppy-o';
         } elseif ($this->itemType()=="component") {
             $itemicon  = 'fa fa-hdd-o';
-        } else {
-            $itemicon  = 'fa fa-paperclip';
-        }
+        } 
 
         return $itemicon;
     }
