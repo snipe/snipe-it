@@ -20,13 +20,20 @@ class ReportsController extends Controller
     {
 
         $actionlogs = Actionlog::with('item', 'user', 'target');
-        //$activitylogs = $activitylogs->Company::scopeCompanyables($activitylogs);
 
         if ($request->has('search')) {
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));
         }
 
-        $allowed_columns = ['created_at'];
+        if ($request->has('user_id')) {
+            $actionlogs = $actionlogs->where('target_id','=',$request->input('user_id'))->where('target_type','=','App\\Models\\User');
+        }
+
+        $allowed_columns = [
+            'id',
+            'created_at'
+        ];
+        
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = request('offset', 0);
