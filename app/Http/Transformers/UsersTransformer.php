@@ -32,6 +32,10 @@ class UsersTransformer
                 'groups' => $user->groups,
                 'jobtitle' => e($user->jobtitle),
                 'email' => e($user->email),
+                'department' => ($user->department) ? [
+                    'id' => (int) $user->department->id,
+                    'name'=> e($user->department->name)
+                ]  : null,
                 'location' => (new LocationsTransformer)->transformLocation($user->userloc),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated =='1') ? true : false,
