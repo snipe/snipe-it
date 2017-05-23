@@ -8,25 +8,6 @@ namespace App\Presenters;
  */
 class ActionlogPresenter extends Presenter
 {
-    /**
-     * Link to this companies name
-     * @return string
-     */
-    public function forDataTable()
-    {
-
-        return [
-            'icon'          => '<i class="'.$this->parseItemIcon().'"></i>',
-            'created_at'    => date("M d, Y g:iA", strtotime($this->created_at)),
-            'action_type'   => strtolower(trans('general.'.str_replace(' ', '_', $this->action_type))),
-            'admin'         =>  $this->admin(),
-            'target'        => $this->target(),
-            'item'          => $this->item(),
-            'item_type'     => $this->itemType(),
-            'note'          => e($this->note),
-
-        ];
-    }
 
     public function admin()
     {
@@ -35,9 +16,8 @@ class ActionlogPresenter extends Presenter
                 return $user->present()->nameUrl();
             }
             // The user was deleted
-            return '<del>'.$user->present()->name()."</del> (deleted)";
+            return '<del>'.$user->getFullNameAttribute()."</del> (deleted)";
         }
-
         return '';
     }
 
@@ -51,10 +31,37 @@ class ActionlogPresenter extends Presenter
                 return $this->model->item->present()->nameUrl();
             }
             // The item was deleted
-            return '<del>'.$item->present()->name().'</del> (deleted)';
+            return '<del>'.$item->name.'</del> (deleted)';
         }
         return '';
     }
+
+
+    public function icon()
+    {
+        if ($this->itemType() == "asset") {
+            $itemicon = 'fa fa-barcode';
+        } elseif ($this->itemType() == "accessory") {
+            $itemicon  = 'fa fa-keyboard-o';
+        } elseif ($this->itemType()=="consumable") {
+            $itemicon  = 'fa fa-tint';
+        } elseif ($this->itemType()=="license") {
+            $itemicon  = 'fa fa-floppy-o';
+        } elseif ($this->itemType()=="component") {
+            $itemicon  = 'fa fa-hdd-o';
+        } else {
+            $itemicon  = 'fa fa-paperclip';
+        }
+
+        return $itemicon;
+    }
+
+
+    public function actionType() {
+        return strtolower(trans('general.'.str_replace(' ', '_', $this->action_type)));
+    }
+
+
 
     public function target()
     {
