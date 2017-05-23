@@ -36,6 +36,7 @@
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="category{{ $category_type_route }}Table">
+      </table>
 
       </div>
     </div>
