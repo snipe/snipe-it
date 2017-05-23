@@ -274,10 +274,6 @@ Route::group(['middleware' => ['auth']], function () {
         [ 'as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport' ]
     );
 
-    Route::get(
-        'reports/activity/json',
-        [ 'as' => 'api.activity.list', 'uses' => 'ReportsController@getActivityReportDataTable' ]
-    );
 
     Route::get(
         'reports/unaccepted_assets',
@@ -414,5 +410,5 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 
-Auth::routes();
+
 

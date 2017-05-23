@@ -507,4 +507,10 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     }); // Users group
 
 
+    Route::get(
+        'reports/activity',
+        [ 'as' => 'api.activity.list', 'uses' => 'ReportsController@index' ]
+    );
+
+
 });
