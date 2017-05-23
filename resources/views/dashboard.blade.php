@@ -92,22 +92,20 @@
         <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
-
               <table
                 class="table table-striped snipe-table"
                 name="activityReport"
                 id="table"
-                data-cookie="false"
-                data-cookie-id-table="dashTable-{{ config('version.hash_version') }}"
-                data-url="{{route('api.activity.list', ['limit' => 25]) }}">
+                data-sort-order="desc"
+                data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
                 <thead>
                   <tr>
                     <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
                     <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                     <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                     <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
-                    <th class="col-sm-3" data-field="item">{{ trans('general.item') }}</th>
-                    <th class="col-sm-2" data-field="target">{{ trans('general.target') }}</th>
+                    <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                    <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   </tr>
                 </thead>
               </table>
@@ -156,8 +154,6 @@
                       class="table table-striped snipe-table"
                       name="categorySummary"
                       id="table"
-                      data-cookie="false"
-                      data-cookie-id-table="categorySummary-{{ config('version.hash_version') }}"
                       data-url="{{ route('api.categories.index', ['limit' => 15]) }}">
                   <thead>
                   <tr>
