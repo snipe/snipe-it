@@ -81,4 +81,30 @@ class DepartmentsController extends Controller
         $department = Department::findOrFail($id);
         return (new DepartmentsTransformer)->transformDepartment($department);
     }
+
+
+
+    /**
+     * Validates and deletes selected location.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $locationId
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        if (is_null($department = Department::find($id))) {
+            return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.not_found'));
+        }
+
+        if ($department->users->count() > 0) {
+            return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.assoc_users'));
+        }
+
+        $department->delete();
+        return redirect()->to(route('departments.index'))->with('success', trans('admin/departments/message.delete.success'));
+
+    }
+
 }
