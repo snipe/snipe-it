@@ -52,6 +52,10 @@ class UsersController extends Controller
             $users = $users->where('company_id','=',$request->input('company_id'));
         }
 
+        if ($request->has('department_id')) {
+            $users = $users->where('department_id','=',$request->input('department_id'));
+        }
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = request('offset', 0);
         $limit = request('limit', 50);
