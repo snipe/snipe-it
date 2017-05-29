@@ -1,0 +1,97 @@
+baseurl = "http://laradock.io/"
+languageCode = "en-us"
+publishDir = "../docs"
+title = "Laradock"
+theme = "hugo-material-docs"
+metadataformat = "yaml"
+canonifyurls = true
+uglyurls = true
+# Enable Google Analytics by entering your tracking id
+googleAnalytics = "UA-37514928-9"
+
+[params]
+	# General information
+	author = "Mahmoud Zalt"
+	description = "Full PHP development environment for Docker."
+	copyright = ""
+
+	# Repository
+	provider = ""
+	repo_url = ""
+
+	version = ""
+	logo = "images/logo.png"
+	favicon = ""
+
+	permalink = "#"
+
+	# Custom assets
+	custom_css = []
+	custom_js  = []
+
+	# Syntax highlighting theme
+	highlight_css  = ""
+
+	[params.palette]
+    	primary = "deep-purple"
+    	accent  = "purple"
+
+    [params.font]
+    	text = "Doctarine"
+    	code = "Source Code Pro"
+
+[social]
+	twitter = ""
+	github  = "laradock/laradock"
+	email   = ""
+
+# ------- MENU START -----------------------------------------
+
+[[menu.main]]
+	name   = "Introduction"
+	url    = "introduction/"
+	weight = 1
+
+[[menu.main]]
+	name   = "Getting Started"
+	url    = "getting-started/"
+	weight = 2
+
+[[menu.main]]
+	name   = "Documentation"
+	url    = "documentation/"
+	weight = 3
+
+[[menu.main]]
+	name   = "Guides"
+	url    = "guides/"
+	weight = 4
+
+[[menu.main]]
+	name   = "Help & Questions"
+	url    = "help/"
+	weight = 5
+
+[[menu.main]]
+	name   = "Related Projects"
+	url    = "related-projects/"
+	weight = 6
+
+[[menu.main]]
+	name   = "Contributing"
+	url    = "contributing/"
+	weight = 7
+
+[[menu.main]]
+	name   = "License"
+	url    = "license/"
+	weight = 8
+
+# ------- MENU END -----------------------------------------
+
+[blackfriday]
+	smartypants	= true
+	fractions = true
+	smartDashes = true
+	plainIDAnchors = true
+

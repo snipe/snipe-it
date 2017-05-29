@@ -1,0 +1,14 @@
+master:
+  build: .
+  environment:
+    JAVA_OPTS: "-Djava.awt.headless=true"
+  ports:
+    - "50000:50000"
+    # Expose Jenkins to parent on port 8090
+    - "8090:8080"
+  # Allow Docker In Docker
+  privileged: true
+  volumes:
+    - ./jenkins_home:/var/jenkins_home
+    # Allow Docker In Docker to use parent docker container
+    - /var/run/docker.sock:/var/run/docker.sock

@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+  ServerName sample.dev
+  DocumentRoot /var/www/sample/public/
+  Options Indexes FollowSymLinks
+
+  <Directory "/var/www/sample/public/">
+    AllowOverride All
+    <IfVersion < 2.4>
+      Allow from all
+    </IfVersion>
+    <IfVersion >= 2.4>
+      Require all granted
+    </IfVersion>
+  </Directory>
+
+</VirtualHost>
