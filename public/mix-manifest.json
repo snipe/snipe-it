@@ -1,3 +1,12 @@
 {
-  "/mix.js": "/mix.js"
+  "/build/vue.js": "/build/vue.js",
+  "/mix.js": "/mix.js",
+  "/build/app.css": "/build/app.css",
+  "/build/AdminLTE.css": "/build/AdminLTE.css",
+  "/build/overrides.css": "/build/overrides.css",
+  "/css/all.css": "/css/all.css",
+  "/js/all.js": "/js/all.js",
+  "/css/app.css": "/css/app.47a3626f2a026645fe48f025aacc900f.css",
+  "/css/dist/all.css": "/css/dist/all.css",
+  "/js/dist/all.js": "/js/dist/all.js"
 }
