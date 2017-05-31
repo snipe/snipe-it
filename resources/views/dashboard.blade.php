@@ -367,7 +367,7 @@
 @if ($snipeSettings->load_remote=='1')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 @else
-    <script src="{{ asset('assets/js/plugins/chartjs/Chart.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/chartjs/Chart.min.js') }}"></script>
 @endif
 
 

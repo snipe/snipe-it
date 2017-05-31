@@ -382,8 +382,8 @@
               </div>
             </div>
 
-            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/jquery.fileupload.css') }}">
-            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/jquery.fileupload-ui.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload-ui.css') }}">
 
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">

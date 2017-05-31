@@ -14,7 +14,7 @@
     }
 </style>
 <!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="{{ asset('assets/js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
 @parent
 @stop
 

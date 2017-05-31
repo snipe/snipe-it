@@ -540,7 +540,7 @@ $('.header-name').click(function() {
 })
 </script>
 
-<script src="{{ asset('assets/js/pGenerator.jquery.js') }}"></script>
+<script src="{{ asset('js/pGenerator.jquery.js') }}"></script>
 
 <script>
 

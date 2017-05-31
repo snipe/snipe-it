@@ -48,12 +48,12 @@
 
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ asset('js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
+<script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="{{ asset('js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
