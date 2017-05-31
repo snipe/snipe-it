@@ -134,6 +134,13 @@
                     </tr>
                   @endif
 
+                    @if (!is_null($user->department))
+                      <tr>
+                        <td>{{ trans('general.department') }}</td>
+                        <td><a href="{{ route('departments.show', $user->department) }}">{{ $user->department->name }}</a></td>
+                      </tr>
+                    @endif
+
                   @if ($user->jobtitle)
                   <tr>
                     <td>{{ trans('admin/users/table.job') }}</td>
