@@ -36,7 +36,7 @@ mix
 
 .scripts([
     'public/build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
-    './bower_components/tether/dist/js/tether.min.js',
+    './node_modules/tether/dist/js/tether.min.js',
     './bower_components/jquery-ui/jquery-ui.js',
     './bower_components/jquery-slimscroll/jquery.slimscroll.js',
     './bower_components/jquery.iframe-transport/jquery.iframe-transport.js',

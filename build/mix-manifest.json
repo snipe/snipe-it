@@ -4,5 +4,6 @@
   "/public/css/AdminLTE.css": "/public/css/AdminLTE.css",
   "/public/css/app.css": "/public/css/app.css",
   "/public/css/overrides.css": "/public/css/overrides.css",
-  "public/css/dist/all.css": "public/css/dist/all.css"
+  "public/css/dist/all.css": "public/css/dist/all.css",
+  "public/js/dist/all.js": "public/js/dist/all.js"
 }
