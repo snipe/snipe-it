@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Supplier;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\SuppliersTransformer;
 
 class SuppliersController extends Controller
 {
@@ -39,8 +39,7 @@ class SuppliersController extends Controller
 
         $total = $suppliers->count();
         $suppliers = $suppliers->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($suppliers, $total);
-        return $suppliers;
+        return (new SuppliersTransformer)->transformSuppliers($suppliers, $total);
     }
 
 
