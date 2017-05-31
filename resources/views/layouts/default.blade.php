@@ -21,7 +21,7 @@
     <!-- bootstrap tables CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
 
-    <link rel="stylesheet" href="{{ asset(elixir('assets/css/app.css')) }}">
+    <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
 
     <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
@@ -671,7 +671,7 @@
 
 
 
-    <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
+    <script src="{{ mix('js/all.js') }}"></script>
 
     @section('moar_scripts')
     @show
