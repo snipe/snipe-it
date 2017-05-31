@@ -51,7 +51,7 @@ $('.snipe-table').bootstrapTable({
             exportOptions: {
 
                 fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
-                ignoreColumn: ['actions','change','checkbox','checkincheckout'],
+                ignoreColumn: ['actions','change','checkbox','checkincheckout','icon'],
                 worksheetName: "Snipe-IT Export",
                 jspdf: {
                     autotable: {
