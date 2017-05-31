@@ -32,15 +32,18 @@ class DashboardController extends Controller
 
             $asset_stats=null;
 
-
+            $counts['asset'] = \App\Models\Asset::count();
+            $counts['accessory'] = \App\Models\Accessory::count();
+            $counts['license'] = \App\Models\License::assetcount();
+            $counts['consumable'] = \App\Models\Consumable::count();
+            $counts['grand_total'] =  $counts['asset'] +  $counts['accessory'] +  $counts['license'] +  $counts['consumable'];
 
             if ((!file_exists(storage_path().'/oauth-private.key')) || (!file_exists(storage_path().'/oauth-public.key'))) {
                 \Artisan::call('passport:install');
                 \Artisan::call('migrate', ['--force' => true]);
             }
 
-
-            return View::make('dashboard')->with('asset_stats', $asset_stats);
+            return View::make('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
         } else {
         // Redirect to the profile page
             return redirect()->intended('account/view-assets');
