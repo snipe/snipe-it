@@ -13,10 +13,7 @@ mix
         {
         processCssUrls: false,
         processFontUrls: false,
-            uglify: {
-                compress: false,
-            }
-
+        uglify: false
     })
 
 
