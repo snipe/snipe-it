@@ -158,7 +158,10 @@
                   @if ($user->manager)
                   <tr>
                     <td>{{ trans('admin/users/table.manager') }}</td>
-                    <td>{{$user->manager->present()->nameUrl() }}</td>
+                    <td>
+                      <a href="{{ route('users.show', $user->manager->id) }}">{{ $user->manager->getFullNameAttribute() }}</a>
+
+                      </td>
                   </tr>
                   @endif
 
