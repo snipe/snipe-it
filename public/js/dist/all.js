@@ -82143,7 +82143,7 @@ var widgetsTooltip = $.ui.tooltip;
 }());
 
 /*!
- * Bootstrap Colorpicker v2.4.0
+ * Bootstrap Colorpicker v2.5.1
  * https://itsjavi.com/bootstrap-colorpicker/
  *
  * Originally written by (c) 2012 Stefan Petre
@@ -82152,23 +82152,22 @@ var widgetsTooltip = $.ui.tooltip;
  *
  */
 
-(function(factory) {
-  var global = (typeof window === 'undefined') ? this : window;
-
-  if (typeof exports === 'object') {
-    module.exports = factory(global.jQuery, global);
-  } else if (typeof define === 'function' && define.amd) {
-    define(['jquery'], function(jq) {
-      return factory(jq, global);
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module unless amdModuleId is set
+    define(["jquery"], function(jq) {
+      return (factory(jq));
     });
-  } else if (global.jQuery && !global.jQuery.fn.colorpicker) {
-    factory(global.jQuery, global);
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory(require("jquery"));
+  } else if (jQuery && !jQuery.fn.colorpicker) {
+    factory(jQuery);
   }
-}(function(jQuery, window) {
+}(this, function($) {
   'use strict';
-
-  var $ = jQuery;
-
   /**
    * Color manipulation helper class
    *
@@ -82176,9 +82175,11 @@ var widgetsTooltip = $.ui.tooltip;
    * @param {Object} [predefinedColors]
    * @param {String|null} [fallbackColor]
    * @param {String|null} [fallbackFormat]
+   * @param {Boolean} [hexNumberSignPrefix]
    * @constructor
    */
-  var Color = function(val, predefinedColors, fallbackColor, fallbackFormat) {
+  var Color = function(
+    val, predefinedColors, fallbackColor, fallbackFormat, hexNumberSignPrefix) {
     this.fallbackValue = fallbackColor ?
       (
         fallbackColor && (typeof fallbackColor.h !== 'undefined') ?
@@ -82193,6 +82194,8 @@ var widgetsTooltip = $.ui.tooltip;
       null;
 
     this.fallbackFormat = fallbackFormat ? fallbackFormat : 'rgba';
+
+    this.hexNumberSignPrefix = hexNumberSignPrefix === true;
 
     this.value = this.fallbackValue;
 
@@ -82223,146 +82226,146 @@ var widgetsTooltip = $.ui.tooltip;
   };
 
   Color.webColors = { // 140 predefined colors from the HTML Colors spec
-    "aliceblue": "#f0f8ff",
-    "antiquewhite": "#faebd7",
-    "aqua": "#00ffff",
-    "aquamarine": "#7fffd4",
-    "azure": "#f0ffff",
-    "beige": "#f5f5dc",
-    "bisque": "#ffe4c4",
-    "black": "#000000",
-    "blanchedalmond": "#ffebcd",
-    "blue": "#0000ff",
-    "blueviolet": "#8a2be2",
-    "brown": "#a52a2a",
-    "burlywood": "#deb887",
-    "cadetblue": "#5f9ea0",
-    "chartreuse": "#7fff00",
-    "chocolate": "#d2691e",
-    "coral": "#ff7f50",
-    "cornflowerblue": "#6495ed",
-    "cornsilk": "#fff8dc",
-    "crimson": "#dc143c",
-    "cyan": "#00ffff",
-    "darkblue": "#00008b",
-    "darkcyan": "#008b8b",
-    "darkgoldenrod": "#b8860b",
-    "darkgray": "#a9a9a9",
-    "darkgreen": "#006400",
-    "darkkhaki": "#bdb76b",
-    "darkmagenta": "#8b008b",
-    "darkolivegreen": "#556b2f",
-    "darkorange": "#ff8c00",
-    "darkorchid": "#9932cc",
-    "darkred": "#8b0000",
-    "darksalmon": "#e9967a",
-    "darkseagreen": "#8fbc8f",
-    "darkslateblue": "#483d8b",
-    "darkslategray": "#2f4f4f",
-    "darkturquoise": "#00ced1",
-    "darkviolet": "#9400d3",
-    "deeppink": "#ff1493",
-    "deepskyblue": "#00bfff",
-    "dimgray": "#696969",
-    "dodgerblue": "#1e90ff",
-    "firebrick": "#b22222",
-    "floralwhite": "#fffaf0",
-    "forestgreen": "#228b22",
-    "fuchsia": "#ff00ff",
-    "gainsboro": "#dcdcdc",
-    "ghostwhite": "#f8f8ff",
-    "gold": "#ffd700",
-    "goldenrod": "#daa520",
-    "gray": "#808080",
-    "green": "#008000",
-    "greenyellow": "#adff2f",
-    "honeydew": "#f0fff0",
-    "hotpink": "#ff69b4",
-    "indianred": "#cd5c5c",
-    "indigo": "#4b0082",
-    "ivory": "#fffff0",
-    "khaki": "#f0e68c",
-    "lavender": "#e6e6fa",
-    "lavenderblush": "#fff0f5",
-    "lawngreen": "#7cfc00",
-    "lemonchiffon": "#fffacd",
-    "lightblue": "#add8e6",
-    "lightcoral": "#f08080",
-    "lightcyan": "#e0ffff",
-    "lightgoldenrodyellow": "#fafad2",
-    "lightgrey": "#d3d3d3",
-    "lightgreen": "#90ee90",
-    "lightpink": "#ffb6c1",
-    "lightsalmon": "#ffa07a",
-    "lightseagreen": "#20b2aa",
-    "lightskyblue": "#87cefa",
-    "lightslategray": "#778899",
-    "lightsteelblue": "#b0c4de",
-    "lightyellow": "#ffffe0",
-    "lime": "#00ff00",
-    "limegreen": "#32cd32",
-    "linen": "#faf0e6",
-    "magenta": "#ff00ff",
-    "maroon": "#800000",
-    "mediumaquamarine": "#66cdaa",
-    "mediumblue": "#0000cd",
-    "mediumorchid": "#ba55d3",
-    "mediumpurple": "#9370d8",
-    "mediumseagreen": "#3cb371",
-    "mediumslateblue": "#7b68ee",
-    "mediumspringgreen": "#00fa9a",
-    "mediumturquoise": "#48d1cc",
-    "mediumvioletred": "#c71585",
-    "midnightblue": "#191970",
-    "mintcream": "#f5fffa",
-    "mistyrose": "#ffe4e1",
-    "moccasin": "#ffe4b5",
-    "navajowhite": "#ffdead",
-    "navy": "#000080",
-    "oldlace": "#fdf5e6",
-    "olive": "#808000",
-    "olivedrab": "#6b8e23",
-    "orange": "#ffa500",
-    "orangered": "#ff4500",
-    "orchid": "#da70d6",
-    "palegoldenrod": "#eee8aa",
-    "palegreen": "#98fb98",
-    "paleturquoise": "#afeeee",
-    "palevioletred": "#d87093",
-    "papayawhip": "#ffefd5",
-    "peachpuff": "#ffdab9",
-    "peru": "#cd853f",
-    "pink": "#ffc0cb",
-    "plum": "#dda0dd",
-    "powderblue": "#b0e0e6",
-    "purple": "#800080",
-    "red": "#ff0000",
-    "rosybrown": "#bc8f8f",
-    "royalblue": "#4169e1",
-    "saddlebrown": "#8b4513",
-    "salmon": "#fa8072",
-    "sandybrown": "#f4a460",
-    "seagreen": "#2e8b57",
-    "seashell": "#fff5ee",
-    "sienna": "#a0522d",
-    "silver": "#c0c0c0",
-    "skyblue": "#87ceeb",
-    "slateblue": "#6a5acd",
-    "slategray": "#708090",
-    "snow": "#fffafa",
-    "springgreen": "#00ff7f",
-    "steelblue": "#4682b4",
-    "tan": "#d2b48c",
-    "teal": "#008080",
-    "thistle": "#d8bfd8",
-    "tomato": "#ff6347",
-    "turquoise": "#40e0d0",
-    "violet": "#ee82ee",
-    "wheat": "#f5deb3",
-    "white": "#ffffff",
-    "whitesmoke": "#f5f5f5",
-    "yellow": "#ffff00",
-    "yellowgreen": "#9acd32",
+    "aliceblue": "f0f8ff",
+    "antiquewhite": "faebd7",
+    "aqua": "00ffff",
+    "aquamarine": "7fffd4",
+    "azure": "f0ffff",
+    "beige": "f5f5dc",
+    "bisque": "ffe4c4",
+    "black": "000000",
+    "blanchedalmond": "ffebcd",
+    "blue": "0000ff",
+    "blueviolet": "8a2be2",
+    "brown": "a52a2a",
+    "burlywood": "deb887",
+    "cadetblue": "5f9ea0",
+    "chartreuse": "7fff00",
+    "chocolate": "d2691e",
+    "coral": "ff7f50",
+    "cornflowerblue": "6495ed",
+    "cornsilk": "fff8dc",
+    "crimson": "dc143c",
+    "cyan": "00ffff",
+    "darkblue": "00008b",
+    "darkcyan": "008b8b",
+    "darkgoldenrod": "b8860b",
+    "darkgray": "a9a9a9",
+    "darkgreen": "006400",
+    "darkkhaki": "bdb76b",
+    "darkmagenta": "8b008b",
+    "darkolivegreen": "556b2f",
+    "darkorange": "ff8c00",
+    "darkorchid": "9932cc",
+    "darkred": "8b0000",
+    "darksalmon": "e9967a",
+    "darkseagreen": "8fbc8f",
+    "darkslateblue": "483d8b",
+    "darkslategray": "2f4f4f",
+    "darkturquoise": "00ced1",
+    "darkviolet": "9400d3",
+    "deeppink": "ff1493",
+    "deepskyblue": "00bfff",
+    "dimgray": "696969",
+    "dodgerblue": "1e90ff",
+    "firebrick": "b22222",
+    "floralwhite": "fffaf0",
+    "forestgreen": "228b22",
+    "fuchsia": "ff00ff",
+    "gainsboro": "dcdcdc",
+    "ghostwhite": "f8f8ff",
+    "gold": "ffd700",
+    "goldenrod": "daa520",
+    "gray": "808080",
+    "green": "008000",
+    "greenyellow": "adff2f",
+    "honeydew": "f0fff0",
+    "hotpink": "ff69b4",
+    "indianred": "cd5c5c",
+    "indigo": "4b0082",
+    "ivory": "fffff0",
+    "khaki": "f0e68c",
+    "lavender": "e6e6fa",
+    "lavenderblush": "fff0f5",
+    "lawngreen": "7cfc00",
+    "lemonchiffon": "fffacd",
+    "lightblue": "add8e6",
+    "lightcoral": "f08080",
+    "lightcyan": "e0ffff",
+    "lightgoldenrodyellow": "fafad2",
+    "lightgrey": "d3d3d3",
+    "lightgreen": "90ee90",
+    "lightpink": "ffb6c1",
+    "lightsalmon": "ffa07a",
+    "lightseagreen": "20b2aa",
+    "lightskyblue": "87cefa",
+    "lightslategray": "778899",
+    "lightsteelblue": "b0c4de",
+    "lightyellow": "ffffe0",
+    "lime": "00ff00",
+    "limegreen": "32cd32",
+    "linen": "faf0e6",
+    "magenta": "ff00ff",
+    "maroon": "800000",
+    "mediumaquamarine": "66cdaa",
+    "mediumblue": "0000cd",
+    "mediumorchid": "ba55d3",
+    "mediumpurple": "9370d8",
+    "mediumseagreen": "3cb371",
+    "mediumslateblue": "7b68ee",
+    "mediumspringgreen": "00fa9a",
+    "mediumturquoise": "48d1cc",
+    "mediumvioletred": "c71585",
+    "midnightblue": "191970",
+    "mintcream": "f5fffa",
+    "mistyrose": "ffe4e1",
+    "moccasin": "ffe4b5",
+    "navajowhite": "ffdead",
+    "navy": "000080",
+    "oldlace": "fdf5e6",
+    "olive": "808000",
+    "olivedrab": "6b8e23",
+    "orange": "ffa500",
+    "orangered": "ff4500",
+    "orchid": "da70d6",
+    "palegoldenrod": "eee8aa",
+    "palegreen": "98fb98",
+    "paleturquoise": "afeeee",
+    "palevioletred": "d87093",
+    "papayawhip": "ffefd5",
+    "peachpuff": "ffdab9",
+    "peru": "cd853f",
+    "pink": "ffc0cb",
+    "plum": "dda0dd",
+    "powderblue": "b0e0e6",
+    "purple": "800080",
+    "red": "ff0000",
+    "rosybrown": "bc8f8f",
+    "royalblue": "4169e1",
+    "saddlebrown": "8b4513",
+    "salmon": "fa8072",
+    "sandybrown": "f4a460",
+    "seagreen": "2e8b57",
+    "seashell": "fff5ee",
+    "sienna": "a0522d",
+    "silver": "c0c0c0",
+    "skyblue": "87ceeb",
+    "slateblue": "6a5acd",
+    "slategray": "708090",
+    "snow": "fffafa",
+    "springgreen": "00ff7f",
+    "steelblue": "4682b4",
+    "tan": "d2b48c",
+    "teal": "008080",
+    "thistle": "d8bfd8",
+    "tomato": "ff6347",
+    "turquoise": "40e0d0",
+    "violet": "ee82ee",
+    "wheat": "f5deb3",
+    "white": "ffffff",
+    "whitesmoke": "f5f5f5",
+    "yellow": "ffff00",
+    "yellowgreen": "9acd32",
     "transparent": "transparent"
   };
 
@@ -82500,7 +82503,15 @@ var widgetsTooltip = $.ui.tooltip;
         return 'transparent';
       }
 
-      return "#" + ((1 << 24) + (parseInt(rgb.r) << 16) + (parseInt(rgb.g) << 8) + parseInt(rgb.b)).toString(16).slice(1);
+      var hexStr = (this.hexNumberSignPrefix ? '#' : '') + (
+          (1 << 24) +
+          (parseInt(rgb.r) << 16) +
+          (parseInt(rgb.g) << 8) +
+          parseInt(rgb.b))
+        .toString(16)
+        .slice(1);
+
+      return hexStr;
     },
     toHSL: function(h, s, b, a) {
       if (arguments.length === 0) {
@@ -82833,6 +82844,7 @@ var widgetsTooltip = $.ui.tooltip;
     component: '.add-on, .input-group-addon', // children component selector
     fallbackColor: false, // fallback color value. null = keeps current color.
     fallbackFormat: 'hex', // fallback color format
+    hexNumberSignPrefix: true, // put a '#' (number sign) before hex strings
     sliders: {
       saturation: {
         maxLeft: 100,
@@ -82956,7 +82968,8 @@ var widgetsTooltip = $.ui.tooltip;
             .css('background-color', color)
             .data('class', name).data('alias', name);
 
-          $btn.on('click.colorpicker touchend.colorpicker', function() {
+          $btn.on('mousedown.colorpicker touchstart.colorpicker', function(event) {
+            event.preventDefault();
             colorpicker.setValue(
               colorpicker.format === 'alias' ? $(this).data('alias') : $(this).css('background-color')
             );
@@ -83114,6 +83127,7 @@ var widgetsTooltip = $.ui.tooltip;
       val = val || this.color.toString(this.format, false);
       if (this.input !== false) {
         this.input.prop('value', val);
+        this.input.trigger('change');
       }
       return val;
     },
@@ -83141,10 +83155,10 @@ var widgetsTooltip = $.ui.tooltip;
       });
 
       this.picker.find('.colorpicker-saturation')
-        .css('backgroundColor', this.color.toHex(this.color.value.h, 1, 1, 1));
+        .css('backgroundColor', (this.options.hexNumberSignPrefix ? '' : '#') + this.color.toHex(this.color.value.h, 1, 1, 1));
 
       this.picker.find('.colorpicker-alpha')
-        .css('backgroundColor', this.color.toHex());
+        .css('backgroundColor', (this.options.hexNumberSignPrefix ? '' : '#') + this.color.toHex());
 
       this.picker.find('.colorpicker-color, .colorpicker-color div')
         .css('backgroundColor', this.color.toString(this.format, true));
@@ -83207,7 +83221,8 @@ var widgetsTooltip = $.ui.tooltip;
         val ? val : null,
         this.options.colorSelectors,
         this.options.fallbackColor ? this.options.fallbackColor : this.color,
-        this.options.fallbackFormat
+        this.options.fallbackFormat,
+        this.options.hexNumberSignPrefix
       );
     },
     getValue: function(defaultValue) {
@@ -92583,9 +92598,14 @@ var Lightbox = (function ($) {
 			this._modalId = 'ekkoLightbox-' + Math.floor(Math.random() * 1000 + 1);
 			this._$element = $element instanceof jQuery ? $element : $($element);
 
-			var header = '<div class="modal-header"' + (this._config.title || this._config.alwaysShowClose ? '' : ' style="display:none"') + '><button type="button" class="close" data-dismiss="modal" aria-label="' + this._config.strings.close + '"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">' + (this._config.title || "&nbsp;") + '</h4></div>';
+			this._isBootstrap3 = $.fn.modal.Constructor.VERSION[0] == 3;
+
+			var h4 = '<h4 class="modal-title">' + (this._config.title || "&nbsp;") + '</h4>';
+			var btn = '<button type="button" class="close" data-dismiss="modal" aria-label="' + this._config.strings.close + '"><span aria-hidden="true">&times;</span></button>';
+
+			var header = '<div class="modal-header"' + (this._config.title || this._config.alwaysShowClose ? '' : ' style="display:none"') + '>' + (this._isBootstrap3 ? btn + h4 : h4 + btn) + '</div>';
 			var footer = '<div class="modal-footer"' + (this._config.footer ? '' : ' style="display:none"') + '>' + (this._config.footer || "&nbsp;") + '</div>';
-			var body = '<div class="modal-body"><div class="ekko-lightbox-container"><div class="ekko-lightbox-item fade in"></div><div class="ekko-lightbox-item fade"></div></div></div>';
+			var body = '<div class="modal-body"><div class="ekko-lightbox-container"><div class="ekko-lightbox-item fade in show"></div><div class="ekko-lightbox-item fade"></div></div></div>';
 			var dialog = '<div class="modal-dialog" role="document"><div class="modal-content">' + header + body + footer + '</div></div>';
 			$(this._config.doc.body).append('<div id="' + this._modalId + '" class="ekko-lightbox modal fade" tabindex="-1" tabindex="-1" role="dialog" aria-hidden="true">' + dialog + '</div>');
 
@@ -92737,13 +92757,13 @@ var Lightbox = (function ($) {
 					$current = this._$lightboxBodyTwo;
 				}
 
-				$current.removeClass('in');
+				$current.removeClass('in show');
 				setTimeout(function () {
 					if (!_this2._$lightboxBodyTwo.hasClass('in')) _this2._$lightboxBodyTwo.empty();
 					if (!_this2._$lightboxBodyOne.hasClass('in')) _this2._$lightboxBodyOne.empty();
 				}, 500);
 
-				$toUse.addClass('in');
+				$toUse.addClass('in show');
 				return $toUse;
 			}
 		}, {
@@ -92808,11 +92828,11 @@ var Lightbox = (function ($) {
 				show = show || false;
 				if (show) {
 					this._$modalDialog.css('display', 'none');
-					this._$modal.removeClass('in');
+					this._$modal.removeClass('in show');
 					$('.modal-backdrop').append(this._config.loadingMessage);
 				} else {
 					this._$modalDialog.css('display', 'block');
-					this._$modal.addClass('in');
+					this._$modal.addClass('in show');
 					$('.modal-backdrop').find('.ekko-lightbox-loader').remove();
 				}
 				return this;
@@ -93003,6 +93023,10 @@ var Lightbox = (function ($) {
 							var image = $('<img />');
 							image.attr('src', img.src);
 							image.addClass('img-fluid');
+
+							// backward compatibility for bootstrap v3
+							image.css('width', '100%');
+
 							$containerForImage.html(image);
 							if (_this4._$modalArrows) _this4._$modalArrows.css('display', ''); // remove display to default to css property
 
@@ -93060,7 +93084,14 @@ var Lightbox = (function ($) {
 				this._$lightboxContainer.css('height', maxHeight);
 				this._$modalDialog.css('width', 'auto').css('maxWidth', width);
 
-				this._$modal.modal('_handleUpdate');
+				if (!this._isBootstrap3) {
+					// v4 method is mistakenly protected
+					var modal = this._$modal.data('bs.modal');
+					if (modal) modal._handleUpdate();
+				} else {
+					var modal = this._$modal.data('bs.modal');
+					if (modal) modal.handleUpdate();
+				}
 				return this;
 			}
 		}], [{

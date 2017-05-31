@@ -13,15 +13,15 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/select2/select2.min.css') }}">
 
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/iCheck/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/iCheck/all.css') }}">
 
     <!-- bootstrap tables CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-table.css') }}">
 
-    <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/dist/all.css') }}">
 
     <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
@@ -88,8 +88,8 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
        @else
-            <script src="{{ asset('assets/js/html5shiv.js') }}"></script>
-            <script src="{{ asset('assets/js/respond.js') }}"></script>
+            <script src="{{ asset('js/html5shiv.js') }}"></script>
+            <script src="{{ asset('js/respond.js') }}"></script>
        @endif
        <![endif]-->
   </head>
@@ -671,7 +671,7 @@
 
 
 
-    <script src="{{ mix('js/all.js') }}"></script>
+    <script src="{{ mix('js/dist/all.js') }}"></script>
 
     @section('moar_scripts')
     @show

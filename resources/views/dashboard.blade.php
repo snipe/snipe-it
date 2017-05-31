@@ -10,7 +10,6 @@
 {{-- Page content --}}
 @section('content')
 
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/morris.css') }}">
 <div class="row">
   <!-- panel -->
   <div class="col-lg-3 col-xs-6">

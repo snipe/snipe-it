@@ -1,16 +1,16 @@
 {{-- This Will load our default bootstrap-table settings on any table with a class of "snipe-table" and export it to the passed 'exportFile' name --}}
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
 
 @if (!isset($simple_view))
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/FileSaver.min.js') }}"></script>
-<script src="{{ asset('assets/js/jspdf.min.js') }}"></script>
-<script src="{{ asset('assets/js/jspdf.plugin.autotable.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
+<script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
+<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
+<script src="{{ asset('js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('js/FileSaver.min.js') }}"></script>
+<script src="{{ asset('js/jspdf.min.js') }}"></script>
+<script src="{{ asset('js/jspdf.plugin.autotable.js') }}"></script>
+<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 @endif
 
 <script>
