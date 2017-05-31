@@ -428,35 +428,25 @@
 
         <div class="tab-pane" id="history_tab">
           <div class="table-responsive">
-            <table class="table table-striped" id="example">
+
+            <table
+                    class="table table-striped snipe-table"
+                    name="userActivityReport"
+                    id="table4
+                    data-sort-order="desc"
+                    data-url="{{ route('api.activity.index', ['user_id' => $user->id]) }}">
               <thead>
-                <tr>
-                  <th class="col-md-1"></th>
-                  <th class="col-md-2">{{ trans('general.date') }}</th>
-                  <th class="col-md-2"><span class="line"></span>{{ trans('table.action') }}</th>
-                  <th class="col-md-4"><span class="line"></span>{{ trans('general.asset') }}</th>
-                  <th class="col-md-3"><span class="line"></span>{{ trans('table.by') }}</th>
-                </tr>
+              <tr>
+                <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+                <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+              </tr>
               </thead>
-              <tbody>
-                @foreach ($userlog as $log)
-                @php $result = $log->present()->forDataTable;
-                @endphp
-                <tr>
-                  <td class="text-center">
-                    {!!$result['icon']!!}
-                  </td>
-                  <td>{{ $result['created_at'] }}</td>
-                  <td>{{ $result['action_type'] }}</td>
-                  <td>
-                    {!! $result['item'] !!}
-                  </td>
-                  <td>
-                    {!! $result['admin'] !!}
-                </tr>
-                @endforeach
-              </tbody>
             </table>
+
           </div>
         </div><!-- /.tab-pane -->
       </div><!-- /.tab-content -->
@@ -523,4 +513,9 @@ $(function () {
 });
 </script>
 
+
+@stop
+
+@section('moar_scripts')
+  @include ('partials.bootstrap-table')
 @stop
