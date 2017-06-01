@@ -150,7 +150,7 @@ case $distro in
                 echo "  The installer has detected Debian version $version as the OS."
                 distro=debian
                 ;;
-        *centos*|*redhat*)
+        *centos*|*redhat*|*ol*)
                 echo "  The installer has detected $distro version $version as the OS."
                 distro=centos
                 ;;
