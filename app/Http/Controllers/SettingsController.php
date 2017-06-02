@@ -65,14 +65,23 @@ class SettingsController extends Controller
 
         $start_settings['url_config'] = url('/');
         $start_settings['real_url'] = $pageURL;
+        
+        // Curl the .env file to make sure it's not accessible via a browser
+        $ch = curl_init($protocol . $host.'/.env');
+        curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+        curl_setopt($ch, CURLOPT_NOBODY, true);    // we don't need body
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        $output = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-        $exposed_env = @file_get_contents($protocol . $host.'/.env');
-
-        if ($exposed_env) {
-            $start_settings['env_exposed'] = true;
-        } else {
+        if ($httpcode == 404 || $httpcode == 403) {
             $start_settings['env_exposed'] = false;
+        } else {
+            $start_settings['env_exposed'] = true;
         }
+
 
         if (\App::Environment('production') && (config('app.debug')==true)) {
             $start_settings['debug_exposed'] = true;
