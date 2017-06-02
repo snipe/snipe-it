@@ -5,7 +5,7 @@ return array(
     'about_accessories_text'  			=> 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
     'accessory_category' 				=> 'Accessory Category',
     'accessory_name'  					=> 'Accessory Name',
-    'checkout'  							=> 'Checkout Accessory',
+    'checkout'  						=> 'Checkout Accessory',
     'checkin'  							=> 'Checkin Accessory',
     'create'  							=> 'Create Accessory',
     'edit'  							=> 'Edit Accessory',
@@ -18,5 +18,8 @@ return array(
     'update'  							=> 'Update Accessory',
     'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',
     'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
-
+    'order'					            => 'Order Number',
+    'date'					            => 'Purchase Date',
+    'cost'				                => 'Purchase Cost',
+	
 );

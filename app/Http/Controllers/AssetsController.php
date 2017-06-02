@@ -107,7 +107,7 @@ class AssetsController extends Controller
     public function getCreate($model_id = null)
     {
         // Grab the dropdown lists
-        $model_list = Helper::modelList();
+        $model_list = Helper::modelList('asset');
         $statuslabel_list = Helper::statusLabelList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
@@ -116,6 +116,7 @@ class AssetsController extends Controller
         $company_list = Helper::companyList();
         $assigned_to = Helper::usersList();
         $statuslabel_types = Helper::statusTypeList();
+		$customfieldset_list = Helper::customFieldsetList();
 
         $view = View::make('hardware/edit');
         $view->with('supplier_list', $supplier_list);
@@ -125,9 +126,10 @@ class AssetsController extends Controller
         $view->with('assigned_to', $assigned_to);
         $view->with('location_list', $location_list);
         $view->with('item', new Asset);
-        $view->with('manufacturer', $manufacturer_list);
-        $view->with('category', $category_list);
+        $view->with('manufacturer_list', $manufacturer_list);
+        $view->with('category_list', $category_list);
         $view->with('statuslabel_types', $statuslabel_types);
+		$view->with('customfieldset_list', $customfieldset_list);
 
         if (!is_null($model_id)) {
             $selected_model = AssetModel::find($model_id);
@@ -163,6 +165,7 @@ class AssetsController extends Controller
         $asset->archived                    = '0';
         $asset->physical                    = '1';
         $asset->depreciate                  = '0';
+		
         if (e(Input::get('status_id')) == '') {
             $asset->status_id =  null;
         } else {
@@ -298,7 +301,7 @@ class AssetsController extends Controller
         }
 
         // Grab the dropdown lists
-        $model_list = Helper::modelList();
+        $model_list = Helper::modelList('asset');
         $statuslabel_list = Helper::statusLabelList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
@@ -307,17 +310,19 @@ class AssetsController extends Controller
         $company_list = Helper::companyList();
         $assigned_to = Helper::usersList();
         $statuslabel_types =Helper::statusTypeList();
+		$customfieldset_list = Helper::customFieldsetList();
 
         return View::make('hardware/edit', compact('item'))
-        ->with('model_list', $model_list)
-        ->with('supplier_list', $supplier_list)
-        ->with('company_list', $company_list)
-        ->with('location_list', $location_list)
-        ->with('statuslabel_list', $statuslabel_list)
-        ->with('assigned_to', $assigned_to)
-        ->with('manufacturer', $manufacturer_list)
-        ->with('statuslabel_types', $statuslabel_types)
-        ->with('category', $category_list);
+				->with('model_list', $model_list)
+				->with('supplier_list', $supplier_list)
+				->with('company_list', $company_list)
+				->with('location_list', $location_list)
+				->with('statuslabel_list', $statuslabel_list)
+				->with('assigned_to', $assigned_to)
+				->with('manufacturer_list', $manufacturer_list)
+				->with('statuslabel_types', $statuslabel_types)
+				->with('category_list', $category_list)
+				->with('customfieldset_list', $customfieldset_list);
     }
 
 
@@ -332,7 +337,7 @@ class AssetsController extends Controller
 
     public function postEdit(AssetRequest $request, $assetId = null)
     {
-
+		\Debugbar::info('AssetsController::postEdit');
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
@@ -1036,7 +1041,7 @@ class AssetsController extends Controller
         }
 
         // Grab the dropdown lists
-        $model_list = Helper::modelList();
+        $model_list = Helper::modelList('asset');
         $statuslabel_list = Helper::statusLabelList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
@@ -1045,6 +1050,7 @@ class AssetsController extends Controller
         $assigned_to =Helper::usersList();
         $statuslabel_types = Helper::statusTypeList();
         $company_list = Helper::companyList();
+		$customfieldset_list = Helper::customFieldsetList();
 
         $asset = clone $asset_to_clone;
         $asset->id = null;
@@ -1060,9 +1066,10 @@ class AssetsController extends Controller
         ->with('assigned_to', $assigned_to)
         ->with('item', $asset)
         ->with('location_list', $location_list)
-        ->with('manufacturer', $manufacturer_list)
-        ->with('category', $category_list)
-        ->with('company_list', $company_list);
+        ->with('manufacturer_list', $manufacturer_list)
+        ->with('category_list', $category_list)
+        ->with('company_list', $company_list)
+		->with('customfieldset_list', $customfieldset_list);
 
     }
 
@@ -1459,7 +1466,7 @@ class AssetsController extends Controller
                 $supplier_list = Helper::suppliersList();
                 $statuslabel_list = Helper::statusLabelList();
                 $location_list = Helper::locationsList();
-                $models_list =  Helper::modelList();
+                $models_list =  Helper::modelList('asset');
                 $companies_list = array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList();
 
                 return View::make('hardware/bulk')
@@ -1650,10 +1657,10 @@ class AssetsController extends Controller
     */
     public function getDatatable(Request $request, $status = null)
     {
-
-
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
-        ->Hardware();
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'))
+					->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 
+							'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 
+							'assetstatus', 'assetloc', 'company')->Hardware();
 
         if ($request->has('search')) {
              $assets = $assets->TextSearch(e($request->get('search')));
@@ -1706,26 +1713,26 @@ class AssetsController extends Controller
 
 
         $allowed_columns = [
-        'id',
-        'name',
-        'asset_tag',
-        'serial',
-        'model',
-        'model_number',
-        'last_checkout',
-        'category',
-        'manufacturer',
-        'notes',
-        'expected_checkin',
-        'order_number',
-        'companyName',
-        'location',
-        'image',
-        'status_label',
-        'assigned_to',
-        'created_at',
-        'purchase_date',
-        'purchase_cost'
+			'id',
+			'name',
+			'asset_tag',
+			'serial',
+			'model',
+			'model_number',
+			'last_checkout',
+			'category',
+			'manufacturer',
+			'notes',
+			'expected_checkin',
+			'order_number',
+			'companyName',
+			'location',
+			'image',
+			'status_label',
+			'assigned_to',
+			'created_at',
+			'purchase_date',
+			'purchase_cost'
         ];
 
         $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
@@ -1811,30 +1818,32 @@ class AssetsController extends Controller
             $purchase_cost = Helper::formatCurrencyOutput($asset->purchase_cost);
 
             $row = array(
-            'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
-            'id'        => $asset->id,
-            'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.config('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.config('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
-            'name'          => '<a title="'.e($asset->name).'" href="hardware/'.$asset->id.'/view">'.e($asset->name).'</a>',
-            'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
-            'serial'        => e($asset->serial),
-            'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
-            'model_number'  => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
+            'checkbox'            =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
+            'id'                  => $asset->id,
+            'image'               => (($asset->image) && ($asset->image!='')) ? '<img src="'.config('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.config('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
+            'name'                => '<a title="'.e($asset->name).'" href="hardware/'.$asset->id.'/view">'.e($asset->name).'</a>',
+            'asset_tag'           => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
+            'serial'              => e($asset->serial),
+            'model'               => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
+            'model_number'        => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
             'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
-            'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
-            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
-            'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
-            'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
-            'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
-            'purchase_cost'           => $purchase_cost,
-            'purchase_date'           => ($asset->purchase_date) ? $asset->purchase_date : '',
-            'notes'         => e($asset->notes),
-            'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
-            'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-            'expected_checkin' => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
-            'created_at' => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
-            'change'        => ($inout) ? $inout : '',
-            'actions'       => ($actions) ? $actions : '',
-            'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
+            'assigned_to'         => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
+            'location'            => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
+            'category'            => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
+            'manufacturer'        => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
+            'eol'                 => ($asset->eol_date()) ? $asset->eol_date() : '',
+			'warranty_months'     => ($asset->warranty_months) ? $asset->warranty_months . ' ' . trans('admin/hardware/form.months') : '',
+			'warrantee_expires'   => ($asset->warrantee_expires()) ? $asset->warrantee_expires() : '',
+            'purchase_cost'       => $purchase_cost,
+            'purchase_date'       => ($asset->purchase_date) ? $asset->purchase_date : '',
+            'notes'               => e($asset->notes),
+            'order_number'        => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
+            'last_checkout'       => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
+            'expected_checkin'    => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
+            'created_at'          => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
+            'change'              => ($inout) ? $inout : '',
+            'actions'             => ($actions) ? $actions : '',
+            'companyName'         => is_null($asset->company) ? '' : e($asset->company->name)
             );
             foreach ($all_custom_fields as $field) {
                 $column_name = $field->db_column_name();

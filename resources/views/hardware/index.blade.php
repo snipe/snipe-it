@@ -80,16 +80,18 @@
                             <th data-sortable="true" data-field="name" data-visible="false">{{ trans('admin/hardware/form.name') }}</th>
                             <th data-sortable="true" data-field="asset_tag">{{ trans('admin/hardware/table.asset_tag') }}</th>
                             <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
+							<th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
                             <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
                             <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
+							<th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
                             <th data-sortable="true" data-field="status_label">{{ trans('admin/hardware/table.status') }}</th>
                             <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
                             <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
-                            <th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
-                            <th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
                             <th data-sortable="true" data-field="purchase_cost" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.cost') }}</th>
                             <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
-                            <th data-sortable="false" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
+							<th data-sortable="true" data-field="warranty_months" data-searchable="true">{{ trans('admin/hardware/form.warranty') }}</th>
+							<th data-sortable="true" data-field="warrantee_expires" data-searchable="true">{{ trans('admin/hardware/form.expires') }}</th>
+                            <th data-sortable="true" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
                             <th data-sortable="true" data-searchable="true" data-field="notes">{{ trans('general.notes') }}</th>
                             <th data-sortable="true" data-searchable="true"  data-field="order_number">{{ trans('admin/hardware/form.order') }}</th>
                             <th data-sortable="true" data-searchable="true" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>

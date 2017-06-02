@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Company;
 use App\Models\Manufacturer;
 use App\Models\Setting;
@@ -268,6 +269,9 @@ class ManufacturersController extends Controller
                 return $this->getDataAccessoriesView($manufacturer);
             case "consumables":
                 return $this->getDataConsumablesView($manufacturer);
+            case "components":
+                return $this->getDataComponentsView($manufacturer);
+				
         }
 
         throw new Exception("We shouldn't be here");
@@ -276,7 +280,12 @@ class ManufacturersController extends Controller
 
     protected function getDataAssetsView(Manufacturer $manufacturer)
     {
-        $manufacturer = $manufacturer->load('assets.model', 'assets.assigneduser', 'assets.assetstatus', 'assets.company');
+        $manufacturer = $manufacturer->load(
+			'assets.model', 
+			'assets.assigneduser', 
+			'assets.assetstatus', 
+			'assets.company'
+		);
         $manufacturer_assets = $manufacturer->assets;
 
         if (Input::has('search')) {
@@ -304,7 +313,7 @@ class ManufacturersController extends Controller
         $rows = array();
 
         foreach ($manufacturer_assets as $asset) {
-
+			$inout = '';
             $actions = '';
             if ($asset->deleted_at=='') {
                 $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
@@ -326,12 +335,30 @@ class ManufacturersController extends Controller
                 'id' => $asset->id,
                 'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
                 'model' => e($asset->model->name),
-                'asset_tag' => e($asset->asset_tag),
+				'model_number' => ($asset->model && $asset->model->model_number) ? (string)$asset->model->model_number : '',
+				
+				'location'      => /*($asset->assetloc) ? e($asset->assetloc->name): '',*/
+					(($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? 
+						(string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : 
+						(($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
+				
+				'eol'                 => ($asset->eol_date()) ? $asset->eol_date() : '',
+				'warranty_months'     => ($asset->warranty_months) ? $asset->warranty_months . ' ' . trans('admin/hardware/form.months') : '',
+				'warrantee_expires'   => ($asset->warrantee_expires()) ? $asset->warrantee_expires() : '',
+				'purchase_date'       => ($asset->purchase_date) ? $asset->purchase_date : '',
+				
+				
+				'asset_tag' => e($asset->asset_tag),
                 'serial' => e($asset->serial),
                 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
-                'actions' => $actions,
+                'change'        => ($inout) ? $inout : '',
+				'actions' => $actions,
                 // 'companyName' => e(Company::getName($asset)),
-                'companyName' => is_null($asset->company) ? '' : $asset->company->name
+                'companyName' => is_null($asset->company) ? '' : $asset->company->name,
+				'manufacturer' => ($asset->model && $asset->model->manufacturer && $asset->model->manufacturer->name) ? 
+								(string) link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', $asset->model->manufacturer->name) : '',
+				'category' => ($asset->model && $asset->model->category && $asset->model->category->name) ? 
+								(string) link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', $asset->model->category->name) : ''	
                 );
 
             if (isset($inout)) {
@@ -448,12 +475,14 @@ class ManufacturersController extends Controller
             $company = $accessory->company;
 
             $rows[] = array(
+			'id'            => $accessory->id,
             'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
             'qty'           => e($accessory->qty),
             'order_number'  => e($accessory->order_number),
             'min_amt'  => e($accessory->min_amt),
-            'location'      => ($accessory->location) ? e($accessory->location->name): '',
+            'location'      => /* ($accessory->location) ? e($accessory->location->name): '', */
+								($accessory->location) ? (string)link_to('admin/settings/locations/'.$accessory->location->id.'/view',e($accessory->location->name)) : '',
             'purchase_date' => e($accessory->purchase_date),
             'purchase_cost' => number_format($accessory->purchase_cost, 2),
             'numRemaining'  => $accessory->numRemaining(),
@@ -517,7 +546,8 @@ class ManufacturersController extends Controller
             $rows[] = array(
                 'id'            => $consumable->id,
                 'name'          => (string)link_to('admin/consumables/'.$consumable->id.'/view', e($consumable->name)),
-                'location'      => ($consumable->location) ? e($consumable->location->name) : '',
+                'location'      => /* ($consumable->location) ? e($consumable->location->name) : '', */
+									($consumable->location) ? (string)link_to('admin/settings/locations/'.$consumable->location->id.'/view',e($consumable->location->name)) : '',
                 'min_amt'       => e($consumable->min_amt),
                 'qty'           => e($consumable->qty),
                 'manufacturer'  => ($consumable->manufacturer) ? (string) link_to('/admin/settings/manufacturers/'.$consumable->manufacturer_id.'/view', $consumable->manufacturer->name): '',
@@ -534,6 +564,103 @@ class ManufacturersController extends Controller
         }
 
         $data = array('total' => $consumCount, 'rows' => $rows);
+
+        return $data;
+    }
+    public function getDataComponentsView($manufacturer)
+    {
+
+        $manufacturer = $manufacturer->load(
+            //'components.location',
+            'components.model',
+			// 'components.model.category', 
+			'components.model.manufacturer',
+			'components.company'
+        );
+
+		/*
+        $manufacturer = $manufacturer->load(
+            'components.*'
+        );
+		*/
+		
+		$components = $manufacturer->components;
+
+		
+		
+		
+		/*
+		$components = $manufacturer->load(
+            'components.location',
+            'components.company',
+            'components.model',
+			'components.model.category', 
+			'components.model.manufacturer'
+		);
+		*/
+        
+
+        if (Input::has('search')) {
+            $components = $components->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $componCount = $components->count();
+
+        $rows = array();
+
+        foreach ($components as $component) {
+            $actions = '<nobr>';
+            if (Gate::allows('components.checkout')) {
+                $actions .= '<a href="' . route('checkout/component',
+                        $component->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+            }
+
+            if (Gate::allows('components.edit')) {
+                $actions .= '<a href="' . route('update/component',
+                        $component->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            }
+            if (Gate::allows('components.delete')) {
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/component',
+                        $component->id) . '" data-content="' . trans('admin/components/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($component->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            }
+
+            $actions .='</nobr>';
+
+            $company = $component->company;
+
+            $rows[] = array(
+                'id'             => $component->id,
+                'name'           => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
+				'component_tag'  => e($component->component_tag),
+				'serial'         => $component->serial,
+				'model'          => ($component->model) ? (string)link_to('/hardware/models/'.$component->model->id.'/view', e($component->model->name)) : 'No model',
+				'model_number'   => ($component->model && $component->model->model_number) ? (string)$component->model->model_number : '',
+                'location'       => ($component->location) ? (string)link_to('admin/settings/locations/'.$component->location->id.'/view',e($component->location->name)) : '',
+ 				'category'       => ($component->model && $component->model->category && $component->model->category->name) ? 
+									(string)link_to('/admin/settings/categories/'.$component->model->category->id.'/view', e($component->model->category->name)) : '',
+				'manufacturer'   => ($component->model && $component->model->manufacturer && $component->model->manufacturer->name) ? 
+									(string)link_to('/admin/settings/manufacturers/'.$component->model->manufacturer->id.'/view', e($component->model->manufacturer->name)) : '',
+                'purchase_date'  => e($component->purchase_date),
+                'purchase_cost'  => Helper::formatCurrencyOutput($component->purchase_cost),//($component->purchase_cost!='') ? number_format($component->purchase_cost, 2): '' ,
+				'notes'          => e($component->notes),
+				'order_number'   => e($component->order_number),	
+                'qty'            => e($component->qty),				
+				'min_amt'        => e($component->min_amt),
+				'numRemaining'   => $component->numRemaining(),
+                //'item_no'       => e($component->item_no),
+                'actions'        => $actions,
+                'companyName'    => is_null($company) ? '' : e($company->name),
+
+            );
+        }
+
+        $data = array('total' => $componCount, 'rows' => $rows);
 
         return $data;
     }

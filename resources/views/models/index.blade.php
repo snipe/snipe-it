@@ -38,10 +38,11 @@
             <tr>
               <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
               <th data-sortable="true" data-field="image"  data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
+			  <th data-sortable="true" data-field="name">{{ trans('admin/models/table.name') }}</th>
               <th data-sortable="false" data-field="manufacturer">{{ trans('general.manufacturer') }}</th>
-              <th data-sortable="true" data-field="name">{{ trans('admin/models/table.title') }}</th>
               <th data-sortable="true" data-field="modelnumber">{{ trans('admin/models/table.modelnumber') }}</th>
               <th data-sortable="false" data-field="numassets">{{ trans('admin/models/table.numassets') }}</th>
+			  <th data-sortable="false" data-field="numcomponents">{{ trans('admin/models/table.numcomponents') }}</th>
               <th data-sortable="false" data-field="depreciation">{{ trans('general.depreciation') }}</th>
               <th data-sortable="false" data-field="category">{{ trans('general.category') }}</th>
               <th data-sortable="true" data-field="eol">{{ trans('general.eol') }}</th>

@@ -5,6 +5,6 @@ return array(
     'id'      					=> 'ID',
     'parent'   					=> 'Parent',
     'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'title'      				=> 'Category Name',
 
 );

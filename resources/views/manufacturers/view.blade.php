@@ -29,16 +29,19 @@
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active">
-            <a href="#assets" data-toggle="tab">Assets</a>
+            <a href="#assets" data-toggle="tab">{{ trans('general.assets') }}</a>
           </li>
           <li>
-            <a href="#licenses" data-toggle="tab">Licenses</a>
+            <a href="#licenses" data-toggle="tab">{{ trans('general.licenses') }}</a>
           </li>
           <li>
-            <a href="#accessories" data-toggle="tab">Accessories</a>
+            <a href="#accessories" data-toggle="tab">{{ trans('general.accessories') }}</a>
           </li>
           <li>
-            <a href="#consumables" data-toggle="tab">Consumables</a>
+            <a href="#consumables" data-toggle="tab">{{ trans('general.consumables') }}</a>
+          </li>
+          <li>
+            <a href="#components" data-toggle="tab">{{ trans('general.components') }}</a>
           </li>
         </ul>
         <div class="tab-content">
@@ -54,17 +57,23 @@
             >
               <thead>
                 <tr>
-                  <th data-searchable="false" data-sortable="false" data-field="companyName" data-visible="false">
-                      {{ trans('admin/companies/table.title') }}
-                  </th>
-                  <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.name') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="assigned_to">{{ trans('general.user') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="change"  data-switchable="false">{{ trans('admin/hardware/table.change') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="actions"  data-switchable="false">{{ trans('table.actions') }}</th>
+				  <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+                  <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
+                  <th data-sortable="true" data-field="name" data-visible="false">{{ trans('admin/hardware/form.name') }}</th>
+				  <th data-sortable="true" data-field="asset_tag">{{ trans('admin/hardware/table.asset_tag') }}</th>
+				  <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
+                  <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+				  <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
+				  <th data-sortable="true" data-field="manufacturer" data-visible="false">{{ trans('general.manufacturer') }}</th>
+				  <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('general.category') }}</th>
+				  <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
+				  <th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
+				  <th data-sortable="true" data-field="warranty_months" data-searchable="true">{{ trans('admin/hardware/form.warranty') }}</th>
+				  <th data-sortable="true" data-field="warrantee_expires" data-searchable="true">{{ trans('admin/hardware/form.expires') }}</th>
+				  <th data-sortable="true" data-field="eol" data-searchable="true">{{ trans('general.eol') }}</th>
+                  <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
+				  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{ trans('admin/hardware/table.change') }}</th>
+				  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
                 </tr>
               </thead>
             </table>
@@ -114,6 +123,7 @@
             >
               <thead>
                 <tr>
+				  <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                   <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                   <th data-sortable="true" data-searchable="true"  data-field="name">{{ trans('admin/accessories/table.title') }}</th>
                   <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('admin/accessories/general.accessory_category') }}</th>
@@ -132,7 +142,7 @@
           </div>
           <div class="tab-pane fade" id="consumables">
             <table
-              name="manufacturer_licenses"
+              name="manufacturer_consumables"
               class="table table-striped bootstrap-table snipe-table"
               id="licenses-table"
               data-url="{{ route('api.manufacturers.view', ['manufacturerId' => $manufacturer->id, 'itemtype' => 'consumables']) }}"
@@ -156,6 +166,39 @@
                   <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('admin/consumables/general.order') }}</th>
                   <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('admin/consumables/general.date') }}</th>
                   <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('admin/consumables/general.cost') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"> {{ trans('table.actions') }}</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="components">
+            <table
+              name="manufacturer_components"
+              class="table table-striped bootstrap-table snipe-table"
+              id="licenses-table"
+              data-url="{{ route('api.manufacturers.view', ['manufacturerId' => $manufacturer->id, 'itemtype' => 'components']) }}"
+              data-cookie="true"
+              data-click-to-select="true"
+              data-cookie-id-table="maufacturerLicensesTable-{{config('version.hash_version') }}"
+            >
+              <thead>
+                <tr>
+                  <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+                  <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName">{{ trans('admin/companies/table.title') }}</th>
+                  <th data-sortable="true" data-searchable="true" data-field="name">{{ trans('admin/components/table.title') }}</th>
+				  <th data-sortable="true" data-field="component_tag">{{ trans('admin/components/table.component_tag') }}</th>
+				  <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
+                  <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
+				  <th data-sortable="true" data-field="manufacturer" data-visible="false">{{ trans('general.manufacturer') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('general.category') }}</th>
+				  <th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty"> {{ trans('admin/components/general.total') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining"> {{ trans('admin/components/general.remaining') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="min_amt"> {{ trans('general.min_amt') }}</th>
+                  <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">{{ trans('admin/components/general.order') }}</th>
+                  <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">{{ trans('admin/components/general.date') }}</th>
+                  <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">{{ trans('admin/components/general.cost') }}</th>
                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"> {{ trans('table.actions') }}</th>
                 </tr>
               </thead>

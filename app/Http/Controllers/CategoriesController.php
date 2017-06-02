@@ -307,7 +307,7 @@ class CategoriesController extends Controller
     {
 
         $category = Category::find($categoryID);
-        $category = $category->load('assets.company', 'assets.model', 'assets.assetstatus', 'assets.assigneduser');
+        $category = $category->load('assets.company', 'assets.model', 'assets.assetstatus', 'assets.assigneduser', 'assets.assetloc');
         $category_assets = $category->assets();
         if (Input::has('search')) {
             $category_assets = $category_assets->TextSearch(e(Input::get('search')));
@@ -362,7 +362,14 @@ class CategoriesController extends Controller
                 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
                 'change' => $inout,
                 'actions' => $actions,
-                'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
+				'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/view', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/view', e($asset->defaultLoc->name)) : ''),
+				
+				'eol'                 => ($asset->eol_date()) ? $asset->eol_date() : '',
+				'warranty_months'     => ($asset->warranty_months) ? $asset->warranty_months . ' ' . trans('admin/hardware/form.months') : '',
+				'warrantee_expires'   => ($asset->warrantee_expires()) ? $asset->warrantee_expires() : '',
+				'purchase_date'       => ($asset->purchase_date) ? $asset->purchase_date : '',
+				
+				'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
         }
 

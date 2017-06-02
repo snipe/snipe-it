@@ -10,4 +10,8 @@ return array(
     'remaining' 			            => 'Remaining',
     'total' 			                => 'Total',
     'update'                            => 'Update Consumable',
+    'order'					            => 'Order Number',
+    'date'					            => 'Purchase Date',
+    'cost'				                => 'Purchase Cost',
+	
 );

@@ -32,6 +32,7 @@
           data-cookie-id-table="accessoriesTable-{{ config('version.hash_version') }}">
             <thead>
                 <tr>
+				   <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                   <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                   <th data-sortable="true" data-searchable="true"  data-field="name">{{ trans('admin/accessories/table.title') }}</th>
                   <th data-searchable="true" data-sortable="true" data-field="category">{{ trans('admin/accessories/general.accessory_category') }}</th>

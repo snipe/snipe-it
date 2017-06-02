@@ -53,12 +53,15 @@
           data-cookie-id-table="modeldetailsViewTable">
                 <thead>
                     <tr>
-
-                        <th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                         <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
+						<th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                         <th data-sortable="true" data-field="name" data-searchable="true">{{ trans('general.name') }}</th>
                         <th data-sortable="true" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
                         <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
+						<th data-searchable="true" data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
+						<th data-sortable="true" data-field="purchase_date" data-searchable="true" data-visible="false">{{ trans('admin/hardware/form.date') }}</th>
+						<th data-sortable="true" data-field="warranty_months" data-searchable="true">{{ trans('admin/hardware/form.warranty') }}</th>
+						<th data-sortable="true" data-field="warrantee_expires" data-searchable="true">{{ trans('admin/hardware/form.expires') }}</th>
                         <th data-sortable="false" data-field="assigned_to">{{ trans('general.user') }}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
                     </tr>

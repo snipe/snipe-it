@@ -35,7 +35,7 @@
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                 <th data-sortable="true" data-field="name">{{ trans('admin/categories/table.title') }}</th>
                 <th data-sortable="true" data-field="category_type">{{ trans('general.type') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="count">{{ trans('general.assets') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="count">{{ trans('admin/categories/general.total') }}</th>
                 <th data-searchable="false" data-sortable="true" data-field="acceptance">{{ trans('admin/categories/table.require_acceptance') }}</th>
                 <th data-searchable="false" data-sortable="true" data-field="eula">{{ trans('admin/categories/table.eula_text') }}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>

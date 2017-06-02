@@ -67,6 +67,10 @@ class Manufacturer extends SnipeModel
         return $this->hasMany('\App\Models\Consumable', 'manufacturer_id');
     }
 
+    public function components()
+    {
+        return $this->hasManyThrough('\App\Models\Component', '\App\Models\AssetModel',  'manufacturer_id', 'model_id');
+    }
     /**
     * Query builder scope to search on text
     *
