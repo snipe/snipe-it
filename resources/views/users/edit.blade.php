@@ -159,7 +159,7 @@
             </div>
             <div class="col-md-4">
               @if ($user->ldap_import!='1')
-                <a href="#" class="left" id="genPassword">Generate</a>
+                <a href="#" class="left" id="genPassword">{{ trans('admin/users/table.generate') }}</a>
               @endif
             </div>
           </div>
