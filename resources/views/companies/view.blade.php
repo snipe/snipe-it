@@ -17,45 +17,44 @@
 
                     <li class="active">
                         <a href="#asset_tab" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <i class="fa fa-barcode"></i>
-            </span>
+                            <span class="hidden-lg hidden-md">
+                            <i class="fa fa-barcode"></i>
+                            </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#licenses_tab" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <i class="fa fa-floppy-o"></i>
-            </span>
+                            <span class="hidden-lg hidden-md">
+                            <i class="fa fa-floppy-o"></i>
+                            </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#accessories_tab" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <i class="fa fa-keyboard-o"></i>
-            </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
+                            <span class="hidden-lg hidden-md">
+                            <i class="fa fa-keyboard-o"></i>
+                            </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#consumables_tab" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <i class="fa fa-tint"></i></span>
+                            <span class="hidden-lg hidden-md">
+                            <i class="fa fa-tint"></i></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
                         </a>
                     </li>
-
 
 
                 </ul>
 
                 <div class="tab-content">
 
-                    <div class="tab-pane" id="asset_tab">
+                    <div class="tab-pane fade in active" id="asset_tab">
                         <!-- checked out assets table -->
                         <div class="table-responsive">
                             <table
@@ -64,8 +63,7 @@
                                     id="table"
                                     data-url="{{route('api.assets.index',['company_id' => $company->id]) }}"
                                     data-cookie="true"
-                                    data-click-to-select="true"
-                                    data-cookie-id-table="lcompanyAssetsTable-{{ config('version.hash_version') }}">
+                                    data-cookie-id-table="companyAssetsTable-{{ config('version.hash_version') }}">
                                 <thead>
                                 <tr>
                                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
