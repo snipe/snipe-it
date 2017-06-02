@@ -6,11 +6,11 @@ return array(
     'add'    	                => 'Dodaj nowy',
     'cancel'                    => 'Anuluj',
     'checkin_and_delete'  	    => 'Odbierz i usuń użytkownika',
-    'delete'  	                => 'Kasuj',
+    'delete'  	                => 'Usuń',
     'edit'    	                => 'Edycja',
     'restore' 	                => 'Przywróć',
     'request'                   => 'Zamówienie',
     'submit'  	                => 'Zatwierdź',
-    'upload'                    => 'Wgraj',
+    'upload'                    => 'Prześlij',
 
 );
