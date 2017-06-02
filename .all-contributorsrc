@@ -646,6 +646,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "BrettFagerlund",
+      "name": "Brett",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10522541?v=3",
+      "profile": "https://github.com/BrettFagerlund",
+      "contributions": [
+        "test"
+      ]
     }
   ]
 }
