@@ -558,9 +558,9 @@ class LicensesController extends Controller
 
             // Update the asset data
             if (e(Input::get('assigned_to')) == '') {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = '{{ trans('general.licenses') }} <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+                $slack_msg = '{{ trans('general.licenses') }} <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             }
 
 
