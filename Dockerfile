@@ -1,14 +1,18 @@
-FROM debian:jessie-slim
+FROM ubuntu:xenial
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
 RUN apt-get update && apt-get install -y \
+apache2 \
 apache2-bin \
-libapache2-mod-php5 \
-php5-curl \
-php5-ldap \
-php5-mysql \
-php5-mcrypt \
-php5-gd \
+libapache2-mod-php7.0 \
+php7.0-curl \
+php7.0-ldap \
+php7.0-mysql \
+php7.0-mcrypt \
+php7.0-gd \
+php7.0-xml \
+php7.0-mbstring \
+php7.0-zip \
 patch \
 curl \
 vim \
@@ -17,13 +21,13 @@ mysql-client \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN php5enmod mcrypt
-RUN php5enmod gd
+RUN phpenmod mcrypt
+RUN phpenmod gd
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php5/apache2/php.ini
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php5/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/cli/php.ini
 
-RUN useradd --uid 1000 --gid 50 docker
+RUN useradd -m --uid 1000 --gid 50 docker
 
 RUN echo export APACHE_RUN_USER=docker >> /etc/apache2/envvars
 RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
@@ -66,7 +70,9 @@ RUN \
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
 
 # Get dependencies
-RUN cd /var/www/html;composer install
+USER docker
+RUN cd /var/www/html;composer install && rm -rf /home/docker/.composer/cache
+USER root
 
 ############### APPLICATION INSTALL/INIT #################
 
@@ -86,7 +92,13 @@ VOLUME ["/var/lib/snipeit"]
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Add Tini
+ENV TINI_VERSION v0.14.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+
+CMD ["/entrypoint.sh"]
 
 EXPOSE 80
 EXPOSE 443

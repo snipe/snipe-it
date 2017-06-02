@@ -1,5 +1,4 @@
 #!/bin/sh
-cd /var/www/html
 
 # fix key if needed
 if [ -z "$APP_KEY" ]
