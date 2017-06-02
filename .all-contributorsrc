@@ -656,6 +656,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "jasonspriggs",
+      "name": "Jason Spriggs",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/16108587?v=3",
+      "profile": "http://jasonspriggs.com",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
