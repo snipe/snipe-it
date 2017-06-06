@@ -13,9 +13,14 @@
   "/css/overrides.css": "/css/overrides.css",
   "/css/skin-blue.css": "/css/skin-blue.css",
   "/vue.js": "/vue.js",
+  "/vue.js.map": "/vue.js.map",
   "/public/css/AdminLTE.css": "/public/css/AdminLTE.css",
   "/public/css/app.css": "/public/css/app.css",
   "/public/css/overrides.css": "/public/css/overrides.css",
+  "/mix.js.map": "/mix.js.map",
+  "/public/css/AdminLTE.css.map": "/public/css/AdminLTE.css.map",
+  "/public/css/app.css.map": "/public/css/app.css.map",
+  "/public/css/overrides.css.map": "/public/css/overrides.css.map",
   "public/css/dist/all.css": "public/css/dist/all.css",
   "public/js/dist/all.js": "public/js/dist/all.js"
 }
