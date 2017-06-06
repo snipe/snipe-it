@@ -3,6 +3,9 @@ const { mix } = require('laravel-mix');
 
 mix.setPublicPath('build'); //this throws everything to root dir 'build'
 
+
+// This generates a file called app.css, which we use
+// later on to build all.css
 mix
     .options(
         {
@@ -14,10 +17,7 @@ mix
     .less('resources/assets/less/app.less', 'public/css')
     .less('resources/assets/less/overrides.less', 'public/css')
 
-
-
 mix.styles([
-    //'public/css/app.css', //what is this file, is this wrong? Are we building from ourselves?
     'build/public/css/app.css',
     'public/css/AdminLTE.css',
     'resources/assets/css/font-awesome/font-awesome.min.css',
@@ -30,7 +30,7 @@ mix.styles([
 mix.js(
     // jQuery is loaded from vue.js webpack process
     './resources/assets/js/vue.js', //this is Snipe-IT's initializer for Vue.js
-    'build/public'
+    'build'
 ).sourceMaps();
 
 mix.scripts([
