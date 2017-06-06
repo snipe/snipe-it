@@ -16,7 +16,7 @@
   <div class="col-md-12">
 
     <div class="error-page" style="padding-top: 200px">
-      <img src="{{ url('/') }}/assets/img/sad-panda.png" style="width: 200px; height: 200px;" class="pull-left">
+      <img src="{{ url('/') }}/img/sad-panda.png" style="width: 200px; height: 200px;" class="pull-left">
             <div class="error-content">
               <h3><i class="fa fa-warning text-yellow"></i> 403 Forbidden.</h3>
               <p>

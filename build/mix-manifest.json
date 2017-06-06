@@ -14,6 +14,8 @@
   "/css/skin-blue.css": "/css/skin-blue.css",
   "/public//vue.js": "/public//vue.js",
   "/public/css/AdminLTE.css": "/public/css/AdminLTE.css",
+  "/public/css/app.css": "/public/css/app.css",
+  "/public/css/overrides.css": "/public/css/overrides.css",
   "public/css/dist/all.css": "public/css/dist/all.css",
   "public/js/dist/all.js": "public/js/dist/all.js"
 }

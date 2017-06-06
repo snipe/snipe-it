@@ -15,7 +15,7 @@
           <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
           <link rel="stylesheet" href="{{ asset('css/skins/skin-blue.css') }}">
         <link rel="stylesheet" href="{{ asset('js/plugins/select2/select2.min.css') }}">
-          <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
+          <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
 
 
 
@@ -126,7 +126,7 @@
                   </div>
               </div>
           </div>
-          <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
+          <script src="{{ asset(mix('assets/js/all.js')) }}"></script>
 
         <script>
             $(function () {
