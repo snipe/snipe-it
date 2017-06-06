@@ -263,7 +263,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="300"></canvas>
+                            <canvas id="statusPieChart" height="170"></canvas>
                         </div> <!-- ./chart-responsive -->
                     </div> <!-- /.col -->
                 </div> <!-- /.row -->
