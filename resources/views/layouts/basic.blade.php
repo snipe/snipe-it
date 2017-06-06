@@ -11,7 +11,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('js/plugins/select2/select2.min.css') }}">

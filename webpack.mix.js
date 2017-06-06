@@ -1,13 +1,14 @@
 
 const { mix } = require('laravel-mix');
 
-mix.setPublicPath('build');
+mix.setPublicPath('build'); //this throws everything to root dir 'build'
 
 mix
     .options(
         {
             processCssUrls: false,
-            processFontUrls: false
+            processFontUrls: true,
+            clearConsole: false
         })
     .less('resources/assets/less/AdminLTE.less', 'public/css')
     .less('resources/assets/less/app.less', 'public/css')
@@ -16,22 +17,24 @@ mix
 
 
 mix.styles([
-    'public/css/app.css',
+    //'public/css/app.css', //what is this file, is this wrong? Are we building from ourselves?
+    'build/public/css/app.css',
     'public/css/AdminLTE.css',
     'resources/assets/css/font-awesome/font-awesome.min.css',
     './bower_components/iCheck/skins/minimal/minimal.css',
     './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
     'public/css/overrides.css',
+
 ], 'public/css/dist/all.css');
 
 mix.js(
     // jQuery is loaded from vue.js webpack process
     './resources/assets/js/vue.js', //this is Snipe-IT's initializer for Vue.js
-    'public/build'
-);
+    'build/public'
+).sourceMaps();
 
 mix.scripts([
-    'public/build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
+    'build/public/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
     './node_modules/tether/dist/js/tether.min.js',
     './bower_components/jquery-ui/jquery-ui.js',
     './bower_components/jquery-slimscroll/jquery.slimscroll.js',
