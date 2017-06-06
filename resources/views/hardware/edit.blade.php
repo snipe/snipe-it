@@ -165,6 +165,13 @@
 @include('partials/modals')
 <script>
 
+    $('.datepicker').datepicker();
+
+
+
+
+
+
     function fetchCustomFields() {
         var modelid = $('#model_select_id').val();
         if (modelid == '') {
