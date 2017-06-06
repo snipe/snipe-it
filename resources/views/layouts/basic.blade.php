@@ -8,9 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Snipe-IT</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <!-- Font Awesome -->
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('js/plugins/select2/select2.min.css') }}">
