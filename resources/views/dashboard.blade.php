@@ -152,7 +152,7 @@
                         </p>
 
                         <div class="chart">
-                            <canvas id="salesChart" style="height:200px"></canvas>
+                            <canvas id="salesChart-temp" style="height:200px"></canvas>
                         </div>
                         <!-- /.chart-responsive -->
                     </div>
@@ -263,7 +263,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="150"></canvas>
+                            <canvas id="statusPieChart" height="300"></canvas>
                         </div> <!-- ./chart-responsive -->
                     </div> <!-- /.col -->
                 </div> <!-- /.row -->
@@ -387,35 +387,32 @@
 
 
 
-        var ctx = document.getElementById('salesChart').getContext("2d")
-        var myChart = new Chart(ctx, {
-            type: 'line'
+        //var ctx = document.getElementById('salesChart').getContext("2d")
+        //var myChart = new Chart(ctx, {
+         //   type: 'line'
+        //});
 
 
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '{{  route('api.statuslabels.assets.bytype') }}',
+        //    headers: {
+        //        "X-Requested-With": 'XMLHttpRequest',
+        //        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        //    },
 
-        });
-
-
-        $.ajax({
-            type: 'GET',
-            url: '{{  route('api.statuslabels.assets.bytype') }}',
-            headers: {
-                "X-Requested-With": 'XMLHttpRequest',
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-
-            dataType: 'json',
-            success: function (data) {
-                var ctx = new Chart(ctx,{
-                    type: 'line',
-                    data: data,
-                    options: lineOptions
-                });
-            },
-            error: function (data) {
-                window.location.reload(true);
-            }
-        });
+        //    dataType: 'json',
+        //   success: function (data) {
+        //       var ctx = new Chart(ctx,{
+        //          type: 'line',
+        //            data: data,
+        //            options: lineOptions
+        //        });
+        //    },
+        //    error: function (data) {
+       //         window.location.reload(true);
+       //     }
+       // });
 
 
 
