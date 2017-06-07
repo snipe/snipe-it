@@ -25,12 +25,12 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'Datei wurde nicht gelöscht. Bitte noch einmal Probieren.',
+        'error'   => 'Datei wurde nicht gelöscht. Bitte versuchen Sie es erneut.',
         'success' => 'Datei erfolgreich gelöscht.',
     ),
 
     'upload' => array(
-        'error'   => 'Datei(en) wurde nicht hochgeladen. Bitte noch einmal Probieren.',
+        'error'   => 'Datei(en) wurde(n) nicht hochgeladen. Bitte versuchen Sie es erneut.',
         'success' => 'Datei(en) erfolgreich hochgeladen.',
         'nofiles' => 'Es wurde keine Datei für den Upload ausgewählt, oder die Datei ist zu groß',
         'invalidfiles' => 'Eine oder mehrere Ihrer Dateien ist zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',

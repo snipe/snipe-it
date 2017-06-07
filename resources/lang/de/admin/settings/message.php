@@ -8,10 +8,10 @@ return array(
         'success'               => 'Die Einstellungen wurden erfolgreich aktualisiert.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Backup Datei wirklich löschen? Aktion kann nicht rückgängig gemacht werden. ',
-        'file_deleted'          => 'Backup Datei erfolgreich gelöscht. ',
-        'generated'             => 'Backup Datei erfolgreich erstellt.',
-        'file_not_found'        => 'Backup Datei konnte nicht gefunden werden.',
+        'delete_confirm'        => 'Backup-Datei wirklich löschen? Aktion kann nicht rückgängig gemacht werden. ',
+        'file_deleted'          => 'Backup-Datei erfolgreich gelöscht. ',
+        'generated'             => 'Backup-Datei erfolgreich erstellt.',
+        'file_not_found'        => 'Backup-Datei konnte nicht gefunden werden.',
     ),
     'purge' => array(
         'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',

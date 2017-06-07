@@ -21,7 +21,7 @@ return array(
     'update'                => 'Lieferanten bearbeiten',
     'url'                   => 'URL',
     'view'                  => 'Lieferanten ansehen',
-    'view_assets_for'       => 'Assets anschauen von',
+    'view_assets_for'       => 'Assets ansehen von',
     'zip'                   => 'Postleitzahl',
 
 );

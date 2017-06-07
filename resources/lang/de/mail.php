@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'a_user_canceled' => 'Eine Geräte Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
+    'a_user_canceled' => 'Eine Geräte-Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',
     'accessory_name' => 'Zubehör Name:',
     'additional_notes' => 'Zusätzliche Bemerkungen:',
@@ -52,16 +52,16 @@ return array(
     'read_the_terms' => 'Bitte lesen Sie die nachfolgenden Nutzungsbedingungen.',
     'read_the_terms_and_click' => 'Bitte lesen Sie die Nutzungsbedingungen und klicken Sie auf den Link unten, um zu bestätigen, dass Sie diese gelesen und die Nutzungsbedingungen und den Gegenstand erhalten haben.',
     'requested' => 'Angefordert:',
-    'reset_link' => 'Ihr Link zum Zurücksetzen des Kennworts',
+    'reset_link' => 'Ihr Link zum Zurücksetzen des Passworts',
     'reset_password' => 'Klicken Sie hier, um Ihr Passwort zurückzusetzen:',
     'serial' => 'Seriennummer:',
     'supplier' => 'Lieferant',
     'tag' => 'Kennzeichnung',
     'test_email' => 'Test E-Mail von Snipe-IT',
-    'test_mail_text' => 'Dies ist ein Test von Snipe-IT-Asset-Management-System. Wenn du dies erhalten hast funktioniert das Senden von Mails :)',
+    'test_mail_text' => 'Dies ist ein Test von Snipe-IT-Asset-Management-System. Wenn Sie das erhalten haben, funktioniert das Senden von Mails :)',
     'the_following_item' => 'Der folgende Gegenstand wurde eingecheckt: ',
     'There_are' => 'Da ist {1} | [2, Inf] Da sind',
-    'to_reset' => 'Zum zurücksetzen Ihres :web Passwortes füllen Sie dies Formular aus:',
+    'to_reset' => 'Zum zurücksetzen Ihres :web Passwortes füllen Sie dieses Formular aus:',
     'type' => 'Typ',
     'user' => 'Benutzer:',
     'username' => 'Benutzername:',
