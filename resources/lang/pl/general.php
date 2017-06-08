@@ -107,7 +107,7 @@
     'min_amt_help'	=> 'Minimalna ilość dostępnych przedmiotów, poniżej której wyzwalany jest alarm.',
     'model_no'				=> 'Model nr.',
     'months'				=> 'miesięcy',
-    'moreinfo'				=> 'Więcej informacji',
+    'more_info'				=> 'Więcej informacji',
     'name'					=> 'Nazwa',
     'next'					=> 'Następny',
     'new'					=> 'nowy!',
