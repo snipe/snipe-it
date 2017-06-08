@@ -51,9 +51,10 @@ LDAP User Sync
   </div>
 </div>
 
+@if (Session::get('summary'))
 <div class="row">
   <div class="col-md-12">
-    @if (Session::get('summary'))
+
     <div class="box box-default">
       <div class="box-header with-border">
         <h3 class="box-title">Synchronization Results</h3>
@@ -87,8 +88,10 @@ LDAP User Sync
       </div>
     </div>
     @endif
+
   </div>
 </div>
+@endif
 
 @stop
 
