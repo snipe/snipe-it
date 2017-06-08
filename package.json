@@ -23,6 +23,7 @@
   "dependencies": {
     "blueimp-file-upload": "^9.18.0",
     "bootstrap-colorpicker": "^2.5.1",
+    "bootstrap-datepicker": "^1.6.4",
     "bootstrap-less": "^3.3.8",
     "ekko-lightbox": "^5.1.1",
     "fastclick": "^1.0.6",

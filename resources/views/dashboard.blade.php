@@ -131,11 +131,12 @@
 
 @else
 
+
 <div class="row">
     <div class="col-md-9">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Monthly Recap Report</h3>
+                <h3 class="box-title">This Chart Doesn't Do Anything Yet</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -151,7 +152,7 @@
                         </p>
 
                         <div class="chart">
-                            <canvas id="salesChart" style="height:200px"></canvas>
+                            <canvas id="salesChart-temp" style="height:200px"></canvas>
                         </div>
                         <!-- /.chart-responsive -->
                     </div>
@@ -262,7 +263,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="150"></canvas>
+                            <canvas id="statusPieChart" height="170"></canvas>
                         </div> <!-- ./chart-responsive -->
                     </div> <!-- /.col -->
                 </div> <!-- /.row -->
@@ -381,40 +382,37 @@
          */
 
         // -----------------------
-        // - MONTHLY SALES CHART -
+        // - LINE CHART -
         // -----------------------
 
 
 
-        var ctx = document.getElementById('salesChart').getContext("2d")
-        var myChart = new Chart(ctx, {
-            type: 'line'
+        //var ctx = document.getElementById('salesChart').getContext("2d")
+        //var myChart = new Chart(ctx, {
+         //   type: 'line'
+        //});
 
 
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '{{  route('api.statuslabels.assets.bytype') }}',
+        //    headers: {
+        //        "X-Requested-With": 'XMLHttpRequest',
+        //        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        //    },
 
-        });
-
-
-        $.ajax({
-            type: 'GET',
-            url: '{{  route('api.statuslabels.assets.bytype') }}',
-            headers: {
-                "X-Requested-With": 'XMLHttpRequest',
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-
-            dataType: 'json',
-            success: function (data) {
-                var ctx = new Chart(ctx,{
-                    type: 'line',
-                    data: data,
-                    options: lineOptions
-                });
-            },
-            error: function (data) {
-                window.location.reload(true);
-            }
-        });
+        //    dataType: 'json',
+        //   success: function (data) {
+        //       var ctx = new Chart(ctx,{
+        //          type: 'line',
+        //            data: data,
+        //            options: lineOptions
+        //        });
+        //    },
+        //    error: function (data) {
+       //         window.location.reload(true);
+       //     }
+       // });
 
 
 

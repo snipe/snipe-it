@@ -13,10 +13,10 @@ System Unavailable
 
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
 
-    <div class="error-page" style="padding-top: 200px">
-      <img src="{{ url('/') }}/assets/img/sad-panda.png" style="width: 200px; height: 200px;" class="pull-left">
+    <div style="padding-top: 200px">
+      <img src="{{ url('/') }}/img/sad-panda.png" style="width: 200px; height: 200px;" class="pull-left">
             <div class="error-content">
               <h2><i class="fa fa-warning text-yellow"></i> System Unavailable</h2>
               <p>
