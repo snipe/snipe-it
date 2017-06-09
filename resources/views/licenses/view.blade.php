@@ -339,58 +339,24 @@
         <div class="tab-pane" id="tab_3">
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-hover table-fixed break-word">
+              <table
+                      class="table table-striped snipe-table"
+                      name="assetHistory"
+                      id="table"
+                      data-sort-order="desc"
+                      data-height="400"
+                      data-url="{{ route('api.activity.index', ['item_id' => $license->id, 'item_type' => 'license']) }}">
                 <thead>
-
-
-                  <tr>
-                    <th class="col-md-2">{{ trans('general.date') }}</th>
-                    <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
-                    <th class="col-md-2"><span class="line"></span>{{ trans('button.actions') }}</th>
-                    <th class="col-md-2"><span class="line"></span>{{ trans('general.target') }}</th>
-                    <th class="col-md-4"><span class="line"></span>{{ trans('general.notes') }}</th>
-                  </tr>
+                <tr>
+                  <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+                  <th class="col-sm-2" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
+                </tr>
                 </thead>
-                <tbody>
-                  @if (count($license->assetlog) > 0)
-                    @foreach ($license->assetlog as $log)
-                    @php $result = $log->present()->forDataTable()
-                    @endphp
-                    <tr>
-                      <td>{{ $result['created_at'] }}</td>
-                      <td>
-                      {!! $result['admin'] !!}
-                      </td>
-                      <td>{{ $result['action_type'] }}</td>
-
-                      <td>
-                      {!! $result['target'] !!}
-                      </td>
-
-                      <td>
-                      {{ $result['note'] }}
-                      </td>
-                    </tr>
-                    @endforeach
-                  @endif
-                  <tr>
-                    <td>{{ $license->created_at }}</td>
-                    <td>
-                      @if ($license->adminuser)
-                        {{ $license->adminuser->present()->fullName() }}
-                      @else
-                        {{ trans('general.unknown_admin') }}
-                      @endif
-                    </td>
-                    <td>{{ trans('general.created_asset') }}</td>
-                    <td></td>
-                    <td>
-                      @if ($license->notes)
-                      {{ $license->notes }}
-                      @endif
-                    </td>
-                  </tr>
-                </tbody>
               </table>
             </div> <!-- /.col-md-12-->
           </div> <!-- /.row-->
@@ -436,3 +402,11 @@
 </div>
 
 @stop
+
+
+@section('moar_scripts')
+  @include ('partials.bootstrap-table', ['simple_view' => true])
+
+
+@stop
+
