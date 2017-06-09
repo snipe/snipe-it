@@ -673,6 +673,13 @@
 
     <script src="{{ mix('js/dist/all.js') }}"></script>
 
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+    </script>
+
     @section('moar_scripts')
     @show
 
@@ -680,6 +687,8 @@
     <script>
          $("#tagSearch").focus();
     </script>
+
+
         @endif
 
   </body>
