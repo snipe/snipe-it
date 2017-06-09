@@ -29,6 +29,11 @@ class ReportsController extends Controller
             $actionlogs = $actionlogs->where('target_id','=',$request->input('user_id'))->where('target_type','=','App\\Models\\User');
         }
 
+        if (($request->has('item_type'))  && ($request->has('item_id'))) {
+            $actionlogs = $actionlogs->where('item_id','=',$request->input('item_id'))
+                ->where('item_type','=',"App\\Models\\".ucwords($request->input('item_type')));
+        }
+
         $allowed_columns = [
             'id',
             'created_at'

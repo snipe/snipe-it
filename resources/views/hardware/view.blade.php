@@ -562,57 +562,24 @@
           <!-- checked out assets table -->
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-hover table-fixed break-word">
+              <table
+                      class="table table-striped snipe-table"
+                      name="assetHistory"
+                      id="table"
+                      data-sort-order="desc"
+                      data-height="400"
+                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
                 <thead>
-                  <tr>
-                      <th class="col-md-3">{{ trans('general.date') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('general.user') }}</th>
-                      <th class="col-md-3"><span class="line"></span>{{ trans('general.notes') }}</th>
-                      @if  ($snipeSettings->require_accept_signature=='1')
-                      <th class="col-md-3"><span class="line"></span>{{ trans('general.signature') }}</th>
-                      @endif
-                  </tr>
+                <tr>
+                  <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+                  <th class="col-sm-2" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
+                </tr>
                 </thead>
-                <tbody>
-                  @if (count($asset->assetlog) > 0)
-                    @foreach ($asset->assetlog as $log)
-                    @php $result = $log->present()->forDataTable();
-                    @endphp
-                      <tr>
-                        <td>{{ $result['created_at'] }}</td>
-                        <td> {!! $result['admin'] !!} </td>
-                        <td>{{ $result['action_type'] }}</td>
-                        <td>{!! $result['target'] !!} </td>
-                        <td>
-                          {{ $result['note'] }}
-                        </td>
-                        @if ($snipeSettings->require_accept_signature=='1')
-                        <td>
-                          @if (($log->accept_signature!='') && (($log->action_type=='accepted') || ($log->action_type=='declined')))
-                              <a href="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('log.signature.view', ['filename' => $log->accept_signature ]) }}" class="img-responsive"></a>
-                           @endif
-                        </td>
-                        @endif
-                      </tr>
-                    @endforeach
-                  @endif
-                  <!-- Add a "created asset" row to the log list.  This isn't an official log entry.-->
-                  <tr>
-                    <td>{{ $asset->created_at }}</td>
-                    <td>
-                    @if ($asset->adminuser)
-                      {{ $asset->adminuser->present()->fullName() }}
-                    @else
-                      {{ trans('general.unknown_admin') }}
-                    @endif
-                    </td>
-                    <td>{{ trans('general.created_asset') }}</td>
-                    <td></td> <!-- User -->
-                    <td></td> <!-- Notes -->
-                  </tr>
-                </tbody>
               </table>
             </div>
           </div> <!-- /.row -->
@@ -706,6 +673,8 @@
 @stop
 
 @section('moar_scripts')
+  @include ('partials.bootstrap-table', ['simple_view' => true])
+
 <script>
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
         event.preventDefault();
