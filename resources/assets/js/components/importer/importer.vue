@@ -1,6 +1,10 @@
 <style scoped>
 td {
-    font-size: 14px;
+    font-size: 13px;
+}
+
+th {
+    font-size: 13px;
 }
 </style>
 <template>
@@ -61,7 +65,7 @@ td {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="padding-top: 30px;">
                             <table class="table table-striped" id="upload-table">
                                 <thead>
                                     <th>File</th>
@@ -75,8 +79,8 @@ td {
                                         <td>{{ file.created_at }} </td>
                                         <td>{{ file.filesize }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-info" @click="showModal(file)"><i class="fa fa-spinner process"></i>Process</button>
-                                            <button class="btn btn-sm btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
+                                            <button class="btn btn-sm btn-info" @click="showModal(file)">Process</button>
+                                            <button class="btn btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

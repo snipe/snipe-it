@@ -13,12 +13,12 @@ mix
             processFontUrls: true,
             clearConsole: false
         })
-    .less('resources/assets/less/AdminLTE.less', 'public/css')
-    .less('resources/assets/less/app.less', 'public/css')
-    .less('resources/assets/less/overrides.less', 'public/css')
+    .less('resources/assets/less/AdminLTE.less', 'css')
+    .less('resources/assets/less/app.less', 'css')
+    .less('resources/assets/less/overrides.less', 'css')
 
 mix.styles([
-    'build/public/css/app.css',
+    'build/css/app.css',
     'public/css/AdminLTE.css',
     'resources/assets/css/font-awesome/font-awesome.min.css',
     './bower_components/iCheck/skins/minimal/minimal.css',
@@ -34,7 +34,7 @@ mix.js(
 ).sourceMaps();
 
 mix.scripts([
-    'build/public/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
+    'build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
     './node_modules/tether/dist/js/tether.min.js',
     './bower_components/jquery-ui/jquery-ui.js',
     './bower_components/jquery-slimscroll/jquery.slimscroll.js',
