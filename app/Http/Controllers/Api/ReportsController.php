@@ -25,8 +25,10 @@ class ReportsController extends Controller
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));
         }
 
-        if ($request->has('user_id')) {
-            $actionlogs = $actionlogs->where('target_id','=',$request->input('user_id'))->where('target_type','=','App\\Models\\User');
+        if (($request->has('target_type'))  && ($request->has('target_id'))) {
+            $actionlogs = $actionlogs->where('target_id','=',$request->input('target_id'))
+                ->where('target_type','=',"App\\Models\\".ucwords($request->input('target_type')));
+
         }
 
         if (($request->has('item_type'))  && ($request->has('item_id'))) {

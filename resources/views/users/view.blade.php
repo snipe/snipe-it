@@ -434,7 +434,7 @@
                     name="userActivityReport"
                     id="table4
                     data-sort-order="desc"
-                    data-url="{{ route('api.activity.index', ['user_id' => $user->id]) }}">
+                    data-url="{{ route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'user']) }}">
               <thead>
               <tr>
                 <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
@@ -457,6 +457,7 @@
 @stop
 
 @section('moar_scripts')
+  @include ('partials.bootstrap-table', ['simple_view' => true])
 <script>
 $(function () {
     //binds to onchange event of your input field
@@ -514,8 +515,4 @@ $(function () {
 </script>
 
 
-@stop
-
-@section('moar_scripts')
-  @include ('partials.bootstrap-table')
 @stop
