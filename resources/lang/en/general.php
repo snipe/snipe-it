@@ -27,6 +27,7 @@
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
+    'change' 		        => 'In/Out',
     'changeemail'  			=> 'Change Email Address',
     'changepassword'  		=> 'Change Password',
     'checkin'  				=> 'Checkin',
