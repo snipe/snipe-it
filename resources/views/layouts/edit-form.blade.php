@@ -30,9 +30,11 @@
             {{ $item->display_name }}
             @endif
             </h3>
-            <div class="box-tools pull-right">
-                <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
-            </div>
+                @if (isset($helpText))
+                    <div class="box-tools pull-right">
+                        <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
+                    </div>
+                @endif
             </div><!-- /.box-header -->
 
             <div class="box-body">
@@ -51,6 +53,8 @@
             </div>
         </div>
     </div>
+
+    @if ((isset($helpText)) && (isset($helpTitle)))
     <div class="slideout-menu">
         <a href="#" class="slideout-menu-toggle pull-right">×</a>
         <h3>
@@ -58,6 +62,7 @@
         </h3>
         <p>{{ $helpText }} </p>
     </div>
+    @endif
 </div>
 
 @stop

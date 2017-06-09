@@ -1,10 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/groups/titles.create') ,
     'updateText' => trans('admin/groups/titles.update'),
-    'helpTitle' => trans('admin/groups/general.about_groups_title'),
-    'helpText' => trans('admin/groups/general.about_groups_text'),
     'item' => $group,
-    'formAction' => ($group !== null && $group->id !== null) ? route('groups.update', ['accessory' => $group->id]) : route('groups.store'),
+    'formAction' => ($group !== null && $group->id !== null) ? route('groups.update', ['group' => $group->id]) : route('groups.store'),
 
 ])
 @section('content')
@@ -28,34 +26,40 @@
     </div>
 </div>
 
-<div class="col-md-8 col-md-offset-3">
 
     @foreach ($permissions as $area => $permission)
         @for ($i = 0; $i < count($permission); $i++)
+
+
             <?php
             $permission_name = $permission[$i]['permission'];
             ?>
             @if ($permission[$i]['display'])
-            <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
-            <p>{{ $permission[$i]['note'] }}</p>
+                <div class="col-md-12 col-md-offset-2">
+                    <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
+                    <p>{{ $permission[$i]['note'] }}</p>
 
-            <!-- radio -->
-            <div class="form-group" style="padding-left: 15px;">
-                <label class="radio-padding">
-                    {{ Form::radio('permission['.$permission_name.']', 1,
-                    (is_array($groupPermissions))
-                    && (array_key_exists($permission_name, $groupPermissions)
-                    && $groupPermissions[$permission_name]), ['class' => 'minimal']) }}
-                    Grant
-                </label>
-                <label class="radio-padding">
-                    {{ Form::radio('permission['.$permission_name.']', 0, ((is_array($groupPermissions) && !array_key_exists($permission_name, $groupPermissions)) || !$groupPermissions[$permission_name]), ['class' => 'minimal']) }}
-                    Deny
-                </label>
+                    <!-- radio -->
+                        <div class="form-group" style="padding-left: 15px;">
+                        <label class="radio-padding col-md-3">
+                            {{ Form::radio('permission['.$permission_name.']', 1,
+                            (is_array($groupPermissions))
+                            && (array_key_exists($permission_name, $groupPermissions)
+                            && $groupPermissions[$permission_name]), ['class' => 'minimal']) }}
+                            Grant
+                        </label>
+                        <label class="radio-padding col-md-3">
+                            {{ Form::radio('permission['.$permission_name.']', 0, ((is_array($groupPermissions) && !array_key_exists($permission_name, $groupPermissions)) || !$groupPermissions[$permission_name]), ['class' => 'minimal']) }}
+                            Deny
+                        </label>
+
+                    </div>
+                    <hr>
             </div>
-            <hr>
+
             @endif
         @endfor
     @endforeach
-</div>
+
+
 @stop

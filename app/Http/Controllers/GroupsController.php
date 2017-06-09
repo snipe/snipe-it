@@ -28,7 +28,7 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function getIndex()
+    public function index()
     {
         // Show the page
         return View::make('groups/index', compact('groups'));
@@ -42,7 +42,7 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function getCreate()
+    public function create()
     {
         $group = new Group;
         // Get all the available permissions
@@ -62,7 +62,7 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreate()
+    public function store()
     {
         // create a new group instance
         $group = new Group();
@@ -84,13 +84,13 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function getEdit($id = null)
+    public function edit($id = null)
     {
         $group = Group::find($id);
         $permissions = config('permissions');
         $groupPermissions = $group->decodePermissions();
         $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
-        return View::make('groups/edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
+        return View::make('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
     }
 
     /**
@@ -102,7 +102,7 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postEdit($id = null)
+    public function update($id = null)
     {
         $permissions = config('permissions');
         if (!$group = Group::find($id)) {
@@ -113,11 +113,11 @@ class GroupsController extends Controller
 
         if (!config('app.lock_passwords')) {
             if ($group->save()) {
-                return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.update'));
+                return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.update'));
             }
             return redirect()->back()->withInput()->withErrors($group->getErrors());
         }
-        return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
+        return redirect()->route('groups.index')->with('error', trans('general.feature_disabled'));
     }
 
     /**
@@ -129,7 +129,7 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function getDelete($id = null)
+    public function destroy($id = null)
     {
         if (!config('app.lock_passwords')) {
             if (!$group = Group::find($id)) {
@@ -137,9 +137,9 @@ class GroupsController extends Controller
             }
             $group->delete();
             // Redirect to the group management page
-            return redirect()->route('groups')->with('success', trans('admin/groups/message.success.delete'));
+            return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.delete'));
         }
-        return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
+        return redirect()->route('groups.index')->with('error', trans('general.feature_disabled'));
     }
 
 }

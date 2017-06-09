@@ -165,17 +165,13 @@ Route::group([ 'prefix' => 'admin','middleware' => ['auth']], function () {
 
 });
 
-# Group Management
-Route::group([ 'prefix' => 'groups', 'middleware' => ['auth'] ], function () {
 
-    Route::get('/', [ 'as' => 'groups.index', 'uses' => 'GroupsController@getIndex' ]);
-    Route::get('create', [ 'as' => 'groups.create', 'uses' => 'GroupsController@getCreate']);
-    Route::post('create', [ 'as' => 'groups.store', 'uses' => 'GroupsController@postCreate' ]);
-    Route::get('{groupId}/edit', [ 'as' => 'groups.edit', 'uses' => 'GroupsController@getEdit' ]);
-    Route::post('{groupId}/edit', [ 'as' => 'groups.update', 'uses' => 'GroupsController@postEdit' ]);
-    Route::get('{groupId}/delete', [ 'as' => 'groups.delete', 'uses' => 'GroupsController@getDelete' ]);
+Route::resource('groups', 'GroupsController', [
+    'middleware' => ['auth'],
+    'parameters' => ['group' => 'group_id']
+]);
 
-});
+
 
 
 /*
