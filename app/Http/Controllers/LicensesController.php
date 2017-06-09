@@ -43,7 +43,7 @@ class LicensesController extends Controller
     public function index()
     {
         $this->authorize('view', License::class);
-        return View::make('licenses/index');
+        return view('licenses/index');
     }
 
 
@@ -64,7 +64,7 @@ class LicensesController extends Controller
             '0' => 'No'
         ];
 
-        return View::make('licenses/edit')
+        return view('licenses/edit')
             //->with('license_options',$license_options)
             ->with('depreciation_list', Helper::depreciationList())
             ->with('supplier_list', Helper::suppliersList())
@@ -145,7 +145,7 @@ class LicensesController extends Controller
             '0' => 'No'
         ];
 
-        return View::make('licenses/edit', compact('item'))
+        return view('licenses/edit', compact('item'))
             ->with('depreciation_list', Helper::depreciationList())
             ->with('supplier_list', Helper::suppliersList())
             ->with('company_list', Helper::companyList())
@@ -259,7 +259,7 @@ class LicensesController extends Controller
         }
 
         $this->authorize('checkout', $licenseSeat);
-        return View::make('licenses/checkout', compact('licenseSeat'))
+        return view('licenses/checkout', compact('licenseSeat'))
             ->with('users_list', Helper::usersList())
             ->with('asset_list', Helper::detailedAssetList());
     }
@@ -369,7 +369,7 @@ class LicensesController extends Controller
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
         $this->authorize('checkin', $licenseseat);
-        return View::make('licenses/checkin', compact('licenseseat'))->with('backto', $backTo);
+        return view('licenses/checkin', compact('licenseseat'))->with('backto', $backTo);
     }
 
 
@@ -450,7 +450,7 @@ class LicensesController extends Controller
         if (isset($license->id)) {
             $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
             $this->authorize('view', $license);
-            return View::make('licenses/view', compact('license'));
+            return view('licenses/view', compact('license'));
         }
         $error = trans('admin/licenses/message.does_not_exist', compact('id'));
         return redirect()->route('licenses.index')->with('error', $error);
@@ -475,7 +475,7 @@ class LicensesController extends Controller
         $license->serial = null;
 
         // Show the page
-        return View::make('licenses/edit')
+        return view('licenses/edit')
         ->with('depreciation_list', Helper::depreciationList())
         ->with('supplier_list', Helper::suppliersList())
         ->with('item', $license)

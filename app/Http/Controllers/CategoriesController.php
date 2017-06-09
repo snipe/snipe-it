@@ -38,7 +38,7 @@ class CategoriesController extends Controller
     public function index()
     {
         // Show the page
-        return View::make('categories/index');
+        return view('categories/index');
     }
 
 
@@ -54,7 +54,7 @@ class CategoriesController extends Controller
     {
         // Show the page
          $category_types= Helper::categoryTypeList();
-        return View::make('categories/edit')->with('item', new Category)
+        return view('categories/edit')->with('item', new Category)
             ->with('category_types', $category_types);
     }
 
@@ -105,7 +105,7 @@ class CategoriesController extends Controller
         }
         $category_types= Helper::categoryTypeList();
 
-        return View::make('categories/edit', compact('item'))
+        return view('categories/edit', compact('item'))
         ->with('category_types', $category_types);
     }
 
@@ -201,7 +201,7 @@ class CategoriesController extends Controller
                 $category_type = $category->category_type;
                 $category_type_route = $category->category_type.'s';
             }
-            return View::make('categories/view', compact('category'))
+            return view('categories/view', compact('category'))
                 ->with('category_type',$category_type)
                 ->with('category_type_route',$category_type_route);
         }

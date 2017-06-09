@@ -39,7 +39,7 @@ class AccessoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Accessory::class);
-        return View::make('accessories/index');
+        return view('accessories/index');
     }
 
 
@@ -53,7 +53,7 @@ class AccessoriesController extends Controller
     {
         $this->authorize('create', Accessory::class);
         // Show the page
-        return View::make('accessories/edit')
+        return view('accessories/edit')
           ->with('item', new Accessory)
           ->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
@@ -114,7 +114,7 @@ class AccessoriesController extends Controller
 
         $this->authorize($item);
 
-        return View::make('accessories/edit', compact('item'))
+        return view('accessories/edit', compact('item'))
           ->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
           ->with('location_list', Helper::locationsList())
@@ -203,7 +203,7 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
-            return View::make('accessories/view', compact('accessory'));
+            return view('accessories/view', compact('accessory'));
         }
         // Prepare the error message
         $error = trans('admin/accessories/message.does_not_exist', compact('id'));
@@ -230,7 +230,7 @@ class AccessoriesController extends Controller
         $this->authorize('checkout', $accessory);
 
         // Get the dropdown of users and then pass it to the checkout view
-        return View::make('accessories/checkout', compact('accessory'))->with('users_list', Helper::usersList());
+        return view('accessories/checkout', compact('accessory'))->with('users_list', Helper::usersList());
 
     }
 
@@ -316,7 +316,7 @@ class AccessoriesController extends Controller
 
         $accessory = Accessory::find($accessory_user->accessory_id);
         $this->authorize('checkin', $accessory);
-        return View::make('accessories/checkin', compact('accessory'))->with('backto', $backto);
+        return view('accessories/checkin', compact('accessory'))->with('backto', $backto);
     }
 
 

@@ -44,7 +44,7 @@ class ComponentsController extends Controller
     public function index()
     {
         $this->authorize('view', Component::class);
-        return View::make('components/index');
+        return view('components/index');
     }
 
 
@@ -60,7 +60,7 @@ class ComponentsController extends Controller
     {
         $this->authorize('create', Component::class);
         // Show the page
-        return View::make('components/edit')
+        return view('components/edit')
             ->with('item', new Component)
             ->with('category_list', Helper::categoryList('component'))
             ->with('company_list', Helper::companyList())
@@ -123,7 +123,7 @@ class ComponentsController extends Controller
 
         $this->authorize('update', $item);
 
-        return View::make('components/edit', compact('item'))
+        return view('components/edit', compact('item'))
             ->with('category_list', Helper::categoryList('component'))
             ->with('company_list', Helper::companyList())
             ->with('location_list', Helper::locationsList());
@@ -215,7 +215,7 @@ class ComponentsController extends Controller
 
         if (isset($component->id)) {
             $this->authorize('view', $component);
-            return View::make('components/view', compact('component'));
+            return view('components/view', compact('component'));
         }
         // Prepare the error message
         $error = trans('admin/components/message.does_not_exist', compact('id'));
@@ -240,7 +240,7 @@ class ComponentsController extends Controller
             return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         }
         $this->authorize('checkout', $component);
-        return View::make('components/checkout', compact('component'))->with('assets_list', Helper::detailedAssetList());
+        return view('components/checkout', compact('component'))->with('assets_list', Helper::detailedAssetList());
     }
 
     /**

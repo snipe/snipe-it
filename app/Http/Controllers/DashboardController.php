@@ -43,7 +43,7 @@ class DashboardController extends Controller
                 \Artisan::call('migrate', ['--force' => true]);
             }
 
-            return View::make('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
+            return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
         } else {
         // Redirect to the profile page
             return redirect()->intended('account/view-assets');

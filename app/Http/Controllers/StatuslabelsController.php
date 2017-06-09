@@ -32,7 +32,7 @@ class StatuslabelsController extends Controller
 
     public function index()
     {
-        return View::make('statuslabels/index', compact('statuslabels'));
+        return view('statuslabels/index', compact('statuslabels'));
     }
 
     public function show($id)
@@ -40,7 +40,7 @@ class StatuslabelsController extends Controller
         $statuslabel = Statuslabel::find($id);
 
         if (isset($statuslabel->id)) {
-            return View::make('statuslabels/view', compact('statuslabel'));
+            return view('statuslabels/view', compact('statuslabel'));
         }
 
         return redirect()->route('statuslabels.index')->with('error', trans('admin/locations/message.does_not_exist', compact('id')));
@@ -60,7 +60,7 @@ class StatuslabelsController extends Controller
         $use_statuslabel_type = $item->getStatuslabelType();
         $statuslabel_types = Helper::statusTypeList();
 
-        return View::make('statuslabels/edit', compact('statuslabel_types', 'item'))->with('use_statuslabel_type', $use_statuslabel_type);
+        return view('statuslabels/edit', compact('statuslabel_types', 'item'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
 
 
@@ -148,7 +148,7 @@ class StatuslabelsController extends Controller
 
         $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
 
-        return View::make('statuslabels/edit', compact('item', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
+        return view('statuslabels/edit', compact('item', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
 
 

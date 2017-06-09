@@ -129,7 +129,7 @@ class SettingsController extends Controller
 
 
         $start_settings['gd'] = extension_loaded('gd');
-        return View::make('setup/index')
+        return view('setup/index')
         ->with('step', 1)
         ->with('start_settings', $start_settings)
         ->with('section', 'Pre-Flight Check');
@@ -224,7 +224,7 @@ class SettingsController extends Controller
     */
     public function getSetupUser()
     {
-        return View::make('setup/user')
+        return view('setup/user')
         ->with('step', 3)
         ->with('section', 'Create a User');
     }
@@ -239,7 +239,7 @@ class SettingsController extends Controller
     public function getSetupDone()
     {
 
-        return View::make('setup/done')
+        return view('setup/done')
         ->with('step', 4)
         ->with('section', 'Done!');
     }
@@ -258,7 +258,7 @@ class SettingsController extends Controller
         Artisan::call('migrate', ['--force' => true]);
 
         $output = Artisan::output();
-        return View::make('setup/migrate')
+        return view('setup/migrate')
         ->with('output', $output)
         ->with('step', 2)
         ->with('section', 'Create Database Tables');
@@ -276,7 +276,7 @@ class SettingsController extends Controller
     public function getIndex()
     {
         $settings = Setting::all();
-        return View::make('settings/index', compact('settings'));
+        return view('settings/index', compact('settings'));
     }
 
 
@@ -292,7 +292,7 @@ class SettingsController extends Controller
         $setting = Setting::first();
         $is_gd_installed = extension_loaded('gd');
 
-        return View::make('settings/edit', compact('setting'))->with('is_gd_installed', $is_gd_installed);
+        return view('settings/edit', compact('setting'))->with('is_gd_installed', $is_gd_installed);
     }
 
 
@@ -504,7 +504,7 @@ class SettingsController extends Controller
         }
 
 
-        return View::make('settings/backups', compact('path', 'files'));
+        return view('settings/backups', compact('path', 'files'));
     }
 
 
@@ -597,7 +597,7 @@ class SettingsController extends Controller
             if (Input::get('confirm_purge')=='DELETE') {
                 Artisan::call('snipeit:purge', ['--force'=>'true','--no-interaction'=>true]);
                 $output = Artisan::output();
-                return View::make('settings/purge')
+                return view('settings/purge')
                 ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
             } else {
                 return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));

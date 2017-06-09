@@ -31,7 +31,7 @@ class GroupsController extends Controller
     public function index()
     {
         // Show the page
-        return View::make('groups/index', compact('groups'));
+        return view('groups/index', compact('groups'));
     }
 
     /**
@@ -51,7 +51,7 @@ class GroupsController extends Controller
         $selectedPermissions = Input::old('permissions', $groupPermissions);
 
         // Show the page
-        return View::make('groups/edit', compact('permissions', 'selectedPermissions', 'groupPermissions'))->with('group', $group);
+        return view('groups/edit', compact('permissions', 'selectedPermissions', 'groupPermissions'))->with('group', $group);
     }
 
     /**
@@ -90,7 +90,7 @@ class GroupsController extends Controller
         $permissions = config('permissions');
         $groupPermissions = $group->decodePermissions();
         $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
-        return View::make('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
+        return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
     }
 
     /**

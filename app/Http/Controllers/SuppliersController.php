@@ -35,7 +35,7 @@ class SuppliersController extends Controller
         $suppliers = Supplier::orderBy('created_at', 'DESC')->get();
 
         // Show the page
-        return View::make('suppliers/index', compact('suppliers'));
+        return view('suppliers/index', compact('suppliers'));
     }
 
 
@@ -46,7 +46,7 @@ class SuppliersController extends Controller
      */
     public function create()
     {
-        return View::make('suppliers/edit')->with('item', new Supplier);
+        return view('suppliers/edit')->with('item', new Supplier);
     }
 
 
@@ -126,7 +126,7 @@ class SuppliersController extends Controller
         }
 
         // Show the page
-        return View::make('suppliers/edit', compact('item'));
+        return view('suppliers/edit', compact('item'));
     }
 
 
@@ -222,7 +222,7 @@ class SuppliersController extends Controller
         $supplier = Supplier::find($supplierId);
 
         if (isset($supplier->id)) {
-                return View::make('suppliers/view', compact('supplier'));
+                return view('suppliers/view', compact('supplier'));
         }
         // Prepare the error message
         $error = trans('admin/suppliers/message.does_not_exist', compact('id'));

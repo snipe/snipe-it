@@ -30,7 +30,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $location_list = Helper::locationsList();
-        return View::make('account/profile', compact('user'))->with('location_list', $location_list);
+        return view('account/profile', compact('user'))->with('location_list', $location_list);
     }
 
     /**

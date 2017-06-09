@@ -53,7 +53,7 @@ class ViewAssetsController extends Controller
         $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
-            return View::make('account/view-assets', compact('user', 'userlog'));
+            return view('account/view-assets', compact('user', 'userlog'));
         } else {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
@@ -71,13 +71,13 @@ class ViewAssetsController extends Controller
         $assets = Asset::with('model', 'defaultLoc', 'assetloc', 'assignedTo')->Hardware()->RequestableAssets()->get();
         $models = AssetModel::with('category')->RequestableModels()->get();
 
-        return View::make('account/requestable-assets', compact('user', 'assets', 'models'));
+        return view('account/requestable-assets', compact('user', 'assets', 'models'));
     }
 
     public function getRequestedIndex()
     {
         $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
-        return View::make('admin/requested-assets', compact('requestedItems'));
+        return view('admin/requested-assets', compact('requestedItems'));
     }
 
 
@@ -280,7 +280,7 @@ class ViewAssetsController extends Controller
     {
         $checkoutrequests = CheckoutRequest::all();
 
-        return View::make('account/requested-items', compact($checkoutrequests));
+        return view('account/requested-items', compact($checkoutrequests));
     }
 
 
@@ -314,7 +314,7 @@ class ViewAssetsController extends Controller
         } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         } else {
-            return View::make('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item', $item);
+            return view('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item', $item);
         }
     }
 

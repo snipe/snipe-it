@@ -61,7 +61,7 @@ class UsersController extends Controller
     public function index()
     {
         $this->authorize('index', User::class);
-        return View::make('users/index');
+        return view('users/index');
     }
 
     /**
@@ -86,7 +86,7 @@ class UsersController extends Controller
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
-        return View::make('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
+        return view('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
         ->with('location_list', Helper::locationsList())
         ->with('manager_list', Helper::managerList())
         ->with('company_list', Helper::companyList())
@@ -254,7 +254,7 @@ class UsersController extends Controller
         }
 
         // Show the page
-        return View::make('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
+        return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
             ->with('location_list', Helper::locationsList())
             ->with('department_list', Helper::departmentList())
             ->with('company_list', Helper::companyList())
@@ -423,7 +423,7 @@ class UsersController extends Controller
             $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
             if ($request->input('bulk_actions')=='edit') {
 
-                return View::make('users/bulk-edit', compact('users'))
+                return view('users/bulk-edit', compact('users'))
                     ->with('location_list', Helper::locationsList())
                     ->with('company_list', Helper::companyList())
                     ->with('manager_list', Helper::managerList())
@@ -432,7 +432,7 @@ class UsersController extends Controller
                     ->with('groups', Group::pluck('name', 'id'));
             }
 
-            return View::make('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
+            return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
     }
 
@@ -645,7 +645,7 @@ class UsersController extends Controller
 
         if (isset($user->id)) {
             $this->authorize('view', $user);
-            return View::make('users/view', compact('user', 'userlog'));
+            return view('users/view', compact('user', 'userlog'));
         }
     }
 
@@ -729,7 +729,7 @@ class UsersController extends Controller
             $userPermissions =Helper::selectedPermissionsArray($permissions, $clonedPermissions);
 
             // Show the page
-            return View::make('users/edit', compact('permissions', 'userPermissions'))
+            return view('users/edit', compact('permissions', 'userPermissions'))
                             ->with('location_list', Helper::locationsList())
                             ->with('company_list', Helper::companyList())
                             ->with('manager_list', Helper::managerList())
@@ -761,7 +761,7 @@ class UsersController extends Controller
         $permissions = config('permissions');
         $selectedPermissions = Input::old('permissions', array('superuser' => -1));
         // Show the page
-        return View::make('users/import', compact('selectedGroups', 'permissions', 'selectedPermissions'));
+        return view('users/import', compact('selectedGroups', 'permissions', 'selectedPermissions'));
     }
 
     /**
@@ -991,7 +991,7 @@ class UsersController extends Controller
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }
 
-        return View::make('users/ldap')
+        return view('users/ldap')
               ->with('location_list', Helper::locationsList());
     }
 

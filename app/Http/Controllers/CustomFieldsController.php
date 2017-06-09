@@ -39,7 +39,7 @@ class CustomFieldsController extends Controller
 
         $fieldsets = CustomFieldset::with("fields", "models")->get();
         $fields = CustomField::with("fieldset")->get();
-        return View::make("custom_fields.index")->with("custom_fieldsets", $fieldsets)->with("custom_fields", $fields);
+        return view("custom_fields.index")->with("custom_fieldsets", $fieldsets)->with("custom_fields", $fields);
     }
 
 
@@ -57,7 +57,7 @@ class CustomFieldsController extends Controller
     public function create()
     {
 
-        return View::make("custom_fields.fields.edit")->with('field', new CustomField());
+        return view("custom_fields.fields.edit")->with('field', new CustomField());
     }
 
 
@@ -155,7 +155,7 @@ class CustomFieldsController extends Controller
     public function edit($id)
     {
         $field = CustomField::find($id);
-        return View::make("custom_fields.fields.edit")->with('field', $field);
+        return view("custom_fields.fields.edit")->with('field', $field);
     }
 
 

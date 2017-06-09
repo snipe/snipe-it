@@ -55,7 +55,7 @@ class LoginController extends Controller
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
-        return View::make('auth.login');
+        return view('auth.login');
     }
 
 
@@ -198,7 +198,7 @@ class LoginController extends Controller
             $user->two_factor_secret
         );
 
-        return View::make('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
+        return view('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
 
     }
 
@@ -210,7 +210,7 @@ class LoginController extends Controller
      */
     public function getTwoFactorAuth()
     {
-        return View::make('auth.two_factor');
+        return view('auth.two_factor');
     }
 
     /**

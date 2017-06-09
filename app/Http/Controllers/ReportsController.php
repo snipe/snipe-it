@@ -35,7 +35,7 @@ class ReportsController extends Controller
     public function getAccessoryReport()
     {
         $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
-        return View::make('reports/accessories', compact('accessories'));
+        return view('reports/accessories', compact('accessories'));
     }
 
     /**
@@ -90,7 +90,7 @@ class ReportsController extends Controller
     public function getAssetsReport()
     {
         $settings = \App\Models\Setting::first();
-        return View::make('reports/asset', compact('assets'))->with('settings', $settings);
+        return view('reports/asset', compact('assets'))->with('settings', $settings);
     }
 
 
@@ -189,7 +189,7 @@ class ReportsController extends Controller
         $assets = Asset::with('model', 'assignedTo', 'assetstatus', 'defaultLoc', 'assetlog', 'company')
                        ->orderBy('created_at', 'DESC')->get();
 
-        return View::make('reports/depreciation', compact('assets'));
+        return view('reports/depreciation', compact('assets'));
     }
 
     /**
@@ -281,7 +281,7 @@ class ReportsController extends Controller
     public function getActivityReport()
     {
 
-        return View::make('reports/activity');
+        return view('reports/activity');
     }
 
 
@@ -299,7 +299,7 @@ class ReportsController extends Controller
                            ->with('company')
                            ->get();
 
-        return View::make('reports/licenses', compact('licenses'));
+        return view('reports/licenses', compact('licenses'));
     }
 
     /**
@@ -363,7 +363,7 @@ class ReportsController extends Controller
     public function getCustomReport()
     {
         $customfields = CustomField::get();
-        return View::make('reports/custom')->with('customfields', $customfields);
+        return view('reports/custom')->with('customfields', $customfields);
     }
 
     /**
@@ -636,7 +636,7 @@ class ReportsController extends Controller
                                               ->orderBy('created_at', 'DESC')
                                               ->get();
 
-        return View::make('reports/asset_maintenances', compact('assetMaintenances'));
+        return view('reports/asset_maintenances', compact('assetMaintenances'));
 
     }
 
@@ -711,7 +711,7 @@ class ReportsController extends Controller
     {
         $assetsForReport = Asset::notYetAccepted()->with('company')->get();
 
-        return View::make('reports/unaccepted_assets', compact('assetsForReport'));
+        return view('reports/unaccepted_assets', compact('assetsForReport'));
     }
 
     /**

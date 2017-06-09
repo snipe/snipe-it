@@ -32,7 +32,7 @@ class DepreciationsController extends Controller
     public function index()
     {
         // Show the page
-        return View::make('depreciations/index', compact('depreciations'));
+        return view('depreciations/index', compact('depreciations'));
     }
 
 
@@ -47,7 +47,7 @@ class DepreciationsController extends Controller
     public function create()
     {
         // Show the page
-        return View::make('depreciations/edit')->with('item', new Depreciation);
+        return view('depreciations/edit')->with('item', new Depreciation);
     }
 
 
@@ -94,7 +94,7 @@ class DepreciationsController extends Controller
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
-        return View::make('depreciations/edit', compact('item'));
+        return view('depreciations/edit', compact('item'));
     }
 
 

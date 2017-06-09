@@ -59,7 +59,7 @@ class AssetMaintenancesController extends Controller
     */
     public function index()
     {
-        return View::make('asset_maintenances/index');
+        return view('asset_maintenances/index');
     }
 
 
@@ -160,7 +160,7 @@ class AssetMaintenancesController extends Controller
                                 ] + AssetMaintenance::getImprovementOptions();
         // Mark the selected asset, if it came in
         // Render the view
-        return View::make('asset_maintenances/edit')
+        return view('asset_maintenances/edit')
                    ->with('asset_list', Helper::detailedAssetList())
                    ->with('selectedAsset', request('asset_id'))
                    ->with('supplier_list', Helper::suppliersList())
@@ -259,7 +259,7 @@ class AssetMaintenancesController extends Controller
 
         // Get Supplier List
         // Render the view
-        return View::make('asset_maintenances/edit')
+        return view('asset_maintenances/edit')
                    ->with('asset_list', Helper::detailedAssetList())
                    ->with('selectedAsset', null)
                    ->with('supplier_list', Helper::suppliersList())
@@ -384,6 +384,6 @@ class AssetMaintenancesController extends Controller
             return static::getInsufficientPermissionsRedirect();
         }
 
-        return View::make('asset_maintenances/view')->with('assetMaintenance', $assetMaintenance);
+        return view('asset_maintenances/view')->with('assetMaintenance', $assetMaintenance);
     }
 }

@@ -27,7 +27,7 @@ final class CompaniesController extends Controller
      */
     public function index()
     {
-        return View::make('companies/index')->with('companies', Company::all());
+        return view('companies/index')->with('companies', Company::all());
     }
 
     /**
@@ -39,7 +39,7 @@ final class CompaniesController extends Controller
      */
     public function create()
     {
-        return View::make('companies/edit')->with('item', new Company);
+        return view('companies/edit')->with('item', new Company);
     }
 
     /**
@@ -77,7 +77,7 @@ final class CompaniesController extends Controller
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
         }
-        return View::make('companies/edit')->with('item', $item);
+        return view('companies/edit')->with('item', $item);
     }
 
     /**
@@ -145,7 +145,7 @@ final class CompaniesController extends Controller
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.not_found'));
         } else {
-            return View::make('companies/view')->with('company',$company);
+            return view('companies/view')->with('company',$company);
         }
 
     }

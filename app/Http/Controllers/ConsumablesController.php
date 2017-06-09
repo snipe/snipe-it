@@ -40,7 +40,7 @@ class ConsumablesController extends Controller
     public function index()
     {
         $this->authorize('index', Consumable::class);
-        return View::make('consumables/index');
+        return view('consumables/index');
     }
 
 
@@ -56,7 +56,7 @@ class ConsumablesController extends Controller
     {
         $this->authorize('create', Consumable::class);
         // Show the page
-        return View::make('consumables/edit')
+        return view('consumables/edit')
             ->with('item', new Consumable)
             ->with('category_list', Helper::categoryList('consumable'))
             ->with('company_list', Helper::companyList())
@@ -121,7 +121,7 @@ class ConsumablesController extends Controller
 
         $this->authorize($item);
 
-        return View::make('consumables/edit', compact('item'))
+        return view('consumables/edit', compact('item'))
             ->with('category_list', Helper::categoryList('consumable'))
             ->with('company_list', Helper::companyList())
             ->with('location_list', Helper::locationsList())
@@ -200,7 +200,7 @@ class ConsumablesController extends Controller
         $consumable = Consumable::find($consumableId);
         $this->authorize($consumable);
         if (isset($consumable->id)) {
-            return View::make('consumables/view', compact('consumable'));
+            return view('consumables/view', compact('consumable'));
         }
         // Prepare the error message
         $error = trans('admin/consumables/message.does_not_exist', compact('id'));
@@ -227,7 +227,7 @@ class ConsumablesController extends Controller
         }
         $this->authorize('checkout', $consumable);
         // Get the dropdown of users and then pass it to the checkout view
-        return View::make('consumables/checkout', compact('consumable'))->with('users_list', Helper::usersList());
+        return view('consumables/checkout', compact('consumable'))->with('users_list', Helper::usersList());
     }
 
     /**

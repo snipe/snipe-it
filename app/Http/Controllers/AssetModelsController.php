@@ -40,7 +40,7 @@ class AssetModelsController extends Controller
     */
     public function index()
     {
-        return View::make('models/index');
+        return view('models/index');
     }
 
     /**
@@ -53,7 +53,7 @@ class AssetModelsController extends Controller
     public function create()
     {
         // Show the page
-        return View::make('models/edit')
+        return view('models/edit')
         ->with('category_list', Helper::categoryList('asset'))
         ->with('depreciation_list', Helper::depreciationList())
         ->with('manufacturer_list', Helper::manufacturerList())
@@ -297,7 +297,7 @@ class AssetModelsController extends Controller
         $model = AssetModel::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
-            return View::make('models/view', compact('model'));
+            return view('models/view', compact('model'));
         }
         // Prepare the error message
         $error = trans('admin/models/message.does_not_exist', compact('id'));
@@ -347,7 +347,7 @@ class AssetModelsController extends Controller
     public function getCustomFields($modelId)
     {
         $model = AssetModel::find($modelId);
-        return View::make("models.custom_fields_form")->with("model", $model);
+        return view("models.custom_fields_form")->with("model", $model);
     }
 
 
@@ -414,7 +414,7 @@ class AssetModelsController extends Controller
         $manufacturer_list = $nochange + Helper::manufacturerList();
 
         
-            return View::make('models/bulk-edit', compact('models'))
+            return view('models/bulk-edit', compact('models'))
                 ->with('manufacturer_list', $manufacturer_list)
                 ->with('category_list', $category_list)
                 ->with('fieldset_list', $fieldset_list)

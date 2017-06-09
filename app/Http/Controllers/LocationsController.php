@@ -41,7 +41,7 @@ class LocationsController extends Controller
         $locations = Location::orderBy('created_at', 'DESC')->with('parent', 'assets', 'assignedassets')->get();
 
         // Show the page
-        return View::make('locations/index', compact('locations'));
+        return view('locations/index', compact('locations'));
     }
 
 
@@ -61,7 +61,7 @@ class LocationsController extends Controller
         $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
 
-        return View::make('locations/edit')
+        return view('locations/edit')
             ->with('location_options', $location_options)
             ->with('item', new Location);
     }
@@ -154,7 +154,7 @@ class LocationsController extends Controller
         $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
 
-        return View::make('locations/edit', compact('item'))->with('location_options', $location_options);
+        return view('locations/edit', compact('item'))->with('location_options', $location_options);
     }
 
 
@@ -243,7 +243,7 @@ class LocationsController extends Controller
         $location = Location::find($locationId);
 
         if (isset($location->id)) {
-            return View::make('locations/view', compact('location'));
+            return view('locations/view', compact('location'));
         }
         // Prepare the error message
         $error = trans('admin/locations/message.does_not_exist', compact('id'));

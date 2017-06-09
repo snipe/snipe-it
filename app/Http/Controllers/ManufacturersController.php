@@ -33,7 +33,7 @@ class ManufacturersController extends Controller
      */
     public function index()
     {
-        return View::make('manufacturers/index', compact('manufacturers'));
+        return view('manufacturers/index', compact('manufacturers'));
     }
 
 
@@ -47,7 +47,7 @@ class ManufacturersController extends Controller
      */
     public function create()
     {
-        return View::make('manufacturers/edit')->with('item', new Manufacturer);
+        return view('manufacturers/edit')->with('item', new Manufacturer);
     }
 
 
@@ -95,7 +95,7 @@ class ManufacturersController extends Controller
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
         // Show the page
-        return View::make('manufacturers/edit', compact('item'));
+        return view('manufacturers/edit', compact('item'));
     }
 
 
@@ -172,7 +172,7 @@ class ManufacturersController extends Controller
         $manufacturer = Manufacturer::find($manufacturerId);
 
         if (isset($manufacturer->id)) {
-            return View::make('manufacturers/view', compact('manufacturer'));
+            return view('manufacturers/view', compact('manufacturer'));
         }
         // Prepare the error message
         $error = trans('admin/manufacturers/message.does_not_exist', compact('id'));
