@@ -20,21 +20,37 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
+        {{ Form::open([
+          'method' => 'POST',
+          'route' => ['models.bulkedit.index'],
+          'class' => 'form-inline',
+           'id' => 'bulkForm']) }}
+        <div class="row">
+          <div class="col-md-12">
+              <div id="toolbar">
+                <select name="bulk_actions" class="form-control select2" style="width: 300px;">
+                  <option value="edit">Bulk Edit</option>
+                </select>
+                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+              </div>
+
+
+
         <table
         name="models"
         class="table table-striped snipe-table"
         id="table"
-        data-url="{{ route('api.models.index',array('status'=>e(Input::get('status')))) }}"
+        data-url="{{ route('api.models.index') }}"
         data-cookie="true"
         data-click-to-select="true"
         data-cookie-id-table="modelsTable-{{ config('version.hash_version') }}">
           <thead>
             <tr>
+              <th data-checkbox="true" data-field="checkbox"></th>
               <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
               <th data-sortable="true" data-field="name" data-formatter="modelsLinkFormatter">{{ trans('general.name') }}</th>
               <th data-sortable="true" data-field="image" data-formatter="imageFormatter" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
               <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
-
               <th data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
               <th data-sortable="false" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
               <th data-sortable="false" data-field="depreciation" data-formatter="depreciationsLinkObjFormatter">{{ trans('general.depreciation') }}</th>
@@ -46,6 +62,9 @@
             </tr>
           </thead>
         </table>
+              {{ Form::close() }}
+          </div>
+        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>

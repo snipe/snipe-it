@@ -394,4 +394,73 @@ class AssetModelsController extends Controller
 
         return $data;
     }
+
+
+    /**
+     * Returns a view that allows the user to bulk edit model attrbutes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.7]
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function postBulkEdit(Request $request)
+    {
+        $models_raw_array = Input::get('ids');
+        $models = AssetModel::whereIn('id', $models_raw_array)->get();
+        $nochange = ['NC' => 'No Change'];
+        $fieldset_list = $nochange + Helper::customFieldsetList();
+        $depreciation_list = $nochange + Helper::depreciationList();
+        $category_list = $nochange + Helper::categoryList('asset');
+        $manufacturer_list = $nochange + Helper::manufacturerList();
+
+        
+            return View::make('models/bulk-edit', compact('models'))
+                ->with('manufacturer_list', $manufacturer_list)
+                ->with('category_list', $category_list)
+                ->with('fieldset_list', $fieldset_list)
+                ->with('depreciation_list', $depreciation_list);
+
+    }
+
+
+
+    /**
+     * Returns a view that allows the user to bulk edit model attrbutes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.7]
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function postBulkEditSave(Request $request)
+    {
+
+        $models_raw_array = Input::get('ids');
+        $update_array = array();
+
+        if (($request->has('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
+            $update_array['manufacturer_id'] = $request->input('manufacturer_id');
+        }
+        if (($request->has('category_id') && ($request->input('category_id')!='NC'))) {
+            $update_array['category_id'] = $request->input('category_id');
+        }
+        if ($request->input('fieldset_id')!='NC') {
+            $update_array['fieldset_id'] = $request->input('fieldset_id');
+        }
+        if ($request->input('depreciation_id')!='NC') {
+            $update_array['depreciation_id'] = $request->input('depreciation_id');
+        }
+
+
+        
+        if (count($update_array) > 0) {
+            AssetModel::whereIn('id', $models_raw_array)->update($update_array);
+            return redirect()->route('models.index')
+                ->with('success', trans('admin/models/message.bulkedit.success'));
+        }
+
+        return redirect()->route('models.index')
+            ->with('warning', trans('admin/models/message.bulkedit.error'));
+
+    }
+
 }
