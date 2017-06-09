@@ -113,6 +113,7 @@ function isinstalled {
 if [ -f /etc/lsb-release ]; then
     distro="$(lsb_release -s -i )"
     version="$(lsb_release -s -r)"
+    codename="$(lsb_release -c -s)"
 elif [ -f /etc/os-release ]; then
     distro="$(. /etc/os-release && echo $ID)"
     version="$(. /etc/os-release && echo $VERSION_ID)"
