@@ -87,6 +87,11 @@ Route::group(
                 'uses' => 'AssetsController@getDeleteImportFile'
         ]);
 
+        Route::get('import/map',[
+            'as' => 'import.map',
+            'uses' => 'AssetsController@getImportMap'
+        ]);
+
         Route::get('import',[
                 'as' => 'assets/import',
                 'uses' => 'AssetsController@getImportUpload'

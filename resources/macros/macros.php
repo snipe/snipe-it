@@ -518,3 +518,22 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
     return $select;
 
 });
+
+
+
+
+Form::macro('header_list', function ($headers = null, $name = "header_list", $selected = null, $class = null) {
+
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
+    $select .= '<option value="">Do Not Import</option>';
+    
+    foreach ($headers as $header => $label) {
+        $select .= '<option value="'.str_slug($label).'"'.($selected == str_slug($label) ? ' selected="selected"' : '').'>'.e($label).'</option> '."\n";
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});

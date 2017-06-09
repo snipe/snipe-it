@@ -687,6 +687,34 @@ class AssetsController extends Controller
         return View::make('hardware/import');
     }
 
+
+    /**
+     * Map the fields for import
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function getImportMap()
+    {
+
+        $this->authorize('create', Asset::class);
+
+        // This is currently hardcoded for testing - should use a post variable or something to dynamically select the correct file.
+        $file = storage_path().'/private_uploads/imports/2017-06-08-072329-sample-assets.csv';
+        $reader = Reader::createFromPath($file);
+        $header_rows = $reader->fetchOne(0);
+        
+        // Grab the first row to display via ajax as the user picks fields
+        $first_row = $reader->fetchOne(1);
+        
+        // Grab all of the custom fields to we can map those too.
+        $custom_fields = CustomField::all();
+
+        return View::make('importer/fieldmapper')->with('header_rows', $header_rows)->with('first_row',$first_row)->with('custom_fields',$custom_fields);
+    }
+    
+
     /**
     * Process the uploaded file
     *
