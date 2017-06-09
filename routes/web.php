@@ -144,7 +144,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['auth']], function () {
                 'as' => 'settings/download-file',
                 'uses' => 'SettingsController@downloadFile' ]);
 
-            Route::get('delete/{filename}', [
+            Route::delete('delete/{filename}', [
                 'as' => 'settings/delete-file',
                 'uses' => 'SettingsController@deleteFile' ]);
 

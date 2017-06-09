@@ -29,14 +29,13 @@
               <td>{{ date("M d, Y g:i A", $file['modified']) }} </td>
               <td>{{ $file['filesize'] }}</td>
               <td>
-                  {{ Helper::generateDatatableButton(
-                    'delete',
-                    route('settings/delete-file', $file['filename']),
-                    config('app.lock_passwords'),
-                    trans('admin/settings/message.backup.delete_confirm'),
-                    $file['filename']
-                    )
-                  }}
+
+                  @can('superadmin')
+                      <a data-html="false"
+                         class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
+                          <i class="fa fa-trash icon-white"></i>
+                      </a>
+                  @endcan
               </td>
             </tr>
             @endforeach
