@@ -588,9 +588,7 @@ class AssetsController extends Controller
 
         if (isset($asset->id)) {
 
-            if ($asset->userloc) {
-                $use_currency = $asset->userloc->currency;
-            } elseif ($asset->assetloc) {
+            if ($asset->assetloc) {
                 $use_currency = $asset->assetloc->currency;
             } else {
 
