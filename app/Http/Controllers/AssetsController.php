@@ -74,7 +74,7 @@ class AssetsController extends Controller
         } else {
             $company = null;
         }
-        return View::make('hardware/index')->with('company',$company);
+        return view('hardware/index')->with('company',$company);
     }
 
     /**
@@ -254,7 +254,7 @@ class AssetsController extends Controller
         //Handles company checks and permissions.
         $this->authorize($item);
 
-        return View::make('hardware/edit', compact('item'))
+        return view('hardware/edit', compact('item'))
         ->with('model_list', Helper::modelList())
         ->with('supplier_list', Helper::suppliersList())
         ->with('company_list', Helper::companyList())
@@ -423,7 +423,7 @@ class AssetsController extends Controller
         $this->authorize('checkout', $asset);
 
         // Get the dropdown of users and then pass it to the checkout view
-        return View::make('hardware/checkout', compact('asset'))
+        return view('hardware/checkout', compact('asset'))
             ->with('users_list', Helper::usersList())
             ->with('assets_list', Helper::assetsList())
             ->with('locations_list', Helper::locationsList());
@@ -498,7 +498,7 @@ class AssetsController extends Controller
         }
 
         $this->authorize('checkin', $asset);
-        return View::make('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto);
+        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto);
 
     }
 
@@ -604,7 +604,7 @@ class AssetsController extends Controller
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
-            return View::make('hardware/view', compact('asset', 'qr_code', 'settings'))->with('use_currency', $use_currency);
+            return view('hardware/view', compact('asset', 'qr_code', 'settings'))->with('use_currency', $use_currency);
         }
 
         return redirect()->route('hardware')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
@@ -684,7 +684,7 @@ class AssetsController extends Controller
     public function getImportUpload()
     {
         $this->authorize('create', Asset::class);
-        return View::make('hardware/import');
+        return view('hardware/import');
     }
 
 
@@ -711,7 +711,7 @@ class AssetsController extends Controller
         // Grab all of the custom fields to we can map those too.
         $custom_fields = CustomField::all();
 
-        return View::make('importer/fieldmapper')->with('header_rows', $header_rows)->with('first_row',$first_row)->with('custom_fields',$custom_fields);
+        return view('importer/fieldmapper')->with('header_rows', $header_rows)->with('first_row',$first_row)->with('custom_fields',$custom_fields);
     }
     
 
@@ -775,7 +775,7 @@ class AssetsController extends Controller
         $asset->serial = '';
         $asset->assigned_to = '';
 
-        return View::make('hardware/edit')
+        return view('hardware/edit')
         ->with('supplier_list', Helper::suppliersList())
         ->with('model_list', Helper::modelList())
         ->with('statuslabel_list', Helper::statusLabelList())
@@ -798,7 +798,7 @@ class AssetsController extends Controller
     public function getImportHistory()
     {
         $this->authorize('checkout', Asset::class);
-        return View::make('hardware/history');
+        return view('hardware/history');
     }
 
     /**
@@ -944,7 +944,7 @@ class AssetsController extends Controller
                 }
             }
         }
-        return View::make('hardware/history')->with('status', $status);
+        return view('hardware/history')->with('status', $status);
     }
 
     /**
@@ -1104,7 +1104,7 @@ class AssetsController extends Controller
             if ($request->input('bulk_actions')=='labels') {
 
                 $count = 0;
-                return View::make('hardware/labels')
+                return view('hardware/labels')
                     ->with('assets', Asset::find($asset_ids))
                     ->with('settings', Setting::getSettings())
                     ->with('count', $count)
@@ -1117,11 +1117,11 @@ class AssetsController extends Controller
                 $assets->each(function($asset) {
                     $this->authorize('delete',$asset);
                 });
-                return View::make('hardware/bulk-delete')->with('assets', $assets);
+                return view('hardware/bulk-delete')->with('assets', $assets);
 
              // Bulk edit
             } elseif ($request->input('bulk_actions')=='edit') {
-                return View::make('hardware/bulk')
+                return view('hardware/bulk')
                 ->with('assets', request('ids'))
                 ->with('supplier_list', Helper::suppliersList())
                 ->with('statuslabel_list', Helper::statusLabelList())
@@ -1263,7 +1263,7 @@ class AssetsController extends Controller
         $this->authorize('checkout', Asset::class);
         // Filter out assets that are not deployable.
         $assets_list = Company::scopeCompanyables(Asset::RTD()->get(), 'assets.company_id')->pluck('detailed_name', 'id')->toArray();
-        return View::make('hardware/bulk-checkout')
+        return view('hardware/bulk-checkout')
             ->with('users_list', Helper::usersList())
             ->with('assets_list', $assets_list);
     }
