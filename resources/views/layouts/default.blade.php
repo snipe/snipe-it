@@ -675,7 +675,12 @@
 
     <script>
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="tooltip"]').tooltip();
+            
+            var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
+            $.fn.bootstrapDP = datepicker;
+            $('.datepicker').datepicker();
+
         })
 
     </script>

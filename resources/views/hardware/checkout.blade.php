@@ -86,10 +86,10 @@
             <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
               {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
-                <div class="col-md-4 input-group required">
-                  <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at', date('Y-m-d')) }}">
-                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                </div>
+                  <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                      <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at') }}">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  </div>
                 {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
             </div>
@@ -98,10 +98,10 @@
             <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
               {{ Form::label('name', trans('admin/hardware/form.expected_checkin'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
-                <div class="col-md-4 input-group">
-                  <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
-                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                </div>
+                  <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                      <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  </div>
                 {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
             </div>

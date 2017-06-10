@@ -22,9 +22,8 @@ mix.styles([
     'public/css/AdminLTE.css',
     'resources/assets/css/font-awesome/font-awesome.min.css',
     './bower_components/iCheck/skins/minimal/minimal.css',
-    './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css',
+    './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css',
     'public/css/overrides.css',
-
 ], 'public/css/dist/all.css');
 
 mix.js(
@@ -44,7 +43,6 @@ mix.scripts([
     './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
     './node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
     './bower_components/iCheck/icheck.js',
-    './bower_components/select2/dist/js/select2.full.js',
     './node_modules/ekko-lightbox/dist/ekko-lightbox.js',
     './resources/assets/js/app.js', //this is part of AdminLTE
     './resources/assets/js/snipeit.js', //this is the actual Snipe-IT JS

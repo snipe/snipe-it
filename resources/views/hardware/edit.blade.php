@@ -165,11 +165,6 @@
 @include('partials/modals')
 <script>
 
-    $('.datepicker').datepicker();
-
-
-
-
 
 
     function fetchCustomFields() {

@@ -152,7 +152,7 @@
     'select_model'			=> 'Select a Model',
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
-    'select_date'			=> 'Select Date',
+    'select_date'			=> 'Select Date (YYYY-MM-DD)',
     'select_statuslabel'	=> 'Select Status',
     'select_company'    	=> 'Select Company',
     'select_asset'    		=> 'Select Asset',
