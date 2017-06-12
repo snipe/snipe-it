@@ -1243,7 +1243,14 @@ class UsersController extends Controller
                 $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
                 $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
-
+                if( array_key_exists('useraccountcontrol', $results[$i]) ) {
+                    $enabled_accounts = [
+                        '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
+                    ];
+                    $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
+                } else {
+                    $item['activated'] = 0;
+                }
                 // User exists
                 $item["createorupdate"] = 'updated';
                 if (!$user = User::where('username', $item["username"])->first()) {
@@ -1260,7 +1267,7 @@ class UsersController extends Controller
                 $user->username = e($item["username"]);
                 $user->email = e($item["email"]);
                 $user->employee_num = e($item["employee_number"]);
-                $user->activated = 1;
+                $user->activated = $item['activated'];
                 if ($request->input('location_id')!='') {
                     $user->location_id = e($request->input('location_id'));
                 }
