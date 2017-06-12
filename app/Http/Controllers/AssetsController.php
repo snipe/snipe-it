@@ -684,7 +684,7 @@ class AssetsController extends Controller
     public function getImportUpload()
     {
         $this->authorize('create', Asset::class);
-        return view('hardware/import');
+        return view('importer/import');
     }
 
 
