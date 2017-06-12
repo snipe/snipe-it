@@ -105,6 +105,23 @@ $factory->define(App\Models\CustomField::class, function (Faker\Generator $faker
     ];
 });
 
+$factory->define(App\Models\Department::class, function (Faker\Generator $faker) {
+    return [
+    'name' => $faker->catchPhrase,
+    'user_id' => '1',
+    'location_id' => function () {
+        return factory(App\Models\Location::class)->create()->id;
+    },
+    'company_id' => function () {
+        return factory(App\Models\Company::class)->create()->id;
+    },
+    'manager_id' => function () {
+        return factory(App\Models\User::class)->create()->id;
+    },
+
+    ];
+});
+
 $factory->define(App\Models\Depreciation::class, function (Faker\Generator $faker) {
     return [
     'name' => $faker->text(20),
@@ -195,4 +212,3 @@ $factory->define(App\Models\Setting::class, function ($faker) {
         'locale' => $faker->locale,
     ];
 });
-

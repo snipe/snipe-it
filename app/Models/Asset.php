@@ -273,10 +273,6 @@ class Asset extends Depreciable
    **/
     public function assetLoc()
     {
-        if ($this->assignedTo) {
-            return $this->assignedTo->userloc();
-        }
-
         if (!empty($this->assignedType())) {
             if ($this->assignedType() == self::ASSET) {
                 return $this->assignedTo->assetloc(); // Recurse until we have a final location
