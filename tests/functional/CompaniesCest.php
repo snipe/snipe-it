@@ -32,7 +32,7 @@ class CompaniesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $company = factory(App\Models\Company::class, 'company')->make();
+        $company = factory(App\Models\Company::class)->make();
         $values = [
             'name' => $company->name
         ];

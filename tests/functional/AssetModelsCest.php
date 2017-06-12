@@ -33,7 +33,7 @@ class AssetModelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $model = factory(App\Models\AssetModel::class, 'assetmodel')->make();
+        $model = factory(App\Models\AssetModel::class)->make();
         $values = [
             'name'              => $model->name,
             'manufacturer_id'   => $model->manufacturer_id,
@@ -56,7 +56,7 @@ class AssetModelsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an asset model');
-        $model = factory(App\Models\AssetModel::class, 'assetmodel')->create();
+        $model = factory(App\Models\AssetModel::class)->create();
         $I->sendDelete(route('models.destroy', $model->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

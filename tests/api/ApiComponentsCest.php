@@ -21,7 +21,7 @@ class ApiComponentsCest
         $I->wantTo('Get a list of components');
 
         // setup
-        $components = factory(\App\Models\Component::class, 'component', 10)->create();
+        $components = factory(\App\Models\Component::class, 10)->create();
 
         // call
         $I->sendGET('/components');
@@ -46,9 +46,9 @@ class ApiComponentsCest
         $I->wantTo('Create a new component');
 
         // setup
-        $category = factory(\App\Models\Category::class, 'category')->create(['user_id' => $this->user->id]);
-        $location = factory(\App\Models\Location::class, 'location')->create(['user_id' => $this->user->id]);
-        $company = factory(\App\Models\Company::class, 'company')->create();
+        $category = factory(\App\Models\Category::class)->create(['user_id' => $this->user->id]);
+        $location = factory(\App\Models\Location::class)->create(['user_id' => $this->user->id]);
+        $company = factory(\App\Models\Company::class)->create();
 
         $data = [
             'category_id' => $category->id,
@@ -107,7 +107,7 @@ class ApiComponentsCest
         $I->wantTo('Update a component with PATCH');
 
         // create
-        $component = factory(\App\Models\Component::class, 'component')->create();
+        $component = factory(\App\Models\Component::class)->create();
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         $data = [
@@ -142,7 +142,7 @@ class ApiComponentsCest
         $I->wantTo('Update a component with PUT');
 
         // create
-        $component = factory(\App\Models\Component::class, 'component')->create();
+        $component = factory(\App\Models\Component::class)->create();
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         $data = [
@@ -176,7 +176,7 @@ class ApiComponentsCest
         $I->wantTo('Delete a component');
 
         // create
-        $component = factory(\App\Models\Component::class, 'component')->create();
+        $component = factory(\App\Models\Component::class)->create();
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         // delete

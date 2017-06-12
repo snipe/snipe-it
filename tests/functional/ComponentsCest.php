@@ -47,7 +47,7 @@ class ComponentsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $component = factory(App\Models\Component::class, 'component')->make();
+        $component = factory(App\Models\Component::class)->make();
 
         $values = [
             'name'              => $component->name,
