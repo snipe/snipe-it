@@ -14,6 +14,6 @@ class CompanySeeder extends Seeder
     {
         //
         Company::truncate();
-        factory(Company::class, 'company', 4)->create();
+        factory(Company::class, 4)->create();
     }
 }

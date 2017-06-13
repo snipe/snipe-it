@@ -13,9 +13,14 @@ class ManufacturerTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testManufacturerAdd()
     {
-      $manufacturers = factory(Manufacturer::class, 'manufacturer')->make();
+      $manufacturers = factory(Manufacturer::class)->make();
       $values = [
         'name' => $manufacturers->name,
       ];

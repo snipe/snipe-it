@@ -2,26 +2,31 @@
 
 use App\Models\Company;
 
-$factory->defineAs(App\Models\User::class, 'valid-user', function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
-    'first_name' => $faker->firstName,
-    'last_name' => $faker->lastName,
-    'username' => $faker->username,
-    'password' => $faker->password,
-    'permissions' => '{"user":"0"}',
-    'email' => $faker->safeEmail,
-    'company_id' => Company::inRandomOrder()->first()->id,
-    'locale' => $faker->locale,
-    'employee_num' => $faker->numberBetween(3500, 35050),
-    'jobtitle' => $faker->word,
-    'phone' => $faker->phoneNumber,
-    'notes' => $faker->sentence
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'username' => $faker->username,
+        'password' => $faker->password,
+        'permissions' => '{"user":"0"}',
+        'email' => $faker->safeEmail,
+        'company_id' => function () {
+                return factory(App\Models\Company::class)->create()->id;
+        },
+        'locale' => $faker->locale,
+        'employee_num' => $faker->numberBetween(3500, 35050),
+        'jobtitle' => $faker->word,
+        'phone' => $faker->phoneNumber,
+        'notes' => $faker->sentence,
+        'location_id' => function () {
+            return factory(App\Models\Location::class)->create()->id;
+        },
     ];
 });
 // USER GLOBAL PERMISSION STATES
 $factory->state(App\Models\User::class, 'superuser', function ($faker) {
     return [
-    'permissions' => '{"superuser":"1"}',
+        'permissions' => '{"superuser":"1"}',
     ];
 });
 
@@ -33,7 +38,7 @@ $factory->state(App\Models\User::class, 'admin', function ($faker) {
 // USER ASSET PERMISSION STATES
 $factory->state(App\Models\User::class, 'view-assets', function ($faker) {
     return [
-    'permissions' => '{"assets.view":"1"}',
+        'permissions' => '{"assets.view":"1"}',
     ];
 });
 
@@ -51,7 +56,7 @@ $factory->state(App\Models\User::class, 'edit-assets', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-assets', function ($faker) {
     return [
-        'permissions' => '{"assets.delete":"1",}',
+        'permissions' => '{"assets.delete":"1"}',
     ];
 });
 
@@ -76,7 +81,7 @@ $factory->state(App\Models\User::class, 'view-requestable-assets', function ($fa
 // USER ACCESSORY PERMISSION STATES
 $factory->state(App\Models\User::class, 'view-accessories', function ($faker) {
     return [
-    'permissions' => '{"accessories.view":"1"}',
+        'permissions' => '{"accessories.view":"1"}',
     ];
 });
 
@@ -94,7 +99,7 @@ $factory->state(App\Models\User::class, 'edit-accessories', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-accessories', function ($faker) {
     return [
-        'permissions' => '{"accessories.delete":"1",}',
+        'permissions' => '{"accessories.delete":"1"}',
     ];
 });
 
@@ -113,7 +118,7 @@ $factory->state(App\Models\User::class, 'checkout-accessories', function ($faker
 // USER CONSUMABLE PERMISSION STATES
 $factory->state(App\Models\User::class, 'view-consumables', function ($faker) {
     return [
-    'permissions' => '{"consumables.view":"1"}',
+        'permissions' => '{"consumables.view":"1"}',
     ];
 });
 
@@ -131,7 +136,7 @@ $factory->state(App\Models\User::class, 'edit-consumables', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-consumables', function ($faker) {
     return [
-        'permissions' => '{"consumables.delete":"1",}',
+        'permissions' => '{"consumables.delete":"1"}',
     ];
 });
 
@@ -150,7 +155,7 @@ $factory->state(App\Models\User::class, 'checkout-consumables', function ($faker
 // USER LICENSE PERMISSION STATES
 $factory->state(App\Models\User::class, 'view-licenses', function ($faker) {
     return [
-    'permissions' => '{"licenses.view":"1"}',
+        'permissions' => '{"licenses.view":"1"}',
     ];
 });
 
@@ -168,7 +173,7 @@ $factory->state(App\Models\User::class, 'edit-licenses', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-licenses', function ($faker) {
     return [
-        'permissions' => '{"licenses.delete":"1",}',
+        'permissions' => '{"licenses.delete":"1"}',
     ];
 });
 
@@ -187,7 +192,7 @@ $factory->state(App\Models\User::class, 'view-keys-licenses', function ($faker) 
 // USER COMPONENTS PERMISSION STATES
 $factory->state(App\Models\User::class, 'view-components', function ($faker) {
     return [
-    'permissions' => '{"components.view":"1"}',
+        'permissions' => '{"components.view":"1"}',
     ];
 });
 
@@ -205,7 +210,7 @@ $factory->state(App\Models\User::class, 'edit-components', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-components', function ($faker) {
     return [
-        'permissions' => '{"components.delete":"1",}',
+        'permissions' => '{"components.delete":"1"}',
     ];
 });
 
@@ -224,7 +229,7 @@ $factory->state(App\Models\User::class, 'checkout-components', function ($faker)
 // USER USER PERMISSION STATES
 $factory->state(App\Models\User::class, 'view-users', function ($faker) {
     return [
-    'permissions' => '{"users.view":"1"}',
+        'permissions' => '{"users.view":"1"}',
     ];
 });
 
@@ -242,6 +247,6 @@ $factory->state(App\Models\User::class, 'edit-users', function ($faker) {
 
 $factory->state(App\Models\User::class, 'delete-users', function ($faker) {
     return [
-        'permissions' => '{"users.delete":"1",}',
+        'permissions' => '{"users.delete":"1"}',
     ];
 });

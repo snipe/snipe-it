@@ -19,11 +19,11 @@ class ApiComponentsAssetsCest
         $I->wantTo('Get a list of assets related to a component');
 
         // generate component
-        $component = factory(\App\Models\Component::class, 'component')
+        $component = factory(\App\Models\Component::class)
                     ->create(['user_id' => $this->user->id, 'qty' => 20]);
 
         // generate assets and associate component
-        $assets = factory(\App\Models\Asset::class, 'asset', 2)
+        $assets = factory(\App\Models\Asset::class, 2)
                     ->create(['user_id' => $this->user->id])
                     ->each(function ($asset) use ($component) {
                         $component->assets()->attach($component->id, [
@@ -65,7 +65,7 @@ class ApiComponentsAssetsCest
     {
         $I->wantTo('See an empty response when there are no associated assets to a component');
 
-        $component = factory(\App\Models\Component::class, 'component')
+        $component = factory(\App\Models\Component::class)
                     ->create(['user_id' => $this->user->id, 'qty' => 20]);
 
         $I->sendGET('/components/' . $component->id . '/assets');

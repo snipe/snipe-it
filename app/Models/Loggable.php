@@ -45,12 +45,17 @@ trait Loggable
         $log->user_id = Auth::user()->id;
 
         // @FIXME This needs to be generalized with new asset checkout.
-        if (!is_null($this->asset_id) || isset($target)) {
-            $log->target_type = Asset::class;
-            $log->target_id = $this->asset_id;
-        } elseif (!is_null($this->assigned_to)) {
-            $log->target_type = User::class;
-            $log->target_id = $this->assigned_to;
+        if(isset($target)) {
+            $log->target_type = get_class($target);
+            $log->target_id = $target->id;
+        } else {
+            if (!is_null($this->asset_id)) {
+                $log->target_type = Asset::class;
+                $log->target_id = $this->asset_id;
+            } elseif (!is_null($this->assigned_to)) {
+                $log->target_type = User::class;
+                $log->target_id = $this->assigned_to;
+            }
         }
 
         $item = call_user_func(array($log->target_type, 'find'), $log->target_id);

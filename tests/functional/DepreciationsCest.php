@@ -44,7 +44,7 @@ class DepreciationCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $depreciation = factory(App\Models\Depreciation::class, 'depreciation')->make();
+        $depreciation = factory(App\Models\Depreciation::class)->make();
         $values = [
             'name'      => $depreciation->name,
             'months'    => $depreciation->months

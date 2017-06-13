@@ -48,7 +48,7 @@ class ConsumablesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $consumable = factory(App\Models\Consumable::class, 'consumable')->make();
+        $consumable = factory(App\Models\Consumable::class)->make();
         $values = [
             'company_id'        => $consumable->company_id,
             'name'              => $consumable->name,

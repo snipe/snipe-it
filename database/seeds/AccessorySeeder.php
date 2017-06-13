@@ -7,6 +7,6 @@ class AccessorySeeder extends Seeder
   public function run()
   {
     Accessory::truncate();
-    factory(Accessory::class, 'accessory',15)->create();
+    factory(Accessory::class,15)->create();
   }
 }

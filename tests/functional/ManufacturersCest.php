@@ -43,7 +43,7 @@ class ManufacturersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $manufacturer = factory(App\Models\Manufacturer::class, 'manufacturer')->make();
+        $manufacturer = factory(App\Models\Manufacturer::class)->make();
         $values = [
             'name' => $manufacturer->name
         ];
@@ -57,7 +57,7 @@ class ManufacturersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a manufacturer');
-        $manufacturerId = factory(App\Models\Manufacturer::class, 'manufacturer')->create()->id;
+        $manufacturerId = factory(App\Models\Manufacturer::class)->create()->id;
         $I->sendDelete(route('manufacturers.destroy', $manufacturerId), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

@@ -21,7 +21,7 @@ class ApiAssetsCest
         $I->wantTo('Get a list of assets');
 
         // setup
-        $assets = factory(\App\Models\Asset::class, 'asset', 10)->create();
+        $assets = factory(\App\Models\Asset::class, 10)->create();
 
         // call
         $I->sendGET('/hardware');
@@ -121,7 +121,7 @@ class ApiAssetsCest
     {
         $I->wantTo('Create a new asset');
 
-        $temp_asset = factory(\App\Models\Asset::class, 'asset')->make();
+        $temp_asset = factory(\App\Models\Asset::class)->make();
 
         // setup
         $data = [
@@ -153,10 +153,10 @@ class ApiAssetsCest
         $I->wantTo('Update an asset with PATCH');
 
         // create
-        $asset = factory(\App\Models\Asset::class, 'asset')->create();
+        $asset = factory(\App\Models\Asset::class)->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
-        $temp_asset = factory(\App\Models\Asset::class, 'asset')->make();
+        $temp_asset = factory(\App\Models\Asset::class)->make();
 
         $data = [
             'asset_tag' => $temp_asset->asset_tag,
@@ -279,11 +279,11 @@ class ApiAssetsCest
         $I->wantTo('Update a asset with PUT');
 
         // create
-        $asset = factory(\App\Models\Asset::class, 'asset')->create();
+        $asset = factory(\App\Models\Asset::class)->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
         $temp_asset_tag = $this->faker->uuid;
-        $temp_asset = factory(\App\Models\Asset::class, 'asset')->make([
+        $temp_asset = factory(\App\Models\Asset::class)->make([
             'asset_tag' => $temp_asset_tag,
         ]);
 
@@ -411,7 +411,7 @@ class ApiAssetsCest
         $I->wantTo('Delete an asset');
 
         // create
-        $asset = factory(\App\Models\Asset::class, 'asset')->create();
+        $asset = factory(\App\Models\Asset::class)->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
         // delete

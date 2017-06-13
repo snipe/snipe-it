@@ -53,7 +53,7 @@ class AccessoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $accessory = factory(App\Models\Accessory::class,'accessory')->make();
+        $accessory = factory(App\Models\Accessory::class)->make();
         $values = [
             'company_id'       => $accessory->company_id,
             'name'          => $accessory->name,

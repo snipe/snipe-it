@@ -8,9 +8,9 @@ class ActionlogSeeder extends Seeder
   {
     Actionlog::truncate();
     factory(Actionlog::class, 'asset-checkout',25)->create();
-    factory(Actionlog::class, 'accessory-checkout',15)->create();
-    factory(Actionlog::class, 'consumable-checkout', 15)->create();
-    factory(Actionlog::class, 'component-checkout', 15)->create();
-    factory(Actionlog::class, 'license-checkout-asset', 15)->create();
+    // factory(Actionlog::class, 'accessory-checkout',15)->create();
+    // factory(Actionlog::class, 'consumable-checkout', 15)->create();
+    // factory(Actionlog::class, 'component-checkout', 15)->create();
+    // factory(Actionlog::class, 'license-checkout-asset', 15)->create();
   }
 }

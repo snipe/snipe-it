@@ -14,6 +14,11 @@ class CustomFieldTest extends \Codeception\TestCase\Test
     protected $tester;
     use DatabaseMigrations;
 
+    protected function _before()
+    {
+        Artisan::call('migrate');
+    }
+
     public function testConstructor()
     {
         $customfield = new CustomField();
@@ -21,7 +26,7 @@ class CustomFieldTest extends \Codeception\TestCase\Test
 
     public function testFormat()
     {
-        $customfield = factory(CustomField::class, 'customfield-ip')->make();
+        $customfield = factory(CustomField::class)->make();
         $values = [
             'name' => $customfield->name,
             'format' => $customfield->format,

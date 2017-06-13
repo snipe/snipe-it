@@ -50,7 +50,11 @@ class UsersController extends Controller
         }
 
         if ($request->has('company_id')) {
-            $users = $users->where('company_id','=',$request->input('company_id'));
+            $users = $users->where('company_id', '=', $request->input('company_id'));
+        }
+
+        if ($request->has('location_id')) {
+            $users = $users->where('location_id', '=', $request->input('location_id'));
         }
 
         if ($request->has('department_id')) {

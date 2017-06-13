@@ -45,7 +45,7 @@ class LocationsCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $location = factory(App\Models\Location::class, 'location')->make();
+        $location = factory(App\Models\Location::class)->make();
         $values = [
             'name'              => $location->name,
             'parent_id'         => $I->getLocationId(),
@@ -67,7 +67,7 @@ class LocationsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a location');
-        $location = factory(App\Models\Location::class, 'location')->create();
+        $location = factory(App\Models\Location::class)->create();
         $I->sendDelete(route('locations.destroy', $location->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

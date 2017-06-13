@@ -33,7 +33,7 @@ class AssetsCest
 
     public function passesCreateAndCheckout(FunctionalTester $I)
     {
-        $asset = factory(App\Models\Asset::class,'asset')->make();
+        $asset = factory(App\Models\Asset::class)->make();
         $userId = $I->getUserId();
         $values = [
             'company_id'        => $asset->company_id,

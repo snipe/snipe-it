@@ -47,7 +47,7 @@ class LicensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $license = factory(App\Models\License::class, 'license')->make();
+        $license = factory(App\Models\License::class)->make();
         $values = [
             'name'              => $license->name,
             'serial'            => $license->serial,
