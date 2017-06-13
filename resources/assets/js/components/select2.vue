@@ -1,5 +1,8 @@
 
 <style scoped>
+    .select2-dropdown {
+        z-index:9999;
+    }
 </style>
 
 <template>
@@ -14,13 +17,14 @@
         /*
          * The component's data.
          */
-        props: ['options', 'value'],
+        props: ['options', 'value', 'parent'],
 
         mounted() {
             var vm = this;
             $(this.$el)
                 .select2({
-                    data: this.options
+                    data: this.options,
+                    dropdownParent: $('#import-modal')
                 })
                 .on('change', function() { vm.$emit('input', this.value) } );
         },

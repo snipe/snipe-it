@@ -58,11 +58,10 @@ class LicenseImporter extends ItemImporter
         $this->item['license_email'] = $this->array_smart_fetch($row, "licensed to email");
         $this->item['license_name'] = $this->array_smart_fetch($row, "licensed to name");
         $this->item['maintained'] = $this->array_smart_fetch($row, 'maintained');
-        $this->item['purchase_order'] = $this->array_smart_fetch($row, 'purchase_order');
+        $this->item['purchase_order'] = $this->array_smart_fetch($row, 'purchase order');
         $this->item['reassignable'] = $this->array_smart_fetch($row, 'reassignable');
-        $this->item['serial'] = $this->array_smart_fetch($row, "serial number");
-        $this->item['termination_date'] = $this->array_smart_fetch($row, 'termination_date');
         $this->item['seats'] = $this->array_smart_fetch($row, 'seats');
+        $this->item['termination_date'] = $this->array_smart_fetch($row, 'termination date');
 
         if ($editingLicense) {
             $license->update($this->sanitizeItemForUpdating($license));

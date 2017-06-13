@@ -10,7 +10,6 @@ th {
 
 <script>
     require('blueimp-file-upload');
-    var modal = require('vue-strap').modal
     export default {
         /*
          * The component's data.
@@ -127,7 +126,12 @@ th {
                     }
                     this.displayImportModal=false;
                 });
-            }
+            },
+
+
+            closeDialog() {
+                this.displayImportModal = false;
+            },
 
         },
 
@@ -138,7 +142,7 @@ th {
         },
 
         components: {
-            modal,
+            modal: require('../modal.vue'),
             errors: require('./importer-errors.vue'),
             alert: require('../alert.vue'),
             select2: require('../select2.vue')

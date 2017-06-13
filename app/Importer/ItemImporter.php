@@ -20,61 +20,66 @@ class ItemImporter extends Importer
 
     protected function handle($row)
     {
-        // TODO: CHeck if this interferes with checkout to user.. it shouldn't..
-        $this->item["user_id"] = $this->user_id;
         $item_category = $this->array_smart_fetch($row, "category");
-        $item_company_name = $this->array_smart_fetch($row, "company");
-        $item_location = $this->array_smart_fetch($row, "location");
-        $item_manufacturer = $this->array_smart_fetch($row, "manufacturer");
-        $item_status_name = $this->array_smart_fetch($row, "status");
-        $item_supplier = $this->array_smart_fetch($row, "supplier");
-        $this->item["name"] = $this->array_smart_fetch($row, "item name");
-        $this->item["purchase_date"] = null;
-        if ($this->array_smart_fetch($row, "purchase date")!='') {
-            $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
-        }
-
-        $this->item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
-        $this->item["order_number"] = $this->array_smart_fetch($row, "order number");
-        $this->item["notes"] = $this->array_smart_fetch($row, "notes");
-        $this->item["qty"] = $this->array_smart_fetch($row, "quantity");
-        $this->item["requestable"] = $this->array_smart_fetch($row, "requestable");
-        $this->item["asset_tag"] = $this->array_smart_fetch($row, "asset tag");
-
-        if ($this->item["user"] = $this->createOrFetchUser($row)) {
-            $this->item['assigned_to'] = $this->item['user']->id;
-        }
-
-        if ($this->shouldUpdateField($item_location)) {
-            if ($this->item["location"] = $this->createOrFetchLocation($item_location)) {
-                $this->item["location_id"] = $this->item["location"]->id;
-            }
-        }
         if ($this->shouldUpdateField($item_category)) {
             if ($this->item["category"] = $this->createOrFetchCategory($item_category)) {
                 $this->item["category_id"] = $this->item["category"]->id;
             }
         }
-        if ($this->shouldUpdateField($item_manufacturer)) {
-            if ($this->item["manufacturer"] = $this->createOrFetchManufacturer($item_manufacturer)) {
-                $this->item["manufacturer_id"] = $this->item["manufacturer"]->id;
-            }
-        }
+
+        $item_company_name = $this->array_smart_fetch($row, "company");
         if ($this->shouldUpdateField($item_company_name)) {
             if ($this->item["company"] = $this->createOrFetchCompany($item_company_name)) {
                 $this->item["company_id"] = $this->item["company"]->id;
             }
         }
+
+        $item_location = $this->array_smart_fetch($row, "location");
+        if ($this->shouldUpdateField($item_location)) {
+            if ($this->item["location"] = $this->createOrFetchLocation($item_location)) {
+                $this->item["location_id"] = $this->item["location"]->id;
+            }
+        }
+
+        $item_manufacturer = $this->array_smart_fetch($row, "manufacturer");
+        if ($this->shouldUpdateField($item_manufacturer)) {
+            if ($this->item["manufacturer"] = $this->createOrFetchManufacturer($item_manufacturer)) {
+                $this->item["manufacturer_id"] = $this->item["manufacturer"]->id;
+            }
+        }
+
+        $item_status_name = $this->array_smart_fetch($row, "status");
         if ($this->shouldUpdateField($item_status_name)) {
             if ($this->item["status_label"] = $this->createOrFetchStatusLabel($item_status_name)) {
                 $this->item["status_label_id"] = $this->item["status_label"]->id;
             }
         }
+
+        $item_supplier = $this->array_smart_fetch($row, "supplier");
         if ($this->shouldUpdateField($item_supplier)) {
             if ($this->item['supplier'] = $this->createOrFetchSupplier($item_supplier)) {
                 $this->item['supplier_id'] = $this->item['supplier']->id;
             }
         }
+
+        $this->item["name"] = $this->array_smart_fetch($row, "item name");
+        $this->item["notes"] = $this->array_smart_fetch($row, "notes");
+        $this->item["order_number"] = $this->array_smart_fetch($row, "order number");
+        $this->item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
+
+        $this->item["purchase_date"] = null;
+        if ($this->array_smart_fetch($row, "purchase date")!='') {
+            $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
+        }
+
+        $this->item["qty"] = $this->array_smart_fetch($row, "quantity");
+        $this->item["requestable"] = $this->array_smart_fetch($row, "requestable");
+        $this->item["user_id"] = $this->user_id;
+        $this->item['serial'] = $this->array_smart_fetch($row, "serial number");
+        if ($this->item["user"] = $this->createOrFetchUser($row)) {
+            $this->item['assigned_to'] = $this->item['user']->id;
+        }
+
     }
 
     /**

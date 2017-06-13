@@ -11,7 +11,7 @@
 <div id="app">
     <importer inline-template>
         <div class="row">
-        <alert v-show="alert.visible" :alertType="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
+        <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
             @include('importer.import-modal')
             <div class="col-md-12">

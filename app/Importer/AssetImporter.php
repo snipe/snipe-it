@@ -45,10 +45,11 @@ class AssetImporter extends ItemImporter
     public function createAssetIfNotExists(array $row)
     {
         $editingAsset = false;
-        $asset = Asset::where(['asset_tag'=> $this->item['asset_tag']])->first();
+        $asset_tag = $this->array_smart_fetch($row, "asset tag");
+        $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
         if ($asset) {
             if (!$this->updating) {
-                $this->log('A matching Asset ' . $this->item['asset_tag'] . ' already exists');
+                $this->log('A matching Asset ' . $asset_tag . ' already exists');
                 return;
             }
 
@@ -58,7 +59,7 @@ class AssetImporter extends ItemImporter
             $this->log("No Matching Asset, Creating a new one");
             $asset = new Asset;
         }
-        $this->item['serial'] = $this->array_smart_fetch($row, "serial number");
+
         $this->item['image'] = $this->array_smart_fetch($row, "image");
         $this->item['warranty_months'] = intval($this->array_smart_fetch($row, "warranty months"));
         if ($this->item['asset_model'] = $this->createOrFetchAssetModel($row)) {
