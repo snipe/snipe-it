@@ -90,7 +90,6 @@ class AccessoriesController extends Controller
 
         // Was the accessory created?
         if ($accessory->save()) {
-            $accessory->logCreate();
             // Redirect to the new accessory  page
             return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.create.success'));
         }
@@ -108,7 +107,6 @@ class AccessoriesController extends Controller
     {
         // Check if the accessory exists
         if (is_null($item = Accessory::find($accessoryId))) {
-            // Redirect to the blogs management page
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
         }
 
@@ -131,9 +129,7 @@ class AccessoriesController extends Controller
    */
     public function update(Request $request, $accessoryId = null)
     {
-      // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
-            // Redirect to the accessory index page
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
         }
 
@@ -154,7 +150,6 @@ class AccessoriesController extends Controller
 
       // Was the accessory updated?
         if ($accessory->save()) {
-            // Redirect to the updated accessory page
             return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
         }
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
@@ -169,9 +164,7 @@ class AccessoriesController extends Controller
    */
     public function destroy(Request $request, $accessoryId)
     {
-        // Check if the blog post exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
-            // Redirect to the blogs management page
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
 
@@ -182,7 +175,6 @@ class AccessoriesController extends Controller
              return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
         }
         $accessory->delete();
-        // Redirect to the locations management page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.delete.success'));
     }
 

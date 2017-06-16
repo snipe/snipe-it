@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Setting;
@@ -91,10 +90,7 @@ class ConsumablesController extends Controller
         $consumable->qty                    = Input::get('qty');
         $consumable->user_id                = Auth::id();
 
-        // Was the consumable created?
         if ($consumable->save()) {
-            $consumable->logCreate();
-            // Redirect to the new consumable  page
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.create.success'));
         }
 
@@ -113,9 +109,7 @@ class ConsumablesController extends Controller
      */
     public function edit($consumableId = null)
     {
-        // Check if the consumable exists
         if (is_null($item = Consumable::find($consumableId))) {
-            // Redirect to the blogs management page
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
 
@@ -175,9 +169,7 @@ class ConsumablesController extends Controller
      */
     public function destroy($consumableId)
     {
-        // Check if the blog post exists
         if (is_null($consumable = Consumable::find($consumableId))) {
-            // Redirect to the blogs management page
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
         $this->authorize($consumable);
@@ -202,11 +194,7 @@ class ConsumablesController extends Controller
         if (isset($consumable->id)) {
             return view('consumables/view', compact('consumable'));
         }
-        // Prepare the error message
-        $error = trans('admin/consumables/message.does_not_exist', compact('id'));
-
-        // Redirect to the user management page
-        return redirect()->route('consumables')->with('error', $error);
+        return redirect()->route('consumables')->with('error', trans('admin/consumables/message.does_not_exist', compact('id')));
     }
 
     /**
@@ -220,13 +208,10 @@ class ConsumablesController extends Controller
      */
     public function getCheckout($consumableId)
     {
-        // Check if the consumable exists
         if (is_null($consumable = Consumable::find($consumableId))) {
-            // Redirect to the consumable management page with error
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
         $this->authorize('checkout', $consumable);
-        // Get the dropdown of users and then pass it to the checkout view
         return view('consumables/checkout', compact('consumable'))->with('users_list', Helper::usersList());
     }
 
@@ -241,9 +226,7 @@ class ConsumablesController extends Controller
      */
     public function postCheckout($consumableId)
     {
-      // Check if the consumable exists
         if (is_null($consumable = Consumable::find($consumableId))) {
-            // Redirect to the consumable management page with error
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
 
@@ -252,13 +235,13 @@ class ConsumablesController extends Controller
         $admin_user = Auth::user();
         $assigned_to = e(Input::get('assigned_to'));
 
-      // Check if the user exists
+        // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.user_does_not_exist'));
         }
 
-      // Update the consumable data
+        // Update the consumable data
         $consumable->assigned_to = e(Input::get('assigned_to'));
 
         $consumable->users()->attach($consumable->id, [

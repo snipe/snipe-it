@@ -113,10 +113,7 @@ class LicensesController extends Controller
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
 
-        // Was the license created?
         if ($license->save()) {
-            $license->logCreate();
-            // Save the license seat data
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($license->getErrors());
@@ -167,15 +164,12 @@ class LicensesController extends Controller
      */
     public function update(Request $request, $licenseId = null)
     {
-        // Check if the license exists
         if (is_null($license = License::find($licenseId))) {
-            // Redirect to the blogs management page
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         }
 
         $this->authorize('update', $license);
 
-      // Update the license data
         $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
         $license->depreciation_id   = $request->input('depreciation_id');
         $license->expiration_date   = $request->input('expiration_date');

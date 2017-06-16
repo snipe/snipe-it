@@ -1198,20 +1198,10 @@ class AssetsController extends Controller
                         $update_array['requestable'] = e(Input::get('requestable'));
                     }
 
-                    if (DB::table('assets')
+                    DB::table('assets')
                     ->where('id', $key)
-                    ->update($update_array)) {
-                        $logAction = new Actionlog();
-                        $logAction->item_type = Asset::class;
-                        $logAction->item_id = $key;
-                        $logAction->created_at =  date("Y-m-d H:i:s");
+                    ->update($update_array);
 
-                        if (Input::has('rtd_location_id')) {
-                            $logAction->location_id = e(Input::get('rtd_location_id'));
-                        }
-                        $logAction->user_id = Auth::user()->id;
-                        $logAction->logaction('update');
-                    }
                 } // endforeach
                 return redirect()->to("hardware")->with('success', trans('admin/hardware/message.update.success'));
             // no values given, nothing to update
@@ -1238,17 +1228,9 @@ class AssetsController extends Controller
                 $update_array['deleted_at'] = date('Y-m-d H:i:s');
                 $update_array['assigned_to'] = null;
 
-                if (DB::table('assets')
+                DB::table('assets')
                 ->where('id', $asset->id)
-                ->update($update_array)) {
-
-                    $logAction = new Actionlog();
-                    $logAction->item_type = Asset::class;
-                    $logAction->item_id = $asset->id;
-                    $logAction->created_at =  date("Y-m-d H:i:s");
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->logaction('deleted');
-                }
+                ->update($update_array);
 
             } // endforeach
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.delete.success'));

@@ -6,6 +6,17 @@ use Illuminate\Support\ServiceProvider;
 use DB;
 use Log;
 use Illuminate\Support\Facades\Schema;
+use App\Observers\AssetObserver;
+use App\Observers\LicenseObserver;
+use App\Observers\AccessoryObserver;
+use App\Observers\ConsumableObserver;
+use App\Observers\ComponentObserver;
+use App\Models\Asset;
+use App\Models\License;
+use App\Models\Accessory;
+use App\Models\Consumable;
+use App\Models\Component;
+
 
 /**
  * This service provider handles a few custom validation rules.
@@ -26,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        Asset::observe(AssetObserver::class);
+        Accessory::observe(AccessoryObserver::class);
+        Component::observe(ComponentObserver::class);
+        Consumable::observe(ConsumableObserver::class);
+        License::observe(LicenseObserver::class);
         
         // Email array validator
         Validator::extend('email_array', function ($attribute, $value, $parameters, $validator) {

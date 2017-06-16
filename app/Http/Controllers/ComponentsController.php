@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\CustomField;
@@ -12,7 +11,6 @@ use App\Models\Asset;
 use Auth;
 use Config;
 use DB;
-use DeepCopyTest\H;
 use Input;
 use Lang;
 use Mail;
@@ -79,10 +77,7 @@ class ComponentsController extends Controller
     public function store()
     {
         $this->authorize('create', Component::class);
-        // create a new model instance
         $component = new Component();
-
-        // Update the component data
         $component->name                   = Input::get('name');
         $component->category_id            = Input::get('category_id');
         $component->location_id            = Input::get('location_id');
@@ -95,10 +90,7 @@ class ComponentsController extends Controller
         $component->qty                    = Input::get('qty');
         $component->user_id                = Auth::id();
 
-        // Was the component created?
         if ($component->save()) {
-            $component->logCreate();
-            // Redirect to the new component  page
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($component->getErrors());
@@ -115,9 +107,7 @@ class ComponentsController extends Controller
      */
     public function edit($componentId = null)
     {
-        // Check if the component exists
         if (is_null($item = Component::find($componentId))) {
-            // Redirect to the blogs management page
             return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         }
 
@@ -141,9 +131,7 @@ class ComponentsController extends Controller
      */
     public function update($componentId = null)
     {
-        // Check if the blog post exists
         if (is_null($component = Component::find($componentId))) {
-            // Redirect to the blogs management page
             return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         }
 
