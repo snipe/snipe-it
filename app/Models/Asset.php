@@ -426,6 +426,7 @@ class Asset extends Depreciable
     {
         $settings = \App\Models\Setting::getSettings();
 
+
         if ($settings->auto_increment_assets == '1') {
             $temp_asset_tag = \DB::table('assets')
                 ->where('physical', '=', '1')
@@ -435,13 +436,42 @@ class Asset extends Depreciable
             $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
 
             if ($settings->zerofill_count > 0) {
-                return $settings->auto_increment_prefix.Asset::zerofill(($asset_tag + 1), $settings->zerofill_count);
+                return $settings->auto_increment_prefix.Asset::zerofill($settings->next_auto_tag_base, $settings->zerofill_count);
             }
-            return $settings->auto_increment_prefix.($asset_tag + 1);
+            return $settings->auto_increment_prefix.$settings->next_auto_tag_bas;
         } else {
             return false;
         }
     }
+
+    /*
+     * Get the next base number for the auto-incrementer. We'll add the zerofill and
+     * prefixes on the fly as we generate the number
+     *
+     */
+    public static function nextAutoIncrement($assets)
+    {
+
+        $max = 1;
+
+        foreach ($assets as $asset) {
+            $results = preg_match ( "/\d+$/" , $asset['asset_tag'], $matches);
+
+            if ($results)
+            {
+                $number = $matches[0];
+
+                if ($number > $max)
+                {
+                    $max = $number;
+                }
+            }
+        }
+        return $max + 1;
+
+    }
+
+
 
 
     public static function zerofill($num, $zerofill = 3)
@@ -688,9 +718,9 @@ class Asset extends Depreciable
   /**
   * Query builder scope to get accepted assets
   *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
     public function scopeAccepted($query)
     {
