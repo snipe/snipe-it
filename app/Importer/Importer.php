@@ -16,7 +16,7 @@ abstract class Importer
     /**
      * @var string
      */
-    private $filename;
+    private $filename; 
     private $csv;
     /**
      * Should we persist to database?

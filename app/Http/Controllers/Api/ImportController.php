@@ -70,12 +70,13 @@ class ImportController extends Controller
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
                 $import->file_path = $file_name;
                 $import->filesize = filesize($path.'/'.$file_name);
-                $import->save();
-                $results[] = $import;
+                //TODO: is there a lighter way to do this?
                 $reader = Reader::createFromPath("{$path}/{$file_name}");
                 $import->header_row = $reader->fetchOne(0);
                 // Grab the first row to display via ajax as the user picks fields
                 $import->first_row = $reader->fetchOne(1);
+                $import->save();
+                $results[] = $import;
             }
             $results = (new ImportsTransformer)->transformImports($results);
             return [

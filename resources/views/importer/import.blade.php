@@ -46,7 +46,7 @@
                             <div class="col-md-12" style="padding-top: 30px;">
                                 <table class="table table-striped" id="upload-table">
                                     <thead>
-                                        <th class="flex">File</th>
+                                        <th>File</th>
                                         <th>Created</th>
                                         <th>Size</th>
                                         <th></th>
@@ -59,7 +59,7 @@
                                     			<td>@{{ currentFile.filesize }}</td>
                                     			<td>
                                     			<button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">Process</button>
-                                    				<button class="btn btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
+                                    				<button class="btn btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
                                     			</td>
                                     		</tr>
                                     			<import-file :key="currentFile.id" :file="currentFile" @alert="updateAlert(alert)">

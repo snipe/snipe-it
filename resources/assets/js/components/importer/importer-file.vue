@@ -12,7 +12,7 @@ tr {
                 <div class="col-md-4 col-xs-12">
                     <label for="import-type">Import Type:</label>
                 </div>
-                <div class="col-md-8 col-xs-12">
+                <div class="col-md-4 col-xs-12">
                     <select2 :options="options.importTypes" v-model="options.importType">
                         <option disabled value="0"></option>
                     </select2>
@@ -22,15 +22,49 @@ tr {
                 <div class="col-md-4 col-xs-12">
                     <label for="import-update">Update Existing Values?:</label>
                 </div>
-                <div class="col-md-8 col-xs-12">
+                <div class="col-md-4 col-xs-12">
                     <input type="checkbox" name="import-update" v-model="options.update">
                 </div>
             </div>
-            <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="statusText">@{{ this.statusText }}</div>
+
+            <div class="col-md-12" style="padding-top: 30px;">
+            <table class="table">
+            <thead>
+                <th>Header Field</th>
+                <th>Import Field</th>
+                <th>Sample Value</th>
+            </thead>
+            <tbody>
+            <template v-for="(header, index) in file.header_row">
+                <tr>
+                    <td>
+                    <label :for="header" class="controllabel">{{ header }}</label>
+                    </td>
+                    <td>
+                        <div required>
+<!--                             <select2 :options="columns" v-model="activeColumn">
+                                <option value="0">Do Not Import</option>
+                            </select2> -->
+                            <select class="select2" :name="header">
+                                <option value="">Do Not Import</option>
+                                <option v-for="column in columns" :value="column.id" :selected="column.text == header">{{ column.text }}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div>{{ activeFile.first_row[index] }}</div>
+                    </td>
+                </tr>
+                </template>
+            </tbody>
+            </table>
+            </div>
         </td>
+
         <td>
             <button type="button" class="btn btn-default" @click="processDetail = false">Cancel</button>
             <button type="submit" class="btn btn-primary" @click="postSave">Import</button>
+            <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="statusText">{{ this.statusText }}</div>
         </td>
     </tr>
 </template>
@@ -40,6 +74,7 @@ tr {
         props: ['file'],
         data() {
             return {
+                activeFile: this.file,
                 processDetail: false,
                 statusText: null,
                 options: {
@@ -54,9 +89,33 @@ tr {
                     ],
                     statusText: null,
                 },
+                columns: [
+                    {id: 'checkout_to', text: 'Checked out to' },
+                    {id: 'username', text: 'Username' },
+                    {id: 'user_email', text: 'Email' },
+                    {id: 'item_name', text: 'Item Name' },
+                    {id: 'asset_tag', text: 'Asset Tag' },
+                    {id: 'serial_number', text: 'Serial Number' },
+                    {id: 'model_name', text: 'Model Name' },
+                    {id: 'model_number', text: 'Model Number' },
+                    {id: 'category', text: 'Category' },
+                    {id: 'manufacturer', text: 'Manufacturer' },
+                    {id: 'company', text: 'Company' },
+                    {id: 'location', text: 'Location' },
+                    {id: 'purchase_date', text: 'Purchase Date' },
+                    {id: 'purchase_cost', text: 'Purchase Cost' },
+                    {id: 'status', text: 'Status' },
+                    {id: 'notes', text: 'Notes' },
+                    {id: 'image_path', text: 'Image Filename' },
+                ],
+                activeColumn: null,
             }
         },
-
+        computed: {
+            headerLength() {
+                return this.activeFile ? this.activeFile.header_row.length : 0;
+            }
+        },
         created() {
             window.eventHub.$on('showDetails', this.toggleExtendedDisplay)
         },

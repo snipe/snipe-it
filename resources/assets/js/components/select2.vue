@@ -17,22 +17,31 @@
         /*
          * The component's data.
          */
-        props: ['options', 'value', 'parent'],
+        props: ['options', 'value'],
+
+        data() {
+            return {
+                choices: this.options,
+                active: this.value,
+            }
+        },
 
         mounted() {
             var vm = this;
             $(this.$el)
                 .select2({
-                    data: this.options
+                    data: this.choices
                 })
-                .on('change', function() { vm.$emit('input', this.value) } );
+                .on('change', function() { vm.$emit('input', this.active) } );
         },
         watch: {
             value: function (value) {
                 $(this.$el).val(value)
+                this.active = value
             },
             options: function (options) {
                 $(this.$el).select2({data: options})
+                this.choices = options
             },
             destroyed: function() {
                 $(this.$el).off().select2('destroy')

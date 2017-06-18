@@ -12,6 +12,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\CustomField;
+use App\Models\Import;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
@@ -701,12 +702,16 @@ class AssetsController extends Controller
         $this->authorize('create', Asset::class);
 
         // This is currently hardcoded for testing - should use a post variable or something to dynamically select the correct file.
-        $file = storage_path().'/private_uploads/imports/2017-04-30-051003-assets-inventory-for-import.csv';
-        $reader = Reader::createFromPath($file);
-        $header_rows = $reader->fetchOne(0);
+        // $file = storage_path().'/private_uploads/imports/2017-04-30-051003-assets-inventory-for-import.csv';
+        // $reader = Reader::createFromPath($file);
+        $import = Import::first();
+        if(!$import) {
+            return "Upload an import file first";
+        }
+        $header_rows = $import->header_row;
         
         // Grab the first row to display via ajax as the user picks fields
-        $first_row = $reader->fetchOne(1);
+        $first_row = $import->first_row;
         
         // Grab all of the custom fields to we can map those too.
         $custom_fields = CustomField::all();
