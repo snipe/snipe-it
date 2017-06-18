@@ -11,6 +11,7 @@ use App\Models\Import;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ImportController extends Controller
@@ -29,7 +30,7 @@ class ImportController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Process and store a CSV upload file.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -65,17 +66,20 @@ class ImportController extends Controller
                         $results['error'].= ' ' . $exception->getMessage();
                     }
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
-
                 }
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
                 $import->file_path = $file_name;
                 $import->filesize = filesize($path.'/'.$file_name);
                 $import->save();
                 $results[] = $import;
+                $reader = Reader::createFromPath("{$path}/{$file_name}");
+                $import->header_row = $reader->fetchOne(0);
+                // Grab the first row to display via ajax as the user picks fields
+                $import->first_row = $reader->fetchOne(1);
             }
             $results = (new ImportsTransformer)->transformImports($results);
             return [
-                'files' => $results
+                'files' => $results,
             ];
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 500);
