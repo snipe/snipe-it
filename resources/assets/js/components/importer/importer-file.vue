@@ -86,23 +86,35 @@ tr {
                     statusText: null,
                 },
                 columns: [
-                    {id: 'checkout_to', text: 'Checked out to' },
-                    {id: 'username', text: 'Username' },
-                    {id: 'user_email', text: 'Email' },
-                    {id: 'item_name', text: 'Item Name' },
                     {id: 'asset_tag', text: 'Asset Tag' },
-                    {id: 'serial_number', text: 'Serial Number' },
-                    {id: 'model_name', text: 'Model Name' },
-                    {id: 'model_number', text: 'Model Number' },
                     {id: 'category', text: 'Category' },
-                    {id: 'manufacturer', text: 'Manufacturer' },
                     {id: 'company', text: 'Company' },
+                    {id: 'checkout_to', text: 'Checked out to' },
+                    {id: 'expiration_date', text: 'Expiration Date' },
+                    {id: 'image', text: 'Image Filename' },
+                    {id: 'license_email', text: 'Licensed To Email' },
+                    {id: 'license_name', text: 'Licensed To Name' },
                     {id: 'location', text: 'Location' },
-                    {id: 'purchase_date', text: 'Purchase Date' },
-                    {id: 'purchase_cost', text: 'Purchase Cost' },
-                    {id: 'status', text: 'Status' },
+                    {id: 'maintained', text: 'Maintained' },
+                    {id: 'manufacturer', text: 'Manufacturer' },
+                    {id: 'asset_model', text: 'Model Name' },
+                    {id: 'model_number', text: 'Model Number' },
+                    {id: 'item_name', text: 'Item Name' },
                     {id: 'notes', text: 'Notes' },
-                    {id: 'image_path', text: 'Image Filename' },
+                    {id: 'order_number', text: 'Order Number' },
+                    {id: 'purchase_cost', text: 'Purchase Cost' },
+                    {id: 'purchase_date', text: 'Purchase Date' },
+                    {id: 'purchase_order', text: 'Purchase Order' },
+                    {id: 'quantity', text: 'Quantity' },
+                    {id: 'reassignable', text: 'Reassignable' },
+                    {id: 'requestable', text: 'Requestable' },
+                    {id: 'seats', text: 'Seats' },
+                    {id: 'serial', text: 'Serial Number' },
+                    {id: 'status', text: 'Status' },
+                    {id: 'supplier', text: 'Supplier' },
+                    {id: 'user_email', text: 'Email' },
+                    {id: 'username', text: 'Username' },
+                    {id: 'warranty_months', text: 'Warranty Months' },
                 ],
                 columnMappings: {},
                 activeColumn: null,
@@ -117,10 +129,8 @@ tr {
             for(var j=0; j < this.columns.length; j++) {
                 let column = this.columns[j];
                 let index = this.file.header_row.indexOf(column.text)
-                if(index > -1) {
+                if(index != -1) {
                     this.$set(this.columnMappings, this.file.header_row[index], column.id)
-                } else {
-                    this.$set(this.columnMappings, this.file.header_row[index], null)
                 }
             }
         },

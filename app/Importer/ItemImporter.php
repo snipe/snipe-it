@@ -62,10 +62,10 @@ class ItemImporter extends Importer
             }
         }
 
-        $this->item["name"] = $this->array_smart_fetch($row, "item name");
+        $this->item["name"] = $this->array_smart_fetch($row, "item_name");
         $this->item["notes"] = $this->array_smart_fetch($row, "notes");
-        $this->item["order_number"] = $this->array_smart_fetch($row, "order number");
-        $this->item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
+        $this->item["order_number"] = $this->array_smart_fetch($row, "order_number");
+        $this->item["purchase_cost"] = $this->array_smart_fetch($row, "purchase_cost");
 
         $this->item["purchase_date"] = null;
         if ($this->array_smart_fetch($row, "purchase date")!='') {

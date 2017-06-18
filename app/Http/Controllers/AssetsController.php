@@ -712,48 +712,11 @@ class AssetsController extends Controller
         
         // Grab the first row to display via ajax as the user picks fields
         $first_row = $import->first_row;
-        
+
         // Grab all of the custom fields to we can map those too.
         $custom_fields = CustomField::all();
 
         return view('importer/fieldmapper')->with('header_rows', $header_rows)->with('first_row',$first_row)->with('custom_fields',$custom_fields);
-    }
-    
-
-    /**
-    * Process the uploaded file
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @return Redirect
-    */
-    public function postProcessImportFile(ItemImportRequest $request)
-    {
-        $this->authorize('create', Asset::class);
-        $errors = $request->import();
-
-        // We use hardware instead of asset in the url
-        $redirectTo = "hardware";
-        switch (request('import-type')) {
-            case "asset":
-                $redirectTo = "hardware.index";
-                break;
-            case "accessory":
-                $redirectTo = "accessories.index";
-                break;
-            case "consumable":
-                $redirectTo = "consumables.index";
-                break;
-            case "component":
-                $redirectTo = "components.index";
-                break;
-        }
-
-        if ($errors) { //Failure
-            return redirect()->back()->with('import_errors', json_decode(json_encode($errors)))->with('error', trans('admin/hardware/message.import.error'));
-        }
-        return redirect()->to(route($redirectTo))->with('success', trans('admin/hardware/message.import.success'));
-
     }
 
     /**

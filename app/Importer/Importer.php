@@ -34,6 +34,11 @@ abstract class Importer
      */
     protected $updating;
     /**
+     * Map of item fields->csv names
+     * @var array
+     */
+    protected $fieldMap;
+    /**
      * @var callable
      */
     protected $logCallback;
@@ -71,7 +76,7 @@ abstract class Importer
 
     public function import()
     {
-        $results = $this->normalizeInputArray($this->csv->fetchAssoc());
+        $results = $this->csv->fetchAssoc();
         $this->customFields = CustomField::All(['name']);
         DB::transaction(function () use (&$results) {
             Model::unguard();
@@ -88,20 +93,6 @@ abstract class Importer
     abstract protected function handle($row);
 
     /**
-     * @param $results
-     * @return array
-     */
-    public function normalizeInputArray($results)
-    {
-        $newArray = [];
-
-        foreach ($results as $index => $arrayToNormalize) {
-            $newArray[$index] = array_change_key_case($arrayToNormalize);
-        }
-        return $newArray;
-    }
-
-    /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
      * @author Daniel Melzter
@@ -114,11 +105,19 @@ abstract class Importer
     public function array_smart_fetch(array $array, $key, $default = '')
     {
         $val = $default;
-        if (array_key_exists(trim($key), $array)) {
+        $this->log("Looking for: {$key} ");
+        // Let's see if we have a custom mapping defined, and if so, try to lookup there.
+        if (array_key_exists($key, $this->fieldMap)) {
+            // dd($this->fieldMap);
+            $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
+            $key = $this->fieldMap[$key];
+        }
+// dd($array);
+        if (array_key_exists($key, $array)) {
             $val = e(Encoding::toUTF8(trim($array[ $key ])));
         }
         $key = title_case($key);
-        // $this->log("${key}: ${val}");
+        $this->log("${key}: ${val}");
         return $val;
     }
 
@@ -276,6 +275,22 @@ abstract class Importer
     {
         $this->updating = $updating;
 
+        return $this;
+    }
+
+    /**
+     * Defines mappings of csv fields
+     *
+     * @param bool $updating the updating
+     *
+     * @return self
+     */
+    public function setFieldMappings($fields)
+    {
+        // Some initial sanitization.
+
+        $this->fieldMap = $fields;
+        $this->log($this->fieldMap);
         return $this;
     }
 

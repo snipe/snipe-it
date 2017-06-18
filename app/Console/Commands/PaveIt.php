@@ -2,9 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use DB;
-
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -14,12 +11,15 @@ use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\Depreciation;
 use App\Models\Group;
+use App\Models\Import;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
+use DB;
+use Illuminate\Console\Command;
 
 class PaveIt extends Command
 {
