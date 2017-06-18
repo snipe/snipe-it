@@ -57,7 +57,7 @@ class ConsumableImporter extends ItemImporter
             $this->log("Consumable " . $this->item["name"] . ' was created');
             return;
         }
-        $this->jsonError($consumable, 'Consumable');
+        $this->logError($consumable, 'Consumable');
         return;
     }
 }

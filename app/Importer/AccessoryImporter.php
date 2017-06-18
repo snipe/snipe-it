@@ -58,6 +58,6 @@ class AccessoryImporter extends ItemImporter
             $accessory->logCreate('Imported using CSV Importer');
             $this->log('Accessory ' . $this->item["name"] . ' was created');
         }
-        $this->jsonError($accessory, 'Accessory');
+        $this->logError($accessory, 'Accessory');
     }
 }

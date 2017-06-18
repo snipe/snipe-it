@@ -102,25 +102,36 @@ abstract class Importer
      * @param $default string
      * @return string
      */
-    public function array_smart_fetch(array $array, $key, $default = '')
+    public function findMatch(array $array, $key, $default = '')
     {
         $val = $default;
-        $this->log("Looking for: {$key} ");
-        // Let's see if we have a custom mapping defined, and if so, try to lookup there.
-        if (array_key_exists($key, $this->fieldMap)) {
-            // dd($this->fieldMap);
-            $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
-            $key = $this->fieldMap[$key];
+
+        if($customKey = $this->lookupCustomKey($key)) {
+            $key = $customKey;
         }
-// dd($array);
         if (array_key_exists($key, $array)) {
             $val = e(Encoding::toUTF8(trim($array[ $key ])));
         }
-        $key = title_case($key);
-        $this->log("${key}: ${val}");
+        // $this->log("${key}: ${val}");
         return $val;
     }
 
+    /**
+     * Looks up A custom key in the custom field map
+     *
+     * @author Daniel Melzter
+     * @since 4.0
+     * @param $key string
+     * @return string|null
+     */
+    public function lookupCustomKey($key)
+    {
+        if (array_key_exists($key, $this->fieldMap)) {
+            $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
+            return $key = $this->fieldMap[$key];
+        }
+        return null;
+    }
     /**
      * Figure out the fieldname of the custom field
      *
@@ -140,7 +151,7 @@ abstract class Importer
         call_user_func($this->logCallback, $string);
     }
 
-    protected function jsonError($item, $field)
+    protected function logError($item, $field)
     {
         call_user_func($this->errorCallback, $item, $field, $item->getErrors());
     }
@@ -159,9 +170,9 @@ abstract class Importer
      */
     protected function createOrFetchUser($row)
     {
-        $user_name = $this->array_smart_fetch($row, "name");
-        $user_email = $this->array_smart_fetch($row, "email");
-        $user_username = $this->array_smart_fetch($row, "username");
+        $user_name = $this->findMatch($row, "name");
+        $user_email = $this->findMatch($row, "email");
+        $user_username = $this->findMatch($row, "username");
         $first_name = '';
         $last_name = '';
         // A number was given instead of a name
@@ -213,7 +224,7 @@ abstract class Importer
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
-                    $this->jsonError($user, 'User "' . $first_name . '"');
+                    $this->logError($user, 'User "' . $first_name . '"');
                 }
             }
         }

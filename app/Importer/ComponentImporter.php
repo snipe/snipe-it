@@ -75,6 +75,6 @@ class ComponentImporter extends ItemImporter
             }
             return;
         }
-        $this->jsonError($component, 'Component');
+        $this->logError($component, 'Component');
     }
 }

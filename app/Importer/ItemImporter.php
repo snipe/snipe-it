@@ -20,62 +20,62 @@ class ItemImporter extends Importer
 
     protected function handle($row)
     {
-        $item_category = $this->array_smart_fetch($row, "category");
+        $item_category = $this->findMatch($row, "category");
         if ($this->shouldUpdateField($item_category)) {
             if ($this->item["category"] = $this->createOrFetchCategory($item_category)) {
                 $this->item["category_id"] = $this->item["category"]->id;
             }
         }
 
-        $item_company_name = $this->array_smart_fetch($row, "company");
+        $item_company_name = $this->findMatch($row, "company");
         if ($this->shouldUpdateField($item_company_name)) {
             if ($this->item["company"] = $this->createOrFetchCompany($item_company_name)) {
                 $this->item["company_id"] = $this->item["company"]->id;
             }
         }
 
-        $item_location = $this->array_smart_fetch($row, "location");
+        $item_location = $this->findMatch($row, "location");
         if ($this->shouldUpdateField($item_location)) {
             if ($this->item["location"] = $this->createOrFetchLocation($item_location)) {
                 $this->item["location_id"] = $this->item["location"]->id;
             }
         }
 
-        $item_manufacturer = $this->array_smart_fetch($row, "manufacturer");
+        $item_manufacturer = $this->findMatch($row, "manufacturer");
         if ($this->shouldUpdateField($item_manufacturer)) {
             if ($this->item["manufacturer"] = $this->createOrFetchManufacturer($item_manufacturer)) {
                 $this->item["manufacturer_id"] = $this->item["manufacturer"]->id;
             }
         }
 
-        $item_status_name = $this->array_smart_fetch($row, "status");
+        $item_status_name = $this->findMatch($row, "status");
         if ($this->shouldUpdateField($item_status_name)) {
             if ($this->item["status_label"] = $this->createOrFetchStatusLabel($item_status_name)) {
                 $this->item["status_label_id"] = $this->item["status_label"]->id;
             }
         }
 
-        $item_supplier = $this->array_smart_fetch($row, "supplier");
+        $item_supplier = $this->findMatch($row, "supplier");
         if ($this->shouldUpdateField($item_supplier)) {
             if ($this->item['supplier'] = $this->createOrFetchSupplier($item_supplier)) {
                 $this->item['supplier_id'] = $this->item['supplier']->id;
             }
         }
 
-        $this->item["name"] = $this->array_smart_fetch($row, "item_name");
-        $this->item["notes"] = $this->array_smart_fetch($row, "notes");
-        $this->item["order_number"] = $this->array_smart_fetch($row, "order_number");
-        $this->item["purchase_cost"] = $this->array_smart_fetch($row, "purchase_cost");
+        $this->item["name"] = $this->findMatch($row, "item_name");
+        $this->item["notes"] = $this->findMatch($row, "notes");
+        $this->item["order_number"] = $this->findMatch($row, "order_number");
+        $this->item["purchase_cost"] = $this->findMatch($row, "purchase_cost");
 
         $this->item["purchase_date"] = null;
-        if ($this->array_smart_fetch($row, "purchase date")!='') {
-            $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
+        if ($this->findMatch($row, "purchase date")!='') {
+            $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->findMatch($row, "purchase date")));
         }
 
-        $this->item["qty"] = $this->array_smart_fetch($row, "quantity");
-        $this->item["requestable"] = $this->array_smart_fetch($row, "requestable");
+        $this->item["qty"] = $this->findMatch($row, "quantity");
+        $this->item["requestable"] = $this->findMatch($row, "requestable");
         $this->item["user_id"] = $this->user_id;
-        $this->item['serial'] = $this->array_smart_fetch($row, "serial number");
+        $this->item['serial'] = $this->findMatch($row, "serial number");
         if ($this->item["user"] = $this->createOrFetchUser($row)) {
             $this->item['assigned_to'] = $this->item['user']->id;
         }
@@ -113,8 +113,8 @@ class ItemImporter extends Importer
 
     /**
     * Convenience function for updating that strips the empty values.
-    *
-    *
+     * @param $model SnipeModel Model that's being updated.
+     * @return array
     */
     protected function sanitizeItemForUpdating($model)
     {
@@ -152,8 +152,8 @@ class ItemImporter extends Importer
      */
     public function createOrFetchAssetModel(array $row)
     {
-        $asset_model_name = $this->array_smart_fetch($row, "model name");
-        $asset_modelNumber = $this->array_smart_fetch($row, "model number");
+        $asset_model_name = $this->findMatch($row, "model_name");
+        $asset_modelNumber = $this->findMatch($row, "model_number");
         // TODO: At the moment, this means  we can't update the model number if the model name stays the same.
         if (!$this->shouldUpdateField($asset_model_name)) {
             return;
@@ -167,7 +167,6 @@ class ItemImporter extends Importer
         $asset_model = AssetModel::where(['name' => $asset_model_name, 'model_number' => $asset_modelNumber])->first();
 
         if ($asset_model) {
-
             if (!$this->updating) {
                 $this->log("A matching model already exists, returning it.");
                 return $asset_model;
@@ -200,7 +199,7 @@ class ItemImporter extends Importer
             $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelNumber . ' was created');
             return $asset_model;
         }
-        $this->jsonError($asset_model, 'Asset Model "' . $asset_model_name . '"');
+        $this->logError($asset_model, 'Asset Model "' . $asset_model_name . '"');
         return;
     }
 
@@ -218,6 +217,7 @@ class ItemImporter extends Importer
         // Magic to transform "AssetImporter" to "asset" or similar.
         $classname = class_basename(get_class($this));
         $item_type = strtolower(substr($classname, 0, strpos($classname, 'Importer')));
+
         if (empty($asset_category)) {
             $asset_category = 'Unnamed Category';
         }
@@ -241,7 +241,7 @@ class ItemImporter extends Importer
             return $category;
         }
 
-        $this->jsonError($category, 'Category "'. $asset_category. '"');
+        $this->logError($category, 'Category "'. $asset_category. '"');
     }
 
     /**
@@ -270,7 +270,7 @@ class ItemImporter extends Importer
             $this->log('Company ' . $asset_company_name . ' was created');
             return $company;
         }
-        $this->jsonError($company, 'Company');
+        $this->logError($company, 'Company');
         return;
     }
 
@@ -310,7 +310,7 @@ class ItemImporter extends Importer
             return $status;
         }
 
-        $this->jsonError($status, 'Status "'. $asset_statuslabel_name . '"');
+        $this->logError($status, 'Status "'. $asset_statuslabel_name . '"');
         return;
     }
 
@@ -348,7 +348,7 @@ class ItemImporter extends Importer
             $this->log('Manufacturer ' . $manufacturer->name . ' was created');
             return $manufacturer;
         }
-        $this->jsonError($manufacturer, 'Manufacturer "'. $manufacturer->name . '"');
+        $this->logError($manufacturer, 'Manufacturer "'. $manufacturer->name . '"');
         return;
     }
 
@@ -388,7 +388,7 @@ class ItemImporter extends Importer
             $this->log('Location ' . $asset_location . ' was created');
             return $location;
         }
-        $this->jsonError($location, 'Location');
+        $this->logError($location, 'Location');
         return;
     }
 
@@ -424,7 +424,7 @@ class ItemImporter extends Importer
             $this->log('Supplier ' . $item_supplier . ' was created');
             return $supplier;
         }
-        $this->jsonError($supplier, 'Supplier');
+        $this->logError($supplier, 'Supplier');
         return;
     }
 }

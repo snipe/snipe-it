@@ -26,13 +26,11 @@ class AddNextAutoincrementToSettings extends Migration
         });
 
         \Log::debug('Setting '.$next.' as default auto-increment');
-        
+
         if ($settings = App\Models\Setting::first()) {
             $settings->next_auto_tag_base = $next;
-            $settings->save(); 
+            $settings->save();
         }
-       
-
 
     }
 

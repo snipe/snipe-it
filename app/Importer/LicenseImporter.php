@@ -53,15 +53,15 @@ class LicenseImporter extends ItemImporter
             $this->log("No Matching License, Creating a new one");
         }
 
-        $asset_tag = $this->item['asset_tag'] = $this->array_smart_fetch($row, 'asset_tag'); // used for checkout out to an asset.
-        $this->item['expiration_date'] = $this->array_smart_fetch($row, 'expiration date');
-        $this->item['license_email'] = $this->array_smart_fetch($row, "licensed to email");
-        $this->item['license_name'] = $this->array_smart_fetch($row, "licensed to name");
-        $this->item['maintained'] = $this->array_smart_fetch($row, 'maintained');
-        $this->item['purchase_order'] = $this->array_smart_fetch($row, 'purchase order');
-        $this->item['reassignable'] = $this->array_smart_fetch($row, 'reassignable');
-        $this->item['seats'] = $this->array_smart_fetch($row, 'seats');
-        $this->item['termination_date'] = $this->array_smart_fetch($row, 'termination date');
+        $asset_tag = $this->item['asset_tag'] = $this->findMatch($row, 'asset_tag'); // used for checkout out to an asset.
+        $this->item['expiration_date'] = $this->findMatch($row, 'expiration_date');
+        $this->item['license_email'] = $this->findMatch($row, "licensed_to_email");
+        $this->item['license_name'] = $this->findMatch($row, "licensed_to_name");
+        $this->item['maintained'] = $this->findMatch($row, 'maintained');
+        $this->item['purchase_order'] = $this->findMatch($row, 'purchase_order');
+        $this->item['reassignable'] = $this->findMatch($row, 'reassignable');
+        $this->item['seats'] = $this->findMatch($row, 'seats');
+        $this->item['termination_date'] = $this->findMatch($row, 'termination_date');
 
         if ($editingLicense) {
             $license->update($this->sanitizeItemForUpdating($license));
@@ -94,7 +94,7 @@ class LicenseImporter extends ItemImporter
                 }
                 return;
             }
-            $this->jsonError($license, 'License "' . $this->item['name'].'"');
+            $this->logError($license, 'License "' . $this->item['name'].'"');
         }
     }
 }
