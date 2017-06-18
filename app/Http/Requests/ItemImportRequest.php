@@ -33,14 +33,15 @@ class ItemImportRequest extends FormRequest
     public function import(Import $import)
     {
         $filename = config('app.private_uploads') . '/imports/' . $import->file_path;
-        $class = title_case($this->input('import-type'));
+        $import->import_type = $this->input('import-type');
+        $class = title_case($import->import_type);
         $classString = "App\\Importer\\{$class}Importer";
         $importer = new $classString($filename);
-
-        $fieldMappings = request('column-mappings');
-        if($fieldMappings) {
+        $import->field_map  = request('column-mappings');
+        $import->save();
+        if ($import->field_map) {
             // We submit as csv field: column, but the importer is happier if we flip it here.
-            $fieldMappings = array_change_key_case(array_flip($fieldMappings), CASE_LOWER);
+            $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
                         // dd($fieldMappings);
         }
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])

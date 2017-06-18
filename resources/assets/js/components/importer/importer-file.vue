@@ -74,7 +74,7 @@ tr {
                 processDetail: false,
                 statusText: null,
                 options: {
-                    importType: 'asset',
+                    importType: this.file.import_type,
                     update: false,
                     importTypes: [
                         { id: 'asset', text: 'Assets' },
@@ -116,21 +116,24 @@ tr {
                     {id: 'username', text: 'Username' },
                     {id: 'warranty_months', text: 'Warranty Months' },
                 ],
-                columnMappings: {},
+                columnMappings: this.file.field_map || {},
                 activeColumn: null,
             }
         },
         created() {
+            // console.dir(this.file);
             window.eventHub.$on('showDetails', this.toggleExtendedDisplay)
 
-            for (var i=0; i < this.file.header_row.length; i++) {
-                this.$set(this.columnMappings, this.file.header_row[i], null);
-            }
-            for(var j=0; j < this.columns.length; j++) {
-                let column = this.columns[j];
-                let index = this.file.header_row.indexOf(column.text)
-                if(index != -1) {
-                    this.$set(this.columnMappings, this.file.header_row[index], column.id)
+            if(!this.columnMappings) {
+                for (var i=0; i < this.file.header_row.length; i++) {
+                    this.$set(this.columnMappings, this.file.header_row[i], null);
+                }
+                for(var j=0; j < this.columns.length; j++) {
+                    let column = this.columns[j];
+                    let index = this.file.header_row.indexOf(column.text)
+                    if(index != -1) {
+                        this.$set(this.columnMappings, this.file.header_row[index], column.id)
+                    }
                 }
             }
         },

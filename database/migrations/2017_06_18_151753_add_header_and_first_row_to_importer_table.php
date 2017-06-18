@@ -17,7 +17,7 @@ class AddHeaderAndFirstRowToImporterTable extends Migration
             // Add a json string representing the header row of the csv, and the first row of the csv.
             $table->json('header_row')->nullable()->default(null);
             $table->json('first_row')->nullable()->default(null);
-            $table->json('field_mappings')->nullable()->default(null);
+            $table->json('field_map')->nullable()->default(null);
         });
     }
 
@@ -32,7 +32,7 @@ class AddHeaderAndFirstRowToImporterTable extends Migration
             //
             $table->dropColumn('header_row');
             $table->dropColumn('first_row');
-            $table->dropColumn('field_mappings');
+            $table->dropColumn('field_map');
         });
     }
 }

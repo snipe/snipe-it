@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Import extends Model
 {
     protected $casts = [
-        'header_row' => 'json',
-        'first_row' => 'json'
+        'header_row' => 'array',
+        'first_row' => 'array',
+        'field_map' => 'json'
     ];
 }
