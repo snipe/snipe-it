@@ -23,8 +23,7 @@
             var vm = this;
             $(this.$el)
                 .select2({
-                    data: this.options,
-                    dropdownParent: $('#import-modal')
+                    data: this.options
                 })
                 .on('change', function() { vm.$emit('input', this.value) } );
         },

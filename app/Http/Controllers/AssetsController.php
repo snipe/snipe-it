@@ -701,7 +701,7 @@ class AssetsController extends Controller
         $this->authorize('create', Asset::class);
 
         // This is currently hardcoded for testing - should use a post variable or something to dynamically select the correct file.
-        $file = storage_path().'/private_uploads/imports/2017-06-08-072329-sample-assets.csv';
+        $file = storage_path().'/private_uploads/imports/2017-04-30-051003-assets-inventory-for-import.csv';
         $reader = Reader::createFromPath($file);
         $header_rows = $reader->fetchOne(0);
         

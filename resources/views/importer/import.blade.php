@@ -1,5 +1,12 @@
 @extends('layouts/default')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
+
+{{-- Hide importer until vue has rendered it, if we continue using vue for other things we should move this higher in the style --}}
+<style>
+[v-cloak] {
+    display:none;
+}
+</style>
 {{-- Page title --}}
 @section('title')
 {{ trans('general.import') }}
@@ -9,11 +16,10 @@
 {{-- Page content --}}
 @section('content')
 <div id="app">
-    <importer inline-template>
+    <importer inline-template v-cloak>
         <div class="row">
         <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
-            @include('importer.import-modal')
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
@@ -40,21 +46,26 @@
                             <div class="col-md-12" style="padding-top: 30px;">
                                 <table class="table table-striped" id="upload-table">
                                     <thead>
-                                        <th>File</th>
+                                        <th class="flex">File</th>
                                         <th>Created</th>
                                         <th>Size</th>
                                         <th></th>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="file in files">
-                                            <td>@{{ file.file_path }}</td>
-                                            <td>@{{ file.created_at }} </td>
-                                            <td>@{{ file.filesize }}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-info" @click="showModal(file)">Process</button>
-                                                <button class="btn btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
-                                            </td>
-                                        </tr>
+                                    	<template v-for="currentFile in files">
+                                    		<tr>
+                                    			<td>@{{ currentFile.file_path }}</td>
+                                    			<td>@{{ currentFile.created_at }} </td>
+                                    			<td>@{{ currentFile.filesize }}</td>
+                                    			<td>
+                                    			<button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">Process</button>
+                                    				<button class="btn btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
+                                    			</td>
+                                    			<import-file :key="currentFile.id" :file="currentFile" @alert="updateAlert(alert)">
+                                    			</import-file>
+                                    		</tr>
+                                    	</template>
+                                          </td>
                                     </tbody>
                                 </table>
                             </div>

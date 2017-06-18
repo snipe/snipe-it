@@ -24,18 +24,6 @@ th {
                     message: null,
                     visible: false,
                 },
-                modal: {
-                    importType: 'asset',
-                    update: false,
-                    importTypes: [
-                        { id: 'asset', text: 'Assets' },
-                        { id: 'accessory', text: 'Accessories' },
-                        { id: 'consumable', text: 'Consumable' },
-                        { id: 'component', text: 'Components' },
-                        { id: 'license', text: 'Licenses' }
-                    ],
-                    statusText: null,
-                },
                 importErrors: null,
                 progress: {
                     currentClass: "progress-bar-warning",
@@ -58,6 +46,7 @@ th {
                     vm.progress.currentClass="progress-bar-success";
                     vm.progress.statusText = "Success!";
                     vm.files = data.result.files.concat(vm.files);
+                    console.log(data.result.header_row);
                 },
                 add(e, data) {
                     data.headers = {
@@ -93,7 +82,7 @@ th {
             },
             deleteFile(file, key) {
                 this.$http.delete("/api/v1/imports/"+file.id)
-                .then((response) => this.files.splice(key, 1), // Success
+                .then((response) => this.files.splice(key, 1), // Success, remove file from array.
                     (response) => {// Fail
                         this.alert.type="danger";
                         this.alert.visible=true;
@@ -101,38 +90,12 @@ th {
                     }
                 );
             },
-            showModal(file) {
-                this.activeFile = file;
-                this.displayImportModal = true;
+            toggleEvent(fileId) {
+                window.eventHub.$emit('showDetails', fileId)
             },
-
-            postSave() {
-                this.modal.statusText = "Processing...";
-                this.$http.post('/api/v1/imports/process/'+this.activeFile.id, {
-                    'import-update': this.modal.update,
-                    'import-type': this.modal.importType
-                }).then( (response) => {
-                    // Success
-                    this.modal.statusText = "Success... Redirecting.";
-                    window.location.href = response.body.messages.redirect_url;
-                }, (response) => {
-                    // Failure
-                    if(response.body.status == 'import-errors') {
-                        this.importErrors = response.body.messages;
-                    } else {
-                        this.alert.message= response.body.messages;
-                        this.alert.type="danger";
-                        this.alert.visible=true;
-                    }
-                    this.displayImportModal=false;
-                });
+            updateAlert(alert) {
+                this.alert = alert;
             },
-
-
-            closeDialog() {
-                this.displayImportModal = false;
-            },
-
         },
 
         computed: {
@@ -142,10 +105,9 @@ th {
         },
 
         components: {
-            modal: require('../modal.vue'),
-            errors: require('./importer-errors.vue'),
             alert: require('../alert.vue'),
-            select2: require('../select2.vue')
+            errors: require('./importer-errors.vue'),
+            importFile: require('./importer-file.vue'),
         }
     }
 
