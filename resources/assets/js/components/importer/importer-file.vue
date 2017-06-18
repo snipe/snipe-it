@@ -42,13 +42,9 @@ tr {
                     </td>
                     <td>
                         <div required>
-<!--                             <select2 :options="columns" v-model="activeColumn">
+                            <select2 :options="columns" v-model="columnMappings[header]">
                                 <option value="0">Do Not Import</option>
-                            </select2> -->
-                            <select class="select2" :name="header">
-                                <option value="">Do Not Import</option>
-                                <option v-for="column in columns" :value="column.id" :selected="column.text == header">{{ column.text }}</option>
-                            </select>
+                            </select2>
                         </div>
                     </td>
                     <td>
@@ -108,16 +104,25 @@ tr {
                     {id: 'notes', text: 'Notes' },
                     {id: 'image_path', text: 'Image Filename' },
                 ],
+                columnMappings: {},
                 activeColumn: null,
-            }
-        },
-        computed: {
-            headerLength() {
-                return this.activeFile ? this.activeFile.header_row.length : 0;
             }
         },
         created() {
             window.eventHub.$on('showDetails', this.toggleExtendedDisplay)
+
+            for (var i=0; i < this.file.header_row.length; i++) {
+                this.$set(this.columnMappings, this.file.header_row[i], null);
+            }
+            for(var j=0; j < this.columns.length; j++) {
+                let column = this.columns[j];
+                let index = this.file.header_row.indexOf(column.text)
+                if(index > -1) {
+                    this.$set(this.columnMappings, this.file.header_row[index], column.id)
+                } else {
+                    this.$set(this.columnMappings, this.file.header_row[index], null)
+                }
+            }
         },
 
         methods: {
@@ -125,7 +130,8 @@ tr {
                 this.statusText = "Processing...";
                 this.$http.post('/api/v1/imports/process/'+this.file.id, {
                     'import-update': this.options.update,
-                    'import-type': this.options.importType
+                    'import-type': this.options.importType,
+                    'column-mappings': this.columnMappings
                 }).then( (response) => {
                     // Success
                     this.statusText = "Success... Redirecting.";
@@ -151,6 +157,10 @@ tr {
                     this.processDetail = !this.processDetail
                 }
             },
+            updateModel(header, value) {
+                console.log(header, value);
+                this.columnMappings[header] = value;
+            }
         },
         components: {
             select2: require('../select2.vue')

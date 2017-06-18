@@ -19,29 +19,21 @@
          */
         props: ['options', 'value'],
 
-        data() {
-            return {
-                choices: this.options,
-                active: this.value,
-            }
-        },
-
         mounted() {
             var vm = this;
             $(this.$el)
                 .select2({
-                    data: this.choices
+                    data: this.options
                 })
-                .on('change', function() { vm.$emit('input', this.active) } );
+                .on('change', function() { vm.$emit('input', this.value) } )
+                .val(this.value).trigger('change');
         },
         watch: {
             value: function (value) {
                 $(this.$el).val(value)
-                this.active = value
             },
             options: function (options) {
                 $(this.$el).select2({data: options})
-                this.choices = options
             },
             destroyed: function() {
                 $(this.$el).off().select2('destroy')
