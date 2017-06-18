@@ -61,11 +61,10 @@
                                     			<button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">Process</button>
                                     				<button class="btn btn-danger" @click="deleteFile(file)"><i class="fa fa-trash icon-white"></i></button>
                                     			</td>
+                                    		</tr>
                                     			<import-file :key="currentFile.id" :file="currentFile" @alert="updateAlert(alert)">
                                     			</import-file>
-                                    		</tr>
                                     	</template>
-                                          </td>
                                     </tbody>
                                 </table>
                             </div>

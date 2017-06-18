@@ -38,6 +38,7 @@ th {
          * Prepare the component (Vue 2.x).
          */
         mounted() {
+            window.eventHub.$on('importErrors', this.updateImportErrors);
             this.fetchFiles();
             let vm = this;
             $('#fileupload').fileupload({
@@ -96,6 +97,9 @@ th {
             updateAlert(alert) {
                 this.alert = alert;
             },
+            updateImportErrors(errors) {
+                this.importErrors = errors;
+            }
         },
 
         computed: {

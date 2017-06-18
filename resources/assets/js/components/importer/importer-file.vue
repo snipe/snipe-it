@@ -13,7 +13,7 @@ tr {
                     <label for="import-type">Import Type:</label>
                 </div>
                 <div class="col-md-8 col-xs-12">
-                    <select2 :options="modal.importTypes" v-model="modal.importType">
+                    <select2 :options="options.importTypes" v-model="options.importType">
                         <option disabled value="0"></option>
                     </select2>
                 </div>
@@ -23,16 +23,14 @@ tr {
                     <label for="import-update">Update Existing Values?:</label>
                 </div>
                 <div class="col-md-8 col-xs-12">
-                    <input type="checkbox" name="import-update" v-model="modal.update">
+                    <input type="checkbox" name="import-update" v-model="options.update">
                 </div>
             </div>
+            <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="statusText">@{{ this.statusText }}</div>
         </td>
         <td>
-            <div class="footer" slot="footer">
-                <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="statusText">@{{ this.statusText }}</div>
-                <button type="button" class="btn btn-default" @click="processDetail = false">Cancel</button>
-                <button type="submit" class="btn btn-primary" @click="postSave">Import</button>
-            </div>
+            <button type="button" class="btn btn-default" @click="processDetail = false">Cancel</button>
+            <button type="submit" class="btn btn-primary" @click="postSave">Import</button>
         </td>
     </tr>
 </template>
@@ -44,7 +42,7 @@ tr {
             return {
                 processDetail: false,
                 statusText: null,
-                modal: {
+                options: {
                     importType: 'asset',
                     update: false,
                     importTypes: [
@@ -66,9 +64,9 @@ tr {
         methods: {
             postSave() {
                 this.statusText = "Processing...";
-                this.$http.post('/api/v1/imports/process/'+this.activeFile.id, {
-                    'import-update': this.modal.update,
-                    'import-type': this.modal.importType
+                this.$http.post('/api/v1/imports/process/'+this.file.id, {
+                    'import-update': this.options.update,
+                    'import-type': this.options.importType
                 }).then( (response) => {
                     // Success
                     this.statusText = "Success... Redirecting.";
@@ -76,7 +74,8 @@ tr {
                 }, (response) => {
                     // Failure
                     if(response.body.status == 'import-errors') {
-                        this.importErrors = response.body.messages;
+                        window.eventHub.$emit('importErrors', response.body.messages);
+                        this.statusText = "Error";
                     } else {
                         this.$emit('alert', {
                             message: response.body.messages,
