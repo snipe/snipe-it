@@ -79,63 +79,90 @@ tr {
                     importTypes: [
                         { id: 'asset', text: 'Assets' },
                         { id: 'accessory', text: 'Accessories' },
-                        { id: 'consumable', text: 'Consumable' },
+                        { id: 'consumable', text: 'Consumables' },
                         { id: 'component', text: 'Components' },
-                        { id: 'license', text: 'Licenses' }
+                        { id: 'license', text: 'Licenses' },
+                        { id: 'user', text: 'Users' }
                     ],
                     statusText: null,
                 },
-                columns: [
-                    {id: 'asset_tag', text: 'Asset Tag' },
-                    {id: 'category', text: 'Category' },
-                    {id: 'company', text: 'Company' },
-                    {id: 'checkout_to', text: 'Checked out to' },
-                    {id: 'expiration_date', text: 'Expiration Date' },
-                    {id: 'image', text: 'Image Filename' },
-                    {id: 'license_email', text: 'Licensed To Email' },
-                    {id: 'license_name', text: 'Licensed To Name' },
-                    {id: 'location', text: 'Location' },
-                    {id: 'maintained', text: 'Maintained' },
-                    {id: 'manufacturer', text: 'Manufacturer' },
-                    {id: 'asset_model', text: 'Model Name' },
-                    {id: 'model_number', text: 'Model Number' },
-                    {id: 'item_name', text: 'Item Name' },
-                    {id: 'notes', text: 'Notes' },
-                    {id: 'order_number', text: 'Order Number' },
-                    {id: 'purchase_cost', text: 'Purchase Cost' },
-                    {id: 'purchase_date', text: 'Purchase Date' },
-                    {id: 'purchase_order', text: 'Purchase Order' },
-                    {id: 'quantity', text: 'Quantity' },
-                    {id: 'reassignable', text: 'Reassignable' },
-                    {id: 'requestable', text: 'Requestable' },
-                    {id: 'seats', text: 'Seats' },
-                    {id: 'serial', text: 'Serial Number' },
-                    {id: 'status', text: 'Status' },
-                    {id: 'supplier', text: 'Supplier' },
-                    {id: 'user_email', text: 'Email' },
-                    {id: 'username', text: 'Username' },
-                    {id: 'warranty_months', text: 'Warranty Months' },
-                ],
+                columnOptions: {
+                    general: {
+                        "text": "General Options",
+                            "children": [
+                            {id: 'category', text: 'Category' },
+                            {id: 'company', text: 'Company' },
+                            {id: 'checkout_to', text: 'Checked out to' },
+                            {id: 'user_email', text: 'Email' },
+                            {id: 'first_name', text: 'First Name' },
+                            {id: 'item_name', text: 'Item Name' },
+                            {id: 'last_name', text: 'Last Name' },
+                            {id: 'location', text: 'Location' },
+                            {id: 'maintained', text: 'Maintained' },
+                            {id: 'manufacturer', text: 'Manufacturer' },
+                            {id: 'notes', text: 'Notes' },
+                            {id: 'order_number', text: 'Order Number' },
+                            {id: 'purchase_cost', text: 'Purchase Cost' },
+                            {id: 'purchase_date', text: 'Purchase Date' },
+                            {id: 'quantity', text: 'Quantity' },
+                            {id: 'requestable', text: 'Requestable' },
+                            {id: 'serial', text: 'Serial Number' },
+                            {id: 'supplier', text: 'Supplier' },
+                            {id: 'username', text: 'Username' },
+                        ],
+                    },
+                    assets: {
+                        "text": "Assets",
+                        "children": [
+                            {id: 'asset_tag', text: 'Asset Tag' },
+                            {id: 'asset_model', text: 'Model Name' },
+                            {id: 'image', text: 'Image Filename' },
+                            {id: 'model_number', text: 'Model Number' },
+                            {id: 'status', text: 'Status' },
+                            {id: 'warranty_months', text: 'Warranty Months' },
+                        ],
+                    },
+                    licenses: {
+                        "text": "Licenses",
+                        "children": [
+                            {id: 'expiration_date', text: 'Expiration Date' },
+                            {id: 'license_email', text: 'Licensed To Email' },
+                            {id: 'license_name', text: 'Licensed To Name' },
+                            {id: 'purchase_order', text: 'Purchase Order' },
+                            {id: 'reassignable', text: 'Reassignable' },
+                            {id: 'seats', text: 'Seats' },
+                        ],
+                    },
+                    users: {
+                        "text": "Users",
+                        "children": [
+                            {id: 'employee_num', text: 'Employee Number' },
+                            {id: 'jobtitle', text: 'Job Title' },
+                            {id: 'phone_number', text: 'Phone Number' },
+                        ],
+                    },
+                },
                 columnMappings: this.file.field_map || {},
                 activeColumn: null,
             }
         },
         created() {
             window.eventHub.$on('showDetails', this.toggleExtendedDisplay)
-            if(this.file.field_map == null) {
-                for (var i=0; i < this.file.header_row.length; i++) {
-                    this.$set(this.columnMappings, this.file.header_row[i], null);
+            this.populateSelect2ActiveItems();
+        },
+        computed: {
+            columns() {
+                switch(this.options.importType) {
+                    case 'asset':
+                        return [this.columnOptions.general, this.columnOptions.assets];
+                    case 'license':
+                        return [this.columnOptions.general, this.columnOptions.licenses];
+                    case 'user':
+                        return [this.columnOptions.general, this.columnOptions.users];
                 }
-                for(var j=0; j < this.columns.length; j++) {
-                    let column = this.columns[j];
-                    let index = this.file.header_row.indexOf(column.text)
-                    if(index != -1) {
-                        this.$set(this.columnMappings, this.file.header_row[index], column.id)
-                    }
-                }
+                return [this.columnOptions.general];
             }
         },
-
         methods: {
             postSave() {
                 this.statusText = "Processing...";
@@ -162,7 +189,22 @@ tr {
                     this.displayImportModal=false;
                 });
             },
-
+            populateSelect2ActiveItems() {
+                if(this.file.field_map == null) {
+                    // Begin by populating the active selection in dropdowns with blank values.
+                    for (var i=0; i < this.file.header_row.length; i++) {
+                        this.$set(this.columnMappings, this.file.header_row[i], null);
+                    }
+                    // Then, for any values that have a likely match, we make that active.
+                    for(var j=0; j < this.columns.length; j++) {
+                        let column = this.columns[j];
+                        let index = this.file.header_row.indexOf(column.text)
+                        if(index != -1) {
+                            this.$set(this.columnMappings, this.file.header_row[index], column.id)
+                        }
+                    }
+                }
+            },
             toggleExtendedDisplay(fileId) {
                 if(fileId == this.file.id) {
                     this.processDetail = !this.processDetail
