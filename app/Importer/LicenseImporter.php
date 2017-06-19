@@ -53,15 +53,15 @@ class LicenseImporter extends ItemImporter
             $this->log("No Matching License, Creating a new one");
         }
 
-        $asset_tag = $this->item['asset_tag'] = $this->findMatch($row, 'asset_tag'); // used for checkout out to an asset.
-        $this->item['expiration_date'] = $this->findMatch($row, 'expiration_date');
-        $this->item['license_email'] = $this->findMatch($row, "licensed_to_email");
-        $this->item['license_name'] = $this->findMatch($row, "licensed_to_name");
-        $this->item['maintained'] = $this->findMatch($row, 'maintained');
-        $this->item['purchase_order'] = $this->findMatch($row, 'purchase_order');
-        $this->item['reassignable'] = $this->findMatch($row, 'reassignable');
-        $this->item['seats'] = $this->findMatch($row, 'seats');
-        $this->item['termination_date'] = $this->findMatch($row, 'termination_date');
+        $asset_tag = $this->item['asset_tag'] = $this->findCsvMatch($row, 'asset_tag'); // used for checkout out to an asset.
+        $this->item['expiration_date'] = $this->findCsvMatch($row, 'expiration_date');
+        $this->item['license_email'] = $this->findCsvMatch($row, "licensed_to_email");
+        $this->item['license_name'] = $this->findCsvMatch($row, "licensed_to_name");
+        $this->item['maintained'] = $this->findCsvMatch($row, 'maintained');
+        $this->item['purchase_order'] = $this->findCsvMatch($row, 'purchase_order');
+        $this->item['reassignable'] = $this->findCsvMatch($row, 'reassignable');
+        $this->item['seats'] = $this->findCsvMatch($row, 'seats');
+        $this->item['termination_date'] = $this->findCsvMatch($row, 'termination_date');
 
         if ($editingLicense) {
             $license->update($this->sanitizeItemForUpdating($license));

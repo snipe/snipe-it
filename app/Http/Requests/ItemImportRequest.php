@@ -49,15 +49,15 @@ class ItemImportRequest extends FormRequest
                  ->setUpdating($this->has('import-update'))
                  ->setUsernameFormat('firstname.lastname')
                  ->setFieldMappings($fieldMappings);
-        $logFile = storage_path('logs/importer.log');
-        \Log::useFiles($logFile);
+        // $logFile = storage_path('logs/importer.log');
+        // \Log::useFiles($logFile);
         $importer->import();
         return $this->errors;
     }
 
     public function log($string)
     {
-        \Log::Info($string);
+        // \Log::Info($string);
     }
 
     public function progress($count)

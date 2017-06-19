@@ -45,7 +45,7 @@ class AssetImporter extends ItemImporter
     public function createAssetIfNotExists(array $row)
     {
         $editingAsset = false;
-        $asset_tag = $this->findMatch($row, "asset tag");
+        $asset_tag = $this->findCsvMatch($row, "asset_tag");
         $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
         if ($asset) {
             if (!$this->updating) {
@@ -60,8 +60,8 @@ class AssetImporter extends ItemImporter
             $asset = new Asset;
         }
 
-        $this->item['image'] = $this->findMatch($row, "image");
-        $this->item['warranty_months'] = intval($this->findMatch($row, "warranty months"));
+        $this->item['image'] = $this->findCsvMatch($row, "image");
+        $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty months"));
         if ($this->item['asset_model'] = $this->createOrFetchAssetModel($row)) {
             $this->item['model_id'] = $this->item['asset_model']->id;
         }
@@ -73,7 +73,7 @@ class AssetImporter extends ItemImporter
             $this->item['status_id'] = $this->defaultStatusLabelId;
         }
 
-
+        $this->item['asset_tag'] = $asset_tag;
         // By default we're set this to location_id in the item.
         $item = $this->sanitizeItemForStoring($asset, $editingAsset);
         if (isset($this->item["location"])) {

@@ -674,51 +674,6 @@ class AssetsController extends Controller
 
     }
 
-
-    /**
-    * Get the Asset import upload page.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @return View
-    */
-    public function getImportUpload()
-    {
-        $this->authorize('create', Asset::class);
-        return view('importer/import');
-    }
-
-
-    /**
-     * Map the fields for import
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
-     * @return View
-     */
-    public function getImportMap()
-    {
-
-        $this->authorize('create', Asset::class);
-
-        // This is currently hardcoded for testing - should use a post variable or something to dynamically select the correct file.
-        // $file = storage_path().'/private_uploads/imports/2017-04-30-051003-assets-inventory-for-import.csv';
-        // $reader = Reader::createFromPath($file);
-        $import = Import::first();
-        if(!$import) {
-            return "Upload an import file first";
-        }
-        $header_rows = $import->header_row;
-        
-        // Grab the first row to display via ajax as the user picks fields
-        $first_row = $import->first_row;
-
-        // Grab all of the custom fields to we can map those too.
-        $custom_fields = CustomField::all();
-
-        return view('importer/fieldmapper')->with('header_rows', $header_rows)->with('first_row',$first_row)->with('custom_fields',$custom_fields);
-    }
-
     /**
     * Returns a view that presents a form to clone an asset.
     *

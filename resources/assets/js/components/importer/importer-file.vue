@@ -121,10 +121,8 @@ tr {
             }
         },
         created() {
-            // console.dir(this.file);
             window.eventHub.$on('showDetails', this.toggleExtendedDisplay)
-
-            if(!this.columnMappings) {
+            if(this.file.field_map == null) {
                 for (var i=0; i < this.file.header_row.length; i++) {
                     this.$set(this.columnMappings, this.file.header_row[i], null);
                 }

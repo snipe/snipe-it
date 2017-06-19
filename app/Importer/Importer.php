@@ -102,13 +102,14 @@ abstract class Importer
      * @param $default string
      * @return string
      */
-    public function findMatch(array $array, $key, $default = '')
+    public function findCsvMatch(array $array, $key, $default = '')
     {
         $val = $default;
-
+// dd($array);
         if($customKey = $this->lookupCustomKey($key)) {
             $key = $customKey;
         }
+        $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
             $val = e(Encoding::toUTF8(trim($array[ $key ])));
         }
@@ -126,8 +127,9 @@ abstract class Importer
      */
     public function lookupCustomKey($key)
     {
+        // dd($this->fieldMap);
         if (array_key_exists($key, $this->fieldMap)) {
-            $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
+            // $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
             return $key = $this->fieldMap[$key];
         }
         return null;
@@ -170,9 +172,9 @@ abstract class Importer
      */
     protected function createOrFetchUser($row)
     {
-        $user_name = $this->findMatch($row, "name");
-        $user_email = $this->findMatch($row, "email");
-        $user_username = $this->findMatch($row, "username");
+        $user_name = $this->findCsvMatch($row, "name");
+        $user_email = $this->findCsvMatch($row, "email");
+        $user_username = $this->findCsvMatch($row, "username");
         $first_name = '';
         $last_name = '';
         // A number was given instead of a name
