@@ -24,7 +24,19 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     protected $hidden = ['password'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
-    protected $fillable = ['first_name', 'last_name', 'email','password','username','department_id'];
+    protected $fillable = [
+        'email',
+        'last_name',
+        'company_id',
+        'department_id',
+        'employee_num',
+        'jobtitle',
+        'location_id',
+        'password',
+        'phone_number',
+        'username',
+        'first_name',
+    ];
 
     protected $casts = [
         'activated' => 'boolean',

@@ -32,6 +32,8 @@ class ItemImportRequest extends FormRequest
 
     public function import(Import $import)
     {
+        ini_set('max_execution_time', 600); //600 seconds = 10 minutes
+        ini_set('memory_limit', '500M');
         $filename = config('app.private_uploads') . '/imports/' . $import->file_path;
         $import->import_type = $this->input('import-type');
         $class = title_case($import->import_type);
@@ -68,7 +70,6 @@ class ItemImportRequest extends FormRequest
     public function errorCallback($item, $field, $errorString)
     {
         $this->errors[$item->name][$field] = $errorString;
-        // $this->errors[$item->name] = $errorString;
     }
 
     private $errors;

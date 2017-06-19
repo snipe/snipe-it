@@ -95,7 +95,7 @@ class ImportController extends Controller
     {
         $this->authorize('create', Asset::class);
         $errors = $request->import(Import::find($import_id));
-        $redirectTo = "hardware";
+        $redirectTo = "hardware.index";
         switch ($request->get('import-type')) {
             case "asset":
                 $redirectTo = "hardware.index";
@@ -111,6 +111,9 @@ class ImportController extends Controller
                 break;
             case "license":
                 $redirectTo = "licenses.index";
+                break;
+            case "user":
+                $redirectTo = "users.index";
                 break;
         }
 
