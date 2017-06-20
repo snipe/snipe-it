@@ -1222,8 +1222,10 @@ class AssetsController extends Controller
     public function postBulkDelete()
     {
         $this->authorize('delete', Asset::class);
-        if (Input::has('bulk_edit')) {
-            $assets = Asset::find(Input::get('bulk_edit'));
+        
+        
+        if (Input::has('ids')) {
+            $assets = Asset::find(Input::get('ids'));
             foreach ($assets as $asset) {
                 $update_array['deleted_at'] = date('Y-m-d H:i:s');
                 $update_array['assigned_to'] = null;
