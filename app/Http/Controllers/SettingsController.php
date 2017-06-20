@@ -190,6 +190,7 @@ class SettingsController extends Controller
         $settings->user_id = 1;
         $settings->email_domain = e(Input::get('email_domain'));
         $settings->email_format = e(Input::get('email_format'));
+        $settings->next_auto_tag_base = 1;
 
 
         if ((!$user->isValid()) || (!$settings->isValid())) {
