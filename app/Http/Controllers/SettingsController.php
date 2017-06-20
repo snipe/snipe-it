@@ -362,6 +362,7 @@ class SettingsController extends Controller
         $setting->labels_fontsize = e(Input::get('labels_fontsize'));
         $setting->labels_pagewidth = e(Input::get('labels_pagewidth'));
         $setting->labels_pageheight = e(Input::get('labels_pageheight'));
+        $setting->next_auto_tag_base = e(Input::get('next_auto_tag_base'));
 
 
         if (Input::has('labels_display_name')) {

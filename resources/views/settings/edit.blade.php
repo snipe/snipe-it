@@ -338,6 +338,17 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <div class="col-md-3">
+                    {{ Form::label('next_auto_tag_base', trans('admin/settings/general.next_auto_tag_base')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {{ Form::text('next_auto_tag_base', Input::old('next_auto_tag_base', $setting->next_auto_tag_base), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
+                    {!! $errors->first('next_auto_tag_base', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
+
                 <!-- auto prefix -->
                 <div class="form-group {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
                   <div class="col-md-3">
