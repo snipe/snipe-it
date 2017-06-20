@@ -438,7 +438,7 @@ class Asset extends Depreciable
             if ($settings->zerofill_count > 0) {
                 return $settings->auto_increment_prefix.Asset::zerofill($settings->next_auto_tag_base, $settings->zerofill_count);
             }
-            return $settings->auto_increment_prefix.$settings->next_auto_tag_bas;
+            return $settings->auto_increment_prefix.$settings->next_auto_tag_base;
         } else {
             return false;
         }
