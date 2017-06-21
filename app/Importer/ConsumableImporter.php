@@ -7,11 +7,9 @@ use App\Models\Consumable;
 
 class ConsumableImporter extends ItemImporter
 {
-    protected $consumables;
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->consumables = Consumable::all();
     }
 
     protected function handle($row)
@@ -28,16 +26,13 @@ class ConsumableImporter extends ItemImporter
      */
     public function createConsumableIfNotExists()
     {
-        $consumableId = $this->consumables->search(function ($key) {
-            return strcasecmp($key->name, $this->item['name']) == 0;
-        });
-        if ($consumableId !== false) {
+        $consumable = Consumable::where('name', $this->item['name'])->first();
+        if ($consumable) {
             if (!$this->updating) {
                 $this->log('A matching Consumable ' . $this->item["name"] . ' already exists.  ');
                 return;
             }
             $this->log('Updating Consumable');
-            $consumable = $this->consumables[$consumableId];
             $consumable->update($this->sanitizeItemForUpdating($consumable));
             if (!$this->testRun) {
                 $consumable->save();

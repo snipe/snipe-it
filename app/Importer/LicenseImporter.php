@@ -36,11 +36,9 @@ class LicenseImporter extends ItemImporter
     public function createLicenseIfNotExists(array $row)
     {
         $editingLicense = false;
-        $license = new License;
-        $license_id = $this->licenses->search(function ($key) {
-            return strcasecmp($key->name, $this->item['name']) == 0;
-        });
-        if ($license_id !== false) {
+        $license = License::where('name', $this->item['name'])->first();
+
+        if ($license) {
             if (!$this->updating) {
                 $this->log('A matching License ' . $this->item['name'] . ' already exists');
                 return;
@@ -48,11 +46,10 @@ class LicenseImporter extends ItemImporter
 
             $this->log("Updating License");
             $editingLicense = true;
-            $license = $this->licenses[$license_id];
         } else {
             $this->log("No Matching License, Creating a new one");
         }
-
+        $license = new License;
         $asset_tag = $this->item['asset_tag'] = $this->findCsvMatch($row, 'asset_tag'); // used for checkout out to an asset.
         $this->item['expiration_date'] = $this->findCsvMatch($row, 'expiration_date');
         $this->item['license_email'] = $this->findCsvMatch($row, "licensed_to_email");
@@ -68,9 +65,7 @@ class LicenseImporter extends ItemImporter
         } else {
             $license->fill($this->sanitizeItemForStoring($license));
         }
-        if (!$editingLicense) {
-            $this->licenses->add($license);
-        }
+
         if (!$this->testRun) {
             if ($license->save()) {
                 $license->logCreate('Imported using csv importer');

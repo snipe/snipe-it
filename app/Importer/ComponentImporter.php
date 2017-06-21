@@ -7,11 +7,9 @@ use App\Models\Component;
 
 class ComponentImporter extends ItemImporter
 {
-    protected $components;
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->components = Component::all();
     }
 
     protected function handle($row)
@@ -31,11 +29,9 @@ class ComponentImporter extends ItemImporter
         $component = null;
         $editingComponent = false;
         $this->log("Creating Component");
-        $componentId = $this->components->search(function ($key) {
-            return strcasecmp($key->name, $this->item['name']) == 0;
-        });
+        $component = Component::where('name', $this->item['name']);
 
-        if ($componentId !== false) {
+        if ($component) {
             $editingComponent = true;
             $this->log('A matching Component ' . $this->item["name"] . ' already exists.  ');
             if (!$this->updating) {
