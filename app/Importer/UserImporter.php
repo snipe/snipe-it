@@ -11,7 +11,7 @@ class UserImporter extends ItemImporter
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->users = User::all();
+        // $this->users = User::all();
     }
 
     protected function handle($row)
@@ -38,16 +38,14 @@ class UserImporter extends ItemImporter
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
         $this->item['password'] = $this->tempPassword;
-        $userId = $this->users->search(function ($key) {
-            return strcasecmp($key->username, $this->item['username']) == 0;
-        });
-        if ($userId !== false) {
+        $user = User::where('username', $this->item['username'])->first();
+        if ($user) {
             if (!$this->updating) {
                 $this->log('A matching User ' . $this->item["name"] . ' already exists.  ');
                 return;
             }
             $this->log('Updating User');
-            $user = $this->users[$userId];
+            // $user = $this->users[$userId];
             $user->update($this->sanitizeItemForUpdating($user));
             if (!$this->testRun) {
                 $user->save();

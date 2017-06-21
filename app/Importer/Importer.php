@@ -37,7 +37,7 @@ abstract class Importer
      * Map of item fields->csv names
      * @var array
      */
-    protected $fieldMap;
+    protected $fieldMap = [];
     /**
      * @var callable
      */

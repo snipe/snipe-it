@@ -41,6 +41,7 @@ class ItemImportRequest extends FormRequest
         $importer = new $classString($filename);
         $import->field_map  = request('column-mappings');
         $import->save();
+        $fieldMappings=[];
         if ($import->field_map) {
             // We submit as csv field: column, but the importer is happier if we flip it here.
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);

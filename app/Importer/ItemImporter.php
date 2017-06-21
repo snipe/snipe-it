@@ -2,6 +2,7 @@
 
 namespace App\Importer;
 
+use App\Importer\UserImporter;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -76,8 +77,12 @@ class ItemImporter extends Importer
         $this->item["requestable"] = $this->findCsvMatch($row, "requestable");
         $this->item["user_id"] = $this->user_id;
         $this->item['serial'] = $this->findCsvMatch($row, "serial number");
-        if ($this->item["user"] = $this->createOrFetchUser($row)) {
-            $this->item['assigned_to'] = $this->item['user']->id;
+        // NO need to call this method if we're running the user import.
+        // TODO: Merge these methods.
+        if(get_class($this) !== UserImporter::class) {
+            if ($this->item["user"] = $this->createOrFetchUser($row)) {
+                $this->item['assigned_to'] = $this->item['user']->id;
+            }
         }
 
     }
