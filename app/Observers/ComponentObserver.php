@@ -22,7 +22,7 @@ class ComponentObserver
         $logAction->item_type = Component::class;
         $logAction->item_id = $component->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('update');
     }
 
@@ -44,7 +44,7 @@ class ComponentObserver
         $logAction->item_type = Component::class;
         $logAction->item_id = $component->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('create');
 
     }
@@ -61,7 +61,7 @@ class ComponentObserver
         $logAction->item_type = Component::class;
         $logAction->item_id = $component->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }
 }
