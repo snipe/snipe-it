@@ -45,10 +45,11 @@ class AssetImporter extends ItemImporter
     public function createAssetIfNotExists(array $row)
     {
         $editingAsset = false;
-        $asset = Asset::where(['asset_tag'=> $this->item['asset_tag']])->first();
+        $asset_tag = $this->findCsvMatch($row, "asset_tag");
+        $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
         if ($asset) {
             if (!$this->updating) {
-                $this->log('A matching Asset ' . $this->item['asset_tag'] . ' already exists');
+                $this->log('A matching Asset ' . $asset_tag . ' already exists');
                 return;
             }
 
@@ -58,24 +59,19 @@ class AssetImporter extends ItemImporter
             $this->log("No Matching Asset, Creating a new one");
             $asset = new Asset;
         }
-        $this->item['serial'] = $this->array_smart_fetch($row, "serial number");
-        $this->item['image'] = $this->array_smart_fetch($row, "image");
-        $this->item['warranty_months'] = intval($this->array_smart_fetch($row, "warranty months"));
-        if ($this->item['asset_model'] = $this->createOrFetchAssetModel($row)) {
-            $this->item['model_id'] = $this->item['asset_model']->id;
-        }
-        if (isset($this->item["status_label"])) {
-            $this->item['status_id'] = $this->item["status_label"]->id;
-        } elseif (!$editingAsset) {
-            // Assume if we are editing, we already have a status and can ignore.
+
+        $this->item['image'] = $this->findCsvMatch($row, "image");
+        $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty months"));
+        $this->item['model_id'] = $this->createOrFetchAssetModel($row);
+        if (!$this->item['status_id'] && !$editingAsset) {
             $this->log("No status field found, defaulting to first status.");
             $this->item['status_id'] = $this->defaultStatusLabelId;
         }
 
-
+        $this->item['asset_tag'] = $asset_tag;
         // By default we're set this to location_id in the item.
         $item = $this->sanitizeItemForStoring($asset, $editingAsset);
-        if (isset($this->item["location"])) {
+        if (isset($this->item["location_id"])) {
             $item['rtd_location_id'] = $this->item['location_id'];
             unset($item['location_id']);
         }
@@ -95,7 +91,7 @@ class AssetImporter extends ItemImporter
                 $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
                 return;
             }
-            $this->jsonError($asset, 'Asset "' . $this->item['name'].'"');
+            $this->logError($asset, 'Asset "' . $this->item['name'].'"');
         }
     }
 }

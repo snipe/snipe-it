@@ -2,9 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use DB;
-
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -12,14 +9,18 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
+use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\Group;
+use App\Models\Import;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
+use DB;
+use Illuminate\Console\Command;
 
 class PaveIt extends Command
 {
@@ -63,6 +64,7 @@ class PaveIt extends Command
                 Company::getQuery()->delete();
                 Component::getQuery()->delete();
                 Consumable::getQuery()->delete();
+                Department::getQuery()->delete();
                 Depreciation::getQuery()->delete();
                 License::getQuery()->delete();
                 LicenseSeat::getQuery()->delete();
@@ -108,6 +110,7 @@ class PaveIt extends Command
                 \DB::statement('drop table IF EXISTS custom_fields');
                 \DB::statement('drop table IF EXISTS custom_fieldsets');
                 \DB::statement('drop table IF EXISTS depreciations');
+                \DB::statement('drop table IF EXISTS departments');
                 \DB::statement('drop table IF EXISTS groups');
                 \DB::statement('drop table IF EXISTS history');
                 \DB::statement('drop table IF EXISTS components');

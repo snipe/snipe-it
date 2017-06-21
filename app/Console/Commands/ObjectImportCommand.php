@@ -80,10 +80,10 @@ class ObjectImportCommand extends Command
         $logFile = $this->option('logfile');
         \Log::useFiles($logFile);
         if ($this->option('testrun')) {
-            $this->comment('====== TEST ONLY Asset Import for '.$filename.' ====');
+            $this->comment('====== TEST ONLY Item Import for '.$filename.' ====');
             $this->comment('============== NO DATA WILL BE WRITTEN ==============');
         } else {
-            $this->comment('======= Importing Assets from '.$filename.' =========');
+            $this->comment('======= Importing Items from '.$filename.' =========');
         }
         $importer->import();
 
@@ -175,7 +175,7 @@ class ObjectImportCommand extends Command
         array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
         array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
         array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
-        array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'),
+        array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Accessory, License, or User', 'Asset'),
         array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
         array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1),
         array('update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'),
