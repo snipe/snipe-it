@@ -91,7 +91,7 @@ tr {
                         {id: 'category', text: 'Category' },
                         {id: 'company', text: 'Company' },
                         {id: 'checkout_to', text: 'Checked out to' },
-                        {id: 'user_email', text: 'Email' },
+                        {id: 'email', text: 'Email' },
                         {id: 'first_name', text: 'First Name' },
                         {id: 'item_name', text: 'Item Name' },
                         {id: 'last_name', text: 'Last Name' },

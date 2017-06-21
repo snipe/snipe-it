@@ -13,6 +13,6 @@
   "/css/overrides.css": "/css/overrides.css",
   "/css/skin-blue.css": "/css/skin-blue.css",
   "/vue.js": "/vue.js",
-  "public/js/dist/all.js": "public/js/dist/all.js",
-  "public/css/dist/all.css": "public/css/dist/all.css"
+  "public/css/dist/all.css": "public/css/dist/all.css",
+  "public/js/dist/all.js": "public/js/dist/all.js"
 }
