@@ -87,60 +87,49 @@ tr {
                     statusText: null,
                 },
                 columnOptions: {
-                    general: {
-                        "text": "General Options",
-                            "children": [
-                            {id: 'category', text: 'Category' },
-                            {id: 'company', text: 'Company' },
-                            {id: 'checkout_to', text: 'Checked out to' },
-                            {id: 'user_email', text: 'Email' },
-                            {id: 'first_name', text: 'First Name' },
-                            {id: 'item_name', text: 'Item Name' },
-                            {id: 'last_name', text: 'Last Name' },
-                            {id: 'location', text: 'Location' },
-                            {id: 'maintained', text: 'Maintained' },
-                            {id: 'manufacturer', text: 'Manufacturer' },
-                            {id: 'notes', text: 'Notes' },
-                            {id: 'order_number', text: 'Order Number' },
-                            {id: 'purchase_cost', text: 'Purchase Cost' },
-                            {id: 'purchase_date', text: 'Purchase Date' },
-                            {id: 'quantity', text: 'Quantity' },
-                            {id: 'requestable', text: 'Requestable' },
-                            {id: 'serial', text: 'Serial Number' },
-                            {id: 'supplier', text: 'Supplier' },
-                            {id: 'username', text: 'Username' },
-                        ],
-                    },
-                    assets: {
-                        "text": "Assets",
-                        "children": [
-                            {id: 'asset_tag', text: 'Asset Tag' },
-                            {id: 'asset_model', text: 'Model Name' },
-                            {id: 'image', text: 'Image Filename' },
-                            {id: 'model_number', text: 'Model Number' },
-                            {id: 'status', text: 'Status' },
-                            {id: 'warranty_months', text: 'Warranty Months' },
-                        ],
-                    },
-                    licenses: {
-                        "text": "Licenses",
-                        "children": [
-                            {id: 'expiration_date', text: 'Expiration Date' },
-                            {id: 'license_email', text: 'Licensed To Email' },
-                            {id: 'license_name', text: 'Licensed To Name' },
-                            {id: 'purchase_order', text: 'Purchase Order' },
-                            {id: 'reassignable', text: 'Reassignable' },
-                            {id: 'seats', text: 'Seats' },
-                        ],
-                    },
-                    users: {
-                        "text": "Users",
-                        "children": [
-                            {id: 'employee_num', text: 'Employee Number' },
-                            {id: 'jobtitle', text: 'Job Title' },
-                            {id: 'phone_number', text: 'Phone Number' },
-                        ],
-                    },
+                    general: [
+                        {id: 'category', text: 'Category' },
+                        {id: 'company', text: 'Company' },
+                        {id: 'checkout_to', text: 'Checked out to' },
+                        {id: 'user_email', text: 'Email' },
+                        {id: 'first_name', text: 'First Name' },
+                        {id: 'item_name', text: 'Item Name' },
+                        {id: 'last_name', text: 'Last Name' },
+                        {id: 'location', text: 'Location' },
+                        {id: 'maintained', text: 'Maintained' },
+                        {id: 'manufacturer', text: 'Manufacturer' },
+                        {id: 'notes', text: 'Notes' },
+                        {id: 'order_number', text: 'Order Number' },
+                        {id: 'purchase_cost', text: 'Purchase Cost' },
+                        {id: 'purchase_date', text: 'Purchase Date' },
+                        {id: 'quantity', text: 'Quantity' },
+                        {id: 'requestable', text: 'Requestable' },
+                        {id: 'serial', text: 'Serial Number' },
+                        {id: 'supplier', text: 'Supplier' },
+                        {id: 'username', text: 'Username' },
+                    ],
+                    assets: [
+                        {id: 'asset_tag', text: 'Asset Tag' },
+                        {id: 'asset_model', text: 'Model Name' },
+                        {id: 'image', text: 'Image Filename' },
+                        {id: 'model_number', text: 'Model Number' },
+                        {id: 'name', text: 'Full Name' },
+                        {id: 'status', text: 'Status' },
+                        {id: 'warranty_months', text: 'Warranty Months' },
+                    ],
+                    licenses: [
+                        {id: 'expiration_date', text: 'Expiration Date' },
+                        {id: 'license_email', text: 'Licensed To Email' },
+                        {id: 'license_name', text: 'Licensed To Name' },
+                        {id: 'purchase_order', text: 'Purchase Order' },
+                        {id: 'reassignable', text: 'Reassignable' },
+                        {id: 'seats', text: 'Seats' },
+                    ],
+                    users: [
+                        {id: 'employee_num', text: 'Employee Number' },
+                        {id: 'jobtitle', text: 'Job Title' },
+                        {id: 'phone_number', text: 'Phone Number' },
+                    ],
                 },
                 columnMappings: this.file.field_map || {},
                 activeColumn: null,
@@ -154,13 +143,13 @@ tr {
             columns() {
                 switch(this.options.importType) {
                     case 'asset':
-                        return [this.columnOptions.general, this.columnOptions.assets];
+                        return this.columnOptions.general.concat(this.columnOptions.assets);
                     case 'license':
-                        return [this.columnOptions.general, this.columnOptions.licenses];
+                        return this.columnOptions.general.concat(this.columnOptions.licenses);
                     case 'user':
-                        return [this.columnOptions.general, this.columnOptions.users];
+                        return this.columnOptions.general.concat(this.columnOptions.users);
                 }
-                return [this.columnOptions.general];
+                return this.columnOptions.general;
             }
         },
         methods: {
