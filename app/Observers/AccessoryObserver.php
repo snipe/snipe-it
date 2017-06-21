@@ -24,8 +24,6 @@ class AccessoryObserver
         $logAction->created_at =  date("Y-m-d H:i:s");
         $logAction->user_id = Auth::user()->id;
         $logAction->logaction('update');
-
-
     }
 
 
@@ -41,7 +39,6 @@ class AccessoryObserver
     {
         $settings = Setting::first();
         $settings->increment('next_auto_tag_base');
-        \Log::debug('Setting new next_auto_tag_base value');
 
         $logAction = new Actionlog();
         $logAction->item_type = Accessory::class;
