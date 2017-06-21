@@ -15,9 +15,9 @@ class AddHeaderAndFirstRowToImporterTable extends Migration
     {
         Schema::table('imports', function (Blueprint $table) {
             // Add a json string representing the header row of the csv, and the first row of the csv.
-            $table->json('header_row')->nullable()->default(null);
-            $table->json('first_row')->nullable()->default(null);
-            $table->json('field_map')->nullable()->default(null);
+            $table->text('header_row')->nullable()->default(null);
+            $table->text('first_row')->nullable()->default(null);
+            $table->text('field_map')->nullable()->default(null);
         });
     }
 
