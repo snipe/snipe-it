@@ -22,7 +22,7 @@ class AccessoryObserver
         $logAction->item_type = Accessory::class;
         $logAction->item_id = $accessory->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('update');
 
 
@@ -47,7 +47,7 @@ class AccessoryObserver
         $logAction->item_type = Accessory::class;
         $logAction->item_id = $accessory->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('create');
 
     }
@@ -64,7 +64,7 @@ class AccessoryObserver
         $logAction->item_type = Accessory::class;
         $logAction->item_id = $accessory->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }
 }
