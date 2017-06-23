@@ -172,6 +172,17 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         );
     }); // Fields group
 
+    /*--- Fieldsets API ---*/
+
+    Route::group(['prefix' => 'fieldsets'], function () {
+
+        Route::get('{id}',
+        [
+            'as' => 'api.customfields.show',
+            'uses' => 'CustomFieldsetsController@show'
+        ]);
+    }); // Fieldsets group
+
 
     /*--- Groups API ---*/
 
