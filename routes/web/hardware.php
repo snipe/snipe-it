@@ -79,23 +79,6 @@ Route::group(
             'uses' => 'AssetsController@displayFile'
         ]);
 
-        Route::post( 'import/process/', [ 'as' => 'assets/import/process-file',
-                'uses' => 'AssetsController@postProcessImportFile'
-        ]);
-
-        Route::get( 'import/delete/{filename}', [ 'as' => 'assets/import/delete-file',
-                'uses' => 'AssetsController@getDeleteImportFile'
-        ]);
-
-        Route::get('import/map',[
-            'as' => 'import.map',
-            'uses' => 'AssetsController@getImportMap'
-        ]);
-
-        Route::get('import',[
-                'as' => 'assets/import',
-                'uses' => 'AssetsController@getImportUpload'
-        ]);
 
         Route::post(
             'bulkedit',

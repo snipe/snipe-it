@@ -22,10 +22,8 @@ class LicenseObserver
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('update');
-
-
     }
 
 
@@ -41,13 +39,12 @@ class LicenseObserver
     {
         $settings = Setting::first();
         $settings->increment('next_auto_tag_base');
-        \Log::debug('Setting new next_auto_tag_base value');
 
         $logAction = new Actionlog();
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('create');
 
     }
@@ -64,7 +61,7 @@ class LicenseObserver
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::user()->id;
+        $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }
 }

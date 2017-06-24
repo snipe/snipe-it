@@ -12,6 +12,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\CustomField;
+use App\Models\Import;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
@@ -670,84 +671,6 @@ class AssetsController extends Controller
                 return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
             }
         }
-
-    }
-
-
-    /**
-    * Get the Asset import upload page.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @return View
-    */
-    public function getImportUpload()
-    {
-        $this->authorize('create', Asset::class);
-        return view('hardware/import');
-    }
-
-
-    /**
-     * Map the fields for import
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
-     * @return View
-     */
-    public function getImportMap()
-    {
-
-        $this->authorize('create', Asset::class);
-
-        // This is currently hardcoded for testing - should use a post variable or something to dynamically select the correct file.
-        $file = storage_path().'/private_uploads/imports/2017-06-08-072329-sample-assets.csv';
-        $reader = Reader::createFromPath($file);
-        $header_rows = $reader->fetchOne(0);
-        
-        // Grab the first row to display via ajax as the user picks fields
-        $first_row = $reader->fetchOne(1);
-        
-        // Grab all of the custom fields to we can map those too.
-        $custom_fields = CustomField::all();
-
-        return view('importer/fieldmapper')->with('header_rows', $header_rows)->with('first_row',$first_row)->with('custom_fields',$custom_fields);
-    }
-    
-
-    /**
-    * Process the uploaded file
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @return Redirect
-    */
-    public function postProcessImportFile(ItemImportRequest $request)
-    {
-        $this->authorize('create', Asset::class);
-        $errors = $request->import();
-
-        // We use hardware instead of asset in the url
-        $redirectTo = "hardware";
-        switch (request('import-type')) {
-            case "asset":
-                $redirectTo = "hardware.index";
-                break;
-            case "accessory":
-                $redirectTo = "accessories.index";
-                break;
-            case "consumable":
-                $redirectTo = "consumables.index";
-                break;
-            case "component":
-                $redirectTo = "components.index";
-                break;
-        }
-
-        if ($errors) { //Failure
-            return redirect()->back()->with('import_errors', json_decode(json_encode($errors)))->with('error', trans('admin/hardware/message.import.error'));
-        }
-        return redirect()->to(route($redirectTo))->with('success', trans('admin/hardware/message.import.success'));
 
     }
 

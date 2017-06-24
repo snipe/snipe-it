@@ -17,7 +17,6 @@ class Kernel extends ConsoleKernel
         Commands\CreateAdmin::class,
         Commands\SendExpirationAlerts::class,
         Commands\SendInventoryAlerts::class,
-        Commands\LicenseImportCommand::class,
         Commands\ObjectImportCommand::class,
         Commands\Versioning::class,
         Commands\SystemBackup::class,

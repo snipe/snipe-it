@@ -26,6 +26,9 @@ class ImportsTransformer
             'name' => $import->name,
             'import_type' => $import->import_type,
             'created_at' => $import->created_at->diffForHumans(),
+            'header_row' => $import->header_row,
+            'first_row'  => $import->first_row,
+            'field_map'  => $import->field_map,
 
         ];
 

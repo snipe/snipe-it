@@ -7,11 +7,9 @@ use App\Models\Accessory;
 
 class AccessoryImporter extends ItemImporter
 {
-    protected $accessories;
     public function __construct($filename)
     {
         parent::__construct($filename);
-        $this->accessories = Accessory::all();
     }
 
     protected function handle($row)
@@ -28,17 +26,14 @@ class AccessoryImporter extends ItemImporter
      */
     public function createAccessoryIfNotExists()
     {
-        $accessoryId = $this->accessories->search(function ($key) {
-            return strcasecmp($key->name, $this->item['name']) == 0;
-        });
-        if ($accessoryId !== false) {
+        $accessory = Accessory::where('name', $this->item['name'])->first();
+        if ($accessory) {
             if (!$this->updating) {
                 $this->log('A matching Accessory ' . $this->item["name"] . ' already exists.  ');
                 return;
             }
 
             $this->log('Updating Accessory');
-            $accessory = $this->accessories[$accessoryId];
             $accessory->update($this->sanitizeItemForUpdating($accessory));
             if (!$this->testRun) {
                 $accessory->save();
@@ -57,7 +52,8 @@ class AccessoryImporter extends ItemImporter
         if ($accessory->save()) {
             $accessory->logCreate('Imported using CSV Importer');
             $this->log('Accessory ' . $this->item["name"] . ' was created');
+            return;
         }
-        $this->jsonError($accessory, 'Accessory');
+        $this->logError($accessory, 'Accessory');
     }
 }

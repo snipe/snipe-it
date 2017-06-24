@@ -7,7 +7,7 @@
         "require": {
     "php": ">=5.6.4",
     "aws/aws-sdk-php-laravel": "^3.1",
-    "barryvdh/laravel-debugbar": "^2.3",
+    "barryvdh/laravel-debugbar": "^2.4",
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
     "doctrine/dbal": "v2.4.2",

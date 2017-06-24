@@ -34,6 +34,11 @@ abstract class Importer
      */
     protected $updating;
     /**
+     * Map of item fields->csv names
+     * @var array
+     */
+    protected $fieldMap = [];
+    /**
      * @var callable
      */
     protected $logCallback;
@@ -71,7 +76,7 @@ abstract class Importer
 
     public function import()
     {
-        $results = $this->normalizeInputArray($this->csv->fetchAssoc());
+        $results = $this->csv->fetchAssoc();
         $this->customFields = CustomField::All(['name']);
         DB::transaction(function () use (&$results) {
             Model::unguard();
@@ -88,20 +93,6 @@ abstract class Importer
     abstract protected function handle($row);
 
     /**
-     * @param $results
-     * @return array
-     */
-    public function normalizeInputArray($results)
-    {
-        $newArray = [];
-
-        foreach ($results as $index => $arrayToNormalize) {
-            $newArray[$index] = array_change_key_case($arrayToNormalize);
-        }
-        return $newArray;
-    }
-
-    /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
      * @author Daniel Melzter
@@ -111,17 +102,38 @@ abstract class Importer
      * @param $default string
      * @return string
      */
-    public function array_smart_fetch(array $array, $key, $default = '')
+    public function findCsvMatch(array $array, $key, $default = '')
     {
         $val = $default;
-        if (array_key_exists(trim($key), $array)) {
+// dd($array);
+        if($customKey = $this->lookupCustomKey($key)) {
+            $key = $customKey;
+        }
+        $this->log("Custom Key: ${key}");
+        if (array_key_exists($key, $array)) {
             $val = e(Encoding::toUTF8(trim($array[ $key ])));
         }
-        $key = title_case($key);
         // $this->log("${key}: ${val}");
         return $val;
     }
 
+    /**
+     * Looks up A custom key in the custom field map
+     *
+     * @author Daniel Melzter
+     * @since 4.0
+     * @param $key string
+     * @return string|null
+     */
+    public function lookupCustomKey($key)
+    {
+        // dd($this->fieldMap);
+        if (array_key_exists($key, $this->fieldMap)) {
+            // $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
+            return $key = $this->fieldMap[$key];
+        }
+        return null;
+    }
     /**
      * Figure out the fieldname of the custom field
      *
@@ -141,7 +153,7 @@ abstract class Importer
         call_user_func($this->logCallback, $string);
     }
 
-    protected function jsonError($item, $field)
+    protected function logError($item, $field)
     {
         call_user_func($this->errorCallback, $item, $field, $item->getErrors());
     }
@@ -160,9 +172,9 @@ abstract class Importer
      */
     protected function createOrFetchUser($row)
     {
-        $user_name = $this->array_smart_fetch($row, "name");
-        $user_email = $this->array_smart_fetch($row, "email");
-        $user_username = $this->array_smart_fetch($row, "username");
+        $user_name = $this->findCsvMatch($row, "name");
+        $user_email = $this->findCsvMatch($row, "email");
+        $user_username = $this->findCsvMatch($row, "username");
         $first_name = '';
         $last_name = '';
         // A number was given instead of a name
@@ -214,7 +226,7 @@ abstract class Importer
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
-                    $this->jsonError($user, 'User "' . $first_name . '"');
+                    $this->logError($user, 'User "' . $first_name . '"');
                 }
             }
         }
@@ -276,6 +288,22 @@ abstract class Importer
     {
         $this->updating = $updating;
 
+        return $this;
+    }
+
+    /**
+     * Defines mappings of csv fields
+     *
+     * @param bool $updating the updating
+     *
+     * @return self
+     */
+    public function setFieldMappings($fields)
+    {
+        // Some initial sanitization.
+
+        $this->fieldMap = $fields;
+        $this->log($this->fieldMap);
         return $this;
     }
 

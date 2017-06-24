@@ -171,7 +171,20 @@ Route::resource('groups', 'GroupsController', [
     'parameters' => ['group' => 'group_id']
 ]);
 
-
+/*
+|--------------------------------------------------------------------------
+| Importer Routes
+|--------------------------------------------------------------------------
+|
+|
+|
+*/
+Route::group([ 'prefix' => 'import', 'middleware' => ['auth']], function () {
+        Route::get('/', [
+                'as' => 'imports.index',
+                'uses' => 'ImportsController@index'
+        ]);
+});
 
 
 /*

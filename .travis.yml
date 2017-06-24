@@ -22,9 +22,9 @@ before_script:
   - php artisan migrate --env=testing-ci --database=mysql --force
   - ./vendor/bin/codecept build
   - php artisan --env=testing-ci key:generate 
+  - php artisan --env=testing-ci snipeit:travisci-install
   - php artisan --env=testing-ci db:seed --database=mysql --force
   - php artisan --env=testing-ci snipeit:create-admin --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
-  - php artisan --env=testing-ci snipeit:travisci-install
   - php artisan --env=testing-ci passport:install
   - php artisan serve --env=testing-ci --port=8000 --host=localhost &
   - sleep 5

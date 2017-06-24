@@ -17,6 +17,7 @@ require('bootstrap-less');
  */
 
 window.Vue = require('vue');
+window.eventHub = new Vue();
 require('vue-resource');
 
 /**

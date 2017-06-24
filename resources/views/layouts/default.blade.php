@@ -473,8 +473,8 @@
             </li>
             @endcan
             @can('create', \App\Models\Asset::class)
-                <li{!! (Request::is('hardware/import*') ? ' class="active"' : '') !!}>
-                    <a href="{{ url('hardware/import') }}">
+                <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('imports.index') }}">
                         <i class="fa fa-cloud-download"></i>
                         <span>@lang('general.import')</span>
                     </a>
