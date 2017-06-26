@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Http\Transformers\CustomFieldsTransformer;
 use App\Http\Transformers\CustomFieldsetsTransformer;
+use App\Http\Requests\AssetRequest;
 
 /**
  * This controller handles all actions related to Custom Asset Fieldsets for
@@ -39,10 +40,30 @@ class CustomFieldsetsController extends Controller
     * @since [v1.8]
     * @return View
     */
+    public function index(Request $request)
+    {
+        $this->authorize('index', CustomFieldset::class);
+        $fields = CustomFieldset::all();
+
+        if(($request->has('search')) && (count($filter) == 0))
+            $fields->TextSearch($request->input('search'));
+        $total = count($fields);
+        return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fields, $total);
+
+    }
+
+    /**
+    * Shows the given fieldset and its fields
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @author [Josh Gibson]
+    * @param int $id
+    * @since [v1.8]
+    * @return View
+    */
     public function show($id)
     {
         if ($fieldset = CustomFieldset::find($id)) {
-            $this->authorize('view', $fieldset);
+            $this->authorize('show', CustomFieldset::class);
             return (new CustomFieldsetsTransformer)->transformCustomFieldset($fieldset);
         }
 
