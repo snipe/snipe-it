@@ -45,8 +45,6 @@ class CustomFieldsetsController extends Controller
         $this->authorize('index', CustomFieldset::class);
         $fields = CustomFieldset::all();
 
-        if(($request->has('search')) && (count($filter) == 0))
-            $fields->TextSearch($request->input('search'));
         $total = count($fields);
         return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fields, $total);
 
