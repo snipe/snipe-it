@@ -40,7 +40,7 @@ class CustomFieldsetsController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function index(Request $request)
+    public function index()
     {
         $this->authorize('index', CustomFieldset::class);
         $fields = CustomFieldset::all();
