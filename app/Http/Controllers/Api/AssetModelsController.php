@@ -74,6 +74,7 @@ class AssetModelsController extends Controller
         $this->authorize('create', AssetModel::class);
         $assetmodel = new AssetModel;
         $assetmodel->fill($request->all());
+        $assetmodel->fieldset_id = $request->get("custom_fieldset_id");
 
         if ($assetmodel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/assetmodels/message.create.success')));
@@ -127,6 +128,7 @@ class AssetModelsController extends Controller
         $this->authorize('edit', AssetModel::class);
         $assetmodel = AssetModel::findOrFail($id);
         $assetmodel->fill($request->all());
+        $assetmodel->fieldset_id = $request->get("custom_fieldset_id");
 
         if ($assetmodel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/assetmodels/message.update.success')));
