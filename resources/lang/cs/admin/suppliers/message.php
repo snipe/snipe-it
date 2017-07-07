@@ -3,21 +3,21 @@
 return array(
 
     'does_not_exist' => 'Dodavatel neexistuje.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'assoc_users'	 => 'Tento dodavatel je právě přiřazena alespoň k jednomu modelu majetku a nemůže tak být odstraněn. Odeberte jeho vazbu z patřičných modelů a akci opakujte. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
+        'error'   => 'Dodavatel nebyl vytvořen, zkuste to prosím znovu.',
         'success' => 'Dodavatel úspěšně vytvořen.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
+        'error'   => 'Dodavatel nebyl aktualizován, zkuste to prosím znovu',
         'success' => 'Dodavatel úspěšně aktualizován.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
+        'confirm'   => 'Opravdu si přejete odstranit tohoto dodavatele?',
+        'error'   => 'Vyskytl se problém při mazání dodavatele. Zkuste to prosím znovu.',
         'success' => 'Dodavatel byl úspěšně smazán.'
     )
 

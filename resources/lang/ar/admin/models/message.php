@@ -28,4 +28,9 @@ return array(
         'success' 		=> 'تم إستعادة المودير بنجاح.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'No fields were changed, so nothing was updated.',
+        'success' 		=> 'Models updated.'
+    ),
+
 );

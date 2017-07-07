@@ -47,6 +47,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'آیا شما مطمئن هستید که می خواهید این تنظیمات دارایی را حذف کنید؟',
         'error'   		=> 'اشکال در حذف دارایی.لطفا دوباره تلاش کنید.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'دارایی با موفقیت حذف شد.'
     ),
 

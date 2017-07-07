@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => '이 설정들은 설치본의 특정 분야를 설정하는 것입니다.',
     'labels_per_page'           => '페이지 당 꼬리표',
     'label_dimensions'          => '꼬리표 크기(인치)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => '페이지 여백 (인치)',
     'purge'                    => '삭제된 기록들 지우기',
     'labels_display_bgutter'    => '꼬리표 아래쪽 가운데 여백',

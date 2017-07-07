@@ -4,15 +4,15 @@
 return array(
 
     'assets_user'       => 'Актив привязан к :name',
-    'bulk_update_warn'	=> 'You are about to edit the properties of :user_count users. Please note that you cannot change your own user attributes using this form, and must make edits to your own user individually.',
-    'bulk_update_help'	=> 'This form allows you to update multiple users at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged.',
+    'bulk_update_warn'	=> 'Вы собираетесь изменить свойства :user_count пользователей. Пожалуйста, обратите внимание, что вы не сможете изменить ваши собственные атрибуты используя эту форму. Если вам нужно изменить атрибуты своего профиля, то внесите изменения отдельно.',
+    'bulk_update_help'	=> 'Эта форма позволяет Вам обновить несколько пользователей за раз. Заполняйте только те поля, которые нужно изменить. Пустые поля останутся без изменений.',
     'current_assets'    => 'Активы, выданные данному пользователю',
     'clone'             => 'Клонировать пользователя',
     'contact_user'      => 'Связаться с :name',
     'edit'              => 'Редактировать пользователя',
     'filetype_info'     => 'Разрешенные типы файлов: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'history_user'      => 'История для :name',
-	'info'				=> 'Info',
+	'info'				=> 'Информация',
     'last_login'        => 'Последний вход',
     'ldap_config_text'  => 'Параметры конфигурации LDAP можно найти Администратор > Параметры. Выбранное местоположение будет установлено для всех импортируемых пользователей. (Необязательно).',
     'software_user'     => 'Программное обеспечение привязано к :name',

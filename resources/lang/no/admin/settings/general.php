@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Disse innstillingene lar deg tilpasse enkelte aspekter av installasjonen din.',
     'labels_per_page'           => 'Etiketter per side',
     'label_dimensions'          => 'Etikettstørrelsen (inches)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Side marger (inches)',
     'purge'                    => 'Tømme slettede poster',
     'labels_display_bgutter'    => 'Etikett bunnmarg',

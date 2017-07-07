@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Te ustawienia pozwalają ci zmodyfikować najważniejsze szczegóły twojej instalacji.',
     'labels_per_page'           => 'Etykieta per strona',
     'label_dimensions'          => 'rozmiar etykiety',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Margines strony (cale)',
     'purge'                    => 'Wyczyść usunięte rekordy',
     'labels_display_bgutter'    => 'Label bottom gutter',

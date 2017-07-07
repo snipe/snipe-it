@@ -28,4 +28,9 @@ return array(
         'success' 		=> '型番は復元されました。'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'No fields were changed, so nothing was updated.',
+        'success' 		=> 'Models updated.'
+    ),
+
 );

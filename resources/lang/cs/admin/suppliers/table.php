@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => 'O dodavatelích',
+    'about_suppliers_text'  => 'Dodavatelé se používají ke sledování zdroje položek',
     'address'               => 'Adresa dodavatele',
     'assets'                => 'Majetek',
     'city'                  => 'Město',
@@ -18,10 +18,10 @@ return array(
     'phone'                 => 'Telefon',
     'state'                 => 'Stát',
     'suppliers'             => 'Dodavatelé',
-    'update'                => 'Update Supplier',
+    'update'                => 'Aktualizovat dodavatele',
     'url'                   => 'URL',
     'view'                  => 'Zobrazit dodavatele',
-    'view_assets_for'       => 'View Assets for',
+    'view_assets_for'       => 'Zobrazit majetky pro',
     'zip'                   => 'PSČ',
 
 );

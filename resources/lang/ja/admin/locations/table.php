@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'ロケーション',
     'parent'                    => '上位',
     'currency'                  => '現地通貨',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'LDAP OU を検索',
     );

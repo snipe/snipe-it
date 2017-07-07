@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'Locaties',
     'parent'                    => 'Bovenliggend',
     'currency'                  => 'Locatie valuta',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'LDAP zoek OU',
     );

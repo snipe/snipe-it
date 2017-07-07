@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups_title'            => 'O skupinách',
+    'about_groups'                  => 'Skupiny se používají ke zobecnění uživatelských oprávnění.',
     'group_management' 	 	=> 'Správa skupin',
     'create' 	 	 	    => 'Vytvořit novou skupinu',
     'update' 	 		        => 'Upravit skupinu',

@@ -25,7 +25,7 @@ return array(
         "file"    => ":attribute 는 :min - :max Kbyte 사이의 값입니다.",
         "string"  => ":attribute 는 :min - :max 자 사이의 문자입니다.",
     ),
-    "boolean"          => "The :attribute must be true or false.",
+    "boolean"          => ":attribute 는 참 또는 거짓의 속성만 지정 가능합니다.",
     "confirmed"        => ":attribute 확인이 일치 하지 않습니다.",
     "date"             => ":attribute 는 잘못된 날짜 입니다.",
     "date_format"      => ":attribute 는 :format 형식과 일치하지 않습니다.",

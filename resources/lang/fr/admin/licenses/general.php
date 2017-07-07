@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'A propos des licences',
+    'about_licenses'                  => 'Les licences sont utilisées pour suivre les logiciels. Ils ont un certain nombre d\'attribution pouvant être associés individuellement',
     'checkin'  					=> 'Libérer la licence multiposte',
     'checkout_history'  		=> 'Historique des associations',
     'checkout'  				=> 'Associer la licence multiposte',

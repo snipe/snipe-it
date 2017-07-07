@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',
         'error'   		=> 'Det oppstod et problem under sletting av eiendel. Vennligst prøv igjen.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Vellykket sletting av eiendel.'
     ),
 

@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Dengan pengaturan ini anda dapat merubah aspek tertentu pada instalasi.',
     'labels_per_page'           => 'Label per halaman',
     'label_dimensions'          => 'Dimensi label (inch)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Marjin halaman (inch)',
     'purge'                    => 'Pembersihan catatan yang telah terhapus',
     'labels_display_bgutter'    => 'Ukuran bawah label',

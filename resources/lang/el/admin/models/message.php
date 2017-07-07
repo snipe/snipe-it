@@ -28,4 +28,9 @@ return array(
         'success' 		=> 'Το μοντέλο επαναφέρθηκε με επιτυχία.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'No fields were changed, so nothing was updated.',
+        'success' 		=> 'Models updated.'
+    ),
+
 );

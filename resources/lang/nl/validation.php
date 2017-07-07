@@ -25,7 +25,7 @@ return array(
         "file"    => ":attribute moet een waarde hebben tussen :min en :max kilobytes.",
         "string"  => ":attribute moet tussen de :min en :max aantal karakters lang zijn.",
     ),
-    "boolean"          => "The :attribute must be true or false.",
+    "boolean"          => ":attribute moet waar of onwaar zijn.",
     "confirmed"        => ":attribute bevestiging komt niet overeen.",
     "date"             => ":attribute is geen geldige datum.",
     "date_format"      => ":attribute komt niet overeen met het volgende formaat :format.",

@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Bạn có chắc chắn muốn xoá bỏ tài sản này?',
         'error'   		=> 'Đã có vấn đề xảy ra khi xoá tài sản này. Bạn hãy thử lại xem.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Tài sản này được xoá thành công.'
     ),
 

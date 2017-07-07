@@ -47,6 +47,7 @@ return array(
     'delete' => array(
         'confirm'   	=> '您確定要刪除此資產嗎？',
         'error'   		=> '刪除資產時發生問題，請重試。',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> '刪除資產成功。'
     ),
 

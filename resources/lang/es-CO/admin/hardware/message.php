@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Estás seguro que quieres eliminar el equipo?',
         'error'   		=> 'Equipo no eliminado, intentalo de nuevo.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Equipo eliminado.'
     ),
 

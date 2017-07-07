@@ -25,7 +25,7 @@ return array(
         "file"    => ":attribute musí být mezi :min - :max kilobajtů.",
         "string"  => ":attribute smí obsahovat pouze :min - :max znaků.",
     ),
-    "boolean"          => "The :attribute must be true or false.",
+    "boolean"          => ":attribute musí být true nebo false.",
     "confirmed"        => "Potvrzení :attribute se neshoduje.",
     "date"             => ":attribute není platným datem.",
     "date_format"      => "Atribut  :attribute nesouhlasí s formátem :format.",
@@ -34,7 +34,7 @@ return array(
     "digits_between"   => ":attribute musí být mezi hodnotami :min a :max.",
     "email"            => "Formát :attribute je neplatný.",
     "exists"           => "Zvolený :attribute je neplatný.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "email_array"      => "Jedna nebo více e-mailových adres je neplatná.",
     "image"            => ":attribute musí být obrázek.",
     "in"               => "Zvolený :attribute je neplatný.",
     "integer"          => ":attribute musí být celočíselný.",
@@ -65,8 +65,8 @@ return array(
     ),
     "unique"           => ":attribute byl již vybrán.",
     "url"              => "Formát :attribute je neplatný.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Musíte vybrat platný status typu štítku",
+    "unique_undeleted" => ":attribute musí být jedinečný.",
 
 
     /*

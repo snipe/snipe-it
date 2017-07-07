@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Anda pasti anda ingin hapuskan harta ini?',
         'error'   		=> 'Ada isu semasa menghapuskan harta. Sila cuba lagi.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Harta berjaya dihapuskan.'
     ),
 

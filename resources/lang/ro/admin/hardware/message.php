@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti acest activ?',
         'error'   		=> 'S-a intampinat o problema la stergerea activului. Va rugam incercati iar.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Activul a fost sters.'
     ),
 

@@ -11,5 +11,5 @@ return array(
     'request'                   => 'Заявка',
     'submit'  	                => 'Потвърди',
     'upload'                    => 'Качване',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Изберете файл...',
 );

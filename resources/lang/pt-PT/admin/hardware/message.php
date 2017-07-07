@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Tem a certeza de que pretende eliminar este artigo?',
         'error'   		=> 'Ocorreu um problema ao remover o artigo. Por favor, tente novamente.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'O artigo foi removido com sucesso.'
     ),
 

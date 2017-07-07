@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Estas configurações permitem-lhe customizar determinados aspetos da sua instalação.',
     'labels_per_page'           => 'Etiquetas por página',
     'label_dimensions'          => 'Dimensões das etiquetas (inches)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Margens da pagina (inches)',
     'purge'                    => 'Remover registos apagados',
     'labels_display_bgutter'    => 'Margem inferior da etiqueta',

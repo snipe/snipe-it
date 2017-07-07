@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Тези настройки позволяват да конфигурирате различни аспекти на Вашата инсталация.',
     'labels_per_page'           => 'Етикети на страница',
     'label_dimensions'          => 'Измерения на етикети (инчове)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Марж на страница (инчове)',
     'purge'                    => 'Пречисти изтрити записи',
     'labels_display_bgutter'    => 'Обозначаване на долен канал',

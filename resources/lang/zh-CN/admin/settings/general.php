@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => '这些设置允许您自定义您的安装偏好',
     'labels_per_page'           => '每页显示',
     'label_dimensions'          => 'Label 尺寸（英尺）',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => '页面边框',
     'purge'                    => '清除已标记删除的记录',
     'labels_display_bgutter'    => '标签底部装订线',

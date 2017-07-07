@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this asset?',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'تم حذف الأصل بنجاح.'
     ),
 

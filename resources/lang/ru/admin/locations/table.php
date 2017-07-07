@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'Размещения',
     'parent'                    => 'Родитель',
     'currency'                  => 'Валюта местонахождения',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'Поиск в LDAP OU',
     );

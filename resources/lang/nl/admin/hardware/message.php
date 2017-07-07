@@ -47,6 +47,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Weet je zeker dat je dit product wilt verwijderen?',
         'error'   		=> 'Er was een probleem tijdens het verwijderen van het product. Probeer opnieuw.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Het product is met succes verwijderd.'
     ),
 

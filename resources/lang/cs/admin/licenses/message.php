@@ -4,9 +4,9 @@ return array(
 
     'does_not_exist' => 'Licence neexistuje.',
     'user_does_not_exist' => 'Uživatel neexistuje.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'asset_does_not_exist' 	=> 'Majetek, který se pokoušíte spojit s touto licencí, neexistuje.',
+    'owner_doesnt_match_asset' => 'Majetek, který se pokoušíte spojit s touto licencí, vlastní někdo jiný než osoba vybraná v rozbalovací nabídce k této licenci.',
+    'assoc_users'	 => 'Licence je předána svému uživateli a nelze ji odstranit. Před odstraněním ji nejprve převezměte. ',
 
 
     'create' => array(
@@ -21,29 +21,29 @@ return array(
 
     'upload' => array(
         'error'   => 'Soubor(y) se nepodařilo nahrát. Prosím zkuste to znovu.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'success' => 'Soubor(y) byly v pořádku nahrány.',
+        'nofiles' => 'K nahrání jste nevybrali žádný, nebo příliš velký soubor',
+        'invalidfiles' => 'Jeden nebo více označených souborů je příliš velkých nebo nejsou podporované. Povolenými příponami jsou png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, a lic.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Licence nebyla aktualizována, zkuste to prosím znovu',
+        'success' => 'Licence byla úspěšně aktualizována.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
+        'confirm'   => 'Jste si jisti, že chcete odstranit tuto licenci?',
+        'error'   => 'Vyskytl se problém při mazání licence. Zkuste to znovu prosím.',
         'success' => 'Licence byla úspěšně smazána.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Vyskytl se problém při výdeji licence. Zkuste to znovu prosím.',
+        'success' => 'Licence byla úspěšně vydána'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
+        'error'   => 'Vyskytl se problém při ověřování licence. Zkuste to znovu prosím.',
         'success' => 'Licence byla úspěšně zkontrolována'
     ),
 

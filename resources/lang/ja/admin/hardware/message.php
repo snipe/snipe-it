@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'この資産を削除してもよろしいですか？',
         'error'   		=> '資産を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> '資産は正常に削除されました。'
     ),
 

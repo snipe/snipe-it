@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Вы успешно приняли актив.',
     'declined'                  => 'Вы успешно отклонили актив.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'Ваши пользователи были успешно обновлены, однако запись менеджера не была сохранена, потому что выбранный менеджер также присутствовал в редактируемом списке пользователей, и пользователи не могут быть менеджерами самим себе. Пожалуйста выберите ваших пользователей снова, за исключением их менеджера.',
     'user_exists'               => 'Пользователь уже существует!',
     'user_not_found'            => 'Пользователь [:id] не существует.',
     'user_login_required'       => 'Поле "Логин" является обязательным',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Пользователь успешно создан.',
         'update'    => 'Пользователь успешно изменен.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Пользователи успешно изменены!',
         'delete'    => 'Пользователь успешно удален.',
         'ban'       => 'Пользователь успешно заблокирован.',
         'unban'     => 'Пользователь успешно разблокирован.',

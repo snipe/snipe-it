@@ -47,6 +47,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Tem certeza de que deseja excluir este ativo?',
         'error'   		=> 'Houve um problema ao excluir o ativo. Tente novamente.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'O ativo foi excluído com sucesso.'
     ),
 
@@ -68,7 +69,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
         'success' 		=> 'Ativo solicitado com sucesso.',
-        'canceled'      => 'Requisição cancelado com sucesso'
+        'canceled'      => 'Requisição cancelada com sucesso'
     )
 
 );

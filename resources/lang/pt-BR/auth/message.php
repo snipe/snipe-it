@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Esta conta de usuário não está ativada.',
     'account_suspended'      => 'Esta conta de usuário está suspensa.',
     'account_banned'         => 'Esta conta de usuário está banida.',
-    'throttle'               => 'Muitas tentativas falhadas de login. Por favor, tente novamente no próximo(s) :minutes minuto(s).',
+    'throttle'               => 'Muitas tentativas com falha de login. Por favor, tente novamente no próximo(s) :minutes minuto(s).',
 
     'signin' => array(
         'error'   => 'Houve um problema ao tentar-lhe entrar, tente novamente.',

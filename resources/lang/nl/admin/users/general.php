@@ -4,8 +4,8 @@
 return array(
 
     'assets_user'       => 'Materiaal toegewezen aan :name',
-    'bulk_update_warn'	=> 'You are about to edit the properties of :user_count users. Please note that you cannot change your own user attributes using this form, and must make edits to your own user individually.',
-    'bulk_update_help'	=> 'This form allows you to update multiple users at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged.',
+    'bulk_update_warn'	=> 'U staat op het punt om een aanpassing te maken aan de eigenschappen van :user_count gebruikers. Houd er rekening mee dat u niet uw eigen gebruikers eigenschappen kan aanpassen via dit formulier, u zal dit in uw eigen instellingen moeten doen.',
+    'bulk_update_help'	=> 'Dit formulier maakt het mogelijk om meerdere gebruikers tegelijkertijd te bewerken, vul alleen de velden in die veranderd moeten worden. Blanco velden zullen ongewijzigd blijven.',
     'current_assets'    => 'Op dit moment aan deze gebruiker uitgeleverde producten',
     'clone'             => 'Gebruiker klonen',
     'contact_user'      => 'Contact :name',

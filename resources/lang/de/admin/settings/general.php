@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Mit diesen Einstellungen können Sie verschiedene Aspekte Ihrer Installation anpassen.',
     'labels_per_page'           => 'Etiketten pro Seite',
     'label_dimensions'          => 'Etikettengröße (Zoll)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Seiten Ränder (Zoll)',
     'purge'                    => 'Gelöschte Einträge bereinigen',
     'labels_display_bgutter'    => 'Ettiketten Spaltenzwischenraum unterhalb',

@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',
         'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Dieses Asset wurde erfolgreich entfernt.'
     ),
 

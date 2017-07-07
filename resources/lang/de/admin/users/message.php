@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Sie haben diesen Gegenstand erfolgreich angenommen.',
     'declined'                  => 'Sie haben diesen Gegenstand abgelehnt.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'Benutzer erfolgreich geändert. Vorgesetzter sollte auch bearbeitet werden und konnte nicht angepasst werden, weil er sich nicht selbst als Vorgesetzter eingetragen haben kann. Bitte Benutzer ohne den Vorgesetzten nochmal bearbeiten.',
     'user_exists'               => 'Benutzer existiert bereits!',
     'user_not_found'            => 'Benutzer [:id] existiert nicht.',
     'user_login_required'       => 'Das Loginfeld ist erforderlich',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Benutzer wurde erfolgreich erstellt.',
         'update'    => 'Benutzer wurde erfolgreich bearbeitet.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Benutzer erfolgreich geändert!',
         'delete'    => 'Benutzer wurde erfolgreich gelöscht.',
         'ban'       => 'Benutzer wurde erfolgreich ausgeschlossen.',
         'unban'     => 'Benutzer wurde erfolgreich wieder eingeschlossen.',
