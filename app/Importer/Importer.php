@@ -14,11 +14,6 @@ abstract class Importer
 {
     protected $csv;
     /**
-     * Should we persist to database?
-     * @var bool
-     */
-    protected $testRun;
-    /**
      * Id of User performing import
      * @var
      */
@@ -266,9 +261,7 @@ abstract class Importer
             }
         }
         $user = new User;
-        if ($this->testRun) {
-            return $user;
-        }
+
         if (!empty($user_username)) {
 
             if ($user = User::MatchEmailOrUsername($user_username, $user_email)
@@ -291,20 +284,6 @@ abstract class Importer
             }
         }
         return $user;
-    }
-
-    /**
-     * Sets the Should we persist to database?.
-     *
-     * @param bool $testRun the test run
-     *
-     * @return self
-     */
-    public function setTestRun($testRun)
-    {
-        $this->testRun = $testRun;
-
-        return $this;
     }
 
     /**

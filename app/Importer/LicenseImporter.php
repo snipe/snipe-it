@@ -66,30 +66,28 @@ class LicenseImporter extends ItemImporter
             $license->fill($this->sanitizeItemForStoring($license));
         }
 
-        if (!$this->testRun) {
-            if ($license->save()) {
-                $license->logCreate('Imported using csv importer');
-                $this->log('License ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
+        if ($license->save()) {
+            $license->logCreate('Imported using csv importer');
+            $this->log('License ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
 
-                // Lets try to checkout seats if the fields exist and we have seats.
-                if ($license->seats > 0) {
-                    $user = $this->item['user'];
-                    $asset = Asset::where('asset_tag', $asset_tag)->first();
-                    $targetLicense = $license->licenseSeats()->first();
-                    if ($user) {
-                        $targetLicense->assigned_to = $user->id;
-                        if ($asset) {
-                            $targetLicense->asset_id = $asset->id;
-                        }
-                        $targetLicense->save();
-                    } elseif ($asset) {
+            // Lets try to checkout seats if the fields exist and we have seats.
+            if ($license->seats > 0) {
+                $user = $this->item['user'];
+                $asset = Asset::where('asset_tag', $asset_tag)->first();
+                $targetLicense = $license->licenseSeats()->first();
+                if ($user) {
+                    $targetLicense->assigned_to = $user->id;
+                    if ($asset) {
                         $targetLicense->asset_id = $asset->id;
-                        $targetLicense->save();
                     }
+                    $targetLicense->save();
+                } elseif ($asset) {
+                    $targetLicense->asset_id = $asset->id;
+                    $targetLicense->save();
                 }
-                return;
             }
-            $this->logError($license, 'License "' . $this->item['name'].'"');
+            return;
         }
+        $this->logError($license, 'License "' . $this->item['name'].'"');
     }
 }

@@ -34,19 +34,13 @@ class ConsumableImporter extends ItemImporter
             }
             $this->log('Updating Consumable');
             $consumable->update($this->sanitizeItemForUpdating($consumable));
-            if (!$this->testRun) {
-                $consumable->save();
-            }
+            $consumable->save();
             return;
         }
         $this->log("No matching consumable, creating one");
         $consumable = new Consumable();
         $consumable->fill($this->sanitizeItemForStoring($consumable));
 
-        if ($this->testRun) {
-            $this->log('TEST RUN - Consumable ' . $this->item['name'] . ' not created');
-            return;
-        }
         if ($consumable->save()) {
             $consumable->logCreate('Imported using CSV Importer');
             $this->log("Consumable " . $this->item["name"] . ' was created');

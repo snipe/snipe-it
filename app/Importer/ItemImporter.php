@@ -170,9 +170,7 @@ class ItemImporter extends Importer
             $item['name'] = $asset_model_name;
             $item['model_number'] = $asset_modelNumber;
             $asset_model->update($item);
-            if (!$this->testRun) {
-                $asset_model->save();
-            }
+            $asset_model->save();
             $this->log("Asset Model Updated");
             return $asset_model->id;
         }
@@ -185,10 +183,6 @@ class ItemImporter extends Importer
 
         $asset_model->fill($item);
         $item = null;
-        if ($this->testRun) {
-            $this->log('TEST RUN - asset_model  ' . $asset_model->name . ' not created');
-            return $asset_model->id;
-        }
 
         if ($asset_model->save()) {
             $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelNumber . ' was created');
@@ -228,9 +222,6 @@ class ItemImporter extends Importer
         $category->category_type = $item_type;
         $category->user_id = $this->user_id;
 
-        if ($this->testRun) {
-            return $category->id;
-        }
         if ($category->save()) {
             $this->log('Category ' . $asset_category . ' was created');
             return $category->id;
@@ -258,10 +249,6 @@ class ItemImporter extends Importer
         $company = new Company();
         $company->name = $asset_company_name;
 
-        if ($this->testRun) {
-
-            return $company->id;
-        }
         if ($company->save()) {
             $this->log('Company ' . $asset_company_name . ' was created');
             return $company->id;
@@ -297,10 +284,6 @@ class ItemImporter extends Importer
         $status->deployable = 1;
         $status->pending = 0;
         $status->archived = 0;
-
-        if ($this->testRun) {
-            return $status->id;
-        }
 
         if ($status->save()) {
             $this->log('Status ' . $asset_statuslabel_name . ' was created');
@@ -338,9 +321,6 @@ class ItemImporter extends Importer
         $manufacturer->name = $item_manufacturer;
         $manufacturer->user_id = $this->user_id;
 
-        if ($this->testRun) {
-            return $manufacturer->id;
-        }
         if ($manufacturer->save()) {
             $this->log('Manufacturer ' . $manufacturer->name . ' was created');
             return $manufacturer->id;
@@ -378,9 +358,6 @@ class ItemImporter extends Importer
         $location->country = '';
         $location->user_id = $this->user_id;
 
-        if ($this->testRun) {
-            return $location->id;
-        }
         if ($location->save()) {
             $this->log('Location ' . $asset_location . ' was created');
             return $location->id;
@@ -414,9 +391,6 @@ class ItemImporter extends Importer
         $supplier->name = $item_supplier;
         $supplier->user_id = $this->user_id;
 
-        if ($this->testRun) {
-            return $supplier->id;
-        }
         if ($supplier->save()) {
             $this->log('Supplier ' . $item_supplier . ' was created');
             return $supplier->id;

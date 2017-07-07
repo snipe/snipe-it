@@ -35,19 +35,12 @@ class AccessoryImporter extends ItemImporter
 
             $this->log('Updating Accessory');
             $accessory->update($this->sanitizeItemForUpdating($accessory));
-            if (!$this->testRun) {
-                $accessory->save();
-            }
+            $accessory->save();
             return;
         }
         $this->log("No Matching Accessory, Creating a new one");
         $accessory = new Accessory();
         $accessory->fill($this->sanitizeItemForStoring($accessory));
-
-        if ($this->testRun) {
-            $this->log('TEST RUN - Accessory  ' . $this->item["name"] . ' not created');
-            return;
-        }
 
         if ($accessory->save()) {
             $accessory->logCreate('Imported using CSV Importer');

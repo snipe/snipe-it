@@ -85,13 +85,11 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
-        if (!$this->testRun) {
-            if ($asset->save()) {
-                $asset->logCreate('Imported using csv importer');
-                $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
-                return;
-            }
-            $this->logError($asset, 'Asset "' . $this->item['name'].'"');
+        if ($asset->save()) {
+            $asset->logCreate('Imported using csv importer');
+            $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
+            return;
         }
+        $this->logError($asset, 'Asset "' . $this->item['name'].'"');
     }
 }
