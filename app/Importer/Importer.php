@@ -324,8 +324,9 @@ abstract class Importer
     public function setFieldMappings($fields)
     {
         // Some initial sanitization.
-
+        $fields = array_map('strtolower', $fields);
         $this->fieldMap = array_merge($this->defaultFieldMap, $fields);
+
         // $this->log($this->fieldMap);
         return $this;
     }
