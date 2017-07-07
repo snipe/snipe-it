@@ -72,7 +72,6 @@ class ItemImporter extends Importer
                 $this->item['assigned_to'] = $this->item['user']->id;
             }
         }
-
     }
 
     /**
@@ -128,6 +127,7 @@ class ItemImporter extends Importer
     private function shouldUpdateField($field)
     {
         if (empty($field)) {
+            // dd('here');
             return false;
         }
         return !($this->updating && empty($field));
@@ -145,6 +145,7 @@ class ItemImporter extends Importer
      */
     public function createOrFetchAssetModel(array $row)
     {
+
         $asset_model_name = $this->findCsvMatch($row, "asset_model");
         $asset_modelNumber = $this->findCsvMatch($row, "model_number");
         // TODO: At the moment, this means  we can't update the model number if the model name stays the same.
@@ -279,6 +280,7 @@ class ItemImporter extends Importer
      */
     public function createOrFetchStatusLabel($asset_statuslabel_name)
     {
+
         if (empty($asset_statuslabel_name)) {
             return null;
         }

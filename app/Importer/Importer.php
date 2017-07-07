@@ -1,7 +1,6 @@
 <?php
 namespace App\Importer;
 
-
 use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\User;
@@ -13,11 +12,7 @@ use League\Csv\Reader;
 
 abstract class Importer
 {
-    /**
-     * @var string
-     */
-    private $filename;
-    private $csv;
+    protected $csv;
     /**
      * Should we persist to database?
      * @var bool
@@ -33,6 +28,42 @@ abstract class Importer
      * @var bool
      */
     protected $updating;
+    /**
+     * Default Map of item fields->csv names
+     * @var array
+     */
+    private $defaultFieldMap = [
+        'asset_tag' => 'asset tag',
+        'category' => 'category',
+        'company' => 'company',
+        'item_name' => 'item name',
+        'image' => 'image',
+        'expiration_date' => 'expiration date',
+        'location' => 'location',
+        'notes' => 'notes',
+        'license_email' => 'licensed to email',
+        'license_name' => "licensed_to_name",
+        'maintained' => 'maintained',
+        'manufacturer' => 'manufacturer',
+        'asset_model' => "model name",
+        'model_number' => 'model number',
+        'order_number' => 'order number',
+        'purchase_cost' => 'purchase cost',
+        'purchase_date' => 'purchase date',
+        'purchase_order' => 'purchase order',
+        'qty' => 'quantity',
+        'reassignable' => 'reassignable',
+        'requestable' => 'requestable',
+        'seats' => 'seats',
+        'serial' => 'serial number',
+        'status' => 'status',
+        'supplier' => 'supplier',
+        'termination_date' => 'termination date',
+        'warranty_months' => 'warranty',
+        'name' => 'name',
+        'email' => 'email',
+        'username' => 'username'
+    ];
     /**
      * Map of item fields->csv names
      * @var array
@@ -58,13 +89,18 @@ abstract class Importer
 
     /**
      * ObjectImporter constructor.
-     * @param string $filename
+     * @param string $file
      */
-    public function __construct($filename)
+    public function __construct($file)
     {
-
-        $this->filename = $filename;
-        $this->csv = Reader::createFromPath($filename);
+        $this->fieldMap = $this->defaultFieldMap;
+        // By default the importer passes a url to the file.
+        // However, for testing we also support passing a string directly
+        if (is_file($file)) {
+            $this->csv = Reader::createFromPath($file);
+        } else {
+            $this->csv = Reader::createFromString($file);
+        }
         $this->csv->setNewLine('\r\n');
         if (! ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
@@ -76,14 +112,18 @@ abstract class Importer
 
     public function import()
     {
-        $results = $this->csv->fetchAssoc();
+        $headerRow = $this->csv->fetchOne();
+        $results = $this->normalizeInputArray($this->csv->fetchAssoc());
+
         $this->customFields = CustomField::All(['name']);
         DB::transaction(function () use (&$results) {
             Model::unguard();
             $resultsCount = sizeof($results);
             foreach ($results as $row) {
                 $this->handle($row);
-                call_user_func($this->progressCallback, $resultsCount);
+                if ($this->progressCallback) {
+                    call_user_func($this->progressCallback, $resultsCount);
+                }
 
                 $this->log('------------- Action Summary ----------------');
             }
@@ -104,9 +144,10 @@ abstract class Importer
      */
     public function findCsvMatch(array $array, $key, $default = '')
     {
+
         $val = $default;
-// dd($array);
-        if($customKey = $this->lookupCustomKey($key)) {
+
+        if ($customKey = $this->lookupCustomKey($key)) {
             $key = $customKey;
         }
         $this->log("Custom Key: ${key}");
@@ -128,11 +169,25 @@ abstract class Importer
     public function lookupCustomKey($key)
     {
         // dd($this->fieldMap);
+
         if (array_key_exists($key, $this->fieldMap)) {
-            // $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
-            return $key = $this->fieldMap[$key];
+            $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
+            return $this->fieldMap[$key];
         }
         return null;
+    }
+
+    /**
+     * @param $results
+     * @return array
+     */
+    public function normalizeInputArray($results)
+    {
+        $newArray = [];
+        foreach ($results as $index => $arrayToNormalize) {
+            $newArray[$index] = array_change_key_case($arrayToNormalize);
+        }
+        return $newArray;
     }
     /**
      * Figure out the fieldname of the custom field
@@ -150,12 +205,16 @@ abstract class Importer
 
     protected function log($string)
     {
-        call_user_func($this->logCallback, $string);
+        if ($this->logCallback) {
+            call_user_func($this->logCallback, $string);
+        }
     }
 
     protected function logError($item, $field)
     {
-        call_user_func($this->errorCallback, $item, $field, $item->getErrors());
+        if ($this->errorCallback) {
+            call_user_func($this->errorCallback, $item, $field, $item->getErrors());
+        }
     }
 
     /**
@@ -183,6 +242,7 @@ abstract class Importer
             $user_username = '';
             // No name was given
         } elseif (empty($user_name)) {
+
             $this->log('No user data provided - skipping user creation, just adding asset');
             //$user_username = '';
         } else {
@@ -205,12 +265,12 @@ abstract class Importer
                 }
             }
         }
-
         $user = new User;
         if ($this->testRun) {
             return $user;
         }
         if (!empty($user_username)) {
+
             if ($user = User::MatchEmailOrUsername($user_username, $user_email)
                 ->whereNotNull('username')->first()) {
                 $this->log('User '.$user_username.' already exists');
@@ -231,22 +291,6 @@ abstract class Importer
             }
         }
         return $user;
-    }
-
-
-
-    /**
-     * Sets the value of filename.
-     *
-     * @param string $filename the filename
-     *
-     * @return self
-     */
-    public function setFilename($filename)
-    {
-        $this->filename = $filename;
-
-        return $this;
     }
 
     /**
@@ -302,8 +346,8 @@ abstract class Importer
     {
         // Some initial sanitization.
 
-        $this->fieldMap = $fields;
-        $this->log($this->fieldMap);
+        $this->fieldMap = array_merge($this->defaultFieldMap, $fields);
+        // $this->log($this->fieldMap);
         return $this;
     }
 
