@@ -45,6 +45,13 @@ class FixDoubleEscape extends Command
             '\App\Models\Accessory' => ['name'],
             '\App\Models\Component' => ['name'],
             '\App\Models\Company' => ['name'],
+            '\App\Models\Manufacturer' => ['name'],
+            '\App\Models\Supplier' => ['name'],
+            '\App\Models\Statuslabel' => ['name'],
+            '\App\Models\Depreciation' => ['name'],
+            '\App\Models\AssetModel' => ['name'],
+            '\App\Models\Group' => ['name'],
+            '\App\Models\Department' => ['name'],
             '\App\Models\Location' => ['name'],
             '\App\Models\User' => ['first_name', 'last_name'],
         ];
