@@ -15,14 +15,21 @@ class AssetObserver
      * @param  Asset  $asset
      * @return void
      */
-    public function updated(Asset $asset)
+    public function updating(Asset $asset)
     {
-        $logAction = new Actionlog();
-        $logAction->item_type = Asset::class;
-        $logAction->item_id = $asset->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
-        $logAction->user_id = Auth::id();
-        $logAction->logaction('update');
+
+        if (($asset->getAttributes()['assigned_to'] == $asset->getOriginal()['assigned_to'])
+            && ($asset->getAttributes()['last_checkout'] == $asset->getOriginal()['last_checkout'])
+            && ($asset->getAttributes()['status_id'] == $asset->getOriginal()['status_id']))
+        {
+            $logAction = new Actionlog();
+            $logAction->item_type = Asset::class;
+            $logAction->item_id = $asset->id;
+            $logAction->created_at =  date("Y-m-d H:i:s");
+            $logAction->user_id = Auth::id();
+            $logAction->logaction('update');
+        }
+
     }
 
 

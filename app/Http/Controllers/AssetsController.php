@@ -587,9 +587,9 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
         $this->authorize('view', $asset);
 
-        if (isset($asset->id)) {
+        if (isset($asset)) {
 
-            if ($asset->assetloc) {
+            if (!is_null($asset->assetloc)) {
                 $use_currency = $asset->assetloc->currency;
             } else {
 
