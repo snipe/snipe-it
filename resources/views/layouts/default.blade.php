@@ -321,38 +321,10 @@
 
 
                @can('superadmin')
-               <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                       <i class="fa fa-wrench fa-fw"></i> @lang('general.admin')
-                       <b class="caret"></b>
+               <li>
+                   <a href="{{ route('settings.index') }}">
+                       <i class="fa fa-cogs fa-fw"></i> @lang('general.admin')
                    </a>
-                   <ul class="dropdown-menu">
-
-                       <li {!! (Request::is('groups*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('groups.index') }}">
-                               <i class="fa fa-group fa-fw"></i> @lang('general.groups')
-                           </a>
-                       </li>
-                       <li {!! (Request::is('settings/backups*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/settings/backups') }}">
-                               <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
-                           </a>
-                       </li>
-
-                       @can('settings.api')
-                           <li>
-                               <a href="{{ route('settings.api') }}">
-                                   <i class="fa fa-exchange fa-fw"></i> OAuth API Keys
-                               </a>
-                           </li>
-                       @endcan
-                       <li class="divider"></li>
-                       <li>
-                           <a href="{{ route('app') }}">
-                               <i class="fa fa-cog fa-fw"></i> @lang('general.settings')
-                           </a>
-                       </li>
-                   </ul>
                </li>
                @endcan
             </ul>

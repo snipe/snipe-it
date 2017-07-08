@@ -367,6 +367,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     ); // Settings resource
 
+    Route::get('settings/ldaptest', [
+        'as' => 'api.settings.ldaptest',
+        'uses' => 'SettingsController@getLdapTest'
+    ]);
+
 
     /*--- Status Labels API ---*/
 

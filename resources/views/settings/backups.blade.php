@@ -6,6 +6,10 @@
 @parent
 @stop
 
+@section('header_right')
+    <a href="{{ route('settings.index') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
+@stop
+
 {{-- Page content --}}
 @section('content')
 
@@ -32,7 +36,7 @@
 
                   @can('superadmin')
                       <a data-html="false"
-                         class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
+                         class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings.backups.destroy', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
                           <i class="fa fa-trash icon-white"></i>
                       </a>
                   @endcan
@@ -52,7 +56,7 @@
         {{ Form::hidden('_token', csrf_token()) }}
 
           <p>
-              <button class="btn btn-default {{ (config('app.lock_passwords')) ? ' disabled': '' }}">{{ trans('admin/settings/general.generate_backup') }}</button>
+              <button class="btn btn-success {{ (config('app.lock_passwords')) ? ' disabled': '' }}">{{ trans('admin/settings/general.generate_backup') }}</button>
           </p>
 
            @if (config('app.lock_passwords'))

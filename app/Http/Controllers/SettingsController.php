@@ -274,7 +274,7 @@ class SettingsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
         $settings = Setting::all();
         return view('settings/index', compact('settings'));
@@ -282,7 +282,7 @@ class SettingsController extends Controller
 
 
     /**
-    * Return a form to allow a super admin to update settings.
+    * Return the admin settings page
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
@@ -291,32 +291,167 @@ class SettingsController extends Controller
     public function getEdit()
     {
         $setting = Setting::first();
-        $is_gd_installed = extension_loaded('gd');
-
-        return view('settings/edit', compact('setting'))->with('is_gd_installed', $is_gd_installed);
+        return view('settings/general', compact('setting'));
     }
 
 
     /**
-    * Validate and process settings edit form.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return Redirect
-    */
-    public function postEdit(ImageUploadRequest $request)
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getSettings()
+    {
+        $setting = Setting::first();
+        return view('settings/general', compact('setting'));
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postSettings(Request $request)
     {
 
-        // Check if the asset exists
         if (is_null($setting = Setting::first())) {
-            // Redirect to the asset management page with error
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
+        $setting->load_remote = $request->input('load_remote', '0');
+        $setting->email_domain = $request->input('email_domain');
+        $setting->email_format = $request->input('email_format');
+        $setting->username_format = $request->input('username_format');
+        $setting->require_accept_signature = $request->input('require_accept_signature');
+        $setting->login_note = $request->input('login_note');
+        $setting->default_eula_text = $request->input('default_eula_text');
+
+        if (Input::get('per_page')!='') {
+            $setting->per_page = $request->input('per_page');
+        } else {
+            $setting->per_page = 200;
+        }
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getBranding()
+    {
+        $setting = Setting::first();
+        return view('settings.branding', compact('setting'));
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postBranding(ImageUploadRequest $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $setting->brand = $request->input('brand', '1');
+        $setting->header_color = $request->input('header_color');
+
+
+        // Only allow the site name and CSS to be changed if lock_passwords is false
+        // Because public demos make people act like dicks
+        if (!config('app.lock_passwords')) {
+            $setting->site_name = $request->input('site_name');
+            $setting->custom_css = $request->input('custom_css');
+        }
+
+
+        // If the user wants to clear the logo, reset the brand type
+        if ($request->input('clear_logo')=='1') {
+            $setting->logo = null;
+            $setting->brand = 1;
+
+        // If they are uploading an image, validate it and upload it
+        } elseif ($request->hasFile('image')) {
+
+            if (!config('app.lock_passwords')) {
+                $image = $request->file('image');
+                $file_name = "logo.".$image->getClientOriginalExtension();
+                $path = public_path('uploads');
+                if ($image->getClientOriginalExtension()!='svg') {
+                    Image::make($image->getRealPath())->resize(null, 40, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save($path.'/'.$file_name);
+                } else {
+                    $image->move($path, $file_name);
+                }
+                $setting->logo = $file_name;
+            }
+        }
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getSecurity()
+    {
+        $setting = Setting::first();
+        return view('settings.security', compact('setting'));
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postSecurity(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
 
         if (!config('app.lock_passwords')) {
-            $setting->site_name = $request->input('site_name');
-            $setting->custom_css = $request->input('custom_css');
 
             if ($request->input('two_factor_enabled')=='') {
                 $setting->two_factor_enabled = null;
@@ -326,30 +461,260 @@ class SettingsController extends Controller
 
         }
 
-        if (Input::get('per_page')!='') {
-            $setting->per_page = $request->input('per_page');
-        } else {
-            $setting->per_page = 200;
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getLocalization()
+    {
+        $setting = Setting::first();
+        return view('settings.localization', compact('setting'));
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postLocalization(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
         $setting->locale = $request->input('locale', 'en');
-        $setting->qr_code = $request->input('qr_code', '0');
-        $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
-        $setting->alt_barcode = $request->input('alt_barcode');
-        $setting->alt_barcode_enabled = $request->input('alt_barcode_enabled', '0');
-        $setting->barcode_type = $request->input('barcode_type');
-        $setting->load_remote = $request->input('load_remote', '0');
         $setting->default_currency = $request->input('default_currency', '$');
-        $setting->qr_text = $request->input('qr_text');
+        $setting->date_display_format = $request->input('date_display_format');
+        $setting->time_display_format = $request->input('time_display_format');
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getAlerts()
+    {
+        $setting = Setting::first();
+        return view('settings.alerts', compact('setting'));
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postAlerts(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $alert_email = rtrim($request->input('alert_email'), ',');
+        $alert_email = trim($alert_email);
+
+        $setting->alert_email = e($alert_email);
+        $setting->alerts_enabled = $request->input('alerts_enabled', '0');
+        $setting->alert_interval = $request->input('alert_interval');
+        $setting->alert_threshold = $request->input('alert_threshold');
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getSlack()
+    {
+        $setting = Setting::first();
+        return view('settings.slack', compact('setting'));
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postSlack(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $setting->slack_endpoint = $request->input('slack_endpoint');
+        $setting->slack_channel = $request->input('slack_channel');
+        $setting->slack_botname = $request->input('slack_botname');
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getAssetTags()
+    {
+        $setting = Setting::first();
+        return view('settings.asset_tags', compact('setting'));
+    }
+
+
+    /**
+     * Saves settings from form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postAssetTags(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
         $setting->auto_increment_prefix = $request->input('auto_increment_prefix');
         $setting->auto_increment_assets = $request->input('auto_increment_assets', '0');
         $setting->zerofill_count = $request->input('zerofill_count');
-        $setting->alert_interval = $request->input('alert_interval');
-        $setting->alert_threshold = $request->input('alert_threshold');
-        $setting->email_domain = $request->input('email_domain');
-        $setting->email_format = $request->input('email_format');
-        $setting->username_format = $request->input('username_format');
-        $setting->require_accept_signature = $request->input('require_accept_signature');
+        $setting->next_auto_tag_base = $request->input('next_auto_tag_base');
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getBarcodes()
+    {
+        $setting = Setting::first();
+        $is_gd_installed = extension_loaded('gd');
+
+        return view('settings.barcodes', compact('setting'))->with('is_gd_installed',$is_gd_installed);
+    }
+
+
+    /**
+     * Saves settings from form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function postBarcodes(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $setting->qr_code = $request->input('qr_code', '0');
+        $setting->alt_barcode = $request->input('alt_barcode');
+        $setting->alt_barcode_enabled = $request->input('alt_barcode_enabled', '0');
+        $setting->barcode_type = $request->input('barcode_type');
+        $setting->qr_text = $request->input('qr_text');
+
+
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+
+    }
+
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function getLabels()
+    {
+        $setting = Setting::first();
+        return view('settings.labels', compact('setting'));
+    }
+
+
+    /**
+     * Saves settings from form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function postLabels(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
         $setting->labels_per_page = $request->input('labels_per_page');
         $setting->labels_width = $request->input('labels_width');
         $setting->labels_height = $request->input('labels_height');
@@ -362,7 +727,7 @@ class SettingsController extends Controller
         $setting->labels_fontsize = $request->input('labels_fontsize');
         $setting->labels_pagewidth = $request->input('labels_pagewidth');
         $setting->labels_pageheight = $request->input('labels_pageheight');
-        $setting->next_auto_tag_base = $request->input('next_auto_tag_base');
+
 
 
         if (Input::has('labels_display_name')) {
@@ -383,16 +748,43 @@ class SettingsController extends Controller
             $setting->labels_display_tag = 0;
         }
 
-        $alert_email = rtrim($request->input('alert_email'), ',');
-        $alert_email = trim($alert_email);
+        if ($setting->save()) {
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
 
-        $setting->alert_email = e($alert_email);
-        $setting->alerts_enabled = $request->input('alerts_enabled', '0');
-        $setting->header_color = $request->input('header_color');
-        $setting->default_eula_text = $request->input('default_eula_text');
-        $setting->slack_endpoint = $request->input('slack_endpoint');
-        $setting->slack_channel = $request->input('slack_channel');
-        $setting->slack_botname = $request->input('slack_botname');
+    }
+
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function getLdapSettings()
+    {
+        $setting = Setting::first();
+        return view('settings.ldap', compact('setting'));
+    }
+
+
+    /**
+     * Saves settings from form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function postLdapSettings(Request $request)
+    {
+
+        if (is_null($setting = Setting::first())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
         $setting->ldap_enabled = $request->input('ldap_enabled', '0');
         $setting->ldap_server = $request->input('ldap_server');
         $setting->ldap_server_cert_ignore = $request->input('ldap_server_cert_ignore', false);
@@ -415,64 +807,17 @@ class SettingsController extends Controller
         $setting->ldap_tls = $request->input('ldap_tls', '0');
         $setting->ldap_pw_sync = $request->input('ldap_pw_sync', '0');
 
-        $setting->date_display_format = $request->input('date_display_format');
-        $setting->time_display_format = $request->input('time_display_format');
-        $setting->brand = $request->input('brand', '1');
-        $setting->login_note = $request->input('login_note');
-
-
-        if ($request->input('clear_logo')=='1') {
-            $setting->logo = null;
-            $setting->brand = 1;
-        } elseif ($request->hasFile('image')) {
-
-            if (!config('app.lock_passwords')) {
-                $image = $request->file('image');
-                $file_name = "logo.".$image->getClientOriginalExtension();
-                $path = public_path('uploads');
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 40, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                $setting->logo = $file_name;
-            }
-        }
-
         if ($setting->save()) {
-            return redirect()->to("admin/settings/app")->with('success', trans('admin/settings/message.update.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($setting->getErrors());
+            return redirect()->route('settings.index')
+                ->with('success', trans('admin/settings/message.update.success'));
         }
-
-
-        // Redirect to the setting management page
-        return redirect()->to("admin/settings/app/edit")->with('error', trans('admin/settings/message.update.error'));
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
 
     }
 
 
-    public function getLdapTest()
-    {
-
-        try {
-            $connection = Ldap::connectToLdap();
-            try {
-                Ldap::bindAdminToLdap($connection);
-                return response()->json(['message' => 'It worked!'], 200);
-            } catch (\Exception $e) {
-                return response()->json(['message' => $e->getMessage()], 500);
-            }
-            return response()->json(['message' => 'It worked!'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
 
 
-    }
 
 
     /**
@@ -524,10 +869,9 @@ class SettingsController extends Controller
     {
         if (!config('app.lock_passwords')) {
             Artisan::call('backup:run');
-            return redirect()->to("admin/settings/backups")->with('success', trans('admin/settings/message.backup.generated'));
+            return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.generated'));
         } else {
-
-            return redirect()->to("admin/settings/backups")->with('error', trans('general.feature_disabled'));
+            return redirect()->to("settings.backups.index")->with('error', trans('general.feature_disabled'));
         }
 
 
@@ -589,6 +933,18 @@ class SettingsController extends Controller
 
 
     /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function getPurge()
+    {
+        return view('settings.purge-form');
+    }
+
+    /**
     * Purges soft-deletes
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -623,6 +979,6 @@ class SettingsController extends Controller
      * @return View
      */
     public function api() {
-        return view('settings/api');
+        return view('settings.api');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Ldap;
 
 class SettingsController extends Controller
 {
@@ -73,4 +74,28 @@ class SettingsController extends Controller
     {
         //
     }
+
+    public function getLdapTest()
+    {
+        \Log::debug('Preparing to test LDAP connection');
+
+        try {
+            $connection = Ldap::connectToLdap();
+            try {
+                \Log::debug('attempting to bind to LDAP for LDAP test');
+                Ldap::bindAdminToLdap($connection);
+                return response()->json(['message' => 'It worked!'], 200);
+            } catch (\Exception $e) {
+                \Log::debug('Bind failed');
+                return response()->json(['message' => $e->getMessage()], 400);
+                //return response()->json(['message' => $e->getMessage()], 500);
+            }
+        } catch (\Exception $e) {
+            \Log::debug('Connection failed');
+            return response()->json(['message' => $e->getMessage()], 600);
+        }
+
+
+    }
+
 }
