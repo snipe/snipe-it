@@ -692,6 +692,23 @@
                     {!! $errors->first('slack_channel', '<span class="alert-msg">:message</span>') !!}
                   </div>
                 </div>
+
+                <!-- slack botname -->
+                <div class="form-group {{ $errors->has('slack_botname') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('slack_botname', trans('admin/settings/general.slack_botname')) }}
+                  </div>
+                  <div class="col-md-9">
+                    @if (config('app.lock_passwords')===true)
+                      {{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}
+                    @else
+                      {{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
+                    @endif
+                    {!! $errors->first('slack_botname', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
+
               </div> <!--/.box-body-->
             </div> <!--/#collapseFive-->
           </div> <!-- /.panel-->

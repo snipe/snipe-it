@@ -315,54 +315,54 @@ class SettingsController extends Controller
 
 
         if (!config('app.lock_passwords')) {
-            $setting->site_name = e(Input::get('site_name'));
-            $setting->custom_css = e(Input::get('custom_css'));
+            $setting->site_name = $request->input('site_name');
+            $setting->custom_css = $request->input('custom_css');
 
-            if (Input::get('two_factor_enabled')=='') {
+            if ($request->input('two_factor_enabled')=='') {
                 $setting->two_factor_enabled = null;
             } else {
-                $setting->two_factor_enabled = e(Input::get('two_factor_enabled'));
+                $setting->two_factor_enabled = $request->input('two_factor_enabled');
             }
 
         }
 
         if (Input::get('per_page')!='') {
-            $setting->per_page = e(Input::get('per_page'));
+            $setting->per_page = $request->input('per_page');
         } else {
             $setting->per_page = 200;
         }
 
-        $setting->locale = e(Input::get('locale', 'en'));
-        $setting->qr_code = e(Input::get('qr_code', '0'));
-        $setting->full_multiple_companies_support = e(Input::get('full_multiple_companies_support', '0'));
-        $setting->alt_barcode = e(Input::get('alt_barcode'));
-        $setting->alt_barcode_enabled = e(Input::get('alt_barcode_enabled', '0'));
-        $setting->barcode_type = e(Input::get('barcode_type'));
-        $setting->load_remote = e(Input::get('load_remote', '0'));
-        $setting->default_currency = e(Input::get('default_currency', '$'));
-        $setting->qr_text = e(Input::get('qr_text'));
-        $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
-        $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
-        $setting->zerofill_count = e(Input::get('zerofill_count'));
-        $setting->alert_interval = e(Input::get('alert_interval'));
-        $setting->alert_threshold = e(Input::get('alert_threshold'));
-        $setting->email_domain = e(Input::get('email_domain'));
-        $setting->email_format = e(Input::get('email_format'));
-        $setting->username_format = e(Input::get('username_format'));
-        $setting->require_accept_signature = e(Input::get('require_accept_signature'));
-        $setting->labels_per_page = e(Input::get('labels_per_page'));
-        $setting->labels_width = e(Input::get('labels_width'));
-        $setting->labels_height = e(Input::get('labels_height'));
-        $setting->labels_pmargin_left = e(Input::get('labels_pmargin_left'));
-        $setting->labels_pmargin_right = e(Input::get('labels_pmargin_right'));
-        $setting->labels_pmargin_top = e(Input::get('labels_pmargin_top'));
-        $setting->labels_pmargin_bottom = e(Input::get('labels_pmargin_bottom'));
-        $setting->labels_display_bgutter = e(Input::get('labels_display_bgutter'));
-        $setting->labels_display_sgutter = e(Input::get('labels_display_sgutter'));
-        $setting->labels_fontsize = e(Input::get('labels_fontsize'));
-        $setting->labels_pagewidth = e(Input::get('labels_pagewidth'));
-        $setting->labels_pageheight = e(Input::get('labels_pageheight'));
-        $setting->next_auto_tag_base = e(Input::get('next_auto_tag_base'));
+        $setting->locale = $request->input('locale', 'en');
+        $setting->qr_code = $request->input('qr_code', '0');
+        $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
+        $setting->alt_barcode = $request->input('alt_barcode');
+        $setting->alt_barcode_enabled = $request->input('alt_barcode_enabled', '0');
+        $setting->barcode_type = $request->input('barcode_type');
+        $setting->load_remote = $request->input('load_remote', '0');
+        $setting->default_currency = $request->input('default_currency', '$');
+        $setting->qr_text = $request->input('qr_text');
+        $setting->auto_increment_prefix = $request->input('auto_increment_prefix');
+        $setting->auto_increment_assets = $request->input('auto_increment_assets', '0');
+        $setting->zerofill_count = $request->input('zerofill_count');
+        $setting->alert_interval = $request->input('alert_interval');
+        $setting->alert_threshold = $request->input('alert_threshold');
+        $setting->email_domain = $request->input('email_domain');
+        $setting->email_format = $request->input('email_format');
+        $setting->username_format = $request->input('username_format');
+        $setting->require_accept_signature = $request->input('require_accept_signature');
+        $setting->labels_per_page = $request->input('labels_per_page');
+        $setting->labels_width = $request->input('labels_width');
+        $setting->labels_height = $request->input('labels_height');
+        $setting->labels_pmargin_left = $request->input('labels_pmargin_left');
+        $setting->labels_pmargin_right = $request->input('labels_pmargin_right');
+        $setting->labels_pmargin_top = $request->input('labels_pmargin_top');
+        $setting->labels_pmargin_bottom = $request->input('labels_pmargin_bottom');
+        $setting->labels_display_bgutter = $request->input('labels_display_bgutter');
+        $setting->labels_display_sgutter = $request->input('labels_display_sgutter');
+        $setting->labels_fontsize = $request->input('labels_fontsize');
+        $setting->labels_pagewidth = $request->input('labels_pagewidth');
+        $setting->labels_pageheight = $request->input('labels_pageheight');
+        $setting->next_auto_tag_base = $request->input('next_auto_tag_base');
 
 
         if (Input::has('labels_display_name')) {
@@ -383,40 +383,41 @@ class SettingsController extends Controller
             $setting->labels_display_tag = 0;
         }
 
-        $alert_email = rtrim(Input::get('alert_email'), ',');
+        $alert_email = rtrim($request->input('alert_email'), ',');
         $alert_email = trim($alert_email);
 
         $setting->alert_email = e($alert_email);
-        $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
-        $setting->header_color = e(Input::get('header_color'));
-        $setting->default_eula_text = e(Input::get('default_eula_text'));
-        $setting->slack_endpoint = e(Input::get('slack_endpoint'));
-        $setting->slack_channel = e(Input::get('slack_channel'));
-        $setting->slack_botname = e(Input::get('slack_botname'));
-        $setting->ldap_enabled = e(Input::get('ldap_enabled', '0'));
-        $setting->ldap_server = e(Input::get('ldap_server'));
-        $setting->ldap_server_cert_ignore = e(Input::get('ldap_server_cert_ignore', false));
-        $setting->ldap_uname = e(Input::get('ldap_uname'));
+        $setting->alerts_enabled = $request->input('alerts_enabled', '0');
+        $setting->header_color = $request->input('header_color');
+        $setting->default_eula_text = $request->input('default_eula_text');
+        $setting->slack_endpoint = $request->input('slack_endpoint');
+        $setting->slack_channel = $request->input('slack_channel');
+        $setting->slack_botname = $request->input('slack_botname');
+        $setting->ldap_enabled = $request->input('ldap_enabled', '0');
+        $setting->ldap_server = $request->input('ldap_server');
+        $setting->ldap_server_cert_ignore = $request->input('ldap_server_cert_ignore', false);
+        $setting->ldap_uname = $request->input('ldap_uname');
         if (Input::has('ldap_pword')) {
-            $setting->ldap_pword = Crypt::encrypt(Input::get('ldap_pword'));
+            $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
         }
-        $setting->ldap_basedn = e(Input::get('ldap_basedn'));
-        $setting->ldap_filter = Input::get('ldap_filter');
-        $setting->ldap_username_field = Input::get('ldap_username_field');
-        $setting->ldap_lname_field = e(Input::get('ldap_lname_field'));
-        $setting->ldap_fname_field = e(Input::get('ldap_fname_field'));
-        $setting->ldap_auth_filter_query = Input::get('ldap_auth_filter_query');
-        $setting->ldap_version = e(Input::get('ldap_version'));
-        $setting->ldap_active_flag = e(Input::get('ldap_active_flag'));
-        $setting->ldap_emp_num = e(Input::get('ldap_emp_num'));
-        $setting->ldap_email = e(Input::get('ldap_email'));
-        $setting->ad_domain = e(Input::get('ad_domain'));
-        $setting->is_ad = e(Input::get('is_ad', '0'));
-        $setting->ldap_tls = e(Input::get('ldap_tls', '0'));
-        $setting->ldap_pw_sync = e(Input::get('ldap_pw_sync', '0'));
+        $setting->ldap_basedn = $request->input('ldap_basedn');
+        $setting->ldap_filter = $request->input('ldap_filter');
+        $setting->ldap_username_field = $request->input('ldap_username_field');
+        $setting->ldap_lname_field = $request->input('ldap_lname_field');
+        $setting->ldap_fname_field = $request->input('ldap_fname_field');
+        $setting->ldap_auth_filter_query = $request->input('ldap_auth_filter_query');
+        $setting->ldap_version = $request->input('ldap_version');
+        $setting->ldap_active_flag = $request->input('ldap_active_flag');
+        $setting->ldap_emp_num = $request->input('ldap_emp_num');
+        $setting->ldap_email = $request->input('ldap_email');
+        $setting->ad_domain = $request->input('ad_domain');
+        $setting->is_ad = $request->input('is_ad', '0');
+        $setting->ldap_tls = $request->input('ldap_tls', '0');
+        $setting->ldap_pw_sync = $request->input('ldap_pw_sync', '0');
 
-        $setting->date_display_format = e(Input::get('date_display_format'));
-        $setting->time_display_format = e(Input::get('time_display_format'));
+        $setting->date_display_format = $request->input('date_display_format');
+        $setting->time_display_format = $request->input('time_display_format');
+        $setting->brand = $request->input('brand', '1');
 
 
         if ($request->input('clear_logo')=='1') {

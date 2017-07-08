@@ -14,14 +14,14 @@ class Setting extends Model
 
     protected $rules = [
           "brand"     => 'required|min:1|numeric',
-          "qr_text"         => 'min:1|max:31',
+          "qr_text"         => 'max:31',
           "logo_img"        => 'mimes:jpeg,bmp,png,gif',
           "alert_email"   => 'email_array',
-          "slack_endpoint"   => 'url',
           "default_currency"   => 'required',
           "locale"   => 'required',
-          "slack_channel"   => 'regex:/(?<!\w)#\w+/',
-          "slack_botname"   => 'string',
+          "slack_endpoint"   => 'url|required_with:slack_channel',
+          "slack_channel"   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint',
+          "slack_botname"   => 'string|nullable',
           'labels_per_page' => 'numeric',
           'labels_width' => 'numeric',
           'labels_height' => 'numeric',
