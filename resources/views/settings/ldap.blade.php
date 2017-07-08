@@ -20,6 +20,18 @@
         }
     </style>
 
+    @if ((!function_exists('ldap_connect')) || (!function_exists('ldap_set_option')) || (!function_exists('ldap_bind')))
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="alert alert-danger">
+                       It doesn't look like the LDAP extension is installed or enabled on this server. :(
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    @else
 
 
     {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
@@ -347,10 +359,15 @@
 
                 </div>
             </div> <!-- /box -->
+
+
+
+
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
     {{Form::close()}}
+   @endif
 
 @stop
 
