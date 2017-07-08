@@ -163,7 +163,18 @@
       </div>
     </div>
 
-
+    @if (config('app.debug')=== true)
+      <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+        <div class="box box-default">
+          <div class="box-body text-center">
+            <a href="{{ route('settings.phpinfo.index') }}" class="btn btn-lg btn-white"><i class="fa fa-server fa-3x"></i></a>
+            <br>
+            PHP
+            <p class="help-block">PHP System Info</p>
+          </div>
+        </div>
+      </div>
+    @endif
 
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-danger">
@@ -175,12 +186,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
-
 
   </div>
 
@@ -227,6 +232,7 @@
     </div> <!--/box-default-->
   </div><!--/col-md-8-->
 </div><!--/row-->
+
 
 
 @stop

@@ -687,6 +687,18 @@ class SettingsController extends Controller
     }
 
 
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function getPhpInfo()
+    {
+        return view('settings.phpinfo');
+    }
+
 
     /**
      * Return a form to allow a super admin to update settings.
