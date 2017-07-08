@@ -644,29 +644,32 @@
 
 
     <script src="{{ mix('js/dist/all.js') }}"></script>
-
     <script>
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-            
             var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
             $.fn.bootstrapDP = datepicker;
             $('.datepicker').datepicker();
-
         })
 
     </script>
 
+
+
+
     @section('moar_scripts')
     @show
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
 
     @if ((Session::get('topsearch')=='true') || (Request::is('/')))
     <script>
          $("#tagSearch").focus();
     </script>
-
-
-        @endif
+    @endif
 
   </body>
 </html>

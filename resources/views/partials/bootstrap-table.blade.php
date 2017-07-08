@@ -143,16 +143,16 @@ $('.snipe-table').bootstrapTable({
             var actions = '<nobr>';
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/clone" class="btn btn-sm btn-info"><i class="fa fa-copy"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
                 actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" '
-                    + ' class="btn btn-danger btn-sm delete-asset" '
+                    + ' class="btn btn-danger btn-sm delete-asset"  data-tooltip="true"  '
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}?" onClick="return false;">'
@@ -326,6 +326,15 @@ $('.snipe-table').bootstrapTable({
                 $( "#bulkForm" ).append($('<input type="hidden" name="ids[' + value.id + ']" value="' + value.id + '">' ));
             });
 
+        });
+    });
+
+    // This is necessary to make the bootstrap tooltips work inside of the wenzhixin/bootstrap-table formatters
+    $(function() {
+        $('#table').on('post-body.bs.table', function () {
+            $('[data-tooltip="true"]').tooltip({
+                container: 'body'
+            });
         });
     });
 

@@ -33,12 +33,12 @@ mix.js(
 ).sourceMaps();
 
 mix.scripts([
+    './node_modules/jquery-ui/jquery-ui.js',
     'build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
     './node_modules/tether/dist/js/tether.min.js',
-    './bower_components/jquery-ui/jquery-ui.js',
-    './bower_components/jquery-slimscroll/jquery.slimscroll.js',
-    './bower_components/jquery.iframe-transport/jquery.iframe-transport.js',
-    './bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+    './node_modules/jquery-slimscroll/jquery.slimscroll.js',
+    './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',
+    './node_modules/blueimp-file-upload/js/jquery.fileupload.js',
     './node_modules/fastclick/lib/fastclick.js',
     './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
     './node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
