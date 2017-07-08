@@ -204,7 +204,7 @@ $('.snipe-table').bootstrapTable({
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
-                return '<a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a>';
+                return '<div  data-tooltip="true" title="This item has a status label that is undeployable and cannot be checked out at this time."><a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a></div>';
 
             // The user is allowed to check items in
             } else if ((row.available_actions.checkin == true)  && (row.assigned_to)) {
