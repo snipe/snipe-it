@@ -323,7 +323,7 @@
                     @if (config('app.lock_passwords')===true)
 
                       <textarea class="form-control" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ Input::old('login_note', $setting->login_note) }}</textarea>
-                      {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
+                      {!! $errors->first('login_note', '<span class="alert-msg">:message</span>') !!}
                       <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                     @else
                       <textarea class="form-control" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ Input::old('login_note', $setting->login_note) }}</textarea>
