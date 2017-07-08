@@ -323,7 +323,7 @@
                @can('superadmin')
                <li>
                    <a href="{{ route('settings.index') }}">
-                       <i class="fa fa-cogs fa-fw"></i> @lang('general.admin')
+                       <i class="fa fa-cogs fa-fw"></i>
                    </a>
                </li>
                @endcan
