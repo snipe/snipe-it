@@ -259,7 +259,7 @@ class AssetsController extends Controller
         ->with('model_list', Helper::modelList())
         ->with('supplier_list', Helper::suppliersList())
         ->with('company_list', Helper::companyList())
-        ->with('location_list', Helper::locationsList())
+        ->with('locations_list', Helper::locationsList())
         ->with('statuslabel_list', Helper::statusLabelList())
         ->with('assigned_to', Helper::usersList())
         ->with('manufacturer', Helper::manufacturerList())
@@ -705,9 +705,11 @@ class AssetsController extends Controller
         ->with('statuslabel_types', Helper::statusTypeList())
         ->with('assigned_to', Helper::usersList())
         ->with('item', $asset)
-        ->with('location_list', Helper::locationsList())
+        ->with('locations_list', Helper::locationsList())
         ->with('manufacturer', Helper::manufacturerList())
         ->with('category', Helper::categoryList('asset'))
+        ->with('users_list', Helper::usersList())
+        ->with('assets_list', Helper::assetsList())
         ->with('company_list', Helper::companyList());
     }
 

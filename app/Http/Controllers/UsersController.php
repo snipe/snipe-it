@@ -721,7 +721,7 @@ class UsersController extends Controller
             $user->id = null;
 
             // Get this user groups
-            $userGroups = $user_to_clone->groups()->lists('name', 'id');
+            $userGroups = $user_to_clone->groups()->pluck('name', 'id');
             // Get all the available permissions
             $permissions = config('permissions');
             $clonedPermissions = $user_to_clone->decodePermissions();
@@ -733,6 +733,7 @@ class UsersController extends Controller
                             ->with('location_list', Helper::locationsList())
                             ->with('company_list', Helper::companyList())
                             ->with('manager_list', Helper::managerList())
+                            ->with('department_list', Helper::departmentList())
                             ->with('user', $user)
                             ->with('groups', Group::pluck('name', 'id'))
                             ->with('userGroups', $userGroups)

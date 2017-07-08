@@ -36,8 +36,9 @@ class AssetModelsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => Gate::allows('admin') ? true : false,
-            'delete' => Gate::allows('admin') ? true : false,
+            'update' => Gate::allows('update', AssetModel::class) ? true : false,
+            'delete' => Gate::allows('delete', AssetModel::class) ? true : false,
+            'clone' => Gate::allows('create', AssetModel::class) ? true : false,
         ];
 
         $array += $permissions_array;

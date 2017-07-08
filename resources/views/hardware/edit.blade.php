@@ -124,7 +124,7 @@
   <div class="form-group {{ $errors->has('rtd_location_id') ? ' has-error' : '' }}">
     <label for="rtd_location_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.default_location') }}</label>
     <div class="col-md-7 col-sm-11">
-      {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $item->rtd_location_id), array('class'=>'select2', 'style'=>'width:100%','id'=>'rtd_location_select')) }}
+      {{ Form::select('rtd_location_id', $locations_list , Input::old('rtd_location_id', $item->rtd_location_id), array('class'=>'select2', 'style'=>'width:100%','id'=>'rtd_location_select')) }}
 
       {!! $errors->first('rtd_location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
       </div>

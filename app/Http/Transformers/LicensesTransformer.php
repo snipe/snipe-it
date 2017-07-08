@@ -48,6 +48,7 @@ class LicensesTransformer
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', License::class) ? true : false,
             'checkin' => Gate::allows('checkin', License::class) ? true : false,
+            'clone' => Gate::allows('create', License::class) ? true : false,
             'update' => Gate::allows('update', License::class) ? true : false,
             'delete' => Gate::allows('delete', License::class) ? true : false,
         ];
