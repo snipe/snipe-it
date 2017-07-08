@@ -39,6 +39,7 @@ class Setting extends Model
           "ldap_basedn"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_filter"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_username_field"     => 'sometimes|required_if:ldap_enabled,1',
+          "ldap_fname_field"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
