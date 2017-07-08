@@ -63,6 +63,8 @@ return array(
     'ldap_email'                => 'LDAP Email',
     'load_remote_text'          => 'Remote Scripts',
     'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
+    'login_note'                => 'Login Note',
+    'login_note_help'           => 'Optionally include a few sentences on your login screen, for example to assist people who have found a lost or stolen device. This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>',
     'logo'                    	=> 'Logo',
     'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',

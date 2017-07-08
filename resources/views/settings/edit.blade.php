@@ -312,6 +312,29 @@
                     {!! $errors->first('per_page', '<span class="alert-msg">:message</span>') !!}
                   </div>
                 </div>
+
+
+                <!-- login text -->
+                <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('login_note', trans('admin/settings/general.login_note')) }}
+                  </div>
+                  <div class="col-md-9">
+                    @if (config('app.lock_passwords')===true)
+
+                      <textarea class="form-control" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ Input::old('login_note', $setting->login_note) }}</textarea>
+                      {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
+                      <p class="help-block">{{ trans('general.lock_passwords') }}</p>
+                    @else
+                      <textarea class="form-control" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ Input::old('login_note', $setting->login_note) }}</textarea>
+                      {!! $errors->first('login_note', '<span class="alert-msg">:message</span>') !!}
+                    @endif
+                    <p class="help-block">{!!  trans('admin/settings/general.login_note_help') !!}</p>
+                  </div>
+                </div>
+
+
+
               </div> <!-- .box-body-->
             </div> <!--/.collapseOne-->
           </div>

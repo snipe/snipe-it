@@ -418,6 +418,7 @@ class SettingsController extends Controller
         $setting->date_display_format = $request->input('date_display_format');
         $setting->time_display_format = $request->input('time_display_format');
         $setting->brand = $request->input('brand', '1');
+        $setting->login_note = $request->input('login_note');
 
 
         if ($request->input('clear_logo')=='1') {
