@@ -348,7 +348,7 @@
               </table>
           </div> <!-- /.col -->
             <div class="col-md-12 text-center" style="padding-top: 10px;">
-                <a href="{{ route('reports/activity') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
+                <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
             </div>
         </div> <!-- /.row -->
 
