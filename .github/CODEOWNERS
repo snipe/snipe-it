@@ -17,5 +17,6 @@
 
 app/Importer/*  @dmeltzer
 app/Http/Controllers/CustomFields* @uberbrady
+app/Http/Controllers/Api/CustomFields* @uberbrady
 resources/views/custom_fields/* @uberbrady
 docker/* @uberbrady
