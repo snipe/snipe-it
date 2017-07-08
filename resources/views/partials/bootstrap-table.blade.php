@@ -200,7 +200,7 @@ $('.snipe-table').bootstrapTable({
 
             // The user is allowed to check items out, AND the item is deployable
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary">{{ trans('general.checkout') }}</a>';
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
@@ -208,7 +208,7 @@ $('.snipe-table').bootstrapTable({
 
             // The user is allowed to check items in
             } else if ((row.available_actions.checkin == true)  && (row.assigned_to)) {
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary">{{ trans('general.checkin') }}</a>';
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
 
             }
 
