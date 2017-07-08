@@ -696,7 +696,11 @@ class SettingsController extends Controller
      */
     public function getPhpInfo()
     {
-        return view('settings.phpinfo');
+        if (config('app.debug')=== true) {
+            return view('settings.phpinfo');
+        }
+        return redirect()->route('settings.index')
+            ->with('error', 'PHP syetem debugging information is only available when debug is enabled in your .env file.');
     }
 
 
