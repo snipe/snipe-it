@@ -911,11 +911,11 @@ class SettingsController extends Controller
             } else {
 
                 // Redirect to the backup page
-                return redirect()->route('settings/backups')->with('error', trans('admin/settings/message.backup.file_not_found'));
+                return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
         } else {
             // Redirect to the backup page
-            return redirect()->route('settings/backups')->with('error', trans('general.feature_disabled'));
+            return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
         }
 
 
@@ -937,12 +937,12 @@ class SettingsController extends Controller
             $file = $path.'/'.$filename;
             if (file_exists($file)) {
                 unlink($file);
-                return redirect()->route('settings/backups')->with('success', trans('admin/settings/message.backup.file_deleted'));
+                return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
             } else {
-                return redirect()->route('settings/backups')->with('error', trans('admin/settings/message.backup.file_not_found'));
+                return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
         } else {
-            return redirect()->route('settings/backups')->with('error', trans('general.feature_disabled'));
+            return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
         }
 
     }
