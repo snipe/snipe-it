@@ -1,4 +1,5 @@
 <?php
+use App\Importer\AccessoryImporter;
 use App\Importer\AssetImporter;
 use App\Models\Accessory;
 use App\Models\AssetModel;
@@ -8,18 +9,12 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 
-class AccessoryTest extends \Codeception\TestCase\Test
+class ImporterTest extends BaseTest
 {
     /**
     * @var \UnitTester
     */
     protected $tester;
-    use DatabaseTransactions;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testDefaultImportAsset()
     {
@@ -27,7 +22,7 @@ class AccessoryTest extends \Codeception\TestCase\Test
 Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
 Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan
 EOT;
-        $this->importAsset($csv);
+        $this->import(new AssetImporter($csv));
         // Did we create a user?
 
         $this->tester->seeRecord('users', [
@@ -80,7 +75,7 @@ EOT;
 Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
 Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan
 EOT;
-        $this->importAsset($csv);
+        $this->import(new AssetImporter($csv));
         $updatedCSV = <<<'EOT'
 item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
 A new name,some other category,Another Model,Linkbridge 32,356,67433477,970882174-8,New Location,I have no notes,2018-04-05,25.59,Another Company,Ready To Go,18,Not Creative
@@ -149,7 +144,7 @@ EOT;
         'asset_model' => "model name",
     ];
 
-        $this->importAsset($csv, $customFieldMap);
+        $this->import(new AssetImporter($csv), $customFieldMap);
         // Did we create a user?
 
         $this->tester->seeRecord('users', [
@@ -197,13 +192,68 @@ EOT;
             ]);
     }
 
+    public function testDefaultAccessoryImport()
+    {
+        $csv = <<<'EOT'
+Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
+Walter Carter,09/01/2006,,metus. Vivamus,Macromedia,J935H60W,Customers,False,278
+EOT;
+        $this->import(new AccessoryImporter($csv));
+        $this->tester->seeRecord('accessories', [
+            'name' => 'Walter Carter',
+            'purchase_date' => '2006-09-01 00:00:01',
+            'order_number' => 'J935H60W',
+            'requestable' => 0,
+            'qty' => 278
+        ]);
 
-    private function importAsset($csv, $mappings = null)
+        $this->tester->seeRecord('locations', [
+            'name' => 'metus. Vivamus'
+        ]);
+
+        $this->tester->seeRecord('companies', [
+            'name' => 'Macromedia'
+        ]);
+
+        $this->tester->seeRecord('categories', [
+            'name' => 'Customers'
+        ]);
+
+    }
+
+    public function testDefaultAccessoryUpdate()
+    {
+        $csv = <<<'EOT'
+Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
+Walter Carter,09/01/2006,,metus. Vivamus,Macromedia,J935H60W,Customers,False,278
+EOT;
+        $this->import(new AccessoryImporter($csv));
+        $this->tester->seeNumRecords(1, 'accessories');
+
+
+        $updatedCSV = <<<'EOT'
+Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
+Walter Carter,09/01/2015,350,metus. Vivamus,Macromedia,35GGH,Customers,True,12
+EOT;
+        $importer = new AccessoryImporter($updatedCSV);
+        $importer->setUserId(1)
+             ->setUpdating(true)
+             ->import();
+        // At this point we should still only have one record.
+        $this->tester->seeNumRecords(1, 'accessories');
+        // But instead these.
+        $this->tester->seeRecord('accessories', [
+            'name' => 'Walter Carter',
+            'purchase_date' => '2015-09-01 00:00:01',
+            'order_number' => '35GGH',
+            'requestable' => 1,
+            'qty' => 12
+        ]);
+    }
+
+    private function import($importer, $mappings = null)
     {
 
-        factory(App\Models\Setting::class)->create();
-
-        $importer = new AssetImporter($csv);
         if($mappings) {
             $importer->setFieldMappings($mappings);
         }
