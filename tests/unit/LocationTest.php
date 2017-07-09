@@ -5,18 +5,12 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class LocationTest extends \Codeception\TestCase\Test
+class LocationTest extends BaseTest
 {
     /**
     * @var \UnitTester
     */
     protected $tester;
-    use DatabaseMigrations;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testAssetAdd()
     {

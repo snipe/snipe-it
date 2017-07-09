@@ -6,18 +6,12 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AccessoryTest extends \Codeception\TestCase\Test
+class AccessoryTest extends BaseTest
 {
     /**
     * @var \UnitTester
     */
     protected $tester;
-    use DatabaseTransactions;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testAccessoryAdd()
     {

@@ -10,12 +10,12 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-class PermissionsTest extends \Codeception\TestCase\Test
+class PermissionsTest extends BaseTest
 {
 
     public function _before()
     {
-        Artisan::call('migrate');
+        parent::_before();
         $this->noHardware = [
             'assets.view' => false,
             'assets.create' => false,

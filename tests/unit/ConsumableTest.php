@@ -5,18 +5,12 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ConsumableTest extends \Codeception\TestCase\Test
+class ConsumableTest extends BaseTest
 {
     /**
      * @var \UnitTester
      */
     protected $tester;
-    use DatabaseMigrations;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testConsumableAdd()
     {

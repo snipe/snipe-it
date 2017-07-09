@@ -6,17 +6,12 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 
-class AssetModelTest extends \Codeception\TestCase\Test
+class AssetModelTest extends BaseTest
 {
     /**
      * @var \UnitTester
      */
     protected $tester;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testAssetModelAdd()
     {
