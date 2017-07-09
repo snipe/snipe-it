@@ -182,9 +182,9 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ($field->field_encrypted=='1') ?
-                    '<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
-                "formatter" => null ];
+                "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.e($field->name) : e($field->name)
+            ];
+
         }
 
         $layout[] = [
