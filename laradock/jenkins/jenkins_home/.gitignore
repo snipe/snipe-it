@@ -1,0 +1,28 @@
+# File Patterns to Ignore
+logs
+*.log
+*.log.*
+*.swp
+
+# Ignore SSH Config
+.ssh/*
+!.ssh/known_hosts
+
+# Include job configs and ignore other data
+!config.xml
+builds
+lastStable
+lastSuccessful
+nextBuildNumber
+
+# Ignore expanded plugins folders because we only want jpi files
+plugins/*
+!plugins/*.jpi
+
+# Include user info
+!userContent/*
+!users/*
+
+# Ignore Directories
+workspace/
+war/
