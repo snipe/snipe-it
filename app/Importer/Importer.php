@@ -37,7 +37,7 @@ abstract class Importer
         'location' => 'location',
         'notes' => 'notes',
         'license_email' => 'licensed to email',
-        'license_name' => "licensed_to_name",
+        'license_name' => "licensed to name",
         'maintained' => 'maintained',
         'manufacturer' => 'manufacturer',
         'asset_model' => "model name",
@@ -50,7 +50,7 @@ abstract class Importer
         'reassignable' => 'reassignable',
         'requestable' => 'requestable',
         'seats' => 'seats',
-        'serial' => 'serial number',
+        'serial_number' => 'serial number',
         'status' => 'status',
         'supplier' => 'supplier',
         'termination_date' => 'termination date',
@@ -109,7 +109,6 @@ abstract class Importer
     {
         $headerRow = $this->csv->fetchOne();
         $results = $this->normalizeInputArray($this->csv->fetchAssoc());
-
         $this->customFields = CustomField::All(['name']);
         DB::transaction(function () use (&$results) {
             Model::unguard();

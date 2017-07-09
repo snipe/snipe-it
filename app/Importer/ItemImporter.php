@@ -50,7 +50,6 @@ class ItemImporter extends Importer
         if ($this->shouldUpdateField($item_supplier)) {
             $this->item['supplier_id'] = $this->createOrFetchSupplier($item_supplier);
         }
-
         $this->item["name"] = $this->findCsvMatch($row, "item_name");
         $this->item["notes"] = $this->findCsvMatch($row, "notes");
         $this->item["order_number"] = $this->findCsvMatch($row, "order_number");
@@ -60,11 +59,10 @@ class ItemImporter extends Importer
         if ($this->findCsvMatch($row, "purchase_date")!='') {
             $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "purchase_date")));
         }
-// dd($this->item);
         $this->item["qty"] = $this->findCsvMatch($row, "quantity");
         $this->item["requestable"] = $this->findCsvMatch($row, "requestable");
         $this->item["user_id"] = $this->user_id;
-        $this->item['serial'] = $this->findCsvMatch($row, "serial number");
+        $this->item['serial'] = $this->findCsvMatch($row, "serial_number");
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
         if(get_class($this) !== UserImporter::class) {
@@ -127,7 +125,6 @@ class ItemImporter extends Importer
     private function shouldUpdateField($field)
     {
         if (empty($field)) {
-            // dd('here');
             return false;
         }
         return !($this->updating && empty($field));
