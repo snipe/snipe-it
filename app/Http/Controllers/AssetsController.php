@@ -210,9 +210,21 @@ class AssetsController extends Controller
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
+
+
+
         if ($model->fieldset) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
+
+                if ($field->field_encrypted=='1') {
+                    if (Gate::allows('admin')) {
+                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                    }
+
+                } else {
+                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                }
+
             }
         }
 
@@ -359,7 +371,7 @@ class AssetsController extends Controller
                     }
 
                 } else {
-                    $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
+                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                 }
             }
         }
@@ -461,19 +473,19 @@ class AssetsController extends Controller
         $admin = Auth::user();
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
-            $checkout_at = e(Input::get('checkout_at'));
+            $checkout_at = Input::get('checkout_at');
         } else {
             $checkout_at = date("Y-m-d H:i:s");
         }
 
         if (Input::has('expected_checkin')) {
-            $expected_checkin = e(Input::get('expected_checkin'));
+            $expected_checkin = Input::get('expected_checkin');
         } else {
             $expected_checkin = '';
         }
-        if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
+        if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
 //           Redirect to the new asset page
-            return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
+            return redirect()->to("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
         }
 
       // Redirect to the asset management page with error
@@ -565,11 +577,11 @@ class AssetsController extends Controller
             if ($backto=='user') {
                 return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/hardware/message.checkin.success'));
             }
-            return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkin.success'));
+            return redirect()->to("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));
         }
 
         // Redirect to the asset management page with error
-        return redirect()->to("hardware")->with('error', trans('admin/hardware/message.checkin.error'));
+        return redirect()->to("hardware.index")->with('error', trans('admin/hardware/message.checkin.error'));
     }
 
 
@@ -608,7 +620,7 @@ class AssetsController extends Controller
             return view('hardware/view', compact('asset', 'qr_code', 'settings'))->with('use_currency', $use_currency);
         }
 
-        return redirect()->route('hardware')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
     }
 
     /**
@@ -888,7 +900,7 @@ class AssetsController extends Controller
         if (isset($asset->id)) {
             // Restore the asset
             Asset::withTrashed()->where('id', $assetId)->restore();
-            return redirect()->route('hardware')->with('success', trans('admin/hardware/message.restore.success'));
+            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
         }
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
     }
@@ -907,7 +919,7 @@ class AssetsController extends Controller
     {
 
         if (!$asset = Asset::find($assetId)) {
-            return redirect()->route('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('update', $asset);
 
@@ -964,7 +976,7 @@ class AssetsController extends Controller
         $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
         // Redirect to the hardware management page
-        return redirect()->route('hardware')->with('error', $error);
+        return redirect()->route('hardware.index')->with('error', $error);
     }
 
     /**
@@ -997,7 +1009,7 @@ class AssetsController extends Controller
         $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
         // Redirect to the hardware management page
-        return redirect()->route('hardware')->with('error', $error);
+        return redirect()->route('hardware.index')->with('error', $error);
     }
 
     /**
