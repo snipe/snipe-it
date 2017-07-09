@@ -251,6 +251,47 @@ EOT;
         ]);
     }
 
+    public function testCustomAccessoryImport()
+    {
+        $csv = <<<'EOT'
+Name,Pur Date,Cost,Loc,Comp,Order Num,Cat,Request,Quan
+Walter Carter,09/01/2006,,metus. Vivamus,Macromedia,J935H60W,Customers,False,278
+EOT;
+
+   $customFieldMap = [
+        'category' => 'Cat',
+        'company' => 'Comp',
+        'item_name' => 'Name',
+        'location' => 'Loc',
+        'purchase_date' => 'Pur Date',
+        'purchase_cost' => "Cost",
+        'order_number' => 'Order Num',
+        'requestable' => 'Request',
+        'quantity' => 'Quan'
+    ];
+        $this->import(new AccessoryImporter($csv), $customFieldMap);
+        // dd($this->tester->grabRecord('accessories'));
+        $this->tester->seeRecord('accessories', [
+            'name' => 'Walter Carter',
+            'purchase_date' => '2006-09-01 00:00:01',
+            'order_number' => 'J935H60W',
+            'requestable' => 0,
+            'qty' => 278
+        ]);
+
+        $this->tester->seeRecord('locations', [
+            'name' => 'metus. Vivamus'
+        ]);
+
+        $this->tester->seeRecord('companies', [
+            'name' => 'Macromedia'
+        ]);
+
+        $this->tester->seeRecord('categories', [
+            'name' => 'Customers'
+        ]);
+
+    }
     private function import($importer, $mappings = null)
     {
 

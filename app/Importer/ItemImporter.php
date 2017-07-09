@@ -57,10 +57,10 @@ class ItemImporter extends Importer
         $this->item["purchase_cost"] = $this->findCsvMatch($row, "purchase_cost");
 
         $this->item["purchase_date"] = null;
-        if ($this->findCsvMatch($row, "purchase date")!='') {
-            $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "purchase date")));
+        if ($this->findCsvMatch($row, "purchase_date")!='') {
+            $this->item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "purchase_date")));
         }
-
+// dd($this->item);
         $this->item["qty"] = $this->findCsvMatch($row, "quantity");
         $this->item["requestable"] = $this->findCsvMatch($row, "requestable");
         $this->item["user_id"] = $this->user_id;

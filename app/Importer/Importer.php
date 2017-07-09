@@ -145,6 +145,7 @@ abstract class Importer
         if ($customKey = $this->lookupCustomKey($key)) {
             $key = $customKey;
         }
+
         $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
             $val = e(Encoding::toUTF8(trim($array[ $key ])));
