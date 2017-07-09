@@ -178,11 +178,13 @@ class AssetPresenter extends Presenter
 
         $fields =  CustomField::all();
         foreach ($fields as $field) {
-            $layout[] = ["field" => $field->convertUnicodeDbSlug(),
+            $layout[] = [
+                "field" => 'custom_fields.'.$field->convertUnicodeDbSlug(),
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.e($field->name) : e($field->name)
+                "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
+                "formatter" => "customFieldsFormatter"
             ];
 
         }
