@@ -25,21 +25,18 @@ class CustomFieldsetsTransformer
         $fields = $fieldset->fields;
         $models = $fieldset->models;
         $modelsArray = array();
-        $totalModels = 0;
         foreach ($models as $model)
         {
-            $modelArray = array();
-            $modelArray["id"] = $model->id;
-            $modelArray["name"] = $model->name;
-            $modelsArray[$totalModels] = $modelArray;
-            $totalModels = $totalModels + 1;
+            $modelsArray[] = [
+              'id' => $model->id,
+              'name' => $model->name
+            ];
         }
-        $totalFields = $fields->count();
         $array = [
             'id' => $fieldset->id,
             'name' => $fieldset->name,
-            'fields' => (new CustomFieldsTransformer)->transformCustomFields($fields, $totalFields),
-            'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $totalModels)
+            'fields' => (new CustomFieldsTransformer)->transformCustomFields($fields, $fieldset->fields_count),
+            'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $fieldset->models_count)
         ];
         return $array;
     }
