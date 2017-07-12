@@ -1,19 +1,19 @@
 | CSV                 | Item             | Applicable Types                          |
 |---------------------|------------------|-------------------------------------------|
 | asset tag           | asset_tag        | Asset                                     |
-| category            | category_id      | All                                       |
-| company             | company_id       | All                                       |
-| item name           | name             | All                                       |
+| category            | category         | All                                       |
+| company             | company          | All                                       |
+| item name           | item_name        | All                                       |
 | image               | image            | asset                                     |
 | expiration date     | expiration_date  | License                                   |
-| location            | location_id      | All                                       |
+| location            | location         | All                                       |
 | notes               | notes            | All                                       |
 | licensed to email   | license_email    | License                                   |
 | licensed to name    | license_name     | License                                   |
 | maintained          | maintained       | License                                   |
-| manufacturer        | manufacturer_id  | All                                       |
-| model name          | model_id         | Asset                                     |
-| model number        | model_id         | Asset                                     |
+| manufacturer        | manufacturer     | All                                       |
+| model name          | asset_model      | Asset                                     |
+| model number        | model_number     | Asset                                     |
 | order number        | order_number     | All ?                                     |
 | purchase cost       | purchase_cost    | All ?                                     |
 | purchase date       | purchase_date    | All ?                                     |
@@ -23,8 +23,8 @@
 | requestable         | requestable      | Asset, Accessory?                         |
 | seats               | seats            | License                                   |
 | serial number       | serial           | asset, license                            |
-| status              | status_id        | asset ? All                               |
-| supplier            | supplier_id      | Asset ? All                               |
+| status              | status           | asset ? All                               |
+| supplier            | supplier         | Asset ? All                               |
 | termination date    | termination_date | License                                   |
 | warranty months     | warranty_months  | asset                                     |
 | User Related Fields | assigned_to      | Asset                                     |

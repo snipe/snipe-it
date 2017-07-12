@@ -41,19 +41,12 @@ class ComponentImporter extends ItemImporter
             $this->log("Updating Component");
             $component = $this->components[$componentId];
             $component->update($this->sanitizeItemFor($component));
-            if (!$this->testRun) {
-                $component->save();
-            }
+            $component->save();
             return;
         }
         $this->log("No matching component, creating one");
         $component = new Component;
         $component->fill($$this->sanitizeItemForStoring($component));
-
-        if ($this->testRun) {
-            $this->log('TEST RUN - Component ' . $this->item["name"] . ' not created');
-            return;
-        }
 
         if ($component->save()) {
             $component->logCreate('Imported using CSV Importer');

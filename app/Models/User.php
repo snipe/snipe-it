@@ -317,7 +317,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
             // There is a last name given
         } else {
 
-            $last_name = str_replace($first_name, '', $users_name);
+            $last_name = str_replace($first_name . ' ', '', $users_name);
 
             if ($format=='filastname') {
                 $email_last_name.=str_replace(' ', '', $last_name);

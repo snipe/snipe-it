@@ -61,7 +61,7 @@ class AssetImporter extends ItemImporter
         }
 
         $this->item['image'] = $this->findCsvMatch($row, "image");
-        $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty months"));
+        $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty"));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
         if (!$this->item['status_id'] && !$editingAsset) {
             $this->log("No status field found, defaulting to first status.");
@@ -85,13 +85,11 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
-        if (!$this->testRun) {
-            if ($asset->save()) {
-                $asset->logCreate('Imported using csv importer');
-                $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
-                return;
-            }
-            $this->logError($asset, 'Asset "' . $this->item['name'].'"');
+        if ($asset->save()) {
+            $asset->logCreate('Imported using csv importer');
+            $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
+            return;
         }
+        $this->logError($asset, 'Asset "' . $this->item['name'].'"');
     }
 }

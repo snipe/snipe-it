@@ -14,6 +14,9 @@ class Consumable extends SnipeModel
 
     protected $dates = ['deleted_at'];
     protected $table = 'consumables';
+    protected $casts = [
+        'requestable' => 'boolean'
+    ];
 
 
     /**
@@ -56,6 +59,14 @@ class Consumable extends SnipeModel
         'requestable'
     ];
 
+    public function setRequestableAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return;
+    }
 
     public function admin()
     {

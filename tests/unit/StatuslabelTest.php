@@ -5,18 +5,12 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class StatuslabelTest extends \Codeception\TestCase\Test
+class StatuslabelTest extends BaseTest
 {
     /**
     * @var \UnitTester
     */
     protected $tester;
-    use DatabaseMigrations;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testRTDStatuslabelAdd()
     {
