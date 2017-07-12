@@ -3,7 +3,7 @@
 
 use App\Models\AssetMaintenance;
 
-class AssetMaintenanceTest extends \Codeception\Test\Unit
+class AssetMaintenanceTest extends BaseTest
 {
     /**
      * @var \UnitTester

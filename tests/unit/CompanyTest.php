@@ -5,23 +5,14 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class CompanyTest extends \Codeception\TestCase\Test
+class CompanyTest extends BaseTest
 {
     /**
      * @var \UnitTester
      */
     protected $tester;
-    private $company;
-    use DatabaseMigrations;
 
-    protected function _before()
-    {
-        Artisan::call('migrate');
-
-        $this->company = factory(Company::class)->create();
-    }
-
-    public function testAssetAdd()
+    public function testCompanyAdd()
     {
         $company = factory(Company::class)->make();
         $values = [
@@ -49,43 +40,43 @@ class CompanyTest extends \Codeception\TestCase\Test
 
     public function testACompanyCanHaveUsers()
     {
-        $this->company = factory(Company::class)->create();
-        factory(App\Models\User::class, 1)->create(['company_id'=>$this->company->id]);
-        $this->assertCount(1, $this->company->users);
+        $company = factory(Company::class)->create();
+        factory(App\Models\User::class, 1)->create(['company_id'=>$company->id]);
+        $this->assertCount(1, $company->users);
     }
 
     public function testACompanyCanHaveAssets()
     {
-        $this->company = factory(Company::class)->create();
-        factory(App\Models\Asset::class, 1)->create(['company_id'=>$this->company->id]);
-        $this->assertCount(1, $this->company->assets);
+        $company = factory(Company::class)->create();
+        factory(App\Models\Asset::class, 1)->create(['company_id'=>$company->id]);
+        $this->assertCount(1, $company->assets);
     }
 
     public function testACompanyCanHaveLicenses()
     {
-        $this->company = factory(Company::class)->create();
-        factory(App\Models\License::class, 1)->create(['company_id'=>$this->company->id]);
-        $this->assertCount(1, $this->company->licenses);
+        $company = factory(Company::class)->create();
+        factory(App\Models\License::class, 1)->create(['company_id'=>$company->id]);
+        $this->assertCount(1, $company->licenses);
     }
 
     public function testACompanyCanHaveAccessories()
     {
-        $this->company = factory(Company::class)->create();
-        factory(App\Models\Accessory::class, 1)->create(['company_id'=>$this->company->id]);
-        $this->assertCount(1, $this->company->accessories);
+        $company = factory(Company::class)->create();
+        factory(App\Models\Accessory::class, 1)->create(['company_id'=>$company->id]);
+        $this->assertCount(1, $company->accessories);
     }
 
     public function testACompanyCanHaveConsumables()
     {
-        $this->company = factory(Company::class)->create();
-        factory(App\Models\Consumable::class, 1)->create(['company_id'=>$this->company->id]);
-        $this->assertCount(1, $this->company->consumables);
+        $company = factory(Company::class)->create();
+        factory(App\Models\Consumable::class, 1)->create(['company_id'=>$company->id]);
+        $this->assertCount(1, $company->consumables);
     }
 
     public function testACompanyCanHaveComponents()
     {
-        $this->company = factory(Company::class)->create();
-        factory(App\Models\Component::class, 1)->create(['company_id'=>$this->company->id]);
-        $this->assertCount(1, $this->company->components);
+        $company = factory(Company::class)->create();
+        factory(App\Models\Component::class, 1)->create(['company_id'=>$company->id]);
+        $this->assertCount(1, $company->components);
     }
 }
