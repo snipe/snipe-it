@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Gate;
+use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
 {
@@ -11,6 +12,17 @@ class CustomFieldset extends Model
     public $rules=[
     "name" => "required|unique:custom_fieldsets"
     ];
+
+    /**
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var boolean
+     */
+    protected $injectUniqueIdentifier = true;
+    use ValidatingTrait;
+    
 
     public function fields()
     {
