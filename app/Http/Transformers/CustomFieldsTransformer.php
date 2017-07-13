@@ -20,11 +20,15 @@ class CustomFieldsTransformer
 
     public function transformCustomField (CustomField $field)
     {
+
         $array = [
             'name' => $field->name,
             'db_column_name' => $field->db_column_name(),
-            'format'   =>  $field->format
+            'format'   =>  $field->format,
+            'required'   =>  $field->pivot->required
         ];
         return $array;
     }
+
+
 }
