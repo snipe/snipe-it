@@ -175,18 +175,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Fieldsets API ---*/
 
-    Route::group(['prefix' => 'fieldsets'], function () {
-        Route::get('',
-            [
-                'as' => 'api.customfieldset.index',
-                'uses' => 'CustomFieldsetsController@index'
-            ]);
-        Route::get('{id}',
+    Route::resource('fieldsets', 'CustomFieldsetsController',
         [
-            'as' => 'api.customfieldsets.show',
-            'uses' => 'CustomFieldsetsController@show'
-        ]);
-    }); // Fieldsets group
+            'names' =>
+                [
+                    'index' => 'api.fieldsets.index',
+                    'show' => 'api.fieldsets.show',
+                    'store' => 'api.fieldsets.store',
+                    'update' => 'api.fieldsets.update',
+                    'destroy' => 'api.fieldsets.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['fieldset' => 'fieldset_id']
+        ]
+    ); // Custom fieldset resource
+
 
 
     /*--- Groups API ---*/
