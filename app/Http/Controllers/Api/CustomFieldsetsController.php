@@ -70,6 +70,51 @@ class CustomFieldsetsController extends Controller
     }
 
 
+     /**
+     * Update the specified resource in storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->authorize('edit', CustomFieldset::class);
+        $fieldset = CustomFieldset::findOrFail($id);
+        $fieldset->fill($request->all());
+
+        if ($fieldset->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $fieldset->getErrors()));
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->authorize('create', CustomFieldset::class);
+        $fieldset = new CustomFieldset;
+        $fieldset->fill($request->all());
+
+        if ($fieldset->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.create.success')));
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, $fieldset->getErrors()));
+
+    }
+
+
     /**
      * Delete a custom fieldset.
      *
