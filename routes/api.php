@@ -173,6 +173,22 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     }); // Fields group
 
 
+    /*--- Fieldsets API ---*/
+
+    Route::group(['prefix' => 'fieldsets'], function () {
+        Route::get('',
+            [
+                'as' => 'api.customfieldset.index',
+                'uses' => 'CustomFieldsetsController@index'
+            ]);
+        Route::get('{id}',
+        [
+            'as' => 'api.customfieldsets.show',
+            'uses' => 'CustomFieldsetsController@show'
+        ]);
+    }); // Fieldsets group
+
+
     /*--- Groups API ---*/
 
     Route::resource('groups', 'GroupsController',

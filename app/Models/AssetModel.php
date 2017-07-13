@@ -55,7 +55,7 @@ class AssetModel extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','manufacturer_id','category_id','eol', 'user_id'];
+    protected $fillable = ['name','manufacturer_id','category_id','eol', 'user_id', 'fieldset_id'];
 
     public function assets()
     {
