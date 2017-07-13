@@ -132,10 +132,14 @@ class CustomFieldsetsController extends Controller
 
         if (($modelsCount > 0) || ($fieldsCount > 0) ){
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Fieldset is in use.'));
-        } else {
-            $fieldset->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.fieldset.delete.success')));
         }
+
+         if ($fieldset->delete()) {
+             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.fieldset.delete.success')));
+         }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Unspecified error'));
+
 
         
     }

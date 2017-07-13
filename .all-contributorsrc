@@ -690,8 +690,7 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/15913949?v=3",
       "profile": "https://github.com/steveelwood",
       "contributions": [
-        "test",
-        "matc"
+        "test"
       ]
     },
     {
@@ -710,6 +709,15 @@
       "profile": "http://www.davisracingteam.com",
       "contributions": [
         "test"
+      ]
+    },
+    {
+      "login": "gibsonjoshua55",
+      "name": "gibsonjoshua55",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10167681?v=3",
+      "profile": "https://github.com/gibsonjoshua55",
+      "contributions": [
+        "code"
       ]
     }
   ]
