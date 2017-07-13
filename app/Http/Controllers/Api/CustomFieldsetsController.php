@@ -69,4 +69,30 @@ class CustomFieldsetsController extends Controller
 
     }
 
+
+    /**
+     * Delete a custom fieldset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return Redirect
+     */
+    public function destroy($id)
+    {
+        $this->authorize('delete', CustomFieldset::class);
+        $fieldset = CustomFieldset::findOrFail($id);
+        
+        $modelsCount = $fieldset->models->count();
+        $fieldsCount = $fieldset->fields->count();
+
+        if (($modelsCount > 0) || ($fieldsCount > 0) ){
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Fieldset is in use.'));
+        } else {
+            $fieldset->delete();
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.fieldset.delete.success')));
+        }
+
+        
+    }
+
 }
