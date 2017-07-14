@@ -57,7 +57,7 @@ class ImportController extends Controller
                 }
 
                 $date = date('Y-m-d-his');
-                $fixed_filename = str_replace(' ', '-', $file->getClientOriginalName());
+                $fixed_filename = str_slug($file->getClientOriginalName());
                 try {
                     $file->move($path, $date.'-'.$fixed_filename);
                 } catch (FileException $exception) {
