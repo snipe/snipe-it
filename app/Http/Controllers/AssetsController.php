@@ -485,7 +485,7 @@ class AssetsController extends Controller
         }
         if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
 //           Redirect to the new asset page
-            return redirect()->to("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
+            return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
         }
 
       // Redirect to the asset management page with error
@@ -577,11 +577,11 @@ class AssetsController extends Controller
             if ($backto=='user') {
                 return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/hardware/message.checkin.success'));
             }
-            return redirect()->to("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));
+            return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));
         }
 
         // Redirect to the asset management page with error
-        return redirect()->to("hardware.index")->with('error', trans('admin/hardware/message.checkin.error'));
+        return redirect()->route("hardware.index")->with('error', trans('admin/hardware/message.checkin.error'));
     }
 
 
