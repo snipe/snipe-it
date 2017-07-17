@@ -86,7 +86,7 @@
           <!-- Supplier -->
           <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
             <label for="supplier_id" class="col-md-2 control-label">
-              {{ trans('admin/hardware/form.supplier') }}
+              {{ trans('general.supplier') }}
             </label>
             <div class="col-md-7">
               {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
