@@ -10,7 +10,7 @@ class Depreciation extends SnipeModel
     // Declare the rules for the form validation
     protected $rules = array(
         'name' => 'required|min:3|max:255|unique:depreciations,name',
-        'months' => 'required|max:240|integer',
+        'months' => 'required|max:3200|integer',
     );
 
     /**
