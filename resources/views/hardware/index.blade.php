@@ -40,7 +40,9 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  <a href="{{ route('reports/export/assets') }}" style="margin-right: 5px;" class="btn btn-default"><i class="fa fa-download icon-white"></i>
+    {{ trans('admin/hardware/table.dl_csv') }}</a>
+  <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
 @stop
 
 {{-- Page content --}}

@@ -66,7 +66,8 @@ class AssetsTransformer
                 'id' => (int) $asset->assigneduser->id,
                 'name' => e($asset->assigneduser->getFullNameAttribute()),
                 'first_name'=> e($asset->assigneduser->first_name),
-                'last_name'=> e($asset->assigneduser->last_name)
+                'last_name'=> e($asset->assigneduser->last_name),
+                'employee_number' =>  e($asset->assigneduser->employee_num),
             ]  : null,
             'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
             'warranty_expires' => ($asset->warranty_months > 0) ?  Helper::getFormattedDateObject($asset->warranty_expires, 'date') : null,

@@ -99,6 +99,13 @@ class AssetPresenter extends Presenter
                 "title" => trans('admin/hardware/form.checkedout_to'),
                 "visible" => true,
                 "formatter" => "usersLinkObjFormatter"
+            ], [
+                "field" => "assigned_to.employee_number",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/users/table.employee_num'),
+                "visible" => false,
+
             ],[
                 "field" => "location",
                 "searchable" => true,
