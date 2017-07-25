@@ -611,7 +611,7 @@
           <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/">Report a Bug</a>
         </div>
         <a target="_blank" href="https://snipeitapp.com">Snipe-IT</a> is an open source
-        project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
+          project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a> under the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL3 license</a>.
       </footer>
 
 
