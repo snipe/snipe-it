@@ -109,7 +109,7 @@ class LdapSync extends Command
 
             // Delete located users from the general group.
             foreach ($results as $key => $generic_entry) {
-                if (in_array($generic_entry[$ldap_result_username][0], $location_users)) {
+                if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
                     unset($results[$key]);
                 }
             }
