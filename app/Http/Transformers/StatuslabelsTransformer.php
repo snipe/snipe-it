@@ -21,7 +21,7 @@ class StatuslabelsTransformer
     public function transformStatuslabel (Statuslabel $statuslabel)
     {
         $array = [
-            'id' => e($statuslabel->id),
+            'id' => (int) $statuslabel->id,
             'name' => e($statuslabel->name),
             'type' => $statuslabel->getStatuslabelType(),
             'color' => ($statuslabel->color) ? e($statuslabel->color) : null,

@@ -23,7 +23,7 @@ class DepartmentsTransformer
         if ($department) {
 
             $array = [
-                'id' => e($department->id),
+                'id' => (int) $department->id,
                 'name' => e($department->name),
                 'company' => ($department->company) ? [
                     'id' => (int) $department->company->id,

@@ -20,11 +20,11 @@ class ImportsTransformer
     public function transformImport(Import $import)
     {
         $array = [
-            'id' => $import->id,
-            'file_path' => $import->file_path,
+            'id' => (int)  $import->id,
+            'file_path' => e($import->file_path),
             'filesize' => Setting::fileSizeConvert($import->filesize),
-            'name' => $import->name,
-            'import_type' => $import->import_type,
+            'name' => e($import->name),
+            'import_type' => e($import->import_type),
             'created_at' => $import->created_at->diffForHumans(),
             'header_row' => $import->header_row,
             'first_row'  => $import->first_row,

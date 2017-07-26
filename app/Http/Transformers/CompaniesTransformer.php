@@ -27,12 +27,12 @@ class CompaniesTransformer
                 'name' => e($company->name),
                 "created_at" => Helper::getFormattedDateObject($company->created_at, 'datetime'),
                 "updated_at" => Helper::getFormattedDateObject($company->updated_at, 'datetime'),
-                "assets_count" => $company->assets_count,
-                "licenses_count" => $company->licenses_count,
-                "accessories_count" => $company->accessories_count,
-                "consumables_count" => $company->consumables_count,
-                "components_count" => $company->components_count,
-                "users_count" => $company->users_count
+                "assets_count" => (int) $company->assets_count,
+                "licenses_count" => (int) $company->licenses_count,
+                "accessories_count" => (int) $company->accessories_count,
+                "consumables_count" => (int) $company->consumables_count,
+                "components_count" => (int) $company->components_count,
+                "users_count" => (int) $company->users_count
             ];
 
             $permissions_array['available_actions'] = [

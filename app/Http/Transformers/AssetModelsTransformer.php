@@ -21,10 +21,10 @@ class AssetModelsTransformer
     {
 
         $array = [
-            'id' => $assetmodel->id,
+            'id' => (int) $assetmodel->id,
             'name' => e($assetmodel->name),
             'manufacturer' => ($assetmodel->manufacturer_id) ? $assetmodel->manufacturer : null,
-            'image' => ($assetmodel->image!='') ? url('/').'/uploads/models/'.e($assetmodel->image) : '',
+            'image' => ($assetmodel->image!='') ? url('/').'/uploads/models/'.e($assetmodel->image) : null,
             'model_number' => e($assetmodel->model_number),
             'depreciation' => ($assetmodel->depreciation) ? $assetmodel->depreciation : 'No',
             'assets_count' => $assetmodel->assets_count,

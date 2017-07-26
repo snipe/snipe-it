@@ -33,7 +33,7 @@ class LocationsTransformer
             }
 
             $array = [
-                'id' => e($location->id),
+                'id' => (int) $location->id,
                 'name' => e($location->name),
                 'address' => e($location->address),
                 'city' => e($location->city),
@@ -44,7 +44,7 @@ class LocationsTransformer
                 'assets' => $assets_arr,
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
-                'parent_id' => e($location->parent_id),
+                'parent_id' => ($location->parent_id) ? (int) $location->parent_id : null,
                 'children' => $children_arr,
             ];
 

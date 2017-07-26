@@ -35,7 +35,7 @@ class CustomFieldsetsTransformer
         }
 
         $array = [
-            'id' => $fieldset->id,
+            'id' => (int) $fieldset->id,
             'name' => e($fieldset->name),
             'fields' => (new CustomFieldsTransformer)->transformCustomFields($fields, $fieldset->fields_count),
             'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $fieldset->models_count)
