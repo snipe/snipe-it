@@ -331,6 +331,7 @@ class SettingsController extends Controller
         $setting->require_accept_signature = $request->input('require_accept_signature');
         $setting->login_note = $request->input('login_note');
         $setting->default_eula_text = $request->input('default_eula_text');
+        $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
 
         if (Input::get('per_page')!='') {
             $setting->per_page = $request->input('per_page');

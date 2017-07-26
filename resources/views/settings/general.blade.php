@@ -133,6 +133,18 @@
                         </div>
                     </div>
 
+                   <!-- Thumb Size -->
+                   <div class="form-group {{ $errors->has('thumbnail_max_h') ? 'error' : '' }}">
+                       <div class="col-md-3">
+                           {{ Form::label('thumbnail_max_h', trans('admin/settings/general.thumbnail_max_h')) }}
+                       </div>
+                       <div class="col-md-9">
+                           {{ Form::text('thumbnail_max_h', Input::old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                           <p class="help-block">{{ trans('admin/settings/general.thumbnail_max_h_help') }}</p>
+                           {!! $errors->first('thumbnail_max_h', '<span class="alert-msg">:message</span>') !!}
+                       </div>
+                   </div>
+
                     <!-- Default EULA -->
                    <div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
                        <div class="col-md-3">

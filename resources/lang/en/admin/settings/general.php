@@ -107,6 +107,8 @@ return array(
     'width_w'        => 'w',
     'height_h'        => 'h',
     'text_pt'        => 'pt',
+    'thumbnail_max_h'   => 'Max thumbnail height',
+    'thumbnail_max_h_help'   => 'Maximum height in pixels that thumbnails may display in the listing view. Min 25, max 500.',
     'two_factor'        => 'Two Factor Authentication',
     'two_factor_secret'        => 'Two-Factor Code',
     'two_factor_enrollment'        => 'Two-Factor Enrollment',

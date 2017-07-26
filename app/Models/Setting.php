@@ -43,6 +43,7 @@ class Setting extends Model
           "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
+          "thumbnail_max_h"     => 'numeric|max:500|min:25',
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];
