@@ -28,15 +28,21 @@ class UsersTransformer
                 'lastname' => e($user->last_name),
                 'username' => e($user->username),
                 'employee_num' => e($user->employee_num),
-                'manager' => ($user->manager) ? (new UsersTransformer)->transformUser($user->manager) : null,
+                'manager' => ($user->manager) ? [
+                    'id' => (int) $user->manager->id,
+                    'name'=> e($user->manager->name)
+                ]  : null,
                 'groups' => $user->groups,
-                'jobtitle' => e($user->jobtitle),
+                'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'email' => e($user->email),
                 'department' => ($user->department) ? [
                     'id' => (int) $user->department->id,
                     'name'=> e($user->department->name)
                 ]  : null,
-                'location' => (new LocationsTransformer)->transformLocation($user->userloc),
+                'location' => ($user->userloc) ? [
+                    'id' => (int) $user->userloc->id,
+                    'name'=> e($user->userloc->name)
+                ]  : null,
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated =='1') ? true : false,
                 'two_factor_activated' => ($user->activated =='1') ? true : false,
