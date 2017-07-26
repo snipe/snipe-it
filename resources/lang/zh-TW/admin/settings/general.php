@@ -30,6 +30,7 @@ return array(
 	'display_alt_barcode'		=> '顯示條碼',
 	'barcode_type'				=> '二維條碼類型',
 	'alt_barcode_type'			=> '條碼類型',
+    'alt_barcode_reader_tooltip'=> 'Barcode on the label can be read by Barcode Reader.<br/>Barcode reader need to be set with Prefix(Default: ~) and Suffix(Default: Enter).<br/>If you want change barcode prefix or suffix you can do it in config/barcode.php',
     'eula_settings'				=> 'EULA 設定',
     'eula_markdown'				=> 'EULA中可使用<a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> '一般設定',

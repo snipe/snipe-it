@@ -30,6 +30,7 @@ return array(
 	'display_alt_barcode'		=> '1 D 바코드 표시',
 	'barcode_type'				=> '2D 바코드 형식',
 	'alt_barcode_type'			=> '1D 바코드 형식',
+    'alt_barcode_reader_tooltip'=> 'Barcode on the label can be read by Barcode Reader.<br/>Barcode reader need to be set with Prefix(Default: ~) and Suffix(Default: Enter).<br/>If you want change barcode prefix or suffix you can do it in config/barcode.php',
     'eula_settings'				=> '최종 사용 계약 설정',
     'eula_markdown'				=> '이 최종 사용 계약은 <a href="https://help.github.com/articles/github-flavored-markdown/">GFM을 따른다</a>.',
     'general_settings'			=> '일반 설정',

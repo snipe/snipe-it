@@ -30,6 +30,7 @@ return array(
 	'display_alt_barcode'		=> 'Tampilan barcode 1D',
 	'barcode_type'				=> 'Tipe Barcode 2D',
 	'alt_barcode_type'			=> 'Tipe Barcode 1D',
+    'alt_barcode_reader_tooltip'=> 'Barcode on the label can be read by Barcode Reader.<br/>Barcode reader need to be set with Prefix(Default: ~) and Suffix(Default: Enter).<br/>If you want change barcode prefix or suffix you can do it in config/barcode.php',
     'eula_settings'				=> 'Konfigurasi EULA',
     'eula_markdown'				=> 'EULA mengijinkan <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> 'Konfigurasi umum',

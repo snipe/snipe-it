@@ -643,7 +643,7 @@
 
 
 
-    <script src="{{ mix('js/dist/all.js') }}"></script>
+    <script src="{{ url( mix('js/dist/all.js') ) }}"></script>
     <script>
         $(function () {
             var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
@@ -669,6 +669,10 @@
     <script>
          $("#tagSearch").focus();
     </script>
+    @endif
+
+    @if( config( 'barcode.reader_active', false ) )
+        @include( 'layouts.barcode_reader' )
     @endif
 
   </body>
