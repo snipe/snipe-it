@@ -384,10 +384,15 @@
                 data: formData,
                 dataType: 'json',
                 success: function (data) {
-                    // AssetController flashes success to session, redirect to hardware page.
-                    window.location.href = data.redirect_url;
                     // console.dir(data);
-                    // console.log('submit was successful');
+                    // AssetController flashes success to session, redirect to hardware page.
+                    if (data.redirect_url) {
+                        window.location.href = data.redirect_url;
+                        return true;
+                    }
+                    window.location.reload(true);
+                    return false;
+
                 },
                 error: function (data) {
                     // AssetRequest Validator will flash all errors to session, this just refreshes to see them.
@@ -417,7 +422,7 @@
             });
 
             data._token = '{{ csrf_token() }}';
-            //console.log(data);
+            console.log(data);
 
                 $.ajax({
                     type: 'POST',
