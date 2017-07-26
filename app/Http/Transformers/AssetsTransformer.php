@@ -64,6 +64,7 @@ class AssetsTransformer
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($asset->assigneduser) ? [
                 'id' => (int) $asset->assigneduser->id,
+                'username' => e($asset->assigneduser->username),
                 'name' => e($asset->assigneduser->getFullNameAttribute()),
                 'first_name'=> e($asset->assigneduser->first_name),
                 'last_name'=> e($asset->assigneduser->last_name),
