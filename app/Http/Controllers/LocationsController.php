@@ -114,14 +114,14 @@ class LocationsController extends Controller
 
         // Save the location data
         $location->name               = Input::get('name');
-        $location->currency           = Setting::first()->default_currency; //e(Input::get('currency'));
-        $location->address            = e(Input::get('address'));
-        $location->address2			  = e(Input::get('address2'));
+        $location->currency           =  Setting::first()->default_currency; //e(Input::get('currency'));
+        $location->address            = ''; //e(Input::get('address'));
+        // $location->address2			= e(Input::get('address2'));
         $location->city               = Input::get('city');
-        $location->state              = e(Input::get('state'));;
+        $location->state          = '';//e(Input::get('state'));
         $location->country            = Input::get('country');
-        $location->zip    			  = e(Input::get('zip'));
-        $location->user_id            = Auth::id();
+        // $location->zip    			= e(Input::get('zip'));
+        $location->user_id          = Auth::id();
 
         // Was the location created?
         if ($location->save()) {
