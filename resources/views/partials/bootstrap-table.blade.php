@@ -321,6 +321,14 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function employeeNumFormatter(value, row) {
+        if ((value) && (value.employee_number)) {
+            return '<a href="{{ url('/') }}/users/' + row.id + '"> ' + value.employee_number + '</a>';
+        } else {
+            return value;
+        }
+    }
+
     function orderNumberObjFilterFormatter(value, row) {
         if (value) {
             return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '"> ' + row.order_number + '</a>';

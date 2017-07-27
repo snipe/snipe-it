@@ -100,11 +100,12 @@ class AssetPresenter extends Presenter
                 "visible" => true,
                 "formatter" => "usersLinkObjFormatter"
             ], [
-                "field" => "assigned_to.employee_number",
+                "field" => "assigned_to",
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('admin/users/table.employee_num'),
                 "visible" => false,
+                "formatter" => "employeeNumFormatter"
 
             ],[
                 "field" => "location",
