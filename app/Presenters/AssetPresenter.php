@@ -184,7 +184,17 @@ class AssetPresenter extends Presenter
             ],
         ];
 
-        $fields =  CustomField::all();
+        // This looks complicated, but we have to confirm that the custom fields exist in custom fieldsets
+        // *and* those fieldsets are associated with models, otherwise we'll trigger
+        // javascript errors on the bootstrap tables side of things, since we're asking for properties
+        // on fields that will never be passed through the REST API since they're not associated with
+        // models. We only pass the fieldsets that pertain to each asset (via their model) so that we
+        // don't junk up the REST API with tons of custom fields that don't apply
+
+        $fields =  CustomField::whereHas('fieldset', function ($query) {
+            $query->whereHas('models');
+        })->get();
+
         foreach ($fields as $field) {
             $layout[] = [
                 "field" => 'custom_fields.'.$field->convertUnicodeDbSlug(),
