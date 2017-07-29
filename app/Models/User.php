@@ -345,6 +345,25 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     }
 
+    /**
+     * Check whether two-factor authorization is required and the user has activated it
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     *
+     * @return bool
+     */
+    public function two_factor_active () {
+
+        if (Setting::getSettings()->two_factor_enabled !='0') {
+            if (($this->two_factor_optin =='1') && ($this->two_factor_enrolled)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 
     public function decodePermissions()
     {

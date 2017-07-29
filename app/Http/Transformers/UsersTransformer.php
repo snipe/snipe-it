@@ -45,7 +45,7 @@ class UsersTransformer
                 ]  : null,
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated =='1') ? true : false,
-                'two_factor_activated' => ($user->activated =='1') ? true : false,
+                'two_factor_activated' => ($user->two_factor_active()) ? true : false,
                 'assets_count' => (int) $user->assets_count,
                 'licenses_count' => (int) $user->licenses_count,
                 'accessories_count' => (int) $user->accessories_count,
