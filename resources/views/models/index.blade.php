@@ -8,6 +8,7 @@
 
 {{-- Page title --}}
 @section('header_right')
+  <a href="{{ route('models.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
   <a href="{{ url('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_deleted') }}</a>
 @stop
 
