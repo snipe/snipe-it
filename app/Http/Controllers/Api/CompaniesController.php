@@ -79,7 +79,8 @@ class CompaniesController extends Controller
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
-        return $company;
+        return (new CompaniesTransformer)->transformCompany($company);
+
     }
 
 
