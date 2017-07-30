@@ -144,9 +144,11 @@ class Location extends SnipeModel
 
         return $query->where('name', 'LIKE', "%$search%")
           ->orWhere('address', 'LIKE', "%$search%")
+          ->orWhere('address2', 'LIKE', "%$search%")
           ->orWhere('city', 'LIKE', "%$search%")
           ->orWhere('state', 'LIKE', "%$search%")
           ->orWhere('zip', 'LIKE', "%$search%")
+          ->orWhere('country', 'LIKE', "%$search%")
 
           // This doesn't actually work - need to use a table alias maybe?
           ->orWhere(function ($query) use ($search) {
