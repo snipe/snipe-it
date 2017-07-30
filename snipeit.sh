@@ -446,9 +446,7 @@ case $distro in
 
 		echo -e "\n##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		log "wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file"
-		log "unzip -qo $tmp/$file -d $tmp/"
-		log "cp -R $tmp/$fileName $webdir/$name"
+		log "git clone https://github.com/snipe/snipe-it $webdir/$name"
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
