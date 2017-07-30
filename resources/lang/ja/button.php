@@ -11,5 +11,5 @@ return array(
     'request'                   => 'リクエスト',
     'submit'  	                => '送信',
     'upload'                    => 'アップロード',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'ファイルを選択...',
 );

@@ -21,6 +21,13 @@
                         <div class="login-box-body">
                             <div class="row">
 
+                                @if ($snipeSettings->login_note)
+                                    <div class="col-md-12">
+                                        <div class="alert alert-info">
+                                            {!!  Parsedown::instance()->text(e($snipeSettings->login_note))  !!}
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <!-- Notifications -->
                                 @include('notifications')

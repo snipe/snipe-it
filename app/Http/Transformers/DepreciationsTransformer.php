@@ -21,7 +21,7 @@ class DepreciationsTransformer
     public function transformDepreciation (Depreciation $depreciation)
     {
         $array = [
-            'id' => e($depreciation->id),
+            'id' => (int) $depreciation->id,
             'name' => e($depreciation->name),
             'months' => $depreciation->months . ' '. trans('general.months'),
             'created_at' => Helper::getFormattedDateObject($depreciation->created_at, 'datetime'),

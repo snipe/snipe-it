@@ -10,12 +10,11 @@
 
 <div class="row">
   <div class="col-md-9">
+  {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off']) }}
+  <!-- CSRF Token -->
+    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <div class="box box-default">
       <div class="box-body">
-        {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off']) }}
-        <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
         <!-- First Name -->
         <div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
           <label for="first_name" class="col-md-3 control-label">{{ trans('general.first_name') }}
@@ -128,12 +127,14 @@
         </div>
         @endif
 
-        {{ Form::close() }}
+
       </div> <!-- .box-body -->
       <div class="box-footer text-right">
-        <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> {{ trans('general.save') }}</button>
-      </div> <!-- .box-footer-->
+        <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
+        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+      </div>
     </div> <!-- .box-default -->
+    {{ Form::close() }}
   </div> <!-- .col-md-9 -->
 </div> <!-- .row-->
 

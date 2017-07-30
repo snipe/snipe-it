@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_title'    => 'O výrobcích',
+    'about_manufacturers_text'  => 'Výrobci jsou společnosti, které vytvářejí váš majetek. Zde můžete uložit důležitá kontaktní informace o podpoře, která se zobrazí na stránkách s podrobnostmi o majetku.',
     'asset_manufacturers'	=> 'Výrobci',
     'create'				=> 'Vytvořit výrobce',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'Název',
+    'support_email'   		=> 'Emailová podpora',
+    'support_phone'   		=> 'Telefonní podpora',
+    'support_url'   		=> 'URL podpory',
     'update'				=> 'Upravit Výrobce',
     'url'   				=> 'URL',
 

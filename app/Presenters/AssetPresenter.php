@@ -99,6 +99,14 @@ class AssetPresenter extends Presenter
                 "title" => trans('admin/hardware/form.checkedout_to'),
                 "visible" => true,
                 "formatter" => "usersLinkObjFormatter"
+            ], [
+                "field" => "assigned_to",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/users/table.employee_num'),
+                "visible" => false,
+                "formatter" => "employeeNumFormatter"
+
             ],[
                 "field" => "location",
                 "searchable" => true,
@@ -176,15 +184,27 @@ class AssetPresenter extends Presenter
             ],
         ];
 
-        $fields =  CustomField::all();
+        // This looks complicated, but we have to confirm that the custom fields exist in custom fieldsets
+        // *and* those fieldsets are associated with models, otherwise we'll trigger
+        // javascript errors on the bootstrap tables side of things, since we're asking for properties
+        // on fields that will never be passed through the REST API since they're not associated with
+        // models. We only pass the fieldsets that pertain to each asset (via their model) so that we
+        // don't junk up the REST API with tons of custom fields that don't apply
+
+        $fields =  CustomField::whereHas('fieldset', function ($query) {
+            $query->whereHas('models');
+        })->get();
+
         foreach ($fields as $field) {
-            $layout[] = ["field" => $field->convertUnicodeDbSlug(),
+            $layout[] = [
+                "field" => 'custom_fields.'.$field->convertUnicodeDbSlug(),
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ($field->field_encrypted=='1') ?
-                    '<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
-                "formatter" => null ];
+                "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
+                "formatter" => "customFieldsFormatter"
+            ];
+
         }
 
         $layout[] = [

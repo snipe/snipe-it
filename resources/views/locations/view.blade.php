@@ -32,7 +32,7 @@
               data-cookie-id-table="location_usersDetailTable">
                 <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-sortable="false"  data-formatter="usersLinkFormatter" data-field="name">{{ trans('general.user') }}</th>
                   </tr>
                 </thead>
               </table>
@@ -61,8 +61,8 @@
               data-cookie-id-table="location_assetsDetailTable">
                 <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.name') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+                    <th data-searchable="false" data-sortable="false"  data-formatter="hardwareLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+                    <th data-searchable="false" data-formatter="modelsLinkObjFormatter" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
                   </tr>

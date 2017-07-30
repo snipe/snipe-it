@@ -11,5 +11,5 @@ return array(
     'request'                   => '요청',
     'submit'  	                => '제출',
     'upload'                    => '올리기',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> '파일 선택...',
 );

@@ -142,16 +142,20 @@ $('.snipe-table').bootstrapTable({
 
             var actions = '<nobr>';
 
+            if ((row.available_actions) && (row.available_actions.clone === true)) {
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
+            }
+
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
                 actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" '
-                    + ' class="btn btn-danger btn-sm delete-asset" '
+                    + ' class="btn btn-danger btn-sm delete-asset"  data-tooltip="true"  '
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
-                    + ' data-title="{{  trans('general.delete') }}?" onClick="return false;">'
+                    + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
                     + '<i class="fa fa-trash"></i></a></nobr>';
             }
             return actions;
@@ -196,15 +200,15 @@ $('.snipe-table').bootstrapTable({
 
             // The user is allowed to check items out, AND the item is deployable
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary">{{ trans('general.checkout') }}</a>';
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm btn-primary" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
-                return '<a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a>';
+                return '<div  data-tooltip="true" title="This item has a status label that is undeployable and cannot be checked out at this time."><a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a></div>';
 
             // The user is allowed to check items in
             } else if ((row.available_actions.checkin == true)  && (row.assigned_to)) {
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary">{{ trans('general.checkin') }}</a>';
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
 
             }
 
@@ -243,8 +247,23 @@ $('.snipe-table').bootstrapTable({
     }
 
 
+    // This is  gross, but necessary so that we can package the API response
+    // for custom fields in a more useful way.
+    function customFieldsFormatter(value, row) {
 
-    function createdAtFormatter(value, row) {
+            var field_column = this.title;
+
+            // Pull out any HTMl that might be passed via the presenter
+            // (for example, the locked icon for encrypted fields)
+            var field_column_plain = field_column.replace(/<(?:.|\n)*?> ?/gm, '');
+            if (row.custom_fields[field_column_plain]) {
+                return row.custom_fields[field_column_plain].value;
+            }
+
+    }
+
+
+    function createdAtFormatter(value) {
         if ((value) && (value.date)) {
             return value.date;
         }
@@ -302,6 +321,14 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function employeeNumFormatter(value, row) {
+        if ((value) && (value.employee_number)) {
+            return '<a href="{{ url('/') }}/users/' + row.id + '"> ' + value.employee_number + '</a>';
+        } else {
+            return value;
+        }
+    }
+
     function orderNumberObjFilterFormatter(value, row) {
         if (value) {
             return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '"> ' + row.order_number + '</a>';
@@ -311,7 +338,7 @@ $('.snipe-table').bootstrapTable({
 
    function imageFormatter(value, row) {
         if (value) {
-            return '<img src="' + value + '" height="50" width="50">';
+            return '<img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;">';
         }
     }
 
@@ -322,6 +349,15 @@ $('.snipe-table').bootstrapTable({
                 $( "#bulkForm" ).append($('<input type="hidden" name="ids[' + value.id + ']" value="' + value.id + '">' ));
             });
 
+        });
+    });
+
+    // This is necessary to make the bootstrap tooltips work inside of the wenzhixin/bootstrap-table formatters
+    $(function() {
+        $('#table').on('post-body.bs.table', function () {
+            $('[data-tooltip="true"]').tooltip({
+                container: 'body'
+            });
         });
     });
 

@@ -27,8 +27,8 @@ class ComponentsTransformer
                 'id' => (int) $component->location->id,
                 'name' => e($component->location->name)
             ] : null,
-            'qty' => number_format($component->qty),
-            'min_amt' => e($component->min_amt),
+            'qty' => ($component->qty!='') ? (int) $component->qty : null,
+            'min_amt' => ($component->min_amt!='') ? (int) $component->min_amt : null,
             'category' => ($component->category) ? [
                 'id' => (int) $component->category->id,
                 'name' => e($component->category->name)
@@ -43,6 +43,7 @@ class ComponentsTransformer
             ] : null,
             'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
+            'user_can_checkout' =>  ($component->numRemaining() > 0) ? 1 : 0,
         ];
 
         $permissions_array['available_actions'] = [

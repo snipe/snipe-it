@@ -28,4 +28,9 @@ return array(
         'success' 		=> 'Sukses memulihkan model.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'No fields were changed, so nothing was updated.',
+        'success' 		=> 'Models updated.'
+    ),
+
 );

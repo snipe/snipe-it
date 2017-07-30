@@ -4,15 +4,15 @@
 return array(
 
     'assets_user'       => '分配给:name的资产',
-    'bulk_update_warn'	=> 'You are about to edit the properties of :user_count users. Please note that you cannot change your own user attributes using this form, and must make edits to your own user individually.',
-    'bulk_update_help'	=> 'This form allows you to update multiple users at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged.',
+    'bulk_update_warn'	=> '您即将编辑user_count用户的属性。请注意，您不能使用此表单更改您自己的用户属性，必须单独对您自己的用户信息进行编辑。',
+    'bulk_update_help'	=> '此表单允许您一次更新多个用户。仅填写您需要更改的字段。留的空的任何字段将保持不变。',
     'current_assets'    => '资产当前借出给该用户',
     'clone'             => '克隆用户',
     'contact_user'      => '联系 :name',
     'edit'              => '编辑用户',
     'filetype_info'     => '允许的文件类型有： png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar',
     'history_user'      => ':name的历史',
-	'info'				=> 'Info',
+	'info'				=> '信息',
     'last_login'        => '上一次登陆',
     'ldap_config_text'  => 'LDAP配置在 管理 > 设置。所选位置将为导入的用户所用',
     'software_user'     => ':name 借走的软件',

@@ -64,9 +64,11 @@ class AssetsTransformer
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($asset->assigneduser) ? [
                 'id' => (int) $asset->assigneduser->id,
+                'username' => e($asset->assigneduser->username),
                 'name' => e($asset->assigneduser->getFullNameAttribute()),
                 'first_name'=> e($asset->assigneduser->first_name),
-                'last_name'=> e($asset->assigneduser->last_name)
+                'last_name'=> e($asset->assigneduser->last_name),
+                'employee_number' =>  e($asset->assigneduser->employee_num),
             ]  : null,
             'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
             'warranty_expires' => ($asset->warranty_months > 0) ?  Helper::getFormattedDateObject($asset->warranty_expires, 'date') : null,
@@ -79,22 +81,46 @@ class AssetsTransformer
             'user_can_checkout' => (bool) $asset->availableForCheckout(),
         ];
 
+
+        if ($asset->model->fieldset) {
+            $fields_array = array();
+            foreach ($asset->model->fieldset->fields as $field) {
+
+                if ($field->isFieldDecryptable($asset->{$field->convertUnicodeDbSlug()})) {
+                    $decrypted = \App\Helpers\Helper::gracefulDecrypt($field,$asset->{$field->convertUnicodeDbSlug()});
+                    $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
+
+ //                   $fields_array = [$field->convertUnicodeDbSlug() => $value];
+
+
+                    $fields_array[$field->name] = [
+                            'field' => $field->convertUnicodeDbSlug(),
+                            'value' => $value
+                        ];
+
+                } else {
+                    $fields_array[$field->name] = [
+                        'field' => $field->convertUnicodeDbSlug(),
+                        'value' => $asset->{$field->convertUnicodeDbSlug()}
+                    ];
+                    //$fields_array = [$field->convertUnicodeDbSlug() => $asset->{$field->convertUnicodeDbSlug()}];
+
+
+                }
+                //array += $fields_array;
+                $array['custom_fields'] = $fields_array;
+            }
+        }
+
         $permissions_array['available_actions'] = [
             'checkout' => (bool) Gate::allows('checkout', Asset::class),
             'checkin' => (bool) Gate::allows('checkin', Asset::class),
+            'clone' => Gate::allows('create', Asset::class) ? true : false,
             'update' => (bool) Gate::allows('update', Asset::class),
             'delete' => (bool) Gate::allows('delete', Asset::class),
         ];
 
         $array += $permissions_array;
-
-        if ($asset->model->fieldset) {
-            foreach ($asset->model->fieldset->fields as $field) {
-                $fields_array = [$field->name => $asset->{$field->convertUnicodeDbSlug()}];
-                $array += $fields_array;
-            }
-        }
-
         return $array;
     }
 

@@ -28,6 +28,8 @@
                             <thead>
                             <tr>
                                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+                                <th data-sortable="true" data-field="company" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('general.company') }}</th>
+
                                 <th data-sortable="true" data-formatter="departmentsLinkFormatter" data-field="name" data-searchable="false">{{ trans('admin/departments/table.name') }}</th>
                                 <th data-sortable="false" data-formatter="usersLinkObjFormatter" data-field="manager" data-searchable="false">{{ trans('admin/departments/table.manager') }}</th>
                                 <th data-sortable="false" data-field="users_count" data-searchable="false">{{ trans('general.users') }}</th>

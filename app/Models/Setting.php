@@ -14,14 +14,14 @@ class Setting extends Model
 
     protected $rules = [
           "brand"     => 'required|min:1|numeric',
-          "qr_text"         => 'min:1|max:31',
+          "qr_text"         => 'max:31',
           "logo_img"        => 'mimes:jpeg,bmp,png,gif',
           "alert_email"   => 'email_array',
-          "slack_endpoint"   => 'url',
           "default_currency"   => 'required',
           "locale"   => 'required',
-          "slack_channel"   => 'regex:/(?<!\w)#\w+/',
-          "slack_botname"   => 'string',
+          "slack_endpoint"   => 'url|required_with:slack_channel',
+          "slack_channel"   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint',
+          "slack_botname"   => 'string|nullable',
           'labels_per_page' => 'numeric',
           'labels_width' => 'numeric',
           'labels_height' => 'numeric',
@@ -39,9 +39,11 @@ class Setting extends Model
           "ldap_basedn"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_filter"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_username_field"     => 'sometimes|required_if:ldap_enabled,1',
+          "ldap_fname_field"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
           "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
+          "thumbnail_max_h"     => 'numeric|max:500|min:25',
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];

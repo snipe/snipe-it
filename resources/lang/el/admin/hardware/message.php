@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το πάγιο;',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Το πάγιο διαγράφηκε με επιτυχία.'
     ),
 

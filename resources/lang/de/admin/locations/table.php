@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'Standorte',
     'parent'                    => 'Hauptkategorie',
     'currency'                  => 'Landeswährung',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'LDAP OU Suche',
     );

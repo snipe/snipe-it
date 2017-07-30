@@ -321,38 +321,10 @@
 
 
                @can('superadmin')
-               <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                       <i class="fa fa-wrench fa-fw"></i> @lang('general.admin')
-                       <b class="caret"></b>
+               <li>
+                   <a href="{{ route('settings.index') }}">
+                       <i class="fa fa-cogs fa-fw"></i>
                    </a>
-                   <ul class="dropdown-menu">
-
-                       <li {!! (Request::is('groups*') ? ' class="active"' : '') !!}>
-                           <a href="{{ route('groups.index') }}">
-                               <i class="fa fa-group fa-fw"></i> @lang('general.groups')
-                           </a>
-                       </li>
-                       <li {!! (Request::is('settings/backups*') ? ' class="active"' : '') !!}>
-                           <a href="{{ url('admin/settings/backups') }}">
-                               <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
-                           </a>
-                       </li>
-
-                       @can('settings.api')
-                           <li>
-                               <a href="{{ route('settings.api') }}">
-                                   <i class="fa fa-exchange fa-fw"></i> OAuth API Keys
-                               </a>
-                           </li>
-                       @endcan
-                       <li class="divider"></li>
-                       <li>
-                           <a href="{{ route('app') }}">
-                               <i class="fa fa-cog fa-fw"></i> @lang('general.settings')
-                           </a>
-                       </li>
-                   </ul>
                </li>
                @endcan
             </ul>
@@ -399,17 +371,18 @@
 
 
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
-                    <a href="{{ url('hardware?status=Deployed') }}">@lang('general.deployed')
+                    <a href="{{ url('hardware?status=Deployed') }}"><i class="fa fa-circle-o text-blue"></i>@lang('general.deployed')
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                     <a href="{{ url('hardware?status=RTD') }}">
+                        <i class="fa fa-circle-o text-green"></i>
                     @lang('general.ready_to_deploy')</a>
                   </li>
-                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}">@lang('general.pending')</a></li>
-                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}">@lang('general.undeployable')</a></li>
-                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}">@lang('admin/hardware/general.archived')</a></li>
-                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}">@lang('admin/hardware/general.requestable')</a></li>
+                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>@lang('general.pending')</a></li>
+                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>@lang('general.undeployable')</a></li>
+                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fa fa-times text-red"></i>@lang('admin/hardware/general.archived')</a></li>
+                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fa fa-check text-blue"></i> @lang('admin/hardware/general.requestable')</a></li>
 
                   <li class="divider">&nbsp;</li>
                     @can('checkout', \App\Models\Asset::class)
@@ -557,7 +530,6 @@
                     <li><a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}>@lang('general.depreciation_report')</a></li>
                     <li><a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }}>@lang('general.license_report')</a></li>
                     <li><a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }} >@lang('general.asset_maintenance_report')</a></li>
-                    <li><a href="{{ url('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }}>@lang('general.asset_report')</a></li>
                     <li><a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }} >@lang('general.unaccepted_asset_report')</a></li>
                     <li><a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>@lang('general.accessory_report')</a></li>
                     <li><a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>@lang('general.custom_report')</a></li>
@@ -638,7 +610,7 @@
           <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/">Report a Bug</a>
         </div>
         <a target="_blank" href="https://snipeitapp.com">Snipe-IT</a> is an open source
-        project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a>.
+          project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeyhead">@snipeyhead</a> under the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL3 license</a>.
       </footer>
 
 
@@ -672,29 +644,32 @@
 
 
     <script src="{{ mix('js/dist/all.js') }}"></script>
-
     <script>
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-            
             var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
             $.fn.bootstrapDP = datepicker;
             $('.datepicker').datepicker();
-
         })
 
     </script>
 
+
+
+
     @section('moar_scripts')
     @show
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
 
     @if ((Session::get('topsearch')=='true') || (Request::is('/')))
     <script>
          $("#tagSearch").focus();
     </script>
-
-
-        @endif
+    @endif
 
   </body>
 </html>

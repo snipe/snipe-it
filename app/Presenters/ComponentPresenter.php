@@ -85,16 +85,28 @@ class ComponentPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.purchase_cost'),
                 "visible" => true,
-            ], [
-                "field" => "actions",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
-                "visible" => true,
-                "formatter" => "componentsActionsFormatter",
-            ]
+            ],
         ];
+
+        $layout[] = [
+            "field" => "checkincheckout",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => true,
+            "title" => 'Checkin/Checkout',
+            "visible" => true,
+            "formatter" => "componentsInOutFormatter",
+        ];
+
+        $layout[] = [
+            "field" => "actions",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => false,
+            "title" => trans('table.actions'),
+            "formatter" => "componentsActionsFormatter",
+        ];
+
 
         return json_encode($layout);
     }

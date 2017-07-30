@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'O majetku',
+    'about_assets_text'            => 'Majetky jsou položky sledované sériovým číslem nebo značkou. Mají tendenci mít vyšší hodnotou, tam kde je důležitá identifikace určité položky.',
 	'archived'  				=> 'Archivováno',
     'asset'  					=> 'Majetek',
     'bulk_checkout'             => 'Předat majetek uživateli',

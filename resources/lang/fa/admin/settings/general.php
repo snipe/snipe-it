@@ -91,6 +91,7 @@ return array(
     'about_settings_text'       => 'این تنظیمات به شما اجازه سفارشی کردن جنبه های خاصی از نصب و راه اندازی خود را می دهد.',
     'labels_per_page'           => 'برچسب ها در صفحه',
     'label_dimensions'          => 'ابعاد برچسب (اینچ)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'صفحه حاشیه (اینچ)',
     'purge'                    => 'پاکسازی حذف رکوردها',
     'labels_display_bgutter'    => 'برچسب قطره قطره پایین',

@@ -37,17 +37,18 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Některé položky nebyly správně importovány.',
+        'errorDetail'           => 'Následující položky nebyly importovány kvůli chybám.',
+        'success'               => "Váš soubor byl importován",
+        'file_delete_success'   => "Váš soubor byl úspěšně odstraněn",
+        'file_delete_error'      => "Soubor nelze odstranit",
     ),
 
 
     'delete' => array(
         'confirm'   	=> 'Opravdu si přejete tento majetek odstranit?',
         'error'   		=> 'Nepodařilo se nám tento majetek odstranit. Zkuste to prosím znovu.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Majetek byl úspěšně smazán.'
     ),
 
@@ -55,7 +56,7 @@ return array(
         'error'   		=> 'Majetek nebyl předán, zkuste to prosím znovu',
         'success' 		=> 'Majetek byl v pořádku předán.',
         'user_does_not_exist' => 'Tento uživatel je neplatný. Zkuste to prosím znovu.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Tento majetek není k dispozici pro výdej!'
     ),
 
     'checkin' => array(
@@ -69,7 +70,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Majetek nebyl vyžádán, zkuste to prosím znovu',
         'success' 		=> 'Vyžádání majetku proběhlo v pořádku.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'Požadavek na výdej byl úspěšně zrušen'
     )
 
 );

@@ -2,14 +2,14 @@
 
 return array(
     'about_manufacturers_title'    => '关于制造商',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_text'  => '制造商是您资产的生产厂家。您可以保存一些重要的客服信息，可以方便进行故障报修等操作，这些信息将显示到资产的详情页中。',
     'asset_manufacturers'	=> '资产制造商',
     'create'				=> '创建制造厂',
     'id'   					=> '编号',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> '名称',
+    'support_email'   		=> '邮件客服支持',
+    'support_phone'   		=> '电话客服支持',
+    'support_url'   		=> '网站客服支持',
     'update'				=> '更新制造商',
     'url'   				=> 'URL',
 

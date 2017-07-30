@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Вы уверены что хотите удалить этот актив?',
         'error'   		=> 'При удалении актива возникла проблема. Пожалуйста попробуйте снова.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Актив был успешно удален.'
     ),
 

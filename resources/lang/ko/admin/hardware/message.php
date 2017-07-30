@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> '이 자산을 삭제하시겠습니까?',
         'error'   		=> '그룹을 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> '자산이 삭제되었습니다.'
     ),
 

@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'これらの設定は、あなたのインストレーションの特性に合わせてカスタマイズできます。',
     'labels_per_page'           => 'ページあたりのラベル数',
     'label_dimensions'          => 'ラベルの大きさ (インチ)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'ページ マージン',
     'purge'                    => 'データレコードを消去',
     'labels_display_bgutter'    => 'ラベル 下余白',

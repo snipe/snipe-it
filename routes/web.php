@@ -103,65 +103,80 @@ Route::group(['middleware' => 'auth'], function () {
 |
 */
 
-Route::group([ 'prefix' => 'admin','middleware' => ['auth']], function () {
-
-    Route::get('requests',
-        // foreach( CheckoutRequest::with('user')->get() as $requestedItem) {
-        //     echo $requestedItem->user->username . ' requested ' . $requestedItem->requestedItem->name;
-            [
-            'as' => 'requests',
-            'middleware' => 'authorize:admin',
-            'uses' => 'ViewAssetsController@getRequestedIndex'
-            ]);
 
 
-    # Admin Settings Routes (for categories, maufactureres, etc)
-    Route::group([ 'prefix' => 'settings', 'middleware'=>'authorize:superuser'], function () {
+Route::group([ 'prefix' => 'admin','middleware' => ['authorize:superuser']], function () {
 
-        # Settings
-        Route::group([ 'prefix' => 'app' ], function () {
-
-            Route::get('api', [ 'as' => 'settings.api', 'uses' => 'SettingsController@api' ]);
-            Route::post('purge', ['as' => 'purge', 'uses' => 'SettingsController@postPurge']);
-            Route::get('edit', [ 'as' => 'edit/settings', 'uses' => 'SettingsController@getEdit' ]);
-            Route::post('edit', 'SettingsController@postEdit');
-
-            Route::get('ldaptest', [
-                'as' => 'settings/ldaptest',
-                'uses' => 'SettingsController@getLdapTest'
-            ]);
-
-            Route::get('/', [ 'as' => 'app', 'uses' => 'SettingsController@getIndex' ]);
-        });
+    Route::get('settings', ['as' => 'settings.general.index','uses' => 'SettingsController@getSettings' ]);
+    Route::post('settings', ['as' => 'settings.general.save','uses' => 'SettingsController@postSettings' ]);
 
 
+    Route::get('branding', ['as' => 'settings.branding.index','uses' => 'SettingsController@getBranding' ]);
+    Route::post('branding', ['as' => 'settings.branding.save','uses' => 'SettingsController@postBranding' ]);
 
-        # Settings
-        Route::group([ 'prefix' => 'backups', 'middleware' => 'auth' ], function () {
+    Route::get('security', ['as' => 'settings.security.index','uses' => 'SettingsController@getSecurity' ]);
+    Route::post('security', ['as' => 'settings.security.save','uses' => 'SettingsController@postSecurity' ]);
+
+    Route::get('groups', ['as' => 'settings.groups.index','uses' => 'GroupsController@index' ]);
+
+    Route::get('localization', ['as' => 'settings.localization.index','uses' => 'SettingsController@getLocalization' ]);
+    Route::post('localization', ['as' => 'settings.localization.save','uses' => 'SettingsController@postLocalization' ]);
+
+    Route::get('notifications', ['as' => 'settings.alerts.index','uses' => 'SettingsController@getAlerts' ]);
+    Route::post('notifications', ['as' => 'settings.alerts.save','uses' => 'SettingsController@postAlerts' ]);
+
+    Route::get('slack', ['as' => 'settings.slack.index','uses' => 'SettingsController@getSlack' ]);
+    Route::post('slack', ['as' => 'settings.slack.save','uses' => 'SettingsController@postSlack' ]);
+
+    Route::get('asset_tags', ['as' => 'settings.asset_tags.index','uses' => 'SettingsController@getAssetTags' ]);
+    Route::post('asset_tags', ['as' => 'settings.asset_tags.save','uses' => 'SettingsController@postAssetTags' ]);
+
+    Route::get('barcodes', ['as' => 'settings.barcodes.index','uses' => 'SettingsController@getBarcodes' ]);
+    Route::post('barcodes', ['as' => 'settings.barcodes.save','uses' => 'SettingsController@postBarcodes' ]);
+
+    Route::get('labels', ['as' => 'settings.labels.index','uses' => 'SettingsController@getLabels' ]);
+    Route::post('labels', ['as' => 'settings.labels.save','uses' => 'SettingsController@postLabels' ]);
+
+    Route::get('ldap', ['as' => 'settings.ldap.index','uses' => 'SettingsController@getLdapSettings' ]);
+    Route::post('ldap', ['as' => 'settings.ldap.save','uses' => 'SettingsController@postLdapSettings' ]);
+
+    Route::get('phpinfo', ['as' => 'settings.phpinfo.index','uses' => 'SettingsController@getPhpInfo' ]);
 
 
-            Route::get('download/{filename}', [
-                'as' => 'settings/download-file',
-                'uses' => 'SettingsController@downloadFile' ]);
+    Route::get('oauth', [ 'as' => 'settings.oauth.index', 'uses' => 'SettingsController@api' ]);
 
-            Route::delete('delete/{filename}', [
-                'as' => 'settings/delete-file',
-                'uses' => 'SettingsController@deleteFile' ]);
+    Route::get('purge', ['as' => 'settings.purge.index', 'uses' => 'SettingsController@getPurge']);
+    Route::post('purge', ['as' => 'settings.purge.save', 'uses' => 'SettingsController@postPurge']);
 
-            Route::post('/', [
-                'as' => 'settings/backups',
-                'uses' => 'SettingsController@postBackups'
-            ]);
+    # Backups
+    Route::group([ 'prefix' => 'backups', 'middleware' => 'auth' ], function () {
 
 
-            Route::get('/', [ 'as' => 'settings/backups', 'uses' => 'SettingsController@getBackups' ]);
-        });
+        Route::get('download/{filename}', [
+            'as' => 'settings.backups.download',
+            'uses' => 'SettingsController@downloadFile' ]);
+
+        Route::delete('delete/{filename}', [
+            'as' => 'settings.backups.destroy',
+            'uses' => 'SettingsController@deleteFile' ]);
+
+        Route::post('/', [
+            'as' => 'settings.backups.create',
+            'uses' => 'SettingsController@postBackups'
+        ]);
+
+        Route::get('/', [ 'as' => 'settings.backups.index', 'uses' => 'SettingsController@getBackups' ]);
 
     });
 
 
-    # Dashboard
-    Route::get('/', [ 'as' => 'admin', 'uses' => 'DashboardController@getIndex' ]);
+    Route::get('requests', [ 'as' => 'requests', 'middleware' => 'authorize:admin', 'uses' => 'ViewAssetsController@getRequestedIndex']);
+
+
+
+
+    Route::get('/', ['as' => 'settings.index', 'uses' => 'SettingsController@index' ]);
+
 
 });
 

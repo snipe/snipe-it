@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Demirbaşı silmek istediğinize emin misiniz?',
         'error'   		=> 'Demirbaş silinirken bir problem oluştu. Lütfen tekrar deneyin.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Demirbaş silindi.'
     ),
 

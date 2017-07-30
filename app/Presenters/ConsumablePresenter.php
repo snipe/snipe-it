@@ -40,7 +40,7 @@ class ConsumablePresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.name'),
                 "visible" => true,
-                "formatter" => 'componentsLinkFormatter',
+                "formatter" => 'consumablesLinkFormatter',
             ], [
                 "field" => "category",
                 "searchable" => true,

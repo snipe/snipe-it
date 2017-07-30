@@ -25,7 +25,7 @@ return array(
         "file"    => ":attribute трябва да бъде с големина между :min и :max KB.",
         "string"  => ":attribute трябва да бъде с дължина между :min и :max символа.",
     ),
-    "boolean"          => "The :attribute must be true or false.",
+    "boolean"          => ":attribute трябва да е верен или грешен.",
     "confirmed"        => ":attribute потвърждение не съвпада.",
     "date"             => ":attribute не е валидна дата.",
     "date_format"      => ":attribute не съвпада с формата :format.",

@@ -25,36 +25,6 @@
                     data-cookie="true"
                     data-click-to-select="true"
                     data-cookie-id-table="companiesTable-{{ config('version.hash_version') }}">
-              <thead>
-              <tr>
-                <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-formatter="companiesLinkFormatter" data-field="name" data-searchable="true">{{ trans('admin/companies/table.name') }}</th>
-                <th data-sortable="false" data-field="users_count" data-formatter="usersCompanyObjFilterFormatter" data-searchable="false">
-                  <span class="hidden-xs"><i class="fa fa-users"></i></span>
-                  <span class="hidden-md hidden-lg">{{ trans('general.users') }}</span></th>
-                <th data-sortable="false" data-field="assets_count" data-searchable="false" data-formatter="assetCompanyFilterFormatter">
-                  <span class="hidden-xs"><i class="fa fa-barcode"></i></span>
-                  <span class="hidden-md hidden-lg">{{ trans('general.assets') }}</span></th>
-                </th>
-                <th data-sortable="false" data-field="licenses_count" data-searchable="false">
-                  <span class="hidden-xs"><i class="fa fa-floppy-o"></i></span>
-                  <span class="hidden-md hidden-lg">{{ trans('general.licenses') }}</span></th>
-                </th>
-                <th data-sortable="false" data-field="accessories_count" data-searchable="false">
-                  <span class="hidden-xs"><i class="fa fa-keyboard-o"></i></span>
-                  <span class="hidden-md hidden-lg">{{ trans('general.accessories') }}</span></th>
-                </th>
-                <th data-sortable="false" data-field="consumables_count" data-searchable="false">
-                  <span class="hidden-xs"><i class="fa fa-tint"></i></span>
-                  <span class="hidden-md hidden-lg">{{ trans('general.consumables') }}</span></th>
-                </th>
-                <th data-sortable="false" data-field="components_count" data-searchable="false">
-                  <span class="hidden-xs"><i class="fa fa-hdd-o"></i></span>
-                  <span class="hidden-md hidden-lg">{{ trans('general.users') }}</span></th>
-                </th>
-                <th data-switchable="false" data-formatter="companiesActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
-              </tr>
-              </thead>
             </table>
           </div>
         </div>
@@ -71,6 +41,10 @@
 @stop
 
 @section('moar_scripts')
-  @include ('partials.bootstrap-table', ['exportFile' => 'companies-export', 'search' => true])
+  @include ('partials.bootstrap-table', [
+      'exportFile' => 'companies-export',
+      'search' => true,
+      'columns' => \App\Presenters\CompanyPresenter::dataTableLayout()
+  ])
 
 @stop

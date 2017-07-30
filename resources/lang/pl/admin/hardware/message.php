@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Czy na pewno chcesz usunąć?',
         'error'   		=> 'Nie można usunąć. Proszę spróbować ponownie.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Nabytek został usunięty.'
     ),
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Transformers\CompaniesTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
@@ -23,7 +23,10 @@ class CompaniesController extends Controller
 
         $allowed_columns = ['id','name'];
 
-        $companies = Company::withCount('assets','licenses','accessories','consumables','components','users');
+        $companies = Company::withCount('assets','licenses','accessories','consumables','components','users')
+            ->withCount('users')->withCount('users')->withCount('assets')
+            ->withCount('licenses')->withCount('accessories')
+            ->withCount('consumables')->withCount('components');
 
         if ($request->has('search')) {
             $companies->TextSearch($request->input('search'));
@@ -37,7 +40,7 @@ class CompaniesController extends Controller
 
         $total = $companies->count();
         $companies = $companies->skip($offset)->take($limit)->get();
-        return (new DatatablesTransformer)->transformDatatables($companies, $total);
+        return (new CompaniesTransformer)->transformCompanies($companies, $total);
 
     }
 
@@ -76,7 +79,8 @@ class CompaniesController extends Controller
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
-        return $company;
+        return (new CompaniesTransformer)->transformCompany($company);
+
     }
 
 

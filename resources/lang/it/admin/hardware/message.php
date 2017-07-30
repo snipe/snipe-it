@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',
         'error'   		=> 'C\'è stato un problema durante la cancellazione del bene. Riprova per favore.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Il bene è stato eliminato con successo.'
     ),
 

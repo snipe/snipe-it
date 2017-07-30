@@ -4,8 +4,8 @@
 return array(
 
     'assets_user'       => 'Actifs associés avec :name',
-    'bulk_update_warn'	=> 'You are about to edit the properties of :user_count users. Please note that you cannot change your own user attributes using this form, and must make edits to your own user individually.',
-    'bulk_update_help'	=> 'This form allows you to update multiple users at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged.',
+    'bulk_update_warn'	=> 'Vous êtes sur le point de modifier les propriétés de: user_count users. Veuillez noter que vous ne pouvez pas modifier vos propres attributs d\'utilisateur en utilisant ce formulaire et devez effectuer des modifications à votre propre utilisateur individuellement.',
+    'bulk_update_help'	=> 'Ce formulaire vous permet de mettre à jour plusieurs utilisateurs à la fois. Remplissez uniquement les champs que vous devez modifier. Tous les champs laissés vides resteront inchangés.',
     'current_assets'    => 'Biens actuellement attribués à cet utilisateur',
     'clone'             => 'Cloner l\'utilisateur',
     'contact_user'      => 'Contact :name',
@@ -18,7 +18,7 @@ return array(
     'software_user'     => 'Logiciels associés avec :name',
     'view_user'         => 'Voir l\'utilisateur :name',
     'usercsv'           => 'Fichier CSV',
-    'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
-    'two_factor_enrolled' => '2FA Device Enrolled ',
-    'two_factor_active'   => '2FA Active ',
+    'two_factor_admin_optin_help' => 'Vos paramètres administratifs actuels permettent une application sélective de l\'authentification à deux facteurs.  ',
+    'two_factor_enrolled' => 'Dispositif à deux facteurs inscrit ',
+    'two_factor_active'   => 'Activation des deux facteurs ',
     );

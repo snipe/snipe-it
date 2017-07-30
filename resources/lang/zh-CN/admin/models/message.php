@@ -28,4 +28,9 @@ return array(
         'success' 		=> '型号恢复成功。'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'No fields were changed, so nothing was updated.',
+        'success' 		=> 'Models updated.'
+    ),
+
 );

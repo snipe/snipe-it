@@ -11,5 +11,5 @@ return array(
     'request'                   => 'Aanvraag',
     'submit'  	                => 'Verzenden',
     'upload'                    => 'Verstuur',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Bestand selecteren...',
 );

@@ -6,18 +6,12 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 
-class DepartmentTest extends \Codeception\TestCase\Test
+class DepartmentTest extends BaseTest
 {
     /**
      * @var \UnitTester
      */
     protected $tester;
-    use DatabaseTransactions;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testDepartmentAdd()
     {

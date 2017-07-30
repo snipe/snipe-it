@@ -91,6 +91,7 @@ return array(
     'about_settings_text'       => '這些設定允許您自訂您的安裝偏好',
     'labels_per_page'           => '每頁顯示',
     'label_dimensions'          => '標籤尺寸（英吋）',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => '頁面邊框（英吋）',
     'purge'                    => '清除已標記刪除的記錄',
     'labels_display_bgutter'    => '標籤底部裝訂線',

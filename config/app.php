@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' =>  env('APP_LOCALE', 'en'),
+    'locale' =>  env('APP_LOCALE', 'en_US.UTF-8'),
 
     /*
     |--------------------------------------------------------------------------
@@ -285,8 +285,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
-        'Form'      => 'Collective\Html\FormFacade',
-        'Html'      => 'Collective\Html\HtmlFacade',
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
         'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image'     => Intervention\Image\ImageManagerStatic::class,

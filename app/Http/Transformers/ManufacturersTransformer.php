@@ -23,16 +23,16 @@ class ManufacturersTransformer
         if ($manufacturer) {
 
             $array = [
-                'id' => e($manufacturer->id),
+                'id' => (int) $manufacturer->id,
                 'name' => e($manufacturer->name),
                 'url' => e($manufacturer->url),
                 'support_url' => e($manufacturer->support_url),
                 'support_phone' => e($manufacturer->support_phone),
                 'support_email' => e($manufacturer->support_email),
-                'assets_count' => e($manufacturer->assets_count),
-                'licenses_count' => e($manufacturer->licenses_count),
-                'consumables_count' => e($manufacturer->consumables_count),
-                'accessories_count' => e($manufacturer->accessories_count),
+                'assets_count' => (int) $manufacturer->assets_count,
+                'licenses_count' => (int) $manufacturer->licenses_count,
+                'consumables_count' => (int) $manufacturer->consumables_count,
+                'accessories_count' => (int) $manufacturer->accessories_count,
                 'created_at' => Helper::getFormattedDateObject($manufacturer->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($manufacturer->updated_at, 'datetime'),
             ];

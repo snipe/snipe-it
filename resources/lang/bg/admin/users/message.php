@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Активът беше приет.',
     'declined'                  => 'Активът беше отказан.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'Вашите потребителски профили бяха обновени успешно, обаче вашето управителско вписване не беше запазено, защото управителят, които сте избрали бе в списъка с потребителски профили за промяна и потребителите не могат да бъдат свои управители. Моля изберете вашите потребителски профили отново, с изключение на управителя.',
     'user_exists'               => 'Потребителят вече съществува!',
     'user_not_found'            => 'Потребител [:id] не съществува.',
     'user_login_required'       => 'Полето за вход е задължително',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Потребителят е създаден.',
         'update'    => 'Потребителят е обновен.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Потребителите бяха обновени успешно!',
         'delete'    => 'Потребителят е изтрит.',
         'ban'       => 'Потребителят беше забранен успешно.',
         'unban'     => 'Потребителят възстановен успешно.',

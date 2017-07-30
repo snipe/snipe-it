@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'Konfirmasi Penghapusan Aset dalam Jumlah Besar',
   'bulk_delete_help'	=> 'Meninjau aset untuk penghapusan massal di bawah ini. Setelah dihapus, aset-aset ini dapat dipulihkan, tetapi mereka tidak lagi akan dikaitkan dengan setiap pengguna yang mereka saat ini digunakan.',
   'bulk_delete_warn'	=> 'Anda akan menghapus :asset_count aset.',
 	'bulk_update'		=> 'Perbarui aset jumlah besar',

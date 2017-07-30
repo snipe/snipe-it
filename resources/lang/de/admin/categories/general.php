@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Kategorie bearbeiten',
     'eula_text'							=> 'Kategorie EULA',
     'eula_text_help'					=> 'Dieses Feld erlaubt Ihnen die EULA Ihren Bedürfnissen nach Asset Typ anzupassen.Wenn Sie nur eine EULA für alle Assets haben, aktivieren Sie die Checkbox unterhalb um die Standard EULA zu verwenden.',
-    'name'                              => 'Category Name',
+    'name'                              => 'Kategorie Name',
     'require_acceptance'				=> 'Benutzer müssen bei Assets in dieser Kategorie Ihre Zustimmung bestätigen.',
     'required_acceptance'				=> 'Dieser Benutzer erhält ein Email zur Bestätigung des Gegenstands.',
     'required_eula'						=> 'Dieser Benutzer erhält eine Kopie der EULA via Email',

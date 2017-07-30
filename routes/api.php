@@ -173,6 +173,25 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     }); // Fields group
 
 
+    /*--- Fieldsets API ---*/
+
+    Route::resource('fieldsets', 'CustomFieldsetsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.fieldsets.index',
+                    'show' => 'api.fieldsets.show',
+                    'store' => 'api.fieldsets.store',
+                    'update' => 'api.fieldsets.update',
+                    'destroy' => 'api.fieldsets.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['fieldset' => 'fieldset_id']
+        ]
+    ); // Custom fieldset resource
+
+
+
     /*--- Groups API ---*/
 
     Route::resource('groups', 'GroupsController',
@@ -366,6 +385,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['setting' => 'setting_id']
         ]
     ); // Settings resource
+
+    Route::get('settings/ldaptest', [
+        'as' => 'api.settings.ldaptest',
+        'uses' => 'SettingsController@getLdapTest'
+    ]);
 
 
     /*--- Status Labels API ---*/

@@ -9,11 +9,10 @@
 {{-- Page content --}}
 @section('content')
     @if (!config('app.lock_passwords'))
-        <passport-clients></passport-clients>
-        <passport-authorized-clients></passport-authorized-clients>
-        @if(env('APP_ENV') != 'production')
-            <passport-personal-access-tokens></passport-personal-access-tokens>
-        @endif
+        <div id="app">
+            <passport-clients></passport-clients>
+            <passport-authorized-clients></passport-authorized-clients>
+        </div>
     @else
         <p class="help-block">{{ trans('general.feature_disabled') }}</p>
     @endif

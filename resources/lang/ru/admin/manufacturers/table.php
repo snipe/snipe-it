@@ -2,15 +2,15 @@
 
 return array(
     'about_manufacturers_title'    => 'О производителях',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_text'  => 'Производители - компании, создающие ваши активы. Вы можете хранить здесь важные контактные данные, которые будут отображаться вместе с подробностями о ваших активах.',
     'asset_manufacturers'	=> 'Производители оборудования',
     'create'				=> 'Создать производителя',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'Название',
+    'support_email'   		=> 'Электронная почта поддержки',
+    'support_phone'   		=> 'Телефон поддержки',
+    'support_url'   		=> 'Страница поддержки',
     'update'				=> 'Обновить производителя',
-    'url'   				=> 'URL',
+    'url'   				=> 'Адрес',
 
 );

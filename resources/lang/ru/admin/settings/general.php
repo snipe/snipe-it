@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Эти настройки позволяют персонализировать некоторые аспекты вашей установки.',
     'labels_per_page'           => 'Этикеток на странице',
     'label_dimensions'          => 'Размеры наклеек (в дюймах)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Поля страницы (в дюймах)',
     'purge'                    => 'Очистка удалённых записей',
     'labels_display_bgutter'    => 'Метка внизу страницы',

@@ -28,4 +28,9 @@ return array(
         'success' 		=> 'مدل با موفقیت بازیابی شد.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'No fields were changed, so nothing was updated.',
+        'success' 		=> 'Models updated.'
+    ),
+
 );

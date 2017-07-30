@@ -9,15 +9,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  * Test strings for db column names  gathered from
  * http://www.omniglot.com/language/phrases/hovercraft.htm
  */
-class CustomFieldTest extends \Codeception\TestCase\Test
+class CustomFieldTest extends BaseTest
 {
     protected $tester;
-    use DatabaseMigrations;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testConstructor()
     {

@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',
     'labels_per_page'           => 'Labels per page',
     'label_dimensions'          => 'Label dimensions (inches)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Περιθώρια σελίδας (ίντσες)',
     'purge'                    => 'Purge Deleted Records',
     'labels_display_bgutter'    => 'Label bottom gutter',

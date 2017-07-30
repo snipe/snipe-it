@@ -184,9 +184,11 @@ $(function () {
 
   //Activate Bootstrap tooltip
   if (o.enableBSToppltip) {
+      $.widget.bridge('uitooltip', $.ui.tooltip);
     $('body').tooltip({
       selector: o.BSTooltipSelector
     });
+
   }
 
   //Activate box widget

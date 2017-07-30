@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-
+        'does_not_exist' => 'Fieldset does not exist',
 
         'create' => array(
             'error'   => 'Fieldset was not created, please try again.',

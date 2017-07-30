@@ -6,18 +6,12 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 
-class AssetTest extends \Codeception\TestCase\Test
+class AssetTest extends BaseTest
 {
     /**
      * @var \UnitTester
      */
     protected $tester;
-    use DatabaseTransactions;
-
-    protected function _before()
-    {
-        Artisan::call('migrate');
-    }
 
     public function testAssetAdd()
     {
@@ -207,8 +201,6 @@ class AssetTest extends \Codeception\TestCase\Test
     public function testAnAssetCanBeCheckedOut()
     {
         // This tests Asset::checkOut(), Asset::assignedTo(), Asset::assignedAssets(), Asset::assetLoc(), Asset::assignedType(), defaultLoc()
-        // Need to mock settings here to avoid issues with checkout notifications.
-        factory(App\Models\Setting::class)->create();
         $asset = factory(Asset::class)->create();
         $adminUser = factory(App\Models\User::class)->states('superuser')->create();
         Auth::login($adminUser);

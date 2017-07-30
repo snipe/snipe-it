@@ -48,6 +48,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',
         'error'   		=> 'Laitteen poistamisessa tapahtui virhe. Yritä uudelleen.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Laite poistettu onnistuneesti.'
     ),
 

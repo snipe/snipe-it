@@ -1,0 +1,22 @@
+# Code ownership for pull request reviews, per
+# the feature detailed here:
+
+# https://github.com/blog/2392-introducing-code-owners
+# https://help.github.com/articles/about-codeowners/
+
+# These owners will be the default owners for everything in the repo.
+* @snipe
+
+# Order is important. The last matching pattern has the most precedence.
+# So if a pull request only touches javascript files, only these owners
+# will be requested to review.
+
+# For example:
+#  *.js    @octocat @github/js
+
+
+app/Importer/*  @dmeltzer
+app/Http/Controllers/CustomFields* @uberbrady
+app/Http/Controllers/Api/CustomFields* @uberbrady
+resources/views/custom_fields/* @uberbrady
+docker/* @uberbrady

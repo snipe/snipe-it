@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => '用户创建成功',
         'update'    => '用户更新成功。',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => '用户更新成功。',
         'delete'    => '用户已经被删除',
         'ban'       => '用户禁止成功',
         'unban'     => '用户成功解禁',

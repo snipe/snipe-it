@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Ha aceptado con éxito este equipo.',
     'declined'                  => 'Ha declinado con éxito este equipo.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'Sus usuarios han sido correctamente actualizados, de todos modos la entrada de administrador no fue guardada porque el administrador seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propior administradores. Vuelva a seleccionar los usuarios, excluyendo al administrador.',
     'user_exists'               => 'El Usuario ya existe!',
     'user_not_found'            => 'Usuario [:id] no existe.',
     'user_login_required'       => 'El campo Usuario es obligatorio',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Usuario correctamente creado.',
         'update'    => 'Usuario correctamente actualizado.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Usuarios correctamente actualizados!',
         'delete'    => 'Usuario correctamente eliminado.',
         'ban'       => 'Usuario correctamente bloqueado.',
         'unban'     => 'Usuario correctamente desbloqueado.',

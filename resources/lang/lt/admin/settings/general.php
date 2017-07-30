@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Šie nustatymai leidžia jums pasirinkti savus diegimo nustatymus.',
     'labels_per_page'           => 'Etikečių puslapyje',
     'label_dimensions'          => 'Etiketės išmatavimai (coliais)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Page margins (inches)',
     'purge'                    => 'Purge Deleted Records',
     'labels_display_bgutter'    => 'Label bottom gutter',

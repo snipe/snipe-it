@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Editar Categoría',
     'eula_text'							=> 'Categoría EULA',
     'eula_text_help'					=> 'Este campo permite personalizar sus EULAs para tipos específicos de equipos. Si solo tiene un EULA para todos sus equipos, puede seleccionar la siguiente opción para usar el valor por defecto.',
-    'name'                              => 'Category Name',
+    'name'                              => 'Nombre de la categoría',
     'require_acceptance'				=> 'Requerir confirmación de usuarios para la aceptación de equipos en esta categoría.',
     'required_acceptance'				=> 'Se enviará  un email a este usuario con un link para confirmar la aceptación de este item.',
     'required_eula'						=> 'Se enviará  un email a este usuario con una copia del EULA',

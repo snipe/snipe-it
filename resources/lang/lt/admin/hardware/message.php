@@ -47,6 +47,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią įrangą?',
         'error'   		=> 'Nepavyko ištrinti įrangos. Prašome bandykite dar kartą.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Įranga sėkmingai ištrinta.'
     ),
 

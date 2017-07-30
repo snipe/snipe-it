@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Deze instellingen laten jou specifieke aspecten aanpassen van jou installatie.',
     'labels_per_page'           => 'Labels per pagina',
     'label_dimensions'          => 'Label afmetingen (inches)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Pagina marges (inches)',
     'purge'                    => 'Verwijderde items opschonen',
     'labels_display_bgutter'    => 'Label ondermarge',

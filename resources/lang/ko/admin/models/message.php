@@ -28,4 +28,9 @@ return array(
         'success' 		=> '모델이 복원되었습니다.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'No fields were changed, so nothing was updated.',
+        'success' 		=> 'Models updated.'
+    ),
+
 );

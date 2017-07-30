@@ -17,8 +17,11 @@ class Accessory extends SnipeModel
     use Loggable, Presentable;
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'accessories';
+    protected $casts = [
+        'requestable' => 'boolean'
+    ];
 
     /**
     * Accessory validation rules
@@ -28,7 +31,7 @@ class Accessory extends SnipeModel
         'qty'               => 'required|integer|min:1',
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
-        'min_amt'           => 'integer|min:0',
+        'min_amt'           => 'integer|min:0|nullable',
         'purchase_cost'     => 'numeric|nullable',
     );
 
@@ -60,6 +63,15 @@ class Accessory extends SnipeModel
         'qty',
         'requestable'
     ];
+
+    public function setRequestableAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return;
+    }
 
     public function company()
     {

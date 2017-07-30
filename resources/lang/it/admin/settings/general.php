@@ -90,6 +90,7 @@ return array(
     'about_settings_text'       => 'Queste impostazioni ti permettono di personalizzare alcuni aspetti della tua installazione.',
     'labels_per_page'           => 'Etichetta per pagina',
     'label_dimensions'          => 'Dimensioni dell\'etichetta (pollici)',
+    'next_auto_tag_base'        => 'Next auto-increment',
     'page_padding'             => 'Margini della pagina (pollici)',
     'purge'                    => 'Eliminare i record cancellati',
     'labels_display_bgutter'    => 'Label bottom gutter',

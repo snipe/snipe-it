@@ -11,5 +11,5 @@ return array(
     'request'                   => 'Requête ',
     'submit'  	                => 'Soumettre',
     'upload'                    => 'Uploader',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Sélectionner un fichier...',
 );

@@ -25,7 +25,7 @@ return array(
         "file"    => ":attribute должен быть между :min - :max килобайт.",
         "string"  => ":attribute должен быть между :min - :max символов.",
     ),
-    "boolean"          => "The :attribute must be true or false.",
+    "boolean"          => ":attribute должен быть true или false.",
     "confirmed"        => "Подтверждение :attribute не совпадает.",
     "date"             => ":attribute неправильная дата.",
     "date_format"      => ":attribute не совпадает с форматом :format.",
