@@ -23,7 +23,7 @@ class SuppliersController extends Controller
         $allowed_columns = ['id','name','address','phone','contact','fax','email'];
         
         $suppliers = Supplier::select(
-                array('id','name','address','address2','city','state','country','fax', 'phone','email','contact')
+                array('id','name','address','address2','city','state','country','fax', 'phone','email','contact','created_at','updated_at','deleted_at')
             )->withCount('assets')->withCount('licenses')->whereNull('deleted_at');
 
 
@@ -76,7 +76,7 @@ class SuppliersController extends Controller
     {
         $this->authorize('view', Supplier::class);
         $supplier = Supplier::findOrFail($id);
-        return $supplier;
+        return (new SuppliersTransformer)->transformSupplier($supplier);
     }
 
 

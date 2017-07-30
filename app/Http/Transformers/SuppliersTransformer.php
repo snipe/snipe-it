@@ -22,8 +22,6 @@ class SuppliersTransformer
     {
         if ($supplier) {
 
-
-
             $array = [
                 'id' => (int) $supplier->id,
                 'name' => e($supplier->name),
@@ -38,6 +36,7 @@ class SuppliersTransformer
                 'contact' => ($supplier->contact) ? e($supplier->contact) : null,
                 'assets_count' => (int) $supplier->assets_count,
                 'licenses_count' => (int) $supplier->licenses_count,
+                'image' =>   ($supplier->image) ? e($supplier->image) : null,
                 'created_at' => Helper::getFormattedDateObject($supplier->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($supplier->updated_at, 'datetime'),
 

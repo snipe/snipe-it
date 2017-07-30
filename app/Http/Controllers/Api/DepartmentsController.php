@@ -27,8 +27,11 @@ class DepartmentsController extends Controller
             'id',
             'name',
             'location_id',
-            'manager_id'
-        ])->with('users')->with('location')->with('manager')->withCount('users');
+            'company_id',
+            'manager_id',
+            'created_at',
+            'updated_at'
+        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users');
 
         if ($request->has('search')) {
             $departments = $departments->TextSearch($request->input('search'));

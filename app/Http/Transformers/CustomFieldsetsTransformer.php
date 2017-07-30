@@ -38,7 +38,9 @@ class CustomFieldsetsTransformer
             'id' => (int) $fieldset->id,
             'name' => e($fieldset->name),
             'fields' => (new CustomFieldsTransformer)->transformCustomFields($fields, $fieldset->fields_count),
-            'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $fieldset->models_count)
+            'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $fieldset->models_count),
+            'created_at' => Helper::getFormattedDateObject($fieldset->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($fieldset->updated_at, 'datetime'),
         ];
         return $array;
     }

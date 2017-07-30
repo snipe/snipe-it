@@ -77,7 +77,7 @@ class ManufacturersController extends Controller
     {
         $this->authorize('view', Manufacturer::class);
         $manufacturer = Manufacturer::findOrFail($id);
-        return $manufacturer;
+        return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
     }
 
 

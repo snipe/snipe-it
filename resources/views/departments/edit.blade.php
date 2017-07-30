@@ -8,7 +8,10 @@
 
 {{-- Page content --}}
 @section('inputFields')
+
     @include ('partials.forms.edit.name', ['translated_name' => trans('admin/departments/table.name')])
+
+    @include ('partials.forms.edit.company')
 
     <!-- Manager -->
     <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">

@@ -91,7 +91,10 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        return view('departments/edit')->with('item', new Department)->with('manager_list', Helper::managerList())->with('location_list', Helper::locationsList());
+        return view('departments/edit')->with('item', new Department)
+            ->with('manager_list', Helper::managerList())
+            ->with('location_list', Helper::locationsList())
+            ->with('company_list', Helper::companyList());
     }
 
 
@@ -132,7 +135,10 @@ class DepartmentsController extends Controller
         if (is_null($item = Department::find($id))) {
             return redirect()->back()->with('error', trans('admin/locations/message.does_not_exist'));
         }
-        return view('departments/edit', compact('item'))->with('manager_list', Helper::managerList())->with('location_list', Helper::locationsList());
+        return view('departments/edit', compact('item'))
+            ->with('manager_list', Helper::managerList())
+            ->with('location_list', Helper::locationsList())
+            ->with('company_list', Helper::companyList());
     }
     
     
