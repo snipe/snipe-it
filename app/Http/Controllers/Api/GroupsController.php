@@ -22,7 +22,7 @@ class GroupsController extends Controller
         $this->authorize('view', Group::class);
         $allowed_columns = ['id','name','created_at'];
 
-        $groups = Group::select('id','name','permissions')->withCount('users');
+        $groups = Group::select('id','name','permissions','created_at','updated_at')->withCount('users');
 
         if ($request->has('search')) {
             $groups = $groups->TextSearch($request->input('search'));
