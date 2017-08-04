@@ -60,7 +60,7 @@ class CompaniesController extends Controller
         $company->fill($request->all());
 
         if ($company->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $company, trans('admin/companies/message.create.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new CompaniesTransformer)->transformCompany($company), trans('admin/companies/message.create.success')));
         }
         return response()
             ->json(Helper::formatStandardApiResponse('error', null, $company->getErrors()));
@@ -101,7 +101,7 @@ class CompaniesController extends Controller
 
         if ($company->save()) {
             return response()
-                ->json(Helper::formatStandardApiResponse('success', $company, trans('admin/companies/message.update.success')));
+                ->json(Helper::formatStandardApiResponse('success', (new CompaniesTransformer)->transformCompany($company), trans('admin/companies/message.update.success')));
         }
 
         return response()
