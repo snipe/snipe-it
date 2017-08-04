@@ -32,7 +32,11 @@ class UsersTransformer
                     'id' => (int) $user->manager->id,
                     'name'=> e($user->manager->username)
                 ]  : null,
-                'groups' => $user->groups,
+
+                'groups' => ($user->groups) ? [
+                    'id' => (int) $user->userloc->id,
+                    'name'=> e($user->userloc->name)
+                ]  : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'email' => e($user->email),
                 'department' => ($user->department) ? [

@@ -31,6 +31,7 @@ return array(
         'create' => 'There was an issue creating the user. Please try again.',
         'update' => 'There was an issue updating the user. Please try again.',
         'delete' => 'There was an issue deleting the user. Please try again.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'There was an issue unsuspending the user. Please try again.',
         'import'    => 'There was an issue importing users. Please try again.',
         'asset_already_accepted' => 'This asset has already been accepted.',

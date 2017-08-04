@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\UsersTransformer;
 use App\Models\Company;
 use App\Models\User;
+use App\Helpers\Helper;
 
 class UsersController extends Controller
 {
@@ -103,7 +104,14 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('view', User::class);
+        $user = new User;
+        $user->fill($request->all());
+
+        if ($user->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.create.success')));
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
     }
 
     /**
@@ -132,7 +140,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('edit', User::class);
+        $user = User::findOrFail($id);
+        $user->fill($request->all());
+
+        if ($user->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
     }
 
     /**
@@ -145,6 +161,18 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('delete', User::class);
+        $user = User::findOrFail($id);
+        $this->authorize('delete', $user);
+
+
+        if ($user->assets()->count() > 0) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete_has_assets')));
+        }
+
+        if ($user->delete()) {
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));
     }
 }
