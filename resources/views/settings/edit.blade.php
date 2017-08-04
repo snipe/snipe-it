@@ -66,12 +66,12 @@
                 </div>
 
                 <!-- Two Factor -->
-                <div class="form-group {{ $errors->has('two_factor_enabled') ? 'error' : '' }}">
+                <div class="form-group {{ $errors->has('two_factor_enabled') ? 'error' : '' }}"> 
                   <div class="col-md-3">
                     {{ Form::label('two_factor_enabled', trans('admin/settings/general.two_factor_enabled_text')) }}
                   </div>
                   <div class="col-md-9">
-					  
+
                     {!! Form::two_factor_options('two_factor_enabled', Input::old('two_factor_enabled', $setting->two_factor_enabled), 'select2') !!}
                     <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
 

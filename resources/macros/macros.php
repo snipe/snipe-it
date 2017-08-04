@@ -487,7 +487,7 @@ Form::macro('two_factor_options', function ($name = "two_factor_enabled", $selec
 
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100% ">';
     foreach ($formats as $format => $label) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
     }
