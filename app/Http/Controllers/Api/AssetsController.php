@@ -373,7 +373,10 @@ class AssetsController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Asset::class);
+
         if ($asset = Asset::find($id)) {
+
             $this->authorize('delete', $asset);
 
             DB::table('assets')
