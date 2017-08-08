@@ -70,7 +70,7 @@ class LocationsController extends Controller
         $location->fill($request->all());
 
         if ($location->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $location, trans('admin/locations/message.create.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.create.success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
 
@@ -108,7 +108,7 @@ class LocationsController extends Controller
         $location->fill($request->all());
 
         if ($location->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $location, trans('admin/locations/message.update.success')));
+            return response()->json(Helper::formatStandardApiResponse('success',  (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.update.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
