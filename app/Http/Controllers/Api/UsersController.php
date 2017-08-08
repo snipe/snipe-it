@@ -107,6 +107,7 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $user = new User;
         $user->fill($request->all());
+        $user->password = bcrypt($request->input('password'));
 
         if ($user->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.create.success')));
@@ -143,6 +144,11 @@ class UsersController extends Controller
         $this->authorize('edit', User::class);
         $user = User::findOrFail($id);
         $user->fill($request->all());
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+
 
         if ($user->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
