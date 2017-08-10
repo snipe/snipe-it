@@ -160,12 +160,14 @@
         }).change();
     });
 
+
+
     // Checkbox handling
-    $('div.icheckbox_minimal-blue').on('ifChecked', function(event){
+    $('#field_encrypted').on('ifChecked', function(event){
         $("#encrypt_warning").show();
     });
 
-    $('div.icheckbox_minimal-blue').on('ifUnchecked', function(event){
+    $('#field_encrypted').on('ifUnchecked', function(event){
         $("#encrypt_warning").hide();
     });
 
