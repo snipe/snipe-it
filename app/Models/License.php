@@ -402,6 +402,20 @@ class License extends Depreciable
     }
 
     /**
+     * Query builder scope to order on supplier
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->select('licenses.*')
+            ->orderBy('suppliers.name', $order);
+    }
+
+    /**
      * Query builder scope to order on company
      *
      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance

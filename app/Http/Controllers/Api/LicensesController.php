@@ -59,6 +59,10 @@ class LicensesController extends Controller
             $licenses->where('manufacturer_id','=',$request->input('manufacturer_id'));
         }
 
+        if ($request->has('supplier_id')) {
+            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+        }
+
         if ($request->has('depreciation_id')) {
             $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
         }
@@ -69,22 +73,26 @@ class LicensesController extends Controller
 
         $offset = request('offset', 0);
         $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','manufacturer','company','license_name','license_email'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
-        switch ($sort) {
+
+        switch ($request->input('sort')) {
             case 'manufacturer':
                 $licenses = $licenses->OrderManufacturer($order);
+                break;
+            case 'supplier':
+                $licenses = $licenses->OrderSupplier($order);
                 break;
             case 'company':
                 $licenses = $licenses->OrderCompany($order);
                 break;
             default:
+                $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','license_name','license_email'];
+                $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
         }
+        
 
         $total = $licenses->count();
         $licenses = $licenses->skip($offset)->take($limit)->get();
