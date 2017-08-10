@@ -32,11 +32,6 @@ class UsersTransformer
                     'id' => (int) $user->manager->id,
                     'name'=> e($user->manager->username)
                 ]  : null,
-
-                'groups' => ($user->groups) ? [
-                    'id' => (int) $user->userloc->id,
-                    'name'=> e($user->userloc->name)
-                ]  : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'email' => e($user->email),
                 'department' => ($user->department) ? [
@@ -67,6 +62,24 @@ class UsersTransformer
         ];
 
         $array += $permissions_array;
+
+
+        $numGroups = count($user->groups);
+        if($numGroups > 0)
+        {
+            $groups["total"] = $numGroups;
+            foreach($user->groups as $group)
+            {
+                $groups["rows"][] = [
+                    'id' => (int) $group->id,
+                    'name' => e($group->name)
+                ];
+            }
+            $array["groups"] = $groups;
+        }
+        else {
+            $array["groups"] = null;
+        }
 
         return $array;
     }
