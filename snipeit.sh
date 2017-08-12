@@ -292,7 +292,7 @@ case $distro in
 		service apache2 restart
 		;;
 	centos )
-	if [ "$version" == "6" ]; then
+	if [[ "$version" =~ ^6 ]]; then
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
