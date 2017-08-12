@@ -151,7 +151,7 @@ case $distro in
                 echo "  The installer has detected Debian version $version as the OS."
                 distro=debian
                 ;;
-        *centos*|*redhat*|*ol*)
+        *centos*|*redhat*|*ol*|*rhel*)
                 echo "  The installer has detected $distro version $version as the OS."
                 distro=centos
                 ;;
@@ -409,7 +409,7 @@ case $distro in
 
 	       service httpd restart
 
-	elif [ "$version" == "7" ]; then
+	elif [[ "$version" =~ ^7 ]]; then
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		webdir=/var/www/html
