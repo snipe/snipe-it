@@ -13,6 +13,7 @@ php7.0-gd \
 php7.0-xml \
 php7.0-mbstring \
 php7.0-zip \
+php7.0-bcmath \
 patch \
 curl \
 vim \
@@ -23,6 +24,7 @@ mysql-client \
 
 RUN phpenmod mcrypt
 RUN phpenmod gd
+RUN phpenmod bcmath
 
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/apache2/php.ini
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/cli/php.ini
