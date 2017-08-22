@@ -215,6 +215,10 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
     # Profile
     Route::get('profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ]);
     Route::post('profile', 'ProfileController@postIndex');
+
+    Route::get('password', [ 'as' => 'account.password.index', 'uses' => 'ProfileController@password' ]);
+    Route::post('password', [ 'uses' => 'ProfileController@passwordSave' ]);
+
     Route::get('api', [ 'as' => 'user.api', 'uses' => 'ProfileController@api' ]);
 
     # View Assets

@@ -301,6 +301,14 @@
                              <i class="fa fa-user fa-fw"></i> @lang('general.editprofile')
                          </a>
                      </li>
+                     <li>
+                         <a href="{{ route('account.password.index') }}">
+                             <i class="fa fa-asterisk"></i> @lang('general.changepassword')
+                         </a>
+                     </li>
+
+
+
                      @can('self.api')
                      <li>
                          <a href="{{ route('user.api') }}">
