@@ -30,6 +30,7 @@ class SuppliersTransformer
                 'city' => ($supplier->city) ? e($supplier->city) : null,
                 'state' => ($supplier->state) ? e($supplier->state) : null,
                 'country' => ($supplier->country) ? e($supplier->country) : null,
+                'zip' => ($supplier->zip) ? e($supplier->zip) : null,
                 'fax' => ($supplier->fax) ? e($supplier->fax) : null,
                 'phone' => ($supplier->phone) ? e($supplier->phone) : null,
                 'email' => ($supplier->email) ? e($supplier->email) : null,
@@ -37,6 +38,7 @@ class SuppliersTransformer
                 'assets_count' => (int) $supplier->assets_count,
                 'licenses_count' => (int) $supplier->licenses_count,
                 'image' =>   ($supplier->image) ? e($supplier->image) : null,
+                'notes' => ($supplier->notes) ? e($supplier->notes) : null,
                 'created_at' => Helper::getFormattedDateObject($supplier->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($supplier->updated_at, 'datetime'),
 
