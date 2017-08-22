@@ -99,16 +99,14 @@ class DepartmentsController extends Controller
      */
     public function destroy($id)
     {
-        if (is_null($department = Department::find($id))) {
-            return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.not_found'));
-        }
+        $department = Department::findOrFail($id);
 
         if ($department->users->count() > 0) {
-            return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.assoc_users'));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/departments/message.assoc_users')));
         }
 
         $department->delete();
-        return redirect()->to(route('departments.index'))->with('success', trans('admin/departments/message.delete.success'));
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/departments/message.delete.success')));
 
     }
 
