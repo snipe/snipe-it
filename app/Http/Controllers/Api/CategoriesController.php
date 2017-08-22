@@ -22,7 +22,7 @@ class CategoriesController extends Controller
         $this->authorize('view', Category::class);
         $allowed_columns = ['id', 'name','category_type','use_default_eula','require_acceptance','checkin_email'];
 
-        $categories = Category::select(['id', 'name','category_type','use_default_eula','require_acceptance','checkin_email'])
+        $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','require_acceptance','checkin_email'])
             ->withCount('assets', 'accessories', 'consumables', 'components');
 
         if ($request->has('search')) {
@@ -75,7 +75,8 @@ class CategoriesController extends Controller
     {
         $this->authorize('view', Category::class);
         $category = Category::findOrFail($id);
-        return $category;
+        return (new CategoriesTransformer)->transformCategory($category);
+
     }
 
 

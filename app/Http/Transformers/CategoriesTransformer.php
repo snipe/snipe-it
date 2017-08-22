@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
+use App\Helpers\Helper;
 
 class CategoriesTransformer
 {
@@ -26,11 +27,14 @@ class CategoriesTransformer
                 'name' => e($category->name),
                 'type' => e($category->category_type),
                 'use_default_eula' => ($category->use_default_eula =='1') ? true : false,
+                'checkin_email' => ($category->checkin_email =='1') ? true : false,
                 'require_acceptance' => ($category->require_acceptance =='1') ? true : false,
                 'assets_count' => $category->assets_count,
                 'accessories_count' => $category->accessories_count,
                 'consumables_count' => $category->consumables_count,
                 'components_count' => $category->components_count,
+                'created_at' => Helper::getFormattedDateObject($category->created_at, 'datetime'),
+                'updated_at' => Helper::getFormattedDateObject($category->updated_at, 'datetime'),
             ];
 
             $permissions_array['available_actions'] = [
