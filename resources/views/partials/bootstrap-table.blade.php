@@ -82,7 +82,7 @@ $('.snipe-table').bootstrapTable({
         formatLoadingMessage: function () {
             return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
         },
-        pageList: ['50','100','150','200','500','1000'],
+        pageList: ['30','50','100','150','200','500','1000'],
         icons: {
             advancedSearchIcon: 'fa fa-search-plus',
             paginationSwitchDown: 'fa-caret-square-o-down',
