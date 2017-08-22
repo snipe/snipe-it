@@ -89,11 +89,15 @@
 <script>
 
     function groupsFormatter(value) {
-        var groups = '';
-        for (var index = 0; index < value.length; index++) {
-            groups += '<a href="#" class="label label-default"> ' + value[index].name + '</a> ';
+
+        if (value) {
+            var groups = '';
+            for (var index in value.rows) {
+                groups += '<a href="#" class="label label-default"> ' + value.rows[index].name + '</a> ';
+            }
+            return groups;
         }
-        return groups;
+
     }
 
 
