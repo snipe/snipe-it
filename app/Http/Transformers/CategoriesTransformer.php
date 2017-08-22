@@ -23,7 +23,7 @@ class CategoriesTransformer
         if ($category) {
 
             $array = [
-                'id' => e($category->id),
+                'id' => (int) $category->id,
                 'name' => e($category->name),
                 'type' => e($category->category_type),
                 'use_default_eula' => ($category->use_default_eula =='1') ? true : false,

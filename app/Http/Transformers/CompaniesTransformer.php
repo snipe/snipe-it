@@ -23,7 +23,7 @@ class CompaniesTransformer
         if ($company) {
 
             $array = [
-                'id' => e($company->id),
+                'id' => (int) $company->id,
                 'name' => e($company->name),
                 "created_at" => Helper::getFormattedDateObject($company->created_at, 'datetime'),
                 "updated_at" => Helper::getFormattedDateObject($company->updated_at, 'datetime'),
