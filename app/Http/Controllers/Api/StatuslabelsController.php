@@ -53,8 +53,19 @@ class StatuslabelsController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', Statuslabel::class);
+        $request->except('deployable', 'pending','archived');
+
+        if (!$request->has('type')) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
+        }
+
         $statuslabel = new Statuslabel;
         $statuslabel->fill($request->all());
+
+        $statusType = Statuslabel::getStatuslabelTypesForDB($request->input('type'));
+        $statuslabel->deployable        =  $statusType['deployable'];
+        $statuslabel->pending           =  $statusType['pending'];
+        $statuslabel->archived          =  $statusType['archived'];
 
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
@@ -75,7 +86,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
-        return $statuslabel;
+        return (new StatuslabelsTransformer)->transformStatuslabel($statuslabel);
     }
 
 
@@ -92,7 +103,19 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('edit', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
+        
+        $request->except('deployable', 'pending','archived');
+
+        if (!$request->has('type')) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
+        }
+
         $statuslabel->fill($request->all());
+
+        $statusType = Statuslabel::getStatuslabelTypesForDB($request->input('type'));
+        $statuslabel->deployable        =  $statusType['deployable'];
+        $statuslabel->pending           =  $statusType['pending'];
+        $statuslabel->archived          =  $statusType['archived'];
 
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.update.success')));
