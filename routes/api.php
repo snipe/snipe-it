@@ -230,6 +230,22 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     });
 
+    /*--- Asset Maintenances API ---*/
+    Route::resource('maintenances', 'AssetMaintenancesController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.maintenances.index',
+                    'show' => 'api.maintenances.show',
+                    'store' => 'api.maintenances.store',
+                    'update' => 'api.maintenances.update',
+                    'destroy' => 'api.maintenances.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['maintenance' => 'maintenance_id']
+        ]
+    ); // Consumables resource
+
 
     Route::resource('hardware', 'AssetsController',
         [
