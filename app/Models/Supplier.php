@@ -45,7 +45,7 @@ class Supplier extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','address','address2','city','state','country','zip','phone','fax','email','contact','url','notes'];
 
 
     // Eager load counts.
