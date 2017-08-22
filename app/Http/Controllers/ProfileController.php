@@ -107,45 +107,41 @@ class ProfileController extends Controller
      */
     public function passwordSave(Request $request)
     {
+
         if (config('app.lock_passwords')) {
             return redirect()->route('account.password.index')->with('error', Lang::get('admin/users/table.lock_passwords'));
-        } else {
+        }
 
-            // Grab the user
-            $user = Auth::user();
+        $user = Auth::user();
+        if ($user->ldap_import=='1') {
+            return redirect()->route('account.password.index')->with('error', Lang::get('admin/users/message.error.password_ldap'));
+        }
 
-            if ($user->ldap_import=='1') {
-                return redirect()->route('account.password.index')->with('error', Lang::get('admin/users/message.error.password_ldap'));
+        $rules = array(
+            'current_password'     => 'required',
+            'password'         => 'required|min:6',
+            'password_confirm' => 'required|same:password',
+        );
+
+        $validator = \Validator::make($request->all(), $rules);
+        $validator->after(function($validator) use ($request, $user) {
+
+            if (!Hash::check($request->input('current_password'), $user->password)) {
+                $validator->errors()->add('current_password', trans('validation.hashed_pass'));
             }
+            
+        });
 
-
-            $rules = array(
-                'current_password'     => 'required',
-                'password'         => 'required|min:6',
-                'password_confirm' => 'required|same:password',
-            );
-
-            $validator = \Validator::make($request->all(), $rules);
-
-            $validator->after(function($validator) use ($request, $user) {
-
-                if (!Hash::check($request->input('current_password'), $user->password)) {
-                    $validator->errors()->add('current_password', trans('validation.hashed_pass'));
-                }
-            });
-
-            if (!$validator->fails()) {
-                $user->password = Hash::make($request->input('password'));
-                $user->save();
-                return redirect()->route('account.password.index')->with('success', 'Password updated!');
-
-            }
-            return redirect()->back()->withInput()->withErrors($validator);
-
+        if (!$validator->fails()) {
+            $user->password = Hash::make($request->input('password'));
+            $user->save();
+            return redirect()->route('account.password.index')->with('success', 'Password updated!');
 
         }
+        return redirect()->back()->withInput()->withErrors($validator);
 
 
     }
+
 
 }
