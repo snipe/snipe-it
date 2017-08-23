@@ -28,8 +28,7 @@ class LicenseObserver
 
 
     /**
-     * Listen to the License created event, and increment
-     * the next_auto_tag_base value in the settings table when i
+     * Listen to the License created event when
      * a new license is created.
      *
      * @param  License  $license
@@ -37,8 +36,6 @@ class LicenseObserver
      */
     public function created(License $license)
     {
-        $settings = Setting::first();
-        $settings->increment('next_auto_tag_base');
 
         $logAction = new Actionlog();
         $logAction->item_type = License::class;

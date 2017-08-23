@@ -28,8 +28,7 @@ class AccessoryObserver
 
 
     /**
-     * Listen to the Accessory created event, and increment
-     * the next_auto_tag_base value in the settings table when i
+     * Listen to the Accessory created event when
      * a new accessory is created.
      *
      * @param  Accessory  $accessory
@@ -37,9 +36,6 @@ class AccessoryObserver
      */
     public function created(Accessory $accessory)
     {
-        $settings = Setting::first();
-        $settings->increment('next_auto_tag_base');
-
         $logAction = new Actionlog();
         $logAction->item_type = Accessory::class;
         $logAction->item_id = $accessory->id;

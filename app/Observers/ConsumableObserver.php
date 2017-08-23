@@ -28,8 +28,7 @@ class ConsumableObserver
 
 
     /**
-     * Listen to the Consumable created event, and increment
-     * the next_auto_tag_base value in the settings table when i
+     * Listen to the Consumable created event when
      * a new consumable is created.
      *
      * @param  Consumable  $consumable
@@ -37,8 +36,6 @@ class ConsumableObserver
      */
     public function created(Consumable $consumable)
     {
-        $settings = Setting::first();
-        $settings->increment('next_auto_tag_base');
 
         $logAction = new Actionlog();
         $logAction->item_type = Consumable::class;

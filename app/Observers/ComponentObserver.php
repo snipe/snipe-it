@@ -28,8 +28,7 @@ class ComponentObserver
 
 
     /**
-     * Listen to the Component created event, and increment
-     * the next_auto_tag_base value in the settings table when i
+     * Listen to the Component created event when
      * a new component is created.
      *
      * @param  Component  $component
@@ -37,9 +36,6 @@ class ComponentObserver
      */
     public function created(Component $component)
     {
-        $settings = Setting::first();
-        $settings->increment('next_auto_tag_base');
-
         $logAction = new Actionlog();
         $logAction->item_type = Component::class;
         $logAction->item_id = $component->id;
