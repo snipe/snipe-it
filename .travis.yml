@@ -18,7 +18,7 @@ php:
 before_script:
   - phantomjs --webdriver=4444  &
   - sleep 4
-  - mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis
+  - mysql -e 'CREATE DATABASE snipeit_unit;'
   - composer self-update
   - composer install -n --prefer-source
   - chmod -R 777 storage
