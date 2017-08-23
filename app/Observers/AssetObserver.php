@@ -43,8 +43,9 @@ class AssetObserver
      */
     public function created(Asset $asset)
     {
-        $settings = Setting::first();
-        $settings->increment('next_auto_tag_base');
+        if ($settings = Setting::first()) {
+            $settings->increment('next_auto_tag_base');
+        }
 
         $logAction = new Actionlog();
         $logAction->item_type = Asset::class;
