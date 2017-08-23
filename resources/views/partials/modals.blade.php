@@ -31,9 +31,9 @@
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-statuslabel_types">{{ trans('admin/statuslabels/table.status_type') }}:
+                    <div class="col-md-4 col-xs-12"><label for="modal-type">{{ trans('admin/statuslabels/table.status_type') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-statuslabel_types', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:90%','id' =>'modal-statuslabel_types')) }}</div>
+                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-type', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:90%','id' =>'modal-type')) }}</div>
                 </div>
 
                 <div class="dynamic-form-row">

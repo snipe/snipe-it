@@ -1,4 +1,4 @@
-@if($model->fieldset)
+@if (($model) && ($model->fieldset))
   @foreach($model->fieldset->fields AS $field)
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>

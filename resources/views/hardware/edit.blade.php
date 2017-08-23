@@ -31,9 +31,9 @@
     <label for="parent" class="col-md-3 control-label">{{ trans('admin/hardware/form.model') }}</label>
     <div class="col-md-7 col-sm-10{{  (\App\Helpers\Helper::checkIfRequired($item, 'model_id')) ? ' required' : '' }}">
       @if (isset($selected_model))
-      {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'width:100%','id' =>'model_select_id')) }}
+      {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'width:100%','id' => 'model_select_id', 'id' =>'model_select_id')) }}
       @else
-      {{ Form::select('model_id', $model_list , Input::old('model_id', $item->model_id), array('class'=>'select2 model', 'style'=>'width:100%','id' =>'model_select_id')) }}
+      {{ Form::select('model_id', $model_list , Input::old('model_id', $item->model_id), array('class'=>'select2 model', 'id' => 'model_select_id', 'style'=>'width:100%','id' =>'model_select_id')) }}
       @endif
       <!-- onclick="return dependency('model')" -->
       {!! $errors->first('model_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -86,9 +86,7 @@
       {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $item->assigned_type == 'App\Models\Asset' ? $item->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
       {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
-    <div class="col-md-1 col-sm-1 text-left">
-      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_asset' class="btn btn-sm btn-default">New</a>
-    </div>
+
   </div>
 
   <!-- Locations -->
@@ -100,7 +98,7 @@
       {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
     <div class="col-md-1 col-sm-1 text-left">
-      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
+      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="location" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
     </div>
   </div>
   @endif
@@ -271,7 +269,7 @@
                     break;
 
                 case 'statuslabel':
-                    show_er("#modal-statuslabel_types");
+                    show_er("#modal-type");
                     break;
 
                 case 'supplier':
@@ -436,10 +434,16 @@
                     success: function (result) {
 
                         var id = result.id;
-                        var name = result.name || (result.first_name + " " + result.last_name);
+                        var name = result.payload.name || (result.payload.first_name + " " + result.payload.last_name);
+                        console.log(name);
                         $('.modal-body input:visible').val("");
                         $('#createModal').modal('hide');
+
+                        // "select" is the original drop-down menu that someone
+                        // clicked 'add' on to add a new 'thing'
+                        // this code adds the newly created object to that select
                         var selector = document.getElementById(select);
+                        //console.log(document.getElementById(select));
                         selector.options[selector.length] = new Option(name, id);
                         selector.selectedIndex = selector.length - 1;
                         $(selector).trigger("change");
@@ -447,7 +451,8 @@
 
                     },
                     error: function (result) {
-                        msg = result.responseJSON.error.message || result.responseJSON.error;
+                       // console.log('Error: ' + result.responseJSON.error.message );
+                        msg = result.responseJSON.messages || result.responseJSON.error;
                         window.alert("Unable to add new " + model + " - error: " + msg);
                     }
 
