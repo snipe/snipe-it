@@ -110,6 +110,8 @@ class AssetsTransformer
                 //array += $fields_array;
                 $array['custom_fields'] = $fields_array;
             }
+        } else {
+            $array['custom_fields'] = array();
         }
 
         $permissions_array['available_actions'] = [

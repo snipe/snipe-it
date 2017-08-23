@@ -256,7 +256,7 @@ $('.snipe-table').bootstrapTable({
             // Pull out any HTMl that might be passed via the presenter
             // (for example, the locked icon for encrypted fields)
             var field_column_plain = field_column.replace(/<(?:.|\n)*?> ?/gm, '');
-            if (row.custom_fields[field_column_plain]) {
+            if ((row.custom_fields) && (row.custom_fields[field_column_plain])) {
                 return row.custom_fields[field_column_plain].value;
             }
 
