@@ -24,8 +24,10 @@
     "neitanod/forceutf8": "^2.0",
     "patchwork/utf8": "~1.2",
     "pragmarx/google2fa": "^1.0",
+    "schuppo/password-strength": "~1.5",
     "spatie/laravel-backup": "^3.0.0",
     "tecnickcom/tc-lib-barcode": "^1.15",
+    "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^3.0"
   },
     "require-dev": {

@@ -220,6 +220,8 @@ return [
         PragmaRX\Google2FA\Vendor\Laravel\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
+        Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
+        Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
 
 
         /*

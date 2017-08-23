@@ -414,7 +414,7 @@ class AssetModelsController extends Controller
         $manufacturer_list = $nochange + Helper::manufacturerList();
 
         
-            return view('models/bulk-edit', compact('models'))
+             return view('models/bulk-edit', compact('models'))
                 ->with('manufacturer_list', $manufacturer_list)
                 ->with('category_list', $category_list)
                 ->with('fieldset_list', $fieldset_list)

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd84e08e5e7eca2c1e032c6357ca2500",
+    "content-hash": "da7d8408e0c3434a6131340252d2d228",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2889,6 +2889,56 @@
             "time": "2017-08-04T13:39:04+00:00"
         },
         {
+            "name": "schuppo/password-strength",
+            "version": "v1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schuppo/PasswordStrengthPackage.git",
+                "reference": "184d65517eb438651b491b116df8895238005b79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schuppo/PasswordStrengthPackage/zipball/184d65517eb438651b491b116df8895238005b79",
+                "reference": "184d65517eb438651b491b116df8895238005b79",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "illuminate/translation": "^5.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/validation": "~5.0",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Schuppo\\PasswordStrength": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Schupp",
+                    "email": "oliver.schupp@yahoo.de"
+                }
+            ],
+            "description": "This package provides a validator for ensuring strong passwords in Laravel 4 applications.",
+            "keywords": [
+                "laravel",
+                "laravel 5",
+                "laravel5",
+                "password",
+                "password strength",
+                "validation"
+            ],
+            "time": "2016-10-05T09:57:59+00:00"
+        },
+        {
             "name": "spatie/db-dumper",
             "version": "1.5.1",
             "source": {
@@ -4170,6 +4220,61 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2016-09-20T12:50:39+00:00"
+        },
+        {
+            "name": "unicodeveloper/laravel-password",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unicodeveloper/laravel-password.git",
+                "reference": "5c3bdc977c4b8065350caf2e57371b069ef6f5b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unicodeveloper/laravel-password/zipball/5c3bdc977c4b8065350caf2e57371b069ef6f5b4",
+                "reference": "5c3bdc977c4b8065350caf2e57371b069ef6f5b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.6|~7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0||~5.0",
+                "scrutinizer/ocular": "~1.1",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Unicodeveloper\\DumbPassword\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": ":Prosper Otemuyiwa",
+                    "email": "prosperotemuyiwa@gmail.com",
+                    "homepage": "http://goodheads.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Protect your users from entering dumb and common passwords",
+            "homepage": "https://github.com/unicodeveloper/laravel-password",
+            "keywords": [
+                "dumb",
+                "passwords",
+                "security",
+                "unicodeveloper"
+            ],
+            "time": "2017-04-27T07:35:00+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

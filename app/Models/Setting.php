@@ -44,6 +44,7 @@ class Setting extends Model
           "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1|nullable',
           "ldap_version"     => 'sometimes|required_if:ldap_enabled,1|nullable',
           "thumbnail_max_h"     => 'numeric|max:500|min:25',
+          "pwd_secure_min" => "numeric|required|min:5",
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];
@@ -158,4 +159,34 @@ class Setting extends Model
         //  In the future this may want to be adapted for individual notifications.
         return $this->slack_endpoint;
     }
+
+    public function passwordComplexityStringToArray()
+    {
+        
+        $this->pwd_secure_complexity = 'numbers|letters|case_diff';
+        $complexity_array_split = array();
+        $complexity_array = array();
+
+        if (($this->pwd_secure_complexity) && ($this->pwd_secure_complexity!='')) {
+            $complexity_array_split = explode('|',$this->pwd_secure_complexity);
+        }
+
+        for ($x = 0; $x < count($complexity_array_split); $x++) {
+            $complexity_array[$complexity_array_split[$x]] = 1;
+        }
+
+        return $complexity_array;
+
+    }
+
+    public static function passwordComplexityToFormattedString($array) {
+       // $array = array();
+        $string = '';
+        for ($x = 0; $x <= count($array); $x++) {
+            $string .= '|'.$array[$x];
+        }
+        
+        return $string;
+    }
+
 }

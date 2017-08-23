@@ -8,6 +8,7 @@ use App\Http\Transformers\UsersTransformer;
 use App\Models\Company;
 use App\Models\User;
 use App\Helpers\Helper;
+use App\Http\Requests\SaveUserRequest;
 
 class UsersController extends Controller
 {
@@ -102,7 +103,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveUserRequest $request)
     {
         $this->authorize('view', User::class);
         $user = new User;
@@ -139,7 +140,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SaveUserRequest $request, $id)
     {
         $this->authorize('edit', User::class);
         $user = User::findOrFail($id);

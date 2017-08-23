@@ -12,9 +12,7 @@ use App\Models\Company;
 use App\Models\Location;
 use App\Models\License;
 use App\Models\Setting;
-use App\Models\Statuslabel;
 use App\Http\Requests\SaveUserRequest;
-use App\Http\Requests\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\User;
 use App\Models\Ldap;
@@ -23,7 +21,6 @@ use Config;
 use Crypt;
 use DB;
 use HTML;
-use Illuminate\Support\Facades\Log;
 use Input;
 use Lang;
 use League\Csv\Reader;
@@ -169,7 +166,7 @@ class UsersController extends Controller
     * @since [v1.8]
     * @return string JSON
     */
-    public function apiStore(Request $request)
+    public function apiStore(SaveUserRequest $request)
     {
         $this->authorize('create', User::class);
 
@@ -270,7 +267,7 @@ class UsersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateUserRequest $request, $id = null)
+    public function update(SaveUserRequest $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
@@ -309,14 +306,11 @@ class UsersController extends Controller
             }
         }
 
-        // Do we want to update the user password?
-        if ($request->has('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
+
         if ($request->has('username')) {
-            $user->username = e($request->input('username'));
+            $user->username = $request->input('username');
         }
-        $user->email = e($request->input('email'));
+        $user->email = $request->input('email');
 
 
        // Update the user
@@ -333,6 +327,12 @@ class UsersController extends Controller
         $user->manager_id = $request->input('manager_id', null);
         $user->notes = $request->input('notes');
         $user->department_id = $request->input('department_id', null);
+
+
+        // Do we want to update the user password?
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');

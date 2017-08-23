@@ -462,6 +462,15 @@ class SettingsController extends Controller
 
         }
 
+        $setting->pwd_secure_uncommon = (int) $request->input('pwd_secure_uncommon');
+        $setting->pwd_secure_min = (int) $request->input('pwd_secure_min');
+        $setting->pwd_secure_complexity = '';
+
+        if ($request->has('pwd_secure_complexity')) {
+            $setting->pwd_secure_complexity =  implode('|', $request->input('pwd_secure_complexity'));
+        }
+
+
 
         if ($setting->save()) {
             return redirect()->route('settings.index')

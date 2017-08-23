@@ -14,11 +14,6 @@
 {{-- Page content --}}
 @section('content')
 
-    <style>
-        .checkbox label {
-            padding-right: 40px;
-        }
-    </style>
 
 
     {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
@@ -57,6 +52,68 @@
                                 {!! $errors->first('two_factor_enabled', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
+
+                        <!-- Min characters -->
+                        <div class="form-group {{ $errors->has('pwd_secure_min') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('pwd_secure_min', trans('admin/settings/general.pwd_secure_min')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('pwd_secure_min', Input::old('pwd_secure_min', $setting->pwd_secure_min), array('class' => 'form-control',  'style'=>'width: 50px;')) }}
+
+                                {!! $errors->first('pwd_secure_min', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.pwd_secure_min_help') }}
+                                </p>
+
+
+                            </div>
+                        </div>
+
+
+                        <!-- Common Passwords -->
+                        <div class="form-group {{ $errors->has('pwd_secure_uncommon') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('pwd_secure_text',
+                                              trans('admin/settings/general.pwd_secure_uncommon')) }}
+
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('pwd_secure_uncommon', '1', Input::old('pwd_secure_uncommon', $setting->pwd_secure_uncommon),array('class' => 'minimal')) }}
+                                {{ Form::label('pwd_secure_uncommon',  trans('general.yes')) }}
+                                {!! $errors->first('pwd_secure_uncommon', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.pwd_secure_uncommon_help') }}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
+                        <!-- Common Passwords -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('pwd_secure_complexity', trans('admin/settings/general.pwd_secure_complexity')) }}
+                            </div>
+                            <div class="col-md-9">
+
+                                {{ Form::checkbox("pwd_secure_complexity['letters']", 'letters', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'letters')!==false), array('class' => 'minimal')) }}
+                                Require at least one letter <br>
+
+                                {{ Form::checkbox("pwd_secure_complexity['numbers']", 'numbers', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'numbers')!==false), array('class' => 'minimal')) }}
+                                Require at least one number<br>
+
+                                {{ Form::checkbox("pwd_secure_complexity['symbols']", 'symbols', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'symbols')!==false), array('class' => 'minimal')) }}
+                                Require at least one symbol<br>
+
+                                {{ Form::checkbox("pwd_secure_complexity['case_diff']", 'case_diff', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'case_diff')!==false), array('class' => 'minimal')) }}
+                                Require at least one uppercase and one lowercase
+
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.pwd_secure_complexity_help') }}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
 
 
                     </div>
