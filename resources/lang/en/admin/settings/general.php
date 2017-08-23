@@ -78,7 +78,7 @@ return array(
     'pwd_secure_min'            => 'Password minimum characters',
     'pwd_secure_min_help'       => 'Minimum permitted value is 5',
     'pwd_secure_uncommon'       => 'Prevent common passwords',
-    'pwd_secure_uncommon_help'  => 'This will disallow users from using common passwords from the top 10,000 passwoerds reported in breaches.',
+    'pwd_secure_uncommon_help'  => 'This will disallow users from using common passwords from the top 10,000 passwords reported in breaches.',
     'qr_help'                   => 'Enable QR Codes first to set this',
     'qr_text'                   => 'QR Code Text',
     'setting'                   => 'Setting',
