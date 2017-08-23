@@ -119,7 +119,7 @@ class ProfileController extends Controller
 
         $rules = array(
             'current_password'     => 'required',
-            'password'         => 'required|min:6',
+            'password'         => Setting::passwordComplexityRulesSaving('store'),
             'password_confirm' => 'required|same:password',
         );
 
