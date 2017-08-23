@@ -322,10 +322,9 @@ $('.snipe-table').bootstrapTable({
     }
 
     function employeeNumFormatter(value, row) {
-        if ((value) && (value.employee_number)) {
-            return '<a href="{{ url('/') }}/users/' + row.id + '"> ' + value.employee_number + '</a>';
-        } else {
-            return value;
+
+        if ((row.assigned_to) && ((row.assigned_to.employee_number))) {
+            return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '"> ' + row.assigned_to.employee_number + '</a>';
         }
     }
 
