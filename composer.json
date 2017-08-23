@@ -29,8 +29,8 @@
     "tecnickcom/tc-lib-barcode": "^1.15",
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^3.0",
-    "phpunit/php-token-stream": "1.4.11",
-    "doctrine/instantiator": "1.0.5"
+    "doctrine/instantiator": "1.0.5",
+    "doctrine/inflector": "1.0.*"
   },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -38,7 +38,8 @@
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "codeception/codeception": "2.2.9",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/php-token-stream": "1.4.11"
 
     },
     "autoload": {
