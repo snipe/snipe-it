@@ -47,6 +47,7 @@ class RecryptFromMcrypt extends Command
         // Check and see if they have a legacy app key listed in their .env
         // If not, we can try to use the current APP_KEY if looks like it's old
         $legacy_key = env('LEGACY_APP_KEY');
+        $errors = array();
 
         if (!$legacy_key) {
             $this->error('ERROR: You do not have a LEGACY_APP_KEY set in your .env file. Please locate your old APP_KEY and ADD a line to your .env file like: LEGACY_APP_KEY=YOUR_OLD_APP_KEY');
