@@ -160,33 +160,29 @@ class Setting extends Model
         return $this->slack_endpoint;
     }
 
-    public function passwordComplexityStringToArray()
+    public static function passwordComplexityRulesSaving($action = 'update')
     {
-        
-        $this->pwd_secure_complexity = 'numbers|letters|case_diff';
-        $complexity_array_split = array();
-        $complexity_array = array();
+        $security_rules = '';
+        $settings = Setting::getSettings();
 
-        if (($this->pwd_secure_complexity) && ($this->pwd_secure_complexity!='')) {
-            $complexity_array_split = explode('|',$this->pwd_secure_complexity);
+        // Check if they have uncommon password enforcement selected in settings
+        if ($settings->pwd_secure_uncommon == 1) {
+            $security_rules .= '|dumbpwd';
         }
 
-        for ($x = 0; $x < count($complexity_array_split); $x++) {
-            $complexity_array[$complexity_array_split[$x]] = 1;
+        // Check for any secure password complexity rules that may have been selected
+        if ($settings->pwd_secure_complexity!='') {
+            $security_rules  .= '|'.$settings->pwd_secure_complexity;
         }
 
-        return $complexity_array;
+        if ($action == 'update') {
+            return 'nullable|min:'.$settings->pwd_secure_min.$security_rules;
+        }
+
+        return 'required|min:'.$settings->pwd_secure_min.$security_rules;
 
     }
 
-    public static function passwordComplexityToFormattedString($array) {
-       // $array = array();
-        $string = '';
-        for ($x = 0; $x <= count($array); $x++) {
-            $string .= '|'.$array[$x];
-        }
-        
-        return $string;
-    }
+
 
 }

@@ -67,11 +67,15 @@ class AppServiceProvider extends ServiceProvider
         // This works around the use case where multiple deleted items have the same unique attribute.
         // (I think this is a bug in Laravel's validator?)
         Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
-            $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
-            return $count < 1;
+
+            if (count($parameters)) {
+                $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
+                return $count < 1;
+            }
+
         });
 
-        // Share common variables with all views.
+        // Share common setting variables with all views.
         view()->composer('*', function ($view) {
             $view->with('snipeSettings', \App\Models\Setting::getSettings());
         });
