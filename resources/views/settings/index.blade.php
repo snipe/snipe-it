@@ -31,7 +31,7 @@
           <a href="{{ route('settings.general.index') }}" class="btn btn-lg btn-white"><i class="fa fa-wrench fa-3x"></i></a>
           <br>
           General Settings
-          <p class="help-block">Language and stuff</p>
+          <p class="help-block">Default EULA and more</p>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
           <a href="{{ route('settings.security.index') }}" class="btn btn-lg btn-white"><i class="fa fa-lock fa-3x"></i></a>
           <br>
           Security
-          <p class="help-block">Two-factor</p>
+          <p class="help-block">Two-factor, Password Restrictions</p>
         </div>
       </div>
     </div>
@@ -112,7 +112,7 @@
           <a href="{{ route('settings.barcodes.index') }}" class="btn btn-lg btn-white"><i class="fa fa-barcode fa-3x"></i></a>
           <br>
           Barcodes
-          <p class="help-block">Barcode &amp;amp; QR settings</p>
+          <p class="help-block">Barcode &amp; QR settings</p>
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@
           <a href="{{ route('settings.labels.index') }}" class="btn btn-lg btn-white"><i class="fa fa-tags fa-3x"></i></a>
           <br>
           Labels
-          <p class="help-block">Label sizes &amp;amp; settings</p>
+          <p class="help-block">Label sizes &amp; settings</p>
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@
           <a href="{{ route('settings.oauth.index') }}" class="btn btn-lg btn-white"><i class="fa fa-user-secret fa-3x"></i></a>
           <br>
           OAuth
-          <p class="help-block">Oauth endpoint Settings</p>
+          <p class="help-block">Oauth Endpoint Settings</p>
         </div>
       </div>
     </div>
