@@ -15,7 +15,7 @@
     "fideloper/proxy": "^3.1",
     "intervention/image": "^2.3",
     "javiereguiluz/easyslugger": "^1.0",
-    "laravel/framework": "5.4.27",
+    "laravel/framework": "5.4.20",
     "laravel/passport": "^1.0",
     "laravel/tinker": "^1.0",
     "laravelcollective/html": "^5.3",
@@ -28,7 +28,9 @@
     "spatie/laravel-backup": "^3.0.0",
     "tecnickcom/tc-lib-barcode": "^1.15",
     "unicodeveloper/laravel-password": "^1.0",
-    "watson/validating": "^3.0"
+    "watson/validating": "^3.0",
+    "phpunit/php-token-stream": "1.4.11",
+    "doctrine/instantiator": "1.0.5"
   },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
