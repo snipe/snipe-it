@@ -18,7 +18,8 @@ class AssetObserver
     public function updating(Asset $asset)
     {
 
-        if (($asset->getAttributes()['assigned_to'] == $asset->getOriginal()['assigned_to'])
+
+        if ((isset($asset->getOriginal()['assigned_to'])) && ($asset->getAttributes()['assigned_to'] == $asset->getOriginal()['assigned_to'])
             && ($asset->getAttributes()['last_checkout'] == $asset->getOriginal()['last_checkout'])
             && ($asset->getAttributes()['status_id'] == $asset->getOriginal()['status_id']))
         {
