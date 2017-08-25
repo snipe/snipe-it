@@ -113,7 +113,7 @@
                       <td>{{ $asset->serial  }}</td>
                     </tr>
                     @endif
-                    @if ($audit_log->created_at)
+                    @if ((isset($audit_log)) && ($audit_log->created_at))
                       <tr>
                         <td>{{ trans('general.last_audit') }}</td>
                         <td> {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})</td>
