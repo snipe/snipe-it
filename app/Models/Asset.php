@@ -1092,7 +1092,7 @@ class Asset extends Depreciable
         return $query->where(function ($query) use ($search) {
             $query->whereHas('defaultLoc', function ($query) use ($search) {
                 $query->where('locations.id', '=', $search);
-            })->whereNull('assigned_to');
+            });
         })->orWhere(function ($query) use ($search) {
             $query->whereHas('assigneduser', function ($query) use ($search) {
                 $query->whereHas('userloc', function ($query) use ($search) {
