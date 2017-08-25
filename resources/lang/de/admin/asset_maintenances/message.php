@@ -12,8 +12,8 @@
             'success' => 'Wartungsvertrag erfolgreich erstellt.'
         ],
         'edit'                       => [
-            'error'   => 'Wartungsvertrag konnte nicht bearbeitet werden, bitte versuchen Sie es noch einmal.',
-            'success' => 'Wartungsvertrag erfolgreich bearbeitet.'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => 'Wartungsvertrag noch nicht komplett ausgefüllt',
         'warranty'                     => 'Garantie',

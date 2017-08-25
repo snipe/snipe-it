@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Sijainti',
     'lock_passwords'		=> 'Kirjautumistietoja ei voida muokata tässä asennuksessa.',
     'manager' 				=> 'Esimies',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nimi',
     'notes'                 => 'Muistiinpanot',
     'password_confirm' 		=> 'Vahvista Salasana',

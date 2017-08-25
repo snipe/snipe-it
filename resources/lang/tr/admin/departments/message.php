@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Bölüm mevcut değil.',
+    'assoc_users'	 => 'Bu bölüm şu anda en az bir kullanıcı ile ilişkili ve silinemez. Bölümü silebilmek için ilişkili kullanıcıları güncelleyin. ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Bölüm oluşturulmadı, lütfen yeniden deneyin.',
+        'success' => 'Bölüm başarıyla oluşturuldu.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Bölüm güncelleştirilmedi, lütfen tekrar deneyin',
+        'success' => 'Bölüm başarıyla güncelleştirildi.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Bu bölümü silmek istediğinizden emin misiniz?',
+        'error'   => 'Bölüm silinirken bir sorun oluştu. Lütfen yeniden deneyin.',
+        'success' => 'Bölüm başarıyla silindi.'
     )
 
 );

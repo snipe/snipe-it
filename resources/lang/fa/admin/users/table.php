@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'مکان',
     'lock_passwords'		=> 'جزییات وارد شدن نمیتواند در این نصب تغییر کند.',
     'manager' 				=> 'مدیر',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'نام',
     'notes'                 => 'یادداشت ها',
     'password_confirm' 		=> 'تایید رمز عبور',

@@ -31,6 +31,7 @@ return array(
         'create' => 'اشکال در ایجاد کاربر.لطفا دوباره تلاش کنید.',
         'update' => 'اشکال در به روزرسانی کاربر.لطفا دوباره تلاش کنید.',
         'delete' => 'اشکال در حذف کاربر.لطفا دوباره تلاش کنید.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'اشکال در به رفع تعلیق کاربر.لطفا دوباره تلاش کنید.',
         'import'    => 'اشکال در به وارد کردن کاربران.لطفا دوباره تلاش کنید.',
         'asset_already_accepted' => 'دارایی پذیرفته شده است.',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'ارتباط با سرور LDAP برقرار نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'ldap_could_not_search' => 'جستجو در سرور LDPA انجام نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'ldap_could_not_get_entries' => 'مجوز از سرور LDPA گرفته نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

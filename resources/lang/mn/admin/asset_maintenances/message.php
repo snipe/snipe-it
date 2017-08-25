@@ -12,8 +12,8 @@
             'success' => 'Амжилттай үүсгэлээ.'
         ],
         'edit'                       => [
-            'error'   => 'Засвар өөрчлөлт хадгалагдсангүй, дахин оролдоно уу.',
-            'success' => 'Өөрчлөлт амжилттай.'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => 'Дуусаагүй',
         'warranty'                     => 'Баталгаа',

@@ -35,6 +35,8 @@ return array(
     "email"            => "Format pola :attribute jest niewłaściwy.",
     "exists"           => "Wybrane :attribute jest niewłaściwe.",
     "email_array"      => "Jeden lub więcej wprowadzonych adresów jest nieprawidłowy.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute musi być obrazkiem.",
     "in"               => "Wybrane :attribute jest niewłaściwe.",
     "integer"          => ":attribute must musi być liczbą całkowitą.",

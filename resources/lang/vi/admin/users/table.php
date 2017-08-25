@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Địa phương',
     'lock_passwords'		=> 'Chi tiết đăng nhập không thể thay đổi trong cài đặt này.',
     'manager' 				=> 'Người quản lý',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Tên',
     'notes'                 => 'Ghi chú',
     'password_confirm' 		=> 'Xác nhận mật khẩu',

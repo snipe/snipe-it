@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Vieta',
     'lock_passwords'		=> 'Prisijungimo duomenys negali būti keičiami šio diegimo metu.',
     'manager' 				=> 'Tiesioginis vadovas',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Pavadinimas',
     'notes'                 => 'Pastabos',
     'password_confirm' 		=> 'Patvirtinti slaptažodį',

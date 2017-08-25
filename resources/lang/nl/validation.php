@@ -35,6 +35,8 @@ return array(
     "email"            => "Het formaat van :attribute is ongeldig.",
     "exists"           => "Het geselecteerde kenmerk :attribute is ongeldig.",
     "email_array"      => "Een of meerdere e-mail adressen kloppen niet.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute moet een afbeelding zijn.",
     "in"               => "Het geselecteerde kenmerk :attribute is ongeldig.",
     "integer"          => ":attribute moet van het type integer zijn.",

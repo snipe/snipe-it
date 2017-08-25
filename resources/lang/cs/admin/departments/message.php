@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Oddělení neexistuje.',
+    'assoc_users'	 => 'Toto oddělení je momentálně přiřazeno alespoň jednomu uživateli a nelze jej smazat. Aktualizujte své uživatele tak, aby již neodkázali na toto oddělení a zkuste to znovu.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Oddělení nebylo vytvořeno, zkuste to prosím znovu.',
+        'success' => 'Oddělení bylo úspěšně vytvořeno.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Oddělení nebylo aktualizováno, zkuste to prosím znovu',
+        'success' => 'Oddělení se úspěšně aktualizovalo.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Opravdu chcete smazat toto oddělení?',
+        'error'   => 'Byl problém odstranit oddělení. Prosím zkuste to znovu.',
+        'success' => 'Oddělení bylo úspěšně smazáno.'
     )
 
 );

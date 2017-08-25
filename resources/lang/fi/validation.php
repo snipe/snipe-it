@@ -35,6 +35,8 @@ return array(
     "email"            => ":attribute muotoilu on virheellinen.",
     "exists"           => "Valittu :attribute on virheellinen.",
     "email_array"      => "One or more email addresses is invalid.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute tulee olla kuva.",
     "in"               => "Valittu :attribute on virheellinen.",
     "integer"          => ":attribute tulee olla kokonaisluku.",

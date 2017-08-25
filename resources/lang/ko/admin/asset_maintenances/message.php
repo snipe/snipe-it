@@ -12,8 +12,8 @@
             'success' => '자산 관리가 생성되었습니다.'
         ],
         'edit'                       => [
-            'error'   => '자산 관리가 수정되지 않았습니다. 다시 시도해 주세요.',
-            'success' => '자산 관리가 수정되었습니다.'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => '아직 완료되지 않았습니다.',
         'warranty'                     => '보증',

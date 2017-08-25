@@ -25,7 +25,7 @@ return array(
         "file"    => "A :attribute :min - :max kilobájt között kell lenni.",
         "string"  => "A :attribute :min - :max karakter között kell lenni.",
     ),
-    "boolean"          => "The :attribute must be true or false.",
+    "boolean"          => "Az attribútumnak igaznak, vagy hamisnak kell lennie (true/false).",
     "confirmed"        => "A :attribute ellenörzés nem egyezik.",
     "date"             => "A :attribute nem egy valós dátum.",
     "date_format"      => "A :attribute nem egyezik a formátummal :format.",
@@ -35,6 +35,8 @@ return array(
     "email"            => "Az :attribute formátuma érvénytelen.",
     "exists"           => "A kiválasztott :attribute étvénytelen.",
     "email_array"      => "Egy vagy több email cím érvénytelen.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => "A :attribute képnek kell lenni.",
     "in"               => "A kiválasztott :attribute étvénytelen.",
     "integer"          => "A :attribute számnak kell lennie.",
@@ -65,8 +67,8 @@ return array(
     ),
     "unique"           => "A :attribute már foglalt.",
     "url"              => "Az :attribute formátuma érvénytelen.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Érvényes állapot jelzőt kell választani",
+    "unique_undeleted" => "Az attribútumnak egyedinek kell lennie.",
 
 
     /*

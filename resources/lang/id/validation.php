@@ -35,6 +35,8 @@ return array(
     "email"            => "Format :attribute tidak benar.",
     "exists"           => ":attribute yang di pilih tidak benar.",
     "email_array"      => "Satu atau lebih alamat email tidak benar.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute harus dalam bentuk gambar.",
     "in"               => ":attribute yang di pilih tidak benar.",
     "integer"          => ":attribute harus dalam bentuk integer.",

@@ -15,7 +15,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this department?',
         'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'success' => 'El departamento ha sido borrado exitosamente'
     )
 
 );

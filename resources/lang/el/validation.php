@@ -35,6 +35,8 @@ return array(
     "email"            => "The :attribute format is invalid.",
     "exists"           => "Το επιλεγμένο: χαρακτηριστικό δεν είναι έγκυρο.",
     "email_array"      => "One or more email addresses is invalid.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => "Το: χαρακτηριστικό πρέπει να είναι μια εικόνα.",
     "in"               => "The selected :attribute is invalid.",
     "integer"          => "The :attribute must be an integer.",

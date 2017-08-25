@@ -29,8 +29,8 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Nenhum campo foi alterado, então nada foi atualizado.',
+        'success' 		=> 'Modelos atualizados.'
     ),
 
 );

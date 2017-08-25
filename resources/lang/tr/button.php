@@ -11,5 +11,5 @@ return array(
     'request'                   => 'İstek',
     'submit'  	                => 'Gönder',
     'upload'                    => 'Yükle',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Dosya Seç...',
 );

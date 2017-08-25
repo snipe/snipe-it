@@ -12,8 +12,8 @@
             'success' => '資產維護訊息已新增。'
         ],
         'edit'                       => [
-            'error'   => '資產維護訊息修改失敗。請再試一次',
-            'success' => '資產維護訊息已修改。'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => '尚未完成',
         'warranty'                     => '保固',

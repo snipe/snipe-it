@@ -35,6 +35,8 @@ return array(
     "email"            => "Định dạng :attribute thì không phù hợp.",
     "exists"           => ":attribute đã chọn không phù hợp.",
     "email_array"      => "Một hoặc nhiều địa chỉ email không hợp lệ.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute phải là một hình.",
     "in"               => ":attribute đã lựa chọn không hợp lý.",
     "integer"          => ":attribute phải là một số nguyên.",

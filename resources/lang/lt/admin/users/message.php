@@ -31,6 +31,7 @@ return array(
         'create' => 'Nepavyko sukurti naudotojo. Prašome bandykite dar kartą.',
         'update' => 'Nepavyko atnaujinti naudotojo. Prašome bandykite dar kartą.',
         'delete' => 'Nepavyko ištrinti naudotojo. Prašome bandykite dar kartą.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Nepavyko atšaldyti naudotojo. Prašome bandykite dar kartą.',
         'import'    => 'Nepavyko įkelti naudotojų. Prašome bandykite dar kartą.',
         'asset_already_accepted' => 'ši įranga jau buvo priimta.',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Negali nustatyti vartotojo prisijungiant prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio: ',
         'ldap_could_not_search' => 'Negali rasti LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
         'ldap_could_not_get_entries' => 'Negali gauti prieigos prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

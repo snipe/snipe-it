@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Lokasjon',
     'lock_passwords'		=> 'Innloggingsdetaljer kan ikke endres i denne installasjonen.',
     'manager' 				=> 'Overordnet',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Navn',
     'notes'                 => 'Notater',
     'password_confirm' 		=> 'Bekreft passord',

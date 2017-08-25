@@ -31,6 +31,7 @@ return array(
         'create' => 'Ocorreu um problema ao criar o utilizador. Por favor, tente novamente.',
         'update' => 'Ocorreu um problema ao atualizar o utilizador. Por favor, tente novamente.',
         'delete' => 'Ocorreu um problema ao remover o utilizador. Por favor, tente novamente.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Ocorreu um problema ao retirar a suspensão ao utilizador. Por favor, tente novamente.',
         'import'    => 'Ocorreu um problema ao importar os utilizadores. Por favor, tente novamente.',
         'asset_already_accepted' => 'Este artigo já foi aceite.',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Não foi possível estabelecer uma vinculação com o servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP: ',
         'ldap_could_not_search' => 'Não foi possível pesquisar no servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',
         'ldap_could_not_get_entries' => 'Não foi possível obter registos do servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

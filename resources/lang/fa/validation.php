@@ -35,6 +35,8 @@ return array(
     "email"            => "شکل ویژگی نامعتبر است.",
     "exists"           => "ویژگی انتخاب شده نامعتبر است.",
     "email_array"      => "یک یا بیش از یک آدرس ایمیل نامعتبر است.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => "ویژگی باید یک عکس باشد.",
     "in"               => "ویژگی انتخاب شده نامعتبر است.",
     "integer"          => "ویژگی باید یک عدد باشد.",

@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Helyszín',
     'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Felettes',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Név',
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Jelszó megerősítése',

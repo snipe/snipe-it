@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => '부서가 존재하지 않습니다.',
+    'assoc_users'	 => '이 부서는 현재 적어도 한명의 사용자와 연결되어 있어서 삭제할 수 없습니다. 사용자가 더 이상 이 부서를 참조하지 않게 갱신하고 다시 시도해주세요. ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => '부서가 생성되지 않았습니다. 다시 시도해 주세요.',
+        'success' => '부서가 생성되었습니다.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => '부서가 갱신되지 않았습니다. 다시 시도해 주세요.',
+        'success' => '부서가 갱신되었습니다.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> '이 부서를 삭제하시겠습니까?',
+        'error'   => '부서를 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
+        'success' => '부서가 삭제되었습니다.'
     )
 
 );

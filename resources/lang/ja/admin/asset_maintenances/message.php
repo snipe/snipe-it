@@ -12,8 +12,8 @@
             'success' => '資産管理の作成に成功しました。'
         ],
         'edit'                       => [
-            'error'   => '資産管理を作成できませんでした。もう一度試して下さい。',
-            'success' => '資産管理は正常に編集されました。'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => '不完全です。',
         'warranty'                     => '保証',

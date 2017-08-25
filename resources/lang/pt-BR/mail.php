@@ -45,7 +45,7 @@ return array(
     'Low_Inventory_Report' => 'Relatório de baixas de inventario',
     'min_QTY' => 'Qtde. Min',
     'name' => 'Nome',
-    'new_item_checked' => 'Um novo item foi atribuído a ti, os detalhes estão abaixo.',
+    'new_item_checked' => 'Um novo item foi feito Check-out em seu nome, detalhes abaixo.',
     'password' => 'Senha:',
     'password_reset' => 'Redefinir Senha',
 

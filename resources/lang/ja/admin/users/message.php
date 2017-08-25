@@ -31,6 +31,7 @@ return array(
         'create' => '利用者を作成する際に問題が発生しました。もう一度、やり直して下さい。',
         'update' => '利用者を更新する際に問題が発生しました。もう一度、やり直して下さい。',
         'delete' => '利用者を削除する際に問題が発生しました。もう一度、やり直して下さい。',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => '利用者を再開する際に問題が発生しました。もう一度、やり直して下さい。',
         'import'    => '利用者をインポートする際に問題が発生しました。もう一度、やり直して下さい。',
         'asset_already_accepted' => 'この資産は既に承認されています。',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'LDAPサーバーにバインドできません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー: ',
         'ldap_could_not_search' => 'LDAPサーバーを検索できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',
         'ldap_could_not_get_entries' => 'LDAPサーバーからエンティティを取得できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

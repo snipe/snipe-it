@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => 'A jelszó linket elküldtük!',
+    'user'			=> 'A felhasználó nem létezik, vagy nincs hozzárendelt e-mail cím',
 ];
 

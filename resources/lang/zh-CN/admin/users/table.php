@@ -19,6 +19,7 @@ return array(
     'location'  			=> '位置',
     'lock_passwords'		=> '不能更换登陆资料',
     'manager' 				=> '领导',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> '名字',
     'notes'                 => '笔记',
     'password_confirm' 		=> '确认密码',

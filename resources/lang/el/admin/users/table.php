@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Τοποθεσία',
     'lock_passwords'		=> 'Οι λεπτομέρειες σύνδεσης δεν μπορούν να αλλάξουν σε αυτήν την εγκατάσταση.',
     'manager' 				=> 'Διευθυντής',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Όνομα',
     'notes'                 => 'Σημειώσεις',
     'password_confirm' 		=> 'Επιβεβαίωση Κωδικού Πρόσβασης',

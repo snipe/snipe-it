@@ -31,6 +31,7 @@ return array(
         'create' => 'มีปัญหาระหว่างการสร้างผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
         'update' => 'มีปัญหาระหว่างปรับปรุงข้อมูลผู้ใช้ กรุณาลองใหม่อีกครั้ง',
         'delete' => 'มีปัญหาระหว่างลบผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'มีปัญหาระหว่างการยกเลิกการระงับผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
         'import'    => 'มีปัญหาระหว่างการนำเข้าผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
         'asset_already_accepted' => 'ทรัพย์สินนี้ได้รับการยอมรับแล้ว',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'ไม่สามารถผูกกับ LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server: ',
         'ldap_could_not_search' => 'ไม่สามารถค้นหา LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
         'ldap_could_not_get_entries' => 'ไม่สามารถดึงข้อมูลจาก LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

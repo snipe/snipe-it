@@ -35,6 +35,8 @@ return array(
     "email"            => ":attribute formato incorrecto.",
     "exists"           => "El :attribute seleccionado no es correcto.",
     "email_array"      => "Una o más direcciones de correo electrónico no es válido.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute debe ser una imagen.",
     "in"               => "El :attribute seleccionado no es correcto.",
     "integer"          => ":attribute debe ser un número entero.",

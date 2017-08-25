@@ -35,6 +35,8 @@ return array(
     "email"            => "Formát :attribute je neplatný.",
     "exists"           => "Zvolený :attribute je neplatný.",
     "email_array"      => "Jedna nebo více e-mailových adres je neplatná.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute musí být obrázek.",
     "in"               => "Zvolený :attribute je neplatný.",
     "integer"          => ":attribute musí být celočíselný.",

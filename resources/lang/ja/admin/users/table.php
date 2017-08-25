@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'ロケーション:',
     'lock_passwords'		=> 'ログイン時の詳細設定はインストール時に変更することは出来ません。',
     'manager' 				=> 'マネージャー',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> '名前',
     'notes'                 => '備考',
     'password_confirm' 		=> 'パスワードを確認',

@@ -35,6 +35,8 @@ return array(
     "email"            => ":attribute formatas neteisingas.",
     "exists"           => "Pasirinktas :attribute neteisingas.",
     "email_array"      => "One or more email addresses is invalid.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute privalo būti paveikslėlis.",
     "in"               => "Pasirinktas :attribute neteisingas.",
     "integer"          => ":attribute turi būti sveikas skaičius.",

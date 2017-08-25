@@ -35,6 +35,8 @@ return array(
     "email"            => "รูปแบบของ :attribute ไม่ถูกต้อง",
     "exists"           => ":attribute ที่เลือกไม่ถูกต้อง",
     "email_array"      => "One or more email addresses is invalid.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute ต้องเป็นรูปภาพเท่านั้น",
     "in"               => ":attribute ที่เลือกไม่ถูกต้อง",
     "integer"          => ":attribute ต้องเป็นจำนวนเต็มเท่านั้น",

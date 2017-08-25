@@ -12,8 +12,8 @@
             'success' => 'Tài sản đang bảo trì được tạo thành công.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => 'Chưa hoàn thành',
         'warranty'                     => 'Bảo hành',

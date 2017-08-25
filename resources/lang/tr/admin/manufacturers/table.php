@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_title'    => 'Üreticiler hakkında',
+    'about_manufacturers_text'  => 'Üreticiler varlıkları oluşturan şirketledir. Önemli servis sağlayıcı bilgilerinizi burada saklayabilirsiniz. Varlıkların detay kısmında bu bilgilere ulaşabilirsiniz.',
     'asset_manufacturers'	=> 'Demirbaş Üreticileri',
     'create'				=> 'Üretici Oluştur',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'Ad',
+    'support_email'   		=> 'Destek Maili',
+    'support_phone'   		=> 'Destek telefonu',
+    'support_url'   		=> 'Destek URL\'si',
     'update'				=> 'Üretici Güncelle',
     'url'   				=> 'URL',
 

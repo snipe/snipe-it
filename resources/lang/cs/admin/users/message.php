@@ -31,6 +31,7 @@ return array(
         'create' => 'Vyskytl se problém při vytvářením uživatele. Zkuste to znovu.',
         'update' => 'Vyskytl se problém při aktualizování uživatele. Zkuste to znovu.',
         'delete' => 'Vyskytl se problém při mazání uživatele. Zkuste to znovu.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Vyskytl se problém při rušení uživatele. Zkuste to znovu.',
         'import'    => 'Vyskytl se problém při importu uživatelů. Zkuste to znovu.',
         'asset_already_accepted' => 'Tento majetek již byl odsouhlasen.',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Nelze svázat server LDAP. Zkontrolujte prosím konfiguraci serveru LDAP v konfiguračním souboru LDAP. <br>Chyba serveru LDAP: ',
         'ldap_could_not_search' => 'Nelze vyhledat server LDAP. Zkontrolujte prosím konfiguraci serveru LDAP v konfiguračním souboru LDAP. <br>Chyba serveru LDAP:',
         'ldap_could_not_get_entries' => 'Nelze získat záznamy ze serveru LDAP. Zkontrolujte prosím konfiguraci serveru LDAP v konfiguračním souboru LDAP. <br>Chyba serveru LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

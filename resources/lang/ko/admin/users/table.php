@@ -19,6 +19,7 @@ return array(
     'location'  			=> '장소',
     'lock_passwords'		=> '이 설치본에서는 로그인 상세를 변경 할 수 없습니다.',
     'manager' 				=> '상사',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> '이름',
     'notes'                 => '비고',
     'password_confirm' 		=> '비밀번호 확인',

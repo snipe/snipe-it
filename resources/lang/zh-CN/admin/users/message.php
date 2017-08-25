@@ -31,6 +31,7 @@ return array(
         'create' => '创建用户过程中出现了一些问题，请重试。',
         'update' => '更新用户过程中出现了一些问题，请重试。',
         'delete' => '删除用户过程中出现了一点儿问题，请重试。',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => '恢复停用用户的过程中出现了一点儿问题，请重试。',
         'import'    => '导入用户出现问题。请再试一次。',
         'asset_already_accepted' => '资产已被接受',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => '无法绑定到LDAP服务器，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息: ',
         'ldap_could_not_search' => '查询LDAP服务器失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'ldap_could_not_get_entries' => '从LDAP服务器获取信息条目失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

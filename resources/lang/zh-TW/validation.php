@@ -35,6 +35,8 @@ return array(
     "email"            => ":attribute 格式不正確",
     "exists"           => "選擇的 :attribute 無效",
     "email_array"      => "一個或多個郵件地址不正確",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute 必須是圖片格式",
     "in"               => "選擇的 :attribute 無效",
     "integer"          => ":attribute 必須是整數",

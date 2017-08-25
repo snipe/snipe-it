@@ -6,7 +6,7 @@ return array(
     'checkin'           => 'Giriş',
     'create'            => 'Lisans Oluştur',
     'expiration'        => 'Son Geçerlilik Tarihi',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Ürün anahtarı',
     'maintained'        => 'Korumalı',
     'name'              => 'Yazılım Adı',
     'no_depreciation'   => 'Mortisman Yok',

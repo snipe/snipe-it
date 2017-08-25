@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Ort',
     'lock_passwords'		=> 'Die Login-Daten können auf dieser Installation nicht geändert werden.',
     'manager' 				=> 'Manager',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Name',
     'notes'                 => 'Notizen',
     'password_confirm' 		=> 'Kennwort bestätigen',

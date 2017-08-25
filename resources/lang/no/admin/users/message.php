@@ -31,6 +31,7 @@ return array(
         'create' => 'Det oppstod et problem under opprettelse av bruker. Prøv igjen.',
         'update' => 'Det oppstod et problem under oppdatering av bruker. Prøv igjen.',
         'delete' => 'Det oppstod et problem under sletting av bruker. Prøv igjen.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Det oppstod et problem under aktivering av bruker. Prøv igjen.',
         'import'    => 'Det oppstod et problem under import av brukere. Prøv igjen.',
         'asset_already_accepted' => 'Denne eiendelen er allerede akseptert.',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Kunne ikke opprette tilkopling til LDAP-server. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server: ',
         'ldap_could_not_search' => 'Kunne ikke utføre søk på LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
         'ldap_could_not_get_entries' => 'Fikk ingen oppføringer fra LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

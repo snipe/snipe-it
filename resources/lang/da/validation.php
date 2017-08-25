@@ -35,6 +35,8 @@ return array(
     "email"            => ":attribute formatet er ugylidgt.",
     "exists"           => "Den valgte :attribute er ugyldig.",
     "email_array"      => "En eller flere email-adresser er ugyldige.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute skal være et billede.",
     "in"               => "Det valgte :attribute er ugyldigt.",
     "integer"          => ":attribute skal være et heltal.",

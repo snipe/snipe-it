@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups_title'            => 'Gruplar hakkında',
+    'about_groups'                  => 'Gruplar, kullanıcı izinlerini genellemek için kullanılır.',
     'group_management' 	 	=> 'Grup Yönetimi',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
+    'create' 	 	 	    => 'Yeni Grup Oluştur',
+    'update' 	 		        => 'Grubu Düzenle',
     'group_name' 	 		=> 'Grup Adı',
     'group_admin' 	 		=> 'Grup Yöneticisi',
     'allow' 	 			=> 'Kabul Et',

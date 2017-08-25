@@ -12,8 +12,8 @@
             'success' => 'Manutenção do artigo criada com sucesso.'
         ],
         'edit'                       => [
-            'error'   => 'Manutenção do artigo não foi editada, por favor tente novamente.',
-            'success' => 'Manutenção do artigo criada com sucesso.'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => 'Incompleto',
         'warranty'                     => 'Garantia',

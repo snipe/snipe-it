@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Umístění',
     'lock_passwords'		=> 'Přihlašovací údaje nelze v této instalaci měnit.',
     'manager' 				=> 'Nadřízený',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Položka',
     'notes'                 => 'Poznámky',
     'password_confirm' 		=> 'Potvrzení hesla',

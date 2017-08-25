@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Расположение',
     'lock_passwords'		=> 'Подробности логина не могут быть изменены на этой конфигурации.',
     'manager' 				=> 'Руководитель',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Имя',
     'notes'                 => 'Заметки',
     'password_confirm' 		=> 'Подтверждение пароля',

@@ -12,8 +12,8 @@
             'success' => 'Inventarieunderhållet skapades.'
         ],
         'edit'                       => [
-            'error'   => 'Inventarieunderhållet redigerades inte. Var god försök igen.',
-            'success' => 'Inventarieunderhållet redigerades.'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => 'Inte klar ännu',
         'warranty'                     => 'Garanti',

@@ -31,6 +31,7 @@ return array(
         'create' => 'Terdapat kesalahan ketika membuat pengguna. Silahkan coba kembali.',
         'update' => 'Terdapat masalah ketika memperbarui pengguna. Silahkan coba kembali.',
         'delete' => 'Terdapat masalah ketika menghapus pengguna. Silahkan coba kembali.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Terdapat masalah ketika menangguhkan pengguna. Silahkan coba kembali.',
         'import'    => 'Terdapat masalah ketika mengimpor pengguna. Silahkan coba kembali.',
         'asset_already_accepted' => 'Aset ini telah di terima.',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Server LDAP gagal mengikat. Silahkan cek kembali konfigurasi server LDAP di berkas config. <br>Eror dari server LDAP: ',
         'ldap_could_not_search' => 'Gagal mencari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
         'ldap_could_not_get_entries' => 'Gagal menerima catatan dari server LDAP. Silahkan cek konfigurasi server LDAP di berkas config LDAP. <br>Eror dari server LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

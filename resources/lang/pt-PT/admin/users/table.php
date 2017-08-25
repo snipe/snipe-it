@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Localização',
     'lock_passwords'		=> 'Detalhes de autenticação não podem ser alterados nesta instalação.',
     'manager' 				=> 'Responsável',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nome',
     'notes'                 => 'Notas',
     'password_confirm' 		=> 'Confirmar palavra-passe',

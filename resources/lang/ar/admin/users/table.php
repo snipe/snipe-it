@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'الموقع',
     'lock_passwords'		=> 'لا يمكن تغيير تفاصيل الدخول بالنسبة لهذا التنصيب.',
     'manager' 				=> 'المدير',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'الاسم',
     'notes'                 => 'مُلاحظات',
     'password_confirm' 		=> 'تأكيد كلمة المرور',

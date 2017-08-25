@@ -12,8 +12,8 @@
             'success' => 'Выполнено.'
         ],
         'edit'                       => [
-            'error'   => 'Обслуживание Активов не было изменено, пожалуйста, попробуйте еще раз.',
-            'success' => 'Обслуживание Активов изменено успешно.'
+            'error'   => 'Asset Maintenance was not created, please try again.',
+            'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => 'Ещё не готово',
         'warranty'                     => 'Гарантия',

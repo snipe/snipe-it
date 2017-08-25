@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Seri No',
     'status'   		=> 'Durum',
     'title'      	=> 'Demirbaş ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'image'		=> 'Cihaz resmi',
+    'days_without_acceptance' => 'Kabul edilmeden geçen gün'
 
 );

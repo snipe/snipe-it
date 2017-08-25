@@ -31,6 +31,7 @@ return array(
         'create' => 'Podczas tworzenia użytkownika wystąpił problem. Spróbuj ponownie.',
         'update' => 'Podczas aktualizacji użytkownika wystąpił problem. Spróbuj ponownie.',
         'delete' => 'Wystąpił błąd podczas usuwania użytkownika. Spróbuj ponownie.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Wystąpił problem podczas odblokowania użytkownika. Spróbuj ponownie.',
         'import'    => 'Podczas importowania użytkowników wystąpił błąd. Spróbuj ponownie.',
         'asset_already_accepted' => 'Aktywo zostało już zaakceptowane.',
@@ -40,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Nie udało się połączyć z serwerem LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP: ',
         'ldap_could_not_search' => 'Nie udało się przeszukać serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
         'ldap_could_not_get_entries' => 'Nie udało się pobrać pozycji z serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

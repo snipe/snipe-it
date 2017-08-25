@@ -35,6 +35,8 @@ return array(
     "email"            => "Le format de l'attribut \":attribute\" est invalide.",
     "exists"           => "L'attribut \":attribute\" est invalide.",
     "email_array"      => "Une ou plusieurs adresses e-mail sont invalides.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => "L'attribut \":attribute\" doit être une image.",
     "in"               => "Le :attribute selectionné est invalide.",
     "integer"          => "L'attribut \":attribute\" doit être un nombre entier.",

@@ -35,6 +35,8 @@ return array(
     "email"            => ":attribute е с невалиден формат.",
     "exists"           => "Избраният :attribute е невалиден.",
     "email_array"      => "Един или повече email адреси е невалиден.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute трябва да бъде изображение.",
     "in"               => "Избраният :attribute е невалиден.",
     "integer"          => ":attribute трябва да бъде целочислен.",

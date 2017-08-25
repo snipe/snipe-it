@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Lokasi',
     'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Pengurus',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nama',
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Sahkan kata laluan',

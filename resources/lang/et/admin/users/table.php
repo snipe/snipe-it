@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'Asukoht',
     'lock_passwords'		=> 'Selles installatsioonis ei sa sisselogimise infot muuta.',
     'manager' 				=> 'Juht',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nimi',
     'notes'                 => 'Märkmed',
     'password_confirm' 		=> 'Kinnita parool',

@@ -35,6 +35,8 @@ return array(
     "email"            => "Formatul :attribute nu este valid.",
     "exists"           => ":attribute selectat nu e valid.",
     "email_array"      => "One or more email addresses is invalid.",
+    "hashed_pass"      => "Your current password is incorrect",
+    'dumbpwd'          => 'That password is too common.',
     "image"            => ":attribute trebuie sa fie o imagine.",
     "in"               => ":attribute selectat nu este valid.",
     "integer"          => ":attribute trebuie sa fie numar intreg.",

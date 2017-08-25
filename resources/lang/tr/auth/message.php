@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Hesabınız aktif edilmemiş.',
     'account_suspended'      => 'Hesabınız durdurulmuş.',
     'account_banned'         => 'Hesabınız engellenmiş.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'throttle'               => 'Çok fazla başarısız giriş denemesi. Lütfen :minutes dakika içinde tekrar deneyin.',
 
     'signin' => array(
         'error'   => 'Bir problem ile karşılaştık, lütfen tekrar deneyin.',

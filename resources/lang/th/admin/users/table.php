@@ -19,6 +19,7 @@ return array(
     'location'  			=> 'สถานที่',
     'lock_passwords'		=> 'รายละเอียดการเข้าสู่ระบบไม่สามารถแก้ไขเปลี่ยนแปลงบนการติดตั้งนี้',
     'manager' 				=> 'ผู้จัดการ',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'ชื่อ',
     'notes'                 => 'หมายเหตุ',
     'password_confirm' 		=> 'ยืนยันรหัสผ่าน',
