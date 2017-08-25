@@ -184,7 +184,7 @@ class SettingsController extends Controller
         $settings->site_name = e(Input::get('site_name'));
         $settings->alert_email = e(Input::get('email'));
         $settings->alerts_enabled = 1;
-        $settings->pwd secure min = 10;
+        $settings->pwd_secure_min = 10;
         $settings->brand = 1;
         $settings->locale = 'en';
         $settings->default_currency = 'USD';
