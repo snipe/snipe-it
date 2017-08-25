@@ -42,4 +42,8 @@ class LocationPresenter extends Presenter
     {
         return '<i class="fa fa-globe"></i>';
     }
+    
+    public function fullName() {
+        return $this->name;
+    }
 }
