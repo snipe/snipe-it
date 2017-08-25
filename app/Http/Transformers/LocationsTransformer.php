@@ -22,14 +22,12 @@ class LocationsTransformer
     {
         if ($location) {
 
-            $assets_arr = [];
-            foreach($location->assets() as $asset) {
-                $assets_arr = ['id' => $asset->id];
-            }
-            
             $children_arr = [];
-            foreach($location->childLocations() as $child) {
-                $children_arr = ['id' => $child->id];
+            foreach($location->childLocations as $child) {
+                $children_arr[] = [
+                    'id' => (int) $child->id,
+                    'name' => $child->name
+                ];
             }
 
             $array = [
@@ -41,7 +39,6 @@ class LocationsTransformer
                 'assets_checkedout' => $location->assets()->count(),
                 'assets_default'    => $location->assignedassets()->count(),
                 'country' => e($location->country),
-                'assets' => $assets_arr,
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
                 'parent' => ($location->parent) ? [

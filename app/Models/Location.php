@@ -63,7 +63,7 @@ class Location extends SnipeModel
 
     public function parent()
     {
-        return $this->belongsTo('\App\Models\Location', 'parent_id');
+        return $this->belongsTo('\App\Models\Location', 'parent_id','id');
     }
 
     public function childLocations()
