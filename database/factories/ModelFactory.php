@@ -210,5 +210,6 @@ $factory->define(App\Models\Setting::class, function ($faker) {
         'brand' => 1,
         'default_currency' => $faker->currencyCode,
         'locale' => $faker->locale,
+        'pwd_secure_min' => 5,
     ];
 });
