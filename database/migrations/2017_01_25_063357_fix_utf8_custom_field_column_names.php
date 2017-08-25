@@ -21,7 +21,7 @@ use Illuminate\Database\Schema\Blueprint;
 function updateLegacyColumnName($customfield) {
 
     $name_to_db_name = CustomField::name_to_db_name($customfield->name);
-    \Log::debug('Trying to rename '.$name_to_db_name." to ".$customfield->convertUnicodeDbSlug()."...\n");
+    //\Log::debug('Trying to rename '.$name_to_db_name." to ".$customfield->convertUnicodeDbSlug()."...\n");
 
     if (Schema::hasColumn(CustomField::$table_name, $name_to_db_name)) {
 
@@ -32,7 +32,7 @@ function updateLegacyColumnName($customfield) {
         );
 
     } else {
-        \Log::debug('Legacy DB column '.$name_to_db_name.' was not found on the assets table.');
+        //\Log::debug('Legacy DB column '.$name_to_db_name.' was not found on the assets table.');
     }
 
 }

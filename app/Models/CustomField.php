@@ -38,12 +38,10 @@ class CustomField extends Model
     public static function boot()
     {
         self::created(function ($custom_field) {
-            \Log::debug("\n\nCreating Original Name: ".$custom_field->name);
-            \Log::debug('Creating Column Name: '.$custom_field->convertUnicodeDbSlug());
 
 
+            // column exists - nothing to do here
             if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
-                \Log::debug('Column exists. Nothing to do here.');
                 return false;
             }
 
@@ -57,17 +55,12 @@ class CustomField extends Model
 
 
         self::updating(function ($custom_field) {
-            \Log::debug('Updating column name');
-            \Log::debug('Updating Original Name: '.$custom_field->getOriginal("name"));
-            \Log::debug('Updating New Column Name: '.$custom_field->convertUnicodeDbSlug());
 
+             // Column already exists. Nothing to update.
             if ($custom_field->isDirty("name")) {
                 if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
-                    \Log::debug('Column already exists. Nothing to update.');
                     return true;
                 }
-
-                \Log::debug('Updating column name to.'.$custom_field->convertUnicodeDbSlug());
 
                 return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal("name")), $custom_field->convertUnicodeDbSlug());
@@ -85,7 +78,7 @@ class CustomField extends Model
 
     public function fieldset()
     {
-        return $this->belongsToMany('\App\Models\CustomFieldset'); //?!?!?!?!?!?
+        return $this->belongsToMany('\App\Models\CustomFieldset');
     }
 
     public function user()
@@ -102,10 +95,9 @@ class CustomField extends Model
     public function db_column_name()
     {
         return $this->db_column;
-        // return self::convertUnicodeDbSlug();
     }
 
-    //mutators for 'format' attribute
+    // mutators for 'format' attribute
     public function getFormatAttribute($value)
     {
         foreach (self::$PredefinedFormats as $name => $pattern) {
@@ -116,6 +108,13 @@ class CustomField extends Model
         return $value;
     }
 
+    /**
+     * Format a value string as an array for select boxes and checkboxes.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.4]
+     * @return Array
+     */
     public function setFormatAttribute($value)
     {
         if (isset(self::$PredefinedFormats[$value])) {

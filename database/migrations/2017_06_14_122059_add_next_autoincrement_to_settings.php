@@ -25,7 +25,7 @@ class AddNextAutoincrementToSettings extends Migration
             $table->bigInteger('next_auto_tag_base')->default('1');
         });
 
-        \Log::debug('Setting '.$next.' as default auto-increment');
+        //\Log::debug('Setting '.$next.' as default auto-increment');
 
         if ($settings = App\Models\Setting::first()) {
             $settings->next_auto_tag_base = $next;

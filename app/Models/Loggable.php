@@ -80,8 +80,11 @@ trait Loggable
             'admin' => $log->user,
             'note' => $note
         ];
-        Setting::getSettings()->notify(new CheckoutNotification($params));
 
+        if ($settings = Setting::getSettings()) {
+            $settings->notify(new CheckoutNotification($params));
+        }
+        
         return $log;
     }
 
