@@ -80,7 +80,7 @@ class Handler extends ExceptionHandler
 
                 }
             }
-            // Try to parse 500 Errors ina  bit nicer way when debug is enabled.
+            // Try to parse 500 Errors in a bit nicer way when debug is enabled.
             if (config('app.debug')) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, "An Error has occured! " . $e->getMessage()), 500);
             }
