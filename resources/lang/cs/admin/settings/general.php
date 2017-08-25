@@ -30,6 +30,7 @@ return array(
 	'display_alt_barcode'		=> 'Zobrazit 1D čárový kód',
 	'barcode_type'				=> 'Typ 2D čárového kódu',
 	'alt_barcode_type'			=> 'Typ 1D čárového kódu',
+	'alt_barcode_reader_tooltip'=> 'Čiarový kód na Label-och sa dá prečítať čítačkou čiarových kódov.<br/>Čítačka musí mať nastavený Prefix(Default: ~) a Suffix(Default: Enter).<br/>Ak chete zmeniť základný prefix alebo subbix môžete tak urobiť v config/barcode.php',
     'eula_settings'				=> 'Nastavení EULA',
     'eula_markdown'				=> 'Tato EULA umožňuje <a href="https://help.github.com/articles/github-flavored-markdown/">Github markdown</a>.',
     'general_settings'			=> 'Obecné nastavení',

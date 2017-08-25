@@ -84,6 +84,10 @@
                                     {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                 </div>
                             </div>
+
+                            <span class="help-block col-md-offset-3 col-md-12">
+                                {!! trans('admin/settings/general.alt_barcode_reader_tooltip') !!}
+                            </span>
                         @else
                             <span class="help-block col-md-offset-3 col-md-12">
                     {{ trans('admin/settings/general.php_gd_warning') }}
