@@ -19,6 +19,9 @@ before_script:
   - phantomjs --webdriver=4444  &
   - sleep 4
   - mysql -e 'CREATE DATABASE snipeit_unit;'
+  - mysql -e 'CREATE USER "travis'@'localhost";'
+  - mysql -e 'GRANT ALL PRIVILEGES ON * . * TO "travis'@'localhost";'
+  - mysql -e 'FLUSH PRIVILEGES;'
   - composer self-update
   - composer install -n --prefer-source
   - chmod -R 777 storage
