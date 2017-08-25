@@ -231,7 +231,8 @@ class AssetsController extends Controller
      */
     public function store(AssetRequest $request)
     {
-        // $this->authorize('create', Asset::class);
+
+        $this->authorize('create', Asset::class);
 
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
@@ -279,6 +280,7 @@ class AssetsController extends Controller
             }
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
 
