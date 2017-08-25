@@ -182,7 +182,9 @@
                   @if ($user->userloc)
                   <tr>
                     <td>{{ trans('admin/users/table.location') }}</td>
-                    <td>{{ $user->userloc->name }}</td>
+                    <td>{{ link_to_route('locations.show', $user->userloc->name, [$user->userloc->id]) }}</td>
+
+
                   </tr>
                   @endif
                   @if ($user->created_at)
