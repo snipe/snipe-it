@@ -376,7 +376,6 @@ class UsersController extends Controller
             }
 
             if ($user->licenses()->count() > 0) {
-
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->licenses()->count() . ' licenses associated with them.');
             }
@@ -384,6 +383,11 @@ class UsersController extends Controller
             if ($user->accessories()->count() > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->accessories()->count() . ' accessories associated with them.');
+            }
+
+            if ($user->managedLocations()->count() > 0) {
+                // Redirect to the user management page
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.');
             }
 
             // Delete the user

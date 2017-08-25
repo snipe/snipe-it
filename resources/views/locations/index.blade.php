@@ -37,13 +37,15 @@
                 <th data-searchable="true" data-sortable="true" data-field="city">{{ trans('admin/locations/table.city') }}
                 </th>
                 <th data-searchable="true" data-sortable="true" data-field="state">
-                 {{ trans('admin/locations/table.state') }}
+                    {{ trans('admin/locations/table.state') }}
                 </th>
-                  <th data-searchable="true" data-sortable="true" data-field="zip">
-                      {{ trans('admin/locations/table.zip') }}
-                  </th>
+                    <th data-searchable="true" data-sortable="true" data-field="zip">
+                        {{ trans('admin/locations/table.zip') }}
+                    </th>
                 <th data-searchable="true" data-sortable="true" data-field="country">
-                {{ trans('admin/locations/table.country') }}</th>
+                    {{ trans('admin/locations/table.country') }}
+                </th>
+                <th data-sortable="true" data-formatter="usersLinkObjFormatter" data-field="manager" data-searchable="true">{{ trans('admin/users/table.manager') }}</th>
                 <th data-switchable="false" data-formatter="locationsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>

@@ -63,7 +63,8 @@ class LocationsController extends Controller
 
         return view('locations/edit')
             ->with('location_options', $location_options)
-            ->with('item', new Location);
+            ->with('item', new Location)
+            ->with('manager_list', Helper::managerList());
     }
 
 
@@ -88,6 +89,7 @@ class LocationsController extends Controller
         $location->state            = Input::get('state');
         $location->country          = Input::get('country');
         $location->zip              = Input::get('zip');
+        $location->manager_id       = Input::get('manager_id');
         $location->user_id          = Auth::id();
 
         if ($location->save()) {
@@ -154,7 +156,10 @@ class LocationsController extends Controller
         $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
 
-        return view('locations/edit', compact('item'))->with('location_options', $location_options);
+
+        return view('locations/edit', compact('item'))
+            ->with('location_options', $location_options)
+            ->with('manager_list', Helper::managerList());
     }
 
 
@@ -185,6 +190,7 @@ class LocationsController extends Controller
         $location->country      = Input::get('country');
         $location->zip          = Input::get('zip');
         $location->ldap_ou      = Input::get('ldap_ou');
+        $location->manager_id   = Input::get('manager_id');
 
         // Was the location updated?
         if ($location->save()) {
@@ -232,8 +238,6 @@ class LocationsController extends Controller
     * the content for the locations detail page.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::getDataViewUsers() method that returns JSON for location users
-    * @see LocationsController::getDataViewAssets() method that returns JSON for location assets
     * @param int $locationId
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
@@ -252,78 +256,4 @@ class LocationsController extends Controller
         return redirect()->route('locations.index')->with('error', $error);
     }
 
-
-    /**
-     * Returns a JSON response that contains the users association with the
-     * selected location, to be used by the location detail view.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see LocationsController::getView() method that creates the display view
-     * @param $locationID
-     * @return array
-     * @internal param int $locationId
-     * @since [v1.8]
-     */
-    public function getDataViewUsers($locationID)
-    {
-        $location = Location::find($locationID);
-        $users = User::where('location_id', '=', $location->id);
-
-        if (Input::has('search')) {
-            $users = $users->TextSearch(e(Input::get('search')));
-        }
-
-        $users = $users->get();
-        $rows = array();
-
-        foreach ($users as $user) {
-            $rows[] = array(
-              'name' => (string)link_to_route('users.show', e($user->present()->fullName()), ['user'=>$user->id])
-              );
-        }
-
-        $data = array('total' => $users->count(), 'rows' => $rows);
-
-        return $data;
-    }
-
-
-    /**
-    * Returns a JSON response that contains the assets association with the
-    * selected location, to be used by the location detail view.
-    *
-    * @todo This is broken for accessories and consumables.
-    * @todo This is a very naive implementation. Should clean this up with query scopes.
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::getView() method that creates the display view
-    * @param int $locationID
-    * @since [v1.8]
-    * @return array
-     */
-    public function getDataViewAssets($locationID)
-    {
-        $location = Location::find($locationID)->load('assignedassets.model');
-        $assets = Asset::AssetsByLocation($location);
-
-        if (Input::has('search')) {
-            $assets = $assets->TextSearch(e(Input::get('search')));
-        }
-
-        $assets = $assets->get();
-
-        $rows = array();
-
-        foreach ($assets as $asset) {
-            $rows[] = [
-                'name' => (string)link_to_route('hardware.show', e($asset->present()->name()), ['hardware' => $asset->id]),
-                'asset_tag' => e($asset->asset_tag),
-                'serial' => e($asset->serial),
-                'model' => e($asset->model->name),
-            ];
-        }
-
-        $data = array('total' => $assets->count(), 'rows' => $rows);
-        return $data;
-
-    }
 }

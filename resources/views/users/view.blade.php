@@ -73,6 +73,16 @@
           </a>
         </li>
 
+        @if ($user->managedLocations()->count() >= 0 )
+        <li>
+          <a href="#managed_tab" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fa fa-clock-o"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}</span>
+          </a>
+        </li>
+        @endif
+
         @can('update', $user)
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -451,6 +461,27 @@
 
           </div>
         </div><!-- /.tab-pane -->
+
+        <div class="tab-pane" id="managed_tab">
+          <div class="table-responsive">
+            <table class="display table table-striped">
+              <thead>
+                <tr>
+                  <th class="col-md-8">{{ trans('general.name') }}</th>
+                  <th class="col-md-4">{{ trans('general.date') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($user->managedLocations as $location)
+                <tr>
+                  <td>{!! $location->present()->nameUrl() !!}</a></td>
+                  <td>{{ $location->created_at }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+          </table>
+          </div>
+        </div><!-- /consumables-tab -->
       </div><!-- /.tab-content -->
     </div><!-- nav-tabs-custom -->
   </div>

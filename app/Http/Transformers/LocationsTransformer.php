@@ -9,7 +9,7 @@ use App\Helpers\Helper;
 class LocationsTransformer
 {
 
-    public function transformLocations (Collection $locations, $total)
+    public function transformLocations(Collection $locations, $total)
     {
         $array = array();
         foreach ($locations as $location) {
@@ -18,7 +18,7 @@ class LocationsTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLocation (Location $location = null)
+    public function transformLocation(Location $location = null)
     {
         if ($location) {
 
@@ -45,6 +45,9 @@ class LocationsTransformer
                     'id' => (int) $location->parent->id,
                     'name'=> e($location->parent->name)
                 ] : null,
+                'manager' => ($location->manager) ? (new UsersTransformer)->transformUser($location->manager) : null,
+
+
                 'children' => $children_arr,
             ];
 
