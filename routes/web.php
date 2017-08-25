@@ -70,6 +70,23 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+/*
+|
+|--------------------------------------------------------------------------
+| Re-Usable Modal Dialog routes.
+|--------------------------------------------------------------------------
+|
+| Routes for various modal dialogs to interstitially create various things
+| 
+*/
+
+Route::group(['middleware' => 'auth','prefix' => 'modals'], function () {
+    Route::get('location',['as' => 'modal.location','uses' => 'ModalController@location']);
+    Route::get('model',['as' => 'modal.model','uses' => 'ModalController@model']);
+    Route::get('statuslabel',['as' => 'modal.statuslabel','uses' => 'ModalController@statuslabel']);
+    Route::get('supplier',['as' => 'modal.supplier','uses' => 'ModalController@supplier']);
+    Route::get('user',['as' => 'modal.user','uses' => 'ModalController@user']);
+});
 
 /*
 |--------------------------------------------------------------------------
