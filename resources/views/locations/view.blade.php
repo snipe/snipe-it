@@ -29,7 +29,7 @@
               name="location_users"
               id="table-users"
               class="table table-striped snipe-table"
-              data-url="{{route('api.locations.viewusers', $location->id)}}"
+              data-url="{{route('api.users.index', ['location_id' => $location->id])}}"
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="location_usersDetailTable">
