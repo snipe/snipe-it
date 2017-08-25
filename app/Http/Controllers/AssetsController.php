@@ -116,9 +116,9 @@ class AssetsController extends Controller
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('location_list', Helper::locationsList())
             ->with('item', new Asset)
-            ->with('manufacturer', Helper::manufacturerList())
-            ->with('category', Helper::categoryList('asset'))
-            ->with('statuslabel_types', Helper::statusTypeList())
+            ->with('manufacturer', Helper::manufacturerList()) //handled in modal now?
+            ->with('category', Helper::categoryList('asset')) //handled in modal now?
+            ->with('statuslabel_types', Helper::statusTypeList()) //handled in modal now?
             ->with('users_list', Helper::usersList())
             ->with('assets_list', Helper::assetsList())
             ->with('locations_list', Helper::locationsList());

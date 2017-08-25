@@ -39,7 +39,7 @@
       {!! $errors->first('model_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
     <div class="col-md-1 col-sm-1 text-left">
-        <a href='#' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id" class="btn btn-sm btn-default">New</a>
+        <a href='{{ route('modal.model') }}' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id" class="btn btn-sm btn-default">New</a>
         <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
     </div>
   </div>
@@ -74,7 +74,7 @@
     </div>
     <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
         @can('users.create')
-      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user' class="btn btn-sm btn-default">New</a>
+      <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user' class="btn btn-sm btn-default">New</a>
         @endcan
     </div>
   </div>
@@ -98,7 +98,7 @@
       {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
     <div class="col-md-1 col-sm-1 text-left">
-      <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="location" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
+      <a href='{{ route('modal.location') }}' data-toggle="modal"  data-target="#createModal" data-dependency="location" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
     </div>
   </div>
   @endif
@@ -127,7 +127,7 @@
       {!! $errors->first('rtd_location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
       </div>
       <div class="col-md-1 col-sm-1 text-left">
-        <a href='#' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select' class="btn btn-sm btn-default">New</a>
+        <a href='{{ route('modal.location') }}' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select' class="btn btn-sm btn-default">New</a>
       </div>
   </div>
 
@@ -160,7 +160,9 @@
 @stop
 
 @section('moar_scripts')
-@include('partials/modals')
+{{-- Some room for the modals --}}
+<div class="modal fade" id="createModal">
+</div><!-- /.modal -->
 <script>
 
 
@@ -187,19 +189,6 @@
             });
         }
     }
-
-    $(function () {
-        $('#model_select_id').on("change", fetchCustomFields);
-    });
-
-    $(function () {
-        user_add($(".status_id option:selected").val());
-    });
-
-    var $statusSelect = $(".status_id");
-    $statusSelect.on("change", function () {
-        user_add($statusSelect.val());
-    });
 
     function user_add(status_id) {
 
@@ -230,52 +219,30 @@
     ;
 
     $(function () {
+        //grab custom fields for this model whenever model changes.
+        $('#model_select_id').on("change", fetchCustomFields);
+
+        //initialize assigned user/loc/asset based on statuslabel's statustype
+        user_add($(".status_id option:selected").val());
+
+        //whenever statuslabel changes, update assigned user/loc/asset
+        $(".status_id").on("change", function () {
+            user_add($(".status_id").val());
+        });
+
+        //handle modal-add-interstitial calls
         var model, select;
 
         $('#createModal').on("show.bs.modal", function (event) {
             var link = $(event.relatedTarget);
             model = link.data("dependency");
             select = link.data("select");
-
-            var modal = $(this);
-            modal.find('.modal-title').text('Add a new ' + model);
-
-            $('.dynamic-form-row').hide();
-            function show_er(selector) {
-                $(selector).parent().parent().show();
-            }
-
-            show_er('#modal-name');
-            switch (model) {
-                case 'model':
-                    show_er('#modal-manufacturer_id');
-                    show_er('#modal-category_id');
-                    show_er('#modal-modelno');
-                    show_er('#modal-fieldset_id');
-                    break;
-
-                case 'user':
-                    $('.dynamic-form-row').hide(); //we don't want a generic "name"
-                    show_er("#modal-first_name");
-                    show_er("#modal-last_name");
-                    show_er("#modal-username");
-                    show_er("#modal-password");
-                    show_er("#modal-password_confirm");
-                    break;
-
-                case 'location':
-                    show_er('#modal-city');
-                    show_er('#modal-country');
-                    break;
-
-                case 'statuslabel':
-                    show_er("#modal-type");
-                    break;
-
-                case 'supplier':
-
-            }
-
+            // console.warn("Uh, href is: "+link.attr('href'));
+            // console.dir(link);
+            $('#createModal').load(link.attr('href'),function () {
+                //do we need to re-select2 this, after load? Probably.
+                $('#createModal').find('select.select2').select2();                
+            });
         });
 
         $("form").submit(function (event) {
@@ -404,7 +371,8 @@
         }
 
 
-        $('#modal-save').on('click', function () {
+        $('#createModal').on('click','#modal-save', function () {
+            console.warn("MODAL SAVE CALLED FOR MODAL!");
             var data = {};
             console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
             $('.modal-body input:visible').each(function (index, elem) {
@@ -414,6 +382,7 @@
                     data[bits[1]] = $(elem).val();
                 }
             });
+            //this can probably get replaced with a normal 'serialize' instead
             $('.modal-body select:visible').each(function (index, elem) {
                 var bits = elem.id.split("-");
                 data[bits[1]] = $(elem).val();
@@ -432,12 +401,21 @@
 
                     data: data,
                     success: function (result) {
-
-                        var id = result.id;
+                        // {"status":"error","messages":{"name":["The name field is required."]}}
+                        if(result.status == "error") {
+                            var error_message="";
+                            for(var field in result.messages) {
+                                error_message+="Problem(s) with field '"+field+"': "+result.messages[field].join(", ");
+                            }
+                            //window.alert("Error adding "+model+": "+error_message);
+                            $('#modal_error_msg').html(error_message).show();
+                            return false;
+                        }
+                        var id = result.payload.id;
                         var name = result.payload.name || (result.payload.first_name + " " + result.payload.last_name);
                         console.log(name);
-                        $('.modal-body input:visible').val("");
                         $('#createModal').modal('hide');
+                        $('#createModal').html("");
 
                         // "select" is the original drop-down menu that someone
                         // clicked 'add' on to add a new 'thing'
@@ -453,7 +431,8 @@
                     error: function (result) {
                        // console.log('Error: ' + result.responseJSON.error.message );
                         msg = result.responseJSON.messages || result.responseJSON.error;
-                        window.alert("Unable to add new " + model + " - error: " + msg);
+                        $('#modal_error_msg').html("Server Error: "+msg).show();
+                        //window.alert("Unable to add new " + model + " - error: " + msg);
                     }
 
 
