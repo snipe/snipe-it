@@ -487,8 +487,13 @@
                             </li>
                         @endcan
 
-                        @can('view', \App\Models\Company::class)
-                            <li><a href="{{ route('companies.index') }}" {{ (Request::is('/companies') ? ' class="active"' : '') }} >@lang('general.companies')</a></li>
+                        @can('view', \App\Models\AssetModel::class)
+                            <li><a href="{{ route('models.index') }}" {{ (Request::is('/assetmodels') ? ' class="active"' : '') }} >@lang('general.asset_models')</a></li>
+                        @endcan
+
+
+                        @can('view', \App\Models\Category::class)
+                            <li><a href="{{ route('categories.index') }}" {{ (Request::is('/categories') ? ' class="active"' : '') }} >@lang('general.categories')</a></li>
                         @endcan
 
                         @can('view', \App\Models\Manufacturer::class)
@@ -499,24 +504,20 @@
                             <li><a href="{{ route('suppliers.index') }}" {{ (Request::is('/suppliers') ? ' class="active"' : '') }} >@lang('general.suppliers')</a></li>
                         @endcan
 
-                        @can('view', \App\Models\Category::class)
-                            <li><a href="{{ route('categories.index') }}" {{ (Request::is('/categories') ? ' class="active"' : '') }} >@lang('general.categories')</a></li>
-                        @endcan
-
-                        @can('view', \App\Models\AssetModel::class)
-                            <li><a href="{{ route('models.index') }}" {{ (Request::is('/assetmodels') ? ' class="active"' : '') }} >@lang('general.asset_models')</a></li>
-                        @endcan
-
-                        @can('view', \App\Models\Depreciation::class)
-                            <li><a href="{{ route('depreciations.index') }}" {{ (Request::is('/depreciations') ? ' class="active"' : '') }} >@lang('general.depreciation')</a></li>
-                        @endcan
-
                         @can('view', \App\Models\Department::class)
                             <li><a href="{{ route('departments.index') }}" {{ (Request::is('/departments') ? ' class="active"' : '') }} >@lang('general.departments')</a></li>
                         @endcan
 
                         @can('view', \App\Models\Location::class)
                             <li><a href="{{ route('locations.index') }}" {{ (Request::is('/locations') ? ' class="active"' : '') }} >@lang('general.locations')</a></li>
+                        @endcan
+
+                        @can('view', \App\Models\Company::class)
+                            <li><a href="{{ route('companies.index') }}" {{ (Request::is('/companies') ? ' class="active"' : '') }} >@lang('general.companies')</a></li>
+                        @endcan
+
+                        @can('view', \App\Models\Depreciation::class)
+                            <li><a href="{{ route('depreciations.index') }}" {{ (Request::is('/depreciations') ? ' class="active"' : '') }} >@lang('general.depreciation')</a></li>
                         @endcan
 
                     </ul>
@@ -533,7 +534,10 @@
                 </a>
 
                 <ul class="treeview-menu">
-	                 <li><a href="{{ url('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
+	                 <li><a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
+
+                    <li><a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }} >@lang('general.audit_report')</a></li>
+
 
                     <li><a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}>@lang('general.depreciation_report')</a></li>
                     <li><a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }}>@lang('general.license_report')</a></li>
