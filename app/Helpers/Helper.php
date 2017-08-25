@@ -683,12 +683,11 @@ class Helper
     public static function formatStandardApiResponse($status, $payload = null, $messages = null) {
 
         $array['status'] = $status;
-        ($payload) ? $array['payload'] = $payload : '';
-
+        $array['messages'] = $messages;
         if (($messages) && (count($messages) > 0)) {
             $array['messages'] = $messages;
         }
-
+        ($payload) ? $array['payload'] = $payload : $array['payload'] = null;
         return $array;
     }
 
