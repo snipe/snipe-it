@@ -4,8 +4,9 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">{{ trans('general.user') }}</h4>
         </div>
-        <div class="modal-body">
-
+            <div class="modal-body">
+            <div class="alert alert-danger" id="modal_error_msg" style="display:none">
+            </div>
             <div class="dynamic-form-row">
                 <div class="col-md-4 col-xs-12"><label for="modal-first_name">{{ trans('general.first_name') }}:</label></div>
                 <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-first_name' class="form-control"></div>
