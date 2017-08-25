@@ -23,6 +23,7 @@
     @endif
     <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
     <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
+      <li role="presentation"><a href="{{ route('asset.audit.create', $asset->id)  }}">{{ trans('general.audit') }}</a></li>
   </ul>
 </div>
 @endcan
@@ -111,6 +112,18 @@
                       <td>{{ trans('admin/hardware/form.serial') }}</td>
                       <td>{{ $asset->serial  }}</td>
                     </tr>
+                    @endif
+                    @if ($audit_log->created_at)
+                      <tr>
+                        <td>{{ trans('general.last_audit') }}</td>
+                        <td> {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})</td>
+                      </tr>
+                    @endif
+                    @if ($asset->next_audit_date)
+                      <tr>
+                        <td>{{ trans('general.next_audit_date') }}</td>
+                        <td> {{ \App\Helpers\Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}</td>
+                      </tr>
                     @endif
 
                     @if ($asset->model->manufacturer)

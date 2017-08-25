@@ -17,6 +17,16 @@ Route::group(
             'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id']
         ]);
 
+        Route::get('audit/{id}', [
+            'as' => 'asset.audit.create',
+            'uses' => 'AssetsController@audit'
+        ]);
+
+        Route::post('audit/{id}', [
+            'as' => 'asset.audit.store',
+            'uses' => 'AssetsController@auditStore'
+        ]);
+
 
         Route::get('history', [
             'as' => 'asset.import-history',
@@ -111,6 +121,8 @@ Route::group(
             'as' => 'hardware/bulkcheckout',
             'uses' => 'AssetsController@postBulkCheckout'
         ]);
+
+
 });
 
 

@@ -29,6 +29,7 @@ class ActionlogsTransformer
             ] : null,
             'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
+            'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->item->next_audit_date, 'datetime'): null,
             'action_type'   => $actionlog->present()->actionType(),
             'admin' => ($actionlog->user) ? [
                 'id' => (int) $actionlog->user->id,

@@ -36,6 +36,10 @@ class ReportsController extends Controller
                 ->where('item_type','=',"App\\Models\\".ucwords($request->input('item_type')));
         }
 
+        if ($request->has('action_type')) {
+            $actionlogs = $actionlogs->where('action_type','=',$request->input('action_type'))->orderBy('created_at', 'desc');
+        }
+
         $allowed_columns = [
             'id',
             'created_at'

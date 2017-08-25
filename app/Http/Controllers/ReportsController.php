@@ -271,6 +271,20 @@ class ReportsController extends Controller
 
     }
 
+
+    /**
+     * Displays audit report.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function audit()
+    {
+        return view('reports/audit');
+    }
+
+
     /**
     * Displays activity report.
     *

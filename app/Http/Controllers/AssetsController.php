@@ -595,9 +595,12 @@ class AssetsController extends Controller
     */
     public function show($assetId = null)
     {
+
         $asset = Asset::withTrashed()->find($assetId);
-        $settings = Setting::getSettings();
         $this->authorize('view', $asset);
+        $settings = Setting::getSettings();
+        $audit_log = Actionlog::where('action_type','=','audit')->where('item_id','=',$assetId)->where('item_type','=',Asset::class)->orderBy('created_at','DESC')->first();
+
 
         if (isset($asset)) {
 
@@ -617,7 +620,8 @@ class AssetsController extends Controller
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
-            return view('hardware/view', compact('asset', 'qr_code', 'settings'))->with('use_currency', $use_currency);
+            return view('hardware/view', compact('asset', 'qr_code', 'settings'))
+                ->with('use_currency', $use_currency)->with('audit_log',$audit_log);
         }
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
@@ -1233,4 +1237,29 @@ class AssetsController extends Controller
           // Redirect to the asset management page with error
             return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
     }
+
+    public function audit(Request $request, $id)
+    {
+        $this->authorize('audit', Asset::class);
+
+        $dt = Carbon::now()->addMonths(12)->toDateString();
+
+        $asset = Asset::findOrFail($id);
+        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt);
+    }
+
+    public function auditStore(Request $request, $id)
+    {
+        $this->authorize('audit', Asset::class);
+
+        $asset = Asset::findOrFail($id);
+        $asset->next_audit_date = $request->input('next_audit_date');
+
+        if ($asset->save()) {
+            $asset->logAudit(request('note'));
+            return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
+        }
+    }
+
+
 }

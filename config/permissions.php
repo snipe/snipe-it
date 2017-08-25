@@ -85,8 +85,8 @@ return array(
         array(
             'permission' => 'assets.audit',
             'label'      => 'Audit ',
-            'note'       => '',
-            'display'    => false,
+            'note'       => 'Allows the user to mark an asset as physically inventoried.',
+            'display'    => true,
         ),
 
 

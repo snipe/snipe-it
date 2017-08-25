@@ -274,6 +274,11 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('reports/audit', [
+        'as' => 'reports.audit',
+        'uses' => 'ReportsController@audit'
+    ]);
+
     Route::get(
         'reports/depreciation',
         [ 'as' => 'reports/depreciation', 'uses' => 'ReportsController@getDeprecationReport' ]
@@ -316,7 +321,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get(
         'reports/activity',
-        [ 'as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport' ]
+        [ 'as' => 'reports.activity', 'uses' => 'ReportsController@getActivityReport' ]
     );
 
 

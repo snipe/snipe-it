@@ -20,6 +20,7 @@ class AssetObserver
 
 
         if ((isset($asset->getOriginal()['assigned_to'])) && ($asset->getAttributes()['assigned_to'] == $asset->getOriginal()['assigned_to'])
+            && ($asset->getAttributes()['next_audit_date'] == $asset->getOriginal()['next_audit_date'])
             && ($asset->getAttributes()['last_checkout'] == $asset->getOriginal()['last_checkout'])
             && ($asset->getAttributes()['status_id'] == $asset->getOriginal()['status_id']))
         {

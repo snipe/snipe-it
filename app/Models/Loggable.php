@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\CheckoutRequest;
 use App\Models\User;
 use App\Notifications\CheckinNotification;
+use App\Notifications\AuditNotification;
 use App\Notifications\CheckoutNotification;
 use Illuminate\Support\Facades\Auth;
 
@@ -119,6 +120,38 @@ trait Loggable
 
         return $log;
     }
+
+
+    /**
+     * @author  A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \App\Models\Actionlog
+     */
+    public function logAudit($note)
+    {
+        $log = new Actionlog;
+        if (static::class == LicenseSeat::class) {
+            $log->item_type = License::class;
+            $log->item_id = $this->license_id;
+        } else {
+            $log->item_type = static::class;
+            $log->item_id = $this->id;
+        }
+        $log->location_id = null;
+        $log->note = $note;
+        $log->user_id = Auth::user()->id;
+        $log->logaction('audit');
+
+        $params = [
+            'item' => $log->item,
+            'admin' => $log->user,
+            'note' => $note
+        ];
+        Setting::getSettings()->notify(new AuditNotification($params));
+
+        return $log;
+    }
+
 
     /**
      * @author  Daniel Meltzer <parallelgrapefruit@gmail.com

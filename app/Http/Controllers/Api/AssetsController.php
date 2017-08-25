@@ -31,6 +31,7 @@ use TCPDF;
 use Validator;
 use View;
 
+
 /**
  * This class controls all actions related to assets for
  * the Snipe-IT Asset Management application.
@@ -495,5 +496,34 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));
+    }
+
+
+    /**
+     * Mark an asset as audited
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $id
+     * @since [v4.0]
+     * @return JsonResponse
+     */
+    public function audit(Request $request, $id) {
+
+        $this->authorize('audit', Asset::class);
+
+        $rules = array(
+            'id'     => 'required'
+        );
+
+        $validator = \Validator::make($request->all(), $rules);
+
+        $asset = Asset::findOrFail($id);
+        $asset->next_audit_date = $request->input('next_audit_date');
+
+        if ($asset->save()) {
+            $asset->logAudit(request('note'));
+            return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.audit.success')));
+        }
+
     }
 }
