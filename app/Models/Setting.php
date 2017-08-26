@@ -45,6 +45,8 @@ class Setting extends Model
           "ldap_version"     => 'sometimes|required_if:ldap_enabled,1|nullable',
           "thumbnail_max_h"     => 'numeric|max:500|min:25',
           "pwd_secure_min" => "numeric|required|min:5",
+          "audit_warning_days" => "numeric|nullable",
+          "audit_interval" => "numeric|nullable",
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];
