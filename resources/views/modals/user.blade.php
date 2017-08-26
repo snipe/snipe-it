@@ -1,3 +1,24 @@
+
+<script src="/js/pGenerator.jquery.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('#genPassword').pGenerator({
+            'bind': 'click',
+            'passwordElement': '#modal-password',
+            'displayElement': '#generated-password',
+            'passwordLength': 16,
+            'uppercase': true,
+            'lowercase': true,
+            'numbers': true,
+            'specialChars': true,
+            'onPasswordGenerated': function (generatedPassword) {
+                $('#modal-password_confirm').val($('#modal-password').val());
+            }
+        });
+    });
+</script>
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">

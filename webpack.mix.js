@@ -46,6 +46,7 @@ mix.scripts([
     './node_modules/ekko-lightbox/dist/ekko-lightbox.js',
     './resources/assets/js/app.js', //this is part of AdminLTE
     './resources/assets/js/snipeit.js', //this is the actual Snipe-IT JS
+    './resources/assets/js/snipeit_modals.js'
 ],'public/js/dist/all.js');
 
 //if (mix.config.inProduction) {
