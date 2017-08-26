@@ -1,5 +1,29 @@
+/* 
+ * 
+ * Snipe-IT Universal Modal support
+ * 
+ * Enables modal dialogs to create sub-resources throughout Snipe-IT
+ * 
+ */
 
-$(function () {
+ /* 
+ HOW TO USE
+
+ Create a Button looking like this:
+
+ <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
+
+ If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
+
+ data-toggle="modal" - required for Bootstrap Modals
+ data-target="#createModal" - fixed ID for the modal, do not change
+ data-dependency="user" - which Snipe-IT model you're going to be creating.
+ data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a 
+                             success? Be on the lookout for duplicate ID's, it will confuse this library!
+ class="btn btn-sm btn-default" - makes it look button-ey, feel free to change :)
+ */
+
+ $(function () {
   console.warn("Loading up Modal functionality.");
 
   //handle modal-add-interstitial calls
@@ -64,7 +88,10 @@ $(function () {
             }
             var id = result.payload.id;
             var name = result.payload.name || (result.payload.first_name + " " + result.payload.last_name);
-            console.log(name);
+            if(!id || !name) {
+                console.error("Could not find resulting name or ID from modal-create. Name: "+name+", id: "+id);
+                return false;
+            }
             $('#createModal').modal('hide');
             $('#createModal').html("");
 
@@ -72,11 +99,18 @@ $(function () {
             // clicked 'add' on to add a new 'thing'
             // this code adds the newly created object to that select
             var selector = document.getElementById(select);
+            if(!selector) {
+                console.error("Could not find original <select> element with an id of: "+select);
+                return false;
+            }
             //console.log(document.getElementById(select));
+            console.dir(selector);
             selector.options[selector.length] = new Option(name, id);
             selector.selectedIndex = selector.length - 1;
             $(selector).trigger("change");
-            fetchCustomFields();
+            if(fetchCustomFields) {
+                fetchCustomFields();
+            }
 
         },
         error: function (result) {
