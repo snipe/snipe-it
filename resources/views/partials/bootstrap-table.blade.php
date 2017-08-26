@@ -98,6 +98,15 @@ $('.snipe-table').bootstrapTable({
 
     });
 
+
+    function dateRowCheckStyle(value) {
+        if ((value.days_to_next_audit) && (value.days_to_next_audit < {{ $snipeSettings->audit_warning_days }})) {
+            return { classes : "danger" }
+        }
+        return {};
+    }
+
+
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('check.bs.table', function () {
         $('#bulkEdit').removeAttr('disabled');

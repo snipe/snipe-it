@@ -562,10 +562,12 @@ class SettingsController extends Controller
         $alert_email = rtrim($request->input('alert_email'), ',');
         $alert_email = trim($alert_email);
 
-        $setting->alert_email = e($alert_email);
+        $setting->alert_email = $alert_email;
         $setting->alerts_enabled = $request->input('alerts_enabled', '0');
         $setting->alert_interval = $request->input('alert_interval');
         $setting->alert_threshold = $request->input('alert_threshold');
+        $setting->audit_interval = $request->input('audit_interval');
+        $setting->audit_warning_days = $request->input('audit_warning_days');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')

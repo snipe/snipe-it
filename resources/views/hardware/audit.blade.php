@@ -44,11 +44,20 @@
                             </div>
                         </div>
 
+                        <!-- Locations -->
+                        <div id="location_id" class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}">
+                            {{ Form::label('location_id', trans('general.location'), array('class' => 'col-md-3 control-label')) }}
+                            <div class="col-md-9">
+                                {{ Form::select('location_id', $locations_list , Input::old('location_id'), array('class'=>'select2', 'id'=>'location_id', 'style'=>'width:100%')) }}
+
+                                {!! $errors->first('location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                            </div>
+                        </div>
 
 
                         <!-- Next Audit -->
                         <div class="form-group {{ $errors->has('next_audit_date') ? 'error' : '' }}">
-                            {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
+                            {{ Form::label('name', trans('general.next_audit_date'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-9">
                                 <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ Input::old('next_audit_date', $next_audit_date) }}">
@@ -73,7 +82,7 @@
                     </div> <!--/.box-body-->
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
+                        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.audit') }}</button>
                     </div>
                 </form>
             </div>

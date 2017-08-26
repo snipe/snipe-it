@@ -19,7 +19,7 @@ class ReportsController extends Controller
     public function index(Request $request)
     {
 
-        $actionlogs = Actionlog::with('item', 'user', 'target');
+        $actionlogs = Actionlog::with('item', 'user', 'target','location');
 
         if ($request->has('search')) {
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));

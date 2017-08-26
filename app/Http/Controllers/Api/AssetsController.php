@@ -512,18 +512,25 @@ class AssetsController extends Controller
         $this->authorize('audit', Asset::class);
 
         $rules = array(
-            'id'     => 'required'
+            'location_id' => 'exists:locations,id|nullable|numeric',
+            'next_audit_date' => 'date|nullable'
         );
 
         $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
+        }
 
         $asset = Asset::findOrFail($id);
         $asset->next_audit_date = $request->input('next_audit_date');
 
         if ($asset->save()) {
-            $asset->logAudit(request('note'));
+            $asset->logAudit(request('note'),request('location_id'));
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.audit.success')));
         }
+
+
+
 
     }
 }

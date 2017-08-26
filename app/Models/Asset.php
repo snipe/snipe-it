@@ -66,6 +66,7 @@ class Asset extends Depreciable
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'purchase_cost'   => 'numeric|nullable',
+        'next_audit_date'  => 'date|nullable',
     ];
 
   /**

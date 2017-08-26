@@ -2,6 +2,7 @@
 namespace App\Http\Transformers;
 
 use App\Models\Actionlog;
+use App\Models\Setting;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
@@ -12,24 +13,32 @@ class ActionlogsTransformer
     public function transformActionlogs (Collection $actionlogs, $total)
     {
         $array = array();
+        $settings = Setting::getSettings();
         foreach ($actionlogs as $actionlog) {
-            $array[] = self::transformActionlog($actionlog);
+            $array[] = self::transformActionlog($actionlog, $settings);
         }
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformActionlog (Actionlog $actionlog)
+    public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
         $array = [
+            'id'          => (int) $actionlog->id,
             'icon'          => $actionlog->present()->icon(),
+            'image' => ($actionlog->item->getImageUrl()) ? $actionlog->item->getImageUrl() : null,
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
                 'name' => e($actionlog->item->getDisplayNameAttribute()),
                 'type' => e($actionlog->itemType()),
             ] : null,
+            'location' => ($actionlog->location) ? [
+                'id' => (int) $actionlog->location->id,
+                'name' => e($actionlog->location->name)
+            ] : null,
             'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
-            'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->item->next_audit_date, 'datetime'): null,
+            'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->item->next_audit_date, 'date'): null,
+            'days_to_next_audit' => $actionlog->daysUntilNextAudit($settings->audit_interval, $actionlog->item),
             'action_type'   => $actionlog->present()->actionType(),
             'admin' => ($actionlog->user) ? [
                 'id' => (int) $actionlog->user->id,

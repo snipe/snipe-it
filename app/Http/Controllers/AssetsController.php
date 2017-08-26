@@ -1241,22 +1241,30 @@ class AssetsController extends Controller
     public function audit(Request $request, $id)
     {
         $this->authorize('audit', Asset::class);
-
         $dt = Carbon::now()->addMonths(12)->toDateString();
-
         $asset = Asset::findOrFail($id);
-        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt);
+        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list', Helper::locationsList());
     }
 
     public function auditStore(Request $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
+        $rules = array(
+            'location_id' => 'exists:locations,id|nullable|numeric',
+            'next_audit_date' => 'date|nullable'
+        );
+
+        $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
+        }
+
         $asset = Asset::findOrFail($id);
         $asset->next_audit_date = $request->input('next_audit_date');
 
         if ($asset->save()) {
-            $asset->logAudit(request('note'));
+            $asset->logAudit(request('note'),request('location_id'));
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }

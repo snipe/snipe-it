@@ -123,6 +123,10 @@ class Actionlog extends SnipeModel
         return $this->belongsTo('\App\Models\ActionLog', 'thread_id');
     }
 
+    public function location() {
+        return $this->belongsTo('\App\Models\Location', 'location_id' )->withTrashed();
+    }
+
     /**
        * Check if the file exists, and if it does, force a download
        **/
@@ -147,6 +151,44 @@ class Actionlog extends SnipeModel
         } else {
             return false;
         }
+    }
+
+    public function daysUntilNextAudit($monthInterval = null, $asset = null) {
+
+        // check for next_audit_date to override global
+
+        if (!$monthInterval) {
+            $monthInterval = 12;
+        }
+        $last_audit_date = $this->created_at;
+        $next_audit_days = $last_audit_date->diffInDays($last_audit_date->copy()->addMonth($monthInterval));
+
+        // Override the default setting for interval if the asset has its own next audit date
+        if (($asset) && ($asset->next_audit_date)) {
+            $override_default_next = \Carbon::parse($asset->next_audit_date);
+            $suborder['payment_date'] = $override_default_next->format('M d Y');
+            $next_audit_days = $last_audit_date->diffInDays($override_default_next);
+        }
+
+        return $next_audit_days;
+    }
+
+    public function calcNextAuditDate($monthInterval = null, $asset = null) {
+
+        if (!$monthInterval) {
+            $monthInterval = 12;
+        }
+
+        $dt = \Carbon::now()->addMonths(12)->toDateString();
+        $last_audit_date = Carbon::parse($this->created_at);
+
+        // If there is an asset-specific next date already given,
+        if (($asset) && ($asset->next_audit_date)) {
+            return \Carbon::parse($asset->next_audit_date);;
+        }
+
+        $next_audit_date = \Carbon::now()->addMonths($monthInterval)->toDateString();
+        $next_audit_date = $last_audit_date->diffInDays($last_audit_date->copy()->addMonth($monthInterval));
     }
 
     /**

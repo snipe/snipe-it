@@ -90,6 +90,41 @@
                             </div>
                         </div>
 
+
+                        <!-- Alert interval -->
+                        <div class="form-group {{ $errors->has('audit_interval') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('audit_interval', trans('admin/settings/general.audit_interval')) }}
+                            </div>
+                            <div class="input-group col-md-2">
+                                {{ Form::text('audit_interval', Input::old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                <span class="input-group-addon">{{ trans('general.months') }}</span>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                {!! $errors->first('audit_interval', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">{{ trans('admin/settings/general.audit_interval_help') }}</p>
+                            </div>
+                        </div>
+
+                        <!-- Alert threshold -->
+                        <div class="form-group {{ $errors->has('audit_warning_days') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('audit_warning_days', trans('admin/settings/general.audit_warning_days')) }}
+                            </div>
+                            <div class="input-group col-md-2">
+                                {{ Form::text('audit_warning_days', Input::old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                <span class="input-group-addon">{{ trans('general.days') }}</span>
+
+
+
+
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                {!! $errors->first('audit_warning_days', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">{{ trans('admin/settings/general.audit_warning_days_help') }}</p>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div> <!--/.box-body-->

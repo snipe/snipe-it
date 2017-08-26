@@ -127,7 +127,7 @@ trait Loggable
      * @since [v4.0]
      * @return \App\Models\Actionlog
      */
-    public function logAudit($note)
+    public function logAudit($note, $location_id)
     {
         $log = new Actionlog;
         if (static::class == LicenseSeat::class) {
@@ -137,7 +137,7 @@ trait Loggable
             $log->item_type = static::class;
             $log->item_id = $this->id;
         }
-        $log->location_id = null;
+        $log->location_id = ($location_id) ? $location_id : null;
         $log->note = $note;
         $log->user_id = Auth::user()->id;
         $log->logaction('audit');
@@ -151,6 +151,7 @@ trait Loggable
 
         return $log;
     }
+
 
 
     /**
