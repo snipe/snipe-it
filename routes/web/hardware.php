@@ -17,6 +17,11 @@ Route::group(
             'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id']
         ]);
 
+        Route::get('scan', [
+            'as' => 'asset.scan',
+            'uses' => 'AssetsController@scan'
+        ]);
+
         Route::get('audit/{id}', [
             'as' => 'asset.audit.create',
             'uses' => 'AssetsController@audit'
