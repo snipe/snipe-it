@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\User;
 use App\Helpers\Helper;
 use App\Http\Requests\SaveUserRequest;
+use App\Models\Asset;
 
 class UsersController extends Controller
 {
@@ -181,5 +182,20 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));
+    }
+
+    /**
+     * Return JSON containing a list of assets assigned to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function assets($id)
+    {
+        $this->authorize('view', User::class);
+        $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
+        return response()->json($assets);
     }
 }

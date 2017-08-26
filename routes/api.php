@@ -540,7 +540,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         Route::get('{user}/assets',
             [
                 'as' => 'api.users.assetlist',
-                'uses' => 'UsersController@getAssetList'
+                'uses' => 'UsersController@assets'
             ]
         );
 
