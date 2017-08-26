@@ -1151,21 +1151,7 @@ class UsersController extends Controller
         }
         return redirect()->route('ldap/user')->with('success', "LDAP Import successful.")->with('summary', $summary);
     }
-
-    /**
-     * Return JSON containing a list of assets assigned to a user.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.0]
-     * @param $userId
-     * @return string JSON
-     */
-    public function getAssetList($userId)
-    {
-        $this->authorize('view', User::class);
-        $assets = Asset::where('assigned_to', '=', $userId)->with('model')->get();
-        return response()->json($assets);
-    }
+    
 
     /**
      * Exports users to CSV

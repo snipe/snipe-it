@@ -100,7 +100,7 @@ $('.snipe-table').bootstrapTable({
 
 
     function dateRowCheckStyle(value) {
-        if ((value.days_to_next_audit) && (value.days_to_next_audit < {{ $snipeSettings->audit_warning_days }})) {
+        if ((value.days_to_next_audit) && (value.days_to_next_audit < {{ $snipeSettings->audit_warning_days ?: 0 }})) {
             return { classes : "danger" }
         }
         return {};
