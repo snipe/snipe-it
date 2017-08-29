@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Carbon;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -179,16 +180,13 @@ class Actionlog extends SnipeModel
             $monthInterval = 12;
         }
 
-        $dt = \Carbon::now()->addMonths(12)->toDateString();
         $last_audit_date = Carbon::parse($this->created_at);
-
         // If there is an asset-specific next date already given,
         if (($asset) && ($asset->next_audit_date)) {
-            return \Carbon::parse($asset->next_audit_date);;
+            return \Carbon::parse($asset->next_audit_date);
         }
 
-        $next_audit_date = \Carbon::now()->addMonths($monthInterval)->toDateString();
-        $next_audit_date = $last_audit_date->diffInDays($last_audit_date->copy()->addMonth($monthInterval));
+        return  \Carbon::parse($last_audit_date)->addMonths($monthInterval)->toDateString();
     }
 
     /**
