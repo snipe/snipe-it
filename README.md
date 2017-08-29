@@ -21,7 +21,7 @@ If you're having trouble with the installation, please check the [Common Issues]
 
 -----
 ### User's Manual
-For help using Snipe-IT, check out the [user's manual](https://snipe-it-manual.readme.io/docs).
+For help using Snipe-IT, check out the [user's manual](https://snipe-it.readme.io/docs/overview).
 
 -----
 ### Bug Reports & Feature Requests
