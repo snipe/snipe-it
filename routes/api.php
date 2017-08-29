@@ -214,7 +214,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'hardware'], function () {
 
-        Route::post('audit/{id}', [
+        Route::post('audit', [
             'as' => 'api.asset.audit',
             'uses' => 'AssetsController@audit'
         ]);

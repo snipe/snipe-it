@@ -25,6 +25,8 @@
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
     'bad_data'      		=> 'Nothing found. Maybe bad data?',
+    'bulkaudit'             => 'Bulk Audit',
+    'bulkaudit_status'      => 'Audit Status',
     'bulk_checkout'  		=> 'Bulk Checkout',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',

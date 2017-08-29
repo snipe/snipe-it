@@ -1238,6 +1238,16 @@ class AssetsController extends Controller
             return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
     }
 
+
+    public function quickScan(Request $request)
+    {
+        $this->authorize('audit', Asset::class);
+        $dt = Carbon::now()->addMonths(12)->toDateString();
+        return view('hardware/quickscan')->with('next_audit_date', $dt)->with('locations_list', Helper::locationsList());
+    }
+
+
+
     public function audit(Request $request, $id)
     {
         $this->authorize('audit', Asset::class);

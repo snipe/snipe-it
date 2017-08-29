@@ -414,6 +414,9 @@
                       <li><a href="{{ route('maintenances.index') }}">@lang('general.asset_maintenances') </a></li>
                       <li><a href="{{ url('hardware/history') }}">@lang('general.import-history') </a></li>
                     @endcan
+                    @can('audit', \App\Models\Asset::class)
+                        <li><a href="{{ route('assets.bulkaudit') }}">@lang('general.bulkaudit') </a></li>
+                    @endcan
                 </ul>
               </li>
               @endcan

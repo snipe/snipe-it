@@ -12,6 +12,11 @@ Route::group(
     'middleware' => ['auth']],
     function () {
 
+        Route::get( 'bulkaudit',  [
+            'as' => 'assets.bulkaudit',
+            'uses' => 'AssetsController@quickScan'
+        ]);
+
         # Asset Maintenances
         Route::resource('maintenances', 'AssetMaintenancesController', [
             'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id']
@@ -126,6 +131,8 @@ Route::group(
             'as' => 'hardware/bulkcheckout',
             'uses' => 'AssetsController@postBulkCheckout'
         ]);
+
+
 
 
 });

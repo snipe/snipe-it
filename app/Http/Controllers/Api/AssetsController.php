@@ -507,27 +507,34 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function audit(Request $request, $id) {
+    public function audit(Request $request) {
+
 
         $this->authorize('audit', Asset::class);
-
         $rules = array(
+            'asset_tag' => 'required',
             'location_id' => 'exists:locations,id|nullable|numeric',
             'next_audit_date' => 'date|nullable'
         );
 
-        $validator = \Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
         }
 
-        $asset = Asset::findOrFail($id);
-        $asset->next_audit_date = $request->input('next_audit_date');
+        $asset = Asset::where('asset_tag','=', $request->input('asset_tag'))->first();
 
-        if ($asset->save()) {
-            $asset->logAudit(request('note'),request('location_id'));
-            return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.audit.success')));
+
+        if ($asset) {
+            $asset->next_audit_date = $request->input('next_audit_date');
+            if ($asset->save()) {
+                $log = $asset->logAudit(request('note'),request('location_id'));
+                return response()->json(Helper::formatStandardApiResponse('success', ['asset_tag'=> e($asset->asset_tag), 'note'=> e($request->input('note')), 'next_audit_date' => Helper::getFormattedDateObject($log->calcNextAuditDate())], trans('admin/hardware/message.audit.success')));
+            }
         }
+
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.$request->input('asset_tag').' not found'));
+
 
 
 
