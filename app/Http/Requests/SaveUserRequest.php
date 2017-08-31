@@ -34,14 +34,14 @@ class SaveUserRequest extends Request
             case 'POST':
             {
                 $rules['first_name'] = 'required|string|min:1';
-                $rules['username'] = 'required|string|min:1';
+                $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 $rules['password'] = Setting::passwordComplexityRulesSaving('store');
             }
 
             // Save all fields
             case 'PUT':
                 $rules['first_name'] = 'required|string|min:1';
-                $rules['username'] = 'required|string|min:1';
+                $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 $rules['password'] = Setting::passwordComplexityRulesSaving('update');
 
             // Save only what's passed
