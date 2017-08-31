@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +71,13 @@ $factory->state(Asset::class, 'assigned-to-asset', function ($faker) {
     ];
 });
 
+$factory->state(Asset::class, 'requires-acceptance', function ($faker) {
+    $cat = factory(Category::class)->states('asset-category', 'requires-acceptance')->create();
+    $model = factory(AssetModel::class)->create(['category_id' => $cat->id]);
+    return [
+        'model_id' => $model->id
+    ];
+});
 
 $factory->define(App\Models\AssetModel::class, function (Faker\Generator $faker) {
     return [

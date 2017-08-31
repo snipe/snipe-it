@@ -59,29 +59,25 @@
                   @endcan
               </div>
             </div>
+            @if (!$asset->requireAcceptance())
+                <!-- Assets -->
+                <div id="assigned_asset" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+                  {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+                  <div class="col-md-7 required">
+                    {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
+                    {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                  </div>
+                </div>
 
-            <!-- Assets -->
-            <div id="assigned_asset" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-              {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-              <div class="col-md-7 required">
-                {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
-
-                {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              </div>
-              
-            </div> 
-
-            <!-- Locations -->
-            <div id="assigned_location" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-              {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-              <div class="col-md-7 required">
-                {{ Form::select('assigned_location', $locations_list , Input::old('assigned_location', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_location', 'style'=>'width:100%')) }}
-
-                {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              </div>
-
-            </div>
-
+                <!-- Locations -->
+                <div id="assigned_location" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+                  {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+                  <div class="col-md-7 required">
+                    {{ Form::select('assigned_location', $locations_list , Input::old('assigned_location', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_location', 'style'=>'width:100%')) }}
+                    {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                  </div>
+                </div>
+            @endif
             <!-- Checkout/Checkin Date -->
             <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
               {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}

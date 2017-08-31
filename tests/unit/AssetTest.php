@@ -1,7 +1,9 @@
 <?php
+use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
+use App\Models\Location;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
@@ -202,8 +204,7 @@ class AssetTest extends BaseTest
     {
         // This tests Asset::checkOut(), Asset::assignedTo(), Asset::assignedAssets(), Asset::assetLoc(), Asset::assignedType(), defaultLoc()
         $asset = factory(Asset::class)->create();
-        $adminUser = factory(App\Models\User::class)->states('superuser')->create();
-        Auth::login($adminUser);
+        $adminUser = $this->signIn();
 
         $target = factory(App\Models\User::class)->create();
         // An Asset Can be checked out to a user, and this should be logged.
@@ -281,5 +282,16 @@ class AssetTest extends BaseTest
         $asset = factory(Asset::class)->create();
         factory(App\Models\AssetMaintenance::class)->create(['asset_id' => $asset->id]);
         $this->assertCount(1, $asset->assetmaintenances);
+    }
+
+    public function testAnAssetThatRequiresAcceptanceCanNotBeCheckedOutToANonUser()
+    {
+        $this->expectException(CheckoutNotAllowed::class);
+        $this->signIn();
+
+        $asset = factory(Asset::class)->states('requires-acceptance')->create();
+
+        $location = factory(Location::class)->create();
+        $asset->checkOut($location);
     }
 }
