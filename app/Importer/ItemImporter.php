@@ -95,7 +95,6 @@ class ItemImporter extends Importer
             $item = $item->reject(function ($value) {
                 return empty($value);
             });
-dd($item);
         }
 
         return $item->toArray();
