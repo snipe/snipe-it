@@ -90,12 +90,12 @@ class ItemImporter extends Importer
         $item = collect($this->item);
         // First Filter the item down to the model's fillable fields
         $item = $item->only($model->getFillable());
-
         // Then iterate through the item and, if we are updating, remove any blank values.
         if ($updating) {
             $item = $item->reject(function ($value) {
                 return empty($value);
             });
+dd($item);
         }
 
         return $item->toArray();

@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Presenters\Presentable;
 use AssetPresenter;
@@ -141,7 +142,7 @@ class Asset extends Depreciable
      * @return bool
      */
     //FIXME: The admin parameter is never used. Can probably be removed.
-    public function checkOut($target, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
+    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
         if (!$target) {
             return false;
@@ -161,39 +162,17 @@ class Asset extends Depreciable
         }
 
         if ($this->requireAcceptance()) {
+            if(get_class($target) != User::class) {
+                throw new CheckoutNotAllowed;
+            }
             $this->accepted="pending";
         }
 
         if ($this->save()) {
             $this->logCheckout($note, $target);
-//            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
-//                $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
-//            }
             return true;
         }
         return false;
-    }
-
-    public function checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note)
-    {
-        $data['log_id'] = $log_id;
-        $data['eula'] = $this->getEula();
-        $data['first_name'] = $user->first_name;
-        $data['item_name'] = $this->present()->name();
-        $data['checkout_date'] = $checkout_at;
-        $data['expected_checkin'] = $expected_checkin;
-        $data['item_tag'] = $this->asset_tag;
-        $data['note'] = $note;
-        $data['item_serial'] = $this->serial;
-        $data['require_acceptance'] = $this->requireAcceptance();
-
-        if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && (!config('app.lock_passwords'))) {
-            \Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject(trans('mail.Confirm_asset_delivery'));
-            });
-        }
     }
 
     public function getDetailedNameAttribute()

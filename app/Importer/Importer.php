@@ -136,14 +136,12 @@ abstract class Importer
      * @param $default string
      * @return string
      */
-    public function findCsvMatch(array $array, $key, $default = '')
+    public function findCsvMatch(array $array, $key, $default = null)
     {
 
         $val = $default;
 
-        if ($customKey = $this->lookupCustomKey($key)) {
-            $key = $customKey;
-        }
+        $key = $this->lookupCustomKey($key);
 
         $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
@@ -169,7 +167,8 @@ abstract class Importer
             $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
             return $this->fieldMap[$key];
         }
-        return null;
+        // Otherwise no custom key, return original.
+        return $key;
     }
 
     /**

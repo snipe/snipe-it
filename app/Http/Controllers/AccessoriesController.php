@@ -260,7 +260,7 @@ class AccessoriesController extends Controller
             'assigned_to' => $request->get('assigned_to')
         ]);
 
-        $logaction = $accessory->logCheckout(e(Input::get('note')));
+        $logaction = $accessory->logCheckout(e(Input::get('note')), $user);
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
