@@ -126,6 +126,8 @@
                       @endif
                     @else
                       (Managed via LDAP)
+                          <input type="hidden" name="username" value="{{ Input::old('username', $user->username) }}">
+
                     @endif
 
                     {!! $errors->first('username', '<span class="alert-msg">:message</span>') !!}

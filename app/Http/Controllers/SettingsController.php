@@ -20,6 +20,7 @@ use Auth;
 use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\SettingsLdapRequest;
 
 /**
  * This controller handles all actions related to Settings for
