@@ -110,7 +110,7 @@ class Ldap extends Model
             return false;
         }
 
-        if (!$user =  array_change_key_case(ldap_get_attributes($connection, $entry), CASE_LOWER)) {
+        if (!$user =  ldap_get_attributes($connection, $entry)) {
             return false;
         }
 
