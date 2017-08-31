@@ -283,7 +283,7 @@ class ComponentsController extends Controller
             'asset_id' => $asset_id
         ]);
 
-        $component->logCheckout(e(Input::get('note')), $asset_id);
+        $component->logCheckout(e(Input::get('note')), $asset);
         return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
     }
 

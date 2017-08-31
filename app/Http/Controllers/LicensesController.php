@@ -291,22 +291,22 @@ class LicensesController extends Controller
             // Ooops.. something went wrong
             return redirect()->back()->withInput()->withErrors($validator);
         }
-
+        $target = null;
         if ($assigned_to!='') {
         // Check if the user exists
-            if (is_null($is_assigned_to = User::find($assigned_to))) {
+            if (is_null($target = User::find($assigned_to))) {
                 // Redirect to the asset management page with error
                 return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
             }
         }
 
         if ($asset_id!='') {
-            if (is_null($asset = Asset::find($asset_id))) {
+            if (is_null($target = Asset::find($asset_id))) {
                 // Redirect to the asset management page with error
                 return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
             }
 
-            if (($asset->assigned_to!='') && (($asset->assigned_to!=$assigned_to)) && ($assigned_to!='')) {
+            if (($target->assigned_to!='') && (($target->assigned_to!=$assigned_to)) && ($target!='')) {
                 return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.owner_doesnt_match_asset'));
             }
         }
@@ -332,7 +332,7 @@ class LicensesController extends Controller
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            $licenseSeat->logCheckout($request->input('note'));
+            $licenseSeat->logCheckout($request->input('note'), $target);
 
             $data['license_id'] =$licenseSeat->license_id;
             $data['note'] = $request->input('note');

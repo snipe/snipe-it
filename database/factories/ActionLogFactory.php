@@ -20,7 +20,7 @@ $factory->defineAs(Actionlog::class, 'asset-checkout', function (Faker\Generator
     $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
     $target = factory(App\Models\User::class)->create(['company_id' => $company->id]);
     // $item = factory(App\Models\Asset::class)->create(['company_id' => $company->id]);
-
+// dd($item);
     return [
         'user_id' => $user->id,
         'action_type' => 'checkout',

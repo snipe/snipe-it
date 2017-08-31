@@ -250,7 +250,7 @@ class ConsumablesController extends Controller
             'assigned_to' => e(Input::get('assigned_to'))
         ]);
 
-        $logaction = $consumable->logCheckout(e(Input::get('note')));
+        $logaction = $consumable->logCheckout(e(Input::get('note')), $user);
         $data['log_id'] = $logaction->id;
         $data['eula'] = $consumable->getEula();
         $data['first_name'] = $user->first_name;
