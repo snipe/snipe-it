@@ -56,8 +56,9 @@ class AuditNotification extends Notification
                     'By' => '<'.$admin_user->present()->viewUrl().'|'.$admin_user->present()->fullName().'>'
                 ];
                 array_key_exists('note', $this->params) && $fields['Notes'] = $this->params['note'];
+                array_key_exists('location', $this->params) && $fields['Location'] = $this->params['location'];
 
-                $attachment->title($item->name, $item->present()->viewUrl())
+                $attachment->title($item->present()->name, $item->present()->viewUrl())
                     ->fields($fields);
             });
     }
@@ -69,10 +70,7 @@ class AuditNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', 'https://laravel.com')
-            ->line('Thank you for using our application!');
+
     }
 
     /**

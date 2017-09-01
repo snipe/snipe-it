@@ -529,7 +529,11 @@ class AssetsController extends Controller
             $asset->next_audit_date = $request->input('next_audit_date');
             if ($asset->save()) {
                 $log = $asset->logAudit(request('note'),request('location_id'));
-                return response()->json(Helper::formatStandardApiResponse('success', ['asset_tag'=> e($asset->asset_tag), 'note'=> e($request->input('note')), 'next_audit_date' => Helper::getFormattedDateObject($log->calcNextAuditDate())], trans('admin/hardware/message.audit.success')));
+                return response()->json(Helper::formatStandardApiResponse('success', [
+                    'asset_tag'=> e($asset->asset_tag),
+                    'note'=> e($request->input('note')),
+                    'next_audit_date' => Helper::getFormattedDateObject($log->calcNextAuditDate())
+                ], trans('admin/hardware/message.audit.success')));
             }
         }
 

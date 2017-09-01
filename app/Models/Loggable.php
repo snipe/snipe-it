@@ -131,6 +131,7 @@ trait Loggable
     public function logAudit($note, $location_id)
     {
         $log = new Actionlog;
+        $location = Location::find($location_id);
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
@@ -146,6 +147,7 @@ trait Loggable
         $params = [
             'item' => $log->item,
             'admin' => $log->user,
+            'location' => ($location) ? $location->name : '',
             'note' => $note
         ];
         Setting::getSettings()->notify(new AuditNotification($params));
