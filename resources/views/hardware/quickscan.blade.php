@@ -94,7 +94,7 @@
         <div class="col-md-6">
             <div class="box box-default" id="audited-div" style="display: none">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> {{ trans('general.bulkaudit_status') }} </h3>
+                    <h3 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h3>
                 </div>
                 <div class="box-body">
 
@@ -106,11 +106,6 @@
                             <th></th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <td colspan="3"><span id="audit-counter">0</span> assets audited</td>
-                        </tr>
-                        </tfoot>
                         <tbody>
                             <tr id="audit-loader" style="display: none;">
                                 <td colspan="3">
@@ -135,7 +130,6 @@
         $("#audit-form").submit(function (event) {
             $('#audited-div').show();
             $('#audit-loader').show();
-
 
             event.preventDefault();
 
