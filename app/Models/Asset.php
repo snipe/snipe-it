@@ -11,6 +11,7 @@ use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Model for Assets.
@@ -20,7 +21,7 @@ use Watson\Validating\ValidatingTrait;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
-    use Loggable, Requestable, Presentable;
+    use Loggable, Requestable, Presentable, Notifiable;
     use SoftDeletes;
 
     const LOCATION = 'location';
