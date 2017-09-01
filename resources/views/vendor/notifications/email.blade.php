@@ -25,7 +25,7 @@ $style = [
 
     /* Masthead ----------------------- */
 
-    'email-masthead' => 'padding: 25px 0; text-align: center;',
+    'email-masthead' => 'padding: 25px 0; text-align: left;',
     'email-masthead_name' => 'font-size: 16px; font-weight: bold; color: #2F3133; text-decoration: none; text-shadow: 0 1px 0 white;',
 
     'email-body' => 'width: 100%; margin: 0; padding: 0; border-top: 1px solid #EDEFF2; border-bottom: 1px solid #EDEFF2; background-color: #FFF;',
@@ -44,7 +44,7 @@ $style = [
 
     'anchor' => 'color: #3869D4;',
     'header-1' => 'margin-top: 0; color: #2F3133; font-size: 19px; font-weight: bold; text-align: left;',
-    'paragraph' => 'margin-top: 0; color: #74787E; font-size: 16px; line-height: 1.5em;',
+    'paragraph' => 'margin-top: 0; color: #000000; font-size: 16px; line-height: 1.5em;',
     'paragraph-sub' => 'margin-top: 0; color: #74787E; font-size: 12px; line-height: 1.5em;',
     'paragraph-center' => 'text-align: center;',
 
@@ -70,8 +70,12 @@ $style = [
                     <!-- Logo -->
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
+
+                            @if ($snipeSettings->logo)
+                                <img src="{{ url('/') }}/{{ $snipeSettings->logo }}">
+                            @endif
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                {{ config('app.name') }}
+                                {{ $snipeSettings->site_name }}
                             </a>
                         </td>
                     </tr>
@@ -140,7 +144,7 @@ $style = [
 
                                         <!-- Salutation -->
                                         <p style="{{ $style['paragraph'] }}">
-                                            Regards,<br>{{ config('app.name') }}
+                                            Regards,<br>{{ $snipeSettings->site_name }}
                                         </p>
 
                                         <!-- Sub Copy -->
@@ -176,7 +180,7 @@ $style = [
                                     <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
-                                            <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ config('app.name') }}</a>.
+                                            <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
                                             All rights reserved.
                                         </p>
                                     </td>
