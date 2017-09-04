@@ -62,14 +62,7 @@ class AssetsTransformer
                 'name'=> e($asset->defaultLoc->name)
             ]  : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
-            'assigned_to' => ($asset->assigneduser) ? [
-                'id' => (int) $asset->assigneduser->id,
-                'username' => e($asset->assigneduser->username),
-                'name' => e($asset->assigneduser->getFullNameAttribute()),
-                'first_name'=> e($asset->assigneduser->first_name),
-                'last_name'=> e($asset->assigneduser->last_name),
-                'employee_number' =>  e($asset->assigneduser->employee_num),
-            ]  : null,
+            'assigned_to' => $this->transformAssignedTo($asset),
             'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
             'warranty_expires' => ($asset->warranty_months > 0) ?  Helper::getFormattedDateObject($asset->warranty_expires, 'date') : null,
             'created_at' => Helper::getFormattedDateObject($asset->created_at, 'datetime'),
@@ -129,5 +122,25 @@ class AssetsTransformer
     public function transformAssetsDatatable($assets)
     {
         return (new DatatablesTransformer)->transformDatatables($assets);
+    }
+
+    public function transformAssignedTo($asset)
+    {
+        if ($asset->assignedType() == Asset::USER) {
+            return $asset->assignedTo ? [
+                    'id' => (int) $asset->assignedTo->id,
+                    'username' => e($asset->assignedTo->username),
+                    'name' => e($asset->assignedTo->getFullNameAttribute()),
+                    'first_name'=> e($asset->assignedTo->first_name),
+                    'last_name'=> e($asset->assignedTo->last_name),
+                    'employee_number' =>  e($asset->assignedTo->employee_num),
+                    'type' => 'user'
+                ] : null;
+        }
+        return $asset->assignedTo ? [
+            'id' => $asset->assignedTo->id,
+            'name' => $asset->assignedTo->display_name,
+            'type' => $asset->assignedType()
+        ] : null;
     }
 }

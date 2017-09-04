@@ -235,8 +235,11 @@ class Asset extends Depreciable
      */
     public function assigneduser()
     {
-        return $this->belongsTo('\App\Models\User', 'assigned_to')
-                  ->withTrashed();
+        if ($this->assignedType() == self::USER) {
+            return $this->belongsTo('\App\Models\User', 'assigned_to')
+                    ->withTrashed();
+        }
+        return new User;
     }
 
     public function assignedTo()
@@ -260,13 +263,12 @@ class Asset extends Depreciable
             }
             if ($this->assignedType() == self::LOCATION) {
                 return $this->assignedTo();
-            } elseif (!$this->assignedTo) {
-                return $this->defaultLoc();
-            } elseif ($this->assignedType() == self::USER) {
-                return $this->assignedTo->userLoc();
             }
             if ($this->assignedType() == self::USER) {
                 return $this->assignedTo->userLoc();
+            }
+            if (!$this->assignedTo) {
+                return $this->defaultLoc();
             }
         }
         return $this->defaultLoc();

@@ -192,6 +192,8 @@ $('.snipe-table').bootstrapTable({
                 item_destination = 'licenses';
             } else if (value.type == 'user') {
                 item_destination = 'users';
+            } else if (value.type == 'location') {
+                item_destination = 'locations'
             }
 
             return '<a href="{{ url('/') }}/' + item_destination +'/' + value.id + '"> ' + value.name + '</a>';
