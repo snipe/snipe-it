@@ -141,7 +141,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['consumable' => 'consumable_id']
         ]
     ); // Consumables resource
-
+    Route::get('consumables/view/{id}/users',
+        [
+            'as' => 'api.consumables.showUsers',
+            'uses' => 'ConsumablesController@getDataView'
+        ]
+    );
 
     /*--- Depreciations API ---*/
 
