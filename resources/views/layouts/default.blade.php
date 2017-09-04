@@ -257,7 +257,7 @@
                       @for($i=0; count($alert_items) > $i; $i++)
 
                         <li><!-- Task item -->
-                          <a href="{{ url('/') }}/{{ $alert_items[$i]['type'] }}/{{ $alert_items[$i]['id'] }}/view">
+                          <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
                             <h3>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
                                 {{ $alert_items[$i]['remaining'] }} remaining
