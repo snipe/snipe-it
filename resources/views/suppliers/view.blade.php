@@ -59,8 +59,8 @@
                   </a>
                 </td>
                 <td>
-                  @if ($supplierassets->assigneduser)
-                  {!! $supplierassets->assigneduser->present()->nameUrl() !!}
+                  @if ($supplierassets->assignedTo)
+                  {!! $supplierassets->assignedTo->present()->nameUrl() !!}
                   @endif
                 </td>
                 <td>

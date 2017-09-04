@@ -227,19 +227,14 @@ class Asset extends Depreciable
                   ->orderBy('created_at', 'desc');
     }
 
-
     /**
      * Even though we allow allow for checkout to things beyond users
      * this method is an easy way of seeing if we are checked out to a user.
      * @return mixed
      */
-    public function assigneduser()
+    public function checkedOutToUser()
     {
-        if ($this->assignedType() == self::USER) {
-            return $this->belongsTo('\App\Models\User', 'assigned_to')
-                    ->withTrashed();
-        }
-        return new User;
+      return $this->assignedType() === self::USER;
     }
 
     public function assignedTo()
@@ -531,7 +526,7 @@ class Asset extends Depreciable
 
 
     /**
-    * Query builder scope for pending assets
+    * Query builder scope for searching location
     *
     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
     *
@@ -541,8 +536,17 @@ class Asset extends Depreciable
     public function scopeAssetsByLocation($query, $location)
     {
         return $query->where(function ($query) use ($location) {
-            $query->whereHas('assigneduser', function ($query) use ($location) {
-                $query->where('users.location_id', '=', $location->id);
+            $query->whereHas('assignedTo', function ($query) use ($location) {
+                $query->where([
+                    ['users.location_id', '=', $location->id],
+                    ['assets.assigned_type', '=', User::class]
+                ])->orWhere([
+                    ['locations.id', '=', $location->id],
+                    ['assets.assigned_type', '=', Location::class]
+                ])->orWhere([
+                    ['assets.rtd_location_id', '=', $location->id],
+                    ['assets.assigned_type', '=', Asset::class]
+                ]);
             })->orWhere(function ($query) use ($location) {
                 $query->where('assets.rtd_location_id', '=', $location->id);
                 $query->whereNull('assets.assigned_to');
@@ -762,18 +766,26 @@ class Asset extends Depreciable
                     $query->whereHas('defaultLoc', function ($query) use ($search) {
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
                     });
-                })->orWhere(function ($query) use ($search) {
-                    $query->whereHas('assigneduser', function ($query) use ($search) {
-                        $query->where(function ($query) use ($search) {
-                            $query->where('users.first_name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('users.last_name', 'LIKE', '%'.$search.'%')
-                            ->orWhere(function ($query) use ($search) {
-                                $query->whereHas('userloc', function ($query) use ($search) {
-                                    $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                                });
-                            });
-                        });
-                    });
+                    //FIXME: This needs attention to work with checkout to not-users.
+                // })->orWhere(function ($query) use ($search) {
+                    // $query->whereHas('assignedTo', function ($query) use ($search) {
+                    //     $query->where(function ($query) use ($search) {
+                    //         $query->where('assets.assigned_type', '=', User::class)
+                    //         ->join('users', 'users.id', '=', 'assets.assigned_to')
+                    //         ->where(function($query) use ($search) {
+                    //             $query->where('users.first_name', 'LIKE', '%'.$search.'%')
+                    //             ->orWhere('users.last_name', 'LIKE', '%'.$search.'%');
+                    //         });
+                    //     })->orWhere(function ($query) use ($search) {
+                    //         $query->where('assets.assigned_type', '=', Location::class)
+                    //         ->join('locations', 'locations.id', '=', 'assets.assigned_to')
+                    //         ->where('locations.name', 'LIKE', '%'.$search.'%');
+                    //     })->orWhere(function ($query) use ($search) {
+                    //         $query->where('assets.assigned_type', '=', Asset::class)
+                    //         ->join('assets as assigned_asset', 'assigned_assets.id', '=', 'assets.assigned_to')
+                    //         ->where('assigned_assets.name', 'LIKE', '%'.$search.'%');
+                    //     });
+                    // });
                 })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')

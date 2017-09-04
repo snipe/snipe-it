@@ -390,7 +390,7 @@ class ReportsController extends Controller
      */
     public function postCustom()
     {
-        $assets = Asset::orderBy('created_at', 'DESC')->with('company', 'assigneduser', 'assetloc', 'defaultLoc', 'assigneduser.userloc', 'model', 'supplier', 'assetstatus', 'model.manufacturer')->get();
+        $assets = Asset::orderBy('created_at', 'DESC')->with('company', 'assignedTo', 'assetloc', 'defaultLoc', 'model', 'supplier', 'assetstatus', 'model.manufacturer')->get();
         $customfields = CustomField::get();
 
         $rows   = [ ];
@@ -552,8 +552,8 @@ class ReportsController extends Controller
 
             if (e(Input::get('username')) == '1') {
                 // Only works if we're checked out to a user, not anything else.
-                if ($asset->assigneduser) {
-                    $row[] = '"' .e($asset->assigneduser->username). '"';
+                if ($asset->checkedOutToUser()) {
+                    $row[] = '"' .e($asset->assignedTo->username). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
@@ -561,8 +561,8 @@ class ReportsController extends Controller
 
             if (e(Input::get('employee_num')) == '1') {
                 // Only works if we're checked out to a user, not anything else.
-                if ($asset->assigneduser) {
-                    $row[] = '"' .e($asset->assigneduser->employee_num). '"';
+                if ($asset->checkedOutToUser()) {
+                    $row[] = '"' .e($asset->assignedTo->employee_num). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }

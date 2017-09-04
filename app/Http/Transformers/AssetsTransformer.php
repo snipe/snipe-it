@@ -126,7 +126,7 @@ class AssetsTransformer
 
     public function transformAssignedTo($asset)
     {
-        if ($asset->assignedType() == Asset::USER) {
+        if ($asset->checkedOutToUser()) {
             return $asset->assignedTo ? [
                     'id' => (int) $asset->assignedTo->id,
                     'username' => e($asset->assignedTo->username),
