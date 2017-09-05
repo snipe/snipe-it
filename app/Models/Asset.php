@@ -1088,13 +1088,15 @@ class Asset extends Depreciable
             $query->whereHas('defaultLoc', function ($query) use ($search) {
                 $query->where('locations.id', '=', $search);
             });
-        })->orWhere(function ($query) use ($search) {
-            $query->whereHas('assigneduser', function ($query) use ($search) {
-                $query->whereHas('userloc', function ($query) use ($search) {
-                    $query->where('locations.id', '=', $search);
-                });
-            });
         });
+        // FIXME: This needs porting to checkout to non-user.
+        // ->orWhere(function ($query) use ($search) {
+        //     $query->whereHas('assigneduser', function ($query) use ($search) {
+        //         $query->whereHas('userloc', function ($query) use ($search) {
+        //             $query->where('locations.id', '=', $search);
+        //         });
+        //     });
+        // });
     }
 
 
