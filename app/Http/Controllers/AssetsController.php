@@ -958,7 +958,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getDeleteFile($assetId = null, $fileId = null)
+    public function deleteFile($assetId = null, $fileId = null)
     {
         $asset = Asset::find($assetId);
         $this->authorize('update', $asset);

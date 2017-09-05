@@ -92,11 +92,14 @@ Route::group(
             'uses' => 'AssetsController@postUpload'
         ]);
 
-
-
         Route::get('{assetId}/showfile/{fileId}', [
             'as' => 'show/assetfile',
             'uses' => 'AssetsController@displayFile'
+        ]);
+
+        Route::delete('{assetId}/showfile/{fileId}/delete', [
+            'as' => 'delete/assetfile',
+            'uses' => 'AssetsController@deleteFile'
         ]);
 
 

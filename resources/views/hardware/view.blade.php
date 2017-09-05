@@ -661,7 +661,7 @@
                         </td>
                         <td>
                           @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                            <a href="../{{ $asset->id }}/showfile/{{ $file->id }}" data-toggle="lightbox" data-type="image"><img src="../{{ $asset->id }}/showfile/{{ $file->id }}"" class="img-thumbnail" style="max-width: 50px;"></a>
+                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                           @endif
                         </td>
                         <td>
