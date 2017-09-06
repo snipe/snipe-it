@@ -65,6 +65,11 @@ abstract class Presenter
         return '';
     }
 
+    public function name()
+    {
+        return $this->model->name;
+    }
+
     public function __get($property)
     {
         if (method_exists($this, $property)) {
