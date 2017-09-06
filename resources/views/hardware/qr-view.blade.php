@@ -334,12 +334,12 @@
             </ul>
             @endif
 
-            @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+            @if (($asset->checkedOutToUser()) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
             {{-- @TODO This should be extnded for details about non users --}}
             <h6><br>{{ trans('admin/hardware/form.checkedout_to') }}</h6>
             <ul>
                 <li>
-                    <img src="{{ $asset->assigneduser->present()->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br />
+                    <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br />
                 </li>
                 <li>
                     {{ $asset->assignedTo->present()->nameUrl() }}
@@ -357,12 +357,12 @@
                     @endif
                 @endif
 
-                @if (isset($asset->assigneduser->email))
-                <li><br /><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
+                @if (isset($asset->assignedTo->email))
+                <li><br /><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                 @endif
 
-                @if ((isset($asset->assigneduser->phone)) && ($asset->assigneduser->phone!=''))
-                <li><i class="fa fa-phone"></i> {{ $asset->assigneduser->phone }}</li>
+                @if ((isset($asset->assignedTo->phone)) && ($asset->assignedTo->phone!=''))
+                <li><i class="fa fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
                 @endif
             </ul>
             @endif

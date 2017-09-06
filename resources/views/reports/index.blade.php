@@ -52,7 +52,7 @@
                         @endif
                     </td>
                     <td>
-                        @if (($asset->assignedTo) && ($asset->assigneduser->assetLoc))
+                        @if (($asset->checkedOutToUser()) && ($asset->assignedTo->assetLoc))
                             {{ $asset->assignedTo->assetLoc->city }}, {{ $asset->assignedTo->assetLoc->state}}
                         @endif
                     </td>

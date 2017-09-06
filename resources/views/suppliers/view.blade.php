@@ -49,18 +49,18 @@
               @foreach ($supplier->assets as $supplierassets)
               <tr>
                 <td>
-                  <a href="{{ route('suppliers.show',  $supplierassets->id) }}">
+                  <a href="{{ route('hardware.show',  $supplierassets->id) }}">
                     {{ $supplierassets->asset_tag }}
                   </a>
                 </td>
                 <td>
-                  <a href="{{ route('suppliers.show',  $supplierassets->id) }}">
+                  <a href="{{ route('hardware.show',  $supplierassets->id) }}">
                     {{ $supplierassets->name }}
                   </a>
                 </td>
                 <td>
-                  @if ($supplierassets->assigneduser)
-                  {!! $supplierassets->assigneduser->present()->nameUrl() !!}
+                  @if ($supplierassets->assignedTo)
+                  {!! $supplierassets->assignedTo->present()->nameUrl() !!}
                   @endif
                 </td>
                 <td>

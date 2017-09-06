@@ -25,7 +25,7 @@ class ActionlogsTransformer
         $array = [
             'id'          => (int) $actionlog->id,
             'icon'          => $actionlog->present()->icon(),
-            'image' => ($actionlog->item->getImageUrl()) ? $actionlog->item->getImageUrl() : null,
+            'image' => (method_exists($actionlog->item, 'getImageUrl')) ? $actionlog->item->getImageUrl() : null,
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
                 'name' => e($actionlog->item->getDisplayNameAttribute()),

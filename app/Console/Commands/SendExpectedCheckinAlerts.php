@@ -44,14 +44,14 @@ class SendExpectedCheckinAlerts extends Command
     {
 
         $whenNotify = Carbon::now()->addDays(7);
-        $assets = Asset::with('assigneduser')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
+        $assets = Asset::with('assignedTo')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
 
         $this->info($whenNotify.' is deadline');
         $this->info($assets->count().' assets');
 
         foreach ($assets as $asset) {
-            if ($asset->assigneduser) {
-                $asset->assigneduser->notify((new ExpectedCheckinNotification($asset)));
+            if ($asset->assignedTo  && $asset->checkoutOutToUser()) {
+                $asset->assignedTo->notify((new ExpectedCheckinNotification($asset)));
                 //$this->info($asset);
             }
         }

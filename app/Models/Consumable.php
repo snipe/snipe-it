@@ -73,7 +73,7 @@ class Consumable extends SnipeModel
         return $this->belongsTo('\App\Models\User', 'user_id');
     }
 
-    public function consumableAssigments()
+    public function consumableAssignments()
     {
         return $this->hasMany('\App\Models\ConsumableAssignment');
     }

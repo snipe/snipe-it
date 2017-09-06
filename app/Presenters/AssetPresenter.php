@@ -98,7 +98,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/hardware/form.checkedout_to'),
                 "visible" => true,
-                "formatter" => "usersLinkObjFormatter"
+                "formatter" => "polymorphicItemFormatter"
             ], [
                 "field" => "employee_number",
                 "searchable" => false,

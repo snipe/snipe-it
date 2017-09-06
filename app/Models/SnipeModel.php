@@ -82,4 +82,8 @@ class SnipeModel extends Model
     {
         return $this->name;
     }
+
+    public function name() {
+        return $this->name;
+    }
 }
