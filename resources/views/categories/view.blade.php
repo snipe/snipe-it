@@ -32,7 +32,7 @@
           name="category_assets"
           class="snipe-table"
           id="table"
-          data-url="{{ route('api.'.$category_type_route.'.index',['category_id'=> $category->id]) }}
+          data-url="{{ route('api.'.$category_type_route.'.index',['category_id'=> $category->id]) }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="category{{ $category_type_route }}Table">
