@@ -116,7 +116,7 @@
                                     >
                                         {{ csrf_field() }}
                                         <td>{{$requestableModel->name}}</td>
-                                        <td>{{$requestableModel->assets()->where('requestable', '1')->count()}}</td>
+                                        <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
                                         <td><input type="text" name="request-quantity" value=""></td>
                                         <td>
                                             @if ($requestableModel->isRequestedBy(Auth::user()))

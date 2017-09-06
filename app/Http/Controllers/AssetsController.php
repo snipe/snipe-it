@@ -537,17 +537,18 @@ class AssetsController extends Controller
         $this->authorize('checkin', $asset);
 
         $admin = Auth::user();
-        $user = $asset->assignedUser;
+        if($asset->assignedType() == Asset::USER) {
+            $user = $asset->assignedTo;
+        }
         if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
-        // This is just used for the redirect
-        $return_to = $asset->assigned_to;
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
+        $asset->assigned_type = null;
         $asset->accepted = null;
         $asset->name = e(Input::get('name'));
 
@@ -575,7 +576,7 @@ class AssetsController extends Controller
             }
 
             if ($backto=='user') {
-                return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/hardware/message.checkin.success'));
+                return redirect()->to("admin/users/".$user->id.'/view')->with('success', trans('admin/hardware/message.checkin.success'));
             }
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));
         }
@@ -957,7 +958,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getDeleteFile($assetId = null, $fileId = null)
+    public function deleteFile($assetId = null, $fileId = null)
     {
         $asset = Asset::find($assetId);
         $this->authorize('update', $asset);

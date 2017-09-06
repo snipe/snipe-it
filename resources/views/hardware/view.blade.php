@@ -401,19 +401,19 @@
               @if (($asset->assignedTo) && ($asset->deleted_at==''))
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
                 <p>
-                  @if($asset->assigned_type == User::class) <!-- Only users have avatars currently-->
-                  <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assigneduser->present()->fullName() }}">
+                  @if($asset->checkedOutToUser()) <!-- Only users have avatars currently-->
+                  <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assignedTo->present()->fullName() }}">
                   @endif
                   {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
                 </p>
 
                 <ul class="list-unstyled">
-                  @if ((isset($asset->assigneduser->email)) && ($asset->assigneduser->email!=''))
-                    <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
+                  @if ((isset($asset->assignedTo->email)) && ($asset->assignedTo->email!=''))
+                    <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                   @endif
 
-                  @if ((isset($asset->assigneduser->phone)) && ($asset->assigneduser->phone!=''))
-                    <li><i class="fa fa-phone"></i> {{ $asset->assigneduser->phone }}</li>
+                  @if ((isset($asset->assignedTo->phone)) && ($asset->assignedTo->phone!=''))
+                    <li><i class="fa fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
                   @endif
 
                   @if (isset($asset->assetLoc))
@@ -661,7 +661,7 @@
                         </td>
                         <td>
                           @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                            <a href="../{{ $asset->id }}/showfile/{{ $file->id }}" data-toggle="lightbox" data-type="image"><img src="../{{ $asset->id }}/showfile/{{ $file->id }}"" class="img-thumbnail" style="max-width: 50px;"></a>
+                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                           @endif
                         </td>
                         <td>

@@ -84,9 +84,8 @@ class AssetsController extends Controller
         }
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
-            'assetLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
-            'model.category', 'model.manufacturer', 'model.fieldset', 'assigneduser','supplier');
-
+            'assetloc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
+            'model.category', 'model.manufacturer', 'model.fieldset','supplier');
         // If we should search on everything
         if (($request->has('search')) && (count($filter) == 0)) {
             $assets->TextSearch($request->input('search'));
@@ -96,7 +95,6 @@ class AssetsController extends Controller
                 $assets->ByFilter($filter);
             }
         }
-
 
         // These are used by the API to query against specific ID numbers
         if ($request->has('status_id')) {
