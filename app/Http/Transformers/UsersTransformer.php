@@ -56,9 +56,10 @@ class UsersTransformer
             ];
 
         $permissions_array['available_actions'] = [
-            'update' => Gate::allows('update', User::class) ? true : false,
-            'delete' => Gate::allows('delete', User::class) ? true : false,
-            'clone' => Gate::allows('create', User::class) ? true : false,
+            'update' => (Gate::allows('update', User::class) && ($user->deleted_at==''))  ? true : false,
+            'delete' => (Gate::allows('delete', User::class) && ($user->deleted_at=='')) ? true : false,
+            'clone' => (Gate::allows('create', User::class) && ($user->deleted_at=='')) ,
+            'restore' => (Gate::allows('create', User::class) && ($user->deleted_at!='')) ? true : false,
         ];
 
         $array += $permissions_array;

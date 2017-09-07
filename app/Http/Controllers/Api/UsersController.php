@@ -52,6 +52,12 @@ class UsersController extends Controller
             $users = $users->TextSearch($request->input('search'));
         }
 
+
+        if (($request->has('deleted')) && ($request->input('deleted')=='true')) {
+            $users = $users->GetDeleted();
+        }
+
+
         if ($request->has('company_id')) {
             $users = $users->where('company_id', '=', $request->input('company_id'));
         }

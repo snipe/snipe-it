@@ -167,6 +167,10 @@ $('.snipe-table').bootstrapTable({
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
                     + '<i class="fa fa-trash"></i></a></nobr>';
             }
+
+            if ((row.available_actions) && (row.available_actions.restore === true)) {
+                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-tooltip="true" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
+            }
             return actions;
 
         };

@@ -64,7 +64,7 @@
               class="table table-striped snipe-table"
               id="table"
               data-url="{{ route('api.users.index',
-              array(''=>e(Input::get('status')),'company_id'=>e(Input::get('company_id')))) }}"
+              array('deleted'=> (Input::get('status')=='deleted') ? 'true' : 'false','company_id'=>e(Input::get('company_id')))) }}"
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="userTableDisplay-{{ config('version.hash_version') }}">
