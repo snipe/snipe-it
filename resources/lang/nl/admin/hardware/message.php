@@ -23,6 +23,12 @@ return array(
         'success' 		=> 'Gereedschap is succesvol hersteld.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Bestand is niet verwijderd. Probeer het opnieuw.',
         'success' => 'Bestand is met succes verwijderd.',

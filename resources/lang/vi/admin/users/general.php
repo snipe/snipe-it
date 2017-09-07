@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Cho phép loại tập tin are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Lịch sử cấp phát của :name',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Lần đăng nhập trước',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => 'Phần mềm đã được checkout đến :name',

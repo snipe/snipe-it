@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Erlaubte Dateitypen sind png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, und rar.',
     'history_user'      => 'Historie von :name',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Letzte Anmeldung',
     'ldap_config_text'  => 'Die LDAP Konfigurations Einstellungen finden Sie hier Admin -> Einstellungen. Der (optional) wählbare Standort wird für alle importierten Benutzer gesetzt.',
     'software_user'     => 'Software herausgegeben an :name',

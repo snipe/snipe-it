@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Aktywo zostało przywrócone.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Plik nie zostały usunięte. Spróbuj ponownie.',
         'success' => 'Plik zostały usunięty.',

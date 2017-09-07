@@ -2,10 +2,10 @@
 
 return array(
 
-    'id'                        => 'ID',
-    'name'                      => 'Department Name',
-    'manager'                   => 'Manager',
-    'location'                  => 'Location',
-    'create'                    => 'Create Department',
-    'update'                    => 'Update Department',
+    'id'                        => 'رقم التعريف',
+    'name'                      => 'اسم القسم الإداري',
+    'manager'                   => 'المدير',
+    'location'                  => 'الموقع',
+    'create'                    => 'إنشاء قسم اداري',
+    'update'                    => 'تحديث قسم اداري',
     );

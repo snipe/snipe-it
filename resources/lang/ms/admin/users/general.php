@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Sejarah untuk :nama',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Log masuk terakhir',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => 'Perisian diagihkan kepada :nama',

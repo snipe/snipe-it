@@ -2,9 +2,9 @@
 
 return array(
 	'bulk_delete'		=> 'تاكيد إجراء حذف متعدد للاُصول',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
-	'bulk_update'		=> 'Bulk Update Assets',
+  'bulk_delete_help'	=> 'الرجاء مراجعة الأصول المعينة للحذف بالجملة أدناه. بمجرد الحذف، يمكن استعادة هذه الأصول، لكنها لن تكون مقترنة مع أي من المستخدمين اللذين تم تعيين الاصول لهم من قبل.',
+  'bulk_delete_warn'	=> 'أنت على وشك حذف اصول asset_count: .',
+	'bulk_update'		=> 'تحديث الاصول بالجملة',
 	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
 	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Checked Out To',

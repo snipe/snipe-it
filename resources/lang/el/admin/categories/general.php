@@ -6,7 +6,7 @@ return array(
     'asset_categories' 					=> 'Κατηγορίες στοιχείων παγίων',
     'category_name'  					=> 'Όνομα κατηγορίας',
     'checkin_email'                     => 'Send email to user on checkin.',
-    'clone'                             => 'Clone Category',
+    'clone'                             => 'Αντιγραφή Κατηγορίας',
     'create'  							=> 'Δημιουργία Κατηγορίας',
     'edit'                              => 'Επεξεργασία Κατηγορίας',
     'eula_text'							=> 'Category EULA',
@@ -16,7 +16,7 @@ return array(
     'required_acceptance'				=> 'This user will be emailed with a link to confirm acceptance of this item.',
     'required_eula'						=> 'This user will be emailed a copy of the EULA',
     'no_default_eula'					=> 'No primary default EULA found. Add one in Settings.',
-    'update'  							=> 'Update Category',
+    'update'  							=> 'Ενημέρωση Κατηγορίας',
     'use_default_eula'					=> 'Χρησιμοποιήστε την προεπιλεγμένη <a href="#" data-toggle="modal" data-target="#eulaModal">primary EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
 

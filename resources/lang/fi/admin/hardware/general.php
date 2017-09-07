@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Laite',
     'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Palauta Laite',
-    'checkout'  				=> 'Luovuta Laite Käyttäjälle',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Monista Laite',
     'deployable'  				=> 'Käyttööotettavissa',
     'deleted'  					=> 'Tämä laite on poistettu. <a href="/hardware/:asset_id/restore">Klikkaa tästä palauttaaksesi sen</a>.',

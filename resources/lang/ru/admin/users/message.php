@@ -31,7 +31,7 @@ return array(
         'create' => 'При создании пользователя возникла проблема. Пожалуйста попробуйте снова.',
         'update' => 'При изменении пользователя возникла проблема. Пожалуйста попробуйте снова.',
         'delete' => 'При удалении пользователя возникла проблема. Пожалуйста попробуйте снова.',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => 'У пользователя есть назначенные ему активы и не может быть удалён.',
         'unsuspend' => 'При разморозке пользователя возникла проблема. Пожалуйста попробуйте снова.',
         'import'    => 'При импорте пользователей произошла ошибка. Попробуйте еще раз.',
         'asset_already_accepted' => 'Этот актив уже был принят.',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Не могу связаться (bind) с сервером LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера: ',
         'ldap_could_not_search' => 'Не могу найти сервер LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера:',
         'ldap_could_not_get_entries' => 'Не могу загрузить записи с сервера LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => 'Пароль для этой учетной записи управляется LDAP/Active Directory. Пожалуйста, свяжитесь с департаментом ИТ, чтобы изменить свой пароль. ',
     ),
 
     'deletefile' => array(

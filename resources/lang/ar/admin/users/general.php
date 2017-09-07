@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'انواع صيغ الملفات المسوح بها هي png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'الأرشيف الخاص بـ :name',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'آخر دخول للمستخدم',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => 'البرامج المسجلة لـ :name',

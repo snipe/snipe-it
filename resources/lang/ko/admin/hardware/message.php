@@ -24,6 +24,12 @@ return array(
         'success' 		=> '자산이 복원되었습니다.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => '파일이 삭제되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일이 삭제되었습니다.',

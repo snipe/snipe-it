@@ -23,6 +23,12 @@ return array(
         'success' 		=> 'Активът възстановен успешно.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Файлът не беше изтрит. Моля опитайте отново.',
         'success' => 'Файлът изтрит успешно.',

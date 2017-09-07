@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => '允許檔案類型：png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar。',
     'history_user'      => ':name 的歷史記錄',
 	'info'				=> '資訊',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => '上次登入',
     'ldap_config_text'  => 'LDAP 設定在 管理 > 設定。所選位置將套用至匯入的使用者。',
     'software_user'     => ':name 借出的軟體',

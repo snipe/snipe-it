@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Activ',
     'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Verifica activ',
-    'checkout'  				=> 'Checkout activ catre utilizator',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Cloneaza activ',
     'deployable'  				=> 'Lansabil',
     'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',

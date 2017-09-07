@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Актив успешно восстановлен.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Не удалось удалить файл. Повторите попытку.',
         'success' => 'Файл успешно удален.',
@@ -48,7 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Вы уверены что хотите удалить этот актив?',
         'error'   		=> 'При удалении актива возникла проблема. Пожалуйста попробуйте снова.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'nothing_updated'   => 'Ни один из активов не выбран, поэтому ничего не удалено.',
         'success' 		=> 'Актив был успешно удален.'
     ),
 

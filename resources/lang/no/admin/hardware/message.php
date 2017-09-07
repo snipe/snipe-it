@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Vellykket gjenoppretting av eiendel.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
         'success' => 'Vellykket sletting av fil.',

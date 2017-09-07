@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Majetek byl v pořádku obnoven.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Soubor se nesmazal, prosím zkuste to znovu.',
         'success' => 'Soubor byl úspěšně smazán.',

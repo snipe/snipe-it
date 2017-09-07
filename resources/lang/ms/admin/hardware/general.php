@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Harta',
     'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Terima Harta',
-    'checkout'  				=> 'Agih Harta Kepada Pengguna',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Pendua Harta',
     'deployable'  				=> 'Deployable',
     'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',

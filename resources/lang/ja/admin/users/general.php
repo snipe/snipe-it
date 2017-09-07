@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => '許可するファイルタイプ（png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar）',
     'history_user'      => ':nameの履歴',
 	'info'				=> '情報',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => '最終ログイン',
     'ldap_config_text'  => 'LDAP 構成設定 管理者 > 設定。 選択した場所は、インポートされたすべてのユーザーに対して設定されます。',
     'software_user'     => 'ソフトウェアは :name にチェックアウトしました。',

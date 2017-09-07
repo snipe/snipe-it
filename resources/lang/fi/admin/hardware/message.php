@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Laite palautettiin onnistuneesti.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Tiedostoa ei poistettu. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedosto poistettiin onnistuneesti.',

@@ -23,6 +23,12 @@ return array(
         'success' 		=> 'دارایی با موفقیت بازیابی شد.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'فایل حذف نمی شود. لطفا دوباره تلاش کنید.',
         'success' => 'فایل با موفقیت حذف شده است.',

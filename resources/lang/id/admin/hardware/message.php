@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Aset berhasil dikembalikan.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Berkas tidak terhapus. Silahkan coba kembali.',
         'success' => 'Berkas berhasil dihapus.',

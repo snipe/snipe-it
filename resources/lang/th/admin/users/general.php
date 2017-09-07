@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'ประเภทของไฟล์ที่อนุญาตแล้ว มีดังนี้ png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar',
     'history_user'      => 'ประวัติของ :name',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'เข้าสู่ระบบล่าสุด',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => 'ซอฟต์แวร์ที่กำหนดให้ :name',

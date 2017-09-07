@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Įranga',
     'bulk_checkout'             => 'Išduoti įrangą naudotojui',
     'checkin'  					=> 'Išduota įranga',
-    'checkout'  				=> 'Įranga išduota naudotojui',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Kopijuoti įrangą',
     'deployable'  				=> 'Naudojamas',
     'deleted'  					=> 'Ši įranga buvo ištrinta. <a href="/hardware/:asset_id/restore">Paspauskit čia ją atkurti</a>.',

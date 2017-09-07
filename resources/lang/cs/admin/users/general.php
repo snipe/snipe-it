@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Povolené přílohy: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Historie:',
 	'info'				=> 'Informace',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Poslední přihlášení',
     'ldap_config_text'  => 'Nastavení konfigurace LDAP lze nalézt v menu Správce> Nastavení. Vybrané (volitelně) místo bude nastaven pro všechny importované uživatele.',
     'software_user'     => 'Software vydaný pro :name',

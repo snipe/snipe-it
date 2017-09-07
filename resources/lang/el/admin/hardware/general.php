@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Πάγιο',
     'bulk_checkout'             => 'Checkout παγίων σε χρήστη',
     'checkin'  					=> 'Checkin Asset',
-    'checkout'  				=> 'Checkout Asset to User',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Κλώνος χρήστη',
     'deployable'  				=> 'Προς ανάπτυξη',
     'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',

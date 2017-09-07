@@ -23,6 +23,12 @@ return array(
         'success' 		=> 'Ativo restaurado com sucesso.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'O arquivo não foi excluído. Tente novamente.',
         'success' => 'Arquivo excluído com sucesso.',

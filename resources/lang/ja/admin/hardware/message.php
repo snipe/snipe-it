@@ -24,6 +24,12 @@ return array(
         'success' 		=> '資産は正常に復元されました。'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'ファイルが削除できませんでした。もう一度、やり直して下さい。',
         'success' => 'ファイルは正常に削除されました。',

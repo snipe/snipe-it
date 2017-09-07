@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Asset restored successfully.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'لم يتم حذف الملف. الرجاء المحاولة مرة اخرى.',
         'success' => 'تم حذف الملف بنجاح.',

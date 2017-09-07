@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Toegestane bestandstypes zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Geschiedenis voor :name',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Laatst aangemeld',
     'ldap_config_text'  => 'LDAP configuratie kan worden gevonden in Admin > Instellingen. De (optioneel) geselecteerde locatie zal voor alle geimporteerde gebruikers ingesteld worden.',
     'software_user'     => 'Software toegekend aan :name',

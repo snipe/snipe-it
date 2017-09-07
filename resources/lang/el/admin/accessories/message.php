@@ -6,19 +6,19 @@ return array(
     'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
+        'error'   => 'Το εξάρτημα δεν δημιουργήθηκε, παρακαλώ προσπαθήστε ξανά.',
         'success' => 'Το εξάρτημα δημιουργήθηκε με επιτυχία.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Το εξάρτημα δεν ενημερώθηκε, παρακαλώ προσπαθήστε ξανά',
+        'success' => 'Το εξάρτημα ενημερώθηκε με επιτυχία.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'confirm'   => 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το εξάρτημα;',
         'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας το αξεσουάρ. Παρακαλώ δοκιμάστε ξανά.',
-        'success' => 'The accessory was deleted successfully.'
+        'success' => 'Το εξάρτημα διαγράφηκε με επιτυχία.'
     ),
 
      'checkout' => array(

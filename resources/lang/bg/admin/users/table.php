@@ -19,7 +19,7 @@ return array(
     'location'  			=> 'Местоположение',
     'lock_passwords'		=> 'Настройките за вход не могат да бъдат променяни в текущата инсталация.',
     'manager' 				=> 'Ръководител',
-    'managed_locations'     => 'Managed Locations',
+    'managed_locations'     => 'Управлявани места',
     'name' 					=> 'Име',
     'notes'                 => 'Бележки',
     'password_confirm' 		=> 'Потвърждение на паролата',

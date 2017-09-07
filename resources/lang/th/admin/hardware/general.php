@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'สินทรัพย์',
     'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'เช็คอินสินทรัพย์',
-    'checkout'  				=> 'เช็คเอ้าท์สินทรัพย์ให้ผู้ใช้งาน',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'คัดลอกแบบสินทรัพย์',
     'deployable'  				=> 'สามารถใช้งานได้',
     'deleted'  					=> 'สินทรัพย์นี้ถูกลบแล้ว <a href="/hardware/:asset_id/restore">คลิกที่นี่เพื่อกู้คืน</a>.',

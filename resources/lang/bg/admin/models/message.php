@@ -29,8 +29,8 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Няма полета, който да са се променили, така че нищо не е осъвременено.',
+        'success' 		=> 'Моделите са осъвременени.'
     ),
 
 );

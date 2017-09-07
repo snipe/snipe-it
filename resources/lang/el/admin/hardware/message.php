@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Τα πάγια επαναφέρθηκαν επιτυχώς.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Το αρχείο δεν έχει διαγραφεί. Παρακαλώ δοκιμάστε ξανά.',
         'success' => 'Το αρχείο διαγράφηκε με επιτυχία.',

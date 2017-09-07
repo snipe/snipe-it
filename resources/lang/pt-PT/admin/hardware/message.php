@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Artigo restaurado com sucesso.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Ficheiro não removido. Por favor, tente novamente.',
         'success' => 'Ficheiro removido com sucesso.',

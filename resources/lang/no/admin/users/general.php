@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Gyldige filtyper er png, gif, jpg, jpeg, doc docx, pdf, txt, zip og rar.',
     'history_user'      => 'Historikk for :name',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Siste innlogging',
     'ldap_config_text'  => 'LDAP-konfigurasjonsinnstillingene kan finnes på Admin > innstillinger. Den (Valgfrie) valgte plasseringen angis for alle importerte brukere.',
     'software_user'     => 'Programvare utsjekket til :name',

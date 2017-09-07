@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Majetek',
     'bulk_checkout'             => 'Předat majetek uživateli',
     'checkin'  					=> 'Převzít majetek',
-    'checkout'  				=> 'Předat majetek uživateli',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klonovat majetek',
     'deployable'  				=> 'Připraveno k nasazení',
     'deleted'  					=> 'Toto zařízení bylo odstraněno. <a href="/hardware/:asset_id/restore">Klepněte zde pro jeho obnovení</a>.',

@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Demirbaş geri getirildi.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya silindi.',

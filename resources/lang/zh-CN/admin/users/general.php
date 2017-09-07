@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => '允许的文件类型有： png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar',
     'history_user'      => ':name的历史',
 	'info'				=> '信息',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => '上一次登陆',
     'ldap_config_text'  => 'LDAP配置在 管理 > 设置。所选位置将为导入的用户所用',
     'software_user'     => ':name 借走的软件',

@@ -2,10 +2,10 @@
 
 return array(
 
-    'id'                        => 'ID',
+    'id'                        => 'ИД№',
     'name'                      => 'Department Name',
-    'manager'                   => 'Manager',
-    'location'                  => 'Location',
+    'manager'                   => 'Ръководител',
+    'location'                  => 'Местоположение',
     'create'                    => 'Create Department',
     'update'                    => 'Update Department',
     );

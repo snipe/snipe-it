@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Отписване на активи към потребител',
     'checkin'  					=> 'Връщане на актив',
-    'checkout'  				=> 'Изписване на актив към потребител',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Копиране на актив',
     'deployable'  				=> 'Може да бъде предоставен',
     'deleted'  					=> 'Активът беше изтрит. <a href="/hardware/:asset_id/restore">Възстановяване</a>.',

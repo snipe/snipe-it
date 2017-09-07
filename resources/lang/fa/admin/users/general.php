@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'پسوند های مجاز:png, gif, jpg, jpeg, doc, docx, pdf, txt, zip,Rar',
     'history_user'      => 'تاریخچه برای:',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'آخرین ورود',
     'ldap_config_text'  => 'تنظشیمات تاییدیه LDPA در فولدر app/config در فایلی به نام idap.php وجود دارد.مکان مشخص شده برای تمامی کاربران وارد شده تنظیم میشود.شما نیاز دارید که حداقل یه مکان را اضافه کرده باشید تا بتوانید از این ویژگی استفاده کنید.',
     'software_user'     => 'برنامه چک شد برای:',

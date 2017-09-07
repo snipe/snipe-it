@@ -7,7 +7,7 @@ return array(
     'asset'  					=> '资产',
     'bulk_checkout'             => '借出资产给某人',
     'checkin'  					=> '借入资产',
-    'checkout'  				=> '借出资产给某人',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> '复制资产',
     'deployable'  				=> '可部署',
     'deleted'  					=> '该资产已删除。 <a href="/hardware/:asset_id/restore">点击此处恢复</a>.',

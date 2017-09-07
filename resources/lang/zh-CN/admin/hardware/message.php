@@ -23,6 +23,12 @@ return array(
         'success' 		=> '资产恢复成功。'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => '文件删除失败，请重试',
         'success' => '文件已成功删除。',

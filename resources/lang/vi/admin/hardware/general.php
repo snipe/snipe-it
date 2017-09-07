@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Tài sản',
     'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Checkin tài sản',
-    'checkout'  				=> 'Checkout tài sản đến người dùng',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Nhân đôi tài sản',
     'deployable'  				=> 'Cho phép cấp phát',
     'deleted'  					=> 'Tài sản này đã bị xóa. <a href="/hardware/:asset_id/restore">Nhấn vào đây để phục hồi</a>.',

@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Leidžiami dokumentų formatai png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => ':name naudotojo istorija',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Paskutinis prisijungimas',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => ':name išduota įranga',

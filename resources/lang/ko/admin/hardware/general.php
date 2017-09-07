@@ -7,7 +7,7 @@ return array(
     'asset'  					=> '자산',
     'bulk_checkout'             => '사용자에게 반출할 자산',
     'checkin'  					=> '반입 자산',
-    'checkout'  				=> '사용자에게 반출된 자산',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> '자산 복제',
     'deployable'  				=> '사용가능',
     'deleted'  					=> '이 자산은 삭제되었습니다. <a href="/hardware/:asset_id/restore">복원하려면 여기를 클릭하세요</a>.',

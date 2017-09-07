@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Biens',
     'bulk_checkout'             => 'Attribuer les objets à l\'utilisateur',
     'checkin'  					=> 'Retour des Biens',
-    'checkout'  				=> 'Sortie des Biens',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Cloner le Bien',
     'deployable'  				=> 'Déployable',
     'deleted'  					=> 'Cet actif a été détruit. <a href="/hardware/:asset_id/restore">Cliquez ici pour le restaurer</a>.',

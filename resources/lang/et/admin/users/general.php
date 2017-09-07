@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Lubatud failitüübid on png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ja rar.',
     'history_user'      => 'Kasutaja :name ajalugu',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Viimane sisselogimine',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => 'Kasutaja :name valdusesse antud tarkvara',

@@ -7,7 +7,7 @@ return array(
     'asset'  					=> '資産',
     'bulk_checkout'             => '利用者に資産をチェックアウトする',
     'checkin'  					=> '資産をチェックイン',
-    'checkout'  				=> '利用者に資産をチェックアウト',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> '資産を複製',
     'deployable'  				=> '配備可能',
     'deleted'  					=> 'この資産は削除されました。<a href="/hardware/:asset_id/restore">復元するにはココをクリックして下さい。</a>',

@@ -13,6 +13,7 @@ return array(
     'filetype_info'     => 'Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, txt, zip ja rar.',
     'history_user'      => 'Historia käyttäjälle :name',
 	'info'				=> 'Info',
+    'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Viimeisin kirjautuminen',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => 'Käyttäjälle :name luovutetut ohjelmistot',
