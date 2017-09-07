@@ -107,9 +107,9 @@
               <div class="col-md-12">
                 <div class="callout callout-warning">
                   <i class="icon fa fa-warning"></i>
-                  {{ trans('general.user_deleted_text') }}
+                  {{ trans('admin/users/message.user_deleted_warning') }}
                   @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">{{ trans('general.click_here') }}</a> {{ trans('general.to_restore_them') }}
+                      <a href="{{ route('restore/user', $user->id) }}">{{ trans('admin/users/general.restore_user') }}</a>
                   @endcan
                 </div>
               </div>
