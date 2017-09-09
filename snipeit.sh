@@ -193,7 +193,6 @@ esac
 done
 
 #Snipe says we need a new 32bit key, so let's create one randomly and inject it into the file
-random32="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c32`)"
 
 #db_setup.sql will be injected to the database during install.
 #Again, this file should be removed, which will be a prompt at the end of the script.
@@ -246,6 +245,8 @@ case $distro in
 		php composer.phar install --no-dev --prefer-source
 		perms
 		service apache2 restart
+		php artisan key:generate
+		php artisan passport:install
 		;;
 	ubuntu)
 		#####################################  Install for Ubuntu  ##############################################
@@ -290,6 +291,8 @@ case $distro in
 		php composer.phar install --no-dev --prefer-source
 		perms
 		service apache2 restart
+        php artisan key:generate
+        php artisan passport:install
 		;;
 	centos )
 	if [[ "$version" =~ ^6 ]]; then
@@ -406,8 +409,9 @@ case $distro in
                       service iptables save
                 fi
 
-
 	       service httpd restart
+	       php artisan key:generate
+           php artisan passport:install
 
 	elif [[ "$version" =~ ^7 ]]; then
 		#####################################  Install for Centos/Redhat 7  ##############################################
@@ -527,6 +531,8 @@ case $distro in
  	       	fi
 
 		systemctl restart httpd.service
+		php artisan key:generate
+        php artisan passport:install
 
 	else
 		echo "Unable to Handle Centos Version #.  Version Found: " $version
