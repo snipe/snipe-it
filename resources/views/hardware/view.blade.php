@@ -536,7 +536,11 @@
                       @foreach ($asset->assetmaintenances as $assetMaintenance)
                         @if (is_null($assetMaintenance->deleted_at))
                           <tr>
-                            <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a></td>
+                            <td>
+                                @if ($assetMaintenance->supplier)
+                                    <a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a>
+                                @endif
+                            </td>
                             <td>{{ $assetMaintenance->title }}</td>
                             <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
                             <td>{{ $assetMaintenance->start_date }}</td>
