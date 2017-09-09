@@ -63,7 +63,9 @@ class AssetImporter extends ItemImporter
         $this->item['image'] = $this->findCsvMatch($row, "image");
         $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty"));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
-        if (!$this->item['status_id'] && !$editingAsset) {
+
+        // If no status ID is found
+        if (!array_key_exists('status_id', $this->item) && !$editingAsset) {
             $this->log("No status field found, defaulting to first status.");
             $this->item['status_id'] = $this->defaultStatusLabelId;
         }
