@@ -116,15 +116,13 @@ class GroupsController extends Controller
         $group->permissions = json_encode(Input::get('permission'));
 
 
-        if (!config('app.lock_passwords')) {
-
+        if (config('app.lock_passwords')) {
+            return redirect()->route('update/group', $id)->withInput()->with('error', 'Denied! Editing groups is not allowed in the demo.');
+        } else {
             if ($group->save()) {
                 return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.update'));
             }
             return redirect()->back()->withInput()->withErrors($group->getErrors());
-
-        } else {
-            return redirect()->route('update/group', $id)->withInput()->with('error', 'Denied! Editing groups is not allowed in the demo.');
         }
 
     }
