@@ -267,16 +267,13 @@ class LocationsController extends Controller
         $location = Location::find($locationId);
 
         if (isset($location->id)) {
-                return View::make('locations/view', compact('location'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/locations/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('locations')->with('error', $error);
+            return View::make('locations/view', compact('location'));
         }
+        // Prepare the error message
+        $error = trans('admin/locations/message.does_not_exist', compact('id'));
 
-
+        // Redirect to the user management page
+        return redirect()->route('locations')->with('error', $error);
     }
 
 
