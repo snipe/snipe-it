@@ -845,9 +845,9 @@ class LicensesController extends Controller
 
                 if ($upload_success) {
                     return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
-                } else {
-                    return redirect()->back()->with('success', trans('admin/licenses/message.upload.error'));
                 }
+                return redirect()->back()->with('success', trans('admin/licenses/message.upload.error'));
+
 
             } else {
                  return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
