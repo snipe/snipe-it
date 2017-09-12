@@ -155,27 +155,28 @@ class LicensesController extends Controller
         }
 
             // Was the license created?
-        if ($license->save()) {
-            $license->logCreate();
-            $insertedId = $license->id;
-          // Save the license seat data
-            DB::transaction(function () use (&$insertedId, &$license) {
-                for ($x=0; $x<$license->seats; $x++) {
-                    $license_seat = new LicenseSeat();
-                    $license_seat->license_id       = $insertedId;
-                    $license_seat->user_id          = Auth::user()->id;
-                    $license_seat->assigned_to      = null;
-                    $license_seat->notes            = null;
-                    $license_seat->save();
-                }
-            });
-
-
-          // Redirect to the new license page
-            return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.create.success'));
+        if (!$license->save()) {
+            return redirect()->back()->withInput()->withErrors($license->getErrors());
         }
+        $license->logCreate();
+        $insertedId = $license->id;
+      // Save the license seat data
+        DB::transaction(function () use (&$insertedId, &$license) {
+            for ($x=0; $x<$license->seats; $x++) {
+                $license_seat = new LicenseSeat();
+                $license_seat->license_id       = $insertedId;
+                $license_seat->user_id          = Auth::user()->id;
+                $license_seat->assigned_to      = null;
+                $license_seat->notes            = null;
+                $license_seat->save();
+            }
+        });
 
-        return redirect()->back()->withInput()->withErrors($license->getErrors());
+
+      // Redirect to the new license page
+        return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.create.success'));
+
+
 
     }
 
