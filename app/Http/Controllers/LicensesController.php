@@ -563,46 +563,42 @@ class LicensesController extends Controller
 
 
 
-        if ($settings->slack_endpoint) {
+        if (!$settings->slack_endpoint) {
+            // Redirect to the new asset page
+            return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
+        }
+        $slack_settings = [
+            'username' => $settings->botname,
+            'channel' => $settings->slack_channel,
+            'link_names' => true
+        ];
+
+        $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+
+        try {
+                $client->attach([
+                    'color' => 'good',
+                    'fields' => [
+                        [
+                            'title' => 'Checked Out:',
+                            'value' => $slack_msg
+                        ],
+                        [
+                            'title' => 'Note:',
+                            'value' => e(Input::get('note'))
+                        ],
 
 
-            $slack_settings = [
-                'username' => $settings->botname,
-                'channel' => $settings->slack_channel,
-                'link_names' => true
-            ];
 
-            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+                    ]
+                ])->send('License Checked Out');
 
-            try {
-                    $client->attach([
-                        'color' => 'good',
-                        'fields' => [
-                            [
-                                'title' => 'Checked Out:',
-                                'value' => $slack_msg
-                            ],
-                            [
-                                'title' => 'Note:',
-                                'value' => e(Input::get('note'))
-                            ],
-
-
-
-                        ]
-                    ])->send('License Checked Out');
-
-            } catch (Exception $e) {
-
-            }
+        } catch (Exception $e) {
 
         }
-
-        // Redirect to the new asset page
+         // Redirect to the new asset page
         return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
-
-
-        }
+    }
 
 
     /**
