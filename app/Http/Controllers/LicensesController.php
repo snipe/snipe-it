@@ -870,28 +870,25 @@ class LicensesController extends Controller
         $destinationPath = config('app.private_uploads').'/licenses';
 
         // the license is valid
-        if (isset($license->id)) {
-
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-
-            $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
-            }
-            $log->delete();
-            return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
-
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        $log = Actionlog::find($fileId);
+        $full_filename = $destinationPath.'/'.$log->filename;
+        if (file_exists($full_filename)) {
+            unlink($destinationPath.'/'.$log->filename);
+        }
+        $log->delete();
+        return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
     }
 
 
