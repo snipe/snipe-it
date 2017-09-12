@@ -827,20 +827,16 @@ class LicensesController extends Controller
                     );
                     $validator = Validator::make(array('licensefile'=> $file), $rules);
 
-                    if ($validator->passes()) {
-
-                        $extension = $file->getClientOriginalExtension();
-                        $filename = 'license-'.$license->id.'-'.str_random(8);
-                        $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
-                        $upload_success = $file->move($destinationPath, $filename);
-
-                        //Log the upload to the log
-                        $license->logUpload($filename, e(Input::get('notes')));
-                    } else {
-                         return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
+                    if (!$validator->passes()) {
+                        return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
                     }
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = 'license-'.$license->id.'-'.str_random(8);
+                    $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                    $upload_success = $file->move($destinationPath, $filename);
 
-
+                    //Log the upload to the log
+                    $license->logUpload($filename, e(Input::get('notes')));
                 }
 
                 if ($upload_success) {
