@@ -322,25 +322,25 @@ class LicensesController extends Controller
 
 
               //If the remaining collection is as large or larger than the number of seats we want to delete
-                if ($seats->count() >= abs($difference)) {
-                    for ($i=1; $i <= abs($difference); $i++) {
-                        //Delete the appropriate number of seats
-                        $seats->pop()->delete();
-                    }
-
-                  //Log the deletion of seats to the log
-                    $logaction = new Actionlog();
-                    $logaction->item_type = License::class;
-                    $logaction->item_id = $license->id;
-                    $logaction->user_id = Auth::user()->id;
-                    $logaction->note = '-'.abs($difference)." seats";
-                    $logaction->target_id =  null;
-                    $log = $logaction->logaction('delete seats');
-
-                } else {
-                  // Redirect to the license edit page
+                if ($seats->count() < abs($difference)) {
+                    // Redirect to the license edit page
                     return redirect()->to("admin/licenses/$licenseId/edit")->with('error', trans('admin/licenses/message.assoc_users'));
                 }
+
+                for ($i=1; $i <= abs($difference); $i++) {
+                    //Delete the appropriate number of seats
+                    $seats->pop()->delete();
+                }
+
+              //Log the deletion of seats to the log
+                $logaction = new Actionlog();
+                $logaction->item_type = License::class;
+                $logaction->item_id = $license->id;
+                $logaction->user_id = Auth::user()->id;
+                $logaction->note = '-'.abs($difference)." seats";
+                $logaction->target_id =  null;
+                $log = $logaction->logaction('delete seats');
+
             } else {
 
                 for ($i=1; $i <= $difference; $i++) {
