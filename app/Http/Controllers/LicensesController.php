@@ -538,68 +538,71 @@ class LicensesController extends Controller
         }
 
         // Was the asset updated?
-        if ($licenseseat->save()) {
-
-            $licenseseat->logCheckout(e(Input::get('note')));
-
-            $data['license_id'] =$licenseseat->license_id;
-            $data['note'] = e(Input::get('note'));
-
-            $license = License::find($licenseseat->license_id);
-            $settings = Setting::getSettings();
-
-
-            // Update the asset data
-            if (e(Input::get('assigned_to')) == '') {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
-            } else {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
-            }
-
-
-
-            if ($settings->slack_endpoint) {
-
-
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'Checked Out:',
-                                    'value' => $slack_msg
-                                ],
-                                [
-                                    'title' => 'Note:',
-                                    'value' => e(Input::get('note'))
-                                ],
-
-
-
-                            ]
-                        ])->send('License Checked Out');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
-
-            // Redirect to the new asset page
-            return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
+        if (!$licenseseat->save()) {
+            // Redirect to the asset management page with error
+            return redirect()->to('admin/licenses/$assetId/checkout')->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
         }
 
-        // Redirect to the asset management page with error
-        return redirect()->to('admin/licenses/$assetId/checkout')->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
-    }
+
+
+        $licenseseat->logCheckout(e(Input::get('note')));
+
+        $data['license_id'] =$licenseseat->license_id;
+        $data['note'] = e(Input::get('note'));
+
+        $license = License::find($licenseseat->license_id);
+        $settings = Setting::getSettings();
+
+
+        // Update the asset data
+        if (e(Input::get('assigned_to')) == '') {
+            $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+        } else {
+            $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+        }
+
+
+
+        if ($settings->slack_endpoint) {
+
+
+            $slack_settings = [
+                'username' => $settings->botname,
+                'channel' => $settings->slack_channel,
+                'link_names' => true
+            ];
+
+            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+
+            try {
+                    $client->attach([
+                        'color' => 'good',
+                        'fields' => [
+                            [
+                                'title' => 'Checked Out:',
+                                'value' => $slack_msg
+                            ],
+                            [
+                                'title' => 'Note:',
+                                'value' => e(Input::get('note'))
+                            ],
+
+
+
+                        ]
+                    ])->send('License Checked Out');
+
+            } catch (Exception $e) {
+
+            }
+
+        }
+
+        // Redirect to the new asset page
+        return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
+
+
+        }
 
 
     /**
@@ -745,20 +748,17 @@ class LicensesController extends Controller
         $license = License::withTrashed()->find($licenseId);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
 
-        if (isset($license->id)) {
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-            return View::make('licenses/view', compact('license'));
-
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-
             // Redirect to the user management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+        return View::make('licenses/view', compact('license'));
     }
 
     public function getClone($licenseId = null)
