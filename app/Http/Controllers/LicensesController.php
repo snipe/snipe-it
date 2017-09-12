@@ -681,56 +681,54 @@ class LicensesController extends Controller
         $user = Auth::user();
 
         // Was the asset updated?
-        if ($licenseseat->save()) {
-            $licenseseat->logCheckin($return_to, e(Input::get('note')));
+        if (!$licenseseat->save()) {
+            // Redirect to the license page with error
+            return redirect()->to("admin/licenses")->with('error', trans('admin/licenses/message.checkin.error'));
+        }
 
-            $settings = Setting::getSettings();
+        $licenseseat->logCheckin($return_to, e(Input::get('note')));
 
-            if ($settings->slack_endpoint) {
+        $settings = Setting::getSettings();
 
-
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'Checked In:',
-                                    'value' => 'License: <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
-                                ],
-                                [
-                                    'title' => 'Note:',
-                                    'value' => e(Input::get('note'))
-                                ],
-
-                            ]
-                        ])->send('License Checked In');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
+        if ($settings->slack_endpoint) {
 
 
+            $slack_settings = [
+                'username' => $settings->botname,
+                'channel' => $settings->slack_channel,
+                'link_names' => true
+            ];
 
-            if ($backto=='user') {
-                return redirect()->to("admin/users/".$return_to->id.'/view')->with('success', trans('admin/licenses/message.checkin.success'));
-            } else {
-                return redirect()->to("admin/licenses/".$licenseseat->license_id."/view")->with('success', trans('admin/licenses/message.checkin.success'));
+            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+
+            try {
+                    $client->attach([
+                        'color' => 'good',
+                        'fields' => [
+                            [
+                                'title' => 'Checked In:',
+                                'value' => 'License: <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
+                            ],
+                            [
+                                'title' => 'Note:',
+                                'value' => e(Input::get('note'))
+                            ],
+
+                        ]
+                    ])->send('License Checked In');
+
+            } catch (Exception $e) {
+
             }
 
         }
 
-        // Redirect to the license page with error
-        return redirect()->to("admin/licenses")->with('error', trans('admin/licenses/message.checkin.error'));
+
+
+        if ($backto=='user') {
+            return redirect()->to("admin/users/".$return_to->id.'/view')->with('success', trans('admin/licenses/message.checkin.success'));
+        }
+        return redirect()->to("admin/licenses/".$licenseseat->license_id."/view")->with('success', trans('admin/licenses/message.checkin.success'));
     }
 
     /**
