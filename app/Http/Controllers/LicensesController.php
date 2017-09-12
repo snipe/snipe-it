@@ -811,51 +811,47 @@ class LicensesController extends Controller
         // the license is valid
         $destinationPath = config('app.private_uploads').'/licenses';
 
-        if (isset($license->id)) {
-
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-
-            if (!Input::hasFile('licensefile')) {
-                return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
-            }
-            foreach (Input::file('licensefile') as $file) {
-
-                $rules = array(
-                'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
-                );
-                $validator = Validator::make(array('licensefile'=> $file), $rules);
-
-                if (!$validator->passes()) {
-                    return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
-                }
-
-                $extension = $file->getClientOriginalExtension();
-                $filename = 'license-'.$license->id.'-'.str_random(8);
-                $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
-                $upload_success = $file->move($destinationPath, $filename);
-
-                //Log the upload to the log
-                $license->logUpload($filename, e(Input::get('notes')));
-            }
-
-            if ($upload_success) {
-                return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
-            }
-            return redirect()->back()->with('success', trans('admin/licenses/message.upload.error'));
-
-
-
-
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        if (!Input::hasFile('licensefile')) {
+            return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
+        }
+        foreach (Input::file('licensefile') as $file) {
+
+            $rules = array(
+            'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
+            );
+            $validator = Validator::make(array('licensefile'=> $file), $rules);
+
+            if (!$validator->passes()) {
+                return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
+            }
+
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'license-'.$license->id.'-'.str_random(8);
+            $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+            $upload_success = $file->move($destinationPath, $filename);
+
+            //Log the upload to the log
+            $license->logUpload($filename, e(Input::get('notes')));
+        }
+
+        if ($upload_success) {
+            return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
+        }
+        return redirect()->back()->with('success', trans('admin/licenses/message.upload.error'));
+
+
     }
 
 
