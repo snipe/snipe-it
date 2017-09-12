@@ -904,26 +904,24 @@ class LicensesController extends Controller
     */
     public function displayFile($licenseId = null, $fileId = null)
     {
-
         $license = License::find($licenseId);
 
         // the license is valid
-        if (isset($license->id)) {
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-
-                $log = Actionlog::find($fileId);
-                $file = $log->get_src('licenses');
-                return Response::download($file);
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        $log = Actionlog::find($fileId);
+        $file = $log->get_src('licenses');
+        return Response::download($file);
     }
 
 
