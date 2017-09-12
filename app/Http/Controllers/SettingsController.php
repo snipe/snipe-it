@@ -183,23 +183,23 @@ class SettingsController extends Controller
 
         if ((!$user->isValid()) || (!$settings->isValid())) {
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
-        } else {
-            $user->save();
-            Auth::login($user, true);
-            $settings->save();
-
-            if (Input::get('email_creds')=='1') {
-                Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
-                    $m->to($data['email'], $data['first_name']);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.your_credentials'));
-                });
-            }
-
-
-
-            return redirect()->route('setup.done');
         }
+        $user->save();
+        Auth::login($user, true);
+        $settings->save();
+
+        if (Input::get('email_creds')=='1') {
+            Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
+                $m->to($data['email'], $data['first_name']);
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.your_credentials'));
+            });
+        }
+
+
+
+        return redirect()->route('setup.done');
+
 
 
     }
