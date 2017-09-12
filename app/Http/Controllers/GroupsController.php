@@ -138,21 +138,21 @@ class GroupsController extends Controller
     */
     public function getDelete($id = null)
     {
-        if (!config('app.lock_passwords')) {
-            try {
-                // Get group information
-                $group = Group::find($id);
-                $group->delete();
-
-                // Redirect to the group management page
-                return redirect()->route('groups')->with('success', trans('admin/groups/message.success.delete'));
-            } catch (GroupNotFoundException $e) {
-                // Redirect to the group management page
-                return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
-            }
-        } else {
+        if (config('app.lock_passwords')) {
             return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
         }
+        try {
+            // Get group information
+            $group = Group::find($id);
+            $group->delete();
+
+            // Redirect to the group management page
+            return redirect()->route('groups')->with('success', trans('admin/groups/message.success.delete'));
+        } catch (GroupNotFoundException $e) {
+            // Redirect to the group management page
+            return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+        }
+
     }
 
 

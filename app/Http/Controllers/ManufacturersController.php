@@ -145,15 +145,12 @@ class ManufacturersController extends Controller
 
             // Redirect to the asset management page
             return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.assoc_users'));
-        } else {
-
-            // Delete the manufacturer
-            $manufacturer->delete();
-
-            // Redirect to the manufacturers management page
-            return redirect()->to('admin/settings/manufacturers')->with('success', trans('admin/manufacturers/message.delete.success'));
         }
+        // Delete the manufacturer
+        $manufacturer->delete();
 
+        // Redirect to the manufacturers management page
+        return redirect()->to('admin/settings/manufacturers')->with('success', trans('admin/manufacturers/message.delete.success'));
     }
 
 
@@ -175,15 +172,12 @@ class ManufacturersController extends Controller
 
         if (isset($manufacturer->id)) {
                 return View::make('manufacturers/view', compact('manufacturer'));
-        } else {
+        }
             // Prepare the error message
             $error = trans('admin/manufacturers/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
             return redirect()->route('manufacturers')->with('error', $error);
-        }
-
-
     }
 
     /**

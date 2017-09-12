@@ -155,27 +155,28 @@ class LicensesController extends Controller
         }
 
             // Was the license created?
-        if ($license->save()) {
-            $license->logCreate();
-            $insertedId = $license->id;
-          // Save the license seat data
-            DB::transaction(function () use (&$insertedId, &$license) {
-                for ($x=0; $x<$license->seats; $x++) {
-                    $license_seat = new LicenseSeat();
-                    $license_seat->license_id       = $insertedId;
-                    $license_seat->user_id          = Auth::user()->id;
-                    $license_seat->assigned_to      = null;
-                    $license_seat->notes            = null;
-                    $license_seat->save();
-                }
-            });
-
-
-          // Redirect to the new license page
-            return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.create.success'));
+        if (!$license->save()) {
+            return redirect()->back()->withInput()->withErrors($license->getErrors());
         }
+        $license->logCreate();
+        $insertedId = $license->id;
+      // Save the license seat data
+        DB::transaction(function () use (&$insertedId, &$license) {
+            for ($x=0; $x<$license->seats; $x++) {
+                $license_seat = new LicenseSeat();
+                $license_seat->license_id       = $insertedId;
+                $license_seat->user_id          = Auth::user()->id;
+                $license_seat->assigned_to      = null;
+                $license_seat->notes            = null;
+                $license_seat->save();
+            }
+        });
 
-        return redirect()->back()->withInput()->withErrors($license->getErrors());
+
+      // Redirect to the new license page
+        return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.create.success'));
+
+
 
     }
 
@@ -322,25 +323,25 @@ class LicensesController extends Controller
 
 
               //If the remaining collection is as large or larger than the number of seats we want to delete
-                if ($seats->count() >= abs($difference)) {
-                    for ($i=1; $i <= abs($difference); $i++) {
-                        //Delete the appropriate number of seats
-                        $seats->pop()->delete();
-                    }
-
-                  //Log the deletion of seats to the log
-                    $logaction = new Actionlog();
-                    $logaction->item_type = License::class;
-                    $logaction->item_id = $license->id;
-                    $logaction->user_id = Auth::user()->id;
-                    $logaction->note = '-'.abs($difference)." seats";
-                    $logaction->target_id =  null;
-                    $log = $logaction->logaction('delete seats');
-
-                } else {
-                  // Redirect to the license edit page
+                if ($seats->count() < abs($difference)) {
+                    // Redirect to the license edit page
                     return redirect()->to("admin/licenses/$licenseId/edit")->with('error', trans('admin/licenses/message.assoc_users'));
                 }
+
+                for ($i=1; $i <= abs($difference); $i++) {
+                    //Delete the appropriate number of seats
+                    $seats->pop()->delete();
+                }
+
+              //Log the deletion of seats to the log
+                $logaction = new Actionlog();
+                $logaction->item_type = License::class;
+                $logaction->item_id = $license->id;
+                $logaction->user_id = Auth::user()->id;
+                $logaction->note = '-'.abs($difference)." seats";
+                $logaction->target_id =  null;
+                $log = $logaction->logaction('delete seats');
+
             } else {
 
                 for ($i=1; $i <= $difference; $i++) {
@@ -397,36 +398,29 @@ class LicensesController extends Controller
         }
 
         if ($license->assigned_seats_count > 0) {
-
             // Redirect to the license management page
             return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.assoc_users'));
 
-        } else {
-
-            // Delete the license and the associated license seats
-            DB::table('license_seats')
-            ->where('id', $license->id)
-            ->update(array('assigned_to' => null,'asset_id' => null));
-
-            $licenseseats = $license->licenseseats();
-            $licenseseats->delete();
-            $license->delete();
-
-            $logaction = new Actionlog();
-            $logaction->item_type = License::class;
-            $logaction->item_id = $license->id;
-            $logaction->created_at =  date("Y-m-d H:i:s");
-            $logaction->user_id = Auth::user()->id;
-            $log = $logaction->logaction('deleted');
-
-
-
-
-            // Redirect to the licenses management page
-            return redirect()->to('admin/licenses')->with('success', trans('admin/licenses/message.delete.success'));
         }
 
+        // Delete the license and the associated license seats
+        DB::table('license_seats')
+        ->where('id', $license->id)
+        ->update(array('assigned_to' => null,'asset_id' => null));
 
+        $licenseseats = $license->licenseseats();
+        $licenseseats->delete();
+        $license->delete();
+
+        $logaction = new Actionlog();
+        $logaction->item_type = License::class;
+        $logaction->item_id = $license->id;
+        $logaction->created_at =  date("Y-m-d H:i:s");
+        $logaction->user_id = Auth::user()->id;
+        $log = $logaction->logaction('deleted');
+
+        // Redirect to the licenses management page
+        return redirect()->to('admin/licenses')->with('success', trans('admin/licenses/message.delete.success'));
     }
 
 
@@ -545,67 +539,66 @@ class LicensesController extends Controller
         }
 
         // Was the asset updated?
-        if ($licenseseat->save()) {
-
-            $licenseseat->logCheckout(e(Input::get('note')));
-
-            $data['license_id'] =$licenseseat->license_id;
-            $data['note'] = e(Input::get('note'));
-
-            $license = License::find($licenseseat->license_id);
-            $settings = Setting::getSettings();
-
-
-            // Update the asset data
-            if (e(Input::get('assigned_to')) == '') {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
-            } else {
-                $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
-            }
+        if (!$licenseseat->save()) {
+            // Redirect to the asset management page with error
+            return redirect()->to('admin/licenses/$assetId/checkout')->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
+        }
 
 
 
-            if ($settings->slack_endpoint) {
+        $licenseseat->logCheckout(e(Input::get('note')));
+
+        $data['license_id'] =$licenseseat->license_id;
+        $data['note'] = e(Input::get('note'));
+
+        $license = License::find($licenseseat->license_id);
+        $settings = Setting::getSettings();
 
 
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'Checked Out:',
-                                    'value' => $slack_msg
-                                ],
-                                [
-                                    'title' => 'Note:',
-                                    'value' => e(Input::get('note'))
-                                ],
+        // Update the asset data
+        if (e(Input::get('assigned_to')) == '') {
+            $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+        } else {
+            $slack_msg = 'License <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.config('app.url').'/admin/users/'.$user->id.'/view|'.$is_assigned_to->fullName().'> by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
+        }
 
 
 
-                            ]
-                        ])->send('License Checked Out');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
-
+        if (!$settings->slack_endpoint) {
             // Redirect to the new asset page
             return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
         }
+        $slack_settings = [
+            'username' => $settings->botname,
+            'channel' => $settings->slack_channel,
+            'link_names' => true
+        ];
 
-        // Redirect to the asset management page with error
-        return redirect()->to('admin/licenses/$assetId/checkout')->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
+        $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+
+        try {
+                $client->attach([
+                    'color' => 'good',
+                    'fields' => [
+                        [
+                            'title' => 'Checked Out:',
+                            'value' => $slack_msg
+                        ],
+                        [
+                            'title' => 'Note:',
+                            'value' => e(Input::get('note'))
+                        ],
+
+
+
+                    ]
+                ])->send('License Checked Out');
+
+        } catch (Exception $e) {
+
+        }
+         // Redirect to the new asset page
+        return redirect()->to("admin/licenses")->with('success', trans('admin/licenses/message.checkout.success'));
     }
 
 
@@ -688,56 +681,54 @@ class LicensesController extends Controller
         $user = Auth::user();
 
         // Was the asset updated?
-        if ($licenseseat->save()) {
-            $licenseseat->logCheckin($return_to, e(Input::get('note')));
+        if (!$licenseseat->save()) {
+            // Redirect to the license page with error
+            return redirect()->to("admin/licenses")->with('error', trans('admin/licenses/message.checkin.error'));
+        }
 
-            $settings = Setting::getSettings();
+        $licenseseat->logCheckin($return_to, e(Input::get('note')));
 
-            if ($settings->slack_endpoint) {
+        $settings = Setting::getSettings();
 
-
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'Checked In:',
-                                    'value' => 'License: <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
-                                ],
-                                [
-                                    'title' => 'Note:',
-                                    'value' => e(Input::get('note'))
-                                ],
-
-                            ]
-                        ])->send('License Checked In');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
+        if ($settings->slack_endpoint) {
 
 
+            $slack_settings = [
+                'username' => $settings->botname,
+                'channel' => $settings->slack_channel,
+                'link_names' => true
+            ];
 
-            if ($backto=='user') {
-                return redirect()->to("admin/users/".$return_to->id.'/view')->with('success', trans('admin/licenses/message.checkin.success'));
-            } else {
-                return redirect()->to("admin/licenses/".$licenseseat->license_id."/view")->with('success', trans('admin/licenses/message.checkin.success'));
+            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+
+            try {
+                    $client->attach([
+                        'color' => 'good',
+                        'fields' => [
+                            [
+                                'title' => 'Checked In:',
+                                'value' => 'License: <'.config('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.config('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
+                            ],
+                            [
+                                'title' => 'Note:',
+                                'value' => e(Input::get('note'))
+                            ],
+
+                        ]
+                    ])->send('License Checked In');
+
+            } catch (Exception $e) {
+
             }
 
         }
 
-        // Redirect to the license page with error
-        return redirect()->to("admin/licenses")->with('error', trans('admin/licenses/message.checkin.error'));
+
+
+        if ($backto=='user') {
+            return redirect()->to("admin/users/".$return_to->id.'/view')->with('success', trans('admin/licenses/message.checkin.success'));
+        }
+        return redirect()->to("admin/licenses/".$licenseseat->license_id."/view")->with('success', trans('admin/licenses/message.checkin.success'));
     }
 
     /**
@@ -754,20 +745,17 @@ class LicensesController extends Controller
         $license = License::withTrashed()->find($licenseId);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
 
-        if (isset($license->id)) {
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-            return View::make('licenses/view', compact('license'));
-
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-
             // Redirect to the user management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+        return View::make('licenses/view', compact('license'));
     }
 
     public function getClone($licenseId = null)
@@ -820,56 +808,47 @@ class LicensesController extends Controller
         // the license is valid
         $destinationPath = config('app.private_uploads').'/licenses';
 
-        if (isset($license->id)) {
-
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-
-            if (Input::hasFile('licensefile')) {
-
-                foreach (Input::file('licensefile') as $file) {
-
-                    $rules = array(
-                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
-                    );
-                    $validator = Validator::make(array('licensefile'=> $file), $rules);
-
-                    if ($validator->passes()) {
-
-                        $extension = $file->getClientOriginalExtension();
-                        $filename = 'license-'.$license->id.'-'.str_random(8);
-                        $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
-                        $upload_success = $file->move($destinationPath, $filename);
-
-                        //Log the upload to the log
-                        $license->logUpload($filename, e(Input::get('notes')));
-                    } else {
-                         return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
-                    }
-
-
-                }
-
-                if ($upload_success) {
-                    return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
-                } else {
-                    return redirect()->back()->with('success', trans('admin/licenses/message.upload.error'));
-                }
-
-            } else {
-                 return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
-            }
-
-
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        if (!Input::hasFile('licensefile')) {
+            return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
+        }
+        foreach (Input::file('licensefile') as $file) {
+
+            $rules = array(
+            'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
+            );
+            $validator = Validator::make(array('licensefile'=> $file), $rules);
+
+            if (!$validator->passes()) {
+                return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
+            }
+
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'license-'.$license->id.'-'.str_random(8);
+            $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+            $upload_success = $file->move($destinationPath, $filename);
+
+            //Log the upload to the log
+            $license->logUpload($filename, e(Input::get('notes')));
+        }
+
+        if ($upload_success) {
+            return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
+        }
+        return redirect()->back()->with('success', trans('admin/licenses/message.upload.error'));
+
+
     }
 
 
@@ -888,28 +867,25 @@ class LicensesController extends Controller
         $destinationPath = config('app.private_uploads').'/licenses';
 
         // the license is valid
-        if (isset($license->id)) {
-
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-
-            $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
-            }
-            $log->delete();
-            return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
-
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        $log = Actionlog::find($fileId);
+        $full_filename = $destinationPath.'/'.$log->filename;
+        if (file_exists($full_filename)) {
+            unlink($destinationPath.'/'.$log->filename);
+        }
+        $log->delete();
+        return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
     }
 
 
@@ -925,26 +901,24 @@ class LicensesController extends Controller
     */
     public function displayFile($licenseId = null, $fileId = null)
     {
-
         $license = License::find($licenseId);
 
         // the license is valid
-        if (isset($license->id)) {
-
-            if (!Company::isCurrentUserHasAccess($license)) {
-                return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
-            }
-
-                $log = Actionlog::find($fileId);
-                $file = $log->get_src('licenses');
-                return Response::download($file);
-        } else {
+        if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return redirect()->route('licenses')->with('error', $error);
         }
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return redirect()->to('admin/licenses')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        $log = Actionlog::find($fileId);
+        $file = $log->get_src('licenses');
+        return Response::download($file);
     }
 
 
