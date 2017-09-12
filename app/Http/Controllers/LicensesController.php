@@ -397,36 +397,29 @@ class LicensesController extends Controller
         }
 
         if ($license->assigned_seats_count > 0) {
-
             // Redirect to the license management page
             return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.assoc_users'));
 
-        } else {
-
-            // Delete the license and the associated license seats
-            DB::table('license_seats')
-            ->where('id', $license->id)
-            ->update(array('assigned_to' => null,'asset_id' => null));
-
-            $licenseseats = $license->licenseseats();
-            $licenseseats->delete();
-            $license->delete();
-
-            $logaction = new Actionlog();
-            $logaction->item_type = License::class;
-            $logaction->item_id = $license->id;
-            $logaction->created_at =  date("Y-m-d H:i:s");
-            $logaction->user_id = Auth::user()->id;
-            $log = $logaction->logaction('deleted');
-
-
-
-
-            // Redirect to the licenses management page
-            return redirect()->to('admin/licenses')->with('success', trans('admin/licenses/message.delete.success'));
         }
 
+        // Delete the license and the associated license seats
+        DB::table('license_seats')
+        ->where('id', $license->id)
+        ->update(array('assigned_to' => null,'asset_id' => null));
 
+        $licenseseats = $license->licenseseats();
+        $licenseseats->delete();
+        $license->delete();
+
+        $logaction = new Actionlog();
+        $logaction->item_type = License::class;
+        $logaction->item_id = $license->id;
+        $logaction->created_at =  date("Y-m-d H:i:s");
+        $logaction->user_id = Auth::user()->id;
+        $log = $logaction->logaction('deleted');
+
+        // Redirect to the licenses management page
+        return redirect()->to('admin/licenses')->with('success', trans('admin/licenses/message.delete.success'));
     }
 
 
