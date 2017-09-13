@@ -613,20 +613,18 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return boolean
+     * @param $class
+     * @param $field
+     * @return bool
      */
     public static function checkIfRequired($class, $field)
     {
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
-            if ($rule_name == $field) {
-                if (strpos($rule, 'required') === false) {
-                    return false;
-                } else {
-                    return true;
-                }
-
+            if ($rule_name !== $field) {
+                continue;
             }
+            return (boolean) strpos($rule, 'required');
         }
     }
 
