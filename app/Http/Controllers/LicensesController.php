@@ -582,16 +582,17 @@ class LicensesController extends Controller
         $license = License::find($licenseId);
 
         // the license is valid
-        if (isset($license->id)) {
-            $this->authorize('view', $license);
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src('licenses');
-            return Response::download($file);
+        if (!isset($license->id)) {
+            // Prepare the error message
+            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+            // Redirect to the licence management page
+            return redirect()->route('licenses.index')->with('error', $error);
         }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        // Redirect to the licence management page
-        return redirect()->route('licenses.index')->with('error', $error);
+
+        $this->authorize('view', $license);
+        $log = Actionlog::find($fileId);
+        $file = $log->get_src('licenses');
+        return Response::download($file);
     }
 
 
