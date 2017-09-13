@@ -130,7 +130,8 @@ class LicensesController extends Controller
      */
     public function edit($licenseId = null)
     {
-        if (is_null($item = License::find($licenseId))) {
+        $item = License::find($licenseId);
+        if (is_null($item)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         }
 
@@ -206,8 +207,9 @@ class LicensesController extends Controller
      */
     public function destroy($licenseId)
     {
+        $license = License::find($licenseId);
         // Check if the license exists
-        if (is_null($license = License::find($licenseId))) {
+        if (is_null($license)) {
             // Redirect to the license management page
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
