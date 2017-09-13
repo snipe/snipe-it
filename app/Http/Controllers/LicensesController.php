@@ -441,8 +441,10 @@ class LicensesController extends Controller
     public function show($licenseId = null)
     {
         $license = License::find($licenseId);
+
         if (!isset($license->id)) {
-            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
+            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+            return redirect()->route('licenses.index')->with('error', $error);
         }
 
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
@@ -547,7 +549,6 @@ class LicensesController extends Controller
         $license = License::find($licenseId);
         $destinationPath = config('app.private_uploads').'/licenses';
 
-        // the license is valid
         if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
@@ -555,6 +556,7 @@ class LicensesController extends Controller
             // Redirect to the licence management page
             return redirect()->route('licenses.index')->with('error', $error);
         }
+        // the license is valid
         $this->authorize('edit', $license);
         $log = Actionlog::find($fileId);
         $full_filename = $destinationPath.'/'.$log->filename;
@@ -581,7 +583,6 @@ class LicensesController extends Controller
 
         $license = License::find($licenseId);
 
-        // the license is valid
         if (!isset($license->id)) {
             // Prepare the error message
             $error = trans('admin/licenses/message.does_not_exist', compact('id'));
@@ -589,6 +590,7 @@ class LicensesController extends Controller
             return redirect()->route('licenses.index')->with('error', $error);
         }
 
+        // the license is valid
         $this->authorize('view', $license);
         $log = Actionlog::find($fileId);
         $file = $log->get_src('licenses');
