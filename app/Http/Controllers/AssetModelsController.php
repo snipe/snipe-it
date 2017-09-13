@@ -54,7 +54,6 @@ class AssetModelsController extends Controller
     {
         // Show the page
         return view('models/edit')
-        //->with('category_list', Helper::categoryList('asset'))
         ->with('depreciation_list', Helper::depreciationList())
         ->with('manufacturer_list', Helper::manufacturerList())
         ->with('item', new AssetModel);
@@ -164,7 +163,6 @@ class AssetModelsController extends Controller
         }
 
         $view = View::make('models/edit', compact('item'));
-        //$view->with('category_list', Helper::categoryList('asset'));
         $view->with('depreciation_list', Helper::depreciationList());
         $view->with('manufacturer_list', Helper::manufacturerList());
         return $view;
@@ -326,7 +324,6 @@ class AssetModelsController extends Controller
 
         // Show the page
         $view = View::make('models/edit');
-        //$view->with('category_list', Helper::categoryList('asset'));
         $view->with('depreciation_list', Helper::depreciationList());
         $view->with('manufacturer_list', Helper::manufacturerList());
         $view->with('item', $model);

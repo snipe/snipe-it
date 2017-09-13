@@ -55,7 +55,6 @@ class AccessoriesController extends Controller
         // Show the page
         return view('accessories/edit')
           ->with('item', new Accessory)
-          //->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
           ->with('location_list', Helper::locationsList())
           ->with('manufacturer_list', Helper::manufacturerList());
@@ -113,7 +112,6 @@ class AccessoriesController extends Controller
         $this->authorize($item);
 
         return view('accessories/edit', compact('item'))
-          //->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
           ->with('location_list', Helper::locationsList())
           ->with('manufacturer_list', Helper::manufacturerList());
