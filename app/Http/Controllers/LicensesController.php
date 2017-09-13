@@ -497,33 +497,33 @@ class LicensesController extends Controller
         if (isset($license->id)) {
             $this->authorize('update', $license);
 
-            if (Input::hasFile('licensefile')) {
 
-                foreach (Input::file('licensefile') as $file) {
-
-                    $rules = array(
-                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
-                    );
-                    $validator = Validator::make(array('licensefile'=> $file), $rules);
-
-                    if ($validator->fails()) {
-                         return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
-                    }
-                    $extension = $file->getClientOriginalExtension();
-                    $filename = 'license-'.$license->id.'-'.str_random(8);
-                    $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
-                    $upload_success = $file->move($destinationPath, $filename);
-
-                    //Log the upload to the log
-                    $license->logUpload($filename, e($request->input('notes')));
-                }
-
-                if ($upload_success) {
-                    return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
-                }
-                return redirect()->back()->with('error', trans('admin/licenses/message.upload.error'));
+            if (!Input::hasFile('licensefile')) {
+                return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
             }
-            return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
+            foreach (Input::file('licensefile') as $file) {
+
+                $rules = array(
+                'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
+                );
+                $validator = Validator::make(array('licensefile'=> $file), $rules);
+
+                if ($validator->fails()) {
+                     return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
+                }
+                $extension = $file->getClientOriginalExtension();
+                $filename = 'license-'.$license->id.'-'.str_random(8);
+                $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                $upload_success = $file->move($destinationPath, $filename);
+
+                //Log the upload to the log
+                $license->logUpload($filename, e($request->input('notes')));
+            }
+
+            if ($upload_success) {
+                return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
+            }
+            return redirect()->back()->with('error', trans('admin/licenses/message.upload.error'));
         }
         // Prepare the error message
         $error = trans('admin/licenses/message.does_not_exist', compact('id'));
