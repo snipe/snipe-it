@@ -417,17 +417,17 @@ class LicensesController extends Controller
         $licenseSeat->assigned_to                   = null;
         $licenseSeat->asset_id                      = null;
 
-        // Was the asset updated?
-        if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e(request('note')));
-            if ($backTo=='user') {
-                return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
-            }
-            return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
+        if (!$licenseSeat->save()) {
+            // Redirect to the license page with error
+            return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkin.error'));
         }
+        // Was the asset updated?
+        $licenseSeat->logCheckin($return_to, e(request('note')));
+        if ($backTo=='user') {
+            return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
+        }
+        return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
 
-        // Redirect to the license page with error
-        return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkin.error'));
     }
 
     /**
