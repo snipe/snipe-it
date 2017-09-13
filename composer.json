@@ -30,7 +30,8 @@
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^3.0",
     "doctrine/instantiator": "1.0.5",
-    "doctrine/inflector": "1.0.*"
+    "doctrine/inflector": "1.0.*",
+    "imanghafoori/laravel-widgetize" : "1.8.*"
   },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
