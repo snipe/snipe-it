@@ -213,24 +213,22 @@ class LicensesController extends Controller
         }
 
         $this->authorize('delete', $license);
-
-        if ($license->assigned_seats_count == 0) {
-            // Delete the license and the associated license seats
-            DB::table('license_seats')
-                ->where('id', $license->id)
-                ->update(array('assigned_to' => null,'asset_id' => null));
-
-            $licenseSeats = $license->licenseseats();
-            $licenseSeats->delete();
-            $license->delete();
-
-            // Redirect to the licenses management page
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.delete.success'));
-            // Redirect to the license management page
+        if ($license->assigned_seats_count !== 0) {
+            // There are still licenses in use.
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.assoc_users'));
         }
-        // There are still licenses in use.
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.assoc_users'));
 
+        // Delete the license and the associated license seats
+        DB::table('license_seats')
+            ->where('id', $license->id)
+            ->update(array('assigned_to' => null,'asset_id' => null));
+
+        $licenseSeats = $license->licenseseats();
+        $licenseSeats->delete();
+        $license->delete();
+
+        // Redirect to the licenses management page
+        return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.delete.success'));
     }
 
     /**
