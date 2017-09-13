@@ -440,8 +440,7 @@ class LicensesController extends Controller
     {
         $license = License::find($licenseId);
         if (!isset($license->id)) {
-            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-            return redirect()->route('licenses.index')->with('error', $error);
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
         }
 
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
