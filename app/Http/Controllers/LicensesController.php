@@ -441,13 +441,14 @@ class LicensesController extends Controller
     public function show($licenseId = null)
     {
         $license = License::find($licenseId);
-        if (isset($license->id)) {
-            $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
-            $this->authorize('view', $license);
-            return view('licenses/view', compact('license'));
+        if (!isset($license->id)) {
+            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+            return redirect()->route('licenses.index')->with('error', $error);
         }
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        return redirect()->route('licenses.index')->with('error', $error);
+
+        $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
+        $this->authorize('view', $license);
+        return view('licenses/view', compact('license'));
     }
 
     public function getClone($licenseId = null)
