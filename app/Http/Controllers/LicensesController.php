@@ -329,18 +329,18 @@ class LicensesController extends Controller
         }
 
         // Was the asset updated?
-        if ($licenseSeat->save()) {
-            $licenseSeat->logCheckout($request->input('note'), $target);
-
-            $data['license_id'] =$licenseSeat->license_id;
-            $data['note'] = $request->input('note');
-
-            // Redirect to the new asset page
-            return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
+        if (!$licenseSeat->save()) {
+            // Redirect to the asset management page with error
+            return redirect()->to("admin/licenses/{$asset_id}/checkout")->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
         }
+        $licenseSeat->logCheckout($request->input('note'), $target);
 
-        // Redirect to the asset management page with error
-        return redirect()->to("admin/licenses/{$asset_id}/checkout")->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
+        $data['license_id'] =$licenseSeat->license_id;
+        $data['note'] = $request->input('note');
+
+        // Redirect to the new asset page
+        return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
+
     }
 
 
