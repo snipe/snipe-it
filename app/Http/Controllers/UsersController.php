@@ -793,76 +793,77 @@ class UsersController extends Controller
 
         $nbInsert = $csv->each(function ($row) use ($duplicates) {
 
-            if (array_key_exists(2, $row)) {
+            if (!array_key_exists(2, $row)) {
+                return null;
+            }
+            if (Input::get('activate') == 1) {
+                $activated = '1';
+            } else {
+                $activated = '0';
+            }
 
-                if (Input::get('activate') == 1) {
-                    $activated = '1';
+            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
+
+            // Location
+            if (array_key_exists('4', $row)) {
+                $user_location_id = trim($row[4]);
+                if ($user_location_id=='') {
+                    $user_location_id = null;
+                }
+            }
+
+
+
+            try {
+                // Check if this email already exists in the system
+                $user = User::where('username', $row[2])->first();
+                if ($user) {
+                    $duplicates .= $row[2] . ', ';
                 } else {
-                    $activated = '0';
-                }
 
-                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
+                    $newuser = array(
+                        'first_name' => trim(e($row[0])),
+                        'last_name' => trim(e($row[1])),
+                        'username' => trim(e($row[2])),
+                        'email' => trim(e($row[3])),
+                        'password' => bcrypt($pass),
+                        'activated' => $activated,
+                        'location_id' => trim(e($user_location_id)),
+                        'phone' => trim(e($row[5])),
+                        'jobtitle' => trim(e($row[6])),
+                        'employee_num' => trim(e($row[7])),
+                        'company_id' => Company::getIdForUser($row[8]),
+                        'permissions' => '{"user":1}',
+                        'notes' => 'Imported user'
+                    );
+                    //dd($newuser);
 
-                // Location
-                if (array_key_exists('4', $row)) {
-                    $user_location_id = trim($row[4]);
-                    if ($user_location_id=='') {
-                        $user_location_id = null;
-                    }
-                }
-
-
-
-                try {
-                    // Check if this email already exists in the system
-                    $user = User::where('username', $row[2])->first();
-                    if ($user) {
-                        $duplicates .= $row[2] . ', ';
-                    } else {
-
-                        $newuser = array(
-                            'first_name' => trim(e($row[0])),
-                            'last_name' => trim(e($row[1])),
-                            'username' => trim(e($row[2])),
-                            'email' => trim(e($row[3])),
-                            'password' => bcrypt($pass),
-                            'activated' => $activated,
-                            'location_id' => trim(e($user_location_id)),
-                            'phone' => trim(e($row[5])),
-                            'jobtitle' => trim(e($row[6])),
-                            'employee_num' => trim(e($row[7])),
-                            'company_id' => Company::getIdForUser($row[8]),
-                            'permissions' => '{"user":1}',
-                            'notes' => 'Imported user'
-                        );
-                        //dd($newuser);
-
-                        DB::table('users')->insert($newuser);
+                    DB::table('users')->insert($newuser);
 
 
-                        if (((Input::get('email_user') == 1) && !config('app.lock_passwords'))) {
-                            // Send the credentials through email
-                            if ($row[3] != '') {
-                                $data = array();
-                                $data['username'] = trim(e($row[2]));
-                                $data['first_name'] = trim(e($row[0]));
-                                $data['password'] = $pass;
+                    if (((Input::get('email_user') == 1) && !config('app.lock_passwords'))) {
+                        // Send the credentials through email
+                        if ($row[3] != '') {
+                            $data = array();
+                            $data['username'] = trim(e($row[2]));
+                            $data['first_name'] = trim(e($row[0]));
+                            $data['password'] = $pass;
 
-                                if ($newuser['email']) {
-                                    Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
-                                        $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-                                        $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                                        $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
-                                    });
-                                }
+                            if ($newuser['email']) {
+                                Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+                                    $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+                                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                                    $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
+                                });
                             }
                         }
                     }
-                } catch (Exception $e) {
-                    echo 'Caught exception: ', $e->getMessage(), "\n";
                 }
-                return true;
+            } catch (Exception $e) {
+                echo 'Caught exception: ', $e->getMessage(), "\n";
             }
+            return true;
+
         });
         return redirect()->route('users.index')->with('duplicates', $duplicates)->with('success', 'Success');
     }
