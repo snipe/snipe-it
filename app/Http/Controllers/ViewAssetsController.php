@@ -211,67 +211,67 @@ class ViewAssetsController extends Controller
         if ($asset->isRequestedBy(Auth::user())) {
             $asset->cancelRequest();
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
-        } else {
-
-            $logaction = new Actionlog();
-            $logaction->item_id = $data['asset_id'] = $asset->id;
-            $logaction->item_type = Asset::class;
-            $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
-            $data['asset_type'] = 'hardware';
-            if ($user->location_id) {
-                $logaction->location_id = $user->location_id;
-            }
-            $logaction->target_id = $data['user_id'] = Auth::user()->id;
-            $logaction->target_type = User::class;
-            $log = $logaction->logaction('requested');
-
-            $data['requested_by'] = $user->present()->fullName();
-            $data['asset_name'] = $asset->present()->name();
-
-            $settings = Setting::getSettings();
-
-            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.asset_requested'));
-                });
-            }
-
-            $asset->request();
-
-
-            if ($settings->slack_endpoint) {
-
-
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'REQUESTED:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
-                                ]
-
-                            ]
-                        ])->send('Asset Requested');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
-
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
+
+        $logaction = new Actionlog();
+        $logaction->item_id = $data['asset_id'] = $asset->id;
+        $logaction->item_type = Asset::class;
+        $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
+        $data['asset_type'] = 'hardware';
+        if ($user->location_id) {
+            $logaction->location_id = $user->location_id;
+        }
+        $logaction->target_id = $data['user_id'] = Auth::user()->id;
+        $logaction->target_type = User::class;
+        $log = $logaction->logaction('requested');
+
+        $data['requested_by'] = $user->present()->fullName();
+        $data['asset_name'] = $asset->present()->name();
+
+        $settings = Setting::getSettings();
+
+        if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
+            Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
+                $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.asset_requested'));
+            });
+        }
+
+        $asset->request();
+
+
+        if ($settings->slack_endpoint) {
+
+
+            $slack_settings = [
+                'username' => $settings->botname,
+                'channel' => $settings->slack_channel,
+                'link_names' => true
+            ];
+
+            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+
+            try {
+                    $client->attach([
+                        'color' => 'good',
+                        'fields' => [
+                            [
+                                'title' => 'REQUESTED:',
+                                'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
+                            ]
+
+                        ]
+                    ])->send('Asset Requested');
+
+            } catch (Exception $e) {
+
+            }
+
+        }
+
+        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+
 
 
     }
