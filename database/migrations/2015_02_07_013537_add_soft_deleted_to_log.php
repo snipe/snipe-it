@@ -12,10 +12,13 @@ class AddSoftDeletedToLog extends Migration {
 	 */
 	public function up()
 	{
-    
-    Schema::table('asset_logs', function ($table) {
-      $table->string('asset_type',100)->nullable()->change();
-    });
+
+        $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
+        $platform->registerDoctrineTypeMapping('enum', 'string');
+
+        Schema::table('asset_logs', function ($table) {
+          $table->string('asset_type',100)->nullable()->change();
+        });
 
 		// DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'asset_logs MODIFY column asset_type varchar(100) null');
 		// DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'asset_logs MODIFY column added_on timestamp default "0000-00-00 00:00:00"');
