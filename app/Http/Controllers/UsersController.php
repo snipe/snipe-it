@@ -524,85 +524,84 @@ class UsersController extends Controller
             return redirect()->back()->with('error', 'No users selected');
         } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
             return redirect()->route('users.index')->with('error', 'No status selected');
-        } else {
-
-            $user_raw_array = Input::get('ids');
-            $asset_array = array();
-
-            if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
-                unset($user_raw_array[$key]);
-            }
-
-            if (!Auth::user()->isSuperUser()) {
-                return redirect()->route('users.index')->with('error', trans('admin/users/message.insufficient_permissions'));
-            }
-
-            if (!config('app.lock_passwords')) {
-
-                $users = User::whereIn('id', $user_raw_array)->get();
-                $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
-                $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
-                $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-                $license_array = array();
-                $accessory_array = array();
-
-                foreach ($assets as $asset) {
-
-                    $asset_array[] = $asset->id;
-
-                    // Update the asset log
-                    $logAction = new Actionlog();
-                    $logAction->item_id = $asset->id;
-                    $logAction->item_type = Asset::class;
-                    $logAction->target_id = $asset->assigned_to;
-                    $logAction->target_type = User::class;
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->note = 'Bulk checkin asset and delete user';
-                    $logAction->logaction('checkin from');
-
-                    Asset::whereIn('id', $asset_array)->update([
-                                'status_id' => e(Input::get('status_id')),
-                                'assigned_to' => null,
-                    ]);
-                }
-
-                foreach ($accessories as $accessory) {
-                    $accessory_array[] = $accessory->accessory_id;
-                    // Update the asset log
-                    $logAction = new Actionlog();
-                    $logAction->item_id = $accessory->id;
-                    $logAction->item_type = Accessory::class;
-                    $logAction->target_id = $accessory->assigned_to;
-                    $logAction->target_type = User::class;
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->note = 'Bulk checkin accessory and delete user';
-                    $logAction->logaction('checkin from');
-                }
-
-                foreach ($licenses as $license) {
-                    $license_array[] = $license->id;
-                    // Update the asset log
-                    $logAction = new Actionlog();
-                    $logAction->item_id = $license->id;
-                    $logAction->item_type = License::class;
-                    $logAction->target_id = $license->assigned_to;
-                    $logAction->target_type = User::class;
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->note = 'Bulk checkin license and delete user';
-                    $logAction->logaction('checkin from');
-                }
-
-                LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => null]);
-
-                foreach ($users as $user) {
-                    $user->accessories()->sync(array());
-                    $user->delete();
-                }
-
-                return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
-            }
-            return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
         }
+        $user_raw_array = Input::get('ids');
+        $asset_array = array();
+
+        if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
+            unset($user_raw_array[$key]);
+        }
+
+        if (!Auth::user()->isSuperUser()) {
+            return redirect()->route('users.index')->with('error', trans('admin/users/message.insufficient_permissions'));
+        }
+
+        if (!config('app.lock_passwords')) {
+
+            $users = User::whereIn('id', $user_raw_array)->get();
+            $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
+            $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
+            $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
+            $license_array = array();
+            $accessory_array = array();
+
+            foreach ($assets as $asset) {
+
+                $asset_array[] = $asset->id;
+
+                // Update the asset log
+                $logAction = new Actionlog();
+                $logAction->item_id = $asset->id;
+                $logAction->item_type = Asset::class;
+                $logAction->target_id = $asset->assigned_to;
+                $logAction->target_type = User::class;
+                $logAction->user_id = Auth::user()->id;
+                $logAction->note = 'Bulk checkin asset and delete user';
+                $logAction->logaction('checkin from');
+
+                Asset::whereIn('id', $asset_array)->update([
+                            'status_id' => e(Input::get('status_id')),
+                            'assigned_to' => null,
+                ]);
+            }
+
+            foreach ($accessories as $accessory) {
+                $accessory_array[] = $accessory->accessory_id;
+                // Update the asset log
+                $logAction = new Actionlog();
+                $logAction->item_id = $accessory->id;
+                $logAction->item_type = Accessory::class;
+                $logAction->target_id = $accessory->assigned_to;
+                $logAction->target_type = User::class;
+                $logAction->user_id = Auth::user()->id;
+                $logAction->note = 'Bulk checkin accessory and delete user';
+                $logAction->logaction('checkin from');
+            }
+
+            foreach ($licenses as $license) {
+                $license_array[] = $license->id;
+                // Update the asset log
+                $logAction = new Actionlog();
+                $logAction->item_id = $license->id;
+                $logAction->item_type = License::class;
+                $logAction->target_id = $license->assigned_to;
+                $logAction->target_type = User::class;
+                $logAction->user_id = Auth::user()->id;
+                $logAction->note = 'Bulk checkin license and delete user';
+                $logAction->logaction('checkin from');
+            }
+
+            LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => null]);
+
+            foreach ($users as $user) {
+                $user->accessories()->sync(array());
+                $user->delete();
+            }
+
+            return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
+        }
+        return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
+
     }
 
     /**
