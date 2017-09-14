@@ -47,6 +47,7 @@ class RecryptFromMcrypt extends Command
         // Check and see if they have a legacy app key listed in their .env
         // If not, we can try to use the current APP_KEY if looks like it's old
         $legacy_key = env('LEGACY_APP_KEY');
+        $key_parts = explode(':', $legacy_key);
         $errors = array();
 
         if (!$legacy_key) {
@@ -54,11 +55,23 @@ class RecryptFromMcrypt extends Command
             return false;
         }
 
-        // Check that the app key is 32 characters
+
+        // Do some basic legacy app key length checks
         if (strlen($legacy_key) == 32) {
-            $this->comment('INFO: Your LEGACY_APP_KEY is 32 characters. Okay to continue.');
+            $legacy_length_check = true;
+        } elseif (array_key_exists('1', $key_parts) && (strlen($key_parts[1])==44)) {
+            $legacy_length_check = true;
         } else {
-            $this->error('ERROR: Your LEGACY_APP_KEY is not the correct length (32 characters). Please locate your old APP_KEY and use that as your LEGACY_APP_KEY in your .env file to continue.');
+            $legacy_length_check = false;
+        }
+   
+
+
+        // Check that the app key is 32 characters
+        if ($legacy_length_check === true) {
+            $this->comment('INFO: Your LEGACY_APP_KEY looks correct. Okay to continue.');
+        } else {
+            $this->error('ERROR: Your LEGACY_APP_KEY is not the correct length (32 characters or base64 followed by 44 characters for later versions). Please locate your old APP_KEY and use that as your LEGACY_APP_KEY in your .env file to continue.');
             return false;
         }
 
