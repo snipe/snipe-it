@@ -418,26 +418,26 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
         if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } else {
-
-            $statuslabel_list = Helper::statusLabelList();
-            $user_raw_array = array_keys(Input::get('ids'));
-            $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-
-            $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
-            if ($request->input('bulk_actions')=='edit') {
-
-                return view('users/bulk-edit', compact('users'))
-                    ->with('location_list', Helper::locationsList())
-                    ->with('company_list', Helper::companyList())
-                    ->with('manager_list', Helper::managerList())
-                    ->with('manager_list', Helper::managerList())
-                    ->with('department_list', Helper::departmentList())
-                    ->with('groups', Group::pluck('name', 'id'));
-            }
-
-            return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
+
+        $statuslabel_list = Helper::statusLabelList();
+        $user_raw_array = array_keys(Input::get('ids'));
+        $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
+
+        $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
+        if ($request->input('bulk_actions')=='edit') {
+
+            return view('users/bulk-edit', compact('users'))
+                ->with('location_list', Helper::locationsList())
+                ->with('company_list', Helper::companyList())
+                ->with('manager_list', Helper::managerList())
+                ->with('manager_list', Helper::managerList())
+                ->with('department_list', Helper::departmentList())
+                ->with('groups', Group::pluck('name', 'id'));
+        }
+
+        return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
+
     }
 
 
