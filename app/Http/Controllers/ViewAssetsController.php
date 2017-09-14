@@ -127,7 +127,7 @@ class ViewAssetsController extends Controller
         if ($item->isRequestedBy($user)) {
 
             $item->cancelRequest();
-            $log = $logaction->logaction('request_canceled');
+            $logaction->logaction('request_canceled');
 
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
                 Mail::send('emails.asset-canceled', $data, function ($m) use ($user, $settings) {
@@ -138,21 +138,22 @@ class ViewAssetsController extends Controller
             }
 
             if ($settings->slack_endpoint) {
-                try {
-                        $slackClient->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'CANCELED:',
-                                    'value' => $slackMessage
-                                ]
-
+                return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+            }
+            try {
+                    $slackClient->attach([
+                        'color' => 'good',
+                        'fields' => [
+                            [
+                                'title' => 'CANCELED:',
+                                'value' => $slackMessage
                             ]
-                        ])->send('Item Request Canceled');
 
-                } catch (Exception $e) {
+                        ]
+                    ])->send('Item Request Canceled');
 
-                }
+            } catch (Exception $e) {
+
             }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
