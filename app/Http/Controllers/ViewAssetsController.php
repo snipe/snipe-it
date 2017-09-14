@@ -240,32 +240,31 @@ class ViewAssetsController extends Controller
         $asset->request();
 
 
-        if ($settings->slack_endpoint) {
+        if (!$settings->slack_endpoint) {
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        }
 
+        $slack_settings = [
+            'username' => $settings->botname,
+            'channel' => $settings->slack_channel,
+            'link_names' => true
+        ];
 
-            $slack_settings = [
-                'username' => $settings->botname,
-                'channel' => $settings->slack_channel,
-                'link_names' => true
-            ];
+        $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
 
-            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-            try {
-                    $client->attach([
-                        'color' => 'good',
-                        'fields' => [
-                            [
-                                'title' => 'REQUESTED:',
-                                'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
-                            ]
-
+        try {
+                $client->attach([
+                    'color' => 'good',
+                    'fields' => [
+                        [
+                            'title' => 'REQUESTED:',
+                            'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
                         ]
-                    ])->send('Asset Requested');
 
-            } catch (Exception $e) {
+                    ]
+                ])->send('Asset Requested');
 
-            }
+        } catch (Exception $e) {
 
         }
 
