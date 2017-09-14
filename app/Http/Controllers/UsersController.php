@@ -841,21 +841,19 @@ class UsersController extends Controller
                     DB::table('users')->insert($newuser);
 
 
-                    if (((Input::get('email_user') == 1) && !config('app.lock_passwords'))) {
+                    if ((Input::get('email_user') == 1) && !config('app.lock_passwords') && $row[3] != '') {
                         // Send the credentials through email
-                        if ($row[3] != '') {
-                            $data = array();
-                            $data['username'] = trim(e($row[2]));
-                            $data['first_name'] = trim(e($row[0]));
-                            $data['password'] = $pass;
+                        $data = array();
+                        $data['username'] = trim(e($row[2]));
+                        $data['first_name'] = trim(e($row[0]));
+                        $data['password'] = $pass;
 
-                            if ($newuser['email']) {
-                                Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
-                                    $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-                                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                                    $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
-                                });
-                            }
+                        if ($newuser['email']) {
+                            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+                                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+                                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                                $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
+                            });
                         }
                     }
                 }
