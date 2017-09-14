@@ -883,33 +883,34 @@ class UsersController extends Controller
         $user = User::find($userId);
         $destinationPath = config('app.private_uploads') . '/users';
 
-        if (isset($user->id)) {
-            $this->authorize('update', $user);
+        if (!isset($user->id)) {
+            return JsonResponse::create(["error" => "Failed validation: ".print_r($logAction->getErrors(), true)], 500);
+        }
+        $this->authorize('update', $user);
 
-            foreach (Input::file('file') as $file) {
+        foreach (Input::file('file') as $file) {
 
-                $extension = $file->getClientOriginalExtension();
-                $filename = 'user-' . $user->id . '-' . str_random(8);
-                $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
-                $upload_success = $file->move($destinationPath, $filename);
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'user-' . $user->id . '-' . str_random(8);
+            $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
+            $upload_success = $file->move($destinationPath, $filename);
 
-                //Log the uploaded file to the log
-                $logAction = new Actionlog();
-                $logAction->item_id = $user->id;
-                $logAction->item_type = User::class;
-                $logAction->user_id = Auth::user()->id;
-                $logAction->note = e(Input::get('notes'));
-                $logAction->target_id = null;
-                $logAction->created_at = date("Y-m-d H:i:s");
-                $logAction->filename = $filename;
-                $logAction->action_type = 'uploaded';
-                $logAction->save();
-
-            }
-            return JsonResponse::create($logAction);
+            //Log the uploaded file to the log
+            $logAction = new Actionlog();
+            $logAction->item_id = $user->id;
+            $logAction->item_type = User::class;
+            $logAction->user_id = Auth::user()->id;
+            $logAction->note = e(Input::get('notes'));
+            $logAction->target_id = null;
+            $logAction->created_at = date("Y-m-d H:i:s");
+            $logAction->filename = $filename;
+            $logAction->action_type = 'uploaded';
+            $logAction->save();
 
         }
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($logAction->getErrors(), true)], 500);
+        return JsonResponse::create($logAction);
+
+
     }
 
 
