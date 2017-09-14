@@ -126,37 +126,7 @@ class ViewAssetsController extends Controller
 
         if ($item->isRequestedBy($user)) {
 
-            $item->cancelRequest();
-            $logaction->logaction('request_canceled');
-
-            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-canceled', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Item_Request_Canceled'));
-                });
-            }
-
-            if ($settings->slack_endpoint) {
-                return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
-            }
-            try {
-                    $slackClient->attach([
-                        'color' => 'good',
-                        'fields' => [
-                            [
-                                'title' => 'CANCELED:',
-                                'value' => $slackMessage
-                            ]
-
-                        ]
-                    ])->send('Item Request Canceled');
-
-            } catch (Exception $e) {
-
-            }
-
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+            return $this->handleRequestByUser($item, $logaction, $settings, $data, $user, $slackClient, $slackMessage);
 
         }
         $item->request();
@@ -396,5 +366,48 @@ class ViewAssetsController extends Controller
         }
         return redirect()->to('account/view-assets')->with('error', 'Something went wrong ');
 
+    }
+
+    /**
+     * @param $item
+     * @param $logaction
+     * @param $settings
+     * @param $data
+     * @param $user
+     * @param $slackClient
+     * @param $slackMessage
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    private function handleRequestByUser($item, $logaction, $settings, $data, $user, $slackClient, $slackMessage)
+    {
+        $item->cancelRequest();
+        $logaction->logaction('request_canceled');
+
+        if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
+            Mail::send('emails.asset-canceled', $data, function ($m) use ($user, $settings) {
+                $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.Item_Request_Canceled'));
+            });
+        }
+
+        if ($settings->slack_endpoint) {
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+        }
+        try {
+            $slackClient->attach([
+                'color' => 'good',
+                'fields' => [
+                    [
+                        'title' => 'CANCELED:',
+                        'value' => $slackMessage
+                    ]
+
+                ]
+            ])->send('Item Request Canceled');
+        } catch (Exception $e) {
+        }
+
+        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
     }
 }
