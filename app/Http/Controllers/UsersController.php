@@ -453,52 +453,52 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
         if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } else {
+        }
 
-            $user_raw_array = Input::get('ids');
-            $update_array = array();
-            $manager_conflict = false;
+        $user_raw_array = Input::get('ids');
+        $update_array = array();
+        $manager_conflict = false;
 
-            $users = User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->get();
+        $users = User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->get();
 
-            if ($request->has('location_id')) {
-                $update_array['location_id'] = $request->input('location_id');
-            }
-            if ($request->has('department_id')) {
-                $update_array['department_id'] = $request->input('department_id');
-            }
-            if ($request->has('company_id')) {
-                $update_array['company_id'] = $request->input('company_id');
-            }
+        if ($request->has('location_id')) {
+            $update_array['location_id'] = $request->input('location_id');
+        }
+        if ($request->has('department_id')) {
+            $update_array['department_id'] = $request->input('department_id');
+        }
+        if ($request->has('company_id')) {
+            $update_array['company_id'] = $request->input('company_id');
+        }
 
-            if ($request->has('manager_id')) {
+        if ($request->has('manager_id')) {
 
-                // Do not allow a manager update if the selected manager is one of the users being
-                // edited.
-                if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
-                    $update_array['manager_id'] = $request->input('manager_id');
+            // Do not allow a manager update if the selected manager is one of the users being
+            // edited.
+            if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
+                $update_array['manager_id'] = $request->input('manager_id');
 
-                } else {
-                    $manager_conflict = true;
-                }
-
-            }
-            if ($request->has('activated')) {
-                $update_array['activated'] = $request->input('activated');
-            }
-
-            if (count($update_array) > 0) {
-                User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->update($update_array);
-            }
-
-            // Only sync groups if groups were selected
-            if ($request->has('groups')) {
-                foreach ($users as $user) {
-                    $user->groups()->sync($request->input('groups'));
-                }
+            } else {
+                $manager_conflict = true;
             }
 
         }
+        if ($request->has('activated')) {
+            $update_array['activated'] = $request->input('activated');
+        }
+
+        if (count($update_array) > 0) {
+            User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->update($update_array);
+        }
+
+        // Only sync groups if groups were selected
+        if ($request->has('groups')) {
+            foreach ($users as $user) {
+                $user->groups()->sync($request->input('groups'));
+            }
+        }
+
+
         if ($manager_conflict) {
             return redirect()->route('users.index')
                 ->with('warning', trans('admin/users/message.bulk_manager_warn'));
