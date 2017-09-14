@@ -385,7 +385,7 @@ class ViewAssetsController extends Controller
         if (isset($sig_filename)) {
             $logaction->accept_signature = $sig_filename;
         }
-        $log = $logaction->logaction($logaction_msg);
+        $logaction->logaction($logaction_msg);
 
         $update_checkout = DB::table('action_logs')
         ->where('id', $findlog->id)
@@ -398,8 +398,8 @@ class ViewAssetsController extends Controller
         if ($update_checkout) {
             return redirect()->to('account/view-assets')->with('success', $return_msg);
 
-        } else {
-            return redirect()->to('account/view-assets')->with('error', 'Something went wrong ');
         }
+        return redirect()->to('account/view-assets')->with('error', 'Something went wrong ');
+
     }
 }
