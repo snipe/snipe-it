@@ -160,41 +160,41 @@ class ViewAssetsController extends Controller
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
 
-        } else {
-            $item->request();
+        }
+        $item->request();
 
-            $log = $logaction->logaction('requested');
+        $log = $logaction->logaction('requested');
 
 
-            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Item_Requested'));
-                });
-            }
+        if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
+            Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
+                $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.Item_Requested'));
+            });
+        }
 
-            if (!$settings->slack_endpoint) {
-                return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
-            }
-            try {
-                    $slackClient->attach([
-                        'color' => 'good',
-                        'fields' => [
-                            [
-                                'title' => 'REQUESTED:',
-                                'value' => $slackMessage
-                            ]
-
-                        ]
-                    ])->send('Item Requested');
-
-            } catch (Exception $e) {
-
-            }
-
+        if (!$settings->slack_endpoint) {
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
+        try {
+                $slackClient->attach([
+                    'color' => 'good',
+                    'fields' => [
+                        [
+                            'title' => 'REQUESTED:',
+                            'value' => $slackMessage
+                        ]
+
+                    ]
+                ])->send('Item Requested');
+
+        } catch (Exception $e) {
+
+        }
+
+        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+
     }
     public function getRequestAsset($assetId = null)
     {
