@@ -174,22 +174,23 @@ class ViewAssetsController extends Controller
                 });
             }
 
-            if ($settings->slack_endpoint) {
-                try {
-                        $slackClient->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'REQUESTED:',
-                                    'value' => $slackMessage
-                                ]
-
+            if (!$settings->slack_endpoint) {
+                return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+            }
+            try {
+                    $slackClient->attach([
+                        'color' => 'good',
+                        'fields' => [
+                            [
+                                'title' => 'REQUESTED:',
+                                'value' => $slackMessage
                             ]
-                        ])->send('Item Requested');
 
-                } catch (Exception $e) {
+                        ]
+                    ])->send('Item Requested');
 
-                }
+            } catch (Exception $e) {
+
             }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
