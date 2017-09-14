@@ -368,12 +368,8 @@ class ViewAssetsController extends Controller
             $logaction->item_type    = $findlog->item_type;
 
         // Asset
-        if (($findlog->item_id!='') && ($findlog->item_type==Asset::class)) {
-            if (Input::get('asset_acceptance')!='accepted') {
-                DB::table('assets')
-                ->where('id', $findlog->item_id)
-                ->update(array('assigned_to' => null));
-            }
+        if (($findlog->item_id!='') && ($findlog->item_type==Asset::class) && Input::get('asset_acceptance')!='accepted') {
+            DB::table('assets')->where('id', $findlog->item_id)->update(array('assigned_to' => null));
         }
 
         $logaction->target_id = $findlog->target_id;
