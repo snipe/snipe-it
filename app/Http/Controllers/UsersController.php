@@ -1089,64 +1089,65 @@ class UsersController extends Controller
         $pass = bcrypt($tmp_pass);
 
         for ($i = 0; $i < $results["count"]; $i++) {
-            if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
-
-                $item = array();
-                $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
-                $item["employee_number"] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : "";
-                $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
-                $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
-                $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
-                $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
-                $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
-
-                if( array_key_exists('useraccountcontrol', $results[$i]) ) {
-                $enabled_accounts = [
-                        '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
-                    ];
-                    $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
-                } else {
-                    $item['activated'] = 0;
-                }
-
-                // User exists
-                $item["createorupdate"] = 'updated';
-                if (!$user = User::where('username', $item["username"])->first()) {
-                    $user = new User;
-                    $user->password = $pass;
-                    $item["createorupdate"] = 'created';
-                }
-
-                 // Create the user if they don't exist.
-                $user->first_name = $item["firstname"];
-                $user->last_name = $item["lastname"];
-                $user->username = $item["username"];
-                $user->email = $item["email"];
-                $user->employee_num = e($item["employee_number"]);
-                $user->activated = $item['activated'];
-                
-                if ($item['ldap_location_override'] == true) {
-                    $user->location_id = $item['location_id'];
-                } else if ($request->input('location_id')!='') {
-                    $user->location_id = e($request->input('location_id'));
-                }
-                $user->notes = 'Imported from LDAP';
-                $user->ldap_import = 1;
-
-                $errors = '';
-
-                if ($user->save()) {
-                    $item["note"] = $item["createorupdate"];
-                    $item["status"]='success';
-                } else {
-                    foreach ($user->getErrors()->getMessages() as $key => $err) {
-                        $errors .='<li>'.$err[0];
-                    }
-                    $item["note"] = $errors;
-                    $item["status"]='error';
-                }
-                array_push($summary, $item);
+            if (!empty($ldap_result_active_flag) && $results[$i][$ldap_result_active_flag][0] !== "TRUE") {
+                continue;
             }
+            $item = array();
+            $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
+            $item["employee_number"] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : "";
+            $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
+            $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
+            $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
+            $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
+            $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
+
+            if( array_key_exists('useraccountcontrol', $results[$i]) ) {
+            $enabled_accounts = [
+                    '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
+                ];
+                $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
+            } else {
+                $item['activated'] = 0;
+            }
+
+            // User exists
+            $item["createorupdate"] = 'updated';
+            if (!$user = User::where('username', $item["username"])->first()) {
+                $user = new User;
+                $user->password = $pass;
+                $item["createorupdate"] = 'created';
+            }
+
+             // Create the user if they don't exist.
+            $user->first_name = $item["firstname"];
+            $user->last_name = $item["lastname"];
+            $user->username = $item["username"];
+            $user->email = $item["email"];
+            $user->employee_num = e($item["employee_number"]);
+            $user->activated = $item['activated'];
+
+            if ($item['ldap_location_override'] == true) {
+                $user->location_id = $item['location_id'];
+            } else if ($request->input('location_id')!='') {
+                $user->location_id = e($request->input('location_id'));
+            }
+            $user->notes = 'Imported from LDAP';
+            $user->ldap_import = 1;
+
+            $errors = '';
+
+            if ($user->save()) {
+                $item["note"] = $item["createorupdate"];
+                $item["status"]='success';
+            } else {
+                foreach ($user->getErrors()->getMessages() as $key => $err) {
+                    $errors .='<li>'.$err[0];
+                }
+                $item["note"] = $errors;
+                $item["status"]='error';
+            }
+            array_push($summary, $item);
+
         }
         return redirect()->route('ldap/user')->with('success', "LDAP Import successful.")->with('summary', $summary);
     }
