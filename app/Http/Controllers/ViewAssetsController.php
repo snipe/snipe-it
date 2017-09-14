@@ -54,13 +54,10 @@ class ViewAssetsController extends Controller
 
         if (isset($user->id)) {
             return view('account/view-assets', compact('user', 'userlog'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
         }
+        // Redirect to the user management page
+        return redirect()->route('users')->with('error', trans('admin/users/message.user_not_found', compact('id')));
+
 
     }
 
@@ -163,7 +160,7 @@ class ViewAssetsController extends Controller
         }
         $item->request();
 
-        $log = $logaction->logaction('requested');
+        $logaction->logaction('requested');
 
 
         if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
