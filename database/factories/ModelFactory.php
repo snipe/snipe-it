@@ -97,14 +97,6 @@ $factory->define(App\Models\Consumable::class, function (Faker\Generator $faker)
     ];
 });
 
-$factory->define(App\Models\CustomField::class, function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->catchPhrase,
-    'format' => 'IP',
-    'element' => 'text',
-    ];
-});
-
 $factory->define(App\Models\Department::class, function (Faker\Generator $faker) {
     return [
     'name' => $faker->catchPhrase,
