@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\CustomFieldsTransformer;
+use App\Models\CustomField;
 use App\Models\CustomFieldset;
+use Illuminate\Http\Request;
 
 class CustomFieldsController extends Controller
 {
@@ -16,6 +18,15 @@ class CustomFieldsController extends Controller
      * @since [v3.0]
      * @return Array
      */
+
+    public function index()
+    {
+        $this->authorize('index', CustomFields::class);
+        $fields = CustomField::get();
+
+        $total = count($fields);
+        return (new CustomFieldsTransformer)->transformCustomFields($fields, $total);
+    }
     public function postReorder(Request $request, $id)
     {
         $fieldset = CustomFieldset::find($id);

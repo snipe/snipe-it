@@ -175,6 +175,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'CustomFieldsController@postReorder'
             ]
         );
+
+        Route::get('/',
+            [
+                'as' => 'api.customfields.index',
+                'uses' => 'CustomFieldsController@index'
+            ]
+        );
     }); // Fields group
 
 

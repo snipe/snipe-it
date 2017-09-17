@@ -130,12 +130,14 @@ tr {
                         {id: 'jobtitle', text: 'Job Title' },
                         {id: 'phone_number', text: 'Phone Number' },
                     ],
+                    customFields: [],
                 },
                 columnMappings: this.file.field_map || {},
                 activeColumn: null,
             }
         },
         created() {
+            this.fetchCustomFields();
             window.eventHub.$on('showDetails', this.toggleExtendedDisplay)
             this.populateSelect2ActiveItems();
         },
@@ -143,7 +145,7 @@ tr {
             columns() {
                 switch(this.options.importType) {
                     case 'asset':
-                        return this.columnOptions.general.concat(this.columnOptions.assets);
+                        return this.columnOptions.general.concat(this.columnOptions.assets).concat(this.columnOptions.customFields);
                     case 'license':
                         return this.columnOptions.general.concat(this.columnOptions.licenses);
                     case 'user':
@@ -153,6 +155,18 @@ tr {
             }
         },
         methods: {
+            fetchCustomFields() {
+                this.$http.get('/api/v1/fields')
+                .then( ({data}) => {
+                    data = data.rows;
+                    data.forEach((item) => {
+                        this.columnOptions.customFields.push({
+                            'id': item.db_column_name,
+                            'text': item.name,
+                        })
+                    })
+                });
+            },
             postSave() {
                 this.statusText = "Processing...";
                 this.$http.post('/api/v1/imports/process/'+this.file.id, {
