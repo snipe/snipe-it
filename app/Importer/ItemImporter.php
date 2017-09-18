@@ -10,6 +10,7 @@ use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
+use App\Models\User;
 
 class ItemImporter extends Importer
 {
@@ -68,6 +69,7 @@ class ItemImporter extends Importer
         if(get_class($this) !== UserImporter::class) {
             if ($this->item["user"] = $this->createOrFetchUser($row)) {
                 $this->item['assigned_to'] = $this->item['user']->id;
+                $this->item['assigned_type'] = User::class;
             }
         }
     }

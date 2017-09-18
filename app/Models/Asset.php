@@ -79,6 +79,7 @@ class Asset extends Depreciable
     protected $fillable = [
         'asset_tag',
         'assigned_to',
+        'assigned_type',
         'company_id',
         'image',
         'model_id',

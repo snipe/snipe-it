@@ -4,6 +4,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
@@ -60,7 +61,7 @@ class AssetTest extends BaseTest
                 ['asset_tag' => 'U8T7597h77']
             ])
         );
-        
+
         \Log::debug(print_r($next));
         $this->assertEquals($expected, $next);
     }
@@ -194,6 +195,7 @@ class AssetTest extends BaseTest
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
         $asset->assigned_to = null;
+        $asset->assigned_type = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
         $asset->save();
@@ -220,6 +222,13 @@ class AssetTest extends BaseTest
             'target_type'   => get_class($target),
             'target_id'     => $target->id
         ]);
+
+        $this->tester->seeRecord('assets', [
+            'id' => $asset->id,
+            'assigned_to' => $target->id,
+            'assigned_type' => User::class
+        ]);
+
         $this->checkin($asset, $target);
         $this->assertNull($asset->fresh()->assignedTo);
 
@@ -229,6 +238,11 @@ class AssetTest extends BaseTest
             'target_id'     => $target->id
         ]);
 
+        $this->tester->seeRecord('assets', [
+            'id' => $asset->id,
+            'assigned_to' => null,
+            'assigned_type' => null
+        ]);
 
         // An Asset Can be checked out to a asset, and this should be logged.
         $target = factory(App\Models\Asset::class)->create();
