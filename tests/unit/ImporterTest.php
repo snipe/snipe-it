@@ -8,6 +8,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\CustomField;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -135,8 +136,8 @@ EOT;
         ]);
     }
 
-        public function initializeCustomFields()
-        {
+    public function initializeCustomFields()
+    {
             $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
             $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
             $customFieldSet->fields()->attach($customField, [
@@ -147,7 +148,8 @@ EOT;
                 'name' => 'massa id',
                 'fieldset_id' => $customFieldSet->id
             ]);
-        }
+    }
+
     public function testCustomMappingImport()
     {
         $csv = <<<'EOT'
@@ -170,6 +172,12 @@ EOT;
         // Did we create a user?
 
         $this->tester->seeRecord('users', [
+            'first_name' => 'Bonnie',
+            'last_name' => 'Nelson',
+            'email' => 'bnelson0@cdbaby.com',
+        ]);
+        // Grab the user record for use in asserting assigned_to
+        $createdUser = $this->tester->grabRecord('users', [
             'first_name' => 'Bonnie',
             'last_name' => 'Nelson',
             'email' => 'bnelson0@cdbaby.com',
@@ -203,6 +211,7 @@ EOT;
         $this->tester->seeRecord('suppliers', [
             'name' => 'Blogspan'
         ]);
+
         $this->tester->seeRecord('assets', [
             'name' => 'eget nunc donec quis',
             'serial' => '27aa8378-b0f4-4289-84a4-405da95c6147',
@@ -210,8 +219,10 @@ EOT;
             'notes' => "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
             'purchase_date' => '2016-04-05 00:00:01',
             'purchase_cost' => 133289.59,
-            'warranty_months' => 14
-            ]);
+            'warranty_months' => 14,
+            'assigned_to' => $createdUser['id'],
+            'assigned_type' => User::class
+        ]);
     }
 
     public function testDefaultAccessoryImport()
@@ -240,7 +251,6 @@ EOT;
         $this->tester->seeRecord('categories', [
             'name' => 'Customers'
         ]);
-
     }
 
     public function testDefaultAccessoryUpdate()
@@ -312,7 +322,6 @@ EOT;
         $this->tester->seeRecord('categories', [
             'name' => 'Customers'
         ]);
-
     }
 
     public function testDefaultConsumableImport()
@@ -343,7 +352,6 @@ EOT;
         $this->tester->seeRecord('categories', [
             'name' => 'Triamterene/Hydrochlorothiazide'
         ]);
-
     }
 
     public function testDefaultConsumableUpdate()
@@ -416,7 +424,6 @@ EOT;
         $this->tester->seeRecord('categories', [
             'name' => 'Triamterene/Hydrochlorothiazide'
         ]);
-
     }
 
     public function testDefaultLicenseImport()
@@ -457,7 +464,6 @@ EOT;
         ]);
 
         $this->tester->seeNumRecords(80, 'license_seats');
-
     }
 
     public function testDefaultLicenseUpdate()
@@ -558,7 +564,6 @@ EOT;
         ]);
 
         $this->tester->seeNumRecords(80, 'license_seats');
-
     }
 
     private function import($importer, $mappings = null)
