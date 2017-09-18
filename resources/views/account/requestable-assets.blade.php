@@ -51,16 +51,16 @@
                                 <tr>
                                     <form action="{{route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id])}}" method="POST" accept-charset="utf-8">
                                         {{ csrf_field() }}
-                                        <td>{{ $asset->model->name }}</td>
+                                        <td>{!! $asset->model->present()->nameUrl() !!}</td>
 
                                         @if ($snipeSettings->display_asset_name)
                                         <td>{{ $asset->name }}</td>
                                         @endif
 
-                                        <td>{{ $asset->serial }}</td>
+                                        <td><a href="{{ $asset->present()->viewUrl() }}">{{ $asset->serial }}</a></td>
 
                                         <td>
-                                            {{ $asset->assetloc->name }}
+                                            {!! $asset->assetLoc->present()->nameUrl() !!}
                                         </td>
                                         @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
                                             <td>Checked out</td>

@@ -1,11 +1,13 @@
 <?php
 use App\Importer\AccessoryImporter;
 use App\Importer\AssetImporter;
-use App\Importer\LicenseImporter;
 use App\Importer\ConsumableImporter;
+use App\Importer\LicenseImporter;
 use App\Models\Accessory;
+use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\CustomField;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -18,14 +20,15 @@ class ImporterTest extends BaseTest
     */
     protected $tester;
 
-    public function testDefaultImportAsset()
+    public function testDefaultImportAssetWithCustomFields()
     {
         $csv = <<<'EOT'
-Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
-Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan
+Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier,Weight
+Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan,35
 EOT;
+
+        $this->initializeCustomFields();
         $this->import(new AssetImporter($csv));
-        // Did we create a user?
 
         $this->tester->seeRecord('users', [
             'first_name' => 'Bonnie',
@@ -67,16 +70,19 @@ EOT;
             'notes' => "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
             'purchase_date' => '2016-04-05 00:00:01',
             'purchase_cost' => 133289.59,
-            'warranty_months' => 14
+            'warranty_months' => 14,
+            '_snipeit_weight_2' => 35
             ]);
     }
 
-    public function testUpdateAsset()
+    public function testUpdateAssetIncludingCustomFields()
     {
         $csv = <<<'EOT'
-Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
-Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan
+Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier,weight
+Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan,95
 EOT;
+
+        $this->initializeCustomFields();
         $this->import(new AssetImporter($csv));
         $updatedCSV = <<<'EOT'
 item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
@@ -124,10 +130,24 @@ EOT;
             'notes' => "I have no notes",
             'purchase_date' => '2018-04-05 00:00:01',
             'purchase_cost' => 25.59,
-            'warranty_months' => 18
-            ]);
+            'warranty_months' => 18,
+            '_snipeit_weight_2' => 95
+        ]);
     }
 
+        public function initializeCustomFields()
+        {
+            $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
+            $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
+            $customFieldSet->fields()->attach($customField, [
+                'required' => false,
+                'order' => 'asc']);
+
+            $am = factory(App\Models\AssetModel::class)->create([
+                'name' => 'massa id',
+                'fieldset_id' => $customFieldSet->id
+            ]);
+        }
     public function testCustomMappingImport()
     {
         $csv = <<<'EOT'

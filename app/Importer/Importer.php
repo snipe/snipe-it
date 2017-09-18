@@ -109,7 +109,15 @@ abstract class Importer
     {
         $headerRow = $this->csv->fetchOne();
         $results = $this->normalizeInputArray($this->csv->fetchAssoc());
-        $this->customFields = CustomField::All(['name']);
+
+        // Stolen From https://adamwathan.me/2016/07/14/customizing-keys-when-mapping-collections/
+        // This 'inverts' the fields such that we have a collection of fields indexed by name.
+        $cFs = CustomField::All();
+        $this->customFields = $cFs->reduce(function ($nameLookup, $field) {
+            $nameLookup[$field['name']] = $field;
+            return $nameLookup;
+        });
+
         DB::transaction(function () use (&$results) {
             Model::unguard();
             $resultsCount = sizeof($results);
@@ -161,8 +169,6 @@ abstract class Importer
      */
     public function lookupCustomKey($key)
     {
-        // dd($this->fieldMap);
-
         if (array_key_exists($key, $this->fieldMap)) {
             $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
             return $this->fieldMap[$key];

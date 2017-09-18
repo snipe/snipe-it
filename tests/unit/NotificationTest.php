@@ -1,4 +1,5 @@
 <?php
+use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
@@ -38,6 +39,7 @@ class NotificationTest extends BaseTest
         $this->signIn();
         $asset = factory(Asset::class)->states('requires-acceptance')->create();
 
+        $this->expectException(CheckoutNotAllowed::class);
         $location = factory(Location::class)->create();
         Notification::fake();
         $asset->checkOut($location, 1);

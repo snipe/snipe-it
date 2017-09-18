@@ -61,7 +61,6 @@ class Accessory extends SnipeModel
         'purchase_date',
         'model_number',
         'manufacturer_id',
-        'notes',
         'qty',
         'requestable'
     ];
