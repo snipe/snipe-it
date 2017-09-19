@@ -48,6 +48,7 @@ class Ldap extends Model
         // Needed for AD
         ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
+        ldap_set_option($connection, LDAP_OPT_NETWORK_TIMEOUT, 20);
 
         if ($ldap_use_tls=='1') {
             ldap_start_tls($connection);
