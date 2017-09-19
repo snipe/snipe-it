@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Nabytek',
     'bulk_checkout'             => 'Przypisane aktywa do użytkownika',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Przypisz zasób',
     'clone'  					=> 'Klonuj zasób',
     'deployable'  				=> 'Gotowe do wdrożenia',
     'deleted'  					=> 'To aktywo zostało usunięte. <a href="/hardware/:asset_id/restore">Kliknij tutaj, aby je przywrócić</a>.',

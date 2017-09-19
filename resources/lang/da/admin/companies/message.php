@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Virksomheden eksisterer ikke.',
+    'assoc_users'    => 'Denne virksomhed er knyttet til mindst én model og kan ikke slettes. Opdater venligst dine modeller for at ikke længere henvise til dette selskab, og prøv igen. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Virksomheden blev ikke oprettet, prøve igen.',
+        'success' => 'Virksomhed oprettet.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Virksomheden blev ikke opdateret, prøv igen',
+        'success' => 'Virksomheden blev opdateret.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Er du sikker på du vil slette denne virksomhed?',
+        'error'   => 'Der opstod et problem under sletning af virksomheden. Prøv igen.',
+        'success' => 'Virksomheden blev slettet.'
     )
 );

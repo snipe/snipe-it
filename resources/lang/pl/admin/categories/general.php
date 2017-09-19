@@ -2,7 +2,7 @@
 
 return array(
     'about_categories_title' 			=> 'O Kategoriach',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories'  				=> 'Kategorie pozwolą lepiej zorganizować twoje aktywa. Przykłady kategorii to np. &quot; Stacje robocze&quot;, &quot;Laptopy&quot;, &quot;Telefony&quot;, &quot;Tablety&quot;, i inne dowolnie przez Ciebie wymyślone.',
     'asset_categories' 					=> 'Kategorie aktywów',
     'category_name'  					=> 'Nazwa kategorii',
     'checkin_email'                     => 'Wyślij email przy przypisywaniu do użytkownika.',

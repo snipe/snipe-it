@@ -10,7 +10,7 @@ return array(
 	'alert_interval'			=> 'Próg wygasających alarmów (w dniach)',
 	'alert_inv_threshold'		=> 'Inwentarz progu alarmów',
 	'asset_ids'					=> 'ID Aktywa',
-	'audit_interval'            => 'Audit Interval',
+	'audit_interval'            => 'Interwał audytu',
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months.',
 	'audit_warning_days'        => 'Audit Warning Threshold',
     'audit_warning_days_help'   => 'How many days in advance should we warn you when assets are due for auditing?',

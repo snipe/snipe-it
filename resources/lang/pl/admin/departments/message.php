@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Wydział nie istnieje.',
+    'assoc_users'	 => 'Ten wydział obecnie jest skojarzony z co najmniej jednym użytkownikiem i nie może zostać usunięty. Uaktualnij użytkowników tak, aby nie było relacji z tym wydziałem i spróbuj ponownie. ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Wydział nie został utworzony. Spróbuj ponownie.',
+        'success' => 'Wydział utworzony pomyślnie.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Wydział nie został utworzony. Spróbuj ponownie',
+        'success' => 'Wydział utworzony pomyślnie.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Czy na pewno usunąć wybrany wydział?',
+        'error'   => 'Podczas usuwania wydziału napotkano problem. Spróbuj ponownie.',
+        'success' => 'Wydział usunięty pomyślnie.'
     )
 
 );

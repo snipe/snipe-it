@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Audyt aktywów nie powiódł się. Proszę spróbować ponownie.',
+        'success' 		=> 'Audyt aktywów pomyślnie zarejestrowany.'
     ),
 
 
@@ -54,7 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Czy na pewno chcesz usunąć?',
         'error'   		=> 'Nie można usunąć. Proszę spróbować ponownie.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'nothing_updated'   => 'Aktywa nie zostały wybrane, więc nic nie zostało usunięte.',
         'success' 		=> 'Nabytek został usunięty.'
     ),
 
