@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจที่จะลบอุปกรณ์เสริมนี้?',
+        'error'   => 'มีปัญหาขณะลบอุปกรณ์เสริมนี้ กรุณาลองอีกครั้ง.',
+        'success' => 'ลบอุปกรณ์เสริมเรียบร้อยแล้ว'
     ),
 
      'checkout' => array(

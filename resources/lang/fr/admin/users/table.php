@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Actif',
     'allow'  				=> 'Autoriser',
     'checkedout'  			=> 'Actifs',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Lieu',
     'lock_passwords'		=> 'Les informations de connexion ne peuvent pas être modifiés sur cette installation .',
     'manager' 				=> 'Responsable',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nom',
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Confirmer le mot de passe',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Afficher les utilisateurs actifs',
     'show_deleted'          => 'Afficher les utilisateurs supprimés',
     'title' 				=> 'Titre',
+	'to_restore_them'		=> 'pour les restaurer.',
     'updateuser' 			=> 'Mettre à jour l\'utilisateur',
     'username' 				=> 'Nom d\'utilisateur',
+	'user_deleted_text' 	=> 'Cet utilisateur a été marqué comme supprimé.',
     'username_note' 		=> '( Ceci est utilisé pour la liaison ne Active Directory , pas pour la connexion. )',
     'cloneuser'             => 'Cloner l\'utilisateur',
     'viewusers' 			=> 'Voir les utilisateurs',

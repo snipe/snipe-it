@@ -2,45 +2,42 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Watson\Validating\ValidatingTrait;
 use Schema;
 
 class Setting extends Model
 {
+    use Notifiable;
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
     protected $rules = [
           "brand"     => 'required|min:1|numeric',
-          "qr_text"         => 'min:1|max:31',
+          "qr_text"         => 'max:31|nullable',
           "logo_img"        => 'mimes:jpeg,bmp,png,gif',
-          "custom_css"   => 'string',
-          "alert_email"   => 'email_array',
-          "slack_endpoint"   => 'url',
+          "alert_email"   => 'email_array|nullable',
           "default_currency"   => 'required',
           "locale"   => 'required',
-          "slack_channel"   => 'regex:/(?<!\w)#\w+/',
-          "slack_botname"   => 'string',
+          "slack_endpoint"   => 'url|required_with:slack_channel|nullable',
+          "slack_channel"   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
+          "slack_botname"   => 'string|nullable',
           'labels_per_page' => 'numeric',
           'labels_width' => 'numeric',
           'labels_height' => 'numeric',
-          'labels_pmargin_left' => 'numeric',
-          'labels_pmargin_right' => 'numeric',
-          'labels_pmargin_top' => 'numeric',
-          'labels_pmargin_bottom' => 'numeric',
-          'labels_display_bgutter' => 'numeric',
-          'labels_display_sgutter' => 'numeric',
+          'labels_pmargin_left' => 'numeric|nullable',
+          'labels_pmargin_right' => 'numeric|nullable',
+          'labels_pmargin_top' => 'numeric|nullable',
+          'labels_pmargin_bottom' => 'numeric|nullable',
+          'labels_display_bgutter' => 'numeric|nullable',
+          'labels_display_sgutter' => 'numeric|nullable',
           'labels_fontsize' => 'numeric|min:5',
-          'labels_pagewidth' => 'numeric',
-          'labels_pageheight' => 'numeric',
-          "ldap_server"   => 'sometimes|required_if:ldap_enabled,1|url',
-          "ldap_uname"     => 'sometimes|required_if:ldap_enabled,1',
-          "ldap_basedn"     => 'sometimes|required_if:ldap_enabled,1',
-          "ldap_filter"     => 'sometimes|required_if:ldap_enabled,1',
-          "ldap_username_field"     => 'sometimes|required_if:ldap_enabled,1',
-          "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
-          "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
-          "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
+          'labels_pagewidth' => 'numeric|nullable',
+          'labels_pageheight' => 'numeric|nullable',
+          "thumbnail_max_h"     => 'numeric|max:500|min:25',
+          "pwd_secure_min" => "numeric|required|min:5",
+          "audit_warning_days" => "numeric|nullable",
+          "audit_interval" => "numeric|nullable",
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];
@@ -49,11 +46,11 @@ class Setting extends Model
     {
         static $static_cache = null;
 
-            if (!$static_cache) {
-                if (Schema::hasTable('settings')) {
-                    $static_cache = Setting::first();
-                }
+        if (!$static_cache) {
+            if (Schema::hasTable('settings')) {
+                $static_cache = Setting::first();
             }
+        }
 
             return $static_cache;
 
@@ -61,23 +58,15 @@ class Setting extends Model
 
     public static function setupCompleted()
     {
-        
+
         $users_table_exists = Schema::hasTable('users');
         $settings_table_exists = Schema::hasTable('settings');
-        
+
         if ($users_table_exists && $settings_table_exists) {
             $usercount = User::withTrashed()->count();
-
-            if ($usercount > 0) {
-                return true;
-            }
-            return false;
-        } else {
-            return false;
+            $settingsCount = Setting::count();
+            return ($usercount > 0 && $settingsCount > 0);
         }
-        return false;
-
-
 
     }
 
@@ -151,4 +140,42 @@ class Setting extends Model
             }
             return $result;
     }
+
+    /**
+     * The url for slack notifications.
+     * Used by Notifiable trait.
+     * @return mixed
+     */
+    public function routeNotificationForSlack()
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        return $this->slack_endpoint;
+    }
+
+    public static function passwordComplexityRulesSaving($action = 'update')
+    {
+        $security_rules = '';
+        $settings = Setting::getSettings();
+
+        // Check if they have uncommon password enforcement selected in settings
+        if ($settings->pwd_secure_uncommon == 1) {
+            $security_rules .= '|dumbpwd';
+        }
+
+        // Check for any secure password complexity rules that may have been selected
+        if ($settings->pwd_secure_complexity!='') {
+            $security_rules  .= '|'.$settings->pwd_secure_complexity;
+        }
+
+        if ($action == 'update') {
+            return 'nullable|min:'.$settings->pwd_secure_min.$security_rules;
+        }
+
+        return 'required|min:'.$settings->pwd_secure_min.$security_rules;
+
+    }
+
+
+
 }

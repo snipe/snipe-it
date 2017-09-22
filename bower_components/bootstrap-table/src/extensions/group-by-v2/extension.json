@@ -1,0 +1,12 @@
+{
+  "name": "Group By",
+  "version": "1.0.0",
+  "description": "Group the data by field",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/group-by-v2",
+  "example": "",
+  "plugins": [],
+  "author": {
+    "name": "Knoxvillekm",
+    "image": "https://avatars3.githubusercontent.com/u/11072464"
+  }
+}

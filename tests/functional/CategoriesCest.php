@@ -1,7 +1,7 @@
 <?php
 
 
-class CategoryCest
+class CategoriesCest
 {
     public function _before(FunctionalTester $I)
     {
@@ -20,7 +20,7 @@ class CategoryCest
     {
         $I->wantTo('Test Category Creation');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/category'));
+        $I->amOnPage(route('categories.create'));
         $I->seeInTitle('Create Category');
         $I->see('Create Category', 'h1.pull-left');
     }
@@ -28,7 +28,7 @@ class CategoryCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/category'));
+        $I->amOnPage(route('categories.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -37,7 +37,7 @@ class CategoryCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $category = factory(App\Models\Category::class, 'asset-category')->make();
+        $category = factory(App\Models\Category::class)->make();
         $values = [
             'name'                  => $category->name,
             'category_type'         => $category->category_type,
@@ -46,7 +46,7 @@ class CategoryCest
             'checkin_email'         => $category->checkin_email,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/category'));
+        $I->amOnPage(route('categories.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('categories', $values);
         $I->dontSee('&lt;span class=&quot;');
@@ -55,7 +55,8 @@ class CategoryCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a category');
-        $I->amOnPage(route('delete/category', $I->getEmptyCategoryId()));
-        $I->seeElement('.alert-success');
+        $category = factory(App\Models\Category::class)->create();
+        $I->sendDelete(route('categories.destroy', $category->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

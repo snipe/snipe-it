@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Models\Requestable;
 use App\Models\SnipeModel;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -16,18 +17,19 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends SnipeModel
 {
     use SoftDeletes;
-    use Requestable;
+    protected $presenter = 'App\Presenters\AssetModelPresenter';
+    use Requestable, Presentable;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
+    protected $hidden = ['user_id','deleted_at'];
 
     // Declare the rules for the model validation
     protected $rules = array(
         'name'          => 'required|min:1|max:255',
-        'model_number'      => 'min:1|max:255',
-        'category_id'       => 'required|integer',
-        'manufacturer_id'   => 'required|integer',
-        'eol'   => 'integer:min:0|max:240',
-        'user_id' => 'integer',
+        'model_number'      => 'max:255|nullable',
+        'category_id'       => 'required|integer|exists:categories,id',
+        'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
+        'eol'   => 'integer:min:0|max:240|nullable',
     );
 
     /**
@@ -40,14 +42,20 @@ class AssetModel extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
+    public function setEolAttribute($value)
+    {
+        if ($value == '') {
+            $value = 0;
+        }
+
+        $this->attributes['eol'] = $value;
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name','manufacturer_id','category_id','eol'];
-
-
+    protected $fillable = ['name','manufacturer_id','category_id','eol', 'user_id', 'fieldset_id', 'model_number', 'notes'];
 
     public function assets()
     {
@@ -77,26 +85,6 @@ class AssetModel extends SnipeModel
     public function fieldset()
     {
         return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
-    }
-
-    public function getNote()
-    {
-
-        $Parsedown = new \Parsedown();
-
-        if ($this->note) {
-            return $Parsedown->text(e($this->note));
-        }
-
-    }
-
-    public function displayModelName()
-    {
-        $name = $this->manufacturer->name.' '.$this->name;
-        if ($this->model_number) {
-            $name .=" / ".$this->model_number;
-        }
-        return $name;
     }
 
     /**
@@ -180,4 +168,19 @@ class AssetModel extends SnipeModel
             });
 
     }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
+    }
+
+
 }

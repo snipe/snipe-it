@@ -1,9 +1,9 @@
 <?php
 return array(
-    'companies' => 'Companies',
-    'create'    => 'Create Company',
-    'title'     => 'Company',
-    'update'    => 'Update Company',
-    'name'      => 'Company Name',
+    'companies' => 'Virksomheder',
+    'create'    => 'Oprette virksomhed',
+    'title'     => 'Virksomheden',
+    'update'    => 'Opdater virksomhed',
+    'name'      => 'Virksomhedens navn',
     'id'        => 'ID',
 );

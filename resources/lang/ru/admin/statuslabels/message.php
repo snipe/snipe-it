@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Ярлык состояния не существует.',
+    'assoc_assets'	 => 'Этот ярлык состояния связан как минимум с одним активом и не может быть удален. Измените состояние ваших активов и попробуйте ещё раз. ',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Ярлык состояния не создан, попробуйте еще раз.',
+        'success' => 'Ярлык состояния успешно создан.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Ярлык состояния не обновлен, попробуйте еще раз',
+        'success' => 'Ярлык состояния успешно обновлен.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'confirm'   => 'Вы уверены что хотите удалить это состояние?',
+        'error'   => 'При удалении состояния возникла проблема. Пожалуйста попробуйте снова.',
+        'success' => 'Ярлык состояние был успешно удален.'
     )
 
 );

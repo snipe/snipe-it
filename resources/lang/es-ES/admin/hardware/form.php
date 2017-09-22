@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'Confirmar eliminación masiva de bienes',
   'bulk_delete_help'	=> 'Revisar los bienes para eliminación masiva. Una vez eliminados, esos bienes pueden ser restaurados, pero no volverán a estar asociados con ningún usuario a los que esté asignado.',
   'bulk_delete_warn'	=> 'Está a punto de borrar :asset_count.',
 	'bulk_update'		=> 'Actualización masiva de Equipos',

@@ -1,0 +1,28 @@
+{
+  "name": "jquery.iframe-transport",
+  "version": "1.0.0",
+  "homepage": "https://cmlenz.github.io/jquery-iframe-transport/",
+  "authors": [
+    "Christopher Lenz <cmlenz@gmail.com>"
+  ],
+  "description": "jQuery plugin that implements an iframe transport so that ajax calls support the uploading of files using standard HTML file input fields",
+  "main": "jquery.iframe-transport.js",
+  "dependencies": {
+    "jquery": ">=1.6"
+  },
+  "keywords": [
+    "jquery",
+    "iframe",
+    "upload",
+    "file",
+    "form",
+    "ajax"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Gruntfile.js"
+  ]
+}

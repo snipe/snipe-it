@@ -2,7 +2,8 @@
     'createText' => trans('admin/statuslabels/table.create') ,
     'updateText' => trans('admin/statuslabels/table.update'),
     'helpTitle' => trans('admin/statuslabels/table.about'),
-    'helpText' => trans('admin/statuslabels/table.info')
+    'helpText' => trans('admin/statuslabels/table.info'),
+    'formAction' => ($item) ? route('statuslabels.update', ['statuslabel' => $item->id]) : route('statuslabels.store'),
 ])
 
 {{-- Page content --}}
@@ -13,7 +14,7 @@
     }
 </style>
 <!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="{{ asset('assets/js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
 @parent
 @stop
 

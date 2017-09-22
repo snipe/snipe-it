@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Uživatelský účet není aktivován.',
     'account_suspended'      => 'Uživatelský účet je pozastaven.',
     'account_banned'         => 'Uživatelský účet je zablokován.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Příliš mnoho neúspěšných pokusů o přihlášení. Zkuste to prosím znovu za :minutes minut.',
 
     'signin' => array(
         'error'   => 'Vyskytl se problém při přihlášení, zkuste to znovu.',

@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'دارایی',
     'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'دارایی checkin',
-    'checkout'  				=> 'پرداخت سرمایه به کاربر',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'دارایی شگرف',
     'deployable'  				=> 'گسترش',
     'deleted'  					=> 'این دارایی حذف شده است. <a href="/hardware/:asset_id/restore"> اینجا به بازگرداندن آن کلیک کنید </a>.',

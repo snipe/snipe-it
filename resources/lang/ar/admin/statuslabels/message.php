@@ -2,18 +2,18 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
+    'does_not_exist' => 'حالة التصنيف غير موجود.',
     'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
         'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'success' => 'تم إنشاء تسمية الحالة بنجاح.'
     ),
 
     'update' => array(
         'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'success' => 'تم تحديث تسمية الحالة بنجاح.'
     ),
 
     'delete' => array(

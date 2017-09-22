@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Denne brukerkontoen er ikke aktiv.',
     'account_suspended'      => 'Denne brukerkontoen er deaktivert.',
     'account_banned'         => 'Denne brukerkontoen er forbudt.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'For mange mislykkede påloggingsforsøk. Prøv igjen om :minutes minutt(er).',
 
     'signin' => array(
         'error'   => 'Det oppstod et problem under innlogging. Prøv igjen.',

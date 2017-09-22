@@ -1,0 +1,17 @@
+{
+  "name": "Table Export",
+  "version": "1.1.0",
+  "description": "Export your table data to JSON, XML, CSV, TXT, SQL, Word, Excel, PNG, PDF.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/export",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/export.html",
+
+  "plugins": [{
+    "name": "tableExport.jquery.plugin",
+    "url": "https://github.com/hhurz/tableExport.jquery.plugin"
+  }],
+
+  "author": {
+    "name": "wenzhixin",
+    "image": "https://avatars1.githubusercontent.com/u/2117018"
+  }
+}

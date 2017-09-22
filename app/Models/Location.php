@@ -5,23 +5,26 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Asset;
 use App\Models\SnipeModel;
 use App\Models\User;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class Location extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\LocationPresenter';
+    use Presentable;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(
-      'name'        => 'required|min:3|max:255|unique_undeleted',
-      'city'        => 'min:3|max:255',
-      'state'           => 'min:0|max:32',
-      'country'     => 'min:2|max:2',
-      'address'         => 'min:5|max:80',
-      'address2'        => 'min:2|max:80',
-      'zip'         => 'min:3|max:10',
+      'name'        => 'required|min:2|max:255|unique_undeleted',
+      'city'        => 'min:3|max:255|nullable',
+      'country'     => 'min:2|max:2|nullable',
+      'address'         => 'max:80|nullable',
+      'address2'        => 'max:80|nullable',
+      'zip'         => 'min:3|max:10|nullable',
+      // 'manager_id'  => 'exists:users'
     );
 
     /**
@@ -41,7 +44,8 @@ class Location extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','parent_id','address','address2','city','state', 'country','zip','ldap_ou'];
+    protected $hidden = ['user_id'];
 
     public function users()
     {
@@ -53,19 +57,30 @@ class Location extends SnipeModel
         return $this->hasManyThrough('\App\Models\Asset', '\App\Models\User', 'location_id', 'assigned_to', 'id');
     }
 
-    public function assignedassets()
+    public function locationAssets()
     {
-        return $this->hasMany('\App\Models\Asset', 'rtd_location_id');
+        return $this->hasMany('\App\Models\Asset', 'rtd_location_id')->orHas('assignedAssets');
     }
 
     public function parent()
     {
-        return $this->belongsTo('\App\Models\Location', 'parent_id');
+        return $this->belongsTo('\App\Models\Location', 'parent_id','id');
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo('\App\Models\User', 'manager_id');
     }
 
     public function childLocations()
     {
         return $this->hasMany('\App\Models\Location', 'parent_id');
+    }
+
+    public function assignedAssets()
+    {
+        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        // return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
     public static function getLocationHierarchy($locations, $parent_id = null)

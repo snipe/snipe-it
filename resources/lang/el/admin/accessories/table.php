@@ -1,11 +1,11 @@
 <?php
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
+	'dl_csv'      				=> 'Κατεβάστε το CSV',
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'require_acceptance'      	=> 'Αποδοχή',
+    'title'      				=> 'Όνομα ανταλλακτικού',
 
 
 );

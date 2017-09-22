@@ -6,7 +6,7 @@ return array(
     'checkin'           => 'Carica',
     'create'            => 'Crea Licenza',
     'expiration'        => 'Data di scadenza',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Chiave licenza',
     'maintained'        => 'Mantenuto',
     'name'              => 'Nome Software',
     'no_depreciation'   => 'Non svaluta',

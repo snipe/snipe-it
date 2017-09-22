@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Lisanslar Hakkında',
+    'about_licenses'                  => 'Lisanslar yazılım takibi için kullanılır.  Kullanıcı sayısı kadar kişide kullanılabilir',
     'checkin'  					=> 'Lisans Kullanıcısı Girişi',
     'checkout_history'  		=> 'Çıkış Geçmişi',
     'checkout'  				=> 'Lisans Kullanıcı Çıkışı',
     'edit'  					=> 'Lisansı Düzenle',
-    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'				=> 'İzin verilen dosya türleri; png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'clone'  					=> 'Lisansı Kopyala',
     'history_for'  				=> 'Geçmiş ',
     'in_out'  					=> 'Giriş/Çıkış',

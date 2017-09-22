@@ -51,30 +51,24 @@
                                 <tr>
                                     <form action="{{route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id])}}" method="POST" accept-charset="utf-8">
                                         {{ csrf_field() }}
-                                        <td>{{ $asset->model->name }}</td>
+                                        <td>{!! $asset->model->present()->nameUrl() !!}</td>
 
                                         @if ($snipeSettings->display_asset_name)
                                         <td>{{ $asset->name }}</td>
                                         @endif
 
-                                        <td>{{ $asset->serial }}</td>
+                                        <td><a href="{{ $asset->present()->viewUrl() }}">{{ $asset->serial }}</a></td>
 
                                         <td>
-                                            @if ($asset->assigneduser && $asset->assetloc)
-                                            {{ $asset->assetloc->name }}
-                                            @elseif ($asset->defaultLoc)
-                                            {{ $asset->defaultLoc->name }}
-                                            @endif
+                                            {!! $asset->assetLoc->present()->nameUrl() !!}
                                         </td>
-                                         @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
+                                        @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
                                             <td>Checked out</td>
                                         @else
-                                        <td>{{ trans('admin/hardware/general.requestable') }}</td>
+                                            <td>{{ trans('admin/hardware/general.requestable') }}</td>
                                         @endif
 
                                         <td>{{ $asset->expected_checkin }}</td>
-
-
                                         <td>
                                             @if ($asset->isRequestedBy(Auth::user()))
                                                 {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
@@ -89,7 +83,6 @@
                         </table>
                     </div>
 
-
                     @else
                     <div class="col-md-12">
                         <div class="alert alert-info alert-block">
@@ -97,8 +90,6 @@
                             {{ trans('general.no_results') }}
                         </div>
                     </div>
-
-
                     @endif
                 </div>
 
@@ -114,19 +105,18 @@
                                 <th class="col-md-2" bSortable="true">{{ trans('general.quantity') }}</th>
                                 <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
                             </tr>
-                    </thead>
+                        </thead>
 
                         <tbody>
                             @foreach($models as $requestableModel)
-
                                 <tr>
-                                     <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
+                                    <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
                                             method="POST"
                                             accept-charset="utf-8"
                                     >
                                         {{ csrf_field() }}
                                         <td>{{$requestableModel->name}}</td>
-                                        <td>{{$requestableModel->assets()->where('requestable', '1')->count()}}</td>
+                                        <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
                                         <td><input type="text" name="request-quantity" value=""></td>
                                         <td>
                                             @if ($requestableModel->isRequestedBy(Auth::user()))
@@ -155,10 +145,9 @@
         </div> <!-- .nav-tabs-custom -->
     </div> <!-- .col-md-12> -->
 </div> <!-- .row -->
-
-
-
 @stop
+
+
 @section('moar_scripts')
 <script>
 

@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Δημιουργία περιουσιακού στοιχείου μοντέλου',
+    'created_at' 			=> 'Δημιουργήθηκε στις',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> 'Αριθμός Μοντέλου.',
+    'name'      			=> 'Όνομα μοντέλου παγίου',
+    'numassets' 			=> 'Πάγια',
+    'title'					=> 'Μοντέλα Παγίων',
+    'update'				=> 'Ενημέρωση παγίου μοντέλου',
+    'view'					=> 'Προβολή μοντέλου περιουσιακού στοιχείου',
+    'update'				=> 'Ενημέρωση παγίου μοντέλου',
+    'clone'				=> 'Κλώνος μοντέλο',
+    'edit'				=> 'Επεξεργασία μοντέλου',
 );

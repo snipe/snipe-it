@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => '操作',
     'add'    	                => '新增',
     'cancel'                    => '取消',
@@ -12,5 +11,5 @@ return array(
     'request'                   => '申請',
     'submit'  	                => '送出',
     'upload'                    => '上傳',
-
+	'select_file'				=> '選擇檔案…',
 );

@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\SnipeModel;
+use App\Presenters\Presentable;
 use Auth;
 use DB;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +22,8 @@ final class Company extends SnipeModel
         'name' => 'required|min:1|max:255|unique:companies,name'
     ];
 
+    protected $presenter = 'App\Presenters\CompanyPresenter';
+    use Presentable;
 
     /**
     * Whether the model should inject it's identifier to the unique
@@ -61,12 +64,6 @@ final class Company extends SnipeModel
         }
 
         return $query->where($column, '=', $company_id);
-    }
-
-    public static function getSelectList()
-    {
-        $select_company = trans('general.select_company');
-        return ['0' => $select_company] + DB::table('companies')->orderBy('name', 'ASC')->lists('name', 'id');
     }
 
     public static function getIdFromInput($unescaped_input)
@@ -116,7 +113,6 @@ final class Company extends SnipeModel
 
     public static function isCurrentUserAuthorized()
     {
-
         return ((!static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->isSuperUser()));
     }
 
@@ -168,37 +164,32 @@ final class Company extends SnipeModel
         }
     }
 
-    public static function getName($companyable)
+    public function users()
     {
-        $company = $companyable->company;
-
-        if (is_null($company)) {
-            return '';
-        } else {
-            return e($company->name);
-        }
-    }
-
-    public function users() {
         return $this->hasMany(User::class);
     }
 
-    public function assets() {
+    public function assets()
+    {
         return $this->hasMany(Asset::class);
     }
 
-    public function licenses() {
+    public function licenses()
+    {
         return $this->hasMany(License::class);
     }
-    public function accessories() {
+    public function accessories()
+    {
         return $this->hasMany(Accessory::class);
     }
 
-    public function consumables() {
+    public function consumables()
+    {
         return $this->hasMany(Consumable::class);
     }
 
-    public function components() {
+    public function components()
+    {
         return $this->hasMany(Component::class);
     }
 }

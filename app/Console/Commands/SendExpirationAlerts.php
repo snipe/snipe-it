@@ -55,7 +55,7 @@ class SendExpirationAlerts extends Command
 
         foreach ($expiring_assets as $asset) {
 
-            $expires = $asset->warrantee_expires();
+            $expires = $asset->present()->warrantee_expires();
             $difference =  round(abs(strtotime($expires) - strtotime($now))/86400);
 
             if ($difference > 30) {
@@ -64,11 +64,11 @@ class SendExpirationAlerts extends Command
                 $asset_data['email_content'] .= '<tr style="background-color:#d9534f;">';
             }
             $asset_data['email_content'] .= '<td><a href="'.config('app.url').'/hardware/'.e($asset->id).'/view">';
-            $asset_data['email_content'] .= $asset->showAssetName().'</a></td><td>'.e($asset->asset_tag).'</td>';
-            $asset_data['email_content'] .= '<td>'.e($asset->warrantee_expires()).'</td>';
+            $asset_data['email_content'] .= $asset->present()->name().'</a></td><td>'.e($asset->asset_tag).'</td>';
+            $asset_data['email_content'] .= '<td>'.e($asset->present()->warrantee_expires()).'</td>';
             $asset_data['email_content'] .= '<td>'.$difference.' '.trans('mail.days').'</td>';
             $asset_data['email_content'] .= '<td>'.($asset->supplier ? e($asset->supplier->name) : '').'</td>';
-            $asset_data['email_content'] .= '<td>'.($asset->assigneduser ? e($asset->assigneduser->fullName()) : '').'</td>';
+            $asset_data['email_content'] .= '<td>'.($asset->assignedTo ? e($asset->assignedTo->present()->name()) : '').'</td>';
             $asset_data['email_content'] .= '</tr>';
         }
 
@@ -89,7 +89,7 @@ class SendExpirationAlerts extends Command
             } else {
                 $license_data['email_content'] .= '<tr style="background-color:#d9534f;">';
             }
-                $license_data['email_content'] .= '<td><a href="'.config('app.url').'/admin/licenses/'.$license->id.'/view">';
+                $license_data['email_content'] .= '<td><a href="'.route('licenses.show', $license->id).'">';
                 $license_data['email_content'] .= $license->name.'</a></td>';
                 $license_data['email_content'] .= '<td>'.$license->expiration_date.'</td>';
                 $license_data['email_content'] .= '<td>'.$difference.' days</td>';

@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'نشط',
     'allow'  				=> 'السماح',
     'checkedout'  			=> 'الأصول',
@@ -20,16 +19,19 @@ return array(
     'location'  			=> 'الموقع',
     'lock_passwords'		=> 'لا يمكن تغيير تفاصيل الدخول بالنسبة لهذا التنصيب.',
     'manager' 				=> 'المدير',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'الاسم',
-    'notes'                 => 'Notes',
+    'notes'                 => 'مُلاحظات',
     'password_confirm' 		=> 'تأكيد كلمة المرور',
     'password' 				=> 'كلمة المرور',
     'phone'  				=> 'رقم الهاتف',
     'show_current'          => 'Show Current Users',
     'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'المسمى الوظيفي',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'تحديث المستخدم',
     'username' 				=> 'اسم المستخدم',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(يستخدم فقط للربط مع الـ Active Directory وليس لغرض تسجيل الدخول.)',
     'cloneuser'             => 'نسخ المستخدم',
     'viewusers' 			=> 'عرض المستخدمين',

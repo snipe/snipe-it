@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
+    'does_not_exist' => 'Fabrikant eksistere ikke.',
     'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
 
     'create' => array(

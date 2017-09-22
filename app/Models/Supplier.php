@@ -20,8 +20,8 @@ class Supplier extends SnipeModel
         'city'              => 'min:3|max:255',
         'state'             => 'min:0|max:32',
         'country'           => 'min:0|max:2',
-        'fax'               => 'min:7|max:20',
-        'phone'             => 'min:7|max:20',
+        'fax'               => 'min:7|max:35',
+        'phone'             => 'min:7|max:35',
         'contact'           => 'min:0|max:100',
         'notes'             => 'min:0|max:255',
         'email'             => 'email|min:5|max:150',
@@ -45,7 +45,7 @@ class Supplier extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','address','address2','city','state','country','zip','phone','fax','email','contact','url','notes'];
 
 
     // Eager load counts.

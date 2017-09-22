@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Active',
     'allow'  				=> 'Erlauben',
     'checkedout'  			=> 'Assets',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Ort',
     'lock_passwords'		=> 'Die Login-Daten können auf dieser Installation nicht geändert werden.',
     'manager' 				=> 'Manager',
+    'managed_locations'     => 'Verwaltete Standorte',
     'name' 					=> 'Name',
     'notes'                 => 'Notizen',
     'password_confirm' 		=> 'Kennwort bestätigen',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Zeige aktuelle Benutzer',
     'show_deleted'          => 'Zeige gelöschte Benutzer',
     'title' 				=> 'Titel',
+	'to_restore_them'		=> 'zum Wiederherstellen.',
     'updateuser' 			=> 'Benutzer aktualisieren',
     'username' 				=> 'Benutzernamen',
+	'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',
     'username_note' 		=> '(Dies wird für den Bind an das Active Directory benutzt, nicht für die Anmeldung.)',
     'cloneuser'             => 'Benutzer kopieren',
     'viewusers' 			=> 'Benutzer anzeigen',

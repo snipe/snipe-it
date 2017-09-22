@@ -42,7 +42,7 @@ class Versioning extends Command
     {
 
         $versionFile = 'config/version.php';
-        $hash_version = str_replace("\n",'',shell_exec('git describe --tags'));
+        $hash_version = str_replace("\n", '', shell_exec('git describe --tags'));
 
         $version = explode('-', $hash_version);
 
@@ -52,18 +52,19 @@ class Versioning extends Command
             'build_version' => $version[1],
             'hash_version' => $version[2],
             'full_hash' => $hash_version),
-        true);
+            true
+        );
 
 
         // Construct our file content
-        $content = <<<CON
+            $content = <<<CON
 <?php
 return $array;
 CON;
 
         // And finally write the file and output the current version
-        \File::put($versionFile, $content);
-        $this->line('Setting version: '. config('version.app_version').' build '.config('version.build_version').' ('.config('version.hash_version').')');
+            \File::put($versionFile, $content);
+            $this->line('Setting version: '. config('version.app_version').' build '.config('version.build_version').' ('.config('version.hash_version').')');
     }
 
     /**

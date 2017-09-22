@@ -2,7 +2,7 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
+    'assigned_to'   	=> 'Tildelt',
     'checkout'   		=> 'In/Out',
     'id'      			=> 'ID',
     'license_email'   	=> 'License Email',

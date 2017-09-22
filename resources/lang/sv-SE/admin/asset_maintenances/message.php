@@ -1,17 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Inventarieunderhållet du letade efter kunde inte hittas!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'År du säker på att du vill radera inventarieunderhållet?',
+            'error'   => 'Ett fel uppstod vid radering av inventarieunderhållet. Var god försök igen.',
+            'success' => 'Inventarieunderhållet raderades.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Inventarieunderhållet skapades inte. Var god försök igen.',
+            'success' => 'Inventarieunderhållet skapades.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'edit'                       => [
+            'error'   => 'Asset Maintenance was not edited, please try again.',
+            'success' => 'Asset Maintenance edited successfully.'
+        ],
+        'asset_maintenance_incomplete' => 'Inte klar ännu',
+        'warranty'                     => 'Garanti',
+        'not_warranty'                 => 'Inte garanti',
     ];

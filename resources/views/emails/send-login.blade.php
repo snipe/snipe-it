@@ -5,7 +5,7 @@
 
 <p>{{ trans('mail.admin_has_created', ['web' => $snipeSettings->site_name]) }} </p>
 
-<p>URL: <a href="{{ config('app.url') }}">{{ config('app.url') }}</a><br>
+<p>URL: <a href="{{ url('/') }}">{{ url('/') }}</a><br>
 {{ trans('mail.login') }} {{ $username }} <br>
 {{ trans('mail.password') }} {{ $password }}
 </p>

@@ -2,30 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Model neexistuje.',
+    'assoc_users'	 => 'Tento model je spojen s alespoň jedním majetkem a nemůže být smazán. Prosím smažte tyto majetky a pak to zkuste znovu. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Model nebyl vytvořen, zkuste to znovu.',
+        'success' => 'Model byl úspěšně vytvořen.',
+        'duplicate_set' => 'Model majetku s tímto názvem, výrobcem a číslem modelu již existuje.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Model nebyl aktualizován, zkuste to prosím znovu',
+        'success' => 'Model byl úspěšně aktualizován.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Opravdu si přejete tento model majetku odstranit?',
+        'error'   => 'Vyskytl se problém se smazáním modelu. Zkuste to znovu.',
+        'success' => 'Model byl úspěšně smazán.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Model nebyl obnoven, zkuste to prosím znovu',
+        'success' 		=> 'Model byl úspěšně obnoven.'
+    ),
+
+    'bulkedit' => array(
+        'error'   		=> 'Žádné pole nebyly změněny, takže nic nebylo aktualizováno.',
+        'success' 		=> 'Modely byly aktualizovány.'
     ),
 
 );

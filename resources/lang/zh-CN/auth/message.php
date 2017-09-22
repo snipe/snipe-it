@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => '用户还未激活',
     'account_suspended'      => '账户已经被停用',
     'account_banned'         => '账户已经被禁用',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => '登录失败的次数太多。请在 :minutes分钟后重试。',
 
     'signin' => array(
         'error'   => '登陆过程中出现了一点儿问题，请重试。',

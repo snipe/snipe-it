@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Asset restored successfully.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
@@ -48,6 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Anda pasti anda ingin hapuskan harta ini?',
         'error'   		=> 'Ada isu semasa menghapuskan harta. Sila cuba lagi.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Harta berjaya dihapuskan.'
     ),
 

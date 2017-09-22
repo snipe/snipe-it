@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => '关于资产',
+    'about_assets_text'            => '资产是按照序列号或者资产标签跟踪的物品。可以标记特殊物品为高价值资产。',
 	'archived'  				=> '已存档',
     'asset'  					=> '资产',
     'bulk_checkout'             => '借出资产给某人',
     'checkin'  					=> '借入资产',
-    'checkout'  				=> '借出资产给某人',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> '复制资产',
     'deployable'  				=> '可部署',
     'deleted'  					=> '该资产已删除。 <a href="/hardware/:asset_id/restore">点击此处恢复</a>.',

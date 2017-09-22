@@ -2,36 +2,35 @@
 
 {{-- Page title --}}
 @section('title')
-Change your Password
+{{ trans('general.changepassword') }}
 @stop
 
 {{-- Account page content --}}
 @section('content')
-<div class="row header">
 
-    <div class="col-md-12">
-        <h3>{{ trans('general.changepassword') }}</h3>
-    </div>
-</div>
 
-<div class="row form-wrapper">
-<form method="post" action="" class="form-horizontal" autocomplete="off">
+<div class="row">
+    <div class="col-md-9">
+    {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off']) }}
     <!-- CSRF Token -->
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <div class="box box-default">
+            <div class="box-body">
+
 
     <!-- Old Password -->
-    <div class="form-group {{ $errors->has('old_password') ? ' has-error' : '' }}">
-        <label for="old_password" class="col-md-2 control-label">Old Password
-        <i class='fa fa-asterisk'></i>
+    <div class="form-group {{ $errors->has('current_password') ? ' has-error' : '' }}">
+        <label for="current_password" class="col-md-3 control-label">Current Password
+            <i class='fa fa-asterisk'></i>
         </label>
         <div class="col-md-5">
-            <input class="form-control" type="password" name="old_password" id="old_password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-            {!! $errors->first('old_password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            <input class="form-control" type="password" name="current_password" id="current_password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
+            {!! $errors->first('current_password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
         </div>
     </div>
 
     <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-        <label for="password" class="col-md-2 control-label">New Password
+        <label for="password" class="col-md-3 control-label">New Password
         <i class='fa fa-asterisk'></i></label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password" id="password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
@@ -41,8 +40,8 @@ Change your Password
 
 
     <div class="form-group {{ $errors->has('password_confirm') ? ' has-error' : '' }}">
-        <label for="password_confirm" class="col-md-2 control-label">New Password
-        <i class='fa fa-asterisk'></i>
+        <label for="password_confirm" class="col-md-3 control-label">New Password
+            <i class='fa fa-asterisk'></i>
         </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password_confirm" id="password_confirm"  {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
@@ -53,16 +52,16 @@ Change your Password
         </div>
     </div>
 
-    <hr>
 
-    <!-- Form actions -->
-    <div class="form-group">
-	<label class="col-md-2 control-label"></label>
-		<div class="col-md-7">
-			<a class="btn btn-link" href="{{ route('view-assets') }}">{{ trans('button.cancel') }}</a>
-			<button type="submit" class="btn btn-success" {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
-		</div>
-	</div>
 
-</form>
+            </div> <!-- .box-body -->
+            <div class="box-footer text-right">
+                <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+            </div>
+
+        </div> <!-- .box-default -->
+        {{ Form::close() }}
+    </div> <!-- .col-md-9 -->
+</div> <!-- .row-->
 @stop

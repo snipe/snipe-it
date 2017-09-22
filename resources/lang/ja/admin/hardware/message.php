@@ -24,6 +24,12 @@ return array(
         'success' 		=> '資産は正常に復元されました。'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'ファイルが削除できませんでした。もう一度、やり直して下さい。',
         'success' => 'ファイルは正常に削除されました。',
@@ -37,17 +43,18 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'いくつかの項目は正しくインポートされませんでした。',
+        'errorDetail'           => '以下のアイテムはエラーのためインポートできませんでした',
+        'success'               => "ファイルはインポートされました。",
+        'file_delete_success'   => "ファイルを削除しました。",
+        'file_delete_error'      => "ファイルが削除出来ませんでした。",
     ),
 
 
     'delete' => array(
         'confirm'   	=> 'この資産を削除してもよろしいですか？',
         'error'   		=> '資産を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> '資産は正常に削除されました。'
     ),
 
@@ -55,7 +62,7 @@ return array(
         'error'   		=> '資産はチェックアウトされませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は正常にチェックアウトされました。',
         'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'この資産はチェックアウトできません!'
     ),
 
     'checkin' => array(
@@ -69,7 +76,7 @@ return array(
     'requests' => array(
         'error'   		=> '資産は要求されませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産の要求処理が成功しました。',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'チェックアウトリクエストが正常にキャンセルされました。'
     )
 
 );

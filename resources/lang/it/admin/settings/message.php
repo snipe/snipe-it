@@ -16,7 +16,7 @@ return array(
     'purge' => array(
         'error'     => 'Si è verificato un errore durante la pulizia. ',
         'validation_failed'     => 'La conferma dell\'eliminazione non è corretta. Digita "DELETE" nel box di conferma.',
-        'success'               => 'Deleted records successfully purged.'
+        'success'               => 'I record cancellati sono stati correttamente eliminati.'
     ),
 
 );

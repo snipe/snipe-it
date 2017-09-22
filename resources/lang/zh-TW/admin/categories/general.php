@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> '關於類別',
+    'about_categories'  				=> '資產類別可幫助您組織您的資產。例如：桌上型電腦、筆記型電腦、手機、平板...等，您可依需求自行定義類別。',
     'asset_categories' 					=> '資產類別',
     'category_name'  					=> '類別名稱',
     'checkin_email'                     => '寄送郵件到登記的使用者',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => '編輯類別',
     'eula_text'							=> '類別的最終用戶許可協議',
     'eula_text_help'					=> '此欄位允許您為指定類型的資產自訂ELUA（最終用戶許可協議）。如果您所有資產只套用一個EULA（最終用戶許可協議），您可以核取下方框將其設為預設。',
+    'name'                              => '類別名稱',
     'require_acceptance'				=> '要求使用者確認接受此類別的資產',
     'required_acceptance'				=> '使用者會收到包含確認接收連結的郵件',
     'required_eula'						=> '使用者將收到EULA（最終使用者許可協議）的郵件',

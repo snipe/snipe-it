@@ -2,7 +2,8 @@
     'createText' => trans('admin/licenses/form.create') ,
     'updateText' => trans('admin/licenses/form.update'),
     'helpTitle' => trans('admin/licenses/general.about_licenses_title'),
-    'helpText' => trans('admin/licenses/general.about_licenses_text')
+    'helpText' => trans('admin/licenses/general.about_licenses_text'),
+    'formAction' => ($item) ? route('licenses.update', ['license' => $item->id]) : route('license.store'),
 ])
 
 {{-- Page content --}}
@@ -68,27 +69,26 @@
 <!-- Expiration Date -->
 <div class="form-group {{ $errors->has('expiration_date') ? ' has-error' : '' }}">
     <label for="expiration_date" class="col-md-3 control-label">{{ trans('admin/licenses/form.expiration') }}</label>
-    <div class="input-group col-md-3">
-        <div class="input-group">
-            <input type="text" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" name="expiration_date" id="expiration_date" value="{{ Input::old('expiration_date', $item->expiration_date) }}">
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-        </div><!-- /.input group -->
 
+    <div class="input-group col-md-3">
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expiration_date" id="expiration_date" value="{{ Input::old('expiration_date', $item->expiration_date) }}">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        </div>
         {!! $errors->first('expiration_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
+
 </div>
 
 <!-- Termination Date -->
 <div class="form-group {{ $errors->has('termination_date') ? ' has-error' : '' }}">
     <label for="termination_date" class="col-md-3 control-label">{{ trans('admin/licenses/form.termination_date') }}</label>
+
     <div class="input-group col-md-3">
-        <div class="input-group">
-
-            <input type="text" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" name="termination_date" id="termination_date" value="{{ Input::old('termination_date', $item->termination_date) }}">
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="termination_date" id="termination_date" value="{{ Input::old('termination_date', $item->termination_date) }}">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-        </div><!-- /.input group -->
-
-
+        </div>
         {!! $errors->first('termination_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>

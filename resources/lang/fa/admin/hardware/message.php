@@ -23,6 +23,12 @@ return array(
         'success' 		=> 'دارایی با موفقیت بازیابی شد.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'فایل حذف نمی شود. لطفا دوباره تلاش کنید.',
         'success' => 'فایل با موفقیت حذف شده است.',
@@ -47,6 +53,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'آیا شما مطمئن هستید که می خواهید این تنظیمات دارایی را حذف کنید؟',
         'error'   		=> 'اشکال در حذف دارایی.لطفا دوباره تلاش کنید.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'دارایی با موفقیت حذف شد.'
     ),
 

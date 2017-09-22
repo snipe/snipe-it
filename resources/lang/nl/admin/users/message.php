@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Je hebt met succes dit product geaccepteerd.',
     'declined'                  => 'Je hebt met succes dit product geweigerd.',
+    'bulk_manager_warn'	        => 'Uw gebruikers zijn succesvol bijgewerkt, de gekozen manager kon echter niet toegepast worden omdat deze persoon ook in de lijst staat, gebruikers mogen niet hun eigen manager zijn. Probeer het nogmaals en selecteer de gebruikers zonder de manager.',
     'user_exists'               => 'Gebruiker bestaat reeds!',
     'user_not_found'            => 'Gebruiker [:id] bestaat niet.',
     'user_login_required'       => 'Het veld gebruikersnaam is verplicht.',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Gebruiker succesvol aangemaakt.',
         'update'    => 'Gebruiker succesvol bijgewerkt.',
+        'update_bulk'    => 'Gebruikers zijn succesvol bijgewerkt!',
         'delete'    => 'Gebruiker succesvol verwijderd.',
         'ban'       => 'Gebruiker succesvol verbannen.',
         'unban'     => 'Gebruiker succesvol opnieuw toegang verleend.',
@@ -29,6 +31,7 @@ return array(
         'create' => 'Er was een probleem tijdens het aanmaken van de gebruiker. Probeer opnieuw, aub.',
         'update' => 'Er was een probleem tijdens het bijwerken van de gebruiker. Probeer opnieuw, aub.',
         'delete' => 'Er was een probleem tijdens het verwijderen van de gebruiker. Probeer opnieuw, aub.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Er was een probleem tijdens het opnieuw inschakelen van de gebruiker. Probeer opnieuw, aub.',
         'import'    => 'Er was een probleem met het importeren van de gebruikers. Probeer het opnieuw.',
         'asset_already_accepted' => 'Dit product is al geaccepteerd.',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Kan niet verbinden met de LDAP server. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server: ',
         'ldap_could_not_search' => 'Kan niet zoeken in de LDAP server. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server:',
         'ldap_could_not_get_entries' => 'Kan geen gegeven van de LDAP server krijgen. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

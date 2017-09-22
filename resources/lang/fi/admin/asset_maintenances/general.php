@@ -2,9 +2,9 @@
 
     return [
         'asset_maintenances' => 'Laitteen huolto',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
+        'edit'               => 'Muokkaa laitteen huoltoa',
+        'delete'             => 'Poista laitteen huolto',
+        'view'               => 'Näytä laitteen huoltotiedot',
         'repair'             => 'Korjaus',
         'maintenance'        => 'Huoltotila',
         'upgrade'            => 'Päivitä'

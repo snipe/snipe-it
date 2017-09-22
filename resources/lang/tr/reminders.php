@@ -17,7 +17,7 @@ return array(
 
     "user"     => "Kullanıcı adı veya e-mail adresi hatalı",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Şifre sıfırlama anahtarı geçersiz.",
 
     "sent" => "Eşleşen email bulunsaydı, şifre gönderilirdi!",
 

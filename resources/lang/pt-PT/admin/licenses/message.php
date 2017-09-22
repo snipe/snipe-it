@@ -23,7 +23,7 @@ return array(
         'error'   => 'Ficheiro(s) não submetidos. Por favor, tente novamente.',
         'success' => 'Ficheiro(s) submetidos com sucesso.',
         'nofiles' => 'Não selecionou nenhum ficheiro para submissão, ou o ficheiro que pretende submeter é demasiado grande',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'Um ou mais ficheiros excedem o tamanho ou são do tipo de ficheiro não é permitido. Os tipos permitidos são png, gif, jpg, doc, docx, pdf, txt, zip, rar, and rtf.',
     ),
 
     'update' => array(

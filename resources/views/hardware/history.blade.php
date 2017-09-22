@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('hardware') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
+    <a href="{{ route('hardware.index') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
 @stop
 
 {{-- Page content --}}

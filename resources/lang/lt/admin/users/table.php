@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktyvus',
     'allow'  				=> 'Leisti',
     'checkedout'  			=> 'Įranga',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Vieta',
     'lock_passwords'		=> 'Prisijungimo duomenys negali būti keičiami šio diegimo metu.',
     'manager' 				=> 'Tiesioginis vadovas',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Pavadinimas',
     'notes'                 => 'Pastabos',
     'password_confirm' 		=> 'Patvirtinti slaptažodį',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Rodyti esamus naudotojus',
     'show_deleted'          => 'Rodyti ištrintus naudotojus',
     'title' 				=> 'Antraštė',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Atnaujinti naudotoją',
     'username' 				=> 'Vartotojo vardas',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Tai naudojamą tik aktyviam direktorijos binding ne prisijungimui.)',
     'cloneuser'             => 'Kopijuoti naudotoją',
     'viewusers' 			=> 'Peržiūrėti naudotojus',

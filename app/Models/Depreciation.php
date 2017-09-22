@@ -1,16 +1,17 @@
 <?php
 namespace App\Models;
 
-use App\Models\SnipeModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Watson\Validating\ValidatingTrait;
 
 class Depreciation extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\DepreciationPresenter';
+    use Presentable;
     // Declare the rules for the form validation
     protected $rules = array(
         'name' => 'required|min:3|max:255|unique:depreciations,name',
-        'months' => 'required|max:3200|integer',
+        'months' => 'required|max:3600|integer',
     );
 
     /**
@@ -45,10 +46,10 @@ class Depreciation extends SnipeModel
       /**
       * Query builder scope to search on text
       *
-      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
       * @param  text                              $search      Search term
       *
-      * @return Illuminate\Database\Query\Builder          Modified query builder
+      * @return \Illuminate\Database\Query\Builder          Modified query builder
       */
     public function scopeTextSearch($query, $search)
     {

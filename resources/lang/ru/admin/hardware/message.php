@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Актив успешно восстановлен.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Не удалось удалить файл. Повторите попытку.',
         'success' => 'Файл успешно удален.',
@@ -37,17 +43,18 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Некоторые элементы не были импортированы корректно.',
+        'errorDetail'           => 'Следующие элементы не были импортированы из за ошибок.',
+        'success'               => "Ваш файл был импортирован",
+        'file_delete_success'   => "Ваш файл был успешно удален",
+        'file_delete_error'      => "Невозможно удалить файл",
     ),
 
 
     'delete' => array(
         'confirm'   	=> 'Вы уверены что хотите удалить этот актив?',
         'error'   		=> 'При удалении актива возникла проблема. Пожалуйста попробуйте снова.',
+        'nothing_updated'   => 'Ни один из активов не выбран, поэтому ничего не удалено.',
         'success' 		=> 'Актив был успешно удален.'
     ),
 
@@ -55,7 +62,7 @@ return array(
         'error'   		=> 'Актив не был привязан, пожалуйста попробуйте снова',
         'success' 		=> 'Актив успешно привязан.',
         'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Данный актив недоступен к выдаче!'
     ),
 
     'checkin' => array(
@@ -69,7 +76,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Актив не был запрошен, попробуйте ещё раз',
         'success' 		=> 'Актив запрошен успешно.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'Запрос актива успешно отменен'
     )
 
 );

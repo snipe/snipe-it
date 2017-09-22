@@ -1,12 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'     => 'About manufacturers',
-    'about_manufacturers_text'           => 'Manufacturers make all the magic items we consume.',
+    'about_manufacturers_title'    => 'O výrobcích',
+    'about_manufacturers_text'  => 'Výrobci jsou společnosti, které vytvářejí váš majetek. Zde můžete uložit důležitá kontaktní informace o podpoře, která se zobrazí na stránkách s podrobnostmi o majetku.',
     'asset_manufacturers'	=> 'Výrobci',
     'create'				=> 'Vytvořit výrobce',
     'id'   					=> 'ID',
-    'name'      			=> 'Název Výrobce',
+    'name'      			=> 'Název',
+    'support_email'   		=> 'Emailová podpora',
+    'support_phone'   		=> 'Telefonní podpora',
+    'support_url'   		=> 'URL podpory',
     'update'				=> 'Upravit Výrobce',
+    'url'   				=> 'URL',
 
 );

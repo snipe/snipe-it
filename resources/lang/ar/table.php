@@ -3,8 +3,8 @@
 return array(
 
     'actions'	 	=> 'الإجراءات',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'action' 		=> 'الإجراء',
+    'by'      		=> 'بواسطة',
+    'item' 			=> 'عنصر',
 
 );

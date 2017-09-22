@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'О лицензиях',
+    'about_licenses'                  => 'Лицензии используются для отслеживания программного обеспечения.  Как правило, количество пользователей, которые могут их использовать - ограничено',
     'checkin'  					=> 'Отвязать лицензию',
     'checkout_history'  		=> 'История привязок',
     'checkout'  				=> 'Привязать лицензию',

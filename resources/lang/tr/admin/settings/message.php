@@ -8,15 +8,15 @@ return array(
         'success'               => 'Ayarlar güncellendi.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
+        'delete_confirm'        => 'Bu yedek dosyayı silmek istediğinizden emin misiniz? Bu eylem geri alınamaz. ',
         'file_deleted'          => 'Yedek dosyası başarıyla silindi.',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'generated'             => 'Yeni bir yedekleme dosyası başarıyla oluşturuldu.',
+        'file_not_found'        => 'Bu yedek dosyası sunucuda bulunamadı.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Temizleme sırasında bir hata oluştu. ',
+        'validation_failed'     => 'Temizle onay kodu yanlıştır. Lütfen onay kutusuna "DELETE" yazın.',
+        'success'               => 'Silinen kayıtları başarıyla temizlendi.'
     ),
 
 );

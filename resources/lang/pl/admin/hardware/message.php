@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Aktywo zostało przywrócone.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Audyt aktywów nie powiódł się. Proszę spróbować ponownie.',
+        'success' 		=> 'Audyt aktywów pomyślnie zarejestrowany.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Plik nie zostały usunięte. Spróbuj ponownie.',
         'success' => 'Plik zostały usunięty.',
@@ -48,6 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Czy na pewno chcesz usunąć?',
         'error'   		=> 'Nie można usunąć. Proszę spróbować ponownie.',
+        'nothing_updated'   => 'Aktywa nie zostały wybrane, więc nic nie zostało usunięte.',
         'success' 		=> 'Nabytek został usunięty.'
     ),
 

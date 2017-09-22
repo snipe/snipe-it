@@ -20,7 +20,7 @@ class LocationsCest
         /* Create Form */
         $I->wantTo('Test Location Creation');
         $I->lookForwardTo('Finding no Failures');
-        $I->amOnPage(route('create/location'));
+        $I->amOnPage(route('locations.create'));
         $I->dontSee('Create Location', '.page-header');
         $I->see('Create Location', 'h1.pull-left');
     }
@@ -28,7 +28,7 @@ class LocationsCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/location'));
+        $I->amOnPage(route('locations.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -37,22 +37,15 @@ class LocationsCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short values");
-        $I->amOnPage(route('create/location'));
-        $I->fillField('name', 't2');
-        $I->fillField('address', 't2da');
-        $I->fillField('city', 't2');
-        $I->fillField('state', 't');
-        $I->fillField('zip', 't2');
+        $I->amOnPage(route('locations.create'));
+        $I->fillField('name', 't');
         $I->click('Save');
         $I->seeElement('.alert-danger');
-        $I->see('The name must be at least 3 characters', '.alert-msg');
-        $I->see('The address must be at least 5 characters', '.alert-msg');
-        $I->see('The city must be at least 3 characters', '.alert-msg');
-        $I->see('The zip must be at least 3 characters', '.alert-msg');
+        $I->see('The name must be at least 2 characters', '.alert-msg');
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $location = factory(App\Models\Location::class, 'location')->make();
+        $location = factory(App\Models\Location::class)->make();
         $values = [
             'name'              => $location->name,
             'parent_id'         => $I->getLocationId(),
@@ -65,7 +58,7 @@ class LocationsCest
             'zip'               => $location->zip,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/location'));
+        $I->amOnPage(route('locations.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('locations', $values);
         $I->seeElement('.alert-success');
@@ -74,7 +67,8 @@ class LocationsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a location');
-        $I->amOnPage(route('delete/location', Location::doesntHave('assets')->doesntHave('assignedAssets')->first()->id));
-        $I->seeElement('.alert-success');
+        $location = factory(App\Models\Location::class)->create();
+        $I->sendDelete(route('locations.destroy', $location->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

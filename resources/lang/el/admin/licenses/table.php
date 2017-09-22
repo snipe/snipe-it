@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
+    'assigned_to'   	=> 'Ανατέθηκε στον',
     'checkout'   		=> 'In/Out',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'license_email'   	=> 'Άδεια χρήσης ηλεκτρονικού ταχυδρομείου',
+    'license_name'   	=> 'Την άδεια να',
+    'purchase_date'   	=> 'Ημερομηνία αγοράς',
+    'purchased'   		=> 'Αγοράστηκε',
+    'seats'   			=> 'Θέσεις',
     'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'serial'   			=> 'Σειριακός',
+    'title'      		=> 'Άδεια Χρήσεως',
 
 );

@@ -8,7 +8,7 @@
 
 {{-- Page title --}}
 @section('header_right')
-<a href="{{ route('create/manufacturer') }}" class="btn btn-primary pull-right">
+<a href="{{ route('manufacturers.create') }}" class="btn btn-primary pull-right">
   {{ trans('general.create') }}</a>
 @stop
 
@@ -20,35 +20,28 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
+          <table
+          name="manufacturers"
+          class="table table-striped snipe-table"
+          id="table"
+          data-url="{{route('api.manufacturers.index') }}"
+          data-cookie="true"
+          data-click-to-select="true"
+          data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">
 
-        <table
-        name="manufacturers"
-        class="table table-striped snipe-table"
-        id="table"
-        data-url="{{route('api.manufacturers.list') }}"
-        data-cookie="true"
-        data-click-to-select="true"
-        data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">
-            <thead>
-                <tr>
-                    <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                    <th data-sortable="true" data-field="name">{{ trans('admin/manufacturers/table.name') }}</th>
-                    <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="assets">{{ trans('general.assets') }}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
-                </tr>
-            </thead>
-        </table>
-
-      </div>
+          </table>
+        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
-
-
   </div>
 </div>
 
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'manufacturers-export', 'search' => true])
+  @include ('partials.bootstrap-table',
+      ['exportFile' => 'manufacturers-export',
+      'search' => true,
+      'columns' => \App\Presenters\ManufacturerPresenter::dataTableLayout()
+  ])
 @stop

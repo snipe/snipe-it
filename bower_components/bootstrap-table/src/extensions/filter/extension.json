@@ -1,0 +1,17 @@
+{
+  "name": "Filter",
+  "version": "1.0.0",
+  "description": "Plugin to filter the boostrap table data.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/filter",
+  "example": "#",
+
+  "plugins": [{
+    "name": "bootstrap-table-filter",
+    "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/filter"
+  }],
+
+  "author": {
+    "name": "wenzhixin",
+    "image": "https://avatars1.githubusercontent.com/u/2117018"
+  }
+}

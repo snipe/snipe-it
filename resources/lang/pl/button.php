@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Akcje',
     'add'    	                => 'Dodaj nowy',
     'cancel'                    => 'Anuluj',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'Zamówienie',
     'submit'  	                => 'Zatwierdź',
     'upload'                    => 'Wgraj',
-
+	'select_file'				=> 'Wybierz plik...',
 );

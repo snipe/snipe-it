@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'Về Danh mục',
+    'about_categories'  				=> 'Danh mục giúp bạn quản lý các mục của bạn. Ví dụ như danh mục có thể là Máy tính để bàn (Desktops), Máy tính xách tay (Laptops), Điện thoại di động (Mobile Phones), Máy tính bảng,... nhưng bản có thể sử dụng danh mục này bằng bất kỳ cách nào mà bạn cảm thấy phù hợp.',
     'asset_categories' 					=> 'Danh mục tài sản',
     'category_name'  					=> 'Tên hạng mục',
     'checkin_email'                     => 'Gửi email đến người dùng đang checkin.',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Chính sửa hạng mục',
     'eula_text'							=> 'Danh mục EULA',
     'eula_text_help'					=> 'Đây là trường cho phép bạn điều chỉnh EULA cho những loại tài sản riêng biệt. Nếu bạn chỉ có một EULA cho tất cả tài sản, bạn có thể nhấn chọn vào ô bên dưới để sử dụng như là giá trị mặc định.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'Yêu cầu người dùng xác nhận nhận tài sản trong hạng mục này.',
     'required_acceptance'				=> 'Người dùng sẽ nhận được email có chứa đường dẫn để xác nhận chấp nhận tài sản này.',
     'required_eula'						=> 'Đây là người dùng đã được gửi một email bản sao của EULA',

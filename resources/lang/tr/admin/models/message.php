@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => 'Klasör oluşturulmadı, lütfen tekrar deneyin.',
         'success' => 'Model oluşturuldu.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Bu üretici ve model numarası ile bir varlık ve model zaten var.',
     ),
 
     'update' => array(
@@ -26,6 +26,11 @@ return array(
     'restore' => array(
         'error'   		=> 'Model geri getirilemedi, lütfen tekrar deneyin',
         'success' 		=> 'Model geri getirildi.'
+    ),
+
+    'bulkedit' => array(
+        'error'   		=> 'Hiçbir alan değiştirilmedi, dolayısıyla hiç bir alan güncellenmedi.',
+        'success' 		=> 'Model güncellendi.'
     ),
 
 );

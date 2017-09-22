@@ -23,6 +23,12 @@ return array(
         'success' 		=> 'Ativo restaurado com sucesso.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'O arquivo não foi excluído. Tente novamente.',
         'success' => 'Arquivo excluído com sucesso.',
@@ -47,6 +53,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Tem certeza de que deseja excluir este ativo?',
         'error'   		=> 'Houve um problema ao excluir o ativo. Tente novamente.',
+        'nothing_updated'   => 'Nenhum ativo foi selecionado, então nada foi deletado.',
         'success' 		=> 'O ativo foi excluído com sucesso.'
     ),
 
@@ -68,7 +75,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
         'success' 		=> 'Ativo solicitado com sucesso.',
-        'canceled'      => 'Requisição cancelado com sucesso'
+        'canceled'      => 'Requisição cancelada com sucesso'
     )
 
 );

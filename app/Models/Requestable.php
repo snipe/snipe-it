@@ -19,9 +19,9 @@ trait Requestable
 
     public function isRequestedBy(User $user)
     {
-        return $this->requests()
-            ->where('user_id', $user->id)
-            ->exists();
+        $requests = $this->requests->where('user_id', $user->id);
+
+        return $requests->count() > 0;
     }
 
     public function scopeRequestedBy($query, User $user)

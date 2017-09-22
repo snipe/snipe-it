@@ -1,15 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\ActionLog;
-use App\Models\Category;
-use App\Models\Company;
-use App\Models\ConsumableAssignment;
-use App\Models\Location;
-use App\Models\Loggable;
-use App\Models\SnipeModel;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
@@ -20,14 +12,13 @@ use Watson\Validating\ValidatingTrait;
  */
 class Component extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\ComponentPresenter';
     use CompanyableTrait;
-    use Loggable;
+    use Loggable, Presentable;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
     protected $table = 'components';
-
-
     /**
     * Category validation rules
     */
@@ -35,9 +26,9 @@ class Component extends SnipeModel
         'name'        => 'required|min:3|max:255',
         'qty'     => 'required|integer|min:1',
         'category_id' => 'required|integer',
-        'company_id'  => 'integer',
-        'purchase_date'  => 'date',
-        'purchase_cost'   => 'numeric',
+        'company_id'  => 'integer|nullable',
+        'purchase_date'  => 'date|nullable',
+        'purchase_cost'   => 'numeric|nullable',
     );
 
     /**
@@ -55,7 +46,15 @@ class Component extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','company_id','category_id'];
+    protected $fillable = [
+        'category_id',
+        'company_id',
+        'location_id',
+        'name',
+        'purchase_cost',
+        'purchase_date',
+        'qty',
+    ];
 
     public function location()
     {

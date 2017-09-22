@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Standort nicht verfügbar.',
+    'does_not_exist' => 'Der Standort ist nicht vorhanden.',
     'assoc_users'	 => 'Dieser Standort ist mit mindestens einem Benutzer verknüpft und kann nicht gelöscht werden. Bitte Benutzer updaten, so dass dieser Standort nicht mehr verknüpft ist und erneut versuchen. ',
     'assoc_assets'	 => 'Dieser Ort ist mit mindestens einem Asset verknüpft und kann nicht gelöscht werden. Bitte Asset updaten, so dass dieser Standort nicht mehr verknüpft ist und erneut versuchen. ',
     'assoc_child_loc'	 => 'Dieser Ort ist mit mindestens einem anderen Ort übergeordnet und kann nicht gelöscht werden. Bitte Orte aktualisieren, so dass dieser Standort nicht mehr verknüpft ist und erneut versuchen. ',

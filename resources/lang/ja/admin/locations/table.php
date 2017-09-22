@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations_title'     => '設置場所について',
+    'about_locations'           => '設置場所はユーザー、資産、およびその他のアイテムの情報追跡に使用されます。',
     'assets_rtd'                => '資産', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => '資産割当先',
     'id'                        => 'ID',
@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'ロケーション',
     'parent'                    => '上位',
     'currency'                  => '現地通貨',
+    'ldap_ou'                   => 'LDAP OU を検索',
     );

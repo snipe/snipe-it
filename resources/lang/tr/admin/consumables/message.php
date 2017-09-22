@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => 'Bu sarf malzemesini silmek istediğinizden emin misiniz?',
         'error'   => 'Sarf malzemesi\'ni silerken hata oluştu. Lütfen tekrar deneyin.',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => 'Sarf malzemesi başarıyla silindi.'
     ),
 
      'checkout' => array(

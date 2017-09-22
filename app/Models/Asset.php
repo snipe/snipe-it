@@ -1,22 +1,17 @@
 <?php
 namespace App\Models;
 
-use App\Helpers\Helper;
+use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\Actionlog;
-use App\Models\Company;
-use App\Models\Location;
-use App\Models\Loggable;
-use App\Models\Requestable;
-use App\Models\Setting;
+use App\Presenters\Presentable;
+use AssetPresenter;
 use Auth;
+use Carbon\Carbon;
 use Config;
-use DateTime;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
-use Parsedown;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Model for Assets.
@@ -25,10 +20,13 @@ use Watson\Validating\ValidatingTrait;
  */
 class Asset extends Depreciable
 {
-    use Loggable;
+    protected $presenter = 'App\Presenters\AssetPresenter';
+    use Loggable, Requestable, Presentable, Notifiable;
     use SoftDeletes;
-    use Requestable;
 
+    const LOCATION = 'location';
+    const ASSET = 'asset';
+    const USER = 'user';
   /**
   * The database table used by the model.
   *
@@ -44,32 +42,81 @@ class Asset extends Depreciable
   * @var boolean
   */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    use UniqueUndeletedTrait;
 
-    protected $rules = [
-    'name'            => 'min:2|max:255',
-    'model_id'        => 'required|integer',
-    'status_id'       => 'required|integer',
-    'company_id'      => 'integer',
-    'warranty_months' => 'integer|min:0|max:240',
-    'physical'         => 'integer',
-    'checkout_date'   => 'date|max:10|min:10',
-    'checkin_date'    => 'date|max:10|min:10',
-    'supplier_id'     => 'integer',
-    'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
-    'status'          => 'integer',
-    'purchase_cost'   => 'numeric',
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'purchase_date',
+        'last_checkout',
+        'expected_checkin'
     ];
 
+
+    use ValidatingTrait, UniqueUndeletedTrait;
+
+    protected $rules = [
+        'name'            => 'max:255|nullable',
+        'model_id'        => 'required|integer|exists:models,id',
+        'status_id'       => 'required|integer|exists:status_labels,id',
+        'company_id'      => 'integer|nullable',
+        'warranty_months' => 'numeric|nullable',
+        'physical'         => 'numeric|max:1|nullable',
+        'checkout_date'   => 'date|max:10|min:10|nullable',
+        'checkin_date'    => 'date|max:10|min:10|nullable',
+        'supplier_id'     => 'numeric|nullable',
+        'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
+        'status'          => 'integer',
+        'purchase_cost'   => 'numeric|nullable',
+        'next_audit_date'  => 'date|nullable',
+    ];
 
   /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
-    protected $fillable = ['name','model_id','status_id','asset_tag'];
+    protected $fillable = [
+        'asset_tag',
+        'assigned_to',
+        'assigned_type',
+        'company_id',
+        'image',
+        'model_id',
+        'name',
+        'notes',
+        'purchase_cost',
+        'purchase_date',
+        'rtd_location_id',
+        'serial',
+        'status_id',
+        'supplier_id',
+        'warranty_months',
+    ];
 
+    public function getDisplayNameAttribute()
+    {
+        return $this->present()->name();
+    }
+
+    /**
+     * Returns the warranty expiration date as Carbon object
+     * @return \Carbon|null
+     */
+    public function getWarrantyExpiresAttribute()
+    {
+        if (isset($this->attributes['warranty_months']) && isset($this->attributes['purchase_date'])) {
+            if (is_string($this->attributes['purchase_date']) || is_string($this->attributes['purchase_date'])) {
+                $purchase_date = \Carbon\Carbon::parse($this->attributes['purchase_date']);
+            } else {
+                $purchase_date = \Carbon\Carbon::instance($this->attributes['purchase_date']);
+            }
+            $purchase_date->setTime(0, 0, 0);
+            return $purchase_date->addMonths((int) $this->attributes['warranty_months']);
+        }
+
+        return null;
+    }
 
     public function company()
     {
@@ -79,19 +126,27 @@ class Asset extends Depreciable
 
     public function availableForCheckout()
     {
-      return (
+        return (
           empty($this->assigned_to) &&
           $this->assetstatus->deployable == 1 &&
           empty($this->deleted_at)
         );
     }
 
-  /**
-  * Checkout asset
-  */
-    public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
+    /**
+     * Checkout asset
+     * @param User $user
+     * @param User $admin
+     * @param Carbon $checkout_at
+     * @param null $expected_checkin
+     * @param string $note
+     * @param null $name
+     * @return bool
+     */
+    //FIXME: The admin parameter is never used. Can probably be removed.
+    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
-        if (!$user) {
+        if (!$target) {
             return false;
         }
 
@@ -101,104 +156,31 @@ class Asset extends Depreciable
 
         $this->last_checkout = $checkout_at;
 
-        $this->assigneduser()->associate($user);
+        $this->assignedTo()->associate($target);
 
-        if($name != null)
-        {
+
+        if ($name != null) {
             $this->name = $name;
         }
 
-        $settings = Setting::getSettings();
-
         if ($this->requireAcceptance()) {
+            if(get_class($target) != User::class) {
+                throw new CheckoutNotAllowed;
+            }
             $this->accepted="pending";
         }
 
-
-
         if ($this->save()) {
-
-            // $action, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null
-            $log = $this->createLogRecord('checkout', $this, $admin, $user, $expected_checkin, $note, $checkout_at);
-
-            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
-                $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
-            }
-
-            if ($settings->slack_endpoint) {
-                $this->checkOutNotifySlack($settings, $admin, $note);
-            }
+            $this->logCheckout($note, $target);
             return true;
-
         }
         return false;
-
     }
-
-    public function checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note)
-    {
-        $data['log_id'] = $log_id;
-        $data['eula'] = $this->getEula();
-        $data['first_name'] = $user->first_name;
-        $data['item_name'] = $this->showAssetName();
-        $data['checkout_date'] = $checkout_at;
-        $data['expected_checkin'] = $expected_checkin;
-        $data['item_tag'] = $this->asset_tag;
-        $data['note'] = $note;
-        $data['item_serial'] = $this->serial;
-        $data['require_acceptance'] = $this->requireAcceptance();
-
-        if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && (!config('app.lock_passwords'))) {
-
-            \Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject(trans('mail.Confirm_asset_delivery'));
-            });
-        }
-
-    }
-
-    public function checkOutNotifySlack($settings, $admin, $note = null)
-    {
-
-        if ($settings->slack_endpoint) {
-
-            $slack_settings = [
-            'username' => $settings->botname,
-            'channel' => $settings->slack_channel,
-            'link_names' => true
-            ];
-
-            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-            try {
-                $client->attach([
-                'color' => 'good',
-                'fields' => [
-                [
-                  'title' => 'Checked Out:',
-                  'value' => 'HARDWARE asset <'.config('app.url').'/hardware/'.$this->id.'/view'.'|'.$this->showAssetName().'> checked out to <'.config('app.url').'/admin/users/'.$this->assigned_to.'/view|'.$this->assigneduser->fullName().'> by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.$admin->fullName().'>.'
-                ],
-                [
-                    'title' => 'Note:',
-                    'value' => e($note)
-                ],
-                  ]
-                ])->send('Asset Checked Out');
-
-            } catch (Exception $e) {
-                LOG::error($e);
-            }
-        }
-
-    }
-
 
     public function getDetailedNameAttribute()
     {
-        if ($this->assignedUser) {
-            $user_name = $this->assignedUser->fullName();
+        if ($this->assignedTo) {
+            $user_name = $this->assignedTo->present()->name();
         } else {
             $user_name = "Unassigned";
         }
@@ -207,38 +189,6 @@ class Asset extends Depreciable
     public function validationRules($id = '0')
     {
         return $this->rules;
-    }
-
-
-    public function createLogRecord($action, $asset, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null)
-    {
-
-        $logaction = new Actionlog();
-        $logaction->item_type = Asset::class;
-        $logaction->item_id = $this->id;
-        $logaction->target_type = User::class;
-        // On Checkin, this is the user that previously had the asset.
-        $logaction->target_id = $user->id;
-        $logaction->note = $note;
-        $logaction->user_id = $admin->id;
-        if ($checkout_at!='') {
-            $logaction->created_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', strtotime($checkout_at)));
-        } else {
-            $logaction->created_at = \Carbon\Carbon::now();
-        }
-
-        if ($action=="checkout") {
-            if ($user) {
-                $logaction->location_id = $user->location_id;
-            }
-        } else {
-            // Update the asset data to null, since it's being checked in
-            $logaction->location_id = null;
-        }
-        $logaction->user()->associate($admin);
-        $log = $logaction->logaction($action);
-
-        return $logaction;
     }
 
 
@@ -271,7 +221,6 @@ class Asset extends Depreciable
    */
     public function uploads()
     {
-
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
                   ->where('item_type', '=', Asset::class)
                   ->where('action_type', '=', 'uploaded')
@@ -279,24 +228,53 @@ class Asset extends Depreciable
                   ->orderBy('created_at', 'desc');
     }
 
-    public function assigneduser()
+    /**
+     * Even though we allow allow for checkout to things beyond users
+     * this method is an easy way of seeing if we are checked out to a user.
+     * @return mixed
+     */
+    public function checkedOutToUser()
     {
-        return $this->belongsTo('\App\Models\User', 'assigned_to')
-                  ->withTrashed();
+      return $this->assignedType() === self::USER;
+    }
+
+    public function assignedTo()
+    {
+        return $this->morphTo('assigned', 'assigned_type', 'assigned_to');
+    }
+
+    public function assignedAssets()
+    {
+        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
   /**
    * Get the asset's location based on the assigned user
    **/
-    public function assetloc()
+    public function assetLoc()
     {
-        if ($this->assigneduser) {
-            return $this->assigneduser->userloc();
-        } else {
-            return $this->belongsTo('\App\Models\Location', 'rtd_location_id');
+        if (!empty($this->assignedType())) {
+            // dd($this->assignedType());
+            if ($this->assignedType() == self::ASSET) {
+                return $this->assignedto->assetloc(); // Recurse until we have a final location
+            }
+            if ($this->assignedType() == self::LOCATION) {
+                return $this->assignedTo();
+            }
+            if ($this->assignedType() == self::USER) {
+                return $this->assignedTo->userLoc();
+            }
+            if (!$this->assignedTo) {
+                return $this->defaultLoc();
+            }
         }
+        return $this->defaultLoc();
     }
 
+    public function assignedType()
+    {
+        return strtolower(class_basename($this->assigned_type));
+    }
   /**
    * Get the asset's location based on default RTD location
    **/
@@ -304,6 +282,18 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('\App\Models\Location', 'rtd_location_id');
     }
+
+
+    public function getImageUrl()
+    {
+        if ($this->image && !empty($this->image)) {
+            return url('/').'/uploads/assets/'.$this->image;
+        } elseif ($this->model && !empty($this->model->image)) {
+            return url('/').'/uploads/models/'.$this->model->image;
+        }
+        return false;
+    }
+
 
   /**
    * Get action logs for this asset
@@ -327,7 +317,6 @@ class Asset extends Depreciable
    */
     public function assetmaintenances()
     {
-
         return $this->hasMany('\App\Models\AssetMaintenance', 'asset_id')
                   ->orderBy('created_at', 'desc');
     }
@@ -345,7 +334,6 @@ class Asset extends Depreciable
    */
     public static function assetcount()
     {
-
         return Company::scopeCompanyables(Asset::where('physical', '=', '1'))
                ->whereNull('deleted_at', 'and')
                ->count();
@@ -356,11 +344,9 @@ class Asset extends Depreciable
    */
     public static function availassetcount()
     {
-
         return Asset::RTD()
                   ->whereNull('deleted_at')
                   ->count();
-
     }
 
   /**
@@ -368,11 +354,9 @@ class Asset extends Depreciable
    */
     public static function getRequestable()
     {
-
         return Asset::Requestable()
                   ->whereNull('deleted_at')
                   ->count();
-
     }
 
   /**
@@ -383,35 +367,6 @@ class Asset extends Depreciable
         return $this->belongsTo('\App\Models\Statuslabel', 'status_id');
     }
 
-  /**
-   * Get name for EULA
-   **/
-    public function showAssetName()
-    {
-
-        if ($this->name == '') {
-            if ($this->model) {
-                return $this->model->name.' ('.$this->asset_tag.')';
-            }
-            return $this->asset_tag;
-        } else {
-            return $this->name;
-        }
-    }
-
-    public function getDisplayNameAttribute()
-    {
-        return $this->showAssetName();
-    }
-
-    public function warrantee_expires()
-    {
-        $date = date_create($this->purchase_date);
-        date_add($date, date_interval_create_from_date_string($this->warranty_months . ' months'));
-        return date_format($date, 'Y-m-d');
-    }
-
-
     public function model()
     {
         return $this->belongsTo('\App\Models\AssetModel', 'model_id')->withTrashed();
@@ -419,7 +374,6 @@ class Asset extends Depreciable
 
     public static function getExpiringWarrantee($days = 30)
     {
-
         return Asset::where('archived', '=', '0')
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
@@ -449,40 +403,15 @@ class Asset extends Depreciable
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
     }
 
-    public function months_until_eol()
-    {
 
-        $today = date("Y-m-d");
-        $d1    = new DateTime($today);
-        $d2    = new DateTime($this->eol_date());
-
-        if ($this->eol_date() > $today) {
-            $interval = $d2->diff($d1);
-        } else {
-            $interval = null;
-        }
-
-        return $interval;
-    }
-
-    public function eol_date()
-    {
-
-        if (( $this->purchase_date ) && ( $this->model )) {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->eol . ' months'));
-            return date_format($date, 'Y-m-d');
-        }
-
-    }
 
   /**
    * Get auto-increment
    */
     public static function autoincrement_asset()
     {
-
         $settings = \App\Models\Setting::getSettings();
+
 
         if ($settings->auto_increment_assets == '1') {
             $temp_asset_tag = \DB::table('assets')
@@ -493,22 +422,51 @@ class Asset extends Depreciable
             $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
 
             if ($settings->zerofill_count > 0) {
-                return $settings->auto_increment_prefix.Asset::zerofill(($asset_tag + 1),$settings->zerofill_count);
+                return $settings->auto_increment_prefix.Asset::zerofill($settings->next_auto_tag_base, $settings->zerofill_count);
             }
-            return $settings->auto_increment_prefix.($asset_tag + 1);
+            return $settings->auto_increment_prefix.$settings->next_auto_tag_base;
         } else {
             return false;
         }
     }
 
+    /*
+     * Get the next base number for the auto-incrementer. We'll add the zerofill and
+     * prefixes on the fly as we generate the number
+     *
+     */
+    public static function nextAutoIncrement($assets)
+    {
 
-    public static function zerofill ($num, $zerofill = 3)
+        $max = 1;
+
+        foreach ($assets as $asset) {
+            $results = preg_match ( "/\d+$/" , $asset['asset_tag'], $matches);
+
+            if ($results)
+            {
+                $number = $matches[0];
+
+                if ($number > $max)
+                {
+                    $max = $number;
+                }
+            }
+        }
+        return $max + 1;
+
+    }
+
+
+
+
+    public static function zerofill($num, $zerofill = 3)
     {
         return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
     }
 
 
-public function checkin_email()
+    public function checkin_email()
     {
         return $this->model->category->checkin_email;
     }
@@ -520,7 +478,6 @@ public function checkin_email()
 
     public function getEula()
     {
-
         $Parsedown = new \Parsedown();
 
         if ($this->model->category->eula_text) {
@@ -530,7 +487,6 @@ public function checkin_email()
         } else {
             return null;
         }
-
     }
 
 
@@ -543,30 +499,27 @@ public function checkin_email()
   /**
    * Query builder scope for hardware
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeHardware($query)
     {
-
         return $query->where('physical', '=', '1');
     }
 
   /**
    * Query builder scope for pending assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopePending($query)
     {
-
         return $query->whereHas('assetstatus', function ($query) {
-
             $query->where('deployable', '=', 0)
                 ->where('pending', '=', 1)
                 ->where('archived', '=', 0);
@@ -575,22 +528,28 @@ public function checkin_email()
 
 
     /**
-    * Query builder scope for pending assets
+    * Query builder scope for searching location
     *
-    * @param  Illuminate\Database\Query\Builder $query Query builder instance
+    * @param  \Illuminate\Database\Query\Builder $query Query builder instance
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
 
     public function scopeAssetsByLocation($query, $location)
     {
         return $query->where(function ($query) use ($location) {
-
-            $query->whereHas('assigneduser', function ($query) use ($location) {
-
-                $query->where('users.location_id', '=', $location->id);
+            $query->whereHas('assignedTo', function ($query) use ($location) {
+                $query->where([
+                    ['users.location_id', '=', $location->id],
+                    ['assets.assigned_type', '=', User::class]
+                ])->orWhere([
+                    ['locations.id', '=', $location->id],
+                    ['assets.assigned_type', '=', Location::class]
+                ])->orWhere([
+                    ['assets.rtd_location_id', '=', $location->id],
+                    ['assets.assigned_type', '=', Asset::class]
+                ]);
             })->orWhere(function ($query) use ($location) {
-
                 $query->where('assets.rtd_location_id', '=', $location->id);
                 $query->whereNull('assets.assigned_to');
             });
@@ -601,17 +560,15 @@ public function checkin_email()
     /**
     * Query builder scope for RTD assets
     *
-    * @param  Illuminate\Database\Query\Builder $query Query builder instance
+    * @param  \Illuminate\Database\Query\Builder $query Query builder instance
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
 
     public function scopeRTD($query)
     {
-
         return $query->whereNULL('assigned_to')
                    ->whereHas('assetstatus', function ($query) {
-
                        $query->where('deployable', '=', 1)
                              ->where('pending', '=', 0)
                              ->where('archived', '=', 0);
@@ -621,16 +578,14 @@ public function checkin_email()
   /**
    * Query builder scope for Undeployable assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeUndeployable($query)
     {
-
         return $query->whereHas('assetstatus', function ($query) {
-
             $query->where('deployable', '=', 0)
                 ->where('pending', '=', 0)
                 ->where('archived', '=', 0);
@@ -640,16 +595,14 @@ public function checkin_email()
     /**
      * Query builder scope for non-Archived assets
      *
-     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
 
     public function scopeNotArchived($query)
     {
-
         return $query->whereHas('assetstatus', function ($query) {
-
             $query->where('archived', '=', 0);
         });
     }
@@ -657,16 +610,14 @@ public function checkin_email()
   /**
    * Query builder scope for Archived assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeArchived($query)
     {
-
         return $query->whereHas('assetstatus', function ($query) {
-
             $query->where('deployable', '=', 0)
                 ->where('pending', '=', 0)
                 ->where('archived', '=', 1);
@@ -676,31 +627,28 @@ public function checkin_email()
   /**
    * Query builder scope for Deployed assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeDeployed($query)
     {
-
         return $query->where('assigned_to', '>', '0');
     }
 
   /**
    * Query builder scope for Requestable assets
    *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   * @param  \Illuminate\Database\Query\Builder $query Query builder instance
    *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
+   * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
     public function scopeRequestableAssets($query)
     {
-
         return Company::scopeCompanyables($query->where('requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
-
             $query->where('deployable', '=', 1)
                  ->where('pending', '=', 0)
                  ->where('archived', '=', 0);
@@ -711,9 +659,9 @@ public function checkin_email()
   /**
   * Query builder scope for Deleted assets
   *
-  * @param  Illuminate\Database\Query\Builder $query Query builder instance
+  * @param  \Illuminate\Database\Query\Builder $query Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
 
     public function scopeDeleted($query)
@@ -740,9 +688,9 @@ public function checkin_email()
   /**
   * Query builder scope to get not-yet-accepted assets
   *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
     public function scopeNotYetAccepted($query)
     {
@@ -752,9 +700,9 @@ public function checkin_email()
   /**
   * Query builder scope to get rejected assets
   *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
     public function scopeRejected($query)
     {
@@ -765,9 +713,9 @@ public function checkin_email()
   /**
   * Query builder scope to get accepted assets
   *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
   *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
+  * @return \Illuminate\Database\Query\Builder          Modified query builder
   */
     public function scopeAccepted($query)
     {
@@ -778,17 +726,16 @@ public function checkin_email()
     /**
     * Query builder scope to search on text for complex Bootstrap Tables API
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $search      Search term
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeTextSearch($query, $search)
     {
         $search = explode(' OR ', $search);
 
         return $query->where(function ($query) use ($search) {
-
             foreach ($search as $search) {
                 $query->whereHas('model', function ($query) use ($search) {
                     $query->whereHas('category', function ($query) use ($search) {
@@ -804,9 +751,14 @@ public function checkin_email()
                             $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
                         });
                     });
+
                 })->orWhere(function ($query) use ($search) {
                     $query->whereHas('assetstatus', function ($query) use ($search) {
                         $query->where('status_labels.name', 'LIKE', '%'.$search.'%');
+                    });
+                })->orWhere(function ($query) use ($search) {
+                    $query->whereHas('supplier', function ($query) use ($search) {
+                        $query->where('suppliers.name', 'LIKE', '%'.$search.'%');
                     });
                 })->orWhere(function ($query) use ($search) {
                     $query->whereHas('company', function ($query) use ($search) {
@@ -816,18 +768,26 @@ public function checkin_email()
                     $query->whereHas('defaultLoc', function ($query) use ($search) {
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
                     });
-                })->orWhere(function ($query) use ($search) {
-                    $query->whereHas('assigneduser', function ($query) use ($search) {
-                        $query->where(function ($query) use ($search) {
-                            $query->where('users.first_name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('users.last_name', 'LIKE', '%'.$search.'%')
-                            ->orWhere(function ($query) use ($search) {
-                                $query->whereHas('userloc', function ($query) use ($search) {
-                                    $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                                });
-                            });
-                        });
-                    });
+                    //FIXME: This needs attention to work with checkout to not-users.
+                // })->orWhere(function ($query) use ($search) {
+                    // $query->whereHas('assignedTo', function ($query) use ($search) {
+                    //     $query->where(function ($query) use ($search) {
+                    //         $query->where('assets.assigned_type', '=', User::class)
+                    //         ->join('users', 'users.id', '=', 'assets.assigned_to')
+                    //         ->where(function($query) use ($search) {
+                    //             $query->where('users.first_name', 'LIKE', '%'.$search.'%')
+                    //             ->orWhere('users.last_name', 'LIKE', '%'.$search.'%');
+                    //         });
+                    //     })->orWhere(function ($query) use ($search) {
+                    //         $query->where('assets.assigned_type', '=', Location::class)
+                    //         ->join('locations', 'locations.id', '=', 'assets.assigned_to')
+                    //         ->where('locations.name', 'LIKE', '%'.$search.'%');
+                    //     })->orWhere(function ($query) use ($search) {
+                    //         $query->where('assets.assigned_type', '=', Asset::class)
+                    //         ->join('assets as assigned_asset', 'assigned_assets.id', '=', 'assets.assigned_to')
+                    //         ->where('assigned_assets.name', 'LIKE', '%'.$search.'%');
+                    //     });
+                    // });
                 })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
@@ -840,13 +800,134 @@ public function checkin_email()
         });
     }
 
+
+
+    /**
+     * Query builder scope to search on text filters for complex Bootstrap Tables API
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text   $filter   JSON array of search keys and terms
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeByFilter($query, $filter)
+    {
+        return $query->where(function ($query) use ($filter) {
+            foreach ($filter as $key => $search_val) {
+                if ($key =='asset_tag') {
+                    $query->where('assets.asset_tag', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='name') {
+                    $query->where('assets.name', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='product_key') {
+                    $query->where('assets.serial', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='purchase_date') {
+                    $query->where('assets.purchase_date', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='purchase_cost') {
+                    $query->where('assets.purchase_cost', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='notes') {
+                    $query->where('assets.notes', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='order_number') {
+                    $query->where('assets.order_number', 'LIKE', '%'.$search_val.'%');
+                }
+
+                if ($key =='status_label') {
+                    $query->whereHas('assetstatus', function ($query) use ($search_val) {
+                        $query->where('status_labels.name', 'LIKE', '%' . $search_val . '%');
+                    });
+                }
+
+                if ($key =='location') {
+                    $query->whereHas('defaultLoc', function ($query) use ($search_val) {
+                        $query->where('locations.name', 'LIKE', '%' . $search_val . '%');
+                    });
+                }
+
+                if ($key =='checkedout_to') {
+                    $query->whereHas('assigneduser', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('users.first_name', 'LIKE', '%' . $search . '%')
+                                ->orWhere('users.last_name', 'LIKE', '%' . $search . '%');
+                        });
+                    });
+                }
+
+
+                if ($key =='manufacturer') {
+                    $query->whereHas('model', function ($query) use ($search_val) {
+                        $query->whereHas('manufacturer', function ($query) use ($search_val) {
+                            $query->where(function ($query) use ($search_val) {
+                                $query->where('manufacturers.name', 'LIKE', '%'.$search_val.'%');
+                            });
+                        });
+                    });
+                }
+
+                if ($key =='category') {
+                    $query->whereHas('model', function ($query) use ($search) {
+                        $query->whereHas('category', function ($query) use ($search) {
+                            $query->where(function ($query) use ($search_val) {
+                                $query->where('categories.name', 'LIKE', '%' . $search_val . '%')
+                                    ->orWhere('models.name', 'LIKE', '%' . $search_val . '%')
+                                    ->orWhere('models.model_number', 'LIKE', '%' . $search_val . '%');
+                            });
+                        });
+                    });
+                }
+
+                if ($key =='model') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('model', function ($query) use ($search_val) {
+                            $query->where('models.name', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
+
+                if ($key =='model_number') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('model', function ($query) use ($search_val) {
+                            $query->where('models.model_number', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
+
+
+                if ($key =='company') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('company', function ($query) use ($search_val) {
+                            $query->where('companies.name', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
+            }
+
+            foreach (CustomField::all() as $field) {
+                if (array_key_exists($field->db_column_name(), $filter)) {
+                    $query->orWhere($field->db_column_name(), 'LIKE', "%$search_val%");
+                }
+            }
+        });
+    }
+
+
     /**
     * Query builder scope to order on model
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderModels($query, $order)
     {
@@ -856,10 +937,10 @@ public function checkin_email()
     /**
     * Query builder scope to order on model number
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderModelNumber($query, $order)
     {
@@ -870,10 +951,10 @@ public function checkin_email()
     /**
     * Query builder scope to order on assigned user
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderAssigned($query, $order)
     {
@@ -883,37 +964,68 @@ public function checkin_email()
     /**
     * Query builder scope to order on status
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderStatus($query, $order)
     {
         return $query->join('status_labels', 'assets.status_id', '=', 'status_labels.id')->orderBy('status_labels.name', $order);
     }
 
-  /**
+    /**
     * Query builder scope to order on company
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'assets.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
     }
 
-  /**
-  * Query builder scope to order on category
-  *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-  * @param  text                              $order         Order
-  *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
-  */
+
+    /**
+     * Query builder scope to return results of a category
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text $order Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeInCategory($query, $category_id)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('categories', 'models.category_id', '=', 'categories.id')->where('models.category_id', '=', $category_id);
+    }
+
+    /**
+     * Query builder scope to return results of a manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text $order Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeByManufacturer($query, $manufacturer_id)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->where('models.manufacturer_id', '=', $manufacturer_id);
+    }
+
+
+
+    /**
+    * Query builder scope to order on category
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order         Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeOrderCategory($query, $order)
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')
@@ -925,10 +1037,10 @@ public function checkin_email()
     /**
      * Query builder scope to order on manufacturer
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $order         Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderManufacturer($query, $order)
     {
@@ -937,18 +1049,57 @@ public function checkin_email()
             ->orderBy('manufacturers.name', $order);
     }
 
-  /**
+   /**
     * Query builder scope to order on location
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-  * TODO: Extend this method out for checked out assets as well. Right now it
-  * only checks the location name related to rtd_location_id
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderLocation($query, $order)
     {
         return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
     }
+
+
+    /**
+     * Query builder scope to order on supplier name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers', 'assets.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+    }
+
+    /**
+     * Query builder scope to search on location ID
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeByLocationId($query, $search)
+    {
+        return $query->where(function ($query) use ($search) {
+            $query->whereHas('defaultLoc', function ($query) use ($search) {
+                $query->where('locations.id', '=', $search);
+            });
+        });
+        // FIXME: This needs porting to checkout to non-user.
+        // ->orWhere(function ($query) use ($search) {
+        //     $query->whereHas('assigneduser', function ($query) use ($search) {
+        //         $query->whereHas('userloc', function ($query) use ($search) {
+        //             $query->where('locations.id', '=', $search);
+        //         });
+        //     });
+        // });
+    }
+
+
 }

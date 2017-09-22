@@ -3,7 +3,7 @@
 
 use App\Models\License;
 
-class licensesCest
+class LicensesCest
 {
     public function _before(FunctionalTester $I)
     {
@@ -18,7 +18,7 @@ class licensesCest
     {
         $I->wantTo('ensure that the create licenses form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/licenses'));
+        $I->amOnPage(route('licenses.create'));
         $I->dontSee('Create License', '.page-header');
         $I->see('Create License', 'h1.pull-left');
     }
@@ -26,31 +26,28 @@ class licensesCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/licenses'));
+        $I->amOnPage(route('licenses.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
-        $I->see('The serial field is required.', '.alert-msg');
         $I->see('The seats field is required.', '.alert-msg');
     }
 
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage(route('create/licenses'));
+        $I->amOnPage(route('licenses.create'));
         $I->fillField('name', 't2');
-        $I->fillField('serial', '13a-');
         $I->fillField('seats', '-15');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name must be at least 3 characters', '.alert-msg');
-        $I->see('The serial must be at least 5 characters', '.alert-msg');
         $I->see('The seats must be at least 1', '.alert-msg');
     }
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $license = factory(App\Models\License::class, 'license')->make();
+        $license = factory(App\Models\License::class)->make();
         $values = [
             'name'              => $license->name,
             'serial'            => $license->serial,
@@ -72,7 +69,7 @@ class licensesCest
         ];
 
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/licenses'));
+        $I->amOnPage(route('licenses.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('licenses', $values);
         $I->dontSee('&lt;span class=&quot;');
@@ -82,8 +79,8 @@ class licensesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a license');
-        $I->amOnPage(route('delete/license', License::doesntHave('assignedUsers')->first()->id));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('licenses.destroy', License::doesntHave('assignedUsers')->first()->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 
 }

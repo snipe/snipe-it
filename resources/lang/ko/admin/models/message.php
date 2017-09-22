@@ -28,4 +28,9 @@ return array(
         'success' 		=> '모델이 복원되었습니다.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> '변경된 항목이 없어서, 갱신되지 않습니다.',
+        'success' 		=> '모델 갱신됨.'
+    ),
+
 );

@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Tài sản được khôi phục thành công.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Tập tin đã không được xoá. Bạn hãy thử lại.',
         'success' => 'Tập tin đã được xoá thành công.',
@@ -48,6 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Bạn có chắc chắn muốn xoá bỏ tài sản này?',
         'error'   		=> 'Đã có vấn đề xảy ra khi xoá tài sản này. Bạn hãy thử lại xem.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Tài sản này được xoá thành công.'
     ),
 

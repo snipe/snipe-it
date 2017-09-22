@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktivní',
     'allow'  				=> 'Povolit',
     'checkedout'  			=> 'Zařízení',
@@ -11,15 +10,16 @@ return array(
     'email'      			=> 'Email',
     'employee_num'      	=> 'Osobní číslo',
     'first_name' 			=> 'Jméno',
-    'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned.',
+    'groupnotes'			=> 'Vyberte skupinu, kterou chcete přiřadit uživateli, nezapomeňte, že uživatel přebírá oprávnění skupiny, která je mu přiřazena.',
     'id'         			=> 'ID',
     'inherit'  				=> 'Převzít',
     'job' 					=> 'Pracovní pozice',
     'last_login'  			=> 'Poslední přihlášení',
     'last_name'  			=> 'Příjmení',
     'location'  			=> 'Umístění',
-    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
+    'lock_passwords'		=> 'Přihlašovací údaje nelze v této instalaci měnit.',
     'manager' 				=> 'Nadřízený',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Položka',
     'notes'                 => 'Poznámky',
     'password_confirm' 		=> 'Potvrzení hesla',
@@ -27,10 +27,12 @@ return array(
     'phone'  				=> 'Telefon',
     'show_current'          => 'Zobraz aktuální uživatele',
     'show_deleted'          => 'Zobraz smazané uživatele',
-    'title' 				=> 'Title',
-    'updateuser' 			=> 'Update User',
+    'title' 				=> 'Název',
+	'to_restore_them'		=> 'obnovit.',
+    'updateuser' 			=> 'Aktualizace uživatele',
     'username' 				=> 'Uživatelské jméno',
-    'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
+	'user_deleted_text' 	=> 'Tento uživatel byl označen jako smazaný.',
+    'username_note' 		=> '(Použije se pouze pro vazbu služby Active Directory, nikoliv pro přihlášení.)',
     'cloneuser'             => 'Duplikuj uživatele',
     'viewusers' 			=> 'Zobrazit uživatele',
 );

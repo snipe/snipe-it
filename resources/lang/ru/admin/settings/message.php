@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Эта резервная копия не найдена на сервере.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Возникла ошибка при попытке очистки. ',
+        'validation_failed'     => 'Ваш текст подтверждения очистки неверен. Пожалуйста, наберите слово "DELETE" в поле подтверждения.',
+        'success'               => 'Удаленные записи успешно очищены.'
     ),
 
 );

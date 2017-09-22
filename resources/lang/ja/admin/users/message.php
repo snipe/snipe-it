@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'この資産を承認しました。',
     'declined'                  => 'この資産を却下しました。',
+    'bulk_manager_warn'	        => 'あなたの利用者は正常に更新されました。しかしながら、あなたの管理者エントリーは保存されませんでした。あなたが選択した管理者が、編集対象の利用者一覧に選択されていたため更新されませんでした。および利用者は彼ら自身の管理者でない場合があります。再度、管理者を除いた上で、あなたの利用者を選択してください。',
     'user_exists'               => '利用者が既に存在しています!',
     'user_not_found'            => '利用者 [:id] は、存在していません。',
     'user_login_required'       => 'ログインフィールドが必要です。',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => '利用者が正常に作成されました。',
         'update'    => '利用者が正常に更新されました。',
+        'update_bulk'    => '利用者が正常に更新されました！',
         'delete'    => '利用者が正常に削除されました。',
         'ban'       => '利用者が正常に禁止されました。',
         'unban'     => '利用者が正常に解禁されました。',
@@ -29,6 +31,7 @@ return array(
         'create' => '利用者を作成する際に問題が発生しました。もう一度、やり直して下さい。',
         'update' => '利用者を更新する際に問題が発生しました。もう一度、やり直して下さい。',
         'delete' => '利用者を削除する際に問題が発生しました。もう一度、やり直して下さい。',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => '利用者を再開する際に問題が発生しました。もう一度、やり直して下さい。',
         'import'    => '利用者をインポートする際に問題が発生しました。もう一度、やり直して下さい。',
         'asset_already_accepted' => 'この資産は既に承認されています。',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'LDAPサーバーにバインドできません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー: ',
         'ldap_could_not_search' => 'LDAPサーバーを検索できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',
         'ldap_could_not_get_entries' => 'LDAPサーバーからエンティティを取得できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

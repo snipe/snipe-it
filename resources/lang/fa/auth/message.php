@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'این حساب کاربری فعال نشده است.',
     'account_suspended'      => 'این حساب کاربری بسته است.',
     'account_banned'         => 'این حساب کاربری ممنوع است.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
 
     'signin' => array(
         'error'   => 'مشکلی در حین تلاش به شما در ورود به سیستم وجود دارد، لطفا دوباره امتحان کنید.',

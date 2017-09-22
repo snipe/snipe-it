@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Acerca de Activos',
+    'about_assets_text'            => 'Los activos son elementos con número de serie o etiqueta de activos.  Tienden a ser artículos de alto valor donde es importante identificar un elemento específico.',
 	'archived'  				=> 'Archivado',
     'asset'  					=> 'Equipo',
     'bulk_checkout'             => 'Asignar activos a un usuario',
     'checkin'  					=> 'Quitar Equipo',
-    'checkout'  				=> 'Asignar a un usuario',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Clonar Equipo',
     'deployable'  				=> 'Desplegable',
     'deleted'  					=> 'Este equipo ha sido eliminado. <a href="/hardware/:asset_id/restore">Click aqui para restaurarlot</a>.',

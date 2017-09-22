@@ -23,6 +23,12 @@ return array(
         'success' 		=> 'Įranga atkurta sėkmingai.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
         'success' => 'Failas sėkmingai ištrintas.',
@@ -47,6 +53,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią įrangą?',
         'error'   		=> 'Nepavyko ištrinti įrangos. Prašome bandykite dar kartą.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Įranga sėkmingai ištrinta.'
     ),
 

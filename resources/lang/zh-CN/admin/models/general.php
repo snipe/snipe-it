@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_models_title'     => 'About Asset Models',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
+    'about_models_title'     => '关于资产型号',
+    'about_models_text'           => '资产型号是将相同资产分组的一种方式。"MBP 2013"、"IPhone 6s"等。',
     'deleted'  					        => '此型号已被删除。<a href="/hardware/models/:model_id/restore">点击此处恢复</a>。',
     'restore'                   => '恢复型号',
     'requestable'               => '用户可申请此型号',

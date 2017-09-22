@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Actief',
     'allow'  				=> 'Toestaan',
     'checkedout'  			=> 'Materialen',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Locatie',
     'lock_passwords'		=> 'Login gegevens kunnen niet worden gewijzigd in deze installatie.',
     'manager' 				=> 'Manager',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Naam',
     'notes'                 => 'Notities',
     'password_confirm' 		=> 'Bevestig uw wachtwoord',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Toon de huidige gebruikers',
     'show_deleted'          => 'Toon de verwijderde gebruikers',
     'title' 				=> 'Titel',
+	'to_restore_them'		=> 'om ze te herstellen.',
     'updateuser' 			=> 'Gebruiker bijwerken',
     'username' 				=> 'Gebruikersnaam',
+	'user_deleted_text' 	=> 'Deze gebruiker is gemarkeerd als verwijderd.',
     'username_note' 		=> '(Dit wordt enkel gebruikt om te koppelen met de Active Directory, niet om aan te melden.)',
     'cloneuser'             => 'Gebruiker klonen',
     'viewusers' 			=> 'Bekijk gebruikers',

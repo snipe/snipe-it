@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\CustomField;
 use Image;
 use Input;
 use Lang;
@@ -15,6 +16,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use Config;
 use App\Helpers\Helper;
+use Illuminate\Http\Request;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -36,10 +38,9 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function index()
     {
-        // Show the page
-        return View::make('models/index');
+        return view('models/index');
     }
 
     /**
@@ -49,16 +50,13 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getCreate()
+    public function create()
     {
         // Show the page
-        $depreciation_list = Helper::depreciationList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
-        return View::make('models/edit')
-        ->with('category_list', $category_list)
-        ->with('depreciation_list', $depreciation_list)
-        ->with('manufacturer_list', $manufacturer_list)
+        return view('models/edit')
+        ->with('category_list', Helper::categoryList('asset'))
+        ->with('depreciation_list', Helper::depreciationList())
+        ->with('manufacturer_list', Helper::manufacturerList())
         ->with('item', new AssetModel);
     }
 
@@ -70,38 +68,26 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function store(Request $request)
     {
 
         // Create a new asset model
         $model = new AssetModel;
 
-
-        if (e(Input::get('depreciation_id')) == '') {
-            $model->depreciation_id =  0;
-        } else {
-            $model->depreciation_id = e(Input::get('depreciation_id'));
-        }
-
-        if (e(Input::get('eol')) == '') {
-            $model->eol =  0;
-        } else {
-            $model->eol = e(Input::get('eol'));
-        }
-
         // Save the model data
-        $model->name                = e(Input::get('name'));
-        $model->model_number             = e(Input::get('model_number'));
-        $model->manufacturer_id     = e(Input::get('manufacturer_id'));
-        $model->category_id         = e(Input::get('category_id'));
-        $model->notes               = e(Input::get('notes'));
-        $model->user_id             = Auth::user()->id;
+        $model->eol = $request->input('eol');
+        $model->depreciation_id = $request->input('depreciation_id');
+        $model->name                = $request->input('name');
+        $model->model_number        = $request->input('model_number');
+        $model->manufacturer_id     = $request->input('manufacturer_id');
+        $model->category_id         = $request->input('category_id');
+        $model->notes               = $request->input('notes');
+        $model->user_id             = Auth::guard('api')->user();
         $model->requestable         = Input::has('requestable');
 
-        if (Input::get('custom_fieldset')!='') {
-            $model->fieldset_id = e(Input::get('custom_fieldset'));
+        if ($request->input('custom_fieldset')!='') {
+            $model->fieldset_id = e($request->input('custom_fieldset'));
         }
-
 
         if (Input::file('image')) {
             $image = Input::file('image');
@@ -117,22 +103,21 @@ class AssetModelsController extends Controller
             // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
-            return redirect()->to("hardware/models")->with('success', trans('admin/models/message.create.success'));
+            return redirect()->route("models.index")->with('success', trans('admin/models/message.create.success'));
         }
-
-            return redirect()->back()->withInput()->withErrors($model->getErrors());
-
+        return redirect()->back()->withInput()->withErrors($model->getErrors());
     }
 
     /**
-    * Validates and stores new Asset Model data created from the
-    * modal form on the Asset Creation view.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @return String JSON
-    */
-    public function store()
+     * Validates and stores new Asset Model data created from the
+     * modal form on the Asset Creation view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @param Request $request
+     * @return String JSON
+     */
+    public function apiStore(Request $request)
     {
       //COPYPASTA!!!! FIXME
         $model = new AssetModel;
@@ -140,18 +125,18 @@ class AssetModelsController extends Controller
         $settings=Input::all();
         $settings['eol']= null;
 
-        $model->name=e(Input::get('name'));
-        $model->manufacturer_id = e(Input::get('manufacturer_id'));
-        $model->category_id = e(Input::get('category_id'));
-        $model->model_number = e(Input::get('model_number'));
-        $model->user_id = Auth::user()->id;
-        $model->notes            = e(Input::get('notes'));
+        $model->name=$request->input('name');
+        $model->manufacturer_id = $request->input('manufacturer_id');
+        $model->category_id = $request->input('category_id');
+        $model->model_number = $request->input('model_number');
+        $model->user_id = Auth::id();
+        $model->notes            = $request->input('notes');
         $model->eol= null;
 
-        if (Input::get('fieldset_id')=='') {
+        if ($request->input('fieldset_id')=='') {
             $model->fieldset_id = null;
         } else {
-            $model->fieldset_id = e(Input::get('fieldset_id'));
+            $model->fieldset_id = e($request->input('fieldset_id'));
         }
 
         if ($model->save()) {
@@ -170,22 +155,18 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return View
     */
-    public function getEdit($modelId = null)
+    public function edit($modelId = null)
     {
         // Check if the model exists
         if (is_null($item = AssetModel::find($modelId))) {
             // Redirect to the model management page
-            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
-        $depreciation_list = Helper::depreciationList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
-
         $view = View::make('models/edit', compact('item'));
-        $view->with('category_list', $category_list);
-        $view->with('depreciation_list', $depreciation_list);
-        $view->with('manufacturer_list', $manufacturer_list);
+        $view->with('category_list', Helper::categoryList('asset'));
+        $view->with('depreciation_list', Helper::depreciationList());
+        $view->with('manufacturer_list', Helper::manufacturerList());
         return $view;
     }
 
@@ -199,39 +180,28 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return Redirect
     */
-    public function postEdit($modelId = null)
+    public function update(Request $request, $modelId = null)
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the models management page
-            return redirect()->to('admin/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
-
-        if (e(Input::get('depreciation_id')) == '') {
-            $model->depreciation_id =  0;
-        } else {
-            $model->depreciation_id = e(Input::get('depreciation_id'));
-        }
-
-        if (e(Input::get('eol')) == '') {
-            $model->eol =  null;
-        } else {
-            $model->eol = e(Input::get('eol'));
-        }
-        // Update the model data
-        $model->name                = e(Input::get('name'));
-        $model->model_number        = e(Input::get('model_number'));
-        $model->manufacturer_id     = e(Input::get('manufacturer_id'));
-        $model->category_id         = e(Input::get('category_id'));
-        $model->notes               = e(Input::get('notes'));
+        $model->depreciation_id = $request->input('depreciation_id');
+        $model->eol = $request->input('eol');
+        $model->name                = $request->input('name');
+        $model->model_number        = $request->input('model_number');
+        $model->manufacturer_id     = $request->input('manufacturer_id');
+        $model->category_id         = $request->input('category_id');
+        $model->notes               = $request->input('notes');
 
         $model->requestable = Input::has('requestable');
 
-        if (Input::get('custom_fieldset')=='') {
+        if ($request->input('custom_fieldset')=='') {
             $model->fieldset_id = null;
         } else {
-            $model->fieldset_id = e(Input::get('custom_fieldset'));
+            $model->fieldset_id = $request->input('custom_fieldset');
         }
 
         if (Input::file('image')) {
@@ -245,22 +215,14 @@ class AssetModelsController extends Controller
             $model->image = $file_name;
         }
 
-        if (Input::get('image_delete') == 1 && Input::file('image') == "") {
+        if ($request->input('image_delete') == 1 && Input::file('image') == "") {
             $model->image = null;
         }
 
-        // Was it created?
         if ($model->save()) {
-            // Redirect to the new model  page
-            return redirect()->to("hardware/models")->with('success', trans('admin/models/message.update.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($model->getErrors());
+            return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
         }
-
-
-        // Redirect to the model create page
-        return redirect()->to("hardware/models/$modelId/edit")->with('error', trans('admin/models/message.update.error'));
-
+        return redirect()->back()->withInput()->withErrors($model->getErrors());
     }
 
     /**
@@ -272,25 +234,22 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return Redirect
     */
-    public function getDelete($modelId)
+    public function destroy($modelId)
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
-            // Redirect to the blogs management page
-            return redirect()->to('hardware/models')->with('error', trans('admin/models/message.not_found'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.not_found'));
         }
 
-        if ($model->assets->count() > 0) {
+        if ($model->assets()->count() > 0) {
             // Throw an error that this model is associated with assets
-            return redirect()->to('hardware/models')->with('error', trans('admin/models/message.assoc_users'));
-
-        } else {
-            // Delete the model
-            $model->delete();
-
-            // Redirect to the models management page
-            return redirect()->to('hardware/models')->with('success', trans('admin/models/message.delete.success'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.assoc_users'));
         }
+        // Delete the model
+        $model->delete();
+
+        // Redirect to the models management page
+        return redirect()->route('models.index')->with('success', trans('admin/models/message.delete.success'));
     }
 
 
@@ -317,11 +276,10 @@ class AssetModelsController extends Controller
             $success = trans('admin/models/message.restore.success');
 
             // Redirect back
-            return redirect()->back()->with('success', $success);
+            return redirect()->route('models.index')->with('success', $success);
 
-        } else {
-            return redirect()->back()->with('error', trans('admin/models/message.not_found'));
         }
+        return redirect()->back()->with('error', trans('admin/models/message.not_found'));
 
     }
 
@@ -334,21 +292,18 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return View
     */
-    public function getView($modelId = null)
+    public function show($modelId = null)
     {
         $model = AssetModel::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
-                return View::make('models/view', compact('model'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/models/message.does_not_exist', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('models')->with('error', $error);
+            return view('models/view', compact('model'));
         }
+        // Prepare the error message
+        $error = trans('admin/models/message.does_not_exist', compact('id'));
 
-
+        // Redirect to the user management page
+        return redirect()->route('models.index')->with('error', $error);
     }
 
     /**
@@ -363,21 +318,17 @@ class AssetModelsController extends Controller
     {
         // Check if the model exists
         if (is_null($model_to_clone = AssetModel::find($modelId))) {
-            // Redirect to the model management page
-            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $model = clone $model_to_clone;
         $model->id = null;
 
         // Show the page
-        $depreciation_list = Helper::depreciationList();
-        $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList('asset');
         $view = View::make('models/edit');
-        $view->with('category_list', $category_list);
-        $view->with('depreciation_list', $depreciation_list);
-        $view->with('manufacturer_list', $manufacturer_list);
+        $view->with('category_list', Helper::categoryList('asset'));
+        $view->with('depreciation_list', Helper::depreciationList());
+        $view->with('manufacturer_list', Helper::manufacturerList());
         $view->with('item', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
@@ -396,121 +347,35 @@ class AssetModelsController extends Controller
     public function getCustomFields($modelId)
     {
         $model = AssetModel::find($modelId);
-        return View::make("models.custom_fields_form")->with("model", $model);
+        return view("models.custom_fields_form")->with("model", $model);
     }
 
 
 
     /**
-    * Get the JSON response to populate the data tables on the
-    * Asset Model listing page.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @param string $status
-    * @return String JSON
-    */
-
-    public function getDatatable($status = null)
-    {
-        $models = AssetModel::with('category', 'assets', 'depreciation', 'manufacturer');
-
-        switch ($status) {
-            case 'Deleted':
-                $models->withTrashed()->Deleted();
-                break;
-        }
-
-
-        if (Input::has('search')) {
-            $models = $models->TextSearch(Input::get('search'));
-        }
-
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
-
-
-        $allowed_columns = ['id','name','model_number'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
-
-        $models = $models->orderBy($sort, $order);
-
-        $modelCount = $models->count();
-        $models = $models->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($models as $model) {
-            if ($model->deleted_at == '') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/model', $model->id).'" class="btn btn-info btn-sm" title="Clone Model" data-toggle="tooltip"><i class="fa fa-clone"></i></a> <a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.trans('admin/models/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
-            } else {
-                $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
-            }
-
-            $rows[] = array(
-                'id'      => $model->id,
-                'manufacturer'      => (string)link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
-                'name'              => (string)link_to('/hardware/models/'.$model->id.'/view', $model->name),
-                'image' => ($model->image!='') ? '<img src="'.config('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
-                'modelnumber'       => $model->model_number,
-                'numassets'         => $model->assets->count(),
-                'depreciation'      => (($model->depreciation) && ($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
-                'category'          => ($model->category) ? (string)link_to('admin/settings/categories/'.$model->category->id.'/view', $model->category->name) : '',
-                'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
-                'note'              => $model->getNote(),
-                'fieldset'          => ($model->fieldset) ? (string)link_to('admin/custom_fields/'.$model->fieldset->id, $model->fieldset->name) : '',
-                'actions'           => $actions
-                );
-        }
-
-        $data = array('total' => $modelCount, 'rows' => $rows);
-
-        return $data;
-    }
-
-
-    /**
-    * Get the asset information to present to the model view detail page
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v2.0]
-    * @param int $modelId
-    * @return String JSON
-    */
-    public function getDataView($modelID)
+     * Get the asset information to present to the model view detail page
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @param Request $request
+     * @param $modelID
+     * @return String JSON
+     * @internal param int $modelId
+     */
+    public function getDataView(Request $request, $modelID)
     {
         $assets = Asset::where('model_id', '=', $modelID)->with('company', 'assetstatus');
 
         if (Input::has('search')) {
-            $assets = $assets->TextSearch(e(Input::get('search')));
+            $assets = $assets->TextSearch(e($request->input('search')));
         }
-
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
 
 
         $allowed_columns = ['name', 'serial','asset_tag'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
         $assets = $assets->orderBy($sort, $order);
 
@@ -519,33 +384,83 @@ class AssetModelsController extends Controller
 
         $rows = array();
 
-
+        $all_custom_fields = CustomField::all();
         foreach ($assets as $asset) {
-            $actions = '';
 
-            if ($asset->assetstatus) {
-                if ($asset->assetstatus->deployable != 0) {
-                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
-                    } else {
-                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
-                    }
-                }
-            }
-
-            $rows[] = array(
-                'id'            => $asset->id,
-                'name'          => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
-                'asset_tag'     => (string)link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
-                'serial'        => $asset->serial,
-                'assigned_to'   => ($asset->assigned_to) ? (string)link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
-                'actions'       => $actions,
-                'companyName'   => Company::getName($asset)
-            );
+            $rows[] = $asset->present()->forDataTable($all_custom_fields);
         }
 
         $data = array('total' => $assetsCount, 'rows' => $rows);
 
         return $data;
     }
+
+
+    /**
+     * Returns a view that allows the user to bulk edit model attrbutes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.7]
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function postBulkEdit(Request $request)
+    {
+        $models_raw_array = Input::get('ids');
+        $models = AssetModel::whereIn('id', $models_raw_array)->get();
+        $nochange = ['NC' => 'No Change'];
+        $fieldset_list = $nochange + Helper::customFieldsetList();
+        $depreciation_list = $nochange + Helper::depreciationList();
+        $category_list = $nochange + Helper::categoryList('asset');
+        $manufacturer_list = $nochange + Helper::manufacturerList();
+
+        
+             return view('models/bulk-edit', compact('models'))
+                ->with('manufacturer_list', $manufacturer_list)
+                ->with('category_list', $category_list)
+                ->with('fieldset_list', $fieldset_list)
+                ->with('depreciation_list', $depreciation_list);
+
+    }
+
+
+
+    /**
+     * Returns a view that allows the user to bulk edit model attrbutes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.7]
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function postBulkEditSave(Request $request)
+    {
+
+        $models_raw_array = Input::get('ids');
+        $update_array = array();
+
+        if (($request->has('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
+            $update_array['manufacturer_id'] = $request->input('manufacturer_id');
+        }
+        if (($request->has('category_id') && ($request->input('category_id')!='NC'))) {
+            $update_array['category_id'] = $request->input('category_id');
+        }
+        if ($request->input('fieldset_id')!='NC') {
+            $update_array['fieldset_id'] = $request->input('fieldset_id');
+        }
+        if ($request->input('depreciation_id')!='NC') {
+            $update_array['depreciation_id'] = $request->input('depreciation_id');
+        }
+
+
+        
+        if (count($update_array) > 0) {
+            AssetModel::whereIn('id', $models_raw_array)->update($update_array);
+            return redirect()->route('models.index')
+                ->with('success', trans('admin/models/message.bulkedit.success'));
+        }
+
+        return redirect()->route('models.index')
+            ->with('warning', trans('admin/models/message.bulkedit.error'));
+
+    }
+
 }

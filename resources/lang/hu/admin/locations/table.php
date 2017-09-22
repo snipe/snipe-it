@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Helyek',
     'parent'                    => 'Szülő',
     'currency'                  => 'Helyi valuta',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Über Assets',
+    'about_assets_text'            => 'Assets sind Gegenstände die durch eine Seriennummer oder Bezeichnung identifiziert werden. Meistens sind diese von höherem Wert, wobei es Sinn macht diese spezifisch zu kennzeichnen.',
 	'archived'  				=> 'Archiviert',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Assets an Benutzer herausgeben',
     'checkin'  					=> 'Asset zurücknehmen',
-    'checkout'  				=> 'Asset an Benutzer herausgeben',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Asset duplizieren',
     'deployable'  				=> 'Einsetzbar',
     'deleted'  					=> 'Dieses Asset wurde gelöscht. <a href="/hardware/:asset_id/restore">Zur Wiederherstellung hier klicken</a>.',

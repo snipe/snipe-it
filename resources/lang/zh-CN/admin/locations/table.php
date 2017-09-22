@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations_title'     => '管理地理位置',
+    'about_locations'           => '地理位置用来跟踪用户、资产和其他项目的位置信息。',
     'assets_rtd'                => '资产', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => '持有人',
     'id'                        => '编号',
@@ -17,4 +17,5 @@ return array(
     'locations'                 => '地理位置',
     'parent'                    => '上级节点',
     'currency'                  => '当地货币单位',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

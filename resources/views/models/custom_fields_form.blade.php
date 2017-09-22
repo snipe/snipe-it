@@ -1,4 +1,4 @@
-@if($model->fieldset)
+@if (($model) && ($model->fieldset))
   @foreach($model->fieldset->fields AS $field)
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>
@@ -43,12 +43,16 @@
 
           @endif
 
+              @if ($field->help_text!='')
+              <p class="help-block">{{ $field->help_text }}</p>
+              @endif
+
           <?php
           $errormessage=$errors->first($field->db_column_name());
           if ($errormessage) {
               $errormessage=preg_replace('/ snipeit /', '', $errormessage);
               print('<span class="alert-msg"><i class="fa fa-times"></i> '.$errormessage.'</span>');
-            }
+          }
             ?>
       </div>
 
@@ -57,6 +61,8 @@
             <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
         </div>
         @endif
+
+
     </div>
   @endforeach
 @endif

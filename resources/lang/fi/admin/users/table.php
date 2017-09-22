@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Aktiivinen',
     'allow'  				=> 'Salli',
     'checkedout'  			=> 'Laitteet',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Sijainti',
     'lock_passwords'		=> 'Kirjautumistietoja ei voida muokata tässä asennuksessa.',
     'manager' 				=> 'Esimies',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nimi',
     'notes'                 => 'Muistiinpanot',
     'password_confirm' 		=> 'Vahvista Salasana',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Näytä nykyiset käyttäjät',
     'show_deleted'          => 'Näytä poistetut käyttäjät',
     'title' 				=> 'Titteli',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Päivitä Käyttäjä',
     'username' 				=> 'Käyttäjätunnus',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Tätä käytetään vain Active Directory synkronointiin, ei kirjautumista varten.)',
     'cloneuser'             => 'Monista Käyttäjä',
     'viewusers' 			=> 'Näytä Käyttäjät',

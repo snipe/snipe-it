@@ -5,6 +5,17 @@ use Validator;
 use Illuminate\Support\ServiceProvider;
 use DB;
 use Log;
+use Illuminate\Support\Facades\Schema;
+use App\Observers\AssetObserver;
+use App\Observers\LicenseObserver;
+use App\Observers\AccessoryObserver;
+use App\Observers\ConsumableObserver;
+use App\Observers\ComponentObserver;
+use App\Models\Asset;
+use App\Models\License;
+use App\Models\Accessory;
+use App\Models\Consumable;
+use App\Models\Component;
 
 
 /**
@@ -25,14 +36,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        Schema::defaultStringLength(191);
+        Asset::observe(AssetObserver::class);
+        Accessory::observe(AccessoryObserver::class);
+        Component::observe(ComponentObserver::class);
+        Consumable::observe(ConsumableObserver::class);
+        License::observe(LicenseObserver::class);
+        
         // Email array validator
-        Validator::extend('email_array', function($attribute, $value, $parameters, $validator) {
-            $value = str_replace(' ','',$value);
+        Validator::extend('email_array', function ($attribute, $value, $parameters, $validator) {
+            $value = str_replace(' ', '', $value);
             $array = explode(',', $value);
 
-            foreach($array as $email) //loop over values
-            {
+            foreach ($array as $email) { //loop over values
                 $email_to_validate['alert_email'][]=$email;
             }
 
@@ -41,35 +57,33 @@ class AppServiceProvider extends ServiceProvider
                  'alert_email.*'=>trans('validation.email_array')
             );
 
-            $validator = Validator::make($email_to_validate,$rules,$messages);
+            $validator = Validator::make($email_to_validate, $rules, $messages);
 
-            if ($validator->passes()) {
-                return true;
-            } else {
-                return false;
-            }
+            return $validator->passes();
 
         });
 
         // Unique only if undeleted
         // This works around the use case where multiple deleted items have the same unique attribute.
         // (I think this is a bug in Laravel's validator?)
-        Validator::extend('unique_undeleted', function($attribute, $value, $parameters, $validator) {
+        Validator::extend('unique_undeleted', function ($attribute, $value, $parameters, $validator) {
 
-            $count = DB::table($parameters[0])->select('id')->where($attribute,'=',$value)->whereNull('deleted_at')->where('id','!=',$parameters[1])->count();
-
-            if ($count < 1) {
-                return true;
-            } else {
-                return false;
+            if (count($parameters)) {
+                $count = DB::table($parameters[0])->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('id', '!=', $parameters[1])->count();
+                return $count < 1;
             }
 
         });
 
-        // Share common variables with all views.
+        // Share common setting variables with all views.
         view()->composer('*', function ($view) {
             $view->with('snipeSettings', \App\Models\Setting::getSettings());
         });
+
+        // Set the monetary locale to the configured locale to make helper::parseFloat work.
+        setlocale(LC_MONETARY, config('app.locale'));
+        setlocale(LC_NUMERIC, config('app.locale'));
+
     }
 
     /**
@@ -91,7 +105,7 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        foreach($monolog->getHandlers() as $handler) {
+        foreach ($monolog->getHandlers() as $handler) {
             $handler->setLevel($log_level);
         }
     }

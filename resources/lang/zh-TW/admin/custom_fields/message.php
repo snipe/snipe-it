@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-
+        'does_not_exist' => 'Fieldset does not exist',
 
         'create' => array(
             'error'   => '新增欄位集失敗，請重試。',

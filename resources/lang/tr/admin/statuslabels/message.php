@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Durum etiket yok.',
+    'assoc_assets'	 => 'Bu durum etiketi şu anda en az bir varlık ile ilişkili ve silinemez. Lütfen artık bu durum başvuru ve yeniden denemek için sabit kıymetleri güncelleştirin. ',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Durum etiketi oluşturulamadı, lütfen yeniden deneyin.',
+        'success' => 'Durum etiketi başarıyla oluşturuldu.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Durum etiket güncelleştirilmedi, lütfen tekrar deneyin',
+        'success' => 'Durum etiketi başarıyla güncelleştirildi.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'confirm'   => 'Bu durum etiketi silmek istediğinizden emin misiniz?',
+        'error'   => 'Durum etiketi silerken bir sorun oluştu. Lütfen yeniden deneyin.',
+        'success' => 'Durum etiketi başarıyla silindi.'
     )
 
 );

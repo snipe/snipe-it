@@ -18,7 +18,7 @@ class StatusLabelsCest
     {
         $I->wantTo('ensure that the create statuslabels form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/statuslabel'));
+        $I->amOnPage(route('statuslabels.create'));
         $I->dontSee('Create Status Label', '.page-header');
         $I->see('Create Status Label', 'h1.pull-left');
     }
@@ -26,7 +26,7 @@ class StatusLabelsCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/statuslabel'));
+        $I->amOnPage(route('statuslabels.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -34,7 +34,7 @@ class StatusLabelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $status = factory(App\Models\Statuslabel::class, 'pending')->make();
+        $status = factory(App\Models\Statuslabel::class)->states('pending')->make();
         $submitValues = [
             'name'                  => 'Testing Status',
             'statuslabel_types'     => 'pending',
@@ -53,7 +53,7 @@ class StatusLabelsCest
             'show_in_nav'           => true,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/statuslabel'));
+        $I->amOnPage(route('statuslabels.create'));
         $I->submitForm('form#create-form', $submitValues);
         $I->seeRecord('status_labels', $recordValues);
         $I->seeElement('.alert-success');
@@ -62,7 +62,7 @@ class StatusLabelsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a Status Label');
-        $I->amOnPage(route('delete/statuslabel', Statuslabel::doesntHave('assets')->first()->id));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('statuslabels.destroy', Statuslabel::doesntHave('assets')->first()->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

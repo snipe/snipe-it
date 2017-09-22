@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Lokasi',
     'parent'                    => 'Induk',
     'currency'                  => 'Lokasi Mata Uang',
+    'ldap_ou'                   => 'LDAP Search OU',
     );

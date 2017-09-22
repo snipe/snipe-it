@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Eiendel',
     'bulk_checkout'             => 'Sjekk ut Eiendel til Bruker',
     'checkin'  					=> 'Sjekk inn eiendel',
-    'checkout'  				=> 'Sjekk ut eiendel til bruker',
+    'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klon eiendel',
     'deployable'  				=> 'Utleverbar',
     'deleted'  					=> 'Denne eiendelen har blitt slettet. <a href="/hardware/:asset_id/restore">Klikk for å gjenopprette den</a>.',

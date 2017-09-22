@@ -2,9 +2,9 @@
     'createText' => trans('admin/accessories/general.create') ,
     'updateText' => trans('admin/accessories/general.update'),
     'helpTitle' => trans('admin/accessories/general.about_accessories_title'),
-    'helpText' => trans('admin/accessories/general.about_accessories_text')
+    'helpText' => trans('admin/accessories/general.about_accessories_text'),
+    'formAction' => ($item) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
 ])
-
 
 {{-- Page content --}}
 @section('inputFields')

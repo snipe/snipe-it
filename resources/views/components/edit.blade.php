@@ -2,7 +2,9 @@
     'createText' => trans('admin/components/general.create') ,
     'updateText' => trans('admin/components/general.update'),
     'helpTitle' => trans('admin/components/general.about_components_title'),
-    'helpText' => trans('admin/components/general.about_components_text')
+    'helpText' => trans('admin/components/general.about_components_text'),
+    'formAction' => ($item) ? route('components.update', ['component' => $item->id]) : route('components.store'),
+
 ])
 
 {{-- Page content --}}

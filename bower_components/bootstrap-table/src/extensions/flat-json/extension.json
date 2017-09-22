@@ -1,0 +1,17 @@
+{
+  "name": "Flat JSON",
+  "version": "1.3.0",
+  "description": "Plugin to flat the JSON object.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/flat-json",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/flat-json.html",
+
+  "plugins": [{
+    "name": "bootstrap-table-flat-json",
+    "url": "https://github.com/djhvscf/bootstrap-table-flat-json"
+  }],
+
+  "author": {
+    "name": "djhvscf",
+    "image": "https://avatars1.githubusercontent.com/u/4496763"
+  }
+}

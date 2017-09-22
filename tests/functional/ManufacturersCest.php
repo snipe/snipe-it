@@ -18,7 +18,7 @@ class ManufacturersCest
     {
         $I->wantTo('Test Manufacturer Creation');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/manufacturer'));
+        $I->amOnPage(route('manufacturers.create'));
         $I->seeInTitle('Create Manufacturer');
         $I->see('Create Manufacturer', 'h1.pull-left');
     }
@@ -26,7 +26,7 @@ class ManufacturersCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/manufacturer'));
+        $I->amOnPage(route('manufacturers.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -35,7 +35,7 @@ class ManufacturersCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage(route('create/manufacturer'));
+        $I->amOnPage(route('manufacturers.create'));
         $I->fillField('name', 't');
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -43,12 +43,12 @@ class ManufacturersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $manufacturer = factory(App\Models\Manufacturer::class, 'manufacturer')->make();
+        $manufacturer = factory(App\Models\Manufacturer::class)->make();
         $values = [
             'name' => $manufacturer->name
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/manufacturer'));
+        $I->amOnPage(route('manufacturers.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('manufacturers', $values);
         $I->seeElement('.alert-success');
@@ -57,11 +57,8 @@ class ManufacturersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a manufacturer');
-        $I->amOnPage(route('delete/manufacturer', Manufacturer::doesntHave('models')
-                                                ->doesntHave('accessories')
-                                                ->doesntHave('consumables')
-                                                ->doesntHave('licenses')->first()->id
-        ));
-        $I->seeElement('.alert-success');
+        $manufacturerId = factory(App\Models\Manufacturer::class)->create()->id;
+        $I->sendDelete(route('manufacturers.destroy', $manufacturerId), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

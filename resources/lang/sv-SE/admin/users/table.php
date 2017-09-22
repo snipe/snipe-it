@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Active',
     'allow'  				=> 'Allow',
     'checkedout'  			=> 'Assets',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Location',
     'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Manager',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Name',
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Confirm Password',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Show Current Users',
     'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'Title',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Update User',
     'username' 				=> 'Username',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Clone User',
     'viewusers' 			=> 'View Users',

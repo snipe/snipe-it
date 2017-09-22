@@ -1,3 +1,4 @@
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object
@@ -5,6 +6,38 @@
  * @return {IIFE}          Immediately invoked. Returns self.
  */
 
+var lineOptions = {
+
+        legend: {
+            position: "bottom"
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "rgba(0,0,0,0.5)",
+                    fontStyle: "bold",
+                    beginAtZero: true,
+                    maxTicksLimit: 5,
+                    padding: 20
+                },
+                gridLines: {
+                    drawTicks: false,
+                    display: false
+                }
+            }],
+            xAxes: [{
+                gridLines: {
+                    zeroLineColor: "transparent"
+                },
+                ticks: {
+                    padding: 20,
+                    fontColor: "rgba(0,0,0,0.5)",
+                    fontStyle: "bold"
+                }
+            }]
+        }
+
+};
 
 var pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
@@ -35,10 +68,7 @@ var pieOptions = {
     //String - A tooltip template
     tooltipTemplate: "<%=value %> <%=label%> "
 };
-//console.dir(pieOptions);
-//Create pie or douhnut chart
-// You can switch between pie and douhnut using the method below.
-//pieChart.Doughnut(PieData, pieOptions);
+
 //-----------------
 //- END PIE CHART -
 //-----------------
@@ -63,7 +93,7 @@ var pieOptions = {
 
                 $('#myModalLabel').text(title);
                 $dataConfirmModal.find('.modal-body').text(message);
-                $('#dataConfirmOK').attr('href', href);
+                $('#deleteForm').attr('action', href);
                 $dataConfirmModal.modal({
                     show: true
                 });
@@ -92,3 +122,64 @@ var pieOptions = {
 
 
 
+
+
+$(document).ready(function () {
+
+    /*
+    * Slideout help menu
+    */
+     $('.slideout-menu-toggle').on('click', function(event){
+       console.log('clicked');
+        event.preventDefault();
+        // create menu variables
+        var slideoutMenu = $('.slideout-menu');
+        var slideoutMenuWidth = $('.slideout-menu').width();
+
+        // toggle open class
+        slideoutMenu.toggleClass("open");
+
+        // slide menu
+        if (slideoutMenu.hasClass("open")) {
+         slideoutMenu.show();
+            slideoutMenu.animate({
+                right: "0px"
+            });
+        } else {
+            slideoutMenu.animate({
+                right: -slideoutMenuWidth
+            }, "-350px");
+         slideoutMenu.fadeOut();
+        }
+     });
+
+     /*
+     * iCheck checkbox plugin
+     */
+
+     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+         checkboxClass: 'icheckbox_minimal-blue',
+         radioClass: 'iradio_minimal-blue'
+     });
+
+
+     /*
+     * Select2
+     */
+
+     var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
+     if(!iOS)
+     {
+        // Vue collision: Avoid overriding a vue select2 instance
+        // by checking to see if the item has already been select2'd.
+        $('select.select2:not(".select2-hidden-accessible")').each(function (i,obj) {
+            {
+                $(obj).select2();
+            }
+        });
+     }
+     $('.datepicker').datepicker();
+
+
+
+});

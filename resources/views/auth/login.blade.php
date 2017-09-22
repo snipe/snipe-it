@@ -21,6 +21,13 @@
                         <div class="login-box-body">
                             <div class="row">
 
+                                @if ($snipeSettings->login_note)
+                                    <div class="col-md-12">
+                                        <div class="alert alert-info">
+                                            {!!  Parsedown::instance()->text(e($snipeSettings->login_note))  !!}
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <!-- Notifications -->
                                 @include('notifications')
@@ -52,7 +59,7 @@
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
-                            <a href="{{ config('app.url') }}/password/reset">{{ trans('auth/general.forgot_password')  }}</a>
+                            <a href="{{ url('/') }}/password/reset">{{ trans('auth/general.forgot_password')  }}</a>
                         </div>
                     </div> <!-- end login box -->
 

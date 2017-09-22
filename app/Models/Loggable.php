@@ -6,6 +6,9 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\CheckoutRequest;
 use App\Models\User;
+use App\Notifications\CheckinNotification;
+use App\Notifications\AuditNotification;
+use App\Notifications\CheckoutNotification;
 use Illuminate\Support\Facades\Auth;
 
 trait Loggable
@@ -27,11 +30,56 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckout($note, $target = null /*target is overridable for components*/)
+    public function logCheckout($note, $target /* What are we checking out to? */)
     {
         $log = new Actionlog;
+        $log = $this->determineLogItemType($log);
+        $log->user_id = Auth::user()->id;
 
-        // We need to special case licenses because of license_seat vs license.  So much for clean polymorphism :)
+        if (!isset($target)) {
+            throw new Exception('All checkout logs require a target');
+            return;
+        }
+        $log->target_type = get_class($target);
+        $log->target_id = $target->id;
+
+        $class = get_class($target);
+        if ($class == Location::class) {
+            // We can checkout to a location
+            $log->location_id = $target->id;
+        } else if ($class== Asset::class) {
+            $log->location_id = $target->rtd_location_id;
+        } else {
+            $log->location_id = $target->location_id;
+        }
+        $log->note = $note;
+        $log->logaction('checkout');
+
+        $params = [
+            'item' => $this,
+            'target' => $target,
+            'admin' => $log->user,
+            'note' => $note,
+            'log_id' => $log->id
+        ];
+
+        if ($settings = Setting::getSettings()) {
+            $settings->notify(new CheckoutNotification($params));
+        }
+
+        if (method_exists($target, 'notify')) {
+            $target->notify(new CheckoutNotification($params));
+        }
+
+        return $log;
+    }
+
+    /**
+    * Helper method to determine the log item type
+    */
+    private function determineLogItemType($log)
+    {
+        // We need to special case licenses because of license_seat vs license.  So much for clean polymorphism :
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
@@ -40,24 +88,8 @@ trait Loggable
             $log->item_id = $this->id;
         }
 
-        $log->user_id = Auth::user()->id;
-
-        if (!is_null($this->asset_id) || isset($target)) {
-            $log->target_type = Asset::class;
-            $log->target_id = $this->asset_id;
-        } else if (!is_null($this->assigned_to)) {
-            $log->target_type = User::class;
-            $log->target_id = $this->assigned_to;
-        }
-
-        $item = call_user_func(array($log->target_type, 'find'), $log->target_id);
-        $log->location_id = $item->location_id;
-        $log->note = $note;
-        $log->logaction('checkout');
-
         return $log;
     }
-
     /**
      * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
      * @since [v3.4]
@@ -80,8 +112,50 @@ trait Loggable
         $log->user_id = Auth::user()->id;
         $log->logaction('checkin from');
 
+        $params = [
+            'item' => $log->item,
+            'admin' => $log->user,
+            'note' => $note
+        ];
+        Setting::getSettings()->notify(new CheckinNotification($params));
+
         return $log;
     }
+
+
+    /**
+     * @author  A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \App\Models\Actionlog
+     */
+    public function logAudit($note, $location_id)
+    {
+        $log = new Actionlog;
+        $location = Location::find($location_id);
+        if (static::class == LicenseSeat::class) {
+            $log->item_type = License::class;
+            $log->item_id = $this->license_id;
+        } else {
+            $log->item_type = static::class;
+            $log->item_id = $this->id;
+        }
+        $log->location_id = ($location_id) ? $location_id : null;
+        $log->note = $note;
+        $log->user_id = Auth::user()->id;
+        $log->logaction('audit');
+
+        $params = [
+            'item' => $log->item,
+            'admin' => $log->user,
+            'location' => ($location) ? $location->name : '',
+            'note' => $note
+        ];
+        Setting::getSettings()->notify(new AuditNotification($params));
+
+        return $log;
+    }
+
+
 
     /**
      * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
@@ -128,7 +202,7 @@ trait Loggable
         $log->user_id = Auth::user()->id;
         $log->note = $note;
         $log->target_id =  null;
-        $log->created_at =  date("Y-m-d h:i:s");
+        $log->created_at =  date("Y-m-d H:i:s");
         $log->filename =  $filename;
         $log->logaction('uploaded');
 

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
+    'does_not_exist' => 'Leverantören finns inte.',
     'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
 
     'create' => array(

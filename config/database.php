@@ -54,18 +54,19 @@ return [
 
         'sqlite_testing' => [
             'driver'   => 'sqlite',
-            'database' => database_path('testing.sqlite'),
+            'database' => ':memory:',
             'prefix'   => '',
         ],
 
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
+            'port'      => env('DB_PORT', '3306'),
             'database'  => env('DB_DATABASE', 'forge'),
             'username'  => env('DB_USERNAME', 'forge'),
             'password'  => env('DB_PASSWORD', ''),
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => env('DB_PREFIX', null),
             'strict'    => false,
             'engine'    => null,

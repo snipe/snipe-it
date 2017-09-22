@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Архивният файл не беше открит на сървъра.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Възникна грешка при пречистване. ',
+        'validation_failed'     => 'Потвърждението ви за пречистване не неправилно. Моля напишете думата "DELETE" в клетката за потвърждаване.',
+        'success'               => 'Изтрити записи успешно премахнати.'
     ),
 
 );

@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'About Components',
+    'about_components_title' 			=> 'Σχετικά με τα στοιχεία',
     'about_components_text'  			=> 'Components are items that are part of an asset, for example HDD, RAM, etc.',
-    'component_name'                  => 'Component Name',
+    'component_name'                  => 'Όνομα στοιχείου',
     'checkin'                             => 'Checkin Component',
     'checkout'                             => 'Checkout Component',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Component',
-    'edit'                             => 'Edit Component',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
-    'update'                            => 'Update Component',
+    'cost'				=> 'Κόστος αγοράς',
+    'create'                             => 'Δημιουργία στοιχείου',
+    'edit'                             => 'Επεξεργασία εξαρτήματος',
+    'date'					=> 'Ημερομηνία αγοράς',
+    'order'					=> 'Αριθμός παραγγελίας',
+    'remaining' 			             => 'Απομένουν',
+    'total' 			                 => 'Σύνολο',
+    'update'                            => 'Αναβάθμιση εξαρτήματος',
 );

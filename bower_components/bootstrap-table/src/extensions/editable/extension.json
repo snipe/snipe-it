@@ -1,0 +1,17 @@
+{
+  "name": "Table Editable",
+  "version": "1.1.0",
+  "description": "Use the x-editable to in-place editing your table.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/editable",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/editable.html",
+
+  "plugins": [{
+    "name": "x-editable",
+    "url": "https://github.com/vitalets/x-editable"
+  }],
+
+  "author": {
+    "name": "wenzhixin",
+    "image": "https://avatars1.githubusercontent.com/u/2117018"
+  }
+}

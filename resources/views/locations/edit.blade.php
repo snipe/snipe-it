@@ -2,7 +2,8 @@
     'createText' => trans('admin/locations/table.create') ,
     'updateText' => trans('admin/locations/table.update'),
     'helpTitle' => trans('admin/locations/table.about_locations_title'),
-    'helpText' => trans('admin/locations/table.about_locations')
+    'helpText' => trans('admin/locations/table.about_locations'),
+    'formAction' => ($item) ? route('locations.update', ['location' => $item->id]) : route('locations.store'),
 ])
 
 {{-- Page content --}}
@@ -20,6 +21,17 @@
     </div>
 </div>
 
+<!-- Manager-->
+<div class="form-group {{ $errors->has('manager_id') ? ' has-error' : '' }}">
+    <label for="manager_id" class="col-md-3 control-label">
+        {{ trans('admin/users/table.manager') }}
+    </label>
+    <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'manager_id')) ? ' required' : '' }}">
+        {!! Form::select('manager_id', $manager_list , Input::old('manager_id', $item->manager_id), array('class'=>'select2 parent', 'style'=>'width:350px')) !!}
+        {!! $errors->first('manager_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    </div>
+</div>
+
 <!-- Currency -->
 <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
     <label for="currency" class="col-md-3 control-label">
@@ -32,6 +44,20 @@
 </div>
 
 @include ('partials.forms.edit.address')
+
+<!-- LDAP Search OU -->
+@if ($snipeSettings->ldap_enabled == 1)
+    <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
+        <label for="ldap_ou" class="col-md-3 control-label">
+            {{ trans('admin/locations/table.ldap_ou') }}
+        </label>
+        <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'currency')) ? ' required' : '' }}">
+            {{ Form::text('ldap_ou', Input::old('ldap_ou', $item->ldap_ou), array('class' => 'form-control')) }}
+            {!! $errors->first('ldap_ou', '<span class="alert-msg">:message</span>') !!}
+        </div>
+    </div>
+@endif
+
 @stop
 
 @if (!$item->id)
@@ -53,7 +79,7 @@
 //start ajax request
 $.ajax({
     type: 'GET',
-    url: "{{config('app.url') }}/api/locations/"+id+"/check",
+    url: "{{url('/') }}/api/locations/"+id+"/check",
 //force to handle it as text
 dataType: "text",
 success: function(data) {

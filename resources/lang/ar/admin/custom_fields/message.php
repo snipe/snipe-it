@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-
+        'does_not_exist' => 'مجموعة الحقول غير موجودة',
 
         'create' => array(
             'error'   => 'لم يتم إنشاء مجموعة-الحقول، الرجاء المحاولة مرة اخرى.',

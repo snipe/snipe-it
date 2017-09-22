@@ -1,12 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'     => 'About manufacturers',
-    'about_manufacturers_text'           => 'Manufacturers make all the magic items we consume.',
+    'about_manufacturers_title'    => 'A propos des fabricants',
+    'about_manufacturers_text'  => 'Les fabricants sont les entreprises qui créent vos actifs. Vous pouvez stocker ici des informations importantes sur les contacts de support, qui seront affichées sur les pages de détails de votre actif.',
     'asset_manufacturers'	=> 'Fabricants d\'actif',
     'create'				=> 'Créer un fabricant',
     'id'   					=> 'ID',
-    'name'      			=> 'Nom du fabricant',
+    'name'      			=> 'Nom',
+    'support_email'   		=> 'Email du support',
+    'support_phone'   		=> 'Téléphone du support',
+    'support_url'   		=> 'URL du support',
     'update'				=> 'Mettre à jour le fabricant',
+    'url'   				=> 'URL',
 
 );

@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Deze gebruikersaccount is niet actief.',
     'account_suspended'      => 'Deze gebruikersaccount is vergrendeld.',
     'account_banned'         => 'Deze gebruikersaccount is geband.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Te veel mislukte inlog pogingen. Probeer het nogmaals over :minutes minuten.',
 
     'signin' => array(
         'error'   => 'Er was een probleem bij inloggen, probeer opnieuw aub.',

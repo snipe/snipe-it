@@ -6,6 +6,7 @@ use Input;
 use Lang;
 use Redirect;
 use View;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Companies for
@@ -22,11 +23,11 @@ final class CompaniesController extends Controller
     *
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
-    * @return View
-    */
-    public function getIndex()
+    * @return \Illuminate\Contracts\View\View
+     */
+    public function index()
     {
-        return View::make('companies/index')->with('companies', Company::all());
+        return view('companies/index')->with('companies', Company::all());
     }
 
     /**
@@ -34,33 +35,31 @@ final class CompaniesController extends Controller
     *
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
-    * @return View
-    */
-    public function getCreate()
+    * @return \Illuminate\Contracts\View\View
+     */
+    public function create()
     {
-        return View::make('companies/edit')->with('item', new Company);
+        return view('companies/edit')->with('item', new Company);
     }
 
     /**
-    * Save data from new company form.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
-    public function postCreate()
+     * Save data from new company form.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
     {
         $company = new Company;
-
-            $company->name = e(Input::get('name'));
+        $company->name = $request->input('name');
 
         if ($company->save()) {
-            return redirect()->to('admin/settings/companies')
+            return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.create.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($company->getErrors());
         }
-
+        return redirect()->back()->withInput()->withErrors($company->getErrors());
     }
 
 
@@ -70,44 +69,40 @@ final class CompaniesController extends Controller
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
     * @param int $companyId
-    * @return View
-    */
-    public function getEdit($companyId)
+    * @return \Illuminate\Contracts\View\View
+     */
+    public function edit($companyId)
     {
         if (is_null($item = Company::find($companyId))) {
-            return redirect()->to('admin/settings/companies')
+            return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
-        } else {
-            return View::make('companies/edit')->with('item', $item);
         }
+        return view('companies/edit')->with('item', $item);
     }
 
     /**
-    * Save data from edit company form.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @param int $companyId
-    * @return Redirect
-    */
-    public function postEdit($companyId)
+     * Save data from edit company form.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param Request $request
+     * @param int $companyId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return redirect()->to('admin/settings/companies')->with('error', trans('admin/companies/message.does_not_exist'));
-        } else {
-
-
-            $company->name = e(Input::get('name'));
-
-            if ($company->save()) {
-                return redirect()->to('admin/settings/companies')
-                    ->with('success', trans('admin/companies/message.update.success'));
-            } else {
-                return redirect()->to("admin/settings/companies/$companyId/edit")
-                    ->with('error', trans('admin/companies/message.update.error'));
-            }
-
+            return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
         }
+
+        $company->name = $request->input('name');
+
+        if ($company->save()) {
+            return redirect()->route('companies.index')
+                ->with('success', trans('admin/companies/message.update.success'));
+        }
+        return redirect()->route('companies.edit', ['company' => $companyId])
+            ->with('error', trans('admin/companies/message.update.error'));
     }
 
     /**
@@ -116,17 +111,17 @@ final class CompaniesController extends Controller
     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
     * @since [v1.8]
     * @param int $companyId
-    * @return Redirect
-    */
-    public function postDelete($companyId)
+    * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return redirect()->to('admin/settings/companies')
+            return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.not_found'));
         } else {
             try {
                 $company->delete();
-                return redirect()->to('admin/settings/companies')
+                return redirect()->route('companies.index')
                     ->with('success', trans('admin/companies/message.delete.success'));
             } catch (\Illuminate\Database\QueryException $exception) {
             /*
@@ -134,12 +129,24 @@ final class CompaniesController extends Controller
                  * For example when rows in other tables are referencing this company
                  */
                 if ($exception->getCode() == 23000) {
-                    return redirect()->to('admin/settings/companies')
+                    return redirect()->route('companies.index')
                         ->with('error', trans('admin/companies/message.assoc_users'));
                 } else {
                     throw $exception;
                 }
             }
         }
+    }
+
+    public function show($id) {
+        $this->authorize('view', Company::class);
+
+        if (is_null($company = Company::find($id))) {
+            return redirect()->route('companies.index')
+                ->with('error', trans('admin/companies/message.not_found'));
+        } else {
+            return view('companies/view')->with('company',$company);
+        }
+
     }
 }

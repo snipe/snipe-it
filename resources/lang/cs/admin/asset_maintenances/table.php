@@ -2,7 +2,7 @@
 
     return [
         'title'         => 'Údržba zařízení',
-        'asset_name'    => 'Asset Name',
+        'asset_name'    => 'Název majetku',
         'is_warranty'   => 'Záruka',
         'dl_csv'        => 'Stáhnout CSV'
     ];

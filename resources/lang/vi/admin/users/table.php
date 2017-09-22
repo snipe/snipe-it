@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Đang hoạt động',
     'allow'  				=> 'Cho phép',
     'checkedout'  			=> 'Tài sản',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Địa phương',
     'lock_passwords'		=> 'Chi tiết đăng nhập không thể thay đổi trong cài đặt này.',
     'manager' 				=> 'Người quản lý',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Tên',
     'notes'                 => 'Ghi chú',
     'password_confirm' 		=> 'Xác nhận mật khẩu',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Hiển thị người dùng hiện tại',
     'show_deleted'          => 'Hiển thị người dùng đã xóa',
     'title' 				=> 'Tiêu đề',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Cập nhật người dùng',
     'username' 				=> 'Tên đăng nhập',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Nhân đôi người dùng',
     'viewusers' 			=> 'Xem Người dùng',

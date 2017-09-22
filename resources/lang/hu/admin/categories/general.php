@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'A kategóriákról',
+    'about_categories'  				=> 'A kategóriák segítenek rendezni a dolgait. Néhány példa kategória lehet "Desktop-ok", "Laptopok", "Mobiltelefonok", "Tabletek", és így tovább, de bármilyen más kategóriát használhat, ami releváns önnek.',
     'asset_categories' 					=> 'Eszköz kategóriák',
     'category_name'  					=> 'Kategória név',
     'checkin_email'                     => 'Küldj a felhasználónak e-mailt, leadáskor.',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Kategória szerkesztése',
     'eula_text'							=> 'Felhasználói engedély Kategória',
     'eula_text_help'					=> 'Ezzel a mezővel testre szabhatja a különböző eszközök EULA-ját. Ha csak egy EULA van az összes eszközhöz, akkor jelölje be a négyzetet lent, hogy az alapértelmezettet használja.',
+    'name'                              => 'Kategória neve',
     'require_acceptance'				=> 'A felhasználónak kötelező elfogadnia az eszköz(ök) átvételét ebben a kategóriában.',
     'required_acceptance'				=> 'Ennek a felhasználónak küldünk egy elfogadó linket e-mailben.',
     'required_eula'						=> 'Ennek a felhasználónak küldünk egy elfogadó linket e-mailben.',

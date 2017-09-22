@@ -2,7 +2,8 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class MacroServiceProvider extends ServiceProvider {
+class MacroServiceProvider extends ServiceProvider
+{
 
     /**
      * Bootstrap the application services.
@@ -12,9 +13,9 @@ class MacroServiceProvider extends ServiceProvider {
     public function boot()
     {
       //  require base_path() . '/resources/macros/community_types.php';
-      foreach(glob(base_path('resources/macros/*.php')) as $filename) {
-        require_once($filename);
-      }
+        foreach (glob(base_path('resources/macros/*.php')) as $filename) {
+            require_once($filename);
+        }
 
     }
 
@@ -27,5 +28,4 @@ class MacroServiceProvider extends ServiceProvider {
     {
         //
     }
-
 }

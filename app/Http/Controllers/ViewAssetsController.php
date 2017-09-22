@@ -41,7 +41,6 @@ class ViewAssetsController extends Controller
     {
 
         $user = User::with(
-            'assets',
             'assets.model',
             'consumables',
             'accessories',
@@ -54,7 +53,7 @@ class ViewAssetsController extends Controller
         $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
-            return View::make('account/view-assets', compact('user', 'userlog'));
+            return view('account/view-assets', compact('user', 'userlog'));
         } else {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
@@ -69,16 +68,16 @@ class ViewAssetsController extends Controller
     public function getRequestableIndex()
     {
 
-        $assets = Asset::with('model', 'defaultLoc', 'assetloc', 'assigneduser')->Hardware()->RequestableAssets()->get();
-        $models = AssetModel::with('category')->RequestableModels()->get();
+        $assets = Asset::with('model', 'defaultLoc', 'assetloc', 'assignedTo', 'requests')->Hardware()->RequestableAssets()->get();
+        $models = AssetModel::with('category', 'requests', 'assets')->RequestableModels()->get();
 
-        return View::make('account/requestable-assets', compact('user', 'assets', 'models'));
+        return view('account/requestable-assets', compact('user', 'assets', 'models'));
     }
 
     public function getRequestedIndex()
     {
         $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
-        return View::make('admin/requested-assets', compact('requestedItems'));
+        return view('admin/requested-assets', compact('requestedItems'));
     }
 
 
@@ -103,16 +102,16 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
-        $data['requested_by'] = $user->fullName();
+        $data['requested_by'] = $user->present()->fullName();
         $data['item_name'] = $item->name;
         $data['item_type'] = $itemType;
 
         if ($fullItemType == Asset::class) {
-            $data['item_url'] = route('view/hardware', $item->id);
-            $slackMessage = ' Asset <'.config('app.url').'/hardware/'.$item->id.'/view'.'|'.$item->showAssetName().'> requested by <'.config('app.url').'/users/'.$item->user_id.'/view'.'|'.$user->fullName().'>.';
+            $data['item_url'] = route('hardware.show', $item->id);
+            $slackMessage = ' Asset <'.url('/').'/hardware/'.$item->id.'/view'.'|'.$item->present()->name().'> requested by <'.url('/').'/users/'.$item->user_id.'/view'.'|'.$user->present()->fullName().'>.';
         } else {
             $data['item_url'] = route("view/${itemType}", $item->id);
-            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.config('app.url').'/user/'.$item->id.'/view'.'|'.$user->fullName().'>.';
+            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.url('/').'/user/'.$item->id.'/view'.'|'.$user->present()->fullName().'>.';
         }
 
         $settings = Setting::getSettings();
@@ -226,8 +225,8 @@ class ViewAssetsController extends Controller
             $logaction->target_type = User::class;
             $log = $logaction->logaction('requested');
 
-            $data['requested_by'] = $user->fullName();
-            $data['asset_name'] = $asset->showAssetName();
+            $data['requested_by'] = $user->present()->fullName();
+            $data['asset_name'] = $asset->present()->name();
 
             $settings = Setting::getSettings();
 
@@ -259,7 +258,7 @@ class ViewAssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'REQUESTED:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> requested by <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->fullName().'>.'
+                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
                                 ]
 
                             ]
@@ -281,7 +280,7 @@ class ViewAssetsController extends Controller
     {
         $checkoutrequests = CheckoutRequest::all();
 
-        return View::make('account/requested-items', compact($checkoutrequests));
+        return view('account/requested-items', compact($checkoutrequests));
     }
 
 
@@ -315,7 +314,7 @@ class ViewAssetsController extends Controller
         } elseif (!Company::isCurrentUserHasAccess($item)) {
             return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         } else {
-            return View::make('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item',$item);
+            return view('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item', $item);
         }
     }
 

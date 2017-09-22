@@ -11,6 +11,10 @@
             'error'   => 'Mantenimiento de Activos no fue creado, por favor intentelo de nuevo.',
             'success' => 'Mantenimiento de Activo creado correctamente.'
         ],
+        'edit'                       => [
+            'error'   => 'Asset Maintenance was not edited, please try again.',
+            'success' => 'Asset Maintenance edited successfully.'
+        ],
         'asset_maintenance_incomplete' => 'Sin Completar',
         'warranty'                     => 'Garantía',
         'not_warranty'                 => 'Sin Garantía',

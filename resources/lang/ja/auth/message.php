@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'このユーザーアカウントは有効化されていません。',
     'account_suspended'      => 'このユーザーアカウントは停止中です。',
     'account_banned'         => 'このユーザーアカウントは禁止されています。',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => '複数回ログインに失敗しました。 :minutes 分後に再試行してください。',
 
     'signin' => array(
         'error'   => 'ログインする際に問題が発生しました。もう一度やり直して下さい。',

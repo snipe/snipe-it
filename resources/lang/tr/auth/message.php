@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Hesabınız aktif edilmemiş.',
     'account_suspended'      => 'Hesabınız durdurulmuş.',
     'account_banned'         => 'Hesabınız engellenmiş.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Çok fazla başarısız giriş denemesi. Lütfen :minutes dakika içinde tekrar deneyin.',
 
     'signin' => array(
         'error'   => 'Bir problem ile karşılaştık, lütfen tekrar deneyin.',
@@ -15,23 +15,23 @@ return array(
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
+        'error'   => 'Hesabınızı oluştururken bir hata oluştu, lütfen tekrar deneyiniz.',
         'success' => 'Hesap başarılı bir şekilde oluşturuldu.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Şifre resetleme kodu oluştururken bir hata oluştu, lütfen tekrar deneyiniz.',
+            'success' => 'Şifre kurtarma emaili başarı ile gönderildi.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Şifrenizi sıfırlarken bir hata oluştu, lütfen tekrar deneyiniz.',
+            'success' => 'Şifreniz başarı ile sıfırlandı.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Hesabınızı aktif ederken bir hata oluştu, lütfen tekrar deneyiniz.',
+        'success' => 'Hesabınız başarı ile aktif edilmiştir.',
     ),
 
 );

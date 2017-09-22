@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'فعال کردن',
     'allow'  				=> 'مجاز کردن',
     'checkedout'  			=> 'دارایی ها',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'مکان',
     'lock_passwords'		=> 'جزییات وارد شدن نمیتواند در این نصب تغییر کند.',
     'manager' 				=> 'مدیر',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'نام',
     'notes'                 => 'یادداشت ها',
     'password_confirm' 		=> 'تایید رمز عبور',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'نمایش کابران کنونی',
     'show_deleted'          => 'نمایش کاربران حذف شده',
     'title' 				=> 'عنوان',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'به روز رسانی کاربر',
     'username' 				=> 'نام کاربری',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(این فقط برای فعال سازی راهنمای اتصال است ،نه برای وارد شدن)',
     'cloneuser'             => ' کاربر کلون',
     'viewusers' 			=> 'مشاهده کاربران',

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_models_title'     => 'About Asset Models',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
+    'about_models_title'     => 'A propos des modèles actifs',
+    'about_models_text'           => 'Les modèles actifs sont une façon de regrouper les actifs identiques. « MBP 2013", « IPhone 6 s », etc.',
     'deleted'  					        => 'Ce modèle a été détruit. <a href="/hardware/models/:model_id/restore">Cliquez ici pour le restaurer</a>.',
     'restore'                   => 'Restaurer le modèle',
     'requestable'               => 'Les utilisateurs peuvent demander ce modèle',

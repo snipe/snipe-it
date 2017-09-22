@@ -4,9 +4,9 @@ use App\Models\Consumable;
 
 class ConsumableSeeder extends Seeder
 {
-  public function run()
-  {
-    Consumable::truncate();
-    factory(Consumable::class, 'consumable',25)->create();
-  }
+    public function run()
+    {
+        Consumable::truncate();
+        factory(Consumable::class, 25)->create();
+    }
 }

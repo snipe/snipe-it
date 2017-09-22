@@ -1,30 +1,46 @@
 <?php
 namespace App\Models;
 
+use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\Setting;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends SnipeModel implements AuthenticatableContract, CanResetPasswordContract
 {
-
-    use SoftDeletes;
-    use ValidatingTrait;
-    use Authenticatable;
-    use CanResetPassword;
+    protected $presenter = 'App\Presenters\UserPresenter';
+    use SoftDeletes, ValidatingTrait;
+    use Authenticatable, CanResetPassword, HasApiTokens;
     use UniqueUndeletedTrait;
-
+    use Notifiable;
+    use Presentable;
     protected $dates = ['deleted_at'];
+    protected $hidden = ['password','remember_token','permissions','reset_password_code','persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
-    protected $fillable = ['first_name', 'last_name', 'email','password','username'];
+    protected $fillable = [
+        'email',
+        'last_name',
+        'company_id',
+        'department_id',
+        'employee_num',
+        'jobtitle',
+        'location_id',
+        'password',
+        'phone_number',
+        'username',
+        'first_name',
+    ];
 
+    protected $casts = [
+        'activated' => 'boolean',
+    ];
 
     /**
      * Model validation rules
@@ -34,19 +50,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $rules = [
         'first_name'              => 'required|string|min:1',
-        'username'                => 'required|string|min:2|unique_undeleted',
-        'email'                   => 'email',
+        'username'                => 'required|string|min:1|unique_undeleted',
+        'email'                   => 'email|nullable',
         'password'                => 'required|min:6',
+        'locale'                  => 'max:10|nullable'
     ];
 
 
     public function hasAccess($section)
     {
-
         if ($this->isSuperUser()) {
             return true;
         }
-
         $user_groups = $this->groups;
 
 
@@ -60,7 +75,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
             return true;
         }
-
         // If the user is explicitly denied, return false
         if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1')) {
             return false;
@@ -104,25 +118,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
-    public function isActivated()
+    public function department()
     {
-        if ($this->activated == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->belongsTo('\App\Models\Department', 'department_id');
     }
 
-
-    /**
-     * Returns the user full name, it simply concatenates
-     * the user first and last name.
-     *
-     * @return string
-     */
-    public function fullName()
+    public function isActivated()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return $this->activated ==1;
     }
 
     public function getFullNameAttribute()
@@ -135,33 +138,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
     }
 
-    /**
-     * Returns the user Gravatar image url.
-     *
-     * @return string
-     */
-    public function gravatar()
-    {
 
-        if ($this->avatar) {
-            return config('app.url').'/uploads/avatars/'.$this->avatar;
-        }
-
-        if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
-            $gravatar = md5(strtolower(trim($this->email)));
-            return "//gravatar.com/avatar/".$gravatar;
-        }
-
-        return false;
-
-    }
 
     /**
      * Get assets assigned to this user
      */
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
+        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        // return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
     /**
@@ -218,6 +203,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function manager()
     {
         return $this->belongsTo('\App\Models\User', 'manager_id')->withTrashed();
+    }
+
+    /**
+     * Get any locations the user manages.
+     **/
+    public function managedLocations()
+    {
+        return $this->hasMany('\App\Models\Location', 'manager_id')->withTrashed();
     }
 
     /**
@@ -309,7 +302,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->orWhere('username', '=', $user_email);
     }
 
-    public static function generateEmailFromFullName($name) {
+    public static function generateEmailFromFullName($name)
+    {
         $username = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }
@@ -331,7 +325,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             // There is a last name given
         } else {
 
-            $last_name = str_replace($first_name, '', $users_name);
+            $last_name = str_replace($first_name . ' ', '', $users_name);
 
             if ($format=='filastname') {
                 $email_last_name.=str_replace(' ', '', $last_name);
@@ -356,6 +350,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return $user;
 
+
+    }
+
+    /**
+     * Check whether two-factor authorization is required and the user has activated it
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     *
+     * @return bool
+     */
+    public function two_factor_active () {
+
+        if (Setting::getSettings()->two_factor_enabled !='0') {
+            if (($this->two_factor_optin =='1') && ($this->two_factor_enrolled)) {
+                return true;
+            }
+        }
+        return false;
 
     }
 
@@ -387,6 +400,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 ->orWhere(function ($query) use ($search) {
                     $query->whereHas('userloc', function ($query) use ($search) {
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
+                    });
+                })
+                ->orWhere(function ($query) use ($search) {
+                    $query->whereHas('department', function ($query) use ($search) {
+                        $query->where('departments.name', 'LIKE', '%'.$search.'%');
                     });
                 })
                 ->orWhere(function ($query) use ($search) {
@@ -443,5 +461,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'users.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
+    }
+
+
+    /**
+     * Query builder scope to order on department
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderDepartment($query, $order)
+    {
+        return $query->leftJoin('departments', 'users.department_id', '=', 'departments.id')->orderBy('departments.name', $order);
     }
 }

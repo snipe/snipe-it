@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Asset restored successfully.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
@@ -48,6 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti acest activ?',
         'error'   		=> 'S-a intampinat o problema la stergerea activului. Va rugam incercati iar.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Activul a fost sters.'
     ),
 

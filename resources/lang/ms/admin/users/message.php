@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'You have successfully accepted this asset.',
     'declined'                  => 'You have successfully declined this asset.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Pengguna telah wujud!',
     'user_not_found'            => 'Pengguna [:id] tidak wujud.',
     'user_login_required'       => 'Ruangan log masuk diperlukan',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Pengguna berjaya dicipta.',
         'update'    => 'Pengguna berjaya dikemaskini.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Pnegguna berjaya dihapuskan.',
         'ban'       => 'Pengguna berjaya disekat.',
         'unban'     => 'Pengguna berjaya dibernarkan.',
@@ -29,6 +31,7 @@ return array(
         'create' => 'Ada isu semasa mencipta pengguna. Sila cuba lagi.',
         'update' => 'Ada isu semasa mencipta pengguna. Sila cuba lagi.',
         'delete' => 'Ada isu semasa menghapuskan pengguna. Sila cuba lagi.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Ada isu semasa melepakan pengguna. Sila cuba lagi. ',
         'import'    => 'There was an issue importing users. Please try again.',
         'asset_already_accepted' => 'This asset has already been accepted.',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
         'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
         'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

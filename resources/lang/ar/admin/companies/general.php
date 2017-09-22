@@ -1,6 +1,6 @@
 <?php
 return [
-    'about_companies_title'            => 'About Companies',
-    'about_companies_text'                  => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'about_companies_title'            => 'حول الشركات',
+    'about_companies_text'                  => 'يمكن للشركات أن تستخدم كحقل معرف بسيط، أو يمكن استخدامها للحد من معاينة الأصول، والمستخدمين، وما إلى ذلك إذا تم تمكين دعم الشركة الكامل في إعدادات مدير النظام.',
     'select_company' => 'اختر الشركة',
 ];

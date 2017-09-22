@@ -2,9 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use DB;
-
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -12,14 +9,18 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
+use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\Group;
+use App\Models\Import;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
+use DB;
+use Illuminate\Console\Command;
 
 class PaveIt extends Command
 {
@@ -63,6 +64,7 @@ class PaveIt extends Command
                 Company::getQuery()->delete();
                 Component::getQuery()->delete();
                 Consumable::getQuery()->delete();
+                Department::getQuery()->delete();
                 Depreciation::getQuery()->delete();
                 License::getQuery()->delete();
                 LicenseSeat::getQuery()->delete();
@@ -72,6 +74,7 @@ class PaveIt extends Command
                 Statuslabel::getQuery()->delete();
                 Supplier::getQuery()->delete();
                 Group::getQuery()->delete();
+                Import::getQuery()->delete();
 
                 DB::statement('delete from accessories_users');
                 DB::statement('delete from asset_logs');
@@ -107,6 +110,7 @@ class PaveIt extends Command
                 \DB::statement('drop table IF EXISTS custom_fields');
                 \DB::statement('drop table IF EXISTS custom_fieldsets');
                 \DB::statement('drop table IF EXISTS depreciations');
+                \DB::statement('drop table IF EXISTS departments');
                 \DB::statement('drop table IF EXISTS groups');
                 \DB::statement('drop table IF EXISTS history');
                 \DB::statement('drop table IF EXISTS components');
@@ -117,6 +121,11 @@ class PaveIt extends Command
                 \DB::statement('drop table IF EXISTS manufacturers');
                 \DB::statement('drop table IF EXISTS models');
                 \DB::statement('drop table IF EXISTS migrations');
+                \DB::statement('drop table IF EXISTS oauth_access_tokens');
+                \DB::statement('drop table IF EXISTS oauth_auth_codes');
+                \DB::statement('drop table IF EXISTS oauth_clients');
+                \DB::statement('drop table IF EXISTS oauth_personal_access_clients');
+                \DB::statement('drop table IF EXISTS oauth_refresh_tokens');
                 \DB::statement('drop table IF EXISTS password_resets');
                 \DB::statement('drop table IF EXISTS requested_assets');
                 \DB::statement('drop table IF EXISTS requests');
@@ -126,6 +135,7 @@ class PaveIt extends Command
                 \DB::statement('drop table IF EXISTS throttle');
                 \DB::statement('drop table IF EXISTS users_groups');
                 \DB::statement('drop table IF EXISTS users');
+                \DB::statement('drop table IF EXISTS imports');
             }
         }
     }

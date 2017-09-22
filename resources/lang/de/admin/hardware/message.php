@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Asset erfolgreich wiederhergestellt.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Datei wurde nicht gelöscht. Bitte noch einmal Probieren.',
         'success' => 'Datei erfolgreich gelöscht.',
@@ -48,6 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',
         'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        'nothing_updated'   => 'Es wurden keine Assets ausgewählt, somit wurde auch nichts gelöscht.',
         'success' 		=> 'Dieses Asset wurde erfolgreich entfernt.'
     ),
 

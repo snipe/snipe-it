@@ -1,0 +1,17 @@
+{
+  "name": "Reorder Rows",
+  "version": "1.0.0",
+  "description": "Plugin to support the reordering rows feature.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/reorder-rows",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/reorder-rows.html",
+
+  "plugins": [{
+    "name": "bootstrap-table-reorder-rows",
+    "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/reorder-rows"
+  }],
+
+  "author": {
+    "name": "djhvscf",
+    "image": "https://avatars1.githubusercontent.com/u/4496763"
+  }
+}

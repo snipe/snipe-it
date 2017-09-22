@@ -18,6 +18,7 @@ return array(
             'note'       => 'Determines whether the user has access to most aspects of the admin. ',
             'display'    => true,
         ),
+
         array(
             'permission' => 'admin.api_key',
             'label'      => 'Create API Key',
@@ -84,8 +85,8 @@ return array(
         array(
             'permission' => 'assets.audit',
             'label'      => 'Audit ',
-            'note'       => '',
-            'display'    => false,
+            'note'       => 'Allows the user to mark an asset as physically inventoried.',
+            'display'    => true,
         ),
 
 
@@ -279,6 +280,257 @@ return array(
 
     ),
 
+
+    'Models' => array(
+        array(
+            'permission' => 'models.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'models.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'models.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'models.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+
+    ),
+
+    'Categories' => array(
+        array(
+            'permission' => 'categories.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'categories.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'categories.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'categories.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Departments' => array(
+        array(
+            'permission' => 'departments.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'departments.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Status Labels' => array(
+        array(
+            'permission' => 'statuslabels.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'statuslabels.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'statuslabels.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'statuslabels.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Custom Fields' => array(
+        array(
+            'permission' => 'customfields.view',
+            'label'      => 'View',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfields.create',
+            'label'      => 'Create',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfields.edit',
+            'label'      => 'Edit',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfields.delete',
+            'label'      => 'Delete',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+
+
+    'Suppliers' => array(
+        array(
+            'permission' => 'suppliers.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'suppliers.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'suppliers.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'suppliers.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+
+    'Manufacturers' => array(
+        array(
+            'permission' => 'manufacturers.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'manufacturers.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'manufacturers.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'manufacturers.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Depreciations' => array(
+        array(
+            'permission' => 'depreciations.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'depreciations.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'depreciations.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'depreciations.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+    'Locations' => array(
+        array(
+            'permission' => 'locations.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'locations.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'locations.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'locations.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+
+
+
     'Self' => array(
         array(
             'permission' => 'self.two_factor',
@@ -287,7 +539,15 @@ return array(
             'display'    => true,
         ),
 
+        array(
+            'permission' => 'self.api',
+            'label'      => 'Create API Keys',
+            'note'       => 'The user create personal API keys to utilize the REST API.',
+            'display'    => true,
+        ),
+
     ),
+
 
 
 

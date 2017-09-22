@@ -1,13 +1,14 @@
 <?php
 namespace App\Models;
 
-use App\Models\SnipeModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class Manufacturer extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\ManufacturerPresenter';
+    use Presentable;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'manufacturers';
@@ -15,8 +16,14 @@ class Manufacturer extends SnipeModel
     // Declare the rules for the form validation
     protected $rules = array(
         'name'   => 'required|min:2|max:255|unique:manufacturers,name,NULL,deleted_at',
-        'user_id' => 'integer',
+        'url'   => 'url|nullable',
+        'support_url'   => 'url|nullable',
+        'support_email'   => 'email|nullable'
     );
+
+    protected $hidden = ['user_id','deleted_at'];
+
+
 
     /**
     * Whether the model should inject it's identifier to the unique
@@ -33,7 +40,7 @@ class Manufacturer extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','url','support_url','support_phone','support_email'];
 
 
 

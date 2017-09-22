@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> 'Toplu varlık silmeyi onaylıyor musunuz?',
+  'bulk_delete_help'	=> 'Toplu silme için aşağıdaki Varlıkları gözden geçirin. Silindikten sonra bu varlıkların geri yüklenebilir fakat atanmış olan herhangi bir kullanıcı ile ilişkili olmayacaktır.',
+  'bulk_delete_warn'	=> ':asset_count adet varlığı düzenlemek üzeresiniz.',
 	'bulk_update'		=> 'Demirbaşları Toplu Güncelle',
 	'bulk_update_help'	=> 'Bu form birden çok demirbaşı tek seferde güncellemenizi sağlar. Lütfen sadece değiştirmek istediğiniz alanları doldurunuz. Değiştirilmesini istemediğiniz alanları boş bırakınız. ',
 	'bulk_update_warn'	=> ':asset_count adet demirbaşı düzenlemek üzeresiniz.',
@@ -18,10 +18,10 @@ return array(
     'default_location'	=> 'Varsayılan Konum',
     'eol_date'			=> 'Ömür',
     'eol_rate'			=> 'Ömür Başarısı',
-    'expected_checkin'  => 'Expected Checkin Date',
+    'expected_checkin'  => 'Beklenen geri alma tarihi',
     'expires'			=> 'Son kullanma tarihi',
     'fully_depreciated'	=> 'Değeri tamamen düştü',
-    'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
+    'help_checkout'		=> 'Bu varlığı hemen atamak istiyorsanız Durum listesinden "Atanabilir" durumunu seçin. ',
     'mac_address'		=> 'MAC Adresi',
     'manufacturer'		=> 'Üretici',
     'model'				=> 'Model',

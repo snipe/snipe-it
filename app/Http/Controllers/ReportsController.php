@@ -6,21 +6,14 @@ use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
-use App\Models\AssetModel;
-use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\License;
-use App\Models\Location;
 use App\Models\Setting;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
-use Redirect;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -42,8 +35,7 @@ class ReportsController extends Controller
     public function getAccessoryReport()
     {
         $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
-
-        return View::make('reports/accessories', compact('accessories'));
+        return view('reports/accessories', compact('accessories'));
     }
 
     /**
@@ -98,7 +90,7 @@ class ReportsController extends Controller
     public function getAssetsReport()
     {
         $settings = \App\Models\Setting::first();
-        return View::make('reports/asset', compact('assets'))->with('settings', $settings);
+        return view('reports/asset', compact('assets'))->with('settings', $settings);
     }
 
 
@@ -117,11 +109,11 @@ class ReportsController extends Controller
 
         $customfields = CustomField::get();
 
-        $response = new StreamedResponse(function() use ($customfields) {
+        $response = new StreamedResponse(function () use ($customfields) {
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            Asset::with('assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
+            Asset::with('assignedTo', 'assetLoc','defaultLoc','assignedTo','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
                 $headers=[
                     trans('general.company'),
                     trans('admin/hardware/table.asset_tag'),
@@ -140,7 +132,7 @@ class ReportsController extends Controller
                     trans('admin/hardware/table.location'),
                     trans('general.notes'),
                 ];
-                foreach($customfields as $field) {
+                foreach ($customfields as $field) {
                     $headers[]=$field->name;
                 }
                 fputcsv($handle, $headers);
@@ -160,13 +152,12 @@ class ReportsController extends Controller
                         ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
                         ($asset->order_number) ? e($asset->order_number) : '',
                         ($asset->supplier) ? e($asset->supplier->name) : '',
-                        ($asset->assigneduser) ? e($asset->assigneduser->fullName()) : '',
+                        ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        ($asset->assigneduser && $asset->assigneduser->userloc!='') ?
-                            e($asset->assigneduser->userloc->name) : ( ($asset->defaultLoc!='') ? e($asset->defaultLoc->name) : ''),
+                        e($asset->assetLoc->present()->name()),
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
-                    foreach($customfields as $field) {
+                    foreach ($customfields as $field) {
                         $values[]=$asset->{$field->db_column_name()};
                     }
                     fputcsv($handle, $values);
@@ -195,10 +186,10 @@ class ReportsController extends Controller
     {
 
         // Grab all the assets
-        $assets = Asset::with('model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog', 'company')
+        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'assetloc', 'assetlog', 'company', 'model.category', 'model.depreciation')
                        ->orderBy('created_at', 'DESC')->get();
 
-        return View::make('reports/depreciation', compact('assets'));
+        return view('reports/depreciation', compact('assets'));
     }
 
     /**
@@ -213,7 +204,7 @@ class ReportsController extends Controller
     {
 
         // Grab all the assets
-        $assets = Asset::with('model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog')
+        $assets = Asset::with('model', 'assignedTo', 'assetstatus', 'defaultLoc', 'assetlog')
                        ->orderBy('created_at', 'DESC')->get();
 
         $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
@@ -244,15 +235,13 @@ class ReportsController extends Controller
             $row[] = e($asset->name);
             $row[] = e($asset->serial);
 
-            if ($asset->assigned_to > 0) {
-                $user  = User::find($asset->assigned_to);
-                $row[] = e($user->fullName());
+            if ($target = $asset->assignedTo) {
+                $row[] = e($target->present()->name());
             } else {
                 $row[] = ''; // Empty string if unassigned
             }
 
-            if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
-                $location = Location::find($asset->assigneduser->location_id);
+            if (( $asset->assigned_to > 0 ) && ( $location = $asset->assetLoc )) {
                 if ($location->city) {
                     $row[] = e($location->city) . ', ' . e($location->state);
                 } elseif ($location->name) {
@@ -282,6 +271,20 @@ class ReportsController extends Controller
 
     }
 
+
+    /**
+     * Displays audit report.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+    public function audit()
+    {
+        return view('reports/audit');
+    }
+
+
     /**
     * Displays activity report.
     *
@@ -291,137 +294,10 @@ class ReportsController extends Controller
     */
     public function getActivityReport()
     {
-        $log_actions = Actionlog::orderBy('created_at', 'DESC')
-                                ->with('item')
-                                ->orderBy('created_at', 'DESC')
-                                ->get();
 
-        return View::make('reports/activity', compact('log_actions'));
+        return view('reports/activity');
     }
 
-    /**
-     * Returns Activity Report JSON.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
-     * @return View
-     */
-    public function getActivityReportDataTable()
-    {
-        $activitylogs = Company::scopeCompanyables(Actionlog::with('item', 'user', 'target'))->orderBy('created_at', 'DESC');
-
-        if (Input::has('search')) {
-            $activitylogs = $activitylogs->TextSearch(e(Input::get('search')));
-        }
-
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
-
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
-
-
-        $allowed_columns = ['created_at'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
-
-
-        $activityCount = $activitylogs->count();
-        $activitylogs = $activitylogs->offset($offset)->limit($limit)->get();
-
-        $rows = array();
-        foreach ($activitylogs as $activity) {
-
-            if ($activity->itemType() == "asset") {
-                $activity_icons = '<i class="fa fa-barcode"></i>';
-            } elseif ($activity->itemType() == "accessory") {
-                $activity_icons = '<i class="fa fa-keyboard-o"></i>';
-            } elseif ($activity->itemType()=="consumable") {
-                $activity_icons = '<i class="fa fa-tint"></i>';
-            } elseif ($activity->itemType()=="license"){
-                $activity_icons = '<i class="fa fa-floppy-o"></i>';
-            } elseif ($activity->itemType()=="component") {
-                $activity_icons = '<i class="fa fa-hdd-o"></i>';
-            } else {
-                $activity_icons = '<i class="fa fa-paperclip"></i>';
-            }
-
-            if (($activity->item) && ($activity->itemType()=="asset")) {
-              $activity_item = '<a href="'.route('view/hardware', $activity->item_id).'">'.e($activity->item->asset_tag).' - '. e($activity->item->showAssetName()).'</a>';
-                $item_type = 'asset';
-            } elseif ($activity->item) {
-
-                if ($activity->item->deleted_at!='') {
-                    $activity_item = '<del>'. e($activity->item->name).'</del>';
-                } else {
-                    $activity_item = '<a href="' . route('view/' . $activity->itemType(),
-                    $activity->item_id) . '">' . e($activity->item->name) . '</a>';
-                }
-
-                $item_type = $activity->itemType();
-
-            } else {
-                $activity_item = "unknown (deleted)";
-                $item_type = "null";
-            }
-            
-
-            if (($activity->user) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user")) {
-                $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->user->fullName().'</a>';
-            } elseif ($activity->target_type === "App\Models\Asset") {
-                if($activity->target) {
-                    $activity_target = '<a href="'.route('view/hardware', $activity->target_id).'">'.$activity->target->showAssetName().'</a>';
-                } else {
-                    $activity_target = "";
-                }
-            } elseif ( $activity->target_type === "App\Models\User") {
-                if($activity->target) {
-                   $activity_target = '<a href="'.route('view/user', $activity->target_id).'">'.$activity->target->fullName().'</a>';
-                } else {
-                    $activity_target = '';
-                }
-            } elseif (($activity->action_type=='accepted') || ($activity->action_type=='declined')) {
-                $activity_target = '<a href="' . route('view/user', $activity->item->assigneduser->id) . '">' . e($activity->item->assigneduser->fullName()) . '</a>';
-
-            } elseif ($activity->action_type=='requested') {
-                if ($activity->user) {
-                    $activity_target =  '<a href="'.route('view/user', $activity->user_id).'">'.$activity->user->fullName().'</a>';
-                } else {
-                    $activity_target = '';
-                }
-            } else {
-                if($activity->target) {
-                    $activity_target = $activity->target->id;
-                } else {
-                    $activity_target = "";
-                }
-            }
-
-            
-            $rows[] = array(
-                'icon'          => $activity_icons,
-                'created_at'    => date("M d, Y g:iA", strtotime($activity->created_at)),
-                'action_type'              => strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))),
-                'admin'         =>  $activity->user ? (string) link_to('/admin/users/'.$activity->user_id.'/view', $activity->user->fullName()) : '',
-                'target'          => $activity_target,
-                'item'          => $activity_item,
-                'item_type'     => $item_type,
-                'note'     => e($activity->note),
-
-            );
-        }
-
-        $data = array('total'=>$activityCount, 'rows'=>$rows);
-
-        return $data;
-
-    }
 
     /**
      * Displays license report
@@ -437,7 +313,7 @@ class ReportsController extends Controller
                            ->with('company')
                            ->get();
 
-        return View::make('reports/licenses', compact('licenses'));
+        return view('reports/licenses', compact('licenses'));
     }
 
     /**
@@ -501,7 +377,7 @@ class ReportsController extends Controller
     public function getCustomReport()
     {
         $customfields = CustomField::get();
-        return View::make('reports/custom')->with('customfields', $customfields);
+        return view('reports/custom')->with('customfields', $customfields);
     }
 
     /**
@@ -514,7 +390,7 @@ class ReportsController extends Controller
      */
     public function postCustom()
     {
-        $assets = Asset::orderBy('created_at', 'DESC')->with('company','assigneduser', 'assetloc','defaultLoc','assigneduser.userloc','model','supplier','assetstatus','model.manufacturer')->get();
+        $assets = Asset::orderBy('created_at', 'DESC')->with('company', 'assignedTo', 'assetloc', 'defaultLoc', 'model', 'supplier', 'assetstatus', 'model.manufacturer')->get();
         $customfields = CustomField::get();
 
         $rows   = [ ];
@@ -639,7 +515,7 @@ class ReportsController extends Controller
                 $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
             if (e(Input::get('eol')) == '1') {
-                $row[] = '"' .($asset->eol_date()) ? $asset->eol_date() : ''. '"';
+                $row[] = '"' .($asset->present()->eol_date()) ? $asset->present()->eol_date() : ''. '"';
             }
             if (e(Input::get('order')) == '1') {
                 if ($asset->order_number) {
@@ -657,44 +533,36 @@ class ReportsController extends Controller
             }
 
             if (e(Input::get('location')) == '1') {
-                $show_loc = '';
-
-
-                if (($asset->assigned_to > 0) && ($asset->assigneduser) && ($asset->assigneduser->location)) {
-                    $show_loc .= '"' .e($asset->assigneduser->location->name). '"';
-                } elseif ($asset->rtd_location_id!='') {
-                    $location = Location::find($asset->rtd_location_id);
-                    if ($location) {
-                        $show_loc .= '"' .e($location->name). '"';
-                    } else {
-                        $show_loc .= 'Default location '.$asset->rtd_location_id.' is invalid';
-                    }
+                if($asset->assetLoc) {
+                    $show_loc = $asset->assetLoc->present()->name();
+                } else {
+                    $show_loc = 'Default location '.$asset->rtd_location_id.' is invalid';
                 }
-
                 $row[] = $show_loc;
-
             }
 
 
             if (e(Input::get('assigned_to')) == '1') {
-                if ($asset->assigneduser) {
-                    $row[] = '"' .e($asset->assigneduser->fullName()). '"';
+                if ($asset->assignedTo) {
+                    $row[] = '"' .e($asset->assignedTo->present()->name()). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
             }
 
             if (e(Input::get('username')) == '1') {
-                if ($asset->assigneduser) {
-                    $row[] = '"' .e($asset->assigneduser->username). '"';
+                // Only works if we're checked out to a user, not anything else.
+                if ($asset->checkedOutToUser()) {
+                    $row[] = '"' .e($asset->assignedTo->username). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
             }
 
             if (e(Input::get('employee_num')) == '1') {
-                if ($asset->assigneduser) {
-                    $row[] = '"' .e($asset->assigneduser->employee_num). '"';
+                // Only works if we're checked out to a user, not anything else.
+                if ($asset->checkedOutToUser()) {
+                    $row[] = '"' .e($asset->assignedTo->employee_num). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
@@ -714,7 +582,7 @@ class ReportsController extends Controller
             if (e(Input::get('warranty')) == '1') {
                 if ($asset->warranty_months) {
                     $row[] = $asset->warranty_months;
-                    $row[] = $asset->warrantee_expires();
+                    $row[] = $asset->present()->warrantee_expires();
                 } else {
                     $row[] = '';
                     $row[] = '';
@@ -766,7 +634,7 @@ class ReportsController extends Controller
                 ->with('error', trans('admin/reports/message.error'));
         }
     }
-    
+
 
     /**
      * getImprovementsReport
@@ -782,7 +650,7 @@ class ReportsController extends Controller
                                               ->orderBy('created_at', 'DESC')
                                               ->get();
 
-        return View::make('reports/asset_maintenances', compact('assetMaintenances'));
+        return view('reports/asset_maintenances', compact('assetMaintenances'));
 
     }
 
@@ -857,7 +725,7 @@ class ReportsController extends Controller
     {
         $assetsForReport = Asset::notYetAccepted()->with('company')->get();
 
-        return View::make('reports/unaccepted_assets', compact('assetsForReport'));
+        return view('reports/unaccepted_assets', compact('assetsForReport'));
     }
 
     /**
@@ -891,9 +759,9 @@ class ReportsController extends Controller
             $row    = [ ];
             $row[]  = str_replace(',', '', e($assetItem->assetlog->model->category->name));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->model->name));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->showAssetName()));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->present()->name()));
             $row[]  = str_replace(',', '', e($assetItem->assetlog->asset_tag));
-            $row[]  = str_replace(',', '', e($assetItem->assetlog->assigneduser->fullName()));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->assignedTo->present()->name()));
             $rows[] = implode($row, ',');
         }
 

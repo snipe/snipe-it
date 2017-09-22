@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Műveletek',
     'add'    	                => 'Új hozzáadása',
     'cancel'                    => 'Vissza',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'Kérelem',
     'submit'  	                => 'Küldés',
     'upload'                    => 'Feltöltés',
-
+	'select_file'				=> 'Select File...',
 );

@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Akaun pengguna ini tidak aktif. ',
     'account_suspended'      => 'Akaun pengguna ini digantung.',
     'account_banned'         => 'Akaun pengguna ini di sekat.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
 
     'signin' => array(
         'error'   => 'Ada masalah semasa log masuk, sila cuba lagi.',

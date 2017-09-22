@@ -9,14 +9,16 @@ class AccessoriesCest
          $I->fillField('username', 'snipeit');
          $I->fillField('password', 'snipeit');
          $I->click('Login');
+         $I->seeAuthentication();
     }
 
     // tests
-    public function tryToTest(FunctionalTester $I)
+    public function loadsFormWithoutErrors(FunctionalTester $I)
     {
         $I->wantTo('ensure that the create accessories form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
+        $I->seeResponseCodeIs(200);
         $I->dontSee('Create Accessory', '.page-header');
         $I->see('Create Accessory', 'h1.pull-left');
     }
@@ -24,7 +26,8 @@ class AccessoriesCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
+        $I->seeResponseCodeIs(200);
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -35,7 +38,8 @@ class AccessoriesCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
+        $I->seeResponseCodeIs(200);
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
         $I->fillField('min_amt', '-15');
@@ -49,7 +53,7 @@ class AccessoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $accessory = factory(App\Models\Accessory::class,'accessory')->make();
+        $accessory = factory(App\Models\Accessory::class)->make();
         $values = [
             'company_id'       => $accessory->company_id,
             'name'          => $accessory->name,
@@ -64,7 +68,8 @@ class AccessoriesCest
         ];
 
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage('/admin/accessories/create');
+        $I->amOnPage('/accessories/create');
+        $I->seeResponseCodeIs(200);
 
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('accessories', $values);
@@ -76,7 +81,7 @@ class AccessoriesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an accessory');
-        $I->amOnPage( route('delete/accessory', $I->getAccessoryId() ) );
-        $I->seeElement('.alert-success');
+        $I->sendDelete( route('accessories.destroy', $I->getAccessoryId() ), ['_token' => csrf_token()] );
+        $I->seeResponseCodeIs(200);
     }
 }

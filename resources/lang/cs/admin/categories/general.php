@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'Informace o kategoriích',
+    'about_categories'  				=> 'Kategorie usnadňují organizovat majetek. Takovou kategorii může být např. &quot;Desktopy&quot;, &quot;Notebooky&quot;, &quot;Mobilní telefony&quot;, &quot;Tablety&quot;, apod., ale můžete použít kategorie jakýmkoli způsobem.',
     'asset_categories' 					=> 'Kategorie majetku',
     'category_name'  					=> 'Jméno kategorie',
     'checkin_email'                     => 'Poslat uživateli zprávu při přejímce.',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Upravit Kategorii',
     'eula_text'							=> 'EULA Kategorie',
     'eula_text_help'					=> 'Toto pole umožňuje upravit EULA pro různé druhy majetku. Pokud máte pouze jeden typ pro všechen majetek, můžete zaškrtnout položku níže pro použití jako výchozí.',
+    'name'                              => 'Název kategorie',
     'require_acceptance'				=> 'Žádat uživatelé o potvrzení převzetí majetku v této kategorii.',
     'required_acceptance'				=> 'Uživateli bude zaslán email s odkazem pro potvrzení přijetí této položky.',
     'required_eula'						=> 'Tomuto uživateli bude zaslána kopie EUAL emailem',

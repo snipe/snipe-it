@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
+    'assigned_to'   	=> 'مخصص لـ',
+    'checkout'   		=> 'داخل\\خارج',
+    'id'      			=> 'رقم التعريف',
     'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_name'   	=> 'مرخص الى',
+    'purchase_date'   	=> 'تاريخ الشراء',
+    'purchased'   		=> 'تم الشراء',
+    'seats'   			=> 'مقاعد',
+    'hardware'   		=> 'أجهزة',
+    'serial'   			=> 'الرقم التسلسلي',
+    'title'      		=> 'الرخص',
 
 );

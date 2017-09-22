@@ -2,6 +2,6 @@
 
 {{ trans('mail.login_first_admin') }}
 
-URL: {{ config('app.url') }}
+URL: {{ url('/') }}
 {{ trans('mail.username') }} {{ $username }}
 {{ trans('mail.password') }} {{ $password }}

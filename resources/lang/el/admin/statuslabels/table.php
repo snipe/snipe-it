@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'color'      	=> 'Chart Color',
-    'deployable'      	=> 'Deployable',
+    'about'      	=> 'Σχετικά με το καθεστώς ετικετών',
+    'archived'      	=> 'Αρχειοθετημένα',
+    'create'      	=> 'Δημιουργία ετικέτας κατάστασης',
+    'color'      	=> 'Χρώμα Γραφήματος',
+    'deployable'      	=> 'Προς ανάπτυξη',
     'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
+    'name'      	=> 'Όνομα κατάστασης',
+    'pending'      	=> 'Εκκρεμεί',
+    'status_type'   => 'Τύπος κατάστασης',
     'show_in_nav'   => 'Show in side nav',
-    'title'      	=> 'Status Labels',
+    'title'      	=> 'Ετικέτα Κατάστασης',
     'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'update'      	=> 'Ενημέρωση κατάστασης ετικέτα',
 );

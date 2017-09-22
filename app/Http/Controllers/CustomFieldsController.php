@@ -11,6 +11,7 @@ use App\Models\AssetModel;
 use Lang;
 use Auth;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use Log;
 
 /**
@@ -35,76 +36,14 @@ class CustomFieldsController extends Controller
     */
     public function index()
     {
-        //
-        $fieldsets=CustomFieldset::with("fields", "models")->get();
-        //$fieldsets=CustomFieldset::all();
-        $fields=CustomField::with("fieldset")->get();
-        //$fields=CustomField::all();
-        return View::make("custom_fields.index")->with("custom_fieldsets", $fieldsets)->with("custom_fields", $fields);
+
+        $fieldsets = CustomFieldset::with("fields", "models")->get();
+        $fields = CustomField::with("fieldset")->get();
+        return view("custom_fields.index")->with("custom_fieldsets", $fieldsets)->with("custom_fields", $fields);
     }
 
 
-    /**
-    * Returns a view with a form for creating a new custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
-    public function create()
-    {
-        //
-        return View::make("custom_fields.create");
-    }
 
-
-    /**
-    * Validates and stores a new custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
-    public function store(Request $request)
-    {
-        //
-        $cfset = new CustomFieldset(
-            [
-                "name" => e($request->get("name")),
-                "user_id" => Auth::user()->id]
-            );
-
-        $validator=Validator::make(Input::all(), $cfset->rules);
-        if ($validator->passes()) {
-            $cfset->save();
-            return redirect()->route("admin.custom_fields.show", [$cfset->id])->with('success', trans('admin/custom_fields/message.fieldset.create.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-    }
-
-    /**
-    * Associate the custom field with a custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
-    public function associate($id)
-    {
-
-        $set = CustomFieldset::find($id);
-
-        foreach ($set->fields as $field) {
-            if ($field->id == Input::get('field_id')) {
-                return redirect()->route("admin.custom_fields.show", [$id])->withInput()->withErrors(['field_id' => trans('admin/custom_fields/message.field.already_added')]);
-            }
-        }
-
-        $results=$set->fields()->attach(Input::get('field_id'), ["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
-
-        return redirect()->route("admin.custom_fields.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
-    }
 
 
     /**
@@ -115,9 +54,10 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function createField()
+    public function create()
     {
-        return View::make("custom_fields.create_field");
+
+        return view("custom_fields.fields.edit")->with('field', new CustomField());
     }
 
 
@@ -129,13 +69,14 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function storeField(Request $request)
+    public function store(Request $request)
     {
         $field = new CustomField([
-            "name" => e($request->get("name")),
-            "element" => e($request->get("element")),
-            "field_values" => e($request->get("field_values")),
-            "field_encrypted" => e($request->get("field_encrypted", 0)),
+            "name" => $request->get("name"),
+            "element" => $request->get("element"),
+            "help_text" => $request->get("help_text"),
+            "field_values" => $request->get("field_values"),
+            "field_encrypted" => $request->get("field_encrypted", 0),
             "user_id" => Auth::user()->id
         ]);
 
@@ -148,12 +89,12 @@ class CustomFieldsController extends Controller
         }
 
 
+        $validator = Validator::make(Input::all(), $field->rules);
 
-        $validator=Validator::make(Input::all(), $field->rules);
         if ($validator->passes()) {
             $results = $field->save();
             if ($results) {
-                return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
+                return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
             } else {
                 dd($field);
                 return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
@@ -176,7 +117,7 @@ class CustomFieldsController extends Controller
         $field = CustomField::find($field_id);
 
         if ($field->fieldset()->detach($fieldset_id)) {
-            return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
 
         return redirect()->back()->withErrors(['message' => "Field is in-use"]);
@@ -189,7 +130,7 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function deleteField($field_id)
+    public function destroy($field_id)
     {
         $field = CustomField::find($field_id);
 
@@ -197,115 +138,63 @@ class CustomFieldsController extends Controller
             return redirect()->back()->withErrors(['message' => "Field is in-use"]);
         } else {
             $field->delete();
-            return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
     }
 
-    /**
-    * Validates and stores a new custom field.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @param int $id
-    * @since [v1.8]
-    * @return View
-    */
-    public function show($id)
-    {
-        $cfset = CustomFieldset::with('fields')->where('id','=',$id)->orderBy('id','ASC')->first();
-        $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::lists("name", "id")->toArray();
-
-        $maxid = 0;
-        foreach ($cfset->fields() as $field) {
-            if ($field->pivot->order > $maxid) {
-                $maxid=$field->pivot->order;
-            }
-            if (isset($custom_fields_list[$field->id])) {
-                unset($custom_fields_list[$field->id]);
-            }
-        }
-
-        return View::make("custom_fields.show")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
-    }
 
 
     /**
-    * What the actual fuck, Brady?
+    * Return a view to edit a custom field
     *
-    * @todo Uhh, build this?
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param  int  $id
-    * @since [v1.8]
-    * @return Fuckall
+    * @since [v4.0]
+    * @return View
     */
     public function edit($id)
     {
-        //
+        $field = CustomField::find($id);
+        return view("custom_fields.fields.edit")->with('field', $field);
     }
 
 
     /**
-    * GET IN THE SEA BRADY.
+    * Store the updated field
     *
-    * @todo Uhh, build this too?
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @param  int  $id
-    * @since [v1.8]
-    * @return Fuckall
-    */
-    public function update($id)
-    {
-        //
-    }
-
-
-    /**
-    * Validates a custom fieldset and then deletes if it has no models associated.
+    * @todo Allow encrypting/decrypting if encryption status changes
     *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param  int  $id
-    * @since [v1.8]
-    * @return View
+    * @since [v4.0]
+    * @return Redirect
     */
-    public function destroy($id)
+    public function update(Request $request, $id)
     {
-        //
-        $fieldset = CustomFieldset::find($id);
+        $field =  CustomField::find($id);
 
-        $models = AssetModel::where("fieldset_id", "=", $id);
-        if ($models->count() == 0) {
-            $fieldset->delete();
-            return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.fieldset.delete.success'));
+        $field->name = e($request->get("name"));
+        $field->element = e($request->get("element"));
+        $field->field_values = e($request->get("field_values"));
+        $field->field_encrypted = e($request->get("field_encrypted", 0));
+        $field->user_id = Auth::user()->id;
+        $field->help_text = $request->get("help_text");
+
+        if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
+            $field->format = e($request->get("custom_format"));
         } else {
-            return redirect()->route("admin.custom_fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use'));
+            $field->format = e($request->get("format"));
         }
+
+        $validator = Validator::make(Input::all(), $field->rules);
+
+        if ($field->save()) {
+           return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.update.success'));
+        }
+
+       return redirect()->back()->withInput()->withErrors($validator);
     }
 
 
-    /**
-     * Reorder the custom fields within a fieldset
-     *
-     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-     * @param  int  $id
-     * @since [v3.0]
-     * @return Array
-     */
-    public function postReorder(Request $request, $id)
-    {
-        $fieldset = CustomFieldset::find($id);
-        $fields = array();
-        $order_array = array();
 
-        $items = $request->input('item');
-
-        foreach ($items as $order => $field_id) {
-            $order_array[$field_id] = $order;
-        }
-
-        foreach ($fieldset->fields as $field) {
-            $fields[$field->id] = ['required' => $field->pivot->required, 'order' => $order_array[$field->id]];
-        }
-
-        return $fieldset->fields()->sync($fields);
-
-    }
 }

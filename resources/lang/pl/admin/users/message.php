@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Pomyślnie zaakceptowałeś ten składnik aktywów.',
     'declined'                  => 'Pomyślnie odrzuciłeś ten składnik aktywów.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Użytkownik już istnieje!',
     'user_not_found'            => 'User [:id] nie istnieje.',
     'user_login_required'       => 'Pole login jest wymagane',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Użytkownik utworzony pomyślnie.',
         'update'    => 'Użytkownik zaktualizowany pomyślnie.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Użytkownik został usunięty pomyślnie.',
         'ban'       => 'Użytkownik został zablokowany.',
         'unban'     => 'Użytkownik został odblokowany.',
@@ -29,6 +31,7 @@ return array(
         'create' => 'Podczas tworzenia użytkownika wystąpił problem. Spróbuj ponownie.',
         'update' => 'Podczas aktualizacji użytkownika wystąpił problem. Spróbuj ponownie.',
         'delete' => 'Wystąpił błąd podczas usuwania użytkownika. Spróbuj ponownie.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Wystąpił problem podczas odblokowania użytkownika. Spróbuj ponownie.',
         'import'    => 'Podczas importowania użytkowników wystąpił błąd. Spróbuj ponownie.',
         'asset_already_accepted' => 'Aktywo zostało już zaakceptowane.',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Nie udało się połączyć z serwerem LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP: ',
         'ldap_could_not_search' => 'Nie udało się przeszukać serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
         'ldap_could_not_get_entries' => 'Nie udało się pobrać pozycji z serwera LDAP. Sprawdź proszę konfigurację serwera LDAP w pliku konfiguracji. <br>Błąd z serwera LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

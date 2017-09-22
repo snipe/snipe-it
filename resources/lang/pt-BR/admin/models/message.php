@@ -28,4 +28,9 @@ return array(
         'success' 		=> 'Modelo restaurado com sucesso.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'Nenhum campo foi alterado, então nada foi atualizado.',
+        'success' 		=> 'Modelos atualizados.'
+    ),
+
 );

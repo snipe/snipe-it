@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Activ',
     'allow'  				=> 'Permite',
     'checkedout'  			=> 'Active',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Locatie',
     'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Manager',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nume',
     'notes'                 => 'Notes',
     'password_confirm' 		=> 'Confirma parola',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Show Current Users',
     'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'Titlu',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Actualizeaza utilizator',
     'username' 				=> 'Utilizator',
+	'user_deleted_text' 	=> 'This user has been marked as deleted.',
     'username_note' 		=> '(Folosit numai pentru legatura cu Active Directory, nu pentru logare.)',
     'cloneuser'             => 'Cloneaza utilizator',
     'viewusers' 			=> 'Vezi utilizatori',

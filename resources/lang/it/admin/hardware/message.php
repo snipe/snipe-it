@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Bene ripristinato con successo.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'File non cancellato. Riprova.',
         'success' => 'File cancellato con successo.',
@@ -48,6 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',
         'error'   		=> 'C\'è stato un problema durante la cancellazione del bene. Riprova per favore.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Il bene è stato eliminato con successo.'
     ),
 

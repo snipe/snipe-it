@@ -28,4 +28,9 @@ return array(
         'success' 		=> 'Das Modell wurde erfolgreich Wiederhergestellt.'
     ),
 
+    'bulkedit' => array(
+        'error'   		=> 'Es wurden keine Felder ausgewählt, somit wurde auch nichts aktualisiert.',
+        'success' 		=> 'Modelle aktualisiert.'
+    ),
+
 );

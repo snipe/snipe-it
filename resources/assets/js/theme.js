@@ -37,27 +37,6 @@ $(function () {
   });
 
 
-  // skin changer
-  $(".skins-nav .skin").click(function (e) {
-    e.preventDefault();
-    if ($(this).hasClass("selected")) {
-      return;
-    }
-    $(".skins-nav .skin").removeClass("selected");
-    $(this).addClass("selected");
-    
-    if (!$("#skin-file").length) {
-      $("head").append('<link rel="stylesheet" type="text/css" id="skin-file" href="">');
-    }
-    var $skin = $("#skin-file");
-    if ($(this).attr("data-file")) {
-      $skin.attr("href", $(this).data("file"));
-    } else {
-      $skin.attr("href", "");
-    }
-
-  });
-
 
   // sidebar menu dropdown toggle
   $("#dashboard-menu .dropdown-toggle").click(function (e) {

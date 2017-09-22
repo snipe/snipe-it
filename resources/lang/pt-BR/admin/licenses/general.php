@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Sobre Licenças',
+    'about_licenses'                  => 'Licenças são utilizadas para controlar o uso dos softwares. Ela possuem uma quantidade específica que podem ser alocadas para os usuários',
     'checkin'  					=> 'Retorna Licença Compartilhada',
     'checkout_history'  		=> 'Histórico de Registros',
     'checkout'  				=> 'Registra Licença Compartilhada',

@@ -1,12 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'     => 'About manufacturers',
-    'about_manufacturers_text'           => 'Manufacturers make all the magic items we consume.',
+    'about_manufacturers_title'    => 'Hersteller',
+    'about_manufacturers_text'  => 'Hersteller sind Firmen, die ihre Assets herstellen. Hier können Sie wichtige Supportkontakte eintragen, welche in den Assetdetails angezeigt werden.',
     'asset_manufacturers'	=> 'Asset Hersteller',
     'create'				=> 'Hersteller anlegen',
     'id'   					=> 'ID',
-    'name'      			=> 'Herstellername',
+    'name'      			=> 'Name',
+    'support_email'   		=> 'Support per E-Mail',
+    'support_phone'   		=> 'Support Telefon',
+    'support_url'   		=> 'Support-URL',
     'update'				=> 'Hersteller aktualisieren',
+    'url'   				=> 'URL',
 
 );

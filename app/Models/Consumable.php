@@ -1,26 +1,22 @@
 <?php
 namespace App\Models;
 
-use App\Models\ActionLog;
-use App\Models\Category;
-use App\Models\Company;
-use App\Models\ConsumableAssignment;
-use App\Models\Location;
-use App\Models\Loggable;
-use App\Models\SnipeModel;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
 class Consumable extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\ConsumablePresenter';
     use CompanyableTrait;
-    use Loggable;
+    use Loggable, Presentable;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
     protected $table = 'consumables';
+    protected $casts = [
+        'requestable' => 'boolean'
+    ];
 
 
     /**
@@ -30,9 +26,9 @@ class Consumable extends SnipeModel
         'name'        => 'required|min:3|max:255',
         'qty'         => 'required|integer|min:0',
         'category_id' => 'required|integer',
-        'company_id'  => 'integer',
-        'min_amt'     => 'integer|min:1',
-        'purchase_cost'   => 'numeric',
+        'company_id'  => 'integer|nullable',
+        'min_amt'     => 'integer|min:1|nullable',
+        'purchase_cost'   => 'numeric|nullable',
     );
 
     /**
@@ -50,15 +46,34 @@ class Consumable extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','qty','company_id','category_id'];
+    protected $fillable = [
+        'category_id',
+        'company_id',
+        'location_id',
+        'manufacturer_id',
+        'name',
+        'order_number',
+        'purchase_cost',
+        'purchase_date',
+        'qty',
+        'requestable'
+    ];
 
+    public function setRequestableAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return;
+    }
 
     public function admin()
     {
         return $this->belongsTo('\App\Models\User', 'user_id');
     }
 
-    public function consumableAssigments()
+    public function consumableAssignments()
     {
         return $this->hasMany('\App\Models\ConsumableAssignment');
     }

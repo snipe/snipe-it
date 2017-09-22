@@ -22,14 +22,14 @@ class CheckForSetup
         if (Setting::setupCompleted()) {
 
             if ($request->is('setup*')) {
-                return redirect(config('app.url'));
+                return redirect(url('/'));
             } else {
                 return $next($request);
             }
 
         } else {
             if (!($request->is('setup*')) && !($request->is('.env'))) {
-                return redirect(config('app.url').'/setup')->with('Request', $request);
+                return redirect(url('/').'/setup')->with('Request', $request);
             }
 
             return $next($request);

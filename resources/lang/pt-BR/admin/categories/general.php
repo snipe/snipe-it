@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'Sobre as Categorias',
+    'about_categories'  				=> 'Categorias auxiliam na organização dos seus itens. Alguns exemplos de categorias podem ser: Desktops, Notebooks, Celulares, Tablets, e assim por diante, mas você pode usar as Categorias de melhor forma que você identificar.',
     'asset_categories' 					=> 'Categorias de Ativos',
     'category_name'  					=> 'Nome da Categoria',
     'checkin_email'                     => 'Enviar e-mail para o usuário na entrega.',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Editar Categoria',
     'eula_text'							=> 'EULA da Categoria',
     'eula_text_help'					=> 'Este campo lhe permite personalizar seus EULAs para tipos específicos de bens. Se você apenas tem um EULA para todos os seus bens, você pode selecionar a caixa abaixo para usar o padrão primário.',
+    'name'                              => 'Nome da Categoria',
     'require_acceptance'				=> 'Requer que usuários confirmem a aceitação de ativos nesta categoria.',
     'required_acceptance'				=> 'Este usuário receberá um e-mail com um link para confirmar a aceitação deste item.',
     'required_eula'						=> 'Este usuário receberá um e-mail com uma cópia do EULA',

@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Hai accettato con successo questo prodotto.',
     'declined'                  => 'Hai rifiutato con successo questo prodotto.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Utente già esistente!',
     'user_not_found'            => 'L\'utente [:id] non esite.',
     'user_login_required'       => 'È necessario il campo login',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Utente creato con successo.',
         'update'    => 'Utente aggiornato con successo.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Utente eliminato con successo.',
         'ban'       => 'Utente bloccato con successo.',
         'unban'     => 'Utente sbloccato con successo.',
@@ -29,6 +31,7 @@ return array(
         'create' => 'C\'è stato un problema durante la creazione dell\'utente. Per favore riprova.',
         'update' => 'C\'è stato un problema durante l\'aggiornamento dell\'utente. Per favore riprova.',
         'delete' => 'C\'è stato un problema durante la cancellazione dell\'utente. Riprova per favore.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'C\'è stato un problema durante la riabilitazione dell\'utente. Riprova per favore.',
         'import'    => 'C\'è stato un problema durante l\'importazione degli utenti. Riprova per favore.',
         'asset_already_accepted' => 'Questo bene è già stato accettato.',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Impossibile unirsi al server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP: ',
         'ldap_could_not_search' => 'Impossibile trovare il server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'ldap_could_not_get_entries' => 'Impossibile ottenere voci dal server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

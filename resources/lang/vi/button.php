@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Thao tác',
     'add'    	                => 'Thêm mới',
     'cancel'                    => 'Hủy',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'Yêu cầu',
     'submit'  	                => 'Gửi',
     'upload'                    => 'Tải lên',
-
+	'select_file'				=> 'Select File...',
 );

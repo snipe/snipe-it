@@ -2,7 +2,8 @@
     'createText' => trans('admin/models/table.create') ,
     'updateText' => trans('admin/models/table.update'),
     'helpTitle' => trans('admin/models/general.about_models_title'),
-    'helpText' => trans('admin/models/general.about_models_text')
+    'helpText' => trans('admin/models/general.about_models_text'),
+    'formAction' => ($item) ? route('models.update', ['model' => $item->id]) : route('models.store'),
 ])
 
 {{-- Page content --}}
@@ -49,7 +50,7 @@
     <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
     <div class="col-md-5">
         {{ Form::checkbox('image_delete') }}
-        <img src="{{ config('app.url') }}/uploads/models/{{ $item->image }}" />
+        <img src="{{ url('/') }}/uploads/models/{{ $item->image }}" />
         {!! $errors->first('image_delete', '<span class="alert-msg"><br>:message</span>') !!}
     </div>
 </div>

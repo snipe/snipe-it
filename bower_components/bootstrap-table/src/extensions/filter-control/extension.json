@@ -1,0 +1,17 @@
+{
+  "name": "Filter Control",
+  "version": "2.1.0",
+  "description": "Plugin to add input/select element on the top of the columns in order to filter the data.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/filter-control",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/filter-control.html",
+
+  "plugins": [{
+    "name": "bootstrap-table-filter-control",
+    "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/filter-control"
+  }],
+
+  "author": {
+    "name": "djhvscf",
+    "image": "https://avatars1.githubusercontent.com/u/4496763"
+  }
+}

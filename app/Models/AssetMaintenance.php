@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,7 +21,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
 
     protected $dates = [ 'deleted_at' ];
     protected $table = 'asset_maintenances';
-
     // Declaring rules for form validation
     protected $rules = [
         'asset_id'               => 'required|integer',
@@ -28,10 +28,10 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
-        'start_date'             => 'required|date_format:Y-m-d',
-        'completion_date'        => 'date_format:Y-m-d',
-        'notes'                  => 'string',
-        'cost'                   => 'numeric'
+        'start_date'             => 'required|date_format:"Y-m-d"',
+        'completion_date'        => 'date_format:"Y-m-d"',
+        'notes'                  => 'string|nullable',
+        'cost'                   => 'numeric|nullable'
     ];
 
     public function getCompanyableParents()
@@ -54,6 +54,48 @@ class AssetMaintenance extends Model implements ICompanyableChild
             trans('admin/asset_maintenances/general.repair')      => trans('admin/asset_maintenances/general.repair'),
             trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade')
         ];
+    }
+
+    public function setIsWarrantyAttribute($value)
+    {
+        if ($value == '') {
+            $value = 0;
+        }
+        $this->attributes['is_warranty'] = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setCostAttribute($value)
+    {
+        $value =  Helper::ParseFloat($value);
+        if ($value == '0.0') {
+            $value = null;
+        }
+        $this->attributes['cost'] = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setNotesAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['notes'] = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setCompletionDateAttribute($value)
+    {
+        if ($value == '' || $value == "0000-00-00") {
+            $value = null;
+        }
+        $this->attributes['completion_date'] = $value;
     }
 
     /**

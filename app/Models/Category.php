@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\SnipeModel;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -17,18 +18,22 @@ use Watson\Validating\ValidatingTrait;
  */
 class Category extends SnipeModel
 {
-
+    protected $presenter = 'App\Presenters\CategoryPresenter';
+    use Presentable;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'categories';
+    protected $hidden = ['user_id','deleted_at'];
 
     /**
     * Category validation rules
     */
     public $rules = array(
-        'user_id' => 'numeric',
+        'user_id' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|unique_undeleted',
-        'category_type'   => 'required',
+        'require_acceptance'   => 'boolean',
+        'use_default_eula'   => 'boolean',
+        'category_type'   => 'required|in:asset,accessory,consumable,component',
     );
 
     /**
@@ -48,7 +53,7 @@ class Category extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','category_type'];
+    protected $fillable = ['name','category_type', 'user_id', 'use_default_eula','checkin_email','require_acceptance'];
 
 
     public function has_models()
@@ -75,13 +80,13 @@ class Category extends SnipeModel
     {
         switch ($this->category_type) {
             case 'asset':
-                return $this->assets->count();
+                return $this->assets()->count();
             case 'accessory':
-                return $this->accessories->count();
+                return $this->accessories()->count();
             case 'component':
-                return $this->components->count();
+                return $this->components()->count();
             case 'consumable':
-                return $this->consumables->count();
+                return $this->consumables()->count();
         }
         return '0';
     }

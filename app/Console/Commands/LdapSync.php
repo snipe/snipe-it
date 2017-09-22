@@ -69,22 +69,55 @@ class LdapSync extends Command
 
         $results = Ldap::findLdapUsers();
 
+        $ldap_ou_locations = Location::whereNotNull('ldap_ou')->get();
+
+        if (sizeof($ldap_ou_locations) > 0) {
+            LOG::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
+        }
+
+        $results = Ldap::findLdapUsers();
+        for ($i = 0; $i < $results["count"]; $i++) {
+            $results[$i]["ldap_location_override"] = false;
+            $results[$i]["location_id"] = 0;
+        }
+
         if ($this->option('location')!='') {
-            $location = Location::where('name','=',$this->option('location'))->first();
+            $location = Location::where('name', '=', $this->option('location'))->first();
             LOG::debug('Location name '.$this->option('location').' passed');
             LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
         } elseif ($this->option('location_id')!='') {
-            $location = Location::where('id','=',$this->option('location_id'))->first();
+            $location = Location::where('id', '=', $this->option('location_id'))->first();
             LOG::debug('Location ID '.$this->option('location_id').' passed');
             LOG::debug('Importing to '.$location->name.' ('.$location->id.')');
         } else {
-            $location = new Location;
-        }
+	    $location = NULL;
+	}
 
         if (!isset($location)) {
-            LOG::debug('That location is invalid, so no location will be assigned.');
+            LOG::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
         }
 
+        // Grab subsets based on location-specific DNs, and overwrite location for these users.
+        foreach ($ldap_ou_locations as $ldap_loc) {
+            $location_users = Ldap::findLdapUsers($ldap_loc->ldap_ou);
+            $usernames = array();
+            for ($i = 0; $i < $location_users["count"]; $i++) {
+                $location_users[$i]["ldap_location_override"] = true;
+                $location_users[$i]["location_id"] = $ldap_loc->id;
+                $usernames[] = $location_users[$i][$ldap_result_username][0];
+            }
+
+            // Delete located users from the general group.
+            foreach ($results as $key => $generic_entry) {
+                if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
+                    unset($results[$key]);
+                }
+            }
+
+            $global_count = $results['count'];
+            $results = array_merge($location_users, $results);
+            $results['count'] = $global_count;
+        }
 
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $pass = bcrypt($tmp_pass);
@@ -99,6 +132,9 @@ class LdapSync extends Command
                 $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
                 $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
+                $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
+                $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
+
 
                 // User exists
                 $item["createorupdate"] = 'updated';
@@ -118,7 +154,9 @@ class LdapSync extends Command
                 $user->employee_num = e($item["employee_number"]);
                 $user->activated = 1;
 
-                if ($location) {
+                if ($item['ldap_location_override'] == true) {
+                    $user->location_id = $item['location_id'];
+                } else if ($location) {
                     $user->location_id = e($location->id);
                 }
 
@@ -146,7 +184,7 @@ class LdapSync extends Command
         if ($this->option('summary')) {
             for ($x = 0; $x < count($summary); $x++) {
                 if ($summary[$x]['status']=='error') {
-                    $this->error('ERROR: '.$summary[$x]['firstname'].' '.$summary[$x]['lastname'].' (username:  '.$summary[$x]['username'].' was not imported: '.$summary[$x]['note'] );
+                    $this->error('ERROR: '.$summary[$x]['firstname'].' '.$summary[$x]['lastname'].' (username:  '.$summary[$x]['username'].' was not imported: '.$summary[$x]['note']);
                 } else {
                     $this->info('User '.$summary[$x]['firstname'].' '.$summary[$x]['lastname'].' (username:  '.$summary[$x]['username'].' was '.strtoupper($summary[$x]['createorupdate']).'.');
                 }
@@ -159,6 +197,4 @@ class LdapSync extends Command
 
 
     }
-
-
 }

@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-
+        'does_not_exist' => 'Fieldset does not exist',
 
         'create' => array(
             'error'   => 'O Conjunto de campos não foi criado, por favor tente novamente.',

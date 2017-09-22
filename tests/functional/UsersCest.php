@@ -16,7 +16,7 @@ class UsersCest
     {
         $I->wantTo('ensure that the create users form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/user'));
+        $I->amOnPage(route('users.create'));
         $I->dontSee('Create User', '.page-header');
         $I->see('Create User', 'h1.pull-left');
     }
@@ -24,7 +24,7 @@ class UsersCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/user'));
+        $I->amOnPage(route('users.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The first name field is required.', '.alert-msg');
@@ -35,7 +35,7 @@ class UsersCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage(route('create/user'));
+        $I->amOnPage(route('users.create'));
         $I->fillField('first_name', 't2');
         $I->fillField('last_name', 't2');
         $I->fillField('username', 'a'); // Must be 2 chars
@@ -49,7 +49,7 @@ class UsersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $user = factory(App\Models\User::class, 'valid-user')->make();
+        $user = factory(App\Models\User::class)->make();
         $submitValues = [
             'first_name'        => $user->first_name,
             'last_name'         => $user->last_name,
@@ -61,8 +61,8 @@ class UsersCest
             'locale'            => $user->locale,
             'employee_num'      => $user->employee_num,
             'jobtitle'          => $user->jobtitle,
-            'manager_id'        => 19,
-            'location_id'       => 67,
+            'manager_id'        => $user->manager_id,
+            'location_id'       => $user->location_id,
             'phone'             => $user->phone,
             'activated'         => true,
             'notes'             => $user->notes
@@ -76,13 +76,13 @@ class UsersCest
             'locale'            => $user->locale,
             'employee_num'      => $user->employee_num,
             'jobtitle'          => $user->jobtitle,
-            'manager_id'        => 19,
-            'location_id'       => 67,
+            'manager_id'        => $user->manager_id,
+            'location_id'       => $user->location_id,
             'phone'             => $user->phone,
             'activated'         => true,
             'notes'             => $user->notes
         ];
-        $I->amOnPage(route('create/user'));
+        $I->amOnPage(route('users.create'));
         $I->wantTo("Test Validation Succeeds");
         $I->submitForm('form#userForm', $submitValues);
         $I->seeRecord('users', $storedValues);
@@ -91,14 +91,9 @@ class UsersCest
 
     public function allowsDelete(FunctionalTester $I)
     {
+        $user = factory(App\Models\User::class)->create();
         $I->wantTo('Ensure I can delete a user');
-        $I->amOnPage(route('delete/user', User::doesntHave('assets')
-                                        ->doesntHave('accessories')
-                                        ->doesntHave('consumables')
-                                        ->doesntHave('licenses')
-                                        ->where('username', '!=', 'snipeit')
-                                        ->first()->id
-        ));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('users.destroy', $user->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

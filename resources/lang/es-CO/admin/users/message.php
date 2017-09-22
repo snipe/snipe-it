@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Ha aceptado con éxito este equipo.',
     'declined'                  => 'Ha declinado con éxito este equipo.',
+    'bulk_manager_warn'	        => 'Sus usuarios han sido correctamente actualizados, de todos modos la entrada de administrador no fue guardada porque el administrador seleccionado también estaba en la lista de usuarios a ser editada, y los usuarios no pueden ser sus propior administradores. Vuelva a seleccionar los usuarios, excluyendo al administrador.',
     'user_exists'               => 'El Usuario ya existe!',
     'user_not_found'            => 'Usuario [:id] no existe.',
     'user_login_required'       => 'El campo Usuario es obligatorio',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Usuario correctamente creado.',
         'update'    => 'Usuario correctamente actualizado.',
+        'update_bulk'    => 'Usuarios correctamente actualizados!',
         'delete'    => 'Usuario correctamente eliminado.',
         'ban'       => 'Usuario correctamente bloqueado.',
         'unban'     => 'Usuario correctamente desbloqueado.',
@@ -29,6 +31,7 @@ return array(
         'create' => 'Ha habido un problema creando el Usuario. Intentalo de nuevo.',
         'update' => 'Ha habido un problema actualizando el Usuario. Intentalo de nuevo.',
         'delete' => 'Ha habido un problema eliminando el  Usuario. Intentalo de nuevo.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Ha habido un problema marcando como no suspendido el Usuario. Intentalo de nuevo.',
         'import'    => 'Ha habido un problema importando los usuarios. Por favor intente nuevamente.',
         'asset_already_accepted' => 'Este equipo ya ha sido aceptado.',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'No se ha podido vincular con el servidor LDAP. Por favor verifique la configuración de su servidor LDAP en su archivo de configuración.<br> Error del servidor LDAP: ',
         'ldap_could_not_search' => 'No se ha podido buscar en el servidor LDAP. Por favor verifique la configuración de su servidor LDAP en su archivo de configuración.<br> Error del servidor LDAP:',
         'ldap_could_not_get_entries' => 'No se han podido obtener entradas del servidor LDAP. Por favor verifique la configuración de su servidor LDAP en su archivo de configuración.<br> Error del servidor LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

@@ -16,7 +16,7 @@ class ConsumablesCest
     {
         $I->wantTo('ensure that the create consumables form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/consumable'));
+        $I->amOnPage(route('consumables.create'));
         $I->dontSee('Create Consumable', '.page-header');
         $I->see('Create Consumable', 'h1.pull-left');
     }
@@ -24,7 +24,7 @@ class ConsumablesCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/consumable'));
+        $I->amOnPage(route('consumables.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -35,7 +35,7 @@ class ConsumablesCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage(route('create/consumable'));
+        $I->amOnPage(route('consumables.create'));
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
         $I->fillField('min_amt', '-15');
@@ -48,7 +48,7 @@ class ConsumablesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $consumable = factory(App\Models\Consumable::class, 'consumable')->make();
+        $consumable = factory(App\Models\Consumable::class)->make();
         $values = [
             'company_id'        => $consumable->company_id,
             'name'              => $consumable->name,
@@ -62,7 +62,7 @@ class ConsumablesCest
             'min_amt'           => $consumable->min_amt,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/consumable'));
+        $I->amOnPage(route('consumables.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('consumables', $values);
         $I->seeElement('.alert-success');
@@ -71,7 +71,7 @@ class ConsumablesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a consumable');
-        $I->amOnPage(route('delete/consumable', $I->getConsumableId()));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('consumables.destroy', $I->getConsumableId()), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

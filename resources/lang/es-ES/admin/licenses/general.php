@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Acerca de licencias',
+    'about_licenses'                  => 'Las licencias son para identificar software. Tienen un número específico de asientos que pueden ser asignados a individuos',
     'checkin'  					=> 'Quitar Instalación',
     'checkout_history'  		=> 'Historial Asignaciones',
     'checkout'  				=> 'Asignar Instalación',

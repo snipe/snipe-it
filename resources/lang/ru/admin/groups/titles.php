@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups_title'            => 'О группах',
+    'about_groups'                  => 'Группы используются для обобщения разрешений пользователей.',
     'group_management' 	 	=> 'Управление группой',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
+    'create' 	 	 	    => 'Создать новую группу',
+    'update' 	 		        => 'Редактировать группу',
     'group_name' 	 		=> 'Название группы',
     'group_admin' 	 		=> 'Администратор группы',
     'allow' 	 			=> 'Разрешить',

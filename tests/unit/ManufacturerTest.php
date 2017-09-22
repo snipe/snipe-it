@@ -5,17 +5,16 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ManufacturerTest extends \Codeception\TestCase\Test
+class ManufacturerTest extends BaseTest
 {
     /**
      * @var \UnitTester
      */
     protected $tester;
-    use DatabaseMigrations;
 
     public function testManufacturerAdd()
     {
-      $manufacturers = factory(Manufacturer::class, 'manufacturer')->make();
+      $manufacturers = factory(Manufacturer::class)->make();
       $values = [
         'name' => $manufacturers->name,
       ];

@@ -1,0 +1,17 @@
+{
+  "name": "Key Events",
+  "version": "1.0.0",
+  "description": "Plugin to support the key events in the bootstrap table.",
+  "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/key-events",
+  "example": "http://issues.wenzhixin.net.cn/bootstrap-table/#extensions/key-events.html",
+
+  "plugins": [{
+    "name": "bootstrap-table-key-events",
+    "url": "https://github.com/wenzhixin/bootstrap-table/tree/master/src/extensions/key-events"
+  }],
+
+  "author": {
+    "name": "djhvscf",
+    "image": "https://avatars1.githubusercontent.com/u/4496763"
+  }
+}

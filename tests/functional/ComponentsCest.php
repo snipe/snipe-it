@@ -16,7 +16,7 @@ class ComponentsCest
     {
         $I->wantTo('ensure that the create components form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/component'));
+        $I->amOnPage(route('components.create'));
         $I->dontSee('Create Component', '.page-header');
         $I->see('Create Component', 'h1.pull-left');
     }
@@ -24,7 +24,7 @@ class ComponentsCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/component'));
+        $I->amOnPage(route('components.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -35,7 +35,7 @@ class ComponentsCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage(route('create/component'));
+        $I->amOnPage(route('components.create'));
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
         $I->fillField('min_amt', '-15');
@@ -47,7 +47,7 @@ class ComponentsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $component = factory(App\Models\Component::class, 'component')->make();
+        $component = factory(App\Models\Component::class)->make();
 
         $values = [
             'name'              => $component->name,
@@ -62,7 +62,7 @@ class ComponentsCest
             'purchase_cost'     => $component->purchase_cost,
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/component'));
+        $I->amOnPage(route('components.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('components', $values);
         $I->dontSee('&lt;span class=&quot;');
@@ -71,7 +71,7 @@ class ComponentsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a component');
-        $I->amOnPage(route('delete/component', $I->getComponentId()));
-        $I->seeElement('.alert-success');
+        $I->sendDelete(route('components.destroy', $I->getComponentId()), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-
+        'does_not_exist' => 'Набор полей не существует',
 
         'create' => array(
             'error'   => 'Набор полей не был создан, попробуйте ещё раз.',

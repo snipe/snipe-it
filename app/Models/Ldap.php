@@ -8,7 +8,6 @@ use Exception;
 use Input;
 use Log;
 
-
 class Ldap extends Model
 {
 
@@ -36,8 +35,8 @@ class Ldap extends Model
         }
 
         // If the user specifies where CA Certs are, make sure to use them
-        if(env("LDAPTLS_CACERT")) {
-          putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
+        if (env("LDAPTLS_CACERT")) {
+            putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
         }
 
         $connection = @ldap_connect($ldap_host);
@@ -49,6 +48,7 @@ class Ldap extends Model
         // Needed for AD
         ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
+        ldap_set_option($connection, LDAP_OPT_NETWORK_TIMEOUT, 20);
 
         if ($ldap_use_tls=='1') {
             ldap_start_tls($connection);
@@ -78,13 +78,10 @@ class Ldap extends Model
         $ldap_username_field     = $settings->ldap_username_field;
         $baseDn      = $settings->ldap_basedn;
 
-        if ($settings->is_ad =='1')
-        {
-
-            // Check if they are using the userprincipalname for the username field.
+        if ($settings->is_ad =='1') {
+        // Check if they are using the userprincipalname for the username field.
             // If they are, we can skip building the UPN to authenticate against AD
-            if ($ldap_username_field=='userprincipalname')
-            {
+            if ($ldap_username_field=='userprincipalname') {
                 $userDn = $username;
             } else {
                 // In case they haven't added an AD domain
@@ -114,7 +111,7 @@ class Ldap extends Model
             return false;
         }
 
-        if (!$user =  array_change_key_case(ldap_get_attributes($connection, $entry), CASE_LOWER)) {
+        if (!$user =  ldap_get_attributes($connection, $entry)) {
             return false;
         }
 
@@ -236,17 +233,21 @@ class Ldap extends Model
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param $ldapatttibutes
+     * @param $base_dn
      * @return array|bool
      */
-    static function findLdapUsers() {
+    static function findLdapUsers($base_dn = null)
+    {
 
         $ldapconn = Ldap::connectToLdap();
         $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
-        $base_dn = Setting::getSettings()->ldap_basedn;
+        // Default to global base DN if nothing else is provided.
+        if (is_null($base_dn)) {
+            $base_dn = Setting::getSettings()->ldap_basedn;
+        }
         $filter = Setting::getSettings()->ldap_filter;
 
         // Set up LDAP pagination for very large databases
-        // @author Richard Hofman
         $page_size = 500;
         $cookie = '';
         $result_set = array();
@@ -291,8 +292,4 @@ class Ldap extends Model
 
 
     }
-
-
-
-
 }

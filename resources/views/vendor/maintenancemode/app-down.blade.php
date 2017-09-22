@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <title>{{ Lang::get(Config::get('maintenancemode.language-path', 'maintenancemode::defaults.') . '.title') }}</title>
     <style>
         html, body {
@@ -16,7 +15,11 @@
             -webkit-transform-style: preserve-3d;
             -moz-transform-style: preserve-3d;
             transform-style: preserve-3d;
-            font-family: 'Open Sans', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont,
+            "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+            "Fira Sans", "Droid Sans", "Helvetica Neue",
+            sans-serif;
+
         }
         header {
             width: 80%;

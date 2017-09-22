@@ -11,6 +11,10 @@
             'error'   => 'Pemeliharaan Aset gagal dibuat, silakan coba lagi.',
             'success' => 'Pemeliharaan Aset berhasil dibuat.'
         ],
+        'edit'                       => [
+            'error'   => 'Asset Maintenance was not edited, please try again.',
+            'success' => 'Asset Maintenance edited successfully.'
+        ],
         'asset_maintenance_incomplete' => 'Belum selesai',
         'warranty'                     => 'Jaminan',
         'not_warranty'                 => 'Tidak ada Jaminan',

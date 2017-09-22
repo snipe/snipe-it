@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Accept {{ $item->showAssetName() }}
+    Accept {{ $item->present()->name() }}
     @parent
 @stop
 
@@ -11,7 +11,7 @@
 @section('content')
 
     
-<link rel="stylesheet" href="{{ asset('assets/css/signature-pad.css') }}">
+<link rel="stylesheet" href="{{ asset('css/signature-pad.css') }}">
 
 <style>
 .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
@@ -29,76 +29,71 @@
 
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
-    <!-- CSRF Token -->
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-    <input type="hidden" name="logId" value="{{ $findlog->id }}" />
+  <!-- CSRF Token -->
+  <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+  <input type="hidden" name="logId" value="{{ $findlog->id }}" />
 
 
-<div class="row">
+  <div class="row">
     <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+      <div class="panel box box-default">
+        <div class="box-body">
+          <div class="col-md-12">
+            <div class="radio">
+              <label>
+                <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
+                I accept
+              </label>
+            </div>
 
-        <div class="panel box box-default">
+            <div class="radio">
+              <label>
+                <input type="radio" name="asset_acceptance" id="declined" value="declined">
+                I decline
+              </label>
+            </div>
 
-            <div class="box-body">
-                <div class="col-md-12">
+            @if ($item->getEula())
+            <div class="col-md-12" style="padding-top: 20px">
+              <div id="eula_div">
+                {!!  $item->getEula() !!}
+              </div>
+            </div>
+            @endif
 
+            @if ($snipeSettings->require_accept_signature=='1')
+            <div class="col-md-12 col-sm-12 text-center" style="padding-top: 20px">
 
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
-                        I accept
-                    </label>
+              <h3>Sign below to indicate that you agree to the terms of service:</h3>
+
+              <div id="signature-pad" class="m-signature-pad col-md-12 col-sm-12">
+                <div class="m-signature-pad--body col-md-12 col-sm-12">
+                  <canvas></canvas>
+                    <input type="hidden" name="signature_output" id="signature_output">
                 </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="asset_acceptance" id="declined" value="declined">
-                        I decline
-                    </label>
+                <div class="col-md-12 col-sm-12 text-center">
+                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear</button>
                 </div>
+              </div>
+            </div> <!-- .col-md-12.text-center-->
+            @endif
 
-                @if ($item->getEula())
-                <div class="col-md-12" style="padding-top: 20px">
-                    <div id="eula_div">
-                        {!!  $item->getEula() !!}
-                    </div>
-                 </div>
-                @endif
+          </div><!-- / col-md-12 -->
 
-                @if ($snipeSettings->require_accept_signature=='1')
-                <div class="col-md-12 col-sm-12 text-center" style="padding-top: 20px">
-
-                    <h3>Sign below to indicate that you agree to the terms of service:</h3>
-
-                    <div id="signature-pad" class="m-signature-pad col-md-12 col-sm-12">
-                        <div class="m-signature-pad--body col-md-12 col-sm-12">
-                            <canvas></canvas>
-                            <input type="hidden" name="signature_output" id="signature_output">
-                        </div>
-                        <div class="col-md-12 col-sm-12 text-center">
-                            <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear</button>
-                        </div>
-                    </div>
-                </div>
-                @endif
-
-
-
-
-                </div><!-- / col-md-7 col-sm-12 -->
-
-            </div> <!-- / box-body -->
-            <div class="box-footer text-right">
-                <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white"></i> {{ trans('general.submit') }}</button>
-            </div><!-- /.box-footer -->
-        </div> <!-- / box-default -->
+        </div> <!-- / box-body -->
+        <div class="box-footer text-right">
+            <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white"></i> {{ trans('general.submit') }}</button>
+        </div><!-- /.box-footer -->
+      </div> <!-- / box-default -->
     </div> <!-- / col -->
-</div> <!-- / row -->
-
+  </div> <!-- / row -->
 </form>
+
+@stop
 
 @section('moar_scripts')
 
-    <script src="{{ asset('assets/js/signature_pad.min.js') }}"></script>
+    <script src="{{ asset('js/signature_pad.min.js') }}"></script>
     <script>
         var wrapper = document.getElementById("signature-pad"),
                 clearButton = wrapper.querySelector("[data-action=clear]"),
@@ -138,6 +133,4 @@
         });
 
     </script>
-@stop
-
 @stop

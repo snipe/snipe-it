@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'activated'  			=> 'Ativo',
     'allow'  				=> 'Permitir',
     'checkedout'  			=> 'Ativos',
@@ -20,6 +19,7 @@ return array(
     'location'  			=> 'Local',
     'lock_passwords'		=> 'Detalhes de login não podem ser alterados nesta instalação.',
     'manager' 				=> 'Gerenciador',
+    'managed_locations'     => 'Managed Locations',
     'name' 					=> 'Nome',
     'notes'                 => 'Notas',
     'password_confirm' 		=> 'Confirmar Senha',
@@ -28,8 +28,10 @@ return array(
     'show_current'          => 'Mostrar Usuários Atuais',
     'show_deleted'          => 'Mostrar Usuários Excluídos',
     'title' 				=> 'Título',
+	'to_restore_them'		=> 'para restaurar ele(a).',
     'updateuser' 			=> 'Atualizar Usuário',
     'username' 				=> 'Usuário',
+	'user_deleted_text' 	=> 'Este usuário foi marcado como deletado.',
     'username_note' 		=> '(Istó é usado somente para conexão do Active Directory, não para login.)',
     'cloneuser'             => 'Clonar Usuário',
     'viewusers' 			=> 'Ver Usuários',

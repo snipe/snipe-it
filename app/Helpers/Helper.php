@@ -4,6 +4,7 @@ namespace App\Helpers;
 use DB;
 use App\Models\Statuslabel;
 use App\Models\Location;
+use App\Models\Department;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\User;
@@ -17,6 +18,7 @@ use App\Models\Component;
 use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\Asset;
+use App\Models\Setting;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
@@ -31,7 +33,8 @@ class Helper
      * @since [v2.0]
      * @return String
      */
-    public static function parseEscapedMarkedown($str) {
+    public static function parseEscapedMarkedown($str)
+    {
         $Parsedown = new \Parsedown();
 
         if ($str) {
@@ -123,6 +126,8 @@ class Helper
         $LocaleInfo = localeconv();
         $floatString = str_replace(",", "", $floatString);
         $floatString = str_replace($LocaleInfo["decimal_point"], ".", $floatString);
+        // Strip Currency symbol
+        $floatString = str_replace($LocaleInfo['currency_symbol'], '', $floatString);
         return floatval($floatString);
     }
 
@@ -139,7 +144,7 @@ class Helper
         $models = AssetModel::with('manufacturer')->get();
         $model_array[''] = trans('general.select_model');
         foreach ($models as $model) {
-            $model_array[$model->id] = $model->displayModelName();
+            $model_array[$model->id] = $model->present()->modelName();
         }
         return $model_array;
     }
@@ -153,9 +158,10 @@ class Helper
      */
     public static function companyList()
     {
-        $company_list = array('0' => trans('general.select_company')) + DB::table('companies')
+        $company_list = array('' => trans('general.select_company')) + DB::table('companies')
                 ->orderBy('name', 'asc')
-                ->pluck('name', 'id');
+                ->pluck('name', 'id')
+                ->toArray();
         return $company_list;
     }
 
@@ -172,11 +178,31 @@ class Helper
         $categories = Category::orderBy('name', 'asc')
                 ->whereNull('deleted_at')
                 ->orderBy('name', 'asc');
-        if(!empty($category_type))
+        if (!empty($category_type)) {
             $categories = $categories->where('category_type', '=', $category_type);
+        }
         $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
         return $category_list;
     }
+
+
+    /**
+     * Get the list of categories in an array to make a dropdown menu
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.5]
+     * @return Array
+     */
+    public static function departmentList()
+    {
+        $departments = Department::orderBy('name', 'asc')
+            ->whereNull('deleted_at')
+            ->orderBy('name', 'asc');
+
+        return array('' => trans('general.select_department')) + $departments->pluck('name', 'id')->toArray();
+
+    }
+    
 
     /**
      * Get the list of suppliers in an array to make a dropdown menu
@@ -203,7 +229,7 @@ class Helper
      */
     public static function statusLabelList()
     {
-        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')
+        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('deployable', 'desc')
                 ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
     }
@@ -248,7 +274,12 @@ class Helper
      */
     public static function statusTypeList()
     {
-        $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
+        $statuslabel_types =
+              array('' => trans('admin/hardware/form.select_statustype'))
+            + array('deployable' => trans('admin/hardware/general.deployable'))
+            + array('pending' => trans('admin/hardware/general.pending'))
+            + array('undeployable' => trans('admin/hardware/general.undeployable'))
+            + array('archived' => trans('admin/hardware/general.archived'));
         return $statuslabel_types;
     }
 
@@ -265,7 +296,7 @@ class Helper
                         User::where('deleted_at', '=', null)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
-                        ->lists('complete_name', 'id')->toArray();
+                        ->pluck('complete_name', 'id')->toArray();
 
         return $manager_list;
     }
@@ -308,10 +339,10 @@ class Helper
     {
         $users_list =   array( '' => trans('general.select_user')) +
                         Company::scopeCompanyables(User::where('deleted_at', '=', null))
-                        ->where('show_in_list','=',1)
+                        ->where('show_in_list', '=', 1)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
-                        ->lists('complete_name', 'id')->toArray();
+                        ->pluck('complete_name', 'id')->toArray();
 
         return $users_list;
     }
@@ -336,11 +367,11 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.5]
-     * @return Array
+     * @return array
      */
     public static function detailedAssetList()
     {
-        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedUser', 'model'), 'assets.company_id')->get()->lists('detailed_name', 'id')->toArray();
+        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedTo', 'model'), 'assets.company_id')->get()->pluck('detailed_name', 'id')->toArray();
         return $assets;
     }
 
@@ -367,8 +398,8 @@ class Helper
      */
     public static function predefined_formats()
     {
-        $keys=array_keys(CustomField::$PredefinedFormats);
-        $stuff=array_combine($keys, $keys);
+        $keys = array_keys(CustomField::$PredefinedFormats);
+        $stuff = array_combine($keys, $keys);
         return $stuff+["" => trans('admin/custom_fields/general.custom_format')];
     }
 
@@ -553,7 +584,7 @@ class Helper
                 if ($permission[$x]['display'] === true) {
 
                     if ($selected_arr) {
-                        if (array_key_exists($permission_name,$selected_arr)) {
+                        if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
@@ -584,7 +615,8 @@ class Helper
      * @since [v3.0]
      * @return boolean
      */
-    public static function checkIfRequired($class, $field) {
+    public static function checkIfRequired($class, $field)
+    {
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
@@ -611,26 +643,8 @@ class Helper
      */
     public static function array_smart_fetch(array $array, $key, $default = '')
     {
-       array_change_key_case($array, CASE_LOWER);
+        array_change_key_case($array, CASE_LOWER);
         return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[ $key ])) : $default;
-    }
-
-    /**
-     * Check to see if the given key exists in the array, and trim excess white space before returning it
-     *
-     * @author A. Gianotto
-     * @since 3.2
-     * @param $array array
-     * @return string
-     */
-    public static function getLastDateFromHistoryArray(array $array)
-    {
-        foreach ($array as $key => $value) {
-//            echo '<pre>';
-//            echo 'last:'.$key;
-//            print_r($array);
-//            echo '</pre>';
-        }
     }
 
 
@@ -646,7 +660,8 @@ class Helper
      * @param String $string
      * @return string
      */
-    public static function gracefulDecrypt(CustomField $field, $string) {
+    public static function gracefulDecrypt(CustomField $field, $string)
+    {
 
         if ($field->isFieldDecryptable($string)) {
 
@@ -663,26 +678,52 @@ class Helper
 
     }
 
-    /**
-     * Strip HTML out of returned JSON. This is pretty gross, and I'd like to find a better way
-     * to handle this, but the REST API will solve some of these problems anyway.
-     *
-     * This is not currently used, but will be.
-     *
-     * @author A. Gianotto
-     * @since 3.4
-     * @param $array array
-     * @return Array
-     */
-    public static function stripTagsFromJSON(Array $array) {
 
-        foreach ($array as $key => $value) {
-            $clean_value = strip_tags($value);
-            $clean_array[$key] = $clean_value;
+
+    public static function formatStandardApiResponse($status, $payload = null, $messages = null) {
+
+        $array['status'] = $status;
+        $array['messages'] = $messages;
+        if (($messages) && (count($messages) > 0)) {
+            $array['messages'] = $messages;
         }
-        return $clean_array;
+        ($payload) ? $array['payload'] = $payload : $array['payload'] = null;
+        return $array;
+    }
+
+
+    /*
+    Possible solution for unicode fieldnames
+    */
+    public static function make_slug($string) {
+        return preg_replace('/\s+/u', '_', trim($string));
+    }
+
+
+    public static function getFormattedDateObject($date, $type = 'datetime', $array = true) {
+
+        if ($date=='') {
+            return null;
+        }
+
+        $settings = Setting::getSettings();
+        $tmp_date = new \Carbon($date);
+
+        if ($type == 'datetime') {
+            $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
+            $dt['formatted'] = $tmp_date->format($settings->date_display_format .' '. $settings->time_display_format);
+        } else {
+            $dt['date'] = $tmp_date->format('Y-m-d');
+            $dt['formatted'] = $tmp_date->format($settings->date_display_format);
+        }
+
+        if ($array == 'true') {
+            return $dt;
+        }
+        return $dt['formatted'];
 
     }
+
 
 
 }

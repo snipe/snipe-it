@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => 'Bạn đã xác nhận tài sản này thành công.',
     'declined'                  => 'Bạn đã từ chối tài sản này thành công.',
+    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'Người dùng thật sự tồn tại!',
     'user_not_found'            => 'Người dùng [:id] không tồn tại.',
     'user_login_required'       => 'Trường đăng nhập thì bắt buộc',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Người dùng đã được tạo thành công.',
         'update'    => 'Người dùng đã được cập nhật thành công.',
+        'update_bulk'    => 'Users were successfully updated!',
         'delete'    => 'Người dùng đã được xóa thành công.',
         'ban'       => 'Người dùng đã bị cấm thành công.',
         'unban'     => 'Phục hồi người dùng bị cấm thành công.',
@@ -29,6 +31,7 @@ return array(
         'create' => 'Có vấn đề xảy ra khi tạo người dùng. Xin thử lại lần nữa.',
         'update' => 'Có vấn đề xảy ra khi cập nhật người dùng. Xin thử lại lần nữa.',
         'delete' => 'Có vấn đề xảy ra khi xóa người dùng. Xin thử lại lần nữa.',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'Có vấn đề xảy ra khi phục hồi người dùng bị tạm ngưng. Xin thử lại.',
         'import'    => 'Có vấn đề xảy ra khi nhập danh sách người dùng. Xin thử lại.',
         'asset_already_accepted' => 'Tài sản này đã được chấp thuận.',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Không thể liên kết đến máy chủ LDAP. Xin vui lòng kiểm tra lại cấu hình máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP: ',
         'ldap_could_not_search' => 'Không thể tìm thấy máy chủ LDAP. Xin vui lòng kiểm tra cấu hình cài đặt máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP:',
         'ldap_could_not_get_entries' => 'Không thể lấy các mục từ máy chủ LDAP. Xin vui lòng kiểm tra lại cấu hình máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP:',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

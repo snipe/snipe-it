@@ -1,0 +1,38 @@
+{
+  "name": "bootstrap-table",
+  "homepage": "https://github.com/wenzhixin/bootstrap-table",
+  "authors": [
+    "zhixin <wenzhixin2010@gmail.com>"
+  ],
+  "description": "An extended Bootstrap table with radio, checkbox, sort, pagination, and other added features.",
+  "main": [
+    "src/bootstrap-table.js",
+    "src/bootstrap-table.css"
+  ],
+  "keywords": [
+    "bootstrap",
+    "table",
+    "bootstrap table"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "docs",
+    "assets"
+  ],
+  "version": "1.11.0",
+  "_release": "1.11.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.11.0",
+    "commit": "ae3f6bf016d45adaa31c94fad1f677ac7d094e24"
+  },
+  "_source": "https://github.com/wenzhixin/bootstrap-table.git",
+  "_target": "^1.11.0",
+  "_originalSource": "bootstrap-table",
+  "_direct": true
+}

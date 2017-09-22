@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'Handlinger',
     'add'    	                => 'Tilføj Ny',
     'cancel'                    => 'Annuller',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'Anmodning',
     'submit'  	                => 'Send',
     'upload'                    => 'Upload',
-
+	'select_file'				=> 'Select File...',
 );

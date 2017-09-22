@@ -24,6 +24,12 @@ return array(
         'success' 		=> 'Vellykket gjenoppretting av eiendel.'
     ),
 
+    'audit' => array(
+        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
+        'success' 		=> 'Asset audit successfully logged.'
+    ),
+
+
     'deletefile' => array(
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
         'success' => 'Vellykket sletting av fil.',
@@ -48,6 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',
         'error'   		=> 'Det oppstod et problem under sletting av eiendel. Vennligst prøv igjen.',
+        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'Vellykket sletting av eiendel.'
     ),
 

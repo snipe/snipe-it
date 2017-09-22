@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-
+        'does_not_exist' => 'Zestaw pól nie istnieje',
 
         'create' => array(
             'error'   => 'Zestaw pól nie został utworzony, spróbuj ponownie.',

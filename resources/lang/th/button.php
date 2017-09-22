@@ -1,7 +1,6 @@
 <?php
 
 return array(
-
     'actions' 	                => 'การกระทำ',
     'add'    	                => 'เพิ่มใหม่',
     'cancel'                    => 'ยกเลิก',
@@ -12,5 +11,5 @@ return array(
     'request'                   => 'ร้องขอ',
     'submit'  	                => 'ตกลง',
     'upload'                    => 'อัพโหลด',
-
+	'select_file'				=> 'Select File...',
 );

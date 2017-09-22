@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations_title'     => '장소 란',
+    'about_locations'           => '장소는 사용자, 자산, 그리고 그외의 품목들에 대한 위치 정보 추적에 사용된다',
     'assets_rtd'                => '자산', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => '할당된 자산',
     'id'                        => '아이디',
@@ -17,4 +17,5 @@ return array(
     'locations'                 => '위치',
     'parent'                    => '상위',
     'currency'                  => '현지 통화',
+    'ldap_ou'                   => 'LDAP 검색 OU',
     );

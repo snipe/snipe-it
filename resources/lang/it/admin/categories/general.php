@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Modifica Categoria',
     'eula_text'							=> 'Categoria EULA',
     'eula_text_help'					=> 'Questo campo consente di personalizzare le EULA per specifici tipi di attività. Se avete solo un EULA per tutti i vostri beni, è possibile controllare la casella di seguito per utilizzare il valore predefinito.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'Richiedere agli utenti di confermare l\'accettazione di attività in questa categoria.',
     'required_acceptance'				=> 'Verrà inviata un email  all\'utente con un link per confermare l\'accettazione di questo oggetto.',
     'required_eula'						=> 'Verrà inviato all\'utente via email copia di questa EULA',

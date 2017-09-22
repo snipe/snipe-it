@@ -4,6 +4,7 @@ return array(
 
     'accepted'                  => '您已接受這項資產。',
     'declined'                  => '您已拒絕這項資產。',
+    'bulk_manager_warn'	        => '您的使用者已成功更新，但主管條目未保存，因為您選擇的主管也在要編輯的使用者列表中，使用者不能是自己的主管。 請再次選擇您的使用者並排除主管。',
     'user_exists'               => '使用者已存在！',
     'user_not_found'            => '使用者 [:id] 不存在',
     'user_login_required'       => '登入欄位是必需的',
@@ -16,6 +17,7 @@ return array(
     'success' => array(
         'create'    => '新增使用者成功。',
         'update'    => '更新使用者成功。',
+        'update_bulk'    => '使用者更新成功 ！',
         'delete'    => '刪除使用者成功。',
         'ban'       => '禁止使用者成功。',
         'unban'     => '解禁使用者成功。',
@@ -29,6 +31,7 @@ return array(
         'create' => '新增使用者失敗，請重試。',
         'update' => '更新使用者失敗，請重試。',
         'delete' => '刪除使用者失敗，請重試。',
+        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => '解除停用使用者失敗，請重試。',
         'import'    => '匯入使用者失敗，請重試。',
         'asset_already_accepted' => '資產已被接受',
@@ -38,6 +41,7 @@ return array(
         'ldap_could_not_bind' => '無法綁定 LDAP 伺服器，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'ldap_could_not_search' => '查詢 LDAP 伺服器失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'ldap_could_not_get_entries' => ' LDAP 伺服器取得資訊條目失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
+        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 
     'deletefile' => array(

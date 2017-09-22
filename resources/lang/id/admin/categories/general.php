@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'Tentang Kategori',
+    'about_categories'  				=> 'Kategori membantu meng-organisir aset anda. Beberapa contoh kategori mungkin seperti &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, dan seterusnya, tapi anda bisa menggunakan kategori sesuai kebutuhan anda.',
     'asset_categories' 					=> 'Kategori Aset',
     'category_name'  					=> 'Nama Kategori',
     'checkin_email'                     => 'Kirim surel ke pengguna ketika barang di berikan kepadanya.',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Ubah Kategori',
     'eula_text'							=> 'Kategori EULA',
     'eula_text_help'					=> 'Kolom ini memperbolehkan Anda untuk menyesuaikan EULA Anda untuk jenis dari aset. Jika Anda hanya memiliki satu EULA untuk semua aset Anda, Anda dapat memeriksa kotak di bawah untuk menggunakan pilihan utama.',
+    'name'                              => 'Nama Kategori',
     'require_acceptance'				=> 'Mengharuskan pengguna untuk mengkonfirmasi penerimaan aset dalam kategori ini.',
     'required_acceptance'				=> 'Pengguna akan dikirimkan surel konfirmasi untuk menerima barang tersebut.',
     'required_eula'						=> 'Pengguna akan di kirimkan surel atas EULA',

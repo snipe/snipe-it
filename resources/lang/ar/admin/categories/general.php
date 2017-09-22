@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'عن التصنيفات',
+    'about_categories'  				=> 'التصنيفات تساعدك على ترتيب الأصول. من الأمثلة على التصنيفات &quot; مكاتب &quot;، &quot;أجهزة الكمبيوتر المحمولة &quot;، &quot;الهواتف النقالة &quot;، &quot;أجهزة لوحية &quot; وهكذا، كما يمكنك استخدام التصنيفات بأي طريقة تناسبك.',
     'asset_categories' 					=> 'التصنيفات',
     'category_name'  					=> 'اسم التصنيف',
     'checkin_email'                     => 'إرسال إشعار للمستخدم عند الإدخال.',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'تعديل التصنيف',
     'eula_text'							=> 'إتفاقية الإستخدام للتصنيف',
     'eula_text_help'					=> 'يسمح لك هذا الحقل بتخصيص الاتفاقيات لأنواع معينة من الأصول. اذا كنت تمتلك اتفاقية واحدة لجميع أصولك يمكنك أن تقوم بتأشير المربع في الأسفل لاستخدام الاتفاقية الافتراضية.',
+    'name'                              => 'Category Name',
     'require_acceptance'				=> 'مطالبة المستخدمين بتأكيد قبولهم للأصول في هذا التصنيف.',
     'required_acceptance'				=> 'سيتم اشعار المستخدم لتأكيد قبول الأصل.',
     'required_eula'						=> 'سيتم إشعار هذا المستخدم بإتفاقية الإستخدام',

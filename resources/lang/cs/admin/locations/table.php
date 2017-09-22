@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations_title'     => 'O umístěních',
+    'about_locations'           => 'Umístění se používá ke sledování informací o poloze uživatelů, majetku a dalších položek',
     'assets_rtd'                => 'Zařízení', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Předaných zař.',
     'id'                        => 'ID',
@@ -17,4 +17,5 @@ return array(
     'locations'                 => 'Umístění',
     'parent'                    => 'Nadřazené',
     'currency'                  => 'Měna',
+    'ldap_ou'                   => 'LDAP Vyhledat OU',
     );

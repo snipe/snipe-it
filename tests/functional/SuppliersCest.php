@@ -1,8 +1,5 @@
 <?php
 
-
-use App\Models\Supplier;
-
 class SuppliersCest
 {
     public function _before(FunctionalTester $I)
@@ -18,7 +15,7 @@ class SuppliersCest
     {
         $I->wantTo('ensure that the create settings/suppliers form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
-        $I->amOnPage(route('create/supplier'));
+        $I->amOnPage(route('suppliers.create'));
         $I->dontSee('Create Supplier', '.page-header');
         $I->see('Create Supplier', 'h1.pull-left');
     }
@@ -26,7 +23,7 @@ class SuppliersCest
     public function failsEmptyValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with blank elements");
-        $I->amOnPage(route('create/supplier'));
+        $I->amOnPage(route('suppliers.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
@@ -35,7 +32,7 @@ class SuppliersCest
     public function failsShortValidation(FunctionalTester $I)
     {
         $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage(route('create/supplier'));
+        $I->amOnPage(route('suppliers.create'));
         $I->fillField('name', 't2');
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -43,7 +40,7 @@ class SuppliersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $supplier = factory(App\Models\Supplier::class, 'supplier')->make();
+        $supplier = factory(App\Models\Supplier::class)->make();
         $values = [
             'name'              => $supplier->name,
             'address'           => $supplier->address,
@@ -60,7 +57,7 @@ class SuppliersCest
             'notes'             => $supplier->notes
         ];
         $I->wantTo("Test Validation Succeeds");
-        $I->amOnPage(route('create/supplier'));
+        $I->amOnPage(route('suppliers.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('suppliers', $values);
         $I->seeElement('.alert-success');
@@ -69,7 +66,8 @@ class SuppliersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a supplier');
-        $I->amOnPage(route('delete/supplier', Supplier::doesntHave('assets')->doesntHave('licenses')->first()->id));
-        $I->seeElement('.alert-success');
+        $supplier = factory(App\Models\Supplier::class)->create();
+        $I->sendDelete(route('suppliers.destroy', $supplier->id), ['_token' => csrf_token()]);
+        $I->seeResponseCodeIs(200);
     }
 }

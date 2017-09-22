@@ -2,7 +2,7 @@
 
     return [
         'title'         => 'Utrzymywanie aktywów',
-        'asset_name'    => 'Asset Name',
+        'asset_name'    => 'Nazwa Aktywu',
         'is_warranty'   => 'Gwarancja',
         'dl_csv'        => 'Pobierz CSV'
     ];

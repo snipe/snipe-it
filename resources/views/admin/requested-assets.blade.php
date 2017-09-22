@@ -17,7 +17,6 @@
     <div class="col-md-12">
 
         @if ($requestedItems->count() > 0)
-
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -33,9 +32,7 @@
                 </thead>
                 <tbody>
                     @foreach ($requestedItems as $request)
-
                     <tr>
-                       
                         <form action="#" method="POST" accept-charset="utf-8">
                             {{ csrf_field() }}
                             <td>{{ $request->itemType() }}</td>
@@ -53,7 +50,7 @@
                                 "N/A"
                             @endif
                             </td>
-                            <td>{{ $request->requestingUser()->fullName() }}</td>
+                            <td>{{ $request->requestingUser()->present()->fullName() }}</td>
                             <td>{{$request->created_at}}</td>
                             <td>
                             </td>
@@ -64,7 +61,6 @@
             </table>
         </div>
 
-
         @else
         <div class="col-md-12">
             <div class="alert alert-info alert-block">
@@ -72,13 +68,7 @@
                 {{ trans('general.no_results') }}
             </div>
         </div>
-
-
         @endif
-    </div>
     </div> <!-- .col-md-12> -->
 </div> <!-- .row -->
-
-
-
 @stop

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'A propos des catégories',
+    'about_categories'  				=> 'Les catégories vous aident à organiser vos items. Des exemples de catégories peuvent être "Ordinateurs de bureau", "Ordinateurs portables", "Téléphones portables", "Tablettes", etc..., mais vous pouvez utiliser les catégories comme cela vous convient.',
     'asset_categories' 					=> 'Catégories',
     'category_name'  					=> 'Catégorie',
     'checkin_email'                     => 'Envoyer un courriel à l\'utilisateur lors de l\'attribution.',
@@ -11,6 +11,7 @@ return array(
     'edit'                              => 'Modifier la catégorie',
     'eula_text'							=> 'Catégorie de licence d\'utilisation',
     'eula_text_help'					=> 'Ce champ vous permet de configurer vos licences d\'utilisation pour chaque type d\'items. Si vous avez seulement une licence pour tout vos items, vous pouvez cochez la case ci-dessous pour utiliser celle par défaut.',
+    'name'                              => 'Nom de la catégorie',
     'require_acceptance'				=> 'L\'utilisateur doit confirmer qu\'il accepte les actifs de cette catégorie.',
     'required_acceptance'				=> 'L\'utilisateur recevra un courriel avec un lien de confirmation pour accepter ce produit.',
     'required_eula'						=> 'Cet utilisateur recevra par courriel une copie de la licence d\'utilisation',

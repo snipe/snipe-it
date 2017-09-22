@@ -1,9 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\Loggable;
-use App\Models\SnipeModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
@@ -14,12 +12,16 @@ use Watson\Validating\ValidatingTrait;
  */
 class Accessory extends SnipeModel
 {
+    protected $presenter = 'App\Presenters\AccessoryPresenter';
     use CompanyableTrait;
-    use Loggable;
+    use Loggable, Presentable;
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'accessories';
+    protected $casts = [
+        'requestable' => 'boolean'
+    ];
 
     /**
     * Accessory validation rules
@@ -27,10 +29,10 @@ class Accessory extends SnipeModel
     public $rules = array(
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
-        'category_id'       => 'required|integer',
-        'company_id'        => 'integer',
-        'min_amt'           => 'integer|min:0',
-        'purchase_cost'     => 'numeric',
+        'category_id'       => 'required|integer|exists:categories,id',
+        'company_id'        => 'integer|nullable',
+        'min_amt'           => 'integer|min:0|nullable',
+        'purchase_cost'     => 'numeric|nullable',
     );
 
 
@@ -49,7 +51,28 @@ class Accessory extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','qty','category_id'];
+    protected $fillable = [
+        'category_id',
+        'company_id',
+        'location_id',
+        'name',
+        'order_number',
+        'purchase_cost',
+        'purchase_date',
+        'model_number',
+        'manufacturer_id',
+        'qty',
+        'requestable'
+    ];
+
+    public function setRequestableAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return;
+    }
 
     public function company()
     {
@@ -109,10 +132,8 @@ class Accessory extends SnipeModel
             return $Parsedown->text(e($this->category->eula_text));
         } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-        } else {
-            return null;
         }
-
+            return null;
     }
 
     public function numRemaining()
@@ -126,10 +147,10 @@ class Accessory extends SnipeModel
     /**
     * Query builder scope to search on text
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $search      Search term
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeTextSearch($query, $search)
     {
@@ -143,11 +164,6 @@ class Accessory extends SnipeModel
                     })->orWhere(function ($query) use ($search) {
                         $query->whereHas('company', function ($query) use ($search) {
                             $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('assetlog', function ($query) use ($search) {
-                            $query->where('action_type', '=', 'checkout')
-                            ->where('created_at', 'LIKE', '%'.$search.'%');
                         });
                     })->orWhere(function ($query) use ($search) {
                         $query->whereHas('location', function ($query) use ($search) {
@@ -165,39 +181,55 @@ class Accessory extends SnipeModel
     /**
     * Query builder scope to order on company
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCompany($query, $order)
     {
-        return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+        return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')
+        ->orderBy('companies.name', $order);
     }
 
     /**
-    * Query builder scope to order on company
+    * Query builder scope to order on category
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCategory($query, $order)
     {
-        return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
+        return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')
+        ->orderBy('categories.name', $order);
     }
 
     /**
-    * Query builder scope to order on company
+    * Query builder scope to order on location
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderLocation($query, $order)
     {
-        return $query->leftJoin('locations', 'consumables.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
+        return $query->leftJoin('locations', 'accessories.location_id', '=', 'locations.id')
+        ->orderBy('locations.name', $order);
+    }
+
+    /**
+    * Query builder scope to order on manufacturer
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'accessories.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
 }
