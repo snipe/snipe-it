@@ -165,9 +165,9 @@
                             {{ Form::label('login_note', trans('admin/settings/general.login_note')) }}
                         </div>
                         <div class="col-md-9">
-                            @if (config('app.lock_passwords')===true)
+                            @if (config('app.lock_passwords'))
 
-                                <textarea class="form-control" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ Input::old('login_note', $setting->login_note) }}</textarea>
+                                <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" readonly>{{ Input::old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg">:message</span>') !!}
                                 <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                             @else
