@@ -541,26 +541,22 @@
                   <tbody>
                     <?php $totalCost = 0; ?>
 
-                      @foreach ($asset->assetmaintenances as $assetMaintenance)
-                        @if (is_null($assetMaintenance->deleted_at))
-                          <tr>
-                            <td>
-                                @if ($assetMaintenance->supplier)
-                                    <a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a>
-                                @endif
-                            </td>
-                            <td>{{ $assetMaintenance->title }}</td>
-                            <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
-                            <td>{{ $assetMaintenance->start_date }}</td>
-                            <td>{{ $assetMaintenance->completion_date }}</td>
-                            <td>{{ $assetMaintenance->notes }}</td>
-                            <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
-                            <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
-                            <td>
-                              @if ($assetMaintenance->admin)
-                                <a href="{{ config('app.url')  }}/admin/users/{{ $assetMaintenance->admin->id }}/view">{{ $assetMaintenance->admin->fullName() }}</a>
-                              @endif
-                            </td>
+                    @foreach ($asset->assetmaintenances as $assetMaintenance)
+                      @if (is_null($assetMaintenance->deleted_at))
+                        <tr>
+                          <td><a href="{{ route('suppliers.show', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a></td> 
+                          <td>{{ $assetMaintenance->title }}</td>
+                          <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
+                          <td>{{ $assetMaintenance->start_date }}</td>
+                          <td>{{ $assetMaintenance->completion_date }}</td>
+                          <td>{{ $assetMaintenance->notes }}</td>
+                          <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
+                          <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
+                          <td>
+                            @if ($assetMaintenance->admin)
+                              <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->present()->fullName() }}</a>
+                            @endif
+                          </td>
                             <?php $totalCost += $assetMaintenance->cost; ?>
                             @can('update', \App\Models\Asset::class)
                               <td>
