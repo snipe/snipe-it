@@ -338,7 +338,10 @@ class SettingsController extends Controller
         $setting->email_format = $request->input('email_format');
         $setting->username_format = $request->input('username_format');
         $setting->require_accept_signature = $request->input('require_accept_signature');
-        $setting->login_note = $request->input('login_note');
+        if (config('app.lock_passwords')) {
+            $setting->login_note = $request->input('login_note');
+        }
+
         $setting->default_eula_text = $request->input('default_eula_text');
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
 
