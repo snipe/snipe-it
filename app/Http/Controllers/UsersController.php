@@ -418,26 +418,26 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
         if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } else {
-
-            $statuslabel_list = Helper::statusLabelList();
-            $user_raw_array = array_keys(Input::get('ids'));
-            $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-
-            $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
-            if ($request->input('bulk_actions')=='edit') {
-
-                return view('users/bulk-edit', compact('users'))
-                    ->with('location_list', Helper::locationsList())
-                    ->with('company_list', Helper::companyList())
-                    ->with('manager_list', Helper::managerList())
-                    ->with('manager_list', Helper::managerList())
-                    ->with('department_list', Helper::departmentList())
-                    ->with('groups', Group::pluck('name', 'id'));
-            }
-
-            return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
+
+        $statuslabel_list = Helper::statusLabelList();
+        $user_raw_array = array_keys(Input::get('ids'));
+        $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
+
+        $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
+        if ($request->input('bulk_actions')=='edit') {
+
+            return view('users/bulk-edit', compact('users'))
+                ->with('location_list', Helper::locationsList())
+                ->with('company_list', Helper::companyList())
+                ->with('manager_list', Helper::managerList())
+                ->with('manager_list', Helper::managerList())
+                ->with('department_list', Helper::departmentList())
+                ->with('groups', Group::pluck('name', 'id'));
+        }
+
+        return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
+
     }
 
 
@@ -453,52 +453,52 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
         if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } else {
+        }
 
-            $user_raw_array = Input::get('ids');
-            $update_array = array();
-            $manager_conflict = false;
+        $user_raw_array = Input::get('ids');
+        $update_array = array();
+        $manager_conflict = false;
 
-            $users = User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->get();
+        $users = User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->get();
 
-            if ($request->has('location_id')) {
-                $update_array['location_id'] = $request->input('location_id');
-            }
-            if ($request->has('department_id')) {
-                $update_array['department_id'] = $request->input('department_id');
-            }
-            if ($request->has('company_id')) {
-                $update_array['company_id'] = $request->input('company_id');
-            }
+        if ($request->has('location_id')) {
+            $update_array['location_id'] = $request->input('location_id');
+        }
+        if ($request->has('department_id')) {
+            $update_array['department_id'] = $request->input('department_id');
+        }
+        if ($request->has('company_id')) {
+            $update_array['company_id'] = $request->input('company_id');
+        }
 
-            if ($request->has('manager_id')) {
+        if ($request->has('manager_id')) {
 
-                // Do not allow a manager update if the selected manager is one of the users being
-                // edited.
-                if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
-                    $update_array['manager_id'] = $request->input('manager_id');
+            // Do not allow a manager update if the selected manager is one of the users being
+            // edited.
+            if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
+                $update_array['manager_id'] = $request->input('manager_id');
 
-                } else {
-                    $manager_conflict = true;
-                }
-
-            }
-            if ($request->has('activated')) {
-                $update_array['activated'] = $request->input('activated');
-            }
-
-            if (count($update_array) > 0) {
-                User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->update($update_array);
-            }
-
-            // Only sync groups if groups were selected
-            if ($request->has('groups')) {
-                foreach ($users as $user) {
-                    $user->groups()->sync($request->input('groups'));
-                }
+            } else {
+                $manager_conflict = true;
             }
 
         }
+        if ($request->has('activated')) {
+            $update_array['activated'] = $request->input('activated');
+        }
+
+        if (count($update_array) > 0) {
+            User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->update($update_array);
+        }
+
+        // Only sync groups if groups were selected
+        if ($request->has('groups')) {
+            foreach ($users as $user) {
+                $user->groups()->sync($request->input('groups'));
+            }
+        }
+
+
         if ($manager_conflict) {
             return redirect()->route('users.index')
                 ->with('warning', trans('admin/users/message.bulk_manager_warn'));
@@ -524,85 +524,84 @@ class UsersController extends Controller
             return redirect()->back()->with('error', 'No users selected');
         } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
             return redirect()->route('users.index')->with('error', 'No status selected');
-        } else {
-
-            $user_raw_array = Input::get('ids');
-            $asset_array = array();
-
-            if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
-                unset($user_raw_array[$key]);
-            }
-
-            if (!Auth::user()->isSuperUser()) {
-                return redirect()->route('users.index')->with('error', trans('admin/users/message.insufficient_permissions'));
-            }
-
-            if (!config('app.lock_passwords')) {
-
-                $users = User::whereIn('id', $user_raw_array)->get();
-                $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
-                $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
-                $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-                $license_array = array();
-                $accessory_array = array();
-
-                foreach ($assets as $asset) {
-
-                    $asset_array[] = $asset->id;
-
-                    // Update the asset log
-                    $logAction = new Actionlog();
-                    $logAction->item_id = $asset->id;
-                    $logAction->item_type = Asset::class;
-                    $logAction->target_id = $asset->assigned_to;
-                    $logAction->target_type = User::class;
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->note = 'Bulk checkin asset and delete user';
-                    $logAction->logaction('checkin from');
-
-                    Asset::whereIn('id', $asset_array)->update([
-                                'status_id' => e(Input::get('status_id')),
-                                'assigned_to' => null,
-                    ]);
-                }
-
-                foreach ($accessories as $accessory) {
-                    $accessory_array[] = $accessory->accessory_id;
-                    // Update the asset log
-                    $logAction = new Actionlog();
-                    $logAction->item_id = $accessory->id;
-                    $logAction->item_type = Accessory::class;
-                    $logAction->target_id = $accessory->assigned_to;
-                    $logAction->target_type = User::class;
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->note = 'Bulk checkin accessory and delete user';
-                    $logAction->logaction('checkin from');
-                }
-
-                foreach ($licenses as $license) {
-                    $license_array[] = $license->id;
-                    // Update the asset log
-                    $logAction = new Actionlog();
-                    $logAction->item_id = $license->id;
-                    $logAction->item_type = License::class;
-                    $logAction->target_id = $license->assigned_to;
-                    $logAction->target_type = User::class;
-                    $logAction->user_id = Auth::user()->id;
-                    $logAction->note = 'Bulk checkin license and delete user';
-                    $logAction->logaction('checkin from');
-                }
-
-                LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => null]);
-
-                foreach ($users as $user) {
-                    $user->accessories()->sync(array());
-                    $user->delete();
-                }
-
-                return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
-            }
-            return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
         }
+        $user_raw_array = Input::get('ids');
+        $asset_array = array();
+
+        if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
+            unset($user_raw_array[$key]);
+        }
+
+        if (!Auth::user()->isSuperUser()) {
+            return redirect()->route('users.index')->with('error', trans('admin/users/message.insufficient_permissions'));
+        }
+
+        if (!config('app.lock_passwords')) {
+
+            $users = User::whereIn('id', $user_raw_array)->get();
+            $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
+            $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
+            $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
+            $license_array = array();
+            $accessory_array = array();
+
+            foreach ($assets as $asset) {
+
+                $asset_array[] = $asset->id;
+
+                // Update the asset log
+                $logAction = new Actionlog();
+                $logAction->item_id = $asset->id;
+                $logAction->item_type = Asset::class;
+                $logAction->target_id = $asset->assigned_to;
+                $logAction->target_type = User::class;
+                $logAction->user_id = Auth::user()->id;
+                $logAction->note = 'Bulk checkin asset and delete user';
+                $logAction->logaction('checkin from');
+
+                Asset::whereIn('id', $asset_array)->update([
+                            'status_id' => e(Input::get('status_id')),
+                            'assigned_to' => null,
+                ]);
+            }
+
+            foreach ($accessories as $accessory) {
+                $accessory_array[] = $accessory->accessory_id;
+                // Update the asset log
+                $logAction = new Actionlog();
+                $logAction->item_id = $accessory->id;
+                $logAction->item_type = Accessory::class;
+                $logAction->target_id = $accessory->assigned_to;
+                $logAction->target_type = User::class;
+                $logAction->user_id = Auth::user()->id;
+                $logAction->note = 'Bulk checkin accessory and delete user';
+                $logAction->logaction('checkin from');
+            }
+
+            foreach ($licenses as $license) {
+                $license_array[] = $license->id;
+                // Update the asset log
+                $logAction = new Actionlog();
+                $logAction->item_id = $license->id;
+                $logAction->item_type = License::class;
+                $logAction->target_id = $license->assigned_to;
+                $logAction->target_type = User::class;
+                $logAction->user_id = Auth::user()->id;
+                $logAction->note = 'Bulk checkin license and delete user';
+                $logAction->logaction('checkin from');
+            }
+
+            LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => null]);
+
+            foreach ($users as $user) {
+                $user->accessories()->sync(array());
+                $user->delete();
+            }
+
+            return redirect()->route('users.index')->with('success', 'Your selected users have been deleted and their assets have been updated.');
+        }
+        return redirect()->route('users.index')->with('error', 'Bulk delete is not enabled in this installation');
+
     }
 
     /**
@@ -794,76 +793,75 @@ class UsersController extends Controller
 
         $nbInsert = $csv->each(function ($row) use ($duplicates) {
 
-            if (array_key_exists(2, $row)) {
+            if (!array_key_exists(2, $row)) {
+                return null;
+            }
+            if (Input::get('activate') == 1) {
+                $activated = '1';
+            } else {
+                $activated = '0';
+            }
 
-                if (Input::get('activate') == 1) {
-                    $activated = '1';
+            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
+
+            // Location
+            if (array_key_exists('4', $row)) {
+                $user_location_id = trim($row[4]);
+                if ($user_location_id=='') {
+                    $user_location_id = null;
+                }
+            }
+
+
+
+            try {
+                // Check if this email already exists in the system
+                $user = User::where('username', $row[2])->first();
+                if ($user) {
+                    $duplicates .= $row[2] . ', ';
                 } else {
-                    $activated = '0';
-                }
 
-                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
+                    $newuser = array(
+                        'first_name' => trim(e($row[0])),
+                        'last_name' => trim(e($row[1])),
+                        'username' => trim(e($row[2])),
+                        'email' => trim(e($row[3])),
+                        'password' => bcrypt($pass),
+                        'activated' => $activated,
+                        'location_id' => trim(e($user_location_id)),
+                        'phone' => trim(e($row[5])),
+                        'jobtitle' => trim(e($row[6])),
+                        'employee_num' => trim(e($row[7])),
+                        'company_id' => Company::getIdForUser($row[8]),
+                        'permissions' => '{"user":1}',
+                        'notes' => 'Imported user'
+                    );
+                    //dd($newuser);
 
-                // Location
-                if (array_key_exists('4', $row)) {
-                    $user_location_id = trim($row[4]);
-                    if ($user_location_id=='') {
-                        $user_location_id = null;
-                    }
-                }
-
-
-
-                try {
-                    // Check if this email already exists in the system
-                    $user = User::where('username', $row[2])->first();
-                    if ($user) {
-                        $duplicates .= $row[2] . ', ';
-                    } else {
-
-                        $newuser = array(
-                            'first_name' => trim(e($row[0])),
-                            'last_name' => trim(e($row[1])),
-                            'username' => trim(e($row[2])),
-                            'email' => trim(e($row[3])),
-                            'password' => bcrypt($pass),
-                            'activated' => $activated,
-                            'location_id' => trim(e($user_location_id)),
-                            'phone' => trim(e($row[5])),
-                            'jobtitle' => trim(e($row[6])),
-                            'employee_num' => trim(e($row[7])),
-                            'company_id' => Company::getIdForUser($row[8]),
-                            'permissions' => '{"user":1}',
-                            'notes' => 'Imported user'
-                        );
-                        //dd($newuser);
-
-                        DB::table('users')->insert($newuser);
+                    DB::table('users')->insert($newuser);
 
 
-                        if (((Input::get('email_user') == 1) && !config('app.lock_passwords'))) {
-                            // Send the credentials through email
-                            if ($row[3] != '') {
-                                $data = array();
-                                $data['username'] = trim(e($row[2]));
-                                $data['first_name'] = trim(e($row[0]));
-                                $data['password'] = $pass;
+                    if ((Input::get('email_user') == 1) && !config('app.lock_passwords') && $row[3] != '') {
+                        // Send the credentials through email
+                        $data = array();
+                        $data['username'] = trim(e($row[2]));
+                        $data['first_name'] = trim(e($row[0]));
+                        $data['password'] = $pass;
 
-                                if ($newuser['email']) {
-                                    Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
-                                        $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-                                        $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                                        $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
-                                    });
-                                }
-                            }
+                        if ($newuser['email']) {
+                            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+                                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+                                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                                $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
+                            });
                         }
                     }
-                } catch (Exception $e) {
-                    echo 'Caught exception: ', $e->getMessage(), "\n";
                 }
-                return true;
+            } catch (Exception $e) {
+                echo 'Caught exception: ', $e->getMessage(), "\n";
             }
+            return true;
+
         });
         return redirect()->route('users.index')->with('duplicates', $duplicates)->with('success', 'Success');
     }
@@ -884,33 +882,34 @@ class UsersController extends Controller
         $user = User::find($userId);
         $destinationPath = config('app.private_uploads') . '/users';
 
-        if (isset($user->id)) {
-            $this->authorize('update', $user);
+        if (!isset($user->id)) {
+            return JsonResponse::create(["error" => "Failed validation: ".print_r($logAction->getErrors(), true)], 500);
+        }
+        $this->authorize('update', $user);
 
-            foreach (Input::file('file') as $file) {
+        foreach (Input::file('file') as $file) {
 
-                $extension = $file->getClientOriginalExtension();
-                $filename = 'user-' . $user->id . '-' . str_random(8);
-                $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
-                $upload_success = $file->move($destinationPath, $filename);
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'user-' . $user->id . '-' . str_random(8);
+            $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
+            $upload_success = $file->move($destinationPath, $filename);
 
-                //Log the uploaded file to the log
-                $logAction = new Actionlog();
-                $logAction->item_id = $user->id;
-                $logAction->item_type = User::class;
-                $logAction->user_id = Auth::user()->id;
-                $logAction->note = e(Input::get('notes'));
-                $logAction->target_id = null;
-                $logAction->created_at = date("Y-m-d H:i:s");
-                $logAction->filename = $filename;
-                $logAction->action_type = 'uploaded';
-                $logAction->save();
-
-            }
-            return JsonResponse::create($logAction);
+            //Log the uploaded file to the log
+            $logAction = new Actionlog();
+            $logAction->item_id = $user->id;
+            $logAction->item_type = User::class;
+            $logAction->user_id = Auth::user()->id;
+            $logAction->note = e(Input::get('notes'));
+            $logAction->target_id = null;
+            $logAction->created_at = date("Y-m-d H:i:s");
+            $logAction->filename = $filename;
+            $logAction->action_type = 'uploaded';
+            $logAction->save();
 
         }
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($logAction->getErrors(), true)], 500);
+        return JsonResponse::create($logAction);
+
+
     }
 
 
@@ -1090,64 +1089,65 @@ class UsersController extends Controller
         $pass = bcrypt($tmp_pass);
 
         for ($i = 0; $i < $results["count"]; $i++) {
-            if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
-
-                $item = array();
-                $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
-                $item["employee_number"] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : "";
-                $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
-                $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
-                $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
-                $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
-                $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
-
-                if( array_key_exists('useraccountcontrol', $results[$i]) ) {
-                $enabled_accounts = [
-                        '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
-                    ];
-                    $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
-                } else {
-                    $item['activated'] = 0;
-                }
-
-                // User exists
-                $item["createorupdate"] = 'updated';
-                if (!$user = User::where('username', $item["username"])->first()) {
-                    $user = new User;
-                    $user->password = $pass;
-                    $item["createorupdate"] = 'created';
-                }
-
-                 // Create the user if they don't exist.
-                $user->first_name = $item["firstname"];
-                $user->last_name = $item["lastname"];
-                $user->username = $item["username"];
-                $user->email = $item["email"];
-                $user->employee_num = e($item["employee_number"]);
-                $user->activated = $item['activated'];
-                
-                if ($item['ldap_location_override'] == true) {
-                    $user->location_id = $item['location_id'];
-                } else if ($request->input('location_id')!='') {
-                    $user->location_id = e($request->input('location_id'));
-                }
-                $user->notes = 'Imported from LDAP';
-                $user->ldap_import = 1;
-
-                $errors = '';
-
-                if ($user->save()) {
-                    $item["note"] = $item["createorupdate"];
-                    $item["status"]='success';
-                } else {
-                    foreach ($user->getErrors()->getMessages() as $key => $err) {
-                        $errors .='<li>'.$err[0];
-                    }
-                    $item["note"] = $errors;
-                    $item["status"]='error';
-                }
-                array_push($summary, $item);
+            if (!empty($ldap_result_active_flag) && $results[$i][$ldap_result_active_flag][0] !== "TRUE") {
+                continue;
             }
+            $item = array();
+            $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
+            $item["employee_number"] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : "";
+            $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
+            $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
+            $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
+            $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
+            $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
+
+            if( array_key_exists('useraccountcontrol', $results[$i]) ) {
+            $enabled_accounts = [
+                    '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
+                ];
+                $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
+            } else {
+                $item['activated'] = 0;
+            }
+
+            // User exists
+            $item["createorupdate"] = 'updated';
+            if (!$user = User::where('username', $item["username"])->first()) {
+                $user = new User;
+                $user->password = $pass;
+                $item["createorupdate"] = 'created';
+            }
+
+             // Create the user if they don't exist.
+            $user->first_name = $item["firstname"];
+            $user->last_name = $item["lastname"];
+            $user->username = $item["username"];
+            $user->email = $item["email"];
+            $user->employee_num = e($item["employee_number"]);
+            $user->activated = $item['activated'];
+
+            if ($item['ldap_location_override'] == true) {
+                $user->location_id = $item['location_id'];
+            } else if ($request->input('location_id')!='') {
+                $user->location_id = e($request->input('location_id'));
+            }
+            $user->notes = 'Imported from LDAP';
+            $user->ldap_import = 1;
+
+            $errors = '';
+
+            if ($user->save()) {
+                $item["note"] = $item["createorupdate"];
+                $item["status"]='success';
+            } else {
+                foreach ($user->getErrors()->getMessages() as $key => $err) {
+                    $errors .='<li>'.$err[0];
+                }
+                $item["note"] = $errors;
+                $item["status"]='error';
+            }
+            array_push($summary, $item);
+
         }
         return redirect()->route('ldap/user')->with('success', "LDAP Import successful.")->with('summary', $summary);
     }

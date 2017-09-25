@@ -132,13 +132,12 @@ class ProfileController extends Controller
             
         });
 
-        if (!$validator->fails()) {
-            $user->password = Hash::make($request->input('password'));
-            $user->save();
-            return redirect()->route('account.password.index')->with('success', 'Password updated!');
-
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
         }
-        return redirect()->back()->withInput()->withErrors($validator);
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+        return redirect()->route('account.password.index')->with('success', 'Password updated!');
 
 
     }

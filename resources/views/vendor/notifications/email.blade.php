@@ -112,16 +112,8 @@ $style = [
                                                 <tr>
                                                     <td align="center">
                                                         <?php
-                                                        switch ($level) {
-                                                            case 'success':
-                                                                $actionColor = 'button--green';
-                                                                break;
-                                                            case 'error':
-                                                                $actionColor = 'button--red';
-                                                                break;
-                                                            default:
-                                                                $actionColor = 'button--blue';
-                                                        }
+                                                        $map = [ 'success' => 'button--green', 'error' => 'button--red,'];
+                                                        $actionColor = array_get($map, $level, 'button--blue');
                                                         ?>
 
                                                         <a href="{{ $actionUrl }}"

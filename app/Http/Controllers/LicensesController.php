@@ -130,7 +130,8 @@ class LicensesController extends Controller
      */
     public function edit($licenseId = null)
     {
-        if (is_null($item = License::find($licenseId))) {
+        $item = License::find($licenseId);
+        if (is_null($item)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         }
 
@@ -206,31 +207,30 @@ class LicensesController extends Controller
      */
     public function destroy($licenseId)
     {
+        $license = License::find($licenseId);
         // Check if the license exists
-        if (is_null($license = License::find($licenseId))) {
+        if (is_null($license)) {
             // Redirect to the license management page
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
         $this->authorize('delete', $license);
-
-        if ($license->assigned_seats_count == 0) {
-            // Delete the license and the associated license seats
-            DB::table('license_seats')
-                ->where('id', $license->id)
-                ->update(array('assigned_to' => null,'asset_id' => null));
-
-            $licenseSeats = $license->licenseseats();
-            $licenseSeats->delete();
-            $license->delete();
-
-            // Redirect to the licenses management page
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.delete.success'));
-            // Redirect to the license management page
+        if ($license->assigned_seats_count !== 0) {
+            // There are still licenses in use.
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.assoc_users'));
         }
-        // There are still licenses in use.
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.assoc_users'));
 
+        // Delete the license and the associated license seats
+        DB::table('license_seats')
+            ->where('id', $license->id)
+            ->update(array('assigned_to' => null,'asset_id' => null));
+
+        $licenseSeats = $license->licenseseats();
+        $licenseSeats->delete();
+        $license->delete();
+
+        // Redirect to the licenses management page
+        return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.delete.success'));
     }
 
     /**
@@ -331,18 +331,18 @@ class LicensesController extends Controller
         }
 
         // Was the asset updated?
-        if ($licenseSeat->save()) {
-            $licenseSeat->logCheckout($request->input('note'), $target);
-
-            $data['license_id'] =$licenseSeat->license_id;
-            $data['note'] = $request->input('note');
-
-            // Redirect to the new asset page
-            return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
+        if (!$licenseSeat->save()) {
+            // Redirect to the asset management page with error
+            return redirect()->to("admin/licenses/{$asset_id}/checkout")->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
         }
+        $licenseSeat->logCheckout($request->input('note'), $target);
 
-        // Redirect to the asset management page with error
-        return redirect()->to("admin/licenses/{$asset_id}/checkout")->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
+        $data['license_id'] =$licenseSeat->license_id;
+        $data['note'] = $request->input('note');
+
+        // Redirect to the new asset page
+        return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
+
     }
 
 
@@ -417,17 +417,17 @@ class LicensesController extends Controller
         $licenseSeat->assigned_to                   = null;
         $licenseSeat->asset_id                      = null;
 
-        // Was the asset updated?
-        if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e(request('note')));
-            if ($backTo=='user') {
-                return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
-            }
-            return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
+        if (!$licenseSeat->save()) {
+            // Redirect to the license page with error
+            return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkin.error'));
         }
+        // Was the asset updated?
+        $licenseSeat->logCheckin($return_to, e(request('note')));
+        if ($backTo=='user') {
+            return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
+        }
+        return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
 
-        // Redirect to the license page with error
-        return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkin.error'));
     }
 
     /**
@@ -441,13 +441,15 @@ class LicensesController extends Controller
     public function show($licenseId = null)
     {
         $license = License::find($licenseId);
-        if (isset($license->id)) {
-            $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
-            $this->authorize('view', $license);
-            return view('licenses/view', compact('license'));
+
+        if (!isset($license->id)) {
+            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+            return redirect()->route('licenses.index')->with('error', $error);
         }
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        return redirect()->route('licenses.index')->with('error', $error);
+
+        $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
+        $this->authorize('view', $license);
+        return view('licenses/view', compact('license'));
     }
 
     public function getClone($licenseId = null)
@@ -494,40 +496,42 @@ class LicensesController extends Controller
         // the license is valid
         $destinationPath = config('app.private_uploads').'/licenses';
 
-        if (isset($license->id)) {
-            $this->authorize('update', $license);
 
-            if (Input::hasFile('licensefile')) {
+        if (!isset($license->id)) {
+            // Prepare the error message
+            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+            return redirect()->route('licenses.index')->with('error', $error);
+        }
 
-                foreach (Input::file('licensefile') as $file) {
+        $this->authorize('update', $license);
 
-                    $rules = array(
-                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
-                    );
-                    $validator = Validator::make(array('licensefile'=> $file), $rules);
 
-                    if ($validator->fails()) {
-                         return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
-                    }
-                    $extension = $file->getClientOriginalExtension();
-                    $filename = 'license-'.$license->id.'-'.str_random(8);
-                    $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
-                    $upload_success = $file->move($destinationPath, $filename);
-
-                    //Log the upload to the log
-                    $license->logUpload($filename, e($request->input('notes')));
-                }
-
-                if ($upload_success) {
-                    return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
-                }
-                return redirect()->back()->with('error', trans('admin/licenses/message.upload.error'));
-            }
+        if (!Input::hasFile('licensefile')) {
             return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
         }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        return redirect()->route('licenses.index')->with('error', $error);
+        foreach (Input::file('licensefile') as $file) {
+
+            $rules = array(
+            'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
+            );
+            $validator = Validator::make(array('licensefile'=> $file), $rules);
+
+            if ($validator->fails()) {
+                 return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
+            }
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'license-'.$license->id.'-'.str_random(8);
+            $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+            $upload_success = $file->move($destinationPath, $filename);
+
+            //Log the upload to the log
+            $license->logUpload($filename, e($request->input('notes')));
+        }
+
+        if ($upload_success) {
+            return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
+        }
+        return redirect()->back()->with('error', trans('admin/licenses/message.upload.error'));
     }
 
 
@@ -545,22 +549,22 @@ class LicensesController extends Controller
         $license = License::find($licenseId);
         $destinationPath = config('app.private_uploads').'/licenses';
 
-        // the license is valid
-        if (isset($license->id)) {
-            $this->authorize('edit', $license);
-            $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
-            }
-            $log->delete();
-            return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
-        }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+        if (!isset($license->id)) {
+            // Prepare the error message
+            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
-        // Redirect to the licence management page
-        return redirect()->route('licenses.index')->with('error', $error);
+            // Redirect to the licence management page
+            return redirect()->route('licenses.index')->with('error', $error);
+        }
+        // the license is valid
+        $this->authorize('edit', $license);
+        $log = Actionlog::find($fileId);
+        $full_filename = $destinationPath.'/'.$log->filename;
+        if (file_exists($full_filename)) {
+            unlink($destinationPath.'/'.$log->filename);
+        }
+        $log->delete();
+        return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
     }
 
 
@@ -579,17 +583,18 @@ class LicensesController extends Controller
 
         $license = License::find($licenseId);
 
-        // the license is valid
-        if (isset($license->id)) {
-            $this->authorize('view', $license);
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src('licenses');
-            return Response::download($file);
+        if (!isset($license->id)) {
+            // Prepare the error message
+            $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+            // Redirect to the licence management page
+            return redirect()->route('licenses.index')->with('error', $error);
         }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        // Redirect to the licence management page
-        return redirect()->route('licenses.index')->with('error', $error);
+
+        // the license is valid
+        $this->authorize('view', $license);
+        $log = Actionlog::find($fileId);
+        $file = $log->get_src('licenses');
+        return Response::download($file);
     }
 
 
