@@ -7,7 +7,7 @@
         @show
       </title>
 
-        <link rel="stylesheet" href="{{ mix('css/dist/all.css') }}">
+        <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
 
 
 
@@ -118,7 +118,7 @@
                   </div>
               </div>
           </div>
-          <script src="{{ asset(mix('js/dist/all.js')) }}"></script>
+          <script src="{{ url(mix('js/dist/all.js')) }}"></script>
 
         <script>
             $(function () {
