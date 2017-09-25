@@ -22,6 +22,8 @@ return [
                     base_path('public/uploads'),
                     base_path('config'),
                     base_path('storage/private_uploads'),
+                    base_path('storage/oauth-private.key'),
+                    base_path('storage/oauth-public.key'),
                 ],
 
                 /*
