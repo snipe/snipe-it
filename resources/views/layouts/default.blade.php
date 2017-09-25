@@ -13,17 +13,17 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('js/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{{ asset('js/plugins/iCheck/all.css') }}">
+    <link rel="stylesheet" href="{{ url(asset('js/plugins/iCheck/all.css')) }}">
 
     <!-- bootstrap tables CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-table.css') }}">
+    <link rel="stylesheet" href="{{ url(asset('css/bootstrap-table.css')) }}">
 
-    <link rel="stylesheet" href="{{ mix('css/dist/all.css') }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
 
-    <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -88,8 +88,8 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
        @else
-            <script src="{{ asset('js/html5shiv.js') }}"></script>
-            <script src="{{ asset('js/respond.js') }}"></script>
+            <script src="{{ url(asset('js/html5shiv.js')) }}"></script>
+            <script src="{{ url(asset('js/respond.js')) }}"></script>
        @endif
        <![endif]-->
   </head>
@@ -662,7 +662,7 @@
 
 
 
-    <script src="{{ mix('js/dist/all.js') }}"></script>
+    <script src="{{ url(mix('js/dist/all.js')) }}"></script>
     <script>
         $(function () {
             var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
