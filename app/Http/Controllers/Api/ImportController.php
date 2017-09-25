@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Artisan;
 
 class ImportController extends Controller
 {
@@ -94,6 +95,8 @@ class ImportController extends Controller
     public function process(ItemImportRequest $request, $import_id)
     {
         $this->authorize('create', Asset::class);
+        // Run a backup immediately before processing
+        Artisan::call('backup:run');
         $errors = $request->import(Import::find($import_id));
         $redirectTo = "hardware.index";
         switch ($request->get('import-type')) {

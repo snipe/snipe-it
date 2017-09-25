@@ -995,6 +995,8 @@ class SettingsController extends Controller
     {
         if (!config('app.lock_passwords')) {
             if (Input::get('confirm_purge')=='DELETE') {
+                // Run a backup immediately before processing
+                Artisan::call('backup:run');
                 Artisan::call('snipeit:purge', ['--force'=>'true','--no-interaction'=>true]);
                 $output = Artisan::output();
                 return view('settings/purge')
