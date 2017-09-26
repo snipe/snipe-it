@@ -152,7 +152,7 @@
                     } else {
                         handleAuditFail(data);
                     }
-
+                    $('input#asset_tag').val('');
                 },
                 error: function (data) {
                     handleAuditFail(data);
