@@ -200,6 +200,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['auth', 'authorize:superuser
 
 });
 
+Auth::routes();
 
 
 
