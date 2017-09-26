@@ -53,7 +53,8 @@ echo '- '.$cache_clear;
 echo "\n";
 
 echo "--------------------------------------------------------\n";
-echo "Step 4: Updating composer dependencies :\n";
+echo "Step 4: Updating composer dependencies:\n";
+echo "(This may take an moment.)\n";
 echo "--------------------------------------------------------\n\n";
 
 
@@ -98,7 +99,10 @@ echo "--------------------------------------------------------\n\n";
 $up = shell_exec('php artisan up');
 echo '- '.$up."\n\n";
 
-
+echo "--------------------------------------------------------\n";
+echo "FINISHED! Clear your browser cookies and re-login to use :\n";
+echo "your upgraded Snipe-IT.\n";
+echo "--------------------------------------------------------\n\n";
 
 
 
