@@ -94,7 +94,7 @@ class CheckoutNotification extends Notification
             'item_tag' => $item->asset_tag,
             'note' => $this->params['note'],
             'item_serial' => $item->serial,
-            'require_acceptance' => $item->requireAcceptance(),
+            'require_acceptance' => method_exists($item, 'requireAcceptance') ? $item->requireAcceptance() : '',
             'log_id' => $this->params['log_id'],
         ];
         return (new MailMessage)
