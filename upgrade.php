@@ -1,23 +1,36 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
+$pwu_data = posix_getpwuid(posix_geteuid());
+$username = $pwu_data['name'];
+
+if (($username=='root') || ($username=='admin')) {
+    die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
+}
 
 echo "Welcome to the Snipe-IT upgrader.\n\n";
+echo "Please note that this script will not download the latest Snipe-IT \n";
+echo "files for you, it simply runs the standard composer and artisan \n";
+echo "commands needed to finalize the upgrade after \n\n";
 
-echo "If you have any encrypted custom fields, BE SURE TO run the recrypter. See the Snipe-IT documentation for help.\n\n";
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+echo "!! If you have any encrypted custom fields, BE SURE TO run the recrypter. \n";
+echo "!! See the Snipe-IT documentation for help: \n";
+echo "!! https://snipe-it.readme.io/docs/upgrading-to-v4\n";
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
 
 echo "--------------------------------------------------------\n";
 echo "STEP 1: Backing up database: \n";
 echo "--------------------------------------------------------\n\n";
 $backup = shell_exec('php artisan snipeit:backup');
-echo '- '.$backup."\n\n";
+echo '-- '.$backup."\n\n";
 
 
 echo "--------------------------------------------------------\n";
 echo "STEP 2: Putting application into maintenance mode: \n";
 echo "--------------------------------------------------------\n\n";
 $down = shell_exec('php artisan down');
-echo '- '.$down."\n\n";
+echo '-- '.$down."\n\n";
 
 echo "--------------------------------------------------------\n";
 echo "Step 3: Cleaning up old cached files:\n";
@@ -47,9 +60,12 @@ if (file_exists('bootstrap/cache/config.php')) {
 
 $config_clear = shell_exec('php artisan config:clear');
 $cache_clear = shell_exec('php artisan cache:clear');
-echo '- '.$config_clear;
-echo '- '.$cache_clear;
-
+$route_clear = shell_exec('php artisan route:clear');
+$view_clear = shell_exec('php artisan view:clear');
+echo '-- '.$config_clear;
+echo '-- '.$cache_clear;
+echo '-- '.$route_clear;
+echo '-- '.$view_clear;
 echo "\n";
 
 echo "--------------------------------------------------------\n";
@@ -60,13 +76,17 @@ echo "--------------------------------------------------------\n\n";
 
 // Composer install
 if (file_exists('composer.phar')) {
-    echo "- Local composer.phar detected, so we'll use that.\n\n";
+    echo "-- Local composer.phar detected, so we'll use that.\n\n";
+    $composer_dump = shell_exec('php composer.phar dump');
     $composer = shell_exec('php composer.phar install --prefer-source');
+
 } else {
-    echo "- We couldn't find a local composer.phar - trying globally.\n\n";
+    echo "-- We couldn't find a local composer.phar - trying globally.\n\n";
+    $composer_dump = shell_exec('composer dump');
     $composer = shell_exec('composer install --prefer-source');
 }
 
+echo $composer_dump."\n\n";
 echo $composer."\n\n";
 
 
@@ -75,7 +95,7 @@ echo "Step 5: Migrating database:\n";
 echo "--------------------------------------------------------\n\n";
 
 $migrations = shell_exec('php artisan migrate --force');
-echo '- '.$migrations."\n\n";
+echo '-- '.$migrations."\n\n";
 
 
 echo "--------------------------------------------------------\n";
@@ -93,11 +113,22 @@ if ((!file_exists('storage/oauth-public.key')) || (!file_exists('storage/oauth-p
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 7: Taking application out of maintenance mode:\n";
+echo "Step 7: Caching routes and config:\n";
+echo "--------------------------------------------------------\n\n";
+$config_cache = shell_exec('php artisan config:cache');
+$route_cache = shell_exec('php artisan route:cache');
+echo '-- '.$config_cache;
+echo '-- '.$route_cache;
+echo "\n";
+
+
+
+echo "--------------------------------------------------------\n";
+echo "Step 8: Taking application out of maintenance mode:\n";
 echo "--------------------------------------------------------\n\n";
 
 $up = shell_exec('php artisan up');
-echo '- '.$up."\n\n";
+echo '-- '.$up."\n\n";
 
 echo "--------------------------------------------------------\n";
 echo "FINISHED! Clear your browser cookies and re-login to use :\n";
