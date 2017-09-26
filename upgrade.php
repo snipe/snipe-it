@@ -1,6 +1,13 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
+$pwu_data = posix_getpwuid(posix_geteuid());
+$username = $pwu_data['name'];
+
+if (($username=='root') || ($username=='admin')) {
+    die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
+}
+
 echo "Welcome to the Snipe-IT upgrader.\n\n";
 echo "Please note that this script will not download the latest Snipe-IT \n";
 echo "files for you, it simply runs the standard composer and artisan \n";
