@@ -43,20 +43,23 @@ trait Loggable
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
 
-        $class = get_class($target);
-        if ($class == Location::class) {
+        $target_class = get_class($target);
+
+        // Figure out what the target is
+        if ($target_class == Location::class) {
             // We can checkout to a location
             $log->location_id = $target->id;
-        } else if ($class== Asset::class) {
+        } elseif ($target_class== Asset::class) {
             $log->location_id = $target->rtd_location_id;
         } else {
             $log->location_id = $target->location_id;
         }
+
         $log->note = $note;
         $log->logaction('checkout');
 
         $params = [
-            'item' => $this,
+            'item' => $log->item,
             'target' => $target,
             'admin' => $log->user,
             'note' => $note,

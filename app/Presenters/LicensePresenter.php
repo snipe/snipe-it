@@ -147,6 +147,16 @@ class LicensePresenter extends Presenter
     }
 
     /**
+     * Link to this licenses Name
+     * @return string
+     */
+    public function fullName()
+    {
+        return 'poop';
+    }
+
+
+    /**
      * Link to this licenses serial
      * @return string
      */

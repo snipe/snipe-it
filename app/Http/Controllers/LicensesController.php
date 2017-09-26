@@ -306,8 +306,8 @@ class LicensesController extends Controller
                 return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
             }
 
-            if (($target->assigned_to!='') && (($target->assigned_to!=$assigned_to)) && ($target!='')) {
-                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.owner_doesnt_match_asset'));
+            if (($request->has('assigned_to')) && ($request->has('asset_id'))) {
+                return redirect()->back()->withInput()->with('error', trans('admin/licenses/message.select_asset_or_person'));
             }
         }
 
