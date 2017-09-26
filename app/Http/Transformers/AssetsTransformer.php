@@ -75,8 +75,9 @@ class AssetsTransformer
         ];
 
 
-        if ($asset->model->fieldset) {
+        if (($asset->model->fieldset) && (count($asset->model->fieldset->fields)> 0)) {
             $fields_array = array();
+
             foreach ($asset->model->fieldset->fields as $field) {
 
                 if ($field->isFieldDecryptable($asset->{$field->convertUnicodeDbSlug()})) {
