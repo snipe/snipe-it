@@ -73,7 +73,7 @@ class GroupsController extends Controller
     {
         $this->authorize('view', Group::class);
         $group = Group::findOrFail($id);
-        return $group;
+        return (new GroupsTransformer)->transformGroup($group);
     }
 
 
