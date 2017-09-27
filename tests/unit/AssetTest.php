@@ -210,7 +210,7 @@ class AssetTest extends BaseTest
 
         $target = factory(App\Models\User::class)->create();
         // An Asset Can be checked out to a user, and this should be logged.
-        $asset->checkOut($target, $adminUser);
+        $asset->checkOut($target);
         $asset->save();
 
         $this->assertInstanceOf(App\Models\User::class, $asset->assignedTo);
@@ -246,7 +246,7 @@ class AssetTest extends BaseTest
 
         // An Asset Can be checked out to a asset, and this should be logged.
         $target = factory(App\Models\Asset::class)->create();
-        $asset->checkOut($target, $adminUser);
+        $asset->checkOut($target);
         $asset->save();
         $this->assertInstanceOf(App\Models\Asset::class, $asset->fresh()->assignedTo);
         $this->assertEquals($asset->fresh()->assetLoc->id, $target->fresh()->assetLoc->id);
@@ -270,7 +270,7 @@ class AssetTest extends BaseTest
 
         // An Asset Can be checked out to a location, and this should be logged.
         $target = factory(App\Models\Location::class)->create();
-        $asset->checkOut($target, $adminUser);
+        $asset->checkOut($target);
         $asset->save();
         $this->assertInstanceOf(App\Models\Location::class, $asset->fresh()->assignedTo);
         $this->assertEquals($asset->fresh()->assetLoc->id, $target->fresh()->id);

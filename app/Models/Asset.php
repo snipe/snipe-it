@@ -136,15 +136,13 @@ class Asset extends Depreciable
     /**
      * Checkout asset
      * @param User $user
-     * @param User $admin
      * @param Carbon $checkout_at
      * @param null $expected_checkin
      * @param string $note
      * @param null $name
      * @return bool
      */
-    //FIXME: The admin parameter is never used. Can probably be removed.
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
+    public function checkOut($target, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
         if (!$target) {
             return false;

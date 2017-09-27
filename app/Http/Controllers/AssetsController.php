@@ -225,7 +225,7 @@ class AssetsController extends Controller
                 $target = Location::find(request('assigned_location'));
             }
             if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
+                $asset->checkOut($target, date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
@@ -449,7 +449,6 @@ class AssetsController extends Controller
             $target = Location::find(request('assigned_location'));
         }
         // $user = User::find(Input::get('assigned_to'));
-        $admin = Auth::user();
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
             $checkout_at = Input::get('checkout_at');
@@ -473,7 +472,7 @@ class AssetsController extends Controller
             $asset->location_id = $target->location_id;
         }
 
-        if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
+        if ($asset->checkOut($target, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
 //           Redirect to the new asset page
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
         }
