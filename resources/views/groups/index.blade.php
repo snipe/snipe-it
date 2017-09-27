@@ -32,7 +32,7 @@
                <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="name" data-visible="true">{{ trans('admin/groups/table.name') }}</th>
                <th data-switchable="true" data-sortable="false" data-field="users_count" data-visible="true">{{ trans('admin/groups/table.users') }}</th>
-               <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true" data-formatter="createdAtFormatter">{{ trans('general.created_at') }}</th>
+               <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true" data-formatter="dateDisplayFormatter">{{ trans('general.created_at') }}</th>
                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"   data-formatter="groupsActionsFormatter">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
