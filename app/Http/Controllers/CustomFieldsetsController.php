@@ -37,19 +37,25 @@ class CustomFieldsetsController extends Controller
     public function show($id)
     {
         $cfset = CustomFieldset::with('fields')->where('id', '=', $id)->orderBy('id', 'ASC')->first();
-        $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
 
-        $maxid = 0;
-        foreach ($cfset->fields() as $field) {
-            if ($field->pivot->order > $maxid) {
-                $maxid=$field->pivot->order;
+        if ($cfset) {
+            $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
+
+            $maxid = 0;
+            foreach ($cfset->fields() as $field) {
+                if ($field->pivot->order > $maxid) {
+                    $maxid=$field->pivot->order;
+                }
+                if (isset($custom_fields_list[$field->id])) {
+                    unset($custom_fields_list[$field->id]);
+                }
             }
-            if (isset($custom_fields_list[$field->id])) {
-                unset($custom_fields_list[$field->id]);
-            }
+
+            return view("custom_fields.fieldsets.view")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
         }
 
-        return view("custom_fields.fieldsets.view")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
+        return redirect()->route("fields.index")->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
+
     }
 
 
@@ -133,16 +139,21 @@ class CustomFieldsetsController extends Controller
     */
     public function destroy($id)
     {
-        //
         $fieldset = CustomFieldset::find($id);
 
-        $models = AssetModel::where("fieldset_id", "=", $id);
-        if ($models->count() == 0) {
-            $fieldset->delete();
-            return redirect()->route("fields.show")->with("success", trans('admin/custom_fields/message.fieldset.delete.success'));
-        } else {
-            return redirect()->route("fields.show")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use'));
+        if ($fieldset) {
+            $models = AssetModel::where("fieldset_id", "=", $id);
+            if ($models->count() == 0) {
+                $fieldset->delete();
+                return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.fieldset.delete.success'));
+            } else {
+                return redirect()->route("fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use'));
+            }
         }
+
+        return redirect()->route("fields.index")->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
+
+
     }
 
 
