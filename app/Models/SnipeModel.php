@@ -77,6 +77,24 @@ class SnipeModel extends Model
         return;
     }
 
+    public function setMinAmtAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['min_amt'] = $value;
+        return;
+    }
+
+    public function setParentIdAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['parent_id'] = $value;
+        return;
+    }
+
     //
     public function getDisplayNameAttribute()
     {
