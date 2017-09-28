@@ -42,7 +42,7 @@ $factory->state(Asset::class, 'laptop-mbp', function ($faker) {
 $factory->state(Asset::class, 'laptop-mbp-pending', function ($faker) {
     return [
         'model_id' => 1,
-         'status_id' => 2,
+        'status_id' => 2,
     ];
 });
 

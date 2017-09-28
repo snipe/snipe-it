@@ -558,9 +558,8 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function checkin($asset_id)
+    public function checkin($asset_id, Request $request)
     {
-        $this->authorize('checkin', Asset::class);
         $asset = Asset::findOrFail($asset_id);
         $this->authorize('checkin', $asset);
 
@@ -570,40 +569,10 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.already_checked_in')));
         }
 
-        $asset->expected_checkin = null;
-        $asset->last_checkout = null;
-        $asset->assigned_to = null;
-        $asset->assignedTo()->disassociate($asset);
-        $asset->accepted = null;
-        $asset->name = e(Input::get('name'));
+        $item_name = e(request('name', null));
+        $status_id = e(request('status_id', null));
 
-        if (Input::has('status_id')) {
-            $asset->status_id =  e(Input::get('status_id'));
-        }
-
-        // Was the asset updated?
-        if ($asset->save()) {
-            $logaction = $asset->logCheckin($target, e(request('note')));
-
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
-            $data['item_name'] = $asset->present()->name();
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = $asset->asset_tag;
-            $data['item_serial'] = $asset->serial;
-            $data['note'] = $logaction->note;
-            $data['manufacturer_name'] = $asset->model->manufacturer->name;
-            $data['model_name'] = $asset->model->name;
-            $data['model_number'] = $asset->model->model_number;
-
-            if ((($asset->checkin_email()=='1')) && (isset($user)) && (!config('app.lock_passwords'))) {
-                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
-                });
-            }
-
+        if($asset->checkIn($target, $item_name, $status_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 
