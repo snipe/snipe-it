@@ -14,8 +14,9 @@ class XssProtectHeader
      */
     public function handle($request, Closure $next)
     {
+        $mode = '1; mode=block';
         $response = $next($request);
-        $response->headers->set('X-XSS-Protection', '1');
+        $response->headers->set('X-XSS-Protection', $mode);
         return $response;
     }
 }
