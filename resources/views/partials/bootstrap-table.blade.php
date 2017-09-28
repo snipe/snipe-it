@@ -358,7 +358,7 @@ $('.snipe-table').bootstrapTable({
 
    function imageFormatter(value, row) {
         if (value) {
-            return '<img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" data-toggle="lightbox" data-type="image">';
+            return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
         }
     }
 

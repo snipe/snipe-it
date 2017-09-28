@@ -52,8 +52,8 @@ class ActionlogsTransformer
                 'type' => e($actionlog->targetType()),
             ] : null,
 
-            'note'          => e($actionlog->note),
-            'signature_file'   => ($actionlog->accept_signature) ? $actionlog->accept_signature : null,
+            'note'          => ($actionlog->note) ? e($actionlog->note): null,
+            'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
 
 
         ];
