@@ -53,6 +53,7 @@ class Component extends SnipeModel
         'name',
         'purchase_cost',
         'purchase_date',
+        'min_amt',
         'qty',
     ];
 

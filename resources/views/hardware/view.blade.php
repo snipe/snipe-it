@@ -603,6 +603,9 @@
                   <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
+                  @if  ($snipeSettings->require_accept_signature=='1')
+                    <th class="col-md-3" data-field="signature_file" data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                  @endif
                 </tr>
                 </thead>
               </table>

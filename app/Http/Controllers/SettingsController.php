@@ -338,7 +338,7 @@ class SettingsController extends Controller
         $setting->email_format = $request->input('email_format');
         $setting->username_format = $request->input('username_format');
         $setting->require_accept_signature = $request->input('require_accept_signature');
-        if (config('app.lock_passwords')) {
+        if (!config('app.lock_passwords')) {
             $setting->login_note = $request->input('login_note');
         }
 

@@ -23,7 +23,7 @@ class GroupsTransformer
         $array = [
             'id' => (int) $group->id,
             'name' => e($group->name),
-            'permissions' => $group->permissions,
+            'permissions' => json_decode($group->permissions),
             'users_count' => (int) $group->users_count,
             'created_at' => Helper::getFormattedDateObject($group->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($group->updated_at, 'datetime'),

@@ -6,6 +6,10 @@
     @parent
 @stop
 
+@section('header_right')
+    <a href="{{ route('settings.index') }}" class="btn btn-default pull-right">{{ trans('general.back') }}</a>
+@stop
+
 {{-- Page content --}}
 @section('content')
     @if (!config('app.lock_passwords'))
