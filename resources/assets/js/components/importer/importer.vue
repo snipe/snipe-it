@@ -11,6 +11,8 @@ th {
 <script>
     require('blueimp-file-upload');
     export default {
+
+        props: ['importUrl'],
         /*
          * The component's data.
          */
@@ -72,7 +74,7 @@ th {
 
         methods: {
             fetchFiles() {
-                this.$http.get('/api/v1/imports')
+                this.$http.get(this.importUrl)
                 .then( ({data}) => this.files = data, // Success
                     //Fail
                 (response) => {
@@ -82,7 +84,7 @@ th {
                 });
             },
             deleteFile(file, key) {
-                this.$http.delete("/api/v1/imports/"+file.id)
+                this.$http.delete(this.importUrl+"/"+file.id)
                 .then((response) => this.files.splice(key, 1), // Success, remove file from array.
                     (response) => {// Fail
                         this.alert.type="danger";

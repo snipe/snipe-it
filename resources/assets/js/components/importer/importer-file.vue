@@ -67,7 +67,7 @@ tr {
 
 <script>
     export default {
-        props: ['file'],
+        props: ['file', 'customFieldUrl', 'importProcessUrl'],
         data() {
             return {
                 activeFile: this.file,
@@ -142,6 +142,12 @@ tr {
             this.populateSelect2ActiveItems();
         },
         computed: {
+            processUrl() {
+                // Because we need to pass a parameter to the laravel route function
+                // We get a url 'http://localhost/api/v1/imports/process/DUMMYTEXT'
+                // But we want to customize that to /api/v1/imports/process/this_file
+                return this.importProcessUrl.replace('DUMMYTEXT', this.file.id)
+            },
             columns() {
                 switch(this.options.importType) {
                     case 'asset':
@@ -156,7 +162,7 @@ tr {
         },
         methods: {
             fetchCustomFields() {
-                this.$http.get('/api/v1/fields')
+                this.$http.get(this.customFieldUrl)
                 .then( ({data}) => {
                     data = data.rows;
                     data.forEach((item) => {
@@ -169,22 +175,22 @@ tr {
             },
             postSave() {
                 this.statusText = "Processing...";
-                this.$http.post('/api/v1/imports/process/'+this.file.id, {
+                this.$http.post(this.processUrl, {
                     'import-update': this.options.update,
                     'import-type': this.options.importType,
                     'column-mappings': this.columnMappings
-                }).then( (response) => {
+                }).then( ({body}) => {
                     // Success
                     this.statusText = "Success... Redirecting.";
-                    window.location.href = response.body.messages.redirect_url;
-                }, (response) => {
+                    window.location.href = body.messages.redirect_url;
+                }, ({body}) => {
                     // Failure
-                    if(response.body.status == 'import-errors') {
-                        window.eventHub.$emit('importErrors', response.body.messages);
+                    if(body.status == 'import-errors') {
+                        window.eventHub.$emit('importErrors', body.messages);
                         this.statusText = "Error";
                     } else {
                         this.$emit('alert', {
-                            message: response.body.messages,
+                            message: body.messages,
                             type: "danger",
                             visible: true,
                         })
