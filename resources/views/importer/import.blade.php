@@ -16,7 +16,7 @@
 {{-- Page content --}}
 @section('content')
 <div id="app">
-    <importer inline-template v-cloak>
+    <importer inline-template import-url="{{route('api.imports.index')}}" v-cloak>
         <div class="row">
         <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
@@ -62,7 +62,12 @@
                                     				<button class="btn btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
                                     			</td>
                                     		</tr>
-                                    			<import-file :key="currentFile.id" :file="currentFile" @alert="updateAlert(alert)">
+                                    			<import-file
+                                                    :key="currentFile.id"
+                                                    :file="currentFile"
+                                                    customFieldUrl="{{route('api.customfields.index')}}"
+                                                    importProcessUrl="{{route('api.imports.importFile','DUMMYTEXT')}}"
+                                                    @alert="updateAlert(alert)">
                                     			</import-file>
                                     	</template>
                                     </tbody>

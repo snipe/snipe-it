@@ -380,7 +380,7 @@ class AssetsController extends Controller
         if ($asset->save()) {
             // Redirect to the new asset page
             \Session::flash('success', trans('admin/hardware/message.update.success'));
-            return response()->json(['redirect_url' => route("view/hardware", $assetId)]);
+            return response()->json(['redirect_url' => route("hardware.show", $assetId)]);
         }
         \Input::flash();
         \Session::flash('errors', $asset->getErrors());
