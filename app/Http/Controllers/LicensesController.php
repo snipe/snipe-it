@@ -334,15 +334,14 @@ class LicensesController extends Controller
         if ($licenseSeat->save()) {
             $licenseSeat->logCheckout($request->input('note'), $target);
 
-            $data['license_id'] =$licenseSeat->license_id;
+            $data['license_id'] = $licenseSeat->license_id;
             $data['note'] = $request->input('note');
 
             // Redirect to the new asset page
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
         }
-
-        // Redirect to the asset management page with error
-        return redirect()->to("admin/licenses/{$asset_id}/checkout")->with('error', trans('admin/licenses/message.create.error'))->with('license', new License);
+        
+        return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkout.error'));
     }
 
 
