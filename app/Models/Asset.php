@@ -725,7 +725,8 @@ class Asset extends Depreciable
 
 
     /**
-    * Query builder scope to search on text for complex Bootstrap Tables API
+    * Query builder scope to search on text for complex Bootstrap Tables API.
+    * This is really horrible, but I can't think of a less-awful way to do it.
     *
     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $search      Search term
@@ -736,7 +737,16 @@ class Asset extends Depreciable
     {
         $search = explode(' OR ', $search);
 
-        return $query->where(function ($query) use ($search) {
+        return $query->leftJoin('users',function ($leftJoin) {
+            $leftJoin->on("users.id", "=", "assets.assigned_to")
+                ->where("assets.assigned_type", "=", User::class);
+        })->leftJoin('locations',function ($leftJoin) {
+            $leftJoin->on("locations.id","=","assets.assigned_to")
+                ->where("assets.assigned_type","=",Location::class);
+        })->leftJoin('assets as assigned_assets',function ($leftJoin) {
+            $leftJoin->on('assigned_assets.id', '=', 'assets.assigned_to')
+                ->where('assets.assigned_type', '=', Asset::class);
+        })->where(function ($query) use ($search) {
             foreach ($search as $search) {
                 $query->whereHas('model', function ($query) use ($search) {
                     $query->whereHas('category', function ($query) use ($search) {
@@ -769,26 +779,15 @@ class Asset extends Depreciable
                     $query->whereHas('defaultLoc', function ($query) use ($search) {
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
                     });
-                    //FIXME: This needs attention to work with checkout to not-users.
-                // })->orWhere(function ($query) use ($search) {
-                    // $query->whereHas('assignedTo', function ($query) use ($search) {
-                    //     $query->where(function ($query) use ($search) {
-                    //         $query->where('assets.assigned_type', '=', User::class)
-                    //         ->join('users', 'users.id', '=', 'assets.assigned_to')
-                    //         ->where(function($query) use ($search) {
-                    //             $query->where('users.first_name', 'LIKE', '%'.$search.'%')
-                    //             ->orWhere('users.last_name', 'LIKE', '%'.$search.'%');
-                    //         });
-                    //     })->orWhere(function ($query) use ($search) {
-                    //         $query->where('assets.assigned_type', '=', Location::class)
-                    //         ->join('locations', 'locations.id', '=', 'assets.assigned_to')
-                    //         ->where('locations.name', 'LIKE', '%'.$search.'%');
-                    //     })->orWhere(function ($query) use ($search) {
-                    //         $query->where('assets.assigned_type', '=', Asset::class)
-                    //         ->join('assets as assigned_asset', 'assigned_assets.id', '=', 'assets.assigned_to')
-                    //         ->where('assigned_assets.name', 'LIKE', '%'.$search.'%');
-                    //     });
-                    // });
+                 })->orWhere(function ($query) use ($search) {
+
+                     $query->whereHas('assignedTo', function ($query) use ($search) {
+                         $query->where('users.first_name', 'LIKE', '%'.$search.'%')
+                         ->orWhere('users.last_name', 'LIKE', '%'.$search.'%')
+                         ->orWhere('users.username', 'LIKE', '%'.$search.'%')
+                         ->orWhere('locations.name', 'LIKE', '%'.$search.'%')
+                         ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
+                     });
                 })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
@@ -796,9 +795,9 @@ class Asset extends Depreciable
                     ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
             }
             foreach (CustomField::all() as $field) {
-                $query->orWhere($field->db_column_name(), 'LIKE', "%$search%");
+                $query->orWhere('assets.'.$field->db_column_name(), 'LIKE', "%$search%");
             }
-        });
+        })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
     }
 
 
