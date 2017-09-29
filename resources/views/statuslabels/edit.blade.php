@@ -13,8 +13,6 @@
         width: 30px;
     }
 </style>
-<!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="{{ asset('js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
 @parent
 @stop
 

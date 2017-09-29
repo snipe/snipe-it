@@ -11,10 +11,8 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
-
     <!-- iCheck for checkboxes and radio inputs -->
+    <!-- We need to keep this because of the images it loads, which webpack handles poorly -->
     <link rel="stylesheet" href="{{ url(asset('js/plugins/iCheck/all.css')) }}">
 
     <!-- bootstrap tables CSS -->

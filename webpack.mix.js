@@ -18,8 +18,10 @@ mix
     './resources/assets/css/app.css',
     'public/css/AdminLTE.css',
     'resources/assets/css/font-awesome/font-awesome.min.css',
-    './bower_components/iCheck/skins/minimal/minimal.css',
+    './node_modules/icheck/skins/minimal/minimal.css',
     './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css',
+    './node_modules/select2/dist/css/select2.css',
+    './node_modules/blueimp-file-upload/css/jquery.fileupload.css',
     'public/css/bootstrap-tables-sticky-header.css',
     'public/css/overrides.css'
 ],
@@ -29,7 +31,6 @@ mix
 // This compiles the vue.js file in the build directory
 // for later concatenation in the scripts() section below.
 .js(
-
     'resources/assets/js/vue.js', // Snipe-IT's initializer for Vue.js
     './public/js/build'
 ).sourceMaps()
@@ -37,14 +38,16 @@ mix
     './node_modules/jquery-ui/jquery-ui.js',
     './public/build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
     './node_modules/tether/dist/js/tether.min.js',
+    './node_modules/chart.js/dist/Chart.js',
     './node_modules/jquery-slimscroll/jquery.slimscroll.js',
     './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',
     './node_modules/blueimp-file-upload/js/jquery.fileupload.js',
     './node_modules/fastclick/lib/fastclick.js',
     './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
     './node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-    './bower_components/iCheck/icheck.js',
+    './node_modules/icheck/icheck.js',
     './node_modules/ekko-lightbox/dist/ekko-lightbox.js',
+    './node_modules/select2/dist/js/select2.js',
     './resources/assets/js/app.js', //this is part of AdminLTE
     './resources/assets/js/snipeit.js', //this is the actual Snipe-IT JS
     './resources/assets/js/snipeit_modals.js'
