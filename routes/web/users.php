@@ -13,9 +13,9 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['auth']], function () {
     Route::get('{userId}/restore', [ 'as' => 'restore/user', 'uses' => 'UsersController@getRestore' ]);
     Route::get('{userId}/unsuspend', [ 'as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend' ]);
     Route::post('{userId}/upload', [ 'as' => 'upload/user', 'uses' => 'UsersController@postUpload' ]);
-    Route::get(
+    Route::delete(
         '{userId}/deletefile/{fileId}',
-        [ 'as' => 'delete/userfile', 'uses' => 'UsersController@getDeleteFile' ]
+        [ 'as' => 'userfile.destroy', 'uses' => 'UsersController@getDeleteFile' ]
     );
     Route::get(
         '{userId}/showfile/{fileId}',
