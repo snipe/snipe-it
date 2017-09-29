@@ -274,7 +274,7 @@ class AccessoriesController extends Controller
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $accessory->requireAcceptance();
         // TODO: Port this to new mail notifications
-        if (($accessory->requireAcceptance()=='1')  || ($accessory->getEula())) {
+        if ((($accessory->requireAcceptance()=='1')  || ($accessory->getEula())) && ($user->email!='')) {
 
             Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
@@ -351,7 +351,7 @@ class AccessoriesController extends Controller
             $data['item_tag'] = '';
             $data['note'] = e($logaction->note);
 
-            if (($accessory->checkin_email()=='1')) {
+            if ((($accessory->checkin_email()=='1')) && ($user->email!='')) {
 
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
