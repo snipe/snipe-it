@@ -279,7 +279,7 @@ class LicensesController extends Controller
 
         // Declare the rules for the form validation
         $rules = [
-            'note'   => 'string',
+            'note'   => 'string|nullable',
             'asset_id'  => 'required_without:assigned_to',
         ];
 

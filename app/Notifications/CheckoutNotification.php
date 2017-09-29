@@ -44,7 +44,9 @@ class CheckoutNotification extends Notification
         }
         $item = $this->params['item'];
 
-        $notifyBy[]='mail';
+        if (class_basename(get_class($this->params['item']))!='License') {
+            $notifyBy[] = 'mail';
+        }
         // if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance()=='1'))
         //     || (method_exists($item, 'getEula') && ($item->getEula()))
         // ) {
@@ -81,30 +83,31 @@ class CheckoutNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        //TODO: Expand for non assets.
-        $item = $this->params['item'];
-        $admin_user = $this->params['admin'];
-        $target = $this->params['target'];
-        $data = [
-            'eula' => method_exists($item, 'getEula') ? $item->getEula() : '',
-            'first_name' => $target->present()->fullName(),
-            'item_name' => $item->present()->name(),
-            'checkout_date' => $item->last_checkout,
-            'expected_checkin' => $item->expected_checkin,
-            'item_tag' => $item->asset_tag,
-            'note' => $this->params['note'],
-            'item_serial' => $item->serial,
-            'require_acceptance' => method_exists($item, 'requireAcceptance') ? $item->requireAcceptance() : '',
-            'log_id' => $this->params['log_id'],
-        ];
-        return (new MailMessage)
-                    ->view('emails.accept-asset', $data)
-                    ->subject(trans('mail.Confirm_asset_delivery'));
-            // \Mail::send('emails.accept-asset', $data, function ($m) use ($target) {
-            //     $m->to($target->email, $target->first_name . ' ' . $target->last_name);
-            //     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-            //     $m->subject(trans('mail.Confirm_asset_delivery'));
-            // });
+
+            //TODO: Expand for non assets.
+            $item = $this->params['item'];
+            $admin_user = $this->params['admin'];
+            $target = $this->params['target'];
+            $data = [
+                'eula' => method_exists($item, 'getEula') ? $item->getEula() : '',
+                'first_name' => $target->present()->fullName(),
+                'item_name' => $item->present()->name(),
+                'checkout_date' => $item->last_checkout,
+                'expected_checkin' => $item->expected_checkin,
+                'item_tag' => $item->asset_tag,
+                'note' => $this->params['note'],
+                'item_serial' => $item->serial,
+                'require_acceptance' => method_exists($item, 'requireAcceptance') ? $item->requireAcceptance() : '',
+                'log_id' => $this->params['log_id'],
+            ];
+
+            return (new MailMessage)
+                ->view('emails.accept-asset', $data)
+                ->subject(trans('mail.Confirm_asset_delivery'));
+
+
+
+
     }
 
     /**
