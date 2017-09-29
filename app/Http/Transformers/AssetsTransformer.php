@@ -33,7 +33,7 @@ class AssetsTransformer
             'model_number' => ($asset->model) ? e($asset->model->model_number) : null,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
-                'name'=> e($asset->assetstatus->name),
+                'name'=> e($asset->present()->statusText),
                 'status_meta' =>  e($asset->present()->statusMeta),
             ] : null,
             'category' => ($asset->model->category) ? [

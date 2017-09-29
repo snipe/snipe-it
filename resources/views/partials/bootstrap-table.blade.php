@@ -140,7 +140,29 @@ $('.snipe-table').bootstrapTable({
     function genericColumnObjLinkFormatter(destination) {
         return function (value,row) {
             if ((value) && (value.status_meta)) {
-                return '<label class="label label-default">'+ value.status_meta + '</label> <a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a> ';
+
+                var text_color;
+                var icon_style;
+
+                switch (value.status_meta) {
+                    case 'deployed':
+                        text_color = 'blue';
+                        icon_style = 'fa-circle';
+                    break;
+                    case 'deployable':
+                        text_color = 'green';
+                        icon_style = 'fa-circle';
+                    break;
+                    case 'pending':
+                        text_color = 'orange';
+                        icon_style = 'fa-circle';
+                        break;
+                    default:
+                        text_color = 'red';
+                        icon_style = 'fa-times';
+                }
+
+                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ value.status_meta + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + '</a> ';
             } else if ((value) && (value.name)) {
                 return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';
             }

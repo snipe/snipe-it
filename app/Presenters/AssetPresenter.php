@@ -346,7 +346,7 @@ class AssetPresenter extends Presenter
     public function statusText()
     {
         if ($this->model->assignedTo) {
-            return strtolower(trans('general.deployed'));
+            return trans('general.deployed');
         }
         return $this->model->assetstatus->name;
     }
