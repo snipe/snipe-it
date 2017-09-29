@@ -139,7 +139,7 @@ $('.snipe-table').bootstrapTable({
     // Use this when we're introspecting into a column object and need to link
     function genericColumnObjLinkFormatter(destination) {
         return function (value,row) {
-            if (value.status_type) {
+            if ((value) && (value.status_type)) {
                 return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a> ' + '<label class="label label-default">'+ value.status_type + '</label>';
             } else if ((value) && (value.name)) {
                 return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';

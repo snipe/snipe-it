@@ -1230,7 +1230,7 @@ class AssetsController extends Controller
             foreach ($asset_ids as $asset_id) {
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);
-                $error = $asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+                $error = $asset->checkOut($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
 
                 if ($error) {
                     array_merge_recursive($errors, $asset->getErrors()->toArray());
