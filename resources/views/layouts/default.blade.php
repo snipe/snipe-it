@@ -661,7 +661,7 @@
 
 
 
-    <script src="{{ url(mix('js/dist/all.js')) }}"></script>
+    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
     <script nonce="{{ csrf_token() }}">
         $(function () {
             var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
