@@ -25,9 +25,9 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Security Headers
-    Header set Strict-Transport-Security "max-age=2592000" env=HTTPS
-    Header set X-XSS-Protection "1; mode=block"
-    Header set X-Content-Type-Options nosniff
-    Header set X-Permitted-Cross-Domain-Policies "master-only"
+    # Header set Strict-Transport-Security "max-age=2592000" env=HTTPS
+    # Header set X-XSS-Protection "1; mode=block"
+    # Header set X-Content-Type-Options nosniff
+    # Header set X-Permitted-Cross-Domain-Policies "master-only"
 
 </IfModule>
