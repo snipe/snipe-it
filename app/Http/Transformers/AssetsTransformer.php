@@ -31,11 +31,7 @@ class AssetsTransformer
                 'name'=> e($asset->model->name)
             ] : null,
             'model_number' => ($asset->model) ? e($asset->model->model_number) : null,
-            'status_label' => ($asset->assetstatus) ? [
-                'id' => (int) $asset->assetstatus->id,
-                'name'=> e($asset->assetstatus->name),
-                'status_type' =>  e($asset->assetstatus->getStatuslabelType()),
-            ] : null,
+            'status_label' => $this->transformStatus($asset),
             'category' => ($asset->model->category) ? [
                 'id' => (int) $asset->model->category->id,
                 'name'=> e($asset->model->category->name)
@@ -85,9 +81,6 @@ class AssetsTransformer
                     $decrypted = \App\Helpers\Helper::gracefulDecrypt($field,$asset->{$field->convertUnicodeDbSlug()});
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
- //                   $fields_array = [$field->convertUnicodeDbSlug() => $value];
-
-
                     $fields_array[$field->name] = [
                             'field' => $field->convertUnicodeDbSlug(),
                             'value' => $value
@@ -98,9 +91,6 @@ class AssetsTransformer
                         'field' => $field->convertUnicodeDbSlug(),
                         'value' => $asset->{$field->convertUnicodeDbSlug()}
                     ];
-                    //$fields_array = [$field->convertUnicodeDbSlug() => $asset->{$field->convertUnicodeDbSlug()}];
-
-
                 }
                 //array += $fields_array;
                 $array['custom_fields'] = $fields_array;
@@ -124,6 +114,20 @@ class AssetsTransformer
     public function transformAssetsDatatable($assets)
     {
         return (new DatatablesTransformer)->transformDatatables($assets);
+    }
+
+    public function transformStatus($asset) {
+        if ($assset->assignedTo) {
+            return 'Deployed';
+        }
+        if ($asset->assetstatus) {
+            return [
+                'id' => (int) $asset->assetstatus->id,
+                'name'=> e($asset->assetstatus->name),
+                'status_type' =>  e($asset->assetstatus->getStatuslabelType()),
+            ];
+        }
+        return null;
     }
 
     public function transformAssignedTo($asset)
