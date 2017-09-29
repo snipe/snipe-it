@@ -325,13 +325,32 @@ class AssetPresenter extends Presenter
         return $interval;
     }
 
+    /**
+     * @return string
+     * This handles the status label "meta" status of "deployed" if
+     * it's assigned. Should maybe deprecate.
+     */
+    public function statusMeta()
+    {
+        if ($this->model->assignedTo) {
+            return strtolower(trans('general.deployed'));
+        }
+        return $this->model->assetstatus->getStatuslabelType();
+    }
+
+    /**
+     * @return string
+     * This handles the status label "meta" status of "deployed" if
+     * it's assigned. Should maybe deprecate.
+     */
     public function statusText()
     {
         if ($this->model->assignedTo) {
-            return trans('general.deployed');
+            return strtolower(trans('general.deployed'));
         }
         return $this->model->assetstatus->name;
     }
+
     /**
      * Date the warantee expires.
      * @return false|string
