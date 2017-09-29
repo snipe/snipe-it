@@ -372,7 +372,7 @@
 @stop
 
 @section('moar_scripts')
-    <script>
+    <script nonce="{{ csrf_token() }}">
         $("#ldaptest").click(function(){
             $("#ldaptestrow").removeClass('success');
             $("#ldaptestrow").removeClass('danger');

@@ -54,7 +54,7 @@
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'statuslabels-export', 'search' => true])
 
-  <script>
+  <script nonce="{{ csrf_token() }}">
       function colorSqFormatter(value, row) {
           if (value) {
               return '<span class="label" style="background-color: ' + value + ';">&nbsp;</span> ' + value;

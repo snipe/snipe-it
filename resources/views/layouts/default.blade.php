@@ -27,13 +27,13 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-      <script>
+      <script nonce="{{ csrf_token() }}">
           window.Laravel = { csrfToken: '{{ csrf_token() }}' };
       </script>
 
 
 
-      <style>
+      <style nonce="{{ csrf_token() }}">
         @if ($snipeSettings)
             @if ($snipeSettings->header_color)
             .main-header .navbar, .main-header .logo {
@@ -70,7 +70,7 @@
 
 
 
-    <script>
+    <script nonce="{{ csrf_token() }}">
           window.snipeit = {
               settings: {
                   "per_page": {{ $snipeSettings->per_page }}
@@ -662,7 +662,7 @@
 
 
     <script src="{{ url(mix('js/dist/all.js')) }}"></script>
-    <script>
+    <script nonce="{{ csrf_token() }}">
         $(function () {
             var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
             $.fn.bootstrapDP = datepicker;
@@ -677,14 +677,14 @@
     @section('moar_scripts')
     @show
 
-    <script>
+    <script nonce="{{ csrf_token() }}">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         })
     </script>
 
     @if ((Session::get('topsearch')=='true') || (Request::is('/')))
-    <script>
+    <script nonce="{{ csrf_token() }}">
          $("#tagSearch").focus();
     </script>
     @endif

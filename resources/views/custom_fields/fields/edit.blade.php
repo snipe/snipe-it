@@ -134,7 +134,7 @@
 @stop
 
 @section('moar_scripts')
-<script>
+<script nonce="{{ csrf_token() }}">
     $(document).ready(function(){
 
         // Only display the custom format field if it's a custom format validation type

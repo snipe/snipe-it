@@ -253,7 +253,7 @@
 @endif
 
 
-<script>
+<script nonce="{{ csrf_token() }}">
 
 
 

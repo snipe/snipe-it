@@ -86,7 +86,7 @@
     'columns' => \App\Presenters\UserPresenter::dataTableLayout()
 ])
 
-<script>
+<script nonce="{{ csrf_token() }}">
 
     function groupsFormatter(value) {
 

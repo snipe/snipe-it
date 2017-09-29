@@ -20,6 +20,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\FrameGuard::class,
         \App\Http\Middleware\XssProtectHeader::class,
         \App\Http\Middleware\ReferrerPolicyHeader::class,
+        \App\Http\Middleware\ContentSecurityPolicyHeader::class,
         \App\Http\Middleware\NosniffGuard::class,
         \App\Http\Middleware\CheckForSetup::class,
         \Fideloper\Proxy\TrustProxies::class,

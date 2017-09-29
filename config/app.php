@@ -169,6 +169,24 @@ return [
 
     'referrer_policy' => env('REFERRER_POLICY', 'strict-origin'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | CSP
+    |--------------------------------------------------------------------------
+    |
+    | Disable the content security policy that restricts what scripts, images
+    | and styles can load. (This should be left as false if you don't know
+    | what this means.)
+    |
+    | Read more: https://www.w3.org/TR/CSP/
+    | Read more: https://content-security-policy.com
+    |
+    */
+
+    'disable_csp' => env('DISABLE_CSP', false),
+
+
+
 
     /*
     |--------------------------------------------------------------------------

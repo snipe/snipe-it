@@ -553,7 +553,7 @@
 @stop
 
 @section('moar_scripts')
-<script>
+<script nonce="{{ csrf_token() }}">
 $(document).ready(function() {
 
 	$('#email').on('keyup',function(){
@@ -570,7 +570,7 @@ $(document).ready(function() {
 });
 </script>
 
-<script>
+<script nonce="{{ csrf_token() }}">
 $('tr.header-row input:radio').click(function() {
   value = $(this).attr('value');
   $(this).parent().parent().siblings().each(function() {
@@ -585,7 +585,7 @@ $('.header-name').click(function() {
 
 <script src="{{ asset('js/pGenerator.jquery.js') }}"></script>
 
-<script>
+<script nonce="{{ csrf_token() }}">
 
 
 $(document).ready(function(){
