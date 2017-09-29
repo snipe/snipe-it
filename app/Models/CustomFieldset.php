@@ -47,11 +47,7 @@ class CustomFieldset extends Model
 
             if (($field->field_encrypted!='1') ||
                   (($field->field_encrypted =='1')  && (Gate::allows('admin')) )) {
-                if ($field->pivot->required) {
-                    $rule[]="required";
-                } else {
-                    $rule[]="nullable";
-                }
+                    $rule[] = ($field->pivot->required=='1') ? "required" : "nullable";
             }
 
             array_push($rule, $field->attributes['format']);
