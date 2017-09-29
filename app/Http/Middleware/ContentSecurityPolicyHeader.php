@@ -14,7 +14,7 @@ class ContentSecurityPolicyHeader
      */
     public function handle($request, Closure $next)
     {
-        if (config('app.disable_csp')=='true') {
+        if ((config('app.debug')=='true')  || (config('app.disable_csp')=='true')) {
             $response = $next($request);
             return $response;
         }
