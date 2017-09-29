@@ -118,7 +118,7 @@
                   </div>
               </div>
           </div>
-          <script src="{{ url(mix('js/dist/all.js')) }}"></script>
+          <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
 
         <script nonce="{{ csrf_token() }}">
             $(function () {
