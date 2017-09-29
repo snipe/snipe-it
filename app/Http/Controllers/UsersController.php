@@ -376,6 +376,11 @@ class UsersController extends Controller
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
             }
 
+            if (count($user->assets) > 0) {
+                // Redirect to the user management page
+                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets) . ' assets associated with them.');
+            }
+
             if ($user->licenses()->count() > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
