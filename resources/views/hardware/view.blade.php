@@ -703,7 +703,7 @@
 @section('moar_scripts')
   @include ('partials.bootstrap-table', ['simple_view' => true])
 
-<script>
+<script nonce="{{ csrf_token() }}">
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();

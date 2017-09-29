@@ -62,7 +62,7 @@
 
 @if (!$item->id)
 @section('moar_scripts')
-<script>
+<script nonce="{{ csrf_token() }}">
 
     var $eventSelect = $(".parent");
     $eventSelect.on("change", function () { parent_details($eventSelect.val()); });

@@ -154,7 +154,7 @@
 @stop
 
 @section('moar_scripts')
-<script>
+<script nonce="{{ csrf_token() }}">
 $(function() {
   $('#assigned_user').on("change",function () {
     var userid = $('#assigned_user option:selected').val();

@@ -13,7 +13,7 @@
 <script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 @endif
 
-<script>
+<script nonce="{{ csrf_token() }}">
 $('.snipe-table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',

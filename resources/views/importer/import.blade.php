@@ -83,7 +83,7 @@
 @stop
 
 @section('moar_scripts')
-<script>
+<script nonce="{{ csrf_token() }}">
     new Vue({
         el: '#app'
     });

@@ -146,7 +146,7 @@
 
 @section('moar_scripts')
     <!-- bootstrap color picker -->
-    <script>
+    <script nonce="{{ csrf_token() }}">
         //color picker with addon
         $(".header-color").colorpicker();
         // toggle the disabled state of asset id prefix

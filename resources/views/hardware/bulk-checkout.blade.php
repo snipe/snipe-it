@@ -107,7 +107,7 @@
 @stop
 
 @section('moar_scripts')
-<script>
+<script nonce="{{ csrf_token() }}">
 $(function() {
   $('#assigned_to').on("change",function () {
     // console.warn("Model Id has changed!");

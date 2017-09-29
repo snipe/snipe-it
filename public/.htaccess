@@ -5,9 +5,11 @@
 
     RewriteEngine On
 
-    # Uncomment these two lines to force SSL redirect
+    # Uncomment these two lines to force SSL redirect in Apache
     # RewriteCond %{HTTPS} off
     # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -21,4 +23,11 @@
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Security Headers
+    Header set Strict-Transport-Security "max-age=2592000" env=HTTPS
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options nosniff
+    Header set X-Permitted-Cross-Domain-Policies "master-only"
+
 </IfModule>
