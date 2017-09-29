@@ -11,7 +11,7 @@
 
 @include ('partials.forms.edit.company')
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/accessories/general.accessory_name')])
-@include ('partials.forms.edit.category')
+@widget('Form/CategorySelector', ['item' => $item, 'type' => 'accessory'])
 @include ('partials.forms.edit.manufacturer')
 @include ('partials.forms.edit.location')
 @include ('partials.forms.edit.model_number')

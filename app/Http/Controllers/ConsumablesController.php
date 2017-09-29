@@ -57,7 +57,6 @@ class ConsumablesController extends Controller
         // Show the page
         return view('consumables/edit')
             ->with('item', new Consumable)
-            ->with('category_list', Helper::categoryList('consumable'))
             ->with('company_list', Helper::companyList())
             ->with('location_list', Helper::locationsList())
             ->with('manufacturer_list', Helper::manufacturerList());
@@ -116,7 +115,6 @@ class ConsumablesController extends Controller
         $this->authorize($item);
 
         return view('consumables/edit', compact('item'))
-            ->with('category_list', Helper::categoryList('consumable'))
             ->with('company_list', Helper::companyList())
             ->with('location_list', Helper::locationsList())
             ->with('manufacturer_list', Helper::manufacturerList());

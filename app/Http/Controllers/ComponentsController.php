@@ -60,7 +60,6 @@ class ComponentsController extends Controller
         // Show the page
         return view('components/edit')
             ->with('item', new Component)
-            ->with('category_list', Helper::categoryList('component'))
             ->with('company_list', Helper::companyList())
             ->with('location_list', Helper::locationsList());
     }
@@ -114,7 +113,6 @@ class ComponentsController extends Controller
         $this->authorize('update', $item);
 
         return view('components/edit', compact('item'))
-            ->with('category_list', Helper::categoryList('component'))
             ->with('company_list', Helper::companyList())
             ->with('location_list', Helper::locationsList());
     }

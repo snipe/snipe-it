@@ -255,6 +255,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
         Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
+        \Imanghafoori\Widgets\WidgetsServiceProvider::class,
 
 
         /*

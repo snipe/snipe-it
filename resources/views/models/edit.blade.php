@@ -11,7 +11,7 @@
 
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/models/table.name')])
 @include ('partials.forms.edit.manufacturer')
-@include ('partials.forms.edit.category')
+@widget('Form/CategorySelector', ['item' => $item, 'type' => 'asset'])
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.depreciation')
 
