@@ -87,8 +87,8 @@
                             &nbsp; &nbsp;</span>
                         </span>
                         @endif
-                        <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">{{ $asset->present()->statusText() }}</a>
-                          <label class="label label-default">{{ $asset->assetstatus->getStatuslabelType() }}</label>
+                        <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">{{ $asset->assetstatus->name }}</a>
+                          <label class="label label-default">{{ $asset->present()->statusMeta }}</label>
                       </td>
                     </tr>
                     @endif
@@ -703,7 +703,7 @@
 @section('moar_scripts')
   @include ('partials.bootstrap-table', ['simple_view' => true])
 
-<script>
+<script nonce="{{ csrf_token() }}">
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();

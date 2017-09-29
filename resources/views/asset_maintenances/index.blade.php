@@ -58,7 +58,7 @@
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'maintenances-export', 'search' => true])
-<script>
+<script nonce="{{ csrf_token() }}">
     function maintenanceActions(value, row) {
         var actions = '<nobr>';
         if ((row) && (row.available_actions.update === true)) {

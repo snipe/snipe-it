@@ -13,7 +13,7 @@
 
 
 
-        <script>
+        <script nonce="{{ csrf_token() }}">
             window.snipeit = {
                 settings: {
                     "per_page": 20
@@ -118,9 +118,9 @@
                   </div>
               </div>
           </div>
-          <script src="{{ url(mix('js/dist/all.js')) }}"></script>
+          <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
 
-        <script>
+        <script nonce="{{ csrf_token() }}">
             $(function () {
                 $(".select2").select2();
             });

@@ -1,7 +1,7 @@
 
 <script src="/js/pGenerator.jquery.js"></script>
 
-<script>
+<script nonce="{{ csrf_token() }}">
     $(document).ready(function () {
 
         $('#genPassword').pGenerator({

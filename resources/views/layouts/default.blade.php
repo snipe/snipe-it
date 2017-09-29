@@ -27,13 +27,13 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-      <script>
+      <script nonce="{{ csrf_token() }}">
           window.Laravel = { csrfToken: '{{ csrf_token() }}' };
       </script>
 
 
 
-      <style>
+      <style nonce="{{ csrf_token() }}">
         @if ($snipeSettings)
             @if ($snipeSettings->header_color)
             .main-header .navbar, .main-header .logo {
@@ -70,7 +70,7 @@
 
 
 
-    <script>
+    <script nonce="{{ csrf_token() }}">
           window.snipeit = {
               settings: {
                   "per_page": {{ $snipeSettings->per_page }}
@@ -382,17 +382,17 @@
 
 
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
-                    <a href="{{ url('hardware?status=Deployed') }}"><i class="fa fa-circle-o text-blue"></i>@lang('general.deployed')
+                    <a href="{{ url('hardware?status=Deployed') }}"><i class="fa fa-circle-o text-blue"></i>All  @lang('general.deployed')
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                     <a href="{{ url('hardware?status=RTD') }}">
                         <i class="fa fa-circle-o text-green"></i>
-                    @lang('general.ready_to_deploy')</a>
+                        All  @lang('general.ready_to_deploy')</a>
                   </li>
-                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>@lang('general.pending')</a></li>
-                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>@lang('general.undeployable')</a></li>
-                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fa fa-times text-red"></i>@lang('admin/hardware/general.archived')</a></li>
+                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>All  @lang('general.pending')</a></li>
+                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>All @lang('general.undeployable')</a></li>
+                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fa fa-times text-red"></i>All  @lang('admin/hardware/general.archived')</a></li>
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fa fa-check text-blue"></i> @lang('admin/hardware/general.requestable')</a></li>
 
                   <li class="divider">&nbsp;</li>
@@ -661,8 +661,8 @@
 
 
 
-    <script src="{{ url(mix('js/dist/all.js')) }}"></script>
-    <script>
+    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script nonce="{{ csrf_token() }}">
         $(function () {
             var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
             $.fn.bootstrapDP = datepicker;
@@ -677,14 +677,18 @@
     @section('moar_scripts')
     @show
 
-    <script>
+    <script nonce="{{ csrf_token() }}">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         })
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
     </script>
 
     @if ((Session::get('topsearch')=='true') || (Request::is('/')))
-    <script>
+    <script nonce="{{ csrf_token() }}">
          $("#tagSearch").focus();
     </script>
     @endif

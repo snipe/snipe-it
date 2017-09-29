@@ -57,7 +57,7 @@
 
 @section('moar_scripts')
     <!-- bootstrap color picker -->
-    <script>
+    <script nonce="{{ csrf_token() }}">
         //color picker with addon
         $(".color").colorpicker();
     </script>

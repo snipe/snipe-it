@@ -491,7 +491,7 @@
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table', ['simple_view' => true])
-<script>
+<script nonce="{{ csrf_token() }}">
 $(function () {
     //binds to onchange event of your input field
     var uploadedFileSize = 0;

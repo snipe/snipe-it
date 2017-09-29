@@ -190,7 +190,7 @@
             @endif
 
         </div></div></div>
-<script>
+<script nonce="{{ csrf_token() }}">
 $(document).ready(function(){
 
     $('#generate-password').pGenerator({

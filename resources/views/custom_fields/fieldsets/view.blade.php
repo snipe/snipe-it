@@ -82,7 +82,7 @@
 @stop
 
 @section('moar_scripts')
-  <script>
+  <script nonce="{{ csrf_token() }}">
   var fixHelperModified = function(e, tr) {
       var $originals = tr.children();
       var $helper = tr.clone();

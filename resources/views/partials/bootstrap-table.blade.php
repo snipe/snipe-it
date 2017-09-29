@@ -13,7 +13,7 @@
 <script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 @endif
 
-<script>
+<script nonce="{{ csrf_token() }}">
 $('.snipe-table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
@@ -139,8 +139,30 @@ $('.snipe-table').bootstrapTable({
     // Use this when we're introspecting into a column object and need to link
     function genericColumnObjLinkFormatter(destination) {
         return function (value,row) {
-            if ((value) && (value.status_type)) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a> ' + '<label class="label label-default">'+ value.status_type + '</label>';
+            if ((value) && (value.status_meta)) {
+
+                var text_color;
+                var icon_style;
+
+                switch (value.status_meta) {
+                    case 'deployed':
+                        text_color = 'blue';
+                        icon_style = 'fa-circle';
+                    break;
+                    case 'deployable':
+                        text_color = 'green';
+                        icon_style = 'fa-circle';
+                    break;
+                    case 'pending':
+                        text_color = 'orange';
+                        icon_style = 'fa-circle';
+                        break;
+                    default:
+                        text_color = 'red';
+                        icon_style = 'fa-times';
+                }
+
+                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ value.status_meta + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + '</a> ';
             } else if ((value) && (value.name)) {
                 return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';
             }

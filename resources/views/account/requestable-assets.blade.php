@@ -149,7 +149,7 @@
 
 
 @section('moar_scripts')
-<script>
+<script nonce="{{ csrf_token() }}">
 
     $( "a[name='Request']").click(function(event) {
         // event.preventDefault();

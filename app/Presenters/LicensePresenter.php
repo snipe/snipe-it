@@ -152,7 +152,7 @@ class LicensePresenter extends Presenter
      */
     public function fullName()
     {
-        return 'poop';
+        return $this->name;
     }
 
 
