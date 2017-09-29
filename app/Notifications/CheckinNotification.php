@@ -41,10 +41,12 @@ class CheckinNotification extends Notification
             $notifyBy[] = 'slack';
         }
         $item = $this->params['item'];
-        if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance()=='1'))
-            || (method_exists($item, 'getEula') && ($item->getEula()))
-        ) {
-            $notifyBy[] = 'mail';
+        if (class_basename(get_class($this->params['item']))=='Asset') {
+            if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
+                || (method_exists($item, 'getEula') && ($item->getEula()))
+            ) {
+                $notifyBy[] = 'mail';
+            }
         }
         return $notifyBy;
     }
