@@ -59,13 +59,30 @@ class AccessoriesTransformer
     }
 
 
-    public function transformCheckedoutAccessories (Collection $accessories_users, $total)
+    public function transformCheckedoutAccessory (Accessory $accessory, $total)
     {
 
+
+        
+
         $array = array();
-        foreach ($accessories_users as $user) {
-            $array[] = (new UsersTransformer)->transformUser($user);
+        foreach ($accessory->users as $user) {
+            $array[] = [
+                'assigned_pivot_id' => $user->pivot->id,
+                'id' => (int) $user->id,
+                'username' => e($user->username),
+                'name' => e($user->getFullNameAttribute()),
+                'first_name'=> e($user->first_name),
+                'last_name'=> e($user->last_name),
+                'employee_number' =>  e($user->employee_num),
+                'type' => 'user',
+                'available_actions' => ['checkin' => true]
+            ];
+
         }
+
+
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 

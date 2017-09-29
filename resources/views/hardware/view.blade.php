@@ -87,8 +87,8 @@
                             &nbsp; &nbsp;</span>
                         </span>
                         @endif
-                        {{ $asset->present()->statusText() }}
-                        ({{ $asset->assetstatus->getStatuslabelType() }})
+                        <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">{{ $asset->present()->statusText() }}</a>
+                          <label class="label label-default">{{ $asset->assetstatus->getStatuslabelType() }}</label>
                       </td>
                     </tr>
                     @endif

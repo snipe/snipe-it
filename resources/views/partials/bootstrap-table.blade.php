@@ -139,7 +139,9 @@ $('.snipe-table').bootstrapTable({
     // Use this when we're introspecting into a column object and need to link
     function genericColumnObjLinkFormatter(destination) {
         return function (value,row) {
-            if ((value) && (value.name)) {
+            if (value.status_type) {
+                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a> ' + '<label class="label label-default">'+ value.status_type + '</label>';
+            } else if ((value) && (value.name)) {
                 return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';
             }
         };
@@ -228,8 +230,14 @@ $('.snipe-table').bootstrapTable({
                 return '<div  data-tooltip="true" title="This item has a status label that is undeployable and cannot be checked out at this time."><a class="btn btn-sm btn-primary disabled">{{ trans('general.checkout') }}</a></div>';
 
             // The user is allowed to check items in
-            } else if ((row.available_actions.checkin == true)  && (row.assigned_to)) {
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+            } else if (row.available_actions.checkin == true)  {
+                if (row.assigned_to) {
+                    return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm btn-primary" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                } else if (row.assigned_pivot_id) {
+                    return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm btn-primary" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                }
+
+            } else {
 
             }
 

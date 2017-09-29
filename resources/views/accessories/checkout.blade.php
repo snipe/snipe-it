@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('admin/hardware/general.checkout') }}
+     {{ trans('admin/accessories/general.checkout') }}
 @parent
 @stop
 @section('header_right')
