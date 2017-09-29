@@ -490,7 +490,7 @@ class LicensesController extends Controller
     * @param int $licenseId
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postUpload($licenseId = null)
+    public function postUpload(Request $request, $licenseId = null)
     {
         $license = License::find($licenseId);
         // the license is valid
