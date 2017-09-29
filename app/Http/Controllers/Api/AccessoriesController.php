@@ -129,9 +129,8 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id)->with('users')->first();
-        $accessories_users = $accessory->users;
-        $total = $accessories_users->count();
-        return (new AccessoriesTransformer)->transformCheckedoutAccessories($accessories_users, $total);
+        $total = $accessory->users->count();
+        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $total);
     }
 
 
