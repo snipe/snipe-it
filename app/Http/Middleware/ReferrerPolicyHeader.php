@@ -3,7 +3,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class XssProtectHeader
+class ReferrerPolicyHeader
 {
     /**
      * Handle the given request and get the response.
@@ -14,9 +14,8 @@ class XssProtectHeader
      */
     public function handle($request, Closure $next)
     {
-        $mode = '1; mode=block';
         $response = $next($request);
-        $response->headers->set('X-XSS-Protection', $mode);
+        $response->headers->set('Referrer-Policy', config('app.referrer_policy'));
         return $response;
     }
 }

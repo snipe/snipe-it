@@ -157,6 +157,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | REFERRER-POLICY
+    |--------------------------------------------------------------------------
+    |
+    | This is an additional security header that browsers use to determine
+    | whether they should report back URL referrer information.
+    |
+    | Read more: https://www.w3.org/TR/referrer-policy/
+    |
+    */
+
+    'referrer_policy' => env('REFERRER_POLICY', 'strict-origin'),
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Demo Mode Lockdown
     |--------------------------------------------------------------------------
     |
