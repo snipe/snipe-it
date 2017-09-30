@@ -66,7 +66,6 @@
                                                     :key="currentFile.id"
                                                     :file="currentFile"
                                                     customFieldUrl="{{route('api.customfields.index')}}"
-                                                    importProcessUrl="{{route('api.imports.importFile','DUMMYTEXT')}}"
                                                     @alert="updateAlert(alert)">
                                     			</import-file>
                                     	</template>

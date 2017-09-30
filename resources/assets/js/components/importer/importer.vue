@@ -36,9 +36,6 @@ th {
             };
         },
 
-        /**
-         * Prepare the component (Vue 2.x).
-         */
         mounted() {
             window.eventHub.$on('importErrors', this.updateImportErrors);
             this.fetchFiles();
