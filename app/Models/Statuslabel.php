@@ -21,7 +21,7 @@ class Statuslabel extends SnipeModel
 
     protected $rules = array(
         'name'  => 'required|string|unique_undeleted',
-        'notes'   => 'string',
+        'notes'   => 'string|nullable',
         'deployable' => 'required',
         'pending' => 'required',
         'archived' => 'required',
