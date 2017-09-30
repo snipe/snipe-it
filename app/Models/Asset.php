@@ -179,13 +179,14 @@ class Asset extends Depreciable
 
     public function getDetailedNameAttribute()
     {
-        if ($this->assignedTo) {
-            $user_name = $this->assignedTo->present()->name();
+        if ($this->assignedto) {
+            $user_name = $this->assignedto->present()->name();
         } else {
             $user_name = "Unassigned";
         }
         return $this->asset_tag . ' - ' . $this->name . ' (' . $user_name . ') ' . $this->model->name;
     }
+
     public function validationRules($id = '0')
     {
         return $this->rules;

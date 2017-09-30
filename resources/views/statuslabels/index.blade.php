@@ -46,6 +46,12 @@
   <div class="col-md-3">
     <h4>{{ trans('admin/statuslabels/table.about') }}</h4>
     <p>{{ trans('admin/statuslabels/table.info') }}</p>
+
+      <p><i class="fa fa-circle text-green"></i> <strong>{{ trans('admin/statuslabels/table.deployable') }}</strong>: {!!  trans('admin/statuslabels/message.help.deployable')  !!}</p>
+      <p><i class="fa fa-circle text-orange"></i> <strong>Pending</strong>{{ trans('admin/statuslabels/message.help.pending') }}</p>
+      <p><i class="fa fa-times text-red"></i> <strong>Undeployable</strong>: {{ trans('admin/statuslabels/message.help.undeployable') }}</p>
+      <p><i class="fa fa-times text-red"></i> <strong>Archived</strong>: {{ trans('admin/statuslabels/message.help.archived') }}</p>
+
   </div>
 
 </div>
