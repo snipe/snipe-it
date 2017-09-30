@@ -10,12 +10,12 @@
     "barryvdh/laravel-debugbar": "^2.4",
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
-    "doctrine/dbal": "v2.4.2",
+    "doctrine/dbal": "v2.5.13",
     "erusev/parsedown": "^1.6",
     "fideloper/proxy": "^3.1",
     "intervention/image": "^2.3",
     "javiereguiluz/easyslugger": "^1.0",
-    "laravel/framework": "5.4.20",
+    "laravel/framework": "5.4.*",
     "laravel/passport": "^1.0",
     "laravel/tinker": "^1.0",
     "laravelcollective/html": "^5.3",
@@ -29,15 +29,15 @@
     "tecnickcom/tc-lib-barcode": "^1.15",
     "unicodeveloper/laravel-password": "^1.0",
     "watson/validating": "^3.0",
-    "doctrine/instantiator": "1.0.5",
-    "doctrine/inflector": "1.0.*"
+    "doctrine/instantiator": "1.0.*",
+    "doctrine/inflector": "1.2.*"
   },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "phpunit/phpunit": "~5.7",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
-        "codeception/codeception": "2.2.9",
+        "codeception/codeception": "2.3.6",
         "squizlabs/php_codesniffer": "*",
         "phpunit/php-token-stream": "1.4.11"
 
