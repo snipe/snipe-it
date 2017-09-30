@@ -67,7 +67,7 @@ tr {
 
 <script>
     export default {
-        props: ['file', 'customFieldUrl', 'importProcessUrl'],
+        props: ['file', 'customFieldUrl'],
         data() {
             return {
                 activeFile: this.file,
@@ -142,12 +142,6 @@ tr {
             this.populateSelect2ActiveItems();
         },
         computed: {
-            processUrl() {
-                // Because we need to pass a parameter to the laravel route function
-                // We get a url 'http://localhost/api/v1/imports/process/DUMMYTEXT'
-                // But we want to customize that to /api/v1/imports/process/this_file
-                return this.importProcessUrl.replace('DUMMYTEXT', this.file.id)
-            },
             columns() {
                 switch(this.options.importType) {
                     case 'asset':
@@ -175,7 +169,7 @@ tr {
             },
             postSave() {
                 this.statusText = "Processing...";
-                this.$http.post(this.processUrl, {
+                this.$http.post(this.file.process_url, {
                     'import-update': this.options.update,
                     'import-type': this.options.importType,
                     'column-mappings': this.columnMappings
