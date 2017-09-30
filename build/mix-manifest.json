@@ -18,5 +18,6 @@
   "/css/AdminLTE.css.map": "/css/AdminLTE.css.map",
   "/css/app.css.map": "/css/app.css.map",
   "/css/overrides.css.map": "/css/overrides.css.map",
-  "public/css/dist/all.css": "public/css/dist/all.css"
+  "public/css/dist/all.css": "public/css/dist/all.css",
+  "public/js/dist/all.js": "public/js/dist/all.js"
 }
