@@ -78,12 +78,7 @@ class ObjectImportCommand extends Command
 
         $logFile = $this->option('logfile');
         \Log::useFiles($logFile);
-        if ($this->option('testrun')) {
-            $this->comment('====== TEST ONLY Item Import for '.$filename.' ====');
-            $this->comment('============== NO DATA WILL BE WRITTEN ==============');
-        } else {
-            $this->comment('======= Importing Items from '.$filename.' =========');
-        }
+        $this->comment('======= Importing Items from '.$filename.' =========');
         $importer->import();
 
         $this->bar = null;
