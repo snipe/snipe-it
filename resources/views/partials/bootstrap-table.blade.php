@@ -205,26 +205,34 @@ $('.snipe-table').bootstrapTable({
     function polymorphicItemFormatter(value) {
 
         var item_destination = '';
+        var item_icon;
 
         if ((value) && (value.type)) {
 
             if (value.type == 'asset') {
                 item_destination = 'hardware';
+                item_icon = 'fa-barcode';
             } else if (value.type == 'accessory') {
                 item_destination = 'accessories';
+                item_icon = 'fa-keyboard-o';
             } else if (value.type == 'component') {
                 item_destination = 'components';
+                item_icon = 'fa-hdd-o';
             } else if (value.type == 'consumable') {
                 item_destination = 'consumables';
+                item_icon = 'fa-tint';
             } else if (value.type == 'license') {
                 item_destination = 'licenses';
+                item_icon = 'fa-floppy-o';
             } else if (value.type == 'user') {
                 item_destination = 'users';
+                item_icon = 'fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
+                item_icon = 'fa-map-marker';
             }
 
-            return '<a href="{{ url('/') }}/' + item_destination +'/' + value.id + '"> ' + value.name + '</a>';
+            return '<a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-blue"></i> ' + value.name + '</a>';
 
         } else {
             return '';
