@@ -87,9 +87,8 @@ class SuppliersController extends Controller
                 $supplier->image = $file_name;
         }
 
-            // Was it created?
         if ($supplier->save()) {
-          // Redirect to the new supplier  page
+          // Redirect to the nw supplier  page
             return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($supplier->getErrors());
