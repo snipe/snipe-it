@@ -31,7 +31,9 @@
     "tecnickcom/tc-lib-barcode": "^1.15",
     "tightenco/ziggy": "^0.4.1",
     "unicodeveloper/laravel-password": "^1.0",
-    "watson/validating": "^3.0"
+    "watson/validating": "^3.0",
+    "phpspec/prophecy": "1.6.2",
+    "phpdocumentor/reflection-docblock": "3.2.2"
   },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
