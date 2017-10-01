@@ -160,6 +160,7 @@
 
 <script>
     export default {
+        props: ['tokenUrl', 'scopesUrl'],
         /*
          * The component's data.
          */
@@ -209,7 +210,7 @@
              * Get all of the personal access tokens for the user.
              */
             getTokens() {
-                this.$http.get('/oauth/personal-access-tokens')
+                this.$http.get(this.tokenUrl)
                         .then(response => {
                             this.tokens = response.data;
                         });
@@ -219,7 +220,7 @@
              * Get all of the available scopes.
              */
             getScopes() {
-                this.$http.get('/oauth/scopes')
+                this.$http.get(this.scopesUrl)
                         .then(response => {
                             this.scopes = response.data;
                         });
@@ -240,7 +241,7 @@
 
                 this.form.errors = [];
 
-                this.$http.post('/oauth/personal-access-tokens', this.form)
+                this.$http.post(this.tokenUrl, this.form)
                         .then(response => {
                             this.form.name = '';
                             this.form.scopes = [];
@@ -293,7 +294,7 @@
              * Revoke the given token.
              */
             revoke(token) {
-                this.$http.delete('/oauth/personal-access-tokens/' + token.id)
+                this.$http.delete(this.tokenUrl +'/'+ token.id)
                         .then(response => {
                             this.getTokens();
                         });

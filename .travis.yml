@@ -43,7 +43,7 @@ before_script:
 # use the $DB env variable to determine the phpunit.xml to use
 # script: ./vendor/bin/codecept run --env testing-ci
 script:
-  - ./vendor/bin/codecept run unit --env testing-ci
+  - ./vendor/bin/codecept run unit
 #  - ./vendor/bin/codecept run acceptance --env=testing-ci
   - ./vendor/bin/codecept run functional --env=functional-travis
 #script: ./vendor/bin/codecept run

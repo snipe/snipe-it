@@ -9,15 +9,16 @@ class ApiAssetsCest
 
     public function _before(ApiTester $I)
     {
+        $I->setupDatabase();
         $this->faker = \Faker\Factory::create();
         $this->user = \App\Models\User::find(1);
-
         $I->amBearerAuthenticated($I->getToken($this->user));
     }
 
     /** @test */
     public function indexAssets(ApiTester $I)
     {
+
         $I->wantTo('Get a list of assets');
 
         // setup

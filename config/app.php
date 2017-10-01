@@ -255,7 +255,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
         Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
-
+        Tightenco\Ziggy\ZiggyServiceProvider::class, // Laravel routes in vue
 
         /*
         * Application Service Providers...

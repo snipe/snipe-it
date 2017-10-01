@@ -29,7 +29,6 @@ class ImportsTransformer
             'header_row' => $import->header_row,
             'first_row'  => $import->first_row,
             'field_map'  => $import->field_map,
-            'process_url'=> route('api.imports.importFile', $import->id),
         ];
 
         return $array;

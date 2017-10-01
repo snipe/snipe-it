@@ -519,13 +519,16 @@ class LicensesController extends Controller
                     //Log the upload to the log
                     $license->logUpload($filename, e($request->input('notes')));
                 }
-
+                // This being called from a modal seems to confuse redirect()->back()
+                // It thinks we should go to the dashboard.  As this is only used
+                // from the modal at present, hardcode the redirect.  Longterm
+                // maybe we evaluate something else.
                 if ($upload_success) {
-                    return redirect()->back()->with('success', trans('admin/licenses/message.upload.success'));
+                    return redirect()->route('licenses.show', $license->id)->with('success', trans('admin/licenses/message.upload.success'));
                 }
-                return redirect()->back()->with('error', trans('admin/licenses/message.upload.error'));
+                return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.error'));
             }
-            return redirect()->back()->with('error', trans('admin/licenses/message.upload.nofiles'));
+            return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.nofiles'));
         }
         // Prepare the error message
         $error = trans('admin/licenses/message.does_not_exist', compact('id'));

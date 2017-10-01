@@ -11,3 +11,4 @@ modules:
             environment_file: .env.testing
             disable_middleware: true
             cleanup: true
+

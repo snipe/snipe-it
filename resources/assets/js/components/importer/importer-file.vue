@@ -67,7 +67,7 @@ tr {
 
 <script>
     export default {
-        props: ['file', 'customFieldUrl'],
+        props: ['file', 'customFields'],
         data() {
             return {
                 activeFile: this.file,
@@ -130,14 +130,13 @@ tr {
                         {id: 'jobtitle', text: 'Job Title' },
                         {id: 'phone_number', text: 'Phone Number' },
                     ],
-                    customFields: [],
+                    customFields: this.customFields,
                 },
                 columnMappings: this.file.field_map || {},
                 activeColumn: null,
             }
         },
         created() {
-            this.fetchCustomFields();
             window.eventHub.$on('showDetails', this.toggleExtendedDisplay)
             this.populateSelect2ActiveItems();
         },
@@ -155,21 +154,9 @@ tr {
             }
         },
         methods: {
-            fetchCustomFields() {
-                this.$http.get(this.customFieldUrl)
-                .then( ({data}) => {
-                    data = data.rows;
-                    data.forEach((item) => {
-                        this.columnOptions.customFields.push({
-                            'id': item.db_column_name,
-                            'text': item.name,
-                        })
-                    })
-                });
-            },
             postSave() {
                 this.statusText = "Processing...";
-                this.$http.post(this.file.process_url, {
+                this.$http.post(route('api.imports.importFile', this.file.id), {
                     'import-update': this.options.update,
                     'import-type': this.options.importType,
                     'column-mappings': this.columnMappings

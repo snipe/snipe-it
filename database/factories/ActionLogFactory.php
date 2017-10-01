@@ -19,12 +19,14 @@ $factory->defineAs(Actionlog::class, 'asset-checkout', function (Faker\Generator
     $company =  factory(App\Models\Company::class)->create();
     $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
     $target = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    // $item = factory(App\Models\Asset::class)->create(['company_id' => $company->id]);
+    do {
+        $item = factory(App\Models\Asset::class)->create(['company_id' => $company->id]);
+    } while (!$item->isValid());
 // dd($item);
     return [
         'user_id' => $user->id,
         'action_type' => 'checkout',
-        'item_id' => factory(App\Models\Asset::class)->create(['company_id' => $company->id])->id,
+        'item_id' => $item->id,
         'item_type'  => App\Models\Asset::class,
         'target_id' => $target->id,
         'target_type' => get_class($target),
