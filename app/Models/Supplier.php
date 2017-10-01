@@ -26,7 +26,7 @@ class Supplier extends SnipeModel
         'notes'             => 'max:255|nullable',
         'email'             => 'email|max:150|nullable',
         'zip'               => 'max:10|nullable',
-        'url'               => 'url|nullable',
+        'url'               => 'sometimes|nullable|string|max:250',
     );
 
     /**
