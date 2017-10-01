@@ -11,6 +11,8 @@
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
     "doctrine/dbal": "v2.5.13",
+    "doctrine/inflector": "1.2.*",
+    "doctrine/instantiator": "1.0.*",
     "erusev/parsedown": "^1.6",
     "fideloper/proxy": "^3.1",
     "intervention/image": "^2.3",
@@ -27,10 +29,9 @@
     "schuppo/password-strength": "~1.5",
     "spatie/laravel-backup": "^3.0.0",
     "tecnickcom/tc-lib-barcode": "^1.15",
+    "tightenco/ziggy": "^0.4.1",
     "unicodeveloper/laravel-password": "^1.0",
-    "watson/validating": "^3.0",
-    "doctrine/instantiator": "1.0.*",
-    "doctrine/inflector": "1.2.*"
+    "watson/validating": "^3.0"
   },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

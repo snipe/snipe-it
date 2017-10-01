@@ -27,13 +27,11 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-      <script nonce="{{ csrf_token() }}">
-          window.Laravel = { csrfToken: '{{ csrf_token() }}' };
-      </script>
+    <script nonce="{{ csrf_token() }}">
+      window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+    </script>
 
-
-
-      <style nonce="{{ csrf_token() }}">
+    <style nonce="{{ csrf_token() }}">
         @if ($snipeSettings)
             @if ($snipeSettings->header_color)
             .main-header .navbar, .main-header .logo {
@@ -68,16 +66,15 @@
     }
     </style>
 
-
-
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
               settings: {
                   "per_page": {{ $snipeSettings->per_page }}
               }
           };
-      </script>
-
+    </script>
+    <!-- Add laravel route sinto javascript  Primarily useful for vue.-->
+    @routes
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
