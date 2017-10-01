@@ -357,12 +357,12 @@ class LicensesController extends Controller
     public function getCheckin($seatId = null, $backTo = null)
     {
         // Check if the asset exists
-        if (is_null($licenseseat = LicenseSeat::find($seatId))) {
+        if (is_null($licenseSeat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
-        $this->authorize('checkin', $licenseseat);
-        return view('licenses/checkin', compact('licenseseat'))->with('backto', $backTo);
+        $this->authorize('checkin', $licenseSeat);
+        return view('licenses/checkin', compact('licenseSeat'))->with('backto', $backTo);
     }
 
 
