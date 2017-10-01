@@ -15,7 +15,7 @@
         @for($i=0; $count > $i; $i++)
             <tr>
                 <td>
-                    <a href="{{ url('/') }}/admin/{{ $data[$i]['type'] }}/{{ $data[$i]['id'] }}/view">{{ $data[$i]['name'] }}</a>
+                    <a href="{{ route($data[$i]['type'].'.show', $data[$i]['id']) }}">{{ $data[$i]['name'] }}</a>
                 </td>
                 <td>{{ $data[$i]['type'] }}</td>
                 <td>{{ $data[$i]['remaining'] }}</td>
