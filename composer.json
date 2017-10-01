@@ -11,7 +11,7 @@
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
     "doctrine/dbal": "v2.5.13",
-    "doctrine/inflector": "1.2.*",
+    "doctrine/inflector": "1.1.*",
     "doctrine/instantiator": "1.0.*",
     "erusev/parsedown": "^1.6",
     "fideloper/proxy": "^3.1",
