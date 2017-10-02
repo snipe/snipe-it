@@ -183,7 +183,7 @@ return [
     |
     */
 
-    'disable_csp' => env('DISABLE_CSP', false),
+    'enable_csp' => env('ENABLE_CSP', false),
 
 
 
