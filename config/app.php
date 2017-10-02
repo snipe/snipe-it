@@ -167,7 +167,7 @@ return [
     |
     */
 
-    'referrer_policy' => env('REFERRER_POLICY', 'strict-origin'),
+    'referrer_policy' => env('REFERRER_POLICY', 'same-origin'),
 
     /*
     |--------------------------------------------------------------------------

@@ -47,6 +47,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
+        Session::put('backUrl', URL::previous());
     }
 
 
@@ -318,6 +319,11 @@ class LoginController extends Controller
 
     public function legacyAuthRedirect() {
         return redirect()->route('login');
+    }
+
+    public function redirectTo()
+    {
+        return Session::get('backUrl') ? Session::get('backUrl') :   $this->redirectTo;
     }
 
 }
