@@ -307,7 +307,7 @@ case $distro in
         webdir=/var/www/html
         #Allow us to get the mysql engine
         echo ""
-        echo "##  Adding IUS, epel-release and mariaDB repos.";
+        echo "##  Adding IUS, epel-release and mariaDB repositories.";
         mariadbRepo=/etc/yum.repos.d/MariaDB.repo
         touch "$mariadbRepo"
         {
@@ -323,9 +323,9 @@ case $distro in
         log "wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm"
         log "rpm -Uvh "$tmp/ius-release*.rpm""
 
-        #Install PHP and other needed stuff.
-        echo "##  Installing PHP and other needed stuff";
-        PACKAGES="httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
+        #Install PHP and other needed stuff
+        echo "##  Installing PHP and other requirements.";
+        PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml"
 
         for p in $PACKAGES;do
             if isinstalled "$p"; then
@@ -337,11 +337,9 @@ case $distro in
             fi
         done;
 
-        echo -e "\n##  Downloading Snipe-IT from github and putting it in the web directory.";
+        echo -e "\n##  Cloning Snipe-IT from github to the web directory.";
 
-        log "wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file"
-        unzip -qo $tmp/$file -d $tmp/
-        cp -R $tmp/$fileName $webdir/$name
+        log "git clone https://github.com/snipe/snipe-it $webdir/$name"
 
         # Make mariaDB start on boot and restart the daemon
         echo "##  Starting the mariaDB server.";
@@ -417,8 +415,12 @@ case $distro in
         fi
 
         service httpd restart
-        php artisan key:generate
-        php artisan passport:install
+        
+        echo "##  Generating the application key."
+        php artisan key:generate --force
+
+        echo "##  Artisan Migrate."
+        php artisan migrate --force
 
     elif [[ "$version" =~ ^7 ]]; then
         #####################################  Install for Centos/Redhat 7  ##############################################
