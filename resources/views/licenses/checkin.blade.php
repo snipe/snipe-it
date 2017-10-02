@@ -17,7 +17,7 @@
     <div class="row">
         <!-- left column -->
         <div class="col-md-7">
-            <form class="form-horizontal" method="post" action="{{ route('licenses.checkin.save', $licenseSeat) }}" autocomplete="off">
+            <form class="form-horizontal" method="post" action="{{ route('licenses.checkin.save', $licenseSeat->id) }}" autocomplete="off">
                 {{csrf_field()}}
 
                 <div class="box box-default">
@@ -50,12 +50,14 @@
                     {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
             </div>
-            <div class="box-footer">
-                <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
-                <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
-            </div>
-        </div> <!-- /.box-->
-</div> <!-- /.col-->
-</div> <!-- /.row-->
+                        <div class="box-footer">
+                            <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
+                            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
+                        </div>
+                    </div> <!-- /.box-->
+            </form>
+        </div> <!-- /.col-md-7-->
+    </div>
+
 
 @stop
