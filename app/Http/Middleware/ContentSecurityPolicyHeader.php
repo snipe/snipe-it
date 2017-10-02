@@ -14,14 +14,14 @@ class ContentSecurityPolicyHeader
      */
     public function handle($request, Closure $next)
     {
-        if ((config('app.debug')=='true')  || (config('app.disable_csp')=='true')) {
+        if ((config('app.debug')=='true')  || (config('app.enable_csp')!='true')) {
             $response = $next($request);
             return $response;
         }
 
         $policy[] = "default-src 'self'";
         $policy[] = "style-src 'self' 'unsafe-inline' oss.maxcdn.com";
-        $policy[] = "script-src 'self' oss.mafxcdn.com cdnjs.cloudflare.com 'nonce-".csrf_token()."'";
+        $policy[] = "script-src 'self' 'unsafe-inline' oss.mafxcdn.com cdnjs.cloudflare.com 'nonce-".csrf_token()."'";
         $policy[] = "connect-src 'self'";
         $policy[] = "object-src 'none'";
         $policy[] = "font-src 'self' data:";

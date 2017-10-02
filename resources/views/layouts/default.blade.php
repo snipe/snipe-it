@@ -84,8 +84,8 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
 
        @else
-            <script src="{{ url(asset('js/html5shiv.js')) }}"></script>
-            <script src="{{ url(asset('js/respond.js')) }}"></script>
+            <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
+            <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
        @endif
        <![endif]-->
   </head>
