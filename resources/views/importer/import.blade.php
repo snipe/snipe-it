@@ -16,7 +16,7 @@
 {{-- Page content --}}
 @section('content')
 <div id="app">
-    <importer inline-template import-url="{{route('api.imports.index')}}" v-cloak>
+    <importer inline-template v-cloak>
         <div class="row">
         <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
@@ -65,7 +65,7 @@
                                     			<import-file
                                                     :key="currentFile.id"
                                                     :file="currentFile"
-                                                    customFieldUrl="{{route('api.customfields.index')}}"
+                                                    :custom-fields="customFields"
                                                     @alert="updateAlert(alert)">
                                     			</import-file>
                                     	</template>

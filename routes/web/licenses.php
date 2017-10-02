@@ -25,7 +25,7 @@ Route::group([ 'prefix' => 'licenses', 'middleware' => ['auth'] ], function () {
     ]);
 
     Route::post('{licenseId}/checkin/{backto?}', [
-    'as' => 'licenses.checkin',
+    'as' => 'licenses.checkin.save',
     'uses' => 'LicensesController@postCheckin'
     ]);
 

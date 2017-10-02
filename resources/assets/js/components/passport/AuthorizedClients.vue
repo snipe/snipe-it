@@ -56,6 +56,7 @@
 
 <script>
     export default {
+        props: ['clientsUrl', 'tokensUrl'],
         /*
          * The component's data.
          */
@@ -91,7 +92,7 @@
              * Get all of the authorized tokens for the user.
              */
             getTokens() {
-                this.$http.get('/oauth/tokens')
+                this.$http.get(this.tokensUrl)
                         .then(response => {
                             this.tokens = response.data;
                         });
@@ -101,7 +102,7 @@
              * Revoke the given token.
              */
             revoke(token) {
-                this.$http.delete('/oauth/tokens/' + token.id)
+                this.$http.delete(this.tokensUrl +'/'+ token.id)
                         .then(response => {
                             this.getTokens();
                         });

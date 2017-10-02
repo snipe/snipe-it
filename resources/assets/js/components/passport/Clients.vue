@@ -219,6 +219,7 @@
         /*
          * The component's data.
          */
+        props: ['clientsUrl'],
         data() {
             return {
                 clients: [],
@@ -271,7 +272,7 @@
              * Get all of the OAuth clients for the user.
              */
             getClients() {
-                this.$http.get('/oauth/clients')
+                this.$http.get(this.clientsUrl)
                         .then(response => {
                             this.clients = response.data;
                         });
@@ -289,7 +290,7 @@
              */
             store() {
                 this.persistClient(
-                    'post', '/oauth/clients',
+                    'post', this.clientsUrl,
                     this.createForm, '#modal-create-client'
                 );
             },
@@ -310,7 +311,7 @@
              */
             update() {
                 this.persistClient(
-                    'put', '/oauth/clients/' + this.editForm.id,
+                    'put', this.clientsUrl + '/' + this.editForm.id,
                     this.editForm, '#modal-edit-client'
                 );
             },
@@ -319,8 +320,10 @@
              * Persist the client to storage using the given form.
              */
             persistClient(method, uri, form, modal) {
+                console.log('persisting');
                 form.errors = [];
 
+                console.log('method: ' + method);
                 this.$http[method](uri, form)
                     .then(response => {
                         this.getClients();
@@ -344,7 +347,7 @@
              * Destroy the given client.
              */
             destroy(client) {
-                this.$http.delete('/oauth/clients/' + client.id)
+                this.$http.delete(this.clientsUrl +'/' + client.id)
                         .then(response => {
                             this.getClients();
                         });

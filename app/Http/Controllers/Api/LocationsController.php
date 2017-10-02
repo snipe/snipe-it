@@ -23,7 +23,7 @@ class LocationsController extends Controller
         $allowed_columns = ['id','name','address','address2','city','state','country','zip','created_at',
         'updated_at','parent_id', 'manager_id'];
 
-        $locations = Location::select([
+        $locations = Location::with('parent', 'manager', 'childLocations')->select([
             'locations.id',
             'locations.name',
             'locations.address',
@@ -37,7 +37,10 @@ class LocationsController extends Controller
             'locations.created_at',
             'locations.updated_at',
             'locations.currency'
-        ])->withCount('assets')->withCount('users');
+        ])->withCount('locationAssets')
+        ->withCount('assignedAssets')
+        ->withCount('assets')
+        ->withCount('users');
 
         if ($request->has('search')) {
             $locations = $locations->TextSearch($request->input('search'));
@@ -52,7 +55,6 @@ class LocationsController extends Controller
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
         return (new LocationsTransformer)->transformLocations($locations, $total);
-
     }
 
 
@@ -74,7 +76,6 @@ class LocationsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.create.success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
-
     }
 
     /**
@@ -109,7 +110,13 @@ class LocationsController extends Controller
         $location->fill($request->all());
 
         if ($location->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success',  (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.update.success')));
+            return response()->json(
+                Helper::formatStandardApiResponse(
+                    'success',
+                    (new LocationsTransformer)->transformLocation($location),
+                    trans('admin/locations/message.update.success')
+                )
+            );
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
@@ -129,7 +136,6 @@ class LocationsController extends Controller
         $location = Location::findOrFail($id);
         $this->authorize('delete', $location);
         $location->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/locations/message.delete.success')));
-
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/locations/message.delete.success')));
     }
 }

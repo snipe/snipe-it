@@ -38,8 +38,8 @@ class LocationsTransformer
                 'state' => e($location->state),
                 'country' => e($location->country),
                 'zip' => e($location->zip),
-                'assets_checkedout' => $location->assets()->count(),
-                'assets_default'    => $location->assignedassets()->count(),
+                'assets_checkedout' => $location->location_assets_count,
+                'assets_default'    => $location->assigned_assets_count,
 
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
