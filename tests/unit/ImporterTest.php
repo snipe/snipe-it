@@ -478,7 +478,7 @@ EOT;
 
         $updatedCSV = <<<'EOT'
 Item name,serial number,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
-Argentum Malachite Athletes Foot Relief,7435753-467734,"Beer, Leannon and Lubowitz",05/15/2019,$1865.34,63 ar,18334,A Legend,Legendary@gov.uk,04/27/2016,yes,true,64,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",05/15/2019,$1865.34,63 ar,18334,A Legend,Legendary@gov.uk,04/27/2016,yes,true,64,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $importer = new LicenseImporter($updatedCSV);
         $importer->setUserId(1)
@@ -501,7 +501,7 @@ EOT;
             'purchase_cost' => 1865.34,
             'purchase_order' => "63 ar",
             'reassignable' => 1,
-            'serial' => '7435753-467734',
+            'serial' => '1aa5b0eb-79c5-40b2-8943-5472a6893c3c',
         ]);
         // License seats are soft deleted
         $this->tester->seeNumRecords(64, 'license_seats', ['deleted_at' => null]);
