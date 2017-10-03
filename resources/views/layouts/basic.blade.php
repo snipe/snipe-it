@@ -42,7 +42,7 @@
 
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
         <center>
-            <img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+            <img style="padding-top: 20px; padding-bottom: 10px; max-width: 150px" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
         </center>
     @endif
   <!-- Content -->
