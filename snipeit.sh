@@ -26,9 +26,7 @@ hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
 ans=default
 hosts=/etc/hosts
-file=master.zip
 tmp=/tmp/$name
-fileName=snipe-it-master
 
 spin[0]="-"
 spin[1]="\\"
@@ -40,25 +38,22 @@ mkdir $tmp
 
 # Debian/Ubuntu friendly f(x)s
 progress () {
-    while kill -0 "$pid" > /dev/null 2>&1
+    while kill -0 $pid > /dev/null 2>&1
         do
             for i in "${spin[@]}"
                 do
-                    if [ -e /proc/"$pid" ]; then
                         echo -ne "\b$i"
                         sleep .1
-                        else
-                        echo -ne "\n\b\n"
-                        fi
                 done
         done
 }
+
 
 #Used for Debian and Ubuntu
 vhenvfile () {
     find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' >/dev/null 2>&1
     apachefile=/etc/apache2/sites-available/$name.conf
-    echo "* Create Virtual host for apache."
+    echo "* Creating Virtual host for apache."
     {
         echo "<VirtualHost *:80>"
         echo "ServerAdmin webmaster@localhost"
@@ -74,17 +69,6 @@ vhenvfile () {
     } >> $apachefile
     echo >> $hosts "127.0.0.1 $hostname $fqdn"
     log "a2ensite $name.conf"
-
-    cp $webdir/$name/.env.example $webdir/$name/.env
-
-    sed -i '1 i\#Created By Snipe-it Installer' $webdir/$name/.env
-    sed -i 's,^\(APP_TIMEZONE=\).*,\1'$(cat /etc/timezone)',' $webdir/$name/.env
-    sed -i 's,^\(DB_HOST=\).*,\1'localhost',' $webdir/$name/.env
-    sed -i 's,^\(DB_DATABASE=\).*,\1'snipeit',' $webdir/$name/.env
-    sed -i 's,^\(DB_USERNAME=\).*,\1'snipeit',' $webdir/$name/.env
-    sed -i 's,^\(DB_PASSWORD=\).*,\1'$mysqluserpw',' $webdir/$name/.env
-    sed -i 's,^\(APP_URL=\).*,\1'http://$fqdn',' $webdir/$name/.env
-    sed -i 's,^\(APP_KEY=\).*,\1'$$random32',' $webdir/$name/.env
 }
 
 perms () {
@@ -100,6 +84,18 @@ perms () {
 
 log () {
     eval "$@" |& tee -a /var/log/snipeit-install.log >/dev/null 2>&1
+}
+
+setenv () {
+    cp $webdir/$name/.env.example $webdir/$name/.env
+
+    sed -i '1 i\#Created By Snipe-it Installer' $webdir/$name/.env
+    sed -i 's,^\(APP_TIMEZONE=\).*,\1'$tzone',' $webdir/$name/.env
+    sed -i 's,^\(DB_HOST=\).*,\1'localhost',' $webdir/$name/.env
+    sed -i 's,^\(DB_DATABASE=\).*,\1'snipeit',' $webdir/$name/.env
+    sed -i 's,^\(DB_USERNAME=\).*,\1'snipeit',' $webdir/$name/.env
+    sed -i 's,^\(DB_PASSWORD=\).*,\1'$mysqluserpw',' $webdir/$name/.env
+    sed -i 's,^\(APP_URL=\).*,\1'http://$fqdn',' $webdir/$name/.env
 }
 
 #CentOS Friendly f(x)s
@@ -231,6 +227,8 @@ case $distro in
         progress
         php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
         a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+        tzone=$(cat /etc/timezone)
+        setenv
         vhenvfile
         wait
         echo >> $hosts "127.0.0.1 $hostname $fqdn"
@@ -247,58 +245,77 @@ case $distro in
         perms
         service apache2 restart
         php artisan key:generate
-        php artisan passport:install
         ;;
     ubuntu)
         #####################################  Install for Ubuntu  ##############################################
-        #Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
-        #Git clone snipeit, create vhost, .env file, mysql install
-        #composer install, set permissions, restart apache.
 
         webdir=/var/www
-        echo -ne "\n* Adding MariaDB repo in the background... ${spin[0]}"
+
+        echo "* Adding MariaDB repository."
         (echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list >/dev/null 2>&1)
         log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
-        echo -ne "\n* Updating with apt-get update in the background... ${spin[0]}"
+
+        echo "* Updating with apt-get update."
         log "apt-get update" & pid=$!
         [ -f /var/lib/dpkg/lock ] && rm -f /var/lib/dpkg/lock
         progress
-        echo -ne "\n* Upgrading packages with apt-get upgrade in the background... ${spin[0]}"
+
+        echo "* Upgrading packages with apt-get upgrade."
         log "apt-get -y upgrade" & pid=$!
         progress
-        echo -ne "\n* Setting up LAMP in the background... ${spin[0]}\n"
-        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php curl" & pid=$!
+
+        echo "* Installing httpd, PHP, MariaDB and other requirements."
+        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php curl git unzip" & pid=$!
         progress
+
         if [ "$version" == "16.04" ]; then
-            log "apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml" & pid=$!
+            log "apt-get install -y php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath" & pid=$!
             progress
             log "phpenmod mcrypt"
             log "phpenmod mbstring"
             log "a2enmod rewrite"
         else
-            log "apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap" & pid=$!
+            log "apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap" & pid=$!
             progress
             log "php5enmod mcrypt"
             log "a2enmod rewrite"
         fi
-        echo -ne "\n* Cloning Snipeit, extracting to $webdir/$name... ${spin[0]}"
+
+        echo "* Cloning Snipe-IT from github to the web directory."
         log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
         progress
+        
+        echo "* Configuring .env file."
+        tzone=$(cat /etc/timezone)
+        setenv
+        
         vhenvfile
-        echo -e "* MySQL Phase next.\n"
+        
+        echo "* Starting the MariaDB server.";       
         service mysql status >/dev/null || service mysql start
+        
+        echo "* Securing MariaDB server.";
         /usr/bin/mysql_secure_installation
-        echo -e "* Creating MySQL Database and user.\n* Please Input your MySQL/MariaDB root password created in the previous step.: "
+        
+        echo "* Creating MariaDB Database/User."
+        echo "* Please Input your MariaDB root password:"
         mysql -u root -p < $dbsetup
-        echo -e "\n* Securing Mysql\n* Installing and configuring composer"
+
+        echo "* Installing and running composer."
         cd $webdir/$name/
         curl -sS https://getcomposer.org/installer  | php
         php composer.phar install --no-dev --prefer-source
+        
         perms
         chown -R www-data:www-data "/var/www/$name"
+        
         service apache2 restart
-        php artisan key:generate
-        php artisan passport:install
+
+        echo "* Generating the application key."
+        php artisan key:generate --force
+
+        echo "* Artisan Migrate."
+        php artisan migrate --force
         ;;
     centos )
     if [[ "$version" =~ ^6 ]]; then
@@ -307,7 +324,7 @@ case $distro in
         webdir=/var/www/html
         #Allow us to get the mysql engine
         echo ""
-        echo "##  Adding IUS, epel-release and mariaDB repositories.";
+        echo "##  Adding IUS, epel-release and MariaDB repositories.";
         mariadbRepo=/etc/yum.repos.d/MariaDB.repo
         touch "$mariadbRepo"
         {
@@ -324,7 +341,7 @@ case $distro in
         log "rpm -Uvh "$tmp/ius-release*.rpm""
 
         #Install PHP and other needed stuff
-        echo "##  Installing PHP and other requirements.";
+        echo "##  Installing httpd, PHP, MariaDB and other requirements.";
         PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml"
 
         for p in $PACKAGES;do
@@ -342,15 +359,15 @@ case $distro in
         log "git clone https://github.com/snipe/snipe-it $webdir/$name"
 
         # Make mariaDB start on boot and restart the daemon
-        echo "##  Starting the mariaDB server.";
+        echo "##  Starting the MariaDB server.";
         chkconfig mysql on
         /sbin/service mysql start
 
-        echo "##  Securing mariaDB server.";
+        echo "##  Securing MariaDB server.";
         /usr/bin/mysql_secure_installation
 
-        echo "##  Creating MySQL Database/User."
-        echo "##  Please Input your MySQL/MariaDB root password: "
+        echo "##  Creating MariaDB Database/User."
+        echo "##  Please Input your MariaDB root password: "
         mysql -u root -p < $dbsetup
 
         #Create the new virtual host in Apache and enable rewrite
@@ -382,22 +399,12 @@ case $distro in
         echo "##  Starting the apache server.";
         chkconfig httpd on
         /sbin/service httpd start
-
+        
+        echo "##  Configuring .env file."
         tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
-        echo "## Configuring .env file."
+        setenv
 
-        cp $webdir/$name/.env.example $webdir/$name/.env
-
-        sed -i '1 i\#Created By Snipe-it Installer' $webdir/$name/.env
-        sed -i 's,^\(APP_TIMEZONE=\).*,\1'$tzone',' $webdir/$name/.env
-        sed -i 's,^\(DB_HOST=\).*,\1'localhost',' $webdir/$name/.env
-        sed -i 's,^\(DB_DATABASE=\).*,\1'snipeit',' $webdir/$name/.env
-        sed -i 's,^\(DB_USERNAME=\).*,\1'snipeit',' $webdir/$name/.env
-        sed -i 's,^\(DB_PASSWORD=\).*,\1'$mysqluserpw',' $webdir/$name/.env
-        sed -i 's,^\(APP_URL=\).*,\1'http://$fqdn',' $webdir/$name/.env
-        sed -i 's,^\(APP_KEY=\).*,\1'$$random32',' $webdir/$name/.env
-
-        echo "##  Configure composer"
+        echo "##  Installing and running composer."
         cd $webdir/$name
         curl -sS https://getcomposer.org/installer | php
         php composer.phar install --no-dev --prefer-source
@@ -428,13 +435,13 @@ case $distro in
         webdir=/var/www/html
 
         #Allow us to get the mysql engine
-        echo -e "\n##  Adding IUS, epel-release and mariaDB repositories.";
+        echo -e "\n##  Adding IUS, epel-release and MariaDB repositories.";
         log "yum -y install wget epel-release"
         log "wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm"
         log "rpm -Uvh $tmp/ius-release*.rpm"
 
         #Install PHP and other requirements
-        echo "##  Installing PHP and other requirements.";
+        echo "##  Installing httpd, PHP, MariaDB and other requirements.";
         PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml"
 
         for p in $PACKAGES;do
@@ -452,17 +459,17 @@ case $distro in
         log "git clone https://github.com/snipe/snipe-it $webdir/$name"
 
         # Make mariaDB start on boot and restart the daemon
-        echo "##  Starting the mariaDB server.";
+        echo "##  Starting the MariaDB server.";
         systemctl enable mariadb.service
         systemctl start mariadb.service
 
-        echo "##  Securing mariaDB server.";
+        echo "##  Securing MariaDB server.";
         echo "";
         echo "";
         /usr/bin/mysql_secure_installation
 
-        echo "##  Creating MySQL Database/User."
-        echo "##  Please Input your MySQL/MariaDB root password "
+        echo "##  Creating MariaDB Database/User."
+        echo "##  Please Input your MariaDB root password "
         mysql -u root -p < "$dbsetup"
 
         ##TODO make sure the apachefile doesnt exist isnt already in there
@@ -499,23 +506,12 @@ case $distro in
         systemctl enable httpd.service
         systemctl restart httpd.service
 
+        echo "##  Configuring .env file."
         tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
-        echo "## Configuring .env file."
+        setenv
 
-        cp $webdir/$name/.env.example $webdir/$name/.env
-
-        sed -i '1 i\#Created By Snipe-it Installer' $webdir/$name/.env
-        sed -i 's,^\(APP_TIMEZONE=\).*,\1'$tzone',' $webdir/$name/.env
-        sed -i 's,^\(DB_HOST=\).*,\1'localhost',' $webdir/$name/.env
-        sed -i 's,^\(DB_DATABASE=\).*,\1'snipeit',' $webdir/$name/.env
-        sed -i 's,^\(DB_USERNAME=\).*,\1'snipeit',' $webdir/$name/.env
-        sed -i 's,^\(DB_PASSWORD=\).*,\1'$mysqluserpw',' $webdir/$name/.env
-        sed -i 's,^\(APP_URL=\).*,\1'http://$fqdn',' $webdir/$name/.env
-        sed -i 's,^\(APP_KEY=\).*,\1'$$random32',' $webdir/$name/.env
-
-        #Install / configure composer
+        echo "##  Installing and running composer."
         cd $webdir/$name
-
         curl -sS https://getcomposer.org/installer | php
         php composer.phar install --no-dev --prefer-source
 
@@ -525,7 +521,7 @@ case $distro in
 
         #Check if SELinux is enforcing
         if [ "$(getenforce)" == "Enforcing" ]; then
-            #Add SELinux and firewall exception/rules
+            echo "##  Configuring SELinux."
             #Required for ldap integration
             setsebool -P httpd_can_connect_ldap on
             #Sets SELinux context type so that scripts running in the web server process are allowed read/write access
