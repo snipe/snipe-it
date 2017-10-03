@@ -7,6 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
 use Illuminate\Validation\ValidationException;
+use Log;
 
 class Handler extends ExceptionHandler
 {
@@ -34,8 +35,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        \Log::error($exception); // rollbar
-        parent::report($exception);
+        if ($this->shouldReport($exception)) {
+            Log::error($exception);
+            return parent::report($exception);
+        }
     }
 
     /**

@@ -54,6 +54,7 @@ $('.snipe-table').bootstrapTable({
                 ignoreColumn: ['actions','change','checkbox','checkincheckout','icon'],
                 worksheetName: "Snipe-IT Export",
                 jspdf: {
+                    orientation: 'l',
                     autotable: {
                         styles: {
                             rowHeight: 20,
