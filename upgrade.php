@@ -9,7 +9,7 @@ if (($username=='root') || ($username=='admin')) {
 }
 
 
-($argv[0]) ? $branch = $argv[0] : $branch = 'master';
+($argv[1]) ? $branch = $argv[1] : $branch = 'master';
 
 echo "Welcome to the Snipe-IT upgrader.\n\n";
 echo "Please note that this script will not download the latest Snipe-IT \n";
