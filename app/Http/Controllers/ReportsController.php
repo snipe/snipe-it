@@ -543,8 +543,8 @@ class ReportsController extends Controller
 
 
             if (e(Input::get('assigned_to')) == '1') {
-                if ($asset->assignedTo) {
-                    $row[] = '"' .e($asset->assignedTo->present()->name()). '"';
+                if ($asset->assignedto) {
+                    $row[] = '"' .e($asset->assignedto->present()->name()). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
@@ -553,7 +553,7 @@ class ReportsController extends Controller
             if (e(Input::get('username')) == '1') {
                 // Only works if we're checked out to a user, not anything else.
                 if ($asset->checkedOutToUser()) {
-                    $row[] = '"' .e($asset->assignedTo->username). '"';
+                    $row[] = '"' .e($asset->assignedto->username). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
@@ -562,7 +562,7 @@ class ReportsController extends Controller
             if (e(Input::get('employee_num')) == '1') {
                 // Only works if we're checked out to a user, not anything else.
                 if ($asset->checkedOutToUser()) {
-                    $row[] = '"' .e($asset->assignedTo->employee_num). '"';
+                    $row[] = '"' .e($asset->assignedto->employee_num). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
