@@ -8,9 +8,13 @@ if (($username=='root') || ($username=='admin')) {
     die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
 }
 
+
+($argv[1]) ? $branch = $argv[1] : $branch = 'master';
+
 echo "Welcome to the Snipe-IT upgrader.\n\n";
 echo "Please note that this script will not download the latest Snipe-IT \n";
-echo "files for you, it simply runs the standard composer and artisan \n";
+echo "files for you unless you have git installed. \n";
+echo "It simply runs the standard composer and artisan \n";
 echo "commands needed to finalize the upgrade after \n\n";
 
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
@@ -25,15 +29,35 @@ echo "--------------------------------------------------------\n\n";
 $backup = shell_exec('php artisan snipeit:backup');
 echo '-- '.$backup."\n\n";
 
-
 echo "--------------------------------------------------------\n";
 echo "STEP 2: Putting application into maintenance mode: \n";
 echo "--------------------------------------------------------\n\n";
 $down = shell_exec('php artisan down');
 echo '-- '.$down."\n\n";
 
+
 echo "--------------------------------------------------------\n";
-echo "Step 3: Cleaning up old cached files:\n";
+echo "STEP 3: Pulling latest from Git (".$branch." branch): \n";
+echo "--------------------------------------------------------\n\n";
+$git_version = shell_exec('git --version');
+
+if ((strpos('git version', $git_version)) === false) {
+    echo "Git is installed. \n";
+    $git_checkout = shell_exec('git checkout '.$branch);
+    $git_stash = shell_exec('git stash');
+    $git_pull = shell_exec('git pull');
+    echo '-- '.$git_stash;
+    echo '-- '.$git_checkout;
+    echo '-- '.$git_pull;
+} else {
+    echo "Git is NOT installed. You can still use this upgrade script to run common \n";
+    echo "migration commands, but you will have to manually download the updated files. \n\n";
+}
+
+
+
+echo "--------------------------------------------------------\n";
+echo "Step 4: Cleaning up old cached files:\n";
 echo "--------------------------------------------------------\n\n";
 
 
@@ -69,7 +93,7 @@ echo '-- '.$view_clear;
 echo "\n";
 
 echo "--------------------------------------------------------\n";
-echo "Step 4: Updating composer dependencies:\n";
+echo "Step 5: Updating composer dependencies:\n";
 echo "(This may take an moment.)\n";
 echo "--------------------------------------------------------\n\n";
 
@@ -91,7 +115,7 @@ echo $composer."\n\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 5: Migrating database:\n";
+echo "Step 6: Migrating database:\n";
 echo "--------------------------------------------------------\n\n";
 
 $migrations = shell_exec('php artisan migrate --force');
@@ -99,7 +123,7 @@ echo '-- '.$migrations."\n\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 6: Checking for OAuth keys:\n";
+echo "Step 7: Checking for OAuth keys:\n";
 echo "--------------------------------------------------------\n\n";
 
 
@@ -113,7 +137,7 @@ if ((!file_exists('storage/oauth-public.key')) || (!file_exists('storage/oauth-p
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 7: Caching routes and config:\n";
+echo "Step 8: Caching routes and config:\n";
 echo "--------------------------------------------------------\n\n";
 $config_cache = shell_exec('php artisan config:cache');
 $route_cache = shell_exec('php artisan route:cache');
@@ -124,7 +148,7 @@ echo "\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 8: Taking application out of maintenance mode:\n";
+echo "Step 9: Taking application out of maintenance mode:\n";
 echo "--------------------------------------------------------\n\n";
 
 $up = shell_exec('php artisan up');

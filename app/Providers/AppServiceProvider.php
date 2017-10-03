@@ -105,6 +105,10 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
+        if (($this->app->environment('production'))  && (config('services.rollbar.access_token'))){
+            $this->app->register(\Jenssegers\Rollbar\RollbarServiceProvider::class);
+        }
+
         foreach ($monolog->getHandlers() as $handler) {
             $handler->setLevel($log_level);
         }
