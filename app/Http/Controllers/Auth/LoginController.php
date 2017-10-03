@@ -47,7 +47,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
-        \Session::put('backUrl', URL::previous());
+        \Session::put('backUrl', \URL::previous());
     }
 
 
