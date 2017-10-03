@@ -126,7 +126,7 @@ class ReportsController extends Controller
                     trans('admin/hardware/table.purchase_date'),
                     trans('admin/hardware/table.purchase_cost'),
                     trans('admin/hardware/form.order'),
-                    trans('admin/hardware/form.supplier'),
+                    trans('general.supplier'),
                     trans('admin/hardware/table.checkoutto'),
                     trans('admin/hardware/table.checkout_date'),
                     trans('admin/hardware/table.location'),
@@ -154,7 +154,7 @@ class ReportsController extends Controller
                         ($asset->supplier) ? e($asset->supplier->name) : '',
                         ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        e($asset->assetLoc->present()->name()),
+                        ($asset->assetLoc) ? e($asset->assetLoc->present()->name()) : '',
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
                     foreach ($customfields as $field) {
