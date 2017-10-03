@@ -46,9 +46,9 @@ if ((strpos('git version', $git_version)) === false) {
     $git_checkout = shell_exec('git checkout '.$branch);
     $git_stash = shell_exec('git stash');
     $git_pull = shell_exec('git pull');
-    echo '-- '.$git_stash."\n";
-    echo '-- '.$git_checkout."\n";
-    echo '-- '.$git_pull."\n";
+    echo '-- '.$git_stash;
+    echo '-- '.$git_checkout;
+    echo '-- '.$git_pull;
 } else {
     echo "Git is NOT installed. You can still use this upgrade script to run common \n";
     echo "migration commands, but you will have to manually download the updated files. \n\n";
