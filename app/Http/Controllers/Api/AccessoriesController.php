@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Http\Transformers\AccessoriesTransformer;
+use App\Models\Company;
 
 
 class AccessoriesController extends Controller
@@ -128,9 +129,15 @@ class AccessoriesController extends Controller
     public function checkedout($id)
     {
         $this->authorize('view', Accessory::class);
-        $accessory = Accessory::findOrFail($id)->with('users')->first();
-        $total = $accessory->users->count();
-        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $total);
+
+        $accessory = Accessory::findOrFail($id);
+        if (!Company::isCurrentUserHasAccess($accessory)) {
+            return ['total' => 0, 'rows' => []];
+        }
+        $accessory_users = $accessory->users;
+        $total = $accessory_users->count();
+
+        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory_users, $total);
     }
 
 
