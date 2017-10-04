@@ -2,14 +2,26 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/models/table.title') }}
+
+  @if (Input::get('status')=='deleted')
+    {{ trans('admin/models/general.view_deleted') }}
+    {{ trans('admin/models/table.title') }}
+    @else
+    {{ trans('admin/models/general.view_models') }}
+  @endif
 @parent
 @stop
 
 {{-- Page title --}}
 @section('header_right')
   <a href="{{ route('models.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
-  <a href="{{ route('models.index', ['status' => 'Deleted']) }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  {{ trans('admin/models/general.view_deleted') }}</a>
+
+  @if (Input::get('status')=='deleted')
+    <a class="btn btn-default pull-right" href="{{ route('models.index') }}" style="margin-right: 5px;">{{ trans('admin/models/general.view_models') }}</a>
+  @else
+    <a class="btn btn-default pull-right" href="{{ route('models.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/models/general.view_deleted') }}</a>
+  @endif
+
 @stop
 
 
