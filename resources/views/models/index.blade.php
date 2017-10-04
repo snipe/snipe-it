@@ -40,12 +40,15 @@
            'id' => 'bulkForm']) }}
         <div class="row">
           <div class="col-md-12">
+
+            @if (Input::get('status')!='deleted')
               <div id="toolbar">
                 <select name="bulk_actions" class="form-control select2" style="width: 300px;">
                   <option value="edit">Bulk Edit</option>
                 </select>
                 <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
               </div>
+            @endif
 
 
 
