@@ -31,12 +31,16 @@ class AssetModelsController extends Controller
         $this->authorize('view', AssetModel::class);
         $allowed_columns = ['id','image','name','model_number','eol','notes','created_at','manufacturer'];
 
-        $assetmodels = AssetModel::select(['models.id','models.image','models.name','model_number','eol','models.notes','models.created_at','category_id','manufacturer_id','depreciation_id','fieldset_id'])
+        $assetmodels = AssetModel::select(['models.id','models.image','models.name','model_number','eol','models.notes','models.created_at','category_id','manufacturer_id','depreciation_id','fieldset_id', 'models.deleted_at'])
             ->with('category','depreciation', 'manufacturer','fieldset')
             ->withCount('assets');
 
         if ($request->has('search')) {
             $assetmodels->TextSearch($request->input('search'));
+        }
+
+        if ($request->has('status')) {
+            $assetmodels->onlyTrashed();
         }
 
 
