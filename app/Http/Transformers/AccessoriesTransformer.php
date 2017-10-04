@@ -59,14 +59,12 @@ class AccessoriesTransformer
     }
 
 
-    public function transformCheckedoutAccessory (Accessory $accessory, $total)
+    public function transformCheckedoutAccessory ($accessory_users, $total)
     {
 
 
-        
-
         $array = array();
-        foreach ($accessory->users as $user) {
+        foreach ($accessory_users as $user) {
             $array[] = [
                 'assigned_pivot_id' => $user->pivot->id,
                 'id' => (int) $user->id,
