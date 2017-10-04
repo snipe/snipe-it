@@ -13,6 +13,8 @@
     {{ trans('general.pending') }}
   @elseif (Input::get('status')=='RTD')
     {{ trans('general.ready_to_deploy') }}
+  @elseif (Input::get('status')=='Deployed')
+    {{ trans('general.deployed') }}
   @elseif (Input::get('status')=='Undeployable')
     {{ trans('general.undeployable') }}
   @elseif (Input::get('status')=='Deployable')
@@ -40,7 +42,7 @@
 @stop
 
 @section('header_right')
-  <a href="{{ route('reports/export/assets') }}" style="margin-right: 5px;" class="btn btn-default"><i class="fa fa-download icon-white"></i>
+  <a href="{{ route('reports.export.assets', ['status'=> e(Input::get('status'))]) }}" style="margin-right: 5px;" class="btn btn-default"><i class="fa fa-download icon-white"></i>
     {{ trans('admin/hardware/table.dl_csv') }}</a>
   <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
 @stop

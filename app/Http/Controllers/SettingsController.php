@@ -414,7 +414,7 @@ class SettingsController extends Controller
                 $file_name = "logo.".$image->getClientOriginalExtension();
                 $path = public_path('uploads');
                 if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 40, function ($constraint) {
+                    Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })->save($path.'/'.$file_name);

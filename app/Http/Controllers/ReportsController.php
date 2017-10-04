@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Reports for
@@ -102,18 +103,45 @@ class ReportsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\Response
     */
-    public function exportAssetReport()
+    public function exportAssetReport(Request $request)
     {
 
          \Debugbar::disable();
 
         $customfields = CustomField::get();
 
-        $response = new StreamedResponse(function () use ($customfields) {
+        $response = new StreamedResponse(function () use ($customfields, $request) {
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            Asset::with('assignedTo', 'assetLoc','defaultLoc','assignedTo','model','supplier','assetstatus','model.manufacturer')->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
+            $assets = Asset::with('assignedTo', 'assetLoc','defaultLoc','assignedTo','model','supplier','assetstatus','model.manufacturer');
+
+                // This is used by the sidenav, mostly
+            switch ($request->input('status')) {
+                case 'Deleted':
+                    $assets->withTrashed()->Deleted();
+                    break;
+                case 'Pending':
+                    $assets->Pending();
+                    break;
+                case 'RTD':
+                    $assets->RTD();
+                    break;
+                case 'Undeployable':
+                    $assets->Undeployable();
+                    break;
+                case 'Archived':
+                    $assets->Archived();
+                    break;
+                case 'Requestable':
+                    $assets->RequestableAssets();
+                    break;
+                case 'Deployed':
+                    $assets->Deployed();
+                    break;
+            }
+
+            $assets->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
                 $headers=[
                     trans('general.company'),
                     trans('admin/hardware/table.asset_tag'),
@@ -126,7 +154,7 @@ class ReportsController extends Controller
                     trans('admin/hardware/table.purchase_date'),
                     trans('admin/hardware/table.purchase_cost'),
                     trans('admin/hardware/form.order'),
-                    trans('admin/hardware/form.supplier'),
+                    trans('general.supplier'),
                     trans('admin/hardware/table.checkoutto'),
                     trans('admin/hardware/table.checkout_date'),
                     trans('admin/hardware/table.location'),
@@ -154,7 +182,7 @@ class ReportsController extends Controller
                         ($asset->supplier) ? e($asset->supplier->name) : '',
                         ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        e($asset->assetLoc->present()->name()),
+                        ($asset->assetLoc) ? e($asset->assetLoc->present()->name()) : '',
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
                     foreach ($customfields as $field) {
@@ -168,7 +196,8 @@ class ReportsController extends Controller
             fclose($handle);
         }, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="assets-'.date('Y-m-d-his').'.csv"',
+            'Content-Disposition'
+                => 'attachment; filename="'.(($request->has('status')) ? trim($request->input('status')) : 'all').'-assets-'.date('Y-m-d-his').'.csv"',
         ]);
 
         return $response;

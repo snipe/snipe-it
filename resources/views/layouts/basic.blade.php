@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
-    <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
 
 
     @if (($snipeSettings) && ($snipeSettings->header_color))
@@ -42,7 +42,7 @@
 
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
         <center>
-            <img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+            <img style="padding-top: 20px; padding-bottom: 10px; max-width: 150px" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
         </center>
     @endif
   <!-- Content -->
