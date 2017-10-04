@@ -247,13 +247,13 @@ case $distro in
         php artisan key:generate
         ;;
     ubuntu)
-        #####################################  Install for Ubuntu  ##############################################
-
+    if [[ "$version" =~ 1[6-7] ]]; then
+        #####################################  Install for Ubuntu 16+  ##############################################
         webdir=/var/www
 
         echo "* Adding MariaDB repository."
-        (echo "deb [arch=amd64,i386] http://ftp.hosteurope.de/mirror/mariadb.org/repo/10.1/ubuntu $codename main" | tee /etc/apt/sources.list.d/mariadb.list >/dev/null 2>&1)
         log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
+        log "add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
 
         echo "* Updating with apt-get update."
         log "apt-get update" & pid=$!
@@ -265,21 +265,12 @@ case $distro in
         progress
 
         echo "* Installing httpd, PHP, MariaDB and other requirements."
-        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php curl git unzip" & pid=$!
+        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip" & pid=$!
         progress
 
-        if [ "$version" == "16.04" ]; then
-            log "apt-get install -y php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath" & pid=$!
-            progress
-            log "phpenmod mcrypt"
-            log "phpenmod mbstring"
-            log "a2enmod rewrite"
-        else
-            log "apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap" & pid=$!
-            progress
-            log "php5enmod mcrypt"
-            log "a2enmod rewrite"
-        fi
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
 
         echo "* Cloning Snipe-IT from github to the web directory."
         log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
@@ -296,7 +287,7 @@ case $distro in
         
         echo "* Securing MariaDB server.";
         /usr/bin/mysql_secure_installation
-        
+    
         echo "* Creating MariaDB Database/User."
         echo "* Please Input your MariaDB root password:"
         mysql -u root -p < $dbsetup
@@ -316,8 +307,76 @@ case $distro in
 
         echo "* Artisan Migrate."
         php artisan migrate --force
-        ;;
-    centos )
+    
+    elif [[ "$version" =~ 14 ]]; then
+        #####################################  Install for Ubuntu 14  ##############################################
+        webdir=/var/www
+
+        echo "* Adding MariaDB and ppa:ondrej/php repositories."
+        log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db"
+        log "add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
+        #PHP7 repository
+        log "add-apt-repository ppa:ondrej/php -y"
+
+        echo "* Updating with apt-get update."
+        log "apt-get update" & pid=$!
+        [ -f /var/lib/dpkg/lock ] && rm -f /var/lib/dpkg/lock
+        progress
+
+        echo "* Upgrading packages with apt-get upgrade."
+        log "apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing httpd, PHP, MariaDB and other requirements."
+        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip" & pid=$!
+        progress
+
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+
+        echo "* Cloning Snipe-IT from github to the web directory."
+        log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
+        progress
+        
+        echo "* Configuring .env file."
+        tzone=$(cat /etc/timezone)
+        setenv
+        
+        vhenvfile
+        
+        echo "* Starting the MariaDB server.";       
+        service mysql status >/dev/null || service mysql start
+        
+        echo "* Securing MariaDB server.";
+        /usr/bin/mysql_secure_installation
+    
+        echo "* Creating MariaDB Database/User."
+        echo "* Please Input your MariaDB root password:"
+        mysql -u root -p < $dbsetup
+
+        echo "* Installing and running composer."
+        cd $webdir/$name/
+        curl -sS https://getcomposer.org/installer  | php
+        php composer.phar install --no-dev --prefer-source
+        
+        perms
+        chown -R www-data:www-data "/var/www/$name"
+        
+        service apache2 restart
+
+        echo "* Generating the application key."
+        php artisan key:generate --force
+
+        echo "* Artisan Migrate."
+        php artisan migrate --force
+
+    else
+        echo "Unable to Handle Ubuntu Version #.  Version Found: " $version
+    return 1
+    fi
+    ;;
+    centos)
     if [[ "$version" =~ ^6 ]]; then
         #####################################  Install for Centos/Redhat 6  ##############################################
 
