@@ -189,18 +189,6 @@ case $setpw in
 esac
 done
 
-#Snipe says we need a new 32bit key, so let's create one randomly and inject it into the file
-
-#db_setup.sql will be injected to the database during install.
-#Again, this file should be removed, which will be a prompt at the end of the script.
-dbsetup=$tmp/db_setup.sql
-echo >> $dbsetup "CREATE DATABASE snipeit;"
-echo >> $dbsetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
-
-#Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
-chown root:root $dbsetup
-chmod 700 $dbsetup
-
 ## TODO: Progress tracker on each step
 
 case $distro in
@@ -238,7 +226,7 @@ case $distro in
         # and just set the snipeit database user at the beginning
         /usr/bin/mysql_secure_installation
         echo -e "* Creating Mysql Database and User.\n##  Please Input your MySQL/MariaDB root password: "
-        mysql -u root -p < $dbsetup
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
         cd $webdir/$name/
         curl -sS https://getcomposer.org/installer | php
         php composer.phar install --no-dev --prefer-source
@@ -290,7 +278,7 @@ case $distro in
     
         echo "* Creating MariaDB Database/User."
         echo "* Please Input your MariaDB root password:"
-        mysql -u root -p < $dbsetup
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
         echo "* Installing and running composer."
         cd $webdir/$name/
@@ -353,7 +341,7 @@ case $distro in
     
         echo "* Creating MariaDB Database/User."
         echo "* Please Input your MariaDB root password:"
-        mysql -u root -p < $dbsetup
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
         echo "* Installing and running composer."
         cd $webdir/$name/
@@ -396,8 +384,8 @@ case $distro in
         } >> "$mariadbRepo"
 
         log "yum -y install wget epel-release"
-        log "wget -P "$tmp/" https://centos6.iuscommunity.org/ius-release.rpm"
-        log "rpm -Uvh "$tmp/ius-release*.rpm""
+        log "yum -y install https://centos6.iuscommunity.org/ius-release.rpm"
+        log "rpm --import /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY"
 
         #Install PHP and other needed stuff
         echo "##  Installing httpd, PHP, MariaDB and other requirements.";
@@ -427,7 +415,7 @@ case $distro in
 
         echo "##  Creating MariaDB Database/User."
         echo "##  Please Input your MariaDB root password: "
-        mysql -u root -p < $dbsetup
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
         #Create the new virtual host in Apache and enable rewrite
         echo "##  Creating the new virtual host in Apache.";
@@ -496,8 +484,8 @@ case $distro in
         #Allow us to get the mysql engine
         echo -e "\n##  Adding IUS, epel-release and MariaDB repositories.";
         log "yum -y install wget epel-release"
-        log "wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm"
-        log "rpm -Uvh $tmp/ius-release*.rpm"
+        log "yum -y install https://centos7.iuscommunity.org/ius-release.rpm"
+        log "rpm --import /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY"
 
         #Install PHP and other requirements
         echo "##  Installing httpd, PHP, MariaDB and other requirements.";
@@ -529,7 +517,7 @@ case $distro in
 
         echo "##  Creating MariaDB Database/User."
         echo "##  Please Input your MariaDB root password "
-        mysql -u root -p < "$dbsetup"
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
         ##TODO make sure the apachefile doesnt exist isnt already in there
 
