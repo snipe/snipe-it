@@ -16,8 +16,14 @@
 
 # ensure running as root
 if [ "$(id -u)" != "0" ]; then
-  exec sudo "$0" "$@"
+    #Debian doesnt have sudo if root has a password.
+    if ! hash sudo 2>/dev/null; then
+        exec su -c "$0" "$@"
+    else
+        exec sudo "$0" "$@"
+    fi
 fi
+
 #First things first, let's set some variables and find our distro.
 clear
 
@@ -26,15 +32,11 @@ hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
 ans=default
 hosts=/etc/hosts
-tmp=/tmp/$name
 
 spin[0]="-"
 spin[1]="\\"
 spin[2]="|"
 spin[3]="/"
-
-rm -rf ${tmp:?}
-mkdir $tmp
 
 # Debian/Ubuntu friendly f(x)s
 progress () {
@@ -47,7 +49,6 @@ progress () {
                 done
         done
 }
-
 
 #Used for Debian and Ubuntu
 vhenvfile () {
@@ -124,7 +125,6 @@ else
     distro="unsupported"
 fi
 
-
 echo "
        _____       _                  __________
       / ___/____  (_)___  ___        /  _/_  __/
@@ -134,7 +134,6 @@ echo "
                 /_/
 "
 
-echo ""
 echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for Centos, Debian and Ubuntu!"
 echo ""
@@ -158,7 +157,6 @@ case $distro in
         ;;
 esac
 shopt -u nocasematch
-#Get your FQDN.
 
 echo -n "  Q. What is the FQDN of your server? ($fqdn): "
 read fqdn
@@ -168,7 +166,6 @@ fi
 echo "     Setting to $fqdn"
 echo ""
 
-#Do you want to set your own passwords, or have me generate random ones?
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
 echo -n "  Q. Do you want to automatically create the database user password? (y/n) "
 read setpw
@@ -189,54 +186,66 @@ case $setpw in
 esac
 done
 
-## TODO: Progress tracker on each step
+#TODO: Lets not install snipeit application under root
+#TODO: Make progress tracker go on the same line of the step being run
+#TODO: Progress tracker on each step
 
 case $distro in
     debian)
-        #####################################  Install for Debian ##############################################
-        #Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
-        #Git clone snipeit, create vhost, edit hosts file, create .env file, mysql install
-        #composer install, set permissions, restart apache.
-        #BTW, Debian, I swear, you're such a pain.
-
+        #####################################  Install for Debian 9 ##############################################
         webdir=/var/www
-        echo -e "\n* Updating Debian packages in the background... ${spin[0]}\n"
-        apt-get update >> /var/log/snipeit-install.log & pid=$! 2>&1
-        wait
-        apt-get upgrade >> /var/log/snipeit-install.log & pid=$! 2>&1
-        wait
-        echo -e "\n* Installing packages... ${spin[0]}\n"
-        echo -e "\n* Going to suppress more messages that you don't need to worry about. Please wait... ${spin[0]}"
-        DEBIAN_FRONTEND=noninteractive apt-get -y install mariadb-server mariadb-client apache2 git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl >> /var/log/snipeit-install.log & pid=$! 2>&1
+        
+        echo "* Updating with apt-get update."
+        log "apt-get update" & pid=$!
         progress
-        wait
-        echo -e "\n* Cloning Snipeit, extracting to $webdir/$name..."
-        git clone https://github.com/snipe/snipe-it $webdir/$name >> /var/log/snipeit-install.log & pid=$! 2>&1
+
+        echo "* Upgrading packages with apt-get upgrade."
+        log "apt-get -y upgrade" & pid=$!
         progress
-        php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
-        a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+
+        echo "* Installing httpd, PHP, MariaDB and other requirements."
+        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip" & pid=$!
+        progress
+
+        log "a2enmod rewrite"
+
+        echo "* Cloning Snipe-IT from github to the web directory."
+        log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
+        progress
+        
         tzone=$(cat /etc/timezone)
         setenv
         vhenvfile
         wait
         echo >> $hosts "127.0.0.1 $hostname $fqdn"
         a2ensite $name.conf
-        echo -e "* Modify the Snipe-It files necessary for a production environment.\n* Securing Mysql"
-        # Have user set own root password when securing install
-        # and just set the snipeit database user at the beginning
+        
+        echo "* Securing MariaDB server.";
         /usr/bin/mysql_secure_installation
-        echo -e "* Creating Mysql Database and User.\n##  Please Input your MySQL/MariaDB root password: "
+        
+        echo "* Creating MariaDB Database/User."
+        echo "* Please Input your MariaDB root password:"
         mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+        
+        echo "* Installing and running composer."
         cd $webdir/$name/
         curl -sS https://getcomposer.org/installer | php
         php composer.phar install --no-dev --prefer-source
+        
         perms
+        chown -R www-data:www-data "/var/www/$name"
+
         service apache2 restart
-        php artisan key:generate
+        
+        echo "* Generating the application key."
+        php artisan key:generate --force
+
+        echo "* Artisan Migrate."
+        php artisan migrate --force
         ;;
     ubuntu)
     if [[ "$version" =~ 1[6-7] ]]; then
-        #####################################  Install for Ubuntu 16+  ##############################################
+        #####################################  Install for Ubuntu 16-17  ##############################################
         webdir=/var/www
 
         echo "* Adding MariaDB repository."
@@ -367,10 +376,8 @@ case $distro in
     centos)
     if [[ "$version" =~ ^6 ]]; then
         #####################################  Install for Centos/Redhat 6  ##############################################
-
         webdir=/var/www/html
-        #Allow us to get the mysql engine
-        echo ""
+
         echo "##  Adding IUS, epel-release and MariaDB repositories.";
         mariadbRepo=/etc/yum.repos.d/MariaDB.repo
         touch "$mariadbRepo"
@@ -387,7 +394,6 @@ case $distro in
         log "yum -y install https://centos6.iuscommunity.org/ius-release.rpm"
         log "rpm --import /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY"
 
-        #Install PHP and other needed stuff
         echo "##  Installing httpd, PHP, MariaDB and other requirements.";
         PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml"
 
@@ -478,16 +484,13 @@ case $distro in
 
     elif [[ "$version" =~ ^7 ]]; then
         #####################################  Install for Centos/Redhat 7  ##############################################
-
         webdir=/var/www/html
 
-        #Allow us to get the mysql engine
         echo -e "\n##  Adding IUS, epel-release and MariaDB repositories.";
         log "yum -y install wget epel-release"
         log "yum -y install https://centos7.iuscommunity.org/ius-release.rpm"
         log "rpm --import /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY"
 
-        #Install PHP and other requirements
         echo "##  Installing httpd, PHP, MariaDB and other requirements.";
         PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml"
 
@@ -502,25 +505,21 @@ case $distro in
         done;
 
         echo -e "\n##  Cloning Snipe-IT from github to the web directory.";
-
         log "git clone https://github.com/snipe/snipe-it $webdir/$name"
 
-        # Make mariaDB start on boot and restart the daemon
+        #Make mariaDB start on boot and restart the daemon
         echo "##  Starting the MariaDB server.";
         systemctl enable mariadb.service
         systemctl start mariadb.service
 
         echo "##  Securing MariaDB server.";
-        echo "";
-        echo "";
         /usr/bin/mysql_secure_installation
 
         echo "##  Creating MariaDB Database/User."
         echo "##  Please Input your MariaDB root password "
         mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
-        ##TODO make sure the apachefile doesnt exist isnt already in there
-
+        #TODO make sure the apachefile doesnt exist isnt already in there
         #Create the new virtual host in Apache and enable rewrite
         apachefile="/etc/httpd/conf.d/$name.conf"
 
@@ -544,7 +543,7 @@ case $distro in
             echo "</VirtualHost>"
         } >> "$apachefile"
 
-        ##TODO make sure this isnt already in there
+        #TODO make sure this isnt already in there
         echo "##  Setting up hosts file.";
         echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
@@ -601,6 +600,5 @@ echo ""
 echo "* Cleaning up..."
 rm -f snipeit.sh
 rm -f install.sh
-rm -rf ${tmp:?}
 echo "* Finished!"
 sleep 1
