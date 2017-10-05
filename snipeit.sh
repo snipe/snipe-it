@@ -49,7 +49,12 @@ progress () {
     echo ""
 }
 
+<<<<<<< HEAD
 setvhdebian () {
+=======
+#Used for Debian and Ubuntu
+vhenvfile () {
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
     find /etc/apache2/mods-enabled -maxdepth 1 -name 'rewrite.load' >/dev/null 2>&1
     apachefile=/etc/apache2/sites-available/$name.conf
     {
@@ -183,7 +188,11 @@ echo "
 "
 
 echo ""
+<<<<<<< HEAD
 echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Fedora, Debian and Ubuntu!"
+=======
+echo "  Welcome to Snipe-IT Inventory Installer for Centos, Debian and Ubuntu!"
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
 echo ""
 shopt -s nocasematch
 case $distro in
@@ -218,7 +227,10 @@ fi
 echo "     Setting to $fqdn"
 echo ""
 
+<<<<<<< HEAD
 ans=default
+=======
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
 echo -n "  Q. Do you want to automatically create the database user password? (y/n) "
 read -r setpw
@@ -241,6 +253,7 @@ esac
 done
 
 #TODO: Lets not install snipeit application under root
+<<<<<<< HEAD
 
 case $distro in
     debian)
@@ -334,6 +347,64 @@ case $distro in
         exit 1
     fi
     ;;
+=======
+#TODO: Make progress tracker go on the same line of the step being run
+#TODO: Progress tracker on each step
+
+case $distro in
+    debian)
+        #####################################  Install for Debian 9 ##############################################
+        webdir=/var/www
+        
+        echo "* Updating with apt-get update."
+        log "apt-get update" & pid=$!
+        progress
+
+        echo "* Upgrading packages with apt-get upgrade."
+        log "apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing httpd, PHP, MariaDB and other requirements."
+        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip" & pid=$!
+        progress
+
+        log "a2enmod rewrite"
+
+        echo "* Cloning Snipe-IT from github to the web directory."
+        log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
+        progress
+        
+        tzone=$(cat /etc/timezone)
+        setenv
+        vhenvfile
+        wait
+        echo >> $hosts "127.0.0.1 $hostname $fqdn"
+        a2ensite $name.conf
+        
+        echo "* Securing MariaDB server.";
+        /usr/bin/mysql_secure_installation
+        
+        echo "* Creating MariaDB Database/User."
+        echo "* Please Input your MariaDB root password:"
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+        
+        echo "* Installing and running composer."
+        cd $webdir/$name/
+        curl -sS https://getcomposer.org/installer | php
+        php composer.phar install --no-dev --prefer-source
+        
+        perms
+        chown -R www-data:www-data "/var/www/$name"
+
+        service apache2 restart
+        
+        echo "* Generating the application key."
+        php artisan key:generate --force
+
+        echo "* Artisan Migrate."
+        php artisan migrate --force
+        ;;
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
     ubuntu)
     if [[ "$version" =~ 1[6-7] ]]; then
         #####################################  Install for Ubuntu 16-17  ##############################################
@@ -342,7 +413,10 @@ case $distro in
         tzone=$(cat /etc/timezone)
 
         echo "* Adding MariaDB repository."
+<<<<<<< HEAD
         log "apt-get install software-properties-common"
+=======
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
         log "add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
 
@@ -354,7 +428,11 @@ case $distro in
         log "apt-get -y upgrade" & pid=$!
         progress
 
+<<<<<<< HEAD
         echo -n "* Installing Apache httpd, PHP, MariaDB and other requirements."
+=======
+        echo "* Installing httpd, PHP, MariaDB and other requirements."
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip" & pid=$!
         progress
 
@@ -423,11 +501,79 @@ case $distro in
 
         echo "* Securing MariaDB."
         /usr/bin/mysql_secure_installation
+<<<<<<< HEAD
 
+=======
+    
         echo "* Creating MariaDB Database/User."
         echo "* Please Input your MariaDB root password:"
         mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
+        echo "* Installing and running composer."
+        cd $webdir/$name/
+        curl -sS https://getcomposer.org/installer  | php
+        php composer.phar install --no-dev --prefer-source
+        
+        perms
+        chown -R www-data:www-data "/var/www/$name"
+        
+        service apache2 restart
+
+        echo "* Generating the application key."
+        php artisan key:generate --force
+
+        echo "* Artisan Migrate."
+        php artisan migrate --force
+    
+    elif [[ "$version" =~ 14 ]]; then
+        #####################################  Install for Ubuntu 14  ##############################################
+        webdir=/var/www
+
+        echo "* Adding MariaDB and ppa:ondrej/php repositories."
+        log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db"
+        log "add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
+        #PHP7 repository
+        log "add-apt-repository ppa:ondrej/php -y"
+
+        echo "* Updating with apt-get update."
+        log "apt-get update" & pid=$!
+        [ -f /var/lib/dpkg/lock ] && rm -f /var/lib/dpkg/lock
+        progress
+
+        echo "* Upgrading packages with apt-get upgrade."
+        log "apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing httpd, PHP, MariaDB and other requirements."
+        log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip" & pid=$!
+        progress
+
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+
+        echo "* Cloning Snipe-IT from github to the web directory."
+        log "git clone https://github.com/snipe/snipe-it $webdir/$name" & pid=$!
+        progress
+        
+        echo "* Configuring .env file."
+        tzone=$(cat /etc/timezone)
+        setenv
+        
+        vhenvfile
+        
+        echo "* Starting the MariaDB server.";       
+        service mysql status >/dev/null || service mysql start
+        
+        echo "* Securing MariaDB server.";
+        /usr/bin/mysql_secure_installation
+    
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
+        echo "* Creating MariaDB Database/User."
+        echo "* Please Input your MariaDB root password:"
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+
+<<<<<<< HEAD
         installsnipeit
 
         echo "* Restarting Apache httpd."
@@ -436,16 +582,44 @@ case $distro in
     else
         echo "Unsupported Ubuntu version. Version found: $version"
         exit 1
+=======
+        echo "* Installing and running composer."
+        cd $webdir/$name/
+        curl -sS https://getcomposer.org/installer  | php
+        php composer.phar install --no-dev --prefer-source
+        
+        perms
+        chown -R www-data:www-data "/var/www/$name"
+        
+        service apache2 restart
+
+        echo "* Generating the application key."
+        php artisan key:generate --force
+
+        echo "* Artisan Migrate."
+        php artisan migrate --force
+
+    else
+        echo "Unable to Handle Ubuntu Version #.  Version Found: " $version
+    return 1
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
     fi
     ;;
     centos)
     if [[ "$version" =~ ^6 ]]; then
+<<<<<<< HEAD
         #####################################  Install for CentOS/Redhat 6  ##############################################
         webdir=/var/www/html
         ownergroup=apache:apache
         tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
 
         echo "* Adding IUS, epel-release and MariaDB repositories."
+=======
+        #####################################  Install for Centos/Redhat 6  ##############################################
+        webdir=/var/www/html
+
+        echo "##  Adding IUS, epel-release and MariaDB repositories.";
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         mariadbRepo=/etc/yum.repos.d/MariaDB.repo
         touch "$mariadbRepo"
         {
@@ -461,7 +635,11 @@ case $distro in
         log "yum -y install https://centos6.iuscommunity.org/ius-release.rpm"
         log "rpm --import /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY"
 
+<<<<<<< HEAD
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+=======
+        echo "##  Installing httpd, PHP, MariaDB and other requirements.";
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml"
 
         for p in $PACKAGES; do
@@ -480,8 +658,13 @@ case $distro in
         echo "* Securing MariaDB."
         /usr/bin/mysql_secure_installation
 
+<<<<<<< HEAD
         echo "* Creating MariaDB Database/User."
         echo "* Please Input your MariaDB root password: "
+=======
+        echo "##  Creating MariaDB Database/User."
+        echo "##  Please Input your MariaDB root password: "
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
         echo "* Creating the new virtual host in Apache."
@@ -504,17 +687,29 @@ case $distro in
         log "/sbin/service httpd start"
 
     elif [[ "$version" =~ ^7 ]]; then
+<<<<<<< HEAD
         #####################################  Install for CentOS/Redhat 7  ##############################################
+=======
+        #####################################  Install for Centos/Redhat 7  ##############################################
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         webdir=/var/www/html
         ownergroup=apache:apache
         tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
 
+<<<<<<< HEAD
         echo "* Adding IUS, epel-release and MariaDB repositories."
+=======
+        echo -e "\n##  Adding IUS, epel-release and MariaDB repositories.";
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         log "yum -y install wget epel-release"
         log "yum -y install https://centos7.iuscommunity.org/ius-release.rpm"
         log "rpm --import /etc/pki/rpm-gpg/IUS-COMMUNITY-GPG-KEY"
 
+<<<<<<< HEAD
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+=======
+        echo "##  Installing httpd, PHP, MariaDB and other requirements.";
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
         PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml"
 
         for p in $PACKAGES; do
@@ -526,6 +721,7 @@ case $distro in
             fi
         done;
 
+<<<<<<< HEAD
         echo "* Setting MariaDB to start on boot and starting MariaDB."
         log "systemctl enable mariadb.service"
         log "systemctl start mariadb.service"
@@ -558,6 +754,50 @@ case $distro in
             #Sets SELinux context type so that scripts running in the web server process are allowed read/write access
             chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
         fi
+=======
+        echo -e "\n##  Cloning Snipe-IT from github to the web directory.";
+        log "git clone https://github.com/snipe/snipe-it $webdir/$name"
+
+        #Make mariaDB start on boot and restart the daemon
+        echo "##  Starting the MariaDB server.";
+        systemctl enable mariadb.service
+        systemctl start mariadb.service
+
+        echo "##  Securing MariaDB server.";
+        /usr/bin/mysql_secure_installation
+
+        echo "##  Creating MariaDB Database/User."
+        echo "##  Please Input your MariaDB root password "
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+
+        #TODO make sure the apachefile doesnt exist isnt already in there
+        #Create the new virtual host in Apache and enable rewrite
+        apachefile="/etc/httpd/conf.d/$name.conf"
+
+        {
+            echo "##  Creating the new virtual host in Apache.";
+            echo ""
+            echo ""
+            echo "LoadModule rewrite_module modules/mod_rewrite.so"
+            echo ""
+            echo "<VirtualHost *:80>"
+            echo "ServerAdmin webmaster@localhost"
+            echo "    <Directory $webdir/$name/public>"
+            echo "        Allow From All"
+            echo "        AllowOverride All"
+            echo "        Options +Indexes"
+            echo "   </Directory>"
+            echo "    DocumentRoot $webdir/$name/public"
+            echo "    ServerName $fqdn"
+            echo "        ErrorLog /var/log/httpd/snipeIT.error.log"
+            echo "        CustomLog /var/log/access.log combined"
+            echo "</VirtualHost>"
+        } >> "$apachefile"
+
+        #TODO make sure this isnt already in there
+        echo "##  Setting up hosts file.";
+        echo >> $hosts "127.0.0.1 $hostname $fqdn"
+>>>>>>> Support Ubuntu and Debian installs. (#4133)
 
         echo "* Setting Apache httpd to start on boot and starting service."
         log "systemctl enable httpd.service"
