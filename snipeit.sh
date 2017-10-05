@@ -341,13 +341,13 @@ case $distro in
         setenv
         
         vhenvfile
-        
-        echo "* Starting the MariaDB server.";       
+
+        echo "* Starting the MariaDB server.";
         service mysql status >/dev/null || service mysql start
-        
+
         echo "* Securing MariaDB server.";
         /usr/bin/mysql_secure_installation
-    
+        
         echo "* Creating MariaDB Database/User."
         echo "* Please Input your MariaDB root password:"
         mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
@@ -356,10 +356,10 @@ case $distro in
         cd $webdir/$name/
         curl -sS https://getcomposer.org/installer  | php
         php composer.phar install --no-dev --prefer-source
-        
+
         perms
         chown -R www-data:www-data "/var/www/$name"
-        
+
         service apache2 restart
 
         echo "* Generating the application key."
@@ -452,7 +452,7 @@ case $distro in
         echo "##  Starting the apache server.";
         chkconfig httpd on
         /sbin/service httpd start
-        
+
         echo "##  Configuring .env file."
         tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
         setenv
@@ -475,7 +475,7 @@ case $distro in
         fi
 
         service httpd restart
-        
+
         echo "##  Generating the application key."
         php artisan key:generate --force
 
@@ -584,7 +584,7 @@ case $distro in
 
         echo "##  Creating scheduler cron."
         (crontab -l ; echo "* * * * * /usr/bin/php $webdir/$name/artisan schedule:run >> /dev/null 2>&1") | crontab -
-    
+
     else
         echo "Unable to Handle Centos Version #.  Version Found: " $version
         return 1
