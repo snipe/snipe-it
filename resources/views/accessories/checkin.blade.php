@@ -56,19 +56,10 @@
                                             {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                     </div>
-                                    <!-- Form actions -->
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label"></label>
-                                            <div class="col-md-7">
-                                                <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i>{{ trans('general.checkin') }}</button>
-                                            </div>
-                                        </div>
-
-                        </form>
-                    </div>
-                        <div class="box-footer text-right">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                              </div>
+                        <div class="box-footer">
+                            <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
+                            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i>{{ trans('general.checkin') }}</button>
                         </div>
                 </div> <!-- .box.box-default -->
             </form>
