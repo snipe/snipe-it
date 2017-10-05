@@ -856,10 +856,10 @@ class Asset extends Depreciable
                 }
 
                 if ($key =='checkedout_to') {
-                    $query->whereHas('assigneduser', function ($query) use ($search) {
-                        $query->where(function ($query) use ($search) {
-                            $query->where('users.first_name', 'LIKE', '%' . $search . '%')
-                                ->orWhere('users.last_name', 'LIKE', '%' . $search . '%');
+                    $query->whereHas('assigneduser', function ($query) use ($search_val) {
+                        $query->where(function ($query) use ($search_val) {
+                            $query->where('users.first_name', 'LIKE', '%' . $search_val . '%')
+                                ->orWhere('users.last_name', 'LIKE', '%' . $search_val . '%');
                         });
                     });
                 }
@@ -876,8 +876,8 @@ class Asset extends Depreciable
                 }
 
                 if ($key =='category') {
-                    $query->whereHas('model', function ($query) use ($search) {
-                        $query->whereHas('category', function ($query) use ($search) {
+                    $query->whereHas('model', function ($query) use ($search_val) {
+                        $query->whereHas('category', function ($query) use ($search_val) {
                             $query->where(function ($query) use ($search_val) {
                                 $query->where('categories.name', 'LIKE', '%' . $search_val . '%')
                                     ->orWhere('models.name', 'LIKE', '%' . $search_val . '%')
