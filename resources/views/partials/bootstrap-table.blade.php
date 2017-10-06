@@ -311,6 +311,11 @@ $('.snipe-table').bootstrapTable({
     // for custom fields in a more useful way.
     function customFieldsFormatter(value, row) {
 
+
+            if ((!this) || (!this.title)) {
+                return '';
+            }
+
             var field_column = this.title;
 
             // Pull out any HTMl that might be passed via the presenter
