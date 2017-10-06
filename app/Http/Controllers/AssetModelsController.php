@@ -17,6 +17,7 @@ use App\Models\Company;
 use Config;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -68,7 +69,7 @@ class AssetModelsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
 
         // Create a new asset model
@@ -90,14 +91,21 @@ class AssetModelsController extends Controller
         }
 
         if (Input::file('image')) {
+
             $image = Input::file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/models/'.$file_name);
-            Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
+            $file_name = str_random(25) . "." . $image->getClientOriginalExtension();
+            $path = public_path('uploads/models/');
+
+            if ($image->getClientOriginalExtension()!='svg') {
+                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path.'/'.$file_name);
+            } else {
+                $image->move($path, $file_name);
+            }
             $model->image = $file_name;
+
         }
 
             // Was it created?

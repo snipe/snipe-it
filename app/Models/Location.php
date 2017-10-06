@@ -83,6 +83,11 @@ class Location extends SnipeModel
         // return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
+    public function setLdapOuAttribute($ldap_ou)
+    {
+        return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
+    }
+
     public static function getLocationHierarchy($locations, $parent_id = null)
     {
 
