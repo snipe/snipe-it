@@ -815,6 +815,7 @@ class Asset extends Depreciable
     {
         return $query->where(function ($query) use ($filter) {
             foreach ($filter as $key => $search_val) {
+                
                 if ($key =='asset_tag') {
                     $query->where('assets.asset_tag', 'LIKE', '%'.$search_val.'%');
                 }
@@ -914,11 +915,13 @@ class Asset extends Depreciable
             }
 
             foreach (CustomField::all() as $field) {
-                if (array_key_exists($field->db_column_name(), $filter)) {
-                    $query->orWhere($field->db_column_name(), 'LIKE', "%$search_val%");
-                }
+                if (array_key_exists('custom_fields.'.$field->db_column_name(), $filter)) {
+                    $query->orWhere($field->db_column_name(), 'LIKE', '%' . $search_val . '%');
+                } 
             }
+
         });
+
     }
 
 
