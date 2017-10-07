@@ -167,7 +167,7 @@
     'settings'				=> 'Settings',
     'sign_in'				=> 'Sign in',
     'signature'             => 'Signature',
-    'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
+    'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation, and the data in this system will reset daily.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
     'status_labels'			=> 'Status Labels',
