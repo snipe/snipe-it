@@ -12,6 +12,8 @@
 $factory->define(App\Models\Accessory::class, function (Faker\Generator $faker) {
     return [
         'user_id' => 1,
+        'model_number' => $faker->numberBetween(1000000, 50000000),
+        'location_id' => rand(1,5),
     ];
 });
 
