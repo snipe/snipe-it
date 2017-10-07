@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(UserSeeder::class);
         $this->call(DepreciationSeeder::class);
+        $this->call(DepartmentSeeder::class);
         $this->call(ManufacturerSeeder::class);
         $this->call(LocationSeeder::class);
         $this->call(SupplierSeeder::class);
@@ -29,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LicenseSeeder::class);
         $this->call(ComponentSeeder::class);
         $this->call(ConsumableSeeder::class);
-        $this->call(LicenseSeeder::class);
         $this->call(ActionlogSeeder::class);
         $this->call(CustomFieldSeeder::class);
 

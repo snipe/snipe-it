@@ -15,88 +15,185 @@ use App\Models\Category;
 
 $factory->define(Asset::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->catchPhrase,
-        'model_id' => function () {
-            return factory(App\Models\AssetModel::class)->create()->id;
-        },
-        'rtd_location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
+        'name' => null,
+        'rtd_location_id' => 1,
         'serial' => $faker->uuid,
-        'status_id' => function () {
-            return factory(App\Models\Statuslabel::class)->states('rtd')->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
+        'status_id' => 1,
+        'user_id' => 1,
         'asset_tag' => $faker->unixTime('now'),
-        'notes'   => $faker->sentence,
-        'purchase_date' => $faker->dateTime(),
-        'purchase_cost' => $faker->randomFloat(2),
+        'notes'   => 'Created by DB seeder',
+        'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
+        'purchase_cost' => $faker->randomFloat(2, '299.99', '2999.99'),
         'order_number' => $faker->numberBetween(1000000, 50000000),
-        'supplier_id' => function () {
-            return factory(App\Models\Supplier::class)->create()->id;
-        },
-        'company_id' => function () {
-            return factory(App\Models\Company::class)->create()->id;
-        },
+        'supplier_id' => 1,
         'requestable' => $faker->boolean()
     ];
 });
 
-$factory->state(Asset::class, 'deleted', function ($faker) {
+
+
+
+$factory->state(Asset::class, 'laptop-mbp', function ($faker) {
     return [
-        'deleted_at' => $faker->dateTime(),
+        'model_id' => 1
     ];
 });
 
+$factory->state(Asset::class, 'laptop-mbp-pending', function ($faker) {
+    return [
+        'model_id' => 1,
+         'status_id' => 2,
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-mbp-archived', function ($faker) {
+    return [
+        'model_id' => 1,
+        'status_id' => 3,
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-air', function ($faker) {
+    return [
+        'model_id' => 2
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-surface', function ($faker) {
+    return [
+        'model_id' => 3
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-xps', function ($faker) {
+    return [
+        'model_id' => 4
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-spectre', function ($faker) {
+    return [
+        'model_id' => 5
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-zenbook', function ($faker) {
+    return [
+        'model_id' => 6
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-yoga', function ($faker) {
+    return [
+        'model_id' => 7
+    ];
+});
+
+$factory->state(Asset::class, 'desktop-macpro', function ($faker) {
+    return [
+        'model_id' => 8
+    ];
+});
+
+$factory->state(Asset::class, 'desktop-lenovo-i5', function ($faker) {
+    return [
+        'model_id' => 9
+    ];
+});
+
+$factory->state(Asset::class, 'desktop-optiplex', function ($faker) {
+    return [
+        'model_id' => 10
+    ];
+});
+
+$factory->state(Asset::class, 'conf-polycom', function ($faker) {
+    return [
+        'model_id' => 11
+    ];
+});
+
+$factory->state(Asset::class, 'conf-polycomcx', function ($faker) {
+    return [
+        'model_id' => 12
+    ];
+});
+
+$factory->state(Asset::class, 'tablet-ipad', function ($faker) {
+    return [
+        'model_id' => 13
+    ];
+});
+
+$factory->state(Asset::class, 'tablet-tab3', function ($faker) {
+    return [
+        'model_id' => 14
+    ];
+});
+
+$factory->state(Asset::class, 'phone-iphone6s', function ($faker) {
+    return [
+        'model_id' => 15
+    ];
+});
+
+$factory->state(Asset::class, 'phone-iphone7', function ($faker) {
+    return [
+        'model_id' => 16
+    ];
+});
+
+$factory->state(Asset::class, 'ultrafine', function ($faker) {
+    return [
+        'model_id' => 17
+    ];
+});
+
+$factory->state(Asset::class, 'ultrasharp', function ($faker) {
+    return [
+        'model_id' => 18
+    ];
+});
+
+
+// These are just for unit tests, not to generate data
+
 $factory->state(Asset::class, 'assigned-to-user', function ($faker) {
     return [
+        'model_id' => 1,
         'assigned_to' => factory(App\Models\User::class)->create()->id,
         'assigned_type' => App\Models\User::class,
     ];
 });
-
 $factory->state(Asset::class, 'assigned-to-location', function ($faker) {
     return [
+        'model_id' => 1,
         'assigned_to' => factory(App\Models\Location::class)->create()->id,
         'assigned_type' => App\Models\Location::class,
     ];
 });
-
 $factory->state(Asset::class, 'assigned-to-asset', function ($faker) {
     return [
+        'model_id' => 1,
         'assigned_to' => factory(App\Models\Asset::class)->create()->id,
         'assigned_type' => App\Models\Asset::class,
     ];
 });
 
 $factory->state(Asset::class, 'requires-acceptance', function ($faker) {
-    $cat = factory(Category::class)->states('asset-category', 'requires-acceptance')->create();
-    $model = factory(AssetModel::class)->create(['category_id' => $cat->id]);
     return [
-        'model_id' => $model->id
+        'model_id' => 1,
     ];
 });
 
-$factory->define(App\Models\AssetModel::class, function (Faker\Generator $faker) {
+
+$factory->state(Asset::class, 'deleted', function ($faker) {
     return [
-    'name' => $faker->catchPhrase,
-    'manufacturer_id' => function () {
-        return factory(App\Models\Manufacturer::class)->create()->id;
-    },
-    'category_id' => function () {
-        return factory(App\Models\Category::class)->states('asset-category')->create()->id;
-    },
-    'model_number' => $faker->numberBetween(1000000, 50000000),
-    'eol' => 1,
-    'notes' => $faker->paragraph(),
-    'requestable' => $faker->boolean(),
-    'depreciation_id' => function () {
-        return factory(App\Models\Depreciation::class)->create()->id;
-    },
+        'model_id' => 1,
+        'deleted_at' => $faker->dateTime()
     ];
 });
+
 
 $factory->define(App\Models\AssetMaintenance::class, function (Faker\Generator $faker) {
     return [

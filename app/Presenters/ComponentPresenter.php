@@ -120,5 +120,14 @@ class ComponentPresenter extends Presenter
         return (string) link_to_route('consumables.show', e($this->name), $this->id);
     }
 
+    /**
+     * Url to view this item.
+     * @return string
+     */
+    public function viewUrl()
+    {
+        return route('accessories.show', $this->id);
+    }
+
 
 }

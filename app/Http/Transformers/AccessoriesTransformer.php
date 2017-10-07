@@ -79,8 +79,6 @@ class AccessoriesTransformer
 
         }
 
-
-
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 

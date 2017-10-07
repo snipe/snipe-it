@@ -288,35 +288,4 @@ class ComponentsController extends Controller
     }
 
 
-    /**
-    * Return JSON data to populate the components view,
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::getView() method that returns the view.
-    * @since [v3.0]
-    * @param int $componentId
-    * @return string JSON
-    */
-    public function getDataView($componentId)
-    {
-        if (is_null($component = Component::with('assets')->find($componentId))) {
-            // Redirect to the component management page with error
-            return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
-        }
-
-        if (!Company::isCurrentUserHasAccess($component)) {
-            return ['total' => 0, 'rows' => []];
-        }
-        $this->authorize('view', $component);
-
-        $rows = array();
-        $all_custom_fields = CustomField::all(); // Cached for table;
-        foreach ($component->assets as $component_assignment) {
-            $rows[] = $component_assignment->present()->forDataTable($all_custom_fields);
-        }
-
-        $componentCount = $component->assets->count();
-        $data = array('total' => $componentCount, 'rows' => $rows);
-        return $data;
-    }
 }

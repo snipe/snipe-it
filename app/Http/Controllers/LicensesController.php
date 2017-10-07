@@ -591,61 +591,10 @@ class LicensesController extends Controller
             $file = $log->get_src('licenses');
             return Response::download($file);
         }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        // Redirect to the licence management page
-        return redirect()->route('licenses.index')->with('error', $error);
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
     }
 
 
-    /**
-    * Generates a JSON response to populate the licence index datatables.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LicensesController::getIndex() method that provides the view
-    * @since [v1.0]
-    * @return String JSON
-    */
-    public function getDatatable(Request $request)
-    {
-        $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'licenseSeatsRelation', 'manufacturer'));
-
-        if (Input::has('search')) {
-            $licenses = $licenses->TextSearch($request->input('search'));
-        }
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','manufacturer','company'];
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
-
-        switch ($sort) {
-            case 'manufacturer':
-                $licenses = $licenses->OrderManufacturer($order);
-                break;
-            case 'company':
-                $licenses = $licenses->OrderCompany($order);
-                break;
-            default:
-                $licenses = $licenses->orderBy($sort, $order);
-                break;
-        }
-
-        $licenseCount = $licenses->count();
-        $licenses = $licenses->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        foreach ($licenses as $license) {
-            $rows[] = $license->present()->forDataTable();
-        }
-
-        $data = array('total' => $licenseCount, 'rows' => $rows);
-
-        return $data;
-    }
 
     /**
     * Generates the next free seat ID for checkout.

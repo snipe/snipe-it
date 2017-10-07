@@ -19,28 +19,6 @@ use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 
-$factory->define(App\Models\Accessory::class, function (Faker\Generator $faker) {
-    return [
-    'company_id' => function () {
-        return factory(App\Models\Company::class)->create()->id;
-    },
-    'name' => $faker->text(20),
-    'category_id' => function () {
-        return factory(App\Models\Category::class)->states('accessory-category')->create()->id;
-    },
-    'manufacturer_id' => function () {
-        return factory(App\Models\Manufacturer::class)->create()->id;
-    },
-    'location_id' => function () {
-        return factory(App\Models\Location::class)->create()->id;
-    },
-    'order_number' => $faker->numberBetween(1000000, 50000000),
-    'purchase_date' => $faker->dateTime(),
-    'purchase_cost' => $faker->randomFloat(2),
-    'qty' => $faker->numberBetween(5, 10),
-    'min_amt' => $faker->numberBetween($min = 1, $max = 2),
-    ];
-});
 
 $factory->define(App\Models\Company::class, function (Faker\Generator $faker) {
     return [
@@ -54,9 +32,7 @@ $factory->define(App\Models\Component::class, function (Faker\Generator $faker) 
         'category_id' => function () {
             return factory(App\Models\Category::class)->create()->id;
         },
-        'location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
+        'location_id' => 1,
         'serial'   => $faker->uuid,
         'qty' => $faker->numberBetween(3, 10),
         'order_number' => $faker->numberBetween(1000000, 50000000),
@@ -69,94 +45,10 @@ $factory->define(App\Models\Component::class, function (Faker\Generator $faker) 
     ];
 });
 
-$factory->define(App\Models\Consumable::class, function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->text(20),
-    'company_id' => function () {
-            return factory(App\Models\Company::class)->create()->id;
-    },
-    'category_id' => function () {
-            return factory(App\Models\Category::class)->create()->id;
-    },
-    'location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-    },
-    'manufacturer_id' => function () {
-        return factory(App\Models\Manufacturer::class)->create()->id;
-    },
-    'user_id' => function () {
-        return factory(App\Models\User::class)->create()->id;
-    },
-    'model_number' => $faker->numberBetween(1000000, 50000000),
-    'item_no' => $faker->numberBetween(1000000, 50000000),
-    'order_number' => $faker->numberBetween(1000000, 50000000),
-    'purchase_date' => $faker->dateTime(),
-    'purchase_cost' => $faker->randomFloat(2),
-    'qty' => $faker->numberBetween(5, 10),
-    'min_amt' => $faker->numberBetween($min = 1, $max = 2),
-    ];
-});
-
-$factory->define(App\Models\Department::class, function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->catchPhrase,
-    'user_id' => '1',
-    'location_id' => function () {
-        return factory(App\Models\Location::class)->create()->id;
-    },
-    'company_id' => function () {
-        return factory(App\Models\Company::class)->create()->id;
-    },
-    'manager_id' => function () {
-        return factory(App\Models\User::class)->create()->id;
-    },
-
-    ];
-});
-
-$factory->define(App\Models\Depreciation::class, function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->text(20),
-    'months' => $faker->numberBetween(1, 10),
-    ];
-});
-
-$factory->define(App\Models\License::class, function (Faker\Generator $faker) {
-    return [
-    'name'   => $faker->catchPhrase,
-    'serial'   => $faker->uuid,
-    'seats'   => $faker->numberBetween(1, 10),
-    'license_email'   => $faker->safeEmail,
-    'license_name'   => $faker->name,
-    'order_number' => $faker->numberBetween(1500, 13250),
-    'purchase_order' => $faker->numberBetween(1500, 13250),
-    'purchase_date' => $faker->dateTime(),
-    'purchase_cost' => $faker->randomFloat(2),
-    'notes' => $faker->sentence,
-    'supplier_id' => function () {
-        return factory(App\Models\Supplier::class)->create()->id;
-    },
-    'company_id' =>function () {
-        return factory(App\Models\Company::class)->create()->id;
-    },
-    ];
-});
-
-$factory->define(App\Models\LicenseSeat::class, function (Faker\Generator $faker) {
-    return [
-    'license_id' => function () {
-        return factory(App\Models\License::class)->create()->id;
-    },
-    'created_at' => $faker->dateTime(),
-    'updated_at' => $faker->dateTime(),
-    'notes' => $faker->sentence,
-    'user_id' => '1',
-    ];
-});
 
 $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     return [
-    'name' => $faker->catchPhrase,
+    'name' => $faker->city,
     'address' => $faker->streetAddress,
     'address2' => $faker->secondaryAddress,
     'city' => $faker->city,
@@ -167,11 +59,6 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Manufacturer::class, function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->company,
-    ];
-});
 
 $factory->define(App\Models\Supplier::class, function (Faker\Generator $faker) {
     return [

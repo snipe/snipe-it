@@ -8,9 +8,10 @@ class LicenseSeeder extends Seeder
     public function run()
     {
         License::truncate();
-        factory(License::class, 10)->create();
-
         LicenseSeat::truncate();
-        factory(LicenseSeat::class, 10)->create();
+        factory(License::class, 1)->states('photoshop')->create();
+        factory(License::class, 1)->states('acrobat')->create();
+        factory(License::class, 1)->states('indesign')->create();
+        factory(License::class, 1)->states('office')->create();
     }
 }

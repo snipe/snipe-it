@@ -122,55 +122,6 @@ class AccessoryPresenter extends Presenter
         return json_encode($layout);
     }
 
-    /**
-     * JSON representation of Accessory for datatable.
-     * @return array
-     */
-    public function forDataTable()
-    {
-
-        $actions = '<nobr>';
-        if (Gate::allows('checkout', $this->model)) {
-            $actions .= Helper::generateDatatableButton(
-                'checkout',
-                route('checkout/accessory', $this->id),
-                $this->numRemaining() > 0
-            );
-        }
-        if (Gate::allows('update', $this->model)) {
-            $actions .= Helper::generateDatatableButton('edit', route('accessories.edit', $this->id));
-        }
-        if (Gate::allows('delete', $this->model)) {
-            $actions .= Helper::generateDatatableButton(
-                'delete',
-                route('accessories.destroy', $this->id),
-                true, /*enabled*/
-                trans('admin/accessories/message.delete.confirm'),
-                $this->name
-            );
-        }
-        $actions .= '</nobr>';
-
-        $results = [];
-        $results['name'] = $this->nameUrl();
-        $results['category'] = '';
-        if ($this->model->category) {
-            $results['category'] = $this->model->category->present()->nameUrl();
-        }
-        $results['model_number'] = $this->model_number;
-        $results['qty'] = $this->qty;
-        $results['order_number'] = $this->order_number;
-        $results['min_amt'] = $this->min_amt;
-        $results['location'] = $this->model->location ? $this->model->location->present()->nameUrl() : '';
-        $results['purchase_date'] = $this->purchase_date;
-        $results['purchase_cost'] = Helper::formatCurrencyOutput($this->purchase_cost);
-        $results['numRemaining'] = $this->numRemaining();
-        $results['companyName'] = $this->model->company ? $this->model->company->present()->nameUrl() : '';
-        $results['manufacturer'] = $this->model->manufacturer ? $this->model->manufacturer->present()->nameUrl() : '';
-        $results['actions']       = $actions;
-
-        return $results;
-    }
 
     /**
      * Pregenerated link to this accessories view page.
