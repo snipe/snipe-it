@@ -23,7 +23,7 @@ $factory->define(Asset::class, function (Faker\Generator $faker) {
         'asset_tag' => $faker->unixTime('now'),
         'notes'   => 'Created by DB seeder',
         'purchase_date' => $faker->dateTime(),
-        'purchase_cost' => $faker->randomFloat(2),
+        'purchase_cost' => $faker->randomFloat(2, '299.99', '2999.99'),
         'order_number' => $faker->numberBetween(1000000, 50000000),
         'supplier_id' => 1,
         'requestable' => $faker->boolean()
@@ -39,6 +39,19 @@ $factory->state(Asset::class, 'laptop-mbp', function ($faker) {
     ];
 });
 
+$factory->state(Asset::class, 'laptop-mbp-pending', function ($faker) {
+    return [
+        'model_id' => 1,
+         'status_id' => 2,
+    ];
+});
+
+$factory->state(Asset::class, 'laptop-mbp-archived', function ($faker) {
+    return [
+        'model_id' => 1,
+        'status_id' => 3,
+    ];
+});
 
 $factory->state(Asset::class, 'laptop-air', function ($faker) {
     return [
