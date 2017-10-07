@@ -88,7 +88,7 @@ $factory->state(App\Models\Category::class, 'accessory-mouse-category', function
 
 $factory->state(App\Models\Category::class, 'component-hdd-category', function ($faker) {
     return [
-        'name' => 'HDD',
+        'name' => 'HDD/SSD',
         'category_type' => 'component',
     ];
 });
