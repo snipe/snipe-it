@@ -1,76 +1,102 @@
 <?php
 
 use App\Models\Actionlog;
+use App\Models\Company;
+use App\Models\User;
+use App\Models\Location;
+use App\Models\Asset;
 
-$factory->defineAs(App\Models\Actionlog::class, 'asset-upload', function ($faker) {
-    $asset = factory(App\Models\Asset::class)->create();
+
+$factory->define(Actionlog::class, function (Faker\Generator $faker) {
     return [
-        'item_type' => get_class($asset),
-        'item_id' => $asset->id,
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
-        'filename' => $faker->word,
-        'action_type' => 'uploaded'
+
+        'note' => 'Sample checkout from DB seeder!',
     ];
 });
 
-$factory->defineAs(Actionlog::class, 'asset-checkout', function (Faker\Generator $faker) {
-    $company =  factory(App\Models\Company::class)->create();
-    $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $target = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    do {
-        $item = factory(App\Models\Asset::class)->create(['company_id' => $company->id]);
-    } while (!$item->isValid());
-// dd($item);
+
+
+$factory->defineAs(Actionlog::class, 'asset-checkout-user', function (Faker\Generator $faker) {
+    $target = User::inRandomOrder()->first();
+    $item = Asset::inRandomOrder()->first();
+    $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
+    $asset = App\Models\Asset::where('id', $item->id)
+        ->update(
+            [
+                'assigned_to' => $target->id,
+                'assigned_type' => App\Models\User::class
+            ]
+        );
+
     return [
-        'user_id' => $user->id,
+        'created_at'  => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
+        'user_id' => $user_id,
         'action_type' => 'checkout',
         'item_id' => $item->id,
         'item_type'  => App\Models\Asset::class,
         'target_id' => $target->id,
         'target_type' => get_class($target),
-        'created_at'  => $faker->dateTime(),
-        'note' => $faker->sentence,
-        'company_id' => $company->id
+
+
     ];
 });
 
-$factory->defineAs(Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
-    $company =  factory(App\Models\Company::class)->create();
-    $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $target = factory(App\Models\Asset::class)->create(['company_id' => $company->id]);
-    $item = factory(App\Models\License::class)->create(['company_id' => $company->id]);
+$factory->defineAs(Actionlog::class, 'asset-checkout-location', function (Faker\Generator $faker) {
+    $target = Location::inRandomOrder()->first();
+    $item = Asset::inRandomOrder()->first();
+    $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
+    $asset = App\Models\Asset::where('id', $item->id)
+        ->update(
+            [
+                'assigned_to' => $target->id,
+                'assigned_type' => App\Models\Location::class
+            ]
+        );
 
     return [
-        'user_id' => $user->id,
+        'created_at'  => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
+        'user_id' => $user_id,
+        'action_type' => 'checkout',
+        'item_id' => $item->id,
+        'item_type'  => App\Models\Asset::class,
+        'target_id' => $target->id,
+        'target_type' => get_class($target),
+    ];
+});
+
+// This doesn't work - we need to assign a seat
+$factory->defineAs(Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
+    $target = Asset::inRandomOrder()->first();
+    $item = License::inRandomOrder()->first();
+    $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
+
+    return [
+        'user_id' => $user_id,
         'action_type' => 'checkout',
         'item_id' => $item->id,
         'item_type'  => get_class($item),
         'target_id' => $target->id,
         'target_type' => get_class($target),
         'created_at'  => $faker->dateTime(),
-        'note' => $faker->sentence,
-        'company_id' => $company->id
+        'note' => $faker->sentence
     ];
 });
+
 
 $factory->defineAs(Actionlog::class, 'accessory-checkout', function (Faker\Generator $faker) {
-    $company =  factory(App\Models\Company::class)->create();
-    $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $target = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $item = factory(App\Models\Accessory::class)->create(['company_id' => $company->id]);
+    $target = Asset::inRandomOrder()->first();
+    $item = Accessory::inRandomOrder()->first();
+    $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
 
     return [
-        'user_id' => $user->id,
+        'user_id' => $user_id,
         'action_type' => 'checkout',
         'item_id' => $item->id,
         'item_type'  => get_class($item),
         'target_id' => $target->id,
         'target_type' => get_class($target),
         'created_at'  => $faker->dateTime(),
-        'note' => $faker->sentence,
-        'company_id' => $company->id
+        'note' => $faker->sentence
     ];
 });
 
