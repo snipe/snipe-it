@@ -29,6 +29,9 @@ class AssetSeeder extends Seeder
       factory(Asset::class, 27)->states('phone-iphone6s')->create();
       factory(Asset::class, 40)->states('phone-iphone7')->create();
 
+      factory(Asset::class, 10)->states('ultrafine')->create();
+      factory(Asset::class, 10)->states('ultrasharp')->create();
+
 
   }
 }

@@ -35,6 +35,10 @@ class AssetModelSeeder extends Seeder
         factory(AssetModel::class, 1)->states('iphone6s-model')->create(); // 15
         factory(AssetModel::class, 1)->states('iphone7-model')->create(); // 16
 
+        // Displays
+        factory(AssetModel::class, 1)->states('ultrafine')->create(); // 17
+        factory(AssetModel::class, 1)->states('ultrasharp')->create(); // 18
+
 
     }
 
