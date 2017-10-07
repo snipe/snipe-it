@@ -19,27 +19,6 @@ use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 
-$factory->define(App\Models\Accessory::class, function (Faker\Generator $faker) {
-    return [
-    'company_id' => function () {
-        return factory(App\Models\Company::class)->create()->id;
-    },
-    'name' => $faker->text(20),
-    'category_id' => function () {
-        return factory(App\Models\Category::class)->states('accessory-keyboard-category')->create()->id;
-    },
-    'manufacturer_id' => function () {
-
-        return factory(App\Models\Manufacturer::class)->create()->id;
-    },
-    'location_id' => 1,
-    'order_number' => $faker->numberBetween(1000000, 50000000),
-    'purchase_date' => $faker->dateTime(),
-    'purchase_cost' => $faker->randomFloat(2),
-    'qty' => $faker->numberBetween(5, 10),
-    'min_amt' => $faker->numberBetween($min = 1, $max = 2),
-    ];
-});
 
 $factory->define(App\Models\Company::class, function (Faker\Generator $faker) {
     return [
@@ -66,31 +45,7 @@ $factory->define(App\Models\Component::class, function (Faker\Generator $faker) 
     ];
 });
 
-$factory->define(App\Models\Consumable::class, function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->text(20),
-    'company_id' => function () {
-            return factory(App\Models\Company::class)->create()->id;
-    },
-    'category_id' => function () {
-            return factory(App\Models\Category::class)->create()->id;
-    },
-    'location_id' => 1,
-    'manufacturer_id' => function () {
-        return factory(App\Models\Manufacturer::class)->create()->id;
-    },
-    'user_id' => function () {
-        return factory(App\Models\User::class)->create()->id;
-    },
-    'model_number' => $faker->numberBetween(1000000, 50000000),
-    'item_no' => $faker->numberBetween(1000000, 50000000),
-    'order_number' => $faker->numberBetween(1000000, 50000000),
-    'purchase_date' => $faker->dateTime(),
-    'purchase_cost' => $faker->randomFloat(2),
-    'qty' => $faker->numberBetween(5, 10),
-    'min_amt' => $faker->numberBetween($min = 1, $max = 2),
-    ];
-});
+
 
 $factory->define(App\Models\Department::class, function (Faker\Generator $faker) {
     return [
@@ -160,11 +115,6 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Models\Manufacturer::class, function (Faker\Generator $faker) {
-    return [
-    'name' => $faker->company,
-    ];
-});
 
 $factory->define(App\Models\Supplier::class, function (Faker\Generator $faker) {
     return [
