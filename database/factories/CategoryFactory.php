@@ -24,6 +24,7 @@ $factory->state(App\Models\Category::class, 'asset-laptop-category', function ($
     return [
         'name' => 'Laptops',
         'category_type' => 'asset',
+        'require_acceptance' => true,
     ];
 });
 
