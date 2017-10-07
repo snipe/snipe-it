@@ -30,13 +30,6 @@ $factory->state(App\Models\License::class, 'photoshop', function ($faker) {
         'purchase_cost' => '299.99',
         'seats' => 10,
     ];
-
-
-    for ($x = 0; $x < $data['seats']; $x++) {
-        $seat = new App\Models\LicenseSeat;
-        $seat->license_id = 1;
-        $seat->create();
-    }
     
     return $data;
 
@@ -51,12 +44,7 @@ $factory->state(App\Models\License::class, 'acrobat', function ($faker) {
         'purchase_cost' => '29.99',
         'seats' => 10,
     ];
-
-    for ($x = 0; $x < $data['seats']; $x++) {
-        $seat = new App\Models\LicenseSeat;
-        $seat->license_id = 2;
-        $seat->create();
-    }
+    
 
     return $data;
 });
@@ -69,12 +57,7 @@ $factory->state(App\Models\License::class, 'indesign', function ($faker) {
         'purchase_cost' => '199.99',
         'seats' => 10,
     ];
-
-    for ($x = 0; $x < $data['seats']; $x++) {
-        $seat = new App\Models\LicenseSeat;
-        $seat->license_id = 3;
-        $seat->create();
-    }
+    
 
     return $data;
 });
@@ -89,11 +72,6 @@ $factory->state(App\Models\License::class, 'office', function ($faker) {
         'seats' => 20,
     ];
 
-    for ($x = 0; $x < $data['seats']; $x++) {
-        $seat = new App\Models\LicenseSeat;
-        $seat->license_id = 4;
-        $seat->create();
-    }
 
     return $data;
 });
