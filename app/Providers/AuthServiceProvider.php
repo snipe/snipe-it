@@ -16,6 +16,8 @@ use App\Policies\AssetPolicy;
 use App\Policies\ComponentPolicy;
 use App\Policies\ConsumablePolicy;
 use App\Policies\LicensePolicy;
+use App\Policies\LocationPolicy;
+use App\Policies\CategoryPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -35,8 +37,8 @@ class AuthServiceProvider extends ServiceProvider
         Consumable::class => ConsumablePolicy::class,
         License::class => LicensePolicy::class,
         User::class => UserPolicy::class,
-        //Location::class => LocationPolicy::class,
-        //Category::class => CategoryPolicy::class,
+        Location::class => LocationPolicy::class,
+        Category::class => CategoryPolicy::class,
     ];
 
     /**
