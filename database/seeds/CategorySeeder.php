@@ -8,19 +8,19 @@ class CategorySeeder extends Seeder
     {
         Category::truncate();
 
-        factory(Category::class, 1)->states('asset-laptop-category')->create();
-        factory(Category::class, 1)->states('asset-desktop-category')->create();
-        factory(Category::class, 1)->states('asset-tablet-category')->create();
-        factory(Category::class, 1)->states('asset-mobile-category')->create();
-        factory(Category::class, 1)->states('asset-display-category')->create();
-        factory(Category::class, 1)->states('asset-voip-category')->create();
-        factory(Category::class, 1)->states('asset-conference-category')->create();
-        factory(Category::class, 1)->states('accessory-keyboard-category')->create();
-        factory(Category::class, 1)->states('accessory-mouse-category')->create();
-        factory(Category::class, 1)->states('consumable-paper-category')->create();
-        factory(Category::class, 1)->states('consumable-ink-category')->create();
-        factory(Category::class, 1)->states('component-hdd-category')->create();
-        factory(Category::class, 1)->states('component-ram-category')->create();
+        factory(Category::class, 1)->states('asset-laptop-category')->create(); // 1
+        factory(Category::class, 1)->states('asset-desktop-category')->create(); // 2
+        factory(Category::class, 1)->states('asset-tablet-category')->create(); // 3
+        factory(Category::class, 1)->states('asset-mobile-category')->create(); // 4
+        factory(Category::class, 1)->states('asset-display-category')->create(); // 5
+        factory(Category::class, 1)->states('asset-voip-category')->create(); // 6
+        factory(Category::class, 1)->states('asset-conference-category')->create(); // 7
+        factory(Category::class, 1)->states('accessory-keyboard-category')->create(); // 8
+        factory(Category::class, 1)->states('accessory-mouse-category')->create(); // 9
+        factory(Category::class, 1)->states('consumable-paper-category')->create(); // 10
+        factory(Category::class, 1)->states('consumable-ink-category')->create(); // 11
+        factory(Category::class, 1)->states('component-hdd-category')->create(); // 12
+        factory(Category::class, 1)->states('component-ram-category')->create(); // 13
     }
 
 }
