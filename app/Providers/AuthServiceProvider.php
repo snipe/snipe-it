@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\Accessory;
 use Carbon\Carbon;
 use App\Models\Asset;
+use App\Models\Location;
 use App\Models\Component;
+use App\Models\Category;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
@@ -33,6 +35,8 @@ class AuthServiceProvider extends ServiceProvider
         Consumable::class => ConsumablePolicy::class,
         License::class => LicensePolicy::class,
         User::class => UserPolicy::class,
+        Location::class => LocationPolicy::class,
+        Category::class => LocationPolicy::class,
     ];
 
     /**
