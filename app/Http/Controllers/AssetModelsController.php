@@ -188,7 +188,7 @@ class AssetModelsController extends Controller
     * @param int $modelId
     * @return Redirect
     */
-    public function update(Request $request, $modelId = null)
+    public function update(ImageUploadRequest $request, $modelId = null)
     {
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
@@ -214,13 +214,19 @@ class AssetModelsController extends Controller
 
         if (Input::file('image')) {
             $image = Input::file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/models/'.$file_name);
-            Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
+            $file_name = str_random(25) . "." . $image->getClientOriginalExtension();
+            $path = public_path('uploads/models/');
+
+            if ($image->getClientOriginalExtension()!='svg') {
+                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path.'/'.$file_name);
+            } else {
+                $image->move($path, $file_name);
+            }
             $model->image = $file_name;
+
         }
 
         if ($request->input('image_delete') == 1 && Input::file('image') == "") {
