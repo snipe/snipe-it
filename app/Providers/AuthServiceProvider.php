@@ -35,8 +35,8 @@ class AuthServiceProvider extends ServiceProvider
         Consumable::class => ConsumablePolicy::class,
         License::class => LicensePolicy::class,
         User::class => UserPolicy::class,
-        Location::class => LocationPolicy::class,
-        Category::class => LocationPolicy::class,
+        //Location::class => LocationPolicy::class,
+        //Category::class => CategoryPolicy::class,
     ];
 
     /**
