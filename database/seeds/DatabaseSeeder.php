@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LicenseSeeder::class);
         $this->call(ComponentSeeder::class);
         $this->call(ConsumableSeeder::class);
-        $this->call(LicenseSeeder::class);
         $this->call(ActionlogSeeder::class);
         $this->call(CustomFieldSeeder::class);
 
