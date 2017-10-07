@@ -366,49 +366,6 @@ class AssetModelsController extends Controller
 
 
 
-    /**
-     * Get the asset information to present to the model view detail page
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.0]
-     * @param Request $request
-     * @param $modelID
-     * @return String JSON
-     * @internal param int $modelId
-     */
-    public function getDataView(Request $request, $modelID)
-    {
-        $assets = Asset::where('model_id', '=', $modelID)->with('company', 'assetstatus');
-
-        if (Input::has('search')) {
-            $assets = $assets->TextSearch(e($request->input('search')));
-        }
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-
-        $allowed_columns = ['name', 'serial','asset_tag'];
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
-
-        $assets = $assets->orderBy($sort, $order);
-
-        $assetsCount = $assets->count();
-        $assets = $assets->skip($offset)->take($limit)->get();
-
-        $rows = array();
-
-        $all_custom_fields = CustomField::all();
-        foreach ($assets as $asset) {
-
-            $rows[] = $asset->present()->forDataTable($all_custom_fields);
-        }
-
-        $data = array('total' => $assetsCount, 'rows' => $rows);
-
-        return $data;
-    }
-
 
     /**
      * Returns a view that allows the user to bulk edit model attrbutes
