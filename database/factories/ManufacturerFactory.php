@@ -18,6 +18,8 @@ $factory->define(App\Models\Manufacturer::class, function (Faker\Generator $fake
     ];
 });
 
+
+// 1
 $factory->state(App\Models\Manufacturer::class, 'apple', function ($faker) {
     return [
         'name' => 'Apple',
@@ -26,7 +28,7 @@ $factory->state(App\Models\Manufacturer::class, 'apple', function ($faker) {
     ];
 });
 
-
+// 2
 $factory->state(App\Models\Manufacturer::class, 'microsoft', function ($faker) {
     return [
         'name' => 'Microsoft',
@@ -35,7 +37,7 @@ $factory->state(App\Models\Manufacturer::class, 'microsoft', function ($faker) {
     ];
 });
 
-
+// 3
 $factory->state(App\Models\Manufacturer::class, 'dell', function ($faker) {
     return [
         'name' => 'Dell',
@@ -44,6 +46,7 @@ $factory->state(App\Models\Manufacturer::class, 'dell', function ($faker) {
     ];
 });
 
+// 4
 $factory->state(App\Models\Manufacturer::class, 'asus', function ($faker) {
     return [
         'name' => 'Asus',
@@ -52,6 +55,7 @@ $factory->state(App\Models\Manufacturer::class, 'asus', function ($faker) {
     ];
 });
 
+// 5
 $factory->state(App\Models\Manufacturer::class, 'hp', function ($faker) {
     return [
         'name' => 'HP',
@@ -60,6 +64,7 @@ $factory->state(App\Models\Manufacturer::class, 'hp', function ($faker) {
     ];
 });
 
+// 6
 $factory->state(App\Models\Manufacturer::class, 'lenovo', function ($faker) {
     return [
         'name' => 'Lenovo',
@@ -68,6 +73,7 @@ $factory->state(App\Models\Manufacturer::class, 'lenovo', function ($faker) {
     ];
 });
 
+// 7
 $factory->state(App\Models\Manufacturer::class, 'lg', function ($faker) {
     return [
         'name' => 'LG',
@@ -76,6 +82,7 @@ $factory->state(App\Models\Manufacturer::class, 'lg', function ($faker) {
     ];
 });
 
+// 8
 $factory->state(App\Models\Manufacturer::class, 'polycom', function ($faker) {
     return [
         'name' => 'Polycom',
@@ -84,6 +91,7 @@ $factory->state(App\Models\Manufacturer::class, 'polycom', function ($faker) {
     ];
 });
 
+// 9
 $factory->state(App\Models\Manufacturer::class, 'adobe', function ($faker) {
     return [
         'name' => 'Adobe',
@@ -92,6 +100,7 @@ $factory->state(App\Models\Manufacturer::class, 'adobe', function ($faker) {
     ];
 });
 
+// 10
 $factory->state(App\Models\Manufacturer::class, 'avery', function ($faker) {
     return [
         'name' => 'Avery',
