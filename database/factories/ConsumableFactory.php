@@ -2,10 +2,10 @@
 
 /*
 |--------------------------------------------------------------------------
-| Asset Model Factories
+| Consumables Factories
 |--------------------------------------------------------------------------
 |
-| Factories related exclusively to creating models ..
+| Factories related exclusively to creating consumables ..
 |
 */
 
@@ -14,7 +14,7 @@ $factory->define(App\Models\Consumable::class, function (Faker\Generator $faker)
         'user_id' => 1,
         'item_no' => $faker->numberBetween(1000000, 50000000),
         'order_number' => $faker->numberBetween(1000000, 50000000),
-        'purchase_date' => $faker->dateTime(),
+        'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
         'purchase_cost' => $faker->randomFloat(2, 1, 50),
         'qty' => $faker->numberBetween(5, 10),
         'min_amt' => $faker->numberBetween($min = 1, $max = 2),
