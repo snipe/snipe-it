@@ -158,6 +158,6 @@ class ComponentsController extends Controller
         $limit = $request->input('limit', 50);
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
-        return (new ComponentsAssetsTransformer)->transformAssets($assets, $total);
+        return (new ComponentsTransformer)->transformCheckedoutComponents($assets, $total);
     }
 }
