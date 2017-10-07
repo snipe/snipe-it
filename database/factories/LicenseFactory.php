@@ -15,7 +15,6 @@ $factory->define(App\Models\License::class, function (Faker\Generator $faker) {
     
     return [
         'user_id' => 1,
-        'location_id' => rand(1,5),
         'serial' => $faker->uuid,
         'notes'   => 'Created by DB seeder',
         'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
