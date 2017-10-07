@@ -13,28 +13,29 @@ $factory->define(App\Models\License::class, function (Faker\Generator $faker) {
 
     return [
         'user_id' => 1,
+        'license_name' => $faker->name,
+        'license_email' => $faker->safeEmail,
         'serial' => $faker->uuid,
         'notes'   => 'Created by DB seeder',
         'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
         'order_number' => $faker->numberBetween(1000000, 50000000),
     ];
-
-    
 });
 
 // 1
 $factory->state(App\Models\License::class, 'photoshop', function ($faker) {
     $data =  [
-        'name' => 'Photoshop',
+        'name' => 'Photoshorp',
         'manufacturer_id' => 9,
         'purchase_cost' => '299.99',
         'seats' => 10,
     ];
 
+
     for ($x = 0; $x < $data['seats']; $x++) {
         $seat = new App\Models\LicenseSeat;
         $seat->license_id = 1;
-        $seat->save();
+        $seat->create();
     }
     
     return $data;
@@ -54,7 +55,7 @@ $factory->state(App\Models\License::class, 'acrobat', function ($faker) {
     for ($x = 0; $x < $data['seats']; $x++) {
         $seat = new App\Models\LicenseSeat;
         $seat->license_id = 2;
-        $seat->save();
+        $seat->create();
     }
 
     return $data;
@@ -72,7 +73,7 @@ $factory->state(App\Models\License::class, 'indesign', function ($faker) {
     for ($x = 0; $x < $data['seats']; $x++) {
         $seat = new App\Models\LicenseSeat;
         $seat->license_id = 3;
-        $seat->save();
+        $seat->create();
     }
 
     return $data;
@@ -91,7 +92,7 @@ $factory->state(App\Models\License::class, 'office', function ($faker) {
     for ($x = 0; $x < $data['seats']; $x++) {
         $seat = new App\Models\LicenseSeat;
         $seat->license_id = 4;
-        $seat->save();
+        $seat->create();
     }
 
     return $data;
