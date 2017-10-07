@@ -100,12 +100,22 @@ $factory->state(App\Models\Manufacturer::class, 'adobe', function ($faker) {
     ];
 });
 
+
 // 10
 $factory->state(App\Models\Manufacturer::class, 'avery', function ($faker) {
     return [
         'name' => 'Avery',
         'url' => 'https://avery.com',
         'support_url' => 'https://support.avery.com'
+    ];
+});
+
+// 11
+$factory->state(App\Models\Manufacturer::class, 'crucial', function ($faker) {
+    return [
+        'name' => 'Crucial',
+        'url' => 'https://crucial.com',
+        'support_url' => 'https://support.crucial.com'
     ];
 });
 
