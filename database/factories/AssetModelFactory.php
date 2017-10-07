@@ -30,7 +30,8 @@ $factory->state(App\Models\AssetModel::class, 'mbp-13-model', function ($faker) 
         'name' => 'Macbook Pro 13"',
         'category_id' => 1,
         'manufacturer_id' => 1,
-        'eol' => '36'
+        'eol' => '36',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -40,7 +41,8 @@ $factory->state(App\Models\AssetModel::class, 'mbp-air-model', function ($faker)
         'name' => 'Macbook Air',
         'category_id' => 1,
         'manufacturer_id' => 1,
-        'eol' => '36'
+        'eol' => '36',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -50,7 +52,8 @@ $factory->state(App\Models\AssetModel::class, 'surface-model', function ($faker)
         'name' => 'Surface',
         'category_id' => 1,
         'manufacturer_id' => 2,
-        'eol' => '36'
+        'eol' => '36',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -60,7 +63,8 @@ $factory->state(App\Models\AssetModel::class, 'xps13-model', function ($faker) {
         'name' => 'XPS 13',
         'category_id' => 1,
         'manufacturer_id' => 3,
-        'eol' => '36'
+        'eol' => '36',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -70,7 +74,8 @@ $factory->state(App\Models\AssetModel::class, 'zenbook-model', function ($faker)
         'name' => 'ZenBook UX310',
         'category_id' => 1,
         'manufacturer_id' => 4,
-        'eol' => '36'
+        'eol' => '36',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -80,7 +85,8 @@ $factory->state(App\Models\AssetModel::class, 'spectre-model', function ($faker)
         'name' => 'Spectre',
         'category_id' => 1,
         'manufacturer_id' => 5,
-        'eol' => '36'
+        'eol' => '36',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -90,7 +96,8 @@ $factory->state(App\Models\AssetModel::class, 'yoga-model', function ($faker) {
         'name' => 'Yoga 910',
         'category_id' => 1,
         'manufacturer_id' => 6,
-        'eol' => '36'
+        'eol' => '36',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -106,7 +113,8 @@ $factory->state(App\Models\AssetModel::class, 'macpro-model', function ($faker) 
         'name' => 'iMac Pro',
         'category_id' => 2,
         'manufacturer_id' => 1,
-        'eol' => '24'
+        'eol' => '24',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -115,7 +123,8 @@ $factory->state(App\Models\AssetModel::class, 'lenovo-i5-model', function ($fake
         'name' => 'Lenovo Intel Core i5',
         'category_id' => 2,
         'manufacturer_id' => 6,
-        'eol' => '24'
+        'eol' => '24',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -125,7 +134,8 @@ $factory->state(App\Models\AssetModel::class, 'optiplex-model', function ($faker
         'category_id' => 2,
         'manufacturer_id' => 3,
         'model_number' => '5040 (MRR81)',
-        'eol' => '24'
+        'eol' => '24',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -142,7 +152,8 @@ $factory->state(App\Models\AssetModel::class, 'polycom-model', function ($faker)
         'name' => 'SoundStation 2',
         'category_id' => 6,
         'manufacturer_id' => 8,
-        'eol' => '12'
+        'eol' => '12',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -151,7 +162,8 @@ $factory->state(App\Models\AssetModel::class, 'polycomcx-model', function ($fake
         'name' => 'Polycom CX3000 IP Conference Phone',
         'category_id' => 6,
         'manufacturer_id' => 8,
-        'eol' => '12'
+        'eol' => '12',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -168,6 +180,7 @@ $factory->state(App\Models\AssetModel::class, 'ipad-model', function ($faker) {
         'category_id' => 3,
         'manufacturer_id' => 1,
         'eol' => '12',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -178,6 +191,7 @@ $factory->state(App\Models\AssetModel::class, 'tab3-model', function ($faker) {
         'category_id' => 3,
         'manufacturer_id' => 6,
         'eol' => '12',
+        'depreciation_id' => 1,
     ];
 });
 
@@ -194,6 +208,7 @@ $factory->state(App\Models\AssetModel::class, 'iphone6s-model', function ($faker
         'category_id' => 4,
         'manufacturer_id' => 1,
         'eol' => '12',
+        'depreciation_id' => 3,
     ];
 });
 
@@ -203,8 +218,37 @@ $factory->state(App\Models\AssetModel::class, 'iphone7-model', function ($faker)
         'category_id' => 4,
         'manufacturer_id' => 1,
         'eol' => '12',
+        'depreciation_id' => 1,
     ];
 });
+
+/*
+|--------------------------------------------------------------------------
+| Displays
+|--------------------------------------------------------------------------
+*/
+
+$factory->state(App\Models\AssetModel::class, 'ultrafine', function ($faker) {
+    return [
+        'name' => 'Ultrafine 4k',
+        'category_id' => 5,
+        'manufacturer_id' => 7,
+        'eol' => '12',
+        'depreciation_id' => 2,
+    ];
+});
+
+$factory->state(App\Models\AssetModel::class, 'ultrasharp', function ($faker) {
+    return [
+        'name' => 'Ultrasharp U2415',
+        'category_id' => 5,
+        'manufacturer_id' => 3,
+        'eol' => '12',
+        'depreciation_id' => 2,
+    ];
+});
+
+
 
 
 
