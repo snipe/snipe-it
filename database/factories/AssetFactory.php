@@ -15,67 +15,28 @@ use App\Models\Category;
 
 $factory->define(Asset::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->catchPhrase,
-        'model_id' => function () {
-            return factory(App\Models\AssetModel::class)->create()->id;
-        },
-        'rtd_location_id' => function () {
-            return factory(App\Models\Location::class)->create()->id;
-        },
+        'name' => null,
+        'rtd_location_id' => 1,
         'serial' => $faker->uuid,
-        'status_id' => function () {
-            return factory(App\Models\Statuslabel::class)->states('rtd')->create()->id;
-        },
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
-        },
+        'status_id' => 1,
+        'user_id' => 1,
         'asset_tag' => $faker->unixTime('now'),
         'notes'   => $faker->sentence,
         'purchase_date' => $faker->dateTime(),
         'purchase_cost' => $faker->randomFloat(2),
         'order_number' => $faker->numberBetween(1000000, 50000000),
-        'supplier_id' => function () {
-            return factory(App\Models\Supplier::class)->create()->id;
-        },
-        'company_id' => function () {
-            return factory(App\Models\Company::class)->create()->id;
-        },
+        'supplier_id' => 1,
+        'company_id' => 1,
         'requestable' => $faker->boolean()
     ];
 });
 
-$factory->state(Asset::class, 'deleted', function ($faker) {
-    return [
-        'deleted_at' => $faker->dateTime(),
-    ];
-});
 
-$factory->state(Asset::class, 'assigned-to-user', function ($faker) {
-    return [
-        'assigned_to' => factory(App\Models\User::class)->create()->id,
-        'assigned_type' => App\Models\User::class,
-    ];
-});
 
-$factory->state(Asset::class, 'assigned-to-location', function ($faker) {
-    return [
-        'assigned_to' => factory(App\Models\Location::class)->create()->id,
-        'assigned_type' => App\Models\Location::class,
-    ];
-});
 
-$factory->state(Asset::class, 'assigned-to-asset', function ($faker) {
+$factory->state(Asset::class, 'asset-laptop', function ($faker) {
     return [
-        'assigned_to' => factory(App\Models\Asset::class)->create()->id,
-        'assigned_type' => App\Models\Asset::class,
-    ];
-});
-
-$factory->state(Asset::class, 'requires-acceptance', function ($faker) {
-    $cat = factory(Category::class)->states('asset-category', 'requires-acceptance')->create();
-    $model = factory(AssetModel::class)->create(['category_id' => $cat->id]);
-    return [
-        'model_id' => $model->id
+        'model_id' => 1
     ];
 });
 
@@ -86,7 +47,7 @@ $factory->define(App\Models\AssetModel::class, function (Faker\Generator $faker)
         return factory(App\Models\Manufacturer::class)->create()->id;
     },
     'category_id' => function () {
-        return factory(App\Models\Category::class)->states('asset-category')->create()->id;
+        return factory(App\Models\Category::class)->states('asset-desktop-category')->create()->id;
     },
     'model_number' => $faker->numberBetween(1000000, 50000000),
     'eol' => 1,
