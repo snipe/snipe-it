@@ -66,7 +66,7 @@
           <a href="{{ route('settings.localization.index') }}" class="btn btn-lg btn-white"><i class="fa fa-globe fa-3x"></i></a>
           <br>
           Localization
-          <p class="help-block">Language, time zones</p>
+          <p class="help-block">Language, date display</p>
 
         </div>
       </div>

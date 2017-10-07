@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
         Commands\LdapSync::class,
         Commands\FixDoubleEscape::class,
         Commands\RecryptFromMcrypt::class,
-        Commands\DemoData::class
+        Commands\ResetDemoSettings::class
     ];
 
     /**
