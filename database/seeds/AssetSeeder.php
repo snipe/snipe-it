@@ -8,7 +8,6 @@ class AssetSeeder extends Seeder
   public function run()
   {
       Asset::truncate();
-      //factory(Asset::class, 100)->create();
       factory(Asset::class, 10)->states('laptop-mbp')->create();
       factory(Asset::class, 10)->states('laptop-air')->create();
       factory(Asset::class, 5)->states('laptop-surface')->create();
