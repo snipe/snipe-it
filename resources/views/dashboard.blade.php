@@ -328,7 +328,7 @@
             });
         },
         error: function (data) {
-            window.location.reload(true);
+           // window.location.reload(true);
         }
     });
 

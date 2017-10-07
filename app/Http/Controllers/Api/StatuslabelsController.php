@@ -155,7 +155,7 @@ class StatuslabelsController extends Controller
     public function getAssetCountByStatuslabel()
     {
 
-        $statusLabels = Statuslabel::with('assets')->get();
+        $statusLabels = Statuslabel::get();
         $labels=[];
         $points=[];
         $colors=[];
