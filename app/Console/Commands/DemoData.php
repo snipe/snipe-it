@@ -37,7 +37,7 @@ class DemoData extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:demo-seed {--username=*}';
+    protected $signature = 'snipeit:demo-seed {--nukeusers}';
 
     /**
      * The console command description.
@@ -74,23 +74,6 @@ class DemoData extends Command
 
         if ($this->confirm("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n This will overwrite your existing database. Do you wish to continue?")) {
 
-
-            $this->dropRealCustomFieldsColumns();
-            $this->dropAndCreateCategories();
-            $this->dropAndCreateManufacturers();
-            $this->dropAndCreateLocations();
-            $this->dropAndCreateActionlogs();
-            $this->dropAndCreateAssetModels();
-            $this->dropAndCreateStatusLabels();
-            $this->dropAndCreateAssets();
-            $this->dropAndCreateDepreciations();
-            $this->dropAndCreateSuppliers();
-            $this->dropAndCreateAccessories();
-            $this->dropAndCreateLicenses();
-            $this->dropAndCreateComponents();
-            $this->dropAndCreateConsumables();
-
-
             Import::truncate();
             AssetMaintenance::truncate();
             Group::truncate();
@@ -98,12 +81,30 @@ class DemoData extends Command
             CustomField::truncate();
             Group::truncate();
             CustomFieldset::truncate();
-            Department::truncate();
-            User::where('username', '!=', 'snipe')
-                ->where('username', '!=', 'admin')
-                ->forceDelete();
+
             DB::table('custom_field_custom_fieldset')->truncate();
             DB::table('checkout_requests')->truncate();
+
+            $this->dropRealCustomFieldsColumns();
+            $this->dropAndCreateCategories();
+            $this->dropAndCreateManufacturers();
+            $this->dropAndCreateAssetModels();
+            $this->dropAndCreateStatusLabels();
+            $this->dropAndCreateDepreciations();
+            $this->dropAndCreateSuppliers();
+            $this->dropAndCreateAccessories();
+            $this->dropAndCreateLicenses();
+            $this->dropAndCreateComponents();
+            $this->dropAndCreateConsumables();
+            $this->dropAndCreateLocations();
+            if ($this->option('nukeusers')) {
+                $this->dropAndCreateUsers();
+            }
+
+            $this->dropAndCreateAssets();
+            $this->dropAndCreateActionlogs();
+            $this->dropAndCreateDepartments();
+
 
 
         }
@@ -289,6 +290,81 @@ class DemoData extends Command
                 'serial' => self::generateRandomString(),
                 'asset_tag' => '1000311'
             ],
+            [
+                'id' => 12,
+                'user_id' => 1,
+                'name' => null,
+                'model_id' => 14,
+                'assigned_to' => null,
+                'assigned_type' => null,
+                'purchase_cost' => '899.56',
+                'purchase_date' => date('Y-m-d'),
+                'supplier_id' => rand(1,4),
+                'status_id' => 1,
+                'rtd_location_id' =>  rand(1,4),
+                'serial' => self::generateRandomString(),
+                'asset_tag' => '1000312'
+            ],
+            [
+                'id' => 13,
+                'user_id' => 1,
+                'name' => null,
+                'model_id' => 14,
+                'assigned_to' => null,
+                'assigned_type' => null,
+                'purchase_cost' => '899.56',
+                'purchase_date' => date('Y-m-d'),
+                'supplier_id' => rand(1,4),
+                'status_id' => 1,
+                'rtd_location_id' =>  rand(1,4),
+                'serial' => self::generateRandomString(),
+                'asset_tag' => '1000313'
+            ],
+            [
+                'id' => 14,
+                'user_id' => 1,
+                'name' => null,
+                'model_id' => 14,
+                'assigned_to' => null,
+                'assigned_type' => null,
+                'purchase_cost' => '899.56',
+                'purchase_date' => date('Y-m-d'),
+                'supplier_id' => rand(1,4),
+                'status_id' => 4,
+                'rtd_location_id' =>  rand(1,4),
+                'serial' => self::generateRandomString(),
+                'asset_tag' => '1000314'
+            ],
+            [
+                'id' => 15,
+                'user_id' => 1,
+                'name' => 'Reception Laptop',
+                'model_id' => 4,
+                'assigned_to' => 3,
+                'assigned_type' => Location::class,
+                'purchase_cost' => '3025.56',
+                'purchase_date' => date('Y-m-d'),
+                'supplier_id' => rand(1,4),
+                'status_id' => 1,
+                'rtd_location_id' =>  rand(1,4),
+                'serial' => self::generateRandomString(),
+                'asset_tag' => '1000315'
+            ],
+            [
+                'id' => 16,
+                'user_id' => 1,
+                'name' => 'Testing Laptop',
+                'model_id' => 4,
+                'assigned_to' => 2,
+                'assigned_type' => User::class,
+                'purchase_cost' => '3025.56',
+                'purchase_date' => date('Y-m-d'),
+                'supplier_id' => rand(1,4),
+                'status_id' => 1,
+                'rtd_location_id' =>  rand(1,4),
+                'serial' => self::generateRandomString(),
+                'asset_tag' => '1000316'
+            ],
 
 
         ];
@@ -362,7 +438,7 @@ class DemoData extends Command
 
 
     public function dropAndCreateSuppliers() {
-
+        $this->info('Dropping suppliers data');
         Supplier::truncate();
 
         $supppliers = [
@@ -390,12 +466,13 @@ class DemoData extends Command
 
         // Create Depreciations
         DB::table('suppliers')->insert($supppliers);
+        $this->info('Generating suppliers data');
         return $supppliers;
     }
 
 
     public function dropAndCreateDepreciations() {
-
+        $this->info('Dropping depreciations data');
         Depreciation::truncate();
 
         $depreciations = [
@@ -414,13 +491,15 @@ class DemoData extends Command
         ];
 
         // Create Depreciations
+        $this->info('Generating suppliers data');
         DB::table('depreciations')->insert($depreciations);
+
         return $depreciations;
     }
 
 
     public function dropAndCreateAssetModels() {
-
+        $this->info('Dropping asset model data');
         AssetModel::truncate();
 
         $models = [
@@ -582,14 +661,17 @@ class DemoData extends Command
                 'model_number' => rand(111111,99999)
             ],
 
+
         ];
 
         // Create Models
+        $this->info('generating asset model data');
         DB::table('models')->insert($models);
         return $models;
     }
     public function dropAndCreateCategories() {
 
+        $this->info('Dropping category data');
         Category::truncate();
         $categories = [
 
@@ -686,12 +768,14 @@ class DemoData extends Command
 
 
         // Create Categories
+        $this->info('Generating category data');
         DB::table('categories')->insert($categories);
         return $categories;
     }
 
     public function dropAndCreateLocations() {
 
+        $this->info('Dropping location data');
         Location::truncate();
 
         $locations = [
@@ -720,6 +804,7 @@ class DemoData extends Command
         ];
 
         // Create Locations
+        $this->info('Generating location data');
         DB::table('locations')->insert($locations);
         return $locations;
 
@@ -727,6 +812,7 @@ class DemoData extends Command
 
     public function dropAndCreateLicenses() {
 
+        $this->info('Dropping licenses and seat data');
         License::truncate();
         LicenseSeat::truncate();
 
@@ -789,6 +875,7 @@ class DemoData extends Command
         ];
 
         // Create Licenses
+        $this->info('Dropping license and seat data');
         DB::table('licenses')->insert($licenses);
 
         foreach ($licenses as $license) {
@@ -811,6 +898,7 @@ class DemoData extends Command
 
     public function dropAndCreateAccessories() {
 
+        $this->info('Dropping accessory data');
         Accessory::truncate();
         DB::table('accessories_users')->truncate();
 
@@ -869,6 +957,7 @@ class DemoData extends Command
         ];
 
         // Create Locations
+        $this->info('Generating accessory data');
         DB::table('accessories')->insert($accessories);
         return $accessories;
 
@@ -878,6 +967,7 @@ class DemoData extends Command
 
     public function dropAndCreateComponents() {
 
+        $this->info('Dropping component data');
         Component::truncate();
         DB::table('components_assets')->truncate();
 
@@ -898,6 +988,7 @@ class DemoData extends Command
         ];
 
         // Create Locations
+        $this->info('Generating component data');
         DB::table('components')->insert($components);
         return $components;
 
@@ -906,6 +997,7 @@ class DemoData extends Command
 
     public function dropAndCreateConsumables() {
 
+        $this->info('Dropping consumable data');
         Consumable::truncate();
         DB::table('consumables_users')->truncate();
 
@@ -927,15 +1019,138 @@ class DemoData extends Command
         ];
 
         // Create Locations
+        $this->info('Generating consumable data');
         DB::table('consumables')->insert($consumables);
         return $consumables;
+
+    }
+
+    public function dropAndCreateUsers() {
+
+        $this->info('Dropping users data (except user: admin)');
+        User::where('username', '!=', 'snipe')
+            ->where('username', '!=', 'admin')
+            ->forceDelete();
+
+        $users = [
+
+            // Users
+            [
+                'first_name' => 'Test',
+                'last_name' => 'User',
+                'username' => 'testuser',
+                'email' => 'testuser@snipe.net',
+                'jobtitle' => 'Just a test user',
+                'notes' => 'Created by demo seeder',
+                'location_id' => 1,
+                'department_id' => 1,
+                'password' => bcrypt('password'),
+                'activated' => 1,
+            ],
+            [
+                'first_name' => 'Donald',
+                'last_name' => 'Duck',
+                'username' => 'donaldduck',
+                'email' => 'donaldduck@example.com',
+                'jobtitle' => 'Director of Engineering',
+                'notes' => 'Created by demo seeder',
+                'location_id' => 2,
+                'department_id' => 3,
+                'password' => bcrypt('password'),
+                'activated' => 1,
+            ],
+            [
+                'first_name' => 'Adrian',
+                'last_name' => 'Whapcaplet',
+                'username' => 'adrianwhapcaplet',
+                'email' => 'adrianwhapcaplet@example.com',
+                'jobtitle' => 'HR Manager',
+                'notes' => 'Created by demo seeder',
+                'location_id' => 2,
+                'department_id' => 1,
+                'password' => bcrypt('password'),
+                'activated' => 1,
+            ],
+            [
+                'first_name' => 'Arthur',
+                'last_name' => 'Nudge',
+                'username' => 'arthurnudge',
+                'email' => 'arthurnudge@example.com',
+                'jobtitle' => 'Social Media Manager',
+                'notes' => 'Created by demo seeder',
+                'location_id' => 2,
+                'department_id' => 2,
+                'password' => bcrypt('password'),
+                'activated' => 1,
+            ],
+            [
+                'first_name' => 'Spiny',
+                'last_name' => 'Norman',
+                'username' => 'spinynorman',
+                'email' => 'spinynorman@example.com',
+                'jobtitle' => 'CEO',
+                'notes' => 'Created by demo seeder',
+                'location_id' => 2,
+                'department_id' => 2,
+                'password' => bcrypt('password'),
+                'activated' => 1,
+            ],
+             
+
+
+        ];
+
+        // Create Locations
+        $this->info('Generating user data');
+        DB::table('users')->insert($users);
+        return $users;
+
+    }
+
+    public function dropAndCreateDepartments() {
+
+        $this->info('Dropping department data');
+        Department::truncate();
+
+        $departments = [
+
+            // Departments
+            [
+                'id' => 1,
+                'name' => 'Human Resources',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Dept of Silly Walks',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Engineering',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Marketing',
+            ],
+            [
+                'id' => 5,
+                'name' => 'Client Services',
+            ],
+
+        ];
+
+        // Create Locations
+        $this->info('Generating suppliers data');
+        DB::table('departments')->insert($departments);
+        return $departments;
 
     }
 
 
     public function dropAndCreateActionlogs() {
 
+        $this->info('Dropping actionlog data');
         Actionlog::truncate();
+
 
         $action_logs = [
 
@@ -1010,16 +1225,38 @@ class DemoData extends Command
                 'created_at' => date('Y-m-d'),
                 'note' => 'Created by demo seeder',
             ],
+            [
+                'user_id' => 1,
+                'action_type' => 'checkout',
+                'target_id' => 3,
+                'target_type' => Location::class,
+                'item_type' => Asset::class,
+                'item_id' => 15,
+                'created_at' => date('Y-m-d'),
+                'note' => 'Created by demo seeder',
+            ],
+            [
+                'user_id' => 1,
+                'action_type' => 'checkout',
+                'target_id' => 1,
+                'target_type' => User::class,
+                'item_type' => Asset::class,
+                'item_id' => 16,
+                'created_at' => date('Y-m-d'),
+                'note' => 'Created by demo seeder',
+            ],
 
         ];
 
         // Create Logs
+        $this->info('Generating actionlog data');
         DB::table('action_logs')->insert($action_logs);
         return $action_logs;
     }
 
     public function dropAndCreateStatusLabels() {
 
+        $this->info('Dropping statuslabel data');
         Statuslabel::truncate();
 
         $statuslabels = [
@@ -1076,22 +1313,29 @@ class DemoData extends Command
         ];
 
         // Create status labels
+        $this->info('Dropping statuslabel data');
         DB::table('status_labels')->insert($statuslabels);
         return $statuslabels;
     }
 
     public function dropRealCustomFieldsColumns() {
         // delete custom field columns on the asset table
+        $this->info('Dropping custom fields from asset table');
         $fields = Customfield::all();
+        $fieldcount = 0;
         foreach ($fields as $field) {
             if ($field->db_column!='') {
+                $fieldcount++;
                 $this->info('Dropping DB column: '.$field->db_column);
                 Schema::table('assets', function (Blueprint $table) {
                     $table->dropColumn($field->db_column);
                 });
             }
         }
+        $this->info('Dropped '.$fieldcount.' fields from asset table');
     }
+
+
 
     public function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
