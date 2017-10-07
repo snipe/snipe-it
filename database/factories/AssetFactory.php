@@ -130,6 +130,57 @@ $factory->state(Asset::class, 'phone-iphone7', function ($faker) {
     ];
 });
 
+$factory->state(Asset::class, 'ultrafine', function ($faker) {
+    return [
+        'model_id' => 17
+    ];
+});
+
+$factory->state(Asset::class, 'ultrasharp', function ($faker) {
+    return [
+        'model_id' => 18
+    ];
+});
+
+
+// These are just for unit tests, not to generate data
+
+$factory->state(Asset::class, 'assigned-to-user', function ($faker) {
+    return [
+        'model_id' => 1,
+        'assigned_to' => factory(App\Models\User::class)->create()->id,
+        'assigned_type' => App\Models\User::class,
+    ];
+});
+$factory->state(Asset::class, 'assigned-to-location', function ($faker) {
+    return [
+        'model_id' => 1,
+        'assigned_to' => factory(App\Models\Location::class)->create()->id,
+        'assigned_type' => App\Models\Location::class,
+    ];
+});
+$factory->state(Asset::class, 'assigned-to-asset', function ($faker) {
+    return [
+        'model_id' => 1,
+        'assigned_to' => factory(App\Models\Asset::class)->create()->id,
+        'assigned_type' => App\Models\Asset::class,
+    ];
+});
+
+$factory->state(Asset::class, 'requires-acceptance', function ($faker) {
+    return [
+        'model_id' => 1,
+    ];
+});
+
+
+$factory->state(Asset::class, 'deleted', function ($faker) {
+    return [
+        'model_id' => 1,
+        'deleted_at' => $faker->dateTime()
+    ];
+});
+
 
 $factory->define(App\Models\AssetMaintenance::class, function (Faker\Generator $faker) {
     return [
