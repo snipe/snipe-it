@@ -9,6 +9,8 @@ class AssetSeeder extends Seeder
   {
       Asset::truncate();
       factory(Asset::class, 10)->states('laptop-mbp')->create();
+      factory(Asset::class, 5)->states('laptop-mbp-pending')->create();
+      factory(Asset::class, 5)->states('laptop-mbp-archived')->create();
       factory(Asset::class, 10)->states('laptop-air')->create();
       factory(Asset::class, 5)->states('laptop-surface')->create();
       factory(Asset::class, 5)->states('laptop-xps')->create();
