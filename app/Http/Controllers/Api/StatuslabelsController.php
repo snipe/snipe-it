@@ -168,9 +168,7 @@ class StatuslabelsController extends Controller
                 }
             }
         }
-        $labels[]='Deployed';
-        $points[]=Asset::whereNotNull('assigned_to')->count();
-
+        
         $colors_array = array_merge($colors, Helper::chartColors());
 
         $result= [
