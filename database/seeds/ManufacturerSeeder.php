@@ -16,6 +16,7 @@ class ManufacturerSeeder extends Seeder
         factory(Manufacturer::class, 1)->states('lg')->create(); // 7
         factory(Manufacturer::class, 1)->states('polycom')->create(); // 8
         factory(Manufacturer::class, 1)->states('adobe')->create(); // 9
+        factory(Manufacturer::class, 1)->states('avery')->create(); // 10
         
     }
 }
