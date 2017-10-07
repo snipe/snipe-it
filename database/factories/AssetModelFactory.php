@@ -23,6 +23,8 @@ $factory->define(App\Models\AssetModel::class, function (Faker\Generator $faker)
     ];
 });
 
+
+// 1
 $factory->state(App\Models\AssetModel::class, 'mbp-13-model', function ($faker) {
     return [
         'name' => 'Macbook Pro 13"',
@@ -32,17 +34,17 @@ $factory->state(App\Models\AssetModel::class, 'mbp-13-model', function ($faker) 
     ];
 });
 
-
+// 2
 $factory->state(App\Models\AssetModel::class, 'mbp-air-model', function ($faker) {
     return [
-        'name' => 'Macbook Pro 13"',
+        'name' => 'Macbook Air',
         'category_id' => 1,
         'manufacturer_id' => 1,
         'eol' => '36'
     ];
 });
 
-
+// 3
 $factory->state(App\Models\AssetModel::class, 'surface-model', function ($faker) {
     return [
         'name' => 'Surface',
@@ -52,6 +54,7 @@ $factory->state(App\Models\AssetModel::class, 'surface-model', function ($faker)
     ];
 });
 
+// 4
 $factory->state(App\Models\AssetModel::class, 'xps13-model', function ($faker) {
     return [
         'name' => 'XPS 13',
@@ -61,6 +64,7 @@ $factory->state(App\Models\AssetModel::class, 'xps13-model', function ($faker) {
     ];
 });
 
+// 5
 $factory->state(App\Models\AssetModel::class, 'zenbook-model', function ($faker) {
     return [
         'name' => 'ZenBook UX310',
@@ -70,6 +74,7 @@ $factory->state(App\Models\AssetModel::class, 'zenbook-model', function ($faker)
     ];
 });
 
+// 6
 $factory->state(App\Models\AssetModel::class, 'spectre-model', function ($faker) {
     return [
         'name' => 'Spectre',
@@ -79,6 +84,7 @@ $factory->state(App\Models\AssetModel::class, 'spectre-model', function ($faker)
     ];
 });
 
+// 7
 $factory->state(App\Models\AssetModel::class, 'yoga-model', function ($faker) {
     return [
         'name' => 'Yoga 910',
