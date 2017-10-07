@@ -22,7 +22,7 @@ $factory->define(Asset::class, function (Faker\Generator $faker) {
         'user_id' => 1,
         'asset_tag' => $faker->unixTime('now'),
         'notes'   => 'Created by DB seeder',
-        'purchase_date' => $faker->dateTime(),
+        'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
         'purchase_cost' => $faker->randomFloat(2, '299.99', '2999.99'),
         'order_number' => $faker->numberBetween(1000000, 50000000),
         'supplier_id' => 1,
