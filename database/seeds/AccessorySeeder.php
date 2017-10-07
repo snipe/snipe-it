@@ -7,7 +7,7 @@ class AccessorySeeder extends Seeder
 {
   public function run()
   {
-    Accessory::truncate();
+      Accessory::truncate();
       DB::table('accessories_users')->truncate();
       factory(Accessory::class, 1)->states('apple-usb-keyboard')->create();
       factory(Accessory::class, 1)->states('apple-bt-keyboard')->create();
