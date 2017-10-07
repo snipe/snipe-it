@@ -25,7 +25,7 @@ $factory->define(App\Models\License::class, function (Faker\Generator $faker) {
 // 1
 $factory->state(App\Models\License::class, 'photoshop', function ($faker) {
     $data =  [
-        'name' => 'Photoshorp',
+        'name' => 'Photoshop',
         'manufacturer_id' => 9,
         'purchase_cost' => '299.99',
         'seats' => 10,
