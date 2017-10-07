@@ -9,7 +9,6 @@ use App\Models\Asset;
 
 $factory->define(Actionlog::class, function (Faker\Generator $faker) {
     return [
-
         'note' => 'Sample checkout from DB seeder!',
     ];
 });
@@ -18,7 +17,7 @@ $factory->define(Actionlog::class, function (Faker\Generator $faker) {
 
 $factory->defineAs(Actionlog::class, 'asset-checkout-user', function (Faker\Generator $faker) {
     $target = User::inRandomOrder()->first();
-    $item = Asset::inRandomOrder()->first();
+    $item = Asset::inRandomOrder()->RTD()->first();
     $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
     $asset = App\Models\Asset::where('id', $item->id)
         ->update(
@@ -43,7 +42,7 @@ $factory->defineAs(Actionlog::class, 'asset-checkout-user', function (Faker\Gene
 
 $factory->defineAs(Actionlog::class, 'asset-checkout-location', function (Faker\Generator $faker) {
     $target = Location::inRandomOrder()->first();
-    $item = Asset::inRandomOrder()->first();
+    $item = Asset::inRandomOrder()->RTD()->first();
     $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
     $asset = App\Models\Asset::where('id', $item->id)
         ->update(
@@ -66,7 +65,7 @@ $factory->defineAs(Actionlog::class, 'asset-checkout-location', function (Faker\
 
 // This doesn't work - we need to assign a seat
 $factory->defineAs(Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
-    $target = Asset::inRandomOrder()->first();
+    $target = Asset::inRandomOrder()->RTD()->first();
     $item = License::inRandomOrder()->first();
     $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
 
@@ -84,7 +83,7 @@ $factory->defineAs(Actionlog::class, 'license-checkout-asset', function (Faker\G
 
 
 $factory->defineAs(Actionlog::class, 'accessory-checkout', function (Faker\Generator $faker) {
-    $target = Asset::inRandomOrder()->first();
+    $target = Asset::inRandomOrder()->RTD()->first();
     $item = Accessory::inRandomOrder()->first();
     $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
 
