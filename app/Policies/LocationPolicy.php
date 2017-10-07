@@ -12,7 +12,7 @@ class LocationPolicy
     use HandlesAuthorization;
 
 
-    public function before(User $user, $ability, $location)
+    public function before(User $user, $location)
     {
         // Lets move all company related checks here.
         if ($location instanceof \App\Models\Location && !Company::isCurrentUserHasAccess($location)) {
@@ -30,7 +30,7 @@ class LocationPolicy
      * @param  \App\Models\Location  $location
      * @return mixed
      */
-    public function view(User $user, Location $location = null)
+    public function view(User $user)
     {
         return $user->hasAccess('locations.view');
     }
@@ -53,7 +53,7 @@ class LocationPolicy
      * @param  \App\Models\Location  $location
      * @return mixed
      */
-    public function update(User $user, Location $location = null)
+    public function update(User $user)
     {
         //
         return $user->hasAccess('locations.edit');
@@ -66,7 +66,7 @@ class LocationPolicy
      * @param  \App\Models\Location  $location
      * @return mixed
      */
-    public function delete(User $user, Location $location = null)
+    public function delete(User $user)
     {
         //
         return $user->hasAccess('locations.delete');
@@ -92,7 +92,7 @@ class LocationPolicy
      * @param  \App\Models\Location  $location
      * @return mixed
      */
-    public function manage(User $user, Location $location = null)
+    public function manage(User $user)
     {
         return $user->hasAccess('locations.edit');
     }

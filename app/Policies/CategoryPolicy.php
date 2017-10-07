@@ -12,7 +12,7 @@ class CategoryPolicy
     use HandlesAuthorization;
 
 
-    public function before(User $user, $ability, $category)
+    public function before(User $user, $category)
     {
         // Lets move all company related checks here.
         if ($category instanceof \App\Models\Category && !Company::isCurrentUserHasAccess($category)) {
@@ -30,7 +30,7 @@ class CategoryPolicy
      * @param  \App\Category  $category
      * @return mixed
      */
-    public function view(User $user, Category $category = null)
+    public function view(User $user)
     {
         return $user->hasAccess('categories.view');
     }
@@ -53,7 +53,7 @@ class CategoryPolicy
      * @param  \App\Category  $category
      * @return mixed
      */
-    public function update(User $user, Category $category = null)
+    public function update(User $user)
     {
         //
         return $user->hasAccess('categories.edit');
@@ -66,7 +66,7 @@ class CategoryPolicy
      * @param  \App\Category  $category
      * @return mixed
      */
-    public function delete(User $user, Category $category = null)
+    public function delete(User $user)
     {
         //
         return $user->hasAccess('categories.delete');
@@ -92,7 +92,7 @@ class CategoryPolicy
      * @param  \App\Models\Category  $category
      * @return mixed
      */
-    public function manage(User $user, Category $category = null)
+    public function manage(User $user)
     {
         return  $user->hasAccess('categories.edit');
     }
