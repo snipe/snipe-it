@@ -91,3 +91,14 @@ $factory->state(App\Models\Manufacturer::class, 'adobe', function ($faker) {
         'support_url' => 'https://support.adobe.com'
     ];
 });
+
+$factory->state(App\Models\Manufacturer::class, 'avery', function ($faker) {
+    return [
+        'name' => 'Avery',
+        'url' => 'https://avery.com',
+        'support_url' => 'https://support.avery.com'
+    ];
+});
+
+
+
