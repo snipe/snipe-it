@@ -110,6 +110,12 @@ class LicensePresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.order_number'),
+            ], [
+                "field" => "notes",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('general.notes'),
             ]
         ];
 
