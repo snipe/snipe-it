@@ -39,12 +39,14 @@ spin[3]="/"
 
 # Debian/Ubuntu friendly f(x)s
 progress () {
+    echo -n " "
     while kill -0 "$pid" > /dev/null 2>&1; do
         for i in "${spin[@]}"; do
             echo -ne "\b$i"
             sleep .1
         done
     done
+    echo ""
 }
 
 setvhdebian () {
@@ -63,7 +65,6 @@ setvhdebian () {
         echo "        CustomLog /var/log/apache2/access.log combined"
         echo "</VirtualHost>"
     } >> $apachefile
-    echo >> $hosts "127.0.0.1 $hostname $fqdn"
     log "a2ensite $name.conf"
 }
 
@@ -203,7 +204,7 @@ read -r setpw
 
 case $setpw in
     [yY] | [yY][Ee][Ss] )
-        mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c16`)"
+        mysqluserpw="$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c16; echo)"
         echo ""
         ans="yes"
         ;;
@@ -219,8 +220,6 @@ esac
 done
 
 #TODO: Lets not install snipeit application under root
-#TODO: Make progress tracker go on the same line of the step being run
-#TODO: Progress tracker on each step
 
 case $distro in
     debian)
@@ -230,15 +229,15 @@ case $distro in
         ownergroup=www-data:www-data
         tzone=$(cat /etc/timezone)
 
-        echo "* Updating with apt-get update."
+        echo -n "* Updating with apt-get update."
         log "apt-get update" & pid=$!
         progress
 
-        echo "* Upgrading packages with apt-get upgrade."
+        echo -n "* Upgrading packages with apt-get upgrade."
         log "apt-get -y upgrade" & pid=$!
         progress
 
-        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        echo -n "* Installing Apache httpd, PHP, MariaDB and other requirements."
         log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip" & pid=$!
         progress
 
@@ -247,6 +246,7 @@ case $distro in
         echo "* Creating the new virtual host in Apache."
         setvhdebian
 
+        echo "* Setting up hosts file."
         echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
         echo "* Securing MariaDB."
@@ -262,6 +262,7 @@ case $distro in
         log "service apache2 restart"
 
     elif [[ "$version" =~ ^8 ]]; then
+        #####################################  Install for Debian 8 ##############################################
         webdir=/var/www
         ownergroup=www-data:www-data
         tzone=$(cat /etc/timezone)
@@ -273,17 +274,17 @@ case $distro in
         #PHP7 repository
         log "apt-get install -y apt-transport-https"
         log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
-        echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+        echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
-        echo "* Updating with apt-get update."
+        echo -n "* Updating with apt-get update."
         log "apt-get update" & pid=$!
         progress
 
-        echo "* Upgrading packages with apt-get upgrade."
+        echo -n "* Upgrading packages with apt-get upgrade."
         log "apt-get -y upgrade" & pid=$!
         progress
 
-        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        echo -n "* Installing Apache httpd, PHP, MariaDB and other requirements."
         log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip" & pid=$!
         progress
 
@@ -292,6 +293,7 @@ case $distro in
         echo "* Creating the new virtual host in Apache."
         setvhdebian
 
+        echo "* Setting up hosts file."
         echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
         echo "* Securing MariaDB."
@@ -323,17 +325,15 @@ case $distro in
         log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
         log "add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
 
-        echo "* Updating with apt-get update."
+        echo -n "* Updating with apt-get update."
         log "apt-get update" & pid=$!
-        #https://wiki.debian.org/Teams/Dpkg/FAQ#Q:_What_can_be_done_when_the_dpkg_lock_is_held.3F
-        #[ -f /var/lib/dpkg/lock ] && rm -f /var/lib/dpkg/lock
         progress
 
-        echo "* Upgrading packages with apt-get upgrade."
+        echo -n "* Upgrading packages with apt-get upgrade."
         log "apt-get -y upgrade" & pid=$!
         progress
 
-        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        echo -n "* Installing Apache httpd, PHP, MariaDB and other requirements."
         log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip" & pid=$!
         progress
 
@@ -343,6 +343,9 @@ case $distro in
 
         echo "* Creating the new virtual host in Apache."
         setvhdebian
+
+        echo "* Setting up hosts file."
+        echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
         echo "* Starting MariaDB."
         log "service mysql start"
@@ -372,17 +375,15 @@ case $distro in
         #PHP7 repository
         log "add-apt-repository ppa:ondrej/php -y"
 
-        echo "* Updating with apt-get update."
+        echo -n "* Updating with apt-get update."
         log "apt-get update" & pid=$!
-        #https://wiki.debian.org/Teams/Dpkg/FAQ#Q:_What_can_be_done_when_the_dpkg_lock_is_held.3F
-        #[ -f /var/lib/dpkg/lock ] && rm -f /var/lib/dpkg/lock
         progress
 
-        echo "* Upgrading packages with apt-get upgrade."
+        echo -n "* Upgrading packages with apt-get upgrade."
         log "apt-get -y upgrade" & pid=$!
         progress
 
-        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        echo -n "* Installing Apache httpd, PHP, MariaDB and other requirements."
         log "DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip" & pid=$!
         progress
 
@@ -392,6 +393,9 @@ case $distro in
 
         echo "* Creating the new virtual host in Apache."
         setvhdebian
+
+        echo "* Setting up hosts file."
+        echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
         echo "* Starting MariaDB."
         log "service mysql start"
@@ -513,7 +517,6 @@ case $distro in
         mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
         #TODO make sure the apachefile doesnt exist isnt already in there
-        #Create the new virtual host in Apache and enable rewrite
         echo "* Creating the new virtual host in Apache."
         setvhcentos
 
