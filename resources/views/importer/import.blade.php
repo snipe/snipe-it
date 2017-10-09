@@ -29,7 +29,7 @@
                                 <span class="btn btn-info fileinput-button">
                                     <span>Select Import File...</span>
                                     <!-- The file input field used as target for the file upload widget -->
-                                    <input id="fileupload" type="file" name="files[]" data-url="/api/v1/imports" accept="text/csv">
+                                    <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv">
                                 </span>
                             </div>
                             <div class="col-md-9" v-show="progress.visible" style="padding-bottom:20px">
