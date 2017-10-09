@@ -398,31 +398,8 @@ Form::macro('time_display_format', function ($name = "time_display_format", $sel
 
 /**
 * Barcode macro
-* Generates the dropdown menu of available barcodes
+* Generates the dropdown menu of available 1D barcodes
 */
-Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
-
-    $barcode_types = array(
-    'QRCODE'=>"QR Code",
-    'PDF417'=>'PDF417',
-    'DATAMATRIX'=>'DATAMATRIX',
-    'C128'=>'Code 128'
-    );
-
-    $select = '<select name="'.$name.'" class="'.$class.'">';
-
-    foreach ($barcode_types as $code => $codename) {
-        $select .= '<option value="'.$code.'"'.($selected == $code ? ' selected="selected"' : '').'>'.$codename.'</option> ';
-    }
-
-    $select .= '</select>';
-
-    return $select;
-
-});
-
-
-
 Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = null, $class = null) {
 
     $barcode_types = array(
@@ -445,6 +422,10 @@ Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = nu
 });
 
 
+/**
+* Barcode macro
+* Generates the dropdown menu of available 2D barcodes
+*/
 Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
 
     $barcode_types = array(
