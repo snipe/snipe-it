@@ -125,7 +125,7 @@
                     @if ($license->manufacturer)
                       <tr>
                         <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
-                        <td>
+                        <td><p style="line-height: 23px;">
                           @can('view', \App\Models\Manufacturer::class)
                             <a href="{{ route('manufacturers.show', $license->manufacturer->id) }}">
                               {{ $license->manufacturer->name }}
@@ -135,20 +135,23 @@
                           @endcan
 
                           @if ($license->manufacturer->url)
-                            <br><i class="fa fa-globe"></i> <a href="{{ $license->manufacturer->url }}">{{ $license->manufacturer->url }}</a>
+                            <br><i class="fa fa-globe"></i> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
                           @endif
 
                           @if ($license->manufacturer->support_url)
-                            <br><i class="fa fa-life-ring"></i> <a href="{{ $license->manufacturer->support_url }}">{{ $license->manufacturer->support_url }}</a>
+                            <br><i class="fa fa-life-ring"></i>
+                              <a href="{{ $license->manufacturer->support_url }}"  rel="noopener">{{ $license->manufacturer->support_url }}</a>
                           @endif
 
                           @if ($license->manufacturer->support_phone)
-                            <br><i class="fa fa-phone"></i> {{ $license->manufacturer->support_phone }}
+                            <br><i class="fa fa-phone"></i>
+                              <a href="tel:{{ $license->manufacturer->support_phone }}">{{ $license->manufacturer->support_phone }}</a>
                           @endif
 
                           @if ($license->manufacturer->support_email)
                             <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
                           @endif
+                          </p>
                         </td>
                       </tr>
                     @endif

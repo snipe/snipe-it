@@ -46,7 +46,7 @@ class ResetDemoSettings extends Command
         $settings->per_page = 20;
         $settings->site_name = 'Snipe-IT Asset Management Demo';
         $settings->auto_increment_assets = 1;
-        $settings->logo = 'logo.png';
+        $settings->logo = 'snipe-logo.png';
         $settings->alert_email = 'service@snipe-it.io';
         $settings->header_color = null;
         $settings->barcode_type = 'QRCODE';

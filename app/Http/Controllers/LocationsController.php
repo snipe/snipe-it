@@ -89,6 +89,7 @@ class LocationsController extends Controller
         $location->state            = Input::get('state');
         $location->country          = Input::get('country');
         $location->zip              = Input::get('zip');
+        $location->ldap_ou          = Input::get('ldap_ou');
         $location->manager_id       = Input::get('manager_id');
         $location->user_id          = Auth::id();
 

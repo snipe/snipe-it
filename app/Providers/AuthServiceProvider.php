@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\Accessory;
 use Carbon\Carbon;
 use App\Models\Asset;
+use App\Models\Location;
 use App\Models\Component;
+use App\Models\Category;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
@@ -14,6 +16,8 @@ use App\Policies\AssetPolicy;
 use App\Policies\ComponentPolicy;
 use App\Policies\ConsumablePolicy;
 use App\Policies\LicensePolicy;
+use App\Policies\LocationPolicy;
+use App\Policies\CategoryPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -33,6 +37,8 @@ class AuthServiceProvider extends ServiceProvider
         Consumable::class => ConsumablePolicy::class,
         License::class => LicensePolicy::class,
         User::class => UserPolicy::class,
+        Location::class => LocationPolicy::class,
+        Category::class => CategoryPolicy::class,
     ];
 
     /**
