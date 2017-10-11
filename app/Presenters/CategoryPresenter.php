@@ -63,20 +63,21 @@ class CategoryPresenter extends Presenter
                 "title" => trans('general.components'),
                 "visible" => true
             ], [
-                "field" => "use_default_eula",
+                "field" => "eula",
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('admin/categories/table.eula_text'),
                 "visible" => false,
                 "formatter" => 'trueFalseFormatter',
-            ], [
+            ],  [
                 "field" => "require_acceptance",
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('admin/categories/table.require_acceptance'),
                 "visible" => true,
                 "formatter" => 'trueFalseFormatter',
-            ], [
+            ],
+           [
                 "field" => "actions",
                 "searchable" => false,
                 "sortable" => false,

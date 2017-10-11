@@ -91,16 +91,14 @@
                   {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
               </div>
-              <button type="submit" class="btn btn-success pull-right"><i
-                class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
-              </form>
+            <div class="box-footer">
+              <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
+              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
             </div>
           </form>
         </div> <!--/.col-md-12-->
       </div> <!--/.box-body-->
-      <div class="box-footer">
-        <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-      </div>
+
     </div> <!--/.box.box-default-->
   </div>
 </div>

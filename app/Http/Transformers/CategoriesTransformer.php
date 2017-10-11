@@ -26,7 +26,7 @@ class CategoriesTransformer
                 'id' => (int) $category->id,
                 'name' => e($category->name),
                 'type' => e($category->category_type),
-                'use_default_eula' => ($category->use_default_eula =='1') ? true : false,
+                'eula' => ($category->getEula()) ? true : false,
                 'checkin_email' => ($category->checkin_email =='1') ? true : false,
                 'require_acceptance' => ($category->require_acceptance =='1') ? true : false,
                 'assets_count' => $category->assets_count,

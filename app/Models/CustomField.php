@@ -62,7 +62,9 @@ class CustomField extends Model
                     return true;
                 }
 
-              
+                $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
+                $platform->registerDoctrineTypeMapping('enum', 'string');
+                
                 Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal("name")), $custom_field->convertUnicodeDbSlug());
                 });
