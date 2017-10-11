@@ -125,7 +125,7 @@ class AssetsController extends Controller
             $assets->ByManufacturer($request->input('manufacturer_id'));
         }
 
-        $request->has('order_number') ? $assets = $assets->where('order_number', '=', e($request->get('order_number'))) : '';
+        $request->has('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
