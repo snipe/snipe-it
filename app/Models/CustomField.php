@@ -62,9 +62,16 @@ class CustomField extends Model
                     return true;
                 }
 
-                return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
+              
+                Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal("name")), $custom_field->convertUnicodeDbSlug());
                 });
+
+
+                $custom_field->db_column = $custom_field->convertUnicodeDbSlug();
+                $custom_field->save();
+
+                return true;
             }
             return true;
         });
