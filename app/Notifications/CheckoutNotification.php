@@ -82,6 +82,7 @@ class CheckoutNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        if (class_basename(get_class($this->params['item']))=='Asset') {
 
             //TODO: Expand for non assets.
             $item = $this->params['item'];
@@ -100,9 +101,14 @@ class CheckoutNotification extends Notification
                 'log_id' => $this->params['log_id'],
             ];
 
-            return (new MailMessage)
-                ->view('emails.accept-asset', $data)
-                ->subject(trans('mail.Confirm_asset_delivery'));
+            if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
+                || (method_exists($item, 'getEula') && ($item->getEula()))
+            ) {
+                return (new MailMessage)
+                    ->view('emails.accept-asset', $data)
+                    ->subject(trans('mail.Confirm_asset_delivery'));
+            }
+        }
 
 
 
