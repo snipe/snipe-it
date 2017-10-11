@@ -263,8 +263,8 @@ class SettingsController extends Controller
         $output = Artisan::output();
 
         if ((!file_exists(storage_path().'/oauth-private.key')) || (!file_exists(storage_path().'/oauth-public.key'))) {
-            Artisan::call('passport:install');
             Artisan::call('migrate', ['--force' => true]);
+            Artisan::call('passport:install');
         }
 
 
