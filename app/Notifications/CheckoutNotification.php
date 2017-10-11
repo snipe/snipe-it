@@ -45,13 +45,12 @@ class CheckoutNotification extends Notification
         $item = $this->params['item'];
 
         if (class_basename(get_class($this->params['item']))=='Asset') {
-            $notifyBy[] = 'mail';
+            if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
+                || (method_exists($item, 'getEula') && ($item->getEula()))
+            ) {
+                $notifyBy[] = 'mail';
+            }
         }
-        // if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance()=='1'))
-        //     || (method_exists($item, 'getEula') && ($item->getEula()))
-        // ) {
-        //     $notifyBy[] = 'mail';
-        // }
         return $notifyBy;
     }
 
