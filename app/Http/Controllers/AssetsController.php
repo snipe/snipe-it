@@ -432,7 +432,7 @@ class AssetsController extends Controller
         // Get the dropdown of users and then pass it to the checkout view
         return view('hardware/checkout', compact('asset'))
             ->with('users_list', Helper::usersList())
-            ->with('assets_list', Helper::assetsList())
+            ->with('assets_list', Helper::detailedAssetList())
             ->with('locations_list', Helper::locationsList());
     }
 
