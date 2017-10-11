@@ -39,8 +39,8 @@ class DashboardController extends Controller
             $counts['grand_total'] =  $counts['asset'] +  $counts['accessory'] +  $counts['license'] +  $counts['consumable'];
 
             if ((!file_exists(storage_path().'/oauth-private.key')) || (!file_exists(storage_path().'/oauth-public.key'))) {
-                \Artisan::call('passport:install');
                 \Artisan::call('migrate', ['--force' => true]);
+                \Artisan::call('passport:install');
             }
 
             return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
