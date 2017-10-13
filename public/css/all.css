@@ -10661,7 +10661,7 @@ a:focus {
 .small-box .icon {
   transition: all 0.3s linear;
   position: absolute;
-  top: -10px;
+  top: -14px;
   right: 10px;
   z-index: 0;
   font-size: 90px;
