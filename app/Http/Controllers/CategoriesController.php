@@ -98,10 +98,8 @@ class CategoriesController extends Controller
      */
     public function edit($categoryId = null)
     {
-        // Check if the category exists
         if (is_null($item = Category::find($categoryId))) {
-            // Redirect to the blogs management page
-            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.does_not_exist'));
+            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.does_not_exist'));
         }
         $category_types= Helper::categoryTypeList();
 
@@ -158,22 +156,22 @@ class CategoriesController extends Controller
     {
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
-            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.not_found'));
+            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.not_found'));
         }
 
         if ($category->has_models() > 0) {
-            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'model']));
+            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'model']));
         } elseif ($category->accessories()->count() > 0) {
-                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory']));
+                return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory']));
         } elseif ($category->consumables()->count() > 0) {
-                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable']));
+                return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable']));
         } elseif ($category->components()->count() > 0) {
-                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'component']));
+                return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'component']));
         }
 
         $category->delete();
         // Redirect to the locations management page
-        return redirect()->to(route('categories.index'))->with('success', trans('admin/categories/message.delete.success'));
+        return redirect()->route('categories.index')->with('success', trans('admin/categories/message.delete.success'));
     }
 
 
