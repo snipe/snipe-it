@@ -77,23 +77,18 @@ class Ldap extends Model
         $connection = Ldap::connectToLdap();
         $ldap_username_field     = $settings->ldap_username_field;
         $baseDn      = $settings->ldap_basedn;
+        $userDn      = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
 
         if ($settings->is_ad =='1') {
-        // Check if they are using the userprincipalname for the username field.
+            // Check if they are using the userprincipalname for the username field.
             // If they are, we can skip building the UPN to authenticate against AD
             if ($ldap_username_field=='userprincipalname') {
                 $userDn = $username;
             } else {
                 // In case they haven't added an AD domain
-                if ($settings->ad_domain == '') {
-                    $userDn      = $username.'@'.$settings->email_domain;
-                } else {
-                    $userDn      = $username.'@'.$settings->ad_domain;
-                }
+                    $userDn  = ($settings->ad_domain != '') ?  $username.'@'.$settings->ad_domain : $username.'@'.$settings->email_domain;
             }
 
-        } else {
-            $userDn      = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
         }
 
         \Log::debug('Attempting to login using distinguished name:'.$userDn);
