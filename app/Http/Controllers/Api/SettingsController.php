@@ -123,6 +123,7 @@ class SettingsController extends Controller
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             \Log::debug('LDAP Validation test failed.');
+            $validation_errors = implode(' ',$validator->errors()->all());
             return response()->json(['message' => $validator->errors()->all()], 400);
         }
         
@@ -153,7 +154,7 @@ class SettingsController extends Controller
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed');
-            return response()->json(['message' => $e->getMessage()], 600);
+            return response()->json(['message' => $e->getMessage()], 500);
         }
 
 

@@ -96,6 +96,8 @@ class Ldap extends Model
             $userDn      = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
         }
 
+        \Log::debug('Attempting to login using distinguished name:'.$userDn);
+
 
         $filterQuery = $settings->ldap_auth_filter_query . $username;
 
