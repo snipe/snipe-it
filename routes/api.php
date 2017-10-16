@@ -423,6 +423,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'as' => 'api.settings.ldaptest',
         'uses' => 'SettingsController@ldaptest'
     ]);
+
+    Route::post('settings/ldaptestlogin', [
+        'as' => 'api.settings.ldaptestlogin',
+        'uses' => 'SettingsController@ldaptestlogin'
+    ]);
     
     Route::resource('settings', 'SettingsController',
         [
