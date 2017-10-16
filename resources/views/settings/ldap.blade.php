@@ -488,7 +488,6 @@
                     var error_text;
 
                     $("#ldaptestloginicon").html('');
-                    $("#ldaptestloginrow").addClass('danger');
                     $("#ldaptestloginstatus").addClass('text-danger');
                     $("#ldaptestloginicon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
 
