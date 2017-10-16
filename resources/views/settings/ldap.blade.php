@@ -455,6 +455,7 @@
         $("#ldaptestlogin").click(function(){
             $("#ldaptestloginrow").removeClass('text-success');
             $("#ldaptestloginrow").removeClass('text-danger');
+            $("#ldaptestloginstatus").removeClass('text-danger');
             $("#ldaptestloginstatus").html('');
             $("#ldaptestloginicon").html('<i class="fa fa-spinner spin"></i> Testing...');
             $.ajax({
