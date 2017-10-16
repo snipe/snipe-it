@@ -27,13 +27,11 @@ class DepartmentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Department::class);
+        $company = null;
         if ($request->has('company_id')) {
             $company = Company::find($request->input('company_id'));
-        } else {
-            $company = null;
         }
-        return view('departments/index')->with('company',$company);
-
+        return view('departments/index')->with('company', $company);
     }
 
 
@@ -53,12 +51,10 @@ class DepartmentsController extends Controller
         $department->user_id = Auth::user()->id;
         $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
 
-
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($department->getErrors());
-
     }
 
     /**
@@ -140,15 +136,13 @@ class DepartmentsController extends Controller
             ->with('location_list', Helper::locationsList())
             ->with('company_list', Helper::companyList());
     }
-    
-    
+
     public function update(Request $request, $id) {
 
         $this->authorize('create', Department::class);
         if (is_null($department = Department::find($id))) {
-            return redirect()->to('admin/settings/departments')->with('error', trans('admin/departments/message.does_not_exist'));
+            return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist'));
         }
-
 
         $department->fill($request->all());
         $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
@@ -156,9 +150,6 @@ class DepartmentsController extends Controller
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.update.success'));
         }
-        
         return redirect()->back()->withInput()->withErrors($department->getErrors());
     }
-    
-
 }

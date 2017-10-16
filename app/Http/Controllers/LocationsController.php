@@ -148,7 +148,7 @@ class LocationsController extends Controller
     {
         // Check if the location exists
         if (is_null($item = Location::find($locationId))) {
-            return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.does_not_exist'));
+            return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
         // Show the page
@@ -156,7 +156,6 @@ class LocationsController extends Controller
         $location_options_array = Location::getLocationHierarchy($locations);
         $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
-
 
         return view('locations/edit', compact('item'))
             ->with('location_options', $location_options)
@@ -177,7 +176,7 @@ class LocationsController extends Controller
     {
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
-            return redirect()->to('admin/settings/locations')->with('error', trans('admin/locations/message.does_not_exist'));
+            return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
         // Update the location data
@@ -217,7 +216,6 @@ class LocationsController extends Controller
             // Redirect to the blogs management page
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.not_found'));
         }
-
 
         if ($location->users->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
