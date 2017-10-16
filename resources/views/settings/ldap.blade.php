@@ -353,10 +353,10 @@
                             <div class="col-md-9" id="ldaptestloginrow">
                                 <div class="row">
                                 <div class="col-md-4">
-                                    <input type="text" name="ldaptest_user" class="form-control" placeholder="LDAP username">
+                                    <input type="text" name="ldaptest_user" id="ldaptest_user"  class="form-control" placeholder="LDAP username">
                                 </div>
                                 <div class="col-md-4">
-                                <input type="password" name="ldaptest_password" class="form-control" placeholder="LDAP password">
+                                <input type="password" name="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
                                 </div>
                                 <div class="col-md-3">
                                     <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">Test LDAP</a>
@@ -448,7 +448,11 @@
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 },
-                data: {},
+                data: {
+                    'ldaptest_user': $('#ldaptest_user').val(),
+                    'ldaptest_password': $('#ldaptest_password').val()
+                },
+
                 dataType: 'json',
 
                 success: function (data) {
