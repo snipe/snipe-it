@@ -75,8 +75,9 @@ class SettingsController extends Controller
         //
     }
 
-    public function getLdapTest()
+    public function ldaptest()
     {
+        echo 'foo';
         \Log::debug('Preparing to test LDAP connection');
 
         try {

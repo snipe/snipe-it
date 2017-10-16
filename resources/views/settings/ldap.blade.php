@@ -335,13 +335,11 @@
                             </div>
                             <div class="col-md-9">
                                 <div id="ldaptestrow">
-                                    <div class="col-md-8">
                                         <a class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;"> Test LDAP</a>
                                         <span id="ldaptesticon"></span>
                                         <span id="ldaptestresult"></span>
                                         <span id="ldapteststatus"></span>
                                     </div>
-                                </div>
                             </div>
                         </div>
 
@@ -389,20 +387,17 @@
                 dataType: 'json',
 
                 success: function (data) {
-                    // console.dir(data);
-                    //console.log(data.responseJSON.message);
                     $("#ldaptesticon").html('');
                     $("#ldaptestrow").addClass('success');
                     $("#ldapteststatus").html('<i class="fa fa-check text-success"></i> It worked!');
                 },
 
                 error: function (data) {
-                    console.dir(data);
-                    console.log(data.responseJSON.message);
+                    //console.dir(data);
                     $("#ldaptesticon").html('');
                     $("#ldaptestrow").addClass('danger');
                     $("#ldaptesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
-                    $('#ldapteststatus').text(data.responseJSON.message);
+                    $('#ldapteststatus').text(data.responseText.message);
                 }
 
 
