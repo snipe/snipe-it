@@ -409,7 +409,7 @@
             $("#ldaptestrow").removeClass('text-success');
             $("#ldaptestrow").removeClass('text-danger');
             $("#ldapteststatus").html('');
-            $("#ldaptesticon").html('<i class="fa fa-spinner spin"></i> Testing...');
+            $("#ldaptesticon").html('<i class="fa fa-spinner spin"></i> Testing LDAP Binding...');
             $.ajax({
                 url: '{{ route('api.settings.ldaptest') }}',
                 type: 'GET',
@@ -423,11 +423,20 @@
                 success: function (data) {
                     $("#ldaptesticon").html('');
                     $("#ldapteststatus").addClass('text-success');
-                    $("#ldapteststatus").html('<i class="fa fa-check text-success"></i> It worked!');
+                    $("#ldapteststatus").html('<i class="fa fa-check text-success"></i> Connection to LDAP server established!');
                 },
 
                 error: function (data) {
-                    //console.dir(data);
+
+                    if (data.responseJSON) {
+                        var bind_errors = data.responseJSON.message;
+                    } else {
+                        var bind_errors;
+                    }
+
+                    var bind_error_text;
+
+
                     $("#ldaptesticon").html('');
                     $("#ldapteststatus").addClass('text-danger');
                     $("#ldaptesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
@@ -436,13 +445,19 @@
                         $('#ldapteststatus').html('500 Server Error');
                     } else if (data.status == 400) {
 
-                        for (i = 0; i < errors.length; i++) {
-                            if (errors[i]) {
-                                error_text += '<li>Error: ' + errors[i];
+                        if (typeof bind_errors !='string') {
+
+                            for (i = 0; i < bind_errors.length; i++) {
+                                if (bind_errors[i]) {
+                                    bind_error_text += '<li>Error: ' + bind_errors[i];
+                                }
+
                             }
 
+                        } else {
+                            error_text = bind_errors;
                         }
-                        $('#ldapteststatus').html(error_text);
+                        $('#ldapteststatus').html(bind_error_text);
                     } else {
                         $('#ldapteststatus').html(data.responseText.message);
                     }
@@ -457,7 +472,7 @@
             $("#ldaptestloginrow").removeClass('text-danger');
             $("#ldaptestloginstatus").removeClass('text-danger');
             $("#ldaptestloginstatus").html('');
-            $("#ldaptestloginicon").html('<i class="fa fa-spinner spin"></i> Testing...');
+            $("#ldaptestloginicon").html('<i class="fa fa-spinner spin"></i> Testing LDAP Authentication...');
             $.ajax({
                 url: '{{ route('api.settings.ldaptestlogin') }}',
                 type: 'POST',
@@ -475,7 +490,8 @@
                 success: function (data) {
                     $("#ldaptestloginicon").html('');
                     $("#ldaptestloginrow").addClass('text-success');
-                    $("#ldaptestloginstatus").html('<i class="fa fa-check text-success"></i> It worked!');
+                    $("#ldaptestloginstatus").addClass('text-success');
+                    $("#ldaptestloginstatus").html('<i class="fa fa-check text-success"></i> User authenticated against LDAP successfully!');
                 },
 
                 error: function (data) {
@@ -486,7 +502,7 @@
                         var errors;
                     }
 
-                    var error_text;
+                    var error_text = '';
 
                     $("#ldaptestloginicon").html('');
                     $("#ldaptestloginstatus").addClass('text-danger');
@@ -496,13 +512,21 @@
                         $('#ldaptestloginstatus').html('500 Server Error');
                     } else if (data.status == 400) {
 
-                        for (i = 0; i < errors.length; i++) {
-                            if (errors[i]) {
-                                error_text += '<li>Error: ' + errors[i];
+                        if (typeof errors !='string') {
+
+                            for (i = 0; i < errors.length; i++) {
+                                if (errors[i]) {
+                                    error_text += '<li>Error: ' + errors[i];
+                                }
+
                             }
 
+                        } else {
+                            error_text = errors;
                         }
+
                         $('#ldaptestloginstatus').html(error_text);
+
                     } else {
                         $('#ldaptestloginstatus').html(data.responseText.message);
                     }
@@ -517,4 +541,5 @@
 
 
     </script>
+
 @stop
