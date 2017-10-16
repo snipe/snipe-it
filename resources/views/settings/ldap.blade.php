@@ -361,10 +361,14 @@
                                 <div class="col-md-3">
                                     <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">Test LDAP</a>
                                 </div>
-                                <span id="ldaptestloginicon"></span>
+                                    <span id="ldaptestloginicon"></span>
+
+                            </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+
                                 <span id="ldaptestloginresult"></span>
                                 <span id="ldaptestloginstatus"></span>
-                            </div>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 <p class="help-block">Enter a valid LDAP username and password to test whether your LDAP login is configured correctly.</p>

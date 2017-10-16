@@ -107,11 +107,15 @@ class SettingsController extends Controller
         try {
             $connection = Ldap::connectToLdap();
             try {
-                \Log::debug('attempting to bind to LDAP for LDAP test');
+                \Log::debug('Attempting to bind to LDAP for LDAP test');
                 Ldap::bindAdminToLdap($connection);
                 try {
                     $ldap_user = Ldap::findAndBindUserLdap($request->input('ldaptest_user'), $request->input('ldaptest_password'));
-                    return response()->json(['message' => 'It worked! '. $request->input('username').' successfully binded to LDAP.'], 200);
+                    if ($ldap_user) {
+                        return response()->json(['message' => 'It worked! '. $request->input('username').' successfully binded to LDAP.'], 200);
+                    }
+                    return response()->json(['message' => 'Login Failed. '. $request->input('username').' successfully binded to LDAP.'], 400);
+
                 } catch (\Exception $e) {
                     \Log::debug('LDAP login failed');
                     return response()->json(['message' => $e->getMessage()], 400);
