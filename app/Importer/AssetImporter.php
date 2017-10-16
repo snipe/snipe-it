@@ -23,13 +23,17 @@ class AssetImporter extends ItemImporter
         // ItemImporter handles the general fetching.
         parent::handle($row);
 
-        foreach ($this->customFields as $customField) {
-            $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField);
-            if ($customFieldValue) {
-                $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
-                $this->log('Custom Field '. $customField->name.': '.$customFieldValue);
+        if ($this->customFields) {
+
+            foreach ($this->customFields as $customField) {
+                $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField);
+                if ($customFieldValue) {
+                    $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
+                    $this->log('Custom Field '. $customField->name.': '.$customFieldValue);
+                }
             }
         }
+
 
         $this->createAssetIfNotExists($row);
     }
