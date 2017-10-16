@@ -381,6 +381,10 @@
             $.ajax({
                 url: '{{ route('api.settings.ldaptest') }}',
                 type: 'GET',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
                 data: {},
                 dataType: 'json',
 
