@@ -200,7 +200,13 @@
               @foreach ($supplier->asset_maintenances as $improvement)
                 @if (is_null($improvement->deleted_at))
                 <tr>
-                  <td><a href="{{ route('hardware.show', $improvement->asset_id) }}">{{ $improvement->asset->name }}</a></td>
+                  <td>
+                    @if ($improvement->asset)
+                      <a href="{{ route('hardware.show', $improvement->asset_id) }}">{{ $improvement->asset->name }}</a>
+                    @else
+                        (deleted asset)
+                    @endif
+                  </td>
                   <td>{{ $improvement->asset_maintenance_type }}</td>
                   <td>{{ $improvement->start_date }}</td>
                   <td>{{ $improvement->completion_date }}</td>
