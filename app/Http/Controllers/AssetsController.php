@@ -558,6 +558,9 @@ class AssetsController extends Controller
             $data['item_tag'] = $asset->asset_tag;
             $data['item_serial'] = $asset->serial;
             $data['note'] = $logaction->note;
+            $data['manufacturer_name'] = $asset->model->manufacturer->name;
+            $data['model_name'] = $asset->model->name;
+            $data['model_number'] = $asset->model->model_number;
 
             if ((($asset->checkin_email()=='1')) && (isset($user)) && (!empty($user->email)) && (!config('app.lock_passwords'))) {
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {

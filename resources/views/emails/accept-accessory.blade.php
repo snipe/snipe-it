@@ -57,5 +57,5 @@
 <p><strong><a href="{{ url('/') }}/account/accept-asset/{{ $log_id }}">{{ trans('mail.i_have_read') }}</a></strong></p>
 @endif
 
-<p>{{ $snipeSettings->site_name }}</p>
+<p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
 @stop

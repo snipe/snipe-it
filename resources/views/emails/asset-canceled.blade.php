@@ -9,4 +9,5 @@
    {{ trans('mail.canceled') }} {{ $requested_date }}
 </p>
 
+<p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
 @stop

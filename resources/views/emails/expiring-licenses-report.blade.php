@@ -14,5 +14,5 @@
 {!! $email_content !!}
 </table>
 
-
+<p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
 @stop
