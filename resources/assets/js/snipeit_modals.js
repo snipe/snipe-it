@@ -18,8 +18,7 @@
  data-toggle="modal" - required for Bootstrap Modals
  data-target="#createModal" - fixed ID for the modal, do not change
  data-dependency="user" - which Snipe-IT model you're going to be creating.
- data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a 
-                             success? Be on the lookout for duplicate ID's, it will confuse this library!
+ data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a success? Be on the lookout for duplicate ID's, it will confuse this library!
  class="btn btn-sm btn-default" - makes it look button-ey, feel free to change :)
  */
 
@@ -37,8 +36,6 @@
       var link = $(event.relatedTarget);
       model = link.data("dependency");
       select = link.data("select");
-      // console.warn("Uh, href is: "+link.attr('href'));
-      // console.dir(link);
       $('#createModal').load(link.attr('href'),function () {
           //do we need to re-select2 this, after load? Probably.
           $('#createModal').find('select.select2').select2();                
@@ -47,11 +44,9 @@
 
 
   $('#createModal').on('click','#modal-save', function () {
-    console.warn("MODAL SAVE CALLED FOR MODAL!");
     var data = {};
     console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
     $('.modal-body input:visible').each(function (index, elem) {
-        console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
         var bits = elem.id.split("-");
         if (bits[0] === "modal") {
             data[bits[1]] = $(elem).val();
@@ -64,11 +59,11 @@
     });
 
     data._token = Laravel.csrfToken;
-    console.log(data);
+    //console.log(data);
 
     $.ajax({
         type: 'POST',
-        url: "/api/v1/" + model + "s",
+        url: "../api/v1/" + model + "s",
         headers: {
             "X-Requested-With": 'XMLHttpRequest',
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -100,15 +95,15 @@
             // this code adds the newly created object to that select
             var selector = document.getElementById(select);
             if(!selector) {
-                console.error("Could not find original <select> element with an id of: "+select);
+               // console.error("Could not find original <select> element with an id of: "+select);
                 return false;
             }
             //console.log(document.getElementById(select));
-            console.dir(selector);
+            // console.dir(selector);
             selector.options[selector.length] = new Option(name, id);
             selector.selectedIndex = selector.length - 1;
             $(selector).trigger("change");
-            if(fetchCustomFields) {
+            if(window.fetchCustomFields) {
                 fetchCustomFields();
             }
 

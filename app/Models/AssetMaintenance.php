@@ -29,7 +29,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'title'                  => 'required|max:100',
         'is_warranty'            => 'boolean',
         'start_date'             => 'required|date_format:"Y-m-d"',
-        'completion_date'        => 'date_format:"Y-m-d"',
+        'completion_date'        => 'nullable|date_format:"Y-m-d"',
         'notes'                  => 'string|nullable',
         'cost'                   => 'numeric|nullable'
     ];
