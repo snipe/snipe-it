@@ -637,7 +637,7 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
 
         if ($settings->qr_code == '1') {
-            $asset = Asset::find($assetId)->withTrashed();
+            $asset = Asset::withTrashed()->find($assetId);
             $size = Helper::barcodeDimensions($settings->barcode_type);
             $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'-'.str_slug($asset->id).'.png';
 
