@@ -47,11 +47,11 @@
 
 
   $('#createModal').on('click','#modal-save', function () {
-    console.warn("MODAL SAVE CALLED FOR MODAL!");
+   // console.warn("MODAL SAVE CALLED FOR MODAL!");
     var data = {};
     console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
     $('.modal-body input:visible').each(function (index, elem) {
-        console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
+      //  console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
         var bits = elem.id.split("-");
         if (bits[0] === "modal") {
             data[bits[1]] = $(elem).val();
@@ -64,11 +64,11 @@
     });
 
     data._token = Laravel.csrfToken;
-    console.log(data);
+    //console.log(data);
 
     $.ajax({
         type: 'POST',
-        url: "/api/v1/" + model + "s",
+        url: "../api/v1/" + model + "s",
         headers: {
             "X-Requested-With": 'XMLHttpRequest',
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
