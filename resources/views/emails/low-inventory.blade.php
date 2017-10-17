@@ -27,6 +27,10 @@
 
     </table>
 
-    <p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
+    @if ($snipeSettings->show_url_in_emails=='1')
+        <p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
+    @else
+        <p>{{ $snipeSettings->site_name }}</p>
+    @endif
 
 @stop
