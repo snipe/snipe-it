@@ -25,6 +25,36 @@
 			</td>
 		</tr>
 	@endif
+	@if (isset($manufacturer_name))
+		<tr>
+			<td style="background-color:#ccc">
+				{{ trans('general.manufacturer') }}
+			</td>
+			<td>
+				<strong>{{ $manufacturer_name }}</strong>
+			</td>
+		</tr>
+	@endif
+	@if (isset($model_name))
+		<tr>
+			<td style="background-color:#ccc">
+				{{ trans('general.model_no') }}:
+			</td>
+			<td>
+				<strong>{{ $model_name }}</strong>
+			</td>
+		</tr>
+	@endif
+	@if (isset($model_number))
+		<tr>
+			<td style="background-color:#ccc">
+				{{ trans('general.asset_model') }}:
+			</td>
+			<td>
+				<strong>{{ $model_number }}</strong>
+			</td>
+		</tr>
+	@endif
 	<tr>
 		<td style="background-color:#ccc">
 			{{ trans('mail.checkin_date') }}
@@ -45,5 +75,5 @@
 	@endif
 </table>
 
-<p>{{ $snipeSettings->site_name }}</p>
+<p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
 @stop

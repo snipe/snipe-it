@@ -11,4 +11,5 @@
 {{ trans('mail.quantity') }} {{ $item_quantity}}
 @endif
 
+<p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
 @stop

@@ -99,6 +99,9 @@ class CheckoutNotification extends Notification
                 'item_serial' => $item->serial,
                 'require_acceptance' => method_exists($item, 'requireAcceptance') ? $item->requireAcceptance() : '',
                 'log_id' => $this->params['log_id'],
+                'manufacturer_name' => $item->model->manufacturer->name,
+                'model_name' => $item->model->name,
+                'model_number' => $item->model->model_number,
             ];
 
             if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))

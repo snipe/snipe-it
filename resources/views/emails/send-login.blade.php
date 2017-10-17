@@ -12,5 +12,5 @@
 
 <p>{{ trans('mail.best_regards') }}</p>
 
-<p>{{ $snipeSettings->site_name }}</p>
+<p><a href="{{ url('/') }}">{{ $snipeSettings->site_name }}</a></p>
 @stop

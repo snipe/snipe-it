@@ -125,6 +125,10 @@ class AssetsController extends Controller
             $assets->ByManufacturer($request->input('manufacturer_id'));
         }
 
+        if ($request->has('depreciation_id')) {
+            $assets->ByDepreciationId($request->input('depreciation_id'));
+        }
+
         $request->has('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
         $offset = request('offset', 0);
@@ -133,28 +137,61 @@ class AssetsController extends Controller
 
 
         // This is used by the sidenav, mostly
+
+        // We switched from using query scopes here because of a Laravel bug
+        // related to fulltext searches on complex queries.
+        // I am sad. :(
         switch ($request->input('status')) {
             case 'Deleted':
                 $assets->withTrashed()->Deleted();
                 break;
             case 'Pending':
-                $assets->Pending();
+                $assets->join('status_labels',function ($join) {
+                    $join->on('status_labels.id', "=", "assets.status_id")
+                        ->where('status_labels.deployable','=',0)
+                        ->where('status_labels.pending','=',1)
+                        ->where('status_labels.archived', '=', 0);
+                });
                 break;
             case 'RTD':
-                $assets->RTD();
+                $assets->join('status_labels',function ($join) {
+                    $join->on('status_labels.id', "=", "assets.status_id")
+                        ->where('status_labels.deployable','=',1)
+                        ->where('status_labels.pending','=',0)
+                        ->where('status_labels.archived', '=', 0);
+                });
                 break;
             case 'Undeployable':
                 $assets->Undeployable();
                 break;
             case 'Archived':
-                $assets->Archived();
+                $assets->join('status_labels',function ($join) {
+                    $join->on('status_labels.id', "=", "assets.status_id")
+                        ->where('status_labels.deployable','=',0)
+                        ->where('status_labels.pending','=',0)
+                        ->where('status_labels.archived', '=', 1);
+                });
                 break;
             case 'Requestable':
-                $assets->RequestableAssets();
+                $assets->where('assets.requestable', '=', 1)
+                    ->join('status_labels',function ($join) {
+                    $join->on('status_labels.id', "=", "assets.status_id")
+                        ->where('status_labels.deployable','=',1)
+                        ->where('status_labels.pending','=',0)
+                        ->where('status_labels.archived', '=', 0);
+                });
+
                 break;
             case 'Deployed':
-                $assets->Deployed();
+                // more sad, horrible workarounds for laravel bugs when doing full text searches
+                $assets->where('assets.assigned_to', '>', '0');
                 break;
+            default:
+                // terrible workaround for complex-query Laravel bug in fulltext
+                $assets->join('status_labels',function ($join) {
+                    $join->on('status_labels.id', "=", "assets.status_id")
+                        ->where('status_labels.archived', '=', 0);
+                });
         }
 
 
@@ -481,6 +518,9 @@ class AssetsController extends Controller
             $data['item_tag'] = $asset->asset_tag;
             $data['item_serial'] = $asset->serial;
             $data['note'] = $logaction->note;
+            $data['manufacturer_name'] = $asset->model->manufacturer->name;
+            $data['model_name'] = $asset->model->name;
+            $data['model_number'] = $asset->model->model_number;
 
             if ((($asset->checkin_email()=='1')) && (isset($user)) && (!config('app.lock_passwords'))) {
                 Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
