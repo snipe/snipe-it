@@ -1106,4 +1106,20 @@ class Asset extends Depreciable
     }
 
 
+    /**
+     * Query builder scope to search on location ID
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeByDepreciationId($query, $search)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('depreciations', 'models.depreciation_id', '=', 'depreciations.id')->where('models.depreciation_id', '=', $search);
+
+    }
+
+
 }

@@ -155,5 +155,24 @@ class DepreciationsController extends Controller
         return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.delete.success'));
     }
 
+    /**
+     * Returns a view that displays a form to display depreciation listing
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see DepreciationsController::postEdit()
+     * @param int $depreciationId
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show($id)
+    {
+        if (is_null($depreciation = Depreciation::find($id))) {
+            // Redirect to the blogs management page
+            return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
+        }
+
+        return view('depreciations/view', compact('depreciation'));
+    }
+
 
 }

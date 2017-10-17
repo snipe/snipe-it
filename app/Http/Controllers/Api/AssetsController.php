@@ -125,6 +125,10 @@ class AssetsController extends Controller
             $assets->ByManufacturer($request->input('manufacturer_id'));
         }
 
+        if ($request->has('depreciation_id')) {
+            $assets->ByDepreciationId($request->input('depreciation_id'));
+        }
+
         $request->has('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
         $offset = request('offset', 0);
@@ -155,6 +159,8 @@ class AssetsController extends Controller
             case 'Deployed':
                 $assets->Deployed();
                 break;
+            default:
+                $assets->NotArchived();
         }
 
 
