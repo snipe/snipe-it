@@ -3,8 +3,8 @@
 return array(
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'parent'   					=> 'Ouer',
+    'require_acceptance'      	=> 'aanvaarding',
+    'title'      				=> 'Bate Kategorie Naam',
 
 );

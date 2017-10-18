@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups_title'            => 'Om grupper',
+    'about_groups'                  => 'Grupper används för att generalisera användarbehörigheter.',
     'group_management' 	 	=> 'Grupphantering',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
+    'create' 	 	 	    => 'Skapa ny grupp',
+    'update' 	 		        => 'Redigera grupp',
     'group_name' 	 		=> 'Gruppnamn',
     'group_admin' 	 		=> 'Gruppadministratör',
     'allow' 	 			=> 'Tillåt',

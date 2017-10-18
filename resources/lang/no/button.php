@@ -11,5 +11,5 @@ return array(
     'request'                   => 'Forespørsel',
     'submit'  	                => 'Send',
     'upload'                    => 'Last opp',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Velg fil...',
 );

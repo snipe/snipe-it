@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Veldverzameling bestaat niet',
 
         'create' => array(
             'error'   => 'Veldverzameling is niet aangemaakt, probeer het opnieuw.',

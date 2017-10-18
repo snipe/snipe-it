@@ -3,15 +3,15 @@
 return array(
 
     'assigned_to'   	=> 'Tildelt',
-    'checkout'   		=> 'In/Out',
+    'checkout'   		=> 'Ind ud',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'license_email'   	=> 'Licens Email',
+    'license_name'   	=> 'Licenseret til',
+    'purchase_date'   	=> 'Købsdato',
+    'purchased'   		=> 'købt',
+    'seats'   			=> 'Sæder',
     'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'serial'   			=> 'Seriel',
+    'title'      		=> 'Licens',
 
 );

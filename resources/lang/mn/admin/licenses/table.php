@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Томилогдсон',
+    'checkout'   		=> 'Гадуур нь',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> 'Лицензийн и-мэйл',
+    'license_name'   	=> 'Лицензтэй байна',
+    'purchase_date'   	=> 'Худалдан авах өдөр',
+    'purchased'   		=> 'Худалдан авсан',
+    'seats'   			=> 'Суудал',
+    'hardware'   		=> 'Тоног төхөөрөмж',
+    'serial'   			=> 'Цуваа',
+    'title'      		=> 'Лиценз',
 
 );

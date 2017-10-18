@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Департаментът не съществува.',
+    'assoc_users'	 => 'Този отдел понастоящем е свързан с поне един потребител и не може да бъде изтрит. Моля, актуализирайте потребителите си, за да не препращате към този отдел и опитайте отново.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Отделът не е създаден, моля, опитайте отново.',
+        'success' => 'Отделът е създаден успешно.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Отделът не е актуализиран, моля, опитайте отново',
+        'success' => 'Отделът се актуализира успешно.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Наистина ли искате да изтриете този отдел?',
+        'error'   => 'Имаше проблем с изтриването на отдела. Моля, опитайте отново.',
+        'success' => 'Отделът бе изтрит успешно.'
     )
 
 );

@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Materiaal',
     'bulk_checkout'             => 'Materiaal aan gebruiker uitleveren',
     'checkin'  					=> 'Materiaal uitlenen',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Materiaal uitlenen',
     'clone'  					=> 'Kloon Materiaal',
     'deployable'  				=> 'Uitrolbaar',
     'deleted'  					=> 'Dit materiaal is verwijderd. <a href="/hardware/:asset_id/restore">Klik hier om te herstellen</a>.',

@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'Activul pe care incercati sa-l asociati cu aceasta licenta nu exista.',
     'owner_doesnt_match_asset' => 'Activul pe care incercati sa-l asociati cu aceasta licenta apartine unei alte persoane decat cea selectata.',
     'assoc_users'	 => 'Aceasta licenta este momentan predata catre un utilizator si nu poate fi stearsa. Va rugam verificati licenta mai intai si dupa incercati s-o stergeti iar. ',
+    'select_asset_or_person' => 'Trebuie să selectați un material sau un utilizator, dar nu ambele.',
 
 
     'create' => array(
@@ -22,8 +23,8 @@ return array(
     'upload' => array(
         'error'   => 'Fisierul/Fisierele nu au fost uploadate. Incecati iar.',
         'success' => 'Fisierul/Fisierele au fost uploadate.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'nofiles' => 'Nu ați selectat niciun fișier pentru încărcare sau fișierul pe care încercați să îl încărcați este prea mare',
+        'invalidfiles' => 'Unul sau mai multe fișiere este prea mare sau este un tip de fișier care nu este permis. Tipurile de fișiere permise sunt png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml și lic.',
     ),
 
     'update' => array(

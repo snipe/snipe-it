@@ -10,26 +10,26 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponentas nebuvo atnaujintas, bandykite dar kartą',
+        'success' => 'Komponentas sėkmingai atnaujintas.'
     ),
 
     'delete' => array(
         'confirm'   => 'Ar tikrai norite ištrinti šį komponentą?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
+        'error'   => 'Problema buvo pašalinta komponentas. Prašau, pabandykite dar kartą.',
         'success' => 'Komponentas ištrintas sėkmingai.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
+        'error'   		=> 'Komponentas nebuvo išregistruotas, bandykite dar kartą',
+        'success' 		=> 'Komponentas sėkmingai patikrintas.',
         'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponentas nebuvo įregistruotas, bandykite dar kartą',
+        'success' 		=> 'Komponentas sėkmingai užregistruotas.',
+        'user_does_not_exist' => 'Šis naudotojas yra netinkamas. Prašau, pabandykite dar kartą.'
     )
 
 

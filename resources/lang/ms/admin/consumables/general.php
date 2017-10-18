@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'checkout'                          => 'Checkout Consumable to User',
-    'consumable_name'                   => 'Consumable Name',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
-    'total' 			                => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'Mengenai Penggunaan',
+    'about_consumables_text'  			=> 'Barang kemas adalah apa-apa yang dibeli yang akan digunakan sepanjang masa. Sebagai contoh, dakwat pencetak atau kertas copier.',
+    'checkout'                          => 'Checkout Disebabkan Pengguna',
+    'consumable_name'                   => 'Nama yang boleh digunakan',
+    'create'                            => 'Buat Makan',
+    'item_no'                           => 'barang No.',
+    'remaining' 			            => 'Baki',
+    'total' 			                => 'Jumlah',
+    'update'                            => 'Kemas kini boleh digunakan',
 );

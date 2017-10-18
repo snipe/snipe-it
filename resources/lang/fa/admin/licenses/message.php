@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'دارایی شما در حال تلاش برای ارتباط با این مجوز توسط کسی غیر از فرد در اختصاص داده شده به انتخاب کرکره متعلق به.
 ',
     'assoc_users'	 => 'این مجوز در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا مجوز در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
+    'select_asset_or_person' => 'شما باید دارایی یا یک کاربر را انتخاب کنید، اما نه هر دو.',
 
 
     'create' => array(
@@ -24,7 +25,7 @@ return array(
         'error'   => 'فایل) آپلود نیست. لطفا دوباره تلاش کنید.',
         'success' => 'فایل (موفقیت آپلود شد.',
         'nofiles' => 'شما هر فایل برای آپلود انتخاب کنید، و یا فایل شما در حال تلاش برای آپلود بیش از حد بزرگ است',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'یک یا چند فایل شما بیش از حد بزرگ است و یا یک نوع فایل است که مجاز نیست. انواع فایلهای مجاز PNG، GIF، JPG، JPEG، DOC، DOCX، PDF، TXT، ZIP، RAR، RTF، XML و LIC است.',
     ),
 
     'update' => array(

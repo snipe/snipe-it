@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => 'คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลการสิ้นเปลืองนี้',
         'error'   => 'มีปัญหาระหว่างการลบวัสดุสิ้นเปลือง กรุณาลองอีกครั้ง',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => 'การสิ้นเปลืองถูกลบเรียบร้อยแล้ว'
     ),
 
      'checkout' => array(

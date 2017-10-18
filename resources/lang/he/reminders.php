@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "סיסמאות חייבות להיות שש תווים ולהתאים את האישור.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "שם המשתמש או כתובת האימייל שגויים",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "אסימון איפוס הסיסמה אינו חוקי.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "אם נמצאה כתובת דוא\"ל תואמת, נשלחה תזכורת סיסמא!",
 
 );

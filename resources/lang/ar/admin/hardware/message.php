@@ -5,28 +5,28 @@ return array(
     'undeployable' 		=> '<strong>تحذير: </strong> هذا الأصل معلم كـ غير قابل للنشر.
 إذا لم يتغير هذا الوضع، يرجى تحديث الحالة الأصول.',
     'does_not_exist' 	=> 'الأصل غير موجود.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'does_not_exist_or_not_requestable' => 'محاولة جيدة. هذا الأصل غير موجود أو غير قابل للتطبيق.',
+    'assoc_users'	 	=> 'يتم حاليا سحب مادة العرض هذه إلى مستخدم ولا يمكن حذفها. يرجى التحقق من مادة العرض أولا، ثم محاولة الحذف مرة أخرى.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
+        'error'   		=> 'لم يتم إنشاء مادة العرض، يرجى إعادة المحاولة. :(',
         'success' 		=> 'تم إنشاء الأصل بنجاح.'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
+        'error'   			=> 'لم يتم تحديث مادة العرض، يرجى إعادة المحاولة',
         'success' 			=> 'تم تحديث الأصل بنجاح.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'لم يتم اختيار أي حقول، لذلك لم يتم تحديث أي شيء.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'لم تتم استعادة مادة العرض، يرجى إعادة المحاولة',
+        'success' 		=> 'تمت استعادة مادة العرض بنجاح.'
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'لم تنجح مراجعة الأصول. حاول مرة اخرى.',
+        'success' 		=> 'تم تسجيل تدقيق الأصول بنجاح.'
     ),
 
 
@@ -36,47 +36,47 @@ return array(
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'لم يتم تحميل الملف. حاول مرة اخرى.',
+        'success' => 'تم تحميل الملف بنجاح.',
+        'nofiles' => 'لم تحدد أي ملفات للتحميل، أو أن الملف الذي تحاول تحميله كبير جدا',
+        'invalidfiles' => 'واحد أو أكثر من الملفات كبير جدا أو هو نوع ملف غير مسموح به. أنواع الملفات المسموح بها هي ينغ و جيف و جبغ و دوك و دوك و بدف و تكست.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'لم يتم استيراد بعض العناصر بشكل صحيح.',
+        'errorDetail'           => 'لم يتم استيراد العناصر التالية بسبب الأخطاء.',
+        'success'               => "تم استيراد الملف",
+        'file_delete_success'   => "تم حذف ملفك بنجاح",
+        'file_delete_error'      => "تعذر حذف الملف",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'confirm'   	=> 'هل تريد بالتأكيد حذف مادة العرض هذه؟',
+        'error'   		=> 'حدثت مشكلة أثناء حذف مادة العرض. حاول مرة اخرى.',
+        'nothing_updated'   => 'لم يتم اختيار أي أصول، لذلك لم يتم حذف أي شيء.',
         'success' 		=> 'تم حذف الأصل بنجاح.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'لم يتم سحب مادة العرض، يرجى إعادة المحاولة',
+        'success' 		=> 'تم التحقق من الأصول بنجاح.',
+        'user_does_not_exist' => 'هذا المستخدم غير صالح. حاول مرة اخرى.',
+        'not_available' => 'هذا الأصل غير متاح للخروج!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'لم يتم التحقق من مادة العرض، يرجى إعادة المحاولة',
+        'success' 		=> 'تم التحقق من مادة العرض بنجاح.',
+        'user_does_not_exist' => 'هذا المستخدم غير صالح. حاول مرة اخرى.',
+        'already_checked_in'  => 'تم التحقق من ذلك الأصل بالفعل.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'لم يتم طلب مادة العرض، يرجى إعادة المحاولة',
+        'success' 		=> 'تم طلب مادة العرض بنجاح.',
+        'canceled'      => 'تم إلغاء طلب تشيكوت بنجاح'
     )
 
 );

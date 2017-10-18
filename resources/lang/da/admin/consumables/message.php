@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Forbrugsstoffer findes ikke.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Forbruget er ikke oprettet, prøv igen.',
+        'success' => 'Forbrugsvarer oprettes med succes.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Forbruget blev ikke opdateret, prøv igen',
+        'success' => 'Forbrugsstoffer opdateret med succes.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Er du sikker på, at du ønsker at slette denne forbrugsstof?',
+        'error'   => 'Der opstod et problem ved at slette forbruget. Prøv igen.',
+        'success' => 'Forbruget blev slettet.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Forbruget blev ikke tjekket ud, prøv igen',
+        'success' 		=> 'Forbrugsmaterialet tjekket ud med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Forbruget blev ikke tjekket ind, prøv igen',
+        'success' 		=> 'Forbrugsstoffer kontrolleres med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.'
     )
 
 

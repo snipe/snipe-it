@@ -3,23 +3,23 @@
 return array(
 
     'does_not_exist' => 'Denna avskrivningskategori existerar inte.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'assoc_users'	 => 'Denna avskrivning är för närvarande kopplad till en eller flera modeller och kan inte raderas. Ta bort modellerna och försök sedan radera igen.',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Avskrivningsklassen skapades inte, försök igen. :(',
+        'success' => 'Avskrivningsklassen skapades framgångsrikt. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Avskrivningsklassen uppdaterades inte, var god försök igen',
+        'success' => 'Avskrivningsklassen uppdaterades framgångsrikt.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Är du säker på att du vill ta bort denna avskrivningsklass?',
+        'error'   => 'Det gick inte att ta bort avskrivningsklassen. Var god försök igen.',
+        'success' => 'Avskrivningsklassen har tagits bort.'
     )
 
 );

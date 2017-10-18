@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Acest câmp nu există.',
+        'already_added'   => 'Câmpul deja adăugat',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Câmpul nu a fost creat, încercați din nou.',
+            'success' => 'Câmpul a fost creat.',
+            'assoc_success' => 'Câmpul a fost adăugat cu succes la setul de câmp'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Câmpul nu a fost actualizat, încercați din nou',
+            'success' => 'Câmpul sa actualizat cu succes.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Sigur doriți să ștergeți acest câmp?',
+            'error'   => 'A apărut o problemă cu ștergerea câmpului. Vă rugăm să încercați din nou.',
+            'success' => 'Câmpul a fost șters cu succes.',
+            'in_use'   => 'Câmpul este încă în uz.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Setul de câmp nu există',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Setul de câmp nu a fost creat, încercați din nou.',
+            'success' => 'Setul de campuri a fost creat cu succes.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Setul de câmp nu a fost actualizat, încercați din nou',
+            'success' => 'Setul de câmpuri sa actualizat cu succes.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Sigur doriți să ștergeți acest set de câmpuri?',
+            'error'   => 'A apărut o problemă la ștergerea setului de câmpuri. Vă rugăm să încercați din nou.',
+            'success' => 'Setul de câmpuri a fost șters cu succes.',
+            'in_use'   => 'Setul de câmp este încă în uz.',
         )
 
     ),

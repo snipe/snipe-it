@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'Om Kategorier',
+    'about_categories'  				=> 'Kategorier hjælper dig med at organisere dine varer. Nogle eksempler kan være &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot; osv., Men du kan bruge kategorier på nogen måde, der giver mening for dig.',
     'asset_categories' 					=> 'Aktiver Kategorier',
     'category_name'  					=> 'Kategorinavn',
     'checkin_email'                     => 'Send email til bruger ved tjek ind.',
@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Rediger Kategori',
     'eula_text'							=> 'Slutbrugerlicenskategori',
     'eula_text_help'					=> 'Dette felt tillader dig at tilpasse din slutbrugerlicens til specifikke typer af aktiver. Hvis du kun har en slutbrugerlicens for alle dine aktiver, kan du afkrydse boksen nedenfor for at bruge den primære standardlicens.',
-    'name'                              => 'Category Name',
+    'name'                              => 'Kategori Navn',
     'require_acceptance'				=> 'Kræver brugere at bekræfte accept af aktiver i denne kategori.',
     'required_acceptance'				=> 'Denne bruger vil modtage en e-mail med et link til bekræftelse af accept af dette emne.',
     'required_eula'						=> 'Denne bruger vil blive sendt en kopi af slutbrugerlicensen',

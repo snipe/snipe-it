@@ -14,6 +14,7 @@ return array(
     'cost'				=> '採購成本',
     'create'			=> '新增資產',
     'date'				=> '採購日期',
+    'depreciation'	    => '折舊',
     'depreciates_on'	=> '折舊於',
     'default_location'	=> '預設位置',
     'eol_date'			=> '產品壽命日期',

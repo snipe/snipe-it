@@ -6,8 +6,8 @@ return array(
     'asset_model'       => 'موديل',
     'book_value'  	=> 'القيمة',
     'change' 		=> 'داخل\\خارج',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
+    'checkout_date' => 'موعد انتهاء الأقامة',
+    'checkoutto' 	=> 'فحصت',
     'diff' 			=> 'الفرق',
     'dl_csv' 		=> 'التنزيل كملف CSV',
     'eol' 			=> 'نهاية الحياة',
@@ -16,9 +16,9 @@ return array(
     'purchase_cost'	=> 'التكلفة',
     'purchase_date'	=> 'تم الشراء',
     'serial'   		=> 'الرقم التسلسلي',
-    'status'   		=> 'Status',
+    'status'   		=> 'الحالة',
     'title'      	=> 'أصل ',
     'image'		=> 'صورة الجهاز',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => 'أيام بدون قبول'
 
 );

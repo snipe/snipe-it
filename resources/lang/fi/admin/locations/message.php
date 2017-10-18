@@ -4,8 +4,8 @@ return array(
 
     'does_not_exist' => 'Sijaintia ei löydy.',
     'assoc_users'	 => 'Sijainti on määritetty käyttöön yhdelle tai useammalle käyttäjälle joten sitä ei voida poistaa. Poista sijainti käytöstä kaikilta käyttäjiltä ja yritä uudelleen. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'assoc_assets'	 => 'Tällä sijainnilla on tällä hetkellä vähintään yksi omaisuus, eikä sitä voi poistaa. Päivitä varastosi, jotta et halua enää viitata tähän sijaintiin ja yritä uudelleen.',
+    'assoc_child_loc'	 => 'Tämä sijainti on tällä hetkellä vähintään yhden lapsen sijainnin emä, eikä sitä voi poistaa. Päivitä sijainnit, jotta et enää viitata tähän sijaintiin ja yritä uudelleen.',
 
 
     'create' => array(

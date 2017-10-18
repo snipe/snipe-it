@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => 'Mengenai Pembekal',
+    'about_suppliers_text'  => 'Pembekal digunakan untuk mengesan sumber barangan',
     'address'               => 'Alamat Pembekal',
     'assets'                => 'Harta',
     'city'                  => 'Bandar',

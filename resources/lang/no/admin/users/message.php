@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Du har akseptert eiendelen.',
     'declined'                  => 'Du har avvist eiendelen.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'Brukerne er oppdatert, men lederen ble ikke lagret fordi lederen du valgte også i brukerlisten for redigering og brukere kan ikke være sin egen leder. Velg brukerne igjen, unntatt lederen.',
     'user_exists'               => 'Bruker finnes allerede!',
     'user_not_found'            => 'Bruker [:id] finnes ikke.',
     'user_login_required'       => 'Login-feltet er påkrevd',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Opprettelse av bruker vellykket.',
         'update'    => 'Oppdatering av bruker vellykket.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Oppdatering av brukere vellykket!',
         'delete'    => 'Sletting av bruker vellykket.',
         'ban'       => 'Vellykket forbud av bruker.',
         'unban'     => 'Forbud av bruker ble opphevet.',
@@ -31,7 +31,7 @@ return array(
         'create' => 'Det oppstod et problem under opprettelse av bruker. Prøv igjen.',
         'update' => 'Det oppstod et problem under oppdatering av bruker. Prøv igjen.',
         'delete' => 'Det oppstod et problem under sletting av bruker. Prøv igjen.',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => 'Denne brukeren har utstyr tildelt og kan ikke slettes.',
         'unsuspend' => 'Det oppstod et problem under aktivering av bruker. Prøv igjen.',
         'import'    => 'Det oppstod et problem under import av brukere. Prøv igjen.',
         'asset_already_accepted' => 'Denne eiendelen er allerede akseptert.',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Kunne ikke opprette tilkopling til LDAP-server. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server: ',
         'ldap_could_not_search' => 'Kunne ikke utføre søk på LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
         'ldap_could_not_get_entries' => 'Fikk ingen oppføringer fra LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => 'Passordet for denne kontoen administreres av LDAP/Active Directory. Kontakt IT-avdelingen for å endre passordet. ',
     ),
 
     'deletefile' => array(

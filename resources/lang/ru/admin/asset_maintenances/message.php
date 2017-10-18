@@ -12,8 +12,8 @@
             'success' => 'Выполнено.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Обслуживание активов не было отредактировано, повторите попытку.',
+            'success' => 'Управление активами отредактировано успешно.'
         ],
         'asset_maintenance_incomplete' => 'Ещё не готово',
         'warranty'                     => 'Гарантия',

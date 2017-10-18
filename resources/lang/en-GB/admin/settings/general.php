@@ -116,6 +116,8 @@ return array(
     'inches'        => 'inches',
     'width_w'        => 'w',
     'height_h'        => 'h',
+    'show_url_in_emails'                => 'Link to Snipe-IT in Emails',
+    'show_url_in_emails_help_text'      => 'Uncheck this box if you do not wish to link back to your Snipe-IT installation in your email footers. Useful if most of your users never login. ',
     'text_pt'        => 'pt',
     'thumbnail_max_h'   => 'Max thumbnail height',
     'thumbnail_max_h_help'   => 'Maximum height in pixels that thumbnails may display in the listing view. Min 25, max 500.',

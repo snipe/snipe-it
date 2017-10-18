@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'send_password_link'	        => 'Lähetä salasanan linkitys',
+    'email_reset_password'			=> 'Sähköposti salasanan palautus',
+    'reset_password'			    => 'Nollaa salasana',
+    'login'                         => 'Kirjaudu sisään',
+    'login_prompt'                  => 'Kirjaudu sisään, ole hyvä',
+    'forgot_password'               => 'unohdin salasanani',
+    'remember_me'                   => 'Muista minut',
     ];
 

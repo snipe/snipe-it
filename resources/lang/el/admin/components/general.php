@@ -2,10 +2,10 @@
 
 return array(
     'about_components_title' 			=> 'Σχετικά με τα στοιχεία',
-    'about_components_text'  			=> 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'about_components_text'  			=> 'Τα στοιχεία είναι στοιχεία που αποτελούν μέρος ενός περιουσιακού στοιχείου, για παράδειγμα σκληρό δίσκο, μνήμη RAM κ.λπ.',
     'component_name'                  => 'Όνομα στοιχείου',
-    'checkin'                             => 'Checkin Component',
-    'checkout'                             => 'Checkout Component',
+    'checkin'                             => 'Ελέγξτε το στοιχείο',
+    'checkout'                             => 'Συστατικό ελέγχου',
     'cost'				=> 'Κόστος αγοράς',
     'create'                             => 'Δημιουργία στοιχείου',
     'edit'                             => 'Επεξεργασία εξαρτήματος',

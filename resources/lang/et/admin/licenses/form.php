@@ -9,7 +9,7 @@ return array(
     'license_key'       => 'Tootevõti',
     'maintained'        => 'Kasutajatoega',
     'name'              => 'Tarkvara nimi',
-    'no_depreciation'   => 'Do Not Depreciate',
+    'no_depreciation'   => 'Ära lase oma hinge',
     'purchase_order'    => 'Tellimuse number',
     'reassignable'      => 'Taas-kasutatav',
     'remaining_seats'   => 'Kasutamata tööjaamu',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Litsenseeritud e-mailile',
     'to_name'           => 'Litsenseeritud nimele',
     'update'            => 'Muuda litsentsi',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'checkout_help'     => 'Peate litsentsi kontrollima riistvara vara või isiku jaoks. Võite valida mõlemad, kuid vara omanik peab sobima selle isikuga, kellele vara kontrollitakse.'
 );

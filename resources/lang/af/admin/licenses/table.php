@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Toevertrou aan',
+    'checkout'   		=> 'In uit',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'license_email'   	=> 'Lisensie E-pos',
+    'license_name'   	=> 'Gelisensieer om',
+    'purchase_date'   	=> 'Aankoop datum',
+    'purchased'   		=> 'gekoop',
+    'seats'   			=> 'sitplekke',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'title'      		=> 'lisensie',
 
 );

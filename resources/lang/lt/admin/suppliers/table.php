@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => 'Apie tiekėjus',
+    'about_suppliers_text'  => 'Tiekėjai naudojami daiktų šaltiniui stebėti',
     'address'               => 'Tiekėjo adresas',
     'assets'                => 'Įranga',
     'city'                  => 'Miestas',

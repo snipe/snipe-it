@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'assigned_to'   	=> 'Dodijeljena',
+    'checkout'   		=> 'In / Out',
+    'id'      			=> 'iskaznica',
+    'license_email'   	=> 'E-adresa za licencu',
+    'license_name'   	=> 'Licencirano',
+    'purchase_date'   	=> 'Datum kupnje',
+    'purchased'   		=> 'kupljen',
+    'seats'   			=> 'sjedala',
+    'hardware'   		=> 'Hardver',
+    'serial'   			=> 'Serijski',
+    'title'      		=> 'licenca',
 
 );

@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Κατηγορία δεν υπάρχει.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'Αυτή η κατηγορία συσχετίζεται επί του παρόντος με τουλάχιστον ένα μοντέλο και δεν μπορεί να διαγραφεί. Ενημερώστε τα μοντέλα σας ώστε να μην αναφέρονται πλέον στην κατηγορία αυτή και δοκιμάστε ξανά.',
+    'assoc_items'	 => 'Αυτή η κατηγορία συσχετίζεται προς το παρόν με τουλάχιστον ένα: asset_type και δεν μπορεί να διαγραφεί. Ενημερώστε το στοιχείο: asset_type ώστε να μην αναφέρεται πλέον αυτή η κατηγορία και δοκιμάστε ξανά.',
 
     'create' => array(
         'error'   => 'Η κατηγορία δεν δημιουργήθηκε, παρακαλώ δοκιμάστε ξανά.',

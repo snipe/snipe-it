@@ -2,16 +2,16 @@
 
 return array(
     'about'      	=> 'Mengenai Label Status',
-    'archived'      	=> 'Archived',
+    'archived'      	=> 'Diarkibkan',
     'create'      	=> 'Cipata Label Status',
-    'color'      	=> 'Chart Color',
+    'color'      	=> 'Warna Carta',
     'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'info'      	=> 'Label status digunakan untuk menggambarkan pelbagai negeri aset anda boleh masuk. Mereka mungkin keluar untuk dibaiki, hilang / dicuri, dan lain-lain. Anda boleh membuat label status baru untuk aset yang boleh ditugaskan, tertunda dan diarkibkan.',
     'name'      	=> 'Nama Status',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'show_in_nav'   => 'Show in side nav',
+    'pending'      	=> 'Menunggu',
+    'status_type'   => 'Jenis Status',
+    'show_in_nav'   => 'Tunjukkan di tepi sampingan',
     'title'      	=> 'Label Status',
-    'undeployable'  => 'Undeployable',
+    'undeployable'  => 'Tidak dapat dipisahkan',
     'update'      	=> 'Kemaskini Label Status',
 );

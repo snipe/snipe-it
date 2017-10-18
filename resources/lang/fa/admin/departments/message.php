@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'اداره وجود ندارد',
+    'assoc_users'	 => 'این بخش در حال حاضر حداقل با یک کاربر مرتبط است و نمی تواند حذف شود. لطفا کاربران خود را به دیگران مراجعه کنید و دوباره امتحان کنید.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'وزارت ایجاد نشد، لطفا دوباره امتحان کنید',
+        'success' => 'گروه با موفقیت ساخت'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'وزارت به روز نشده است، لطفا دوباره امتحان کنید',
+        'success' => 'بخش با موفقیت به روز شد'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'آیا مطمئن هستید که می خواهید این بخش را حذف کنید؟',
+        'error'   => 'یک مسئله حذف بخش وجود داشت. لطفا دوباره تلاش کنید.',
+        'success' => 'بخش با موفقیت حذف شد.'
     )
 
 );

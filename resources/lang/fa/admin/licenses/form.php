@@ -7,7 +7,7 @@ return array(
     'create'            => 'ایجاد مجوز
 ',
     'expiration'        => 'تاریخ انقضا',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'کلید محصول',
     'maintained'        => 'نگهداری',
     'name'              => 'نام نرم افزار
 ',

@@ -3,48 +3,49 @@
 return array(
 
     'does_not_exist' => 'Licens eksistere ikke.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'user_does_not_exist' => 'Bruger eksisterer ikke.',
+    'asset_does_not_exist' 	=> 'Det aktiv, du forsøger at forbinde med denne licens, findes ikke.',
+    'owner_doesnt_match_asset' => 'Det aktiv, du forsøger at associere med denne licens, ejes af andre som den person, der er valgt i den tildelte til dropdown.',
+    'assoc_users'	 => 'Denne licens er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller venligst licensen først, og prøv derefter at slette igen.',
+    'select_asset_or_person' => 'Du skal vælge et aktiv eller en bruger, men ikke begge.',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Licensen blev ikke oprettet, prøv igen.',
+        'success' => 'Licensen er oprettet med succes.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Filen er ikke slettet. Prøv igen.',
+        'success' => 'Filen er slettet korrekt.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'Fil (er) ikke uploadet. Prøv igen.',
+        'success' => 'Fil (er), der blev uploadet korrekt.',
+        'nofiles' => 'Du valgte ikke nogen filer til upload, eller filen du forsøger at uploade er for stor',
+        'invalidfiles' => 'En eller flere af dine filer er for store eller er en filtype, der ikke er tilladt. Tilladte filtyper er png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml og lic.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Licensen blev ikke opdateret, prøv igen',
+        'success' => 'Licensen opdateres med succes.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Er du sikker på, at du vil slette denne licens?',
+        'error'   => 'Der opstod et problem ved at slette licensen. Prøv igen.',
+        'success' => 'Licensen blev slettet korrekt.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Der var et problem med at tjekke licensen. Prøv igen.',
+        'success' => 'Licensen blev tjekket ud med succes'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Der var et problem at kontrollere licensen. Prøv igen.',
+        'success' => 'Licensen blev tjekket ind med succes'
     ),
 
 );

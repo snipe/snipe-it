@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'about_locations_title'     => 'Mengenai Lokasi',
+    'about_locations'           => 'Lokasi digunakan untuk mengesan maklumat lokasi untuk pengguna, aset dan barangan lain',
+    'assets_rtd'                => 'Aset', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Aset Ditugaskan',
     'id'                        => 'ID',
     'city'                      => 'Bandar',
     'state'                     => 'Negeri',
@@ -15,7 +15,7 @@ return array(
     'address'                   => 'Alamat',
     'zip'                       => 'Poskod',
     'locations'                 => 'Lokasi',
-    'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'parent'                    => 'Ibu bapa',
+    'currency'                  => 'Mata Wang Lokasi',
+    'ldap_ou'                   => 'Carian LDAP OU',
     );

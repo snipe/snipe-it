@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'Lokacija ne postoji.',
+    'assoc_users'	 => 'Ta je lokacija trenutačno povezana s barem jednim korisnikom i ne može se izbrisati. Ažurirajte korisnike da više ne referiraju ovu lokaciju i pokušajte ponovno.',
+    'assoc_assets'	 => 'Ta je lokacija trenutačno povezana s barem jednim resursom i ne može se izbrisati. Ažurirajte svoju imovinu da više ne referira na tu lokaciju i pokušajte ponovno.',
+    'assoc_child_loc'	 => 'Ta je lokacija trenutačno roditelj najmanje jedne lokacije za djecu i ne može se izbrisati. Ažurirajte svoje lokacije da više ne referiraju ovu lokaciju i pokušajte ponovo.',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Lokacija nije izrađena, pokušajte ponovo.',
+        'success' => 'Lokacija je uspješno izrađena.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Lokacija nije ažurirana, pokušajte ponovo',
+        'success' => 'Lokacija je uspješno ažurirana.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Jeste li sigurni da želite izbrisati tu lokaciju?',
+        'error'   => 'Došlo je do problema s brisanjem lokacije. Molim te pokušaj ponovno.',
+        'success' => 'Lokacija je uspješno obrisana.'
     )
 
 );

@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Atsarginė kopija nerasta.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Išvalant įvyko klaida.',
+        'validation_failed'     => 'Jūsų valymo patvirtinimas yra neteisingas. Patvirtinimo laukelyje įrašykite žodį "DELETE".',
+        'success'               => 'Ištrinti įrašai sėkmingai išvalomi.'
     ),
 
 );

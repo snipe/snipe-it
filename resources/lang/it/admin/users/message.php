@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Hai accettato con successo questo prodotto.',
     'declined'                  => 'Hai rifiutato con successo questo prodotto.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'I tuoi utenti sono stati aggiornati con successo, tuttavia la voce del gestore non è stata salvata perché il gestore selezionato è stato anche nell\'elenco utenti da modificare e gli utenti potrebbero non essere il proprio gestore. Seleziona nuovamente i tuoi utenti, esclusi il gestore.',
     'user_exists'               => 'Utente già esistente!',
     'user_not_found'            => 'L\'utente [:id] non esite.',
     'user_login_required'       => 'È necessario il campo login',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Utente creato con successo.',
         'update'    => 'Utente aggiornato con successo.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Gli utenti sono stati aggiornati con successo!',
         'delete'    => 'Utente eliminato con successo.',
         'ban'       => 'Utente bloccato con successo.',
         'unban'     => 'Utente sbloccato con successo.',
@@ -31,17 +31,17 @@ return array(
         'create' => 'C\'è stato un problema durante la creazione dell\'utente. Per favore riprova.',
         'update' => 'C\'è stato un problema durante l\'aggiornamento dell\'utente. Per favore riprova.',
         'delete' => 'C\'è stato un problema durante la cancellazione dell\'utente. Riprova per favore.',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => 'Questo utente dispone di elementi assegnati e non può essere eliminato.',
         'unsuspend' => 'C\'è stato un problema durante la riabilitazione dell\'utente. Riprova per favore.',
         'import'    => 'C\'è stato un problema durante l\'importazione degli utenti. Riprova per favore.',
         'asset_already_accepted' => 'Questo bene è già stato accettato.',
         'accept_or_decline' => 'Devi accettare o rifiutare questo prodotto.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => 'L\'asset che hai tentato di accettare non è stato verificato.',
         'ldap_could_not_connect' => 'Impossibile connettersi al server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'ldap_could_not_bind' => 'Impossibile unirsi al server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP: ',
         'ldap_could_not_search' => 'Impossibile trovare il server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'ldap_could_not_get_entries' => 'Impossibile ottenere voci dal server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => 'La password per questo account è gestita da LDAP / Active Directory. Per cambiare la tua password, contatta il tuo reparto IT.',
     ),
 
     'deletefile' => array(

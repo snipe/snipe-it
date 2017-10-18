@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Departamentas neegzistuoja.',
+    'assoc_users'	 => 'Šis skyrius šiuo metu yra susijęs su bent vienu naudotoju ir jo negalima ištrinti. Prašome atnaujinti savo naudotojus, kad jie daugiau nebenumatytų šio skyriaus ir bandytų dar kartą.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Departamentas nebuvo sukurtas, prašome pabandyti dar kartą.',
+        'success' => 'Departamentas sėkmingai sukūrė.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Departamentas nebuvo atnaujintas, bandykite dar kartą',
+        'success' => 'Departamentas sėkmingai atnaujintas.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Ar tikrai norite ištrinti šį skyrių?',
+        'error'   => 'Buvo pašalinta departamento problema. Prašau, pabandykite dar kartą.',
+        'success' => 'Departamentas sėkmingai ištrintas.'
     )
 
 );

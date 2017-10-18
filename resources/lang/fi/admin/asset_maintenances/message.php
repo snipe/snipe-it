@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Varallisuushoitoa, jota etsit, ei löytynyt!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Haluatko varmasti poistaa tämän omaisuuden ylläpidon?',
+            'error'   => 'Omaisuuden ylläpitoa poistettiin ongelma. Yritä uudelleen.',
+            'success' => 'Omaisuuden ylläpito on poistettu onnistuneesti.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Omaisuuden ylläpitoa ei luotu, yritä uudelleen.',
+            'success' => 'Omaisuuden ylläpito onnistui.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Varainhoitoa ei muokattu, yritä uudelleen.',
+            'success' => 'Varainhoidon muokkaus onnistui.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
+        'asset_maintenance_incomplete' => 'Ei vielä valmis',
         'warranty'                     => 'Takuu',
         'not_warranty'                 => 'Takuu päättynyt',
     ];

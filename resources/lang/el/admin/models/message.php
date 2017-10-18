@@ -3,13 +3,13 @@
 return array(
 
     'does_not_exist' => 'Το μοντέλο δεν υπάρχει.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'assoc_users'	 => 'Αυτό το μοντέλο συσχετίζεται επί του παρόντος με ένα ή περισσότερα στοιχεία και δεν μπορεί να διαγραφεί. Διαγράψτε τα στοιχεία και, στη συνέχεια, δοκιμάστε ξανά τη διαγραφή.',
 
 
     'create' => array(
         'error'   => 'Το μοντέλο δεν δημιουργήθηκε, παρακαλώ προσπαθήστε ξανά.',
         'success' => 'Το μοντέλο δημιουργήθηκε με επιτυχία.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Ένα μοντέλο στοιχείων ενεργητικού με αυτό το όνομα, τον κατασκευαστή και τον αριθμό μοντέλου υπάρχει ήδη.',
     ),
 
     'update' => array(
@@ -20,7 +20,7 @@ return array(
     'delete' => array(
         'confirm'   => 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το περιουσιακό μοντέλο;',
         'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας αυτό το μοντέλο. Παρακαλώ δοκιμάστε ξανά.',
-        'success' => 'The model was deleted successfully.'
+        'success' => 'Το μοντέλο διαγράφηκε με επιτυχία.'
     ),
 
     'restore' => array(
@@ -29,8 +29,8 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Δεν άλλαξαν πεδία, επομένως τίποτα δεν ενημερώθηκε.',
+        'success' 		=> 'Τα μοντέλα ενημερώθηκαν.'
     ),
 
 );

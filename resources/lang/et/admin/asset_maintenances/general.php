@@ -1,11 +1,11 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
-        'maintenance'        => 'Maintenance',
-        'upgrade'            => 'Upgrade'
+        'asset_maintenances' => 'Vara säilimine',
+        'edit'               => 'Varade hoolduse muutmine',
+        'delete'             => 'Kustuta vara hooldus',
+        'view'               => 'Vaadake varahalduse üksikasju',
+        'repair'             => 'Remont',
+        'maintenance'        => 'Hooldus',
+        'upgrade'            => 'Uuendage'
     ];

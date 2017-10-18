@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'Eiendelen du prøver å koble til denne lisensen eksisterer ikke.',
     'owner_doesnt_match_asset' => 'Eiendelen du prøver å koble til denne lisensen er eid av noen andre enn personen du har valgt i tildelt til-nedtrekkslista.',
     'assoc_users'	 => 'Denne lisensen er sjekket ut til en bruker og kan ikke slettes. Vennligst sjekk inn lisensen først, og forsøk sletting på nytt. ',
+    'select_asset_or_person' => 'Du må velge en ressurs eller en bruker, men ikke begge.',
 
 
     'create' => array(
@@ -23,7 +24,7 @@ return array(
         'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
         'success' => 'Fil(er) ble slettet.',
         'nofiles' => 'Ingen fil er valgt til opplasting, eller filen er for stor',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'En eller flere av filene er for stor, eller er en filtype som ikke er tillatt. Tillatte filtyper er png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, og lic.',
     ),
 
     'update' => array(

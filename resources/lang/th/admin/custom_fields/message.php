@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'ฟิลด์นั้นไม่มีอยู่',
+        'already_added'   => 'ฟิลด์ถูกเพิ่มแล้ว',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'ไม่ได้สร้างฟิลด์โปรดลองอีกครั้ง',
+            'success' => 'สร้างฟิลด์สำเร็จแล้ว',
+            'assoc_success' => 'ฟิลด์ถูกเพิ่มเข้าไปใน fieldset สำเร็จแล้ว'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'ฟิลด์ไม่ได้รับการอัปเดตโปรดลองอีกครั้ง',
+            'success' => 'ปรับปรุงข้อมูลสำเร็จแล้ว'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้',
+            'error'   => 'เกิดปัญหาในการนำออกฟิลด์ กรุณาลองอีกครั้ง.',
+            'success' => 'ฟิลด์ถูกลบเรียบร้อยแล้ว',
+            'in_use'   => 'ฟิลด์ยังคงใช้งานอยู่',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'ไม่พบ Fieldset',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'ไม่ได้สร้าง Fieldset โปรดลองอีกครั้ง',
+            'success' => 'สร้างฟิลด์สำเร็จแล้ว'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'ไม่ได้อัปเดต Fieldset โปรดลองอีกครั้ง',
+            'success' => 'อัปเดตฟิลด์สำเร็จแล้ว'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'คุณแน่ใจหรือไม่ว่าต้องการลบชุดข้อมูลฟิลด์นี้',
+            'error'   => 'เกิดปัญหาในการลบ fieldset กรุณาลองอีกครั้ง.',
+            'success' => 'ฟิลด์ถูกลบเรียบร้อยแล้ว',
+            'in_use'   => 'Fieldset ยังคงใช้อยู่',
         )
 
     ),

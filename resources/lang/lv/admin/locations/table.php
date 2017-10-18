@@ -1,21 +1,21 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'about_locations_title'     => 'Par atrašanās vietu',
+    'about_locations'           => 'Vietas tiek izmantotas, lai izsekotu atrašanās vietas informāciju lietotājiem, īpašumiem un citiem vienumiem',
+    'assets_rtd'                => 'Aktīvi', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Piešķirtie aktīvi',
     'id'                        => 'ID',
-    'city'                      => 'City',
-    'state'                     => 'State',
-    'country'                   => 'Country',
-    'create'                    => 'Create Location',
-    'update'                    => 'Update Location',
-    'name'                      => 'Location Name',
-    'address'                   => 'Address',
-    'zip'                       => 'Postal Code',
-    'locations'                 => 'Locations',
-    'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
+    'city'                      => 'Pilsēta',
+    'state'                     => 'Valsts',
+    'country'                   => 'Valsts',
+    'create'                    => 'Izveidot atrašanās vietu',
+    'update'                    => 'Atjaunināt atrašanās vietu',
+    'name'                      => 'Atrašanās vietas nosaukums',
+    'address'                   => 'Adrese',
+    'zip'                       => 'Pasta indekss',
+    'locations'                 => 'Atrašanās vietas',
+    'parent'                    => 'Vecāks',
+    'currency'                  => 'Atrašanās vietas valūta',
     'ldap_ou'                   => 'LDAP Search OU',
     );

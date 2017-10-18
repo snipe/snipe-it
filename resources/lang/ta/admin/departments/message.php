@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'துறை இல்லை.',
+    'assoc_users'	 => 'இந்தத் துறை தற்போது குறைந்தது ஒரு பயனருடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. தயவுசெய்து உங்கள் துறையை இனி இந்த துறையை குறிப்பிடாமல் புதுப்பிக்கவும் மற்றும் மீண்டும் முயற்சிக்கவும்.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'துறை உருவாக்கப்பட்டது இல்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'துறை வெற்றிகரமாக உருவாக்கப்பட்டது.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'துறை புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' => 'துறை வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'இந்தத் துறையை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
+        'error'   => 'திணைக்களம் நீக்கப்பட்ட ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'துறை வெற்றிகரமாக நீக்கப்பட்டது.'
     )
 
 );

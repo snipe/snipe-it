@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'நீங்கள் தேடிக்கொண்டிருக்கும் சொத்து பராமரிப்பு இல்லை!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'நிச்சயமாக இந்த சொத்து பராமரிப்பு நீக்க வேண்டுமா?',
+            'error'   => 'சொத்து பராமரிப்பு நீக்கப்பட்ட ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக நீக்கப்பட்டது.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'சொத்து பராமரிப்பு உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக உருவாக்கப்பட்டது.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'சொத்து பராமரிப்பு திருத்தப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக திருத்தப்பட்டது.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'இதுவரையிலும் முடிக்கப்படவில்லை',
+        'warranty'                     => 'உத்தரவாதத்தை',
+        'not_warranty'                 => 'உத்தரவாதம் இல்லை',
     ];

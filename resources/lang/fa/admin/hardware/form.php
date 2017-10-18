@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'تأیید دارایی های حذف فله',
   'bulk_delete_help'	=> 'بررسی دارایی برای حذف فله زیر کلیک کنید. به محض حذف این دارایی ها را می توان ترمیم کرد، اما ان ها دیگر قابل دسترسی با یوزر های دیگر نیستند.',
   'bulk_delete_warn'	=> 'شما در حال حذف: دارایی های تعداد دارایی.',
 	'bulk_update'		=> 'به روز رسانی دارایی های فله',
@@ -21,6 +21,7 @@ return array(
 ',
     'date'				=> 'تاریخ خرید
 ',
+    'depreciation'	    => 'استهلاک',
     'depreciates_on'	=> 'مستهلک کردن 
 ',
     'default_location'	=> ' پیش فرض محل سکونت

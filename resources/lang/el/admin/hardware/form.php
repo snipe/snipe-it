@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Κόστος αγοράς',
     'create'			=> 'Δημιουργία παγίου',
     'date'				=> 'Ημερομηνία αγοράς',
+    'depreciation'	    => 'Υποτίμηση',
     'depreciates_on'	=> 'Αποσβέσεις σε',
     'default_location'	=> 'Προεπιλεγμένη τοποθεσία',
     'eol_date'			=> 'EOL ημερομηνία',

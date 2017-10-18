@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_models_title'     => 'About Asset Models',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-    'requestable'               => 'Users may request this model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
+    'about_models_title'     => 'Mengenai Model Asset',
+    'about_models_text'           => 'Model Aset adalah cara untuk mengumpulkan aset yang sama. "MBP 2013", "IPhone 6s", dan sebagainya.',
+    'deleted'  					        => 'Model ini telah dipadamkan. <a href="/hardware/models/:model_id/restore">Klik di sini untuk memulihkannya</a>.',
+    'restore'                   => 'Pulihkan Model',
+    'requestable'               => 'Pengguna boleh meminta model ini',
+	'show_mac_address'			      => 'Tunjukkan medan alamat MAC dalam aset dalam model ini',
+    'view_deleted'              => 'Paparan Dihapus',
+    'view_models'               => 'Lihat Model',
     'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'no_custom_field'           => 'Tiada bidang tersuai',
 
 );

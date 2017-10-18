@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Det fältet existerar inte.',
+        'already_added'   => 'Fält som redan lagts till',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Fältet skapades inte, var vänlig försök igen.',
+            'success' => 'Fält skapat framgångsrikt.',
+            'assoc_success' => 'Fält med framgång tillfogas till fältet.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Fältet uppdaterades inte, var vänlig försök igen',
+            'success' => 'Fältet uppdateras framgångsrikt.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Är du säker på att du vill radera det här fältet?',
+            'error'   => 'Det gick inte att ta bort fältet. Var god försök igen.',
+            'success' => 'Fältet raderades framgångsrikt.',
+            'in_use'   => 'Fältet är fortfarande i bruk.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Fieldset existerar inte',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Fieldset skapades inte, försök igen.',
+            'success' => 'Fältet skapades framgångsrikt.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Fieldset uppdaterades inte, försök igen',
+            'success' => 'Fältet uppdateras framgångsrikt.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Är du säker på att du vill radera den här fältet?',
+            'error'   => 'Det gick inte att ta bort fältet. Var god försök igen.',
+            'success' => 'Fältet raderades framgångsrikt.',
+            'in_use'   => 'Fieldset är fortfarande i bruk.',
         )
 
     ),

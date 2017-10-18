@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Il dipartimento non esiste.',
+    'assoc_users'	 => 'Questo reparto è attualmente associato a almeno un utente e non può essere eliminato. Aggiorna i tuoi utenti per non fare più riferimento a questo reparto e riprovare.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Il reparto non è stato creato, riprova.',
+        'success' => 'Dipartimento creato con successo.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Dipartimento non è stato aggiornato, riprova',
+        'success' => 'Dipartimento aggiornato con successo.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Sei sicuro di voler eliminare questo reparto?',
+        'error'   => 'Si è verificato un problema eliminando il reparto. Riprova.',
+        'success' => 'Il reparto è stato eliminato correttamente.'
     )
 
 );

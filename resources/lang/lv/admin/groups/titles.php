@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
-    'group_management' 	 	=> 'Group Management',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'about_groups_title'            => 'Par grupām',
+    'about_groups'                  => 'Grupas tiek izmantotas, lai vispārinātu lietotāju atļaujas.',
+    'group_management' 	 	=> 'Grupas vadība',
+    'create' 	 	 	    => 'Izveidot jaunu grupu',
+    'update' 	 		        => 'Rediģēt grupu',
+    'group_name' 	 		=> 'Grupas nosaukums',
+    'group_admin' 	 		=> 'Grupas administrators',
+    'allow' 	 			=> 'Atļaut',
+    'deny' 	 				=> 'Liegties',
 
 );

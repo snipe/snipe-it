@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Tvrtka ne postoji.',
+    'assoc_users'    => 'Tvrtka je trenutno povezana s barem jednim modelom i ne može se izbrisati. Ažurirajte svoje modele da se više ne referiraju na tu tvrtku i pokušajte ponovno.',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Tvrtka nije izrađena, pokušajte ponovo.',
+        'success' => 'Tvrtka je uspješno stvorena.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Tvrtka nije ažurirana, pokušajte ponovo',
+        'success' => 'Tvrtka je uspješno ažurirana.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Jeste li sigurni da želite izbrisati ovu tvrtku?',
+        'error'   => 'Došlo je do problema s brisanjem tvrtke. Molim te pokušaj ponovno.',
+        'success' => 'Tvrtka je uspješno izbrisana.'
     )
 );

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'A tömeges törlési eszközök megerősítése',
   'bulk_delete_help'	=> 'Tömeges törléshez tekintse át az eszközöket. Ha törli az eszközöket, azok visszaállíthatók, de többé nem lesznek hozzárendelve a korábban hozzárendelt felhasználókhoz.',
   'bulk_delete_warn'	=> 'Le akarod törölni a :asset_count eszközt.',
 	'bulk_update'		=> 'Tömeges eszköz frissítés',
@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Beszerzési érték',
     'create'			=> 'Eszköz létrehozása',
     'date'				=> 'Vásárlás dátuma',
+    'depreciation'	    => 'Értékcsökkenés',
     'depreciates_on'	=> 'Leértékelődik',
     'default_location'	=> 'Alapértelmezett hely',
     'eol_date'			=> 'Lejárat Dátuma',

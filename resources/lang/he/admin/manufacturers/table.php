@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
-    'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'update'				=> 'Update Manufacturer',
-    'url'   				=> 'URL',
+    'about_manufacturers_title'    => 'על היצרנים',
+    'about_manufacturers_text'  => 'היצרנים הן החברות שיוצרות את הנכסים שלך. תוכל לאחסן כאן פרטים חשובים ליצירת קשר עם התמיכה, שתוצג בדפי פרטי הנכס שלך.',
+    'asset_manufacturers'	=> 'יצרני נכסים',
+    'create'				=> 'צור יצרן',
+    'id'   					=> 'תְעוּדַת זֶהוּת',
+    'name'      			=> 'שֵׁם',
+    'support_email'   		=> 'דוא"ל תמיכה',
+    'support_phone'   		=> 'טלפון תמיכה',
+    'support_url'   		=> 'כתובת אתר לתמיכה',
+    'update'				=> 'עדכון היצרן',
+    'url'   				=> 'כתובת אתר',
 
 );

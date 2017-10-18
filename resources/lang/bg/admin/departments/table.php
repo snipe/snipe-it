@@ -3,9 +3,9 @@
 return array(
 
     'id'                        => 'ИД№',
-    'name'                      => 'Department Name',
+    'name'                      => 'Име на отдел',
     'manager'                   => 'Ръководител',
     'location'                  => 'Местоположение',
-    'create'                    => 'Create Department',
-    'update'                    => 'Update Department',
+    'create'                    => 'Създайте отдела',
+    'update'                    => 'Отдел за актуализиране',
     );

@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Lisävarustetta ei ole olemassa.',
+    'assoc_users'	 => 'Tällä lisävarusteella on tällä hetkellä: laskea kohteet, jotka on tarkistettu käyttäjille. Tarkista lisävarusteet ja yritä uudelleen.',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Lisävarustetta ei luotu, yritä uudelleen.',
+        'success' => 'Lisävaruste on luotu.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Lisävarustetta ei päivitetty, yritä uudelleen',
+        'success' => 'Lisävaruste päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Haluatko varmasti poistaa tämän lisävarusteen?',
+        'error'   => 'Ongelma poistaa lisäosan. Yritä uudelleen.',
+        'success' => 'Lisävaruste poistettiin onnistuneesti.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
+        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
+        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
+        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     )
 
 

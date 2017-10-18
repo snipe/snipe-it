@@ -2,7 +2,7 @@
 
 return array(
     'about_categories_title' 			=> 'Om kategorier',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories'  				=> 'Kategorier hjelper deg med å organisere ting. Eksempeler på kategorier kan være "Skrivebord", "Bærbare", "Mobiltelefon", "Tablet" og så videre, men du kan bruke kategorier som gir mening for deg.',
     'asset_categories' 					=> 'Kategorier',
     'category_name'  					=> 'Navn',
     'checkin_email'                     => 'Send epost til bruker ved sjekk inn.',

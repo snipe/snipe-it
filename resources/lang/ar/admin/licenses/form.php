@@ -3,20 +3,20 @@
 return array(
 
     'asset'             => 'أصل',
-    'checkin'           => 'Checkin',
+    'checkin'           => 'تحقق في',
     'create'            => 'إنشاء رخصة',
     'expiration'        => 'تاريخ الانتهاء',
     'license_key'       => 'مفتاح المنتج',
-    'maintained'        => 'Maintained',
+    'maintained'        => 'حافظ',
     'name'              => 'إسم البرنامج',
-    'no_depreciation'   => 'Do Not Depreciate',
+    'no_depreciation'   => 'لا تستهلك',
     'purchase_order'    => 'رقم طلب الشراء',
     'reassignable'      => 'قابل لإعادة التعيين',
     'remaining_seats'   => 'المقاعد المتبقية',
     'seats'             => 'مقاعد',
     'termination_date'  => 'تاريخ الإلغاء',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
+    'to_email'          => 'مرخص إلى البريد الإلكتروني',
+    'to_name'           => 'مرخص للاسم',
     'update'            => 'تحديث الرخصة',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'checkout_help'     => 'يجب عليك التحقق من ترخيص إلى أصل جهاز أو شخص. يمكنك تحديد كليهما، ولكن يجب أن يتطابق مالك مادة العرض مع الشخص الذي تتحقق منه مادة العرض.'
 );

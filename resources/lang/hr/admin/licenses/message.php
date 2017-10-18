@@ -2,49 +2,50 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'Licenca ne postoji.',
+    'user_does_not_exist' => 'Korisnik ne postoji.',
+    'asset_does_not_exist' 	=> 'Imovina koju pokušavate povezati s ovom licencom ne postoji.',
+    'owner_doesnt_match_asset' => 'Imovina koju pokušavate povezati s ovom licencom u vlasništvu je nekog drugog osim osobe koja je odabrana u odjeljku za padajući izbornik.',
+    'assoc_users'	 => 'Ova je licenca trenutno provjerena korisniku i ne može se izbrisati. Najprije provjerite licencu, a zatim pokušajte ponovno brisati.',
+    'select_asset_or_person' => 'Morate odabrati neku vrstu imovine ili korisnika, ali ne oboje.',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Licenca nije izrađena, pokušajte ponovo.',
+        'success' => 'Licenca je uspješno stvorena.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Datoteka nije izbrisana. Molim te pokušaj ponovno.',
+        'success' => 'Datoteka je uspješno obrisana.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'Datoteke nisu prenesene. Molim te pokušaj ponovno.',
+        'success' => 'Datoteke su uspješno učitane.',
+        'nofiles' => 'Niste odabrali nijednu datoteku za prijenos ili je datoteka koju pokušavate prenijeti prevelika',
+        'invalidfiles' => 'Jedna ili više datoteka je prevelika ili je vrsta datoteke koja nije dopuštena. Dopuštene vrste datoteka su png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml i lic.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Licenca nije ažurirana, pokušajte ponovo',
+        'success' => 'Licenca je uspješno ažurirana.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Jeste li sigurni da želite izbrisati ovu licencu?',
+        'error'   => 'Došlo je do problema s brisanjem licence. Molim te pokušaj ponovno.',
+        'success' => 'Licenca je uspješno obrisana.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Došlo je do problema prilikom provjere licence. Molim te pokušaj ponovno.',
+        'success' => 'Licenca je uspješno provjerena'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'U licenci se provjeravala problem. Molim te pokušaj ponovno.',
+        'success' => 'Licenca je uspješno provjerena'
     ),
 
 );

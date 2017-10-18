@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create'  					            => 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update'  					            => 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Varade kadumiste kohta',
+    'about_depreciations'  					=> 'Võite varade amortisatsiooni seadistada, et varasid amortiseerida lineaarsel kulumil.',
+    'asset_depreciations'  					=> 'Varade kahanemine',
+    'create'  					            => 'Loo amortisatsioon',
+    'depreciation_name'  					=> 'Amortisatsiooni nimi',
+    'number_of_months'  					=> 'Kuude arv',
+    'update'  					            => 'Kulumi ajakohastamine',
 
 );

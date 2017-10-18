@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Coût d\'achat',
     'create'			=> 'Créer des actifs',
     'date'				=> 'Date d\'achat',
+    'depreciation'	    => 'Dépréciation',
     'depreciates_on'	=> 'Amortit sur',
     'default_location'	=> 'Emplacement par défaut',
     'eol_date'			=> 'Date de fin de vie',

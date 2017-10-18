@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Proizvođač ne postoji.',
+    'assoc_users'	 => 'Ovaj je proizvođač trenutno povezan s barem jednim modelom i ne može se izbrisati. Ažurirajte svoje modele da više ne referiraju ovog proizvođača i pokušajte ponovno.',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Proizvođač nije izrađen, pokušajte ponovo.',
+        'success' => 'Proizvođač je uspješno izrađen.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Proizvođač nije ažuriran, pokušajte ponovo',
+        'success' => 'Proizvođač je uspješno ažuriran.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Jeste li sigurni da želite izbrisati ovog proizvođača?',
+        'error'   => 'Došlo je do problema s brisanjem proizvođača. Molim te pokušaj ponovno.',
+        'success' => 'Proizvođač je uspješno izbrisan.'
     )
 
 );

@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Bidang itu tidak wujud.',
+        'already_added'   => 'Bidang sudah ditambahkan',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Bidang tidak dibuat, sila cuba lagi.',
+            'success' => 'Bidang berjaya dibuat.',
+            'assoc_success' => 'Bidang berjaya ditambah ke fieldset.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Bidang tidak dikemas kini, sila cuba lagi',
+            'success' => 'Bidang dikemas kini berjaya.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Adakah anda pasti ingin memadamkan medan ini?',
+            'error'   => 'Terdapat masalah memadamkan medan. Sila cuba lagi.',
+            'success' => 'Medan telah berjaya dipadam.',
+            'in_use'   => 'Medan masih digunakan.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Fieldset tidak wujud',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Fieldset tidak dibuat, sila cuba lagi.',
+            'success' => 'Fieldset berjaya berjaya.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Fieldset tidak dikemas kini, sila cuba lagi',
+            'success' => 'Fieldset dikemas kini dengan jayanya.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Adakah anda pasti ingin memadamkan medan ini?',
+            'error'   => 'Terdapat isu memadamkan medan. Sila cuba lagi.',
+            'success' => 'Bidang field telah berjaya dipadam.',
+            'in_use'   => 'Fieldset masih digunakan.',
         )
 
     ),

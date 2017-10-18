@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Departamentul nu există.',
+    'assoc_users'	 => 'Acest departament este în prezent asociat cu cel puțin un utilizator și nu poate fi șters. Actualizați-vă utilizatorii astfel încât să nu mai faceți referire la acest departament și încercați din nou.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Departamentul nu a fost creat, încercați din nou.',
+        'success' => 'Departamentul a creat cu succes.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Departamentul nu a fost actualizat, încercați din nou',
+        'success' => 'Departamentul a fost actualizat cu succes.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Sigur doriți să ștergeți acest departament?',
+        'error'   => 'A apărut o problemă cu ștergerea departamentului. Vă rugăm să încercați din nou.',
+        'success' => 'Departamentul a fost șters cu succes.'
     )
 
 );

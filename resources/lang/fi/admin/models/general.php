@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_models_title'     => 'About Asset Models',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-    'requestable'               => 'Users may request this model',
+    'about_models_title'     => 'Tietoja varallismalleista',
+    'about_models_text'           => 'Asset-mallit ovat tapa ryhmitellä identtiset varat. "MBP 2013", "IPhone 6s" jne.',
+    'deleted'  					        => 'Tämä malli on poistettu. <a href="/hardware/models/:model_id/restore">Vaihda tästä palauttaaksesi sen</a>.',
+    'restore'                   => 'Palauta malli',
+    'requestable'               => 'Käyttäjät voivat pyytää tätä mallia',
 	'show_mac_address'			      => 'Näytä MAC-osoitekenttä tämän mallin laitteille',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'view_deleted'              => 'Näytä poistettu',
+    'view_models'               => 'Näytä mallit',
+    'fieldset'                  => 'fieldset',
+    'no_custom_field'           => 'Ei muokattuja kenttiä',
 
 );

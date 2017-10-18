@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'เกี่ยวกับสินทรัพย์',
+    'about_assets_text'            => 'สินทรัพย์คือรายการที่ติดตามโดยใช้หมายเลขซีเรียลหรือแท็กเนื้อหา พวกเขามีแนวโน้มที่จะเป็นรายการมูลค่าที่สูงขึ้นซึ่งจะระบุรายการที่เฉพาะเจาะจง',
 	'archived'  				=> 'ถูกเก็บไว้',
     'asset'  					=> 'สินทรัพย์',
-    'bulk_checkout'             => 'Checkout Assets to User',
+    'bulk_checkout'             => 'ชำระบัญชีสินทรัพย์ให้กับผู้ใช้',
     'checkin'  					=> 'เช็คอินสินทรัพย์',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'ตรวจสอบสินทรัพย์',
     'clone'  					=> 'คัดลอกแบบสินทรัพย์',
     'deployable'  				=> 'สามารถใช้งานได้',
     'deleted'  					=> 'สินทรัพย์นี้ถูกลบแล้ว <a href="/hardware/:asset_id/restore">คลิกที่นี่เพื่อกู้คืน</a>.',
@@ -15,7 +15,7 @@ return array(
 	'filetype_info'				=> 'ประเภทของไฟล์ที่อนุญาตแล้ว มีดังนี้ png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'model_deleted'  			=> 'รุ่นสินทรัพย์นี้ถูกลบ ก่อนที่คุณจะสามารถกู้คืนสินทรัพย์นี้ คุณต้องกู้คืนรุ่นสินทรัพย์นี้<br/> <a href="/hardware/models/:model_id/restore">คลิกที่นี่เพื้อกู้คืนรุ่น</a>.',
     'requestable'               => 'ร้องขอได้',
-    'requested'				    => 'Requested',
+    'requested'				    => 'การขอใช้บริการ',
     'restore'  					=> 'กู้คืนสินทรัพย์',
     'pending'  					=> 'อยู่ระหว่างดำเนินการ',
     'undeployable'  			=> 'ไม่สามารถนำไปใช้งานได้',

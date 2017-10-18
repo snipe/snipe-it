@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Το εξάρτημα δεν υπάρχει.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'assoc_users'	 => 'Αυτό το εξάρτημα διαθέτει: τα στοιχεία καταμέτρησης που ελέγχθηκαν στους χρήστες. Ελέγξτε τα εξαρτήματα και δοκιμάστε ξανά.',
 
     'create' => array(
         'error'   => 'Το εξάρτημα δεν δημιουργήθηκε, παρακαλώ προσπαθήστε ξανά.',
@@ -22,14 +22,14 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
+        'error'   		=> 'Το αξεσουάρ δεν έχει ελεγχθεί, δοκιμάστε ξανά',
+        'success' 		=> 'Το αξεσουάρ ολοκληρώθηκε με επιτυχία.',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
+        'error'   		=> 'Το αξεσουάρ δεν έχει συνδεθεί, δοκιμάστε ξανά',
+        'success' 		=> 'Το αξεσουάρ ολοκληρώθηκε με επιτυχία.',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     )
 

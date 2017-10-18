@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => '你已成功接受此项资产。',
     'declined'                  => '你已拒绝此项资产。',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => '您的用户已成功更新，但是您的经理条目未保存，因为您选择的经理也在要编辑的用户列表中，用户可能不是自己的经理。请再次选择您的用户，不包括经理。',
     'user_exists'               => '用户已经存在!',
     'user_not_found'            => '用户[:id] 不存在',
     'user_login_required'       => '登陆字段是必须的',
@@ -31,7 +31,7 @@ return array(
         'create' => '创建用户过程中出现了一些问题，请重试。',
         'update' => '更新用户过程中出现了一些问题，请重试。',
         'delete' => '删除用户过程中出现了一点儿问题，请重试。',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => '此用户具有分配的项目，无法删除。',
         'unsuspend' => '恢复停用用户的过程中出现了一点儿问题，请重试。',
         'import'    => '导入用户出现问题。请再试一次。',
         'asset_already_accepted' => '资产已被接受',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => '无法绑定到LDAP服务器，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息: ',
         'ldap_could_not_search' => '查询LDAP服务器失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'ldap_could_not_get_entries' => '从LDAP服务器获取信息条目失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => '此帐户的密码由LDAP / Active Directory管理。请联系您的IT部门更改您的密码。',
     ),
 
     'deletefile' => array(

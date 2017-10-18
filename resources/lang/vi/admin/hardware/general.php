@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Giới thiệu về Tài sản',
+    'about_assets_text'            => 'Tài sản là các mục được theo dõi bằng số sê-ri hoặc thẻ nội dung. Chúng thường có giá trị cao hơn khi xác định một mục cụ thể.',
 	'archived'  				=> 'Đã lưu trữ',
     'asset'  					=> 'Tài sản',
-    'bulk_checkout'             => 'Checkout Assets to User',
+    'bulk_checkout'             => 'Tài sản thanh toán cho Người dùng',
     'checkin'  					=> 'Checkin tài sản',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Tài sản thanh toán',
     'clone'  					=> 'Nhân đôi tài sản',
     'deployable'  				=> 'Cho phép cấp phát',
     'deleted'  					=> 'Tài sản này đã bị xóa. <a href="/hardware/:asset_id/restore">Nhấn vào đây để phục hồi</a>.',
@@ -15,7 +15,7 @@ return array(
 	'filetype_info'				=> 'Cho phép loại tập tin như png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'model_deleted'  			=> 'Kiểu tài sản này đã bị xóa. Bạn phải phục hồi kiểu tài sản trước khi bạn phục hồi Tài sản.<br/> <a href="/hardware/models/:model_id/restore">Nhấn vào đây để phục hồi kiểu tài sản</a>.',
     'requestable'               => 'Cho phép đề xuất',
-    'requested'				    => 'Requested',
+    'requested'				    => 'Yêu cầu',
     'restore'  					=> 'Phục hồi tài sản',
     'pending'  					=> 'Đang chờ',
     'undeployable'  			=> 'Không cho phép cấp phát',

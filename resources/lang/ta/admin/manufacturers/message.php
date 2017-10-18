@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'உற்பத்தியாளர் இல்லை.',
+    'assoc_users'	 => 'இந்த உற்பத்தியாளர் தற்போது குறைந்தது ஒரு மாதிரியுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. இந்த உற்பத்தியாளரை இனி குறிப்பிடுவதற்கு உங்கள் மாதிரியைப் புதுப்பிக்கவும் மீண்டும் முயற்சிக்கவும்.',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'உற்பத்தியாளர் உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'உற்பத்தியாளர் வெற்றிகரமாக உருவாக்கப்பட்டது.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'உற்பத்தியாளர் புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' => 'உற்பத்தியாளர் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'இந்த உற்பத்தியாளரை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
+        'error'   => 'தயாரிப்பாளரை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'உற்பத்தியாளர் வெற்றிகரமாக நீக்கப்பட்டது.'
     )
 
 );

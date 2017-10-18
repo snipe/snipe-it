@@ -1,11 +1,11 @@
 <?php
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
+	'dl_csv'      				=> 'Laadige alla CSV',
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'require_acceptance'      	=> 'Vastuvõtmine',
+    'title'      				=> 'Lisaseade Nimi',
 
 
 );

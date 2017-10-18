@@ -13,7 +13,7 @@ return array(
     'filetype_info'     => 'İzin verilen dosya türleri; png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => ':name Kişisi ile iligli geçmiş',
 	'info'				=> 'Bilgi',
-    'restore_user'		=> 'Click here to restore them.',
+    'restore_user'		=> 'Onları geri yüklemek için buraya tıklayın.',
     'last_login'        => 'Son oturum açma tarihi',
     'ldap_config_text'  => 'LDAP yapılandırma ayarları Yönetici> Ayarlar\'da bulunabilir. Seçilen yer (isteğe bağlı), tüm içe aktarılan kullanıcılar için ayarlanır.',
     'software_user'     => 'Yazılıma :name için çıkış yapılmış',

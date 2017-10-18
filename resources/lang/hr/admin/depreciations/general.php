@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create'  					            => 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update'  					            => 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'O amortizacijama imovine',
+    'about_depreciations'  					=> 'Možete postaviti amortizaciju imovine za amortizaciju imovine na temelju linearne amortizacije.',
+    'asset_depreciations'  					=> 'Deprecijacija imovine',
+    'create'  					            => 'Stvorite amortizaciju',
+    'depreciation_name'  					=> 'Naziv amortizacije',
+    'number_of_months'  					=> 'Broj mjeseci',
+    'update'  					            => 'Ažuriraj amortizaciju',
 
 );

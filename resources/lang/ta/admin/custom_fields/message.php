@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'அந்த புலம் இல்லை.',
+        'already_added'   => 'புலம் ஏற்கனவே சேர்க்கப்பட்டது',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'புலம் உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'புலம் வெற்றிகரமாக உருவாக்கப்பட்டது.',
+            'assoc_success' => 'Fieldet க்கு புலம் வெற்றிகரமாக சேர்க்கப்பட்டது.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'புலம் புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+            'success' => 'புலம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'நிச்சயமாக இந்த புலம் நீக்க வேண்டுமா?',
+            'error'   => 'களத்தை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'புலம் வெற்றிகரமாக நீக்கப்பட்டது.',
+            'in_use'   => 'புலம் இன்னும் பயன்படுத்தப்படுகிறது.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'புலத்தில் இல்லை',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'புலத்தை உருவாக்கவில்லை, தயவு செய்து மீண்டும் முயற்சி செய்க.',
+            'success' => 'புலத்தில் வெற்றிகரமாக உருவாக்கப்பட்டது.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'புலத்தை புதுப்பிக்க முடியவில்லை, மீண்டும் முயற்சிக்கவும்',
+            'success' => 'புலத்தில் வெற்றிகரமாக மேம்படுத்தப்பட்டது.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'இந்த துறையை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
+            'error'   => 'களஞ்சியத்தை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'Fieldset வெற்றிகரமாக நீக்கப்பட்டது.',
+            'in_use'   => 'புலத்தில் இன்னும் பயன்படுத்தப்படுகிறது.',
         )
 
     ),

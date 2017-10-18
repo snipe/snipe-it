@@ -2,81 +2,80 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Varning: </strong> Den här tillgången har markerats som omöjlig för närvarande. Om denna status har ändrats uppdaterar du tillgångsstatusen.',
+    'does_not_exist' 	=> 'Tillgång existerar inte.',
+    'does_not_exist_or_not_requestable' => 'Bra försök. Den tillgången existerar inte eller är inte önskvärd.',
+    'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Tillgången skapades inte, försök igen. :(',
+        'success' 		=> 'Asset skapades framgångsrikt. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Tillgången var inte uppdaterad, försök igen',
+        'success' 			=> 'Asset uppdaterad framgångsrikt.',
+        'nothing_updated'	=>  'Inga fält valdes, så ingenting uppdaterades.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Tillgången återställdes inte, försök igen',
+        'success' 		=> 'Tillgången återställs framgångsrikt.'
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Assetrevisionen misslyckades. Var god försök igen.',
+        'success' 		=> 'Asset-revision har loggats in.'
     ),
 
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Filen har inte tagits bort. Var god försök igen.',
+        'success' => 'Filen har tagits bort.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Fil (er) inte uppladdade. Var god försök igen.',
+        'success' => 'Filer som har laddats upp.',
+        'nofiles' => 'Du valde inte några filer för uppladdning, eller filen du försöker ladda upp är för stor',
+        'invalidfiles' => 'En eller flera av dina filer är för stora eller är en filtyp som inte är tillåten. Tillåtna filtyper är png, gif, jpg, doc, docx, pdf och txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Vissa objekt importerades inte korrekt.',
+        'errorDetail'           => 'Följande objekt importerades inte på grund av fel.',
+        'success'               => "Din fil har importerats",
+        'file_delete_success'   => "Din fil har tagits bort",
+        'file_delete_error'      => "Filen kunde inte raderas",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Är du säker på att du vill radera den här tillgången?',
+        'error'   		=> 'Det gick inte att ta bort tillgången. Var god försök igen.',
+        'nothing_updated'   => 'Inga tillgångar valdes, så ingenting togs bort.',
+        'success' 		=> 'Tillgången raderades framgångsrikt.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'Tillgången utcheckades inte, försök igen',
+        'success' 		=> 'Tillgången checkas ut framgångsrikt.',
+        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.',
+        'not_available' => 'Den tillgången är inte tillgänglig för kassan!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'Tillgången kontrollerades inte, försök igen',
+        'success' 		=> 'Asset kontrolleras framgångsrikt.',
+        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.',
+        'already_checked_in'  => 'Den tillgången är redan incheckad.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'Tillgången begärdes inte, försök igen',
+        'success' 		=> 'Asset begärdes framgångsrikt.',
+        'canceled'      => 'Checkout förfrågan har avbrutits'
     )
 
 );

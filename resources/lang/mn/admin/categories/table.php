@@ -3,8 +3,8 @@
 return array(
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'parent'   					=> 'Эцэг эх',
+    'require_acceptance'      	=> 'Хүлээн зөвшөөрөх',
+    'title'      				=> 'Активын нэр',
 
 );

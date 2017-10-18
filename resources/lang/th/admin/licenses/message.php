@@ -2,49 +2,50 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'ไม่มีสัญญาอนุญาต',
+    'user_does_not_exist' => 'ไม่มีผู้ใช้',
+    'asset_does_not_exist' 	=> 'เนื้อหาที่คุณกำลังพยายามเชื่อมโยงกับใบอนุญาตนี้ไม่มีอยู่',
+    'owner_doesnt_match_asset' => 'เนื้อหาที่คุณกำลังพยายามเชื่อมโยงกับใบอนุญาตนี้เป็นของ somene ไม่ใช่บุคคลที่เลือกในรายการที่กำหนดให้กับ dropdown',
+    'assoc_users'	 => 'ขณะนี้ใบอนุญาตนี้ออกให้แก่ผู้ใช้แล้วและไม่สามารถลบได้ โปรดตรวจสอบใบอนุญาตเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
+    'select_asset_or_person' => 'คุณต้องเลือกเนื้อหาหรือผู้ใช้ แต่ไม่ใช่ทั้งสองอย่าง',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'ไม่ได้สร้างสัญญาอนุญาตโปรดลองอีกครั้ง',
+        'success' => 'สร้างสัญญาอนุญาตเรียบร้อยแล้ว'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'ไฟล์ไม่ถูกลบ กรุณาลองอีกครั้ง.',
+        'success' => 'ไฟล์ถูกลบเรียบร้อยแล้ว',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'ไฟล์ไม่ได้อัปโหลด กรุณาลองอีกครั้ง.',
+        'success' => 'ไฟล์ที่อัปโหลดเรียบร้อยแล้ว',
+        'nofiles' => 'คุณไม่ได้เลือกไฟล์ใด ๆ สำหรับการอัปโหลดหรือไฟล์ที่คุณกำลังพยายามอัปโหลดมีขนาดใหญ่เกินไป',
+        'invalidfiles' => 'ไฟล์ของคุณอย่างน้อยหนึ่งไฟล์มีขนาดใหญ่เกินไปหรือเป็นไฟล์ที่ไม่ได้รับอนุญาต ไฟล์ที่อนุญาตคือ png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml และ lic',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'สัญญาอนุญาตไม่ได้รับการปรับปรุงโปรดลองอีกครั้ง',
+        'success' => 'มีการอัปเดตใบอนุญาตเรียบร้อยแล้ว'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจหรือไม่ว่าต้องการลบสัญญาอนุญาตนี้',
+        'error'   => 'เกิดปัญหาในการนำออกใบอนุญาต กรุณาลองอีกครั้ง.',
+        'success' => 'ใบอนุญาตถูกลบเรียบร้อยแล้ว'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'มีปัญหาในการตรวจสอบใบอนุญาต กรุณาลองอีกครั้ง.',
+        'success' => 'ออกใบอนุญาตแล้ว'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'เกิดปัญหาในการตรวจสอบใบอนุญาต กรุณาลองอีกครั้ง.',
+        'success' => 'ใบอนุญาตได้รับการตรวจสอบเรียบร้อยแล้ว'
     ),
 
 );

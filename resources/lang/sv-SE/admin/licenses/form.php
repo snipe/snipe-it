@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'create'            => 'Create License',
-    'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'purchase_order'    => 'Purchase Order Number',
+    'asset'             => 'Tillgång',
+    'checkin'           => 'Checka in',
+    'create'            => 'Skapa licens',
+    'expiration'        => 'Utgångsdatum',
+    'license_key'       => 'Produktnyckel',
+    'maintained'        => 'Bibehållen',
+    'name'              => 'Programnamn',
+    'no_depreciation'   => 'Depreciera inte',
+    'purchase_order'    => 'Beställningsnummer',
     'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'remaining_seats'   => 'Återstående platser',
+    'seats'             => 'Säten',
+    'termination_date'  => 'Slutdatum',
+    'to_email'          => 'Licensierad till Email',
+    'to_name'           => 'Licensierad till Namn',
+    'update'            => 'Uppdateringslicens',
+    'checkout_help'     => 'Du måste kolla en licens ut till en maskinvaru tillgång eller en person. Du kan välja båda, men ägaren av tillgången måste matcha den person du kontrollerar tillgången ut till.'
 );

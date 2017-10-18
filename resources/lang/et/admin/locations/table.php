@@ -4,7 +4,7 @@ return array(
     'about_locations_title'     => 'Asukohtadest',
     'about_locations'           => 'Asukohti kasutatakse selleks, et jälgida kasutajate, vahendite ja muude asjade liikumist',
     'assets_rtd'                => 'Vahendid', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'assets_checkedout'         => 'Assigneeritud varad',
     'id'                        => 'ID',
     'city'                      => 'Linn',
     'state'                     => 'Maakond',

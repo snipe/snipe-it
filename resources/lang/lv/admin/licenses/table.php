@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Piešķirts',
+    'checkout'   		=> 'Iekšā ārā',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> 'Licences e-pasts',
+    'license_name'   	=> 'Licencēts',
+    'purchase_date'   	=> 'Pirkuma datums',
+    'purchased'   		=> 'Iegādāts',
+    'seats'   			=> 'Sēdvietas',
+    'hardware'   		=> 'Aparatūra',
+    'serial'   			=> 'Sērijas numurs',
+    'title'      		=> 'Licence',
 
 );

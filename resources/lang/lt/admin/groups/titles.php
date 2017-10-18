@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups_title'            => 'Apie grupes',
+    'about_groups'                  => 'Grupės naudojamos apibendrinti naudotojo leidimus.',
     'group_management' 	 	=> 'Grupės valdymas',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
+    'create' 	 	 	    => 'Sukurti naują grupę',
+    'update' 	 		        => 'Redaguoti grupę',
     'group_name' 	 		=> 'Grupės pavadinimas',
     'group_admin' 	 		=> 'Gruopės administratorius',
     'allow' 	 			=> 'Leisti',

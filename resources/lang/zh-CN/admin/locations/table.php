@@ -17,5 +17,5 @@ return array(
     'locations'                 => '地理位置',
     'parent'                    => '上级节点',
     'currency'                  => '当地货币单位',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'LDAP中搜索组织单位（OU）',
     );

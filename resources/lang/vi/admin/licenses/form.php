@@ -6,7 +6,7 @@ return array(
     'checkin'           => 'Đăng ký vào',
     'create'            => 'Tạo giấp phép',
     'expiration'        => 'Ngày hết hạn',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Mã sản phẩm',
     'maintained'        => 'Đã duy trì',
     'name'              => 'Tên phần mềm',
     'no_depreciation'   => 'Không khấu hao',

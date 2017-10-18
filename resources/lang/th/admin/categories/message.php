@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'ยังไม่มีหมวดหมู่',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'หมวดหมู่นี้เชื่อมโยงกับโมเดลอย่างน้อยหนึ่งรายการและไม่สามารถลบออกได้ โปรดอัปเดตโมเดลของคุณเพื่อไม่ให้อ้างอิงหมวดหมู่นี้อีกแล้วลองอีกครั้ง',
+    'assoc_items'	 => 'หมวดหมู่นี้มีการเชื่อมโยงกับ asset_type อย่างน้อยหนึ่งรายการและไม่สามารถลบได้ โปรดอัปเดต: asset_type เพื่อไม่ให้อ้างอิงหมวดหมู่นี้อีกแล้วลองอีกครั้ง',
 
     'create' => array(
         'error'   => 'ยังไม่ได้สร้างหมวดหมู่ กรุณาลองอีกครั้ง.',

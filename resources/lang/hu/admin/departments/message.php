@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'A tanszék nem létezik.',
+    'assoc_users'	 => 'Ez a részleg jelenleg társított legalább egy felhasználót, és nem lehet törölni. Kérjük, frissítse a felhasználókat, hogy ne hivatkozzanak az osztályon, és próbálja újra.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Osztály nem jött létre, próbálkozzon újra.',
+        'success' => 'Osztály sikeresen létrehozva.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'A tanszék nem frissült, próbálkozzon újra',
+        'success' => 'Osztály sikeresen frissült.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Biztosan törölni szeretné ezt az osztályt?',
+        'error'   => 'Hiba történt a részleg törlésével. Kérlek próbáld újra.',
+        'success' => 'Az osztály sikeresen törölve lett.'
     )
 
 );

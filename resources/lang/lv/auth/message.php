@@ -2,36 +2,36 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'account_already_exists' => 'Konts ar šo e-pasta adresi jau pastāv.',
+    'account_not_found'      => 'Lietotājvārds vai parole nav pareiza.',
+    'account_not_activated'  => 'Šis lietotāja konts nav aktivizēts.',
+    'account_suspended'      => 'Šī lietotāja konta darbība ir apturēta.',
+    'account_banned'         => 'Šis lietotāja konts ir aizliegts.',
+    'throttle'               => 'Pārāk daudz pieteikšanās mēģinājumu neizdevās. Lūdzu, mēģiniet vēlreiz apmēram minūtēs minūtēs.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Mēģinot pieslēgties, radās problēma. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Jūs esat veiksmīgi pieteicies',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Mēģinot izveidot kontu, radās problēma. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Konts veiksmīgi izveidots.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Mēģinot atkopt paroles kodu, radās problēma. Lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Paroles atjaunošanas e-pasts ir veiksmīgi nosūtīts.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Mēģinot atiestatīt paroli, radās problēma. Lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Jūsu parole ir veiksmīgi atiestatīta.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Mēģinot aktivizēt kontu, radās problēma. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Jūsu konts ir veiksmīgi aktivizēts.',
     ),
 
 );

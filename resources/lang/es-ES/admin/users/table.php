@@ -19,7 +19,7 @@ return array(
     'location'  			=> 'Localización',
     'lock_passwords'		=> 'Los detalles de acceso no pueden ser cambiados en esta instalación.',
     'manager' 				=> 'Responsable',
-    'managed_locations'     => 'Managed Locations',
+    'managed_locations'     => 'Ubicaciones gestionadas',
     'name' 					=> 'Usuario',
     'notes'                 => 'Notas',
     'password_confirm' 		=> 'Confirmar Password',

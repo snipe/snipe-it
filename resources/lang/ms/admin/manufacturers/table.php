@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_title'    => 'Mengenai pengeluar',
+    'about_manufacturers_text'  => 'Pengilang adalah syarikat yang membuat aset anda. Anda boleh menyimpan maklumat hubungan sokongan penting tentang mereka di sini, yang akan dipaparkan pada halaman butiran aset anda.',
     'asset_manufacturers'	=> 'Pengeluar Harta',
     'create'				=> 'Cipta Pengeluar',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'Nama',
+    'support_email'   		=> 'Sokongan E-mel',
+    'support_phone'   		=> 'Sokongan Telefon',
+    'support_url'   		=> 'Sokongan URL',
     'update'				=> 'Kemaskini Pengeluar',
     'url'   				=> 'URL',
 

@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Groep bestaan ​​reeds!',
+    'group_not_found'     => 'Groep [: id] bestaan ​​nie.',
+    'group_name_required' => 'Die naam veld is nodig',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Groep is suksesvol geskep.',
+        'update' => 'Groep is suksesvol opgedateer.',
+        'delete' => 'Groep is suksesvol verwyder.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Is jy seker jy wil hierdie groep uitvee?',
+        'create' => 'Kon nie die groep skep nie. Probeer asseblief weer.',
+        'update' => 'Kon nie die groep opdateer nie. Probeer asseblief weer.',
+        'delete' => 'Kon nie die groep uitvee nie. Probeer asseblief weer.',
     ),
 
 );

@@ -2,23 +2,23 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
+    'asset_tag'   	=> 'Varade silt',
+    'asset_model'       => 'Mudel',
+    'book_value'  	=> 'Väärtus',
+    'change' 		=> 'Sees väljas',
     'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'checkoutto' 	=> 'Väljaostetud',
+    'diff' 			=> 'Diferentseeritud',
+    'dl_csv' 		=> 'Laadige alla CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'location' 		=> 'Asukoht',
+    'purchase_cost'	=> 'Kulud',
+    'purchase_date'	=> 'Ostetud',
+    'serial'   		=> 'Seerianumber',
+    'status'   		=> 'Olek',
+    'title'      	=> 'Vara',
+    'image'		=> 'Seadme pilt',
+    'days_without_acceptance' => 'Päeva ilma vastuvõtmiseta'
 
 );

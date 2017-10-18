@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'El equipo que intentas asignar a esta licencia no existe.',
     'owner_doesnt_match_asset' => 'El equipo al que estas intentando asignar esta licenciam, está asignado a un usuario diferente que el de la licencia.',
     'assoc_users'	 => 'Esta categoría está asignada al menos a un modelo y no puede ser eliminada.',
+    'select_asset_or_person' => 'Debe seleccionar un activo o un usuario, pero no ambos.',
 
 
     'create' => array(

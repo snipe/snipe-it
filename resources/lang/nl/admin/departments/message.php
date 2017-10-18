@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Afdeling bestaat niet.',
+    'assoc_users'	 => 'Deze afdeling is op dit moment gekoppeld aan minstens één gebruiker en kan daardoor niet verwijderd worden. Zorg ervoor dat er geen gebruikers meer aan deze afdeling gekoppeld zijn en probeer het opnieuw. ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Afdeling is niet aangemaakt, probeer het nogmaals.',
+        'success' => 'Afdeling succesvol aangemaakt.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Afdeling is niet bijgewerkt, probeer het nogmaals',
+        'success' => 'Afdeling succesvol bijgewerkt.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Weet je zeker dat je deze afdeling wil verwijderen?',
+        'error'   => 'Er was een probleem tijdens het verwijderen van de afdeling, probeer het nogmaals.',
+        'success' => 'De afdeling is succesvol verwijderd.'
     )
 
 );

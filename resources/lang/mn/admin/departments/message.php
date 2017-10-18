@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Хэлтэс байхгүй байна.',
+    'assoc_users'	 => 'Энэ хэлтэс нь одоогоор хамгийн багадаа нэг хэрэглэгчтэй холбоотой бөгөөд устгах боломжгүй байна. Энэ хэрэглэгчийн лавлагааг цаашид хэрэггүй болгохын тулд хэрэглэгчиддээ шинэчилнэ үү.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Газар үүсгээгүй байна, дахин оролдоно уу.',
+        'success' => 'Газар амжилттай бий болсон.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Хэлтэс шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Газар амжилттай шинэчлэгдсэн.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Та энэ хэлтэст устгахыг хүсч байна уу?',
+        'error'   => 'Департаментыг устгах асуудал гарсан. Дахин оролдоно уу.',
+        'success' => 'Энэ хэлтэс амжилттай устгагдсан.'
     )
 
 );

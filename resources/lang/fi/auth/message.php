@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Käyttäjätiliä ei ole aktivoitu.',
     'account_suspended'      => 'Käyttäjätili on jäädytetty.',
     'account_banned'         => 'Käyttäjätili on estetty.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'throttle'               => 'Liian monet epäonnistuneet kirjautumisyritykset. Yritä uudelleen noin minuuttien minuuttien ajan.',
 
     'signin' => array(
         'error'   => 'Sisäänkirjautumisessa tapahtui virhe, yritä uudelleen.',

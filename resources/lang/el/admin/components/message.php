@@ -5,7 +5,7 @@ return array(
     'does_not_exist' => 'Το στοιχείο δεν υπάρχει.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
+        'error'   => 'Το στοιχείο δεν δημιουργήθηκε, δοκιμάστε ξανά.',
         'success' => 'Το στοιχείο ενημερώθηκε με επιτυχία.'
     ),
 
@@ -16,20 +16,20 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το εξάρτημα;',
-        'error'   => 'There was an issue deleting the component. Please try again.',
+        'error'   => 'Παρουσιάστηκε ένα ζήτημα κατάργησης του στοιχείου. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
         'success' => 'Το εξάρτημα έχει διαγραφεί με επιτυχία.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
+        'error'   		=> 'Το στοιχείο δεν έχει ελεγχθεί, δοκιμάστε ξανά',
+        'success' 		=> 'Η συνιστώσα ολοκληρώθηκε με επιτυχία.',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Το στοιχείο δεν έχει επιλεγεί, δοκιμάστε ξανά',
+        'success' 		=> 'Το στοιχείο ελέγχου ολοκληρώθηκε με επιτυχία.',
+        'user_does_not_exist' => 'Αυτός ο χρήστης είναι άκυρος. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.'
     )
 
 

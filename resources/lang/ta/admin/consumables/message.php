@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'நுகர்வோர் இல்லை.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'நுகர்வோர் உருவாக்கப்படவில்லை, தயவுசெய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'நுகர்வோர் வெற்றிகரமாக உருவாக்கப்பட்டது.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'நுகர்வோர் புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' => 'நுகர்வோர் வெற்றிகரமாக மேம்படுத்தப்பட்டது.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'நீங்கள் இந்த நுகர்வு நீக்க விரும்புகிறீர்களா?',
+        'error'   => 'நுகர்வு நீக்கம் ஒரு பிரச்சினை இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'நுகர்வோர் வெற்றிகரமாக நீக்கப்பட்டது.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'நுகர்வோர் சரிபார்க்கப்படவில்லை, தயவு செய்து மீண்டும் முயற்சிக்கவும்',
+        'success' 		=> 'நுகர்வோர் வெற்றிகரமாக சோதிக்கப்பட்டது.',
+        'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'நுகர்வோர் சரிபார்க்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' 		=> 'நுகர்வோர் வெற்றிகரமாக சோதிக்கப்பட்டது.',
+        'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.'
     )
 
 

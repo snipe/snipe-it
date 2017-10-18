@@ -1,14 +1,14 @@
 <?php
 return array(
     'does_not_exist' => 'Αυτή η εταιρεία δεν υπάρχει.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'assoc_users'    => 'Αυτή η εταιρεία συσχετίζεται προς το παρόν με τουλάχιστον ένα μοντέλο και δεν μπορεί να διαγραφεί. Ενημερώστε τα μοντέλα σας ώστε να μην αναφέρονται πλέον στην εν λόγω εταιρεία και δοκιμάστε ξανά.',
     'create' => array(
         'error'   => 'Η εταιρεία δεν δημιουργήθηκε, παρακαλώ δοκιμάστε ξανά.',
         'success' => 'Η εταιρεία δημιουργήθηκε με επιτυχία.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Η εταιρεία δεν ενημερώθηκε, δοκιμάστε ξανά',
+        'success' => 'Η εταιρεία ενημερώθηκε με επιτυχία.'
     ),
     'delete' => array(
         'confirm' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την εταιρεία;',

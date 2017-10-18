@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'תווית הסטטוס אינה קיימת.',
+    'assoc_assets'	 => 'תווית סטטוס זו משויכת כעת לנכס אחד לפחות ולא ניתן למחוק אותה. עדכן את הנכסים שלך כדי לא להתייחס עוד לסטטוס זה ונסה שוב.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'תווית הסטטוס לא נוצרה, נסה שוב.',
+        'success' => 'תווית המצב נוצרה בהצלחה.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'תווית הסטטוס לא עודכנה, נסה שוב',
+        'success' => 'תווית הסטטוס עודכנה בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק את תווית המצב הזו?',
+        'error'   => 'הייתה בעיה במחיקת תווית המצב. בבקשה נסה שוב.',
+        'success' => 'תווית הסטטוס נמחקה בהצלחה.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'לא ניתן להקצות נכסים אלה לאף אחד.',
+        'deployable'   => 'ניתן לבדוק את הנכסים האלה. לאחר הקצאתן, הן יקבלו סטטוס meta של <i class="fa fa-circle text-blue"></i> <strong> פורסמו </strong>.',
+        'archived'   => 'לא ניתן לבדוק את הנכסים האלה, והם יופיעו רק בתצוגה המפורטת בארכיון. אפשרות זו שימושית לשמירת מידע על נכסים לצורך תקצוב / מטרות היסטוריות, אך שמירה על רשימת הנכסים היומיומית.',
+        'pending'   => 'נכסים אלה עדיין לא ניתן להקצות לאף אחד, משמש לעתים קרובות עבור פריטים כי הם לתיקון, אבל הם צפויים לחזור למחזור.',
+    ),
 
 );

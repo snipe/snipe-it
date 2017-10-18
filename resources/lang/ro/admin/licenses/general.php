@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Despre Licențe',
+    'about_licenses'                  => 'Licențele sunt utilizate pentru a urmări software-ul. Ei au un număr specific de locuri care pot fi verificate pentru persoane fizice',
     'checkin'  					=> 'Primire locuri licenta',
     'checkout_history'  		=> 'Istoric predari',
     'checkout'  				=> 'Locuri licente predate',
     'edit'  					=> 'Editeaza licenta',
-    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'				=> 'Tipurile de fișiere permise sunt png, gif, jpg, jpeg, doc, docx, pdf, txt, zip și rar.',
     'clone'  					=> 'Cloneaza licenta',
     'history_for'  				=> 'Istoric pentru ',
     'in_out'  					=> 'Predare/Primire',

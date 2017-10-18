@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Хөрөнгийн загвар үүсгэх',
+    'created_at' 			=> 'Үүсгэгдсэн',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> 'Загварын дугаар',
+    'name'      			=> 'Хөрөнгийн загварын нэр',
+    'numassets' 			=> 'Актив',
+    'title'					=> 'Хөрөнгийн загвар',
+    'update'				=> 'Активын загварыг шинэчлэх',
+    'view'					=> 'Активын загварыг харах',
+    'update'				=> 'Активын загварыг шинэчлэх',
+    'clone'				=> 'Клоны загвар',
+    'edit'				=> 'Загварыг засах',
 );

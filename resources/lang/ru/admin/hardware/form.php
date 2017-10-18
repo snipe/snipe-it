@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Цена',
     'create'			=> 'Создать актив',
     'date'				=> 'Дата покупки',
+    'depreciation'	    => 'обесценивание',
     'depreciates_on'	=> 'Обесценивается на',
     'default_location'	=> 'Текущее расположение',
     'eol_date'			=> 'Срок эксплуатации',

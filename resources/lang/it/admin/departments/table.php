@@ -3,9 +3,9 @@
 return array(
 
     'id'                        => 'ID',
-    'name'                      => 'Department Name',
+    'name'                      => 'Nome Dipartimento',
     'manager'                   => 'Manager',
-    'location'                  => 'Location',
-    'create'                    => 'Create Department',
-    'update'                    => 'Update Department',
+    'location'                  => 'luogo',
+    'create'                    => 'Crea reparto',
+    'update'                    => 'Reparto aggiornamento',
     );

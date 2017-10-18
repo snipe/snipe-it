@@ -1,11 +1,11 @@
 <?php
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+	'dl_csv'      				=> 'CSV ஐ பதிவிறக்குக',
+	'eula_text'      			=> 'இறுதிப் பயனர் உரிம ஒப்பந்தம்',
+    'id'      					=> 'ஐடி',
+    'require_acceptance'      	=> 'ஏற்றுக்கொள்ளுதல்',
+    'title'      				=> 'துணை பெயர்',
 
 
 );

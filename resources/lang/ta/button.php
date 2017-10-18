@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Request',
-    'submit'  	                => 'Submit',
-    'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
+    'actions' 	                => 'செயல்கள்',
+    'add'    	                => 'புதிதாக சேர்க்கவும்',
+    'cancel'                    => 'ரத்து',
+    'checkin_and_delete'  	    => 'சரிபார்க்கவும் & நீக்கு பயனர்',
+    'delete'  	                => 'அழி',
+    'edit'    	                => 'தொகு',
+    'restore' 	                => 'மீட்டமை',
+    'request'                   => 'வேண்டுகோள்',
+    'submit'  	                => 'சமர்ப்பி',
+    'upload'                    => 'பதிவேற்றம்',
+	'select_file'				=> 'கோப்பு தேர்ந்தெடு ...',
 );

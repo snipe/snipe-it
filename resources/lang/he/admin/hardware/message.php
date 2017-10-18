@@ -2,81 +2,80 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong> אזהרה: </strong> הנכס הזה סומן כבלתי ניתן לפריסה כעת. אם סטטוס זה השתנה, עדכן את סטטוס הנכס.',
+    'does_not_exist' 	=> 'הנכס אינו קיים.',
+    'does_not_exist_or_not_requestable' => 'ניסיון יפה. נכס זה אינו קיים או שאינו ניתן לביצוע.',
+    'assoc_users'	 	=> 'הנכס הזה מסומן כרגע למשתמש ולא ניתן למחוק אותו. בדוק תחילה את הנכס ולאחר מכן נסה למחוק שוב.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'הנכס לא נוצר, נסה שוב. You',
+        'success' 		=> 'הנכס נוצר בהצלחה. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'הנכס לא עודכן, נסה שוב',
+        'success' 			=> 'הנכס עודכן בהצלחה.',
+        'nothing_updated'	=>  'לא נבחרו שדות, ולכן דבר לא עודכן.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'הנכס לא שוחזר, נסה שוב',
+        'success' 		=> 'הנכס שוחזר בהצלחה.'
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'ביקורת הנכסים נכשלה. בבקשה נסה שוב.',
+        'success' 		=> 'ביקורת נכסים נרשמה בהצלחה.'
     ),
 
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'הקובץ לא נמחק. בבקשה נסה שוב.',
+        'success' => 'הקובץ נמחק בהצלחה.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'הקובץ לא הועלה. בבקשה נסה שוב.',
+        'success' => 'הקבצים הועלו בהצלחה.',
+        'nofiles' => 'לא בחרת קבצים להעלאה, או שהקובץ שאתה מנסה להעלות גדול מדי',
+        'invalidfiles' => 'אחד או יותר מהקבצים שלך גדול מדי או שהוא סוג קובץ שאינו מותר. סוגי קבצים מותרים הם png, gif, jpg, doc, docx, pdf ו- txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'פריטים מסוימים לא ייבאו כראוי.',
+        'errorDetail'           => 'הפריטים הבאים לא יובאו בגלל שגיאות.',
+        'success'               => "הקובץ שלך יובא",
+        'file_delete_success'   => "הקובץ שלך נמחק בהצלחה",
+        'file_delete_error'      => "לא ניתן היה למחוק את הקובץ",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'האם אתה בטוח שברצונך למחוק את הנכס הזה?',
+        'error'   		=> 'היתה בעיה במחיקת הנכס. בבקשה נסה שוב.',
+        'nothing_updated'   => 'לא נבחרו נכסים ולכן לא נמחק דבר.',
+        'success' 		=> 'הנכס נמחק בהצלחה.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'הנכס לא נבדק, נסה שוב',
+        'success' 		=> 'הנכס הוצא בהצלחה.',
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.',
+        'not_available' => 'הנכס הזה אינו זמין לקופה!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'הנכס לא נבדק, נסה שוב',
+        'success' 		=> 'הנכס נבדק בהצלחה.',
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.',
+        'already_checked_in'  => 'הנכס כבר נבדק.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'הנכס לא התבקש, נסה שוב',
+        'success' 		=> 'הנכס המבוקש בהצלחה.',
+        'canceled'      => 'בקשת התשלום בוטלה בהצלחה'
     )
 
 );

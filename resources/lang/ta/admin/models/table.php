@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'create'				=> 'சொத்து மாதிரி உருவாக்கவும்',
+    'created_at' 			=> 'இல் உருவாக்கப்பட்டது',
+    'eol'	 				=> ', EOL',
+    'modelnumber'   		=> 'மாதிரி எண்.',
+    'name'      			=> 'சொத்து மாதிரி பெயர்',
+    'numassets' 			=> 'சொத்துக்கள்',
+    'title'					=> 'சொத்து மாதிரிகள்',
+    'update'				=> 'சொத்து மாதிரியை புதுப்பி',
+    'view'					=> 'சொத்து மாடலைக் காண்க',
+    'update'				=> 'சொத்து மாதிரியை புதுப்பி',
+    'clone'				=> 'குளோன் மாதிரி',
+    'edit'				=> 'மாதிரி திருத்தவும்',
 );

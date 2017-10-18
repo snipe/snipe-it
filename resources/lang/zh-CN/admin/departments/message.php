@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => '部门不存在',
+    'assoc_users'	 => '该位置下关联的还有其他用户，目前不能删除，请更新该用户的信息之后，再尝试删除。 ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => '部门没有创建，请重试。',
+        'success' => '部门创建成功。'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => '部门没有更新，请重试',
+        'success' => '部门更新成功。'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> '你确定要删除这个部门吗？',
+        'error'   => '删除部门有一个问题。请再试一次。',
+        'success' => '已成功删除该部门。'
     )
 
 );

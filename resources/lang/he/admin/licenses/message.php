@@ -2,49 +2,50 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'הרישיון אינו קיים.',
+    'user_does_not_exist' => 'משתמש לא קיים.',
+    'asset_does_not_exist' 	=> 'הנכס שאתה מנסה לשייך לרישיון זה אינו קיים.',
+    'owner_doesnt_match_asset' => 'הנכס שאתה מנסה לשייך לרישיון זה נמצא בבעלות somene אחר מאשר האדם שנבחר שהוקצה לתפריט הנפתח.',
+    'assoc_users'	 => 'רישיון זה נבדק כעת למשתמש ולא ניתן למחוק אותו. בדוק תחילה את הרישיון ולאחר מכן נסה למחוק שוב.',
+    'select_asset_or_person' => 'עליך לבחור נכס או משתמש, אך לא את שניהם.',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'הרישיון לא נוצר, נסה שוב.',
+        'success' => 'הרישיון נוצר בהצלחה.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'הקובץ לא נמחק. בבקשה נסה שוב.',
+        'success' => 'הקובץ נמחק בהצלחה.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'הקובץ לא הועלה. בבקשה נסה שוב.',
+        'success' => 'הקבצים הועלו בהצלחה.',
+        'nofiles' => 'לא בחרת קבצים להעלאה, או שהקובץ שאתה מנסה להעלות גדול מדי',
+        'invalidfiles' => 'אחד או יותר מהקבצים שלך גדול מדי או שהוא סוג קובץ שאינו מותר. סוגי קבצים מותרים הם png, gif, jpg, jpeg, docx, pdf, txt, zip, rar, rtf, XML ו- lic.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'הרישיון לא עודכן, נסה שוב',
+        'success' => 'הרישיון עודכן בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק רישיון זה?',
+        'error'   => 'היתה בעיה במחיקת הרישיון. בבקשה נסה שוב.',
+        'success' => 'הרישיון נמחק בהצלחה.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'היתה בעיה לבדוק את הרישיון. בבקשה נסה שוב.',
+        'success' => 'הרשיון נבדק בהצלחה'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'היתה בעיה בבדיקת הרישיון. בבקשה נסה שוב.',
+        'success' => 'הרישיון נבדק בהצלחה'
     ),
 
 );

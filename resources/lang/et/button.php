@@ -4,7 +4,7 @@ return array(
     'actions' 	                => 'Tegevused',
     'add'    	                => 'Lisa uus',
     'cancel'                    => 'Loobu',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'checkin_and_delete'  	    => 'Checkin & Kustuta kasutaja',
     'delete'  	                => 'Kustuta',
     'edit'    	                => 'Muuda',
     'restore' 	                => 'Taasta',

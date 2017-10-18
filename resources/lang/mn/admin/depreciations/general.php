@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create'  					            => 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update'  					            => 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Хөрөнгийн элэгдлийн тухай',
+    'about_depreciations'  					=> 'Та шулуун шугамын элэгдэл дээр үндэслэн хөрөнгийг элэгдүүлэхийн тулд хөрөнгийн элэгдлийг үүсгэж болно.',
+    'asset_depreciations'  					=> 'Хөрөнгийн элэгдэл',
+    'create'  					            => 'Элэгдэл бий болгох',
+    'depreciation_name'  					=> 'Элэгдэл Нэр',
+    'number_of_months'  					=> 'Сарын тоо',
+    'update'  					            => 'Элэгдэл шинэчлэх',
 
 );

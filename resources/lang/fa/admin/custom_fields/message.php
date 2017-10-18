@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Fieldset وجود ندارد',
 
         'create' => array(
             'error'   => 'تنظیمات فیلد ایجاد نشده است، لطفا دوباره تلاش کنید.',

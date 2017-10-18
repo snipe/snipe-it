@@ -2,7 +2,7 @@
 
 return array(
     'about_licenses_title'            => 'Tentang Lisensi',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses'                  => 'Lisensi digunakan untuk melacak perangkat lunak. Mereka memiliki sejumlah kursi yang bisa diperiksa ke individu',
     'checkin'  					=> 'Pemberian kapasitas lisensi',
     'checkout_history'  		=> 'Riwayat Pemberian',
     'checkout'  				=> 'Pemberian kapasitas lisensi',

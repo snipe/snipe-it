@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Modelis nepastāv.',
+    'assoc_users'	 => 'Šobrīd šis modelis ir saistīts ar vienu vai vairākiem aktīviem, un tos nevar izdzēst. Lūdzu, izdzēsiet aktīvus un pēc tam mēģiniet vēlreiz dzēst.',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Modelis netika izveidots, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Modelis veiksmīgi izveidots.',
+        'duplicate_set' => 'Aktīvu modelis ar šo nosaukumu, ražotāju un modeļa numuru jau pastāv.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Modelis nav atjaunināts, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Modelis tika veiksmīgi atjaunināts.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Vai tiešām vēlaties dzēst šo aktīvu modeli?',
+        'error'   => 'Radās problēma, izdzēšot modeli. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Modelis tika veiksmīgi dzēsts.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Modelis netika atjaunots, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Veiksmīgi atjaunots modelis.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Neviens laukums netika mainīts, tāpēc nekas netika atjaunināts.',
+        'success' 		=> 'Modeļi ir atjaunināti.'
     ),
 
 );

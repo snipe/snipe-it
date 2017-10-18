@@ -2,7 +2,7 @@
 
 return array(
     'about_groups_title'            => 'Om grupper',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups'                  => 'Grupper brukes til å generalisere brukertillatelser.',
     'group_management' 	 	=> 'Gruppeadministrasjon',
     'create' 	 	 	    => 'Opprett ny gruppe',
     'update' 	 		        => 'Rediger gruppe',

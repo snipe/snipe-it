@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'color'      	=> 'Chart Color',
+    'about'      	=> 'Om statusetiketter',
+    'archived'      	=> 'arkiveras',
+    'create'      	=> 'Skapa statusetikett',
+    'color'      	=> 'Diagramfärg',
     'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'show_in_nav'   => 'Show in side nav',
-    'title'      	=> 'Status Labels',
+    'info'      	=> 'Statusetiketter används för att beskriva de olika tillstånd som dina tillgångar kan vara i. De kan vara ute för reparation, förlorade / stulna etc. Du kan skapa nya statusetiketter för deployerbara, pågående och arkiverade tillgångar.',
+    'name'      	=> 'Statusnamn',
+    'pending'      	=> 'Avvaktan',
+    'status_type'   => 'Statustyp',
+    'show_in_nav'   => 'Visa i sidnav',
+    'title'      	=> 'Statusetiketter',
     'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'update'      	=> 'Uppdatera statusetikett',
 );

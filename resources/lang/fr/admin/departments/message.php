@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Le département n\'existe pas.',
+    'assoc_users'	 => 'Ce service est actuellement associé à au moins un utilisateur et ne peut pas être supprimé. Veuillez mettre à jour vos utilisateurs pour ne plus référencer ce service et réessayer.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Le département n\'a pas été créé. Veuillez réessayer.',
+        'success' => 'Département créé avec succès.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Le département n\'a pas été mis à jour. Veuillez réessayer.',
+        'success' => 'Département mis à jour avec succès.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Êtes-vous sûr de vouloir supprimer ce département?',
+        'error'   => 'Il y avait un problème de suppression du département. Veuillez réessayer.',
+        'success' => 'Le département a été supprimé avec succès.'
     )
 
 );

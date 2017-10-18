@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Precio Compra',
     'create'			=> 'Crear Equipo',
     'date'				=> 'Fecha Compra',
+    'depreciation'	    => 'Depreciación',
     'depreciates_on'	=> 'Se deprecia en',
     'default_location'	=> 'Ubicación Predeterminada',
     'eol_date'			=> 'Fecha EOL',

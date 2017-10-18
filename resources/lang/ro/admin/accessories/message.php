@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Accesoriul nu exista.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'assoc_users'	 => 'Acest accesoriu are în prezent : count elemente predate la utilizatori. Vă rugăm să verificaţi accesoriile și încercați din nou. ',
 
     'create' => array(
         'error'   => 'Accesoriul nu a fost adaugat, va rugam incercati din nou.',
@@ -16,21 +16,21 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Sigur doriți să ștergeți acest accesoriu?',
+        'error'   => 'A apărut o problemă la ştergerea accesoriului. Vă rugăm să încercaţi din nou.',
+        'success' => 'Accesoriul a fost şters cu succes.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Accesoriu nu a fost predat, vă rugăm să încercaţi din nou',
+        'success' 		=> 'Accesoriu a fost predat.',
+        'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Accesoriul nu a fost primit, vă rugăm să încercaţi din nou',
+        'success' 		=> 'Accesoriu primit cu succes.',
+        'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.'
     )
 
 

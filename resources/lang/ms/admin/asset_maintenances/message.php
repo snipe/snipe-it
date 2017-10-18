@@ -12,8 +12,8 @@
             'success' => 'Penyelenggaraan aset berjaya dicipta.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Penyelenggaraan Aset tidak diedit, sila cuba lagi.',
+            'success' => 'Penyenggaraan Aset berjaya disunting.'
         ],
         'asset_maintenance_incomplete' => 'Tidak dilengkapkan lagi',
         'warranty'                     => 'Waranti',

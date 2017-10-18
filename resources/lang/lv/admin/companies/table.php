@@ -1,9 +1,9 @@
 <?php
 return array(
-    'companies' => 'Companies',
-    'create'    => 'Create Company',
-    'title'     => 'Company',
-    'update'    => 'Update Company',
-    'name'      => 'Company Name',
+    'companies' => 'Kompānijas',
+    'create'    => 'Izveidojiet uzņēmumu',
+    'title'     => 'Uzņēmums',
+    'update'    => 'Atjaunināt uzņēmumu',
+    'name'      => 'Kompānijas nosaukums',
     'id'        => 'ID',
 );

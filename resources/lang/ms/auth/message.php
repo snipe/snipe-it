@@ -3,11 +3,11 @@
 return array(
 
     'account_already_exists' => 'Akaun menggunakan e-mel ini telah wujud.',
-    'account_not_found'      => 'The username or password is incorrect.',
+    'account_not_found'      => 'Nama pengguna atau kata laluan tidak betul.',
     'account_not_activated'  => 'Akaun pengguna ini tidak aktif. ',
     'account_suspended'      => 'Akaun pengguna ini digantung.',
     'account_banned'         => 'Akaun pengguna ini di sekat.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'throttle'               => 'Terlalu banyak cubaan log masuk gagal. Sila cuba lagi di sekitar: minit minit.',
 
     'signin' => array(
         'error'   => 'Ada masalah semasa log masuk, sila cuba lagi.',

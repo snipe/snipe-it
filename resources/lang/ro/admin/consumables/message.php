@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Consumul nu există.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Consumul nu a fost creat, încercați din nou.',
+        'success' => 'Consumul a fost creat cu succes.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Consumul nu a fost actualizat, încercați din nou',
+        'success' => 'Consumul a fost actualizat cu succes.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Sigur doriți să ștergeți acest consumabil?',
+        'error'   => 'A apărut o problemă cu ștergerea consumabilelor. Vă rugăm să încercați din nou.',
+        'success' => 'Consumul a fost șters cu succes.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumul nu a fost verificat, încercați din nou',
+        'success' 		=> 'Consumul a fost verificat cu succes.',
+        'user_does_not_exist' => 'Acest utilizator este nevalid. Vă rugăm să încercați din nou.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumul nu a fost verificat, încercați din nou',
+        'success' 		=> 'Consumul a fost verificat cu succes.',
+        'user_does_not_exist' => 'Acest utilizator este nevalid. Vă rugăm să încercați din nou.'
     )
 
 

@@ -19,7 +19,7 @@ return array(
     'location'  			=> 'Konum',
     'lock_passwords'		=> 'Bu kurulumda giriş bilgileri değiştirilemez.',
     'manager' 				=> 'Yönetici',
-    'managed_locations'     => 'Managed Locations',
+    'managed_locations'     => 'Yönetilen Mekanlar',
     'name' 					=> 'Adı',
     'notes'                 => 'Notlar',
     'password_confirm' 		=> 'Şifreyi Doğrula',

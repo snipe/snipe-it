@@ -2,36 +2,36 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'account_already_exists' => 'இந்த மின்னஞ்சலுடன் ஒரு கணக்கு ஏற்கனவே உள்ளது.',
+    'account_not_found'      => 'பயனர் பெயர் அல்லது கடவுச்சொல் தவறானது.',
+    'account_not_activated'  => 'இந்த பயனர் கணக்கு செயல்படுத்தப்படவில்லை.',
+    'account_suspended'      => 'இந்த பயனர் கணக்கு இடைநீக்கம் செய்யப்பட்டுள்ளது.',
+    'account_banned'         => 'இந்த பயனர் கணக்கு தடைசெய்யப்பட்டுள்ளது.',
+    'throttle'               => 'பல உள்நுழைவு முயற்சிகள் தோல்வியடைந்தது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்: நிமிடங்கள் நிமிடங்கள் (நிமிடங்கள்).',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'உங்களை உள்நுழைய முயற்சிக்கும்போது சிக்கல் ஏற்பட்டது, தயவுசெய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'வெற்றிகரமாக உள்நுழைந்துள்ளீர்கள்.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'உங்கள் கணக்கை உருவாக்க முயற்சிக்கும்போது ஒரு சிக்கல் ஏற்பட்டது, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'கணக்கு வெற்றிகரமாக உருவாக்கப்பட்டது.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'மீட்டமை கடவுச்சொல் குறியீட்டை பெற முயற்சிக்கும் போது சிக்கல் ஏற்பட்டது, மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'கடவுச்சொல் மீட்பு மின்னஞ்சல் வெற்றிகரமாக அனுப்பப்பட்டது.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'உங்கள் கடவுச்சொல்லை மீட்டமைக்க முயற்சிக்கும் போது ஒரு சிக்கல் ஏற்பட்டது, மீண்டும் முயற்சிக்கவும்.',
+            'success' => 'உங்கள் கடவுச்சொல் வெற்றிகரமாக மீட்டமைக்கப்பட்டது.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'உங்கள் கணக்கை செயலாக்க முயற்சிக்கும்போது சிக்கல் ஏற்பட்டது, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'உங்கள் கணக்கு வெற்றிகரமாக செயல்படுத்தப்பட்டது.',
     ),
 
 );

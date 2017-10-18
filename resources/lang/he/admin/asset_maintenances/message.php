@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'תחזוקת הנכסים שחיפשת לא נמצאה!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'האם אתה בטוח שברצונך למחוק את תחזוקת הנכס?',
+            'error'   => 'היתה בעיה במחיקת הנכס. בבקשה נסה שוב.',
+            'success' => 'תחזוקת הנכס נמחקה בהצלחה.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'תחזוקת הנכסים לא נוצרה, נסה שוב.',
+            'success' => 'תחזוקת הנכסים נוצרה בהצלחה.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'תחזוקת הנכסים לא נערכה, נסה שוב.',
+            'success' => 'תחזוקת הנכסים נערכה בהצלחה.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
+        'asset_maintenance_incomplete' => 'לא הושלם עדיין',
         'warranty'                     => 'אחריות',
         'not_warranty'                 => 'ללא אחריות',
     ];

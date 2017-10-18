@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Apie turtą',
+    'about_assets_text'            => 'Turtas - tai daiktai, kurie stebimi serijos numeriu arba turinio žyma. Jie dažniausiai būna vertingesni dalykai, kai svarbu nustatyti konkretų elementą.',
 	'archived'  				=> 'Archyvuota',
     'asset'  					=> 'Įranga',
     'bulk_checkout'             => 'Išduoti įrangą naudotojui',
     'checkin'  					=> 'Išduota įranga',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Patikros turtas',
     'clone'  					=> 'Kopijuoti įrangą',
     'deployable'  				=> 'Naudojamas',
     'deleted'  					=> 'Ši įranga buvo ištrinta. <a href="/hardware/:asset_id/restore">Paspauskit čia ją atkurti</a>.',

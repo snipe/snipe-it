@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Mengenai Lesen',
+    'about_licenses'                  => 'Lesen digunakan untuk mengesan perisian. Mereka mempunyai bilangan tempat duduk tertentu yang boleh diperiksa kepada individu',
     'checkin'  					=> 'Terima Kekosongan Lesen',
     'checkout_history'  		=> 'Sejarah Agihan',
     'checkout'  				=> 'Agihkan Kekosongan Lesen',
     'edit'  					=> 'Kemaskini Lesen',
-    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'				=> 'Filetype yang dibenarkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, dan rar.',
     'clone'  					=> 'Pendua Lesen',
     'history_for'  				=> 'Sejarah untuk ',
     'in_out'  					=> 'Masuk/Keluar',

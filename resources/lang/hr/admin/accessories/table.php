@@ -1,11 +1,11 @@
 <?php
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
+	'dl_csv'      				=> 'Preuzmite CSV',
 	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'id'      					=> 'iskaznica',
+    'require_acceptance'      	=> 'Prihvaćanje',
+    'title'      				=> 'Naziv dodatne opreme',
 
 
 );

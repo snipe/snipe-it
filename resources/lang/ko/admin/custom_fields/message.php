@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => '항목세트가 존재하지 않습니다',
 
         'create' => array(
             'error'   => '항목세트를 만들지 못했습니다. 재시도해 주십시오.',

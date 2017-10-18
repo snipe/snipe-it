@@ -2,11 +2,11 @@
 
 return array(
     'about_accessories_title' 			=> 'Σχετικά με τα αξεσουάρ',
-    'about_accessories_text'  			=> 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'about_accessories_text'  			=> 'Τα αξεσουάρ είναι οτιδήποτε εκδίδετε στους χρήστες αλλά δεν έχουν αύξοντα αριθμό (ή δεν σας ενδιαφέρει να τα εντοπίζετε μοναδικά). Για παράδειγμα, ποντίκια υπολογιστή ή πληκτρολόγια.',
     'accessory_category' 				=> 'Κατηγορία αξεσουάρ',
     'accessory_name'  					=> 'Όνομα ανταλλακτικού',
     'checkout'  							=> 'Checkout αξεσουάρ',
-    'checkin'  							=> 'Checkin Accessory',
+    'checkin'  							=> 'Checkin Αξεσουάρ',
     'create'  							=> 'Το πεδίο ενημερώθηκε επιτυχώς',
     'edit'  							=> 'Επεξεργασία αξεσουάρ',
     'eula_text'							=> 'Κατηγορία EULA',

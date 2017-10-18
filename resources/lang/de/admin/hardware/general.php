@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Assets an Benutzer herausgeben',
     'checkin'  					=> 'Asset zurücknehmen',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Kasse Asset',
     'clone'  					=> 'Asset duplizieren',
     'deployable'  				=> 'Einsetzbar',
     'deleted'  					=> 'Dieses Asset wurde gelöscht. <a href="/hardware/:asset_id/restore">Zur Wiederherstellung hier klicken</a>.',

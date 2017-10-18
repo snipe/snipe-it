@@ -12,8 +12,8 @@
             'success' => 'Įrangos priežiūra sukurta sėkmingai.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Turto priežiūra nebuvo redaguota, bandykite dar kartą.',
+            'success' => 'Turto priežiūra sėkmingai redaguojama.'
         ],
         'asset_maintenance_incomplete' => 'Nebaigta',
         'warranty'                     => 'Garantija',

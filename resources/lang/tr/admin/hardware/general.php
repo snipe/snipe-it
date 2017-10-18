@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Demirbaş',
     'bulk_checkout'             => 'Varlıkları kullanıcıya ata',
     'checkin'  					=> 'Demirbaş Girişi Yap',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Ödenme Öğe',
     'clone'  					=> 'Demirbaşı Kopyala',
     'deployable'  				=> 'Dağıtılabilir',
     'deleted'  					=> 'Bu demirbaş silindi. <a href="/hardware/:asset_id/restore">Geri getirmek için tıklayınız</a>.',

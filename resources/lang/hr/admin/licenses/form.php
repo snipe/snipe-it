@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Asset',
+    'asset'             => 'Imovina',
     'checkin'           => 'Checkin',
-    'create'            => 'Create License',
-    'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'create'            => 'Stvorite licencu',
+    'expiration'        => 'Datum isteka roka trajanja',
+    'license_key'       => 'Šifra proizvoda',
+    'maintained'        => 'Održavati',
+    'name'              => 'Naziv softvera',
+    'no_depreciation'   => 'Nemojte se smiriti',
+    'purchase_order'    => 'Broj kupovne narudžbe',
+    'reassignable'      => 'dodijeliti drugima',
+    'remaining_seats'   => 'Preostala mjesta',
+    'seats'             => 'sjedala',
+    'termination_date'  => 'Datum završetka',
+    'to_email'          => 'Licencirano na e-poštu',
+    'to_name'           => 'Licencirano za ime',
+    'update'            => 'Ažuriraj licencu',
+    'checkout_help'     => 'Morate provjeriti licencu na hardversku imovinu ili osobu. Možete odabrati oboje, ali vlasnik imovine mora odgovarati osobi kojoj provjeravate imovinu.'
 );

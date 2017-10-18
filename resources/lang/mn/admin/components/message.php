@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Бүрэлдэхүүн хэсэг байхгүй байна.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Бүрэлдэхүүн бүтээсэнгүй, дахин оролдоно уу.',
+        'success' => 'Бүрэлдэхүүн хэсэг амжилттай бүтээгдсэн.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Бүрэлдэхүүн шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Бүрэлдэхүүн хэсэг амжилттай шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Та энэ бүрэлдэхүүн хэсгийг устгахдаа итгэлтэй байна уу?',
+        'error'   => 'Энэ бүрэлдэхүүнийг устгах асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Бүрэлдэхүүн хэсэг амжилттай устгагдсан.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Бүрэлдэхүүнийг шалгаагүй байна, дахин оролдоно уу',
+        'success' 		=> 'Бүрэлдэхүүн хэсэг амжилттай шалгагдсан.',
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Бүрэлдэхүүнийг шалгаагүй байна, дахин оролдоно уу',
+        'success' 		=> 'Бүрэлдэхүүн хэсэг амжилттай шалгагдсан.',
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.'
     )
 
 

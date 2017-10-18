@@ -14,6 +14,7 @@
     'all'       			=> 'All',
     'archived'              => 'Archived',
     'asset_models'			=> 'Asset Models',
+    'asset_model'			=> 'Model',
     'asset'					=> 'Asset',
     'asset_report'          => 'Asset Report',
     'asset_tag'				=> 'Asset Tag',

@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'A státusz-címke nem létezik.',
+    'assoc_assets'	 => 'Ez az Állapotjelző jelenleg legalább egy Assethez társítva, és nem törölhető. Kérjük, frissítse eszközeit, hogy ne hivatkozzon erre az állapotra, és próbálja újra.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'A státusz-címke nem jött létre, próbálkozzon újra.',
+        'success' => 'A státusz címke sikeresen létrehozva.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'A státusz-címke nem frissült, próbálkozzon újra',
+        'success' => 'Az állapotjelző sikeresen frissült.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'Biztos benne, hogy törölni szeretné ezt az állapotjelzőt?',
+        'error'   => 'Hiba történt az Állapotjelző törlésével. Kérlek próbáld újra.',
+        'success' => 'Az Állapotjelző sikeresen törölve lett.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'Ezeket az eszközöket senkihez nem lehet hozzárendelni.',
+        'deployable'   => 'Ezek az eszközök kiválaszthatók. Ha kijelölésre került, akkor a <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong> meta állapotát veszi fel.',
+        'archived'   => 'Ezeket az eszközöket nem lehet kijelölni, és csak az Archivált nézetben jelenhetnek meg. Ez hasznos lehet az eszközökkel kapcsolatos információk megőrzésére költségvetés / történelmi célokra, de a napi eszközlista megtartásával.',
+        'pending'   => 'Ezeket az eszközöket még nem lehet bárkihez hozzárendelni, gyakran azokat a tételeket használják, amelyek ki vannak javítva, de várhatóan visszatérnek a forgalomba.',
+    ),
 
 );

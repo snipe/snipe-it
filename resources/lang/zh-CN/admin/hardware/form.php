@@ -14,6 +14,7 @@ return array(
     'cost'				=> '采购价格',
     'create'			=> '创建资产',
     'date'				=> '购买时间',
+    'depreciation'	    => '折旧',
     'depreciates_on'	=> '折旧于',
     'default_location'	=> '默认位置',
     'eol_date'			=> '产品寿命日期',

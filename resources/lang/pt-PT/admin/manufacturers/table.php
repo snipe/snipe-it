@@ -2,14 +2,14 @@
 
 return array(
     'about_manufacturers_title'    => 'Sobre os fabricantes',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_text'  => 'Os fabricantes são as empresas que criam seus ativos. Você pode armazenar informações de contato de suporte importantes sobre eles aqui, que serão exibidas nas páginas de detalhes do recurso.',
     'asset_manufacturers'	=> 'Fabricantes de Artigos',
     'create'				=> 'Criar Fabricante',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'Nome',
+    'support_email'   		=> 'Email de suporte',
+    'support_phone'   		=> 'Telefone de suporte',
+    'support_url'   		=> 'URL de suporte',
     'update'				=> 'Atualizar Fabricante',
     'url'   				=> 'URL',
 

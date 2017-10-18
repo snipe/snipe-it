@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Osastoa ei ole olemassa.',
+    'assoc_users'	 => 'Tällä osastolla on tällä hetkellä vähintään yksi käyttäjä, eikä sitä voi poistaa. Päivitä käyttäjät, jotta he eivät enää viitata tähän osastoon ja yritä uudelleen.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Osastoa ei luotu, yritä uudelleen.',
+        'success' => 'Laitos perustettiin onnistuneesti.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Laitetta ei ole päivitetty, yritä uudelleen',
+        'success' => 'Osasto päivitettiin onnistuneesti.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Haluatko varmasti poistaa tämän osaston?',
+        'error'   => 'Oleskelun poistaminen tapahtui. Yritä uudelleen.',
+        'success' => 'Osasto poistettiin onnistuneesti.'
     )
 
 );

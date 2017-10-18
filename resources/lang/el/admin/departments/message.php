@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Τμήμα δεν υπάρχει.',
+    'assoc_users'	 => 'Αυτό το τμήμα σχετίζεται προς το παρόν με τουλάχιστον έναν χρήστη και δεν μπορεί να διαγραφεί. Ενημερώστε τους χρήστες σας ώστε να μην αναφέρονται πλέον στο τμήμα αυτό και προσπαθήστε ξανά.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Τμήμα δεν δημιουργήθηκε, δοκιμάστε ξανά.',
+        'success' => 'Τμήμα δημιουργήθηκε με επιτυχία.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Τμήμα δεν ενημερώθηκε, δοκιμάστε ξανά',
+        'success' => 'Τμήμα ενημερώθηκε με επιτυχία.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το τμήμα;',
+        'error'   => 'Παρουσιάστηκε πρόβλημα κατά τη διαγραφή του τμήματος. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+        'success' => 'Το τμήμα διαγράφηκε με επιτυχία.'
     )
 
 );

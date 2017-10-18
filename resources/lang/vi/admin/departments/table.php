@@ -3,9 +3,9 @@
 return array(
 
     'id'                        => 'ID',
-    'name'                      => 'Department Name',
-    'manager'                   => 'Manager',
-    'location'                  => 'Location',
-    'create'                    => 'Create Department',
-    'update'                    => 'Update Department',
+    'name'                      => 'Tên bộ phận',
+    'manager'                   => 'Giám đốc',
+    'location'                  => 'Vị trí',
+    'create'                    => 'Tạo bộ phận',
+    'update'                    => 'Bộ phận cập nhật',
     );

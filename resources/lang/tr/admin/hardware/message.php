@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Varlık denetimi başarısız oldu. Lütfen tekrar deneyin.',
+        'success' 		=> 'Varlık denetimi başarıyla günlüğe kaydedildi.'
     ),
 
 

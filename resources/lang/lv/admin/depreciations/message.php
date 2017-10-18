@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Nolietojuma kategorija nepastāv.',
+    'assoc_users'	 => 'Šis nolietojums pašlaik ir saistīts ar vienu vai vairākiem modeļiem, un tos nevar izdzēst. Lūdzu, izdzēsiet modeļus un pēc tam mēģiniet dzēst vēlreiz.',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Nolietojuma kategorija netika izveidota, lūdzu, mēģiniet vēlreiz. :(',
+        'success' => 'Nolietojuma pakāpe ir veiksmīgi izveidota. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Nolietojuma kategorija netika atjaunināta, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Amortizācijas klase ir veiksmīgi atjaunināta.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Vai tiešām vēlaties dzēst šo nolietojuma klasi?',
+        'error'   => 'Izdevuma nolietojuma klases dzēšana. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Amortizācijas klase tika veiksmīgi dzēsta.'
     )
 
 );

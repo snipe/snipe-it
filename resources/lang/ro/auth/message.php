@@ -3,11 +3,11 @@
 return array(
 
     'account_already_exists' => 'Exista deja un cont cu aceasta adresa de e-mail.',
-    'account_not_found'      => 'The username or password is incorrect.',
+    'account_not_found'      => 'Numele de utilizator sau parola este incorecta.',
     'account_not_activated'  => 'Acest utilizator nu a fost activat.',
     'account_suspended'      => 'Acest utilizator este suspendat.',
     'account_banned'         => 'Acest utilizator este banat.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'throttle'               => 'Prea multe încercări de conectare nereușite. Încercați din nou în jur de: minute (minute).',
 
     'signin' => array(
         'error'   => 'A aparut o problema la logare, va rugam incercati iar.',

@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Innkjøpskostnad',
     'create'			=> 'Opprett eiendel',
     'date'				=> 'Innkjøpsdato',
+    'depreciation'	    => 'avskrivninger',
     'depreciates_on'	=> 'Avskrivningstype',
     'default_location'	=> 'Standard plassering',
     'eol_date'			=> 'EOL dato',

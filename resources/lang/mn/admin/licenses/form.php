@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'create'            => 'Create License',
-    'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'asset'             => 'Актив',
+    'checkin'           => 'Шалгах',
+    'create'            => 'Лиценз үүсгэх',
+    'expiration'        => 'Хугацаа дуусах хугацаа',
+    'license_key'       => 'Бүтээгдэхүүний түлхүүр',
+    'maintained'        => 'Тогтсон',
+    'name'              => 'Програмын нэр',
+    'no_depreciation'   => 'Үгүй',
+    'purchase_order'    => 'Худалдан авалтын захиалгын дугаар',
+    'reassignable'      => 'Дахин сонгогдох боломжтой',
+    'remaining_seats'   => 'Үлдсэн суудал',
+    'seats'             => 'Суудал',
+    'termination_date'  => 'Төгсгөлийн өдөр',
+    'to_email'          => 'Имэйлд тусгайлсан',
+    'to_name'           => 'Нэрээр нь тусгайлсан',
+    'update'            => 'Лицензийг шинэчлэх',
+    'checkout_help'     => 'Та лицензийг тоног төхөөрөмжийн хөрөнгө эсвэл хүн болгонд шалгаж үзэх ёстой. Та хоёуланг нь сонгож болно, гэхдээ хөрөнгийн эзэмшигч нь уг хөрөнгөө шалгаж байгаа хүнтэй таарах ёстой.'
 );

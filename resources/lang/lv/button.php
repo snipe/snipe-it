@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Request',
-    'submit'  	                => 'Submit',
-    'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
+    'actions' 	                => 'Darbības',
+    'add'    	                => 'Pievieno jaunu',
+    'cancel'                    => 'Atcelt',
+    'checkin_and_delete'  	    => 'Reģistrēties un dzēst lietotāju',
+    'delete'  	                => 'Dzēst',
+    'edit'    	                => 'Rediģēt',
+    'restore' 	                => 'Atjaunot',
+    'request'                   => 'Pieprasījums',
+    'submit'  	                => 'Iesniegt',
+    'upload'                    => 'Augšupielādēt',
+	'select_file'				=> 'Atlasiet failu ...',
 );

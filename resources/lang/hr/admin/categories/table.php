@@ -2,9 +2,9 @@
 
 return array(
 	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'id'      					=> 'iskaznica',
+    'parent'   					=> 'Roditelj',
+    'require_acceptance'      	=> 'Prihvaćanje',
+    'title'      				=> 'Naziv kategorije imovine',
 
 );

@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'checkout'                          => 'Checkout Consumable to User',
-    'consumable_name'                   => 'Consumable Name',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
-    'total' 			                => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'Хэрэглээний талаар',
+    'about_consumables_text'  			=> 'Хэрэглээний бараа бүтээгдэхүүн нь цаг хугацааны турш хэрэглэгдэх зүйл юм. Жишээ нь, хэвлэгч бэх эсвэл хувилах цаас.',
+    'checkout'                          => 'Хэрэглэгчдэд хэрэглэх боломжтой',
+    'consumable_name'                   => 'Боломжийн нэр',
+    'create'                            => 'Болгоомжтой болгох',
+    'item_no'                           => 'Барааны дугаар.',
+    'remaining' 			            => 'Үлдсэн',
+    'total' 			                => 'Нийт',
+    'update'                            => 'Боломжийн талаар шинэчиллээ',
 );

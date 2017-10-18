@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Seda välja ei eksisteeri.',
+        'already_added'   => 'Väli on juba lisatud',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Väli ei loodud, proovige uuesti.',
+            'success' => 'Väli loodi edukalt.',
+            'assoc_success' => 'Väli edukalt lisatud fieldset\'i.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Väli ei värskendatud, proovige uuesti',
+            'success' => 'Väli värskendati edukalt.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Kas olete kindel, et soovite kustutada selle välja?',
+            'error'   => 'Välja jäeti välja küsimus. Palun proovi uuesti.',
+            'success' => 'Väli kustutati edukalt.',
+            'in_use'   => 'Väli on endiselt kasutusel.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Fieldset ei ole olemas',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Fieldset ei loodud, proovige uuesti.',
+            'success' => 'Fieldset loodud edukalt.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Fieldset ei värskendatud, proovige uuesti',
+            'success' => 'Fieldset uuendati edukalt.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Kas olete kindel, et soovite kustutada selle väljadestiivi?',
+            'error'   => 'Väljaku seade kustutati. Palun proovi uuesti.',
+            'success' => 'Väljatrükk on edukalt kustutatud.',
+            'in_use'   => 'Fieldset on endiselt kasutusel.',
         )
 
     ),

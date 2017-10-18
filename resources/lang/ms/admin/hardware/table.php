@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Siri',
     'status'   		=> 'Status',
     'title'      	=> 'Harta ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'image'		=> 'Imej Peranti',
+    'days_without_acceptance' => 'Hari Tanpa Penerimaan'
 
 );

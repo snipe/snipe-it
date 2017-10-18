@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'Apie kategorijas',
+    'about_categories'  				=> 'Kategorijos padeda jums tvarkyti savo daiktus. Kai kurių pavyzdžių kategorijos gali būti &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobilieji telefonai&quot;, &quot;Tablets&quot; ir tt, bet jūs galite naudoti kategorijas bet kokiu būdu, kuris jums yra naudingas.',
     'asset_categories' 					=> 'Įrangos kategorijos',
     'category_name'  					=> 'Kategorijos pavadinimas',
     'checkin_email'                     => 'Išsiųsti el. paštą naudotojui pridėti įragą.',
@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Keisti kategoriją',
     'eula_text'							=> 'Kategorijos EULA',
     'eula_text_help'					=> 'Šis laukelis leidžia jums keisti EULA atskiroms įrangos grupėms. Jei jūs naudotjate vieną EULA visoms įrangų grupėms, tuomet pažymėkite žemiau esantį laukelį, kad būtų naudojama pirminė numatytoji EULA.',
-    'name'                              => 'Category Name',
+    'name'                              => 'Kategorijos pavadinimas',
     'require_acceptance'				=> 'Reikalauja naudotojus patvirtinti šios kategorijos įrangos priėmimą.',
     'required_acceptance'				=> 'Šiam naudotojui bus išsiųstas el. laiškas su nuoroda patvritinanti šios įrangos priėmimą.',
     'required_eula'						=> 'Šiam naudotojui bus išsiųsta EULA kopija',

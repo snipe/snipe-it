@@ -3,34 +3,34 @@
 return array(
 
     'does_not_exist' => 'الموديل غير موجود.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'assoc_users'	 => 'هذا النموذج مقترن حاليا بواحد أو أكثر من الأصول ولا يمكن حذفه. يرجى حذف الأصول، ثم محاولة الحذف مرة أخرى.',
 
 
     'create' => array(
         'error'   => 'لم يتم إنشاء الموديل، حاول مجددا.',
         'success' => 'تم إنشاء الموديل بنجاح.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'يوجد بالفعل نموذج أصول بهذا الاسم، الشركة المصنعة ورقم الطراز.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'لم يتم تحديث النموذج، يرجى إعادة المحاولة',
+        'success' => 'تم تحديث النموذج بنجاح.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'هل تريد بالتأكيد حذف نموذج مادة العرض هذا؟',
+        'error'   => 'حدثت مشكلة أثناء حذف النموذج. حاول مرة اخرى.',
+        'success' => 'تم حذف النموذج بنجاح.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
+        'error'   		=> 'لم تتم استعادة النموذج، يرجى إعادة المحاولة',
         'success' 		=> 'تم إستعادة المودير بنجاح.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'لم يتم تغيير أي حقول، لذلك لم يتم تحديث أي شيء.',
+        'success' 		=> 'تم تحديث النماذج.'
     ),
 
 );

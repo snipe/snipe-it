@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'checkout'                          => 'Checkout Consumable to User',
-    'consumable_name'                   => 'Consumable Name',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
+    'about_consumables_title' 			=> 'Om forbrugsvarer',
+    'about_consumables_text'  			=> 'Forbrugsvarer købes noget, der bliver brugt op over tid. For eksempel printer blæk eller kopimaskine papir.',
+    'checkout'                          => 'Checkout forbrugsvarer til bruger',
+    'consumable_name'                   => 'Forbrugelighedsnavn',
+    'create'                            => 'Opret forbrugsstoffer',
+    'item_no'                           => 'Varenummer',
+    'remaining' 			            => 'Resterende',
     'total' 			                => 'Total',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Opdater forbrugsstoffer',
 );

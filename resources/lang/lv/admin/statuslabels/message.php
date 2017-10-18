@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Statusa marķējums nepastāv.',
+    'assoc_assets'	 => 'Šī statusa marķējums pašlaik ir saistīts ar vismaz vienu īpašumu un to nevar izdzēst. Lūdzu, atjauniniet savus aktīvus, lai vairs nenozīmē šo statusu, un mēģiniet vēlreiz.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Statusa marķējums netika izveidots, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Statusa marķējums tika veiksmīgi izveidots.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Statusa marķējums nav atjaunināts, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Statusa marķējums ir veiksmīgi atjaunināts.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'Vai tiešām vēlaties dzēst šo statusa etiķeti?',
+        'error'   => 'Dzēšot statusa marķējumu, radās problēma. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Statusa marķējums tika veiksmīgi dzēsts.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'Šos līdzekļus nevar nodot nevienam.',
+        'deployable'   => 'Šos aktīvus var pārbaudīt. Kad tie ir piešķirti, viņi uzņemsies meta statusu <i class="fa fa-circle text-blue"></i> <strong>detalizēti</strong>.',
+        'archived'   => 'Šos līdzekļus nevar pārbaudīt, un tie tiks parādīti tikai arhivētajā skatā. Tas ir noderīgi, lai saglabātu informāciju par aktīviem budžetam / vēsturiskiem mērķiem, bet tos saglabātu ikdienas aktīvu sarakstā.',
+        'pending'   => 'Šos aktīvus vēl nevar piešķirt ikvienam, bieži tos izmanto priekšmetos, kas paredzēti remontam, bet tiek sagaidīts, ka tie atgriezīsies apgrozībā.',
+    ),
 
 );

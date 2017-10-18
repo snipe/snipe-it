@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'இருப்பிடம் இல்லை.',
+    'assoc_users'	 => 'தற்போது இந்த இடம் குறைந்தபட்சம் ஒரு பயனருடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. தயவுசெய்து இந்த இடத்தை இனி குறிப்பிடாமல் உங்கள் பயனர்களை புதுப்பித்து மீண்டும் முயற்சிக்கவும்.',
+    'assoc_assets'	 => 'இந்த இடம் தற்போது குறைந்தது ஒரு சொத்துடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. இந்த இருப்பிடத்தை இனி குறிப்பிடாமல் உங்கள் சொத்துக்களை புதுப்பித்து மீண்டும் முயற்சிக்கவும்.',
+    'assoc_child_loc'	 => 'இந்த இடம் தற்போது குறைந்தது ஒரு குழந்தையின் இருப்பிடத்தின் பெற்றோர் மற்றும் அதை நீக்க முடியாது. இந்த இருப்பிடத்தை இனி குறிப்பிடாமல் இருக்க உங்கள் இருப்பிடங்களை புதுப்பித்து மீண்டும் முயற்சிக்கவும்.',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'இருப்பிடம் உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'இடம் வெற்றிகரமாக உருவாக்கப்பட்டது.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'இருப்பிடம் புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' => 'இருப்பிடம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'இந்த இருப்பிடத்தை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
+        'error'   => 'இருப்பிடத்தை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'இடம் வெற்றிகரமாக நீக்கப்பட்டது.'
     )
 
 );

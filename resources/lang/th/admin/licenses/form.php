@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'create'            => 'Create License',
-    'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'asset'             => 'สินทรัพย์',
+    'checkin'           => 'เช็คอิน',
+    'create'            => 'สร้างใบอนุญาต',
+    'expiration'        => 'วันหมดอายุ',
+    'license_key'       => 'รหัสผลิตภัณฑ์',
+    'maintained'        => 'การบำรุงรักษา',
+    'name'              => 'ชื่อซอฟต์แวร์',
+    'no_depreciation'   => 'ไม่ลดราคา',
+    'purchase_order'    => 'เลขที่ใบสั่งซื้อ',
+    'reassignable'      => 'มอบหมายได้',
+    'remaining_seats'   => 'ที่นั่งที่เหลือ',
+    'seats'             => 'ที่นั่ง',
+    'termination_date'  => 'วันสิ้นสุด',
+    'to_email'          => 'ได้รับอนุญาตให้ใช้อีเมล',
+    'to_name'           => 'ได้รับอนุญาตให้ตั้งชื่อ',
+    'update'            => 'อัปเดตสัญญาอนุญาต',
+    'checkout_help'     => 'คุณต้องตรวจสอบใบอนุญาตออกไปกับเนื้อหาฮาร์ดแวร์หรือบุคคล คุณสามารถเลือกทั้งคู่ แต่เจ้าของเนื้อหาต้องตรงกับบุคคลที่คุณกำลังตรวจสอบเนื้อหาออกไป'
 );

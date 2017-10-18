@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups_title'            => 'Giới Nhóm',
+    'about_groups'                  => 'Các nhóm được sử dụng để khái quát hóa quyền người dùng.',
     'group_management' 	 	=> 'Quản lý nhóm',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
+    'create' 	 	 	    => 'Tạo nhóm mới',
+    'update' 	 		        => 'Chỉnh sửa nhóm',
     'group_name' 	 		=> 'Tên nhóm',
     'group_admin' 	 		=> 'Quản lý nhóm',
     'allow' 	 			=> 'Cho phép',

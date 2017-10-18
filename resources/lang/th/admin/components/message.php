@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'คอมโพเนนต์ไม่มีอยู่',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'ไม่ได้สร้างคอมโพเนนต์โปรดลองอีกครั้ง',
+        'success' => 'สร้างคอมโพเนนต์เรียบร้อยแล้ว'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'คอมโพเนนต์ไม่ได้รับการอัปเดตโปรดลองอีกครั้ง',
+        'success' => 'คอมโพเนนต์สำเร็จแล้ว'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจหรือไม่ว่าต้องการลบคอมโพเนนต์นี้',
+        'error'   => 'เกิดปัญหาในการลบคอมโพเนนต์ กรุณาลองอีกครั้ง.',
+        'success' => 'คอมโพเนนต์ถูกลบเรียบร้อยแล้ว'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'ตรวจสอบคอมโพเนนต์แล้วโปรดลองอีกครั้ง',
+        'success' 		=> 'ตรวจสอบคอมโพเนนต์เรียบร้อยแล้ว',
+        'user_does_not_exist' => 'ผู้ใช้รายนั้นไม่ถูกต้อง กรุณาลองอีกครั้ง.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'คอมโพเนนต์ไม่ได้รับการตรวจสอบโปรดลองอีกครั้ง',
+        'success' 		=> 'ตรวจสอบคอมโพเนนต์เรียบร้อยแล้ว',
+        'user_does_not_exist' => 'ผู้ใช้รายนั้นไม่ถูกต้อง กรุณาลองอีกครั้ง.'
     )
 
 

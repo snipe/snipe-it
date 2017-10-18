@@ -4,19 +4,19 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'Došlo je do pogreške prilikom ažuriranja.',
+        'success'               => 'Postavke su uspješno ažurirane.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Jeste li sigurni da želite izbrisati tu sigurnosnu datoteku? Ta se radnja ne može poništiti.',
+        'file_deleted'          => 'Sigurnosna kopija datoteke je uspješno izbrisana.',
+        'generated'             => 'Nova sigurnosna kopija datoteke uspješno je stvorena.',
+        'file_not_found'        => 'Ta se sigurnosna kopija datoteke nije mogla pronaći na poslužitelju.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Došlo je do pogreške prilikom čišćenja.',
+        'validation_failed'     => 'Vaša potvrda o čišćenju nije točna. Upišite riječ "DELETE" u okvir potvrde.',
+        'success'               => 'Izbrisana su evidencija uspješno očišćena.'
     ),
 
 );

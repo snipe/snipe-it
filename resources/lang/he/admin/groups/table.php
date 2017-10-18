@@ -2,8 +2,8 @@
 
 return array(
 
-    'id'         => 'Id',
-    'name'       => 'Name',
-    'users'      => '# of Users',
+    'id'         => 'תְעוּדַת זֶהוּת',
+    'name'       => 'שֵׁם',
+    'users'      => '# משתמשים',
 
 );

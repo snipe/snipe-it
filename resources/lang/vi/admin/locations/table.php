@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'about_locations_title'     => 'Giới thiệu về Địa điểm',
+    'about_locations'           => 'Vị trí được sử dụng để theo dõi thông tin vị trí cho người dùng, nội dung và các mục khác',
+    'assets_rtd'                => 'Tài sản', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Assets Assigned',
     'id'                        => 'ID',
     'city'                      => 'Thành phố',
@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'Địa phương',
     'parent'                    => 'Parent',
     'currency'                  => 'Tiền tệ địa phương',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'Tìm kiếm LDAP của OU',
     );

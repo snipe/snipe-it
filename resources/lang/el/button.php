@@ -11,5 +11,5 @@ return array(
     'request'                   => 'Αίτημα',
     'submit'  	                => 'Υποβολή',
     'upload'                    => 'Μεταφόρτωση',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Επιλέξτε Αρχείο ...',
 );

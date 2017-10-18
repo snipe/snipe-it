@@ -1,21 +1,21 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
-    'id'                        => 'ID',
-    'city'                      => 'City',
-    'state'                     => 'State',
-    'country'                   => 'Country',
-    'create'                    => 'Create Location',
-    'update'                    => 'Update Location',
-    'name'                      => 'Location Name',
-    'address'                   => 'Address',
-    'zip'                       => 'Postal Code',
-    'locations'                 => 'Locations',
-    'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'about_locations_title'     => 'O mjestima',
+    'about_locations'           => 'Lokacije se upotrebljavaju za praćenje podataka o lokaciji korisnika, imovine i ostalih stavki',
+    'assets_rtd'                => 'Imovina', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Dodijeljene imovine',
+    'id'                        => 'iskaznica',
+    'city'                      => 'Grad',
+    'state'                     => 'država',
+    'country'                   => 'Zemlja',
+    'create'                    => 'Izradi lokaciju',
+    'update'                    => 'Ažuriraj lokaciju',
+    'name'                      => 'Naziv lokacije',
+    'address'                   => 'Adresa',
+    'zip'                       => 'Poštanski broj',
+    'locations'                 => 'lokacije',
+    'parent'                    => 'Roditelj',
+    'currency'                  => 'Valuta lokacije',
+    'ldap_ou'                   => 'LDAP pretraživanje OU',
     );

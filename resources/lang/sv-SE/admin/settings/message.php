@@ -4,19 +4,19 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'Ett fel har uppstått under uppdateringen.',
+        'success'               => 'Inställningarna uppdateras framgångsrikt.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Är du säker på att du vill ta bort den här säkerhetskopieringsfilen? Den här åtgärden kan inte ångras.',
+        'file_deleted'          => 'Säkerhetsfilen har tagits bort.',
+        'generated'             => 'En ny säkerhetskopieringsfil skapades med framgång.',
+        'file_not_found'        => 'Den säkerhetskopieringsfilen kunde inte hittas på servern.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Ett fel har uppstått vid spolning.',
+        'validation_failed'     => 'Din rengöringsbekräftelse är felaktig. Vänligen skriv ordet "DELETE" i bekräftelsen rutan.',
+        'success'               => 'Raderade poster som rensats framgångsrikt.'
     ),
 
 );

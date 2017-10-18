@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'درباره مجوزها',
+    'about_licenses'                  => 'مجوز برای پیگیری نرم افزار استفاده می شود. آنها دارای تعداد مشخصی از صندلی هایی هستند که می توانند به افراد منتقل شوند',
     'checkin'  					=> 'بررسی صندلی مجوز',
     'checkout_history'  		=> 'تاریخچه پرداخت',
     'checkout'  				=> 'صندلی مجوز پرداخت',

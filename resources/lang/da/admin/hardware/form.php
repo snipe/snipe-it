@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'Bekræft massefortegnelser',
   'bulk_delete_help'	=> 'Gennemgå aktiver for massesletning nedenfor. Disse aktiver kan gendannes når slettet, men de vil ikke længere være forbundet med eventuelle brugere, de i øjeblikket er tildelt.',
   'bulk_delete_warn'	=> 'Du er i gang med at slette :asset_count aktiver.',
 	'bulk_update'		=> 'Masseopdater Aktiver',
@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Indkøbspris',
     'create'			=> 'Opret Aktiv',
     'date'				=> 'Købsdato',
+    'depreciation'	    => 'Afskrivninger',
     'depreciates_on'	=> 'Afskrives Den',
     'default_location'	=> 'Standardplacering',
     'eol_date'			=> 'EOL Dato',

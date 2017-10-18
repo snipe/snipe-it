@@ -2,10 +2,10 @@
 
     return [
         'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
-        'maintenance'        => 'Maintenance',
-        'upgrade'            => 'Upgrade'
+        'edit'               => 'Wysig bateonderhoud',
+        'delete'             => 'Verwyder Bate Onderhoud',
+        'view'               => 'Bekyk Bate Onderhoud Besonderhede',
+        'repair'             => 'herstel',
+        'maintenance'        => 'onderhoud',
+        'upgrade'            => 'opgradering'
     ];

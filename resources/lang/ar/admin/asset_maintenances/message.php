@@ -12,8 +12,8 @@
             'success' => 'تم إنشاء سند صيانة الأصل بنجاح.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'لم يتم تعديل صيانة الأصول، يرجى إعادة المحاولة.',
+            'success' => 'تم تحرير صيانة الأصول بنجاح.'
         ],
         'asset_maintenance_incomplete' => 'لم يكتمل بعد',
         'warranty'                     => 'الضمان',

@@ -1,8 +1,8 @@
 <?php
 
     return [
-        'title'         => 'Asset Maintenance',
-        'asset_name'    => 'Asset Name',
-        'is_warranty'   => 'Warranty',
-        'dl_csv'        => 'Download CSV'
+        'title'         => 'சொத்து பராமரிப்பு',
+        'asset_name'    => 'சொத்து பெயர்',
+        'is_warranty'   => 'உத்தரவாதத்தை',
+        'dl_csv'        => 'CSV ஐ பதிவிறக்குக'
     ];

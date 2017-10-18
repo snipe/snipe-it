@@ -2,15 +2,15 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'יצירת מודל נכס',
+    'created_at' 			=> 'נוצר ב',
     'eol'	 				=> 'משך החיים',
     'modelnumber'   		=> 'מס׳ הדגם.',
-    'name'      			=> 'Asset Model Name',
+    'name'      			=> 'שם דגם הנכס',
     'numassets' 			=> 'נכסים',
-    'title'					=> 'Asset Models',
+    'title'					=> 'מודלים של נכסים',
     'update'				=> 'עדכון דגם הנכס',
-    'view'					=> 'View Asset Model',
+    'view'					=> 'הצג מודל נכס',
     'update'				=> 'עדכון דגם הנכס',
     'clone'				=> 'שיבוט המודל',
     'edit'				=> 'עריכת מודל',

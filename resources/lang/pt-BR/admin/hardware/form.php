@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Custo da Compra',
     'create'			=> 'Criar Ativo',
     'date'				=> 'Data da Compra',
+    'depreciation'	    => 'Depreciação',
     'depreciates_on'	=> 'Deprecia em',
     'default_location'	=> 'Local Padrão',
     'eol_date'			=> 'Date de EOL',

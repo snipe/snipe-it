@@ -2,14 +2,14 @@
 
 return array(
     'about_models_title'     => 'حول موديلات الأصول',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
+    'about_models_text'           => 'نماذج الأصول هي طريقة لتجميع الأصول المتطابقة. "مب 2013"، "إفون 6s"، الخ.',
+    'deleted'  					        => 'تم حذف هذا النموذج. <a href="/hardware/models/:model_id/restore"> انقر هنا لاستعادته </a>.',
     'restore'                   => 'إستعادة الموديل',
-    'requestable'               => 'Users may request this model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
+    'requestable'               => 'يمكن للمستخدمين طلب هذا النموذج',
+	'show_mac_address'			      => 'عرض حقل عنوان ماك في مواد العرض في هذا النموذج',
     'view_deleted'              => 'مشاهدة محذوفة',
     'view_models'               => 'عرض الموديلات',
-    'fieldset'                  => 'Fieldset',
+    'fieldset'                  => 'مجموعة حقول',
     'no_custom_field'           => 'لا يوجد حقول مخصصة',
 
 );

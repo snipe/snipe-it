@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'הצריכה אינה קיימת.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'הצריכה לא נוצרה, נסה שוב.',
+        'success' => 'הצריכה נוצרה בהצלחה.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'הצריכה לא עודכנה, נסה שוב',
+        'success' => 'הצריכה עודכנה בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק את הפריט המתכלה הזה?',
+        'error'   => 'היתה בעיה במחיקת המתכלים. בבקשה נסה שוב.',
+        'success' => 'המתכלים נמחקו בהצלחה.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'הצריכה לא נבדקה, נסה שוב',
+        'success' 		=> 'הצריכה נשללה בהצלחה.',
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'הצריכה לא נבדקה, נסה שוב',
+        'success' 		=> 'הצריכה נבדקה בהצלחה.',
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.'
     )
 
 

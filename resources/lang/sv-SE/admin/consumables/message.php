@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Förbrukningsartiklar existerar inte.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Förbrukningsbarhet skapades inte, försök igen.',
+        'success' => 'Förbrukningsbar skapad framgångsrik.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Förbrukningsvaror uppdaterades inte, var god försök igen',
+        'success' => 'Förbrukningsvaror uppdateras framgångsrikt.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Är du säker på att du vill radera denna förbrukningsartiklar?',
+        'error'   => 'Det gick inte att ta bort förbrukningen. Var god försök igen.',
+        'success' => 'Konsumtionen har tagits bort.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Förbrukningsartiklarna är inte utcheckade, försök igen',
+        'success' 		=> 'Förbrukningsbar utcheckad framgångsrik.',
+        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Förbrukningsartiklarna kontrollerades inte, försök igen',
+        'success' 		=> 'Konsumtionskontrollen kontrolleras framgångsrikt.',
+        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.'
     )
 
 

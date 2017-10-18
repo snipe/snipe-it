@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Aktīvu uzturēšana, kuru meklējāt, netika atrasta!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Vai tiešām vēlaties dzēst šo līdzekļu uzturēšanu?',
+            'error'   => 'Problēmu novēršanas jautājums tika dzēsts. Lūdzu mēģiniet vēlreiz.',
+            'success' => 'Aktīvu uzturēšana tika veiksmīgi dzēsta.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Aktīvu uzturēšana nav izveidota, lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Aktīvu uzturēšana tika veiksmīgi izveidota.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Aktīvu uzturēšana nav rediģēta, lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Aktīvu uzturēšana veiksmīgi mainīta.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Vēl nav pabeigts',
+        'warranty'                     => 'Garantija',
+        'not_warranty'                 => 'Nav garantija',
     ];

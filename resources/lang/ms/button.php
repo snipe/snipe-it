@@ -2,14 +2,14 @@
 
 return array(
     'actions' 	                => 'Tindakan',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'add'    	                => 'Tambah baru',
+    'cancel'                    => 'Batalkan',
+    'checkin_and_delete'  	    => 'Periksa & Padamkan Pengguna',
     'delete'  	                => 'Hapuskan',
     'edit'    	                => 'Kemaskini',
     'restore' 	                => 'Masukkan Semula',
-    'request'                   => 'Request',
+    'request'                   => 'Permintaan',
     'submit'  	                => 'Hantar',
-    'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
+    'upload'                    => 'Muat naik',
+	'select_file'				=> 'Pilih Fail ...',
 );

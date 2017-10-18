@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'Kategorija nav.',
+    'assoc_models'	 => 'Šobrīd šī kategorija ir saistīta ar vismaz vienu modeli, un to nevar izdzēst. Lūdzu, atjauniniet savus modeļus, lai vairs nerindrinātu šo kategoriju, un mēģiniet vēlreiz.',
+    'assoc_items'	 => 'Šobrīd šī kategorija ir saistīta ar vismaz vienu: asset_type un to nevar izdzēst. Lūdzu, atjauniniet savu: asset_type, lai vairs nenorādītu šo kategoriju, un mēģiniet vēlreiz.',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorija nav izveidota, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Kategorija veiksmīgi izveidota.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorija nav atjaunināta, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Kategorija ir veiksmīgi atjaunināta.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Vai tiešām vēlaties dzēst šo kategoriju?',
+        'error'   => 'Radās problēma, dzēšot kategoriju. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Kategorija tika veiksmīgi dzēsta.'
     )
 
 );

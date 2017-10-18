@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Үйлдвэрлэгч байхгүй байна.',
+    'assoc_users'	 => 'Энэ үйлдвэр нь одоогоор хамгийн багадаа нэг загвартай холбоотой бөгөөд устгах боломжгүй. Энэ загварыг дахин үйлдвэрлэхээ больсон загвараа шинэчлээд дахин оролдоно уу.',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Үйлдвэрлэгч үүсгээгүй байна, дахин оролдоно уу.',
+        'success' => 'Үйлдвэрлэгч амжилттай ажиллаж байна.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Үйлдвэрлэгч шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Үйлдвэрлэгч амжилттай шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Та энэ үйлдвэрлэгчийн устгахыг хүсч байгаадаа итгэлтэй байна уу?',
+        'error'   => 'Үйлдвэрлэгчийг устгахад асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Үйлдвэрлэгч амжилттай устгагдсан байна.'
     )
 
 );

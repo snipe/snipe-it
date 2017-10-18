@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'درباره گروهها',
+    'about_categories'  				=> 'دستهها به شما کمک می کنند که موارد خود را سازماندهی کنید. بعضی از دسته های مثال ممکن است &quot;Desktops&quot;، &quot;Laptops&quot;، &quot; تلفنهای موبایل&quot;، &quot;Tablets&quot; و غیره باشد، اما شما می توانید از هر نوع دسته ای استفاده کنید که برای شما مناسب است.',
     'asset_categories' 					=> 'دسته بندی های دارایی',
     'category_name'  					=> 'نام دسته بندی',
     'checkin_email'                     => 'ارسال ایمیل به کاربر',
@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'ویرایش دسته‌ بندی',
     'eula_text'							=> 'دسته بندی EULA',
     'eula_text_help'					=> 'این فید به امکان این را میدهد که EULA های خود را با توجه به دارایی سفارشی سازی کنید. اگر شما فقط یک EULA برای تمام دارایی خود دارید،میتوانید گزینه زیر را فعال کنید تا از پیشفرض اولیه استفاده کنید.',
-    'name'                              => 'Category Name',
+    'name'                              => 'نام دسته',
     'require_acceptance'				=> 'نیاز به کاربرانی جهت تایید پذیرش دارایی ها در این دسته بندی.',
     'required_acceptance'				=> 'این کاربر با یک لینک به پذیرش این مورد تایید فرستاده می شود.',
     'required_eula'						=> 'به این کاربر کپی EULA فرستاده می شود',

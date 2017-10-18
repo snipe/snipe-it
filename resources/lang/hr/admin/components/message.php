@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponenta ne postoji.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponenta nije izrađena, pokušajte ponovo.',
+        'success' => 'Komponenta je uspješno izrađena.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponenta nije ažurirana, pokušajte ponovo',
+        'success' => 'Komponenta je uspješno ažurirana.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Jeste li sigurni da želite izbrisati ovu komponentu?',
+        'error'   => 'Došlo je do problema s brisanjem komponente. Molim te pokušaj ponovno.',
+        'success' => 'Komponenta je uspješno izbrisana.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenta nije provjerena, pokušajte ponovo',
+        'success' 		=> 'Komponenta je uspješno provjerena.',
+        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenta nije prijavljena, pokušajte ponovo',
+        'success' 		=> 'Komponenta je uspješno prijavljena.',
+        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.'
     )
 
 

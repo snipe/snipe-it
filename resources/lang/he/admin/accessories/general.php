@@ -16,7 +16,7 @@ return array(
     'total'  							=> 'סה"כ',
     'remaining'  						=> 'נותר',
     'update'  							=> 'עידכון אביזר',
-    'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',
-    'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
+    'use_default_eula'					=> 'במקום זאת, השתמש ב- <a href="#" data-toggle="modal" data-target="#eulaModal"> ברירת המחדל הראשית EULA</a>.',
+    'use_default_eula_disabled'			=> '<del> השתמש ב- EULA ברירת המחדל הראשוני במקום. </del> לא נקבעה ברירת המחדל הראשית של הסכם הרישיון למשתמש קצה. הוסף אחד בהגדרות.',
 
 );

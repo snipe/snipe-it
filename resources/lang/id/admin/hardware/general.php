@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Aset',
     'bulk_checkout'             => 'Pemberian aset kepada pengguna',
     'checkin'  					=> 'Pengembalian aset',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Aset Checkout',
     'clone'  					=> 'Klon Aset',
     'deployable'  				=> 'Dapat digunakan',
     'deleted'  					=> 'Aset ini telah di hapus. <a href="/hardware/:asset_id/restore">Klik disini untuk memulihkan</a>.',

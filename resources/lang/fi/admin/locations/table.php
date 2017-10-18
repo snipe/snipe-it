@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'about_locations_title'     => 'Tietoja sijainneista',
+    'about_locations'           => 'Sijainteja käytetään käyttäjien, varojen ja muiden kohteiden sijaintitietojen seurantaan',
+    'assets_rtd'                => 'varat', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Määritetyt varat',
     'id'                        => 'Tunnus',
     'city'                      => 'Kaupunki',
     'state'                     => 'Lääni',
@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'Sijainnit',
     'parent'                    => 'Ylempi kategoria',
     'currency'                  => 'Valuutta',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'LDAP-haku OU',
     );

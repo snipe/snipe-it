@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
-    'group_management' 	 	=> 'Group Management',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'about_groups_title'            => 'குழுக்கள் பற்றி',
+    'about_groups'                  => 'பயனர் அனுமதிகள் பொதுமைப்படுத்த குழுக்கள் பயன்படுத்தப்படுகின்றன.',
+    'group_management' 	 	=> 'குழு மேலாண்மை',
+    'create' 	 	 	    => 'புதிய குழுவை உருவாக்கவும்',
+    'update' 	 		        => 'குழுவைத் திருத்து',
+    'group_name' 	 		=> 'குழு பெயர்',
+    'group_admin' 	 		=> 'குழு நிர்வாகம்',
+    'allow' 	 			=> 'அனுமதி',
+    'deny' 	 				=> 'மறு',
 
 );

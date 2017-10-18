@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'மாதிரி இல்லை.',
+    'assoc_users'	 => 'தற்போது இந்த மாதிரி ஒன்று ஒன்று அல்லது அதற்கு மேற்பட்ட சொத்துக்களுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. சொத்துக்களை நீக்கிவிட்டு மீண்டும் நீக்குவதற்கு முயற்சிக்கவும்.',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'மாதிரி உருவாக்கப்பட்டது இல்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'மாதிரி வெற்றிகரமாக உருவாக்கப்பட்டது.',
+        'duplicate_set' => 'அந்த பெயர், உற்பத்தியாளர் மற்றும் மாதிரி எண்ணுடன் ஏற்கனவே ஒரு சொத்து மாதிரி உள்ளது.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'மாதிரி புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' => 'மாடல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'இந்த சொத்து மாடலை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
+        'error'   => 'மாதிரியை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'மாதிரி வெற்றிகரமாக நீக்கப்பட்டது.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'மாடல் மீட்டமைக்கப்படவில்லை, தயவு செய்து மீண்டும் முயற்சிக்கவும்',
+        'success' 		=> 'மாடல் வெற்றிகரமாக மீட்கப்பட்டது.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'எந்த துறைகளும் மாற்றப்படவில்லை, அதனால் எதுவும் புதுப்பிக்கப்படவில்லை.',
+        'success' 		=> 'மாதிரிகள் புதுப்பிக்கப்பட்டன.'
     ),
 
 );

@@ -19,6 +19,6 @@ return array(
     'status'   		=> 'Tila',
     'title'      	=> 'Laite ',
     'image'		=> 'Laitteen kuva',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => 'Päiviä ilman hyväksymistä'
 
 );

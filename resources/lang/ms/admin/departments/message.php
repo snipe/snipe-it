@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Jabatan tidak wujud.',
+    'assoc_users'	 => 'Jabatan ini kini dikaitkan dengan sekurang-kurangnya seorang pengguna dan tidak boleh dipadamkan. Sila kemas kini pengguna anda untuk tidak lagi merujuk jabatan ini dan cuba lagi.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Jabatan tidak dibuat, sila cuba lagi.',
+        'success' => 'Jabatan berjaya berjaya.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Jabatan tidak dikemas kini, sila cuba lagi',
+        'success' => 'Jabatan dikemas kini berjaya.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Adakah anda pasti ingin memadamkan jabatan ini?',
+        'error'   => 'Terdapat isu memadamkan jabatan. Sila cuba lagi.',
+        'success' => 'Jabatan telah berjaya dipadam.'
     )
 
 );

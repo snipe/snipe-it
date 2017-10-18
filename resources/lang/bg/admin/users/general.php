@@ -13,7 +13,7 @@ return array(
     'filetype_info'     => 'Позволените типове файлове са png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'history_user'      => 'История за :name',
 	'info'				=> 'Информация',
-    'restore_user'		=> 'Click here to restore them.',
+    'restore_user'		=> 'Кликнете тук, за да ги възстановите.',
     'last_login'        => 'Последен достъп до системата',
     'ldap_config_text'  => 'LDAP конфигурационните настройки могат да бъдат намерени в  Admin > Settings. Избраното (по изобр) местоположение ще бъде настроено за всички въведени потребители.',
     'software_user'     => 'Софтуерни продукти, изписани на :name',

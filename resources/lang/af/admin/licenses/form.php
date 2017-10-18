@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'create'            => 'Create License',
-    'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'asset'             => 'bate',
+    'checkin'           => 'Inboek',
+    'create'            => 'Skep lisensie',
+    'expiration'        => 'Vervaldatum',
+    'license_key'       => 'Produk sleutel',
+    'maintained'        => 'gehandhaaf',
+    'name'              => 'Sagteware naam',
+    'no_depreciation'   => 'Moenie Depresieer',
+    'purchase_order'    => 'Bestelling nommer',
+    'reassignable'      => 'heraanwysbare',
+    'remaining_seats'   => 'Oorblywende sitplekke',
+    'seats'             => 'sitplekke',
+    'termination_date'  => 'Termyn Datum',
+    'to_email'          => 'Gelisensieer om te e-pos',
+    'to_name'           => 'Gelisensieer om te Noem',
+    'update'            => 'Update Lisensie',
+    'checkout_help'     => 'U moet \'n lisensie na \'n hardeware bate of \'n persoon nagaan. Jy kan albei kies, maar die eienaar van die bate moet ooreenstem met die persoon waarna jy die bate nagaan.'
 );

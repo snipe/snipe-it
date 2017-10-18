@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'Kategorie bestaan ​​nie.',
+    'assoc_models'	 => 'Hierdie kategorie is tans gekoppel aan ten minste een model en kan nie uitgevee word nie. Dateer asseblief jou modelle op om nie meer hierdie kategorie te verwys nie en probeer weer.',
+    'assoc_items'	 => 'Hierdie kategorie word tans geassosieer met ten minste een: asset_type en kan nie uitgevee word nie. Werk asseblief jou: bat_type op om nie meer hierdie kategorie te verwys nie en probeer weer.',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorie is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Kategorie geskep suksesvol.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorie is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Kategorie suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Is jy seker jy wil hierdie kategorie uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die kategorie. Probeer asseblief weer.',
+        'success' => 'Die kategorie is suksesvol verwyder.'
     )
 
 );

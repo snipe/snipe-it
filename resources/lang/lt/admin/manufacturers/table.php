@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_title'    => 'Apie gamintojus',
+    'about_manufacturers_text'  => 'Gamintojai yra įmonės, kurios kuria jūsų turtą. Čia galite išsaugoti svarbią palaikymo kontaktinę informaciją apie juos, kuri bus rodoma išsamiuose savo turinio puslapiuose.',
     'asset_manufacturers'	=> 'Įrangos gamintojai',
     'create'				=> 'Sukurti gamintoją',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'vardas',
+    'support_email'   		=> 'Palaikymas el. Paštu',
+    'support_phone'   		=> 'Palaikymas telefonu',
+    'support_url'   		=> 'Palaikymo URL',
     'update'				=> 'Atnaujinti gamintoją',
     'url'   				=> 'URL',
 

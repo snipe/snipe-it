@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Aankoopprijs',
     'create'			=> 'Materiaal aanmaken',
     'date'				=> 'Aankoopdatum',
+    'depreciation'	    => 'waardevermindering',
     'depreciates_on'	=> 'Afschrijving op',
     'default_location'	=> 'Standaardlocatie',
     'eol_date'			=> 'EOL datum',

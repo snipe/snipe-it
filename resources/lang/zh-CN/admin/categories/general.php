@@ -11,7 +11,7 @@ return array(
     'edit'                              => '编辑分类',
     'eula_text'							=> '类别的最终用户许可协议',
     'eula_text_help'					=> '此字段允许您自定义的EULA（最终用户许可协议）为特定类型的资产。如果您所有资产只有一个EULA（最终用户许可协议），你可以检查下面的框中使用默认设置。',
-    'name'                              => 'Category Name',
+    'name'                              => '分类名称',
     'require_acceptance'				=> '要求用户确认接受这一类的资产。',
     'required_acceptance'				=> '用户会收到一封邮件，邮件中包含一个确认接收的链接。',
     'required_eula'						=> '用户将收到关于EULA（最终用户许可协议）的邮件。',

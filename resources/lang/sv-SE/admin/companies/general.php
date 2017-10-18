@@ -1,6 +1,6 @@
 <?php
 return [
     'about_companies_title'            => 'Om företag',
-    'about_companies_text'                  => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'about_companies_text'                  => 'Företag kan användas som ett enkelt identifieringsfält, eller kan användas för att begränsa synligheten för tillgångar, användare etc. om fullständigt företagsstöd är aktiverat i dina administratörsinställningar.',
     'select_company' => 'Välj företag',
 ];

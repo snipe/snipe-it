@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create'  					            => 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update'  					            => 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Oor bate afskrywing',
+    'about_depreciations'  					=> 'U kan bate-afskrywings opstel om bates te deprecieer gebaseer op reguit-waardevermindering.',
+    'asset_depreciations'  					=> 'Bate afskrywing',
+    'create'  					            => 'Skep waardevermindering',
+    'depreciation_name'  					=> 'Waardevermindering Naam',
+    'number_of_months'  					=> 'Aantal maande',
+    'update'  					            => 'Werk waardevermindering op',
 
 );

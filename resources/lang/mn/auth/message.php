@@ -2,36 +2,36 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'account_already_exists' => 'Энэ имэйл хаягтай байна.',
+    'account_not_found'      => 'Хэрэглэгчийн нэр эсвэл нууц үг буруу байна.',
+    'account_not_activated'  => 'Энэ хэрэглэгчийн бүртгэл идэвхжээгүй байна.',
+    'account_suspended'      => 'Энэ хэрэглэгчийн бүртгэлийг түдгэлзүүлсэн байна.',
+    'account_banned'         => 'Энэ хэрэглэгчийн бүртгэлийг хориглосон байна.',
+    'throttle'               => 'Маш олон нэвтрэлт оролдлого амжилтгүй болсон. Дахин оролдож үзнэ үү: минут минут (s).',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Нэвтрэхийг оролдож байх явцад асуудал гарсан, дахин оролдоно уу.',
+        'success' => 'Та амжилттай нэвтэрсэн байна.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Таны акаунтыг үүсгэх үед алдаа гарлаа, дахин оролдоно уу.',
+        'success' => 'Акаунт амжилттай хийгдсэн.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Нууц үгийг дахин тохируулахыг оролдож байх явцад асуудал гарлаа, дахин оролдоно уу.',
+            'success' => 'Нууц үг сэргээх и-мэйл амжилттай явуулсан.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Нууц үгээ шинэчлэхдээ алдаа гарлаа, дахин оролдоно уу.',
+            'success' => 'Таны нууц үг амжилттай хийгдсэн.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Таны акаунтыг идэвхжүүлэхийг оролдох үед асуудал гарлаа, дахин оролдоно уу.',
+        'success' => 'Таны бүртгэл амжилттай идэвхжсэн байна.',
     ),
 
 );

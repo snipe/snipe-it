@@ -3,22 +3,22 @@
 return array(
 
     'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'asset_model'       => 'Modelis',
+    'book_value'  	=> 'Vērtība',
+    'change' 		=> 'Iekšā ārā',
+    'checkout_date' => 'Izrakstīšanās datums',
+    'checkoutto' 	=> 'Izrakstīts',
+    'diff' 			=> 'Atšķirība',
+    'dl_csv' 		=> 'Lejupielādējiet CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'location' 		=> 'Atrašanās vieta',
+    'purchase_cost'	=> 'Izmaksas',
+    'purchase_date'	=> 'Iegādāts',
+    'serial'   		=> 'Sērijas numurs',
+    'status'   		=> 'Statuss',
+    'title'      	=> 'Aktīvs',
+    'image'		=> 'Ierīces attēls',
+    'days_without_acceptance' => 'Dienas bez pieņemšanas'
 
 );

@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponen tidak wujud.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponen tidak dibuat, sila cuba lagi.',
+        'success' => 'Komponen berjaya dihasilkan.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponen tidak dikemas kini, sila cuba lagi',
+        'success' => 'Komponen berjaya dikemas kini.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Adakah anda pasti ingin memadamkan komponen ini?',
+        'error'   => 'Terdapat isu memadamkan komponen. Sila cuba lagi.',
+        'success' => 'Komponen telah berjaya dipadam.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponen tidak diperiksa, sila cuba lagi',
+        'success' 		=> 'Komponen diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponen tidak diperiksa, sila cuba lagi',
+        'success' 		=> 'Komponen diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
     )
 
 

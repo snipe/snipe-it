@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'checkout'                          => 'Checkout Consumable to User',
-    'consumable_name'                   => 'Consumable Name',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
+    'about_consumables_title' 			=> 'Despre consumabile',
+    'about_consumables_text'  			=> 'Consumabilele sunt produse achiziționate care vor fi consumate în timp. De exemplu, cerneala imprimantei sau hârtia pentru copiatoare.',
+    'checkout'                          => 'Verificați consumul pentru utilizator',
+    'consumable_name'                   => 'Nume consumabile',
+    'create'                            => 'Creați consumabile',
+    'item_no'                           => 'Numărul articolului',
+    'remaining' 			            => 'Rămas',
     'total' 			                => 'Total',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Actualizați consumabilele',
 );
