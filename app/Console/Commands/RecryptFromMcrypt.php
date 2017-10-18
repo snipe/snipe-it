@@ -131,12 +131,12 @@ class RecryptFromMcrypt extends Command
                         try {
                             $decrypted_field = $mcrypter->decrypt($asset->{$columnName});
                             $asset->{$columnName} = \Crypt::encrypt($decrypted_field);
+                            $asset->save();
                         } catch (\Exception $e) {
                             $errors[] = ' - ERROR: Could not decrypt field ['.$encrypted_field->name.']: '.$e->getMessage();
                         }
                     }
                 }
-                $asset->save();
                 $bar->advance();
             }
 
