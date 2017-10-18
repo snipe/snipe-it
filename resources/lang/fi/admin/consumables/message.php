@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Kulutusta ei ole olemassa.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Kulutusta ei luotu, yritä uudelleen.',
+        'success' => 'Kulutustarvike luotiin onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Kulutusta ei ole päivitetty, yritä uudelleen',
+        'success' => 'Kulutettu päivitetty onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Haluatko varmasti poistaa tämän kulutustarvikkeen?',
+        'error'   => 'Kulutustarvikkeen poistamisessa oli ongelma. Yritä uudelleen.',
+        'success' => 'Kulutustulos poistettiin onnistuneesti.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Kulutusta ei ole tarkistettu, yritä uudelleen',
+        'success' 		=> 'Kulutettu tarkistettu onnistuneesti.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Kulutusta ei ole tarkistettu, yritä uudelleen',
+        'success' 		=> 'Kulutustarkastus onnistui.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     )
 
 

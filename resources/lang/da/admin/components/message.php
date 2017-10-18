@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponent eksisterer ikke.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponent blev ikke oprettet, prøv igen.',
+        'success' => 'Komponent oprettet med succes.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponent blev ikke opdateret, prøv igen',
+        'success' => 'Komponent opdateret med succes.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Er du sikker på, at du vil slette denne komponent?',
+        'error'   => 'Der opstod et problem ved at slette komponenten. Prøv igen.',
+        'success' => 'Komponenten blev slettet korrekt.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponent blev ikke tjekket ud, prøv igen',
+        'success' 		=> 'Komponent tjekket ud med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponent blev ikke tjekket ind, prøv igen',
+        'success' 		=> 'Komponent tjekket ind med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.'
     )
 
 

@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
-    'group_management' 	 	=> 'Group Management',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'about_groups_title'            => 'O grupama',
+    'about_groups'                  => 'Grupe se koriste za generaliziranje korisničkih dozvola.',
+    'group_management' 	 	=> 'Upravljanje grupom',
+    'create' 	 	 	    => 'Izradi novu grupu',
+    'update' 	 		        => 'Uredi grupu',
+    'group_name' 	 		=> 'Grupno ime',
+    'group_admin' 	 		=> 'Administrator grupe',
+    'allow' 	 			=> 'dopustiti',
+    'deny' 	 				=> 'poreći',
 
 );

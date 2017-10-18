@@ -8,15 +8,15 @@ return array(
         'success'               => 'Asetukset päivitettiin onnistuneesti.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Haluatko varmasti poistaa tämän varmuuskopiotiedoston? Tätä toimintoa ei voi kumota.',
+        'file_deleted'          => 'Varmuuskopiotiedosto on poistettu onnistuneesti.',
+        'generated'             => 'Uusi varmuuskopiotiedosto luotiin onnistuneesti.',
+        'file_not_found'        => 'Tätä varmuuskopiotiedostoa ei löytynyt palvelimelta.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Virhe on ilmennyt puhdistuksen aikana.',
+        'validation_failed'     => 'Puhdistustodistus on virheellinen. Kirjoita vahvistusruutuun sana "DELETE".',
+        'success'               => 'Poistetut tietueet menestyivät onnistuneesti.'
     ),
 
 );

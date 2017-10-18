@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Ražotājs neeksistē.',
+    'assoc_users'	 => 'Šis ražotājs pašlaik ir saistīts ar vismaz vienu modeli, un to nevar izdzēst. Lūdzu, atjauniniet savus modeļus, lai vairs nerādītu šo ražotāju, un mēģiniet vēlreiz.',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Ražotājs netika izveidots, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Ražotājs veiksmīgi izveidots.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Ražotājs netika atjaunināts, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Ražotājs tika veiksmīgi atjaunināts.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Vai tiešām vēlaties dzēst šo ražotāju?',
+        'error'   => 'Radās problēma, izdzēšot ražotāju. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Ražotājs tika veiksmīgi dzēsts.'
     )
 
 );

@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_models_title'     => 'About Asset Models',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-    'requestable'               => 'Users may request this model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'about_models_title'     => 'Par īpašuma modeļiem',
+    'about_models_text'           => 'Aktīvu modeļi ir veids, kā grupēt identiskus aktīvus. "MBP 2013", "IPhone 6s" uc',
+    'deleted'  					        => 'Šis modelis ir dzēsts. <a href="/hardware/models/:model_id/restore">Noklikšķiniet šeit, lai to atjaunotu</a>.',
+    'restore'                   => 'Atjaunot modeli',
+    'requestable'               => 'Lietotāji var pieprasīt šo modeli',
+	'show_mac_address'			      => 'Parādiet MAC adreses lauku šī modeļa aktīvos',
+    'view_deleted'              => 'Skatīt dzēsto',
+    'view_models'               => 'Skatīt modeļus',
+    'fieldset'                  => 'Lauka laukums',
+    'no_custom_field'           => 'Nav pielāgotu lauku',
 
 );

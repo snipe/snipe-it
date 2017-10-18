@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'A kategória nem létezik.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'Ez a kategória jelenleg legalább egy modellhez kapcsolódik, és nem törölhető. Kérjük, frissítse a modelleket, hogy ne hivatkozzon erre a kategóriára, és próbálja újra.',
+    'assoc_items'	 => 'Ez a kategória jelenleg legalább egy: asset_type-hez van társítva, és nem törölhető. Kérjük, frissítse a: asset_type-t, hogy ne hivatkozzon erre a kategóriára és próbálja újra.',
 
     'create' => array(
         'error'   => 'Nem sikerült a kategória létrehozása, kérjük, próbálja újra.',

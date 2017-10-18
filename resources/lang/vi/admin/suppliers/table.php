@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => 'Giới thiệu nhà cung cấp',
+    'about_suppliers_text'  => 'Các nhà cung cấp được sử dụng để theo dõi nguồn hàng',
     'address'               => 'Địa chỉ nhà cung cấp',
     'assets'                => 'Tài sản',
     'city'                  => 'Thành phố',

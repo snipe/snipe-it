@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Statuslabel bestaan ​​nie.',
+    'assoc_assets'	 => 'Hierdie statusetiket word tans geassosieer met ten minste een bate en kan nie uitgevee word nie. Dateer asseblief jou bates op om nie meer hierdie status te verwys nie en probeer weer.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Statuslabel is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Status Label suksesvol geskep.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Statuslabel is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Status Label suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'Is jy seker jy wil hierdie Status Label uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die statusetiket. Probeer asseblief weer.',
+        'success' => 'Die statusetiket is suksesvol verwyder.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'Hierdie bates kan nie aan enigiemand toegewys word nie.',
+        'deployable'   => 'Hierdie bates kan nagegaan word. Sodra hulle toegewys is, sal hulle \'n meta-status van <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong> aanvaar.',
+        'archived'   => 'Hierdie bates kan nie nagegaan word nie en sal eers in die Argief-aansig verskyn. Dit is nuttig vir die behoud van inligting oor bates vir begrotings / historiese doeleindes, maar om hulle uit die dag-tot-dag-bate lys te hou.',
+        'pending'   => 'Hierdie bates kan nog nie aan iemand toegewys word nie, wat dikwels gebruik word vir items wat buite herstel is, maar sal na verwagting terugkeer.',
+    ),
 
 );

@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'החברה לא קיימת.',
+    'assoc_users'    => 'חברה זו קשורה כרגע עם דגם אחד לפחות ואינה ניתנת למחיקה. אנא עדכן את המודלים שלך כדי לא להפנות עוד לחברה זו ונסה שוב.',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'החברה לא נוצרה, נסה שוב.',
+        'success' => 'החברה יצרה בהצלחה.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'החברה לא עודכנה, נסה שוב',
+        'success' => 'החברה עודכנה בהצלחה.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'האם אתה בטוח שברצונך למחוק חברה זו?',
+        'error'   => 'היתה בעיה במחיקת החברה. בבקשה נסה שוב.',
+        'success' => 'החברה נמחקה בהצלחה.'
     )
 );

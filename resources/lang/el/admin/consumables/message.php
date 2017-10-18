@@ -5,31 +5,31 @@ return array(
     'does_not_exist' => 'Το αναλώσιμο δεν υπάρχει.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Δεν δημιουργήθηκε αναλώσιμο, δοκιμάστε ξανά.',
+        'success' => 'Το αναλώσιμο δημιουργήθηκε με επιτυχία.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
+        'error'   => 'Το αναλώσιμο δεν ενημερώθηκε, δοκιμάστε ξανά',
         'success' => 'Το αναλώσιμο ενημερώθηκε με επιτυχία.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
+        'confirm'   => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το αναλώσιμο;',
+        'error'   => 'Παρουσιάστηκε πρόβλημα κατά τη διαγραφή του αναλώσιμου. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
         'success' => 'Το αναλώσιμο έχει διαγραφεί με επιτυχία.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
+        'error'   		=> 'Το αναλώσιμο δεν έχει ελεγχθεί, δοκιμάστε ξανά',
+        'success' 		=> 'Το αναλώσιμο ελεγχόταν με επιτυχία.',
         'user_does_not_exist' => 'Αυτός ο χρήστης δεν είναι έγκυρος. Παρακαλώ δοκιμάστε ξανά.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Το αναλώσιμο δεν έχει επιλεγεί, δοκιμάστε ξανά',
+        'success' 		=> 'Το αναλώσιμο ελεγχόταν με επιτυχία.',
+        'user_does_not_exist' => 'Αυτός ο χρήστης είναι άκυρος. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.'
     )
 
 

@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Purchase Cost',
     'create'			=> 'Buat Aset',
     'date'				=> 'Purchase Date',
+    'depreciation'	    => 'Depreciation',
     'depreciates_on'	=> 'Depreciates On',
     'default_location'	=> 'Lokasi Standar',
     'eol_date'			=> 'EOL Date',

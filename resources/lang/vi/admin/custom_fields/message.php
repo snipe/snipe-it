@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Lĩnh vực đó không tồn tại.',
+        'already_added'   => 'Trường đã được thêm',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Trường không được tạo, vui lòng thử lại.',
+            'success' => 'Trường được tạo thành công.',
+            'assoc_success' => 'Trường đã được thêm vào fieldset.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Trường không được cập nhật, vui lòng thử lại',
+            'success' => 'Trường cập nhật thành công.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Bạn có chắc chắn muốn xoá trường này không?',
+            'error'   => 'Đã xảy ra sự cố khi xóa trường. Vui lòng thử lại.',
+            'success' => 'Trường đã bị xóa thành công.',
+            'in_use'   => 'Trường vẫn đang được sử dụng.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Fieldset không tồn tại',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Fieldset chưa được tạo, vui lòng thử lại.',
+            'success' => 'Fieldset được tạo thành công.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Fieldset chưa được cập nhật, vui lòng thử lại',
+            'success' => 'Đã cập nhật thành công Fieldset.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Bạn có chắc chắn muốn xóa bộ công việc này không?',
+            'error'   => 'Có vấn đề xóa fieldset. Vui lòng thử lại.',
+            'success' => 'Fieldset đã bị xóa thành công.',
+            'in_use'   => 'Fieldset vẫn đang được sử dụng.',
         )
 
     ),

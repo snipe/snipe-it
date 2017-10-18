@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Label Status tidak wujud.',
+    'assoc_assets'	 => 'Label Status ini kini dikaitkan dengan sekurang-kurangnya satu Aset dan tidak boleh dipadamkan. Sila kemas kini aset anda untuk tidak merujuk lagi status ini dan cuba lagi.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Label Status tidak dibuat, sila cuba lagi.',
+        'success' => 'Label Status berjaya dibuat.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Label Status tidak dikemas kini, sila cuba lagi',
+        'success' => 'Label Status berjaya dikemas kini.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'Adakah anda pasti ingin memadamkan Label Status ini?',
+        'error'   => 'Terdapat masalah memadamkan Label Status. Sila cuba lagi.',
+        'success' => 'Label Status berjaya dipadam.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'Aset ini tidak boleh diberikan kepada sesiapa sahaja.',
+        'deployable'   => 'Aset ini boleh diperiksa. Sebaik sahaja mereka ditugaskan, mereka akan menerima status meta <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'archived'   => 'Aset-aset ini tidak boleh diperiksa, dan hanya akan dipaparkan dalam pandangan Arkib. Ini berguna untuk mengekalkan maklumat mengenai aset untuk tujuan belanjawan / bersejarah tetapi menyimpannya daripada senarai aset harian.',
+        'pending'   => 'Aset-aset ini belum dapat ditugaskan kepada sesiapa sahaja, sering kali digunakan untuk barang-barang yang hendak dibaiki, tetapi diharapkan dapat kembali ke peredaran.',
+    ),
 
 );

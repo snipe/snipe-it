@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Alan kümesi yok',
 
         'create' => array(
             'error'   => 'Alan kümesi olşturulamadı, lütfen yeniden deneyin.',

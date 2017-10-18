@@ -2,49 +2,50 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'Лиценз байхгүй байна.',
+    'user_does_not_exist' => 'Хэрэглэгч байхгүй байна.',
+    'asset_does_not_exist' 	=> 'Энэ лицензтэй холбогдохыг хүссэн хөрөнгө байхгүй байна.',
+    'owner_doesnt_match_asset' => 'Энэ лицензтэй холбогдохыг хүсэж буй хөрөнгө нь тухайн сонгосон хүнээс доош сомдолоос өөр сомений эзэмшдэг.',
+    'assoc_users'	 => 'Энэ лицензийг одоогоор хэрэглэгчид шалгаж, устгах боломжгүй байна. Лицензийг эхлээд шалгаад дахин устгахыг оролдоно уу.',
+    'select_asset_or_person' => 'Та хөрөнгө эсвэл хэрэглэгчийг сонгох ёстой, гэхдээ хоёулаа биш.',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Лиценз үүсгэгдсэнгүй, дахин оролдоно уу.',
+        'success' => 'Лиценз амжилттай болсон.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Файлыг устгаагүй байна. Дахин оролдоно уу.',
+        'success' => 'Файл амжилттай устгагдсан.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'Файлд байршуулаагүй файл. Дахин оролдоно уу.',
+        'success' => 'Файлууд амжилттай байршуулсан.',
+        'nofiles' => 'Та байршуулах ямар ч файл сонгоогүй, эсвэл байршуулах гэж буй файл хэт том байна',
+        'invalidfiles' => 'Таны файлуудын нэг юмуу хэд нь хэтэрхий том юмуу эсвэл файлын төрлийг зөвшөөрдөггүй. Зөвшөөрөгдсөн filetypes нь png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, lic юм.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Лиценз шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Лиценз шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Та энэ лицензийг устгахыг хүсч байна уу?',
+        'error'   => 'Лицензийг устгах асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Лиценз амжилттай устгагдсан.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Лицензийг шалгах асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Лицензийг амжилттай шалгасан'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Лиценз дээр асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Лицензийг амжилттай шалгасан байна'
     ),
 
 );

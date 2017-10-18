@@ -31,7 +31,7 @@ return array(
         'create' => '新增使用者失敗，請重試。',
         'update' => '更新使用者失敗，請重試。',
         'delete' => '刪除使用者失敗，請重試。',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => '此使用者已分配物件，無法刪除。',
         'unsuspend' => '解除停用使用者失敗，請重試。',
         'import'    => '匯入使用者失敗，請重試。',
         'asset_already_accepted' => '資產已被接受',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => '無法綁定 LDAP 伺服器，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'ldap_could_not_search' => '查詢 LDAP 伺服器失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'ldap_could_not_get_entries' => ' LDAP 伺服器取得資訊條目失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => '此帳戶的密碼由 LDAP/AD 管理。若要更改您的密碼，請聯繫您的 IT 部門。 ',
     ),
 
     'deletefile' => array(

@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Хадгалах боломжгүй.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Боломжит бүтээгдээгүй байна, дахин оролдоно уу.',
+        'success' => 'Боломжит бүтээмж амжилттай болсон.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Боломжийн талаар шинэчилсэн, дахин оролдоно уу',
+        'success' => 'Хэрэглээ шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Та үүнийг устгахыг хүсч байгаадаа итгэлтэй байна уу?',
+        'error'   => 'Хэрэглэгдэхүүн устгах асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Хэрэглүүр амжилттай устгагдсан.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Боломжийн талаар шалгаагүй байна, дахин оролдоно уу',
+        'success' 		=> 'Боломжийн талаар амжилттай шалгасан.',
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Боломжийн талаар шалгаагүй байна, дахин оролдоно уу',
+        'success' 		=> 'Боломжийн шалгуурт амжилттай шалгагдсан.',
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.'
     )
 
 

@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Kiểm toán nội dung không thành công. Vui lòng thử lại.',
+        'success' 		=> 'Kiểm tra thành công tài sản.'
     ),
 
 
@@ -43,18 +43,18 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Một số mặt hàng không nhập chính xác.',
+        'errorDetail'           => 'Các mục sau đây không được nhập khẩu vì lỗi.',
+        'success'               => "Tệp của bạn đã được nhập",
+        'file_delete_success'   => "Tập tin của bạn đã được xóa thành công",
+        'file_delete_error'      => "Không thể xóa tệp",
     ),
 
 
     'delete' => array(
         'confirm'   	=> 'Bạn có chắc chắn muốn xoá bỏ tài sản này?',
         'error'   		=> 'Đã có vấn đề xảy ra khi xoá tài sản này. Bạn hãy thử lại xem.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'nothing_updated'   => 'Không có nội dung nào được chọn, vì vậy không có gì bị xóa.',
         'success' 		=> 'Tài sản này được xoá thành công.'
     ),
 
@@ -62,21 +62,21 @@ return array(
         'error'   		=> 'Tài sản chưa được checkout, xin vui lòng thử lại',
         'success' 		=> 'Tài sản đã checkout thành công.',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Tài sản đó không có sẵn để thanh toán!'
     ),
 
     'checkin' => array(
         'error'   		=> 'Tài sản chưa được checkin, xin vui lòng thử lại',
         'success' 		=> 'Tài sản đã checkin thành công.',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Nội dung đó đã được kiểm tra.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'Tài sản không được yêu cầu, vui lòng thử lại',
+        'success' 		=> 'Tài sản đã yêu cầu thành công.',
+        'canceled'      => 'Yêu cầu Thanh toán đã được hủy thành công'
     )
 
 );

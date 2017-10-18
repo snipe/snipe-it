@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Asset Audit war nicht erfolgreich. Bitte versuche es erneut.',
+        'success' 		=> 'Asset-Audit erfolgreich protokolliert.'
     ),
 
 

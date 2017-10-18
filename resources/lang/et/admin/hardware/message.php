@@ -2,11 +2,10 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Teenindus: </strong> See vara on märgitud kui praegu kasutatav. Kui see olek on muutunud, palun värskendage vara olekut.',
     'does_not_exist' 	=> 'Vahend puudub.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'does_not_exist_or_not_requestable' => 'Hea katse. Seda vara ei eksisteeri või see ei ole kohustuslik.',
+    'assoc_users'	 	=> 'Seda vara kontrollitakse kasutajale praegu ja seda ei saa kustutada. Esmalt kontrollige varast ja proovige seejärel uuesti kustutada.',
 
     'create' => array(
         'error'   		=> 'Vahendit ei loodud, palun proovi uuesti. :(',
@@ -14,69 +13,69 @@ return array(
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Vara ei värskendatud, proovige uuesti',
+        'success' 			=> 'Vara värskendati edukalt',
+        'nothing_updated'	=>  'Pole ühtegi välju valitud, nii et midagi ei uuendatud.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Vara ei taastatud, palun proovi uuesti',
+        'success' 		=> 'Varad on edukalt taastatud.'
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Varade auditi ebaõnnestus. Palun proovi uuesti.',
+        'success' 		=> 'Varakontrolli sisselogimisel.'
     ),
 
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Faili pole kustutatud. Palun proovi uuesti.',
+        'success' => 'Fail edukalt kustutatud.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Faili (d) pole üles laaditud. Palun proovi uuesti.',
+        'success' => 'Fail (id) edukalt üles laaditud.',
+        'nofiles' => 'Te ei valinud üleslaadimiseks ühtegi faili või fail, mille üritate üles laadida, on liiga suur',
+        'invalidfiles' => 'Üks või mitu teie faili on liiga suured või failitüüp pole lubatud. Lubatud failitüübid on png, gif, jpg, doc, docx, pdf ja txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Mõned üksused ei impordinud õigesti.',
+        'errorDetail'           => 'Järgmisi punkte ei imporditud vigade tõttu.',
+        'success'               => "Teie fail on imporditud",
+        'file_delete_success'   => "Teie fail on edukalt kustutatud",
+        'file_delete_error'      => "Faili ei saanud kustutada",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Kas olete kindel, et soovite selle vara kustutada?',
+        'error'   		=> 'Viga kustutas. Palun proovi uuesti.',
+        'nothing_updated'   => 'Varasid ei valitud, nii et midagi ei kustutatud.',
+        'success' 		=> 'Varasus kustutati edukalt.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'Varasid ei kontrollitud, proovige uuesti',
+        'success' 		=> 'Varad võeti edukalt välja.',
+        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.',
+        'not_available' => 'See vara pole kontrollimiseks saadaval!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'Vara ei olnud märgitud, palun proovi uuesti',
+        'success' 		=> 'Vara on edukalt kontrollitud',
+        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.',
+        'already_checked_in'  => 'See vara on juba sisse registreeritud.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'Vara ei taotletud, proovige uuesti',
+        'success' 		=> 'Vara taotletud edukalt.',
+        'canceled'      => 'Checkout taotlus on edukalt tühistatud'
     )
 
 );

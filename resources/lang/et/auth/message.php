@@ -2,36 +2,36 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'account_already_exists' => 'Selle e-posti aadress on juba olemas.',
+    'account_not_found'      => 'Kasutajanimi või parool on vale.',
+    'account_not_activated'  => 'See kasutajakonto pole aktiveeritud.',
+    'account_suspended'      => 'See kasutajakonto on peatatud.',
+    'account_banned'         => 'See kasutajakonto on keelatud.',
+    'throttle'               => 'Liiga palju ebaõnnestunud sisselogimise katsed. Proovige uuesti umbes: minut minutit (minutites).',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Kui proovisite sisse logida, ilmnes probleem, proovige uuesti.',
+        'success' => 'Sa oled edukalt sisse loginud.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Konto loomise proovimisel tekkis probleem, proovige uuesti.',
+        'success' => 'Konto edukalt loodud.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Uuesti parooli koodi proovimisel proovige uuesti proovida.',
+            'success' => 'Parooli taastamise e-posti aadress edukalt saadetud.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Parooli lähtestamise ajal ilmnes probleem, proovige uuesti.',
+            'success' => 'Teie parool on edukalt lähtestatud.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Konto aktiveerimisega proovimisel tekkis probleem, proovige uuesti.',
+        'success' => 'Teie konto on edukalt aktiveeritud.',
     ),
 
 );

@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'تم إرسال رابط كلمة المرور الخاصة بك!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'user'			=> 'هذا المستخدم غير موجود أو ليس لديه عنوان بريد إلكتروني مرتبط',
 ];
 

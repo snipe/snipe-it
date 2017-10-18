@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Departaments nepastāv.',
+    'assoc_users'	 => 'Pašlaik šis departaments ir saistīts ar vismaz vienu lietotāju un to nevar izdzēst. Lūdzu, atjauniniet savus lietotājus, lai tie vairs netiktu izmantoti šajā nodaļā, un mēģiniet vēlreiz.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Departaments nav izveidots, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Nodaļa veiksmīgi izveidota.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Departaments netika atjaunināts, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Nodaļa veiksmīgi atjaunota.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Vai tiešām vēlaties dzēst šo nodaļu?',
+        'error'   => 'Radās problēma, izdzēšot nodaļu. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Departaments tika veiksmīgi dzēsts.'
     )
 
 );

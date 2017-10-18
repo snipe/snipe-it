@@ -9,9 +9,9 @@ return array(
     'name'      			=> 'إسم موديل الأصل',
     'numassets' 			=> 'الأصول',
     'title'					=> 'موديل الأصول',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
+    'update'				=> 'تحديث نموذج الأصول',
+    'view'					=> 'مشاهدة ملف أسيت موديل',
+    'update'				=> 'تحديث نموذج الأصول',
     'clone'				=> 'استنساخ الموديل',
     'edit'				=> 'تحرير الموديل',
 );

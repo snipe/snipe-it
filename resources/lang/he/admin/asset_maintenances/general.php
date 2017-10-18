@@ -1,10 +1,10 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
+        'asset_maintenances' => 'אחזקת נכסים',
+        'edit'               => 'עריכת תחזוקת נכס',
+        'delete'             => 'מחיקת תחזוקת נכס',
+        'view'               => 'הצג פרטי אחזקת נכס',
         'repair'             => 'תיקון',
         'maintenance'        => 'תחזוקה',
         'upgrade'            => 'שדרוג'

@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'ไม่มีแผนก',
+    'assoc_users'	 => 'แผนกนี้มีการเชื่อมโยงกับผู้ใช้อย่างน้อยหนึ่งรายและไม่สามารถลบได้ โปรดอัปเดตผู้ใช้เพื่ออ้างถึงแผนกนี้อีกครั้งและลองอีกครั้ง',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'ไม่ได้สร้างแผนกโปรดลองอีกครั้ง',
+        'success' => 'สร้างแผนกเรียบร้อยแล้ว'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'แผนกไม่ได้รับการปรับปรุงโปรดลองอีกครั้ง',
+        'success' => 'อัปเดตแผนกเรียบร้อยแล้ว'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'คุณแน่ใจหรือไม่ว่าต้องการลบแผนกนี้',
+        'error'   => 'เกิดปัญหาในการลบแผนก กรุณาลองอีกครั้ง.',
+        'success' => 'แผนกนี้ถูกลบเรียบร้อยแล้ว'
     )
 
 );

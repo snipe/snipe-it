@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'Įrangą, kurią ketinate susieti su šia licenzija neegzistuoja.',
     'owner_doesnt_match_asset' => 'Įrangą, kurią ketinate susieti su šia licenzija yra naudojama kažkieno kito nei asmens, kurį pasirinkote meniu.',
     'assoc_users'	 => 'Ši licenzija šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite licenziją ir tik tuomet bandykite vėl ištrinti. ',
+    'select_asset_or_person' => 'Turite pasirinkti turtą arba naudotoją, bet ne abu.',
 
 
     'create' => array(
@@ -23,7 +24,7 @@ return array(
         'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
         'success' => 'Failas (-ai) sėkmingai įkelti.',
         'nofiles' => 'Jūs nepasirinkote įkelti jokių failų arba failas, kurį ketinate įkelti yra per didelis',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'Vienas ar keli jūsų failai yra per dideli arba yra neleidžiamas failų tipas. Leidžiami failų tipai yra png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ir lic.',
     ),
 
     'update' => array(

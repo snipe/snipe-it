@@ -1,21 +1,21 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'about_locations_title'     => 'Байршлын тухай',
+    'about_locations'           => 'Байршил нь хэрэглэгчид, эд хөрөнгө, бусад зүйлсийн байршлын мэдээллийг хянахад ашиглагддаг',
+    'assets_rtd'                => 'Актив', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Активыг хуваарилсан',
     'id'                        => 'ID',
-    'city'                      => 'City',
-    'state'                     => 'State',
-    'country'                   => 'Country',
-    'create'                    => 'Create Location',
-    'update'                    => 'Update Location',
-    'name'                      => 'Location Name',
-    'address'                   => 'Address',
-    'zip'                       => 'Postal Code',
-    'locations'                 => 'Locations',
-    'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'city'                      => 'Хот',
+    'state'                     => 'Улс',
+    'country'                   => 'Улс',
+    'create'                    => 'Байршлыг үүсгэх нь',
+    'update'                    => 'Байршлын мэдээллийг шинэчлэх',
+    'name'                      => 'Байршил нэр',
+    'address'                   => 'Хаяг',
+    'zip'                       => 'Шуудангийн код',
+    'locations'                 => 'Байршил',
+    'parent'                    => 'Эцэг эх',
+    'currency'                  => 'Байршил валют',
+    'ldap_ou'                   => 'LDAP хайлт ОУ',
     );

@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'actions'	 	=> 'செயல்கள்',
+    'action' 		=> 'அதிரடி',
+    'by'      		=> 'மூலம்',
+    'item' 			=> 'பொருள்',
 
 );

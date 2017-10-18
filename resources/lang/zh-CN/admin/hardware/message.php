@@ -24,8 +24,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> '尝试一下',
+        'success' 		=> '资产审计已成功记录。'
     ),
 
 
@@ -53,7 +53,7 @@ return array(
     'delete' => array(
         'confirm'   	=> '你确定要删除这个资产吗？',
         'error'   		=> '删除资产的过程中出现了一点儿问题，请重试。',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'nothing_updated'   => '没有选择任何资产，所以没有删除任何资产。',
         'success' 		=> '资产成功被删除。'
     ),
 

@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Oprette aktiv Model',
+    'created_at' 			=> 'Oprettet af',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> 'Modelnummer',
+    'name'      			=> 'Aktiv modelnavn',
+    'numassets' 			=> 'Aktiver',
+    'title'					=> 'Aktiv Modeller',
+    'update'				=> 'Opdatere aktiv model',
+    'view'					=> 'Se aktiv model',
+    'update'				=> 'Opdatere aktiv model',
+    'clone'				=> 'Klon model',
+    'edit'				=> 'Redigere model',
 );

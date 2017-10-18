@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> '您正在授權的資產不存在。',
     'owner_doesnt_match_asset' => '您正在授權的資產已被其他人佔用，請重新選擇。',
     'assoc_users'	 => '此授權已分配給某個使用者，目前不能被刪除，請檢查後重試。',
+    'select_asset_or_person' => '您必須選擇資產或用戶，但不能同時選擇兩者。',
 
 
     'create' => array(

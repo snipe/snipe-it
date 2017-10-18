@@ -3,25 +3,25 @@
 return array(
 
     'does_not_exist' => 'Beliggenhed findes ikke.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'assoc_users'	 => 'Denne placering er i øjeblikket forbundet med mindst en bruger og kan ikke slettes. Opdater dine brugere for ikke længere at henvise til denne placering, og prøv igen.',
+    'assoc_assets'	 => 'Denne placering er i øjeblikket forbundet med mindst ét ​​aktiv og kan ikke slettes. Opdater dine aktiver for ikke længere at henvise til denne placering, og prøv igen.',
+    'assoc_child_loc'	 => 'Denne placering er for øjeblikket forælder på mindst et barns placering og kan ikke slettes. Opdater dine placeringer for ikke længere at henvise til denne placering, og prøv igen.',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Placeringen blev ikke oprettet, prøv igen.',
+        'success' => 'Placering oprettet med succes.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Placeringen blev ikke opdateret, prøv igen',
+        'success' => 'Placering opdateret med succes.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Er du sikker på, at du vil slette denne placering?',
+        'error'   => 'Der opstod et problem ved at slette placeringen. Prøv igen.',
+        'success' => 'Placeringen blev slettet korrekt.'
     )
 
 );

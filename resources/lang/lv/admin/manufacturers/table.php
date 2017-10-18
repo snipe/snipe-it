@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'about_manufacturers_title'    => 'Par ražotājiem',
+    'about_manufacturers_text'  => 'Ražotāji ir uzņēmumi, kas veido jūsu aktīvus. Šeit varat saglabāt svarīgu atbalsta kontaktinformāciju par tiem, kas tiks parādīti jūsu detalizētās informācijas lapās.',
+    'asset_manufacturers'	=> 'Aktīvu ražotāji',
+    'create'				=> 'Izveidojiet ražotāju',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Nosaukums',
+    'support_email'   		=> 'Atbalsta e-pastu',
+    'support_phone'   		=> 'Atbalsta tālruni',
+    'support_url'   		=> 'Atbalsta URL',
+    'update'				=> 'Atjaunināt ražotāju',
     'url'   				=> 'URL',
 
 );

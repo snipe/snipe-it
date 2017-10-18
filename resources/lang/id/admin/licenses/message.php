@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'Aset yang hendak di asosiasikan dengan lisensi ini tidak ada.',
     'owner_doesnt_match_asset' => 'Aset yang hendak di asosiasikan dengan lisensi ini di miliki oleh seseorang yang tidak masuk dalam daftar.',
     'assoc_users'	 => 'Lisensi ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek lisensi terlebih dahulu kemudian coba hapus kembali. ',
+    'select_asset_or_person' => 'Anda harus memilih aset atau pengguna, namun tidak keduanya.',
 
 
     'create' => array(
@@ -23,7 +24,7 @@ return array(
         'error'   => 'Berkas belum terunggah. Silakan coba kembali.',
         'success' => 'Berkas sukses terunggah.',
         'nofiles' => 'Anda belum memilih berkas untuk di unggah, atau berkas yang akan di unggah terlalu besar ukurannya',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'Satu atau lebih file Anda terlalu besar atau merupakan jenis filetype yang tidak diizinkan. Filetype yang diperbolehkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, dan lic.',
     ),
 
     'update' => array(

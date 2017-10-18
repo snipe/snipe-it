@@ -1,6 +1,6 @@
 <?php
 return [
     'about_companies_title'            => 'Σχετικά με τις εταιρείες',
-    'about_companies_text'                  => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'about_companies_text'                  => 'Οι εταιρείες μπορούν να χρησιμοποιηθούν ως απλό πεδίο αναγνωριστικών ή μπορούν να χρησιμοποιηθούν για τον περιορισμό της ορατότητας των περιουσιακών στοιχείων, των χρηστών κ.λπ., εάν έχει ενεργοποιηθεί η πλήρης υποστήριξη της εταιρείας στις ρυθμίσεις διαχειριστή.',
     'select_company' => 'Επιλογή εταιρείας',
 ];

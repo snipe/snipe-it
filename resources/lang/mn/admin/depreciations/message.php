@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Элэгдлийн анги байхгүй байна.',
+    'assoc_users'	 => 'Энэ элэгдэл нэг буюу хэд хэдэн загвартай холбоотой бөгөөд устгах боломжгүй. Загваруудыг устгаж, дараа нь устгахыг оролдоно уу.',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Элэгдэлийн анги үүссэнгүй, дахин оролдоно уу. :(',
+        'success' => 'Элэгдэлийн элэгдэл бий болсон. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Элэгдэлийн анги шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Элэгдэлийн ангилал амжилттай шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Та энэ элэгдлийн ангилалыг устгахыг хүсч байгаадаа итгэлтэй байна уу?',
+        'error'   => 'Элэгдлийн анги устгах асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Элэгдэлийн анги амжилттай устгасан.'
     )
 
 );

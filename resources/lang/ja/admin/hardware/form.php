@@ -14,6 +14,7 @@ return array(
     'cost'				=> '購入費用',
     'create'			=> '資産を作成',
     'date'				=> '購入日',
+    'depreciation'	    => '減価償却費',
     'depreciates_on'	=> '原価償却対象',
     'default_location'	=> '既定の設置場所',
     'eol_date'			=> 'EOL日付',

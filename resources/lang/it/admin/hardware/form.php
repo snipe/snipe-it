@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confirm Bulk Delete Assets',
+	'bulk_delete'		=> 'Confermi elementi di eliminazione di massa',
   'bulk_delete_help'	=> 'Rivedi gli assets sottostanti per la cancellazione massiva. Una volta cancellati, questi assets potranno essere ripristinati, ma non saranno più associati ad alcun utente cui siano attualmente assegnati.',
   'bulk_delete_warn'	=> 'Stai per cancellare :asset_count assets.',
 	'bulk_update'		=> 'Aggiornamento quantità beni',
@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Costo acquisto',
     'create'			=> 'Creare bene',
     'date'				=> 'Data di acquisto',
+    'depreciation'	    => 'Ammortamento',
     'depreciates_on'	=> 'Deprezza Si',
     'default_location'	=> 'Posizione predefinita',
     'eol_date'			=> 'Data EOL',

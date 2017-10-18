@@ -4,19 +4,19 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'புதுப்பித்தல் போது ஒரு பிழை ஏற்பட்டது.',
+        'success'               => 'அமைப்புகள் வெற்றிகரமாக புதுப்பிக்கப்பட்டன.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'இந்த காப்புப் பிரதி கோப்பை நிச்சயமாக நீக்க விரும்புகிறீர்களா? இந்த செயலைச் செயல்தவிர்க்க முடியாது.',
+        'file_deleted'          => 'காப்புப்பதிவு வெற்றிகரமாக நீக்கப்பட்டது.',
+        'generated'             => 'ஒரு புதிய காப்புப்பதிவு வெற்றிகரமாக உருவாக்கப்பட்டது.',
+        'file_not_found'        => 'அந்த காப்புப் பிரதி சர்வரில் கண்டுபிடிக்க முடியவில்லை.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'அகற்றும் போது பிழை ஏற்பட்டது.',
+        'validation_failed'     => 'உங்கள் தூய்மைப்படுத்தல் உறுதிப்படுத்தல் தவறானது. உறுதிப்படுத்தல் பெட்டியில் "DELETE" என்ற வார்த்தையை தயவுசெய்து தட்டச்சு செய்யவும்.',
+        'success'               => 'நீக்கப்பட்ட பதிவுகள் வெற்றிகரமாக நீக்கப்பட்டன.'
     ),
 
 );

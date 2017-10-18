@@ -2,81 +2,80 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Advarsel: </strong> Dette aktiv er blevet markeret som uudnytteligt. Hvis denne status er ændret, skal du opdatere aktivstatus.',
+    'does_not_exist' 	=> 'Asset eksisterer ikke.',
+    'does_not_exist_or_not_requestable' => 'Godt forsøgt. Det pågældende aktiv eksisterer ikke eller kan ikke anmodes om.',
+    'assoc_users'	 	=> 'Dette aktiv er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller aktivet først, og prøv derefter at slette igen.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Akten blev ikke oprettet, prøv igen. :(',
+        'success' 		=> 'Aktivet blev oprettet med succes. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Akten blev ikke opdateret, prøv igen',
+        'success' 			=> 'Asset opdateret med succes.',
+        'nothing_updated'	=>  'Ingen felter blev valgt, så intet blev opdateret.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Akten blev ikke gendannet, prøv igen',
+        'success' 		=> 'Asset restaureret med succes.'
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Assetrevision mislykkedes. Prøv igen.',
+        'success' 		=> 'Asset audit succesfuldt logget.'
     ),
 
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Filen er ikke slettet. Prøv igen.',
+        'success' => 'Filen er slettet korrekt.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Fil (er) ikke uploadet. Prøv igen.',
+        'success' => 'Fil (er), der blev uploadet korrekt.',
+        'nofiles' => 'Du valgte ikke nogen filer til upload, eller filen du forsøger at uploade er for stor',
+        'invalidfiles' => 'En eller flere af dine filer er for store eller er en filtype, der ikke er tilladt. Tilladte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Nogle elementer importerede ikke korrekt.',
+        'errorDetail'           => 'Følgende elementer blev ikke importeret på grund af fejl.',
+        'success'               => "Din fil er blevet importeret",
+        'file_delete_success'   => "Din fil er blevet slettet korrekt",
+        'file_delete_error'      => "Filen kunne ikke slettes",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Er du sikker på, at du vil slette dette aktiv?',
+        'error'   		=> 'Der opstod et problem ved at slette aktivet. Prøv igen.',
+        'nothing_updated'   => 'Ingen aktiver blev valgt, så intet blev slettet.',
+        'success' 		=> 'Aktivet blev slettet med succes.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'Akten blev ikke tjekket ud, prøv igen',
+        'success' 		=> 'Asset tjekket ud med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
+        'not_available' => 'Det aktiv er ikke tilgængeligt for kassen!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'Akten blev ikke tjekket ind, prøv igen',
+        'success' 		=> 'Asset tjekket ind med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
+        'already_checked_in'  => 'Det aktiv er allerede kontrolleret.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'Akten blev ikke anmodet om, prøv igen',
+        'success' 		=> 'Akten blev bedt om succes.',
+        'canceled'      => 'Afbestillingsanmodningen er aflyst'
     )
 
 );

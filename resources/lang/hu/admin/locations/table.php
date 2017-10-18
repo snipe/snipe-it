@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations_title'     => 'A Helyekről',
+    'about_locations'           => 'A helyek a felhasználók, az eszközök és egyéb elemek helyadatait nyomon követik',
     'assets_rtd'                => 'Eszközök', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Hozzárendelt eszközök',
     'id'                        => 'ID',
@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'Helyek',
     'parent'                    => 'Szülő',
     'currency'                  => 'Helyi valuta',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'LDAP keresés OU',
     );

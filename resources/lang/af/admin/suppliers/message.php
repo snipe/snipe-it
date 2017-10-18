@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Verskaffer bestaan ​​nie.',
+    'assoc_users'	 => 'Hierdie verskaffer is tans geassosieer met ten minste een model en kan nie uitgevee word nie. Dateer asseblief jou modelle op om nie langer hierdie verskaffer te verwys nie en probeer weer.',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Verskaffer is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Verskaffer geskep suksesvol.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Verskaffer is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Verskaffer suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Is jy seker jy wil hierdie verskaffer uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die verskaffer. Probeer asseblief weer.',
+        'success' => 'Verskaffer is suksesvol verwyder.'
     )
 
 );

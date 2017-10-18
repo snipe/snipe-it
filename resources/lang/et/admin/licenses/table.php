@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Määratud',
+    'checkout'   		=> 'Sees väljas',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> 'Litsentsi e-post',
+    'license_name'   	=> 'Litsentseeritud',
+    'purchase_date'   	=> 'Ostu kuupäev',
+    'purchased'   		=> 'Ostetud',
+    'seats'   			=> 'Istekohad',
+    'hardware'   		=> 'Riistvara',
+    'serial'   			=> 'Seerianumber',
+    'title'      		=> 'Litsents',
 
 );

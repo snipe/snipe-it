@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Нийлүүлэгч байхгүй байна.',
+    'assoc_users'	 => 'Энэ нийлүүлэгч одоогоор хамгийн багадаа нэг загвартай холбоотой бөгөөд устгах боломжгүй байна. Энэ загварыг дахин ашиглахгүй байхын тулд загвараа шинэчлээд дахин оролдоно уу.',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Нийлүүлэгч үүсгээгүй байна, дахин оролдоно уу.',
+        'success' => 'Ханган нийлүүлэгч амжилтанд хүрсэн.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Нийлүүлэгч шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Ханган нийлүүлэгч амжилттай шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Та энэ нийлүүлэгчийг устгахыг хүсэж байна уу?',
+        'error'   => 'Ханган нийлүүлэгчийг устгах асуудал гарч байсан. Дахин оролдоно уу.',
+        'success' => 'Ханган нийлүүлэгч амжилттай устгагдсан.'
     )
 
 );

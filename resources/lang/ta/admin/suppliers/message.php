@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'சப்ளையர் இல்லை.',
+    'assoc_users'	 => 'இந்த சப்ளையர் தற்போது குறைந்தது ஒரு மாதிரியுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. இந்த சப்ளையரை இனி குறிப்பிடாமல் உங்கள் மாடல்களை புதுப்பித்து மீண்டும் முயற்சிக்கவும்.',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'சப்ளையர் உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'சப்ளையர் வெற்றிகரமாக உருவாக்கப்பட்டது.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'சப்ளையர் புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' => 'சப்ளையர் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'இந்த சப்ளையரை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
+        'error'   => 'சப்ளையரை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'சப்ளையர் வெற்றிகரமாக நீக்கப்பட்டது.'
     )
 
 );

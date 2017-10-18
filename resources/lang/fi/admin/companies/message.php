@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Yhtiötä ei ole olemassa.',
+    'assoc_users'    => 'Tällä yrityksellä on tällä hetkellä vähintään yksi malli, eikä sitä voi poistaa. Päivitä malleja, jotta ne eivät enää viittaa kyseiseen yritykseen ja yritä uudelleen.',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Yhtiötä ei luotu, yritä uudelleen.',
+        'success' => 'Yritys luotiin onnistuneesti.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Yhtiötä ei ole päivitetty, yritä uudelleen',
+        'success' => 'Yritys päivitettiin onnistuneesti.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Haluatko varmasti poistaa tämän yrityksen?',
+        'error'   => 'Yrityksen poistaminen tapahtui. Yritä uudelleen.',
+        'success' => 'Yritys poistettiin onnistuneesti.'
     )
 );

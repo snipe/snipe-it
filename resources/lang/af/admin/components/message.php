@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponent bestaan ​​nie.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponent is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Komponent geskep suksesvol.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponent is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Komponent suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Is jy seker jy wil hierdie komponent uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die komponent. Probeer asseblief weer.',
+        'success' => 'Die komponent is suksesvol verwyder.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponent is nie nagegaan nie, probeer asseblief weer',
+        'success' 		=> 'Komponent is suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponent is nie nagegaan nie, probeer asseblief weer',
+        'success' 		=> 'Komponent is suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
     )
 
 

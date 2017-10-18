@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Potrošnja ne postoji.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Potrošnja nije izrađena, pokušajte ponovo.',
+        'success' => 'Potrošnja je uspješno stvorena.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Potrošnja nije ažurirana, pokušajte ponovo',
+        'success' => 'Potrošni proizvodi su uspješno ažurirani.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Jeste li sigurni da želite izbrisati ovaj potrošni materijal?',
+        'error'   => 'Došlo je do problema s brisanjem potrošnog materijala. Molim te pokušaj ponovno.',
+        'success' => 'Potrošni materijal je uspješno izbrisan.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Potrošnja nije provjerena, pokušajte ponovo',
+        'success' 		=> 'Isporuka potrošnog materijala uspješno je provjerena.',
+        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Potrošnja nije provjerena, pokušajte ponovo',
+        'success' 		=> 'Potrošni materijal uspješno je provjeren.',
+        'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.'
     )
 
 

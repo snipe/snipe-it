@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_models_title'     => 'About Asset Models',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-    'requestable'               => 'Users may request this model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'about_models_title'     => 'சொத்து மாடல்களைப் பற்றி',
+    'about_models_text'           => 'சொத்து மாதிரிகள் ஒரே மாதிரியான சொத்துக்களை குழுவாக மாற்றுகின்றன. "MBP 2013", "ஐபோன் 6s", முதலியன',
+    'deleted'  					        => 'இந்த மாதிரி நீக்கப்பட்டது. <a href="/hardware/models/:model_id/restore"> அதை மீட்டமைக்க இங்கு கிளிக் செய்க. </a>.',
+    'restore'                   => 'மாடலை மீட்டெடுக்கவும்',
+    'requestable'               => 'பயனர்கள் இந்த மாதிரியைக் கோரலாம்',
+	'show_mac_address'			      => 'இந்த மாடலில் சொத்துகளில் MAC முகவரியினைக் காட்டு',
+    'view_deleted'              => 'காண்க நீக்கப்பட்டது',
+    'view_models'               => 'மாதிரிகள் காண்க',
+    'fieldset'                  => 'fieldset',
+    'no_custom_field'           => 'விருப்ப துறைகள் இல்லை',
 
 );

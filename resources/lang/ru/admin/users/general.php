@@ -13,7 +13,7 @@ return array(
     'filetype_info'     => 'Разрешенные типы файлов: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'history_user'      => 'История для :name',
 	'info'				=> 'Информация',
-    'restore_user'		=> 'Click here to restore them.',
+    'restore_user'		=> 'Нажмите здесь, чтобы восстановить их.',
     'last_login'        => 'Последний вход',
     'ldap_config_text'  => 'Параметры конфигурации LDAP можно найти Администратор > Параметры. Выбранное местоположение будет установлено для всех импортируемых пользователей. (Необязательно).',
     'software_user'     => 'Программное обеспечение привязано к :name',

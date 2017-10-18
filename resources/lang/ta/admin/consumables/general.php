@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'checkout'                          => 'Checkout Consumable to User',
-    'consumable_name'                   => 'Consumable Name',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
-    'total' 			                => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'நுகர்வோர் பற்றி',
+    'about_consumables_text'  			=> 'நுகர்வோர் காலப்போக்கில் பயன்படுத்தப்படும் என்று வாங்கிய எதையும் உள்ளன. உதாரணமாக, அச்சுப்பொறி மை அல்லது நகலி காகிதம்.',
+    'checkout'                          => 'பயனர் நுகர்வோர் காசோலை',
+    'consumable_name'                   => 'நுகர்வோர் பெயர்',
+    'create'                            => 'நுகர்வோர் உருவாக்க',
+    'item_no'                           => 'பொருள் எண்.',
+    'remaining' 			            => 'மீதமுள்ள',
+    'total' 			                => 'மொத்த',
+    'update'                            => 'நுகர்வோர் புதுப்பிக்கவும்',
 );

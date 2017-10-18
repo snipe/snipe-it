@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Model bestaan ​​nie.',
+    'assoc_users'	 => 'Hierdie model word tans geassosieer met een of meer bates en kan nie verwyder word nie. Verwyder asseblief die bates en probeer dan weer uitvee.',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Model is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Model suksesvol geskep.',
+        'duplicate_set' => '\'N Bate-model met die naam, vervaardiger en modelnommer bestaan ​​reeds.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Model is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Model suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Is jy seker jy wil hierdie batemodel uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die model. Probeer asseblief weer.',
+        'success' => 'Die model is suksesvol verwyder.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Model is nie herstel nie, probeer asseblief weer',
+        'success' 		=> 'Model herstel suksesvol.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Geen velde is verander nie, so niks is opgedateer nie.',
+        'success' 		=> 'Modelle opgedateer.'
     ),
 
 );

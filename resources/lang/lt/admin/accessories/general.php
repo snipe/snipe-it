@@ -6,7 +6,7 @@ return array(
     'accessory_category' 				=> 'Įrangos kategorija',
     'accessory_name'  					=> 'Įrangos pavadinimas',
     'checkout'  							=> 'Checkout Accessory',
-    'checkin'  							=> 'Checkin Accessory',
+    'checkin'  							=> 'Registracijos priedas',
     'create'  							=> 'Pridėti įrangą',
     'edit'  							=> 'Redaguoti aksesuarą',
     'eula_text'							=> 'EULA kategorija',

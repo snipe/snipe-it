@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Grupa jau pastāv!',
+    'group_not_found'     => 'Grupa [: id] nepastāv.',
+    'group_name_required' => 'Nosaukuma lauks ir nepieciešams',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Grupa tika veiksmīgi izveidota.',
+        'update' => 'Grupa tika veiksmīgi atjaunināta.',
+        'delete' => 'Grupa tika veiksmīgi izdzēsta.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Vai tiešām vēlaties dzēst šo grupu?',
+        'create' => 'Radās problēma, veidojot grupu. Lūdzu mēģiniet vēlreiz.',
+        'update' => 'Radās problēma, atjauninot grupu. Lūdzu mēģiniet vēlreiz.',
+        'delete' => 'Radās problēma, izdzēšot grupu. Lūdzu mēģiniet vēlreiz.',
     ),
 
 );

@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Šio naudotojo paskyra nėra aktyvuota.',
     'account_suspended'      => 'Šio naudotojo paskyra užšaldyta.',
     'account_banned'         => 'Šio vartojo paskyra užblokuota.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'throttle'               => 'Per daug bandymų prisijungti nepavyko. Prašome pabandyti dar kartą maždaug minučių (minutėmis).',
 
     'signin' => array(
         'error'   => 'Iškilo problema bandant prisijungti, prašome bandykite dar kartą.',

@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Oznaka statusa ne postoji.',
+    'assoc_assets'	 => 'Ova Statusna oznaka trenutačno je povezana s barem jednom Assetom i ne može se izbrisati. Ažurirajte svoju aktivu da više ne referira na taj status i pokušajte ponovo.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Oznaka statusa nije izrađena, pokušajte ponovo.',
+        'success' => 'Oznaka statusa uspješno je izrađena.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Oznaka statusa nije ažurirana, pokušajte ponovo',
+        'success' => 'Oznaka statusa uspješno je ažurirana.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'Jeste li sigurni da želite izbrisati ovu oznaku statusa?',
+        'error'   => 'Došlo je do problema s brisanjem oznake stanja. Molim te pokušaj ponovno.',
+        'success' => 'Oznaka statusa uspješno je izbrisana.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'Ova se imovina ne može dodijeliti nikome.',
+        'deployable'   => 'Ova se imovina može provjeriti. Nakon dodjeljivanja, oni će preuzeti meta status <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'archived'   => 'Ove se imovine ne može izbrisati, a prikazat će se samo u arhiviranom vlasničkom pregledu. To je korisno za zadržavanje informacija o imovini za proračunsko / povijesne svrhe, ali ih ne bi smjelo ostati iz dnevnog popisa imovine.',
+        'pending'   => 'Ovu imovinu još se ne može dodijeliti nikome, često se koristi za predmete koji se vraćaju na popravak, ali se očekuje povratak u promet.',
+    ),
 
 );

@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Waardeverminderingsklas bestaan ​​nie.',
+    'assoc_users'	 => 'Hierdie waardevermindering word tans geassosieer met een of meer modelle en kan nie uitgevee word nie. Skrap asseblief die modelle, en probeer dan weer uitvee.',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Waardeverminderingsklas is nie geskep nie, probeer asseblief weer. :(',
+        'success' => 'Depresiasieklas geskep suksesvol. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Waardeverminderingsklas is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Waardeverminderingsklas suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Is jy seker jy wil hierdie depresiasieklas verwyder?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die waardeverminderingsklas. Probeer asseblief weer.',
+        'success' => 'Die waardeverminderingsklas is suksesvol verwyder.'
     )
 
 );

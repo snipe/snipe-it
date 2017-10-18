@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Компани байхгүй байна.',
+    'assoc_users'    => 'Энэ компани одоогоор хамгийн багадаа нэг загвартай холбоотой бөгөөд устгах боломжгүй байна. Энэ компанийг цаашид лавлахын тулд загвараа шинэчлээд дахин оролдоно уу.',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Компани бүтээгдээгүй, дахин оролдоно уу.',
+        'success' => 'Компани амжилттай байгуулагдсан.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Компани шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Компани амжилттай шинэчлэгдсэн.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Та энэ компанийг устгахыг хүсч байгаадаа итгэлтэй байна уу?',
+        'error'   => 'Компаниыг устгахад асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Компани амжилттай устгасан.'
     )
 );

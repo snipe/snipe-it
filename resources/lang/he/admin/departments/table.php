@@ -2,10 +2,10 @@
 
 return array(
 
-    'id'                        => 'ID',
-    'name'                      => 'Department Name',
-    'manager'                   => 'Manager',
-    'location'                  => 'Location',
-    'create'                    => 'Create Department',
-    'update'                    => 'Update Department',
+    'id'                        => 'תְעוּדַת זֶהוּת',
+    'name'                      => 'שם מחלקה',
+    'manager'                   => 'מנהל',
+    'location'                  => 'מקום',
+    'create'                    => 'יצירת המחלקה',
+    'update'                    => 'עדכון המחלקה',
     );

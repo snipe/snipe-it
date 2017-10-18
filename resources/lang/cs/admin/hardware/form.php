@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Pořizovací cena',
     'create'			=> 'Vytvořit záznam majetku',
     'date'				=> 'Datum pořízení',
+    'depreciation'	    => 'Amortizace',
     'depreciates_on'	=> 'Odepisuje se',
     'default_location'	=> 'Výchozí umístění',
     'eol_date'			=> 'Konec životnosti',

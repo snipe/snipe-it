@@ -2,23 +2,23 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'asset_tag'   	=> 'Bate-tag',
+    'asset_model'       => 'model',
+    'book_value'  	=> 'waarde',
+    'change' 		=> 'In uit',
+    'checkout_date' => 'Checkout Datum',
+    'checkoutto' 	=> 'Gekontroleer',
+    'diff' 			=> 'diff',
+    'dl_csv' 		=> 'Laai CSV af',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
+    'location' 		=> 'plek',
+    'purchase_cost'	=> 'koste',
+    'purchase_date'	=> 'gekoop',
     'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'status'   		=> 'status',
+    'title'      	=> 'bate',
+    'image'		=> 'Toestelbeeld',
+    'days_without_acceptance' => 'Dae sonder aanvaarding'
 
 );

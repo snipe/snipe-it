@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> '자산 감사가 실패했습니다. 다시 시도해 주세요.',
+        'success' 		=> '자산 감사가 성공적으로 기록되었습니다.'
     ),
 
 

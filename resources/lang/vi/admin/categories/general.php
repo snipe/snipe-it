@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'Chính sửa hạng mục',
     'eula_text'							=> 'Danh mục EULA',
     'eula_text_help'					=> 'Đây là trường cho phép bạn điều chỉnh EULA cho những loại tài sản riêng biệt. Nếu bạn chỉ có một EULA cho tất cả tài sản, bạn có thể nhấn chọn vào ô bên dưới để sử dụng như là giá trị mặc định.',
-    'name'                              => 'Category Name',
+    'name'                              => 'tên danh mục',
     'require_acceptance'				=> 'Yêu cầu người dùng xác nhận nhận tài sản trong hạng mục này.',
     'required_acceptance'				=> 'Người dùng sẽ nhận được email có chứa đường dẫn để xác nhận chấp nhận tài sản này.',
     'required_eula'						=> 'Đây là người dùng đã được gửi một email bản sao của EULA',

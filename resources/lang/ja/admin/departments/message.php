@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => '部署が見つかりません',
+    'assoc_users'	 => 'この部署は1人以上の利用者に関連付けされているため、削除できません。部署の関連付けを削除してから、もう一度試して下さい。 ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => '部署が作成できませんでした。もう一度やり直して下さい。',
+        'success' => '部署が作成されました。'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => '部署が編集できませんでした。もう一度やり直して下さい',
+        'success' => '部署が更新されました。'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> '本当にこの部署を削除してもよろしいですか?',
+        'error'   => '部署を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'success' => '部署は削除されました。'
     )
 
 );

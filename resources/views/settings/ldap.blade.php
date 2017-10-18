@@ -34,9 +34,13 @@
     @else
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'false', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
     <!-- CSRF Token -->
     {{csrf_field()}}
+
+    <!-- this is a hack to prevent Chrome from trying to autocomplete fields -->
+    <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
+    <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">

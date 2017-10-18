@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Einkaufspreis',
     'create'			=> 'Asset erstellen',
     'date'				=> 'Kaufdatum',
+    'depreciation'	    => 'Abschreibung',
     'depreciates_on'	=> 'Abschreiben auf',
     'default_location'	=> 'Standard Lagerort',
     'eol_date'			=> 'End of Live Datum (Ende der Nutzungsdauer)',

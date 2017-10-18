@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
+    'create'				=> 'Izradi model aktive',
     'created_at' 			=> 'Created at',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> 'Model br.',
+    'name'      			=> 'Naziv imovine',
+    'numassets' 			=> 'Imovina',
+    'title'					=> 'Modeli imovine',
+    'update'				=> 'Ažuriraj model aktive',
+    'view'					=> 'Prikaz modela aktive',
+    'update'				=> 'Ažuriraj model aktive',
+    'clone'				=> 'Klon model',
+    'edit'				=> 'Uredi model',
 );

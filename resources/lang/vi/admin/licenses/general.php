@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Về giấy phép',
+    'about_licenses'                  => 'Giấy phép được sử dụng để theo dõi phần mềm. Họ có một số lượng ghế xác định mà có thể được kiểm tra ra cho cá nhân',
     'checkin'  					=> 'Checkin bản quyền đặt vào',
     'checkout_history'  		=> 'Lịch sử Checkout',
     'checkout'  				=> 'Checkout bản quyền đặt vào',

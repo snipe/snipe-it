@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Request',
-    'submit'  	                => 'Submit',
-    'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
+    'actions' 	                => 'פעולות',
+    'add'    	                => 'הוסף חדש',
+    'cancel'                    => 'לְבַטֵל',
+    'checkin_and_delete'  	    => 'מחק & מחק משתמש',
+    'delete'  	                => 'לִמְחוֹק',
+    'edit'    	                => 'לַעֲרוֹך',
+    'restore' 	                => 'לשחזר',
+    'request'                   => 'בַּקָשָׁה',
+    'submit'  	                => 'שלח',
+    'upload'                    => 'העלה',
+	'select_file'				=> 'בחר קובץ...',
 );

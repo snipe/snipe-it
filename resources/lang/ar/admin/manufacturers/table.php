@@ -2,15 +2,15 @@
 
 return array(
     'about_manufacturers_title'    => 'حول الشركات المصنعة',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_text'  => 'الشركات المصنعة هي الشركات التي تخلق الأصول الخاصة بك. يمكنك تخزين معلومات الاتصال بالدعم المهمة عنها هنا، والتي سيتم عرضها على صفحات تفاصيل مادة العرض.',
     'asset_manufacturers'	=> 'مصنعين الأصول',
     'create'				=> 'إنشاء شركة مصنعة',
     'id'   					=> 'رقم التعريف',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'اسم',
+    'support_email'   		=> 'دعم البريد الإلكتروني',
+    'support_phone'   		=> 'دعم الهاتف',
+    'support_url'   		=> 'عنوان ورل للدعم',
+    'update'				=> 'تحديث الشركة المصنعة',
     'url'   				=> 'URL',
 
 );

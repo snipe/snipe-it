@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Satın Alma Ücreti',
     'create'			=> 'Demirbaş Oluştur',
     'date'				=> 'Satın Alma Tarihi',
+    'depreciation'	    => 'Amortisman',
     'depreciates_on'	=> 'Amortisman',
     'default_location'	=> 'Varsayılan Konum',
     'eol_date'			=> 'Ömür',

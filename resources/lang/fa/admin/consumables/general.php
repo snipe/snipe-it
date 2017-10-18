@@ -3,7 +3,7 @@
 return array(
     'about_consumables_title' 			=> 'درباره مواد مصرفی',
     'about_consumables_text'  			=> 'مواد مصرفی هر چیزی خریداری خواهد شد که تا در طول زمان استفاده می شود. به عنوان مثال، جوهر چاپگر کاغذ دستگاه کپی.',
-    'checkout'                          => 'Checkout Consumable to User',
+    'checkout'                          => 'پرداخت هزینه قابل مصرف به کاربر',
     'consumable_name'                   => 'نام های مصرفی',
     'create'                            => 'ایجاد مواد مصرفی',
     'item_no'                           => 'شماره مورد ',

@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'הרכיב אינו קיים.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'הרכיב לא נוצר, נסה שוב.',
+        'success' => 'הרכיב נוצר בהצלחה.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'הרכיב לא עודכן, נסה שוב',
+        'success' => 'הרכיב עודכן בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק רכיב זה?',
+        'error'   => 'הייתה בעיה במחיקת הרכיב. בבקשה נסה שוב.',
+        'success' => 'הרכיב נמחק בהצלחה.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'הרכיב לא נבדק, נסה שוב',
+        'success' 		=> 'רכיב הוצא בהצלחה.',
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'הרכיב לא נבדק, נסה שוב',
+        'success' 		=> 'רכיב נבדק בהצלחה.',
+        'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.'
     )
 
 

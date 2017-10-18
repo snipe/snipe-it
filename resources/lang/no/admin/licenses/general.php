@@ -2,7 +2,7 @@
 
 return array(
     'about_licenses_title'            => 'Om lisenser',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses'                  => 'Lisenser er brukt til å spore bruk av programvare.  De har et angitt antall seter som kan sjekkes ut til enkeltpersoner',
     'checkin'  					=> 'Sjekk inn setelisens',
     'checkout_history'  		=> 'Utsjekkhistorikk',
     'checkout'  				=> 'Sjekk ut setelisens',

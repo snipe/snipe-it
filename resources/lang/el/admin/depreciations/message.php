@@ -7,13 +7,13 @@ return array(
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Δεν δημιουργήθηκε κλάση απόσβεσης, δοκιμάστε ξανά. :(',
+        'success' => 'Η κατηγορία απόσβεσης δημιουργήθηκε με επιτυχία. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Η κατηγορία απόσβεσης δεν ενημερώθηκε, δοκιμάστε ξανά',
+        'success' => 'Η τάξη απόσβεσης ενημερώθηκε με επιτυχία.'
     ),
 
     'delete' => array(

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'About Categories',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'about_categories_title' 			=> 'เกี่ยวกับประเภท',
+    'about_categories'  				=> 'หมวดหมู่ช่วยคุณจัดระเบียบรายการของคุณ หมวดหมู่ตัวอย่างบางประเภทอาจเป็น &quot;Desktops&quot;, &quot; แล็ปท็อป&quot;, &quot; โทรศัพท์มือถือ&quot;, &quot;Tablets&quot; เป็นต้นและคุณสามารถใช้งานประเภทต่างๆที่เหมาะสมกับคุณได้',
     'asset_categories' 					=> 'หมวดหมู่ทรัพย์สิน',
     'category_name'  					=> 'ชื่อหมวดหมู่',
     'checkin_email'                     => 'ส่งอีเมล์ถึงผู้ใช้เพื่อการเช็คอิน',
@@ -11,7 +11,7 @@ return array(
     'edit'                              => 'แก้ไขหมวดหมู่',
     'eula_text'							=> 'หมวดหมู่ข้อกำหนดการใช้งาน',
     'eula_text_help'					=> 'ส่วนนี้อนุญาตให้คุณสามารถทำการปรับแต่งข้อตกลงการใช้งานสำหรับกำหนดชนิดของทรัพย์สินได้ หากคุณมีข้อตกลงการใช้งานเพียงหนึ่ง หรือเรื่องเดียวที่ใช้ครอบคลุมทรัพย์สินของคุณทั้งหมด คุณสามารถตั้งค่าให้เป็นการใช้งานหลัก โดยการทำเครื่องหมายในช่องด้านล่างนี้',
-    'name'                              => 'Category Name',
+    'name'                              => 'ชื่อหมวดหมู่',
     'require_acceptance'				=> 'กำหนดให้ผู้ใช้ยืนยันยอมรับสินทรัพย์ในหมวดหมู่นี้',
     'required_acceptance'				=> 'ผู้ใช้นี้จะสามารถส่งอีเมล ด้วยลิงค์เพื่อการยืนยันยอมรับรายการนี้',
     'required_eula'						=> 'ผู้ใช้นี้จะส่งอีเมลสำเนาของ EULA',

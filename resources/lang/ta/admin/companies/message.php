@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'நிறுவனம் இல்லை.',
+    'assoc_users'    => 'இந்த நிறுவனம் தற்போது குறைந்தது ஒரு மாதிரியுடன் தொடர்புடையது மற்றும் நீக்கப்பட முடியாது. இந்த நிறுவனத்தை இனி குறிப்பிடாமல் உங்கள் மாடல்களை புதுப்பிக்கவும் மீண்டும் முயற்சிக்கவும்.',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'நிறுவனம் உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'நிறுவனம் வெற்றிகரமாக உருவாக்கப்பட்டது.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'நிறுவனம் புதுப்பிக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
+        'success' => 'நிறுவனம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'இந்த நிறுவனத்தை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
+        'error'   => 'நிறுவனத்தை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'நிறுவனம் வெற்றிகரமாக நீக்கப்பட்டது.'
     )
 );

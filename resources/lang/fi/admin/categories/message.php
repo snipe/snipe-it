@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Luokkaa ei löydy.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'Tällä luokalla on tällä hetkellä vähintään yksi malli, eikä sitä voi poistaa. Päivitä mallejasi, jotta et enää viitata tähän luokkaan ja yritä uudelleen.',
+    'assoc_items'	 => 'Tällä luokalla on tällä hetkellä vähintään yksi: asset_type ja sitä ei voi poistaa. Päivitä: asset_type ei enää viitata tähän luokkaan ja yritä uudelleen.',
 
     'create' => array(
         'error'   => 'Luokkaa ei luotu, yritä uudelleen.',

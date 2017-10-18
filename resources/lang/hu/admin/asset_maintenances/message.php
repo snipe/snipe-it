@@ -12,8 +12,8 @@
             'success' => 'Eszköz karbantartás sikeresen létrejött.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Az Eszközkarbantartást nem szerkesztették, próbálkozzon újra.',
+            'success' => 'Az Eszközkarbantartás sikeresen szerkesztett.'
         ],
         'asset_maintenance_incomplete' => 'Nincs kitöltve teljesen',
         'warranty'                     => 'Garancia',

@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'info'   => 'Select the options you want for your asset report.'
+    'info'   => 'Välj de alternativ du vill ha för din tillgångsrapport.'
 );

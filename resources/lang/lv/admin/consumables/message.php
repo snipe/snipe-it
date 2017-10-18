@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Patērējamais nav.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Patērējamais nav izveidots, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Izlietojamie tika veiksmīgi izveidoti.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Patērējamais nav atjaunināts, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Izlietojamie tiek veiksmīgi atjaunināti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Vai tiešām vēlaties izdzēst šo patērējamo?',
+        'error'   => 'Radās problēma, izdzēšot patērējamo. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Palīgmateriāls tika veiksmīgi dzēsts.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Neizdevās izņemt patēriņu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Izlietojamie izrakstīti veiksmīgi.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Paredzētais patēriņš netika reģistrēts, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Izlietojamie tiek veiksmīgi reģistrēti.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
     )
 
 

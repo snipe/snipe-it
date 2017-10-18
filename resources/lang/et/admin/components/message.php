@@ -10,7 +10,7 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
+        'error'   => 'Komponenti ei värskendatud, proovige uuesti',
         'success' => 'Komponendi muutmine õnnestus.'
     ),
 
@@ -21,14 +21,14 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
+        'error'   		=> 'Komponenti ei kontrollitud, palun proovige uuesti',
+        'success' 		=> 'Komponent on edukalt välja võetud.',
         'user_does_not_exist' => 'Vale kasutaja. Palun proovi uuesti.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
+        'error'   		=> 'Komponent ei olnud märgitud, palun proovige uuesti',
+        'success' 		=> 'Komponent on edukalt registreeritud.',
         'user_does_not_exist' => 'Vale kasutaja. Palun proovi uuesti.'
     )
 

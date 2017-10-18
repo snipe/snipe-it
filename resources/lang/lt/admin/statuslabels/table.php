@@ -10,7 +10,7 @@ return array(
     'name'      	=> 'Būklės pavadinimas',
     'pending'      	=> 'Vykdoma',
     'status_type'   => 'Būklės tipas',
-    'show_in_nav'   => 'Show in side nav',
+    'show_in_nav'   => 'Rodyti šoninį namą',
     'title'      	=> 'Būklės kortelės',
     'undeployable'  => 'Negalimas naudoti',
     'update'      	=> 'Atnaujinti būklės kortelę',

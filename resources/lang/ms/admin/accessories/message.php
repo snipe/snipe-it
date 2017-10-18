@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Aksesori ini tidak wujud.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'assoc_users'	 => 'Aksesori ini pada masa ini mempunyai: mengira item yang diperiksa kepada pengguna. Sila semak aksesori dan cuba lagi.',
 
     'create' => array(
         'error'   => 'Aksesori tidak dicipta, sila cuba lagi.',
@@ -22,15 +22,15 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Aksesori tidak diperiksa, sila cuba lagi',
+        'success' 		=> 'Aksesori diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Aksesori tidak diperiksa, sila cuba lagi',
+        'success' 		=> 'Aksesori diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
     )
 
 

@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'send_password_link'	        => 'Stuur wagwoord terugstel skakel',
+    'email_reset_password'			=> 'E-pos wagwoord herstel',
+    'reset_password'			    => 'Herstel wagwoord',
+    'login'                         => 'Teken aan',
+    'login_prompt'                  => 'Asseblief Login',
+    'forgot_password'               => 'ek het my wagwoord vergeet',
+    'remember_me'                   => 'Onthou my',
     ];
 

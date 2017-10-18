@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Daardie veld bestaan ​​nie.',
+        'already_added'   => 'Veld reeds bygevoeg',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Veld is nie geskep nie, probeer asseblief weer.',
+            'success' => 'Veld geskep suksesvol.',
+            'assoc_success' => 'Veld suksesvol bygevoeg tot veldtog.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Veld is nie opgedateer nie, probeer asseblief weer',
+            'success' => 'Veld suksesvol opgedateer.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Is jy seker jy wil hierdie veld uitvee?',
+            'error'   => 'Daar was \'n probleem met die verwydering van die veld. Probeer asseblief weer.',
+            'success' => 'Die veld is suksesvol verwyder.',
+            'in_use'   => 'Veld is nog steeds in gebruik.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Veldset bestaan ​​nie',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Veldtipe is nie geskep nie, probeer asseblief weer.',
+            'success' => 'Veldtipe suksesvol geskep.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Fieldset is nie opgedateer nie, probeer asseblief weer',
+            'success' => 'Veldset suksesvol opgedateer.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Is jy seker jy wil hierdie veldtog uitvee?',
+            'error'   => 'Daar was \'n probleem met die verwydering van die veldtog. Probeer asseblief weer.',
+            'success' => 'Die veldtog is suksesvol verwyder.',
+            'in_use'   => 'Veldset is nog steeds in gebruik.',
         )
 
     ),

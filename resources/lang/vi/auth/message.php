@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'Tài khoản người dùng này chưa được kích hoạt.',
     'account_suspended'      => 'Tài khoản người dùng này đã bị tạm ngưng.',
     'account_banned'         => 'Tài khoản người dùng này đã bị cấm.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'throttle'               => 'Quá nhiều lần đăng nhập thất bại. Vui lòng thử lại trong khoảng: phút phút phút.',
 
     'signin' => array(
         'error'   => 'Có vấn đề khi bạn có gắng đăng nhập, xin thử lại.',

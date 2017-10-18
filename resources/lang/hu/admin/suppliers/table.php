@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => 'A beszállítókról',
+    'about_suppliers_text'  => 'A szállítók a tételek forrását nyomon követik',
     'address'               => 'Beszállító címe',
     'assets'                => 'Eszközök',
     'city'                  => 'Város',

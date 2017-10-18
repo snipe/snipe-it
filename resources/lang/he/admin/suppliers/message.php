@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'הספק אינו קיים.',
+    'assoc_users'	 => 'ספק זה מחובר כרגע עם לפחות מודל אחד ולא ניתן למחוק אותו. אנא עדכן את המודלים שלך כדי לא להפנות עוד הספק הזה ונסה שוב.',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'הספק לא נוצר, נסה שוב.',
+        'success' => 'הספק נוצר בהצלחה.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'הספק לא עודכן, נסה שוב',
+        'success' => 'הספק עודכן בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק ספק זה?',
+        'error'   => 'היתה בעיה במחיקת הספק. בבקשה נסה שוב.',
+        'success' => 'הספק נמחק בהצלחה.'
     )
 
 );

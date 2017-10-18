@@ -2,7 +2,7 @@
 
 return array(
     'about_licenses_title'            => 'Informazioni sulle licenze',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses'                  => 'Le licenze vengono utilizzate per monitorare il software. Hanno un numero specifico di posti che possono essere verificati agli individui',
     'checkin'  					=> 'Registrare Licenza Sede',
     'checkout_history'  		=> 'Storico Estrazioni',
     'checkout'  				=> 'Estrazione Licenza Sede',

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => 'Informazioni sui fornitori',
+    'about_suppliers_text'  => 'I fornitori vengono utilizzati per monitorare la fonte degli articoli',
     'address'               => 'Indirizzo fornitore',
     'assets'                => 'Beni',
     'city'                  => 'Città',

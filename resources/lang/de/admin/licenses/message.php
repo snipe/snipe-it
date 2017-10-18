@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'Der Gegenstand den du mit dieser Lizenz verknüpfen willst existiert nicht.',
     'owner_doesnt_match_asset' => 'Der Gegenstand den du mit dieser Lizenz verknüpfen willst gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',
     'assoc_users'	 => 'Diese Kategorie ist derzeit mindestens einem Modell zugeordnet und kann nicht gelöscht werden. Bitte aktualisieren Sie Ihre Modelle, um nicht mehr auf diese Kategorie zu verweisen und versuchen Sie es erneut.',
+    'select_asset_or_person' => 'Sie müssen ein Asset oder einen Benutzer auswählen, aber nicht beides.',
 
 
     'create' => array(

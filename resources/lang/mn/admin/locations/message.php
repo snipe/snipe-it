@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'Байршил байхгүй байна.',
+    'assoc_users'	 => 'Энэ байршил нь одоогоор хамгийн багадаа нэг хэрэглэгчтэй холбоотой бөгөөд устгах боломжгүй байна. Энэ байршлыг лавшруулахгүй болгохын тулд хэрэглэгчдийг шинэчилнэ үү, дахин оролдоно уу.',
+    'assoc_assets'	 => 'Энэ байршил нь одоогоор нэгээс доошгүй активтай холбоотой бөгөөд устгах боломжгүй байна. Энэ байршлыг лавлагаа болгохоо болихын тулд өөрийн хөрөнгийг шинэчлээд дахин оролдоно уу.',
+    'assoc_child_loc'	 => 'Энэ байршил нь одоогоор хамгийн багадаа нэг хүүхдийн байрлалын эцэг эх бөгөөд устгах боломжгүй байна. Энэ байршлыг лавшруулахгүй болгохын тулд байршлаа шинэчлээд дахин оролдоно уу.',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Байршалт үүсээгүй байна, дахин оролдоно уу.',
+        'success' => 'Байршил амжилттай болсон.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Байршил шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Байршил амжилттай шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Та энэ байршлыг устгахыг хүсч байна уу?',
+        'error'   => 'Байршил устгах асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Байршил амжилттай устгагдсан байна.'
     )
 
 );

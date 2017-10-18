@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'create'            => 'Create License',
-    'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'asset'             => 'Aktīvs',
+    'checkin'           => 'Reģistrēties',
+    'create'            => 'Izveidot licenci',
+    'expiration'        => 'Derīguma termiņš',
+    'license_key'       => 'Produkta atslēga',
+    'maintained'        => 'Saglabāts',
+    'name'              => 'Programmatūras nosaukums',
+    'no_depreciation'   => 'Nepārliecieties',
+    'purchase_order'    => 'Pirkuma pasūtījuma numurs',
+    'reassignable'      => 'Piešķirt atkārtoti',
+    'remaining_seats'   => 'Atlikušie sēdekļi',
+    'seats'             => 'Sēdvietas',
+    'termination_date'  => 'Izbeigšanas datums',
+    'to_email'          => 'Licencēta uz e-pastu',
+    'to_name'           => 'Licencēta uz vārdu',
+    'update'            => 'Atjaunināt licenci',
+    'checkout_help'     => 'Jums jāpārbauda licence aparatūras aktīvam vai personai. Jūs varat izvēlēties abus, bet īpašnieka īpašumam ir jāatbilst personai, kurai veicat īpašuma pārbaudi.'
 );

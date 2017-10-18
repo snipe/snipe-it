@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Osakonda ei eksisteeri.',
+    'assoc_users'	 => 'See osakond on praegu seotud vähemalt ühe kasutajaga ja seda ei saa kustutada. Palun uuendage oma kasutajaid, et enam seda osakonda viideteta, ja proovige uuesti.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Osakonda ei loodud, proovige uuesti.',
+        'success' => 'Osakond loodi edukalt.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Osakonda ei värskendatud, proovige uuesti',
+        'success' => 'Osakond uuendati edukalt.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Kas olete kindel, et soovite selle osakonna kustutada?',
+        'error'   => 'Osakonna kustutamisel tekkis küsimus. Palun proovi uuesti.',
+        'success' => 'Osakond kustutati edukalt.'
     )
 
 );

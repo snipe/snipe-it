@@ -24,8 +24,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> '資產稽核失敗。請再試一次。',
+        'success' 		=> '資產稽核成功登錄。'
     ),
 
 

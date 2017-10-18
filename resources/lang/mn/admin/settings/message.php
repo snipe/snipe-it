@@ -4,19 +4,19 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'Шинэчлэлт хийх үед алдаа гарлаа.',
+        'success'               => 'Тохиргоо амжилттай болсон.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Та энэ нөөц файлыг устгахыг хүсч байна уу? Энэ үйлдлийг буцаах боломжгүй.',
+        'file_deleted'          => 'Нөөц файл амжилттай устгагдсан байна.',
+        'generated'             => 'Шинэ нөөц файл амжилттай болсон.',
+        'file_not_found'        => 'Энэ нөөц файлыг сервер дээрээс олж чадсангүй.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Цэвэрлэх явцад алдаа гарлаа.',
+        'validation_failed'     => 'Таны таслалтын баталгаа буруу байна. Баталгаажуулалтын хайрцагт "DELETE" үгийг оруулна уу.',
+        'success'               => 'Устсан бүртгэлийг амжилттай цэвэрлэж байна.'
     ),
 
 );

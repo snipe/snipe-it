@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Aceitou este artigo com sucesso.',
     'declined'                  => 'Recusou este artigo com sucesso.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'Seus usuários foram atualizados com sucesso, no entanto, sua entrada de gerente não foi salva porque o gerente que você selecionou também estava na lista de usuários para ser editada e os usuários podem não ser seu próprio gerente. Selecione seus usuários novamente, excluindo o gerente.',
     'user_exists'               => 'Utilizador já existe!',
     'user_not_found'            => 'Utilizador [:id] não existe.',
     'user_login_required'       => 'O atributo login é obrigatório',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Utilizador criado com sucesso.',
         'update'    => 'Utilizador atualizado com sucesso.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Os usuários foram atualizados com sucesso!',
         'delete'    => 'Utilizador removido com sucesso.',
         'ban'       => 'Utilizador desabilitado com sucesso.',
         'unban'     => 'Utilizador reabilitado com sucesso.',
@@ -31,7 +31,7 @@ return array(
         'create' => 'Ocorreu um problema ao criar o utilizador. Por favor, tente novamente.',
         'update' => 'Ocorreu um problema ao atualizar o utilizador. Por favor, tente novamente.',
         'delete' => 'Ocorreu um problema ao remover o utilizador. Por favor, tente novamente.',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => 'Este usuário tem itens atribuídos e não pôde ser excluído.',
         'unsuspend' => 'Ocorreu um problema ao retirar a suspensão ao utilizador. Por favor, tente novamente.',
         'import'    => 'Ocorreu um problema ao importar os utilizadores. Por favor, tente novamente.',
         'asset_already_accepted' => 'Este artigo já foi aceite.',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Não foi possível estabelecer uma vinculação com o servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP: ',
         'ldap_could_not_search' => 'Não foi possível pesquisar no servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',
         'ldap_could_not_get_entries' => 'Não foi possível obter registos do servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => 'A senha desta conta é gerenciada pelo LDAP / Active Directory. Entre em contato com seu departamento de TI para alterar sua senha.',
     ),
 
     'deletefile' => array(

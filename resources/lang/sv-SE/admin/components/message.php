@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponenten existerar inte.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponent skapades inte, försök igen.',
+        'success' => 'Komponent skapad framgångsrikt.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponenten uppdaterades inte, var god försök igen',
+        'success' => 'Komponent uppdaterad framgångsrikt.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Är du säker på att du vill radera den här komponenten?',
+        'error'   => 'Det gick inte att ta bort komponenten. Var god försök igen.',
+        'success' => 'Komponenten har tagits bort.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenten var inte utcheckad, försök igen',
+        'success' 		=> 'Komponent utcheckad framgångsrikt.',
+        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenten har inte kontrollerats, var vänlig försök igen',
+        'success' 		=> 'Komponent incheckad framgångsrikt.',
+        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.'
     )
 
 

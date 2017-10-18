@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'about_manufacturers_title'    => 'Oor vervaardigers',
+    'about_manufacturers_text'  => 'Vervaardigers is die maatskappye wat jou bates skep. U kan belangrike kontakbesonderhede vir ondersteuning hier opberg, wat op u bate detailbladsye vertoon sal word.',
+    'asset_manufacturers'	=> 'Bate Vervaardigers',
+    'create'				=> 'Skep vervaardiger',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'naam',
+    'support_email'   		=> 'Ondersteunings-e-pos',
+    'support_phone'   		=> 'Ondersteuningsfoon',
+    'support_url'   		=> 'Ondersteunings-URL',
+    'update'				=> 'Update Fabrikant',
     'url'   				=> 'URL',
 
 );

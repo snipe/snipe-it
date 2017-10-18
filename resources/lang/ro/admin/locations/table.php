@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'about_locations_title'     => 'Despre Locații',
+    'about_locations'           => 'Locațiile sunt utilizate pentru a urmări informațiile despre locație pentru utilizatori, active și alte elemente',
+    'assets_rtd'                => 'bunuri', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Assets Assigned',
     'id'                        => 'ID',
     'city'                      => 'Oras',
@@ -15,7 +15,7 @@ return array(
     'address'                   => 'Adresa',
     'zip'                       => 'Cod postal',
     'locations'                 => 'Locatii',
-    'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'parent'                    => 'Mamă',
+    'currency'                  => 'Locație Monedă',
+    'ldap_ou'                   => 'LDAP Căutați OU',
     );

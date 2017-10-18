@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Jūs sėkmingai priėmėte šią įrangą.',
     'declined'                  => 'Jūs sėkmingai atšaukėte šią įrangą.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'	        => 'Jūsų vartotojai buvo sėkmingai atnaujinti, tačiau jūsų valdytojo įrašas nebuvo išsaugotas, nes pasirinktas valdytojas taip pat buvo naudotojo sąraše, kurį reikia redaguoti, o vartotojai gali būti ne jų valdytojai. Prašome vėl pasirinkti naudotojus, išskyrus valdytoją.',
     'user_exists'               => 'Naudotojas jau yra!',
     'user_not_found'            => 'Naudotojas [:id] neegzistuoja.',
     'user_login_required'       => 'Prisijungimo laukelis privalomas',
@@ -17,7 +17,7 @@ return array(
     'success' => array(
         'create'    => 'Naudotojas sėkmingai sukurtas.',
         'update'    => 'Naudotojas sėkmingai atnaujintas.',
-        'update_bulk'    => 'Users were successfully updated!',
+        'update_bulk'    => 'Vartotojai buvo sėkmingai atnaujinti!',
         'delete'    => 'Naudotojas sėkmingai ištrintas.',
         'ban'       => 'Naudotojas sėkmingai užblokuotas.',
         'unban'     => 'Naudotojas sėkmingai atblokuotas.',
@@ -31,7 +31,7 @@ return array(
         'create' => 'Nepavyko sukurti naudotojo. Prašome bandykite dar kartą.',
         'update' => 'Nepavyko atnaujinti naudotojo. Prašome bandykite dar kartą.',
         'delete' => 'Nepavyko ištrinti naudotojo. Prašome bandykite dar kartą.',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => 'Šis vartotojas turi priskirtus elementus, kurių negalima ištrinti.',
         'unsuspend' => 'Nepavyko atšaldyti naudotojo. Prašome bandykite dar kartą.',
         'import'    => 'Nepavyko įkelti naudotojų. Prašome bandykite dar kartą.',
         'asset_already_accepted' => 'ši įranga jau buvo priimta.',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => 'Negali nustatyti vartotojo prisijungiant prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio: ',
         'ldap_could_not_search' => 'Negali rasti LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
         'ldap_could_not_get_entries' => 'Negali gauti prieigos prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => 'Šios paskyros slaptažodį tvarko LDAP / Active Directory. Prašome susisiekti su savo IT departamentu, kad pakeistumėte slaptažodį.',
     ),
 
     'deletefile' => array(

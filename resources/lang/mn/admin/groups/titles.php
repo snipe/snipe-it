@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
-    'group_management' 	 	=> 'Group Management',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'about_groups_title'            => 'Бүлгүүдийн тухай',
+    'about_groups'                  => 'Бүлгүүд нь хэрэглэгчийн зөвшөөрлүүдийг ерөнхийд нь тодорхойлоход ашиглагддаг.',
+    'group_management' 	 	=> 'Группын удирдлага',
+    'create' 	 	 	    => 'Шинэ бүлэг үүсгэх',
+    'update' 	 		        => 'Бүлгийг засварлах',
+    'group_name' 	 		=> 'Группын нэр',
+    'group_admin' 	 		=> 'Групп админ',
+    'allow' 	 			=> 'Зөвшөөрнө үү',
+    'deny' 	 				=> 'Дене',
 
 );

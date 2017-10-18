@@ -5,8 +5,9 @@ return array(
     'does_not_exist' => 'Δεν υπάρχει άδεια χρήσης.',
     'user_does_not_exist' => 'Ο χρήστης δεν υπάρχει.',
     'asset_does_not_exist' 	=> 'Το πάγιο που προσπαθείτε να συσχετίσετε με αυτήν την άδεια δεν υπάρχει.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'owner_doesnt_match_asset' => 'Το περιουσιακό στοιχείο που προσπαθείτε να συσχετίσετε με αυτήν την άδεια ανήκει σε κάποιον άλλον εκτός από το άτομο που επιλέχθηκε στο αναπτυσσόμενο μενού.',
+    'assoc_users'	 => 'Αυτήν τη στιγμή, αυτή η άδεια χρήσης αποστέλλεται στον χρήστη και δεν μπορεί να διαγραφεί. Ελέγξτε πρώτα την άδεια χρήσης και δοκιμάστε ξανά τη διαγραφή.',
+    'select_asset_or_person' => 'Πρέπει να επιλέξετε ένα στοιχείο ή έναν χρήστη, αλλά όχι και τα δύο.',
 
 
     'create' => array(
@@ -22,8 +23,8 @@ return array(
     'upload' => array(
         'error'   => 'Τα αρχεία δεν μεταφορτώθηκαν. Παρακαλώ δοκιμάστε ξανά.',
         'success' => 'Τα αρχεία ενημερώθηκαν με επιτυχία.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'nofiles' => 'Δεν επιλέξατε κανένα αρχείο για μεταφόρτωση ή το αρχείο που προσπαθείτε να μεταφορτώσετε είναι πολύ μεγάλο',
+        'invalidfiles' => 'Ένα ή περισσότερα από τα αρχεία σας είναι πολύ μεγάλα ή είναι τύπου αρχείου που δεν επιτρέπεται. Οι επιτρεπόμενοι τύποι αρχείων είναι png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml και lic.',
     ),
 
     'update' => array(
@@ -38,13 +39,13 @@ return array(
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Παρουσιάστηκε πρόβλημα κατά την εξακρίβωση της άδειας. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+        'success' => 'Η άδεια εκτυπώθηκε με επιτυχία'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Παρουσιάστηκε ένα ζήτημα ελέγχου της άδειας. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+        'success' => 'Η άδεια έχει ελεγχθεί με επιτυχία'
     ),
 
 );

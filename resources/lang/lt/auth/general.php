@@ -2,7 +2,7 @@
 
 return [
     'send_password_link'	        => 'Slaptažodžio atkūrimo nuoroda',
-    'email_reset_password'			=> 'Email Password Reset',
+    'email_reset_password'			=> 'El. Pašto slaptažodžio atstatymas',
     'reset_password'			    => 'Atstatyti slaptažodį',
     'login'                         => 'Prisijungimas',
     'login_prompt'                  => 'Prašome prisijungti',

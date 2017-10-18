@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_models_title'     => 'About Asset Models',
-    'about_models_text'           => 'Asset Models are a way to group identical assets. "MBP 2013", "IPhone 6s", etc.',
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-    'requestable'               => 'Users may request this model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'about_models_title'     => 'Активын загварууд',
+    'about_models_text'           => 'Хөрөнгийн загвар нь ижил төрлийн хөрөнгийг бүлэглэх арга юм. "MBP 2013", "IPhone 6s", гэх мэт.',
+    'deleted'  					        => 'Энэ загварыг устгасан. <a href="/hardware/models/:model_id/restore">Дахин оруулна уу</a>.',
+    'restore'                   => 'Загварыг сэргээх',
+    'requestable'               => 'Хэрэглэгчид энэ загварыг хүсч болно',
+	'show_mac_address'			      => 'Энэ загварт буй MAC хаягийн талбарыг харуулах',
+    'view_deleted'              => 'Устгагдсан харах',
+    'view_models'               => 'Загварыг үзэх',
+    'fieldset'                  => 'Талбар',
+    'no_custom_field'           => 'Өөрчлөгдсөн талбар байхгүй байна',
 
 );

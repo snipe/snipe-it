@@ -3,23 +3,30 @@
 return array(
 
     'does_not_exist' => 'حالة التصنيف غير موجود.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'assoc_assets'	 => 'يرتبط تصنيف الحالة هذا حاليا بأصل واحد على الأقل ولا يمكن حذفه. يرجى تحديث مواد العرض لم تعد تشير إلى هذه الحالة وحاول مرة أخرى.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
+        'error'   => 'لم يتم إنشاء تصنيف الحالة، يرجى إعادة المحاولة.',
         'success' => 'تم إنشاء تسمية الحالة بنجاح.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
+        'error'   => 'لم يتم تحديث تصنيف الحالة، يرجى إعادة المحاولة',
         'success' => 'تم تحديث تسمية الحالة بنجاح.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'هل تريد بالتأكيد حذف تصنيف الحالة هذا؟',
+        'error'   => 'حدثت مشكلة أثناء حذف تصنيف الحالة. حاول مرة اخرى.',
+        'success' => 'تم حذف تصنيف الحالة بنجاح.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'لا يمكن تعيين هذه الأصول لأي شخص.',
+        'deployable'   => 'ويمكن سحب هذه الأصول. بعد تعيينهم، سيتحملون حالة ميتا من <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'archived'   => 'لا يمكن سحب هذه الأصول، ولن تظهر إلا في طريقة العرض المؤرشفة. وهذا مفيد للاحتفاظ بالمعلومات عن الأصول لأغراض الميزنة / التاريخية ولكن الاحتفاظ بها من قائمة الأصول اليومية.',
+        'pending'   => 'لا يمكن بعد تعيين هذه الأصول لأي شخص، وغالبا ما تستخدم للبنود التي هي خارج للإصلاح، ولكن من المتوقع أن يعود إلى التداول.',
+    ),
 
 );

@@ -11,5 +11,5 @@ return array(
     'request'                   => 'درخواست',
     'submit'  	                => 'ثبت کردن',
     'upload'                    => 'بارگزاری',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'فایل را انتخاب کنید...',
 );

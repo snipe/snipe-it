@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Purchase Cost',
     'create'			=> 'Create Asset',
     'date'				=> 'Purchase Date',
+    'depreciation'	    => 'Depreciation',
     'depreciates_on'	=> 'Depreciates On',
     'default_location'	=> 'Default Location',
     'eol_date'			=> 'EOL Date',

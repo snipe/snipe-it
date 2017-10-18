@@ -2,7 +2,7 @@
 
 return array(
     'about_suppliers_title' => 'حول الموردين',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_text'  => 'يتم استخدام الموردين لتتبع مصدر العناصر',
     'address'               => 'عنوان المورد',
     'assets'                => 'الأصول',
     'city'                  => 'المدينة',
@@ -14,14 +14,14 @@ return array(
     'id'                    => 'رقم التعريف',
     'licenses'              => 'الرخص',
     'name'                  => 'إسم المورد',
-    'notes'                 => 'Notes',
-    'phone'                 => 'Phone',
+    'notes'                 => 'ملاحظات',
+    'phone'                 => 'هاتف',
     'state'                 => 'الحالة',
     'suppliers'             => 'الموردون',
     'update'                => 'تحديث المورد',
     'url'                   => 'الرابط',
     'view'                  => 'مشاهدة المورد',
     'view_assets_for'       => 'عرض الأصول لـ',
-    'zip'                   => 'Postal Code',
+    'zip'                   => 'الرمز البريدي',
 
 );

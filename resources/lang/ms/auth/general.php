@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'send_password_link'	        => 'Hantar Taipkan Semula Kata Laluan',
+    'email_reset_password'			=> 'Reset Kata Laluan E-mel',
+    'reset_password'			    => 'Menetapkan semula kata laluan',
+    'login'                         => 'Log masuk',
+    'login_prompt'                  => 'Sila daftar masuk',
+    'forgot_password'               => 'Saya terlupa kata laluan saya',
+    'remember_me'                   => 'Ingat saya',
     ];
 

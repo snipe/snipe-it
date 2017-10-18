@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'actions'	 	=> 'פעולות',
+    'action' 		=> 'פעולה',
+    'by'      		=> 'על ידי',
+    'item' 			=> 'פריט',
 
 );

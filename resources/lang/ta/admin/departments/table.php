@@ -2,10 +2,10 @@
 
 return array(
 
-    'id'                        => 'ID',
-    'name'                      => 'Department Name',
-    'manager'                   => 'Manager',
-    'location'                  => 'Location',
-    'create'                    => 'Create Department',
-    'update'                    => 'Update Department',
+    'id'                        => 'ஐடி',
+    'name'                      => 'துறை பெயர்',
+    'manager'                   => 'மேலாளர்',
+    'location'                  => 'இருப்பிடம்',
+    'create'                    => 'திணைக்களம் உருவாக்கவும்',
+    'update'                    => 'புதுப்பிப்பு துறை',
     );

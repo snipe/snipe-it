@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'assigned_to'   	=> 'ஒதுக்கப்படும்',
+    'checkout'   		=> 'உள்ளே வெளியே',
+    'id'      			=> 'ஐடி',
+    'license_email'   	=> 'உரிமம் மின்னஞ்சல்',
+    'license_name'   	=> 'உரிமம் பெற்றது',
+    'purchase_date'   	=> 'கொள்முதல் தேதி',
+    'purchased'   		=> 'வாங்கப்பட்டது',
+    'seats'   			=> 'இருக்கைகள்',
+    'hardware'   		=> 'வன்பொருள்',
+    'serial'   			=> 'சீரியல்',
+    'title'      		=> 'உரிமம்',
 
 );

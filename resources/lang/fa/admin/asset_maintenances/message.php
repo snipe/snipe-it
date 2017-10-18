@@ -12,8 +12,8 @@
             'success' => 'نگهدارنده دارایی با موفقیت ایجاد شد.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'تعمیر و نگهداری دارایی ویرایش نشد، لطفا دوباره امتحان کنید',
+            'success' => 'تعمیر و نگهداری دارایی با موفقیت ویرایش شد'
         ],
         'asset_maintenance_incomplete' => 'هنوز تکمیل نشده',
         'warranty'                     => 'ضمانت',

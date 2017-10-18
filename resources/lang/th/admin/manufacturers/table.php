@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
+    'about_manufacturers_title'    => 'เกี่ยวกับผู้ผลิต',
+    'about_manufacturers_text'  => 'ผู้ผลิตเป็น บริษัท ที่สร้างสินทรัพย์ของคุณ คุณสามารถจัดเก็บข้อมูลการติดต่อฝ่ายสนับสนุนที่สำคัญไว้ที่นี่ซึ่งจะปรากฏในหน้ารายละเอียดสินทรัพย์ของคุณ',
     'asset_manufacturers'	=> 'ผู้ผลิตสินทรัพย์',
     'create'				=> 'สร้างผู้ผลิต',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'ชื่อ',
+    'support_email'   		=> 'อีเมลสนับสนุน',
+    'support_phone'   		=> 'โทรศัพท์สนับสนุน',
+    'support_url'   		=> 'URL การสนับสนุน',
     'update'				=> 'ปรับปรุงผู้ผลิต',
     'url'   				=> 'URL',
 

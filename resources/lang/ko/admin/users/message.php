@@ -31,7 +31,7 @@ return array(
         'create' => '사용자를 생성하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
         'update' => '사용자를 갱신하는 중 오류가 발생했습니다. 다시 시도해 주세요.',
         'delete' => '사용자를 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => '이 사용자에게 품목이 할당되었고 삭제할 수 없습니다.',
         'unsuspend' => '사용자의 대기 해제 중 문제가 발생했습니다. 다시 시도하세요.',
         'import'    => '사용자를 내보내기 할 때 문제가 발생했습니다. 다시 시도하세요.',
         'asset_already_accepted' => '이 자산은 이미 수락되었습니다.',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => 'LDAP 서버와 동기화 할 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류: ',
         'ldap_could_not_search' => 'LDAP 서버를 찾을 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'ldap_could_not_get_entries' => 'LDAP 서버 목록을 가져올 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => '이 계정의 비밀번호는 LDAP/Active 디렉토리에 의해 관리됩니다. 비밀번호를 변경하려면 IT 부서에 문의하세요. ',
     ),
 
     'deletefile' => array(

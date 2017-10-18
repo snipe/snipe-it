@@ -24,8 +24,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Turto auditas buvo nesėkmingas. Prašau, pabandykite dar kartą.',
+        'success' 		=> 'Turto auditas sėkmingai registruotas.'
     ),
 
 
@@ -43,9 +43,9 @@ return array(
 
     'import' => array(
         'error'                 => 'Nepavyko teisingai importuoti kai kurių įrašų.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
+        'errorDetail'           => 'Šie elementai nebuvo importuoti dėl klaidų.',
         'success'               => "Jūsų failas importuotas",
-        'file_delete_success'   => "Your file has been been successfully deleted",
+        'file_delete_success'   => "Jūsų failas buvo sėkmingai ištrintas",
         'file_delete_error'      => "Nepavyko ištrinti failo",
     ),
 
@@ -53,7 +53,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią įrangą?',
         'error'   		=> 'Nepavyko ištrinti įrangos. Prašome bandykite dar kartą.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, taigi niekas nebuvo ištrintas.',
         'success' 		=> 'Įranga sėkmingai ištrinta.'
     ),
 
@@ -61,21 +61,21 @@ return array(
         'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
         'success' 		=> 'Įranga išduota sėkmingai.',
         'user_does_not_exist' => 'Netinkamas naudotojas. Prašome bandykite dar kartą.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Šis turtas negali būti išsiunčiamas!'
     ),
 
     'checkin' => array(
         'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
         'success' 		=> 'Įranga išduota sėkmingai.',
         'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Šis turtas jau yra registruotas.',
 
     ),
 
     'requests' => array(
         'error'   		=> 'Įranga nebuvo užklausta, prašome bandyti dar kartą',
         'success' 		=> 'Įrangos užklausa sėkmingai išsiusta.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'canceled'      => 'Patikros užklausa sėkmingai atšaukta'
     )
 
 );

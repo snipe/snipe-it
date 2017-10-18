@@ -11,5 +11,5 @@ return array(
     'request'                   => 'Permintaan',
     'submit'  	                => 'Kirim',
     'upload'                    => 'Unggah',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Pilih file...',
 );

@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'A Fieldset nem létezik',
 
         'create' => array(
             'error'   => 'A mezőcsoport nem lett létrehozva, próbálkozz újra.',

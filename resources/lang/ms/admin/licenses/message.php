@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'Harta yang anda ingin sekutukan dengan lesen tidak wujud.',
     'owner_doesnt_match_asset' => 'Harta yang anda ingin sekutukan dengan lesen ini dimiliki oleh orang lain selain dari orang yang dipilih dalam pilihan yang disekutukan.',
     'assoc_users'	 => 'Lesen ini telah diagihkan kepada pengguna dan tidak boleh dihapuskan. Sila semak lesen terlebih dahulu, dan cuba hapus semula.  ',
+    'select_asset_or_person' => 'Anda mesti memilih aset atau pengguna, tetapi tidak kedua-duanya.',
 
 
     'create' => array(
@@ -15,15 +16,15 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Fail tidak dipadam. Sila cuba lagi.',
+        'success' => 'Fail berjaya dipadam.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'Fail tidak dimuat naik. Sila cuba lagi.',
+        'success' => 'Fail berjaya dimuat naik.',
+        'nofiles' => 'Anda tidak memilih sebarang fail untuk dimuat naik, atau fail yang anda cuba muat naik terlalu besar',
+        'invalidfiles' => 'Satu atau lebih daripada fail anda terlalu besar atau merupakan filetype yang tidak dibenarkan. Filetype yang dibenarkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, dan lic.',
     ),
 
     'update' => array(

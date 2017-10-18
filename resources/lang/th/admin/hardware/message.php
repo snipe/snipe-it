@@ -4,78 +4,78 @@ return array(
 
     'undeployable' 		=> '<strong>คำเตือน: </strong> สินทรัพย์นี้ถูกกำหนดสถานะให้ไม่สามารถใช้งานได้ หากสถานะนี้ถูกเปลี่ยน กรุณาอัพเดทสถานะสินทรัพย์ด้วย',
     'does_not_exist' 	=> 'ไม่มีสินทรัพย์',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'does_not_exist_or_not_requestable' => 'พยายามได้ดี. เนื้อหาดังกล่าวไม่มีอยู่หรือไม่ได้รับการร้องขอ',
+    'assoc_users'	 	=> 'ขณะนี้มีการตรวจสอบเนื้อหานี้แก่ผู้ใช้และไม่สามารถลบออกได้ โปรดตรวจสอบเนื้อหาเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'ไม่ได้สร้างเนื้อหาโปรดลองอีกครั้ง :(',
+        'success' 		=> 'สร้างเนื้อหาสำเร็จแล้ว :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'ไม่ได้อัปเดตเนื้อหาโปรดลองอีกครั้ง',
+        'success' 			=> 'อัปเดตเนื้อหาสำเร็จแล้ว',
+        'nothing_updated'	=>  'ไม่มีการเลือกเขตข้อมูลดังนั้นไม่มีการอัปเดตอะไรเลย',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'ไม่ได้กู้คืนเนื้อหาโปรดลองอีกครั้ง',
+        'success' 		=> 'กู้คืนเนื้อหาเรียบร้อยแล้ว'
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'การตรวจสอบสินทรัพย์ไม่สำเร็จ กรุณาลองอีกครั้ง.',
+        'success' 		=> 'บันทึกการตรวจสอบสินทรัพย์สำเร็จแล้ว'
     ),
 
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'ไฟล์ไม่ถูกลบ กรุณาลองอีกครั้ง.',
+        'success' => 'ไฟล์ถูกลบเรียบร้อยแล้ว',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'ไฟล์ไม่ได้อัปโหลด กรุณาลองอีกครั้ง.',
+        'success' => 'ไฟล์ที่อัปโหลดเรียบร้อยแล้ว',
+        'nofiles' => 'คุณไม่ได้เลือกไฟล์ใด ๆ สำหรับการอัปโหลดหรือไฟล์ที่คุณกำลังพยายามอัปโหลดมีขนาดใหญ่เกินไป',
+        'invalidfiles' => 'ไฟล์ของคุณอย่างน้อยหนึ่งไฟล์มีขนาดใหญ่เกินไปหรือเป็นไฟล์ที่ไม่ได้รับอนุญาต ไฟล์ที่อนุญาตคือ png, gif, jpg, doc, docx, pdf และ txt',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'บางรายการไม่สามารถนำเข้าได้อย่างถูกต้อง',
+        'errorDetail'           => 'รายการต่อไปนี้ไม่ได้นำเข้าเนื่องจากมีข้อผิดพลาด',
+        'success'               => "ไฟล์ของคุณถูกนำเข้าแล้ว",
+        'file_delete_success'   => "ไฟล์ของคุณถูกลบเรียบร้อยแล้ว",
+        'file_delete_error'      => "ไม่สามารถลบไฟล์ได้",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'คุณแน่ใจหรือไม่ว่าต้องการลบเนื้อหานี้',
+        'error'   		=> 'เกิดปัญหาในการลบเนื้อหา กรุณาลองอีกครั้ง.',
+        'nothing_updated'   => 'ไม่มีการเลือกเนื้อหาใด ๆ ดังนั้นจึงไม่มีสิ่งใดถูกลบ',
+        'success' 		=> 'เนื้อหาถูกลบเรียบร้อยแล้ว'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'ไม่ได้ตรวจสอบเนื้อหาโปรดลองอีกครั้ง',
+        'success' 		=> 'ตรวจสอบสินทรัพย์เรียบร้อยแล้ว',
+        'user_does_not_exist' => 'ผู้ใช้รายนั้นไม่ถูกต้อง กรุณาลองอีกครั้ง.',
+        'not_available' => 'เนื้อหาดังกล่าวไม่สามารถใช้ได้สำหรับเช็คเอาท์!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'ไม่ได้เช็คอินเนื้อหาโปรดลองอีกครั้ง',
+        'success' 		=> 'ตรวจสอบเนื้อหาเรียบร้อยแล้ว',
+        'user_does_not_exist' => 'ผู้ใช้รายนั้นไม่ถูกต้อง กรุณาลองอีกครั้ง.',
+        'already_checked_in'  => 'มีการตรวจสอบเนื้อหาดังกล่าวแล้ว',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'ไม่ได้ร้องขอเนื้อหาโปรดลองอีกครั้ง',
+        'success' 		=> 'ขอรับสินทรัพย์สำเร็จแล้ว',
+        'canceled'      => 'ยกเลิกคำขอชำระเงินเรียบร้อยแล้ว'
     )
 
 );

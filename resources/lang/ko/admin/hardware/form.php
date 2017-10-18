@@ -14,6 +14,7 @@ return array(
     'cost'				=> '구매 원가',
     'create'			=> '자산 생성',
     'date'				=> '구매 일자',
+    'depreciation'	    => '감가 상각',
     'depreciates_on'	=> '감가 상각 일자',
     'default_location'	=> '기본 장소',
     'eol_date'			=> '폐기 일자',

@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Maatskappy bestaan ​​nie.',
+    'assoc_users'    => 'Hierdie maatskappy is tans geassosieer met ten minste een model en kan nie verwyder word nie. Dateer asseblief jou modelle op om nie meer hierdie maatskappy te verwys nie en probeer weer.',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Maatskappy is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Maatskappy geskep suksesvol.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Maatskappy is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Maatskappy suksesvol opgedateer.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Is jy seker jy wil hierdie maatskappy uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die maatskappy. Probeer asseblief weer.',
+        'success' => 'Die maatskappy is suksesvol verwyder.'
     )
 );

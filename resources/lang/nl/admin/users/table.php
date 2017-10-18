@@ -19,7 +19,7 @@ return array(
     'location'  			=> 'Locatie',
     'lock_passwords'		=> 'Login gegevens kunnen niet worden gewijzigd in deze installatie.',
     'manager' 				=> 'Manager',
-    'managed_locations'     => 'Managed Locations',
+    'managed_locations'     => 'Beheerde locaties',
     'name' 					=> 'Naam',
     'notes'                 => 'Notities',
     'password_confirm' 		=> 'Bevestig uw wachtwoord',

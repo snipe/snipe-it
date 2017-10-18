@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Harga Pembelian',
     'create'			=> 'Membuat aset',
     'date'				=> 'Tanggal pembelian',
+    'depreciation'	    => 'Penyusutan',
     'depreciates_on'	=> 'Penyusutan aktif',
     'default_location'	=> 'Lokasi awal',
     'eol_date'			=> 'Tanggal EOL',

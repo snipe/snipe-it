@@ -9,18 +9,18 @@ return array(
         'create' => array(
             'error'   => 'Το πεδία δεν δημιουργήθηκαν, παρακαλώ προσπαθήστε ξανά.',
             'success' => 'Το πεδίο δημιουργήθηκε με επιτυχία.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'assoc_success' => 'Το πεδίο προστέθηκε με επιτυχία στο fieldset.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
+            'error'   => 'Το πεδίο δεν ενημερώθηκε, δοκιμάστε ξανά',
             'success' => 'Το πεδίο ενημερώθηκε επιτυχώς.'
         ),
 
         'delete' => array(
             'confirm'   	=> 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το πεδίο;',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
+            'error'   => 'Παρουσιάστηκε πρόβλημα κατά τη διαγραφή του πεδίου. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+            'success' => 'Το πεδίο διαγράφηκε με επιτυχία.',
             'in_use'   => 'Το πεδίο παραμένει σε χρήση.',
         )
 
@@ -28,22 +28,22 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Το πεδίο δεν υπάρχει',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
+            'error'   => 'Το Fieldset δεν δημιουργήθηκε, δοκιμάστε ξανά.',
             'success' => 'Το σύνολο των πεδίων δημιουργήθηκε με επιτυχία.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
+            'error'   => 'Το Fieldset δεν ενημερώθηκε, δοκιμάστε ξανά',
             'success' => 'Το σύνολο των πεδίων ενημερώθηκε με επιτυχία.'
         ),
 
         'delete' => array(
             'confirm'   	=> 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το σύνολο πεδίων;',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
+            'error'   => 'Παρουσιάστηκε ένα ζήτημα κατάργησης του πεδίου. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+            'success' => 'Το πεδίο πεδίου διαγράφηκε με επιτυχία.',
             'in_use'   => 'Το σύνολο των πεδίων παραμένουν σε χρήση.',
         )
 

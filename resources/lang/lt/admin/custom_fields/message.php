@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Fieldset neegzistuoja',
 
         'create' => array(
             'error'   => 'Laukelis nebuvo sukurtas. Prašome bandyti dar kartą.',

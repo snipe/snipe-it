@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'Ангилал байхгүй байна.',
+    'assoc_models'	 => 'Энэ ангилалд дор хаяж нэг загвартай холбоотой бөгөөд устгагдах боломжгүй байна. Энэ загварыг цаашид ашиглахгүй байхаар загвараа шинэчлээд дахин оролдоно уу.',
+    'assoc_items'	 => 'Энэ категор нь дор хаяж нэг: asset_typeтэй холбоотой бөгөөд устгах боломжгүй. Та: asset_type-ыг энэ ангилалд хамааруулахгүй болгож дахин оролдоно уу.',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Ангилал үүсгээгүй байна, дахин оролдоно уу.',
+        'success' => 'Ангилал амжилттай болсон.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Ангилал шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Ангилал амжилттай шинэчлэгдсэн.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Та энэ категорийг устгахдаа итгэлтэй байна уу?',
+        'error'   => 'Категорийг устгахад асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Ангилал амжилттай устгагдсан байна.'
     )
 
 );

@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'checkout'                          => 'Checkout Consumable to User',
-    'consumable_name'                   => 'Consumable Name',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
-    'total' 			                => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'O potrošnim materijalima',
+    'about_consumables_text'  			=> 'Potrošni materijali su sve što se kupuje, a to će biti iskorišteno tijekom vremena. Na primjer, pisač tinte ili fotokopirni papir.',
+    'checkout'                          => 'Naplata potrošnog za korisnika',
+    'consumable_name'                   => 'Potrošni naziv',
+    'create'                            => 'Napravite potrošni',
+    'item_no'                           => 'Predmet broj.',
+    'remaining' 			            => 'ostali',
+    'total' 			                => 'ukupno',
+    'update'                            => 'Ažuriraj potrošnju',
 );

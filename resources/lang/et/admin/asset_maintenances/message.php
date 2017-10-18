@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Varahooldust, mida otsisite, ei leitud!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Kas olete kindel, et soovite seda vara hooldust kustutada?',
+            'error'   => 'Seal oli probleem, kustutades vara hooldust. Palun proovi uuesti.',
+            'success' => 'Varade hooldus kustutati edukalt.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Varahooldust ei loodud, proovige uuesti.',
+            'success' => 'Varade hooldus on edukalt loodud.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Varade hooldust ei muudetud, palun proovi uuesti.',
+            'success' => 'Varahoiatus on edukalt muudetud.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Veel pole veel lõpetatud',
+        'warranty'                     => 'Garantii',
+        'not_warranty'                 => 'Mitte garantii',
     ];

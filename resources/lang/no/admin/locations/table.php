@@ -2,7 +2,7 @@
 
 return array(
     'about_locations_title'     => 'Om Lokasjoner',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
+    'about_locations'           => 'Plassering brukes til å spore stedsinformasjon for brukere, eiendeler og andre elementer',
     'assets_rtd'                => 'Eiendeler', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Eiendeler tildelt',
     'id'                        => 'ID',
@@ -17,5 +17,5 @@ return array(
     'locations'                 => 'Plasseringer',
     'parent'                    => 'Overordnet',
     'currency'                  => 'Valuta i lokasjon',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'ldap_ou'                   => 'LDAP-søk OU',
     );

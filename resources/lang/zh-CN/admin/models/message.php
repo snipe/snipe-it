@@ -29,8 +29,8 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> '没有字段被更改，因此没有更新任何内容。',
+        'success' 		=> '模板已更新。'
     ),
 
 );

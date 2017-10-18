@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'ไม่มีป้ายสถานะ',
+    'assoc_assets'	 => 'ป้ายสถานะนี้เชื่อมโยงกับสินทรัพย์อย่างน้อยหนึ่งรายการและไม่สามารถลบได้ โปรดอัปเดตเนื้อหาของคุณเพื่อไม่ให้อ้างอิงสถานะนี้อีกแล้วลองอีกครั้ง',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'ไม่ได้สร้างป้ายสถานะโปรดลองอีกครั้ง',
+        'success' => 'สร้างป้ายสถานะสำเร็จแล้ว'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'ป้ายสถานะไม่ได้รับการอัปเดตโปรดลองอีกครั้ง',
+        'success' => 'อัปเดตป้ายสถานะสำเร็จแล้ว'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'คุณแน่ใจหรือไม่ว่าต้องการลบป้ายสถานะนี้',
+        'error'   => 'มีปัญหาในการลบป้ายสถานะ กรุณาลองอีกครั้ง.',
+        'success' => 'ป้ายสถานะถูกลบเรียบร้อยแล้ว'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'ไม่สามารถกำหนดเนื้อหาเหล่านี้ให้กับทุกคนได้',
+        'deployable'   => 'สามารถตรวจสอบสินทรัพย์เหล่านี้ได้ เมื่อได้รับมอบหมายแล้วพวกเขาจะถือว่าสถานะ meta ของ <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>',
+        'archived'   => 'ไม่สามารถตรวจสอบเนื้อหาเหล่านี้ได้และจะปรากฏเฉพาะในมุมมองที่เก็บถาวรเท่านั้น วิธีนี้มีประโยชน์สำหรับการเก็บรักษาข้อมูลเกี่ยวกับสินทรัพย์เพื่อการจัดทำงบประมาณ / วัตถุประสงค์ทางประวัติศาสตร์ แต่จะช่วยให้พวกเขาออกจากรายชื่อสินทรัพย์แบบวันต่อวัน',
+        'pending'   => 'สินทรัพย์เหล่านี้ยังไม่สามารถกำหนดให้กับทุกคนซึ่งมักใช้สำหรับรายการที่ไม่ได้รับการซ่อม แต่คาดว่าจะกลับสู่การหมุนเวียน',
+    ),
 
 );

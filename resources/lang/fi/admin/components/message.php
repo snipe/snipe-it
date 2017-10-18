@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponenttia ei ole olemassa.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponenttia ei luotu, yritä uudelleen.',
+        'success' => 'Komponentti on luotu onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponenttia ei ole päivitetty, yritä uudelleen',
+        'success' => 'Komponentti on päivitetty onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Haluatko varmasti poistaa tämän komponentin?',
+        'error'   => 'Komponentti poistettiin ongelmasta. Yritä uudelleen.',
+        'success' => 'Komponentti poistettiin onnistuneesti.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenttia ei ole tarkistettu, yritä uudelleen',
+        'success' 		=> 'Komponentti onnistui.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenttia ei ole tarkistettu, yritä uudelleen',
+        'success' 		=> 'Komponentti tarkistettiin onnistuneesti.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     )
 
 

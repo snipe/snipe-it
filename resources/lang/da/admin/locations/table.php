@@ -1,21 +1,21 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'about_locations_title'     => 'Om steder',
+    'about_locations'           => 'Steder bruges til at spore placeringsoplysninger for brugere, aktiver og andre elementer',
+    'assets_rtd'                => 'Aktiver', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Aktiver tildelt',
     'id'                        => 'ID',
-    'city'                      => 'City',
-    'state'                     => 'State',
-    'country'                   => 'Country',
-    'create'                    => 'Create Location',
-    'update'                    => 'Update Location',
-    'name'                      => 'Location Name',
-    'address'                   => 'Address',
-    'zip'                       => 'Postal Code',
-    'locations'                 => 'Locations',
-    'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
+    'city'                      => 'by',
+    'state'                     => 'Stat',
+    'country'                   => 'Land',
+    'create'                    => 'Opret placering',
+    'update'                    => 'Opdateringssted',
+    'name'                      => 'Navn på sted',
+    'address'                   => 'Adresse',
+    'zip'                       => 'Postnummer',
+    'locations'                 => 'Placeringer',
+    'parent'                    => 'Forældre',
+    'currency'                  => 'Beliggenhed Valuta',
     'ldap_ou'                   => 'LDAP Search OU',
     );

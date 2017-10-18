@@ -2,7 +2,7 @@
 
 return array(
     'about_suppliers_title' => 'O Dostawcach',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_text'  => 'Dostawcy są wykorzystywani do śledzenia źródeł elementów',
     'address'               => 'Adres Dostawcy',
     'assets'                => 'Aktywa',
     'city'                  => 'Miasto',

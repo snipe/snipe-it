@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Compania nu există.',
+    'assoc_users'    => 'Această companie este în prezent asociată cu cel puțin un model și nu poate fi ștearsă. Actualizați-vă modelele pentru a nu mai referi această companie și încercați din nou.',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Compania nu a fost creată, încercați din nou.',
+        'success' => 'Compania a creat cu succes.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Compania nu a fost actualizată, încercați din nou',
+        'success' => 'Compania a fost actualizată cu succes.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Sigur doriți să ștergeți această companie?',
+        'error'   => 'A apărut o problemă cu ștergerea companiei. Vă rugăm să încercați din nou.',
+        'success' => 'Compania a fost șters cu succes.'
     )
 );

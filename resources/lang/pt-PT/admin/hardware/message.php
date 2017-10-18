@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'A auditoria de ativos não teve êxito. Por favor, tente novamente.',
+        'success' 		=> 'Auditoria de ativos logada com sucesso.'
     ),
 
 
@@ -54,7 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Tem a certeza de que pretende eliminar este artigo?',
         'error'   		=> 'Ocorreu um problema ao remover o artigo. Por favor, tente novamente.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'nothing_updated'   => 'Nenhum recurso foi selecionado, então nada foi excluído.',
         'success' 		=> 'O artigo foi removido com sucesso.'
     ),
 

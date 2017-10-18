@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_suppliers_title' => 'About Suppliers',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_title' => 'Tietoa toimittajista',
+    'about_suppliers_text'  => 'Tavarantoimittajien avulla seurataan tuotteiden lähdettä',
     'address'               => 'Toimittajan Osoite',
     'assets'                => 'Laitteet',
     'city'                  => 'Kaupunki',

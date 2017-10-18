@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Полето не съществува',
 
         'create' => array(
             'error'   => 'Fieldset не беше създаден, моля опитайте отново.',

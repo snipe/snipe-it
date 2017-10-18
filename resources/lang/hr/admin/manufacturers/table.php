@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
-    'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'update'				=> 'Update Manufacturer',
+    'about_manufacturers_title'    => 'O proizvođačima',
+    'about_manufacturers_text'  => 'Proizvođači su tvrtke koje stvaraju vašu imovinu. Ovdje možete pohraniti važne informacije o kontaktima o podršci koja će se prikazati na vašim stranicama s pojedinostima o imovini.',
+    'asset_manufacturers'	=> 'Prodavači imovine',
+    'create'				=> 'Napravite proizvođača',
+    'id'   					=> 'iskaznica',
+    'name'      			=> 'Ime',
+    'support_email'   		=> 'Podrška e-poštom',
+    'support_phone'   		=> 'Podrška telefonu',
+    'support_url'   		=> 'Podrška URL-a',
+    'update'				=> 'Ažuriraj proizvođača',
     'url'   				=> 'URL',
 
 );

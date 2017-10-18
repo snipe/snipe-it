@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Выдать активы пользователю',
     'checkin'  					=> 'Вернуть актив на склад',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Выдать актив пользователю',
     'clone'  					=> 'Клонировать актив',
     'deployable'  				=> 'Доступные',
     'deleted'  					=> 'Этот актив был удален. <a href="/hardware/:asset_id/restore">Нажмите, чтобы восстановить</a>.',

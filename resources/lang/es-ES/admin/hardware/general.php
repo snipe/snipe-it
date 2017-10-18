@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Equipo',
     'bulk_checkout'             => 'Asignar activos a un usuario',
     'checkin'  					=> 'Quitar Equipo',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Activo de pago',
     'clone'  					=> 'Clonar Equipo',
     'deployable'  				=> 'Desplegable',
     'deleted'  					=> 'Este equipo ha sido eliminado. <a href="/hardware/:asset_id/restore">Click aqui para restaurarlot</a>.',

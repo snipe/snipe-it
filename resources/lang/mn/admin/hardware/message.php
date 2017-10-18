@@ -2,81 +2,80 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Анхааруулга: </strong> Энэ хөрөнгө нь одоогоор хүчингүй болсон гэж тэмдэглэгдсэн байна. Хэрэв энэ байдал өөрчлөгдсөн бол хөрөнгийн статусыг шинэчлэнэ үү.',
+    'does_not_exist' 	=> 'Хөрөнгө байхгүй байна.',
+    'does_not_exist_or_not_requestable' => 'Сайхан оролдлого. Энэ хөрөнгө байхгүй эсвэл хүсэлт гаргаагүй.',
+    'assoc_users'	 	=> 'Энэ хөрөнгийг одоогоор хэрэглэгчид шалгаж, устгах боломжгүй байна. Эхлээд хөрөнгийг шалгаж үзээд дараа нь устга.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Акт үүсгээгүй байна, дахин оролдоно уу. :(',
+        'success' 		=> 'Хөрөнгө амжилттай болсон. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Хөрөнгийн шинэчлэлт хийгдээгүй тул дахин оролдоно уу',
+        'success' 			=> 'Акт амжилттай шинэчлэгдсэн.',
+        'nothing_updated'	=>  'Ямар ч талбар сонгогдоогүй тул шинэчлэгдээгүй байна.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Хөрөнгө сэргээгээгүй байна, дахин оролдоно уу',
+        'success' 		=> 'Хөрөнгийн амжилттай сэргээгдэв.'
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Хөрөнгийн аудит амжилтгүй болсон. Дахин оролдоно уу.',
+        'success' 		=> 'Хөрөнгийн аудит амжилттай нэвтэрсэн байна.'
     ),
 
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Файлыг устгаагүй байна. Дахин оролдоно уу.',
+        'success' => 'Файл амжилттай устгагдсан.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Файлд байршуулаагүй файл. Дахин оролдоно уу.',
+        'success' => 'Файлууд амжилттай байршуулсан.',
+        'nofiles' => 'Та байршуулах ямар ч файл сонгоогүй, эсвэл байршуулах гэж буй файл хэт том байна',
+        'invalidfiles' => 'Таны файлуудын нэг юмуу хэд нь хэтэрхий том юмуу эсвэл файлын төрлийг зөвшөөрдөггүй. Зөвшөөрөгдсөн filetypes нь png, gif, jpg, doc, docx, pdf, болон txt байна.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Зарим зүйлс зөв импорт хийгдээгүй байна.',
+        'errorDetail'           => 'Дараах зүйлсийг алдааны улмаас импортолсонгүй.',
+        'success'               => "Таны файл импортлогдсон байна",
+        'file_delete_success'   => "Таны файл амжилттай болсон байна",
+        'file_delete_error'      => "Файл устгагдах боломжгүй байна",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Та энэ хөрөнгийг устгахыг хүсч байна уу?',
+        'error'   		=> 'Хөрөнгийг устгах асуудал гарлаа. Дахин оролдоно уу.',
+        'nothing_updated'   => 'Ямар ч хөрөнгө сонгогдоогүй тул юу ч устгаагүй.',
+        'success' 		=> 'Хөрөнгийг амжилттай устгасан байна.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'error'   		=> 'Хөрөнгийг шалгаагүй байна, дахин оролдоно уу',
+        'success' 		=> 'Акт амжилттай шалгасан.',
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.',
+        'not_available' => 'Энэ хөрөнгийг татаж авахад бэлэн биш байна!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'Хөрөнгө оруулаагүй байна, дахин оролдоно уу',
+        'success' 		=> 'Хөрөнгө амжилттай шалгагдсан.',
+        'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.',
+        'already_checked_in'  => 'Энэ аккаунтыг аль хэдийн шалгасан байна.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'Акт хүсээгүй тул дахин оролдоно уу',
+        'success' 		=> 'Хөрөнгө амжилттай ирэв.',
+        'canceled'      => 'Тооцоо хийх хүсэлт амжилттай цуцлагдсан'
     )
 
 );

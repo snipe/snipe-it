@@ -5,33 +5,33 @@ return array(
     'account_already_exists' => 'حساب بهذا البريد الإلكتروني موجود مسبقا.',
     'account_not_found'      => 'اسم المستخدم أو كلمة المرور غير صحيحة.',
     'account_not_activated'  => 'لم يتم تنشيط حساب هذا المستخدم.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'account_suspended'      => 'تم تعليق حساب المستخدم هذا.',
+    'account_banned'         => 'تم حظر حساب المستخدم هذا.',
+    'throttle'               => 'هناك عدد كبير جدا من محاولات تسجيل الدخول الفاشلة. يرجى المحاولة مرة أخرى في جميع أنحاء: دقيقة دقيقة (ق).',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
+        'error'   => 'حدثت مشكلة أثناء محاولة تسجيل دخولك، الرجاء إعادة المحاولة.',
         'success' => 'قمت بتسجيل الدخول بنجاح.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'حدثت مشكلة أثناء محاولة إنشاء حسابك، يرجى إعادة المحاولة.',
+        'success' => 'تم إنشاء الحساب بنجاح.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'حدثت مشكلة أثناء محاولة الحصول على رمز إعادة تعيين كلمة المرور، الرجاء إعادة المحاولة.',
+            'success' => 'تم إرسال البريد الإلكتروني لاستعادة كلمة المرور بنجاح.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'حدثت مشكلة أثناء محاولة إعادة تعيين كلمة المرور، الرجاء إعادة المحاولة.',
+            'success' => 'تمت إعادة تعيين كلمة المرور بنجاح.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'حدثت مشكلة أثناء محاولة تنشيط حسابك، يرجى إعادة المحاولة.',
+        'success' => 'تم تفعيل حسابك بنجاح.',
     ),
 
 );

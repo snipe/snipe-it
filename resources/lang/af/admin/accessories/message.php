@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Die accessoire bestaan ​​nie.',
+    'assoc_users'	 => 'Hierdie bykomstige het tans: tel items wat uitgekontroleer is aan gebruikers. Kontroleer asseblief die bykomstighede en en probeer weer.',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Die bykomstigheid is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Die bykomstigheid is suksesvol geskep.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Die bykomstigheid is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Die bykomstigheid is suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Is jy seker jy wil hierdie toebehore uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die bykomstigheid. Probeer asseblief weer.',
+        'success' => 'Die bykomstigheid is suksesvol verwyder.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Toebehore is nie nagegaan nie, probeer asseblief weer',
+        'success' 		=> 'Toebehore suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Toebehore is nie nagegaan nie, probeer asseblief weer',
+        'success' 		=> 'Toebehore is suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
     )
 
 

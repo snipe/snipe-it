@@ -2,14 +2,14 @@
 
 return array(
     'about_manufacturers_title'    => 'Σχετικά με τους κατασκευαστές',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
+    'about_manufacturers_text'  => 'Οι κατασκευαστές είναι οι εταιρείες που δημιουργούν τα περιουσιακά σας στοιχεία. Μπορείτε να αποθηκεύσετε εδώ σημαντικές πληροφορίες επικοινωνίας σχετικά με αυτές, οι οποίες θα εμφανίζονται στις σελίδες λεπτομερειών του ενεργητικού σας.',
+    'asset_manufacturers'	=> 'Κατασκευαστές περιουσιακών στοιχείων',
     'create'				=> 'Δημιουργήστε Κατασκευαστή',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
+    'name'      			=> 'Ονομα',
+    'support_email'   		=> 'Υποστήριξη ηλεκτρονικού ταχυδρομείου',
+    'support_phone'   		=> 'Υποστήριξη τηλεφώνου',
+    'support_url'   		=> 'URL υποστήριξης',
     'update'				=> 'Ενημέρωση Κατασκευαστή',
     'url'   				=> 'URL',
 

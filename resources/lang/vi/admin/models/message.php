@@ -29,8 +29,8 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Không có trường nào được thay đổi, vì vậy không có gì được cập nhật.',
+        'success' 		=> 'Các mô hình được cập nhật.'
     ),
 
 );

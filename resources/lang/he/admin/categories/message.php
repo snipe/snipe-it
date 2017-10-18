@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'קטגוריה לא קיימת.',
+    'assoc_models'	 => 'קטגוריה זו משויכת כרגע לדגם אחד לפחות ולא ניתן למחוק אותה. אנא עדכן את הדגמים שלך כדי לא להתייחס עוד לקטגוריה זו ונסה שוב.',
+    'assoc_items'	 => 'קטגוריה זו משויכת כרגע עם לפחות אחד: type_type ולא ניתן למחוק אותה. עדכן את: הנכס_ typepe כדי לא להתייחס עוד לקטגוריה זו ונסה שוב.',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'הקטגוריה לא נוצרה, נסה שוב.',
+        'success' => 'קטגוריה נוצר בהצלחה.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'הקטגוריה לא עודכנה, נסה שוב',
+        'success' => 'קטגוריה עודכנה בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק קטגוריה זו?',
+        'error'   => 'היתה בעיה במחיקת הקטגוריה. בבקשה נסה שוב.',
+        'success' => 'הקטגוריה נמחקה בהצלחה.'
     )
 
 );

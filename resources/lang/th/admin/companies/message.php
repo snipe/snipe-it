@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'ไม่มี บริษัท',
+    'assoc_users'    => 'บริษัท นี้เชื่อมโยงกับโมเดลอย่างน้อยหนึ่งรายการและไม่สามารถลบได้ โปรดอัปเดตโมเดลของคุณเพื่อไม่ให้ บริษัท นี้อ้างอิงอีกต่อไปและลองอีกครั้ง',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'บริษัท ไม่ได้สร้างโปรดลองอีกครั้ง',
+        'success' => 'บริษัท สร้างสำเร็จแล้ว'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'บริษัท ไม่ได้รับการปรับปรุงโปรดลองอีกครั้ง',
+        'success' => 'อัปเดต บริษัท สำเร็จแล้ว'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'คุณแน่ใจหรือไม่ว่าต้องการลบ บริษัท นี้',
+        'error'   => 'เกิดปัญหาในการลบ บริษัท กรุณาลองอีกครั้ง.',
+        'success' => 'บริษัท ถูกลบเรียบร้อยแล้ว'
     )
 );

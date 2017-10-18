@@ -2,10 +2,10 @@
 
 return array(
 
-    'id'                        => 'ID',
-    'name'                      => 'Department Name',
-    'manager'                   => 'Manager',
-    'location'                  => 'Location',
-    'create'                    => 'Create Department',
-    'update'                    => 'Update Department',
+    'id'                        => 'iskaznica',
+    'name'                      => 'Naziv odjela',
+    'manager'                   => 'Menadžer',
+    'location'                  => 'Mjesto',
+    'create'                    => 'Izradi odjel',
+    'update'                    => 'Odjel za ažuriranje',
     );

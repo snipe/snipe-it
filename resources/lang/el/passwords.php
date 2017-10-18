@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Ο σύνδεσμος κωδικού πρόσβασης σας έχει σταλεί!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'user'			=> 'Αυτός ο χρήστης δεν υπάρχει ή δεν έχει συσχετιστεί με διεύθυνση ηλεκτρονικού ταχυδρομείου',
 ];
 

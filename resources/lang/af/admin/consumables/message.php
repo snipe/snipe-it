@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Verbruiksgoedere bestaan ​​nie.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Verbruiksgoedere is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Verbruiker geskep suksesvol.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Verbruiksgoedere is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Verbruiksgoedere suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Is jy seker jy wil hierdie verbruiksgoed uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die verbruik. Probeer asseblief weer.',
+        'success' => 'Die verbruiksgoed is suksesvol verwyder.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Verbruiksgoedere is nie nagegaan nie, probeer asseblief weer',
+        'success' 		=> 'Verbruiksgoedere is suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Verbruiksgoedere is nie nagegaan nie, probeer asseblief weer',
+        'success' 		=> 'Verbruiker word suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
     )
 
 

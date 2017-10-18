@@ -2,49 +2,50 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'Licensen finns inte.',
+    'user_does_not_exist' => 'Användare finns inte.',
+    'asset_does_not_exist' 	=> 'Den tillgång du försöker associera med denna licens existerar inte.',
+    'owner_doesnt_match_asset' => 'Den tillgång du försöker associera med denna licens ägs av någon annan än den person som valts i den tilldelade till rullgardinsmenyn.',
+    'assoc_users'	 => 'Licensen är nu utcheckad till en användare och kan inte raderas. Var god kontrollera licensen först och försök sedan radera igen.',
+    'select_asset_or_person' => 'Du måste välja en tillgång eller en användare, men inte båda.',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Licensen skapades inte, försök igen.',
+        'success' => 'Licensen skapades framgångsrikt.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Filen har inte tagits bort. Var god försök igen.',
+        'success' => 'Filen har tagits bort.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'error'   => 'Fil (er) inte uppladdade. Var god försök igen.',
+        'success' => 'Filer som har laddats upp.',
+        'nofiles' => 'Du valde inte några filer för uppladdning, eller filen du försöker ladda upp är för stor',
+        'invalidfiles' => 'En eller flera av dina filer är för stora eller är en filtyp som inte är tillåten. Tillåtna filtyper är png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml och lic.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Licensen uppdaterades inte, var god försök igen',
+        'success' => 'Licensen uppdateras framgångsrikt.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Är du säker på att du vill radera denna licens?',
+        'error'   => 'Det gick inte att ta bort licensen. Var god försök igen.',
+        'success' => 'Licensen har tagits bort.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Det gick inte att kontrollera licensen. Var god försök igen.',
+        'success' => 'Licensen utcheckades framgångsrikt'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Det gick inte att kontrollera licensen. Var god försök igen.',
+        'success' => 'Licensen incheckades med framgång'
     ),
 
 );

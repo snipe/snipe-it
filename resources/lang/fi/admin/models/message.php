@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => 'Mallia ei luotu, yritä uudelleen.',
         'success' => 'Malli luotiin onnistuneesti.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Tämän nimen, valmistajan ja mallinumeron omaava omaisuusmalli on jo olemassa.',
     ),
 
     'update' => array(
@@ -24,13 +24,13 @@ return array(
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Mallia ei palautettu, yritä uudelleen',
+        'success' 		=> 'Mallin palautus onnistui.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Mitään kenttää ei muutettu, joten mitään ei päivitetä.',
+        'success' 		=> 'Mallit päivitetty.'
     ),
 
 );

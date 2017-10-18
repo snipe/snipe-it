@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'המחלקה לא קיימת.',
+    'assoc_users'	 => 'מחלקה זו משויכת כרגע למשתמש אחד לפחות ולא ניתן למחוק אותה. עדכן את המשתמשים שלך כדי לא להפנות עוד למחלקה זו ונסה שוב.',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'המחלקה לא נוצרה, נסה שוב.',
+        'success' => 'המחלקה נוצרה בהצלחה.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'המחלקה לא עודכנה, נסה שוב',
+        'success' => 'המחלקה עודכנה בהצלחה.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'האם אתה בטוח שברצונך למחוק מחלקה זו?',
+        'error'   => 'היתה בעיה במחיקת המחלקה. בבקשה נסה שוב.',
+        'success' => 'המחלקה נמחקה בהצלחה.'
     )
 
 );

@@ -7,6 +7,7 @@ return array(
     'asset_does_not_exist' 	=> 'Tài sản bản đang cố gắng liên kết với bản quyền này không tồn tại.',
     'owner_doesnt_match_asset' => 'Tài sản bạn đang cố gắng liên kết với bản quyền đã được sở hữu hởi một người nào đó khác với người đang được lựa chọn để gán trong danh sách xổ xuống.',
     'assoc_users'	 => 'Bản quyền này hiện tại đã được checkout đến một người dùng và có thể đã bị xóa. Xin vui lòng kiểm tra lại bản quyền đầu tiên, và kế đến có gắng xóa thêm lần nữa. ',
+    'select_asset_or_person' => 'Bạn phải chọn một nội dung hoặc người dùng, nhưng không phải cả hai.',
 
 
     'create' => array(
@@ -23,7 +24,7 @@ return array(
         'error'   => 'Tập tin không tải lên được. Xin vui lòng thử lại.',
         'success' => 'Tập tin đã tải lên thành công.',
         'nofiles' => 'Bạn chưa chọn bất kỳ tập tin nào để tải lên, hoặc tập tin bạn đang cố gắng tải lên có dung lượng quá lớn',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
+        'invalidfiles' => 'Một hoặc nhiều tệp của bạn quá lớn hoặc là loại tập tin không được phép. Các loại tệp được cho phép là png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml và lic.',
     ),
 
     'update' => array(

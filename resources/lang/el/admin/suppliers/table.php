@@ -2,7 +2,7 @@
 
 return array(
     'about_suppliers_title' => 'Σχετικά με τους προμηθευτές',
-    'about_suppliers_text'  => 'Suppliers are used to track the source of items',
+    'about_suppliers_text'  => 'Οι προμηθευτές χρησιμοποιούνται για την παρακολούθηση της προέλευσης των αντικειμένων',
     'address'               => 'Διεύθυνση προμηθευτή',
     'assets'                => 'Πάγια',
     'city'                  => 'Πόλη',
@@ -20,7 +20,7 @@ return array(
     'suppliers'             => 'Προμηθευτές',
     'update'                => 'Ενημέρωση προμηθευτή',
     'url'                   => 'Διεύθυνση URL',
-    'view'                  => 'View Supplier',
+    'view'                  => 'Προβολή προμηθευτή',
     'view_assets_for'       => 'Προβολή παγίων για',
     'zip'                   => 'Ταχυδρομικός Κώδικας',
 

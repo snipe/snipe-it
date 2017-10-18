@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Maintenance Type',
-        'title'                  => 'Title',
-        'start_date'             => 'Started',
-        'completion_date'        => 'Completed',
+        'asset_maintenance_type' => 'סוג תחזוקה',
+        'title'                  => 'כותרת',
+        'start_date'             => 'התחיל',
+        'completion_date'        => 'הושלם',
         'cost'                   => 'מחיר',
-        'is_warranty'            => 'Warranty Improvement',
+        'is_warranty'            => 'שיפור באחריות',
         'asset_maintenance_time' => 'ימים',
-        'notes'                  => 'Notes',
-        'update'                 => 'Update',
-        'create'                 => 'Create'
+        'notes'                  => 'הערות',
+        'update'                 => 'עדכון',
+        'create'                 => 'לִיצוֹר'
     ];

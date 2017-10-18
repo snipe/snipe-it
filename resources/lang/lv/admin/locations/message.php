@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'Atrašanās vietas neeksistē.',
+    'assoc_users'	 => 'Pašlaik šī atrašanās vieta ir saistīta ar vismaz vienu lietotāju un to nevar izdzēst. Lūdzu, atjauniniet savus lietotājus, lai vairs nerindrinātu šo atrašanās vietu, un mēģiniet vēlreiz.',
+    'assoc_assets'	 => 'Pašlaik šī atrašanās vieta ir saistīta ar vismaz vienu īpašumu un to nevar izdzēst. Lūdzu, atjauniniet savus aktīvus, lai vairs nerindotu šo atrašanās vietu, un mēģiniet vēlreiz.',
+    'assoc_child_loc'	 => 'Pašlaik šī vieta ir vismaz viena bērna atrašanās vieta un to nevar izdzēst. Lūdzu, atjauniniet savas atrašanās vietas, lai vairs nerindotu šo atrašanās vietu, un mēģiniet vēlreiz.',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Atrašanās vieta nav izveidota, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Atrašanās vieta ir veiksmīgi izveidota.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Atrašanās vieta nav atjaunināta, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Atrašanās vieta ir veiksmīgi atjaunināta.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Vai tiešām vēlaties dzēst šo atrašanās vietu?',
+        'error'   => 'Radās problēma, dzēšot atrašanās vietu. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Atrašanās vieta tika veiksmīgi dzēsta.'
     )
 
 );

@@ -21,14 +21,14 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
+        'error'   		=> 'Tarbitavat ei kontrollitud, proovige uuesti',
+        'success' 		=> 'Tarbitav kontrollitud edukalt.',
         'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
+        'error'   		=> 'Tarbitavat ei märgitud, proovige uuesti',
+        'success' 		=> 'Tarbitav kontrollitud edukalt.',
         'user_does_not_exist' => 'See kasutaja ei sobi. Palun proovi uuesti.'
     )
 

@@ -14,6 +14,7 @@ return array(
     'cost'				=> 'Koszt zakupu',
     'create'			=> 'Nowy nabytek',
     'date'				=> 'Data zakupu',
+    'depreciation'	    => 'Deprecjacja',
     'depreciates_on'	=> 'Amortyzacja włączona',
     'default_location'	=> 'Domyślna lokalizacja',
     'eol_date'			=> 'Data końca licencji',

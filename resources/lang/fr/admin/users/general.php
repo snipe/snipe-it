@@ -13,7 +13,7 @@ return array(
     'filetype_info'     => 'Types de fichier autorisés: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Historique pour :name',
 	'info'				=> 'Info',
-    'restore_user'		=> 'Click here to restore them.',
+    'restore_user'		=> 'Cliquez ici pour les restaurer.',
     'last_login'        => 'Dernière connexion',
     'ldap_config_text'  => 'Les paramètres de configuration LDAP se trouvent sous Admin > Réglages. La localisation sélectionnée (optionnelle) sera définie pour tous les utilisateurs importés.',
     'software_user'     => 'Logiciels associés avec :name',

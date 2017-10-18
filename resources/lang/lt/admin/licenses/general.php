@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Apie licencijas',
+    'about_licenses'                  => 'Licencijos naudojamos programinei įrangai stebėti. Jie turi tam tikrą skaičių vietų, kurias galima patikrinti asmenims',
     'checkin'  					=> 'Išduoti licenzijos prieigą',
     'checkout_history'  		=> 'Išdavimo istorija',
     'checkout'  				=> 'Išduotas licenzijų kiekis',

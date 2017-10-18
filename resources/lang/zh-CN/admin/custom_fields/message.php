@@ -28,7 +28,7 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => '现场集不存在',
 
         'create' => array(
             'error'   => '新增字段集失败，请重试',

@@ -4,8 +4,8 @@ return array(
 
     'does_not_exist' => 'Locatia nu exista.',
     'assoc_users'	 => 'Aceasta locatie este momentan asociata cu cel putin inca un alt utilizator si nu poate fi stearsa. Va rugam actualizati utilizatorii care nu mai apartin de aceasta locatie si incercati iar. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'assoc_assets'	 => 'Această locație este în prezent asociată cu cel puțin un material și nu poate fi ștearsă. Actualizați-vă activele astfel încât acestea să nu mai fie menționate și să încercați din nou.',
+    'assoc_child_loc'	 => 'Această locație este în prezent părinte pentru cel puțin o locație copil și nu poate fi ștearsă. Actualizați locațiile dvs. pentru a nu mai referi această locație și încercați din nou.',
 
 
     'create' => array(

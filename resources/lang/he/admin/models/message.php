@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'המודל אינו קיים.',
+    'assoc_users'	 => 'מודל זה משויך כרגע לנכס אחד או יותר ולא ניתן למחוק אותו. מחק את הנכסים ולאחר מכן נסה למחוק שוב.',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'המודל לא נוצר, נסה שוב.',
+        'success' => 'המודל נוצר בהצלחה.',
+        'duplicate_set' => 'כבר קיים מודל נכסים עם שם, יצרן ומספר דגם זה.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'המודל לא עודכן, נסה שוב',
+        'success' => 'המודל עודכן בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק מודל נכס זה?',
+        'error'   => 'הייתה בעיה במחיקת המודל. בבקשה נסה שוב.',
+        'success' => 'המודל נמחק בהצלחה.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'המודל לא שוחזר, נסה שוב',
+        'success' 		=> 'המודל שוחזר בהצלחה.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'לא השתנו שדות, ולכן שום דבר לא עודכן.',
+        'success' 		=> 'המודלים עודכנו.'
     ),
 
 );

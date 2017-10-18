@@ -8,15 +8,15 @@ return array(
         'success'               => 'A beállítások sikeresen frissítve.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Biztosan törölni szeretné ezt a biztonsági másolatot? Ez a művelet nem vonható vissza.',
+        'file_deleted'          => 'A biztonsági mentés sikeresen törölve lett.',
+        'generated'             => 'Új biztonsági másolatot sikerült létrehozni.',
+        'file_not_found'        => 'A biztonsági másolat nem található a kiszolgálón.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Hiba történt a tisztítás során.',
+        'validation_failed'     => 'A tisztítás megerősítése helytelen. Kérjük, írja be a "DELETE" szót a megerősítő mezőbe.',
+        'success'               => 'A törölt rekordok sikeresen feltöltöttek.'
     ),
 
 );

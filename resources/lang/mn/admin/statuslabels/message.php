@@ -2,24 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Статусын шошго байхгүй байна.',
+    'assoc_assets'	 => 'Энэ Статистик хаяг нь одоогоор хамгийн багадаа нэг акттай холбоотой бөгөөд устгагдах боломжгүй байна. Энэ хөрөнгийг дахин ашиглахын тулд өөрийн хөрөнгийг шинэчилнэ үү.',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Статусын шошгыг үүсгээгүй байна, дахин оролдоно уу.',
+        'success' => 'Статусын шошго амжилттай болсон.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Статусын шошго шинэчлэгдсэнгүй, дахин оролдоно уу',
+        'success' => 'Статусын шошго амжилттай болсон.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
-    )
+        'confirm'   => 'Та энэ Статус шошгыг устгахыг хүсч байна уу?',
+        'error'   => 'Статусын шошгыг устгахад асуудал гарлаа. Дахин оролдоно уу.',
+        'success' => 'Статусын шошго амжилттай устгагдсан байна.'
+    ),
+
+    'help' => array(
+        'undeployable'   => 'Эдгээр хөрөнгийг хэн ч өгч чадахгүй.',
+        'deployable'   => 'Эдгээр хөрөнгийг шалгах боломжтой. Тэдгээрийг оноож дууссаны дараа тэд <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong> гэсэн мета төлөв гэж тооцдог.',
+        'archived'   => 'Эдгээр хөрөнгө нь шалгагдаагүй, зөвхөн Архивлагдсан үзэгдэлд харагдана. Энэ нь төсөвт / түүхэн зориулалтаар ашиглах хөрөнгийн тухай мэдээллийг хадгалж үлдэхийн зэрэгцээ тэдгээрийг өдөр тутмын хөрөнгийн жагсаалтаас гаргахад тустай байдаг.',
+        'pending'   => 'Эд хөрөнгийг засварлахын тулд ихэвчлэн ашигладаг боловч эргэлтэнд орохоор хүлээгдэж буй эд зүйлсэд ашиглагддаггүй.',
+    ),
 
 );

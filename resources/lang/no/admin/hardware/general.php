@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_assets_title'           => 'About Assets',
-    'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'about_assets_title'           => 'Om assets',
+    'about_assets_text'            => 'Eiendeler er sporet av serienummer eller assetsmerke.  De pleier å være høyere verdi f. eks for å identifisere spesielle ting.',
 	'archived'  				=> 'Arkivert',
     'asset'  					=> 'Eiendel',
     'bulk_checkout'             => 'Sjekk ut Eiendel til Bruker',
     'checkin'  					=> 'Sjekk inn eiendel',
-    'checkout'  				=> 'Checkout Asset',
+    'checkout'  				=> 'Sjekk ut asset',
     'clone'  					=> 'Klon eiendel',
     'deployable'  				=> 'Utleverbar',
     'deleted'  					=> 'Denne eiendelen har blitt slettet. <a href="/hardware/:asset_id/restore">Klikk for å gjenopprette den</a>.',

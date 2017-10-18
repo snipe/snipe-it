@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'About Licenses',
-    'about_licenses'                  => 'Licenses are used to track software.  They have a specified number of seats that can be checked out to individuals',
+    'about_licenses_title'            => 'Tietoja lisensseistä',
+    'about_licenses'                  => 'Ohjelmistojen seurantaan käytetään lisenssejä. Heillä on tietty määrä paikkoja, jotka voidaan tarkistaa yksityishenkilöille',
     'checkin'  					=> 'Palautettavien Lisenssien Käyttäjämäärä',
     'checkout_history'  		=> 'Luovutushistoria',
     'checkout'  				=> 'Luovutettujen Lisenssien Käyttäjämäärä',

@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'about_manufacturers_title'    => 'Үйлдвэрлэгчийн талаар',
+    'about_manufacturers_text'  => 'Үйлдвэрлэгчид нь таны хөрөнгийг үүсгэдэг компаниуд юм. Та эдгээрийн талаар чухал мэдээллийг холбоо барих мэдээллийг хадгалах боломжтой бөгөөд энэ нь таны хөрөнгийн дэлгэрэнгүй хуудаснууд дээр харагдах болно.',
+    'asset_manufacturers'	=> 'Актив үйлдвэрлэгчид',
+    'create'				=> 'Үйлдвэрлэгч үүсгэх',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Нэр',
+    'support_email'   		=> 'Дэмжлэг Имэйл',
+    'support_phone'   		=> 'Утасны дэмжлэг',
+    'support_url'   		=> 'Дэмжих URL',
+    'update'				=> 'Үйлдвэрлэгчийг шинэчлэх',
     'url'   				=> 'URL',
 
 );

@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => 'Modelul nu a fost creat, incercati iar.',
         'success' => 'Modelul a fost creat.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Un model de activ cu numele, producătorul și numărul modelului există deja.',
     ),
 
     'update' => array(
@@ -24,13 +24,13 @@ return array(
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Modelul nu a fost restabilit, încercați din nou',
+        'success' 		=> 'Modelul a fost restaurat cu succes.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Nu au fost modificate câmpuri, deci nimic nu a fost actualizat.',
+        'success' 		=> 'Modelele au fost actualizate.'
     ),
 
 );

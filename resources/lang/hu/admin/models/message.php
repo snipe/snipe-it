@@ -8,29 +8,29 @@ return array(
 
     'create' => array(
         'error'   => 'A model nem lett létrehozva. Próbálkozz újra.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'success' => 'A modell sikeresen létrehozva.',
+        'duplicate_set' => 'Már létezik ilyen nevű eszközmodell, gyártó és modellszám.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'A modell nem frissült, próbálkozzon újra',
+        'success' => 'A modell sikeresen frissült.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Biztos benne, hogy törli ezt az eszközmodellt?',
+        'error'   => 'A modell törlését okozta. Kérlek próbáld újra.',
+        'success' => 'A modell sikeresen törölve lett.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'A modell nem állt helyre, próbálkozzon újra',
+        'success' 		=> 'A modell sikeresen visszaállt.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
+        'success' 		=> 'Modellek frissítve.'
     ),
 
 );

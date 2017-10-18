@@ -5,7 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite on määritetty käyttökunnottomaksi.
                         Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Hyvä yritys. Tätä omaisuutta ei ole olemassa tai se ei ole tarpeellista.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
     'create' => array(
@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.'
+        'error'   		=> 'Omaisuuden tarkastus epäonnistui. Yritä uudelleen.',
+        'success' 		=> 'Omaisuuden tarkastus onnistui kirjautuneena.'
     ),
 
 
@@ -38,23 +38,23 @@ return array(
     'upload' => array(
         'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'Et ole valinnut lähetettäviä tiedostoja tai tiedosto, jonka yrität ladata, on liian suuri',
         'invalidfiles' => 'Yksi tai useampia tiedostoja on liian iso tai sen tiedostotyyppi ei ole sallittu. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf, ja txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
-        'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'error'                 => 'Jotkin kohteet eivät tuoneet oikein.',
+        'errorDetail'           => 'Seuraavia kohteita ei tuotu virheiden vuoksi.',
+        'success'               => "Tiedostosi on tuotu",
+        'file_delete_success'   => "Tiedosto on poistettu onnistuneesti",
+        'file_delete_error'      => "Tiedostoa ei voitu poistaa",
     ),
 
 
     'delete' => array(
         'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',
         'error'   		=> 'Laitteen poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
+        'nothing_updated'   => 'Mitään omaisuutta ei valittu, joten mitään ei poistettu.',
         'success' 		=> 'Laite poistettu onnistuneesti.'
     ),
 
@@ -62,21 +62,21 @@ return array(
         'error'   		=> 'Laitteen luovutus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite luovutettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'Tätä omaisuutta ei ole saatavilla kassalle!'
     ),
 
     'checkin' => array(
         'error'   		=> 'Laitteen palautus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite palautettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Tämä omaisuus on jo tarkistettu.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled'
+        'error'   		=> 'Varallisuutta ei pyydetty, yritä uudelleen',
+        'success' 		=> 'Omaisuus pyydettiin onnistuneesti.',
+        'canceled'      => 'Checkout-pyyntö peruutettiin onnistuneesti'
     )
 
 );

@@ -12,8 +12,8 @@
             'success' => 'Údržba zařízení byla v pořádku vytvořena.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Údržba majetku nebyla upravena, zkuste to prosím znovu.',
+            'success' => 'Údržba majetku byla úspěšně upravena.'
         ],
         'asset_maintenance_incomplete' => 'Prozatím nedokončeno',
         'warranty'                     => 'Záruka',

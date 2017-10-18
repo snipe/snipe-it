@@ -1,6 +1,6 @@
 <?php
 return [
-    'about_companies_title'            => 'About Companies',
-    'about_companies_text'                  => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
-    'select_company' => 'Select Company',
+    'about_companies_title'            => 'நிறுவனங்கள் பற்றி',
+    'about_companies_text'                  => 'நிறுவனங்கள் ஒரு எளிய அடையாளங்காட்டி களமாகப் பயன்படுத்தப்படலாம் அல்லது உங்கள் நிர்வாக அமைப்புகளில் முழு நிறுவனம் ஆதரவு இயக்கப்பட்டிருந்தால், சொத்துக்களின் பார்வையையும், பயனர்களையும், பார்வையிடலாம்.',
+    'select_company' => 'நிறுவனம் தேர்ந்தெடு',
 ];

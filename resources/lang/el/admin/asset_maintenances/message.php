@@ -12,8 +12,8 @@
             'success' => 'Επιτυχής δημιουργία συντήρησης παγίου.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Η συντήρηση του ενεργητικού δεν έχει επεξεργαστεί, δοκιμάστε ξανά.',
+            'success' => 'Η συντήρηση του ενεργητικού έγινε με επιτυχία.'
         ],
         'asset_maintenance_incomplete' => 'Δεν ολοκληρώθηκε ακόμη',
         'warranty'                     => 'Εγγύηση',

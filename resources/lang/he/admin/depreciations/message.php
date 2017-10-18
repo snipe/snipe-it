@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'שיעור פחת אינו קיים.',
+    'assoc_users'	 => 'פחת זה משויך כרגע עם דגם אחד או יותר ולא ניתן למחוק אותו. מחק את המודלים ולאחר מכן נסה למחוק שוב.',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'מחלקת הפחת לא נוצרה, נסה שוב. You',
+        'success' => 'מחלקת הפחת נוצרה בהצלחה. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'שיעור הפחת לא עודכן, נסה שוב',
+        'success' => 'שיעור הפחת עודכן בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'האם אתה בטוח שברצונך למחוק את שיעור הפחת הזה?',
+        'error'   => 'אירעה בעיה במחיקת שיעור הפחת. בבקשה נסה שוב.',
+        'success' => 'מחלקת הפחת נמחקה בהצלחה.'
     )
 
 );

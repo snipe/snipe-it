@@ -31,7 +31,7 @@ return array(
         'create' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'update' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'delete' => 'Kullanıcı silinirken bir problem oluştu. Lütfen tekrar deneyin.',
-        'delete_has_assets' => 'This user has items assigned and could not be deleted.',
+        'delete_has_assets' => 'Bu kullanıcının atadığı öğeler var ve silinemiyor.',
         'unsuspend' => 'Kullanıcı erişimi açılırken bir sorun oluştu. Lütfen yeniden deneyin.',
         'import'    => 'Kullanıcılar içe aktarılırken bir sorun oluştu. Lütfen yeniden deneyin.',
         'asset_already_accepted' => 'Bu varlık zaten kabul etti.',
@@ -41,7 +41,7 @@ return array(
         'ldap_could_not_bind' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata: ',
         'ldap_could_not_search' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
         'ldap_could_not_get_entries' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
-        'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
+        'password_ldap' => 'Bu hesabın parolası LDAP / Active Directory tarafından yönetilir. Lütfen şifrenizi değiştirmek için BT departmanınızla iletişime geçin.',
     ),
 
     'deletefile' => array(

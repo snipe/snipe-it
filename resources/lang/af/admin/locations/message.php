@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'Ligging bestaan ​​nie.',
+    'assoc_users'	 => 'Hierdie ligging is tans gekoppel aan ten minste een gebruiker en kan nie uitgevee word nie. Dateer asseblief u gebruikers op om nie meer hierdie ligging te verwys nie en probeer weer.',
+    'assoc_assets'	 => 'Hierdie ligging is tans geassosieer met ten minste een bate en kan nie uitgevee word nie. Dateer asseblief jou bates op om nie meer hierdie ligging te verwys nie en probeer weer.',
+    'assoc_child_loc'	 => 'Hierdie ligging is tans die ouer van ten minste een kind se plek en kan nie uitgevee word nie. Werk asseblief jou liggings by om nie meer hierdie ligging te verwys nie en probeer weer.',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Ligging is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Ligging suksesvol geskep.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Ligging is nie opgedateer nie, probeer asseblief weer',
+        'success' => 'Ligging suksesvol opgedateer.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Is jy seker jy wil hierdie ligging uitvee?',
+        'error'   => 'Daar was \'n probleem met die verwydering van die ligging. Probeer asseblief weer.',
+        'success' => 'Die ligging is suksesvol verwyder.'
     )
 
 );

@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Tarvikut pole olemas.',
+    'assoc_users'	 => 'See lisavarustus on praegu: kasutajate poolt kontrollitud arvude arv. Palun kontrollige tarvikuid ja proovige uuesti.',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Lisatarvikut ei loodud, proovige uuesti.',
+        'success' => 'Lisavarustus loodi edukalt.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Lisatarvikut ei värskendatud. Proovige uuesti',
+        'success' => 'Lisatarvikut uuendati edukalt.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Kas olete kindel, et soovite seda lisaseadet kustutada?',
+        'error'   => 'Aksessuaar eemaldati. Palun proovi uuesti.',
+        'success' => 'Lisaseade kustutati edukalt.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Lisatarvikut ei kontrollitud, palun proovige uuesti',
+        'success' 		=> 'Lisaseade edukalt kontrollitud.',
+        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Lisatarvikut ei olnud märgitud, palun proovige uuesti',
+        'success' 		=> 'Lisaseade kontrollitud edukalt.',
+        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.'
     )
 
 
