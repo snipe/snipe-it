@@ -76,7 +76,7 @@
                           @endif
                         </td>
                         <td>
-                          @if ($licensedto->asset_id)
+                          @if ($licensedto->asset)
                             @can('view', $licensedto->asset)
                               <a href="{{ route('hardware.show', $licensedto->asset_id) }}">
                                 {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
