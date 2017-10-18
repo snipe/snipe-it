@@ -121,18 +121,6 @@ class RecryptFromMcrypt extends Command
 
             $bar = $this->output->createProgressBar(count($assets));
 
-            foreach ($custom_fields as $encrypted_field) {
-
-                // Try to decrypt the payload using the legacy app key
-                try {
-                    $decrypted_field = $mcrypter->decrypt($encrypted_field);
-                    $this->comment($decrypted_field);
-                } catch (\Exception $e) {
-                    $errors[] = ' - ERROR: Could not decrypt field ['.$encrypted_field->name.']: '.$e->getMessage();
-                }
-                $bar->advance();
-            }
-
 
             foreach ($assets as $asset) {
                 foreach ($custom_fields as $encrypted_field) {
