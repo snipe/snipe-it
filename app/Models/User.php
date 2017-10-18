@@ -378,6 +378,14 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         return json_decode($this->permissions, true);
     }
 
+
+    public function scopeByGroup($query, $id) {
+        return $query->whereHas('groups', function ($query) use ($id) {
+            $query->where('id', '=', $id);
+        });
+    }
+
+
     /**
      * Query builder scope to search on text
      *

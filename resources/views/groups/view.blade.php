@@ -2,56 +2,63 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/groups/table.view') }} -
-{{ $group->name }} 
-@parent
+    {{ $group->name }}
+    @parent
 @stop
+
+@section('header_right')
+    <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/groups/titles.update') }} </a>
+    <a href="{{ route('groups.index') }}" class="btn btn-default pull-right">{{ trans('general.back') }}</a>
+@stop
+
+
 
 {{-- Page content --}}
 @section('content')
 
-<div class="row header">
-    <div class="col-md-12">
-        <a href="{{ route('update/group', $group->id) }}" class="btn-flat white pull-right">
-            {{ trans('admin/groups/table.update') }}
-        </a>
-        <a href="{{ url('admin/groups') }}" class="btn-flat gray pull-right" style="margin-right:5px;">
-            <i class="fa fa-arrow-left icon-white"></i> {{ trans('general.back') }}
-        </a>
-        <h3 class="name"> {{ trans('admin/groups/titles.group_management') }} - {{ $group->name }}</h3>
-    </div>
-</div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table table-responsive">
+                                <table
+                                        name="groups_users"
+                                        id="table-users"
+                                        class="table table-striped snipe-table"
+                                        data-url="{{ route('api.users.index',['group_id'=> $group->id]) }}"
+                                        data-cookie="true"
+                                        data-click-to-select="true"
+                                        data-cookie-id-table="groups_usersDetailTable">
+                                    <thead>
 
-<div class="user-profile">
-    <div class="row profile">
-        <div class="col-md-12 bio">
-            @if (count($users) > 0)
-            <table id="example">
-                <thead>
-                    <tr role="row">
-                        <th class="col-md-3">{{ trans('admin/groups/table.name') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $user)
-                    <tr>
-                        <td>
-                            <a href="{{ route('users.show', $user->id) }}">{{ $user->first_name }} {{ $user->last_name }}</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            @else
-            <div class="col-md-12">
-                <div class="alert alert-info alert-block">
-                    <i class="fa fa-info-circle"></i>
-                    {{ trans('general.no_results') }}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            @endif
         </div>
-    </div> <!--.col-md-12-->
-</div> <!--.user-profile-->
+        <div class="col-md-3">
+
+            <ul class="list-unstyled">
+                @foreach ($group->decodePermissions() as $permission_name => $permission)
+                   <li>{!! ($permission == '1') ? '<i class="fa fa-check text-success"></i>' :  '<i class="fa fa-times text-danger"></i>' !!} {{ e(str_replace('.', ': ', ucwords($permission_name))) }} </li>
+                @endforeach
+
+            </ul>
+
+        </div>
+    </div>
+
+@stop
+
+@section('moar_scripts')
+    @include ('partials.bootstrap-table', [
+        'exportFile' => 'groups-export',
+        'search' => true,
+        'columns' => \App\Presenters\UserPresenter::dataTableLayout()
+    ])
+
 @stop

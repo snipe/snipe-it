@@ -87,10 +87,15 @@ class GroupsController extends Controller
     public function edit($id = null)
     {
         $group = Group::find($id);
-        $permissions = config('permissions');
-        $groupPermissions = $group->decodePermissions();
-        $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
-        return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
+
+        if ($group) {
+            $permissions = config('permissions');
+            $groupPermissions = $group->decodePermissions();
+            $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
+            return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
+        }
+
+        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
     }
 
     /**
@@ -140,6 +145,26 @@ class GroupsController extends Controller
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.delete'));
         }
         return redirect()->route('groups.index')->with('error', trans('general.feature_disabled'));
+    }
+
+    /**
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the group detail page.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $locationId
+     * @since [v4.0.11]
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show($id)
+    {
+        $group = Group::find($id);
+
+        if ($group) {
+            return view('groups/view', compact('group'));
+        }
+
+        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
     }
 
 }

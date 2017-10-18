@@ -332,6 +332,21 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function groupsFormatter(value) {
+
+        if (value) {
+            var groups = '';
+            for (var index in value.rows) {
+                groups += '<a href="{{ url('/') }}/admin/groups/' + value.rows[index].id + '" class="label label-default"> ' + value.rows[index].name + '</a> ';
+            }
+            return groups;
+        }
+    }
+
+    function groupsAdminLinkFormatter(value, row) {
+        return '<a href="{{ url('/') }}/admin/groups/' + row.id + '"> ' + value + '</a>';
+    }
+
     function trueFalseFormatter(value, row) {
         if ((value) && ((value == 'true') || (value == '1'))) {
             return '<i class="fa fa-check text-success"></i>';

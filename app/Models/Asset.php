@@ -781,14 +781,11 @@ class Asset extends Depreciable
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
                     });
                  })->orWhere(function ($query) use ($search) {
-
-                     $query->whereHas('assignedTo', function ($query) use ($search) {
                          $query->where('users.first_name', 'LIKE', '%'.$search.'%')
                          ->orWhere('users.last_name', 'LIKE', '%'.$search.'%')
                          ->orWhere('users.username', 'LIKE', '%'.$search.'%')
                          ->orWhere('locations.name', 'LIKE', '%'.$search.'%')
                          ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
-                     });
                 })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
