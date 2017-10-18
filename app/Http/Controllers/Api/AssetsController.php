@@ -146,39 +146,40 @@ class AssetsController extends Controller
                 $assets->withTrashed()->Deleted();
                 break;
             case 'Pending':
-                $assets->join('status_labels',function ($join) {
-                    $join->on('status_labels.id', "=", "assets.status_id")
-                        ->where('status_labels.deployable','=',0)
-                        ->where('status_labels.pending','=',1)
-                        ->where('status_labels.archived', '=', 0);
+                $assets->join('status_labels AS status_alias',function ($join) {
+                    $join->on('status_alias.id', "=", "assets.status_id")
+                        ->where('status_alias.deployable','=',0)
+                        ->where('status_alias.pending','=',1)
+                        ->where('status_alias.archived', '=', 0);
                 });
                 break;
             case 'RTD':
-                $assets->join('status_labels',function ($join) {
-                    $join->on('status_labels.id', "=", "assets.status_id")
-                        ->where('status_labels.deployable','=',1)
-                        ->where('status_labels.pending','=',0)
-                        ->where('status_labels.archived', '=', 0);
+                $assets->whereNull('assets.assigned_to')
+                ->join('status_labels AS status_alias',function ($join) {
+                    $join->on('status_alias.id', "=", "assets.status_id")
+                        ->where('status_alias.deployable','=',1)
+                        ->where('status_alias.pending','=',0)
+                        ->where('status_alias.archived', '=', 0);
                 });
                 break;
             case 'Undeployable':
                 $assets->Undeployable();
                 break;
             case 'Archived':
-                $assets->join('status_labels',function ($join) {
-                    $join->on('status_labels.id', "=", "assets.status_id")
-                        ->where('status_labels.deployable','=',0)
-                        ->where('status_labels.pending','=',0)
-                        ->where('status_labels.archived', '=', 1);
+                $assets->join('status_labels AS status_alias',function ($join) {
+                    $join->on('status_alias.id', "=", "assets.status_id")
+                        ->where('status_alias.deployable','=',0)
+                        ->where('status_alias.pending','=',0)
+                        ->where('status_alias.archived', '=', 1);
                 });
                 break;
             case 'Requestable':
                 $assets->where('assets.requestable', '=', 1)
-                    ->join('status_labels',function ($join) {
-                    $join->on('status_labels.id', "=", "assets.status_id")
-                        ->where('status_labels.deployable','=',1)
-                        ->where('status_labels.pending','=',0)
-                        ->where('status_labels.archived', '=', 0);
+                    ->join('status_labels AS status_alias',function ($join) {
+                    $join->on('status_alias.id', "=", "assets.status_id")
+                        ->where('status_alias.deployable','=',1)
+                        ->where('status_alias.pending','=',0)
+                        ->where('status_alias.archived', '=', 0);
                 });
 
                 break;
@@ -188,9 +189,9 @@ class AssetsController extends Controller
                 break;
             default:
                 // terrible workaround for complex-query Laravel bug in fulltext
-                $assets->join('status_labels',function ($join) {
-                    $join->on('status_labels.id', "=", "assets.status_id")
-                        ->where('status_labels.archived', '=', 0);
+                $assets->join('status_labels AS status_alias',function ($join) {
+                    $join->on('status_alias.id', "=", "assets.status_id")
+                        ->where('status_alias.archived', '=', 0);
                 });
         }
 
