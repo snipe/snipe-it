@@ -376,6 +376,9 @@ class AssetModelsController extends Controller
      */
     public function postBulkEdit(Request $request)
     {
+        if (is_array($models_raw_array)) {
+
+
         $models_raw_array = Input::get('ids');
         $models = AssetModel::whereIn('id', $models_raw_array)->get();
         $nochange = ['NC' => 'No Change'];
@@ -390,6 +393,10 @@ class AssetModelsController extends Controller
                 ->with('category_list', $category_list)
                 ->with('fieldset_list', $fieldset_list)
                 ->with('depreciation_list', $depreciation_list);
+        }
+
+        return redirect()->route('models.index')
+            ->with('error', 'You must select at least one model to edit.');
 
     }
 
