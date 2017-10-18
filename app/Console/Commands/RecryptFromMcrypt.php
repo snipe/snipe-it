@@ -92,8 +92,6 @@ class RecryptFromMcrypt extends Command
                 $this->info('WARNING: Could not backup app keys');
             }
 
-            $this->error($legacy_key);
-
             if($legacy_cipher){
                 $mcrypter = new McryptEncrypter($legacy_key,$legacy_cipher);
             }else{
