@@ -376,16 +376,16 @@ class AssetModelsController extends Controller
      */
     public function postBulkEdit(Request $request)
     {
-        if (is_array($models_raw_array)) {
-
-
+        
         $models_raw_array = Input::get('ids');
-        $models = AssetModel::whereIn('id', $models_raw_array)->get();
-        $nochange = ['NC' => 'No Change'];
-        $fieldset_list = $nochange + Helper::customFieldsetList();
-        $depreciation_list = $nochange + Helper::depreciationList();
-        $category_list = $nochange + Helper::categoryList('asset');
-        $manufacturer_list = $nochange + Helper::manufacturerList();
+
+        if (is_array($models_raw_array)) {
+            $models = AssetModel::whereIn('id', $models_raw_array)->get();
+            $nochange = ['NC' => 'No Change'];
+            $fieldset_list = $nochange + Helper::customFieldsetList();
+            $depreciation_list = $nochange + Helper::depreciationList();
+            $category_list = $nochange + Helper::categoryList('asset');
+            $manufacturer_list = $nochange + Helper::manufacturerList();
 
         
              return view('models/bulk-edit', compact('models'))
