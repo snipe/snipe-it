@@ -103,7 +103,7 @@ class RecryptFromMcrypt extends Command
             if ($settings->ldap_password=='') {
                 $this->comment('INFO: No LDAP password found. Skipping... ');
             }
-
+            /** @var CustomField[] $custom_fields */
             $custom_fields = CustomField::where('field_encrypted','=', 1)->get();
             $this->comment('INFO: Retrieving encrypted custom fields...');
 
@@ -116,6 +116,7 @@ class RecryptFromMcrypt extends Command
 
 
             // Get all assets with a value in any of the fields that were encrypted
+            /** @var Asset[] $assets */
             $assets = $query->get();
 
             $bar = $this->output->createProgressBar(count($assets));
@@ -135,13 +136,14 @@ class RecryptFromMcrypt extends Command
 
             foreach ($assets as $asset) {
                 foreach ($custom_fields as $encrypted_field) {
+                    $columnName = $encrypted_field->db_column;
 
                     // Make sure the value isn't null
-                    if ($asset->{$encrypted_field}!='') {
+                    if ($asset->{$columnName}!='') {
                         // Try to decrypt the payload using the legacy app key
                         try {
-                            $decrypted_field = $mcrypter->decrypt($asset->{$encrypted_field});
-                            $asset->{$encrypted_field} = \Crypt::encrypt($decrypted_field);
+                            $decrypted_field = $mcrypter->decrypt($asset->{$columnName});
+                            $asset->{$columnName} = \Crypt::encrypt($decrypted_field);
                             $this->comment($decrypted_field);
                         } catch (\Exception $e) {
                             $errors[] = ' - ERROR: Could not decrypt field ['.$encrypted_field->name.']: '.$e->getMessage();
