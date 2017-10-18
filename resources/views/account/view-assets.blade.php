@@ -230,7 +230,7 @@ View Assets for  {{ $user->present()->fullName() }}
                   id="table"
                   data-cookie="false"
                   data-cookie-id-table="userHistoryTable-{{ config('version.hash_version') }}"
-                  data-url="{{route('api.activity.index', ['user_id' => $user->id, 'order' => 'desc']) }}">
+                  data-url="{{route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'User', 'order' => 'desc']) }}">
             <thead>
             <tr>
               <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
