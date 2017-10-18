@@ -20,7 +20,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-warning"></i> {{ trans('admin/settings/general.purge') }}</h3>
                 </div>
-            {{ Form::open(['method' => 'POST', 'route' => ['settings.purge.index'], 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+            {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
             <!-- CSRF Token -->
                 {{csrf_field()}}
                 <div class="box-body">
