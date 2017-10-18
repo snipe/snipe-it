@@ -93,15 +93,19 @@ class RecryptFromMcrypt extends Command
             }
 
 
-            if($legacy_cipher){
+            if ($legacy_cipher){
                 $mcrypter = new McryptEncrypter($legacy_key,$legacy_cipher);
             }else{
                 $mcrypter = new McryptEncrypter($legacy_key);
             }
             $settings = Setting::getSettings();
 
-            if ($settings->ldap_password=='') {
+            if ($settings->ldap_pword=='') {
                 $this->comment('INFO: No LDAP password found. Skipping... ');
+            } else {
+                $decrypted_ldap_pword = $mcrypter->decrypt($settings->ldap_pword);
+                $settings->ldap_pword = \Crypt::encrypt($decrypted_ldap_pword);
+                $settings->save();
             }
             /** @var CustomField[] $custom_fields */
             $custom_fields = CustomField::where('field_encrypted','=', 1)->get();
