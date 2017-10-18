@@ -70,7 +70,7 @@ class LdapSync extends Command
         $results = Ldap::findLdapUsers();
 
         // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
-        $ldap_ou_locations = Location::whereNotNull('ldap_ou')->get()->toArray();
+        $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
         $ldap_ou_lengths = array();
         
         foreach ($ldap_ou_locations as $location) {
