@@ -48,6 +48,7 @@ class RecryptFromMcrypt extends Command
         // If not, we can try to use the current APP_KEY if looks like it's old
         $legacy_key = env('LEGACY_APP_KEY');
         $key_parts = explode(':', $legacy_key);
+        $legacy_cipher = env('LEGACY_CIPHER');
         $errors = array();
 
         if (!$legacy_key) {
@@ -60,6 +61,7 @@ class RecryptFromMcrypt extends Command
         if (strlen($legacy_key) == 32) {
             $legacy_length_check = true;
         } elseif (array_key_exists('1', $key_parts) && (strlen($key_parts[1])==44)) {
+            $legacy_key = base64_decode($key_parts[1],true);
             $legacy_length_check = true;
         } else {
             $legacy_length_check = false;
@@ -91,7 +93,11 @@ class RecryptFromMcrypt extends Command
             }
 
 
-            $mcrypter = new McryptEncrypter($legacy_key);
+            if($legacy_cipher){
+                $mcrypter = new McryptEncrypter($legacy_key,$legacy_cipher);
+            }else{
+                $mcrypter = new McryptEncrypter($legacy_key);
+            }
             $settings = Setting::getSettings();
 
             if ($settings->ldap_password=='') {
