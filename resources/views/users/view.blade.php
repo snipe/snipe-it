@@ -536,7 +536,6 @@ $(function () {
                 $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-check fa-3x icon-white" style="color: green"></i>');
                 $.each(data.result.file, function (index, file) {
                     $('<tr><td>' + file.notes + '</td><<td>' + file.name + '</td><td>Just now</td><td>' + file.filesize + '</td><td><a class="btn btn-info btn-sm hidden-print" href="import/process/' + file.name + '"><i class="fa fa-spinner process"></i> Process</a></td></tr>').prependTo("#upload-table > tbody");
-                    //$('<tr><td>').text(file.name).appendTo(document.body);
                 });
             }
             $('#progress').removeClass('active');
