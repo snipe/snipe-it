@@ -41,25 +41,30 @@
               $totalCost = 0;
                 ?>
               @foreach ($assetMaintenances as $assetMaintenance)
+                  <?php $assetMaintenanceTime = intval($assetMaintenance->asset_maintenance_time); ?>
                   @if ($assetMaintenance->asset)
                       <tr>
                         <td>{{ ($assetMaintenance->asset->company) ? $assetMaintenance->asset->company->name :  '' }}</td>
                         <td>{{ $assetMaintenance->asset->asset_tag }}</td>
                         <td>{{ $assetMaintenance->asset->name }}</td>
-                        <td>{{ $assetMaintenance->supplier->name }}</td>
+                        <td>
+                            @if ($assetMaintenance->supplier)
+                                {{ $assetMaintenance->supplier->name }}
+                            @else
+                                (deleted supplier)
+                            @endif
+                        </td>
                         <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
                         <td>{{ $assetMaintenance->title }}</td>
                         <td>{{ $assetMaintenance->start_date }}</td>
                         <td>{{ is_null($assetMaintenance->completion_date) ? trans('admin/asset_maintenances/message.asset_maintenance_incomplete') : $assetMaintenance->completion_date }}</td>
-                        @if (is_null($assetMaintenance->asset_maintenance_time))
-                        <?php
-                        $assetMaintenanceTime = intval(Carbon::now()->diffInDays(Carbon::parse($assetMaintenance->start_date)));
-                        ?>
-                        @else
-                        <?php
-                        $assetMaintenanceTime = intval($assetMaintenance->asset_maintenance_time);
-                        ?>
-                        @endif
+                          <?php
+
+                          if (is_null($assetMaintenance->asset_maintenance_time)) {
+                              $assetMaintenanceTime = intval(Carbon::now()->diffInDays(Carbon::parse($assetMaintenance->start_date)));
+                          }
+
+                          ?>
                         <td>{{ $assetMaintenanceTime }}</td>
                         <td>
                           {{ $snipeSettings->default_currency }}
