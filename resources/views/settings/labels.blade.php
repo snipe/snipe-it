@@ -21,7 +21,7 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
     <!-- CSRF Token -->
     {{csrf_field()}}
 
