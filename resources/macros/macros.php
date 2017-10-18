@@ -33,7 +33,7 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'he'=> "Hebrew",
       'hu'=> "Hungarian",
       'id'=> "Indonesian",
-      'ga-IE'=> "Italian",
+      'ga-IE'=> "Irish",
       'it'=> "Italian",
       'ja'=> "Japanese",
       'ko'=> "Korean",
