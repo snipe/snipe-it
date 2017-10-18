@@ -14,81 +14,32 @@
       <div class="box-body">
 
         <div class="table-responsive">
-          <table
-          name="maintenancesReport"
-          id="table"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="maintenancesReportTable">
+            <table
+                    name="maintenancesReport"
+                    id="table"
+                    class="table table-striped snipe-table"
+                    data-url="{{route('api.maintenances.index') }}"
+                    data-cookie="true"
+                    data-click-to-select="true"
+                    data-cookie-id-table="maintenancesReport-{{ config('version.hash_version') }}">
+                <thead>
+                <tr>
+                    <th data-field="company" data-sortable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
+                    <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
+                    <th data-sortable="false" data-field="asset_name" data-formatter="hardwareLinkObjFormatter">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
+                    <th data-sortable="false" data-field="supplier" data-formatter="suppliersLinkObjFormatter">{{ trans('general.supplier') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="asset_maintenance_type">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="title">{{ trans('admin/asset_maintenances/form.title') }}</th>
+                    <th data-searchable="true" data-sortable="false" data-field="start_date" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="completion_date" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="asset_maintenance_time">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right">{{ trans('admin/asset_maintenances/form.cost') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
+                </tr>
+                </thead>
+            </table>
 
-            <thead>
-              <tr role="row">
-                <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                <th class="col-sm-1">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
-                <th class="col-sm-1">{{ trans('general.supplier') }}</th>
-                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.title') }}</th>
-                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
-                <th class="col-sm-1">{{ trans('admin/asset_maintenances/form.cost') }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $totalDays = 0;
-              $totalCost = 0;
-                ?>
-              @foreach ($assetMaintenances as $assetMaintenance)
-                  <?php $assetMaintenanceTime = intval($assetMaintenance->asset_maintenance_time); ?>
-                  @if ($assetMaintenance->asset)
-                      <tr>
-                        <td>{{ ($assetMaintenance->asset->company) ? $assetMaintenance->asset->company->name :  '' }}</td>
-                        <td>{{ $assetMaintenance->asset->asset_tag }}</td>
-                        <td>{{ $assetMaintenance->asset->name }}</td>
-                        <td>
-                            @if ($assetMaintenance->supplier)
-                                {{ $assetMaintenance->supplier->name }}
-                            @else
-                                (deleted supplier)
-                            @endif
-                        </td>
-                        <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
-                        <td>{{ $assetMaintenance->title }}</td>
-                        <td>{{ $assetMaintenance->start_date }}</td>
-                        <td>{{ is_null($assetMaintenance->completion_date) ? trans('admin/asset_maintenances/message.asset_maintenance_incomplete') : $assetMaintenance->completion_date }}</td>
-                          <?php
-
-                          if (is_null($assetMaintenance->asset_maintenance_time)) {
-                              $assetMaintenanceTime = intval(Carbon::now()->diffInDays(Carbon::parse($assetMaintenance->start_date)));
-                          }
-
-                          ?>
-                        <td>{{ $assetMaintenanceTime }}</td>
-                        <td>
-                          {{ $snipeSettings->default_currency }}
-                          {{ number_format($assetMaintenance->cost,2) }}
-                        </td>
-                      </tr>
-                      @endif
-                <?php
-                $totalDays += $assetMaintenanceTime;
-                $totalCost += floatval($assetMaintenance->cost);
-                ?>
-              @endforeach
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="6" align="right"><strong>Totals:</strong></td>
-                <td>{{number_format($totalDays)}}</td>
-                <td>
-                  {{ $snipeSettings->default_currency }}
-                  {{ number_format($totalCost,2) }}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
         </div>
       </div>
     </div>
@@ -97,42 +48,5 @@
 @stop
 
 @section('moar_scripts')
-<script src="{{ asset('js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
-<script type="text/javascript">
-  $('#table').bootstrapTable({
-      classes: 'table table-responsive table-no-bordered',
-      undefinedText: '',
-      iconsPrefix: 'fa',
-      showRefresh: true,
-      search: true,
-      pageSize: {{ $snipeSettings->per_page }},
-      pagination: true,
-      sidePagination: 'client',
-      sortable: true,
-      cookie: true,
-      mobileResponsive: true,
-      showExport: true,
-      showColumns: true,
-      exportDataType: 'all',
-      exportTypes: ['csv', 'txt','json', 'xml'],
-      maintainSelected: true,
-      paginationFirstText: "{{ trans('general.first') }}",
-      paginationLastText: "{{ trans('general.last') }}",
-      paginationPreText: "{{ trans('general.previous') }}",
-      paginationNextText: "{{ trans('general.next') }}",
-      pageList: ['10','25','50','100','150','200'],
-      icons: {
-          paginationSwitchDown: 'fa-caret-square-o-down',
-          paginationSwitchUp: 'fa-caret-square-o-up',
-          columns: 'fa-columns',
-          refresh: 'fa-refresh'
-      },
-
-  });
-</script>
+    @include ('partials.bootstrap-table', ['exportFile' => 'maintenances-export', 'search' => true])
 @stop
