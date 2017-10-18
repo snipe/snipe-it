@@ -14,6 +14,17 @@ $factory->define(Actionlog::class, function (Faker\Generator $faker) {
 });
 
 
+$factory->defineAs(App\Models\Actionlog::class, 'asset-upload', function ($faker) {
+    $asset = factory(App\Models\Asset::class)->create();
+    return [
+        'item_type' => get_class($asset),
+        'item_id' => 1,
+        'user_id' => 1,
+        'filename' => $faker->word,
+        'action_type' => 'uploaded'
+    ];
+});
+
 
 $factory->defineAs(Actionlog::class, 'asset-checkout-user', function (Faker\Generator $faker) {
     $target = User::inRandomOrder()->first();
