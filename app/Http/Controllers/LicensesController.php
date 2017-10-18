@@ -187,6 +187,7 @@ class LicensesController extends Controller
         $license->termination_date  = $request->input('termination_date');
         $license->seats             = e($request->input('seats'));
         $license->manufacturer_id   =  $request->input('manufacturer_id');
+        $license->supplier_id       = $request->input('supplier_id');
 
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));

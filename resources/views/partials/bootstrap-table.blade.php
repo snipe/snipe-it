@@ -38,6 +38,9 @@ $('.snipe-table').bootstrapTable({
         cookie: true,
         cookieExpire: '2y',
         showExport: true,
+        @if (isset($showFooter))
+            showFooter: true,
+        @endif
         showColumns: true,
         trimOnSearch: false,
 
@@ -202,7 +205,7 @@ $('.snipe-table').bootstrapTable({
     }
 
 
-    // This handles
+    // This handles the icons and display of polymorphic entries
     function polymorphicItemFormatter(value) {
 
         var item_destination = '';
@@ -419,6 +422,15 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function sumFormatter(data) {
+        var field = this.field;
+        var total_sum = data.reduce(function(sum, row) {
+            return (sum) + (parseFloat(row[field]) || 0);
+        }, 0);
+        return total_sum.toFixed(2);
+    }
+    
+
     $(function () {
         $('#bulkEdit').click(function () {
             var selectedIds = $('.snipe-table').bootstrapTable('getSelections');
@@ -429,7 +441,9 @@ $('.snipe-table').bootstrapTable({
         });
     });
 
-    // This is necessary to make the bootstrap tooltips work inside of the wenzhixin/bootstrap-table formatters
+
+    // This is necessary to make the bootstrap tooltips work inside of the
+    // wenzhixin/bootstrap-table formatters
     $(function() {
         $('#table').on('post-body.bs.table', function () {
             $('[data-tooltip="true"]').tooltip({
@@ -437,6 +451,8 @@ $('.snipe-table').bootstrapTable({
             });
         });
     });
+
+
 
 
 </script>

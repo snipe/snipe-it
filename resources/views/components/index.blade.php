@@ -45,7 +45,7 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'components-export', 'search' => true, 'columns' => \App\Presenters\ComponentPresenter::dataTableLayout()])
+@include ('partials.bootstrap-table', ['exportFile' => 'components-export', 'search' => true, 'showFooter' => true, 'columns' => \App\Presenters\ComponentPresenter::dataTableLayout()])
 
 
 
