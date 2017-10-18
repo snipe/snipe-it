@@ -189,23 +189,29 @@ class SuppliersController extends Controller
      */
     public function destroy($supplierId)
     {
-        // Check if the supplier exists
-        if (is_null($supplier = Supplier::find($supplierId))) {
-            // Redirect to the suppliers page
+        if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances','assets','licenses')->find($supplierId))) {
             return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.not_found'));
         }
 
-        if ($supplier->num_assets() == 0) {
-            // Delete the supplier
-            $supplier->delete();
-            // Redirect to the suppliers management page
-            return redirect()->route('suppliers.index')->with(
-                'success',
-                trans('admin/suppliers/message.delete.success')
-            );
+
+        if ($supplier->assets_count > 0) {
+            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.delete.assoc_assets', ['asset_count' => (int) $supplier->assets_count]));
         }
-        // Redirect to the asset management page
-        return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.assoc_users'));
+
+        if ($supplier->asset_maintenances_count > 0) {
+            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.delete.assoc_maintenances', ['asset_maintenances_count' => $supplier->asset_maintenances_count]));
+        }
+
+        if ($supplier->licenses_count > 0) {
+            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.delete.assoc_licenses', ['licenses_count' => (int) $supplier->licenses_count]));
+        }
+
+        $supplier->delete();
+        return redirect()->route('suppliers.index')->with('success',
+            trans('admin/suppliers/message.delete.success')
+        );
+
+
     }
 
 
