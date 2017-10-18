@@ -98,8 +98,8 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.debug')) {
             $log_level = 'debug';
         } else {
-            if (config('log-level')) {
-                $log_level = config('log-level');
+            if (config('app.log_level')) {
+                $log_level = config('app.log_level');
             } else {
                 $log_level = 'error';
             }
