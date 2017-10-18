@@ -196,11 +196,17 @@ class AssetsController extends Controller
         }
 
 
+        // This is kinda gross, but we need to do this because the Bootstrap Tables
+        // API passes custom field ordering as custom_fields.fieldname, and we have to strip
+        // that out to let the default sorter below order them correctly on the assets table.
+        $sort_override = str_replace('custom_fields.','', $request->input('sort')) ;
 
-        // This handles all of the pivot sorting (versus the assets.* fields in the allowed_columns array)
-        $column_sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets.created_at';
-
-        switch ($request->input('sort')) {
+        // This handles all of the pivot sorting (versus the assets.* fields
+        // in the allowed_columns array)
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
+        
+        
+        switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
                 break;
