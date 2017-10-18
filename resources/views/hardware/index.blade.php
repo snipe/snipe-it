@@ -101,6 +101,7 @@
 @include ('partials.bootstrap-table', [
     'exportFile' => 'assets-export',
     'search' => true,
+    'showFooter' => true,
     'columns' => \App\Presenters\AssetPresenter::dataTableLayout()
 ])
 

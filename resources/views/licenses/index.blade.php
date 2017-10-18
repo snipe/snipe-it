@@ -45,6 +45,7 @@
 @include ('partials.bootstrap-table', [
     'exportFile' => 'licenses-export',
     'search' => true,
+    'showFooter' => true,
     'columns' => \App\Presenters\LicensePresenter::dataTableLayout()])
 
 @stop

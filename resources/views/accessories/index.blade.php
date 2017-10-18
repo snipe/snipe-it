@@ -42,6 +42,7 @@
 @include ('partials.bootstrap-table', [
     'exportFile' => 'accessories-export',
     'search' => true,
+    'showFooter' => true,
     'columns' => \App\Presenters\AccessoryPresenter::dataTableLayout()
     ])
 @stop
