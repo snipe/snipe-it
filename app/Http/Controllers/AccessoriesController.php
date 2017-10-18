@@ -197,11 +197,7 @@ class AccessoriesController extends Controller
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));
         }
-        // Prepare the error message
-        $error = trans('admin/accessories/message.does_not_exist', compact('id'));
-
-        // Redirect to the user management page
-        return redirect()->route('accessories')->with('error', $error);
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist', compact('id')));
     }
 
   /**
