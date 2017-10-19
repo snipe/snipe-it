@@ -32,6 +32,10 @@
         background-color: {{ $snipeSettings->header_color }};
         border-color: {{ $snipeSettings->header_color }};
         }
+
+        @if ($snipeSettings->custom_css)
+            {{ $snipeSettings->show_custom_css() }}
+        @endif
         </style>
 
     @endif

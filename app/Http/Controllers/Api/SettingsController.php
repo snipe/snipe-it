@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ldap;
 use Validator;
 use App\Models\Setting;
+use Mail;
 
 class SettingsController extends Controller
 {
@@ -159,5 +160,29 @@ class SettingsController extends Controller
 
 
     }
+
+    /**
+     * Test the email configuration
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Redirect
+     */
+    public function ajaxTestEmail()
+    {
+        try {
+            Mail::send('emails.test', [], function ($m) {
+                $m->to(config('mail.from.address'), config('mail.from.name'));
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.test_email'));
+            });
+            return response()->json(['message' => 'Mail sent! '], 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+
+    }
+
+
 
 }

@@ -178,6 +178,27 @@
                         </div>
                     </div>
 
+                       <!-- Mail test -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               {{ Form::label('login_note', 'Test Mail') }}
+                           </div>
+                           <div class="col-md-9" id="mailtestrow">
+                               <a class="btn btn-default btn-sm pull-left" id="mailtest" style="margin-right: 10px;">
+                                   Send Test</a>
+                               <span id="mailtesticon"></span>
+                               <span id="mailtestresult"></span>
+                               <span id="mailteststatus"></span>
+                           </div>
+                           <div class="col-md-9 col-md-offset-3">
+                               <div id="mailteststatus-error" class="text-danger"></div>
+                           </div>
+                           <div class="col-md-9 col-md-offset-3">
+                               <p class="help-block">This will attempt to send a test mail to {{ config('mail.from.address') }}.</p>
+                           </div>
+
+                       </div>
+
             </div> <!--/.box-body-->
             <div class="box-footer">
                 <div class="text-left col-md-6">
@@ -193,7 +214,7 @@
     </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    {{ Form::close() }}
 
 @stop
 
@@ -208,5 +229,56 @@
         }).on('ifUnchecked', function(){
             $('#auto_increment_prefix').prop('disabled', true);
         });
+
+
+        // Test Mail
+        $("#mailtest").click(function(){
+            $("#mailtestrow").removeClass('text-success');
+            $("#mailtestrow").removeClass('text-danger');
+            $("#mailtesticon").html('');
+            $("#mailteststatus").html('');
+            $('#mailteststatus-error').html('');
+            $("#mailtesticon").html('<i class="fa fa-spinner spin"></i> Sending Test Email...');
+            $.ajax({
+                url: '{{ route('api.settings.mailtest') }}',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {},
+                dataType: 'json',
+
+                success: function (data) {
+                    $("#mailtesticon").html('');
+                    $("#mailteststatus").html('');
+                    $('#mailteststatus-error').html('');
+                    $("#mailteststatus").removeClass('text-danger');
+                    $("#mailteststatus").addClass('text-success');
+                    $("#mailteststatus").html('<i class="fa fa-check text-success"></i> Mail sent!');
+                },
+
+                error: function (data) {
+
+                    $("#mailtesticon").html('');
+                    $("#mailteststatus").html('');
+                    $('#mailteststatus-error').html('');
+                    $("#mailteststatus").removeClass('text-success');
+                    $("#mailteststatus").addClass('text-danger');
+                    $("#mailtesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                    $('#mailteststatus').html('Mail could not be sent.');
+                    if (data.responseJSON) {
+                        $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
+                    } else {
+                        console.dir(data);
+                    }
+
+                }
+
+
+            });
+        });
+
+
     </script>
 @stop

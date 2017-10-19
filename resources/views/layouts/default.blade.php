@@ -303,7 +303,7 @@
                      </li>
                      <li>
                          <a href="{{ route('account.password.index') }}">
-                             <i class="fa fa-asterisk"></i> @lang('general.changepassword')
+                             <i class="fa fa-asterisk fa-fw"></i> @lang('general.changepassword')
                          </a>
                      </li>
 
