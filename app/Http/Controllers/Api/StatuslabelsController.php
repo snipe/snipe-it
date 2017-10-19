@@ -22,7 +22,7 @@ class StatuslabelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Statuslabel::class);
-        $allowed_columns = ['id','name','created_at'];
+        $allowed_columns = ['id','name','created_at', 'assets_count'];
 
         $statuslabels = Statuslabel::withCount('assets');
 
