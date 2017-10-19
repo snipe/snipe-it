@@ -250,12 +250,17 @@
                 dataType: 'json',
 
                 success: function (data) {
+                    console.dir(data);
                     $("#mailtesticon").html('');
                     $("#mailteststatus").html('');
                     $('#mailteststatus-error').html('');
                     $("#mailteststatus").removeClass('text-danger');
                     $("#mailteststatus").addClass('text-success');
-                    $("#mailteststatus").html('<i class="fa fa-check text-success"></i> Mail sent!');
+                    if (data.message) {
+                        $("#mailteststatus").html('<i class="fa fa-check text-success"></i> ' + data.message);
+                    } else {
+                        $("#mailteststatus").html('<i class="fa fa-check text-success"></i> Mail sent!');
+                    }
                 },
 
                 error: function (data) {
