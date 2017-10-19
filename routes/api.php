@@ -428,7 +428,15 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'as' => 'api.settings.ldaptestlogin',
         'uses' => 'SettingsController@ldaptestlogin'
     ]);
-    
+
+    Route::post(
+        'settings/mailtest',
+        [
+            'as'  => 'api.settings.mailtest',
+            'uses' => 'SettingsController@ajaxTestEmail' ]
+    );
+
+
     Route::resource('settings', 'SettingsController',
         [
             'names' =>

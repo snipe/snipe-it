@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
+use App\Helpers\Helper;
 
 /**
  * This controller handles all actions related to Settings for
@@ -1020,9 +1021,9 @@ class SettingsController extends Controller
                 $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                 $m->subject(trans('mail.test_email'));
             });
-            return response()->json(['message' => 'Mail sent! '], 200);
+            return response()->json(Helper::formatStandardApiResponse('success', null, 'Maiol sent!'));
         } catch (Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
+            return response()->json(Helper::formatStandardApiResponse('success', null, $e->getMessage()));
         }
 
     }

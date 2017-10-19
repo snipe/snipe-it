@@ -194,7 +194,7 @@
                                <div id="mailteststatus-error" class="text-danger"></div>
                            </div>
                            <div class="col-md-9 col-md-offset-3">
-                               <p class="help-block">This will attempt to send a test mail to {{ config('mail.reply_to.address') }}.</p>
+                               <p class="help-block">This will attempt to send a test mail to {{ config('mail.from.address') }}.</p>
                            </div>
 
                        </div>
@@ -235,10 +235,12 @@
         $("#mailtest").click(function(){
             $("#mailtestrow").removeClass('text-success');
             $("#mailtestrow").removeClass('text-danger');
+            $("#mailtesticon").html('');
             $("#mailteststatus").html('');
+            $('#mailteststatus-error').html('');
             $("#mailtesticon").html('<i class="fa fa-spinner spin"></i> Sending Test Email...');
             $.ajax({
-                url: '{{ route('settings.mailtest') }}',
+                url: '{{ route('api.settings.mailtest') }}',
                 type: 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
@@ -265,7 +267,11 @@
                     $("#mailteststatus").addClass('text-danger');
                     $("#mailtesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
                     $('#mailteststatus').html('Mail could not be sent.');
-                    $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
+                    if (data.responseJSON) {
+                        $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
+                    } else {
+                        console.dir(data);
+                    }
 
                 }
 
