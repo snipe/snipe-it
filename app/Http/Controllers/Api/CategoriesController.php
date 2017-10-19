@@ -20,7 +20,7 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Category::class);
-        $allowed_columns = ['id', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email'];
+        $allowed_columns = ['id', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count'];
 
         $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email'])
             ->withCount('assets', 'accessories', 'consumables', 'components');
@@ -32,7 +32,7 @@ class CategoriesController extends Controller
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
         $categories->orderBy($sort, $order);
 
         $total = $categories->count();
