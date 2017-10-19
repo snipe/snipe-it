@@ -179,16 +179,21 @@ $('.snipe-table').bootstrapTable({
 
             var actions = '<nobr>';
 
+            var dest = destination;
+            if (destination=='groups') {
+                var dest = 'admin/groups';
+            }
+
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
-                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" '
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '" '
                     + ' class="btn btn-danger btn-sm delete-asset"  data-tooltip="true"  '
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
@@ -197,7 +202,7 @@ $('.snipe-table').bootstrapTable({
             }
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
-                actions += '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-tooltip="true" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-tooltip="true" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
             }
             return actions;
 
