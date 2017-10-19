@@ -3,6 +3,11 @@
 
 {{-- Page content --}}
 @section('content')
+
+    @if ($snipeSettings->custom_forgot_pass_url)
+        <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
+    @else
+
     <form class="form" role="form" method="POST" action="{{ url('/password/email') }}">
         {!! csrf_field() !!}
     <div class="container">
@@ -50,5 +55,7 @@
     </div>
 
     </form>
+
+    @endif
 @stop
 

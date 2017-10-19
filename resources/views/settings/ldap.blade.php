@@ -377,11 +377,28 @@
                                 <span id="ldaptestloginstatus"></span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                <p class="help-block">Enter a valid LDAP username and password to test whether your LDAP login is configured correctly.</p>
+                                <p class="help-block">{{ trans('admin/settings/general.ldap_login_test_help') }}</p>
                             </div>
 
                         </div>
                        @endif
+
+                        <!-- LDAP Forgotten password -->
+                        <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::text('custom_forgot_pass_url', Input::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'https://my.ldapserver-forgotpass.com')) }}
+                                @else
+                                    {{ Form::text('custom_forgot_pass_url', Input::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), array('class' => 'form-control','placeholder' => 'https://my.ldapserver-forgotpass.com')) }}
+                                @endif
+                                <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>
+                                {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div><!-- LDAP Server -->
+
 
                     </div>
                 </div> <!--/.box-body-->

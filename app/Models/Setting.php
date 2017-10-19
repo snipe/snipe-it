@@ -38,6 +38,7 @@ class Setting extends Model
           "pwd_secure_min" => "numeric|required|min:5",
           "audit_warning_days" => "numeric|nullable",
           "audit_interval" => "numeric|nullable",
+          "custom_forgot_pass_url" => "url|nullable",
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];
