@@ -198,12 +198,16 @@ $('.snipe-table').bootstrapTable({
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash"></i></a></nobr>';
+                    + '<i class="fa fa-trash"></i></a>&nbsp;';
+            } else {
+                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
                 actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-tooltip="true" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
             }
+
+            actions +='</nobr>';
             return actions;
 
         };
