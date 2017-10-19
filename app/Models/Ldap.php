@@ -99,6 +99,10 @@ class Ldap extends Model
         if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
             return false;
         }
+        
+        ldap_unbind($connection);
+        $connection = Ldap::connectToLdap();
+        Ldap::bindAdminToLdap($connection);
 
         if (!$results = ldap_search($connection, $baseDn, $filterQuery)) {
             throw new Exception('Could not search LDAP: ');
