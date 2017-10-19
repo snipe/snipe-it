@@ -334,9 +334,9 @@
 
                         @if ($setting->ldap_enabled)
                         <!-- LDAP test -->
-                        <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
+                        <div class="form-group">
                             <div class="col-md-3">
-                                Test LDAP Sync
+                                {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                             </div>
                             <div class="col-md-9" id="ldaptestrow">
                                         <a class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">Test LDAP</a>
@@ -347,14 +347,14 @@
                                 <span id="ldapteststatus"></span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                <p class="help-block">This only tests that LDAP can sync correctly. If your LDAP Authentication query is not correct, users may still not be able to login.</p>
+                                <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>
                             </div>
 
                         </div>
                         <!-- LDAP Login test -->
-                        <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
+                        <div class="form-group">
                             <div class="col-md-3">
-                                Test LDAP Login
+                                {{ Form::label('test_ldap_login', 'Test LDAP Login') }}
                             </div>
                             <div class="col-md-9">
                                 <div class="row">
