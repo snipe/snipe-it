@@ -13,6 +13,7 @@ use Str;
 use View;
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -56,7 +57,7 @@ class SuppliersController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         // Create a new supplier
         $supplier = new Supplier;
@@ -135,7 +136,7 @@ class SuppliersController extends Controller
      * @param  int  $supplierId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($supplierId = null, Request $request)
+    public function update($supplierId = null, ImageUploadRequest $request)
     {
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
@@ -158,18 +159,17 @@ class SuppliersController extends Controller
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->notes                = request('notes');
 
+
         if (Input::file('image')) {
             $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $file_name = 'suppliers-'.str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/suppliers/'.$file_name);
             Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
             $supplier->image = $file_name;
-        }
-
-        if (request('image_delete') == 1 && $request->file('image') == "") {
+        } elseif (request('image_delete') == 1) {
             $supplier->image = null;
         }
 

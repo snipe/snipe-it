@@ -29,16 +29,6 @@ class Statuslabel extends SnipeModel
 
     protected $fillable = ['name', 'deployable', 'pending', 'archived'];
 
-    /**
-     * Show count of assets with status label
-     *
-     * @todo Remove this. It's dumb.
-     * @return \Illuminate\Support\Collection
-     */
-    public function has_assets()
-    {
-        return $this->hasMany('\App\Models\Asset', 'status_id')->count();
-    }
 
     /**
      * Get assets with associated status label
@@ -62,6 +52,27 @@ class Statuslabel extends SnipeModel
         } else {
             return 'deployable';
         }
+    }
+
+    public function scopePending()
+    {
+        return $this->where('pending', '=', 1)
+                    ->where('archived', '=', 0)
+                    ->where('deployable', '=', 0);
+    }
+
+    public function scopeArchived()
+    {
+        return $this->where('pending', '=', 0)
+            ->where('archived', '=', 1)
+            ->where('deployable', '=', 0);
+    }
+
+    public function scopeDeployable()
+    {
+        return $this->where('pending', '=', 0)
+            ->where('archived', '=', 0)
+            ->where('deployable', '=', 1);
     }
 
 

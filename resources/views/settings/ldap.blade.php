@@ -334,9 +334,9 @@
 
                         @if ($setting->ldap_enabled)
                         <!-- LDAP test -->
-                        <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
+                        <div class="form-group">
                             <div class="col-md-3">
-                                Test LDAP Sync
+                                {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                             </div>
                             <div class="col-md-9" id="ldaptestrow">
                                         <a class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">Test LDAP</a>
@@ -347,14 +347,14 @@
                                 <span id="ldapteststatus"></span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                <p class="help-block">This only tests that LDAP can sync correctly. If your LDAP Authentication query is not correct, users may still not be able to login.</p>
+                                <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>
                             </div>
 
                         </div>
                         <!-- LDAP Login test -->
-                        <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
+                        <div class="form-group">
                             <div class="col-md-3">
-                                Test LDAP Login
+                                {{ Form::label('test_ldap_login', 'Test LDAP Login') }}
                             </div>
                             <div class="col-md-9">
                                 <div class="row">
@@ -377,11 +377,28 @@
                                 <span id="ldaptestloginstatus"></span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                <p class="help-block">Enter a valid LDAP username and password to test whether your LDAP login is configured correctly.</p>
+                                <p class="help-block">{{ trans('admin/settings/general.ldap_login_test_help') }}</p>
                             </div>
 
                         </div>
                        @endif
+
+                        <!-- LDAP Forgotten password -->
+                        <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::text('custom_forgot_pass_url', Input::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'https://my.ldapserver-forgotpass.com')) }}
+                                @else
+                                    {{ Form::text('custom_forgot_pass_url', Input::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), array('class' => 'form-control','placeholder' => 'https://my.ldapserver-forgotpass.com')) }}
+                                @endif
+                                <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>
+                                {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div><!-- LDAP Server -->
+
 
                     </div>
                 </div> <!--/.box-body-->

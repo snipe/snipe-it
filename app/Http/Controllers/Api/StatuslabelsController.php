@@ -22,7 +22,7 @@ class StatuslabelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Statuslabel::class);
-        $allowed_columns = ['id','name','created_at'];
+        $allowed_columns = ['id','name','created_at', 'assets_count'];
 
         $statuslabels = Statuslabel::withCount('assets');
 
@@ -137,8 +137,14 @@ class StatuslabelsController extends Controller
         $this->authorize('delete', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
         $this->authorize('delete', $statuslabel);
-        $statuslabel->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/statuslabels/message.delete.success')));
+
+        // Check that there are no assets associated
+        if ($statuslabel->assets()->count() == 0) {
+            $statuslabel->delete();
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/statuslabels/message.delete.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/statuslabels/message.assoc_assets')));
 
     }
 

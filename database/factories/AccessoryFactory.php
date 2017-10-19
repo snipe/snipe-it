@@ -24,7 +24,8 @@ $factory->state(App\Models\Accessory::class, 'apple-bt-keyboard', function ($fak
         'category_id' => 8,
         'manufacturer_id' => 1,
         'qty' => 10,
-        'min_amt' => 2
+        'min_amt' => 2,
+        'supplier_id' => rand(1,5)
     ];
 
 });
@@ -36,7 +37,8 @@ $factory->state(App\Models\Accessory::class, 'apple-usb-keyboard', function ($fa
         'category_id' => 8,
         'manufacturer_id' => 1,
         'qty' => 15,
-        'min_amt' => 2
+        'min_amt' => 2,
+        'supplier_id' => rand(1,5)
     ];
 
 });
@@ -48,7 +50,8 @@ $factory->state(App\Models\Accessory::class, 'apple-mouse', function ($faker) {
         'category_id' => 9,
         'manufacturer_id' => 1,
         'qty' => 13,
-        'min_amt' => 2
+        'min_amt' => 2,
+        'supplier_id' => rand(1,5)
     ];
 
 });
@@ -56,7 +59,7 @@ $factory->state(App\Models\Accessory::class, 'apple-mouse', function ($faker) {
 $factory->state(App\Models\Accessory::class, 'microsoft-mouse', function ($faker) {
 
     return [
-        'name' => 'Sculpt Comfort Mouse\'',
+        'name' => 'Sculpt Comfort Mouse',
         'category_id' => 9,
         'manufacturer_id' => 2,
         'qty' => 13,

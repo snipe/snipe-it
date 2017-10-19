@@ -63,7 +63,13 @@
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
-                            <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
+                            @if ($snipeSettings->custom_forgot_pass_url)
+                                <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
+                            @else
+                                <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
+                            @endif
+
+
                         </div>
                     </div> <!-- end login box -->
 

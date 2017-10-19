@@ -41,25 +41,25 @@ class CategoryPresenter extends Presenter
             ], [
                 "field" => "assets_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => trans('general.assets'),
                 "visible" => true
             ], [
                 "field" => "accessories_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => trans('general.accessories'),
                 "visible" => true
             ], [
                 "field" => "consumables_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => trans('general.consumables'),
                 "visible" => true
             ], [
                 "field" => "components_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => trans('general.components'),
                 "visible" => true
             ], [
@@ -72,7 +72,7 @@ class CategoryPresenter extends Presenter
             ],  [
                 "field" => "require_acceptance",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => trans('admin/categories/table.require_acceptance'),
                 "visible" => true,
                 "formatter" => 'trueFalseFormatter',
