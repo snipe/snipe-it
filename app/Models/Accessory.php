@@ -17,7 +17,7 @@ class Accessory extends SnipeModel
     use Loggable, Presentable;
     use SoftDeletes;
 
-    protected $dates = ['deleted_at', 'purchase_date'];
+    protected $dates = ['deleted_at'];
     protected $table = 'accessories';
     protected $casts = [
         'requestable' => 'boolean'
@@ -61,9 +61,18 @@ class Accessory extends SnipeModel
         'purchase_date',
         'model_number',
         'manufacturer_id',
+        'supplier_id',
+        'image',
         'qty',
         'requestable'
     ];
+
+
+    public function supplier()
+    {
+        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+    }
+    
 
     public function setRequestableAttribute($value)
     {

@@ -27,6 +27,7 @@ public/uploads/logo.png
 public/uploads/logo.svg
 public/uploads/models/*
 public/uploads/suppliers/*
+public/uploads/accessories/*
 public/uploads/users/*
 storage/app/private_uploads/users/*
 storage/debugbar/

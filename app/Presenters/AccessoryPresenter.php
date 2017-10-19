@@ -31,6 +31,14 @@ class AccessoryPresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('general.id'),
                 "visible" => false
+            ],[
+                "field" => "image",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/hardware/table.image'),
+                "visible" => true,
+                "formatter" => "imageFormatter"
             ], [
                 "field" => "company",
                 "searchable" => true,
@@ -63,6 +71,14 @@ class AccessoryPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.manufacturer'),
                 "formatter" => "manufacturersLinkObjFormatter",
+            ], [
+                "field" => "supplier",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.supplier'),
+                "visible" => false,
+                "formatter" => "suppliersLinkObjFormatter"
             ], [
                 "field" => "location",
                 "searchable" => true,

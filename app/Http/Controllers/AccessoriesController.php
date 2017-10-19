@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Slack;
 use Str;
 use View;
+use Image;
+use App\Http\Requests\ImageUploadRequest;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
@@ -57,6 +59,7 @@ class AccessoriesController extends Controller
           ->with('item', new Accessory)
           ->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
+          ->with('supplier_list', Helper::suppliersList())
           ->with('location_list', Helper::locationsList())
           ->with('manufacturer_list', Helper::manufacturerList());
     }
@@ -68,7 +71,7 @@ class AccessoriesController extends Controller
    * @author [A. Gianotto] [<snipe@snipe.net>]
    * @return Redirect
    */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize(Accessory::class);
         // create a new model instance
@@ -87,6 +90,28 @@ class AccessoriesController extends Controller
         $accessory->purchase_cost           = Helper::ParseFloat(request('purchase_cost'));
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
+        $accessory->supplier_id             = request('supplier_id');
+
+        if ($request->hasFile('image')) {
+
+            if (!config('app.lock_passwords')) {
+                $image = $request->file('image');
+                $ext = $image->getClientOriginalExtension();
+                $file_name = "accessory-".str_random(18).'.'.$ext;
+                $path = public_path('/uploads/accessories');
+                if ($image->getClientOriginalExtension()!='svg') {
+                    Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save($path.'/'.$file_name);
+                } else {
+                    $image->move($path, $file_name);
+                }
+                $accessory->image = $file_name;
+            }
+        }
+
+
 
         // Was the accessory created?
         if ($accessory->save()) {
@@ -116,6 +141,7 @@ class AccessoriesController extends Controller
           ->with('category_list', Helper::categoryList('accessory'))
           ->with('company_list', Helper::companyList())
           ->with('location_list', Helper::locationsList())
+          ->with('supplier_list', Helper::suppliersList())
           ->with('manufacturer_list', Helper::manufacturerList());
     }
 
@@ -127,7 +153,7 @@ class AccessoriesController extends Controller
    * @param  int  $accessoryId
    * @return Redirect
    */
-    public function update(Request $request, $accessoryId = null)
+    public function update(ImageUploadRequest $request, $accessoryId = null)
     {
         if (is_null($accessory = Accessory::find($accessoryId))) {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
@@ -144,11 +170,38 @@ class AccessoriesController extends Controller
         $accessory->manufacturer_id         = request('manufacturer_id');
         $accessory->order_number            = request('order_number');
         $accessory->model_number            = request('model_number');
-        $accessory->purchase_date       = request('purchase_date');
-        $accessory->purchase_cost       = request('purchase_cost');
+        $accessory->purchase_date           = request('purchase_date');
+        $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
+        $accessory->supplier_id             = request('supplier_id');
 
-      // Was the accessory updated?
+        if ($request->hasFile('image')) {
+            
+            if (!config('app.lock_passwords')) {
+                
+                
+                $image = $request->file('image');
+                $ext = $image->getClientOriginalExtension();
+                $file_name = "accessory-".str_random(18).'.'.$ext;
+                $path = public_path('/uploads/accessories');
+                if ($image->getClientOriginalExtension()!='svg') {
+                    Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save($path.'/'.$file_name);
+                } else {
+                    $image->move($path, $file_name);
+                }
+                if (($accessory->image) && (file_exists($path.'/'.$accessory->image))) {
+                    unlink($path.'/'.$accessory->image);
+                }
+
+                $accessory->image = $file_name;
+            }
+        }
+
+
+        // Was the accessory updated?
         if ($accessory->save()) {
             return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.update.success'));
         }
