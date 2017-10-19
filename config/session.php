@@ -109,7 +109,7 @@ return [
     |
     */
 
-    'cookie' => env('COOKIE_NAME', 'sl53_session'),
+    'cookie' => env('COOKIE_NAME', 'snipeitv4_session'),
 
     /*
     |--------------------------------------------------------------------------

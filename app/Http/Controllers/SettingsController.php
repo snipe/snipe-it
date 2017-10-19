@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
+use App\Helpers\Helper;
 
 /**
  * This controller handles all actions related to Settings for
@@ -136,28 +137,6 @@ class SettingsController extends Controller
         ->with('section', 'Pre-Flight Check');
     }
 
-    /**
-    * Test the email configuration
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v3.0]
-    * @return Redirect
-    */
-    public function ajaxTestEmail()
-    {
-
-        try {
-            Mail::send('emails.test', [], function ($m) {
-                $m->to(config('mail.from.address'), config('mail.from.name'));
-                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject(trans('mail.test_email'));
-            });
-            return 'success';
-        } catch (Exception $e) {
-            return 'error';
-        }
-
-    }
 
     /**
     * Save the first admin user from Setup.
@@ -1023,5 +1002,29 @@ class SettingsController extends Controller
      */
     public function api() {
         return view('settings.api');
+    }
+
+
+
+    /**
+     * Test the email configuration
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Redirect
+     */
+    public function ajaxTestEmail()
+    {
+        try {
+            Mail::send('emails.test', [], function ($m) {
+                $m->to(config('mail.from.address'), config('mail.from.name'));
+                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                $m->subject(trans('mail.test_email'));
+            });
+            return response()->json(Helper::formatStandardApiResponse('success', null, 'Maiol sent!'));
+        } catch (Exception $e) {
+            return response()->json(Helper::formatStandardApiResponse('success', null, $e->getMessage()));
+        }
+
     }
 }
