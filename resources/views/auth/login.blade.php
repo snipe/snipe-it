@@ -4,8 +4,12 @@
 {{-- Page content --}}
 @section('content')
 
-    <form role="form" action="{{ url('/login') }}" method="POST" autocomplete="off">
+    <form role="form" action="{{ url('/login') }}" method="POST" autocomplete="false">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+        <!-- this is a hack to prevent Chrome from trying to autocomplete fields -->
+        <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
+        <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
 
         <div class="container">
             <div class="row">
@@ -38,7 +42,7 @@
 
                                     <fieldset>
                                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                            <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" autofocus>
+                                            <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text"  autocomplete="off" autofocus>
                                             {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">

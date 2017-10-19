@@ -346,6 +346,15 @@ $('.snipe-table').bootstrapTable({
         }
     }
 
+    function deployedLocationFormatter(row, value) {
+        if ((row) && (row!=undefined)) {
+            return '<a href="{{ url('/') }}/locations/' + row.id + '"> ' + row.name + '</a>';
+        } else if (value.rtd_location) {
+            return '<a href="{{ url('/') }}/locations/' + value.rtd_location.id + '" data-tooltip="true" title="Default Location"> ' + value.rtd_location.name + '</a>';
+        }
+
+    }
+
     function groupsAdminLinkFormatter(value, row) {
         return '<a href="{{ url('/') }}/admin/groups/' + row.id + '"> ' + value + '</a>';
     }

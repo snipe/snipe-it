@@ -194,7 +194,7 @@ class ConsumablesController extends Controller
         if (isset($consumable->id)) {
             return view('consumables/view', compact('consumable'));
         }
-        return redirect()->route('consumables')->with('error', trans('admin/consumables/message.does_not_exist', compact('id')));
+        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist', compact('id')));
     }
 
     /**
