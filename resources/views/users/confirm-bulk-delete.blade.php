@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Bulk Checkin &amp;amp; Delete
+Bulk Checkin &amp; Delete
 @parent
 @stop
 
