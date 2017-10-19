@@ -458,7 +458,7 @@ class AssetsController extends Controller
         if (request('assigned_user')) {
             $target = User::find(request('assigned_user'));
         } elseif (request('assigned_asset')) {
-            $target = Asset::find(request('assigned_asset'));
+            $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
         } elseif (request('assigned_location')) {
             $target = Location::find(request('assigned_location'));
         }

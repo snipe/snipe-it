@@ -457,16 +457,28 @@ class AssetsController extends Controller
 
         $this->authorize('checkout', $asset);
 
+        $error_payload = [];
+        $error_payload['asset'] = [
+            'id' => $asset->id,
+            'asset_tag' => $asset->asset_tag,
+        ];
         if ($request->has('user_id')) {
             $target = User::find($request->input('user_id'));
+            $error_payload['target_id'] = $request->input('user_id');
+            $error_payload['target_type'] = User::class;
+        // Don't let the user check an asset out to itself
         } elseif ($request->has('asset_id')) {
-            $target = Asset::find($request->input('asset_id'));
+            $target = Asset::where('id','!=',$asset_id)->find($request->input('asset_id'));
+            $error_payload['target_id'] = $request->input('asset_id');
+            $error_payload['target_type'] = Asset::class;
         } elseif ($request->has('location_id')) {
             $target = Location::find($request->input('location_id'));
+            $error_payload['target_id'] = $request->input('location_id');
+            $error_payload['target_type'] = Location::class;
         }
 
         if (!isset($target)) {
-            return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], 'No valid checkout target specified for asset '.e($asset->asset_tag).'.'));
+            return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'No valid checkout target specified for asset '.e($asset->asset_tag).'.'));
         }
 
         $checkout_at = request('checkout_at', date("Y-m-d H:i:s"));
