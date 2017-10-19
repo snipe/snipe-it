@@ -38,6 +38,10 @@ class AccessoriesController extends Controller
             $accessories->where('manufacturer_id','=',$request->input('manufacturer_id'));
         }
 
+        if ($request->has('supplier_id')) {
+            $accessories->where('supplier_id','=',$request->input('supplier_id'));
+        }
+
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
