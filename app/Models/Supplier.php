@@ -68,6 +68,11 @@ class Supplier extends SnipeModel
         return $this->hasMany('\App\Models\Asset', 'supplier_id');
     }
 
+    public function accessories()
+    {
+        return $this->hasMany('\App\Models\Accessory', 'supplier_id');
+    }
+
     public function asset_maintenances()
     {
         return $this->hasMany('\App\Models\AssetMaintenance', 'supplier_id');

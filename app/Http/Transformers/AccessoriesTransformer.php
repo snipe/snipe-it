@@ -25,6 +25,7 @@ class AccessoriesTransformer
             'name' => e($accessory->name),
             'company' => ($accessory->company) ? ['id' => $accessory->company->id,'name'=> e($accessory->company->name)] : null,
             'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id,'name'=> e($accessory->manufacturer->name)] : null,
+            'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id,'name'=> e($accessory->supplier->name)] : null,
             'model_number' => ($accessory->model_number) ? e($accessory->model_number) : null,
             'category' => ($accessory->category) ? ['id' => $accessory->category->id,'name'=> e($accessory->category->name)] : null,
             'location' => ($accessory->location) ? ['id' => $accessory->location->id,'name'=> e($accessory->location->name)] : null,
@@ -35,6 +36,7 @@ class AccessoriesTransformer
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
             'remaining_qty' => $accessory->numRemaining(),
+            'image' => ($accessory->image) ? url('/').'/uploads/accessories/'.e($accessory->image) : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
 
