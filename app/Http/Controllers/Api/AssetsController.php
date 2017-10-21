@@ -98,7 +98,7 @@ class AssetsController extends Controller
 
         // These are used by the API to query against specific ID numbers
         if ($request->has('status_id')) {
-            $assets->where('status_id', '=', $request->input('status_id'));
+            $assets->where('assets.status_id', '=', $request->input('status_id'));
         }
 
         if ($request->has('model_id')) {
