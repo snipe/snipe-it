@@ -35,23 +35,23 @@
 			</td>
 		</tr>
 	@endif
-	@if (isset($model_name))
+	@if (isset($model_number))
 		<tr>
 			<td style="background-color:#ccc">
 				{{ trans('general.model_no') }}:
 			</td>
 			<td>
-				<strong>{{ $model_name }}</strong>
+				<strong>{{ $model_number }}</strong>
 			</td>
 		</tr>
 	@endif
-	@if (isset($model_number))
+	@if (isset($model_name))
 		<tr>
 			<td style="background-color:#ccc">
 				{{ trans('general.asset_model') }}:
 			</td>
 			<td>
-				<strong>{{ $model_number }}</strong>
+				<strong>{{ $model_name }}</strong>
 			</td>
 		</tr>
 	@endif
