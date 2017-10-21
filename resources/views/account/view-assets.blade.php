@@ -30,6 +30,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 <tr>
                   <th class="col-md-4">{{ trans('admin/hardware/table.asset_model') }}</th>
                   <th class="col-md-2">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                  <th class="col-md-3">{{ trans('admin/hardware/table.serial') }}</th>
                   <th class="col-md-3">{{ trans('general.name') }}</th>
                   <th></th>
                 </tr>
@@ -43,6 +44,7 @@ View Assets for  {{ $user->present()->fullName() }}
                     @endif
                   </td>
                   <td>{{ $asset->asset_tag }}</td>
+                  <td>{{ $asset->serial }}</td>
                   <td>{{ $asset->name }}</td>
                   <td>
                     @if (($asset->image) && ($asset->image!=''))
