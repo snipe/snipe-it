@@ -38,7 +38,7 @@
 		@if (isset($model_name))
 			<tr>
 				<td>
-					{{ trans('general.model_no') }}:
+					{{ trans('general.asset_model') }}:
 				</td>
 				<td>
 					<strong>{{ $model_name }}</strong>
@@ -48,7 +48,7 @@
 		@if (isset($model_number))
 			<tr>
 				<td>
-					{{ trans('general.asset_model') }}:
+					{{ trans('general.model_no') }}:
 				</td>
 				<td>
 					<strong>{{ $model_number }}</strong>
