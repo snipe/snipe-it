@@ -31,6 +31,7 @@ class UsersController extends Controller
             'users.two_factor_enrolled',
             'users.jobtitle',
             'users.email',
+            'users.phone',
             'users.username',
             'users.location_id',
             'users.manager_id',
@@ -93,7 +94,7 @@ class UsersController extends Controller
                         'last_name','first_name','email','jobtitle','username','employee_num',
                         'assets','accessories', 'consumables','licenses','groups','activated','created_at',
                         'two_factor_enrolled','two_factor_optin','last_login', 'assets_count', 'licenses_count',
-                        'consumables_count', 'accessories_count'
+                        'consumables_count', 'accessories_count', 'phone'
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';

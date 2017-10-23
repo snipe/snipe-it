@@ -33,6 +33,7 @@ class UsersTransformer
                     'name'=> e($user->manager->username)
                 ]  : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
+                'phone' => ($user->phone) ? e($user->phone) : null,
                 'email' => e($user->email),
                 'department' => ($user->department) ? [
                     'id' => (int) $user->department->id,
