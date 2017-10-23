@@ -1060,7 +1060,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderLocation($query, $order)
     {
-        return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
+        return $query->leftJoin('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
     }
 
 
