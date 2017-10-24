@@ -11,10 +11,28 @@
 <script src="{{ asset('js/jspdf.plugin.autotable.js') }}"></script>
 <script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
 <script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
+<script src="{{ asset('js/extensions/sticky-header/bootstrap-table-sticky-header.js') }}"></script>
 @endif
 
 <script nonce="{{ csrf_token() }}">
-$('.snipe-table').bootstrapTable({
+
+    var $table = $('.snipe-table');
+    $(function () {
+        buildTable($table, 20, 50);
+    });
+    function buildTable($el) {
+        var stickyHeaderOffsetY = 0;
+
+        if ( $('.navbar-fixed-top').css('height') ) {
+            stickyHeaderOffsetY = +$('.navbar-fixed-top').css('height').replace('px','');
+        }
+        if ( $('.navbar-fixed-top').css('margin-bottom') ) {
+            stickyHeaderOffsetY += +$('.navbar-fixed-top').css('margin-bottom').replace('px','');
+        }
+
+
+
+$('.snipe-table').bootstrapTable('destroy').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
         iconsPrefix: 'fa',
@@ -38,6 +56,11 @@ $('.snipe-table').bootstrapTable({
         cookie: true,
         cookieExpire: '2y',
         showExport: true,
+
+    stickyHeader: true,
+    stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
+
+
         @if (isset($showFooter))
             showFooter: true,
         @endif
@@ -101,6 +124,8 @@ $('.snipe-table').bootstrapTable({
         },
 
     });
+    }
+
 
 
     function dateRowCheckStyle(value) {
