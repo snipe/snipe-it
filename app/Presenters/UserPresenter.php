@@ -287,7 +287,8 @@ class UserPresenter extends Presenter
             return "//gravatar.com/avatar/".$gravatar;
         }
 
-        return false;
+        // Set a fun, gender-neutral default icon
+        return url('/').'/img/default-sm.png';
 
     }
 
