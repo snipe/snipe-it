@@ -67,7 +67,7 @@ class UsersController extends Controller
         }
         
         if ($request->has('group_id')) {
-            $users = $users->ByGroup($request->has('group_id'));
+            $users = $users->ByGroup($request->get('group_id'));
         }
 
         if ($request->has('department_id')) {
