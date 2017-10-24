@@ -70,6 +70,14 @@ class UserPresenter extends Presenter
                 "formatter" => "emailFormatter"
             ],
             [
+                "field" => "phone",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/users/table.phone'),
+                "visible" => true,
+            ],
+            [
                 "field" => "username",
                 "searchable" => true,
                 "sortable" => true,

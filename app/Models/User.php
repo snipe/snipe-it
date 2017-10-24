@@ -403,6 +403,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
                 ->orWhere('users.email', 'LIKE', "%$search%")
                 ->orWhere('users.username', 'LIKE', "%$search%")
                 ->orWhere('users.notes', 'LIKE', "%$search%")
+                ->orWhere('users.phone', 'LIKE', "%$search%")
                 ->orWhere('users.jobtitle', 'LIKE', "%$search%")
                 ->orWhere('users.employee_num', 'LIKE', "%$search%")
                 ->orWhere(function ($query) use ($search) {
