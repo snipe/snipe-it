@@ -914,7 +914,7 @@ class Asset extends Depreciable
             }
 
 
-                    $query->orWhere($fieldname, 'LIKE', '%' . $search_val . '%');
+            $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
 
 
         });
