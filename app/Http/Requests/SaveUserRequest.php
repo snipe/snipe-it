@@ -27,15 +27,17 @@ class SaveUserRequest extends Request
 
         $rules = [];
 
+        \Log::debug($this->method());
         switch($this->method())
         {
 
-            // Brand new asset
+            // Brand new user
             case 'POST':
             {
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 $rules['password'] = Setting::passwordComplexityRulesSaving('store');
+                break;
             }
 
             // Save all fields
@@ -43,11 +45,13 @@ class SaveUserRequest extends Request
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 $rules['password'] = Setting::passwordComplexityRulesSaving('update');
+                break;
 
             // Save only what's passed
             case 'PATCH':
             {
                 $rules['password'] = Setting::passwordComplexityRulesSaving('update');
+                break;
             }
 
             default:break;
