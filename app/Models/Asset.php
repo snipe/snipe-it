@@ -184,7 +184,7 @@ class Asset extends Depreciable
         } else {
             $user_name = "Unassigned";
         }
-        return $this->asset_tag . ' - ' . $this->name . ' (' . $user_name . ') ' . $this->model->name;
+        return $this->asset_tag . ' - ' . $this->name . ' (' . $user_name . ') ' . ($this->model) ? $this->model->name: '';
     }
 
     public function validationRules($id = '0')
