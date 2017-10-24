@@ -35,6 +35,15 @@ class UserPresenter extends Presenter
                 "visible" => false
             ],
             [
+                "field" => "avatar",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => 'Avatar',
+                "visible" => false,
+                "formatter" => "imageFormatter"
+            ],
+            [
                 "field" => "company",
                 "searchable" => true,
                 "sortable" => true,
