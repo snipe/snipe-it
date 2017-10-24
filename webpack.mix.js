@@ -23,7 +23,8 @@ mix.styles([
     'resources/assets/css/font-awesome/font-awesome.min.css',
     './bower_components/iCheck/skins/minimal/minimal.css',
     './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css',
-    'public/css/overrides.css',
+    'public/css/bootstrap-tables-sticky-header.css',
+    'public/css/overrides.css'
 ], 'public/css/dist/all.css');
 
 mix.js(
