@@ -92,6 +92,7 @@
             <ul class="dropdown-menu">
               <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
               <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+              <li><a href="{{ route('hardware/generatelabels', array('ids' => $user->assets->pluck('id')->toArray())) }}">{{ trans('admin/hardware/general.generate_labels') }}</a></li>
               @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
                 <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
               @endif
