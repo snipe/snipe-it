@@ -28,11 +28,15 @@
             <!-- Date field -->
 
                 @if ($field->format=='DATE')
-                    <div class="input-group col-md-4" style="padding-left: 0px;">
 
-                        <input type="text" value="{{ Input::old($field->db_column_name(),(isset($item) ? \App\Helpers\Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="datepicker form-control col-md-4" name="{{ $field->db_column_name() }}" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
+                        <div class="input-group col-md-4" style="padding-left: 0px;">
+                            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="{{ $field->db_column_name() }}" id="{{ $field->db_column_name() }}" value="{{ Input::old($field->db_column_name(),(isset($item) ? \App\Helpers\Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : "")) }}">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+
+
                 @else
                     @if (($field->field_encrypted=='0') || (Gate::allows('admin')))
                     <input type="text" value="{{ Input::old($field->db_column_name(),(isset($item) ? \App\Helpers\Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
