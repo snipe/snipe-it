@@ -73,7 +73,7 @@
               }
           };
     </script>
-    <!-- Add laravel route sinto javascript  Primarily useful for vue.-->
+    <!-- Add laravel routes into javascript  Primarily useful for vue.-->
     @routes
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
