@@ -1,7 +1,7 @@
 
 const { mix } = require('laravel-mix');
 
-mix.setPublicPath('build'); //this throws everything to root dir 'build'
+mix.setPublicPath('farts'); //this throws everything to root dir 'build'
 
 
 // This generates a file called app.css, which we use
@@ -16,8 +16,7 @@ mix
     .less('resources/assets/less/AdminLTE.less', 'css')
     .less('resources/assets/less/app.less', 'css')
     .less('resources/assets/less/overrides.less', 'css')
-
-mix.styles([
+.styles([
     'build/css/app.css',
     'public/css/AdminLTE.css',
     'resources/assets/css/font-awesome/font-awesome.min.css',
@@ -25,15 +24,12 @@ mix.styles([
     './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css',
     'public/css/bootstrap-tables-sticky-header.css',
     'build/css/overrides.css'
-], 'public/css/dist/all.css');
-
-mix.js(
+], 'public/css/dist/all.css')
+.js(
     // jQuery is loaded from vue.js webpack process
     './resources/assets/js/vue.js', //this is Snipe-IT's initializer for Vue.js
     'build'
-).sourceMaps();
-
-mix.scripts([
+).sourceMaps().scripts([
     './node_modules/jquery-ui/jquery-ui.js',
     'build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
     './node_modules/tether/dist/js/tether.min.js',
@@ -48,10 +44,6 @@ mix.scripts([
     './resources/assets/js/app.js', //this is part of AdminLTE
     './resources/assets/js/snipeit.js', //this is the actual Snipe-IT JS
     './resources/assets/js/snipeit_modals.js'
-],'public/js/dist/all.js');
-
-//if (mix.config.inProduction) {
-   //mix.version();
-//}
+],'public/js/dist/all.js').version();
 
 
