@@ -95,11 +95,9 @@
             // this code adds the newly created object to that select
             var selector = document.getElementById(select);
             if(!selector) {
-               // console.error("Could not find original <select> element with an id of: "+select);
                 return false;
             }
-            //console.log(document.getElementById(select));
-            // console.dir(selector);
+
             selector.options[selector.length] = new Option(name, id);
             selector.selectedIndex = selector.length - 1;
             $(selector).trigger("change");
@@ -109,10 +107,8 @@
 
         },
         error: function (result) {
-            // console.log('Error: ' + result.responseJSON.error.message );
             msg = result.responseJSON.messages || result.responseJSON.error;
             $('#modal_error_msg').html("Server Error: "+msg).show();
-            //window.alert("Unable to add new " + model + " - error: " + msg);
         }
 
 
