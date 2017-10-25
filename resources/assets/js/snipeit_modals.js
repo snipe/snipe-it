@@ -23,7 +23,7 @@
  */
 
  $(function () {
-  console.warn("Loading up Modal functionality.");
+
 
   //handle modal-add-interstitial calls
   var model, select;
@@ -45,7 +45,7 @@
 
   $('#createModal').on('click','#modal-save', function () {
     var data = {};
-    console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
+    //console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
     $('.modal-body input:visible').each(function (index, elem) {
         var bits = elem.id.split("-");
         if (bits[0] === "modal") {
@@ -59,11 +59,10 @@
     });
 
     data._token = Laravel.csrfToken;
-    //console.log(data);
 
     $.ajax({
         type: 'POST',
-        url: "../api/v1/" + model + "s",
+        url: baseUrl+ "/api/v1/" + model + "s",
         headers: {
             "X-Requested-With": 'XMLHttpRequest',
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -71,13 +70,15 @@
 
         data: data,
         success: function (result) {
-            // {"status":"error","messages":{"name":["The name field is required."]}}
+            console.dir(result);
+
             if(result.status == "error") {
                 var error_message="";
                 for(var field in result.messages) {
-                    error_message+="Problem(s) with field '"+field+"': "+result.messages[field].join(", ");
+                    error_message += "<li>Problem(s) with field <i><strong>" + field + "</strong></i>: " + result.messages[field];
+                    console.dir(result.messages);
+                    console.log('error_messages are: ' + error_message);
                 }
-                //window.alert("Error adding "+model+": "+error_message);
                 $('#modal_error_msg').html(error_message).show();
                 return false;
             }
