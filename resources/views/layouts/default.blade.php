@@ -108,7 +108,7 @@
                  @if ($snipeSettings->brand == '3')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img" style="max-height: 50px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
                           @endif
                           {{ $snipeSettings->site_name }}
                       </a>
