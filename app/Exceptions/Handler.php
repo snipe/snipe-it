@@ -67,7 +67,7 @@ class Handler extends ExceptionHandler
             }
 
             if ($e instanceof \Illuminate\Validation\ValidationException) {
-                return response()->json(Helper::formatStandardApiResponse('error', $e->response['messages'], $e->getMessage(), 400));
+                return response()->json(Helper::formatStandardApiResponse('error', null, $e->response['messages'], 400));
             }
 
             if ($this->isHttpException($e)) {
