@@ -175,7 +175,7 @@ echo "
 "
 
 echo ""
-echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Debian and Ubuntu!"
+echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Fedora, Debian and Ubuntu!"
 echo ""
 shopt -s nocasematch
 case $distro in
