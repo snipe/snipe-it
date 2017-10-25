@@ -1,7 +1,7 @@
 
 const { mix } = require('laravel-mix');
 
-mix.setPublicPath('farts'); //this throws everything to root dir 'build'
+mix.setPublicPath('build'); //this throws everything to root dir 'build'
 
 
 // This generates a file called app.css, which we use
