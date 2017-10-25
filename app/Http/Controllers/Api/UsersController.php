@@ -111,6 +111,78 @@ class UsersController extends Controller
 
 
     /**
+     * Display a listing of the resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', User::class);
+
+        $users = User::select(
+            [
+                'users.id',
+                'users.employee_num',
+                'users.first_name',
+                'users.last_name',
+                'users.gravatar',
+                'users.avatar',
+                'users.email',
+            ]
+            );
+
+        $users = Company::scopeCompanyables($users);
+
+        if ($request->has('search')) {
+            $users = $users->where('first_name', '=', '%'.$request->get('search').'%')
+                ->orWhere('last_name', 'LIKE', '%'.$request->get('search').'%')
+                ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
+                ->orWhere('employee_num', '=', '%'.$request->get('search').'%');
+        }
+
+        $users = $users->orderBy('last_name', 'asc');
+        $users = $users->paginate(50);
+        $users_array = [];
+
+        foreach ($users as $user) {
+            $name_str = '';
+            if ($user->last_name!='') {
+                $name_str .= e($user->last_name).', ';
+            }
+            $name_str .= e($user->first_name);
+
+            if ($user->employee_num!='') {
+                $name_str .= ' (#'.e($user->employee_num).')';
+            }
+
+            $users_array[] =
+                [
+                    'id' => $user->id,
+                    'text' => $name_str,
+                    'image' => ($user->present()->gravatar) ? $user->present()->gravatar : null,
+                ];
+        }
+        $results = [
+            'items' => $users_array,
+            'pagination' =>
+                [
+                    'more' => ($users->currentPage() >= $users->lastPage()) ? false : true,
+                    'per_page' => $users->perPage()
+                ],
+            'total_count' => $users->total(),
+            'page' => $users->currentPage(),
+            'page_count' => $users->lastPage()
+        ];
+
+        return $results;
+    }
+
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

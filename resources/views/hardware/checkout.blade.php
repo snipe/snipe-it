@@ -27,7 +27,7 @@
         <div class="box-body">
             {{csrf_field()}}
             @if ($asset->model->name)
-            <!-- Asset name -->
+            <!-- Model name -->
             <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
                 {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
@@ -45,14 +45,23 @@
               </div>
             </div>
 
-            <!-- User -->
+
+
             <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+
+
+
+
               {{ Form::label('assigned_user', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-              <div class="col-md-7 required">
-                {{ Form::select('assigned_user', $users_list , Input::old('assigned_user', $asset->assigned_type == 'App\Models\User' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_user_select', 'style'=>'width:100%')) }}
+
+                <div class="col-md-7 required">
+                    <select class="js-data-user-ajax" name="assigned_user" style="width: 350px;">
+                        <option value="">{{ trans('general.select_user') }}</option>
+                    </select>
+                </div>
 
                 {!! $errors->first('assigned_user', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              </div>
+
               <div class="col-md-1 col-sm-1 text-left">
                   @can('create', \App\Models\User::class)
                     <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user_select' class="btn btn-sm btn-default">New</a>
