@@ -229,7 +229,7 @@
                       <form action="{{ route('users/bulkedit') }}" method="POST">
                         <!-- CSRF Token -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        <input type="hidden" name="edit_user[{{ $user->id }}]" value="{{ $user->id }}" />
+                        <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
                         <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
                       </form>
                     </div>
