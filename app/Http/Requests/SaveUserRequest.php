@@ -27,7 +27,6 @@ class SaveUserRequest extends Request
 
         $rules = [];
 
-        \Log::debug($this->method());
         switch($this->method())
         {
 
