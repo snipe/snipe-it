@@ -125,7 +125,7 @@ class UsersController extends Controller
         $user->password = bcrypt($request->input('password'));
 
         if ($user->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.create.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.create')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
     }
