@@ -27,120 +27,127 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="assets">
+                    <div class="row">
+                        <div class="col-md-12">
 
-                    @if ($assets->count() > 0)
+                                @if ($assets->count() > 0)
 
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr role="row">
-                                    <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
-                                    @if ($snipeSettings->display_asset_name)
-                                    <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/form.name') }}</th>
-                                    @endif
-                                    <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.serial') }}</th>
-                                    <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.location') }}</th>
-                                    <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.status') }}</th>
-                                    <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
-                                    <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($assets as $asset)
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
+                                                @if ($snipeSettings->display_asset_name)
+                                                <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/form.name') }}</th>
+                                                @endif
+                                                <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.serial') }}</th>
+                                                <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.location') }}</th>
+                                                <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.status') }}</th>
+                                                <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
+                                                <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($assets as $asset)
 
-                                <tr>
-                                    <form action="{{route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id])}}" method="POST" accept-charset="utf-8">
-                                        {{ csrf_field() }}
-                                        <td>{!! $asset->model->present()->nameUrl() !!}</td>
+                                            <tr>
+                                                <form action="{{route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id])}}" method="POST" accept-charset="utf-8">
+                                                    {{ csrf_field() }}
+                                                    <td>{!! $asset->model->present()->nameUrl() !!}</td>
 
-                                        @if ($snipeSettings->display_asset_name)
-                                        <td>{{ $asset->name }}</td>
-                                        @endif
+                                                    @if ($snipeSettings->display_asset_name)
+                                                    <td>{{ $asset->name }}</td>
+                                                    @endif
 
-                                        <td><a href="{{ $asset->present()->viewUrl() }}">{{ $asset->serial }}</a></td>
+                                                    <td><a href="{{ $asset->present()->viewUrl() }}">{{ $asset->serial }}</a></td>
 
-                                        <td>
-                                            @if ($asset->assetloc)
-                                            {!! $asset->assetloc->present()->nameUrl() !!}
-                                            @endif
-                                        </td>
-                                        @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
-                                            <td>Checked out</td>
-                                        @else
-                                            <td>{{ trans('admin/hardware/general.requestable') }}</td>
-                                        @endif
+                                                    <td>
+                                                        @if ($asset->assetloc)
+                                                        {!! $asset->assetloc->present()->nameUrl() !!}
+                                                        @endif
+                                                    </td>
+                                                    @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
+                                                        <td>Checked out</td>
+                                                    @else
+                                                        <td>{{ trans('admin/hardware/general.requestable') }}</td>
+                                                    @endif
 
-                                        <td>{{ $asset->expected_checkin }}</td>
-                                        <td>
-                                            @if ($asset->isRequestedBy(Auth::user()))
-                                                {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
-                                            @else
-                                                {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
-                                            @endif
-                                        </td>
-                                    </form>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                                    <td>{{ $asset->expected_checkin }}</td>
+                                                    <td>
+                                                        @if ($asset->isRequestedBy(Auth::user()))
+                                                            {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
+                                                        @else
+                                                            {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
+                                                        @endif
+                                                    </td>
+                                                </form>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                @else
+
+                                    <div class="alert alert-info alert-block">
+                                        <i class="fa fa-info-circle"></i>
+                                        {{ trans('general.no_results') }}
+                                    </div>
+
+                                @endif
+
                     </div>
-
-                    @else
-                    <div class="col-md-12">
-                        <div class="alert alert-info alert-block">
-                            <i class="fa fa-info-circle"></i>
-                            {{ trans('general.no_results') }}
-                        </div>
-                    </div>
-                    @endif
                 </div>
+            </div>
 
                 <div class="tab-pane fade" id="models">
+                    <div class="row">
+                        <div class="col-md-12">
 
-                    @if ($models->count() > 0)
-                    <h4>Requestable Models</h4>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr role="row">
-                                <th class="col-md-6" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
-                                <th class="col-md-3" bSortable="true">{{ trans('admin/accessories/general.remaining') }}</th>
-                                <th class="col-md-2" bSortable="true">{{ trans('general.quantity') }}</th>
-                                <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
-                            </tr>
-                        </thead>
+                            @if ($models->count() > 0)
+                            <h4>Requestable Models</h4>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="col-md-6" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
+                                        <th class="col-md-3" bSortable="true">{{ trans('admin/accessories/general.remaining') }}</th>
+                                        <th class="col-md-2" bSortable="true">{{ trans('general.quantity') }}</th>
+                                        <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
+                                    </tr>
+                                </thead>
 
-                        <tbody>
-                            @foreach($models as $requestableModel)
-                                <tr>
-                                    <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
-                                            method="POST"
-                                            accept-charset="utf-8"
-                                    >
-                                        {{ csrf_field() }}
-                                        <td>{{$requestableModel->name}}</td>
-                                        <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
-                                        <td><input type="text" name="request-quantity" value=""></td>
-                                        <td>
-                                            @if ($requestableModel->isRequestedBy(Auth::user()))
-                                                {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
-                                            @else
-                                                {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
-                                            @endif
-                                        </td>
-                                    </form>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                <tbody>
+                                    @foreach($models as $requestableModel)
+                                        <tr>
+                                            <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
+                                                    method="POST"
+                                                    accept-charset="utf-8"
+                                            >
+                                                {{ csrf_field() }}
+                                                <td>{{$requestableModel->name}}</td>
+                                                <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
+                                                <td><input type="text" name="request-quantity" value=""></td>
+                                                <td>
+                                                    @if ($requestableModel->isRequestedBy(Auth::user()))
+                                                        {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
+                                                    @else
+                                                        {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
+                                                    @endif
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                    @else
-                    <div class="col-md-12">
-                        <div class="alert alert-info alert-block">
-                            <i class="fa fa-info-circle"></i>
-                            {{ trans('general.no_results') }}
+                            @else
+                                <div class="alert alert-info alert-block">
+                                    <i class="fa fa-info-circle"></i>
+                                    {{ trans('general.no_results') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
-                    @endif
                 </div>
 
             </div> <!-- .tab-content-->
