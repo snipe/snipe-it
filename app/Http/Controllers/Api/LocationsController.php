@@ -21,7 +21,7 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $allowed_columns = ['id','name','address','address2','city','state','country','zip','created_at',
-        'updated_at','parent_id', 'manager_id'];
+        'updated_at','parent_id', 'manager_id','image'];
 
         $locations = Location::with('parent', 'manager', 'childLocations')->select([
             'locations.id',
@@ -36,6 +36,7 @@ class LocationsController extends Controller
             'locations.manager_id',
             'locations.created_at',
             'locations.updated_at',
+            'locations.image',
             'locations.currency'
         ])->withCount('locationAssets')
         ->withCount('assignedAssets')
