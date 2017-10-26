@@ -28,6 +28,10 @@ public/uploads/logo.svg
 public/uploads/models/*
 public/uploads/suppliers/*
 public/uploads/accessories/*
+public/uploads/locations/*
+public/uploads/manufacturers/*
+public/uploads/components/*
+public/uploads/consumables/*
 public/uploads/users/*
 storage/app/private_uploads/users/*
 storage/debugbar/
