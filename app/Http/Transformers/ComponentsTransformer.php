@@ -22,7 +22,8 @@ class ComponentsTransformer
         $array = [
             'id' => (int) $component->id,
             'name' => e($component->name),
-            'serial_number' => e($component->serial),
+            'image' =>   ($component->image) ? e(url('/').'/uploads/components/'.e($component->image)) : null,
+            'serial_number' => ($component->serial) ? e($component->serial) : null,
             'location' => ($component->location) ? [
                 'id' => (int) $component->location->id,
                 'name' => e($component->location->name)
