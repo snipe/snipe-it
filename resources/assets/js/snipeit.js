@@ -180,14 +180,78 @@ $(document).ready(function () {
      }
      $('.datepicker').datepicker();
 
-    $(document).ready(function() {
-        $("#toggle_nav").toggle(function() {
+    var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
+    $.fn.bootstrapDP = datepicker;
+    $('.datepicker').datepicker();
 
+
+    // Crazy select2 rich dropdowns with images!
+    $('.js-data-ajax').each( function (i,item) {
+        var link = $(item);
+        var endpoint = link.data("endpoint");
+        var select = link.data("select");
+
+        link.select2({
+
+            ajax: {
+                url: baseUrl + '/api/v1/' + endpoint + '/selectlist',
+                dataType: 'json',
+                delay: 250,
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                data: function (params) {
+                    var data = {
+                        search: params.term,
+                        page: params.page || 1
+                    };
+                    return data;
+                },
+                processResults: function (data, params) {
+
+                    params.page = params.page || 1;
+
+                    var answer =  {
+                        results: data.items,
+                        pagination: {
+                            more: "true" //(params.page  < data.page_count)
+                        }
+                    };
+
+                    return answer;
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            templateResult: formatDatalist,
+            templateSelection: formatDataSelection
         });
+
     });
 
+    function formatDatalist (datalist) {
+        var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+        if (datalist.loading) {
+            return loading_markup;
+        }
 
+        var markup = "<div class='clearfix'>" ;
+        markup +="<div class='pull-left' style='padding-right: 10px;'>";
+        if (datalist.image) {
+            markup += "<img src='" + datalist.image + "' style='max-height: 20px'>";
+        } else {
+            markup += "<div style='height: 20px; width: 20px;'></div>";
+        }
 
+        markup += "</div><div>" + datalist.text + "</div>";
+        markup += "</div>";
+        return markup;
+    }
+
+    function formatDataSelection (datalist) {
+        return datalist.text;
+    }
 
 
 

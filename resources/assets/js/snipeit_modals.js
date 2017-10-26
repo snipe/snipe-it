@@ -95,10 +95,14 @@
             // clicked 'add' on to add a new 'thing'
             // this code adds the newly created object to that select
             var selector = document.getElementById(select);
+            console.warn("The selector we should've selecte dis: "+select);
+            console.dir(selector);
             if(!selector) {
                 return false;
             }
 
+            console.warn("onChange Selector Thing should've activated? Here's the selector");
+            console.dir(selector);
             selector.options[selector.length] = new Option(name, id);
             selector.selectedIndex = selector.length - 1;
             $(selector).trigger("change");

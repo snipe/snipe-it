@@ -47,45 +47,58 @@
 
 
 
-            <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-
-
-
+            <div id="assigned_user" class="form-group{{ $errors->has('assigned_user') ? ' has-error' : '' }}">
 
               {{ Form::label('assigned_user', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
 
                 <div class="col-md-7 required">
-                    <select class="js-data-user-ajax" name="assigned_user" style="width: 350px;">
+                    <select class="js-data-ajax" data-endpoint="users" name="assigned_user" style="width: 100%" id="assigned_user_select">
                         <option value="">{{ trans('general.select_user') }}</option>
                     </select>
                 </div>
-
-                {!! $errors->first('assigned_user', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
               <div class="col-md-1 col-sm-1 text-left">
                   @can('create', \App\Models\User::class)
                     <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user_select' class="btn btn-sm btn-default">New</a>
                   @endcan
               </div>
-            </div>
-            @if (!$asset->requireAcceptance())
-                <!-- Assets -->
-                <div id="assigned_asset" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                  {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-                  <div class="col-md-7 required">
-                    {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
-                    {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                  </div>
-                </div>
 
-                <!-- Locations -->
-                <div id="assigned_location" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                  {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-                  <div class="col-md-7 required">
-                    {{ Form::select('assigned_location', $locations_list , Input::old('assigned_location', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_location', 'style'=>'width:100%')) }}
-                    {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                  </div>
-                </div>
+                {!! $errors->first('assigned_user', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
+
+            </div>
+
+            @if (!$asset->requireAcceptance())
+
+                   <!-- Asset -->
+                    <div id="assigned_asset" class="form-group{{ $errors->has('assigned_asset') ? ' has-error' : '' }}">
+                        {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+                        <div class="col-md-7 required">
+                            <select class="js-data-ajax" data-endpoint="hardware" name="assigned_asset" style="width: 100%" id="assigned_asset_select">
+                                <option value="">{{ trans('general.select_asset') }}</option>
+                            </select>
+                        </div>
+                        {!! $errors->first('assigned_asset', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
+
+                    </div>
+
+                    <!-- Location -->
+                    <div id="assigned_location" class="form-group{{ $errors->has('assigned_location') ? ' has-error' : '' }}">
+                        {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+                        <div class="col-md-7 required">
+                            <select class="js-data-ajax" data-endpoint="locations" name="assigned_location" style="width: 100%" id="assigned_location_select">
+                                <option value="">{{ trans('general.select_location') }}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-1 col-sm-1 text-left">
+                            @can('create', \App\Models\Location::class)
+                                <a href='{{ route('modal.location') }}' data-toggle="modal"  data-target="#createModal" data-dependency="location" data-select='assigned_location_select' class="btn btn-sm btn-default">New</a>
+                            @endcan
+                        </div>
+
+                        {!! $errors->first('assigned_location', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
+
+                    </div>
             @endif
             <!-- Checkout/Checkin Date -->
             <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
@@ -164,9 +177,12 @@
 
 @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">
+
+// create the assigned assets listing box for the right side of the screen
 $(function() {
   $('#assigned_user').on("change",function () {
     var userid = $('#assigned_user option:selected').val();
+
     if(userid=='') {
       console.warn('no user selected');
       $('#current_assets_box').fadeOut();

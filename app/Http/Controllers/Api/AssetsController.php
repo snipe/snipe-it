@@ -263,6 +263,61 @@ class AssetsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
+    /**
+     * Display a formatted JSON response for the select2 menus
+     *
+     * @todo: create a transformer for handling these responses
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', Asset::class);
+
+        $assets = Company::scopeCompanyables(Asset::select([
+            'assets.id',
+            'assets.name',
+            'assets.asset_tag',
+            'assets.model_id',
+            ]))->with('model')->RTD();
+
+
+        if ($request->has('search')) {
+            $assets = $assets->where('assets.name', 'LIKE', '%'.$request->get('search').'%')
+                ->orWhere('assets.asset_tag', 'LIKE', '%'.$request->get('search').'%')
+                ->join('models AS assets_models',function ($join) use ($request) {
+                    $join->on('assets_models.id', "=", "assets.model_id");
+            })->orWhere('assets_models.name','LIKE','%'.$request->get('search').'%');
+        }
+
+        $assets = $assets->paginate(50);
+        $assets_array = [];
+
+        foreach ($assets as $asset) {
+            $assets_array[] =
+                [
+                    'id' => (int) $asset->id,
+                    'text' => e($asset->present()->fullName),
+                    'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
+                ];
+        }
+        $results = [
+            'items' => $assets_array,
+            'pagination' =>
+                [
+                    'more' => ($assets->currentPage() >= $assets->lastPage()) ? false : true,
+                    'per_page' => $assets->perPage()
+                ],
+            'total_count' => $assets->total(),
+            'page' => $assets->currentPage(),
+            'page_count' => $assets->lastPage()
+        ];
+
+        return $results;
+    }
+
 
     /**
      * Accepts a POST request to create a new asset

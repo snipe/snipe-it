@@ -226,6 +226,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'hardware'], function () {
 
+        Route::get( 'selectlist',  [
+            'as' => 'assets.selectlist',
+            'uses' => 'AssetsController@selectlist'
+        ]);
+
+
         Route::post('audit', [
             'as' => 'api.asset.audit',
             'uses' => 'AssetsController@audit'
@@ -331,21 +337,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Locations API ---*/
 
-    Route::resource('locations', 'LocationsController',
-        [
-            'names' =>
-                [
-                    'index' => 'api.locations.index',
-                    'show' => 'api.locations.show',
-                    'store' => 'api.locations.store',
-                    'update' => 'api.locations.update',
-                    'destroy' => 'api.locations.destroy'
-                ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['location' => 'location_id']
-        ]
-    ); // Locations resource
-
     Route::group(['prefix' => 'locations'], function () {
 
         Route::get('{location}/users',
@@ -369,7 +360,31 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'LocationsController@show'
             ]
         );
+
+        Route::get( 'selectlist',  [
+            'as' => 'locations.selectlist',
+            'uses' => 'LocationsController@selectlist'
+        ]);
     }); // Locations group
+
+
+
+    Route::resource('locations', 'LocationsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.locations.index',
+                    'show' => 'api.locations.show',
+                    'store' => 'api.locations.store',
+                    'update' => 'api.locations.update',
+                    'destroy' => 'api.locations.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['location' => 'location_id']
+        ]
+    ); // Locations resource
+
+
 
 
     /*--- Manufacturers API ---*/

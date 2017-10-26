@@ -139,4 +139,55 @@ class LocationsController extends Controller
         $location->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/locations/message.delete.success')));
     }
+
+    /**
+     * Display a formatted JSON response for the select2 menus
+     *
+     * @todo: create a transformer for handling these responses
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', Location::class);
+
+        $locations = Location::select([
+            'locations.id',
+            'locations.name',
+            'locations.image',
+        ]);
+
+
+        if ($request->has('search')) {
+            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $locations = $locations->paginate(50);
+        $locations_array = [];
+
+        foreach ($locations as $location) {
+            $locations_array[] =
+                [
+                    'id' => (int) $location->id,
+                    'text' => e($location->name),
+                    'image' => ($location->image) ? url('/').'/uploads/locations/'.$location->image : null,
+                ];
+        }
+        $results = [
+            'items' => $locations_array,
+            'pagination' =>
+                [
+                    'more' => ($locations->currentPage() >= $locations->lastPage()) ? false : true,
+                    'per_page' => $locations->perPage()
+                ],
+            'total_count' => $locations->total(),
+            'page' => $locations->currentPage(),
+            'page_count' => $locations->lastPage()
+        ];
+
+        return $results;
+    }
+
 }
