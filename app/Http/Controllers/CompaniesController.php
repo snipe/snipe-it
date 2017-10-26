@@ -7,6 +7,8 @@ use Lang;
 use Redirect;
 use View;
 use Illuminate\Http\Request;
+use Image;
+use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This controller handles all actions related to Companies for
@@ -50,10 +52,21 @@ final class CompaniesController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $company = new Company;
         $company->name = $request->input('name');
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/companies/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $company->image = $file_name;
+        }
 
         if ($company->save()) {
             return redirect()->route('companies.index')
@@ -89,13 +102,27 @@ final class CompaniesController extends Controller
      * @param int $companyId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $companyId)
+    public function update(ImageUploadRequest $request, $companyId)
     {
         if (is_null($company = Company::find($companyId))) {
             return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
         }
 
         $company->name = $request->input('name');
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/companies/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $company->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $company->image = null;
+        }
+
 
         if ($company->save()) {
             return redirect()->route('companies.index')

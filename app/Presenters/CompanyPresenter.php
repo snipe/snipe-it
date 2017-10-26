@@ -31,6 +31,14 @@ class CompanyPresenter extends Presenter
                 "visible" => true,
                 "formatter" => 'companiesLinkFormatter',
             ],[
+                "field" => "image",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.image'),
+                "visible" => true,
+                "formatter" => 'imageFormatter',
+            ],[
                 "field" => "users_count",
                 "searchable" => false,
                 "sortable" => false,

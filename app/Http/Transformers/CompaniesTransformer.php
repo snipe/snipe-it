@@ -25,6 +25,7 @@ class CompaniesTransformer
             $array = [
                 'id' => (int) $company->id,
                 'name' => e($company->name),
+                'image' =>   ($company->image) ? e(url('/').'/uploads/companies/'.e($company->image)) : null,
                 "created_at" => Helper::getFormattedDateObject($company->created_at, 'datetime'),
                 "updated_at" => Helper::getFormattedDateObject($company->updated_at, 'datetime'),
                 "assets_count" => (int) $company->assets_count,

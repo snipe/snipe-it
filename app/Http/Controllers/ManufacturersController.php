@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\CustomField;
 use App\Models\Manufacturer;
 use Auth;
@@ -13,6 +14,7 @@ use Redirect;
 use Str;
 use View;
 use Illuminate\Http\Request;
+use Image;
 
 /**
  * This controller handles all actions related to Manufacturers for
@@ -60,7 +62,7 @@ class ManufacturersController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
 
         $manufacturer = new Manufacturer;
@@ -70,6 +72,18 @@ class ManufacturersController extends Controller
         $manufacturer->support_url     = $request->input('support_url');
         $manufacturer->support_phone    = $request->input('support_phone');
         $manufacturer->support_email    = $request->input('support_email');
+
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/manufacturers/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $manufacturer->image = $file_name;
+        }
 
 
 
@@ -123,6 +137,20 @@ class ManufacturersController extends Controller
         $manufacturer->support_url     = $request->input('support_url');
         $manufacturer->support_phone    = $request->input('support_phone');
         $manufacturer->support_email    = $request->input('support_email');
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/manufacturers/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $manufacturer->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $manufacturer->image = null;
+        }
+
 
         if ($manufacturer->save()) {
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.update.success'));

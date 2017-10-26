@@ -25,6 +25,7 @@ class SuppliersTransformer
             $array = [
                 'id' => (int) $supplier->id,
                 'name' => e($supplier->name),
+                'image' =>   ($supplier->image) ? e(url('/').'/uploads/suppliers/'.e($supplier->image)) : null,
                 'address' => ($supplier->address) ? e($supplier->address) : null,
                 'address2' => ($supplier->address2) ? e($supplier->address2) : null,
                 'city' => ($supplier->city) ? e($supplier->city) : null,
@@ -38,7 +39,6 @@ class SuppliersTransformer
                 'assets_count' => (int) $supplier->assets_count,
                 'accessories_count' => (int) $supplier->accessories_count,
                 'licenses_count' => (int) $supplier->licenses_count,
-                'image' =>   ($supplier->image) ? url('/').'/uploads/suppliers/'.e($supplier->image) : null,
                 'notes' => ($supplier->notes) ? e($supplier->notes) : null,
                 'created_at' => Helper::getFormattedDateObject($supplier->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($supplier->updated_at, 'datetime'),

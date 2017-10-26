@@ -71,6 +71,12 @@
 
   <!-- side address column -->
   <div class="col-md-3">
+    @if ($component->image!='')
+      <div class="col-md-12" style="padding-bottom: 5px;">
+        <img src="{{ url('/') }}/uploads/components/{{ $component->image  }}">
+      </div>
+    @endif
+
     @if ($component->serial!='')
     <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/hardware/form.serial') }}: </strong>
     {{ $component->serial }} </div>

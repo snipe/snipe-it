@@ -43,6 +43,14 @@ class ComponentPresenter extends Presenter
                 "visible" => true,
                 "formatter" => 'componentsLinkFormatter',
             ], [
+                "field" => "image",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.image'),
+                "visible" => false,
+                "formatter" => 'imageFormatter',
+            ], [
                 "field" => "category",
                 "searchable" => true,
                 "sortable" => true,
