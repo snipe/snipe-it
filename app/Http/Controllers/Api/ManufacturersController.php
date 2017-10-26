@@ -21,10 +21,10 @@ class ManufacturersController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Manufacturer::class);
-        $allowed_columns = ['id','name','url','support_url','support_email','support_phone','created_at','updated_at'];
+        $allowed_columns = ['id','name','url','support_url','support_email','support_phone','created_at','updated_at','image'];
 
         $manufacturers = Manufacturer::select(
-            array('id','name','url','support_url','support_email','support_phone','created_at','updated_at')
+            array('id','name','url','support_url','support_email','support_phone','created_at','updated_at','image')
         )->withCount('assets')->withCount('licenses')->withCount('consumables')->withCount('accessories');
 
 
