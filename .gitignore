@@ -32,6 +32,7 @@ public/uploads/locations/*
 public/uploads/manufacturers/*
 public/uploads/components/*
 public/uploads/consumables/*
+public/uploads/companies/*
 public/uploads/users/*
 storage/app/private_uploads/users/*
 storage/debugbar/
