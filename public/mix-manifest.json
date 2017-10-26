@@ -1,12 +1,10 @@
 {
-    "/build/vue.js": "/build/vue.js?id=d0dcadee26c0506bc73f",
-    "/css/AdminLTE.css": "/css/AdminLTE.css?id=b8be19a285eaf44eec37",
-    "/css/app.css": "/css/app.css?id=407edb63cc6b6dc62405",
-    "/css/overrides.css": "/css/overrides.css?id=9ae1a3c861441320c5a1",
-    "/build/vue.js.map": "/build/vue.js.map?id=a916300d57772f57e2df",
-    "/css/AdminLTE.css.map": "/css/AdminLTE.css.map?id=99f5a5a03c4155cf69f6",
-    "/css/app.css.map": "/css/app.css.map?id=bdbe05e6ecd70ccfac72",
-    "/css/overrides.css.map": "/css/overrides.css.map?id=898c91d4a425b01b589b",
-    "/css/dist/all.css": "/css/dist/all.css?id=7c3842d2639193ac7e88",
-    "/js/dist/all.js": "/js/dist/all.js?id=15363bc14ab0694d1275"
+    "/js/build/vue.js": "/js/build/vue.js?id=e9504cad01a748f9b0fa",
+    "/css/AdminLTE.css": "/css/AdminLTE.css?id=889dc040f2ddfca6efde",
+    "/css/app.css": "/css/app.css?id=3a1e8c168fa8714043a6",
+    "/css/overrides.css": "/css/overrides.css?id=3911514a8a64a4247483",
+    "/css/dist/all.css": "/css/dist/all.css?id=f2d4896e67e878a47434",
+    "/js/dist/all.js": "/js/dist/all.js?id=15363bc14ab0694d1275",
+    "/css/build/all.css": "/css/build/all.css?id=f2d4896e67e878a47434",
+    "/js/build/all.js": "/js/build/all.js?id=15363bc14ab0694d1275"
 }
