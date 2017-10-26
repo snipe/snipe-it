@@ -239,7 +239,7 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
         $this->authorize('checkout', $consumable);
-        return view('consumables/checkout', compact('consumable'))->with('users_list', Helper::usersList());
+        return view('consumables/checkout', compact('consumable'));
     }
 
     /**
@@ -265,7 +265,7 @@ class ConsumablesController extends Controller
         // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.user_does_not_exist'));
+            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
         }
 
         // Update the consumable data
@@ -286,7 +286,7 @@ class ConsumablesController extends Controller
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $consumable->requireAcceptance();
 
-        if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
+        if ((($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) && $user->email!='') {
 
             Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);

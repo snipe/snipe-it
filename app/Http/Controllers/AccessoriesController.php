@@ -271,7 +271,7 @@ class AccessoriesController extends Controller
         $this->authorize('checkout', $accessory);
 
         // Get the dropdown of users and then pass it to the checkout view
-        return view('accessories/checkout', compact('accessory'))->with('users_list', Helper::usersList());
+        return view('accessories/checkout', compact('accessory'));
 
     }
 
@@ -296,7 +296,7 @@ class AccessoriesController extends Controller
         $this->authorize('checkout', $accessory);
 
         if (!$user = User::find(Input::get('assigned_to'))) {
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->route('checkout/accessory', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
         }
 
       // Update the accessory data
@@ -323,6 +323,7 @@ class AccessoriesController extends Controller
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $accessory->requireAcceptance();
         // TODO: Port this to new mail notifications
+
         if ((($accessory->requireAcceptance()=='1')  || ($accessory->getEula())) && ($user->email!='')) {
 
             Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {

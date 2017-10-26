@@ -303,6 +303,9 @@ class AssetsController extends Controller
                     'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
                 ];
         }
+
+        array_unshift($assets_array, ['id'=> '', 'text'=> trans('general.select_asset'), 'image' => null]);
+        
         $results = [
             'items' => $assets_array,
             'pagination' =>

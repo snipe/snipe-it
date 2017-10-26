@@ -45,60 +45,16 @@
               </div>
             </div>
 
+                @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user'])
 
-
-            <div id="assigned_user" class="form-group{{ $errors->has('assigned_user') ? ' has-error' : '' }}">
-
-              {{ Form::label('assigned_user', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-
-                <div class="col-md-7 required">
-                    <select class="js-data-ajax" data-endpoint="users" name="assigned_user" style="width: 100%" id="assigned_user_select">
-                        <option value="">{{ trans('general.select_user') }}</option>
-                    </select>
-                </div>
-
-              <div class="col-md-1 col-sm-1 text-left">
-                  @can('create', \App\Models\User::class)
-                    <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user_select' class="btn btn-sm btn-default">New</a>
-                  @endcan
-              </div>
-
-                {!! $errors->first('assigned_user', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
-
-            </div>
 
             @if (!$asset->requireAcceptance())
 
-                   <!-- Asset -->
-                    <div id="assigned_asset" class="form-group{{ $errors->has('assigned_asset') ? ' has-error' : '' }}">
-                        {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-                        <div class="col-md-7 required">
-                            <select class="js-data-ajax" data-endpoint="hardware" name="assigned_asset" style="width: 100%" id="assigned_asset_select">
-                                <option value="">{{ trans('general.select_asset') }}</option>
-                            </select>
-                        </div>
-                        {!! $errors->first('assigned_asset', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
+                @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset'])
 
-                    </div>
+                @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location'])
 
-                    <!-- Location -->
-                    <div id="assigned_location" class="form-group{{ $errors->has('assigned_location') ? ' has-error' : '' }}">
-                        {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-                        <div class="col-md-7 required">
-                            <select class="js-data-ajax" data-endpoint="locations" name="assigned_location" style="width: 100%" id="assigned_location_select">
-                                <option value="">{{ trans('general.select_location') }}</option>
-                            </select>
-                        </div>
 
-                        <div class="col-md-1 col-sm-1 text-left">
-                            @can('create', \App\Models\Location::class)
-                                <a href='{{ route('modal.location') }}' data-toggle="modal"  data-target="#createModal" data-dependency="location" data-select='assigned_location_select' class="btn btn-sm btn-default">New</a>
-                            @endcan
-                        </div>
-
-                        {!! $errors->first('assigned_location', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
-
-                    </div>
             @endif
             <!-- Checkout/Checkin Date -->
             <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">

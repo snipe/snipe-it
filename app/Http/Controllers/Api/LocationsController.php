@@ -175,6 +175,9 @@ class LocationsController extends Controller
                     'image' => ($location->image) ? url('/').'/uploads/locations/'.$location->image : null,
                 ];
         }
+
+        array_unshift($locations_array, ['id'=> '', 'text'=> trans('general.select_location'), 'image' => null]);
+
         $results = [
             'items' => $locations_array,
             'pagination' =>

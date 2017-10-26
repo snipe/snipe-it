@@ -165,6 +165,8 @@ class UsersController extends Controller
                     'image' => ($user->present()->gravatar) ? $user->present()->gravatar : null,
                 ];
         }
+
+        array_unshift($users_array, ['id'=> '', 'text'=> trans('general.select_user'), 'image' => null]);
         $results = [
             'items' => $users_array,
             'pagination' =>

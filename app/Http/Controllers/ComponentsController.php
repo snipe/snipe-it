@@ -255,7 +255,7 @@ class ComponentsController extends Controller
             return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         }
         $this->authorize('checkout', $component);
-        return view('components/checkout', compact('component'))->with('assets_list', Helper::detailedAssetList());
+        return view('components/checkout', compact('component'));
     }
 
     /**

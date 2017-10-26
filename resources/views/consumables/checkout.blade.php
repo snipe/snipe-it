@@ -38,14 +38,7 @@
           @endif
 
           <!-- User -->
-          <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-            <label for="assigned_to" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkout_to') }}
-              <i class='icon-asterisk'></i></label>
-            <div class="col-md-9">
-              {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $consumable->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-              {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
+            @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
 
           @if ($consumable->category->require_acceptance=='1')
           <div class="form-group">
