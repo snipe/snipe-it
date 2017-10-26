@@ -144,10 +144,11 @@ class ProfileController extends Controller
     }
 
     /**
-     * Returns a page with the API token generation interface.
+     * Save the menu state of open/closed when the user clicks on the hamburger
+     * menu.
      *
-     * We created a controller method for this because closures aren't allowed
-     * in the routes file if you want to be able to cache the routes.
+     * This URL is triggered via jquery in
+     * resources/views/layouts/default.blade.php
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
