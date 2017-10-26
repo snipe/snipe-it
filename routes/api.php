@@ -532,20 +532,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Users API ---*/
 
-    Route::resource('users', 'UsersController',
-        [
-            'names' =>
-                [
-                    'index' => 'api.users.index',
-                    'show' => 'api.users.show',
-                    'store' => 'api.users.store',
-                    'update' => 'api.users.update',
-                    'destroy' => 'api.users.destroy'
-                ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['user' => 'user_id']
-        ]
-    ); // Users resource
+
 
     Route::group([ 'prefix' => 'users' ], function () {
 
@@ -563,6 +550,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
+        Route::get('selectlist',
+            [
+                'as' => 'api.users.selectlist',
+                'uses' => 'UsersController@selectList'
+            ]
+        );
+
         Route::get('{user}/assets',
             [
                 'as' => 'api.users.assetlist',
@@ -577,6 +571,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
     }); // Users group
+
+    Route::resource('users', 'UsersController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.users.index',
+                    'show' => 'api.users.show',
+                    'store' => 'api.users.store',
+                    'update' => 'api.users.update',
+                    'destroy' => 'api.users.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['user' => 'user_id']
+        ]
+    ); // Users resource
 
 
     Route::get(

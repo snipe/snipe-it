@@ -27,7 +27,7 @@
 
             <div class="dynamic-form-row">
                 <div class="col-md-4 col-xs-12"><label for="modal-modelno">{{ trans('general.model_no') }}:</label></div>
-                <div class="col-md-8 col-xs-12"><input type='text' id='modal-modelno' class="form-control"></div>
+                <div class="col-md-8 col-xs-12"><input type='text' id='modal-model_number' class="form-control"></div>
             </div>
 
             <div class="dynamic-form-row">

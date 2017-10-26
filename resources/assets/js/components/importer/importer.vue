@@ -1,12 +1,4 @@
-<style scoped>
-td {
-    font-size: 13px;
-}
 
-th {
-    font-size: 13px;
-}
-</style>
 
 <script>
     require('blueimp-file-upload');

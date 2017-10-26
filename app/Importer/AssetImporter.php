@@ -30,6 +30,8 @@ class AssetImporter extends ItemImporter
                 if ($customFieldValue) {
                     $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
                     $this->log('Custom Field '. $customField->name.': '.$customFieldValue);
+                } else {
+                    $this->item['custom_fields'][$customField->db_column_name()] = '';
                 }
             }
         }

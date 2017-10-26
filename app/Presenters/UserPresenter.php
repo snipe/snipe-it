@@ -35,6 +35,15 @@ class UserPresenter extends Presenter
                 "visible" => false
             ],
             [
+                "field" => "avatar",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => true,
+                "title" => 'Avatar',
+                "visible" => false,
+                "formatter" => "imageFormatter"
+            ],
+            [
                 "field" => "company",
                 "searchable" => true,
                 "sortable" => true,
@@ -278,7 +287,8 @@ class UserPresenter extends Presenter
             return "//gravatar.com/avatar/".$gravatar;
         }
 
-        return false;
+        // Set a fun, gender-neutral default icon
+        return url('/').'/img/default-sm.png';
 
     }
 

@@ -27,7 +27,7 @@
         <div class="box-body">
             {{csrf_field()}}
             @if ($asset->model->name)
-            <!-- Asset name -->
+            <!-- Model name -->
             <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
                 {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
@@ -45,14 +45,23 @@
               </div>
             </div>
 
-            <!-- User -->
+
+
             <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+
+
+
+
               {{ Form::label('assigned_user', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-              <div class="col-md-7 required">
-                {{ Form::select('assigned_user', $users_list , Input::old('assigned_user', $asset->assigned_type == 'App\Models\User' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_user_select', 'style'=>'width:100%')) }}
+
+                <div class="col-md-7 required">
+                    <select class="js-data-user-ajax" name="assigned_user" style="width: 350px;">
+                        <option value="">{{ trans('general.select_user') }}</option>
+                    </select>
+                </div>
 
                 {!! $errors->first('assigned_user', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              </div>
+
               <div class="col-md-1 col-sm-1 text-left">
                   @can('create', \App\Models\User::class)
                     <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user_select' class="btn btn-sm btn-default">New</a>
@@ -166,7 +175,7 @@ $(function() {
 
         $.ajax({
             type: 'GET',
-            url: '{{url('/') }}/api/v1/users/' + userid + '/assets',
+            url: '{{ url('/') }}/api/v1/users/' + userid + '/assets',
             headers: {
                 "X-Requested-With": 'XMLHttpRequest',
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -176,20 +185,45 @@ $(function() {
             success: function (data) {
                 $('#current_assets_box').fadeIn();
 
-                var table_html = '<div class="row"><div class="col-md-12"><table class="table table-striped"><thead><tr><td>{{ trans('admin/hardware/form.name') }}</td><td>{{ trans('admin/hardware/form.tag') }}</td></tr></thead><tbody>';
+                var table_html = '<div class="row">';
+                table_html += '<div class="col-md-12">';
+                table_html += '<table class="table table-striped">';
+                table_html += '<thead><tr>';
+                table_html += '<th></th>';
+                table_html += '<th>{{ trans('admin/hardware/form.name') }}</th>';
+                table_html += '<th>{{ trans('admin/hardware/form.tag') }}</th>';
+                table_html += '<th>{{ trans('admin/hardware/form.serial') }}</th>';
+                table_html += '</tr></thead><tbody>';
 
                 $('#current_assets_content').append('');
 
-                for (var i in data) {
-                    var asset = data[i];
-                    table_html += '<tr><td class="col-md-8"><a href="{{ url('/') }}/hardware/' + asset.id + '">' + asset.name;
-                    if (asset.model.name!='') {
-                        table_html += " (" + asset.model.name + ")";
+                if (data.rows.length > 0) {
 
+                    for (var i in data.rows) {
+                        var asset = data.rows[i];
+                        table_html += '<tr>';
+                        if (asset.image != null) {
+                            table_html += '<td class="col-md-1"><a href="' + asset.image + '" data-toggle="lightbox" data-type="image"><img src="' + asset.image + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;"></a></td>';
+                        } else {
+                            table_html += "<td></td> ";
+                        }
+                        table_html += '<td><a href="{{ url('/') }}/hardware/' + asset.id + '">';
+
+                        if ((asset.name == '') && (asset.name != null)) {
+                            table_html += " " + asset.model.name;
+                        } else {
+                            table_html += asset.name;
+                            table_html += " (" + asset.model.name + ")";
+                        }
+
+                        table_html += '</a></td>';
+                        table_html += '<td class="col-md-4">' + asset.asset_tag + '</td>';
+                        table_html += '<td class="col-md-4">' + asset.serial + '</td>';
+                        table_html += "</tr>";
                     }
-                    table_html += "</a></td><td class=\"col-md-4\">" + asset.asset_tag + "</td></tr>";
+                } else {
+                    table_html += '<tr><td colspan="4">No assets checked out to '+ $('.js-data-user-ajax').find('option:selected').text() + ' yet!</td></tr>';
                 }
-
                 $('#current_assets_content').html(table_html + '</tbody></table></div></div>');
 
             },
