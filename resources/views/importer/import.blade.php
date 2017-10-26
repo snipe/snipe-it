@@ -1,12 +1,5 @@
 @extends('layouts/default')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
 
-{{-- Hide importer until vue has rendered it, if we continue using vue for other things we should move this higher in the style --}}
-<style>
-[v-cloak] {
-    display:none;
-}
-</style>
 {{-- Page title --}}
 @section('title')
 {{ trans('general.import') }}
@@ -15,11 +8,22 @@
 
 {{-- Page content --}}
 @section('content')
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
+
+    {{-- Hide importer until vue has rendered it, if we continue using vue for other things we should move this higher in the style --}}
+    <style>
+        [v-cloak] {
+            display:none;
+        }
+    </style>
+
 <div id="app">
     <importer inline-template v-cloak>
         <div class="row">
         <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
+
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
