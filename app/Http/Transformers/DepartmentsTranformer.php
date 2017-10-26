@@ -25,6 +25,7 @@ class DepartmentsTransformer
             $array = [
                 'id' => (int) $department->id,
                 'name' => e($department->name),
+                'image' =>   ($department->image) ? e(url('/').'/uploads/departments/'.e($department->image)) : null,
                 'company' => ($department->company) ? [
                     'id' => (int) $department->company->id,
                     'name'=> e($department->company->name)

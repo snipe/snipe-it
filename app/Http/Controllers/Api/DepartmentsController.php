@@ -21,7 +21,7 @@ class DepartmentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Department::class);
-        $allowed_columns = ['id','name'];
+        $allowed_columns = ['id','name','image'];
 
         $departments = Department::select([
             'id',
@@ -30,7 +30,8 @@ class DepartmentsController extends Controller
             'company_id',
             'manager_id',
             'created_at',
-            'updated_at'
+            'updated_at',
+            'image'
         ])->with('users')->with('location')->with('manager')->with('company')->withCount('users');
 
         if ($request->has('search')) {
