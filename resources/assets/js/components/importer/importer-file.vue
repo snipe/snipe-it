@@ -58,8 +58,8 @@ tr {
         </td>
 
         <td>
-            <button type="button" class="btn btn-default" @click="processDetail = false">Cancel</button>
-            <button type="submit" class="btn btn-primary" @click="postSave">Import</button>
+            <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
             <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="statusText">{{ this.statusText }}</div>
         </td>
     </tr>
