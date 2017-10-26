@@ -63,6 +63,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Companies API ---*/
 
+    Route::get( 'companies/selectlist',  [
+        'as' => 'companies.selectlist',
+        'uses' => 'CompaniesController@selectlist'
+    ]);
+
+
     Route::resource('companies', 'CompaniesController',
         [
             'names' =>
