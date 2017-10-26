@@ -77,19 +77,18 @@ class SuppliersController extends Controller
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->user_id              = Auth::id();
 
-        if (Input::file('image')) {
+        if ($request->file('image')) {
             $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/suppliers/'.$file_name);
-            Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
-                $supplier->image = $file_name;
+            $supplier->image = $file_name;
         }
 
         if ($supplier->save()) {
-          // Redirect to the nw supplier  page
             return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($supplier->getErrors());
@@ -160,16 +159,16 @@ class SuppliersController extends Controller
         $supplier->notes                = request('notes');
 
 
-        if (Input::file('image')) {
+        if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = 'suppliers-'.str_random(25).".".$image->getClientOriginalExtension();
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/suppliers/'.$file_name);
-            Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
             $supplier->image = $file_name;
-        } elseif (request('image_delete') == 1) {
+        } elseif ($request->input('image_delete')=='1') {
             $supplier->image = null;
         }
 
