@@ -36,6 +36,15 @@ class ManufacturerPresenter extends Presenter
                 "formatter" => "manufacturersLinkFormatter"
             ],
             [
+                "field" => "image",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.image'),
+                "visible" => true,
+                "formatter" => "imageFormatter"
+            ],
+            [
                 "field" => "url",
                 "searchable" => true,
                 "sortable" => true,
@@ -44,7 +53,6 @@ class ManufacturerPresenter extends Presenter
                 "visible" => true,
                 "formatter" => "linkFormatter"
             ],
-
             [
                 "field" => "support_url",
                 "searchable" => true,
