@@ -19,6 +19,8 @@ use Slack;
 use Str;
 use View;
 use Gate;
+use Image;
+use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -72,23 +74,35 @@ class ConsumablesController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable();
-        $consumable->name                   = Input::get('name');
-        $consumable->category_id            = Input::get('category_id');
-        $consumable->location_id            = Input::get('location_id');
-        $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $consumable->order_number           = Input::get('order_number');
-        $consumable->min_amt                = Input::get('min_amt');
-        $consumable->manufacturer_id        = Input::get('manufacturer_id');
-        $consumable->model_number           = Input::get('model_number');
-        $consumable->item_no                = Input::get('item_no');
-        $consumable->purchase_date          = Input::get('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
-        $consumable->qty                    = Input::get('qty');
+        $consumable->name                   = $request->input('name');
+        $consumable->category_id            = $request->input('category_id');
+        $consumable->location_id            = $request->input('location_id');
+        $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $consumable->order_number           = $request->input('order_number');
+        $consumable->min_amt                = $request->input('min_amt');
+        $consumable->manufacturer_id        = $request->input('manufacturer_id');
+        $consumable->model_number           = $request->input('model_number');
+        $consumable->item_no                = $request->input('item_no');
+        $consumable->purchase_date          = $request->input('purchase_date');
+        $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
+        $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
+
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/consumables/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $consumable->image = $file_name;
+        }
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.create.success'));
@@ -132,7 +146,7 @@ class ConsumablesController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($consumableId = null)
+    public function update(ImageUploadRequest $request,  $consumableId = null)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
@@ -140,18 +154,31 @@ class ConsumablesController extends Controller
 
         $this->authorize($consumable);
 
-        $consumable->name                   = Input::get('name');
-        $consumable->category_id            = Input::get('category_id');
-        $consumable->location_id            = Input::get('location_id');
-        $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $consumable->order_number           = Input::get('order_number');
-        $consumable->min_amt                   = Input::get('min_amt');
-        $consumable->manufacturer_id         = Input::get('manufacturer_id');
-        $consumable->model_number               = Input::get('model_number');
-        $consumable->item_no         = Input::get('item_no');
-        $consumable->purchase_date       = Input::get('purchase_date');
-        $consumable->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
+        $consumable->name                   = $request->input('name');
+        $consumable->category_id            = $request->input('category_id');
+        $consumable->location_id            = $request->input('location_id');
+        $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $consumable->order_number           = $request->input('order_number');
+        $consumable->min_amt                = $request->input('min_amt');
+        $consumable->manufacturer_id        = $request->input('manufacturer_id');
+        $consumable->model_number           = $request->input('model_number');
+        $consumable->item_no                = $request->input('item_no');
+        $consumable->purchase_date          = $request->input('purchase_date');
+        $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/consumables/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $consumable->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $consumable->image = null;
+        }
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
