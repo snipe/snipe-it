@@ -6,7 +6,6 @@
     <title>
       @section('title')
       @show
-
       :: {{ $snipeSettings->site_name }}
     </title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -29,6 +28,7 @@
 
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+
     </script>
 
     <style nonce="{{ csrf_token() }}">
@@ -89,7 +89,7 @@
        @endif
        <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+  <body class="sidebar-mini skin-blue {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
     <div class="wrapper">
 
       <header class="main-header">
@@ -732,11 +732,31 @@
     <script nonce="{{ csrf_token() }}">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
-        })
+
+            $('body').bind('expanded.pushMenu', function() {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ route('account.menuprefs', ['state'=>'open']) }}",
+                    _token: "{{ csrf_token() }}"
+                });
+
+            });
+
+            $('body').bind('collapsed.pushMenu', function() {
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ route('account.menuprefs', ['state'=>'close']) }}",
+                    _token: "{{ csrf_token() }}"
+                });
+            });
+
+        });
+
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
+
     </script>
 
     @if ((Session::get('topsearch')=='true') || (Request::is('/')))

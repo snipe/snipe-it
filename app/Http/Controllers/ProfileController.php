@@ -143,5 +143,24 @@ class ProfileController extends Controller
 
     }
 
+    /**
+     * Returns a page with the API token generation interface.
+     *
+     * We created a controller method for this because closures aren't allowed
+     * in the routes file if you want to be able to cache the routes.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return View
+     */
+
+    public function getMenuState(Request $request) {
+        if ($request->input('state')=='open') {
+            $request->session()->put('menu_state', 'open');
+        } else {
+            $request->session()->put('menu_state', 'closed');
+        }
+    }
+
 
 }
