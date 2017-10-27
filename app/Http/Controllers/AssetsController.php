@@ -110,17 +110,12 @@ class AssetsController extends Controller
         $this->authorize('create', Asset::class);
         $view = View::make('hardware/edit')
             ->with('supplier_list', Helper::suppliersList())
-            ->with('company_list', Helper::companyList())
             ->with('model_list', Helper::modelList())
             ->with('statuslabel_list', Helper::statusLabelList())
-            ->with('location_list', Helper::locationsList())
             ->with('item', new Asset)
             ->with('manufacturer', Helper::manufacturerList()) //handled in modal now?
             ->with('category', Helper::categoryList('asset')) //handled in modal now?
-            ->with('statuslabel_types', Helper::statusTypeList()) //handled in modal now?
-            ->with('users_list', Helper::usersList())
-            ->with('assets_list', Helper::assetsList())
-            ->with('locations_list', Helper::locationsList());
+            ->with('statuslabel_types', Helper::statusTypeList());
 
         if ($request->has('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
@@ -139,17 +134,18 @@ class AssetsController extends Controller
     public function store(AssetRequest $request)
     {
         $this->authorize(Asset::class);
-        // create a new model instance
-        $asset = new Asset();
-        $asset->model()->associate(AssetModel::find(e(Input::get('model_id'))));
 
-        $asset->name                    = Input::get('name');
-        $asset->serial                  = Input::get('serial');
-        $asset->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
-        $asset->model_id                = Input::get('model_id');
-        $asset->order_number            = Input::get('order_number');
-        $asset->notes                   = Input::get('notes');
-        $asset->asset_tag               = Input::get('asset_tag');
+
+        $asset = new Asset();
+        $asset->model()->associate(AssetModel::find($request->input('model_id')));
+
+        $asset->name                    = $request->input('name');
+        $asset->serial                  = $request->input('serial');
+        $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
+        $asset->model_id                = $request->input('model_id');
+        $asset->order_number            = $request->input('order_number');
+        $asset->notes                   = $request->input('notes');
+        $asset->asset_tag               = $request->input('asset_tag');
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
@@ -164,8 +160,8 @@ class AssetsController extends Controller
         $asset->rtd_location_id         = request('rtd_location_id', null);
 
         // Create the image (if one was chosen.)
-        if (Input::has('image')) {
-            $image = Input::get('image');
+        if ($request->has('image')) {
+            $image = $request->input('image');
 
             // After modification, the image is prefixed by mime info like the following:
             // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
