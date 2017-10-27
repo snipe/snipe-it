@@ -413,6 +413,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Models API ---*/
 
+    Route::group(['prefix' => 'models'], function () {
+
+        Route::get('assets',
+            [
+                'as' => 'api.models.assets',
+                'uses'=> 'AssetModelsController@assets'
+            ]
+        );
+        Route::get('selectlist',
+            [
+                'as' => 'api.models.selectlist',
+                'uses'=> 'AssetModelsController@selectlist'
+            ]
+        );
+    }); // Models group
+
+
     Route::resource('models', 'AssetModelsController',
         [
             'names' =>
@@ -428,15 +445,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     ); // Models resource
 
-    Route::group(['prefix' => 'models'], function () {
 
-        Route::get('assets',
-            [
-                'as' => 'api.models.assets',
-                'uses'=> 'AssetModelsController@assets'
-            ]
-        );
-    }); // Models group
 
 
     /*--- Settings API ---*/
