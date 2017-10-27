@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 
 class LocationsController extends Controller
 {
@@ -141,13 +142,12 @@ class LocationsController extends Controller
     }
 
     /**
-     * Display a formatted JSON response for the select2 menus
+     * Gets a paginated collection for the select2 menus
      *
-     * @todo: create a transformer for handling these responses
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
      *
-     * @return \Illuminate\Http\Response
      */
     public function selectlist(Request $request)
     {
@@ -159,38 +159,22 @@ class LocationsController extends Controller
             'locations.image',
         ]);
 
-
         if ($request->has('search')) {
             $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
-        $locations = $locations->paginate(50);
-        $locations_array = [];
+        $locations = $locations->orderBy('name', 'ASC')->paginate(50);
 
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
         foreach ($locations as $location) {
-            $locations_array[] =
-                [
-                    'id' => (int) $location->id,
-                    'text' => e($location->name),
-                    'image' => ($location->image) ? url('/').'/uploads/locations/'.$location->image : null,
-                ];
+            $location->use_text = $location->name;
+            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
         }
 
-        array_unshift($locations_array, ['id'=> '', 'text'=> trans('general.select_location'), 'image' => null]);
+        return (new SelectlistTransformer)->transformSelectlist($locations);
 
-        $results = [
-            'items' => $locations_array,
-            'pagination' =>
-                [
-                    'more' => ($locations->currentPage() >= $locations->lastPage()) ? false : true,
-                    'per_page' => $locations->perPage()
-                ],
-            'total_count' => $locations->total(),
-            'page' => $locations->currentPage(),
-            'page_count' => $locations->lastPage()
-        ];
-
-        return $results;
     }
 
 }

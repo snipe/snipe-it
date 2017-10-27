@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Company;
+use App\Http\Transformers\SelectlistTransformer;
 
 class CompaniesController extends Controller
 {
@@ -143,13 +144,12 @@ class CompaniesController extends Controller
     }
 
     /**
-     * Display a formatted JSON response for the select2 menus
+     * Gets a paginated collection for the select2 menus
      *
-     * @todo: create a transformer for handling these responses
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
      *
-     * @return \Illuminate\Http\Response
      */
     public function selectlist(Request $request)
     {
@@ -161,37 +161,20 @@ class CompaniesController extends Controller
             'companies.image',
         ]);
 
-
         if ($request->has('search')) {
             $companies = $companies->where('companies.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
-        $companies = $companies->paginate(50);
-        $companies_array = [];
+        $companies = $companies->orderBy('name', 'ASC')->paginate(50);
 
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
         foreach ($companies as $company) {
-            $companies_array[] =
-                [
-                    'id' => (int) $company->id,
-                    'text' => e($company->name),
-                    'image' => ($company->image) ? url('/').'/uploads/companies/'.$company->image : null,
-                ];
+            $company->use_text = $company->name;
+            $company->use_image = ($company->image) ? url('/').'/uploads/companies/'.$company->image : null;
         }
 
-        array_unshift($companies_array, ['id'=> '', 'text'=> trans('general.select_company'), 'image' => null]);
-
-        $results = [
-            'items' => $companies_array,
-            'pagination' =>
-                [
-                    'more' => ($companies->currentPage() >= $companies->lastPage()) ? false : true,
-                    'per_page' => $companies->perPage()
-                ],
-            'total_count' => $companies->total(),
-            'page' => $companies->currentPage(),
-            'page_count' => $companies->lastPage()
-        ];
-
-        return $results;
+        return (new SelectlistTransformer)->transformSelectlist($companies);
     }
 }

@@ -30,6 +30,7 @@ use Str;
 use TCPDF;
 use Validator;
 use View;
+use App\Http\Transformers\SelectlistTransformer;
 
 
 /**
@@ -263,14 +264,14 @@ class AssetsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
+
     /**
-     * Display a formatted JSON response for the select2 menus
+     * Gets a paginated collection for the select2 menus
      *
-     * @todo: create a transformer for handling these responses
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
      *
-     * @return \Illuminate\Http\Response
      */
     public function selectlist(Request $request)
     {
@@ -293,32 +294,17 @@ class AssetsController extends Controller
         }
 
         $assets = $assets->paginate(50);
-        $assets_array = [];
 
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
         foreach ($assets as $asset) {
-            $assets_array[] =
-                [
-                    'id' => (int) $asset->id,
-                    'text' => e($asset->present()->fullName),
-                    'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
-                ];
+            $asset->use_text = $asset->present()->fullName;
+            $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;
         }
 
-        array_unshift($assets_array, ['id'=> '', 'text'=> trans('general.select_asset'), 'image' => null]);
-        
-        $results = [
-            'items' => $assets_array,
-            'pagination' =>
-                [
-                    'more' => ($assets->currentPage() >= $assets->lastPage()) ? false : true,
-                    'per_page' => $assets->perPage()
-                ],
-            'total_count' => $assets->total(),
-            'page' => $assets->currentPage(),
-            'page_count' => $assets->lastPage()
-        ];
+        return (new SelectlistTransformer)->transformSelectlist($assets);
 
-        return $results;
     }
 
 

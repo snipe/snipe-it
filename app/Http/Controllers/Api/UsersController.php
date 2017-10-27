@@ -11,6 +11,7 @@ use App\Helpers\Helper;
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Asset;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 
 class UsersController extends Controller
 {
@@ -111,12 +112,12 @@ class UsersController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * Gets a paginated collection for the select2 menus
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
      *
-     * @return \Illuminate\Http\Response
      */
     public function selectlist(Request $request)
     {
@@ -145,7 +146,7 @@ class UsersController extends Controller
 
         $users = $users->orderBy('last_name', 'asc');
         $users = $users->paginate(50);
-        $users_array = [];
+
 
         foreach ($users as $user) {
             $name_str = '';
@@ -158,28 +159,12 @@ class UsersController extends Controller
                 $name_str .= ' (#'.e($user->employee_num).')';
             }
 
-            $users_array[] =
-                [
-                    'id' => $user->id,
-                    'text' => $name_str,
-                    'image' => ($user->present()->gravatar) ? $user->present()->gravatar : null,
-                ];
+            $user->use_text = $name_str;
+            $user->use_image = ($user->present()->gravatar) ? $user->present()->gravatar : null;
         }
 
-        array_unshift($users_array, ['id'=> '', 'text'=> trans('general.select_user'), 'image' => null]);
-        $results = [
-            'items' => $users_array,
-            'pagination' =>
-                [
-                    'more' => ($users->currentPage() >= $users->lastPage()) ? false : true,
-                    'per_page' => $users->perPage()
-                ],
-            'total_count' => $users->total(),
-            'page' => $users->currentPage(),
-            'page_count' => $users->lastPage()
-        ];
+        return (new SelectlistTransformer)->transformSelectlist($users);
 
-        return $results;
     }
 
 
