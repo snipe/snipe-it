@@ -45,6 +45,17 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Categories API ---*/
 
+    Route::group(['prefix' => 'categories'], function () {
+
+        Route::get('selectlist',
+            [
+                'as' => 'api.categories.selectlist',
+                'uses' => 'CategoriesController@selectlist'
+            ]
+        );
+    }); // Categories group
+
+
     Route::resource('categories', 'CategoriesController',
         [
             'names' =>
@@ -394,6 +405,15 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
     /*--- Manufacturers API ---*/
+
+    Route::group(['prefix' => 'manufacturers'], function () {
+
+        Route::get( 'selectlist',  [
+            'as' => 'manufacturers.selectlist',
+            'uses' => 'ManufacturersController@selectlist'
+        ]);
+    }); // Locations group
+
 
     Route::resource('manufacturers', 'ManufacturersController',
         [

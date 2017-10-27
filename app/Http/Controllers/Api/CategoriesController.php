@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Category;
 use App\Http\Transformers\CategoriesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 
 class CategoriesController extends Controller
 {
@@ -128,4 +129,42 @@ class CategoriesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/categories/message.delete.success')));
 
     }
+
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     *
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', Categories::class);
+
+        $categories = Category::select([
+            'id',
+            'name',
+            'image',
+        ]);
+
+        if ($request->has('search')) {
+            $categories = $categories->where('name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $categories = $categories->orderBy('name', 'ASC')->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($categories as $category) {
+            $category->use_text = $category->name;
+            $category->use_image = ($category->image) ? url('/').'/uploads/categories/'.$category->image : null;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($categories);
+
+    }
+
 }
