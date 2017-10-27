@@ -526,6 +526,12 @@ case $distro in
 
         installsnipeit
 
+        if [ "$(firewall-cmd --state)" == "running" ]; then
+            echo "* Configuring firewall."
+            log "firewall-cmd --zone=public --add-port=http/tcp --permanent"
+            log "firewall-cmd --reload"
+        fi
+
         #Check if SELinux is enforcing
         if [ "$(getenforce)" == "Enforcing" ]; then
             echo "* Configuring SELinux."
