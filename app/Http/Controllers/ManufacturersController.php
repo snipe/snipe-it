@@ -186,11 +186,10 @@ class ManufacturersController extends Controller
 
     /**
     * Returns a view that invokes the ajax tables which actually contains
-    * the content for the manufacturers detail listing, which is generated in getDatatable.
+    * the content for the manufacturers detail listing, which is generated via API.
     * This data contains a listing of all assets that belong to that manufacturer.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::getDataView()
     * @param int $manufacturerId
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
@@ -202,43 +201,13 @@ class ManufacturersController extends Controller
         if (isset($manufacturer->id)) {
             return view('manufacturers/view', compact('manufacturer'));
         }
-        // Prepare the error message
-        $error = trans('admin/manufacturers/message.does_not_exist', compact('id'));
+
+        $error = trans('admin/manufacturers/message.does_not_exist');
         // Redirect to the user management page
-        return redirect()->route('manufacturers')->with('error', $error);
+        return redirect()->route('manufacturers.index')->with('error', $error);
     }
 
    
-    /**
-     * Generates the JSON used to display the manufacturer detail.
-     * This JSON returns data on all of the assets with the specified
-     * manufacturer ID number.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see ManufacturersController::getView()
-     * @param int $manufacturerId
-     * @param string $itemType
-     * @param Request $request
-     * @return String JSON* @since [v1.0]
-     */
-    public function getDataView($manufacturerId, $itemType = null, Request $request)
-    {
-        $manufacturer = Manufacturer::find($manufacturerId);
-
-        switch ($itemType) {
-            case "assets":
-                return $this->getDataAssetsView($manufacturer, $request);
-            case "licenses":
-                return $this->getDataLicensesView($manufacturer, $request);
-            case "accessories":
-                return $this->getDataAccessoriesView($manufacturer, $request);
-            case "consumables":
-                return $this->getDataConsumablesView($manufacturer, $request);
-        }
-
-        return "We shouldn't be here";
-
-    }
 
 
 }
