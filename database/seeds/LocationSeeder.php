@@ -8,6 +8,6 @@ class LocationSeeder extends Seeder
     public function run()
     {
         Location::truncate();
-        factory(Location::class, 5)->create();
+        factory(Location::class, 30)->create();
     }
 }
