@@ -85,7 +85,7 @@ class AssetsController extends Controller
         }
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
-            'assetloc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
+            'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
             'model.category', 'model.manufacturer', 'model.fieldset','supplier');
 
 
@@ -256,12 +256,11 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-        if ($asset = Asset::withTrashed()->find($id)) {
+        if ($asset = Asset::withTrashed()->findOrFail($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
 
