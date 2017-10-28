@@ -85,7 +85,7 @@ class AssetsController extends Controller
         }
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
-            'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
+            'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc',
             'model.category', 'model.manufacturer', 'model.fieldset','supplier');
 
 
