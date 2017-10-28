@@ -3,10 +3,12 @@
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7 required">
         <select class="js-data-ajax" data-endpoint="hardware" name="{{ $fieldname }}" style="width: 100%" id="assigned_asset_select">
-            @if (Input::old($fieldname))
-                <option value="{{ Input::old($fieldname) }}" selected="selected">
-                    {{ \App\Models\Asset::select('name')->find(Input::old($fieldname))->name }}
+            @if ($asset_id = Input::old($fieldname, $item->{$fieldname}))
+                <option value="{{ $asset_id }}" selected="selected">
+                    {{ \App\Models\Asset::find($asset_id)->present()->fullName }}
                 </option>
+            @else
+                <option value="">{{ trans('general.select_asset') }}</option>
             @endif
         </select>
     </div>
