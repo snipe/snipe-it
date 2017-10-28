@@ -4,9 +4,9 @@
 
     <div class="col-md-7 required">
         <select class="js-data-ajax" data-endpoint="users" name="{{ $fieldname }}" style="width: 100%" id="assigned_user_select">
-            @if ($user_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+            @if ($user_id = Input::old($fieldname, $item->{$fieldname}))
                 <option value="{{ $user_id }}" selected="selected">
-                    {{ \App\Models\User::find($user_id)->name }}
+                    {{ \App\Models\User::find($user_id)->present()->fullName }}
                 </option>
             @else
                 <option value="">{{ trans('general.select_user') }}</option>

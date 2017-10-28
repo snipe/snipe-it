@@ -56,8 +56,8 @@ class ConsumablesController extends Controller
     public function create()
     {
         $this->authorize('create', Consumable::class);
-        // Show the page
-        return view('consumables/edit')
+        $category_type = 'consumable';
+        return view('consumables/edit')->with('category_type', $category_type)
             ->with('item', new Consumable);
     }
 
@@ -119,17 +119,14 @@ class ConsumablesController extends Controller
      */
     public function edit($consumableId = null)
     {
-        if (is_null($item = Consumable::find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
+        if ($item = Consumable::find($consumableId)) {
+            $this->authorize($item);
+            $category_type = 'consumable';
+            return view('consumables/edit', compact('item'))->with('category_type', $category_type);
         }
 
-        $this->authorize($item);
+        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
 
-        return view('consumables/edit', compact('item'))
-            ->with('category_list', Helper::categoryList('consumable'))
-            ->with('company_list', Helper::companyList())
-            ->with('location_list', Helper::locationsList())
-            ->with('manufacturer_list', Helper::manufacturerList());
     }
 
 

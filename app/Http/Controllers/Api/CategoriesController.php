@@ -139,7 +139,7 @@ class CategoriesController extends Controller
      * @see \App\Http\Transformers\SelectlistTransformer
      *
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request, $category_type = 'asset')
     {
         $this->authorize('view', Categories::class);
 
@@ -153,7 +153,7 @@ class CategoriesController extends Controller
             $categories = $categories->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 
-        $categories = $categories->orderBy('name', 'ASC')->paginate(50);
+        $categories = $categories->where('category_type', $category_type)->orderBy('name', 'ASC')->paginate(50);
 
         // Loop through and set some custom properties for the transformer to use.
         // This lets us have more flexibility in special cases like assets, where

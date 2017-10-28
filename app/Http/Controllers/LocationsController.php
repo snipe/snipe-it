@@ -65,8 +65,7 @@ class LocationsController extends Controller
 
         return view('locations/edit')
             ->with('location_options', $location_options)
-            ->with('item', new Location)
-            ->with('manager_list', Helper::managerList());
+            ->with('item', new Location);
     }
 
 

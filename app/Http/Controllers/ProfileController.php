@@ -30,8 +30,7 @@ class ProfileController extends Controller
     public function getIndex()
     {
         $user = Auth::user();
-        $location_list = Helper::locationsList();
-        return view('account/profile', compact('user'))->with('location_list', $location_list);
+        return view('account/profile', compact('user'));
     }
 
     /**

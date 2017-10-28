@@ -138,15 +138,14 @@ class UsersController extends Controller
         $users = Company::scopeCompanyables($users);
 
         if ($request->has('search')) {
-            $users = $users->where('first_name', '=', '%'.$request->get('search').'%')
+            $users = $users->where('first_name', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('last_name', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
-                ->orWhere('employee_num', '=', '%'.$request->get('search').'%');
+                ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
         }
 
-        $users = $users->orderBy('last_name', 'asc');
+        $users = $users->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
         $users = $users->paginate(50);
-
 
         foreach ($users as $user) {
             $name_str = '';

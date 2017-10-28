@@ -27,13 +27,8 @@ LDAP User Sync
         <div class="box-body">
           <!-- location_id-->
           <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
-            <label class="col-md-2 control-label" for="location_id">{{ trans('admin/users/table.location') }}
-                </label>
-            <div class="col-md-6">
-              {{ Form::select('location_id', $location_list , Input::old('location_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
-
-              {!! $errors->first('location_id', '<span class="alert-msg">:message</span>') !!}
-            </div>
+              <!-- Location -->
+              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
             <div class="col-md-4">
               <button type="submit" class="btn btn-warning" id="sync">
                   <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>

@@ -47,12 +47,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'categories'], function () {
 
-        Route::get('selectlist',
+        Route::get('{item_type}/selectlist',
             [
                 'as' => 'api.categories.selectlist',
                 'uses' => 'CategoriesController@selectlist'
             ]
         );
+
     }); // Categories group
 
 

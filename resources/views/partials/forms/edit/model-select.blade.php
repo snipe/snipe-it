@@ -5,7 +5,7 @@
 
     <div class="col-md-7 required">
         <select class="js-data-ajax" data-endpoint="models" name="{{ $fieldname }}" style="width: 100%" id="model_select_id">
-            @if ($model_id = Input::old($fieldname, $item->{$fieldname}))
+            @if ($model_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $model_id }}" selected="selected">
                     {{ \App\Models\AssetModel::find($model_id)->name }}
                 </option>

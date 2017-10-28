@@ -54,8 +54,8 @@ class AccessoriesController extends Controller
     public function create(Request $request)
     {
         $this->authorize('create', Accessory::class);
-        // Show the page
-        return view('accessories/edit')
+        $category_type = 'accessory';
+        return view('accessories/edit')->with('category_type', $category_type)
           ->with('item', new Accessory);
     }
 
@@ -125,14 +125,15 @@ class AccessoriesController extends Controller
    */
     public function edit(Request $request, $accessoryId = null)
     {
-        // Check if the accessory exists
-        if (is_null($item = Accessory::find($accessoryId))) {
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+
+        if ($item = Accessory::find($accessoryId)) {
+            $this->authorize($item);
+            $category_type = 'accessory';
+            return view('accessories/edit', compact('item'))->with('category_type', $category_type);
         }
 
-        $this->authorize($item);
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
 
-        return view('accessories/edit', compact('item'));
     }
 
 

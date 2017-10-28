@@ -59,8 +59,8 @@ class ComponentsController extends Controller
     public function create()
     {
         $this->authorize('create', Component::class);
-        // Show the page
-        return view('components/edit')
+        $category_type = 'component';
+        return view('components/edit')->with('category_type',$category_type)
             ->with('item', new Component);
     }
 
@@ -118,14 +118,18 @@ class ComponentsController extends Controller
      */
     public function edit($componentId = null)
     {
-        if (is_null($item = Component::find($componentId))) {
-            return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
+
+
+        if ($item = Component::find($componentId)) {
+            $this->authorize('update', $item);
+            $category_type = 'component';
+            return view('components/edit', compact('item'))->with('category_type', $category_type);
         }
+        return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
 
-        $this->authorize('update', $item);
 
-        return view('components/edit', compact('item'))
-            ->with('category_list', Helper::categoryList('component'));
+
+
     }
 
 

@@ -3,8 +3,8 @@
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
     <div class="col-md-7 required">
-        <select class="js-data-ajax" data-endpoint="suppliers" name="{{ $fieldname }}" style="width: 100%" id="suppliers_select">
-            @if ($supplier_id = Input::old($fieldname, $item->{$fieldname}))
+        <select class="js-data-ajax" data-endpoint="suppliers" name="{{ $fieldname }}" style="width: 100%" id="supplier_select">
+            @if ($supplier_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $supplier_id }}" selected="selected">
                     {{ \App\Models\Supplier::find($supplier_id)->name }}
                 </option>

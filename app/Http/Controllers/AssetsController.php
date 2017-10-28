@@ -255,14 +255,8 @@ class AssetsController extends Controller
 
         return view('hardware/edit', compact('item'))
             ->with('model_list', Helper::modelList())
-            ->with('supplier_list', Helper::suppliersList())
-            ->with('company_list', Helper::companyList())
-            ->with('locations_list', Helper::locationsList())
             ->with('statuslabel_list', Helper::statusLabelList())
-            ->with('assigned_to', Helper::usersList())
-            ->with('manufacturer', Helper::manufacturerList())
-            ->with('statuslabel_types', Helper::statusTypeList())
-            ->with('category', Helper::categoryList('asset'));
+            ->with('statuslabel_types', Helper::statusTypeList());
     }
 
 
@@ -720,18 +714,9 @@ class AssetsController extends Controller
         $asset->assigned_to = '';
 
         return view('hardware/edit')
-        ->with('supplier_list', Helper::suppliersList())
-        ->with('model_list', Helper::modelList())
         ->with('statuslabel_list', Helper::statusLabelList())
         ->with('statuslabel_types', Helper::statusTypeList())
-        ->with('assigned_to', Helper::usersList())
-        ->with('item', $asset)
-        ->with('locations_list', Helper::locationsList())
-        ->with('manufacturer', Helper::manufacturerList())
-        ->with('category', Helper::categoryList('asset'))
-        ->with('users_list', Helper::usersList())
-        ->with('assets_list', Helper::assetsList())
-        ->with('company_list', Helper::companyList());
+        ->with('item', $asset);
     }
 
     /**
@@ -1035,8 +1020,7 @@ class AssetsController extends Controller
                 return view('hardware/labels')
                     ->with('assets', Asset::find($asset_ids))
                     ->with('settings', Setting::getSettings())
-                    ->with('count', $count)
-                    ->with('settings', Setting::getSettings());
+                    ->with('count', $count);
             } elseif ($request->input('bulk_actions')=='delete') {
                 $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                 $assets->each(function ($asset) {
@@ -1047,10 +1031,7 @@ class AssetsController extends Controller
             } elseif ($request->input('bulk_actions')=='edit') {
                 return view('hardware/bulk')
                 ->with('assets', request('ids'))
-                ->with('supplier_list', Helper::suppliersList())
                 ->with('statuslabel_list', Helper::statusLabelList())
-                ->with('location_list', Helper::locationsList())
-                ->with('models_list', Helper::modelList())
                 ->with(
                     'companies_list',
                     array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList()
@@ -1222,11 +1203,11 @@ class AssetsController extends Controller
     }
 
 
-    public function quickScan(Request $request)
+    public function quickScan()
     {
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths(12)->toDateString();
-        return view('hardware/quickscan')->with('next_audit_date', $dt)->with('locations_list', Helper::locationsList());
+        return view('hardware/quickscan')->with('next_audit_date', $dt);
     }
 
 
@@ -1236,7 +1217,7 @@ class AssetsController extends Controller
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths(12)->toDateString();
         $asset = Asset::findOrFail($id);
-        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list', Helper::locationsList());
+        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
     public function auditStore(Request $request, $id)

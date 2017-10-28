@@ -178,6 +178,8 @@
                     class="form-control"
                     value=""
                     autocomplete="off"
+                    readonly
+                    onfocus="this.removeAttribute('readonly');"
                     {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                     >
                     @if (config('app.lock_passwords') && ($user->id))
@@ -256,14 +258,14 @@
 
 
                 <!-- Manager -->
-              @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'manager_id'])
+              @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
 
                   <!--  Department -->
-              @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.select_department'), 'fieldname' => 'department_id'])
+              @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'department_id'])
 
 
                   <!-- Location -->
-              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.select_location'), 'fieldname' => 'location_id'])
+              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
                 <!-- Phone -->
                 <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
