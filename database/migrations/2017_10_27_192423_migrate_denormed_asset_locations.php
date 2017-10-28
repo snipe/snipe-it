@@ -75,9 +75,7 @@ class MigrateDenormedAssetLocations extends Migration
                 \Log::info('MISMATCH MISMATCH '.$asset->id. "doesn't match its location");
             }
         });
-
-        die();
-
+        
     }
 
     /**
