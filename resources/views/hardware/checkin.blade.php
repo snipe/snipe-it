@@ -64,6 +64,8 @@
               </div>
             </div>
 
+            @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
+
             <!-- Checkout/Checkin Date -->
             <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
               {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
