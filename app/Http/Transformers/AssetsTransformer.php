@@ -54,9 +54,9 @@ class AssetsTransformer
                 'id' => (int) $asset->company->id,
                 'name'=> e($asset->company->name)
             ] : null,
-            'location' => ($asset->assetLoc) ? [
-                'id' => (int) $asset->assetLoc->id,
-                'name'=> e($asset->assetLoc->name)
+            'location' => ($asset->location) ? [
+                'id' => (int) $asset->location->id,
+                'name'=> e($asset->location->name)
             ]  : null,
             'rtd_location' => ($asset->defaultLoc) ? [
                 'id' => (int) $asset->defaultLoc->id,
