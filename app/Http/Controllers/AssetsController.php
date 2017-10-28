@@ -539,6 +539,11 @@ class AssetsController extends Controller
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));
         }
+
+        if (Input::has('location_id')) {
+            $asset->location_id =  e(Input::get('location_id'));
+        }
+
         // Was the asset updated?
         if ($asset->save()) {
             $logaction = $asset->logCheckin($target, e(request('note')));
