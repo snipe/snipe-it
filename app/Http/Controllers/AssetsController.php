@@ -594,8 +594,8 @@ class AssetsController extends Controller
 
 
         if (isset($asset)) {
-            if (!is_null($asset->assetloc)) {
-                $use_currency = $asset->assetloc->currency;
+            if ($asset->location) {
+                $use_currency = $asset->location->currency;
             } else {
                 if ($settings->default_currency!='') {
                     $use_currency = $settings->default_currency;
