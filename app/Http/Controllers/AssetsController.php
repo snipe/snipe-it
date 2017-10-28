@@ -912,8 +912,8 @@ class AssetsController extends Controller
 
         $destinationPath = config('app.private_uploads').'/assets';
 
-        if ($request->file('image')) {
-            foreach (Input::file('assetfile') as $file) {
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8);
                 $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
