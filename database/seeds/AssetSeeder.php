@@ -35,5 +35,15 @@ class AssetSeeder extends Seeder
       factory(Asset::class, 10)->states('ultrasharp')->create();
 
 
+      $dst =  public_path('/uploads/assets');
+
+      $del_files = glob($dst."/*.*");
+
+      foreach($del_files as $del_file){ // iterate files
+          if(is_file($del_file))
+              unlink($del_file); // delete file
+      }
+
+
   }
 }

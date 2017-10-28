@@ -159,6 +159,14 @@ class AssetModelsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/models/message.assoc_users')));
         }
 
+        if ($assetmodel->image) {
+            try  {
+                unlink(public_path().'/uploads/models/'.$assetmodel->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
+
         $assetmodel->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/assetmodels/message.delete.success')));
 

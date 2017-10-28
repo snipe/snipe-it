@@ -76,7 +76,7 @@ class ManufacturersController extends Controller
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $file_name = str_slug($image->getClientOriginalName()).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/manufacturers/'.$file_name);
             Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -140,8 +140,17 @@ class ManufacturersController extends Controller
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $file_name = str_slug($image->getClientOriginalName()).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/manufacturers/'.$file_name);
+            $old_image = $path.$model->image;
+
+            try  {
+                unlink($old_image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+
+
             Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
@@ -178,6 +187,16 @@ class ManufacturersController extends Controller
             // Redirect to the asset management page
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.assoc_users'));
         }
+
+        if ($manufacturer->image) {
+            try  {
+                unlink(public_path().'/uploads/manufacturers/'.$manufacturer->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
+
+
         // Delete the manufacturer
         $manufacturer->delete();
         // Redirect to the manufacturers management page

@@ -34,7 +34,8 @@ $factory->defineAs(Actionlog::class, 'asset-checkout-user', function (Faker\Gene
         ->update(
             [
                 'assigned_to' => $target->id,
-                'assigned_type' => App\Models\User::class
+                'assigned_type' => App\Models\User::class,
+                'assigned_to' => $target->location_id,
             ]
         );
 
@@ -59,7 +60,8 @@ $factory->defineAs(Actionlog::class, 'asset-checkout-location', function (Faker\
         ->update(
             [
                 'assigned_to' => $target->id,
-                'assigned_type' => App\Models\Location::class
+                'assigned_type' => App\Models\Location::class,
+                'assigned_to' => $target->id,
             ]
         );
 

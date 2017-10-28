@@ -18,5 +18,6 @@ class UserSeeder extends Seeder
         factory(User::class, 3)->states('superuser')->create();
         factory(User::class, 3)->states('admin')->create();
         factory(User::class, 50)->states('view-assets')->create();
+
     }
 }

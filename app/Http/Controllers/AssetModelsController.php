@@ -93,7 +93,7 @@ class AssetModelsController extends Controller
         if (Input::file('image')) {
 
             $image = Input::file('image');
-            $file_name = str_random(25) . "." . $image->getClientOriginalExtension();
+            $file_name = slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
             $path = public_path('uploads/models/');
 
             if ($image->getClientOriginalExtension()!='svg') {
@@ -213,9 +213,17 @@ class AssetModelsController extends Controller
         }
 
         if (Input::file('image')) {
+
             $image = Input::file('image');
-            $file_name = str_random(25) . "." . $image->getClientOriginalExtension();
+            $file_name = str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
             $path = public_path('uploads/models/');
+            $old_image = $path.$model->image;
+
+            try  {
+                unlink($old_image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
 
             if ($image->getClientOriginalExtension()!='svg') {
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
@@ -259,6 +267,15 @@ class AssetModelsController extends Controller
             // Throw an error that this model is associated with assets
             return redirect()->route('models.index')->with('error', trans('admin/models/message.assoc_users'));
         }
+
+        if ($model->image) {
+            try  {
+                unlink(public_path().'/uploads/models/'.$model->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
+
         // Delete the model
         $model->delete();
 
