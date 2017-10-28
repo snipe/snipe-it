@@ -70,13 +70,16 @@ class MigrateDenormedAssetLocations extends Migration
             \Log::info('Asset: '.$unassigned_asset->id.' still has no location');
         }
 
-        Asset::get()->each(function ($asset) {
-            if (($asset)  && ($asset->location_id != $asset->assetLoc()->id)) {
-                    \Log::info('MISMATCH MISMATCH '.$asset->id. "doesn't match its location");
-            }
-        });
+        $assets = Asset::get();
 
-        die();
+        foreach ($assets as $asset) {
+            if (($asset)  && ($asset->location_id != $asset->assetLoc()->id)) {
+                \Log::info('MISMATCH MISMATCH '.$asset->id. "doesn't match its location");
+            }
+        }
+
+
+     
     }
 
     /**
