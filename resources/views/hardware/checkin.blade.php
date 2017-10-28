@@ -64,7 +64,7 @@
               </div>
             </div>
 
-            @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
+            @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($asset->defaultLoc) ? 'You can choose to check this asset in to a location other than the default location of '.$asset->defaultLoc->name.' if one is set.' : null])
 
             <!-- Checkout/Checkin Date -->
             <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
