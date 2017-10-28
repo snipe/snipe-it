@@ -61,8 +61,8 @@
   @include ('partials.forms.edit.order_number')
     <?php
     $currency_type=null;
-    if ($item->id && $item->assetloc) {
-        $currency_type = $item->assetloc->currency;
+    if ($item->id && $item->location) {
+        $currency_type = $item->location->currency;
     }
     ?>
   @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
