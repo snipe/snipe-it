@@ -4,10 +4,10 @@ namespace App\Policies;
 
 use App\Policies\SnipePermissionsPolicy;
 
-class CategoryPolicy extends SnipePermissionsPolicy
+class StatuslabelPolicy extends SnipePermissionsPolicy
 {
     protected function columnName()
     {
-        return 'categories';
+        return 'statuslabels';
     }
 }
