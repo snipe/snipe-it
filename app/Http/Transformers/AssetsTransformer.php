@@ -30,7 +30,7 @@ class AssetsTransformer
                 'id' => (int) $asset->model->id,
                 'name'=> e($asset->model->name)
             ] : null,
-            'model_number' => ($asset->model) ? e($asset->model->model_number) : null,
+            'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
                 'name'=> e($asset->present()->statusText),
@@ -135,8 +135,8 @@ class AssetsTransformer
                     'username' => e($asset->assigned->username),
                     'name' => e($asset->assigned->getFullNameAttribute()),
                     'first_name'=> e($asset->assigned->first_name),
-                    'last_name'=> e($asset->assigned->last_name),
-                    'employee_number' =>  e($asset->assigned->employee_num),
+                    'last_name'=> ($asset->assigned->last_name) ? e($asset->assigned->last_name) : null,
+                    'employee_number' =>  ($asset->assigned->employee_num) ? e($asset->assigned->employee_num) : null,
                     'type' => 'user'
                 ] : null;
         }

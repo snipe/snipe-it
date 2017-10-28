@@ -256,7 +256,7 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-        if ($asset = Asset::withTrashed()->findOrFail($id)) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->findOrFail($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
