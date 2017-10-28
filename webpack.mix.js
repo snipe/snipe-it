@@ -35,7 +35,7 @@ mix
 ).sourceMaps()
 .scripts([
     './node_modules/jquery-ui/jquery-ui.js',
-    './public/build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
+    './public/js/build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
     './node_modules/tether/dist/js/tether.min.js',
     './node_modules/jquery-slimscroll/jquery.slimscroll.js',
     './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',

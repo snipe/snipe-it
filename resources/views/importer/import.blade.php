@@ -50,9 +50,9 @@
                             <div class="col-md-12" style="padding-top: 30px;">
                                 <table class="table table-striped" id="upload-table">
                                     <thead>
-                                        <th>File</th>
-                                        <th>Created</th>
-                                        <th>Size</th>
+                                        <th>{{ trans('general.file_name') }}</th>
+                                        <th>{{ trans('general.created_at') }}</th>
+                                        <th>{{ trans('general.file_size') }}</th>
                                         <th></th>
                                     </thead>
                                     <tbody>
@@ -62,8 +62,8 @@
                                     			<td>@{{ currentFile.created_at }} </td>
                                     			<td>@{{ currentFile.filesize }}</td>
                                     			<td>
-                                    			<button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">Process</button>
-                                    				<button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
+                                    		      <button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">{{ trans('general.import') }}</button>
+                                				  <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
                                     			</td>
                                     		</tr>
                                     			<import-file
@@ -88,7 +88,8 @@
 @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">
     new Vue({
-        el: '#app'
+        el: '#app',
+        i18n: Vue.i18n
     });
 </script>
 @endsection

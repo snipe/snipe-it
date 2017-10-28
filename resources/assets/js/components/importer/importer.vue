@@ -69,7 +69,7 @@
                 (response) => {
                     this.alert.type="danger";
                     this.alert.visible=true;
-                    this.alert.message="Something went wrong fetching files...";
+                    this.alert.message=this.$t('importer.messages.file_fetch');
                 });
             },
             fetchCustomFields() {
