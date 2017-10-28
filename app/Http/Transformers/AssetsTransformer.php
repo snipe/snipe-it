@@ -48,7 +48,7 @@ class AssetsTransformer
                 'id' => (int) $asset->supplier->id,
                 'name'=> e($asset->supplier->name)
             ]  : null,
-            'notes' => e($asset->notes),
+            'notes' => ($asset->notes) ? e($asset->notes) : null,
             'order_number' => e($asset->order_number),
             'company' => ($asset->company) ? [
                 'id' => (int) $asset->company->id,
