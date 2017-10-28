@@ -115,8 +115,8 @@ class AssetMaintenancesController extends Controller
                 );
             }
 
-            if (($maintenance->cost) && (isset($maintenance->asset)) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
-                $maintenance_cost = $maintenance->asset->assetloc->currency.$maintenance->cost;
+            if (($maintenance->cost) && (isset($maintenance->asset)) && ($maintenance->asset->location) &&  ($maintenance->asset->location->currency!='')) {
+                $maintenance_cost = $maintenance->asset->location->currency.$maintenance->cost;
             } else {
                 $maintenance_cost = $settings->default_currency.$maintenance->cost;
             }

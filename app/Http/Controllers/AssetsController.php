@@ -594,8 +594,8 @@ class AssetsController extends Controller
 
 
         if (isset($asset)) {
-            if (!is_null($asset->assetloc)) {
-                $use_currency = $asset->assetloc->currency;
+            if ($asset->location) {
+                $use_currency = $asset->location->currency;
             } else {
                 if ($settings->default_currency!='') {
                     $use_currency = $settings->default_currency;
@@ -1022,7 +1022,7 @@ class AssetsController extends Controller
                     ->with('count', $count)
                     ->with('settings', Setting::getSettings());
             } elseif ($request->input('bulk_actions')=='delete') {
-                $assets = Asset::with('assignedTo', 'assetloc')->find($asset_ids);
+                $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                 $assets->each(function ($asset) {
                     $this->authorize('delete', $asset);
                 });

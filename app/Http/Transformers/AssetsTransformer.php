@@ -54,9 +54,9 @@ class AssetsTransformer
                 'id' => (int) $asset->company->id,
                 'name'=> e($asset->company->name)
             ] : null,
-            'location' => ($asset->assetLoc) ? [
-                'id' => (int) $asset->assetLoc->id,
-                'name'=> e($asset->assetLoc->name)
+            'location' => ($asset->location) ? [
+                'id' => (int) $asset->location->id,
+                'name'=> e($asset->location->name)
             ]  : null,
             'rtd_location' => ($asset->defaultLoc) ? [
                 'id' => (int) $asset->defaultLoc->id,
@@ -68,6 +68,7 @@ class AssetsTransformer
             'warranty_expires' => ($asset->warranty_months > 0) ?  Helper::getFormattedDateObject($asset->warranty_expires, 'date') : null,
             'created_at' => Helper::getFormattedDateObject($asset->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($asset->updated_at, 'datetime'),
+            'deleted_at' => Helper::getFormattedDateObject($asset->deleted_at, 'datetime'),
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
@@ -129,19 +130,19 @@ class AssetsTransformer
     public function transformAssignedTo($asset)
     {
         if ($asset->checkedOutToUser()) {
-            return $asset->assignedTo ? [
-                    'id' => (int) $asset->assignedTo->id,
-                    'username' => e($asset->assignedTo->username),
-                    'name' => e($asset->assignedTo->getFullNameAttribute()),
-                    'first_name'=> e($asset->assignedTo->first_name),
-                    'last_name'=> e($asset->assignedTo->last_name),
-                    'employee_number' =>  e($asset->assignedTo->employee_num),
+            return $asset->assigned ? [
+                    'id' => (int) $asset->assigned->id,
+                    'username' => e($asset->assigned->username),
+                    'name' => e($asset->assigned->getFullNameAttribute()),
+                    'first_name'=> e($asset->assigned->first_name),
+                    'last_name'=> e($asset->assigned->last_name),
+                    'employee_number' =>  e($asset->assigned->employee_num),
                     'type' => 'user'
                 ] : null;
         }
-        return $asset->assignedTo ? [
-            'id' => $asset->assignedTo->id,
-            'name' => $asset->assignedTo->display_name,
+        return $asset->assigned ? [
+            'id' => $asset->assigned->id,
+            'name' => $asset->assigned->display_name,
             'type' => $asset->assignedType()
         ] : null;
     }

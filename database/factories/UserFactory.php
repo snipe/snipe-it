@@ -2,19 +2,17 @@
 
 use App\Models\Company;
 
+$password = bcrypt('password');
 
-
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) use ($password) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'username' => $faker->username,
-        'password' => bcrypt('password'),
+        'password' => $password,
         'permissions' => '{"user":"0"}',
         'email' => $faker->safeEmail,
-        'company_id' => function () {
-                return factory(App\Models\Company::class)->create()->id;
-        },
+        'company_id' => rand(1,4),
         'locale' => $faker->locale,
         'employee_num' => $faker->numberBetween(3500, 35050),
         'jobtitle' => $faker->jobTitle,

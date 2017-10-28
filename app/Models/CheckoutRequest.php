@@ -37,12 +37,6 @@ class CheckoutRequest extends Model
 
     public function location()
     {
-        if ($this->itemType() == "asset") {
-            $asset = $this->itemRequested();
-            if ($asset->assignedTo) {
-                return $asset->assetloc;
-            }
-        }
         return $this->itemRequested()->location;
     }
 

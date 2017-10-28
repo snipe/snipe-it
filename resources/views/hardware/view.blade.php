@@ -224,10 +224,10 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.cost') }}</td>
                         <td>
-                          @if (($asset->id) && ($asset->userloc))
-                            {{ $asset->userloc->currency }}
-                          @elseif (($asset->id) && ($asset->assetloc))
-                            {{ $asset->assetloc->currency }}
+                          @if (($asset->id) && ($asset->location))
+                            {{ $asset->location->currency }}
+                          @elseif (($asset->id) && ($asset->location))
+                            {{ $asset->location->currency }}
                           @else
                             {{ $snipeSettings->default_currency }}
                           @endif
@@ -335,16 +335,16 @@
                       <td> {!! nl2br(e($asset->notes)) !!}</td>
                     </tr>
 
-                    @if ($asset->assetloc)
+                    @if ($asset->location)
                       <tr>
                         <td>{{ trans('general.location') }}</td>
                         <td>
                           @can('superuser')
-                            <a href="{{ route('locations.show', ['location' => $asset->assetloc->id]) }}">
-                              {{ $asset->assetloc->name }}
+                            <a href="{{ route('locations.show', ['location' => $asset->location->id]) }}">
+                              {{ $asset->location->name }}
                             </a>
                           @else
-                            {{ $asset->assetloc->name }}
+                            {{ $asset->location->name }}
                           @endcan
                         </td>
                       </tr>

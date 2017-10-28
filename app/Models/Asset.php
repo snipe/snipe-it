@@ -127,11 +127,10 @@ class Asset extends Depreciable
 
     public function availableForCheckout()
     {
-        return (
-          empty($this->assigned_to) &&
-          $this->assetstatus->deployable == 1 &&
-          empty($this->deleted_at)
-        );
+        if ((empty($this->assigned_to)) && (empty($this->deleted_at)) && ($this->assetstatus->deployable == 1)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -255,23 +254,33 @@ class Asset extends Depreciable
    **/
     public function assetLoc()
     {
+        static $iterations=0;
+        static $first_asset;
         if (!empty($this->assignedType())) {
-            // dd($this->assignedType());
             if ($this->assignedType() == self::ASSET) {
-                return $this->assignedto->assetloc(); // Recurse until we have a final location
+                $iterations++;
+                if(!$first_asset) {
+                    $first_asset=$this;
+                }
+                if($iterations>10) {
+                    throw new \Exception("Asset assignment Loop for Asset ID: ".$first_asset->id);
+                }
+                $assigned_to=Asset::find($this->assigned_to); //have to do this this way because otherwise it errors
+                return $assigned_to->assetLoc(); // Recurse until we have a final location
             }
             if ($this->assignedType() == self::LOCATION) {
-                return $this->assignedTo();
+                return $this->assignedTo;
             }
             if ($this->assignedType() == self::USER) {
-                if (!$this->assignedTo) {
-                    return $this->defaultLoc();
+                if (!$this->assignedTo->userLoc) {
+                    //this makes no sense
+                    return $this->defaultLoc;
                 }
-                return $this->assignedTo->userLoc();
+                return $this->assignedTo->userLoc;
             }
 
         }
-        return $this->defaultLoc();
+        return $this->defaultLoc;
     }
 
     public function assignedType()
@@ -404,6 +413,12 @@ class Asset extends Depreciable
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+    }
+
+
+    public function location()
+    {
+        return $this->belongsTo('\App\Models\Location', 'location_id');
     }
 
 
