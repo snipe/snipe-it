@@ -553,6 +553,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
     /*--- Suppliers API ---*/
+    Route::group(['prefix' => 'suppliers'], function () {
+
+        Route::get('list',
+            [
+                'as'=>'api.suppliers.list',
+                'uses'=>'SuppliersController@getDatatable'
+            ]
+        );
+
+        Route::get('selectlist',
+            [
+                'as' => 'api.suppliers.selectlist',
+                'uses' => 'SuppliersController@selectlist'
+            ]
+        );
+    }); // Categories group
+
 
     Route::resource('suppliers', 'SuppliersController',
         [
@@ -569,15 +586,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     ); // Suppliers resource
 
-    Route::group(['prefix' => 'suppliers'], function () {
-
-        Route::get('list',
-            [
-                'as'=>'api.suppliers.list',
-                'uses'=>'SuppliersController@getDatatable'
-            ]
-        );
-    }); // Suppliers group
 
 
     /*--- Users API ---*/
