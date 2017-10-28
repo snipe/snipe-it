@@ -67,10 +67,7 @@ class LicensesController extends Controller
         return view('licenses/edit')
             //->with('license_options',$license_options)
             ->with('depreciation_list', Helper::depreciationList())
-            ->with('supplier_list', Helper::suppliersList())
             ->with('maintained_list', $maintained_list)
-            ->with('company_list', Helper::companyList())
-            ->with('manufacturer_list', Helper::manufacturerList())
             ->with('item', new License);
 
     }
@@ -144,10 +141,7 @@ class LicensesController extends Controller
 
         return view('licenses/edit', compact('item'))
             ->with('depreciation_list', Helper::depreciationList())
-            ->with('supplier_list', Helper::suppliersList())
-            ->with('company_list', Helper::companyList())
-            ->with('maintained_list', $maintained_list)
-            ->with('manufacturer_list', Helper::manufacturerList());
+            ->with('maintained_list', $maintained_list);
     }
 
 
@@ -254,9 +248,7 @@ class LicensesController extends Controller
         }
 
         $this->authorize('checkout', $licenseSeat);
-        return view('licenses/checkout', compact('licenseSeat'))
-            ->with('users_list', Helper::usersList())
-            ->with('asset_list', Helper::detailedAssetList());
+        return view('licenses/checkout', compact('licenseSeat'));
     }
 
 
@@ -472,11 +464,8 @@ class LicensesController extends Controller
         // Show the page
         return view('licenses/edit')
         ->with('depreciation_list', Helper::depreciationList())
-        ->with('supplier_list', Helper::suppliersList())
         ->with('item', $license)
-        ->with('maintained_list', $maintained_list)
-        ->with('company_list', Helper::companyList())
-        ->with('manufacturer_list', Helper::manufacturerList());
+        ->with('maintained_list', $maintained_list);
     }
 
 

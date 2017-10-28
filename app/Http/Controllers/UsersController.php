@@ -85,10 +85,6 @@ class UsersController extends Controller
         $permissions = $this->filterDisplayable($permissions);
 
         return view('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
-        ->with('location_list', Helper::locationsList())
-        ->with('manager_list', Helper::managerList())
-        ->with('company_list', Helper::companyList())
-        ->with('department_list', Helper::departmentList())
         ->with('user', new User);
     }
 

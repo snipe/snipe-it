@@ -150,8 +150,7 @@
                         autocomplete="off"
                         readonly
                         onfocus="this.removeAttribute('readonly');"
-                        {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
-                      >
+                        {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     @else
                       (Managed via LDAP)
                     @endif
@@ -202,8 +201,7 @@
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
                       readonly
-                      onfocus="this.removeAttribute('readonly');"
-                    >
+                      onfocus="this.removeAttribute('readonly');">
                     @if (config('app.lock_passwords') && ($user->id))
                     <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
                     @endif
@@ -213,16 +211,7 @@
 
                 <!-- Company -->
                 @if (\App\Models\Company::canManageUsersCompanies())
-                <!-- Company -->
-                <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
-                  <div class="col-md-3 control-label">
-                    {{ Form::label('company_id', trans('general.company')) }}
-                  </div>
-                  <div class="col-md-8">
-                    {{ Form::select('company_id', $company_list , Input::old('company_id', $user->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                    {!! $errors->first('company_id', '<span class="alert-msg">:message</span>') !!}
-                  </div>
-                </div>
+                    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
                 @endif
 
                 <!-- language -->
@@ -267,35 +256,14 @@
 
 
                 <!-- Manager -->
-                <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="manager_id">{{ trans('admin/users/table.manager') }}</label>
-                  <div class="col-md-8">
-                    {{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                    {!! $errors->first('manager_id', '<span class="alert-msg">:message</span>') !!}
-                  </div>
-                </div>
+              @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'manager_id'])
 
                   <!--  Department -->
-                  <div class="form-group {{ $errors->has('department_id') ? ' has-error' : '' }}">
-                      <label for="status_id" class="col-md-3 control-label">
-                          {{ trans('general.department') }}
-                      </label>
-                      <div class="col-md-7">
-                          {{ Form::select('department_id', $department_list , Input::old('department_id', $user->department_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                          {!! $errors->first('department_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                      </div>
-                  </div>
+              @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.select_department'), 'fieldname' => 'department_id'])
 
 
                   <!-- Location -->
-                <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="location_id">{{ trans('admin/users/table.location') }}
-                  </label>
-                  <div class="col-md-8">
-                    {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                    {!! $errors->first('location_id', '<span class="alert-msg">:message</span>') !!}
-                  </div>
-                </div>
+              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.select_location'), 'fieldname' => 'location_id'])
 
                 <!-- Phone -->
                 <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">

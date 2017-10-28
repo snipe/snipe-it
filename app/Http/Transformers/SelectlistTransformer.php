@@ -25,7 +25,7 @@ class SelectlistTransformer
         foreach ($select_items as $select_item) {
             $items_array[]= [
                 'id' => (int) $select_item->id,
-                'text' =>  e($select_item->use_text),
+                'text' => ($select_item->use_text) ? e($select_item->use_text) : e($select_item->name),
                 'image' => ($select_item->use_image) ?  e($select_item->use_image) : null,
 
             ];

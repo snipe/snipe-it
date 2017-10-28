@@ -159,7 +159,6 @@ class CategoriesController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($categories as $category) {
-            $category->use_text = $category->name;
             $category->use_image = ($category->image) ? url('/').'/uploads/categories/'.$category->image : null;
         }
 

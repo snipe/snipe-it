@@ -98,6 +98,20 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Departments API ---*/
 
+    /*--- Suppliers API ---*/
+    Route::group(['prefix' => 'departments'], function () {
+
+
+        Route::get('selectlist',
+            [
+                'as' => 'api.departments.selectlist',
+                'uses' => 'DepartmentsController@selectlist'
+            ]
+        );
+    }); // Departments group
+
+
+
     Route::resource('departments', 'DepartmentsController',
         [
             'names' =>
@@ -568,7 +582,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'SuppliersController@selectlist'
             ]
         );
-    }); // Categories group
+    }); // Suppliers group
 
 
     Route::resource('suppliers', 'SuppliersController',

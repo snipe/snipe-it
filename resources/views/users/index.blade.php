@@ -67,7 +67,7 @@
               array('deleted'=> (Input::get('status')=='deleted') ? 'true' : 'false','company_id'=>e(Input::get('company_id')))) }}"
               data-cookie="true"
               data-click-to-select="true"
-              data-cookie-id-table="userTableDisplay-{{ config('version.hash_version') }}">
+              data-cookie-id-table="userlTableDisplay-{{ config('version.hash_version') }}">
 
              </table>
 

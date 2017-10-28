@@ -3,7 +3,7 @@
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7 required">
         <select class="js-data-ajax" data-endpoint="hardware" name="{{ $fieldname }}" style="width: 100%" id="assigned_asset_select">
-            @if ($asset_id = Input::old($fieldname, $item->{$fieldname}))
+            @if ($asset_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $asset_id }}" selected="selected">
                     {{ \App\Models\Asset::find($asset_id)->present()->fullName }}
                 </option>

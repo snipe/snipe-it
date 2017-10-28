@@ -3,12 +3,12 @@
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="companies" name="{{ $fieldname }}" style="width: 100%" id="company_select">
-            @if ($company_id = Input::old($fieldname, $item->{$fieldname}))
+            @if ($company_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $company_id }}" selected="selected">
                     {{ \App\Models\Company::find($company_id)->name }}
                 </option>
             @else
-                <option value="">{{ trans('general.select_model') }}</option>
+                <option value="">{{ trans('general.select_company') }}</option>
             @endif
         </select>
     </div>

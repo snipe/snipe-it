@@ -30,8 +30,8 @@
     {!! $errors->first('seats', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
 </div>
 
-@include ('partials.forms.edit.company')
-@include ('partials.forms.edit.manufacturer')
+@include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
+@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 
 <!-- Licensed to name -->
 <div class="form-group {{ $errors->has('license_name') ? ' has-error' : '' }}">
@@ -61,7 +61,7 @@
 </div>
 
 
-@include ('partials.forms.edit.supplier')
+@include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
 @include ('partials.forms.edit.order_number')
 @include ('partials.forms.edit.purchase_cost')
 @include ('partials.forms.edit.purchase_date')

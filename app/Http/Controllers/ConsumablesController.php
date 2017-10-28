@@ -58,11 +58,7 @@ class ConsumablesController extends Controller
         $this->authorize('create', Consumable::class);
         // Show the page
         return view('consumables/edit')
-            ->with('item', new Consumable)
-            ->with('category_list', Helper::categoryList('consumable'))
-            ->with('company_list', Helper::companyList())
-            ->with('location_list', Helper::locationsList())
-            ->with('manufacturer_list', Helper::manufacturerList());
+            ->with('item', new Consumable);
     }
 
 
