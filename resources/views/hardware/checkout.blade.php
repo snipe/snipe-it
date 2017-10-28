@@ -46,9 +46,17 @@
             </div>
 
                 @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user'])
+            @if ($asset->requireAcceptance())
+                    <div class="form-group">
 
-
-            @if (!$asset->requireAcceptance())
+                        <div class="col-md-8 col-md-offset-3">
+                            <p class="help-block">
+                                Because this asset category requires acceptance,
+                                it cannot be checked out to another asset or to a location.
+                            </p>
+                        </div>
+                    </div>
+            @else
 
                 @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset'])
 
@@ -56,6 +64,7 @@
 
 
             @endif
+
             <!-- Checkout/Checkin Date -->
             <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
               {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
@@ -89,24 +98,26 @@
               </div>
             </div>
 
-            @if ($asset->requireAcceptance())
-            <div class="form-group">
-              <div class="col-md-8 col-md-offset-3">
-                <p class="text-yellow">
-                  <i class="fa fa-warning"></i>
-                  {{ trans('admin/categories/general.required_acceptance') }}
-                </p>
-              </div>
-            </div>
-            @endif
+                @if ($asset->requireAcceptance() || $asset->getEula())
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-3">
+                            <div class="callout callout-info">
 
-            @if ($asset->getEula())
-            <div class="form-group">
-              <div class="col-md-8 col-md-offset-3">
-                <p class="text-yellow"><i class="fa fa-warning"></i> {{ trans('admin/categories/general.required_eula') }}</p>
-              </div>
-            </div>
-            @endif
+                                    @if ($asset->requireAcceptance())
+                                        <i class="fa fa-envelope"></i>
+                                    {{ trans('admin/categories/general.required_acceptance') }}
+                                        <br>
+                                    @endif
+
+                                    @if ($asset->getEula())
+                                        <i class="fa fa-envelope"></i>
+                                       {{ trans('admin/categories/general.required_eula') }}
+                                    @endif
+                            </div>
+                        </div>
+                    </div>
+                 @endif
+
         </div> <!--/.box-body-->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
