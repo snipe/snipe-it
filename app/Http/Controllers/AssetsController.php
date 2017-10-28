@@ -614,7 +614,7 @@ class AssetsController extends Controller
                 ->with('use_currency', $use_currency)->with('audit_log', $audit_log);
         }
 
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
     }
 
     /**
@@ -912,22 +912,19 @@ class AssetsController extends Controller
 
         $destinationPath = config('app.private_uploads').'/assets';
 
-        if (Input::hasFile('assetfile')) {
+        if ($request->file('image')) {
             foreach (Input::file('assetfile') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8);
                 $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
-                $upload_success = $file->move($destinationPath, $filename);
-                //Log the deletion of seats to the log
+                $file->move($destinationPath, $filename);
                 $asset->logUpload($filename, e(Input::get('notes')));
             }
+            return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
         } else {
             return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
         }
 
-        if ($upload_success) {
-            return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
-        }
         return redirect()->back()->with('error', trans('admin/hardware/message.upload.error'));
     }
 
@@ -958,11 +955,9 @@ class AssetsController extends Controller
             $log->delete();
             return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
         }
-        // Prepare the error message
-        $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
         // Redirect to the hardware management page
-        return redirect()->route('hardware.index')->with('error', $error);
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
     }
 
     /**
@@ -1009,8 +1004,6 @@ class AssetsController extends Controller
     public function postBulkEdit(Request $request)
     {
         $this->authorize('update', Asset::class);
-
-
 
         if (!$request->has('ids')) {
             return redirect()->back()->with('error', 'No assets selected');
@@ -1224,7 +1217,7 @@ class AssetsController extends Controller
 
 
 
-    public function audit(Request $request, $id)
+    public function audit($id)
     {
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths(12)->toDateString();
