@@ -346,7 +346,7 @@ class AssetPresenter extends Presenter
      */
     public function statusMeta()
     {
-        if ($this->model->assignedTo) {
+        if ($this->model->assigned) {
             return strtolower(trans('general.deployed'));
         }
         return $this->model->assetstatus->getStatuslabelType();
