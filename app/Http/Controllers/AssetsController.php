@@ -400,9 +400,8 @@ class AssetsController extends Controller
         $logaction->item_id = $asset->id;
         $logaction->created_at =  date("Y-m-d H:i:s");
         $logaction->user_id = Auth::user()->id;
-        $log = $logaction->logaction('deleted');
+        $logaction->logaction('deleted');
 
-        // Redirect to the asset management page
         return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
     }
 
@@ -908,6 +907,7 @@ class AssetsController extends Controller
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
+
         $this->authorize('update', $asset);
 
         $destinationPath = config('app.private_uploads').'/assets';
@@ -921,11 +921,9 @@ class AssetsController extends Controller
                 $asset->logUpload($filename, e(Input::get('notes')));
             }
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
-        } else {
-            return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
         }
 
-        return redirect()->back()->with('error', trans('admin/hardware/message.upload.error'));
+        return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
     }
 
     /**
