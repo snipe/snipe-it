@@ -23,6 +23,7 @@ class MigrateDenormedAssetLocations extends Migration
         foreach ($rtd_assets as $rtd_asset) {
             \Log::info('Setting asset '.$rtd_asset->id.' to  location: '.$rtd_asset->rtd_location_id." Because asset's default location is: ".$rtd_asset->rtd_location_id);
             $rtd_asset->location_id=$rtd_asset->rtd_location_id;
+            $rtd_asset->unsetEventDispatcher();
             $rtd_asset->save();
         }
 
@@ -38,6 +39,7 @@ class MigrateDenormedAssetLocations extends Migration
                 $new_location=$assigned_user_asset->rtd_location_id;
             }
             $assigned_user_asset->location_id=$new_location;
+            $assigned_user_asset->unsetEventDispatcher();
             $assigned_user_asset->save();
 
         }
@@ -48,6 +50,7 @@ class MigrateDenormedAssetLocations extends Migration
         foreach ($assigned_location_assets as $assigned_location_asset) {
             $assigned_location_asset->location_id=$assigned_location_asset->assignedTo->id;
             \Log::info('(calculated to be: '.$assigned_location_asset->assetLoc());
+            $assigned_location_asset->unsetEventDispatcher();
             $assigned_location_asset->save();
         }
 
@@ -79,7 +82,7 @@ class MigrateDenormedAssetLocations extends Migration
         }
 
 
-     
+
     }
 
     /**
