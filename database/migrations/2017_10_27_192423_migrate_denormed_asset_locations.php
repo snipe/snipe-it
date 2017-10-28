@@ -19,7 +19,7 @@ class MigrateDenormedAssetLocations extends Migration
 
         // Unassigned
         $rtd_assets = Asset::whereNull('assigned_to')->with('defaultLoc')->get();
-        echo "\nUnasigned assets: ";
+        \Log::info('Unasigned assets: ');
         foreach ($rtd_assets as $rtd_asset) {
             \Log::info('Setting asset '.$rtd_asset->id.' to  location: '.$rtd_asset->rtd_location_id." Because asset's default location is: ".$rtd_asset->rtd_location_id);
             $rtd_asset->location_id=$rtd_asset->rtd_location_id;
