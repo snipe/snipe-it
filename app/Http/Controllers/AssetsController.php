@@ -468,6 +468,17 @@ class AssetsController extends Controller
         } else {
             $expected_checkin = '';
         }
+
+        // Set the location ID to the RTD location id if there is one
+        if ($asset->rtd_location_id!='') {
+            $asset->location_id = $target->rtd_location_id;
+        }
+
+        // Overwrite that if the target has a location ID though
+        if ($target->location_id!='') {
+            $asset->location_id = $target->location_id;
+        }
+
         if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
 //           Redirect to the new asset page
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));

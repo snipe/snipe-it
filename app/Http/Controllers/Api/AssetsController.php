@@ -524,10 +524,22 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'No valid checkout target specified for asset '.e($asset->asset_tag).'.'));
         }
 
+
+
         $checkout_at = request('checkout_at', date("Y-m-d H:i:s"));
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
         $asset_name = request('name', null);
+        
+        // Set the location ID to the RTD location id if there is one
+        if ($asset->rtd_location_id!='') {
+            $asset->location_id = $target->rtd_location_id;
+        }
+
+        // Overwrite that if the target has a location ID though
+        if ($target->location_id!='') {
+            $asset->location_id = $target->location_id;
+        }
         
 
         if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name)) {
