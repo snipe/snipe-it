@@ -191,9 +191,9 @@ $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
                         icon_style = 'fa-times';
                 }
 
-                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ value.status_meta + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + '</a> ';
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ value.status_meta + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + '</a></nobr>';
             } else if ((value) && (value.name)) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a>';
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a></span>';
             }
         };
     }
@@ -270,7 +270,7 @@ $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
                 item_icon = 'fa-map-marker';
             }
 
-            return '<a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-blue"></i> ' + value.name + '</a>';
+            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-blue"></i> ' + value.name + '</a></nobr>';
 
         } else {
             return '';
