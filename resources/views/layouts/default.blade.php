@@ -464,7 +464,7 @@
                 </li>
             @endcan
 
-            @can('manage', \App\Models\Setting::class)
+            @can('backend.interact')
                 <li>
                     <a href="#">
                         <i class="fa fa-gear"></i>
@@ -536,7 +536,7 @@
                 </a>
 
                 <ul class="treeview-menu">
-	                 <li><a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
+                    <li><a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
                     <li><a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }} >@lang('general.audit_report')</a></li>
 
