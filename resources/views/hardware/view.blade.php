@@ -416,19 +416,19 @@
                     <li><i class="fa fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
                   @endif
 
-                  @if (isset($asset->assetLoc))
-                    <li>{{ $asset->assetLoc->name }}</li>
-                    <li>{{ $asset->assetLoc->address }}
-                      @if ($asset->assetLoc->address2!='')
-                      {{ $asset->assetLoc->address2 }}
+                  @if (isset($asset->location))
+                    <li>{{ $asset->location->name }}</li>
+                    <li>{{ $asset->location->address }}
+                      @if ($asset->location->address2!='')
+                      {{ $asset->location->address2 }}
                       @endif
                     </li>
 
-                    <li>{{ $asset->assetLoc->city }}
-                      @if (($asset->assetLoc->city!='') && ($asset->assetLoc->state!=''))
+                    <li>{{ $asset->location->city }}
+                      @if (($asset->location->city!='') && ($asset->location->state!=''))
                           ,
                       @endif
-                      {{ $asset->assetLoc->state }} {{ $asset->assetLoc->zip }}
+                      {{ $asset->location->state }} {{ $asset->location->zip }}
                     </li>
                     @endif
                 </ul>
