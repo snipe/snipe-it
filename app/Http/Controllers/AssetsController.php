@@ -1022,7 +1022,7 @@ class AssetsController extends Controller
                     ->with('count', $count)
                     ->with('settings', Setting::getSettings());
             } elseif ($request->input('bulk_actions')=='delete') {
-                $assets = Asset::with('assignedTo', 'assetloc')->find($asset_ids);
+                $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                 $assets->each(function ($asset) {
                     $this->authorize('delete', $asset);
                 });

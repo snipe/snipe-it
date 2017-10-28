@@ -114,7 +114,7 @@ class ReportsController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            $assets = Asset::with('assignedTo', 'assetLoc','defaultLoc','assignedTo','model','supplier','assetstatus','model.manufacturer');
+            $assets = Asset::with('assignedTo', 'location','defaultLoc','assignedTo','model','supplier','assetstatus','model.manufacturer');
 
                 // This is used by the sidenav, mostly
             switch ($request->input('status')) {
@@ -182,7 +182,7 @@ class ReportsController extends Controller
                         ($asset->supplier) ? e($asset->supplier->name) : '',
                         ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        ($asset->assetLoc) ? e($asset->assetLoc->present()->name()) : '',
+                        ($asset->location) ? e($asset->location->present()->name()) : '',
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
                     foreach ($customfields as $field) {
@@ -215,7 +215,7 @@ class ReportsController extends Controller
     {
 
         // Grab all the assets
-        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'assetloc', 'assetlog', 'company', 'model.category', 'model.depreciation')
+        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'assetlog', 'company', 'model.category', 'model.depreciation')
                        ->orderBy('created_at', 'DESC')->get();
 
         return view('reports/depreciation', compact('assets'));
@@ -270,7 +270,7 @@ class ReportsController extends Controller
                 $row[] = ''; // Empty string if unassigned
             }
 
-            if (( $asset->assigned_to > 0 ) && ( $location = $asset->assetLoc )) {
+            if (( $asset->assigned_to > 0 ) && ( $location = $asset->location )) {
                 if ($location->city) {
                     $row[] = e($location->city) . ', ' . e($location->state);
                 } elseif ($location->name) {
@@ -282,8 +282,8 @@ class ReportsController extends Controller
                 $row[] = '';  // Empty string if location is not set
             }
 
-            if ($asset->assetloc) {
-                $currency = e($asset->assetloc->currency);
+            if ($asset->location) {
+                $currency = e($asset->location->currency);
             } else {
                 $currency = e(Setting::first()->default_currency);
             }
@@ -562,8 +562,8 @@ class ReportsController extends Controller
             }
 
             if (e(Input::get('location')) == '1') {
-                if($asset->assetLoc) {
-                    $show_loc = $asset->assetLoc->present()->name();
+                if($asset->location) {
+                    $show_loc = $asset->location->present()->name();
                 } else {
                     $show_loc = 'Default location '.$asset->rtd_location_id.' is invalid';
                 }

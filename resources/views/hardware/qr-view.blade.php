@@ -345,15 +345,15 @@
                     {{ $asset->assignedTo->present()->nameUrl() }}
                 </li>
 
-                @if (isset($asset->assetloc->address))
+                @if (isset($asset->location->address))
                 <li>
-                    {{ $asset->assetloc->address }}
-                    @if (isset($asset->assetloc->address2))
-                    {{ $asset->assetloc->address2 }}
+                    {{ $asset->location->address }}
+                    @if (isset($asset->location->address2))
+                    {{ $asset->location->address2 }}
                     @endif
                 </li>
-                    @if (isset($asset->assetloc->city))
-                    <li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
+                    @if (isset($asset->location->city))
+                    <li>{{ $asset->location->city }}, {{ $asset->location->state }} {{ $asset->location->zip }}</li>
                     @endif
                 @endif
 
