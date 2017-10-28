@@ -15,6 +15,13 @@
 
     {!! $errors->first($fieldname, '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
 
+    @if ($help_text)
+    <div class="col-md-7 col-sm-11 col-md-offset-3">
+        <p class="help-block">{{ $help_text }}</p>
+    </div>
+    @endif
+
+
 </div>
 
 
