@@ -130,19 +130,19 @@ class AssetsTransformer
     public function transformAssignedTo($asset)
     {
         if ($asset->checkedOutToUser()) {
-            return $asset->assignedTo ? [
-                    'id' => (int) $asset->assignedTo->id,
-                    'username' => e($asset->assignedTo->username),
-                    'name' => e($asset->assignedTo->getFullNameAttribute()),
-                    'first_name'=> e($asset->assignedTo->first_name),
-                    'last_name'=> e($asset->assignedTo->last_name),
-                    'employee_number' =>  e($asset->assignedTo->employee_num),
+            return $asset->assigned ? [
+                    'id' => (int) $asset->assigned->id,
+                    'username' => e($asset->assigned->username),
+                    'name' => e($asset->assigned->getFullNameAttribute()),
+                    'first_name'=> e($asset->assigned->first_name),
+                    'last_name'=> e($asset->assigned->last_name),
+                    'employee_number' =>  e($asset->assigned->employee_num),
                     'type' => 'user'
                 ] : null;
         }
-        return $asset->assignedTo ? [
-            'id' => $asset->assignedTo->id,
-            'name' => $asset->assignedTo->display_name,
+        return $asset->assigned ? [
+            'id' => $asset->assigned->id,
+            'name' => $asset->assigned->display_name,
             'type' => $asset->assignedType()
         ] : null;
     }
