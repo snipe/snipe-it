@@ -558,7 +558,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function checkin($asset_id, Request $request)
+    public function checkin($asset_id)
     {
         $asset = Asset::findOrFail($asset_id);
         $this->authorize('checkin', $asset);
