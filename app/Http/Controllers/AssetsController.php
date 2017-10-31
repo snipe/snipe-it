@@ -1243,4 +1243,28 @@ class AssetsController extends Controller
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
+
+    /**
+     * Generate labels for given asset ids.
+     *
+     * @return View
+     */
+    public function generateLabels(Request $request)
+    {
+        if (!$request->has('ids')) {
+            return redirect()->back()->with('error', 'No assets selected');
+        }
+
+        $asset_raw_array = $request->input('ids');
+        foreach ($asset_raw_array as $key => $asset_id) {
+            $asset_ids[] = $asset_id;
+        }
+
+        $count = 0;
+        return view('hardware/labels')
+            ->with('assets', Asset::find($asset_ids))
+            ->with('settings', Setting::getSettings())
+            ->with('count', $count)
+            ->with('settings', Setting::getSettings());
+    }
 }

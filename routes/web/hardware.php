@@ -103,6 +103,14 @@ Route::group(
         ]);
 
 
+        Route::get(
+            'generatelabels',
+            [
+                'as'   => 'hardware/generatelabels',
+                'uses' => 'AssetsController@generateLabels'
+            ]
+        );
+
         Route::post(
             'bulkedit',
             [
