@@ -28,18 +28,7 @@
           {{ csrf_field() }}
 
           <!-- User -->
-          <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-
-            {{ Form::label('assigned_to', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-            <div class="col-md-7 required">
-              {{ Form::select('assigned_to', $users_list , Input::old('assigned_to'), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'width:100%')) }}
-
-              {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-            <div class="col-md-1 col-sm-1 text-left">
-              <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
-            </div>
-          </div>
+          @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user'])
 
               <!-- Checkout/Checkin Date -->
               <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
@@ -75,13 +64,8 @@
             </div>
           </div>
 
-          <div class="form-group{{ $errors->has('selected_asset') ? ' has-error' : '' }}">
-            {{ Form::label('selected_asset', trans('general.assets'), array('class' => 'col-md-3 control-label')) }}
-            <div class="col-md-8 required">
-              {{ Form::select('selected_assets[]', $assets_list , Input::old('selected_asset'), array('class'=>'select2', 'id'=>'selected_asset', 'style'=>'width:100%', 'multiple'=>'multiple')) }}
-              {!! $errors->first('selected_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
+              @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.assets'), 'fieldname' => 'selected_assets[]', 'multiple' => true])
+
 
       </div> <!--./box-body-->
       <div class="box-footer">
@@ -108,38 +92,6 @@
 @stop
 
 @section('moar_scripts')
-<script nonce="{{ csrf_token() }}">
-$(function() {
-  $('#assigned_to').on("change",function () {
-    // console.warn("Model Id has changed!");
-    var userid=$('#assigned_to').val();
-    if(userid=='') {
-      console.warn('no user selected');
-      $('#current_assets_box').fadeOut();
-      $('#current_assets_content').html("");
-    } else {
-      $.get("{{url('/') }}/api/users/"+userid+"/assets",{_token: "{{ csrf_token() }}"},function (data) {
-        // console.warn("Ajax call came back okay for user " + userid + "! " + data.length + " Data is: "+data);
-        if (data.length > 0) {
-            $('#current_assets_box').fadeIn();
-            var table_html = '<div class="row"><div class="col-md-12"><table class="table table-striped"><thead><tr><td>{{ trans('admin/hardware/form.name') }}</td><td>{{ trans('admin/hardware/form.tag') }}</td></tr></thead><tbody>';
-            $('#current_assets_content').append('');
-            for (var i in data) {
-                var asset = data[i];
-                table_html += "<tr><td class=\"col-md-8\"><a href=\"{{ url('/') }}/hardware/" + asset.id + "/view\">" + asset.name;
-                if (asset.model.name!='') {
-                    table_html += " (" + asset.model.name + ")";
-                }
-                table_html += "</a></td><td class=\"col-md-4\">" + asset.asset_tag + "</td></tr>";
-            }
-            $('#current_assets_content').html(table_html + '</tbody></table></div></div>');
-        } else {
-            $('#current_assets_box').fadeOut();
-        }
-      });
-    }
-  });
-});
-</script>
+@include('partials/assets-assigned')
 
 @stop
