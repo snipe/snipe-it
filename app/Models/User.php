@@ -199,8 +199,18 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     /**
      * Get the asset's location based on the assigned user
+     * @todo - this should be removed once we're sure we've switched it
+     * to location()
      **/
     public function userloc()
+    {
+        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
+    }
+
+    /**
+     * Get the asset's location based on the assigned user
+     **/
+    public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }
