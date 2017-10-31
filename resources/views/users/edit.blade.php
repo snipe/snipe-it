@@ -276,6 +276,53 @@
                   </div>
                 </div>
 
+                  <!-- Address -->
+                  <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="address">{{ trans('general.address') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="address" id="address" value="{{ Input::old('address', $user->address) }}" />
+                          {!! $errors->first('address', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- City -->
+                  <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="city">{{ trans('general.city') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="city" id="city" value="{{ Input::old('city', $user->city) }}" />
+                          {!! $errors->first('city', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- State -->
+                  <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="state">{{ trans('general.state') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="state" id="state" value="{{ Input::old('state', $user->state) }}" maxlength="3" />
+                          {!! $errors->first('state', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- Country -->
+                  <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="city">{{ trans('general.country') }}</label>
+                      <div class="col-md-4">
+                          {!! Form::countries('country', Input::old('country', $user->country), 'select2') !!}
+                          {!! $errors->first('country', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- Zip -->
+                  <div class="form-group{{ $errors->has('zip') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="zip">{{ trans('general.zip') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="zip" id="zip" value="{{ Input::old('zip', $user->zip) }}" maxlength="10" />
+                          {!! $errors->first('zip', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+
+
                 <!-- Activation Status -->
                 <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="activated">{{ trans('admin/users/table.activated') }}</label>

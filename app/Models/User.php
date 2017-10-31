@@ -38,6 +38,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'phone_number',
         'username',
         'first_name',
+        'address',
+        'city',
+        'state',
+        'country',
+        'zip',
     ];
 
     protected $casts = [
