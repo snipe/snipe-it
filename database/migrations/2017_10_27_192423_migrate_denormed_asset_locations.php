@@ -28,7 +28,7 @@ class MigrateDenormedAssetLocations extends Migration
         }
 
         // Assigned to users - ::with('assignedTo') //can't eager-load polymorphic relations?
-        $assigned_user_assets = Asset::where('assigned_type',User::class)->get();
+        $assigned_user_assets = Asset::where('assigned_type',User::class)->whereNotNull('assigned_to')->get();
         \Log::debug('User-assigned assets:');
         foreach ($assigned_user_assets as $assigned_user_asset) {
             if ($assigned_user_asset->assignedTo->userLoc) {
