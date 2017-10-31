@@ -31,8 +31,9 @@
                 <th data-sortable="true" data-formatter="locationsLinkFormatter" data-field="name" data-searchable="true">{{ trans('admin/locations/table.name') }}</th>
                 <th data-sortable="true" data-field="image" data-visible="false" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
                 <th data-sortable="true" data-field="parent" data-formatter="locationsLinkObjFormatter">{{ trans('admin/locations/table.parent') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="assets_default">{{ trans('admin/locations/table.assets_rtd') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="assets_checkedout">{{ trans('admin/locations/table.assets_checkedout') }}</th>
+                <th data-searchable="false" data-sortable="true" data-field="rtd_assets_count">{{ trans('admin/locations/table.assets_rtd') }}</th>
+                <th data-searchable="false" data-sortable="true" data-field="assets_count">{{ trans('admin/locations/table.assets_checkedout') }}</th>
+                <th data-searchable="false" data-sortable="true" data-field="users_count">{{ trans('general.people') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="currency">{{ trans('general.currency') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="address">{{ trans('admin/locations/table.address') }}</th>
                 <th data-searchable="true" data-sortable="true" data-field="city">{{ trans('admin/locations/table.city') }}
