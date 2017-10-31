@@ -80,7 +80,7 @@ class MigrateDenormedAssetLocations extends Migration
         $assets = Asset::get();
 
         foreach ($assets as $asset) {
-            if (($asset)  && ($asset->location_id != $asset->assetLoc()->id)) {
+            if (($asset)  && ($asset->assetLoc()) && ($asset->location_id != $asset->assetLoc()->id)) {
                 \Log::info('MISMATCH MISMATCH '.$asset->id. "doesn't match its location");
             }
         }
