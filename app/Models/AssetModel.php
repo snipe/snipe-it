@@ -149,7 +149,7 @@ class AssetModel extends SnipeModel
     public function scopeTextSearch($query, $search)
     {
 
-        return $query->where('name', 'LIKE', "%$search%")
+        return $query->where('models.name', 'LIKE', "%$search%")
             ->orWhere('model_number', 'LIKE', "%$search%")
             ->orWhere(function ($query) use ($search) {
                 $query->whereHas('depreciation', function ($query) use ($search) {

@@ -55,7 +55,7 @@ class AssetModelsController extends Controller
                 $assetmodels->OrderManufacturer($order);
                 break;
             default:
-                $assetmodels->orderBy($sort, $order);
+                $assetmodels->orderBy('models'.$sort, $order);
                 break;
         }
 
