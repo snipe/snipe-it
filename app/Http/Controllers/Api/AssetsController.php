@@ -353,7 +353,7 @@ class AssetsController extends Controller
         }
 
         if ($asset->save()) {
-            $asset->logCreate();
+
             if ($request->get('assigned_user')) {
                 $target = User::find(request('assigned_user'));
             } elseif ($request->get('assigned_asset')) {
