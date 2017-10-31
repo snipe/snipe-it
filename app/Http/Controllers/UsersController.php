@@ -331,6 +331,9 @@ class UsersController extends Controller
         $user->zip = $request->input('zip', null);
 
 
+        // Update the location of any assets checked out to this user
+        Asset::where('assigned_type', User::class)
+            ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         // Do we want to update the user password?
         if ($request->has('password')) {
