@@ -45,7 +45,7 @@ class MigrateDenormedAssetLocations extends Migration
         }
 
         // Assigned to locations // with('assetloc')-> //can't eager-load polymorphic relationships
-        $assigned_location_assets = Asset::where('assigned_type',Location::class)->get();
+        $assigned_location_assets = Asset::where('assigned_type',Location::class)->whereNotNull('assigned_to')->get();
         \Log::info('Location-assigned assets: ');
         foreach ($assigned_location_assets as $assigned_location_asset) {
             $assigned_location_asset->location_id=$assigned_location_asset->assignedTo->id;
@@ -55,16 +55,20 @@ class MigrateDenormedAssetLocations extends Migration
         }
 
         // Assigned to assets
-        $assigned_asset_assets = Asset::with('assetloc')->where('assigned_type',Asset::class)->get();
+        $assigned_asset_assets = Asset::where('assigned_type',Asset::class)->whereNotNull('assigned_to')->with('assetloc')->get();
         \Log::info('Asset-assigned assets: ');
         foreach ($assigned_asset_assets as $assigned_asset_asset) {
             \Log::info('This asset is: '.$assigned_asset_asset->assignedTo->asset_tag);
-            if ($assigned_asset_asset->assignedTo->location) {
+            if (($assigned_asset_asset->assignedTo) && ($assigned_asset_asset->assignedTo->location)) {
                 \Log::info('They are in '.$assigned_asset_asset->assignedTo->location->name);
             }
-            \Log::info('User location is: '.$assigned_asset_asset->assetloc->name);
-            \Log::info('Setting asset '.$assigned_asset_asset->id.' location to  '.$assigned_asset_asset->assetloc->id.' ('.$assigned_asset_asset->assetloc->name.')');
-            $assigned_asset_asset->location_id=$assigned_asset_asset->assetloc->id;
+            if ($assigned_asset_asset->assetloc) {
+                \Log::info('User location is: '.$assigned_asset_asset->assetloc->name);
+                \Log::info('Setting asset '.$assigned_asset_asset->id.' location to  '.$assigned_asset_asset->assetloc->id.' ('.$assigned_asset_asset->assetloc->name.')');
+                $assigned_asset_asset->location_id=$assigned_asset_asset->assetloc->id;
+            }
+
+
 
         }
 
