@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Company;
+use App\Http\Transformers\SelectlistTransformer;
 
 class CompaniesController extends Controller
 {
@@ -140,5 +141,39 @@ class CompaniesController extends Controller
             }
         }
 
+    }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     *
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', Company::class);
+
+        $companies = Company::select([
+            'companies.id',
+            'companies.name',
+            'companies.image',
+        ]);
+
+        if ($request->has('search')) {
+            $companies = $companies->where('companies.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $companies = $companies->orderBy('name', 'ASC')->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($companies as $company) {
+            $company->use_image = ($company->image) ? url('/').'/uploads/companies/'.$company->image : null;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($companies);
     }
 }

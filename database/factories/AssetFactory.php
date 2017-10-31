@@ -16,7 +16,7 @@ use App\Models\Category;
 $factory->define(Asset::class, function (Faker\Generator $faker) {
     return [
         'name' => null,
-        'rtd_location_id' => 1,
+        'rtd_location_id' => rand(1,10),
         'serial' => $faker->uuid,
         'status_id' => 1,
         'user_id' => 1,

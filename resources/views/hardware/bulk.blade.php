@@ -30,7 +30,7 @@
         <div class="box-body">
           <!-- Purchase Date -->
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
-            <label for="purchase_date" class="col-md-2 control-label">{{ trans('admin/hardware/form.date') }}</label>
+            <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
             <div class="input-group col-md-3">
               <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -40,7 +40,7 @@
 
           <!-- Status -->
           <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
-            <label for="status_id" class="col-md-2 control-label">
+            <label for="status_id" class="col-md-3 control-label">
               {{ trans('admin/hardware/form.status') }}
             </label>
             <div class="col-md-7">
@@ -49,31 +49,15 @@
             </div>
           </div>
 
-          <!-- Asset Model -->
-          <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
-            <label for="model_id" class="col-md-2 control-label">
-              {{ trans('admin/hardware/form.model') }}
-            </label>
-            <div class="col-md-7">
-              {{ Form::select('model_id', $models_list , Input::old('model_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
-              {!! $errors->first('model_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
+        @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id'])
 
           <!-- Default Location -->
-          <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
-            <label for="status_id" class="col-md-2 control-label">
-              {{ trans('admin/hardware/form.default_location') }}
-            </label>
-            <div class="col-md-7">
-              {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
-              {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
+        @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'location_id'])
 
-          <!-- Purchase Cost -->
+
+        <!-- Purchase Cost -->
           <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
-            <label for="purchase_cost" class="col-md-2 control-label">
+            <label for="purchase_cost" class="col-md-3 control-label">
               {{ trans('admin/hardware/form.cost') }}
             </label>
             <div class="input-group col-md-3">
@@ -84,19 +68,12 @@
           </div>
 
           <!-- Supplier -->
-          <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
-            <label for="supplier_id" class="col-md-2 control-label">
-              {{ trans('general.supplier') }}
-            </label>
-            <div class="col-md-7">
-              {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-              {!! $errors->first('supplier_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
+           @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
 
-          <!-- Company -->
+
+        <!-- Company -->
           <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
-            <label for="company_id" class="col-md-2 control-label">
+            <label for="company_id" class="col-md-3 control-label">
               {{ trans('general.company') }}
             </label>
             <div class="col-md-7">
@@ -107,7 +84,7 @@
 
           <!-- Order Number -->
           <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-            <label for="order_number" class="col-md-2 control-label">
+            <label for="order_number" class="col-md-3 control-label">
               {{ trans('admin/hardware/form.order') }}
             </label>
             <div class="col-md-7">
@@ -118,12 +95,12 @@
 
           <!-- Warranty -->
           <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
-            <label for="warranty_months" class="col-md-2 control-label">
+            <label for="warranty_months" class="col-md-3 control-label">
               {{ trans('admin/hardware/form.warranty') }}
             </label>
             <div class="col-md-2">
               <div class="input-group">
-                <input class="col-md-2 form-control" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months') }}" />
+                <input class="col-md-3 form-control" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months') }}" />
                 <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
                 {!! $errors->first('warranty_months', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
@@ -132,10 +109,10 @@
 
           <!-- Requestable -->
           <div class="form-group {{ $errors->has('requestable') ? ' has-error' : '' }}">
-            <label for="requestable" class="col-md-2 control-label">
+            <label for="requestable" class="col-md-3 control-label">
               {{ trans('admin/hardware/form.requestable') }}
             </label>
-            <div class="col-md-10">
+            <div class="col-md-7 col-md-offset-3">
               <label class="radio">
                 <input type="radio" name="requestable" value="1"> Yes
               </label>

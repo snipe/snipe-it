@@ -55,7 +55,8 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     'state' => $faker->stateAbbr,
     'country' => $faker->countryCode,
     'currency' => $faker->currencyCode,
-    'zip' => $faker->postcode
+    'zip' => $faker->postcode,
+    'image' => rand(1,9).'.jpg',
     ];
 });
 

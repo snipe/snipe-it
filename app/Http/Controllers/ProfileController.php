@@ -30,8 +30,7 @@ class ProfileController extends Controller
     public function getIndex()
     {
         $user = Auth::user();
-        $location_list = Helper::locationsList();
-        return view('account/profile', compact('user'))->with('location_list', $location_list);
+        return view('account/profile', compact('user'));
     }
 
     /**
@@ -144,10 +143,11 @@ class ProfileController extends Controller
     }
 
     /**
-     * Returns a page with the API token generation interface.
+     * Save the menu state of open/closed when the user clicks on the hamburger
+     * menu.
      *
-     * We created a controller method for this because closures aren't allowed
-     * in the routes file if you want to be able to cache the routes.
+     * This URL is triggered via jquery in
+     * resources/views/layouts/default.blade.php
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]

@@ -33,13 +33,15 @@ class LocationsTransformer
             $array = [
                 'id' => (int) $location->id,
                 'name' => e($location->name),
+                'image' =>   ($location->image) ? e(url('/').'/uploads/locations/'.e($location->image)) : null,
                 'address' => e($location->address),
                 'city' => e($location->city),
                 'state' => e($location->state),
                 'country' => e($location->country),
                 'zip' => e($location->zip),
-                'assets_checkedout' => $location->location_assets_count,
-                'assets_default'    => $location->assigned_assets_count,
+                'assets_count' => (int) $location->assets_count,
+                'rtd_assets_count'    => (int) $location->rtd_assets_count,
+                'users_count'    => (int) $location->users_count,
 
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),

@@ -45,48 +45,26 @@
               </div>
             </div>
 
+                @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user'])
+            @if ($asset->requireAcceptance())
+                    <div class="form-group">
+
+                        <div class="col-md-8 col-md-offset-3">
+                            <p class="help-block">
+                                Because this asset category requires acceptance,
+                                it cannot be checked out to another asset or to a location.
+                            </p>
+                        </div>
+                    </div>
+            @else
+
+                @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset'])
+
+                @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location'])
 
 
-            <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-
-
-
-
-              {{ Form::label('assigned_user', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-
-                <div class="col-md-7 required">
-                    <select class="js-data-user-ajax" name="assigned_user" style="width: 350px;">
-                        <option value="">{{ trans('general.select_user') }}</option>
-                    </select>
-                </div>
-
-                {!! $errors->first('assigned_user', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-
-              <div class="col-md-1 col-sm-1 text-left">
-                  @can('create', \App\Models\User::class)
-                    <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user_select' class="btn btn-sm btn-default">New</a>
-                  @endcan
-              </div>
-            </div>
-            @if (!$asset->requireAcceptance())
-                <!-- Assets -->
-                <div id="assigned_asset" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                  {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-                  <div class="col-md-7 required">
-                    {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
-                    {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                  </div>
-                </div>
-
-                <!-- Locations -->
-                <div id="assigned_location" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                  {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-                  <div class="col-md-7 required">
-                    {{ Form::select('assigned_location', $locations_list , Input::old('assigned_location', $asset->assigned_type == 'App\Models\Asset' ? $asset->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_location', 'style'=>'width:100%')) }}
-                    {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                  </div>
-                </div>
             @endif
+
             <!-- Checkout/Checkin Date -->
             <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
               {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
@@ -120,24 +98,26 @@
               </div>
             </div>
 
-            @if ($asset->requireAcceptance())
-            <div class="form-group">
-              <div class="col-md-8 col-md-offset-3">
-                <p class="text-yellow">
-                  <i class="fa fa-warning"></i>
-                  {{ trans('admin/categories/general.required_acceptance') }}
-                </p>
-              </div>
-            </div>
-            @endif
+                @if ($asset->requireAcceptance() || $asset->getEula())
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-3">
+                            <div class="callout callout-info">
 
-            @if ($asset->getEula())
-            <div class="form-group">
-              <div class="col-md-8 col-md-offset-3">
-                <p class="text-yellow"><i class="fa fa-warning"></i> {{ trans('admin/categories/general.required_eula') }}</p>
-              </div>
-            </div>
-            @endif
+                                    @if ($asset->requireAcceptance())
+                                        <i class="fa fa-envelope"></i>
+                                    {{ trans('admin/categories/general.required_acceptance') }}
+                                        <br>
+                                    @endif
+
+                                    @if ($asset->getEula())
+                                        <i class="fa fa-envelope"></i>
+                                       {{ trans('admin/categories/general.required_eula') }}
+                                    @endif
+                            </div>
+                        </div>
+                    </div>
+                 @endif
+
         </div> <!--/.box-body-->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
@@ -163,76 +143,5 @@
 @stop
 
 @section('moar_scripts')
-<script nonce="{{ csrf_token() }}">
-$(function() {
-  $('#assigned_user').on("change",function () {
-    var userid = $('#assigned_user option:selected').val();
-    if(userid=='') {
-      console.warn('no user selected');
-      $('#current_assets_box').fadeOut();
-      $('#current_assets_content').html("");
-    } else {
-
-        $.ajax({
-            type: 'GET',
-            url: '{{ url('/') }}/api/v1/users/' + userid + '/assets',
-            headers: {
-                "X-Requested-With": 'XMLHttpRequest',
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-
-            dataType: 'json',
-            success: function (data) {
-                $('#current_assets_box').fadeIn();
-
-                var table_html = '<div class="row">';
-                table_html += '<div class="col-md-12">';
-                table_html += '<table class="table table-striped">';
-                table_html += '<thead><tr>';
-                table_html += '<th></th>';
-                table_html += '<th>{{ trans('admin/hardware/form.name') }}</th>';
-                table_html += '<th>{{ trans('admin/hardware/form.tag') }}</th>';
-                table_html += '<th>{{ trans('admin/hardware/form.serial') }}</th>';
-                table_html += '</tr></thead><tbody>';
-
-                $('#current_assets_content').append('');
-
-                if (data.rows.length > 0) {
-
-                    for (var i in data.rows) {
-                        var asset = data.rows[i];
-                        table_html += '<tr>';
-                        if (asset.image != null) {
-                            table_html += '<td class="col-md-1"><a href="' + asset.image + '" data-toggle="lightbox" data-type="image"><img src="' + asset.image + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;"></a></td>';
-                        } else {
-                            table_html += "<td></td> ";
-                        }
-                        table_html += '<td><a href="{{ url('/') }}/hardware/' + asset.id + '">';
-
-                        if ((asset.name == '') && (asset.name != null)) {
-                            table_html += " " + asset.model.name;
-                        } else {
-                            table_html += asset.name;
-                            table_html += " (" + asset.model.name + ")";
-                        }
-
-                        table_html += '</a></td>';
-                        table_html += '<td class="col-md-4">' + asset.asset_tag + '</td>';
-                        table_html += '<td class="col-md-4">' + asset.serial + '</td>';
-                        table_html += "</tr>";
-                    }
-                } else {
-                    table_html += '<tr><td colspan="4">No assets checked out to '+ $('.js-data-user-ajax').find('option:selected').text() + ' yet!</td></tr>';
-                }
-                $('#current_assets_content').html(table_html + '</tbody></table></div></div>');
-
-            },
-            error: function (data) {
-                $('#current_assets_box').fadeOut();
-            }
-        });
-    }
-  });
-});
-</script>
+    @include('partials/assets-assigned')
 @stop

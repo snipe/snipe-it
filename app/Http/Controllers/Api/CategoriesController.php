@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Category;
 use App\Http\Transformers\CategoriesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 
 class CategoriesController extends Controller
 {
@@ -20,9 +21,9 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Category::class);
-        $allowed_columns = ['id', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count'];
+        $allowed_columns = ['id', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count', 'image'];
 
-        $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email'])
+        $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email','image'])
             ->withCount('assets', 'accessories', 'consumables', 'components');
 
         if ($request->has('search')) {
@@ -128,4 +129,41 @@ class CategoriesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/categories/message.delete.success')));
 
     }
+
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     *
+     */
+    public function selectlist(Request $request, $category_type = 'asset')
+    {
+        $this->authorize('view', Categories::class);
+
+        $categories = Category::select([
+            'id',
+            'name',
+            'image',
+        ]);
+
+        if ($request->has('search')) {
+            $categories = $categories->where('name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $categories = $categories->where('category_type', $category_type)->orderBy('name', 'ASC')->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($categories as $category) {
+            $category->use_image = ($category->image) ? url('/').'/uploads/categories/'.$category->image : null;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($categories);
+
+    }
+
 }

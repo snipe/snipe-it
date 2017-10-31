@@ -139,6 +139,14 @@ isinstalled () {
     fi
 }
 
+isdnfinstalled () {
+    if dnf list installed "$@" >/dev/null 2>&1; then
+        true
+    else
+        false
+    fi
+}
+
 if [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
     distro="$(lsb_release -s -i)"
     version="$(lsb_release -s -r)"
@@ -149,6 +157,7 @@ elif [ -f /etc/os-release ]; then
     #Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
     #If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
     #so lets assume that it's version 6 (Plus, who would be doing a new install of anything on centos5 at this point..)
+    #/etc/os-release also properly detects fedora
 elif [ -f /etc/centos-release ]; then
     distro="Centos"
     version="6"
@@ -166,7 +175,7 @@ echo "
 "
 
 echo ""
-echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Debian and Ubuntu!"
+echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Fedora, Debian and Ubuntu!"
 echo ""
 shopt -s nocasematch
 case $distro in
@@ -181,6 +190,10 @@ case $distro in
     *centos*|*redhat*|*ol*|*rhel*)
         echo "  The installer has detected $distro version $version."
         distro=centos
+        ;;
+    *fedora*)
+        echo "  The installer has detected $distro version $version."
+        distro=fedora
         ;;
     *)
         echo "  The installer was unable to determine your OS. Exiting for safety."
@@ -526,6 +539,12 @@ case $distro in
 
         installsnipeit
 
+        if [ "$(firewall-cmd --state)" == "running" ]; then
+            echo "* Configuring firewall."
+            log "firewall-cmd --zone=public --add-port=http/tcp --permanent"
+            log "firewall-cmd --reload"
+        fi
+
         #Check if SELinux is enforcing
         if [ "$(getenforce)" == "Enforcing" ]; then
             echo "* Configuring SELinux."
@@ -543,6 +562,58 @@ case $distro in
         echo "Unsupported CentOS version. Version found: $version"
         exit 1
     fi
+    ;;
+    fedora)
+        #####################################  Install for Fedora 25+  ##############################################
+        webdir=/var/www/html
+        ownergroup=apache:apache
+        tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
+
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-cli php-common php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml"
+
+        for p in $PACKAGES; do
+            if isdnfinstalled "$p"; then
+                echo "  * $p already installed"
+            else
+                echo "  * Installing $p ... "
+                log "dnf -y install $p"
+            fi
+        done;
+
+        echo "* Setting MariaDB to start on boot and starting MariaDB."
+        log "systemctl enable mariadb.service"
+        log "systemctl start mariadb.service"
+
+        echo "* Securing MariaDB."
+        /usr/bin/mysql_secure_installation
+
+        echo "* Creating MariaDB Database/User."
+        echo "* Please Input your MariaDB root password "
+        mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+
+        #TODO make sure the apachefile doesnt exist isnt already in there
+        echo "* Creating the new virtual host in Apache."
+        setvhcentos
+
+        #TODO make sure this isnt already in there
+        echo "* Setting up hosts file."
+        echo >> $hosts "127.0.0.1 $hostname $fqdn"
+
+        installsnipeit
+
+        #Check if SELinux is enforcing
+        if [ "$(getenforce)" == "Enforcing" ]; then
+            echo "* Configuring SELinux."
+            #Required for ldap integration
+            setsebool -P httpd_can_connect_ldap on
+            #Sets SELinux context type so that scripts running in the web server process are allowed read/write access
+            chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+        fi
+
+        echo "* Setting Apache httpd to start on boot and starting service."
+        log "systemctl enable httpd.service"
+        log "systemctl restart httpd.service"
 esac
 
 setupmail=default

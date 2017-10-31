@@ -24,7 +24,8 @@ $factory->state(App\Models\Manufacturer::class, 'apple', function ($faker) {
     return [
         'name' => 'Apple',
         'url' => 'https://apple.com',
-        'support_url' => 'https://support.apple.com'
+        'support_url' => 'https://support.apple.com',
+        'image' => 'apple.jpg',
     ];
 });
 
@@ -33,7 +34,8 @@ $factory->state(App\Models\Manufacturer::class, 'microsoft', function ($faker) {
     return [
         'name' => 'Microsoft',
         'url' => 'https://microsoft.com',
-        'support_url' => 'https://support.microsoft.com'
+        'support_url' => 'https://support.microsoft.com',
+        'image' => 'microsoft.png',
     ];
 });
 
@@ -42,7 +44,8 @@ $factory->state(App\Models\Manufacturer::class, 'dell', function ($faker) {
     return [
         'name' => 'Dell',
         'url' => 'https://dell.com',
-        'support_url' => 'https://support.dell.com'
+        'support_url' => 'https://support.dell.com',
+        'image' => 'dell.png',
     ];
 });
 
@@ -51,7 +54,8 @@ $factory->state(App\Models\Manufacturer::class, 'asus', function ($faker) {
     return [
         'name' => 'Asus',
         'url' => 'https://asus.com',
-        'support_url' => 'https://support.asus.com'
+        'support_url' => 'https://support.asus.com',
+        'image' => 'asus.png',
     ];
 });
 
@@ -60,7 +64,8 @@ $factory->state(App\Models\Manufacturer::class, 'hp', function ($faker) {
     return [
         'name' => 'HP',
         'url' => 'https://hp.com',
-        'support_url' => 'https://support.hp.com'
+        'support_url' => 'https://support.hp.com',
+        'image' => 'hp.png',
     ];
 });
 
@@ -69,7 +74,8 @@ $factory->state(App\Models\Manufacturer::class, 'lenovo', function ($faker) {
     return [
         'name' => 'Lenovo',
         'url' => 'https://lenovo.com',
-        'support_url' => 'https://support.lenovo.com'
+        'support_url' => 'https://support.lenovo.com',
+        'image' => 'lenovo.jpg',
     ];
 });
 
@@ -78,7 +84,8 @@ $factory->state(App\Models\Manufacturer::class, 'lg', function ($faker) {
     return [
         'name' => 'LG',
         'url' => 'https://lg.com',
-        'support_url' => 'https://support.lg.com'
+        'support_url' => 'https://support.lg.com',
+        'image' => 'lg.jpg',
     ];
 });
 
@@ -87,7 +94,8 @@ $factory->state(App\Models\Manufacturer::class, 'polycom', function ($faker) {
     return [
         'name' => 'Polycom',
         'url' => 'https://polycom.com',
-        'support_url' => 'https://support.polycom.com'
+        'support_url' => 'https://support.polycom.com',
+        'image' => 'polycom.png',
     ];
 });
 
@@ -96,7 +104,8 @@ $factory->state(App\Models\Manufacturer::class, 'adobe', function ($faker) {
     return [
         'name' => 'Adobe',
         'url' => 'https://adobe.com',
-        'support_url' => 'https://support.adobe.com'
+        'support_url' => 'https://support.adobe.com',
+        'image' => 'adobe.jpg',
     ];
 });
 
@@ -106,7 +115,8 @@ $factory->state(App\Models\Manufacturer::class, 'avery', function ($faker) {
     return [
         'name' => 'Avery',
         'url' => 'https://avery.com',
-        'support_url' => 'https://support.avery.com'
+        'support_url' => 'https://support.avery.com',
+        'image' => 'avery.png',
     ];
 });
 
@@ -115,7 +125,8 @@ $factory->state(App\Models\Manufacturer::class, 'crucial', function ($faker) {
     return [
         'name' => 'Crucial',
         'url' => 'https://crucial.com',
-        'support_url' => 'https://support.crucial.com'
+        'support_url' => 'https://support.crucial.com',
+        'image' => 'crucial.jpg',
     ];
 });
 

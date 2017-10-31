@@ -36,23 +36,17 @@
           @endif
 
           <!-- Asset -->
-          <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
-            <label for="asset_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkout_to') }}
-             <i class='icon-asterisk'></i></label>
-            <div class="col-md-9">
-              {{ Form::select('asset_id', $assets_list , Input::old('asset_id', $component->asset_id), array('class'=>'select2', 'style'=>'width:100%')) }}
-              {!! $errors->first('asset_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
+            @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.select_asset'), 'fieldname' => 'asset_id'])
 
-          <div class="form-group {{ $errors->has('assigned_qty') ? ' has-error' : '' }}">
-            <label for="assigned_qty" class="col-md-3 control-label">{{ trans('general.qty') }}
-             <i class='icon-asterisk'></i></label>
-            <div class="col-md-9">
-              <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ Input::old('assigned_qty') }}" />
-              {!! $errors->first('assigned_qty', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            <div class="form-group {{ $errors->has('assigned_qty') ? ' has-error' : '' }}">
+              <label for="assigned_qty" class="col-md-3 control-label">{{ trans('general.qty') }}
+                <i class='icon-asterisk'></i></label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ Input::old('assigned_qty') }}" />
+                {!! $errors->first('assigned_qty', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
             </div>
-          </div>
+
 
         </div> <!-- .BOX-BODY-->
         <div class="box-footer">

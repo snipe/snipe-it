@@ -464,7 +464,7 @@
                 </li>
             @endcan
 
-            @can('manage', \App\Models\Setting::class)
+            @can('backend.interact')
                 <li>
                     <a href="#">
                         <i class="fa fa-gear"></i>
@@ -536,7 +536,7 @@
                 </a>
 
                 <ul class="treeview-menu">
-	                 <li><a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
+                    <li><a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
                     <li><a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }} >@lang('general.audit_report')</a></li>
 
@@ -658,73 +658,6 @@
 
 
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-    <script nonce="{{ csrf_token() }}">
-        $(function () {
-            var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
-            $.fn.bootstrapDP = datepicker;
-            $('.datepicker').datepicker();
-        });
-
-        // Crazy select2 rich dropdowns with images!
-        $(".js-data-user-ajax").select2({
-            ajax: {
-                url: '{{ route('api.users.selectlist') }}',
-
-                dataType: 'json',
-                delay: 250,
-                headers: {
-                    "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                },
-                data: function (params) {
-                    var data = {
-                        search: params.term,
-                        page: params.page || 1
-                    };
-                    return data;
-                },
-                processResults: function (data, params) {
-
-                    params.page = params.page || 1;
-
-                    var answer =  {
-                        results: data.items,
-                        pagination: {
-                            more: "true" //(params.page  < data.page_count)
-                        }
-                    };
-
-                    return answer;
-                },
-                cache: true
-            },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            templateResult: formatUserlist,
-            templateSelection: formatUserSelection
-        });
-
-        function formatUserlist (userlist) {
-            var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
-            if (userlist.loading) {
-                return loading_markup;
-            }
-
-            var markup = "<div class='clearfix'>" ;
-                markup +="<div class='pull-left' style='padding-right: 10px;'>";
-                markup += "<img src='" + userlist.image + "' style='max-height: 20px'></div>";
-                markup += "<div>" + userlist.text + "</div>";
-                markup += "</div>";
-                return markup;
-        }
-
-        function formatUserSelection (userlist) {
-            return userlist.text;
-        }
-
-    </script>
-
-
-
 
     @section('moar_scripts')
     @show

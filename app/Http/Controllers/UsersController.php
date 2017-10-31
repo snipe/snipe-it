@@ -85,10 +85,6 @@ class UsersController extends Controller
         $permissions = $this->filterDisplayable($permissions);
 
         return view('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
-        ->with('location_list', Helper::locationsList())
-        ->with('manager_list', Helper::managerList())
-        ->with('company_list', Helper::companyList())
-        ->with('department_list', Helper::departmentList())
         ->with('user', new User);
     }
 
@@ -123,6 +119,11 @@ class UsersController extends Controller
         $user->company_id = Company::getIdForUser($request->input('company_id', null));
         $user->manager_id = $request->input('manager_id', null);
         $user->notes = $request->input('notes');
+        $user->address = $request->input('address', null);
+        $user->city = $request->input('city', null);
+        $user->state = $request->input('state', null);
+        $user->country = $request->input('country', null);
+        $user->zip = $request->input('zip', null);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -232,9 +233,9 @@ class UsersController extends Controller
 
     public function edit($id)
     {
-        try {
 
-            $user = User::find($id);
+        if ($user =  User::find($id)) {
+
             $this->authorize('update', $user);
             $permissions = config('permissions');
 
@@ -244,19 +245,14 @@ class UsersController extends Controller
             $user->permissions = $user->decodePermissions();
             $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
             $permissions = $this->filterDisplayable($permissions);
-            
-        } catch (UserNotFoundException $e) {
 
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-            return redirect()->route('users.index')->with('error', $error);
+            return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('item', $user);
         }
 
-        // Show the page
-        return view('users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
-            ->with('location_list', Helper::locationsList())
-            ->with('department_list', Helper::departmentList())
-            ->with('company_list', Helper::companyList())
-            ->with('manager_list', Helper::managerList());
+        $error = trans('admin/users/message.user_not_found', compact('id'));
+        return redirect()->route('users.index')->with('error', $error);
+
+
     }
 
     /**
@@ -321,14 +317,23 @@ class UsersController extends Controller
         $user->locale = $request->input('locale');
         $user->employee_num = $request->input('employee_num');
         $user->activated = $request->input('activated', $user->activated);
-        $user->jobtitle = $request->input('jobtitle');
+        $user->jobtitle = $request->input('jobtitle', null);
         $user->phone = $request->input('phone');
         $user->location_id = $request->input('location_id', null);
         $user->company_id = Company::getIdForUser($request->input('company_id', null));
         $user->manager_id = $request->input('manager_id', null);
         $user->notes = $request->input('notes');
         $user->department_id = $request->input('department_id', null);
+        $user->address = $request->input('address', null);
+        $user->city = $request->input('city', null);
+        $user->state = $request->input('state', null);
+        $user->country = $request->input('country', null);
+        $user->zip = $request->input('zip', null);
 
+
+        // Update the location of any assets checked out to this user
+        Asset::where('assigned_type', User::class)
+            ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         // Do we want to update the user password?
         if ($request->has('password')) {
@@ -435,11 +440,6 @@ class UsersController extends Controller
             if ($request->input('bulk_actions')=='edit') {
 
                 return view('users/bulk-edit', compact('users'))
-                    ->with('location_list', Helper::locationsList())
-                    ->with('company_list', Helper::companyList())
-                    ->with('manager_list', Helper::managerList())
-                    ->with('manager_list', Helper::managerList())
-                    ->with('department_list', Helper::departmentList())
                     ->with('groups', Group::pluck('name', 'id'));
             }
 
@@ -725,7 +725,7 @@ class UsersController extends Controller
             $user->first_name = '';
             $user->last_name = '';
             $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos : 0);
-            ;
+
             $user->id = null;
 
             // Get this user groups
@@ -738,10 +738,6 @@ class UsersController extends Controller
 
             // Show the page
             return view('users/edit', compact('permissions', 'userPermissions'))
-                            ->with('location_list', Helper::locationsList())
-                            ->with('company_list', Helper::companyList())
-                            ->with('manager_list', Helper::managerList())
-                            ->with('department_list', Helper::departmentList())
                             ->with('user', $user)
                             ->with('groups', Group::pluck('name', 'id'))
                             ->with('userGroups', $userGroups)

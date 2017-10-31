@@ -57,15 +57,15 @@ class CustomFieldsController extends Controller
      */
     public function destroy($field_id)
     {
-        $field = CustomField::find($field_id);
+        $field = CustomField::findOrFail($field_id);
 
         if ($field->fieldset->count() >0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Field is in use.'));
-        } else {
-            $field->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.field.delete.success')));
-
         }
+        
+        $field->delete();
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.field.delete.success')));
+
     }
 
 }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Helpers\Helper;
 use Auth;
+use Image;
+use App\Http\Requests\ImageUploadRequest;
 
 class DepartmentsController extends Controller
 {
@@ -43,13 +45,24 @@ class DepartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Department::class);
         $department = new Department;
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
         $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/departments/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $department->image = $file_name;
+        }
 
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.create.success'));
@@ -87,10 +100,7 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
-        return view('departments/edit')->with('item', new Department)
-            ->with('manager_list', Helper::managerList())
-            ->with('location_list', Helper::locationsList())
-            ->with('company_list', Helper::companyList());
+        return view('departments/edit')->with('item', new Department);
     }
 
 
@@ -131,10 +141,7 @@ class DepartmentsController extends Controller
         if (is_null($item = Department::find($id))) {
             return redirect()->back()->with('error', trans('admin/locations/message.does_not_exist'));
         }
-        return view('departments/edit', compact('item'))
-            ->with('manager_list', Helper::managerList())
-            ->with('location_list', Helper::locationsList())
-            ->with('company_list', Helper::companyList());
+        return view('departments/edit', compact('item'));
     }
 
     public function update(Request $request, $id) {
@@ -145,6 +152,20 @@ class DepartmentsController extends Controller
         }
 
         $department->fill($request->all());
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/departments/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $department->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $department->image = null;
+        }
+
         $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
 
         if ($department->save()) {

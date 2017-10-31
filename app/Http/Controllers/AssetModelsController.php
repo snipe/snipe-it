@@ -35,7 +35,6 @@ class AssetModelsController extends Controller
     * the content for the accessories listing, which is generated in getDatatable.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see AssetModelsController::getDatatable() method that generates the JSON response
     * @since [v1.0]
     * @return View
     */
@@ -53,11 +52,9 @@ class AssetModelsController extends Controller
     */
     public function create()
     {
-        // Show the page
-        return view('models/edit')
-        ->with('category_list', Helper::categoryList('asset'))
+        $category_type = 'asset';
+        return view('models/edit')->with('category_type',$category_type)
         ->with('depreciation_list', Helper::depreciationList())
-        ->with('manufacturer_list', Helper::manufacturerList())
         ->with('item', new AssetModel);
     }
 
@@ -93,7 +90,7 @@ class AssetModelsController extends Controller
         if (Input::file('image')) {
 
             $image = Input::file('image');
-            $file_name = str_random(25) . "." . $image->getClientOriginalExtension();
+            $file_name = slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
             $path = public_path('uploads/models/');
 
             if ($image->getClientOriginalExtension()!='svg') {
@@ -165,17 +162,15 @@ class AssetModelsController extends Controller
     */
     public function edit($modelId = null)
     {
-        // Check if the model exists
-        if (is_null($item = AssetModel::find($modelId))) {
-            // Redirect to the model management page
-            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
+        if ($item = AssetModel::find($modelId)) {
+            $category_type = 'asset';
+            $view = View::make('models/edit', compact('item','category_type'));
+            $view->with('depreciation_list', Helper::depreciationList());
+            return $view;
         }
 
-        $view = View::make('models/edit', compact('item'));
-        $view->with('category_list', Helper::categoryList('asset'));
-        $view->with('depreciation_list', Helper::depreciationList());
-        $view->with('manufacturer_list', Helper::manufacturerList());
-        return $view;
+        return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
+
     }
 
 
@@ -213,9 +208,17 @@ class AssetModelsController extends Controller
         }
 
         if (Input::file('image')) {
+
             $image = Input::file('image');
-            $file_name = str_random(25) . "." . $image->getClientOriginalExtension();
+            $file_name = str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
             $path = public_path('uploads/models/');
+            $old_image = $path.$model->image;
+
+            try  {
+                unlink($old_image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
 
             if ($image->getClientOriginalExtension()!='svg') {
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
@@ -259,6 +262,15 @@ class AssetModelsController extends Controller
             // Throw an error that this model is associated with assets
             return redirect()->route('models.index')->with('error', trans('admin/models/message.assoc_users'));
         }
+
+        if ($model->image) {
+            try  {
+                unlink(public_path().'/uploads/models/'.$model->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
+
         // Delete the model
         $model->delete();
 

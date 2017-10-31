@@ -62,8 +62,8 @@
                                                     <td><a href="{{ $asset->present()->viewUrl() }}">{{ $asset->serial }}</a></td>
 
                                                     <td>
-                                                        @if ($asset->assetloc)
-                                                        {!! $asset->assetloc->present()->nameUrl() !!}
+                                                        @if ($asset->location)
+                                                        {!! $asset->location->present()->nameUrl() !!}
                                                         @endif
                                                     </td>
                                                     @if ($asset->assigned_to != '' && $asset->assigned_to > 0)

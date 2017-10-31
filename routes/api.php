@@ -45,6 +45,18 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Categories API ---*/
 
+    Route::group(['prefix' => 'categories'], function () {
+
+        Route::get('{item_type}/selectlist',
+            [
+                'as' => 'api.categories.selectlist',
+                'uses' => 'CategoriesController@selectlist'
+            ]
+        );
+
+    }); // Categories group
+
+
     Route::resource('categories', 'CategoriesController',
         [
             'names' =>
@@ -63,6 +75,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Companies API ---*/
 
+    Route::get( 'companies/selectlist',  [
+        'as' => 'companies.selectlist',
+        'uses' => 'CompaniesController@selectlist'
+    ]);
+
+
     Route::resource('companies', 'CompaniesController',
         [
             'names' =>
@@ -80,6 +98,20 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
     /*--- Departments API ---*/
+
+    /*--- Suppliers API ---*/
+    Route::group(['prefix' => 'departments'], function () {
+
+
+        Route::get('selectlist',
+            [
+                'as' => 'api.departments.selectlist',
+                'uses' => 'DepartmentsController@selectlist'
+            ]
+        );
+    }); // Departments group
+
+
 
     Route::resource('departments', 'DepartmentsController',
         [
@@ -226,6 +258,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'hardware'], function () {
 
+        Route::get( 'selectlist',  [
+            'as' => 'assets.selectlist',
+            'uses' => 'AssetsController@selectlist'
+        ]);
+
+
         Route::post('audit', [
             'as' => 'api.asset.audit',
             'uses' => 'AssetsController@audit'
@@ -331,21 +369,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Locations API ---*/
 
-    Route::resource('locations', 'LocationsController',
-        [
-            'names' =>
-                [
-                    'index' => 'api.locations.index',
-                    'show' => 'api.locations.show',
-                    'store' => 'api.locations.store',
-                    'update' => 'api.locations.update',
-                    'destroy' => 'api.locations.destroy'
-                ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['location' => 'location_id']
-        ]
-    ); // Locations resource
-
     Route::group(['prefix' => 'locations'], function () {
 
         Route::get('{location}/users',
@@ -369,10 +392,43 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'LocationsController@show'
             ]
         );
+
+        Route::get( 'selectlist',  [
+            'as' => 'locations.selectlist',
+            'uses' => 'LocationsController@selectlist'
+        ]);
     }); // Locations group
 
 
+
+    Route::resource('locations', 'LocationsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.locations.index',
+                    'show' => 'api.locations.show',
+                    'store' => 'api.locations.store',
+                    'update' => 'api.locations.update',
+                    'destroy' => 'api.locations.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['location' => 'location_id']
+        ]
+    ); // Locations resource
+
+
+
+
     /*--- Manufacturers API ---*/
+
+    Route::group(['prefix' => 'manufacturers'], function () {
+
+        Route::get( 'selectlist',  [
+            'as' => 'manufacturers.selectlist',
+            'uses' => 'ManufacturersController@selectlist'
+        ]);
+    }); // Locations group
+
 
     Route::resource('manufacturers', 'ManufacturersController',
         [
@@ -392,6 +448,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Models API ---*/
 
+    Route::group(['prefix' => 'models'], function () {
+
+        Route::get('assets',
+            [
+                'as' => 'api.models.assets',
+                'uses'=> 'AssetModelsController@assets'
+            ]
+        );
+        Route::get('selectlist',
+            [
+                'as' => 'api.models.selectlist',
+                'uses'=> 'AssetModelsController@selectlist'
+            ]
+        );
+    }); // Models group
+
+
     Route::resource('models', 'AssetModelsController',
         [
             'names' =>
@@ -407,15 +480,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     ); // Models resource
 
-    Route::group(['prefix' => 'models'], function () {
 
-        Route::get('assets',
-            [
-                'as' => 'api.models.assets',
-                'uses'=> 'AssetModelsController@assets'
-            ]
-        );
-    }); // Models group
 
 
     /*--- Settings API ---*/
@@ -503,6 +568,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
     /*--- Suppliers API ---*/
+    Route::group(['prefix' => 'suppliers'], function () {
+
+        Route::get('list',
+            [
+                'as'=>'api.suppliers.list',
+                'uses'=>'SuppliersController@getDatatable'
+            ]
+        );
+
+        Route::get('selectlist',
+            [
+                'as' => 'api.suppliers.selectlist',
+                'uses' => 'SuppliersController@selectlist'
+            ]
+        );
+    }); // Suppliers group
+
 
     Route::resource('suppliers', 'SuppliersController',
         [
@@ -519,15 +601,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     ); // Suppliers resource
 
-    Route::group(['prefix' => 'suppliers'], function () {
-
-        Route::get('list',
-            [
-                'as'=>'api.suppliers.list',
-                'uses'=>'SuppliersController@getDatatable'
-            ]
-        );
-    }); // Suppliers group
 
 
     /*--- Users API ---*/

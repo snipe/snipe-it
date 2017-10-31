@@ -54,10 +54,10 @@ class Location extends SnipeModel
 
     public function assets()
     {
-        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\User', 'location_id', 'assigned_to', 'id')->where("assets.assigned_type",User::class);
+        return $this->hasMany('\App\Models\Asset', 'location_id');
     }
 
-    public function locationAssets()
+    public function rtd_assets()
     {
         /* This used to have an ...->orHas() clause that referred to
            assignedAssets, and that was probably incorrect, as well as
@@ -88,6 +88,7 @@ class Location extends SnipeModel
         return $this->hasMany('\App\Models\Location', 'parent_id');
     }
 
+    // I don't think we need this anymore since we de-normed location_id in assets?
     public function assignedAssets()
     {
         return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();

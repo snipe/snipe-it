@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 
 class LocationsController extends Controller
 {
@@ -20,8 +21,10 @@ class LocationsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Location::class);
-        $allowed_columns = ['id','name','address','address2','city','state','country','zip','created_at',
-        'updated_at','parent_id', 'manager_id'];
+        $allowed_columns = [
+                'id','name','address','address2','city','state','country','zip','created_at',
+                'updated_at','parent_id', 'manager_id','image',
+                'rtd_assets_count','users_count','assets_count'];
 
         $locations = Location::with('parent', 'manager', 'childLocations')->select([
             'locations.id',
@@ -36,9 +39,9 @@ class LocationsController extends Controller
             'locations.manager_id',
             'locations.created_at',
             'locations.updated_at',
+            'locations.image',
             'locations.currency'
-        ])->withCount('locationAssets')
-        ->withCount('assignedAssets')
+        ])->withCount('rtd_assets')
         ->withCount('assets')
         ->withCount('users');
 
@@ -138,4 +141,41 @@ class LocationsController extends Controller
         $location->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/locations/message.delete.success')));
     }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     *
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', Location::class);
+
+        $locations = Location::select([
+            'locations.id',
+            'locations.name',
+            'locations.image',
+        ]);
+
+        if ($request->has('search')) {
+            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $locations = $locations->orderBy('name', 'ASC')->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($locations as $location) {
+            $location->use_text = $location->name;
+            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($locations);
+
+    }
+
 }

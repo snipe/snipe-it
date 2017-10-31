@@ -4,8 +4,10 @@ namespace App\Models;
 use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -16,7 +18,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 {
     protected $presenter = 'App\Presenters\UserPresenter';
     use SoftDeletes, ValidatingTrait;
-    use Authenticatable, CanResetPassword, HasApiTokens;
+    use Authenticatable, Authorizable, CanResetPassword, HasApiTokens;
     use UniqueUndeletedTrait;
     use Notifiable;
     use Presentable;
@@ -36,6 +38,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'phone_number',
         'username',
         'first_name',
+        'address',
+        'city',
+        'state',
+        'country',
+        'zip',
     ];
 
     protected $casts = [
@@ -53,7 +60,8 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'username'                => 'required|string|min:1|unique_undeleted',
         'email'                   => 'email|nullable',
         'password'                => 'required|min:6',
-        'locale'                  => 'max:10|nullable'
+        'locale'                  => 'max:10|nullable',
+        'manager_id'              => 'nullable|different:id',
     ];
 
 
@@ -191,8 +199,18 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     /**
      * Get the asset's location based on the assigned user
+     * @todo - this should be removed once we're sure we've switched it
+     * to location()
      **/
     public function userloc()
+    {
+        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
+    }
+
+    /**
+     * Get the asset's location based on the assigned user
+     **/
+    public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }

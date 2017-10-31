@@ -224,10 +224,10 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.cost') }}</td>
                         <td>
-                          @if (($asset->id) && ($asset->userloc))
-                            {{ $asset->userloc->currency }}
-                          @elseif (($asset->id) && ($asset->assetloc))
-                            {{ $asset->assetloc->currency }}
+                          @if (($asset->id) && ($asset->location))
+                            {{ $asset->location->currency }}
+                          @elseif (($asset->id) && ($asset->location))
+                            {{ $asset->location->currency }}
                           @else
                             {{ $snipeSettings->default_currency }}
                           @endif
@@ -335,16 +335,16 @@
                       <td> {!! nl2br(e($asset->notes)) !!}</td>
                     </tr>
 
-                    @if ($asset->assetloc)
+                    @if ($asset->location)
                       <tr>
                         <td>{{ trans('general.location') }}</td>
                         <td>
                           @can('superuser')
-                            <a href="{{ route('locations.show', ['location' => $asset->assetloc->id]) }}">
-                              {{ $asset->assetloc->name }}
+                            <a href="{{ route('locations.show', ['location' => $asset->location->id]) }}">
+                              {{ $asset->location->name }}
                             </a>
                           @else
-                            {{ $asset->assetloc->name }}
+                            {{ $asset->location->name }}
                           @endcan
                         </td>
                       </tr>
@@ -416,19 +416,19 @@
                     <li><i class="fa fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
                   @endif
 
-                  @if (isset($asset->assetLoc))
-                    <li>{{ $asset->assetLoc->name }}</li>
-                    <li>{{ $asset->assetLoc->address }}
-                      @if ($asset->assetLoc->address2!='')
-                      {{ $asset->assetLoc->address2 }}
+                  @if (isset($asset->location))
+                    <li>{{ $asset->location->name }}</li>
+                    <li>{{ $asset->location->address }}
+                      @if ($asset->location->address2!='')
+                      {{ $asset->location->address2 }}
                       @endif
                     </li>
 
-                    <li>{{ $asset->assetLoc->city }}
-                      @if (($asset->assetLoc->city!='') && ($asset->assetLoc->state!=''))
+                    <li>{{ $asset->location->city }}
+                      @if (($asset->location->city!='') && ($asset->location->state!=''))
                           ,
                       @endif
-                      {{ $asset->assetLoc->state }} {{ $asset->assetLoc->zip }}
+                      {{ $asset->location->state }} {{ $asset->location->zip }}
                     </li>
                     @endif
                 </ul>

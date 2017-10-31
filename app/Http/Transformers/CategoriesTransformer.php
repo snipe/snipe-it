@@ -25,6 +25,7 @@ class CategoriesTransformer
             $array = [
                 'id' => (int) $category->id,
                 'name' => e($category->name),
+                'image' =>   ($category->image) ? e(url('/').'/uploads/categories/'.e($category->image)) : null,
                 'type' => e($category->category_type),
                 'eula' => ($category->getEula()) ? true : false,
                 'checkin_email' => ($category->checkin_email =='1') ? true : false,

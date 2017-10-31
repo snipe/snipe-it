@@ -32,6 +32,7 @@ $factory->state(App\Models\AssetModel::class, 'mbp-13-model', function ($faker) 
         'manufacturer_id' => 1,
         'eol' => '36',
         'depreciation_id' => 1,
+        'image' => 'mbp.jpg',
     ];
 });
 
@@ -43,6 +44,7 @@ $factory->state(App\Models\AssetModel::class, 'mbp-air-model', function ($faker)
         'manufacturer_id' => 1,
         'eol' => '36',
         'depreciation_id' => 1,
+        'image' => 'macbookair.jpg',
     ];
 });
 
@@ -54,6 +56,7 @@ $factory->state(App\Models\AssetModel::class, 'surface-model', function ($faker)
         'manufacturer_id' => 2,
         'eol' => '36',
         'depreciation_id' => 1,
+        'image' => 'surface.jpg',
     ];
 });
 
@@ -65,6 +68,7 @@ $factory->state(App\Models\AssetModel::class, 'xps13-model', function ($faker) {
         'manufacturer_id' => 3,
         'eol' => '36',
         'depreciation_id' => 1,
+        'image' => 'xps.jpg',
     ];
 });
 
@@ -76,6 +80,7 @@ $factory->state(App\Models\AssetModel::class, 'zenbook-model', function ($faker)
         'manufacturer_id' => 4,
         'eol' => '36',
         'depreciation_id' => 1,
+        'image' => 'zenbook.jpg',
     ];
 });
 
@@ -87,6 +92,7 @@ $factory->state(App\Models\AssetModel::class, 'spectre-model', function ($faker)
         'manufacturer_id' => 5,
         'eol' => '36',
         'depreciation_id' => 1,
+        'image' => 'spectre.jpg',
     ];
 });
 
@@ -98,6 +104,7 @@ $factory->state(App\Models\AssetModel::class, 'yoga-model', function ($faker) {
         'manufacturer_id' => 6,
         'eol' => '36',
         'depreciation_id' => 1,
+        'image' => 'yoga.png',
     ];
 });
 
@@ -115,6 +122,7 @@ $factory->state(App\Models\AssetModel::class, 'macpro-model', function ($faker) 
         'manufacturer_id' => 1,
         'eol' => '24',
         'depreciation_id' => 1,
+        'image' => 'imacpro.jpg',
     ];
 });
 
@@ -125,6 +133,7 @@ $factory->state(App\Models\AssetModel::class, 'lenovo-i5-model', function ($fake
         'manufacturer_id' => 6,
         'eol' => '24',
         'depreciation_id' => 1,
+        'image' => 'lenovoi5.png',
     ];
 });
 
@@ -136,6 +145,7 @@ $factory->state(App\Models\AssetModel::class, 'optiplex-model', function ($faker
         'model_number' => '5040 (MRR81)',
         'eol' => '24',
         'depreciation_id' => 1,
+        'image' => 'optiplex.jpg',
     ];
 });
 
@@ -154,6 +164,7 @@ $factory->state(App\Models\AssetModel::class, 'polycom-model', function ($faker)
         'manufacturer_id' => 8,
         'eol' => '12',
         'depreciation_id' => 1,
+        'image' => 'soundstation.jpg',
     ];
 });
 
@@ -164,6 +175,7 @@ $factory->state(App\Models\AssetModel::class, 'polycomcx-model', function ($fake
         'manufacturer_id' => 8,
         'eol' => '12',
         'depreciation_id' => 1,
+        'image' => 'cx3000.png',
     ];
 });
 
@@ -181,6 +193,7 @@ $factory->state(App\Models\AssetModel::class, 'ipad-model', function ($faker) {
         'manufacturer_id' => 1,
         'eol' => '12',
         'depreciation_id' => 1,
+        'image' => 'ipad.jpg',
     ];
 });
 
@@ -192,6 +205,7 @@ $factory->state(App\Models\AssetModel::class, 'tab3-model', function ($faker) {
         'manufacturer_id' => 6,
         'eol' => '12',
         'depreciation_id' => 1,
+        'image' => 'tab3.png',
     ];
 });
 
@@ -209,6 +223,7 @@ $factory->state(App\Models\AssetModel::class, 'iphone6s-model', function ($faker
         'manufacturer_id' => 1,
         'eol' => '12',
         'depreciation_id' => 3,
+        'image' => 'iphone6.jpg',
     ];
 });
 
@@ -219,6 +234,7 @@ $factory->state(App\Models\AssetModel::class, 'iphone7-model', function ($faker)
         'manufacturer_id' => 1,
         'eol' => '12',
         'depreciation_id' => 1,
+        'image' => 'iphone7.jpg',
     ];
 });
 
@@ -235,6 +251,7 @@ $factory->state(App\Models\AssetModel::class, 'ultrafine', function ($faker) {
         'manufacturer_id' => 7,
         'eol' => '12',
         'depreciation_id' => 2,
+        'image' => 'ultrafine.jpg',
     ];
 });
 
@@ -245,6 +262,7 @@ $factory->state(App\Models\AssetModel::class, 'ultrasharp', function ($faker) {
         'manufacturer_id' => 3,
         'eol' => '12',
         'depreciation_id' => 2,
+        'image' => 'ultrasharp.jpg',
     ];
 });
 

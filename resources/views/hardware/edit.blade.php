@@ -12,7 +12,7 @@
 
 @section('inputFields')
 
-  @include ('partials.forms.edit.company')
+    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
     <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
@@ -26,23 +26,7 @@
     </div>
   </div>
 
-  <!-- Model -->
-  <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
-    <label for="parent" class="col-md-3 control-label">{{ trans('admin/hardware/form.model') }}</label>
-    <div class="col-md-7 col-sm-10{{  (\App\Helpers\Helper::checkIfRequired($item, 'model_id')) ? ' required' : '' }}">
-      @if (isset($selected_model))
-      {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'width:100%','id' => 'model_select_id', 'id' =>'model_select_id')) }}
-      @else
-      {{ Form::select('model_id', $model_list , Input::old('model_id', $item->model_id), array('class'=>'select2 model', 'id' => 'model_select_id', 'style'=>'width:100%','id' =>'model_select_id')) }}
-      @endif
-      <!-- onclick="return dependency('model')" -->
-      {!! $errors->first('model_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-    </div>
-    <div class="col-md-1 col-sm-1 text-left">
-        <a href='{{ route('modal.model') }}' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id" class="btn btn-sm btn-default">New</a>
-        <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
-    </div>
-  </div>
+    @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id'])
 
 
   <div id='custom_fields_content'>
@@ -63,73 +47,30 @@
   @include ('partials.forms.edit.status')
 
   @if (!$item->id)
-  <!-- Assigned To -->
-  <div id="assigned_user" style="display: none;" class="form-group {{ $errors->has('assigned_user') ? ' has-error' : '' }}">
-    <label for="parent" class="col-md-3 control-label">
-      {{ trans('admin/hardware/form.checkout_to') }}
-    </label>
-    <div class="col-md-7 col-sm-12">
-      {{ Form::select('assigned_user', $users_list , Input::old('assigned_user', $item->assigned_type == 'App\Models\User' ? $item->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_user', 'style'=>'width:100%')) }}
-      {!! $errors->first('assigned_user', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-    </div>
-    <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-        @can('users.create')
-      <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user' class="btn btn-sm btn-default">New</a>
-        @endcan
-    </div>
-  </div>
+      @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user'])
 
-  <!-- Assets -->
-  <div id="assigned_asset" style="display: none;" class="form-group{{ $errors->has('assigned_asset') ? ' has-error' : '' }}">
-    {{ Form::label('assigned_asset', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-    <div class="col-md-7">
-      {{ Form::select('assigned_asset', $assets_list , Input::old('assigned_asset', $item->assigned_type == 'App\Models\Asset' ? $item->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_asset', 'style'=>'width:100%')) }}
-      {!! $errors->first('assigned_asset', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-    </div>
+  @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset'])
 
-  </div>
-
-  <!-- Locations -->
-  <div id="assigned_location" style="display: none;" class="form-group{{ $errors->has('assigned_location') ? ' has-error' : '' }}">
-    {{ Form::label('assigned_location', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
-    <div class="col-md-7">
-      {{ Form::select('assigned_location', $locations_list , Input::old('assigned_location', $item->assigned_type == 'App\Models\Asset' ? $item->assigned_to : 0), array('class'=>'select2', 'id'=>'assigned_location', 'style'=>'width:100%')) }}
-
-      {!! $errors->first('assigned_location', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-    </div>
-    <div class="col-md-1 col-sm-1 text-left">
-      <a href='{{ route('modal.location') }}' data-toggle="modal"  data-target="#createModal" data-dependency="location" data-select='assigned_location' class="btn btn-sm btn-default">New</a>
-    </div>
-  </div>
+  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location'])
   @endif
 
   @include ('partials.forms.edit.serial', ['translated_serial' => trans('admin/hardware/form.serial')])
   @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
   @include ('partials.forms.edit.purchase_date')
-  @include ('partials.forms.edit.supplier')
+  @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
   @include ('partials.forms.edit.order_number')
     <?php
     $currency_type=null;
-    if ($item->id && $item->assetloc) {
-        $currency_type = $item->assetloc->currency;
+    if ($item->id && $item->location) {
+        $currency_type = $item->location->currency;
     }
     ?>
   @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
   @include ('partials.forms.edit.warranty')
   @include ('partials.forms.edit.notes')
 
-  <!-- Default Location -->
-  <div class="form-group {{ $errors->has('rtd_location_id') ? ' has-error' : '' }}">
-    <label for="rtd_location_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.default_location') }}</label>
-    <div class="col-md-7 col-sm-11">
-      {{ Form::select('rtd_location_id', $locations_list , Input::old('rtd_location_id', $item->rtd_location_id), array('class'=>'select2', 'style'=>'width:100%','id'=>'rtd_location_select')) }}
+  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
 
-      {!! $errors->first('rtd_location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-      </div>
-      <div class="col-md-1 col-sm-1 text-left">
-        <a href='{{ route('modal.location') }}' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select' class="btn btn-sm btn-default">New</a>
-      </div>
-  </div>
 
   @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
 
@@ -353,5 +294,9 @@
         }
 
     });
+
+
+
+
 </script>
 @stop

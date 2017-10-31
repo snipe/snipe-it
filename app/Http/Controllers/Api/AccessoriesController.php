@@ -100,8 +100,6 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
-        $accessory_users = $accessory->users;
-
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
 

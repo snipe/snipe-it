@@ -27,7 +27,7 @@
 
                     <!-- Asset name -->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
+                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
                         <div class="col-md-6">
                             <p class="form-control-static">{{ $licenseSeat->license->name }}</p>
                         </div>
@@ -35,41 +35,24 @@
 
                     <!-- Serial -->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.serial') }}</label>
-                        <div class="col-md-10">
+                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.serial') }}</label>
+                        <div class="col-md-9">
                             <p class="form-control-static" style="word-wrap: break-word;">{{ $licenseSeat->license->serial }}</p>
                         </div>
                     </div>
 
-                    <!-- Asset -->
-                    <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
-                        <label for="asset_id" class="col-md-2 control-label">{{ trans('admin/licenses/form.asset') }}
-                         </label>
+                @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/licenses/form.asset'), 'fieldname' => 'asset_id'])
 
-                        <div class="col-md-10">
-                            {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $licenseSeat->asset_id), array('class'=>'select2', 'style'=>'min-width:600px')) }}
-                            {!! $errors->first('asset_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                        </div>
-                    </div>
+                @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_to'])
 
-                    <!-- User -->
-                    <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                        <label for="assigned_to" class="col-md-2 control-label">{{ trans('admin/hardware/form.checkout_to') }}
-                        </label>
+                    <p class="col-md-offset-3 help-block">
+                    {{ trans('admin/licenses/form.checkout_help') }}
+                    </p>
 
-                        <div class="col-md-9">
-                            {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $licenseSeat->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                            {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-
-                            <p class="help-block">
-                            {{ trans('admin/licenses/form.checkout_help') }}
-                            </p>
-                        </div>
-                    </div>
 
                     <!-- Note -->
                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                        <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+                        <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                         <div class="col-md-7">
                             <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $licenseSeat->note) }}</textarea>
                             {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}

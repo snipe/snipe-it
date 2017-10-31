@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Supplier;
 use App\Http\Transformers\SuppliersTransformer;
+use App\Http\Transformers\SelectlistTransformer;
+
 
 class SuppliersController extends Controller
 {
@@ -23,7 +25,7 @@ class SuppliersController extends Controller
         $allowed_columns = ['id','name','address','phone','contact','fax','email','image','assets_count','licenses_count', 'accessories_count'];
         
         $suppliers = Supplier::select(
-                array('id','name','address','address2','city','state','country','fax', 'phone','email','contact','created_at','updated_at','deleted_at')
+                array('id','name','address','address2','city','state','country','fax', 'phone','email','contact','created_at','updated_at','deleted_at','image')
             )->withCount('assets')->withCount('licenses')->withCount('accessories')->whereNull('deleted_at');
 
 
@@ -133,4 +135,41 @@ class SuppliersController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/suppliers/message.delete.success')));
 
     }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     *
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', Supplier::class);
+
+        $suppliers = Supplier::select([
+            'id',
+            'name',
+            'image',
+        ]);
+
+        if ($request->has('search')) {
+            $suppliers = $suppliers->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $suppliers = $suppliers->orderBy('name', 'ASC')->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($suppliers as $supplier) {
+            $supplier->use_text = $supplier->name;
+            $supplier->use_image = ($supplier->image) ? url('/').'/uploads/suppliers/'.$supplier->image : null;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($suppliers);
+
+    }
+
 }

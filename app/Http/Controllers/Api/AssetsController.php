@@ -30,6 +30,7 @@ use Str;
 use TCPDF;
 use Validator;
 use View;
+use App\Http\Transformers\SelectlistTransformer;
 
 
 /**
@@ -69,7 +70,8 @@ class AssetsController extends Controller
             'created_at',
             'updated_at',
             'purchase_date',
-            'purchase_cost'
+            'purchase_cost',
+            'warranty_months',
         ];
 
         $filter = array();
@@ -84,7 +86,7 @@ class AssetsController extends Controller
         }
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
-            'assetloc', 'assetstatus', 'defaultLoc', 'assetlog', 'company',
+            'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
             'model.category', 'model.manufacturer', 'model.fieldset','supplier');
 
 
@@ -255,12 +257,54 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-        if ($asset = Asset::withTrashed()->find($id)) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->findOrFail($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+    }
+
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     *
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', Asset::class);
+
+        $assets = Company::scopeCompanyables(Asset::select([
+            'assets.id',
+            'assets.name',
+            'assets.asset_tag',
+            'assets.model_id',
+            ]))->with('model')->RTD();
+
+
+        if ($request->has('search')) {
+            $assets = $assets->where('assets.name', 'LIKE', '%'.$request->get('search').'%')
+                ->orWhere('assets.asset_tag', 'LIKE', '%'.$request->get('search').'%')
+                ->join('models AS assets_models',function ($join) use ($request) {
+                    $join->on('assets_models.id', "=", "assets.model_id");
+            })->orWhere('assets_models.name','LIKE','%'.$request->get('search').'%');
+        }
+
+        $assets = $assets->paginate(50);
+
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+        foreach ($assets as $asset) {
+            $asset->use_text = $asset->present()->fullName;
+            $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($assets);
+
     }
 
 
@@ -305,12 +349,12 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if ($model->fieldset) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
+                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug(), null));
             }
         }
 
         if ($asset->save()) {
-            $asset->logCreate();
+
             if ($request->get('assigned_user')) {
                 $target = User::find(request('assigned_user'));
             } elseif ($request->get('assigned_asset')) {
@@ -481,10 +525,22 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'No valid checkout target specified for asset '.e($asset->asset_tag).'.'));
         }
 
+
+
         $checkout_at = request('checkout_at', date("Y-m-d H:i:s"));
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
         $asset_name = request('name', null);
+        
+        // Set the location ID to the RTD location id if there is one
+        if ($asset->rtd_location_id!='') {
+            $asset->location_id = $target->rtd_location_id;
+        }
+
+        // Overwrite that if the target has a location ID though
+        if ($target->location_id!='') {
+            $asset->location_id = $target->location_id;
+        }
         
 
         if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name)) {

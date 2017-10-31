@@ -150,8 +150,7 @@
                         autocomplete="off"
                         readonly
                         onfocus="this.removeAttribute('readonly');"
-                        {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
-                      >
+                        {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     @else
                       (Managed via LDAP)
                     @endif
@@ -179,6 +178,8 @@
                     class="form-control"
                     value=""
                     autocomplete="off"
+                    readonly
+                    onfocus="this.removeAttribute('readonly');"
                     {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                     >
                     @if (config('app.lock_passwords') && ($user->id))
@@ -202,8 +203,7 @@
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
                       readonly
-                      onfocus="this.removeAttribute('readonly');"
-                    >
+                      onfocus="this.removeAttribute('readonly');">
                     @if (config('app.lock_passwords') && ($user->id))
                     <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
                     @endif
@@ -213,16 +213,7 @@
 
                 <!-- Company -->
                 @if (\App\Models\Company::canManageUsersCompanies())
-                <!-- Company -->
-                <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
-                  <div class="col-md-3 control-label">
-                    {{ Form::label('company_id', trans('general.company')) }}
-                  </div>
-                  <div class="col-md-8">
-                    {{ Form::select('company_id', $company_list , Input::old('company_id', $user->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                    {!! $errors->first('company_id', '<span class="alert-msg">:message</span>') !!}
-                  </div>
-                </div>
+                    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
                 @endif
 
                 <!-- language -->
@@ -267,35 +258,14 @@
 
 
                 <!-- Manager -->
-                <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="manager_id">{{ trans('admin/users/table.manager') }}</label>
-                  <div class="col-md-8">
-                    {{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                    {!! $errors->first('manager_id', '<span class="alert-msg">:message</span>') !!}
-                  </div>
-                </div>
+              @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
 
                   <!--  Department -->
-                  <div class="form-group {{ $errors->has('department_id') ? ' has-error' : '' }}">
-                      <label for="status_id" class="col-md-3 control-label">
-                          {{ trans('general.department') }}
-                      </label>
-                      <div class="col-md-7">
-                          {{ Form::select('department_id', $department_list , Input::old('department_id', $user->department_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                          {!! $errors->first('department_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                      </div>
-                  </div>
+              @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'department_id'])
 
 
                   <!-- Location -->
-                <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="location_id">{{ trans('admin/users/table.location') }}
-                  </label>
-                  <div class="col-md-8">
-                    {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                    {!! $errors->first('location_id', '<span class="alert-msg">:message</span>') !!}
-                  </div>
-                </div>
+              @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
                 <!-- Phone -->
                 <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
@@ -305,6 +275,53 @@
                     {!! $errors->first('phone', '<span class="alert-msg">:message</span>') !!}
                   </div>
                 </div>
+
+                  <!-- Address -->
+                  <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="address">{{ trans('general.address') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="address" id="address" value="{{ Input::old('address', $user->address) }}" />
+                          {!! $errors->first('address', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- City -->
+                  <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="city">{{ trans('general.city') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="city" id="city" value="{{ Input::old('city', $user->city) }}" />
+                          {!! $errors->first('city', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- State -->
+                  <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="state">{{ trans('general.state') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="state" id="state" value="{{ Input::old('state', $user->state) }}" maxlength="3" />
+                          {!! $errors->first('state', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- Country -->
+                  <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="city">{{ trans('general.country') }}</label>
+                      <div class="col-md-4">
+                          {!! Form::countries('country', Input::old('country', $user->country), 'select2') !!}
+                          {!! $errors->first('country', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+                  <!-- Zip -->
+                  <div class="form-group{{ $errors->has('zip') ? ' has-error' : '' }}">
+                      <label class="col-md-3 control-label" for="zip">{{ trans('general.zip') }}</label>
+                      <div class="col-md-4">
+                          <input class="form-control" type="text" name="zip" id="zip" value="{{ Input::old('zip', $user->zip) }}" maxlength="10" />
+                          {!! $errors->first('zip', '<span class="alert-msg">:message</span>') !!}
+                      </div>
+                  </div>
+
+
 
                 <!-- Activation Status -->
                 <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">

@@ -43,14 +43,7 @@
 
 
                         <!-- Locations -->
-                        <div id="location_id" class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}">
-                            {{ Form::label('location_id', trans('general.location'), array('class' => 'col-md-3 control-label')) }}
-                            <div class="col-md-9">
-                                {{ Form::select('location_id', $locations_list , Input::old('location_id'), array('class'=>'select2', 'id'=>'location_id', 'style'=>'width:100%')) }}
-
-                                {!! $errors->first('location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                            </div>
-                        </div>
+                    @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
 
                         <!-- Next Audit -->

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\CustomField;
@@ -21,6 +22,7 @@ use View;
 use Validator;
 use Illuminate\Http\Request;
 use Gate;
+use Image;
 
 /**
  * This class controls all actions related to Components for
@@ -57,12 +59,9 @@ class ComponentsController extends Controller
     public function create()
     {
         $this->authorize('create', Component::class);
-        // Show the page
-        return view('components/edit')
-            ->with('item', new Component)
-            ->with('category_list', Helper::categoryList('component'))
-            ->with('company_list', Helper::companyList())
-            ->with('location_list', Helper::locationsList());
+        $category_type = 'component';
+        return view('components/edit')->with('category_type',$category_type)
+            ->with('item', new Component);
     }
 
 
@@ -74,7 +73,7 @@ class ComponentsController extends Controller
     * @since [v3.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Component::class);
         $component = new Component();
@@ -89,6 +88,18 @@ class ComponentsController extends Controller
         $component->purchase_cost          = $request->input('purchase_cost', null);
         $component->qty                    = $request->input('qty');
         $component->user_id                = Auth::id();
+
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/components/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $component->image = $file_name;
+        }
 
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
@@ -107,16 +118,18 @@ class ComponentsController extends Controller
      */
     public function edit($componentId = null)
     {
-        if (is_null($item = Component::find($componentId))) {
-            return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
+
+
+        if ($item = Component::find($componentId)) {
+            $this->authorize('update', $item);
+            $category_type = 'component';
+            return view('components/edit', compact('item'))->with('category_type', $category_type);
         }
+        return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
 
-        $this->authorize('update', $item);
 
-        return view('components/edit', compact('item'))
-            ->with('category_list', Helper::categoryList('component'))
-            ->with('company_list', Helper::companyList())
-            ->with('location_list', Helper::locationsList());
+
+
     }
 
 
@@ -129,7 +142,7 @@ class ComponentsController extends Controller
     * @since [v3.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($componentId = null)
+    public function update(ImageUploadRequest $request, $componentId = null)
     {
         if (is_null($component = Component::find($componentId))) {
             return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
@@ -149,6 +162,19 @@ class ComponentsController extends Controller
         $component->purchase_date          = Input::get('purchase_date');
         $component->purchase_cost          = request('purchase_cost');
         $component->qty                    = Input::get('qty');
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/components/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $component->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $component->image = null;
+        }
 
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
@@ -228,7 +254,7 @@ class ComponentsController extends Controller
             return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         }
         $this->authorize('checkout', $component);
-        return view('components/checkout', compact('component'))->with('assets_list', Helper::detailedAssetList());
+        return view('components/checkout', compact('component'));
     }
 
     /**

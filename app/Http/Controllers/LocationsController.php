@@ -16,6 +16,8 @@ use Validator;
 use View;
 use Auth;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Image;
+use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This controller handles all actions related to Locations for
@@ -63,8 +65,7 @@ class LocationsController extends Controller
 
         return view('locations/edit')
             ->with('location_options', $location_options)
-            ->with('item', new Location)
-            ->with('manager_list', Helper::managerList());
+            ->with('item', new Location);
     }
 
 
@@ -77,21 +78,32 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(ImageUploadRequest $request)
     {
         $location = new Location();
-        $location->name             = Input::get('name');
-        $location->parent_id        = Input::get('parent_id', null);
-        $location->currency         = Input::get('currency', '$');
-        $location->address          = Input::get('address');
-        $location->address2         = Input::get('address2');
-        $location->city             = Input::get('city');
-        $location->state            = Input::get('state');
-        $location->country          = Input::get('country');
-        $location->zip              = Input::get('zip');
-        $location->ldap_ou          = Input::get('ldap_ou');
-        $location->manager_id       = Input::get('manager_id');
+        $location->name             = $request->input('name');
+        $location->parent_id        = $request->input('parent_id', null);
+        $location->currency         = $request->input('currency', '$');
+        $location->address          = $request->input('address');
+        $location->address2         = $request->input('address2');
+        $location->city             = $request->input('city');
+        $location->state            = $request->input('state');
+        $location->country          = $request->input('country');
+        $location->zip              = $request->input('zip');
+        $location->ldap_ou          = $request->input('ldap_ou');
+        $location->manager_id       = $request->input('manager_id');
         $location->user_id          = Auth::id();
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/locations/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $location->image = $file_name;
+        }
 
         if ($location->save()) {
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
@@ -108,7 +120,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return String JSON
     */
-    public function apiStore()
+    public function apiStore(Request $request)
     {
         $new['currency']=Setting::first()->default_currency;
 
@@ -116,13 +128,13 @@ class LocationsController extends Controller
         $location = new Location();
 
         // Save the location data
-        $location->name               = Input::get('name');
+        $location->name               = $request->input('name');
         $location->currency           =  Setting::first()->default_currency; //e(Input::get('currency'));
         $location->address            = ''; //e(Input::get('address'));
         // $location->address2			= e(Input::get('address2'));
-        $location->city               = Input::get('city');
+        $location->city               = $request->input('city');
         $location->state          = '';//e(Input::get('state'));
-        $location->country            = Input::get('country');
+        $location->country            = $request->input('country');
         // $location->zip    			= e(Input::get('zip'));
         $location->user_id          = Auth::id();
 
@@ -172,7 +184,7 @@ class LocationsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($locationId = null)
+    public function update(ImageUploadRequest $request, $locationId = null)
     {
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
@@ -180,24 +192,35 @@ class LocationsController extends Controller
         }
 
         // Update the location data
-        $location->name         = Input::get('name');
-        $location->parent_id    = Input::get('parent_id', null);
-        $location->currency     = Input::get('currency', '$');
-        $location->address      = Input::get('address');
-        $location->address2     = Input::get('address2');
-        $location->city         = Input::get('city');
-        $location->state        = Input::get('state');
-        $location->country      = Input::get('country');
-        $location->zip          = Input::get('zip');
-        $location->ldap_ou      = Input::get('ldap_ou');
-        $location->manager_id   = Input::get('manager_id');
+        $location->name         = $request->input('name');
+        $location->parent_id    = $request->input('parent_id', null);
+        $location->currency     = $request->input('currency', '$');
+        $location->address      = $request->input('address');
+        $location->address2     = $request->input('address2');
+        $location->city         = $request->input('city');
+        $location->state        = $request->input('state');
+        $location->country      = $request->input('country');
+        $location->zip          = $request->input('zip');
+        $location->ldap_ou      = $request->input('ldap_ou');
+        $location->manager_id   = $request->input('manager_id');
 
-        // Was the location updated?
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/locations/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $location->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $location->image = null;
+        }
+
+
         if ($location->save()) {
-          // Redirect to the saved location page
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.update.success'));
         }
-        // Redirect to the location management page
         return redirect()->back()->withInput()->withInput()->withErrors($location->getErrors());
     }
 
@@ -211,20 +234,22 @@ class LocationsController extends Controller
      */
     public function destroy($locationId)
     {
-        // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
-            // Redirect to the blogs management page
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.not_found'));
         }
 
         if ($location->users->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
+
         } elseif ($location->childLocations->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_child_loc'));
+
         } elseif ($location->assets->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
+
         } elseif ($location->assignedassets->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
+
         } else {
             $location->delete();
             return redirect()->to(route('locations.index'))->with('success', trans('admin/locations/message.delete.success'));
@@ -248,11 +273,8 @@ class LocationsController extends Controller
         if (isset($location->id)) {
             return view('locations/view', compact('location'));
         }
-        // Prepare the error message
-        $error = trans('admin/locations/message.does_not_exist', compact('id'));
 
-        // Redirect to the user management page
-        return redirect()->route('locations.index')->with('error', $error);
+        return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist', compact('id')));
     }
 
 }

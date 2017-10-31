@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 
 
 /**
@@ -158,8 +159,51 @@ class AssetModelsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/models/message.assoc_users')));
         }
 
+        if ($assetmodel->image) {
+            try  {
+                unlink(public_path().'/uploads/models/'.$assetmodel->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
+
         $assetmodel->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/assetmodels/message.delete.success')));
 
     }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0.16]
+     * @see \App\Http\Transformers\SelectlistTransformer
+     *
+     */
+    public function selectlist(Request $request)
+    {
+        $this->authorize('view', AssetModel::class);
+
+        $assetmodels = AssetModel::select([
+            'models.id',
+            'models.name',
+            'models.image',
+            'models.model_number',
+        ]);
+
+
+        if ($request->has('search')) {
+            $assetmodels = $assetmodels->where('models.name', 'LIKE', '%'.$request->get('search').'%')
+                ->orWhere('models.model_number', 'LIKE', '%'.$request->get('search').'%');
+        }
+        $assetmodels = $assetmodels->paginate(50);
+
+        foreach ($assetmodels as $assetmodel) {
+            $assetmodel->use_text = $assetmodel->present()->modelName;
+            $assetmodel->use_image = ($assetmodel->image) ? url('/').'/uploads/models/'.$assetmodel->image : null;
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($assetmodels);
+    }
+
 }

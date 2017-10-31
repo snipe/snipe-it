@@ -28,8 +28,15 @@ public/uploads/logo.svg
 public/uploads/models/*
 public/uploads/suppliers/*
 public/uploads/accessories/*
+public/uploads/locations/*
+public/uploads/manufacturers/*
+public/uploads/components/*
+public/uploads/consumables/*
+public/uploads/companies/*
+public/uploads/categories/*
 public/uploads/users/*
 storage/app/private_uploads/users/*
+public/uploads/departments/*
 storage/debugbar/
 storage/dumps/*
 storage/laravel-backups

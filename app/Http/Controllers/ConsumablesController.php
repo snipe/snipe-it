@@ -19,6 +19,8 @@ use Slack;
 use Str;
 use View;
 use Gate;
+use Image;
+use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -54,13 +56,9 @@ class ConsumablesController extends Controller
     public function create()
     {
         $this->authorize('create', Consumable::class);
-        // Show the page
-        return view('consumables/edit')
-            ->with('item', new Consumable)
-            ->with('category_list', Helper::categoryList('consumable'))
-            ->with('company_list', Helper::companyList())
-            ->with('location_list', Helper::locationsList())
-            ->with('manufacturer_list', Helper::manufacturerList());
+        $category_type = 'consumable';
+        return view('consumables/edit')->with('category_type', $category_type)
+            ->with('item', new Consumable);
     }
 
 
@@ -72,23 +70,35 @@ class ConsumablesController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Consumable::class);
         $consumable = new Consumable();
-        $consumable->name                   = Input::get('name');
-        $consumable->category_id            = Input::get('category_id');
-        $consumable->location_id            = Input::get('location_id');
-        $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $consumable->order_number           = Input::get('order_number');
-        $consumable->min_amt                = Input::get('min_amt');
-        $consumable->manufacturer_id        = Input::get('manufacturer_id');
-        $consumable->model_number           = Input::get('model_number');
-        $consumable->item_no                = Input::get('item_no');
-        $consumable->purchase_date          = Input::get('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
-        $consumable->qty                    = Input::get('qty');
+        $consumable->name                   = $request->input('name');
+        $consumable->category_id            = $request->input('category_id');
+        $consumable->location_id            = $request->input('location_id');
+        $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $consumable->order_number           = $request->input('order_number');
+        $consumable->min_amt                = $request->input('min_amt');
+        $consumable->manufacturer_id        = $request->input('manufacturer_id');
+        $consumable->model_number           = $request->input('model_number');
+        $consumable->item_no                = $request->input('item_no');
+        $consumable->purchase_date          = $request->input('purchase_date');
+        $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
+        $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
+
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/consumables/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $consumable->image = $file_name;
+        }
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.create.success'));
@@ -109,17 +119,14 @@ class ConsumablesController extends Controller
      */
     public function edit($consumableId = null)
     {
-        if (is_null($item = Consumable::find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
+        if ($item = Consumable::find($consumableId)) {
+            $this->authorize($item);
+            $category_type = 'consumable';
+            return view('consumables/edit', compact('item'))->with('category_type', $category_type);
         }
 
-        $this->authorize($item);
+        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
 
-        return view('consumables/edit', compact('item'))
-            ->with('category_list', Helper::categoryList('consumable'))
-            ->with('company_list', Helper::companyList())
-            ->with('location_list', Helper::locationsList())
-            ->with('manufacturer_list', Helper::manufacturerList());
     }
 
 
@@ -132,7 +139,7 @@ class ConsumablesController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($consumableId = null)
+    public function update(ImageUploadRequest $request,  $consumableId = null)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
@@ -140,18 +147,31 @@ class ConsumablesController extends Controller
 
         $this->authorize($consumable);
 
-        $consumable->name                   = Input::get('name');
-        $consumable->category_id            = Input::get('category_id');
-        $consumable->location_id            = Input::get('location_id');
-        $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $consumable->order_number           = Input::get('order_number');
-        $consumable->min_amt                   = Input::get('min_amt');
-        $consumable->manufacturer_id         = Input::get('manufacturer_id');
-        $consumable->model_number               = Input::get('model_number');
-        $consumable->item_no         = Input::get('item_no');
-        $consumable->purchase_date       = Input::get('purchase_date');
-        $consumable->purchase_cost       = Helper::ParseFloat(Input::get('purchase_cost'));
+        $consumable->name                   = $request->input('name');
+        $consumable->category_id            = $request->input('category_id');
+        $consumable->location_id            = $request->input('location_id');
+        $consumable->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $consumable->order_number           = $request->input('order_number');
+        $consumable->min_amt                = $request->input('min_amt');
+        $consumable->manufacturer_id        = $request->input('manufacturer_id');
+        $consumable->model_number           = $request->input('model_number');
+        $consumable->item_no                = $request->input('item_no');
+        $consumable->purchase_date          = $request->input('purchase_date');
+        $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/consumables/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $consumable->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $consumable->image = null;
+        }
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
@@ -212,7 +232,7 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
         }
         $this->authorize('checkout', $consumable);
-        return view('consumables/checkout', compact('consumable'))->with('users_list', Helper::usersList());
+        return view('consumables/checkout', compact('consumable'));
     }
 
     /**
@@ -238,7 +258,7 @@ class ConsumablesController extends Controller
         // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.user_does_not_exist'));
+            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
         }
 
         // Update the consumable data
@@ -259,7 +279,7 @@ class ConsumablesController extends Controller
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $consumable->requireAcceptance();
 
-        if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
+        if ((($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) && $user->email!='') {
 
             Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);

@@ -110,17 +110,12 @@ class AssetsController extends Controller
         $this->authorize('create', Asset::class);
         $view = View::make('hardware/edit')
             ->with('supplier_list', Helper::suppliersList())
-            ->with('company_list', Helper::companyList())
             ->with('model_list', Helper::modelList())
             ->with('statuslabel_list', Helper::statusLabelList())
-            ->with('location_list', Helper::locationsList())
             ->with('item', new Asset)
             ->with('manufacturer', Helper::manufacturerList()) //handled in modal now?
             ->with('category', Helper::categoryList('asset')) //handled in modal now?
-            ->with('statuslabel_types', Helper::statusTypeList()) //handled in modal now?
-            ->with('users_list', Helper::usersList())
-            ->with('assets_list', Helper::assetsList())
-            ->with('locations_list', Helper::locationsList());
+            ->with('statuslabel_types', Helper::statusTypeList());
 
         if ($request->has('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
@@ -139,17 +134,18 @@ class AssetsController extends Controller
     public function store(AssetRequest $request)
     {
         $this->authorize(Asset::class);
-        // create a new model instance
-        $asset = new Asset();
-        $asset->model()->associate(AssetModel::find(e(Input::get('model_id'))));
 
-        $asset->name                    = Input::get('name');
-        $asset->serial                  = Input::get('serial');
-        $asset->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
-        $asset->model_id                = Input::get('model_id');
-        $asset->order_number            = Input::get('order_number');
-        $asset->notes                   = Input::get('notes');
-        $asset->asset_tag               = Input::get('asset_tag');
+
+        $asset = new Asset();
+        $asset->model()->associate(AssetModel::find($request->input('model_id')));
+
+        $asset->name                    = $request->input('name');
+        $asset->serial                  = $request->input('serial');
+        $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
+        $asset->model_id                = $request->input('model_id');
+        $asset->order_number            = $request->input('order_number');
+        $asset->notes                   = $request->input('notes');
+        $asset->asset_tag               = $request->input('asset_tag');
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
@@ -164,8 +160,8 @@ class AssetsController extends Controller
         $asset->rtd_location_id         = request('rtd_location_id', null);
 
         // Create the image (if one was chosen.)
-        if (Input::has('image')) {
-            $image = Input::get('image');
+        if ($request->has('image')) {
+            $image = $request->input('image');
 
             // After modification, the image is prefixed by mime info like the following:
             // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
@@ -259,14 +255,8 @@ class AssetsController extends Controller
 
         return view('hardware/edit', compact('item'))
             ->with('model_list', Helper::modelList())
-            ->with('supplier_list', Helper::suppliersList())
-            ->with('company_list', Helper::companyList())
-            ->with('locations_list', Helper::locationsList())
             ->with('statuslabel_list', Helper::statusLabelList())
-            ->with('assigned_to', Helper::usersList())
-            ->with('manufacturer', Helper::manufacturerList())
-            ->with('statuslabel_types', Helper::statusTypeList())
-            ->with('category', Helper::categoryList('asset'));
+            ->with('statuslabel_types', Helper::statusTypeList());
     }
 
 
@@ -404,9 +394,8 @@ class AssetsController extends Controller
         $logaction->item_id = $asset->id;
         $logaction->created_at =  date("Y-m-d H:i:s");
         $logaction->user_id = Auth::user()->id;
-        $log = $logaction->logaction('deleted');
+        $logaction->logaction('deleted');
 
-        // Redirect to the asset management page
         return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
     }
 
@@ -430,10 +419,7 @@ class AssetsController extends Controller
         $this->authorize('checkout', $asset);
 
         // Get the dropdown of users and then pass it to the checkout view
-        return view('hardware/checkout', compact('asset'))
-            ->with('users_list', Helper::usersList())
-            ->with('assets_list', Helper::detailedAssetList())
-            ->with('locations_list', Helper::locationsList());
+        return view('hardware/checkout', compact('asset'));
     }
 
     /**
@@ -476,6 +462,17 @@ class AssetsController extends Controller
         } else {
             $expected_checkin = '';
         }
+
+        // Set the location ID to the RTD location id if there is one
+        if ($asset->rtd_location_id!='') {
+            $asset->location_id = $target->rtd_location_id;
+        }
+
+        // Overwrite that if the target has a location ID though
+        if ($target->location_id!='') {
+            $asset->location_id = $target->location_id;
+        }
+
         if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
 //           Redirect to the new asset page
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
@@ -547,6 +544,11 @@ class AssetsController extends Controller
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));
         }
+
+        if (Input::has('location_id')) {
+            $asset->location_id =  e(Input::get('location_id'));
+        }
+
         // Was the asset updated?
         if ($asset->save()) {
             $logaction = $asset->logCheckin($target, e(request('note')));
@@ -595,15 +597,17 @@ class AssetsController extends Controller
         $asset = Asset::withTrashed()->find($assetId);
         $this->authorize('view', $asset);
         $settings = Setting::getSettings();
-        $audit_log = Actionlog::where('action_type', '=', 'audit')
-            ->where('item_id', '=', $assetId)
-            ->where('item_type', '=', Asset::class)
-            ->orderBy('created_at', 'DESC')->first();
+
 
 
         if (isset($asset)) {
-            if (!is_null($asset->assetloc)) {
-                $use_currency = $asset->assetloc->currency;
+            $audit_log = Actionlog::where('action_type', '=', 'audit')
+                ->where('item_id', '=', $assetId)
+                ->where('item_type', '=', Asset::class)
+                ->orderBy('created_at', 'DESC')->first();
+
+            if ($asset->location) {
+                $use_currency = $asset->location->currency;
             } else {
                 if ($settings->default_currency!='') {
                     $use_currency = $settings->default_currency;
@@ -621,7 +625,7 @@ class AssetsController extends Controller
                 ->with('use_currency', $use_currency)->with('audit_log', $audit_log);
         }
 
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
     }
 
     /**
@@ -712,18 +716,9 @@ class AssetsController extends Controller
         $asset->assigned_to = '';
 
         return view('hardware/edit')
-        ->with('supplier_list', Helper::suppliersList())
-        ->with('model_list', Helper::modelList())
         ->with('statuslabel_list', Helper::statusLabelList())
         ->with('statuslabel_types', Helper::statusTypeList())
-        ->with('assigned_to', Helper::usersList())
-        ->with('item', $asset)
-        ->with('locations_list', Helper::locationsList())
-        ->with('manufacturer', Helper::manufacturerList())
-        ->with('category', Helper::categoryList('asset'))
-        ->with('users_list', Helper::usersList())
-        ->with('assets_list', Helper::assetsList())
-        ->with('company_list', Helper::companyList());
+        ->with('item', $asset);
     }
 
     /**
@@ -915,27 +910,23 @@ class AssetsController extends Controller
         if (!$asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
+
         $this->authorize('update', $asset);
 
         $destinationPath = config('app.private_uploads').'/assets';
 
-        if (Input::hasFile('assetfile')) {
-            foreach (Input::file('assetfile') as $file) {
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8);
                 $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
-                $upload_success = $file->move($destinationPath, $filename);
-                //Log the deletion of seats to the log
+                $file->move($destinationPath, $filename);
                 $asset->logUpload($filename, e(Input::get('notes')));
             }
-        } else {
-            return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
-        }
-
-        if ($upload_success) {
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
         }
-        return redirect()->back()->with('error', trans('admin/hardware/message.upload.error'));
+
+        return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
     }
 
     /**
@@ -965,11 +956,9 @@ class AssetsController extends Controller
             $log->delete();
             return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
         }
-        // Prepare the error message
-        $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
         // Redirect to the hardware management page
-        return redirect()->route('hardware.index')->with('error', $error);
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
     }
 
     /**
@@ -1017,8 +1006,6 @@ class AssetsController extends Controller
     {
         $this->authorize('update', Asset::class);
 
-
-
         if (!$request->has('ids')) {
             return redirect()->back()->with('error', 'No assets selected');
         }
@@ -1035,10 +1022,9 @@ class AssetsController extends Controller
                 return view('hardware/labels')
                     ->with('assets', Asset::find($asset_ids))
                     ->with('settings', Setting::getSettings())
-                    ->with('count', $count)
-                    ->with('settings', Setting::getSettings());
+                    ->with('count', $count);
             } elseif ($request->input('bulk_actions')=='delete') {
-                $assets = Asset::with('assignedTo', 'assetloc')->find($asset_ids);
+                $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
                 $assets->each(function ($asset) {
                     $this->authorize('delete', $asset);
                 });
@@ -1047,10 +1033,7 @@ class AssetsController extends Controller
             } elseif ($request->input('bulk_actions')=='edit') {
                 return view('hardware/bulk')
                 ->with('assets', request('ids'))
-                ->with('supplier_list', Helper::suppliersList())
                 ->with('statuslabel_list', Helper::statusLabelList())
-                ->with('location_list', Helper::locationsList())
-                ->with('models_list', Helper::modelList())
                 ->with(
                     'companies_list',
                     array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList()
@@ -1167,10 +1150,9 @@ class AssetsController extends Controller
     {
         $this->authorize('checkout', Asset::class);
         // Filter out assets that are not deployable.
-        $assets_list = Company::scopeCompanyables(Asset::RTD()->get(), 'assets.company_id')->pluck('detailed_name', 'id')->toArray();
+
         return view('hardware/bulk-checkout')
-            ->with('users_list', Helper::usersList())
-            ->with('assets_list', $assets_list);
+            ->with('users_list', Helper::usersList());
     }
 
     public function postBulkCheckout(Request $request)
@@ -1222,21 +1204,21 @@ class AssetsController extends Controller
     }
 
 
-    public function quickScan(Request $request)
+    public function quickScan()
     {
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths(12)->toDateString();
-        return view('hardware/quickscan')->with('next_audit_date', $dt)->with('locations_list', Helper::locationsList());
+        return view('hardware/quickscan')->with('next_audit_date', $dt);
     }
 
 
 
-    public function audit(Request $request, $id)
+    public function audit($id)
     {
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths(12)->toDateString();
         $asset = Asset::findOrFail($id);
-        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list', Helper::locationsList());
+        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
     public function auditStore(Request $request, $id)

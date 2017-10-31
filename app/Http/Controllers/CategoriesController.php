@@ -15,6 +15,8 @@ use Lang;
 use Redirect;
 use Str;
 use View;
+use Image;
+use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This class controls all actions related to Categories for
@@ -67,7 +69,7 @@ class CategoriesController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         // create a new model instance
         $category = new Category();
@@ -79,6 +81,18 @@ class CategoriesController extends Controller
         $category->require_acceptance   = $request->input('require_acceptance', '0');
         $category->checkin_email        = $request->input('checkin_email', '0');
         $category->user_id              = Auth::id();
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/categories/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $category->image = $file_name;
+        }
+
 
         if ($category->save()) {
             return redirect()->route('categories.index')->with('success', trans('admin/categories/message.create.success'));
@@ -118,7 +132,7 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @since [v1.0]
      */
-    public function update(Request $request, $categoryId = null)
+    public function update(ImageUploadRequest $request, $categoryId = null)
     {
         // Check if the blog post exists
         if (is_null($category = Category::find($categoryId))) {
@@ -135,6 +149,20 @@ class CategoriesController extends Controller
         $category->use_default_eula     = $request->input('use_default_eula', '0');
         $category->require_acceptance   = $request->input('require_acceptance', '0');
         $category->checkin_email        = $request->input('checkin_email', '0');
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/categories/'.$file_name);
+            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
+            $category->image = $file_name;
+        } elseif ($request->input('image_delete')=='1') {
+            $category->image = null;
+        }
+
 
         if ($category->save()) {
             // Redirect to the new category page
