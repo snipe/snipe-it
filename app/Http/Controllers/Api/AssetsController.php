@@ -70,7 +70,8 @@ class AssetsController extends Controller
             'created_at',
             'updated_at',
             'purchase_date',
-            'purchase_cost'
+            'purchase_cost',
+            'warranty_months',
         ];
 
         $filter = array();

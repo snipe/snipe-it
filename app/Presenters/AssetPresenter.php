@@ -148,6 +148,19 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.order_number'),
                 'formatter' => "orderNumberObjFilterFormatter"
             ], [
+                "field" => "warranty_months",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/hardware/form.warranty')
+            ],[
+                "field" => "warranty_expires",
+                "searchable" => false,
+                "sortable" => false,
+                "visible" => false,
+                "title" => 'Warranty Expires',
+                "formatter" => "dateDisplayFormatter"
+            ],[
                 "field" => "notes",
                 "searchable" => true,
                 "sortable" => true,
