@@ -597,13 +597,15 @@ class AssetsController extends Controller
         $asset = Asset::withTrashed()->find($assetId);
         $this->authorize('view', $asset);
         $settings = Setting::getSettings();
-        $audit_log = Actionlog::where('action_type', '=', 'audit')
-            ->where('item_id', '=', $assetId)
-            ->where('item_type', '=', Asset::class)
-            ->orderBy('created_at', 'DESC')->first();
+
 
 
         if (isset($asset)) {
+            $audit_log = Actionlog::where('action_type', '=', 'audit')
+                ->where('item_id', '=', $assetId)
+                ->where('item_type', '=', Asset::class)
+                ->orderBy('created_at', 'DESC')->first();
+
             if ($asset->location) {
                 $use_currency = $asset->location->currency;
             } else {
@@ -1148,10 +1150,9 @@ class AssetsController extends Controller
     {
         $this->authorize('checkout', Asset::class);
         // Filter out assets that are not deployable.
-        $assets_list = Company::scopeCompanyables(Asset::RTD()->get(), 'assets.company_id')->pluck('detailed_name', 'id')->toArray();
+
         return view('hardware/bulk-checkout')
-            ->with('users_list', Helper::usersList())
-            ->with('assets_list', $assets_list);
+            ->with('users_list', Helper::usersList());
     }
 
     public function postBulkCheckout(Request $request)
