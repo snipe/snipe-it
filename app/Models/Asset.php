@@ -21,8 +21,7 @@ use Illuminate\Notifications\Notifiable;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
-    use Loggable, Requestable, Presentable, Notifiable;
-    use SoftDeletes;
+    use Loggable, Requestable, Presentable, Notifiable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
 
     const LOCATION = 'location';
     const ASSET = 'asset';
@@ -53,7 +52,6 @@ class Asset extends Depreciable
     ];
 
 
-    use ValidatingTrait, UniqueUndeletedTrait;
 
     protected $rules = [
         'name'            => 'max:255|nullable',
@@ -94,6 +92,8 @@ class Asset extends Depreciable
         'supplier_id',
         'warranty_months',
     ];
+
+
 
     public function getDisplayNameAttribute()
     {
