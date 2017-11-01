@@ -419,7 +419,7 @@ class ReportsController extends Controller
      */
     public function postCustom()
     {
-        $assets = Asset::orderBy('created_at', 'DESC')->with('company', 'assignedTo', 'assetloc', 'defaultLoc', 'model', 'supplier', 'assetstatus', 'model.manufacturer')->get();
+        $assets = Asset::orderBy('created_at', 'DESC')->with('company', 'assignedTo', 'location', 'defaultLoc', 'model', 'supplier', 'assetstatus', 'model.manufacturer')->get();
         $customfields = CustomField::get();
 
         $rows   = [ ];
