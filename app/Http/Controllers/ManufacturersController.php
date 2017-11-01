@@ -142,7 +142,7 @@ class ManufacturersController extends Controller
             $image = $request->file('image');
             $file_name = str_slug($image->getClientOriginalName()).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/manufacturers/'.$file_name);
-            $old_image = $path.$model->image;
+            $old_image = $path.$manufacturer->image;
 
             try  {
                 unlink($old_image);

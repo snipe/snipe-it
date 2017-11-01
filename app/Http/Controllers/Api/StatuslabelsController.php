@@ -161,19 +161,22 @@ class StatuslabelsController extends Controller
     public function getAssetCountByStatuslabel()
     {
 
-        $statusLabels = Statuslabel::get();
+        $statuslabels = Statuslabel::with('assets')->groupBy('id')->withCount('assets')->get();
+
         $labels=[];
         $points=[];
         $colors=[];
-        foreach ($statusLabels as $statusLabel) {
-            if ($statusLabel->assets()->count() > 0) {
-                $labels[]=$statusLabel->name;
-                $points[]=$statusLabel->assets()->whereNull('assigned_to')->count();
-                if ($statusLabel->color!='') {
-                    $colors[]=$statusLabel->color;
+        foreach ($statuslabels as $statuslabel) {
+            if ($statuslabel->assets_count > 0) {
+
+                $labels[]=$statuslabel->name. ' ('.number_format($statuslabel->assets_count).')';
+                $points[]=$statuslabel->assets_count;
+                if ($statuslabel->color!='') {
+                    $colors[]=$statuslabel->color;
                 }
             }
         }
+
         
         $colors_array = array_merge($colors, Helper::chartColors());
 
