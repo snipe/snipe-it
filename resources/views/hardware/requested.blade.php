@@ -53,6 +53,8 @@
                             <td>
                                 @if ($request->itemType() == "asset")
                                     <a href="{{ $request->requestable->getImageUrl() }}" data-toggle="lightbox" data-type="image"><img src="{{ $request->requestable->getImageUrl() }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>
+                                @else
+                                        <a href="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" data-toggle="lightbox" data-type="image"><img src="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>
                                 @endif
 
 
