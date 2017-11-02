@@ -42,8 +42,8 @@
                 <td>{{ $asset->id }}</td>
                 <td>{{ $asset->present()->name() }}</td>
                 <td>
-                  @if ($asset->assetloc)
-                  {{ $asset->assetloc->name }}
+                  @if ($asset->location)
+                  {{ $asset->location->name }}
                   @endif
                 </td>
                 <td>
