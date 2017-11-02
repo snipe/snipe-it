@@ -79,6 +79,18 @@ class AssetModelPresenter extends Presenter
     }
 
     /**
+     * Generate img tag to this models image.
+     * @return string
+     */
+    public function imageSrc()
+    {
+        if (!empty($this->image)) {
+            return url('/') . '/uploads/models/' . $this->image;
+        }
+        return '';
+    }
+
+    /**
      * Url to view this item.
      * @return string
      */
