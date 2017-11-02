@@ -281,6 +281,26 @@ class AssetPresenter extends Presenter
     }
 
     /**
+     * Generate img tag to this items image.
+     * @return mixed|string
+     */
+    public function imageSrc()
+    {
+        $imagePath = '';
+        if ($this->image && !empty($this->image)) {
+            $imagePath = $this->image;
+            return 'poop';
+        } elseif ($this->model && !empty($this->model->image)) {
+            $imagePath = $this->model->image;
+            return 'fart';
+        }
+        if (!empty($imagePath)) {
+            return config('app.url').'/uploads/assets/'.$imagePath;
+        }
+        return $imagePath;
+    }
+
+    /**
      * Get Displayable Name
      * @return string
      **/

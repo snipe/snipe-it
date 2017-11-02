@@ -22,6 +22,8 @@ Route::group(
             'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id']
         ]);
 
+        Route::get('requested', [ 'as' => 'assets.requested', 'uses' => 'AssetsController@getRequestedIndex']);
+
         Route::get('scan', [
             'as' => 'asset.scan',
             'uses' => 'AssetsController@scan'

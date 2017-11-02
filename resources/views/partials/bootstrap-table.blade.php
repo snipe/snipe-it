@@ -43,7 +43,7 @@ $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
 
 
         paginationVAlign: 'both',
-        sidePagination: 'server',
+        sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
         sortable: true,
 
 
