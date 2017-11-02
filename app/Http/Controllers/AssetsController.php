@@ -160,7 +160,7 @@ class AssetsController extends Controller
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
 
-        // Create the image (if one was chosen.)
+
         if ($request->has('image')) {
             $image = $request->input('image');
 
@@ -226,7 +226,7 @@ class AssetsController extends Controller
                 $target = Location::find(request('assigned_location'));
             }
             if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
+                $asset->checkOut($target, date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
@@ -420,6 +420,7 @@ class AssetsController extends Controller
         $this->authorize('checkout', $asset);
 
         // Get the dropdown of users and then pass it to the checkout view
+
         return view('hardware/checkout', compact('asset'));
     }
 
@@ -450,7 +451,6 @@ class AssetsController extends Controller
             $target = Location::find(request('assigned_location'));
         }
         // $user = User::find(Input::get('assigned_to'));
-        $admin = Auth::user();
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
             $checkout_at = Input::get('checkout_at');
@@ -474,7 +474,7 @@ class AssetsController extends Controller
             $asset->location_id = $target->location_id;
         }
 
-        if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
+        if ($asset->checkOut($target, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
 //           Redirect to the new asset page
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
         }
@@ -526,59 +526,17 @@ class AssetsController extends Controller
 
         $this->authorize('checkin', $asset);
 
-        $admin = Auth::user();
-        if ($asset->assignedType() == Asset::USER) {
-            $user = $asset->assignedTo;
-        }
         if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
-
-        $asset->expected_checkin = null;
-        $asset->last_checkout = null;
-        $asset->assigned_to = null;
-        $asset->assignedTo()->disassociate($asset);
-        $asset->assigned_type = null;
-        $asset->accepted = null;
-        $asset->name = e(Input::get('name'));
-
-        if (Input::has('status_id')) {
-            $asset->status_id =  e(Input::get('status_id'));
-        }
-
-        if (Input::has('location_id')) {
-            $asset->location_id =  e(Input::get('location_id'));
-        }
-
-        // Was the asset updated?
-        if ($asset->save()) {
-            $logaction = $asset->logCheckin($target, e(request('note')));
-
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
-            $data['item_name'] = $asset->present()->name();
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = $asset->asset_tag;
-            $data['item_serial'] = $asset->serial;
-            $data['note'] = $logaction->note;
-            $data['manufacturer_name'] = $asset->model->manufacturer->name;
-            $data['model_name'] = $asset->model->name;
-            $data['model_number'] = $asset->model->model_number;
-
-            if ((($asset->checkin_email()=='1')) && (isset($user)) && (!empty($user->email)) && (!config('app.lock_passwords'))) {
-                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
-                });
-            }
-
+        $status_id = e(Input::get('status_id'));
+        $item_name = e(Input::get('name'));
+        if ($asset->checkIn($target, $item_name, $status_id)) {
             if ($backto=='user') {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));
         }
-
         // Redirect to the asset management page with error
         return redirect()->route("hardware.index")->with('error', trans('admin/hardware/message.checkin.error'));
     }
@@ -645,6 +603,7 @@ class AssetsController extends Controller
             $asset = Asset::withTrashed()->find($assetId);
             $size = Helper::barcodeDimensions($settings->barcode_type);
             $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'-'.str_slug($asset->id).'.png';
+
 
             if (isset($asset->id, $asset->asset_tag)) {
                 if (file_exists($qr_file)) {
@@ -753,8 +712,6 @@ class AssetsController extends Controller
 
         $csv = Reader::createFromPath(Input::file('user_import_csv'));
         $csv->setNewline("\r\n");
-        //get the first row, usually the CSV header
-        //$headers = $csv->fetchOne();
 
         $results = $csv->fetchAssoc();
         $item = array();
@@ -1184,7 +1141,6 @@ class AssetsController extends Controller
 
         $errors = [];
         DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
-          
             foreach ($asset_ids as $asset_id) {
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);
@@ -1211,8 +1167,6 @@ class AssetsController extends Controller
         $dt = Carbon::now()->addMonths(12)->toDateString();
         return view('hardware/quickscan')->with('next_audit_date', $dt);
     }
-
-
 
     public function audit($id)
     {

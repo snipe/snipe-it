@@ -136,15 +136,13 @@ class Asset extends Depreciable
     /**
      * Checkout asset
      * @param User $user
-     * @param User $admin
      * @param Carbon $checkout_at
      * @param null $expected_checkin
      * @param string $note
      * @param null $name
      * @return bool
      */
-    //FIXME: The admin parameter is never used. Can probably be removed.
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
+    public function checkOut($target, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
         if (!$target) {
             return false;
@@ -164,7 +162,7 @@ class Asset extends Depreciable
         }
 
         if ($this->requireAcceptance()) {
-            if(get_class($target) != User::class) {
+            if (get_class($target) != User::class) {
                 throw new CheckoutNotAllowed;
             }
             $this->accepted="pending";
@@ -172,6 +170,51 @@ class Asset extends Depreciable
 
         if ($this->save()) {
             $this->logCheckout($note, $target);
+            return true;
+        }
+        return false;
+    }
+
+    public function checkIn($target, $item_name = null, $status_id = null)
+    {
+        $admin = Auth::user();
+        if ($this->assignedType() == Asset::USER) {
+            $user = $this->assignedTo;
+        }
+
+        $this->expected_checkin = null;
+        $this->last_checkout = null;
+        $this->assigned_to = null;
+        $this->assignedTo()->disassociate($this);
+        $this->assigned_type = null;
+        $this->accepted = null;
+        if (isset($item_name)) {
+            $this->name = $item_name;
+        }
+
+        // Only update this if one is passed, otherwise we'll null it out.
+        if ($status_id) {
+            $this->status_id =  $status_id;
+        }
+        // Was the asset updated?
+        if ($this->save()) {
+            $logaction = $this->logCheckin($target, e(request('note')));
+
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
+            $data['item_name'] = $this->present()->name();
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = $this->asset_tag;
+            $data['item_serial'] = $this->serial;
+            $data['note'] = $logaction->note;
+
+            if ((($this->checkin_email()=='1')) && (isset($user)) && (!empty($user->email)) && (!config('app.lock_passwords'))) {
+                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
+                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
+                });
+            }
             return true;
         }
         return false;
@@ -236,7 +279,7 @@ class Asset extends Depreciable
      */
     public function checkedOutToUser()
     {
-      return $this->assignedType() === self::USER;
+        return $this->assignedType() === self::USER;
     }
 
     public function assignedTo()
@@ -284,7 +327,6 @@ class Asset extends Depreciable
                 return $this->defaultLoc;
 
             }
-
         }
         return $this->defaultLoc;
     }
@@ -461,28 +503,21 @@ class Asset extends Depreciable
      */
     public static function nextAutoIncrement($assets)
     {
-
         $max = 1;
 
         foreach ($assets as $asset) {
-            $results = preg_match ( "/\d+$/" , $asset['asset_tag'], $matches);
+            $results = preg_match("/\d+$/", $asset['asset_tag'], $matches);
 
-            if ($results)
-            {
+            if ($results) {
                 $number = $matches[0];
 
-                if ($number > $max)
-                {
+                if ($number > $max) {
                     $max = $number;
                 }
             }
         }
         return $max + 1;
-
     }
-
-
-
 
     public static function zerofill($num, $zerofill = 3)
     {
@@ -785,7 +820,6 @@ class Asset extends Depreciable
                             $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
                         });
                     });
-
                 })->orWhere(function ($query) use ($search) {
                     $query->whereHas('assetstatus', function ($query) use ($search) {
                         $query->where('status_labels.name', 'LIKE', '%'.$search.'%');
@@ -1126,7 +1160,7 @@ class Asset extends Depreciable
 
 
     /**
-     * Query builder scope to search on location ID
+     * Query builder scope to search on depreciation ID
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $search      Search term
@@ -1139,6 +1173,5 @@ class Asset extends Depreciable
             ->join('depreciations', 'models.depreciation_id', '=', 'depreciations.id')->where('models.depreciation_id', '=', $search);
 
     }
-
 
 }

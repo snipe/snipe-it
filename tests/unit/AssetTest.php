@@ -89,7 +89,8 @@ class AssetTest extends BaseTest
      */
     public function testWarrantyExpiresAttribute()
     {
-        $asset = factory(\App\Models\Asset::class)->create();
+        $am = factory(\App\Models\AssetModel::class)
+        $asset = factory(\App\Models\Asset::class)->states('laptop-mbp')->create();
 
         $asset->purchase_date = \Carbon\Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0);
         $asset->warranty_months = 24;
@@ -189,19 +190,6 @@ class AssetTest extends BaseTest
         $this->assertCount(1, $asset->fresh()->uploads);
     }
 
-    // Helper Method for checking in assets.... We should extract this to the model or a trait.
-
-    private function checkin($asset, $target) {
-        $asset->expected_checkin = null;
-        $asset->last_checkout = null;
-        $asset->assigned_to = null;
-        $asset->assigned_type = null;
-        $asset->assignedTo()->disassociate($asset);
-        $asset->accepted = null;
-        $asset->save();
-        $asset->logCheckin($target, 'Test Checkin');
-    }
-
     public function testAnAssetCanBeCheckedOut()
     {
         // This tests Asset::checkOut(), Asset::assignedTo(), Asset::assignedAssets(), Asset::assetLoc(), Asset::assignedType(), defaultLoc()
@@ -210,7 +198,7 @@ class AssetTest extends BaseTest
 
         $target = factory(App\Models\User::class)->create();
         // An Asset Can be checked out to a user, and this should be logged.
-        $asset->checkOut($target, $adminUser);
+        $asset->checkOut($target);
         $asset->save();
 
         $this->assertInstanceOf(App\Models\User::class, $asset->assignedTo);
@@ -229,7 +217,7 @@ class AssetTest extends BaseTest
             'assigned_type' => User::class
         ]);
 
-        $this->checkin($asset, $target);
+        $asset->checkin($target);
         $this->assertNull($asset->fresh()->assignedTo);
 
         $this->tester->seeRecord('action_logs', [
@@ -246,7 +234,7 @@ class AssetTest extends BaseTest
 
         // An Asset Can be checked out to a asset, and this should be logged.
         $target = factory(App\Models\Asset::class)->create();
-        $asset->checkOut($target, $adminUser);
+        $asset->checkOut($target);
         $asset->save();
         $this->assertInstanceOf(App\Models\Asset::class, $asset->fresh()->assignedTo);
         $this->assertEquals($asset->fresh()->assetLoc->id, $target->fresh()->assetLoc->id);
@@ -259,7 +247,7 @@ class AssetTest extends BaseTest
         ]);
 
         $this->assertCount(1, $target->assignedAssets);
-        $this->checkin($asset, $target);
+        $asset->checkin($target);
         $this->assertNull($asset->fresh()->assignedTo);
 
         $this->tester->seeRecord('action_logs', [
@@ -270,7 +258,7 @@ class AssetTest extends BaseTest
 
         // An Asset Can be checked out to a location, and this should be logged.
         $target = factory(App\Models\Location::class)->create();
-        $asset->checkOut($target, $adminUser);
+        $asset->checkOut($target);
         $asset->save();
         $this->assertInstanceOf(App\Models\Location::class, $asset->fresh()->assignedTo);
         $this->assertEquals($asset->fresh()->assetLoc->id, $target->fresh()->id);
@@ -281,7 +269,7 @@ class AssetTest extends BaseTest
             'target_type'   => get_class($target),
             'target_id'     => $target->id
         ]);
-        $this->checkin($asset, $target);
+        $asset->checkin($target);
         $this->assertNull($asset->fresh()->assignedTo);
 
         $this->tester->seeRecord('action_logs', [
