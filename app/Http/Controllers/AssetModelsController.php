@@ -90,7 +90,7 @@ class AssetModelsController extends Controller
         if (Input::file('image')) {
 
             $image = Input::file('image');
-            $file_name = slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
+            $file_name = str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
             $path = public_path('uploads/models/');
 
             if ($image->getClientOriginalExtension()!='svg') {

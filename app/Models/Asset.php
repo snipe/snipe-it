@@ -872,7 +872,7 @@ class Asset extends Depreciable
                 }
 
                 if ($fieldname =='location') {
-                    $query->whereHas('defaultLoc', function ($query) use ($search_val) {
+                    $query->whereHas('location', function ($query) use ($search_val) {
                         $query->where('locations.name', 'LIKE', '%' . $search_val . '%');
                     });
                 }
@@ -935,8 +935,11 @@ class Asset extends Depreciable
                 }
             }
 
+            if ($fieldname!='category') {
+                $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
+            }
 
-            $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
+
 
 
         });
