@@ -53,7 +53,7 @@ class UsersController extends Controller
             'users.activated',
             'users.avatar',
 
-        ])->with('manager', 'groups', 'location', 'company', 'department','throttle','assets','licenses','accessories','consumables')
+        ])->with('manager', 'groups', 'userloc', 'company', 'department','throttle','assets','licenses','accessories','consumables')
             ->withCount('assets','licenses','accessories','consumables');
         $users = Company::scopeCompanyables($users);
 
