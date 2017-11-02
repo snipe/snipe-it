@@ -85,7 +85,7 @@ class UsersController extends Controller
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = request('offset', 0);
-        $limit = request('limit', 50);
+        $limit = request('limit',  20);
 
         switch ($request->input('sort')) {
             case 'manager':
