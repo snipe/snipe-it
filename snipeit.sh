@@ -147,6 +147,14 @@ isdnfinstalled () {
     fi
 }
 
+openfirewalld () {
+    if [ "$(firewall-cmd --state)" == "running" ]; then
+        echo "* Configuring firewall to allow HTTP traffic only."
+        log "firewall-cmd --zone=public --add-port=http/tcp --permanent"
+        log "firewall-cmd --reload"
+    fi
+}
+
 if [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
     distro="$(lsb_release -s -i)"
     version="$(lsb_release -s -r)"
@@ -539,11 +547,8 @@ case $distro in
 
         installsnipeit
 
-        if [ "$(firewall-cmd --state)" == "running" ]; then
-            echo "* Configuring firewall."
-            log "firewall-cmd --zone=public --add-port=http/tcp --permanent"
-            log "firewall-cmd --reload"
-        fi
+        #open the firewall for HTTP traffic only
+        openfirewalld
 
         #Check if SELinux is enforcing
         if [ "$(getenforce)" == "Enforcing" ]; then
@@ -601,6 +606,9 @@ case $distro in
         echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
         installsnipeit
+
+        #open the firewall for HTTP traffic only
+        openfirewalld
 
         #Check if SELinux is enforcing
         if [ "$(getenforce)" == "Enforcing" ]; then
