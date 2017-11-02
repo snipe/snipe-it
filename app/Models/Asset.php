@@ -984,7 +984,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderAssigned($query, $order)
     {
-        return $query->leftJoin('users', 'assets.assigned_to', '=', 'users.id')->select('assets.*')->orderBy('users.first_name', $order)->orderBy('users.last_name', $order);
+        return $query->leftJoin('users as users_sort', 'assets.assigned_to', '=', 'users_sort.id')->select('assets.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
     }
 
     /**
@@ -997,7 +997,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderStatus($query, $order)
     {
-        return $query->join('status_labels', 'assets.status_id', '=', 'status_labels.id')->orderBy('status_labels.name', $order);
+        return $query->join('status_labels as status_sort', 'assets.status_id', '=', 'status_sort.id')->orderBy('status_sort.name', $order);
     }
 
     /**
@@ -1010,7 +1010,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderCompany($query, $order)
     {
-        return $query->leftJoin('companies', 'assets.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+        return $query->leftJoin('companies as company_sort', 'assets.company_id', '=', 'company_sort.id')->orderBy('company_sort.name', $order);
     }
 
 
@@ -1054,9 +1054,9 @@ class Asset extends Depreciable
     */
     public function scopeOrderCategory($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('categories', 'models.category_id', '=', 'categories.id')
-            ->orderBy('categories.name', $order);
+        return $query->join('models as order_model_category', 'assets.model_id', '=', 'order_model_category.id')
+            ->join('categories as category_order', 'order_model_category.category_id', '=', 'category_order.id')
+            ->orderBy('category_order.name', $order);
     }
 
 
