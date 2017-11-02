@@ -74,11 +74,6 @@ class ViewAssetsController extends Controller
         return view('account/requestable-assets', compact('user', 'assets', 'models'));
     }
 
-    public function getRequestedIndex()
-    {
-        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
-        return view('admin/requested-assets', compact('requestedItems'));
-    }
 
 
     public function getRequestItem($itemType, $itemId = null)
