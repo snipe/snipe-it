@@ -76,9 +76,9 @@ Create a User
 
                     <!-- Email user -->
                     <div class="form-group">
-                        <div class="col-sm-2 ">
+                        <div class="col-sm-2">
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-10">
                             {{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email these users their credentials? (Only possible where email address is included with user data.)
                         </div>
                     </div>
@@ -96,9 +96,9 @@ Create a User
                 <div class="box-footer text-right">
 
                     @if (config('app.lock_passwords'))
-                    <button type="submit" class="btn btn-default disabled" disabled="disabled">{{ trans('button.submit') }}</button>
+                    <button type="submit" class="btn btn-success disabled" disabled="disabled">{{ trans('button.submit') }}</button>
                     @else
-                        <button type="submit" class="btn btn-default">{{ trans('button.submit') }}</button>
+                        <button type="submit" class="btn btn-success">{{ trans('button.submit') }}</button>
                     @endif
                 </div>
             </div>
