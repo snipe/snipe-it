@@ -935,7 +935,7 @@ class Asset extends Depreciable
                 }
             }
 
-            if ($fieldname!='category') {
+            if (($fieldname!='category') && ($fieldname!='status_label')) {
                 $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
 
