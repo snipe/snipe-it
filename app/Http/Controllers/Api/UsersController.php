@@ -53,7 +53,7 @@ class UsersController extends Controller
             'users.activated',
             'users.avatar',
 
-        ])->with('manager', 'groups', 'location', 'company', 'department','throttle','assets','licenses','accessories','consumables')
+        ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
             ->withCount('assets','licenses','accessories','consumables');
         $users = Company::scopeCompanyables($users);
 
@@ -85,7 +85,7 @@ class UsersController extends Controller
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = request('offset', 0);
-        $limit = request('limit', 50);
+        $limit = request('limit',  20);
 
         switch ($request->input('sort')) {
             case 'manager':

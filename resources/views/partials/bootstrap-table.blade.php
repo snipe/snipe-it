@@ -32,7 +32,7 @@
 
 
 
-$('.snipe-table').bootstrapTable('destroy').bootstrapTable({
+        $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
         iconsPrefix: 'fa',
@@ -46,30 +46,27 @@ $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
         sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
         sortable: true,
 
-
        @if (!isset($simple_view))
 
         showRefresh: true,
         pagination: true,
-        pageSize: {{ $snipeSettings->per_page }},
-
+        pageSize: 20,
         cookie: true,
         cookieExpire: '2y',
         showExport: true,
-
-    stickyHeader: true,
-    stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
+        stickyHeader: true,
+        stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
 
 
         @if (isset($showFooter))
-            showFooter: true,
+        showFooter: true,
         @endif
         showColumns: true,
         trimOnSearch: false,
 
-            @if (isset($multiSort))
-            showMultiSort: true,
-            @endif
+        @if (isset($multiSort))
+        showMultiSort: true,
+        @endif
 
             @if (isset($exportFile))
             exportDataType: 'all',
@@ -97,7 +94,7 @@ $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
         @endif
 
         @if (isset($columns))
-            columns: {!! $columns !!},
+         columns: {!! $columns !!},
         @endif
 
         mobileResponsive: true,
@@ -109,7 +106,7 @@ $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
         formatLoadingMessage: function () {
             return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
         },
-        pageList: ['30','50','100','150','200','500'],
+        pageList: ['20', '30','50','100','150','200'],
         icons: {
             advancedSearchIcon: 'fa fa-search-plus',
             paginationSwitchDown: 'fa-caret-square-o-down',
@@ -121,7 +118,7 @@ $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
             minus: 'fa fa-minus',
             @endif
             refresh: 'fa-refresh'
-        },
+        }
 
     });
     }
