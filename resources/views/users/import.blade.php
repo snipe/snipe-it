@@ -13,12 +13,17 @@ Create a User
 {{-- Page content --}}
 @section('content')
 
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="">
             <div class="box box-default">
                 <div class="box-body">
+
+                    @if (config('app.lock_passwords'))
+                        <p class="alert alert-warning">CSV uploads are disabled on the demo.</p>
+                    @endif
+
                     <!-- CSRF Token -->
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -41,14 +46,22 @@ Create a User
                         Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address. If you wish to include a company association, you must reference the ID number of an existing company - companies will not be created on the fly.
                     </p>
 
-                    @if (config('app.lock_passwords'))
-                    <p>Note: Email notification for users is disabled for this installation.</p>
-                    @endif
 
-                    <div class="form-group {!! $errors->first('user_import_csv', 'has-error') }}">
+
+
+                    <div class="form-group {!! $errors->first('user_import_csv', 'has-error') !!}">
                         <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                         <div class="col-sm-5">
-                            <input type="file" name="user_import_csv" id="user_import_csv">
+                            <span class="btn btn-info fileinput-button">
+                                    <span>Select Import File...</span>
+                                        @if (config('app.lock_passwords'))
+                                            <input id="fileupload" type="file" name="user_import_csv" accept="text/csv" disabled="disabled" class="disabled">
+                                        @else
+                                            <input id="fileupload" type="file" name="user_import_csv" accept="text/csv">
+                                        @endif
+
+                                    </span>
+
                         </div>
                     </div>
 
@@ -63,9 +76,9 @@ Create a User
 
                     <!-- Email user -->
                     <div class="form-group">
-                        <div class="col-sm-2 ">
+                        <div class="col-sm-2">
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-10">
                             {{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email these users their credentials? (Only possible where email address is included with user data.)
                         </div>
                     </div>
@@ -81,7 +94,12 @@ Create a User
                 </div> <!--/box-body-->
                 <!-- Form Actions -->
                 <div class="box-footer text-right">
-                    <button type="submit" class="btn btn-default">{{ trans('button.submit') }}</button>
+
+                    @if (config('app.lock_passwords'))
+                    <button type="submit" class="btn btn-success disabled" disabled="disabled">{{ trans('button.submit') }}</button>
+                    @else
+                        <button type="submit" class="btn btn-success">{{ trans('button.submit') }}</button>
+                    @endif
                 </div>
             </div>
         </form>

@@ -29,12 +29,16 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-3">
+
                                 <!-- The fileinput-button span is used to style the file input field as button -->
+                                @if (!config('app.lock_passwords'))
                                 <span class="btn btn-info fileinput-button">
                                     <span>Select Import File...</span>
                                     <!-- The file input field used as target for the file upload widget -->
                                     <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv">
                                 </span>
+                                 @endif
+
                             </div>
                             <div class="col-md-9" v-show="progress.visible" style="padding-bottom:20px">
                                 <div class="col-md-11">

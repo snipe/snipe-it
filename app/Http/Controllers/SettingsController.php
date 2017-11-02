@@ -888,12 +888,30 @@ class SettingsController extends Controller
 
     public function postBackups()
     {
+
         if (!config('app.lock_passwords')) {
             Artisan::call('backup:run');
-            return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.generated'));
-        } else {
-            return redirect()->to("settings.backups.index")->with('error', trans('general.feature_disabled'));
-        }
+            $output = Artisan::output();
+
+            // Backup completed
+            if (!preg_match('/failed/', $output)) {
+                return redirect()->route('settings.backups.index')
+                    ->with('success', trans('admin/settings/message.backup.generated'));
+            }
+
+
+            $formatted_output = str_replace('Backup completed!', '', $output);
+            $output_split = explode('...', $formatted_output);
+
+            if (array_key_exists(2, $output_split)) {
+                return redirect()->route("settings.backups.index")->with('error', $output_split[2]);
+            }
+            return redirect()->route("settings.backups.index")->with('error', $formatted_output);
+
+            }
+        return redirect()->route("settings.backups.index")->with('error', trans('general.feature_disabled'));
+
+
 
 
     }
