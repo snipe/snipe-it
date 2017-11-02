@@ -48,12 +48,14 @@
                 </thead>
                 <tbody>
                     @foreach ($requestedItems as $request)
+
+                        @if ($request->requestable)
                     <tr>
                             {{ csrf_field() }}
                             <td>
-                                @if ($request->itemType() == "asset")
+                                @if (($request->itemType() == "asset") && ($request->requestable))
                                     <a href="{{ $request->requestable->getImageUrl() }}" data-toggle="lightbox" data-type="image"><img src="{{ $request->requestable->getImageUrl() }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>
-                                @else
+                                @elseif (($request->itemType() == "asset_model") && ($request->requestable))
                                         <a href="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" data-toggle="lightbox" data-type="image"><img src="{{ url('/') }}/uploads/models/{{ $request->requestable->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>
                                 @endif
 
@@ -102,6 +104,7 @@
 
 
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
