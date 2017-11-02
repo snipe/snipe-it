@@ -397,13 +397,12 @@
                         <a href="{{ route('hardware/bulkcheckout') }}">
                             {{ trans('general.bulk_checkout') }}</a>
                     </li>
+                    <li{!! (Request::is('hardware/requested') ? ' class="active>"' : '') !!}>
+                        <a href="{{ route('assets.requested') }}">
+                            {{ trans('general.requested') }}</a>
+                    </li>
                     @endcan
-                    @can('view', \App\Models\Assetmodel::class)
-                    <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ route('models.index') }}">@lang('general.asset_models')</a></li>
-                    @endcan
-                    @can('view', \App\Models\Category::class)
-                  <li><a href="{{ url('categories') }}" {!! (Request::is('settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
-                    @endcan
+
                     @can('create', \App\Models\Asset::class)
                       <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
                       <li><a href="{{ route('maintenances.index') }}">@lang('general.asset_maintenances') </a></li>
