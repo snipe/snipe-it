@@ -38,6 +38,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use TCPDF;
 use Validator;
 use View;
+use App\Models\CheckoutRequest;
 
 /**
  * This class controls all actions related to assets for
@@ -1243,4 +1244,14 @@ class AssetsController extends Controller
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
+
+    public function getRequestedIndex($id = null)
+    {
+        if ($id) {
+            $requestedItems = CheckoutRequest::where('user_id', $id)->with('user', 'requestedItem')->get();
+        }
+        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
+        return view('hardware/requested', compact('requestedItems'));
+    }
+
 }
