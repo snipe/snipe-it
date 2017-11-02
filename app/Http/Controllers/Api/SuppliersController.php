@@ -155,7 +155,7 @@ class SuppliersController extends Controller
         ]);
 
         if ($request->has('search')) {
-            $suppliers = $suppliers->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
+            $suppliers = $suppliers->where('suppliers.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
         $suppliers = $suppliers->orderBy('name', 'ASC')->paginate(50);
