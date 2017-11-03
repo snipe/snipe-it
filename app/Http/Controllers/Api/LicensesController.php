@@ -87,7 +87,7 @@ class LicensesController extends Controller
                 $licenses = $licenses->OrderCompany($order);
                 break;
             default:
-                $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','license_name','license_email'];
+                $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','license_name','license_email','free_seats_count','seats'];
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
