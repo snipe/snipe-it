@@ -80,7 +80,7 @@ class UsersController extends Controller
         }
 
         if ($request->has('department_id')) {
-            $users = $users->where('department_id','=',$request->input('department_id'));
+            $users = $users->where('users.department_id','=',$request->input('department_id'));
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
