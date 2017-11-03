@@ -30,7 +30,6 @@ class LicensesTransformer
             'purchase_order' => e($license->purchase_order),
             'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
             'purchase_cost' => e($license->purchase_cost),
-            'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
             'notes' => e($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'total_seats' => (int) $license->seats,
