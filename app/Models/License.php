@@ -268,7 +268,6 @@ class License extends Depreciable
         return $this->licenseSeatsRelation()
             ->whereNull('asset_id')
             ->whereNull('assigned_to')
-            ->whereNull('user_id')
             ->whereNull('deleted_at');
     }
 
