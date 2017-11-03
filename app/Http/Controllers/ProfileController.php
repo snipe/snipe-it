@@ -108,12 +108,12 @@ class ProfileController extends Controller
     {
 
         if (config('app.lock_passwords')) {
-            return redirect()->route('account.password.index')->with('error', Lang::get('admin/users/table.lock_passwords'));
+            return redirect()->route('account.password.index')->with('error', trans('admin/users/table.lock_passwords'));
         }
 
         $user = Auth::user();
         if ($user->ldap_import=='1') {
-            return redirect()->route('account.password.index')->with('error', Lang::get('admin/users/message.error.password_ldap'));
+            return redirect()->route('account.password.index')->with('error', trans('admin/users/message.error.password_ldap'));
         }
 
         $rules = array(
