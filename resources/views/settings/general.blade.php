@@ -194,7 +194,7 @@
                                <div id="mailteststatus-error" class="text-danger"></div>
                            </div>
                            <div class="col-md-9 col-md-offset-3">
-                               <p class="help-block">This will attempt to send a test mail to {{ config('mail.from.address') }}.</p>
+                               <p class="help-block">This will attempt to send a test mail to {{ config('mail.reply_to.address') }}.</p>
                            </div>
 
                        </div>

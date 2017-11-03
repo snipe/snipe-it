@@ -61,7 +61,11 @@ return [
     |
     */
 
-    'from' => ['address' => env('MAIL_FROM_ADDR', null), 'name' => env('MAIL_FROM_NAME', null)],
+    'from' =>
+        [
+            'address' => env('MAIL_FROM_ADDR', null),
+            'name' => env('MAIL_FROM_NAME', null)
+        ],
 
 
     /*
@@ -76,8 +80,8 @@ return [
     */
 
     'reply_to' => [
-        'address' => env('MAIL_REPLYTO_ADDR', env('MAIL_FROM_ADDR', null)),
-        'name' => env('MAIL_REPLYTO_NAME', env('MAIL_FROM_NAME', null))
+        'address' => env('MAIL_REPLYTO_ADDR',null),
+        'name' => env('MAIL_REPLYTO_NAME', null)
     ],
 
     /*

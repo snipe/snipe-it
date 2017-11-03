@@ -439,10 +439,12 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
                     });
                 })
 
-                // Ugly, ugly code because Laravel sucks at self-joins
+                 //Ugly, ugly code because Laravel sucks at self-joins
                 ->orWhere(function ($query) use ($search) {
-                    $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
+                    $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE ? OR last_name LIKE ?)", ["%$search%", "%$search%"]);
                 });
+
+
         });
 
     }
@@ -473,7 +475,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     public function scopeOrderManager($query, $order)
     {
         // Left join here, or it will only return results with parents
-        return $query->leftJoin('users as manager', 'users.manager_id', '=', 'manager.id')->orderBy('manager.first_name', $order)->orderBy('manager.last_name', $order);
+        return $query->leftJoin('users as users_manager', 'users.manager_id', '=', 'users_manager.id')->orderBy('users_manager.first_name', $order)->orderBy('users_manager.last_name', $order);
     }
 
     /**
@@ -486,7 +488,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function scopeOrderLocation($query, $order)
     {
-        return $query->leftJoin('locations', 'users.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
+        return $query->leftJoin('locations as locations_users', 'users.location_id', '=', 'locations_users.id')->orderBy('locations_users.name', $order);
     }
 
 
@@ -500,6 +502,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function scopeOrderDepartment($query, $order)
     {
-        return $query->leftJoin('departments', 'users.department_id', '=', 'departments.id')->orderBy('departments.name', $order);
+        return $query->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')->orderBy('departments_users.name', $order);
     }
 }
