@@ -97,7 +97,7 @@
                                 <span>Assigned</span>
                               @endif
                             @else
-                              <a href="{{ route('licenses.checkout', $licensedto->id) }}" class="btn btn-info btn-sm">
+                              <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-info btn-sm">
                                 {{ trans('general.checkout') }}
                               </a>
                             @endif
