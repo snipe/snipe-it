@@ -90,14 +90,14 @@
                           @can('checkout', $licensedto)
                             @if (($licensedto->assigned_to) || ($licensedto->asset_id))
                               @if ($license->reassignable)
-                                <a href="{{ route('licenses.checkin', $licensedto->id) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('licenses.checkin', $licensedto->id) }}" class="btn btn-sm bg-purple">
                                   {{ trans('general.checkin') }}
                                 </a>
                               @else
                                 <span>Assigned</span>
                               @endif
                             @else
-                              <a href="{{ route('licenses.checkout', $licensedto->id) }}" class="btn btn-info btn-sm">
+                              <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-sm bg-maroon">
                                 {{ trans('general.checkout') }}
                               </a>
                             @endif

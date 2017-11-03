@@ -225,6 +225,10 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->fill($request->all());
 
+        if ($user->id == $request->input('manager_id')) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
+        }
+
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
         }

@@ -32,17 +32,15 @@ class LicensesTransformer
             'purchase_cost' => e($license->purchase_cost),
             'notes' => e($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
-            'total_seats' => (int) $license->seats,
-            'next_seat' => ($license->freeSeat()) ?  (int) $license->freeSeat()->id : null,
-            'remaining_qty' => (int) $license->remaincount(),
-            'min_qty' => $license->remaincount(),
+            'seats' => (int) $license->seats,
+            'free_seats_count' => (int) $license->free_seats_count,
             'license_name' =>  e($license->license_name),
             'license_email' => e($license->license_email),
             'maintained' => ($license->maintained == 1) ? true : false,
             'supplier' =>  ($license->supplier) ? ['id' => (int)  $license->supplier->id,'name'=> e($license->supplier->name)] : null,
             'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
-            'user_can_checkout' => (bool) ($license->remaincount() > 0),
+            'user_can_checkout' => (bool) ($license->free_seats_count > 0),
         ];
 
         $permissions_array['available_actions'] = [

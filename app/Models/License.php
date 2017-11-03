@@ -266,7 +266,9 @@ class License extends Depreciable
     public function availCount()
     {
         return $this->licenseSeatsRelation()
-            ->whereNull('asset_id');
+            ->whereNull('asset_id')
+            ->whereNull('assigned_to')
+            ->whereNull('deleted_at');
     }
 
     public function getAvailSeatsCountAttribute()
@@ -343,6 +345,15 @@ class License extends Depreciable
                     ->whereNull('assigned_to')
                     ->whereNull('asset_id')
                     ->first();
+    }
+
+    /*
+   * Get the next available free seat - used by
+   * the API to populate next_seat
+   */
+    public function freeSeats()
+    {
+        return $this->hasMany('\App\Models\LicenseSeat')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
     }
 
     public static function getExpiringLicenses($days = 60)

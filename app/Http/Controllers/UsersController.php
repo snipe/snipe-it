@@ -106,7 +106,6 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
             $data['password'] =  $request->input('password');
         }
-        // Update the user
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->locale = $request->input('locale');
@@ -278,6 +277,10 @@ class UsersController extends Controller
         try {
 
             $user = User::find($id);
+
+            if ($user->id == $request->input('manager_id')) {
+                return redirect()->back()->withInput()->with('error', 'You cannot be your own manager.');
+            }
             $this->authorize('update', $user);
             // Figure out of this user was an admin before this edit
             $orig_permissions_array = $user->decodePermissions();

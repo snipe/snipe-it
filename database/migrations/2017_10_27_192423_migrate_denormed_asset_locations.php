@@ -31,7 +31,7 @@ class MigrateDenormedAssetLocations extends Migration
         $assigned_user_assets = Asset::where('assigned_type',User::class)->whereNotNull('assigned_to')->get();
         \Log::debug('User-assigned assets:');
         foreach ($assigned_user_assets as $assigned_user_asset) {
-            if ($assigned_user_asset->assignedTo->userLoc) {
+            if (($assigned_user_asset->assignedTo) && ($assigned_user_asset->assignedTo->userLoc)) {
                 $new_location=$assigned_user_asset->assignedTo->userloc->id;
                 \Log::info(' They are in '.$assigned_user_asset->assignedTo->userloc->name.' which is id: '.$new_location);
             } else {

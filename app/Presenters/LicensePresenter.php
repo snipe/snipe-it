@@ -76,14 +76,14 @@ class LicensePresenter extends Presenter
                 "title" => trans('general.manufacturer'),
                 "formatter" => "manufacturersLinkObjFormatter",
             ], [
-                "field" => "total_seats",
+                "field" => "seats",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => trans('admin/accessories/general.total'),
             ], [
-                "field" => "remaining_qty",
+                "field" => "free_seats_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => trans('admin/accessories/general.remaining'),
             ], [
                 "field" => "purchase_date",

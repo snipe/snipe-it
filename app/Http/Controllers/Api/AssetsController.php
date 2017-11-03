@@ -282,7 +282,8 @@ class AssetsController extends Controller
             'assets.name',
             'assets.asset_tag',
             'assets.model_id',
-            ]))->with('model')->RTD();
+            'assets.status_id'
+            ])->with('model', 'assetstatus')->NotArchived());
 
 
         if ($request->has('search')) {
@@ -300,6 +301,10 @@ class AssetsController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($assets as $asset) {
             $asset->use_text = $asset->present()->fullName;
+            if ($asset->assetstatus->getStatuslabelType()=='pending') {
+                $asset->use_text = $asset->present()->fullName.' ('.$asset->assetstatus->getStatuslabelType().')';
+            }
+
             $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;
         }
 
