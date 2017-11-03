@@ -108,11 +108,11 @@ class SettingsController extends Controller
         if (!config('app.lock_passwords')) {
             try {
                 Mail::send('emails.test', [], function ($m) {
-                    $m->to(config('mail.from.address'), config('mail.from.name'));
+                    $m->to(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.test_email'));
                 });
-                return response()->json(['message' => 'Mail sent to '.config('mail.from.address')], 200);
+                return response()->json(['message' => 'Mail sent to '.config('mail.reply_to.address')], 200);
             } catch (Exception $e) {
                 return response()->json(['message' => $e->getMessage()], 500);
             }
