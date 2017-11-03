@@ -21,7 +21,7 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'licenseSeatsRelation', 'manufacturer', 'supplier'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'licenseseats', 'manufacturer', 'supplier')->withCount('licenseseats'));
 
         if ($request->has('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
