@@ -33,7 +33,7 @@ class LicensesTransformer
             'notes' => e($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
-            'free_seats_count' => $license->free_seats_count,
+            'free_seats_count' => (int) $license->free_seats_count,
             'license_name' =>  e($license->license_name),
             'license_email' => e($license->license_email),
             'maintained' => ($license->maintained == 1) ? true : false,
