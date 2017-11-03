@@ -77,14 +77,14 @@ class LicensesController extends Controller
 
 
         switch ($request->input('sort')) {
-            case 'manufacturer':
-                $licenses = $licenses->OrderManufacturer($order);
+                case 'manufacturer':
+                    $licenses = $licenses->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
                 break;
             case 'supplier':
-                $licenses = $licenses->OrderSupplier($order);
+                $licenses = $licenses->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
                 break;
             case 'company':
-                $licenses = $licenses->OrderCompany($order);
+                $licenses = $licenses->leftJoin('companies', 'licenses.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
                 break;
             default:
                 $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','license_name','license_email','free_seats_count','seats'];
@@ -95,6 +95,7 @@ class LicensesController extends Controller
         
 
         $total = $licenses->count();
+
         $licenses = $licenses->skip($offset)->take($limit)->get();
         return (new LicensesTransformer)->transformLicenses($licenses, $total);
 
