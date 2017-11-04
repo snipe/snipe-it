@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute は、取得済みです。',
     'uploaded'             => ':attribute のアップロードに失敗しました。',
     'url'                  => ':attribute フォーマットが不正です。',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "現在のパスワードが正しくありません。",
         'dumbpwd'          => 'そのパスワードはあまりにも脆弱です。',
         "statuslabel_type" => "有効なステータスラベルの種類を選択する必要があります。",
-        "unique_undeleted" => ":attribute は 一意の値である必要があります。",
     ],
 
     /*

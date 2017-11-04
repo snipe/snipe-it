@@ -2,14 +2,14 @@
 
     return [
     'accessories'			=> 'Aksesuarlar',
-    'activated'			=> 'Aktif edildi',
+    'activated'			    => 'Aktif edildi',
     'accessory'				=> 'Aksesuar',
-    'accessory_report'			=> 'Aksesuar Raporu',
+    'accessory_report'		=> 'Aksesuar Raporu',
     'action'                => 'Hareket',
     'activity_report'		=> 'Aktivite Raporu',
     'address'				=> 'Adres',
     'admin'					=> 'Yönetici',
-    'add_seats'     => 'Eklenen kişi sayısı',
+    'add_seats'             => 'Eklenen kişi sayısı',
     'all_assets'			=> 'Tüm Demirbaşlar',
     'all'       			=> 'Tümü',
     'archived'              => 'Arşivlenmiş',
@@ -40,9 +40,10 @@
     'checkout'  			=> 'Atama',
     'city'  				=> 'Şehir',
 	'click_here'			=> 'Buraya Tıklayın',
-    'companies'			=> 'Şirketler',
+    'clear_selection'		=> 'Clear Selection',
+    'companies'			    => 'Şirketler',
     'company'				=> 'Şirket',
-    'component'			=> 'Bileşen',
+    'component'			    => 'Bileşen',
     'components'			=> 'Bileşenler',
 	'complete'				=> 'Tamamla',
     'consumable'			=> 'Sarf Malzeme',
@@ -58,10 +59,10 @@
     'custom_report'         => 'Özel demirbaş raporu',
     'dashboard'				=> 'Pano',
     'days'      			=> 'günler',
-    'days_to_next_audit'        => 'Sonraki Denetime Günden Gün Sayısı',
+    'days_to_next_audit'    => 'Sonraki Denetime Günden Gün Sayısı',
     'date'					=> 'Tarih',
     'debug_warning'         => 'Uyarı!',
-    'debug_warning_text'         => 'Bu uygulama, hata ayıklamanın etkin olduğu üretim modunda çalışıyor. Bu, hassas verilerinizi, uygulamanıza dış dünyadan erişebilirse ortaya çıkarabilir. Ayarını yaparak hata ayıklama modunu devre dışı bırakın.  <code>APP_DEBUG</code> value in your <code>.env</code> file to <code>false</code>.
+    'debug_warning_text'    => 'Bu uygulama, hata ayıklamanın etkin olduğu üretim modunda çalışıyor. Bu, hassas verilerinizi, uygulamanıza dış dünyadan erişebilirse ortaya çıkarabilir. Ayarını yaparak hata ayıklama modunu devre dışı bırakın.  <code>APP_DEBUG</code> value in your <code>.env</code> file to <code>false</code>.
  
 Context | Request Context
 ',
@@ -92,6 +93,7 @@ Context | Request Context
     'history'  			    => 'Geçmiş',
     'history_for'  			=> 'Kullanıcı geçmişi',
     'id'  					=> 'Kimlik',
+    'image'                 => 'Image',
     'image_delete'         	=> 'Resmi sil',
     'image_upload'         	=> 'Resim yükle',
     'import'         	    => 'İçeri aktar',

@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Tài sản chưa được checkout, xin vui lòng thử lại',
         'success' 		=> 'Tài sản đã checkout thành công.',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.',
-        'not_available' => 'Tài sản đó không có sẵn để thanh toán!'
+        'not_available' => 'Tài sản đó không có sẵn để thanh toán!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

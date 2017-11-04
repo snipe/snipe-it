@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Ce bien n\'a pas été sorti, veuillez réessayer',
         'success' 		=> 'Ce bien a été sorti correctement.',
         'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
-        'not_available' => 'Ce bien n\'est pas disponible pour être sorti!'
+        'not_available' => 'Ce bien n\'est pas disponible pour être sorti!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Bate is nie nagegaan nie, probeer asseblief weer',
         'success' 		=> 'Die bate is suksesvol nagegaan.',
         'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.',
-        'not_available' => 'Die bate is nie beskikbaar vir die kassa nie!'
+        'not_available' => 'Die bate is nie beskikbaar vir die kassa nie!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Хөрөнгийг шалгаагүй байна, дахин оролдоно уу',
         'success' 		=> 'Акт амжилттай шалгасан.',
         'user_does_not_exist' => 'Энэ хэрэглэгч буруу байна. Дахин оролдоно уу.',
-        'not_available' => 'Энэ хөрөнгийг татаж авахад бэлэн биш байна!'
+        'not_available' => 'Энэ хөрөнгийг татаж авахад бэлэн биш байна!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

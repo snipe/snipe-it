@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'הנכס לא נבדק, נסה שוב',
         'success' 		=> 'הנכס הוצא בהצלחה.',
         'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.',
-        'not_available' => 'הנכס הזה אינו זמין לקופה!'
+        'not_available' => 'הנכס הזה אינו זמין לקופה!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

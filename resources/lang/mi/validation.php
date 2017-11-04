@@ -87,6 +87,7 @@ return array(
     'unique'               => 'Ko te: kua tangohia te huanga.',
     'uploaded'             => 'Ko te: ko te huanga i rahua te tuku.',
     'url'                  => 'Ko te: ko te hōputu huanga he muhu.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "He hē tō kupuhipa o nāianei",
         'dumbpwd'          => 'He noa rawa te kupuhipa.',
         "statuslabel_type" => "Me tīpako i te momo tahua tohu whaimana",
-        "unique_undeleted" => "Ko te: me tino ahurei te huanga.",
     ],
 
     /*

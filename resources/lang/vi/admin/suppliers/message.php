@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Nhà cung cấp không tồn tại.',
-    'assoc_users'	 => 'Nhà cung cấp này hiện tại đang liên kết với ít nhất một kiểu tài sản và không thể xóa. Xin vui lòng cập nhật kiểu tài sản để không còn liên kết đến nhà cung cấp này và thử lại. ',
+
 
     'create' => array(
         'error'   => 'Nhà cung cấp chưa được tạo, xin thử lại.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Bạn có chắc muốn xóa nhà cung cấp này?',
         'error'   => 'Có vấn đề xảy ra khi xóa nhà cung cấp. Xin thử lại.',
-        'success' => 'Nhà cung cấp đã xóa thành công.'
+        'success' => 'Nhà cung cấp đã xóa thành công.',
+        'assoc_assets'	 => 'Nhà cung cấp này hiện tại đang có liên kết với: asset_count tài sản và không thể xóa. Xin vui lòng cập nhật các tài sản để không còn liên kết với nhà cung cấp này và thử lại. ',
+        'assoc_licenses'	 => 'Nhà cung cấp này hiện tại đang có liên kết với: licenses_count license(s) và không thể xóa. Xin vui lòng cập nhật các licence để không còn liên kết với nhà cung cấp này và thử lại. ',
+        'assoc_maintenances'	 => 'Nhà cung cấp này hiện tại đang có liên kết với: asset_maintainces_count tài sản đang trong trạng thái bảo trì và không thể xóa. Xin vui lòng cập nhật các tài sản đó để không còn liên kết với nhà cung cấp này và thử lại. ',
     )
 
 );

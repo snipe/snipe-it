@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Kaore he kaiwhakarato.',
-    'assoc_users'	 => 'Kei te hono tenei kaiwhakarato ki te tauira kotahi, kaore e taea te muku. Tena koa whakahou i o tauira kia kaua e tuhi atu ki tenei kaihoko me te ngana ano.',
+
 
     'create' => array(
         'error'   => 'Kaore i hangaia te kaiwhakarato, tēnā whakamātau anō.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Kei te hiahia koe ki te muku i tenei kaiwhakarato?',
         'error'   => 'He raru kei te whakakore i te kaituku. Tena ngana ano.',
-        'success' => 'Kua mukua te kaihoko.'
+        'success' => 'Kua mukua te kaihoko.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

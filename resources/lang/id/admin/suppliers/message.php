@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Pemasok tidak ada.',
-    'assoc_users'	 => 'Saat ini pemasok tersebut terhubung dengan satu model dan tidak dapat di hapus. Silahkan perbarui model anda sehingga tidak terhubung dengan pemasok tersebut dan coba kembali. ',
+
 
     'create' => array(
         'error'   => 'Pemasok gagal di buat, silahkan coba kembali.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Apakah Anda yakin untuk menghapus pemasok ini?',
         'error'   => 'Terdapat masalah ketika menghapus pemasok. Silahkan coba kembali.',
-        'success' => 'Sukses menghapus pemasok.'
+        'success' => 'Sukses menghapus pemasok.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

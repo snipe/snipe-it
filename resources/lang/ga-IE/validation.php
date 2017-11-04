@@ -87,6 +87,7 @@ return array(
     'unique'               => 'An: tá tréith déanta cheana féin.',
     'uploaded'             => 'The: theip ar an tréith a uaslódáil.',
     'url'                  => 'Tá an fhormáid tréithbhail neamhbhailí.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Tá do phasfhocal reatha mícheart",
         'dumbpwd'          => 'Tá an focal faire sin ró-choitianta.',
         "statuslabel_type" => "Ní mór duit cineál lipéad stádas bailí a roghnú",
-        "unique_undeleted" => "An: Ní mór tréith a bheith uathúil.",
     ],
 
     /*

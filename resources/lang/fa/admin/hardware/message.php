@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'دارایی در بررسی نیست، لطفا دوباره امتحان کنید',
         'success' 		=> 'دارایی را بررسی کنید موفقیت.',
         'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.',
-        'not_available' => 'این دارایی برای پرداخت در دسترس نیست!'
+        'not_available' => 'این دارایی برای پرداخت در دسترس نیست!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

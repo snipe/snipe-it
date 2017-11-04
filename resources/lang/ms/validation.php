@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute telah diambil.',
     'uploaded'             => 'The: attribute gagal untuk dimuat naik.',
     'url'                  => ':attribute format tidak sah.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Kata laluan semasa anda tidak betul",
         'dumbpwd'          => 'Kata laluan itu terlalu umum.',
         "statuslabel_type" => "Anda mesti memilih jenis label status yang sah",
-        "unique_undeleted" => "The: atribut mestilah unik.",
     ],
 
     /*

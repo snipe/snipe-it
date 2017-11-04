@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Product is niet uitgecheckt, probeer het opnieuw',
         'success' 		=> 'Product is met succes uitgecheckt.',
         'user_does_not_exist' => 'De gebruiker is ongeldig. Probeer het opnieuw.',
-        'not_available' => 'Dat item is niet beschikbaar om uit te leveren!'
+        'not_available' => 'Dat item is niet beschikbaar om uit te leveren!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

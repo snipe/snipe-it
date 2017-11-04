@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute 已被採用',
     'uploaded'             => ':attribute 上傳失敗',
     'url'                  => ':attribute 格式不正確',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "當前密碼不正確！",
         'dumbpwd'          => '該密碼太常見。',
         "statuslabel_type" => "您必須選擇一個有效的狀態標籤",
-        "unique_undeleted" => ":attribute 必須是唯一值",
     ],
 
     /*

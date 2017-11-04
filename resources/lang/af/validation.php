@@ -87,6 +87,7 @@ return array(
     'unique'               => 'Die: Attribuut is reeds geneem.',
     'uploaded'             => 'Die: kenmerk kon nie opgelaai word nie.',
     'url'                  => 'Die: Attribuutformaat is ongeldig.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Jou huidige wagwoord is verkeerd",
         'dumbpwd'          => 'Daardie wagwoord is te algemeen.',
         "statuslabel_type" => "U moet 'n geldige statusetiket tipe kies",
-        "unique_undeleted" => "Die: Attribuut moet uniek wees.",
     ],
 
     /*

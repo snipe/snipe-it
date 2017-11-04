@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Laitteen luovutus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite luovutettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
-        'not_available' => 'Tätä omaisuutta ei ole saatavilla kassalle!'
+        'not_available' => 'Tätä omaisuutta ei ole saatavilla kassalle!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

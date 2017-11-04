@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Ifa alizange lihlolwe, sicela uzame futhi',
         'success' 		=> 'Ifa likhiphe ngempumelelo.',
         'user_does_not_exist' => 'Lo msebenzisi awuvumelekile. Ngicela uzame futhi.',
-        'not_available' => 'Le mali ayitholakali ukuhlolwa!'
+        'not_available' => 'Le mali ayitholakali ukuhlolwa!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

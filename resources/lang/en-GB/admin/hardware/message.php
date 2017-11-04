@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Asset was not checked out, please try again',
         'success' 		=> 'Asset checked out successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!'
+        'not_available' => 'That asset is not available for checkout!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

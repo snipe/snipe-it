@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute on jo käytössä.',
     'uploaded'             => 'Attribuutti ei onnistunut lataamaan.',
     'url'                  => ':attribute muotoilu on virheellinen.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Nykyinen salasanasi on virheellinen",
         'dumbpwd'          => 'Salasana on liian yleinen.',
         "statuslabel_type" => "Sinun on valittava kelvollinen tilamerkintyyppi",
-        "unique_undeleted" => "Ominaisuuden on oltava ainutlaatuinen.",
     ],
 
     /*

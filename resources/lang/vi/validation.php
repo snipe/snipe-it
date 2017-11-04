@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute đã sẵn sàng.',
     'uploaded'             => 'Thuộc tính: không thể tải lên.',
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Mật khẩu hiện tại của bạn không chính xác",
         'dumbpwd'          => 'Mật khẩu đó quá phổ biến.',
         "statuslabel_type" => "Bạn phải chọn một loại nhãn tình trạng hợp lệ",
-        "unique_undeleted" => "Thuộc tính: phải là duy nhất.",
     ],
 
     /*

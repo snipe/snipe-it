@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Tillgången utcheckades inte, försök igen',
         'success' 		=> 'Tillgången checkas ut framgångsrikt.',
         'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.',
-        'not_available' => 'Den tillgången är inte tillgänglig för kassan!'
+        'not_available' => 'Den tillgången är inte tillgänglig för kassan!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

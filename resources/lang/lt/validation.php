@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute jau užimtas.',
     'uploaded'             => 'Nepavyko įkelti atributo.',
     'url'                  => ':attribute formatas neteisingas.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Jūsų dabartinis slaptažodis yra neteisingas",
         'dumbpwd'          => 'Šis slaptažodis yra per dažnas.',
         "statuslabel_type" => "Turite pasirinkti tinkamą statuso etiketės tipą",
-        "unique_undeleted" => "Atributas turi būti unikalus.",
     ],
 
     /*

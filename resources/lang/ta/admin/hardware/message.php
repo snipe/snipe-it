@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'சொத்து சரிபார்க்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்',
         'success' 		=> 'சொத்து வெற்றிகரமாக சரிபார்க்கப்பட்டது.',
         'user_does_not_exist' => 'அந்த பயனர் தவறானது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
-        'not_available' => 'புதுப்பித்துக்காக அந்த சொத்து கிடைக்கவில்லை!'
+        'not_available' => 'புதுப்பித்துக்காக அந்த சொத்து கிடைக்கவில்லை!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

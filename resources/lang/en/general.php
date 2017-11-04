@@ -40,6 +40,7 @@
     'checkout'  			=> 'Checkout',
     'city'  				=> 'City',
 	'click_here'			=> 'Click here',
+    'clear_selection'		=> 'Clear Selection',
     'companies'			    => 'Companies',
     'company'				=> 'Company',
     'component'			    => 'Component',

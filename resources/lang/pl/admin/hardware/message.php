@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Nie mogę wypisać nabytku/zasobu, proszę spróbować ponownie.',
         'success' 		=> 'Przypisano nabytek/zasób.',
         'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.',
-        'not_available' => 'Ten składnik aktywów nie jest dostępny do zamówienia!'
+        'not_available' => 'Ten składnik aktywów nie jest dostępny do zamówienia!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

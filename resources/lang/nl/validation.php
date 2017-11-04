@@ -87,6 +87,7 @@ return array(
     'unique'               => 'Het veld :attribute is reeds in gebruik.',
     'uploaded'             => 'Uploaden van :attribute is mislukt.',
     'url'                  => 'Het formaat van :attribute is ongeldig.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Je huidige wachtwoord is incorrect",
         'dumbpwd'          => 'Dat wachtwoord is te veelvoorkomend.',
         "statuslabel_type" => "Selecteer een valide status label",
-        "unique_undeleted" => ":attribute moet uniek zijn.",
     ],
 
     /*

@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Piegādātājs neeksistē.',
-    'assoc_users'	 => 'Šis piegādātājs pašlaik ir saistīts ar vismaz vienu modeli, un to nevar izdzēst. Lūdzu, atjauniniet savus modeļus, lai vairs nenorādītu šo piegādātāju, un mēģiniet vēlreiz.',
+
 
     'create' => array(
         'error'   => 'Piegādātājs netika izveidots, lūdzu, mēģiniet vēlreiz.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Vai tiešām vēlaties dzēst šo piegādātāju?',
         'error'   => 'Radās problēma, izlaižot piegādātāju. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Piegādātājs tika veiksmīgi dzēsts.'
+        'success' => 'Piegādātājs tika veiksmīgi dzēsts.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );
