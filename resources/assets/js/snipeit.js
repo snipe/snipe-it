@@ -196,7 +196,7 @@ $(document).ready(function () {
             ajax: {
                 url: baseUrl + '/api/v1/' + endpoint + '/selectlist',
                 dataType: 'json',
-                delay: 100,
+                delay: 250,
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
