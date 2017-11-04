@@ -54,7 +54,12 @@ class Location extends SnipeModel
 
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'location_id');
+        return $this->hasMany('\App\Models\Asset', 'location_id')
+            ->whereHas('assetstatus', function ($query) {
+                    $query->where('status_labels.deployable', '=', 1)
+                        ->orWhere('status_labels.pending', '=', 1)
+                        ->orWhere('status_labels.archived', '=', 0);
+            });
     }
 
     public function rtd_assets()
