@@ -199,8 +199,6 @@ class AssetsController extends Controller
 
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
-        // FIXME: No idea why this is returning a Builder error on db_column_name.
-        // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
 
         if ($model->fieldset) {
