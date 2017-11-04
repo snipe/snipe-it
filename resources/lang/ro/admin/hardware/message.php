@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Activul nu a fost predat, va rugam incercati iar',
         'success' 		=> 'Activul a fost predat.',
         'user_does_not_exist' => 'Utilizatorul este invalid. Va rugam incercati iar.',
-        'not_available' => 'Activul respectiv nu este disponibil pentru checkout!'
+        'not_available' => 'Activul respectiv nu este disponibil pentru checkout!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute schon benutzt.',
     'uploaded'             => ':attribute konnte nicht hochgeladen werden.',
     'url'                  => ':attribute Format ist ungültig.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Ihr derzeitiges Passwort ist nicht korrekt",
         'dumbpwd'          => 'Das Passwort ist zu gebräuchlich.',
         "statuslabel_type" => "Sie müssen einen gültigen Statuslabel-Typ auswählen",
-        "unique_undeleted" => ":attribute muss eindeutig sein.",
     ],
 
     /*

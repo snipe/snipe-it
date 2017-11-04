@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Ativo não foi registrado, favor tentar novamente',
         'success' 		=> 'Ativo registrado com sucesso.',
         'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.',
-        'not_available' => 'Esse recurso não está disponível para checkout!'
+        'not_available' => 'Esse recurso não está disponível para checkout!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

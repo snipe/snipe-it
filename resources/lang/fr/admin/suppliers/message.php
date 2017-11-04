@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Le fournisseur n\'existe pas.',
-    'assoc_users'	 => 'Ce fournisseur est actuellement associé à au moins un modèle et ne peut être supprimé. Veuillez actualiser vos modèles pour ne plus référencer cette catégorie et réessayer. ',
+
 
     'create' => array(
         'error'   => 'Le fournisseur n\'a pas été créé, veuillez essayer à nouveau.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Êtes-vous sûr de vouloir supprimer ce fournisseur ?',
         'error'   => 'Un problème a eu lieu pendant la suppression du fournisseur. Veuillez essayer à nouveau.',
-        'success' => 'Le fournisseur a été supprimé avec succès.'
+        'success' => 'Le fournisseur a été supprimé avec succès.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

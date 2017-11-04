@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute sudah digunakan.',
     'uploaded'             => 'Atribut: gagal diupload.',
     'url'                  => 'Format :attribute tidak benar.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Kata sandi Anda saat ini salah",
         'dumbpwd'          => 'Password itu terlalu umum',
         "statuslabel_type" => "Anda harus memilih jenis label status yang valid",
-        "unique_undeleted" => "Atribut: harus unik.",
     ],
 
     /*

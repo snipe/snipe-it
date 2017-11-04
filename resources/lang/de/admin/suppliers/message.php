@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Lieferant ist nicht vorhanden.',
-    'assoc_users'	 => 'Diese Lieferant ist derzeit mindestens einem Modell zugeordnet und kann nicht gelöscht werden. Bitte aktualisieren Sie Ihre Modelle, um nicht mehr auf diesen Lieferant zu verweisen und versuchen Sie es erneut. ',
+
 
     'create' => array(
         'error'   => 'Lieferant wurde nicht erstellt, bitte versuchen Sie es erneut.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Sind Sie sicher, dass Sie diesen Lieferanten löschen möchten?',
         'error'   => 'Beim löschen des Lieferanten ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-        'success' => 'Lieferant wurde erfolgreich gelöscht.'
+        'success' => 'Lieferant wurde erfolgreich gelöscht.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

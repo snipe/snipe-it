@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'لم يتم سحب مادة العرض، يرجى إعادة المحاولة',
         'success' 		=> 'تم التحقق من الأصول بنجاح.',
         'user_does_not_exist' => 'هذا المستخدم غير صالح. حاول مرة اخرى.',
-        'not_available' => 'هذا الأصل غير متاح للخروج!'
+        'not_available' => 'هذا الأصل غير متاح للخروج!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

@@ -87,6 +87,7 @@ return array(
     'unique'               => 'L\' :attribute è già stato preso.',
     'uploaded'             => 'L\'attributo: non è riuscito a caricare.',
     'url'                  => 'Il formato dell\' :attribute è invalido.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "La tua password corrente non è corretta",
         'dumbpwd'          => 'Quella password è troppo comune.',
         "statuslabel_type" => "È necessario selezionare un tipo di etichetta di stato valido",
-        "unique_undeleted" => "L'attributo: deve essere univoco.",
     ],
 
     /*

@@ -87,6 +87,7 @@ return array(
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Your current password is incorrect",
         'dumbpwd'          => 'That password is too common.',
         "statuslabel_type" => "You must select a valid status label type",
-        "unique_undeleted" => "The :attribute must be unique.",
     ],
 
     /*

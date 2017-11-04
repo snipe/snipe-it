@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Não foi possível alocar o artigo, por favor tente novamente',
         'success' 		=> 'Artigo alocado com sucesso.',
         'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.',
-        'not_available' => 'Esse recurso não está disponível para checkout!'
+        'not_available' => 'Esse recurso não está disponível para checkout!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

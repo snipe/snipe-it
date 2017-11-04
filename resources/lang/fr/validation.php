@@ -87,6 +87,7 @@ return array(
     'unique'               => 'Cet-te :attribute a déjà été pris-e.',
     'uploaded'             => 'L\'attribut: n\'a pas pu télécharger.',
     'url'                  => 'Le format de cet-te :attribute est invalide.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Votre mot de passe actuel est incorrect",
         'dumbpwd'          => 'Ce mot de passe est trop commun.',
         "statuslabel_type" => "Vous devez sélectionner un type d'étiquette de statut valide",
-        "unique_undeleted" => "L'attribut: doit être unique.",
     ],
 
     /*

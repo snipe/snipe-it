@@ -87,6 +87,7 @@ return array(
     'unique'               => 'Attributtet :attribute er allerede tatt.',
     'uploaded'             => 'Atribbutet :attribute kunne ikke lastes opp.',
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Gjeldende passord er feil",
         'dumbpwd'          => 'Passordet er for vanlig.',
         "statuslabel_type" => "Du må velge en gyldig statusetikett-type",
-        "unique_undeleted" => ":attribute må være unik.",
     ],
 
     /*

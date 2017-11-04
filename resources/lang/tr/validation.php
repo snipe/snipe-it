@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute zaten alınmış.',
     'uploaded'             => ': Özniteliği yüklenemedi.',
     'url'                  => ':attribute biçim geçersiz.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Geçerli şifre yanlış",
         'dumbpwd'          => 'Bu şifre çok yaygındır.',
         "statuslabel_type" => "Geçerli bir durum etiketi türü seçmelisiniz",
-        "unique_undeleted" => ": Özniteliği benzersiz olmalıdır.",
     ],
 
     /*

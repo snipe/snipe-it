@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute został już wzięty.',
     'uploaded'             => 'Nie udało się przesłać atrybutu:.',
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Twoje bieżące hasło jest niepoprawne",
         'dumbpwd'          => 'To hasło jest zbyt powszechne.',
         "statuslabel_type" => "Musisz wybrać odpowiedni typ etykiety statusu",
-        "unique_undeleted" => "Atrybut: musi być unikatowy.",
     ],
 
     /*

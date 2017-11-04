@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Demirbaş çıkışı yapılamadı. Lütfen tekrar deneyin',
         'success' 		=> 'Demirbaş çıkışı yapıldı.',
         'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
-        'not_available' => 'Bu varlık için atama yapılamaz!'
+        'not_available' => 'Bu varlık için atama yapılamaz!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

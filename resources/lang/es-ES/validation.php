@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute ya ha sido introducido.',
     'uploaded'             => 'El atributo: no se pudo cargar.',
     'url'                  => ':attribute formato incorrecto.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Tu contraseña actual es incorrecta",
         'dumbpwd'          => 'Esa contraseña es muy común.',
         "statuslabel_type" => "Debe seleccionar un tipo de etiqueta de estado válido.",
-        "unique_undeleted" => "El atributo debe ser único.",
     ],
 
     /*

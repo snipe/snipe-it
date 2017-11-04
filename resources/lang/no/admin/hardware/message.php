@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Eiendel ble ikke sjekket ut. Prøv igjen',
         'success' 		=> 'Vellykket utsjekk av eiendel.',
         'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.',
-        'not_available' => 'Den eiendelen er ikke tilgjengelig til å sjekkes ut!'
+        'not_available' => 'Den eiendelen er ikke tilgjengelig til å sjekkes ut!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Tedarikçi mevcut değil.',
-    'assoc_users'	 => 'Bu kategori en az 1 adet model ile ilişkili ve silinemez. Lütfen Modelleri güncelleyerek bu kategori ile bağını kesin ve tekrar deneyin. ',
+
 
     'create' => array(
         'error'   => 'Tedarikçi oluşturulamadı, lütfen tekrar deneyin.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Tedarikçiyi silmek istediğinize emin misiniz?',
         'error'   => 'Tedarikçi silinirken bir hata oluştu. Lütfen tekrar deneyin.',
-        'success' => 'Tedarikçi silindi.'
+        'success' => 'Tedarikçi silindi.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

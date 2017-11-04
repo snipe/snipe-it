@@ -87,6 +87,7 @@ return array(
     'unique'               => 'ویژگی در حال حاضر گرفته شده است.',
     'uploaded'             => 'ویژگی: attribute failed to upload.',
     'url'                  => 'شکل ویژگی نامعتبر است.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "رمز عبور فعلی شما اشتباه است",
         'dumbpwd'          => 'این رمز عبور خیلی رایج است',
         "statuslabel_type" => "شما باید نوع برچسب معتبر را انتخاب کنید",
-        "unique_undeleted" => ": attribute باید منحصر به فرد باشد.",
     ],
 
     /*

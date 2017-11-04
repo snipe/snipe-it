@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Umphakeli akekho.',
-    'assoc_users'	 => 'Lo mhlinzeki okwamanje uhlotshaniswa okungenani oyisibonelo esisodwa futhi angeke asuswe. Sicela ubuyekeze amamodeli akho ukuthi ungasaphinde ubhekisele kulo mhlinzeki futhi uzame futhi.',
+
 
     'create' => array(
         'error'   => 'Umphakeli akazange adalwe, sicela uzame futhi.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Uqinisekile ukuthi ufisa ukususa lo mphakeli?',
         'error'   => 'Kube nenkinga yokususa umphakeli. Ngicela uzame futhi.',
-        'success' => 'Umphakeli ususiwe ngempumelelo.'
+        'success' => 'Umphakeli ususiwe ngempumelelo.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

@@ -87,6 +87,7 @@ return array(
     'unique'               => ':attribute este deja folosit.',
     'uploaded'             => 'Atributul: nu a reușit să se încarce.',
     'url'                  => 'Formatul :attribute nu este valid.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Parola curentă este incorectă",
         'dumbpwd'          => 'Această parolă este prea obișnuită.',
         "statuslabel_type" => "Trebuie să selectați un tip de etichetă de stare validă",
-        "unique_undeleted" => "Atributul: trebuie să fie unic.",
     ],
 
     /*

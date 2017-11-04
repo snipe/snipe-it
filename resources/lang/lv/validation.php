@@ -87,6 +87,7 @@ return array(
     'unique'               => 'Atribūts jau ir pieņemts.',
     'uploaded'             => 'Atribūts neizdevās augšupielādēt.',
     'url'                  => 'Atribūta formāts nav derīgs.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "Jūsu pašreizējā parole nav pareiza",
         'dumbpwd'          => 'Šī parole ir pārāk izplatīta.',
         "statuslabel_type" => "Jums ir jāizvēlas derīgs statusa etiķetes veids",
-        "unique_undeleted" => "Atribūtam jābūt unikālam.",
     ],
 
     /*

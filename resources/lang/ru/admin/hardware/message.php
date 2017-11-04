@@ -62,7 +62,8 @@ return array(
         'error'   		=> 'Актив не был привязан, пожалуйста попробуйте снова',
         'success' 		=> 'Актив успешно привязан.',
         'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.',
-        'not_available' => 'Данный актив недоступен к выдаче!'
+        'not_available' => 'Данный актив недоступен к выдаче!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

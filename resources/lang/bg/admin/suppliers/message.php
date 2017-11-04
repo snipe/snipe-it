@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Несъществуващ доставчик.',
-    'assoc_users'	 => 'Този доставчик е асоцииран с поне един от моделите и не може да бъде изтрит. Моля, променете връзките на моделите по отношение на този доставчик и опитайте отново. ',
+
 
     'create' => array(
         'error'   => 'Доставчикът не беше създаден. Моля, опитайте отново.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Сигурни ли сте, че искате да изтриете този доставчик?',
         'error'   => 'Възникна проблем при изтриване на доставчика. Моля, опитайте отново.',
-        'success' => 'Доставчикът е изтрит.'
+        'success' => 'Доставчикът е изтрит.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Verskaffer bestaan ​​nie.',
-    'assoc_users'	 => 'Hierdie verskaffer is tans geassosieer met ten minste een model en kan nie uitgevee word nie. Dateer asseblief jou modelle op om nie langer hierdie verskaffer te verwys nie en probeer weer.',
+
 
     'create' => array(
         'error'   => 'Verskaffer is nie geskep nie, probeer asseblief weer.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Is jy seker jy wil hierdie verskaffer uitvee?',
         'error'   => 'Daar was \'n probleem met die verwydering van die verskaffer. Probeer asseblief weer.',
-        'success' => 'Verskaffer is suksesvol verwyder.'
+        'success' => 'Verskaffer is suksesvol verwyder.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );

@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'ไม่ได้ตรวจสอบเนื้อหาโปรดลองอีกครั้ง',
         'success' 		=> 'ตรวจสอบสินทรัพย์เรียบร้อยแล้ว',
         'user_does_not_exist' => 'ผู้ใช้รายนั้นไม่ถูกต้อง กรุณาลองอีกครั้ง.',
-        'not_available' => 'เนื้อหาดังกล่าวไม่สามารถใช้ได้สำหรับเช็คเอาท์!'
+        'not_available' => 'เนื้อหาดังกล่าวไม่สามารถใช้ได้สำหรับเช็คเอาท์!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

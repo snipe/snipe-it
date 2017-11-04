@@ -87,6 +87,7 @@ return array(
     'unique'               => 'A :attribute már foglalt.',
     'uploaded'             => 'A: attribútum nem sikerült feltölteni.',
     'url'                  => 'Az :attribute formátuma érvénytelen.',
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,6 @@ return array(
         "hashed_pass"      => "A jelenlegi jelszava helytelen",
         'dumbpwd'          => 'Ez a jelszó túl gyakori.',
         "statuslabel_type" => "Meg kell határoznia egy érvényes állapotcímke típust",
-        "unique_undeleted" => "A: attribútumnak egyedinek kell lennie.",
     ],
 
     /*

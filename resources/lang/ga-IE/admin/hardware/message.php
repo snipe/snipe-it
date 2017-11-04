@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Níor sheiceáil amach an tsócmhainn, déan iarracht arís',
         'success' 		=> 'Seiceáil sheiceáil amach go rathúil.',
         'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.',
-        'not_available' => 'Níl an tsócmhainn sin ar fáil le haghaidh seiceáil!'
+        'not_available' => 'Níl an tsócmhainn sin ar fáil le haghaidh seiceáil!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

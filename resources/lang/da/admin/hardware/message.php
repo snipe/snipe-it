@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Akten blev ikke tjekket ud, prøv igen',
         'success' 		=> 'Asset tjekket ud med succes.',
         'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
-        'not_available' => 'Det aktiv er ikke tilgængeligt for kassen!'
+        'not_available' => 'Det aktiv er ikke tilgængeligt for kassen!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

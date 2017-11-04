@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Kaore i teahia te taketake, me ngana ano',
         'success' 		=> 'Kua tohua te tahua.',
         'user_does_not_exist' => 'He muhu te kaiwhakamahi. Tena ngana ano.',
-        'not_available' => 'Kaore i te wātea te taonga mo te takitaki!'
+        'not_available' => 'Kaore i te wātea te taonga mo te takitaki!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

@@ -61,7 +61,8 @@ return array(
         'error'   		=> 'Активът не беше изписан. Моля опитайте отново.',
         'success' 		=> 'Активът изписан успешно.',
         'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.',
-        'not_available' => 'Този актив не е наличен за отписване!'
+        'not_available' => 'Този актив не е наличен за отписване!',
+        'no_assets_selected' => 'You must select at least one asset from the list'
     ),
 
     'checkin' => array(

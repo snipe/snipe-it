@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Leverandør finnes ikke.',
-    'assoc_users'	 => 'Denne leverandøren er tilknyttet minst en modell og kan ikke slettes. Oppdater modellene dine til ikke å bruke denne leverandøren og prøv igjen. ',
+
 
     'create' => array(
         'error'   => 'Leverandør ble ikke opprettet. Prøv igjen.',
@@ -18,7 +18,10 @@ return array(
     'delete' => array(
         'confirm'   => 'Er du sikker på at du vil slette denne leverandøren?',
         'error'   => 'Det oppstod et problem under sletting av leverandør. Prøv igjen.',
-        'success' => 'Sletting av leverandør vellykket.'
+        'success' => 'Sletting av leverandør vellykket.',
+        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
+        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
+        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
     )
 
 );
