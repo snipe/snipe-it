@@ -25,10 +25,14 @@ class CustomField extends Model
     ];
 
     public $rules = [
-      "name" => "required|unique:custom_fields"
+        "name" => "required|unique:custom_fields",
+        "format" => "nullable|valid_regex",
     ];
 
-    public static $table_name="assets";
+    // This is confusing, since it's actually the custom fields table that
+    // we're usually modifying, but since we alter the assets table, we have to
+    // say that here
+    public static $table_name = "assets";
 
     public static function name_to_db_name($name)
     {
@@ -38,7 +42,6 @@ class CustomField extends Model
     public static function boot()
     {
         self::created(function ($custom_field) {
-
 
             // column exists - nothing to do here
             if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
