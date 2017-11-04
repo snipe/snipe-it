@@ -421,6 +421,8 @@ class AssetsController extends Controller
                 $asset->requestable = $request->get('requestable') : '';
             ($request->has('rtd_location_id')) ?
                 $asset->rtd_location_id = $request->get('rtd_location_id') : '';
+            ($request->has('rtd_location_id')) ?
+                $asset->location_id = $request->get('rtd_location_id') : '';
             ($request->has('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
@@ -438,14 +440,17 @@ class AssetsController extends Controller
 
                 if ($request->get('assigned_user')) {
                     $target = User::find(request('assigned_user'));
+                    $location = $target->location_id;
                 } elseif ($request->get('assigned_asset')) {
                     $target = Asset::find(request('assigned_asset'));
+                    $location = $target->location_id;
                 } elseif ($request->get('assigned_location')) {
                     $target = Location::find(request('assigned_location'));
+                    $location = $target->id;
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')));
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
                 }
 
                 return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
@@ -512,14 +517,18 @@ class AssetsController extends Controller
         ];
         if ($request->has('user_id')) {
             $target = User::find($request->input('user_id'));
+            $location = $target->location_id;
             $error_payload['target_id'] = $request->input('user_id');
             $error_payload['target_type'] = User::class;
         // Don't let the user check an asset out to itself
         } elseif ($request->has('asset_id')) {
             $target = Asset::where('id','!=',$asset_id)->find($request->input('asset_id'));
+            $location = $target->location_id;
             $error_payload['target_id'] = $request->input('asset_id');
             $error_payload['target_type'] = Asset::class;
         } elseif ($request->has('location_id')) {
+            $target = Location::find($request->input('location_id'));
+            $location = $target->id;
             $target = Location::find($request->input('location_id'));
             $error_payload['target_id'] = $request->input('location_id');
             $error_payload['target_type'] = Location::class;
@@ -541,13 +550,11 @@ class AssetsController extends Controller
             $asset->location_id = $target->rtd_location_id;
         }
 
-        // Overwrite that if the target has a location ID though
-        if ($target->location_id!='') {
-            $asset->location_id = $target->location_id;
-        }
+        $asset->location_id = $location;
+
         
 
-        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name)) {
+        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $location)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
@@ -563,7 +570,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function checkin($asset_id)
+    public function checkin(Request $request, $asset_id)
     {
         $this->authorize('checkin', Asset::class);
         $asset = Asset::findOrFail($asset_id);
@@ -581,6 +588,13 @@ class AssetsController extends Controller
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
         $asset->name = e(Input::get('name'));
+        $asset->location_id =  $asset->rtd_location_id;
+
+        if ($request->has('location_id')) {
+            $asset->location_id =  $request->input('location_id');
+        }
+
+        $asset->location_id = $asset->rtd_location_id;
 
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));
