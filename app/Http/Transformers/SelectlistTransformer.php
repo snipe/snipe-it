@@ -34,7 +34,10 @@ class SelectlistTransformer
 
         // This is weird and awful, but the only way I can find to allow the user to
         // clear the selection - @snipe
-        array_unshift($items_array, ['id' =>'', 'text'=> trans('general.clear_selection')]);
+        if (count($items_array) > 0) {
+            array_unshift($items_array, ['id' =>'', 'text'=> trans('general.clear_selection')]);
+        }
+
         $results = [
             'items' => $items_array,
             'pagination' =>
