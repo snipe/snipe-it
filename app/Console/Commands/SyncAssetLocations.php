@@ -53,7 +53,7 @@ class SyncAssetLocations extends Command
         $output['info'][] = 'There are '.$rtd_assets->count().' unassigned assets.';
 
         foreach ($rtd_assets as $rtd_asset) {
-           //  $output['info'][] = 'Setting Unassigned Asset ' . $rtd_asset->id . ' ('.$rtd_asset->asset_tag.') to  location: ' . $rtd_asset->rtd_location_id . " because their default location is: " . $rtd_asset->rtd_location_id;
+             $output['info'][] = 'Setting Unassigned Asset ' . $rtd_asset->id . ' ('.$rtd_asset->asset_tag.') to  location: ' . $rtd_asset->rtd_location_id . " because their default location is: " . $rtd_asset->rtd_location_id;
             $rtd_asset->location_id=$rtd_asset->rtd_location_id;
             $rtd_asset->unsetEventDispatcher();
             $rtd_asset->save();
