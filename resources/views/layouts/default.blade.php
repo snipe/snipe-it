@@ -772,6 +772,7 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
 
+            // This javascript handles saving the state of the menu (expanded or not)
             $('body').bind('expanded.pushMenu', function() {
                 $.ajax({
                     type: 'GET',
@@ -791,6 +792,7 @@
 
         });
 
+        // Initiate the ekko lightbox
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
