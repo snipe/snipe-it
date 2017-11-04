@@ -112,7 +112,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('location_id')) {
-            $assets->ByLocationId($request->input('location_id'));
+            $assets->where('assets.location_id', '=', $request->input('location_id'));
         }
 
         if ($request->has('supplier_id')) {
