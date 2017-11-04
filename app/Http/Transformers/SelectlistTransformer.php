@@ -19,7 +19,7 @@ class SelectlistTransformer
 
     public function transformSelectlist (LengthAwarePaginator $select_items)
     {
-
+        $items_array=[];
 
         // Loop through the paginated collection to set the array values
         foreach ($select_items as $select_item) {
