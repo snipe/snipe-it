@@ -289,6 +289,11 @@ class AssetsController extends Controller
         $asset->requestable = $request->has('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
 
+        if ($asset->assigned_to=='') {
+            $asset->location_id = $request->input('rtd_location_id', null);
+        }
+
+
         if ($request->has('image_delete')) {
             unlink(public_path().'/uploads/assets/'.$asset->image);
             $asset->image = '';
