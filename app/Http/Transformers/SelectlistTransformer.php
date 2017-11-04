@@ -19,7 +19,7 @@ class SelectlistTransformer
 
     public function transformSelectlist (LengthAwarePaginator $select_items)
     {
-        $items_array = [];
+
 
         // Loop through the paginated collection to set the array values
         foreach ($select_items as $select_item) {
@@ -32,6 +32,9 @@ class SelectlistTransformer
 
         }
 
+        // This is weird and awful, but the only way I can find to allow the user to
+        // clear the selection - @snipe
+        array_unshift($items_array, ['id' =>'', 'text'=> trans('general.clear_selection')]);
         $results = [
             'items' => $items_array,
             'pagination' =>
