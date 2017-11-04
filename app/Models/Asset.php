@@ -144,7 +144,7 @@ class Asset extends Depreciable
      * @return bool
      */
     //FIXME: The admin parameter is never used. Can probably be removed.
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
+    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
     {
         if (!$target) {
             return false;
@@ -161,6 +161,10 @@ class Asset extends Depreciable
 
         if ($name != null) {
             $this->name = $name;
+        }
+
+        if ($location != null) {
+            $this->location_id = $location;
         }
 
         if ($this->requireAcceptance()) {
