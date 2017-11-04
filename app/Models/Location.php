@@ -92,7 +92,6 @@ class Location extends SnipeModel
     public function assignedAssets()
     {
         return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
-        // return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
     public function setLdapOuAttribute($ldap_ou)
