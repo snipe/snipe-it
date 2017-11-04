@@ -160,6 +160,10 @@ class AssetsController extends Controller
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
 
+        if ($asset->assigned_to=='') {
+            $asset->location_id = $request->input('rtd_location_id', null);
+        }
+
         // Create the image (if one was chosen.)
         if ($request->has('image')) {
             $image = $request->input('image');
@@ -216,15 +220,20 @@ class AssetsController extends Controller
             // Was the asset created?
         if ($asset->save()) {
             $asset->logCreate();
+
             if (request('assigned_user')) {
                 $target = User::find(request('assigned_user'));
+                $location = $target->location_id;
             } elseif (request('assigned_asset')) {
                 $target = Asset::find(request('assigned_asset'));
+                $location = $target->location_id;
             } elseif (request('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
+                $location = $target->id;
             }
+
             if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')), $location);
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
@@ -549,6 +558,8 @@ class AssetsController extends Controller
             $asset->status_id =  e(Input::get('status_id'));
         }
 
+        $asset->location_id = $asset->rtd_location_id;
+        
         if (Input::has('location_id')) {
             $asset->location_id =  e(Input::get('location_id'));
         }
