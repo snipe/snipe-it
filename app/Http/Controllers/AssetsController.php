@@ -160,6 +160,10 @@ class AssetsController extends Controller
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
 
+        if ($asset->assigned_to=='') {
+            $asset->location_id = $request->input('rtd_location_id', null);
+        }
+
         // Create the image (if one was chosen.)
         if ($request->has('image')) {
             $image = $request->input('image');
@@ -199,8 +203,6 @@ class AssetsController extends Controller
 
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
-        // FIXME: No idea why this is returning a Builder error on db_column_name.
-        // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
 
         if ($model->fieldset) {
@@ -218,15 +220,20 @@ class AssetsController extends Controller
             // Was the asset created?
         if ($asset->save()) {
             $asset->logCreate();
+
             if (request('assigned_user')) {
                 $target = User::find(request('assigned_user'));
+                $location = $target->location_id;
             } elseif (request('assigned_asset')) {
                 $target = Asset::find(request('assigned_asset'));
+                $location = $target->location_id;
             } elseif (request('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
+                $location = $target->id;
             }
+
             if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
+                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e(Input::get('name')), $location);
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
@@ -288,6 +295,11 @@ class AssetsController extends Controller
         // If the box isn't checked, it's not in the request at all.
         $asset->requestable = $request->has('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
+
+        if ($asset->assigned_to=='') {
+            $asset->location_id = $request->input('rtd_location_id', null);
+        }
+
 
         if ($request->has('image_delete')) {
             unlink(public_path().'/uploads/assets/'.$asset->image);
@@ -546,6 +558,8 @@ class AssetsController extends Controller
             $asset->status_id =  e(Input::get('status_id'));
         }
 
+        $asset->location_id = $asset->rtd_location_id;
+        
         if (Input::has('location_id')) {
             $asset->location_id =  e(Input::get('location_id'));
         }

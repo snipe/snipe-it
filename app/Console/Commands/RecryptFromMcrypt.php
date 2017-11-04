@@ -49,7 +49,7 @@ class RecryptFromMcrypt extends Command
         // If not, we can try to use the current APP_KEY if looks like it's old
         $legacy_key = env('LEGACY_APP_KEY');
         $key_parts = explode(':', $legacy_key);
-        $legacy_cipher = env('LEGACY_CIPHER');
+        $legacy_cipher = env('LEGACY_CIPHER', 'rijndael-256');
         $errors = array();
 
         if (!$legacy_key) {
