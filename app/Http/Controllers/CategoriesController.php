@@ -71,9 +71,7 @@ class CategoriesController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
-        // create a new model instance
         $category = new Category();
-        // Update the category data
         $category->name                 = $request->input('name');
         $category->category_type        = $request->input('category_type');
         $category->eula_text            = $request->input('eula_text');

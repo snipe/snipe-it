@@ -75,6 +75,41 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
+
+        // Yo dawg. I heard you like validators.
+        // This validates the custom validator regex in custom fields.
+        // We're just checking that the regex won't throw an exception, not
+        // that it's actually correct for what the user intended.
+
+        Validator::extend('valid_regex', function ($attribute, $value, $parameters, $validator) {
+
+            // Make sure it's not just an ANY format
+            if ($value!='') {
+
+               //  Check that the string starts with regex:
+                if (strpos($value, 'regex:') === FALSE) {
+                    return false;
+                }
+
+                $test_string = 'My hovercraft is full of eels';
+
+                // We have to stip out the regex: part here to check with preg_match
+                $test_pattern = str_replace('regex:','', $value);
+
+                try {
+                    preg_match($test_pattern, $test_string, $matches);
+                    return true;
+                } catch (\Exception $e) {
+                    return false;
+                }
+
+            }
+            return true;
+
+        });
+
+
+
         // Share common setting variables with all views.
         view()->composer('*', function ($view) {
             $view->with('snipeSettings', \App\Models\Setting::getSettings());
