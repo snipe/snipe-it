@@ -25,10 +25,13 @@ class CustomField extends Model
     ];
 
     public $rules = [
-      "name" => "required|unique:custom_fields"
+        "name" => "required|unique:custom_fields"
     ];
 
-    public static $table_name="assets";
+    // This is confusing, since it's actually the custom fields table that
+    // we're usually modifying, but since we alter the assets table, we have to
+    // say that here
+    public static $table_name = "assets";
 
     public static function name_to_db_name($name)
     {
@@ -38,7 +41,6 @@ class CustomField extends Model
     public static function boot()
     {
         self::created(function ($custom_field) {
-
 
             // column exists - nothing to do here
             if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
@@ -62,14 +64,17 @@ class CustomField extends Model
                     return true;
                 }
 
+                // This is just a dumb thing we have to include because Laraval/Doctrine doesn't
+                // play well with enums or a table that EVER had enums. :(
                 $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
                 $platform->registerDoctrineTypeMapping('enum', 'string');
-                
+
+                // Rename the field if the name has changed
                 Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal("name")), $custom_field->convertUnicodeDbSlug());
                 });
 
-
+                // Save the updated column name to the custom fields table
                 $custom_field->db_column = $custom_field->convertUnicodeDbSlug();
                 $custom_field->save();
 
@@ -78,6 +83,8 @@ class CustomField extends Model
             return true;
         });
 
+
+        // Drop the assets column if we've deleted it from custom fields
         self::deleting(function ($custom_field) {
             return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
                 $table->dropColumn($custom_field->convertUnicodeDbSlug());

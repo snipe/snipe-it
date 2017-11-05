@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomFieldRequest;
 use View;
 use App\Models\CustomFieldset;
 use App\Models\CustomField;
@@ -69,7 +70,7 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function store(Request $request)
+    public function store(CustomFieldRequest $request)
     {
         $field = new CustomField([
             "name" => $request->get("name"),
@@ -81,27 +82,19 @@ class CustomFieldsController extends Controller
         ]);
 
 
-
         if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));
         }
 
-
-        $validator = Validator::make(Input::all(), $field->rules);
-
-        if ($validator->passes()) {
-            $results = $field->save();
-            if ($results) {
-                return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
-            } else {
-                dd($field);
-                return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
-            }
+        if ($field->save()) {
+            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
         } else {
-            return redirect()->back()->withInput()->withErrors($validator);
+           // dd($field);
+            return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
         }
+
     }
 
 
@@ -169,7 +162,7 @@ class CustomFieldsController extends Controller
     * @since [v4.0]
     * @return Redirect
     */
-    public function update(Request $request, $id)
+    public function update(CustomFieldRequest $request, $id)
     {
         $field =  CustomField::find($id);
 
@@ -186,13 +179,12 @@ class CustomFieldsController extends Controller
             $field->format = e($request->get("format"));
         }
 
-        $validator = Validator::make(Input::all(), $field->rules);
 
         if ($field->save()) {
            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.update.success'));
         }
 
-       return redirect()->back()->withInput()->withErrors($validator);
+        return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.update.error'));
     }
 
 
