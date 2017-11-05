@@ -25,8 +25,7 @@ class CustomField extends Model
     ];
 
     public $rules = [
-        "name" => "required|unique:custom_fields",
-        "format" => "nullable|valid_regex",
+        "name" => "required|unique:custom_fields"
     ];
 
     // This is confusing, since it's actually the custom fields table that
