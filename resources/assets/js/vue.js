@@ -7,6 +7,17 @@
 require('../../../node_modules/jquery-ui-bundle/jquery-ui.min.js');
 require('./bootstrap');
 
+import vuei18n from 'vue-i18n';
+import Locales from './vue-i18n-locales.generated.js';
+
+Vue.use(vuei18n);
+Vue.config.lang=Laravel.lang;
+Vue.i18n = new vuei18n({
+    locale: Laravel.lang,
+    fallbackLocale: 'en',
+    messages: Locales
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

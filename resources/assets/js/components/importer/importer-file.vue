@@ -7,10 +7,10 @@ tr {
 <template>
     <tr v-show="processDetail">
         <td colspan="3">
-            <h4 class="modal-title">Import File:</h4>
+            <h4 class="modal-title">{{ $t('importer.import.import_file') }}</h4>
             <div class="dynamic-form-row">
                 <div class="col-md-4 col-xs-12">
-                    <label for="import-type">Import Type:</label>
+                    <label for="import-type">{{ $t('importer.import.import_type') }}:</label>
                 </div>
                 <div class="col-md-4 col-xs-12">
                     <select2 :options="options.importTypes" v-model="options.importType">
@@ -20,7 +20,7 @@ tr {
             </div>
             <div class="dynamic-form-row">
                 <div class="col-md-4 col-xs-12">
-                    <label for="import-update">Update Existing Values?:</label>
+                    <label for="import-update">{{ $t('importer.import.update_existing') }}</label>
                 </div>
                 <div class="col-md-4 col-xs-12">
                     <input type="checkbox" name="import-update" v-model="options.update">
@@ -30,9 +30,9 @@ tr {
             <div class="col-md-12" style="padding-top: 30px;">
             <table class="table">
             <thead>
-                <th>Header Field</th>
-                <th>Import Field</th>
-                <th>Sample Value</th>
+                <th>{{ $t('importer.import.header_field') }}</th>
+                <th>{{ $t('importer.import.import_field') }}</th>
+                <th>{{ $t('importer.import.header_sample') }}</th>
             </thead>
             <tbody>
             <template v-for="(header, index) in file.header_row">
@@ -43,7 +43,7 @@ tr {
                     <td>
                         <div required>
                             <select2 :options="columns" v-model="columnMappings[header]">
-                                <option value="0">Do Not Import</option>
+                                <option value="0">{{ $t('importer.import.no_import') }}</option>
                             </select2>
                         </div>
                     </td>
@@ -58,8 +58,8 @@ tr {
         </td>
 
         <td>
-            <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
-            <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
+            <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">{{ $t('general.cancel') }}</button>
+            <button type="submit" class="btn btn-sm btn-primary" @click="postSave">{{ $t('importer.import.process') }}</button>
             <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="statusText">{{ this.statusText }}</div>
         </td>
     </tr>
@@ -77,58 +77,58 @@ tr {
                     importType: this.file.import_type,
                     update: false,
                     importTypes: [
-                        { id: 'asset', text: 'Assets' },
-                        { id: 'accessory', text: 'Accessories' },
-                        { id: 'consumable', text: 'Consumables' },
-                        { id: 'component', text: 'Components' },
-                        { id: 'license', text: 'Licenses' },
-                        { id: 'user', text: 'Users' }
+                        { id: 'asset', text: this.$t('general.assets') },
+                        { id: 'accessory', text: this.$t('general.accessories') },
+                        { id: 'consumable', text: this.$t('general.consumables') },
+                        { id: 'component', text: this.$t('general.components') },
+                        { id: 'license', text: this.$t('general.licenses') },
+                        { id: 'user', text: this.$t('general.users') }
                     ],
                     statusText: null,
                 },
                 columnOptions: {
                     general: [
-                        {id: 'category', text: 'Category' },
-                        {id: 'company', text: 'Company' },
-                        {id: 'checkout_to', text: 'Checked out to' },
-                        {id: 'email', text: 'Email' },
-                        {id: 'first_name', text: 'First Name' },
-                        {id: 'item_name', text: 'Item Name' },
-                        {id: 'last_name', text: 'Last Name' },
-                        {id: 'location', text: 'Location' },
-                        {id: 'maintained', text: 'Maintained' },
-                        {id: 'manufacturer', text: 'Manufacturer' },
-                        {id: 'notes', text: 'Notes' },
-                        {id: 'order_number', text: 'Order Number' },
-                        {id: 'purchase_cost', text: 'Purchase Cost' },
-                        {id: 'purchase_date', text: 'Purchase Date' },
-                        {id: 'quantity', text: 'Quantity' },
-                        {id: 'requestable', text: 'Requestable' },
-                        {id: 'serial', text: 'Serial Number' },
-                        {id: 'supplier', text: 'Supplier' },
-                        {id: 'username', text: 'Username' },
+                        {id: 'category', text: this.$t('general.category') },
+                        {id: 'company', text: this.$t('general.company') },
+                        {id: 'checkout_to', text: this.$t('admin.hardware.form.checkedout_to') },
+                        {id: 'email', text: this.$t('admin.users.table.email') },
+                        {id: 'first_name', text: this.$t('general.first_name') },
+                        {id: 'item_name', text: this.$t('general.item_name') },
+                        {id: 'last_name', text: this.$t('general.last_name') },
+                        {id: 'location', text: this.$t('general.location') },
+                        {id: 'maintained', text: this.$t('admin.licenses.form.maintained') },
+                        {id: 'manufacturer', text: this.$t('general.manufacturer') },
+                        {id: 'notes', text: this.$t('general.notes') },
+                        {id: 'order_number', text: this.$t('general.order_number') },
+                        {id: 'purchase_cost', text: this.$t('general.purchase_cost') },
+                        {id: 'purchase_date', text: this.$t('general.purchase_date') },
+                        {id: 'quantity', text: this.$t('general.quantity') },
+                        {id: 'requestable', text: this.$t('admin.hardware.general.requestable') },
+                        {id: 'serial', text: this.$t('admin.hardware.form.serial') },
+                        {id: 'supplier', text: this.$t('general.supplier') },
+                        {id: 'username', text: this.$t('mail.username') },
                     ],
                     assets: [
-                        {id: 'asset_tag', text: 'Asset Tag' },
-                        {id: 'asset_model', text: 'Model Name' },
-                        {id: 'image', text: 'Image Filename' },
-                        {id: 'model_number', text: 'Model Number' },
-                        {id: 'name', text: 'Full Name' },
-                        {id: 'status', text: 'Status' },
-                        {id: 'warranty_months', text: 'Warranty Months' },
+                        {id: 'asset_tag', text: this.$t('admin.hardware.table.asset_tag') },
+                        {id: 'asset_model', text: this.$t('admin.models.table.name') },
+                        {id: 'image', text: this.$t('general.image') },
+                        {id: 'model_number', text: this.$t('general.model_no') },
+                        {id: 'name', text: this.$t('importer.import.full_name') },
+                        {id: 'status', text: this.$t('general.status') },
+                        {id: 'warranty_months', text: this.$t('admin.hardware.form.warranty') },
                     ],
                     licenses: [
-                        {id: 'expiration_date', text: 'Expiration Date' },
-                        {id: 'license_email', text: 'Licensed To Email' },
-                        {id: 'license_name', text: 'Licensed To Name' },
-                        {id: 'purchase_order', text: 'Purchase Order' },
-                        {id: 'reassignable', text: 'Reassignable' },
-                        {id: 'seats', text: 'Seats' },
+                        {id: 'expiration_date', text: this.$t('admin.licenses.form.expiration') },
+                        {id: 'license_email', text: this.$t('admin.licenses.form.to_name') },
+                        {id: 'license_name', text: this.$t('admin.licenses.form.to_email') },
+                        {id: 'purchase_order', text: this.$t('admin.licenses.form.purchase_order') },
+                        {id: 'reassignable', text: this.$t('admin.licenses.form.reassignable') },
+                        {id: 'seats', text: this.$t('admin.licenses.form.seats') },
                     ],
                     users: [
-                        {id: 'employee_num', text: 'Employee Number' },
-                        {id: 'jobtitle', text: 'Job Title' },
-                        {id: 'phone_number', text: 'Phone Number' },
+                        {id: 'employee_num', text: this.$t('admin.users.table.employee_num') },
+                        {id: 'jobtitle', text: this.$t('admin.users.table.job') },
+                        {id: 'phone_number', text: this.$t('admin.users.table.phone') },
                     ],
                     customFields: this.customFields,
                 },
@@ -155,14 +155,14 @@ tr {
         },
         methods: {
             postSave() {
-                this.statusText = "Processing...";
+                this.statusText = this.$t('general.processing');
                 this.$http.post(route('api.imports.importFile', this.file.id), {
                     'import-update': this.options.update,
                     'import-type': this.options.importType,
                     'column-mappings': this.columnMappings
                 }).then( ({body}) => {
                     // Success
-                    this.statusText = "Success... Redirecting.";
+                    this.statusText = this.$t('importer.import.import_success');
                     window.location.href = body.messages.redirect_url;
                 }, ({body}) => {
                     // Failure

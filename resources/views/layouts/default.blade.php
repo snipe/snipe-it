@@ -27,8 +27,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script nonce="{{ csrf_token() }}">
-      window.Laravel = { csrfToken: '{{ csrf_token() }}' };
-
+      window.Laravel = {
+        csrfToken: '{{ csrf_token() }}',
+        lang: '{{ App::getLocale() }}'
+    };
     </script>
 
     <style nonce="{{ csrf_token() }}">
