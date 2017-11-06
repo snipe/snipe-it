@@ -6,7 +6,7 @@
         <select class="js-data-ajax" data-endpoint="locations" name="{{ $fieldname }}" style="width: 100%" id="{{ $fieldname }}_location_select">
             @if ($location_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $location_id }}" selected="selected">
-                    {{ \App\Models\Location::find($location_id)->name }}
+                    {{ (\App\Models\Location::find($location_id)) ? \App\Models\Location::find($location_id)->name : '' }}
                 </option>
             @else
                 <option value="">{{ trans('general.select_location') }}</option>
