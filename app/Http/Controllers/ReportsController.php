@@ -596,7 +596,12 @@ class ReportsController extends Controller
             if (e(Input::get('employee_num')) == '1') {
                 // Only works if we're checked out to a user, not anything else.
                 if ($asset->checkedOutToUser()) {
-                    $row[] = '"' .e($asset->assignedto->employee_num). '"';
+                    if ($asset->assignedto) {
+                        $row[] = '"' .e($asset->assignedto->employee_num). '"';
+                    } else {
+                        $row[] = ''; // Empty string if unassigned
+                    }
+
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
