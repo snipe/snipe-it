@@ -67,23 +67,13 @@
                                 <thead>
                                 <tr>
                                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                                    <th data-sortable="true" data-formatter="locationsLinkFormatter" data-field="name" data-searchable="true">{{ trans('admin/locations/table.name') }}</th>
-                                    <th data-sortable="true" data-field="parent">{{ trans('admin/locations/table.parent') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="assets_default">{{ trans('admin/locations/table.assets_rtd') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="assets_checkedout">{{ trans('admin/locations/table.assets_checkedout') }}</th>
-                                    <th data-searchable="true" data-sortable="true" data-field="currency">{{ App\Models\Setting::first()->default_currency }}</th>
-                                    <th data-searchable="true" data-sortable="true" data-field="address">{{ trans('admin/locations/table.address') }}</th>
-                                    <th data-searchable="true" data-sortable="true" data-field="city">{{ trans('admin/locations/table.city') }}
-                                    </th>
-                                    <th data-searchable="true" data-sortable="true" data-field="state">
-                                        {{ trans('admin/locations/table.state') }}
-                                    </th>
-                                    <th data-searchable="true" data-sortable="true" data-field="zip">
-                                        {{ trans('admin/locations/table.zip') }}
-                                    </th>
-                                    <th data-searchable="true" data-sortable="true" data-field="country">
-                                        {{ trans('admin/locations/table.country') }}</th>
-                                    <th data-switchable="false" data-formatter="locationsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+                                    <th data-sortable="true" data-formatter="hardwareLinkFormatter" data-field="name" data-searchable="true">{{ trans('admin/hardware/form.name') }}</th>
+                                    <th data-sortable="true" data-field="image" data-visible="true" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
+                                    <th data-searchable="false" data-formatter="modelsLinkObjFormatter" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+                                    <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
+                                    <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
+                                    <th data-searchable="false" data-sortable="false" data-formatter="hardwareInOutFormatter" data-field="checkincheckout">Checkin/Checkout</th>
+                                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('general.action') }}</th>
                                 </tr>
                                 </thead>
                             </table>
