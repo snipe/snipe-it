@@ -182,7 +182,7 @@ class ReportsController extends Controller
                         ($asset->supplier) ? e($asset->supplier->name) : '',
                         ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        ($asset->location) ? e($asset->location->present()->name()) : '',
+                        ($asset->location) ? e($asset->location->name) : '',
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
                     foreach ($customfields as $field) {
@@ -596,7 +596,12 @@ class ReportsController extends Controller
             if (e(Input::get('employee_num')) == '1') {
                 // Only works if we're checked out to a user, not anything else.
                 if ($asset->checkedOutToUser()) {
-                    $row[] = '"' .e($asset->assignedto->employee_num). '"';
+                    if ($asset->assignedto) {
+                        $row[] = '"' .e($asset->assignedto->employee_num). '"';
+                    } else {
+                        $row[] = ''; // Empty string if unassigned
+                    }
+
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
