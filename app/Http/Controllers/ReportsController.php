@@ -182,7 +182,7 @@ class ReportsController extends Controller
                         ($asset->supplier) ? e($asset->supplier->name) : '',
                         ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        ($asset->location) ? e($asset->location->present()->name()) : '',
+                        ($asset->location) ? e($asset->location->name) : '',
                         ($asset->notes) ? e($asset->notes) : '',
                     ];
                     foreach ($customfields as $field) {
