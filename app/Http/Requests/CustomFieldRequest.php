@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class CustomFieldRequest extends FormRequest
 {
@@ -21,11 +22,26 @@ class CustomFieldRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return  [
-            "name" => "required|unique:custom_fields",
-            "custom_format" => "valid_regex",
-        ];
+        
+        $rules = [];
+
+        switch($this->method())
+        {
+
+            // Brand new
+            case 'POST':
+            {
+                $rules['name'] = "required|unique:custom_fields";
+                break;
+            }
+
+            default:break;
+        }
+
+        $rules['custom_format'] = 'valid_regex';
+
+        return  $rules;
     }
 }
