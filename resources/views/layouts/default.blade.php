@@ -771,6 +771,7 @@
     <script nonce="{{ csrf_token() }}">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            $('.select2 span').addClass('needsclick');
 
             // This javascript handles saving the state of the menu (expanded or not)
             $('body').bind('expanded.pushMenu', function() {
@@ -797,6 +798,8 @@
             event.preventDefault();
             $(this).ekkoLightbox();
         });
+
+
 
     </script>
 
