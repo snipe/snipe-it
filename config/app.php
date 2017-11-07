@@ -278,7 +278,6 @@ return [
          */
 
         Barryvdh\Debugbar\ServiceProvider::class,
-        Aws\Laravel\AwsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
