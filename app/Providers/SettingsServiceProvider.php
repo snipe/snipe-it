@@ -45,7 +45,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('models_upload_url', function(){
-            return url('/'.'uploads/models/');
+            return url('/').'/uploads/models/';
         });
 
         // Categories
@@ -54,7 +54,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('categories_upload_url', function(){
-            return url('/'.'uploads/categories/');
+            return url('/').'/uploads/categories/';
         });
 
         // Locations
@@ -63,7 +63,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('locations_upload_url', function(){
-            return url('/'.'uploads/locations/');
+            return url('/').'/uploads/locations/';
         });
 
         // Users
@@ -72,7 +72,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('users_upload_url', function(){
-            return url('/'.'uploads/users/');
+            return url('/').'/uploads/users/';
         });
 
         // Manufacturers
@@ -81,7 +81,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('manufacturers_upload_url', function(){
-            return url('/'.'uploads/manufacturers/');
+            return url('/').'/uploads/manufacturers/';
         });
 
         // Suppliers
@@ -90,7 +90,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('suppliers_upload_url', function(){
-            return url('/'.'uploads/suppliers/');
+            return url('/').'/uploads/suppliers/';
         });
 
         // Departments
@@ -99,7 +99,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('departments_upload_url', function(){
-            return url('/'.'uploads/departments/');
+            return url('/').'/uploads/departments/';
         });
 
 
