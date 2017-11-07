@@ -33,7 +33,7 @@ class LocationsTransformer
             $array = [
                 'id' => (int) $location->id,
                 'name' => e($location->name),
-                'image' =>   ($location->image) ? e(url('/').'/uploads/locations/'.e($location->image)) : null,
+                'image' =>   ($location->image) ? app('locations_upload_url').e($location->image) : null,
                 'address' => e($location->address),
                 'city' => e($location->city),
                 'state' => e($location->state),
