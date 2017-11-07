@@ -694,7 +694,7 @@ class Asset extends Depreciable
 
     public function scopeDeleted($query)
     {
-        return $query->whereNotNull('deleted_at');
+        return $query->whereNotNull('assets.deleted_at');
     }
 
     /**
