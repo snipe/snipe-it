@@ -40,7 +40,7 @@ mix
     './node_modules/jquery-slimscroll/jquery.slimscroll.js',
     './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',
     './node_modules/blueimp-file-upload/js/jquery.fileupload.js',
-    './node_modules/fastclick/lib/fastclick.js',
+  //  './node_modules/fastclick/lib/fastclick.js',
     './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
     './node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
     './bower_components/iCheck/icheck.js',

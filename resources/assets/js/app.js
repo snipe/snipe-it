@@ -63,7 +63,7 @@ $.AdminLTE.options = {
   //native touch experience with touch devices. If you
   //choose to enable the plugin, make sure you load the script
   //before AdminLTE's app.js
-  enableFastclick: true,
+  enableFastclick: false,
   //Control Sidebar Options
   enableControlSidebar: true,
   controlSidebarOptions: {
