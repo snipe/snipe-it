@@ -102,6 +102,16 @@ class SettingsServiceProvider extends ServiceProvider
             return url('/').'/uploads/departments/';
         });
 
+        // Company paths and URLs
+        \App::singleton('companies_upload_path', function(){
+            return public_path('/uploads/companies/');
+        });
+
+        \App::singleton('companies_upload_url', function(){
+            return url('/').'/uploads/companies/';
+        });
+
+
 
         // Set the monetary locale to the configured locale to make helper::parseFloat work.
         setlocale(LC_MONETARY, config('app.locale'));

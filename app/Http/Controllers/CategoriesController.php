@@ -150,13 +150,11 @@ class CategoriesController extends Controller
 
         $old_image = $category->image;
 
-
         // Set the model's image property to null if the image is being deleted
         if ($request->input('image_delete') == 1) {
             $category->image = null;
         }
 
-        // If a new file is being uploaded, resize it and save it
         if ($request->file('image')) {
             $image = $request->file('image');
             $file_name = $category->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
@@ -173,7 +171,6 @@ class CategoriesController extends Controller
 
         }
 
-        // If there is a new file being uploaded
         if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
             try  {
                 unlink(app('categories_upload_path').$old_image);

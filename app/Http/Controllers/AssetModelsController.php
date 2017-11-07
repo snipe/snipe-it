@@ -91,7 +91,7 @@ class AssetModelsController extends Controller
 
             $image = Input::file('image');
             $file_name = str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-            $path = public_path('uploads/models/');
+            $path = app('models_upload_path');
 
             if ($image->getClientOriginalExtension()!='svg') {
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
@@ -191,15 +191,14 @@ class AssetModelsController extends Controller
             return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
-        $model->depreciation_id = $request->input('depreciation_id');
-        $model->eol = $request->input('eol');
+        $model->depreciation_id     = $request->input('depreciation_id');
+        $model->eol                 = $request->input('eol');
         $model->name                = $request->input('name');
         $model->model_number        = $request->input('model_number');
         $model->manufacturer_id     = $request->input('manufacturer_id');
         $model->category_id         = $request->input('category_id');
         $model->notes               = $request->input('notes');
-
-        $model->requestable = Input::has('requestable');
+        $model->requestable         = $request->input('requestable', '0');
 
         if ($request->input('custom_fieldset')=='') {
             $model->fieldset_id = null;
@@ -207,34 +206,37 @@ class AssetModelsController extends Controller
             $model->fieldset_id = $request->input('custom_fieldset');
         }
 
-        if (Input::file('image')) {
+        $old_image = $model->image;
 
-            $image = Input::file('image');
-            $file_name = str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-            $path = public_path('uploads/models/');
-            $old_image = $path.$model->image;
+        // Set the model's image property to null if the image is being deleted
+        if ($request->input('image_delete') == 1) {
+            $model->image = null;
+        }
 
-            try  {
-                unlink($old_image);
-            } catch (\Exception $e) {
-                \Log::error($e);
-            }
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $file_name = $model->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
 
             if ($image->getClientOriginalExtension()!='svg') {
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
-                })->save($path.'/'.$file_name);
+                })->save(app('models_upload_path').$file_name);
             } else {
-                $image->move($path, $file_name);
+                $image->move(app('models_upload_path'), $file_name);
             }
             $model->image = $file_name;
 
         }
 
-        if ($request->input('image_delete') == 1 && Input::file('image') == "") {
-            $model->image = null;
+        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
+            try  {
+                unlink(app('models_upload_path').$old_image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
         }
+
 
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
