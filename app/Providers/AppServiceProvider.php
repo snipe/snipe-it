@@ -132,7 +132,7 @@ class AppServiceProvider extends ServiceProvider
         $log_level = config('app.log_level');
 
         if (($this->app->environment('production'))  && (config('services.rollbar.access_token'))){
-            $this->app->register(\Jenssegers\Rollbar\RollbarServiceProvider::class);
+            $this->app->register(\Rollbar\Laravel\RollbarServiceProvider::class);
         }
 
         foreach ($monolog->getHandlers() as $handler) {
