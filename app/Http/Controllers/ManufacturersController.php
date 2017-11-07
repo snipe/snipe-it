@@ -138,26 +138,35 @@ class ManufacturersController extends Controller
         $manufacturer->support_phone    = $request->input('support_phone');
         $manufacturer->support_email    = $request->input('support_email');
 
+        $old_image = $manufacturer->image;
+
+        // Set the model's image property to null if the image is being deleted
+        if ($request->input('image_delete') == 1) {
+            $manufacturer->image = null;
+        }
+
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_slug($image->getClientOriginalName()).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/manufacturers/'.$file_name);
-            $old_image = $path.$manufacturer->image;
+            $file_name = $manufacturer->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
 
+            if ($image->getClientOriginalExtension()!='svg') {
+                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save(app('manufacturers_upload_path').$file_name);
+            } else {
+                $image->move(app('manufacturers_upload_path'), $file_name);
+            }
+            $manufacturer->image = $file_name;
+
+        }
+
+        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
             try  {
-                unlink($old_image);
+                unlink(app('manufacturers_upload_path').$old_image);
             } catch (\Exception $e) {
                 \Log::error($e);
             }
-
-
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $manufacturer->image = $file_name;
-        } elseif ($request->input('image_delete')=='1') {
-            $manufacturer->image = null;
         }
 
 

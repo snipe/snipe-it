@@ -4,9 +4,8 @@
   "keywords": ["assets", "asset-management", "laravel"],
   "license": "AGPL-3",
   "type": "project",
-        "require": {
+    "require": {
     "php": ">=5.6.4",
-    "aws/aws-sdk-php-laravel": "^3.1",
     "barryvdh/laravel-debugbar": "^2.4",
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
@@ -17,7 +16,6 @@
     "fideloper/proxy": "^3.1",
     "intervention/image": "^2.3",
     "javiereguiluz/easyslugger": "^1.0",
-    "jenssegers/rollbar": "^1.5",
     "laravel/framework": "5.4.29",
     "laravel/passport": "^3.0",
     "laravel/tinker": "^1.0",
@@ -30,6 +28,7 @@
     "phpspec/prophecy": "1.6.2",
     "pragmarx/google2fa": "^1.0",
     "predis/predis": "^1.1",
+    "rollbar/rollbar-laravel": "^2.2",
     "schuppo/password-strength": "~1.5",
     "spatie/laravel-backup": "^3.0.0",
     "tecnickcom/tc-lib-barcode": "^1.15",

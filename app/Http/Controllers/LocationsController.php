@@ -204,17 +204,35 @@ class LocationsController extends Controller
         $location->ldap_ou      = $request->input('ldap_ou');
         $location->manager_id   = $request->input('manager_id');
 
+        $old_image = $location->image;
+
+        // Set the model's image property to null if the image is being deleted
+        if ($request->input('image_delete') == 1) {
+            $location->image = null;
+        }
+
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/locations/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
+            $file_name = $location->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
+
+            if ($image->getClientOriginalExtension()!='svg') {
+                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save(app('locations_upload_path').$file_name);
+            } else {
+                $image->move(app('locations_upload_path'), $file_name);
+            }
             $location->image = $file_name;
-        } elseif ($request->input('image_delete')=='1') {
-            $location->image = null;
+
+        }
+
+        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
+            try  {
+                unlink(app('locations_upload_path').$old_image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
         }
 
 
