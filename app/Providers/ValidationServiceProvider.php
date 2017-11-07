@@ -92,7 +92,7 @@ class ValidationServiceProvider extends ServiceProvider
                 $test_pattern = str_replace('regex:','', $value);
 
                 try {
-                    preg_match($test_pattern, $test_string, $matches);
+                    preg_match($test_pattern, $test_string);
                     return true;
                 } catch (\Exception $e) {
                     return false;
