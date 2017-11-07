@@ -82,7 +82,7 @@ class ValidationServiceProvider extends ServiceProvider
             if ($value!='') {
 
                 //  Check that the string starts with regex:
-                if (strpos($value, 'regex:') === FALSE) {
+                if (strpos($value, 'regex:') === false) {
                     return false;
                 }
 
