@@ -40,7 +40,7 @@
       margin-top: 0px;
     }
     .permissions.table > tbody+tbody {
-      margin: 15px;
+
     }
     .header-row {
       border-bottom: 1px solid #ccc;
@@ -57,9 +57,6 @@
     .table > tbody > tr > td.permissions-item {
       padding: 1px;
       padding-left: 8px;
-    }
-    table, tbody {
-      border: 1px solid #ccc;
     }
 
     .header-name {
