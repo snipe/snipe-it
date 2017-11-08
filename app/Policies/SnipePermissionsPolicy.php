@@ -26,7 +26,6 @@ abstract class SnipePermissionsPolicy
 
     public function index(User $user)
     {
-        // dd('here');
         return $user->hasAccess($this->columnName().'.view');
     }
     /**
@@ -37,7 +36,6 @@ abstract class SnipePermissionsPolicy
      */
     public function view(User $user, $item = null)
     {
-        //
         return $user->hasAccess($this->columnName().'.view');
     }
 
@@ -49,7 +47,6 @@ abstract class SnipePermissionsPolicy
      */
     public function create(User $user)
     {
-        //
         return $user->hasAccess($this->columnName().'.create');
     }
 
@@ -61,7 +58,6 @@ abstract class SnipePermissionsPolicy
      */
     public function update(User $user, $item = null)
     {
-        //
         return $user->hasAccess($this->columnName().'.edit');
     }
 
@@ -73,7 +69,6 @@ abstract class SnipePermissionsPolicy
      */
     public function delete(User $user, $item = null)
     {
-        //
         return $user->hasAccess($this->columnName().'.delete');
     }
 
