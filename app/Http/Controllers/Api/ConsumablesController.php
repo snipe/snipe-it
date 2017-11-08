@@ -160,7 +160,6 @@ class ConsumablesController extends Controller
      */
     public function getDataView($consumableId)
     {
-        //$consumable = Consumable::find($consumableID);
         $consumable = Consumable::with(array('consumableAssignments'=>
         function ($query) {
             $query->orderBy('created_at', 'DESC');
@@ -171,12 +170,10 @@ class ConsumablesController extends Controller
         },
         ))->find($consumableId);
 
-        //  $consumable->load('consumableAssignments.admin','consumableAssignments.user');
-
         if (!Company::isCurrentUserHasAccess($consumable)) {
             return ['total' => 0, 'rows' => []];
         }
-        $this->authorize('view', Component::class);
+        $this->authorize('view', Consumable::class);
         $rows = array();
 
         foreach ($consumable->consumableAssignments as $consumable_assignment) {

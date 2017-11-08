@@ -284,9 +284,10 @@ class ViewAssetsController extends Controller
     public function getAcceptAsset($logID = null)
     {
 
-        if (!$findlog = Actionlog::where('id', $logID)->first()) {
-            echo 'no record';
-            //return redirect()->to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
+        $findlog = Actionlog::where('id', $logID)->first();
+
+        if (!$findlog) {
+            return redirect()->to('account/view-assets')->with('error', 'No matching record.');
         }
 
         if ($findlog->accepted_id!='') {
