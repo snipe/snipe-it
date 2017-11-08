@@ -187,7 +187,7 @@
                 </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="min-height: 400px;">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">
