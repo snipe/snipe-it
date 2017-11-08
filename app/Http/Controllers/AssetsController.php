@@ -454,14 +454,32 @@ class AssetsController extends Controller
         }
         $this->authorize('checkout', $asset);
 
+
+        // Fetch the target and set the asset's new location_id
         if (request('assigned_user')) {
             $target = User::find(request('assigned_user'));
+            $asset->location_id = ($target) ? $target->location_id : '';
+
         } elseif (request('assigned_asset')) {
+
             $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
+            $asset->location_id = $target->rtd_location_id;
+
+            // Override with the asset's location_id if it has one
+            if ($target->location_id!='') {
+                $asset->location_id = ($target) ? $target->location_id : '';
+            }
+            
         } elseif (request('assigned_location')) {
             $target = Location::find(request('assigned_location'));
+            $asset->location_id = ($target) ? $target->id : '';
         }
-        // $user = User::find(Input::get('assigned_to'));
+
+        // No valid target was found - error out
+        if (!$target) {
+            return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+        }
+
         $admin = Auth::user();
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
@@ -476,22 +494,13 @@ class AssetsController extends Controller
             $expected_checkin = '';
         }
 
-        // Set the location ID to the RTD location id if there is one
-        if ($asset->rtd_location_id!='') {
-            $asset->location_id = $target->rtd_location_id;
-        }
-
-        // Overwrite that if the target has a location ID though
-        if ($target->location_id!='') {
-            $asset->location_id = $target->location_id;
-        }
 
         if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
 //           Redirect to the new asset page
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
         }
 
-      // Redirect to the asset management page with error
+        // Redirect to the asset management page with error
         return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
     }
 
