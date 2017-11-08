@@ -1,10 +1,10 @@
 {
-    "/js/build/vue.js": "/js/build/vue.js?id=e9504cad01a748f9b0fa",
-    "/css/AdminLTE.css": "/css/AdminLTE.css?id=889dc040f2ddfca6efde",
-    "/css/app.css": "/css/app.css?id=3a1e8c168fa8714043a6",
-    "/css/overrides.css": "/css/overrides.css?id=3911514a8a64a4247483",
-    "/css/dist/all.css": "/css/dist/all.css?id=f2d4896e67e878a47434",
-    "/js/dist/all.js": "/js/dist/all.js?id=0d558c3ed637f4c81a77",
-    "/css/build/all.css": "/css/build/all.css?id=f2d4896e67e878a47434",
-    "/js/build/all.js": "/js/build/all.js?id=0d558c3ed637f4c81a77"
+    "/js/build/vue.js": "/js/build/vue.js",
+    "/css/AdminLTE.css": "/css/AdminLTE.css",
+    "/css/app.css": "/css/app.css",
+    "/css/overrides.css": "/css/overrides.css",
+    "/js/build/vue.js.map": "/js/build/vue.js.map",
+    "/css/AdminLTE.css.map": "/css/AdminLTE.css.map",
+    "/css/app.css.map": "/css/app.css.map",
+    "/css/overrides.css.map": "/css/overrides.css.map"
 }
