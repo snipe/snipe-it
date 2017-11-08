@@ -35,7 +35,7 @@
             $permission_name = $permission[$i]['permission'];
             ?>
             @if ($permission[$i]['display'])
-                <div class="col-md-12 col-md-offset-2">
+                <div class="col-md-9 col-md-offset-2">
                     <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
                     <p>{{ $permission[$i]['note'] }}</p>
 

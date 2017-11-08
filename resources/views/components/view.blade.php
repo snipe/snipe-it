@@ -58,6 +58,7 @@
                     <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name" data-formatter="hardwareLinkFormatter">{{ trans('general.asset') }}</th>
                     <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{ trans('general.qty') }}</th>
                     <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="componentsInOutFormatter">Checkin/Checkout</th>
                   </tr>
                 </thead>
               </table>

@@ -27,6 +27,7 @@
     "bootstrap-less": "^3.3.8",
     "ekko-lightbox": "^5.1.1",
     "font-awesome": "^4.7.0",
+    "icheck": "^1.0.2",
     "jquery-slimscroll": "^1.3.8",
     "jquery-ui": "^1.12.1",
     "jquery-ui-bundle": "^1.12.1",

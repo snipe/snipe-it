@@ -239,6 +239,7 @@
                @endcan
 
                @can('admin')
+               @if ($snipeSettings->show_alerts_in_menu=='1')
                <!-- Tasks: style can be found in dropdown.less -->
                <?php $alert_items = \App\Helpers\Helper::checkLowInventory(); ?>
 
@@ -281,6 +282,7 @@
                  </ul>
                </li>
                @endcan
+               @endif
 
 
                <!-- User Account: style can be found in dropdown.less -->
