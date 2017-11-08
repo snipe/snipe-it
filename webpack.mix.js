@@ -18,7 +18,7 @@ mix
     './resources/assets/css/app.css',
     'public/css/AdminLTE.css',
     'resources/assets/css/font-awesome/font-awesome.min.css',
-    './bower_components/iCheck/skins/minimal/minimal.css',
+    './node_modules/icheck/skins/minimal/minimal.css',
     './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css',
     'public/css/bootstrap-tables-sticky-header.css',
     'public/css/overrides.css'
@@ -40,10 +40,9 @@ mix
     './node_modules/jquery-slimscroll/jquery.slimscroll.js',
     './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',
     './node_modules/blueimp-file-upload/js/jquery.fileupload.js',
-  //  './node_modules/fastclick/lib/fastclick.js',
     './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
     './node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-    './bower_components/iCheck/icheck.js',
+    './node_modules/icheck/icheck.js',
     './node_modules/ekko-lightbox/dist/ekko-lightbox.js',
     './resources/assets/js/app.js', //this is part of AdminLTE
     './resources/assets/js/snipeit.js', //this is the actual Snipe-IT JS

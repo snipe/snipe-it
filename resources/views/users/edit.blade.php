@@ -474,30 +474,29 @@
                   <td class="col-md-5 tooltip-base permissions-item"
                     data-toggle="tooltip"
                     data-placement="right"
-                    title="{{ $localPermission['note'] }}"
-                  >
+                    title="{{ $localPermission['note'] }}">
                     <h4>{{ $area . ': ' . $localPermission['label'] }}</h4>
                   </td>
 
                   <td class="col-md-1 permissions-item">
                     @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                      {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['disabled'=>"disabled"]) }}
+                      {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['disabled'=>"disabled", 'class'=>'minimal']) }}
                     @else
-                      {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['value'=>"grant"]) }}
+                      {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['value'=>"grant", 'class'=>'minimal']) }}
                     @endif
                   </td>
                   <td class="col-md-1 permissions-item">
                     @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                      {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['disabled'=>"disabled"]) }}
+                      {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['disabled'=>"disabled", 'class'=>'minimal']) }}
                     @else
-                      {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['value'=>"deny"]) }}
+                      {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['value'=>"deny", 'class'=>'minimal']) }}
                     @endif
                   </td>
                   <td class="col-md-1 permissions-item">
                     @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                      {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['disabled'=>"disabled"] ) }}
+                      {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['disabled'=>"disabled",'class'=>'minimal'] ) }}
                     @else
-                      {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['value'=>"inherit"] ) }}
+                      {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['value'=>"inherit", 'class'=>'minimal'] ) }}
                     @endif
                   </td>
                 </tr>
@@ -509,13 +508,13 @@
                     <h3>{{ $area }}</h3>
                   </td>
                   <td class="col-md-1 permissions-item">
-                    {{ Form::radio("$area", '1',false,['value'=>"grant"]) }}
+                    {{ Form::radio("$area", '1',false,['value'=>"grant", 'class'=>'minimal']) }}
                   </td>
                   <td class="col-md-1 permissions-item">
-                    {{ Form::radio("$area", '-1',false,['value'=>"deny"]) }}
+                    {{ Form::radio("$area", '-1',false,['value'=>"deny", 'class'=>'minimal']) }}
                   </td>
                   <td class="col-md-1 permissions-item">
-                    {{ Form::radio("$area", '0',false,['value'=>"inherit"] ) }}
+                    {{ Form::radio("$area", '0',false,['value'=>"inherit", 'class'=>'minimal'] ) }}
                   </td>
                 </tr>
 
@@ -526,29 +525,28 @@
                       class="col-md-5 tooltip-base permissions-item"
                       data-toggle="tooltip"
                       data-placement="right"
-                      title="{{ $permission['note'] }}"
-                    >
+                      title="{{ $permission['note'] }}">
                       {{ $permission['label'] }}
                     </td>
                     <td class="col-md-1 permissions-item">
                       @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                      {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[$permission['permission'] ] == '1', ["value"=>"grant", 'disabled'=>'disabled']) }}
+                      {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[$permission['permission'] ] == '1', ["value"=>"grant", 'disabled'=>'disabled', 'class'=>'minimal']) }}
                       @else
-                      {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[ $permission['permission'] ] == '1', ["value"=>"grant"]) }}
+                      {{ Form::radio('permission['.$permission['permission'].']', '1', $userPermissions[ $permission['permission'] ] == '1', ["value"=>"grant",'class'=>'minimal']) }}
                       @endif
                     </td>
                     <td class="col-md-1 permissions-item">
                       @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                      {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny", 'disabled'=>'disabled']) }}
+                      {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny", 'disabled'=>'disabled', 'class'=>'minimal']) }}
                       @else
-                      {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny"]) }}
+                      {{ Form::radio('permission['.$permission['permission'].']', '-1', $userPermissions[$permission['permission'] ] == '-1', ["value"=>"deny",'class'=>'minimal']) }}
                       @endif
                     </td>
                     <td class="col-md-1 permissions-item">
                       @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-                      {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit", 'disabled'=>'disabled']) }}
+                      {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit", 'disabled'=>'disabled', 'class'=>'minimal']) }}
                       @else
-                      {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit"]) }}
+                      {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit", 'class'=>'minimal']) }}
                       @endif
                     </td>
                   @endif
@@ -588,11 +586,11 @@ $(document).ready(function() {
 </script>
 
 <script nonce="{{ csrf_token() }}">
-$('tr.header-row input:radio').click(function() {
-  value = $(this).attr('value');
-  $(this).parent().parent().siblings().each(function() {
-    $(this).find('td input:radio[value='+value+']').prop("checked", true);
-  })
+$('tr.header-row input:radio').on('ifClicked', function () {
+    value = $(this).attr('value');
+      $(this).parent().parent().parent().siblings().each(function(idx,elem) {
+        $(this).find('td input:radio[value='+value+']').iCheck('check');
+      })
 });
 
 $('.header-name').click(function() {
