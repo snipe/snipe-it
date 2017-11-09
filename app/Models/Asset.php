@@ -711,7 +711,7 @@ class Asset extends Depreciable
    */
     public function scopeInModelList($query, array $modelIdListing)
     {
-        return $query->whereIn('model_id', $modelIdListing);
+        return $query->whereIn('assets.model_id', $modelIdListing);
     }
 
   /**
