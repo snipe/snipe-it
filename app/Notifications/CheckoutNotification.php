@@ -93,7 +93,7 @@ class CheckoutNotification extends Notification
                 'first_name' => $target->present()->fullName(),
                 'item_name' => $item->present()->name(),
                 'checkout_date' => $item->last_checkout,
-                'expected_checkin' => $item->expected_checkin->format('Y-m-d'),
+                'expected_checkin' => ($item->expected_checkin) ? $item->expected_checkin->format('Y-m-d') : '',
                 'item_tag' => $item->asset_tag,
                 'note' => $this->params['note'],
                 'item_serial' => $item->serial,
