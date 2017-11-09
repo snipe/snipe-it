@@ -118,6 +118,11 @@
             <br>
         @endif
         </div>
+	<div class="pull-left">
+        @if (($settings->labels_display_company_name=='1') && ($asset->company_id!='0') && (!(is_null($asset->company_id))) && (\App\Models\Company::find($asset->company_id)->name!=''))
+        	C: {{ \App\Models\Company::find($asset->company_id)->name }}
+        @endif
+    	</div>
         <div class="pull-left">
         @if (($settings->labels_display_name=='1') && ($asset->name!=''))
             N: {{ $asset->name }}
