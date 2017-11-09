@@ -768,6 +768,12 @@ class SettingsController extends Controller
         } else {
             $setting->labels_display_tag = 0;
         }
+        
+         if (Input::has('labels_display_company_name')) {
+            $setting->labels_display_company_name = 1;
+        } else {
+            $setting->labels_display_company_name = 0;
+        }
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
