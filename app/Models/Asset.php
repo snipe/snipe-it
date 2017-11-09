@@ -941,7 +941,7 @@ class Asset extends Depreciable
             }
 
             if (($fieldname!='category')  && ($fieldname!='location')
-                && ($fieldname!='status_label') && ($fieldname!='model')) {
+                && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
 
