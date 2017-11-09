@@ -22,7 +22,14 @@ class License extends Depreciable
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
-    protected $dates = ['deleted_at'];
+    // We set these as protected dates so that they will be easily accessible via Carbon
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'purchase_date'
+    ];
+
 
     public $timestamps = true;
 
