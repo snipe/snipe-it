@@ -179,6 +179,10 @@
                                         {{ Form::checkbox('labels_display_tag', '1', Input::old('labels_display_tag',   $setting->labels_display_tag),array('class' => 'minimal')) }}
                                         {{ trans('admin/hardware/form.tag') }}
                                     </label>
+                                    <label>
+                                        {{ Form::checkbox('labels_display_company_name', '1', Input::old('labels_display_company_name',   $setting->labels_display_company_name),array('class' => 'minimal')) }}
+                                        {{ trans('admin/hardware/form.company_name') }}
+                                    </label>
                                 </div> <!--/.CHECKBOX-->
                             </div> <!--/.col-md-9-->
                         </div> <!--/.form-group-->
