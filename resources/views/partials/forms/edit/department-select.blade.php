@@ -6,7 +6,7 @@
         <select class="js-data-ajax" data-endpoint="departments" name="{{ $fieldname }}" style="width: 100%" id="department_select">
             @if ($department_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $department_id }}" selected="selected">
-                    {{ \App\Models\Department::find($department_id)->name }}
+                    {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
                 </option>
             @else
                 <option value="">{{ trans('general.select_department') }}</option>
