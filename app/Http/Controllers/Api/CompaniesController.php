@@ -153,7 +153,6 @@ class CompaniesController extends Controller
      */
     public function selectlist(Request $request)
     {
-        $this->authorize('view', Company::class);
 
         $companies = Company::select([
             'companies.id',
