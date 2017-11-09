@@ -178,7 +178,7 @@
 </div> <!--/row-->
 <div class="row">
     <div class="col-md-6">
-        <div class="box box-default" style="min-height: 400px;">
+        <div class="box box-default">
             <div class="box-header with-border">
                 <h3 class="box-title">{{ trans('general.assets') }} by Status</h3>
                 <div class="box-tools pull-right">
@@ -187,7 +187,7 @@
                 </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="min-height: 400px;">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">

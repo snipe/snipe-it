@@ -7,7 +7,7 @@
         <select class="js-data-ajax" data-endpoint="manufacturers" name="{{ $fieldname }}" style="width: 100%" id="category_select_id">
             @if ($manufacturer_id = Input::old($fieldname, $item->{$fieldname}))
                 <option value="{{ $manufacturer_id }}" selected="selected">
-                    {{ \App\Models\Manufacturer::find($manufacturer_id)->name }}
+                    {{ (\App\Models\Manufacturer::find($manufacturer_id)) ? \App\Models\Manufacturer::find($manufacturer_id)->name : '' }}
                 </option>
             @else
                 <option value="">{{ trans('general.select_manufacturer') }}</option>

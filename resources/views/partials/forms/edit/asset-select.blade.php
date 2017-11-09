@@ -5,7 +5,7 @@
         <select class="js-data-ajax select2" data-endpoint="hardware" name="{{ $fieldname }}" style="width: 100%" id="assigned_asset_select"{{ (isset($multiple)) ? ' multiple="multiple"' : '' }}>
             @if ($asset_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $asset_id }}" selected="selected">
-                    {{ \App\Models\Asset::find($asset_id)->present()->fullName }}
+                    {{ (\App\Models\Asset::find($asset_id)) ? \App\Models\Asset::find($asset_id)->present()->fullName : '' }}
                 </option>
             @else
                 <option value="">{{ trans('general.select_asset') }}</option>

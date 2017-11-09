@@ -513,7 +513,7 @@
             @endcan
 
             @can('backend.interact')
-                <li>
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gear"></i>
                         <span>{{ trans('general.settings') }}</span>

@@ -6,7 +6,7 @@
         <select class="js-data-ajax" data-endpoint="users" name="{{ $fieldname }}" style="width: 100%" id="assigned_user_select">
             @if ($user_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $user_id }}" selected="selected">
-                    {{ \App\Models\User::find($user_id)->present()->fullName }}
+                    {{ (\App\Models\User::find($user_id)) ? \App\Models\User::find($user_id)->present()->fullName : '' }}
                 </option>
             @else
                 <option value="">{{ trans('general.select_user') }}</option>

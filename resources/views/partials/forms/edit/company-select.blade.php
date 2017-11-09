@@ -5,7 +5,7 @@
         <select class="js-data-ajax" data-endpoint="companies" name="{{ $fieldname }}" style="width: 100%" id="company_select">
             @if ($company_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $company_id }}" selected="selected">
-                    {{ \App\Models\Company::find($company_id)->name }}
+                    {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
                 </option>
             @else
                 <option value="">{{ trans('general.select_company') }}</option>
