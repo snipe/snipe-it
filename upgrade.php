@@ -106,7 +106,7 @@ echo "--------------------------------------------------------\n\n";
 if (file_exists('composer.phar')) {
     echo "-- Local composer.phar detected, so we'll use that.\n\n";
     $composer_dump = shell_exec('php composer.phar dump');
-    $composer = shell_exec('php composer.phar install --prefer-source');
+    $composer = shell_exec('php composer.phar install --no-dev --prefer-source');
 
 } else {
     echo "-- We couldn't find a local composer.phar - trying globally.\n\n";
