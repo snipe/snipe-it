@@ -119,8 +119,8 @@
         @endif
         </div>
 	<div class="pull-left">
-        @if (($settings->labels_display_company_name=='1') && ($asset->company_id!='0') && (!(is_null($asset->company_id))) && (\App\Models\Company::find($asset->company_id)->name!=''))
-        	C: {{ \App\Models\Company::find($asset->company_id)->name }}
+        @if (($settings->labels_display_company_name=='1') && ($asset->company))
+        	C: {{ $asset->company->name }}
         @endif
     	</div>
         <div class="pull-left">
