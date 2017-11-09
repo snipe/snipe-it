@@ -42,6 +42,7 @@ class Asset extends Depreciable
   */
     protected $injectUniqueIdentifier = true;
 
+    // We set these as protected dates so that they will be easily accessible via Carbon
     protected $dates = [
         'created_at',
         'updated_at',
@@ -138,7 +139,7 @@ class Asset extends Depreciable
      * @param User $user
      * @param User $admin
      * @param Carbon $checkout_at
-     * @param null $expected_checkin
+     * @param Carbon $expected_checkin
      * @param string $note
      * @param null $name
      * @return bool
