@@ -12,11 +12,12 @@ class Consumable extends SnipeModel
     use Loggable, Presentable;
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'consumables';
     protected $casts = [
         'requestable' => 'boolean'
     ];
+
 
 
     /**
