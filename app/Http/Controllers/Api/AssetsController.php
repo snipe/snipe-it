@@ -334,7 +334,13 @@ class AssetsController extends Controller
         $asset->model_id                = $request->get('model_id');
         $asset->order_number            = $request->get('order_number');
         $asset->notes                   = $request->get('notes');
-        $asset->asset_tag               = $request->get('asset_tag');
+
+        if ($request->get('asset_tag')) {
+            $asset->asset_tag               = $request->get('asset_tag');
+        } else {
+            $asset->asset_tag               = Asset::autoincrement_asset();
+        }
+        
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
