@@ -41,22 +41,8 @@
       </div><!-- /.box-header -->
 
       <div class="box-body">
-        <!-- Asset -->
-        <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
-          <label for="asset_id" class="col-md-3 control-label">
-            {{ trans('admin/asset_maintenances/table.asset_name') }}
-          </label>
-          <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_id')) ? ' required' : '' }}">
-            @if ($selectedAsset == null)
-            {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $item->asset_id), ['class'=>'select2', 'style'=>'min-width:350px']) }}
-            @else
-            {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $selectedAsset), ['class'=>'select2', 'style'=>'min-width:350px', 'enabled' => 'false']) }}
-            @endif
-            {!! $errors->first('asset_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-          </div>
-        </div> <!-- .form-group -->
-
-        @include ('partials.forms.edit.supplier')
+        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/asset_maintenances/table.asset_name'), 'fieldname' => 'asset_id'])
+        @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
         @include ('partials.forms.edit.maintenance_type')
 
         <!-- Title -->
