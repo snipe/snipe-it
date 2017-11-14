@@ -154,16 +154,21 @@ class AssetMaintenancesController extends Controller
      */
     public function create()
     {
+        $asset = null;
+
+        if ($asset = Asset::find(request('asset_id'))) {
+            // We have to set this so that the correct property is set in the select2 ajax dropdown
+            $asset->asset_id = $asset->id;
+        }
+
         // Prepare Asset Maintenance Type List
         $assetMaintenanceType = [
                                     '' => 'Select an asset maintenance type',
                                 ] + AssetMaintenance::getImprovementOptions();
         // Mark the selected asset, if it came in
-        // Render the view
+
         return view('asset_maintenances/edit')
-                   ->with('asset_list', Helper::detailedAssetList())
-                   ->with('selectedAsset', request('asset_id'))
-                   ->with('supplier_list', Helper::suppliersList())
+                   ->with('asset', $asset)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
                    ->with('item', new AssetMaintenance);
     }

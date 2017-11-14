@@ -963,7 +963,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderModels($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+        return $query->join('models as asset_models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
     }
 
     /**
