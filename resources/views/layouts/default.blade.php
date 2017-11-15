@@ -52,7 +52,7 @@
             @endif
 
         @if ($snipeSettings->custom_css)
-            {{ $snipeSettings->show_custom_css() }}
+            {!! $snipeSettings->show_custom_css() !!}
         @endif
      @endif
     @media (max-width: 400px) {
