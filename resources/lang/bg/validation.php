@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Избраният :attribute е невалиден.',
     'numeric'              => ':attribute трябва да бъде число.',
     'present'              => 'Полето на атрибута трябва да е налице.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Форматът на :attribute е невалиден.',
     'required'             => 'Полето :attribute е задължително.',
     'required_if'          => 'Полето :attribute е задължително, когато :other е :value.',

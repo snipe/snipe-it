@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'ویژگی انتخاب شده نامعتبر است.',
     'numeric'              => 'ویژگی باید عدد باشد.',
     'present'              => 'فیلد attribute باید باشد.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'شکل ویژگی نامعتبر است.',
     'required'             => 'فیلد ویژگی ضروری است.',
     'required_if'          => 'فیلد ویژگی ضروری است، وقتی که دیگری ارزش است.',

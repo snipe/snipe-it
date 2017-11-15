@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'L\' :attribute selezionato è invalido.',
     'numeric'              => 'L\' :attribute deve essere un numero.',
     'present'              => 'Il campo attributo deve essere presente.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Il formato dell\' :attribute è invalido.',
     'required'             => 'Il campo :attribute è obblogatorio.',
     'required_if'          => 'L\' :attribute è richiesto quando :other è :value.',

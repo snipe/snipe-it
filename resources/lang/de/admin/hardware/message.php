@@ -63,7 +63,7 @@ return array(
         'success' 		=> 'Asset wurde erfolgreich herausgegeben.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
         'not_available' => 'Dieses Asset kann nicht herausgegeben werden!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Mind. 1 Eintrag muss ausgewählt werden'
     ),
 
     'checkin' => array(

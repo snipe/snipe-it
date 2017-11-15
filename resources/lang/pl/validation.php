@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Wybrany :attribute jest nieprawidłowy.',
     'numeric'              => ':attribute musi być liczbą.',
     'present'              => ':attribute nie może być puste.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Format :attribute jest niewłaściwy.',
     'required'             => ':attribute nie może być puste.',
     'required_if'          => 'Pole :attribute jest wymagane gdy :other jest :value.',

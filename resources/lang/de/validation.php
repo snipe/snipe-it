@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Auswahl :attribute ist ungültig.',
     'numeric'              => ':attribute muss eine Zahl sein.',
     'present'              => 'Das Attributfeld muss vorhanden sein.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute Format ungültig.',
     'required'             => ':attribute Feld muss ausgefüllt sein.',
     'required_if'          => ':attribute wird benötigt wenn :other :value entspricht.',
@@ -87,7 +88,7 @@ return array(
     'unique'               => ':attribute schon benutzt.',
     'uploaded'             => ':attribute konnte nicht hochgeladen werden.',
     'url'                  => ':attribute Format ist ungültig.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "Die Variable :attribute muss eindeutig sein.",
 
     /*
     |--------------------------------------------------------------------------

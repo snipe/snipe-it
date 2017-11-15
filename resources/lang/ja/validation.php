@@ -67,6 +67,7 @@ return array(
     'not_in'               => '選択された :attribute は不正です。',
     'numeric'              => ':attribute は数字にして下さい。',
     'present'              => ':attribute フィールドは必須です。',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute フォーマットが不正です。',
     'required'             => ':attribute フィールドは、必須です。',
     'required_if'          => ':other が :value の時、:attribute フィールドは必須です。',

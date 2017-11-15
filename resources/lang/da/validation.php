@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Den valgte :attribute er ugyldig.',
     'numeric'              => ':attribute skal være et tal.',
     'present'              => 'Attributfeltet skal være til stede.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute formatet er ugyldigt.',
     'required'             => ':attribute feltet er krævet.',
     'required_if'          => ':attribute feltet er krævet når :other er :value.',

@@ -67,6 +67,7 @@ return array(
     'not_in'               => ':attribute selectat nu e valid.',
     'numeric'              => ':attribute trebuie sa fie un numar.',
     'present'              => 'Câmpul atributului trebuie să fie prezent.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Formatul :attribute nu este valid.',
     'required'             => 'Campul :attribute este obligatoriu.',
     'required_if'          => ':attribute este obligatoriu atunci cand :other este :value.',

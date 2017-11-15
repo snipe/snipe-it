@@ -62,7 +62,7 @@ return array(
         'success' 		=> 'Harta berjaya diagihkan.',
         'user_does_not_exist' => 'Pengguna tak sah. Sila cuba lagi.',
         'not_available' => 'Aset itu tidak tersedia untuk checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Anda mesti memilih sekurang-kurangnya satu aset dari senarai'
     ),
 
     'checkin' => array(

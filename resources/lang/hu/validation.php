@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'A kiválasztott :attribute étvénytelen.',
     'numeric'              => 'A :attribute csak szám lehet.',
     'present'              => 'A: attribútum mezőnek jelen kell lennie.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Az :attribute formátuma érvénytelen.',
     'required'             => 'A :attribute mező kötelező.',
     'required_if'          => 'A :attribute mező kötelező ha :other egy :value.',

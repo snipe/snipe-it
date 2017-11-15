@@ -20,6 +20,7 @@ return array(
     'field_element_short'     => 'Element',
     'field_format'            => 'Stijl',
     'field_custom_format'     => 'Aangepaste stijl',
+    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Verplicht',
     'req'   		              => 'Ndz.',
     'used_by_models'   		    => 'Gebruikt door modellen',

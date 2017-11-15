@@ -20,6 +20,7 @@ return array(
     'field_element_short'     => '성분',
     'field_format'            => '형식',
     'field_custom_format'     => '사용자 형식',
+    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => '필수사항',
     'req'   		              => '필수',
     'used_by_models'   		    => '적용 모델',

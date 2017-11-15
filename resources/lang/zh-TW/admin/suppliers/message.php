@@ -19,9 +19,9 @@ return array(
         'confirm'   => '您確定要刪除此供應商嗎？',
         'error'   => '刪除供應商失敗，請重試',
         'success' => '刪除供應商成功。',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => '至少還有 :asset_count 個樣板與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
+        'assoc_licenses'	 => '至少還有 :licenses_count 個授權與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
+        'assoc_maintenances'	 => '至少還有 :asset_maintenances_count 個資產維護與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
     )
 
 );

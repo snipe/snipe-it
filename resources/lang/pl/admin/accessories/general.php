@@ -2,7 +2,7 @@
 
 return array(
     'about_accessories_title' 			=> 'O Akcesoriach',
-    'about_accessories_text'  			=> 'Akcesoria to coś co wydajesz dla użytkowników, a które nie mają numerów seryjny ch(lub nie zależy Ci na śledzeniu ich niepowtarzalności). Na przykład, myszy i klawiatury komputerowe.',
+    'about_accessories_text'  			=> 'Akcesoria to rzeczy, które wydajesz użytkownikom, a które nie mają numerów seryjnych (lub nie zależy Ci na śledzeniu ich niepowtarzalności). Na przykład, myszy i klawiatury komputerowe.',
     'accessory_category' 				=> 'Kategorie Akcesoriów',
     'accessory_name'  					=> 'Nazwa akcesoriów',
     'checkout'  							=> 'Wydanie akcesoriów',

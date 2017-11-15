@@ -20,6 +20,7 @@ return array(
     'field_element_short'     => '表單元素',
     'field_format'            => '格式',
     'field_custom_format'     => '自訂格式',
+    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => '必填',
     'req'   		              => '必填',
     'used_by_models'   		    => '引用型號',

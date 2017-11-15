@@ -20,6 +20,7 @@ return array(
     'field_element_short'     => 'Typ',
     'field_format'            => 'Formát',
     'field_custom_format'     => 'Vlastní formát',
+    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Povinné',
     'req'   		              => 'Pov.',
     'used_by_models'   		    => 'Užito u modelů',

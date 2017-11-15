@@ -62,7 +62,7 @@ return array(
         'success' 		=> '借出資產成功。',
         'user_does_not_exist' => '無效使用者，請重試。',
         'not_available' => '此資產無法借出',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => '你必須至少選擇一項資產。'
     ),
 
     'checkin' => array(

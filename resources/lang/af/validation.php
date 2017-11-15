@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Die gekose: attribuut is ongeldig.',
     'numeric'              => 'Die: Attribuut moet \'n nommer wees.',
     'present'              => 'Die: attribuut veld moet teenwoordig wees.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Die: Attribuutformaat is ongeldig.',
     'required'             => 'Die: attribuut veld is nodig.',
     'required_if'          => 'Die: attribuut veld is nodig wanneer: ander is: waarde.',

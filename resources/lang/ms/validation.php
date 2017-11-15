@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Piliah :attribute tidak sah.',
     'numeric'              => ':attribute mesti nombor.',
     'present'              => 'Yang: bidang atribut mesti ada.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute format tidak sah.',
     'required'             => ':attribute ruangan diperlukan.',
     'required_if'          => ':attribute rungan diperlukan bila :other adalah :value.',

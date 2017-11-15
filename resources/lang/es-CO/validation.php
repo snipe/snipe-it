@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'El :attribute seleccionado no es correcto.',
     'numeric'              => ':attribute debe ser un número.',
     'present'              => 'El campo: atributo debe estar presente.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute formato incorrecto.',
     'required'             => ':attribute es obligatorio.',
     'required_if'          => ':attribute es obligatrio cuando :other es :value.',
