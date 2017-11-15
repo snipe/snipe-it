@@ -89,6 +89,18 @@ class Setting extends Model
 
     }
 
+    /**
+     * Escapes the custom CSS, and then un-escapes the greater-than symbol
+     * so it can work with direct descendant characters for bootstrap
+     * menu overrides like:
+     * 
+     * .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a
+     * 
+     * Important: Do not remove the e() escaping here, as we output raw in the blade.
+     *
+     * @return string escaped CSS
+     * @author A. Gianotto <snipe@snipe.net>
+     */
     public function show_custom_css()
     {
         $custom_css = Setting::getSettings()->custom_css;
