@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'L\'attribut ":attribute" est invalide.',
     'numeric'              => 'L\'attribut ":attribute" doit être un nombre.',
     'present'              => 'Le champ d\'attribut: doit être présent.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Le format de l\'attribut ":attribute" est invalide.',
     'required'             => 'Le champs :attribute est nécessaire.',
     'required_if'          => 'Le champ :attribute est nécessaire quand :other vaut :value.',

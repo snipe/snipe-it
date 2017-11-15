@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'התכונה שנבחרה: אינה חוקית.',
     'numeric'              => 'התכונה: חייבת להיות מספר.',
     'present'              => 'שדה התכונה: חייב להיות נוכח.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'תבנית התכונה: אינה חוקית.',
     'required'             => 'שדה התכונה: נדרש.',
     'required_if'          => 'שדה התכונה: נדרש כאשר: other is: value.',

@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Atlasītais: atribūts nav derīgs.',
     'numeric'              => 'Atribūts ir jābūt skaitlim.',
     'present'              => 'Atribūta laukam jābūt klāt.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Atribūta formāts nav derīgs.',
     'required'             => 'Atribūta lauks ir nepieciešams.',
     'required_if'          => 'Atribūta lauks ir nepieciešams, ja: cits ir: vērtība.',

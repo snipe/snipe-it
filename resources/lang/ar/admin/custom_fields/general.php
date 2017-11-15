@@ -20,6 +20,7 @@ return array(
     'field_element_short'     => 'عنصر',
     'field_format'            => 'صيغة',
     'field_custom_format'     => 'صيغة مخصصة',
+    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'مطلوب',
     'req'   		              => 'مطلوب',
     'used_by_models'   		    => 'مستخدم في الموديلات',

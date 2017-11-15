@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Det valda: attributet är ogiltigt.',
     'numeric'              => 'Attributet måste vara ett nummer.',
     'present'              => 'Attributfältet måste vara närvarande.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Attributet formatet är ogiltigt.',
     'required'             => 'Fältet: Attribut är obligatoriskt.',
     'required_if'          => 'Attributfältet krävs när: annat är: värde.',

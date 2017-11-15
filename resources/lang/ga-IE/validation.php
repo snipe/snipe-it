@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'An roghnaithe: tá tréith neamhbhailí.',
     'numeric'              => 'An: Ní mór tréith a bheith ina líon.',
     'present'              => 'Ní mór an réimse tréith a bheith i láthair.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Tá an fhormáid tréithbhail neamhbhailí.',
     'required'             => 'An: Tá réimse tréith ag teastáil.',
     'required_if'          => 'An: Tá réimse tréith ag teastáil nuair: eile é: luach.',

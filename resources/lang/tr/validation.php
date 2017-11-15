@@ -67,6 +67,7 @@ return array(
     'not_in'               => ':attribute geçersiz.',
     'numeric'              => ':attribute sayı olmalıdır.',
     'present'              => ': Attribute alanı bulunmalıdır.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute formatı geçersiz.',
     'required'             => ':attribute alanı zorunludur.',
     'required_if'          => ':attribute :other :value geçersiz.',

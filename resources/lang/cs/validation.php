@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Zvolený :attribute je neplatný.',
     'numeric'              => ':attribute musí být číslo.',
     'present'              => 'Pole atributu musí být přítomno.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Formát :attribute je neplatný.',
     'required'             => 'Pole :attribute je požadováno.',
     'required_if'          => 'Položka :attribute je vyžadována, když :other je :value.',

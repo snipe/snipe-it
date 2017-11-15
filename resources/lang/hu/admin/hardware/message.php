@@ -62,7 +62,7 @@ return array(
         'success' 		=> 'A készlet sikeresen ki lett állítva.',
         'user_does_not_exist' => 'Ez a felhasználó érvénytelen. Kérlek próbáld újra.',
         'not_available' => 'Ez az eszköz nem áll rendelkezésre pénztárnál!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Ki kell választania legalább egy elemet a listából'
     ),
 
     'checkin' => array(

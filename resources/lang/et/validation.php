@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Valitud atribuut on kehtetu.',
     'numeric'              => 'Atribuut peab olema number.',
     'present'              => 'Atribuudiväli peab olema kohal.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Atribuudivorming on vale.',
     'required'             => 'Atribuudiväljandus on kohustuslik.',
     'required_if'          => 'Atribuudiväljastus on vajalik, kui: muu on: väärtus.',

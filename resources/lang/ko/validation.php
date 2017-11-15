@@ -67,6 +67,7 @@ return array(
     'not_in'               => '선택한 :attribute 가 부정확 합니다.',
     'numeric'              => ':attribute 는 숫자만 가능합니다.',
     'present'              => ':attribute 항목이 있어야 합니다.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute 형식이 부정확 합니다.',
     'required'             => ':attribute 항목을 입력해 주세요.',
     'required_if'          => ':attribute 항목은 :other가 :value 일때 필요합니다.',

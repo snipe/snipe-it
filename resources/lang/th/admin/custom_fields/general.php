@@ -20,6 +20,7 @@ return array(
     'field_element_short'     => 'ธาตุ',
     'field_format'            => 'รูป',
     'field_custom_format'     => 'รูปแบบที่กำหนดเอง',
+    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'จำเป็นต้องใช้',
     'req'   		              => 'req',
     'used_by_models'   		    => 'ใช้ตามโมเดล',

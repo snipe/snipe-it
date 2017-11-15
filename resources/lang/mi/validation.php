@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Ko te mea i tīpakohia: he muhu te huanga.',
     'numeric'              => 'Ko te: me tohu he huanga.',
     'present'              => 'Ko te: ko te waahi tohu kia noho.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Ko te: ko te hōputu huanga he muhu.',
     'required'             => 'Ko te: e hiahiatia ana te waahi huanga.',
     'required_if'          => 'Ko te: ka hiahiatia te waahi huanga ina: ko etahi atu: te uara.',

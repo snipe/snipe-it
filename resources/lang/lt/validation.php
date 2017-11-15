@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Pasirinktas :attribute neteisingas.',
     'numeric'              => ':attribute privalo būti skaičius.',
     'present'              => 'Atributo laukas turi būti.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute formatas neteisingas.',
     'required'             => ':attribute laukelis privalomas.',
     'required_if'          => ':attribute laukelis yra privalomas kai :other yra :value.',

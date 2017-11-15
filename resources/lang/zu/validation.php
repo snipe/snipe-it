@@ -67,6 +67,7 @@ return array(
     'not_in'               => 'Okukhethiwe: imfanelo ayivumelekile.',
     'numeric'              => 'I: imfanelo kufanele ibe inombolo.',
     'present'              => 'I: insimu yemfanelo kufanele ibe khona.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'I: ifomethi yokwaziswa ayivumelekile.',
     'required'             => 'I: insimu yemfanelo iyadingeka.',
     'required_if'          => 'I: Insimu yemfanelo iyadingeka uma: enye ingukuthi: inani.',

@@ -20,6 +20,7 @@ return array(
     'field_element_short'     => 'Στοιχείο',
     'field_format'            => 'Τύπος',
     'field_custom_format'     => 'Προσαρμοσμένος τύπος',
+    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Απαιτείται',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Χρησιμοποιήθηκε από τα μοντέλα',

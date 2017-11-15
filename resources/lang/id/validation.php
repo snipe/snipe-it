@@ -67,6 +67,7 @@ return array(
     'not_in'               => ':attribute yang di pilih tidak benar.',
     'numeric'              => ':attribute harus dalam angka.',
     'present'              => 'Bidang atribut: harus ada.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Format :attribute tidak benar.',
     'required'             => 'Kolom :attribute wajib di-isi.',
     'required_if'          => 'Kolom :attribute wajib di-isi ketika :other nya :value.',

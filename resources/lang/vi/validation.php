@@ -67,6 +67,7 @@ return array(
     'not_in'               => ':attribute đã chọn không hợp lý.',
     'numeric'              => ':attribute phải là một số.',
     'present'              => 'Trường thuộc tính: phải có mặt.',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'Định dạng :attribute thì không hợp lý.',
     'required'             => 'Trường :attribute thì bắt buộc.',
     'required_if'          => 'Trường :attribute thì bắt buộc khi :other là :value.',

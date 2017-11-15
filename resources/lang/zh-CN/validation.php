@@ -67,6 +67,7 @@ return array(
     'not_in'               => '选择的 :attribute 无效',
     'numeric'              => ':attribute 必须是数字',
     'present'              => '：属性字段必须存在。',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute 格式不对',
     'required'             => ':attribute 字段必填',
     'required_if'          => ':attribute 字段在 :other 是 :value 时是必须的',
