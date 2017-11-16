@@ -141,7 +141,6 @@ class CategoriesController extends Controller
      */
     public function selectlist(Request $request, $category_type = 'asset')
     {
-        $this->authorize('view', Categories::class);
 
         $categories = Category::select([
             'id',
