@@ -60,8 +60,7 @@
                                             @foreach ($assets as $asset)
 
                                             <tr>
-                                                <form action="{{route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id])}}" method="POST" accept-charset="utf-8">
-                                                    {{ csrf_field() }}
+
                                                     <td>
                                                         @if ($asset->getImageUrl())
                                                             <a href="{{ $asset->getImageUrl() }}" data-toggle="lightbox" data-type="image">
@@ -96,13 +95,16 @@
 
                                                     <td>{{ $asset->expected_checkin }}</td>
                                                     <td>
+                                                        <form action="{{route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id])}}" method="POST" accept-charset="utf-8">
+                                                        {{ csrf_field() }}
                                                         @if ($asset->isRequestedBy(Auth::user()))
                                                             {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
                                                         @else
                                                             {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
                                                         @endif
+                                                        </form>
                                                     </td>
-                                                </form>
+
                                             </tr>
                                             @endforeach
                                         </tbody>
