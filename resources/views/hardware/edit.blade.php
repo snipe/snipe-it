@@ -142,12 +142,21 @@
                 },
                 success: function (data) {
                     $(".status_spinner").css("display", "none");
+                    $("#selected_status_status").fadeIn();
 
                     if (data == true) {
                         $("#assignto_selector").show();
 
+                        $("#selected_status_status").removeClass('text-danger');
+                        $("#selected_status_status").addClass('text-success');
+                        $("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
+
+
                     } else {
                         $("#assignto_selector").hide();
+                        $("#selected_status_status").removeClass('text-success');
+                        $("#selected_status_status").addClass('text-danger');
+                        $("#selected_status_status").html('<i class="fa fa-times"></i> That asset status is not deployable. This asset cannot be checked out. ');
                     }
                 }
             });
