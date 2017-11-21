@@ -453,34 +453,31 @@ class AssetsController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
         }
         $this->authorize('checkout', $asset);
-
-
-        // Fetch the target and set the asset's new location_id
-        if (request('assigned_user')) {
-            $target = User::find(request('assigned_user'));
-            $asset->location_id = ($target) ? $target->location_id : '';
-
-        } elseif (request('assigned_asset')) {
-
+        $admin = Auth::user();
+        
+        // This item is checked out to a location
+        if (request('checkout_to_type')=='location') {
+            $target = Location::find(request('assigned_location'));
+            $asset->location_id = ($target) ? $target->id : '';
+        } elseif (request('checkout_to_type')=='asset') {
             $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
-
             // Override with the asset's location_id if it has one
             if ($target->location_id!='') {
                 $asset->location_id = ($target) ? $target->location_id : '';
             }
-            
-        } elseif (request('assigned_location')) {
-            $target = Location::find(request('assigned_location'));
-            $asset->location_id = ($target) ? $target->id : '';
+        } else {
+            // Fetch the target and set the asset's new location_id
+            $target = User::find(request('assigned_user'));
+            $asset->location_id = ($target) ? $target->location_id : '';
         }
+
 
         // No valid target was found - error out
         if (!$target) {
             return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
         }
 
-        $admin = Auth::user();
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
             $checkout_at = Input::get('checkout_at');
@@ -496,7 +493,6 @@ class AssetsController extends Controller
 
 
         if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), Input::get('name'))) {
-//           Redirect to the new asset page
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
         }
 
