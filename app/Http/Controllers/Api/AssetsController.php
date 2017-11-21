@@ -281,17 +281,16 @@ class AssetsController extends Controller
             'assets.name',
             'assets.asset_tag',
             'assets.model_id',
+            'assets.assigned_to',
+            'assets.assigned_type',
             'assets.status_id'
-            ])->with('model', 'assetstatus')->NotArchived());
+            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived());
 
 
         if ($request->has('search')) {
-            $assets = $assets->where('assets.name', 'LIKE', '%'.$request->get('search').'%')
-                ->orWhere('assets.asset_tag', 'LIKE', '%'.$request->get('search').'%')
-                ->join('models AS assets_models',function ($join) use ($request) {
-                    $join->on('assets_models.id', "=", "assets.model_id");
-            })->orWhere('assets_models.name','LIKE','%'.$request->get('search').'%');
+            $assets = $assets->AssignedSearch($request->input('search'));
         }
+
 
         $assets = $assets->paginate(50);
 
@@ -299,9 +298,17 @@ class AssetsController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($assets as $asset) {
+
+
             $asset->use_text = $asset->present()->fullName;
+
+            if ($asset->checkedOutToUser()) {
+                $asset->use_text .= ' → '.$asset->assigned->getFullNameAttribute();
+            }
+
+            
             if ($asset->assetstatus->getStatuslabelType()=='pending') {
-                $asset->use_text = $asset->present()->fullName.' ('.$asset->assetstatus->getStatuslabelType().')';
+                $asset->use_text .=  '('.$asset->assetstatus->getStatuslabelType().')';
             }
 
             $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;

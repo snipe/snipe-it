@@ -275,10 +275,19 @@ class LicensesController extends Controller
             if ($license->getAvailSeatsCountAttribute() < 1) {
                 return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
             }
+
+            // Get the next available seat for this license
             $next = $license->freeSeat();
 
+            if (!$next) {
+                return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
+            }
 
-            $licenseSeat = LicenseSeat::where('license_id',$license->id)->find($next)->first();
+            if (!$licenseSeat = LicenseSeat::where('id', '=', $next->id)->first()) {
+                return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
+            }
+
+
             $assigned_to = $request->input('assigned_to');
             $asset_id = $request->input('asset_id');
 
@@ -299,6 +308,8 @@ class LicensesController extends Controller
                 return redirect()->back()->withInput()->withErrors($validator);
             }
             $target = null;
+
+            // If assigned to a user
             if ($assigned_to!='') {
                 // Check if the user exists
                 if (is_null($target = User::find($assigned_to))) {
@@ -307,6 +318,7 @@ class LicensesController extends Controller
                 }
             }
 
+            // If assigned to an asset
             if ($asset_id!='') {
                 if (is_null($target = Asset::find($asset_id))) {
                     // Redirect to the asset management page with error
@@ -318,11 +330,6 @@ class LicensesController extends Controller
                 }
             }
 
-            // Check if the asset exists
-            if (is_null($licenseSeat)) {
-                // Redirect to the asset management page with error
-                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
-            }
 
             if ($request->input('asset_id') == '') {
                 $licenseSeat->asset_id = null;
@@ -336,6 +343,8 @@ class LicensesController extends Controller
             } else {
                 $licenseSeat->assigned_to = $request->input('assigned_to');
             }
+
+            $licenseSeat->user_id = Auth::user()->id;
 
             // Was the asset updated?
             if ($licenseSeat->save()) {

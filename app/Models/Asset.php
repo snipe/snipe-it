@@ -765,11 +765,11 @@ class Asset extends Depreciable
     {
         $search = explode(' OR ', $search);
 
-        return $query->leftJoin('users',function ($leftJoin) {
-            $leftJoin->on("users.id", "=", "assets.assigned_to")
+        return $query->leftJoin('users as assets_users',function ($leftJoin) {
+            $leftJoin->on("assets_users.id", "=", "assets.assigned_to")
                 ->where("assets.assigned_type", "=", User::class);
-        })->leftJoin('locations',function ($leftJoin) {
-            $leftJoin->on("locations.id","=","assets.assigned_to")
+        })->leftJoin('locations as assets_locations',function ($leftJoin) {
+            $leftJoin->on("assets_locations.id","=","assets.assigned_to")
                 ->where("assets.assigned_type","=",Location::class);
         })->leftJoin('assets as assigned_assets',function ($leftJoin) {
             $leftJoin->on('assigned_assets.id', '=', 'assets.assigned_to')
@@ -808,11 +808,67 @@ class Asset extends Depreciable
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
                     });
                  })->orWhere(function ($query) use ($search) {
-                         $query->where('users.first_name', 'LIKE', '%'.$search.'%')
-                         ->orWhere('users.last_name', 'LIKE', '%'.$search.'%')
-                         ->orWhere('users.username', 'LIKE', '%'.$search.'%')
-                         ->orWhere('locations.name', 'LIKE', '%'.$search.'%')
+                         $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
+                         ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
+                         ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
+                         ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
                          ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
+                })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
+            }
+            foreach (CustomField::all() as $field) {
+                $query->orWhere('assets.'.$field->db_column_name(), 'LIKE', "%$search%");
+            }
+        })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
+    }
+
+
+    /**
+     * Query builder scope to search on text for complex Bootstrap Tables API.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeAssignedSearch($query, $search)
+    {
+        $search = explode(' OR ', $search);
+
+        return $query->leftJoin('users as assets_users',function ($leftJoin) {
+            $leftJoin->on("assets_users.id", "=", "assets.assigned_to")
+                ->where("assets.assigned_type", "=", User::class);
+        })->leftJoin('locations as assets_locations',function ($leftJoin) {
+            $leftJoin->on("assets_locations.id","=","assets.assigned_to")
+                ->where("assets.assigned_type","=",Location::class);
+        })->leftJoin('assets as assigned_assets',function ($leftJoin) {
+            $leftJoin->on('assigned_assets.id', '=', 'assets.assigned_to')
+                ->where('assets.assigned_type', '=', Asset::class);
+        })->where(function ($query) use ($search) {
+            foreach ($search as $search) {
+                $query->whereHas('model', function ($query) use ($search) {
+                    $query->whereHas('category', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('categories.name', 'LIKE', '%'.$search.'%')
+                                ->orWhere('models.name', 'LIKE', '%'.$search.'%')
+                                ->orWhere('models.model_number', 'LIKE', '%'.$search.'%');
+                        });
+                    });
+                })->orWhereHas('model', function ($query) use ($search) {
+                    $query->whereHas('manufacturer', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                        });
+                    });
+                })->orWhere(function ($query) use ($search) {
+                    $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
                 })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
@@ -1091,7 +1147,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderLocation($query, $order)
     {
-        return $query->leftJoin('locations as asset_locations', 'asset_locations.id', '=', 'assets.rtd_location_id')->orderBy('asset_locations.name', $order);
+        return $query->leftJoin('locations as asset_locations', 'asset_locations.id', '=', 'assets.location_id')->orderBy('asset_locations.name', $order);
     }
 
 
@@ -1119,7 +1175,7 @@ class Asset extends Depreciable
     public function scopeByLocationId($query, $search)
     {
         return $query->where(function ($query) use ($search) {
-            $query->whereHas('defaultLoc', function ($query) use ($search) {
+            $query->whereHas('location', function ($query) use ($search) {
                 $query->where('locations.id', '=', $search);
             });
         });

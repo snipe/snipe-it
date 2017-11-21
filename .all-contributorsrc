@@ -809,6 +809,26 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "TheVakman",
+      "name": "Lawrence",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/18545156?v=4",
+      "profile": "https://github.com/TheVakman",
+      "contributions": [
+        "test",
+        "bug"
+      ]
+    },
+    {
+      "login": "uknzaeinozpas",
+      "name": "uknzaeinozpas",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/22473767?v=4",
+      "profile": "https://github.com/uknzaeinozpas",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ]
 }
