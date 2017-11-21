@@ -347,10 +347,13 @@ class License extends Depreciable
      */
     public function freeSeat()
     {
-        return $this->licenseseats()
+        return  $this->licenseseats()
                     ->whereNull('deleted_at')
-                    ->whereNull('assigned_to')
-                    ->whereNull('asset_id')
+                    ->where(function ($query) {
+                        $query->whereNull('assigned_to')
+                            ->whereNull('asset_id');
+                    })
+                    ->orderBy('id', 'asc')
                     ->first();
     }
 
