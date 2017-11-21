@@ -47,11 +47,13 @@
   @include ('partials.forms.edit.status')
 
   @if (!$item->id)
-      @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user'])
+      @include ('partials.forms.checkout-selector', ['style' => 'display:none;'])
 
-  @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset'])
+      @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;'])
 
-  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location'])
+  @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;'])
+
+  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;'])
   @endif
 
   @include ('partials.forms.edit.serial', ['translated_serial' => trans('admin/hardware/form.serial')])
@@ -140,15 +142,21 @@
                 },
                 success: function (data) {
                     $(".status_spinner").css("display", "none");
+                    $("#selected_status_status").fadeIn();
 
                     if (data == true) {
-                        $("#assigned_user").css("display", "block");
-                        $("#assigned_location").css("display", "block");
-                        $("#assigned_asset").css("display", "block");
+                        $("#assignto_selector").show();
+
+                        $("#selected_status_status").removeClass('text-danger');
+                        $("#selected_status_status").addClass('text-success');
+                        $("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
+
+
                     } else {
-                        $("#assigned_user").css("display", "none");
-                        $("#assigned_location").css("display", "none");
-                        $("#assigned_asset").css("display", "none");
+                        $("#assignto_selector").hide();
+                        $("#selected_status_status").removeClass('text-success');
+                        $("#selected_status_status").addClass('text-danger');
+                        $("#selected_status_status").html('<i class="fa fa-times"></i> That asset status is not deployable. This asset cannot be checked out. ');
                     }
                 }
             });
