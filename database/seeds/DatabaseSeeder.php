@@ -33,6 +33,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ActionlogSeeder::class);
         $this->call(CustomFieldSeeder::class);
 
+        Artisan::call('snipeit:sync-asset-locations', ['--output' => 'all']);
+        $output = Artisan::output();
+        \Log::info($output);
+
         Model::reguard();
     }
 }
