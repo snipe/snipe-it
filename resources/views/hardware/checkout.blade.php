@@ -40,12 +40,13 @@
             <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
               {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
-                <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
+                <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" tabindex="1">
                 {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
             </div>
+                @include ('partials.forms.checkout-selector')
 
-                @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user'])
+                @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
             @if ($asset->requireAcceptance())
                     <div class="form-group">
 
@@ -57,11 +58,10 @@
                         </div>
                     </div>
             @else
+                <!-- We have to pass unselect here so that we don't default to the asset that's being checked out. We want that asset to be pre-selected everywhere else. -->
+                @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
 
-                @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset'])
-
-                @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location'])
-
+                @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
 
             @endif
 
@@ -99,7 +99,7 @@
             </div>
 
                 @if ($asset->requireAcceptance() || $asset->getEula())
-                    <div class="form-group">
+                    <div class="form-group notification-callout">
                         <div class="col-md-8 col-md-offset-3">
                             <div class="callout callout-info">
 
