@@ -30,5 +30,4 @@ class CreateHistoryTable extends Migration
     {
         //Schema::drop('history');
     }
-
 }

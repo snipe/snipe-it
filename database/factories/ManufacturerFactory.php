@@ -18,7 +18,6 @@ $factory->define(App\Models\Manufacturer::class, function (Faker\Generator $fake
     ];
 });
 
-
 // 1
 $factory->state(App\Models\Manufacturer::class, 'apple', function ($faker) {
     return [
@@ -109,7 +108,6 @@ $factory->state(App\Models\Manufacturer::class, 'adobe', function ($faker) {
     ];
 });
 
-
 // 10
 $factory->state(App\Models\Manufacturer::class, 'avery', function ($faker) {
     return [
@@ -129,6 +127,3 @@ $factory->state(App\Models\Manufacturer::class, 'crucial', function ($faker) {
         'image' => 'crucial.jpg',
     ];
 });
-
-
-

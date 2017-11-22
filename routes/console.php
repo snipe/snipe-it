@@ -19,7 +19,7 @@ Artisan::command('inspire', function () {
 })->describe('Display an inspiring quote');
 
 Artisan::command('snipeit:travisci-install', function () {
-    if(!Setting::setupCompleted()) {
+    if (! Setting::setupCompleted()) {
         $settings = new Setting;
         $settings->site_name = 'test-ci';
         $settings->alert_email = 'test@example.com';

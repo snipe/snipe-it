@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Lietotājs vietnē ir atcēlis objekta pieprasījumu',
     'a_user_requested' => 'Lietotājs ir pieprasījis vienumu vietnē',
     'accessory_name' => 'Piederumu nosaukums:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Sveicināti: vārds',
     'welcome_to' => 'Laipni lūdzam: tīmeklī!',
     'your_credentials' => 'Jūsu Snipe-IT akreditācijas dati',
-);
+];

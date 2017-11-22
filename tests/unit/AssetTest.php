@@ -1,13 +1,11 @@
 <?php
+
 use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
 
 class AssetTest extends BaseTest
 {
@@ -32,21 +30,20 @@ class AssetTest extends BaseTest
 
     public function testFailsEmptyValidation()
     {
-       // An Asset requires a name, a qty, and a category_id.
+        // An Asset requires a name, a qty, and a category_id.
         $a = Asset::create();
         $this->assertFalse($a->isValid());
 
         $fields = [
             'model_id' => 'model id',
             'status_id' => 'status id',
-            'asset_tag' => 'asset tag'
+            'asset_tag' => 'asset tag',
         ];
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
             $this->assertEquals($errors->get($field)[0], "The ${fieldTitle} field is required.");
         }
     }
-
 
     public function testAutoIncrementMixed()
     {
@@ -58,7 +55,7 @@ class AssetTest extends BaseTest
                 ['asset_tag' => 'WTF-745'],
                 ['asset_tag' => '0012346'],
                 ['asset_tag' => '00123410'],
-                ['asset_tag' => 'U8T7597h77']
+                ['asset_tag' => 'U8T7597h77'],
             ])
         );
 
@@ -82,7 +79,6 @@ class AssetTest extends BaseTest
 //        $this->assertEquals($expected, $next);
 //    }
 //
-
 
     /**
      * @test
@@ -172,9 +168,9 @@ class AssetTest extends BaseTest
     {
         $asset = factory(Asset::class)->create();
         $components = factory(App\Models\Component::class, 5)->create();
-        $components->each(function($component) use ($asset) {
+        $components->each(function ($component) use ($asset) {
             $component->assets()->attach($component, [
-                'asset_id'=>$asset->id
+                'asset_id' => $asset->id,
             ]);
         });
         $this->assertInstanceOf(App\Models\Component::class, $asset->components()->first());
@@ -191,7 +187,8 @@ class AssetTest extends BaseTest
 
     // Helper Method for checking in assets.... We should extract this to the model or a trait.
 
-    private function checkin($asset, $target) {
+    private function checkin($asset, $target)
+    {
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
         $asset->assigned_to = null;
@@ -220,13 +217,13 @@ class AssetTest extends BaseTest
         $this->tester->seeRecord('action_logs', [
             'action_type' => 'checkout',
             'target_type'   => get_class($target),
-            'target_id'     => $target->id
+            'target_id'     => $target->id,
         ]);
 
         $this->tester->seeRecord('assets', [
             'id' => $asset->id,
             'assigned_to' => $target->id,
-            'assigned_type' => User::class
+            'assigned_type' => User::class,
         ]);
 
         $this->checkin($asset, $target);
@@ -235,13 +232,13 @@ class AssetTest extends BaseTest
         $this->tester->seeRecord('action_logs', [
             'action_type' => 'checkin from',
             'target_type'   => get_class($target),
-            'target_id'     => $target->id
+            'target_id'     => $target->id,
         ]);
 
         $this->tester->seeRecord('assets', [
             'id' => $asset->id,
             'assigned_to' => null,
-            'assigned_type' => null
+            'assigned_type' => null,
         ]);
 
         // An Asset Can be checked out to a asset, and this should be logged.
@@ -255,7 +252,7 @@ class AssetTest extends BaseTest
         $this->tester->seeRecord('action_logs', [
             'action_type' => 'checkout',
             'target_type'   => get_class($target),
-            'target_id'     => $target->id
+            'target_id'     => $target->id,
         ]);
 
         $this->assertCount(1, $target->assignedAssets);
@@ -265,7 +262,7 @@ class AssetTest extends BaseTest
         $this->tester->seeRecord('action_logs', [
             'action_type' => 'checkin from',
             'target_type'   => get_class($target),
-            'target_id'     => $target->id
+            'target_id'     => $target->id,
         ]);
 
         // An Asset Can be checked out to a location, and this should be logged.
@@ -279,7 +276,7 @@ class AssetTest extends BaseTest
         $this->tester->seeRecord('action_logs', [
             'action_type' => 'checkout',
             'target_type'   => get_class($target),
-            'target_id'     => $target->id
+            'target_id'     => $target->id,
         ]);
         $this->checkin($asset, $target);
         $this->assertNull($asset->fresh()->assignedTo);
@@ -287,7 +284,7 @@ class AssetTest extends BaseTest
         $this->tester->seeRecord('action_logs', [
             'action_type' => 'checkin from',
             'target_type'   => get_class($target),
-            'target_id'     => $target->id
+            'target_id'     => $target->id,
         ]);
     }
 

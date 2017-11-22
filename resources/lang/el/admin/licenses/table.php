@@ -1,17 +1,17 @@
 <?php
 
-return array(
+return [
 
-    'assigned_to'   	=> 'Ανατέθηκε στον',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'Άδεια χρήσης ηλεκτρονικού ταχυδρομείου',
-    'license_name'   	=> 'Την άδεια να',
-    'purchase_date'   	=> 'Ημερομηνία αγοράς',
-    'purchased'   		=> 'Αγοράστηκε',
-    'seats'   			=> 'Θέσεις',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Σειριακός',
-    'title'      		=> 'Άδεια Χρήσεως',
+    'assigned_to'    => 'Ανατέθηκε στον',
+    'checkout'        => 'In/Out',
+    'id'                  => 'ID',
+    'license_email'    => 'Άδεια χρήσης ηλεκτρονικού ταχυδρομείου',
+    'license_name'    => 'Την άδεια να',
+    'purchase_date'    => 'Ημερομηνία αγοράς',
+    'purchased'        => 'Αγοράστηκε',
+    'seats'            => 'Θέσεις',
+    'hardware'        => 'Hardware',
+    'serial'            => 'Σειριακός',
+    'title'              => 'Άδεια Χρήσεως',
 
-);
+];

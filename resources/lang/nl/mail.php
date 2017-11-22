@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Een gebruiker heeft op de website zijn aanvraag voor een object geannuleerd',
     'a_user_requested' => 'Een gebruiker heeft op de website een object aangevraagd',
     'accessory_name' => 'Accessoire Naam:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Welkom :name',
     'welcome_to' => 'Welkom bij :web!',
     'your_credentials' => 'Je Snipe-IT inloggegevens',
-);
+];

@@ -1,24 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Umkhiqizi akekho.',
-    'assoc_users'	 => 'Lo menzi okwamanje uhlotshaniswa okungenani oyisibonelo esisodwa futhi angeke asuswe. Sicela ubuyekeze amamodeli akho ukuba angasaphinde abhekisele kulo mkhiqizi futhi uzame futhi.',
+    'assoc_users'     => 'Lo menzi okwamanje uhlotshaniswa okungenani oyisibonelo esisodwa futhi angeke asuswe. Sicela ubuyekeze amamodeli akho ukuba angasaphinde abhekisele kulo mkhiqizi futhi uzame futhi.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Umkhiqizi akazange adalwe, sicela uzame futhi.',
-        'success' => 'Umkhiqizi wadalwa ngempumelelo.'
-    ),
+        'success' => 'Umkhiqizi wadalwa ngempumelelo.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Umkhiqizi akabuyekezwanga, sicela uzame futhi',
-        'success' => 'Umkhiqizi ubuyekezwe ngempumelelo.'
-    ),
+        'success' => 'Umkhiqizi ubuyekezwe ngempumelelo.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Uqinisekile ukuthi ufisa ukususa lo menzi?',
         'error'   => 'Kube nenkinga yokususa umenzi. Ngicela uzame futhi.',
-        'success' => 'Umkhiqizi ususiwe ngempumelelo.'
-    )
+        'success' => 'Umkhiqizi ususiwe ngempumelelo.',
+    ],
 
-);
+];

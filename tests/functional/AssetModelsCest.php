@@ -22,7 +22,7 @@ class AssetModelsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('models.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -44,7 +44,7 @@ class AssetModelsCest
             'requestable'       => $model->requestable,
         ];
 
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('models.create'));
 
         $I->submitForm('form#create-form', $values);
@@ -60,5 +60,4 @@ class AssetModelsCest
         $I->sendDelete(route('models.destroy', $model->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
-
 }

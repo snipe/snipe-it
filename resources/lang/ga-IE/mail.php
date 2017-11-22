@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Tá úsáideoir tar éis iarratas ar mhír a chealú ar an láithreán gréasáin',
     'a_user_requested' => 'D\'iarr úsáideoir mír ar an láithreán gréasáin',
     'accessory_name' => 'Ainm Cúlpháirtí:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Fáilte: ainm',
     'welcome_to' => 'Fáilte go dtí: gréasáin!',
     'your_credentials' => 'Do dhintiúir Snipe-IT',
-);
+];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Category;
@@ -8,28 +9,27 @@ use App\Helpers\Helper;
 
 class CategoriesTransformer
 {
-
-    public function transformCategories (Collection $categorys, $total)
+    public function transformCategories(Collection $categorys, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($categorys as $category) {
             $array[] = self::transformCategory($category);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformCategory (Category $category = null)
+    public function transformCategory(Category $category = null)
     {
         if ($category) {
-
             $array = [
                 'id' => (int) $category->id,
                 'name' => e($category->name),
                 'image' =>   ($category->image) ? app('categories_upload_url').e($category->image) : null,
                 'type' => e($category->category_type),
                 'eula' => ($category->getEula()) ? true : false,
-                'checkin_email' => ($category->checkin_email =='1') ? true : false,
-                'require_acceptance' => ($category->require_acceptance =='1') ? true : false,
+                'checkin_email' => ($category->checkin_email == '1') ? true : false,
+                'require_acceptance' => ($category->require_acceptance == '1') ? true : false,
                 'assets_count' => $category->assets_count,
                 'accessories_count' => $category->accessories_count,
                 'consumables_count' => $category->consumables_count,
@@ -47,10 +47,5 @@ class CategoriesTransformer
 
             return $array;
         }
-
-
     }
-
-
-
 }

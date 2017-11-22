@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -16,6 +17,7 @@ class NosniffGuard
     {
         $response = $next($request);
         $response->headers->set('X-Content-Type-Options', 'nosniff', false);
+
         return $response;
     }
 }

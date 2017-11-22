@@ -9,141 +9,133 @@
 */
 Route::group(
     ['prefix' => 'hardware',
-    'middleware' => ['auth']],
+    'middleware' => ['auth'], ],
     function () {
-
-        Route::get( 'bulkaudit',  [
+        Route::get('bulkaudit',  [
             'as' => 'assets.bulkaudit',
-            'uses' => 'AssetsController@quickScan'
+            'uses' => 'AssetsController@quickScan',
         ]);
 
         # Asset Maintenances
         Route::resource('maintenances', 'AssetMaintenancesController', [
-            'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id']
+            'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id'],
         ]);
 
-        Route::get('requested', [ 'as' => 'assets.requested', 'uses' => 'AssetsController@getRequestedIndex']);
+        Route::get('requested', ['as' => 'assets.requested', 'uses' => 'AssetsController@getRequestedIndex']);
 
         Route::get('scan', [
             'as' => 'asset.scan',
-            'uses' => 'AssetsController@scan'
+            'uses' => 'AssetsController@scan',
         ]);
 
         Route::get('audit/{id}', [
             'as' => 'asset.audit.create',
-            'uses' => 'AssetsController@audit'
+            'uses' => 'AssetsController@audit',
         ]);
 
         Route::post('audit/{id}', [
             'as' => 'asset.audit.store',
-            'uses' => 'AssetsController@auditStore'
+            'uses' => 'AssetsController@auditStore',
         ]);
-
 
         Route::get('history', [
             'as' => 'asset.import-history',
-            'uses' => 'AssetsController@getImportHistory'
+            'uses' => 'AssetsController@getImportHistory',
         ]);
 
         Route::post('history', [
             'as' => 'asset.process-import-history',
-            'uses' => 'AssetsController@postImportHistory'
+            'uses' => 'AssetsController@postImportHistory',
         ]);
 
         Route::get('/bytag', [
             'as'   => 'findbytag/hardware',
-            'uses' => 'AssetsController@getAssetByTag'
+            'uses' => 'AssetsController@getAssetByTag',
         ]);
 
         Route::get('{assetId}/clone', [
             'as' => 'clone/hardware',
-            'uses' => 'AssetsController@getClone'
+            'uses' => 'AssetsController@getClone',
         ]);
 
         Route::post('{assetId}/clone', 'AssetsController@postCreate');
 
         Route::get('{assetId}/checkout', [
             'as' => 'checkout/hardware',
-            'uses' => 'AssetsController@getCheckout'
+            'uses' => 'AssetsController@getCheckout',
         ]);
         Route::post('{assetId}/checkout', [
             'as' => 'checkout/hardware',
-            'uses' => 'AssetsController@postCheckout'
+            'uses' => 'AssetsController@postCheckout',
         ]);
         Route::get('{assetId}/checkin/{backto?}', [
             'as' => 'checkin/hardware',
-            'uses' => 'AssetsController@getCheckin'
+            'uses' => 'AssetsController@getCheckin',
         ]);
 
         Route::post('{assetId}/checkin/{backto?}', [
             'as' => 'checkin/hardware',
-            'uses' => 'AssetsController@postCheckin'
+            'uses' => 'AssetsController@postCheckin',
         ]);
         Route::get('{assetId}/view', [
             'as' => 'hardware.view',
-            'uses' => 'AssetsController@show'
+            'uses' => 'AssetsController@show',
         ]);
-        Route::get('{assetId}/qr_code', [ 'as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode' ]);
-        Route::get('{assetId}/barcode', [ 'as' => 'barcode/hardware', 'uses' => 'AssetsController@getBarCode' ]);
+        Route::get('{assetId}/qr_code', ['as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode']);
+        Route::get('{assetId}/barcode', ['as' => 'barcode/hardware', 'uses' => 'AssetsController@getBarCode']);
         Route::get('{assetId}/restore', [
             'as' => 'restore/hardware',
-            'uses' => 'AssetsController@getRestore'
+            'uses' => 'AssetsController@getRestore',
         ]);
         Route::post('{assetId}/upload', [
             'as' => 'upload/asset',
-            'uses' => 'AssetsController@postUpload'
+            'uses' => 'AssetsController@postUpload',
         ]);
 
         Route::get('{assetId}/showfile/{fileId}', [
             'as' => 'show/assetfile',
-            'uses' => 'AssetsController@displayFile'
+            'uses' => 'AssetsController@displayFile',
         ]);
 
         Route::delete('{assetId}/showfile/{fileId}/delete', [
             'as' => 'delete/assetfile',
-            'uses' => 'AssetsController@deleteFile'
+            'uses' => 'AssetsController@deleteFile',
         ]);
-
 
         Route::post(
             'bulkedit',
             [
                 'as'   => 'hardware/bulkedit',
-                'uses' => 'AssetsController@postBulkEdit'
+                'uses' => 'AssetsController@postBulkEdit',
             ]
         );
         Route::post(
             'bulkdelete',
             [
                 'as'   => 'hardware/bulkdelete',
-                'uses' => 'AssetsController@postBulkDelete'
+                'uses' => 'AssetsController@postBulkDelete',
             ]
         );
         Route::post(
             'bulksave',
             [
                 'as'   => 'hardware/bulksave',
-                'uses' => 'AssetsController@postBulkSave'
+                'uses' => 'AssetsController@postBulkSave',
             ]
         );
 
         # Bulk checkout / checkin
-         Route::get( 'bulkcheckout',  [
+         Route::get('bulkcheckout',  [
                  'as' => 'hardware/bulkcheckout',
-                 'uses' => 'AssetsController@getBulkCheckout'
+                 'uses' => 'AssetsController@getBulkCheckout',
          ]);
-        Route::post( 'bulkcheckout',  [
+        Route::post('bulkcheckout',  [
             'as' => 'hardware/bulkcheckout',
-            'uses' => 'AssetsController@postBulkCheckout'
+            'uses' => 'AssetsController@postBulkCheckout',
         ]);
-
-
-
-
-});
-
+    });
 
 Route::resource('hardware', 'AssetsController', [
     'middleware' => ['auth'],
-    'parameters' => ['asset' => 'asset_id']
+    'parameters' => ['asset' => 'asset_id'],
 ]);

@@ -7,5 +7,5 @@
         'view'               => 'Controlla Dettagli Manutenzione Prodotto',
         'repair'             => 'Ripara',
         'maintenance'        => 'Manutenzione',
-        'upgrade'            => 'Aggiorna'
+        'upgrade'            => 'Aggiorna',
     ];

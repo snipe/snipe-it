@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Consumable;
@@ -8,17 +9,17 @@ use Gate;
 
 class ConsumablesTransformer
 {
-
-    public function transformConsumables (Collection $consumables, $total)
+    public function transformConsumables(Collection $consumables, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($consumables as $consumable) {
             $array[] = self::transformConsumable($consumable);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformConsumable (Consumable $consumable)
+    public function transformConsumable(Consumable $consumable)
     {
         $array = [
             'id'            => (int) $consumable->id,
@@ -53,20 +54,17 @@ class ConsumablesTransformer
             'delete' => Gate::allows('delete', Consumable::class) ? true : false,
         ];
         $array += $permissions_array;
+
         return $array;
     }
 
-
-    public function transformCheckedoutConsumables (Collection $consumables_users, $total)
+    public function transformCheckedoutConsumables(Collection $consumables_users, $total)
     {
-
-        $array = array();
+        $array = [];
         foreach ($consumables_users as $user) {
             $array[] = (new UsersTransformer)->transformUser($user);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
-
-
-
 }

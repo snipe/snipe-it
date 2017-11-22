@@ -13,7 +13,7 @@ class AddQrTextToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('qr_text', 32)->nullable()->default(NULL);
+            $table->string('qr_text', 32)->nullable()->default(null);
         });
     }
 
@@ -28,5 +28,4 @@ class AddQrTextToSettingsTable extends Migration
             $table->dropColumn('qr_text');
         });
     }
-
 }

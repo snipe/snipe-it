@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class AssetFileRequest extends Request
 {
     /**
@@ -24,7 +22,7 @@ class AssetFileRequest extends Request
     public function rules()
     {
         return [
-          'file.*' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar|max:2000'
+          'file.*' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar|max:2000',
         ];
     }
 

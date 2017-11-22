@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Wartungsvertrag (in Tagen)',
         'notes'                  => 'Anmerkungen',
         'update'                 => 'Wartungsvertrag überarbeiten',
-        'create'                 => 'Wartungsvertrag erstellen'
+        'create'                 => 'Wartungsvertrag erstellen',
     ];

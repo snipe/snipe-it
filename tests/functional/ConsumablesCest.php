@@ -5,10 +5,10 @@ class ConsumablesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
     }
 
     // tests
@@ -23,7 +23,7 @@ class ConsumablesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('consumables.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -34,7 +34,7 @@ class ConsumablesCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('consumables.create'));
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
@@ -61,7 +61,7 @@ class ConsumablesCest
             'qty'               => $consumable->qty,
             'min_amt'           => $consumable->min_amt,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('consumables.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('consumables', $values);

@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Company;
 
 $password = bcrypt('password');
 
@@ -12,18 +11,17 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) use (
         'password' => $password,
         'permissions' => '{"user":"0"}',
         'email' => $faker->safeEmail,
-        'company_id' => rand(1,4),
+        'company_id' => rand(1, 4),
         'locale' => $faker->locale,
         'employee_num' => $faker->numberBetween(3500, 35050),
         'jobtitle' => $faker->jobTitle,
-        'department_id' => rand(1,6),
+        'department_id' => rand(1, 6),
         'phone' => $faker->phoneNumber,
         'notes' => 'Created by DB seeder',
-        'location_id' => rand(1,5),
+        'location_id' => rand(1, 5),
         'activated' => 1,
     ];
 });
-
 
 $factory->state(App\Models\User::class, 'first-admin', function ($faker) {
     return [
@@ -44,7 +42,6 @@ $factory->state(App\Models\User::class, 'snipe-admin', function ($faker) {
     ];
 });
 
-
 // USER GLOBAL PERMISSION STATES
 $factory->state(App\Models\User::class, 'superuser', function ($faker) {
     return [
@@ -55,7 +52,7 @@ $factory->state(App\Models\User::class, 'superuser', function ($faker) {
 $factory->state(App\Models\User::class, 'admin', function ($faker) {
     return [
         'permissions' => '{"admin":"1"}',
-        'manager_id' => rand(1,2),
+        'manager_id' => rand(1, 2),
     ];
 });
 // USER ASSET PERMISSION STATES

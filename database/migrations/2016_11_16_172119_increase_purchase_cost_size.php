@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class IncreasePurchaseCostSize extends Migration
@@ -14,7 +13,6 @@ class IncreasePurchaseCostSize extends Migration
     {
         $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
         $platform->registerDoctrineTypeMapping('enum', 'string');
-
 
         Schema::table('assets', function ($table) {
             $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
@@ -39,7 +37,6 @@ class IncreasePurchaseCostSize extends Migration
         Schema::table('licenses', function ($table) {
             $table->decimal('purchase_cost',  20, 2)->nullable()->default(null)->change();
         });
-
     }
 
     /**

@@ -4,11 +4,7 @@ namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
 use Illuminate\Database\Eloquent\Model;
-use Log;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\SnipeModel;
-use App\Models\User;
 
 class Department extends SnipeModel
 {
@@ -17,7 +13,7 @@ class Department extends SnipeModel
      * validation rules before attempting validation. If this property
      * is not set in the model it will default to true.
      *
-     * @var boolean
+     * @var bool
      */
     protected $injectUniqueIdentifier = true;
 
@@ -45,7 +41,6 @@ class Department extends SnipeModel
         'notes',
     ];
 
-
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
@@ -61,25 +56,22 @@ class Department extends SnipeModel
         return $this->hasMany('\App\Models\User', 'department_id');
     }
 
-
     /**
-    * Return the manager in charge of the dept
-    * @return mixed
-    */
+     * Return the manager in charge of the dept.
+     * @return mixed
+     */
     public function manager()
     {
         return $this->belongsTo('\App\Models\User', 'manager_id');
     }
-
 
     public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id');
     }
 
-
     /**
-     * Query builder scope to search on text
+     * Query builder scope to search on text.
      *
      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $search      Search term
@@ -90,8 +82,5 @@ class Department extends SnipeModel
     {
         return $query->where('name', 'LIKE', "%$search%")
             ->orWhere('notes', 'LIKE', "%$search%");
-
     }
-
-
 }

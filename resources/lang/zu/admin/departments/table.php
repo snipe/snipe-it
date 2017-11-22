@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Igama lomnyango',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Indawo',
     'create'                    => 'Dala uMnyango',
     'update'                    => 'Umnyango Wokuvuselela',
-    );
+    ];

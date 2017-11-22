@@ -7,5 +7,5 @@
         'view'               => 'Papar Terperinci Penyelenggaraan Aset',
         'repair'             => 'Baiki',
         'maintenance'        => 'Penyelenggaraan',
-        'upgrade'            => 'Naik taraf'
+        'upgrade'            => 'Naik taraf',
     ];

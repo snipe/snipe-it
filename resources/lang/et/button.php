@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'Tegevused',
-    'add'    	                => 'Lisa uus',
+return [
+    'actions'                    => 'Tegevused',
+    'add'                        => 'Lisa uus',
     'cancel'                    => 'Loobu',
-    'checkin_and_delete'  	    => 'Checkin & Kustuta kasutaja',
-    'delete'  	                => 'Kustuta',
-    'edit'    	                => 'Muuda',
-    'restore' 	                => 'Taasta',
+    'checkin_and_delete'        => 'Checkin & Kustuta kasutaja',
+    'delete'                    => 'Kustuta',
+    'edit'                        => 'Muuda',
+    'restore'                    => 'Taasta',
     'request'                   => 'Päring',
-    'submit'  	                => 'Kinnita',
+    'submit'                    => 'Kinnita',
     'upload'                    => 'Lae üles',
-	'select_file'				=> 'Vali fail...',
-);
+    'select_file'                => 'Vali fail...',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'En bruger har annulleret en vareforespørgsel på hjemmesiden',
     'a_user_requested' => 'En bruger har anmodet om et emne på hjemmesiden',
     'accessory_name' => 'Tilbehør Navn:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Velkommen :navn',
     'welcome_to' => 'Velkommen til :web!',
     'your_credentials' => 'Dine Snipe-IT Legitimationsoplysninger',
-);
+];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -18,7 +19,7 @@ class FrameGuard
         if (config('app.allow_iframing') == false) {
             $response->headers->set('X-Frame-Options', 'SAMEORIGIN', false);
         }
-        return $response;
 
+        return $response;
     }
 }

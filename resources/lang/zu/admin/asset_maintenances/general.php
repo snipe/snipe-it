@@ -7,5 +7,5 @@
         'view'               => 'Buka Imininingwane Yokugcinwa Kwempahla',
         'repair'             => 'Lungisa',
         'maintenance'        => 'Isondlo',
-        'upgrade'            => 'Thuthukisa'
+        'upgrade'            => 'Thuthukisa',
     ];

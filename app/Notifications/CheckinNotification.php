@@ -6,7 +6,6 @@ use App\Models\Setting;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class CheckinNotification extends Notification
@@ -41,13 +40,14 @@ class CheckinNotification extends Notification
             $notifyBy[] = 'slack';
         }
         $item = $this->params['item'];
-        if (class_basename(get_class($this->params['item']))=='Asset') {
+        if (class_basename(get_class($this->params['item'])) == 'Asset') {
             if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
                 || (method_exists($item, 'getEula') && ($item->getEula()))
             ) {
                 $notifyBy[] = 'mail';
             }
         }
+
         return $notifyBy;
     }
 
@@ -55,7 +55,7 @@ class CheckinNotification extends Notification
     {
         return (new SlackMessage)
             ->success()
-            ->content(class_basename(get_class($this->params['item'])) . " Checked In")
+            ->content(class_basename(get_class($this->params['item'])).' Checked In')
             ->attachment(function ($attachment) use ($notifiable) {
                 $item = $this->params['item'];
                 $admin_user = $this->params['admin'];

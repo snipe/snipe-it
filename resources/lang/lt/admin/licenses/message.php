@@ -1,51 +1,50 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Licenzijos nėra.',
     'user_does_not_exist' => 'Naudotojo nėra.',
-    'asset_does_not_exist' 	=> 'Įrangą, kurią ketinate susieti su šia licenzija neegzistuoja.',
+    'asset_does_not_exist'    => 'Įrangą, kurią ketinate susieti su šia licenzija neegzistuoja.',
     'owner_doesnt_match_asset' => 'Įrangą, kurią ketinate susieti su šia licenzija yra naudojama kažkieno kito nei asmens, kurį pasirinkote meniu.',
-    'assoc_users'	 => 'Ši licenzija šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite licenziją ir tik tuomet bandykite vėl ištrinti. ',
+    'assoc_users'     => 'Ši licenzija šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite licenziją ir tik tuomet bandykite vėl ištrinti. ',
     'select_asset_or_person' => 'Turite pasirinkti turtą arba naudotoją, bet ne abu.',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Licenzija nesukurta, prašome bandykite dar kartą.',
-        'success' => 'Licenzija sukurta.'
-    ),
+        'success' => 'Licenzija sukurta.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
         'success' => 'Failas sėkmingai ištrintas.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
         'success' => 'Failas (-ai) sėkmingai įkelti.',
         'nofiles' => 'Jūs nepasirinkote įkelti jokių failų arba failas, kurį ketinate įkelti yra per didelis',
         'invalidfiles' => 'Vienas ar keli jūsų failai yra per dideli arba yra neleidžiamas failų tipas. Leidžiami failų tipai yra png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ir lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Licenzija nesukurta, prašome bandykite dar kartą',
-        'success' => 'Licenzija atnaujinta sėkmingai.'
-    ),
+        'success' => 'Licenzija atnaujinta sėkmingai.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Ar jūs tikrai norite ištrinti šią licenziją?',
         'error'   => 'Licenzijos nepavyko ištrinti. Prašome bandykite dar kartą.',
-        'success' => 'Licenzija sėkmingai ištrinta.'
-    ),
+        'success' => 'Licenzija sėkmingai ištrinta.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Nepavyko išduoti licenzijos. Prašome bandykite dar kartą.',
-        'success' => 'Licenzija sėkmingai išduota'
-    ),
+        'success' => 'Licenzija sėkmingai išduota',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Nepavyko priimti licenzijos. Prašome bandykite dar kartą.',
-        'success' => 'Licenzija sėkmingai priimta'
-    ),
+        'success' => 'Licenzija sėkmingai priimta',
+    ],
 
-);
+];

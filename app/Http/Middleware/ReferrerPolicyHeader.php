@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -16,6 +17,7 @@ class ReferrerPolicyHeader
     {
         $response = $next($request);
         $response->headers->set('Referrer-Policy', config('app.referrer_policy'));
+
         return $response;
     }
 }

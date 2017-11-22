@@ -2,10 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Setting;
-use App\Models\SnipeModel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
@@ -40,13 +37,13 @@ class ExpectedCheckinNotification extends Notification
         $notifyBy = [];
         $item = $this->params['item'];
 
-        $notifyBy[]='mail';
+        $notifyBy[] = 'mail';
+
         return $notifyBy;
     }
 
     public function toSlack($notifiable)
     {
-
     }
 
     /**
@@ -58,6 +55,7 @@ class ExpectedCheckinNotification extends Notification
     public function toMail($params)
     {
         $formatted_due = Carbon::parse($this->params->expected_checkin)->format('D,  M j, Y');
+
         return (new MailMessage)
             ->error()
             ->subject('Reminder: '.$this->params->present()->name().' checkin deadline approaching')
@@ -67,8 +65,6 @@ class ExpectedCheckinNotification extends Notification
             ->line('Serial: '.$this->params->serial)
             ->line('Asset Tag: '.$this->params->asset_tag)
             ->action('View Your Assets', route('view-assets'));
-
-
     }
 
     /**

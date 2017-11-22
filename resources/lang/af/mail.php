@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '\'N Gebruiker het \'n itemversoek op die webwerf gekanselleer',
     'a_user_requested' => '\'N Gebruiker het \'n item op die webwerf versoek',
     'accessory_name' => 'Toebehore Naam:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Welkom: naam',
     'welcome_to' => 'Welkom by: web!',
     'your_credentials' => 'Jou Snipe-IT-referenties',
-);
+];

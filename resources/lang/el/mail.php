@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Ένας χρήστης έχει ακυρώσει μια αίτηση στοιχείο στην ιστοσελίδα',
     'a_user_requested' => 'Ο χρήστης έχει ζητήσει ένα στοιχείο στην ιστοσελίδα',
     'accessory_name' => 'Όνομα ανταλλακτικού:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Καλώς ήρθατε, %name',
     'welcome_to' => 'Καλώς ήλθατε στο!',
     'your_credentials' => 'Τα διαπιστευτήρια σας Snipe-IT',
-);
+];

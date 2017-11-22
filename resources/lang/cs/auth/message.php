@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Účet s tímto emailem již existuje.',
     'account_not_found'      => 'Neexistující uživatel nebo chybné heslo!',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Uživatelský účet je zablokován.',
     'throttle'               => 'Příliš mnoho neúspěšných pokusů o přihlášení. Zkuste to prosím znovu za :minutes minut.',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Vyskytl se problém při přihlášení, zkuste to znovu.',
         'success' => 'Došlo k úspěšnému přihlášení.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Vyskytl se problém při vytváření účtu, zkuste to znovu.',
         'success' => 'Účet úspěšně vytvořen.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Vyskytl se problém při získávání kódu pro reset hesla, zkuste to znovu.',
             'success' => 'Email určený k obnově hesla úspěšně odeslán.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Vyskytl se problém při resetování hesla, zkuste to znovu.',
             'success' => 'Vaše heslo bylo úspěšně resetováno.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Vyskytl se problém při vytváření účtu, zkuste to znovu.',
         'success' => 'Váš účet byl úspěšně vytvořen.',
-    ),
+    ],
 
-);
+];

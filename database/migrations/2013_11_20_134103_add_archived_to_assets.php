@@ -27,5 +27,4 @@ class AddArchivedToAssets extends Migration
             $table->dropColumn('archived');
         });
     }
-
 }

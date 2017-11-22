@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Informazioni sulle posizioni',
     'about_locations'           => 'Le posizioni sono usate per tracciare la poszione degli utenti, degli asset, e di altri oggetti',
     'assets_rtd'                => 'Asset', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => 'Genitore',
     'currency'                  => 'Valuta della Posizione',
     'ldap_ou'                   => 'LDAP Search OU',
-    );
+    ];

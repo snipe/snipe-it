@@ -13,7 +13,7 @@ class DropForeignKeys extends Migration
      */
     public function up()
     {
-        try  {
+        try {
             Schema::table('accessories', function (Blueprint $table) {
                 $table->dropForeign(['company_id']);
             });
@@ -21,7 +21,7 @@ class DropForeignKeys extends Migration
             //echo $e;
         }
 
-        try  {
+        try {
             Schema::table('users', function (Blueprint $table) {
                 $table->dropForeign(['company_id']);
             });
@@ -29,7 +29,7 @@ class DropForeignKeys extends Migration
             //echo $e;
         }
 
-        try  {
+        try {
             Schema::table('assets', function (Blueprint $table) {
                 $table->dropForeign(['company_id']);
             });
@@ -37,7 +37,7 @@ class DropForeignKeys extends Migration
             //echo $e;
         }
 
-        try  {
+        try {
             Schema::table('components', function (Blueprint $table) {
                 $table->dropForeign(['company_id']);
             });
@@ -45,7 +45,7 @@ class DropForeignKeys extends Migration
             //echo $e;
         }
 
-        try  {
+        try {
             Schema::table('consumables', function (Blueprint $table) {
                 $table->dropForeign(['company_id']);
             });
@@ -53,16 +53,13 @@ class DropForeignKeys extends Migration
             //echo $e;
         }
 
-        try  {
+        try {
             Schema::table('licenses', function (Blueprint $table) {
                 $table->dropForeign(['company_id']);
             });
         } catch (\Exception $e) {
             //echo $e;
         }
-
-
-
     }
 
     /**

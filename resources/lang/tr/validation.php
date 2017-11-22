@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute zaten alınmış.',
     'uploaded'             => ': Özniteliği yüklenemedi.',
     'url'                  => ':attribute biçim geçersiz.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ": Attribute alanı, izin verilmeyen bir karakter içeriyor.",
-        "email_array"      => "Bir veya daha fazla e-posta adresi geçersiz.",
-        "hashed_pass"      => "Geçerli şifre yanlış",
+        'alpha_space' => ': Attribute alanı, izin verilmeyen bir karakter içeriyor.',
+        'email_array'      => 'Bir veya daha fazla e-posta adresi geçersiz.',
+        'hashed_pass'      => 'Geçerli şifre yanlış',
         'dumbpwd'          => 'Bu şifre çok yaygındır.',
-        "statuslabel_type" => "Geçerli bir durum etiketi türü seçmelisiniz",
+        'statuslabel_type' => 'Geçerli bir durum etiketi türü seçmelisiniz',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

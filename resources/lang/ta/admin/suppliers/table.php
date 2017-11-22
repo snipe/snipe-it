@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'சப்ளையர்கள் பற்றி',
     'about_suppliers_text'  => 'சப்ளையர்கள் உருப்படிகளின் மூலத்தைக் கண்டறிய பயன்படுகிறது',
     'address'               => 'சப்ளையர் முகவரி',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'சொத்துகளுக்கான பார்வை',
     'zip'                   => 'அஞ்சல் குறியீடு',
 
-);
+];

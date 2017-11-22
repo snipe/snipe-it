@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Equipo',
     'checkin'           => 'Quita',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Registrado a Email',
     'to_name'           => 'Registrado a Nombre',
     'update'            => 'Actualizar Licencia',
-    'checkout_help'     => 'Puedes asignar la licencia a un equipo a a un usuario. Puedes seleccionarlos a ambos, pero el dueño de la licencia debe ser el mismo usuario al que asignes el equipo.'
-);
+    'checkout_help'     => 'Puedes asignar la licencia a un equipo a a un usuario. Puedes seleccionarlos a ambos, pero el dueño de la licencia debe ser el mismo usuario al que asignes el equipo.',
+];

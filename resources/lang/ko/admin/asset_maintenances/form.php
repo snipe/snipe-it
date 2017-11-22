@@ -10,5 +10,5 @@
         'asset_maintenance_time' => '자산 관리 기간(일 단위)',
         'notes'                  => '주석',
         'update'                 => '자산 관리 갱신',
-        'create'                 => '자산 관리 생성'
+        'create'                 => '자산 관리 생성',
     ];

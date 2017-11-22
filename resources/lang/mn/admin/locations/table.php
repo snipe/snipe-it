@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Байршлын тухай',
     'about_locations'           => 'Байршил нь хэрэглэгчид, эд хөрөнгө, бусад зүйлсийн байршлын мэдээллийг хянахад ашиглагддаг',
     'assets_rtd'                => 'Актив', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => 'Эцэг эх',
     'currency'                  => 'Байршил валют',
     'ldap_ou'                   => 'LDAP хайлт ОУ',
-    );
+    ];

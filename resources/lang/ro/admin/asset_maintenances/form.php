@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'zi',
         'notes'                  => 'notițe',
         'update'                 => 'Actualizați',
-        'create'                 => 'Crea'
+        'create'                 => 'Crea',
     ];

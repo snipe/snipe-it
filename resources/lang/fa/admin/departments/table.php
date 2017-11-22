@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'شناسه',
     'name'                      => 'اسم دپارتمان',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'محل',
     'create'                    => 'ایجاد گروه',
     'update'                    => 'به روز رسانی گروه',
-    );
+    ];

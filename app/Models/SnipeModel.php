@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class SnipeModel extends Model
@@ -15,6 +14,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['purchase_date'] = $value;
+
         return;
     }
 
@@ -23,11 +23,12 @@ class SnipeModel extends Model
      */
     public function setPurchaseCostAttribute($value)
     {
-        $value =  Helper::ParseFloat($value);
+        $value = Helper::ParseFloat($value);
         if ($value == '0.0') {
             $value = null;
         }
         $this->attributes['purchase_cost'] = $value;
+
         return;
     }
 
@@ -37,6 +38,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['location_id'] = $value;
+
         return;
     }
 
@@ -56,6 +58,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['supplier_id'] = $value;
+
         return;
     }
 
@@ -65,6 +68,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['depreciation_id'] = $value;
+
         return;
     }
 
@@ -74,6 +78,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['manufacturer_id'] = $value;
+
         return;
     }
 
@@ -83,6 +88,7 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['min_amt'] = $value;
+
         return;
     }
 
@@ -92,9 +98,9 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['parent_id'] = $value;
+
         return;
     }
-
 
     //
     public function getDisplayNameAttribute()

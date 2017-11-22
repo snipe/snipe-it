@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'info'   => 'Vælg de ønskede muligheder for din aktivrapport.'
-);
+return [
+    'info'   => 'Vælg de ønskede muligheder for din aktivrapport.',
+];

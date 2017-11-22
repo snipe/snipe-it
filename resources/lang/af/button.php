@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'aksies',
-    'add'    	                => 'Voeg nuwe',
+return [
+    'actions'                    => 'aksies',
+    'add'                        => 'Voeg nuwe',
     'cancel'                    => 'kanselleer',
-    'checkin_and_delete'  	    => 'Kontroleer en verwyder gebruiker',
-    'delete'  	                => 'verwyder',
-    'edit'    	                => 'wysig',
-    'restore' 	                => 'herstel',
+    'checkin_and_delete'        => 'Kontroleer en verwyder gebruiker',
+    'delete'                    => 'verwyder',
+    'edit'                        => 'wysig',
+    'restore'                    => 'herstel',
     'request'                   => 'versoek',
-    'submit'  	                => 'Indien',
+    'submit'                    => 'Indien',
     'upload'                    => 'oplaai',
-	'select_file'				=> 'Kies lêer ...',
-);
+    'select_file'                => 'Kies lêer ...',
+];

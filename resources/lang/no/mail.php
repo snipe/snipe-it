@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Brukeren har avbrutt en element-forespørsel på webområdet',
     'a_user_requested' => 'En bruker har bedt om et element på webområdet',
     'accessory_name' => 'Navn tilbehør:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Velkommen :name',
     'welcome_to' => 'Velkommen til :web!',
     'your_credentials' => 'Din Snipe-IT konto',
-);
+];

@@ -4,5 +4,5 @@
         'title'         => 'Te Whakahaere Ahua',
         'asset_name'    => 'Ingoa Ahua',
         'is_warranty'   => 'Te tiwhikete',
-        'dl_csv'        => 'Tikiake CSV'
+        'dl_csv'        => 'Tikiake CSV',
     ];

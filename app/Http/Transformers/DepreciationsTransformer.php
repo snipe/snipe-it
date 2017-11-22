@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Depreciation;
@@ -8,22 +9,22 @@ use App\Helpers\Helper;
 
 class DepreciationsTransformer
 {
-
-    public function transformDepreciations (Collection $depreciations)
+    public function transformDepreciations(Collection $depreciations)
     {
-        $array = array();
+        $array = [];
         foreach ($depreciations as $depreciation) {
             $array[] = self::transformDepreciation($depreciation);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array);
     }
 
-    public function transformDepreciation (Depreciation $depreciation)
+    public function transformDepreciation(Depreciation $depreciation)
     {
         $array = [
             'id' => (int) $depreciation->id,
             'name' => e($depreciation->name),
-            'months' => $depreciation->months . ' '. trans('general.months'),
+            'months' => $depreciation->months.' '.trans('general.months'),
             'created_at' => Helper::getFormattedDateObject($depreciation->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($depreciation->updated_at, 'datetime'),
         ];
@@ -37,7 +38,4 @@ class DepreciationsTransformer
 
         return $array;
     }
-
-
-
 }

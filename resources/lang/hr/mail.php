@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Korisnik je otkazao zahtjev za stavkom na web mjestu',
     'a_user_requested' => 'Korisnik je zatražio stavku na web mjestu',
     'accessory_name' => 'Naziv dodatne opreme:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Dobrodošli: ime',
     'welcome_to' => 'Dobrodošli na: web!',
     'your_credentials' => 'Vaše vjerodajnice za Snipe-IT',
-);
+];

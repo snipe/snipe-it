@@ -7,5 +7,5 @@
         'view'               => 'Prikaz pojedinosti o održavanju imovine',
         'repair'             => 'Popravak',
         'maintenance'        => 'Održavanje',
-        'upgrade'            => 'nadogradnja'
+        'upgrade'            => 'nadogradnja',
     ];

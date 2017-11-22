@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Departamento pavadinimas',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Vieta',
     'create'                    => 'Sukurkite skyrių',
     'update'                    => 'Atnaujinti departamentą',
-    );
+    ];

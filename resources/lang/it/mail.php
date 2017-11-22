@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Un utente ha annullato una richiesta di elemento sul sito web',
     'a_user_requested' => 'Un utente ha richiesto un elemento sul sito web',
     'accessory_name' => 'Nome accessorio:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Benvenuto: nome',
     'welcome_to' => 'Benvenuti in: web!',
     'your_credentials' => 'Le tue credenziali Snipe-IT',
-);
+];

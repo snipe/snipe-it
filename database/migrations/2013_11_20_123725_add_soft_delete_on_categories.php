@@ -25,5 +25,4 @@ class AddSoftDeleteOnCategories extends Migration
     {
         //
     }
-
 }

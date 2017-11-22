@@ -12,7 +12,7 @@ class CreateActionlogTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('action_logs')) {
+        if (! Schema::hasTable('action_logs')) {
             Schema::create('action_logs', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->nullable();

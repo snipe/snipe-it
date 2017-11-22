@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> 'Thao tác',
-    'action' 		=> 'Tác vụ',
-    'by'      		=> 'Bởi',
-    'item' 			=> 'Mục',
+    'actions'        => 'Thao tác',
+    'action'        => 'Tác vụ',
+    'by'              => 'Bởi',
+    'item'            => 'Mục',
 
-);
+];

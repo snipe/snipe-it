@@ -1,10 +1,6 @@
 <?php
+
 use App\Models\Department;
-use App\Models\Location;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
 
 class DepartmentTest extends BaseTest
 {
@@ -25,5 +21,4 @@ class DepartmentTest extends BaseTest
         Department::create($values);
         $this->tester->seeRecord('departments', $values);
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Paskyra su šiuo el. paštu jau yra sukurta.',
     'account_not_found'      => 'Naudotojo vardas arba slaptažodis neteisingas.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Šio vartojo paskyra užblokuota.',
     'throttle'               => 'Per daug bandymų prisijungti nepavyko. Prašome pabandyti dar kartą maždaug minučių (minutėmis).',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Iškilo problema bandant prisijungti, prašome bandykite dar kartą.',
         'success' => 'Jūs sėkmingai prisijungėte.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Siekiant suskurti jūsų paskyrą iškilo problema. Prašome bandykite dar kartą.',
         'success' => 'Paskyra sėkmingai sukurta.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Iškilo sunkumų siekiant gauti slaptažodžio atnaujinimo kodą. Prašome bandykite dar kartą.',
             'success' => 'Slaptažodžio atkūrimo el. paštas išsiųstas.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Iškilo sunkumų siekiant pakeisti jūsų slaptažodį. Prašome bandykite dar kartą.',
             'success' => 'Jūsų slaptaždis sėkmingai atnaujintas.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Iškilo sunkumų siekiant aktyvuoti jūsų paskyrą. Prašome bandyti dar kartą.',
         'success' => 'Jūsų paskyra sėkmingai aktyvuota.',
-    ),
+    ],
 
-);
+];

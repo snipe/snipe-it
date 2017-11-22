@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Manufacturer;
-use App\Http\Transformers\DatatablesTransformer;
 use App\Http\Transformers\ManufacturersTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 
@@ -25,9 +24,8 @@ class ManufacturersController extends Controller
         $allowed_columns = ['id','name','url','support_url','support_email','support_phone','created_at','updated_at','image'];
 
         $manufacturers = Manufacturer::select(
-            array('id','name','url','support_url','support_email','support_phone','created_at','updated_at','image')
+            ['id', 'name', 'url', 'support_url', 'support_email', 'support_phone', 'created_at', 'updated_at', 'image']
         )->withCount('assets')->withCount('licenses')->withCount('consumables')->withCount('accessories');
-
 
         if ($request->has('search')) {
             $manufacturers = $manufacturers->TextSearch($request->input('search'));
@@ -41,9 +39,9 @@ class ManufacturersController extends Controller
 
         $total = $manufacturers->count();
         $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
+
         return (new ManufacturersTransformer)->transformManufacturers($manufacturers, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -62,8 +60,8 @@ class ManufacturersController extends Controller
         if ($manufacturer->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $manufacturer, trans('admin/manufacturers/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $manufacturer->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $manufacturer->getErrors()));
     }
 
     /**
@@ -78,9 +76,9 @@ class ManufacturersController extends Controller
     {
         $this->authorize('view', Manufacturer::class);
         $manufacturer = Manufacturer::findOrFail($id);
+
         return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -118,21 +116,19 @@ class ManufacturersController extends Controller
         $manufacturer = Manufacturer::findOrFail($id);
         $this->authorize('delete', $manufacturer);
         $manufacturer->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
     }
 
     /**
-     * Gets a paginated collection for the select2 menus
+     * Gets a paginated collection for the select2 menus.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
-
         $manufacturers = Manufacturer::select([
             'id',
             'name',
@@ -154,6 +150,5 @@ class ManufacturersController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($manufacturers);
-
     }
 }

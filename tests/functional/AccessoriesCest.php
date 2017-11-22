@@ -5,11 +5,11 @@ class AccessoriesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
-         $I->seeAuthentication();
+        $I->amOnPage('/login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
+        $I->seeAuthentication();
     }
 
     // tests
@@ -25,7 +25,7 @@ class AccessoriesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage('/accessories/create');
         $I->seeResponseCodeIs(200);
         $I->click('Save');
@@ -37,7 +37,7 @@ class AccessoriesCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage('/accessories/create');
         $I->seeResponseCodeIs(200);
         $I->fillField('name', 't2');
@@ -64,10 +64,10 @@ class AccessoriesCest
             'purchase_date' => '2016-01-01',
             'purchase_cost' => $accessory->purchase_cost,
             'qty'           => $accessory->qty,
-            'min_amt'       => $accessory->min_amt
+            'min_amt'       => $accessory->min_amt,
         ];
 
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage('/accessories/create');
         $I->seeResponseCodeIs(200);
 
@@ -81,7 +81,7 @@ class AccessoriesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an accessory');
-        $I->sendDelete( route('accessories.destroy', $I->getAccessoryId() ), ['_token' => csrf_token()] );
+        $I->sendDelete(route('accessories.destroy', $I->getAccessoryId()), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 }

@@ -7,5 +7,5 @@
         'view'               => 'Zobacz szczegóły konserwacji aktywa',
         'repair'             => 'Naprawa',
         'maintenance'        => 'Konserwacja',
-        'upgrade'            => 'Uaktualnienie'
+        'upgrade'            => 'Uaktualnienie',
     ];

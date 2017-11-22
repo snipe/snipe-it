@@ -22,7 +22,7 @@ class AssetsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('hardware.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -72,7 +72,7 @@ class AssetsCest
             'requestable'       => $asset->requestable,
         ];
 
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('hardware.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('assets', $seenValues);

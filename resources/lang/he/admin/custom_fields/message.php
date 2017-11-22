@@ -1,57 +1,52 @@
 <?php
 
-return array(
+return [
 
-    'field' => array(
+    'field' => [
         'invalid'   => 'שדה זה אינו קיים.',
         'already_added'   => 'השדה כבר נוסף',
 
-        'create' => array(
+        'create' => [
             'error'   => 'שדה לא נוצר, נסה שוב.',
             'success' => 'שדה נוצר בהצלחה.',
-            'assoc_success' => 'שדה נוסף בהצלחה ל- fieldset.'
-        ),
+            'assoc_success' => 'שדה נוסף בהצלחה ל- fieldset.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'השדה לא עודכן, נסה שוב',
-            'success' => 'שדה עודכן בהצלחה.'
-        ),
+            'success' => 'שדה עודכן בהצלחה.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'האם אתה בטוח שברצונך למחוק שדה זה?',
+        'delete' => [
+            'confirm'    => 'האם אתה בטוח שברצונך למחוק שדה זה?',
             'error'   => 'הייתה בעיה במחיקת השדה. בבקשה נסה שוב.',
             'success' => 'השדה נמחק בהצלחה.',
             'in_use'   => 'שדה עדיין בשימוש.',
-        )
+        ],
 
-    ),
+    ],
 
-    'fieldset' => array(
+    'fieldset' => [
 
         'does_not_exist' => 'Fieldset אינו קיים',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Fieldset לא נוצר, נסה שוב.',
-            'success' => 'Fieldset נוצר בהצלחה.'
-        ),
+            'success' => 'Fieldset נוצר בהצלחה.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Fieldset לא עודכן, נסה שוב',
-            'success' => 'Fieldset עודכן בהצלחה.'
-        ),
+            'success' => 'Fieldset עודכן בהצלחה.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'האם אתה בטוח שברצונך למחוק את השדה הזה?',
+        'delete' => [
+            'confirm'    => 'האם אתה בטוח שברצונך למחוק את השדה הזה?',
             'error'   => 'היתה בעיה במחיקת השדה. בבקשה נסה שוב.',
             'success' => 'ה- fieldset נמחק בהצלחה.',
             'in_use'   => 'Fieldset עדיין בשימוש.',
-        )
+        ],
 
-    ),
+    ],
 
-
-
-
-
-
-);
+];

@@ -7,5 +7,5 @@
         'view'               => 'Bekyk Bate Onderhoud Besonderhede',
         'repair'             => 'herstel',
         'maintenance'        => 'onderhoud',
-        'upgrade'            => 'opgradering'
+        'upgrade'            => 'opgradering',
     ];

@@ -3,22 +3,18 @@
  * Created by PhpStorm.
  * User: parallelgrapefruit
  * Date: 12/23/16
- * Time: 12:15 PM
+ * Time: 12:15 PM.
  */
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
- * Class AssetModelPresenter
- * @package App\Presenters
+ * Class AssetModelPresenter.
  */
 class AssetModelPresenter extends Presenter
 {
-    
     /**
-     * Formatted note for this model
+     * Formatted note for this model.
      * @return string
      */
     public function note()
@@ -28,7 +24,6 @@ class AssetModelPresenter extends Presenter
         if ($this->model->note) {
             return $Parsedown->text($this->model->note);
         }
-
     }
 
     public function eolText()
@@ -36,11 +31,12 @@ class AssetModelPresenter extends Presenter
         if ($this->eol) {
             return $this->eol.' '.trans('general.months');
         }
+
         return '';
     }
 
     /**
-     * Pretty name for this model
+     * Pretty name for this model.
      * @return string
      */
     public function modelName()
@@ -52,8 +48,9 @@ class AssetModelPresenter extends Presenter
         $name .= $this->name;
 
         if ($this->model_number) {
-            $name .=" (#".$this->model_number.')';
+            $name .= ' (#'.$this->model_number.')';
         }
+
         return $name;
     }
 
@@ -72,9 +69,10 @@ class AssetModelPresenter extends Presenter
      */
     public function imageUrl()
     {
-        if (!empty($this->image)) {
-            return '<img src="' . url('/') . '/uploads/models/' . $this->image . '" height=50 width=50>';
+        if (! empty($this->image)) {
+            return '<img src="'.url('/').'/uploads/models/'.$this->image.'" height=50 width=50>';
         }
+
         return '';
     }
 
@@ -84,9 +82,10 @@ class AssetModelPresenter extends Presenter
      */
     public function imageSrc()
     {
-        if (!empty($this->image)) {
-            return url('/') . '/uploads/models/' . $this->image;
+        if (! empty($this->image)) {
+            return url('/').'/uploads/models/'.$this->image;
         }
+
         return '';
     }
 

@@ -1,22 +1,21 @@
  <?php
 
 use App\Models\Accessory;
- use App\Models\Asset;
- use App\Models\AssetModel;
- use App\Models\Category;
+use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Category;
 use App\Models\Company;
- use App\Models\Component;
- use App\Models\Consumable;
- use App\Models\Depreciation;
- use App\Models\Location;
+use App\Models\Component;
+use App\Models\Consumable;
+use App\Models\Depreciation;
+use App\Models\Location;
 use App\Models\Manufacturer;
- use App\Models\Statuslabel;
- use App\Models\Supplier;
- use App\Models\User;
+use App\Models\Statuslabel;
+use App\Models\Supplier;
+use App\Models\User;
 
-
- /**
- * Inherited Methods
+/**
+ * Inherited Methods.
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -29,33 +28,32 @@ use App\Models\Manufacturer;
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class FunctionalTester extends \Codeception\Actor
 {
     use _generated\FunctionalTesterActions;
 
-   /**
-    * Define custom actions here
-    */
-
+    /**
+     * Define custom actions here.
+     */
     public function getCompanyId()
     {
-       return Company::inRandomOrder()->first()->id;
+        return Company::inRandomOrder()->first()->id;
     }
 
     public function getCategoryId()
     {
-       return Category::inRandomOrder()->first()->id;
+        return Category::inRandomOrder()->first()->id;
     }
 
     public function getManufacturerId()
     {
-       return Manufacturer::inRandomOrder()->first()->id;
+        return Manufacturer::inRandomOrder()->first()->id;
     }
 
     public function getLocationId()
     {
-       return Location::inRandomOrder()->first()->id;
+        return Location::inRandomOrder()->first()->id;
     }
 
     /**
@@ -63,7 +61,7 @@ class FunctionalTester extends \Codeception\Actor
      */
     public function getAccessoryId()
     {
-      return Accessory::inRandomOrder()->first()->id;
+        return Accessory::inRandomOrder()->first()->id;
     }
 
     /**
@@ -91,7 +89,7 @@ class FunctionalTester extends \Codeception\Actor
     }
 
     /**
-     * Id of random user
+     * Id of random user.
      * @return mixed
      */
     public function getUserId()
@@ -116,7 +114,7 @@ class FunctionalTester extends \Codeception\Actor
     }
 
     /**
-     * An Empty category
+     * An Empty category.
      * @return mixed Id of Empty Category
      */
     public function getEmptyCategoryId()
@@ -125,7 +123,7 @@ class FunctionalTester extends \Codeception\Actor
     }
 
     /**
-     * A random component id for testing
+     * A random component id for testing.
      * @return mixed Id of random component
      */
     public function getComponentId()
@@ -134,7 +132,7 @@ class FunctionalTester extends \Codeception\Actor
     }
 
     /**
-     * A random consumable Id for testing
+     * A random consumable Id for testing.
      * @return mixed
      */
     public function getConsumableId()

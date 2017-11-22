@@ -1,4 +1,5 @@
 <?php
+
 namespace Helper;
 
 use Illuminate\Support\Facades\Artisan;

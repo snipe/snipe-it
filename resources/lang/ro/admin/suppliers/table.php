@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Despre Furnizori',
     'about_suppliers_text'  => 'Furnizorii sunt utilizați pentru a urmări sursa de articole',
     'address'               => 'Adresa furnizor',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Vezi active pentru',
     'zip'                   => 'Cod postal',
 
-);
+];

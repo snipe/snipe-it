@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Mayelana nabathengi',
     'about_suppliers_text'  => 'Abathengi basetshenziselwa ukulandelela umthombo wezinto',
     'address'               => 'Ikheli Lezinsizakalo',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Buka amafa',
     'zip'                   => 'I-Postal Code',
 
-);
+];

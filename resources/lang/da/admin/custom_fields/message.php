@@ -1,57 +1,52 @@
 <?php
 
-return array(
+return [
 
-    'field' => array(
+    'field' => [
         'invalid'   => 'Dette felt findes ikke.',
         'already_added'   => 'Feltet allerede tilføjet',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Feltet blev ikke oprettet, prøve igen.',
             'success' => 'Feltet oprettet.',
-            'assoc_success' => 'Felt tilføjet til feltsættet.'
-        ),
+            'assoc_success' => 'Felt tilføjet til feltsættet.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Feltet blev ikke opdateret, prøv igen',
-            'success' => 'Feltet opdateret.'
-        ),
+            'success' => 'Feltet opdateret.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Er du sikker på du ønsker at slette feltet?',
+        'delete' => [
+            'confirm'    => 'Er du sikker på du ønsker at slette feltet?',
             'error'   => 'Der opstod et problem under sletning af feltet. Prøv venligst igen.',
             'success' => 'Feltet blev slettet.',
             'in_use'   => 'Feltet er stadig i brug.',
-        )
+        ],
 
-    ),
+    ],
 
-    'fieldset' => array(
+    'fieldset' => [
 
         'does_not_exist' => 'Feltsættet findes ikke',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Feltsættet blev ikke opdateret, prøv igen.',
-            'success' => 'Feltsættet oprettet.'
-        ),
+            'success' => 'Feltsættet oprettet.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Feltsættet blev ikke opdateret, prøv igen',
-            'success' => 'Feltsættet opdateret.'
-        ),
+            'success' => 'Feltsættet opdateret.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Er du sikker på du vil slette dette feltsæt?',
+        'delete' => [
+            'confirm'    => 'Er du sikker på du vil slette dette feltsæt?',
             'error'   => 'Der opstod et problem under sletning af feltsættet. Prøv venligst igen.',
             'success' => 'Feltsættet blev slettet.',
             'in_use'   => 'Feltsættet er stadig i brug.',
-        )
+        ],
 
-    ),
+    ],
 
-
-
-
-
-
-);
+];

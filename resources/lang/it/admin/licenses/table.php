@@ -1,17 +1,17 @@
 <?php
 
-return array(
+return [
 
-    'assigned_to'   	=> 'Assegnato a',
-    'checkout'   		=> 'Dentro/Fuori',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'Licenza Email',
-    'license_name'   	=> 'Autorizzato da',
-    'purchase_date'   	=> 'Data di acquisto',
-    'purchased'   		=> 'Acquistato',
-    'seats'   			=> 'Sedi',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Seriale',
-    'title'      		=> 'Licenza',
+    'assigned_to'    => 'Assegnato a',
+    'checkout'        => 'Dentro/Fuori',
+    'id'                  => 'ID',
+    'license_email'    => 'Licenza Email',
+    'license_name'    => 'Autorizzato da',
+    'purchase_date'    => 'Data di acquisto',
+    'purchased'        => 'Acquistato',
+    'seats'            => 'Sedi',
+    'hardware'        => 'Hardware',
+    'serial'            => 'Seriale',
+    'title'              => 'Licenza',
 
-);
+];

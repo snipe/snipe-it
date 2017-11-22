@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Asset',
     'checkin'           => 'Checkin',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licensed to Email',
     'to_name'           => 'Licensed to Name',
     'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
-);
+    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.',
+];

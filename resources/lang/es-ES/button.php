@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'Acciones',
-    'add'    	                => 'Agregar nuevo',
+return [
+    'actions'                    => 'Acciones',
+    'add'                        => 'Agregar nuevo',
     'cancel'                    => 'Cancelar',
-    'checkin_and_delete'  	    => 'Verificar y eliminar usuario',
-    'delete'  	                => 'Borrar',
-    'edit'    	                => 'Editar',
-    'restore' 	                => 'Restaurar',
+    'checkin_and_delete'        => 'Verificar y eliminar usuario',
+    'delete'                    => 'Borrar',
+    'edit'                        => 'Editar',
+    'restore'                    => 'Restaurar',
     'request'                   => 'Solicitud',
-    'submit'  	                => 'Enviar',
+    'submit'                    => 'Enviar',
     'upload'                    => 'Subir',
-	'select_file'				=> 'Seleccionar Archivo...',
-);
+    'select_file'                => 'Seleccionar Archivo...',
+];

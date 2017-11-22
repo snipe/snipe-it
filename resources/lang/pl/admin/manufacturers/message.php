@@ -1,24 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Producent nie istnieje.',
-    'assoc_users'	 => 'Wybrany producent jest obecnie skojarzony z minimum jednym modelem i nie może zostać usunięty. Uaktualnij swoją listę modeli urządzeń by nie zawierała tego producenta, a następnie spróbuj ponownie. ',
+    'assoc_users'     => 'Wybrany producent jest obecnie skojarzony z minimum jednym modelem i nie może zostać usunięty. Uaktualnij swoją listę modeli urządzeń by nie zawierała tego producenta, a następnie spróbuj ponownie. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Producent nie został stworzony, spróbuj ponownie.',
-        'success' => 'Producent stworzony pomyślnie.'
-    ),
+        'success' => 'Producent stworzony pomyślnie.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Producent nie został zaktualizowany, spróbuj ponownie',
-        'success' => 'Producent zaktualizowany pomyślnie.'
-    ),
+        'success' => 'Producent zaktualizowany pomyślnie.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Czy na pewno usunąć danego producenta?',
         'error'   => 'Podczas usuwania producenta wystąpił błąd. Spróbuj ponownie.',
-        'success' => 'Producent usunięty pomyślnie.'
-    )
+        'success' => 'Producent usunięty pomyślnie.',
+    ],
 
-);
+];

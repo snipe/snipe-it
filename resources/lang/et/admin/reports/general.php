@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'info'   => 'Valige oma varade aruandele vajalikud valikud.'
-);
+return [
+    'info'   => 'Valige oma varade aruandele vajalikud valikud.',
+];

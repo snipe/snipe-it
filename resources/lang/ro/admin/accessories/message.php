@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Accesoriul nu exista.',
-    'assoc_users'	 => 'Acest accesoriu are în prezent : count elemente predate la utilizatori. Vă rugăm să verificaţi accesoriile și încercați din nou. ',
+    'assoc_users'     => 'Acest accesoriu are în prezent : count elemente predate la utilizatori. Vă rugăm să verificaţi accesoriile și încercați din nou. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Accesoriul nu a fost adaugat, va rugam incercati din nou.',
-        'success' => 'Accesoriu adaugat cu succes.'
-    ),
+        'success' => 'Accesoriu adaugat cu succes.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Accesoriul nu a fost actualizat, va rugam incercati din nou,',
-        'success' => 'Accesoriu actualizat cu succes.'
-    ),
+        'success' => 'Accesoriu actualizat cu succes.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Sigur doriți să ștergeți acest accesoriu?',
         'error'   => 'A apărut o problemă la ştergerea accesoriului. Vă rugăm să încercaţi din nou.',
-        'success' => 'Accesoriul a fost şters cu succes.'
-    ),
+        'success' => 'Accesoriul a fost şters cu succes.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Accesoriu nu a fost predat, vă rugăm să încercaţi din nou',
-        'success' 		=> 'Accesoriu a fost predat.',
-        'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.'
-    ),
+     'checkout' => [
+        'error'        => 'Accesoriu nu a fost predat, vă rugăm să încercaţi din nou',
+        'success'        => 'Accesoriu a fost predat.',
+        'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Accesoriul nu a fost primit, vă rugăm să încercaţi din nou',
-        'success' 		=> 'Accesoriu primit cu succes.',
-        'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.'
-    )
+    'checkin' => [
+        'error'        => 'Accesoriul nu a fost primit, vă rugăm să încercaţi din nou',
+        'success'        => 'Accesoriu primit cu succes.',
+        'user_does_not_exist' => 'Acest utilizator nu este valid. Vă rugăm să încercaţi din nou.',
+    ],
 
-
-);
+];

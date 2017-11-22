@@ -11,13 +11,11 @@ use Mail;
 
 class SettingsController extends Controller
 {
-
-
     public function ldaptest()
     {
-
-        if (Setting::getSettings()->ldap_enabled!='1') {
+        if (Setting::getSettings()->ldap_enabled != '1') {
             \Log::debug('LDAP is not enabled cannot test.');
+
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
 
@@ -28,41 +26,41 @@ class SettingsController extends Controller
             try {
                 \Log::debug('attempting to bind to LDAP for LDAP test');
                 Ldap::bindAdminToLdap($connection);
+
                 return response()->json(['message' => 'It worked!'], 200);
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
+
                 return response()->json(['message' => $e->getMessage()], 400);
                 //return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed');
+
             return response()->json(['message' => $e->getMessage()], 600);
         }
-
-
     }
 
     public function ldaptestlogin(Request $request)
     {
-
-        if (Setting::getSettings()->ldap_enabled!='1') {
+        if (Setting::getSettings()->ldap_enabled != '1') {
             \Log::debug('LDAP is not enabled. Cannot test.');
+
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
 
-
-        $rules = array(
+        $rules = [
             'ldaptest_user' => 'required',
-            'ldaptest_password' => 'required'
-        );
+            'ldaptest_password' => 'required',
+        ];
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             \Log::debug('LDAP Validation test failed.');
-            $validation_errors = implode(' ',$validator->errors()->all());
+            $validation_errors = implode(' ', $validator->errors()->all());
+
             return response()->json(['message' => $validator->errors()->all()], 400);
         }
-        
 
         \Log::debug('Preparing to test LDAP login');
         try {
@@ -73,31 +71,32 @@ class SettingsController extends Controller
                 try {
                     $ldap_user = Ldap::findAndBindUserLdap($request->input('ldaptest_user'), $request->input('ldaptest_password'));
                     if ($ldap_user) {
-                        \Log::debug('It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.');
-                        return response()->json(['message' => 'It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.'], 200);
-                    }
-                    return response()->json(['message' => 'Login Failed. '. $request->input('ldaptest_user').' did not successfully bind to LDAP.'], 400);
+                        \Log::debug('It worked! '.$request->input('ldaptest_user').' successfully binded to LDAP.');
 
+                        return response()->json(['message' => 'It worked! '.$request->input('ldaptest_user').' successfully binded to LDAP.'], 200);
+                    }
+
+                    return response()->json(['message' => 'Login Failed. '.$request->input('ldaptest_user').' did not successfully bind to LDAP.'], 400);
                 } catch (\Exception $e) {
                     \Log::debug('LDAP login failed');
+
                     return response()->json(['message' => $e->getMessage()], 400);
                 }
-
             } catch (\Exception $e) {
                 \Log::debug('Bind failed');
+
                 return response()->json(['message' => $e->getMessage()], 400);
                 //return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed');
+
             return response()->json(['message' => $e->getMessage()], 500);
         }
-
-
     }
 
     /**
-     * Test the email configuration
+     * Test the email configuration.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
@@ -105,22 +104,20 @@ class SettingsController extends Controller
      */
     public function ajaxTestEmail()
     {
-        if (!config('app.lock_passwords')) {
+        if (! config('app.lock_passwords')) {
             try {
                 Mail::send('emails.test', [], function ($m) {
                     $m->to(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.test_email'));
                 });
+
                 return response()->json(['message' => 'Mail sent to '.config('mail.reply_to.address')], 200);
             } catch (Exception $e) {
                 return response()->json(['message' => $e->getMessage()], 500);
             }
         }
+
         return response()->json(['message' => 'Mail would have been sent, but this application is in demo mode! '], 200);
-
     }
-
-
-
 }

@@ -23,7 +23,6 @@ $factory->define(App\Models\AssetModel::class, function (Faker\Generator $faker)
     ];
 });
 
-
 // 1
 $factory->state(App\Models\AssetModel::class, 'mbp-13-model', function ($faker) {
     return [
@@ -114,7 +113,6 @@ $factory->state(App\Models\AssetModel::class, 'yoga-model', function ($faker) {
 |--------------------------------------------------------------------------
 */
 
-
 $factory->state(App\Models\AssetModel::class, 'macpro-model', function ($faker) {
     return [
         'name' => 'iMac Pro',
@@ -149,13 +147,11 @@ $factory->state(App\Models\AssetModel::class, 'optiplex-model', function ($faker
     ];
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Conference Phones
 |--------------------------------------------------------------------------
 */
-
 
 $factory->state(App\Models\AssetModel::class, 'polycom-model', function ($faker) {
     return [
@@ -179,7 +175,6 @@ $factory->state(App\Models\AssetModel::class, 'polycomcx-model', function ($fake
     ];
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Tablets
@@ -197,7 +192,6 @@ $factory->state(App\Models\AssetModel::class, 'ipad-model', function ($faker) {
     ];
 });
 
-
 $factory->state(App\Models\AssetModel::class, 'tab3-model', function ($faker) {
     return [
         'name' => 'Tab3',
@@ -208,7 +202,6 @@ $factory->state(App\Models\AssetModel::class, 'tab3-model', function ($faker) {
         'image' => 'tab3.png',
     ];
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -265,9 +258,3 @@ $factory->state(App\Models\AssetModel::class, 'ultrasharp', function ($faker) {
         'image' => 'ultrasharp.jpg',
     ];
 });
-
-
-
-
-
-

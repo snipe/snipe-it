@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -17,6 +18,7 @@ class XssProtectHeader
         $mode = '1;mode=block';
         $response = $next($request);
         $response->headers->set('X-XSS-Protection', $mode);
+
         return $response;
     }
 }

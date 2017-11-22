@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Пользователь отменил запрос элемента на веб-сайте',
     'a_user_requested' => 'Пользователь запросил элемент на веб-сайте',
     'accessory_name' => 'Аксессуар:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Добро пожаловать, :name',
     'welcome_to' => 'Добро пожаловать на :web!',
     'your_credentials' => 'Ваш логин и пароль от Snipe-IT',
-);
+];

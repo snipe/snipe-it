@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Lisävarustetta ei ole olemassa.',
-    'assoc_users'	 => 'Tällä lisävarusteella on tällä hetkellä: laskea kohteet, jotka on tarkistettu käyttäjille. Tarkista lisävarusteet ja yritä uudelleen.',
+    'assoc_users'     => 'Tällä lisävarusteella on tällä hetkellä: laskea kohteet, jotka on tarkistettu käyttäjille. Tarkista lisävarusteet ja yritä uudelleen.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Lisävarustetta ei luotu, yritä uudelleen.',
-        'success' => 'Lisävaruste on luotu.'
-    ),
+        'success' => 'Lisävaruste on luotu.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Lisävarustetta ei päivitetty, yritä uudelleen',
-        'success' => 'Lisävaruste päivitettiin onnistuneesti.'
-    ),
+        'success' => 'Lisävaruste päivitettiin onnistuneesti.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Haluatko varmasti poistaa tämän lisävarusteen?',
         'error'   => 'Ongelma poistaa lisäosan. Yritä uudelleen.',
-        'success' => 'Lisävaruste poistettiin onnistuneesti.'
-    ),
+        'success' => 'Lisävaruste poistettiin onnistuneesti.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
-        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
-    ),
+     'checkout' => [
+        'error'        => 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
+        'success'        => 'Lisävaruste tarkistettiin onnistuneesti.',
+        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
-        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
-    )
+    'checkin' => [
+        'error'        => 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
+        'success'        => 'Lisävaruste tarkistettiin onnistuneesti.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
+    ],
 
-
-);
+];

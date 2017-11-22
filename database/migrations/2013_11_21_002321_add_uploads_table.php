@@ -32,5 +32,4 @@ class AddUploadsTable extends Migration
     {
         Schema::drop('asset_uploads');
     }
-
 }

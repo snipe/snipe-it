@@ -15,7 +15,6 @@ class AddContactsToUsers extends Migration
             $table->integer('location_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('jobtitle')->nullable();
-
         });
     }
 
@@ -30,9 +29,6 @@ class AddContactsToUsers extends Migration
             $table->dropColumn('location_id');
             $table->dropColumn('phone');
             $table->dropColumn('jobtitle');
-
         });
-
     }
-
 }

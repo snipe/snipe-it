@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Die accessoire bestaan ​​nie.',
-    'assoc_users'	 => 'Hierdie bykomstige het tans: tel items wat uitgekontroleer is aan gebruikers. Kontroleer asseblief die bykomstighede en en probeer weer.',
+    'assoc_users'     => 'Hierdie bykomstige het tans: tel items wat uitgekontroleer is aan gebruikers. Kontroleer asseblief die bykomstighede en en probeer weer.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Die bykomstigheid is nie geskep nie, probeer asseblief weer.',
-        'success' => 'Die bykomstigheid is suksesvol geskep.'
-    ),
+        'success' => 'Die bykomstigheid is suksesvol geskep.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Die bykomstigheid is nie opgedateer nie, probeer asseblief weer',
-        'success' => 'Die bykomstigheid is suksesvol opgedateer.'
-    ),
+        'success' => 'Die bykomstigheid is suksesvol opgedateer.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Is jy seker jy wil hierdie toebehore uitvee?',
         'error'   => 'Daar was \'n probleem met die verwydering van die bykomstigheid. Probeer asseblief weer.',
-        'success' => 'Die bykomstigheid is suksesvol verwyder.'
-    ),
+        'success' => 'Die bykomstigheid is suksesvol verwyder.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Toebehore is nie nagegaan nie, probeer asseblief weer',
-        'success' 		=> 'Toebehore suksesvol nagegaan.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
-    ),
+     'checkout' => [
+        'error'        => 'Toebehore is nie nagegaan nie, probeer asseblief weer',
+        'success'        => 'Toebehore suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Toebehore is nie nagegaan nie, probeer asseblief weer',
-        'success' 		=> 'Toebehore is suksesvol nagegaan.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.'
-    )
+    'checkin' => [
+        'error'        => 'Toebehore is nie nagegaan nie, probeer asseblief weer',
+        'success'        => 'Toebehore is suksesvol nagegaan.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer asseblief weer.',
+    ],
 
-
-);
+];

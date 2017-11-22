@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Despre Locații',
     'about_locations'           => 'Locațiile sunt utilizate pentru a urmări informațiile despre locație pentru utilizatori, active și alte elemente',
     'assets_rtd'                => 'bunuri', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => 'Mamă',
     'currency'                  => 'Locație Monedă',
     'ldap_ou'                   => 'LDAP Căutați OU',
-    );
+    ];

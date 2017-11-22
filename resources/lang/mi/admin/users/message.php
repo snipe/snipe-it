@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Kua whakaaetia e koe tenei taonga.',
     'declined'                  => 'Kua paopao angitu koe ki tenei taonga.',
-    'bulk_manager_warn'	        => 'Kua angitu te whakahoutia o nga kaiwhakamahi, heoi kihai i tohua to tautuhinga kaiwhakahaere no te mea ko te kaiwhakahaere i tohua e koe i roto i te rarangi kaiwhakamahi kia whakatikaia, kaore ano hoki nga kaiwhakamahi i to ratou ake kaiwhakahaere. Tēnā koa tīpako anō i ō kaiwhakamahi, kaore i te kaiwhakahaere.',
+    'bulk_manager_warn'            => 'Kua angitu te whakahoutia o nga kaiwhakamahi, heoi kihai i tohua to tautuhinga kaiwhakahaere no te mea ko te kaiwhakahaere i tohua e koe i roto i te rarangi kaiwhakamahi kia whakatikaia, kaore ano hoki nga kaiwhakamahi i to ratou ake kaiwhakahaere. Tēnā koa tīpako anō i ō kaiwhakamahi, kaore i te kaiwhakahaere.',
     'user_exists'               => 'Kua noho kē te Kaiwhakamahi!',
     'user_not_found'            => 'Kāore te Kaiwhakamahi [: id] i te tīariari.',
     'user_login_required'       => 'Kei te hiahiatia te mara takiuru',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => 'Kua mukua tenei kaiwhakamahi. Me whakahou e koe tenei kaiwhakamahi ki te whakatika i aua mea, ki te tuku ranei i nga taonga hou.',
     'ldap_not_configured'        => 'Ko te whakaurutanga LDAP kua kore i whirihorahia mo tenei whakauru.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'I hanga angitu te Kaiwhakamahi.',
         'update'    => 'I whakahoutia te kaiwhakamahi.',
         'update_bulk'    => 'Kua pai te whakahou o nga kaiwhakamahi!',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => 'I tino angitu te Kaiwhakamahi.',
         'restored'  => 'I angitu te ora o te Kaiwhakamahi.',
         'import'    => 'He pai te kawemai o nga kaiwhakamahi.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'He raruraru kei te hanga i te kaiwhakamahi. Tena ngana ano.',
         'update' => 'He raru kei te whakahou i te kaiwhakamahi. Tena ngana ano.',
         'delete' => 'He raru kei te whakakore i te kaiwhakamahi. Tena ngana ano.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'Kāore i taea te rapu i te tūmau LDAP. Titiro koa ki te whirihoranga o tō tūmau LDAP i te kōnae whirihora LDAP. <br>Error mai i te Tūmau LDAP:',
         'ldap_could_not_get_entries' => 'Kāore i taea te tiki tuhinga mai i te tūmau LDAP. Titiro koa ki te whirihoranga o tō tūmau LDAP i te kōnae whirihora LDAP. <br>Error mai i te Tūmau LDAP:',
         'password_ldap' => 'Ko te kupuhipa mo tenei kaute kei te whakahaeretia e LDAP / Active Directory. Tēnā whakapā atu ki tō tari IT hei huri i tō kupuhipa.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Kāore te kōnae i mukua. Tena ngana ano.',
         'success' => 'Kua mukua te kōnae.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Ko nga kōnae kāore i tukuna. Tena ngana ano.',
         'success' => 'Ko te (ngā) kōnae i tukuna paihia.',
         'nofiles' => 'Kāore i tīpakohia e koe tetahi kōnae hei tuku ake',
         'invalidfiles' => 'Kotahi, nui atu ranei o ou kōnae he nui rawa atu, he waaahi ranei e kore e whakaaetia. Ko nga kōnae e whakaaetia ana he png, gif, jpg, doc, docx, pdf, me te txt.',
-    ),
+    ],
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Eine Geräte Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',
     'accessory_name' => 'Zubehör Name:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Wilkommen, :name',
     'welcome_to' => 'Willkommen bei: Web!',
     'your_credentials' => 'Ihre Snipe-IT Anmeldedaten',
-);
+];

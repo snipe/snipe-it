@@ -25,5 +25,4 @@ class AddSoftDeleteOnAssets extends Migration
     {
         //
     }
-
 }

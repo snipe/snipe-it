@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Oor verskaffers',
     'about_suppliers_text'  => 'Verskaffers word gebruik om die bron van items op te spoor',
     'address'               => 'Verskaffer Adres',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Bekyk bates vir',
     'zip'                   => 'Poskode',
 
-);
+];

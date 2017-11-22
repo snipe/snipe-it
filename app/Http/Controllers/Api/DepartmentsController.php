@@ -32,7 +32,7 @@ class DepartmentsController extends Controller
             'manager_id',
             'created_at',
             'updated_at',
-            'image'
+            'image',
         ])->with('users')->with('location')->with('manager')->with('company')->withCount('users');
 
         if ($request->has('search')) {
@@ -47,8 +47,8 @@ class DepartmentsController extends Controller
 
         $total = $departments->count();
         $departments = $departments->skip($offset)->take($limit)->get();
-        return (new DepartmentsTransformer)->transformDepartments($departments, $total);
 
+        return (new DepartmentsTransformer)->transformDepartments($departments, $total);
     }
 
     /**
@@ -65,13 +65,13 @@ class DepartmentsController extends Controller
         $department = new Department;
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
-        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->has('manager_id') ? $request->input('manager_id') : null);
 
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
     }
 
     /**
@@ -86,10 +86,9 @@ class DepartmentsController extends Controller
     {
         $this->authorize('view', Department::class);
         $department = Department::findOrFail($id);
+
         return (new DepartmentsTransformer)->transformDepartment($department);
     }
-
-
 
     /**
      * Validates and deletes selected location.
@@ -108,21 +107,19 @@ class DepartmentsController extends Controller
         }
 
         $department->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/departments/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/departments/message.delete.success')));
     }
 
     /**
-     * Gets a paginated collection for the select2 menus
+     * Gets a paginated collection for the select2 menus.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
-
         $departments = Department::select([
             'id',
             'name',
@@ -143,7 +140,5 @@ class DepartmentsController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($departments);
-
     }
-
 }

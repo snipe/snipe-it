@@ -40,23 +40,20 @@ class AssetModelSeeder extends Seeder
         factory(AssetModel::class, 1)->states('ultrasharp')->create(); // 18
 
         $src = public_path('/img/demo/models');
-        $dst =  public_path('/uploads/models');
+        $dst = public_path('/uploads/models');
 
-        $del_files = glob($dst."/*.*");
+        $del_files = glob($dst.'/*.*');
 
-        foreach($del_files as $del_file){ // iterate files
-            if(is_file($del_file))
-                unlink($del_file); // delete file
+        foreach ($del_files as $del_file) { // iterate files
+            if (is_file($del_file)) {
+                unlink($del_file);
+            } // delete file
         }
 
-
-        $add_files = glob($src."/*.*");
-        foreach($add_files as $add_file){
-            $file_to_copy = str_replace($src,$dst,$add_file);
+        $add_files = glob($src.'/*.*');
+        foreach ($add_files as $add_file) {
+            $file_to_copy = str_replace($src, $dst, $add_file);
             copy($add_file, $file_to_copy);
         }
-
-
     }
-
 }

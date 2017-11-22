@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute został już wzięty.',
     'uploaded'             => 'Nie udało się przesłać atrybutu:.',
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Pole: attribute zawiera znak, który nie jest dozwolony.",
-        "email_array"      => "Jeden lub więcej adresów e-mail jest nieprawidłowy.",
-        "hashed_pass"      => "Twoje bieżące hasło jest niepoprawne",
+        'alpha_space' => 'Pole: attribute zawiera znak, który nie jest dozwolony.',
+        'email_array'      => 'Jeden lub więcej adresów e-mail jest nieprawidłowy.',
+        'hashed_pass'      => 'Twoje bieżące hasło jest niepoprawne',
         'dumbpwd'          => 'To hasło jest zbyt powszechne.',
-        "statuslabel_type" => "Musisz wybrać odpowiedni typ etykiety statusu",
+        'statuslabel_type' => 'Musisz wybrać odpowiedni typ etykiety statusu',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

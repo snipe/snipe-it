@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Komponenttia ei ole olemassa.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Komponenttia ei luotu, yritä uudelleen.',
-        'success' => 'Komponentti on luotu onnistuneesti.'
-    ),
+        'success' => 'Komponentti on luotu onnistuneesti.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Komponenttia ei ole päivitetty, yritä uudelleen',
-        'success' => 'Komponentti on päivitetty onnistuneesti.'
-    ),
+        'success' => 'Komponentti on päivitetty onnistuneesti.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Haluatko varmasti poistaa tämän komponentin?',
         'error'   => 'Komponentti poistettiin ongelmasta. Yritä uudelleen.',
-        'success' => 'Komponentti poistettiin onnistuneesti.'
-    ),
+        'success' => 'Komponentti poistettiin onnistuneesti.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Komponenttia ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Komponentti onnistui.',
-        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
-    ),
+     'checkout' => [
+        'error'        => 'Komponenttia ei ole tarkistettu, yritä uudelleen',
+        'success'        => 'Komponentti onnistui.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Komponenttia ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Komponentti tarkistettiin onnistuneesti.',
-        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
-    )
+    'checkin' => [
+        'error'        => 'Komponenttia ei ole tarkistettu, yritä uudelleen',
+        'success'        => 'Komponentti tarkistettiin onnistuneesti.',
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
+    ],
 
-
-);
+];

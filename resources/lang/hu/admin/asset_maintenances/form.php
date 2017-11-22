@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Napok',
         'notes'                  => 'Megjegyzések',
         'update'                 => 'Frissít',
-        'create'                 => 'Létrehoz'
+        'create'                 => 'Létrehoz',
     ];

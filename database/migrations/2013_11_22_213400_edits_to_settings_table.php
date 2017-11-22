@@ -16,10 +16,8 @@ class EditsToSettingsTable extends Migration
             //$table->dropColumn('option_name');
             // $table->dropColumn('option_value');
             $table->integer('per_page')->default(20);
-            $table->string('site_name','100')->default("Snipe IT Asset Management");
+            $table->string('site_name', '100')->default('Snipe IT Asset Management');
         });
-
-
     }
 
     /**
@@ -31,5 +29,4 @@ class EditsToSettingsTable extends Migration
     {
         //
     }
-
 }

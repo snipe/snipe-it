@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Kata Kunci mesti terdiri dari 6 huruf dan sama dengan pengesahan.",
+    'password' => 'Kata Kunci mesti terdiri dari 6 huruf dan sama dengan pengesahan.',
 
-    "user"     => "Kata Laluan atau alamat e-mel tidak betul. ",
+    'user'     => 'Kata Laluan atau alamat e-mel tidak betul. ',
 
-    "token"    => "Token Kata kunci tidak sah.",
+    'token'    => 'Token Kata kunci tidak sah.',
 
-    "sent" => "Jika alamat email yang sesuai ditemui, peringatan kata kunci telha dihantar!",
+    'sent' => 'Jika alamat email yang sesuai ditemui, peringatan kata kunci telha dihantar!',
 
-);
+];

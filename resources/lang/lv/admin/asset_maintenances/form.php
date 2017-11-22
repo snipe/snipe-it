@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dienas',
         'notes'                  => 'Piezīmes',
         'update'                 => 'Atjaunināt',
-        'create'                 => 'Izveidot'
+        'create'                 => 'Izveidot',
     ];

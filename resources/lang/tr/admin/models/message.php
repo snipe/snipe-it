@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Model mevcut değil.',
-    'assoc_users'	 => 'Model bir ya da daha çok demirbaş ile ilişkili ve silinemez. Lütfen demirbaşları silin ve tekrar deneyin. ',
+    'assoc_users'     => 'Model bir ya da daha çok demirbaş ile ilişkili ve silinemez. Lütfen demirbaşları silin ve tekrar deneyin. ',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Klasör oluşturulmadı, lütfen tekrar deneyin.',
         'success' => 'Model oluşturuldu.',
         'duplicate_set' => 'Bu üretici ve model numarası ile bir varlık ve model zaten var.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Model güncellenemedi, lütfen tekrar deneyin',
-        'success' => 'Model güncellendi.'
-    ),
+        'success' => 'Model güncellendi.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Bu demirbaş modelini silmek istediğinize emin misiniz?',
         'error'   => 'Demirbaş silinirken bir problem oluştu. Lütfen tekrar deneyin.',
-        'success' => 'Model silindi.'
-    ),
+        'success' => 'Model silindi.',
+    ],
 
-    'restore' => array(
-        'error'   		=> 'Model geri getirilemedi, lütfen tekrar deneyin',
-        'success' 		=> 'Model geri getirildi.'
-    ),
+    'restore' => [
+        'error'        => 'Model geri getirilemedi, lütfen tekrar deneyin',
+        'success'        => 'Model geri getirildi.',
+    ],
 
-    'bulkedit' => array(
-        'error'   		=> 'Hiçbir alan değiştirilmedi, dolayısıyla hiç bir alan güncellenmedi.',
-        'success' 		=> 'Model güncellendi.'
-    ),
+    'bulkedit' => [
+        'error'        => 'Hiçbir alan değiştirilmedi, dolayısıyla hiç bir alan güncellenmedi.',
+        'success'        => 'Model güncellendi.',
+    ],
 
-);
+];

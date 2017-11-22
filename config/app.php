@@ -154,9 +154,8 @@ return [
     | "debug", "info", "notice", "warning", "error", "critical", "alert", "emergency"
     |
     */
-    
-    'log_level' => env('APP_LOG_LEVEL', 'error'),
 
+    'log_level' => env('APP_LOG_LEVEL', 'error'),
 
     /*
     |--------------------------------------------------------------------------
@@ -173,7 +172,6 @@ return [
 
     'private_uploads' => storage_path().'/private_uploads',
 
-
     /*
     |--------------------------------------------------------------------------
     | ALLOW I-FRAMING
@@ -186,7 +184,6 @@ return [
     */
 
     'allow_iframing' => env('ALLOW_IFRAMING', false),
-
 
     /*
     |--------------------------------------------------------------------------
@@ -218,9 +215,6 @@ return [
 
     'enable_csp' => env('ENABLE_CSP', false),
 
-
-
-
     /*
     |--------------------------------------------------------------------------
     | Demo Mode Lockdown
@@ -232,7 +226,6 @@ return [
     */
 
     'lock_passwords' => env('APP_LOCKED', false),
-
 
     /*
     |--------------------------------------------------------------------------
@@ -299,12 +292,10 @@ return [
         App\Providers\SettingsServiceProvider::class,
         App\Providers\ValidationServiceProvider::class,
 
-
         /*
         * Custom service provider
         */
         App\Providers\MacroServiceProvider::class,
-
 
     ],
 
@@ -360,7 +351,6 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image'     => Intervention\Image\ImageManagerStatic::class,
         'Carbon' => Carbon\Carbon::class,
-
 
     ],
 

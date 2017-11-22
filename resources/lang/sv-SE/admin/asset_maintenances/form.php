@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dagar',
         'notes'                  => 'Anteckningar',
         'update'                 => 'Uppdatera',
-        'create'                 => 'Skapa'
+        'create'                 => 'Skapa',
     ];

@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Päivää',
         'notes'                  => 'Muistiinpanot',
         'update'                 => 'Päivitä',
-        'create'                 => 'Luo'
+        'create'                 => 'Luo',
     ];

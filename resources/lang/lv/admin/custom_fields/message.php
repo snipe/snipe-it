@@ -1,57 +1,52 @@
 <?php
 
-return array(
+return [
 
-    'field' => array(
+    'field' => [
         'invalid'   => 'Šis lauks neeksistē.',
         'already_added'   => 'Lauks jau ir pievienots',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Lauks nav izveidots, lūdzu, mēģiniet vēlreiz.',
             'success' => 'Lauks veiksmīgi izveidots.',
-            'assoc_success' => 'Lauks veiksmīgi pievienots lauka laukam.'
-        ),
+            'assoc_success' => 'Lauks veiksmīgi pievienots lauka laukam.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Lauks nav atjaunināts, lūdzu, mēģiniet vēlreiz',
-            'success' => 'Lauks ir veiksmīgi atjaunināts.'
-        ),
+            'success' => 'Lauks ir veiksmīgi atjaunināts.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Vai tiešām vēlaties dzēst šo lauku?',
+        'delete' => [
+            'confirm'    => 'Vai tiešām vēlaties dzēst šo lauku?',
             'error'   => 'Radās problēma, dzēšot lauku. Lūdzu mēģiniet vēlreiz.',
             'success' => 'Lauks bija veiksmīgi dzēsts.',
             'in_use'   => 'Lauks joprojām tiek izmantots.',
-        )
+        ],
 
-    ),
+    ],
 
-    'fieldset' => array(
+    'fieldset' => [
 
         'does_not_exist' => 'Fieldset nepastāv',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Fieldset nav izveidots, lūdzu, mēģiniet vēlreiz.',
-            'success' => 'Fieldset izveidota veiksmīgi.'
-        ),
+            'success' => 'Fieldset izveidota veiksmīgi.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Fieldset nebija atjaunināts, lūdzu, mēģiniet vēlreiz',
-            'success' => 'Fieldset tika veiksmīgi atjaunināta.'
-        ),
+            'success' => 'Fieldset tika veiksmīgi atjaunināta.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Vai tiešām vēlaties dzēst šo lauka iestatījumu?',
+        'delete' => [
+            'confirm'    => 'Vai tiešām vēlaties dzēst šo lauka iestatījumu?',
             'error'   => 'Radās problēma, novēršot lauka iestatījumu. Lūdzu mēģiniet vēlreiz.',
             'success' => 'Fieldset tika veiksmīgi dzēsts.',
             'in_use'   => 'Fieldset joprojām tiek izmantots.',
-        )
+        ],
 
-    ),
+    ],
 
-
-
-
-
-
-);
+];

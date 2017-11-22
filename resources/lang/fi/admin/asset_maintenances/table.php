@@ -4,5 +4,5 @@
         'title'         => 'Laitteen ylläpito',
         'asset_name'    => 'Laitteen Nimi',
         'is_warranty'   => 'Takuu',
-        'dl_csv'        => 'Lataa CSV'
+        'dl_csv'        => 'Lataa CSV',
     ];

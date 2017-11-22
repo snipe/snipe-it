@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Harta',
     'checkin'           => 'Terima',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Lesen Untuk Di \'email\'',
     'to_name'           => 'Lesen Untuk Dinamakan',
     'update'            => 'Kemaskini Lesen',
-    'checkout_help'     => 'Anda mesti menyemak lesen keluar kepada perkakasan atau persorangan. Anda boleh memilih keduanya, tetapi pemilik harta mesti sama dengan orang yang anda semak dimana harta diagihkan.'
-);
+    'checkout_help'     => 'Anda mesti menyemak lesen keluar kepada perkakasan atau persorangan. Anda boleh memilih keduanya, tetapi pemilik harta mesti sama dengan orang yang anda semak dimana harta diagihkan.',
+];

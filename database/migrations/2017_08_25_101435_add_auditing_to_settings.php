@@ -14,8 +14,8 @@ class AddAuditingToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->integer('audit_interval')->nullable()->default(NULL);
-            $table->integer('audit_warning_days')->nullable()->default(NULL);
+            $table->integer('audit_interval')->nullable()->default(null);
+            $table->integer('audit_warning_days')->nullable()->default(null);
         });
     }
 

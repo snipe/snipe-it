@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Olet hyväksynyt tämän aineiston.',
     'declined'                  => 'Olet onnistunut hylkäsi tämän aineiston.',
-    'bulk_manager_warn'	        => 'Käyttäjiäsi on onnistuneesti päivitetty, mutta pääkäyttäjän merkintääsi ei tallennettu, koska valitsemasi hallinnoijan oli myös muokattava käyttäjäluettelossa, eivätkä käyttäjät ole omaa päällikköään. Valitse käyttäjät uudelleen, poislukien johtajan.',
+    'bulk_manager_warn'            => 'Käyttäjiäsi on onnistuneesti päivitetty, mutta pääkäyttäjän merkintääsi ei tallennettu, koska valitsemasi hallinnoijan oli myös muokattava käyttäjäluettelossa, eivätkä käyttäjät ole omaa päällikköään. Valitse käyttäjät uudelleen, poislukien johtajan.',
     'user_exists'               => 'Käyttäjää on jo luotu!',
     'user_not_found'            => 'Käyttäjää [:id] ei löydy.',
     'user_login_required'       => 'Käyttäjätunnus vaaditaan',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => 'Käyttäjä on jo poistettu. Mikäli haluat muokata tai luovuttaa laitteita hänelle sinun tulee palauttaa käyttäjä.',
     'ldap_not_configured'        => 'LDAP-integraatiota ei ole määritetty tässä asennuksessa.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Käyttäjä luotiin onnistuneesti.',
         'update'    => 'Käyttäjä päivitettiin onnistuneesti.',
         'update_bulk'    => 'Käyttäjiä päivitettiin onnistuneesti!',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => 'Käyttäjän jäädytys poistettiin onnistuneesti.',
         'restored'  => 'Käyttäjä palautettiin onnistuneesti.',
         'import'    => 'Käyttäjät tuotiin onnistuneesti.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Käyttäjä luonnissa tapahtui virhe. Yritä uudelleen.',
         'update' => 'Käyttäjän päivityksessä tapahtui virhe. Yritä uudelleen.',
         'delete' => 'Käyttäjän poistamisessa tapahtui virhe. Yritä uudelleen.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'LDAP-palvelinta ei voitu hakea. Tarkista LDAP-palvelimen määritys LDAP-määritystiedostossa. <br>Häiriö LDAP-palvelimelta:',
         'ldap_could_not_get_entries' => 'LDAP-palvelimelta ei saatu merkintöjä. Tarkista LDAP-palvelimen määritys LDAP-määritystiedostossa. <br>Häiriö LDAP-palvelimelta:',
         'password_ldap' => 'Tätä salasanaa hallinnoi LDAP / Active Directory. Vaihda salasanasi IT-osastolla.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Tiedostoa ei ole poistettu. Yritä uudelleen.',
         'success' => 'Tiedosto poistettiin onnistuneesti.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Tiedostoja ei ole ladattu. Yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
         'nofiles' => 'Et valinnut yhtään tiedostoa lähetettäväksi',
         'invalidfiles' => 'Yksi tai useampi tiedosto on liian suuri tai on filetype, jota ei sallita. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf ja txt.',
-    ),
+    ],
 
-);
+];

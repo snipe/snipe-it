@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Parolele trebuie sa fie de cel putin 6 caractere si sa fie la fel ca si confirmarea.",
+    'password' => 'Parolele trebuie sa fie de cel putin 6 caractere si sa fie la fel ca si confirmarea.',
 
-    "user"     => "Utilizator sau e-mail gresit",
+    'user'     => 'Utilizator sau e-mail gresit',
 
-    "token"    => "Acest token este invalid.",
+    'token'    => 'Acest token este invalid.',
 
-    "sent" => "Daca s-a gasit adresa de e-mail, atunci veti primi un reminder la parola!",
+    'sent' => 'Daca s-a gasit adresa de e-mail, atunci veti primi un reminder la parola!',
 
-);
+];

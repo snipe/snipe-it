@@ -26,5 +26,4 @@ class AddLicenseToAssets extends Migration
     {
         //
     }
-
 }

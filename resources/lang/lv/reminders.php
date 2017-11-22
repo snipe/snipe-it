@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Parolēm jābūt sešām rakstzīmēm un jāatbilst apstiprinājumam.",
+    'password' => 'Parolēm jābūt sešām rakstzīmēm un jāatbilst apstiprinājumam.',
 
-    "user"     => "Lietotājvārds vai e-pasta adrese ir nepareiza",
+    'user'     => 'Lietotājvārds vai e-pasta adrese ir nepareiza',
 
-    "token"    => "Šis paroles atiestatīšanas marķieris nav derīgs.",
+    'token'    => 'Šis paroles atiestatīšanas marķieris nav derīgs.',
 
-    "sent" => "Ja tika atrasta atbilstoša e-pasta adrese, tika nosūtīts paroles atgādinājums!",
+    'sent' => 'Ja tika atrasta atbilstoša e-pasta adrese, tika nosūtīts paroles atgādinājums!',
 
-);
+];

@@ -1,13 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
-use Lang;
 use App\Models\Depreciation;
 use Redirect;
-use App\Models\Setting;
-use DB;
-use Str;
 use View;
 use Auth;
 use Illuminate\Http\Request;
@@ -21,13 +17,13 @@ use Illuminate\Http\Request;
 class DepreciationsController extends Controller
 {
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the depreciation listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see DepreciationsController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the depreciation listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see DepreciationsController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -35,21 +31,19 @@ class DepreciationsController extends Controller
         return view('depreciations/index', compact('depreciations'));
     }
 
-
     /**
-    * Returns a view that displays a form to create a new depreciation.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see DepreciationsController::postCreate()
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that displays a form to create a new depreciation.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see DepreciationsController::postCreate()
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
         // Show the page
         return view('depreciations/edit')->with('item', new Depreciation);
     }
-
 
     /**
      * Validates and stores the new depreciation data.
@@ -65,26 +59,27 @@ class DepreciationsController extends Controller
         // create a new instance
         $depreciation = new Depreciation();
         // Depreciation data
-        $depreciation->name             = $request->input('name');
-        $depreciation->months           = $request->input('months');
-        $depreciation->user_id          = Auth::id();
+        $depreciation->name = $request->input('name');
+        $depreciation->months = $request->input('months');
+        $depreciation->user_id = Auth::id();
 
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the new depreciation  page
             return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
     }
 
     /**
-    * Returns a view that displays a form to update a depreciation.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see DepreciationsController::postEdit()
-    * @param int $depreciationId
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that displays a form to update a depreciation.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see DepreciationsController::postEdit()
+     * @param int $depreciationId
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($depreciationId = null)
     {
@@ -96,7 +91,6 @@ class DepreciationsController extends Controller
 
         return view('depreciations/edit', compact('item'));
     }
-
 
     /**
      * Validates and stores the updated depreciation data.
@@ -117,14 +111,15 @@ class DepreciationsController extends Controller
         }
 
         // Depreciation data
-        $depreciation->name      = $request->input('name');
-        $depreciation->months    = $request->input('months');
+        $depreciation->name = $request->input('name');
+        $depreciation->months = $request->input('months');
 
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the depreciation page
-            return redirect()->route("depreciations.index")->with('success', trans('admin/depreciations/message.update.success'));
+            return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.update.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
     }
 
@@ -135,7 +130,7 @@ class DepreciationsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @since [v1.0]
-     * @param integer $depreciationId
+     * @param int $depreciationId
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($depreciationId)
@@ -156,7 +151,7 @@ class DepreciationsController extends Controller
     }
 
     /**
-     * Returns a view that displays a form to display depreciation listing
+     * Returns a view that displays a form to display depreciation listing.
      *
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @see DepreciationsController::postEdit()
@@ -173,6 +168,4 @@ class DepreciationsController extends Controller
 
         return view('depreciations/view', compact('depreciation'));
     }
-
-
 }

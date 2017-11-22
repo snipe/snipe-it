@@ -24,7 +24,7 @@ class LocationsController extends Controller
         $allowed_columns = [
                 'id','name','address','address2','city','state','country','zip','created_at',
                 'updated_at','parent_id', 'manager_id','image',
-                'assigned_assets_count','users_count','assets_count'];
+                'assigned_assets_count','users_count','assets_count', ];
 
         $locations = Location::with('parent', 'manager', 'childLocations')->select([
             'locations.id',
@@ -40,7 +40,7 @@ class LocationsController extends Controller
             'locations.created_at',
             'locations.updated_at',
             'locations.image',
-            'locations.currency'
+            'locations.currency',
         ])->withCount('assignedAssets')
         ->withCount('assets')
         ->withCount('users');
@@ -57,9 +57,9 @@ class LocationsController extends Controller
 
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
+
         return (new LocationsTransformer)->transformLocations($locations, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -78,6 +78,7 @@ class LocationsController extends Controller
         if ($location->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.create.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
     }
 
@@ -93,9 +94,9 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $location = Location::findOrFail($id);
+
         return (new LocationsTransformer)->transformLocation($location);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -139,20 +140,19 @@ class LocationsController extends Controller
         $location = Location::findOrFail($id);
         $this->authorize('delete', $location);
         $location->delete();
+
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/locations/message.delete.success')));
     }
 
     /**
-     * Gets a paginated collection for the select2 menus
+     * Gets a paginated collection for the select2 menus.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
-
         $locations = Location::select([
             'locations.id',
             'locations.name',
@@ -174,7 +174,5 @@ class LocationsController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($locations);
-
     }
-
 }

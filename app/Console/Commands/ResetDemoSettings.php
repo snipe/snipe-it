@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\User;
@@ -40,7 +39,6 @@ class ResetDemoSettings extends Command
      */
     public function handle()
     {
-
         $this->info('Resetting the demo settings.');
         $settings = Setting::first();
         $settings->per_page = 20;
@@ -68,8 +66,5 @@ class ResetDemoSettings extends Command
             $user->locale = 'en';
             $user->save();
         }
-
-        
     }
-
 }

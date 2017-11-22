@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'Åtgärder',
-    'add'    	                => 'Lägg till ny',
+return [
+    'actions'                    => 'Åtgärder',
+    'add'                        => 'Lägg till ny',
     'cancel'                    => 'Avbryt',
-    'checkin_and_delete'  	    => 'Checka in & radera användare',
-    'delete'  	                => 'Radera',
-    'edit'    	                => 'Ändra',
-    'restore' 	                => 'Återställ',
+    'checkin_and_delete'        => 'Checka in & radera användare',
+    'delete'                    => 'Radera',
+    'edit'                        => 'Ändra',
+    'restore'                    => 'Återställ',
     'request'                   => 'Begäran',
-    'submit'  	                => 'Skicka',
+    'submit'                    => 'Skicka',
     'upload'                    => 'Ladda upp',
-	'select_file'				=> 'Välj fil...',
-);
+    'select_file'                => 'Välj fil...',
+];

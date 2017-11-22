@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'You have successfully accepted this asset.',
     'declined'                  => 'You have successfully declined this asset.',
-    'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
+    'bulk_manager_warn'            => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'User already exists!',
     'user_not_found'            => 'User [:id] does not exist.',
     'user_login_required'       => 'The login field is required',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
     'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'User was successfully created.',
         'update'    => 'User was successfully updated.',
         'update_bulk'    => 'Users were successfully updated!',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => 'User was successfully unsuspended.',
         'restored'  => 'User was successfully restored.',
         'import'    => 'Users imported successfully.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'There was an issue creating the user. Please try again.',
         'update' => 'There was an issue updating the user. Please try again.',
         'delete' => 'There was an issue deleting the user. Please try again.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
         'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
         'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'File(s) not uploaded. Please try again.',
         'success' => 'File(s) successfully uploaded.',
         'nofiles' => 'You did not select any files for upload',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
-    ),
+    ],
 
-);
+];

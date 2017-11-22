@@ -7,5 +7,5 @@
         'view'               => 'Vaadake varahalduse üksikasju',
         'repair'             => 'Remont',
         'maintenance'        => 'Hooldus',
-        'upgrade'            => 'Uuendage'
+        'upgrade'            => 'Uuendage',
     ];

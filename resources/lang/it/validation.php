@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'L\' :attribute è già stato preso.',
     'uploaded'             => 'L\'attributo: non è riuscito a caricare.',
     'url'                  => 'Il formato dell\' :attribute è invalido.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Il campo attributo contiene un carattere non consentito.",
-        "email_array"      => "Uno o più indirizzi email non sono validi.",
-        "hashed_pass"      => "La tua password corrente non è corretta",
+        'alpha_space' => 'Il campo attributo contiene un carattere non consentito.',
+        'email_array'      => 'Uno o più indirizzi email non sono validi.',
+        'hashed_pass'      => 'La tua password corrente non è corretta',
         'dumbpwd'          => 'Quella password è troppo comune.',
-        "statuslabel_type" => "È necessario selezionare un tipo di etichetta di stato valido",
+        'statuslabel_type' => 'È necessario selezionare un tipo di etichetta di stato valido',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

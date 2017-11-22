@@ -5,10 +5,10 @@ class CategoriesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
     }
 
     public function _after(FunctionalTester $I)
@@ -27,7 +27,7 @@ class CategoriesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('categories.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -45,7 +45,7 @@ class CategoriesCest
             'require_acceptance'    => $category->require_acceptance,
             'checkin_email'         => $category->checkin_email,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('categories.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('categories', $values);

@@ -25,5 +25,4 @@ class AddUserIdToCategories extends Migration
     {
         //
     }
-
 }

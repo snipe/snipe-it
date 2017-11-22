@@ -7,5 +7,5 @@
         'view'               => 'Ver Detalles de Mantenimiento de Activos',
         'repair'             => 'Reparación',
         'maintenance'        => 'Mantenimiento',
-        'upgrade'            => 'Mejora'
+        'upgrade'            => 'Mejora',
     ];

@@ -10,5 +10,5 @@
         'asset_maintenance_time' => '資産管理期間(日数)',
         'notes'                  => '備考',
         'update'                 => '資産管理を更新',
-        'create'                 => '資産管理を作成'
+        'create'                 => '資産管理を作成',
     ];

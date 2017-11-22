@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Nazwa wydziału',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Lokalizacja',
     'create'                    => 'Utwórz wydział',
     'update'                    => 'Aktualizuj wydział',
-    );
+    ];

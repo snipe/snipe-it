@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> 'Veiksmai',
-    'action' 		=> 'Veiksmas',
-    'by'      		=> 'Atlikti',
-    'item' 			=> 'Įranga',
+    'actions'        => 'Veiksmai',
+    'action'        => 'Veiksmas',
+    'by'              => 'Atlikti',
+    'item'            => 'Įranga',
 
-);
+];

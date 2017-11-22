@@ -28,5 +28,4 @@ class CreateManufacturersTable extends Migration
     {
         Schema::drop('manufacturers');
     }
-
 }

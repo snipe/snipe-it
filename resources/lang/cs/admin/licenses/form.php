@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Majetek',
     'checkin'           => 'Příjem',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Registrováno na Email',
     'to_name'           => 'Registrace na jméno',
     'update'            => 'Úprava licence',
-    'checkout_help'     => 'Licence musí být přidělena majetku nebo uživateli. Pokud zvolíte obojí, uživatel zvoleného majetku musí souhlasit se zvoleným uživatelem.'
-);
+    'checkout_help'     => 'Licence musí být přidělena majetku nebo uživateli. Pokud zvolíte obojí, uživatel zvoleného majetku musí souhlasit se zvoleným uživatelem.',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Mengenai Pembekal',
     'about_suppliers_text'  => 'Pembekal digunakan untuk mengesan sumber barangan',
     'address'               => 'Alamat Pembekal',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Papar Harta Untuk',
     'zip'                   => 'Poskod',
 
-);
+];

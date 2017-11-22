@@ -46,5 +46,4 @@ return [
         'level' => env('ROLLBAR_LEVEL', 'error'),
     ],
 
-
 ];

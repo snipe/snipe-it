@@ -28,53 +28,52 @@ class LicensesController extends Controller
         }
 
         if ($request->has('company_id')) {
-            $licenses->where('company_id','=',$request->input('company_id'));
+            $licenses->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->has('name')) {
-            $licenses->where('licenses.name','=',$request->input('name'));
+            $licenses->where('licenses.name', '=', $request->input('name'));
         }
 
         if ($request->has('product_key')) {
-            $licenses->where('licenses.serial','=',$request->input('product_key'));
+            $licenses->where('licenses.serial', '=', $request->input('product_key'));
         }
 
         if ($request->has('order_number')) {
-            $licenses->where('order_number','=',$request->input('order_number'));
+            $licenses->where('order_number', '=', $request->input('order_number'));
         }
 
         if ($request->has('purchase_order')) {
-            $licenses->where('purchase_order','=',$request->input('purchase_order'));
+            $licenses->where('purchase_order', '=', $request->input('purchase_order'));
         }
 
         if ($request->has('license_name')) {
-            $licenses->where('license_name','=',$request->input('license_name'));
+            $licenses->where('license_name', '=', $request->input('license_name'));
         }
 
         if ($request->has('license_email')) {
-            $licenses->where('license_email','=',$request->input('license_email'));
+            $licenses->where('license_email', '=', $request->input('license_email'));
         }
 
         if ($request->has('manufacturer_id')) {
-            $licenses->where('manufacturer_id','=',$request->input('manufacturer_id'));
+            $licenses->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
         if ($request->has('supplier_id')) {
-            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+            $licenses->where('supplier_id', '=', $request->input('supplier_id'));
         }
 
         if ($request->has('depreciation_id')) {
-            $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
+            $licenses->where('depreciation_id', '=', $request->input('depreciation_id'));
         }
 
         if ($request->has('supplier_id')) {
-            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+            $licenses->where('supplier_id', '=', $request->input('supplier_id'));
         }
 
         $offset = request('offset', 0);
         $limit = request('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
 
         switch ($request->input('sort')) {
                 case 'manufacturer':
@@ -92,17 +91,13 @@ class LicensesController extends Controller
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
         }
-        
 
         $total = $licenses->count();
 
         $licenses = $licenses->skip($offset)->take($limit)->get();
+
         return (new LicensesTransformer)->transformLicenses($licenses, $total);
-
     }
-
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -130,11 +125,12 @@ class LicensesController extends Controller
         if (isset($license->id)) {
             $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
             $this->authorize('view', $license);
+
             return (new LicensesTransformer)->transformLicense($license);
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.does_not_exist')), 200);
     }
-
 
     /**
      * Update the specified resource in storage.

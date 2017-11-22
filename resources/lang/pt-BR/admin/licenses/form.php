@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Ativo',
     'checkin'           => 'Registrar',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licenciado ao E-mail',
     'to_name'           => 'Licenciado ao Nome',
     'update'            => 'Atualizar Licença',
-    'checkout_help'     => 'Você precisa registrar uma licença para uma pessoa ou hardware. Você pode selecionar ambos, mas o proprietário do ativo deve coincidir com a pessoa para quem você está tentando registrá-lo.'
-);
+    'checkout_help'     => 'Você precisa registrar uma licença para uma pessoa ou hardware. Você pode selecionar ambos, mas o proprietário do ativo deve coincidir com a pessoa para quem você está tentando registrá-lo.',
+];

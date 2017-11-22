@@ -1,24 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Ražotājs neeksistē.',
-    'assoc_users'	 => 'Šis ražotājs pašlaik ir saistīts ar vismaz vienu modeli, un to nevar izdzēst. Lūdzu, atjauniniet savus modeļus, lai vairs nerādītu šo ražotāju, un mēģiniet vēlreiz.',
+    'assoc_users'     => 'Šis ražotājs pašlaik ir saistīts ar vismaz vienu modeli, un to nevar izdzēst. Lūdzu, atjauniniet savus modeļus, lai vairs nerādītu šo ražotāju, un mēģiniet vēlreiz.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Ražotājs netika izveidots, lūdzu, mēģiniet vēlreiz.',
-        'success' => 'Ražotājs veiksmīgi izveidots.'
-    ),
+        'success' => 'Ražotājs veiksmīgi izveidots.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Ražotājs netika atjaunināts, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Ražotājs tika veiksmīgi atjaunināts.'
-    ),
+        'success' => 'Ražotājs tika veiksmīgi atjaunināts.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Vai tiešām vēlaties dzēst šo ražotāju?',
         'error'   => 'Radās problēma, izdzēšot ražotāju. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Ražotājs tika veiksmīgi dzēsts.'
-    )
+        'success' => 'Ražotājs tika veiksmīgi dzēsts.',
+    ],
 
-);
+];

@@ -7,5 +7,5 @@
         'view'               => '資産運用の詳細を閲覧',
         'repair'             => '修復',
         'maintenance'        => 'メンテナンス',
-        'upgrade'            => '更新'
+        'upgrade'            => '更新',
     ];

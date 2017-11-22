@@ -49,7 +49,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php $count=1; ?>
+                    <?php $count = 1; ?>
                     @if ($license->licenseseats)
                       @foreach ($license->licenseseats as $licensedto)
                       <tr>

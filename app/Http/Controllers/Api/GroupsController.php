@@ -22,7 +22,7 @@ class GroupsController extends Controller
         $this->authorize('view', Group::class);
         $allowed_columns = ['id','name','created_at'];
 
-        $groups = Group::select('id','name','permissions','created_at','updated_at')->withCount('users');
+        $groups = Group::select('id', 'name', 'permissions', 'created_at', 'updated_at')->withCount('users');
 
         if ($request->has('search')) {
             $groups = $groups->TextSearch($request->input('search'));
@@ -36,9 +36,9 @@ class GroupsController extends Controller
 
         $total = $groups->count();
         $groups = $groups->skip($offset)->take($limit)->get();
+
         return (new GroupsTransformer)->transformGroups($groups, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -57,8 +57,8 @@ class GroupsController extends Controller
         if ($group->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $group, trans('admin/groups/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $group->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $group->getErrors()));
     }
 
     /**
@@ -73,9 +73,9 @@ class GroupsController extends Controller
     {
         $this->authorize('view', Group::class);
         $group = Group::findOrFail($id);
+
         return (new GroupsTransformer)->transformGroup($group);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -113,9 +113,7 @@ class GroupsController extends Controller
         $group = Group::findOrFail($id);
         $this->authorize('delete', $group);
         $group->delete();
+
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/groups/message.delete.success')));
-
     }
-
-
 }

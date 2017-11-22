@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Mō Ngā Tauwāhi',
     'about_locations'           => 'Whakamahia ai nga waahi ki te aroturuki i nga korero tauwāhi mo nga kaiwhakamahi, nga rawa, me etahi atu mea',
     'assets_rtd'                => 'Ngā taonga', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => 'Matua',
     'currency'                  => 'Wāhi Moni',
     'ldap_ou'                   => 'Rapua Rapu LDAP',
-    );
+    ];

@@ -1,17 +1,17 @@
 <?php
 
-return array(
+return [
 
-    'assigned_to'   	=> 'Toevertrou aan',
-    'checkout'   		=> 'In uit',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'Lisensie E-pos',
-    'license_name'   	=> 'Gelisensieer om',
-    'purchase_date'   	=> 'Aankoop datum',
-    'purchased'   		=> 'gekoop',
-    'seats'   			=> 'sitplekke',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'lisensie',
+    'assigned_to'    => 'Toevertrou aan',
+    'checkout'        => 'In uit',
+    'id'                  => 'ID',
+    'license_email'    => 'Lisensie E-pos',
+    'license_name'    => 'Gelisensieer om',
+    'purchase_date'    => 'Aankoop datum',
+    'purchased'        => 'gekoop',
+    'seats'            => 'sitplekke',
+    'hardware'        => 'Hardware',
+    'serial'            => 'Serial',
+    'title'              => 'lisensie',
 
-);
+];

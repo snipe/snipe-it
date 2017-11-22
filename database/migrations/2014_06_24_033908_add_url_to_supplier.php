@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddUrlToSupplier extends Migration
@@ -13,8 +12,7 @@ class AddUrlToSupplier extends Migration
     public function up()
     {
         Schema::table('suppliers', function ($table) {
-            $table->string('url',250)->nullable()->default(NULL);
-
+            $table->string('url', 250)->nullable()->default(null);
         });
     }
 
@@ -29,5 +27,4 @@ class AddUrlToSupplier extends Migration
             $table->dropColumn('url');
         });
     }
-
 }

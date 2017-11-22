@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Komponent eksisterer ikke.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Komponent blev ikke oprettet, prøv igen.',
-        'success' => 'Komponent oprettet med succes.'
-    ),
+        'success' => 'Komponent oprettet med succes.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Komponent blev ikke opdateret, prøv igen',
-        'success' => 'Komponent opdateret med succes.'
-    ),
+        'success' => 'Komponent opdateret med succes.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Er du sikker på, at du vil slette denne komponent?',
         'error'   => 'Der opstod et problem ved at slette komponenten. Prøv igen.',
-        'success' => 'Komponenten blev slettet korrekt.'
-    ),
+        'success' => 'Komponenten blev slettet korrekt.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Komponent blev ikke tjekket ud, prøv igen',
-        'success' 		=> 'Komponent tjekket ud med succes.',
-        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.'
-    ),
+     'checkout' => [
+        'error'        => 'Komponent blev ikke tjekket ud, prøv igen',
+        'success'        => 'Komponent tjekket ud med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Komponent blev ikke tjekket ind, prøv igen',
-        'success' 		=> 'Komponent tjekket ind med succes.',
-        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.'
-    )
+    'checkin' => [
+        'error'        => 'Komponent blev ikke tjekket ind, prøv igen',
+        'success'        => 'Komponent tjekket ind med succes.',
+        'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
+    ],
 
-
-);
+];

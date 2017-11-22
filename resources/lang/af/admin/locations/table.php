@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Oor plekke',
     'about_locations'           => 'Plekke word gebruik om ligginginligting vir gebruikers, bates en ander items op te spoor',
     'assets_rtd'                => 'bates', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => 'Ouer',
     'currency'                  => 'Ligging Geld',
     'ldap_ou'                   => 'LDAP soek OU',
-    );
+    ];

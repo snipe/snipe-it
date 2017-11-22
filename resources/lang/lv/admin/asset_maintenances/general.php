@@ -7,5 +7,5 @@
         'view'               => 'Skatīt aktīvu uzturēšanas informāciju',
         'repair'             => 'Remonts',
         'maintenance'        => 'Apkope',
-        'upgrade'            => 'Jaunināt'
+        'upgrade'            => 'Jaunināt',
     ];

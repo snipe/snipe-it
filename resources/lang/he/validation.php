@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'התכונה: כבר נלקחה.',
     'uploaded'             => 'התכונה: נכשלה.',
     'url'                  => 'תבנית התכונה: אינה חוקית.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "השדה: מאפיין מכיל תו שאינו מותר.",
-        "email_array"      => "כתובת אימייל אחת או יותר אינה חוקית.",
-        "hashed_pass"      => "הסיסמה הנוכחית שלך שגויה",
+        'alpha_space' => 'השדה: מאפיין מכיל תו שאינו מותר.',
+        'email_array'      => 'כתובת אימייל אחת או יותר אינה חוקית.',
+        'hashed_pass'      => 'הסיסמה הנוכחית שלך שגויה',
         'dumbpwd'          => 'סיסמה זו נפוצה מדי.',
-        "statuslabel_type" => "עליך לבחור סוג תווית סטטוס חוקי",
+        'statuslabel_type' => 'עליך לבחור סוג תווית סטטוס חוקי',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

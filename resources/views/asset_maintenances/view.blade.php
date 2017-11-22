@@ -1,5 +1,6 @@
 <?php
 use Carbon\Carbon;
+
 ?>
 @extends('layouts/default')
 

@@ -7,5 +7,5 @@
         'view'               => 'Details des Wartungsvertrages anzeigen',
         'repair'             => 'Reparatur',
         'maintenance'        => 'Wartung',
-        'upgrade'            => 'Upgrade'
+        'upgrade'            => 'Upgrade',
     ];

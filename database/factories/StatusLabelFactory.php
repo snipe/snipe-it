@@ -12,13 +12,13 @@ $factory->define(Statuslabel::class, function (Faker\Generator $faker) {
         'deployable' => 0,
         'pending' => 0,
         'archived' => 0,
-        'notes' => ''
+        'notes' => '',
     ];
 });
 $factory->state(Statuslabel::class, 'rtd', function (Faker\Generator $faker) {
     return [
         'notes' => $faker->sentence,
-        'deployable' => 1
+        'deployable' => 1,
     ];
 });
 $factory->state(Statuslabel::class, 'pending', function (Faker\Generator $faker) {

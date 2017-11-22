@@ -1,25 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Poistoluokkaa ei löydy.',
-    'assoc_users'	 => 'Tämä poisto on määritetty käyttöön yhdelle tai useammalle mallille eikä sitä voida poistaa. Poista kaikki mallit ja yritä uudelleen. ',
+    'assoc_users'     => 'Tämä poisto on määritetty käyttöön yhdelle tai useammalle mallille eikä sitä voida poistaa. Poista kaikki mallit ja yritä uudelleen. ',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Poistoluokkaa ei luotu, yritä uudelleen. :(',
-        'success' => 'Poistoluokka luotiin onnistuneesti. :)'
-    ),
+        'success' => 'Poistoluokka luotiin onnistuneesti. :)',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Poistoluokkaa ei päivitetty, yritä uudelleen',
-        'success' => 'Poistoluokka päivitettiin onnistuneesti.'
-    ),
+        'success' => 'Poistoluokka päivitettiin onnistuneesti.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Oletko varma että haluat poistaa tämän poistoluokan?',
         'error'   => 'Poistoluokan poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Poistoluokka poistettiin onnistuneesti.'
-    )
+        'success' => 'Poistoluokka poistettiin onnistuneesti.',
+    ],
 
-);
+];

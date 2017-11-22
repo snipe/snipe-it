@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\License;
 use App\Models\User;
-use App\Policies\CheckoutablePermissionsPolicy;
 
 class LicensePolicy extends CheckoutablePermissionsPolicy
 {
@@ -13,8 +12,8 @@ class LicensePolicy extends CheckoutablePermissionsPolicy
         return 'licenses';
     }
 
-   /**
-     * Determine whether the user can view license keys
+    /**
+     * Determine whether the user can view license keys.
      *
      * @param  \App\User  $user
      * @param  \App\License  $license
@@ -24,5 +23,4 @@ class LicensePolicy extends CheckoutablePermissionsPolicy
     {
         return $user->hasAccess('licenses.keys');
     }
-
 }

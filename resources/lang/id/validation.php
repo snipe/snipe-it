@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute sudah digunakan.',
     'uploaded'             => 'Atribut: gagal diupload.',
     'url'                  => 'Format :attribute tidak benar.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Bidang atribut: berisi karakter yang tidak diizinkan.",
-        "email_array"      => "Satu atau lebih alamat email tidak valid.",
-        "hashed_pass"      => "Kata sandi Anda saat ini salah",
+        'alpha_space' => 'Bidang atribut: berisi karakter yang tidak diizinkan.',
+        'email_array'      => 'Satu atau lebih alamat email tidak valid.',
+        'hashed_pass'      => 'Kata sandi Anda saat ini salah',
         'dumbpwd'          => 'Password itu terlalu umum',
-        "statuslabel_type" => "Anda harus memilih jenis label status yang valid",
+        'statuslabel_type' => 'Anda harus memilih jenis label status yang valid',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

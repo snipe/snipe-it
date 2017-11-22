@@ -8,7 +8,6 @@ use App\Http\Requests\ItemImportRequest;
 use App\Http\Transformers\ImportsTransformer;
 use App\Models\Company;
 use App\Models\Import;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use League\Csv\Reader;
@@ -26,8 +25,8 @@ class ImportController extends Controller
     {
         //
         $imports = Import::latest()->get();
-        return (new ImportsTransformer)->transformImports($imports);
 
+        return (new ImportsTransformer)->transformImports($imports);
     }
 
     /**
@@ -39,21 +38,22 @@ class ImportController extends Controller
     public function store()
     {
         //
-        if (!Company::isCurrentUserAuthorized()) {
+        if (! Company::isCurrentUserAuthorized()) {
             return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif (!config('app.lock_passwords')) {
+        } elseif (! config('app.lock_passwords')) {
             $files = Input::file('files');
             $path = config('app.private_uploads').'/imports';
             $results = [];
             $import = new Import;
             foreach ($files as $file) {
-                if (!in_array($file->getMimeType(), array(
+                if (! in_array($file->getMimeType(), [
                     'application/vnd.ms-excel',
                     'text/csv',
                     'text/plain',
                     'text/comma-separated-values',
-                    'text/tsv'))) {
-                    $results['error']='File type must be CSV';
+                    'text/tsv', ])) {
+                    $results['error'] = 'File type must be CSV';
+
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
 
@@ -62,10 +62,11 @@ class ImportController extends Controller
                 try {
                     $file->move($path, $date.'-'.$fixed_filename);
                 } catch (FileException $exception) {
-                    $results['error']=trans('admin/hardware/message.upload.error');
+                    $results['error'] = trans('admin/hardware/message.upload.error');
                     if (config('app.debug')) {
-                        $results['error'].= ' ' . $exception->getMessage();
+                        $results['error'] .= ' '.$exception->getMessage();
                     }
+
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
@@ -80,10 +81,12 @@ class ImportController extends Controller
                 $results[] = $import;
             }
             $results = (new ImportsTransformer)->transformImports($results);
+
             return [
                 'files' => $results,
             ];
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 500);
     }
     /**
@@ -98,25 +101,25 @@ class ImportController extends Controller
         // Run a backup immediately before processing
         Artisan::call('backup:run');
         $errors = $request->import(Import::find($import_id));
-        $redirectTo = "hardware.index";
+        $redirectTo = 'hardware.index';
         switch ($request->get('import-type')) {
-            case "asset":
-                $redirectTo = "hardware.index";
+            case 'asset':
+                $redirectTo = 'hardware.index';
                 break;
-            case "accessory":
-                $redirectTo = "accessories.index";
+            case 'accessory':
+                $redirectTo = 'accessories.index';
                 break;
-            case "consumable":
-                $redirectTo = "consumables.index";
+            case 'consumable':
+                $redirectTo = 'consumables.index';
                 break;
-            case "component":
-                $redirectTo = "components.index";
+            case 'component':
+                $redirectTo = 'components.index';
                 break;
-            case "license":
-                $redirectTo = "licenses.index";
+            case 'license':
+                $redirectTo = 'licenses.index';
                 break;
-            case "user":
-                $redirectTo = "users.index";
+            case 'user':
+                $redirectTo = 'users.index';
                 break;
         }
 
@@ -125,8 +128,8 @@ class ImportController extends Controller
         }
         //Flash message before the redirect
         Session::flash('success', trans('admin/hardware/message.import.success'));
-        return response()->json(Helper::formatStandardApiResponse('success', null, ['redirect_url' => route($redirectTo)]));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, ['redirect_url' => route($redirectTo)]));
     }
 
     /**
@@ -142,6 +145,7 @@ class ImportController extends Controller
         try {
             unlink(config('app.private_uploads').'/imports/'.$import->file_path);
             $import->delete();
+
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
         } catch (\Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.import.file_delete_error')), 500);

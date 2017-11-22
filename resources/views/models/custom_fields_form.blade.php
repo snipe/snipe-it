@@ -52,9 +52,9 @@
               @endif
 
           <?php
-          $errormessage=$errors->first($field->db_column_name());
+          $errormessage = $errors->first($field->db_column_name());
           if ($errormessage) {
-              $errormessage=preg_replace('/ snipeit /', '', $errormessage);
+              $errormessage = preg_replace('/ snipeit /', '', $errormessage);
               print('<span class="alert-msg"><i class="fa fa-times"></i> '.$errormessage.'</span>');
           }
             ?>

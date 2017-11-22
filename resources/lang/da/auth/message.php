@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'En konto med denne e-mail eksisterer allerede.',
     'account_not_found'      => 'Brugernavn eller kodeord er forkert.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Denne brugerkonto er blokeret.',
     'throttle'               => 'For mange mislykkede loginforsøg. Prøv igen omkring: minutter minut (er).',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Der opstod et problem, ved forsøg på at logge dig ind, prøv igen.',
         'success' => 'Du er blevet logget ind.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Der opstod et problem, ved forsøg på at oprette din konto, prøv igen.',
         'success' => 'Konto oprettet med succes.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Der opstod et problem, ved forsøg på at nulstille din adgangkode, prøv igen.',
             'success' => 'En e-mail til gendannelse af adgangskoden er afsendt.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Der opstod et problem, ved forsøg på at nulstille din adgangskode, prøv venligst igen.',
             'success' => 'Din adgangskode er blevet nulstillet.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Der opstod et problem, ved forsøg på at aktivere din konto, prøv igen.',
         'success' => 'Din konto er blevet aktiveret.',
-    ),
+    ],
 
-);
+];

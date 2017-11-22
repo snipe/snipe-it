@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => '이 자산이 승인되었습니다.',
     'declined'                  => '이 자산이 거부되었습니다.',
-    'bulk_manager_warn'	        => '사용자가 성공적으로 갱신되었지만, 선택한 관리자가 편집할 사용자 목록에도 있었고, 사용자가 자신의 관리자가 아니 어서 관리자 항목이 저장되지 않았습니다. 관리자를 제외한 사용자를 다시 선택하십시오.',
+    'bulk_manager_warn'            => '사용자가 성공적으로 갱신되었지만, 선택한 관리자가 편집할 사용자 목록에도 있었고, 사용자가 자신의 관리자가 아니 어서 관리자 항목이 저장되지 않았습니다. 관리자를 제외한 사용자를 다시 선택하십시오.',
     'user_exists'               => '사용자가 이미 존재합니다!',
     'user_not_found'            => '사용자 [:id]는 존재하지 않습니다.',
     'user_login_required'       => '로그인 항목을 입력해 주세요.',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => '이 사용자는 삭제되었습니다. 그것들을 수정하려면 이 사용자를 복원하던가 새 자산들을 생성하세요.',
     'ldap_not_configured'        => '이 설치의 LDAP 통합이 구성이 되지 않았습니다.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => '사용자가 생성되었습니다.',
         'update'    => '사용자가 갱신 되었습니다.',
         'update_bulk'    => '사용자가 갱신 되었습니다.',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => '사용자의 대기를 해제하였습니다.',
         'restored'  => '사용자를 복원하였습니다.',
         'import'    => '사용자를 내보냈습니다.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => '사용자를 생성하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
         'update' => '사용자를 갱신하는 중 오류가 발생했습니다. 다시 시도해 주세요.',
         'delete' => '사용자를 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'LDAP 서버를 찾을 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'ldap_could_not_get_entries' => 'LDAP 서버 목록을 가져올 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'password_ldap' => '이 계정의 비밀번호는 LDAP/Active 디렉토리에 의해 관리됩니다. 비밀번호를 변경하려면 IT 부서에 문의하세요. ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => '파일이 삭제되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일이 삭제되었습니다.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => '파일(들) 이 업로드 되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일(들) 이 업로드 되었습니다.',
         'nofiles' => '업로드 할 파일을 선택해 주세요',
         'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는 형식입니다. 허용되는 형식은 png, gif, jpg, doc, docx, pdf, txt 입니다.',
-    ),
+    ],
 
-);
+];

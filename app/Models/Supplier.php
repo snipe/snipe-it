@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\SnipeModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -13,7 +13,7 @@ class Supplier extends SnipeModel
     protected $dates = ['deleted_at'];
     protected $table = 'suppliers';
 
-    protected $rules = array(
+    protected $rules = [
         'name'              => 'required|min:3|max:255|unique_undeleted',
         'address'           => 'max:50|nullable',
         'address2'          => 'max:50|nullable',
@@ -27,15 +27,15 @@ class Supplier extends SnipeModel
         'email'             => 'email|max:150|nullable',
         'zip'               => 'max:10|nullable',
         'url'               => 'sometimes|nullable|string|max:250',
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
@@ -46,7 +46,6 @@ class Supplier extends SnipeModel
      * @var array
      */
     protected $fillable = ['name','address','address2','city','state','country','zip','phone','fax','email','contact','url','notes'];
-
 
     // Eager load counts.
     // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
@@ -99,25 +98,24 @@ class Supplier extends SnipeModel
 
     public function addhttp($url)
     {
-        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-            $url = "http://" . $url;
+        if (! preg_match('~^(?:f|ht)tps?://~i', $url)) {
+            $url = 'http://'.$url;
         }
+
         return $url;
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to search on text.
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeTextSearch($query, $search)
     {
-
         return $query->where(function ($query) use ($search) {
-        
             $query->where('name', 'LIKE', '%'.$search.'%');
         });
     }

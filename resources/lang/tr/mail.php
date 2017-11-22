@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Bir kullanıcı web sitede öğe talebinden vazgeçti',
     'a_user_requested' => 'Bir kullanıcı websitede bir öğe talebinde bulundu',
     'accessory_name' => 'Aksesuar Adı:',
@@ -70,4 +70,4 @@ return array(
     'welcome' => 'Hoşgeldiniz, :name',
     'welcome_to' => 'Hoş geldiniz :web!',
     'your_credentials' => 'Snipe-IT Bilgileriniz',
-);
+];

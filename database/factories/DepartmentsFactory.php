@@ -12,7 +12,7 @@
 $factory->define(App\Models\Department::class, function (Faker\Generator $faker) {
     return [
         'user_id' => 1,
-        'location_id' => rand(1,5),
+        'location_id' => rand(1, 5),
     ];
 });
 
@@ -57,6 +57,3 @@ $factory->state(App\Models\Department::class, 'silly', function ($faker) {
         'name' => 'Dept of Silly Walks',
     ];
 });
-
-
-

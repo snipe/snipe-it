@@ -7,5 +7,5 @@
         'view'               => 'Rincian Pemeliharaan Aset',
         'repair'             => 'Perbaikan',
         'maintenance'        => 'Pemeliharaan',
-        'upgrade'            => 'Peningkatan'
+        'upgrade'            => 'Peningkatan',
     ];

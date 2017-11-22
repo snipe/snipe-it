@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AlterDefaultLicenseDepreciationId extends Migration
@@ -27,5 +26,4 @@ class AlterDefaultLicenseDepreciationId extends Migration
     {
         //
     }
-
 }

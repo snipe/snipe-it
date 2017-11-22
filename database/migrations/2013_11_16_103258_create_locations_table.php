@@ -15,8 +15,8 @@ class CreateLocationsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('city')->nullable();
-            $table->string('state',2)->nullable();
-            $table->string('country',2)->nullable();
+            $table->string('state', 2)->nullable();
+            $table->string('country', 2)->nullable();
             $table->timestamps();
             $table->integer('user_id')->nullable();
             $table->engine = 'InnoDB';
@@ -32,5 +32,4 @@ class CreateLocationsTable extends Migration
     {
         Schema::drop('locations');
     }
-
 }

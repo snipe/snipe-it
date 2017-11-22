@@ -46,10 +46,7 @@
  * @author Tobias Hößl <tobias@hoessl.eu>
  */
 
-
 namespace Helper;
-
-use Codeception\TestCase;
 
 class HTMLValidator extends \Codeception\Module
 {
@@ -61,24 +58,24 @@ class HTMLValidator extends \Codeception\Module
     private function validateByVNU($html)
     {
         $javaPath = $this->_getConfig('javaPath');
-        if (!$javaPath) {
+        if (! $javaPath) {
             $javaPath = 'java';
         }
         $vnuPath = $this->_getConfig('vnuPath');
-        if (!$vnuPath) {
+        if (! $vnuPath) {
             $vnuPath = '/usr/local/bin/vnu.jar';
         }
 
-        $filename = DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . uniqid('html-validate') . '.html';
+        $filename = DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR.uniqid('html-validate').'.html';
         file_put_contents($filename, $html);
-        exec($javaPath . " -Xss1024k -jar " . $vnuPath . " --format json " . $filename . " 2>&1", $return);
+        exec($javaPath.' -Xss1024k -jar '.$vnuPath.' --format json '.$filename.' 2>&1', $return);
         $data = json_decode($return[0], true);
-        if (!$data || !isset($data['messages']) || !is_array($data['messages'])) {
-            throw new \Exception('Invalid data returned from validation service: ' . $return);
+        if (! $data || ! isset($data['messages']) || ! is_array($data['messages'])) {
+            throw new \Exception('Invalid data returned from validation service: '.$return);
         }
+
         return $data['messages'];
     }
-
 
     /**
      * @return string
@@ -87,12 +84,13 @@ class HTMLValidator extends \Codeception\Module
      */
     private function getPageSource()
     {
-        if (!$this->hasModule('WebDriver')) {
+        if (! $this->hasModule('WebDriver')) {
             throw new \Exception('This validator needs WebDriver to work');
         }
 
         /** @var \Codeception\Module\WebDriver $webdriver */
         $webdriver = $this->getModule('WebDriver');
+
         return $webdriver->webDriver->getPageSource();
     }
 
@@ -106,27 +104,28 @@ class HTMLValidator extends \Codeception\Module
             $messages = $this->validateByVNU($source);
         } catch (\Exception $e) {
             $this->fail($e->getMessage());
+
             return;
         }
         $failMessages = [];
-        $lines        = explode("\n", $source);
+        $lines = explode("\n", $source);
         foreach ($messages as $message) {
             if ($message['type'] == 'error') {
-                $formattedMsg = '- Line ' . $message['lastLine'] . ', column ' . $message['lastColumn'] . ': ' .
-                    $message['message'] . "\n  > " . $lines[$message['lastLine'] - 1];
-                $ignoring     = false;
+                $formattedMsg = '- Line '.$message['lastLine'].', column '.$message['lastColumn'].': '.
+                    $message['message']."\n  > ".$lines[$message['lastLine'] - 1];
+                $ignoring = false;
                 foreach ($ignoreMessages as $ignoreMessage) {
                     if (mb_stripos($formattedMsg, $ignoreMessage) !== false) {
                         $ignoring = true;
                     }
                 }
-                if (!$ignoring) {
+                if (! $ignoring) {
                     $failMessages[] = $formattedMsg;
                 }
             }
         }
         if (count($failMessages) > 0) {
-            \PHPUnit_Framework_Assert::fail('Invalid HTML: ' . "\n" . implode("\n", $failMessages));
+            \PHPUnit_Framework_Assert::fail('Invalid HTML: '."\n".implode("\n", $failMessages));
         }
     }
 }

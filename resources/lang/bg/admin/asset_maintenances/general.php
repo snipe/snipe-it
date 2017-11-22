@@ -7,5 +7,5 @@
         'view'               => 'Преглед на поддръжка на актив',
         'repair'             => 'Ремонт',
         'maintenance'        => 'Поддръжка',
-        'upgrade'            => 'Upgrade'
+        'upgrade'            => 'Upgrade',
     ];

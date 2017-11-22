@@ -1,24 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Tillverkaren existerar inte.',
-    'assoc_users'	 => 'Tillverkaren är för tillfället associerad med en modell och kan inte tas bort. Vänligen uppdatera dina modeller till att inte vara associerade med denna tillverkare och försök igen. ',
+    'assoc_users'     => 'Tillverkaren är för tillfället associerad med en modell och kan inte tas bort. Vänligen uppdatera dina modeller till att inte vara associerade med denna tillverkare och försök igen. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Tillverkaren kunde inte skapas. Vänligen försök igen.',
-        'success' => 'Tillverkaren skapades utan problem.'
-    ),
+        'success' => 'Tillverkaren skapades utan problem.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Tillverkaren kunde inte uppdateras, vänligen försök igen',
-        'success' => 'Tillverkaren uppdaterades utan problem.'
-    ),
+        'success' => 'Tillverkaren uppdaterades utan problem.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Är du säker på att du vill ta bort?',
         'error'   => 'Det gick inte att ta bort tillverkaren. Vänligen försök igen.',
-        'success' => 'Tillverkaren har tagits bort.'
-    )
+        'success' => 'Tillverkaren har tagits bort.',
+    ],
 
-);
+];

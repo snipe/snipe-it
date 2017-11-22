@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'A felhasználó törölte az elemkérést a webhelyen',
     'a_user_requested' => 'A felhasználó egy elemet kért a webhelyen',
     'accessory_name' => 'Tartozéknév:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Üdvözöljük: név',
     'welcome_to' => 'Üdvözöljük a weboldalon!',
     'your_credentials' => 'A Snipe-IT hitelesítő adatai',
-);
+];

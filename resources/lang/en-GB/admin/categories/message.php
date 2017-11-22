@@ -1,25 +1,25 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'     => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'     => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
-    ),
+        'success' => 'Category created successfully.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
-    ),
+        'success' => 'Category updated successfully.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Are you sure you wish to delete this category?',
         'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
-    )
+        'success' => 'The category was deleted successfully.',
+    ],
 
-);
+];

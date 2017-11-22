@@ -6,51 +6,50 @@
 
     class AddThreadIdToAssetLogsTable extends Migration
     {
-
         /**
-         * currentAssetId
+         * currentAssetId.
          *
          * @var int
          */
         protected $currentAssetId = null;
 
         /**
-         * currentAssetLogId
+         * currentAssetLogId.
          *
          * @var int
          */
         protected $currentAssetLogId = null;
 
         /**
-         * assetLogs
+         * assetLogs.
          *
          * @var array
          */
         protected $assetLogs = null;
 
         /**
-         * startOfCurrentThread
+         * startOfCurrentThread.
          *
          * @var bool
          */
         protected $startOfCurrentThread = true;
 
         /**
-         * threadStartingActionTypes
+         * threadStartingActionTypes.
          *
          * @var array
          */
-        protected $threadStartingActionTypes = [ 'checkout', 'requested' ];
+        protected $threadStartingActionTypes = ['checkout', 'requested'];
 
         /**
-         * threadFinalActionTypes
+         * threadFinalActionTypes.
          *
          * @var array
          */
-        protected $threadFinalActionTypes = [ 'checkin from' ];
+        protected $threadFinalActionTypes = ['checkin from'];
 
         /**
-         * actionlog
+         * actionlog.
          *
          * @var \Actionlog
          */
@@ -99,8 +98,6 @@
             // }
         }
 
-
-
         /**
          * Reverse the migrations.
          *
@@ -108,16 +105,14 @@
          */
         public function down()
         {
-
-            Schema::table( 'asset_logs', function ( Blueprint $table ) {
-
-                $table->dropIndex( 'thread_id' );
-                $table->dropColumn( 'thread_id' );
-            } );
+            Schema::table('asset_logs', function (Blueprint $table) {
+                $table->dropIndex('thread_id');
+                $table->dropColumn('thread_id');
+            });
         }
 
         /**
-         * hasAssetChanged
+         * hasAssetChanged.
          *
          * @param $assetLog
          *
@@ -125,30 +120,28 @@
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
          */
-        protected function hasAssetChanged( $assetLog )
+        protected function hasAssetChanged($assetLog)
         {
-
             return $assetLog->asset_id !== $this->currentAssetId;
         }
 
         /**
-         * resetCurrentAssetInformation
+         * resetCurrentAssetInformation.
          *
          * @param $assetLog
          *
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
          */
-        protected function resetCurrentAssetInformation( $assetLog )
+        protected function resetCurrentAssetInformation($assetLog)
         {
-
-            $this->currentAssetId       = $assetLog->asset_id;
-            $this->currentAssetLogId    = $assetLog->id;
+            $this->currentAssetId = $assetLog->asset_id;
+            $this->currentAssetLogId = $assetLog->id;
             $this->startOfCurrentThread = true;
         }
 
         /**
-         * hasReachedEndOfChain
+         * hasReachedEndOfChain.
          *
          * @param $assetLog
          *
@@ -156,48 +149,45 @@
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
          */
-        protected function hasReachedEndOfChain( $assetLog )
+        protected function hasReachedEndOfChain($assetLog)
         {
-
-            return in_array( $assetLog->action_type, $this->threadFinalActionTypes )
+            return in_array($assetLog->action_type, $this->threadFinalActionTypes)
                    && $this->startOfCurrentThread == false;
         }
 
         /**
-         * clearCurrentAssetInformation
+         * clearCurrentAssetInformation.
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
          */
         protected function clearCurrentAssetInformation()
         {
-
             $this->startOfCurrentThread = true;
-            $this->currentAssetLogId    = null;
-            $this->currentAssetId       = null;
+            $this->currentAssetLogId = null;
+            $this->currentAssetId = null;
         }
 
         /**
-         * updateAssetLogWithThreadInformation
+         * updateAssetLogWithThreadInformation.
          *
          * @param $assetLog
          *
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
          */
-        protected function updateAssetLogWithThreadInformation( $assetLog )
+        protected function updateAssetLogWithThreadInformation($assetLog)
         {
-
-            $loadedAssetLog = Actionlog::find( $assetLog->id );
+            $loadedAssetLog = Actionlog::find($assetLog->id);
 
             $loadedAssetLog->thread_id = $this->currentAssetLogId;
 
             $loadedAssetLog->update();
 
-            unset( $loadedAssetLog );
+            unset($loadedAssetLog);
         }
 
         /**
-         * hasBegunNewChain
+         * hasBegunNewChain.
          *
          * @param $assetLog
          *
@@ -205,11 +195,9 @@
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
          */
-        protected function hasBegunNewChain( $assetLog )
+        protected function hasBegunNewChain($assetLog)
         {
-
-            return in_array( $assetLog->action_type, $this->threadStartingActionTypes )
+            return in_array($assetLog->action_type, $this->threadStartingActionTypes)
                    && $this->startOfCurrentThread == true;
         }
-
     }

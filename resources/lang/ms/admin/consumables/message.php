@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Tidak boleh digunakan.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Tidak boleh dicipta, sila cuba lagi.',
-        'success' => 'Berguna dicipta dengan jayanya.'
-    ),
+        'success' => 'Berguna dicipta dengan jayanya.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Dikenakan tidak dikemas kini, sila cuba lagi',
-        'success' => 'Berguna dikemas kini berjaya.'
-    ),
+        'success' => 'Berguna dikemas kini berjaya.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Adakah anda pasti ingin menghapuskan penggunaan ini?',
         'error'   => 'Terdapat isu memadamkan pemakaian. Sila cuba lagi.',
-        'success' => 'Pemakaian telah berjaya dipadam.'
-    ),
+        'success' => 'Pemakaian telah berjaya dipadam.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Makanan tidak diperiksa, sila cuba lagi',
-        'success' 		=> 'Berguna diperiksa dengan jayanya.',
-        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
-    ),
+     'checkout' => [
+        'error'        => 'Makanan tidak diperiksa, sila cuba lagi',
+        'success'        => 'Berguna diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Dikenakan tidak diperiksa, sila cuba lagi',
-        'success' 		=> 'Berguna diperiksa dengan jayanya.',
-        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
-    )
+    'checkin' => [
+        'error'        => 'Dikenakan tidak diperiksa, sila cuba lagi',
+        'success'        => 'Berguna diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.',
+    ],
 
-
-);
+];

@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\Builder;
-use \Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Scope;
 
 /**
  * Handle query scoping for full company support.
@@ -22,6 +23,7 @@ final class CompanyableChildScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $model = $builder->getModel();
+
         return Company::scopeCompanyableChildren($model->getCompanyableParents(), $builder);
     }
 

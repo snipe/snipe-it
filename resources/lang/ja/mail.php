@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ユーザーがアイテムリクエストをキャンセルしました。',
     'a_user_requested' => 'ユーザーがアイテムをリクエストしています',
     'accessory_name' => '付属品名:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'ようこそ、 :name さん',
     'welcome_to' => ':web にようこそ!',
     'your_credentials' => 'Snipe-IT クレデンシャル',
-);
+];

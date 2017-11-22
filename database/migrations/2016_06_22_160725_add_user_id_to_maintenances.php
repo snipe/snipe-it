@@ -13,7 +13,7 @@ class AddUserIdToMaintenances extends Migration
     public function up()
     {
         Schema::table('asset_maintenances', function (Blueprint $table) {
-            $table->integer('user_id')->nullable()->default(NULL);
+            $table->integer('user_id')->nullable()->default(null);
         });
     }
 

@@ -99,10 +99,9 @@ return [
              * After cleaning up the backups remove the oldest backup until
              * this amount of megabytes has been reached.
              */
-            'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 5000
-        ]
+            'deleteOldestBackupsWhenUsingMoreMegabytesThan' => 5000,
+        ],
     ],
-
 
     /*
      *  In this array you can specify which backups should be monitored.
@@ -173,9 +172,9 @@ return [
             'token'  => env('PUSHOVER_APP_TOKEN'),
             'user'   => env('PUSHOVER_USER_KEY'),
             'sounds' => [
-                'success' => env('PUSHOVER_SOUND_SUCCESS','pushover'),
-                'error'   => env('PUSHOVER_SOUND_ERROR','siren'),
+                'success' => env('PUSHOVER_SOUND_SUCCESS', 'pushover'),
+                'error'   => env('PUSHOVER_SOUND_ERROR', 'siren'),
             ],
         ],
-    ]
+    ],
 ];

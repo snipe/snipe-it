@@ -32,5 +32,4 @@ class CreateAssetLogsTable extends Migration
     {
         Schema::drop('asset_logs');
     }
-
 }

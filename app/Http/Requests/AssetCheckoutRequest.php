@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class AssetCheckoutRequest extends Request
 {
     /**
@@ -24,11 +22,10 @@ class AssetCheckoutRequest extends Request
     public function rules()
     {
         $rules = [
-            "assigned_user"   => 'required_without_all:assigned_asset,assigned_location',
-            "assigned_asset"   => 'required_without_all:assigned_user,assigned_location|different:'.$this->id,
-            "assigned_location"   => 'required_without_all:assigned_user,assigned_asset',
+            'assigned_user'   => 'required_without_all:assigned_asset,assigned_location',
+            'assigned_asset'   => 'required_without_all:assigned_user,assigned_location|different:'.$this->id,
+            'assigned_location'   => 'required_without_all:assigned_user,assigned_asset',
         ];
-
 
         return $rules;
     }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Maidir Suímh',
     'about_locations'           => 'Úsáidtear suíomhanna chun faisnéis suímh a rianú d\'úsáideoirí, do shócmhainní agus d\'earraí eile',
     'assets_rtd'                => 'Sócmhainní', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => 'Tuismitheoir',
     'currency'                  => 'Airgeadra Suímh',
     'ldap_ou'                   => 'OL Cuardaigh LDAP',
-    );
+    ];

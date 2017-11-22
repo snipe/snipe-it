@@ -37,7 +37,6 @@ class FixDoubleEscape extends Command
      */
     public function handle()
     {
-
         $tables = [
             '\App\Models\Asset' => ['name'],
             '\App\Models\License' => ['name'],
@@ -56,30 +55,25 @@ class FixDoubleEscape extends Command
             '\App\Models\User' => ['first_name', 'last_name'],
         ];
 
-        $count = array();
+        $count = [];
 
+        foreach ($tables as $classname => $fields) {
+            $count[$classname] = [];
+            $count[$classname]['classname'] = 0;
 
+            foreach ($fields as $field) {
+                $count[$classname]['classname']++;
+                $count[$classname][$field] = 0;
 
-            foreach ($tables as $classname => $fields) {
-                $count[$classname] = array();
-                $count[$classname]['classname'] = 0;
-
-                foreach($fields as $field) {
-
-                    $count[$classname]['classname']++;
-                    $count[$classname][$field] = 0;
-
-                    foreach($classname::where("$field",'LIKE','%&%')->get() as $row) {
-                        $this->info('Updating '.$field.' for '.$classname);
-                        $row->{$field} = html_entity_decode($row->{$field});
-                        $row->save();
-                        $count[$classname][$field]++;
-
-                    }
+                foreach ($classname::where("$field", 'LIKE', '%&%')->get() as $row) {
+                    $this->info('Updating '.$field.' for '.$classname);
+                    $row->{$field} = html_entity_decode($row->{$field});
+                    $row->save();
+                    $count[$classname][$field]++;
                 }
             }
+        }
 
         $this->info('Update complete');
-
     }
 }

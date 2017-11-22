@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use App\Models\Setting;
 
 class SaveUserRequest extends Request
@@ -24,11 +23,9 @@ class SaveUserRequest extends Request
      */
     public function rules()
     {
-
         $rules = [];
 
-        switch($this->method())
-        {
+        switch ($this->method()) {
 
             // Brand new user
             case 'POST':
@@ -59,6 +56,5 @@ class SaveUserRequest extends Request
         $rules['password_confirm'] = 'sometimes|required_with:password';
 
         return $rules;
-
     }
 }

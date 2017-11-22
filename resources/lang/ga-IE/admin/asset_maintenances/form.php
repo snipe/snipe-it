@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Laethanta',
         'notes'                  => 'Nótaí',
         'update'                 => 'Nuashonrú',
-        'create'                 => 'Cruthaigh'
+        'create'                 => 'Cruthaigh',
     ];

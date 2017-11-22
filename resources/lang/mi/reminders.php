@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Ko nga kupuhipa he ono nga kupuhipa me te whakarite i te haamau.",
+    'password' => 'Ko nga kupuhipa he ono nga kupuhipa me te whakarite i te haamau.',
 
-    "user"     => "He hē te ingoa kaiwhakamahi me te wāhitau īmēra",
+    'user'     => 'He hē te ingoa kaiwhakamahi me te wāhitau īmēra',
 
-    "token"    => "He muhu tenei kupuhipa tautuhinga tautuhi.",
+    'token'    => 'He muhu tenei kupuhipa tautuhinga tautuhi.',
 
-    "sent" => "Mena kua kitea he wahitau īmēra rite, kua tukuna he whakamahara kupuhipa!",
+    'sent' => 'Mena kua kitea he wahitau īmēra rite, kua tukuna he whakamahara kupuhipa!',
 
-);
+];

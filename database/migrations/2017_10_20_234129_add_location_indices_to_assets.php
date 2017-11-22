@@ -15,7 +15,7 @@ class AddLocationIndicesToAssets extends Migration
     {
         Schema::table('assets', function (Blueprint $table) {
             $table->index('rtd_location_id');
-            $table->index(['assigned_type','assigned_to']);
+            $table->index(['assigned_type', 'assigned_to']);
         });
     }
 
@@ -29,7 +29,7 @@ class AddLocationIndicesToAssets extends Migration
         Schema::table('assets', function (Blueprint $table) {
             //
             $table->dropIndex(['rtd_location_id']);
-            $table->dropIndex(['assigned_type','assigned_to']);
+            $table->dropIndex(['assigned_type', 'assigned_to']);
         });
     }
 }

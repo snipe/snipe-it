@@ -1,25 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Níl an rang dímheasa ann.',
-    'assoc_users'	 => 'Tá an dímheas seo bainteach le samhlacha amháin nó níos mó faoi láthair agus ní féidir í a scriosadh. Scrios na samhlacha, agus ansin déan iarracht a scriosadh arís.',
+    'assoc_users'     => 'Tá an dímheas seo bainteach le samhlacha amháin nó níos mó faoi láthair agus ní féidir í a scriosadh. Scrios na samhlacha, agus ansin déan iarracht a scriosadh arís.',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Níor cruthaíodh rang dímheasa, déan iarracht arís. :(',
-        'success' => 'An rang dímheasa a cruthaíodh go rathúil. :)'
-    ),
+        'success' => 'An rang dímheasa a cruthaíodh go rathúil. :)',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Níor nuashonraíodh an rang dímheasa, déan iarracht arís',
-        'success' => 'Rang dímheasta cothrom le dáta go rathúil.'
-    ),
+        'success' => 'Rang dímheasta cothrom le dáta go rathúil.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'An bhfuil tú cinnte gur mian leat an rang dímheasa seo a scriosadh?',
         'error'   => 'Bhí ceist ann a scriosadh an rang dímheasa. Arís, le d\'thoil.',
-        'success' => 'Scriosadh an rang dímheasa go rathúil.'
-    )
+        'success' => 'Scriosadh an rang dímheasa go rathúil.',
+    ],
 
-);
+];

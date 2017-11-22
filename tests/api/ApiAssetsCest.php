@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 
 class ApiAssetsCest
 {
@@ -18,7 +17,6 @@ class ApiAssetsCest
     /** @test */
     public function indexAssets(ApiTester $I)
     {
-
         $I->wantTo('Get a list of assets');
 
         // setup
@@ -41,48 +39,48 @@ class ApiAssetsCest
             'serial' => e($asset->serial),
             'model' => ($asset->model) ? [
                 'id' => (int) $asset->model->id,
-                'name'=> e($asset->model->name)
+                'name' => e($asset->model->name),
             ] : null,
             'model_number' => ($asset->model) ? e($asset->model->model_number) : null,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
-                'name'=> e($asset->assetstatus->name)
+                'name' => e($asset->assetstatus->name),
             ] : null,
             'category' => ($asset->model->category) ? [
                 'id' => (int) $asset->model->category->id,
-                'name'=> e($asset->model->category->name)
-            ]  : null,
+                'name' => e($asset->model->category->name),
+            ] : null,
             'manufacturer' => ($asset->model->manufacturer) ? [
                 'id' => (int) $asset->model->manufacturer->id,
-                'name'=> e($asset->model->manufacturer->name)
+                'name' => e($asset->model->manufacturer->name),
             ] : null,
             'supplier' => ($asset->supplier) ? [
                 'id' => (int) $asset->supplier->id,
-                'name'=> e($asset->supplier->name)
+                'name' => e($asset->supplier->name),
             ] : null,
             'notes' => e($asset->notes),
             'order_number' => e($asset->order_number),
             'company' => ($asset->company) ? [
                 'id' => (int) $asset->company->id,
-                'name'=> e($asset->company->name)
+                'name' => e($asset->company->name),
             ] : null,
             'location' => ($asset->location) ? [
                 'id' => (int) $asset->location->id,
-                'name'=> e($asset->location->name)
-            ]  : null,
+                'name' => e($asset->location->name),
+            ] : null,
             'rtd_location' => ($asset->defaultLoc) ? [
                 'id' => (int) $asset->defaultLoc->id,
-                'name'=> e($asset->defaultLoc->name)
-            ]  : null,
+                'name' => e($asset->defaultLoc->name),
+            ] : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($asset->assigneduser) ? [
                 'id' => (int) $asset->assigneduser->id,
                 'name' => e($asset->assigneduser->getFullNameAttribute()),
-                'first_name'=> e($asset->assigneduser->first_name),
-                'last_name'=> e($asset->assigneduser->last_name)
-            ]  : null,
-            'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
-            'warranty_expires' => ($asset->warranty_months > 0) ?  [
+                'first_name' => e($asset->assigneduser->first_name),
+                'last_name' => e($asset->assigneduser->last_name),
+            ] : null,
+            'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months.' '.trans('admin/hardware/form.months')) : null,
+            'warranty_expires' => ($asset->warranty_months > 0) ? [
                 'datetime' => $asset->created_at->format('Y-m-d'),
                 'formatted' => $asset->created_at->format('Y-m-d'),
             ] : null,
@@ -179,7 +177,7 @@ class ApiAssetsCest
         $I->assertNotEquals($asset->name, $data['name']);
 
         // update
-        $I->sendPATCH('/hardware/' . $asset->id, $data);
+        $I->sendPATCH('/hardware/'.$asset->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -192,7 +190,7 @@ class ApiAssetsCest
         $I->assertEquals($temp_asset->rtd_location_id, $response->payload->rtd_location_id); // asset rtd_location_id updated
 
         // verify
-        $I->sendGET('/hardware/' . $asset->id);
+        $I->sendGET('/hardware/'.$asset->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
@@ -202,44 +200,44 @@ class ApiAssetsCest
             'serial' => e($temp_asset->serial),
             'model' => ($temp_asset->model) ? [
                 'id' => (int) $temp_asset->model->id,
-                'name'=> e($temp_asset->model->name)
+                'name' => e($temp_asset->model->name),
             ] : null,
             'model_number' => ($temp_asset->model) ? e($temp_asset->model->model_number) : null,
             'status_label' => ($temp_asset->assetstatus) ? [
                 'id' => (int) $temp_asset->assetstatus->id,
-                'name'=> e($temp_asset->assetstatus->name)
+                'name' => e($temp_asset->assetstatus->name),
             ] : null,
             'category' => ($temp_asset->model->category) ? [
                 'id' => (int) $temp_asset->model->category->id,
-                'name'=> e($temp_asset->model->category->name)
-            ]  : null,
+                'name' => e($temp_asset->model->category->name),
+            ] : null,
             'manufacturer' => ($temp_asset->model->manufacturer) ? [
                 'id' => (int) $temp_asset->model->manufacturer->id,
-                'name'=> e($temp_asset->model->manufacturer->name)
+                'name' => e($temp_asset->model->manufacturer->name),
             ] : null,
             'notes' => e($temp_asset->notes),
             'order_number' => e($asset->order_number),
             'company' => ($asset->company) ? [
                 'id' => (int) $temp_asset->company->id,
-                'name'=> e($temp_asset->company->name)
+                'name' => e($temp_asset->company->name),
             ] : null,
             'location' => ($temp_asset->location) ? [
                 'id' => (int) $temp_asset->location->id,
-                'name'=> e($temp_asset->location->name)
-            ]  : null,
+                'name' => e($temp_asset->location->name),
+            ] : null,
             'rtd_location' => ($temp_asset->defaultLoc) ? [
                 'id' => (int) $temp_asset->defaultLoc->id,
-                'name'=> e($temp_asset->defaultLoc->name)
-            ]  : null,
+                'name' => e($temp_asset->defaultLoc->name),
+            ] : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($temp_asset->assigneduser) ? [
                 'id' => (int) $temp_asset->assigneduser->id,
                 'name' => e($temp_asset->assigneduser->getFullNameAttribute()),
-                'first_name'=> e($temp_asset->assigneduser->first_name),
-                'last_name'=> e($temp_asset->assigneduser->last_name)
-            ]  : null,
-            'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
-            'warranty_expires' => ($asset->warranty_months > 0) ?  [
+                'first_name' => e($temp_asset->assigneduser->first_name),
+                'last_name' => e($temp_asset->assigneduser->last_name),
+            ] : null,
+            'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months.' '.trans('admin/hardware/form.months')) : null,
+            'warranty_expires' => ($asset->warranty_months > 0) ? [
                 'datetime' => $asset->created_at->format('Y-m-d'),
                 'formatted' => $asset->created_at->format('Y-m-d'),
             ] : null,
@@ -311,7 +309,7 @@ class ApiAssetsCest
         $I->assertNotEquals($asset->name, $data['name']);
 
         // update
-        $I->sendPUT('/hardware/' . $asset->id, $data);
+        $I->sendPUT('/hardware/'.$asset->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -324,7 +322,7 @@ class ApiAssetsCest
         $I->assertEquals($temp_asset->rtd_location_id, $response->payload->rtd_location_id); // asset rtd_location_id updated
 
         // verify
-        $I->sendGET('/hardware/' . $asset->id);
+        $I->sendGET('/hardware/'.$asset->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
@@ -334,44 +332,44 @@ class ApiAssetsCest
             'serial' => e($temp_asset->serial),
             'model' => ($temp_asset->model) ? [
                 'id' => (int) $temp_asset->model->id,
-                'name'=> e($temp_asset->model->name)
+                'name' => e($temp_asset->model->name),
             ] : null,
             'model_number' => ($temp_asset->model) ? e($temp_asset->model->model_number) : null,
             'status_label' => ($temp_asset->assetstatus) ? [
                 'id' => (int) $temp_asset->assetstatus->id,
-                'name'=> e($temp_asset->assetstatus->name)
+                'name' => e($temp_asset->assetstatus->name),
             ] : null,
             'category' => ($temp_asset->model->category) ? [
                 'id' => (int) $temp_asset->model->category->id,
-                'name'=> e($temp_asset->model->category->name)
-            ]  : null,
+                'name' => e($temp_asset->model->category->name),
+            ] : null,
             'manufacturer' => ($temp_asset->model->manufacturer) ? [
                 'id' => (int) $temp_asset->model->manufacturer->id,
-                'name'=> e($temp_asset->model->manufacturer->name)
+                'name' => e($temp_asset->model->manufacturer->name),
             ] : null,
             'notes' => e($temp_asset->notes),
             'order_number' => e($asset->order_number),
             'company' => ($asset->company) ? [
                 'id' => (int) $temp_asset->company->id,
-                'name'=> e($temp_asset->company->name)
+                'name' => e($temp_asset->company->name),
             ] : null,
             'location' => ($temp_asset->assetLoc) ? [
                 'id' => (int) $temp_asset->assetLoc->id,
-                'name'=> e($temp_asset->assetLoc->name)
-            ]  : null,
+                'name' => e($temp_asset->assetLoc->name),
+            ] : null,
             'rtd_location' => ($temp_asset->defaultLoc) ? [
                 'id' => (int) $temp_asset->defaultLoc->id,
-                'name'=> e($temp_asset->defaultLoc->name)
-            ]  : null,
+                'name' => e($temp_asset->defaultLoc->name),
+            ] : null,
             'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
             'assigned_to' => ($temp_asset->assigneduser) ? [
                 'id' => (int) $temp_asset->assigneduser->id,
                 'name' => e($temp_asset->assigneduser->getFullNameAttribute()),
-                'first_name'=> e($temp_asset->assigneduser->first_name),
-                'last_name'=> e($temp_asset->assigneduser->last_name)
-            ]  : null,
-            'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
-            'warranty_expires' => ($asset->warranty_months > 0) ?  [
+                'first_name' => e($temp_asset->assigneduser->first_name),
+                'last_name' => e($temp_asset->assigneduser->last_name),
+            ] : null,
+            'warranty' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months.' '.trans('admin/hardware/form.months')) : null,
+            'warranty_expires' => ($asset->warranty_months > 0) ? [
                 'datetime' => $asset->created_at->format('Y-m-d'),
                 'formatted' => $asset->created_at->format('Y-m-d'),
             ] : null,
@@ -416,7 +414,7 @@ class ApiAssetsCest
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
         // delete
-        $I->sendDELETE('/hardware/' . $asset->id);
+        $I->sendDELETE('/hardware/'.$asset->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -425,11 +423,10 @@ class ApiAssetsCest
         $I->assertEquals(trans('admin/hardware/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/hardware/' . $asset->id);
+        $I->sendGET('/hardware/'.$asset->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson(); // @todo: response is not JSON
 
-        
         // $scenario->incomplete('not found response should be JSON, receiving HTML instead');
     }
 }

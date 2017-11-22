@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => '管理地理位置',
     'about_locations'           => '地理位置用来跟踪用户、资产和其他项目的位置信息。',
     'assets_rtd'                => '资产', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => '上级节点',
     'currency'                  => '当地货币单位',
     'ldap_ou'                   => 'LDAP中搜索组织单位（OU）',
-    );
+    ];

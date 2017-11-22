@@ -33,7 +33,6 @@ class AddAddressToUser extends Migration
             $table->dropColumn('city');
             $table->dropColumn('state');
             $table->dropColumn('zip');
-
         });
     }
 }

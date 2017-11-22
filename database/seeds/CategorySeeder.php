@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 
@@ -22,5 +23,4 @@ class CategorySeeder extends Seeder
         factory(Category::class, 1)->states('component-hdd-category')->create(); // 12
         factory(Category::class, 1)->states('component-ram-category')->create(); // 13
     }
-
 }

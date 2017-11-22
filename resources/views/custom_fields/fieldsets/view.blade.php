@@ -68,7 +68,7 @@
                 {{ trans('admin/custom_fields/general.required') }}
                 {{ Form::text("order",$maxid)}}
                 {{ Form::select("field_id",$custom_fields_list,"",["onchange" => "$('#ordering').submit()"]) }}
-                <span class="alert-msg"><?= $errors->first('field_id'); ?></span>
+                <span class="alert-msg"><?php echo $errors->first('field_id'); ?></span>
                 {{ Form::close() }}
               </td>
             </tr>

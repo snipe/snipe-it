@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Nga ra',
         'notes'                  => 'Tuhipoka',
         'update'                 => 'Whakahou',
-        'create'                 => 'Waihanga'
+        'create'                 => 'Waihanga',
     ];

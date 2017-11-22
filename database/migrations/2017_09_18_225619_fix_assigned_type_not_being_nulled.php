@@ -2,8 +2,6 @@
 
 use App\Models\Asset;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class FixAssignedTypeNotBeingNulled extends Migration
 {

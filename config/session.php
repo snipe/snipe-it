@@ -148,6 +148,6 @@ return [
     |
     */
 
-    'secure' => env('SECURE_COOKIES', false)
+    'secure' => env('SECURE_COOKIES', false),
 
 ];

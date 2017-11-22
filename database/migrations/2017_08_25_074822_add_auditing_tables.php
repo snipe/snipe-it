@@ -14,7 +14,7 @@ class AddAuditingTables extends Migration
     public function up()
     {
         Schema::table('assets', function (Blueprint $table) {
-            $table->date('next_audit_date')->nullable()->default(NULL);
+            $table->date('next_audit_date')->nullable()->default(null);
         });
     }
 

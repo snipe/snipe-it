@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'id'      => 'ID',
     'months'   => 'Monate',
     'term'   => 'Laufzeit',
     'title'      => 'Name ',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Kua whakakorea e tetahi kaiwhakamahi tetahi tonoemi i runga i te paetukutuku',
     'a_user_requested' => 'Kua tono tetahi kaiwhakamahi i tetahi mea i runga i te paetukutuku',
     'accessory_name' => 'Ingoa Whakauru:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Nau mai: ingoa',
     'welcome_to' => 'Nau mai ki: web!',
     'your_credentials' => 'Nga tohu tohu Snipe-IT',
-);
+];

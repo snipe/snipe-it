@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Presenters\Presentable;
@@ -20,29 +21,28 @@ class Accessory extends SnipeModel
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'accessories';
     protected $casts = [
-        'requestable' => 'boolean'
+        'requestable' => 'boolean',
     ];
 
     /**
-    * Accessory validation rules
-    */
-    public $rules = array(
+     * Accessory validation rules.
+     */
+    public $rules = [
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
         'purchase_cost'     => 'numeric|nullable',
-    );
-
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -64,15 +64,13 @@ class Accessory extends SnipeModel
         'supplier_id',
         'image',
         'qty',
-        'requestable'
+        'requestable',
     ];
-
 
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
     }
-    
 
     public function setRequestableAttribute($value)
     {
@@ -80,6 +78,7 @@ class Accessory extends SnipeModel
             $value = null;
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+
         return;
     }
 
@@ -99,13 +98,12 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Get action logs for this accessory
-    */
+     * Get action logs for this accessory.
+     */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
-
 
     public function users()
     {
@@ -134,15 +132,15 @@ class Accessory extends SnipeModel
 
     public function getEula()
     {
-
         $Parsedown = new \Parsedown();
 
         if ($this->category->eula_text) {
             return $Parsedown->text(e($this->category->eula_text));
-        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
+        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula == '1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         }
-            return null;
+
+        return;
     }
 
     public function numRemaining()
@@ -150,35 +148,35 @@ class Accessory extends SnipeModel
         $checkedout = $this->users->count();
         $total = $this->qty;
         $remaining = $total - $checkedout;
+
         return $remaining;
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to search on text.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeTextSearch($query, $search)
     {
         $search = explode('+', $search);
 
         return $query->where(function ($query) use ($search) {
-
             foreach ($search as $search) {
-                    $query->whereHas('category', function ($query) use ($search) {
-                        $query->where('categories.name', 'LIKE', '%'.$search.'%');
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('company', function ($query) use ($search) {
-                            $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('location', function ($query) use ($search) {
-                            $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere('accessories.name', 'LIKE', '%'.$search.'%')
+                $query->whereHas('category', function ($query) use ($search) {
+                    $query->where('categories.name', 'LIKE', '%'.$search.'%');
+                })->orWhere(function ($query) use ($search) {
+                    $query->whereHas('company', function ($query) use ($search) {
+                        $query->where('companies.name', 'LIKE', '%'.$search.'%');
+                    });
+                })->orWhere(function ($query) use ($search) {
+                    $query->whereHas('location', function ($query) use ($search) {
+                        $query->where('locations.name', 'LIKE', '%'.$search.'%');
+                    });
+                })->orWhere('accessories.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.model_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.order_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.purchase_cost', 'LIKE', '%'.$search.'%')
@@ -188,13 +186,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on company
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on company.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')
@@ -202,13 +200,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on category
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on category.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderCategory($query, $order)
     {
         return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')
@@ -216,13 +214,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on location
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on location.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'accessories.location_id', '=', 'locations.id')
@@ -230,13 +228,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on manufacturer
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on manufacturer.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderManufacturer($query, $order)
     {
         return $query->leftJoin('manufacturers', 'accessories.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);

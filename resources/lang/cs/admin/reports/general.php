@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'info'   => 'Zvolte možnosti zprávy o majetku.'
-);
+return [
+    'info'   => 'Zvolte možnosti zprávy o majetku.',
+];
