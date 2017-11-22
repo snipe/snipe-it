@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -21,6 +22,8 @@ class CustomFieldSeeder extends Seeder
               }
           }
       CustomField::truncate();
+      CustomFieldset::truncate();
+      DB::table('custom_field_custom_fieldset')->truncate();
       factory(CustomField::class, 4)->create();
 
   }
