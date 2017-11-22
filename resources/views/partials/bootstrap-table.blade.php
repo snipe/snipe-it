@@ -276,6 +276,14 @@
 
     }
 
+    // This just prints out the item type in the activity report
+    function itemTypeFormatter(value, row) {
+
+        if ((row) && (row.item) && (row.item.type)) {
+            return row.item.type;
+        }
+    }
+
 
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
