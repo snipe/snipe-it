@@ -14,8 +14,9 @@ class RemoveOptionKeysFromSettingsTable extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             //
-            if(Schema::hasColumn('settings', 'option_name'))
+            if (Schema::hasColumn('settings', 'option_name')) {
                 $table->dropColumn('option_name');
+            }
         });
     }
 

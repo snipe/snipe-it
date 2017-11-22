@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Modelo inexistente.',
-    'assoc_users'	 => 'Este modelo está asignado a uno o más equipos y no puede ser eliminado',
+    'assoc_users'     => 'Este modelo está asignado a uno o más equipos y no puede ser eliminado',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Modelo no creado, Intentalo de nuevo.',
         'success' => 'Modelo creado.',
         'duplicate_set' => 'Un modelo de activo con ese nombre, fabricante y número de modelo ya existe.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Modelo no actualizado, Intentalo de nuevo',
-        'success' => 'Modelo actualizado.'
-    ),
+        'success' => 'Modelo actualizado.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Estás seguro de querer eliminar el Modelo?',
         'error'   => 'Ha habido un problema al eliminar el Modelo. Intentalo de nuevo.',
-        'success' => 'Modelo eliminado.'
-    ),
+        'success' => 'Modelo eliminado.',
+    ],
 
-    'restore' => array(
-        'error'   		=> 'El modelo no fue restaurado, por favor intente nuevamente',
-        'success' 		=> 'Modelo restaurado exitosamente.'
-    ),
+    'restore' => [
+        'error'        => 'El modelo no fue restaurado, por favor intente nuevamente',
+        'success'        => 'Modelo restaurado exitosamente.',
+    ],
 
-    'bulkedit' => array(
-        'error'   		=> 'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
-        'success' 		=> 'Modelos actualizados.'
-    ),
+    'bulkedit' => [
+        'error'        => 'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
+        'success'        => 'Modelos actualizados.',
+    ],
 
-);
+];

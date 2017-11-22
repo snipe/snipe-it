@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Akun dengan ini email telah digunakan.',
     'account_not_found'      => 'Nama pengguna atau sandi tidak benar.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Akun pengguna ini dilarang.',
     'throttle'               => 'Terlalu banyak usaha login yang gagal Silakan coba lagi di sekitar: menit menit (s).',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Terdapat kesalahan ketika anda mencoba masuk, silahkan coba kembali.',
         'success' => 'Anda berhasil masuk.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Terdapat kesalahan ketika membuat akun anda, silahkan coba kembali.',
         'success' => 'Akun berhasil dibuat.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Terdapat kesalahan ketika reset kode kata sandi anda, silahkan coba kembali.',
             'success' => 'Email pembaruan kata sandi sukses terkirim.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Terdapat kesalahan ketika reset kata sandi anda, silahkan coba kembali.',
             'success' => 'Password anda sudah berhasil di reset.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Terdapat kesalahan ketika aktivasi akun anda, silahkan coba kembali.',
         'success' => 'Akun anda sukses di aktivasi.',
-    ),
+    ],
 
-);
+];

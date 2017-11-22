@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Slaptažodžiai turi sutapti ir būti iš 6 simbolių.",
+    'password' => 'Slaptažodžiai turi sutapti ir būti iš 6 simbolių.',
 
-    "user"     => "Neteisingas naudotojas arba el. paštas",
+    'user'     => 'Neteisingas naudotojas arba el. paštas',
 
-    "token"    => "Šis slaptažodžio atnaujinimas negaliojantis.",
+    'token'    => 'Šis slaptažodžio atnaujinimas negaliojantis.',
 
-    "sent" => "Jūsų slaptažodžio priminimas bus išsiųstas jei nurodytas el. pašto adresas yra sistemoje!",
+    'sent' => 'Jūsų slaptažodžio priminimas bus išsiųstas jei nurodytas el. pašto adresas yra sistemoje!',
 
-);
+];

@@ -1,15 +1,15 @@
 <?php
 
-return array(
+return [
     'about_models_title'     => 'Az Asset Models-ról',
     'about_models_text'           => 'Az eszköz-modellek lehetővé teszik az azonos eszközök csoportosítását. "MBP 2013", "IPhone 6s" stb.',
-    'deleted'  					        => 'Ez a modell törölve lett. <a href="/hardware/models/:model_id/restore">Itt visszaállíthatod</a>.',
+    'deleted'                            => 'Ez a modell törölve lett. <a href="/hardware/models/:model_id/restore">Itt visszaállíthatod</a>.',
     'restore'                   => 'Modell Visszaállítása',
     'requestable'               => 'A felhasználók kérhetik ezt a modellt',
-	'show_mac_address'			      => 'Mutasd a MAC cím mezőt ennél az eszköznél',
+    'show_mac_address'                  => 'Mutasd a MAC cím mezőt ennél az eszköznél',
     'view_deleted'              => 'Töröltek megtekintése',
     'view_models'               => 'Modellek megtekintése',
     'fieldset'                  => 'Mezőcsoport',
     'no_custom_field'           => 'Nincsenek egyedi mezők',
 
-);
+];

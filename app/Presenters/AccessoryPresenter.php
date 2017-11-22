@@ -3,142 +3,137 @@
  * Created by PhpStorm.
  * User: parallelgrapefruit
  * Date: 12/23/16
- * Time: 11:51 AM
+ * Time: 11:51 AM.
  */
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-use Illuminate\Support\Facades\Gate;
-
 /**
- * Class AccessoryPresenter
- * @package App\Presenters
+ * Class AccessoryPresenter.
  */
 class AccessoryPresenter extends Presenter
 {
     /**
-     * Json Column Layout for bootstrap table
+     * Json Column Layout for bootstrap table.
      * @return string
      */
     public static function dataTableLayout()
     {
         $layout = [
             [
-                "field" => "id",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.id'),
-                "visible" => false
+                'field' => 'id',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
             ],[
-                "field" => "image",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/hardware/table.image'),
-                "visible" => true,
-                "formatter" => "imageFormatter"
+                'field' => 'image',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/hardware/table.image'),
+                'visible' => true,
+                'formatter' => 'imageFormatter',
             ], [
-                "field" => "company",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('admin/companies/table.title'),
-                "visible" => false,
-                "formatter" => "companiesLinkObjFormatter"
+                'field' => 'company',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('admin/companies/table.title'),
+                'visible' => false,
+                'formatter' => 'companiesLinkObjFormatter',
             ], [
-                "field" => "name",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.name'),
-                "formatter" => "accessoriesLinkFormatter"
+                'field' => 'name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.name'),
+                'formatter' => 'accessoriesLinkFormatter',
             ], [
-                "field" => "category",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/accessories/general.accessory_category'),
-                "formatter" => "categoriesLinkObjFormatter"
+                'field' => 'category',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('admin/accessories/general.accessory_category'),
+                'formatter' => 'categoriesLinkObjFormatter',
             ], [
-                "field" => "model_number",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/models/table.modelnumber'),
-                "formatter" => "accessoriesLinkFormatter"
+                'field' => 'model_number',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('admin/models/table.modelnumber'),
+                'formatter' => 'accessoriesLinkFormatter',
             ], [
-                "field" => "manufacturer",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.manufacturer'),
-                "formatter" => "manufacturersLinkObjFormatter",
+                'field' => 'manufacturer',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.manufacturer'),
+                'formatter' => 'manufacturersLinkObjFormatter',
             ], [
-                "field" => "supplier",
-                "searchable" => true,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.supplier'),
-                "visible" => false,
-                "formatter" => "suppliersLinkObjFormatter"
+                'field' => 'supplier',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.supplier'),
+                'visible' => false,
+                'formatter' => 'suppliersLinkObjFormatter',
             ], [
-                "field" => "location",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.location'),
-                "formatter" => "locationsLinkObjFormatter",
+                'field' => 'location',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.location'),
+                'formatter' => 'locationsLinkObjFormatter',
             ], [
-                "field" => "qty",
-                "searchable" => false,
-                "sortable" => false,
-                "title" => trans('admin/accessories/general.total'),
+                'field' => 'qty',
+                'searchable' => false,
+                'sortable' => false,
+                'title' => trans('admin/accessories/general.total'),
             ],  [
-                "field" => "min_qty",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.min_amt'),
+                'field' => 'min_qty',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.min_amt'),
             ], [
-                "field" => "remaining_qty",
-                "searchable" => false,
-                "sortable" => false,
-                "title" => trans('admin/accessories/general.remaining'),
+                'field' => 'remaining_qty',
+                'searchable' => false,
+                'sortable' => false,
+                'title' => trans('admin/accessories/general.remaining'),
             ], [
-                "field" => "purchase_date",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('general.purchase_date'),
-                "formatter" => "dateDisplayFormatter"
+                'field' => 'purchase_date',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.purchase_date'),
+                'formatter' => 'dateDisplayFormatter',
             ], [
-                "field" => "purchase_cost",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.purchase_cost'),
-                "footerFormatter" => 'sumFormatter',
+                'field' => 'purchase_cost',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.purchase_cost'),
+                'footerFormatter' => 'sumFormatter',
             ], [
-                "field" => "order_number",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('general.order_number'),
+                'field' => 'order_number',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.order_number'),
             ],[
-                "field" => "change",
-                "searchable" => false,
-                "sortable" => false,
-                "visible" => true,
-                "title" => trans('general.change'),
-                "formatter" => "accessoriesInOutFormatter",
+                'field' => 'change',
+                'searchable' => false,
+                'sortable' => false,
+                'visible' => true,
+                'title' => trans('general.change'),
+                'formatter' => 'accessoriesInOutFormatter',
             ], [
-                "field" => "actions",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
-                "formatter" => "accessoriesActionsFormatter",
-            ]
+                'field' => 'actions',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('table.actions'),
+                'formatter' => 'accessoriesActionsFormatter',
+            ],
         ];
 
         return json_encode($layout);
     }
-
 
     /**
      * Pregenerated link to this accessories view page.

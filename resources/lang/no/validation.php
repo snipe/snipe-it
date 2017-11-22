@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Attributtet :attribute er allerede tatt.',
     'uploaded'             => 'Atribbutet :attribute kunne ikke lastes opp.',
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Attributtfeltet inneholder et tegn som ikke er tillatt.",
-        "email_array"      => "En eller flere e-postadresser er ugyldige.",
-        "hashed_pass"      => "Gjeldende passord er feil",
+        'alpha_space' => 'Attributtfeltet inneholder et tegn som ikke er tillatt.',
+        'email_array'      => 'En eller flere e-postadresser er ugyldige.',
+        'hashed_pass'      => 'Gjeldende passord er feil',
         'dumbpwd'          => 'Passordet er for vanlig.',
-        "statuslabel_type" => "Du må velge en gyldig statusetikett-type",
+        'statuslabel_type' => 'Du må velge en gyldig statusetikett-type',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

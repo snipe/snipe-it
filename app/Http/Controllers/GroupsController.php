@@ -1,12 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Config;
 use Input;
-use Lang;
 use Redirect;
-use App\Models\Setting;
-use Validator;
 use View;
 use App\Models\Group;
 use App\Helpers\Helper;
@@ -20,13 +18,13 @@ use App\Helpers\Helper;
 class GroupsController extends Controller
 {
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the user group listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see GroupsController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the user group listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see GroupsController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -35,19 +33,19 @@ class GroupsController extends Controller
     }
 
     /**
-    * Returns a view that displays a form to create a new User Group.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see GroupsController::postCreate()
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that displays a form to create a new User Group.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see GroupsController::postCreate()
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
         $group = new Group;
         // Get all the available permissions
         $permissions = config('permissions');
-        $groupPermissions = array();
+        $groupPermissions = [];
         $selectedPermissions = Input::old('permissions', $groupPermissions);
 
         // Show the page
@@ -55,12 +53,12 @@ class GroupsController extends Controller
     }
 
     /**
-    * Validates and stores the new User Group data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see GroupsController::getCreate()
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and stores the new User Group data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see GroupsController::getCreate()
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
     {
@@ -70,19 +68,20 @@ class GroupsController extends Controller
         $group->permissions = json_encode(Input::get('permission'));
 
         if ($group->save()) {
-            return redirect()->route("groups.index")->with('success', trans('admin/groups/message.success.create'));
+            return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.create'));
         }
+
         return redirect(route('groups.create'))->withInput()->withErrors($group->getErrors());
     }
 
     /**
-    * Returns a view that presents a form to edit a User Group.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see GroupsController::postEdit()
-    * @param int $id
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that presents a form to edit a User Group.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see GroupsController::postEdit()
+     * @param int $id
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id = null)
     {
@@ -92,6 +91,7 @@ class GroupsController extends Controller
             $permissions = config('permissions');
             $groupPermissions = $group->decodePermissions();
             $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
+
             return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
         }
 
@@ -99,51 +99,54 @@ class GroupsController extends Controller
     }
 
     /**
-    * Validates and stores the updated User Group data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see GroupsController::getEdit()
-    * @param int $id
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and stores the updated User Group data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see GroupsController::getEdit()
+     * @param int $id
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id = null)
     {
         $permissions = config('permissions');
-        if (!$group = Group::find($id)) {
+        if (! $group = Group::find($id)) {
             return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
         }
         $group->name = e(Input::get('name'));
         $group->permissions = json_encode(Input::get('permission'));
 
-        if (!config('app.lock_passwords')) {
+        if (! config('app.lock_passwords')) {
             if ($group->save()) {
                 return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.update'));
             }
+
             return redirect()->back()->withInput()->withErrors($group->getErrors());
         }
+
         return redirect()->route('groups.index')->with('error', trans('general.feature_disabled'));
     }
 
     /**
-    * Validates and deletes the User Group.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see GroupsController::getEdit()
-    * @param int $id
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and deletes the User Group.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see GroupsController::getEdit()
+     * @param int $id
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id = null)
     {
-        if (!config('app.lock_passwords')) {
-            if (!$group = Group::find($id)) {
+        if (! config('app.lock_passwords')) {
+            if (! $group = Group::find($id)) {
                 return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
             }
             $group->delete();
             // Redirect to the group management page
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.delete'));
         }
+
         return redirect()->route('groups.index')->with('error', trans('general.feature_disabled'));
     }
 
@@ -166,5 +169,4 @@ class GroupsController extends Controller
 
         return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
     }
-
 }

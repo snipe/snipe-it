@@ -23,7 +23,7 @@ class CategoriesController extends Controller
         $this->authorize('view', Category::class);
         $allowed_columns = ['id', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count', 'image'];
 
-        $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email','image'])
+        $categories = Category::select(['id', 'created_at', 'updated_at', 'name', 'category_type', 'use_default_eula', 'eula_text', 'require_acceptance', 'checkin_email', 'image'])
             ->withCount('assets', 'accessories', 'consumables', 'components');
 
         if ($request->has('search')) {
@@ -38,10 +38,9 @@ class CategoriesController extends Controller
 
         $total = $categories->count();
         $categories = $categories->skip($offset)->take($limit)->get();
+
         return (new CategoriesTransformer)->transformCategories($categories, $total);
-
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -60,8 +59,8 @@ class CategoriesController extends Controller
         if ($category->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $category, trans('admin/categories/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $category->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $category->getErrors()));
     }
 
     /**
@@ -76,10 +75,9 @@ class CategoriesController extends Controller
     {
         $this->authorize('view', Category::class);
         $category = Category::findOrFail($id);
+
         return (new CategoriesTransformer)->transformCategory($category);
-
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -117,31 +115,28 @@ class CategoriesController extends Controller
         $category = Category::findOrFail($id);
 
         if ($category->has_models() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'model'])));
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type' => 'model'])));
         } elseif ($category->accessories()->count() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory'])));
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type' => 'accessory'])));
         } elseif ($category->consumables()->count() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable'])));
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type' => 'consumable'])));
         } elseif ($category->components()->count() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'component'])));
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type' => 'component'])));
         }
         $category->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/categories/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/categories/message.delete.success')));
     }
 
-
     /**
-     * Gets a paginated collection for the select2 menus
+     * Gets a paginated collection for the select2 menus.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request, $category_type = 'asset')
     {
-
         $categories = Category::select([
             'id',
             'name',
@@ -162,7 +157,5 @@ class CategoriesController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($categories);
-
     }
-
 }

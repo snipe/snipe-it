@@ -7,11 +7,11 @@ class LocationsCest
 {
     public function _before(FunctionalTester $I)
     {
-          // logging in
+        // logging in
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
     }
 
     // tests
@@ -27,7 +27,7 @@ class LocationsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('locations.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -36,7 +36,7 @@ class LocationsCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short values");
+        $I->wantTo('Test Validation Fails with short values');
         $I->amOnPage(route('locations.create'));
         $I->fillField('name', 't');
         $I->click('Save');
@@ -57,7 +57,7 @@ class LocationsCest
             'country'           => $location->country,
             'zip'               => $location->zip,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('locations.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('locations', $values);

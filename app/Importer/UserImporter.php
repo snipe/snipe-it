@@ -2,7 +2,6 @@
 
 namespace App\Importer;
 
-use App\Helpers\Helper;
 use App\Models\User;
 
 class UserImporter extends ItemImporter
@@ -40,28 +39,32 @@ class UserImporter extends ItemImporter
         $this->item['password'] = $this->tempPassword;
         $user = User::where('username', $this->item['username'])->first();
         if ($user) {
-            if (!$this->updating) {
-                $this->log('A matching User ' . $this->item["name"] . ' already exists.  ');
+            if (! $this->updating) {
+                $this->log('A matching User '.$this->item['name'].' already exists.  ');
+
                 return;
             }
             $this->log('Updating User');
             // $user = $this->users[$userId];
             $user->update($this->sanitizeItemForUpdating($user));
             $user->save();
+
             return;
         }
-        $this->log("No matching user, creating one");
+        $this->log('No matching user, creating one');
         $user = new User();
         $user->fill($this->sanitizeItemForStoring($user));
 
         if ($user->save()) {
             // $user->logCreate('Imported using CSV Importer');
-            $this->log("User " . $this->item["name"] . ' was created');
+            $this->log('User '.$this->item['name'].' was created');
             $user = null;
             $this->item = null;
+
             return;
         }
         $this->logError($user, 'User');
+
         return;
     }
 }

@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'info'   => 'Wähle eine Option für deinen Asset Bericht.'
-);
+return [
+    'info'   => 'Wähle eine Option für deinen Asset Bericht.',
+];

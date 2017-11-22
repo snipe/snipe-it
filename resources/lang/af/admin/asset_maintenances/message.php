@@ -5,15 +5,15 @@
         'delete'                       => [
             'confirm' => 'Is jy seker jy wil hierdie bate instandhouding uitvee?',
             'error'   => 'Daar was \'n probleem met die verwydering van die bate-instandhouding. Probeer asseblief weer.',
-            'success' => 'Die bate-instandhouding is suksesvol verwyder.'
+            'success' => 'Die bate-instandhouding is suksesvol verwyder.',
         ],
         'create'                       => [
             'error'   => 'Asset Maintenance is nie geskep nie, probeer asseblief weer.',
-            'success' => 'Bate Onderhoud geskep suksesvol.'
+            'success' => 'Bate Onderhoud geskep suksesvol.',
         ],
         'edit'                       => [
             'error'   => 'Bateonderhoud is nie geredigeer nie, probeer asseblief weer.',
-            'success' => 'Bate Onderhoud suksesvol geredigeer.'
+            'success' => 'Bate Onderhoud suksesvol geredigeer.',
         ],
         'asset_maintenance_incomplete' => 'Nog nie voltooi nie',
         'warranty'                     => 'waarborg',

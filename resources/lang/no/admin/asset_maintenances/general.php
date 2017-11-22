@@ -7,5 +7,5 @@
         'view'               => 'Vedlikehold detaljer',
         'repair'             => 'Reparerasjon',
         'maintenance'        => 'Vedlikehold',
-        'upgrade'            => 'Oppgradering'
+        'upgrade'            => 'Oppgradering',
     ];

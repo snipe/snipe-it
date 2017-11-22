@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Presenters\Presentable;
@@ -14,24 +15,22 @@ class Manufacturer extends SnipeModel
     protected $table = 'manufacturers';
 
     // Declare the rules for the form validation
-    protected $rules = array(
+    protected $rules = [
         'name'   => 'required|min:2|max:255|unique:manufacturers,name,NULL,deleted_at',
         'url'   => 'url|nullable',
         'support_url'   => 'url|nullable',
-        'support_email'   => 'email|nullable'
-    );
+        'support_email'   => 'email|nullable',
+    ];
 
     protected $hidden = ['user_id','deleted_at'];
 
-
-
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -41,8 +40,6 @@ class Manufacturer extends SnipeModel
      * @var array
      */
     protected $fillable = ['name','url','support_url','support_phone','support_email'];
-
-
 
     public function has_models()
     {
@@ -75,18 +72,16 @@ class Manufacturer extends SnipeModel
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to search on text.
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeTextSearch($query, $search)
     {
-
         return $query->where(function ($query) use ($search) {
-        
             $query->where('name', 'LIKE', '%'.$search.'%');
         });
     }

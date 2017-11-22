@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Pengguna telah membatalkan permintaan item di situs web',
     'a_user_requested' => 'Pengguna telah meminta item di situs web',
     'accessory_name' => 'Nama Aksesori:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Selamat datang: nama',
     'welcome_to' => 'Selamat Datang di: web!',
     'your_credentials' => 'Kredensial Snipe-IT Anda',
-);
+];

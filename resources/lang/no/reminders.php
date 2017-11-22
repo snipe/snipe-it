@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passord må bestå av minst 6 tegn og stemme med bekreftelse.",
+    'password' => 'Passord må bestå av minst 6 tegn og stemme med bekreftelse.',
 
-    "user"     => "Brukernavn eller epostadresse er ugyldig",
+    'user'     => 'Brukernavn eller epostadresse er ugyldig',
 
-    "token"    => "Denne passordresetten er ugyldig.",
+    'token'    => 'Denne passordresetten er ugyldig.',
 
-    "sent" => "En passordpåminnelse er sendt hvis en gyldig e-postadresse ble funnet.",
+    'sent' => 'En passordpåminnelse er sendt hvis en gyldig e-postadresse ble funnet.',
 
-);
+];

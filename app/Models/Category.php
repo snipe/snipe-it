@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\SnipeModel;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,27 +26,26 @@ class Category extends SnipeModel
     protected $hidden = ['user_id','deleted_at'];
 
     /**
-    * Category validation rules
-    */
-    public $rules = array(
+     * Category validation rules.
+     */
+    public $rules = [
         'user_id' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|unique_undeleted',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
         'category_type'   => 'required|in:asset,accessory,consumable,component',
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
-
 
     /**
      * The attributes that are mass assignable.
@@ -54,7 +53,6 @@ class Category extends SnipeModel
      * @var array
      */
     protected $fillable = ['name','category_type', 'user_id', 'use_default_eula','checkin_email','require_acceptance'];
-
 
     public function has_models()
     {
@@ -88,6 +86,7 @@ class Category extends SnipeModel
             case 'consumable':
                 return $this->consumables()->count();
         }
+
         return '0';
     }
 
@@ -103,21 +102,19 @@ class Category extends SnipeModel
 
     public function getEula()
     {
-
         $Parsedown = new \Parsedown();
 
         if ($this->eula_text) {
             return $Parsedown->text(e($this->eula_text));
-        } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula=='1')) {
+        } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula == '1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         } else {
-            return null;
+            return;
         }
-
     }
 
     /**
-     * scopeRequiresAcceptance
+     * scopeRequiresAcceptance.
      *
      * @param $query
      *
@@ -127,23 +124,20 @@ class Category extends SnipeModel
      */
     public function scopeRequiresAcceptance($query)
     {
-
         return $query->where('require_acceptance', '=', true);
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to search on text.
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeTextSearch($query, $search)
     {
-
         return $query->where(function ($query) use ($search) {
-
             $query->where('name', 'LIKE', '%'.$search.'%')
             ->orWhere('category_type', 'LIKE', '%'.$search.'%');
         });

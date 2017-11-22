@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> '操作',
-    'action' 		=> '操作',
-    'by'      		=> '經由',
-    'item' 			=> '項目',
+    'actions'        => '操作',
+    'action'        => '操作',
+    'by'              => '經由',
+    'item'            => '項目',
 
-);
+];

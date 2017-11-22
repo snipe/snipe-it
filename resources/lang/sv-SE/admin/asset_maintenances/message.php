@@ -5,15 +5,15 @@
         'delete'                       => [
             'confirm' => 'År du säker på att du vill radera inventarieunderhållet?',
             'error'   => 'Ett fel uppstod vid radering av inventarieunderhållet. Var god försök igen.',
-            'success' => 'Inventarieunderhållet raderades.'
+            'success' => 'Inventarieunderhållet raderades.',
         ],
         'create'                       => [
             'error'   => 'Inventarieunderhållet skapades inte. Var god försök igen.',
-            'success' => 'Inventarieunderhållet skapades.'
+            'success' => 'Inventarieunderhållet skapades.',
         ],
         'edit'                       => [
             'error'   => 'Asset Maintenance var inte redigerat, försök igen.',
-            'success' => 'Asset Maintenance redigerades framgångsrikt.'
+            'success' => 'Asset Maintenance redigerades framgångsrikt.',
         ],
         'asset_maintenance_incomplete' => 'Inte klar ännu',
         'warranty'                     => 'Garanti',

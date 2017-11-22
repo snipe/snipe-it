@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Käyttäjä on peruuttanut kohteen pyynnön verkkosivustolla',
     'a_user_requested' => 'Käyttäjä on pyytänyt kohdetta verkkosivustolla',
     'accessory_name' => 'Lisävarusteiden nimi:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Tervetuloa: nimi',
     'welcome_to' => 'Tervetuloa: web!',
     'your_credentials' => 'Sinun Snipe-IT -asiakirjasi',
-);
+];

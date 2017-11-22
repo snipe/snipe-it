@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-
 use App\Models\Asset;
 use Illuminate\Console\Command;
 use App\Notifications\ExpectedCheckinNotification;
@@ -10,7 +9,6 @@ use Carbon\Carbon;
 
 class SendExpectedCheckinAlerts extends Command
 {
-
     /**
      * The console command name.
      *
@@ -42,7 +40,6 @@ class SendExpectedCheckinAlerts extends Command
      */
     public function fire()
     {
-
         $whenNotify = Carbon::now()->addDays(7);
         $assets = Asset::with('assignedTo')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
 
@@ -50,15 +47,10 @@ class SendExpectedCheckinAlerts extends Command
         $this->info($assets->count().' assets');
 
         foreach ($assets as $asset) {
-            if ($asset->assignedTo  && $asset->checkoutOutToUser()) {
+            if ($asset->assignedTo && $asset->checkoutOutToUser()) {
                 $asset->assignedTo->notify((new ExpectedCheckinNotification($asset)));
                 //$this->info($asset);
             }
         }
-
-
-
-
-
     }
 }

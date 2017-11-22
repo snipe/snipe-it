@@ -39,5 +39,4 @@ class ReCreateLicensesTable extends Migration
         //
         Schema::drop('licenses');
     }
-
 }

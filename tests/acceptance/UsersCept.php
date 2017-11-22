@@ -1,4 +1,5 @@
 <?php
+
 $I = new AcceptanceTester($scenario);
 AcceptanceTester::test_login($I);
 $I->am('logged in user');
@@ -14,7 +15,6 @@ $I->seeInPageSource('users/create');
 $I->dontSee('Users', '.page-header');
 $I->see('Users', 'h1.pull-left');
 $I->seeLink('Create New'); // matches <a href="/logout">Logout</a>
-
 
 /* Create form */
 $I->am('logged in admin');
@@ -33,7 +33,6 @@ $I->submitForm('#userForm', [
 $I->seeElement('.alert-danger');
 $I->dontSeeInSource('&lt;br&gt;&lt;');
 
-
 /* Submit form and expect errors */
 $I->click(['name' => 'email']);
 $I->click(['name' => 'username']);
@@ -46,8 +45,6 @@ $I->submitForm('#userForm', [
 
 $I->seeElement('.alert-danger');
 $I->dontSeeInSource('&lt;br&gt;&lt;');
-
-
 
 /* Submit form and expect success */
 $I->wantTo('submit the form successfully');

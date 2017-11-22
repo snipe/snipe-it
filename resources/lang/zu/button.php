@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'Izenzo',
-    'add'    	                => 'Engeza okusha',
+return [
+    'actions'                    => 'Izenzo',
+    'add'                        => 'Engeza okusha',
     'cancel'                    => 'Khansela',
-    'checkin_and_delete'  	    => 'Hlola & Susa Umsebenzisi',
-    'delete'  	                => 'Susa',
-    'edit'    	                => 'Hlela',
-    'restore' 	                => 'Buyisela',
+    'checkin_and_delete'        => 'Hlola & Susa Umsebenzisi',
+    'delete'                    => 'Susa',
+    'edit'                        => 'Hlela',
+    'restore'                    => 'Buyisela',
     'request'                   => 'Isicelo',
-    'submit'  	                => 'Thumela',
+    'submit'                    => 'Thumela',
     'upload'                    => 'Layisha',
-	'select_file'				=> 'Khetha Ifayela ...',
-);
+    'select_file'                => 'Khetha Ifayela ...',
+];

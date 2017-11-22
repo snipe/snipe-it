@@ -13,7 +13,7 @@ class AddShowToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-          $table->boolean('show_in_list')->default(1);
+            $table->boolean('show_in_list')->default(1);
         });
     }
 

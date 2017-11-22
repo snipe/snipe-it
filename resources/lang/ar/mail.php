@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ألغى المستخدم طلب عنصر على الموقع',
     'a_user_requested' => 'طلب مستخدم عنصر على الموقع',
     'accessory_name' => 'اسم الملحق:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'مرحبا: الاسم',
     'welcome_to' => 'مرحبا بكم في: الويب!',
     'your_credentials' => 'أوراق اعتماد قنص-إيت الخاص بك',
-);
+];

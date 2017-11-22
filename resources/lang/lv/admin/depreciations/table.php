@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'id'      => 'ID',
     'months'   => 'Mēneši',
     'term'   => 'Termiņš',
     'title'      => 'Nosaukums',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Product',
     'checkin'           => 'Inchecken',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licentie uitgegeven aan E-mail',
     'to_name'           => 'Licentie uitgegeven aan Naam',
     'update'            => 'Wijzig licentie',
-    'checkout_help'     => 'Je moet een licentie uitchecken naar een hardware product of een persoon. Je kan beide selecteren maar de eigenaar van het product moet overeenkomen met het persoon waar je het product aan koppelt.'
-);
+    'checkout_help'     => 'Je moet een licentie uitchecken naar een hardware product of een persoon. Je kan beide selecteren maar de eigenaar van het product moet overeenkomen met het persoon waar je het product aan koppelt.',
+];

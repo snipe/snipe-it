@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Günler',
         'notes'                  => 'Notlar',
         'update'                 => 'Güncelle',
-        'create'                 => 'Oluştur'
+        'create'                 => 'Oluştur',
     ];

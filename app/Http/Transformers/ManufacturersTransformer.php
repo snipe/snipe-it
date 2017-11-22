@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Manufacturer;
@@ -8,20 +9,19 @@ use App\Helpers\Helper;
 
 class ManufacturersTransformer
 {
-
-    public function transformManufacturers (Collection $manufacturers, $total)
+    public function transformManufacturers(Collection $manufacturers, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($manufacturers as $manufacturer) {
             $array[] = self::transformManufacturer($manufacturer);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformManufacturer (Manufacturer $manufacturer = null)
+    public function transformManufacturer(Manufacturer $manufacturer = null)
     {
         if ($manufacturer) {
-
             $array = [
                 'id' => (int) $manufacturer->id,
                 'name' => e($manufacturer->name),
@@ -47,10 +47,5 @@ class ManufacturersTransformer
 
             return $array;
         }
-
-
     }
-
-
-
 }

@@ -3,10 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Setting;
-use DB;
 use Mail;
 use App\Helpers\Helper;
-
 use Illuminate\Console\Command;
 
 class SendInventoryAlerts extends Command
@@ -42,8 +40,7 @@ class SendInventoryAlerts extends Command
      */
     public function handle()
     {
-        if ((Setting::getSettings()->alert_email!='')  && (Setting::getSettings()->alerts_enabled==1)) {
-
+        if ((Setting::getSettings()->alert_email != '') && (Setting::getSettings()->alerts_enabled == 1)) {
             $data['data'] = Helper::checkLowInventory();
             $data['count'] = count($data['data']);
 
@@ -53,17 +50,13 @@ class SendInventoryAlerts extends Command
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.Low_Inventory_Report'));
                 });
-
             }
-
         } else {
-            if (Setting::getSettings()->alert_email=='') {
+            if (Setting::getSettings()->alert_email == '') {
                 echo "Could not send email. No alert email configured in settings. \n";
-            } elseif (Setting::getSettings()->alerts_enabled!=1) {
+            } elseif (Setting::getSettings()->alerts_enabled != 1) {
                 echo "Alerts are disabled in the settings. No mail will be sent. \n";
             }
         }
-
-
     }
 }

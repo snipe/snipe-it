@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Įrangos naudojimas (dienomis)',
         'notes'                  => 'Pastabos',
         'update'                 => 'Atnaujint įrangos preižiūrą',
-        'create'                 => 'Sukurti įrangos priežiūrą'
+        'create'                 => 'Sukurti įrangos priežiūrą',
     ];

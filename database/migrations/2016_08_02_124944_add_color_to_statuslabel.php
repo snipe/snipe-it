@@ -13,7 +13,7 @@ class AddColorToStatuslabel extends Migration
     public function up()
     {
         Schema::table('status_labels', function (Blueprint $table) {
-            $table->string('color', 10)->nullable()->default(NULL);
+            $table->string('color', 10)->nullable()->default(null);
         });
     }
 

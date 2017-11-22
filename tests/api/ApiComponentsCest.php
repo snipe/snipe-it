@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 
 class ApiComponentsCest
 {
@@ -71,7 +70,7 @@ class ApiComponentsCest
         $I->assertEquals('success', $response->status);
 
         // verify
-        $I->sendGET('/components/' . $id);
+        $I->sendGET('/components/'.$id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
@@ -118,7 +117,7 @@ class ApiComponentsCest
         $I->assertNotEquals($component->name, $data['name']);
 
         // update
-        $I->sendPATCH('/components/' . $component->id, $data);
+        $I->sendPATCH('/components/'.$component->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -126,7 +125,7 @@ class ApiComponentsCest
         $I->assertEquals('success', $response->status);
 
         // verify
-        $I->sendGET('/components/' . $component->id);
+        $I->sendGET('/components/'.$component->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
@@ -152,7 +151,7 @@ class ApiComponentsCest
         $I->assertNotEquals($component->name, $data['name']);
 
         // update
-        $I->sendPUT('/components/' . $component->id, $data);
+        $I->sendPUT('/components/'.$component->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -160,7 +159,7 @@ class ApiComponentsCest
         $I->assertEquals('success', $response->status);
 
         // verify
-        $I->sendGET('/components/' . $component->id);
+        $I->sendGET('/components/'.$component->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
@@ -180,12 +179,12 @@ class ApiComponentsCest
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         // delete
-        $I->sendDELETE('/components/' . $component->id);
+        $I->sendDELETE('/components/'.$component->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
         // verify, expect a 200 with an error message
-        $I->sendGET('/components/' . $component->id);
+        $I->sendGET('/components/'.$component->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson(); // @todo: response is not JSON
         // $scenario->incomplete('Resource not found response should be JSON, receiving HTML instead');

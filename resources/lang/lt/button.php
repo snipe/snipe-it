@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'Veiksmai',
-    'add'    	                => 'Pridėti naują',
+return [
+    'actions'                    => 'Veiksmai',
+    'add'                        => 'Pridėti naują',
     'cancel'                    => 'Atšaukti',
-    'checkin_and_delete'  	    => 'Registruokitės ir ištrinkite naudotoją',
-    'delete'  	                => 'Ištrinti',
-    'edit'    	                => 'Keisti',
-    'restore' 	                => 'Atstatyti',
+    'checkin_and_delete'        => 'Registruokitės ir ištrinkite naudotoją',
+    'delete'                    => 'Ištrinti',
+    'edit'                        => 'Keisti',
+    'restore'                    => 'Atstatyti',
     'request'                   => 'Užklausti',
-    'submit'  	                => 'Išsaugoti',
+    'submit'                    => 'Išsaugoti',
     'upload'                    => 'Įkelti',
-	'select_file'				=> 'Pasirinkite failą ...',
-);
+    'select_file'                => 'Pasirinkite failą ...',
+];

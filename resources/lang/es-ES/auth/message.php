@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Ya existe un usuario con este e-mail.',
     'account_not_found'      => 'El nombre de usuario o contraseña es incorrecta.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Este usuario ha sido expulsado.',
     'throttle'               => 'Demasiados intentos de inicio de sesión fallidos. Por favor, intente otra vez en alrededor de :minutes minuto(s).',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Ha habido un problema al iniciar sesión. Por favor, vuelve a intentarlo.',
         'success' => 'has iniciado sesión correctamente.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Ha habido un problema al crear la cuenta. Por favor, vuelve a intentarlo.',
         'success' => 'Cuenta creada correctamente.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
             'success' => 'Email de recuperación de password enviado.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
             'success' => 'El password ha sido reseteado correctamente.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Ha habido un problema al intentar activar la cuenta. Por favor, vuelve a intentarlo..',
         'success' => 'Cuenta correctamente activada.',
-    ),
+    ],
 
-);
+];

@@ -7,10 +7,10 @@ class LicensesCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
     }
 
     // tests
@@ -25,7 +25,7 @@ class LicensesCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('licenses.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -35,7 +35,7 @@ class LicensesCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('licenses.create'));
         $I->fillField('name', 't2');
         $I->fillField('seats', '-15');
@@ -65,10 +65,10 @@ class LicensesCest
             'termination_date'  => '2020-01-01',
             'purchase_order'    => $license->purchase_order,
             'maintained'        => true,
-            'notes'             => $license->notes
+            'notes'             => $license->notes,
         ];
 
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('licenses.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('licenses', $values);
@@ -82,5 +82,4 @@ class LicensesCest
         $I->sendDelete(route('licenses.destroy', License::doesntHave('assignedUsers')->first()->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
-
 }

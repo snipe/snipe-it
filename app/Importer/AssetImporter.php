@@ -2,10 +2,7 @@
 
 namespace App\Importer;
 
-use App\Helpers\Helper;
 use App\Models\Asset;
-use App\Models\Category;
-use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 
 class AssetImporter extends ItemImporter
@@ -24,18 +21,16 @@ class AssetImporter extends ItemImporter
         parent::handle($row);
 
         if ($this->customFields) {
-
             foreach ($this->customFields as $customField) {
                 $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField);
                 if ($customFieldValue) {
                     $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
-                    $this->log('Custom Field '. $customField->name.': '.$customFieldValue);
+                    $this->log('Custom Field '.$customField->name.': '.$customFieldValue);
                 } else {
                     $this->item['custom_fields'][$customField->db_column_name()] = '';
                 }
             }
         }
-
 
         $this->createAssetIfNotExists($row);
     }
@@ -51,35 +46,36 @@ class AssetImporter extends ItemImporter
     public function createAssetIfNotExists(array $row)
     {
         $editingAsset = false;
-        $asset_tag = $this->findCsvMatch($row, "asset_tag");
-        $asset = Asset::where(['asset_tag'=> $asset_tag])->first();
+        $asset_tag = $this->findCsvMatch($row, 'asset_tag');
+        $asset = Asset::where(['asset_tag' => $asset_tag])->first();
         if ($asset) {
-            if (!$this->updating) {
-                $this->log('A matching Asset ' . $asset_tag . ' already exists');
+            if (! $this->updating) {
+                $this->log('A matching Asset '.$asset_tag.' already exists');
+
                 return;
             }
 
-            $this->log("Updating Asset");
+            $this->log('Updating Asset');
             $editingAsset = true;
         } else {
-            $this->log("No Matching Asset, Creating a new one");
+            $this->log('No Matching Asset, Creating a new one');
             $asset = new Asset;
         }
 
-        $this->item['image'] = $this->findCsvMatch($row, "image");
-        $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty_months"));
+        $this->item['image'] = $this->findCsvMatch($row, 'image');
+        $this->item['warranty_months'] = intval($this->findCsvMatch($row, 'warranty_months'));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
 
         // If no status ID is found
-        if (!array_key_exists('status_id', $this->item) && !$editingAsset) {
-            $this->log("No status field found, defaulting to first status.");
+        if (! array_key_exists('status_id', $this->item) && ! $editingAsset) {
+            $this->log('No status field found, defaulting to first status.');
             $this->item['status_id'] = $this->defaultStatusLabelId;
         }
 
         $this->item['asset_tag'] = $asset_tag;
         // By default we're set this to location_id in the item.
         $item = $this->sanitizeItemForStoring($asset, $editingAsset);
-        if (isset($this->item["location_id"])) {
+        if (isset($this->item['location_id'])) {
             $item['rtd_location_id'] = $this->item['location_id'];
             unset($item['location_id']);
         }
@@ -95,9 +91,10 @@ class AssetImporter extends ItemImporter
         }
         if ($asset->save()) {
             $asset->logCreate('Imported using csv importer');
-            $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
+            $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
+
             return;
         }
-        $this->logError($asset, 'Asset "' . $this->item['name'].'"');
+        $this->logError($asset, 'Asset "'.$this->item['name'].'"');
     }
 }

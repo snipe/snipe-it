@@ -1,4 +1,5 @@
 <?php
+
 use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -6,17 +7,13 @@ use App\Models\Category;
 use App\Models\Location;
 use App\Models\User;
 use App\Notifications\CheckoutNotification;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 
 class NotificationTest extends BaseTest
 {
     /**
-    * @var \UnitTester
-    */
+     * @var \UnitTester
+     */
     protected $tester;
 
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()

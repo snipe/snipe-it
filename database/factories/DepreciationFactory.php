@@ -35,7 +35,3 @@ $factory->state(App\Models\Depreciation::class, 'mobile-phones', function ($fake
         'months' => 24,
     ];
 });
-
-
-
-

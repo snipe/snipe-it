@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ผู้ใช้ยกเลิกคำร้องขอสินค้าในเว็บไซต์แล้ว',
     'a_user_requested' => 'ผู้ใช้ร้องขอรายการบนเว็บไซต์',
     'accessory_name' => 'ชื่ออุปกรณ์เสริม:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'ยินดีต้อนรับ: ชื่อ',
     'welcome_to' => 'ยินดีต้อนรับสู่: web!',
     'your_credentials' => 'ข้อมูลรับรอง Snipe-IT ของคุณ',
-);
+];

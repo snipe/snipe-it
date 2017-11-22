@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Accesorio no existe.',
-    'assoc_users'	 => 'Este accesorio actualmente tiene :count entregados a usuarios. Por favor ingrese los accesorios y vuelva a intentar. ',
+    'assoc_users'     => 'Este accesorio actualmente tiene :count entregados a usuarios. Por favor ingrese los accesorios y vuelva a intentar. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Accesorio no fue creado, por favor vuelva a intentarlo.',
-        'success' => 'Accesorio creado satisfactoriamente.'
-    ),
+        'success' => 'Accesorio creado satisfactoriamente.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Accesorio no fue actualizado, por favor, inténtalo de nuevo',
-        'success' => 'Accesorio creado satisfactoriamente.'
-    ),
+        'success' => 'Accesorio creado satisfactoriamente.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Estas seguro de borrar este accesorio?',
         'error'   => 'Ha habido un problema eliminando este accesorio. Intentalo de nuevo.',
-        'success' => 'El accesorio fue borrado con éxito.'
-    ),
+        'success' => 'El accesorio fue borrado con éxito.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'El accesorio no fue retirado, por favor vuelva a intentarlo',
-        'success' 		=> 'Accesorio retirado correctamente.',
-        'user_does_not_exist' => 'Este usuario es inválido. Inténtalo de nuevo.'
-    ),
+     'checkout' => [
+        'error'        => 'El accesorio no fue retirado, por favor vuelva a intentarlo',
+        'success'        => 'Accesorio retirado correctamente.',
+        'user_does_not_exist' => 'Este usuario es inválido. Inténtalo de nuevo.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'El accesorio no fue agregado, favor vuelva a intentarlo',
-        'success' 		=> 'Accesorio devuelto correctamente.',
-        'user_does_not_exist' => 'Este usuario es inválido. Inténtalo de nuevo.'
-    )
+    'checkin' => [
+        'error'        => 'El accesorio no fue agregado, favor vuelva a intentarlo',
+        'success'        => 'Accesorio devuelto correctamente.',
+        'user_does_not_exist' => 'Este usuario es inválido. Inténtalo de nuevo.',
+    ],
 
-
-);
+];

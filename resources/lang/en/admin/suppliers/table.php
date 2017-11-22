@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'About Suppliers',
     'about_suppliers_text'  => 'Suppliers are used to track the source of items',
     'address'               => 'Supplier Address',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'View Assets for',
     'zip'                   => 'Postal Code',
 
-);
+];

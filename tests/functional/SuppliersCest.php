@@ -4,10 +4,10 @@ class SuppliersCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
     }
 
     // tests
@@ -22,7 +22,7 @@ class SuppliersCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('suppliers.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -31,7 +31,7 @@ class SuppliersCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('suppliers.create'));
         $I->fillField('name', 't2');
         $I->click('Save');
@@ -54,9 +54,9 @@ class SuppliersCest
             'fax'               => $supplier->fax,
             'email'             => $supplier->email,
             'url'               => $supplier->url,
-            'notes'             => $supplier->notes
+            'notes'             => $supplier->notes,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('suppliers.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('suppliers', $values);

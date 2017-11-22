@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Kasutaja on veebisaidil tühistanud üksuse taotluse',
     'a_user_requested' => 'Kasutaja on taotlenud üksuse veebisaidil',
     'accessory_name' => 'Lisaseade Nimi:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Tere tulemast, :name',
     'welcome_to' => 'Teretulemast lehele :web!',
     'your_credentials' => 'Sinu Snipe-IT rekvisiidid',
-);
+];

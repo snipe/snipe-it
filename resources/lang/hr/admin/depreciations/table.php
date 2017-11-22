@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'id'      => 'iskaznica',
     'months'   => 'mjeseci',
     'term'   => 'Termin',
     'title'      => 'Ime',
 
-);
+];

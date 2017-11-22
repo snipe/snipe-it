@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Department;
-use App\Helpers\Helper;
 use Auth;
 use Image;
 use App\Http\Requests\ImageUploadRequest;
@@ -33,9 +32,9 @@ class DepartmentsController extends Controller
         if ($request->has('company_id')) {
             $company = Company::find($request->input('company_id'));
         }
+
         return view('departments/index')->with('company', $company);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -51,11 +50,11 @@ class DepartmentsController extends Controller
         $department = new Department;
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
-        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->has('manager_id') ? $request->input('manager_id') : null);
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $file_name = str_random(25).'.'.$image->getClientOriginalExtension();
             $path = public_path('uploads/departments/'.$file_name);
             Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -65,8 +64,9 @@ class DepartmentsController extends Controller
         }
 
         if ($department->save()) {
-            return redirect()->route("departments.index")->with('success', trans('admin/departments/message.create.success'));
+            return redirect()->route('departments.index')->with('success', trans('admin/departments/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($department->getErrors());
     }
 
@@ -86,9 +86,9 @@ class DepartmentsController extends Controller
         if (isset($department->id)) {
             return view('departments/view', compact('department'));
         }
+
         return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist', compact('id')));
     }
-
 
     /**
      * Returns a form view used to create a new department.
@@ -102,7 +102,6 @@ class DepartmentsController extends Controller
     {
         return view('departments/edit')->with('item', new Department);
     }
-
 
     /**
      * Validates and deletes selected department.
@@ -123,8 +122,8 @@ class DepartmentsController extends Controller
         }
 
         $department->delete();
-        return redirect()->back()->with('success', trans('admin/departments/message.delete.success'));
 
+        return redirect()->back()->with('success', trans('admin/departments/message.delete.success'));
     }
 
     /**
@@ -141,18 +140,19 @@ class DepartmentsController extends Controller
         if (is_null($item = Department::find($id))) {
             return redirect()->back()->with('error', trans('admin/locations/message.does_not_exist'));
         }
+
         return view('departments/edit', compact('item'));
     }
 
-    public function update(Request $request, $id) {
-
+    public function update(Request $request, $id)
+    {
         $this->authorize('create', Department::class);
         if (is_null($department = Department::find($id))) {
             return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist'));
         }
 
         $department->fill($request->all());
-        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->has('manager_id') ? $request->input('manager_id') : null);
 
         $old_image = $department->image;
 
@@ -163,9 +163,9 @@ class DepartmentsController extends Controller
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = $department->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
+            $file_name = $department->id.'-'.str_slug($image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
 
-            if ($image->getClientOriginalExtension()!='svg') {
+            if ($image->getClientOriginalExtension() != 'svg') {
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
@@ -174,11 +174,10 @@ class DepartmentsController extends Controller
                 $image->move(app('departments_upload_path'), $file_name);
             }
             $department->image = $file_name;
-
         }
 
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
+        if ((($request->file('image')) && (isset($old_image)) && ($old_image != '')) || ($request->input('image_delete') == 1)) {
+            try {
                 unlink(app('departments_upload_path').$old_image);
             } catch (\Exception $e) {
                 \Log::error($e);
@@ -186,8 +185,9 @@ class DepartmentsController extends Controller
         }
 
         if ($department->save()) {
-            return redirect()->route("departments.index")->with('success', trans('admin/departments/message.update.success'));
+            return redirect()->route('departments.index')->with('success', trans('admin/departments/message.update.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($department->getErrors());
     }
 }

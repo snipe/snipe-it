@@ -3,10 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Config;
-use Route;
-use Schema;
-use App\Models\User;
 use App\Models\Setting;
 
 class CheckForSetup
@@ -20,22 +16,17 @@ class CheckForSetup
         }
 
         if (Setting::setupCompleted()) {
-
             if ($request->is('setup*')) {
                 return redirect(url('/'));
             } else {
                 return $next($request);
             }
-
         } else {
-            if (!($request->is('setup*')) && !($request->is('.env'))) {
+            if (! ($request->is('setup*')) && ! ($request->is('.env'))) {
                 return redirect(url('/').'/setup')->with('Request', $request);
             }
 
             return $next($request);
-
         }
-
-
     }
 }

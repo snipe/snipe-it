@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'iskaznica',
     'name'                      => 'Naziv odjela',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Mjesto',
     'create'                    => 'Izradi odjel',
     'update'                    => 'Odjel za ažuriranje',
-    );
+    ];

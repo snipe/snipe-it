@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "A jelszónak 6 karakteresnek kell lennie és egyeznie kell a megerősítésével.",
+    'password' => 'A jelszónak 6 karakteresnek kell lennie és egyeznie kell a megerősítésével.',
 
-    "user"     => "A felhasználónév vagy az e-mail cím téves",
+    'user'     => 'A felhasználónév vagy az e-mail cím téves',
 
-    "token"    => "Ez a jelszó visszaállítási kérelem érvénytelen.",
+    'token'    => 'Ez a jelszó visszaállítási kérelem érvénytelen.',
 
-    "sent" => "Ha megfelelő az email cím, egy jelszó emlékeztetőt küldünk!",
+    'sent' => 'Ha megfelelő az email cím, egy jelszó emlékeztetőt küldünk!',
 
-);
+];

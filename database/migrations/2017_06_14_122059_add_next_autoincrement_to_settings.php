@@ -7,8 +7,6 @@ use App\Models\Asset;
 
 class AddNextAutoincrementToSettings extends Migration
 {
-    
-
     /**
      * Run the migrations.
      *
@@ -17,7 +15,7 @@ class AddNextAutoincrementToSettings extends Migration
     public function up()
     {
         $assets = Asset::select('asset_tag')->whereNull('deleted_at')->get();
-        if (!$next = Asset::nextAutoIncrement($assets)) {
+        if (! $next = Asset::nextAutoIncrement($assets)) {
             $next = 1;
         }
 
@@ -31,7 +29,6 @@ class AddNextAutoincrementToSettings extends Migration
             $settings->next_auto_tag_base = $next;
             $settings->save();
         }
-
     }
 
     /**

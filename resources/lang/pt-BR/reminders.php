@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "As senhas devem ter seis caracteres e corresponderem à confirmação.",
+    'password' => 'As senhas devem ter seis caracteres e corresponderem à confirmação.',
 
-    "user"     => "O nome de usuário ou endereço de e-mail está incorreto",
+    'user'     => 'O nome de usuário ou endereço de e-mail está incorreto',
 
-    "token"    => "Este token de redefinição da senha é inválido.",
+    'token'    => 'Este token de redefinição da senha é inválido.',
 
-    "sent" => "Se um endereço de e-mail correspondente foi encontrado, um lembrete de senha foi enviado!",
+    'sent' => 'Se um endereço de e-mail correspondente foi encontrado, um lembrete de senha foi enviado!',
 
-);
+];

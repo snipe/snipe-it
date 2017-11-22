@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Komponen tidak wujud.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Komponen tidak dibuat, sila cuba lagi.',
-        'success' => 'Komponen berjaya dihasilkan.'
-    ),
+        'success' => 'Komponen berjaya dihasilkan.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Komponen tidak dikemas kini, sila cuba lagi',
-        'success' => 'Komponen berjaya dikemas kini.'
-    ),
+        'success' => 'Komponen berjaya dikemas kini.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Adakah anda pasti ingin memadamkan komponen ini?',
         'error'   => 'Terdapat isu memadamkan komponen. Sila cuba lagi.',
-        'success' => 'Komponen telah berjaya dipadam.'
-    ),
+        'success' => 'Komponen telah berjaya dipadam.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Komponen tidak diperiksa, sila cuba lagi',
-        'success' 		=> 'Komponen diperiksa dengan jayanya.',
-        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
-    ),
+     'checkout' => [
+        'error'        => 'Komponen tidak diperiksa, sila cuba lagi',
+        'success'        => 'Komponen diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Komponen tidak diperiksa, sila cuba lagi',
-        'success' 		=> 'Komponen diperiksa dengan jayanya.',
-        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.'
-    )
+    'checkin' => [
+        'error'        => 'Komponen tidak diperiksa, sila cuba lagi',
+        'success'        => 'Komponen diperiksa dengan jayanya.',
+        'user_does_not_exist' => 'Pengguna itu tidak sah. Sila cuba lagi.',
+    ],
 
-
-);
+];

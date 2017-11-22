@@ -1,24 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Tootjat ei eksisteeri.',
-    'assoc_users'	 => 'Selle tootjaga on seotud vähemalt üks mudel ja seda ei saa kustutada. Palun uuenda oma mudeleid, et need ei kasutaks seda tootjat ning seejärel proovi uuesti. ',
+    'assoc_users'     => 'Selle tootjaga on seotud vähemalt üks mudel ja seda ei saa kustutada. Palun uuenda oma mudeleid, et need ei kasutaks seda tootjat ning seejärel proovi uuesti. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Tootjat ei loodud, proovi uuesti.',
-        'success' => 'Tootja loomine õnnestus.'
-    ),
+        'success' => 'Tootja loomine õnnestus.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Tootjat ei uuendatud, palun proovi uuesti',
-        'success' => 'Tootja uuendamine õnnestus.'
-    ),
+        'success' => 'Tootja uuendamine õnnestus.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Kas oled kindel, et soovid selle tootja kustutada?',
         'error'   => 'Tootja kustutamisel tekkis probleem. Palun proovi uuesti.',
-        'success' => 'Tootja kustutamine õnnestus.'
-    )
+        'success' => 'Tootja kustutamine õnnestus.',
+    ],
 
-);
+];

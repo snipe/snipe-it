@@ -2,7 +2,7 @@
 
 
 /**
- * Inherited Methods
+ * Inherited Methods.
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,24 +15,23 @@
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
-   /**
-    * Define custom actions here
-    */
-
+    /**
+     * Define custom actions here.
+     */
     public static function test_login($I)
     {
-         // if snapshot exists - skipping login
+        // if snapshot exists - skipping login
          //if ($I->loadSessionSnapshot('login')) return;
 
          // logging in
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipe');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->fillField('username', 'snipe');
+        $I->fillField('password', 'password');
+        $I->click('Login');
          //$I->saveSessionSnapshot('login');
     }
 }

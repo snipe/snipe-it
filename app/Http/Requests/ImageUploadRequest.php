@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class ImageUploadRequest extends Request
 {
     /**
@@ -24,7 +22,7 @@ class ImageUploadRequest extends Request
     public function rules()
     {
         return [
-            'image' => 'mimes:png,gif,jpg,jpeg,svg|max:2000'
+            'image' => 'mimes:png,gif,jpg,jpeg,svg|max:2000',
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Heslo musí mít šest znaků a schodovat se s potvrzujícím heslem.",
+    'password' => 'Heslo musí mít šest znaků a schodovat se s potvrzujícím heslem.',
 
-    "user"     => "Uživatelské jméno nebo email je chybný",
+    'user'     => 'Uživatelské jméno nebo email je chybný',
 
-    "token"    => "Tento token pro reset hesla je neplatný.",
+    'token'    => 'Tento token pro reset hesla je neplatný.',
 
-    "sent" => "Pokud byl email nalezen, tak bylo heslo zasláno!",
+    'sent' => 'Pokud byl email nalezen, tak bylo heslo zasláno!',
 
-);
+];

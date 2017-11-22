@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => '關於位置',
     'about_locations'           => '位置用來追踪使用者、資產和其他項目的位置資訊',
     'assets_rtd'                => '資產', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -18,4 +18,4 @@ return array(
     'parent'                    => '父項目',
     'currency'                  => '當地貨幣單位',
     'ldap_ou'                   => 'LDAP 搜尋 OU',
-    );
+    ];

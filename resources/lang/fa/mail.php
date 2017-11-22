@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'یک کاربر یک درخواست اقساط در وب سایت را لغو کرده است',
     'a_user_requested' => 'یک کاربر یک مورد را در وبسایت درخواست کرده است',
     'accessory_name' => 'نام لوازم جانبی:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'خوش آمدید نام',
     'welcome_to' => 'به وب سایت خوش آمدید',
     'your_credentials' => 'مدارک Snipe-IT شما',
-);
+];

@@ -31,12 +31,12 @@ class ApiComponentsAssetsCest
                             'user_id' => $this->user->id,
                             'created_at' => date('Y-m-d H:i:s'),
                             'assigned_qty' => 2,
-                            'asset_id' => $asset->id
+                            'asset_id' => $asset->id,
                         ]);
                     });
 
         // verify
-        $I->sendGET('/components/' . $component->id . '/assets/');
+        $I->sendGET('/components/'.$component->id.'/assets/');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -56,7 +56,7 @@ class ApiComponentsAssetsCest
                     'id' => $assets[1]->id,
                     'created_at' => $assets[1]->created_at->format('Y-m-d'),
                 ],
-            ]
+            ],
         ]);
     }
 
@@ -68,7 +68,7 @@ class ApiComponentsAssetsCest
         $component = factory(\App\Models\Component::class)
                     ->create(['user_id' => $this->user->id, 'qty' => 20]);
 
-        $I->sendGET('/components/' . $component->id . '/assets');
+        $I->sendGET('/components/'.$component->id.'/assets');
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
 

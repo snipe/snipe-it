@@ -13,7 +13,7 @@ class AddEmailDomainAndFormatToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('email_domain')->nullable()->default(NULL);
+            $table->string('email_domain')->nullable()->default(null);
             $table->string('email_format')->nullable()->default('filastname');
             $table->string('username_format')->nullable()->default('filastname');
         });

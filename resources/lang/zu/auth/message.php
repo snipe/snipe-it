@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'I-akhawunti nale imeyili isivele ikhona.',
     'account_not_found'      => 'Igama lomsebenzisi noma iphasiwedi alilungile.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Le akhawunti yomsebenzisi ivaliwe.',
     'throttle'               => 'Imizamo eminingi yokungena ngemvume ayihlulekile. Sicela uzame futhi kuzungeze: iminithi yamaminithi.',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Kube nenkinga ngenkathi uzama ukungena ngemvume, sicela uzame futhi.',
         'success' => 'Ungene ngemvume ngempumelelo.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Kube nenkinga ngenkathi uzama ukudala i-akhawunti yakho, sicela uzame futhi.',
         'success' => 'I-akhawunti idalwe ngokuphumelelayo.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Kube nenkinga ngenkathi uzama ukuthola ikhodi yephasiwedi yokusetha kabusha, sicela uzame futhi.',
             'success' => 'I-imeyili yokutakula iphasiwedi ithunyelwe ngempumelelo.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Kube nenkinga ngenkathi uzama ukusetha kabusha iphasiwedi yakho, sicela uzame futhi.',
             'success' => 'Iphasiwedi yakho isethwe kabusha ngempumelelo.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Kube nenkinga ngenkathi uzama ukwenza i-akhawunti yakho isebenze, sicela uzame futhi.',
         'success' => 'I-akhawunti yakho isebenze ngempumelelo.',
-    ),
+    ],
 
-);
+];

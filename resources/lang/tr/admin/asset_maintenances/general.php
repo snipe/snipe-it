@@ -7,5 +7,5 @@
         'view'               => 'Varlık Bakım Detaylarını Gör',
         'repair'             => 'Onar',
         'maintenance'        => 'Bakım',
-        'upgrade'            => 'Yükselt'
+        'upgrade'            => 'Yükselt',
     ];

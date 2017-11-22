@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Konts ar šo e-pasta adresi jau pastāv.',
     'account_not_found'      => 'Lietotājvārds vai parole nav pareiza.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Šis lietotāja konts ir aizliegts.',
     'throttle'               => 'Pārāk daudz pieteikšanās mēģinājumu neizdevās. Lūdzu, mēģiniet vēlreiz apmēram minūtēs minūtēs.',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Mēģinot pieslēgties, radās problēma. Lūdzu, mēģiniet vēlreiz.',
         'success' => 'Jūs esat veiksmīgi pieteicies',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Mēģinot izveidot kontu, radās problēma. Lūdzu, mēģiniet vēlreiz.',
         'success' => 'Konts veiksmīgi izveidots.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Mēģinot atkopt paroles kodu, radās problēma. Lūdzu, mēģiniet vēlreiz.',
             'success' => 'Paroles atjaunošanas e-pasts ir veiksmīgi nosūtīts.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Mēģinot atiestatīt paroli, radās problēma. Lūdzu, mēģiniet vēlreiz.',
             'success' => 'Jūsu parole ir veiksmīgi atiestatīta.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Mēģinot aktivizēt kontu, radās problēma. Lūdzu, mēģiniet vēlreiz.',
         'success' => 'Jūsu konts ir veiksmīgi aktivizēts.',
-    ),
+    ],
 
-);
+];

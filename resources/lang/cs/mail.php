@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Uživatel zrušil žádost o položku na webu',
     'a_user_requested' => 'Uživatel požádal o položku na webu',
     'accessory_name' => 'Název příslušenství:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Vítej uživateli :name',
     'welcome_to' => 'Vítejte na :web!',
     'your_credentials' => 'Vaše pověření Snipe-IT',
-);
+];

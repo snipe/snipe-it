@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dni',
         'notes'                  => 'Notatki',
         'update'                 => 'Uaktualnij',
-        'create'                 => 'Utwórz'
+        'create'                 => 'Utwórz',
     ];

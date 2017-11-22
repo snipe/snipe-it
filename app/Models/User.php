@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Presenters\Presentable;
@@ -7,7 +8,6 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -50,11 +50,10 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     ];
 
     /**
-     * Model validation rules
+     * Model validation rules.
      *
      * @var array
      */
-
     protected $rules = [
         'first_name'              => 'required|string|min:1',
         'username'                => 'required|string|min:1|unique_undeleted',
@@ -63,7 +62,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'locale'                  => 'max:10|nullable',
     ];
 
-
     public function hasAccess($section)
     {
         if ($this->isSuperUser()) {
@@ -71,26 +69,25 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         }
         $user_groups = $this->groups;
 
-
-        if (($this->permissions=='')  && (count($user_groups) == 0)) {
+        if (($this->permissions == '') && (count($user_groups) == 0)) {
             return false;
         }
 
         $user_permissions = json_decode($this->permissions, true);
 
         //If the user is explicitly granted, return true
-        if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
+        if (($user_permissions != '') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section] == '1'))) {
             return true;
         }
         // If the user is explicitly denied, return false
-        if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1')) {
+        if (($user_permissions == '') || array_key_exists($section, $user_permissions) && ($user_permissions[$section] == '-1')) {
             return false;
         }
 
         // Loop through the groups to see if any of them grant this permission
         foreach ($user_groups as $user_group) {
             $group_permissions = (array) json_decode($user_group->permissions, true);
-            if (((array_key_exists($section, $group_permissions)) && ($group_permissions[$section]=='1'))) {
+            if (((array_key_exists($section, $group_permissions)) && ($group_permissions[$section] == '1'))) {
                 return true;
             }
         }
@@ -100,25 +97,24 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     public function isSuperUser()
     {
-        if (!$user_permissions = json_decode($this->permissions, true)) {
+        if (! $user_permissions = json_decode($this->permissions, true)) {
             return false;
         }
 
         foreach ($this->groups as $user_group) {
             $group_permissions = json_decode($user_group->permissions, true);
-            $group_array = (array)$group_permissions;
-            if ((array_key_exists('superuser', $group_array)) && ($group_permissions['superuser']=='1')) {
+            $group_array = (array) $group_permissions;
+            if ((array_key_exists('superuser', $group_array)) && ($group_permissions['superuser'] == '1')) {
                 return true;
             }
         }
 
-        if ((array_key_exists('superuser', $user_permissions)) && ($user_permissions['superuser']=='1')) {
+        if ((array_key_exists('superuser', $user_permissions)) && ($user_permissions['superuser'] == '1')) {
             return true;
         }
 
         return false;
     }
-
 
     public function company()
     {
@@ -132,23 +128,21 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     public function isActivated()
     {
-        return $this->activated ==1;
+        return $this->activated == 1;
     }
 
     public function getFullNameAttribute()
     {
-        return $this->first_name . " " . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function getCompleteNameAttribute()
     {
-        return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
+        return $this->last_name.', '.$this->first_name.' ('.$this->username.')';
     }
 
-
-
     /**
-     * Get assets assigned to this user
+     * Get assets assigned to this user.
      */
     public function assets()
     {
@@ -157,7 +151,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get assets assigned to this user
+     * Get assets assigned to this user.
      */
     public function assetmaintenances()
     {
@@ -165,7 +159,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get accessories assigned to this user
+     * Get accessories assigned to this user.
      */
     public function accessories()
     {
@@ -173,7 +167,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get consumables assigned to this user
+     * Get consumables assigned to this user.
      */
     public function consumables()
     {
@@ -181,7 +175,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get licenses assigned to this user
+     * Get licenses assigned to this user.
      */
     public function licenses()
     {
@@ -189,7 +183,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get action logs for this user
+     * Get action logs for this user.
      */
     public function userlog()
     {
@@ -197,7 +191,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get the asset's location based on the assigned user
+     * Get the asset's location based on the assigned user.
      * @todo - this should be removed once we're sure we've switched it
      * to location()
      **/
@@ -207,7 +201,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get the asset's location based on the assigned user
+     * Get the asset's location based on the assigned user.
      **/
     public function location()
     {
@@ -215,7 +209,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get the user's manager based on the assigned user
+     * Get the user's manager based on the assigned user.
      **/
     public function manager()
     {
@@ -231,20 +225,19 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get user groups
+     * Get user groups.
      */
     public function groups()
     {
         return $this->belongsToMany('\App\Models\Group', 'users_groups');
     }
 
-
     public function accountStatus()
     {
         if ($this->throttle) {
-            if ($this->throttle->suspended==1) {
+            if ($this->throttle->suspended == 1) {
                 return 'suspended';
-            } elseif ($this->throttle->banned==1) {
+            } elseif ($this->throttle->banned == 1) {
                 return 'banned';
             } else {
                 return false;
@@ -260,19 +253,19 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get uploads for this asset
+     * Get uploads for this asset.
      */
     public function uploads()
     {
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', User::class)
+            ->where('item_type', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');
     }
 
     /**
-     * Fetch Items User has requested
+     * Fetch Items User has requested.
      */
     public function checkoutRequests()
     {
@@ -296,19 +289,20 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     /**
      * Override the SentryUser getPersistCode method for
-     * multiple logins at one time
+     * multiple logins at one time.
      **/
     public function getPersistCode()
     {
-
-        if (!config('session.multi_login') || (!$this->persist_code)) {
+        if (! config('session.multi_login') || (! $this->persist_code)) {
             $this->persist_code = $this->getRandomString();
 
             // Our code got hashed
             $persistCode = $this->persist_code;
             $this->save();
+
             return $persistCode;
         }
+
         return $this->persist_code;
     }
 
@@ -321,43 +315,39 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     public static function generateEmailFromFullName($name)
     {
-        $username = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
+        $username = self::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
+
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }
 
     public static function generateFormattedNameFromFullName($format = 'filastname', $users_name)
     {
-        $name = explode(" ", $users_name);
+        $name = explode(' ', $users_name);
         $name = str_replace("'", '', $name);
         $first_name = $name[0];
         $email_last_name = '';
         $email_prefix = $first_name;
 
         // If there is no last name given
-        if (!array_key_exists(1, $name)) {
-            $last_name='';
+        if (! array_key_exists(1, $name)) {
+            $last_name = '';
             $email_last_name = $last_name;
             $user_username = $first_name;
 
             // There is a last name given
         } else {
+            $last_name = str_replace($first_name.' ', '', $users_name);
 
-            $last_name = str_replace($first_name . ' ', '', $users_name);
-
-            if ($format=='filastname') {
-                $email_last_name.=str_replace(' ', '', $last_name);
+            if ($format == 'filastname') {
+                $email_last_name .= str_replace(' ', '', $last_name);
                 $email_prefix = $first_name[0].$email_last_name;
-
-            } elseif ($format=='firstname.lastname') {
-                $email_last_name.=str_replace(' ', '', $last_name);
+            } elseif ($format == 'firstname.lastname') {
+                $email_last_name .= str_replace(' ', '', $last_name);
                 $email_prefix = $first_name.'.'.$email_last_name;
-
-            } elseif ($format=='firstname') {
-                $email_last_name.=str_replace(' ', '', $last_name);
+            } elseif ($format == 'firstname') {
+                $email_last_name .= str_replace(' ', '', $last_name);
                 $email_prefix = $first_name;
             }
-
-
         }
 
         $user_username = $email_prefix;
@@ -366,45 +356,41 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         $user['username'] = strtolower($user_username);
 
         return $user;
-
-
     }
 
     /**
-     * Check whether two-factor authorization is required and the user has activated it
+     * Check whether two-factor authorization is required and the user has activated it.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      *
      * @return bool
      */
-    public function two_factor_active () {
-
-        if (Setting::getSettings()->two_factor_enabled !='0') {
-            if (($this->two_factor_optin =='1') && ($this->two_factor_enrolled)) {
+    public function two_factor_active()
+    {
+        if (Setting::getSettings()->two_factor_enabled != '0') {
+            if (($this->two_factor_optin == '1') && ($this->two_factor_enrolled)) {
                 return true;
             }
         }
+
         return false;
-
     }
-
 
     public function decodePermissions()
     {
         return json_decode($this->permissions, true);
     }
 
-
-    public function scopeByGroup($query, $id) {
+    public function scopeByGroup($query, $id)
+    {
         return $query->whereHas('groups', function ($query) use ($id) {
             $query->where('groups.id', '=', $id);
         });
     }
 
-
     /**
-     * Query builder scope to search on text
+     * Query builder scope to search on text.
      *
      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $search      Search term
@@ -413,7 +399,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function scopeTextsearch($query, $search)
     {
-
         return $query->where(function ($query) use ($search) {
             $query->where('users.first_name', 'LIKE', "%$search%")
                 ->orWhere('users.last_name', 'LIKE', "%$search%")
@@ -441,31 +426,25 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
                  //Ugly, ugly code because Laravel sucks at self-joins
                 ->orWhere(function ($query) use ($search) {
-                    $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE ? OR last_name LIKE ?)", ["%$search%", "%$search%"]);
+                    $query->whereRaw('users.manager_id IN (select id from users where first_name LIKE ? OR last_name LIKE ?)', ["%$search%", "%$search%"]);
                 });
-
-
         });
-
     }
 
-
     /**
-     * Query builder scope for Deleted users
+     * Query builder scope for Deleted users.
      *
      * @param  Illuminate\Database\Query\Builder $query Query builder instance
      *
      * @return Illuminate\Database\Query\Builder          Modified query builder
      */
-
     public function scopeDeleted($query)
     {
         return $query->whereNotNull('deleted_at');
     }
 
-
     /**
-     * Query builder scope to order on manager
+     * Query builder scope to order on manager.
      *
      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $order         Order
@@ -479,7 +458,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Query builder scope to order on company
+     * Query builder scope to order on company.
      *
      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $order         Order
@@ -491,9 +470,8 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         return $query->leftJoin('locations as locations_users', 'users.location_id', '=', 'locations_users.id')->orderBy('locations_users.name', $order);
     }
 
-
     /**
-     * Query builder scope to order on department
+     * Query builder scope to order on department.
      *
      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $order         Order

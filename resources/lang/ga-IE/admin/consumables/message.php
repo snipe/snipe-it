@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Níl inbhuanaithe ann.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Níor cruthaíodh inbhuanaithe, déan iarracht arís.',
-        'success' => 'Inbhuanaithe a cruthaíodh go rathúil.'
-    ),
+        'success' => 'Inbhuanaithe a cruthaíodh go rathúil.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Níor nuashonraíodh inmhuirearaithe, déan iarracht arís',
-        'success' => 'Nuashonraithe go rathúil.'
-    ),
+        'success' => 'Nuashonraithe go rathúil.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'An bhfuil tú cinnte gur mian leat an t-inchaite seo a scriosadh?',
         'error'   => 'Bhí ceist ann a scriosadh an inchaite. Arís, le d\'thoil.',
-        'success' => 'Scriosadh an inchaite go rathúil.'
-    ),
+        'success' => 'Scriosadh an inchaite go rathúil.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Níor sheiceáil amach an méid inmhuirearaithe, déan iarracht arís',
-        'success' 		=> 'Seiceáil inbhuanaithe go rathúil.',
-        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.'
-    ),
+     'checkout' => [
+        'error'        => 'Níor sheiceáil amach an méid inmhuirearaithe, déan iarracht arís',
+        'success'        => 'Seiceáil inbhuanaithe go rathúil.',
+        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Níor rinneadh seiceáil inmhuirearaithe, déan iarracht arís',
-        'success' 		=> 'Seiceáil inbhuanaithe go rathúil.',
-        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.'
-    )
+    'checkin' => [
+        'error'        => 'Níor rinneadh seiceáil inmhuirearaithe, déan iarracht arís',
+        'success'        => 'Seiceáil inbhuanaithe go rathúil.',
+        'user_does_not_exist' => 'Tá an úsáideoir neamhbhailí. Arís, le d\'thoil.',
+    ],
 
-
-);
+];

@@ -32,12 +32,12 @@
   <div id='custom_fields_content'>
       <!-- Custom Fields -->
       @if ($item->model && $item->model->fieldset)
-      <?php $model=$item->model; ?>
+      <?php $model = $item->model; ?>
       @endif
       @if (Input::old('model_id'))
-        <?php $model=\App\Models\AssetModel::find(Input::old('model_id')); ?>
+        <?php $model = \App\Models\AssetModel::find(Input::old('model_id')); ?>
       @elseif (isset($selected_model))
-        <?php $model=$selected_model; ?>
+        <?php $model = $selected_model; ?>
       @endif
       @if (isset($model) && $model)
       @include("models/custom_fields_form",["model" => $model])
@@ -62,7 +62,7 @@
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
   @include ('partials.forms.edit.order_number')
     <?php
-    $currency_type=null;
+    $currency_type = null;
     if ($item->id && $item->location) {
         $currency_type = $item->location->currency;
     }

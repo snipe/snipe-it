@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Akcesorium nie istnieje.',
-    'assoc_users'	 => 'Akcesoria z tej kategorii zostały wydane do :count użytkowników. Zbierz akcesoria i spróbuj ponownie. ',
+    'assoc_users'     => 'Akcesoria z tej kategorii zostały wydane do :count użytkowników. Zbierz akcesoria i spróbuj ponownie. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Akcesorium nie utworzono, spróbuj ponownie.',
-        'success' => 'Akcesorium utworzono pomyślnie.'
-    ),
+        'success' => 'Akcesorium utworzono pomyślnie.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Nie zaktualizowano Akcesorium, spróbuj ponownie',
-        'success' => 'Akcesorium utworzono pomyślnie.'
-    ),
+        'success' => 'Akcesorium utworzono pomyślnie.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Czy na pewno chcesz usunąć to Akcesorium?',
         'error'   => 'Wystąpił błąd podczas usuwania akcesorium. Proszę spróbować ponownie.',
-        'success' => 'Akcesorium zostało usunięte pomyślnie.'
-    ),
+        'success' => 'Akcesorium zostało usunięte pomyślnie.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Akcesoria nie zostały przypisane, spróbuj ponownie',
-        'success' 		=> 'Akcesoria przypisany pomyślnie.',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
-    ),
+     'checkout' => [
+        'error'        => 'Akcesoria nie zostały przypisane, spróbuj ponownie',
+        'success'        => 'Akcesoria przypisany pomyślnie.',
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Akcesoria nie zostały przypisane, spróbuj ponownie',
-        'success' 		=> 'Akcesoria przypisane pomyślnie.',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
-    )
+    'checkin' => [
+        'error'        => 'Akcesoria nie zostały przypisane, spróbuj ponownie',
+        'success'        => 'Akcesoria przypisane pomyślnie.',
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
+    ],
 
-
-);
+];

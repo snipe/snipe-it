@@ -29,5 +29,4 @@ class AddWarranteeToAssetsTable extends Migration
             $table->dropColumn('warrantee_months');
         });
     }
-
 }

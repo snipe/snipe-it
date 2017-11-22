@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class DenormAssetLocations extends Migration
 {
     /**
@@ -18,7 +17,6 @@ class DenormAssetLocations extends Migration
         Schema::table('assets', function (Blueprint $table) {
             $table->integer('location_id')->nullable()->default(null);
         });
-
     }
 
     /**

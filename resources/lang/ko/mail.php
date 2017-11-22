@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '사용자가 웹사이트에서 품목 요청을 취소했습니다',
     'a_user_requested' => '사용자가 웹사이트에서 품목을 요청했습니다',
     'accessory_name' => '액세서리 이름',
@@ -68,4 +68,4 @@ return array(
     'welcome' => '환영합니다 :name',
     'welcome_to' => '환영합니다 :web!',
     'your_credentials' => '당신의 Snipe-IT 인증들',
-);
+];

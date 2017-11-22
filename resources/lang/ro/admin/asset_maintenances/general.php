@@ -7,5 +7,5 @@
         'view'               => 'Vizualizați detaliile de întreținere a activelor',
         'repair'             => 'Reparație',
         'maintenance'        => 'întreținere',
-        'upgrade'            => 'Actualizare'
+        'upgrade'            => 'Actualizare',
     ];

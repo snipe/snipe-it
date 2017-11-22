@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Seeder;
 use App\Models\Manufacturer;
 
@@ -20,24 +21,20 @@ class ManufacturerSeeder extends Seeder
         factory(Manufacturer::class, 1)->states('crucial')->create(); // 10
 
         $src = public_path('/img/demo/manufacturers');
-        $dst =  public_path('/uploads/manufacturers');
+        $dst = public_path('/uploads/manufacturers');
 
-        $del_files = glob($dst."/*.*");
+        $del_files = glob($dst.'/*.*');
 
-        foreach($del_files as $del_file){ // iterate files
-            if(is_file($del_file))
-                unlink($del_file); // delete file
+        foreach ($del_files as $del_file) { // iterate files
+            if (is_file($del_file)) {
+                unlink($del_file);
+            } // delete file
         }
 
-
-        $add_files = glob($src."/*.*");
-        foreach($add_files as $add_file){
-            $file_to_copy = str_replace($src,$dst,$add_file);
+        $add_files = glob($src.'/*.*');
+        foreach ($add_files as $add_file) {
+            $file_to_copy = str_replace($src, $dst, $add_file);
             copy($add_file, $file_to_copy);
         }
-
-        
     }
-
-
 }

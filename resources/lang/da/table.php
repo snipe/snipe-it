@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> 'Handlinger',
-    'action' 		=> 'Handling',
-    'by'      		=> 'Af',
-    'item' 			=> 'Emne',
+    'actions'        => 'Handlinger',
+    'action'        => 'Handling',
+    'by'              => 'Af',
+    'item'            => 'Emne',
 
-);
+];

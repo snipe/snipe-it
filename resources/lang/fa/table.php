@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> 'فعالیت ها',
-    'action' 		=> 'فعالیت',
-    'by'      		=> 'توسط',
-    'item' 			=> 'مورد',
+    'actions'        => 'فعالیت ها',
+    'action'        => 'فعالیت',
+    'by'              => 'توسط',
+    'item'            => 'مورد',
 
-);
+];

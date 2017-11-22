@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Kata sandi harus 6 karakter dan sama.",
+    'password' => 'Kata sandi harus 6 karakter dan sama.',
 
-    "user"     => "Nama pengguna atau alamat email salah",
+    'user'     => 'Nama pengguna atau alamat email salah',
 
-    "token"    => "Password reset token tidak valid.",
+    'token'    => 'Password reset token tidak valid.',
 
-    "sent" => "Jika alamat email yang cocok ditemukan, pengingat password telah dikirim!",
+    'sent' => 'Jika alamat email yang cocok ditemukan, pengingat password telah dikirim!',
 
-);
+];

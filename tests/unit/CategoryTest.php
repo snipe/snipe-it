@@ -1,9 +1,6 @@
 <?php
+
 use App\Models\Category;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CategoryTest extends BaseTest
 {
@@ -19,7 +16,7 @@ class CategoryTest extends BaseTest
             'name' => $category->name,
             'category_type' => $category->category_type,
             'require_acceptance' => true,
-            'use_default_eula' => false
+            'use_default_eula' => false,
         ];
 
         Category::create($values);
@@ -33,7 +30,7 @@ class CategoryTest extends BaseTest
             'name' => $category->name,
             'category_type' => $category->category_type,
             'require_acceptance' => true,
-            'use_default_eula' => false
+            'use_default_eula' => false,
         ];
 
         Category::create($values);
@@ -42,13 +39,13 @@ class CategoryTest extends BaseTest
 
     public function testFailsEmptyValidation()
     {
-       // An Asset requires a name, a qty, and a category_id.
+        // An Asset requires a name, a qty, and a category_id.
         $a = Category::create();
         $this->assertFalse($a->isValid());
 
         $fields = [
             'name' => 'name',
-            'category_type' => 'category type'
+            'category_type' => 'category type',
         ];
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
@@ -63,7 +60,7 @@ class CategoryTest extends BaseTest
         $this->assertEquals(5, $category->has_models());
         $this->assertCount(5, $category->models);
 
-        $models->each(function($model) {
+        $models->each(function ($model) {
             factory(App\Models\Asset::class, 2)->create(['model_id' => $model->id]);
         });
         $this->assertEquals(10, $category->itemCount());

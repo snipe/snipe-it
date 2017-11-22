@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Ett konto med denna epostadressen finns redan.',
     'account_not_found'      => 'Användarnamnet eller lösenordet är felaktigt.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Detta användarkontot har blivit avstängt.',
     'throttle'               => 'För många misslyckade inloggningsförsök. Vänligen försök igen i närheten: minuter minut (er).',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Det uppstod ett problem när du försökte logga in, försök igen.',
         'success' => 'Din inloggning lyckades.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Det uppstod ett problem med att skapa ditt konto, försök igen.',
         'success' => 'Konto har skapats.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'Det uppstod ett problem med att nollställa ditt lösenord, var god försök igen.',
             'success' => 'E-postmeddelande för lösenordsåterställning har skickats.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Det uppstod ett problem med nollställning av ditt lösenord, var god försök igen.',
             'success' => 'Ditt lösenord har återställts.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'Det uppstod ett problem med att aktivera ditt konto, var god försök igen.',
         'success' => 'Ditt konto har aktiverats.',
-    ),
+    ],
 
-);
+];

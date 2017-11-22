@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> 'פעולות',
-    'action' 		=> 'פעולה',
-    'by'      		=> 'על ידי',
-    'item' 			=> 'פריט',
+    'actions'        => 'פעולות',
+    'action'        => 'פעולה',
+    'by'              => 'על ידי',
+    'item'            => 'פריט',
 
-);
+];

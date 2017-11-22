@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Ημέρες',
         'notes'                  => 'Σημειώσεις',
         'update'                 => 'Ενημέρωση',
-        'create'                 => 'Δημιουργία'
+        'create'                 => 'Δημιουργία',
     ];

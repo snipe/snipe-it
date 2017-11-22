@@ -9,7 +9,6 @@ use App\Models\Accessory;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Models\Company;
 
-
 class AccessoriesController extends Controller
 {
     /**
@@ -31,19 +30,19 @@ class AccessoriesController extends Controller
         }
 
         if ($request->has('company_id')) {
-            $accessories->where('company_id','=',$request->input('company_id'));
+            $accessories->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->has('category_id')) {
-            $accessories->where('category_id','=',$request->input('category_id'));
+            $accessories->where('category_id', '=', $request->input('category_id'));
         }
 
         if ($request->has('manufacturer_id')) {
-            $accessories->where('manufacturer_id','=',$request->input('manufacturer_id'));
+            $accessories->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
         if ($request->has('supplier_id')) {
-            $accessories->where('supplier_id','=',$request->input('supplier_id'));
+            $accessories->where('supplier_id', '=', $request->input('supplier_id'));
         }
 
         $offset = $request->input('offset', 0);
@@ -67,9 +66,9 @@ class AccessoriesController extends Controller
 
         $total = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
+
         return (new AccessoriesTransformer)->transformAccessories($accessories, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -88,8 +87,8 @@ class AccessoriesController extends Controller
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $accessory->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $accessory->getErrors()));
     }
 
     /**
@@ -104,9 +103,9 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
-
 
     /**
      * Display the specified resource.
@@ -120,9 +119,9 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
-
 
     /**
      * Display the specified resource.
@@ -137,7 +136,7 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
 
         $accessory = Accessory::findOrFail($id);
-        if (!Company::isCurrentUserHasAccess($accessory)) {
+        if (! Company::isCurrentUserHasAccess($accessory)) {
             return ['total' => 0, 'rows' => []];
         }
         $accessory_users = $accessory->users;
@@ -145,7 +144,6 @@ class AccessoriesController extends Controller
 
         return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory_users, $total);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -184,11 +182,11 @@ class AccessoriesController extends Controller
         $this->authorize($accessory);
 
         if ($accessory->hasUsers() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers()))));
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.assoc_users', ['count' => $accessory->hasUsers()])));
         }
 
         $accessory->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
     }
 }

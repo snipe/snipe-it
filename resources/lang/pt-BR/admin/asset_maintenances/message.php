@@ -5,15 +5,15 @@
         'delete'                       => [
             'confirm' => 'Você deseja apagar esta manutenção do ativo?',
             'error'   => 'Existe um problema para apagar essa manutenção deste ativo. Por favor tente novamente.',
-            'success' => 'A manutenção do ativo foi apagada com sucesso.'
+            'success' => 'A manutenção do ativo foi apagada com sucesso.',
         ],
         'create'                       => [
             'error'   => 'Não foi criada a Manutenção do Ativo, por favor tente novamente.',
-            'success' => 'Manutenção do ativo criada com sucesso.'
+            'success' => 'Manutenção do ativo criada com sucesso.',
         ],
         'edit'                       => [
             'error'   => 'Manutenção de ativos não foi editada, tente novamente.',
-            'success' => 'Manutenção de ativos editada com sucesso.'
+            'success' => 'Manutenção de ativos editada com sucesso.',
         ],
         'asset_maintenance_incomplete' => 'Não foi Completada Ainda',
         'warranty'                     => 'Garantia',

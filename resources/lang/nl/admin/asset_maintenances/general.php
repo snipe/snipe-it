@@ -7,5 +7,5 @@
         'view'               => 'Toon materiaal onderhoud details',
         'repair'             => 'Reparatie',
         'maintenance'        => 'Onderhoud',
-        'upgrade'            => 'Upgrade'
+        'upgrade'            => 'Upgrade',
     ];

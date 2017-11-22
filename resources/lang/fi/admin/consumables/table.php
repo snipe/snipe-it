@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'title'      				=> 'Kulutettava nimi',
-);
+return [
+    'title'                      => 'Kulutettava nimi',
+];

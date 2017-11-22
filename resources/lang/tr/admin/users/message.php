@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Bu aksesuarı başarıyla kabul ettiniz.',
     'declined'                  => 'Bu varlığı başarıyla reddettiniz.',
-    'bulk_manager_warn'	        => 'Kullanıcılarınızın başarıyla güncelleştirildi, ancak kaydedilmedi Yöneticisi giriş Yöneticisi\'ni seçtiğiniz çünkü aynı zamanda düzenlenecek kullanıcı listesinde oldu ve kullanıcıların kendi yöneticisi olmayabilir. Yine, yönetici hariç olmak üzere, kullanıcılarınızı seçiniz.',
+    'bulk_manager_warn'            => 'Kullanıcılarınızın başarıyla güncelleştirildi, ancak kaydedilmedi Yöneticisi giriş Yöneticisi\'ni seçtiğiniz çünkü aynı zamanda düzenlenecek kullanıcı listesinde oldu ve kullanıcıların kendi yöneticisi olmayabilir. Yine, yönetici hariç olmak üzere, kullanıcılarınızı seçiniz.',
     'user_exists'               => 'Kullanıcı zaten var!',
     'user_not_found'            => 'Kullanıcı [:id] yok.',
     'user_login_required'       => 'Oturum açma alanı gerekli',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => 'Bu kullanıcı silindi. Bunları düzenlemek veya onları yeni varlıklar atamak için bu kullanıcı geri yüklemek gerekir.',
     'ldap_not_configured'        => 'LDAP entegrasyonu bu yükleme için yapılandırılmamış.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Kullanıcı başarıyla oluşturuldu.',
         'update'    => 'Kullanıcı başarıyla güncelleştirildi.',
         'update_bulk'    => 'Kullanıcılar başarıyla güncelleştirildi!',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => 'Kullanıcı erişimi açıldı.',
         'restored'  => 'Kullanıcı başarıyla geri yüklendi.',
         'import'    => 'Kullanıcılar başarıyla içe aktarıldı.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'update' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'delete' => 'Kullanıcı silinirken bir problem oluştu. Lütfen tekrar deneyin.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
         'ldap_could_not_get_entries' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
         'password_ldap' => 'Bu hesabın parolası LDAP / Active Directory tarafından yönetilir. Lütfen şifrenizi değiştirmek için BT departmanınızla iletişime geçin.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya silindi.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Dosya(lar) yüklenemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya(lar) yüklendi.',
         'nofiles' => 'Yükleme için hiç bir dosya seçmediniz',
         'invalidfiles' => 'Bir veya daha fazla dosya çok büyük veya izin verilmeyen bir dosya türü. İzin verilen dosya türleri png, Gif, jpg, doc, docx, pdf, txt.',
-    ),
+    ],
 
-);
+];

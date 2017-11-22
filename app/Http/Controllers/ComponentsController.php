@@ -1,28 +1,20 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Component;
-use App\Models\CustomField;
-use App\Models\Setting;
 use App\Models\User;
 use App\Models\Asset;
 use Auth;
-use Config;
 use DB;
 use Input;
-use Lang;
-use Mail;
 use Redirect;
-use Slack;
-use Str;
 use View;
 use Validator;
 use Illuminate\Http\Request;
-use Gate;
 use Image;
 
 /**
@@ -34,66 +26,65 @@ use Image;
 class ComponentsController extends Controller
 {
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the components listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::getDatatable() method that generates the JSON response
-    * @since [v3.0]
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the components listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentsController::getDatatable() method that generates the JSON response
+     * @since [v3.0]
      * @return \Illuminate\Contracts\View\View
-    */
+     */
     public function index()
     {
         $this->authorize('view', Component::class);
+
         return view('components/index');
     }
 
-
     /**
-    * Returns a form to create a new component.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::postCreate() method that stores the data
-    * @since [v3.0]
-    * @return \Illuminate\Contracts\View\View
-    */
+     * Returns a form to create a new component.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentsController::postCreate() method that stores the data
+     * @since [v3.0]
+     * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         $this->authorize('create', Component::class);
         $category_type = 'component';
-        return view('components/edit')->with('category_type',$category_type)
+
+        return view('components/edit')->with('category_type', $category_type)
             ->with('item', new Component);
     }
 
-
     /**
-    * Validate and store data for new component.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::getCreate() method that generates the view
-    * @since [v3.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validate and store data for new component.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentsController::getCreate() method that generates the view
+     * @since [v3.0]
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Component::class);
         $component = new Component();
-        $component->name                   = $request->input('name');
-        $component->category_id            = $request->input('category_id');
-        $component->location_id            = $request->input('location_id');
-        $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
-        $component->order_number           = $request->input('order_number', null);
-        $component->min_amt                = $request->input('min_amt', null);
-        $component->serial                 = $request->input('serial', null);
-        $component->purchase_date          = $request->input('purchase_date', null);
-        $component->purchase_cost          = $request->input('purchase_cost', null);
-        $component->qty                    = $request->input('qty');
-        $component->user_id                = Auth::id();
-
+        $component->name = $request->input('name');
+        $component->category_id = $request->input('category_id');
+        $component->location_id = $request->input('location_id');
+        $component->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+        $component->order_number = $request->input('order_number', null);
+        $component->min_amt = $request->input('min_amt', null);
+        $component->serial = $request->input('serial', null);
+        $component->purchase_date = $request->input('purchase_date', null);
+        $component->purchase_cost = $request->input('purchase_cost', null);
+        $component->qty = $request->input('qty');
+        $component->user_id = Auth::id();
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $file_name = str_random(25).'.'.$image->getClientOriginalExtension();
             $path = public_path('uploads/components/'.$file_name);
             Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -105,43 +96,39 @@ class ComponentsController extends Controller
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($component->getErrors());
     }
 
     /**
-    * Return a view to edit a component.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::postEdit() method that stores the data.
-    * @since [v3.0]
-    * @param int $componentId
-    * @return \Illuminate\Contracts\View\View
+     * Return a view to edit a component.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentsController::postEdit() method that stores the data.
+     * @since [v3.0]
+     * @param int $componentId
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($componentId = null)
     {
-
-
         if ($item = Component::find($componentId)) {
             $this->authorize('update', $item);
             $category_type = 'component';
+
             return view('components/edit', compact('item'))->with('category_type', $category_type);
         }
+
         return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
-
-
-
-
     }
 
-
     /**
-    * Return a view to edit a component.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::getEdit() method presents the form.
-    * @param int $componentId
-    * @since [v3.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Return a view to edit a component.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentsController::getEdit() method presents the form.
+     * @param int $componentId
+     * @since [v3.0]
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ImageUploadRequest $request, $componentId = null)
     {
@@ -151,45 +138,45 @@ class ComponentsController extends Controller
 
         $this->authorize('update', $component);
 
-
         // Update the component data
-        $component->name                   = Input::get('name');
-        $component->category_id            = Input::get('category_id');
-        $component->location_id            = Input::get('location_id');
-        $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $component->order_number           = Input::get('order_number');
-        $component->min_amt                = Input::get('min_amt');
-        $component->serial                 = Input::get('serial');
-        $component->purchase_date          = Input::get('purchase_date');
-        $component->purchase_cost          = request('purchase_cost');
-        $component->qty                    = Input::get('qty');
+        $component->name = Input::get('name');
+        $component->category_id = Input::get('category_id');
+        $component->location_id = Input::get('location_id');
+        $component->company_id = Company::getIdForCurrentUser(Input::get('company_id'));
+        $component->order_number = Input::get('order_number');
+        $component->min_amt = Input::get('min_amt');
+        $component->serial = Input::get('serial');
+        $component->purchase_date = Input::get('purchase_date');
+        $component->purchase_cost = request('purchase_cost');
+        $component->qty = Input::get('qty');
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+            $file_name = str_random(25).'.'.$image->getClientOriginalExtension();
             $path = public_path('uploads/components/'.$file_name);
             Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
             $component->image = $file_name;
-        } elseif ($request->input('image_delete')=='1') {
+        } elseif ($request->input('image_delete') == '1') {
             $component->image = null;
         }
 
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($component->getErrors());
     }
 
     /**
-    * Delete a component.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v3.0]
-    * @param int $componentId
-    * @return \Illuminate\Http\RedirectResponse
+     * Delete a component.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param int $componentId
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($componentId)
     {
@@ -199,6 +186,7 @@ class ComponentsController extends Controller
 
         $this->authorize('delete', $component);
         $component->delete();
+
         return redirect()->route('components.index')->with('success', trans('admin/components/message.delete.success'));
     }
 
@@ -214,15 +202,14 @@ class ComponentsController extends Controller
         echo 'Stubbed - not yet complete';
     }
 
-
     /**
-    * Return a view to display component information.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::getDataView() method that generates the JSON response
-    * @since [v3.0]
-    * @param int $componentId
-    * @return \Illuminate\Contracts\View\View
+     * Return a view to display component information.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentsController::getDataView() method that generates the JSON response
+     * @since [v3.0]
+     * @param int $componentId
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($componentId = null)
     {
@@ -230,6 +217,7 @@ class ComponentsController extends Controller
 
         if (isset($component->id)) {
             $this->authorize('view', $component);
+
             return view('components/view', compact('component'));
         }
         // Prepare the error message
@@ -239,13 +227,13 @@ class ComponentsController extends Controller
     }
 
     /**
-    * Returns a view that allows the checkout of a component to an asset.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ComponentsController::postCheckout() method that stores the data.
-    * @since [v3.0]
-    * @param int $componentId
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that allows the checkout of a component to an asset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ComponentsController::postCheckout() method that stores the data.
+     * @since [v3.0]
+     * @param int $componentId
+     * @return \Illuminate\Contracts\View\View
      */
     public function getCheckout($componentId)
     {
@@ -255,6 +243,7 @@ class ComponentsController extends Controller
             return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
         }
         $this->authorize('checkout', $component);
+
         return view('components/checkout', compact('component'));
     }
 
@@ -280,8 +269,8 @@ class ComponentsController extends Controller
 
         $max_to_checkout = $component->numRemaining();
         $validator = Validator::make($request->all(), [
-            "asset_id"          => "required",
-            "assigned_qty"      => "required|numeric|between:1,$max_to_checkout"
+            'asset_id'          => 'required',
+            'assigned_qty'      => "required|numeric|between:1,$max_to_checkout",
         ]);
 
         if ($validator->fails()) {
@@ -300,17 +289,18 @@ class ComponentsController extends Controller
         }
 
       // Update the component data
-        $component->asset_id =   $asset_id;
+        $component->asset_id = $asset_id;
 
         $component->assets()->attach($component->id, [
             'component_id' => $component->id,
             'user_id' => $admin_user->id,
             'created_at' => date('Y-m-d H:i:s'),
             'assigned_qty' => Input::get('assigned_qty'),
-            'asset_id' => $asset_id
+            'asset_id' => $asset_id,
         ]);
 
         $component->logCheckout(e(Input::get('note')), $asset);
+
         return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
     }
 
@@ -336,11 +326,11 @@ class ComponentsController extends Controller
                     trans('admin/components/message.not_found'));
             }
             $this->authorize('checkin', $component_assets);
-            return view('components/checkin', compact('component_assets','component','asset'));
+
+            return view('components/checkin', compact('component_assets', 'component', 'asset'));
         }
 
         return redirect()->route('components.index')->with('error', trans('admin/components/messages.not_found'));
-
     }
 
     /**
@@ -361,12 +351,11 @@ class ComponentsController extends Controller
                     trans('admin/components/message.not_found'));
             }
 
-
             $this->authorize('checkin', $component);
 
             $max_to_checkin = $component_assets->assigned_qty;
             $validator = Validator::make($request->all(), [
-                "checkin_qty" => "required|numeric|between:1,$max_to_checkin"
+                'checkin_qty' => "required|numeric|between:1,$max_to_checkin",
             ]);
 
             if ($validator->fails()) {
@@ -376,7 +365,7 @@ class ComponentsController extends Controller
             }
 
             // Validation passed, so let's figure out what we have to do here.
-            $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int)$request->input('checkin_qty'));
+            $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int) $request->input('checkin_qty'));
 
             // We have to modify the record to reflect the new qty that's
             // actually checked out.
@@ -403,8 +392,7 @@ class ComponentsController extends Controller
             return redirect()->route('components.index')->with('success',
                 trans('admin/components/message.checkout.success'));
         }
+
         return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
     }
-
-
 }

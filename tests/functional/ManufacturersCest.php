@@ -7,10 +7,10 @@ class ManufacturersCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
     }
 
     // tests
@@ -25,7 +25,7 @@ class ManufacturersCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('manufacturers.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -34,7 +34,7 @@ class ManufacturersCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('manufacturers.create'));
         $I->fillField('name', 't');
         $I->click('Save');
@@ -45,9 +45,9 @@ class ManufacturersCest
     {
         $manufacturer = factory(App\Models\Manufacturer::class)->make();
         $values = [
-            'name' => $manufacturer->name
+            'name' => $manufacturer->name,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('manufacturers.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('manufacturers', $values);

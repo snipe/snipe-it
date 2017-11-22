@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Bu aksesuar yok.',
-    'assoc_users'	 => 'Bu aksesuardan :count adet kullanıcılara çıkış yapıldı. Lütfen aksesuar girişi yapınız ve tekrar deneyin.',
+    'assoc_users'     => 'Bu aksesuardan :count adet kullanıcılara çıkış yapıldı. Lütfen aksesuar girişi yapınız ve tekrar deneyin.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Aksesuar oluşturma başarısız. lütfen tekrar deneyin.',
-        'success' => 'Aksesuar başarıyla güncellendi.'
-    ),
+        'success' => 'Aksesuar başarıyla güncellendi.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Aksesuar güncellenmedi. Lütfen tekrar deneyin',
-        'success' => 'Aksesuar başarı ile güncellendi.'
-    ),
+        'success' => 'Aksesuar başarı ile güncellendi.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Bu Aksesuar silmek istediğinizden emin misiniz?',
         'error'   => 'Aksesuarı silerken bir hata oluştu. Lütfen tekrar deneyin.',
-        'success' => 'Aksesuar başarıyla silindi.'
-    ),
+        'success' => 'Aksesuar başarıyla silindi.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'Aksesuar çıkışı yapılamadı, lütfen tekrar deneyin',
-        'success' 		=> 'Aksesuar çıkışı yapıldı.',
-        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
-    ),
+     'checkout' => [
+        'error'        => 'Aksesuar çıkışı yapılamadı, lütfen tekrar deneyin',
+        'success'        => 'Aksesuar çıkışı yapıldı.',
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'Aksesuar girişi yapılamadı, lütfen tekrar deneyin',
-        'success' 		=> 'Aksesuar girişi yapıldı.',
-        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
-    )
+    'checkin' => [
+        'error'        => 'Aksesuar girişi yapılamadı, lütfen tekrar deneyin',
+        'success'        => 'Aksesuar girişi yapıldı.',
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
+    ],
 
-
-);
+];

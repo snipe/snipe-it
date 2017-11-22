@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Ați acceptat cu succes acest activ.',
     'declined'                  => 'Ați refuzat cu succes acest activ.',
-    'bulk_manager_warn'	        => 'Utilizatorii dvs. au fost actualizați cu succes, cu toate acestea, intrarea managerului dvs. nu a fost salvată, deoarece managerul pe care l-ați selectat a fost, de asemenea, în lista de utilizatori care urmează să fie editat și este posibil ca utilizatorii să nu fie propriul manager. Selectați din nou utilizatorii dvs., cu excepția managerului.',
+    'bulk_manager_warn'            => 'Utilizatorii dvs. au fost actualizați cu succes, cu toate acestea, intrarea managerului dvs. nu a fost salvată, deoarece managerul pe care l-ați selectat a fost, de asemenea, în lista de utilizatori care urmează să fie editat și este posibil ca utilizatorii să nu fie propriul manager. Selectați din nou utilizatorii dvs., cu excepția managerului.',
     'user_exists'               => 'Utilizatorul exista deja!',
     'user_not_found'            => 'Utilizatorul [:id] nu exista.',
     'user_login_required'       => 'Campul de login este necesar',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => 'Acest utilizator a fost sters. Trebuie sa restaurati utilizator ca sa-l editati sau sa-i desemnati active noi.',
     'ldap_not_configured'        => 'Integrarea LDAP nu a fost configurată pentru această instalare.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Utilizatorul a fost creat.',
         'update'    => 'Utilizatorul a fost actualizat.',
         'update_bulk'    => 'Utilizatorii au fost actualizați cu succes!',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => 'Utilizatorul a fost activat.',
         'restored'  => 'Utilizatorul a fost restaurat.',
         'import'    => 'Utilizatorii importați cu succes.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'A aparut o problema la crearea utilizatorului. Incercati iar.',
         'update' => 'A aparut o problema la actualizarea utilizatorului. Incercati iar.',
         'delete' => 'A aparut o problema la stergerea utilizatorului. Incercati iar.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'Căutarea serverului LDAP nu a putut fi efectuată. Verificați configurația serverului LDAP în fișierul de configurare LDAP. <br>Error de la LDAP Server:',
         'ldap_could_not_get_entries' => 'Nu s-au putut obține intrări de pe serverul LDAP. Verificați configurația serverului LDAP în fișierul de configurare LDAP. <br>Error de la LDAP Server:',
         'password_ldap' => 'Parola pentru acest cont este gestionată de LDAP / Active Directory. Contactați departamentul IT pentru a vă schimba parola.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Fișierul nu a fost șters. Vă rugăm să încercați din nou.',
         'success' => 'Fișierul a fost șters cu succes.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Fișierul nu a fost încărcat. Vă rugăm să încercați din nou.',
         'success' => 'Fișierul a fost încărcat cu succes.',
         'nofiles' => 'Nu ați selectat niciun fișier pentru încărcare',
         'invalidfiles' => 'Unul sau mai multe fișiere este prea mare sau este un tip de fișier care nu este permis. Tipurile de fișiere permise sunt png, gif, jpg, doc, docx, pdf și txt.',
-    ),
+    ],
 
-);
+];

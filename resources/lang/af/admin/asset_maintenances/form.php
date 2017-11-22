@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'dae',
         'notes'                  => 'notas',
         'update'                 => 'Opdateer',
-        'create'                 => 'Skep'
+        'create'                 => 'Skep',
     ];

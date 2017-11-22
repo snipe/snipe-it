@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'תְעוּדַת זֶהוּת',
     'name'                      => 'שם מחלקה',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'מקום',
     'create'                    => 'יצירת המחלקה',
     'update'                    => 'עדכון המחלקה',
-    );
+    ];

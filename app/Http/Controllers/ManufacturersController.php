@@ -1,17 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
-use App\Models\CustomField;
 use App\Models\Manufacturer;
 use Auth;
-use Exception;
-use Gate;
 use Input;
-use Lang;
 use Redirect;
-use Str;
 use View;
 use Illuminate\Http\Request;
 use Image;
@@ -25,33 +20,31 @@ use Image;
 class ManufacturersController extends Controller
 {
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the manufacturers listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see Api\ManufacturersController::index() method that generates the JSON response
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the manufacturers listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see Api\ManufacturersController::index() method that generates the JSON response
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
         return view('manufacturers/index', compact('manufacturers'));
     }
 
-
     /**
-    * Returns a view that displays a form to create a new manufacturer.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::store()
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that displays a form to create a new manufacturer.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ManufacturersController::store()
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
         return view('manufacturers/edit')->with('item', new Manufacturer);
     }
-
 
     /**
      * Validates and stores the data for a new manufacturer.
@@ -64,19 +57,17 @@ class ManufacturersController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
-
         $manufacturer = new Manufacturer;
-        $manufacturer->name            = $request->input('name');
-        $manufacturer->user_id          = Auth::user()->id;
-        $manufacturer->url     = $request->input('url');
-        $manufacturer->support_url     = $request->input('support_url');
-        $manufacturer->support_phone    = $request->input('support_phone');
-        $manufacturer->support_email    = $request->input('support_email');
-
+        $manufacturer->name = $request->input('name');
+        $manufacturer->user_id = Auth::user()->id;
+        $manufacturer->url = $request->input('url');
+        $manufacturer->support_url = $request->input('support_url');
+        $manufacturer->support_phone = $request->input('support_phone');
+        $manufacturer->support_email = $request->input('support_email');
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = str_slug($image->getClientOriginalName()).".".$image->getClientOriginalExtension();
+            $file_name = str_slug($image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
             $path = public_path('uploads/manufacturers/'.$file_name);
             Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -85,22 +76,21 @@ class ManufacturersController extends Controller
             $manufacturer->image = $file_name;
         }
 
-
-
         if ($manufacturer->save()) {
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
     }
 
     /**
-    * Returns a view that displays a form to edit a manufacturer.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ManufacturersController::update()
-    * @param int $manufacturerId
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that displays a form to edit a manufacturer.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ManufacturersController::update()
+     * @param int $manufacturerId
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id = null)
     {
@@ -111,7 +101,6 @@ class ManufacturersController extends Controller
         // Show the page
         return view('manufacturers/edit', compact('item'));
     }
-
 
     /**
      * Validates and stores the updated manufacturer data.
@@ -132,11 +121,11 @@ class ManufacturersController extends Controller
         }
 
         // Save the  data
-        $manufacturer->name     = $request->input('name');
-        $manufacturer->url     = $request->input('url');
-        $manufacturer->support_url     = $request->input('support_url');
-        $manufacturer->support_phone    = $request->input('support_phone');
-        $manufacturer->support_email    = $request->input('support_email');
+        $manufacturer->name = $request->input('name');
+        $manufacturer->url = $request->input('url');
+        $manufacturer->support_url = $request->input('support_url');
+        $manufacturer->support_phone = $request->input('support_phone');
+        $manufacturer->support_email = $request->input('support_email');
 
         $old_image = $manufacturer->image;
 
@@ -147,9 +136,9 @@ class ManufacturersController extends Controller
 
         if ($request->file('image')) {
             $image = $request->file('image');
-            $file_name = $manufacturer->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
+            $file_name = $manufacturer->id.'-'.str_slug($image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
 
-            if ($image->getClientOriginalExtension()!='svg') {
+            if ($image->getClientOriginalExtension() != 'svg') {
                 Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
@@ -158,31 +147,30 @@ class ManufacturersController extends Controller
                 $image->move(app('manufacturers_upload_path'), $file_name);
             }
             $manufacturer->image = $file_name;
-
         }
 
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
+        if ((($request->file('image')) && (isset($old_image)) && ($old_image != '')) || ($request->input('image_delete') == 1)) {
+            try {
                 unlink(app('manufacturers_upload_path').$old_image);
             } catch (\Exception $e) {
                 \Log::error($e);
             }
         }
 
-
         if ($manufacturer->save()) {
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.update.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
     }
 
     /**
-    * Deletes a manufacturer.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $manufacturerId
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Deletes a manufacturer.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $manufacturerId
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($manufacturerId)
     {
@@ -198,13 +186,12 @@ class ManufacturersController extends Controller
         }
 
         if ($manufacturer->image) {
-            try  {
+            try {
                 unlink(public_path().'/uploads/manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
                 \Log::error($e);
             }
         }
-
 
         // Delete the manufacturer
         $manufacturer->delete();
@@ -213,14 +200,14 @@ class ManufacturersController extends Controller
     }
 
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the manufacturers detail listing, which is generated via API.
-    * This data contains a listing of all assets that belong to that manufacturer.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $manufacturerId
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the manufacturers detail listing, which is generated via API.
+     * This data contains a listing of all assets that belong to that manufacturer.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $manufacturerId
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
      */
     public function show($manufacturerId = null)
     {
@@ -234,8 +221,4 @@ class ManufacturersController extends Controller
         // Redirect to the user management page
         return redirect()->route('manufacturers.index')->with('error', $error);
     }
-
-   
-
-
 }

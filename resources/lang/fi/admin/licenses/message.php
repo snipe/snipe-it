@@ -1,51 +1,50 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Lisenssiä ei löydy.',
     'user_does_not_exist' => 'Käyttäjää ei löydy.',
-    'asset_does_not_exist' 	=> 'Laitetta jolle yrität määrittää tämän lisenssin ei löydy.',
+    'asset_does_not_exist'    => 'Laitetta jolle yrität määrittää tämän lisenssin ei löydy.',
     'owner_doesnt_match_asset' => 'Laitteen jolle yrität määrittää tämän lisenssin omistaa joku muu kuin se, jonka olet valinnut alasvetovalikosta.',
-    'assoc_users'	 => 'Lisenssin on luovutettu käyttäjälle eikä sitä voida poistaa. Palauta lisenssin ensin käyttäjältä, ja yritä sitten uudelleen. ',
+    'assoc_users'     => 'Lisenssin on luovutettu käyttäjälle eikä sitä voida poistaa. Palauta lisenssin ensin käyttäjältä, ja yritä sitten uudelleen. ',
     'select_asset_or_person' => 'Sinun on valittava omaisuus tai käyttäjä, mutta ei molempia.',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Lisenssiä ei luotu, yritä uudelleen.',
-        'success' => 'Lisenssi luotiin onnistuneesti.'
-    ),
+        'success' => 'Lisenssi luotiin onnistuneesti.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Tiedostoa ei poistettu. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedosto poistettiin onnistuneesti.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
         'nofiles' => 'Et ole valinnut lähetettäviä tiedostoja tai tiedosto, jonka yrität ladata, on liian suuri',
         'invalidfiles' => 'Yksi tai useampi tiedosto on liian suuri tai on filetype, jota ei sallita. Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ja lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Lisenssiä ei päivitetty, yritä uudelleen',
-        'success' => 'Lisenssi päivitettiin onnistuneesti.'
-    ),
+        'success' => 'Lisenssi päivitettiin onnistuneesti.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Oletko varma että haluat poistaa tämän lisenssin?',
         'error'   => 'Lisenssin poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Lisenssi poistettiin onnistuneesti.'
-    ),
+        'success' => 'Lisenssi poistettiin onnistuneesti.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Lisenssin luovutuksessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Lisenssi luovutettiin onnistuneesti'
-    ),
+        'success' => 'Lisenssi luovutettiin onnistuneesti',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Lisenssin palautuksessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Lisenssi palautettiin onnistuneesti'
-    ),
+        'success' => 'Lisenssi palautettiin onnistuneesti',
+    ],
 
-);
+];

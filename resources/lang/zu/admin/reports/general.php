@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'info'   => 'Khetha okukhethwa kukho okufunayo kumbiko wakho wefa.'
-);
+return [
+    'info'   => 'Khetha okukhethwa kukho okufunayo kumbiko wakho wefa.',
+];

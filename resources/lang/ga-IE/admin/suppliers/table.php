@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Maidir Soláthraithe',
     'about_suppliers_text'  => 'Úsáidtear soláthraithe chun foinse na n-ítimí a rianú',
     'address'               => 'Seoladh an tSoláthraithe',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Féach Sócmhainní le haghaidh',
     'zip'                   => 'Cód Poist',
 
-);
+];

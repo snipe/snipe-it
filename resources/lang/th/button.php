@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'การกระทำ',
-    'add'    	                => 'เพิ่มใหม่',
+return [
+    'actions'                    => 'การกระทำ',
+    'add'                        => 'เพิ่มใหม่',
     'cancel'                    => 'ยกเลิก',
-    'checkin_and_delete'  	    => 'เช็คอินและลบผู้ใช้',
-    'delete'  	                => 'ลบ',
-    'edit'    	                => 'แก้ไข',
-    'restore' 	                => 'นำกลับ',
+    'checkin_and_delete'        => 'เช็คอินและลบผู้ใช้',
+    'delete'                    => 'ลบ',
+    'edit'                        => 'แก้ไข',
+    'restore'                    => 'นำกลับ',
     'request'                   => 'ร้องขอ',
-    'submit'  	                => 'ตกลง',
+    'submit'                    => 'ตกลง',
     'upload'                    => 'อัพโหลด',
-	'select_file'				=> 'เลือกไฟล์...',
-);
+    'select_file'                => 'เลือกไฟล์...',
+];

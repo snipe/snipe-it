@@ -1,25 +1,25 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Kategori mevcut değil.',
-    'assoc_models'	 => 'Bu kategori en az 1 adet model ile ilişkili ve silinemez. Lütfen Modelleri güncelleyerek bu kategori ile bağını kesin ve tekrar deneyin. ',
-    'assoc_items'	 => 'Bu kategori en az 1 adet model ile ilişkili ve silinemez. Lütfen Modelleri güncelleyerek bu kategori ile bağını kesin ve tekrar deneyin. ',
+    'assoc_models'     => 'Bu kategori en az 1 adet model ile ilişkili ve silinemez. Lütfen Modelleri güncelleyerek bu kategori ile bağını kesin ve tekrar deneyin. ',
+    'assoc_items'     => 'Bu kategori en az 1 adet model ile ilişkili ve silinemez. Lütfen Modelleri güncelleyerek bu kategori ile bağını kesin ve tekrar deneyin. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Kategori oluşturulamadı. Lütfen tekrar deneyin.',
-        'success' => 'Kategori oluşturuldu.'
-    ),
+        'success' => 'Kategori oluşturuldu.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Kategori güncellenemedi, Lütfen tekrar deneyin',
-        'success' => 'Kategori güncellendi.'
-    ),
+        'success' => 'Kategori güncellendi.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Bu kategoriyi silmek istediğinize emin misiniz?',
         'error'   => 'Bu kategoriyi silerken bir hata ile karşılaşıldı. Lütfen tekrar deneyin.',
-        'success' => 'Kategori silindi.'
-    )
+        'success' => 'Kategori silindi.',
+    ],
 
-);
+];

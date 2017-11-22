@@ -7,5 +7,5 @@
         'view'               => 'Visa detaljer ang. inventarieunderhåll',
         'repair'             => 'Reparera',
         'maintenance'        => 'Underhåll',
-        'upgrade'            => 'Uppgradera'
+        'upgrade'            => 'Uppgradera',
     ];

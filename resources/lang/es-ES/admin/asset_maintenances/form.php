@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Tiempo de Mantenimiento de Equipo (en días)',
         'notes'                  => 'Notas',
         'update'                 => 'Actualizar Mantenimiento de Equipo',
-        'create'                 => 'Crear Mantenimiento de Equipo'
+        'create'                 => 'Crear Mantenimiento de Equipo',
     ];

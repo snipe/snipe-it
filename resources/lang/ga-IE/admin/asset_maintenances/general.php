@@ -7,5 +7,5 @@
         'view'               => 'Féach ar Mionsonraí Cothabhála Sócmhainní',
         'repair'             => 'Deisiúchán',
         'maintenance'        => 'Cothabháil',
-        'upgrade'            => 'Uasghrádú'
+        'upgrade'            => 'Uasghrádú',
     ];

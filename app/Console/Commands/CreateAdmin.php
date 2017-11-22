@@ -37,7 +37,6 @@ class CreateAdmin extends Command
      */
     public function handle()
     {
-
         $first_name = $this->option('first_name');
         $last_name = $this->option('last_name');
         $username = $this->option('username');
@@ -45,7 +44,7 @@ class CreateAdmin extends Command
         $password = $this->option('password');
         $show_in_list = $this->argument('show_in_list');
 
-        if (($first_name=='') || ($last_name=='') || ($username=='') || ($email=='') || ($password=='')) {
+        if (($first_name == '') || ($last_name == '') || ($username == '') || ($email == '') || ($password == '')) {
             $this->info('ERROR: All fields are required.');
         } else {
             $user = new \App\Models\User;
@@ -68,12 +67,10 @@ class CreateAdmin extends Command
                 $errors = $user->getErrors();
 
                 foreach ($errors->all() as $error) {
-                    $this->info('ERROR:'. $error);
+                    $this->info('ERROR:'.$error);
                 }
-
             }
         }
-
     }
 
   //   protected function getArguments()

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Un utilizator a anulat o solicitare de element pe site',
     'a_user_requested' => 'Un utilizator a solicitat un element de pe site',
     'accessory_name' => 'Nume accesoriu:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Bun venit: nume',
     'welcome_to' => 'Bun venit pe: web!',
     'your_credentials' => 'Informațiile dvs. Snipe-IT',
-);
+];

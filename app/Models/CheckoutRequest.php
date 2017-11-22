@@ -42,10 +42,10 @@ class CheckoutRequest extends Model
 
     public function name()
     {
-        if ($this->itemType() == "asset") {
+        if ($this->itemType() == 'asset') {
             return $this->itemRequested()->present()->name();
         }
-        return $this->itemRequested()->name;
 
+        return $this->itemRequested()->name;
     }
 }

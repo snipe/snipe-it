@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'A user has canceled an item request on the website',
     'a_user_requested' => 'A user has requested an item on the website',
     'accessory_name' => 'Accessory Name:',
@@ -71,4 +71,4 @@ return array(
     'welcome' => 'Welcome :name',
     'welcome_to' => 'Welcome to :web!',
     'your_credentials' => 'Your Snipe-IT credentials',
-);
+];

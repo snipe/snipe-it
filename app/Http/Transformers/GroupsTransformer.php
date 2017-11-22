@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Group;
@@ -8,17 +9,17 @@ use App\Helpers\Helper;
 
 class GroupsTransformer
 {
-
-    public function transformGroups (Collection $groups)
+    public function transformGroups(Collection $groups)
     {
-        $array = array();
+        $array = [];
         foreach ($groups as $group) {
             $array[] = self::transformGroup($group);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array);
     }
 
-    public function transformGroup (Group $group)
+    public function transformGroup(Group $group)
     {
         $array = [
             'id' => (int) $group->id,
@@ -38,7 +39,4 @@ class GroupsTransformer
 
         return $array;
     }
-
-
-
 }

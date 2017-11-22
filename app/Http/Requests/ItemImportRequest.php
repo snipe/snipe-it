@@ -34,14 +34,14 @@ class ItemImportRequest extends FormRequest
     {
         ini_set('max_execution_time', 600); //600 seconds = 10 minutes
         ini_set('memory_limit', '500M');
-        $filename = config('app.private_uploads') . '/imports/' . $import->file_path;
+        $filename = config('app.private_uploads').'/imports/'.$import->file_path;
         $import->import_type = $this->input('import-type');
         $class = title_case($import->import_type);
         $classString = "App\\Importer\\{$class}Importer";
         $importer = new $classString($filename);
-        $import->field_map  = request('column-mappings');
+        $import->field_map = request('column-mappings');
         $import->save();
-        $fieldMappings=[];
+        $fieldMappings = [];
         if ($import->field_map) {
             // We submit as csv field: column, but the importer is happier if we flip it here.
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
@@ -55,6 +55,7 @@ class ItemImportRequest extends FormRequest
         // $logFile = storage_path('logs/importer.log');
         // \Log::useFiles($logFile);
         $importer->import();
+
         return $this->errors;
     }
 

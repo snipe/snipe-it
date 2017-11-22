@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '使用者已取消項目申請',
     'a_user_requested' => '使用者已申請項目',
     'accessory_name' => '配件名稱：',
@@ -68,4 +68,4 @@ return array(
     'welcome' => '歡迎您 :name',
     'welcome_to' => '歡迎來到 :web！',
     'your_credentials' => '您的 Snipe-IT 憑證',
-);
+];

@@ -7,5 +7,5 @@
         'view'               => 'Az eszköz karbantartás részletei',
         'repair'             => 'Javítás',
         'maintenance'        => 'Karbantartás',
-        'upgrade'            => 'Frissítés'
+        'upgrade'            => 'Frissítés',
     ];

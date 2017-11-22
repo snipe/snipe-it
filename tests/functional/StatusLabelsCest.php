@@ -7,10 +7,10 @@ class StatusLabelsCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'snipeit');
+        $I->fillField('password', 'snipeit');
+        $I->click('Login');
     }
 
     // tests
@@ -25,7 +25,7 @@ class StatusLabelsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('statuslabels.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -52,7 +52,7 @@ class StatusLabelsCest
             'notes'                 => $status->notes,
             'show_in_nav'           => true,
         ];
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('statuslabels.create'));
         $I->submitForm('form#create-form', $submitValues);
         $I->seeRecord('status_labels', $recordValues);

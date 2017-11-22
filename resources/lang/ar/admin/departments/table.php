@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'رقم التعريف',
     'name'                      => 'اسم القسم الإداري',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'الموقع',
     'create'                    => 'إنشاء قسم اداري',
     'update'                    => 'تحديث قسم اداري',
-    );
+    ];

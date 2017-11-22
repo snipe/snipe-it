@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'The: atribut je već snimljen.',
     'uploaded'             => 'Atribut nije prenesen.',
     'url'                  => 'Format atributa nije važeći.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Polje atributa sadrži znak koji nije dopušten.",
-        "email_array"      => "Jedna ili više adresa e-pošte nije važeća.",
-        "hashed_pass"      => "Vaša trenutačna zaporka nije točna",
+        'alpha_space' => 'Polje atributa sadrži znak koji nije dopušten.',
+        'email_array'      => 'Jedna ili više adresa e-pošte nije važeća.',
+        'hashed_pass'      => 'Vaša trenutačna zaporka nije točna',
         'dumbpwd'          => 'Ta je lozinka prečestna.',
-        "statuslabel_type" => "Morate odabrati valjanu vrstu oznake statusa",
+        'statuslabel_type' => 'Morate odabrati valjanu vrstu oznake statusa',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

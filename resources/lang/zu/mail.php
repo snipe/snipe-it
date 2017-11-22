@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Umsebenzisi ukhanse isicelo sezinto kuwebhusayithi',
     'a_user_requested' => 'Umsebenzisi ucele into ku-website',
     'accessory_name' => 'Igama lokufinyelela:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Siyakwamukela: igama',
     'welcome_to' => 'Siyakwamukela ku: iwebhu!',
     'your_credentials' => 'Izimpawu zakho ze-Snipe-IT',
-);
+];

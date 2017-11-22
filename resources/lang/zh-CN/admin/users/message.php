@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => '你已成功接受此项资产。',
     'declined'                  => '你已拒绝此项资产。',
-    'bulk_manager_warn'	        => '您的用户已成功更新，但是您的经理条目未保存，因为您选择的经理也在要编辑的用户列表中，用户可能不是自己的经理。请再次选择您的用户，不包括经理。',
+    'bulk_manager_warn'            => '您的用户已成功更新，但是您的经理条目未保存，因为您选择的经理也在要编辑的用户列表中，用户可能不是自己的经理。请再次选择您的用户，不包括经理。',
     'user_exists'               => '用户已经存在!',
     'user_not_found'            => '用户[:id] 不存在',
     'user_login_required'       => '登陆字段是必须的',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => '用户已经被删除，你需要恢复这个用户编辑他或者重新指定新资产。',
     'ldap_not_configured'        => '安装过程中未启用LDAP集成的功能。',
 
-
-    'success' => array(
+    'success' => [
         'create'    => '用户创建成功',
         'update'    => '用户更新成功。',
         'update_bulk'    => '用户更新成功。',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => '用户解除停用',
         'restored'  => '用户成功被恢复。',
         'import'    => '导入用户成功',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => '创建用户过程中出现了一些问题，请重试。',
         'update' => '更新用户过程中出现了一些问题，请重试。',
         'delete' => '删除用户过程中出现了一点儿问题，请重试。',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => '查询LDAP服务器失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'ldap_could_not_get_entries' => '从LDAP服务器获取信息条目失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'password_ldap' => '此帐户的密码由LDAP / Active Directory管理。请联系您的IT部门更改您的密码。',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => '文件删除失败，请重试',
         'success' => '文件已成功删除。',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => '文件上传失败，请重试。',
         'success' => '文件已上传成功。',
         'nofiles' => '您没有选择要上传的文件',
         'invalidfiles' => '一个或多个文件过大或文件类型不被允许。允许上传的文件类型有PNG，GIF，JPG，DOC，DOCX，PDF和TXT。',
-    ),
+    ],
 
-);
+];

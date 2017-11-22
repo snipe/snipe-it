@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Tid brukt på vedlikehold (i dager)',
         'notes'                  => 'Notater',
         'update'                 => 'Oppdater Vedlikehold',
-        'create'                 => 'Legg til Vedlikehold'
+        'create'                 => 'Legg til Vedlikehold',
     ];

@@ -1,22 +1,18 @@
 <?php
+
 use App\Models\Accessory;
 use App\Models\Category;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AccessoryTest extends BaseTest
 {
     /**
-    * @var \UnitTester
-    */
+     * @var \UnitTester
+     */
     protected $tester;
 
     public function testAccessoryAdd()
     {
         $accessory = factory(Accessory::class)->make();
-
 
         $values = [
             'name' => $accessory->name,
@@ -30,13 +26,13 @@ class AccessoryTest extends BaseTest
 
     public function testFailsEmptyValidation()
     {
-       // An Accessory requires a name, a qty, and a category_id.
+        // An Accessory requires a name, a qty, and a category_id.
         $a = Accessory::create();
         $this->assertFalse($a->isValid());
         $fields = [
             'name' => 'name',
             'qty' => 'qty',
-            'category_id' => 'category id'
+            'category_id' => 'category id',
         ];
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
@@ -52,12 +48,12 @@ class AccessoryTest extends BaseTest
         $a = factory(Accessory::class)->make([
             'name' => 'a',
             'qty' => 0,
-            'min_amt' => -1
+            'min_amt' => -1,
         ]);
         $fields = [
             'name' => 'name',
             'qty' => 'qty',
-            'min_amt' => 'min amt'
+            'min_amt' => 'min amt',
         ];
         $this->assertFalse($a->isValid());
         $errors = $a->getErrors();

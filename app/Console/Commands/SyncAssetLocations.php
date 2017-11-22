@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\CustomField;
 use Illuminate\Console\Command;
 use App\Models\Asset;
-use Illuminate\Support\Facades\Storage;
 
 class SyncAssetLocations extends Command
 {
@@ -40,7 +38,6 @@ class SyncAssetLocations extends Command
      */
     public function handle()
     {
-
         $output['info'] = [];
         $output['warn'] = [];
         $output['error'] = [];
@@ -53,96 +50,89 @@ class SyncAssetLocations extends Command
         $output['info'][] = 'There are '.$rtd_assets->count().' unassigned assets.';
 
         foreach ($rtd_assets as $rtd_asset) {
-             $output['info'][] = 'Setting Unassigned Asset ' . $rtd_asset->id . ' ('.$rtd_asset->asset_tag.') to  location: ' . $rtd_asset->rtd_location_id . " because their default location is: " . $rtd_asset->rtd_location_id;
-            $rtd_asset->location_id=$rtd_asset->rtd_location_id;
+            $output['info'][] = 'Setting Unassigned Asset '.$rtd_asset->id.' ('.$rtd_asset->asset_tag.') to  location: '.$rtd_asset->rtd_location_id.' because their default location is: '.$rtd_asset->rtd_location_id;
+            $rtd_asset->location_id = $rtd_asset->rtd_location_id;
             $rtd_asset->unsetEventDispatcher();
             $rtd_asset->save();
             $bar->advance();
         }
 
-        $assigned_user_assets = Asset::where('assigned_type','App\Models\User')->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
+        $assigned_user_assets = Asset::where('assigned_type', 'App\Models\User')->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
         $output['info'][] = 'There are '.$assigned_user_assets->count().' assets checked out to users.';
         foreach ($assigned_user_assets as $assigned_user_asset) {
             if (($assigned_user_asset->assignedTo) && ($assigned_user_asset->assignedTo->userLoc)) {
-                $new_location=$assigned_user_asset->assignedTo->userloc->id;
-                $output['info'][] ='Setting User Asset ' . $assigned_user_asset->id . ' ('.$assigned_user_asset->asset_tag.') to  ' . $assigned_user_asset->assignedTo->userLoc->name . ' which is id: ' . $new_location;
+                $new_location = $assigned_user_asset->assignedTo->userloc->id;
+                $output['info'][] = 'Setting User Asset '.$assigned_user_asset->id.' ('.$assigned_user_asset->asset_tag.') to  '.$assigned_user_asset->assignedTo->userLoc->name.' which is id: '.$new_location;
             } else {
-                $output['warn'][] ='Asset ' . $assigned_user_asset->id . ' ('.$assigned_user_asset->asset_tag.') still has no location! ';
+                $output['warn'][] = 'Asset '.$assigned_user_asset->id.' ('.$assigned_user_asset->asset_tag.') still has no location! ';
                 $new_location = $assigned_user_asset->rtd_location_id;
             }
-            $assigned_user_asset->location_id=$new_location;
+            $assigned_user_asset->location_id = $new_location;
             $assigned_user_asset->unsetEventDispatcher();
             $assigned_user_asset->save();
             $bar->advance();
-
         }
 
-        $assigned_location_assets = Asset::where('assigned_type','App\Models\Location')
+        $assigned_location_assets = Asset::where('assigned_type', 'App\Models\Location')
             ->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
         $output['info'][] = 'There are '.$assigned_location_assets->count().' assets checked out to locations.';
 
         foreach ($assigned_location_assets as $assigned_location_asset) {
             if ($assigned_location_asset->assignedTo) {
                 $assigned_location_asset->location_id = $assigned_location_asset->assignedTo->id;
-                $output['info'][] ='Setting Location Assigned  asset ' . $assigned_location_asset->id . ' ('.$assigned_location_asset->asset_tag.') that is checked out to '.$assigned_location_asset->assignedTo->name.' (#'.$assigned_location_asset->assignedTo->id.') to location: ' . $assigned_location_asset->assetLoc()->id;
+                $output['info'][] = 'Setting Location Assigned  asset '.$assigned_location_asset->id.' ('.$assigned_location_asset->asset_tag.') that is checked out to '.$assigned_location_asset->assignedTo->name.' (#'.$assigned_location_asset->assignedTo->id.') to location: '.$assigned_location_asset->assetLoc()->id;
                 $assigned_location_asset->unsetEventDispatcher();
                 $assigned_location_asset->save();
             } else {
-                $output['warn'][] ='Asset ' . $assigned_location_asset->id . ' ('.$assigned_location_asset->asset_tag.') did not return a valid associated location - perhaps it was deleted?';
+                $output['warn'][] = 'Asset '.$assigned_location_asset->id.' ('.$assigned_location_asset->asset_tag.') did not return a valid associated location - perhaps it was deleted?';
             }
             $bar->advance();
-
         }
 
-
         // Assigned to assets
-        $assigned_asset_assets = Asset::where('assigned_type','App\Models\Asset')
+        $assigned_asset_assets = Asset::where('assigned_type', 'App\Models\Asset')
             ->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
-            $output['info'][] ='Asset-assigned assets: '.$assigned_asset_assets->count();
+        $output['info'][] = 'Asset-assigned assets: '.$assigned_asset_assets->count();
 
-            foreach ($assigned_asset_assets as $assigned_asset_asset) {
+        foreach ($assigned_asset_assets as $assigned_asset_asset) {
 
                 // Check to make sure there aren't any invalid relationships
                 if ($assigned_asset_asset->assetLoc()) {
                     $assigned_asset_asset->location_id = $assigned_asset_asset->assetLoc()->id;
-                    $output['info'][] ='Setting Asset Assigned asset ' . $assigned_asset_asset->assetLoc()->id. ' ('.$assigned_asset_asset->asset_tag.') location to: ' . $assigned_asset_asset->assetLoc()->id;
+                    $output['info'][] = 'Setting Asset Assigned asset '.$assigned_asset_asset->assetLoc()->id.' ('.$assigned_asset_asset->asset_tag.') location to: '.$assigned_asset_asset->assetLoc()->id;
                     $assigned_asset_asset->unsetEventDispatcher();
                     $assigned_asset_asset->save();
                 } else {
-                    $output['warn'][] ='Asset Assigned asset ' . $assigned_asset_asset->assetLoc()->id. ' ('.$assigned_asset_asset->asset_tag.') does not seem to have a valid location';
+                    $output['warn'][] = 'Asset Assigned asset '.$assigned_asset_asset->assetLoc()->id.' ('.$assigned_asset_asset->asset_tag.') does not seem to have a valid location';
                 }
 
-                $bar->advance();
+            $bar->advance();
+        }
 
-            }
-
-        $unlocated_assets = Asset::whereNull("location_id")->whereNull('deleted_at')->get();
-        $output['info'][] ='Assets still without a location: '.$unlocated_assets->count();
-        foreach($unlocated_assets as $unlocated_asset) {
-            $output['warn'][] ='Asset: '.$unlocated_asset->id.' still has no location. ';
+        $unlocated_assets = Asset::whereNull('location_id')->whereNull('deleted_at')->get();
+        $output['info'][] = 'Assets still without a location: '.$unlocated_assets->count();
+        foreach ($unlocated_assets as $unlocated_asset) {
+            $output['warn'][] = 'Asset: '.$unlocated_asset->id.' still has no location. ';
             $bar->advance();
         }
 
         $bar->finish();
         $this->info("\n");
 
-
-        if (($this->option('output')=='all') || ($this->option('output')=='info')) {
+        if (($this->option('output') == 'all') || ($this->option('output') == 'info')) {
             foreach ($output['info'] as $key => $output_text) {
                 $this->info($output_text);
             }
         }
-        if (($this->option('output')=='all') || ($this->option('output')=='warn')) {
+        if (($this->option('output') == 'all') || ($this->option('output') == 'warn')) {
             foreach ($output['warn'] as $key => $output_text) {
                 $this->warn($output_text);
             }
         }
-        if (($this->option('output')=='all') || ($this->option('output')=='error')) {
+        if (($this->option('output') == 'all') || ($this->option('output') == 'error')) {
             foreach ($output['error'] as $key => $output_text) {
                 $this->error($output_text);
             }
         }
-
-
     }
 }

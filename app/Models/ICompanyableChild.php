@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 interface ICompanyableChild

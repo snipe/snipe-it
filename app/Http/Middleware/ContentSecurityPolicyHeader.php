@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -14,8 +15,9 @@ class ContentSecurityPolicyHeader
      */
     public function handle($request, Closure $next)
     {
-        if ((config('app.debug')=='true')  || (config('app.enable_csp')!='true')) {
+        if ((config('app.debug') == 'true') || (config('app.enable_csp') != 'true')) {
             $response = $next($request);
+
             return $response;
         }
 
@@ -26,10 +28,11 @@ class ContentSecurityPolicyHeader
         $policy[] = "object-src 'none'";
         $policy[] = "font-src 'self' data:";
         $policy[] = "img-src 'self' data: gravatar.com";
-        $policy = join(';', $policy);
+        $policy = implode(';', $policy);
 
         $response = $next($request);
         $response->headers->set('Content-Security-Policy', $policy);
+
         return $response;
     }
 }

@@ -1,15 +1,12 @@
 <?php
+
 use App\Models\Statuslabel;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class StatuslabelTest extends BaseTest
 {
     /**
-    * @var \UnitTester
-    */
+     * @var \UnitTester
+     */
     protected $tester;
 
     public function testRTDStatuslabelAdd()

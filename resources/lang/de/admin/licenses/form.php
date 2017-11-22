@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Asset',
     'checkin'           => 'Zurücknehmen',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'E-Mail des Lizenzerwerbers',
     'to_name'           => 'Name des Lizenzerwerbers',
     'update'            => 'Lizenz aktualisieren',
-    'checkout_help'     => 'Du musst eine Lizenz an einen Gegenstand oder eine Person herausgeben. Du kannst beides auswählen, allerdings muss der Besitzer des Gegenstands mit der Person übereinstimmen an die du den Gegenstand herausgibst.'
-);
+    'checkout_help'     => 'Du musst eine Lizenz an einen Gegenstand oder eine Person herausgeben. Du kannst beides auswählen, allerdings muss der Besitzer des Gegenstands mit der Person übereinstimmen an die du den Gegenstand herausgibst.',
+];

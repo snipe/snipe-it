@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> 'Akce',
-    'action' 		=> 'Akce',
-    'by'      		=> 'Vytvořil',
-    'item' 			=> 'Položka',
+    'actions'        => 'Akce',
+    'action'        => 'Akce',
+    'by'              => 'Vytvořil',
+    'item'            => 'Položka',
 
-);
+];

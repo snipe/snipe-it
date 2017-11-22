@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Vartotojas svetainėje atšaukė elemento užklausą',
     'a_user_requested' => 'Vartotojas paprašė elemento svetainėje',
     'accessory_name' => 'Aksesuaro pavadinimas:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Sveiki :vardas',
     'welcome_to' => 'Sveiki atvykę į: internetą!',
     'your_credentials' => 'Jūsų Snipe-IT įgaliojimai',
-);
+];

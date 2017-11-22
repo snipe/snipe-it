@@ -1,57 +1,52 @@
 <?php
 
-return array(
+return [
 
-    'field' => array(
+    'field' => [
         'invalid'   => 'Det fältet existerar inte.',
         'already_added'   => 'Fält som redan lagts till',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Fältet skapades inte, var vänlig försök igen.',
             'success' => 'Fält skapat framgångsrikt.',
-            'assoc_success' => 'Fält med framgång tillfogas till fältet.'
-        ),
+            'assoc_success' => 'Fält med framgång tillfogas till fältet.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Fältet uppdaterades inte, var vänlig försök igen',
-            'success' => 'Fältet uppdateras framgångsrikt.'
-        ),
+            'success' => 'Fältet uppdateras framgångsrikt.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Är du säker på att du vill radera det här fältet?',
+        'delete' => [
+            'confirm'    => 'Är du säker på att du vill radera det här fältet?',
             'error'   => 'Det gick inte att ta bort fältet. Var god försök igen.',
             'success' => 'Fältet raderades framgångsrikt.',
             'in_use'   => 'Fältet är fortfarande i bruk.',
-        )
+        ],
 
-    ),
+    ],
 
-    'fieldset' => array(
+    'fieldset' => [
 
         'does_not_exist' => 'Fieldset existerar inte',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Fieldset skapades inte, försök igen.',
-            'success' => 'Fältet skapades framgångsrikt.'
-        ),
+            'success' => 'Fältet skapades framgångsrikt.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Fieldset uppdaterades inte, försök igen',
-            'success' => 'Fältet uppdateras framgångsrikt.'
-        ),
+            'success' => 'Fältet uppdateras framgångsrikt.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Är du säker på att du vill radera den här fältet?',
+        'delete' => [
+            'confirm'    => 'Är du säker på att du vill radera den här fältet?',
             'error'   => 'Det gick inte att ta bort fältet. Var god försök igen.',
             'success' => 'Fältet raderades framgångsrikt.',
             'in_use'   => 'Fieldset är fortfarande i bruk.',
-        )
+        ],
 
-    ),
+    ],
 
-
-
-
-
-
-);
+];

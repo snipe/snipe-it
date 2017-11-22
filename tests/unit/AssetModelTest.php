@@ -1,10 +1,7 @@
 <?php
+
 use App\Models\Asset;
 use App\Models\AssetModel;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
 
 class AssetModelTest extends BaseTest
 {
@@ -35,7 +32,7 @@ class AssetModelTest extends BaseTest
         $fields = [
             'name' => 'name',
             'manufacturer_id' => 'manufacturer id',
-            'category_id' => 'category id'
+            'category_id' => 'category id',
         ];
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
@@ -49,7 +46,7 @@ class AssetModelTest extends BaseTest
         $am->eol = '';
         $this->assertTrue($am->eol === 0);
         $am->eol = '4';
-        $this->assertTrue($am->eol==4);
+        $this->assertTrue($am->eol == 4);
     }
 
     public function testAnAssetModelContainsAssets()
@@ -58,7 +55,7 @@ class AssetModelTest extends BaseTest
         $asset = factory(Asset::class)->create([
             'model_id' => $assetmodel->id,
         ]);
-        $this->assertEquals(1,$assetmodel->assets()->count());
+        $this->assertEquals(1, $assetmodel->assets()->count());
     }
 
     public function testAnAssetModelHasACategory()

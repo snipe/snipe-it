@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Lösenord måste vara sex tecken och matcha lösenordsbekräftelsen.",
+    'password' => 'Lösenord måste vara sex tecken och matcha lösenordsbekräftelsen.',
 
-    "user"     => "Användarnamnet eller e-postadressen är felaktigt",
+    'user'     => 'Användarnamnet eller e-postadressen är felaktigt',
 
-    "token"    => "Stafetten för lösenordsåterställningen är felaktig.",
+    'token'    => 'Stafetten för lösenordsåterställningen är felaktig.',
 
-    "sent" => "Om en matchande e-postadress har hittats, så har en lösenordspåminnelse skickats!",
+    'sent' => 'Om en matchande e-postadress har hittats, så har en lösenordspåminnelse skickats!',
 
-);
+];

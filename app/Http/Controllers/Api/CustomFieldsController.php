@@ -11,27 +11,27 @@ use Illuminate\Http\Request;
 class CustomFieldsController extends Controller
 {
     /**
-     * Reorder the custom fields within a fieldset
+     * Reorder the custom fields within a fieldset.
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @param  int  $id
      * @since [v3.0]
      * @return Array
      */
-
     public function index()
     {
         $this->authorize('index', CustomFields::class);
         $fields = CustomField::get();
 
         $total = count($fields);
+
         return (new CustomFieldsTransformer)->transformCustomFields($fields, $total);
     }
     public function postReorder(Request $request, $id)
     {
         $fieldset = CustomFieldset::find($id);
-        $fields = array();
-        $order_array = array();
+        $fields = [];
+        $order_array = [];
 
         $items = $request->input('item');
 
@@ -44,9 +44,7 @@ class CustomFieldsController extends Controller
         }
 
         return $fieldset->fields()->sync($fields);
-
     }
-
 
     /**
      * Delete a custom field.
@@ -59,13 +57,12 @@ class CustomFieldsController extends Controller
     {
         $field = CustomField::findOrFail($field_id);
 
-        if ($field->fieldset->count() >0) {
+        if ($field->fieldset->count() > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Field is in use.'));
         }
-        
+
         $field->delete();
+
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/custom_fields/message.field.delete.success')));
-
     }
-
 }

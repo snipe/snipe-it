@@ -1,57 +1,52 @@
 <?php
 
-return array(
+return [
 
-    'field' => array(
+    'field' => [
         'invalid'   => 'Ce champ n\'existe pas.',
         'already_added'   => 'Le champ a déjà été ajouté',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Le champ n\'a pas été créé, veuillez réessayer.',
             'success' => 'Le champ a bien été créé.',
-            'assoc_success' => 'Le champ a bien été ajouté au fieldset.'
-        ),
+            'assoc_success' => 'Le champ a bien été ajouté au fieldset.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Le champ n\'a pas été actualisé, veuillez réessayer',
-            'success' => 'Le champ a bien été actualisé.'
-        ),
+            'success' => 'Le champ a bien été actualisé.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Êtes-vous sûr de vouloir supprimer ce champ ?',
+        'delete' => [
+            'confirm'    => 'Êtes-vous sûr de vouloir supprimer ce champ ?',
             'error'   => 'Un problème a eu lien pendant la suppression du champ. Veuillez réessayer.',
             'success' => 'Le champ a bien été supprimé.',
             'in_use'   => 'Le champ est actuellement en utilisation.',
-        )
+        ],
 
-    ),
+    ],
 
-    'fieldset' => array(
+    'fieldset' => [
 
         'does_not_exist' => 'Fieldset n\'existe pas',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Le fieldset n\'a pas pur être créé, veuillez réessayer.',
-            'success' => 'Le Fieldset a bien été créé.'
-        ),
+            'success' => 'Le Fieldset a bien été créé.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Le fieldset n\'a pas été actualisé, veuillez réessayer',
-            'success' => 'Le fieldset a bien été actualisé.'
-        ),
+            'success' => 'Le fieldset a bien été actualisé.',
+        ],
 
-        'delete' => array(
-            'confirm'   	=> 'Êtes-vous sûr de vouloir supprimer ce fieldset ?',
+        'delete' => [
+            'confirm'    => 'Êtes-vous sûr de vouloir supprimer ce fieldset ?',
             'error'   => 'Un problème a eu lien pendant la suppression du fieldset. Veuillez réessayer.',
             'success' => 'Le fieldset a bien été supprimé.',
             'in_use'   => 'Le fieldset est actuellement utilisé.',
-        )
+        ],
 
-    ),
+    ],
 
-
-
-
-
-
-);
+];

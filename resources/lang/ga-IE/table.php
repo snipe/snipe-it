@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	=> 'Gníomhartha',
-    'action' 		=> 'Gníomh',
-    'by'      		=> 'De réir',
-    'item' 			=> 'Mír',
+    'actions'        => 'Gníomhartha',
+    'action'        => 'Gníomh',
+    'by'              => 'De réir',
+    'item'            => 'Mír',
 
-);
+];

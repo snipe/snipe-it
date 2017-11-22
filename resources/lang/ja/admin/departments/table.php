@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => '部署名',
@@ -8,4 +8,4 @@ return array(
     'location'                  => '設置場所',
     'create'                    => '部署の作成',
     'update'                    => '部署の更新',
-    );
+    ];

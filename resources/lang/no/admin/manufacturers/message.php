@@ -1,24 +1,24 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Produsent eksisterer ikke.',
-    'assoc_users'	 => 'Denne produsenten er tilknyttet minst en modell og kan ikke slettes. Oppdatèr modellen(e) til ikke å bruke denne produsenten, og prøv igjen. ',
+    'assoc_users'     => 'Denne produsenten er tilknyttet minst en modell og kan ikke slettes. Oppdatèr modellen(e) til ikke å bruke denne produsenten, og prøv igjen. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Produsent ble ikke opprettet. Prøv igjen.',
-        'success' => 'Opprettelse av produsent vellykket.'
-    ),
+        'success' => 'Opprettelse av produsent vellykket.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Produsent ble ikke oppdatert. Prøv igjen',
-        'success' => 'Oppdatering av produsent vellykket.'
-    ),
+        'success' => 'Oppdatering av produsent vellykket.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Er du sikker på at du vil slette denne produsenten?',
         'error'   => 'Det oppstod et problem under sletting av produsenten. Prøv igjen.',
-        'success' => 'Sletting av produsenten var vellykket.'
-    )
+        'success' => 'Sletting av produsenten var vellykket.',
+    ],
 
-);
+];

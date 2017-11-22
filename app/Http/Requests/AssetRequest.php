@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use App\Models\AssetModel;
 use Session;
 
@@ -38,9 +37,9 @@ class AssetRequest extends Request
             'status'          => 'integer|nullable',
             'asset_tag'       => 'required',
             'purchase_cost'   => 'numeric|nullable',
-            "assigned_user"   => 'sometimes:required_without_all:assigned_asset,assigned_location',
-            "assigned_asset"   => 'sometimes:required_without_all:assigned_user,assigned_location',
-            "assigned_location"   => 'sometimes:required_without_all:assigned_user,assigned_asset',
+            'assigned_user'   => 'sometimes:required_without_all:assigned_asset,assigned_location',
+            'assigned_asset'   => 'sometimes:required_without_all:assigned_user,assigned_location',
+            'assigned_location'   => 'sometimes:required_without_all:assigned_user,assigned_asset',
         ];
 
         $model = AssetModel::find($this->request->get('model_id'));
@@ -49,9 +48,7 @@ class AssetRequest extends Request
             $rules += $model->fieldset->validation_rules();
         }
 
-
         return $rules;
-
     }
 
     public function response(array $errors)
@@ -59,6 +56,7 @@ class AssetRequest extends Request
         $this->session()->flash('errors', Session::get('errors', new \Illuminate\Support\ViewErrorBag)
             ->put('default', new \Illuminate\Support\MessageBag($errors)));
         \Input::flash();
+
         return parent::response($errors);
     }
 }

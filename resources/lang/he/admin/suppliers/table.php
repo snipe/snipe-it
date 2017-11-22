@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'על הספקים',
     'about_suppliers_text'  => 'הספקים משמשים כדי לעקוב אחר המקור של פריטים',
     'address'               => 'כתובת הספק',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'הצג נכסים עבור',
     'zip'                   => 'מיקוד',
 
-);
+];

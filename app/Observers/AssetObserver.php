@@ -17,23 +17,18 @@ class AssetObserver
      */
     public function updating(Asset $asset)
     {
-
-
         if ((isset($asset->getOriginal()['assigned_to'])) && ($asset->getAttributes()['assigned_to'] == $asset->getOriginal()['assigned_to'])
             && ($asset->getAttributes()['next_audit_date'] == $asset->getOriginal()['next_audit_date'])
             && ($asset->getAttributes()['last_checkout'] == $asset->getOriginal()['last_checkout'])
-            && ($asset->getAttributes()['status_id'] == $asset->getOriginal()['status_id']))
-        {
+            && ($asset->getAttributes()['status_id'] == $asset->getOriginal()['status_id'])) {
             $logAction = new Actionlog();
             $logAction->item_type = Asset::class;
             $logAction->item_id = $asset->id;
-            $logAction->created_at =  date("Y-m-d H:i:s");
+            $logAction->created_at = date('Y-m-d H:i:s');
             $logAction->user_id = Auth::id();
             $logAction->logaction('update');
         }
-
     }
-
 
     /**
      * Listen to the Asset created event, and increment 
@@ -52,10 +47,9 @@ class AssetObserver
         $logAction = new Actionlog();
         $logAction->item_type = Asset::class;
         $logAction->item_id = $asset->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
+        $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('create');
-
     }
 
     /**
@@ -69,7 +63,7 @@ class AssetObserver
         $logAction = new Actionlog();
         $logAction->item_type = Asset::class;
         $logAction->item_id = $asset->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
+        $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }

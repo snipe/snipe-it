@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute on jo käytössä.',
     'uploaded'             => 'Attribuutti ei onnistunut lataamaan.',
     'url'                  => ':attribute muotoilu on virheellinen.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Attribuutin kenttä sisältää merkin, jota ei sallita.",
-        "email_array"      => "Yksi tai useampi sähköpostiosoite on virheellinen.",
-        "hashed_pass"      => "Nykyinen salasanasi on virheellinen",
+        'alpha_space' => 'Attribuutin kenttä sisältää merkin, jota ei sallita.',
+        'email_array'      => 'Yksi tai useampi sähköpostiosoite on virheellinen.',
+        'hashed_pass'      => 'Nykyinen salasanasi on virheellinen',
         'dumbpwd'          => 'Salasana on liian yleinen.',
-        "statuslabel_type" => "Sinun on valittava kelvollinen tilamerkintyyppi",
+        'statuslabel_type' => 'Sinun on valittava kelvollinen tilamerkintyyppi',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

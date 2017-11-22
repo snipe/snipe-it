@@ -13,7 +13,7 @@ class CreateStatusLabels extends Migration
     {
         Schema::create('status_labels', function ($table) {
             $table->increments('id');
-            $table->string('name',100)->nullable();
+            $table->string('name', 100)->nullable();
             $table->integer('user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -30,5 +30,4 @@ class CreateStatusLabels extends Migration
     {
         Schema::drop('status_labels');
     }
-
 }

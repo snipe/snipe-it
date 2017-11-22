@@ -34,7 +34,6 @@ class AddImagesUploadsToLocationsManufacturersEtc extends Migration
         Schema::table('manufacturers', function (Blueprint $table) {
             $table->string('image')->nullable()->default(null);
         });
-
     }
 
     /**
@@ -65,7 +64,5 @@ class AddImagesUploadsToLocationsManufacturersEtc extends Migration
         Schema::table('manufacturers', function (Blueprint $table) {
             $table->dropColumn('image');
         });
-
-
     }
 }

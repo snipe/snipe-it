@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Location;
@@ -8,25 +9,24 @@ use App\Helpers\Helper;
 
 class LocationsTransformer
 {
-
     public function transformLocations(Collection $locations, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($locations as $location) {
             $array[] = self::transformLocation($location);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
     public function transformLocation(Location $location = null)
     {
         if ($location) {
-
             $children_arr = [];
-            foreach($location->childLocations as $child) {
+            foreach ($location->childLocations as $child) {
                 $children_arr[] = [
                     'id' => (int) $child->id,
-                    'name' => $child->name
+                    'name' => $child->name,
                 ];
             }
 
@@ -47,10 +47,9 @@ class LocationsTransformer
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
                 'parent' => ($location->parent) ? [
                     'id' => (int) $location->parent->id,
-                    'name'=> e($location->parent->name)
+                    'name' => e($location->parent->name),
                 ] : null,
                 'manager' => ($location->manager) ? (new UsersTransformer)->transformUser($location->manager) : null,
-
 
                 'children' => $children_arr,
             ];
@@ -64,10 +63,5 @@ class LocationsTransformer
 
             return $array;
         }
-
-
     }
-
-
-
 }

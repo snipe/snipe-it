@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Người dùng đã hủy bỏ một khoản mục yêu cầu trên trang web',
     'a_user_requested' => 'Người dùng đã yêu cầu một mục trên trang web',
     'accessory_name' => 'Tên Phụ Kiện:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Chào mừng: tên',
     'welcome_to' => 'Chào mừng đến với: web!',
     'your_credentials' => 'Thông tin về Snipe-IT của bạn',
-);
+];

@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Izinsuku',
         'notes'                  => 'Amanothi',
         'update'                 => 'Ukubuyekeza',
-        'create'                 => 'Dala'
+        'create'                 => 'Dala',
     ];

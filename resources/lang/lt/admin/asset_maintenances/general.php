@@ -7,5 +7,5 @@
         'view'               => 'Peržiūrėti detalią įrangos priežiūrą',
         'repair'             => 'Remontas',
         'maintenance'        => 'Priežiūra',
-        'upgrade'            => 'Atnaujinti'
+        'upgrade'            => 'Atnaujinti',
     ];

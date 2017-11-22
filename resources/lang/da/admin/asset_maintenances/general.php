@@ -7,5 +7,5 @@
         'view'               => 'Se aktiv vedligeholdelse detaljer',
         'repair'             => 'Reparér',
         'maintenance'        => 'Vedligeholdelse',
-        'upgrade'            => 'Opgradér'
+        'upgrade'            => 'Opgradér',
     ];

@@ -2,22 +2,18 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
- * Class LocationPresenter
- * @package App\Presenters
+ * Class LocationPresenter.
  */
 class LocationPresenter extends Presenter
 {
-
     /**
-     * Link to this locations name
+     * Link to this locations name.
      * @return string
      */
     public function nameUrl()
     {
-        return (string)link_to_route('locations.show', $this->name, $this->id);
+        return (string) link_to_route('locations.show', $this->name, $this->id);
     }
 
     /**
@@ -42,8 +38,9 @@ class LocationPresenter extends Presenter
     {
         return '<i class="fa fa-globe"></i>';
     }
-    
-    public function fullName() {
+
+    public function fullName()
+    {
         return $this->name;
     }
 }

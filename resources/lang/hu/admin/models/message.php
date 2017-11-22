@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Modell nem létezik.',
-    'assoc_users'	 => 'Ez a modell jelenleg társított egy vagy több eszközhöz, és nem törölhető. Legyen szíves törölje az eszközt, és próbálja meg ismét a modell törlését. ',
+    'assoc_users'     => 'Ez a modell jelenleg társított egy vagy több eszközhöz, és nem törölhető. Legyen szíves törölje az eszközt, és próbálja meg ismét a modell törlését. ',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'A model nem lett létrehozva. Próbálkozz újra.',
         'success' => 'A modell sikeresen létrehozva.',
         'duplicate_set' => 'Már létezik ilyen nevű eszközmodell, gyártó és modellszám.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'A modell nem frissült, próbálkozzon újra',
-        'success' => 'A modell sikeresen frissült.'
-    ),
+        'success' => 'A modell sikeresen frissült.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Biztos benne, hogy törli ezt az eszközmodellt?',
         'error'   => 'A modell törlését okozta. Kérlek próbáld újra.',
-        'success' => 'A modell sikeresen törölve lett.'
-    ),
+        'success' => 'A modell sikeresen törölve lett.',
+    ],
 
-    'restore' => array(
-        'error'   		=> 'A modell nem állt helyre, próbálkozzon újra',
-        'success' 		=> 'A modell sikeresen visszaállt.'
-    ),
+    'restore' => [
+        'error'        => 'A modell nem állt helyre, próbálkozzon újra',
+        'success'        => 'A modell sikeresen visszaállt.',
+    ],
 
-    'bulkedit' => array(
-        'error'   		=> 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
-        'success' 		=> 'Modellek frissítve.'
-    ),
+    'bulkedit' => [
+        'error'        => 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
+        'success'        => 'Modellek frissítve.',
+    ],
 
-);
+];

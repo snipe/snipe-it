@@ -7,5 +7,5 @@
         'view'               => 'Näytä laitteen huoltotiedot',
         'repair'             => 'Korjaus',
         'maintenance'        => 'Huoltotila',
-        'upgrade'            => 'Päivitä'
+        'upgrade'            => 'Päivitä',
     ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Użytkownik anulował zapotrzebowanie na sprzęt na stronie www',
     'a_user_requested' => 'Użytkownik zamówił pozycję na stronie internetowej',
     'accessory_name' => 'Nazwa sprzętu:',
@@ -69,4 +69,4 @@ return array(
     'welcome' => 'Witaj :name',
     'welcome_to' => 'Witamy na :web!',
     'your_credentials' => 'Twoje poświadczenia :web',
-);
+];

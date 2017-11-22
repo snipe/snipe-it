@@ -1,10 +1,8 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\Asset;
-use App\Models\SnipeModel;
-use App\Models\User;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +15,7 @@ class Location extends SnipeModel
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
-    protected $rules = array(
+    protected $rules = [
       'name'        => 'required|min:2|max:255|unique_undeleted',
       'city'        => 'min:3|max:255|nullable',
       'country'     => 'min:2|max:2|nullable',
@@ -25,19 +23,18 @@ class Location extends SnipeModel
       'address2'        => 'max:80|nullable',
       'zip'         => 'min:3|max:10|nullable',
       // 'manager_id'  => 'exists:users'
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
-
 
     /**
      * The attributes that are mass assignable.
@@ -56,7 +53,7 @@ class Location extends SnipeModel
     {
         return $this->hasMany('\App\Models\Asset', 'location_id')
             ->whereHas('assetstatus', function ($query) {
-                    $query->where('status_labels.deployable', '=', 1)
+                $query->where('status_labels.deployable', '=', 1)
                         ->orWhere('status_labels.pending', '=', 1)
                         ->orWhere('status_labels.archived', '=', 0);
             });
@@ -80,7 +77,7 @@ class Location extends SnipeModel
 
     public function parent()
     {
-        return $this->belongsTo('\App\Models\Location', 'parent_id','id');
+        return $this->belongsTo('\App\Models\Location', 'parent_id', 'id');
     }
 
     public function manager()
@@ -106,35 +103,30 @@ class Location extends SnipeModel
 
     public static function getLocationHierarchy($locations, $parent_id = null)
     {
-
-
-        $op = array();
+        $op = [];
 
         foreach ($locations as $location) {
-
             if ($location['parent_id'] == $parent_id) {
                 $op[$location['id']] =
-                    array(
+                    [
                         'name' => $location['name'],
-                        'parent_id' => $location['parent_id']
-                    );
+                        'parent_id' => $location['parent_id'],
+                    ];
 
                 // Using recursion
-                $children =  Location::getLocationHierarchy($locations, $location['id']);
+                $children = self::getLocationHierarchy($locations, $location['id']);
                 if ($children) {
                     $op[$location['id']]['children'] = $children;
                 }
-
             }
-
         }
+
         return $op;
     }
 
-
     public static function flattenLocationsArray($location_options_array = null)
     {
-        $location_options = array();
+        $location_options = [];
         foreach ($location_options_array as $id => $value) {
 
             // get the top level key value
@@ -142,33 +134,29 @@ class Location extends SnipeModel
 
                 // If there is a key named children, it has child locations and we have to walk it
             if (array_key_exists('children', $value)) {
-
                 foreach ($value['children'] as $child_id => $child_location_array) {
-                    $child_location_options = Location::flattenLocationsArray($value['children']);
+                    $child_location_options = self::flattenLocationsArray($value['children']);
 
                     foreach ($child_location_options as $child_id => $child_name) {
                         $location_options[$child_id] = '--'.$child_name;
                     }
                 }
-
             }
-
         }
 
         return $location_options;
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to search on text.
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeTextsearch($query, $search)
     {
-
         return $query->where('name', 'LIKE', "%$search%")
           ->orWhere('address', 'LIKE', "%$search%")
           ->orWhere('city', 'LIKE', "%$search%")
@@ -187,21 +175,19 @@ class Location extends SnipeModel
                     $query->whereRaw("parent_id IN (select id from locations where name LIKE '%".$search."%') ");
                 });
           });
-
     }
 
-
     /**
-    * Query builder scope to order on parent
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on parent.
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderParent($query, $order)
     {
-      // Left join here, or it will only return results with parents
+        // Left join here, or it will only return results with parents
         return $query->leftJoin('locations as parent_loc', 'locations.parent_id', '=', 'parent_loc.id')->orderBy('parent_loc.name', $order);
     }
 }

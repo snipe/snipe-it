@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Hasło musi mieć minimum 6 znaków i musi być potwierdzone.",
+    'password' => 'Hasło musi mieć minimum 6 znaków i musi być potwierdzone.',
 
-    "user"     => "Login lub e-mail jest niepoprawny",
+    'user'     => 'Login lub e-mail jest niepoprawny',
 
-    "token"    => "Token resetu hasła jest niepoprawny.",
+    'token'    => 'Token resetu hasła jest niepoprawny.',
 
-    "sent" => "Jeśli adres e-mail jest poprawny , przypomnienie hasła zostanie wysłane!",
+    'sent' => 'Jeśli adres e-mail jest poprawny , przypomnienie hasła zostanie wysłane!',
 
-);
+];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,10 +8,10 @@ use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
 {
-    protected $guarded=["id"];
+    protected $guarded = ['id'];
 
-    public $rules=[
-    "name" => "required|unique:custom_fieldsets"
+    public $rules = [
+    'name' => 'required|unique:custom_fieldsets',
     ];
 
     /**
@@ -18,20 +19,19 @@ class CustomFieldset extends Model
      * validation rules before attempting validation. If this property
      * is not set in the model it will default to true.
      *
-     * @var boolean
+     * @var bool
      */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
-    
 
     public function fields()
     {
-        return $this->belongsToMany('\App\Models\CustomField')->withPivot(["required","order"])->orderBy("pivot_order");
+        return $this->belongsToMany('\App\Models\CustomField')->withPivot(['required', 'order'])->orderBy('pivot_order');
     }
 
     public function models()
     {
-        return $this->hasMany('\App\Models\AssetModel', "fieldset_id");
+        return $this->hasMany('\App\Models\AssetModel', 'fieldset_id');
     }
 
     public function user()
@@ -41,18 +41,19 @@ class CustomFieldset extends Model
 
     public function validation_rules()
     {
-        $rules=[];
+        $rules = [];
         foreach ($this->fields as $field) {
             $rule = [];
 
-            if (($field->field_encrypted!='1') ||
-                  (($field->field_encrypted =='1')  && (Gate::allows('admin')) )) {
-                    $rule[] = ($field->pivot->required=='1') ? "required" : "nullable";
+            if (($field->field_encrypted != '1') ||
+                  (($field->field_encrypted == '1') && (Gate::allows('admin')))) {
+                $rule[] = ($field->pivot->required == '1') ? 'required' : 'nullable';
             }
 
             array_push($rule, $field->attributes['format']);
-            $rules[$field->db_column_name()]=$rule;
+            $rules[$field->db_column_name()] = $rule;
         }
+
         return $rules;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "A Password deve conter no mínimo 6 caracteres and corresponder à confirmação.",
+    'password' => 'A Password deve conter no mínimo 6 caracteres and corresponder à confirmação.',
 
-    "user"     => "Nome de utilizador ou email incorreto",
+    'user'     => 'Nome de utilizador ou email incorreto',
 
-    "token"    => "O token de restauro desta password é inválido.",
+    'token'    => 'O token de restauro desta password é inválido.',
 
-    "sent" => "Se foi encontrado um email correspondente, o alerta de password foi enviado!",
+    'sent' => 'Se foi encontrado um email correspondente, o alerta de password foi enviado!',
 
-);
+];

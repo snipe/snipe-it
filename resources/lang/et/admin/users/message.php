@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Oled selle vahendi edukalt vastu võtnud.',
     'declined'                  => 'Oled selle vahendi tagasi lükanud.',
-    'bulk_manager_warn'	        => 'Sinu kasutajad on edukalt muudetud, kuid sinu juhi-kirjet ei salvestatud sest juht, kelle valisid oli ka muudatavate kasutajate hulgas ning kasutaja ei või olla ise-enda juht. Palun vali oma kasutajad uuesti, jättes juhi kõrvale.',
+    'bulk_manager_warn'            => 'Sinu kasutajad on edukalt muudetud, kuid sinu juhi-kirjet ei salvestatud sest juht, kelle valisid oli ka muudatavate kasutajate hulgas ning kasutaja ei või olla ise-enda juht. Palun vali oma kasutajad uuesti, jättes juhi kõrvale.',
     'user_exists'               => 'Kasutaja on juba olemas!',
     'user_not_found'            => 'Kasutajat [:id] ei ole olemas.',
     'user_login_required'       => 'Login väli on kohustuslik',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => 'See kasutaja on kustutatud. Et kasutajat muuta või talle uusi vahendeid anda, pead ta esmalt taastama.',
     'ldap_not_configured'        => 'LDAP-i integreerimine pole selle installi jaoks konfigureeritud.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Kasutaja loomine õnnestus.',
         'update'    => 'Kasutaja uuendamine õnnestus.',
         'update_bulk'    => 'Kasutajate uuendamine õnnestus!',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => 'Kasutaja oli ebaõnnestunud.',
         'restored'  => 'Kasutaja taastamine õnnestus.',
         'import'    => 'Kasutajate importimine õnnestus.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Kasutaja loomisel tekkis probleem. Palun proovi uuesti.',
         'update' => 'Kasutaja uuendamisel tekkis probleem. Palun proovi uuesti.',
         'delete' => 'Kasutaja kustutamisel tekkis probleem. Palun proovi uuesti.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'LDAP-serverit ei õnnestunud otsida. Palun kontrollige oma LDAP-i serveri konfiguratsiooni LDAP-i konfiguratsioonifailis. <br>Viga LDAP serverist:',
         'ldap_could_not_get_entries' => 'LDAP-serverisse tehtud sissekandeid ei saanud. Palun kontrollige oma LDAP-i serveri konfiguratsiooni LDAP-i konfiguratsioonifailis. <br>Viga LDAP serverist:',
         'password_ldap' => 'Selle konto parooli haldab LDAP / Active Directory. Parooli muutmiseks võtke ühendust oma IT-osakonnaga.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Faili ei kustustatud. Palun proovi uuesti.',
         'success' => 'Fail kustutati.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Fail(e) ei laetud üles. Palun proovi uuesti.',
         'success' => 'Fail(id) laeti edukalt üles.',
         'nofiles' => 'Sa ei valinud üles laadimiseks ühtegi faili',
         'invalidfiles' => 'Üks või mitu sibu failidest on kas liigas uured või ei ole lubatud tüüpi. Lobatud tüübid on png, gif, jpg, doc, docx, pdf, ja txt.',
-    ),
+    ],
 
-);
+];

@@ -3,9 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Setting;
-use App\Models\SnipeModel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -44,29 +42,29 @@ class CheckoutNotification extends Notification
         }
         $item = $this->params['item'];
 
-        if (class_basename(get_class($this->params['item']))=='Asset') {
+        if (class_basename(get_class($this->params['item'])) == 'Asset') {
             if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
                 || (method_exists($item, 'getEula') && ($item->getEula()))
             ) {
                 $notifyBy[] = 'mail';
             }
         }
+
         return $notifyBy;
     }
 
     public function toSlack($notifiable)
     {
-
         return (new SlackMessage)
             ->success()
-            ->content(class_basename(get_class($this->params['item'])) . " Checked Out")
+            ->content(class_basename(get_class($this->params['item'])).' Checked Out')
             ->attachment(function ($attachment) use ($notifiable) {
                 $item = $this->params['item'];
                 $admin_user = $this->params['admin'];
                 $target = $this->params['target'];
                 $fields = [
                     'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-                    'By' => '<'.$admin_user->present()->viewUrl().'|'.$admin_user->present()->fullName().'>'
+                    'By' => '<'.$admin_user->present()->viewUrl().'|'.$admin_user->present()->fullName().'>',
                 ];
                 array_key_exists('note', $this->params) && $fields['Notes'] = $this->params['note'];
 
@@ -82,7 +80,7 @@ class CheckoutNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        if (class_basename(get_class($this->params['item']))=='Asset') {
+        if (class_basename(get_class($this->params['item'])) == 'Asset') {
 
             //TODO: Expand for non assets.
             $item = $this->params['item'];
@@ -112,10 +110,6 @@ class CheckoutNotification extends Notification
                     ->subject(trans('mail.Confirm_asset_delivery'));
             }
         }
-
-
-
-
     }
 
     /**

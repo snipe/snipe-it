@@ -11,14 +11,8 @@
 |
 */
 
-use App\Models\AssetModel;
-use App\Models\Category;
 use App\Models\Company;
-use App\Models\Location;
-use App\Models\Manufacturer;
-use App\Models\Statuslabel;
 use App\Models\Supplier;
-
 
 $factory->define(App\Models\Company::class, function (Faker\Generator $faker) {
     return [
@@ -45,7 +39,6 @@ $factory->define(App\Models\Component::class, function (Faker\Generator $faker) 
     ];
 });
 
-
 $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     return [
     'name' => $faker->city,
@@ -56,10 +49,9 @@ $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     'country' => $faker->countryCode,
     'currency' => $faker->currencyCode,
     'zip' => $faker->postcode,
-    'image' => rand(1,9).'.jpg',
+    'image' => rand(1, 9).'.jpg',
     ];
 });
-
 
 $factory->define(App\Models\Supplier::class, function (Faker\Generator $faker) {
     return [
@@ -75,7 +67,7 @@ $factory->define(App\Models\Supplier::class, function (Faker\Generator $faker) {
     'fax'   => $faker->phoneNumber,
     'email' => $faker->safeEmail,
     'url'   => $faker->url,
-    'notes' => $faker->text(255) // Supplier notes can be a max of 255 characters.
+    'notes' => $faker->text(255), // Supplier notes can be a max of 255 characters.
     ];
 });
 

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Sócmhainn',
     'checkin'           => 'Checkin',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Ceadúnaithe chuig R-phost',
     'to_name'           => 'Ainm Ceadúnaithe',
     'update'            => 'Ceadúnas Nuashonraithe',
-    'checkout_help'     => 'Ní mór duit ceadúnas a sheiceáil amach do shócmhainn chrua-earraí nó do dhuine. Is féidir leat an dá rogha a roghnú, ach ní mór d\'úinéir na sócmhainne a mheaitseáil leis an duine a bhfuil tú ag seiceáil ar an tsócmhainn.'
-);
+    'checkout_help'     => 'Ní mór duit ceadúnas a sheiceáil amach do shócmhainn chrua-earraí nó do dhuine. Is féidir leat an dá rogha a roghnú, ach ní mór d\'úinéir na sócmhainne a mheaitseáil leis an duine a bhfuil tú ag seiceáil ar an tsócmhainn.',
+];

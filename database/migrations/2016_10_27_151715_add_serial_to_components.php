@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddSerialToComponents extends Migration
@@ -15,7 +14,6 @@ class AddSerialToComponents extends Migration
         Schema::table('components', function ($table) {
             $table->string('serial_number')->nullable()->default(null);
         });
-
     }
 
     /**
@@ -28,6 +26,5 @@ class AddSerialToComponents extends Migration
         Schema::table('components', function ($table) {
             $table->dropColumn('serial_number');
         });
-
     }
 }

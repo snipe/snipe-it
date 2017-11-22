@@ -15,7 +15,7 @@ class AddSecurePasswordOptions extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->boolean('pwd_secure_uncommon')->default('0');
-            $table->string('pwd_secure_complexity')->nullable()->default(NULL);
+            $table->string('pwd_secure_complexity')->nullable()->default(null);
             $table->integer('pwd_secure_min')->default('8');
         });
     }

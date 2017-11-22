@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Ingoa Tari',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Wāhi',
     'create'                    => 'Waihanga Te Tari',
     'update'                    => 'Whakahou i te Tari',
-    );
+    ];

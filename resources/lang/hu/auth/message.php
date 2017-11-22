@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Már létezik ezzel az e-mail címmel felhasználó.',
     'account_not_found'      => 'A felhasználónév vagy a jelszó érvénytelen.',
@@ -9,29 +9,29 @@ return array(
     'account_banned'         => 'Ez a felhasználó ki van tiltva.',
     'throttle'               => 'Túl sok sikertelen bejelentkezési kísérlet. Kérjük, próbáld újra körül: perc perc (s).',
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Bejelentkezés közben probléma lépett fel, kérjük próbálja újra.',
         'success' => 'Sikeresen bejelentkezett.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Felhasználói fiók létrehozása közben probléma lépett fel, kérjük próbálja újra.',
         'success' => 'A felhasználói fiók sikeresen elkészült.',
-    ),
+    ],
 
-        'forgot-password' => array(
+        'forgot-password' => [
             'error'   => 'A jelszó visszaállító kód kiküldése közben probléma lépett fel, kérjük próbálja újra.',
             'success' => 'A jelszó visszaállító emailt sikeresen elküldtük.',
-        ),
+        ],
 
-        'forgot-password-confirm' => array(
+        'forgot-password-confirm' => [
             'error'   => 'Jelszó helyreállítás közben probléma lépett fel, kérjük próbálja újra.',
             'success' => 'A jelszavát sikeresen helyreállította.',
-        ),
+        ],
 
-    'activate' => array(
+    'activate' => [
         'error'   => 'A felhasználói fiók aktiválása közben probléma lépett fel, kérjük próbálja újra!',
         'success' => 'A felhasználói fiókot sikeresen aktiválta.',
-    ),
+    ],
 
-);
+];

@@ -33,7 +33,7 @@ class ForgotPasswordController extends Controller
 
     /**
      * Get the e-mail subject line to be used for the reset link email.
-     * Overriding method "getEmailSubject()" from trait "use ResetsPasswords"
+     * Overriding method "getEmailSubject()" from trait "use ResetsPasswords".
      * @return string
      */
     public function getEmailSubject()

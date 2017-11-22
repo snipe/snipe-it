@@ -53,17 +53,15 @@ class UsersController extends Controller
             'users.activated',
             'users.avatar',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
-            ->withCount('assets','licenses','accessories','consumables');
+        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables')
+            ->withCount('assets', 'licenses', 'accessories', 'consumables');
         $users = Company::scopeCompanyables($users);
-
 
         if ($request->has('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
 
-
-        if (($request->has('deleted')) && ($request->input('deleted')=='true')) {
+        if (($request->has('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->GetDeleted();
         }
 
@@ -74,13 +72,13 @@ class UsersController extends Controller
         if ($request->has('location_id')) {
             $users = $users->where('location_id', '=', $request->input('location_id'));
         }
-        
+
         if ($request->has('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
 
         if ($request->has('department_id')) {
-            $users = $users->where('users.department_id','=',$request->input('department_id'));
+            $users = $users->where('users.department_id', '=', $request->input('department_id'));
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -104,7 +102,7 @@ class UsersController extends Controller
                         'assets','accessories', 'consumables','licenses','groups','activated','created_at',
                         'two_factor_enrolled','two_factor_optin','last_login', 'assets_count', 'licenses_count',
                         'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip'
+                        'country', 'zip',
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -113,21 +111,19 @@ class UsersController extends Controller
         }
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
+
         return (new UsersTransformer)->transformUsers($users, $total);
     }
 
-
     /**
-     * Gets a paginated collection for the select2 menus
+     * Gets a paginated collection for the select2 menus.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
-
         $users = User::select(
             [
                 'users.id',
@@ -154,12 +150,12 @@ class UsersController extends Controller
 
         foreach ($users as $user) {
             $name_str = '';
-            if ($user->last_name!='') {
+            if ($user->last_name != '') {
                 $name_str .= e($user->last_name).', ';
             }
             $name_str .= e($user->first_name);
 
-            if ($user->employee_num!='') {
+            if ($user->employee_num != '') {
                 $name_str .= ' (#'.e($user->employee_num).')';
             }
 
@@ -168,10 +164,7 @@ class UsersController extends Controller
         }
 
         return (new SelectlistTransformer)->transformSelectlist($users);
-
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -191,6 +184,7 @@ class UsersController extends Controller
         if ($user->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.create')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
     }
 
@@ -205,9 +199,9 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $user = User::findOrFail($id);
+
         return (new UsersTransformer)->transformUser($user);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -257,7 +251,6 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $this->authorize('delete', $user);
 
-
         if ($user->assets()->count() > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete_has_assets')));
         }
@@ -265,6 +258,7 @@ class UsersController extends Controller
         if ($user->delete()) {
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));
     }
 
@@ -280,6 +274,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
+
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
 }

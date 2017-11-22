@@ -1,8 +1,7 @@
 <?php
+
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class BaseTest extends \Codeception\TestCase\Test
 {
@@ -15,7 +14,7 @@ class BaseTest extends \Codeception\TestCase\Test
 
     protected function signIn($user = null)
     {
-        if (!$user) {
+        if (! $user) {
             $user = factory(User::class)->states('superuser')->create();
         }
         Auth::login($user);

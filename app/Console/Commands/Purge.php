@@ -3,21 +3,18 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use DB;
-use \App\Models\Asset;
-use \App\Models\AssetModel;
-use \App\Models\Location;
-use \App\Models\Company;
-use \App\Models\License;
-use \App\Models\Accessory;
-use \App\Models\Component;
-use \App\Models\Consumable;
-use \App\Models\Category;
-use \App\Models\User;
-use \App\Models\Supplier;
-use \App\Models\Manufacturer;
-use \App\Models\Depreciation;
-use \App\Models\Statuslabel;
+use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Location;
+use App\Models\License;
+use App\Models\Accessory;
+use App\Models\Component;
+use App\Models\Consumable;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Supplier;
+use App\Models\Manufacturer;
+use App\Models\Statuslabel;
 
 class Purge extends Command
 {
@@ -53,10 +50,10 @@ class Purge extends Command
     public function handle()
     {
         $force = $this->option('force');
-        if (($this->confirm("\n****************************************************\nTHIS WILL PURGE ALL SOFT-DELETED ITEMS IN YOUR SYSTEM. \nThere is NO undo. This WILL permanently destroy \nALL of your deleted data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) ||  $force == 'true') {
+        if (($this->confirm("\n****************************************************\nTHIS WILL PURGE ALL SOFT-DELETED ITEMS IN YOUR SYSTEM. \nThere is NO undo. This WILL permanently destroy \nALL of your deleted data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) || $force == 'true') {
 
             /**
-             * Delete assets
+             * Delete assets.
              */
             $assets = Asset::whereNotNull('deleted_at')->withTrashed()->get();
             $assetcount = $assets->count();
@@ -83,9 +80,8 @@ class Purge extends Command
                 $location->forceDelete();
             }
 
-
             $accessories = Accessory::whereNotNull('deleted_at')->withTrashed()->get();
-            $accessory_assoc=0;
+            $accessory_assoc = 0;
             $this->info($accessories->count().' accessories purged.');
             foreach ($accessories as $accessory) {
                 $this->info('- Accessory "'.$accessory->name.'" deleted.');
@@ -95,7 +91,6 @@ class Purge extends Command
             }
             $this->info($accessory_assoc.' corresponding log records purged.');
 
-
             $consumables = Consumable::whereNotNull('deleted_at')->withTrashed()->get();
             $this->info($consumables->count().' consumables purged.');
             foreach ($consumables as $consumable) {
@@ -103,7 +98,6 @@ class Purge extends Command
                 $consumable->assetlog()->forceDelete();
                 $consumable->forceDelete();
             }
-
 
             $components = Component::whereNotNull('deleted_at')->withTrashed()->get();
             $this->info($components->count().' components purged.');
@@ -128,7 +122,6 @@ class Purge extends Command
                 $this->info('- Asset Model "'.$model->name.'" deleted.');
                 $model->forceDelete();
             }
-
 
             $categories = Category::whereNotNull('deleted_at')->withTrashed()->get();
             $this->info($categories->count().' categories purged.');
@@ -168,11 +161,8 @@ class Purge extends Command
                 $this->info('- Status Label "'.$status_label->name.'" deleted.');
                 $status_label->forceDelete();
             }
-
-
         } else {
             $this->info('Action canceled. Nothing was purged.');
         }
-
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Потребител е отменил заявка за елемент в уебсайта',
     'a_user_requested' => 'Потребител е направил заявка за елемент в уебсайта',
     'accessory_name' => 'Име на аксесоар:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'Добре дошли, :name',
     'welcome_to' => 'Добре дошли: уеб!',
     'your_credentials' => 'Вашите идентификационни данни за Snipe-IT',
-);
+];

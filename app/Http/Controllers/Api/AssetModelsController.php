@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Models\AssetModel;
@@ -9,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-
 
 /**
  * This class controls all actions related to asset models for
@@ -32,8 +32,8 @@ class AssetModelsController extends Controller
         $this->authorize('view', AssetModel::class);
         $allowed_columns = ['id','image','name','model_number','eol','notes','created_at','manufacturer'];
 
-        $assetmodels = AssetModel::select(['models.id','models.image','models.name','model_number','eol','models.notes','models.created_at','category_id','manufacturer_id','depreciation_id','fieldset_id', 'models.deleted_at'])
-            ->with('category','depreciation', 'manufacturer','fieldset')
+        $assetmodels = AssetModel::select(['models.id', 'models.image', 'models.name', 'model_number', 'eol', 'models.notes', 'models.created_at', 'category_id', 'manufacturer_id', 'depreciation_id', 'fieldset_id', 'models.deleted_at'])
+            ->with('category', 'depreciation', 'manufacturer', 'fieldset')
             ->withCount('assets');
 
         if ($request->has('search')) {
@@ -43,7 +43,6 @@ class AssetModelsController extends Controller
         if ($request->has('status')) {
             $assetmodels->onlyTrashed();
         }
-
 
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
@@ -59,12 +58,11 @@ class AssetModelsController extends Controller
                 break;
         }
 
-
         $total = $assetmodels->count();
         $assetmodels = $assetmodels->skip($offset)->take($limit)->get();
+
         return (new AssetModelsTransformer)->transformAssetModels($assetmodels, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -83,8 +81,8 @@ class AssetModelsController extends Controller
         if ($assetmodel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/models/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $assetmodel->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $assetmodel->getErrors()));
     }
 
     /**
@@ -99,11 +97,12 @@ class AssetModelsController extends Controller
     {
         $this->authorize('view', AssetModel::class);
         $assetmodel = AssetModel::withCount('assets')->findOrFail($id);
+
         return (new AssetModelsTransformer)->transformAssetModel($assetmodel);
     }
 
     /**
-     * Display the specified resource's assets
+     * Display the specified resource's assets.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
@@ -113,10 +112,10 @@ class AssetModelsController extends Controller
     public function assets($id)
     {
         $this->authorize('view', AssetModel::class);
-        $assets = Asset::where('model_id','=',$id)->get();
+        $assets = Asset::where('model_id', '=', $id)->get();
+
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -132,7 +131,7 @@ class AssetModelsController extends Controller
         $this->authorize('edit', AssetModel::class);
         $assetmodel = AssetModel::findOrFail($id);
         $assetmodel->fill($request->all());
-        $assetmodel->fieldset_id = $request->get("custom_fieldset_id");
+        $assetmodel->fieldset_id = $request->get('custom_fieldset_id');
 
         if ($assetmodel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/assetmodels/message.update.success')));
@@ -160,7 +159,7 @@ class AssetModelsController extends Controller
         }
 
         if ($assetmodel->image) {
-            try  {
+            try {
                 unlink(public_path().'/uploads/models/'.$assetmodel->image);
             } catch (\Exception $e) {
                 \Log::error($e);
@@ -168,28 +167,25 @@ class AssetModelsController extends Controller
         }
 
         $assetmodel->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/assetmodels/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/assetmodels/message.delete.success')));
     }
 
     /**
-     * Gets a paginated collection for the select2 menus
+     * Gets a paginated collection for the select2 menus.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
-
         $assetmodels = AssetModel::select([
             'models.id',
             'models.name',
             'models.image',
             'models.model_number',
         ])->with('manufacturer');
-
 
         if ($request->has('search')) {
             $assetmodels = $assetmodels->where('models.name', 'LIKE', '%'.$request->get('search').'%')
@@ -204,5 +200,4 @@ class AssetModelsController extends Controller
 
         return (new SelectlistTransformer)->transformSelectlist($assetmodels);
     }
-
 }

@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Du har akseptert eiendelen.',
     'declined'                  => 'Du har avvist eiendelen.',
-    'bulk_manager_warn'	        => 'Brukerne er oppdatert, men lederen ble ikke lagret fordi lederen du valgte også i brukerlisten for redigering og brukere kan ikke være sin egen leder. Velg brukerne igjen, unntatt lederen.',
+    'bulk_manager_warn'            => 'Brukerne er oppdatert, men lederen ble ikke lagret fordi lederen du valgte også i brukerlisten for redigering og brukere kan ikke være sin egen leder. Velg brukerne igjen, unntatt lederen.',
     'user_exists'               => 'Bruker finnes allerede!',
     'user_not_found'            => 'Bruker [:id] finnes ikke.',
     'user_login_required'       => 'Login-feltet er påkrevd',
@@ -13,8 +13,7 @@ return array(
     'user_deleted_warning'      => 'Denne brukeren er slettet. Du vil må gjenopprette denne brukeren for å redigere, eller tildele nye eiendeler.',
     'ldap_not_configured'        => 'LDAP integrasjonen er ikke konfigurert i denne installasjonen.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Opprettelse av bruker vellykket.',
         'update'    => 'Oppdatering av bruker vellykket.',
         'update_bulk'    => 'Oppdatering av brukere vellykket!',
@@ -25,9 +24,9 @@ return array(
         'unsuspend' => 'Vellykket aktivering av bruker.',
         'restored'  => 'Vellykket gjenopprettelse av bruker.',
         'import'    => 'Vellykket import av brukere.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Det oppstod et problem under opprettelse av bruker. Prøv igjen.',
         'update' => 'Det oppstod et problem under oppdatering av bruker. Prøv igjen.',
         'delete' => 'Det oppstod et problem under sletting av bruker. Prøv igjen.',
@@ -42,18 +41,18 @@ return array(
         'ldap_could_not_search' => 'Kunne ikke utføre søk på LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
         'ldap_could_not_get_entries' => 'Fikk ingen oppføringer fra LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
         'password_ldap' => 'Passordet for denne kontoen administreres av LDAP/Active Directory. Kontakt IT-avdelingen for å endre passordet. ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
         'success' => 'Fil ble slettet.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
         'success' => 'Vellykket opplasting av fil(er).',
         'nofiles' => 'Du valgte ingen filer for opplasting',
         'invalidfiles' => 'En eller flere av filene dine er for store eller av en filtype som ikke er tillatt. Tillatte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
-    ),
+    ],
 
-);
+];

@@ -1,27 +1,26 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => '供應商不存在',
 
-
-    'create' => array(
+    'create' => [
         'error'   => '新增供應商失敗，請重試',
-        'success' => '新增供應商成功。'
-    ),
+        'success' => '新增供應商成功。',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => '更新供應商失敗，請重試',
-        'success' => '更新供應商成功。'
-    ),
+        'success' => '更新供應商成功。',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => '您確定要刪除此供應商嗎？',
         'error'   => '刪除供應商失敗，請重試',
         'success' => '刪除供應商成功。',
-        'assoc_assets'	 => '至少還有 :asset_count 個樣板與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
-        'assoc_licenses'	 => '至少還有 :licenses_count 個授權與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
-        'assoc_maintenances'	 => '至少還有 :asset_maintenances_count 個資產維護與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
-    )
+        'assoc_assets'     => '至少還有 :asset_count 個樣板與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
+        'assoc_licenses'     => '至少還有 :licenses_count 個授權與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
+        'assoc_maintenances'     => '至少還有 :asset_maintenances_count 個資產維護與此供應商關聯，目前不能被刪除，請檢查後重試。 ',
+    ],
 
-);
+];

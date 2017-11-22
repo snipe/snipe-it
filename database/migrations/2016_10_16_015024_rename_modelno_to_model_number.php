@@ -28,7 +28,6 @@ class RenameModelnoToModelNumber extends Migration
         Schema::table('models', function (Blueprint $table) {
             //
             $table->renameColumn('model_number', 'modelno');
-
         });
     }
 }

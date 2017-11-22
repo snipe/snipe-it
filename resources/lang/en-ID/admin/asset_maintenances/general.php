@@ -7,5 +7,5 @@
         'view'               => 'Tampilkan Detail Pemeliharaan Aet',
         'repair'             => 'Perbaikan',
         'maintenance'        => 'Pemeliharaan',
-        'upgrade'            => 'Perbarui'
+        'upgrade'            => 'Perbarui',
     ];

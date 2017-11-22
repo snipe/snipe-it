@@ -4,5 +4,5 @@
         'title'         => 'Vedlikehold av eiendel',
         'asset_name'    => 'Navn',
         'is_warranty'   => 'Garanti',
-        'dl_csv'        => 'Last ned CSV'
+        'dl_csv'        => 'Last ned CSV',
     ];

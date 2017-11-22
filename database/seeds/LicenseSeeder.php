@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Seeder;
 use App\Models\License;
 use App\Models\LicenseSeat;

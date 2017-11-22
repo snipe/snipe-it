@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Het veld :attribute is reeds in gebruik.',
     'uploaded'             => 'Uploaden van :attribute is mislukt.',
     'url'                  => 'Het formaat van :attribute is ongeldig.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => ":attribute veld bevat een karakter wat niet is toegestaan.",
-        "email_array"      => "één of meer e-mail adressen kloppen niet.",
-        "hashed_pass"      => "Je huidige wachtwoord is incorrect",
+        'alpha_space' => ':attribute veld bevat een karakter wat niet is toegestaan.',
+        'email_array'      => 'één of meer e-mail adressen kloppen niet.',
+        'hashed_pass'      => 'Je huidige wachtwoord is incorrect',
         'dumbpwd'          => 'Dat wachtwoord is te veelvoorkomend.',
-        "statuslabel_type" => "Selecteer een valide status label",
+        'statuslabel_type' => 'Selecteer een valide status label',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\CheckoutRequest;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 // $asset->requests
@@ -11,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 // $asset->whereRequestedBy($user)
 trait Requestable
 {
-
     public function requests()
     {
         return $this->morphMany(CheckoutRequest::class, 'requestable');

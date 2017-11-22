@@ -15,7 +15,6 @@ use Input;
 use Redirect;
 use Log;
 use View;
-use PragmaRX\Google2FA\Google2FA;
 
 /**
  * This controller handles authentication for the user, including local
@@ -26,7 +25,6 @@ use PragmaRX\Google2FA\Google2FA;
  */
 class LoginController extends Controller
 {
-
     use ThrottlesLogins;
 
     // This tells the auth controller to use username instead of email address
@@ -46,55 +44,54 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
+        $this->middleware('guest', ['except' => ['logout', 'postTwoFactorAuth', 'getTwoFactorAuth', 'getTwoFactorEnroll']]);
         \Session::put('backUrl', \URL::previous());
     }
 
-
-    function showLoginForm()
+    public function showLoginForm()
     {
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
+
         return view('auth.login');
     }
 
-
     private function login_via_ldap(Request $request)
     {
-        LOG::debug("Binding user to LDAP.");
+        LOG::debug('Binding user to LDAP.');
         $ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
-        if (!$ldap_user) {
-            LOG::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
-            throw new \Exception("Could not find user in LDAP directory");
+        if (! $ldap_user) {
+            LOG::debug('LDAP user '.$request->input('username').' not found in LDAP or could not bind');
+            throw new \Exception('Could not find user in LDAP directory');
         } else {
-            LOG::debug("LDAP user ".$request->input('username')." successfully bound to LDAP");
+            LOG::debug('LDAP user '.$request->input('username').' successfully bound to LDAP');
         }
 
         // Check if the user already exists in the database and was imported via LDAP
         $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->first();
-        LOG::debug("Local auth lookup complete");
+        LOG::debug('Local auth lookup complete');
 
         // The user does not exist in the database. Try to get them from LDAP.
         // If user does not exist and authenticates successfully with LDAP we
         // will create it on the fly and sign in with default permissions
-        if (!$user) {
-            LOG::debug("Local user ".Input::get('username')." does not exist");
-            LOG::debug("Creating local user ".Input::get('username'));
+        if (! $user) {
+            LOG::debug('Local user '.Input::get('username').' does not exist');
+            LOG::debug('Creating local user '.Input::get('username'));
 
             if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
-                LOG::debug("Local user created.");
+                LOG::debug('Local user created.');
             } else {
-                LOG::debug("Could not create local user.");
-                throw new \Exception("Could not create local user");
+                LOG::debug('Could not create local user.');
+                throw new \Exception('Could not create local user');
             }
             // If the user exists and they were imported from LDAP already
         } else {
-            LOG::debug("Local user ".$request->input('username')." exists in database. Updating existing user against LDAP.");
+            LOG::debug('Local user '.$request->input('username').' exists in database. Updating existing user against LDAP.');
 
             $ldap_attr = Ldap::parseAndMapLdapAttributes($ldap_user);
 
-            if (Setting::getSettings()->ldap_pw_sync=='1') {
+            if (Setting::getSettings()->ldap_pw_sync == '1') {
                 $user->password = bcrypt($request->input('password'));
             }
 
@@ -105,7 +102,6 @@ class LoginController extends Controller
         } // End if(!user)
         return $user;
     }
-
 
     /**
      * Account sign in form processing.
@@ -125,14 +121,15 @@ class LoginController extends Controller
 
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
+
             return $this->sendLockoutResponse($request);
         }
 
         $user = null;
 
         // Should we even check for LDAP users?
-        if (Setting::getSettings()->ldap_enabled=='1') {
-            LOG::debug("LDAP is enabled.");
+        if (Setting::getSettings()->ldap_enabled == '1') {
+            LOG::debug('LDAP is enabled.');
             try {
                 $user = $this->login_via_ldap($request);
                 Auth::login($user, true);
@@ -140,25 +137,24 @@ class LoginController extends Controller
             // If the user was unable to login via LDAP, log the error and let them fall through to
             // local authentication.
             } catch (\Exception $e) {
-                LOG::error("There was an error authenticating the LDAP user: ".$e->getMessage());
+                LOG::error('There was an error authenticating the LDAP user: '.$e->getMessage());
             }
         }
 
         // If the user wasn't authenticated via LDAP, skip to local auth
-        if (!$user) {
-            LOG::debug("Authenticating user against database.");
+        if (! $user) {
+            LOG::debug('Authenticating user against database.');
           // Try to log the user in
-            if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
-
-                if (!$lockedOut) {
+            if (! Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+                if (! $lockedOut) {
                     $this->incrementLoginAttempts($request);
                 }
 
-                LOG::debug("Local authentication failed.");
+                LOG::debug('Local authentication failed.');
+
                 return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
             } else {
-
-                  $this->clearLoginAttempts($request);
+                $this->clearLoginAttempts($request);
             }
         }
 
@@ -171,27 +167,24 @@ class LoginController extends Controller
         return redirect()->intended()->with('success', trans('auth/message.signin.success'));
     }
 
-
     /**
-     * Two factor enrollment page
+     * Two factor enrollment page.
      *
      * @return Redirect
      */
     public function getTwoFactorEnroll()
     {
-
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be logged in.');
         }
 
         $user = Auth::user();
         $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
 
-        if ($user->two_factor_secret=='') {
+        if ($user->two_factor_secret == '') {
             $user->two_factor_secret = $google2fa->generateSecretKey(32);
             $user->save();
         }
-
 
         $google2fa_url = $google2fa->getQRCodeGoogleUrl(
             urlencode(Setting::getSettings()->site_name),
@@ -200,12 +193,10 @@ class LoginController extends Controller
         );
 
         return view('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
-
     }
 
-
     /**
-     * Two factor code form page
+     * Two factor code form page.
      *
      * @return Redirect
      */
@@ -215,14 +206,13 @@ class LoginController extends Controller
     }
 
     /**
-     * Two factor code submission
+     * Two factor code submission.
      *
      * @return Redirect
      */
     public function postTwoFactorAuth(Request $request)
     {
-
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be logged in.');
         }
 
@@ -235,14 +225,12 @@ class LoginController extends Controller
             $user->two_factor_enrolled = 1;
             $user->save();
             $request->session()->put('2fa_authed', 'true');
+
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
         return redirect()->route('two-factor')->with('error', 'Invalid two-factor code');
-
-
     }
-
 
     /**
      * Logout page.
@@ -253,9 +241,9 @@ class LoginController extends Controller
     {
         $request->session()->forget('2fa_authed');
         Auth::logout();
+
         return redirect()->route('login')->with('success', 'You have successfully logged out!');
     }
-
 
     /**
      * Get a validator for an incoming registration request.
@@ -271,18 +259,17 @@ class LoginController extends Controller
         ]);
     }
 
-
     public function username()
     {
         return 'username';
     }
 
     /**
-    * Redirect the user after determining they are locked out.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\RedirectResponse
-    */
+     * Redirect the user after determining they are locked out.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     protected function sendLockoutResponse(Request $request)
     {
         $seconds = $this->limiter()->availableIn(
@@ -293,18 +280,17 @@ class LoginController extends Controller
 
         $message = \Lang::get('auth/message.throttle', ['minutes' => $minutes]);
 
-            return redirect()->back()
+        return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([$this->username() => $message]);
     }
 
-
     /**
-    * Override the lockout time and duration
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\RedirectResponse
-    */
+     * Override the lockout time and duration.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     protected function hasTooManyLoginAttempts(Request $request)
     {
         $lockoutTime = config('auth.throttle.lockout_duration');
@@ -317,13 +303,13 @@ class LoginController extends Controller
         );
     }
 
-    public function legacyAuthRedirect() {
+    public function legacyAuthRedirect()
+    {
         return redirect()->route('login');
     }
 
     public function redirectTo()
     {
-        return Session::get('backUrl') ? Session::get('backUrl') :   $this->redirectTo;
+        return Session::get('backUrl') ? Session::get('backUrl') : $this->redirectTo;
     }
-
 }

@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'error'   => 'Anda harus memilik minimal SATU.'
-);
+return [
+    'error'   => 'Anda harus memilik minimal SATU.',
+];

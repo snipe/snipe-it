@@ -6,7 +6,6 @@ use App\Models\Setting;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class AuditNotification extends Notification
 {
@@ -45,15 +44,14 @@ class AuditNotification extends Notification
 
     public function toSlack($notifiable)
     {
-
         return (new SlackMessage)
             ->success()
-            ->content(class_basename(get_class($this->params['item'])) . " Audited")
+            ->content(class_basename(get_class($this->params['item'])).' Audited')
             ->attachment(function ($attachment) use ($notifiable) {
                 $item = $this->params['item'];
                 $admin_user = $this->params['admin'];
                 $fields = [
-                    'By' => '<'.$admin_user->present()->viewUrl().'|'.$admin_user->present()->fullName().'>'
+                    'By' => '<'.$admin_user->present()->viewUrl().'|'.$admin_user->present()->fullName().'>',
                 ];
                 array_key_exists('note', $this->params) && $fields['Notes'] = $this->params['note'];
                 array_key_exists('location', $this->params) && $fields['Location'] = $this->params['location'];
@@ -70,7 +68,6 @@ class AuditNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'משתמש ביטל בקשת פריט באתר',
     'a_user_requested' => 'משתמש ביקש פריט באתר',
     'accessory_name' => 'שם אביזר:',
@@ -68,4 +68,4 @@ return array(
     'welcome' => 'ברוכים הבאים: שם',
     'welcome_to' => 'ברוכים הבאים ל: אינטרנט!',
     'your_credentials' => 'שלך Snipe- IT אישורים',
-);
+];

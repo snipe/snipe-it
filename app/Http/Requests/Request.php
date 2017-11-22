@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
-use App\Helpers\Helper;
 
+use App\Helpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
 
 abstract class Request extends FormRequest
@@ -16,8 +16,7 @@ abstract class Request extends FormRequest
 
     public function response(array $errors)
     {
-        if ($this->ajax() || $this->wantsJson())
-        {
+        if ($this->ajax() || $this->wantsJson()) {
             return Helper::formatStandardApiResponse('error', null, $errors);
         }
 

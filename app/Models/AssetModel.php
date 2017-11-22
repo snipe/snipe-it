@@ -1,8 +1,7 @@
 <?php
+
 namespace App\Models;
 
-use App\Models\Requestable;
-use App\Models\SnipeModel;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,21 +23,21 @@ class AssetModel extends SnipeModel
     protected $hidden = ['user_id','deleted_at'];
 
     // Declare the rules for the model validation
-    protected $rules = array(
+    protected $rules = [
         'name'          => 'required|min:1|max:255',
         'model_number'      => 'max:255|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
         'eol'   => 'integer:min:0|max:240|nullable',
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -88,18 +87,17 @@ class AssetModel extends SnipeModel
     }
 
     /**
-    * -----------------------------------------------
-    * BEGIN QUERY SCOPES
-    * -----------------------------------------------
-    **/
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------.
+     **/
 
     /**
-    * Query builder scope for Deleted assets
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-
+     * Query builder scope for Deleted assets.
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeDeleted($query)
     {
         return $query->whereNotNull('deleted_at');
@@ -107,7 +105,7 @@ class AssetModel extends SnipeModel
 
     /**
      * scopeInCategory
-     * Get all models that are in the array of category ids
+     * Get all models that are in the array of category ids.
      *
      * @param       $query
      * @param array $categoryIdListing
@@ -118,7 +116,6 @@ class AssetModel extends SnipeModel
      */
     public function scopeInCategory($query, array $categoryIdListing)
     {
-
         return $query->whereIn('category_id', $categoryIdListing);
     }
 
@@ -134,21 +131,19 @@ class AssetModel extends SnipeModel
      */
     public function scopeRequestableModels($query)
     {
-
         return $query->where('requestable', '1');
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to search on text.
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeTextSearch($query, $search)
     {
-
         return $query->where('models.name', 'LIKE', "%$search%")
             ->orWhere('model_number', 'LIKE', "%$search%")
             ->orWhere(function ($query) use ($search) {
@@ -166,11 +161,10 @@ class AssetModel extends SnipeModel
                     $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
                 });
             });
-
     }
 
     /**
-     * Query builder scope to order on manufacturer
+     * Query builder scope to order on manufacturer.
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $order       Order
@@ -181,6 +175,4 @@ class AssetModel extends SnipeModel
     {
         return $query->leftJoin('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
-
-
 }

@@ -1,15 +1,15 @@
 <?php
 
-return array(
-    'actions' 	                => 'Actiuni',
-    'add'    	                => 'Adauga',
+return [
+    'actions'                    => 'Actiuni',
+    'add'                        => 'Adauga',
     'cancel'                    => 'Anuleaza',
-    'checkin_and_delete'  	    => 'Verificați & Ștergeți Utilizatorul',
-    'delete'  	                => 'Sterge',
-    'edit'    	                => 'Editeaza',
-    'restore' 	                => 'Restaureaza',
+    'checkin_and_delete'        => 'Verificați & Ștergeți Utilizatorul',
+    'delete'                    => 'Sterge',
+    'edit'                        => 'Editeaza',
+    'restore'                    => 'Restaureaza',
     'request'                   => 'Cerere',
-    'submit'  	                => 'Trimiteti',
+    'submit'                    => 'Trimiteti',
     'upload'                    => 'Incarca',
-	'select_file'				=> 'Selectați Fișier ...',
-);
+    'select_file'                => 'Selectați Fișier ...',
+];

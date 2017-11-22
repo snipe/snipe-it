@@ -33,20 +33,18 @@ class ConsumablesController extends Controller
         }
 
         if ($request->has('company_id')) {
-            $consumables->where('company_id','=',$request->input('company_id'));
+            $consumables->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->has('manufacturer_id')) {
-            $consumables->where('manufacturer_id','=',$request->input('manufacturer_id'));
+            $consumables->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
-
 
         $offset = request('offset', 0);
         $limit = request('limit', 50);
         $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','company','category','model_number', 'item_no', 'manufacturer','location','qty','image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-
 
         switch ($sort) {
             case 'category':
@@ -66,14 +64,11 @@ class ConsumablesController extends Controller
                 break;
         }
 
-
-
         $total = $consumables->count();
         $consumables = $consumables->skip($offset)->take($limit)->get();
+
         return (new ConsumablesTransformer)->transformConsumables($consumables, $total);
-
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -92,6 +87,7 @@ class ConsumablesController extends Controller
         if ($consumable->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $consumable, trans('admin/consumables/message.create.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $consumable->getErrors()));
     }
 
@@ -106,9 +102,9 @@ class ConsumablesController extends Controller
     {
         $this->authorize('view', Consumable::class);
         $consumable = Consumable::findOrFail($id);
+
         return (new ConsumablesTransformer)->transformConsumable($consumable);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -146,46 +142,47 @@ class ConsumablesController extends Controller
         $consumable = Consumable::findOrFail($id);
         $this->authorize('delete', $consumable);
         $consumable->delete();
+
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/consumables/message.delete.success')));
     }
 
-        /**
-    * Returns a JSON response containing details on the users associated with this consumable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getView() method that returns the form.
-    * @since [v1.0]
-    * @param int $consumableId
-    * @return array
+    /**
+     * Returns a JSON response containing details on the users associated with this consumable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ConsumablesController::getView() method that returns the form.
+     * @since [v1.0]
+     * @param int $consumableId
+     * @return array
      */
     public function getDataView($consumableId)
     {
-        $consumable = Consumable::with(array('consumableAssignments'=>
-        function ($query) {
+        $consumable = Consumable::with(['consumableAssignments' => function ($query) {
             $query->orderBy('created_at', 'DESC');
         },
-        'consumableAssignments.admin'=> function ($query) {
+        'consumableAssignments.admin' => function ($query) {
         },
-        'consumableAssignments.user'=> function ($query) {
+        'consumableAssignments.user' => function ($query) {
         },
-        ))->find($consumableId);
+        ])->find($consumableId);
 
-        if (!Company::isCurrentUserHasAccess($consumable)) {
+        if (! Company::isCurrentUserHasAccess($consumable)) {
             return ['total' => 0, 'rows' => []];
         }
         $this->authorize('view', Consumable::class);
-        $rows = array();
+        $rows = [];
 
         foreach ($consumable->consumableAssignments as $consumable_assignment) {
             $rows[] = [
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
-                'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
+                'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s') == '-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
                 'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
             ];
         }
 
         $consumableCount = $consumable->users->count();
-        $data = array('total' => $consumableCount, 'rows' => $rows);
+        $data = ['total' => $consumableCount, 'rows' => $rows];
+
         return $data;
     }
 }

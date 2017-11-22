@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute schon benutzt.',
     'uploaded'             => ':attribute konnte nicht hochgeladen werden.',
     'url'                  => ':attribute Format ist ungültig.',
-    "unique_undeleted"     => "Die Variable :attribute muss eindeutig sein.",
+    'unique_undeleted'     => 'Die Variable :attribute muss eindeutig sein.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Das :attribute Feld enthält ein nicht erlaubtes Zeichen.",
-        "email_array"      => "Eine oder mehrere Email Adressen sind ungültig.",
-        "hashed_pass"      => "Ihr derzeitiges Passwort ist nicht korrekt",
+        'alpha_space' => 'Das :attribute Feld enthält ein nicht erlaubtes Zeichen.',
+        'email_array'      => 'Eine oder mehrere Email Adressen sind ungültig.',
+        'hashed_pass'      => 'Ihr derzeitiges Passwort ist nicht korrekt',
         'dumbpwd'          => 'Das Passwort ist zu gebräuchlich.',
-        "statuslabel_type" => "Sie müssen einen gültigen Statuslabel-Typ auswählen",
+        'statuslabel_type' => 'Sie müssen einen gültigen Statuslabel-Typ auswählen',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

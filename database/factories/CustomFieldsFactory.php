@@ -12,6 +12,6 @@ $factory->define(App\Models\CustomField::class, function (Faker\Generator $faker
 $factory->define(App\Models\CustomFieldset::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->catchPhrase,
-        'user_id' => Auth::id()
+        'user_id' => Auth::id(),
     ];
 });

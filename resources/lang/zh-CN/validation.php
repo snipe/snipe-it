@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute 已经被采用',
     'uploaded'             => '：属性无法上传。',
     'url'                  => ':attribute 格式无效',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "：属性字段包含不允许的字符。",
-        "email_array"      => "一个或多个电子邮件地址无效。",
-        "hashed_pass"      => "您当前的密码不正确",
+        'alpha_space' => '：属性字段包含不允许的字符。',
+        'email_array'      => '一个或多个电子邮件地址无效。',
+        'hashed_pass'      => '您当前的密码不正确',
         'dumbpwd'          => '那个密码太常见了。',
-        "statuslabel_type" => "您必须选择有效的状态标签类型",
+        'statuslabel_type' => '您必须选择有效的状态标签类型',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];
