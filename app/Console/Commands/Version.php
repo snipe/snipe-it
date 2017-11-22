@@ -99,11 +99,8 @@ class Version extends Command
 
         // Determine if this tag already exists, or if this prior to a release
         $this->line('Running: git rev-parse master '.$current_app_version);
-        $pre_release = trim(shell_exec('git rev-parse '.$use_branch.' '.$current_app_version.' 2>&1 1> /dev/null'));
+        // $pre_release = trim(shell_exec('git rev-parse '.$use_branch.' '.$current_app_version.' 2>&1 1> /dev/null'));
 
-        echo 'Output:'.$pre_release;
-
-        
         if ($use_branch=='develop') {
             $app_version = $app_version.'-pre';
         }
@@ -119,8 +116,7 @@ class Version extends Command
                 'prerelease_version' => $prerelease_version,
                 'hash_version' => $hash_version,
                 'full_hash' => $full_hash_version,
-                'branch' => $git_branch,
-                'next_version' => ''),
+                'branch' => $git_branch),
             true
         );
         
