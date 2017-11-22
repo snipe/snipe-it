@@ -288,9 +288,6 @@ class LicensesController extends Controller
             }
 
 
-            $assigned_to = $request->input('assigned_to');
-            $asset_id = $request->input('asset_id');
-
             $this->authorize('checkout', $licenseSeat);
 
             // Declare the rules for the form validation
@@ -309,51 +306,33 @@ class LicensesController extends Controller
             }
             $target = null;
 
-            // If assigned to a user
-            if ($assigned_to!='') {
-                // Check if the user exists
-                if (is_null($target = User::find($assigned_to))) {
-                    // Redirect to the asset management page with error
-                    return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
-                }
-            }
 
-            // If assigned to an asset
-            if ($asset_id!='') {
-                if (is_null($target = Asset::find($asset_id))) {
-                    // Redirect to the asset management page with error
+            // This item is checked out to a an asset
+            if (request('checkout_to_type')=='asset') {
+                if (is_null($target = Asset::find(request('asset_id')))) {
                     return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
                 }
-
-                if (($request->has('assigned_to')) && ($request->has('asset_id'))) {
-                    return redirect()->back()->withInput()->with('error', trans('admin/licenses/message.select_asset_or_person'));
-                }
-            }
-
-
-            if ($request->input('asset_id') == '') {
-                $licenseSeat->asset_id = null;
-            } else {
                 $licenseSeat->asset_id = $request->input('asset_id');
-            }
 
-            // Update the asset data
-            if ($request->input('assigned_to') == '') {
-                $licenseSeat->assigned_to =  null;
+                // Override asset's assigned user if available
+                if ($target->assigned_to!='') {
+                    $licenseSeat->assigned_to =  $target->assigned_to;
+                }
+
             } else {
-                $licenseSeat->assigned_to = $request->input('assigned_to');
+
+                // Fetch the target and set the license user
+                if (is_null($target = User::find(request('assigned_to')))) {
+                    return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
+                }
+                $licenseSeat->assigned_to = request('assigned_to');
             }
 
             $licenseSeat->user_id = Auth::user()->id;
 
-            // Was the asset updated?
+
             if ($licenseSeat->save()) {
                 $licenseSeat->logCheckout($request->input('note'), $target);
-
-                $data['license_id'] = $licenseSeat->license_id;
-                $data['note'] = $request->input('note');
-
-                // Redirect to the new asset page
                 return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
             }
 
