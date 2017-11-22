@@ -255,6 +255,8 @@ $(document).ready(function () {
         return datalist.text;
     }
 
+    // This handles the radio button selectors for the checkout-to-foo options
+    // on asset checkout and also on asset edit
     $(function() {
         $('input[name=checkout_to_type]').on("change",function () {
             var assignto_type = $('input[name=checkout_to_type]:checked').val();
