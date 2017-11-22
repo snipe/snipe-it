@@ -448,7 +448,7 @@
     }
 
     function assetCompanyObjFilterFormatter(value, row) {
-        if (row.company) {
+        if ((row) && (row.company)) {
             return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '"> ' + row.company.name + '</a>';
         }
     }
@@ -463,7 +463,7 @@
 
     function employeeNumFormatter(value, row) {
 
-        if ((row.assigned_to) && ((row.assigned_to.employee_number))) {
+        if ((row) && (row.assigned_to) && ((row.assigned_to.employee_number))) {
             return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '"> ' + row.assigned_to.employee_number + '</a>';
         }
     }
