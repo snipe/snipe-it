@@ -354,7 +354,18 @@
             // (for example, the locked icon for encrypted fields)
             var field_column_plain = field_column.replace(/<(?:.|\n)*?> ?/gm, '');
             if ((row.custom_fields) && (row.custom_fields[field_column_plain])) {
+
+                // If the field type needs special formatting, do that here
+                if ((row.custom_fields[field_column_plain].field_format) && (row.custom_fields[field_column_plain].value)) {
+                    if (row.custom_fields[field_column_plain].field_format=='URL') {
+                        return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
+                    } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
+                        return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
+                    }
+                }
+                console.log('NOT a URL!');
                 return row.custom_fields[field_column_plain].value;
+
             }
 
     }

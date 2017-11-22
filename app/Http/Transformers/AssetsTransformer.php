@@ -86,24 +86,21 @@ class AssetsTransformer
                     $decrypted = \App\Helpers\Helper::gracefulDecrypt($field,$asset->{$field->convertUnicodeDbSlug()});
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
- //                   $fields_array = [$field->convertUnicodeDbSlug() => $value];
-
-
                     $fields_array[$field->name] = [
                             'field' => $field->convertUnicodeDbSlug(),
-                            'value' => $value
+                            'value' => $value,
+                            'field_format' => $field->format,
                         ];
 
                 } else {
                     $fields_array[$field->name] = [
                         'field' => $field->convertUnicodeDbSlug(),
-                        'value' => $asset->{$field->convertUnicodeDbSlug()}
+                        'value' => $asset->{$field->convertUnicodeDbSlug()},
+                        'field_format' => $field->format,
                     ];
-                    //$fields_array = [$field->convertUnicodeDbSlug() => $asset->{$field->convertUnicodeDbSlug()}];
 
 
                 }
-                //array += $fields_array;
                 $array['custom_fields'] = $fields_array;
             }
         } else {

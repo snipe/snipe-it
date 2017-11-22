@@ -50,11 +50,9 @@ class ReportsController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 50);
         $total = $actionlogs->count();
-        $actionlogs = $actionlogs->orderBy($sort, $order);
-        $actionlogs = $actionlogs->skip($offset)->take($limit)->get();
-        return (new ActionlogsTransformer)->transformActionlogs($actionlogs, $total);
+        $actionlogs = $actionlogs->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 
-
+        return response()->json((new ActionlogsTransformer)->transformActionlogs($actionlogs, $total), 200, ['Content-Type' => 'application/json;charset=utf8'], JSON_UNESCAPED_UNICODE);
 
     }
 }

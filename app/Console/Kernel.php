@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\SendInventoryAlerts::class,
         Commands\SendExpectedCheckinAlerts::class,
         Commands\ObjectImportCommand::class,
-        Commands\Versioning::class,
+        Commands\Version::class,
         Commands\SystemBackup::class,
         Commands\DisableLDAP::class,
         Commands\Purge::class,

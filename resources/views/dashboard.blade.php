@@ -219,11 +219,15 @@
                                 id="table"
                                 data-height="440"
 
-                                data-url="{{ route('api.categories.index') }}">
+                                data-url="{{ route('api.categories.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
                             <thead>
                             <tr>
-                                <th class="col-sm-2" data-field="name" data-formatter="categoriesLinkFormatter">{{ trans('general.name') }}</th>
-                                <th class="col-sm-2" data-field="assets_count"><i class="fa fa-barcode"></i></th>
+                                <th class="col-sm-3" data-field="name" data-formatter="categoriesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
+                                <th class="col-sm-3" data-field="category_type" data-sortable="true">{{ trans('general.type') }}</th>
+                                <th class="col-sm-1" data-field="assets_count" data-sortable="true"><i class="fa fa-barcode"></i></th>
+                                <th class="col-sm-1" data-field="accessories_count" data-sortable="true"><i class="fa fa-keyboard-o"></i></th>
+                                <th class="col-sm-1" data-field="consumables_count" data-sortable="true"><i class="fa fa-tint"></i></th>
+                                <th class="col-sm-1" data-field="components_count" data-sortable="true"><i class="fa fa-hdd-o"></i></th>
                             </tr>
                             </thead>
                         </table>

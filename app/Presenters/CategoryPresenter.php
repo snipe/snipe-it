@@ -40,7 +40,7 @@ class CategoryPresenter extends Presenter
                 "visible" => true,
                 "formatter" => 'imageFormatter',
             ],[
-                "field" => "type",
+                "field" => "category_type",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.type'),
