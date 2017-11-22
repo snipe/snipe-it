@@ -111,9 +111,22 @@ class AssetsTransformer
             'checkout' => (bool) Gate::allows('checkout', Asset::class),
             'checkin' => (bool) Gate::allows('checkin', Asset::class),
             'clone' => Gate::allows('create', Asset::class) ? true : false,
+            'restore' => false,
             'update' => (bool) Gate::allows('update', Asset::class),
             'delete' => (bool) Gate::allows('delete', Asset::class),
         ];
+
+        if ($asset->deleted_at!='') {
+            $permissions_array['available_actions'] = [
+                'checkout' => true,
+                'checkin' => false,
+                'clone' => Gate::allows('create', Asset::class) ? true : false,
+                'restore' => Gate::allows('create', Asset::class) ? true : false,
+                'update' => false,
+                'delete' => false,
+            ];
+        }
+
 
         $array += $permissions_array;
         return $array;
