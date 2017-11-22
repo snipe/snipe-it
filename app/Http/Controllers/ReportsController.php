@@ -156,6 +156,7 @@ class ReportsController extends Controller
                     trans('admin/hardware/form.order'),
                     trans('general.supplier'),
                     trans('admin/hardware/table.checkoutto'),
+                    trans('general.type'),
                     trans('admin/hardware/table.checkout_date'),
                     trans('admin/hardware/table.location'),
                     trans('general.notes'),
@@ -166,6 +167,8 @@ class ReportsController extends Controller
                 fputcsv($handle, $headers);
 
                 foreach ($assets as $asset) {
+
+
                     // Add a new row with data
                     $values=[
                         ($asset->company) ? $asset->company->name : '',
@@ -175,12 +178,13 @@ class ReportsController extends Controller
                         ($asset->model->model_number) ? $asset->model->model_number : '',
                         ($asset->name) ? $asset->name : '',
                         ($asset->serial) ? $asset->serial : '',
-                        ($asset->assetstatus) ? e($asset->assetstatus->name) : '',
+                        ($asset->assetstatus) ? e($asset->present()->statusText) : '',
                         ($asset->purchase_date) ? e($asset->purchase_date) : '',
                         ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
                         ($asset->order_number) ? e($asset->order_number) : '',
                         ($asset->supplier) ? e($asset->supplier->name) : '',
-                        ($asset->assignedTo) ? e($asset->assignedTo->present()->name()) : '',
+                        ($asset->checkedOutToUser()) ? e($asset->assigned->getFullNameAttribute()) : ($asset->assigned ? e($asset->assigned->display_name) : ''),
+                        ($asset->checkedOutToUser()) ? 'user' : e($asset->assignedType()),
                         ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
                         ($asset->location) ? e($asset->location->name) : '',
                         ($asset->notes) ? e($asset->notes) : '',
