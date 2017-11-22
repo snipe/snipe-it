@@ -1238,8 +1238,9 @@ class AssetsController extends Controller
 
     public function audit($id)
     {
+        $settings = Setting::getSettings();
         $this->authorize('audit', Asset::class);
-        $dt = Carbon::now()->addMonths(12)->toDateString();
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
         $asset = Asset::findOrFail($id);
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
