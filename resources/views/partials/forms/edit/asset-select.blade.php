@@ -1,5 +1,5 @@
 <!-- Asset -->
-<div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
+<div id="assigned_asset" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7{{  ((isset($required) && ($required =='true'))) ?  ' required' : '' }}">
         <select class="js-data-ajax select2" data-endpoint="hardware" name="{{ $fieldname }}" style="width: 100%" id="assigned_asset_select"{{ (isset($multiple)) ? ' multiple="multiple"' : '' }}>
