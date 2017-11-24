@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         Commands\RecryptFromMcrypt::class,
         Commands\ResetDemoSettings::class,
         Commands\SyncAssetLocations::class,
+        Commands\RegenerateAssetTags::class,
     ];
 
     /**
