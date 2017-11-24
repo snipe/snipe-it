@@ -137,6 +137,58 @@ EOT;
         ]);
     }
 
+   public function testAssetModelNumber4359()
+    {
+        // As per bug #4359
+        // 1) Create model with blank model # and custom field.
+        // 2 ) Update custom fields with a csv not including model #
+        // 3 ) Not updated.  NULL vs. empty issue.
+        $csv = <<<'EOT'
+Name,Email,Username,item Name,Category,Model name,Manufacturer,Serial,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
+Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan
+EOT;
+
+        // Need to do this manually...
+            $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
+            $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
+            $customFieldSet->fields()->attach($customField, [
+                'required' => false,
+                'order' => 'asc']);
+
+            factory(App\Models\Category::class)->states('asset-laptop-category')->create([
+                'name' => 'quam'
+            ]);
+
+            factory(App\Models\Manufacturer::class)->states('apple')->create([
+                'name' => 'Linkbridge'
+            ]);
+
+
+            $am = factory(App\Models\AssetModel::class)->create([
+                'name' => 'massa id',
+                'fieldset_id' => $customFieldSet->id,
+                'category_id' => 1,
+                'manufacturer_id' => 1,
+                'model_number' => null
+            ]);
+
+        $this->import(new AssetImporter($csv));
+        $updatedCSV = <<<'EOT'
+Serial,Asset Tag,weight
+67433477,970882174-8,115
+EOT;
+        $importer = new AssetImporter($updatedCSV);
+        $importer->setUserId(1)
+             ->setUpdating(true)
+             ->setUsernameFormat('firstname.lastname')
+             ->import();
+
+        $this->tester->seeRecord('assets', [
+            'asset_tag' => '970882174-8',
+            '_snipeit_weight_2' => 115
+        ]);
+    }
+
     public function initializeCustomFields()
     {
             $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
