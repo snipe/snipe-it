@@ -24,7 +24,7 @@ class ImporterTest extends BaseTest
     public function testDefaultImportAssetWithCustomFields()
     {
         $csv = <<<'EOT'
-Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier,Weight
+Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier,Weight
 Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan,35
 EOT;
 
@@ -64,6 +64,7 @@ EOT;
         $this->tester->seeRecord('suppliers', [
             'name' => 'Blogspan'
         ]);
+
         $this->tester->seeRecord('assets', [
             'name' => 'eget nunc donec quis',
             'serial' => '27aa8378-b0f4-4289-84a4-405da95c6147',
@@ -79,14 +80,14 @@ EOT;
     public function testUpdateAssetIncludingCustomFields()
     {
         $csv = <<<'EOT'
-Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier,weight
+Name,Email,Username,item Name,Category,Model name,Manufacturer,Model Number,Serial,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier,weight
 Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan,95
 EOT;
 
         $this->initializeCustomFields();
         $this->import(new AssetImporter($csv));
         $updatedCSV = <<<'EOT'
-item Name,Category,Model name,Manufacturer,Model Number,Serial number,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
+item Name,Category,Model name,Manufacturer,Model Number,Serial,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
 A new name,some other category,Another Model,Linkbridge 32,356,67433477,970882174-8,New Location,I have no notes,2018-04-05,25.59,Another Company,Ready To Go,18,Not Creative
 EOT;
         $importer = new AssetImporter($updatedCSV);
@@ -136,6 +137,58 @@ EOT;
         ]);
     }
 
+   public function testAssetModelNumber4359()
+    {
+        // As per bug #4359
+        // 1) Create model with blank model # and custom field.
+        // 2 ) Update custom fields with a csv not including model #
+        // 3 ) Not updated.  NULL vs. empty issue.
+        $csv = <<<'EOT'
+Name,Email,Username,item Name,Category,Model name,Manufacturer,Serial,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
+Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan
+EOT;
+
+        // Need to do this manually...
+            $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
+            $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
+            $customFieldSet->fields()->attach($customField, [
+                'required' => false,
+                'order' => 'asc']);
+
+            factory(App\Models\Category::class)->states('asset-laptop-category')->create([
+                'name' => 'quam'
+            ]);
+
+            factory(App\Models\Manufacturer::class)->states('apple')->create([
+                'name' => 'Linkbridge'
+            ]);
+
+
+            $am = factory(App\Models\AssetModel::class)->create([
+                'name' => 'massa id',
+                'fieldset_id' => $customFieldSet->id,
+                'category_id' => 1,
+                'manufacturer_id' => 1,
+                'model_number' => null
+            ]);
+
+        $this->import(new AssetImporter($csv));
+        $updatedCSV = <<<'EOT'
+Serial,Asset Tag,weight
+67433477,970882174-8,115
+EOT;
+        $importer = new AssetImporter($updatedCSV);
+        $importer->setUserId(1)
+             ->setUpdating(true)
+             ->setUsernameFormat('firstname.lastname')
+             ->import();
+
+        $this->tester->seeRecord('assets', [
+            'asset_tag' => '970882174-8',
+            '_snipeit_weight_2' => 115
+        ]);
+    }
+
     public function initializeCustomFields()
     {
             $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
@@ -153,7 +206,7 @@ EOT;
     public function testCustomMappingImport()
     {
         $csv = <<<'EOT'
-Name,Email,Username,object name,Cat,Model name,Manufacturer,Model Number,Serial number,Asset,Loc,Some Notes,Purchase Date,Purchase Cost,comp,Status,Warranty,Supplier
+Name,Email,Username,object name,Cat,Model name,Manufacturer,Model Number,Serial,Asset,Loc,Some Notes,Purchase Date,Purchase Cost,comp,Status,Warranty,Supplier
 Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan
 EOT;
 
@@ -331,7 +384,7 @@ Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Req
 eget,01/03/2011,$85.91,mauris blandit mattis.,Lycos,T295T06V,Triamterene/Hydrochlorothiazide,No,322
 EOT;
         $this->import(new ConsumableImporter($csv));
-        // dd($this->tester->grabRecord('consumables'));
+
         $this->tester->seeRecord('consumables', [
             'name' => 'eget',
             'purchase_date' => '2011-01-03 00:00:01',
@@ -429,7 +482,7 @@ EOT;
     public function testDefaultLicenseImport()
     {
         $csv = <<<'EOT'
-Name,Email,Username,Item name,serial number,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
+Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
 Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $this->import(new LicenseImporter($csv));
@@ -469,7 +522,7 @@ EOT;
     public function testDefaultLicenseUpdate()
     {
         $csv = <<<'EOT'
-Name,Email,Username,Item name,serial number,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
+Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
 Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $this->import(new LicenseImporter($csv));
@@ -477,7 +530,7 @@ EOT;
 
 
         $updatedCSV = <<<'EOT'
-Item name,serial number,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
+Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
 Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",05/15/2019,$1865.34,63 ar,18334,A Legend,Legendary@gov.uk,04/27/2016,yes,true,64,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $importer = new LicenseImporter($updatedCSV);
@@ -531,7 +584,7 @@ EOT;
             'reassignable' => 'reass',
             'requestable' => 'Request',
             'seats' => 'seat',
-            'serial_number' => 'serial num',
+            'serial' => 'serial num',
         ];
         $this->import(new LicenseImporter($csv), $customFieldMap);
         // dd($this->tester->grabRecord('licenses'));

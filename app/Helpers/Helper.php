@@ -127,7 +127,13 @@ class Helper
         $floatString = str_replace(",", "", $floatString);
         $floatString = str_replace($LocaleInfo["decimal_point"], ".", $floatString);
         // Strip Currency symbol
-        $floatString = str_replace($LocaleInfo['currency_symbol'], '', $floatString);
+        // If no currency symbol is set, default to $ because Murica
+        $currencySymbol = $LocaleInfo['currency_symbol'];
+        if (empty($currencySymbol)) {
+            $currencySymbol = '$';
+        }
+
+        $floatString = str_replace($currencySymbol, '', $floatString);
         return floatval($floatString);
     }
 
