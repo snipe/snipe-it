@@ -24,6 +24,7 @@ class SnipeModel extends Model
     public function setPurchaseCostAttribute($value)
     {
         $value =  Helper::ParseFloat($value);
+
         if ($value == '0.0') {
             $value = null;
         }
