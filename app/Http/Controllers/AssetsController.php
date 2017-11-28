@@ -431,8 +431,13 @@ class AssetsController extends Controller
 
         $this->authorize('checkout', $asset);
 
+        if ($asset->availableForCheckout()) {
+            return view('hardware/checkout', compact('asset'));
+        }
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
+
         // Get the dropdown of users and then pass it to the checkout view
-        return view('hardware/checkout', compact('asset'));
+
     }
 
     /**
