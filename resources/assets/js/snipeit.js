@@ -268,7 +268,7 @@ $(document).ready(function () {
                 $('#assigned_user').hide();
                 $('#assigned_location').hide();
                 $('.notification-callout').fadeOut();
-                
+
             } else if (assignto_type == 'location') {
                 $('#current_assets_box').fadeOut();
                 $('#assigned_asset').hide();
@@ -276,6 +276,7 @@ $(document).ready(function () {
                 $('#assigned_location').show();
                 $('.notification-callout').fadeOut();
             } else  {
+
                 $('#assigned_asset').hide();
                 $('#assigned_user').show();
                 $('#assigned_location').hide();
@@ -283,7 +284,7 @@ $(document).ready(function () {
                     $('#current_assets_box').fadeIn();
                 }
                 $('.notification-callout').fadeIn();
-                
+
             }
         });
     });
