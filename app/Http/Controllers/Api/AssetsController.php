@@ -523,27 +523,37 @@ class AssetsController extends Controller
             'id' => $asset->id,
             'asset_tag' => $asset->asset_tag,
         ];
-        if ($request->has('user_id')) {
-            $target = User::find($request->input('user_id'));
-            $location = $target->location_id;
-            $error_payload['target_id'] = $request->input('user_id');
-            $error_payload['target_type'] = User::class;
-        // Don't let the user check an asset out to itself
-        } elseif ($request->has('asset_id')) {
-            $target = Asset::where('id','!=',$asset_id)->find($request->input('asset_id'));
-            $location = $target->location_id;
-            $error_payload['target_id'] = $request->input('asset_id');
-            $error_payload['target_type'] = Asset::class;
-        } elseif ($request->has('location_id')) {
-            $target = Location::find($request->input('location_id'));
-            $location = $target->id;
-            $target = Location::find($request->input('location_id'));
-            $error_payload['target_id'] = $request->input('location_id');
-            $error_payload['target_type'] = Location::class;
+
+
+        // This item is checked out to a location
+        if (request('checkout_to_type')=='location') {
+            $target = Location::find(request('assigned_location'));
+            $asset->location_id = ($target) ? $target->id : '';
+            $error_payload['target_id'] = $request->input('assigned_location');
+            $error_payload['target_type'] = 'location';
+
+        } elseif (request('checkout_to_type')=='asset') {
+            $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
+            $asset->location_id = $target->rtd_location_id;
+            // Override with the asset's location_id if it has one
+            if ($target->location_id!='') {
+                $asset->location_id = ($target) ? $target->location_id : '';
+            }
+            $error_payload['target_id'] = $request->input('assigned_asset');
+            $error_payload['target_type'] = 'asset';
+
+        } elseif (request('checkout_to_type')=='user') {
+            // Fetch the target and set the asset's new location_id
+            $target = User::find(request('assigned_user'));
+            $asset->location_id = ($target) ? $target->location_id : '';
+            $error_payload['target_id'] = $request->input('assigned_user');
+            $error_payload['target_type'] = 'user';
         }
 
+
+
         if (!isset($target)) {
-            return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'No valid checkout target specified for asset '.e($asset->asset_tag).'.'));
+            return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset '.e($asset->asset_tag).' is invalid - '.$error_payload['target_type'].' does not exist.'));
         }
 
 
@@ -558,11 +568,11 @@ class AssetsController extends Controller
             $asset->location_id = $target->rtd_location_id;
         }
 
-        $asset->location_id = $location;
+
 
         
 
-        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $location)) {
+        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
