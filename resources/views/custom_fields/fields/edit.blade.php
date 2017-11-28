@@ -28,7 +28,6 @@
 
     <div class="box box-default">
       <div class="box-body">
-
           <!-- Name -->
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-4 control-label">
@@ -71,7 +70,7 @@
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
             <div class="col-md-6 required">
-              {{ Form::select("format",\App\Helpers\Helper::predefined_formats(),"ANY", array('class'=>'format select2 form-control')) }}
+              {{ Form::select("format",\App\Helpers\Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control')) }}
               {!! $errors->first('format', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
@@ -82,10 +81,12 @@
               {{ trans('admin/custom_fields/general.field_custom_format') }}
             </label>
             <div class="col-md-6 required">
-                {{ Form::text('custom_format', Input::old('custom_format', (($field->format!='') && ($field->format!='ANY')) ? $field->format : ''), array('class' => 'form-control', 'id' => 'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
+
+                {{ Form::text('custom_format', Input::old('custom_format', (($field->format!='') && (stripos($field->format,'regex')===0)) ? $field->format : ''), array('class' => 'form-control', 'id' => 'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
                 <p class="help-block">{!! trans('admin/custom_fields/general.field_custom_format_help') !!}</p>
 
               {!! $errors->first('custom_format', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+
             </div>
           </div>
 
@@ -143,6 +144,7 @@
         // If the custom_regex is ever NOT the last element in the format
         // listbox, we will need to refactor this.
         if ($('#custom_format').val()!='') {
+            // console.log('value is ' + $('#custom_format').val());
             $('.format').prop('selectedIndex', $('.format')[0].options.length - 1);
         }
 
