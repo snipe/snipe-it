@@ -431,8 +431,13 @@ class AssetsController extends Controller
 
         $this->authorize('checkout', $asset);
 
+        if ($asset->availableForCheckout()) {
+            return view('hardware/checkout', compact('asset'));
+        }
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
+
         // Get the dropdown of users and then pass it to the checkout view
-        return view('hardware/checkout', compact('asset'));
+
     }
 
     /**
@@ -454,11 +459,13 @@ class AssetsController extends Controller
         }
         $this->authorize('checkout', $asset);
         $admin = Auth::user();
-        
+
+
         // This item is checked out to a location
         if (request('checkout_to_type')=='location') {
             $target = Location::find(request('assigned_location'));
             $asset->location_id = ($target) ? $target->id : '';
+
         } elseif (request('checkout_to_type')=='asset') {
             $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
@@ -466,16 +473,16 @@ class AssetsController extends Controller
             if ($target->location_id!='') {
                 $asset->location_id = ($target) ? $target->location_id : '';
             }
-        } else {
+            
+        } elseif (request('checkout_to_type')=='user') {
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
             $asset->location_id = ($target) ? $target->location_id : '';
         }
 
-
         // No valid target was found - error out
         if (!$target) {
-            return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+            return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
         }
 
 
