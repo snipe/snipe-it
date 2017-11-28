@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
+use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -506,7 +507,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function checkout(Request $request, $asset_id)
+    public function checkout(AssetCheckoutRequest $request, $asset_id)
     {
         $this->authorize('checkout', Asset::class);
         $asset = Asset::findOrFail($asset_id);
