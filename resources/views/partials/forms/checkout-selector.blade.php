@@ -4,7 +4,7 @@
         <div class="btn-group" data-toggle="buttons">
             @if ((isset($user_select)) && ($user_select!='false'))
             <label class="btn btn-default active">
-                <input name="checkout_to_type" value="user" type="radio" selected><i class="fa fa-user"></i> {{ trans('general.user') }}
+                <input name="checkout_to_type" value="user" type="radio" checked="checked"><i class="fa fa-user"></i> {{ trans('general.user') }}
             </label>
             @endif
             @if ((isset($asset_select)) && ($asset_select!='false'))
@@ -17,6 +17,8 @@
                 <input name="checkout_to_type" value="location" class="active" type="radio"><i class="fa fa-map-marker"></i> {{ trans('general.location') }}
             </label>
             @endif
+
+            {!! $errors->first('checkout_to_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
         </div>
     </div>
 </div>
