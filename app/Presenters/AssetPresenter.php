@@ -289,10 +289,8 @@ class AssetPresenter extends Presenter
         $imagePath = '';
         if ($this->image && !empty($this->image)) {
             $imagePath = $this->image;
-            return 'poop';
         } elseif ($this->model && !empty($this->model->image)) {
             $imagePath = $this->model->image;
-            return 'fart';
         }
         if (!empty($imagePath)) {
             return config('app.url').'/uploads/assets/'.$imagePath;
