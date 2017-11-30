@@ -1107,7 +1107,7 @@ class AssetsController extends Controller
                         $update_array['purchase_date'] =  $request->input('purchase_date');
                     }
                     if ($request->has('purchase_cost')) {
-                        $update_array['purchase_cost'] =  Helper::ParseFloat($request->has('purchase_cost'));
+                        $update_array['purchase_cost'] =  Helper::ParseFloat($request->input('purchase_cost'));
                     }
                     if ($request->has('supplier_id')) {
                         $update_array['supplier_id'] =  $request->input('supplier_id');
