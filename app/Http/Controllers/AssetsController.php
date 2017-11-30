@@ -1081,70 +1081,73 @@ class AssetsController extends Controller
      * @internal param array $assets
      * @since [v2.0]
      */
-    public function postBulkSave()
+    public function postBulkSave(Request $request)
     {
         $this->authorize('update', Asset::class);
-        if (Input::has('ids')) {
-            $assets = Input::get('ids');
-            if ((Input::has('purchase_date'))
-                ||  (Input::has('purchase_cost'))
-                ||  (Input::has('supplier_id'))
-                ||  (Input::has('order_number'))
-                || (Input::has('warranty_months'))
-                || (Input::has('rtd_location_id'))
-                || (Input::has('requestable'))
-                ||  (Input::has('company_id'))
-                || (Input::has('status_id'))
-                ||  (Input::has('model_id'))
+        
+        \Log::debug($request->input('ids'));
+        
+        if (($request->has('ids')) && (count($request->input('ids') > 0))) {
+            $assets = $request->input('ids');
+            if (($request->has('purchase_date'))
+                ||  ($request->has('purchase_cost'))
+                ||  ($request->has('supplier_id'))
+                ||  ($request->has('order_number'))
+                || ($request->has('warranty_months'))
+                || ($request->has('rtd_location_id'))
+                || ($request->has('requestable'))
+                ||  ($request->has('company_id'))
+                || ($request->has('status_id'))
+                ||  ($request->has('model_id'))
             ) {
                 foreach ($assets as $key => $value) {
                     $update_array = array();
 
-                    if (Input::has('purchase_date')) {
-                        $update_array['purchase_date'] =  e(Input::get('purchase_date'));
+                    if ($request->has('purchase_date')) {
+                        $update_array['purchase_date'] =  $request->input('purchase_date');
                     }
-                    if (Input::has('purchase_cost')) {
-                        $update_array['purchase_cost'] =  Helper::ParseFloat(e(Input::get('purchase_cost')));
+                    if ($request->has('purchase_cost')) {
+                        $update_array['purchase_cost'] =  Helper::ParseFloat($request->has('purchase_cost'));
                     }
-                    if (Input::has('supplier_id')) {
-                        $update_array['supplier_id'] =  e(Input::get('supplier_id'));
+                    if ($request->has('supplier_id')) {
+                        $update_array['supplier_id'] =  $request->input('supplier_id');
                     }
-                    if (Input::has('model_id')) {
-                        $update_array['model_id'] =  e(Input::get('model_id'));
+                    if ($request->has('model_id')) {
+                        $update_array['model_id'] =  $request->input('model_id');
                     }
-                    if (Input::has('company_id')) {
-                        if (Input::get('company_id')=="clear") {
+                    if ($request->has('company_id')) {
+                        if ($request->input('company_id')=="clear") {
                             $update_array['company_id'] =  null;
                         } else {
-                            $update_array['company_id'] =  e(Input::get('company_id'));
+                            $update_array['company_id'] =  $request->input('company_id');
                         }
                     }
-                    if (Input::has('order_number')) {
-                        $update_array['order_number'] =  e(Input::get('order_number'));
+                    if ($request->has('order_number')) {
+                        $update_array['order_number'] =  $request->input('order_number');
                     }
-                    if (Input::has('warranty_months')) {
-                        $update_array['warranty_months'] =  e(Input::get('warranty_months'));
+                    if ($request->has('warranty_months')) {
+                        $update_array['warranty_months'] =  $request->input('warranty_months');
                     }
-                    if (Input::has('rtd_location_id')) {
-                        $update_array['rtd_location_id'] = e(Input::get('rtd_location_id'));
+                    if ($request->has('rtd_location_id')) {
+                        $update_array['rtd_location_id'] = $request->input('rtd_location_id');
                     }
-                    if (Input::has('status_id')) {
-                        $update_array['status_id'] = e(Input::get('status_id'));
+                    if ($request->has('status_id')) {
+                        $update_array['status_id'] = $request->input('status_id');
                     }
-                    if (Input::has('requestable')) {
-                        $update_array['requestable'] = e(Input::get('requestable'));
+                    if ($request->has('requestable')) {
+                        $update_array['requestable'] = $request->input('requestable');
                     }
 
                     DB::table('assets')
                         ->where('id', $key)
                         ->update($update_array);
                 } // endforeach
-                return redirect()->to("hardware")->with('success', trans('admin/hardware/message.update.success'));
+                return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.update.success'));
             // no values given, nothing to update
             }
-            return redirect()->to("hardware")->with('info', trans('admin/hardware/message.update.nothing_updated'));
+            return redirect()->route("hardware.index")->with('warning', trans('admin/hardware/message.update.nothing_updated'));
         } // endif
-        return redirect()->to("hardware");
+        return redirect()->route("hardware.index")->with('warning', trans('No assets selected, so nothing was updated.'));
     }
 
     /**
