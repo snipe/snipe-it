@@ -160,7 +160,6 @@ class CustomField extends Model
     public function getFormatAttribute($value)
     {
         foreach (self::$PredefinedFormats as $name => $pattern) {
-            \Log::debug($name.'=>'.$pattern);
             if ($pattern === $value) {
                 return $name;
             }
