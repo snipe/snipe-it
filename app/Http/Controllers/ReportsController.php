@@ -145,6 +145,7 @@ class ReportsController extends Controller
                 trans('general.company'),
                 trans('admin/hardware/table.asset_tag'),
                 trans('admin/hardware/form.manufacturer'),
+                trans('general.category'),
                 trans('admin/hardware/form.model'),
                 trans('general.model_no'),
                 trans('general.name'),
@@ -175,6 +176,7 @@ class ReportsController extends Controller
                         ($asset->company) ? $asset->company->name : '',
                         $asset->asset_tag,
                         ($asset->model->manufacturer) ? $asset->model->manufacturer->name : '',
+                        ($asset->model->category) ? $asset->model->category->name : '',
                         ($asset->model) ? $asset->model->name : '',
                         ($asset->model->model_number) ? $asset->model->model_number : '',
                         ($asset->name) ? $asset->name : '',
@@ -519,7 +521,7 @@ class ReportsController extends Controller
 
             fputcsv($handle, $header);
 
-            $assets = Asset::orderBy('created_at', 'DESC')->with('company', 'assignedTo', 'location', 'defaultLoc', 'model', 'supplier', 'assetstatus', 'model.manufacturer');
+            $assets = Asset::with('company', 'assignedTo', 'location', 'defaultLoc', 'model', 'supplier', 'assetstatus', 'model.manufacturer');
             
             if ($request->has('by_location_id')) {
                 $assets->where('assets.location_id', $request->input('by_location_id'));
