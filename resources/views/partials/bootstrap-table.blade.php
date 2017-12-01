@@ -371,7 +371,6 @@
                         return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
                     }
                 }
-                console.log('NOT a URL!');
                 return row.custom_fields[field_column_plain].value;
 
             }

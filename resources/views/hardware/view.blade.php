@@ -82,13 +82,23 @@
                     <tr>
                       <td>{{ trans('general.status') }}</td>
                       <td>
-                        @if ($asset->assetstatus->color)
-                        <span class="label label-default" style="background-color: {{ e($asset->assetstatus->color) }};">
-                            &nbsp; &nbsp;</span>
-                        </span>
+
+                        @if (($asset->assignedTo) && ($asset->deleted_at==''))
+                          <i class="fa fa-circle text-blue"></i> {{ trans('general.deployed') }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {!!  $asset->assignedTo->present()->glyph()  !!}
+                          {!!  $asset->assignedTo->present()->nameUrl() !!}
+                        @else
+                          @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
+                            <i class="fa fa-circle text-green"></i>
+                          @elseif (($asset->assetstatus) && ($asset->assetstatus->pending=='1'))
+                              <i class="fa fa-circle text-orange"></i>
+                          @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
+                            <i class="fa fa-times text-red"></i>
+                          @endif
+                            <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
+                              {{ $asset->assetstatus->name }}</a>
+                            <label class="label label-default">{{ $asset->present()->statusMeta }}</label>
+
                         @endif
-                        <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">{{ $asset->assetstatus->name }}</a>
-                          <label class="label label-default">{{ $asset->present()->statusMeta }}</label>
                       </td>
                     </tr>
                     @endif
@@ -233,9 +243,15 @@
                           @endif
                           {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
-                          @if ($asset->order_number)
-                            (Order #{{ $asset->order_number }})
-                          @endif
+
+                        </td>
+                      </tr>
+                    @endif
+                    @if ($asset->order_number)
+                      <tr>
+                        <td>{{ trans('general.order_number') }}</td>
+                        <td>
+                          #{{ $asset->order_number }}
                         </td>
                       </tr>
                     @endif
