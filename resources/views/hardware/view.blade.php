@@ -233,9 +233,15 @@
                           @endif
                           {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
-                          @if ($asset->order_number)
-                            (Order #{{ $asset->order_number }})
-                          @endif
+
+                        </td>
+                      </tr>
+                    @endif
+                    @if ($asset->order_number)
+                      <tr>
+                        <td>{{ trans('general.order_number') }}</td>
+                        <td>
+                          #{{ $asset->order_number }}
                         </td>
                       </tr>
                     @endif
