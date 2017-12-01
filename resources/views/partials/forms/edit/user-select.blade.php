@@ -16,7 +16,9 @@
 
     <div class="col-md-1 col-sm-1 text-left">
         @can('create', \App\Models\User::class)
-            <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user_select' class="btn btn-sm btn-default">New</a>
+            @if ((!isset($hide_new)) || ($hide_new!='true'))
+                <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_user_select' class="btn btn-sm btn-default">New</a>
+            @endif
         @endcan
     </div>
 
