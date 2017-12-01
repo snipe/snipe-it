@@ -352,6 +352,6 @@ class UserPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-users"></i>';
+        return '<i class="fa fa-user"></i>';
     }
 }

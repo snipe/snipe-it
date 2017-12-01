@@ -40,7 +40,7 @@ class LocationPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-globe"></i>';
+        return '<i class="fa fa-map-marker"></i>';
     }
     
     public function fullName() {
