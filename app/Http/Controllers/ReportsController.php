@@ -141,33 +141,34 @@ class ReportsController extends Controller
                     break;
             }
 
+            $headers=[
+                trans('general.company'),
+                trans('admin/hardware/table.asset_tag'),
+                trans('admin/hardware/form.manufacturer'),
+                trans('admin/hardware/form.model'),
+                trans('general.model_no'),
+                trans('general.name'),
+                trans('admin/hardware/table.serial'),
+                trans('general.status'),
+                trans('admin/hardware/table.purchase_date'),
+                trans('admin/hardware/table.purchase_cost'),
+                trans('admin/hardware/form.order'),
+                trans('general.supplier'),
+                trans('admin/hardware/table.checkoutto'),
+                trans('general.type'),
+                trans('admin/hardware/table.checkout_date'),
+                trans('admin/hardware/table.location'),
+                trans('general.notes'),
+            ];
+            foreach ($customfields as $field) {
+                $headers[]=$field->name;
+            }
+            fputcsv($handle, $headers);
+
             $assets->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
-                $headers=[
-                    trans('general.company'),
-                    trans('admin/hardware/table.asset_tag'),
-                    trans('admin/hardware/form.manufacturer'),
-                    trans('admin/hardware/form.model'),
-                    trans('general.model_no'),
-                    trans('general.name'),
-                    trans('admin/hardware/table.serial'),
-                    trans('general.status'),
-                    trans('admin/hardware/table.purchase_date'),
-                    trans('admin/hardware/table.purchase_cost'),
-                    trans('admin/hardware/form.order'),
-                    trans('general.supplier'),
-                    trans('admin/hardware/table.checkoutto'),
-                    trans('general.type'),
-                    trans('admin/hardware/table.checkout_date'),
-                    trans('admin/hardware/table.location'),
-                    trans('general.notes'),
-                ];
-                foreach ($customfields as $field) {
-                    $headers[]=$field->name;
-                }
-                fputcsv($handle, $headers);
+
 
                 foreach ($assets as $asset) {
-
 
                     // Add a new row with data
                     $values=[
