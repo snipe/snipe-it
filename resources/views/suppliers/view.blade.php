@@ -36,43 +36,28 @@
         <!-- checked out suppliers table -->
         <br>
         <div class="table-responsive">
-          <table class="display table table-hover">
+          <table
+                  name="suppliers_assets"
+                  id="table-users"
+                  class="table table-striped snipe-table"
+                  data-url="{{route('api.assets.index', ['supplier_id' => $supplier->id])}}"
+                  data-cookie="true"
+                  data-click-to-select="true"
+                  data-search="true"
+                  data-cookie-id-table="assets_by_supplierTable">
             <thead>
-              <tr role="row">
-                <th class="col-md-3">Asset Tag</th>
-                <th class="col-md-3"><span class="line"></span>Name</th>
-                <th class="col-md-3"><span class="line"></span>User</th>
-                <th class="col-md-2"><span class="line"></span>Actions</th>
-              </tr>
+            <tr>
+              <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+              <th data-searchable="false" data-sortable="true" data-formatter="hardwareLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+              <th data-searchable="false" data-formatter="modelsLinkObjFormatter" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
+              <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
+              <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="hardwareInOutFormatter">Checkin/Checkout</th>
+              <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
+            </tr>
             </thead>
-            <tbody>
-              @foreach ($supplier->assets as $supplierassets)
-              <tr>
-                <td>
-                  <a href="{{ route('hardware.show',  $supplierassets->id) }}">
-                    {{ $supplierassets->asset_tag }}
-                  </a>
-                </td>
-                <td>
-                  <a href="{{ route('hardware.show',  $supplierassets->id) }}">
-                    {{ $supplierassets->name }}
-                  </a>
-                </td>
-                <td>
-                  @if ($supplierassets->assignedTo)
-                  {!! $supplierassets->assignedTo->present()->nameUrl() !!}
-                  @endif
-                </td>
-                <td>
-                  @if ($supplierassets->assigned_to != '')
-                  <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn btn-info btn-sm">Checkin</a>
-                  @else
-                  <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn btn-success btn-sm">Checkout</a>
-                  @endif
-                </td>
-              </tr>
-              @endforeach
-            </tbody>
           </table>
         </div>
       </div> <!--/box-body-->
@@ -81,16 +66,23 @@
 
   <!-- side address column -->
   <div class="col-md-3">
-    <h4>Contact:</h4>
-    <ul class="list-unstyled">
+
+    @if (($supplier->state!='') && ($supplier->country!='') && (config('services.google.maps_api_key')))
+      <div class="col-md-12 text-center" style="padding-bottom: 20px;">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ urlencode($supplier->city.','.$supplier->city.' '.$supplier->state.' '.$supplier->country.' '.$supplier->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
+      </div>
+    @endif
+
+
+    <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px; padding-top: 20px;">
       @if ($supplier->contact)
-      <li><i class="fa fa-user"></i>{{ $supplier->contact }}</li>
+      <li><i class="fa fa-user"></i> {{ $supplier->contact }}</li>
       @endif
       @if ($supplier->phone)
-      <li><i class="fa fa-phone"></i>{{ $supplier->phone }}</li>
+      <li><i class="fa fa-phone"></i> {{ $supplier->phone }}</li>
       @endif
       @if ($supplier->fax)
-      <li><i class="fa fa-print"></i>{{ $supplier->fax }}</li>
+      <li><i class="fa fa-print"></i> {{ $supplier->fax }}</li>
       @endif
 
       @if ($supplier->email)
@@ -125,7 +117,7 @@
       @endif
 
       @if ($supplier->notes)
-      <li><i class="fa fa-comment"></i>{{ $supplier->notes }}</li>
+      <li><i class="fa fa-comment"></i> {{ $supplier->notes }}</li>
       @endif
 
       @if ($supplier->image)
@@ -148,21 +140,24 @@
         <div class="table-responsive">
 
           <table
-                  name="suppliersAccessories"
-                  id="table"
-                  class="snipe-table"
-                  data-url="{{ route('api.accessories.index', ['supplier_id' => $supplier->id]) }}"
+                  name="suppliers_accessories"
+                  id="table-users"
+                  class="table table-striped snipe-table"
+                  data-url="{{route('api.accessories.index', ['supplier_id' => $supplier->id])}}"
+                  data-search="true"
                   data-cookie="true"
-                  data-export-options='{"fileName": "testo"}'
                   data-click-to-select="true"
-                  data-cookie-id-table="suppliersAccessories-{{ config('version.hash_version') }}">
+                  data-cookie-id-table="accessories_by_supplierTable">
             <thead>
             <tr>
-              <th class="col-md-4" data-field="name" data-formatter="accessoriesLinkFormatter">Name</th>
-              <th class="col-md-4" data-field="model_number">Model Number</th>
-              <th class="col-md-4" data-field="purchase_cost" data-footer-formatter="sumFormatter">Purchase_cost</th>
-
-              <th class="col-md-4" data-field="actions" data-formatter="accessoriesActionsFormatter">Actions</th>
+              <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+              <th data-searchable="false" data-sortable="true" data-formatter="accessoriesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
+              <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
+              <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
+              <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesActionsFormatter">{{ trans('table.actions') }}</th>
             </tr>
             </thead>
           </table>
@@ -182,21 +177,29 @@
       @endif
 
       <div class="box-body">
-        <table class="table table-hover">
+        <table
+                name="suppliers_licenses"
+                id="table-users"
+                class="table table-striped snipe-table"
+                data-url="{{route('api.licenses.index', ['supplier_id' => $supplier->id])}}"
+                data-cookie="true"
+                data-search="true"
+                data-click-to-select="true"
+                data-cookie-id-table="licenses_by_supplierTable">
           <thead>
-            <tr>
-              <th class="col-md-4">Name</th>
-              <th class="col-md-4"><span class="line"></span>Serial</th>
-            </tr>
+          <tr>
+            <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+            <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+            <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="product_key">{{ trans('admin/licenses/form.license_key') }}</th>
+            <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="license_email">{{ trans('admin/licenses/form.to_email') }}</th>
+            <th data-searchable="true" data-sortable="false" data-field="seats">{{ trans('admin/licenses/form.seats') }}</th>
+            <th data-searchable="true" data-sortable="false" data-field="free_seats_count">{{ trans('admin/accessories/general.remaining') }}</th>
+            <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
+            <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
+            <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
+
+          </tr>
           </thead>
-          <tbody>
-            @foreach ($supplier->licenses as $license)
-            <tr>
-              <td>{!! $license->present()->nameUrl() !!}</td>
-              <td>{!! $license->present()->serialUrl() !!}</td>
-            </tr>
-            @endforeach
-          </tbody>
         </table>
       </div>
     </div>
