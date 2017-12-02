@@ -5,9 +5,7 @@
 
  {{ trans('general.location') }}:
  {{ $location->name }}
- @if ($location->manager)
-    <div class="h6"> {!! trans('admin/users/table.manager') . ': ' . $location->manager->present()->nameUrl() !!}</div>
- @endif
+ 
 @parent
 @stop
 
@@ -55,7 +53,7 @@
 
 
     @if ($location->image!='')
-      <div class="col-md-12 text-center">
+      <div class="col-md-12 text-center" style="padding-bottom: 20px;">
         <img src="{{ app('locations_upload_url') }}/{{ $location->image }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
       </div>
     @endif
