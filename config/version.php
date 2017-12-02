@@ -7,3 +7,4 @@ return array (
   'hash_version' => 'g83c8449',
   'full_hash' => 'v4.1.6-2994-g83c8449',
   'branch' => 'master'
+);
