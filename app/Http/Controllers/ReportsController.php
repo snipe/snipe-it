@@ -605,8 +605,6 @@ class ReportsController extends Controller
 
                     if ($request->has('asset_name')) {
                         $row[] = ($asset->name) ? $asset->name : '';
-                        \Log::debug($asset->name);
-                        \Log::debug($asset);
                     }
 
                     if ($request->has('asset_tag')) {
