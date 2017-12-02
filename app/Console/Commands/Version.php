@@ -47,7 +47,7 @@ class Version extends Command
 
         $version = explode('-', $full_hash_version);
         $app_version = $current_app_version = $version[0];
-        $hash_version = $version[2];
+        $hash_version = (array_key_exists('2', $version)) ? $version[2] : '';
         $prerelease_version = '';
 
         $this->line('Branch is: '.$use_branch);
@@ -57,7 +57,6 @@ class Version extends Command
         if (count($version)==3) {
             $this->line('This does not look like an alpha/beta release.');
         } else {
-            print_r($version);
             if (array_key_exists('3',$version)) {
                 $this->line('The current version looks like a beta release.');
                 $prerelease_version = $version[1];
