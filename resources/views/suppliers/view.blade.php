@@ -23,18 +23,14 @@
     <!-- start tables -->
 
     <div class="box box-default">
-      @if ($supplier->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h3 class="box-title"> {{ trans('general.assets') }}
-          </h3>
+          <h3 class="box-title"> {{ trans('general.assets') }}</h3>
         </div>
       </div><!-- /.box-header -->
-      @endif
 
       <div class="box-body">
         <!-- checked out suppliers table -->
-        <br>
         <div class="table-responsive">
           <table
                   name="suppliers_assets"
@@ -60,9 +56,155 @@
             </tr>
             </thead>
           </table>
-        </div>
-      </div> <!--/box-body-->
-    </div>
+        </div><!-- /.table-responsive -->
+      </div><!-- /.box-body -->
+      </div> <!--/.box-->
+
+        <div class="box box-default">
+
+          <div class="box-header with-border">
+            <div class="box-heading">
+              <h3 class="box-title"> {{ trans('general.accessories') }}</h3>
+            </div>
+          </div><!-- /.box-header -->
+
+          <div class="box-body">
+            <div class="table-responsive">
+
+              <table
+                      name="suppliers_accessories"
+                      id="table-users"
+                      class="table table-striped snipe-table"
+                      data-url="{{route('api.accessories.index', ['supplier_id' => $supplier->id])}}"
+                      data-search="true"
+                      data-cookie="true"
+                      data-click-to-select="true"
+                      data-cookie-id-table="accessories_by_supplierTable">
+                <thead>
+                <tr>
+                  <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+                  <th data-searchable="false" data-sortable="true" data-formatter="accessoriesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+                  <th data-searchable="false" data-sortable="false" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
+                  <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
+                  <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
+                  <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
+                  <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
+                  <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesActionsFormatter">{{ trans('table.actions') }}</th>
+                </tr>
+                </thead>
+              </table>
+            </div><!-- /.table-responsive -->
+          </div><!-- /.box-body -->
+        </div> <!--/.box-->
+
+
+
+          <div class="box box-default">
+
+            @if ($supplier->id)
+              <div class="box-header with-border">
+                <div class="box-heading">
+                  <h3 class="box-title"> {{ trans('general.licenses') }}</h3>
+                </div>
+              </div><!-- /.box-header -->
+            @endif
+
+            <div class="box-body">
+              <div class="table-responsive">
+              <table
+                      name="suppliers_licenses"
+                      id="table-users"
+                      class="table table-striped snipe-table"
+                      data-url="{{route('api.licenses.index', ['supplier_id' => $supplier->id])}}"
+                      data-cookie="true"
+                      data-search="true"
+                      data-click-to-select="true"
+                      data-cookie-id-table="licenses_by_supplierTable">
+                <thead>
+                <tr>
+                  <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="product_key">{{ trans('admin/licenses/form.license_key') }}</th>
+                  <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="license_email">{{ trans('admin/licenses/form.to_email') }}</th>
+                  <th data-searchable="true" data-sortable="false" data-field="seats">{{ trans('admin/licenses/form.seats') }}</th>
+                  <th data-searchable="true" data-sortable="false" data-field="free_seats_count">{{ trans('admin/accessories/general.remaining') }}</th>
+                  <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
+                  <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
+                  <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
+                </tr>
+                </thead>
+              </table>
+            </div><!-- /.table-responsive -->
+          </div><!-- /.box-body -->
+        </div> <!--/.box-->
+
+
+
+        <div class="box box-default">
+
+          @if ($supplier->id)
+            <div class="box-header with-border">
+              <div class="box-heading">
+                <h3 class="box-title"> Improvements</h3>
+              </div>
+            </div><!-- /.box-header -->
+          @endif
+
+          <div class="box-body">
+            <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
+                <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
+                <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
+                <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
+                <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
+                <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.cost') }}</th>
+                <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <?php $totalCost = 0; ?>
+              @if ($supplier->asset_maintenances)
+                @foreach ($supplier->asset_maintenances as $improvement)
+                  @if (is_null($improvement->deleted_at))
+                    <tr>
+                      <td>
+                        @if ($improvement->asset)
+                          <a href="{{ route('hardware.show', $improvement->asset_id) }}">{{ $improvement->asset->name }}</a>
+                        @else
+                            (deleted asset)
+                        @endif
+                      </td>
+                      <td>{{ $improvement->asset_maintenance_type }}</td>
+                      <td>{{ $improvement->start_date }}</td>
+                      <td>{{ $improvement->completion_date }}</td>
+                      <td>{{ $improvement->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
+                      <td>{{ sprintf( $snipeSettings->default_currency. '%01.2f', $improvement->cost) }}</td>
+                        <?php $totalCost += $improvement->cost; ?>
+                      <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                      </td>
+                    </tr>
+                  @endif
+                @endforeach
+              @endif
+              </tbody>
+              <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{sprintf($snipeSettings->default_currency . '%01.2f', $totalCost)}}</td>
+              </tr>
+              </tfoot>
+            </table>
+          </div><!-- /.table-responsive -->
+        </div><!-- /.box-body -->
+     </div> <!--/.box-->
+
   </div> <!--/col-md-9-->
 
   <!-- side address column -->
@@ -121,160 +263,17 @@
       <li><i class="fa fa-comment"></i> {{ $supplier->notes }}</li>
       @endif
 
-      @if ($supplier->image)
-      <li><br /><img src="{{ url('/') }}/uploads/suppliers/{{ $supplier->image }}" /></li>
-      @endif
     </ul>
+      @if ($supplier->image!='')
+        <div class="col-md-12 text-center" style="padding-bottom: 20px;">
+          <img src="{{ app('suppliers_upload_url') }}/{{ $supplier->image }}" class="img-responsive img-thumbnail" alt="{{ $supplier->name }}">
+        </div>
+      @endif
+
   </div> <!--/col-md-3-->
 </div> <!--/row-->
 
-<div class="row">
-  <div class="col-md-9">
 
-    <div class="box box-default">
-      <div class="box-header with-border">
-        <div class="box-heading">
-          <h3 class="box-title">Accessories</h3>
-        </div>
-      </div><!-- /.box-header -->
-      <div class="box-body">
-        <div class="table-responsive">
-
-          <table
-                  name="suppliers_accessories"
-                  id="table-users"
-                  class="table table-striped snipe-table"
-                  data-url="{{route('api.accessories.index', ['supplier_id' => $supplier->id])}}"
-                  data-search="true"
-                  data-cookie="true"
-                  data-click-to-select="true"
-                  data-cookie-id-table="accessories_by_supplierTable">
-            <thead>
-            <tr>
-              <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
-              <th data-searchable="false" data-sortable="true" data-formatter="accessoriesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
-              <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
-              <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesActionsFormatter">{{ trans('table.actions') }}</th>
-            </tr>
-            </thead>
-          </table>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="box box-default">
-
-      @if ($supplier->id)
-      <div class="box-header with-border">
-        <div class="box-heading">
-          <h3 class="box-title">Software</h3>
-        </div>
-      </div><!-- /.box-header -->
-      @endif
-
-      <div class="box-body">
-        <table
-                name="suppliers_licenses"
-                id="table-users"
-                class="table table-striped snipe-table"
-                data-url="{{route('api.licenses.index', ['supplier_id' => $supplier->id])}}"
-                data-cookie="true"
-                data-search="true"
-                data-click-to-select="true"
-                data-cookie-id-table="licenses_by_supplierTable">
-          <thead>
-          <tr>
-            <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
-            <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
-            <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="product_key">{{ trans('admin/licenses/form.license_key') }}</th>
-            <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="license_email">{{ trans('admin/licenses/form.to_email') }}</th>
-            <th data-searchable="true" data-sortable="false" data-field="seats">{{ trans('admin/licenses/form.seats') }}</th>
-            <th data-searchable="true" data-sortable="false" data-field="free_seats_count">{{ trans('admin/accessories/general.remaining') }}</th>
-            <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
-            <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
-            <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
-
-          </tr>
-          </thead>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-9">
-    <div class="box box-default">
-
-      @if ($supplier->id)
-      <div class="box-header with-border">
-        <div class="box-heading">
-          <h3 class="box-title"> Improvements</h3>
-        </div>
-      </div><!-- /.box-header -->
-      @endif
-
-      <div class="box-body">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
-              <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-              <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-              <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-              <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
-              <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.cost') }}</th>
-              <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $totalCost = 0; ?>
-            @if ($supplier->asset_maintenances)
-              @foreach ($supplier->asset_maintenances as $improvement)
-                @if (is_null($improvement->deleted_at))
-                <tr>
-                  <td>
-                    @if ($improvement->asset)
-                      <a href="{{ route('hardware.show', $improvement->asset_id) }}">{{ $improvement->asset->name }}</a>
-                    @else
-                        (deleted asset)
-                    @endif
-                  </td>
-                  <td>{{ $improvement->asset_maintenance_type }}</td>
-                  <td>{{ $improvement->start_date }}</td>
-                  <td>{{ $improvement->completion_date }}</td>
-                  <td>{{ $improvement->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
-                  <td>{{ sprintf( $snipeSettings->default_currency. '%01.2f', $improvement->cost) }}</td>
-                    <?php $totalCost += $improvement->cost; ?>
-                  <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-                  </td>
-                </tr>
-                @endif
-              @endforeach
-            @endif
-          </tbody>
-
-          <tfoot>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{{sprintf($snipeSettings->default_currency . '%01.2f', $totalCost)}}</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-    </div>
-  </div>
-</div> <!-- /.row-->
 
 @stop
 @section('moar_scripts')
