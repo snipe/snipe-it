@@ -18,6 +18,8 @@
 
 <div class="row">
   <div class="col-md-9">
+
+
     <div class="box box-default">
     <div class="box-header with-border">
         <div class="box-heading">
@@ -25,8 +27,6 @@
         </div>
     </div>
       <div class="box-body">
-        <div class="row">
-          <div class="col-md-12">
             <div class="table table-responsive">
               <table
               name="location_users"
@@ -54,15 +54,49 @@
                   </tr>
                 </thead>
               </table>
-            </div>
+            </div><!-- /.table-responsive -->
+          </div><!-- /.box-body -->
+        </div> <!--/.box-->
+
+      <div class="box box-default">
+        <div class="box-header with-border">
+          <div class="box-heading">
+            <h3 class="box-title">{{ trans('general.assets') }}</h3>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+        <div class="box-body">
+              <div class="table table-responsive">
+                <table
+                        name="location_assets"
+                        id="table-assets"
+                        data-url="{{route('api.assets.index', ['location_id' => $location->id]) }}"
+                        class="table table-striped snipe-table"
+                        data-cookie="true"
+                        data-show-footer="true"
+                        data-click-to-select="true"
+                        data-cookie-id-table="location_assetsDetailTable">
+                  <thead>
+                  <tr>
+                    <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+                    <th data-searchable="false" data-visible="true" data-sortable="false" data-formatter="imageFormatter" data-field="image">{{ trans('admin/hardware/table.image') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-formatter="hardwareLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+                    <th data-searchable="true" data-formatter="modelsLinkObjFormatter" data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.tag') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
+                    <th data-searchable="true" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
+                    <th data-field="purchase_cost" data-searchable="true" data-sortable="true" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="hardwareInOutFormatter">Checkin/Checkout</th>
+                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
+                  </tr>
+                  </thead>
+                </table>
+              </div><!-- /.table-responsive -->
+            </div><!-- /.box-body -->
+          </div> <!--/.box-->
+
+  </div><!--/.col-md-9-->
+
   <div class="col-md-3">
-
-
 
     @if ($location->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 20px;">
@@ -101,47 +135,6 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-9">
-    <div class="box box-default">
-    <div class="box-header with-border">
-    <div class="box-heading">
-        <h3 class="box-title">{{ trans('general.assets') }}</h3>
-    </div>
-    </div>
-      <div class="box-body">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="table table-responsive">
-              <table
-              name="location_assets"
-              id="table-assets"
-              data-url="{{route('api.assets.index', ['location_id' => $location->id]) }}"
-              class="table table-striped snipe-table"
-              data-cookie="true"
-              data-click-to-select="true"
-              data-cookie-id-table="location_assetsDetailTable">
-                <thead>
-                  <tr>
-                    <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
-                    <th data-searchable="false" data-visible="true" data-sortable="true" data-formatter="imageFormatter" data-field="image">{{ trans('admin/hardware/table.image') }}</th>
-                    <th data-searchable="false" data-sortable="true" data-formatter="hardwareLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
-                    <th data-searchable="false" data-formatter="modelsLinkObjFormatter" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.tag') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
-                    <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
-                    <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="hardwareInOutFormatter">Checkin/Checkout</th>
-                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 
