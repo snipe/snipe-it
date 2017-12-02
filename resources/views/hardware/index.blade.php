@@ -42,8 +42,8 @@
 @stop
 
 @section('header_right')
-  <a href="{{ route('reports.export.assets', ['status'=> e(Input::get('status'))]) }}" style="margin-right: 5px;" class="btn btn-default"><i class="fa fa-download icon-white"></i>
-    {{ trans('admin/hardware/table.dl_csv') }}</a>
+  <a href="{{ route('reports/custom') }}" style="margin-right: 5px;" class="btn btn-default">
+    Custom Export</a>
   <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
 @stop
 
@@ -86,7 +86,7 @@
                   'company_id'=>e(Input::get('company_id')),
                   'status_id'=>e(Input::get('status_id'))))}}"
               data-click-to-select="true"
-              data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">
+              data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.app_version') }}">
               </table>
             </div><!-- /.col -->
           </div><!-- /.row -->

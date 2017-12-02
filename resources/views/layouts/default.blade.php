@@ -218,14 +218,6 @@
                            </a>
                        </li>
                        @endcan
-                       @can('create', \App\Models\User::class)
-                       <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('users.create') }}">
-                           <i class="fa fa-user fa-fw"></i>
-                           {{ trans('general.user') }}
-                           </a>
-                       </li>
-                       @endcan
                        @can('create', \App\Models\Component::class)
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('components.create') }}">
@@ -234,6 +226,14 @@
                            </a>
                        </li>
                        @endcan
+                         @can('create', \App\Models\User::class)
+                             <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
+                                 <a href="{{ route('users.create') }}">
+                                     <i class="fa fa-user fa-fw"></i>
+                                     {{ trans('general.user') }}
+                                 </a>
+                             </li>
+                         @endcan
                    </ul>
                 </li>
                @endcan

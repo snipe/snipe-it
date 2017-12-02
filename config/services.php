@@ -46,5 +46,9 @@ return [
         'level' => env('ROLLBAR_LEVEL', 'error'),
     ],
 
+    'google' => [
+        'maps_api_key' => env('GOOGLE_MAPS_API')
+    ],
+
 
 ];
