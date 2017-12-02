@@ -127,6 +127,7 @@
                 {{ trans('admin/users/table.username') }}
               </label>
             </div>
+
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('employee_num', '1', '1', ['class' => 'minimal']) }}
@@ -153,8 +154,26 @@
             </div>
             <div class="checkbox col-md-12">
               <label>
+                {{ Form::checkbox('checkout_date', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/hardware/table.checkout_date') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
                 {{ Form::checkbox('expected_checkin', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('admin/hardware/form.expected_checkin') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('created_at', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('general.created_at') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('updated_at', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('general.updated_at') }}
               </label>
             </div>
             <div class="checkbox col-md-12">
@@ -180,7 +199,7 @@
 
           </div> <!-- /.col-md-3-->
 
-          <div class="col-md-9">
+          <div class="col-md-8">
 
             <p>Select the fields you'd like to include in your custom report, and click Generate. The file (custom-asset-report-YYYY-mm-dd.csv) will download automatically, and you can open it in Excel.</p>
             <p>If you'd like to export only certain assets, use the options below to fine-tune your results.</p>
@@ -189,9 +208,19 @@
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'by_location_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'by_supplier_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.model-select', ['translated_name' => trans('general.asset_model'), 'fieldname' => 'by_model_id', 'hide_new' => 'true'])
+            @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'by_manufacturer_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'by_category_id', 'hide_new' => 'true', 'category_type' => 'asset'])
 
-          <!-- Order Number -->
+          <!-- Status -->
+            <div class="form-group">
+              <label for="status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
+              <div class="col-md-7 col-sm-11">
+                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , Input::old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%')) }}
+              </div>
+            </div>
+
+
+            <!-- Order Number -->
             <div class="form-group">
               <label for="order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}</label>
               <div class="col-md-5 col-sm-8">
@@ -200,18 +229,26 @@
             </div>
 
           <!-- Purchase Date -->
-            <div class="form-group" id="purchase-range">
+            <div class="form-group purchase-range">
               <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.purchase_date') }} Range</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
-                <input type="text" class="input-sm form-control" name="start" />
+                <input type="text" class="input-sm form-control" name="purchase_start" />
                 <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="end" />
+                <input type="text" class="input-sm form-control" name="purchase_end" />
               </div>
             </div>
 
+            <!-- Created Date -->
+            <div class="form-group purchase-range">
+              <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.created_at') }} Range</label>
+              <div class="input-daterange input-group col-md-6" id="datepicker">
+                <input type="text" class="input-sm form-control" name="created_start" />
+                <span class="input-group-addon">to</span>
+                <input type="text" class="input-sm form-control" name="created_end" />
+              </div>
+            </div>
 
-
-
+            
 
             <div class="col-md-9 col-md-offset-3">
               <label>
@@ -238,7 +275,7 @@
 @section('moar_scripts')
   <script>
 
-      $('#purchase-range .input-daterange').datepicker({
+      $('.purchase-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           endDate: '0d',
