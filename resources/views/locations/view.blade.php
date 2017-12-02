@@ -38,7 +38,19 @@
               data-cookie-id-table="location_usersDetailTable">
                 <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false"  data-formatter="usersLinkFormatter" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+                    <th data-searchable="false" data-sortable="false"  data-formatter="imageFormatter" data-field="avatar">Avatar</th>
+                    <th data-searchable="true" data-sortable="true" data-formatter="usersLinkFormatter" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="true" data-sortable="true"  data-formatter="usersLinkFormatter" data-field="jobtitle">{{ trans('admin/users/table.title') }}</th>
+                    <th data-searchable="true" data-sortable="true"  data-formatter="emailFormatter" data-field="email">{{ trans('admin/users/table.email') }}</th>
+                    <th data-searchable="true" data-visible="false" data-sortable="true" data-field="phone">{{ trans('admin/users/table.phone') }}</th>
+                    <th data-searchable="true" data-visible="false" data-sortable="true" data-formatter="usersLinkObjFormatter" data-field="manager">{{ trans('admin/users/table.manager') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="assets_count"><span class="hidden-md hidden-lg">Assets</span><span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span></th>
+                    <th data-searchable="true" data-sortable="true" data-field="licenses_count"><span class="hidden-md hidden-lg">Licenses</span><span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span></th>
+                    <th data-searchable="true" data-sortable="true" data-field="consumables_count"><span class="hidden-md hidden-lg">Consumables</span><span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span></th>
+                    <th data-searchable="true" data-sortable="true" data-field="accessories_count"><span class="hidden-md hidden-lg">Accessories</span><span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span></th>
+                    <th data-searchable="true" data-sortable="true"  data-formatter="departmentsLinkObjFormatter" data-field="department">{{ trans('general.department') }}</th>
+                    <th data-searchable="true" data-sortable="true"  data-formatter="usersActionsFormatter" data-field="actions">{{ trans('table.actions') }}</th>
                   </tr>
                 </thead>
               </table>
@@ -111,10 +123,16 @@
               data-cookie-id-table="location_assetsDetailTable">
                 <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false"  data-formatter="hardwareLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
+                    <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
+                    <th data-searchable="false" data-visible="true" data-sortable="true" data-formatter="imageFormatter" data-field="image">{{ trans('admin/hardware/table.image') }}</th>
+                    <th data-searchable="false" data-sortable="true" data-formatter="hardwareLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
                     <th data-searchable="false" data-formatter="modelsLinkObjFormatter" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/form.tag') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
+                    <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
+                    <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="hardwareInOutFormatter">Checkin/Checkout</th>
+                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
                   </tr>
                 </thead>
               </table>
