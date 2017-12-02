@@ -440,60 +440,76 @@ class ReportsController extends Controller
 
             $header = [];
 
+
             if ($request->has('company')) {
-                $header[] = 'Company Name';
+                $header[] = trans('general.company');
             }
 
             if ($request->has('asset_name')) {
-                $header[] = 'Asset Name';
+                $header[] = trans('admin/hardware/form.name');
             }
+
             if ($request->has('asset_tag')) {
-                $header[] = 'Asset Tag';
+                $header[] = trans('admin/hardware/table.asset_tag');
             }
-            if ($request->has('manufacturer')) {
-                $header[] = 'Manufacturer';
-            }
+
             if ($request->has('model')) {
-                $header[] = 'Model';
-                $header[] = 'Model Number';
+                $header[] = trans('admin/hardware/form.model');
+                $header[] = trans('general.model_no');
             }
+
             if ($request->has('category')) {
-                $header[] = 'Category';
+                $header[] = trans('general.category');
             }
+
+            if ($request->has('manufacturer')) {
+                $header[] = trans('admin/hardware/form.manufacturer');
+            }
+
             if ($request->has('serial')) {
-                $header[] = 'Serial';
+                $header[] = trans('admin/hardware/table.serial');
             }
             if ($request->has('purchase_date')) {
-                $header[] = 'Purchase Date';
+                $header[] = trans('admin/hardware/table.purchase_date');
             }
+
             if ($request->has('purchase_cost')) {
-                $header[] = 'Purchase Cost';
+                $header[] = trans('admin/hardware/table.purchase_cost');
             }
+
             if ($request->has('eol')) {
-                $header[] = 'EOL';
+                $header[] = trans('admin/hardware/table.eol');
             }
+
             if ($request->has('order')) {
-                $header[] = 'Order Number';
+                $header[] = trans('admin/hardware/form.order');
             }
+
             if ($request->has('supplier')) {
-                $header[] = 'Supplier';
+                $header[] = trans('general.supplier');
             }
+
             if ($request->has('location')) {
-                $header[] = 'Location';
+                $header[] = trans('admin/hardware/table.location');
             }
+
             if ($request->has('assigned_to')) {
-                $header[] = 'Assigned To';
-                $header[] = 'Assigned Type';
+                $header[] = trans('admin/hardware/table.checkoutto');
+                $header[] = trans('general.type');
             }
+
             if ($request->has('username')) {
                 $header[] = 'Username';
             }
+
             if ($request->has('employee_num')) {
                 $header[] = 'Employee No.';
             }
+
             if ($request->has('status')) {
-                $header[] = 'Status';
+                $header[] = trans('general.status');
             }
+
             if ($request->has('warranty')) {
                 $header[] = 'Warranty';
                 $header[] = 'Warranty Expires';
@@ -503,8 +519,21 @@ class ReportsController extends Controller
                 $header[] = 'Value';
                 $header[] = 'Diff';
             }
+
+            if ($request->has('checkout_date')) {
+                $header[] = trans('admin/hardware/table.checkout_date');
+            }
+
             if ($request->has('expected_checkin')) {
                 $header[] = trans('admin/hardware/form.expected_checkin');
+            }
+
+            if ($request->has('created_at')) {
+                $header[] = trans('general.created_at');
+            }
+
+            if ($request->has('updated_at')) {
+                $header[] = trans('general.updated_at');
             }
 
             if ($request->has('notes')) {
@@ -521,7 +550,9 @@ class ReportsController extends Controller
 
             fputcsv($handle, $header);
 
-            $assets = Asset::with('company', 'assignedTo', 'location', 'defaultLoc', 'model', 'supplier', 'assetstatus', 'model.manufacturer');
+            $assets = \App\Models\Company::scopeCompanyables(Asset::select('assets.*'))->with(
+                'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
+                'model.category', 'model.manufacturer','supplier');
             
             if ($request->has('by_location_id')) {
                 $assets->where('assets.location_id', $request->input('by_location_id'));
@@ -543,15 +574,27 @@ class ReportsController extends Controller
                 $assets->InCategory($request->input('by_category_id'));
             }
 
+            if ($request->has('by_manufacturer_id')) {
+                $assets->ByManufacturer($request->input('by_manufacturer_id'));
+            }
+
             if ($request->has('by_order_number')) {
                 $assets->where('assets.order_number', $request->input('by_order_number'));
             }
 
-            if (($request->has('start')) && ($request->has('end'))) {
-                $assets->whereBetween('assets.purchase_date', [$request->input('start'), $request->input('end')]);
+            if ($request->has('by_status_id')) {
+                $assets->where('assets.status_id', $request->input('by_status_id'));
+            }
+
+            if (($request->has('purchase_start')) && ($request->has('purchase_end'))) {
+                $assets->whereBetween('assets.purchase_date', [$request->input('purchase_start'), $request->input('purchase_end')]);
+            }
+
+            if (($request->has('created_start')) && ($request->has('created_end'))) {
+                $assets->whereBetween('assets.created_at', [$request->input('created_start'), $request->input('created_end')]);
             }
             
-            $assets->orderBy('assets.created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields, $request) {
+            $assets->orderBy('assets.created_at', 'ASC')->chunk(500, function($assets) use($handle, $customfields, $request) {
 
                 foreach ($assets as $asset) {
                     $row = [];
@@ -562,14 +605,12 @@ class ReportsController extends Controller
 
                     if ($request->has('asset_name')) {
                         $row[] = ($asset->name) ? $asset->name : '';
+                        \Log::debug($asset->name);
+                        \Log::debug($asset);
                     }
 
                     if ($request->has('asset_tag')) {
                         $row[] = ($asset->asset_tag) ? $asset->asset_tag : '';
-                    }
-
-                    if ($request->has('manufacturer')) {
-                        $row[] = ($asset->model && $asset->model->manufacturer) ? $asset->model->manufacturer->name : '';
                     }
 
                     if ($request->has('model')) {
@@ -579,6 +620,10 @@ class ReportsController extends Controller
 
                     if ($request->has('category')) {
                         $row[] = ($asset->model->category) ? $asset->model->category->name : '';
+                    }
+
+                    if ($request->has('manufacturer')) {
+                        $row[] = ($asset->model && $asset->model->manufacturer) ? $asset->model->manufacturer->name : '';
                     }
 
                     if ($request->has('serial')) {
@@ -634,15 +679,7 @@ class ReportsController extends Controller
                     }
 
                     if ($request->has('status')) {
-                        if (( $asset->status_id == '0' ) && ( $asset->assigned_to == '0' )) {
-                            $row[] = trans('general.ready_to_deploy');
-                        } elseif (( $asset->status_id == '' ) && ( $asset->assigned_to == '0' )) {
-                            $row[] = trans('general.pending');
-                        } elseif ($asset->assetstatus) {
-                            $row[] = $asset->assetstatus->name;
-                        } else {
-                            $row[] = '';
-                        }
+                        $row[] = ($asset->assetstatus) ? $asset->assetstatus->name.' ('.$asset->present()->statusMeta.')' : '';
                     }
 
 
@@ -651,21 +688,31 @@ class ReportsController extends Controller
                         $row[] = $asset->present()->warrantee_expires();
                     }
 
+                    if ($request->has('purchase_cost')) {
+                        $row[]  = ($asset->purchase_cost!='') ? Helper::formatCurrencyOutput($asset->purchase_cost) : '';
+                    }
+
                     if ($request->has('depreciation')) {
-                        if ($asset->purchase_cost!='') {
                             $depreciation = $asset->getDepreciatedValue();
                             $diff = ($asset->purchase_cost - $depreciation);
-                            $row[]        = Helper::formatCurrencyOutput($asset->purchase_cost);
                             $row[]        = Helper::formatCurrencyOutput($depreciation);
                             $row[]        = Helper::formatCurrencyOutput($diff);
-                        } else {
-                            $row[] = '';
-                        }
-                        
+                    }
+
+                    if ($request->has('checkout_date')) {
+                        $row[] = ($asset->last_checkout) ? $asset->last_checkout : '';
                     }
 
                     if ($request->has('expected_checkin')) {
                         $row[] = ($asset->expected_checkin) ? $asset->expected_checkin : '';
+                    }
+
+                    if ($request->has('created_at')) {
+                        $row[] = ($asset->created_at) ? $asset->created_at : '';
+                    }
+
+                    if ($request->has('updated_at')) {
+                        $row[] = ($asset->updated_at) ? $asset->updated_at : '';
                     }
 
                     if ($request->has('notes')) {
