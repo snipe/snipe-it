@@ -257,22 +257,22 @@ class Asset extends Depreciable
   /**
    * Get the asset's location based on the assigned user
    **/
-    public function assetLoc()
+    public function assetLoc($iterations = 1)
     {
-        static $iterations=0;
         static $first_asset;
         if (!empty($this->assignedType())) {
             if ($this->assignedType() == self::ASSET) {
-                $iterations++;
                 if(!$first_asset) {
                     $first_asset=$this;
                 }
                 if($iterations>10) {
-                    throw new \Exception("Asset assignment Loop for Asset ID: ".$first_asset->id);
+                    $loop_id=$first_asset->id;
+                    $first_asset=null; //reset first_asset for additional use
+                    throw new \Exception("Asset assignment Loop for Asset ID: ".$loop_id);
                 }
                 $assigned_to=Asset::find($this->assigned_to); //have to do this this way because otherwise it errors
                 if ($assigned_to) {
-                    return $assigned_to->assetLoc();
+                    return $assigned_to->assetLoc($iterations + 1);
                 } // Recurse until we have a final location
             }
             if ($this->assignedType() == self::LOCATION) {

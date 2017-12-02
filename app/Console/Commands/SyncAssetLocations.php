@@ -109,7 +109,7 @@ class SyncAssetLocations extends Command
                     $assigned_asset_asset->unsetEventDispatcher();
                     $assigned_asset_asset->save();
                 } else {
-                    $output['warn'][] ='Asset Assigned asset ' . $assigned_asset_asset->assetLoc()->id. ' ('.$assigned_asset_asset->asset_tag.') does not seem to have a valid location';
+                    $output['warn'][] ='Asset Assigned asset ' . $assigned_asset_asset->id. ' ('.$assigned_asset_asset->asset_tag.') does not seem to have a valid location';
                 }
 
                 $bar->advance();
