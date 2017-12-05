@@ -170,6 +170,32 @@ class AssetModel extends SnipeModel
     }
 
     /**
+     * Query builder scope to search on text, including catgeory and manufacturer name
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeSearchByManufacturerOrCat($query, $search)
+    {
+
+        return $query->where('models.name', 'LIKE', "%$search%")
+            ->orWhere('model_number', 'LIKE', "%$search%")
+            ->orWhere(function ($query) use ($search) {
+                $query->whereHas('category', function ($query) use ($search) {
+                    $query->where('categories.name', 'LIKE', '%'.$search.'%');
+                });
+            })
+            ->orWhere(function ($query) use ($search) {
+                $query->whereHas('manufacturer', function ($query) use ($search) {
+                    $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                });
+            });
+
+    }
+
+    /**
      * Query builder scope to order on manufacturer
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -180,6 +206,19 @@ class AssetModel extends SnipeModel
     public function scopeOrderManufacturer($query, $order)
     {
         return $query->leftJoin('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on category name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderCategory($query, $order)
+    {
+        return $query->leftJoin('categories', 'models.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
     }
 
 

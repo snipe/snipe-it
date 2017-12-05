@@ -38,7 +38,7 @@
 
 
         <!-- Location -->
-        @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
+        @include ('partials.forms.edit.location-profile-select', ['translated_name' => trans('general.location')])
 
         <!-- Language -->
         <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
