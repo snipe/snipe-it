@@ -473,7 +473,7 @@ class ReportsController extends Controller
                 $header[] = trans('admin/hardware/table.purchase_date');
             }
 
-            if ($request->has('purchase_cost')) {
+            if (($request->has('purchase_cost'))  || ($request->has('depreciation'))) {
                 $header[] = trans('admin/hardware/table.purchase_cost');
             }
 
