@@ -277,20 +277,24 @@ class Asset extends Depreciable
             }
             if ($this->assignedType() == self::LOCATION) {
                 if ($this->assignedTo) {
+                    $iterations=0;
                     return $this->assignedTo;
                 }
 
             }
             if ($this->assignedType() == self::USER) {
                 if (($this->assignedTo) && $this->assignedTo->userLoc) {
+                    $iterations=0;
                     return $this->assignedTo->userLoc;
                 }
                 //this makes no sense
+                $iterations=0;
                 return $this->defaultLoc;
 
             }
 
         }
+        $iterations=0;
         return $this->defaultLoc;
     }
 

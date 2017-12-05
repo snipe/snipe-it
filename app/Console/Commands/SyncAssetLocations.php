@@ -103,13 +103,14 @@ class SyncAssetLocations extends Command
             foreach ($assigned_asset_assets as $assigned_asset_asset) {
 
                 // Check to make sure there aren't any invalid relationships
-                if ($assigned_asset_asset->assetLoc()) {
-                    $assigned_asset_asset->location_id = $assigned_asset_asset->assetLoc()->id;
-                    $output['info'][] ='Setting Asset Assigned asset ' . $assigned_asset_asset->assetLoc()->id. ' ('.$assigned_asset_asset->asset_tag.') location to: ' . $assigned_asset_asset->assetLoc()->id;
+                $assetLoc = $assigned_asset_asset->assetLoc();
+                if ($assetLoc) {
+                    $assigned_asset_asset->location_id = $assetLoc->id;
+                    $output['info'][] ='Setting Asset Assigned asset ' . $assetLoc->id. ' ('.$assigned_asset_asset->asset_tag.') location to: ' . $assetLoc->id;
                     $assigned_asset_asset->unsetEventDispatcher();
                     $assigned_asset_asset->save();
                 } else {
-                    $output['warn'][] ='Asset Assigned asset ' . $assigned_asset_asset->assetLoc()->id. ' ('.$assigned_asset_asset->asset_tag.') does not seem to have a valid location';
+                    $output['warn'][] ='Asset Assigned asset ' . $assetLoc->id. ' ('.$assigned_asset_asset->asset_tag.') does not seem to have a valid location';
                 }
 
                 $bar->advance();
