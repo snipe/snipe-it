@@ -515,7 +515,6 @@ class ReportsController extends Controller
                 $header[] = 'Warranty Expires';
             }
             if ($request->has('depreciation')) {
-                $header[] = 'Purchase Cost';
                 $header[] = 'Value';
                 $header[] = 'Diff';
             }
@@ -686,9 +685,6 @@ class ReportsController extends Controller
                         $row[] = $asset->present()->warrantee_expires();
                     }
 
-                    if ($request->has('purchase_cost')) {
-                        $row[]  = ($asset->purchase_cost!='') ? Helper::formatCurrencyOutput($asset->purchase_cost) : '';
-                    }
 
                     if ($request->has('depreciation')) {
                             $depreciation = $asset->getDepreciatedValue();
