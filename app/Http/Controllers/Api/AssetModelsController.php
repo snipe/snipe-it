@@ -189,18 +189,18 @@ class AssetModelsController extends Controller
             'models.image',
             'models.model_number',
             'models.manufacturer_id',
-        ])->with('manufacturer')->OrderManufacturer('ASC');
+            'models.category_id',
+        ])->with('manufacturer','category');
 
 
         if ($request->has('search')) {
-            $assetmodels = $assetmodels->where('models.name', 'LIKE', '%'.$request->get('search').'%')
-                ->orWhere('models.model_number', 'LIKE', '%'.$request->get('search').'%');
+            $assetmodels = $assetmodels->SearchByManufacturerOrCat($request->input('search'));
         }
 
-        $assetmodels = $assetmodels->orderby('models.name', 'asc')->orderby('models.model_number', 'asc')->paginate(50);
+        $assetmodels = $assetmodels->OrderCategory('ASC')->OrderManufacturer('ASC')->orderby('models.name', 'asc')->orderby('models.model_number', 'asc')->paginate(50);
 
         foreach ($assetmodels as $assetmodel) {
-            $assetmodel->use_text = (($assetmodel->manufacturer) ? e($assetmodel->manufacturer->name) : '').' '.$assetmodel->present()->modelName;
+            $assetmodel->use_text = (($assetmodel->category) ? e($assetmodel->category->name) : '').': '.(($assetmodel->manufacturer) ? e($assetmodel->manufacturer->name) : '').' '.$assetmodel->present()->modelName;
             $assetmodel->use_image = ($assetmodel->image) ? url('/').'/uploads/models/'.$assetmodel->image : null;
         }
 
