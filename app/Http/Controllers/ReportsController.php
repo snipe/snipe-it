@@ -645,7 +645,7 @@ class ReportsController extends Controller
                     }
 
                     if ($request->has('supplier')) {
-                        $row[] = ($asset->location) ? $asset->supplier->name : '';
+                        $row[] = ($asset->supplier) ? $asset->supplier->name : '';
                     }
                     
 
