@@ -188,17 +188,19 @@ class AssetModelsController extends Controller
             'models.name',
             'models.image',
             'models.model_number',
-        ])->with('manufacturer');
+            'models.manufacturer_id',
+        ])->with('manufacturer')->OrderManufacturer('ASC');
 
 
         if ($request->has('search')) {
             $assetmodels = $assetmodels->where('models.name', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('models.model_number', 'LIKE', '%'.$request->get('search').'%');
         }
+
         $assetmodels = $assetmodels->orderby('models.name', 'asc')->orderby('models.model_number', 'asc')->paginate(50);
 
         foreach ($assetmodels as $assetmodel) {
-            $assetmodel->use_text = $assetmodel->present()->modelName;
+            $assetmodel->use_text = (($assetmodel->manufacturer) ? e($assetmodel->manufacturer->name) : '').' '.$assetmodel->present()->modelName;
             $assetmodel->use_image = ($assetmodel->image) ? url('/').'/uploads/models/'.$assetmodel->image : null;
         }
 
