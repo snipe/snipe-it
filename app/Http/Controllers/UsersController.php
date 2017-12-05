@@ -1157,10 +1157,12 @@ class UsersController extends Controller
      */
     public function print($id)
     {
+
         $user = User::where('id',$id)->withTrashed()->first();
-        $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model')->get();
+        $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $licenses = $user->licenses()->get();
-        return view('users/print')->with('assets', $assets)->with('licenses',$licenses);
+        $accessories = $user->accessories()->get();
+        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories);
 
     }
 
