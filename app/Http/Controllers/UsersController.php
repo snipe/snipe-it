@@ -1147,4 +1147,21 @@ class UsersController extends Controller
             return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
         }
     }
+
+    /**
+     * LDAP form processing.
+     *
+     * @author Aladin Alaily
+     * @since [v1.8]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function print($id)
+    {
+        $user = User::where('id',$id)->withTrashed()->first();
+        $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model')->get();
+        $licenses = $user->licenses()->get();
+        return view('users/print')->with('assets', $assets)->with('licenses',$licenses);
+
+    }
+
 }
