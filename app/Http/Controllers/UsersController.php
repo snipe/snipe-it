@@ -1162,7 +1162,8 @@ class UsersController extends Controller
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $licenses = $user->licenses()->get();
         $accessories = $user->accessories()->get();
-        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories);
+        $consumables = $user->consumables()->get();
+        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables);
 
     }
 

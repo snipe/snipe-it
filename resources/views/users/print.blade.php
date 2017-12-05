@@ -138,6 +138,42 @@
         @endforeach
     </table>
 @endif
+
+@if ($consumables->count() > 0)
+    <br><br>
+    <table class="inventory">
+        <thead>
+        <tr>
+            <th colspan="4">{{ trans('general.consumables') }}</th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th style="width: 20px;"></th>
+            <th style="width: 40%;">Name</th>
+            <th style="width: 50%;">Category</th>
+            <th style="width: 10%;">Checked Out</th>
+        </tr>
+        </thead>
+        @php
+            $ccounter = 1;
+        @endphp
+
+        @foreach ($consumables as $consumable)
+
+            <tr>
+                <td>{{ $ccounter }}</td>
+                <td>{{ $consumable->manufacturer->name }} {{ $consumable->name }} {{ $consumable->model_number }}</td>
+                <td>{{ $consumable->category->name }}</td>
+                <td>{{  $consumable->assetlog->first()->created_at }}</td>
+            </tr>
+            @php
+                $ccounter++
+            @endphp
+        @endforeach
+    </table>
+@endif
+
 <br>
 <br>
 <br>
