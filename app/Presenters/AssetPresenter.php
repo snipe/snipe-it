@@ -148,6 +148,13 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.order_number'),
                 'formatter' => "orderNumberObjFilterFormatter"
             ], [
+                "field" => "eol",
+                "searchable" => false,
+                "sortable" => false,
+                "visible" => false,
+                "title" => trans('general.eol'),
+                "formatter" => "dateDisplayFormatter"
+            ], [
                 "field" => "warranty_months",
                 "searchable" => true,
                 "sortable" => true,

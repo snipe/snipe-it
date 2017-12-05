@@ -17,6 +17,13 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['auth']], function () {
         '{userId}/deletefile/{fileId}',
         [ 'as' => 'userfile.destroy', 'uses' => 'UsersController@getDeleteFile' ]
     );
+
+    Route::get(
+        '{userId}/print',
+        [ 'as' => 'users.print', 'uses' => 'UsersController@print' ]
+    );
+
+
     Route::get(
         '{userId}/showfile/{fileId}',
         [ 'as' => 'show/userfile', 'uses' => 'UsersController@displayFile' ]

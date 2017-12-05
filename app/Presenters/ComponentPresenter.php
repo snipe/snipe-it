@@ -50,6 +50,12 @@ class ComponentPresenter extends Presenter
                 "title" => trans('general.image'),
                 "visible" => false,
                 "formatter" => 'imageFormatter',
+            ],[
+                "field" => "serial",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/hardware/form.serial'),
+                "formatter" => "componentsLinkFormatter"
             ], [
                 "field" => "category",
                 "searchable" => true,
@@ -74,6 +80,12 @@ class ComponentPresenter extends Presenter
                 "sortable" => false,
                 "title" => trans('general.min_amt'),
                 "visible" => true,
+            ], [
+                "field" => "location",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('general.location'),
+                "formatter" => "locationsLinkObjFormatter"
             ], [
                 "field" => "order_number",
                 "searchable" => true,

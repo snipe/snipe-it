@@ -128,7 +128,11 @@ class Asset extends Depreciable
 
     public function availableForCheckout()
     {
-        if ((empty($this->assigned_to)) && (empty($this->deleted_at)) && ($this->assetstatus->deployable == 1)) {
+        if (
+            (empty($this->assigned_to)) &&
+            (empty($this->deleted_at)) &&
+            (($this->assetstatus) && ($this->assetstatus->deployable == 1)))
+        {
             return true;
         }
         return false;

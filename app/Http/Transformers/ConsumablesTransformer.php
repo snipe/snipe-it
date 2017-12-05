@@ -30,7 +30,7 @@ class ConsumablesTransformer
             'location'      => ($consumable->location) ? ['id' => (int) $consumable->location->id, 'name' => e($consumable->location->name)] : null,
             'manufacturer'  => ($consumable->manufacturer) ? ['id' => (int) $consumable->manufacturer->id, 'name' => e($consumable->manufacturer->name)] : null,
             'min_amt'       => (int) $consumable->min_amt,
-            'model_number'  => e($consumable->model_number),
+            'model_number'  => ($consumable->model_number!='') ? e($consumable->model_number) : null,
             'remaining'  => $consumable->numRemaining(),
             'order_number'  => e($consumable->order_number),
             'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
