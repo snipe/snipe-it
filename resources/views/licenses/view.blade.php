@@ -156,16 +156,21 @@
                       </tr>
                     @endif
 
-                    @can('viewKeys', $license)
+
                       @if (!is_null($license->serial))
                       <tr>
                         <td>{{ trans('admin/licenses/form.license_key') }}</td>
                         <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">
-                          {!! nl2br(e($license->serial)) !!}
+                          @can('viewKeys', $license)
+                            {!! nl2br(e($license->serial)) !!}
+                          @else
+                           ------------
+                          @endcan
+
                         </td>
                       </tr>
                       @endif
-                    @endcan
+
 
                     @if (!is_null($license->license_name))
                     <tr>
