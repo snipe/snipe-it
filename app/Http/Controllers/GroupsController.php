@@ -47,7 +47,7 @@ class GroupsController extends Controller
         $group = new Group;
         // Get all the available permissions
         $permissions = config('permissions');
-        $groupPermissions = array();
+        $groupPermissions = Helper::selectedPermissionsArray($permissions, $permissions);
         $selectedPermissions = Input::old('permissions', $groupPermissions);
 
         // Show the page
