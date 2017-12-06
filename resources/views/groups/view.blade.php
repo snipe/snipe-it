@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/groups/titles.update') }} </a>
+    <a href="{{ route('groups.edit', ['group' => $group->id]) }}" class="btn btn-primary text-right">{{ trans('admin/groups/titles.update') }} </a>
     <a href="{{ route('groups.index') }}" class="btn btn-default pull-right">{{ trans('general.back') }}</a>
 @stop
 

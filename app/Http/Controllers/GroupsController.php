@@ -84,7 +84,7 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function edit($id = null)
+    public function edit($id)
     {
         $group = Group::find($id);
 
@@ -95,7 +95,7 @@ class GroupsController extends Controller
             return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
         }
 
-        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found'));
     }
 
     /**

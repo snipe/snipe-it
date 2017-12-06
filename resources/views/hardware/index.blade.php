@@ -86,7 +86,7 @@
                   'company_id'=>e(Input::get('company_id')),
                   'status_id'=>e(Input::get('status_id'))))}}"
               data-click-to-select="true"
-              data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.app_version') }}">
+              data-cookie-id-table="{{ e(Input::get('status')) }}assetTable">
               </table>
             </div><!-- /.col -->
           </div><!-- /.row -->

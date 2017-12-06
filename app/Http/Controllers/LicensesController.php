@@ -288,7 +288,7 @@ class LicensesController extends Controller
             }
 
 
-            $this->authorize('checkout', $licenseSeat);
+            $this->authorize('checkout', $license);
 
             // Declare the rules for the form validation
             $rules = [
