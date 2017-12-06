@@ -1155,15 +1155,15 @@ class UsersController extends Controller
      * @since [v1.8]
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function print($id)
+    public function printInventory($id)
     {
 
-        $user = User::where('id',$id)->withTrashed()->first();
+        $show_user = User::where('id',$id)->withTrashed()->first();
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-        $licenses = $user->licenses()->get();
-        $accessories = $user->accessories()->get();
-        $consumables = $user->consumables()->get();
-        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables);
+        $licenses = $show_user->licenses()->get();
+        $accessories = $show_user->accessories()->get();
+        $consumables = $show_user->consumables()->get();
+        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables)->with('show_user', $show_user);
 
     }
 

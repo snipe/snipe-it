@@ -20,7 +20,7 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['auth']], function () {
 
     Route::get(
         '{userId}/print',
-        [ 'as' => 'users.print', 'uses' => 'UsersController@print' ]
+        [ 'as' => 'users.print', 'uses' => 'UsersController@printInventory' ]
     );
 
 

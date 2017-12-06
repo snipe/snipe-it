@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Assigned to {{ $user->present()->fullName() }}</title>
+    <title>Assigned to {{ $show_user->present()->fullName() }}</title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-<h3>Assigned to {{ $user->present()->fullName() }}</h3>
+<h3>Assigned to {{ $show_user->present()->fullName() }}</h3>
 
 @if ($assets->count() > 0)
     @php
