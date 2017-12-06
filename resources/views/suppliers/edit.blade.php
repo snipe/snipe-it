@@ -6,6 +6,7 @@
     'formAction' => ($item) ? route('suppliers.update', ['supplier' => $item->id]) : route('suppliers.store'),
 ])
 
+
 {{-- Page content --}}
 @section('inputFields')
 
@@ -44,6 +45,7 @@
 
 <!-- Image -->
 @if ($item->image)
+
 <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
     <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
     <div class="col-md-5">
@@ -57,7 +59,11 @@
 <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
     <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
     <div class="col-md-5">
-        {{ Form::file('image') }}
+        <label class="btn btn-default">
+            {{ trans('button.select_file')  }}
+            <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
+        </label>
+        <p class="help-block">Accepted filetypes are jpg, png, gif and svg</p>
         {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
     </div>
 </div>

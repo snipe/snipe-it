@@ -87,12 +87,17 @@
         @endif
 
         <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
-          <label class="col-md-3 control-label" for="avatar">{{ trans('general.avatar_upload') }}</label>
-          <div class="col-md-8">
-            {{ Form::file('avatar') }}
+          <label class="col-md-3 control-label" for="avatar">{{ trans('general.image_upload') }}</label>
+          <div class="col-md-5">
+            <label class="btn btn-default">
+              {{ trans('button.select_file')  }}
+              <input type="file" name="avatar" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
+            </label>
+            <p class="help-block">{{ trans('general.image_filetypes_help') }}</p>
             {!! $errors->first('avatar', '<span class="alert-msg">:message</span>') !!}
           </div>
         </div>
+
 
 
         <!-- Two factor opt in -->
