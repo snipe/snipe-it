@@ -587,7 +587,6 @@ $(document).ready(function() {
     $('tr.header-row input:radio').on('ifClicked', function () {
         value = $(this).attr('value');
         area = $(this).data('checker-group');
-        console.log('Area selected is  ' + area);
         $('.radiochecker-'+area+'[value='+value+']').iCheck('check');
     });
 
