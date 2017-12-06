@@ -17,14 +17,7 @@ return array(
             'label'      => '',
             'note'       => 'Determines whether the user has access to most aspects of the admin. ',
             'display'    => true,
-        ),
-
-        array(
-            'permission' => 'admin.api_key',
-            'label'      => 'Create API Key',
-            'note'       => 'Determines whether the user can access the API via API key.',
-            'display'    => false,
-        ),
+        )
     ),
 
     'Reports' => array(
