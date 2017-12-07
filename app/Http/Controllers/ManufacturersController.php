@@ -123,7 +123,7 @@ class ManufacturersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @since [v1.0]
      */
-    public function update(Request $request, $manufacturerId = null)
+    public function update(ImageUploadRequest $request, $manufacturerId = null)
     {
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {

@@ -11,6 +11,7 @@ use App\Models\Setting;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This controller handles all actions related to User Profiles for
@@ -40,7 +41,7 @@ class ProfileController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postIndex()
+    public function postIndex(ImageUploadRequest $request)
     {
 
         $user = Auth::user();

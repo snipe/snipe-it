@@ -144,7 +144,7 @@ class DepartmentsController extends Controller
         return view('departments/edit', compact('item'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(ImageUploadRequest $request, $id) {
 
         $this->authorize('create', Department::class);
         if (is_null($department = Department::find($id))) {

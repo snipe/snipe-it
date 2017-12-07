@@ -28,7 +28,7 @@
 - What specific Snipe-IT page you're on, and what specific element you're interacting with to trigger the error
 - If a stacktrace is provided in the error, include that too.
 - Any errors that appear in your browser's error console.
-- Confirm whether the error is reproduceable on the demo: https://snipeitapp.com/demo.
+- Confirm whether the error is reproducible on the demo: https://snipeitapp.com/demo.
 - Include any additional information you can find in `app/storage/logs` and your webserver's logs.
 - Include what you've done so far in the installation, and if you got any error messages along the way.
 - Indicate whether or not you've manually edited any data directly in the database
