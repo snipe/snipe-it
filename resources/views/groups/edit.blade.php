@@ -88,10 +88,10 @@
                         <h4>{{ $area . ': ' . $localPermission['label'] }}</h4>
                     </td>
                     <td class="col-md-1 permissions-item">
-                        {{ Form::radio('permission['.$localPermission['permission'].']', '1',$groupPermissions[$localPermission['permission'] ] == '1',['value'=>"grant", 'class'=>'minimal']) }}
+                        {{ Form::radio('permission['.$localPermission['permission'].']', '1',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),['value'=>"grant", 'class'=>'minimal']) }}
                     </td>
                     <td class="col-md-1 permissions-item">
-                        {{ Form::radio('permission['.$localPermission['permission'].']', '0',$groupPermissions[$localPermission['permission'] ] == '0',['value'=>"grant", 'class'=>'minimal']) }}
+                        {{ Form::radio('permission['.$localPermission['permission'].']', '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),['value'=>"grant", 'class'=>'minimal']) }}
                     </td>
                 </tr>
 
@@ -125,10 +125,10 @@
                                 {{ $this_permission['label'] }}
                         </td>
                         <td class="col-md-1 permissions-item">
-                            {{ Form::radio('permission['.$this_permission['permission'].']', '1',$groupPermissions[$this_permission['permission'] ] == '1',['class'=>'minimal radiochecker-'.str_slug($area)]) }}
+                            {{ Form::radio('permission['.$this_permission['permission'].']', '1',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '1' : null),['class'=>'minimal radiochecker-'.str_slug($area)]) }}
                         </td>
                         <td class="col-md-1 permissions-item">
-                            {{ Form::radio('permission['.$this_permission['permission'].']', '0',$groupPermissions[$this_permission['permission'] ] == '0',['class'=>'minimal radiochecker-'.str_slug($area)]) }}
+                            {{ Form::radio('permission['.$this_permission['permission'].']', '0',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '0' : null),['class'=>'minimal radiochecker-'.str_slug($area)]) }}
                         </td>
 
                     </tr>
