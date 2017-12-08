@@ -829,6 +829,15 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "Gelob",
+      "name": "Ryan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/422752?v=4",
+      "profile": "https://github.com/Gelob",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }
