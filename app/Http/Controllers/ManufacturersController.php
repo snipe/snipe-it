@@ -35,6 +35,7 @@ class ManufacturersController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', Manufacturer::class);
         return view('manufacturers/index', compact('manufacturers'));
     }
 
@@ -49,6 +50,7 @@ class ManufacturersController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Manufacturer::class);
         return view('manufacturers/edit')->with('item', new Manufacturer);
     }
 
@@ -65,6 +67,7 @@ class ManufacturersController extends Controller
     public function store(ImageUploadRequest $request)
     {
 
+        $this->authorize('edit', Manufacturer::class);
         $manufacturer = new Manufacturer;
         $manufacturer->name            = $request->input('name');
         $manufacturer->user_id          = Auth::user()->id;
@@ -104,6 +107,7 @@ class ManufacturersController extends Controller
      */
     public function edit($id = null)
     {
+        $this->authorize('edit', Manufacturer::class);
         // Check if the manufacturer exists
         if (is_null($item = Manufacturer::find($id))) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
@@ -125,6 +129,7 @@ class ManufacturersController extends Controller
      */
     public function update(ImageUploadRequest $request, $manufacturerId = null)
     {
+        $this->authorize('edit', Manufacturer::class);
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturer  page
@@ -186,6 +191,7 @@ class ManufacturersController extends Controller
      */
     public function destroy($manufacturerId)
     {
+        $this->authorize('delete', Manufacturer::class);
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturers page
@@ -224,6 +230,7 @@ class ManufacturersController extends Controller
      */
     public function show($manufacturerId = null)
     {
+        $this->authorize('view', Manufacturer::class);
         $manufacturer = Manufacturer::find($manufacturerId);
 
         if (isset($manufacturer->id)) {
