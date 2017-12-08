@@ -387,7 +387,7 @@ class LicensesController extends Controller
 
         $license = License::find($licenseSeat->license_id);
 
-        $this->authorize('checkin', $licenseSeat);
+        $this->authorize('checkin', $license);
 
         if (!$license->reassignable) {
             // Not allowed to checkin
