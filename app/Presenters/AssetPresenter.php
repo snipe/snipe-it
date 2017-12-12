@@ -201,6 +201,20 @@ class AssetPresenter extends Presenter
                 "visible" => false,
                 "title" => trans('admin/hardware/form.expected_checkin'),
                 "formatter" => "dateDisplayFormatter"
+            ], [
+                "field" => "last_audit_date",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('general.last_audit'),
+                "formatter" => "dateDisplayFormatter"
+            ], [
+                "field" => "next_audit_date",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('general.next_audit_date'),
+                "formatter" => "dateDisplayFormatter"
             ],
         ];
 

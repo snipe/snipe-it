@@ -49,7 +49,9 @@ class Asset extends Depreciable
         'deleted_at',
         'purchase_date',
         'last_checkout',
-        'expected_checkin'
+        'expected_checkin',
+        'last_audit_date',
+        'next_audit_date'
     ];
 
 
@@ -68,6 +70,7 @@ class Asset extends Depreciable
         'status'          => 'integer',
         'purchase_cost'   => 'numeric|nullable',
         'next_audit_date'  => 'date|nullable',
+        'last_audit_date'  => 'date|nullable',
     ];
 
   /**

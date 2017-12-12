@@ -72,6 +72,8 @@ class AssetsController extends Controller
             'updated_at',
             'purchase_date',
             'purchase_cost',
+            'last_audit_date',
+            'next_audit_date',
             'warranty_months',
         ];
 
@@ -675,7 +677,11 @@ class AssetsController extends Controller
 
 
         if ($asset) {
+            // We don't want to log this as a normal update, so let's bypass that
+            $asset->unsetEventDispatcher();
             $asset->next_audit_date = $request->input('next_audit_date');
+            $asset->last_audit_date = date('Y-m-d h:i:s');
+
             if ($asset->save()) {
                 $log = $asset->logAudit(request('note'),request('location_id'));
                 return response()->json(Helper::formatStandardApiResponse('success', [
