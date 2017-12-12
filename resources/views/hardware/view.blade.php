@@ -617,11 +617,14 @@
             <div class="col-md-12">
               <table
                       class="table table-striped snipe-table"
-                      name="assetHistory"
+                      name="asset-history"
                       id="table"
                       class="table table-striped snipe-table"
                       data-sort-order="desc"
                       data-show-columns="true"
+                      data-search="true"
+                      data-cookie="true"
+                      data-show-refresh="true"
                       data-cookie-id-table="asset-history"
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
                 <thead>
