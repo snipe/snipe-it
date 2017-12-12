@@ -151,6 +151,7 @@
     'recent_activity'		=> 'Recent Activity',
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Reports',
+    'restored'				=> 'restored',
     'requested'				=> 'Requested',
     'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Save',
