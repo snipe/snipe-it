@@ -424,6 +424,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
                 ->orWhere('users.phone', 'LIKE', "%$search%")
                 ->orWhere('users.jobtitle', 'LIKE', "%$search%")
                 ->orWhere('users.employee_num', 'LIKE', "%$search%")
+                ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%", "%$search%"])
                 ->orWhere(function ($query) use ($search) {
                     $query->whereHas('userloc', function ($query) use ($search) {
                         $query->where('locations.name', 'LIKE', '%'.$search.'%');
