@@ -143,29 +143,32 @@
                     <tr>
                       <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
                       <td>
-                      @can('view', \App\Models\Manufacturer::class)
-                        <a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
-                        {{ $asset->model->manufacturer->name }}
-                        </a>
-                      @else
-                        {{ $asset->model->manufacturer->name }}
-                      @endcan
+                        <ul class="list-unstyled" style="line-height: 25px;">
+                        @can('view', \App\Models\Manufacturer::class)
 
-                        @if ($asset->model->manufacturer->url)
-                            <br><i class="fa fa-globe"></i> <a href="{{ $asset->model->manufacturer->url }}">{{ $asset->model->manufacturer->url }}</a>
-                        @endif
+                          <li><a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
+                          {{ $asset->model->manufacturer->name }}</li>
+                          </a>
+                        @else
+                         <li> {{ $asset->model->manufacturer->name }}</li>
+                        @endcan
 
-                        @if ($asset->model->manufacturer->support_url)
-                            <br><i class="fa fa-life-ring"></i> <a href="{{ $asset->model->manufacturer->support_url }}">{{ $asset->model->manufacturer->support_url }}</a>
-                          @endif
+                      @if ($asset->model->manufacturer->url)
+                            <li><i class="fa fa-globe"></i> <a href="{{ $asset->model->manufacturer->url }}">{{ $asset->model->manufacturer->url }}</a></li>
+                      @endif
 
-                          @if ($asset->model->manufacturer->support_phone)
-                            <br><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}
-                          @endif
+                      @if ($asset->model->manufacturer->support_url)
+                            <li><i class="fa fa-life-ring"></i> <a href="{{ $asset->model->manufacturer->support_url }}">{{ $asset->model->manufacturer->support_url }}</a></li>
+                       @endif
 
-                          @if ($asset->model->manufacturer->support_email)
-                            <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $asset->model->manufacturer->support_email }}">{{ $asset->model->manufacturer->support_email }}</a>
-                          @endif
+                       @if ($asset->model->manufacturer->support_phone)
+                            <li><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}</li>
+                       @endif
+
+                       @if ($asset->model->manufacturer->support_email)
+                            <li><i class="fa fa-envelope"></i> <a href="mailto:{{ $asset->model->manufacturer->support_email }}">{{ $asset->model->manufacturer->support_email }}</a></li>
+                       @endif
+                        </ul>
                       </td>
                     </tr>
                     @endif
@@ -426,7 +429,7 @@
                   {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
                 </p>
 
-                <ul class="list-unstyled">
+                  <ul class="list-unstyled" style="line-height: 25px;">
                   @if ((isset($asset->assignedTo->email)) && ($asset->assignedTo->email!=''))
                     <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                   @endif
