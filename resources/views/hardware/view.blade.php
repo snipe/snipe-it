@@ -32,19 +32,22 @@
 {{-- Page content --}}
 @section('content')
 <div class="row">
+  
+  @if ($asset->deleted_at!='')
+    <div class="col-md-12">
+      <div class="alert alert-danger">
+        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+        <strong>WARNING: </strong>
+        This asset has been deleted.
+        You must <a href="{{ route('restore/hardware', $asset->id) }}">restore it</a> before you can assign it to someone.
+      </div>
+    </div>
+  @endif
+
   <div class="col-md-12">
 
 
-    @if ($asset->deleted_at!='')
-        <div class="col-md-12">
-             <div class="alert alert-danger">
-                    <i class="fa fa-exclamation-circle faa-pulse animated"></i>
-                    <strong>WARNING: </strong>
-                    This asset has been deleted.
-                    You must <a href="{{ route('restore/hardware', $asset->id) }}">restore it</a> before you can assign it to someone.
-               </div>
-        </div>
-    @endif
+
 
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
