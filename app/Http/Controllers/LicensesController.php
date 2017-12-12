@@ -315,7 +315,7 @@ class LicensesController extends Controller
                 $licenseSeat->asset_id = $request->input('asset_id');
 
                 // Override asset's assigned user if available
-                if ($target->assigned_to!='') {
+                if ($target->checkedOutToUser()) {
                     $licenseSeat->assigned_to =  $target->assigned_to;
                 }
 
