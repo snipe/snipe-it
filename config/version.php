@@ -1,7 +1,7 @@
 <?php
 return array (
-  'app_version' => 'v4.1.8',
-  'full_app_version' => 'v4.1.8 - build 3103-geb827cd',
+  'app_version' => 'v4.1.8-pre',
+  'full_app_version' => 'v4.1.8-pre - build 3103-geb827cd',
   'build_version' => '3103',
   'prerelease_version' => '',
   'hash_version' => 'geb827cd',
