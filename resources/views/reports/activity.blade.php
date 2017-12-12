@@ -32,6 +32,7 @@
                             <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                             <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">To</th>
                             <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
+                            <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">Changed</th>
                         </tr>
                     </thead>
                 </table>

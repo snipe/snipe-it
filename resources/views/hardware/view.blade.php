@@ -619,24 +619,28 @@
                       class="table table-striped snipe-table"
                       name="assetHistory"
                       id="table"
+                      class="table table-striped snipe-table"
                       data-sort-order="desc"
-                      data-height="400"
+                      data-show-columns="true"
+                      data-cookie-id-table="asset-history"
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
                 <thead>
                 <tr>
                   <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
                   <th class="col-sm-2" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                  <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                  <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-1" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-1" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
                   @if  ($snipeSettings->require_accept_signature=='1')
-                    <th class="col-md-3" data-field="signature_file" data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
+                  <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">Changed</th>
                 </tr>
                 </thead>
               </table>
+
             </div>
           </div> <!-- /.row -->
         </div> <!-- /.tab-pane history -->
@@ -676,7 +680,7 @@
                   <tr>
                     <th class="col-md-4">{{ trans('general.notes') }}</th>
                     <th class="col-md-2"></th>
-                    <th class="col-md-4"><span class="line"></span>{{ trans('general.file_name') }}</th>
+                    <th class="col-md-4">{{ trans('general.file_name') }}</th>
                     <th class="col-md-2"></th>
                     <th class="col-md-2"></th>
                   </tr>

@@ -395,6 +395,19 @@
         }
     }
 
+
+
+    function changeLogFormatter(value) {
+        var result = '';
+            for (var index in value) {
+                result += index + ': <del>' + value[index].old + '</del>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
+            }
+
+        return result;
+
+    }
+
+
     function deployedLocationFormatter(row, value) {
         if ((row) && (row!=undefined)) {
             return '<a href="{{ url('/') }}/locations/' + row.id + '"> ' + row.name + '</a>';
