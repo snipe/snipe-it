@@ -5,17 +5,17 @@ return array(
     'does_not_exist' => 'Komponente existiert nicht.',
 
     'create' => array(
-        'error'   => 'Komponente wurde nicht erstellt, bitte versuche es noch einmal.',
+        'error'   => 'Komponente wurde nicht erstellt. Bitte versuchen Sie es erneut.',
         'success' => 'Komponente wurde erfolgreich erstellt.'
     ),
 
     'update' => array(
-        'error'   => 'Komponente wurde nicht geändert, bitte versuche es noch einmal',
+        'error'   => 'Komponente wurde nicht geändert. Bitte versuchen Sie es erneut',
         'success' => 'Komponente erfolgreich geändert.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Sind Sie sich sicher das sie diese Komponente löschen wollen?',
+        'confirm'   => 'Sind Sie sicher, dass Sie diese Komponente löschen möchten?',
         'error'   => 'Beim Löschen der Komponente ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'success' => 'Die Komponente wurde erfolgreich gelöscht.'
     ),
@@ -27,8 +27,8 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   		=> 'Komponente konnte nicht eingebucht werden. Bitte versuchen Sie es erneut',
-        'success' 		=> 'Komponente wurde erfolgreich eingebucht.',
+        'error'   		=> 'Komponente konnte nicht zurückgenommen werden. Bitte versuchen Sie es erneut',
+        'success' 		=> 'Komponente wurde erfolgreich zurückgenommen.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
     )
 

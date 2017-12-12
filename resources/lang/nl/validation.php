@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Het geselecteerde kenmerk :attribute is ongeldig.',
     'numeric'              => ':attribute moet een getal zijn.',
     'present'              => ':attribute veld moet aanwezig zijn.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Dit is geen geldige regex. ',
     'regex'                => 'Het formaat van :attribute is ongeldig.',
     'required'             => 'Het veld :attribute is verplicht.',
     'required_if'          => 'het veld :attribute is verplicht als :other gelijk is aan :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Het veld :attribute is reeds in gebruik.',
     'uploaded'             => 'Uploaden van :attribute is mislukt.',
     'url'                  => 'Het formaat van :attribute is ongeldig.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "De :attribute moet uniek zijn. ",
 
     /*
     |--------------------------------------------------------------------------

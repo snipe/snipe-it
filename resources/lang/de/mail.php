@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'a_user_canceled' => 'Eine Geräte Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
+    'a_user_canceled' => 'Eine Geräte-Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',
     'accessory_name' => 'Zubehör Name:',
     'additional_notes' => 'Zusätzliche Bemerkungen:',
@@ -38,7 +38,7 @@ return array(
     'items_below_minimum' => '{1} Gegenstand, der unter dem dem Mindestbestand ist oder es bald sein wird. | [2, Inf] Gegenstände, die unter dem Mindestbestand sind oder es bald sein werden.',
     'Item_Request_Canceled' => 'Gegenstands Anfrage abgebrochen',
     'Item_Requested' => 'Gegenstand angefortdert',
-    'licenses_expiring' => '{1} Lizenz läuft in den nächsten 60 Tagen ab. | [2, Inf] Lizenzen laufen in den nächsten 60 Tagen ab.',
+    'licenses_expiring' => '{1} Lizenz, die in den nächsten 60 Tagen abläuft. | [2, Inf] Lizenzen, die in den nächsten 60 Tagen ablaufen.',
     'link_to_update_password' => 'Klicken Sie bitte auf den folgenden Link zum Aktualisieren Ihres :web Passworts:',
     'login_first_admin' => 'Melden Sie sich zu Ihrer neuen Snipe-IT-Installation mithilfe der unten stehenden Anmeldeinformationen an:',
     'login' => 'Benutzername:',
@@ -58,10 +58,10 @@ return array(
     'supplier' => 'Lieferant',
     'tag' => 'Kennzeichnung',
     'test_email' => 'Test E-Mail von Snipe-IT',
-    'test_mail_text' => 'Dies ist ein Test von Snipe-IT-Asset-Management-System. Wenn du dies erhalten hast funktioniert das Senden von Mails :)',
+    'test_mail_text' => 'Dies ist ein Test von Snipe-IT-Asset-Management-System. Wenn Sie das erhalten haben, funktioniert das Senden von Mails :)',
     'the_following_item' => 'Der folgende Gegenstand wurde eingecheckt: ',
-    'There_are' => 'Da ist {1} | [2, Inf] Da sind',
-    'to_reset' => 'Zum zurücksetzen Ihres :web Passwortes füllen Sie dies Formular aus:',
+    'There_are' => 'Es existiert {1} | [2, Inf] Es existieren',
+    'to_reset' => 'Zum Zurücksetzen Ihres :web Passwortes, füllen Sie bitte dieses Formular aus:',
     'type' => 'Typ',
     'user' => 'Benutzer:',
     'username' => 'Benutzername:',

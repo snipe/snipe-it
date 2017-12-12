@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'تصنيف الصيانة',
+        'asset_maintenance_type' => 'نوع الصيانة',
         'title'                  => 'المسمى',
         'start_date'             => 'بدأت',
         'completion_date'        => 'أنجزت',

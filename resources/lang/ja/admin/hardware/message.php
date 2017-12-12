@@ -63,7 +63,7 @@ return array(
         'success' 		=> '資産は正常にチェックアウトされました。',
         'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。',
         'not_available' => 'この資産はチェックアウトできません!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'リストから少なくとも1つの資産を選択する必要があります'
     ),
 
     'checkin' => array(

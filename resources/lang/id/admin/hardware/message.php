@@ -63,7 +63,7 @@ return array(
         'success' 		=> 'Sukses memberikan aset.',
         'user_does_not_exist' => 'Pengguna tersebut tidak terdaftar. Silahkan coba kembali.',
         'not_available' => 'Aset tersebut tidak tersedia untuk checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Anda harus memilih setidaknya satu aset dari daftar'
     ),
 
     'checkin' => array(

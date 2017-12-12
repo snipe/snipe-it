@@ -63,7 +63,7 @@ return array(
         'success' 		=> '자산이 반출되었습니다.',
         'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
         'not_available' => '그 자산은 반출 할 수 없습니다!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => '목록에서 자산을 하나 이상 선택해야 합니다.'
     ),
 
     'checkin' => array(

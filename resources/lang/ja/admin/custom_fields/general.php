@@ -21,7 +21,7 @@ return array(
     'field_element_short'     => 'エレメント',
     'field_format'            => 'フォーマット',
     'field_custom_format'     => 'カスタム形式：',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'このフィールドでは、検証のために正規表現を使用できます。たとえば、カスタムフィールド値に有効なIMEI（15桁）が含まれていることを検証するには、<code>regex：/ ^ [0-9]{15} $ / </code>を使用します。',
     'required'   		          => '必須',
     'req'   		              => '必須',
     'used_by_models'   		    => '型番で使用',

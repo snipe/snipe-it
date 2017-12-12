@@ -7,16 +7,16 @@ return array(
     'group_name_required' => '"Name" darf nicht leer sein',
 
     'success' => array(
-        'create' => 'Die Gruppe wurder erfolgreich erstellt.',
-        'update' => 'Die Gruppe wurder erfolgreich geändert.',
-        'delete' => 'Die Gruppe wurder erfolgreich gelöscht.',
+        'create' => 'Die Gruppe wurde erfolgreich erstellt.',
+        'update' => 'Die Gruppe wurde erfolgreich geändert.',
+        'delete' => 'Die Gruppe wurde erfolgreich gelöscht.',
     ),
 
     'delete' => array(
         'confirm'   => 'Sind Sie sicher, dass Sie die Gruppe löschen wollen?',
-        'create' => 'Beim Erstellen der Gruppe ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
-        'update' => 'Beim Aktualisieren der Gruppe ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
-        'delete' => 'Beim Löschen der Gruppe ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
+        'create' => 'Beim Erstellen der Gruppe ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        'update' => 'Beim Aktualisieren der Gruppe ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        'delete' => 'Beim Löschen der Gruppe ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
     ),
 
 );

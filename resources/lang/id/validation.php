@@ -67,7 +67,7 @@ return array(
     'not_in'               => ':attribute yang di pilih tidak benar.',
     'numeric'              => ':attribute harus dalam angka.',
     'present'              => 'Bidang atribut: harus ada.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Itu bukan regex yang valid. ',
     'regex'                => 'Format :attribute tidak benar.',
     'required'             => 'Kolom :attribute wajib di-isi.',
     'required_if'          => 'Kolom :attribute wajib di-isi ketika :other nya :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute sudah digunakan.',
     'uploaded'             => 'Atribut: gagal diupload.',
     'url'                  => 'Format :attribute tidak benar.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute harus unik.",
 
     /*
     |--------------------------------------------------------------------------

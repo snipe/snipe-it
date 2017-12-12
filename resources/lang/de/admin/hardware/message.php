@@ -5,7 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
                         Falls sich dieser Status verändert hat, aktualisieren Sie bitte den Asset Status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
-    'does_not_exist_or_not_requestable' => 'Netter Versuch. Das Asset existiert nicht oder ist nicht abrufbar.',
+    'does_not_exist_or_not_requestable' => 'Netter Versuch. Dieses Asset existiert nicht oder ist nicht anforderbar.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
 
     'create' => array(
@@ -31,15 +31,15 @@ return array(
 
 
     'deletefile' => array(
-        'error'   => 'Datei wurde nicht gelöscht. Bitte noch einmal Probieren.',
+        'error'   => 'Datei wurde nicht gelöscht. Bitte versuchen Sie es erneut.',
         'success' => 'Datei erfolgreich gelöscht.',
     ),
 
     'upload' => array(
-        'error'   => 'Datei(en) wurde nicht hochgeladen. Bitte noch einmal Probieren.',
+        'error'   => 'Datei(en) wurde(n) nicht hochgeladen. Bitte versuchen Sie es erneut.',
         'success' => 'Datei(en) erfolgreich hochgeladen.',
-        'nofiles' => 'Es wurde keine Datei für den Upload ausgewählt, oder die Datei ist zu groß',
-        'invalidfiles' => 'Eine oder mehrere Ihrer Dateien ist zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
+        'nofiles' => 'Es wurde keine Datei zum Hochladen ausgewählt, oder die Datei ist zu groß',
+        'invalidfiles' => 'Eine oder mehrere Ihrer Dateien sind zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
     ),
 
     'import' => array(

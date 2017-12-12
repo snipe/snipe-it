@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Auswahl :attribute ist ungültig.',
     'numeric'              => ':attribute muss eine Zahl sein.',
     'present'              => 'Das Attributfeld muss vorhanden sein.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Dies ist kein gültiger Regex-Ausdruck. ',
     'regex'                => ':attribute Format ungültig.',
     'required'             => ':attribute Feld muss ausgefüllt sein.',
     'required_if'          => ':attribute wird benötigt wenn :other :value entspricht.',

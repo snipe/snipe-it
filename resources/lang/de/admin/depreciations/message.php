@@ -7,12 +7,12 @@ return array(
 
 
     'create' => array(
-        'error'   => 'Abschreibungsklasse wurde nicht erstellt, bitte versuchen Sie es erneut. :(',
-        'success' => 'Abschreibungsklasse wurde erfolgreich erstellt. :)'
+        'error'   => 'Abschreibungsklasse wurde nicht erstellt. Bitte versuchen Sie es erneut.',
+        'success' => 'Abschreibungsklasse wurde erfolgreich erstellt.'
     ),
 
     'update' => array(
-        'error'   => 'Abschreibungsklasse wurde nicht aktualisiert, bitte versuchen Sie es erneut',
+        'error'   => 'Abschreibungsklasse wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
         'success' => 'Abschreibungsklasse wurde erfolgreich aktualisiert.'
     ),
 

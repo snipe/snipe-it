@@ -67,7 +67,7 @@ return array(
     'not_in'               => '选择的 :attribute 无效',
     'numeric'              => ':attribute 必须是数字',
     'present'              => '：属性字段必须存在。',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => '这不是一个有效的正则表达式。 ',
     'regex'                => ':attribute 格式不对',
     'required'             => ':attribute 字段必填',
     'required_if'          => ':attribute 字段在 :other 是 :value 时是必须的',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute 已经被采用',
     'uploaded'             => '：属性无法上传。',
     'url'                  => ':attribute 格式无效',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute 属性必须唯一。",
 
     /*
     |--------------------------------------------------------------------------
