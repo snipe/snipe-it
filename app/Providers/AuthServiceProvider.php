@@ -14,6 +14,7 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
+use App\Models\Manufacturer;
 use App\Models\User;
 use App\Policies\AccessoryPolicy;
 use App\Policies\AssetModelPolicy;
@@ -28,6 +29,7 @@ use App\Policies\LocationPolicy;
 use App\Policies\StatuslabelPolicy;
 use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
+use App\Policies\ManufacturerPolicy;
 use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -37,6 +39,8 @@ class AuthServiceProvider extends ServiceProvider
 {
     /**
      * The policy mappings for the application.
+     *
+     * See SnipePermissionsPolicy for additional information.
      *
      * @var array
      */
@@ -54,6 +58,7 @@ class AuthServiceProvider extends ServiceProvider
         Statuslabel::class => StatuslabelPolicy::class,
         Supplier::class => SupplierPolicy::class,
         User::class => UserPolicy::class,
+        Manufacturer::class => ManufacturerPolicy::class,
     ];
 
     /**
@@ -126,6 +131,7 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('view', \App\Models\Department::class)
                 || $user->can('view', \App\Models\Location::class)
                 || $user->can('view', \App\Models\Company::class)
+                || $user->can('view', \App\Models\Manufacturer::class)
                 || $user->can('view', \App\Models\Depreciation::class);
         });
     }

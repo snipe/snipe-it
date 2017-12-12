@@ -87,7 +87,7 @@
                           @endif
                         </td>
                         <td>
-                          @can('checkout', $licensedto)
+                          @can('checkout', $license)
                             @if (($licensedto->assigned_to) || ($licensedto->asset_id))
                               @if ($license->reassignable)
                                 <a href="{{ route('licenses.checkin', $licensedto->id) }}" class="btn btn-sm bg-purple">

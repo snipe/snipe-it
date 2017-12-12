@@ -362,7 +362,14 @@ class LicensesController extends Controller
             // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
-        $this->authorize('checkin', $licenseSeat);
+
+        if (is_null($license = License::find($licenseSeat->license_id))) {
+            // Redirect to the asset management page with error
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
+        }
+
+
+        $this->authorize('checkout', $license);
         return view('licenses/checkin', compact('licenseSeat'))->with('backto', $backTo);
     }
 
@@ -386,8 +393,7 @@ class LicensesController extends Controller
         }
 
         $license = License::find($licenseSeat->license_id);
-
-        $this->authorize('checkin', $licenseSeat);
+        $this->authorize('checkout', $license);
 
         if (!$license->reassignable) {
             // Not allowed to checkin

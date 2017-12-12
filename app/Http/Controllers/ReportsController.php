@@ -535,6 +535,14 @@ class ReportsController extends Controller
                 $header[] = trans('general.updated_at');
             }
 
+            if ($request->has('last_audit_date')) {
+                $header[] = trans('general.last_audit');
+            }
+
+            if ($request->has('next_audit_date')) {
+                $header[] = trans('general.next_audit_date');
+            }
+
             if ($request->has('notes')) {
                 $header[] = trans('general.notes');
             }
@@ -707,6 +715,14 @@ class ReportsController extends Controller
 
                     if ($request->has('updated_at')) {
                         $row[] = ($asset->updated_at) ? $asset->updated_at : '';
+                    }
+
+                    if ($request->has('last_audit_date')) {
+                        $row[] = ($asset->last_audit_date) ? $asset->last_audit_date : '';
+                    }
+
+                    if ($request->has('next_audit_date')) {
+                        $row[] = ($asset->next_audit_date) ? $asset->next_audit_date : '';
                     }
 
                     if ($request->has('notes')) {

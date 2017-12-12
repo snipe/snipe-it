@@ -402,13 +402,6 @@ class AssetsController extends Controller
 
         $asset->delete();
 
-        $logaction = new Actionlog();
-        $logaction->item_type = Asset::class;
-        $logaction->item_id = $asset->id;
-        $logaction->created_at =  date("Y-m-d H:i:s");
-        $logaction->user_id = Auth::user()->id;
-        $logaction->logaction('deleted');
-
         return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
     }
 
@@ -919,6 +912,14 @@ class AssetsController extends Controller
         if (isset($asset->id)) {
             // Restore the asset
             Asset::withTrashed()->where('id', $assetId)->restore();
+
+            $logaction = new Actionlog();
+            $logaction->item_type = Asset::class;
+            $logaction->item_id = $asset->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $logaction->logaction('restored');
+
             return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.restore.success'));
         }
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
@@ -1255,6 +1256,7 @@ class AssetsController extends Controller
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
+
     public function auditStore(Request $request, $id)
     {
         $this->authorize('audit', Asset::class);
@@ -1270,7 +1272,11 @@ class AssetsController extends Controller
         }
 
         $asset = Asset::findOrFail($id);
+        // We don't want to log this as a normal update, so let's bypass that
+        $asset->unsetEventDispatcher();
+
         $asset->next_audit_date = $request->input('next_audit_date');
+        $asset->last_audit_date = date('Y-m-d h:i:s');
 
         if ($asset->save()) {
             $asset->logAudit(request('note'), request('location_id'));
