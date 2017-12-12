@@ -2,14 +2,14 @@
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-    echo "Skipping user check as it is not supported on Windows\n";
+	echo "Skipping user check as it is not supported on Windows\n";
 } else {
-    $pwu_data = posix_getpwuid(posix_geteuid());
-    $username = $pwu_data['name'];
+	$pwu_data = posix_getpwuid(posix_geteuid());
+	$username = $pwu_data['name'];
 
-    if (($username=='root') || ($username=='admin')) {
-        die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
-    }
+	if (($username=='root') || ($username=='admin')) {
+		die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
+	}
 }
 
 
@@ -162,5 +162,6 @@ echo "--------------------------------------------------------\n";
 echo "FINISHED! Clear your browser cookies and re-login to use :\n";
 echo "your upgraded Snipe-IT.\n";
 echo "--------------------------------------------------------\n\n";
+
 
 
