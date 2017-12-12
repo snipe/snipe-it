@@ -22,10 +22,21 @@ class CompaniesController extends Controller
     {
         $this->authorize('view', Company::class);
 
-        $allowed_columns = ['id','name'];
+        $allowed_columns = [
+            'id',
+            'name',
+            'created_at',
+            'updated_at',
+            'users_count',
+            'assets_count',
+            'licenses_count',
+            'accessories_count',
+            'consumables_count',
+            'components_count',
+        ];
 
         $companies = Company::withCount('assets','licenses','accessories','consumables','components','users')
-            ->withCount('users')->withCount('users')->withCount('assets')
+            ->withCount('users')->withCount('assets')
             ->withCount('licenses')->withCount('accessories')
             ->withCount('consumables')->withCount('components');
 
