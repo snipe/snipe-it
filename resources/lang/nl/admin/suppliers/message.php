@@ -19,9 +19,9 @@ return array(
         'confirm'   => 'Ben je zeker dat je de leverancier wil verwijderen?',
         'error'   => 'Er ging iets mis tijdens het verwijderen van de leverancier. Probeer het nog een keer.',
         'success' => 'De leverancier is succesvol verwijderd.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'Deze leverancier is momenteel gekoppeld met :asset_count asset(s) en kan hierdoor niet verwijderd worden. Pas je modellen aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
+        'assoc_licenses'	 => 'Deze leverancier is momenteel gekoppeld met :licenses_count licences(s) en kan hierdoor niet verwijderd worden. Pas je modellen aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
+        'assoc_maintenances'	 => 'Deze leverancier is momenteel gekoppeld met :asset_maintenances_count item onderhoud(en) en kan hierdoor niet verwijderd worden. Pas je modellen aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
     )
 
 );

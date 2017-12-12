@@ -3,10 +3,10 @@
 return array(
 
     'does_not_exist' => 'Zubehör existiert nicht.',
-    'assoc_users'	 => 'Dieses Zubehör ist derzeit an :count  Benutzern zur Verwendung ausgegeben worden. Bitte buchen Sie das Zubehör wieder ein und versuchen es dann noch Einmal. ',
+    'assoc_users'	 => 'Dieses Zubehör ist derzeit an :count Benutzern zur Verwendung ausgegeben worden. Bitte buchen Sie das Zubehör wieder ein und versuchen es dann erneut. ',
 
     'create' => array(
-        'error'   => 'Zubehör wurde nicht erzeugt, bitte versuchen Sie es erneut.',
+        'error'   => 'Zubehör wurde nicht erstellt, bitte versuchen Sie es erneut.',
         'success' => 'Zubehör erfolgreich angelegt.'
     ),
 
@@ -16,8 +16,8 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Sind Sie sicher, dass Sie diese Ticket-Notiz löschen möchten?',
-        'error'   => 'Beim löschen dieses Zubehörs ist ein Problem aufgetreten. Bitte versuchen sie es erneut.',
+        'confirm'   => 'Sind Sie sicher, dass Sie dieses Zubehör löschen möchten?',
+        'error'   => 'Beim Löschen dieses Zubehörs ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.',
         'success' => 'Das Zubehör wurde erfolgreich gelöscht.'
     ),
 

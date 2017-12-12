@@ -67,7 +67,7 @@ return array(
     'not_in'               => '선택한 :attribute 가 부정확 합니다.',
     'numeric'              => ':attribute 는 숫자만 가능합니다.',
     'present'              => ':attribute 항목이 있어야 합니다.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => '그것은 유효한 정규 표현식이 아닙니다. ',
     'regex'                => ':attribute 형식이 부정확 합니다.',
     'required'             => ':attribute 항목을 입력해 주세요.',
     'required_if'          => ':attribute 항목은 :other가 :value 일때 필요합니다.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute 는 이미 획득하였습니다.',
     'uploaded'             => ':attribute는 업로드 하지 못했습니다.',
     'url'                  => ':attribute 형식이 부정확 합니다.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute 는 고유의 값만 가져야 합니다.",
 
     /*
     |--------------------------------------------------------------------------

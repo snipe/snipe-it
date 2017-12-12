@@ -14,11 +14,11 @@ return array(
     'id'      		=> 'ID',
     'location' 		=> 'Ort',
     'purchase_cost'	=> 'Kosten',
-    'purchase_date'	=> 'Gekauft',
+    'purchase_date'	=> 'Kaufdatum',
     'serial'   		=> 'Seriennummer',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
-    'image'		=> 'Geräte-Image',
+    'image'		=> 'Geräte-Bild',
     'days_without_acceptance' => 'Tage ohne Akzeptierung'
 
 );

@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'عن استهلاك الأصول',
-    'about_depreciations'  					=> 'يمكنك ضبط قيمة إستهلاك الأصول لخفض الأصول على أساس القسط الثابت للاستهلاك.',
+    'about_asset_depreciations'  			=> 'حول استهلاك الأصول',
+    'about_depreciations'  					=> 'يمكنك إعداد استهلاك الأصول لخفض قيمة الأصول على اساس القسط الثابت للاستهلاك.',
     'asset_depreciations'  					=> 'استهلاك الأصول',
     'create'  					            => 'إنشاء الاستهلاك',
     'depreciation_name'  					=> 'اسم الاستهلاك',

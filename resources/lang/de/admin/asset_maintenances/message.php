@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Wartungsvertrag wurde nicht gefunden!',
+        'not_found'                    => 'Die Wartung nach der Sie suchen, wurde nicht gefunden!',
         'delete'                       => [
-            'confirm' => 'Wartungsvertrag wirklich löschen?',
-            'error'   => 'Es gab Probleme beim Löschen des Wartungsvertrages. Bitte versuchen Sie es noch einmal.',
-            'success' => 'Wartungsvertrag erfolgreich gelöscht.'
+            'confirm' => 'Möchten Sie die Wartung wirklich löschen?',
+            'error'   => 'Es gab Probleme beim Löschen der Wartung. Bitte versuchen Sie es erneut.',
+            'success' => 'Die Wartung wurde erfolgreich gelöscht.'
         ],
         'create'                       => [
-            'error'   => 'Wartungsvertrag wurde nicht erstellt. Bitte versuchen Sie es erneut.',
-            'success' => 'Wartungsvertrag erfolgreich erstellt.'
+            'error'   => 'Wartung wurde nicht erstellt. Bitte versuchen Sie es erneut.',
+            'success' => 'Wartung erfolgreich erstellt.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance wurde nicht bearbeitet, bitte versuchen Sie es erneut.',
-            'success' => 'Asset Maintenance wurde erfolgreich bearbeitet.'
+            'error'   => 'Die Wartung wurde nicht bearbeitet, bitte versuchen Sie es erneut.',
+            'success' => 'Wartung wurde erfolgreich bearbeitet.'
         ],
-        'asset_maintenance_incomplete' => 'Wartungsvertrag noch nicht komplett ausgefüllt',
+        'asset_maintenance_incomplete' => 'Nicht vollständig ausgefüllt',
         'warranty'                     => 'Garantie',
         'not_warranty'                 => 'keine Garantie',
     ];

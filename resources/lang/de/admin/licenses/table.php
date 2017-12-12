@@ -12,6 +12,6 @@ return array(
     'seats'   			=> 'Anzahl Aktivierungen',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Seriennummer',
-    'title'      		=> 'Name der Asset-Kategorie',
+    'title'      		=> 'Lizenz',
 
 );

@@ -4,24 +4,24 @@ return array(
 
     'field' => array(
         'invalid'   => 'Dieses Feld existiert nicht.',
-        'already_added'   => 'Feld wurde schon hinzugefügt',
+        'already_added'   => 'Feld wurde bereits hinzugefügt',
 
         'create' => array(
-            'error'   => 'Feld wurde nicht erstellt. Bitte erneut versuchen.',
-            'success' => 'Feld wurde erstellt.',
-            'assoc_success' => 'Feld wurde zum Feldsatz hinzugefügt.'
+            'error'   => 'Feld wurde nicht erstellt. Bitte versuchen Sie es erneut.',
+            'success' => 'Feld wurde erfolgreich erstellt.',
+            'assoc_success' => 'Feld wurde erfolgreich zum Feldsatz hinzugefügt.'
         ),
 
         'update' => array(
-            'error'   => 'Feld wurde nicht aktualisiert. Bitte erneut versuchen.',
-            'success' => 'Feld wurde aktualisiert.'
+            'error'   => 'Feld wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
+            'success' => 'Feld wurde erfolgreich aktualisiert.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Wollen Sie dieses Feld wirklich löschen?',
-            'error'   => 'Beim Löschen gab es ein Problem. Bitte erneut versuchen.',
+            'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Feld löschen möchten?',
+            'error'   => 'Beim Löschen des Felds ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
             'success' => 'Das Feld wurde erfolgreich gelöscht.',
-            'in_use'   => 'Das Feld wird benutzt.',
+            'in_use'   => 'Dieses Feld wird derzeit noch verwendet.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
         'does_not_exist' => 'Feldsatz existiert nicht',
 
         'create' => array(
-            'error'   => 'Feldsatz wurde nicht erstellt. Bitte erneut versuchen.',
+            'error'   => 'Feldsatz wurde nicht erstellt. Bitte versuchen Sie es erneut.',
             'success' => 'Feldsatz wurde erfolgreich erstellt.'
         ),
 
         'update' => array(
-            'error'   => 'Feldsatz wurde nicht aktualisiert. Bitte erneut versuchen.',
+            'error'   => 'Feldsatz wurde nicht aktualisiert. Bitte versuchen Sie es erneut.',
             'success' => 'Feldsatz wurde erfolgreich aktualisiert.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Möchten Sie den Feldsatz wirklich löschen?',
-            'error'   => 'Beim Löschen des Feldsatzes gab es ein Problem. Bitte erneut versuchen.',
+            'confirm'   	=> 'Sind Sie sicher, dass Sie diesen Feldsatz löschen möchten?',
+            'error'   => 'Beim Löschen des Feldsatzes ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
             'success' => 'Der Feldsatz wurde erfolgreich gelöscht.',
-            'in_use'   => 'Der Feldsatz wird benutzt.',
+            'in_use'   => 'Dieser Feldsatz wird derzeit noch verwendet.',
         )
 
     ),

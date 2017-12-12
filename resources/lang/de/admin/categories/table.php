@@ -5,6 +5,6 @@ return array(
     'id'      					=> 'ID',
     'parent'   					=> 'Übergeordneten',
     'require_acceptance'      	=> 'Zustimmung',
-    'title'      				=> 'Posten Kategorie Name',
+    'title'      				=> 'Name der Asset-Kategorie',
 
 );

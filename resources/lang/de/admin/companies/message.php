@@ -3,16 +3,16 @@ return array(
     'does_not_exist' => 'Firma existiert nicht.',
     'assoc_users'    => 'Diese Firma ist mit mindestens einem Modell verknüpft und kann nicht gelöscht werden. Bitte ändere die Modelle um die Verknüpfung zu lösen. ',
     'create' => array(
-        'error'   => 'Firma wurde nicht erstellt, bitte versuche es noch einmal.',
+        'error'   => 'Firma wurde nicht erstellt. Bitte versuchen Sie es erneut.',
         'success' => 'Firma wurde erfolgreich angelegt.'
     ),
     'update' => array(
-        'error'   => 'Firma wurde nicht geändert, bitte versuche es noch einmal',
+        'error'   => 'Firma wurde nicht geändert, bitte versuchen Sie es erneut',
         'success' => 'Firma erfolgreich geändert.'
     ),
     'delete' => array(
-        'confirm' => 'Sind Sie sich sicher das sie diese Firma löschen wollen?',
-        'error'   => 'Die Firma konnte nicht gelöscht werden. Versuchen sie es später noch einmal.',
+        'confirm' => 'Sind Sie sich sicher, dass Sie diese Firma löschen wollen?',
+        'error'   => 'Es gab ein Problem beim Löschen der Firma. Bitte versuchen Sie es erneut.',
         'success' => 'Die Firma wurde erfolgreich gelöscht.'
     )
 );
