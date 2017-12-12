@@ -218,7 +218,8 @@ class Actionlog extends SnipeModel
                         $query->where('companies.name', 'LIKE', '%'.$search.'%');
                     });
                 })->orWhere('action_type', 'LIKE', '%'.$search.'%')
-                    ->orWhere('note', 'LIKE', '%'.$search.'%');
+                    ->orWhere('note', 'LIKE', '%'.$search.'%')
+                    ->orWhere('log_meta', 'LIKE', '%'.$search.'%');
             }
 
         });

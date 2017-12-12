@@ -149,7 +149,7 @@ class ComponentsController extends Controller
     */
     public function getAssets(Request $request, $id)
     {
-        $this->authorize('index', Asset::class);
+        $this->authorize('view', \App\Models\Asset::class);
         
         $component = Component::findOrFail($id);
         $assets = $component->assets();

@@ -38,7 +38,7 @@ class CompaniesTransformer
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Company::class) ? true : false,
-                'delete' => Gate::allows('delete', Company::class) ? true : false,
+                'delete' => (Gate::allows('delete', Category::class) && ($company->assets_count == 0) && ($company->accessories_count == 0) && ($company->consumables_count == 0) && ($company->components_count == 0) && ($company->users_count == 0)) ? true : false,
             ];
 
             $array += $permissions_array;

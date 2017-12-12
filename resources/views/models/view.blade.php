@@ -42,27 +42,48 @@
         </div><!-- /.box-header -->
       @endif
       <div class="box-body">
-        <table
-        name="modelassets"
-        id="table"
-        class="snipe-table"
-        data-url="{{ route('api.assets.index',['model_id'=> $model->id]) }}"
-        data-cookie="true"
-        data-click-to-select="true"
-        data-cookie-id-table="modeldetailsViewTable">
-          <thead>
-              <tr>
-                  <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
-                  <th data-sortable="false" data-field="company" data-searchable="false" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
-                  <th data-sortable="true" data-field="name"  data-searchable="true" data-formatter="hardwareLinkFormatter">{{ trans('general.name') }}</th>
-                  <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
-                  <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
-                  <th data-sortable="false" data-field="assigned_to" data-formatter="polymorphicItemFormatter">{{ trans('general.user') }}</th>
-                  <th data-sortable="false" data-field="inout" data-formatter="hardwareInOutFormatter">{{ trans('admin/hardware/table.change') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
-              </tr>
-          </thead>
-        </table>
+          <div class="row">
+              <div class="col-md-12">
+                  {{ Form::open([
+                     'method' => 'POST',
+                     'route' => ['hardware/bulkedit'],
+                     'class' => 'form-inline',
+                      'id' => 'bulkForm']) }}
+                  <div id="toolbar">
+                      <select name="bulk_actions" class="form-control select2">
+                          <option value="edit">Edit</option>
+                          <option value="delete">Delete</option>
+                          <option value="labels">Generate Labels</option>
+                      </select>
+                      <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                  </div>
+
+                <table
+                name="modelassets"
+                id="table"
+                class="snipe-table"
+                data-toolbar="#toolbar"
+                data-url="{{ route('api.assets.index',['model_id'=> $model->id]) }}"
+                data-cookie="true"
+                data-click-to-select="true"
+                data-cookie-id-table="model-assets">
+                  <thead>
+                      <tr>
+                          <th data-checkbox="true" data-field="checkbox"></th>
+                          <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
+                          <th data-sortable="false" data-field="company" data-searchable="false" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
+                          <th data-sortable="true" data-field="name"  data-searchable="true" data-formatter="hardwareLinkFormatter">{{ trans('general.name') }}</th>
+                          <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
+                          <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
+                          <th data-sortable="false" data-field="assigned_to" data-formatter="polymorphicItemFormatter">{{ trans('admin/hardware/form.checkedout_to') }}</th>
+                          <th data-sortable="false" data-field="inout" data-formatter="hardwareInOutFormatter">{{ trans('admin/hardware/table.change') }}</th>
+                          <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
+                      </tr>
+                  </thead>
+                </table>
+                  {{ Form::close() }}
+              </div>
+          </div>
       </div> <!-- /.box-body-->
     </div> <!-- /.box-default-->
   </div> <!-- /.col-md-9-->

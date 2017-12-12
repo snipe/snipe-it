@@ -41,51 +41,51 @@ class CompanyPresenter extends Presenter
             ],[
                 "field" => "users_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => '<span class="hidden-xs"><i class="fa fa-users"></i></span><span class="hidden-md hidden-lg">'.trans('general.users').'</span></th>',
                 "visible" => true,
  
             ],[
                 "field" => "assets_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "title" => '<span class="hidden-xs"><i class="fa fa-barcode"></i></span><span class="hidden-md hidden-lg">'.trans('general.assets').'</span>',
                 "visible" => true,
 
             ],[
                 "field" => "licenses_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "visible" => true,
                 "title" => ' <span class="hidden-xs"><i class="fa fa-floppy-o"></i></span><span class="hidden-md hidden-lg">'.trans('general.licenses').'</span>',
             ],[
                 "field" => "accessories_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "visible" => true,
                 "title" => ' <span class="hidden-xs"><i class="fa fa-keyboard-o"></i></span><span class="hidden-md hidden-lg">'.trans('general.accessories').'</span>',
             ],[
                 "field" => "consumables_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "visible" => true,
                 "title" => ' <span class="hidden-xs"><i class="fa fa-tint"></i></span><span class="hidden-md hidden-lg">'.trans('general.consumables').'</span>',
             ],[
                 "field" => "components_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "visible" => true,
                 "title" => ' <span class="hidden-xs"><i class="fa fa-hdd-o"></i></span><span class="hidden-md hidden-lg">'.trans('general.components').'</span>',
             ],[
                 "field" => "updated_at",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.updated_at'),
             ],[
                 "field" => "created_at",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.created_at'),
             ],[

@@ -143,29 +143,32 @@
                     <tr>
                       <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
                       <td>
-                      @can('view', \App\Models\Manufacturer::class)
-                        <a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
-                        {{ $asset->model->manufacturer->name }}
-                        </a>
-                      @else
-                        {{ $asset->model->manufacturer->name }}
-                      @endcan
+                        <ul class="list-unstyled" style="line-height: 25px;">
+                        @can('view', \App\Models\Manufacturer::class)
 
-                        @if ($asset->model->manufacturer->url)
-                            <br><i class="fa fa-globe"></i> <a href="{{ $asset->model->manufacturer->url }}">{{ $asset->model->manufacturer->url }}</a>
-                        @endif
+                          <li><a href="{{ route('manufacturers.show', $asset->model->manufacturer->id) }}">
+                          {{ $asset->model->manufacturer->name }}</li>
+                          </a>
+                        @else
+                         <li> {{ $asset->model->manufacturer->name }}</li>
+                        @endcan
 
-                        @if ($asset->model->manufacturer->support_url)
-                            <br><i class="fa fa-life-ring"></i> <a href="{{ $asset->model->manufacturer->support_url }}">{{ $asset->model->manufacturer->support_url }}</a>
-                          @endif
+                      @if ($asset->model->manufacturer->url)
+                            <li><i class="fa fa-globe"></i> <a href="{{ $asset->model->manufacturer->url }}">{{ $asset->model->manufacturer->url }}</a></li>
+                      @endif
 
-                          @if ($asset->model->manufacturer->support_phone)
-                            <br><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}
-                          @endif
+                      @if ($asset->model->manufacturer->support_url)
+                            <li><i class="fa fa-life-ring"></i> <a href="{{ $asset->model->manufacturer->support_url }}">{{ $asset->model->manufacturer->support_url }}</a></li>
+                       @endif
 
-                          @if ($asset->model->manufacturer->support_email)
-                            <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $asset->model->manufacturer->support_email }}">{{ $asset->model->manufacturer->support_email }}</a>
-                          @endif
+                       @if ($asset->model->manufacturer->support_phone)
+                            <li><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}</li>
+                       @endif
+
+                       @if ($asset->model->manufacturer->support_email)
+                            <li><i class="fa fa-envelope"></i> <a href="mailto:{{ $asset->model->manufacturer->support_email }}">{{ $asset->model->manufacturer->support_email }}</a></li>
+                       @endif
+                        </ul>
                       </td>
                     </tr>
                     @endif
@@ -426,7 +429,7 @@
                   {!! $asset->assignedTo->present()->glyph() . ' ' .$asset->assignedTo->present()->nameUrl() !!}
                 </p>
 
-                <ul class="list-unstyled">
+                  <ul class="list-unstyled" style="line-height: 25px;">
                   @if ((isset($asset->assignedTo->email)) && ($asset->assignedTo->email!=''))
                     <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                   @endif
@@ -614,26 +617,33 @@
             <div class="col-md-12">
               <table
                       class="table table-striped snipe-table"
-                      name="assetHistory"
+                      name="asset-history"
                       id="table"
+                      class="table table-striped snipe-table"
                       data-sort-order="desc"
-                      data-height="400"
+                      data-show-columns="true"
+                      data-search="true"
+                      data-cookie="true"
+                      data-show-refresh="true"
+                      data-cookie-id-table="asset-history"
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
                 <thead>
                 <tr>
                   <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
                   <th class="col-sm-2" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                  <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                  <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-1" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-1" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
                   @if  ($snipeSettings->require_accept_signature=='1')
-                    <th class="col-md-3" data-field="signature_file" data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
+                  <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">Changed</th>
                 </tr>
                 </thead>
               </table>
+
             </div>
           </div> <!-- /.row -->
         </div> <!-- /.tab-pane history -->
@@ -673,7 +683,7 @@
                   <tr>
                     <th class="col-md-4">{{ trans('general.notes') }}</th>
                     <th class="col-md-2"></th>
-                    <th class="col-md-4"><span class="line"></span>{{ trans('general.file_name') }}</th>
+                    <th class="col-md-4">{{ trans('general.file_name') }}</th>
                     <th class="col-md-2"></th>
                     <th class="col-md-2"></th>
                   </tr>
