@@ -40,7 +40,7 @@ class ManufacturersTransformer
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Manufacturer::class) ? true : false,
-                'delete' => Gate::allows('delete', Manufacturer::class) ? true : false,
+                'delete' => (Gate::allows('delete', Manufacturer::class) && ($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->deleted_at=='')) ? true : false,
             ];
 
             $array += $permissions_array;
