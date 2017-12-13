@@ -88,7 +88,7 @@ class AssetsController extends Controller
             $allowed_columns[]=$field->db_column_name();
         }
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with(
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")->with(
             'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
             'model.category', 'model.manufacturer', 'model.fieldset','supplier');
 
