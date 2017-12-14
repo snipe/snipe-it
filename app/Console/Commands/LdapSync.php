@@ -67,8 +67,17 @@ class LdapSync extends Command
 
         $summary = array();
 
-        $results = Ldap::findLdapUsers();
-
+	try {    
+            $results = Ldap::findLdapUsers();
+	} catch (\Exception $e) {
+	    if ($this->option('json_summary')) {
+                $json_summary = [ "error" => true, "error_message" => $e->getMessage(), "summary" => [] ];
+                $this->info(json_encode($json_summary));
+            }
+            LOG::error($e);
+            return [];
+        }
+	    
         // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
         $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
         $ldap_ou_lengths = array();
