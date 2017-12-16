@@ -35,10 +35,7 @@ class CompaniesController extends Controller
             'components_count',
         ];
 
-        $companies = Company::withCount('assets','licenses','accessories','consumables','components','users')
-            ->withCount('users')->withCount('assets')
-            ->withCount('licenses')->withCount('accessories')
-            ->withCount('consumables')->withCount('components');
+        $companies = Company::withCount('assets','licenses','accessories','consumables','components','users');
 
         if ($request->has('search')) {
             $companies->TextSearch($request->input('search'));
