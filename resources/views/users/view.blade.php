@@ -136,20 +136,12 @@
                     <td>{{ trans('admin/users/table.name') }}</td>
                     <td>{{ $user->present()->fullName() }}</td>
                   </tr>
+                  <tr>
+                    <td>{{ trans('admin/users/table.username') }}</td>
+                    <td>{{ $user->username }}</td>
+                  </tr>
 
-                  @if ($user->last_login)
-                    <tr>
-                      <td>{{ trans('general.last_login') }}</td>
-                      <td>{{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}</td>
-                    </tr>
-                  @endif
 
-                    @if (!is_null($user->department))
-                      <tr>
-                        <td>{{ trans('general.department') }}</td>
-                        <td><a href="{{ route('departments.show', $user->department) }}">{{ $user->department->name }}</a></td>
-                      </tr>
-                    @endif
 
                   @if ($user->jobtitle)
                   <tr>
@@ -197,6 +189,19 @@
 
                   </tr>
                   @endif
+                    @if ($user->last_login)
+                      <tr>
+                        <td>{{ trans('general.last_login') }}</td>
+                        <td>{{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}</td>
+                      </tr>
+                    @endif
+
+                    @if (!is_null($user->department))
+                      <tr>
+                        <td>{{ trans('general.department') }}</td>
+                        <td><a href="{{ route('departments.show', $user->department) }}">{{ $user->department->name }}</a></td>
+                      </tr>
+                    @endif
                   @if ($user->created_at)
                   <tr>
                     <td>{{ trans('general.created_at') }}</td>
