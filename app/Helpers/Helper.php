@@ -460,19 +460,19 @@ class Helper
      */
     public static function checkLowInventory()
     {
-        $consumables = Consumable::with('users')->whereNotNull('min_amt')->get();
-        $accessories = Accessory::with('users')->whereNotNull('min_amt')->get();
-        $components = Component::with('assets')->whereNotNull('min_amt')->get();
+        $consumables = Consumable::withCount('consumableAssignments')->whereNotNull('min_amt')->get();
+        $accessories = Accessory::withCount('users')->whereNotNull('min_amt')->get();
+        $components = Component::withCount('assets')->whereNotNull('min_amt')->get();
 
         $avail_consumables = 0;
         $items_array = array();
         $all_count = 0;
 
         foreach ($consumables as $consumable) {
-            $avail = $consumable->numRemaining();
+            $avail = $consumable->qty - $consumable->consumable_assignment_count;  //$consumable->numRemaining();
             if ($avail < ($consumable->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($consumable->qty > 0) {
-                    $percent = number_format((($consumable->numRemaining() / $consumable->qty) * 100), 0);
+                    $percent = number_format((($avail / $consumable->qty) * 100), 0);
                 } else {
                     $percent = 100;
                 }
@@ -481,7 +481,7 @@ class Helper
                 $items_array[$all_count]['name'] = $consumable->name;
                 $items_array[$all_count]['type'] = 'consumables';
                 $items_array[$all_count]['percent'] = $percent;
-                $items_array[$all_count]['remaining']=$consumable->numRemaining();
+                $items_array[$all_count]['remaining'] = $avail;
                 $items_array[$all_count]['min_amt']=$consumable->min_amt;
                 $all_count++;
             }
@@ -490,11 +490,11 @@ class Helper
         }
 
         foreach ($accessories as $accessory) {
-            $avail = $accessory->numRemaining();
+            $avail = $accessory->qty - $accessory->users_count;
             if ($avail < ($accessory->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
 
                 if ($accessory->qty > 0) {
-                    $percent = number_format((($accessory->numRemaining() / $accessory->qty) * 100), 0);
+                    $percent = number_format((($avail / $accessory->qty) * 100), 0);
                 } else {
                     $percent = 100;
                 }
@@ -503,7 +503,7 @@ class Helper
                 $items_array[$all_count]['name'] = $accessory->name;
                 $items_array[$all_count]['type'] = 'accessories';
                 $items_array[$all_count]['percent'] = $percent;
-                $items_array[$all_count]['remaining']=$accessory->numRemaining();
+                $items_array[$all_count]['remaining'] = $avail;
                 $items_array[$all_count]['min_amt']=$accessory->min_amt;
                 $all_count++;
             }
@@ -511,10 +511,10 @@ class Helper
         }
 
         foreach ($components as $component) {
-            $avail = $component->numRemaining();
+            $avail = $component->qty - $component->assets_count;
             if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($component->qty > 0) {
-                    $percent = number_format((($component->numRemaining() / $component->qty) * 100), 0);
+                    $percent = number_format((($avail / $component->qty) * 100), 0);
                 } else {
                     $percent = 100;
                 }
@@ -523,7 +523,7 @@ class Helper
                 $items_array[$all_count]['name'] = $component->name;
                 $items_array[$all_count]['type'] = 'components';
                 $items_array[$all_count]['percent'] = $percent;
-                $items_array[$all_count]['remaining']=$component->numRemaining();
+                $items_array[$all_count]['remaining'] = $avail;
                 $items_array[$all_count]['min_amt']=$component->min_amt;
                 $all_count++;
             }
