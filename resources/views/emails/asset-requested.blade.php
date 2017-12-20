@@ -6,9 +6,9 @@
 
 <p>{{ trans('mail.user') }} <a href="{{ route('users.show', $user_id) }}">{{ $requested_by }}</a><br>
    {{ trans('mail.item') }} <a href="{{ $item_url }}">{{ $item_name }}</a> ({{ $item_type }}) <br>
-   {{ trans('mail.requested') }} {{ $requested_date }}
+   {{ trans('general.requested') }} {{ $requested_date }}
 @if ($item_quantity > 1)
-{{ trans('mail.quantity') }} {{ $item_quantity}}
+        <br> {{ trans('general.qty') }} {{ $item_quantity}}
 @endif
 
 @if ($snipeSettings->show_url_in_emails=='1')

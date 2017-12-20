@@ -143,19 +143,17 @@
                                         <th class="col-md-1" data-sortable="true">{{ trans('general.image') }}</th>
                                         <th class="col-md-6" data-sortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                                         <th class="col-md-3" data-sortable="true">{{ trans('admin/accessories/general.remaining') }}</th>
-                                        <th class="col-md-2" data-sortable="true">{{ trans('general.quantity') }}</th>
-                                        <th class="col-md-1 actions" data-sortable="false">{{ trans('table.actions') }}</th>
+
+                                        <th class="col-md-2 actions" data-sortable="false">{{ trans('table.actions') }}</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     @foreach($models as $requestableModel)
                                         <tr>
-                                            <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
-                                                    method="POST"
-                                                    accept-charset="utf-8">
-                                                {{ csrf_field() }}
+
                                                 <td>
+
                                                     @if ($requestableModel->image)
                                                         <a href="{{ url('/') }}/uploads/models/{{ $requestableModel->image }}" data-toggle="lightbox" data-type="image">
                                                             <img src="{{ url('/') }}/uploads/models/{{ $requestableModel->image }}" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive">
@@ -167,16 +165,20 @@
 
                                                 <td>{{$requestableModel->name}}</td>
                                                 <td>{{$requestableModel->assets->where('requestable', '1')->count()}}</td>
-                                                <td><input type="text" name="request-quantity" value=""></td>
+
                                                 <td>
+                                                    <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}" method="POST" accept-charset="utf-8">
+                                                        {{ csrf_field() }}
+                                                    <input type="text" style="width: 70px; margin-right: 10px;" class="form-control pull-left" name="request-quantity" value="" placeholder="{{ trans('general.qty') }}">
                                                     @if ($requestableModel->isRequestedBy(Auth::user()))
-                                                        {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
+                                                        {{ Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
                                                     @else
-                                                        {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
+                                                        {{ Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
                                                     @endif
+                                                    </form>
                                                 </td>
-                                            </form>
                                         </tr>
+
                                     @endforeach
                                 </tbody>
                             </table>
