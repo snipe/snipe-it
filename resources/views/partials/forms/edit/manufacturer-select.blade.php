@@ -4,7 +4,7 @@
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
     <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
-        <select class="js-data-ajax" data-endpoint="manufacturers" name="{{ $fieldname }}" style="width: 100%" id="category_select_id">
+        <select class="js-data-ajax" data-endpoint="manufacturers" name="{{ $fieldname }}" style="width: 100%" id="manufacturer_select_id">
             @if ($manufacturer_id = Input::old($fieldname,  (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $manufacturer_id }}" selected="selected">
                     {{ (\App\Models\Manufacturer::find($manufacturer_id)) ? \App\Models\Manufacturer::find($manufacturer_id)->name : '' }}
@@ -14,6 +14,14 @@
             @endif
 
         </select>
+    </div>
+
+    <div class="col-md-1 col-sm-1 text-left">
+        @can('create', \App\Models\Manufacturer::class)
+            @if ((!isset($hide_new)) || ($hide_new!='true'))
+                <a href='{{ route('modal.manufacturer') }}' data-toggle="modal"  data-target="#createModal" data-dependency="manufacturer" data-select='manufacturer_select_id' class="btn btn-sm btn-default">New</a>
+            @endif
+        @endcan
     </div>
 
 

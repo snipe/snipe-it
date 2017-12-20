@@ -29,4 +29,13 @@ class ModalController extends Controller
     function user() {
         return view('modals.user');
     }
+
+    function category() {
+        return view('modals.category');
+    }
+
+    function manufacturer() {
+        return view('modals.manufacturer');
+    }
+
 }
