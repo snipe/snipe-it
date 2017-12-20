@@ -12,4 +12,12 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function showRegistrationForm() {
+        abort(404,'Page not found');
+    }
+    
+    public function register() {
+        abort(404,'Page not found');
+    }
 }
