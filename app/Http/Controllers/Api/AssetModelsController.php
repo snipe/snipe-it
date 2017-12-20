@@ -200,7 +200,7 @@ class AssetModelsController extends Controller
         $assetmodels = $assetmodels->OrderCategory('ASC')->OrderManufacturer('ASC')->orderby('models.name', 'asc')->orderby('models.model_number', 'asc')->paginate(50);
 
         foreach ($assetmodels as $assetmodel) {
-            $assetmodel->use_text = (($assetmodel->category) ? e($assetmodel->category->name) : '').': '.(($assetmodel->manufacturer) ? e($assetmodel->manufacturer->name) : '').' '.$assetmodel->present()->modelName;
+            $assetmodel->use_text = (($assetmodel->category) ? e($assetmodel->category->name) : '').': '.$assetmodel->present()->modelName;
             $assetmodel->use_image = ($assetmodel->image) ? url('/').'/uploads/models/'.$assetmodel->image : null;
         }
 
