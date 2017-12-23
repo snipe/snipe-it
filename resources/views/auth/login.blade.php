@@ -50,7 +50,7 @@
                                             {!! $errors->first('password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                         <div class="checkbox">
-                                            <label>
+                                            <label class="rememberme-box">
                                                 <input name="remember" type="checkbox" value="Remember Me">{{ trans('auth/general.remember_me')  }}
                                             </label>
                                         </div>
@@ -62,7 +62,7 @@
                         <div class="box-footer">
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
+                        <div class="forgotpwd-url col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
                             @if ($snipeSettings->custom_forgot_pass_url)
                                 <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
                             @else
