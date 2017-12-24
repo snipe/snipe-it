@@ -726,13 +726,15 @@
       </div><!-- /.content-wrapper -->
 
       <footer class="main-footer hidden-print">
-        <div class="pull-right hidden-xs">
+	<div class="footer-left pull-left">
+        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is an open source
+          project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a> under the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3 license</a>.
+	</div>
+        <div class="footer-right pull-right hidden-xs">
           <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
           <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview" rel="noopener">User's Manual</a>
           <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/" rel="noopener">Report a Bug</a>
         </div>
-        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is an open source
-          project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a> under the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3 license</a>.
       </footer>
 
 
