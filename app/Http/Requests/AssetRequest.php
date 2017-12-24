@@ -44,11 +44,7 @@ class AssetRequest extends Request
 
         $settings = \App\Models\Setting::getSettings();
 
-        if ($settings->auto_increment_assets == '1') {
-            $rules['asset_tag'] = 'integer';
-        } else {
-            $rules['asset_tag'] = 'required';
-        }
+        $rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'integer' : 'required';
 
         $model = AssetModel::find($this->request->get('model_id'));
 
