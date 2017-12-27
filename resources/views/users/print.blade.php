@@ -128,7 +128,7 @@
 
             <tr>
                 <td>{{ $acounter }}</td>
-                <td>{{ $accessory->manufacturer->name }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
+                <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
                 <td>{{ $accessory->category->name }}</td>
                 <td>{{  $accessory->assetlog->first()->created_at }}</td>
             </tr>
@@ -163,7 +163,7 @@
 
             <tr>
                 <td>{{ $ccounter }}</td>
-                <td>{{ $consumable->manufacturer->name }} {{ $consumable->name }} {{ $consumable->model_number }}</td>
+                <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
                 <td>{{ $consumable->category->name }}</td>
                 <td>{{  $consumable->assetlog->first()->created_at }}</td>
             </tr>
