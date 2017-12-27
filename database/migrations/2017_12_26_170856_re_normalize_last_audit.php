@@ -17,6 +17,7 @@ class ReNormalizeLastAudit extends Migration
     {
 
         if (Schema::hasColumn('assets', 'last_audit_date')) {
+
             // Grab the latest info from the Actionlog table where the action is 'audit'
             $audits = Actionlog::selectRaw('MAX(created_at) AS created_at, item_id')
                 ->where('action_type', 'audit')
@@ -27,10 +28,13 @@ class ReNormalizeLastAudit extends Migration
 
             if ($audits) {
                 foreach ($audits as $audit) {
-                    $assets = Asset::where('id', $audit->item_id)->first();
-                    $assets->last_audit_date = $audit->created_at;
-                    $assets->unsetEventDispatcher();
-                    $assets->save();
+                    $asset = Asset::where('id', $audit->item_id)->withTrashed()->first();
+                    if ($asset) {
+                        $asset->last_audit_date = $audit->created_at;
+                        $asset->unsetEventDispatcher();
+                        $asset->save();
+                    }
+
                 }
             }
         }
