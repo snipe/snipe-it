@@ -479,7 +479,7 @@
                       <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                       <td>{{ $seat->license->serial }}</td>
                       <td>
-                        <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn-flat info btn-sm">{{ trans('general.checkin') }}</a>
+                        <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
                       </td>
                     </tr>
                     @endforeach
