@@ -170,6 +170,12 @@ tr {
                 return 'alert-info';
             },
         },
+        watch: {
+            columns() {
+                console.log("CHANGED");
+                this.populateSelect2ActiveItems();
+            }
+        },
         methods: {
             postSave() {
                 console.log('saving');
@@ -215,7 +221,9 @@ tr {
                     // Then, for any values that have a likely match, we make that active.
                     for(var j=0; j < this.columns.length; j++) {
                         let column = this.columns[j];
-                        let index = this.file.header_row.indexOf(column.text)
+                        let lower = this.file.header_row.map((value) => value.toLowerCase());
+                        console.dir(lower);
+                        let index = lower.indexOf(column.text.toLowerCase())
                         if(index != -1) {
                             this.$set(this.columnMappings, this.file.header_row[index], column.id)
                         }
