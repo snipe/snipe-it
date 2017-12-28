@@ -13,7 +13,7 @@ tr {
                     <label for="import-type">Import Type:</label>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <select2 :options="options.importTypes" v-model="options.importType">
+                    <select2 :options="options.importTypes" v-model="options.importType" required>
                         <option disabled value="0"></option>
                     </select2>
                 </div>
@@ -60,7 +60,14 @@ tr {
         <td>
             <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
             <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
-            <div class="alert alert-success col-md-5 col-md-offset-1" style="text-align:left" v-if="statusText">{{ this.statusText }}</div>
+            <div 
+                class="alert col-md-5 col-md-offset-1"
+                :class="alertClass"
+                style="text-align:left"
+                v-if="statusText"
+            >
+                {{ this.statusText }}
+            </div>
         </td>
     </tr>
 </template>
@@ -73,6 +80,7 @@ tr {
                 activeFile: this.file,
                 processDetail: false,
                 statusText: null,
+                statusType: null,
                 options: {
                     importType: this.file.import_type,
                     update: false,
@@ -151,10 +159,27 @@ tr {
                         return this.columnOptions.general.concat(this.columnOptions.users);
                 }
                 return this.columnOptions.general;
-            }
+            },
+            alertClass() {
+                if(this.statusType=='success') {
+                    return 'alert-success';
+                }
+                if(this.statusType=='error') {
+                    return 'alert-danger';
+                }
+                return 'alert-info';
+            },
         },
         methods: {
             postSave() {
+                console.log('saving');
+                console.log(this.options.importType);
+                if(!this.options.importType) {
+                    this.statusType='error';
+                    this.statusText= "An import type is required... ";
+                    return;
+                }
+                this.statusType='pending';
                 this.statusText = "Processing...";
                 this.$http.post(route('api.imports.importFile', this.file.id), {
                     'import-update': this.options.update,
@@ -162,12 +187,14 @@ tr {
                     'column-mappings': this.columnMappings
                 }).then( ({body}) => {
                     // Success
+                    this.statusType="success";
                     this.statusText = "Success... Redirecting.";
                     window.location.href = body.messages.redirect_url;
                 }, ({body}) => {
                     // Failure
                     if(body.status == 'import-errors') {
                         window.eventHub.$emit('importErrors', body.messages);
+                        this.statusType='error';
                         this.statusText = "Error";
                     } else {
                         this.$emit('alert', {
