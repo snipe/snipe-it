@@ -29,11 +29,13 @@ class ComponentImporter extends ItemImporter
         $component = null;
         $editingComponent = false;
         $this->log("Creating Component");
-        $component = Component::where('name', $this->item['name']);
+        $component = Component::where('name', $this->item['name'])
+                        ->where('serial', $this->item['serial'])
+                        ->first();
 
         if ($component) {
             $editingComponent = true;
-            $this->log('A matching Component ' . $this->item["name"] . ' already exists.  ');
+            $this->log('A matching Component ' . $this->item["name"] . ' with serial ' .$this->item['serial'].' already exists.  ');
             if (!$this->updating) {
                 $this->log("Skipping Component");
                 return;

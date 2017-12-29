@@ -173,6 +173,10 @@ class Asset extends Depreciable
 
         if ($location != null) {
             $this->location_id = $location;
+        } else {
+            if($target->location) {
+                $this->location_id = $target->location->id;
+            }
         }
 
         if ($this->requireAcceptance()) {

@@ -79,20 +79,28 @@ class AssetImporter extends ItemImporter
         }
 
         $this->item['asset_tag'] = $asset_tag;
+
+        // We need to save the user if it exists so that we can checkout to user later.
+        // Sanitizing the item will remove it.
+        if(array_key_exists('user', $this->item)) {
+            $user = $this->item['user'];
+        }
         $item = $this->sanitizeItemForStoring($asset, $editingAsset);
-        // By default we're set this to location_id in the item.
+        // The location id fetched by the csv reader is actually the rtd_location_id.
+        // This will also set location_id, but then that will be overridden by the
+        // checkout method if necessary below.
         if (isset($this->item["location_id"])) {
             $item['rtd_location_id'] = $this->item['location_id'];
-            unset($item['location_id']);
         }
+
 
         if ($editingAsset) {
             $asset->update($item);
         } else {
             $asset->fill($item);
         }
-        // If we're updating, we don't want to overwrite old fields.
 
+        // If we're updating, we don't want to overwrite old fields.
         if (array_key_exists('custom_fields', $this->item)) {
             foreach ($this->item['custom_fields'] as $custom_field => $val) {
                 $asset->{$custom_field} = $val;
@@ -101,6 +109,11 @@ class AssetImporter extends ItemImporter
         if ($asset->save()) {
             $asset->logCreate('Imported using csv importer');
             $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
+
+            // If we have a user to checkout to, lets do so.
+            if(isset($user)) {
+                $asset->fresh()->checkOut($user);
+            }
             return;
         }
         $this->logError($asset, 'Asset "' . $this->item['name'].'"');

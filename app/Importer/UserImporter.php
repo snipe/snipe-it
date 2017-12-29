@@ -33,7 +33,7 @@ class UserImporter extends ItemImporter
         $this->item['username'] = $this->findCsvMatch($row, 'username');
         $this->item['first_name'] = $this->findCsvMatch($row, 'first_name');
         $this->item['last_name'] = $this->findCsvMatch($row, 'last_name');
-        $this->item['email'] = $this->findCsvMatch($row, 'user_email');
+        $this->item['email'] = $this->findCsvMatch($row, 'email');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
