@@ -67,10 +67,7 @@ class ItemImporter extends Importer
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
         if(get_class($this) !== UserImporter::class) {
-            if ($this->item["user"] = $this->createOrFetchUser($row)) {
-                $this->item['assigned_to'] = $this->item['user']->id;
-                $this->item['assigned_type'] = User::class;
-            }
+            $this->item["user"] = $this->createOrFetchUser($row);
         }
     }
 

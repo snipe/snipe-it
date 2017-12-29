@@ -26,7 +26,7 @@ class ItemImportRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'import-type' => 'required',
         ];
     }
 
