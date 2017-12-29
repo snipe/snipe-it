@@ -41,6 +41,7 @@ class ConsumableImporter extends ItemImporter
         $consumable = new Consumable();
         $consumable->fill($this->sanitizeItemForStoring($consumable));
 
+        $consumable->unsetEventDispatcher();
         if ($consumable->save()) {
             $consumable->logCreate('Imported using CSV Importer');
             $this->log("Consumable " . $this->item["name"] . ' was created');
