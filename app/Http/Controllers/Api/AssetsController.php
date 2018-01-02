@@ -348,7 +348,7 @@ class AssetsController extends Controller
           {
             $asset->asset_tag             = $asset->autoincrement_asset();
           }
-        else{
+        elseif($setting->auto_increment_assets == 0 && $request->get('asset_tag') != "auto"){
           $asset->asset_tag               = $request->get('asset_tag');
         }
         $asset->user_id                 = Auth::id();
