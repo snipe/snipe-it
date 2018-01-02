@@ -6,8 +6,8 @@ class CompaniesCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
 
