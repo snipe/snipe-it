@@ -209,8 +209,8 @@ class AssetsController extends Controller
         // This handles all of the pivot sorting (versus the assets.* fields
         // in the allowed_columns array)
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
-        
-        
+
+
         switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
@@ -243,7 +243,7 @@ class AssetsController extends Controller
                 $assets->orderBy($column_sort, $order);
                 break;
         }
-        
+
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
         return (new AssetsTransformer)->transformAssets($assets, $total);
@@ -309,7 +309,7 @@ class AssetsController extends Controller
                 $asset->use_text .= ' → '.$asset->assigned->getFullNameAttribute();
             }
 
-            
+
             if ($asset->assetstatus->getStatuslabelType()=='pending') {
                 $asset->use_text .=  '('.$asset->assetstatus->getStatuslabelType().')';
             }
@@ -344,7 +344,13 @@ class AssetsController extends Controller
         $asset->model_id                = $request->get('model_id');
         $asset->order_number            = $request->get('order_number');
         $asset->notes                   = $request->get('notes');
-        $asset->asset_tag               = $request->get('asset_tag');
+        if($setting->auto_increment_assets == 1 && $request->get('asset_tag') == "auto")
+          {
+            $asset->asset_tag             = $asset->autoincrement_asset();
+          }
+        else{
+          $asset->asset_tag               = $request->get('asset_tag');
+        }
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
@@ -564,7 +570,7 @@ class AssetsController extends Controller
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
         $asset_name = request('name', null);
-        
+
         // Set the location ID to the RTD location id if there is one
         if ($asset->rtd_location_id!='') {
             $asset->location_id = $target->rtd_location_id;
@@ -572,7 +578,7 @@ class AssetsController extends Controller
 
 
 
-        
+
 
         if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
