@@ -36,12 +36,15 @@ class AssetRequest extends Request
             'checkin_date'    => 'date',
             'supplier_id'     => 'integer|nullable',
             'status'          => 'integer|nullable',
-            'asset_tag'       => 'required',
             'purchase_cost'   => 'numeric|nullable',
             "assigned_user"   => 'sometimes:required_without_all:assigned_asset,assigned_location',
             "assigned_asset"   => 'sometimes:required_without_all:assigned_user,assigned_location',
             "assigned_location"   => 'sometimes:required_without_all:assigned_user,assigned_asset',
         ];
+
+        $settings = \App\Models\Setting::getSettings();
+
+        $rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
 
         $model = AssetModel::find($this->request->get('model_id'));
 
