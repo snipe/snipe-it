@@ -6,7 +6,7 @@ return [
     'reset_password'			    => 'Nollaa salasana',
     'login'                         => 'Kirjaudu sisään',
     'login_prompt'                  => 'Kirjaudu sisään, ole hyvä',
-    'forgot_password'               => 'unohdin salasanani',
+    'forgot_password'               => 'Unohdin salasanani',
     'remember_me'                   => 'Muista minut',
     ];
 
