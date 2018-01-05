@@ -7,7 +7,7 @@ return array(
     'eol'	 				=> 'Elinaika',
     'modelnumber'   		=> 'Mallinumero',
     'name'      			=> 'Laitemallin Nimi',
-    'numassets' 			=> 'Laitelkm',
+    'numassets' 			=> 'Laite lkm',
     'title'					=> 'Laitemallit',
     'update'				=> 'Päivitä Laitemalli',
     'view'					=> 'Näytä Laitemalli',
