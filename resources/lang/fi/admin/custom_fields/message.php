@@ -28,23 +28,23 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldsetia ei ole olemassa',
+        'does_not_exist' => 'Kenttäryhmää ei ole olemassa',
 
         'create' => array(
-            'error'   => 'Fieldsetia ei luotu, yritä uudelleen.',
-            'success' => 'Fieldset luotu onnistuneesti.'
+            'error'   => 'Kenttäryhmää ei luotu, yritä uudelleen.',
+            'success' => 'Kenttäryhmä luotu onnistuneesti.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldsetia ei ole päivitetty, yritä uudelleen',
-            'success' => 'Fieldset päivitettiin onnistuneesti.'
+            'error'   => 'Kenttäryhmää ei ole päivitetty, yritä uudelleen',
+            'success' => 'Kenttäryhmä päivitettiin onnistuneesti.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Haluatko varmasti poistaa tämän kentän?',
-            'error'   => 'On tapahtunut ongelma, joka poistaa kentän kentän. Yritä uudelleen.',
-            'success' => 'Fieldset poistettiin onnistuneesti.',
-            'in_use'   => 'Fieldset on edelleen käytössä.',
+            'confirm'   	=> 'Haluatko varmasti poistaa tämän kenttäryhmän?',
+            'error'   => 'Tuli ongelma, kenttäryhmän poistossa. Yritä uudelleen.',
+            'success' => 'Kenttäryhmä poistettiin onnistuneesti.',
+            'in_use'   => 'Kenttäryhmä on edelleen käytössä.',
         )
 
     ),
