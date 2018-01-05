@@ -5,8 +5,8 @@ return array(
     'does_not_exist' => 'Lisenssiä ei löydy.',
     'user_does_not_exist' => 'Käyttäjää ei löydy.',
     'asset_does_not_exist' 	=> 'Laitetta jolle yrität määrittää tämän lisenssin ei löydy.',
-    'owner_doesnt_match_asset' => 'Laitteen jolle yrität määrittää tämän lisenssin omistaa joku muu kuin se, jonka olet valinnut alasvetovalikosta.',
-    'assoc_users'	 => 'Lisenssin on luovutettu käyttäjälle eikä sitä voida poistaa. Palauta lisenssin ensin käyttäjältä, ja yritä sitten uudelleen. ',
+    'owner_doesnt_match_asset' => 'Laitteelle jolle yrität määrittää tämän lisenssin omistaa joku muu kuin se, jonka olet valinnut alasvetovalikosta.',
+    'assoc_users'	 => 'Lisenssi on luovutettu käyttäjälle eikä sitä voida poistaa. Palauta lisenssi ensin käyttäjältä, ja yritä sitten uudelleen. ',
     'select_asset_or_person' => 'Sinun on valittava omaisuus tai käyttäjä, mutta ei molempia.',
 
 
@@ -24,7 +24,7 @@ return array(
         'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
         'nofiles' => 'Et ole valinnut lähetettäviä tiedostoja tai tiedosto, jonka yrität ladata, on liian suuri',
-        'invalidfiles' => 'Yksi tai useampi tiedosto on liian suuri tai on filetype, jota ei sallita. Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ja lic.',
+        'invalidfiles' => 'Yksi tai useampi tiedosto on liian suuri tai on tiedostotyyppi, jota ei sallita. Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ja lic.',
     ),
 
     'update' => array(
