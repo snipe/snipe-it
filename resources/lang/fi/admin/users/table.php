@@ -7,7 +7,7 @@ return array(
     'created_at' 			=> 'Luontiaika',
     'createuser' 			=> 'Uusi Käyttäjä',
     'deny'  				=> 'Estä',
-    'email'      			=> 'Email',
+    'email'      			=> 'Sähköposti',
     'employee_num'      	=> 'Työntekijän nro.',
     'first_name' 			=> 'Etunimi',
     'groupnotes'			=> 'Valitse käyttäjälle ryhmä, mutta muista että käyttäjä saa kaikki samat oikeudet kuin mitä ryhmälle on määritetty.',
