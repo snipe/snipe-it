@@ -9,7 +9,7 @@ return array(
     'contact'               => 'Yhteyshenkilön Nimi',
     'country'               => 'Maa',
     'create'                => 'Uusi Toimittaja',
-    'email'                 => 'Email',
+    'email'                 => 'Sähköposti',
     'fax'                   => 'Faksi',
     'id'                    => 'Tunnus',
     'licenses'              => 'Lisenssit',
