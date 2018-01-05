@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Vahvista Bulk Delete Asset',
+	'bulk_delete'		=> 'Vahvista nimikkeen massapoisto',
   'bulk_delete_help'	=> 'Tarkastele aineistoa irtotavarana. Kun ne on poistettu, nämä varat voidaan palauttaa, mutta niitä ei enää yhdistetä niihin käyttäjiin, joille heidät on tällä hetkellä osoitettu.',
   'bulk_delete_warn'	=> 'Olet poistamassa: asset_count-varat.',
 	'bulk_update'		=> 'Massapäivitä Laitteita',
@@ -9,7 +9,7 @@ return array(
 	'bulk_update_warn'	=> 'Olet päivittämässä :asset_count laitteen ominaisuuksia.',
     'checkedout_to'		=> 'Jotka Luovutettuna Käyttäjälle',
     'checkout_date'		=> 'Luovutuspäivä',
-    'checkin_date'		=> 'Checkin Date',
+    'checkin_date'		=> 'Palautuspäivä',
     'checkout_to'		=> 'Luovuta Käyttäjälle',
     'cost'				=> 'Ostohinta',
     'create'			=> 'Uusi Laite',
