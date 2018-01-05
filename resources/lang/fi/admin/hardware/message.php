@@ -43,7 +43,7 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Jotkin kohteet eivät tuoneet oikein.',
+        'error'                 => 'Jotkin kohteet eivät muodostuneet oikein.',
         'errorDetail'           => 'Seuraavia kohteita ei tuotu virheiden vuoksi.',
         'success'               => "Tiedostosi on tuotu",
         'file_delete_success'   => "Tiedosto on poistettu onnistuneesti",
@@ -54,7 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',
         'error'   		=> 'Laitteen poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'nothing_updated'   => 'Mitään omaisuutta ei valittu, joten mitään ei poistettu.',
+        'nothing_updated'   => 'Mitään nimikettä ei valittu, joten mitään ei poistettu.',
         'success' 		=> 'Laite poistettu onnistuneesti.'
     ),
 
@@ -62,8 +62,8 @@ return array(
         'error'   		=> 'Laitteen luovutus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite luovutettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
-        'not_available' => 'Tätä omaisuutta ei ole saatavilla kassalle!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'not_available' => 'Tätä omaisuutta ei ole saatavilla luovutettavaksi!',
+        'no_assets_selected' => 'Sinun pitää valita vähintään yksi nimike listalta'
     ),
 
     'checkin' => array(
@@ -77,7 +77,7 @@ return array(
     'requests' => array(
         'error'   		=> 'Varallisuutta ei pyydetty, yritä uudelleen',
         'success' 		=> 'Omaisuus pyydettiin onnistuneesti.',
-        'canceled'      => 'Checkout-pyyntö peruutettiin onnistuneesti'
+        'canceled'      => 'Luovutuspyyntö peruutettiin onnistuneesti'
     )
 
 );
