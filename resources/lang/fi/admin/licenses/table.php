@@ -5,7 +5,7 @@ return array(
     'assigned_to'   	=> 'Luovutettu',
     'checkout'   		=> 'Toiminto',
     'id'      			=> 'Tunnus',
-    'license_email'   	=> 'Lisenssille määritetty Email',
+    'license_email'   	=> 'Lisenssille määritetty Sähköposti',
     'license_name'   	=> 'Lisenssille Määritetty Nimi',
     'purchase_date'   	=> 'Ostopäivämäärä',
     'purchased'   		=> 'Ostopäivämäärä',
