@@ -2,7 +2,7 @@
 
 return array(
     'about_licenses_title'            => 'Tietoja lisensseistä',
-    'about_licenses'                  => 'Ohjelmistojen seurantaan käytetään lisenssejä. Heillä on tietty määrä paikkoja, jotka voidaan tarkistaa yksityishenkilöille',
+    'about_licenses'                  => 'Lisensseillä seurataan ohjelmistojen käyttöä. Käytettävänä on tietty määrä jotka voidaan osoittaan tietyille henkilöille.',
     'checkin'  					=> 'Palautettavien Lisenssien Käyttäjämäärä',
     'checkout_history'  		=> 'Luovutushistoria',
     'checkout'  				=> 'Luovutettujen Lisenssien Käyttäjämäärä',
