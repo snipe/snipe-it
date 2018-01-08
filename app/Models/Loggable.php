@@ -182,7 +182,7 @@ trait Loggable
         $log->location_id = null;
         $log->note = $note;
         $log->user_id = $user_id;
-        $log->logaction('created');
+        $log->logaction('create');
         $log->save();
         return $log;
     }

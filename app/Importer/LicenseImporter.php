@@ -63,6 +63,8 @@ class LicenseImporter extends ItemImporter
         } else {
             $license->fill($this->sanitizeItemForStoring($license));
         }
+
+        $license->unsetEventDispatcher();
         if ($license->save()) {
             $license->logCreate('Imported using csv importer');
             $this->log('License ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
