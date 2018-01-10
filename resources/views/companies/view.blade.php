@@ -49,6 +49,23 @@
                         </a>
                     </li>
 
+                    <li>
+                        <a href="#components_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md">
+                            <i class="fa fa-hdd-o"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#users_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md">
+                            <i class="fa fa-users"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.people') }}</span>
+                        </a>
+                    </li>
+
+
 
                 </ul>
 
@@ -61,9 +78,11 @@
                                     name="companyAssets"
                                     class="table table-striped snipe-table"
                                     id="table"
+                                    data-search="true"
                                     data-url="{{route('api.assets.index',['company_id' => $company->id]) }}"
+                                    data-export-file="{{ str_slug($company->name) }}-assets"
                                     data-cookie="true"
-                                    data-cookie-id-table="companyAssetsTable-{{ config('version.hash_version') }}">
+                                    data-cookie-id-table="companyAssetsTable">
                                 <thead>
                                 <tr>
                                     <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
@@ -82,32 +101,30 @@
 
                     <div class="tab-pane" id="licenses_tab">
                         <div class="table-responsive">
-                            <table class="display table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-5">{{ trans('general.name') }}</th>
-                                    <th class="col-md-6">{{ trans('admin/hardware/form.serial') }}</th>
-                                    <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
+                            <table
+                                    name="companyLicenses"
+                                    class="table table-striped snipe-table"
+                                    id="companyLicenses"
+                                    data-url="{{route('api.licenses.index',['company_id' => $company->id]) }}"
+                                    data-cookie="true"
+                                    data-export-file="{{ str_slug($company->name) }}-licenses"
+                                    data-cookie-id-table="companyLicenses"
+                                    data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}">
                             </table>
                         </div>
                     </div><!-- /licenses-tab -->
 
                     <div class="tab-pane" id="accessories_tab">
                         <div class="table-responsive">
-                            <table class="display table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-5">Name</th>
-                                    <th class="col-md-1 hidden-print">Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
+                            <table
+                                    name="companyAccessories"
+                                    class="table table-striped snipe-table"
+                                    id="companyAccessories"
+                                    data-url="{{route('api.accessories.index',['company_id' => $company->id]) }}"
+                                    data-cookie="true"
+                                    data-export-file="{{ str_slug($company->name) }}-accessories"
+                                    data-cookie-id-table="companyAccessories"
+                                    data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}">
                                 </tbody>
                             </table>
                         </div>
@@ -115,23 +132,54 @@
 
                     <div class="tab-pane" id="consumables_tab">
                         <div class="table-responsive">
-                            <table class="display table table-striped">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-8">{{ trans('general.name') }}</th>
-                                    <th class="col-md-4">{{ trans('general.date') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
+                            <table
+                                    name="companyConsumables"
+                                    class="table table-striped snipe-table"
+                                    id="companyConsumables"
+                                    data-url="{{route('api.consumables.index',['company_id' => $company->id]) }}"
+                                    data-cookie="true"
+                                    data-export-file="{{ str_slug($company->name) }}-consumables"
+                                    data-cookie-id-table="companyConsumables"
+                                    data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}">
                             </table>
                         </div>
                     </div><!-- /consumables-tab -->
 
-                    
+                    <div class="tab-pane" id="components_tab">
+                        <div class="table-responsive">
+                            <table
+                                    name="companyComponents"
+                                    data-search="true"
+                                    class="table table-striped snipe-table"
+                                    id="companyUsers"
+                                    data-url="{{route('api.components.index',['company_id' => $company->id]) }}"
+                                    data-cookie="true"
+                                    data-export-file="{{ str_slug($company->name) }}-components"
+                                    data-cookie-id-table="companyComponents"
+                                    data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}">
+                            </table>
+                        </div>
+                    </div><!-- /consumables-tab -->
 
-                    
+                    <div class="tab-pane" id="users_tab">
+                        <div class="table-responsive">
+                            <table
+                                    name="companyUsers"
+                                    data-search="true"
+                                    class="table table-striped snipe-table"
+                                    id="companyUsers"
+                                    data-url="{{route('api.users.index',['company_id' => $company->id]) }}"
+                                    data-cookie="true"
+                                    data-export-file="{{ str_slug($company->name) }}-users"
+                                    data-cookie-id-table="companyUsers"
+                                    data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}">
+                            </table>
+                        </div>
+                    </div><!-- /consumables-tab -->
+
+
+
+
                 </div><!-- /.tab-content -->
             </div><!-- nav-tabs-custom -->
         </div>
@@ -139,7 +187,7 @@
 
 @stop
 @section('moar_scripts')
-    @include ('partials.bootstrap-table', ['exportFile' => 'companies-export', 'search' => true])
+    @include ('partials.bootstrap-table')
 
 @stop
 
