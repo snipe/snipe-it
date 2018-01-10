@@ -534,6 +534,47 @@
           </div>
         </div> <!-- /.tab-pane components -->
 
+
+        <div class="tab-pane fade" id="assets">
+          <div class="row">
+            <div class="col-md-12">
+              {{ Form::open([
+                        'method' => 'POST',
+                        'route' => ['hardware/bulkedit'],
+                        'class' => 'form-inline',
+                         'id' => 'bulkForm']) }}
+              <div id="toolbar">
+                <select name="bulk_actions" class="form-control select2" style="300px;">
+                  <option value="edit">Edit</option>
+                  <option value="delete">Delete</option>
+                  <option value="labels">Generate Labels</option>
+                </select>
+                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+              </div>
+
+              <!-- checked out assets table -->
+              <div class="table-responsive">
+                <table
+                        name="assetAssets"
+                        data-toolbar="#toolbar"
+                        class="table table-striped snipe-table"
+                        id="assetAssets"
+                        data-search="false"
+                        data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
+                        data-export-options='{"fileName": "asset-assets"}'
+                        data-cookie="true"
+                        data-show-footer="true"
+                        data-cookie-id-table="assetAssetsTable"
+                        data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
+
+                </table>
+                {{ Form::close() }}
+              </div>
+            </div><!-- /col -->
+          </div> <!-- row -->
+        </div> <!-- /.tab-pane software -->
+
+
         <div class="tab-pane fade" id="maintenances">
           <div class="row">
             <div class="col-md-12">
@@ -619,7 +660,7 @@
           <div class="row">
             <div class="col-md-12">
               <table
-                      name="asset-histor"
+                      name="asset-history"
                       id="asset-history"
                       class="table table-striped snipe-table"
                       data-cookie="true"
@@ -740,7 +781,7 @@
 @stop
 
 @section('moar_scripts')
-  @include ('partials.bootstrap-table', ['simple_view' => true])
+  @include ('partials.bootstrap-table')
 
 <script nonce="{{ csrf_token() }}">
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
