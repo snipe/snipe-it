@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Notifications\Notifiable;
+use DB;
 
 /**
  * Model for Assets.
@@ -173,6 +174,10 @@ class Asset extends Depreciable
 
         if ($location != null) {
             $this->location_id = $location;
+        } else {
+            if($target->location) {
+                $this->location_id = $target->location->id;
+            }
         }
 
         if ($this->requireAcceptance()) {
@@ -814,7 +819,7 @@ class Asset extends Depreciable
                  })->orWhere(function ($query) use ($search) {
                          $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
                          ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
-                         ->orWhereRaw('CONCAT(assets_users.first_name," ",assets_users.last_name) LIKE ?', ["%$search%", "%$search%"])
+                         ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$search%", "%$search%"])
                          ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
                          ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
                          ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
@@ -873,7 +878,7 @@ class Asset extends Depreciable
                 })->orWhere(function ($query) use ($search) {
                     $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
-                        ->orWhereRaw('CONCAT(assets_users.first_name," ",assets_users.last_name) LIKE ?', ["%$search%", "%$search%"])
+                        ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$search%", "%$search%"])
                         ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
                         ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
                         ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
