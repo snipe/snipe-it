@@ -122,6 +122,11 @@ class AssetsController extends Controller
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
         }
 
+        if (($request->has('assigned_to')) && ($request->has('assigned_type'))) {
+            $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
+                    ->where('assets.assigned_type', '=', $request->input('assigned_type'));
+        }
+
         if ($request->has('company_id')) {
             $assets->where('assets.company_id', '=', $request->input('company_id'));
         }
@@ -243,7 +248,8 @@ class AssetsController extends Controller
                 $assets->orderBy($column_sort, $order);
                 break;
         }
-        
+
+
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
         return (new AssetsTransformer)->transformAssets($assets, $total);
