@@ -480,6 +480,11 @@ class UsersController extends Controller
             if ($request->has('company_id')) {
                 $update_array['company_id'] = $request->input('company_id');
             }
+            if ($request->has('locale')) {
+                $update_array['locale'] = $request->input('locale');
+            }
+
+
 
             if ($request->has('manager_id')) {
 

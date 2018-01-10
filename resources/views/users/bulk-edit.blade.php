@@ -46,6 +46,15 @@
                         <!-- Manager -->
                     @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
 
+                        <!-- language -->
+                        <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
+                            <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
+                            <div class="col-md-8">
+                                {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
+                                {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div>
+
                         <!-- activated -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
