@@ -616,16 +616,17 @@
           <div class="row">
             <div class="col-md-12">
               <table
+                      name="asset-histor"
+                      id="asset-history"
                       class="table table-striped snipe-table"
-                      name="asset-history"
-                      id="table"
-                      class="table table-striped snipe-table"
+                      data-cookie="true"
+                      data-click-to-select="true"
+                      data-cookie-id-table="asset-history"
                       data-sort-order="desc"
                       data-show-columns="true"
                       data-search="true"
-                      data-cookie="true"
                       data-show-refresh="true"
-                      data-cookie-id-table="asset-history"
+                      data-id-table="asset-history"
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
                 <thead>
                 <tr>
@@ -639,7 +640,7 @@
                   @if  ($snipeSettings->require_accept_signature=='1')
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
-                  <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">Changed</th>
+                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
                 </tr>
                 </thead>
               </table>
