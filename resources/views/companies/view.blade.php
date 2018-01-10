@@ -82,19 +82,10 @@
                                     data-url="{{route('api.assets.index',['company_id' => $company->id]) }}"
                                     data-export-file="{{ str_slug($company->name) }}-assets"
                                     data-cookie="true"
-                                    data-cookie-id-table="companyAssetsTable">
-                                <thead>
-                                <tr>
-                                    <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                                    <th data-sortable="true" data-formatter="hardwareLinkFormatter" data-field="name" data-searchable="true">{{ trans('admin/hardware/form.name') }}</th>
-                                    <th data-sortable="true" data-field="image" data-visible="true" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
-                                    <th data-searchable="false" data-formatter="modelsLinkObjFormatter" data-sortable="false" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-formatter="hardwareInOutFormatter" data-field="checkincheckout">Checkin/Checkout</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('general.action') }}</th>
-                                </tr>
-                                </thead>
+                                    data-cookie-id-table="companyAssetsTable"
+                                    data-show-footer="true"
+                                    data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
+
                             </table>
                         </div>
                     </div><!-- /asset_tab -->
