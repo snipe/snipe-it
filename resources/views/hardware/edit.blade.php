@@ -105,9 +105,15 @@
 @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">
 
-
+    var transformed_oldvals={};
 
     function fetchCustomFields() {
+        //save custom field choices
+        var oldvals = $('#custom_fields_content').find('input,select').serializeArray();
+        for(var i in oldvals) {
+            transformed_oldvals[oldvals[i].name]=oldvals[i].value;
+        }
+
         var modelid = $('#model_select_id').val();
         if (modelid == '') {
             $('#custom_fields_content').html("");
@@ -123,8 +129,15 @@
                 _token: "{{ csrf_token() }}",
                 dataType: 'html',
                 success: function (data) {
-                    data: data,
                     $('#custom_fields_content').html(data);
+                    $('#custom_fields_content select').select2(); //enable select2 on any custom fields that are select-boxes
+                    //now re-populate the custom fields based on the previously saved values
+                    $('#custom_fields_content').find('input,select').each(function (index,elem) {
+                        if(transformed_oldvals[elem.name]) {
+                            $(elem).val(transformed_oldvals[elem.name]).trigger('change'); //the trigger is for select2-based objects, if we have any
+                        }
+                        
+                    });
                 }
             });
         }
