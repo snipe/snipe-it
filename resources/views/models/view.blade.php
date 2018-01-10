@@ -166,6 +166,13 @@
               </li>
               @endif
 
+              @if ($model->notes)
+                  <li>
+                      {{ trans('general.notes') }}:
+                      {{ $model->notes }}
+                  </li>
+              @endif
+
 
 
               @if  ($model->deleted_at!='')
