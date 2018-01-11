@@ -1,10 +1,10 @@
 {{-- This Will load our default bootstrap-table settings on any table with a class of "snipe-table" and export it to the passed 'exportFile' name --}}
 <script src="{{ asset('js/bootstrap-table.js') }}"></script>
 <script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.min.js?v=1') }}"></script>
 
 @if (!isset($simple_view))
 <script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
 <script src="{{ asset('js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('js/FileSaver.min.js') }}"></script>
 <script src="{{ asset('js/jspdf.min.js') }}"></script>
@@ -36,31 +36,27 @@
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
         iconsPrefix: 'fa',
-
-        @if (isset($search))
-            search: true,
-        @endif
-
-
+        search: {{ (isset($search)) ? 'true' : 'false' }},
         paginationVAlign: 'both',
         sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
         sortable: true,
+        pageSize: 20,
+        pagination: true,
+        cookie: true,
+        cookieExpire: '2y',
+        cookieIdTable: '{{ Route::currentRouteName() }}',
 
        @if (!isset($simple_view))
 
         showRefresh: true,
-        pagination: true,
-        pageSize: 20,
-        cookie: true,
-        cookieExpire: '2y',
         showExport: true,
         stickyHeader: true,
         stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
 
-
         @if (isset($showFooter))
         showFooter: true,
         @endif
+
         showColumns: true,
         trimOnSearch: false,
 
@@ -287,13 +283,9 @@
 
     // We need a special formatter for license seats, since they don't work exactly the same
     //
-    function licenseSeatInOutFormatter (value, row) {
+    function licenseSeatInOutFormatter(value, row) {
 
-        if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
-            return '<a href="{{ url('/') }}/' + destination + '/' + row.next_seat + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
-        } else {
 
-        }
     }
 
     function genericCheckinCheckoutFormatter(destination) {
