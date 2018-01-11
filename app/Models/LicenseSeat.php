@@ -34,4 +34,17 @@ class LicenseSeat extends Model implements ICompanyableChild
     {
         return $this->belongsTo('\App\Models\Asset', 'asset_id')->withTrashed();
     }
+
+    public function location()
+    {
+        if (($this->user) && ($this->user->location)) {
+            return $this->user->location;
+
+        } elseif (($this->asset) && ($this->asset->location)) {
+            return $this->asset->location;
+        }
+
+        return false;
+
+    }
 }

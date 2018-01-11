@@ -38,90 +38,37 @@
       <div class="tab-content">
         <div class="tab-pane active" id="tab_1">
           <div class="row">
-            <div class="col-md-7">
-              <table class="table table-striped">
+            <div class="col-md-8">
+
+              <div class="table-responsive">
+                <table
+                        name="license-seats"
+                        class="table table-striped snipe-table"
+                        id="licenseSeats"
+                        data-id-table="licenseSeats"
+                        data-search="false"
+                        data-url="{{ route('api.license.seats',['licence_id' => $license->id]) }}"
+                        data-export="true"
+                        data-export-options="{'fileName': 'license-seats'}"
+                        data-cookie="true"
+                        data-cookie-id-table="licenseSeats-Table">
                   <thead>
-                    <tr>
-                      <th class="col-md-2">{{ trans('admin/licenses/general.seat') }}</th>
-                      <th class="col-md-2">{{ trans('admin/licenses/general.user') }}</th>
-                      <th class="col-md-4">{{ trans('admin/licenses/form.asset') }}</th>
-                      <th class="col-md-2"></th>
-                    </tr>
+                  <tr>
+                    <th class="col-md-1" data-field="name">{{ trans('admin/licenses/general.seat') }}</th>
+                    <th class="col-md-3" data-formatter="usersLinkObjFormatter" data-field="assigned_user">{{ trans('admin/licenses/general.user') }}</th>
+                    <th class="col-md-3" data-formatter="hardwareLinkObjFormatter" data-field="assigned_asset">{{ trans('admin/licenses/form.asset') }}</th>
+                    <th class="col-md-3" data-formatter="locationsLinkObjFormatter" data-field="location">{{ trans('general.location') }}</th>
+                    <th class="col-md-1" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licenseSeatInOutFormatter">Checkin/Checkout</th>
+                  </tr>
                   </thead>
                   <tbody>
-                    <?php $count=1; ?>
-                    @if ($license->licenseseats)
-                      @foreach ($license->licenseseats as $licensedto)
-                      <tr>
-                        <td>Seat {{ $count }} </td>
-                        <td>
-                          @if (($licensedto->user) && ($licensedto->deleted_at == NULL))
 
-                            @can('users.view')
-                              <a href="{{ route('users.show', $licensedto->assigned_to) }}">
-                                <i class="fa fa-user"></i>
-                                {{ $licensedto->user->present()->fullName() }}
-                              </a>
-                            @else
-                              <i class="fa fa-user"></i>
-                              {{ $licensedto->user->present()->fullName() }}
-                            @endcan
-
-                          @elseif (($licensedto->user) && ($licensedto->deleted_at != NULL))
-
-                            <del>{{ $licensedto->user->present()->fullName() }}</del>
-
-                          @endif
-                        </td>
-                        <td>
-                          @if ($licensedto->asset)
-
-                            @can('view', $licensedto->asset)
-                              <a href="{{ route('hardware.show', $licensedto->asset_id) }}">
-                                <i class="fa fa-barcode"></i>
-                                {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
-                              </a>
-                            @else
-                              <i class="fa fa-barcode"></i>
-                              {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
-                            @endcan
-
-                              @if ($licensedto->asset->location)
-                                @can('locations.view')
-                                  ({!!  $licensedto->asset->location->present()->nameUrl()  !!})
-                                @else
-                                  ({{ $licensedto->asset->location->present()->name() }})
-                                @endcan
-                              @endif
-
-                          @endif
-                        </td>
-                        <td>
-                          @can('checkout', $license)
-                            @if (($licensedto->assigned_to) || ($licensedto->asset_id))
-                              @if ($license->reassignable)
-                                <a href="{{ route('licenses.checkin', $licensedto->id) }}" class="btn btn-sm bg-purple">
-                                  {{ trans('general.checkin') }}
-                                </a>
-                              @else
-                                <span>Assigned</span>
-                              @endif
-                            @else
-                              <a href="{{ route('licenses.checkout', $license->id) }}" class="btn btn-sm bg-maroon">
-                                {{ trans('general.checkout') }}
-                              </a>
-                            @endif
-                          @endcan
-                        </td>
-                      </tr>
-                        <?php $count++; ?>
-                      @endforeach
-                    @endif
-                  </tbody>
                 </table>
+              </div>
+
             </div>
 
-            <div class="col-md-5">
+            <div class="col-md-4">
               <div class="table">
                 <table class="table">
                   <tbody>
@@ -134,7 +81,7 @@
 
                     @if ($license->manufacturer)
                       <tr>
-                        <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
+                        <td>{{ trans('admin/hardware/form.manufacturer') }}:</td>
                         <td><p style="line-height: 23px;">
                           @can('view', \App\Models\Manufacturer::class)
                             <a href="{{ route('manufacturers.show', $license->manufacturer->id) }}">
@@ -169,7 +116,7 @@
 
                       @if (!is_null($license->serial))
                       <tr>
-                        <td>{{ trans('admin/licenses/form.license_key') }}</td>
+                        <td>{{ trans('admin/licenses/form.license_key') }}: </td>
                         <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">
                           @can('viewKeys', $license)
                             {!! nl2br(e($license->serial)) !!}
@@ -182,16 +129,16 @@
                       @endif
 
 
-                    @if (!is_null($license->license_name))
+                    @if ($license->license_name!='')
                     <tr>
-                      <td>{{ trans('admin/licenses/form.to_name') }}</td>
+                      <td>{{ trans('admin/licenses/form.to_name') }}: </td>
                       <td>{{ $license->license_name }}</td>
                     </tr>
                     @endif
 
-                    @if (!is_null($license->license_email))
+                    @if ($license->license_email!='')
                     <tr>
-                      <td>{{ trans('admin/licenses/form.to_email') }}</td>
+                      <td>{{ trans('admin/licenses/form.to_email') }}:</td>
                       <td>{{ $license->license_email }}</td>
                     </tr>
                     @endif
@@ -318,7 +265,7 @@
             <thead>
               <tr>
                 <th class="col-md-5">{{ trans('general.notes') }}</th>
-                <th class="col-md-5"><span class="line"></span>{{ trans('general.file_name') }}</th>
+                <th class="col-md-5">{{ trans('general.file_name') }}</th>
                 <th class="col-md-2"></th>
                 <th class="col-md-2"></th>
               </tr>
@@ -423,7 +370,7 @@
 
 
 @section('moar_scripts')
-  @include ('partials.bootstrap-table', ['simple_view' => true])
+  @include ('partials.bootstrap-table')
 
 
 @stop
