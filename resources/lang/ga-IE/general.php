@@ -116,7 +116,7 @@
     'location'              => 'Suíomh',
     'locations'				=> 'Suímh',
     'logout'				=> 'Logáil Amach',
-    'lookup_by_tag'     => 'Féach ar Chlib Sócmhainní',
+    'lookup_by_asset'     => 'Féach ar Chlib Sócmhainní',
     'manufacturer'			=> 'Déantóir',
     'manufacturers'			=> 'Déantóirí',
     'markdown'				=> 'Ceadaíonn an réimse seo <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

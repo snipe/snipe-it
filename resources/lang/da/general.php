@@ -116,7 +116,7 @@
     'location'              => 'Lokation',
     'locations'				=> 'Lokationer',
     'logout'				=> 'Log ud',
-    'lookup_by_tag'     => 'Søg på aktivkode',
+    'lookup_by_asset'     => 'Søg på aktivkode',
     'manufacturer'			=> 'Producent',
     'manufacturers'			=> 'Producenter',
     'markdown'				=> 'Dette felt tillader <a href="https://help.github.com/articles/github-flavored-markdown/">Github koder</a>.',

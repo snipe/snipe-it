@@ -116,7 +116,7 @@
     'location'              => 'מקום',
     'locations'				=> 'מיקומים',
     'logout'				=> 'להתנתק',
-    'lookup_by_tag'     => 'בדיקה על ידי תג הנכס',
+    'lookup_by_asset'     => 'בדיקה על ידי תג הנכס',
     'manufacturer'			=> 'יַצרָן',
     'manufacturers'			=> 'היצרנים',
     'markdown'				=> 'שדה זה מאפשר <a href="https://help.github.com/articles/github-flavored-markdown/">Github בטעם מרקדון </a>.',

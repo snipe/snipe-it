@@ -116,7 +116,7 @@
     'location'              => 'Sijainti',
     'locations'				=> 'Sijainnit',
     'logout'				=> 'Kirjaudu Ulos',
-    'lookup_by_tag'     => 'Haku nimellä Asset Tag',
+    'lookup_by_asset'     => 'Haku nimellä Asset Tag',
     'manufacturer'			=> 'Valmistaja',
     'manufacturers'			=> 'Valmistajat',
     'markdown'				=> 'Tämä kenttä mahdollistaa <a href="https://help.github.com/articles/github-flavored-markdown/">Github-maustamattoman markdown</a>.',

@@ -116,7 +116,7 @@
     'location'              => 'Местоположение',
     'locations'				=> 'Местоположения',
     'logout'				=> 'Изход',
-    'lookup_by_tag'     => 'Търсене по етикет на актив',
+    'lookup_by_asset'     => 'Търсене по етикет на актив',
     'manufacturer'			=> 'Производител',
     'manufacturers'			=> 'Производители',
     'markdown'				=> 'Това поле позволява <a href="https://help.github.com/articles/github-flavored-markdown/"Github flavored markdown<a/>',

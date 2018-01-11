@@ -116,7 +116,7 @@
     'location'              => 'Vieta',
     'locations'				=> 'Vietovės',
     'logout'				=> 'Atsijungti',
-    'lookup_by_tag'     => 'Paiešką pagal turto žymą',
+    'lookup_by_asset'     => 'Paiešką pagal turto žymą',
     'manufacturer'			=> 'Gamintojas',
     'manufacturers'			=> 'Gamintojai',
     'markdown'				=> 'Šis laukas leidžia <a href="https://help.github.com/articles/github-flavored-markdown/">Github skonio markdown</a>.',

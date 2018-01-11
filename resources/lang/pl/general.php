@@ -116,7 +116,7 @@
     'location'              => 'Lokalizacja',
     'locations'				=> 'Lokalizacje',
     'logout'				=> 'Wyloguj się',
-    'lookup_by_tag'     => 'Wyszukaj poprzez znacznik aktywa',
+    'lookup_by_asset'     => 'Wyszukaj poprzez znacznik aktywa',
     'manufacturer'			=> 'Producent',
     'manufacturers'			=> 'Producenci',
     'markdown'				=> 'To pole pozwala na użycie <a href="https://help.github.com/articles/github-flavored-markdown/">GFM (Github flavored markdown)</a>.',

@@ -116,7 +116,7 @@
     'location'              => 'Байршил',
     'locations'				=> 'Байршил',
     'logout'				=> 'Гарах',
-    'lookup_by_tag'     => 'Хөрөнгийн Tagаар хайх',
+    'lookup_by_asset'     => 'Хөрөнгийн Tagаар хайх',
     'manufacturer'			=> 'Үйлдвэрлэгч',
     'manufacturers'			=> 'Үйлдвэрлэгчид',
     'markdown'				=> 'Энэ талбар нь <a href="https://help.github.com/articles/github-flavored-markdown/"> Гитуб амттай markdown</a>.',

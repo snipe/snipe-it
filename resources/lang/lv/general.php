@@ -116,7 +116,7 @@
     'location'              => 'Atrašanās vieta',
     'locations'				=> 'Atrašanās vietas',
     'logout'				=> 'Izlogoties',
-    'lookup_by_tag'     => 'Meklēt pēc Asset Tag',
+    'lookup_by_asset'     => 'Meklēt pēc Asset Tag',
     'manufacturer'			=> 'Ražotājs',
     'manufacturers'			=> 'Ražotāji',
     'markdown'				=> 'Šajā laukā ir iespējota <a href="https://help.github.com/articles/github-flavored-markdown/">Github aromatizēta atzīme</a>.',

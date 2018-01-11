@@ -116,7 +116,7 @@
     'location'              => 'Locatie',
     'locations'				=> 'Locatii',
     'logout'				=> 'Log out',
-    'lookup_by_tag'     => 'Căutarea după eticheta de activ',
+    'lookup_by_asset'     => 'Căutarea după eticheta de activ',
     'manufacturer'			=> 'Producator',
     'manufacturers'			=> 'Producatori',
     'markdown'				=> 'Acest câmp permite marcarea <a href="https://help.github.com/articles/github-flavored-markdown/">Github markdown</a>.',

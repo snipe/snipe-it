@@ -116,7 +116,7 @@
     'location'              => 'Mjesto',
     'locations'				=> 'lokacije',
     'logout'				=> 'Odjaviti se',
-    'lookup_by_tag'     => 'Pretraživanje pomoću oznake imovine',
+    'lookup_by_asset'     => 'Pretraživanje pomoću oznake imovine',
     'manufacturer'			=> 'Proizvođač',
     'manufacturers'			=> 'Proizvođači',
     'markdown'				=> 'Ovo polje dopušta <a href="https://help.github.com/articles/github-flavored-markdown/">gordi s okusom "Github "</a>.',

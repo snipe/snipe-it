@@ -116,7 +116,7 @@
     'location'              => 'สถานที่',
     'locations'				=> 'สถานที่',
     'logout'				=> 'ออกจากระบบ',
-    'lookup_by_tag'     => 'การค้นหาตามแท็กเนื้อหา',
+    'lookup_by_asset'     => 'การค้นหาตามแท็กเนื้อหา',
     'manufacturer'			=> 'ผู้ผลิต',
     'manufacturers'			=> 'ผู้ผลิต',
     'markdown'				=> 'ฟิลด์นี้ช่วยให้ <a href="https://help.github.com/articles/github-flavored-markdown/">Github markdown markdown</a>',

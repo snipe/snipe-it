@@ -116,7 +116,7 @@
     'location'              => 'Plats',
     'locations'				=> 'Platser',
     'logout'				=> 'Logga ut',
-    'lookup_by_tag'     => 'Lookup med tillgångslabel',
+    'lookup_by_asset'     => 'Lookup med tillgångslabel',
     'manufacturer'			=> 'Tillverkare',
     'manufacturers'			=> 'Tillverkare',
     'markdown'				=> 'Detta fält tillåter <a href="https://help.github.com/articles/github-flavored-markdown/">Github smaksatt markdown</a>.',

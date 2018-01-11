@@ -116,7 +116,7 @@
     'location'              => 'Locatie',
     'locations'				=> 'Locaties',
     'logout'				=> 'Afmelden',
-    'lookup_by_tag'     => 'Opzoeken via object ID',
+    'lookup_by_asset'     => 'Opzoeken via object ID',
     'manufacturer'			=> 'Fabrikant',
     'manufacturers'			=> 'Fabrikanten',
     'markdown'				=> 'Dit veld staat <a href="https://help.github.com/articles/github-flavored-markdown/">Github markdown</a> gebruik toe.',

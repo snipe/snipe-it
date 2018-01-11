@@ -116,7 +116,7 @@
     'location'              => '位置',
     'locations'				=> '位置',
     'logout'				=> '登出',
-    'lookup_by_tag'     => '尋找資產標籤',
+    'lookup_by_asset'     => '尋找資產標籤',
     'manufacturer'			=> '製造商',
     'manufacturers'			=> '製造商',
     'markdown'				=> '此欄位可以使用 <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

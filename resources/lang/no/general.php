@@ -116,7 +116,7 @@
     'location'              => 'Lokasjon',
     'locations'				=> 'Lokasjoner',
     'logout'				=> 'Logg ut',
-    'lookup_by_tag'     => 'Søk på ID-merke',
+    'lookup_by_asset'     => 'Søk på ID-merke',
     'manufacturer'			=> 'Produsent',
     'manufacturers'			=> 'Produsenter',
     'markdown'				=> 'Dette feltet tillater <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

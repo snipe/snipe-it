@@ -116,7 +116,7 @@
     'location'              => 'plek',
     'locations'				=> 'plekke',
     'logout'				=> 'Teken uit',
-    'lookup_by_tag'     => 'Opsoek deur Asset Tag',
+    'lookup_by_asset'     => 'Opsoek deur Asset Tag',
     'manufacturer'			=> 'vervaardiger',
     'manufacturers'			=> 'vervaardigers',
     'markdown'				=> 'Hierdie veld laat <a href="https://help.github.com/articles/github-flavored-markdown/">Gitub-gegeurde markdown</a> toe.',

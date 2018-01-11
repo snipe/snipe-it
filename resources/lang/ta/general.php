@@ -116,7 +116,7 @@
     'location'              => 'இருப்பிடம்',
     'locations'				=> 'இடங்கள்',
     'logout'				=> 'வெளியேறு',
-    'lookup_by_tag'     => 'சொத்து டேக் மூலம் பார்',
+    'lookup_by_asset'     => 'சொத்து டேக் மூலம் பார்',
     'manufacturer'			=> 'உற்பத்தியாளர்',
     'manufacturers'			=> 'உற்பத்தியாளர்கள்',
     'markdown'				=> 'இந்தத் துறையில் <a href="https://help.github.com/articles/github-flavored-markdown/"> ஜிடிப் ருசியான மார்க் டவுன் </a> ஐ அனுமதிக்கிறது.',
