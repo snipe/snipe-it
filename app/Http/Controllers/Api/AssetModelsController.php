@@ -36,14 +36,15 @@ class AssetModelsController extends Controller
             ->with('category','depreciation', 'manufacturer','fieldset')
             ->withCount('assets');
 
-        if ($request->has('search')) {
-            $assetmodels->TextSearch($request->input('search'));
-        }
+
 
         if ($request->has('status')) {
             $assetmodels->onlyTrashed();
         }
 
+        if ($request->has('search')) {
+            $assetmodels->TextSearch($request->input('search'));
+        }
 
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
@@ -58,6 +59,7 @@ class AssetModelsController extends Controller
                 $assetmodels->orderBy($sort, $order);
                 break;
         }
+
 
 
         $total = $assetmodels->count();
