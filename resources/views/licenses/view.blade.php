@@ -42,15 +42,16 @@
 
               <div class="table-responsive">
                 <table
-                        name="licenseSeats"
+                        name="license-seats"
                         class="table table-striped snipe-table"
                         id="licenseSeats"
+                        data-id-table="licenseSeats"
                         data-search="false"
-                        data-url="{{route('api.license.seats',['licence_id' => $license->id]) }}"
-                        data-export-options='{"fileName": "asset-assets"}'
+                        data-url="{{ route('api.license.seats',['licence_id' => $license->id]) }}"
+                        data-export="true"
+                        data-export-options="{'fileName': 'license-seats'}"
                         data-cookie="true"
-                        data-show-footer="true"
-                        data-cookie-id-table="licenseSeats">
+                        data-cookie-id-table="licenseSeats-Table">
                   <thead>
                   <tr>
                     <th class="col-md-1" data-field="name">{{ trans('admin/licenses/general.seat') }}</th>
@@ -80,7 +81,7 @@
 
                     @if ($license->manufacturer)
                       <tr>
-                        <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
+                        <td>{{ trans('admin/hardware/form.manufacturer') }}:</td>
                         <td><p style="line-height: 23px;">
                           @can('view', \App\Models\Manufacturer::class)
                             <a href="{{ route('manufacturers.show', $license->manufacturer->id) }}">
@@ -115,7 +116,7 @@
 
                       @if (!is_null($license->serial))
                       <tr>
-                        <td>{{ trans('admin/licenses/form.license_key') }}</td>
+                        <td>{{ trans('admin/licenses/form.license_key') }}: </td>
                         <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">
                           @can('viewKeys', $license)
                             {!! nl2br(e($license->serial)) !!}
@@ -128,16 +129,16 @@
                       @endif
 
 
-                    @if (!is_null($license->license_name))
+                    @if ($license->license_name!='')
                     <tr>
-                      <td>{{ trans('admin/licenses/form.to_name') }}</td>
+                      <td>{{ trans('admin/licenses/form.to_name') }}: </td>
                       <td>{{ $license->license_name }}</td>
                     </tr>
                     @endif
 
-                    @if (!is_null($license->license_email))
+                    @if ($license->license_email!='')
                     <tr>
-                      <td>{{ trans('admin/licenses/form.to_email') }}</td>
+                      <td>{{ trans('admin/licenses/form.to_email') }}:</td>
                       <td>{{ $license->license_email }}</td>
                     </tr>
                     @endif

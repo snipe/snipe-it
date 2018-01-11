@@ -1,15 +1,16 @@
-{{-- This Will load our default bootstrap-table settings on any table with a class of "snipe-table" and export it to the passed 'exportFile' name --}}
-<script src="{{ asset('js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('js/bootstrap-table.min.js') }}"></script>
 <script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
 <script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.min.js?v=1') }}"></script>
-
-@if (!isset($simple_view))
 <script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
 <script src="{{ asset('js/FileSaver.min.js') }}"></script>
+<script src="{{ asset('js/xlsx.core.min.js') }}"></script>
 <script src="{{ asset('js/jspdf.min.js') }}"></script>
 <script src="{{ asset('js/jspdf.plugin.autotable.js') }}"></script>
-<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ asset('js/extensions/export/tableExport.min.js') }}"></script>
+
+
+@if (!isset($simple_view))
 <script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 <script src="{{ asset('js/extensions/sticky-header/bootstrap-table-sticky-header.js') }}"></script>
 @endif
@@ -17,6 +18,9 @@
 <script nonce="{{ csrf_token() }}">
 
     var $table = $('.snipe-table');
+
+
+
     $(function () {
         buildTable($table, 20, 50);
     });
@@ -34,6 +38,12 @@
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
+
+            ajaxOptions: {
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            },
             undefinedText: '',
             iconsPrefix: 'fa',
             search: {{ (isset($search)) ? 'true' : 'false' }},
@@ -69,10 +79,32 @@
                 @endif
                 refresh: 'fa-refresh'
             },
-                @if (!isset($simple_view))
+            showExport: true,
+            exportDataType: 'all',
+            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+            exportOptions: {
+
+                fileName: '{{ ((isset($exportFile)) ? $exportFile : 'table') }}-' + (new Date()).toISOString().slice(0,10),
+                ignoreColumn: ['actions','image','change','checkbox','checkincheckout','icon'],
+                worksheetName: "Snipe-IT Export",
+                escape: false,
+                jspdf: {
+                    orientation: 'l',
+                    autotable: {
+                        styles: {
+                            rowHeight: 20,
+                            fontSize: 10,
+                            overflow: 'linebreak',
+                        },
+                        headerStyles: {fillColor: 255, textColor: 0},
+                        //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
+                    }
+                }
+            },
+
+            @if (!isset($simple_view))
 
                 showRefresh: true,
-                showExport: true,
                 stickyHeader: true,
                 stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
 
@@ -87,28 +119,8 @@
                 showMultiSort: true,
                 @endif
 
-                        @if (isset($exportFile))
-                exportDataType: 'all',
-                exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-                exportOptions: {
 
-                    fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
-                    ignoreColumn: ['actions','change','checkbox','checkincheckout','icon'],
-                    worksheetName: "Snipe-IT Export",
-                    jspdf: {
-                        orientation: 'l',
-                        autotable: {
-                            styles: {
-                                rowHeight: 20,
-                                fontSize: 10,
-                                overflow: 'linebreak',
-                            },
-                            headerStyles: {fillColor: 255, textColor: 0},
-                            //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
-                        }
-                    }
-                },
-                @endif
+
                 @endif
                 pageList: ['20', '30','50','100','150','200']
 
