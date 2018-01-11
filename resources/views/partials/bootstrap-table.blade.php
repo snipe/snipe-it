@@ -285,18 +285,23 @@
     }
 
 
+    // We need a special formatter for license seats, since they don't work exactly the same
+    //
+    function licenseSeatInOutFormatter (value, row) {
+
+        if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
+            return '<a href="{{ url('/') }}/' + destination + '/' + row.next_seat + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
+        } else {
+
+        }
+    }
+
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
 
             // The user is allowed to check items out, AND the item is deployable
-            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
-                // case for licenses
-                if (row.next_seat) {
-                    return '<a href="{{ url('/') }}/' + destination + '/' + row.next_seat + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
-                } else {
-                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
-                }
-
+            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
