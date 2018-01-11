@@ -33,90 +33,86 @@
 
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
-        undefinedText: '',
-        iconsPrefix: 'fa',
-        search: {{ (isset($search)) ? 'true' : 'false' }},
-        paginationVAlign: 'both',
-        sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
-        sortable: true,
-        pageSize: 20,
-        pagination: true,
-        cookie: true,
-        cookieExpire: '2y',
-        cookieIdTable: '{{ Route::currentRouteName() }}',
-
-       @if (!isset($simple_view))
-
-        showRefresh: true,
-        showExport: true,
-        stickyHeader: true,
-        stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-
-        @if (isset($showFooter))
-        showFooter: true,
-        @endif
-
-        showColumns: true,
-        trimOnSearch: false,
-
-        @if (isset($multiSort))
-        showMultiSort: true,
-        @endif
-
-            @if (isset($exportFile))
-            exportDataType: 'all',
-            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-            exportOptions: {
-
-                fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
-                ignoreColumn: ['actions','change','checkbox','checkincheckout','icon'],
-                worksheetName: "Snipe-IT Export",
-                jspdf: {
-                    orientation: 'l',
-                    autotable: {
-                        styles: {
-                            rowHeight: 20,
-                            fontSize: 10,
-                            overflow: 'linebreak',
-                        },
-                        headerStyles: {fillColor: 255, textColor: 0},
-                        //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
-                    }
-                }
+            classes: 'table table-responsive table-no-bordered',
+            undefinedText: '',
+            iconsPrefix: 'fa',
+            search: {{ (isset($search)) ? 'true' : 'false' }},
+            paginationVAlign: 'both',
+            sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
+            sortable: true,
+            pageSize: 20,
+            pagination: true,
+            cookie: true,
+            cookieExpire: '2y',
+            cookieIdTable: '{{ Route::currentRouteName() }}',
+            @if (isset($columns))
+             columns: {!! $columns !!},
+            @endif
+            mobileResponsive: true,
+            maintainSelected: true,
+            paginationFirstText: "{{ trans('general.first') }}",
+            paginationLastText: "{{ trans('general.last') }}",
+            paginationPreText: "{{ trans('general.previous') }}",
+            paginationNextText: "{{ trans('general.next') }}",
+            formatLoadingMessage: function () {
+                return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
-            @endif
+            icons: {
+                advancedSearchIcon: 'fa fa-search-plus',
+                paginationSwitchDown: 'fa-caret-square-o-down',
+                paginationSwitchUp: 'fa-caret-square-o-up',
+                columns: 'fa-columns',
+                @if( isset($multiSort))
+                sort: 'fa fa-sort-amount-desc',
+                plus: 'fa fa-plus',
+                minus: 'fa fa-minus',
+                @endif
+                refresh: 'fa-refresh'
+            },
+                @if (!isset($simple_view))
 
-        @endif
+                showRefresh: true,
+                showExport: true,
+                stickyHeader: true,
+                stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
 
-        @if (isset($columns))
-         columns: {!! $columns !!},
-        @endif
+                @if (isset($showFooter))
+                showFooter: true,
+                @endif
 
-        mobileResponsive: true,
-        maintainSelected: true,
-        paginationFirstText: "{{ trans('general.first') }}",
-        paginationLastText: "{{ trans('general.last') }}",
-        paginationPreText: "{{ trans('general.previous') }}",
-        paginationNextText: "{{ trans('general.next') }}",
-        formatLoadingMessage: function () {
-            return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
-        },
-        pageList: ['20', '30','50','100','150','200'],
-        icons: {
-            advancedSearchIcon: 'fa fa-search-plus',
-            paginationSwitchDown: 'fa-caret-square-o-down',
-            paginationSwitchUp: 'fa-caret-square-o-up',
-            columns: 'fa-columns',
-            @if( isset($multiSort))
-            sort: 'fa fa-sort-amount-desc',
-            plus: 'fa fa-plus',
-            minus: 'fa fa-minus',
-            @endif
-            refresh: 'fa-refresh'
-        }
+                showColumns: true,
+                trimOnSearch: false,
 
-    });
+                @if (isset($multiSort))
+                showMultiSort: true,
+                @endif
+
+                        @if (isset($exportFile))
+                exportDataType: 'all',
+                exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+                exportOptions: {
+
+                    fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
+                    ignoreColumn: ['actions','change','checkbox','checkincheckout','icon'],
+                    worksheetName: "Snipe-IT Export",
+                    jspdf: {
+                        orientation: 'l',
+                        autotable: {
+                            styles: {
+                                rowHeight: 20,
+                                fontSize: 10,
+                                overflow: 'linebreak',
+                            },
+                            headerStyles: {fillColor: 255, textColor: 0},
+                            //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
+                        }
+                    }
+                },
+                @endif
+                @endif
+                pageList: ['20', '30','50','100','150','200']
+
+        });
     }
 
 
@@ -282,9 +278,15 @@
 
 
     // We need a special formatter for license seats, since they don't work exactly the same
-    //
-    function licenseSeatInOutFormatter(value, row) {
+    // Checkouts need the license ID, checkins need the specific seat ID
 
+    function licenseSeatInOutFormatter(value, row) {
+        // The user is allowed to check the license seat out and it's available
+        if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
+            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out">{{ trans('general.checkout') }}</a>';
+        } else {
+            return '<a href="{{ url('/') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';
+        }
 
     }
 
@@ -302,9 +304,9 @@
             // The user is allowed to check items in
             } else if (row.available_actions.checkin == true)  {
                 if (row.assigned_to) {
-                    return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
                 } else if (row.assigned_pivot_id) {
-                    return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
                 }
 
             } 
