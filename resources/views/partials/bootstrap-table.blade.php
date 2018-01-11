@@ -46,7 +46,7 @@
             },
             undefinedText: '',
             iconsPrefix: 'fa',
-            search: {{ (isset($search)) ? 'true' : 'false' }},
+            {!! ((isset($search)) && ($search=='true')) ? 'search: "true",' : '' !!}
             paginationVAlign: 'both',
             sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
             sortable: true,
