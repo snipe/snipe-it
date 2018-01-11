@@ -23,7 +23,8 @@ class LicenseSeatsTransformer
     public function transformLicenseSeat (LicenseSeat $seat, $seat_count)
     {
         $array = [
-            'id' => (int) $seat->license->id,
+            'id' => (int) $seat->id,
+            'license_id' => (int) $seat->license->id,
             'name' => 'Seat '.$seat_count,
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
@@ -32,6 +33,10 @@ class LicenseSeatsTransformer
             'assigned_asset' => ($seat->asset) ? [
                 'id' => (int) $seat->asset->id,
                 'name'=> e($seat->asset->present()->fullName)
+            ] : null,
+            'location' => ($seat->location()) ? [
+                'id' => (int) $seat->location()->id,
+                'name'=> e($seat->location()->name)
             ] : null,
             'reassignable' => (bool) $seat->license->reassignable,
             'user_can_checkout' => (($seat->assigned_to=='') && ($seat->asset_id=='')) ? true : false,
