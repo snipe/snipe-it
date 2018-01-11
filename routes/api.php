@@ -351,6 +351,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Licenses API ---*/
 
+    Route::group(['prefix' => 'licenses'], function () {
+        Route::get('{licenseId}/seats', [
+            'as' => 'api.license.seats',
+            'uses' => 'LicensesController@seats'
+        ]);
+    }); // Licenses group
+
     Route::resource('licenses', 'LicensesController',
         [
             'names' =>
@@ -365,6 +372,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['license' => 'license_id']
         ]
     ); // Licenses resource
+
 
 
     /*--- Locations API ---*/
