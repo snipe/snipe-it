@@ -60,26 +60,14 @@
 
                 <table
                 name="modelassets"
-                id="table"
-                class="snipe-table"
+                id="modelDetailAssets"
+                class="table table-striped snipe-table"
                 data-toolbar="#toolbar"
                 data-url="{{ route('api.assets.index',['model_id'=> $model->id]) }}"
                 data-cookie="true"
                 data-click-to-select="true"
-                data-cookie-id-table="model-assets">
-                  <thead>
-                      <tr>
-                          <th data-checkbox="true" data-field="checkbox"></th>
-                          <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
-                          <th data-sortable="false" data-field="company" data-searchable="false" data-visible="false" data-formatter="companiesLinkObjFormatter">{{ trans('admin/companies/table.title') }}</th>
-                          <th data-sortable="true" data-field="name"  data-searchable="true" data-formatter="hardwareLinkFormatter">{{ trans('general.name') }}</th>
-                          <th data-sortable="true" data-field="asset_tag" data-formatter="hardwareLinkFormatter">{{ trans('general.asset_tag') }}</th>
-                          <th data-sortable="true" data-field="serial" data-formatter="hardwareLinkFormatter">{{ trans('admin/hardware/table.serial') }}</th>
-                          <th data-sortable="false" data-field="assigned_to" data-formatter="polymorphicItemFormatter">{{ trans('admin/hardware/form.checkedout_to') }}</th>
-                          <th data-sortable="false" data-field="inout" data-formatter="hardwareInOutFormatter">{{ trans('admin/hardware/table.change') }}</th>
-                          <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
-                      </tr>
-                  </thead>
+                data-cookie-id-table="modelDetailAssets"
+                data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
                 </table>
                   {{ Form::close() }}
               </div>
@@ -164,6 +152,13 @@
               <li>{{ trans('admin/models/general.fieldset') }}:
                 <a href="{{ route('fieldsets.show', $model->fieldset->id) }}">{{ $model->fieldset->name }}</a>
               </li>
+              @endif
+
+              @if ($model->notes)
+                  <li>
+                      {{ trans('general.notes') }}:
+                      {{ $model->notes }}
+                  </li>
               @endif
 
 

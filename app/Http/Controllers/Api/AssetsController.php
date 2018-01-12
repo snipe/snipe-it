@@ -54,6 +54,7 @@ class AssetsController extends Controller
      */
     public function index(Request $request)
     {
+
         $this->authorize('index', Asset::class);
 
         $allowed_columns = [
@@ -78,30 +79,28 @@ class AssetsController extends Controller
         ];
 
         $filter = array();
+
         if ($request->has('filter')) {
             $filter = json_decode($request->input('filter'));
         }
-
 
         $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
         foreach ($all_custom_fields as $field) {
             $allowed_columns[]=$field->db_column_name();
         }
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")->with(
-            'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
+            ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
             'model.category', 'model.manufacturer', 'model.fieldset','supplier');
 
 
-        if (count($filter) > 0) {
-            $assets->ByFilter($filter);
-        } elseif ($request->has('search')) {
-            $assets->TextSearch($request->input('search'));
-        }
 
 
 
-        // These are used by the API to query against specific ID numbers
+
+        // These are used by the API to query against specific ID numbers.
+        // They are also used by the individual searches on detail pages like
+        // locations, etc.
         if ($request->has('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
         }
@@ -116,10 +115,16 @@ class AssetsController extends Controller
 
         if ($request->has('location_id')) {
             $assets->where('assets.location_id', '=', $request->input('location_id'));
+           // dd($assets->toSql());
         }
 
         if ($request->has('supplier_id')) {
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if (($request->has('assigned_to')) && ($request->has('assigned_type'))) {
+            $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
+                    ->where('assets.assigned_type', '=', $request->input('assigned_type'));
         }
 
         if ($request->has('company_id')) {
@@ -139,7 +144,6 @@ class AssetsController extends Controller
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
 
         // This is used by the sidenav, mostly
 
@@ -200,6 +204,12 @@ class AssetsController extends Controller
                 });
         }
 
+        if (count($filter) > 0) {
+            $assets->ByFilter($filter);
+        } elseif ($request->has('search')) {
+            $assets->TextSearch($request->input('search'));
+        }
+
 
         // This is kinda gross, but we need to do this because the Bootstrap Tables
         // API passes custom field ordering as custom_fields.fieldname, and we have to strip
@@ -243,7 +253,8 @@ class AssetsController extends Controller
                 $assets->orderBy($column_sort, $order);
                 break;
         }
-        
+
+
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
         return (new AssetsTransformer)->transformAssets($assets, $total);

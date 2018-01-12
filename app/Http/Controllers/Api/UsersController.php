@@ -58,11 +58,6 @@ class UsersController extends Controller
         $users = Company::scopeCompanyables($users);
 
 
-        if ($request->has('search')) {
-            $users = $users->TextSearch($request->input('search'));
-        }
-
-
         if (($request->has('deleted')) && ($request->input('deleted')=='true')) {
             $users = $users->GetDeleted();
         }
@@ -81,6 +76,10 @@ class UsersController extends Controller
 
         if ($request->has('department_id')) {
             $users = $users->where('users.department_id','=',$request->input('department_id'));
+        }
+
+        if ($request->has('search')) {
+            $users = $users->TextSearch($request->input('search'));
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -111,6 +110,8 @@ class UsersController extends Controller
                 $users = $users->orderBy($sort, $order);
                 break;
         }
+
+
         $total = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
         return (new UsersTransformer)->transformUsers($users, $total);

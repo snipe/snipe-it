@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\LicenseSeatsTransformer;
 use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Company;
 
 class LicensesController extends Controller
@@ -23,9 +25,6 @@ class LicensesController extends Controller
         $this->authorize('view', License::class);
         $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier')->withCount('freeSeats'));
 
-        if ($request->has('search')) {
-            $licenses = $licenses->TextSearch($request->input('search'));
-        }
 
         if ($request->has('company_id')) {
             $licenses->where('company_id','=',$request->input('company_id'));
@@ -71,6 +70,12 @@ class LicensesController extends Controller
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
+
+        if ($request->has('search')) {
+            $licenses = $licenses->TextSearch($request->input('search'));
+        }
+
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -92,7 +97,8 @@ class LicensesController extends Controller
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
         }
-        
+
+
 
         $total = $licenses->count();
 
@@ -162,4 +168,38 @@ class LicensesController extends Controller
     {
         //
     }
+
+    /**
+     * Get license seat listing
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @param int $licenseId
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function seats(Request $request, $licenseId)
+    {
+
+        if ($license = License::find($licenseId)) {
+
+            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
+
+            $offset = request('offset', 0);
+            $limit = request('limit', 50);
+            $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+
+            $total = $seats->count();
+            $seats = $seats->skip($offset)->take($limit)->get();
+
+            if ($seats) {
+                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $total);
+            }
+
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.does_not_exist')), 200);
+
+    }
+
+
 }

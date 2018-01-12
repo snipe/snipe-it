@@ -1,15 +1,16 @@
-{{-- This Will load our default bootstrap-table settings on any table with a class of "snipe-table" and export it to the passed 'exportFile' name --}}
-<script src="{{ asset('js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('js/bootstrap-table.min.js') }}"></script>
 <script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-
-@if (!isset($simple_view))
+<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.min.js?v=1') }}"></script>
 <script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="{{ asset('js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
 <script src="{{ asset('js/FileSaver.min.js') }}"></script>
+<script src="{{ asset('js/xlsx.core.min.js') }}"></script>
 <script src="{{ asset('js/jspdf.min.js') }}"></script>
 <script src="{{ asset('js/jspdf.plugin.autotable.js') }}"></script>
-<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ asset('js/extensions/export/tableExport.min.js') }}"></script>
+
+
+@if (!isset($simple_view))
 <script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 <script src="{{ asset('js/extensions/sticky-header/bootstrap-table-sticky-header.js') }}"></script>
 @endif
@@ -17,6 +18,9 @@
 <script nonce="{{ csrf_token() }}">
 
     var $table = $('.snipe-table');
+
+
+
     $(function () {
         buildTable($table, 20, 50);
     });
@@ -33,49 +37,57 @@
 
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
-        undefinedText: '',
-        iconsPrefix: 'fa',
+            classes: 'table table-responsive table-no-bordered',
 
-        @if (isset($search))
-            search: true,
-        @endif
-
-
-        paginationVAlign: 'both',
-        sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
-        sortable: true,
-
-       @if (!isset($simple_view))
-
-        showRefresh: true,
-        pagination: true,
-        pageSize: 20,
-        cookie: true,
-        cookieExpire: '2y',
-        showExport: true,
-        stickyHeader: true,
-        stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-
-
-        @if (isset($showFooter))
-        showFooter: true,
-        @endif
-        showColumns: true,
-        trimOnSearch: false,
-
-        @if (isset($multiSort))
-        showMultiSort: true,
-        @endif
-
-            @if (isset($exportFile))
+            ajaxOptions: {
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            },
+            undefinedText: '',
+            iconsPrefix: 'fa',
+            {!! ((isset($search)) && ($search=='true')) ? 'search: "true",' : '' !!}
+            paginationVAlign: 'both',
+            sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
+            sortable: true,
+            pageSize: 20,
+            pagination: true,
+            cookie: true,
+            cookieExpire: '2y',
+            cookieIdTable: '{{ Route::currentRouteName() }}',
+            @if (isset($columns))
+             columns: {!! $columns !!},
+            @endif
+            mobileResponsive: true,
+            maintainSelected: true,
+            paginationFirstText: "{{ trans('general.first') }}",
+            paginationLastText: "{{ trans('general.last') }}",
+            paginationPreText: "{{ trans('general.previous') }}",
+            paginationNextText: "{{ trans('general.next') }}",
+            formatLoadingMessage: function () {
+                return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+            },
+            icons: {
+                advancedSearchIcon: 'fa fa-search-plus',
+                paginationSwitchDown: 'fa-caret-square-o-down',
+                paginationSwitchUp: 'fa-caret-square-o-up',
+                columns: 'fa-columns',
+                @if( isset($multiSort))
+                sort: 'fa fa-sort-amount-desc',
+                plus: 'fa fa-plus',
+                minus: 'fa fa-minus',
+                @endif
+                refresh: 'fa-refresh'
+            },
+            showExport: true,
             exportDataType: 'all',
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             exportOptions: {
 
-                fileName: '{{ $exportFile . "-" }}' + (new Date()).toISOString().slice(0,10),
-                ignoreColumn: ['actions','change','checkbox','checkincheckout','icon'],
+                fileName: '{{ ((isset($exportFile)) ? $exportFile : 'table') }}-' + (new Date()).toISOString().slice(0,10),
+                ignoreColumn: ['actions','image','change','checkbox','checkincheckout','icon'],
                 worksheetName: "Snipe-IT Export",
+                escape: false,
                 jspdf: {
                     orientation: 'l',
                     autotable: {
@@ -89,38 +101,30 @@
                     }
                 }
             },
-            @endif
 
-        @endif
+            @if (!isset($simple_view))
 
-        @if (isset($columns))
-         columns: {!! $columns !!},
-        @endif
+                showRefresh: true,
+                stickyHeader: true,
+                stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
 
-        mobileResponsive: true,
-        maintainSelected: true,
-        paginationFirstText: "{{ trans('general.first') }}",
-        paginationLastText: "{{ trans('general.last') }}",
-        paginationPreText: "{{ trans('general.previous') }}",
-        paginationNextText: "{{ trans('general.next') }}",
-        formatLoadingMessage: function () {
-            return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
-        },
-        pageList: ['20', '30','50','100','150','200'],
-        icons: {
-            advancedSearchIcon: 'fa fa-search-plus',
-            paginationSwitchDown: 'fa-caret-square-o-down',
-            paginationSwitchUp: 'fa-caret-square-o-up',
-            columns: 'fa-columns',
-            @if( isset($multiSort))
-            sort: 'fa fa-sort-amount-desc',
-            plus: 'fa fa-plus',
-            minus: 'fa fa-minus',
-            @endif
-            refresh: 'fa-refresh'
-        }
+                @if (isset($showFooter))
+                showFooter: true,
+                @endif
 
-    });
+                showColumns: true,
+                trimOnSearch: false,
+
+                @if (isset($multiSort))
+                showMultiSort: true,
+                @endif
+
+
+
+                @endif
+                pageList: ['20', '30','50','100','150','200']
+
+        });
     }
 
 
@@ -285,18 +289,25 @@
     }
 
 
+    // We need a special formatter for license seats, since they don't work exactly the same
+    // Checkouts need the license ID, checkins need the specific seat ID
+
+    function licenseSeatInOutFormatter(value, row) {
+        // The user is allowed to check the license seat out and it's available
+        if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
+            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out">{{ trans('general.checkout') }}</a>';
+        } else {
+            return '<a href="{{ url('/') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';
+        }
+
+    }
+
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
 
             // The user is allowed to check items out, AND the item is deployable
-            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && (!row.assigned_to)) {
-                // case for licenses
-                if (row.next_seat) {
-                    return '<a href="{{ url('/') }}/' + destination + '/' + row.next_seat + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
-                } else {
-                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out to a user">{{ trans('general.checkout') }}</a>';
-                }
-
+            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
@@ -305,9 +316,9 @@
             // The user is allowed to check items in
             } else if (row.available_actions.checkin == true)  {
                 if (row.assigned_to) {
-                    return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
                 } else if (row.assigned_pivot_id) {
-                    return '<nobr><a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
                 }
 
             } 

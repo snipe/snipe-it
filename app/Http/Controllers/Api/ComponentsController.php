@@ -31,6 +31,10 @@ class ComponentsController extends Controller
             $components = $components->TextSearch($request->input('search'));
         }
 
+        if ($request->has('company_id')) {
+            $components->where('company_id','=',$request->input('company_id'));
+        }
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 

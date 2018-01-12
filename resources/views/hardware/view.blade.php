@@ -56,16 +56,19 @@
           <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">Details</span></a>
         </li>
         <li>
-          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">Licenses</span></a>
+          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a>
         </li>
         <li>
-          <a href="#components" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-hdd-o"></i></span> <span class="hidden-xs hidden-sm">Components</span></a>
+          <a href="#components" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-hdd-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span></a>
+        </li>
+        <li>
+          <a href="#assets" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-barcode"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span></a>
         </li>
         <li>
           <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">Maintenances</span></a>
         </li>
         <li>
-          <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">History</span></a>
+          <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span></a>
         </li>
         <li>
           <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">Files</span></a>
@@ -531,6 +534,47 @@
           </div>
         </div> <!-- /.tab-pane components -->
 
+
+        <div class="tab-pane fade" id="assets">
+          <div class="row">
+            <div class="col-md-12">
+              {{ Form::open([
+                        'method' => 'POST',
+                        'route' => ['hardware/bulkedit'],
+                        'class' => 'form-inline',
+                         'id' => 'bulkForm']) }}
+              <div id="toolbar">
+                <select name="bulk_actions" class="form-control select2" style="300px;">
+                  <option value="edit">Edit</option>
+                  <option value="delete">Delete</option>
+                  <option value="labels">Generate Labels</option>
+                </select>
+                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+              </div>
+
+              <!-- checked out assets table -->
+              <div class="table-responsive">
+                <table
+                        name="assetAssets"
+                        data-toolbar="#toolbar"
+                        class="table table-striped snipe-table"
+                        id="assetAssets"
+                        data-search="false"
+                        data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
+                        data-export-options='{"fileName": "asset-assets"}'
+                        data-cookie="true"
+                        data-show-footer="true"
+                        data-cookie-id-table="assetAssetsTable"
+                        data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
+
+                </table>
+                {{ Form::close() }}
+              </div>
+            </div><!-- /col -->
+          </div> <!-- row -->
+        </div> <!-- /.tab-pane software -->
+
+
         <div class="tab-pane fade" id="maintenances">
           <div class="row">
             <div class="col-md-12">
@@ -616,16 +660,17 @@
           <div class="row">
             <div class="col-md-12">
               <table
-                      class="table table-striped snipe-table"
                       name="asset-history"
-                      id="table"
+                      id="asset-history"
                       class="table table-striped snipe-table"
+                      data-cookie="true"
+                      data-click-to-select="true"
+                      data-cookie-id-table="asset-history"
                       data-sort-order="desc"
                       data-show-columns="true"
                       data-search="true"
-                      data-cookie="true"
                       data-show-refresh="true"
-                      data-cookie-id-table="asset-history"
+                      data-id-table="asset-history"
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
                 <thead>
                 <tr>
@@ -639,7 +684,7 @@
                   @if  ($snipeSettings->require_accept_signature=='1')
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
-                  <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">Changed</th>
+                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
                 </tr>
                 </thead>
               </table>
@@ -736,7 +781,7 @@
 @stop
 
 @section('moar_scripts')
-  @include ('partials.bootstrap-table', ['simple_view' => true])
+  @include ('partials.bootstrap-table')
 
 <script nonce="{{ csrf_token() }}">
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
