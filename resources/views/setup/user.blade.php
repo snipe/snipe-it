@@ -15,6 +15,7 @@ Create a User ::
   {{ csrf_field() }}
 
   <div class="col-lg-12" style="padding-top: 20px;">
+
     <!-- Site Name -->
     <div class="row">
       <div class="form-group col-lg-12 {{ $errors->has('site_name') ? 'error' : '' }}">
@@ -47,7 +48,7 @@ Create a User ::
 
   <div class="row">
 
-    <div class="form-group col-lg-12">
+    <div class="form-group col-lg-6">
       <label>{{trans('admin/settings/general.auto_increment_assets')}}</label>
       <div class="checkbox">
         <label>
@@ -55,6 +56,18 @@ Create a User ::
         </label>
       </div>
     </div>
+
+    <!-- Multi Company Support -->
+    <div class="form-group col-lg-6">
+            {{ Form::label('full_multiple_companies_support', trans('admin/settings/general.full_multiple_companies_support_text')) }}
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="1" name="full_multiple_companies_support">  {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
+            </label>
+          </div>
+        </div>
+
+
   </div>
 
   <div class="row">

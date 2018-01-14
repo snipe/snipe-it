@@ -161,6 +161,7 @@ class SettingsController extends Controller
         $data['password'] =  Input::get('password');
 
         $settings = new Setting;
+        $settings->full_multiple_companies_support = e(Input::get('full_multiple_companies_support'));
         $settings->site_name = e(Input::get('site_name'));
         $settings->alert_email = e(Input::get('email'));
         $settings->alerts_enabled = 1;
