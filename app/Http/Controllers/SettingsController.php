@@ -166,8 +166,8 @@ class SettingsController extends Controller
         $settings->alerts_enabled = 1;
         $settings->pwd_secure_min = 10;
         $settings->brand = 1;
-        $settings->locale = 'en';
-        $settings->default_currency = 'USD';
+        $settings->locale = e(Input::get('locale'));
+        $settings->default_currency = e(Input::get('default_currency', "USD"));
         $settings->user_id = 1;
         $settings->email_domain = e(Input::get('email_domain'));
         $settings->email_format = e(Input::get('email_format'));

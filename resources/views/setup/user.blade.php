@@ -25,6 +25,25 @@ Create a User ::
       </div>
     </div>
 
+  <div class="row">
+
+    <!-- Language -->
+    <div class="form-group col-lg-6 {{$errors->has('default_language') ? 'error' : ''}}">
+      {{ Form::label('site_name', trans('admin/settings/general.default_language')) }}
+      {!! Form::locales('locale', Input::old('locale', "en"), 'select2') !!}
+
+      {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+    </div>
+
+    <!-- Currency -->
+    <div class="form-group col-lg-6 {{$errors->has('default_currency') ? 'error' : ''}}">
+      {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
+      {{ Form::text('default_currency', Input::old('default_currency'), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+
+      {!! $errors->first('default_currency', '<span class="alert-msg">:message</span>') !!}
+    </div>
+
+  </div>
 
   <div class="row">
 
