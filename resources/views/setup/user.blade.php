@@ -25,6 +25,37 @@ Create a User ::
       </div>
     </div>
 
+
+  <div class="row">
+
+    <div class="form-group col-lg-12">
+      <label>{{trans('admin/settings/general.auto_increment_assets')}}</label>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="1" name="auto_increment_assets">{{trans('admin/settings/general.auto_increment_assets')}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-lg-6 {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
+      {{ Form::label('auto_increment_prefix', trans('admin/settings/general.auto_increment_prefix')) }}
+      {{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix'), array('class' => 'form-control')) }}
+
+      {!! $errors->first('auto_increment_prefix', '<span class="alert-msg">:message</span>') !!}
+    </div>
+
+    <div class="form-group col-lg-6 {{ $errors->has('zerofill_count') ? 'error' : '' }}">
+      {{ Form::label('zerofill_count', trans('admin/settings/general.zerofill_count')) }}
+      {{ Form::text('zerofill_count', Input::old('zerofill_count', 5), array('class' => 'form-control')) }}
+
+      {!! $errors->first('zerofill_count', '<span class="alert-msg">:message</span>') !!}
+    </div>
+  </div>
+
+
     <!-- email domain -->
     <div class="row">
       <div class="form-group col-lg-6 {{ $errors->has('email_domain') ? 'error' : '' }}">

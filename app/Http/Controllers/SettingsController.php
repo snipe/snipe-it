@@ -67,7 +67,7 @@ class SettingsController extends Controller
 
         $start_settings['url_config'] = url('/');
         $start_settings['real_url'] = $pageURL;
-        
+
         // Curl the .env file to make sure it's not accessible via a browser
         $ch = curl_init($protocol . $host.'/.env');
         curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
@@ -172,6 +172,8 @@ class SettingsController extends Controller
         $settings->email_domain = e(Input::get('email_domain'));
         $settings->email_format = e(Input::get('email_format'));
         $settings->next_auto_tag_base = 1;
+        $settings->auto_increment_assets = e(Input::get('auto_increment_assets', 0));
+        $settings->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
 
 
         if ((!$user->isValid()) || (!$settings->isValid())) {
