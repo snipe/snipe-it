@@ -418,6 +418,47 @@ class AssetPresenter extends Presenter
     }
 
     /**
+     * @return string
+     * This handles the status label "meta" status of "deployed" if
+     * it's assigned. Results look like:
+     *
+     * (if assigned and the status label is "Ready to Deploy"):
+     * (Deployed)
+     *
+     * (f assigned and status label is not "Ready to Deploy":)
+     * Deployed (Another Status Label)
+     *
+     * (if not deployed:)
+     * Another Status Label
+     */
+    public function fullStatusText() {
+        // Make sure the status is valid
+        if ($this->assetstatus) {
+
+            // If the status is assigned to someone or something...
+            if ($this->model->assigned) {
+
+                // If it's assigned and not set to the default "ready to deploy" status
+                if ($this->assetstatus->name != trans('general.ready_to_deploy')) {
+                    return trans('general.deployed'). ' (' . $this->model->assetstatus->name.')';
+                }
+
+                // If it's assigned to the default "ready to deploy" status, just
+                // say it's deployed - otherwise it's confusing to have a status that is
+                // both "ready to deploy" and deployed at the same time.
+                return trans('general.deployed');
+            }
+
+            // Return just the status name
+            return $this->model->assetstatus->name;
+        }
+
+        // This status doesn't seem valid - either data has been manually edited or
+        // the status label was deleted.
+        return 'Invalid status';
+    }
+
+    /**
      * Date the warantee expires.
      * @return false|string
      */

@@ -90,7 +90,12 @@
                       <td>
 
                         @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                          <i class="fa fa-circle text-blue"></i> {{ trans('general.deployed') }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {!!  $asset->assignedTo->present()->glyph()  !!}
+                          <i class="fa fa-circle text-blue"></i>
+                          {{ $asset->assetstatus->name }}
+                          <label class="label label-default">{{ trans('general.deployed') }}</label>
+
+                          <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                          {!!  $asset->assignedTo->present()->glyph()  !!}
                           {!!  $asset->assignedTo->present()->nameUrl() !!}
                         @else
                           @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
@@ -555,13 +560,13 @@
               <!-- checked out assets table -->
               <div class="table-responsive">
                 <table
-                        name="assetAssets"
+                        name="assetAssetsTable"
                         data-toolbar="#toolbar"
                         class="table table-striped snipe-table"
-                        id="assetAssets"
+                        id="assetAssetsTable"
                         data-search="false"
                         data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
-                        data-export-options='{"fileName": "asset-assets"}'
+                        data-show-export="true"
                         data-cookie="true"
                         data-show-footer="true"
                         data-cookie-id-table="assetAssetsTable"
