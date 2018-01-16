@@ -50,8 +50,10 @@
             paginationVAlign: 'both',
             sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
             sortable: true,
+            @if (!isset($nopages))
             pageSize: 20,
             pagination: true,
+            @endif
             cookie: true,
             cookieExpire: '2y',
             cookieIdTable: '{{ Route::currentRouteName() }}',
@@ -72,7 +74,7 @@
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
-                @if( isset($multiSort))
+                @if (isset($multiSort))
                 sort: 'fa fa-sort-amount-desc',
                 plus: 'fa fa-plus',
                 minus: 'fa fa-minus',
