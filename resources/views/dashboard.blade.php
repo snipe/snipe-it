@@ -152,6 +152,7 @@
                 id="table"
                 data-sort-order="desc"
                 data-height="400"
+                data-show-export="false"
                 data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
                 <thead>
                   <tr>
