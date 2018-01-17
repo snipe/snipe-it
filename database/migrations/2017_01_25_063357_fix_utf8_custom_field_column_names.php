@@ -52,10 +52,12 @@ class FixUtf8CustomFieldColumnNames extends Migration
         $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
         $platform->registerDoctrineTypeMapping('enum', 'string');
 
-        Schema::table('custom_fields', function ($table) {
-            $table->string('db_column')->nullable();
-            $table->text('help_text')->nullable();
-        });
+        if (!Schema::hasColumn('custom_fields', 'db_column')) {
+            Schema::table('custom_fields', function ($table) {
+                $table->string('db_column')->nullable();
+                $table->text('help_text')->nullable();
+            });
+        }
 
         foreach(CustomField::all() as $field) {
 
