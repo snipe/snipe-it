@@ -224,6 +224,15 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Fieldsets API ---*/
 
+    Route::group(['prefix' => 'fieldsets'], function () {
+        Route::get('{fieldset}/fields',
+            [
+                'as' => 'api.fieldsets.fields',
+                'uses' => 'CustomFieldsetsController@fields'
+            ]
+        );
+    });
+
     Route::resource('fieldsets', 'CustomFieldsetsController',
         [
             'names' =>
@@ -238,7 +247,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['fieldset' => 'fieldset_id']
         ]
     ); // Custom fieldset resource
-
 
 
     /*--- Groups API ---*/

@@ -179,4 +179,5 @@ class CustomFieldsetsController extends Controller
 
         return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
     }
+
 }
