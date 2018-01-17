@@ -36,7 +36,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'jobtitle',
         'location_id',
         'password',
-        'phone_number',
+        'phone',
         'username',
         'first_name',
         'address',
