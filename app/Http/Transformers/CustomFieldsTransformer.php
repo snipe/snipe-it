@@ -22,6 +22,7 @@ class CustomFieldsTransformer
     {
 
         $array = [
+            'id' => $field->id,
             'name' => e($field->name),
             'db_column_name' => e($field->db_column_name()),
             'format'   =>  e($field->format),

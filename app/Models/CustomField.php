@@ -8,6 +8,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use ForceUTF8\Encoding;
 use EasySlugger\Utf8Slugger;
 use Patchwork\Utf8;
+use Illuminate\Validation\Rule;
 
 class CustomField extends Model
 {
@@ -29,8 +30,18 @@ class CustomField extends Model
         "BOOLEAN" => "boolean",
     ];
 
-    public $rules = [
-        "name" => "required|unique:custom_fields"
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'element',
+        'format',
+        'field_values',
+        'field_encrypted',
+        'help_text'
     ];
 
     // This is confusing, since it's actually the custom fields table that
@@ -160,7 +171,7 @@ class CustomField extends Model
     public function getFormatAttribute($value)
     {
         foreach (self::$PredefinedFormats as $name => $pattern) {
-            if ($pattern === $value) {
+            if ($pattern === $value || $name === $value) {
                 return $name;
             }
         }
@@ -247,5 +258,27 @@ class CustomField extends Model
         }
 
         return substr($long_slug, 0, 50) . '_' . $id;
+    }
+
+    /**
+    * Get validation rules for custom fields to use with Validator
+    * @author [V. Cordes] [<volker@fdatek.de>]
+    * @param int $id
+    * @since [v4.1.10]
+    * @return Array
+    */
+    public function validationRules()
+    {
+        return [
+            "name" => "required|unique:custom_fields",
+            "element" => [
+                "required",
+                Rule::in(['text', 'listbox'])
+            ],
+            'format' => [
+                Rule::in(array_merge(array_keys(CustomField::$PredefinedFormats), CustomField::$PredefinedFormats))
+            ],
+            'field_encrypted' => "nullable|boolean"
+        ];
     }
 }

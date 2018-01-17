@@ -479,15 +479,15 @@
                 </a>
               </li>
               @endcan
-              @can('view', \App\Models\Component::class)
-            <li{!! (Request::is('consunmables*') ? ' class="active"' : '') !!}>
+              @can('view', \App\Models\Consumable::class)
+            <li{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                 <a href="{{ url('consumables') }}">
                   <i class="fa fa-tint"></i>
                   <span>{{ trans('general.consumables') }}</span>
                 </a>
             </li>
              @endcan
-             @can('view', \App\Models\Components::class)
+             @can('view', \App\Models\Component::class)
             <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                 <a href="{{ route('components.index') }}">
                   <i class="fa fa-hdd-o"></i>
