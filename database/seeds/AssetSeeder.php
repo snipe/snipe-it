@@ -44,6 +44,7 @@ class AssetSeeder extends Seeder
               unlink($del_file); // delete file
       }
 
+      DB::table('checkout_requests')->truncate();
 
   }
 }

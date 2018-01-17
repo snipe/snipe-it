@@ -141,6 +141,25 @@
                     <td>{{ $user->username }}</td>
                   </tr>
 
+                    <tr>
+                      <td>{{ trans('general.groups') }}</td>
+                      <td>
+                        @if ($user->groups->count() > 0)
+                            @foreach ($user->groups as $group)
+
+                              @can('superadmin')
+                                  <a href="{{ route('groups.show', $group->id) }}" class="label label-default">{{ $group->name }}</a>
+                            @else
+                              {{ $group->name }}
+                            @endcan
+
+                            @endforeach
+                        @else
+                          --
+                        @endif
+
+                      </td>
+                    </tr>
 
 
                   @if ($user->jobtitle)

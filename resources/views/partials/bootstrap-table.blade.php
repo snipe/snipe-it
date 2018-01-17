@@ -50,8 +50,10 @@
             paginationVAlign: 'both',
             sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
             sortable: true,
+            @if (!isset($nopages))
             pageSize: 20,
             pagination: true,
+            @endif
             cookie: true,
             cookieExpire: '2y',
             cookieIdTable: '{{ Route::currentRouteName() }}',
@@ -72,14 +74,13 @@
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
-                @if( isset($multiSort))
+                @if (isset($multiSort))
                 sort: 'fa fa-sort-amount-desc',
                 plus: 'fa fa-plus',
                 minus: 'fa fa-minus',
                 @endif
                 refresh: 'fa-refresh'
             },
-            showExport: true,
             exportDataType: 'all',
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             exportOptions: {
@@ -173,26 +174,31 @@
 
                 var text_color;
                 var icon_style;
+                var text_help;
 
                 switch (value.status_meta) {
-                    case 'deployed':
+                    case '{{ strtolower(trans('general.deployed')) }}':
                         text_color = 'blue';
                         icon_style = 'fa-circle';
+                        text_help = '<label class="label label-default">{{ trans('general.deployed') }}</label>';
                     break;
-                    case 'deployable':
+                    case '{{ strtolower(trans('admin/hardware/general.deployable')) }}':
                         text_color = 'green';
                         icon_style = 'fa-circle';
+                        text_help = '';
                     break;
-                    case 'pending':
+                    case '{{ strtolower(trans('general.pending')) }}':
                         text_color = 'orange';
                         icon_style = 'fa-circle';
+                        text_help = '';
                         break;
                     default:
                         text_color = 'red';
                         icon_style = 'fa-times';
+                        text_help = '';
                 }
 
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ value.status_meta + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + '</a></nobr>';
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ value.status_meta + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + ' ' + text_help + ' </a> </nobr>';
             } else if ((value) && (value.name)) {
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a></span>';
             }

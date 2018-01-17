@@ -34,7 +34,8 @@ class AssetsTransformer
             'eol' => ($asset->purchase_date!='') ? Helper::getFormattedDateObject($asset->present()->eol_date(), 'date') : null ,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
-                'name'=> e($asset->present()->statusText),
+                'name'=> e($asset->assetstatus->name),
+                'status_type'=> e($asset->assetstatus->getStatuslabelType()),
                 'status_meta' =>  e($asset->present()->statusMeta),
             ] : null,
             'category' => ($asset->model->category) ? [
