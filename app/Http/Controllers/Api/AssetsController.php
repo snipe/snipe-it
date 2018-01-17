@@ -447,26 +447,24 @@ class AssetsController extends Controller
             ($request->has('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
-            if ($request->has('model_id')) {
-                if (($model = AssetModel::find($request->get('model_id'))) && (isset($model->fieldset))) {
-                    foreach ($model->fieldset->fields as $field) {
-                        if ($request->has($field->convertUnicodeDbSlug())) {
-                            $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
-                        }
+
+            // Update custom fields
+            if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
+                foreach ($model->fieldset->fields as $field) {
+                    if ($request->has($field->convertUnicodeDbSlug())) {
+                        $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
                     }
                 }
             }
 
+
             if ($asset->save()) {
 
-                if ($request->get('assigned_user')) {
-                    $target = User::find(request('assigned_user'));
-                    $location = $target->location_id;
-                } elseif ($request->get('assigned_asset')) {
-                    $target = Asset::find(request('assigned_asset'));
-                    $location = $target->location_id;
-                } elseif ($request->get('assigned_location')) {
-                    $target = Location::find(request('assigned_location'));
+                if (($request->has('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
+                        $location = $target->location_id;
+                } elseif (($request->has('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
+                            $location = $target->location_id;
+                } elseif (($request->has('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
                     $location = $target->id;
                 }
 
