@@ -1198,9 +1198,14 @@ class AssetsController extends Controller
         $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
 
+        if (!$user) {
+            return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.user_does_not_exist'));
+        }
+
         if (!is_array(Input::get('selected_assets'))) {
             return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
         }
+
         $asset_ids = array_filter(Input::get('selected_assets'));
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
@@ -1215,6 +1220,7 @@ class AssetsController extends Controller
             $expected_checkin = '';
         }
 
+
         $errors = [];
         DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
           
@@ -1222,6 +1228,14 @@ class AssetsController extends Controller
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);
                 $error = $asset->checkOut($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+
+                if ($user->location_id!='') {
+                    $asset->location_id = $user->location_id;
+                    $asset->unsetEventDispatcher();
+                    $asset->save();
+
+                }
+
 
                 if ($error) {
                     array_merge_recursive($errors, $asset->getErrors()->toArray());
