@@ -25,8 +25,8 @@ class UsersTransformer
                 'id' => (int) $user->id,
                 'avatar' => e($user->present()->gravatar),
                 'name' => e($user->first_name).' '.($user->last_name),
-                'firstname' => e($user->first_name),
-                'lastname' => e($user->last_name),
+                'first_name' => e($user->first_name),
+                'last_name' => e($user->last_name),
                 'username' => e($user->username),
                 'employee_num' => e($user->employee_num),
                 'manager' => ($user->manager) ? [
