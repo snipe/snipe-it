@@ -202,11 +202,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::resource('fields', 'CustomFieldsController', [
         'names' => [
-            'index' => 'api.fields.index',
-            'show' => 'api.fields.show',
-            'store' => 'api.fields.store',
-            'update' => 'api.fields.update',
-            'destroy' => 'api.fields.destroy'
+            'index' => 'api.customfields.index',
+            'show' => 'api.customfields.show',
+            'store' => 'api.customfields.store',
+            'update' => 'api.customfields.update',
+            'destroy' => 'api.customfields.destroy'
         ],
         'except' => [ 'create', 'edit' ],
         'parameters' => [ 'field' => 'field_id' ]
