@@ -180,11 +180,34 @@
                       </td>
                     </tr>
                     @endif
+
+                    <tr>
+                      <td>
+                        {{ trans('general.category') }}</td>
+                      <td>
+                        @if ($asset->model->category)
+
+                          @can('view', \App\Models\Category::class)
+
+                            <a href="{{ route('categories.show', $asset->model->category->id) }}">
+                              {{ $asset->model->category->name }}
+                            </a>
+                          @else
+                            {{ $asset->model->category->name }}
+                          @endcan
+                        @else
+                          Invalid category
+                        @endif
+
+                      </td>
+                    </tr>
+
+                    
                     <tr>
                       <td>
                         {{ trans('admin/hardware/form.model') }}</td>
                       <td>
-                        @can('view', \App\Models\AssetModel::class)
+                       @can('view', \App\Models\AssetModel::class)
                         <a href="{{ route('models.show', $asset->model->id) }}">
                           {{ $asset->model->name }}
                         </a>
@@ -193,6 +216,8 @@
                       @endcan
                       </td>
                     </tr>
+
+
                     <tr>
                       <td>{{ trans('admin/models/table.modelnumber') }}</td>
                       <td>
