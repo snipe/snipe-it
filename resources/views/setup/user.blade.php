@@ -15,6 +15,7 @@ Create a User ::
   {{ csrf_field() }}
 
   <div class="col-lg-12" style="padding-top: 20px;">
+
     <!-- Site Name -->
     <div class="row">
       <div class="form-group col-lg-12 {{ $errors->has('site_name') ? 'error' : '' }}">
@@ -24,6 +25,68 @@ Create a User ::
         {!! $errors->first('site_name', '<span class="alert-msg">:message</span>') !!}
       </div>
     </div>
+
+  <div class="row">
+
+    <!-- Language -->
+    <div class="form-group col-lg-6 {{$errors->has('default_language') ? 'error' : ''}}">
+      {{ Form::label('locale', trans('admin/settings/general.default_language')) }}
+      {!! Form::locales('locale', Input::old('locale', "en"), 'select2') !!}
+
+      {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+    </div>
+
+    <!-- Currency -->
+    <div class="form-group col-lg-6 {{$errors->has('default_currency') ? 'error' : ''}}">
+      {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
+      {{ Form::text('default_currency', Input::old('default_currency'), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+
+      {!! $errors->first('default_currency', '<span class="alert-msg">:message</span>') !!}
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-lg-6">
+      <label>{{trans('admin/settings/general.auto_increment_assets')}}</label>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="1" name="auto_increment_assets">{{trans('admin/settings/general.auto_increment_assets')}}
+        </label>
+      </div>
+    </div>
+
+    <!-- Multi Company Support -->
+    <div class="form-group col-lg-6">
+            {{ Form::label('full_multiple_companies_support', trans('admin/settings/general.full_multiple_companies_support_text')) }}
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="1" name="full_multiple_companies_support">  {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
+            </label>
+          </div>
+        </div>
+
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-lg-6 {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
+      {{ Form::label('auto_increment_prefix', trans('admin/settings/general.auto_increment_prefix')) }}
+      {{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix'), array('class' => 'form-control')) }}
+
+      {!! $errors->first('auto_increment_prefix', '<span class="alert-msg">:message</span>') !!}
+    </div>
+
+    <div class="form-group col-lg-6 {{ $errors->has('zerofill_count') ? 'error' : '' }}">
+      {{ Form::label('zerofill_count', trans('admin/settings/general.zerofill_count')) }}
+      {{ Form::text('zerofill_count', Input::old('zerofill_count', 5), array('class' => 'form-control')) }}
+
+      {!! $errors->first('zerofill_count', '<span class="alert-msg">:message</span>') !!}
+    </div>
+  </div>
+
 
     <!-- email domain -->
     <div class="row">
