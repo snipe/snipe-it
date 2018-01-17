@@ -30,7 +30,7 @@ Create a User ::
 
     <!-- Language -->
     <div class="form-group col-lg-6 {{$errors->has('default_language') ? 'error' : ''}}">
-      {{ Form::label('site_name', trans('admin/settings/general.default_language')) }}
+      {{ Form::label('locale', trans('admin/settings/general.default_language')) }}
       {!! Form::locales('locale', Input::old('locale', "en"), 'select2') !!}
 
       {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
