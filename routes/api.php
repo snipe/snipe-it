@@ -200,18 +200,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Fields API ---*/
 
+    Route::resource('fields', 'CustomFieldsController', [
+        'names' => [
+            'index' => 'api.customfields.index',
+            'show' => 'api.customfields.show',
+            'store' => 'api.customfields.store',
+            'update' => 'api.customfields.update',
+            'destroy' => 'api.customfields.destroy'
+        ],
+        'except' => [ 'create', 'edit' ],
+        'parameters' => [ 'field' => 'field_id' ]
+    ]);
+
     Route::group(['prefix' => 'fields'], function () {
         Route::post('fieldsets/{id}/order',
             [
                 'as' => 'api.customfields.order',
                 'uses' => 'CustomFieldsController@postReorder'
-            ]
-        );
-
-        Route::get('/',
-            [
-                'as' => 'api.customfields.index',
-                'uses' => 'CustomFieldsController@index'
             ]
         );
     }); // Fields group
