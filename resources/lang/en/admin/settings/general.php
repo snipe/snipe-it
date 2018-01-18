@@ -92,6 +92,8 @@ return array(
     'setting'                   => 'Setting',
     'settings'                  => 'Settings',
     'show_alerts_in_menu'       => 'Show alerts in top menu',
+    'show_archived_in_list'     => 'Archived Assets',
+    'show_archived_in_list_text'     => 'Show archived assets in the "all assets" listing',
     'site_name'                 => 'Site Name',
     'slack_botname'             => 'Slack Botname',
     'slack_channel'             => 'Slack Channel',

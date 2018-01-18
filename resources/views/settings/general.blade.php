@@ -199,6 +199,22 @@
 
                        </div>
 
+
+
+                       <!-- Archived in List -->
+                       <div class="form-group {{ $errors->has('show_archived_in_list') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('show_archived_in_list',
+                                              trans('admin/settings/general.show_archived_in_list')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('show_archived_in_list', '1', Input::old('show_archived_in_list', $setting->show_archived_in_list),array('class' => 'minimal')) }}
+                               {{ trans('admin/settings/general.show_archived_in_list_text') }}
+                               {!! $errors->first('show_archived_in_list', '<span class="alert-msg">:message</span>') !!}
+
+                           </div>
+                       </div>
+
             </div> <!--/.box-body-->
             <div class="box-footer">
                 <div class="text-left col-md-6">
