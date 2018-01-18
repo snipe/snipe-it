@@ -116,7 +116,7 @@
     'location'              => '장소',
     'locations'				=> '위치',
     'logout'				=> '로그아웃',
-    'lookup_by_tag'     => '자산 태그로 조회',
+    'lookup_by_asset'     => '자산 태그로 조회',
     'manufacturer'			=> '제조업체',
     'manufacturers'			=> '제조업체',
     'markdown'				=> '이 항목은 <a href="https://help.github.com/articles/github-flavored-markdown/">GFM을 따릅니다</a>.',

@@ -116,7 +116,7 @@
     'location'              => '位置',
     'locations'				=> '地理位置',
     'logout'				=> '注销',
-    'lookup_by_tag'     => '查找资产标签',
+    'lookup_by_asset'     => '查找资产标签',
     'manufacturer'			=> '制造商',
     'manufacturers'			=> '制造商',
     'markdown'				=> '该字段可以使用 <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>',

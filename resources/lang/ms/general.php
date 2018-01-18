@@ -116,7 +116,7 @@
     'location'              => 'Lokasi',
     'locations'				=> 'Lokasi',
     'logout'				=> 'Log keluar',
-    'lookup_by_tag'     => 'Cari dengan Tag Aset',
+    'lookup_by_asset'     => 'Cari dengan Tag Aset',
     'manufacturer'			=> 'Pengeluar',
     'manufacturers'			=> 'Pengeluar',
     'markdown'				=> 'Bidang ini membolehkan markah rasa <a href="https://help.github.com/articles/github-flavored-markdown/">Github</a>.',

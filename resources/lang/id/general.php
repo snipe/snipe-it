@@ -116,7 +116,7 @@
     'location'              => 'Lokasi',
     'locations'				=> 'Lokasi',
     'logout'				=> 'Keluar',
-    'lookup_by_tag'     => 'Mencari berdasarkan tag aset',
+    'lookup_by_asset'     => 'Mencari berdasarkan tag aset',
     'manufacturer'			=> 'Produsen',
     'manufacturers'			=> 'Produsen',
     'markdown'				=> 'Field ini mengizinkan <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

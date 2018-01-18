@@ -116,7 +116,7 @@
     'location'              => 'Расположение',
     'locations'				=> 'Места',
     'logout'				=> 'Выйти',
-    'lookup_by_tag'     => 'Поиск по тегу актива',
+    'lookup_by_asset'     => 'Поиск по тегу актива',
     'manufacturer'			=> 'Производитель',
     'manufacturers'			=> 'Производители',
     'markdown'				=> 'облегченный язык разметки.',

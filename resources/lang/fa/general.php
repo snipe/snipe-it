@@ -120,7 +120,7 @@
     'location'              => 'مکان',
     'locations'				=> 'مکانها',
     'logout'				=> 'خروج',
-    'lookup_by_tag'     => 'نگاهی به Asset Tag',
+    'lookup_by_asset'     => 'نگاهی به Asset Tag',
     'manufacturer'			=> 'سازنده',
     'manufacturers'			=> 'تولیدکننده‌ها',
     'markdown'				=> 'این فیلد اجازه می دهد تا <a href="https://help.github.com/articles/github-flavored-markdown/">گیت هاب به سلیقه خود نشانه گذاری کند . markdown</a>.',

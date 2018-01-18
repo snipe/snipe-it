@@ -116,7 +116,7 @@
     'location'              => 'Τοποθεσία',
     'locations'				=> 'Τοποθεσίες',
     'logout'				=> 'Αποσύνδεση',
-    'lookup_by_tag'     => 'Αναζήτηση με ετικέτα περιουσιακών στοιχείων',
+    'lookup_by_asset'     => 'Αναζήτηση με ετικέτα περιουσιακών στοιχείων',
     'manufacturer'			=> 'Κατασκευαστής',
     'manufacturers'			=> 'Κατασκευαστές',
     'markdown'				=> 'Αυτό το πεδίο επιτρέπει <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

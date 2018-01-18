@@ -91,7 +91,9 @@ class AssetsController extends Controller
         $topsearch = (Input::get('topsearch')=="true");
 
         if (!$asset = Asset::where('asset_tag', '=', Input::get('assetTag'))->first()) {
+          if (!$asset = Asset::where('name', '=', Input::get('assetTag'))->first()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+          }
         }
         $this->authorize('view', $asset);
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
@@ -466,7 +468,7 @@ class AssetsController extends Controller
             if ($target->location_id!='') {
                 $asset->location_id = ($target) ? $target->location_id : '';
             }
-            
+
         } elseif (request('checkout_to_type')=='user') {
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
@@ -564,7 +566,7 @@ class AssetsController extends Controller
         }
 
         $asset->location_id = $asset->rtd_location_id;
-        
+
         if (Input::has('location_id')) {
             $asset->location_id =  e(Input::get('location_id'));
         }
@@ -1085,9 +1087,9 @@ class AssetsController extends Controller
     public function postBulkSave(Request $request)
     {
         $this->authorize('update', Asset::class);
-        
+
         \Log::debug($request->input('ids'));
-        
+
         if (($request->has('ids')) && (count($request->input('ids') > 0))) {
             $assets = $request->input('ids');
             if (($request->has('purchase_date'))
@@ -1223,7 +1225,7 @@ class AssetsController extends Controller
 
         $errors = [];
         DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
-          
+
             foreach ($asset_ids as $asset_id) {
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);

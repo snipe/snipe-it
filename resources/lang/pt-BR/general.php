@@ -116,7 +116,7 @@
     'location'              => 'Local',
     'locations'				=> 'Locais',
     'logout'				=> 'Sair',
-    'lookup_by_tag'     => 'Pesquisa pela Tag ativos',
+    'lookup_by_asset'     => 'Pesquisa pela Tag ativos',
     'manufacturer'			=> 'Fabricante',
     'manufacturers'			=> 'Fabricantes',
     'markdown'				=> 'Este campo permite <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

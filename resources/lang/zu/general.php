@@ -116,7 +116,7 @@
     'location'              => 'Indawo',
     'locations'				=> 'Izindawo',
     'logout'				=> 'Phuma',
-    'lookup_by_tag'     => 'Ukubheka nge-Tag Tag',
+    'lookup_by_asset'     => 'Ukubheka nge-Tag Tag',
     'manufacturer'			=> 'Umkhiqizi',
     'manufacturers'			=> 'Abakhiqizi',
     'markdown'				=> 'Le nsimu ivumela i-<a href="https://help.github.com/articles/github-flavored-markdown/">I-markdown ekhanyisiwe</a>.',

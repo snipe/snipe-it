@@ -116,7 +116,7 @@
     'location'              => 'Asukoht',
     'locations'				=> 'Asukohad',
     'logout'				=> 'Logi välja',
-    'lookup_by_tag'     => 'Varatüübi järgi otsimine',
+    'lookup_by_asset'     => 'Varatüübi järgi otsimine',
     'manufacturer'			=> 'Tootja',
     'manufacturers'			=> 'Tootjad',
     'markdown'				=> 'See väli lubab <a href="https://help.github.com/articles/github-flavored-markdown/">Githubi maitsestatud markdown</a>.',

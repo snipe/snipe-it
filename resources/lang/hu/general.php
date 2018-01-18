@@ -116,7 +116,7 @@
     'location'              => 'Helyszín',
     'locations'				=> 'Helyek',
     'logout'				=> 'Kijelentkezés',
-    'lookup_by_tag'     => 'Keresés az Asset Tag segítségével',
+    'lookup_by_asset'     => 'Keresés az Asset Tag segítségével',
     'manufacturer'			=> 'Gyártó',
     'manufacturers'			=> 'Gyártók',
     'markdown'				=> 'Ez a mező enged a <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown-hoz</a>.',

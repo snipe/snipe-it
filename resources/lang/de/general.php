@@ -116,7 +116,7 @@
     'location'              => 'Standort',
     'locations'				=> 'Standorte',
     'logout'				=> 'Abmelden',
-    'lookup_by_tag'     => 'Nach Asset Tag suchen',
+    'lookup_by_asset'     => 'Nach Asset Tag suchen',
     'manufacturer'			=> 'Hersteller',
     'manufacturers'			=> 'Hersteller',
     'markdown'				=> 'Dieses Feld erlaubt <a href="https://help.github.com/articles/github-flavored-markdown/"> Github Flavored Markdown</a>.',

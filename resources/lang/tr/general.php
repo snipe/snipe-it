@@ -119,7 +119,7 @@ Context | Request Context
     'location'              => 'Konum',
     'locations'				=> 'Konumlar',
     'logout'				=> 'Çıkış Yap',
-    'lookup_by_tag'     => 'Varlık etiketine göre arama',
+    'lookup_by_asset'     => 'Varlık etiketine göre arama',
     'manufacturer'			=> 'Üretici',
     'manufacturers'			=> 'Üreticiler',
     'markdown'				=> 'Bu alan <a href="https://help.github.com/articles/github-flavored-markdown/"> Github tarafından</a> desteklenir.',

@@ -116,7 +116,7 @@
     'location'              => 'Địa phương',
     'locations'				=> 'Địa phương',
     'logout'				=> 'Thoát',
-    'lookup_by_tag'     => 'Tra cứu theo Thẻ nội dung',
+    'lookup_by_asset'     => 'Tra cứu theo Thẻ nội dung',
     'manufacturer'			=> 'Nhà sản xuất',
     'manufacturers'			=> 'Nhà sản xuất',
     'markdown'				=> 'Trường này cho phép đánh dấu <a href="https://help.github.com/articles/github-flavored-markdown/">Github mùi vị</a>.',

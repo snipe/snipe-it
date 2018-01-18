@@ -116,7 +116,7 @@
     'location'              => 'Luogo',
     'locations'				=> 'Luoghi',
     'logout'				=> 'logout',
-    'lookup_by_tag'     => 'Ricerca da Asset Tag',
+    'lookup_by_asset'     => 'Ricerca da Asset Tag',
     'manufacturer'			=> 'Produttore',
     'manufacturers'			=> 'Produttori',
     'markdown'				=> 'Questo campo consente a <a href="https://help.github.com/articles/github-flavored-markdown/">Gridubdown flavored markdown</a>.',

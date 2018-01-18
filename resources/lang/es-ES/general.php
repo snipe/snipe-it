@@ -116,7 +116,7 @@
     'location'              => 'Localización',
     'locations'				=> 'Localizaciones',
     'logout'				=> 'Desconexión',
-    'lookup_by_tag'     => 'Buscar por etiqueta de activo',
+    'lookup_by_asset'     => 'Buscar por etiqueta de activo',
     'manufacturer'			=> 'Fabricante',
     'manufacturers'			=> 'Fabricantes',
     'markdown'				=> 'Este campo permite <a href="https://help.github.com/articles/github-flavored-markdown/">Github con sabor a markdown</a>.',

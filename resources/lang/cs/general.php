@@ -116,7 +116,7 @@
     'location'              => 'Lokalita',
     'locations'				=> 'Umístění',
     'logout'				=> 'Odhlásit',
-    'lookup_by_tag'     => 'Vyhledávání podle značky majetku',
+    'lookup_by_asset'     => 'Vyhledávání podle značky majetku',
     'manufacturer'			=> 'Výrobce',
     'manufacturers'			=> 'Výrobci',
     'markdown'				=> 'Toto pole umožňuje <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

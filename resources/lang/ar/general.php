@@ -116,7 +116,7 @@
     'location'              => 'الموقع',
     'locations'				=> 'المواقع',
     'logout'				=> 'تسجيل خروج',
-    'lookup_by_tag'     => 'البحث عن طريق ترميز الأصل',
+    'lookup_by_asset'     => 'البحث عن طريق ترميز الأصل',
     'manufacturer'			=> 'الشركة المصنعة',
     'manufacturers'			=> 'الشركات المصنعة',
     'markdown'				=> 'يتيح هذا الحقل <a href="https://help.github.com/articles/github-flavored-markdown/">بتطبيق نمط الكتابة من Github</a>.',

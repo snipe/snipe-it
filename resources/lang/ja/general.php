@@ -116,7 +116,7 @@
     'location'              => '設置場所',
     'locations'				=> '設置場所の数',
     'logout'				=> 'ログアウト',
-    'lookup_by_tag'     => '資産タグで参照',
+    'lookup_by_asset'     => '資産タグで参照',
     'manufacturer'			=> '製造元',
     'manufacturers'			=> '製造元の数',
     'markdown'				=> 'このフィールドでは <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>. が利用可能です',

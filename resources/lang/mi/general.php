@@ -116,7 +116,7 @@
     'location'              => 'Wāhi',
     'locations'				=> 'Tauranga',
     'logout'				=> 'Whakaaturanga',
-    'lookup_by_tag'     => 'Te tirotiro i te Tohu Taonga',
+    'lookup_by_asset'     => 'Te tirotiro i te Tohu Taonga',
     'manufacturer'			=> 'Kaihanga',
     'manufacturers'			=> 'Kaihanga',
     'markdown'				=> 'Ka whakaaetia e tenei maraa <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

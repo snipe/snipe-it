@@ -116,7 +116,7 @@
     'location'              => 'Lieu',
     'locations'				=> 'Lieux',
     'logout'				=> 'Se déconnecter',
-    'lookup_by_tag'     => 'Recherche par étiquette de bien',
+    'lookup_by_asset'     => 'Recherche par étiquette de bien',
     'manufacturer'			=> 'Fabricant',
     'manufacturers'			=> 'Fabricants',
     'markdown'				=> 'Ce champ permet <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
