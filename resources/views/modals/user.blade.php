@@ -46,7 +46,7 @@
             <div class="dynamic-form-row">
                 <div class="col-md-4 col-xs-12"><label for="modal-password">{{ trans('admin/users/table.password') }}:</label></div>
                 <div class="col-md-8 col-xs-12 required"><input type='password' id='modal-password' class="form-control">
-                    <a href="#" class="left" id="genPassword">Generate</a>
+                    <a href="#" class="left" id="genPassword">生成密码</a>
                 </div>
             </div>
 

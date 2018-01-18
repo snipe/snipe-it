@@ -31,7 +31,7 @@
             {{ trans('button.select_file')  }}
             <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
         </label>
-        <p class="help-block">Accepted filetypes are jpg, png, gif and svg</p>
+        <p class="help-block">接受的文件类型有jpg,png,gif,svg</p>
         {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
     </div>
 </div>

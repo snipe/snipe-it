@@ -24,7 +24,7 @@
     <!-- Horizontal Form -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Customize Report</h3>
+          <h3 class="box-title">自定义报告</h3>
         </div><!-- /.box-header -->
 
         <div class="box-body">
@@ -34,7 +34,7 @@
             <div class="checkbox col-md-12">
               <label>
                 <input type="checkbox" class="all minimal" checked="checked">
-               Select All
+               全选
               </label>
             </div>
             <div class="checkbox col-md-12">
@@ -197,7 +197,7 @@
 
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">
-                <h4>Custom Fields:</h4>
+                <h4>自定义字段</h4>
               </div>
               @foreach ($customfields as $customfield)
                 <div class="checkbox col-md-12">
@@ -213,8 +213,8 @@
 
           <div class="col-md-8">
 
-            <p>Select the fields you'd like to include in your custom report, and click Generate. The file (custom-asset-report-YYYY-mm-dd.csv) will download automatically, and you can open it in Excel.</p>
-            <p>If you'd like to export only certain assets, use the options below to fine-tune your results.</p>
+            <p>选择你想要在报告里生成的字段，点击创建。文件会自动下载，可以使用Excel打开.</p>
+            <p>如果你想导出特定的自残, 使用下面的选项来微调你的结果。</p>
 
             @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'by_company_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'by_location_id', 'hide_new' => 'true'])
@@ -242,20 +242,20 @@
 
           <!-- Purchase Date -->
             <div class="form-group purchase-range">
-              <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.purchase_date') }} Range</label>
+              <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.purchase_date') }} 范围</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                 <input type="text" class="input-sm form-control" name="purchase_start" />
-                <span class="input-group-addon">to</span>
+                <span class="input-group-addon">至</span>
                 <input type="text" class="input-sm form-control" name="purchase_end" />
               </div>
             </div>
 
             <!-- Created Date -->
             <div class="form-group purchase-range">
-              <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.created_at') }} Range</label>
+              <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.created_at') }}范围</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                 <input type="text" class="input-sm form-control" name="created_start" />
-                <span class="input-group-addon">to</span>
+                <span class="input-group-addon">至</span>
                 <input type="text" class="input-sm form-control" name="created_end" />
               </div>
             </div>
@@ -265,7 +265,7 @@
             <div class="col-md-9 col-md-offset-3">
               <label>
                 {{ Form::checkbox('use_bom', '1') }}
-                Add a BOM (byte-order mark) to this CSV
+                把(byte-order mark) 添加至CSV文件
               </label>
 
             </div>

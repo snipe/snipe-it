@@ -76,8 +76,8 @@
         <!-- Custom Tabs -->
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab_1" data-toggle="tab">Information</a></li>
-          <li><a href="#tab_2" data-toggle="tab">Permissions</a></li>
+          <li class="active"><a href="#tab_1" data-toggle="tab">信息</a></li>
+          <li><a href="#tab_2" data-toggle="tab">允许</a></li>
         </ul>
 
         <div class="tab-content">
@@ -156,7 +156,7 @@
                   </div>
                   <div class="col-md-4">
                     @if ($user->ldap_import!='1')
-                      <a href="#" class="left" id="genPassword">Generate</a>
+                      <a href="#" class="left" id="genPassword">创建</a>
                     @endif
                   </div>
                 </div>
@@ -436,7 +436,7 @@
                     <div class="checkbox">
                       <label for="email_user">
                         {{ Form::checkbox('email_user', '1', Input::old('email_user'), array('id'=>'email_user','disabled'=>'disabled')) }}
-                        Email this user their credentials? <span class="help-text" id="email_user_warn">(Cannot send email. No user email address specified.)</span>
+                        通过电子邮件发送用户凭据？ <span class="help-text" id="email_user_warn">(电子邮箱错误，无法发错邮件.)</span>
                       </label>
                     </div>
                   </div>
@@ -449,17 +449,17 @@
           <div class="tab-pane" id="tab_2">
             <div class="col-md-12">
               @if (!Auth::user()->isSuperUser())
-                <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
+                <p class="alert alert-warning">只有超级用户才能授予超级用户的访问权限.</p>
               @endif
             </div>
 
             <table class="table table-striped permissions">
               <thead>
                 <tr class="permissions-row">
-                  <th class="col-md-5">Permission</th>
-                  <th class="col-md-1">Grant</th>
-                  <th class="col-md-1">Deny</th>
-                  <th class="col-md-1">Inherit</th>
+                  <th class="col-md-5">允许</th>
+                  <th class="col-md-1">授权</th>
+                  <th class="col-md-1">拒绝</th>
+                  <th class="col-md-1">继承</th>
                 </tr>
               </thead>
 

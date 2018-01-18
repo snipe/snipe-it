@@ -114,13 +114,13 @@
             </label>
             <div class="col-md-7 col-md-offset-3">
               <label class="radio">
-                <input type="radio" name="requestable" value="1"> Yes
+                <input type="radio" name="requestable" value="1"> 是
               </label>
               <label class="radio">
-                <input type="radio" name="requestable" value="0"> No
+                <input type="radio" name="requestable" value="0"> 否
               </label>
               <label class="radio">
-                <input type="radio" name="requestable" value=""> Do Not Change
+                <input type="radio" name="requestable" value=""> 不修改
               </label>
             </div>
           </div>

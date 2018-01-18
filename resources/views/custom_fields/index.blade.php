@@ -85,8 +85,8 @@
           <thead>
             <tr>
               <th>{{ trans('general.name') }}</th>
-              <th>Help Text</th>
-              <th>DB Field</th>
+              <th>帮助文本</th>
+              <th>数据库字段</th>
               <th>{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th>{{ trans('admin/custom_fields/general.field_element_short') }}</th>
               <th>{{ trans('admin/custom_fields/general.fieldsets') }}</th>

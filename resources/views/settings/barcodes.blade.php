@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <i class="fa fa-barcode"></i> Barcodes
+                        <i class="fa fa-barcode"></i> 二维码
                     </h4>
                 </div>
                 <div class="box-body">

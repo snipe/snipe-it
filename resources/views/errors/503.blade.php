@@ -27,7 +27,7 @@ System Unavailable
     </div>
     <div class="col-md-10">
       <div class="callout callout-danger">
-        <h3><i class="icon fa fa-warning"></i> System Unavailable</h3>
+        <h3><i class="icon fa fa-warning"></i> 系统不支持</h3>
       <p>{!! json_decode(file_get_contents(storage_path('framework/down')), true)['message'] !!}</p>
       </div>
     </div>

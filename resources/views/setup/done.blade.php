@@ -12,9 +12,9 @@ Create a User ::
 	<div class="col-md-12">
         <div class="alert alert-warning">
             <i class="fa fa-check"></i>
-            Success! Your admin user has been added!
+           成功！管理员用户已被添加
         </div>
     </div>
-    <p>Click here to go to your app login! <a href="{{ url('/') }}">{{ url('/') }}</a></p>
+    <p>单击这里去登录 <a href="{{ url('/') }}">{{ url('/') }}</a></p>
 </div>
 @stop

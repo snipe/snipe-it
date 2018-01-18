@@ -60,11 +60,12 @@
             data-url="{{ route('api.accessories.checkedout', $accessory->id) }}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="accessoryUsersTable">
+            data-cookie-id-table="accessoryUsersTable"
+          >
             <thead>
               <tr>
-                <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
+                <th data-switchable="false" data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>
@@ -90,9 +91,5 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', [
-    'exportFile' => 'accessory' .
-    $accessory->name . '-export',
-    'search' => 'false'
-    ])
+@include ('partials.bootstrap-table', ['exportFile' => 'accessory' . $accessory->name . '-export', 'search' => false])
 @stop

@@ -40,9 +40,9 @@
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', [
+    'exportFile' => 'accessories-export',
     'search' => true,
     'showFooter' => true,
-    'columns' => \App\Presenters\AccessoryPresenter::dataTableLayout(),
-    'exportFile' => 'accessories-export',
+    'columns' => \App\Presenters\AccessoryPresenter::dataTableLayout()
     ])
 @stop

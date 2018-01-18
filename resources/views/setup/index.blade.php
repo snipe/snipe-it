@@ -9,14 +9,14 @@ Create a User ::
 {{-- Page content --}}
 @section('content')
 
-<p>This page will do a system check to make sure your configuration looks correct. We'll add your first user on the next page. </p>
+<p>此页将进行系统检查，以确保您的配置看起来正确。我们将在下一页添加用户。 </p>
 
 <table class="table">
   <thead>
     <tr>
-      <th class="col-lg-2">Setting</th>
-      <th class="col-lg-1">Valid</th>
-      <th class="col-lg-9">Notes</th>
+      <th class="col-lg-2">设置</th>
+      <th class="col-lg-1">校验</th>
+      <th class="col-lg-9">提醒</th>
     </tr>
   </thead>
   <tbody>
@@ -31,16 +31,16 @@ Create a User ::
       </td>
       <td>
         @if ($start_settings['url_valid'])
-          That URL looks right! Good job!
+          成功
         @else
           Uh oh! Snipe-IT thinks your URL is {{ $start_settings['url_config'] }}, but your real URL is {{ $start_settings['real_url'] }}
-          Please update your <code>APP_URL</code> settings in your  <code>.env</code> file
+         请升级你的 <code>APP_URL</code> 设置在你的  <code>.env</code> 文件中
         @endif
       </td>
     </tr>
 
     <tr {!! ($start_settings['db_conn']===true) ? ' class="success"' : ' class="danger"' !!}>
-      <td>Database</td>
+      <td>数据库</td>
       <td>
         @if ($start_settings['db_conn']===true)
           <i class="fa fa-check preflight-success"></i>
@@ -50,9 +50,9 @@ Create a User ::
       </td>
       <td>
         @if ($start_settings['db_conn']===true)
-          Great work! Connected to <code>{{ $start_settings['db_name'] }}</code>
+         成功!连接到 <code>{{ $start_settings['db_name'] }}</code>
         @else
-          D'oh! Looks like we can't connect to your database. Please update your database settings in your  <code>.env</code> file. Your database says: <code>{{ $start_settings['db_error'] }}</code>
+          无法连接到数据库！ 请更新数据库设置在  <code>.env</code>文件中. 数据库显示: <code>{{ $start_settings['db_error'] }}</code>
         @endif
       </td>
     </tr>
@@ -68,15 +68,15 @@ Create a User ::
       </td>
       <td>
         @if (!$start_settings['env_exposed'])
-          Sweet. It doesn't look like your <code>.env</code> file is exposed to the outside world. (You should double check this in a browser though. You don't ever want anyone able to see that file. Ever. Ever ever.) <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
+         这不是 <code>.env</code> 文件. (用户可以在浏览器中检查) <a href="../../.env">单击这里检查</a> (这将返回一个未发现或禁止错误的文件。)
         @else
-          Please make sure your <code>.env</code> is not readable by the outside world via web browser. You don't ever want anyone able to see that file. Ever. Ever ever. An exposed <code>.env</code> file can disclose sensitive data about your system and database. <a href="../../.env">Click here to check now</a> (This should return a file not found or forbidden error.)
+          请检查 <code>.env</code> 通过Web浏览器不能被外界读取。 一个暴露的 <code>.env</code> 文件可以泄露数据库的敏感信息. <a href="../../.env">单价这里检查</a> (这将返回一个未发现或禁止错误的文件)
         @endif
       </td>
     </tr>
 
     <tr {!! ($start_settings['prod']) ? ' class="success"' : ' class="warning"' !!}>
-      <td>Environment</td>
+      <td>环境</td>
       <td>
         @if ($start_settings['prod'])
           <i class="fa fa-check preflight-success"></i>
@@ -86,15 +86,15 @@ Create a User ::
       </td>
       <td>
         @if ($start_settings['prod'])
-          Your app is set to production mode. Rock on!
+         app 在生产模式
         @else
-          Your app is set <code>{{ $start_settings['env'] }}</code> instead of <code>production</code> mode. If you're not planning on developing on Snipe-IT, please update your <code>APP_ENV</code> settings in your  <code>.env</code> file to <code>production</code>.
+          APP处于 <code>{{ $start_settings['env'] }}</code> 而不是 <code>生产</code> 模式. 如果不在生产模式，请更新<code>APP_ENV</code> 设置  <code>.env</code> 文件至 <code>生产</code>.
         @endif
       </td>
     </tr>
 
     <tr {!! (!$start_settings['owner_is_admin']) ? ' class="success"' : ' class="danger"' !!}>
-      <td>File Owner</td>
+      <td>文件持有人</td>
       <td>
         @if (!$start_settings['owner_is_admin'])
           <i class="fa fa-check preflight-success"></i>
@@ -104,9 +104,9 @@ Create a User ::
       </td>
       <td>
         @if (!$start_settings['owner_is_admin'])
-          Your app files are owned by <code>{{ $start_settings['owner'] }}</code>. That doesn't look like a default root/admin account. Nice!
+         app归 <code>{{ $start_settings['owner'] }}</code>拥有. 这不像一个默认的账户. 
         @else
-          It looks like your files are owned by <code>{{ $start_settings['owner'] }}</code>, which might be a root/admin account. It's never a good idea to run a website with escalated priveliges.
+          文件归 <code>{{ $start_settings['owner'] }}</code>拥有, 可能是一个管理员账户
         @endif
       </td>
     </tr>
@@ -122,7 +122,7 @@ Create a User ::
       </td>
       <td>
         @if ($start_settings['writable'])
-          Yippee! Your app storage directory seems writable.
+         你的存储地址是可写的
         @else
           Uh-oh. Your <code>{{ storage_path() }}</code> directory (or sub-directories within) are not writable by the web-server. Those directories need to be writable by the web server in order for the app to work.
         @endif
@@ -140,9 +140,9 @@ Create a User ::
       </td>
       <td>
         @if (!$start_settings['debug_exposed'])
-          Awesomesauce. Debug is either turned off, or you're running this in a non-production environment. (Don't forget to turn it off when you're ready to go live.)
+           调试是关闭的，或你运行在非生产环境中。
         @else
-          Yikes! You should turn off debug mode unless you encounter any issues. Please update your <code>APP_DEBUG</code> settings in your  <code>.env</code> file
+        你应该关闭调试模式. 请更新你的<code>APP_DEBUG</code> 设置在  <code>.env</code> 文件夹
         @endif
       </td>
     </tr>
@@ -158,18 +158,18 @@ Create a User ::
       </td>
       <td>
         @if ($start_settings['gd'])
-          GD is installed. Go you!
+          GD 已被安装. 
         @else
-          The GD library isn't installed. While this won't prevent the system from working, you won't be able to generate labels or upload images.
+          GD未被安装
         @endif
       </td>
     </tr>
 
     <tr id="mailtestrow" class="warning">
-      <td>Email</td>
+      <td>电子邮件</td>
       <td>
             <a class="btn btn-default btn-sm pull-left" id="mailtest" style="margin-right: 10px;">
-                Send Test</a>
+                发送测试</a>
       </td>
         <td>
             <span id="mailtesticon"></span>
@@ -179,7 +179,7 @@ Create a User ::
                 <div id="mailteststatus-error" class="text-danger"></div>
             </div>
             <div class="col-md-12">
-                <p class="help-block">This will attempt to send a test mail to {{ config('mail.from.address') }}.</p>
+                <p class="help-block">尝试发送邮件 {{ config('mail.from.address') }}.</p>
             </div>
       </td>
     </tr>
@@ -190,7 +190,7 @@ Create a User ::
 
 @section('button')
   <form action="{{ route('setup.migrate') }}" method="GET">
-    <button class="btn btn-primary">Next: Create Database Tables</button>
+    <button class="btn btn-primary">下一步：创建数据库表</button>
   </form>
 @parent
 @stop

@@ -25,7 +25,7 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="alert alert-danger">
-                       It doesn't look like the LDAP extension is installed or enabled on this server. :(
+                       这里无法启动LDAP扩展
                     </div>
                 </div>
             </div>
@@ -339,7 +339,7 @@
                                 {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                             </div>
                             <div class="col-md-9" id="ldaptestrow">
-                                        <a class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">Test LDAP</a>
+                                        <a class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">测试LDAP</a>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 <span id="ldaptesticon"></span>
@@ -365,7 +365,7 @@
                                 <input type="password" name="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
                                 </div>
                                 <div class="col-md-3">
-                                    <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">Test LDAP</a>
+                                    <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">测试LDAP</a>
                                 </div>
 
 

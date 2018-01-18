@@ -38,12 +38,13 @@
                 data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
                 data-cookie="true"
                 data-click-to-select="true"
-                data-cookie-id-table="consumableDetailTable-{{ config('version.hash_version') }}">
+                data-cookie-id-table="consumableDetailTable-{{ config('version.hash_version') }}"
+              >
                 <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="created_at">{{ trans('general.date') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at">{{ trans('general.date') }}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                   </tr>
                 </thead>
               </table>

@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <i class="fa fa-slack"></i> Slack
+                        <i class="fa fa-slack"></i> 弹性设置
                     </h4>
                 </div>
                 <div class="box-body">

@@ -30,7 +30,7 @@
 
     <div class="maintenance-mode-alert" id="maintenance-mode-alert" role="alert">
 
-        <strong>Maintenance Mode</strong>
+        <strong>维护模式</strong>
 
         {{-- Show the truncated message (so it doesn't overflow) --}}
         @if(isset(${Config::get('maintenancemode.inject.prefix').'Message'}))

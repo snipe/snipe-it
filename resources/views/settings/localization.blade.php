@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <i class="fa fa-globe"></i> Localization
+                        <i class="fa fa-globe"></i> 本地化
                     </h4>
                 </div>
                 <div class="box-body">

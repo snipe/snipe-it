@@ -52,7 +52,7 @@
               <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
               <td>{{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</td>
               <td>
-                <a href="{{ route('fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a>
+                <a href="{{ route('fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">移除</a>
               </td>
             </tr>
             @endforeach

@@ -74,14 +74,13 @@
                   @endif
                 </td>
                 <td>
-                    @if ($asset->checkedOutToUser())
-                       {{ $asset->assigned->getFullNameAttribute() }}
+                  @if ($asset->assignedTo)
+                    @if ($asset->assignedTo->deleted_at!='')
+                    <del>{{ $asset->assignedTo->present()->name() }}</del>
                     @else
-
-                        @if ($asset->assigned)
-                            {{ $asset->assigned->name }}
-                        @endif
+                      {!!  $asset->assignedTo->present()->nameUrl()  !!}
                     @endif
+                  @endif
                 </td>
                 <td>
                   @if ($asset->location)

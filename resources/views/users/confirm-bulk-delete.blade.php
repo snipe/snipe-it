@@ -19,8 +19,8 @@ Bulk Checkin &amp; Delete
           <div class="col-md-12">
             <div class="callout callout-danger">
               <i class="fa fa-exclamation-circle"></i>
-              <strong>WARNING: </strong>
-              You are about to delete the {{ count($users) }} user(s) listed below. Super admin names are highlighted in red.
+              <strong>警告: </strong>
+              你将删除{{ count($users) }} 用户. 超级管理员名称用红色高亮显示。
             </div>
           </div>
 
@@ -38,11 +38,11 @@ Bulk Checkin &amp; Delete
                 <thead>
                   <tr>
                     <th class="col-md-1"></th>
-                    <th class="col-md-6">Name</th>
-                    <th class="col-md-5">Groups</th>
-                    <th class="col-md-5">Assets</th>
-                    <th class="col-md-5">Accessories</th>
-                    <th class="col-md-5">Licenses</th>
+                    <th class="col-md-6">名字</th>
+                    <th class="col-md-5">组</th>
+                    <th class="col-md-5">资产</th>
+                    <th class="col-md-5">附件</th>
+                    <th class="col-md-5">许可证</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,12 +85,12 @@ Bulk Checkin &amp; Delete
                   <tr>
                     <td colspan="6" class="warning">
                       {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
-                      <label>Update all assets for these users to this status</label>
+                      <label>将这些用户的所有资产更新到该状态</label>
                     </td>
                   </tr>
                   <tr>
                     <td colspan="6" class="warning">
-                      <label><input type="checkbox" name="ids['.e($user->id).']" checked> Check in all properties associated with these users</label>
+                      <label><input type="checkbox" name="ids['.e($user->id).']" checked> 签入与这些用户相关联的所有属性</label>
                     </td>
                   </tr>
                 </tfoot>

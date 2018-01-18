@@ -39,7 +39,7 @@
           </div>
           @endif
 
-          @if ($accessory->category)
+          @if ($accessory->category->name)
           <!-- accessory name -->
           <div class="form-group">
             <label class="col-sm-3 control-label">{{ trans('admin/accessories/general.accessory_category') }}</label>

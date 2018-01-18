@@ -21,7 +21,7 @@ Create a User
                 <div class="box-body">
 
                     @if (config('app.lock_passwords'))
-                        <p class="alert alert-warning">CSV uploads are disabled on the demo.</p>
+                        <p class="alert alert-warning">上传CSV文件失效.</p>
                     @endif
 
                     <!-- CSRF Token -->
@@ -29,13 +29,13 @@ Create a User
 
                     @if (Session::get('message'))
                     <p class="alert-danger">
-                        You have an error in your CSV file:<br />
+                       错误的CSV文件:<br />
                         {{ Session::get('message') }}
                     </p>
                     @endif
 
                     <p>
-                        Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as:
+                        上传一个或多个用户的CSV文件。 密码自动生成。  CSV文件应该有 <strong>first</strong> 像这样的字段:
                     </p>
 
                     <p>
@@ -43,7 +43,7 @@ Create a User
                     </p>
 
                     <p>
-                        Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address. If you wish to include a company association, you must reference the ID number of an existing company - companies will not be created on the fly.
+                       这些字段右侧的其他字段将被忽略。 电子邮件是可选的，但是如果您不提供电子邮件地址，则用户将无法恢复其密码或接收EULA。 如果你想包括一个公司协会，你必须引用一个现有公司的ID号 - 公司不会凭空创建.
                     </p>
 
 
@@ -53,7 +53,7 @@ Create a User
                         <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                         <div class="col-sm-5">
                             <span class="btn btn-info fileinput-button">
-                                    <span>Select Import File...</span>
+                                    <span>选择导入文件</span>
                                         @if (config('app.lock_passwords'))
                                             <input id="fileupload" type="file" name="user_import_csv" accept="text/csv" disabled="disabled" class="disabled">
                                         @else
@@ -70,7 +70,8 @@ Create a User
                         <div class="col-sm-2 ">
                         </div>
                         <div class="col-sm-5">
-                            {{ Form::checkbox('has_headers', '1', Input::old('has_headers')) }} This CSV has a header row
+                            {{ Form::checkbox('has_headers', '1', Input::old('has_headers')) }} 
+                            CSV文件有标题。
                         </div>
                     </div>
 
@@ -79,7 +80,7 @@ Create a User
                         <div class="col-sm-2">
                         </div>
                         <div class="col-sm-10">
-                            {{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email these users their credentials? (Only possible where email address is included with user data.)
+                           向这些用户发送他们的凭据 （只有在用户数据中包含电子邮件地址的情况下才可能）。
                         </div>
                     </div>
 
@@ -88,7 +89,7 @@ Create a User
                         <div class="col-sm-2 ">
                         </div>
                         <div class="col-sm-5">
-                            {{ Form::checkbox('activate', '1', Input::old('activate')) }} Activate user?
+                            {{ Form::checkbox('activate', '1', Input::old('activate')) }}激活用户？
                         </div>
                     </div>
                 </div> <!--/box-body-->

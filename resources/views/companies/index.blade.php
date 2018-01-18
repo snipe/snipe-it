@@ -32,9 +32,9 @@
     </div>
     <!-- side address column -->
     <div class="col-md-3">
-      <h4>About Companies</h4>
+      <h4>关于公司</h4>
       <p>
-        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.
+        您可以将公司用作简单的信息字段，也可以通过在管理设置中启用“完全公司支持”来限制资产的可见性和可用性。
       </p>
   </div>
 

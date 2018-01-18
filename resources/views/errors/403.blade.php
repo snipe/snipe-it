@@ -20,7 +20,7 @@
             <div class="error-content">
               <h3><i class="fa fa-warning text-yellow"></i> 403 Forbidden.</h3>
               <p>
-                Sad panda. You are not authorized to do the thing. Maybe <a href="{{ url('/') }}">return to the dashboard</a>, or contact your administrator.
+                您无权限做这件事， 单击 <a href="{{ url('/') }}">返回主页面</a>, 或者联系管理员.
               </p>
 
     </div>

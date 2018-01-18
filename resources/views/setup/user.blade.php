@@ -9,7 +9,7 @@ Create a User ::
 {{-- Page content --}}
 @section('content')
 
-<p> This is the account information you'll use to access the site for the first time. All fields are required. </p>
+<p> 这是您第一次访问该站点所使用的帐户信息。所有字段都是必需的。 </p>
 
 <form action="{{ route('setup.user.save') }}" method="POST">
   {{ csrf_field() }}
@@ -160,7 +160,7 @@ Create a User ::
       <label>Email credentials</label>
       <div class="checkbox">
         <label>
-          <input type="checkbox" value="1" name="email_creds">Email my credentials to the email address above
+          <input type="checkbox" value="1" name="email_creds">把凭据发到上面的电子邮件地址
         </label>
       </div>
     </div>
@@ -168,7 +168,7 @@ Create a User ::
 @stop
 
 @section('button')
-  <button class="btn btn-primary">Next: Save User</button>
+  <button class="btn btn-primary">下一步：保存用户</button>
 </form>
 @parent
 @stop

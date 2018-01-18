@@ -93,11 +93,11 @@
           <!-- Help Text -->
           <div class="form-group {{ $errors->has('help_text') ? ' has-error' : '' }}">
               <label for="help_text" class="col-md-4 control-label">
-                  Help Text
+                  帮助文档
               </label>
               <div class="col-md-6">
                   {{ Form::text('help_text', Input::old('help_text', $field->help_text), array('class' => 'form-control')) }}
-                  <p class="help-block">This is optional text that will appear below the form elements while editing an asset to provide context on the field.</p>
+                  <p class="help-block">这是可选的文本，它将出现在表单元素下方，同时编辑资产以提供该字段的上下文。</p>
                   {!! $errors->first('help_text', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
           </div>
@@ -130,8 +130,8 @@
       {{ Form::close() }}
   </div> <!--/.col-md-9-->
   <div class="col-md-3">
-    <h4>About Custom Fields</h4>
-    <p>Custom fields allow you to add arbitrary attributes to assets.</p>
+    <h4>关于自定义字段</h4>
+    <p>自定义字段允许您在设置中添加任意属性。</p>
   </div>
 </div>
 @stop

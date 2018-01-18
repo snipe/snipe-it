@@ -41,7 +41,7 @@
                 <td>{{ $assetItem->model->name }}</td>
                 <td>{!! $assetItem->present()->nameUrl() !!}</td>
                 <td>{{ $assetItem->asset_tag }}</td>
-                <td>{!! ($assetItem->assignedTo) ? $assetItem->assignedTo->present()->nameUrl() : 'Deleted user' !!}</td>
+                <td>{!! ($assetItem->assignedTo) ? $assetItem->assignedTo->present()->nameUrl() : '删除用户' !!}</td>
               </tr>
               @endforeach
               @endif

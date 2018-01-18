@@ -21,9 +21,9 @@
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
-              <th>File</th>
-              <th>Created</th>
-              <th>Size</th>
+              <th>文件</th>
+              <th>创建</th>
+              <th>大小</th>
               <th></th>
             </thead>
             <tbody>

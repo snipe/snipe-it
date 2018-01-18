@@ -69,9 +69,9 @@
     <table class="table table-striped permissions">
         <thead>
         <tr class="permissions-row">
-            <th class="col-md-5">Permission</th>
-            <th class="col-md-1">Grant</th>
-            <th class="col-md-1">Deny</th>
+            <th class="col-md-5">同意</th>
+            <th class="col-md-1">允许</th>
+            <th class="col-md-1">拒绝</th>
         </tr>
         </thead>
         <tbody class="permissions-group">

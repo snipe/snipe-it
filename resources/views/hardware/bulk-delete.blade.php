@@ -30,9 +30,9 @@
               <tr>
                 <td></td>
                 <td>ID</td>
-                <td>Name</td>
-                <td>Location</td>
-                <td>Assigned To</td>
+                <td>姓名</td>
+                <td>位置</td>
+                <td>分配给</td>
               </tr>
             </thead>
             <tbody>

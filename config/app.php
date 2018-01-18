@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -65,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => env('APP_TIMEZONE', 'lengai'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +77,7 @@ return [
     |
     */
 
-    'locale' =>  env('APP_LOCALE', 'en'),
+    'locale' =>  env('APP_LOCALE', 'zh-CN'),
 
     /*
     |--------------------------------------------------------------------------
@@ -91,7 +90,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -154,7 +153,7 @@ return [
     | "debug", "info", "notice", "warning", "error", "critical", "alert", "emergency"
     |
     */
-    
+
     'log_level' => env('APP_LOG_LEVEL', 'error'),
 
 

@@ -102,7 +102,7 @@
                         <tbody>
                             <tr id="audit-loader" style="display: none;">
                                 <td colspan="3">
-                                    <i class="fa fa-spinner spin" aria-hidden="true"></i> Processing...
+                                    <i class="fa fa-spinner spin" aria-hidden="true"></i> 正在处理...
                                 </td>
                             </tr>
                         </tbody>
