@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <i class="fa fa-tags"></i> Labels
+                        <i class="fa fa-tags"></i> 标签
                     </h4>
                 </div>
                 <div class="box-body">

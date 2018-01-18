@@ -172,7 +172,7 @@
 
             <div class="col-md-12">
                 <!-- Licenses assets table -->
-                <h6>Software Assigned </h6>
+                <h6>软件授权 </h6>
                 <br>
                 <!-- checked out assets table -->
                 @if (count($asset->licenses) > 0)

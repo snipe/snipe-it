@@ -23,12 +23,11 @@
           <table
           name="manufacturers"
           class="table table-striped snipe-table"
-          id="manufacturersTable"
+          id="table"
           data-url="{{route('api.manufacturers.index') }}"
           data-cookie="true"
-          data-show-export="true"
           data-click-to-select="true"
-          data-cookie-id-table="manufacturersTable">
+          data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">
 
           </table>
         </div>

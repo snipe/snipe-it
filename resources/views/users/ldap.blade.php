@@ -31,7 +31,7 @@ LDAP User Sync
               @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
             <div class="col-md-4">
               <button type="submit" class="btn btn-warning" id="sync">
-                  <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
+                  <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">同步</span>
               </button>
             </div>
           </div>
@@ -52,14 +52,14 @@ LDAP User Sync
 
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title">Synchronization Results</h3>
+        <h3 class="box-title">同步结果</h3>
       </div><!-- /.box-header -->
       <div class="box-body">
         <table class="table table-bordered">
           <tr>
-              <th>Username</th><th>Employee Number</th>
-              <th>First Name</th><th>Last Name</th>
-              <th>Email</th><th>Notes</th>
+              <th>用户名</th><th>员工号</th>
+              <th>姓</th><th>名</th>
+              <th>电子邮箱</th><th>简介</th>
           </tr>
 
           @foreach (Session::get('summary') as $entry)

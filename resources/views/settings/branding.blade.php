@@ -34,7 +34,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <i class="fa fa-copyright"></i> Branding
+                        <i class="fa fa-copyright"></i> 品牌
                     </h4>
                 </div>
                 <div class="box-body">

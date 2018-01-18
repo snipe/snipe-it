@@ -30,9 +30,9 @@
                             <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
                             <th class="col-sm-1" data-field="type" data-formatter="itemTypeFormatter">{{ trans('general.type') }}</th>
                             <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                            <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">To</th>
+                            <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">至</th>
                             <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
-                            <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">Changed</th>
+                            <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">更改</th>
                         </tr>
                     </thead>
                 </table>

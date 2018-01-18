@@ -51,7 +51,7 @@
               <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
               <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
               <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
-              <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="hardwareInOutFormatter">Checkin/Checkout</th>
+              <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="hardwareInOutFormatter">归还/借出</th>
               <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="hardwareActionsFormatter">{{ trans('table.actions') }}</th>
             </tr>
             </thead>
@@ -145,7 +145,7 @@
           @if ($supplier->id)
             <div class="box-header with-border">
               <div class="box-heading">
-                <h3 class="box-title"> Improvements</h3>
+                <h3 class="box-title"> 改进</h3>
               </div>
             </div><!-- /.box-header -->
           @endif

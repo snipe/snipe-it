@@ -52,8 +52,8 @@
 
                         <div class="col-md-8 col-md-offset-3">
                             <p class="help-block">
-                                Because this asset category requires acceptance,
-                                it cannot be checked out to another asset or to a location.
+                                因为这个资产类别需要接收，它不能被移动。
+                                
                             </p>
                         </div>
                     </div>

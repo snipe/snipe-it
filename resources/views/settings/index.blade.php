@@ -18,8 +18,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.branding.index') }}" class="btn btn-lg btn-white"><i class="fa fa-copyright fa-3x"></i></a>
           <br>
-          Branding
-          <p class="help-block">Logo, Site Name</p>
+          品牌
+          <p class="help-block">商标, 名称</p>
         </div>
       </div>
     </div>
@@ -30,8 +30,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.general.index') }}" class="btn btn-lg btn-white"><i class="fa fa-wrench fa-3x"></i></a>
           <br>
-          General Settings
-          <p class="help-block">Default EULA and more</p>
+         通用设置
+          <p class="help-block">默认EULA</p>
         </div>
       </div>
     </div>
@@ -42,8 +42,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.security.index') }}" class="btn btn-lg btn-white"><i class="fa fa-lock fa-3x"></i></a>
           <br>
-          Security
-          <p class="help-block">Two-factor, Password Restrictions</p>
+          安全
+          <p class="help-block">双因素，密码限制</p>
         </div>
       </div>
     </div>
@@ -53,8 +53,8 @@
         <div class="box-body text-center">
           <a href="{{ route('groups.index') }}" class="btn btn-lg btn-white"><i class="fa fa-group fa-3x"></i></a>
           <br>
-          Groups
-          <p class="help-block">Account permission groups</p>
+          租
+          <p class="help-block">帐户权限组</p>
         </div>
       </div>
     </div>
@@ -65,8 +65,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.localization.index') }}" class="btn btn-lg btn-white"><i class="fa fa-globe fa-3x"></i></a>
           <br>
-          Localization
-          <p class="help-block">Language, date display</p>
+          本地化
+          <p class="help-block">语言, 日期</p>
 
         </div>
       </div>
@@ -78,8 +78,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.alerts.index') }}" class="btn btn-lg btn-white"><i class="fa fa-bell fa-3x"></i></a>
           <br>
-          Notifications
-          <p class="help-block">Email alerts</p>
+         提醒
+          <p class="help-block">邮件警告</p>
         </div>
       </div>
     </div>
@@ -89,8 +89,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.slack.index') }}" class="btn btn-lg btn-white"><i class="fa fa-slack fa-3x"></i></a>
           <br>
-          Slack
-          <p class="help-block">Slack settings</p>
+          弹性
+          <p class="help-block">弹性设置</p>
         </div>
       </div>
     </div>
@@ -100,8 +100,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.asset_tags.index') }}" class="btn btn-lg btn-white"><i class="fa fa-list-ol fa-3x"></i></a>
           <br>
-          Asset Tags
-          <p class="help-block">Incrementing and prefixes</p>
+          资产标签
+          <p class="help-block">递增和前缀</p>
         </div>
       </div>
     </div>
@@ -111,8 +111,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.barcodes.index') }}" class="btn btn-lg btn-white"><i class="fa fa-barcode fa-3x"></i></a>
           <br>
-          Barcodes
-          <p class="help-block">Barcode &amp; QR settings</p>
+          二维码
+          <p class="help-block">二维码 &amp; QR 设置</p>
         </div>
       </div>
     </div>
@@ -122,8 +122,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.labels.index') }}" class="btn btn-lg btn-white"><i class="fa fa-tags fa-3x"></i></a>
           <br>
-          Labels
-          <p class="help-block">Label sizes &amp; settings</p>
+          标签
+          <p class="help-block">标签大小 &amp; 设置</p>
         </div>
       </div>
     </div>
@@ -135,7 +135,7 @@
           <a href="{{ route('settings.ldap.index') }}" class="btn btn-lg btn-white"><i class="fa fa-sitemap fa-3x"></i></a>
           <br>
           LDAP
-          <p class="help-block">LDAP/Active Directory</p>
+          <p class="help-block">LDAP/活动目录</p>
         </div>
       </div>
     </div>
@@ -145,8 +145,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.backups.index') }}" class="btn btn-lg btn-white"><i class="fa fa-cloud-download fa-3x"></i></a>
           <br>
-          Backups
-          <p class="help-block">Download files &amp; Data</p>
+          备用
+          <p class="help-block">下载文件 &amp; 数据</p>
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@
           <a href="{{ route('settings.oauth.index') }}" class="btn btn-lg btn-white"><i class="fa fa-user-secret fa-3x"></i></a>
           <br>
           OAuth
-          <p class="help-block">Oauth Endpoint Settings</p>
+          <p class="help-block">Oauth 设置</p>
         </div>
       </div>
     </div>
@@ -170,7 +170,7 @@
             <a href="{{ route('settings.phpinfo.index') }}" class="btn btn-lg btn-white"><i class="fa fa-server fa-3x"></i></a>
             <br>
             PHP
-            <p class="help-block">PHP System Info</p>
+            <p class="help-block">PHP 系统信息</p>
           </div>
         </div>
       </div>
@@ -181,8 +181,8 @@
         <div class="box-body text-center">
           <a href="{{ route('settings.purge.index') }}" class="btn btn-lg btn-white text-danger"><i class="fa fa-trash fa-3x"></i></a>
           <br>
-          Purge
-          <p class="help-block">Purge Deleted Records</p>
+          清空
+          <p class="help-block">清除已删除的记录</p>
         </div>
       </div>
     </div>

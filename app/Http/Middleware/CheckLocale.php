@@ -23,7 +23,7 @@ class CheckLocale
     {
 
 
-        if (Setting::getSettings()) {
+        if (false) {
             // User's preference
             if (($request->user()) && ($request->user()->locale)) {
                 \App::setLocale($request->user()->locale);

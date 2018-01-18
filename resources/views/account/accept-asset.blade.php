@@ -42,14 +42,14 @@
             <div class="radio">
               <label>
                 <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
-                I accept
+                我接受
               </label>
             </div>
 
             <div class="radio">
               <label>
                 <input type="radio" name="asset_acceptance" id="declined" value="declined">
-                I decline
+               我拒绝
               </label>
             </div>
 
@@ -64,7 +64,7 @@
             @if ($snipeSettings->require_accept_signature=='1')
             <div class="col-md-12 col-sm-12 text-center" style="padding-top: 20px">
 
-              <h3>Sign below to indicate that you agree to the terms of service:</h3>
+              <h3> 在下面签字表示你同意服务条款：</h3>
 
               <div id="signature-pad" class="m-signature-pad col-md-12 col-sm-12">
                 <div class="m-signature-pad--body col-md-12 col-sm-12">
@@ -72,7 +72,7 @@
                     <input type="hidden" name="signature_output" id="signature_output">
                 </div>
                 <div class="col-md-12 col-sm-12 text-center">
-                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear</button>
+                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">清除</button>
                 </div>
               </div>
             </div> <!-- .col-md-12.text-center-->

@@ -187,7 +187,7 @@ View Assets for  {{ $user->present()->fullName() }}
           <table class="table table-striped">
             <thead>
               <tr>
-                <th class="col-md-12">Name</th>
+                <th class="col-md-12">姓名</th>
               </tr>
             </thead>
             <tbody>
@@ -218,7 +218,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h3 class="box-title"> History</h3>
+          <h3 class="box-title">历史</h3>
         </div>
       </div><!-- /.box-header -->
       @endif

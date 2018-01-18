@@ -43,7 +43,7 @@
 
 @section('header_right')
   <a href="{{ route('reports/custom') }}" style="margin-right: 5px;" class="btn btn-default">
-    Custom Export</a>
+    自定义导出</a>
   <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
 @stop
 
@@ -64,11 +64,11 @@
               @if (Input::get('status')!='Deleted')
               <div id="toolbar">
                 <select name="bulk_actions" class="form-control select2">
-                  <option value="edit">Edit</option>
-                  <option value="delete">Delete</option>
-                  <option value="labels">Generate Labels</option>
+                  <option value="edit">编辑</option>
+                  <option value="delete">删除</option>
+                  <option value="labels">产生标签</option>
                 </select>
-                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                <button class="btn btn-primary" id="bulkEdit" disabled>开始</button>
               </div>
               @endif
 
@@ -79,7 +79,6 @@
               class="table table-striped snipe-table"
               id="table"
               data-advanced-search="true"
-              data-show-export="true"
               data-id-table="advancedTable"
               data-url="{{ route('api.assets.index',
                   array('status' => e(Input::get('status')),

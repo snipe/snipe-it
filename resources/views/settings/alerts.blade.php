@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <i class="fa fa-bell"></i> Alerts
+                        <i class="fa fa-bell"></i> 警告
                     </h4>
                 </div>
                 <div class="box-body">
@@ -73,7 +73,7 @@
                                 {{ Form::text('alert_email', Input::old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
                                 {!! $errors->first('alert_email', '<span class="alert-msg">:message</span><br>') !!}
 
-                                <p class="help-block">Email addresses or distribution lists you want alerts to be sent to, comma separated</p>
+                                <p class="help-block">请填写您希望警告发送到电子邮件地址，逗号分隔</p>
 
 
                             </div>

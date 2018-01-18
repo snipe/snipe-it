@@ -44,10 +44,10 @@
             @if (Input::get('status')!='deleted')
               <div id="toolbar">
                 <select name="bulk_actions" class="form-control select2" style="width: 300px;">
-                  <option value="edit">Bulk Edit</option>
-                  <option value="delete">Bulk Delete</option>
+                  <option value="edit">批量编辑</option>
+                  <option value="delete">批量删除</option>
                 </select>
-                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                <button class="btn btn-primary" id="bulkEdit" disabled>开始</button>
               </div>
             @endif
 
@@ -69,7 +69,7 @@
               <th data-sortable="true" data-field="image" data-formatter="imageFormatter" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
               <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
               <th data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
-              <th data-sortable="true" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
+              <th data-sortable="false" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
               <th data-sortable="false" data-field="depreciation" data-formatter="depreciationsLinkObjFormatter">{{ trans('general.depreciation') }}</th>
               <th data-sortable="false" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
               <th data-sortable="true" data-field="eol">{{ trans('general.eol') }}</th>

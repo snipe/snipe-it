@@ -101,7 +101,7 @@
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">切换导航</span>
           </a>
           <ul class="nav navbar-nav navbar-left">
               <li class="left-navblock">
@@ -251,7 +251,7 @@
                    @endif
                  </a>
                  <ul class="dropdown-menu">
-                   <li class="header">You have {{ count($alert_items) }} items below or almost below minimum quantity levels</li>
+                   <li class="header">最大数量为{{ count($alert_items) }}</li>
                    <li>
                      <!-- inner menu: contains the actual data -->
                      <ul class="menu">
@@ -262,12 +262,12 @@
                           <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
                             <h3>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
-                                {{ $alert_items[$i]['remaining'] }} remaining
+                                {{ $alert_items[$i]['remaining'] }} 剩余
                               </small>
                             </h3>
                             <div class="progress xs">
                               <div class="progress-bar progress-bar-yellow" style="width: {{ $alert_items[$i]['percent'] }}%" role="progressbar" aria-valuenow="{{ $alert_items[$i]['percent'] }}" aria-valuemin="0" aria-valuemax="100">
-                                <span class="sr-only">{{ $alert_items[$i]['percent'] }}% Complete</span>
+                                <span class="sr-only">{{ $alert_items[$i]['percent'] }}% 完成</span>
                               </div>
                             </div>
                           </a>
@@ -277,7 +277,7 @@
                      </ul>
                    </li>
                    {{-- <li class="footer">
-                     <a href="#">View all tasks</a>
+                     <a href="#">查看所有任务</a>
                    </li> --}}
                  </ul>
                </li>
@@ -322,7 +322,7 @@
                      @can('self.api')
                      <li>
                          <a href="{{ route('user.api') }}">
-                             <i class="fa fa-user-secret fa-fw"></i> Manage API Keys
+                             <i class="fa fa-user-secret fa-fw"></i> 管理API
                          </a>
                      </li>
                      @endcan
@@ -349,7 +349,7 @@
           </div>
       </nav>
        <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">切换导航</span>
         <i class="fa fa-bars"></i>
       </a>
        <!-- Sidebar toggle button-->
@@ -728,11 +728,11 @@
       <footer class="main-footer hidden-print">
         <div class="pull-right hidden-xs">
           <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview" rel="noopener">User's Manual</a>
-          <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/" rel="noopener">Report a Bug</a>
+          <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview" rel="noopener">用户手册</a>
+          <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/" rel="noopener">报告错误</a>
         </div>
-        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is an open source
-          project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a> under the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3 license</a>.
+        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> 开源
+          project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>在 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3 证书下</a>.
       </footer>
 
 

@@ -37,9 +37,9 @@
     <div class="col-md-12">
       <div class="alert alert-danger">
         <i class="fa fa-exclamation-circle faa-pulse animated"></i>
-        <strong>WARNING: </strong>
-        This asset has been deleted.
-        You must <a href="{{ route('restore/hardware', $asset->id) }}">restore it</a> before you can assign it to someone.
+        <strong>警告: </strong>
+        这笔资产已经被删除
+        你应该 <a href="{{ route('restore/hardware', $asset->id) }}">恢复它</a> 在你授权给某人之前
       </div>
     </div>
   @endif
@@ -53,25 +53,22 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
         <li class="active">
-          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">Details</span></a>
+          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">详细信息</span></a>
         </li>
         <li>
-          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a>
+          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">许可证</span></a>
         </li>
         <li>
-          <a href="#components" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-hdd-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span></a>
+          <a href="#components" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-hdd-o"></i></span> <span class="hidden-xs hidden-sm">组成元素</span></a>
         </li>
         <li>
-          <a href="#assets" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-barcode"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span></a>
+          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">维护</span></a>
         </li>
         <li>
-          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">Maintenances</span></a>
+          <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">历史记录</span></a>
         </li>
         <li>
-          <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span></a>
-        </li>
-        <li>
-          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">Files</span></a>
+          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">文件</span></a>
         </li>
         <li class="pull-right">
           <!-- <a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> </a> -->
@@ -90,12 +87,7 @@
                       <td>
 
                         @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                          <i class="fa fa-circle text-blue"></i>
-                          {{ $asset->assetstatus->name }}
-                          <label class="label label-default">{{ trans('general.deployed') }}</label>
-
-                          <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                          {!!  $asset->assignedTo->present()->glyph()  !!}
+                          <i class="fa fa-circle text-blue"></i> {{ trans('general.deployed') }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {!!  $asset->assignedTo->present()->glyph()  !!}
                           {!!  $asset->assignedTo->present()->nameUrl() !!}
                         @else
                           @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
@@ -180,34 +172,11 @@
                       </td>
                     </tr>
                     @endif
-
-                    <tr>
-                      <td>
-                        {{ trans('general.category') }}</td>
-                      <td>
-                        @if ($asset->model->category)
-
-                          @can('view', \App\Models\Category::class)
-
-                            <a href="{{ route('categories.show', $asset->model->category->id) }}">
-                              {{ $asset->model->category->name }}
-                            </a>
-                          @else
-                            {{ $asset->model->category->name }}
-                          @endcan
-                        @else
-                          Invalid category
-                        @endif
-
-                      </td>
-                    </tr>
-
-                    
                     <tr>
                       <td>
                         {{ trans('admin/hardware/form.model') }}</td>
                       <td>
-                       @can('view', \App\Models\AssetModel::class)
+                        @can('view', \App\Models\AssetModel::class)
                         <a href="{{ route('models.show', $asset->model->id) }}">
                           {{ $asset->model->name }}
                         </a>
@@ -216,8 +185,6 @@
                       @endcan
                       </td>
                     </tr>
-
-
                     <tr>
                       <td>{{ trans('admin/models/table.modelnumber') }}</td>
                       <td>
@@ -564,47 +531,6 @@
           </div>
         </div> <!-- /.tab-pane components -->
 
-
-        <div class="tab-pane fade" id="assets">
-          <div class="row">
-            <div class="col-md-12">
-              {{ Form::open([
-                        'method' => 'POST',
-                        'route' => ['hardware/bulkedit'],
-                        'class' => 'form-inline',
-                         'id' => 'bulkForm']) }}
-              <div id="toolbar">
-                <select name="bulk_actions" class="form-control select2" style="300px;">
-                  <option value="edit">Edit</option>
-                  <option value="delete">Delete</option>
-                  <option value="labels">Generate Labels</option>
-                </select>
-                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
-              </div>
-
-              <!-- checked out assets table -->
-              <div class="table-responsive">
-                <table
-                        name="assetAssetsTable"
-                        data-toolbar="#toolbar"
-                        class="table table-striped snipe-table"
-                        id="assetAssetsTable"
-                        data-search="false"
-                        data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
-                        data-show-export="true"
-                        data-cookie="true"
-                        data-show-footer="true"
-                        data-cookie-id-table="assetAssetsTable"
-                        data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
-
-                </table>
-                {{ Form::close() }}
-              </div>
-            </div><!-- /col -->
-          </div> <!-- row -->
-        </div> <!-- /.tab-pane software -->
-
-
         <div class="tab-pane fade" id="maintenances">
           <div class="row">
             <div class="col-md-12">
@@ -690,17 +616,16 @@
           <div class="row">
             <div class="col-md-12">
               <table
-                      name="asset-history"
-                      id="asset-history"
                       class="table table-striped snipe-table"
-                      data-cookie="true"
-                      data-click-to-select="true"
-                      data-cookie-id-table="asset-history"
+                      name="asset-history"
+                      id="table"
+                      class="table table-striped snipe-table"
                       data-sort-order="desc"
                       data-show-columns="true"
                       data-search="true"
+                      data-cookie="true"
                       data-show-refresh="true"
-                      data-id-table="asset-history"
+                      data-cookie-id-table="asset-history"
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
                 <thead>
                 <tr>
@@ -714,7 +639,7 @@
                   @if  ($snipeSettings->require_accept_signature=='1')
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
-                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
+                  <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">更改</th>
                 </tr>
                 </thead>
               </table>
@@ -787,7 +712,7 @@
                         </td>
                         <td>
                           @can('update', \App\Models\Asset::class)
-                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="Are you sure you wish to delete {{$file->filename}}"><i class="fa fa-trash icon-white"></i></a>
+                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
                           @endcan
                         </td>
                       </tr>
@@ -811,7 +736,7 @@
 @stop
 
 @section('moar_scripts')
-  @include ('partials.bootstrap-table')
+  @include ('partials.bootstrap-table', ['simple_view' => true])
 
 <script nonce="{{ csrf_token() }}">
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {

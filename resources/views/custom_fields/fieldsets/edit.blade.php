@@ -43,8 +43,8 @@
     {{ Form::close() }}
   </div>
   <div class="col-md-3">
-    <h4>About Fieldsets</h4>
-    <p>Fieldsets work like containers of the custom fields you've created. This allows you to group commonly used custom attributes together for easy associations. </p>
+    <h4>关于字段集</h4>
+    <p>字段集是用户创建的自定义字段的容器。为了方便用户查看一系列的属性。 </p>
   </div>
 </div>
 @stop

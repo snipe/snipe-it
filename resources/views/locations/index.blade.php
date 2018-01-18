@@ -23,7 +23,6 @@
           id="table"
           data-url="{{ route('api.locations.index') }}"
           data-cookie="true"
-          data-show-export="true"
           data-click-to-select="true"
           data-cookie-id-table="locationsTable-{{ config('version.hash_version') }}">
             <thead>

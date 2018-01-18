@@ -84,7 +84,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">This is your dashboard. There are many like it, but this one is yours.</h3>
+                    <h3 class="box-title">这是你的dashboard</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -93,34 +93,34 @@
 
                             <div class="progress">
                                 <div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
+                                    <span class="sr-only">60% 完成 (警告)</span>
                                 </div>
                             </div>
 
 
-                            <p><strong>It looks like you haven't added anything yet, so we don't have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!</strong></p>
+                            <p><strong>看起来你还没有添加任何东西，所以我们没有任何可以展示的东西。 现在开始添加一些资产，配件，消耗品或许可证！</strong></p>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                             @can('create', \App\Models\Asset::class)
-                            <a class="btn bg-teal" style="width: 100%" href="{{ route('hardware.create') }}">New Asset</a>
+                            <a class="btn bg-teal" style="width: 100%" href="{{ route('hardware.create') }}">新资产</a>
                             @endcan
                         </div>
                         <div class="col-md-3">
                             @can('create', \App\Models\License::class)
-                                <a class="btn bg-maroon" style="width: 100%" href="{{ route('licenses.create') }}">New License</a>
+                                <a class="btn bg-maroon" style="width: 100%" href="{{ route('licenses.create') }}">新许可证</a>
                             @endcan
                         </div>
                         <div class="col-md-3">
                             @can('create', \App\Models\Accessory::class)
-                                <a class="btn bg-orange" style="width: 100%" href="{{ route('accessories.create') }}">New Accessory</a>
+                                <a class="btn bg-orange" style="width: 100%" href="{{ route('accessories.create') }}">新附件</a>
                             @endcan
                         </div>
                         <div class="col-md-3">
                             @can('create', \App\Models\Consumable::class)
-                                <a class="btn bg-purple" style="width: 100%" href="{{ route('consumables.create') }}">New Consumable</a>
+                                <a class="btn bg-purple" style="width: 100%" href="{{ route('consumables.create') }}">新耗材</a>
                             @endcan
                         </div>
                     </div>
@@ -152,7 +152,6 @@
                 id="table"
                 data-sort-order="desc"
                 data-height="400"
-                data-show-export="false"
                 data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
                 <thead>
                   <tr>
@@ -169,7 +168,7 @@
             </div><!-- /.responsive -->
           </div><!-- /.col -->
           <div class="col-md-12 text-center" style="padding-top: 10px;">
-            <a href="{{ route('reports.activity') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
+            <a href="{{ route('reports.activity') }}" class="btn btn-primary btn-sm" style="width: 100%">查看所有</a>
           </div>
         </div><!-- /.row -->
       </div><!-- ./box-body -->
@@ -204,7 +203,7 @@
         <!-- Categories -->
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">Asset {{ trans('general.categories') }}</h3>
+                <h3 class="box-title">资产 {{ trans('general.categories') }}</h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
@@ -234,7 +233,7 @@
                         </table>
                     </div> <!-- /.col -->
                     <div class="col-md-12 text-center" style="padding-top: 10px;">
-                        <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
+                        <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">查看所有</a>
                     </div>
                 </div> <!-- /.row -->
 
@@ -249,7 +248,7 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['simple_view' => true, 'nopages' => true])
+@include ('partials.bootstrap-table', ['simple_view' => true])
 
 @if ($snipeSettings->load_remote=='1')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>

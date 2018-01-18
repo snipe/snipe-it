@@ -37,12 +37,12 @@
                     data-cookie-id-table="requestedAssets">
                 <thead>
                     <tr role="row">
-                        <th class="col-md-1">Image</th>
-                        <th class="col-md-2">Item Name</th>
+                        <th class="col-md-1">图片</th>
+                        <th class="col-md-2">项目名称</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/table.location') }}</th>
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
-                        <th class="col-md-3" data-sortable="true">Requesting User</th>
-                        <th class="col-md-2">Requested Date</th>
+                        <th class="col-md-3" data-sortable="true">请求用户</th>
+                        <th class="col-md-2">请求日期</th>
                         <th class="col-md-1"></th>
                     </tr>
                 </thead>
@@ -86,13 +86,9 @@
                             @endif
                             </td>
                             <td>
-                                @if ($request->requestingUser())
                                 <a href="{{ url('/') }}/users/{{ $request->requestingUser()->id }}">
                                     {{ $request->requestingUser()->present()->fullName() }}
                                 </a>
-                               @else
-                                    (deleted user)
-                                @endif
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
                             <td>
