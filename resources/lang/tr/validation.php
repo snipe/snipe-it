@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute zaten alınmış.',
     'uploaded'             => ': Özniteliği yüklenemedi.',
     'url'                  => ':attribute biçim geçersiz.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute benzersiz olmalıdır.",
 
     /*
     |--------------------------------------------------------------------------

@@ -19,9 +19,9 @@ return array(
         'confirm'   => 'Tem certeza de que deseja excluir este fornecedor?',
         'error'   => 'Houve um problema ao excluir o fornecedor. Tente novamente.',
         'success' => 'O fornecedor foi excluído com sucesso.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'Este fornecedor está no momento associado com :asset_count asset(s) e não pode ser excluído. Atualize seus modelos para não referenciarem mais este fornecedor e tente novamente. ',
+        'assoc_licenses'	 => 'Este fornecedor está no momento associado com :asset_count asset(s) e não pode ser excluído. Atualize seus modelos para não referenciarem mais este fornecedor e tente novamente. ',
+        'assoc_maintenances'	 => 'Este fornecedor está no momento associado com :asset_maintenances_count asset maintenance(s) e não pode ser excluído. Atualize seus modelos para não referenciarem mais este fornecedor e tente novamente. ',
     )
 
 );

@@ -85,6 +85,7 @@
     'file_name'				=> 'Kōnae',
     'file_uploads'			=> 'Ngā Tukunga Kōnae',
     'generate'				=> 'Whakanuia',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Ngā rōpū',
     'gravatar_email'        => 'Gravatar Wāhitau Īmēra',
     'history'  			    => 'Hītori',

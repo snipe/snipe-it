@@ -67,17 +67,17 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset konnte nicht eingebucht werden. Bitte versuchen Sie es erneut',
-        'success' 		=> 'Asset wurde erfolgreich eingebucht.',
+        'error'   		=> 'Asset konnte nicht zurückgenommen werden. Bitte versuchen Sie es erneut',
+        'success' 		=> 'Asset wurde erfolgreich zurückgenommen.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
-        'already_checked_in'  => 'Dieses Asset ist bereits eingebucht.',
+        'already_checked_in'  => 'Dieses Asset ist bereits zurückgenommen.',
 
     ),
 
     'requests' => array(
         'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuchen Sie es erneut',
         'success' 		=> 'Asset erfolgreich angefordert.',
-        'canceled'      => 'Herausgeben erfolgreich abgebrochen'
+        'canceled'      => 'Herausgabe erfolgreich abgebrochen'
     )
 
 );

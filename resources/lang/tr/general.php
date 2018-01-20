@@ -88,6 +88,7 @@ Context | Request Context
     'file_name'				=> 'Dosya',
     'file_uploads'			=> 'Dosya Yüklemeleri',
     'generate'				=> 'Oluştur',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Gruplar',
     'gravatar_email'        => 'Gravatar e-posta adresi',
     'history'  			    => 'Geçmiş',

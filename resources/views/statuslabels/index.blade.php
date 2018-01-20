@@ -7,8 +7,10 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('statuslabels.create') }}" class="btn btn-primary pull-right">
+    @can('create', \App\Models\Statuslabel::class)
+        <a href="{{ route('statuslabels.create') }}" class="btn btn-primary pull-right">
 {{ trans('general.create') }}</a>
+    @endcan
 @stop
 {{-- Page content --}}
 @section('content')

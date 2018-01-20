@@ -85,6 +85,7 @@
     'file_name'				=> 'Plik',
     'file_uploads'			=> 'Dodaj plik',
     'generate'				=> 'Generuj',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Grupy',
     'gravatar_email'        => 'adres Email Gravatara',
     'history'  			    => 'Historia',

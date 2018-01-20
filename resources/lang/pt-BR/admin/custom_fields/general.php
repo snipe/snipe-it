@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Elemento',
     'field_format'            => 'Formato',
     'field_custom_format'     => 'Formato personalizado',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Este campo permite que você use uma expressão regex para validação. Deve começar com "regex:" - por exemplo, para validar que um valor de campo personalizado contém um IMEI válido (15 dígitos numéricos), você usaria <code>regex: / ^ [0-9]{15} $ / </code>.',
     'required'   		          => 'Requerido',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Usado por modelos',
