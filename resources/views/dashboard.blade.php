@@ -10,6 +10,17 @@
 {{-- Page content --}}
 @section('content')
 
+@if ($snipeSettings->dashboard_message!='')
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-warning fade in">
+            <i class="fa fa-warning faa-pulse animated"></i>
+            {{ $snipeSettings->dashboard_message }}
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row">
   <!-- panel -->
   <div class="col-lg-3 col-xs-6">
