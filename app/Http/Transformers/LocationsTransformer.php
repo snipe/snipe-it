@@ -57,7 +57,7 @@ class LocationsTransformer
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Location::class) ? true : false,
-                'delete' => (Gate::allows('delete', Department::class) && ($location->assigned_assets_count==0) && ($location->assets_count==0) && ($location->users_count==0) && ($location->deleted_at=='')) ? true : false,
+                'delete' => (Gate::allows('delete', Location::class) && ($location->assigned_assets_count==0) && ($location->assets_count==0) && ($location->users_count==0) && ($location->deleted_at=='')) ? true : false,
             ];
 
             $array += $permissions_array;
