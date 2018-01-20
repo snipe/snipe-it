@@ -25,6 +25,8 @@ return array(
 	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
     'custom_forgot_pass_url'	=> 'Custom Password Reset URL',
     'custom_forgot_pass_url_help'	=> 'This replaces the built-in forgotten password URL on the login screen, useful to direct people to internal or hosted LDAP password reset functionality. It will effectively disable local user forgotten password functionality.',
+    'dashboard_message'			=> 'Dashboard Message',
+    'dashboard_message_help'	=> 'This text will appear on the dashboard for anyone with permission to view the dashboard.',
 	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Default EULA',
   'default_language'			=> 'Default Language',
