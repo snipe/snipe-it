@@ -186,8 +186,7 @@ class Consumable extends SnipeModel
                         });
                     })->orWhere('consumables.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('consumables.order_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('consumables.purchase_cost', 'LIKE', '%'.$search.'%')
-                            ->orWhere('consumables.purchase_date', 'LIKE', '%'.$search.'%');
+                            ->orWhere('consumables.purchase_cost', 'LIKE', '%'.$search.'%');
             }
         });
     }

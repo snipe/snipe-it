@@ -181,8 +181,7 @@ class Accessory extends SnipeModel
                     })->orWhere('accessories.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.model_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.order_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('accessories.purchase_cost', 'LIKE', '%'.$search.'%')
-                            ->orWhere('accessories.purchase_date', 'LIKE', '%'.$search.'%');
+                            ->orWhere('accessories.purchase_cost', '=', $search);
             }
         });
     }
