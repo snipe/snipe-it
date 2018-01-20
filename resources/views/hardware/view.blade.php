@@ -170,7 +170,9 @@
                        @endif
 
                        @if ($asset->model->manufacturer->support_phone)
-                            <li><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}</li>
+                            <li><i class="fa fa-phone"></i>
+                              <a href="tel:{{ $asset->model->manufacturer->support_phone }}">{{ $asset->model->manufacturer->support_phone }}</a>
+                            </li>
                        @endif
 
                        @if ($asset->model->manufacturer->support_email)
@@ -467,8 +469,11 @@
                     <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                   @endif
 
-                  @if ((isset($asset->assignedTo->phone)) && ($asset->assignedTo->phone!=''))
-                    <li><i class="fa fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
+                  @if ((isset($asset->assignedTo)) && ($asset->assignedTo->phone!=''))
+                    <li>
+                      <i class="fa fa-phone"></i>
+                      <a href="tel:{{ $asset->assignedTo->phone }}">{{ $asset->assignedTo->phone }}</a>
+                    </li>
                   @endif
 
                   @if (isset($asset->location))

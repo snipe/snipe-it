@@ -85,6 +85,7 @@ class UserPresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('admin/users/table.phone'),
                 "visible" => true,
+                "formatter"    => "phoneFormatter",
             ],
             [
                 "field" => "address",
