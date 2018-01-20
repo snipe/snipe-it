@@ -56,14 +56,12 @@
 
         data: $('.modal-body form').serialize(),
         success: function (result) {
-            console.dir(result);
 
             if(result.status == "error") {
                 var error_message="";
                 for(var field in result.messages) {
                     error_message += "<li>Problem(s) with field <i><strong>" + field + "</strong></i>: " + result.messages[field];
-                    console.dir(result.messages);
-                    console.log('error_messages are: ' + error_message);
+
                 }
                 $('#modal_error_msg').html(error_message).show();
                 return false;
@@ -81,14 +79,11 @@
             // clicked 'add' on to add a new 'thing'
             // this code adds the newly created object to that select
             var selector = document.getElementById(select);
-            console.warn("The selector we should've selecte dis: "+select);
-            console.dir(selector);
+
             if(!selector) {
                 return false;
             }
 
-            console.warn("onChange Selector Thing should've activated? Here's the selector");
-            console.dir(selector);
             selector.options[selector.length] = new Option(name, id);
             selector.selectedIndex = selector.length - 1;
             $(selector).trigger("change");
