@@ -132,7 +132,6 @@ class UsersController extends Controller
         $users = User::select(
             [
                 'users.id',
-                'users.username',
                 'users.employee_num',
                 'users.first_name',
                 'users.last_name',
@@ -161,12 +160,8 @@ class UsersController extends Controller
             }
             $name_str .= e($user->first_name);
 
-            if ($user->username!='') {
-                $name_str .= ' ('.e($user->username).')';
-            }
-
             if ($user->employee_num!='') {
-                $name_str .= ' - #'.e($user->employee_num);
+                $name_str .= ' (#'.e($user->employee_num).')';
             }
 
             $user->use_text = $name_str;
