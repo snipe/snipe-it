@@ -196,7 +196,7 @@
                   @if ($user->phone)
                   <tr>
                     <td>{{ trans('admin/users/table.phone') }}</td>
-                    <td>{{ $user->phone }}</td>
+                    <td><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></td>
                   </tr>
                   @endif
 

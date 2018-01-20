@@ -35,7 +35,7 @@
             <th data-sortable="true" data-field="address">{{ trans('admin/suppliers/table.address') }}</th>
             <th data-searchable="true" data-sortable="true" data-field="contact">{{ trans('admin/suppliers/table.contact') }}</th>
             <th data-searchable="true" data-sortable="true" data-field="email" data-formatter="emailFormatter">{{ trans('admin/suppliers/table.email') }}</th>
-            <th data-searchable="true" data-sortable="true" data-field="phone">{{ trans('admin/suppliers/table.phone') }}</th>
+            <th data-searchable="true" data-sortable="true" data-field="phone" data-formatter="phoneFormatter">{{ trans('admin/suppliers/table.phone') }}</th>
             <th data-searchable="true" data-sortable="true" data-field="fax" data-visible="false">{{ trans('admin/suppliers/table.fax') }}</th>
             <th data-searchable="false" data-sortable="true" data-field="assets_count">{{ trans('admin/suppliers/table.assets') }}</th>
             <th data-searchable="false" data-sortable="true" data-field="accessories_count">{{ trans('general.accessories') }}</th>

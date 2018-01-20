@@ -222,7 +222,9 @@
       <li><i class="fa fa-user"></i> {{ $supplier->contact }}</li>
       @endif
       @if ($supplier->phone)
-      <li><i class="fa fa-phone"></i> {{ $supplier->phone }}</li>
+      <li><i class="fa fa-phone"></i>
+        <a href="tel:{{ $supplier->phone }}">{{ $supplier->phone }}</a>
+      </li>
       @endif
       @if ($supplier->fax)
       <li><i class="fa fa-print"></i> {{ $supplier->fax }}</li>
