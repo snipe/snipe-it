@@ -13,9 +13,15 @@
 @if ($snipeSettings->dashboard_message!='')
 <div class="row">
     <div class="col-md-12">
-        <div class="alert alert-warning fade in">
-            <i class="fa fa-warning faa-pulse animated"></i>
-            {{ $snipeSettings->dashboard_message }}
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {!!  Parsedown::instance()->text(e($snipeSettings->dashboard_message))  !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
