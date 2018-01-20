@@ -1,3 +1,4 @@
+{{-- See snipeit_modals.js for what powers this --}}
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -6,30 +7,19 @@
             <h4 class="modal-title">{{ trans('admin/categories/general.create') }}</h4>
         </div>
         <div class="modal-body">
-            <div class="alert alert-danger" id="modal_error_msg" style="display:none">
-            </div>
-            <div class="dynamic-form-row">
-                <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}:
-                    </label></div>
-                <div class="col-md-8 col-xs-12 required">
-                    <input type='text' id='modal-name' class="form-control">
+            <form action="{{ route('api.categories.store') }}" onsubmit="return false">
+                {{ csrf_field() }}
+                <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
-            </div>
-
-            <div class="dynamic-form-row">
-                <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}:
-                    </label></div>
-                <div class="col-md-8 col-xs-12 required">
-                    <select class="select2" id="modal-category_type" style="width: 100%">
-                        <option value="asset">Asset</option>
-                        <option value="accessory" disabled>Accessory</option>
-                        <option value="consumable" disabled>Consumable</option>
-                        <option value="component" disabled>Component</option>
-                    </select>
+                <div class="dynamic-form-row">
+                    <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}:
+                        </label></div>
+                    <div class="col-md-8 col-xs-12 required">
+                        <input type='text' name='name' id='modal-name' class="form-control">
+                    </div>
                 </div>
-            </div>
-
-
+                <input type="hidden" name='category_type' id="modal-category_type" value="{{ request('category_type') }}" />
+            </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
