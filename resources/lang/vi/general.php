@@ -85,6 +85,7 @@
     'file_name'				=> 'Tập tin',
     'file_uploads'			=> 'Tải lên tập tin',
     'generate'				=> 'Tạo ra',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Nhóm',
     'gravatar_email'        => 'Gravatar địa chỉ email',
     'history'  			    => 'Lịch sử',

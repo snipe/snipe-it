@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Витратний матеріал не існує.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Витратний матеріал не було створено, спробуйте ще раз.',
+        'success' => 'Витратний матеріал успішно створено.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Витратний матеріал не було оновлено, спробуйте ще раз',
+        'success' => 'Витратний матеріал успішно оновлено.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => 'Ви впевнені що хочете видалити цей витратний матеріал?',
         'error'   => 'There was an issue deleting the consumable. Please try again.',
         'success' => 'The consumable was deleted successfully.'
     ),
