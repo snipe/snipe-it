@@ -219,6 +219,18 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'CustomFieldsController@postReorder'
             ]
         );
+        Route::post('{field}/associate',
+            [
+                'as' => 'api.customfields.associate',
+                'uses' => 'CustomFieldsController@associate'
+            ]
+        );
+        Route::post('{field}/disassociate',
+            [
+                'as' => 'api.customfields.disassociate',
+                'uses' => 'CustomFieldsController@disassociate'
+            ]
+        );
     }); // Fields group
 
 
