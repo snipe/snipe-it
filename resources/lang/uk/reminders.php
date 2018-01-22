@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Паролі повинні складатися з шести символів і відповідати вимогам безпеки.",
 
     "user"     => "Ім'я користувача або електронна адреса невірна",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Токен для скидання паролю невірний.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Якщо електронна адреса вірна, нагадування пароля буде відправлено!",
 
 );

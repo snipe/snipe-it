@@ -316,6 +316,8 @@ class SettingsController extends Controller
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
         $setting->load_remote = $request->input('load_remote', '0');
+        $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
+        $setting->dashboard_message = $request->input('dashboard_message');
         $setting->email_domain = $request->input('email_domain');
         $setting->email_format = $request->input('email_format');
         $setting->username_format = $request->input('username_format');

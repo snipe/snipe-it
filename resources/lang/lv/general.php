@@ -85,6 +85,7 @@
     'file_name'				=> 'Fails',
     'file_uploads'			=> 'Faila augšupielāde',
     'generate'				=> 'Izveidot',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Grupas',
     'gravatar_email'        => 'Gravatar e-pasta adrese',
     'history'  			    => 'Vēsture',

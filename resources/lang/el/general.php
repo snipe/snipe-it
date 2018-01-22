@@ -85,6 +85,7 @@
     'file_name'				=> 'Αρχείο',
     'file_uploads'			=> 'Ανέβασμα αρχείου',
     'generate'				=> 'Δημιουργία',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Ομάδες',
     'gravatar_email'        => 'Gravatar Email Διεύθυνση',
     'history'  			    => 'Ιστορία',

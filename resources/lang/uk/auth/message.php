@@ -2,21 +2,21 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'account_already_exists' => 'Обліковий запис з цією електронною адресою вже існує.',
+    'account_not_found'      => 'Неправильне ім\'я користувача або пароль.',
+    'account_not_activated'  => 'Цей обліковий запис не активовано.',
+    'account_suspended'      => 'Дію цього аккаунта призупинено.',
+    'account_banned'         => 'Цей аккаунт заблоковано.',
+    'throttle'               => 'Занадто багато невдалих спроб входу в систему. Будь ласка, спробуйте ще раз напротязі (хв).',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Під час спроби входу в систему сталася помилка. Будь ласка, спробуйте ще раз.',
+        'success' => 'Ви успішно увійшли в систему.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Сталася помилка під час створення свого облікового запису, будь ласка, спробуйте ще раз.',
+        'success' => 'Обліковий запис успішно створено.',
     ),
 
         'forgot-password' => array(

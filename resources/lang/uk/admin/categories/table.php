@@ -3,8 +3,8 @@
 return array(
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
+    'parent'   					=> 'Батьківський',
     'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'title'      				=> 'Назва категорії актива',
 
 );

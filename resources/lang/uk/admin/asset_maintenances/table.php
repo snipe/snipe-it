@@ -1,8 +1,8 @@
 <?php
 
     return [
-        'title'         => 'Asset Maintenance',
-        'asset_name'    => 'Asset Name',
-        'is_warranty'   => 'Warranty',
+        'title'         => 'Обслуговування активів',
+        'asset_name'    => 'Назва активу',
+        'is_warranty'   => 'Гарантія',
         'dl_csv'        => 'Download CSV'
     ];

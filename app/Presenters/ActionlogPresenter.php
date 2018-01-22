@@ -58,7 +58,7 @@ class ActionlogPresenter extends Presenter
 
 
     public function actionType() {
-        return strtolower(trans('general.'.str_replace(' ', '_', $this->action_type)));
+        return mb_strtolower(trans('general.'.str_replace(' ', '_', $this->action_type)));
     }
 
 

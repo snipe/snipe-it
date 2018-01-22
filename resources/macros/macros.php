@@ -55,6 +55,7 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'ta'=> "Tamil",
       'th'=> "Thai",
       'tr'=> "Turkish",
+      'uk'=> "Ukranian",
       'vi'=> "Vietnamese",
       'zu'=> "Zulu",
     );

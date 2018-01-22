@@ -2,13 +2,13 @@
 
 return array(
 
-    'asset'             => 'Asset',
+    'asset'             => 'Актив',
     'checkin'           => 'Checkin',
-    'create'            => 'Create License',
+    'create'            => 'Створити ліцензію',
     'expiration'        => 'Expiration Date',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Ключ продукту',
     'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
+    'name'              => 'Назва програмного забезпечення',
     'no_depreciation'   => 'Do Not Depreciate',
     'purchase_order'    => 'Purchase Order Number',
     'reassignable'      => 'Reassignable',

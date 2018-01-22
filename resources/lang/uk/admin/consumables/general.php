@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'checkout'                          => 'Checkout Consumable to User',
-    'consumable_name'                   => 'Consumable Name',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
-    'total' 			                => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'Про витратні матеріали',
+    'about_consumables_text'  			=> 'Витратні матеріали це будь-що, що буде споживано на протязі певного часу. Наприклад, чорнила для принтера або папір.',
+    'checkout'                          => 'Видати витратний матеріал користувачу',
+    'consumable_name'                   => 'Назва витратного матеріалу',
+    'create'                            => 'Створити витратний матеріал',
+    'item_no'                           => 'Позиція №',
+    'remaining' 			            => 'Залишилось',
+    'total' 			                => 'Загалом',
+    'update'                            => 'Оновити витратний матеріал',
 );

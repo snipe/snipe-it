@@ -34,9 +34,9 @@ return array(
     ),
 
     'bulkdelete' => array(
-        'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'error'   		    => '선택된 모델이 없기에, 삭제되지 않습니다.',
+        'success' 		    => ': success_count 모델이 삭제되었습니다!',
+        'success_partial' 	=> ': success_count개의 모델이 삭제되었지만, fail_count 개는 관련된 자산이 있기에 삭제할 수 없습니다.'
     ),
 
 );

@@ -85,6 +85,7 @@
     'file_name'				=> 'Файл',
     'file_uploads'			=> 'Файл оруулах',
     'generate'				=> 'Үүсгэх',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Бүлгүүд',
     'gravatar_email'        => 'Gravatar Email Address',
     'history'  			    => 'Түүх',

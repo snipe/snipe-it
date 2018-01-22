@@ -34,9 +34,9 @@ return array(
     ),
 
     'bulkdelete' => array(
-        'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'error'   		    => 'Es wurden keine Modelle ausgewählt. Somit wurde auch nichts gelöscht.',
+        'success' 		    => ':success_count Modell(e) gelöscht!',
+        'success_partial' 	=> ':success_count Modell(e) wurden gelöscht. Jedochen konnten :fail_count nicht gelöscht werden, da ihnen noch Assets zugeordnet sind.'
     ),
 
 );

@@ -7,8 +7,10 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('locations.create') }}" class="btn btn-primary pull-right">
+  @can('create', \App\Models\Location::class)
+      <a href="{{ route('locations.create') }}" class="btn btn-primary pull-right">
   {{ trans('general.create') }}</a>
+  @endcan
 @stop
 {{-- Page content --}}
 @section('content')

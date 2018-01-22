@@ -521,6 +521,33 @@ return array(
         ),
     ),
 
+    'Companies' => array(
+        array(
+            'permission' => 'companies.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'companies.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'companies.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'companies.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
 
 
 
