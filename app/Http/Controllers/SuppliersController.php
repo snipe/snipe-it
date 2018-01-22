@@ -33,6 +33,7 @@ class SuppliersController extends Controller
     public function index()
     {
         // Grab all the suppliers
+        $this->authorize('view', Supplier::class);
         $suppliers = Supplier::orderBy('created_at', 'DESC')->get();
 
         // Show the page
@@ -47,6 +48,7 @@ class SuppliersController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Supplier::class);
         return view('suppliers/edit')->with('item', new Supplier);
     }
 
@@ -59,6 +61,7 @@ class SuppliersController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
+        $this->authorize('create', Supplier::class);
         // Create a new supplier
         $supplier = new Supplier;
         // Save the location data
@@ -100,6 +103,7 @@ class SuppliersController extends Controller
      */
     public function apiStore(Request $request)
     {
+        $this->authorize('create', Supplier::class);
         $supplier = new Supplier;
         $supplier->name =  $request->input('name');
         $supplier->user_id              = Auth::id();
@@ -118,6 +122,7 @@ class SuppliersController extends Controller
      */
     public function edit($supplierId = null)
     {
+        $this->authorize('edit', Supplier::class);
         // Check if the supplier exists
         if (is_null($item = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
@@ -137,6 +142,7 @@ class SuppliersController extends Controller
      */
     public function update($supplierId = null, ImageUploadRequest $request)
     {
+        $this->authorize('edit', Supplier::class);
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
@@ -207,6 +213,7 @@ class SuppliersController extends Controller
      */
     public function destroy($supplierId)
     {
+        $this->authorize('delete', Supplier::class);
         if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances','assets','licenses')->find($supplierId))) {
             return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.not_found'));
         }

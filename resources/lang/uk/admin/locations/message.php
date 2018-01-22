@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Розташування не існує.',
+    'assoc_users'	 => 'Розташування зараз пов\'язано як мінімум з одним користувачем та не може бути видалено. Оновіть ваших користувачів, так щоб вони не були більше пов\'язані з розташуванням і спробуйте ще раз. ',
     'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
     'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
 
 
     'create' => array(
         'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'success' => 'Розташування успішно створено.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Розташування не було оновлено, спробуйте ще раз',
+        'success' => 'Розташування успішно створено.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
+        'confirm'   	=> 'Ви впевнені, що хочете видати це розташування?',
         'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'success' => 'Розташування було успішно видалено.'
     )
 
 );

@@ -56,6 +56,7 @@ class AssetsController extends Controller
     {
 
         $this->authorize('index', Asset::class);
+        $settings = Setting::getSettings();
 
         $allowed_columns = [
             'id',
@@ -197,11 +198,15 @@ class AssetsController extends Controller
                 $assets->where('assets.assigned_to', '>', '0');
                 break;
             default:
-                // terrible workaround for complex-query Laravel bug in fulltext
-                $assets->join('status_labels AS status_alias',function ($join) {
-                    $join->on('status_alias.id', "=", "assets.status_id")
-                        ->where('status_alias.archived', '=', 0);
-                });
+
+                if ($settings->show_archived_in_list!='1') {
+                    // terrible workaround for complex-query Laravel bug in fulltext
+                    $assets->join('status_labels AS status_alias',function ($join) {
+                        $join->on('status_alias.id', "=", "assets.status_id")
+                            ->where('status_alias.archived', '=', 0);
+                    });
+                }
+
         }
 
         if (count($filter) > 0) {

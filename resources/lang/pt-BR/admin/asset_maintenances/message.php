@@ -12,8 +12,8 @@
             'success' => 'Manutenção do ativo criada com sucesso.'
         ],
         'edit'                       => [
-            'error'   => 'Manutenção de ativos não foi editada, tente novamente.',
-            'success' => 'Manutenção de ativos editada com sucesso.'
+            'error'   => 'Manutenção de ativos não foi alterada, por favor tente novamente.',
+            'success' => 'Manutenção de ativo alterada com sucesso.'
         ],
         'asset_maintenance_incomplete' => 'Não foi Completada Ainda',
         'warranty'                     => 'Garantia',

@@ -6,8 +6,13 @@
         {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
     <div class="col-md-2 col-sm-2 text-left">
-        <a href='{{ route('modal.statuslabel') }}' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id' class="btn btn-sm btn-default">New</a>
+
+        @can('index', \App\Models\Statuslabel::class)
+            <a href='{{ route('modal.statuslabel') }}' data-toggle="modal"  data-target="#createModal" data-select='status_select_id' class="btn btn-sm btn-default">New</a>
+        @endcan
+
         <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
+
     </div>
 
     <div class="col-md-7 col-sm-11 col-md-offset-3" id="status_helptext">

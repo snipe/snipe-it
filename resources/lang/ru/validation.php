@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Выбранный :attribute неправильный.',
     'numeric'              => ':attribute должно быть числом.',
     'present'              => 'Поле атрибута: должно присутствовать.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Это не верно составленное регулярное выражение. ',
     'regex'                => 'Неправильный формат :attribute.',
     'required'             => ':attribute обязательное поле.',
     'required_if'          => ':attribute обязательное поле, когда :other :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute уже занят.',
     'uploaded'             => 'Атрибут: не удалось загрузить.',
     'url'                  => 'Неправильный формат :attribute.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "Свойство :attribute должно быть уникальным.",
 
     /*
     |--------------------------------------------------------------------------

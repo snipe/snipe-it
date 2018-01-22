@@ -331,9 +331,8 @@ class AssetPresenter extends Presenter
                 return $this->model->model->name.' ('.$this->model->asset_tag.')';
             }
             return $this->model->asset_tag;
-        } else {
-            return $this->model->name . ' (' . $this->model->asset_tag . ')';
         }
+        return $this->model->name . ' (' . $this->model->asset_tag . ')';
 
     }
 

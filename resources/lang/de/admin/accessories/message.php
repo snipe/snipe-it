@@ -22,14 +22,14 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Zubehör konnte nicht ausgebucht werden, bitte versuchen Sie es erneut',
-        'success' 		=> 'Zubehör erfolgreich ausgebucht.',
+        'error'   		=> 'Zubehör konnte nicht herausgegeben werden. Bitte versuchen Sie es erneut',
+        'success' 		=> 'Zubehör erfolgreich herausgegeben.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Das Zubehör wurde nicht erfolgreich eingebucht, bitte versuchen Sie es erneut',
-        'success' 		=> 'Zubehör erfolgreich eingebucht.',
+        'error'   		=> 'Das Zubehör wurde nicht erfolgreich zurückgenommen. Bitte versuchen Sie es erneut',
+        'success' 		=> 'Zubehör erfolgreich zurückgenommen.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
     )
 

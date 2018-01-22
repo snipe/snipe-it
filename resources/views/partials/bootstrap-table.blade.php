@@ -425,6 +425,14 @@
     }
 
 
+    // Create a linked phone number in the table list
+    function phoneFormatter(value) {
+        if (value) {
+            return  '<a href="tel:' + value + '">' + value + '</a>';
+        }
+    }
+
+
     function deployedLocationFormatter(row, value) {
         if ((row) && (row!=undefined)) {
             return '<a href="{{ url('/') }}/locations/' + row.id + '"> ' + row.name + '</a>';

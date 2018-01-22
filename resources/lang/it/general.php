@@ -85,6 +85,7 @@
     'file_name'				=> 'File',
     'file_uploads'			=> 'Carica i file',
     'generate'				=> 'Genera',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Gruppi',
     'gravatar_email'        => 'Indirizzo Email Gravatar',
     'history'  			    => 'Storia',

@@ -14,7 +14,9 @@
 
 {{-- Page title --}}
 @section('header_right')
-  <a href="{{ route('models.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  @can('create', \App\Models\AssetModel::class)
+    <a href="{{ route('models.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  @endcan
 
   @if (Input::get('status')=='deleted')
     <a class="btn btn-default pull-right" href="{{ route('models.index') }}" style="margin-right: 5px;">{{ trans('admin/models/general.view_models') }}</a>

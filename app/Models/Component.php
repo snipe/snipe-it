@@ -144,8 +144,7 @@ class Component extends SnipeModel
                     })->orWhere('components.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.order_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.serial', 'LIKE', '%'.$search.'%')
-                            ->orWhere('components.purchase_cost', 'LIKE', '%'.$search.'%')
-                            ->orWhere('components.purchase_date', 'LIKE', '%'.$search.'%');
+                            ->orWhere('components.purchase_cost', 'LIKE', '%'.$search.'%');
             }
         });
     }

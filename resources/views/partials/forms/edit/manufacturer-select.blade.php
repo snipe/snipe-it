@@ -19,7 +19,7 @@
     <div class="col-md-1 col-sm-1 text-left">
         @can('create', \App\Models\Manufacturer::class)
             @if ((!isset($hide_new)) || ($hide_new!='true'))
-                <a href='{{ route('modal.manufacturer') }}' data-toggle="modal"  data-target="#createModal" data-dependency="manufacturer" data-select='manufacturer_select_id' class="btn btn-sm btn-default">New</a>
+                <a href='{{ route('modal.manufacturer') }}' data-toggle="modal"  data-target="#createModal" data-select='manufacturer_select_id' class="btn btn-sm btn-default">New</a>
             @endif
         @endcan
     </div>

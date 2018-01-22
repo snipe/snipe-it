@@ -335,7 +335,7 @@ class ComponentsController extends Controller
                 return redirect()->route('components.index')->with('error',
                     trans('admin/components/message.not_found'));
             }
-            $this->authorize('checkin', $component_assets);
+            $this->authorize('checkin', $component);
             return view('components/checkin', compact('component_assets','component','asset'));
         }
 
