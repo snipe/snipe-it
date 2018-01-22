@@ -8,8 +8,10 @@
 
 {{-- Page title --}}
 @section('header_right')
-<a href="{{ route('manufacturers.create') }}" class="btn btn-primary pull-right">
-  {{ trans('general.create') }}</a>
+  @can('create', \App\Models\Manufacturer::class)
+    <a href="{{ route('manufacturers.create') }}" class="btn btn-primary pull-right">
+    {{ trans('general.create') }}</a>
+  @endcan
 @stop
 
 {{-- Page content --}}
