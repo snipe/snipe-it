@@ -148,13 +148,13 @@ class CustomFieldsController extends Controller
         $field = CustomField::findOrFail($field_id);
 
         $fieldset_id = $request->input('fieldset_id');
-        $fieldset = CustomFieldset::findOrFail($fieldset_id);
         foreach ($field->fieldset as $fieldset) {
             if ($fieldset->id == $fieldset_id) {
                 $fieldset->fields()->detach($field->id);
                 return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
             }
         }
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
         return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
     }
 
