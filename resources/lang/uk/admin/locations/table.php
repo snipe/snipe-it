@@ -1,21 +1,21 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'about_locations_title'     => 'Про розташування',
+    'about_locations'           => 'Розташування використовуються для відсліджування інформації про місцеположення для користувачів, активів та іншого',
+    'assets_rtd'                => 'Активи', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Призначені активи',
     'id'                        => 'ID',
-    'city'                      => 'City',
+    'city'                      => 'Місто',
     'state'                     => 'State',
-    'country'                   => 'Country',
-    'create'                    => 'Create Location',
-    'update'                    => 'Update Location',
-    'name'                      => 'Location Name',
-    'address'                   => 'Address',
-    'zip'                       => 'Postal Code',
-    'locations'                 => 'Locations',
-    'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
-    'ldap_ou'                   => 'LDAP Search OU',
+    'country'                   => 'Країна',
+    'create'                    => 'Створити розташування',
+    'update'                    => 'Оновити розташування',
+    'name'                      => 'Назва розташування',
+    'address'                   => 'Адреса',
+    'zip'                       => 'Поштовий код',
+    'locations'                 => 'Розташування',
+    'parent'                    => 'Батьківський',
+    'currency'                  => 'Валюта розташування',
+    'ldap_ou'                   => 'Пошук OU в LDAP',
     );

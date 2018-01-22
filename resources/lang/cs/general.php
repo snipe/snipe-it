@@ -85,6 +85,7 @@
     'file_name'				=> 'Soubor',
     'file_uploads'			=> 'Nahrání souboru',
     'generate'				=> 'Vytvořit',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Skupiny',
     'gravatar_email'        => 'Emailová adresa Gravatar',
     'history'  			    => 'Historie',

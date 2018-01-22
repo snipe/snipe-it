@@ -85,6 +85,7 @@
     'file_name'				=> 'கோப்பு',
     'file_uploads'			=> 'கோப்பு பதிவேற்றங்கள்',
     'generate'				=> 'உருவாக்குதல்',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'குழுக்கள்',
     'gravatar_email'        => 'Gravatar மின்னஞ்சல் முகவரி',
     'history'  			    => 'வரலாறு',

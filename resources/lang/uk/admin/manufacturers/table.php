@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'about_manufacturers_title'    => 'About manufacturers',
-    'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'about_manufacturers_title'    => 'Про виробників',
+    'about_manufacturers_text'  => 'Виробники це компанії, що виготовляються ваші активи. Ви можете зберігати необхідну контактну інформацію про них, що буде відображатися на сторінках з детальним описом актвів.',
+    'asset_manufacturers'	=> 'Виробники активів',
+    'create'				=> 'Створити виробника',
     'id'   					=> 'ID',
-    'name'      			=> 'Name',
-    'support_email'   		=> 'Support Email',
-    'support_phone'   		=> 'Support Phone',
-    'support_url'   		=> 'Support URL',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Назва',
+    'support_email'   		=> 'Email підтримки',
+    'support_phone'   		=> 'Телефон підтримки',
+    'support_url'   		=> 'URL підтримки',
+    'update'				=> 'Оновити виробника',
     'url'   				=> 'URL',
 
 );

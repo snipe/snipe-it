@@ -67,7 +67,7 @@ class SettingsController extends Controller
 
         $start_settings['url_config'] = url('/');
         $start_settings['real_url'] = $pageURL;
-        
+
         // Curl the .env file to make sure it's not accessible via a browser
         $ch = curl_init($protocol . $host.'/.env');
         curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
@@ -150,28 +150,31 @@ class SettingsController extends Controller
 
 
         $user = new User;
-        $user->first_name  = $data['first_name']= e(Input::get('first_name'));
-        $user->last_name = e(Input::get('last_name'));
-        $user->email = $data['email'] = e(Input::get('email'));
+        $user->first_name  = $data['first_name']= $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $data['email'] = $request->input('email');
         $user->activated = 1;
         $permissions = array('superuser' => 1);
         $user->permissions = json_encode($permissions);
-        $user->username = $data['username'] = e(Input::get('username'));
-        $user->password = bcrypt(Input::get('password'));
-        $data['password'] =  Input::get('password');
+        $user->username = $data['username'] = $request->input('username');
+        $user->password = bcrypt($request->input('password'));
+        $data['password'] =  $request->input('password');
 
         $settings = new Setting;
-        $settings->site_name = e(Input::get('site_name'));
-        $settings->alert_email = e(Input::get('email'));
+        $settings->full_multiple_companies_support = $request->input('full_multiple_companies_support', 0);
+        $settings->site_name = $request->input('site_name');
+        $settings->alert_email = $request->input('email');
         $settings->alerts_enabled = 1;
         $settings->pwd_secure_min = 10;
         $settings->brand = 1;
-        $settings->locale = 'en';
-        $settings->default_currency = 'USD';
+        $settings->locale = $request->input('locale', 'en');
+        $settings->default_currency = $request->input('default_currency', "USD");
         $settings->user_id = 1;
-        $settings->email_domain = e(Input::get('email_domain'));
-        $settings->email_format = e(Input::get('email_format'));
+        $settings->email_domain = $request->input('email_domain');
+        $settings->email_format = $request->input('email_format');
         $settings->next_auto_tag_base = 1;
+        $settings->auto_increment_assets = $request->input('auto_increment_assets', 0);
+        $settings->auto_increment_prefix = $request->input('auto_increment_prefix');
 
 
         if ((!$user->isValid()) || (!$settings->isValid())) {
@@ -313,6 +316,8 @@ class SettingsController extends Controller
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
         $setting->load_remote = $request->input('load_remote', '0');
+        $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
+        $setting->dashboard_message = $request->input('dashboard_message');
         $setting->email_domain = $request->input('email_domain');
         $setting->email_format = $request->input('email_format');
         $setting->username_format = $request->input('username_format');

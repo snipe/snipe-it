@@ -40,6 +40,7 @@ class AssetModelsController extends Controller
     */
     public function index()
     {
+        $this->authorize('index', AssetModel::class);
         return view('models/index');
     }
 
@@ -52,6 +53,7 @@ class AssetModelsController extends Controller
     */
     public function create()
     {
+        $this->authorize('create', AssetModel::class);
         $category_type = 'asset';
         return view('models/edit')->with('category_type',$category_type)
         ->with('depreciation_list', Helper::depreciationList())
@@ -69,6 +71,7 @@ class AssetModelsController extends Controller
     public function store(ImageUploadRequest $request)
     {
 
+        $this->authorize('create', AssetModel::class);
         // Create a new asset model
         $model = new AssetModel;
 
@@ -124,7 +127,8 @@ class AssetModelsController extends Controller
      */
     public function apiStore(Request $request)
     {
-      //COPYPASTA!!!! FIXME
+        //COPYPASTA!!!! FIXME
+        $this->authorize('create', AssetModel::class);
         $model = new AssetModel;
 
         $settings=Input::all();
@@ -162,6 +166,7 @@ class AssetModelsController extends Controller
     */
     public function edit($modelId = null)
     {
+        $this->authorize('edit', AssetModel::class);
         if ($item = AssetModel::find($modelId)) {
             $category_type = 'asset';
             $view = View::make('models/edit', compact('item','category_type'));
@@ -185,6 +190,7 @@ class AssetModelsController extends Controller
     */
     public function update(ImageUploadRequest $request, $modelId = null)
     {
+        $this->authorize('edit', AssetModel::class);
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the models management page
@@ -255,6 +261,7 @@ class AssetModelsController extends Controller
     */
     public function destroy($modelId)
     {
+        $this->authorize('delete', AssetModel::class);
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             return redirect()->route('models.index')->with('error', trans('admin/models/message.not_found'));
@@ -291,7 +298,7 @@ class AssetModelsController extends Controller
     */
     public function getRestore($modelId = null)
     {
-
+        $this->authorize('create', AssetModel::class);
         // Get user information
         $model = AssetModel::withTrashed()->find($modelId);
 
@@ -322,6 +329,7 @@ class AssetModelsController extends Controller
     */
     public function show($modelId = null)
     {
+        $this->authorize('view', AssetModel::class);
         $model = AssetModel::withTrashed()->find($modelId);
 
         if (isset($model->id)) {

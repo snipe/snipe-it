@@ -118,7 +118,9 @@
 
                   @if ($model->manufacturer->support_phone)
                       <li>
-                          <i class="fa fa-phone"></i> {{ $model->manufacturer->support_phone }}
+                          <i class="fa fa-phone"></i>
+                          <a href="tel:{{ $model->manufacturer->support_phone }}">{{ $model->manufacturer->support_phone }}</a>
+
                       </li>
                   @endif
 

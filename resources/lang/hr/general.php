@@ -85,6 +85,7 @@
     'file_name'				=> 'Datoteka',
     'file_uploads'			=> 'Prijenos datoteka',
     'generate'				=> 'Generirati',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'grupe',
     'gravatar_email'        => 'Gravatar adresa e-pošte',
     'history'  			    => 'Povijest',

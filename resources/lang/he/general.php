@@ -85,6 +85,7 @@
     'file_name'				=> 'קוֹבֶץ',
     'file_uploads'			=> 'העלאות קבצים',
     'generate'				=> 'לִיצוֹר',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'קבוצות',
     'gravatar_email'        => 'כתובת דוא"ל Gravatar',
     'history'  			    => 'הִיסטוֹרִיָה',

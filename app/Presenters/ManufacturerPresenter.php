@@ -69,7 +69,8 @@ class ManufacturerPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/manufacturers/table.support_phone'),
-                "visible" => true
+                "visible" => true,
+                "formatter" => "phoneFormatter"
             ],
 
             [

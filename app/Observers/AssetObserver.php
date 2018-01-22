@@ -42,13 +42,7 @@ class AssetObserver
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
 
-        } else {
-
-            \Log::debug('Something else happened');
-            \Log::debug($asset->getOriginal()['assigned_to'].' == '.$asset->getAttributes()['assigned_to']);
-            \Log::debug($asset->getOriginal()['next_audit_date'].' == '.$asset->getAttributes()['next_audit_date']);
-            \Log::debug($asset->getOriginal()['last_checkout'].' == '.$asset->getAttributes()['last_checkout']);
-        }
+        } 
 
     }
 

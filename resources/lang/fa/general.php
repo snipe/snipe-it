@@ -87,6 +87,7 @@
     'file_name'				=> 'فایل',
     'file_uploads'			=> 'بارگذاری پرونده',
     'generate'				=> 'تولید',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'گروه ها',
     'gravatar_email'        => 'آدرس آواتار ایمیل ',
     'history'  			    => 'پيشينه',
