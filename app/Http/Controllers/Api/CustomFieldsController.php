@@ -131,15 +131,15 @@ class CustomFieldsController extends Controller
         $field = CustomField::findOrFail($field_id);
 
         $fieldset_id = $request->input('fieldset_id');
-        $fieldset = CustomFieldset::findOrFail($fieldset_id);
         foreach ($field->fieldset as $fieldset) {
             if ($fieldset->id == $fieldset_id) {
-                return response()->json(Helper::formatStandardApiResponse('success', $field, trans('admin/custom_fields/message.fieldset.update.success')));
+                return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
             }
         }
 
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
         $fieldset->fields()->attach($field->id, ["required" => ($request->input('required') == "on"), "order" => $request->input('order', $fieldset->fields->count())]);
-        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/custom_fields/message.fieldset.update.success')));
+        return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
     }
 
     public function disassociate(Request $request, $field_id)
@@ -152,10 +152,10 @@ class CustomFieldsController extends Controller
         foreach ($field->fieldset as $fieldset) {
             if ($fieldset->id == $fieldset_id) {
                 $fieldset->fields()->detach($field->id);
-                return response()->json(Helper::formatStandardApiResponse('success', $field, trans('admin/custom_fields/message.fieldset.update.success')));
+                return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
             }
         }
-        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/custom_fields/message.fieldset.update.success')));
+        return response()->json(Helper::formatStandardApiResponse('success', $fieldset, trans('admin/custom_fields/message.fieldset.update.success')));
     }
 
     /**
