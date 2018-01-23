@@ -36,7 +36,7 @@ class AssetsTransformer
                 'id' => (int) $asset->assetstatus->id,
                 'name'=> e($asset->assetstatus->name),
                 'status_type'=> e($asset->assetstatus->getStatuslabelType()),
-                'status_meta' =>  e($asset->present()->statusMeta),
+                'status_meta' => e($asset->present()->statusMeta),
             ] : null,
             'category' => ($asset->model->category) ? [
                 'id' => (int) $asset->model->category->id,
