@@ -165,7 +165,7 @@ class AssetPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => false,
                 "visible" => false,
-                "title" => 'Warranty Expires',
+                "title" => trans('admin/hardware/form.warranty_expires'),
                 "formatter" => "dateDisplayFormatter"
             ],[
                 "field" => "notes",
@@ -246,7 +246,7 @@ class AssetPresenter extends Presenter
             "searchable" => false,
             "sortable" => false,
             "switchable" => true,
-            "title" => 'Checkin/Checkout',
+            "title" => trans('general.checkin')'/'trans('general.checkout'),
             "visible" => true,
             "formatter" => "hardwareInOutFormatter",
         ];
