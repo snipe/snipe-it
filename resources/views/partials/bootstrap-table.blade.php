@@ -171,7 +171,6 @@
     function genericColumnObjLinkFormatter(destination) {
         return function (value,row) {
             if ((value) && (value.status_meta)) {
-                console.log(value);
 
                 var text_color;
                 var icon_style;
