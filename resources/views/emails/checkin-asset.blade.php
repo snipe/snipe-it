@@ -1,7 +1,7 @@
 @extends('emails/layouts/default')
 
 @section('content')
-<p>{{ trans('mail.hello') }} {{ $first_name }},</p>
+<p>{{ trans('mail.hello') }} {{ $first_name }} {{ $last_name }},</p>
 
 
 <p>{{ trans('mail.the_following_item') }}
