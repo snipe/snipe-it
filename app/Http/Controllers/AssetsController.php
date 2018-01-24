@@ -1088,7 +1088,7 @@ class AssetsController extends Controller
         
         \Log::debug($request->input('ids'));
         
-        if (($request->has('ids')) && (count($request->input('ids') > 0))) {
+        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
             $assets = $request->input('ids');
             if (($request->has('purchase_date'))
                 ||  ($request->has('purchase_cost'))
