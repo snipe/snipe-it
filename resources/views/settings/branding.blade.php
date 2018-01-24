@@ -139,6 +139,42 @@
                         </div>
 
 
+                        <!-- Support Footer -->
+                        <div class="form-group {{ $errors->has('support_footer') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('support_footer', trans('admin/settings/general.support_footer')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), ['class' => 'form-control disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                @else
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), array('class' => 'form-control', 'style'=>'width: 150px ;')) !!}
+                                @endif
+
+                                <p class="help-block">{{ trans('admin/settings/general.support_footer_help') }}</p>
+                                {!! $errors->first('support_footer', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div>
+
+                        <!-- Additional footer -->
+                        <div class="form-group {{ $errors->has('footer_text') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('custom_css', trans('admin/settings/general.footer_text')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::textarea('footer_text', Input::old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional footer text','disabled'=>'disabled')) }}
+                                    <p class="help-block">{{ trans('general.lock_passwords') }}</p>
+                                @else
+                                    {{ Form::textarea('footer_text', Input::old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
+                                @endif
+                                <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
+                                 {!! $errors->first('footer_text', '<span class="alert-msg">:message</span>') !!}
+
+                            </div>
+                        </div>
+
+
 
 
                     </div>

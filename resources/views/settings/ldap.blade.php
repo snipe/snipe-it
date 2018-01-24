@@ -63,7 +63,12 @@
                                 {{ Form::label('ldap_integration', trans('admin/settings/general.ldap_integration')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled),array('class' => 'minimal')) }}
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled),['class' => 'minimal disabled', 'disabled' => 'disabled']) }}
+                                @else
+                                    {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled),array('class' => 'minimal')) }}
+                                @endcan
+
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 {!! $errors->first('ldap_enabled', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -75,7 +80,12 @@
                                 {{ Form::label('is_ad', trans('admin/settings/general.ad')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('is_ad', '1', Input::old('is_ad', $setting->is_ad),array('class' => 'minimal')) }}
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::checkbox('is_ad', '1', Input::old('is_ad', $setting->is_ad),['class' => 'minimal disabled', 'disabled' => 'disabled']) }}
+                                @else
+                                    {{ Form::checkbox('is_ad', '1', Input::old('is_ad', $setting->is_ad),array('class' => 'minimal')) }}
+                                @endif
+
                                 {{ trans('admin/settings/general.is_ad') }}
                                 {!! $errors->first('is_ad', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -84,10 +94,16 @@
                         <!-- LDAP Password Sync -->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('is_ad', trans('admin/settings/general.ldap_pw_sync')) }}
+                                {{ Form::label('ldap_pw_sync', trans('admin/settings/general.ldap_pw_sync')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_pw_sync', '1', Input::old('ldap_pw_sync', $setting->ldap_pw_sync),array('class' => 'minimal')) }}
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::checkbox('ldap_pw_sync', '1', Input::old('ldap_pw_sync', $setting->ldap_pw_sync),['class' => 'minimal disabled', 'disabled' => 'disabled']) }}
+                                @else
+                                    {{ Form::checkbox('ldap_pw_sync', '1', Input::old('ldap_pw_sync', $setting->ldap_pw_sync),array('class' => 'minimal')) }}
+                                @endif
+
+
                                 {{ trans('general.yes') }}
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_pw_sync_help') }}</p>
                                 {!! $errors->first('ldap_pw_sync', '<span class="alert-msg">:message</span>') !!}
@@ -132,7 +148,13 @@
                                 {{ Form::label('ldap_tls', trans('admin/settings/general.ldap_tls')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_tls', '1', Input::old('ldap_tls', $setting->ldap_tls),array('class' => 'minimal')) }}
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::checkbox('ldap_tls', '1', Input::old('ldap_tls', $setting->ldap_tls),['class' => 'minimal disabled', 'disabled' => 'disabled']) }}
+                                @else
+                                    {{ Form::checkbox('ldap_tls', '1', Input::old('ldap_tls', $setting->ldap_tls),array('class' => 'minimal')) }}
+                                @endif
+
+
                                 {{ trans('admin/settings/general.ldap_tls_help') }}
                                 {!! $errors->first('ldap_tls', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -144,7 +166,13 @@
                                 {{ Form::label('ldap_server_cert_ignore', trans('admin/settings/general.ldap_server_cert')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_server_cert_ignore', '1', Input::old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore),array('class' => 'minimal')) }}
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::checkbox('ldap_server_cert_ignore', '1', Input::old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore),['class' => 'minimal disabled', 'disabled' => 'disabled']) }}
+                                @else
+                                    {{ Form::checkbox('ldap_server_cert_ignore', '1', Input::old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore),array('class' => 'minimal')) }}
+                                @endif
+
+
                                 {{ trans('admin/settings/general.ldap_server_cert_ignore') }}
                                 {!! $errors->first('ldap_server_cert_ignore', '<span class="alert-msg">:message</span>') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_server_cert_help') }}</p>

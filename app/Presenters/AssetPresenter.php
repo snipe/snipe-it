@@ -165,7 +165,7 @@ class AssetPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => false,
                 "visible" => false,
-                "title" => 'Warranty Expires',
+                "title" => trans('admin/hardware/form.warranty_expires'),
                 "formatter" => "dateDisplayFormatter"
             ],[
                 "field" => "notes",
@@ -246,11 +246,11 @@ class AssetPresenter extends Presenter
             "searchable" => false,
             "sortable" => false,
             "switchable" => true,
-            "title" => 'Checkin/Checkout',
+            "title" => trans('general.checkin').'/'.trans('general.checkout'),
             "visible" => true,
             "formatter" => "hardwareInOutFormatter",
         ];
-        
+
         $layout[] = [
             "field" => "actions",
             "searchable" => false,
@@ -263,7 +263,7 @@ class AssetPresenter extends Presenter
         return json_encode($layout);
     }
 
-    
+
 
     /**
      * Generate html link to this items name.
@@ -325,15 +325,14 @@ class AssetPresenter extends Presenter
      **/
     public function name()
     {
-        
+
         if (empty($this->model->name)) {
             if (isset($this->model->model)) {
                 return $this->model->model->name.' ('.$this->model->asset_tag.')';
             }
             return $this->model->asset_tag;
-        } else {
-            return $this->model->name . ' (' . $this->model->asset_tag . ')';
         }
+        return $this->model->name . ' (' . $this->model->asset_tag . ')';
 
     }
 
@@ -399,7 +398,7 @@ class AssetPresenter extends Presenter
     public function statusMeta()
     {
         if ($this->model->assigned) {
-            return strtolower(trans('general.deployed'));
+            return 'deployed';
         }
         return $this->model->assetstatus->getStatuslabelType();
     }
@@ -483,4 +482,3 @@ class AssetPresenter extends Presenter
         return '<i class="fa fa-barcode"></i>';
     }
 }
-

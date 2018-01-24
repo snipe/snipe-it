@@ -45,6 +45,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'country',
         'zip',
         'activated',
+        'manager_id',
     ];
 
     protected $casts = [

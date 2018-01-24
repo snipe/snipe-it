@@ -219,10 +219,31 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'CustomFieldsController@postReorder'
             ]
         );
+        Route::post('{field}/associate',
+            [
+                'as' => 'api.customfields.associate',
+                'uses' => 'CustomFieldsController@associate'
+            ]
+        );
+        Route::post('{field}/disassociate',
+            [
+                'as' => 'api.customfields.disassociate',
+                'uses' => 'CustomFieldsController@disassociate'
+            ]
+        );
     }); // Fields group
 
 
     /*--- Fieldsets API ---*/
+
+    Route::group(['prefix' => 'fieldsets'], function () {
+        Route::get('{fieldset}/fields',
+            [
+                'as' => 'api.fieldsets.fields',
+                'uses' => 'CustomFieldsetsController@fields'
+            ]
+        );
+    });
 
     Route::resource('fieldsets', 'CustomFieldsetsController',
         [
@@ -238,7 +259,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['fieldset' => 'fieldset_id']
         ]
     ); // Custom fieldset resource
-
 
 
     /*--- Groups API ---*/

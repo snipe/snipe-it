@@ -53,7 +53,7 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
         <li class="active">
-          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">Details</span></a>
+          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.details') }}</span></a>
         </li>
         <li>
           <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a>
@@ -65,13 +65,13 @@
           <a href="#assets" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-barcode"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span></a>
         </li>
         <li>
-          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">Maintenances</span></a>
+          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}</span></a>
         </li>
         <li>
           <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span></a>
         </li>
         <li>
-          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">Files</span></a>
+          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.files') }}</span></a>
         </li>
         <li class="pull-right">
           <!-- <a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> </a> -->
@@ -542,12 +542,22 @@
               <div class="col-md-12">
                 @if(count($asset->components) > 0)
                   <table class="table table-striped">
+                    <thead>
+                      <th>{{ trans('general.name') }}</th>
+                      <th>{{ trans('general.qty') }}</th>
+                      <th>{{ trans('general.purchase_cost') }}</th>
+                    </thead>
                     <tbody>
                       <?php $totalCost = 0; ?>
                       @foreach ($asset->components as $component)
                         @if (is_null($component->deleted_at))
                           <tr>
-                            <td><a href="{{ route('components.show', $component->id) }}">{{ $component->name }}</a></td>
+                            <td>
+                              <a href="{{ route('components.show', $component->id) }}">{{ $component->name }}</a>
+                            </td>
+                            <td>{{ $component->pivot->assigned_qty }}</td>
+                            <td>{{ $component->purchase_cost }}</td>
+
                           </tr>
                         @endif
                       @endforeach
