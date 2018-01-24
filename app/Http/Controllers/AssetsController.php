@@ -1131,7 +1131,13 @@ class AssetsController extends Controller
                     }
                     if ($request->has('rtd_location_id')) {
                         $update_array['rtd_location_id'] = $request->input('rtd_location_id');
+                        if (($request->has('update_real_loc'))
+                            && (($request->input('update_real_loc')) == '1'))
+                        {
+                            $update_array['location_id'] = $request->input('location_id');
+                        }
                     }
+                    
                     if ($request->has('status_id')) {
                         $update_array['status_id'] = $request->input('status_id');
                     }
