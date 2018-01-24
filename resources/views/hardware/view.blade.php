@@ -542,12 +542,22 @@
               <div class="col-md-12">
                 @if(count($asset->components) > 0)
                   <table class="table table-striped">
+                    <thead>
+                      <th>{{ trans('general.name') }}</th>
+                      <th>{{ trans('general.qty') }}</th>
+                      <th>{{ trans('general.purchase_cost') }}</th>
+                    </thead>
                     <tbody>
                       <?php $totalCost = 0; ?>
                       @foreach ($asset->components as $component)
                         @if (is_null($component->deleted_at))
                           <tr>
-                            <td><a href="{{ route('components.show', $component->id) }}">{{ $component->name }}</a></td>
+                            <td>
+                              <a href="{{ route('components.show', $component->id) }}">{{ $component->name }}</a>
+                            </td>
+                            <td>{{ $component->pivot->assigned_qty }}</td>
+                            <td>{{ $component->purchase_cost }}</td>
+
                           </tr>
                         @endif
                       @endforeach
