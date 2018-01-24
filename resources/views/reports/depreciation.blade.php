@@ -99,7 +99,7 @@
 
                 @if ($asset->purchase_cost > 0)
                   <td class="align-right">
-                    @if ($asset->location )
+                    @if ($asset->location && $asset->location->currency)
                     {{ $asset->location->currency }}
                     @else
                     {{ $snipeSettings->default_currency }}
@@ -107,7 +107,7 @@
                     {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
                   </td>
                   <td class="align-right">
-                    @if ($asset->location )
+                    @if ($asset->location && $asset->location->currency)
                     {{ $asset->location->currency }}
                     @else
                     {{ $snipeSettings->default_currency }}
@@ -116,7 +116,7 @@
                     {{ \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue()) }}
                   </td>
                   <td class="align-right">
-                    @if ($asset->location)
+                    @if ($asset->location && $asset->location->currency)
                     {{ $asset->location->currency }}
                     @else
                     {{ $snipeSettings->default_currency }}
