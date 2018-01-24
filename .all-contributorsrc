@@ -865,6 +865,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tdb",
+      "name": "Tim Bishop",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/585486?v=4",
+      "profile": "https://github.com/tdb",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
