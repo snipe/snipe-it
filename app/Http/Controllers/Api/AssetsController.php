@@ -244,6 +244,8 @@ class AssetsController extends Controller
                 break;
             case 'location':
                 $assets->OrderLocation($order);
+            case 'rtd_location':
+                $assets->OrderRtdLocation($order);
                 break;
             case 'status_label':
                 $assets->OrderStatus($order);
