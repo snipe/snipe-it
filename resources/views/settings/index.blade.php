@@ -216,6 +216,12 @@
                 </td>
               </tr>
               <tr>
+                <td>{{ trans('admin/settings/general.license') }}</td>
+                <td>
+                  <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3</a>
+                </td>
+              </tr>
+              <tr>
                 <td>{{ trans('admin/settings/general.php') }}</td>
                 <td> {{ phpversion() }}</td>
               </tr>
@@ -225,6 +231,10 @@
                     {{ $snipeSettings->lar_ver() }}
                 </td>
               </tr>
+
+
+
+
             </tbody>
           </table>
         </div>
