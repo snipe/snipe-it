@@ -7,7 +7,7 @@ return array(
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Atribuir ativo a utilizador',
     'checkin'  					=> 'Retornar Ativo',
-    'checkout'  				=> 'Ativo de compras',
+    'checkout'  				=> 'Checkout de Ativo',
     'clone'  					=> 'Clonar Ativo',
     'deployable'  				=> 'Implementável',
     'deleted'  					=> 'Este ativo foi excluído. <a href="/hardware/:asset_id/restore">Clique aqui para restaurá-lo</a>.',

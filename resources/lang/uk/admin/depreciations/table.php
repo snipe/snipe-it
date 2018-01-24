@@ -3,7 +3,7 @@
 return array(
 
     'id'      => 'ID',
-    'months'   => 'Months',
+    'months'   => 'міс.',
     'term'   => 'Term',
     'title'      => 'Name ',
 

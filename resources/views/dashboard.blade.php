@@ -10,6 +10,23 @@
 {{-- Page content --}}
 @section('content')
 
+@if ($snipeSettings->dashboard_message!='')
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {!!  Parsedown::instance()->text(e($snipeSettings->dashboard_message))  !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 <div class="row">
   <!-- panel -->
   <div class="col-lg-3 col-xs-6">
@@ -152,6 +169,7 @@
                 id="table"
                 data-sort-order="desc"
                 data-height="400"
+                data-show-export="false"
                 data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
                 <thead>
                   <tr>
@@ -248,7 +266,7 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['simple_view' => true])
+@include ('partials.bootstrap-table', ['simple_view' => true, 'nopages' => true])
 
 @if ($snipeSettings->load_remote=='1')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>

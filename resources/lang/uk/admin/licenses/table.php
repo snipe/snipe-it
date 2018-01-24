@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
+    'assigned_to'   	=> 'Призначено',
     'checkout'   		=> 'In/Out',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> 'Email ліцензії',
+    'license_name'   	=> 'Зареєстровано на',
+    'purchase_date'   	=> 'Дата покупки',
+    'purchased'   		=> 'Придбано',
+    'seats'   			=> 'Кількість місць',
+    'hardware'   		=> 'Залізо',
+    'serial'   			=> 'Серійник',
+    'title'      		=> 'Ліцензія',
 
 );

@@ -141,6 +141,25 @@
                     <td>{{ $user->username }}</td>
                   </tr>
 
+                    <tr>
+                      <td>{{ trans('general.groups') }}</td>
+                      <td>
+                        @if ($user->groups->count() > 0)
+                            @foreach ($user->groups as $group)
+
+                              @can('superadmin')
+                                  <a href="{{ route('groups.show', $group->id) }}" class="label label-default">{{ $group->name }}</a>
+                            @else
+                              {{ $group->name }}
+                            @endcan
+
+                            @endforeach
+                        @else
+                          --
+                        @endif
+
+                      </td>
+                    </tr>
 
 
                   @if ($user->jobtitle)
@@ -177,7 +196,7 @@
                   @if ($user->phone)
                   <tr>
                     <td>{{ trans('admin/users/table.phone') }}</td>
-                    <td>{{ $user->phone }}</td>
+                    <td><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></td>
                   </tr>
                   @endif
 
@@ -222,7 +241,7 @@
                   <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">Print All Assigned</a>
+                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
 
                 @can('delete', $user)

@@ -15,6 +15,7 @@ use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\Manufacturer;
+use App\Models\Company;
 use App\Models\User;
 use App\Policies\AccessoryPolicy;
 use App\Policies\AssetModelPolicy;
@@ -30,6 +31,7 @@ use App\Policies\StatuslabelPolicy;
 use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\ManufacturerPolicy;
+use App\Policies\CompanyPolicy;
 use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -59,6 +61,7 @@ class AuthServiceProvider extends ServiceProvider
         Supplier::class => SupplierPolicy::class,
         User::class => UserPolicy::class,
         Manufacturer::class => ManufacturerPolicy::class,
+        Company::class => CompanyPolicy::class,
     ];
 
     /**
@@ -132,6 +135,7 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('view', \App\Models\Location::class)
                 || $user->can('view', \App\Models\Company::class)
                 || $user->can('view', \App\Models\Manufacturer::class)
+                || $user->can('view', \App\Models\Company::class)
                 || $user->can('view', \App\Models\Depreciation::class);
         });
     }

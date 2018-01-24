@@ -8,8 +8,10 @@
 
 {{-- Page title --}}
 @section('header_right')
-<a href="{{ route('manufacturers.create') }}" class="btn btn-primary pull-right">
-  {{ trans('general.create') }}</a>
+  @can('create', \App\Models\Manufacturer::class)
+    <a href="{{ route('manufacturers.create') }}" class="btn btn-primary pull-right">
+    {{ trans('general.create') }}</a>
+  @endcan
 @stop
 
 {{-- Page content --}}
@@ -23,11 +25,12 @@
           <table
           name="manufacturers"
           class="table table-striped snipe-table"
-          id="table"
+          id="manufacturersTable"
           data-url="{{route('api.manufacturers.index') }}"
           data-cookie="true"
+          data-show-export="true"
           data-click-to-select="true"
-          data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">
+          data-cookie-id-table="manufacturersTable">
 
           </table>
         </div>

@@ -85,6 +85,7 @@
     'file_name'				=> 'Bestand',
     'file_uploads'			=> 'Bestand uploaden',
     'generate'				=> 'Genereer',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Groepen',
     'gravatar_email'        => 'Gravatar E-mailadres',
     'history'  			    => 'Historie',

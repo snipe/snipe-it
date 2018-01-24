@@ -79,14 +79,11 @@ class Setting extends Model
 
     public static function getDefaultEula()
     {
-
         $Parsedown = new \Parsedown();
         if (Setting::getSettings()->default_eula_text) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-        } else {
-            return null;
         }
-
+        return null;
     }
 
     /**

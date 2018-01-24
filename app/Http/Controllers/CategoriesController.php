@@ -40,6 +40,7 @@ class CategoriesController extends Controller
     public function index()
     {
         // Show the page
+        $this->authorize('view', Category::class);
         return view('categories/index');
     }
 
@@ -55,6 +56,7 @@ class CategoriesController extends Controller
     public function create()
     {
         // Show the page
+        $this->authorize('create', Category::class);
          $category_types= Helper::categoryTypeList();
         return view('categories/edit')->with('item', new Category)
             ->with('category_types', $category_types);
@@ -71,6 +73,7 @@ class CategoriesController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
+        $this->authorize('create', Category::class);
         $category = new Category();
         $category->name                 = $request->input('name');
         $category->category_type        = $request->input('category_type');
@@ -110,6 +113,7 @@ class CategoriesController extends Controller
      */
     public function edit($categoryId = null)
     {
+        $this->authorize('edit', Category::class);
         if (is_null($item = Category::find($categoryId))) {
             return redirect()->route('categories.index')->with('error', trans('admin/categories/message.does_not_exist'));
         }
@@ -132,7 +136,7 @@ class CategoriesController extends Controller
      */
     public function update(ImageUploadRequest $request, $categoryId = null)
     {
-        // Check if the blog post exists
+        $this->authorize('edit', Category::class);
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the categories management page
             return redirect()->to('admin/categories')->with('error', trans('admin/categories/message.does_not_exist'));
@@ -198,6 +202,7 @@ class CategoriesController extends Controller
      */
     public function destroy($categoryId)
     {
+        $this->authorize('delete', Category::class);
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
             return redirect()->route('categories.index')->with('error', trans('admin/categories/message.not_found'));
@@ -231,6 +236,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Category::class);
         if ($category = Category::find($id)) {
 
             if ($category->category_type=='asset') {

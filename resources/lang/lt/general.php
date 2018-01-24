@@ -85,6 +85,7 @@
     'file_name'				=> 'Failas',
     'file_uploads'			=> 'Failo Įkėlimas',
     'generate'				=> 'Sukurti',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Grupės',
     'gravatar_email'        => 'Gravatar el. paštas',
     'history'  			    => 'Istorija',

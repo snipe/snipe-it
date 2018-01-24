@@ -29,6 +29,7 @@
         data-url="{{ route('api.licenses.index') }}"
         class="table table-striped snipe-table"
         data-cookie="true"
+        data-show-export="true"
         data-click-to-select="true"
         data-cookie-id-table="licenseTable">
         </table>

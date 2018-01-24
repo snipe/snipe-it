@@ -53,7 +53,7 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
         <li class="active">
-          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">Details</span></a>
+          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.details') }}</span></a>
         </li>
         <li>
           <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a>
@@ -65,13 +65,13 @@
           <a href="#assets" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-barcode"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span></a>
         </li>
         <li>
-          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">Maintenances</span></a>
+          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}</span></a>
         </li>
         <li>
           <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span></a>
         </li>
         <li>
-          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">Files</span></a>
+          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.files') }}</span></a>
         </li>
         <li class="pull-right">
           <!-- <a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> </a> -->
@@ -90,7 +90,12 @@
                       <td>
 
                         @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                          <i class="fa fa-circle text-blue"></i> {{ trans('general.deployed') }} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {!!  $asset->assignedTo->present()->glyph()  !!}
+                          <i class="fa fa-circle text-blue"></i>
+                          {{ $asset->assetstatus->name }}
+                          <label class="label label-default">{{ trans('general.deployed') }}</label>
+
+                          <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                          {!!  $asset->assignedTo->present()->glyph()  !!}
                           {!!  $asset->assignedTo->present()->nameUrl() !!}
                         @else
                           @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
@@ -165,7 +170,9 @@
                        @endif
 
                        @if ($asset->model->manufacturer->support_phone)
-                            <li><i class="fa fa-phone"></i> {{ $asset->model->manufacturer->support_phone }}</li>
+                            <li><i class="fa fa-phone"></i>
+                              <a href="tel:{{ $asset->model->manufacturer->support_phone }}">{{ $asset->model->manufacturer->support_phone }}</a>
+                            </li>
                        @endif
 
                        @if ($asset->model->manufacturer->support_email)
@@ -175,11 +182,34 @@
                       </td>
                     </tr>
                     @endif
+
+                    <tr>
+                      <td>
+                        {{ trans('general.category') }}</td>
+                      <td>
+                        @if ($asset->model->category)
+
+                          @can('view', \App\Models\Category::class)
+
+                            <a href="{{ route('categories.show', $asset->model->category->id) }}">
+                              {{ $asset->model->category->name }}
+                            </a>
+                          @else
+                            {{ $asset->model->category->name }}
+                          @endcan
+                        @else
+                          Invalid category
+                        @endif
+
+                      </td>
+                    </tr>
+
+                    
                     <tr>
                       <td>
                         {{ trans('admin/hardware/form.model') }}</td>
                       <td>
-                        @can('view', \App\Models\AssetModel::class)
+                       @can('view', \App\Models\AssetModel::class)
                         <a href="{{ route('models.show', $asset->model->id) }}">
                           {{ $asset->model->name }}
                         </a>
@@ -188,6 +218,8 @@
                       @endcan
                       </td>
                     </tr>
+
+
                     <tr>
                       <td>{{ trans('admin/models/table.modelnumber') }}</td>
                       <td>
@@ -437,8 +469,11 @@
                     <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                   @endif
 
-                  @if ((isset($asset->assignedTo->phone)) && ($asset->assignedTo->phone!=''))
-                    <li><i class="fa fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
+                  @if ((isset($asset->assignedTo)) && ($asset->assignedTo->phone!=''))
+                    <li>
+                      <i class="fa fa-phone"></i>
+                      <a href="tel:{{ $asset->assignedTo->phone }}">{{ $asset->assignedTo->phone }}</a>
+                    </li>
                   @endif
 
                   @if (isset($asset->location))
@@ -555,13 +590,13 @@
               <!-- checked out assets table -->
               <div class="table-responsive">
                 <table
-                        name="assetAssets"
+                        name="assetAssetsTable"
                         data-toolbar="#toolbar"
                         class="table table-striped snipe-table"
-                        id="assetAssets"
+                        id="assetAssetsTable"
                         data-search="false"
                         data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
-                        data-export-options='{"fileName": "asset-assets"}'
+                        data-show-export="true"
                         data-cookie="true"
                         data-show-footer="true"
                         data-cookie-id-table="assetAssetsTable"

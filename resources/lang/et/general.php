@@ -85,6 +85,7 @@
     'file_name'				=> 'Fail',
     'file_uploads'			=> 'Faili üleslaadimine',
     'generate'				=> 'Genereeri',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Grupid',
     'gravatar_email'        => 'Gravatari e-maili aadress',
     'history'  			    => 'Ajalugu',

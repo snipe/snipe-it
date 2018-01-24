@@ -85,6 +85,7 @@
     'file_name'				=> 'Fail',
     'file_uploads'			=> 'Muat Naik Fail',
     'generate'				=> 'Laksanakan',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Kumpulan',
     'gravatar_email'        => 'Alam e-mel gravatar',
     'history'  			    => 'Sejarah',

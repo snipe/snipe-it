@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Click here to restore them.',
     'last_login'        => 'Last Login',
     'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Software Checked out to :name',
     'view_user'         => 'View User :name',
     'usercsv'           => 'CSV file',

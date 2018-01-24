@@ -18,7 +18,7 @@
     <div class="col-md-1 col-sm-1 text-left">
         @can('create', \App\Models\AssetModel::class)
             @if ((!isset($hide_new)) || ($hide_new!='true'))
-                <a href='{{ route('modal.model') }}' data-toggle="modal"  data-target="#createModal" data-dependency="model" data-select='model_select_id' class="btn btn-sm btn-default">New</a>
+                <a href='{{ route('modal.model') }}' data-toggle="modal"  data-target="#createModal" data-select='model_select_id' class="btn btn-sm btn-default">New</a>
                 <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
             @endif
         @endcan

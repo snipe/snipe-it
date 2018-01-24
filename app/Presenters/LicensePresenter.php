@@ -125,7 +125,7 @@ class LicensePresenter extends Presenter
             "searchable" => false,
             "sortable" => false,
             "switchable" => true,
-            "title" => 'Checkin/Checkout',
+            "title" => trans('general.checkin').'/'.trans('general.checkout'),
             "visible" => true,
             "formatter" => "licensesInOutFormatter",
         ];

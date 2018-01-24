@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'actions' 	                => 'Дії',
+    'add'    	                => 'Додати новий',
+    'cancel'                    => 'Скасувати',
+    'checkin_and_delete'  	    => 'Прийняти та видалити користувача',
     'delete'  	                => 'Видалити',
     'edit'    	                => 'Редагувати',
     'restore' 	                => 'Відновити',
-    'request'                   => 'Request',
-    'submit'  	                => 'Submit',
+    'request'                   => 'Запит',
+    'submit'  	                => 'Зберегти',
     'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
+	'select_file'				=> 'Обрати файл...',
 );

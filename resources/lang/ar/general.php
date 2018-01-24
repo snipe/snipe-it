@@ -85,6 +85,7 @@
     'file_name'				=> 'ملف',
     'file_uploads'			=> 'تحميلات الملفات',
     'generate'				=> 'توفير',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'المجموعات',
     'gravatar_email'        => 'البريد الإلكتروني لخدمة Gravatar',
     'history'  			    => 'الأرشيف',
