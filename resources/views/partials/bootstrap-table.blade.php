@@ -175,19 +175,24 @@
                 var text_color;
                 var icon_style;
                 var text_help;
+                var status_meta = {
+                  'deployed': '{{ strtolower(trans('general.deployed')) }}',
+                  'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
+                  'pending': '{{ strtolower(trans('general.pending')) }}'
+                }
 
                 switch (value.status_meta) {
-                    case '{{ strtolower(trans('general.deployed')) }}':
+                    case 'deployed':
                         text_color = 'blue';
                         icon_style = 'fa-circle';
                         text_help = '<label class="label label-default">{{ trans('general.deployed') }}</label>';
                     break;
-                    case '{{ strtolower(trans('admin/hardware/general.deployable')) }}':
+                    case 'deployable':
                         text_color = 'green';
                         icon_style = 'fa-circle';
                         text_help = '';
                     break;
-                    case '{{ strtolower(trans('general.pending')) }}':
+                    case 'pending':
                         text_color = 'orange';
                         icon_style = 'fa-circle';
                         text_help = '';
@@ -198,7 +203,7 @@
                         text_help = '';
                 }
 
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ value.status_meta + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + ' ' + text_help + ' </a> </nobr>';
+                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ status_meta[value.status_meta] + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + ' ' + text_help + ' </a> </nobr>';
             } else if ((value) && (value.name)) {
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a></span>';
             }
@@ -327,7 +332,7 @@
                     return '<a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
                 }
 
-            } 
+            }
 
         }
 
@@ -525,7 +530,7 @@
         }, 0);
         return total_sum.toFixed(2);
     }
-    
+
 
     $(function () {
         $('#bulkEdit').click(function () {

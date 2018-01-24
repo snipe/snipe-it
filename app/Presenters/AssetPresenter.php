@@ -250,7 +250,7 @@ class AssetPresenter extends Presenter
             "visible" => true,
             "formatter" => "hardwareInOutFormatter",
         ];
-        
+
         $layout[] = [
             "field" => "actions",
             "searchable" => false,
@@ -263,7 +263,7 @@ class AssetPresenter extends Presenter
         return json_encode($layout);
     }
 
-    
+
 
     /**
      * Generate html link to this items name.
@@ -325,7 +325,7 @@ class AssetPresenter extends Presenter
      **/
     public function name()
     {
-        
+
         if (empty($this->model->name)) {
             if (isset($this->model->model)) {
                 return $this->model->model->name.' ('.$this->model->asset_tag.')';
@@ -398,7 +398,7 @@ class AssetPresenter extends Presenter
     public function statusMeta()
     {
         if ($this->model->assigned) {
-            return strtolower(trans('general.deployed'));
+            return 'deployed';
         }
         return $this->model->assetstatus->getStatuslabelType();
     }
@@ -482,4 +482,3 @@ class AssetPresenter extends Presenter
         return '<i class="fa fa-barcode"></i>';
     }
 }
-
