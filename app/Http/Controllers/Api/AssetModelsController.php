@@ -194,6 +194,7 @@ class AssetModelsController extends Controller
             'models.category_id',
         ])->with('manufacturer','category');
 
+        $settings = \App\Models\Setting::getSettings();
 
         if ($request->has('search')) {
             $assetmodels = $assetmodels->SearchByManufacturerOrCat($request->input('search'));
@@ -202,8 +203,24 @@ class AssetModelsController extends Controller
         $assetmodels = $assetmodels->OrderCategory('ASC')->OrderManufacturer('ASC')->orderby('models.name', 'asc')->orderby('models.model_number', 'asc')->paginate(50);
 
         foreach ($assetmodels as $assetmodel) {
-            $assetmodel->use_text = (($assetmodel->category) ? e($assetmodel->category->name) : '').': '.$assetmodel->present()->modelName;
-            $assetmodel->use_image = ($assetmodel->image) ? url('/').'/uploads/models/'.$assetmodel->image : null;
+
+            $assetmodel->use_text = '';
+
+            if ($settings->modellistCheckedValue('category')) {
+                $assetmodel->use_text .= (($assetmodel->category) ? e($assetmodel->category->name).' - ' : '');
+            }
+
+            if ($settings->modellistCheckedValue('manufacturer')) {
+                $assetmodel->use_text .= (($assetmodel->manufacturer) ? e($assetmodel->manufacturer->name).' ' : '');
+            }
+
+            $assetmodel->use_text .=  e($assetmodel->name);
+
+            if (($settings->modellistCheckedValue('model_number')) && ($assetmodel->model_number!='')) {
+                $assetmodel->use_text .=  ' (#'.e($assetmodel->model_number).')';
+            }
+
+            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? url('/').'/uploads/models/'.$assetmodel->image : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assetmodels);

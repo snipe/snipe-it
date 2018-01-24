@@ -26,7 +26,7 @@ class AddDashboardMessageToSettings extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->text('dashboard_message');
+            $table->dropColumn('dashboard_message');
         });
     }
 }

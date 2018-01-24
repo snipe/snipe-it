@@ -17,7 +17,7 @@ else
 fi
 
 # create data directories
-for dir in 'data/private_uploads' 'data/uploads' 'data/uploads/avatars' 'data/uploads/barcodes' 'data/uploads/models' 'data/uploads/suppliers' 'dumps'; do
+for dir in 'data/private_uploads' 'data/uploads' 'data/uploads/avatars' 'data/uploads/barcodes' 'data/uploads/categories' 'data/uploads/companies' 'data/uploads/departments' 'data/uploads/locations' 'data/uploads/manufacturers' 'data/uploads/models' 'data/uploads/suppliers' 'dumps'; do
 	mkdir -p "/var/lib/snipeit/$dir"
 done
 

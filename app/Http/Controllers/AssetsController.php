@@ -575,6 +575,7 @@ class AssetsController extends Controller
 
             $data['log_id'] = $logaction->id;
             $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
+            $data['last_name'] = get_class($target) == User::class ? $target->last_name : '';
             $data['item_name'] = $asset->present()->name();
             $data['checkin_date'] = $logaction->created_at;
             $data['item_tag'] = $asset->asset_tag;

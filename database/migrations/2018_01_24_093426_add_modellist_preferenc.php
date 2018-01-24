@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFooterSettingsToSettings extends Migration
+class AddModellistPreferenc extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddFooterSettingsToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->char('support_footer', 5)->nullable()->default('on');
-            $table->text('footer_text')->nullable()->default(null);
+            $table->char('modellist_displays')->nullable()->default('image,category,manufacturer,model_number');
         });
     }
 
@@ -27,8 +26,7 @@ class AddFooterSettingsToSettings extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('support_footer');
-            $table->dropColumn('footer_text');
+            $table->dropColumn('modellist_displays');
         });
     }
 }

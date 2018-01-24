@@ -237,6 +237,21 @@
                            </div>
                        </div>
 
+                       <!-- Model List prefs -->
+                       <div class="form-group {{ $errors->has('show_in_model_list') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('show_in_model_list',
+                                              trans('admin/settings/general.show_in_model_list')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('show_in_model_list[]', 'image', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('image')),array('class' => 'minimal')) }} {{ trans('general.image') }} <br>
+                               {{ Form::checkbox('show_in_model_list[]', 'category', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('category')),array('class' => 'minimal')) }} {{ trans('general.category') }} <br>
+                               {{ Form::checkbox('show_in_model_list[]', 'manufacturer', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('manufacturer')),array('class' => 'minimal')) }}  {{ trans('general.manufacturer') }} <br>
+                               {{ Form::checkbox('show_in_model_list[]', 'model_number', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number')),array('class' => 'minimal')) }} {{ trans('general.model_no') }}<br>
+                           </div>
+                       </div>
+                       <!-- /.form-group -->
+
             </div> <!--/.box-body-->
             <div class="box-footer">
                 <div class="text-left col-md-6">
