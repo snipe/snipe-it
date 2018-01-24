@@ -461,7 +461,7 @@ class UsersController extends Controller
     public function postBulkEditSave(Request $request)
     {
         $this->authorize('update', User::class);
-        if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
+        if ((!Input::has('ids')) || (count(Input::input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         } else {
 
