@@ -58,7 +58,7 @@
                     <th class="col-md-3" data-formatter="usersLinkObjFormatter" data-field="assigned_user">{{ trans('admin/licenses/general.user') }}</th>
                     <th class="col-md-3" data-formatter="hardwareLinkObjFormatter" data-field="assigned_asset">{{ trans('admin/licenses/form.asset') }}</th>
                     <th class="col-md-3" data-formatter="locationsLinkObjFormatter" data-field="location">{{ trans('general.location') }}</th>
-                    <th class="col-md-1" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licenseSeatInOutFormatter">Checkin/Checkout</th>
+                    <th class="col-md-1" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licenseSeatInOutFormatter">{{ trans('general.checkin') }}/{{ trans('general.checkout') }}</th>
                   </tr>
                   </thead>
                   <tbody>
