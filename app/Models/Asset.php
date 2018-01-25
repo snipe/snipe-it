@@ -231,7 +231,9 @@ class Asset extends Depreciable
    */
     public function get_depreciation()
     {
-        return $this->model->depreciation;
+        if ($this->model) {
+            return $this->model->depreciation;
+        }
     }
 
   /**
