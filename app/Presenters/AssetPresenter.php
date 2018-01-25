@@ -113,7 +113,14 @@ class AssetPresenter extends Presenter
                 "title" => trans('admin/hardware/table.location'),
                 "visible" => true,
                 "formatter" => "deployedLocationFormatter"
-            ],  [
+            ], [
+                "field" => "rtd_location",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/hardware/form.default_location'),
+                "visible" => false,
+                "formatter" => "deployedLocationFormatter"
+            ], [
                 "field" => "manufacturer",
                 "searchable" => true,
                 "sortable" => true,
