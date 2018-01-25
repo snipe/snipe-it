@@ -624,7 +624,7 @@ class ReportsController extends Controller
                     }
 
                     if ($request->has('category')) {
-                        $row[] = ($asset->model->category) ? $asset->model->category->name : '';
+                        $row[] = (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '';
                     }
 
                     if ($request->has('manufacturer')) {
