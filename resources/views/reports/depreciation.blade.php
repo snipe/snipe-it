@@ -13,6 +13,9 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
+
+
+          @if (($depreciations) && ($depreciations->count() > 0))
         <div class="table-responsive">
           <table
           class="table table-striped table-bordered table-compact"
@@ -134,6 +137,16 @@
             </tbody>
           </table>
         </div> <!-- /.table-responsive-->
+              @else
+              <div class="col-md-12">
+                  <div class="alert alert-warning fade in">
+                      <i class="fa fa-warning faa-pulse animated"></i>
+                      <strong>Warning: </strong>
+                      You do not currently have any depreciations set up.
+                      Please set up at least one depreciation to view the depreciation report.
+                  </div>
+              </div>
+          @endif
       </div> <!-- /.box-body-->
     </div> <!--/box.box-default-->
   </div> <!-- /.col-md-12-->
