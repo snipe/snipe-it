@@ -167,7 +167,7 @@
                 class="table table-striped snipe-table"
                 name="activityReport"
                 id="table"
-                data-sort-order="desc"
+                data-sort-order="asc"
                 data-height="400"
                 data-show-export="false"
                 data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
