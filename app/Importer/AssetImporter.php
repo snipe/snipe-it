@@ -106,7 +106,8 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
-        $asset->unsetEventDispatcher();
+        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
+        // $asset->unsetEventDispatcher();
         if ($asset->save()) {
             $asset->logCreate('Imported using csv importer');
             $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');

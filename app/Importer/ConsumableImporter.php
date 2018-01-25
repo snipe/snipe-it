@@ -40,7 +40,7 @@ class ConsumableImporter extends ItemImporter
         $this->log("No matching consumable, creating one");
         $consumable = new Consumable();
         $consumable->fill($this->sanitizeItemForStoring($consumable));
-
+        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         $consumable->unsetEventDispatcher();
         if ($consumable->save()) {
             $consumable->logCreate('Imported using CSV Importer');

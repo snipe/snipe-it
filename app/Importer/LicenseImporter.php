@@ -63,7 +63,7 @@ class LicenseImporter extends ItemImporter
         } else {
             $license->fill($this->sanitizeItemForStoring($license));
         }
-
+        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         $license->unsetEventDispatcher();
         if ($license->save()) {
             $license->logCreate('Imported using csv importer');

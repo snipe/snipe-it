@@ -41,7 +41,9 @@ class AccessoryImporter extends ItemImporter
         $this->log("No Matching Accessory, Creating a new one");
         $accessory = new Accessory();
         $accessory->fill($this->sanitizeItemForStoring($accessory));
-        $accessory->unsetEventDispatcher();
+
+        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
+        // $accessory->unsetEventDispatcher();
         if ($accessory->save()) {
             $accessory->logCreate('Imported using CSV Importer');
             $this->log('Accessory ' . $this->item["name"] . ' was created');
