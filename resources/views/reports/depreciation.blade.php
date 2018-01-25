@@ -74,7 +74,7 @@
                   @endif
                 </td>
                 <td>
-                    @if ($asset->checkedOutToUser())
+                    @if (($asset->checkedOutToUser()) && ($asset->assigned))
                        {{ $asset->assigned->getFullNameAttribute() }}
                     @else
 
