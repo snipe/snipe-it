@@ -20,6 +20,7 @@
                 class="table table-striped snipe-table"
                 id="table"
                 data-url="{{ route('api.activity.index') }}"
+                data-sort-order="desc"
                 data-cookie="true"
                 data-cookie-id-table="activityReportTable">
                     <thead>
