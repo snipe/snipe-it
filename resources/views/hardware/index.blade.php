@@ -79,6 +79,8 @@
               class="table table-striped snipe-table"
               id="table"
               data-advanced-search="true"
+              data-sort-order="name"
+              data-sort-order="asc"
               data-show-export="true"
               data-cookie="true" 
               data-id-table="advancedTable"

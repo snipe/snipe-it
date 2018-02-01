@@ -19,6 +19,7 @@
                 data-toolbar="#toolbar"
                 class="table table-striped snipe-table"
                 id="table"
+                data-sort-order="desc"
                 data-url="{{ route('api.activity.index') }}"
                 data-cookie="true"
                 data-cookie-id-table="activityReportTable">
