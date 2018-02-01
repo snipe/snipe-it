@@ -1068,7 +1068,7 @@ class UsersController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
+            User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')->orderBy('created_at', 'DESC')->chunk(500, function($users) use($handle) {
                 $headers=[
                     // strtolower to prevent Excel from trying to open it as a SYLK file
                     strtolower(trans('general.id')),
@@ -1080,6 +1080,7 @@ class UsersController extends Controller
                     trans('admin/users/table.email'),
                     trans('admin/users/table.manager'),
                     trans('admin/users/table.location'),
+                    trans('general.department'),
                     trans('general.assets'),
                     trans('general.licenses'),
                     trans('general.accessories'),
@@ -1110,6 +1111,7 @@ class UsersController extends Controller
                         $user->email,
                         ($user->manager) ? $user->manager->present()->fullName() : '',
                         ($user->userloc) ? $user->userloc->name : '',
+                        ($user->department) ? $user->department->name : '',
                         $user->assets->count(),
                         $user->licenses->count(),
                         $user->accessories->count(),

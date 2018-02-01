@@ -199,11 +199,17 @@ class AssetsController extends Controller
                 break;
             default:
 
-                if ($settings->show_archived_in_list!='1') {
+                if ((!$request->has('status_id')) && ($settings->show_archived_in_list!='1')) {
                     // terrible workaround for complex-query Laravel bug in fulltext
                     $assets->join('status_labels AS status_alias',function ($join) {
                         $join->on('status_alias.id', "=", "assets.status_id")
                             ->where('status_alias.archived', '=', 0);
+                    });
+                    
+                // If there is a status ID, don't take show_archived_in_list into consideration
+                } else {
+                    $assets->join('status_labels AS status_alias',function ($join) {
+                        $join->on('status_alias.id', "=", "assets.status_id");
                     });
                 }
 
