@@ -1130,12 +1130,14 @@ class AssetsController extends Controller
                     if ($request->has('warranty_months')) {
                         $update_array['warranty_months'] =  $request->input('warranty_months');
                     }
+
+
                     if ($request->has('rtd_location_id')) {
                         $update_array['rtd_location_id'] = $request->input('rtd_location_id');
                         if (($request->has('update_real_loc'))
                             && (($request->input('update_real_loc')) == '1'))
                         {
-                            $update_array['location_id'] = $request->input('location_id');
+                            $update_array['location_id'] = $request->input('rtd_location_id');
                         }
                     }
                     
