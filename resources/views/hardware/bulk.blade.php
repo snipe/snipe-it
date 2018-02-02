@@ -61,9 +61,9 @@
             </div>
             <div class="col-sm-9">
               <div class="checkbox">
-                <label for="activated">
-                  {{ Form::radio('update_real_loc', '1', true) }} Update default location AND actual location <br>
-                  {{ Form::radio('update_real_loc', '0', Input::old('activated')) }} Only update default location<br>
+                <label for="update_real_loc">
+                  {{ Form::radio('update_real_loc', '1', Input::old('update_real_loc')) }} Update default location AND actual location <br>
+                  {{ Form::radio('update_real_loc', '0', true, Input::old('update_real_loc')) }} Only update default location<br>
 
                 </label>
               </div>
