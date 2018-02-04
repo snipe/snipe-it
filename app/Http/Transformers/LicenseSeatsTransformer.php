@@ -25,7 +25,6 @@ class LicenseSeatsTransformer
         $array = [
             'id' => (int) $seat->id,
             'license_id' => (int) $seat->license->id,
-            'license_name' => (string) $seat->license->name,
             'name' => 'Seat '.$seat_count,
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
