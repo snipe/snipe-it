@@ -7,6 +7,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\CustomField;
+use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Setting;
 use Carbon\Carbon;
@@ -221,11 +222,12 @@ class ReportsController extends Controller
     public function getDeprecationReport()
     {
 
+        $depreciations = Depreciation::get();
         // Grab all the assets
         $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'assetlog', 'company', 'model.category', 'model.depreciation')
                        ->orderBy('created_at', 'DESC')->get();
 
-        return view('reports/depreciation', compact('assets'));
+        return view('reports/depreciation', compact('assets'))->with('depreciations',$depreciations);
     }
 
     /**
@@ -624,7 +626,7 @@ class ReportsController extends Controller
                     }
 
                     if ($request->has('category')) {
-                        $row[] = ($asset->model->category) ? $asset->model->category->name : '';
+                        $row[] = (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '';
                     }
 
                     if ($request->has('manufacturer')) {

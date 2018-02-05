@@ -167,8 +167,8 @@
                 class="table table-striped snipe-table"
                 name="activityReport"
                 id="table"
-                data-sort-order="desc"
                 data-height="400"
+                data-sort-order="desc"
                 data-show-export="false"
                 data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
                 <thead>
@@ -236,7 +236,6 @@
                                 name="categorySummary"
                                 id="table"
                                 data-height="440"
-
                                 data-url="{{ route('api.categories.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
                             <thead>
                             <tr>

@@ -231,7 +231,9 @@ class Asset extends Depreciable
    */
     public function get_depreciation()
     {
-        return $this->model->depreciation;
+        if (($this->model) && ($this->model->depreciation)) {
+            return $this->model->depreciation;
+        }
     }
 
   /**
@@ -1160,6 +1162,18 @@ class Asset extends Depreciable
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations as asset_locations', 'asset_locations.id', '=', 'assets.location_id')->orderBy('asset_locations.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on default
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderRtdLocation($query, $order)
+    {
+        return $query->leftJoin('locations as rtd_asset_locations', 'rtd_asset_locations.id', '=', 'assets.rtd_location_id')->orderBy('rtd_asset_locations.name', $order);
     }
 
 

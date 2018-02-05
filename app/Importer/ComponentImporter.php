@@ -46,6 +46,7 @@ class ComponentImporter extends ItemImporter
         $this->log("No matching component, creating one");
         $component = new Component;
         $component->fill($this->sanitizeItemForStoring($component));
+        //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         $component->unsetEventDispatcher();
         if ($component->save()) {
             $component->logCreate('Imported using CSV Importer');
