@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=master)](https://travis-ci.org/snipe/snipe-it) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snipe/snipe-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Twitter Follow](https://img.shields.io/twitter/follow/snipeyhead.svg?style=social)](https://twitter.com/snipeyhead)  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://www.codacy.com/app/snipe/snipe-it?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=snipe/snipe-it&amp;utm_campaign=Badge_Grade)
 [![All Contributors](https://img.shields.io/badge/all_contributors-94-orange.svg?style=flat-square)](#contributors)
+[![Open Source Helpers](https://www.codetriage.com/snipe/snipe-it/badges/users.svg)](https://www.codetriage.com/snipe/snipe-it)
 
 
 ## Snipe-IT - Open Source Asset Management System
