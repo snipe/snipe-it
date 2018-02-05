@@ -28,24 +28,26 @@ View Assets for  {{ $user->present()->fullName() }}
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th class="col-md-4">{{ trans('admin/hardware/table.asset_model') }}</th>
+                  <th class="col-md-3">{{ trans('general.category') }}</th>
                   <th class="col-md-2">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                  <th class="col-md-3">{{ trans('admin/hardware/table.serial') }}</th>
                   <th class="col-md-3">{{ trans('general.name') }}</th>
+                  <th class="col-md-4">{{ trans('admin/hardware/table.asset_model') }}</th>
+                  <th class="col-md-3">{{ trans('admin/hardware/table.serial') }}</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($user->assets as $asset)
                 <tr>
+                  <td>{{ $asset->model->category->name }}</td>
+                  <td>{{ $asset->asset_tag }}</td>
+                  <td>{{ $asset->name }}</td>
                   <td>
                     @if ($asset->physical=='1')
-                    {{ $asset->model->name }}
+                      {{ $asset->model->name }}
                     @endif
                   </td>
-                  <td>{{ $asset->asset_tag }}</td>
                   <td>{{ $asset->serial }}</td>
-                  <td>{{ $asset->name }}</td>
                   <td>
                     @if (($asset->image) && ($asset->image!=''))
                       <img src="{{ url('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50">
