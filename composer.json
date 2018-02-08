@@ -30,7 +30,7 @@
     "predis/predis": "^1.1",
     "rollbar/rollbar-laravel": "^2.2",
     "schuppo/password-strength": "~1.5",
-    "spatie/laravel-backup": "^3.0.0",
+    "spatie/laravel-backup": "3.11.0",
     "tecnickcom/tc-lib-barcode": "^1.15",
     "tightenco/ziggy": "^0.4.1",
     "unicodeveloper/laravel-password": "^1.0",
