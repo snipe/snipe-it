@@ -299,9 +299,12 @@ class UsersController extends Controller
      * @param $userId
      * @return string JSON
      */
-    public function license_seats($id)
+    public function licenseSeats($id)
     {
         $this->authorize('view', User::class);
+        $user = User::findOrFail($id);
+        $this->authorize('view', $user);
+
         $seats = LicenseSeat::where('assigned_to', '=', $id)->with('license')->get();
         return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $seats->count());
     }

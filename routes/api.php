@@ -673,7 +673,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         Route::get('{user}/license_seats',
             [
                 'as' => 'api.users.licenseseatslist',
-                'uses' => 'UsersController@license_seats'
+                'uses' => 'UsersController@licenseSeats'
             ]
         );
 
