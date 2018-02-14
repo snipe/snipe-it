@@ -80,6 +80,7 @@
     'email_domain_help'		=> 'This is used to generate email addresses when importing',
     'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
     'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
+    'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith@example.com)',
     'first'					=> 'First',
     'first_name'			=> 'First Name',
     'first_name_format'		=> 'First Name (jane@example.com)',
