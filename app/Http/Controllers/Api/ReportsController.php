@@ -42,7 +42,11 @@ class ReportsController extends Controller
 
         $allowed_columns = [
             'id',
-            'created_at'
+            'created_at',
+            'target_id',
+            'user_id',
+            'action_type',
+            'note'
         ];
         
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';

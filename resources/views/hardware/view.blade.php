@@ -31,6 +31,7 @@
 
 {{-- Page content --}}
 @section('content')
+
 <div class="row">
   
   @if ($asset->deleted_at!='')
@@ -589,7 +590,7 @@
                         'class' => 'form-inline',
                          'id' => 'bulkForm']) }}
               <div id="toolbar">
-                <select name="bulk_actions" class="form-control select2" style="300px;">
+                <select name="bulk_actions" class="form-control select2" style="width: 150px;">
                   <option value="edit">Edit</option>
                   <option value="delete">Delete</option>
                   <option value="labels">Generate Labels</option>
@@ -599,20 +600,24 @@
 
               <!-- checked out assets table -->
               <div class="table-responsive">
+
                 <table
-                        name="assetAssetsTable"
-                        data-toolbar="#toolbar"
                         class="table table-striped snipe-table"
-                        id="assetAssetsTable"
+                        data-toolbar="#toolbar"
+                        data-show-export="true"
+                        data-show-refresh="true"
+                        data-export-options='{
+                           "fileName": "{{ str_slug($asset->asset_tag) }}-assets-export",
+                           "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                         }'
                         data-search="false"
                         data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
-                        data-show-export="true"
-                        data-cookie="true"
                         data-show-footer="true"
                         data-cookie-id-table="assetAssetsTable"
                         data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
-
                 </table>
+
+
                 {{ Form::close() }}
               </div>
             </div><!-- /col -->
@@ -624,78 +629,75 @@
           <div class="row">
             <div class="col-md-12">
                 @can('update', \App\Models\Asset::class)
-                  <h6>{{ trans('general.asset_maintenances') }}
-                    [ <a href="{{ route('maintenances.create', ['asset_id'=>$asset->id]) }}">{{ trans('button.add') }}</a> ]
-                  </h6>
+                <div id="maintenance-toolbar">
+                  <a href="{{ route('maintenances.create', ['asset_id' => $asset->id]) }}" class="btn btn-primary">Add Maintenance</a>
+                </div>
                 @endcan
 
               <!-- Asset Maintenance table -->
-              @if (count($asset->assetmaintenances) > 0)
-                <table class="table table-striped">
+                  <table
+                          data-advanced-search="true"
+                          data-click-to-select="true"
+                          data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                          data-cookie-expire="2y"
+                          data-cookie-id-table="{{ str_slug(Input::get('status')) }}assetsListingTable"
+                          data-cookie="true"
+                          data-id-table="assetsListingTable"
+                          data-pagination="true"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-footer="true"
+                          data-show-refresh="true"
+                          data-sort-order="name"
+                          data-toolbar="#toolbar"
+                          id="assetsListingTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{ route('api.assets.index',
+                    array('status' => e(Input::get('status')),
+                    'order_number'=>e(Input::get('order_number')),
+                    'company_id'=>e(Input::get('company_id')),
+                    'status_id'=>e(Input::get('status_id')))) }}"
+                          data-export-options='{
+                "fileName": "export{{ (Input::has('status')) ? '-'.str_slug(Input::get('status')) : '' }}-assets",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
+                  </table>
+
+
+                <table
+                        class="table table-striped snipe-table"
+                        id="assetMaintenances"
+                        data-pagination="true"
+                        data-toolbar="#maintenance-toolbar"
+                        data-show-columns="true"
+                        data-show-refresh="true"
+                        data-show-export="true"
+                        data-export-options='{
+                           "fileName": "export-{{ $asset->asset_tag }}-maintenances",
+                           "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                         }'
+                        data-url="{{ route('api.maintenances.index',
+                        array('asset_id' => $asset->id)) }}"
+                        data-cookie-id-table="asset-maintenances">
                   <thead>
                     <tr>
-                      <th>{{ trans('general.supplier') }}</th>
-                      <th>{{ trans('admin/asset_maintenances/form.title') }}</th>
-                      <th>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-                      <th>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-                      <th>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-                      <th>{{ trans('admin/asset_maintenances/form.notes') }}</th>
+                      <th data-field="supplier" data-formatter="suppliersLinkObjFormatter">{{ trans('general.supplier') }}</th>
+                      <th data-visible="true" data-field="title">{{ trans('admin/asset_maintenances/form.title') }}</th>
+                      <th data-visible="true" data-field="asset_maintenance_type">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
+                      <th data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
+                      <th data-visible="true" data-field="completion_date" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
+                      <th data-visible="true" data-field="notes">{{ trans('admin/asset_maintenances/form.notes') }}</th>
                       <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
-                      <th>{{ trans('admin/asset_maintenances/form.cost') }}</th>
-                      <th>{{ trans('general.admin') }}</th>
-
+                      <th data-visible="true" data-field="cost">{{ trans('admin/asset_maintenances/form.cost') }}</th>
+                      <th data-visible="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                       @can('update', \App\Models\Asset::class)
-                      <th>{{ trans('table.actions') }}</th>
+                      <th data-visible="true" data-formatter="maintenanceActions">{{ trans('table.actions') }}</th>
                       @endcan
                     </tr>
                   </thead>
-                  <tbody>
-                    <?php $totalCost = 0; ?>
-
-                    @foreach ($asset->assetmaintenances as $assetMaintenance)
-                      @if (is_null($assetMaintenance->deleted_at))
-                        <tr>
-                          <td>
-                            @if ($assetMaintenance->supplier)
-                              <a href="{{ route('suppliers.show', $assetMaintenance->supplier_id) }}">{{ $assetMaintenance->supplier->name }}</a>
-                            @else
-                                (deleted supplier)
-                            @endif
-                          </td>
-                          <td>{{ $assetMaintenance->title }}</td>
-                          <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
-                          <td>{{ $assetMaintenance->start_date }}</td>
-                          <td>{{ $assetMaintenance->completion_date }}</td>
-                          <td>{{ $assetMaintenance->notes }}</td>
-                          <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
-                          <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
-                          <td>
-                            @if ($assetMaintenance->admin)
-                              <a href="{{ route('users.show', $assetMaintenance->admin->id) }}">{{ $assetMaintenance->admin->present()->fullName() }}</a>
-                            @endif
-                          </td>
-                            <?php $totalCost += $assetMaintenance->cost; ?>
-                            @can('update', \App\Models\Asset::class)
-                              <td>
-                                <a href="{{ route('maintenances.edit', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-                              </td>
-                            @endcan
-                        </tr>
-                      @endif
-                    @endforeach
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="8" class="text-right">{{ is_numeric($totalCost) ? $use_currency.number_format($totalCost, 2) : $totalCost }}</td>
-                    </tr>
-                  </tfoot>
                 </table>
-              @else
-                <div class="alert alert-info alert-block">
-                  <i class="fa fa-info-circle"></i>
-                  {{ trans('general.no_results') }}
-                </div>
-              @endif
             </div> <!-- /.col-md-12 -->
           </div> <!-- /.row -->
         </div> <!-- /.tab-pane maintenances -->
@@ -705,18 +707,22 @@
           <div class="row">
             <div class="col-md-12">
               <table
-                      name="asset-history"
-                      id="asset-history"
                       class="table table-striped snipe-table"
-                      data-cookie="true"
-                      data-click-to-select="true"
-                      data-cookie-id-table="asset-history"
-                      data-sort-order="desc"
+                      id="assetHistory"
+                      data-pagination="true"
                       data-show-columns="true"
-                      data-search="true"
                       data-show-refresh="true"
-                      data-id-table="asset-history"
-                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}">
+                      data-page-size="20"
+                      data-show-export="true"
+                      data-export-options='{
+                         "fileName": "export{{ (Input::has('status')) ? '-'.str_slug(Input::get('status')) : '' }}-assets",
+                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                       }'
+
+                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
+                      data-cookie-id-table="asset-history">
+
+
                 <thead>
                 <tr>
                   <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
