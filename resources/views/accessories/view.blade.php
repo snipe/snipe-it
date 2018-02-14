@@ -53,21 +53,32 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table table-responsive">
-          <table
-            name="accessory_users"
-            class="table table-striped snipe-table"
-            id="table"
-            data-url="{{ route('api.accessories.checkedout', $accessory->id) }}"
-            data-cookie="true"
-            data-click-to-select="true"
-            data-cookie-id-table="accessoryUsersTable">
-            <thead>
-              <tr>
-                <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
-              </tr>
-            </thead>
-          </table>
+
+            <table
+                    data-cookie-id-table="usersTable"
+                    data-pagination="true"
+                    data-id-table="usersTable"
+                    data-search="true"
+                    data-side-pagination="server"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    id="usersTable"
+                    class="table table-striped snipe-table"
+                    data-url="{{ route('api.accessories.checkedout', $accessory->id) }}"
+                    data-export-options='{
+                    "fileName": "export-accessories-{{ str_slug($accessory->name) }}-users-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'>
+                <thead>
+                <tr>
+                    <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
+                </tr>
+                </thead>
+
+            </table>
         </div>
       </div>
     </div>
@@ -90,9 +101,5 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', [
-    'exportFile' => 'accessory' .
-    $accessory->name . '-export',
-    'search' => 'false'
-    ])
+@include ('partials.bootstrap-table')
 @stop

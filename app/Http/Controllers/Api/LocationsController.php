@@ -24,7 +24,7 @@ class LocationsController extends Controller
         $allowed_columns = [
                 'id','name','address','address2','city','state','country','zip','created_at',
                 'updated_at','parent_id', 'manager_id','image',
-                'assigned_assets_count','users_count','assets_count'];
+                'assigned_assets_count','users_count','assets_count','currency'];
 
         $locations = Location::with('parent', 'manager', 'childLocations')->select([
             'locations.id',
