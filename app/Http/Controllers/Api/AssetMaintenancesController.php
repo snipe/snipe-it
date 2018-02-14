@@ -40,6 +40,10 @@ class AssetMaintenancesController extends Controller
             $maintenances = $maintenances->TextSearch(e($request->input('search')));
         }
 
+        if ($request->has('asset_id')) {
+            $maintenances->where('asset_id', '=', $request->input('asset_id'));
+        }
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
