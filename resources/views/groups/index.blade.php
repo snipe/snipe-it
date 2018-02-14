@@ -19,20 +19,30 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-          <table
-          name="groups"
-          class="table table-striped snipe-table"
-          id="table"
-          data-toggle="table"
-          data-url="{{ route('api.groups.index') }}"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="userGroupDisplay-{{ config('version.hash_version') }}">
+
+            <table
+                data-cookie-id-table="groupsTable"
+                data-pagination="true"
+                data-search="true"
+                data-side-pagination="server"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                id="groupsTable"
+                class="table table-striped snipe-table"
+                data-url="{{ route('api.groups.index') }}"
+                data-export-options='{
+        "fileName": "export-groups-{{ date('Y-m-d') }}",
+            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+            }'>
+
             <thead>
               <tr>
                <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="name" data-formatter="groupsAdminLinkFormatter" data-visible="true">{{ trans('admin/groups/table.name') }}</th>
-               <th data-switchable="true" data-sortable="false" data-field="users_count" data-visible="true">{{ trans('admin/groups/table.users') }}</th>
+               <th data-switchable="true" data-sortable="true" data-field="users_count" data-visible="true">{{ trans('admin/groups/table.users') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true" data-formatter="dateDisplayFormatter">{{ trans('general.created_at') }}</th>
                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"   data-formatter="groupsActionsFormatter">{{ trans('table.actions') }}</th>
               </tr>
