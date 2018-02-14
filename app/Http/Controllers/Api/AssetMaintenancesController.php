@@ -47,7 +47,17 @@ class AssetMaintenancesController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
-        $allowed_columns = ['id','title','asset_maintenance_time','asset_maintenance_type','cost','start_date','completion_date','notes','user_id'];
+        $allowed_columns = [
+                                'id',
+                                'title',
+                                'asset_maintenance_time',
+                                'asset_maintenance_type',
+                                'cost',
+                                'start_date',
+                                'completion_date',
+                                'notes',
+                                'user_id'
+                            ];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
