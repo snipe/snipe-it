@@ -635,41 +635,13 @@
                 @endcan
 
               <!-- Asset Maintenance table -->
-                  <table
-                          data-advanced-search="true"
-                          data-click-to-select="true"
-                          data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
-                          data-cookie-expire="2y"
-                          data-cookie-id-table="{{ str_slug(Input::get('status')) }}assetsListingTable"
-                          data-cookie="true"
-                          data-id-table="assetsListingTable"
-                          data-pagination="true"
-                          data-search="true"
-                          data-side-pagination="server"
-                          data-show-columns="true"
-                          data-show-export="true"
-                          data-show-footer="true"
-                          data-show-refresh="true"
-                          data-sort-order="name"
-                          data-toolbar="#toolbar"
-                          id="assetsListingTable"
-                          class="table table-striped snipe-table"
-                          data-url="{{ route('api.assets.index',
-                    array('status' => e(Input::get('status')),
-                    'order_number'=>e(Input::get('order_number')),
-                    'company_id'=>e(Input::get('company_id')),
-                    'status_id'=>e(Input::get('status_id')))) }}"
-                          data-export-options='{
-                "fileName": "export{{ (Input::has('status')) ? '-'.str_slug(Input::get('status')) : '' }}-assets",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                }'>
-                  </table>
-
-
                 <table
                         class="table table-striped snipe-table"
-                        id="assetMaintenances"
+                        id="assetMaintenancesTable"
                         data-pagination="true"
+                        data-id-table="assetMaintenancesTable"
+                        data-search="true"
+                        data-side-pagination="server"
                         data-toolbar="#maintenance-toolbar"
                         data-show-columns="true"
                         data-show-refresh="true"
@@ -680,7 +652,7 @@
                          }'
                         data-url="{{ route('api.maintenances.index',
                         array('asset_id' => $asset->id)) }}"
-                        data-cookie-id-table="asset-maintenances">
+                        data-cookie-id-table="assetMaintenancesTable">
                   <thead>
                     <tr>
                       <th data-field="supplier" data-formatter="suppliersLinkObjFormatter">{{ trans('general.supplier') }}</th>

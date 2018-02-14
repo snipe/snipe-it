@@ -485,11 +485,14 @@
     }
 
     function sumFormatter(data) {
-        var field = this.field;
-        var total_sum = data.reduce(function(sum, row) {
-            return (sum) + (parseFloat(row[field]) || 0);
-        }, 0);
-        return total_sum.toFixed(2);
+        if (Array.isArray(data)) {
+            var field = this.field;
+            var total_sum = data.reduce(function(sum, row) {
+                return (sum) + (parseFloat(row[field]) || 0);
+            }, 0);
+            return total_sum.toFixed(2);
+        }
+        return 'not an array';
     }
 
 

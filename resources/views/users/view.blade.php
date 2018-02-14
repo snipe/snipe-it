@@ -15,7 +15,7 @@
       <ul class="nav nav-tabs hidden-print">
 
         <li class="active">
-          <a href="#info_tab" data-toggle="tab">
+          <a href="#details" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-info-circle"></i>
             </span>
@@ -101,7 +101,7 @@
       </ul>
 
       <div class="tab-content">
-        <div class="tab-pane active" id="info_tab">
+        <div class="tab-pane active" id="details">
           <div class="row">
             @if ($user->deleted_at!='')
               <div class="col-md-12">
@@ -114,7 +114,7 @@
                 </div>
               </div>
             @endif
-            <div class="col-md-1">
+            <div class="col-md-2 text-center">
               @if ($user->avatar)
                 <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print">
               @else
@@ -470,11 +470,24 @@
           <div class="table-responsive">
 
             <table
-                    class="table table-striped snipe-table"
-                    name="userActivityReport"
-                    id="table4
+                    data-click-to-select="true"
+                    data-cookie-id-table="usersHistoryTable"
+                    data-pagination="true"
+                    data-id-table="usersHistoryTable"
+                    data-search="true"
+                    data-side-pagination="server"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-refresh="true"
                     data-sort-order="desc"
-                    data-url="{{ route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'user']) }}">
+                    data-toolbar="#toolbar"
+                    id="usersHistoryTable"
+                    class="table table-striped snipe-table"
+                    data-url="{{ route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'user']) }}"
+                    data-export-options='{
+                "fileName": "export-{{ str_slug($user->present()->fullName ) }}-history-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
               <thead>
               <tr>
                 <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>

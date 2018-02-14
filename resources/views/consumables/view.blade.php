@@ -31,14 +31,26 @@
         <div class="row">
           <div class="col-md-12">
             <div class="table table-responsive">
+
               <table
-                name="consumable_users"
-                class="table table-striped snipe-table"
-                id="table"
-                data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
-                data-cookie="true"
-                data-click-to-select="true"
-                data-cookie-id-table="consumableDetailTable-{{ config('version.hash_version') }}">
+                      data-cookie-id-table="consumablesCheckedoutTable"
+                      data-pagination="true"
+                      data-id-table="consumablesCheckedoutTable"
+                      data-search="true"
+                      data-side-pagination="server"
+                      data-show-columns="true"
+                      data-show-export="true"
+                      data-show-footer="true"
+                      data-show-refresh="true"
+                      data-sort-order="asc"
+                      data-sort-name="name"
+                      id="consumablesCheckedoutTable"
+                      class="table table-striped snipe-table"
+                      data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
+                      data-export-options='{
+                "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
                 <thead>
                   <tr>
                     <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
