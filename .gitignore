@@ -1,6 +1,6 @@
 .couscous
 .DS_Store
-.env*
+.env
 .idea
 /bin/
 /bootstrap/compiled.php
