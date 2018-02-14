@@ -46,7 +46,7 @@ class ReportsController extends Controller
         ];
         
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $order = ($request->input('order') == 'asc') ? 'asc' : 'desc';
         $offset = request('offset', 0);
         $limit = request('limit', 50);
         $total = $actionlogs->count();

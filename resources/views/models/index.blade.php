@@ -14,7 +14,9 @@
 
 {{-- Page title --}}
 @section('header_right')
-  <a href="{{ route('models.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  @can('create', \App\Models\AssetModel::class)
+    <a href="{{ route('models.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  @endcan
 
   @if (Input::get('status')=='deleted')
     <a class="btn btn-default pull-right" href="{{ route('models.index') }}" style="margin-right: 5px;">{{ trans('admin/models/general.view_models') }}</a>
@@ -69,7 +71,7 @@
               <th data-sortable="true" data-field="image" data-formatter="imageFormatter" data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
               <th data-sortable="true" data-field="manufacturer" data-formatter="manufacturersLinkObjFormatter">{{ trans('general.manufacturer') }}</th>
               <th data-sortable="true" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
-              <th data-sortable="false" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
+              <th data-sortable="true" data-field="assets_count">{{ trans('admin/models/table.numassets') }}</th>
               <th data-sortable="false" data-field="depreciation" data-formatter="depreciationsLinkObjFormatter">{{ trans('general.depreciation') }}</th>
               <th data-sortable="false" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
               <th data-sortable="true" data-field="eol">{{ trans('general.eol') }}</th>

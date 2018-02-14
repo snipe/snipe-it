@@ -85,6 +85,7 @@
     'file_name'				=> 'Fil',
     'file_uploads'			=> 'Filuppladdning',
     'generate'				=> 'Generera',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Grupper',
     'gravatar_email'        => 'Gravatar e-postadress',
     'history'  			    => 'Historik',

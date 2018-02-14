@@ -69,7 +69,8 @@ class ManufacturerPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/manufacturers/table.support_phone'),
-                "visible" => true
+                "visible" => true,
+                "formatter" => "phoneFormatter"
             ],
 
             [
@@ -85,7 +86,7 @@ class ManufacturerPresenter extends Presenter
             [
                 "field" => "assets_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "switchable" => true,
                 "title" => ' <span class="hidden-md hidden-lg">Assets</span>'
                     .'<span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>',
@@ -94,7 +95,7 @@ class ManufacturerPresenter extends Presenter
             [
                 "field" => "licenses_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "switchable" => true,
                 "title" => ' <span class="hidden-md hidden-lg">Licenses</span>'
                     .'<span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>',
@@ -103,7 +104,7 @@ class ManufacturerPresenter extends Presenter
             [
                 "field" => "consumables_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "switchable" => true,
                 "title" => ' <span class="hidden-md hidden-lg">Consumables</span>'
                     .'<span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>',
@@ -112,7 +113,7 @@ class ManufacturerPresenter extends Presenter
             [
                 "field" => "accessories_count",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "switchable" => true,
                 "title" => ' <span class="hidden-md hidden-lg">Accessories</span>'
                     .'<span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>',

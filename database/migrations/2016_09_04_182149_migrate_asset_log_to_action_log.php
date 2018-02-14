@@ -57,7 +57,6 @@ class MigrateAssetLogToActionLog extends Migration
             $a->deleted_at          = $log->deleted_at;
             $a->note                = $log->note;
             $a->expected_checkin    = $log->expected_checkin;
-            $a->thread_id           = $log->thread_id;
             $a->accepted_id         = $log->accepted_id;
             $a->filename            = $log->filename;
 

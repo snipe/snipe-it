@@ -22,6 +22,9 @@ class ItemImporter extends Importer
 
     protected function handle($row)
     {
+        // Need to reset this between iterations or we'll have stale data.
+        $this->item = [];
+
         $item_category = $this->findCsvMatch($row, "category");
         if ($this->shouldUpdateField($item_category)) {
             $this->item["category_id"] = $this->createOrFetchCategory($item_category);

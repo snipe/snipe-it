@@ -141,6 +141,25 @@
                     <td>{{ $user->username }}</td>
                   </tr>
 
+                    <tr>
+                      <td>{{ trans('general.groups') }}</td>
+                      <td>
+                        @if ($user->groups->count() > 0)
+                            @foreach ($user->groups as $group)
+
+                              @can('superadmin')
+                                  <a href="{{ route('groups.show', $group->id) }}" class="label label-default">{{ $group->name }}</a>
+                            @else
+                              {{ $group->name }}
+                            @endcan
+
+                            @endforeach
+                        @else
+                          --
+                        @endif
+
+                      </td>
+                    </tr>
 
 
                   @if ($user->jobtitle)
@@ -177,7 +196,7 @@
                   @if ($user->phone)
                   <tr>
                     <td>{{ trans('admin/users/table.phone') }}</td>
-                    <td>{{ $user->phone }}</td>
+                    <td><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></td>
                   </tr>
                   @endif
 
@@ -222,7 +241,7 @@
                   <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">Print All Assigned</a>
+                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
 
                 @can('delete', $user)
@@ -459,7 +478,7 @@
               <thead>
               <tr>
                 <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
-                <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
                 <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                 <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
                 <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>

@@ -13,6 +13,9 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
+
+
+          @if (($depreciations) && ($depreciations->count() > 0))
         <div class="table-responsive">
           <table
           class="table table-striped table-bordered table-compact"
@@ -74,13 +77,14 @@
                   @endif
                 </td>
                 <td>
-                  @if ($asset->assignedTo)
-                    @if ($asset->assignedTo->deleted_at!='')
-                    <del>{{ $asset->assignedTo->present()->name() }}</del>
+                    @if (($asset->checkedOutToUser()) && ($asset->assigned))
+                       {{ $asset->assigned->getFullNameAttribute() }}
                     @else
-                      {!!  $asset->assignedTo->present()->nameUrl()  !!}
+
+                        @if ($asset->assigned)
+                            {{ $asset->assigned->name }}
+                        @endif
                     @endif
-                  @endif
                 </td>
                 <td>
                   @if ($asset->location)
@@ -98,7 +102,7 @@
 
                 @if ($asset->purchase_cost > 0)
                   <td class="align-right">
-                    @if ($asset->location )
+                    @if ($asset->location && $asset->location->currency)
                     {{ $asset->location->currency }}
                     @else
                     {{ $snipeSettings->default_currency }}
@@ -106,7 +110,7 @@
                     {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
                   </td>
                   <td class="align-right">
-                    @if ($asset->location )
+                    @if ($asset->location && $asset->location->currency)
                     {{ $asset->location->currency }}
                     @else
                     {{ $snipeSettings->default_currency }}
@@ -115,7 +119,7 @@
                     {{ \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue()) }}
                   </td>
                   <td class="align-right">
-                    @if ($asset->location)
+                    @if ($asset->location && $asset->location->currency)
                     {{ $asset->location->currency }}
                     @else
                     {{ $snipeSettings->default_currency }}
@@ -133,6 +137,16 @@
             </tbody>
           </table>
         </div> <!-- /.table-responsive-->
+              @else
+              <div class="col-md-12">
+                  <div class="alert alert-warning fade in">
+                      <i class="fa fa-warning faa-pulse animated"></i>
+                      <strong>Warning: </strong>
+                      You do not currently have any depreciations set up.
+                      Please set up at least one depreciation to view the depreciation report.
+                  </div>
+              </div>
+          @endif
       </div> <!-- /.box-body-->
     </div> <!--/box.box-default-->
   </div> <!-- /.col-md-12-->

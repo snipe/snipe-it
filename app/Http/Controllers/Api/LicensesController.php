@@ -25,9 +25,6 @@ class LicensesController extends Controller
         $this->authorize('view', License::class);
         $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier')->withCount('freeSeats'));
 
-        if ($request->has('search')) {
-            $licenses = $licenses->TextSearch($request->input('search'));
-        }
 
         if ($request->has('company_id')) {
             $licenses->where('company_id','=',$request->input('company_id'));
@@ -73,6 +70,12 @@ class LicensesController extends Controller
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
+
+        if ($request->has('search')) {
+            $licenses = $licenses->TextSearch($request->input('search'));
+        }
+
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
@@ -94,7 +97,8 @@ class LicensesController extends Controller
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
         }
-        
+
+
 
         $total = $licenses->count();
 

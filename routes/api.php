@@ -200,6 +200,18 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Fields API ---*/
 
+    Route::resource('fields', 'CustomFieldsController', [
+        'names' => [
+            'index' => 'api.customfields.index',
+            'show' => 'api.customfields.show',
+            'store' => 'api.customfields.store',
+            'update' => 'api.customfields.update',
+            'destroy' => 'api.customfields.destroy'
+        ],
+        'except' => [ 'create', 'edit' ],
+        'parameters' => [ 'field' => 'field_id' ]
+    ]);
+
     Route::group(['prefix' => 'fields'], function () {
         Route::post('fieldsets/{id}/order',
             [
@@ -207,17 +219,31 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'CustomFieldsController@postReorder'
             ]
         );
-
-        Route::get('/',
+        Route::post('{field}/associate',
             [
-                'as' => 'api.customfields.index',
-                'uses' => 'CustomFieldsController@index'
+                'as' => 'api.customfields.associate',
+                'uses' => 'CustomFieldsController@associate'
+            ]
+        );
+        Route::post('{field}/disassociate',
+            [
+                'as' => 'api.customfields.disassociate',
+                'uses' => 'CustomFieldsController@disassociate'
             ]
         );
     }); // Fields group
 
 
     /*--- Fieldsets API ---*/
+
+    Route::group(['prefix' => 'fieldsets'], function () {
+        Route::get('{fieldset}/fields',
+            [
+                'as' => 'api.fieldsets.fields',
+                'uses' => 'CustomFieldsetsController@fields'
+            ]
+        );
+    });
 
     Route::resource('fieldsets', 'CustomFieldsetsController',
         [
@@ -233,7 +259,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['fieldset' => 'fieldset_id']
         ]
     ); // Custom fieldset resource
-
 
 
     /*--- Groups API ---*/

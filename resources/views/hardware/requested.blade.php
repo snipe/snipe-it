@@ -86,9 +86,13 @@
                             @endif
                             </td>
                             <td>
+                                @if ($request->requestingUser())
                                 <a href="{{ url('/') }}/users/{{ $request->requestingUser()->id }}">
                                     {{ $request->requestingUser()->present()->fullName() }}
                                 </a>
+                               @else
+                                    (deleted user)
+                                @endif
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
                             <td>

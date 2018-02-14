@@ -85,6 +85,7 @@
     'file_name'				=> 'ไฟล์',
     'file_uploads'			=> 'อัปโหลดไฟล์',
     'generate'				=> 'สร้าง',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'กลุ่ม',
     'gravatar_email'        => 'อีเมลแอดเดรส Gravatar',
     'history'  			    => 'ประวัติศาสตร์',

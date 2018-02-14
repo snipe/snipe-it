@@ -10,7 +10,7 @@ return array(
     'create'  							=> 'Zubehör anlegen',
     'edit'  							=> 'Zubehör bearbeiten',
     'eula_text'							=> 'Kategorie EULA',
-    'eula_text_help'					=> 'Dieses Feld erlaubt Ihnen, die EULA an Ihren Bedürfnisse je nach Asset-Typ anzupassen. Wenn Sie nur eine EULA für alle Assets haben, aktivieren Sie die Checkbox unterhalb, um die Standard EULA zu verwenden.',
+    'eula_text_help'					=> 'Dieses Feld erlaubt Ihnen, die EULA je nach Asset-Typ an Ihre Bedürfnisse anzupassen. Wenn Sie nur eine EULA für alle Assets haben, aktivieren Sie die Checkbox unterhalb, um die Standard-EULA zu verwenden.',
     'require_acceptance'				=> 'Benutzer müssen die Annahme von Assets in dieser Kategorie bestätigen.',
     'no_default_eula'					=> 'Keine Standard-EULA gefunden. Bitte fügen Sie eine EULA in den Einstellungen hinzu.',
     'total'  							=> 'Gesamt',

@@ -85,6 +85,7 @@
     'file_name'				=> 'lêer',
     'file_uploads'			=> 'Lêeroplaaie',
     'generate'				=> 'genereer',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'groepe',
     'gravatar_email'        => 'Gravatar e-pos adres',
     'history'  			    => 'Geskiedenis',

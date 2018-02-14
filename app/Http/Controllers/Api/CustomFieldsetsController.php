@@ -126,7 +126,7 @@ class CustomFieldsetsController extends Controller
     {
         $this->authorize('delete', CustomFieldset::class);
         $fieldset = CustomFieldset::findOrFail($id);
-        
+
         $modelsCount = $fieldset->models->count();
         $fieldsCount = $fieldset->fields->count();
 
@@ -141,7 +141,23 @@ class CustomFieldsetsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Unspecified error'));
 
 
-        
+
+    }
+
+    /**
+     * Return JSON containing a list of fields belonging to a fieldset.
+     *
+     * @author [V. Cordes] [<volker@fdatek.de>]
+     * @since [v4.1.10]
+     * @param $fieldsetId
+     * @return string JSON
+     */
+    public function fields($id)
+    {
+        $this->authorize('view', CustomFieldset::class);
+        $set = CustomFieldset::findOrFail($id);
+        $fields = $set->fields->get();
+        return (new CustomFieldsTransformer)->transformCustomFields($fields, $fields->count());
     }
 
 }

@@ -85,6 +85,7 @@
     'file_name'				=> 'Comhad',
     'file_uploads'			=> 'Uaslódáil comhad',
     'generate'				=> 'Gin',
+     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'groups'				=> 'Grúpaí',
     'gravatar_email'        => 'Seoladh Ríomhphoist Gravatar',
     'history'  			    => 'Stair',

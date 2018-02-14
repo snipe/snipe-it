@@ -61,6 +61,8 @@
               name="users"
               data-toolbar="#toolbar"
               data-toggle="table"
+              data-sort-order="name"
+              data-sort-order="asc"
               class="table table-striped snipe-table"
               id="table"
               data-url="{{ route('api.users.index',

@@ -575,6 +575,7 @@ class AssetsController extends Controller
 
             $data['log_id'] = $logaction->id;
             $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
+            $data['last_name'] = get_class($target) == User::class ? $target->last_name : '';
             $data['item_name'] = $asset->present()->name();
             $data['checkin_date'] = $logaction->created_at;
             $data['item_tag'] = $asset->asset_tag;
@@ -1088,7 +1089,7 @@ class AssetsController extends Controller
         
         \Log::debug($request->input('ids'));
         
-        if (($request->has('ids')) && (count($request->input('ids') > 0))) {
+        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
             $assets = $request->input('ids');
             if (($request->has('purchase_date'))
                 ||  ($request->has('purchase_cost'))
@@ -1129,9 +1130,17 @@ class AssetsController extends Controller
                     if ($request->has('warranty_months')) {
                         $update_array['warranty_months'] =  $request->input('warranty_months');
                     }
+
+
                     if ($request->has('rtd_location_id')) {
                         $update_array['rtd_location_id'] = $request->input('rtd_location_id');
+                        if (($request->has('update_real_loc'))
+                            && (($request->input('update_real_loc')) == '1'))
+                        {
+                            $update_array['location_id'] = $request->input('rtd_location_id');
+                        }
                     }
+                    
                     if ($request->has('status_id')) {
                         $update_array['status_id'] = $request->input('status_id');
                     }
@@ -1198,9 +1207,14 @@ class AssetsController extends Controller
         $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
 
+        if (!$user) {
+            return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.user_does_not_exist'));
+        }
+
         if (!is_array(Input::get('selected_assets'))) {
             return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
         }
+
         $asset_ids = array_filter(Input::get('selected_assets'));
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
@@ -1215,6 +1229,7 @@ class AssetsController extends Controller
             $expected_checkin = '';
         }
 
+
         $errors = [];
         DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
           
@@ -1222,6 +1237,14 @@ class AssetsController extends Controller
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);
                 $error = $asset->checkOut($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+
+                if ($user->location_id!='') {
+                    $asset->location_id = $user->location_id;
+                    $asset->unsetEventDispatcher();
+                    $asset->save();
+
+                }
+
 
                 if ($error) {
                     array_merge_recursive($errors, $asset->getErrors()->toArray());

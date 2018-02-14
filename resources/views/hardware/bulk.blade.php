@@ -54,8 +54,25 @@
           <!-- Default Location -->
         @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
 
+        <!-- Update actual location  -->
+          <div class="form-group">
+            <div class="col-sm-3 control-label">
 
-        <!-- Purchase Cost -->
+            </div>
+            <div class="col-sm-9">
+              <div class="checkbox">
+                <label for="update_real_loc">
+                  {{ Form::radio('update_real_loc', '1', Input::old('update_real_loc')) }} Update default location AND actual location <br>
+                  {{ Form::radio('update_real_loc', '0', true, Input::old('update_real_loc')) }} Only update default location<br>
+
+                </label>
+              </div>
+            </div>
+          </div> <!--/form-group-->
+
+
+
+          <!-- Purchase Cost -->
           <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
             <label for="purchase_cost" class="col-md-3 control-label">
               {{ trans('admin/hardware/form.cost') }}

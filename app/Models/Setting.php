@@ -79,13 +79,27 @@ class Setting extends Model
 
     public static function getDefaultEula()
     {
-
         $Parsedown = new \Parsedown();
         if (Setting::getSettings()->default_eula_text) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-        } else {
-            return null;
         }
+        return null;
+    }
+
+    public function modellistCheckedValue ($element) {
+
+        // If the value is blank for some reason
+        if ($this->modellist_displays=='') {
+            return false;
+        }
+        $values = explode(',', $this->modellist_displays);
+
+        foreach ($values as $value) {
+            if ($value == $element) {
+                return true;
+            }
+        }
+        return false;
 
     }
 
