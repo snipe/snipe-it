@@ -650,8 +650,7 @@
                            "fileName": "export-{{ $asset->asset_tag }}-maintenances",
                            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                          }'
-                        data-url="{{ route('api.maintenances.index',
-                        array('asset_id' => $asset->id)) }}"
+                        data-url="{{ route('api.maintenances.index', array('asset_id' => $asset->id)) }}"
                         data-cookie-id-table="assetMaintenancesTable">
                   <thead>
                     <tr>
@@ -682,9 +681,11 @@
                       class="table table-striped snipe-table"
                       id="assetHistory"
                       data-pagination="true"
+                      data-id-table="assetHistory"
+                      data-search="true"
+                      data-side-pagination="server"
                       data-show-columns="true"
                       data-show-refresh="true"
-                      data-page-size="20"
                       data-show-export="true"
                       data-export-options='{
                          "fileName": "export{{ (Input::has('status')) ? '-'.str_slug(Input::get('status')) : '' }}-assets",
@@ -692,7 +693,7 @@
                        }'
 
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
-                      data-cookie-id-table="asset-history">
+                      data-cookie-id-table="assetHistory">
 
 
                 <thead>
