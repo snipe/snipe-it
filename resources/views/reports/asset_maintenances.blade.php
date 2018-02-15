@@ -14,14 +14,25 @@
       <div class="box-body">
 
         <div class="table-responsive">
+
             <table
-                    name="maintenancesReport"
-                    id="table"
-                    class="table table-striped snipe-table"
+                    data-cookie-id-table="maintenancesReport"
+                    data-pagination="true"
+                    data-show-footer="true"
+                    data-id-table="maintenancesReport"
+                    data-search="true"
+                    data-side-pagination="server"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    id="maintenancesReport"
                     data-url="{{route('api.maintenances.index') }}"
-                    data-cookie="true"
-                    data-click-to-select="true"
-                    data-cookie-id-table="maintenancesReport-{{ config('version.hash_version') }}">
+                    class="table table-striped snipe-table"
+                    data-export-options='{
+                        "fileName": "maintenance-report-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
                 <thead>
                 <tr>
                     <th data-field="company" data-sortable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
@@ -48,8 +59,5 @@
 @stop
 
 @section('moar_scripts')
-    @include ('partials.bootstrap-table',
-    ['exportFile' => 'maintenances-export',
-    'search' => true,
-    'showFooter' => true ])
+    @include ('partials.bootstrap-table')
 @stop

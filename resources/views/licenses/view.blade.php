@@ -406,7 +406,5 @@
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
-
-
 @stop
 
