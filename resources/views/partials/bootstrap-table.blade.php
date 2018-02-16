@@ -75,15 +75,11 @@
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
 
 
-            @if (!isset($simple_view))
-                @if (isset($multiSort))
-                showMultiSort: true,
-                @endif
-            @endif
-
-
         });
-    }
+
+    });
+
+
 
 
 
