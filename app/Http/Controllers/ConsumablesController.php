@@ -261,13 +261,27 @@ class ConsumablesController extends Controller
             return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
         }
 
+        // Validate data in request
+        $max_to_checkout = $consumable->numRemaining();
+        $validator = Validator::make($request->all(), [
+            "asset_id"          => "required",
+            "assigned_qty"      => "required|numeric|between:1,$max_to_checkout"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         // Update the consumable data
         $consumable->assigned_to = e(Input::get('assigned_to'));
 
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
-            'assigned_to' => e(Input::get('assigned_to'))
+            'assigned_to' => e(Input::get('assigned_to')),
+            'assigned_qty' => e(Input::get('assigned_qty'))
         ]);
 
         $logaction = $consumable->logCheckout(e(Input::get('note')), $user);

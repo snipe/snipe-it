@@ -173,13 +173,26 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th class="col-md-12">{{ trans('general.name') }}</th>
+                <th class="col-md-5">{{ trans('general.name') }}</th>
+                <th class="col-md-2">{{ trans('general.quantity') }}</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($user->consumables as $consumable)
+              <?php 
+              $consumables = array();
+              foreach ($user->consumables as $consumable) {
+                if (array_key_exists($consumable->name, $consumables)) { 
+                  $consumables[$consumable->name] += 1; 
+                }
+                else {
+                  $consumables[$consumable->name] = 1;
+                }
+              }
+              ?>
+              @foreach ($consumables as $name => $quantity)
               <tr>
-                <td>{{ $consumable->name }}</td>
+                <td>{{ $name }}</td>
+                <td>{{ $quantity }}</td>
               </tr>
               @endforeach
             </tbody>
