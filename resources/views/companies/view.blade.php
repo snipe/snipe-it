@@ -75,95 +75,153 @@
                         <!-- checked out assets table -->
                         <div class="table-responsive">
                             <table
-                                    name="companyAssets"
-                                    class="table table-striped snipe-table"
-                                    id="table"
+                                    data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                                    data-cookie-id-table="assetsListingTable"
+                                    data-pagination="true"
+                                    data-id-table="assetsListingTable"
                                     data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="asc"
+                                    id="assetsListingTable"
+                                    class="table table-striped snipe-table"
                                     data-url="{{route('api.assets.index',['company_id' => $company->id]) }}"
-                                    data-export-file="{{ str_slug($company->name) }}-assets"
-                                    data-cookie="true"
-                                    data-cookie-id-table="companyAssetsTable"
-                                    data-show-footer="true"
-                                    data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
-
+                                    data-export-options='{
+                              "fileName": "export-companies-{{ str_slug($company->name) }}-assets-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
                             </table>
                         </div>
                     </div><!-- /asset_tab -->
 
                     <div class="tab-pane" id="licenses_tab">
                         <div class="table-responsive">
+
                             <table
-                                    name="companyLicenses"
+                                    data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                                    data-cookie-id-table="licensesTable"
+                                    data-pagination="true"
+                                    data-id-table="licensesTable"
+                                    data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="asc"
+                                    id="licensesTable"
                                     class="table table-striped snipe-table"
-                                    id="companyLicenses"
                                     data-url="{{route('api.licenses.index',['company_id' => $company->id]) }}"
-                                    data-cookie="true"
-                                    data-export-file="{{ str_slug($company->name) }}-licenses"
-                                    data-cookie-id-table="companyLicenses"
-                                    data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}">
+                                    data-export-options='{
+                              "fileName": "export-companies-{{ str_slug($company->name) }}-licenses-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
                             </table>
+
                         </div>
                     </div><!-- /licenses-tab -->
 
                     <div class="tab-pane" id="accessories_tab">
                         <div class="table-responsive">
+
                             <table
-                                    name="companyAccessories"
+                                    data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                                    data-cookie-id-table="accessoriesTable"
+                                    data-pagination="true"
+                                    data-id-table="accessoriesTable"
+                                    data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="asc"
+                                    id="accessoriesTable"
                                     class="table table-striped snipe-table"
-                                    id="companyAccessories"
                                     data-url="{{route('api.accessories.index',['company_id' => $company->id]) }}"
-                                    data-cookie="true"
-                                    data-export-file="{{ str_slug($company->name) }}-accessories"
-                                    data-cookie-id-table="companyAccessories"
-                                    data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}">
-                                </tbody>
+                                    data-export-options='{
+                              "fileName": "export-companies-{{ str_slug($company->name) }}-accessories-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
                             </table>
+
                         </div>
                     </div><!-- /accessories-tab -->
 
                     <div class="tab-pane" id="consumables_tab">
                         <div class="table-responsive">
+
                             <table
-                                    name="companyConsumables"
+                                    data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
+                                    data-cookie-id-table="consumablesTable"
+                                    data-pagination="true"
+                                    data-id-table="consumablesTable"
+                                    data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="asc"
+                                    id="consumablesTable"
                                     class="table table-striped snipe-table"
-                                    id="companyConsumables"
                                     data-url="{{route('api.consumables.index',['company_id' => $company->id]) }}"
-                                    data-cookie="true"
-                                    data-export-file="{{ str_slug($company->name) }}-consumables"
-                                    data-cookie-id-table="companyConsumables"
-                                    data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}">
+                                    data-export-options='{
+                              "fileName": "export-companies-{{ str_slug($company->name) }}-consumables-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
                             </table>
+
                         </div>
                     </div><!-- /consumables-tab -->
 
                     <div class="tab-pane" id="components_tab">
                         <div class="table-responsive">
+
                             <table
-                                    name="companyComponents"
+                                    data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
+                                    data-cookie-id-table="componentsTable"
+                                    data-pagination="true"
+                                    data-id-table="componentsTable"
                                     data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="asc"
+                                    id="componentsTable"
                                     class="table table-striped snipe-table"
-                                    id="companyUsers"
                                     data-url="{{route('api.components.index',['company_id' => $company->id]) }}"
-                                    data-cookie="true"
-                                    data-export-file="{{ str_slug($company->name) }}-components"
-                                    data-cookie-id-table="companyComponents"
-                                    data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}">
+                                    data-export-options='{
+                              "fileName": "export-companies-{{ str_slug($company->name) }}-components-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
                             </table>
                         </div>
                     </div><!-- /consumables-tab -->
 
                     <div class="tab-pane" id="users_tab">
                         <div class="table-responsive">
+
                             <table
-                                    name="companyUsers"
+                                    data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
+                                    data-cookie-id-table="usersTable"
+                                    data-pagination="true"
+                                    data-id-table="usersTable"
                                     data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="asc"
+                                    id="usersTable"
                                     class="table table-striped snipe-table"
-                                    id="companyUsers"
                                     data-url="{{route('api.users.index',['company_id' => $company->id]) }}"
-                                    data-cookie="true"
-                                    data-export-file="{{ str_slug($company->name) }}-users"
-                                    data-cookie-id-table="companyUsers"
-                                    data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}">
+                                    data-export-options='{
+                              "fileName": "export-companies-{{ str_slug($company->name) }}-users-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
                             </table>
                         </div>
                     </div><!-- /consumables-tab -->

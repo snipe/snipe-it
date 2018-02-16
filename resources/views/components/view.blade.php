@@ -45,23 +45,36 @@
         <div class="row">
           <div class="col-md-12">
             <div class="table table-responsive">
+
               <table
-                name="component_users"
-                class="table table-striped snipe-table"
-                id="table"
-                data-url="{{ route('api.components.assets', $component->id)}}"
-                data-cookie="true"
-                data-click-to-select="true"
-                data-cookie-id-table="componentDetailTable-{{ config('version.hash_version') }}">
+                      data-cookie-id-table="componentsCheckedoutTable"
+                      data-pagination="true"
+                      data-id-table="componentsCheckedoutTable"
+                      data-search="true"
+                      data-side-pagination="server"
+                      data-show-columns="true"
+                      data-show-export="true"
+                      data-show-footer="true"
+                      data-show-refresh="true"
+                      data-sort-order="asc"
+                      data-sort-name="name"
+                      id="componentsCheckedoutTable"
+                      class="table table-striped snipe-table"
+                      data-url="{{ route('api.components.assets', $component->id)}}"
+                      data-export-options='{
+                "fileName": "export-components-{{ str_slug($component->name) }}-checkedout-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
                 <thead>
-                  <tr>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name" data-formatter="hardwareLinkFormatter">{{ trans('general.asset') }}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{ trans('general.qty') }}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="componentsInOutFormatter">{{ trans('general.checkin') }}/{{ trans('general.checkout') }}</th>
-                  </tr>
+                <tr>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name" data-formatter="hardwareLinkFormatter">{{ trans('general.asset') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{ trans('general.qty') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="componentsInOutFormatter">{{ trans('general.checkin') }}/{{ trans('general.checkout') }}</th>
+                </tr>
                 </thead>
               </table>
+
             </div>
           </div> <!-- .col-md-12-->
         </div>

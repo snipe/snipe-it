@@ -21,14 +21,23 @@
       <div class="box-body">
         <div class="table-responsive">
 
-          <table
-          name="statuslabels"
-          id="table"
-          class="snipe-table"
-          data-url="{{ route('api.statuslabels.index') }}"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="statuslabelsTable-{{ config('version.hash_version') }}">
+            <table
+                    data-cookie-id-table="statuslabelsTable"
+                    data-pagination="true"
+                    data-id-table="statuslabelsTable"
+                    data-search="true"
+                    data-side-pagination="server"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    id="statuslabelsTable"
+                    class="table table-striped snipe-table"
+                    data-url="{{ route('api.statuslabels.index') }}"
+                    data-export-options='{
+                "fileName": "export-statuslabels-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
@@ -79,7 +88,7 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'statuslabels-export', 'search' => true])
+@include ('partials.bootstrap-table')
 
   <script nonce="{{ csrf_token() }}">
       function colorSqFormatter(value, row) {

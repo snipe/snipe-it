@@ -1,6 +1,5 @@
 <script src="{{ asset('js/bootstrap-table.min.js') }}"></script>
 <script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.min.js?v=1') }}"></script>
 <script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
 <script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
 <script src="{{ asset('js/FileSaver.min.js') }}"></script>
@@ -15,16 +14,14 @@
 <script src="{{ asset('js/extensions/sticky-header/bootstrap-table-sticky-header.js') }}"></script>
 @endif
 
+<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
+
+
 <script nonce="{{ csrf_token() }}">
-
-    var $table = $('.snipe-table');
-
 
 
     $(function () {
-        buildTable($table, 20, 50);
-    });
-    function buildTable($el) {
+
         var stickyHeaderOffsetY = 0;
 
         if ( $('.navbar-fixed-top').css('height') ) {
@@ -35,7 +32,6 @@
         }
 
 
-
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
 
@@ -44,89 +40,42 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             },
+            stickyHeader: true,
+            stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
+
             undefinedText: '',
             iconsPrefix: 'fa',
-            {!! ((isset($search)) && ($search=='true')) ? 'search: "true",' : '' !!}
-            paginationVAlign: 'both',
-            sidePagination: '{{ (isset($clientSearch)) ? 'client' : 'server' }}',
-            sortable: true,
-            @if (!isset($nopages))
-            pageSize: 20,
-            pagination: true,
-            @endif
             cookie: true,
             cookieExpire: '2y',
             cookieIdTable: '{{ Route::currentRouteName() }}',
-            @if (isset($columns))
-             columns: {!! $columns !!},
-            @endif
             mobileResponsive: true,
             maintainSelected: true,
+            trimOnSearch: false,
             paginationFirstText: "{{ trans('general.first') }}",
             paginationLastText: "{{ trans('general.last') }}",
             paginationPreText: "{{ trans('general.previous') }}",
             paginationNextText: "{{ trans('general.next') }}",
+            pageList: ['20', '30','50','100','150','200', '500'],
+            paginationVAlign: 'both',
             formatLoadingMessage: function () {
                 return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
+
             icons: {
                 advancedSearchIcon: 'fa fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
-                @if (isset($multiSort))
-                sort: 'fa fa-sort-amount-desc',
-                plus: 'fa fa-plus',
-                minus: 'fa fa-minus',
-                @endif
                 refresh: 'fa-refresh'
             },
-            exportDataType: 'all',
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-            exportOptions: {
 
-                fileName: '{{ ((isset($exportFile)) ? $exportFile : 'table') }}-' + (new Date()).toISOString().slice(0,10),
-                ignoreColumn: ['actions','image','change','checkbox','checkincheckout','icon'],
-                worksheetName: "Snipe-IT Export",
-                escape: false,
-                jspdf: {
-                    orientation: 'l',
-                    autotable: {
-                        styles: {
-                            rowHeight: 20,
-                            fontSize: 10,
-                            overflow: 'linebreak',
-                        },
-                        headerStyles: {fillColor: 255, textColor: 0},
-                        //alternateRowStyles: {fillColor: [60, 69, 79], textColor: 255}
-                    }
-                }
-            },
-
-            @if (!isset($simple_view))
-
-                showRefresh: true,
-                stickyHeader: true,
-                stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-
-                @if (isset($showFooter))
-                showFooter: true,
-                @endif
-
-                showColumns: true,
-                trimOnSearch: false,
-
-                @if (isset($multiSort))
-                showMultiSort: true,
-                @endif
-
-
-
-                @endif
-                pageList: ['20', '30','50','100','150','200']
 
         });
-    }
+
+    });
+
+
 
 
 
@@ -219,6 +168,9 @@
             var dest = destination;
             if (destination=='groups') {
                 var dest = 'admin/groups';
+            }
+            if (destination=='maintenances') {
+                var dest = 'hardware/maintenances';
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
@@ -349,6 +301,7 @@
         'locations',
         'users',
         'manufacturers',
+        'maintenances',
         'statuslabels',
         'models',
         'licenses',
@@ -524,11 +477,14 @@
     }
 
     function sumFormatter(data) {
-        var field = this.field;
-        var total_sum = data.reduce(function(sum, row) {
-            return (sum) + (parseFloat(row[field]) || 0);
-        }, 0);
-        return total_sum.toFixed(2);
+        if (Array.isArray(data)) {
+            var field = this.field;
+            var total_sum = data.reduce(function(sum, row) {
+                return (sum) + (parseFloat(row[field]) || 0);
+            }, 0);
+            return total_sum.toFixed(2);
+        }
+        return 'not an array';
     }
 
 

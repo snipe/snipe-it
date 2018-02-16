@@ -316,7 +316,7 @@ class SettingsController extends Controller
 
         $setting->modellist_displays = '';
 
-        if (($request->has('show_in_model_list')) && (count($request->has('show_in_model_list')) > 0))
+        if (($request->has('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0))
         {
             $setting->modellist_displays = implode(',', $request->input('show_in_model_list'));
         }

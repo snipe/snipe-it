@@ -28,14 +28,59 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
+
         <table
-          name="category_assets"
-          class="snipe-table"
-          id="table"
-          data-url="{{ route('api.'.$category_type_route.'.index',['category_id'=> $category->id]) }}"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="category{{ $category_type_route }}Table">
+
+                @if ($category->category_type=='asset')
+
+                  data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                  data-cookie-id-table="categoryAssetsTable"
+                  id="categoryAssetsTable"
+                  data-id-table="categoryAssetsTable"
+                  data-export-options='{
+                    "fileName": "export-{{ str_slug($category->name) }}-assets-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'
+                @elseif ($category->category_type=='accessory')
+                  data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                  data-cookie-id-table="categoryAccessoryTable"
+                  id="categoryAccessoryTable"
+                  data-id-table="categoryAccessoryTable"
+                  data-export-options='{
+                      "fileName": "export-{{ str_slug($category->name) }}-accessories-{{ date('Y-m-d') }}",
+                      "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                      }'
+                @elseif ($category->category_type=='consumable')
+                  data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
+                  data-cookie-id-table="categoryConsumableTable"
+                  id="categoryConsumableTable"
+                  data-id-table="categoryConsumableTable"
+                  data-export-options='{
+                      "fileName": "export-{{ str_slug($category->name) }}-consumables-{{ date('Y-m-d') }}",
+                      "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                      }'
+                @elseif ($category->category_type=='component')
+                  data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
+                  data-cookie-id-table="categoryCompomnentTable"
+                  id="categoryCompomnentTable"
+                  data-id-table="categoryCompomnentTable"
+                  data-export-options='{
+                      "fileName": "export-{{ str_slug($category->name) }}-components-{{ date('Y-m-d') }}",
+                      "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                      }'
+                @endif
+
+                data-pagination="true"
+                data-search="true"
+                data-show-footer="true"
+                data-side-pagination="server"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                class="table table-striped snipe-table"
+                data-url="{{ route('api.'.$category_type_route.'.index',['category_id'=> $category->id]) }}">
+            
       </table>
 
       </div>
@@ -45,32 +90,5 @@
 @stop
 
 @section('moar_scripts')
-
-  @if ($category->category_type=='asset')
-    @include ('partials.bootstrap-table',
-    [
-      'exportFile' => 'category-' . $category->name . '-export',
-      'search' => true,
-      'columns' => \App\Presenters\AssetPresenter::dataTableLayout()])
-  @elseif ($category->category_type=='accessory')
-    @include ('partials.bootstrap-table',
-    [
-      'exportFile' => 'category-' . $category->name . '-export',
-      'search' => true,
-      'columns' => \App\Presenters\AccessoryPresenter::dataTableLayout()])
-  @elseif ($category->category_type=='consumable')
-    @include ('partials.bootstrap-table',
-    [
-      'exportFile' => 'category-' . $category->name . '-export',
-      'search' => true,
-      'columns' => \App\Presenters\ConsumablePresenter::dataTableLayout()])
-  @elseif ($category->category_type=='component')
-    @include ('partials.bootstrap-table',
-    [
-      'exportFile' => 'category-' . $category->name . '-export',
-      'search' => true,
-      'columns' => \App\Presenters\ComponentPresenter::dataTableLayout()])
-    @endif
-
-
+@include ('partials.bootstrap-table')
 @stop

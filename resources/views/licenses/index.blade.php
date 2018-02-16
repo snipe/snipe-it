@@ -23,16 +23,28 @@
   <div class="col-md-12">
     <div class="box">
       <div class="box-body">
-        <table
-        name="licenses"
-        id="table"
-        data-url="{{ route('api.licenses.index') }}"
-        class="table table-striped snipe-table"
-        data-cookie="true"
-        data-show-export="true"
-        data-click-to-select="true"
-        data-cookie-id-table="licenseTable">
-        </table>
+
+          <table
+              data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+              data-cookie-id-table="licensesTable"
+              data-pagination="true"
+              data-search="true"
+              data-side-pagination="server"
+              data-show-columns="true"
+              data-show-export="true"
+              data-show-footer="true"
+              data-show-refresh="true"
+              data-sort-order="asc"
+              data-sort-name="name"
+              id="licensesTable"
+              class="table table-striped snipe-table"
+              data-url="{{ route('api.licenses.index') }}"
+              data-export-options='{
+            "fileName": "export-licenses-{{ date('Y-m-d') }}",
+            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+            }'>
+          </table>
+
       </div><!-- /.box-body -->
 
       <div class="box-footer clearfix">
@@ -43,10 +55,6 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', [
-    'exportFile' => 'licenses-export',
-    'search' => true,
-    'showFooter' => true,
-    'columns' => \App\Presenters\LicensePresenter::dataTableLayout()])
+@include ('partials.bootstrap-table')
 
 @stop

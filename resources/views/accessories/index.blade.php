@@ -21,14 +21,25 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-          <table
-          name="accessories"
-          class="table table-striped snipe-table"
-          id="table"
-          data-url="{{route('api.accessories.index') }}"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="accessoriesTable-{{ config('version.hash_version') }}">
+
+            <table
+                data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                data-cookie-id-table="accessoriesTable"
+                data-pagination="true"
+                data-id-table="accessoriesTable"
+                data-search="true"
+                data-side-pagination="server"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                id="accessoriesTable"
+                class="table table-striped snipe-table"
+                data-url="{{route('api.accessories.index') }}"
+                data-export-options='{
+                    "fileName": "export-accessories-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'>
           </table>
         </div>
       </div>
@@ -39,10 +50,5 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', [
-    'search' => true,
-    'showFooter' => true,
-    'columns' => \App\Presenters\AccessoryPresenter::dataTableLayout(),
-    'exportFile' => 'accessories-export',
-    ])
+@include ('partials.bootstrap-table')
 @stop

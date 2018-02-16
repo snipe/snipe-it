@@ -21,17 +21,28 @@
     <div class="box box-default">
       <div class="box-body">
         <table
-          name="consumables"
-          class="table table-striped snipe-table"
-          id="table"
-          data-url="{{route('api.consumables.index') }}"
-          data-cookie="true"
-          data-click-to-select="true"
-          data-cookie-id-table="consumablesTable-{{ config('version.hash_version') }}-{{ config('version.hash_version') }}">
-
-            </tr>
-          </thead>
+                data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
+                data-cookie-id-table="consumablesTable"
+                data-pagination="true"
+                data-id-table="consumablesTable"
+                data-search="true"
+                data-side-pagination="server"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-footer="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                data-toolbar="#toolbar"
+                id="consumablesTable"
+                class="table table-striped snipe-table"
+                data-url="{{ route('api.consumables.index') }}"
+                data-export-options='{
+                "fileName": "export-consumables-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
         </table>
+
       </div><!-- /.box-body -->
     </div><!-- /.box -->
 

@@ -73,25 +73,34 @@
               @endif
 
               <table
-              name="assets"
-              {{-- data-row-style="rowStyle" --}}
-              data-toolbar="#toolbar"
-              class="table table-striped snipe-table"
-              id="table"
-              data-advanced-search="true"
-              data-sort-order="name"
-              data-sort-order="asc"
-              data-show-export="true"
-              data-cookie="true" 
-              data-id-table="advancedTable"
-              data-url="{{ route('api.assets.index',
-                  array('status' => e(Input::get('status')),
-                  'order_number'=>e(Input::get('order_number')),
-                  'company_id'=>e(Input::get('company_id')),
-                  'status_id'=>e(Input::get('status_id'))))}}"
-              data-click-to-select="true"
-              data-cookie-id-table="{{ e(Input::get('status')) }}assetTable">
+                data-advanced-search="true"
+                data-click-to-select="true"
+                data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                data-cookie-id-table="assetsListingTable"
+                data-pagination="true"
+                data-id-table="assetsListingTable"
+                data-search="true"
+                data-side-pagination="server"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-footer="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                data-toolbar="#toolbar"
+                id="assetsListingTable"
+                class="table table-striped snipe-table"
+                data-url="{{ route('api.assets.index',
+                    array('status' => e(Input::get('status')),
+                    'order_number'=>e(Input::get('order_number')),
+                    'company_id'=>e(Input::get('company_id')),
+                    'status_id'=>e(Input::get('status_id')))) }}"
+                data-export-options='{
+                "fileName": "export{{ (Input::has('status')) ? '-'.str_slug(Input::get('status')) : '' }}-assets-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
               </table>
+
             </div><!-- /.col -->
           </div><!-- /.row -->
         {{ Form::close() }}
@@ -102,11 +111,6 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', [
-    'exportFile' => 'assets-export',
-    'search' => true,
-    'showFooter' => true,
-    'columns' => \App\Presenters\AssetPresenter::dataTableLayout()
-])
+@include('partials.bootstrap-table')
 
 @stop

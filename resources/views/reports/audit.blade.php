@@ -15,14 +15,23 @@
                 <div class="box-body">
 
                     <table
-                            name="auditReport"
-                            data-toolbar="#toolbar"
-                            class="table table-striped snipe-table"
-                            id="table"
+                            data-cookie-id-table="auditReport"
+                            data-pagination="true"
+                            data-id-table="auditReport"
+                            data-search="true"
+                            data-side-pagination="server"
+                            data-show-columns="true"
+                            data-show-export="true"
+                            data-show-refresh="true"
+                            data-sort-order="asc"
+                            id="auditReport"
                             data-url="{{ route('api.activity.index', ['action_type' => 'audit']) }}"
-                            data-cookie="true"
-                            data-cookie-id-table="activityReportTable"
-                            data-row-style="dateRowCheckStyle">
+                            class="table table-striped snipe-table"
+                            data-export-options='{
+                        "fileName": "activity-report-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+
                         <thead>
                         <tr>
                             <th class="col-sm-1" data-field="image" data-visible="false" data-formatter="imageFormatter">{{ trans('admin/hardware/table.image') }}</th>
@@ -45,5 +54,5 @@
 
 
 @section('moar_scripts')
-    @include ('partials.bootstrap-table', ['exportFile' => 'audit-export', 'search' => false])
+    @include ('partials.bootstrap-table')
 @stop

@@ -23,16 +23,23 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table table-responsive">
-                                <table
-                                        name="groups_users"
-                                        id="table-users"
-                                        class="table table-striped snipe-table"
-                                        data-url="{{ route('api.users.index',['group_id'=> $group->id]) }}"
-                                        data-cookie="true"
-                                        data-click-to-select="true"
-                                        data-cookie-id-table="groups_usersDetailTable">
-                                    <thead>
 
+                                <table
+                                    data-columns="{{  \App\Presenters\UserPresenter::dataTableLayout() }}"
+                                    data-cookie-id-table="groupsUsersTable"
+                                    data-pagination="true"
+                                    data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-export="true"
+                                    data-show-refresh="true"
+                                    id="groupsUsersTable"
+                                    class="table table-striped snipe-table"
+                                    data-url="{{ route('api.users.index',['group_id'=> $group->id]) }}"
+                                    data-export-options='{
+                                    "fileName": "export-{{ str_slug($group->name) }}-group-users-{{ date('Y-m-d') }}",
+                                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                                        }'>
                                 </table>
                             </div>
                         </div>
@@ -59,10 +66,5 @@
 @stop
 
 @section('moar_scripts')
-    @include ('partials.bootstrap-table', [
-        'exportFile' => 'groups-export',
-        'search' => true,
-        'columns' => \App\Presenters\UserPresenter::dataTableLayout()
-    ])
-
+    @include ('partials.bootstrap-table')
 @stop

@@ -17,14 +17,26 @@
       <div class="box box-default">
         <div class="box-body">
           <div class="table-responsive">
+
             <table
-                    name="companies"
-                    class="table table-striped snipe-table"
-                    id="table"
-                    data-url="{{ route('api.companies.index') }}"
-                    data-cookie="true"
-                    data-click-to-select="true"
-                    data-cookie-id-table="companiesTable-{{ config('version.hash_version') }}">
+              data-columns="{{ \App\Presenters\CompanyPresenter::dataTableLayout() }}"
+              data-cookie-id-table="companiesTable"
+              data-pagination="true"
+              data-id-table="companiesTable"
+              data-search="true"
+              data-side-pagination="server"
+              data-show-columns="true"
+              data-show-export="true"
+              data-show-refresh="true"
+              data-sort-order="asc"
+              id="companiesTable"
+              class="table table-striped snipe-table"
+              data-url="{{ route('api.companies.index') }}"
+              data-export-options='{
+                        "fileName": "export-companies-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+
             </table>
           </div>
         </div>
@@ -41,10 +53,5 @@
 @stop
 
 @section('moar_scripts')
-  @include ('partials.bootstrap-table', [
-      'exportFile' => 'companies-export',
-      'search' => true,
-      'columns' => \App\Presenters\CompanyPresenter::dataTableLayout()
-  ])
-
+  @include ('partials.bootstrap-table')
 @stop
