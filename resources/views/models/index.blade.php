@@ -52,17 +52,26 @@
                 <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
               </div>
             @endif
+              <div class="table-responsive">
+              <table
+                  data-cookie-id-table="modelsTable"
+                  data-pagination="true"
+                  data-id-table="modelsTable"
+                  data-search="true"
+                  data-side-pagination="server"
+                  data-show-columns="true"
+                  data-toolbar="#toolbar"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="modelsTable"
+                  data-url="{{ route('api.models.index', ['status'=> e(Input::get('status'))]) }}"
+                  class="table table-striped snipe-table"
+                  data-export-options='{
+                "fileName": "export-asset-models-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
 
-
-
-        <table
-        name="models"
-        class="table table-striped snipe-table"
-        id="table"
-        data-url="{{ route('api.models.index', ['status'=> e(Input::get('status'))]) }}"
-        data-cookie="true"
-        data-click-to-select="true"
-        data-cookie-id-table="modelsTable-{{ config('version.hash_version') }}">
           <thead>
             <tr>
               <th data-checkbox="true" data-field="checkbox"></th>
@@ -83,6 +92,7 @@
         </table>
               {{ Form::close() }}
           </div>
+        </div>
         </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->

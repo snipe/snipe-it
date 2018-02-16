@@ -20,13 +20,25 @@ Asset Depreciations
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
+
           <table
-          name="depreciations"
-          class="table table-striped snipe-table"
-          id="table"
-          data-url="{{ route('api.depreciations.index') }}"
-          data-cookie="true"
-          data-cookie-id-table="depreciationsTable-{{ config('version.hash_version') }}">
+                  data-cookie-id-table="depreciationsTable"
+                  data-pagination="true"
+                  data-id-table="depreciationsTable"
+                  data-search="true"
+                  data-side-pagination="server"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="depreciationsTable"
+                  class="table table-striped snipe-table"
+                  data-url="{{ route('api.depreciations.index') }}"
+                  data-export-options='{
+                    "fileName": "export-depreciations-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'>
+
             <thead>
               <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>

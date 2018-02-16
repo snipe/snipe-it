@@ -58,16 +58,25 @@
                       <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
                   </div>
 
-                <table
-                name="modelassets"
-                id="modelDetailAssets"
-                class="table table-striped snipe-table"
-                data-toolbar="#toolbar"
-                data-url="{{ route('api.assets.index',['model_id'=> $model->id]) }}"
-                data-cookie="true"
-                data-click-to-select="true"
-                data-cookie-id-table="modelDetailAssets"
-                data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
+                  <table
+                  data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                  data-cookie-id-table="assetListingTable"
+                  data-pagination="true"
+                  data-id-table="assetListingTable"
+                  data-search="true"
+                  data-side-pagination="server"
+                  data-show-columns="true"
+                  data-toolbar="#toolbar"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="assetListingTable"
+                  data-url="{{ route('api.assets.index',['model_id'=> $model->id]) }}"
+                  class="table table-striped snipe-table"
+                  data-export-options='{
+                "fileName": "export-models-{{ $model->name }}-assets-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
                 </table>
                   {{ Form::close() }}
               </div>
@@ -184,5 +193,5 @@
 @stop
 
 @section('moar_scripts')
-@include ('partials.bootstrap-table', ['exportFile' => 'model' . $model->name . '-export', 'search' => true])
+@include ('partials.bootstrap-table')
 @stop

@@ -19,41 +19,26 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
+
           <table
-          name="locations"
-          class="table table-striped snipe-table"
-          id="table"
-          data-url="{{ route('api.locations.index') }}"
-          data-cookie="true"
-          data-show-export="true"
-          data-click-to-select="true"
-          data-cookie-id-table="locationsTable-{{ config('version.hash_version') }}">
-            <thead>
-              <tr>
-                <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-formatter="locationsLinkFormatter" data-field="name" data-searchable="true">{{ trans('admin/locations/table.name') }}</th>
-                <th data-sortable="true" data-field="image" data-visible="false" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
-                <th data-sortable="true" data-field="parent" data-formatter="locationsLinkObjFormatter">{{ trans('admin/locations/table.parent') }}</th>
-                <th data-searchable="false" data-sortable="true" data-field="assets_count">{{ trans('admin/locations/table.assets_rtd') }}</th>
-                <th data-searchable="false" data-sortable="true" data-field="assigned_assets_count">{{ trans('admin/locations/table.assets_checkedout') }}</th>
-                <th data-searchable="false" data-sortable="true" data-field="users_count">{{ trans('general.people') }}</th>
-                <th data-searchable="true" data-sortable="true" data-field="currency">{{ trans('general.currency') }}</th>
-                <th data-searchable="true" data-sortable="true" data-field="address">{{ trans('admin/locations/table.address') }}</th>
-                <th data-searchable="true" data-sortable="true" data-field="city">{{ trans('admin/locations/table.city') }}
-                </th>
-                <th data-searchable="true" data-sortable="true" data-field="state">
-                    {{ trans('admin/locations/table.state') }}
-                </th>
-                    <th data-searchable="true" data-sortable="true" data-field="zip">
-                        {{ trans('admin/locations/table.zip') }}
-                    </th>
-                <th data-searchable="true" data-sortable="true" data-field="country">
-                    {{ trans('admin/locations/table.country') }}
-                </th>
-                <th data-sortable="true" data-formatter="usersLinkObjFormatter" data-field="manager" data-searchable="true">{{ trans('admin/users/table.manager') }}</th>
-                <th data-switchable="false" data-formatter="locationsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
-              </tr>
-            </thead>
+                  data-columns="{{ \App\Presenters\LocationPresenter::dataTableLayout() }}"
+                  data-cookie-id-table="locationTable"
+                  data-pagination="true"
+                  data-id-table="locationTable"
+                  data-search="true"
+                  data-show-footer="true"
+                  data-side-pagination="server"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="locationTable"
+                  class="table table-striped snipe-table"
+                  data-url="{{ route('api.locations.index') }}"
+                  data-export-options='{
+              "fileName": "export-locations-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
           </table>
         </div>
       </div>

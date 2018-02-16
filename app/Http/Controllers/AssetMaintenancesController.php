@@ -63,85 +63,6 @@ class AssetMaintenancesController extends Controller
     }
 
 
-    /**
-    *  Generates the JSON response for asset maintenances listing view.
-    *
-    * @see AssetMaintenancesController::getIndex() method that generates view
-    * @author  Vincent Sposato <vincent.sposato@gmail.com>
-    * @version v1.0
-    * @since [v1.8]
-    * @return String JSON
-    */
-    public function getDatatable(Request $request)
-    {
-        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company', 'admin');
-
-        if (Input::has('search')) {
-            $maintenances = $maintenances->TextSearch(e($request->input('search')));
-        }
-
-        $offset = request('offset', 0);
-        $limit = request('limit', 50);
-
-        $allowed_columns = ['id','title','asset_maintenance_time','asset_maintenance_type','cost','start_date','completion_date','notes','user_id'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
-
-        switch ($sort) {
-            case 'user_id':
-                $maintenances = $maintenances->OrderAdmin($order);
-                break;
-            default:
-                $maintenances = $maintenances->orderBy($sort, $order);
-                break;
-        }
-
-        $maintenancesCount = $maintenances->count();
-        $maintenances = $maintenances->skip($offset)->take($limit)->get();
-
-        $rows = array();
-        $settings = Setting::getSettings();
-
-        foreach ($maintenances as $maintenance) {
-            $actions = '';
-            if (Gate::allows('update', Asset::class)) {
-                $actions .= Helper::generateDatatableButton('edit', route('maintenances.edit', $maintenance->id));
-                $actions .= Helper::generateDatatableButton(
-                    'delete',
-                    route('maintenances.destroy', $maintenance->id),
-                    $enabled = true,
-                    trans('admin/asset_maintenances/message.delete.confirm'),
-                    $maintenance->title
-                );
-            }
-
-            if (($maintenance->cost) && (isset($maintenance->asset)) && ($maintenance->asset->location) &&  ($maintenance->asset->location->currency!='')) {
-                $maintenance_cost = $maintenance->asset->location->currency.$maintenance->cost;
-            } else {
-                $maintenance_cost = $settings->default_currency.$maintenance->cost;
-            }
-
-            $rows[] = array(
-                'id'            => $maintenance->id,
-                'asset_name'    =>  ($maintenance->asset) ? (string)link_to_route('maintenances.show', $maintenance->asset->present()->Name(), ['maintenance' => $maintenance->asset->id]) : 'Deleted Asset' ,
-                'title'         => $maintenance->title,
-                'notes'         => $maintenance->notes,
-                'supplier'      => ($maintenance->supplier) ? (string)link_to_route('suppliers.show', $maintenance->supplier->name, ['maintenance'=>$maintenance->supplier->id]) : 'Deleted Supplier',
-                'cost'          => $maintenance_cost,
-                'asset_maintenance_type'          => e($maintenance->asset_maintenance_type),
-                'start_date'         => $maintenance->start_date,
-                'asset_maintenance_time'          => $maintenance->asset_maintenance_time,
-                'completion_date'     => $maintenance->completion_date,
-                'user_id'       => ($maintenance->admin) ? (string)link_to_route('users.show', $maintenance->admin->present()->fullName(), ['user'=>$maintenance->admin->id]) : '',
-                'actions'       => $actions,
-                'company'   => ($maintenance->asset->company) ? $maintenance->asset->company->name : ''
-            );
-        }
-
-        $data = array('total' => $maintenancesCount, 'rows' => $rows);
-        return $data;
-
-    }
 
     /**
      *  Returns a form view to create a new asset maintenance.
@@ -265,9 +186,7 @@ class AssetMaintenancesController extends Controller
         // Get Supplier List
         // Render the view
         return view('asset_maintenances/edit')
-                   ->with('asset_list', Helper::detailedAssetList())
                    ->with('selectedAsset', null)
-                   ->with('supplier_list', Helper::suppliersList())
                    ->with('assetMaintenanceType', $assetMaintenanceType)
                    ->with('item', $assetMaintenance);
 

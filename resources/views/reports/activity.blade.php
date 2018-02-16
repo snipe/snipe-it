@@ -15,14 +15,23 @@
             <div class="box-body">
 
                 <table
-                name="activityReport"
-                data-toolbar="#toolbar"
-                class="table table-striped snipe-table"
-                id="table"
-                data-sort-order="desc"
-                data-url="{{ route('api.activity.index') }}"
-                data-cookie="true"
-                data-cookie-id-table="activityReportTable">
+                        data-cookie-id-table="activityReport"
+                        data-pagination="true"
+                        data-id-table="activityReport"
+                        data-search="true"
+                        data-side-pagination="server"
+                        data-show-columns="true"
+                        data-show-export="true"
+                        data-show-refresh="true"
+                        data-sort-order="asc"
+                        id="activityReport"
+                        data-url="{{ route('api.activity.index') }}"
+                        class="table table-striped snipe-table"
+                        data-export-options='{
+                        "fileName": "activity-report-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+
                     <thead>
                         <tr>
                             <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>

@@ -32,15 +32,26 @@
       <div class="box-body">
         <!-- checked out suppliers table -->
         <div class="table-responsive">
+
           <table
-                  name="suppliers_assets"
-                  id="table-users"
-                  class="table table-striped snipe-table"
-                  data-url="{{route('api.assets.index', ['supplier_id' => $supplier->id])}}"
-                  data-cookie="true"
-                  data-click-to-select="true"
-                  data-search="true"
-                  data-cookie-id-table="assets_by_supplierTable">
+              data-cookie-id-table="suppliersAssetsTable"
+              data-pagination="true"
+              data-id-table="suppliersAssetsTable"
+              data-search="true"
+              data-show-footer="true"
+              data-side-pagination="server"
+              data-show-columns="true"
+              data-show-export="true"
+              data-show-refresh="true"
+              data-sort-order="asc"
+              id="suppliersAssetsTable"
+              class="table table-striped snipe-table"
+              data-url="{{route('api.assets.index', ['supplier_id' => $supplier->id])}}"
+              data-export-options='{
+              "fileName": "export-{{ str_slug($supplier->name) }}-assets-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
+
             <thead>
             <tr>
               <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
@@ -72,26 +83,24 @@
             <div class="table-responsive">
 
               <table
-                      name="suppliers_accessories"
-                      id="table-users"
+                      data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                      data-cookie-id-table="suppliersAccessoriesTable"
+                      data-pagination="true"
+                      data-id-table="suppliersAccessoriesTable"
+                      data-search="true"
+                      data-side-pagination="server"
+                      data-show-columns="true"
+                      data-show-export="true"
+                      data-show-refresh="true"
+                      data-sort-order="asc"
+                      id="suppliersAccessoriesTable"
                       class="table table-striped snipe-table"
                       data-url="{{route('api.accessories.index', ['supplier_id' => $supplier->id])}}"
-                      data-search="true"
-                      data-cookie="true"
-                      data-click-to-select="true"
-                      data-cookie-id-table="accessories_by_supplierTable">
-                <thead>
-                <tr>
-                  <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
-                  <th data-searchable="false" data-sortable="true" data-formatter="accessoriesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="model_number">{{ trans('admin/models/table.modelnumber') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{ trans('admin/hardware/form.tag') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="serial">{{ trans('admin/hardware/form.serial') }}</th>
-                  <th data-searchable="false" data-visible="false" data-sortable="true" data-field="category" data-formatter="categoriesLinkObjFormatter">{{ trans('general.category') }}</th>
-                  <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesActionsFormatter">{{ trans('table.actions') }}</th>
-                </tr>
-                </thead>
+                      data-export-options='{
+              "fileName": "export-{{ str_slug($supplier->name) }}-accessories-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
+
               </table>
             </div><!-- /.table-responsive -->
           </div><!-- /.box-body -->
@@ -111,28 +120,29 @@
 
             <div class="box-body">
               <div class="table-responsive">
-              <table
-                      name="suppliers_licenses"
-                      id="table-users"
-                      class="table table-striped snipe-table"
-                      data-url="{{route('api.licenses.index', ['supplier_id' => $supplier->id])}}"
-                      data-cookie="true"
-                      data-search="true"
-                      data-click-to-select="true"
-                      data-cookie-id-table="licenses_by_supplierTable">
-                <thead>
-                <tr>
-                  <th data-searchable="false" data-visible="false" data-sortable="true" data-field="id">{{ trans('general.id') }}</th>
-                  <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="name">{{ trans('general.name') }}</th>
-                  <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="product_key">{{ trans('admin/licenses/form.license_key') }}</th>
-                  <th data-searchable="true" data-sortable="true" data-formatter="licensesLinkFormatter" data-field="license_email">{{ trans('admin/licenses/form.to_email') }}</th>
-                  <th data-searchable="true" data-sortable="false" data-field="seats">{{ trans('admin/licenses/form.seats') }}</th>
-                  <th data-searchable="true" data-sortable="false" data-field="free_seats_count">{{ trans('admin/accessories/general.remaining') }}</th>
-                  <th data-field="purchase_cost" data-footer-formatter="sumFormatter">{{ trans('general.purchase_cost') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
-                  <th data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licensesActionsFormatter">{{ trans('table.actions') }}</th>
-                </tr>
-                </thead>
+
+
+                <table
+                        data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                        data-cookie-id-table="suppliersLicensesTable"
+                        data-pagination="true"
+                        data-id-table="suppliersLicensesTable"
+                        data-search="true"
+                        data-show-footer="true"
+                        data-side-pagination="server"
+                        data-show-columns="true"
+                        data-show-export="true"
+                        data-show-refresh="true"
+                        data-sort-order="asc"
+                        id="suppliersLicensesTable"
+                        class="table table-striped snipe-table"
+                        data-url="{{route('api.licenses.index', ['supplier_id' => $supplier->id])}}"
+                        data-export-options='{
+                    "fileName": "export-{{ str_slug($supplier->name) }}-licenses-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'>
+
+
               </table>
             </div><!-- /.table-responsive -->
           </div><!-- /.box-body -->

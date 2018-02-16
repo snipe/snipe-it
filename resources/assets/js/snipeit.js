@@ -288,7 +288,41 @@ $(document).ready(function () {
             }
         });
     });
-    
+
+
+    // ------------------------------------------------
+    // Deep linking for Bootstrap tabs
+    // ------------------------------------------------
+    var taburl = document.location.toString();
+
+    // Allow full page URL to activate a tab's ID
+    // ------------------------------------------------
+    // This allows linking to a tab on page load via the address bar.
+    // So a URL such as, http://snipe-it.local/hardware/2/#my_tab will
+    // cause the tab on that page with an ID of “my_tab” to be active.
+    if (taburl.match('#') ) {
+        $('.nav-tabs a[href="#'+taburl.split('#')[1]+'"]').tab('show');
+    }
+
+    // Allow internal page links to activate a tab's ID.
+    // ------------------------------------------------
+    // This allows you to link to a tab from anywhere on the page
+    // including from within another tab. Also note that internal page
+    // links either inside or out of the tabs need to include data-toggle="tab"
+    // Ex: <a href="#my_tab" data-toggle="tab">Click me</a>
+    $('a[data-toggle="tab"]').click(function (e) {
+        var href = $(this).attr("href");
+        history.pushState(null, null, href);
+        e.preventDefault();
+        $('a[href="' + $(this).attr('href') + '"]').tab('show');
+    });
+
+    // ------------------------------------------------
+    // End Deep Linking for Bootstrap tabs
+    // ------------------------------------------------
+
+
+
 
 
 });

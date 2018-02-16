@@ -23,29 +23,48 @@ View Assets for  {{ $user->present()->fullName() }}
 
       <div class="box-body">
         <!-- checked out assets table -->
-        @if (count($user->assets) > 0)
           <div class="table-responsive">
-            <table class="table table-striped">
+
+            <table
+                  data-cookie="true"
+                  data-cookie-id-table="userAssets"
+                  data-pagination="true"
+                  data-id-table="userAssets"
+                  data-search="true"
+                  data-side-pagination="client"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="userAssets"
+                  class="table table-striped snipe-table"
+                  data-export-options='{
+                  "fileName": "my-assets-{{ date('Y-m-d') }}",
+                  "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                  }'>
               <thead>
-                <tr>
-                  <th class="col-md-4">{{ trans('admin/hardware/table.asset_model') }}</th>
-                  <th class="col-md-2">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                  <th class="col-md-3">{{ trans('admin/hardware/table.serial') }}</th>
-                  <th class="col-md-3">{{ trans('general.name') }}</th>
-                  <th></th>
-                </tr>
+              <tr>
+                <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('general.category') }}</th>
+                <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('general.name') }}</th>
+                <th class="col-md-4" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_model') }}</th>
+                <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.serial') }}</th>
+                <th>{{ trans('general.image') }}</th>
+              </tr>
+
               </thead>
               <tbody>
                 @foreach ($user->assets as $asset)
                 <tr>
+                  <td>{{ $asset->model->category->name }}</td>
+                  <td>{{ $asset->asset_tag }}</td>
+                  <td>{{ $asset->name }}</td>
                   <td>
                     @if ($asset->physical=='1')
-                    {{ $asset->model->name }}
+                      {{ $asset->model->name }}
                     @endif
                   </td>
-                  <td>{{ $asset->asset_tag }}</td>
                   <td>{{ $asset->serial }}</td>
-                  <td>{{ $asset->name }}</td>
                   <td>
                     @if (($asset->image) && ($asset->image!=''))
                       <img src="{{ url('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50">
@@ -59,15 +78,6 @@ View Assets for  {{ $user->present()->fullName() }}
               </tbody>
             </table>
           </div> <!-- .table-responsive-->
-        @else
-
-        <div class="col-md-12">
-          <div class="alert alert-info alert-block">
-            <i class="fa fa-info-circle"></i>
-            {{ trans('general.no_results') }}
-          </div>
-        </div>
-        @endif
       </div> <!-- .box-body-->
     </div><!--.box.box-default-->
   </div> <!-- .col-md-12-->
@@ -86,9 +96,24 @@ View Assets for  {{ $user->present()->fullName() }}
 
       <div class="box-body">
         <!-- checked out licenses table -->
-        @if (count($user->licenses) > 0)
+
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table
+                  data-cookie-id-table="userLicenses"
+                  data-pagination="true"
+                  data-id-table="userLicenses"
+                  data-search="true"
+                  data-side-pagination="client"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="userLicenses"
+                  class="table table-striped snipe-table"
+                  data-export-options='{
+                  "fileName": "my-licenses-{{ date('Y-m-d') }}",
+                  "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                  }'>
             <thead>
               <tr>
                 <th class="col-md-5">{{ trans('general.name') }}</th>
@@ -111,14 +136,6 @@ View Assets for  {{ $user->present()->fullName() }}
             </tbody>
           </table>
         </div> <!-- .table-responsive-->
-        @else
-        <div class="col-md-12">
-          <div class="alert alert-info alert-block">
-            <i class="fa fa-info-circle"></i>
-            {{ trans('general.no_results') }}
-          </div>
-        </div>
-        @endif
       </div> <!-- .box-body-->
     </div><!--.box.box-default-->
   </div> <!-- .col-md-12-->
@@ -137,9 +154,23 @@ View Assets for  {{ $user->present()->fullName() }}
 
       <div class="box-body">
         <!-- checked out consumables table -->
-        @if (count($user->consumables) > 0)
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table
+                  data-cookie-id-table="userConsumables"
+                  data-pagination="true"
+                  data-id-table="userConsumables"
+                  data-search="true"
+                  data-side-pagination="client"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="userConsumables"
+                  class="table table-striped snipe-table"
+                  data-export-options='{
+                  "fileName": "my-consumables-{{ date('Y-m-d') }}",
+                  "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                  }'>
             <thead>
               <tr>
                 <th class="col-md-12">{{ trans('general.name') }}</th>
@@ -154,14 +185,7 @@ View Assets for  {{ $user->present()->fullName() }}
             </tbody>
           </table>
         </div>
-        @else
-        <div class="col-md-12">
-            <div class="alert alert-info alert-block">
-                <i class="fa fa-info-circle"></i>
-                {{ trans('general.no_results') }}
-            </div>
-        </div>
-        @endif
+
 
       </div> <!-- .box-body-->
     </div><!--.box.box-default-->
@@ -182,9 +206,24 @@ View Assets for  {{ $user->present()->fullName() }}
 
       <div class="box-body">
         <!-- checked out licenses table -->
-        @if (count($user->accessories) > 0)
+
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table
+                  data-cookie-id-table="userAccessories"
+                  data-pagination="true"
+                  data-id-table="userAccessories"
+                  data-search="true"
+                  data-side-pagination="client"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="userAccessories"
+                  class="table table-striped snipe-table"
+                  data-export-options='{
+                  "fileName": "my-accessories-{{ date('Y-m-d') }}",
+                  "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                  }'>
             <thead>
               <tr>
                 <th class="col-md-12">Name</th>
@@ -199,14 +238,7 @@ View Assets for  {{ $user->present()->fullName() }}
             </tbody>
           </table>
         </div>
-        @else
-        <div class="col-md-12">
-          <div class="alert alert-info alert-block">
-            <i class="fa fa-info-circle"></i>
-            {{ trans('general.no_results') }}
-          </div>
-        </div>
-        @endif
+
        </div> <!-- .box-body-->
     </div><!--.box.box-default-->
   </div> <!-- .col-md-12-->
@@ -224,37 +256,36 @@ View Assets for  {{ $user->present()->fullName() }}
       @endif
 
       <div class="box-body">
-        @if (count($userlog) > 0)
         <div class="table-responsive">
           <table
-                  class="table table-striped snipe-table"
-                  name="userActivityReport"
-                  id="table"
-                  data-cookie="false"
-                  data-cookie-id-table="userHistoryTable-{{ config('version.hash_version') }}"
-                  data-url="{{route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'User', 'order' => 'desc']) }}">
+                data-cookie-id-table="userActivityReport"
+                data-pagination="true"
+                data-id-table="userActivityReport"
+                data-search="true"
+                data-side-pagination="server"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                id="userActivityReport"
+                class="table table-striped snipe-table"
+                data-url="{{route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'User', 'order' => 'desc']) }}"
+                data-export-options='{
+                  "fileName": "my-history-{{ date('Y-m-d') }}",
+                  "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
             <thead>
             <tr>
-              <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
-              <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-              <th class="col-sm-3" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-              <th class="col-sm-3" data-field="action_type">{{ trans('general.action') }}</th>
-              <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+              <th data-switchable="true" data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+              <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+              <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+              <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="action_type">{{ trans('general.action') }}</th>
+              <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
             </tr>
             </thead>
-            <tbody>
-
           </table>
         </div> <!--.table-responsive-->
 
-        @else
-        <div class="col-md-12">
-            <div class="alert alert-info alert-block">
-                <i class="fa fa-info-circle"></i>
-                {{ trans('general.no_results') }}
-            </div>
-        </div>
-        @endif
       </div> <!-- .box-body-->
     </div><!--.box.box-default-->
   </div> <!-- .col-md-12-->

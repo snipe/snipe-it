@@ -330,44 +330,24 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     public static function generateFormattedNameFromFullName($format = 'filastname', $users_name)
     {
-        $name = explode(" ", $users_name);
-        $name = str_replace("'", '', $name);
-        $first_name = $name[0];
-        $email_last_name = '';
-        $email_prefix = $first_name;
+        list($first_name, $last_name) = explode(" ", $users_name, 2);
 
-        // If there is no last name given
-        if (!array_key_exists(1, $name)) {
-            $last_name='';
-            $email_last_name = $last_name;
-            $user_username = $first_name;
+        // Assume filastname by default
+        $username = str_slug(substr($first_name, 0, 1).$last_name);
+        
+        if ($format=='firstname.lastname') {
+            $username = str_slug($first_name).'.'.str_slug($last_name);
 
-            // There is a last name given
-        } else {
+        } elseif ($format=='firstname_lastname') {
+            $username = str_slug($first_name).'_'.str_slug($last_name);
 
-            $last_name = str_replace($first_name . ' ', '', $users_name);
-
-            if ($format=='filastname') {
-                $email_last_name.=str_replace(' ', '', $last_name);
-                $email_prefix = $first_name[0].$email_last_name;
-
-            } elseif ($format=='firstname.lastname') {
-                $email_last_name.=str_replace(' ', '', $last_name);
-                $email_prefix = $first_name.'.'.$email_last_name;
-
-            } elseif ($format=='firstname') {
-                $email_last_name.=str_replace(' ', '', $last_name);
-                $email_prefix = $first_name;
-            }
-
-
+        } elseif ($format=='firstname') {
+            $username = str_slug($first_name);
         }
 
-        $user_username = $email_prefix;
         $user['first_name'] = $first_name;
         $user['last_name'] = $last_name;
-        $user['username'] = strtolower($user_username);
-
+        $user['username'] = strtolower($username);
         return $user;
 
 

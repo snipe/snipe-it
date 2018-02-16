@@ -22,15 +22,27 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table table-responsive">
+
                                 <table
-                                        name="location_users"
-                                        id="table-users"
+                                        data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
+                                        data-cookie-id-table="departmentsUsersTable"
+                                        data-pagination="true"
+                                        data-id-table="departmentsUsersTable"
+                                        data-search="true"
+                                        data-show-footer="true"
+                                        data-side-pagination="server"
+                                        data-show-columns="true"
+                                        data-show-export="true"
+                                        data-show-refresh="true"
+                                        data-sort-order="asc"
+                                        id="departmentsUsersTable"
                                         class="table table-striped snipe-table"
                                         data-url="{{ route('api.users.index',['department_id'=> $department->id]) }}"
-                                        data-cookie="true"
-                                        data-click-to-select="true"
-                                        data-cookie-id-table="department_usersDetailTable">
-                                    <thead>
+                                        data-export-options='{
+                              "fileName": "export-departments-{{ str_slug($department->name) }}-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
 
                                 </table>
                             </div>

@@ -29,41 +29,39 @@
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab_1" data-toggle="tab">Details</a></li>
-        <li><a href="#tab_2" data-toggle="tab">{{ trans('general.file_uploads') }}</a></li>
-        <li><a href="#tab_3" data-toggle="tab">{{ trans('admin/licenses/general.checkout_history') }}</a></li>
+        <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+        <li><a href="#uploads" data-toggle="tab">{{ trans('general.file_uploads') }}</a></li>
+        <li><a href="#history" data-toggle="tab">{{ trans('admin/licenses/general.checkout_history') }}</a></li>
         <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> {{ trans('button.upload') }}</a></li>
       </ul>
 
       <div class="tab-content">
-        <div class="tab-pane active" id="tab_1">
+        <div class="tab-pane active" id="details">
           <div class="row">
             <div class="col-md-8">
 
               <div class="table-responsive">
-                <table
-                        name="license-seats"
-                        class="table table-striped snipe-table"
-                        id="licenseSeats"
-                        data-id-table="licenseSeats"
-                        data-search="false"
-                        data-url="{{ route('api.license.seats',['licence_id' => $license->id]) }}"
-                        data-export="true"
-                        data-export-options="{'fileName': 'license-seats'}"
-                        data-cookie="true"
-                        data-cookie-id-table="licenseSeats-Table">
-                  <thead>
-                  <tr>
-                    <th class="col-md-1" data-field="name">{{ trans('admin/licenses/general.seat') }}</th>
-                    <th class="col-md-3" data-formatter="usersLinkObjFormatter" data-field="assigned_user">{{ trans('admin/licenses/general.user') }}</th>
-                    <th class="col-md-3" data-formatter="hardwareLinkObjFormatter" data-field="assigned_asset">{{ trans('admin/licenses/form.asset') }}</th>
-                    <th class="col-md-3" data-formatter="locationsLinkObjFormatter" data-field="location">{{ trans('general.location') }}</th>
-                    <th class="col-md-1" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="licenseSeatInOutFormatter">{{ trans('general.checkin') }}/{{ trans('general.checkout') }}</th>
-                  </tr>
-                  </thead>
-                  <tbody>
 
+                <table
+                        data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayoutSeats() }}"
+                        data-cookie-id-table="seatsTable"
+                        data-pagination="true"
+                        data-search="true"
+                        data-side-pagination="server"
+                        data-show-columns="true"
+                        data-show-export="false"
+                        data-show-refresh="true"
+                        data-sort-order="asc"
+                        data-sort-name="name"
+                        id="seatsTable"
+                        class="table table-striped snipe-table"
+                        data-url="{{ route('api.license.seats',['license_id' => $license->id]) }}"
+                        data-export-options='{
+                        "fileName": "export-seats-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
                 </table>
+
               </div>
 
             </div>
@@ -260,27 +258,53 @@
           </div> <!--/.row-->
         </div> <!-- /.tab-pane -->
 
-        <div class="tab-pane" id="tab_2">
-          <table class="table table-striped">
+        <div class="tab-pane" id="uploads">
+          <div class="table-responsive">
+            <div id="upload-toolbar">
+              <a href="#" data-toggle="modal" data-target="#uploadFileModal" class="btn btn-default"><i class="fa fa-paperclip"></i> {{ trans('button.upload') }}</a>
+            </div>
+
+            <table
+                data-cookie-id-table="licenseUploadsTable"
+                data-pagination="true"
+                data-id-table="assetsListingTable"
+                data-search="true"
+                data-side-pagination="client"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-footer="true"
+                data-toolbar="#upload-toolbar"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                id="licenseUploadsTable"
+                class="table table-striped snipe-table"
+                data-export-options='{
+                    "fileName": "export-license-uploads-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
+                    }'>
             <thead>
               <tr>
-                <th class="col-md-5">{{ trans('general.notes') }}</th>
-                <th class="col-md-5">{{ trans('general.file_name') }}</th>
-                <th class="col-md-2"></th>
-                <th class="col-md-2"></th>
+                <th class="col-md-4" data-field="file_name" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
+                <th class="col-md-4" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
+                <th class="col-md-4" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
+                <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">Download</th>
+                <th class="col-md-2" data-field="delete" data-visible="true"  data-sortable="false" data-switchable="true">Delete</th>
               </tr>
             </thead>
             <tbody>
             @if (count($license->uploads) > 0)
               @foreach ($license->uploads as $file)
               <tr>
-                <td>
-                @if ($file->note)
-                  {{ $file->note }}
-                @endif
-                </td>
                 <td>{{ $file->filename }}</td>
                 <td>
+                  @if ($file->note)
+                    {{ $file->note }}
+                  @endif
+                </td>
+                <td>{{ $file->created_at }}</td>
+                <td>
+
                 @if ($file->filename)
                   <a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">
                     Download
@@ -299,30 +323,41 @@
             @endif
             </tbody>
           </table>
+          </div>
         </div> <!-- /.tab-pane -->
 
-        <div class="tab-pane" id="tab_3">
+        <div class="tab-pane" id="history">
           <div class="row">
             <div class="col-md-12">
+              <div class="table-responsive">
               <table
                       class="table table-striped snipe-table"
-                      name="assetHistory"
-                      id="table"
+                      id="historyTable"
+                      data-pagination="true"
+                      data-show-columns="true"
+                      data-side-pagination="server"
+                      data-show-refresh="true"
+                      data-show-export="true"
                       data-sort-order="desc"
-                      data-height="400"
-                      data-url="{{ route('api.activity.index', ['item_id' => $license->id, 'item_type' => 'license']) }}">
+                      data-export-options='{
+                       "fileName": "export-{{ str_slug($license->name) }}-history-{{ date('Y-m-d') }}",
+                       "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                     }'
+                      data-url="{{ route('api.activity.index', ['item_id' => $license->id, 'item_type' => 'license']) }}"
+                      data-cookie-id-table="license-history">
+
                 <thead>
                 <tr>
-                  <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
-                  <th class="col-sm-2" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                  <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                  <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
-                  <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                  <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
-                  <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>
                 </tr>
                 </thead>
               </table>
+              </div>
             </div> <!-- /.col-md-12-->
           </div> <!-- /.row-->
         </div> <!-- /.tab-pane -->
@@ -371,7 +406,5 @@
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
-
-
 @stop
 

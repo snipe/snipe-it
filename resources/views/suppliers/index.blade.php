@@ -21,14 +21,24 @@
     <div class="box box-default">
       <div class="box-body">
       <div class="table-responsive">
-      <table
-      name="suppliers"
-      id="table"
-      class="table table-striped snipe-table"
-      data-url="{{ route('api.suppliers.index') }}"
-      data-cookie="true"
-      data-click-to-select="true"
-      data-cookie-id-table="suppliersTable-{{ config('version.hash_version') }}">
+
+        <table
+            data-cookie-id-table="suppliersTable"
+            data-pagination="true"
+            data-id-table="suppliersTable"
+            data-search="true"
+            data-side-pagination="server"
+            data-show-columns="true"
+            data-show-export="true"
+            data-show-refresh="true"
+            data-sort-order="asc"
+            id="suppliersTable"
+            class="table table-striped snipe-table"
+            data-url="{{ route('api.suppliers.index') }}"
+            data-export-options='{
+            "fileName": "export-suppliers-{{ date('Y-m-d') }}",
+            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+            }'>
         <thead>
           <tr>
             <th data-sortable="true" data-field="id" data-visible="false">{{ trans('admin/suppliers/table.id') }}</th>

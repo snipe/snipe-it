@@ -190,7 +190,7 @@
             user_add($(".status_id").val());
         });
 
-        $("form").submit(function (event) {
+        $("#create-form").submit(function (event) {
             event.preventDefault();
             return sendForm();
         });
