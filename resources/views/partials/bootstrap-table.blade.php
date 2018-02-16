@@ -19,13 +19,9 @@
 
 <script nonce="{{ csrf_token() }}">
 
-    var $table = $('.snipe-table');
 
     $(function () {
-        buildTable($table, 20, 50);
-    });
 
-    function buildTable($el) {
         var stickyHeaderOffsetY = 0;
 
         if ( $('.navbar-fixed-top').css('height') ) {
