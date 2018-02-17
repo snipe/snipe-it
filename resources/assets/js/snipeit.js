@@ -322,6 +322,25 @@ $(document).ready(function () {
     // ------------------------------------------------
 
 
+     // File size validation
+    $('#uploadFile').bind('change', function() {
+        $('#upload-file-status').removeClass('text-success').removeClass('text-danger');
+        $('.goodfile').remove();
+        $('.badfile').remove();
+
+        var max_size = $('#uploadFile').data('maxsize');
+        var actual_size = this.files[0].size;
+
+        if (actual_size > max_size) {
+            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ');
+        } else {
+            $('#upload-file-status').addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+        }
+        $('#upload-file-info').html(this.files[0].name);
+
+    });
+
+
 
 
 
