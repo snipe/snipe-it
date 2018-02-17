@@ -180,6 +180,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.notes'),
+
             ], [
                 "field" => "created_at",
                 "searchable" => false,
