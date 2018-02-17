@@ -252,6 +252,14 @@
     }
 
 
+    // Convert line breaks to <br>
+    function notesFormatter(value) {
+        if (value) {
+            return value.replace(/(?:\r\n|\r|\n)/g, '<br />');;
+        }
+    }
+
+
     // We need a special formatter for license seats, since they don't work exactly the same
     // Checkouts need the license ID, checkins need the specific seat ID
 

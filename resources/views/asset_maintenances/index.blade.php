@@ -51,7 +51,7 @@
               <th class="text-right" data-searchable="true" data-visible="true"  data-sortable="true" data-field="asset_maintenance_time" data-footer-formatter="sumFormatter">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right" data-footer-formatter="sumFormatter">{{ trans('admin/asset_maintenances/form.cost') }}</th>
               <th data-searchable="true" data-visible="true"  data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-              <th data-searchable="true" data-visible="true" data-sortable="true" data-field="notes">{{ trans('admin/asset_maintenances/form.notes') }}</th>
+              <th data-searchable="true" data-visible="true" data-sortable="true" data-field="notes" data-formatter="notesFormatter">{{ trans('admin/asset_maintenances/form.notes') }}</th>
               @can('update', \App\Models\Asset::class)
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="maintenanceActions">{{ trans('table.actions') }}</th>
               @endcan

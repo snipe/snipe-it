@@ -117,6 +117,7 @@ class LicensePresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.notes'),
+                "formatter" => "notesFormatter"
             ]
         ];
 
