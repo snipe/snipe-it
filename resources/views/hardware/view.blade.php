@@ -33,7 +33,16 @@
 @section('content')
 
 <div class="row">
-  
+
+  @if (!$asset->model)
+    <div class="col-md-12">
+      <div class="callout callout-danger">
+        <h4>NO MODEL ASSOCIATED</h4>
+        <p>This will break things in weird and horrible ways. Edit this asset now to assign it a model. </p>
+      </div>
+    </div>
+  @endif
+
   @if ($asset->deleted_at!='')
     <div class="col-md-12">
       <div class="alert alert-danger">
@@ -148,7 +157,7 @@
                       </tr>
                     @endif
 
-                    @if ($asset->model->manufacturer)
+                    @if (($asset->model) && ($asset->model->manufacturer))
                     <tr>
                       <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
                       <td>
@@ -162,21 +171,21 @@
                          <li> {{ $asset->model->manufacturer->name }}</li>
                         @endcan
 
-                      @if ($asset->model->manufacturer->url)
+                      @if (($asset->model) && ($asset->model->manufacturer->url))
                             <li><i class="fa fa-globe"></i> <a href="{{ $asset->model->manufacturer->url }}">{{ $asset->model->manufacturer->url }}</a></li>
                       @endif
 
-                      @if ($asset->model->manufacturer->support_url)
+                      @if (($asset->model) && ($asset->model->manufacturer->support_url))
                             <li><i class="fa fa-life-ring"></i> <a href="{{ $asset->model->manufacturer->support_url }}">{{ $asset->model->manufacturer->support_url }}</a></li>
                        @endif
 
-                       @if ($asset->model->manufacturer->support_phone)
+                       @if (($asset->model) && ($asset->model->manufacturer->support_phone))
                             <li><i class="fa fa-phone"></i>
                               <a href="tel:{{ $asset->model->manufacturer->support_phone }}">{{ $asset->model->manufacturer->support_phone }}</a>
                             </li>
                        @endif
 
-                       @if ($asset->model->manufacturer->support_email)
+                       @if (($asset->model) && ($asset->model->manufacturer->support_email))
                             <li><i class="fa fa-envelope"></i> <a href="mailto:{{ $asset->model->manufacturer->support_email }}">{{ $asset->model->manufacturer->support_email }}</a></li>
                        @endif
                         </ul>
@@ -188,7 +197,7 @@
                       <td>
                         {{ trans('general.category') }}</td>
                       <td>
-                        @if ($asset->model->category)
+                        @if (($asset->model) && ($asset->model->category))
 
                           @can('view', \App\Models\Category::class)
 
@@ -208,15 +217,21 @@
                     
                     <tr>
                       <td>
-                        {{ trans('admin/hardware/form.model') }}</td>
+                        {{ trans('admin/hardware/form.model') }}
+                      </td>
                       <td>
-                       @can('view', \App\Models\AssetModel::class)
-                        <a href="{{ route('models.show', $asset->model->id) }}">
-                          {{ $asset->model->name }}
-                        </a>
-                      @else
-                        {{ $asset->model->name }}
-                      @endcan
+
+                      @if ($asset->model)
+
+                           @can('view', \App\Models\AssetModel::class)
+                            <a href="{{ route('models.show', $asset->model->id) }}">
+                              {{ $asset->model->name }}
+                            </a>
+                          @else
+                            {{ $asset->model->name }}
+                          @endcan
+
+                        @endif
                       </td>
                     </tr>
 
@@ -224,12 +239,12 @@
                     <tr>
                       <td>{{ trans('admin/models/table.modelnumber') }}</td>
                       <td>
-                        {{ $asset->model->model_number }}
+                        {{ ($asset->model) ? $asset->model->model_number : ''}}
                       </td>
                     </tr>
 
 
-                    @if ($asset->model->fieldset)
+                    @if (($asset->model) && ($asset->model->fieldset))
                       @foreach($asset->model->fieldset->fields as $field)
                         <tr>
                           <td>
@@ -326,7 +341,7 @@
                       </tr>
                     @endif
 
-                    @if ($asset->depreciation)
+                    @if (($asset->model) && ($asset->depreciation))
                       <tr>
                         <td>{{ trans('general.depreciation') }}</td>
                         <td>
@@ -352,7 +367,7 @@
                       </tr>
                     @endif
 
-                    @if ($asset->model->eol)
+                    @if (($asset->model) && ($asset->model->eol))
                       <tr>
                         <td>{{ trans('admin/hardware/form.eol_rate') }}</td>
                         <td>
@@ -448,7 +463,7 @@
             <div class="col-md-4">
               @if ($asset->image)
                 <img src="{{ url('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
-              @elseif ($asset->model->image!='')
+              @elseif (($asset->model) && ($asset->model->image!=''))
                 <img src="{{ url('/') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 

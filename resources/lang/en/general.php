@@ -97,7 +97,7 @@
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
     'image_upload'         	=> 'Upload Image',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, png, gif, and svg.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, png, gif, and svg. Max upload size allowed is :size.',
     'import'         	    => 'Import',
     'import-history'        => 'Import History',
     'asset_maintenance'        => 'Asset Maintenance',
