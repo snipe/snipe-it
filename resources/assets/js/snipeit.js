@@ -322,23 +322,51 @@ $(document).ready(function () {
     // ------------------------------------------------
 
 
+
+    // Image preview
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function formatBytes(bytes) {
+        if(bytes < 1024) return bytes + " Bytes";
+        else if(bytes < 1048576) return(bytes / 1024).toFixed(3) + " KB";
+        else if(bytes < 1073741824) return(bytes / 1048576).toFixed(3) + " MB";
+        else return(bytes / 1073741824).toFixed(3) + " GB";
+    };
+
      // File size validation
     $('#uploadFile').bind('change', function() {
         $('#upload-file-status').removeClass('text-success').removeClass('text-danger');
         $('.goodfile').remove();
         $('.badfile').remove();
+        $('.badfile').remove();
+        $('.previewSize').hide();
 
         var max_size = $('#uploadFile').data('maxsize');
         var actual_size = this.files[0].size;
 
         if (actual_size > max_size) {
-            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ');
+            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize">This file is ' + formatBytes(actual_size) + '.</span>');
         } else {
             $('#upload-file-status').addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+            readURL(this);
+            $('#imagePreview').fadeIn();
         }
         $('#upload-file-info').html(this.files[0].name);
 
     });
+
+
+
+
+
 
 
 
