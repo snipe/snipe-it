@@ -67,7 +67,7 @@ class ManufacturersController extends Controller
     public function store(ImageUploadRequest $request)
     {
 
-        $this->authorize('edit', Manufacturer::class);
+        $this->authorize('create', Manufacturer::class);
         $manufacturer = new Manufacturer;
         $manufacturer->name            = $request->input('name');
         $manufacturer->user_id          = Auth::user()->id;
