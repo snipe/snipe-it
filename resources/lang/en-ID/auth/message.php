@@ -2,36 +2,36 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'account_already_exists' => 'Akun dengan surel ini sudah ada.',
+    'account_not_found'      => 'Nama pengguna atau kata sandi salah.',
+    'account_not_activated'  => 'Akun pengguna ini tidak aktif.',
+    'account_suspended'      => 'Akun pengguna ini ditangguhkan.',
+    'account_banned'         => 'Akun pengguna ini diblokir.',
+    'throttle'               => 'Terlalu banyak percobaan masuk. Silahkan coba lagi sekitar :menit menit(s).',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Terjadi kesalahan saat mencoba masuk, silahkan coba lagi.',
+        'success' => 'Anda sudah berhasil masuk.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Terjadi kesalahan saat mencoba buat akun anda, silahkan coba lagi.',
+        'success' => 'Akun berhasil dibuat.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Terjadi kesalahan saat mencoba mendapatkan kode kata sandi atur ulang, silahkan coba lagi.',
+            'success' => 'Surel pemulihan kata sandi sudah berhasil dikirim.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Terjadi kesalahan saat mencoba atur ulang kata sandi anda, silahkan coba lagi.',
+            'success' => 'Kata sandi anda sudah berhasil di atur ulang.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Terjadi kesalahan saat mencoba mengaktifkan akun anda, silahkan coba lagi.',
+        'success' => 'Akun anda sudah berhasil diaktifkan.',
     ),
 
 );

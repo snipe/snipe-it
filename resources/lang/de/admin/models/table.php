@@ -2,7 +2,7 @@
 
 return array(
 
-    'create'				=> 'Asset Model erstellen',
+    'create'				=> 'Asset-Modell erstellen',
     'created_at' 			=> 'Erstellt am',
     'eol'	 				=> 'EOL',
     'modelnumber'   		=> 'Modellnummer',

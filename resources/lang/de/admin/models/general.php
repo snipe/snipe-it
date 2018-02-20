@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'about_models_title'     => 'Asset-Modelle',
+    'about_models_title'     => 'Über Asset-Modelle',
     'about_models_text'           => 'Asset-Modelle sind eine Möglichkeit, identische Assets zu gruppieren. "MBP 2013", "IPhone 6 s" usw.',
     'deleted'  					        => 'Dieses Modell wurde gelöscht.<a href="/hardware/models/:model_id/restore">klicken Sie hier um es Wiederzuherstellen</a>.',
     'bulk_delete'               => 'Massenlöschen von Asset-Modellen',

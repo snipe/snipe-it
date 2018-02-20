@@ -85,7 +85,7 @@
     'file_name'				=> '文件',
     'file_uploads'			=> '文件上传',
     'generate'				=> '生成',
-     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
+     'github_markdown'      => '该字段可以使用 <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown语法</a>',
     'groups'				=> '分组',
     'gravatar_email'        => 'Gravatar头像邮件地址',
     'history'  			    => '历史记录',

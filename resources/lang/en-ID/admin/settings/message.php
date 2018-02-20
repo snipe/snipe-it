@@ -4,19 +4,19 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'Terjadi kesalahan saat memperbarui. ',
+        'success'               => 'Pengaturan berhasil diperbarui.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Apakah anda yakin ingin menghapus berkas cadangan ini? Tindakan ini tidak dibatalkan. ',
+        'file_deleted'          => 'Berkas cadangan berhasil dihapus. ',
+        'generated'             => 'Berkas cadangan baru berhasil dibuat.',
+        'file_not_found'        => 'Berkas cadangan itu tidak dapat ditemukan di peladen.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Terjadi kesalahan saat membersihkan. ',
+        'validation_failed'     => 'Konfirmasi pembersihan Anda salah Ketikkan kata "HAPUS" di kotak konfirmasi.',
+        'success'               => 'Catatan yang dihapus berhasil dibersihkan.'
     ),
 
 );

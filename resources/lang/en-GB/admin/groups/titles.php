@@ -2,7 +2,7 @@
 
 return array(
     'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups'                  => 'Groups are used to generalise user permissions.',
     'group_management' 	 	=> 'Group Management',
     'create' 	 	 	    => 'Create New Group',
     'update' 	 		        => 'Edit Group',

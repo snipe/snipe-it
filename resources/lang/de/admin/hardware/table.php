@@ -12,7 +12,7 @@ return array(
     'dl_csv' 		=> 'CSV Herunterladen',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Ort',
+    'location' 		=> 'Standort',
     'purchase_cost'	=> 'Kosten',
     'purchase_date'	=> 'Kaufdatum',
     'serial'   		=> 'Seriennummer',

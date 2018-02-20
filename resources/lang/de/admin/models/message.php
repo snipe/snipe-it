@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => 'Modell wurde nicht erstellt. Bitte versuch es noch einmal.',
         'success' => 'Modell wurde erfolgreich erstellt.',
-        'duplicate_set' => 'Ein Asset Modell mit diesem Namen, Hersteller und Modell Nummer existiert bereits.',
+        'duplicate_set' => 'Ein Asset-Modell mit diesem Namen, Hersteller und Modell Nummer existiert bereits.',
     ),
 
     'update' => array(
@@ -18,7 +18,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Sind sie sicher, dass sie das Asset löschen wollen?',
+        'confirm'   => 'Sind Sie sicher, dass Sie dieses Asset-Modell löschen möchten?',
         'error'   => 'Beim Löschen des Modell ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'success' => 'Das Modell wurde erfolgreich gelöscht.'
     ),
