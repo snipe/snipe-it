@@ -468,7 +468,7 @@
               @endif
 
               @if  ($snipeSettings->qr_code=='1')
-                 <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
+                 <img src="{{ url('/') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
               @if (($asset->assignedTo) && ($asset->deleted_at==''))
