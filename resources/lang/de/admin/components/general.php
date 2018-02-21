@@ -10,7 +10,7 @@ return array(
     'create'                             => 'Komponente erstellen',
     'edit'                             => 'Komponente bearbeiten',
     'date'					=> 'Kaufdatum',
-    'order'					=> 'Bestellnummer',
+    'order'					=> 'Artikelnummer',
     'remaining' 			             => 'Verbleibend',
     'total' 			                 => 'Gesamt',
     'update'                            => 'Komponente aktualisieren',

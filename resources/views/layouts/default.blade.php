@@ -609,7 +609,7 @@
 
             @can('reports.view')
             <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
-                <a href="{{ url('reports') }}"  class="dropdown-toggle">
+                <a href="#"  class="dropdown-toggle">
                     <i class="fa fa-bar-chart"></i>
                     <span>{{ trans('general.reports') }}</span>
                     <i class="fa fa-angle-left pull-right"></i>

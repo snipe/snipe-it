@@ -115,10 +115,10 @@ return array(
 
     'custom' => [
         'alpha_space' => "The :attribute field contains a character that is not allowed.",
-        "email_array"      => "One or more email addresses is invalid.",
-        "hashed_pass"      => "Your current password is incorrect",
-        'dumbpwd'          => 'That password is too common.',
-        "statuslabel_type" => "You must select a valid status label type",
+        "email_array"      => "Satu atau lebih alamat surel tidak valid.",
+        "hashed_pass"      => "Kata sandi anda saat ini salah",
+        'dumbpwd'          => 'Kata sandi itu terlalu umum.',
+        "statuslabel_type" => "Anda harus pilih jenis label status yang valid",
     ],
 
     /*

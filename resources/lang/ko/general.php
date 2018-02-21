@@ -85,7 +85,7 @@
     'file_name'				=> '파일',
     'file_uploads'			=> '파일 올리기',
     'generate'				=> '생성',
-     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
+     'github_markdown'      => '이 항목은 <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>을 채택합니다.',
     'groups'				=> '그룹',
     'gravatar_email'        => 'Gravatar 메일 주소',
     'history'  			    => '기록',
