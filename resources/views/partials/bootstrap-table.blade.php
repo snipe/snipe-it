@@ -56,6 +56,7 @@
             paginationPreText: "{{ trans('general.previous') }}",
             paginationNextText: "{{ trans('general.next') }}",
             pageList: ['10','20', '30','50','100','150','200', '500'],
+            pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
             formatLoadingMessage: function () {
                 return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
