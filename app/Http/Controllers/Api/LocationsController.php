@@ -60,6 +60,9 @@ class LocationsController extends Controller
             case 'parent':
                 $locations->OrderParent($order);
                 break;
+            case 'manager':
+                $locations->OrderManager($order);
+                break;
             default:
                 $locations->orderBy($sort, $order);
                 break;

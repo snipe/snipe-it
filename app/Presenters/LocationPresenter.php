@@ -128,7 +128,7 @@ class LocationPresenter extends Presenter
             ],[
                 "field" => "manager",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "switchable" => true,
                 "title" =>  trans('admin/users/table.manager'),
                 "visible" => false,
