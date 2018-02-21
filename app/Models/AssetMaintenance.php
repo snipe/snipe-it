@@ -154,12 +154,12 @@ class AssetMaintenance extends Model implements ICompanyableChild
 
          return $query->where(function ($query) use ($search) {
 
-                $query->where('title', 'LIKE', '%'.$search.'%')
-                ->orWhere('notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenance_type', 'LIKE', '%'.$search.'%')
-                ->orWhere('cost', 'LIKE', '%'.$search.'%')
-                ->orWhere('start_date', 'LIKE', '%'.$search.'%')
-                ->orWhere('completion_date', 'LIKE', '%'.$search.'%');
+                $query->where('asset_maintenances.title', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.notes', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.asset_maintenance_type', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.cost', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.start_date', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.completion_date', 'LIKE', '%'.$search.'%');
          });
     }
 
