@@ -16,4 +16,9 @@ class AssetPolicy extends CheckoutablePermissionsPolicy
     {
         return $user->hasAccess('assets.view.requestable');
     }
+
+    public function audit(User $user, Asset $asset = null)
+    {
+        return $user->hasAccess('assets.audit');
+    }
 }

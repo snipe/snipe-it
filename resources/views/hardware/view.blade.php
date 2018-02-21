@@ -16,14 +16,24 @@
   <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
     @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
       @if ($asset->assigned_to != '')
+        @can('checkin', \App\Models\Asset::class)
       <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a></li>
+          @endcan
       @else
+       @can('checkout', \App\Models\Asset::class)
       <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a></li>
+          @endcan
       @endif
     @endif
+      @can('edit', \App\Models\Asset::class)
     <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
+      @endcan
+      @can('create', \App\Models\Asset::class)
     <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
+      @endcan
+      @can('audit', \App\Models\Asset::class)
       <li role="presentation"><a href="{{ route('asset.audit.create', $asset->id)  }}">{{ trans('general.audit') }}</a></li>
+     @endcan
   </ul>
 </div>
 @endcan

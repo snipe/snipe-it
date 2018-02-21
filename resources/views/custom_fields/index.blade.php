@@ -98,7 +98,12 @@
             <tr>
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
-              <td>{{ $field->convertUnicodeDbSlug() }}</td>
+              <td>
+                 <code>{{ $field->convertUnicodeDbSlug() }}</code>
+                @if ($field->convertUnicodeDbSlug()!=$field->db_column)
+                  <br><i class="fa fa-warning text-danger"></i>WARNING. This field is in the custom fields table as <code>{{  $field->db_column }}</code> but should be <code>{{ $field->convertUnicodeDbSlug() }}</code>.
+                @endif
+              </td>
               <td>{{ $field->format }}</td>
               <td>{{ $field->element }}</td>
               <td>
