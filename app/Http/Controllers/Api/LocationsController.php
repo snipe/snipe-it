@@ -23,7 +23,7 @@ class LocationsController extends Controller
         $this->authorize('view', Location::class);
         $allowed_columns = [
                 'id','name','address','address2','city','state','country','zip','created_at',
-                'updated_at','parent_id', 'manager_id','image',
+                'updated_at','manager_id','image',
                 'assigned_assets_count','users_count','assets_count','currency'];
 
         $locations = Location::with('parent', 'manager', 'childLocations')->select([
@@ -49,11 +49,22 @@ class LocationsController extends Controller
             $locations = $locations->TextSearch($request->input('search'));
         }
 
+
+
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $locations->orderBy($sort, $order);
+
+        switch ($request->input('sort')) {
+            case 'parent':
+                $locations->OrderParent($order);
+                break;
+            default:
+                $locations->orderBy($sort, $order);
+                break;
+        }
+
 
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
