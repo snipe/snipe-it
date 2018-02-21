@@ -124,7 +124,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::group([ 'prefix' => 'admin','middleware' => ['authorize:superuser']], function () {
+Route::group([ 'prefix' => 'admin','middleware' => ['auth', 'authorize:superuser']], function () {
 
     Route::get('settings', ['as' => 'settings.general.index','uses' => 'SettingsController@getSettings' ]);
     Route::post('settings', ['as' => 'settings.general.save','uses' => 'SettingsController@postSettings' ]);
