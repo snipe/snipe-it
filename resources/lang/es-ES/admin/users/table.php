@@ -30,7 +30,7 @@ return array(
     'title' 				=> 'Puesto',
 	'to_restore_them'		=> 'para restaurarlos.',
     'updateuser' 			=> 'Actualizar Usuario',
-    'username' 				=> 'UsuarioUsuario',
+    'username' 				=> 'Usuario',
 	'user_deleted_text' 	=> 'Este usuario ha sido marcado como eliminado.',
     'username_note' 		=> '(Esto se usa solo para la conexión con Active Directory, no para el inicio de sesión.)',
     'cloneuser'             => 'Clonar Usuario',
