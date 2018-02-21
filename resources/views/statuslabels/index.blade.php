@@ -26,11 +26,13 @@
                     data-pagination="true"
                     data-id-table="statuslabelsTable"
                     data-search="true"
+                    data-show-footer="false"
                     data-side-pagination="server"
                     data-show-columns="true"
                     data-show-export="true"
                     data-show-refresh="true"
                     data-sort-order="asc"
+                    data-sort-name="name"
                     id="statuslabelsTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.statuslabels.index') }}"
@@ -44,9 +46,9 @@
                 <th data-sortable="true" data-field="name" data-formatter="statuslabelsAssetLinkFormatter">{{ trans('admin/statuslabels/table.name') }}</th>
                 <th data-sortable="false" data-field="type" data-formatter="statusLabelTypeFormatter">{{ trans('admin/statuslabels/table.status_type') }}</th>
                   <th data-sortable="true" data-field="assets_count">{{ trans('general.assets') }}</th>
-                <th data-sortable="false" data-field="color" data-formatter="colorSqFormatter">{{ trans('admin/statuslabels/table.color') }}</th>
+                <th data-sortable="true" data-field="color" data-formatter="colorSqFormatter">{{ trans('admin/statuslabels/table.color') }}</th>
                 <th class="text-center" data-sortable="true" data-field="show_in_nav" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.show_in_nav') }}</th>
-                <th data-switchable="false" data-formatter="statuslabelsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
+                <th data-formatter="statuslabelsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>
