@@ -22,17 +22,17 @@ class DepartmentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Department::class);
-        $allowed_columns = ['id','name','image'];
+        $allowed_columns = ['id','name','image','users_count'];
 
         $departments = Department::select([
-            'id',
-            'name',
-            'location_id',
-            'company_id',
-            'manager_id',
-            'created_at',
-            'updated_at',
-            'image'
+            'departments.id',
+            'departments.name',
+            'departments.location_id',
+            'departments.company_id',
+            'departments.manager_id',
+            'departments.created_at',
+            'departments.updated_at',
+            'departments.image'
         ])->with('users')->with('location')->with('manager')->with('company')->withCount('users');
 
         if ($request->has('search')) {
@@ -43,7 +43,18 @@ class DepartmentsController extends Controller
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $departments->orderBy($sort, $order);
+
+        switch ($request->input('sort')) {
+            case 'location':
+                $departments->OrderLocation($order);
+                break;
+            case 'manager':
+                $departments->OrderManager($order);
+                break;
+            default:
+                $departments->orderBy($sort, $order);
+                break;
+        }
 
         $total = $departments->count();
         $departments = $departments->skip($offset)->take($limit)->get();
