@@ -9,6 +9,7 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use DB;
 
 class Location extends SnipeModel
 {
@@ -184,7 +185,7 @@ class Location extends SnipeModel
               })
             // Ugly, ugly code because Laravel sucks at self-joins
                 ->orWhere(function ($query) use ($search) {
-                    $query->whereRaw("parent_id IN (select id from locations where name LIKE '%".$search."%') ");
+                    $query->whereRaw("parent_id IN (select id from ".DB::getTablePrefix()."locations where name LIKE '%".$search."%') ");
                 });
           });
 
