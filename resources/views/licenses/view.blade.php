@@ -49,7 +49,7 @@
                         data-search="true"
                         data-side-pagination="server"
                         data-show-columns="true"
-                        data-show-export="false"
+                        data-show-export="true"
                         data-show-refresh="true"
                         data-sort-order="asc"
                         data-sort-name="name"
