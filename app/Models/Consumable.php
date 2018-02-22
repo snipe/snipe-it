@@ -110,7 +110,7 @@ class Consumable extends SnipeModel
 
     public function users()
     {
-        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id', 'qty')->withTrashed()->withTimestamps();
     }
 
     public function hasUsers()
@@ -141,7 +141,11 @@ class Consumable extends SnipeModel
 
     public function numRemaining()
     {
-        $checkedout = $this->users->count();
+        $checkedout = 0;
+        foreach ($this->users as $user) {
+            if($user->pivot->qty > 0)
+                $checkedout += $user->pivot->qty;
+        }
         $total = $this->qty;
         $remaining = $total - $checkedout;
         return $remaining;

@@ -7,6 +7,7 @@ use Watson\Validating\ValidatingTrait;
 class ConsumableAssignment extends Model
 {
     use CompanyableTrait;
+    use ValidatingTrait;
 
     protected $dates = ['deleted_at'];
     protected $table = 'consumables_users';
@@ -17,7 +18,6 @@ class ConsumableAssignment extends Model
     );
     
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
 
     public function consumable()
     {
