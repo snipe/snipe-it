@@ -55,7 +55,7 @@ abstract class Importer
         'supplier' => 'supplier',
         'termination_date' => 'termination date',
         'warranty_months' => 'warranty',
-        'name' => 'name',
+        'full_name' => 'full name',
         'email' => 'email',
         'username' => 'username'
     ];
@@ -231,7 +231,7 @@ abstract class Importer
      */
     protected function createOrFetchUser($row)
     {
-        $user_name = $this->findCsvMatch($row, "name");
+        $user_name = $this->findCsvMatch($row, "full_name");
         $user_email = $this->findCsvMatch($row, "email");
         $user_username = $this->findCsvMatch($row, "username");
         $first_name = '';
