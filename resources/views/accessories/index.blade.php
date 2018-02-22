@@ -32,6 +32,7 @@
                 data-show-columns="true"
                 data-show-export="true"
                 data-show-refresh="true"
+                data-show-footer="true"
                 data-sort-order="asc"
                 id="accessoriesTable"
                 class="table table-striped snipe-table"

@@ -121,7 +121,7 @@ tr {
                         {id: 'asset_model', text: 'Model Name' },
                         {id: 'image', text: 'Image Filename' },
                         {id: 'model_number', text: 'Model Number' },
-                        {id: 'name', text: 'Full Name' },
+                        {id: 'full_name', text: 'Full Name' },
                         {id: 'status', text: 'Status' },
                         {id: 'warranty_months', text: 'Warranty Months' },
                     ],
