@@ -182,10 +182,10 @@ View Assets for  {{ $user->present()->fullName() }}
               $consumables = array();
               foreach ($user->consumables as $consumable) {
                 if (array_key_exists($consumable->name, $consumables)) { 
-                  $consumables[$consumable->name] += 1; 
+                  $consumables[$consumable->name] += $consumable->pivot->qty; 
                 }
                 else {
-                  $consumables[$consumable->name] = 1;
+                  $consumables[$consumable->name] = $consumable->pivot->qty;
                 }
               }
               ?>

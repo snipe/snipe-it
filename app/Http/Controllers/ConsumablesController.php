@@ -20,6 +20,7 @@ use Str;
 use View;
 use Gate;
 use Image;
+use Validator;
 use App\Http\Requests\ImageUploadRequest;
 
 /**
@@ -260,12 +261,12 @@ class ConsumablesController extends Controller
             // Redirect to the consumable management page with error
             return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
         }
-
+        /*
         // Validate data in request
+        $max_to_consume = -1 * 1;
         $max_to_checkout = $consumable->numRemaining();
         $validator = Validator::make($request->all(), [
-            "asset_id"          => "required",
-            "assigned_qty"      => "required|numeric|between:1,$max_to_checkout"
+            "qty"               => "numeric|between:$max_to_consume,$max_to_checkout"
         ]);
 
         if ($validator->fails()) {
@@ -273,15 +274,16 @@ class ConsumablesController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
+        */
         // Update the consumable data
         $consumable->assigned_to = e(Input::get('assigned_to'));
+        $qty = (e(Input::get('qty')) == 0) ? 1 : e(Input::get('qty'));
 
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
             'assigned_to' => e(Input::get('assigned_to')),
-            'assigned_qty' => e(Input::get('assigned_qty'))
+            'qty' => $qty
         ]);
 
         $logaction = $consumable->logCheckout(e(Input::get('note')), $user);

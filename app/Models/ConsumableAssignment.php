@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Watson\Validating\ValidatingTrait;
 
 class ConsumableAssignment extends Model
 {
@@ -9,6 +10,14 @@ class ConsumableAssignment extends Model
 
     protected $dates = ['deleted_at'];
     protected $table = 'consumables_users';
+    protected $fillable = ['qty'];
+
+    public $rules = array(
+        'qty'         => 'integer'
+    );
+    
+    protected $injectUniqueIdentifier = true;
+    use ValidatingTrait;
 
     public function consumable()
     {
