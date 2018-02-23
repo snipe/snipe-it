@@ -527,6 +527,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'uses' => 'SettingsController@ldaptestlogin'
     ]);
 
+    Route::post('settings/slacktest', [
+        'as' => 'api.settings.slacktest',
+        'uses' => 'SettingsController@slacktest'
+    ]);
+
     Route::post(
         'settings/mailtest',
         [
