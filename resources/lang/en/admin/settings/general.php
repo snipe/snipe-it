@@ -73,6 +73,7 @@ return array(
     'ldap_active_flag'          => 'LDAP Active Flag',
     'ldap_emp_num'              => 'LDAP Employee Number',
     'ldap_email'                => 'LDAP Email',
+    'ldap_phone'                => 'LDAP Phone Number',
     'license'                  => 'Software License',
     'load_remote_text'          => 'Remote Scripts',
     'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
