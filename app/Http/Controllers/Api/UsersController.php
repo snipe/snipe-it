@@ -10,8 +10,10 @@ use App\Models\User;
 use App\Helpers\Helper;
 use App\Http\Requests\SaveUserRequest;
 use App\Models\Asset;
+use App\Models\LicenseSeat;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Http\Transformers\LicenseSeatsTransformer;
 
 class UsersController extends Controller
 {
@@ -69,7 +71,7 @@ class UsersController extends Controller
         if ($request->has('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
         }
-        
+
         if ($request->has('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
@@ -287,5 +289,23 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+    }
+
+    /**
+     * Return JSON containing a list of license seats assigned to a user.
+     *
+     * @author [O. Loesch] [<github@loesch.io]
+     * @since [v4.11]
+     * @param $userId
+     * @return string JSON
+     */
+    public function licenseSeats($id)
+    {
+        $this->authorize('view', User::class);
+        $user = User::findOrFail($id);
+        $this->authorize('view', $user);
+
+        $seats = LicenseSeat::where('assigned_to', '=', $id)->with('license')->get();
+        return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $seats->count());
     }
 }
