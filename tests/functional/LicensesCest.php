@@ -8,8 +8,8 @@ class LicensesCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
 
@@ -47,25 +47,27 @@ class LicensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $license = factory(App\Models\License::class)->make();
+        $license = factory(App\Models\License::class)->states('photoshop')->make([
+            'name' => 'Test License',
+            'company_id' => 3,
+        ]);
         $values = [
-            'name'              => $license->name,
-            'serial'            => $license->serial,
-            'seats'             => $license->seats,
             'company_id'        => $license->company_id,
-            'manufacturer_id'   => $license->manufacturer_id,
-            'license_name'      => $license->license_name,
+            'expiration_date'   => '2018-01-01',
             'license_email'     => $license->license_email,
-            'reassignable'      => true,
-            'supplier_id'       => $license->supplier_id,
+            'license_name'      => $license->license_name,
+            'maintained'        => true,
+            'manufacturer_id'   => $license->manufacturer_id,
+            'name'              => $license->name,
+            'notes'             => $license->notes,
             'order_number'      => $license->order_number,
             'purchase_cost'     => $license->purchase_cost,
             'purchase_date'     => '2016-01-01',
-            'expiration_date'   => '2018-01-01',
-            'termination_date'  => '2020-01-01',
             'purchase_order'    => $license->purchase_order,
-            'maintained'        => true,
-            'notes'             => $license->notes
+            'reassignable'      => true,
+            'seats'             => $license->seats,
+            'serial'            => $license->serial,
+            'termination_date'  => '2020-01-01',
         ];
 
         $I->wantTo("Test Validation Succeeds");

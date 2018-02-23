@@ -12,15 +12,15 @@ class SupplierTest extends BaseTest
      */
     protected $tester;
 
-    public function testSupplierAdd()
-    {
-      $supplier = factory(Supplier::class)->make();
-      $values = [
-        'name' => $supplier->name,
-      ];
+    // public function testSupplierAdd()
+    // {
+    //   $supplier = factory(Supplier::class)->make();
+    //   $values = [
+    //     'name' => $supplier->name,
+    //   ];
 
-      Supplier::create($values);
-      $this->tester->seeRecord('suppliers', $values);
-    }
+    //   Supplier::create($values);
+    //   $this->tester->seeRecord('suppliers', $values);
+    // }
 
 }

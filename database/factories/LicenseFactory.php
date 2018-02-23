@@ -29,6 +29,8 @@ $factory->state(App\Models\License::class, 'photoshop', function ($faker) {
         'manufacturer_id' => 9,
         'purchase_cost' => '299.99',
         'seats' => 10,
+        'purchase_order' => '13503Q',
+        'maintained' => true
     ];
     
     return $data;

@@ -57,9 +57,10 @@ class SettingsController extends Controller
 
         $protocol = array_key_exists('HTTPS', $_SERVER) && ( $_SERVER['HTTPS'] == "on") ? 'https://' : 'http://';
 
-        $host = $_SERVER['SERVER_NAME'];
-        if (($protocol === 'http://' && $_SERVER['SERVER_PORT'] != '80') || ($protocol === 'https://' && $_SERVER['SERVER_PORT'] != '443')) {
-            $host .= ':' . $_SERVER['SERVER_PORT'];
+        $host = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : null;
+        $port = array_key_exists('SERVER_PORT', $_SERVER) ? $_SERVER['SERVER_PORT'] : null;
+        if (($protocol === 'http://' && $port != '80') || ($protocol === 'https://' && $port != '443')) {
+            $host .= ':' . $port;
         }
         $pageURL = $protocol . $host . $_SERVER['REQUEST_URI'];
 

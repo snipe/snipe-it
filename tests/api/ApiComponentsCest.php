@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Component;
 use Illuminate\Support\Facades\Auth;
 
 class ApiComponentsCest
@@ -21,15 +22,15 @@ class ApiComponentsCest
         $I->wantTo('Get a list of components');
 
         // setup
-        $components = factory(\App\Models\Component::class, 10)->create();
+        // $components = factory(\App\Models\Component::class, 10)->create();
 
         // call
-        $I->sendGET('/components');
+        $I->sendGET('/components?limit=10&order=desc');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
         // sample verify
-        $component = $components->random();
+        $component = Component::orderByDesc('created_at')->first();
         $I->seeResponseContainsJson([
             'name' => $component->name,
             'qty' => $component->qty,
@@ -46,7 +47,10 @@ class ApiComponentsCest
         $I->wantTo('Create a new component');
 
         // setup
-        $category = factory(\App\Models\Category::class)->create(['user_id' => $this->user->id]);
+        $category = factory(\App\Models\Category::class)->states('asset-laptop-category')->create([
+            'name' => "Test Category Name",
+            'user_id' => $this->user->id
+        ]);
         $location = factory(\App\Models\Location::class)->create(['user_id' => $this->user->id]);
         $company = factory(\App\Models\Company::class)->create();
 
@@ -107,7 +111,9 @@ class ApiComponentsCest
         $I->wantTo('Update a component with PATCH');
 
         // create
-        $component = factory(\App\Models\Component::class)->create();
+        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+            'name' => "Test Component"
+        ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         $data = [
@@ -142,7 +148,9 @@ class ApiComponentsCest
         $I->wantTo('Update a component with PUT');
 
         // create
-        $component = factory(\App\Models\Component::class)->create();
+        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+            'name' => "Test Component"
+        ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         $data = [
@@ -176,7 +184,9 @@ class ApiComponentsCest
         $I->wantTo('Delete a component');
 
         // create
-        $component = factory(\App\Models\Component::class)->create();
+        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+            'name' => "Test Component"
+        ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         // delete

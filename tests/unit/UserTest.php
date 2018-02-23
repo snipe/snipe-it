@@ -12,20 +12,20 @@ class UserTest extends BaseTest
      */
     protected $tester;
 
-    public function testUserAdd()
-    {
-      $user = factory(User::class)->make();
-      $values = [
-        'first_name' => $user->first_name,
-        'last_name' => $user->last_name,
-        'email' => $user->email,
-        'username' => $user->username,
-        'password' => $user->password,
-      ];
+    // public function testUserAdd()
+    // {
+    //   $user = factory(User::class)->make();
+    //   $values = [
+    //     'first_name' => $user->first_name,
+    //     'last_name' => $user->last_name,
+    //     'email' => $user->email,
+    //     'username' => $user->username,
+    //     'password' => $user->password,
+    //   ];
 
-      User::create($values);
-      $this->tester->seeRecord('users', $values);
-    }
+    //   User::create($values);
+    //   $this->tester->seeRecord('users', $values);
+    // }
 
 
     public function testFirstNameSplit()

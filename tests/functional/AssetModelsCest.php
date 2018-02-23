@@ -6,8 +6,8 @@ class AssetModelsCest
     public function _before(FunctionalTester $I)
     {
         $I->amOnPage('/login');
-        $I->fillField('username', 'snipeit');
-        $I->fillField('password', 'snipeit');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
         $I->click('Login');
     }
     // tests
@@ -33,15 +33,15 @@ class AssetModelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $model = factory(App\Models\AssetModel::class)->make();
+        $model = factory(App\Models\AssetModel::class)->states('mbp-13-model')->make(['name'=>'Test Model']);
         $values = [
-            'name'              => $model->name,
-            'manufacturer_id'   => $model->manufacturer_id,
             'category_id'       => $model->category_id,
-            'model_number'      => $model->model_number,
+            'depreciation_id'   => $model->depreciation_id,
             'eol'               => $model->eol,
+            'manufacturer_id'   => $model->manufacturer_id,
+            'model_number'      => $model->model_number,
+            'name'              => $model->name,
             'notes'             => $model->notes,
-            'requestable'       => $model->requestable,
         ];
 
         $I->wantTo("Test Validation Succeeds");
@@ -56,7 +56,7 @@ class AssetModelsCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete an asset model');
-        $model = factory(App\Models\AssetModel::class)->create();
+        $model = factory(App\Models\AssetModel::class)->states('mbp-13-model')->create(['name' => "Test Model"]);
         $I->sendDelete(route('models.destroy', $model->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

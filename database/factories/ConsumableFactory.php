@@ -28,7 +28,8 @@ $factory->state(App\Models\Consumable::class, 'cardstock', function ($faker) {
         'category_id' => 10,
         'manufacturer_id' => 10,
         'qty' => 10,
-        'min_amt' => 2
+        'min_amt' => 2,
+        'company_id' => 3
     ];
 });
 

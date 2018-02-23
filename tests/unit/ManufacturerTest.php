@@ -12,15 +12,15 @@ class ManufacturerTest extends BaseTest
      */
     protected $tester;
 
-    public function testManufacturerAdd()
-    {
-      $manufacturers = factory(Manufacturer::class)->make();
-      $values = [
-        'name' => $manufacturers->name,
-      ];
+    // public function testManufacturerAdd()
+    // {
+    //   $manufacturers = factory(Manufacturer::class)->make();
+    //   $values = [
+    //     'name' => $manufacturers->name,
+    //   ];
 
-      Manufacturer::create($values);
-      $this->tester->seeRecord('manufacturers', $values);
-    }
+    //   Manufacturer::create($values);
+    //   $this->tester->seeRecord('manufacturers', $values);
+    // }
 
 }
