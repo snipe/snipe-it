@@ -169,6 +169,7 @@ abstract class Importer
      */
     public function lookupCustomKey($key)
     {
+        // dd($this->fieldMap);
         if (array_key_exists($key, $this->fieldMap)) {
             $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
             return $this->fieldMap[$key];

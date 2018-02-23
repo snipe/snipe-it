@@ -18,6 +18,7 @@ php:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
+  - phpenv config-add .github/travis-memory.ini
   - phantomjs --webdriver=4444  &
   - sleep 4
   - mysql -e 'CREATE DATABASE snipeit_unit;'
@@ -49,7 +50,7 @@ script:
 #  - ./vendor/bin/codecept run acceptance --env=testing-ci
   - ./vendor/bin/codecept run functional --env=functional-travis
 #script: ./vendor/bin/codecept run
-  - ./vendor/bin/codecept run api --env=testing-ci
+  - ./vendor/bin/codecept run api --env=functional-travis
 
 after_success:
   - codecov
