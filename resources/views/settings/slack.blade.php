@@ -40,8 +40,11 @@
 
                     <p style="border-bottom: 0px;">
                         {!! trans('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook')) !!}
-                    </p>
 
+                    @if (($setting->slack_channel=='') && ($setting->slack_endpoint==''))
+                           {{ trans('admin/settings/general.slack_integration_help_button') }}
+                    @endif
+                    </p>
 
 
                     <div class="col-md-11 col-md-offset-1" style="border-top: 0px;">
@@ -98,7 +101,7 @@
                                 {{ Form::label('est_slack', 'Test Slack') }}
                             </div>
                             <div class="col-md-9" id="slacktestrow">
-                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test Integration</a>
+                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test <i class="fa fa-slack"></i> Integration</a>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 <span id="slacktesticon"></span>
