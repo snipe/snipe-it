@@ -52,6 +52,7 @@ class LdapSync extends Command
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
+        $ldap_result_phone = Setting::getSettings()->ldap_phone;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -67,10 +68,10 @@ class LdapSync extends Command
 
         $summary = array();
 
-        try {    
+        try {
             if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
-                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');                
+                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
                 $search_base = null;
             }
@@ -106,7 +107,7 @@ class LdapSync extends Command
             // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
             $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
             $ldap_ou_lengths = array();
-            
+
             foreach ($ldap_ou_locations as $location) {
                 $ldap_ou_lengths[] = strlen($location["ldap_ou"]);
             }
@@ -159,6 +160,7 @@ class LdapSync extends Command
                 $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
                 $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
+                $item["phone"] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : "" ;
                 $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
                 $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
 
@@ -184,6 +186,7 @@ class LdapSync extends Command
                 $user->last_name = e($item["lastname"]);
                 $user->username = e($item["username"]);
                 $user->email = e($item["email"]);
+                $user->phone = e($item["phone"]);
                 $user->employee_num = e($item["employee_number"]);
                 $user->activated = $item['activated'];
 
