@@ -8,6 +8,8 @@ use App\Models\Ldap;
 use Validator;
 use App\Models\Setting;
 use Mail;
+use App\Notifications\SlackTest;
+use Notification;
 
 class SettingsController extends Controller
 {
@@ -95,6 +97,29 @@ class SettingsController extends Controller
 
 
     }
+
+
+    public function slacktest()
+    {
+
+        if ($settings = Setting::getSettings()->slack_channel=='') {
+            \Log::debug('Slack is not enabled. Cannot test.');
+            return response()->json(['message' => 'Slack is not enabled, cannot test.'], 400);
+        }
+
+        \Log::debug('Preparing to test slack connection');
+
+        try {
+            Notification::send($settings = Setting::getSettings(), new SlackTest());
+            return response()->json(['message' => 'Success'], 200);
+        } catch (\Exception $e) {
+            \Log::debug('Slack connection failed');
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+
+
+    }
+
 
     /**
      * Test the email configuration

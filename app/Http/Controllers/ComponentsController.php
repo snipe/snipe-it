@@ -194,7 +194,7 @@ class ComponentsController extends Controller
     public function destroy($componentId)
     {
         if (is_null($component = Component::find($componentId))) {
-            return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         }
 
         $this->authorize('delete', $component);
