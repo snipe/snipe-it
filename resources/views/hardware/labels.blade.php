@@ -14,6 +14,8 @@
     $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='') ? $settings->labels_height - .25 : $settings->labels_height;
     // Leave space on left for QR code if necessary
     $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .1: $settings->labels_width);
+    // Leave space on left for company logo if necessary
+    $qr_txt_size = ($settings->labels_display_company_logo=='1' ? $qr_txt_size -$qr_size: $qr_txt_size);
     ?>
 
   <style>
@@ -40,13 +42,15 @@
     page-break-after:always;
   }
 
-  div.qr_img {
+    div.logo,
+    div.qr_img {
     width: {{ $qr_size }}in;
     height: {{ $qr_size }}in;
     float: left;
     display: inline-block;
-    padding-right: .04in;
+    padding-right: .02in;
   }
+  img.logo,
   img.qr_img {
     width: 100%;
     height: 100%;
@@ -105,12 +109,19 @@
 	<?php $count++; ?>
   <div class="label"{!!  ($count % $settings->labels_per_page == 0) ? ' style="margin-bottom: 0px;"' : '' !!}>
 
+      @if (($settings->labels_display_company_logo=='1') && ($asset->company->image))
+    <div class="qr_img">
+            <img src="{{ url('/') }}/uploads/companies/{{ $asset->company->image }}" class="qr_img" />
+    </div>
+      @endif
+
       @if ($settings->qr_code=='1')
     <div class="qr_img">
       <img src="./{{ $asset->id }}/qr_code" class="qr_img">
     </div>
       @endif
 
+      
     <div class="qr_text">
         @if ($settings->qr_text!='')
         <div class="pull-left">

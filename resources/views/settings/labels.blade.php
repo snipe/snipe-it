@@ -183,6 +183,11 @@
                                         {{ Form::checkbox('labels_display_company_name', '1', Input::old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal']) }}
                                         {{ trans('admin/companies/table.name') }}
                                     </label>
+                                    <label>
+                                        {{ Form::checkbox('labels_display_company_logo', '1', Input::old('labels_display_company_logo',   $setting->labels_display_company_logo),['class' => 'minimal']) }}
+                                        {{ trans('general.company_logo') }}
+                                    </label>
+
                                 </div> <!--/.CHECKBOX-->
                             </div> <!--/.col-md-9-->
                         </div> <!--/.form-group-->

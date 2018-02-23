@@ -43,6 +43,7 @@
     'clear_selection'		=> 'Clear Selection',
     'companies'			    => 'Compagnies',
     'company'				=> 'Compagnie',
+    'company_logo'  		=> 'Logo de la compagnie',
     'component'			    => 'Composant',
     'components'			=> 'Composants',
 	'complete'				=> 'Terminé',
