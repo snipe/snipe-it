@@ -59,7 +59,8 @@ LDAP User Sync
           <tr>
               <th>Username</th><th>Employee Number</th>
               <th>First Name</th><th>Last Name</th>
-              <th>Email</th><th>Notes</th>
+              <th>Email</th><th>Phone Number</th>
+              <th>Notes</th>
           </tr>
 
           @foreach (Session::get('summary') as $entry)
@@ -69,6 +70,7 @@ LDAP User Sync
               <td>{{ $entry['firstname'] }}</td>
               <td>{{ $entry['lastname'] }}</td>
               <td>{{ $entry['email'] }}</td>
+              <td>{{ $entry['phone'] }}</td>
               <td>
                 @if ($entry['status']=='success')
                   <i class="fa fa-check"></i> {!! $entry['note'] !!}
