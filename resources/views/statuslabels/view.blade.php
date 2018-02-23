@@ -46,7 +46,7 @@
                                         class="table table-striped snipe-table"
                                         data-url="{{route('api.assets.index', ['status_id' => $statuslabel->id]) }}"
                                         data-export-options='{
-                              "fileName": "export-locations-{{ str_slug($statuslabel->name) }}-assets-{{ date('Y-m-d') }}",
+                              "fileName": "export-assets-{{ str_slug($statuslabel->name) }}-assets-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                                 </table>

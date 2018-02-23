@@ -627,19 +627,24 @@
               <div class="table-responsive">
 
                 <table
-                        class="table table-striped snipe-table"
-                        data-toolbar="#toolbar"
+                        data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                        data-cookie-id-table="assetsTable"
+                        data-pagination="true"
+                        data-id-table="assetsTable"
+                        data-search="true"
+                        data-side-pagination="server"
+                        data-show-columns="true"
                         data-show-export="true"
                         data-show-refresh="true"
-                        data-export-options='{
-                           "fileName": "{{ str_slug($asset->asset_tag) }}-assets-export",
-                           "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                         }'
-                        data-search="false"
+                        data-sort-order="asc"
+                        id="assetsListingTable"
+                        class="table table-striped snipe-table"
                         data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
-                        data-show-footer="true"
-                        data-cookie-id-table="assetAssetsTable"
-                        data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}">
+                        data-export-options='{
+                              "fileName": "export-assets-{{ str_slug($asset->name) }}-assets-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
                 </table>
 
 
