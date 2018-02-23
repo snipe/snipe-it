@@ -7,4 +7,4 @@ modules:
         - \Helper\Unit
         - Asserts
         - Laravel5:
-            environment_file: .env.tests
+            environment_file: .env.unit-tests
