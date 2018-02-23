@@ -28,4 +28,7 @@
 
         <server name="SERVER_NAME" value="http://testing.dev"/>
     </php>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
 </phpunit>
