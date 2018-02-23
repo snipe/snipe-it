@@ -373,14 +373,25 @@
               <thead>
                 <tr>
                   <th class="col-md-8">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('general.date') }}</th>
+                  <th class="col-md-4">{{ trans('general.quantity') }}</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($user->consumables as $consumable)
+                <?php 
+                $consumables = array();
+                foreach ($user->consumables as $consumable) {
+                  if (array_key_exists($consumable->name, $consumables)) { 
+                    $consumables[$consumable->name] += $consumable->pivot->qty; 
+                  }
+                  else {
+                    $consumables[$consumable->name] = $consumable->pivot->qty;
+                  }
+                }
+                ?>
+                @foreach ($consumables as $name => $quantity)
                 <tr>
-                  <td>{!! $consumable->present()->nameUrl() !!}</a></td>
-                  <td>{{ $consumable->created_at }}</td>
+                  <td>{{ $name }}</td>
+                  <td>{{ $quantity }}</td>
                 </tr>
                 @endforeach
               </tbody>
