@@ -28,30 +28,32 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
 
         $users = User::select([
-            'users.id',
-            'users.employee_num',
-            'users.two_factor_enrolled',
-            'users.jobtitle',
-            'users.email',
-            'users.phone',
+            'users.activated',
             'users.address',
+            'users.avatar',
             'users.city',
-            'users.state',
-            'users.country',
-            'users.zip',
-            'users.username',
-            'users.location_id',
-            'users.manager_id',
-            'users.first_name',
-            'users.last_name',
-            'users.created_at',
-            'users.notes',
             'users.company_id',
-            'users.last_login',
+            'users.country',
+            'users.created_at',
             'users.deleted_at',
             'users.department_id',
-            'users.activated',
-            'users.avatar',
+            'users.email',
+            'users.employee_num',
+            'users.first_name',
+            'users.id',
+            'users.jobtitle',
+            'users.last_login',
+            'users.last_name',
+            'users.location_id',
+            'users.manager_id',
+            'users.notes',
+            'users.permissions',
+            'users.phone',
+            'users.state',
+            'users.two_factor_enrolled',
+            'users.updated_at',
+            'users.username',
+            'users.zip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
             ->withCount('assets','licenses','accessories','consumables');
@@ -69,7 +71,7 @@ class UsersController extends Controller
         if ($request->has('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
         }
-        
+
         if ($request->has('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
