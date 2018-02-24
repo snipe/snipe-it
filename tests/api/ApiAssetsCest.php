@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\Helper;
+use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,10 +13,10 @@ class ApiAssetsCest
 
     public function _before(ApiTester $I)
     {
-        // $I->setupDatabase();
         $this->faker = \Faker\Factory::create();
         $this->user = \App\Models\User::find(1);
         $this->timeFormat = Setting::getSettings()->date_display_format .' '. Setting::getSettings()->time_display_format;
+        $this->dateFormat = Setting::getSettings()->date_display_format;
         $I->amBearerAuthenticated($I->getToken($this->user));
     }
 
@@ -23,9 +25,6 @@ class ApiAssetsCest
     {
 
         $I->wantTo('Get a list of assets');
-
-        // We rely on the seeded database for this.  No need to create new assets.
-        // $assets = factory(\App\Models\Asset::class, 10)->create();
 
         // call
         $I->sendGET('/hardware?limit=10');
@@ -85,33 +84,17 @@ class ApiAssetsCest
                     'last_name'=> e($asset->assigneduser->last_name)
                 ]  : null,
                 'warranty_months' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
-                'warranty_expires' => ($asset->warranty_months > 0) ?  [
-                    'datetime' => $asset->created_at->format('Y-m-d'),
-                    'formatted' => $asset->created_at->format('Y-m-d'),
-                ] : null,
+                'warranty_expires' => ($asset->warranty_months > 0) ?
+                    Helper::getFormattedDateObject($asset->warranty_expires, 'date')
+                    : null,
 
-                // I have no idea why these cause the test to fail.  I think it's something about nested json.
-                // 'created_at' => ($asset->created_at) ? [
-                //     'datetime' => $asset->created_at->format('Y-m-d H:i:s'),
-                //     'formatted' => $asset->created_at->format('Y-m-d H:i a'),
-                // ] : null,
-                // 'updated_at' => ($asset->updated_at) ? [
-                //     'datetime' => $asset->updated_at->format('Y-m-d H:i:s'),
-                //     'formatted' => $asset->updated_at->format('Y-m-d H:i a'),
-                // ] : null,
-                // // TODO: Implement last_audit_date and next_audit_date
-                // 'purchase_date' => ($asset->purchase_date) ? [
-                //     'datetime' => $asset->purchase_date->format('Y-m-d'),
-                //     'formatted' => $asset->purchase_date->format('Y-m-d'),
-                // ] : null,
-                // 'last_checkout' => ($asset->last_checkout) ? [
-                //     'datetime' => $asset->last_checkout->format('Y-m-d'),
-                //     'formatted' => $asset->last_checkout->format('Y-m-d'),
-                // ] : null,
-                // 'expected_checkin' => ($asset->created_at) ? [
-                //     'date' => $asset->created_at->format('Y-m-d'),
-                //     'formatted' => $asset->created_at->format('Y-m-d'),
-                // ] : null,
+                'created_at' => Helper::getFormattedDateObject($asset->created_at, 'datetime'),
+                'updated_at' => Helper::getFormattedDateObject($asset->updated_at, 'datetime'),
+                'last_audit_date' => Helper::getFormattedDateObject($asset->last_audit_date, 'datetime'),
+                'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date, 'date'),
+                'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
+                'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
+                'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
                 'purchase_cost' => (float) $asset->purchase_cost,
                 'user_can_checkout' => (bool) $asset->availableForCheckout(),
                 'available_actions' => [
@@ -211,7 +194,6 @@ class ApiAssetsCest
 
         // verify
         $I->sendGET('/hardware/' . $asset->id);
-        // dd($I->grabResponse());
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson([
@@ -256,31 +238,17 @@ class ApiAssetsCest
                 'last_name'=> e($temp_asset->assigneduser->last_name)
             ]  : null,
             'warranty_months' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
-            'warranty_expires' => ($asset->warranty_months > 0) ?  [
-                'datetime' => $asset->created_at->format('Y-m-d'),
-                'formatted' => $asset->created_at->format('Y-m-d'),
-            ] : null,
-            // 'created_at' => ($asset->created_at) ? [
-            //     'datetime' => $asset->created_at->format('Y-m-d H:i:s'),
-            //     'formatted' => $asset->created_at->format($this->timeFormat),
-            // ] : null,
-            // 'updated_at' => ($asset->updated_at) ? [
-            //     'datetime' => $asset->updated_at->format('Y-m-d H:i:s'),
-            //     'formatted' => $asset->updated_at->format($this->timeFormat),
-            // ] : null,
-            'purchase_date' => ($asset->purchase_date) ? [
-                'date' => $temp_asset->purchase_date->format('Y-m-d'),
-                'formatted' => $temp_asset->purchase_date->format('Y-m-d'),
-            ] : null,
-            // 'last_checkout' => ($asset->last_checkout) ? [
-            //     'datetime' => $asset->last_checkout->format('Y-m-d'),
-            //     'formatted' => $asset->last_checkout->format('Y-m-d'),
-            // ] : null,
-            // 'expected_checkin' => ($asset->created_at) ? [
-            //     'date' => $asset->created_at->format('Y-m-d'),
-            //     'formatted' => $asset->created_at->format('Y-m-d'),
-            // ] : null,
-            // 'purchase_cost' => (float) $asset->purchase_cost,
+            'warranty_expires' => ($asset->warranty_months > 0) ?
+                Helper::getFormattedDateObject($asset->warranty_months, 'date')
+                : null,
+            'created_at' => Helper::getFormattedDateObject($asset->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($asset->updated_at, 'datetime'),
+            'purchase_date' => Helper::getFormattedDateObject($temp_asset->purchase_date, 'date'),
+            'last_audit_date' => Helper::getFormattedDateObject($temp_asset->last_audit_date, 'datetime'),
+            'next_audit_date' => Helper::getFormattedDateObject($temp_asset->next_audit_date, 'date'),
+            'last_checkout' => Helper::getFormattedDateObject($temp_asset->last_checkout, 'datetime'),
+            'expected_checkin' => Helper::getFormattedDateObject($temp_asset->expected_checkin, 'date'),
+            'purchase_cost' => Helper::formatCurrencyOutput($temp_asset->purchase_cost),
             'user_can_checkout' => (bool) $temp_asset->availableForCheckout(),
             'available_actions' => [
                 'checkout' => (bool) Gate::allows('checkout', Asset::class),
@@ -390,31 +358,17 @@ class ApiAssetsCest
                 'last_name'=> e($temp_asset->assigneduser->last_name)
             ]  : null,
             'warranty_months' =>  ($asset->warranty_months > 0) ? e($asset->warranty_months . ' ' . trans('admin/hardware/form.months')) : null,
-            'warranty_expires' => ($asset->warranty_months > 0) ?  [
-                'datetime' => $asset->created_at->format('Y-m-d'),
-                'formatted' => $asset->created_at->format('Y-m-d'),
-            ] : null,
-            // 'created_at' => ($asset->created_at) ? [
-            //     'datetime' => $asset->created_at->format('Y-m-d H:i:s'),
-            //     'formatted' => $asset->created_at->format('Y-m-d H:i a'),
-            // ] : null,
-            // 'updated_at' => ($asset->updated_at) ? [
-            //     'datetime' => $asset->updated_at->format('Y-m-d H:i:s'),
-            //     'formatted' => $asset->updated_at->format('Y-m-d H:i a'),
-            // ] : null,
-            'purchase_date' => ($asset->purchase_date) ? [
-                'date' => $temp_asset->purchase_date->format('Y-m-d'),
-                'formatted' => $temp_asset->purchase_date->format('Y-m-d'),
-            ] : null,
-            // 'last_checkout' => ($asset->last_checkout) ? [
-            //     'datetime' => $asset->last_checkout->format('Y-m-d'),
-            //     'formatted' => $asset->last_checkout->format('Y-m-d'),
-            // ] : null,
-            // 'expected_checkin' => ($asset->created_at) ? [
-            //     'date' => $asset->created_at->format('Y-m-d'),
-            //     'formatted' => $asset->created_at->format('Y-m-d'),
-            // ] : null,
-            // 'purchase_cost' => (float) $asset->purchase_cost,
+             'warranty_expires' => ($asset->warranty_months > 0) ?
+                Helper::getFormattedDateObject($asset->warranty_months, 'date')
+                : null,
+            'created_at' => Helper::getFormattedDateObject($asset->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($asset->updated_at, 'datetime'),
+            'purchase_date' => Helper::getFormattedDateObject($temp_asset->purchase_date, 'date'),
+            'last_audit_date' => Helper::getFormattedDateObject($temp_asset->last_audit_date, 'datetime'),
+            'next_audit_date' => Helper::getFormattedDateObject($temp_asset->next_audit_date, 'date'),
+            'last_checkout' => Helper::getFormattedDateObject($temp_asset->last_checkout, 'datetime'),
+            'expected_checkin' => Helper::getFormattedDateObject($temp_asset->expected_checkin, 'date'),
+            'purchase_cost' => Helper::formatCurrencyOutput($temp_asset->purchase_cost),
             'user_can_checkout' => (bool) $temp_asset->availableForCheckout(),
             'available_actions' => [
                 'checkout' => (bool) Gate::allows('checkout', Asset::class),
@@ -448,7 +402,6 @@ class ApiAssetsCest
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson(); // @todo: response is not JSON
 
-        
         // $scenario->incomplete('not found response should be JSON, receiving HTML instead');
     }
 }
