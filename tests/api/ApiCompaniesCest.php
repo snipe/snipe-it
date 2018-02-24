@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\Helper;
+use App\Http\Transformers\CompaniesTransformer;
 use App\Models\Company;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class ApiCompaniesCest
         $I->wantTo('Get a list of companies');
 
         // call
-        $I->sendGET('/companies?limit=10');
+        $I->sendGET('/companies?order_by=id&limit=10');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -35,7 +36,8 @@ class ApiCompaniesCest
         // sample verify
         $company = App\Models\Company::withCount('assets','licenses','accessories','consumables','components','users')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson($this->generateJsonResponse($company, $company));
+        // $I->seeResponseContainsJson($this->generateJsonResponse($company, $company));
+        $I->seeResponseContainsJson((new CompaniesTransformer)->transformCompany($company));
     }
 
     /** @test */
@@ -92,12 +94,18 @@ class ApiCompaniesCest
         $I->assertEquals(trans('admin/companies/message.update.success'), $response->messages);
         $I->assertEquals($company->id, $response->payload->id); // company id does not change
         $I->assertEquals($temp_company->name, $response->payload->name); // company name updated
+        // Some manual copying to compare against
+        $temp_company->created_at = Carbon::parse($response->payload->created_at->datetime);
+        $temp_company->updated_at = Carbon::parse($response->payload->updated_at->datetime);
+        $temp_company->id = $company->id;
 
         // verify
         $I->sendGET('/companies/' . $company->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson($this->generateJsonResponse($temp_company, $company));
+        // $I->seeResponseContainsJson($this->generateJsonResponse($temp_company, $company));
+        $I->seeResponseContainsJson((new CompaniesTransformer)->transformCompany($temp_company));
+
     }
 
     /** @test */
@@ -124,26 +132,5 @@ class ApiCompaniesCest
         $I->sendGET('/companies/' . $company->id);
         $I->seeResponseCodeIs(404);
         $I->seeResponseIsJson();
-    }
-
-    protected function generateJsonResponse($company, $orig_company)
-    {
-        return [
-            'id' => (int) $orig_company->id,
-            'name' => e($company->name),
-            'image' => ($company->image) ? url('/').'/uploads/companies/'.e($company->image) : null,
-            'created_at' => Helper::getFormattedDateObject($orig_company->created_at, 'datetime'),
-            'updated_at' => Helper::getFormattedDateObject($orig_company->updated_at, 'datetime'),
-            'assets_count' => (int) $company->assets_count,
-            'licenses_count' => (int) $company->licenses_count,
-            'accessories_count' => (int) $company->accessories_count,
-            'consumables_count' => (int) $company->consumables_count,
-            'components_count' => (int) $company->components_count,
-            'users_count' => (int) $company->users_count,
-            // 'available_actions' => [
-            //     'update' => (bool) Gate::allows('update', Company::class),
-            //     'delete' => (bool) Gate::allows('delete', Company::class),
-            // ],
-        ];
     }
 }

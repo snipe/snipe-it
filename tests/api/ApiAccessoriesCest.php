@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\Helper;
+use App\Http\Transformers\AccessoriesTransformer;
 use App\Models\Accessory;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ class ApiAccessoriesCest
         $this->user = \App\Models\User::find(1);
         $this->timeFormat = Setting::getSettings()->date_display_format .' '. Setting::getSettings()->time_display_format;
         $this->dateFormat = Setting::getSettings()->date_display_format;
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->amBearerAuthenticated($I->getToken($this->user));
     }
 
@@ -31,10 +33,12 @@ class ApiAccessoriesCest
 
         $response = json_decode($I->grabResponse(), true);
         // dd($response);
+        // dd($response);
         // sample verify
         $accessory = App\Models\Accessory::orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        $I->seeResponseContainsJson($this->generateJsonResponse($accessory, $accessory));
+        // $I->seeResponseContainsJson($this->generateJsonResponse($accessory, $accessory));
+        $I->seeResponseContainsJson((new AccessoriesTransformer)->transformAccessory($accessory));
     }
 
     /** @test */
@@ -43,7 +47,7 @@ class ApiAccessoriesCest
         $I->wantTo('Create a new accessory');
 
         $temp_accessory = factory(\App\Models\Accessory::class)->states('apple-bt-keyboard')->make([
-            'accessory_tag' => "Test Accessory Tag",
+            'name' => "Test Accessory Name",
             'company_id' => 2
         ]);
 
@@ -117,13 +121,15 @@ class ApiAccessoriesCest
         $I->assertEquals($accessory->id, $response->payload->id); // accessory id does not change
         $I->assertEquals($temp_accessory->company_id, $response->payload->company_id); // company_id updated
         $I->assertEquals($temp_accessory->name, $response->payload->name); // accessory name updated
-        $I->assertEquals($temp_accessory->location_id, $response->payload->location_id); // accessory rtd_location_id updated
-
+        $I->assertEquals($temp_accessory->location_id, $response->payload->location_id); // accessory location_id updated
+        $temp_accessory->created_at = Carbon::parse($response->payload->created_at);
+        $temp_accessory->updated_at = Carbon::parse($response->payload->updated_at);
+        $temp_accessory->id = $accessory->id;
         // verify
         $I->sendGET('/accessories/' . $accessory->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson($this->generateJsonResponse($temp_accessory, $accessory));
+        $I->seeResponseContainsJson((new AccessoriesTransformer)->transformAccessory($temp_accessory));
     }
 
     /** @test */
@@ -149,50 +155,6 @@ class ApiAccessoriesCest
         // verify, expect a 200
         $I->sendGET('/accessories/' . $accessory->id);
         $I->seeResponseCodeIs(404);
-
-        $scenario->incomplete('not found response should be JSON, receiving HTML instead');
-    }
-
-    protected function generateJsonResponse($accessory, $orig_accessory)
-    {
-        return [
-            'id' => (int) $orig_accessory->id,
-            'name' => e($accessory->name),
-            'company' => ($accessory->company) ? [
-                'id' => (int) $accessory->company->id,
-                'name'=> e($accessory->company->name)
-            ] : null,
-            'manufacturer' => ($accessory->manufacturer) ? [
-                'id' => (int) $accessory->manufacturer->id,
-                'name'=> e($accessory->manufacturer->name)
-            ] : null,
-            'supplier' => ($accessory->supplier) ? [
-                'id' => (int) $accessory->supplier->id,
-                'name'=> e($accessory->supplier->name)
-            ] : null,
-            'model_number' => ($accessory) ? e($accessory->model_number) : null,
-            'category' => ($accessory->category) ? [
-                'id' => (int) $accessory->category->id,
-                'name'=> e($accessory->category->name)
-            ]  : null,
-            'location' => ($accessory->location) ? [
-                'id' => (int) $accessory->location->id,
-                'name'=> e($accessory->location->name)
-            ]  : null,
-            'notes' => ($accessory->notes) ? e($accessory->notes) : null,
-            'qty' => $accessory->qty,
-            'purchase_date' => Helper::getFormattedDateObject($accessory->purchase_date, 'date'),
-            'purchase_cost' => ($accessory->purchase_cost) ? e($accessory->purchase_cost) : null,
-            'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
-            'image' => ($accessory->image) ? url('/').'/uploads/accessories/'.e($accessory->image) : null,
-            'created_at' => Helper::getFormattedDateObject($orig_accessory->created_at, 'datetime'),
-            'updated_at' => Helper::getFormattedDateObject($orig_accessory->updated_at, 'datetime'),
-            'available_actions' => [
-                'checkout' => (bool) Gate::allows('checkout', Accessory::class),
-                'checkin' => (bool) false,
-                'update' => (bool) Gate::allows('update', Accessory::class),
-                'delete' => (bool) Gate::allows('delete', Accessory::class),
-            ],
-        ];
+        $I->seeResponseIsJson();
     }
 }
