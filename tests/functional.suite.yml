@@ -18,6 +18,10 @@ modules:
             password: ''
             dump: tests/_data/dump.sql
             populate: true
-            cleanup: true
+            populator: 'mysql -u snipeit_laravel snipeittests < tests/_data/dump.sql'
+            cleanup: false
         - REST:
             depends: Laravel5
+groups:
+    func1: tests/functional/func-part-1.txt
+    func2: tests/functional/func-part-2.txt
