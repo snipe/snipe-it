@@ -636,8 +636,6 @@ class AssetsController extends Controller
             $asset->location_id =  $request->input('location_id');
         }
 
-        $asset->location_id = $asset->rtd_location_id;
-
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));
         }
