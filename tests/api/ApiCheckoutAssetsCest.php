@@ -6,7 +6,7 @@ use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
-class ApiAssetsCest
+class ApiCheckoutAssetsCest
 {
     protected $faker;
     protected $user;
