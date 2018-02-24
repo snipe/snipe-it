@@ -171,4 +171,21 @@ class ApiUsersCest
         $I->seeResponseCodeIs(404);
         $I->seeResponseIsJson();
     }
+
+    /** @test */
+    public function fetchUserAssetsTest(ApiTester $I, $scenario) {
+        $I->wantTo("Fetch assets for a user");
+
+        $user = User::has('assets')->first();
+        $asset = $user->assets->shuffle()->first();
+        $I->sendGET("/users/{$user->id}/assets");
+        $response = json_decode($I->grabResponse());
+        $I->seeResponseCodeIs(200);
+        $I->seeResponseIsJson();
+
+        // Just test a random one.
+        $I->seeResponseContainsJson([
+            'asset_tag' => $asset->asset_tag,
+        ]);
+    }
 }
