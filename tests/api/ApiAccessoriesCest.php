@@ -14,8 +14,6 @@ class ApiAccessoriesCest
     public function _before(ApiTester $I)
     {
         $this->user = \App\Models\User::find(1);
-        $this->timeFormat = Setting::getSettings()->date_display_format .' '. Setting::getSettings()->time_display_format;
-        $this->dateFormat = Setting::getSettings()->date_display_format;
         $I->haveHttpHeader('Accept', 'application/json');
         $I->amBearerAuthenticated($I->getToken($this->user));
     }

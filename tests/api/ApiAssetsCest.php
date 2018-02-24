@@ -17,8 +17,6 @@ class ApiAssetsCest
         $this->faker = \Faker\Factory::create();
         $this->user = \App\Models\User::find(1);
         Setting::getSettings()->time_display_format = "H:i";
-        $this->timeFormat = Setting::getSettings()->date_display_format .' '. Setting::getSettings()->time_display_format;
-        $this->dateFormat = Setting::getSettings()->date_display_format;
         $I->amBearerAuthenticated($I->getToken($this->user));
     }
 
