@@ -19,7 +19,7 @@ class ApiAccessoriesCest
     }
 
     /** @test */
-    public function indexAccessorys(ApiTester $I)
+    public function indexAccessories(ApiTester $I)
     {
 
         $I->wantTo('Get a list of accessories');
@@ -30,12 +30,8 @@ class ApiAccessoriesCest
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse(), true);
-        // dd($response);
-        // dd($response);
         // sample verify
         $accessory = App\Models\Accessory::orderByDesc('created_at')->take(10)->get()->shuffle()->first();
-
-        // $I->seeResponseContainsJson($this->generateJsonResponse($accessory, $accessory));
         $I->seeResponseContainsJson((new AccessoriesTransformer)->transformAccessory($accessory));
     }
 
@@ -152,7 +148,7 @@ class ApiAccessoriesCest
 
         // verify, expect a 200
         $I->sendGET('/accessories/' . $accessory->id);
-        $I->seeResponseCodeIs(404);
+        $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
 }

@@ -32,13 +32,10 @@ class ApiLocationsCest
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse(), true);
-        // dd($response);
         // sample verify
         $location = App\Models\Location::orderByDesc('created_at')
             ->withCount('assignedAssets', 'assets',  'users')
             ->take(1)->get()->shuffle()->first();
-        // $I->seeResponseContainsJson($this->generateJsonResponse($location, $location));
-        // dd((new LocationsTransformer)->transformLocation($location));
         $I->seeResponseContainsJson((new LocationsTransformer)->transformLocation($location));
     }
 
@@ -142,36 +139,7 @@ class ApiLocationsCest
 
         // verify, expect a 200
         $I->sendGET('/locations/' . $location->id);
-        $I->seeResponseCodeIs(404);
+        $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
-    }
-
-    protected function generateJsonResponse($location, $orig_location)
-    {
-        return [
-            'id' => (int) $orig_location->id,
-            'name' => e($location->name),
-            'image' => ($location->image) ? url('/').'/uploads/locations/'.e($location->image) : null,
-            'address' =>  ($location->address) ? e($location->address) : null,
-            'address2' =>  ($location->address2) ? e($location->address2) : null,
-            'city' =>  ($location->city) ? e($location->city) : null,
-            'state' =>  ($location->state) ? e($location->state) : null,
-            'country' => ($location->country) ? e($location->country) : null,
-            'zip' => ($location->zip) ? e($location->zip) : null,
-            'assigned_assets_count' => (int) $location->assigned_assets_count,
-            'assets_count'    => (int) $location->assets_count,
-            'users_count'    => (int) $location->users_count,
-            'currency' =>  ($location->currency) ? e($location->currency) : null,
-            'created_at' => Helper::getFormattedDateObject($orig_location->created_at, 'datetime'),
-            'updated_at' => Helper::getFormattedDateObject($orig_location->updated_at, 'datetime'),
-            'parent' => ($location->parent) ? [
-                'id' => (int) $location->parent->id,
-                'name'=> e($location->parent->name)
-            ] : null,
-            // 'available_actions' => [
-            //     'update' => (bool) Gate::allows('update', Location::class),
-            //     'delete' => (bool) Gate::allows('delete', Location::class),
-            // ],
-        ];
     }
 }

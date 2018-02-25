@@ -32,7 +32,6 @@ class ApiComponentsCest
         // sample verify
         $component = App\Models\Component::orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        // $I->seeResponseContainsJson($this->generateJsonResponse($component, $component));
         $I->seeResponseContainsJson((new ComponentsTransformer)->transformComponent($component));
     }
 
@@ -150,7 +149,7 @@ class ApiComponentsCest
         // verify, expect a 200
         $I->sendGET('/components/' . $component->id);
 
-        $I->seeResponseCodeIs(404);
+        $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
 }

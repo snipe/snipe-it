@@ -32,7 +32,6 @@ class ApiConsumablesCest
         // sample verify
         $consumable = App\Models\Consumable::orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        // $I->seeResponseContainsJson($this->generateJsonResponse($consumable, $consumable));
         $I->seeResponseContainsJson((new ConsumablesTransformer)->transformConsumable($consumable));
     }
 
@@ -149,7 +148,7 @@ class ApiConsumablesCest
 
         // verify, expect a 200
         $I->sendGET('/consumables/' . $consumable->id);
-        $I->seeResponseCodeIs(404);
+        $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
 }

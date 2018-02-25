@@ -34,7 +34,7 @@ class ApiCompaniesCest
         // sample verify
         $company = App\Models\Company::withCount('assets','licenses','accessories','consumables','components','users')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
-        // $I->seeResponseContainsJson($this->generateJsonResponse($company, $company));
+
         $I->seeResponseContainsJson((new CompaniesTransformer)->transformCompany($company));
     }
 
@@ -101,7 +101,6 @@ class ApiCompaniesCest
         $I->sendGET('/companies/' . $company->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        // $I->seeResponseContainsJson($this->generateJsonResponse($temp_company, $company));
         $I->seeResponseContainsJson((new CompaniesTransformer)->transformCompany($temp_company));
 
     }
@@ -128,7 +127,7 @@ class ApiCompaniesCest
 
         // verify, expect a 200
         $I->sendGET('/companies/' . $company->id);
-        $I->seeResponseCodeIs(404);
+        $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
 }

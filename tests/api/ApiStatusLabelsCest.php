@@ -30,7 +30,6 @@ class ApiStatuslabelsCest
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse(), true);
-        // dd($response);
         // sample verify
         $statuslabel = App\Models\Statuslabel::orderByDesc('created_at')
             ->withCount('assets')
@@ -112,7 +111,6 @@ class ApiStatuslabelsCest
         $I->sendGET('/statuslabels/' . $statuslabel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        // $I->seeResponseContainsJson($this->generateJsonResponse($temp_statuslabel, $statuslabel));
         $I->seeResponseContainsJson((new StatuslabelsTransformer)->transformStatuslabel($temp_statuslabel));
 
     }
@@ -139,7 +137,7 @@ class ApiStatuslabelsCest
 
         // verify, expect a 200
         $I->sendGET('/statuslabels/' . $statuslabel->id);
-        $I->seeResponseCodeIs(404);
+        $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
 }

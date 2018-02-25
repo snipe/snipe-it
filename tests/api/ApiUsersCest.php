@@ -127,7 +127,6 @@ class ApiUsersCest
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse());
-// dd($response);
         $I->assertEquals('success', $response->status);
         $I->assertEquals(trans('admin/users/message.success.update'), $response->messages);
         $I->assertEquals($user->id, $response->payload->id); // user id does not change
@@ -168,7 +167,7 @@ class ApiUsersCest
         // verify, expect a 200
         $I->sendGET('/users/' . $user->id);
 
-        $I->seeResponseCodeIs(404);
+        $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
 
