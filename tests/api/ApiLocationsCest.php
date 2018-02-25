@@ -118,12 +118,11 @@ class ApiLocationsCest
         $temp_location->created_at = Carbon::parse($response->payload->created_at->datetime);
         $temp_location->updated_at = Carbon::parse($response->payload->updated_at->datetime);
         $temp_location->id = $location->id;
-        // dd($temp_location);
+
         // verify
         $I->sendGET('/locations/' . $location->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        dd((new LocationsTransformer)->transformLocation($temp_location));
         $I->seeResponseContainsJson((new LocationsTransformer)->transformLocation($temp_location));
     }
 
