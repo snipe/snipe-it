@@ -52,12 +52,13 @@ class ApiComponentsCest
             'company_id' => $temp_component->company->id,
             'location_id' => $temp_component->location_id,
             'manufacturer_id' => $temp_component->manufacturer_id,
+            'model_number' => $temp_component->model_number,
             'name' => $temp_component->name,
             'order_number' => $temp_component->order_number,
             'purchase_cost' => $temp_component->purchase_cost,
             'purchase_date' => $temp_component->purchase_date,
             'qty' => $temp_component->qty,
-            'model_number' => $temp_component->model_number,
+            'serial' => $temp_component->serial
         ];
 
         // create
@@ -91,14 +92,13 @@ class ApiComponentsCest
             'category_id' => $temp_component->category_id,
             'company_id' => $temp_component->company->id,
             'location_id' => $temp_component->location_id,
+            'min_amt' => $temp_component->min_amt,
             'name' => $temp_component->name,
+            'order_number' => $temp_component->order_number,
             'purchase_cost' => $temp_component->purchase_cost,
             'purchase_date' => $temp_component->purchase_date,
-            'min_amt' => $temp_component->min_amt,
-            // 'manufacturer_id' => $temp_component->manufacturer_id,
-            'order_number' => $temp_component->order_number,
-            // 'supplier_id' => $temp_component->supplier_id,
             'qty' => $temp_component->qty,
+            'serial' => $temp_component->serial,
         ];
 
         $I->assertNotEquals($component->name, $data['name']);
