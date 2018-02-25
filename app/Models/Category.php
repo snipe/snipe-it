@@ -53,7 +53,15 @@ class Category extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','category_type', 'user_id', 'use_default_eula','checkin_email','require_acceptance'];
+    protected $fillable = [
+        'category_type',
+        'checkin_email',
+        'eula_text',
+        'name',
+        'require_acceptance',
+        'use_default_eula',
+        'user_id',
+    ];
 
 
     public function has_models()
