@@ -27,7 +27,13 @@ class Statuslabel extends SnipeModel
         'archived' => 'required',
     );
 
-    protected $fillable = ['name', 'deployable', 'pending', 'archived'];
+    protected $fillable = [
+        'archived',
+        'deployable',
+        'name',
+        'notes',
+        'pending',
+    ];
 
 
     /**
