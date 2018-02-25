@@ -40,7 +40,14 @@ class Manufacturer extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','url','support_url','support_phone','support_email'];
+    protected $fillable = [
+        'name',
+        'image',
+        'support_email',
+        'support_phone',
+        'support_url',
+        'url',
+    ];
 
 
 
