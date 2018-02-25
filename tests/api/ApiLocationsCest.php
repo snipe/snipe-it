@@ -14,8 +14,6 @@ class ApiLocationsCest
     public function _before(ApiTester $I)
     {
         $this->user = \App\Models\User::find(1);
-        $this->timeFormat = Setting::getSettings()->date_display_format .' '. Setting::getSettings()->time_display_format;
-        $this->dateFormat = Setting::getSettings()->date_display_format;
         $I->haveHttpHeader('Accept', 'application/json');
         $I->amBearerAuthenticated($I->getToken($this->user));
     }
@@ -27,7 +25,7 @@ class ApiLocationsCest
         $I->wantTo('Get a list of locations');
 
         // call
-        $I->sendGET('/locations?limit=1');
+        $I->sendGET('/locations?limit=10');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -35,7 +33,7 @@ class ApiLocationsCest
         // sample verify
         $location = App\Models\Location::orderByDesc('created_at')
             ->withCount('assignedAssets', 'assets',  'users')
-            ->take(1)->get()->shuffle()->first();
+            ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson((new LocationsTransformer)->transformLocation($location));
     }
 
@@ -51,6 +49,17 @@ class ApiLocationsCest
         // setup
         $data = [
             'name' => $temp_location->name,
+            'image' => $temp_location->image,
+            'address' => $temp_location->address,
+            'address2' => $temp_location->address2,
+            'city' => $temp_location->city,
+            'state' => $temp_location->state,
+            'country' => $temp_location->country,
+            'zip' => $temp_location->zip,
+            'parent_id' => $temp_location->parent_id,
+            'parent_id' => $temp_location->parent_id,
+            'manager_id' => $temp_location->manager_id,
+            'currency' => $temp_location->currency
         ];
 
         // create
@@ -109,12 +118,13 @@ class ApiLocationsCest
         $temp_location->created_at = Carbon::parse($response->payload->created_at->datetime);
         $temp_location->updated_at = Carbon::parse($response->payload->updated_at->datetime);
         $temp_location->id = $location->id;
+        // dd($temp_location);
         // verify
         $I->sendGET('/locations/' . $location->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
+        dd((new LocationsTransformer)->transformLocation($temp_location));
         $I->seeResponseContainsJson((new LocationsTransformer)->transformLocation($temp_location));
-        // $I->seeResponseContainsJson($this->generateJsonResponse($temp_location, $location));
     }
 
     /** @test */
