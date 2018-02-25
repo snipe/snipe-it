@@ -40,7 +40,6 @@ class License extends Depreciable
         'seats'   => 'required|min:1|max:1000000|integer',
         'license_email'   => 'email|nullable|max:120',
         'license_name'   => 'string|nullable|max:100',
-        'note'   => 'string|nullable',
         'notes'   => 'string|nullable',
         'company_id' => 'integer|nullable',
     );
@@ -51,25 +50,25 @@ class License extends Depreciable
     * @var array
     */
     protected $fillable = [
-        'name',
-        'serial',
-        'purchase_date',
-        'purchase_cost',
-        'order_number',
-        'seats',
-        'notes',
-        'user_id',
-        'depreciation_id',
-        'license_name', //actually licensed_to
-        'license_email',
-        'supplier_id',
-        'expiration_date',
-        'purchase_order',
-        'termination_date',
-        'maintained',
-        'reassignable',
         'company_id',
-        'manufacturer_id'
+        'depreciation_id',
+        'expiration_date',
+        'license_email',
+        'license_name', //actually licensed_to
+        'maintained',
+        'manufacturer_id',
+        'name',
+        'notes',
+        'order_number',
+        'purchase_cost',
+        'purchase_date',
+        'purchase_order',
+        'reassignable',
+        'seats',
+        'serial',
+        'supplier_id',
+        'termination_date',
+        'user_id',
     ];
 
     public static function boot()
