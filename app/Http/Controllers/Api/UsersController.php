@@ -290,4 +290,32 @@ class UsersController extends Controller
         $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
+
+    /**
+     * Reset the user's two-factor status
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function postTwoFactorReset(Request $request)
+    {
+
+        $this->authorize('edit', User::class);
+
+        if ($request->has('id')) {
+            try {
+                $user = User::find($request->get('id'));
+                $user->two_factor_secret = null;
+                $user->two_factor_enrolled = 0;
+                $user->save();
+                return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
+            }
+        }
+        return response()->json(['message' => 'No ID provided'], 500);
+
+    }
 }
