@@ -54,8 +54,9 @@ class Component extends SnipeModel
         'purchase_cost',
         'purchase_date',
         'min_amt',
+        'order_number',
         'qty',
-        'serial'
+        'serial',
     ];
 
     public function location()

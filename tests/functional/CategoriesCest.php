@@ -58,7 +58,7 @@ class CategoriesCest
     {
         $I->wantTo('Ensure I can delete a category');
         $category = factory(App\Models\Category::class)->states('asset-laptop-category')->create([
-            'name'=>"Test Category"
+            'name'=>"Deletable Test Category"
         ]);
         $I->sendDelete(route('categories.destroy', $category->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);

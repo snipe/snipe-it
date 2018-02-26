@@ -9,3 +9,4 @@ modules:
         dsn: 'mysql:host=localhost;dbname=snipeit_unit'
         user: 'travis'
         password: ''
+        populator: 'mysql -u travis snipeit_unit < tests/_data/dump.sql'

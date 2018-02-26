@@ -6,21 +6,26 @@ $password = bcrypt('password');
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) use ($password) {
     return [
+        'activated' => 1,
+        'address' => $faker->address,
+        'city' => $faker->city,
+        'company_id' => rand(1,4),
+        'country' => $faker->country,
+        'department_id' => rand(1,6),
+        'email' => $faker->safeEmail,
+        'employee_num' => $faker->numberBetween(3500, 35050),
         'first_name' => $faker->firstName,
+        'jobtitle' => $faker->jobTitle,
         'last_name' => $faker->lastName,
-        'username' => $faker->username,
+        'locale' => $faker->locale,
+        'location_id' => rand(1,5),
+        'notes' => 'Created by DB seeder',
         'password' => $password,
         'permissions' => '{"user":"0"}',
-        'email' => $faker->safeEmail,
-        'company_id' => rand(1,4),
-        'locale' => $faker->locale,
-        'employee_num' => $faker->numberBetween(3500, 35050),
-        'jobtitle' => $faker->jobTitle,
-        'department_id' => rand(1,6),
         'phone' => $faker->phoneNumber,
-        'notes' => 'Created by DB seeder',
-        'location_id' => rand(1,5),
-        'activated' => 1,
+        'state' => $faker->stateAbbr,
+        'username' => $faker->username,
+        'zip' => $faker->postcode
     ];
 });
 

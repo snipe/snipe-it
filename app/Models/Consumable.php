@@ -50,10 +50,12 @@ class Consumable extends SnipeModel
     protected $fillable = [
         'category_id',
         'company_id',
+        'item_no',
         'location_id',
         'manufacturer_id',
         'name',
         'order_number',
+        'model_number',
         'purchase_cost',
         'purchase_date',
         'qty',
