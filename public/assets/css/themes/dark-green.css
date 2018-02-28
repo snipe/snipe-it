@@ -38,8 +38,12 @@ body {
     background-color: var(--back-sub);
     color: var(--header);
 }
-.btn-primary, .btn-primary.hover, .btn-primary:active, .btn-primary:hover, .text-blue {
+.btn-primary, .btn-primary.hover, .btn-primary:active, .text-blue {
     color: var(--text-main)!important;
+}
+.btn-primary:hover {
+    background-color: var(--back-main);
+    color: var(--header)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
     color: var(--text-main);
