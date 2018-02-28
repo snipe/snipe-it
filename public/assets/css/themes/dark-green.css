@@ -19,6 +19,9 @@ a, a:link, a:visited, .btn-primary.hover {
 #assetsListingTable>tbody>tr.selected>td {
     background-color: var(--back-main);
 }
+body {
+    color: var(--text-main);
+}
 .box, .box.box-default {
     border-top: 3px solid var(--header);
     border-top-color: var(--header);
@@ -70,7 +73,7 @@ a, a:link, a:visited, .btn-primary.hover {
     background-color: var(--back-main);
     color: var(--text-main);
 }
-h1 {
+h1, h2, h3, h4, h5, h6, p {
     color: var(--text-main);
 }
 .help-block {
