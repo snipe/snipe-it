@@ -50,17 +50,38 @@ class LoginController extends Controller
         \Session::put('backUrl', \URL::previous());
     }
 
-
     function showLoginForm()
     {
+        $this->loginViaRemoteUser();
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
+
+        if (Setting::getSettings()->login_common_disabled == "1") {
+            return view('errors.401');
+        }
+
         return view('auth.login');
     }
 
+    private function loginViaRemoteUser()
+    {
+        if (Setting::getSettings()->login_remote_user_enabled == "1"
+            && isset($_SERVER['REMOTE_USER']) && !empty($_SERVER['REMOTE_USER'])) {
 
-    private function login_via_ldap(Request $request)
+            LOG::debug("Authenticatiing via REMOTE_USER.");
+            try {
+                $user = User::where('username', '=', $_SERVER['REMOTE_USER'])->whereNull('deleted_at')->first();
+                LOG::debug("Remote user auth lookup complete");
+                if(!is_null($user)) Auth::login($user, true);
+            } catch(Exception $e) {
+                LOG::error("There was an error authenticating the Remote user: " . $e->getMessage());
+            }
+
+        }
+    }
+
+    private function loginViaLdap(Request $request)
     {
         LOG::debug("Binding user to LDAP.");
         $ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
@@ -114,6 +135,10 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+        if (Setting::getSettings()->login_common_disabled == "1") {
+            return view('errors.403');
+        }
+
         $validator = $this->validator(Input::all());
 
         if ($validator->fails()) {
@@ -134,7 +159,7 @@ class LoginController extends Controller
         if (Setting::getSettings()->ldap_enabled=='1') {
             LOG::debug("LDAP is enabled.");
             try {
-                $user = $this->login_via_ldap($request);
+                $user = $this->loginViaLdap($request);
                 Auth::login($user, true);
 
             // If the user was unable to login via LDAP, log the error and let them fall through to
@@ -253,6 +278,13 @@ class LoginController extends Controller
     {
         $request->session()->forget('2fa_authed');
         Auth::logout();
+
+        $settings = Setting::getSettings();
+        $customLogoutUrl = $settings->login_remote_user_custom_logout_url ;
+        if ($settings->login_remote_user_enabled == '1' && $customLogoutUrl != '') {
+            return redirect()->away($customLogoutUrl);
+        }
+
         return redirect()->route('login')->with('success', 'You have successfully logged out!');
     }
 
