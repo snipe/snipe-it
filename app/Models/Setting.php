@@ -180,6 +180,13 @@ class Setting extends Model
         return $this->slack_endpoint;
     }
 
+    public function routeNotificationForMail()
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        return config('mail.reply_to.address');
+    }
+
     public static function passwordComplexityRulesSaving($action = 'update')
     {
         $security_rules = '';
