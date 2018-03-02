@@ -541,7 +541,13 @@
                     @foreach ($asset->licenseseats as $seat)
                     <tr>
                       <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
-                      <td>{{ $seat->license->serial }}</td>
+                      <td>
+                          @can('viewKeys', $seat->license)
+                            {!! nl2br(e($seat->license->serial)) !!}
+                          @else
+                           ------------
+                          @endcan
+                      </td>
                       <td>
                         <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
                       </td>
