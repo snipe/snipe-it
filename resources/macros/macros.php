@@ -511,3 +511,22 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
     return $select;
 
 });
+
+
+
+Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
+
+    $formats = array(
+        '' => 'Default Blue',
+        'skin-green-dark.css' => 'Green Dark',
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+    return $select;
+
+});
