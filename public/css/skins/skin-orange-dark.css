@@ -1,17 +1,17 @@
 :root {
-  --background: #222;
-  --back-main: #333;
-  --back-sub: #444;
-  --header: #18A452; /* Use same as Header picker */
-  --text-main: #FFF;
-  --text-sub: #BBB;
+    --background: #222;
+    --back-main: #333;
+    --back-sub: #444;
+    --header: #FF8C00; /* Use same as Header picker */
+    --text-main: #FFF;
+    --text-sub: #BBB;
 }
 
 .main-header .navbar, .main-header .logo {
-    background-color: #18A452;
-    background: -webkit-linear-gradient(top,  #18A452 0%,#18A452 100%);
-    background: linear-gradient(to bottom, #18A452 0%,#18A452 100%);
-    border-color: #18A452;
+    background-color: #FF8C00;
+    background: -webkit-linear-gradient(top,  #FF8C00 0%,#FF8C00 100%);
+    background: linear-gradient(to bottom, #FF8C00 0%,#FF8C00 100%);
+    border-color: #FF8C00;
 }
 
 a, a:link, a:visited, .btn-primary.hover {
