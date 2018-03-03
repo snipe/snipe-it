@@ -19,6 +19,9 @@ a, a:link, a:visited, .btn-primary.hover {
 #assetsListingTable>tbody>tr.selected>td {
     background-color: var(--back-main);
 }
+body {
+    color: var(--text-main);
+}
 .box, .box.box-default {
     border-top: 3px solid var(--header);
     border-top-color: var(--header);
@@ -31,12 +34,16 @@ a, a:link, a:visited, .btn-primary.hover {
     background-color: var(--back-main);
     color: var(--header);
 }
-.btn-default:active, .btn-default:focus, .btn-default:hover {
+.btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
     background-color: var(--back-sub);
     color: var(--header);
 }
-.btn-primary, .btn-primary.hover, .btn-primary:active, .btn-primary:hover, .text-blue {
+.btn-primary, .btn-primary.hover, .btn-primary:active, .text-blue {
     color: var(--text-main)!important;
+}
+.btn-primary:hover {
+    background-color: var(--back-main);
+    color: var(--header)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
     color: var(--text-main);
@@ -47,13 +54,16 @@ a, a:link, a:visited, .btn-primary.hover {
 .content-wrapper {
     background-color: var(--background);
 }
-#create-form>div>div>div>span.input-group-addon {
-    background-color: var(--back-sub);
-    color: var(--text-main);
-}
 #create-form>div>div>div>span>i.fa {
     background-color: var(--back-sub);
     color: var(--header);
+}
+.datepicker .datepicker-switch:hover, .datepicker .next:hover, .datepicker .prev:hover, .datepicker tfoot tr th:hover, .datepicker table tr td.day.focused, .datepicker table tr td.day:hover {
+    background-color: var(--header);
+}
+.datepicker.dropdown-menu {
+    background-color: var(--back-main);
+    color: var(--text-main);
 }
 #details>div>div>div>table {
     background-color: transparent;
@@ -70,7 +80,7 @@ a, a:link, a:visited, .btn-primary.hover {
     background-color: var(--back-main);
     color: var(--text-main);
 }
-h1 {
+h1, h2, h3, h4, h5, h6, p {
     color: var(--text-main);
 }
 .help-block {
@@ -78,6 +88,10 @@ h1 {
 }
 input[type=text], input[type=search] {
     background-color: var(--back-sub);
+    color: var(--text-main);
+}
+.input-group, .input-group-addon {
+    background-color: var(--back-sub)!important;
     color: var(--text-main);
 }
 #licensesTable>tbody>tr>td>nobr>a>i.fa {
@@ -119,12 +133,20 @@ input[type=text], input[type=search] {
     background-color: var(--back-main);
     color: var(--header);
 }
-.select2-selection--single {
-    background-color: var(--back-sub)!important;
-    color: var(--text-main)!important;
+.select2-container--default .select2-results__option[aria-selected=true], .select2-container--default .select2-results__option[aria-selected=true]:hover {
+    background-color: var(--back-sub);
+    color: var(--header);
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--header);
+    color: var(--back-main);
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: var(--text-main);
+}
+.select2-selection--single {
+    background-color: var(--back-sub)!important;
+    color: var(--text-main)!important;
 }
 .select2-dropdown {
     background-color: var(--back-main);
@@ -142,4 +164,7 @@ input[type=text], input[type=search] {
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: var(--back-sub);
+}
+#webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa {
+    color: var(--text-main);
 }
