@@ -7,6 +7,13 @@
   --text-sub: #BBB;
 }
 
+.main-header .navbar, .main-header .logo {
+    background-color: {{ $snipeSettings->header_color }};
+    background: -webkit-linear-gradient(top,  #18A452 0%,#18A452 100%);
+    background: linear-gradient(to bottom, #18A452 0%,#18A452 100%);
+    border-color: #18A452;
+}
+
 a, a:link, a:visited, .btn-primary.hover {
     color: var(--header);
 }
