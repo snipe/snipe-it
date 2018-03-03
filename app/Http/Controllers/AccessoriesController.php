@@ -369,7 +369,7 @@ class AccessoriesController extends Controller
       // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
             // Redirect to the accessory management page with error
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
         }
 
         $accessory = Accessory::find($accessory_user->accessory_id);
@@ -387,6 +387,7 @@ class AccessoriesController extends Controller
 
             $data['log_id'] = $logaction->id;
             $data['first_name'] = e($user->first_name);
+            $data['last_name'] = e($user->last_name);
             $data['item_name'] = e($accessory->name);
             $data['checkin_date'] = e($logaction->created_at);
             $data['item_tag'] = '';
