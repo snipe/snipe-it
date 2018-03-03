@@ -34,6 +34,7 @@ use View;
 use Illuminate\Http\Request;
 use Gate;
 use Artisan;
+use App\Notifications\WelcomeNotification;
 
 /**
  * This controller handles all actions related to Users for
@@ -148,11 +149,13 @@ class UsersController extends Controller
                 $data['first_name'] = e($request->input('first_name'));
                 $data['password'] = e($request->input('password'));
 
-                Mail::send('emails.send-login', $data, function ($m) use ($user) {
+                $user->notify(new WelcomeNotification($data));
+
+/*                Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
-                });
+                });*/
             }
             return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
@@ -192,15 +195,17 @@ class UsersController extends Controller
                 // Send the credentials through email
                 $data = array();
                 $data['email'] = $request->input('email');
+                $data['username'] = $request->input('username');
                 $data['first_name'] = $request->input('first_name');
-                $data['last_name'] = $request->input('last_name');
                 $data['password'] = $request->input('password');
 
-                Mail::send('emails.send-login', $data, function ($m) use ($user) {
+                $user->notify(new WelcomeNotification($data));
+
+                /*Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
-                });
+                });*/
             }
 
             return JsonResponse::create($user);
@@ -852,16 +857,20 @@ class UsersController extends Controller
                             // Send the credentials through email
                             if ($row[3] != '') {
                                 $data = array();
+                                $data['email'] = trim(e($row[4]));
                                 $data['username'] = trim(e($row[2]));
                                 $data['first_name'] = trim(e($row[0]));
                                 $data['password'] = $pass;
 
                                 if ($newuser['email']) {
-                                    Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+                                    $user = User::where('username', $row[2])->first();
+                                    $user->notify(new WelcomeNotification($data));
+                                    
+                                    /*Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
                                         $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
                                         $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                                         $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
-                                    });
+                                    });*/
                                 }
                             }
                         }
