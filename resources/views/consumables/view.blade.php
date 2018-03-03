@@ -54,6 +54,7 @@
                 <thead>
                   <tr>
                     <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="qty">{{ trans('general.quantity') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="created_at">{{ trans('general.date') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                   </tr>

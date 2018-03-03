@@ -260,14 +260,27 @@ class ConsumablesController extends Controller
             // Redirect to the consumable management page with error
             return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
         }
-
+        
+        // Validate data in request
+        $qty = (e(Input::get('qty')) == 0) ? 1 : e(Input::get('qty'));
+        $assigned_qty = 0;
+        foreach ($user->consumables as $consumable) {
+            $assigned_qty += ($consumable->id == $consumableId) ? $consumable->pivot->qty : 0;
+        }
+        $max_to_consume = -1 * $assigned_qty;           // allows for admin forcing consumption of user consumables
+        $max_to_checkout = $consumable->numRemaining();
+        if($max_to_consume > $qty || $qty > $max_to_checkout || !is_numeric($qty)) {
+            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.invalid_quantity'));;
+        }
+        
         // Update the consumable data
         $consumable->assigned_to = e(Input::get('assigned_to'));
 
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
-            'assigned_to' => e(Input::get('assigned_to'))
+            'assigned_to' => e(Input::get('assigned_to')),
+            'qty' => $qty
         ]);
 
         $logaction = $consumable->logCheckout(e(Input::get('note')), $user);
@@ -276,7 +289,7 @@ class ConsumablesController extends Controller
         $data['first_name'] = $user->first_name;
         $data['item_name'] = $consumable->name;
         $data['checkout_date'] = $logaction->created_at;
-        $data['note'] = $logaction->note;
+        $data['note'] = $logaction->note . ' ' . $qty;
         $data['require_acceptance'] = $consumable->requireAcceptance();
 
         if ((($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) && $user->email!='') {

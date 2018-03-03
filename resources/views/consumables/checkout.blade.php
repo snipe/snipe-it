@@ -40,6 +40,15 @@
           <!-- User -->
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
+            <div class="form-group {{ $errors->has('qty') ? ' has-error' : '' }}">
+              <label for="qty" class="col-md-3 control-label">{{ trans('general.quantity') }}
+                <i class='icon-asterisk'></i></label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" name="qty" id="qty" style="width: 70px;" placeholder="1" value="{{ Input::old('qty') }}" />
+                {!! $errors->first('qty', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
+            </div>
+
           @if ($consumable->category->require_acceptance=='1')
           <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
