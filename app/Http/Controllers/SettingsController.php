@@ -191,6 +191,7 @@ class SettingsController extends Controller
                 $data['email'] = $user->email;
                 $data['username'] = $user->username;
                 $data['first_name'] = $user->first_name;
+                $data['last_name'] = $user->last_name;
                 $data['password'] = $user->password;
 
                 $user->notify(new FirstAdminNotification($data));

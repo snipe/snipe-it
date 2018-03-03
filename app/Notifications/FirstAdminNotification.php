@@ -22,6 +22,7 @@ class FirstAdminNotification extends Notification
     {
         $this->_data['email'] = $content['email'];
         $this->_data['first_name'] = $content['first_name'];
+        $this->_data['last_name'] = $content['last_name'];
         $this->_data['username'] = $content['username'];
         $this->_data['password'] = $content['password'];
         $this->_data['url'] = url('/');
@@ -47,7 +48,7 @@ class FirstAdminNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(trans('mail.your_credentials'))
+            ->subject(trans('mail.welcome', ['name' => $this->_data['first_name'] . ' ' . $this->_data['last_name'] ]))
             ->markdown('notifications.FirstAdmin', $this->_data);
     }
 

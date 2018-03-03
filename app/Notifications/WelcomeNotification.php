@@ -22,6 +22,7 @@ class WelcomeNotification extends Notification
     {
         $this->_data['email'] = $content['email'];
         $this->_data['first_name'] = $content['first_name'];
+        $this->_data['last_name'] = $content['last_name'];
         $this->_data['username'] = $content['username'];
         $this->_data['password'] = $content['password'];
         $this->_data['url'] = url('/');
@@ -47,7 +48,7 @@ class WelcomeNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(trans('mail.welcome', ['name' => $this->_data['first_name'] ]))
+            ->subject(trans('mail.welcome', ['name' => $this->_data['first_name'] . ' ' . $this->_data['last_name'] ]))
             ->markdown('notifications.Welcome', $this->_data);
     }
 

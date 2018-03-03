@@ -1,5 +1,5 @@
 @component('mail::message')
-{{ trans('mail.hello') }} {{ $first_name }},
+{{ trans('mail.hello') }} {{ $first_name }} {{$last_name}},
 
 {{ trans('mail.login') }} {{ $username }} <br>
 {{ trans('mail.password') }} {{ $password }}
