@@ -518,7 +518,7 @@ Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
 
     $formats = array(
         '' => 'Default Blue',
-        'skin-green-dark.css' => 'Green Dark',
+        'green-dark' => 'Green Dark',
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';

@@ -33,7 +33,7 @@
 
 
       @if (($snipeSettings) && ($snipeSettings->skin!=''))
-          <link rel="stylesheet" href="{{ url('css/skins/'.$snipeSettings->skin) }}">
+          <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin) }}.css">
       @endif
 
     <style nonce="{{ csrf_token() }}">
