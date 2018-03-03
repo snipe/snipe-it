@@ -147,6 +147,7 @@ class UsersController extends Controller
                 $data['email'] = e($request->input('email'));
                 $data['username'] = e($request->input('username'));
                 $data['first_name'] = e($request->input('first_name'));
+                $data['last_name'] = e($request->input('last_name'));
                 $data['password'] = e($request->input('password'));
 
                 $user->notify(new WelcomeNotification($data));
@@ -197,6 +198,7 @@ class UsersController extends Controller
                 $data['email'] = $request->input('email');
                 $data['username'] = $request->input('username');
                 $data['first_name'] = $request->input('first_name');
+                $data['last_name'] = e($request->input('last_name'));
                 $data['password'] = $request->input('password');
 
                 $user->notify(new WelcomeNotification($data));
@@ -860,6 +862,7 @@ class UsersController extends Controller
                                 $data['email'] = trim(e($row[4]));
                                 $data['username'] = trim(e($row[2]));
                                 $data['first_name'] = trim(e($row[0]));
+                                $data['last_name'] = trim(e($row[1]));
                                 $data['password'] = $pass;
 
                                 if ($newuser['email']) {

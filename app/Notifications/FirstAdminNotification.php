@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class WelcomeNotification extends Notification
+class FirstAdminNotification extends Notification
 {
     use Queueable;
 
@@ -49,7 +49,7 @@ class WelcomeNotification extends Notification
     {
         return (new MailMessage)
             ->subject(trans('mail.welcome', ['name' => $this->_data['first_name'] . ' ' . $this->_data['last_name'] ]))
-            ->markdown('notifications.Welcome', $this->_data);
+            ->markdown('notifications.FirstAdmin', $this->_data);
     }
 
     /**

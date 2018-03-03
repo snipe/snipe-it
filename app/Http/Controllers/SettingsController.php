@@ -22,6 +22,7 @@ use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
 use App\Helpers\Helper;
+use App\Notifications\FirstAdminNotification;
 
 /**
  * This controller handles all actions related to Settings for
@@ -186,11 +187,20 @@ class SettingsController extends Controller
             $settings->save();
 
             if (Input::get('email_creds')=='1') {
-                Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
+                $data = array();
+                $data['email'] = $user->email;
+                $data['username'] = $user->username;
+                $data['first_name'] = $user->first_name;
+                $data['last_name'] = $user->last_name;
+                $data['password'] = $user->password;
+
+                $user->notify(new FirstAdminNotification($data));
+
+                /*Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.your_credentials'));
-                });
+                });*/
             }
 
 
