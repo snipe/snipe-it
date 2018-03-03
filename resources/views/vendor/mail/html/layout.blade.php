@@ -21,6 +21,10 @@
                 width: 100% !important;
             }
         }
+        .logo {
+            width:50px;
+            height:50px;
+        }
     </style>
 
     <table class="wrapper" width="100%" cellpadding="0" cellspacing="0">
