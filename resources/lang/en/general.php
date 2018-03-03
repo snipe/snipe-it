@@ -177,6 +177,7 @@
     'settings'				=> 'Settings',
     'sign_in'				=> 'Sign in',
     'signature'             => 'Signature',
+     'skin'       			=> 'Skin',
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
