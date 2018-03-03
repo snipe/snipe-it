@@ -2,7 +2,23 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            {{ config('app.name') }}
+            @if($snipeSettings::setupCompleted())
+                @if ($snipeSettings->brand == '3')
+                    @if ($snipeSettings->logo!='')
+                        <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                    @endif
+                    {{ $snipeSettings->site_name }}
+            
+                @elseif ($snipeSettings->brand == '2')
+                    @if ($snipeSettings->logo!='')
+                        <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                    @endif
+                @else
+                    {{ $snipeSettings->site_name }}
+                @endif
+            @else
+                Snipe-it
+            @endif
         @endcomponent
     @endslot
 
@@ -21,7 +37,11 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+            @if($snipeSettings::setupCompleted())
+                © {{ date('Y') }} {{ $snipeSettings->site_name }}. All rights reserved.
+            @else
+                © {{ date('Y') }} Snipe-it. All rights reserved.
+            @endif
         @endcomponent
     @endslot
 @endcomponent
