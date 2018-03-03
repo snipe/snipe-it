@@ -50,6 +50,18 @@ Please see the [translations documentation](https://snipe-it.readme.io/docs/tran
 
 -----
 
+### Libraries, Modules & Related Projects
+
+Since the release of the JSON REST API, several third-party developers have been developing modules and libraries to work with Snipe-IT.  
+
+- [Python Module](https://github.com/jbloomer/SnipeIT-PythonAPI) by [@jbloomer](https://github.com/jbloomer)
+- [SnipeSharp - .NET module in C#](https://github.com/barrycarey/SnipeSharp) by [@barrycarey](https://github.com/barrycarey)
+- [InQRy](https://github.com/Microsoft/InQRy) by [@Microsoft](https://github.com/Microsoft)
+
+As these were created by third-parties, Snipe-IT cannot provide support for these project, and you should contact the developers directly if you need assistance. Additionally, Snipe-IT makes no guarantees as to the reliability, accuracy or maintainability of these libraries. Use at your own risk. :) 
+
+-----
+
 ### Contributors
 
 Thanks goes to all of these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) who have helped Snipe-IT get this far:
