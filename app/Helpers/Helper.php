@@ -690,7 +690,7 @@ class Helper
 
         $array['status'] = $status;
         $array['messages'] = $messages;
-        if (($messages) && (count($messages) > 0)) {
+        if (($messages) &&  (is_array($messages)) && (count($messages) > 0)) {
             $array['messages'] = $messages;
         }
         ($payload) ? $array['payload'] = $payload : $array['payload'] = null;
