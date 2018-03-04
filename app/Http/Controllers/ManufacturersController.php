@@ -257,10 +257,9 @@ class ManufacturersController extends Controller
 
         if ($manufacturer) {
             // I don't know why $manufacturer->restore(); didn't work here...
-            // $manufacturer->restore();
+            $manufacturer->restore();
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.restore.success'));
         }
-        \Log::debug('No joy');
         return redirect()->back()->with('error', trans('admin/manufacturers/message.does_not_exist'));
 
     }
