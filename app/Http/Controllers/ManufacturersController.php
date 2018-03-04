@@ -247,7 +247,7 @@ class ManufacturersController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.1.15]
-     * @param int $id
+     * @param int $manufacturers_id
      * @return Redirect
      */
     public function restore($manufacturers_id)
@@ -256,9 +256,13 @@ class ManufacturersController extends Controller
         $manufacturer = Manufacturer::onlyTrashed()->where('id',$manufacturers_id)->first();
 
         if ($manufacturer) {
-            // I don't know why $manufacturer->restore(); didn't work here...
-            $manufacturer->restore();
-            return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.restore.success'));
+
+            // Not sure why this is necessary - it shouldn't fail validation here, but it fails without this, so....
+            $manufacturer->setValidating(false);
+            if ($manufacturer->restore()) {
+                return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.restore.success'));
+            }
+            return redirect()->back()->with('error', 'Could not restore.');
         }
         return redirect()->back()->with('error', trans('admin/manufacturers/message.does_not_exist'));
 
