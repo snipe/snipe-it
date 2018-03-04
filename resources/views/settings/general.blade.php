@@ -36,16 +36,15 @@
                         <i class="fa fa-wrench"></i> {{ trans('admin/settings/general.general_settings') }}
                     </h4>
                 </div>
-               <div class="box-body">
 
+               <div class="box-body">
 
                    <div class="col-md-12">
 
                     <!-- Full Multiple Companies Support -->
                     <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('full_multiple_companies_support',
-                                           trans('admin/settings/general.full_multiple_companies_support_text')) }}
+                            {{ Form::label('full_multiple_companies_support', trans('admin/settings/general.full_multiple_companies_support_text')) }}
                         </div>
                         <div class="col-md-9">
                             {{ Form::checkbox('full_multiple_companies_support', '1', Input::old('full_multiple_companies_support', $setting->full_multiple_companies_support),array('class' => 'minimal')) }}
@@ -56,6 +55,7 @@
                             </p>
                         </div>
                     </div>
+
                     <!-- /.form-group -->
 
                     <!-- Require signature for acceptance -->
@@ -251,6 +251,7 @@
                            </div>
                        </div>
                        <!-- /.form-group -->
+                   </div>
 
             </div> <!--/.box-body-->
             <div class="box-footer">
@@ -263,6 +264,7 @@
 
             </div>
             </div>
+
         </div> <!-- /box -->
     </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
