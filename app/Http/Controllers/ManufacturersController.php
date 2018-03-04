@@ -242,6 +242,29 @@ class ManufacturersController extends Controller
         return redirect()->route('manufacturers.index')->with('error', $error);
     }
 
+    /**
+     * Restore a given Manufacturer (mark as un-deleted)
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.1.15]
+     * @param int $id
+     * @return Redirect
+     */
+    public function restore($manufacturers_id)
+    {
+        $this->authorize('create', Manufacturer::class);
+        $manufacturer = Manufacturer::onlyTrashed()->where('id',$manufacturers_id)->first();
+
+        if ($manufacturer) {
+            // I don't know why $manufacturer->restore(); didn't work here...
+            // $manufacturer->restore();
+            return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.restore.success'));
+        }
+        \Log::debug('No joy');
+        return redirect()->back()->with('error', trans('admin/manufacturers/message.does_not_exist'));
+
+    }
+
    
 
 

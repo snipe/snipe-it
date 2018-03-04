@@ -36,10 +36,12 @@ class ManufacturersTransformer
                 'accessories_count' => (int) $manufacturer->accessories_count,
                 'created_at' => Helper::getFormattedDateObject($manufacturer->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($manufacturer->updated_at, 'datetime'),
+                'deleted_at' => Helper::getFormattedDateObject($manufacturer->deleted_at, 'datetime'),
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => Gate::allows('update', Manufacturer::class) ? true : false,
+                'update' => (($manufacturer->deleted_at=='') && (Gate::allows('update', Manufacturer::class))) ? true : false,
+                'restore' => (($manufacturer->deleted_at!='') && (Gate::allows('create', Manufacturer::class))) ? true : false,
                 'delete' => (Gate::allows('delete', Manufacturer::class) && ($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->deleted_at=='')) ? true : false,
             ];
 
