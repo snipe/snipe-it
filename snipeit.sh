@@ -337,7 +337,7 @@ case $distro in
 
         echo -n "* Updating installed packages."
         log "apt-get update"
-        log "apt-get -y upgrade" & pid=$!
+        log "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
@@ -378,7 +378,7 @@ case $distro in
 
         echo -n "* Updating installed packages."
         log "apt-get update"
-        log "apt-get -y upgrade" & pid=$!
+        log "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
