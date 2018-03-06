@@ -177,4 +177,32 @@ class AssetMaintenance extends Model implements ICompanyableChild
             ->orderBy('users.first_name', $order)
             ->orderBy('users.last_name', $order);
     }
+
+    /**
+     * Query builder scope to order on asset tag
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByTag($query, $order)
+    {
+        return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
+            ->orderBy('assets.asset_tag', $order);
+    }
+
+    /**
+     * Query builder scope to order on asset tag
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByAssetName($query, $order)
+    {
+        return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
+            ->orderBy('assets.name', $order);
+    }
 }
