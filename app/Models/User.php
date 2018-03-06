@@ -346,7 +346,10 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
             $username = str_slug(substr($first_name, 0, 1).$last_name);
 
             if ($format=='firstname.lastname') {
-                $username = str_slug($first_name).'.'.str_slug($last_name);
+                $username = str_slug($first_name) . '.' . str_slug($last_name);
+
+            } elseif ($format=='lastnamefirstinitial') {
+                $username = str_slug($last_name.substr($first_name, 0, 1));
 
             } elseif ($format=='firstname_lastname') {
                 $username = str_slug($first_name).'_'.str_slug($last_name);
