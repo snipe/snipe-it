@@ -167,8 +167,7 @@ class Accessory extends SnipeModel
         return $query->where(function ($query) use ($search) {
 
                     $query->whereHas('category', function ($query) use ($search) {
-                        $query->where('categories.name', 'LIKE', '%'.$search.'%')
-                            ->where('categories.category_type', '=', 'accessory');
+                        $query->where('categories.name', 'LIKE', '%'.$search.'%');
                     })->orWhere(function ($query) use ($search) {
                         $query->whereHas('company', function ($query) use ($search) {
                             $query->where('companies.name', 'LIKE', '%'.$search.'%');
@@ -179,8 +178,7 @@ class Accessory extends SnipeModel
                         });
                     })->orWhere('accessories.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.model_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('accessories.order_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('accessories.purchase_cost', '=', $search);
+                            ->orWhere('accessories.order_number', 'LIKE', '%'.$search.'%');
 
         });
     }
