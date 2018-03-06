@@ -24,6 +24,7 @@ return [
                     base_path('storage/private_uploads'),
                     base_path('storage/oauth-private.key'),
                     base_path('storage/oauth-public.key'),
+                    (env('BACKUP_ENV')=='true') ? base_path('.env') : '',
                 ],
 
                 /*

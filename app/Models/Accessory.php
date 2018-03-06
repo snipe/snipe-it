@@ -163,13 +163,12 @@ class Accessory extends SnipeModel
     */
     public function scopeTextSearch($query, $search)
     {
-        $search = explode('+', $search);
 
         return $query->where(function ($query) use ($search) {
 
-            foreach ($search as $search) {
                     $query->whereHas('category', function ($query) use ($search) {
-                        $query->where('categories.name', 'LIKE', '%'.$search.'%');
+                        $query->where('categories.name', 'LIKE', '%'.$search.'%')
+                            ->where('categories.category_type', '=', 'accessory');
                     })->orWhere(function ($query) use ($search) {
                         $query->whereHas('company', function ($query) use ($search) {
                             $query->where('companies.name', 'LIKE', '%'.$search.'%');
@@ -182,7 +181,7 @@ class Accessory extends SnipeModel
                             ->orWhere('accessories.model_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.order_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.purchase_cost', '=', $search);
-            }
+
         });
     }
 

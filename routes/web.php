@@ -26,6 +26,12 @@ Route::group(['middleware' => 'auth'], function () {
     /*
     * Manufacturers
     */
+
+    Route::group([ 'prefix' => 'manufacturers', 'middleware' => ['auth'] ], function () {
+
+        Route::get('{manufacturers_id}/restore', [ 'as' => 'restore/manufacturer', 'uses' => 'ManufacturersController@restore']);
+    });
+
     Route::resource('manufacturers', 'ManufacturersController', [
         'parameters' => ['manufacturer' => 'manufacturers_id']
     ]);

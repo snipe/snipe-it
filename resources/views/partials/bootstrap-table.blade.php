@@ -413,6 +413,17 @@
         return '<a href="{{ url('/') }}/admin/groups/' + row.id + '"> ' + value + '</a>';
     }
 
+    function assetTagLinkFormatter(value, row) {
+        return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+    }
+
+    function assetNameLinkFormatter(value, row) {
+        if ((row.asset) && (row.asset.name)) {
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.name + '</a>';
+        }
+
+    }
+
     function trueFalseFormatter(value, row) {
         if ((value) && ((value == 'true') || (value == '1'))) {
             return '<i class="fa fa-check text-success"></i>';

@@ -120,6 +120,18 @@
                             </div>
                         </div>
 
+                        <!-- Email format -->
+                        <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('skin', trans('general.skin')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {!! Form::skin('skin', Input::old('skin', $setting->skin), 'select2') !!}
+                                {!! $errors->first('skin', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div>
+
+
                         <!-- Custom css -->
                         <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">
                             <div class="col-md-3">

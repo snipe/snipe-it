@@ -42,8 +42,10 @@
             <tr>
               <th data-sortable="true" data-field="id" data-visible="true">{{ trans('general.id') }}</th>
                <th data-field="company" data-sortable="false" data-visible="true">{{ trans('admin/companies/table.title') }}</th>
-              <th data-sortable="false" data-visible="true" data-field="asset_name" data-formatter="hardwareLinkObjFormatter">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
-              <th data-sortable="false" data-visible="true" data-field="supplier" data-formatter="suppliersLinkObjFormatter">{{ trans('general.supplier') }}</th>
+              <th data-sortable="true" data-visible="false" data-field="asset_name" data-formatter="assetNameLinkFormatter">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
+                <th data-field="asset_tag" data-sortable="true" data-visible="true" data-formatter="assetTagLinkFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th data-sortable="false" data-visible="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('admin/hardware/table.location') }}</th>
+                <th data-sortable="false" data-visible="true" data-field="supplier" data-formatter="suppliersLinkObjFormatter">{{ trans('general.supplier') }}</th>
               <th data-searchable="true" data-visible="true" data-sortable="true" data-field="asset_maintenance_type">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
               <th data-searchable="true" data-visible="true" data-sortable="true" data-field="title">{{ trans('admin/asset_maintenances/form.title') }}</th>
               <th data-searchable="true" data-visible="true" data-sortable="true" data-field="start_date" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.start_date') }}</th>

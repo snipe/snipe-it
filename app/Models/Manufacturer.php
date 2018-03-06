@@ -21,9 +21,7 @@ class Manufacturer extends SnipeModel
         'support_email'   => 'email|nullable'
     );
 
-    protected $hidden = ['user_id','deleted_at'];
-
-
+    protected $hidden = ['user_id'];
 
     /**
     * Whether the model should inject it's identifier to the unique
