@@ -190,7 +190,13 @@ class LdapSync extends Command
                 if ($item['ldap_location_override'] == true) {
                     $user->location_id = $item['location_id'];
                 } elseif ((isset($location)) && (!empty($location))) {
-                    $user->location_id = e($location->id);
+
+                    if (is_array($location)) {
+                        $user->location_id = $location['id'];
+                    } elseif (is_object($location)) {
+                        $user->location_id = $location->id;
+                    }
+
                 }
 
                 $user->notes = 'Imported from LDAP';
