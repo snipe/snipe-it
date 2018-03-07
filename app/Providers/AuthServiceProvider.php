@@ -140,6 +140,7 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('view', \App\Models\Company::class)
                 || $user->can('view', \App\Models\Manufacturer::class)
                 || $user->can('view', \App\Models\Company::class)
+                || $user->can('view', \App\Models\CustomField::class)
                 || $user->can('view', \App\Models\Depreciation::class);
         });
     }
