@@ -26,6 +26,7 @@ class CustomFieldsTransformer
             'name' => e($field->name),
             'db_column_name' => e($field->db_column_name()),
             'format'   =>  e($field->format),
+            'field_values'   => ($field->field_values) ?  e($field->field_values) : null,
             'required'   =>  $field->pivot ? $field->pivot->required : false,
             'created_at' => Helper::getFormattedDateObject($field->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($field->updated_at, 'datetime'),

@@ -524,8 +524,8 @@
                     </a>
 
                     <ul class="treeview-menu">
-                        @can('view', \App\Models\Customfield::class)
-                            <li {!! (Request::is('custom_fields*') ? ' class="active"' : '') !!}>
+                        @can('view', \App\Models\CustomField::class)
+                            <li {!! (Request::is('fields*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('fields.index') }}">
                                     {{ trans('admin/custom_fields/general.custom_fields') }}
                                 </a>

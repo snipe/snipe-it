@@ -420,7 +420,7 @@ class AssetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize('edit', Asset::class);
 
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?
