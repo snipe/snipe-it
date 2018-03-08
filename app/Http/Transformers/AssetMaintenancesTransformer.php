@@ -22,7 +22,6 @@ class AssetMaintenancesTransformer
     {
         $array = [
             'id'            => (int) $assetmaintenance->id,
-
             'asset' => ($assetmaintenance->asset) ? [
                 'id' => (int) $assetmaintenance->asset->id,
                 'name'=> ($assetmaintenance->asset->name) ? e($assetmaintenance->asset->name) : null,
@@ -30,7 +29,7 @@ class AssetMaintenancesTransformer
 
             ]  : null,
             'title'         => ($assetmaintenance->title) ? e($assetmaintenance->title) : null,
-            'location' => ($assetmaintenance->asset->location) ? [
+            'location' => (($assetmaintenance->asset) && ($assetmaintenance->asset->location)) ? [
                 'id' => (int) $assetmaintenance->asset->location->id,
                 'name'=> e($assetmaintenance->asset->location->name),
 
