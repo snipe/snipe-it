@@ -26,7 +26,7 @@ $factory->state(Statuslabel::class, 'pending', function (Faker\Generator $faker)
     return [
         'notes' => $faker->sentence,
         'pending' => 1,
-        'default_label' => 0,
+        'default_label' => 1,
     ];
 });
 
