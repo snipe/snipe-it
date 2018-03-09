@@ -6,5 +6,5 @@ return array (
   'prerelease_version' => '',
   'hash_version' => 'g90bff709a',
   'full_hash' => 'v4.1.14-55-g90bff709a',
-  'branch' => 'develop',
+  'branch' => 'master',
 );
