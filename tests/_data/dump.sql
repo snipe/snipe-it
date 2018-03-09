@@ -1287,6 +1287,7 @@ CREATE TABLE `status_labels` (
   `notes` text COLLATE utf8mb4_unicode_ci,
   `color` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `show_in_nav` tinyint(1) NOT NULL DEFAULT '0',
+  `default_label` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1297,7 +1298,7 @@ CREATE TABLE `status_labels` (
 
 LOCK TABLES `status_labels` WRITE;
 /*!40000 ALTER TABLE `status_labels` DISABLE KEYS */;
-INSERT INTO `status_labels` VALUES (1,'Ready to Deploy',1,'1978-03-29 02:11:42','2003-04-07 04:36:05',NULL,1,0,0,'Neque sint est sit eum.',NULL,0),(2,'Pending',1,'1984-10-22 18:19:42','1971-08-30 03:41:07',NULL,0,1,0,'Consectetur provident assumenda dolore culpa perspiciatis non.',NULL,0),(3,'Archived',1,'2005-10-20 01:12:09','1971-04-28 00:41:58',NULL,0,0,1,'These assets are permanently undeployable',NULL,0),(4,'Out for Diagnostics',1,'2001-12-01 10:49:15','2004-07-26 21:14:26',NULL,0,0,0,'',NULL,0),(5,'Out for Repair',1,'2007-10-08 14:30:44','1994-01-12 01:09:58',NULL,0,0,0,'',NULL,0),(6,'Broken - Not Fixable',1,'1982-06-03 01:20:34','1982-09-19 00:27:34',NULL,0,0,0,'',NULL,0),(7,'Lost/Stolen',1,'1977-02-15 20:16:26','1987-11-14 05:17:29',NULL,0,0,0,'',NULL,0);
+INSERT INTO `status_labels` VALUES (1,'Ready to Deploy',1,'1978-03-29 02:11:42','2003-04-07 04:36:05',NULL,1,0,0,'Neque sint est sit eum.',NULL,0,0),(2,'Pending',1,'1984-10-22 18:19:42','1971-08-30 03:41:07',NULL,0,1,0,'Consectetur provident assumenda dolore culpa perspiciatis non.',NULL,0,0),(3,'Archived',1,'2005-10-20 01:12:09','1971-04-28 00:41:58',NULL,0,0,1,'These assets are permanently undeployable',NULL,0,0),(4,'Out for Diagnostics',1,'2001-12-01 10:49:15','2004-07-26 21:14:26',NULL,0,0,0,'',NULL,0,0),(5,'Out for Repair',1,'2007-10-08 14:30:44','1994-01-12 01:09:58',NULL,0,0,0,'',NULL,0,0),(6,'Broken - Not Fixable',1,'1982-06-03 01:20:34','1982-09-19 00:27:34',NULL,0,0,0,'',NULL,0,0),(7,'Lost/Stolen',1,'1977-02-15 20:16:26','1987-11-14 05:17:29',NULL,0,0,0,'',NULL,0,0);
 /*!40000 ALTER TABLE `status_labels` ENABLE KEYS */;
 UNLOCK TABLES;
 
