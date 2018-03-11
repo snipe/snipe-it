@@ -99,7 +99,6 @@ abstract class Importer
         } else {
             $this->csv = Reader::createFromString($file);
         }
-        //$this->csv->setNewLine('\r\n'); //FIXME!
         $this->tempPassword = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
     }
     // Cached Values for import lookups
