@@ -50,9 +50,9 @@ class LoginController extends Controller
         \Session::put('backUrl', \URL::previous());
     }
 
-    function showLoginForm()
+    function showLoginForm(Request $request)
     {
-        $this->loginViaRemoteUser();
+        $this->loginViaRemoteUser($request);
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
@@ -64,9 +64,9 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    private function loginViaRemoteUser()
+    private function loginViaRemoteUser(Request $request)
     {
-        $remote_user = Request::server('REMOTE_USER');
+        $remote_user = $request->server('REMOTE_USER');
         if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
             LOG::debug("Authenticatiing via REMOTE_USER.");
             try {
