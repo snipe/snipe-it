@@ -58,7 +58,7 @@ class LoginController extends Controller
         }
 
         if (Setting::getSettings()->login_common_disabled == "1") {
-            return view('errors.401');
+            return view('errors.403');
         }
 
         return view('auth.login');
@@ -66,18 +66,16 @@ class LoginController extends Controller
 
     private function loginViaRemoteUser()
     {
-        if (Setting::getSettings()->login_remote_user_enabled == "1"
-            && isset($_SERVER['REMOTE_USER']) && !empty($_SERVER['REMOTE_USER'])) {
-
+        $remote_user = Request::server('REMOTE_USER');
+        if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
             LOG::debug("Authenticatiing via REMOTE_USER.");
             try {
-                $user = User::where('username', '=', $_SERVER['REMOTE_USER'])->whereNull('deleted_at')->first();
+                $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->first();
                 LOG::debug("Remote user auth lookup complete");
                 if(!is_null($user)) Auth::login($user, true);
             } catch(Exception $e) {
                 LOG::error("There was an error authenticating the Remote user: " . $e->getMessage());
             }
-
         }
     }
 
@@ -277,6 +275,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('2fa_authed');
+
         Auth::logout();
 
         $settings = Setting::getSettings();

@@ -14,7 +14,7 @@ class AddCustomLogoutUrl extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('login_remote_user_custom_logout_url')->nullable()->default("");
+            $table->string('login_remote_user_custom_logout_url')->default("");
         });
     }
 
