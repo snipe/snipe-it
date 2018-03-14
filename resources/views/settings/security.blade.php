@@ -66,7 +66,6 @@
                             </div>
                         </div>
 
-
                         <!-- Two Factor -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
                             <div class="col-md-3">
