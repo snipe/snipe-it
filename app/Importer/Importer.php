@@ -91,14 +91,13 @@ abstract class Importer
         $this->fieldMap = $this->defaultFieldMap;
         // By default the importer passes a url to the file.
         // However, for testing we also support passing a string directly
+        if (! ini_get("auto_detect_line_endings")) {
+            ini_set("auto_detect_line_endings", '1');
+        }
         if (is_file($file)) {
             $this->csv = Reader::createFromPath($file);
         } else {
             $this->csv = Reader::createFromString($file);
-        }
-        $this->csv->setNewLine('\r\n');
-        if (! ini_get("auto_detect_line_endings")) {
-            ini_set("auto_detect_line_endings", '1');
         }
         $this->tempPassword = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
     }
