@@ -12,6 +12,14 @@
     <a href="{{ route('manufacturers.create') }}" class="btn btn-primary pull-right">
     {{ trans('general.create') }}</a>
   @endcan
+
+  @if (Input::get('deleted')=='true')
+    <a class="btn btn-default pull-right" href="{{ route('manufacturers.index') }}" style="margin-right: 5px;">{{ trans('general.show_current') }}</a>
+  @else
+    <a class="btn btn-default pull-right" href="{{ route('manufacturers.index', ['deleted' => 'true']) }}" style="margin-right: 5px;">
+      {{ trans('general.show_deleted') }}</a>
+  @endif
+
 @stop
 
 {{-- Page content --}}
@@ -37,7 +45,7 @@
             data-sort-order="asc"
             id="manufacturersTable"
             class="table table-striped snipe-table"
-            data-url="{{route('api.manufacturers.index') }}"
+            data-url="{{route('api.manufacturers.index', ['deleted' => e(Input::get('deleted')) ]) }}"
             data-export-options='{
               "fileName": "export-manufacturers-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]

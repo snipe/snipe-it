@@ -460,8 +460,14 @@ class AssetsController extends Controller
             $asset->location_id = ($target) ? $target->id : '';
 
         } elseif (request('checkout_to_type')=='asset') {
+
+            if (request('assigned_asset') == $assetId) {
+                return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+            }
+
             $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
+
             // Override with the asset's location_id if it has one
             if ($target->location_id!='') {
                 $asset->location_id = ($target) ? $target->location_id : '';

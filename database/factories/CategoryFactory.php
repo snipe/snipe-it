@@ -12,11 +12,11 @@
 
 $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
     return [
-        'user_id' => 1,
+        'checkin_email' => $faker->boolean(),
         'eula_text' => $faker->paragraph(),
         'require_acceptance' => false,
         'use_default_eula' => $faker->boolean(),
-        'checkin_email' => $faker->boolean()
+        'user_id' => 1,
      ];
 });
 

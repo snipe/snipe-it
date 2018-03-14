@@ -12,20 +12,20 @@ class UserTest extends BaseTest
      */
     protected $tester;
 
-    public function testUserAdd()
-    {
-      $user = factory(User::class)->make();
-      $values = [
-        'first_name' => $user->first_name,
-        'last_name' => $user->last_name,
-        'email' => $user->email,
-        'username' => $user->username,
-        'password' => $user->password,
-      ];
+    // public function testUserAdd()
+    // {
+    //   $user = factory(User::class)->make();
+    //   $values = [
+    //     'first_name' => $user->first_name,
+    //     'last_name' => $user->last_name,
+    //     'email' => $user->email,
+    //     'username' => $user->username,
+    //     'password' => $user->password,
+    //   ];
 
-      User::create($values);
-      $this->tester->seeRecord('users', $values);
-    }
+    //   User::create($values);
+    //   $this->tester->seeRecord('users', $values);
+    // }
 
 
     public function testFirstNameSplit()
@@ -54,6 +54,14 @@ class UserTest extends BaseTest
         $this->assertEquals($expected_username, $user['username']);
     }
 
+    public function testLastNameFirstInitial()
+    {
+        $fullname = "Natalia Allanovna Romanova-O'Shostakova";
+        $expected_username = 'allanovna-romanova-oshostakovan';
+        $user = User::generateFormattedNameFromFullName('lastnamefirstinitial', $fullname);
+        $this->assertEquals($expected_username, $user['username']);
+    }
+
 
     public function testFirstInitialLastName()
     {
@@ -67,6 +75,14 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'natalia_allanovna-romanova-oshostakova';
+        $user = User::generateFormattedNameFromFullName('firstname_lastname', $fullname);
+        $this->assertEquals($expected_username, $user['username']);
+    }
+
+    public function testSingleName()
+    {
+        $fullname = "Natalia";
+        $expected_username = 'natalia';
         $user = User::generateFormattedNameFromFullName('firstname_lastname', $fullname);
         $this->assertEquals($expected_username, $user['username']);
     }

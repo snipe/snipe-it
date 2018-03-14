@@ -75,7 +75,7 @@ $factory->define(App\Models\Supplier::class, function (Faker\Generator $faker) {
     'fax'   => $faker->phoneNumber,
     'email' => $faker->safeEmail,
     'url'   => $faker->url,
-    'notes' => $faker->text(255) // Supplier notes can be a max of 255 characters.
+    'notes' => $faker->text(191) // Supplier notes can be a max of 255 characters.
     ];
 });
 

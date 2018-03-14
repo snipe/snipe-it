@@ -28,30 +28,32 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
 
         $users = User::select([
-            'users.id',
-            'users.employee_num',
-            'users.two_factor_enrolled',
-            'users.jobtitle',
-            'users.email',
-            'users.phone',
+            'users.activated',
             'users.address',
+            'users.avatar',
             'users.city',
-            'users.state',
-            'users.country',
-            'users.zip',
-            'users.username',
-            'users.location_id',
-            'users.manager_id',
-            'users.first_name',
-            'users.last_name',
-            'users.created_at',
-            'users.notes',
             'users.company_id',
-            'users.last_login',
+            'users.country',
+            'users.created_at',
             'users.deleted_at',
             'users.department_id',
-            'users.activated',
-            'users.avatar',
+            'users.email',
+            'users.employee_num',
+            'users.first_name',
+            'users.id',
+            'users.jobtitle',
+            'users.last_login',
+            'users.last_name',
+            'users.location_id',
+            'users.manager_id',
+            'users.notes',
+            'users.permissions',
+            'users.phone',
+            'users.state',
+            'users.two_factor_enrolled',
+            'users.updated_at',
+            'users.username',
+            'users.zip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
             ->withCount('assets','licenses','accessories','consumables');
@@ -69,7 +71,7 @@ class UsersController extends Controller
         if ($request->has('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
         }
-        
+
         if ($request->has('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
@@ -287,5 +289,33 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+    }
+
+    /**
+     * Reset the user's two-factor status
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function postTwoFactorReset(Request $request)
+    {
+
+        $this->authorize('edit', User::class);
+
+        if ($request->has('id')) {
+            try {
+                $user = User::find($request->get('id'));
+                $user->two_factor_secret = null;
+                $user->two_factor_enrolled = 0;
+                $user->save();
+                return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
+            }
+        }
+        return response()->json(['message' => 'No ID provided'], 500);
+
     }
 }

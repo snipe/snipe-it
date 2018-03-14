@@ -627,6 +627,10 @@ $(document).ready(function() {
             url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
             type: 'POST',
             data: {},
+            headers: {
+                "X-Requested-With": 'XMLHttpRequest',
+                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            },
             dataType: 'json',
 
             success: function (data) {

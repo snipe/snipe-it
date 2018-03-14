@@ -235,7 +235,7 @@ class Helper
      */
     public static function statusLabelList()
     {
-        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('deployable', 'desc')
+        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('default_label', 'desc')->orderBy('name','asc')->orderBy('deployable','desc')
                 ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
     }
@@ -690,7 +690,7 @@ class Helper
 
         $array['status'] = $status;
         $array['messages'] = $messages;
-        if (($messages) && (count($messages) > 0)) {
+        if (($messages) &&  (is_array($messages)) && (count($messages) > 0)) {
             $array['messages'] = $messages;
         }
         ($payload) ? $array['payload'] = $payload : $array['payload'] = null;

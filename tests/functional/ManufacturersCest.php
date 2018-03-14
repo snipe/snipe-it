@@ -8,8 +8,8 @@ class ManufacturersCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
 
@@ -43,7 +43,9 @@ class ManufacturersCest
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $manufacturer = factory(App\Models\Manufacturer::class)->make();
+        $manufacturer = factory(App\Models\Manufacturer::class)->states('microsoft')->make([
+            'name' => 'Test Manufacturer'
+        ]);
         $values = [
             'name' => $manufacturer->name
         ];
@@ -57,7 +59,7 @@ class ManufacturersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a manufacturer');
-        $manufacturerId = factory(App\Models\Manufacturer::class)->create()->id;
+        $manufacturerId = factory(App\Models\Manufacturer::class)->states('microsoft')->create(['name' => "Deletable Test Manufacturer"])->id;
         $I->sendDelete(route('manufacturers.destroy', $manufacturerId), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

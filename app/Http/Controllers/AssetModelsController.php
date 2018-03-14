@@ -166,7 +166,7 @@ class AssetModelsController extends Controller
     */
     public function edit($modelId = null)
     {
-        $this->authorize('edit', AssetModel::class);
+        $this->authorize('update', AssetModel::class);
         if ($item = AssetModel::find($modelId)) {
             $category_type = 'asset';
             $view = View::make('models/edit', compact('item','category_type'));
@@ -190,7 +190,7 @@ class AssetModelsController extends Controller
     */
     public function update(ImageUploadRequest $request, $modelId = null)
     {
-        $this->authorize('edit', AssetModel::class);
+        $this->authorize('update', AssetModel::class);
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the models management page

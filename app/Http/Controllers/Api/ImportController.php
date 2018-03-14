@@ -72,6 +72,9 @@ class ImportController extends Controller
                 $import->file_path = $file_name;
                 $import->filesize = filesize($path.'/'.$file_name);
                 //TODO: is there a lighter way to do this?
+                if (! ini_get("auto_detect_line_endings")) {
+                    ini_set("auto_detect_line_endings", '1');
+                }
                 $reader = Reader::createFromPath("{$path}/{$file_name}");
                 $import->header_row = $reader->fetchOne(0);
                 // Grab the first row to display via ajax as the user picks fields

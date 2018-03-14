@@ -37,15 +37,16 @@
     "watson/validating": "^3.0"
   },
     "require-dev": {
-        "fzaninotto/faker": "~1.4",
-        "phpunit/phpunit": "~5.7",
-        "symfony/css-selector": "3.1.*",
-        "symfony/dom-crawler": "3.1.*",
-        "codeception/codeception": "2.3.6",
-        "squizlabs/php_codesniffer": "*",
-        "phpunit/php-token-stream": "1.4.11"
-
-    },
+    "codeception/codeception": "2.3.6",
+    "codeclimate/php-test-reporter": "^0.4.4",
+    "fzaninotto/faker": "~1.4",
+    "phpunit/php-token-stream": "1.4.11",
+    "phpunit/phpunit": "~5.7",
+    "roave/security-advisories": "dev-master",
+    "squizlabs/php_codesniffer": "*",
+    "symfony/css-selector": "3.1.*",
+    "symfony/dom-crawler": "3.1.*"
+  },
     "autoload": {
         "classmap": [
             "database"

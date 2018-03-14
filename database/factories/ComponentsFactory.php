@@ -26,7 +26,9 @@ $factory->state(App\Models\Component::class, 'ram-crucial4', function ($faker) {
         'name' => 'Crucial 4GB DDR3L-1600 SODIMM',
         'category_id' => 13,
         'qty' => 10,
-        'min_amt' => 2
+        'min_amt' => 2,
+        'location_id' => 3,
+        'company_id' => 2
     ];
 });
 

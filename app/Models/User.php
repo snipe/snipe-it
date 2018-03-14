@@ -28,24 +28,25 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
     protected $fillable = [
-        'email',
-        'last_name',
-        'company_id',
-        'department_id',
-        'employee_num',
-        'jobtitle',
-        'location_id',
-        'password',
-        'phone',
-        'username',
-        'first_name',
+        'activated',
         'address',
         'city',
-        'state',
+        'company_id',
         'country',
-        'zip',
-        'activated',
+        'department_id',
+        'email',
+        'employee_num',
+        'first_name',
+        'jobtitle',
+        'last_name',
+        'locale',
+        'location_id',
         'manager_id',
+        'password',
+        'phone',
+        'state',
+        'username',
+        'zip',
     ];
 
     protected $casts = [
@@ -330,19 +331,32 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     public static function generateFormattedNameFromFullName($format = 'filastname', $users_name)
     {
-        list($first_name, $last_name) = explode(" ", $users_name, 2);
 
-        // Assume filastname by default
-        $username = str_slug(substr($first_name, 0, 1).$last_name);
-        
-        if ($format=='firstname.lastname') {
-            $username = str_slug($first_name).'.'.str_slug($last_name);
+        // If there was only one name given
+        if (strpos($users_name, ' ') === false) {
+            $first_name = $users_name;
+            $last_name = '';
+            $username  = $users_name;
 
-        } elseif ($format=='firstname_lastname') {
-            $username = str_slug($first_name).'_'.str_slug($last_name);
+        } else {
 
-        } elseif ($format=='firstname') {
-            $username = str_slug($first_name);
+            list($first_name, $last_name) = explode(" ", $users_name, 2);
+
+            // Assume filastname by default
+            $username = str_slug(substr($first_name, 0, 1).$last_name);
+
+            if ($format=='firstname.lastname') {
+                $username = str_slug($first_name) . '.' . str_slug($last_name);
+
+            } elseif ($format=='lastnamefirstinitial') {
+                $username = str_slug($last_name.substr($first_name, 0, 1));
+
+            } elseif ($format=='firstname_lastname') {
+                $username = str_slug($first_name).'_'.str_slug($last_name);
+
+            } elseif ($format=='firstname') {
+                $username = str_slug($first_name);
+            }
         }
 
         $user['first_name'] = $first_name;

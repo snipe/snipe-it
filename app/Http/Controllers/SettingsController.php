@@ -22,6 +22,7 @@ use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
 use App\Helpers\Helper;
+use App\Notifications\FirstAdminNotification;
 
 /**
  * This controller handles all actions related to Settings for
@@ -57,9 +58,10 @@ class SettingsController extends Controller
 
         $protocol = array_key_exists('HTTPS', $_SERVER) && ( $_SERVER['HTTPS'] == "on") ? 'https://' : 'http://';
 
-        $host = $_SERVER['SERVER_NAME'];
-        if (($protocol === 'http://' && $_SERVER['SERVER_PORT'] != '80') || ($protocol === 'https://' && $_SERVER['SERVER_PORT'] != '443')) {
-            $host .= ':' . $_SERVER['SERVER_PORT'];
+        $host = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : null;
+        $port = array_key_exists('SERVER_PORT', $_SERVER) ? $_SERVER['SERVER_PORT'] : null;
+        if (($protocol === 'http://' && $port != '80') || ($protocol === 'https://' && $port != '443')) {
+            $host .= ':' . $port;
         }
         $pageURL = $protocol . $host . $_SERVER['REQUEST_URI'];
 
@@ -185,11 +187,20 @@ class SettingsController extends Controller
             $settings->save();
 
             if (Input::get('email_creds')=='1') {
-                Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
+                $data = array();
+                $data['email'] = $user->email;
+                $data['username'] = $user->username;
+                $data['first_name'] = $user->first_name;
+                $data['last_name'] = $user->last_name;
+                $data['password'] = $user->password;
+
+                $user->notify(new FirstAdminNotification($data));
+
+                /*Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.your_credentials'));
-                });
+                });*/
             }
 
 
@@ -385,6 +396,7 @@ class SettingsController extends Controller
         $setting->header_color = $request->input('header_color');
         $setting->support_footer = $request->input('support_footer');
         $setting->footer_text = $request->input('footer_text');
+        $setting->skin = $request->input('skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
 
 

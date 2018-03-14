@@ -1,0 +1,8 @@
+tests/functional/AccessoriesCest.php
+tests/functional/AssetModelsCest.php
+tests/functional/AssetsCest.php
+tests/functional/CategoriesCest.php
+tests/functional/CompaniesCest.php
+tests/functional/ComponentsCest.php
+tests/functional/ConsumablesCest.php
+tests/functional/DepreciationsCest.php

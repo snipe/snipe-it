@@ -420,7 +420,7 @@ class AssetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize('edit', Asset::class);
 
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?
@@ -635,8 +635,6 @@ class AssetsController extends Controller
         if ($request->has('location_id')) {
             $asset->location_id =  $request->input('location_id');
         }
-
-        $asset->location_id = $asset->rtd_location_id;
 
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));

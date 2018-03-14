@@ -93,9 +93,9 @@ class StatuslabelsController extends Controller
         $statusLabel->archived          =  $statusType['archived'];
         $statusLabel->color             =  Input::get('color');
         $statusLabel->show_in_nav       =  Input::get('show_in_nav', 0);
+        $statusLabel->default_label       =  Input::get('default_label', 0);
 
 
-        // Was the asset created?
         if ($statusLabel->save()) {
             // Redirect to the new Statuslabel  page
             return redirect()->route('statuslabels.index')->with('success', trans('admin/statuslabels/message.create.success'));
@@ -185,6 +185,7 @@ class StatuslabelsController extends Controller
         $statuslabel->archived          =  $statustype['archived'];
         $statuslabel->color          =  Input::get('color');
         $statuslabel->show_in_nav          =  Input::get('show_in_nav', 0);
+        $statuslabel->default_label          =  Input::get('default_label', 0);
 
 
         // Was the asset created?

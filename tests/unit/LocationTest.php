@@ -12,14 +12,14 @@ class LocationTest extends BaseTest
     */
     protected $tester;
 
-    public function testAssetAdd()
-    {
-        $location = factory(Location::class)->make();
-        $values = [
-        'name' => $location->name,
-        ];
+    // public function testAssetAdd()
+    // {
+    //     $location = factory(Location::class)->make();
+    //     $values = [
+    //     'name' => $location->name,
+    //     ];
 
-        Location::create($values);
-        $this->tester->seeRecord('locations', $values);
-    }
+    //     Location::create($values);
+    //     $this->tester->seeRecord('locations', $values);
+    // }
 }

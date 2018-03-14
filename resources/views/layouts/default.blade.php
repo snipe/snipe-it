@@ -31,30 +31,33 @@
 
     </script>
 
+
+      @if (($snipeSettings) && ($snipeSettings->skin!=''))
+          <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin) }}.css">
+      @endif
+
     <style nonce="{{ csrf_token() }}">
-        @if ($snipeSettings)
-            @if ($snipeSettings->header_color)
-            .main-header .navbar, .main-header .logo {
-            background-color: {{ $snipeSettings->header_color }};
-            background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
-            background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
-            border-color: {{ $snipeSettings->header_color }};
-            }
-            .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
-              border-left-color: {{ $snipeSettings->header_color }};
-            }
+        @if (($snipeSettings) && ($snipeSettings->header_color!=''))
+        .main-header .navbar, .main-header .logo {
+        background-color: {{ $snipeSettings->header_color }};
+        background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+        background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+        border-color: {{ $snipeSettings->header_color }};
+        }
+        .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
+          border-left-color: {{ $snipeSettings->header_color }};
+        }
 
-            .btn-primary {
-              background-color: {{ $snipeSettings->header_color }};
-              border-color: {{ $snipeSettings->header_color }};
-            }
+        .btn-primary {
+          background-color: {{ $snipeSettings->header_color }};
+          border-color: {{ $snipeSettings->header_color }};
+        }
+        @endif
 
-            @endif
-
-        @if ($snipeSettings->custom_css)
+        @if (($snipeSettings) && ($snipeSettings->custom_css!=''))
             {!! $snipeSettings->show_custom_css() !!}
         @endif
-     @endif
+
     @media (max-width: 400px) {
       .navbar-left {
        margin: 2px;
@@ -521,8 +524,8 @@
                     </a>
 
                     <ul class="treeview-menu">
-                        @can('view', \App\Models\Customfield::class)
-                            <li {!! (Request::is('custom_fields*') ? ' class="active"' : '') !!}>
+                        @can('view', \App\Models\CustomField::class)
+                            <li {!! (Request::is('fields*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('fields.index') }}">
                                     {{ trans('admin/custom_fields/general.custom_fields') }}
                                 </a>

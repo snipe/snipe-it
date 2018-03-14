@@ -45,7 +45,19 @@ class Location extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','parent_id','address','address2','city','state', 'country','zip','ldap_ou'];
+    protected $fillable = [
+        'name',
+        'parent_id',
+        'address',
+        'address2',
+        'city',
+        'state',
+        'country',
+        'zip',
+        'ldap_ou',
+        'currency',
+        'image',
+    ];
     protected $hidden = ['user_id'];
 
     public function users()

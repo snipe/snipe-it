@@ -6,8 +6,8 @@ class ComponentsCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
 
@@ -47,19 +47,21 @@ class ComponentsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $component = factory(App\Models\Component::class)->make();
-
+        $component = factory(App\Models\Component::class)->states('ram-crucial4')->make([
+            'name' => 'Test Component',
+            'serial' => '3523-235325-1350235'
+        ]);
         $values = [
-            'name'              => $component->name,
             'category_id'       => $component->category_id,
-            'location_id'       => $component->location_id,
-            'qty'               => $component->qty,
-            'min_amt'           => $component->min_amt,
-            'serial'            => $component->serial,
             'company_id'        => $component->company_id,
+            'location_id'       => $component->location_id,
+            'min_amt'           => $component->min_amt,
+            'name'              => $component->name,
             'order_number'      => $component->order_number,
-            'purchase_date'     => '2016-01-01',
             'purchase_cost'     => $component->purchase_cost,
+            'purchase_date'     => '2016-01-01',
+            'qty'               => $component->qty,
+            'serial'            => $component->serial,
         ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage(route('components.create'));

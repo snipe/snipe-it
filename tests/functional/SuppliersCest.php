@@ -5,8 +5,8 @@ class SuppliersCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
 
@@ -29,26 +29,18 @@ class SuppliersCest
         $I->see('The name field is required.', '.alert-msg');
     }
 
-    public function failsShortValidation(FunctionalTester $I)
-    {
-        $I->wantTo("Test Validation Fails with short name");
-        $I->amOnPage(route('suppliers.create'));
-        $I->fillField('name', 't2');
-        $I->click('Save');
-        $I->seeElement('.alert-danger');
-        $I->see('The name must be at least 3 characters', '.alert-msg');
-    }
     public function passesCorrectValidation(FunctionalTester $I)
     {
         $supplier = factory(App\Models\Supplier::class)->make();
+
         $values = [
             'name'              => $supplier->name,
             'address'           => $supplier->address,
             'address2'          => $supplier->address2,
             'city'              => $supplier->city,
             'state'             => $supplier->state,
-            'country'           => $supplier->country,
             'zip'               => $supplier->zip,
+            'country'           => $supplier->country,
             'contact'           => $supplier->contact,
             'phone'             => $supplier->phone,
             'fax'               => $supplier->fax,

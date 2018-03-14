@@ -1,17 +1,20 @@
 <?php
 
+use App\Helpers\Helper;
+use App\Http\Transformers\ComponentsTransformer;
+use App\Models\Component;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
 class ApiComponentsCest
 {
-    protected $faker;
     protected $user;
+    protected $timeFormat;
 
     public function _before(ApiTester $I)
     {
-        $this->faker = \Faker\Factory::create();
         $this->user = \App\Models\User::find(1);
-
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->amBearerAuthenticated($I->getToken($this->user));
     }
 
@@ -20,99 +23,81 @@ class ApiComponentsCest
     {
         $I->wantTo('Get a list of components');
 
-        // setup
-        $components = factory(\App\Models\Component::class, 10)->create();
-
         // call
-        $I->sendGET('/components');
+        $I->sendGET('/components?limit=10');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
+        $response = json_decode($I->grabResponse(), true);
         // sample verify
-        $component = $components->random();
-        $I->seeResponseContainsJson([
-            'name' => $component->name,
-            'qty' => $component->qty,
-        ]);
+        $component = App\Models\Component::orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        $I->seeResponseContainsJson([
-            'total' => \App\Models\Component::count(),
-        ]);
+        $I->seeResponseContainsJson((new ComponentsTransformer)->transformComponent($component));
     }
 
     /** @test */
-    public function createComponent(ApiTester $I)
+    public function createComponent(ApiTester $I, $scenario)
     {
         $I->wantTo('Create a new component');
 
-        // setup
-        $category = factory(\App\Models\Category::class)->create(['user_id' => $this->user->id]);
-        $location = factory(\App\Models\Location::class)->create(['user_id' => $this->user->id]);
-        $company = factory(\App\Models\Company::class)->create();
+        $temp_component = factory(\App\Models\Component::class)->states('ram-crucial4')->make([
+            'name' => "Test Component Name",
+            'company_id' => 2
+        ]);
 
+        // setup
         $data = [
-            'category_id' => $category->id,
-            'company_id' => $company->id,
-            'location_id' => $location->id,
-            'name' => $this->faker->sentence(3),
-            'purchase_cost' => $this->faker->randomFloat(2, 0),
-            'purchase_date' => $this->faker->dateTime->format('Y-m-d'),
-            'qty' => rand(1, 10),
+            'category_id' => $temp_component->category_id,
+            'company_id' => $temp_component->company->id,
+            'location_id' => $temp_component->location_id,
+            'manufacturer_id' => $temp_component->manufacturer_id,
+            'model_number' => $temp_component->model_number,
+            'name' => $temp_component->name,
+            'order_number' => $temp_component->order_number,
+            'purchase_cost' => $temp_component->purchase_cost,
+            'purchase_date' => $temp_component->purchase_date,
+            'qty' => $temp_component->qty,
+            'serial' => $temp_component->serial
         ];
 
         // create
         $I->sendPOST('/components', $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-
-        $response = json_decode($I->grabResponse());
-        $id = $response->payload->id;
-
-        $I->assertEquals('success', $response->status);
-
-        // verify
-        $I->sendGET('/components/' . $id);
-        $I->seeResponseIsJson();
-        $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson([
-            'id' => (int) $id,
-            'name' => e($data['name']),
-            // 'serial_number' => e($component->serial),
-            'location' => [
-                'id' => (int) $data['location_id'],
-                'name' => e($location->name),
-            ],
-            'qty' => number_format($data['qty']),
-            // 'min_amt' => e($component->min_amt),
-            'category' => [
-                'id' => (int) $data['category_id'],
-                'name' => e($category->name),
-            ],
-            // 'order_number'  => e($component->order_number),
-            'purchase_date' =>  \App\Helpers\Helper::getFormattedDateObject($data['purchase_date'], 'date'),
-            'purchase_cost' => \App\Helpers\Helper::formatCurrencyOutput($data['purchase_cost']),
-            // 'remaining' => (int) $component->numRemaining(),
-            'company' => [
-                'id' => (int) $data['company_id'],
-                'name' => e($company->name),
-            ],
-            // 'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
-            // 'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
-        ]);
     }
 
+    // Put is routed to the same method in the controller
+    // DO we actually need to test both?
     /** @test */
-    public function updateComponentWithPatch(ApiTester $I)
+    public function updateComponentWithPatch(ApiTester $I, $scenario)
     {
-        $I->wantTo('Update a component with PATCH');
+        $I->wantTo('Update an component with PATCH');
 
         // create
-        $component = factory(\App\Models\Component::class)->create();
+        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+            'name' => 'Original Component Name',
+            'company_id' => 2,
+            'location_id' => 3
+        ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
+        $temp_component = factory(\App\Models\Component::class)->states('ssd-crucial240')->make([
+            'company_id' => 3,
+            'name' => "updated component name",
+            'location_id' => 1,
+        ]);
+
         $data = [
-            'name' => $this->faker->sentence(3),
-            'qty' => $this->faker->randomDigit + 1,
+            'category_id' => $temp_component->category_id,
+            'company_id' => $temp_component->company->id,
+            'location_id' => $temp_component->location_id,
+            'min_amt' => $temp_component->min_amt,
+            'name' => $temp_component->name,
+            'order_number' => $temp_component->order_number,
+            'purchase_cost' => $temp_component->purchase_cost,
+            'purchase_date' => $temp_component->purchase_date,
+            'qty' => $temp_component->qty,
+            'serial' => $temp_component->serial,
         ];
 
         $I->assertNotEquals($component->name, $data['name']);
@@ -123,60 +108,32 @@ class ApiComponentsCest
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse());
-        $I->assertEquals('success', $response->status);
 
+        $I->assertEquals('success', $response->status);
+        $I->assertEquals(trans('admin/components/message.update.success'), $response->messages);
+        $I->assertEquals($component->id, $response->payload->id); // component id does not change
+        $I->assertEquals($temp_component->company_id, $response->payload->company_id); // company_id updated
+        $I->assertEquals($temp_component->name, $response->payload->name); // component name updated
+        $I->assertEquals($temp_component->location_id, $response->payload->location_id); // component location_id updated
+        $temp_component->created_at = Carbon::parse($response->payload->created_at);
+        $temp_component->updated_at = Carbon::parse($response->payload->updated_at);
+        $temp_component->id = $component->id;
         // verify
         $I->sendGET('/components/' . $component->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson([
-            'name' => $data['name'],
-            'id' => $component->id,
-            'qty' => $data['qty'],
-        ]);
-    }
-
-    /** @test */
-    public function updateComponentWithPut(ApiTester $I)
-    {
-        $I->wantTo('Update a component with PUT');
-
-        // create
-        $component = factory(\App\Models\Component::class)->create();
-        $I->assertInstanceOf(\App\Models\Component::class, $component);
-
-        $data = [
-            'name' => $this->faker->sentence(3),
-        ];
-
-        $I->assertNotEquals($component->name, $data['name']);
-
-        // update
-        $I->sendPUT('/components/' . $component->id, $data);
-        $I->seeResponseIsJson();
-        $I->seeResponseCodeIs(200);
-
-        $response = json_decode($I->grabResponse());
-        $I->assertEquals('success', $response->status);
-
-        // verify
-        $I->sendGET('/components/' . $component->id);
-        $I->seeResponseIsJson();
-        $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson([
-            'name' => e($data['name']),
-            'id' => e($component->id),
-            'qty' => e($component->qty),
-        ]);
+        $I->seeResponseContainsJson((new ComponentsTransformer)->transformComponent($temp_component));
     }
 
     /** @test */
     public function deleteComponentTest(ApiTester $I, $scenario)
     {
-        $I->wantTo('Delete a component');
+        $I->wantTo('Delete an component');
 
         // create
-        $component = factory(\App\Models\Component::class)->create();
+        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+            'name' => "Soon to be deleted"
+        ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
         // delete
@@ -184,10 +141,15 @@ class ApiComponentsCest
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
-        // verify, expect a 200 with an error message
+        $response = json_decode($I->grabResponse());
+        // dd($response);
+        $I->assertEquals('success', $response->status);
+        $I->assertEquals(trans('admin/components/message.delete.success'), $response->messages);
+
+        // verify, expect a 200
         $I->sendGET('/components/' . $component->id);
+
         $I->seeResponseCodeIs(200);
-        $I->seeResponseIsJson(); // @todo: response is not JSON
-        // $scenario->incomplete('Resource not found response should be JSON, receiving HTML instead');
+        $I->seeResponseIsJson();
     }
 }

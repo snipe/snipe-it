@@ -19,6 +19,10 @@ $factory->define(App\Models\License::class, function (Faker\Generator $faker) {
         'notes'   => 'Created by DB seeder',
         'purchase_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
         'order_number' => $faker->numberBetween(1000000, 50000000),
+        'expiration_date' => $faker->dateTimeBetween('now', '+3 years', date_default_timezone_get())->format('Y-m-d H:i:s'),
+        'reassignable' => $faker->boolean(),
+        'termination_date' => $faker->dateTimeBetween('-1 years','now', date_default_timezone_get())->format('Y-m-d H:i:s'),
+        'supplier_id' => $faker->numberBetween(1,5),
     ];
 });
 
@@ -29,6 +33,8 @@ $factory->state(App\Models\License::class, 'photoshop', function ($faker) {
         'manufacturer_id' => 9,
         'purchase_cost' => '299.99',
         'seats' => 10,
+        'purchase_order' => '13503Q',
+        'maintained' => true
     ];
     
     return $data;

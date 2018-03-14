@@ -7,8 +7,8 @@ class UsersCest
     public function _before(\FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
     // tests
@@ -28,7 +28,7 @@ class UsersCest
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The first name field is required.', '.alert-msg');
-        $I->see('The username field is required.', '.alert-msg');
+        $I->see('The username field is required unless ldap import is in 1.', '.alert-msg');
         $I->see('The password field is required.', '.alert-msg');
     }
 
@@ -38,12 +38,11 @@ class UsersCest
         $I->amOnPage(route('users.create'));
         $I->fillField('first_name', 't2');
         $I->fillField('last_name', 't2');
-        $I->fillField('username', 'a'); // Must be 2 chars
+        $I->fillField('username', 'a');
         $I->fillField('password', '12345'); // Must be 6 chars
         $I->click('Save');
         $I->seeElement('.alert-danger');
-        $I->see('The username must be at least 2 characters', '.alert-msg');
-        $I->see('The password must be at least 6 characters', '.alert-msg');
+        $I->see('The password must be at least 10 characters', '.alert-msg');
         $I->see('The password confirm field is required when password is present', '.alert-msg');
 
     }
