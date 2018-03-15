@@ -28,7 +28,9 @@ clear
 
 name="snipeit"
 verbose="false"
+hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
+hosts=/etc/hosts
 
 spin[0]="-"
 spin[1]="\\"
@@ -165,6 +167,11 @@ configureselinux () {
     fi
 }
 
+sethostfile () {
+    echo "* Setting up hosts file."
+    echo >> $hosts "127.0.0.1 $hostname $fqdn"
+}
+
 if [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
     distro="$(lsb_release -s -i)"
     version="$(lsb_release -s -r)"
@@ -220,8 +227,12 @@ case $distro in
 esac
 shopt -u nocasematch
 
-echo ""
-read -rsn1 -p "  Press any key to continue..."
+echo -n "  Q. What is the FQDN of your server? ($fqdn): "
+read -r fqdn
+if [ -z "$fqdn" ]; then
+    fqdn="$(hostname --fqdn)"
+fi
+echo "     Setting to $fqdn"
 echo ""
 
 ans=default
@@ -271,6 +282,8 @@ case $distro in
         log "a2enmod rewrite"
         log "a2ensite $name.conf"
 
+        sethostfile
+
         echo "* Securing MariaDB."
         /usr/bin/mysql_secure_installation
 
@@ -308,6 +321,8 @@ case $distro in
         createvh
         log "a2enmod rewrite"
         log "a2ensite $name.conf"
+
+        sethostfile
 
         echo "* Securing MariaDB."
         /usr/bin/mysql_secure_installation
@@ -351,6 +366,8 @@ case $distro in
         log "a2enmod rewrite"
         log "a2ensite $name.conf"
 
+        sethostfile
+
         echo "* Starting MariaDB."
         log "service mysql start"
 
@@ -391,6 +408,8 @@ case $distro in
         log "phpenmod mbstring"
         log "a2enmod rewrite"
         log "a2ensite $name.conf"
+
+        sethostfile
 
         echo "* Starting MariaDB."
         log "service mysql start"
@@ -443,6 +462,8 @@ case $distro in
         log "chkconfig mysql on"
         log "/sbin/service mysql start"
 
+        sethostfile
+
         echo "* Securing MariaDB."
         /usr/bin/mysql_secure_installation
 
@@ -477,6 +498,8 @@ case $distro in
 
         echo "* Configuring Apache."
         createvh
+
+        sethostfile
 
         echo "* Setting MariaDB to start on boot and starting MariaDB."
         log "systemctl enable mariadb.service"
@@ -513,6 +536,8 @@ case $distro in
 
         echo "* Configuring Apache."
         createvh
+
+        sethostfile
 
         echo "* Setting MariaDB to start on boot and starting MariaDB."
         log "systemctl enable mariadb.service"
