@@ -194,7 +194,9 @@ class UsersController extends Controller
         $this->authorize('view', User::class);
         $user = new User;
         $user->fill($request->all());
-        $user->password = bcrypt($request->input('password'));
+
+        $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+        $user->password = bcrypt($request->get('password', $tmp_pass));
 
         if ($user->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.create')));
