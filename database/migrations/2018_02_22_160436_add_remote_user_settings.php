@@ -16,6 +16,7 @@ class AddRemoteUserSettings extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->boolean('login_remote_user_enabled')->default(0);
             $table->boolean('login_common_disabled')->default(0);
+            $table->string('login_remote_user_custom_logout_url')->default("");
         });
     }
 
@@ -29,6 +30,7 @@ class AddRemoteUserSettings extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('login_remote_user_enabled');
             $table->dropColumn('login_common_disabled');
+            $table->dropColumn('login_remote_user_custom_logout_url');
         });
     }
 }
