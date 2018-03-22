@@ -152,7 +152,7 @@ abstract class Importer
 
         $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
-            $val = e(Encoding::toUTF8(trim($array[ $key ])));
+            $val = Encoding::toUTF8(trim($array[ $key ]));
         }
         // $this->log("${key}: ${val}");
         return $val;
