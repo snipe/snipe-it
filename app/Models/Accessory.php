@@ -173,6 +173,10 @@ class Accessory extends SnipeModel
                             $query->where('companies.name', 'LIKE', '%'.$search.'%');
                         });
                     })->orWhere(function ($query) use ($search) {
+                        $query->whereHas('manufacturer', function ($query) use ($search) {
+                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                        });
+                    })->orWhere(function ($query) use ($search) {
                         $query->whereHas('location', function ($query) use ($search) {
                             $query->where('locations.name', 'LIKE', '%'.$search.'%');
                         });
