@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Artisan;
+use App\Models\Asset;
 
 class ImportController extends Controller
 {
