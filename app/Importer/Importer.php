@@ -152,7 +152,7 @@ abstract class Importer
 
         $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
-            $val = e(Encoding::toUTF8(trim($array[ $key ])));
+            $val = Encoding::toUTF8(trim($array[ $key ]));
         }
         // $this->log("${key}: ${val}");
         return $val;
@@ -200,7 +200,7 @@ abstract class Importer
     public function array_smart_custom_field_fetch(array $array, $key)
     {
         $index_name = strtolower($key->name);
-        return array_key_exists($index_name, $array) ? e(trim($array[$index_name])) : false;
+        return array_key_exists($index_name, $array) ? trim($array[$index_name]) : false;
     }
 
     protected function log($string)
