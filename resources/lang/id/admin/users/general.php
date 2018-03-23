@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klik di sini untuk mengembalikannya.',
     'last_login'        => 'Terakhir masuk',
     'ldap_config_text'  => 'Konfigurasi LDAP terdapat di Admin > Pengaturan. Jika lokasi di pilih, maka akan di impor untuk semua pengguna.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Perangkat lunak pada :name',
     'view_user'         => 'Lihat pengguna: name',
     'usercsv'           => 'Berkas CSV',

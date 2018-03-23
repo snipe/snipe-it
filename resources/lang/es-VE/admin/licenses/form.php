@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset'             => 'Equipo',
-    'checkin'           => 'Quita',
-    'create'            => 'Nueva Licencia',
+    'asset'             => 'Activo',
+    'checkin'           => 'Registro',
+    'create'            => 'Crear Licencia',
     'expiration'        => 'Fecha de vencimiento',
-    'license_key'       => 'Clave de producto',
+    'license_key'       => 'Clave del Producto',
     'maintained'        => 'Mantenido',
-    'name'              => 'Aplicación',
-    'no_depreciation'   => 'No Amortizar',
+    'name'              => 'Nombre del software',
+    'no_depreciation'   => 'No depreciar',
     'purchase_order'    => 'Número de orden de compra',
     'reassignable'      => 'Reasignable',
-    'remaining_seats'   => 'Posiciones Restantes',
+    'remaining_seats'   => 'Intalaciones Restantes',
     'seats'             => 'Instalaciones',
-    'termination_date'  => 'Fecha de Fin',
-    'to_email'          => 'Registrado a Email',
-    'to_name'           => 'Registrado a Nombre',
+    'termination_date'  => 'Fecha de Finalización',
+    'to_email'          => 'Licenciado al Correo Electrónico',
+    'to_name'           => 'Licenciado a Nombre',
     'update'            => 'Actualizar Licencia',
-    'checkout_help'     => 'Puedes asignar la licencia a un equipo a a un usuario. Puedes seleccionarlos a ambos, pero el dueño de la licencia debe ser el mismo usuario al que asignes el equipo.'
+    'checkout_help'     => 'Debes asignar una licencia a un activo de hardware o a una persona. Puedes seleccionar ambos pero el dueño del activo debe coincidir con la persona a la que le registras el activo.'
 );

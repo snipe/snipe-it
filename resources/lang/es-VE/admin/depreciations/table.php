@@ -2,9 +2,9 @@
 
 return array(
 
-    'id'      => 'ID',
+    'id'      => 'Identificación',
     'months'   => 'Meses',
-    'term'   => 'Termina',
+    'term'   => 'Duración',
     'title'      => 'Nombre ',
 
 );

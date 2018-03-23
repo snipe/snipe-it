@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klicka här för att återställa dem.',
     'last_login'        => 'Senaste inloggning',
     'ldap_config_text'  => 'LDAP-konfigurationsinställningar finns Admin> Inställningar. Den (valfria) valda platsen kommer att ställas in för alla importerade användare.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Programvara Kontrollerad till: namn',
     'view_user'         => 'Visa användare: namn',
     'usercsv'           => 'CSV-fil',

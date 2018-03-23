@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Kliknite ovdje da biste ih vratili.',
     'last_login'        => 'Zadnja prijava',
     'ldap_config_text'  => 'Postavke LDAP konfiguracije mogu se pronaći u Administrator> Postavke. Odabrana lokacija (opcionalno) bit će postavljena za sve uvezene korisnike.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Softver je provjeren na: ime',
     'view_user'         => 'Prikaži korisnika: ime',
     'usercsv'           => 'CSV datoteku',

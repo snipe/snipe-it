@@ -15,6 +15,11 @@ return array(
         'success' => '제조업체가 갱신되었습니다.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => '이 제조업체를 삭제하시겠습니까?',
         'error'   => '제조업체를 삭제하는 중에 문제가 생겼습니다. 다시 시도해 주세요.',

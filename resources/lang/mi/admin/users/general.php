@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Pāwhiri ki konei kia whakahokia mai.',
     'last_login'        => 'Whakauru Whakamutunga',
     'ldap_config_text'  => 'Ka taea te kitea nga tautuhinga whirihora LDAP Kaiwhakahaere> Tautuhinga. Ko te (tahua) kua tohua te tauwāhi kua tohua mo nga kaiwhakamahi katoa kua kawemai.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Pūmanawa Kua tirotirohia ki: ingoa',
     'view_user'         => 'Tirohia te Kaiwhakamahi: ingoa',
     'usercsv'           => 'Kōnae CSV',

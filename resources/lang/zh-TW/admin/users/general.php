@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> '點擊此處可將它們還原。',
     'last_login'        => '上次登入',
     'ldap_config_text'  => 'LDAP 設定在 管理 > 設定。所選位置將套用至匯入的使用者。',
+    'print_assigned'    => '列印所有分配的',
     'software_user'     => ':name 借出的軟體',
     'view_user'         => '檢視使用者： :name',
     'usercsv'           => 'CSV 檔',

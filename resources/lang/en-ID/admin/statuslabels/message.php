@@ -24,8 +24,8 @@ return array(
 
     'help' => array(
         'undeployable'   => 'Aset ini tidak dapat diberikan kepada siapapun.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
-        'archived'   => 'These assets cannot be checked out, and will only show up in the Archived view. This is useful for retaining information about assets for budgeting/historic purposes but keeping them out of the day-to-day asset list.',
+        'deployable'   => 'Aset ini bisa diperiksa. Begitu mereka ditetapkan, mereka akan menganggap status meta<i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'archived'   => 'Aset ini tidak dapat diperiksa, dan hanya akan muncul di tampilan Arsip. Ini berguna untuk menyimpan informasi tentang aset untuk tujuan anggaran / sejarah namun menjauhkan mereka dari daftar aset sehari-hari.',
         'pending'   => 'Aset ini belum bisa diberikan kepada siapapun, sering digunakan untuk barang yang sedang diperbaiki, namun diperkirakan akan kembali beredar.',
     ),
 

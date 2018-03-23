@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Onları geri yüklemek için buraya tıklayın.',
     'last_login'        => 'Son oturum açma tarihi',
     'ldap_config_text'  => 'LDAP yapılandırma ayarları Yönetici> Ayarlar\'da bulunabilir. Seçilen yer (isteğe bağlı), tüm içe aktarılan kullanıcılar için ayarlanır.',
+    'print_assigned'    => 'Atananların Tümünü Yazdır',
     'software_user'     => 'Yazılıma :name için çıkış yapılmış',
     'view_user'         => 'Kullanıcıyı Görüntüle :name',
     'usercsv'           => 'CSV Dosyası',

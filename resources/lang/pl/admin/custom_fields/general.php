@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Element',
     'field_format'            => 'Format',
     'field_custom_format'     => 'Format niestandardowy',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'To pole umożliwia użycie wyrażenia regularnego do sprawdzania poprawności. Wyrażenie powinno zaczynać się od "regex:" - na przykład, aby sprawdzić, czy niestandardowa wartość pola zawiera poprawny IMEI (15 cyfr), trzeba użyć <code>regex: / ^[0-9]{15}$ /</code>.',
     'required'   		          => 'Wymagane',
     'req'   		              => 'Wymagane',
     'used_by_models'   		    => 'Używane przez modele',

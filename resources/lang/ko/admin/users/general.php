@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> '그것들을 복원하려면 여기를 클릭하세요.',
     'last_login'        => '마지막 로그인',
     'ldap_config_text'  => 'LDAP 구성 설정들은 Admin > Settings 에서 찾을 수 있습니다. (부가적으로) 선택된 장소는 불러온 모든 사용자들에게 설정됩니다.',
+    'print_assigned'    => 'Assigned 자산 모두 인쇄',
     'software_user'     => '소프트웨어 반출 목록 :name',
     'view_user'         => '사용자 보기 :name',
     'usercsv'           => 'CSV 파일',

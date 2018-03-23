@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Tipo de Mantenimiento de Equipo',
+        'asset_maintenance_type' => 'Tipo de Mantenimiento',
         'title'                  => 'Título',
-        'start_date'             => 'Fecha de Inicio',
-        'completion_date'        => 'Fecha de Terminación',
+        'start_date'             => 'Empezado',
+        'completion_date'        => 'Completado',
         'cost'                   => 'Costo',
         'is_warranty'            => 'Mejora de la Garantía',
-        'asset_maintenance_time' => 'Tiempo de Mantenimiento de Equipo (en días)',
+        'asset_maintenance_time' => 'Días',
         'notes'                  => 'Notas',
-        'update'                 => 'Actualizar Mantenimiento de Equipo',
-        'create'                 => 'Crear Mantenimiento de Equipo'
+        'update'                 => 'Actualizar',
+        'create'                 => 'Crear'
     ];

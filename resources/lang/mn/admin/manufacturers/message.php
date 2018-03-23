@@ -15,6 +15,11 @@ return array(
         'success' => 'Үйлдвэрлэгч амжилттай шинэчлэгдсэн.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Та энэ үйлдвэрлэгчийн устгахыг хүсч байгаадаа итгэлтэй байна уу?',
         'error'   => 'Үйлдвэрлэгчийг устгахад асуудал гарлаа. Дахин оролдоно уу.',

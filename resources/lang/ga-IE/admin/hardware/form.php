@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Clib Sócmhainní',
     'update'			=> 'Nuashonrú Sócmhainní',
     'warranty'			=> 'Bharántas',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'blianta',
 )
 ;

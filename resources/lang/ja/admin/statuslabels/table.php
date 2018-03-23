@@ -5,6 +5,8 @@ return array(
     'archived'      	=> 'アーカイブ',
     'create'      	=> 'ステータスラベルを作成',
     'color'      	=> 'グラフの色',
+    'default_label' => 'Default Label',
+    'default_label_help' => 'This is used to ensure your most commonly used status labels appear at the top of the select box when creating/editing assets.',
     'deployable'      	=> '配備可能',
     'info'      	=> 'ステータスラベルは資産の様々な状態の説明に利用されます。修理中であったり、紛失/盗難かもしれません。資産を配備可能、ペンディング、保管といった新しいステータスラベルを作成できます。',
     'name'      	=> 'ステータス名',

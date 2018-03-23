@@ -883,6 +883,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cepacs",
+      "name": "cepacs",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/36515590?v=4",
+      "profile": "https://github.com/cepacs",
+      "contributions": [
+        "bug",
+        "doc"
+      ]
     }
   ]
 }

@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'Lokasi tidak ada.',
+    'assoc_users'	 => 'Saat ini kategori ini terkait dengan setidaknya satu pengguna dan tidak dapat dihapus. Silahkan perbaharui pengguna anda untuk tidak lagi tereferensi dengan kategori ini dan coba lagi. ',
+    'assoc_assets'	 => 'Saat ini kategori ini terkait dengan setidaknya satu pengguna dan tidak dapat dihapus. Silahkan perbaharui pengguna anda untuk tidak lagi tereferensi dengan kategori ini dan coba lagi. ',
+    'assoc_child_loc'	 => 'Lokasi ini saat ini merupakan induk dari setidaknya satu lokasi anak dan tidak dapat dihapus. Perbarui lokasi Anda agar tidak lagi merujuk lokasi ini dan coba lagi. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Lokasi tidak dibuat, coba lagi.',
+        'success' => 'Lokasi berhasil dibuat.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Lokasi tidak diperbarui, silakan coba lagi',
+        'success' => 'Lokasi berhasil diperbarui.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Apakah anda yakin ingin menghapus lokasi ini?',
+        'error'   => 'Terjadi masalah saat menghapus lokasi. Silahkan coba lagi.',
+        'success' => 'Lokasi telah berhasil dihapus.'
     )
 
 );

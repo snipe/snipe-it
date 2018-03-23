@@ -63,7 +63,7 @@ return array(
         'success' 		=> 'Equipo asignado.',
         'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
         'not_available' => '¡Ese artículo no está disponible para retirada!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Debes seleccionar al menos un elemento de la lista'
     ),
 
     'checkin' => array(

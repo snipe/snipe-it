@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Localización no existente.',
-    'assoc_users'	 => 'Esta localización está asignada al menos a un usuario y no puede ser eliminada. ',
-    'assoc_assets'	 => 'Esta ubicacion se encuentra actualmente asociada con por lo menos un activo y no puede ser eliminada. Por favor, actualice sus activos para no referenciar esta ubicacion e intentelo de nuevo. ',
-    'assoc_child_loc'	 => 'Esta ubicacion actualmente esta asociada con al menos una ubicacion hija y no puede ser eliminada. Por favor, actualice sus ubicaciones para no referenciar esta ubicacion e intentelo de nuevo. ',
+    'does_not_exist' => 'La ubicación no existe.',
+    'assoc_users'	 => 'Esta ubicación está actualmente asociada con al menos un usuario y no puede ser borrada. Por favor actualiza tus usuarios para no referenciar más esta ubicación e inténtalo de nuevo. ',
+    'assoc_assets'	 => 'Esta ubicación está actualmente asociada con al menos un activo y no puede ser borrada. Por favor actualiza tus activos para no referenciar más esta ubicación e inténtalo de nuevo. ',
+    'assoc_child_loc'	 => 'Esta ubicación es actualmente padre al menos una ubicación hija y no puede ser borrada. Por favor actualiza tus ubicaciones para no referenciar más esta ubicación e inténtalo de nuevo. ',
 
 
     'create' => array(
-        'error'   => 'Localización no creada, Intentalo de nuevo.',
-        'success' => 'Localización creada.'
+        'error'   => 'La ubicación no fue creada, por favor, inténtelo de nuevo.',
+        'success' => 'Ubicación creada con éxito.'
     ),
 
     'update' => array(
-        'error'   => 'Localización no actualizada, Intentalo de nuevo',
-        'success' => 'Localización actualizada.'
+        'error'   => 'La ubicación no fue actualizada, por favor inténtelo de nuevo',
+        'success' => 'La ubicación fue actualizada con éxito.'
     ),
 
     'delete' => array(
-        'confirm'   	=> '¿Está seguro que desea eliminar esta ubicación?',
-        'error'   => 'Localización no eliminada por un problema. Intentalo de nuevo.',
-        'success' => 'Localización eliminada.'
+        'confirm'   	=> '¿Está seguro que querer borrar esta ubicación?',
+        'error'   => 'Hubo un problema borrando la ubicación. Por favor, inténtalo de nuevo.',
+        'success' => 'La ubicación fue borrada con exito.'
     )
 
 );

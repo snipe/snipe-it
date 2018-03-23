@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Tag-i zasobu/nabytku',
     'update'			=> 'Aktualizacja zasobu/nabytku',
     'warranty'			=> 'Gwarancja',
+		'warranty_expires'		=> 'Gwarancja wygasa',
     'years'				=> 'rok',
 )
 ;

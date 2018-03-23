@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Bate-tag',
     'update'			=> 'Asset Update',
     'warranty'			=> 'waarborg',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'jaar',
 )
 ;

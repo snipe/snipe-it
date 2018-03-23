@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Nhấp vào đây để khôi phục chúng.',
     'last_login'        => 'Lần đăng nhập trước',
     'ldap_config_text'  => 'Bạn có thể tìm thấy cài đặt cấu hình LDAP Quản trị> Cài đặt. Địa điểm đã chọn (tùy chọn) sẽ được đặt cho tất cả người dùng được nhập.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Phần mềm đã được checkout đến :name',
     'view_user'         => 'Xem người dùng :name',
     'usercsv'           => 'Tập tin CSV',

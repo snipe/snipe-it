@@ -38,6 +38,7 @@ return array(
     'tag'				=> '资产标签',
     'update'			=> '更新资产',
     'warranty'			=> '质保',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> '年',
 )
 ;

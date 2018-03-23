@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klik hier om ze te herstellen.',
     'last_login'        => 'Laatst aangemeld',
     'ldap_config_text'  => 'LDAP configuratie kan worden gevonden in Admin > Instellingen. De (optioneel) geselecteerde locatie zal voor alle geimporteerde gebruikers ingesteld worden.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Software toegekend aan :name',
     'view_user'         => 'Bekijk gebruiker :name',
     'usercsv'           => 'CSV bestand',

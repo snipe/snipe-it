@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Crear Modelo Equipo',
+    'create'				=> 'Crear Modelo de Activo',
     'created_at' 			=> 'Creado el',
-    'eol'	 				=> 'EOL',
+    'eol'	 				=> 'Fin de Vida',
     'modelnumber'   		=> 'Modelo No.',
-    'name'      			=> 'Nombre Modelo',
-    'numassets' 			=> 'Equipos',
-    'title'					=> 'Modelos Equipos',
-    'update'				=> 'Actualizar Modelo',
-    'view'					=> 'Ver Modelo',
-    'update'				=> 'Actualizar Modelo',
+    'name'      			=> 'Nombre de Activo de Modelo',
+    'numassets' 			=> 'Activos',
+    'title'					=> 'Modelos de Activo',
+    'update'				=> 'Actualizar Modelo de Activo',
+    'view'					=> 'Ver Modelos de Activo',
+    'update'				=> 'Actualizar Modelo de Activo',
     'clone'				=> 'Clonar Modelo',
     'edit'				=> 'Editar Modelo',
 );
