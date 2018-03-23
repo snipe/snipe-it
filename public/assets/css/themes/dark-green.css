@@ -1,0 +1,145 @@
+:root {
+  --background: #222;
+  --back-main: #333;
+  --back-sub: #444;
+  --header: #18A452; /* Use same as Header picker */
+  --text-main: #FFF;
+  --text-sub: #BBB;
+}
+
+a, a:link, a:visited, .btn-primary.hover {
+    color: var(--header);
+}
+#accessoriesTable>tbody>tr>td>nobr>a>i.fa {
+    color: var(--text-main);
+}
+#assetsListingTable>tbody>tr>td>nobr>a>i.fa {
+    color: var(--text-main);
+}
+#assetsListingTable>tbody>tr.selected>td {
+    background-color: var(--back-main);
+}
+.box, .box.box-default {
+    border-top: 3px solid var(--header);
+    border-top-color: var(--header);
+}
+.box-body, .box-footer, .box-header {
+    background-color: var(--back-sub);
+    color: var(--text-main);
+}
+.btn-default{
+    background-color: var(--back-main);
+    color: var(--header);
+}
+.btn-default:active, .btn-default:focus, .btn-default:hover {
+    background-color: var(--back-sub);
+    color: var(--header);
+}
+.btn-primary, .btn-primary.hover, .btn-primary:active, .btn-primary:hover, .text-blue {
+    color: var(--text-main)!important;
+}
+#componentsTable>tbody>tr>td>nobr>a>i.fa {
+    color: var(--text-main);
+}
+#consumablesTable>tbody>tr>td>nobr>a>i.fa {
+    color: var(--text-main);
+}
+.content-wrapper {
+    background-color: var(--background);
+}
+#create-form>div>div>div>span.input-group-addon {
+    background-color: var(--back-sub);
+    color: var(--text-main);
+}
+#create-form>div>div>div>span>i.fa {
+    background-color: var(--back-sub);
+    color: var(--header);
+}
+#details>div>div>div>table {
+    background-color: transparent;
+}
+.dropdown-menu, .dropdown-menu>li>a {
+    background-color: var(--back-sub);
+    color: var(--header);
+}
+.dropdown-menu>li>a:hover {
+    background-color: var(--back-main);
+    color: var(--text-main);
+}
+.form-control {
+    background-color: var(--back-main);
+    color: var(--text-main);
+}
+h1 {
+    color: var(--text-main);
+}
+.help-block {
+    color: var(--text-sub);
+}
+input[type=text], input[type=search] {
+    background-color: var(--back-sub);
+    color: var(--text-main);
+}
+#licensesTable>tbody>tr>td>nobr>a>i.fa {
+    color: var(--text-main);
+}
+.main-footer {
+    background-color: var(--back-main);
+    color: var(--text-main);
+}
+.nav-tabs-custom>.nav-tabs>li>a, .nav-tabs-custom>.nav-tabs>li.active>a {
+    color: var(--text-main);
+}
+.nav-tabs-custom>.nav-tabs>li.active {
+    border-top-color: var(--header);
+}
+.nav-tabs-custom>.nav-tabs>li.active>a {
+    background-color: var(--back-main);
+}
+.nav-tabs-custom>.nav-tabs>li.active>a:hover {
+    background-color: var(--back-sub);
+    color: var(--text-main);
+}
+.nav-tabs-custom, .nav-tabs-custom>.tab-content {
+    background-color: var(--back-main);
+}
+.navbar-nav>.tasks-menu>.dropdown-menu>li.header {
+    background-color: var(--back-main);
+    color: var(--header);
+}
+.open>.dropdown-toggle.btn-default {
+    background-color: var(--back-sub);
+    color: var(--header);
+}
+.panel {
+    background-color: var(--back-sub);
+    color: var(--text-main);
+}
+.panel-default>.panel-heading {
+    background-color: var(--back-main);
+    color: var(--header);
+}
+.select2-selection--single {
+    background-color: var(--back-sub)!important;
+    color: var(--text-main)!important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--text-main);
+}
+.select2-dropdown {
+    background-color: var(--back-main);
+    color: var(--text-main);
+}
+.skin-blue .main-header .navbar .dropdown-menu li a {
+    color: var(--header);
+}
+.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
+    background-color: var(--header)!important;
+}
+.tab-content, .tab-pane {
+    background-color: var(--back-main);
+    color: var(--text-main);
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: var(--back-sub);
+}
