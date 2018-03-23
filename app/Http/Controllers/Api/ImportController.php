@@ -58,6 +58,35 @@ class ImportController extends Controller
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
 
+                //TODO: is there a lighter way to do this?
+                if (! ini_get("auto_detect_line_endings")) {
+                    ini_set("auto_detect_line_endings", '1');
+                }
+                $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
+                $import->header_row = $reader->fetchOne(0);
+
+                //duplicate headers check
+                $duplicate_headers = [];
+
+                for($i = 0; $i<count($import->header_row); $i++) {
+                    $header = $import->header_row[$i];
+                    if(in_array($header, $import->header_row)) {
+                        $found_at = array_search($header, $import->header_row);
+                        if($i > $found_at) {
+                            //avoid reporting duplicates twice, e.g. "1 is same as 17! 17 is same as 1!!!"
+                            //as well as "1 is same as 1!!!" (which is always true)
+                            //has to be > because otherwise the first result of array_search will always be $i itself(!)
+                            array_push($duplicate_headers,"Duplicate header '$header' detected, first at column: $found_at, repeats at column: $i");
+                        }
+                    }
+                }
+                if(count($duplicate_headers) > 0) {
+                    return response()->json(Helper::formatStandardApiResponse('error',null, implode("; ",$duplicate_headers)), 500); //should this be '4xx'?
+                }
+
+                // Grab the first row to display via ajax as the user picks fields
+                $import->first_row = $reader->fetchOne(1);
+
                 $date = date('Y-m-d-his');
                 $fixed_filename = str_slug($file->getClientOriginalName());
                 try {
@@ -72,14 +101,6 @@ class ImportController extends Controller
                 $file_name = date('Y-m-d-his').'-'.$fixed_filename;
                 $import->file_path = $file_name;
                 $import->filesize = filesize($path.'/'.$file_name);
-                //TODO: is there a lighter way to do this?
-                if (! ini_get("auto_detect_line_endings")) {
-                    ini_set("auto_detect_line_endings", '1');
-                }
-                $reader = Reader::createFromPath("{$path}/{$file_name}");
-                $import->header_row = $reader->fetchOne(0);
-                // Grab the first row to display via ajax as the user picks fields
-                $import->first_row = $reader->fetchOne(1);
                 $import->save();
                 $results[] = $import;
             }
