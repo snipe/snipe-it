@@ -67,7 +67,7 @@ trait Loggable
         ];
 
         if ($settings = Setting::getSettings()) {
-            $settings->notify(new CheckoutNotification($params));
+           // $settings->notify(new CheckoutNotification($params));
         }
 
         if (method_exists($target, 'notify')) {
