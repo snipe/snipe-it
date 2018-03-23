@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'คลิกที่นี่เพื่อเรียกคืน',
     'last_login'        => 'เข้าสู่ระบบล่าสุด',
     'ldap_config_text'  => 'คุณสามารถตั้งค่าการกำหนดค่า LDAP ได้ Admin> การตั้งค่า สถานที่ที่เลือก (เลือกได้) จะถูกตั้งค่าสำหรับผู้ใช้ที่นำเข้าทั้งหมด',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'ซอฟต์แวร์ที่กำหนดให้ :name',
     'view_user'         => 'ดูผู้ใช้ :name',
     'usercsv'           => 'ไฟล์ CSV',

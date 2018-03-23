@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'El Mantenimiento de Equipo que buscaba no se encontró!',
+        'not_found'                    => '¡El Mantenimiento de Activo que estás buscando no fue encontrado!',
         'delete'                       => [
-            'confirm' => '¿Está seguro que desea eliminar este mantenimiento de equipo?',
-            'error'   => 'Hubo un problema al eliminar el mantenimiento de equipo. Por favor intente nuevamente.',
-            'success' => 'El mantenimiento de equipo fue eliminado de manera exitosa.'
+            'confirm' => '¿Estás seguro de que quieres borrar el mantenimiento de este activo?',
+            'error'   => 'Hubo un problema borrando el mantenimiento del activo. Por favor, inténtalo de nuevo.',
+            'success' => 'El mantenimiento de activo fue eliminado con éxito.'
         ],
         'create'                       => [
-            'error'   => 'El Mantenimiento de Equipo no fue creado, por favor intente nuevamente.',
-            'success' => 'El Mantenimiento de Equipo fue creado de manera exitosa.'
+            'error'   => 'El Mantenimiento de Activo no se ha creado, por favor inténtalo de nuevo.',
+            'success' => 'Mantenimiento de Activo creado con éxito.'
         ],
         'edit'                       => [
-            'error'   => 'El mantenimiento de activo no fue editado. Por favor, intenta de nuevo.',
-            'success' => 'Mantenimiento de activo editado con éxito.'
+            'error'   => 'El Mantenimiento de Activo no se ha editado, por favor inténtalo de nuevo.',
+            'success' => 'Mantenimiento de Activo editado con éxito.'
         ],
-        'asset_maintenance_incomplete' => 'Sin Completar',
+        'asset_maintenance_incomplete' => 'No se ha completado aún',
         'warranty'                     => 'Garantía',
         'not_warranty'                 => 'Sin Garantía',
     ];

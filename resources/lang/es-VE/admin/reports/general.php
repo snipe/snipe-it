@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'info'   => 'Selecciona las opciones de tu informe de Equipos.'
+    'info'   => 'Selecciona que opciones quieres para tu informe de activos.'
 );

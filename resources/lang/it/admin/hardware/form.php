@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Etichetta bene',
     'update'			=> 'Aggiornamento bene',
     'warranty'			=> 'Garanzia',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'anni',
 )
 ;

@@ -5,5 +5,5 @@ return array(
     'title'     => 'Compañía',
     'update'    => 'Actualizar Compañía',
     'name'      => 'Nombre de Compañía',
-    'id'        => 'ID',
+    'id'        => 'Identificación',
 );

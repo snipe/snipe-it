@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Kliknite tukaj, da jih obnovite.',
     'last_login'        => 'Zadnja prijava',
     'ldap_config_text'  => 'Nastavitve konfiguracije LDAP-a lahko najdete v zavihku Admin> Nastavitve. Izbrana lokacija bo nastavljena za vse uvožene uporabnike.',
+    'print_assigned'    => 'Natisni vse dodeljene',
     'software_user'     => 'Programska oprema izdana osebi :name',
     'view_user'         => 'Ogled uporabnika :name',
     'usercsv'           => 'Datoteko CSV',

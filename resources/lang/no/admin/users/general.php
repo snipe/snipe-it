@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klikk her for å gjenopprette dem.',
     'last_login'        => 'Siste innlogging',
     'ldap_config_text'  => 'LDAP-konfigurasjonsinnstillingene kan finnes på Admin > innstillinger. Den (Valgfrie) valgte plasseringen angis for alle importerte brukere.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Programvare utsjekket til :name',
     'view_user'         => 'Vis bruker :name',
     'usercsv'           => 'CSV-fil',

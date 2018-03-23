@@ -15,6 +15,11 @@ return array(
         'success' => 'உற்பத்தியாளர் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'இந்த உற்பத்தியாளரை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
         'error'   => 'தயாரிப்பாளரை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',

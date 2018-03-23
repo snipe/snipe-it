@@ -63,7 +63,7 @@ return array(
         'success' 		=> 'Przypisano nabytek/zasób.',
         'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.',
         'not_available' => 'Ten składnik aktywów nie jest dostępny do zamówienia!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Musisz wybrać co najmniej jeden zasób z listy'
     ),
 
     'checkin' => array(

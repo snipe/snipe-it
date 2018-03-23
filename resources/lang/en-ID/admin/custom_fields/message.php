@@ -3,48 +3,48 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Bidang tersebut tidak tersedia.',
+        'already_added'   => 'Bidang sudah ditambahkan',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Bidang gagal dibuat, silahkan coba lagi.',
+            'success' => 'Kategori Berhasil dibuat.',
+            'assoc_success' => 'Kategori berhasil ditambahkan ke fieldset.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Kategori gagal diupdate, silahkan coba lagi',
+            'success' => 'Kategori Berhasil dibuat.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Apakah Anda yakin ingin menghapus kategori ini?',
+            'error'   => 'Terjadi masalah saat menghapus kategori. Silahkan coba lagi.',
+            'success' => 'Kategori berhasil dihapus.',
+            'in_use'   => 'Kategori masih digunakan.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset does not exist',
+        'does_not_exist' => 'Kategori tidak ada',
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Kategori gagal dibuat, silahkan coba lagi.',
+            'success' => 'Kategori Berhasil dibuat.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Kategori gagal diupdate, silahkan coba lagi',
+            'success' => 'Kategori Berhasil diperbarui.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Apakah Anda yakin ingin menghapus kategori ini?',
+            'error'   => 'Terjadi masalah saat menghapus kategori. Silahkan coba lagi.',
+            'success' => 'Kategori berhasil dihapus.',
+            'in_use'   => 'Kategori masih digunakan.',
         )
 
     ),

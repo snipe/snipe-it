@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Cliceáil anseo chun iad a athchóiriú.',
     'last_login'        => 'Logáil isteach deireanach',
     'ldap_config_text'  => 'Is féidir suímh chumraíochta LDAP a fháil Admin> Settings. Socrófar an suíomh roghnaithe (roghnach) do gach úsáideoir a allmhairítear.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Bogearraí Seiceáil amach chuig: ainm',
     'view_user'         => 'Féach Úsáideoir: ainm',
     'usercsv'           => 'Comhad CSV',

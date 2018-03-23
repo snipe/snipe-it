@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Marcação do Ativo',
     'update'			=> 'Atualização do Ativo',
     'warranty'			=> 'Garantia',
+		'warranty_expires'		=> 'Garantia expira',
     'years'				=> 'anos',
 )
 ;

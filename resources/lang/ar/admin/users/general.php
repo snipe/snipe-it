@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'انقر هنا لاستعادتها.',
     'last_login'        => 'آخر دخول للمستخدم',
     'ldap_config_text'  => 'يمكن العثور على إعدادات تهيئة لداب المشرف> الإعدادات. سيتم تعيين الموقع (اختياري) المحدد لجميع المستخدمين الذين تم استيرادهم.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'البرامج المخرجة الى: :name',
     'view_user'         => 'عرض المستخدم :name',
     'usercsv'           => 'ملف CSV',

@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klik hier om dit te herstel.',
     'last_login'        => 'Laaste Aanmelding',
     'ldap_config_text'  => 'LDAP-konfigurasie-instellings kan Admin> Instellings gevind word. Die (opsionele) gekose ligging sal vir alle ingevoerde gebruikers gestel word.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Sagteware Uitgesoek na: naam',
     'view_user'         => 'Sien gebruiker: naam',
     'usercsv'           => 'CSV-lêer',

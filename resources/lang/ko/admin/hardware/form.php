@@ -38,6 +38,7 @@ return array(
     'tag'				=> '자산 태그',
     'update'			=> '자산 갱신',
     'warranty'			=> '보증',
+		'warranty_expires'		=> '보증 만료일',
     'years'				=> '년',
 )
 ;

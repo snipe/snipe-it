@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'O :attribute selecionado é inválido.',
     'numeric'              => ':attribute tem que ser um número.',
     'present'              => 'O campo: atributo deve estar presente.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Este não é um código regex válido.',
     'regex'                => 'O formato do :attribute é inválido.',
     'required'             => ':attribute é obrigatório.',
     'required_if'          => 'O :attribute é obrigatório quando :other é :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Este :attribute já existe.',
     'uploaded'             => 'O atributo: não foi possível carregar.',
     'url'                  => 'O formato do :attribute é inválido.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "O :atribute deve ser único.",
 
     /*
     |--------------------------------------------------------------------------

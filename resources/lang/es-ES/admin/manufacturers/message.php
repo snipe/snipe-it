@@ -15,6 +15,11 @@ return array(
         'success' => 'Fabricante actualizado.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Estás seguro que quieres eliminar Fabricante?',
         'error'   => 'Hubo un problema eliminando el fabricante. Por favor, inténtalo de nuevo.',

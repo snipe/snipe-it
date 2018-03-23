@@ -15,6 +15,11 @@ return array(
         'success' => 'Producatorul a fost actualizat.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Sunteti sigur ca vreti sa stergeti producatorul?',
         'error'   => 'A aparut o problema la stergerea producatorului. Va rugam incercati iar.',

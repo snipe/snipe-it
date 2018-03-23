@@ -2,50 +2,50 @@
 
 return array(
 
-    'does_not_exist' => 'Categoría inexistente.',
-    'user_does_not_exist' => 'Usuario inexistente.',
-    'asset_does_not_exist' 	=> 'El equipo que intentas asignar a esta licencia no existe.',
-    'owner_doesnt_match_asset' => 'El equipo al que estas intentando asignar esta licenciam, está asignado a un usuario diferente que el de la licencia.',
-    'assoc_users'	 => 'Esta categoría está asignada al menos a un modelo y no puede ser eliminada.',
-    'select_asset_or_person' => 'Debe seleccionar un activo o un usuario, pero no ambos.',
+    'does_not_exist' => 'La licencia no existe.',
+    'user_does_not_exist' => 'El usuario no existe.',
+    'asset_does_not_exist' 	=> 'El activo que intentas asociar con esta licencia no existe.',
+    'owner_doesnt_match_asset' => 'El activo al que estás intentando asociar con esta licencia está asignado a un usuario diferente al de la persona seleccionada para retirar.',
+    'assoc_users'	 => 'Esta licencia está actualmente asignada a un usuario y no puede ser borrada. Por favor, revisa la licencia primero y luego intenta borrarla. ',
+    'select_asset_or_person' => 'Debes seleccionar un activo o un usuario, pero no ambos.',
 
 
     'create' => array(
-        'error'   => 'La categoría no se ha creado, intentalo de nuevo.',
-        'success' => 'Categoría creada correctamente.'
+        'error'   => 'La licencia no se ha creado, inténtelo de nuevo.',
+        'success' => 'Licencia creada con éxito.'
     ),
 
     'deletefile' => array(
-        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
-        'success' => 'Archivo eliminado correctamente.',
+        'error'   => 'El archivo no fue borrado. Por favor, inténtalo de nuevo.',
+        'success' => 'Archivo borrado con éxito.',
     ),
 
     'upload' => array(
-        'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
-        'success' => 'Archivo(s) cargado correctamente.',
+        'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
+        'success' => 'Archivo(s) cargado(s) con éxito.',
         'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
-        'invalidfiles' => 'Uno o más de tus ficheros son demasiado grandes o de un tipo no permitido. Los tipos permitidos son png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
+        'invalidfiles' => 'Uno o más de tus archivos son demasiado grandes o de un tipo no permitido. Los tipos permitidos son png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
     ),
 
     'update' => array(
-        'error'   => 'La categoría no se ha actualizado, intentalo de nuevo.',
-        'success' => 'Categoría actualizada correctamente.'
+        'error'   => 'La licencia no se ha actualizado, inténtalo de nuevo',
+        'success' => 'Licencia actualizada con éxito.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de eliminar esta categoría?',
-        'error'   => 'Ha habido un problema eliminando la categoría. Intentalo de nuevo.',
-        'success' => 'Categoría eliminada.'
+        'confirm'   => '¿Estás seguro de querer borrar esta licencia?',
+        'error'   => 'Hubo un problema al borrar la licencia. Por favor, inténtalo de nuevo.',
+        'success' => 'La licencia fue eliminada con éxito.'
     ),
 
     'checkout' => array(
-        'error'   => 'Equipo no asignado, intentalo de nuevo',
-        'success' => 'Equipo asignado.'
+        'error'   => 'Hubo un problema asignando la licencia. Por favor, inténtelo de nuevo.',
+        'success' => 'La licencia fue asignada con éxito'
     ),
 
     'checkin' => array(
-        'error'   => 'No se ha quitado el equipo. Intentalo de nuevo.',
-        'success' => 'Equipo quitado correctamente.'
+        'error'   => 'Hubo un problema registrando la licencia. Por favor, inténtalo de nuevo.',
+        'success' => 'La licencia fue registrada con éxito'
     ),
 
 );

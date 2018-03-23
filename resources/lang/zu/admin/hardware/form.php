@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Ithegi lefa',
     'update'			=> 'Ukuvuselelwa kwefa',
     'warranty'			=> 'Iwaranti',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'iminyaka',
 )
 ;

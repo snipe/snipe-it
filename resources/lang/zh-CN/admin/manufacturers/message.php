@@ -15,6 +15,11 @@ return array(
         'success' => '制造商更新成功。'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => '确定要删除这个制造商吗？',
         'error'   => '删除制造商的过程中出现了一点儿问题，请重试。',

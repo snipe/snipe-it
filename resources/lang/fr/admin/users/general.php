@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Cliquez ici pour les restaurer.',
     'last_login'        => 'Dernière connexion',
     'ldap_config_text'  => 'Les paramètres de configuration LDAP se trouvent sous Admin > Réglages. La localisation sélectionnée (optionnelle) sera définie pour tous les utilisateurs importés.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Logiciels associés avec :name',
     'view_user'         => 'Voir l\'utilisateur :name',
     'usercsv'           => 'Fichier CSV',

@@ -15,6 +15,11 @@ return array(
         'success' => 'Produsen sukses di perbarui.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Apakah Anda yakin untuk menghapus produsen ini?',
         'error'   => 'Terdapat kesalahan pada saat penghapusan produsen. Silahkan coba kembali.',

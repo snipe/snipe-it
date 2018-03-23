@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Faceți clic aici pentru a le restaura.',
     'last_login'        => 'Ultima logare',
     'ldap_config_text'  => 'Setările de configurare LDAP pot fi găsite pe Administrator> Setări. Locația selectată (opțional) va fi setată pentru toți utilizatorii importați.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Software predat catre :name',
     'view_user'         => 'Vezi utilizator :name',
     'usercsv'           => 'Fișier CSV',

@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klikkaa tästä palauttaaksesi ne.',
     'last_login'        => 'Viimeisin kirjautuminen',
     'ldap_config_text'  => 'LDAP-määritysasetukset löytyvät Järjestelmänvalvoja> Asetukset. Valinnainen (valinnainen) sijainti määritetään kaikille tuodulle käyttäjälle.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Käyttäjälle :name luovutetut ohjelmistot',
     'view_user'         => 'Näytä Käyttäjä :name',
     'usercsv'           => 'CSV-tiedosto',

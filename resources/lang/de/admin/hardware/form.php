@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Asset ID',
     'update'			=> 'Asset Update',
     'warranty'			=> 'Garantie',
+		'warranty_expires'		=> 'Garantie Ablaufdatum',
     'years'				=> 'Jahre',
 )
 ;

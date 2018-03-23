@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Ετικέτα πόρων',
     'update'			=> 'Ενημέρωση παγίου',
     'warranty'			=> 'Εγγύηση',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'έτη',
 )
 ;

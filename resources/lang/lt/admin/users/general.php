@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Spauskite čia norėdami juos atkurti.',
     'last_login'        => 'Paskutinis prisijungimas',
     'ldap_config_text'  => 'LDAP konfigūracijos parametrus galite rasti Administratorius> Nustatymai. Pasirinkta vieta (pasirinktinai) bus nustatyta visiems importuojamiems vartotojams.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => ':name išduota įranga',
     'view_user'         => 'Peržiūrėti :name vartotoją',
     'usercsv'           => 'CSV dokumentas',

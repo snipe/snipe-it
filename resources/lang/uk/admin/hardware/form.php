@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Asset Tag',
     'update'			=> 'Оновити актив',
     'warranty'			=> 'Гарантія',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'р.',
 )
 ;

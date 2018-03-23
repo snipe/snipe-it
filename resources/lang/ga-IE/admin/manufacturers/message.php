@@ -15,6 +15,11 @@ return array(
         'success' => 'Déantar an monaróir chun cinn go rathúil.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'An bhfuil tú cinnte gur mian leat an monaróir seo a scriosadh?',
         'error'   => 'Bhí ceist ann a scriosadh an monaróir. Arís, le d\'thoil.',

@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Tae Taonga',
     'update'			=> 'Te Whakahou Ahua',
     'warranty'			=> 'Te tiwhikete',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'tau',
 )
 ;

@@ -15,6 +15,11 @@ return array(
         'success' => 'Kua angitu te kaihanga.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Kei te hiahia koe ki te muku i tenei kaiwhakanao?',
         'error'   => 'He raru kei te whakakore i te kaihanga. Tena ngana ano.',

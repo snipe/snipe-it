@@ -5,31 +5,31 @@ return array(
     'does_not_exist' => 'El componente no existe.',
 
     'create' => array(
-        'error'   => 'El componente no fuè creado, intentalo de nuevo.',
-        'success' => 'El componente se creò satisfactoriamente.'
+        'error'   => 'El componente no fue creado, por favor inténtalo de nuevo.',
+        'success' => 'Componente creado con éxito.'
     ),
 
     'update' => array(
-        'error'   => 'El componente no se actualizò, intentalo de nuevo',
-        'success' => 'Componente actualizado satisfactoriamente.'
+        'error'   => 'El componente no se actualizó, por favor inténtalo de nuevo',
+        'success' => 'Componente actualizado con éxito.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Estàs seguro de que quieres borrar este componente?',
-        'error'   => 'Hubo un problema al querer borrar el componente, intentalo de nuevo.',
-        'success' => 'El componente fue borrado satisfactoriamente.'
+        'confirm'   => '¿Estás seguro de que deseas eliminar este componente?',
+        'error'   => 'Hubo un problema eliminando el componente. Por favor, inténtalo de nuevo.',
+        'success' => 'El componente fue eliminado con éxito.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'El componente no hizo check out, intentalo de nuevo',
-        'success' 		=> 'Check out del componente satisfactorio.',
-        'user_does_not_exist' => 'El usuario es invalido, intentalo de nuevo.'
+        'error'   		=> 'El componente no fue retirado, por favor, inténtalo de nuevo',
+        'success' 		=> 'Componente retirado con éxito.',
+        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'El componente no fue checked in, intentalo de nuevo',
-        'success' 		=> 'Check in de componente satisfactorio.',
-        'user_does_not_exist' => 'Es usuario es invalido, intentalo de nuevo.'
+        'error'   		=> 'El componente no fue registrado, por favor inténtalo de nuevo',
+        'success' 		=> 'Componente registrado con éxito.',
+        'user_does_not_exist' => 'El usuario no es válido. Por favor inténtalo de nuevo.'
     )
 
 

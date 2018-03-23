@@ -19,9 +19,9 @@ return array(
         'confirm'   => 'คุณแน่ใจว่าคุณตั้งใจจะลบซัพพลายเออร์นี้?',
         'error'   => 'มีปัญหาระหว่างลบซัพพลายเออร์ กรุณาลองใหม่อีกครั้ง',
         'success' => 'ลบซัพพลายเออร์เสร็จสมบูรณ์แล้ว',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'ซัพพลายเออร์นี้มีความเกี่ยวข้องอยู่กับรายการอื่นอย่างน้อยหนึ่งรายการในปัจจุบัน และจะไม่สามารถลบได้ กรุณาแก้ไขโดยการเอารายการดังกล่าวออกจากความเกี่ยวข้องหรืออ้างอิง และลองใหม่อีกครั้ง ',
+        'assoc_licenses'	 => 'ซัพพลายเออร์นี้มีความเกี่ยวข้องอยู่กับรายการอื่นอย่างน้อยหนึ่งรายการในปัจจุบัน และจะไม่สามารถลบได้ กรุณาแก้ไขโดยการเอารายการดังกล่าวออกจากความเกี่ยวข้องหรืออ้างอิง และลองใหม่อีกครั้ง ',
+        'assoc_maintenances'	 => 'ซัพพลายเออร์นี้มีความเกี่ยวข้องอยู่กับรายการอื่นอย่างน้อยหนึ่งรายการในปัจจุบัน และจะไม่สามารถลบได้ กรุณาแก้ไขโดยการเอารายการดังกล่าวออกจากความเกี่ยวข้องหรืออ้างอิง และลองใหม่อีกครั้ง ',
     )
 
 );

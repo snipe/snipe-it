@@ -15,6 +15,11 @@ return array(
         'success' => 'Tootja uuendamine õnnestus.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Kas oled kindel, et soovid selle tootja kustutada?',
         'error'   => 'Tootja kustutamisel tekkis probleem. Palun proovi uuesti.',

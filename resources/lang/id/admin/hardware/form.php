@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Tag Aset',
     'update'			=> 'Perbarui Aset',
     'warranty'			=> 'Garansi',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'tahun',
 )
 ;

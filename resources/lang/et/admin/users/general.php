@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Nende taastamiseks klõpsake siin.',
     'last_login'        => 'Viimane sisselogimine',
     'ldap_config_text'  => 'LDAP-i konfiguratsiooniseadeid saab leida Admin> Seaded. (Valikuline) valitud asukoht määratakse kõigi imporditud kasutajate jaoks.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Kasutaja :name valdusesse antud tarkvara',
     'view_user'         => 'Vaata kasutajat :name',
     'usercsv'           => 'CSV fail',

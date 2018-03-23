@@ -15,6 +15,11 @@ return array(
         'success' => 'Proizvajalec je uspešno posodobljen.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Ali ste prepričani, da želite izbrisati tega proizvajalca?',
         'error'   => 'Pri izbrisu proizvajalca je prišlo do težave. Prosim poskusite ponovno.',

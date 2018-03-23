@@ -15,6 +15,11 @@ return array(
         'success' => 'تولید کننده موفقیت به روز رسانی شد.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'آیا شما مطمئن هستید که میخواهید این تولید کننده را حذف کنید؟',
         'error'   => 'مسئله ای در حذف سازنده وجود دارد. لطفا دوباره تلاش کنید.',

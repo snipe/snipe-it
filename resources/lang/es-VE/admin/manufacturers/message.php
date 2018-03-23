@@ -2,23 +2,28 @@
 
 return array(
 
-    'does_not_exist' => 'Fabricante inexistente.',
-    'assoc_users'	 => 'Este Fabricante está asociado al menos a un modelo y no puede ser eliminado',
+    'does_not_exist' => 'El fabricante no existe.',
+    'assoc_users'	 => 'Este fabricante está actualmente asociado con al menos un modelo y no puede ser borrado. Por favor, actualiza tus modelos para no referenciar este fabricante e inténtelo de nuevo. ',
 
     'create' => array(
-        'error'   => 'Fabricante no creado, Intentalo de nuevo.',
-        'success' => 'Fabricante creado.'
+        'error'   => 'El fabricante no ha sido creado, por favor, inténtalo de nuevo.',
+        'success' => 'Fabricante creado con éxito.'
     ),
 
     'update' => array(
-        'error'   => 'Fabricante no actualizado, Intentalo de nuevo',
-        'success' => 'Fabricante actualizado.'
+        'error'   => 'El fabricante no ha sido actualizado, por favor, inténtelo de nuevo',
+        'success' => 'Fabricante actualizado con éxito.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro que quieres eliminar Fabricante?',
-        'error'   => 'Hubo un problema eliminando el fabricante. Por favor, inténtalo de nuevo.',
-        'success' => 'Fabricante Eliminado.'
+        'confirm'   => '¿Estás seguro de querer borrar este fabricante?',
+        'error'   => 'Hubo un problema borrando el fabricante. Por favor, inténtalo de nuevo.',
+        'success' => 'Fabricante borrado con éxito.'
     )
 
 );

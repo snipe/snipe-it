@@ -15,6 +15,11 @@ return array(
         'success' => 'Gamintojas sėkmingai atnaujintas.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Ar jūs tikrai norite ištrinti šį gamintoją?',
         'error'   => 'Nepavyko ištrinti gamintojo. Prašome bandykite dar kartą.',
