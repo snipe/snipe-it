@@ -45,7 +45,7 @@ class CheckinNotification extends Notification
             if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
                 || (method_exists($item, 'getEula') && ($item->getEula()))
             ) {
-                $notifyBy[] = 'mail';
+               // $notifyBy[] = 'mail';
             }
         }
         return $notifyBy;
