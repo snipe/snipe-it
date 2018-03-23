@@ -274,6 +274,44 @@ class AssetsController extends Controller
     }
 
 
+    /**
+     * Returns JSON with information about an asset (by tag) for detail view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $tag
+     * @since [v4.2.1]
+     * @return JsonResponse
+     */
+    public function showByTag($tag)
+    {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->where('asset_tag',$tag)->first()) {
+            $this->authorize('view', $asset);
+            return (new AssetsTransformer)->transformAsset($asset);
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 404);
+
+    }
+
+    /**
+     * Returns JSON with information about an asset (by serial) for detail view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $serial
+     * @since [v4.2.1]
+     * @return JsonResponse
+     */
+    public function showBySerial($serial)
+    {
+        if ($assets = Asset::with('assetstatus')->with('assignedTo')
+            ->withTrashed()->where('serial',$serial)->get()) {
+                $this->authorize('view', $assets);
+                return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 404);
+
+    }
+
+
      /**
      * Returns JSON with information about an asset for detail view.
      *
@@ -288,6 +326,7 @@ class AssetsController extends Controller
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
+
 
     }
 

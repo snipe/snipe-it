@@ -283,6 +283,17 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group(['prefix' => 'hardware'], function () {
 
+        Route::get( 'bytag/{tag}',  [
+            'as' => 'assets.show.bytag',
+            'uses' => 'AssetsController@showByTag'
+        ]);
+
+        Route::get( 'byserial/{serial}',  [
+            'as' => 'assets.show.byserial',
+            'uses' => 'AssetsController@showBySerial'
+        ]);
+
+
         Route::get( 'selectlist',  [
             'as' => 'assets.selectlist',
             'uses' => 'AssetsController@selectlist'
