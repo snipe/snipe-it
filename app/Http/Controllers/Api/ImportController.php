@@ -76,7 +76,7 @@ class ImportController extends Controller
                             //avoid reporting duplicates twice, e.g. "1 is same as 17! 17 is same as 1!!!"
                             //as well as "1 is same as 1!!!" (which is always true)
                             //has to be > because otherwise the first result of array_search will always be $i itself(!)
-                            array_push($duplicate_headers,"Duplicate header '$header' detected, first at column: $found_at, repeats at column: $i");
+                            array_push($duplicate_headers,"Duplicate header '$header' detected, first at column: ".($found_at+1).", repeats at column: ".($i+1));
                         }
                     }
                 }
