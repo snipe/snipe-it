@@ -24,8 +24,12 @@ class CheckinNotification extends Notification
      */
     public function __construct($params)
     {
-        //
-        $this->params = $params;
+        $this->item = $params['item'];
+        $this->admin = $params['admin'];
+        $this->note = '';
+        if (array_key_exists('note', $params)) {
+            $this->note = $params['note'];
+        }
     }
 
     /**
@@ -41,11 +45,11 @@ class CheckinNotification extends Notification
             $notifyBy[] = 'slack';
         }
         $item = $this->params['item'];
-        if (class_basename(get_class($this->params['item']))=='Asset') {
+        if (class_basename(get_class($item))=='Asset') {
             if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
                 || (method_exists($item, 'getEula') && ($item->getEula()))
             ) {
-               // $notifyBy[] = 'mail';
+                $notifyBy[] = 'mail';
             }
         }
         return $notifyBy;
@@ -53,20 +57,32 @@ class CheckinNotification extends Notification
 
     public function toSlack($notifiable)
     {
-        return (new SlackMessage)
-            ->success()
-            ->content(class_basename(get_class($this->params['item'])) . " Checked In")
-            ->attachment(function ($attachment) use ($notifiable) {
-                $item = $this->params['item'];
-                $admin_user = $this->params['admin'];
-                $fields = [
-                    'By' => '<'.$admin_user->present()->viewUrl().'|'.$admin_user->present()->fullName().'>',
-                ];
-                array_key_exists('note', $this->params) && $fields['Notes'] = $this->params['note'];
+        \Log::debug('Checkin slack');
 
-                $attachment->title($item->name, $item->present()->viewUrl())
-                    ->fields($fields);
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+
+        $fields = [
+            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+
+        ];
+
+        $fields[] = ['Status' => $item->assetstatus->name];
+
+
+        return (new SlackMessage)
+            ->content(':arrow_down: ' . class_basename(get_class($item)) . " Checked In")
+            ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
+                $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
+                    ->fields([
+                        trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+                    ])
+                    ->content($note);
             });
+
+
+
     }
     /**
      * Get the mail representation of the notification.

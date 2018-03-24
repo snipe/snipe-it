@@ -133,7 +133,6 @@ img {
     background-color: #FFFFFF;
     margin: 0 auto;
     padding: 0;
-    width: 570px;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 570px;
@@ -192,7 +191,7 @@ img {
 }
 
 .content-cell {
-    padding: 35px;
+    padding: 20px;
 }
 
 /* Buttons */
