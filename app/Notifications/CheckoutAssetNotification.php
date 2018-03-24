@@ -79,13 +79,6 @@ class CheckoutAssetNotification extends Notification
 
     public function toSlack()
     {
-        \Log::debug('pinging slack');
-
-        return (new SlackMessage)
-            ->from('Poo Bot', ':heart:')
-            ->to('#systems-devhooks')
-            ->image('https://snipeitapp.com/favicon.ico')
-            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
 
         $target = $this->target;
         $admin = $this->admin;
@@ -101,12 +94,6 @@ class CheckoutAssetNotification extends Notification
         if (($this->expected_checkin) && ($this->expected_checkin!='')) {
             $fields['Expected Checkin'] = $this->expected_checkin;
         }
-
-        return (new SlackMessage)
-            ->from('Poo Bot', ':heart:')
-            ->to('#systems-devhooks')
-            ->image('https://snipeitapp.com/favicon.ico')
-            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
 
         return (new SlackMessage)
             ->content(':arrow_up: :computer: Asset Checked Out')
@@ -125,8 +112,6 @@ class CheckoutAssetNotification extends Notification
      */
     public function toMail()
     {
-
-        $bcc = $this->settings->admin_cc_email;
 
         $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
         $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
@@ -154,9 +139,6 @@ class CheckoutAssetNotification extends Notification
             ])
             ->subject(trans('mail.Confirm_asset_delivery'));
 
-        if ($bcc!='') {
-            $message->bcc($bcc, $this->settings->site_name);
-        }
 
         return $message;
 

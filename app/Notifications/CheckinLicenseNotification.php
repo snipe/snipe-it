@@ -36,8 +36,6 @@ class CheckinLicenseNotification extends Notification
             $this->note = $params['note'];
         }
 
-
-
     }
 
     /**

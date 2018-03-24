@@ -56,32 +56,17 @@ class CheckinAssetNotification extends Notification
         }
 
         // Make sure the target is a user and that its appropriate to send them an email
-        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        if ((($this->target->email!='') && ($this->target_type == 'App\Models\User')) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
         {
             \Log::debug('use email');
             $notifyBy[] = 'mail';
         }
 
-
-        \Log::debug('Checkin:');
-        \Log::debug($notifyBy);
-        \Log::debug($this->target_type);
-        \Log::debug($this->item);
-        \Log::debug($this->item->requireAcceptance());
-        \Log::debug($this->item->getEula());
         return $notifyBy;
     }
 
     public function toSlack()
     {
-        \Log::debug('pinging slack for checkin');
-
-        return (new SlackMessage)
-            ->from('Poo Bot', ':heart:')
-            ->to('#systems-devhooks')
-            ->image('https://snipeitapp.com/favicon.ico')
-            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
-
 
         $admin = $this->admin;
         $item = $this->item;
@@ -114,7 +99,7 @@ class CheckinAssetNotification extends Notification
      */
     public function toMail()
     {
-        $bcc = $this->settings->admin_cc_email;
+
 
         $fields = [];
 
@@ -134,9 +119,6 @@ class CheckinAssetNotification extends Notification
             ])
             ->subject('Asset checked in');
 
-        if ($bcc!='') {
-            $message->bcc($bcc, $this->settings->site_name);
-        }
 
         return $message;
     }
