@@ -24,7 +24,7 @@ class CheckoutAccessoryNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params, $only = null)
+    public function __construct($params)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
@@ -35,8 +35,6 @@ class CheckoutAccessoryNotification extends Notification
         $this->expected_checkin = '';
         $this->target_type = $params['target'];
         $this->settings = $params['settings'];
-        $this->only = $only;
-
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -77,6 +75,13 @@ class CheckoutAccessoryNotification extends Notification
 
     public function toSlack($notifiable)
     {
+
+        return (new SlackMessage)
+            ->from('Poo Bot', ':heart:')
+            ->to('#systems-devhooks')
+            ->image('https://snipeitapp.com/favicon.ico')
+            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
+
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;

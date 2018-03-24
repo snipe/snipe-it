@@ -24,7 +24,7 @@ class CheckoutLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params, $only = null)
+    public function __construct($params)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
@@ -33,7 +33,6 @@ class CheckoutLicenseNotification extends Notification
         $this->note = '';
         $this->target_type = $params['target'];
         $this->settings = $params['settings'];
-        $this->only = $only;
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -49,14 +48,9 @@ class CheckoutLicenseNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
-
-        if ($this->only) {
-            $notifyBy[] = $this->only;
-            return $notifyBy;
-        }
 
         if (Setting::getSettings()->slack_endpoint!='') {
             $notifyBy[] = 'slack';
@@ -73,6 +67,12 @@ class CheckoutLicenseNotification extends Notification
 
     public function toSlack($notifiable)
     {
+
+        return (new SlackMessage)
+            ->from('Poo Bot', ':heart:')
+            ->to('#systems-devhooks')
+            ->image('https://snipeitapp.com/favicon.ico')
+            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
 
         $target = $this->target;
         $admin = $this->admin;

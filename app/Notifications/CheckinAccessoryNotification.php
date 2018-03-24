@@ -24,7 +24,7 @@ class CheckinAccessoryNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params, $only = null)
+    public function __construct($params)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
@@ -32,7 +32,6 @@ class CheckinAccessoryNotification extends Notification
         $this->note = '';
         $this->target_type = $params['target'];
         $this->settings = $params['settings'];
-        $this->only = $only;
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -48,15 +47,10 @@ class CheckinAccessoryNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
 
         $notifyBy = [];
-
-        if ($this->only) {
-            $notifyBy[] = $this->only;
-            return $notifyBy;
-        }
 
         if (Setting::getSettings()->slack_endpoint) {
             $notifyBy[] = 'slack';
@@ -71,7 +65,7 @@ class CheckinAccessoryNotification extends Notification
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
+    public function toSlack()
     {
 
 

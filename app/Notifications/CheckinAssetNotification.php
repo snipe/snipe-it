@@ -4,35 +4,30 @@ namespace App\Notifications;
 
 use App\Models\Setting;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\SlackMessage;
 
 class CheckinAssetNotification extends Notification
 {
     use Queueable;
-    /**
-     * @var
-     */
-    private $params;
+
 
     /**
      * Create a new notification instance.
      *
      * @param $params
      */
-    public function __construct($params, $only = null)
+    public function __construct($params)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
         $this->admin = $params['admin'];
         $this->note = '';
         $this->expected_checkin = '';
-        $this->target_type = $params['target'];
+        $this->target_type = $params['target_type'];
         $this->settings = $params['settings'];
-        $this->only = $only;
-
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -50,42 +45,55 @@ class CheckinAssetNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
 
         $notifyBy = [];
 
-        if ($this->only) {
-            $notifyBy[] = $this->only;
-            return $notifyBy;
-        }
-
         if (Setting::getSettings()->slack_endpoint!='') {
+            \Log::debug('use slack');
             $notifyBy[] = 'slack';
         }
 
         // Make sure the target is a user and that its appropriate to send them an email
-        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->checkin_email()) ||  ($this->item->getEula()))) {
-                $notifyBy[] = 'mail';
+        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        {
+            \Log::debug('use email');
+            $notifyBy[] = 'mail';
         }
+
+
+        \Log::debug('Checkin:');
+        \Log::debug($notifyBy);
+        \Log::debug($this->target_type);
+        \Log::debug($this->item);
+        \Log::debug($this->item->requireAcceptance());
+        \Log::debug($this->item->getEula());
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
+    public function toSlack()
     {
+        \Log::debug('pinging slack for checkin');
+
+        return (new SlackMessage)
+            ->from('Poo Bot', ':heart:')
+            ->to('#systems-devhooks')
+            ->image('https://snipeitapp.com/favicon.ico')
+            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
+
 
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
-
+        $botname = ($this->settings->slack_botname!='') ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
         $fields = [
             trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
             trans('general.status') => $item->assetstatus->name,
             trans('general.location') => $item->location->name,
         ];
-
+        
         return (new SlackMessage)
             ->content(':arrow_down: :computer: Asset Checked In')
             ->from($botname)
@@ -96,7 +104,6 @@ class CheckinAssetNotification extends Notification
             });
 
 
-
     }
 
     /**
@@ -105,8 +112,9 @@ class CheckinAssetNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
+        $bcc = $this->settings->admin_cc_email;
 
         $fields = [];
 
@@ -115,7 +123,7 @@ class CheckinAssetNotification extends Notification
             $fields = $this->item->model->fieldset->fields;
         }
 
-        return (new MailMessage)->markdown('notifications.markdown.checkin-asset',
+        $message = (new MailMessage)->markdown('notifications.markdown.checkin-asset',
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
@@ -126,18 +134,11 @@ class CheckinAssetNotification extends Notification
             ])
             ->subject('Asset checked in');
 
+        if ($bcc!='') {
+            $message->bcc($bcc, $this->settings->site_name);
+        }
+
+        return $message;
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

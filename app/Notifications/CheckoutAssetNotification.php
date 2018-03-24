@@ -3,13 +3,11 @@
 namespace App\Notifications;
 
 use App\Models\Setting;
-use App\Models\SnipeModel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CheckoutAssetNotification extends Notification
 {
@@ -24,7 +22,7 @@ class CheckoutAssetNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params, $only = null)
+    public function __construct($params)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
@@ -35,7 +33,6 @@ class CheckoutAssetNotification extends Notification
         $this->expected_checkin = '';
         $this->target_type = $params['target_type'];
         $this->settings = $params['settings'];
-        $this->only = $only;
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -60,17 +57,13 @@ class CheckoutAssetNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
 
         $notifyBy = [];
 
-        if ($this->only) {
-            $notifyBy[] = $this->only;
-            return $notifyBy;
-        }
-
         if (Setting::getSettings()->slack_endpoint!='') {
+            \Log::debug('use slack');
             $notifyBy[] = 'slack';
         }
 
@@ -79,13 +72,21 @@ class CheckoutAssetNotification extends Notification
         {
             $notifyBy[] = 'mail';
         }
-
+        \Log::debug('Checkout:');
+        \Log::debug($notifyBy);
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
+    public function toSlack()
     {
         \Log::debug('pinging slack');
+
+        return (new SlackMessage)
+            ->from('Poo Bot', ':heart:')
+            ->to('#systems-devhooks')
+            ->image('https://snipeitapp.com/favicon.ico')
+            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
+
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
@@ -102,6 +103,12 @@ class CheckoutAssetNotification extends Notification
         }
 
         return (new SlackMessage)
+            ->from('Poo Bot', ':heart:')
+            ->to('#systems-devhooks')
+            ->image('https://snipeitapp.com/favicon.ico')
+            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
+
+        return (new SlackMessage)
             ->content(':arrow_up: :computer: Asset Checked Out')
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
@@ -116,9 +123,10 @@ class CheckoutAssetNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
 
+        $bcc = $this->settings->admin_cc_email;
 
         $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
         $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
@@ -130,9 +138,7 @@ class CheckoutAssetNotification extends Notification
             $fields = $this->item->model->fieldset->fields;
         }
 
-
-
-        return (new MailMessage)->markdown('notifications.markdown.checkout-asset',
+        $message = (new MailMessage)->markdown('notifications.markdown.checkout-asset',
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
@@ -148,19 +154,13 @@ class CheckoutAssetNotification extends Notification
             ])
             ->subject(trans('mail.Confirm_asset_delivery'));
 
+        if ($bcc!='') {
+            $message->bcc($bcc, $this->settings->site_name);
+        }
+
+        return $message;
+
 
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

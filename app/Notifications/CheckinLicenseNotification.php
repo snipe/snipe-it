@@ -24,14 +24,13 @@ class CheckinLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params, $only = null)
+    public function __construct($params)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
         $this->admin = $params['admin'];
         $this->note = '';
         $this->settings = $params['settings'];
-        $this->only = $only;
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -51,18 +50,12 @@ class CheckinLicenseNotification extends Notification
     {
         $notifyBy = [];
 
-        if ($this->only) {
-            $notifyBy[] = $this->only;
-            return $notifyBy;
-        }
-
         if (Setting::getSettings()->slack_endpoint!='') {
             $notifyBy[] = 'slack';
         }
 
 
         $notifyBy[] = 'mail';
-
 
         return $notifyBy;
     }

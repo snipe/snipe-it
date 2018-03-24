@@ -73,13 +73,8 @@ trait Loggable
             'settings' => $settings,
         ];
 
-        // Get the admin email address we should be sending notifications to, if any
-        $recipient = new \App\Models\Recipients\AdminRecipient();
-
-        // Send to the admin, if settings dictate
-        $recipient = new \App\Models\Recipients\AdminRecipient();
-
         $checkoutClass = null;
+
         switch(static::class) {
             case Asset::class:
                 $checkoutClass = CheckoutAssetNotification::class;
@@ -95,12 +90,8 @@ trait Loggable
                 break;
 
         }
-        if ($settings->admin_cc_email!='') {
-            $recipient->notify(new $checkoutClass($params));
-        }
-        $target->notify(new $checkoutClass($params, 'mail'));
 
-
+        $target->notify(new $checkoutClass($params));
         return $log;
     }
 
@@ -155,10 +146,8 @@ trait Loggable
             'settings' => $settings,
         ];
 
-        // Get the admin email address we should be sending notifications to, if any
-        $recipient = new \App\Models\Recipients\AdminRecipient();
-
         $checkoutClass = null;
+
         switch(static::class) {
             case Asset::class:
                 $checkoutClass = CheckinAssetNotification::class;
@@ -169,12 +158,9 @@ trait Loggable
             case LicenseSeat::class:
                 $checkoutClass = CheckinLicenseNotification::class;
                 break;
+        }
 
-        }
-        if ($settings->admin_cc_email!='') {
-            $recipient->notify(new $checkoutClass($params));
-        }
-        $target->notify(new $checkoutClass($params, 'mail'));
+        $target->notify(new $checkoutClass($params));
 
 
 
