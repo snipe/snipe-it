@@ -72,8 +72,6 @@ class CheckoutAssetNotification extends Notification
         {
             $notifyBy[] = 'mail';
         }
-        \Log::debug('Checkout:');
-        \Log::debug($notifyBy);
         return $notifyBy;
     }
 
