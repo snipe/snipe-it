@@ -3,9 +3,6 @@
 
 {{ trans('mail.new_item_checked') }}
 
-@if (($snipeSettings->show_images_in_email =='1') && $item->getImageUrl())
-<center><img src="{{ $item->getImageUrl() }}" alt="Consumable" style="max-width: 570px;"></center>
-@endif
 
 @component('mail::table')
 |        |          |
@@ -13,7 +10,7 @@
 @if (isset($checkout_date))
 | **{{ trans('mail.checkout_date') }}** | {{ $checkout_date }} |
 @endif
-| **{{ trans('general.accessory') }}** | {{ $item->name }} |
+| **{{ trans('general.consumable') }}** | {{ $item->name }} |
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
 @endif
