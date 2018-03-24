@@ -76,7 +76,7 @@ class CheckinLicenseNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content(':arrow_up: :floppy_disk: License  Checked In')
+            ->content(':arrow_down: :floppy_disk: License  Checked In')
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())

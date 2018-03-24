@@ -66,13 +66,7 @@ class CheckoutLicenseNotification extends Notification
     }
 
     public function toSlack($notifiable)
-    {
-
-        return (new SlackMessage)
-            ->from('Poo Bot', ':heart:')
-            ->to('#systems-devhooks')
-            ->image('https://snipeitapp.com/favicon.ico')
-            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
+    {1
 
         $target = $this->target;
         $admin = $this->admin;

@@ -50,16 +50,15 @@
                                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                                         <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                                         <div class="col-md-7">
-                                            <textarea class="col-md-6 form-control" id="note" name="note">
-                                                {{ Input::old('note', $accessory->note) }}
-                                            </textarea>
+                                            <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $accessory->note) }}</textarea>
                                             {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                     </div>
                               </div>
                         <div class="box-footer">
                             <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i>{{ trans('general.checkin') }}</button>
+                            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i>
+                                {{ trans('general.checkin') }}</button>
                         </div>
                 </div> <!-- .box.box-default -->
             </form>

@@ -55,11 +55,6 @@ class CheckoutAccessoryNotification extends Notification
 
         $notifyBy = [];
 
-        if ($this->only) {
-            $notifyBy[] = $this->only;
-            return $notifyBy;
-        }
-
         if (Setting::getSettings()->slack_endpoint!='') {
             $notifyBy[] = 'slack';
         }
@@ -76,11 +71,6 @@ class CheckoutAccessoryNotification extends Notification
     public function toSlack($notifiable)
     {
 
-        return (new SlackMessage)
-            ->from('Poo Bot', ':heart:')
-            ->to('#systems-devhooks')
-            ->image('https://snipeitapp.com/favicon.ico')
-            ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
 
         $target = $this->target;
         $admin = $this->admin;

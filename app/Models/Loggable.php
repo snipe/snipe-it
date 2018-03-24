@@ -73,6 +73,11 @@ trait Loggable
             'settings' => $settings,
         ];
 
+
+        // Send to the admin, if settings dictate
+        $recipient = new \App\Models\Recipients\AdminRecipient();
+
+
         $checkoutClass = null;
 
         switch(static::class) {
@@ -88,10 +93,16 @@ trait Loggable
             case LicenseSeat::class:
                 $checkoutClass = CheckoutLicenseNotification::class;
                 break;
-
         }
 
-        $target->notify(new $checkoutClass($params));
+        if (method_exists($target, 'notify')) {
+            $target->notify(new $checkoutClass($params));
+        }
+
+        if ($settings->admin_cc_email!='') {
+            $recipient->notify(new $checkoutClass($params));
+        }
+
         return $log;
     }
 
@@ -146,6 +157,9 @@ trait Loggable
             'settings' => $settings,
         ];
 
+        // Send to the admin, if settings dictate
+        $recipient = new \App\Models\Recipients\AdminRecipient();
+
         $checkoutClass = null;
 
         switch(static::class) {
@@ -160,7 +174,15 @@ trait Loggable
                 break;
         }
 
-        $target->notify(new $checkoutClass($params));
+        if (method_exists($target, 'notify')) {
+            $target->notify(new $checkoutClass($params));
+        }
+
+        if ($settings->admin_cc_email!='') {
+            $recipient->notify(new $checkoutClass($params));
+        }
+
+
 
 
 

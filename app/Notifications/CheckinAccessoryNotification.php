@@ -68,12 +68,11 @@ class CheckinAccessoryNotification extends Notification
     public function toSlack()
     {
 
-
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->note->slack_botname) ? $this->note->slack_botname : 'Snipe-Bot' ;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
 
         $fields = [
@@ -84,7 +83,7 @@ class CheckinAccessoryNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content('Accessory Checked In')
+            ->content(':arrow_down: :keyboard: Accessory Checked In')
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
