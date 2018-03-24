@@ -7,7 +7,6 @@ use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\User;
-use App\Notifications\CheckoutAssetNotification;
 use Auth;
 use Config;
 use DB;
