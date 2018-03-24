@@ -31,7 +31,7 @@ class CheckoutLicenseNotification extends Notification
         $this->admin = $params['admin'];
         $this->log_id = $params['log_id'];
         $this->note = '';
-        $this->target_type = $params['target'];
+        $this->target_type = $params['target_type'];
         $this->settings = $params['settings'];
 
         if (array_key_exists('note', $params)) {

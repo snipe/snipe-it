@@ -33,7 +33,7 @@ class CheckoutAccessoryNotification extends Notification
         $this->note = '';
         $this->last_checkout = '';
         $this->expected_checkin = '';
-        $this->target_type = $params['target'];
+        $this->target_type = $params['target_type'];
         $this->settings = $params['settings'];
 
         if (array_key_exists('note', $params)) {
@@ -60,7 +60,7 @@ class CheckoutAccessoryNotification extends Notification
         }
 
         // Make sure the target is a user and that its appropriate to send them an email
-        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        if ((($this->target->email!='') && ($this->target_type == 'App\Models\User')) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
         {
             $notifyBy[] = 'mail';
         }
