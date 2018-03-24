@@ -109,6 +109,14 @@ class Consumable extends SnipeModel
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Consumable::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
+    public function getImageUrl() {
+        if ($this->image) {
+            return url('/').'/uploads/accessories/'.$this->image;
+        }
+        return false;
+
+    }
+
 
     public function users()
     {
