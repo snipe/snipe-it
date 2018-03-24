@@ -140,8 +140,8 @@
         <h3 class="box-title">{{ trans('admin/users/general.current_assets') }}</h3>
       </div>
       <div class="box-body">
-        {{--<div id="current_assets_content">--}}
-        {{--</div>--}}
+        <div id="current_assets_content">
+        </div>
       </div>
     </div>
   </div>
