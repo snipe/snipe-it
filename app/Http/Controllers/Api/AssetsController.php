@@ -668,7 +668,7 @@ class AssetsController extends Controller
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
-        $asset->name = e(Input::get('name'));
+        $asset->name = Input::get('name');
         $asset->location_id =  $asset->rtd_location_id;
 
         if ($request->has('location_id')) {
@@ -676,10 +676,9 @@ class AssetsController extends Controller
         }
 
         if (Input::has('status_id')) {
-            $asset->status_id =  e(Input::get('status_id'));
+            $asset->status_id =  Input::get('status_id');
         }
 
-        // Was the asset updated?
         if ($asset->save()) {
             $asset->logCheckin($target, e(request('note')));
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
