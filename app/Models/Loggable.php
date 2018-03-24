@@ -50,13 +50,11 @@ trait Loggable
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
 
-        $target_class = get_class($target);
 
         // Figure out what the target is
-        if ($target_class == Location::class) {
-            // We can checkout to a location
+        if ($log->target_type == Location::class) {
             $log->location_id = $target->id;
-        } elseif ($target_class== Asset::class) {
+        } elseif ($log->target_type == Asset::class) {
             $log->location_id = $target->rtd_location_id;
         } else {
             $log->location_id = $target->location_id;
@@ -67,10 +65,12 @@ trait Loggable
 
         $params = [
             'item' => $log->item,
+            'target_type' => $log->target_type,
             'target' => $target,
             'admin' => $log->user,
             'note' => $note,
-            'log_id' => $log->id
+            'log_id' => $log->id,
+            'settings' => $settings,
         ];
 
         // Get the admin email address we should be sending notifications to, if any
@@ -136,13 +136,7 @@ trait Loggable
         $settings = Setting::getSettings();
         $log = new Actionlog;
         $log->target_type = get_class($target);
-
-        if ($target) {
-            $log->target_id = $target->id;
-        } else {
-            $target = null;
-        }
-
+        $log->target_id = $target->id;
 
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
@@ -163,6 +157,8 @@ trait Loggable
             'item' => $log->item,
             'admin' => $log->user,
             'note' => $note,
+            'target_type' => $log->target_type,
+            'settings' => $settings,
         ];
 
         // Get the admin email address we should be sending notifications to, if any
