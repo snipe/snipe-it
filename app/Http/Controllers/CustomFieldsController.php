@@ -78,6 +78,7 @@ class CustomFieldsController extends Controller
             "help_text" => $request->get("help_text"),
             "field_values" => $request->get("field_values"),
             "field_encrypted" => $request->get("field_encrypted", 0),
+            "show_in_email" => $request->get("show_in_email", 0),
             "user_id" => Auth::user()->id
         ]);
 
