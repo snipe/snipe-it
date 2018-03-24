@@ -106,7 +106,6 @@ class CheckoutAccessoryNotification extends Notification
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
-                'log_id'        => $this->note,
                 'target'        => $this->target,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,

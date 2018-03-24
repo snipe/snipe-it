@@ -11,7 +11,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
-class CheckoutAssetNotification extends Notification
+class CheckinAccessoryNotification extends Notification
 {
     use Queueable;
     /**
@@ -29,24 +29,12 @@ class CheckoutAssetNotification extends Notification
         $this->target = $params['target'];
         $this->item = $params['item'];
         $this->admin = $params['admin'];
-        $this->log_id = $params['log_id'];
         $this->note = '';
-        $this->last_checkout = '';
-        $this->expected_checkin = '';
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
         }
 
-        if ($this->item->last_checkout) {
-            $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date',
-                false);
-        }
-
-        if ($this->item->expected_checkin) {
-            $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
-                false);
-        }
 
 
     }
@@ -74,24 +62,23 @@ class CheckoutAssetNotification extends Notification
 
     public function toSlack($notifiable)
     {
+
+
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
 
-        if (($this->expected_checkin) && ($this->expected_checkin!='')) {
-            $fields['Expected Checkin'] = $this->expected_checkin;
-        }
-
 
 
         return (new SlackMessage)
-            ->content(':arrow_up: ' . class_basename(get_class($item)) . " Checked Out")
+            ->content(':arrow_up: ' . class_basename(get_class($item)) . " Checked In")
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)
@@ -107,35 +94,18 @@ class CheckoutAssetNotification extends Notification
     public function toMail($notifiable)
     {
 
+        \Log::debug($this->item->getImageUrl());
+        $eula =  $this->item->getEula();
+        $req_accept = $this->item->requireAcceptance();
 
-        $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
-        $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
-
-        $fields = [];
-
-        // Check if the item has custom fields associated with it
-        if (($this->item->model) && ($this->item->model->fieldset)) {
-            $fields = $this->item->model->fieldset->fields;
-        }
-
-
-
-        return (new MailMessage)->markdown('notifications.markdown.checkout-asset',
+        return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
-                'log_id'        => $this->note,
                 'target'        => $this->target,
-                'fields'        => $fields,
-                'eula'          => $eula,
-                'req_accept'    => $req_accept,
-                'accept_url'    =>  url('/').'/account/accept-asset/'.$this->log_id,
-                'last_checkout' => $this->last_checkout,
-                'expected_checkin'  => $this->expected_checkin,
             ])
-            ->subject(trans('mail.Confirm_asset_delivery'));
-
+            ->subject('Accessory checked in');
 
     }
 
