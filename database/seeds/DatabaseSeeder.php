@@ -34,7 +34,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ActionlogSeeder::class);
         $this->call(CustomFieldSeeder::class);
 
-        factory(Setting::class)->create();
+        // Only create default settings if they do not exist in the db.
+        if(!Setting::first()) {
+            factory(Setting::class)->create();
+        }
         Artisan::call('snipeit:sync-asset-locations', ['--output' => 'all']);
         $output = Artisan::output();
         \Log::info($output);
