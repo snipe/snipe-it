@@ -53,22 +53,26 @@
 
           @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
 
-          @if (($accessory->category) && ($accessory->category->require_acceptance=='1'))
-          <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-              <p class="hint-block">{{ trans('admin/categories/general.required_acceptance') }}</p>
-            </div>
-          </div>
-          @endif
 
-          @if ($accessory->getEula())
-          <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-              <p class="hint-block">{{ trans('admin/categories/general.required_eula') }}</p>
-            </div>
-          </div>
-          @endif
+             @if ($accessory->requireAcceptance() || $accessory->getEula())
+                 <div class="form-group notification-callout">
+                     <div class="col-md-8 col-md-offset-3">
+                         <div class="callout callout-info">
 
+                             @if ($accessory->requireAcceptance())
+                                 <i class="fa fa-envelope"></i>
+                                 {{ trans('admin/categories/general.required_acceptance') }}
+                                 <br>
+                             @endif
+
+                             @if ($accessory->getEula())
+                                 <i class="fa fa-envelope"></i>
+                                 {{ trans('admin/categories/general.required_eula') }}
+                             @endif
+                         </div>
+                     </div>
+                 </div>
+             @endif
        </div>
        <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
