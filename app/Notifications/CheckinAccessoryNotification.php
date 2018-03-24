@@ -24,7 +24,7 @@ class CheckinAccessoryNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct($params, $only = null)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
@@ -32,6 +32,7 @@ class CheckinAccessoryNotification extends Notification
         $this->note = '';
         $this->target_type = $params['target'];
         $this->settings = $params['settings'];
+        $this->only = $only;
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -49,8 +50,14 @@ class CheckinAccessoryNotification extends Notification
      */
     public function via($notifiable)
     {
-        $target_type = get_class($this->target);
+
         $notifyBy = [];
+
+        if ($this->only) {
+            $notifyBy[] = $this->only;
+            return $notifyBy;
+        }
+
         if (Setting::getSettings()->slack_endpoint) {
             $notifyBy[] = 'slack';
         }

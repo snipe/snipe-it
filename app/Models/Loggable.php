@@ -77,34 +77,28 @@ trait Loggable
         $recipient = new \App\Models\Recipients\AdminRecipient();
 
         // Send to the admin, if settings dictate
-        if (static::class == Asset::class) {
+        $recipient = new \App\Models\Recipients\AdminRecipient();
 
-            if ($settings->admin_cc_email!='') {
-                $recipient->notify(new CheckoutAssetNotification($params));
-            }
+        $checkoutClass = null;
+        switch(static::class) {
+            case Asset::class:
+                $checkoutClass = CheckoutAssetNotification::class;
+                break;
+            case Accessory::class:
+                $checkoutClass = CheckoutAccessoryNotification::class;
+                break;
+            case Consumable::class:
+                $checkoutClass = CheckoutConsumableNotification::class;
+                break;
+            case LicenseSeat::class:
+                $checkoutClass = CheckoutLicenseNotification::class;
+                break;
 
-            $target->notify(new CheckoutAssetNotification($params));
-        } elseif (static::class == Accessory::class) {
-
-            if ($settings->admin_cc_email!='') {
-                $recipient->notify(new CheckoutAccessoryNotification($params));
-            }
-
-            $target->notify(new CheckoutAccessoryNotification($params));
-        } elseif (static::class == Consumable::class) {
-
-            if ($settings->admin_cc_email!='') {
-                $recipient->notify(new CheckoutConsumableNotification($params));
-            }
-
-            $target->notify(new CheckoutConsumableNotification($params));
-        } elseif (static::class == LicenseSeat::class) {
-            if ($settings->admin_cc_email!='') {
-                $recipient->notify(new CheckoutLicenseNotification($params));
-            }
-
-            $target->notify(new CheckoutLicenseNotification($params));
         }
+        if ($settings->admin_cc_email!='') {
+            $recipient->notify(new $checkoutClass($params));
+        }
+        $target->notify(new $checkoutClass($params, 'mail'));
 
 
         return $log;
@@ -164,28 +158,23 @@ trait Loggable
         // Get the admin email address we should be sending notifications to, if any
         $recipient = new \App\Models\Recipients\AdminRecipient();
 
-        if (static::class == Asset::class) {
-            if ($settings->admin_cc_email!='') {
-                $recipient->notify(new CheckinAssetNotification($params));
-            }
-
-            $target->notify(new CheckinAssetNotification($params));
-
-        } elseif (static::class == Accessory::class) {
-            if ($settings->admin_cc_email!='') {
-                $recipient->notify(new CheckinAccessoryNotification($params));
-            }
-
-            $target->notify(new CheckinAccessoryNotification($params));
-
-        } elseif (static::class == LicenseSeat::class) {
-            if ($settings->admin_cc_email!='') {
-                $recipient->notify(new CheckinLicenseNotification($params));
-            }
-
-            $target->notify(new CheckinLicenseNotification($params));
+        $checkoutClass = null;
+        switch(static::class) {
+            case Asset::class:
+                $checkoutClass = CheckinAssetNotification::class;
+                break;
+            case Accessory::class:
+                $checkoutClass = CheckinAccessoryNotification::class;
+                break;
+            case LicenseSeat::class:
+                $checkoutClass = CheckinLicenseNotification::class;
+                break;
 
         }
+        if ($settings->admin_cc_email!='') {
+            $recipient->notify(new $checkoutClass($params));
+        }
+        $target->notify(new $checkoutClass($params, 'mail'));
 
 
 

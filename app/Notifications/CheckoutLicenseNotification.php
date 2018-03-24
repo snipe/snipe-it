@@ -24,7 +24,7 @@ class CheckoutLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct($params, $only = null)
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
@@ -33,6 +33,7 @@ class CheckoutLicenseNotification extends Notification
         $this->note = '';
         $this->target_type = $params['target'];
         $this->settings = $params['settings'];
+        $this->only = $only;
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -51,6 +52,12 @@ class CheckoutLicenseNotification extends Notification
     public function via($notifiable)
     {
         $notifyBy = [];
+
+        if ($this->only) {
+            $notifyBy[] = $this->only;
+            return $notifyBy;
+        }
+
         if (Setting::getSettings()->slack_endpoint!='') {
             $notifyBy[] = 'slack';
         }
