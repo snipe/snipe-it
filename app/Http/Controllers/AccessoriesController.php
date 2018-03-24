@@ -12,7 +12,6 @@ use DB;
 use Gate;
 use Input;
 use Lang;
-use Mail;
 use Redirect;
 use Illuminate\Http\Request;
 use Slack;
@@ -313,16 +312,6 @@ class AccessoriesController extends Controller
         $data['expected_checkin'] = '';
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $accessory->requireAcceptance();
-        // TODO: Port this to new mail notifications
-
-        if ((($accessory->requireAcceptance()=='1')  || ($accessory->getEula())) && ($user->email!='')) {
-
-            Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject(trans('mail.Confirm_accessory_delivery'));
-            });
-        }
 
       // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));
@@ -392,15 +381,6 @@ class AccessoriesController extends Controller
             $data['checkin_date'] = e($logaction->created_at);
             $data['item_tag'] = '';
             $data['note'] = e($logaction->note);
-
-            if ((($accessory->checkin_email()=='1')) && ($user->email!='')) {
-
-                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Confirm_Accessory_Checkin'));
-                });
-            }
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $return_to)->with('success', trans('admin/accessories/message.checkin.success'));
