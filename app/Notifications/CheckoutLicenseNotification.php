@@ -31,6 +31,8 @@ class CheckoutLicenseNotification extends Notification
         $this->admin = $params['admin'];
         $this->log_id = $params['log_id'];
         $this->note = '';
+        $this->target_type = $params['target'];
+        $this->settings = $params['settings'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -48,13 +50,12 @@ class CheckoutLicenseNotification extends Notification
      */
     public function via($notifiable)
     {
-        $target_type = get_class($this->target);
         $notifyBy = [];
-        if (Setting::getSettings()->slack_endpoint) {
+        if (Setting::getSettings()->slack_endpoint!='') {
             $notifyBy[] = 'slack';
         }
 
-        if ($target_type==\App\Models\User::class) {
+        if ($this->target_type == \App\Models\User::class) {
             $notifyBy[] = 'mail';
         }
 
@@ -66,22 +67,20 @@ class CheckoutLicenseNotification extends Notification
     public function toSlack($notifiable)
     {
 
-
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
 
-
-
         return (new SlackMessage)
-            ->content(':arrow_up: :floppy_disk: ' . class_basename(get_class($item)) . " Checked Out")
+            ->content(':arrow_up: :floppy_disk: License Checked Out')
+            ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

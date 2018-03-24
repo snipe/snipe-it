@@ -30,6 +30,7 @@ class CheckinLicenseNotification extends Notification
         $this->item = $params['item'];
         $this->admin = $params['admin'];
         $this->note = '';
+        $this->settings = $params['settings'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -48,7 +49,7 @@ class CheckinLicenseNotification extends Notification
     public function via($notifiable)
     {
         $notifyBy = [];
-        if (Setting::getSettings()->slack_endpoint) {
+        if (Setting::getSettings()->slack_endpoint!='') {
             $notifyBy[] = 'slack';
         }
 
@@ -62,11 +63,11 @@ class CheckinLicenseNotification extends Notification
     public function toSlack($notifiable)
     {
 
-
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
 
         $fields = [
@@ -77,7 +78,8 @@ class CheckinLicenseNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content(':arrow_up: :floppy_disk: ' . class_basename(get_class($item)) . " Checked In")
+            ->content(':arrow_up: :floppy_disk: License  Checked In')
+            ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

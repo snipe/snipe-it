@@ -30,6 +30,8 @@ class CheckinAccessoryNotification extends Notification
         $this->item = $params['item'];
         $this->admin = $params['admin'];
         $this->note = '';
+        $this->target_type = $params['target'];
+        $this->settings = $params['settings'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -54,7 +56,7 @@ class CheckinAccessoryNotification extends Notification
         }
 
         // Make sure the target is a user and that its appropriate to send them an email
-        if (($target_type==\App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
         {
             $notifyBy[] = 'mail';
         }
@@ -70,6 +72,7 @@ class CheckinAccessoryNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+        $botname = ($this->note->slack_botname) ? $this->note->slack_botname : 'Snipe-Bot' ;
 
 
         $fields = [
@@ -80,7 +83,8 @@ class CheckinAccessoryNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content(':arrow_up: :keyboard: ' . class_basename(get_class($item)) . " Checked In")
+            ->content('Asset Checked In')
+            ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

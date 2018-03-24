@@ -33,6 +33,8 @@ class CheckoutAssetNotification extends Notification
         $this->note = '';
         $this->last_checkout = '';
         $this->expected_checkin = '';
+        $this->target_type = $params['target_type'];
+        $this->settings = $params['settings'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -59,14 +61,15 @@ class CheckoutAssetNotification extends Notification
      */
     public function via($notifiable)
     {
-        $target_type = get_class($this->target);
+
         $notifyBy = [];
-        if (Setting::getSettings()->slack_endpoint) {
+
+        if (Setting::getSettings()->slack_endpoint!='') {
             $notifyBy[] = 'slack';
         }
 
         // Make sure the target is a user and that its appropriate to send them an email
-        if (($target_type==\App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
         {
             $notifyBy[] = 'mail';
         }
@@ -76,10 +79,12 @@ class CheckoutAssetNotification extends Notification
 
     public function toSlack($notifiable)
     {
+        \Log::debug('pinging slack');
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
@@ -90,10 +95,9 @@ class CheckoutAssetNotification extends Notification
             $fields['Expected Checkin'] = $this->expected_checkin;
         }
 
-
-
         return (new SlackMessage)
-            ->content(':arrow_up: :computer: ' . class_basename(get_class($item)) . " Checked Out")
+            ->content(':arrow_up: :computer: Asset Checked Out')
+            ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)
