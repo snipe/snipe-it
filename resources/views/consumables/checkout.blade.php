@@ -41,7 +41,7 @@
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
 
-            @if ($consumable->requireAcceptance() || $consumable->getEula())
+            @if ($consumable->requireAcceptance() || $consumable->getEula() || ($snipeSettings->slack_endpoint!=''))
               <div class="form-group notification-callout">
                 <div class="col-md-8 col-md-offset-3">
                   <div class="callout callout-info">
@@ -55,6 +55,12 @@
                     @if ($consumable->getEula())
                       <i class="fa fa-envelope"></i>
                       {{ trans('admin/categories/general.required_eula') }}
+                        <br>
+                    @endif
+
+                    @if ($snipeSettings->slack_endpoint!='')
+                        <i class="fa fa-slack"></i>
+                        A slack message will be sent
                     @endif
                   </div>
                 </div>
