@@ -107,6 +107,8 @@ return array(
     'show_alerts_in_menu'       => 'Show alerts in top menu',
     'show_archived_in_list'     => 'Archived Assets',
     'show_archived_in_list_text'     => 'Show archived assets in the "all assets" listing',
+    'show_images_in_email'     => 'Show images in emails',
+    'show_images_in_email_help'   => 'Uncheck this box if your Snipe-IT installation is behind a VPN or closed network and users outside the network will not be able to load images served from this installation in their emails.',
     'site_name'                 => 'Site Name',
     'slack_botname'             => 'Slack Botname',
     'slack_channel'             => 'Slack Channel',
