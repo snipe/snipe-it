@@ -111,7 +111,7 @@ class Consumable extends SnipeModel
 
     public function getImageUrl() {
         if ($this->image) {
-            return url('/').'/uploads/accessories/'.$this->image;
+            return url('/').'/uploads/consumables/'.$this->image;
         }
         return false;
 
