@@ -48,13 +48,16 @@ class CheckoutLicenseNotification extends Notification
      */
     public function via($notifiable)
     {
+        $target_type = get_class($this->target);
         $notifyBy = [];
         if (Setting::getSettings()->slack_endpoint) {
             $notifyBy[] = 'slack';
         }
 
-
+        if ($target_type==\App\Models\User::class) {
             $notifyBy[] = 'mail';
+        }
+
 
 
         return $notifyBy;

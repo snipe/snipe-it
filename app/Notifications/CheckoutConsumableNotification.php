@@ -50,12 +50,14 @@ class CheckoutConsumableNotification extends Notification
      */
     public function via($notifiable)
     {
+        $target_type = get_class($this->target);
         $notifyBy = [];
         if (Setting::getSettings()->slack_endpoint) {
             $notifyBy[] = 'slack';
         }
 
-        if (($this->item->requireAcceptance() == '1') || ($this->item->getEula()))
+        // Make sure the target is a user and that its appropriate to send them an email
+        if (($target_type==\App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula()))
         {
             $notifyBy[] = 'mail';
         }
