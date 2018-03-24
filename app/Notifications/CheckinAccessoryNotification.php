@@ -84,7 +84,7 @@ class CheckinAccessoryNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content('Asset Checked In')
+            ->content('Accessory Checked In')
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
