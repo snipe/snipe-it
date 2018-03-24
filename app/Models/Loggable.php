@@ -6,9 +6,14 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\CheckoutRequest;
 use App\Models\User;
-use App\Notifications\CheckinNotification;
+use App\Notifications\CheckinAssetNotification;
 use App\Notifications\AuditNotification;
-use App\Notifications\CheckoutNotification;
+use App\Notifications\CheckoutAssetNotification;
+use App\Notifications\CheckoutAccessoryNotification;
+use App\Notifications\CheckinAccessoryNotification;
+use App\Notifications\CheckoutConsumableNotification;
+use App\Notifications\CheckoutLicenseNotification;
+use App\Notifications\CheckinLicenseNotification;
 use Illuminate\Support\Facades\Auth;
 
 trait Loggable
@@ -32,6 +37,7 @@ trait Loggable
      */
     public function logCheckout($note, $target /* What are we checking out to? */)
     {
+        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
         $log->user_id = Auth::user()->id;
@@ -66,13 +72,22 @@ trait Loggable
             'log_id' => $log->id
         ];
 
-        if ($settings = Setting::getSettings()) {
-           // $settings->notify(new CheckoutNotification($params));
+
+        // Send to the admin, if settings dictate
+        if (static::class == Asset::class) {
+            $settings->notify(new CheckoutAssetNotification($params));
+            $target->notify(new CheckoutAssetNotification($params));
+        } elseif (static::class == Accessory::class) {
+            $settings->notify(new CheckoutAccessoryNotification($params));
+            $target->notify(new CheckoutAccessoryNotification($params));
+        } elseif (static::class == Consumable::class) {
+            $settings->notify(new CheckoutConsumableNotification($params));
+            $target->notify(new CheckoutConsumableNotification($params));
+        } elseif (static::class == LicenseSeat::class) {
+            $settings->notify(new CheckoutLicenseNotification($params));
+            $target->notify(new CheckoutLicenseNotification($params));
         }
 
-        if (method_exists($target, 'notify')) {
-            $target->notify(new CheckoutNotification($params));
-        }
 
         return $log;
     }
@@ -103,6 +118,7 @@ trait Loggable
         $log = new Actionlog;
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
+
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
@@ -110,17 +126,31 @@ trait Loggable
             $log->item_type = static::class;
             $log->item_id = $this->id;
         }
+
+
         $log->location_id = null;
         $log->note = $note;
         $log->user_id = Auth::user()->id;
         $log->logaction('checkin from');
 
         $params = [
+            'target' => $target,
             'item' => $log->item,
             'admin' => $log->user,
-            'note' => $note
+            'note' => $note,
         ];
-        Setting::getSettings()->notify(new CheckinNotification($params));
+
+
+        if (static::class == Asset::class) {
+            Setting::getSettings()->notify(new CheckinAssetNotification($params));
+            $target->notify(new CheckinAssetNotification($params));
+        } elseif (static::class == Accessory::class) {
+            Setting::getSettings()->notify(new CheckinAccessoryNotification($params));
+            $target->notify(new CheckinAccessoryNotification($params));
+        
+        }
+
+
 
         return $log;
     }

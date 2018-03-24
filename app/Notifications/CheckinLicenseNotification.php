@@ -11,7 +11,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
-class CheckoutLicenseNotification extends Notification
+class CheckinLicenseNotification extends Notification
 {
     use Queueable;
     /**
@@ -54,7 +54,7 @@ class CheckoutLicenseNotification extends Notification
         }
 
 
-            $notifyBy[] = 'mail';
+        $notifyBy[] = 'mail';
 
 
         return $notifyBy;
@@ -78,7 +78,7 @@ class CheckoutLicenseNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content(':arrow_up: ' . class_basename(get_class($item)) . " Checked Out")
+            ->content(':arrow_up: ' . class_basename(get_class($item)) . " Checked In")
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)
@@ -94,14 +94,14 @@ class CheckoutLicenseNotification extends Notification
     public function toMail($notifiable)
     {
 
-        return (new MailMessage)->markdown('notifications.markdown.checkout-license',
+        return (new MailMessage)->markdown('notifications.markdown.checkin-license',
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
                 'target'        => $this->target,
             ])
-            ->subject(trans('mail.Confirm_license_delivery'));
+            ->subject('License checked in');
 
     }
 
