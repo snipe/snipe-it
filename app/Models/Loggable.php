@@ -48,6 +48,7 @@ trait Loggable
             return;
         }
         $log->target_type = get_class($target);
+        \Log::debug($log->target_type);
         $log->target_id = $target->id;
 
         $target_class = get_class($target);
@@ -83,27 +84,37 @@ trait Loggable
                 $recipient->notify(new CheckoutAssetNotification($params));
             }
 
-            $target->notify(new CheckoutAssetNotification($params));
+            if ($log->target_type == User::class) {
+                $target->notify(new CheckoutAssetNotification($params));
+            }
+
         } elseif (static::class == Accessory::class) {
 
             if ($settings->admin_cc_email!='') {
                 $recipient->notify(new CheckoutAccessoryNotification($params));
             }
 
-            $target->notify(new CheckoutAccessoryNotification($params));
+            if ($log->target_type == User::class) {
+                $target->notify(new CheckoutAccessoryNotification($params));
+            }
+
         } elseif (static::class == Consumable::class) {
 
             if ($settings->admin_cc_email!='') {
                 $recipient->notify(new CheckoutConsumableNotification($params));
             }
 
-            $target->notify(new CheckoutConsumableNotification($params));
+            if ($log->target_type == User::class) {
+                $target->notify(new CheckoutConsumableNotification($params));
+            }
+
         } elseif (static::class == LicenseSeat::class) {
             if ($settings->admin_cc_email!='') {
                 $recipient->notify(new CheckoutLicenseNotification($params));
             }
-            
-            $target->notify(new CheckoutLicenseNotification($params));
+            if ($log->target_type == User::class) {
+                $target->notify(new CheckoutLicenseNotification($params));
+            }
         }
 
 
