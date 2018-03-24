@@ -15,23 +15,9 @@
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
 @endif
-@if (isset($item->model))
-| **{{ trans('general.asset_model') }}** | {{ $item->model->name }} |
-@endif
 @if (isset($item->model_no))
 | **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
 @endif
-@if (isset($item->serial))
-| **{{ trans('mail.serial') }}** | {{ $item->serial }} |
-@endif
-@if (isset($last_checkout))
-| **{{ trans('mail.checkout_date') }}** | {{ $last_checkout }} |
-@endif
-@foreach($fields as $field)
-@if (($item->{ $field->db_column_name() }!='') && ($field->show_in_email) && ($field->field_encrypted=='0'))
-| **{{ $field->name }}** | {{ $item->{ $field->db_column_name() } }} |
-@endif
-@endforeach
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
 @endif

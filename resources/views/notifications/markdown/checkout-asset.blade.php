@@ -30,9 +30,6 @@
 @if (isset($expected_checkin))
 | **{{ trans('mail.expecting_checkin_date') }}** | {{ $expected_checkin }} |
 @endif
-@if ($note)
-| **{{ trans('mail.additional_notes') }}** | {{ $note }} |
-@endif
 @foreach($fields as $field)
 @if (($item->{ $field->db_column_name() }!='') && ($field->show_in_email) && ($field->field_encrypted=='0'))
 | **{{ $field->name }}** | {{ $item->{ $field->db_column_name() } }} |
@@ -40,6 +37,9 @@
 @endforeach
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
+@endif
+@if ($note)
+| **{{ trans('mail.additional_notes') }}** | {{ $note }} |
 @endif
 @endcomponent
 
