@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use App\Notifications\CheckoutConsumableNotification;
 
 class Consumable extends SnipeModel
 {
@@ -18,6 +19,11 @@ class Consumable extends SnipeModel
         'requestable' => 'boolean'
     ];
 
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutConsumableNotification::class;
+    public static $checkinClass = null;
 
 
     /**

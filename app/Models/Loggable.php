@@ -78,29 +78,12 @@ trait Loggable
         $recipient = new \App\Models\Recipients\AdminRecipient();
 
 
-        $checkoutClass = null;
-
-        switch(static::class) {
-            case Asset::class:
-                $checkoutClass = CheckoutAssetNotification::class;
-                break;
-            case Accessory::class:
-                $checkoutClass = CheckoutAccessoryNotification::class;
-                break;
-            case Consumable::class:
-                $checkoutClass = CheckoutConsumableNotification::class;
-                break;
-            case LicenseSeat::class:
-                $checkoutClass = CheckoutLicenseNotification::class;
-                break;
-        }
-
         if (method_exists($target, 'notify')) {
-            $target->notify(new $checkoutClass($params));
+            $target->notify(new static::$checkoutClass($params));
         }
 
         if ($settings->admin_cc_email!='') {
-            $recipient->notify(new $checkoutClass($params));
+            $recipient->notify(new static::$checkoutClass($params));
         }
 
         return $log;
@@ -162,29 +145,13 @@ trait Loggable
 
         $checkoutClass = null;
 
-        switch(static::class) {
-            case Asset::class:
-                $checkoutClass = CheckinAssetNotification::class;
-                break;
-            case Accessory::class:
-                $checkoutClass = CheckinAccessoryNotification::class;
-                break;
-            case LicenseSeat::class:
-                $checkoutClass = CheckinLicenseNotification::class;
-                break;
-        }
-
         if (method_exists($target, 'notify')) {
-            $target->notify(new $checkoutClass($params));
+            $target->notify(new static::$checkinClass($params));
         }
 
         if ($settings->admin_cc_email!='') {
-            $recipient->notify(new $checkoutClass($params));
+            $recipient->notify(new static::$checkinClass($params));
         }
-
-
-
-
 
         return $log;
     }

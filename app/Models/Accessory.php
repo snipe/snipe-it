@@ -4,6 +4,8 @@ namespace App\Models;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use App\Notifications\CheckinAccessoryNotification;
+use App\Notifications\CheckoutAccessoryNotification;
 
 /**
  * Model for Accessories.
@@ -22,6 +24,13 @@ class Accessory extends SnipeModel
     protected $casts = [
         'requestable' => 'boolean'
     ];
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutAccessoryNotification::class;
+    public static $checkinClass = CheckinAccessoryNotification::class;
+
 
     /**
     * Accessory validation rules
@@ -66,6 +75,8 @@ class Accessory extends SnipeModel
         'qty',
         'requestable'
     ];
+
+
 
 
     public function supplier()
