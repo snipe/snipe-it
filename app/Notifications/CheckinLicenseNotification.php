@@ -29,7 +29,6 @@ class CheckinLicenseNotification extends Notification
         $this->target = $params['target'];
         $this->item = $params['item'];
         $this->admin = $params['admin'];
-        $this->log_id = $params['log_id'];
         $this->note = '';
 
         if (array_key_exists('note', $params)) {
@@ -78,7 +77,7 @@ class CheckinLicenseNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content(':arrow_up: ' . class_basename(get_class($item)) . " Checked In")
+            ->content(':arrow_up: :floppy_disk: ' . class_basename(get_class($item)) . " Checked In")
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

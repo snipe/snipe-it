@@ -78,7 +78,7 @@ class CheckinAccessoryNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content(':arrow_up: ' . class_basename(get_class($item)) . " Checked In")
+            ->content(':arrow_up: :keyboard: ' . class_basename(get_class($item)) . " Checked In")
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)

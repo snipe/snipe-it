@@ -16,6 +16,7 @@ use App\Notifications\CheckoutLicenseNotification;
 use App\Notifications\CheckinLicenseNotification;
 use Illuminate\Support\Facades\Auth;
 
+
 trait Loggable
 {
 
@@ -72,19 +73,36 @@ trait Loggable
             'log_id' => $log->id
         ];
 
+        // Get the admin email address we should be sending notifications to, if any
+        $recipient = new \App\Models\Recipients\AdminRecipient();
 
         // Send to the admin, if settings dictate
         if (static::class == Asset::class) {
-            $settings->notify(new CheckoutAssetNotification($params));
+
+            if ($settings->admin_cc_email!='') {
+                $recipient->notify(new CheckoutAssetNotification($params));
+            }
+
             $target->notify(new CheckoutAssetNotification($params));
         } elseif (static::class == Accessory::class) {
-            $settings->notify(new CheckoutAccessoryNotification($params));
+
+            if ($settings->admin_cc_email!='') {
+                $recipient->notify(new CheckoutAccessoryNotification($params));
+            }
+
             $target->notify(new CheckoutAccessoryNotification($params));
         } elseif (static::class == Consumable::class) {
-            $settings->notify(new CheckoutConsumableNotification($params));
+
+            if ($settings->admin_cc_email!='') {
+                $recipient->notify(new CheckoutConsumableNotification($params));
+            }
+
             $target->notify(new CheckoutConsumableNotification($params));
         } elseif (static::class == LicenseSeat::class) {
-            $settings->notify(new CheckoutLicenseNotification($params));
+            if ($settings->admin_cc_email!='') {
+                $recipient->notify(new CheckoutLicenseNotification($params));
+            }
+            
             $target->notify(new CheckoutLicenseNotification($params));
         }
 
@@ -115,9 +133,16 @@ trait Loggable
      */
     public function logCheckin($target, $note)
     {
+        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log->target_type = get_class($target);
-        $log->target_id = $target->id;
+
+        if ($target) {
+            $log->target_id = $target->id;
+        } else {
+            $target = null;
+        }
+
 
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
@@ -140,14 +165,30 @@ trait Loggable
             'note' => $note,
         ];
 
+        // Get the admin email address we should be sending notifications to, if any
+        $recipient = new \App\Models\Recipients\AdminRecipient();
 
         if (static::class == Asset::class) {
-            Setting::getSettings()->notify(new CheckinAssetNotification($params));
+            if ($settings->admin_cc_email!='') {
+                $recipient->notify(new CheckinAssetNotification($params));
+            }
+
             $target->notify(new CheckinAssetNotification($params));
+
         } elseif (static::class == Accessory::class) {
-            Setting::getSettings()->notify(new CheckinAccessoryNotification($params));
+            if ($settings->admin_cc_email!='') {
+                $recipient->notify(new CheckinAccessoryNotification($params));
+            }
+
             $target->notify(new CheckinAccessoryNotification($params));
-        
+
+        } elseif (static::class == LicenseSeat::class) {
+            if ($settings->admin_cc_email!='') {
+                $recipient->notify(new CheckinLicenseNotification($params));
+            }
+
+            $target->notify(new CheckinLicenseNotification($params));
+
         }
 
 

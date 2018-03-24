@@ -578,8 +578,11 @@ class SettingsController extends Controller
 
         $alert_email = rtrim($request->input('alert_email'), ',');
         $alert_email = trim($alert_email);
+        $admin_cc_email = rtrim($request->input('admin_cc_email'), ',');
+        $admin_cc_email = trim($admin_cc_email);
 
         $setting->alert_email = $alert_email;
+        $setting->admin_cc_email = $admin_cc_email;
         $setting->alerts_enabled = $request->input('alerts_enabled', '0');
         $setting->alert_interval = $request->input('alert_interval');
         $setting->alert_threshold = $request->input('alert_threshold');

@@ -75,7 +75,7 @@ class CheckinAssetNotification extends Notification
         ];
 
         return (new SlackMessage)
-            ->content(':arrow_down: ' . class_basename(get_class($item)) . " Checked In")
+            ->content(':arrow_down: :computer: ' . class_basename(get_class($item)) . " Checked In")
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)
