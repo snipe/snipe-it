@@ -11,7 +11,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
-class CheckoutNotification extends Notification
+class CheckoutAssetNotification extends Notification
 {
     use Queueable;
     /**
@@ -31,9 +31,23 @@ class CheckoutNotification extends Notification
         $this->admin = $params['admin'];
         $this->log_id = $params['log_id'];
         $this->note = '';
+        $this->last_checkout = '';
+        $this->expected_checkin = '';
+
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
         }
+
+        if ($this->item->last_checkout) {
+            $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date',
+                false);
+        }
+
+        if ($this->item->expected_checkin) {
+            $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
+                false);
+        }
+
 
     }
 
@@ -49,22 +63,17 @@ class CheckoutNotification extends Notification
         if (Setting::getSettings()->slack_endpoint) {
             $notifyBy[] = 'slack';
         }
-        $item = $this->item;
 
-        if (class_basename(get_class($item))=='Asset') {
-            if ((method_exists($item, 'requireAcceptance') && ($item->requireAcceptance() == '1'))
-                || (method_exists($item, 'getEula') && ($item->getEula()))
-            ) {
-                $notifyBy[] = 'mail';
-            }
+        if (($this->item->requireAcceptance() == '1') || ($this->item->getEula()))
+        {
+            $notifyBy[] = 'mail';
         }
+
         return $notifyBy;
     }
 
     public function toSlack($notifiable)
     {
-
-        \Log::debug('Trigger slack ');
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
@@ -72,8 +81,12 @@ class CheckoutNotification extends Notification
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>'
+            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
+
+        if (($this->expected_checkin) && ($this->expected_checkin!='')) {
+            $fields['Expected Checkin'] = $this->expected_checkin;
+        }
 
 
 
@@ -97,41 +110,34 @@ class CheckoutNotification extends Notification
 
         $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
         $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
-        $last_checkout = ($this->item->last_checkout) ? \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date', false) : '';
-        $expected_checkin = ($this->item->expected_checkin) ? \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date', false) : '';
 
-        if (class_basename(get_class($this->item))=='Asset') {
+        $fields = [];
 
-            $fields = [];
-
-            // Check if the item has custom fields associated with it
-            if (($this->item->model) && ($this->item->model->fieldset)) {
-                $fields = $this->item->model->fieldset->fields;
-            }
-
-
-            if ((method_exists($this->item, 'requireAcceptance') && ($this->item->requireAcceptance() == '1'))
-                || (method_exists($this->item, 'getEula') && ($this->item->getEula()))
-            ) {
-
-                return (new MailMessage)->markdown('notifications.markdown.checkout',
-                    [
-                        'item'          => $this->item,
-                        'admin'         => $this->admin,
-                        'note'          => $this->note,
-                        'log_id'        => $this->note,
-                        'target'        => $this->target,
-                        'fields'        => $fields,
-                        'eula'          => $eula,
-                        'req_accept'    => $req_accept,
-                        'accept_url'    =>  url('/').'/account/accept-asset/'.$this->log_id,
-                        'last_checkout' => $last_checkout,
-                        'expected_checkin'  => $expected_checkin,
-                    ])
-                    ->subject(trans('mail.Confirm_asset_delivery'));
-
-            }
+        // Check if the item has custom fields associated with it
+        if (($this->item->model) && ($this->item->model->fieldset)) {
+            $fields = $this->item->model->fieldset->fields;
         }
+
+
+
+        return (new MailMessage)->markdown('notifications.markdown.checkout-asset',
+            [
+                'item'          => $this->item,
+                'admin'         => $this->admin,
+                'note'          => $this->note,
+                'log_id'        => $this->note,
+                'target'        => $this->target,
+                'fields'        => $fields,
+                'eula'          => $eula,
+                'req_accept'    => $req_accept,
+                'accept_url'    =>  url('/').'/account/accept-asset/'.$this->log_id,
+                'last_checkout' => $this->last_checkout,
+                'expected_checkin'  => $this->expected_checkin,
+            ])
+            ->subject(trans('mail.Confirm_asset_delivery'));
+
+
+
 
 
 

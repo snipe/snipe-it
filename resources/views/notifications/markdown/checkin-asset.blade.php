@@ -4,7 +4,7 @@
 {{ trans('mail.new_item_checked') }}
 
 @if ($item->getImageUrl())
-<img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;">
+<center><img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
 @endif
 
 @component('mail::table')

@@ -4,7 +4,7 @@
 {{ trans('mail.new_item_checked') }}
 
 @if (($snipeSettings->show_images_in_email =='1') && $item->getImageUrl())
-<img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;">
+<center><img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
 @endif
 
 @component('mail::table')

@@ -5,7 +5,7 @@ use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\User;
-use App\Notifications\CheckoutNotification;
+use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;

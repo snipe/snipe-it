@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CheckinNotification extends Notification
+class CheckinAssetNotification extends Notification
 {
     use Queueable;
     /**
@@ -57,27 +57,24 @@ class CheckinNotification extends Notification
 
     public function toSlack($notifiable)
     {
-        \Log::debug('Checkin slack');
+
 
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
 
+
         $fields = [
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-
+            trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+            trans('general.status') => $item->assetstatus->name,
+            trans('general.location') => $item->location->name,
         ];
-
-        $fields[] = ['Status' => $item->assetstatus->name];
-
 
         return (new SlackMessage)
             ->content(':arrow_down: ' . class_basename(get_class($item)) . " Checked In")
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
-                    ->fields([
-                        trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-                    ])
+                    ->fields($fields)
                     ->content($note);
             });
 
