@@ -66,7 +66,7 @@ class CheckoutLicenseNotification extends Notification
     }
 
     public function toSlack($notifiable)
-    {1
+    {
 
         $target = $this->target;
         $admin = $this->admin;
