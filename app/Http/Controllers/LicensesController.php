@@ -419,6 +419,8 @@ class LicensesController extends Controller
         if (!$return_to) {
             $return_to = Asset::find($licenseSeat->asset_id);
         }
+
+        \Log::debug($licenseSeat->assigned_to);
         // Update the asset data
         $licenseSeat->assigned_to                   = null;
         $licenseSeat->asset_id                      = null;

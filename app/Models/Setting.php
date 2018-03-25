@@ -17,6 +17,7 @@ class Setting extends Model
           'qr_text'         => 'max:31|nullable',
           'logo_img'        => 'mimes:jpeg,bmp,png,gif',
           'alert_email'   => 'email_array|nullable',
+          'admin_cc_email'   => 'email|nullable',
           'default_currency'   => 'required',
           'locale'   => 'required',
           'slack_endpoint'   => 'url|required_with:slack_channel|nullable',

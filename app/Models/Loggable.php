@@ -6,10 +6,16 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\CheckoutRequest;
 use App\Models\User;
-use App\Notifications\CheckinNotification;
+use App\Notifications\CheckinAssetNotification;
 use App\Notifications\AuditNotification;
-use App\Notifications\CheckoutNotification;
+use App\Notifications\CheckoutAssetNotification;
+use App\Notifications\CheckoutAccessoryNotification;
+use App\Notifications\CheckinAccessoryNotification;
+use App\Notifications\CheckoutConsumableNotification;
+use App\Notifications\CheckoutLicenseNotification;
+use App\Notifications\CheckinLicenseNotification;
 use Illuminate\Support\Facades\Auth;
+
 
 trait Loggable
 {
@@ -32,6 +38,7 @@ trait Loggable
      */
     public function logCheckout($note, $target /* What are we checking out to? */)
     {
+        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
         $log->user_id = Auth::user()->id;
@@ -43,13 +50,11 @@ trait Loggable
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
 
-        $target_class = get_class($target);
 
         // Figure out what the target is
-        if ($target_class == Location::class) {
-            // We can checkout to a location
+        if ($log->target_type == Location::class) {
             $log->location_id = $target->id;
-        } elseif ($target_class== Asset::class) {
+        } elseif ($log->target_type == Asset::class) {
             $log->location_id = $target->rtd_location_id;
         } else {
             $log->location_id = $target->location_id;
@@ -60,18 +65,25 @@ trait Loggable
 
         $params = [
             'item' => $log->item,
+            'target_type' => $log->target_type,
             'target' => $target,
             'admin' => $log->user,
             'note' => $note,
-            'log_id' => $log->id
+            'log_id' => $log->id,
+            'settings' => $settings,
         ];
 
-        if ($settings = Setting::getSettings()) {
-           // $settings->notify(new CheckoutNotification($params));
-        }
+
+        // Send to the admin, if settings dictate
+        $recipient = new \App\Models\Recipients\AdminRecipient();
+
 
         if (method_exists($target, 'notify')) {
-            $target->notify(new CheckoutNotification($params));
+            $target->notify(new static::$checkoutClass($params));
+        }
+
+        if ($settings->admin_cc_email!='') {
+            $recipient->notify(new static::$checkoutClass($params));
         }
 
         return $log;
@@ -100,9 +112,11 @@ trait Loggable
      */
     public function logCheckin($target, $note)
     {
+        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
+
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
@@ -110,17 +124,34 @@ trait Loggable
             $log->item_type = static::class;
             $log->item_id = $this->id;
         }
+
+
         $log->location_id = null;
         $log->note = $note;
         $log->user_id = Auth::user()->id;
         $log->logaction('checkin from');
 
         $params = [
+            'target' => $target,
             'item' => $log->item,
             'admin' => $log->user,
-            'note' => $note
+            'note' => $note,
+            'target_type' => $log->target_type,
+            'settings' => $settings,
         ];
-        Setting::getSettings()->notify(new CheckinNotification($params));
+
+        // Send to the admin, if settings dictate
+        $recipient = new \App\Models\Recipients\AdminRecipient();
+
+        $checkoutClass = null;
+
+        if (method_exists($target, 'notify')) {
+            $target->notify(new static::$checkinClass($params));
+        }
+
+        if ($settings->admin_cc_email!='') {
+            $recipient->notify(new static::$checkinClass($params));
+        }
 
         return $log;
     }

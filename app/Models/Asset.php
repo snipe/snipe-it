@@ -13,6 +13,8 @@ use Log;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Notifications\Notifiable;
 use DB;
+use App\Notifications\CheckinAssetNotification;
+use App\Notifications\CheckoutAssetNotification;
 
 /**
  * Model for Assets.
@@ -27,20 +29,28 @@ class Asset extends Depreciable
     const LOCATION = 'location';
     const ASSET = 'asset';
     const USER = 'user';
-  /**
-  * The database table used by the model.
-  *
-  * @var string
-  */
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutAssetNotification::class;
+    public static $checkinClass = CheckinAssetNotification::class;
+
+
+    /**
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'assets';
 
-  /**
-  * Whether the model should inject it's identifier to the unique
-  * validation rules before attempting validation. If this property
-  * is not set in the model it will default to true.
-  *
-  * @var boolean
-  */
+    /**
+    * Whether the model should inject it's identifier to the unique
+    * validation rules before attempting validation. If this property
+    * is not set in the model it will default to true.
+    *
+    * @var boolean
+    */
     protected $injectUniqueIdentifier = true;
 
     // We set these as protected dates so that they will be easily accessible via Carbon

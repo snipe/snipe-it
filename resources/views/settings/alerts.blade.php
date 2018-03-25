@@ -79,6 +79,22 @@
                             </div>
                         </div>
 
+
+                        <!-- Admin CC Email -->
+                        <div class="form-group {{ $errors->has('admin_cc_email') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('admin_cc_email', trans('admin/settings/general.admin_cc_email')) }}
+                            </div>
+                            <div class="col-md-7">
+                                {{ Form::text('admin_cc_email', Input::old('admin_cc_email', $setting->admin_cc_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
+                                {!! $errors->first('admin_cc_email', '<span class="alert-msg">:message</span><br>') !!}
+
+                                <p class="help-block">{{ trans('admin/settings/general.admin_cc_email_help') }}</p>
+
+
+                            </div>
+                        </div>
+
                         <!-- Alert interval -->
                         <div class="form-group {{ $errors->has('alert_interval') ? 'error' : '' }}">
                             <div class="col-md-3">
