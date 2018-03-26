@@ -3,7 +3,7 @@
     <head>
       <title>
         @section('title')
-         Snipe-IT Setup
+         Snipe-IT Setup Hello
         @show
       </title>
         <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
