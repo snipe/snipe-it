@@ -22,6 +22,7 @@
       <div class="box-body">
 
           <table
+              data-columns="{{ \App\Presenters\AssetMaintenancesPresenter::dataTableLayout() }}"
               data-cookie-id-table="maintenancesTable"
               data-pagination="true"
               data-search="true"
@@ -38,27 +39,6 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
 
-          <thead>
-            <tr>
-              <th data-sortable="true" data-field="id" data-visible="true">{{ trans('general.id') }}</th>
-               <th data-field="company" data-sortable="false" data-visible="true">{{ trans('admin/companies/table.title') }}</th>
-              <th data-sortable="true" data-visible="false" data-field="asset_name" data-formatter="assetNameLinkFormatter">{{ trans('admin/asset_maintenances/table.asset_name') }}</th>
-                <th data-field="asset_tag" data-sortable="true" data-visible="true" data-formatter="assetTagLinkFormatter">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                <th data-sortable="false" data-visible="true" data-field="location" data-formatter="locationsLinkObjFormatter">{{ trans('admin/hardware/table.location') }}</th>
-                <th data-sortable="false" data-visible="true" data-field="supplier" data-formatter="suppliersLinkObjFormatter">{{ trans('general.supplier') }}</th>
-              <th data-searchable="true" data-visible="true" data-sortable="true" data-field="asset_maintenance_type">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-              <th data-searchable="true" data-visible="true" data-sortable="true" data-field="title">{{ trans('admin/asset_maintenances/form.title') }}</th>
-              <th data-searchable="true" data-visible="true" data-sortable="true" data-field="start_date" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-              <th data-searchable="true" data-visible="true"  data-sortable="true" data-field="completion_date" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-              <th class="text-right" data-searchable="true" data-visible="true"  data-sortable="true" data-field="asset_maintenance_time" data-footer-formatter="sumFormatter">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
-              <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right" data-footer-formatter="sumFormatter">{{ trans('admin/asset_maintenances/form.cost') }}</th>
-              <th data-searchable="true" data-visible="true"  data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-              <th data-searchable="true" data-visible="true" data-sortable="true" data-field="notes" data-formatter="notesFormatter">{{ trans('admin/asset_maintenances/form.notes') }}</th>
-              @can('update', \App\Models\Asset::class)
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" data-formatter="maintenanceActions">{{ trans('table.actions') }}</th>
-              @endcan
-            </tr>
-          </thead>
         </table>
 
       </div>
