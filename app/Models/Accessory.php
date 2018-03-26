@@ -4,6 +4,8 @@ namespace App\Models;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use App\Notifications\CheckinAccessoryNotification;
+use App\Notifications\CheckoutAccessoryNotification;
 
 /**
  * Model for Accessories.
@@ -22,6 +24,13 @@ class Accessory extends SnipeModel
     protected $casts = [
         'requestable' => 'boolean'
     ];
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutAccessoryNotification::class;
+    public static $checkinClass = CheckinAccessoryNotification::class;
+
 
     /**
     * Accessory validation rules
@@ -68,6 +77,8 @@ class Accessory extends SnipeModel
     ];
 
 
+
+
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
@@ -106,6 +117,13 @@ class Accessory extends SnipeModel
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
+    public function getImageUrl() {
+        if ($this->image) {
+            return url('/').'/uploads/accessories/'.$this->image;
+        }
+        return false;
+
+    }
 
     public function users()
     {

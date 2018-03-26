@@ -179,7 +179,7 @@ class ConsumablesController extends Controller
         foreach ($consumable->consumableAssignments as $consumable_assignment) {
             $rows[] = [
                 'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
-                'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
+                'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
                 'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
             ];
         }

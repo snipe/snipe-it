@@ -7,13 +7,11 @@ use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\User;
-use App\Notifications\CheckoutNotification;
 use Auth;
 use Config;
 use DB;
 use Input;
 use Lang;
-use Mail;
 use Redirect;
 use Slack;
 use Str;
@@ -279,14 +277,6 @@ class ConsumablesController extends Controller
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $consumable->requireAcceptance();
 
-        if ((($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) && $user->email!='') {
-
-            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject(trans('mail.Confirm_consumable_delivery'));
-            });
-        }
 
       // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
