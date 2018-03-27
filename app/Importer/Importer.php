@@ -116,6 +116,14 @@ abstract class Importer
             $nameLookup[$field['name']] = $field;
             return $nameLookup;
         });
+        // Remove any custom fields that do not exist in the header row.  This prevents nulling out values that shouldn't exist.
+        // In detail, we compare the lower case name of custom fields (indexed by name) to the keys in the header row.  This
+        // results in an array with only custom fields that are in the file.
+        $this->customFields = array_intersect_key(
+            array_change_key_case($this->customFields),
+            array_change_key_case(array_flip($headerRow))
+        );
+
 
         DB::transaction(function () use (&$results) {
             Model::unguard();

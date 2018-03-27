@@ -88,6 +88,7 @@ EOT;
 
         $this->initializeCustomFields();
         $this->import(new AssetImporter($csv));
+
         $updatedCSV = <<<'EOT'
 item Name,Category,Model name,Manufacturer,Model Number,Serial,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier
 A new name,some other category,Another Model,Linkbridge 32,356,67433477,970882174-8,New Location,I have no notes,2018-04-05,25.59,Another Company,Ready To Go,18,Not Creative
