@@ -31,9 +31,8 @@ class AssetImporter extends ItemImporter
                     $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
                     $this->log('Custom Field '. $customField->name.': '.$customFieldValue);
                 } else {
-                    // This removes custom fields when updating if the column doesn't exist in file.
-                    // Commented out becausee not sure if it's needed anywhere.
-                    // $this->item['custom_fields'][$customField->db_column_name()] = '';
+                    // Clear out previous data.
+                    $this->item['custom_fields'][$customField->db_column_name()] = null;
                 }
             }
         }
@@ -106,6 +105,7 @@ class AssetImporter extends ItemImporter
                 $asset->{$custom_field} = $val;
             }
         }
+
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         // $asset->unsetEventDispatcher();
         if ($asset->save()) {
