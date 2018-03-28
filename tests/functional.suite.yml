@@ -12,14 +12,6 @@ modules:
         - Laravel5:
             environment_file: .env.tests
             cleanup: true
-        - Db:
-            dsn: 'mysql:host=localhost;dbname=snipeittests'
-            user: 'snipeit_laravel'
-            password: ''
-            dump: tests/_data/dump.sql
-            populate: true
-            populator: 'mysql -u snipeit_laravel snipeittests < tests/_data/dump.sql'
-            cleanup: false
         - REST:
             depends: Laravel5
 groups:
