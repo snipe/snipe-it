@@ -73,16 +73,16 @@ trait Loggable
             'settings' => $settings,
         ];
 
-
-        // Send to the admin, if settings dictate
-        $recipient = new \App\Models\Recipients\AdminRecipient();
-
+        $checkoutClass = null;
 
         if (method_exists($target, 'notify')) {
             $target->notify(new static::$checkoutClass($params));
         }
 
-        if ($settings->admin_cc_email!='') {
+        // Send to the admin, if settings dictate
+        $recipient = new \App\Models\Recipients\AdminRecipient();
+
+        if (($settings->admin_cc_email!='') && (static::$checkoutClass!='')) {
             $recipient->notify(new static::$checkoutClass($params));
         }
 
@@ -140,8 +140,6 @@ trait Loggable
             'settings' => $settings,
         ];
 
-        // Send to the admin, if settings dictate
-        $recipient = new \App\Models\Recipients\AdminRecipient();
 
         $checkoutClass = null;
 
@@ -149,7 +147,10 @@ trait Loggable
             $target->notify(new static::$checkinClass($params));
         }
 
-        if ($settings->admin_cc_email!='') {
+        // Send to the admin, if settings dictate
+        $recipient = new \App\Models\Recipients\AdminRecipient();
+
+        if (($settings->admin_cc_email!='') && (static::$checkoutClass!='')) {
             $recipient->notify(new static::$checkinClass($params));
         }
 
