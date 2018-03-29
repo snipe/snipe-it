@@ -71,6 +71,11 @@ class AssetMaintenancesPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/asset_maintenances/form.asset_maintenance_type'),
             ], [
+                "field" => "title",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/asset_maintenances/form.title'),
+            ], [
                 "field" => "created_at",
                 "searchable" => true,
                 "sortable" => true,
