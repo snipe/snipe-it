@@ -25,7 +25,7 @@
           @endcan
       @endif
     @endif
-      @can('edit', \App\Models\Asset::class)
+      @can('update', \App\Models\Asset::class)
     <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
       @endcan
       @can('create', \App\Models\Asset::class)
