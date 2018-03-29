@@ -1307,10 +1307,14 @@ class AssetsController extends Controller
 
     public function getRequestedIndex($id = null)
     {
+        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->whereNull('canceled_at')->with('user', 'requestedItem');
+
         if ($id) {
-            $requestedItems = CheckoutRequest::where('user_id', $id)->with('user', 'requestedItem')->get();
+            $requestedItems->where('user_id', $id)->get();
         }
-        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
+
+        $requestedItems = $requestedItems->orderBy('created_at', 'desc')->get();
+
         return view('hardware/requested', compact('requestedItems'));
     }
 
