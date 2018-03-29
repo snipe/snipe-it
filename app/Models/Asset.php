@@ -94,6 +94,7 @@ class Asset extends Depreciable
         'assigned_type',
         'company_id',
         'image',
+        'location_id',
         'model_id',
         'name',
         'notes',
