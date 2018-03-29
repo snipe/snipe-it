@@ -19,8 +19,7 @@ trait Requestable
 
     public function isRequestedBy(User $user)
     {
-        $requests = $this->requests->where('user_id', $user->id);
-
+        $requests = $this->requests->where('canceled_at', NULL)->where('user_id', $user->id);
         return $requests->count() > 0;
     }
 
@@ -38,8 +37,13 @@ trait Requestable
         );
     }
 
-    public function cancelRequest()
+    public function deleteRequest()
     {
         $this->requests()->where('user_id', Auth::id())->delete();
+    }
+
+    public function cancelRequest()
+    {
+        $this->requests()->where('user_id', Auth::id())->update(['canceled_at' => \Carbon\Carbon::now()]);
     }
 }
