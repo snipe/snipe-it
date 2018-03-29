@@ -82,18 +82,14 @@ class RequestAssetNotification extends Notification
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
         $fields = [
-            'By' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+            'QTY' => '1',
         ];
-
-        if (($this->expected_checkin) && ($this->expected_checkin!='')) {
-            $fields['Expected Checkin'] = $this->expected_checkin;
-        }
 
         return (new SlackMessage)
             ->content(trans('mail.Item_Requested'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $fields) {
-                $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
+                $attachment->title('Requested by '.htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)
                     ->content($note);
             });
