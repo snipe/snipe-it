@@ -19,6 +19,14 @@ class Component extends SnipeModel
 
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'components';
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = null;
+    public static $checkinClass = null;
+
+    
     /**
     * Category validation rules
     */
