@@ -141,7 +141,7 @@ trait Loggable
         ];
 
 
-        $checkoutClass = null;
+        $checkinClass = null;
 
         if (method_exists($target, 'notify')) {
             $target->notify(new static::$checkinClass($params));
@@ -150,7 +150,7 @@ trait Loggable
         // Send to the admin, if settings dictate
         $recipient = new \App\Models\Recipients\AdminRecipient();
 
-        if (($settings->admin_cc_email!='') && (static::$checkoutClass!='')) {
+        if (($settings->admin_cc_email!='') && (static::$checkinClass!='')) {
             $recipient->notify(new static::$checkinClass($params));
         }
 
