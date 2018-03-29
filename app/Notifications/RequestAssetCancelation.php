@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class RequestAssetNotification extends Notification
+class RequestAssetCancelationNotification extends Notification
 {
     use Queueable;
     /**
@@ -90,7 +90,7 @@ class RequestAssetNotification extends Notification
         }
 
         return (new SlackMessage)
-            ->content(trans('mail.Item_Requested'))
+            ->content( trans('mail.a_user_canceled'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
@@ -123,9 +123,9 @@ class RequestAssetNotification extends Notification
                 'fields'        => $fields,
                 'last_checkout' => $this->last_checkout,
                 'expected_checkin'  => $this->expected_checkin,
-                'intro_text'        => trans('mail.a_user_requested'),
+                'intro_text'        => trans('mail.a_user_canceled'),
             ])
-            ->subject(trans('mail.Item_Requested'));
+            ->subject(trans('Item Request Canceled'));
 
 
         return $message;
