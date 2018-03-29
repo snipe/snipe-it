@@ -1,7 +1,7 @@
 @component('mail::message')
 # {{ trans('mail.hello') }},
 
-{{ trans('mail.a_user_requested') }}.
+{{ $intro_text }}.
 
 @if (($snipeSettings->show_images_in_email =='1') && $item->getImageUrl())
 <center><img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
