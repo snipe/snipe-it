@@ -301,6 +301,16 @@
     }
 
 
+    function assetRequestActionsFormatter (row, value) {
+        if (value.available_actions.request == true)  {
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-primary btn-sm" data-tooltip="true" title="Request this item">{{ trans('button.request') }}</button></form>';
+        } else if (value.available_actions.cancel == true)  {
+            return '<form><a href="{{ url('/') }}/' + row + '/request" class="btn btn-danger btn-sm" data-tooltip="true" title="Request this item">{{ trans('button.cancel') }}</a></form>';
+        }
+
+    }
+
+
 
     var formatters = [
         'hardware',

@@ -16,8 +16,16 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
-    /*--- Accessories API ---*/
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('requestable/hardware',
+            [
+                'as' => 'api.assets.requestable',
+                'uses' => 'AssetsController@requestable'
+            ]
+        );
+    });
 
+    /*--- Accessories API ---*/
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
@@ -714,6 +722,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'reports/activity',
         [ 'as' => 'api.activity.index', 'uses' => 'ReportsController@index' ]
     );
+
 
 
 });

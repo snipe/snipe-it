@@ -12,6 +12,7 @@ use App\Models\Consumable;
 use App\Models\License;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\RequestAssetNotification;
 use Auth;
 use Config;
 use DB;
@@ -91,6 +92,7 @@ class ViewAssetsController extends Controller
         $logaction->item_id = $data['asset_id'] = $item->id;
         $logaction->item_type = $fullItemType;
         $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
+
         if ($user->location_id) {
             $logaction->location_id = $user->location_id;
         }
@@ -103,24 +105,12 @@ class ViewAssetsController extends Controller
 
         if ($fullItemType == Asset::class) {
             $data['item_url'] = route('hardware.show', $item->id);
-            $slackMessage = ' Asset <'.url('/').'/hardware/'.$item->id.'/view'.'|'.$item->present()->name().'> requested by <'.url('/').'/users/'.$item->user_id.'/view'.'|'.$user->present()->fullName().'>.';
         } else {
             $data['item_url'] = route("view/${itemType}", $item->id);
-            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.url('/').'/user/'.$item->id.'/view'.'|'.$user->present()->fullName().'>.';
+
         }
 
         $settings = Setting::getSettings();
-
-        if ($settings->slack_endpoint) {
-
-            $slack_settings = [
-                'username' => $settings->botname,
-                'channel' => $settings->slack_channel,
-                'link_names' => true
-            ];
-
-            $slackClient = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-        }
 
         if ($item->isRequestedBy($user)) {
 
@@ -128,30 +118,9 @@ class ViewAssetsController extends Controller
             $log = $logaction->logaction('request_canceled');
 
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-canceled', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Item_Request_Canceled'));
-                });
+                $settings->notify(new RequestAssetNotification($data));
             }
 
-            if ($settings->slack_endpoint) {
-                try {
-                        $slackClient->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'CANCELED:',
-                                    'value' => $slackMessage
-                                ]
-
-                            ]
-                        ])->send('Item Request Canceled');
-
-                } catch (Exception $e) {
-
-                }
-            }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
 
@@ -159,33 +128,9 @@ class ViewAssetsController extends Controller
             $item->request();
 
             $log = $logaction->logaction('requested');
+            $settings->notify(new RequestAssetNotification($data));
 
 
-            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Item_Requested'));
-                });
-            }
-
-            if ($settings->slack_endpoint) {
-                try {
-                        $slackClient->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'REQUESTED:',
-                                    'value' => $slackMessage
-                                ]
-
-                            ]
-                        ])->send('Item Requested');
-
-                } catch (Exception $e) {
-
-                }
-            }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
@@ -220,50 +165,14 @@ class ViewAssetsController extends Controller
             $logaction->target_type = User::class;
             $log = $logaction->logaction('requested');
 
-            $data['requested_by'] = $user->present()->fullName();
-            $data['asset_name'] = $asset->present()->name();
+            $data['item'] = $asset;
+            $data['target'] =  Auth::user();
 
             $settings = Setting::getSettings();
 
-            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.asset_requested'));
-                });
-            }
-
             $asset->request();
+            $settings->notify(new RequestAssetNotification($data));
 
-
-            if ($settings->slack_endpoint) {
-
-
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'REQUESTED:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
-                                ]
-
-                            ]
-                        ])->send('Asset Requested');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
