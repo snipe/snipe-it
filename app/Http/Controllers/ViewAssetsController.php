@@ -82,12 +82,14 @@ class ViewAssetsController extends Controller
     {
         $item = null;
         $fullItemType = 'App\\Models\\' . studly_case($itemType);
+
         if ($itemType == "asset_model") {
             $itemType = "model";
         }
         $item = call_user_func(array($fullItemType, 'find'), $itemId);
+
         $user = Auth::user();
-        $quantity = $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
+
 
         $logaction = new Actionlog();
         $logaction->item_id = $data['asset_id'] = $item->id;
@@ -100,9 +102,12 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
+        $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
-        $data['item_name'] = $item->name;
+        $data['item'] = $item;
         $data['item_type'] = $itemType;
+        $data['target'] = Auth::user();
+
 
         if ($fullItemType == Asset::class) {
             $data['item_url'] = route('hardware.show', $item->id);
@@ -114,22 +119,21 @@ class ViewAssetsController extends Controller
         $settings = Setting::getSettings();
 
         if ($item->isRequestedBy($user)) {
-
-            $item->cancelRequest();
-            $log = $logaction->logaction('request_canceled');
+           $item->cancelRequest();
+           $logaction->logaction('request_canceled');
 
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                $settings->notify(new RequestAssetNotification($data));
+                $settings->notify(new RequestAssetCancelationNotification($data));
             }
-
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
 
         } else {
             $item->request();
-
-            $log = $logaction->logaction('requested');
-            $settings->notify(new RequestAssetNotification($data));
+            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
+                $logaction->logaction('requested');
+                $settings->notify(new RequestAssetNotification($data));
+            }
 
 
 

@@ -28,6 +28,7 @@ class RequestAssetCancelationNotification extends Notification
         $this->item = $params['item'];
         $this->note = '';
         $this->last_checkout = '';
+        $this->item_quantity = $params['item_quantity'];
         $this->expected_checkin = '';
         $this->requested_date = \App\Helpers\Helper::getFormattedDateObject($params['requested_date'], 'datetime',
             false);
@@ -79,10 +80,12 @@ class RequestAssetCancelationNotification extends Notification
         $target = $this->target;
         $item = $this->item;
         $note = $this->note;
+        $qty = $this->item_quantity;
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
         $fields = [
-            'By' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+            'QTY' => $qty,
+            'Canceled By' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
         ];
 
         if (($this->expected_checkin) && ($this->expected_checkin!='')) {
@@ -121,6 +124,7 @@ class RequestAssetCancelationNotification extends Notification
                 'requested_by'  => $this->target,
                 'requested_date' => $this->requested_date,
                 'fields'        => $fields,
+                'qty'           => $this->item_quantity,
                 'last_checkout' => $this->last_checkout,
                 'expected_checkin'  => $this->expected_checkin,
                 'intro_text'        => trans('mail.a_user_canceled'),

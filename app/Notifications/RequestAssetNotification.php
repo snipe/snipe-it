@@ -26,6 +26,8 @@ class RequestAssetNotification extends Notification
     {
         $this->target = $params['target'];
         $this->item = $params['item'];
+        $this->item_type = $params['item_type'];
+        $this->item_quantity = $params['item_quantity'];
         $this->note = '';
         $this->last_checkout = '';
         $this->expected_checkin = '';
@@ -77,19 +79,21 @@ class RequestAssetNotification extends Notification
 
 
         $target = $this->target;
+        $qty = $this->item_quantity;
         $item = $this->item;
         $note = $this->note;
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
         $fields = [
-            'QTY' => '1',
+            'QTY' => $qty,
+            'Requested By' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
         ];
 
         return (new SlackMessage)
             ->content(trans('mail.Item_Requested'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $fields) {
-                $attachment->title('Requested by '.htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
+                $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
                     ->fields($fields)
                     ->content($note);
             });
@@ -120,6 +124,7 @@ class RequestAssetNotification extends Notification
                 'last_checkout' => $this->last_checkout,
                 'expected_checkin'  => $this->expected_checkin,
                 'intro_text'        => trans('mail.a_user_requested'),
+                'qty'           => $this->item_quantity,
             ])
             ->subject(trans('mail.Item_Requested'));
 
