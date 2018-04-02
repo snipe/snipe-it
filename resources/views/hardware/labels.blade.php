@@ -11,7 +11,7 @@
     $settings->labels_width = $settings->labels_width - $settings->labels_display_sgutter;
     $settings->labels_height = $settings->labels_height - $settings->labels_display_bgutter;
     // Leave space on bottom for 1D barcode if necessary
-    $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='') ? $settings->labels_height - .25 : $settings->labels_height;
+    $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='') ? $settings->labels_height - .3 : $settings->labels_height - .3;
     // Leave space on left for QR code if necessary
     $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .1: $settings->labels_width);
     ?>
@@ -60,7 +60,7 @@
  .qr_text {
     width: {{ $qr_txt_size }}in;
     height: {{ $qr_size }}in;
-    padding-top: .01in;
+    padding-top: .10in;
     font-family: arial, helvetica, sans-serif;
     padding-right: .01in;
     overflow: hidden !important;
@@ -75,6 +75,12 @@
       display: inline;
       height: 50px;
   }
+  
+  .next-padding {
+      margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
+  }
+
+
 
   @media print {
     .noprint {
@@ -103,7 +109,7 @@
 
 @foreach ($assets as $asset)
 	<?php $count++; ?>
-  <div class="label"{!!  ($count % $settings->labels_per_page == 0) ? ' style="margin-bottom: 0px;"' : '' !!}>
+  <div class="label"> 
 
       @if ($settings->qr_code=='1')
     <div class="qr_img">
@@ -120,24 +126,30 @@
         @endif
         @if (($settings->labels_display_company_name=='1') && ($asset->company))
         <div class="pull-left">
-        	C: {{ $asset->company->name }}
+        	Company: {{ $asset->company->name }}
         </div>
         @endif
         @if (($settings->labels_display_name=='1') && ($asset->name!=''))
         <div class="pull-left">
-            N: {{ $asset->name }}
+            Name: {{ $asset->name }}
         </div>
         @endif
         @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
-        <div class="pull-left">
-            T: {{ $asset->asset_tag }}
+	<div class="pull-left">
+            Tag:<br>&nbsp;&nbsp;&nbsp; {{ $asset->asset_tag }}
         </div>
         @endif
         @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
         <div class="pull-left">
-            S: {{ $asset->serial }}
+            Serial:<br>&nbsp;&nbsp;&nbsp; {{ $asset->serial }}
         </div>
-        @endif
+	@endif
+	@if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
+	<div class="pull-left">
+            Model:<br>&nbsp;&nbsp;&nbsp; {{ $asset->model->name }} {{ $asset->model->model_number }}
+	</div>
+	@endif
+
     </div>
 
     @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
