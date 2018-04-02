@@ -35,6 +35,10 @@ class ComponentsController extends Controller
             $components->where('company_id','=',$request->input('company_id'));
         }
 
+        if ($request->has('category_id')) {
+            $components->where('category_id','=',$request->input('category_id'));
+        }
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
