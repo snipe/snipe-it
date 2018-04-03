@@ -14,7 +14,7 @@ class LabelsDisplayCompanyName extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-		$table->tinyInteger('labels_display_model')->default(1);
+		$table->boolean('labels_display_model')->default(0);
         });
     }
 

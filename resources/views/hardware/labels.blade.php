@@ -126,27 +126,27 @@
         @endif
         @if (($settings->labels_display_company_name=='1') && ($asset->company))
         <div class="pull-left">
-        	Company: {{ $asset->company->name }}
+        	C: {{ $asset->company->name }}
         </div>
         @endif
         @if (($settings->labels_display_name=='1') && ($asset->name!=''))
         <div class="pull-left">
-            Name: {{ $asset->name }}
+            N: {{ $asset->name }}
         </div>
         @endif
         @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
 	<div class="pull-left">
-            Tag:<br>&nbsp;&nbsp;&nbsp; {{ $asset->asset_tag }}
+            T: {{ $asset->asset_tag }}
         </div>
         @endif
         @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
         <div class="pull-left">
-            Serial:<br>&nbsp;&nbsp;&nbsp; {{ $asset->serial }}
+            S: {{ $asset->serial }}
         </div>
 	@endif
 	@if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
 	<div class="pull-left">
-            Model:<br>&nbsp;&nbsp;&nbsp; {{ $asset->model->name }} {{ $asset->model->model_number }}
+            M: {{ $asset->model->name }} {{ $asset->model->model_number }}
 	</div>
 	@endif
 
