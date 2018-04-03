@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Eticheta activ',
     'update'			=> 'Actualizeaza activ',
     'warranty'			=> 'Garantie',
+		'warranty_expires'		=> 'Garanția expiră',
     'years'				=> 'Ani',
 )
 ;

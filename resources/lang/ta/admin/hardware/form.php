@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'சொத்து டேக்',
     'update'			=> 'சொத்து புதுப்பிப்பு',
     'warranty'			=> 'உத்தரவாதத்தை',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'ஆண்டுகள்',
 )
 ;

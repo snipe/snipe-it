@@ -72,7 +72,7 @@
 </div> <!-- .row-->
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header with-border">
         <h3 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h3>
@@ -86,6 +86,7 @@
             <tr>
               <th>{{ trans('general.name') }}</th>
               <th>Help Text</th>
+              <th>Email</th>
               <th>DB Field</th>
               <th>{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th>{{ trans('admin/custom_fields/general.field_element_short') }}</th>
@@ -98,6 +99,7 @@
             <tr>
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
+              <td>{!! ($field->show_in_email=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>'  !!}</td>
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)

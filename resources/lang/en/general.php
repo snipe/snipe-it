@@ -9,6 +9,7 @@
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Address',
     'admin'					=> 'Admin',
+    'administrator'			=> 'Administrator',
     'add_seats'             => 'Added seats',
     'all_assets'			=> 'All Assets',
     'all'       			=> 'All',

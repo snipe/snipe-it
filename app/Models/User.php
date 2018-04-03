@@ -150,6 +150,18 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
     }
 
+    /**
+     * The url for slack notifications.
+     * Used by Notifiable trait.
+     * @return mixed
+     */
+    public function routeNotificationForSlack()
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        $this->endpoint = \App\Models\Setting::getSettings()->slack_endpoint;
+        return $this->endpoint;
+    }
 
 
     /**

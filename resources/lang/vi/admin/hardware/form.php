@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Thẻ tài sản',
     'update'			=> 'Cập nhật tài sản',
     'warranty'			=> 'Bảo hành',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'năm',
 )
 ;

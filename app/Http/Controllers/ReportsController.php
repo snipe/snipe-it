@@ -494,6 +494,14 @@ class ReportsController extends Controller
             if ($request->has('location')) {
                 $header[] = trans('admin/hardware/table.location');
             }
+            if ($request->has('location_address')) {
+                $header[] = trans('general.address');
+                $header[] = trans('general.address');
+                $header[] = trans('general.city');
+                $header[] = trans('general.state');
+                $header[] = trans('general.country');
+                $header[] = trans('general.zip');
+            }
 
             if ($request->has('assigned_to')) {
                 $header[] = trans('admin/hardware/table.checkoutto');
@@ -661,6 +669,16 @@ class ReportsController extends Controller
                     if ($request->has('location')) {
                         $row[] = ($asset->location) ? $asset->location->present()->name() : '';
                     }
+
+                    if ($request->has('location_address')) {
+                        $row[] = ($asset->location) ? $asset->location->address : '';
+                        $row[] = ($asset->location) ? $asset->location->address2 : '';
+                        $row[] = ($asset->location) ? $asset->location->city : '';
+                        $row[] = ($asset->location) ? $asset->location->state : '';
+                        $row[] = ($asset->location) ? $asset->location->country : '';
+                        $row[] = ($asset->location) ? $asset->location->zip : '';
+                    }
+
 
                     if ($request->has('assigned_to')) {
                         $row[] = ($asset->checkedOutToUser() && $asset->assigned) ? e($asset->assigned->getFullNameAttribute()) : ($asset->assigned ? e($asset->assigned->display_name) : '');

@@ -15,6 +15,11 @@ return array(
         'success' => 'Pengeluar berjaya dikemaskini.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Anda pasti anda ingin hapuskan pengeluar ini?',
         'error'   => 'Ada isu semasa menghapuskan pengeluar. Sila cuba lagi.',

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'Lizenzen',
+    'about_licenses_title'            => 'Über Lizenzen',
     'about_licenses'                  => 'Lizenzen werden verwendet, um Software zu verfolgen.  Sie haben eine bestimmte Anzahl von Plätzen, die an Einzelpersonen ausgegeben werden können',
     'checkin'  					=> 'Lizenzaktivierung zurücknehmen',
     'checkout_history'  		=> 'Zuweisungsverlauf',

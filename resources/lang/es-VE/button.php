@@ -2,14 +2,14 @@
 
 return array(
     'actions' 	                => 'Acciones',
-    'add'    	                => 'Agregar nuevo',
+    'add'    	                => 'Añadir Nuevo',
     'cancel'                    => 'Cancelar',
-    'checkin_and_delete'  	    => 'Verificar y eliminar usuario',
+    'checkin_and_delete'  	    => 'Registrar y Borrar Usuario',
     'delete'  	                => 'Borrar',
     'edit'    	                => 'Editar',
     'restore' 	                => 'Restaurar',
-    'request'                   => 'Solicitud',
+    'request'                   => 'Solicitar',
     'submit'  	                => 'Enviar',
-    'upload'                    => 'Subir',
+    'upload'                    => 'Cargar',
 	'select_file'				=> 'Seleccionar Archivo...',
 );

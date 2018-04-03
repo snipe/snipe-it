@@ -11,8 +11,9 @@ use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Notifications\Notifiable;
 use DB;
+use App\Notifications\CheckinAssetNotification;
+use App\Notifications\CheckoutAssetNotification;
 
 /**
  * Model for Assets.
@@ -22,25 +23,33 @@ use DB;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
-    use Loggable, Requestable, Presentable, Notifiable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
+    use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
 
     const LOCATION = 'location';
     const ASSET = 'asset';
     const USER = 'user';
-  /**
-  * The database table used by the model.
-  *
-  * @var string
-  */
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutAssetNotification::class;
+    public static $checkinClass = CheckinAssetNotification::class;
+
+
+    /**
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'assets';
 
-  /**
-  * Whether the model should inject it's identifier to the unique
-  * validation rules before attempting validation. If this property
-  * is not set in the model it will default to true.
-  *
-  * @var boolean
-  */
+    /**
+    * Whether the model should inject it's identifier to the unique
+    * validation rules before attempting validation. If this property
+    * is not set in the model it will default to true.
+    *
+    * @var boolean
+    */
     protected $injectUniqueIdentifier = true;
 
     // We set these as protected dates so that they will be easily accessible via Carbon
@@ -85,6 +94,7 @@ class Asset extends Depreciable
         'assigned_type',
         'company_id',
         'image',
+        'location_id',
         'model_id',
         'name',
         'notes',

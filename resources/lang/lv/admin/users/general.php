@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Noklikšķiniet šeit, lai tos atjaunotu.',
     'last_login'        => 'Pēdējais pieteikšanās',
     'ldap_config_text'  => 'LDAP konfigurācijas iestatījumus var atrast Admin> Settings. Atlasītā atrašanās vieta (izvēles) tiks iestatīta visiem importētajiem lietotājiem.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Programmatūra Pārbaudīta: nosaukums',
     'view_user'         => 'Apskatīt Lietotāju: vārds',
     'usercsv'           => 'CSV fails',

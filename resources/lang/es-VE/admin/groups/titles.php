@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'Acerca de los grupos',
-    'about_groups'                  => 'Los Grupos son usados para generar permisos de usuarios.',
-    'group_management' 	 	=> 'Gestión de Grupos',
-    'create' 	 	 	    => 'Crear un grupo nuevo',
+    'about_groups_title'            => 'Acerca de los Grupos',
+    'about_groups'                  => 'Los grupos son usados para generalizar permisos de usuario.',
+    'group_management' 	 	=> 'Administración de Grupo',
+    'create' 	 	 	    => 'Crear Nuevo Grupo',
     'update' 	 		        => 'Editar Grupo',
     'group_name' 	 		=> 'Nombre de Grupo',
-    'group_admin' 	 		=> 'Admin Grupo',
+    'group_admin' 	 		=> 'Administración de Grupo',
     'allow' 	 			=> 'Permitir',
     'deny' 	 				=> 'Denegar',
 

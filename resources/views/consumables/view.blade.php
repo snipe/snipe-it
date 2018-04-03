@@ -36,7 +36,7 @@
                       data-cookie-id-table="consumablesCheckedoutTable"
                       data-pagination="true"
                       data-id-table="consumablesCheckedoutTable"
-                      data-search="true"
+                      data-search="false"
                       data-side-pagination="server"
                       data-show-columns="true"
                       data-show-export="true"
@@ -54,7 +54,7 @@
                 <thead>
                   <tr>
                     <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="created_at">{{ trans('general.date') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
                   </tr>
                 </thead>

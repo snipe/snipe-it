@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Oznaka sredstva',
     'update'			=> 'Posodobitev sredstva',
     'warranty'			=> 'Garancija',
+		'warranty_expires'		=> 'Garancija poteče',
     'years'				=> 'let',
 )
 ;

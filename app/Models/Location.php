@@ -20,7 +20,7 @@ class Location extends SnipeModel
     protected $table = 'locations';
     protected $rules = array(
       'name'        => 'required|min:2|max:255|unique_undeleted',
-      'city'        => 'min:3|max:255|nullable',
+      'city'        => 'min:2|max:255|nullable',
       'country'     => 'min:2|max:2|nullable',
       'address'         => 'max:80|nullable',
       'address2'        => 'max:80|nullable',

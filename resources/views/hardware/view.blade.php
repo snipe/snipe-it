@@ -25,7 +25,7 @@
           @endcan
       @endif
     @endif
-      @can('edit', \App\Models\Asset::class)
+      @can('update', \App\Models\Asset::class)
     <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
       @endcan
       @can('create', \App\Models\Asset::class)
@@ -672,6 +672,7 @@
 
               <!-- Asset Maintenance table -->
                 <table
+                        data-columns="{{ \App\Presenters\AssetMaintenancesPresenter::dataTableLayout() }}"
                         class="table table-striped snipe-table"
                         id="assetMaintenancesTable"
                         data-pagination="true"
@@ -688,22 +689,6 @@
                          }'
                         data-url="{{ route('api.maintenances.index', array('asset_id' => $asset->id)) }}"
                         data-cookie-id-table="assetMaintenancesTable">
-                  <thead>
-                    <tr>
-                      <th data-field="supplier" data-formatter="suppliersLinkObjFormatter">{{ trans('general.supplier') }}</th>
-                      <th data-visible="true" data-field="title">{{ trans('admin/asset_maintenances/form.title') }}</th>
-                      <th data-visible="true" data-field="asset_maintenance_type">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-                      <th data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-                      <th data-visible="true" data-field="completion_date" data-formatter="dateDisplayFormatter">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-                      <th data-visible="true" data-field="notes">{{ trans('admin/asset_maintenances/form.notes') }}</th>
-                      <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
-                      <th data-visible="true" data-field="cost">{{ trans('admin/asset_maintenances/form.cost') }}</th>
-                      <th data-visible="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                      @can('update', \App\Models\Asset::class)
-                      <th data-visible="true" data-formatter="maintenanceActions">{{ trans('table.actions') }}</th>
-                      @endcan
-                    </tr>
-                  </thead>
                 </table>
             </div> <!-- /.col-md-12 -->
           </div> <!-- /.row -->

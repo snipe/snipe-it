@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Etiqueta',
     'update'			=> 'Actualizar Equipo',
     'warranty'			=> 'Garantía',
+		'warranty_expires'		=> 'Vencimiento de la Garantía',
     'years'				=> 'años',
 )
 ;

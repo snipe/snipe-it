@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> '单击此处可将其还原。',
     'last_login'        => '上一次登陆',
     'ldap_config_text'  => 'LDAP配置在 管理 > 设置。所选位置将为导入的用户所用',
+    'print_assigned'    => '打印所有已分配资产',
     'software_user'     => ':name 借走的软件',
     'view_user'         => '查看用户： :name',
     'usercsv'           => 'CSV 档案',

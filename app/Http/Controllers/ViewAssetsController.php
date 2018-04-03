@@ -297,9 +297,11 @@ class ViewAssetsController extends Controller
         $user = Auth::user();
 
 
-        if ($user->id != $findlog->item->assigned_to) {
+        // TODO - Fix this for non-assets
+        if (($findlog->item_type==Asset::class) && ($user->id != $findlog->item->assigned_to)) {
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
+
 
         $item = $findlog->item;
 
@@ -336,7 +338,7 @@ class ViewAssetsController extends Controller
 
         $user = Auth::user();
 
-        if ($user->id != $findlog->item->assigned_to) {
+        if (($findlog->item_type==Asset::class) && ($user->id != $findlog->item->assigned_to)) {
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
@@ -388,9 +390,11 @@ class ViewAssetsController extends Controller
         ->where('id', $findlog->id)
         ->update(array('accepted_id' => $logaction->id));
 
+        if (($findlog->item_id!='') && ($findlog->item_type==Asset::class)) {
             $affected_asset = $logaction->item;
             $affected_asset->accepted = $accepted;
             $affected_asset->save();
+        }
 
         if ($update_checkout) {
             return redirect()->to('account/view-assets')->with('success', $return_msg);

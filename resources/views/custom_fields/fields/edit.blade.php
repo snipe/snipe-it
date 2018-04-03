@@ -104,6 +104,19 @@
 
 
       @if (!$field->id)
+
+          <!-- Show in Email  -->
+              <div class="form-group {{ $errors->has('show_in_email') ? ' has-error' : '' }}"  id="show_in_email">
+                  <div class="col-md-8 col-md-offset-4">
+                      <label for="field_encrypted">
+                          <input type="checkbox" name="show_in_email"class="minimal"{{ (Input::old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
+                          {{ trans('admin/custom_fields/general.show_in_email') }}
+                      </label>
+                  </div>
+
+              </div>
+
+
           <!-- Encrypted  -->
           <div class="form-group {{ $errors->has('encrypted') ? ' has-error' : '' }}">
             <div class="col-md-8 col-md-offset-4">
@@ -177,10 +190,12 @@
     // Checkbox handling
     $('#field_encrypted').on('ifChecked', function(event){
         $("#encrypt_warning").show();
+        $("#show_in_email").hide();
     });
 
     $('#field_encrypted').on('ifUnchecked', function(event){
         $("#encrypt_warning").hide();
+        $("#show_in_email").show();
     });
 
 </script>

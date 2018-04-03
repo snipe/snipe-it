@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klik her for at gendanne dem.',
     'last_login'        => 'Sidste Login',
     'ldap_config_text'  => 'LDAP-konfigurationsindstillinger kan findes Admin> Indstillinger. Den (valgfrie) valgte placering vil blive indstillet for alle importerede brugere.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Software Checket ud til: navn',
     'view_user'         => 'Se bruger :navn',
     'usercsv'           => 'CSV-fil',

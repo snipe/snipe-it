@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Öğe',
     'field_format'            => 'Düzen',
     'field_custom_format'     => 'Özel biçim',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Bu alan doğrulama için bir regex ifadesi kullanmanıza izin verir. Bu alan "regex:" ile başlamalı - örneğin, özel alan değerinin geçerli bir IMEI (15 basamaklı) olmasını sağlamak için <code>regex:/^[0-9]{15}$/</code> şeklinde kodlamalısınız.',
     'required'   		          => 'Gerekli',
     'req'   		              => 'Talep.',
     'used_by_models'   		    => 'Modellerle Kullanılmıştır',

@@ -7,13 +7,6 @@ modules:
             depends: Laravel5
             timeout: 10
         - Asserts
-        - Db:
-            dsn: 'mysql:host=localhost;dbname=snipeittests'
-            user: 'snipeit_laravel'
-            password: ''
-            dump: tests/_data/dump.sql
-            populate: true
-            cleanup: false
     config:
         - Laravel5:
             environment_file: .env.tests

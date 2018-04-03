@@ -15,6 +15,11 @@ return array(
         'success' => 'Ο κατασκευαστής ενημερώθηκε με επιτυχία.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτόν τον κατασκευαστή;',
         'error'   => 'Υπήρξε ένα ζήτημα διαγράφοντας τον κατασκευαστή. Παρακαλώ δοκιμάστε ξανά.',

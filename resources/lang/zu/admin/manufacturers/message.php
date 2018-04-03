@@ -15,6 +15,11 @@ return array(
         'success' => 'Umkhiqizi ubuyekezwe ngempumelelo.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Uqinisekile ukuthi ufisa ukususa lo menzi?',
         'error'   => 'Kube nenkinga yokususa umenzi. Ngicela uzame futhi.',

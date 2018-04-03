@@ -335,6 +335,7 @@ class SettingsController extends Controller
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
         $setting->load_remote = $request->input('load_remote', '0');
+        $setting->show_images_in_email = $request->input('show_images_in_email', '0');
         $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
         $setting->dashboard_message = $request->input('dashboard_message');
         $setting->email_domain = $request->input('email_domain');
@@ -577,8 +578,11 @@ class SettingsController extends Controller
 
         $alert_email = rtrim($request->input('alert_email'), ',');
         $alert_email = trim($alert_email);
+        $admin_cc_email = rtrim($request->input('admin_cc_email'), ',');
+        $admin_cc_email = trim($admin_cc_email);
 
         $setting->alert_email = $alert_email;
+        $setting->admin_cc_email = $admin_cc_email;
         $setting->alerts_enabled = $request->input('alerts_enabled', '0');
         $setting->alert_interval = $request->input('alert_interval');
         $setting->alert_threshold = $request->input('alert_threshold');

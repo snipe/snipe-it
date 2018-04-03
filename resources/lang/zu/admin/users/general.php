@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Chofoza lapha ukuze ubuyisele.',
     'last_login'        => 'Ukungena ngemvume kokugcina',
     'ldap_config_text'  => 'Izilungiselelo zokuhlela ze-LDAP zitholakala Admin> Izilungiselelo. Indawo (okukhethwa kukho) ekhethiwe izobekwa kuwo wonke abasebenzisi abangenisiwe.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Isofthiwe ihlolwe ku: igama',
     'view_user'         => 'Buka umsebenzisi: igama',
     'usercsv'           => 'Ifayela le-CSV',

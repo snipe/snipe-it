@@ -117,6 +117,12 @@
             </div>
             <div class="checkbox col-md-12">
               <label>
+                {{ Form::checkbox('location_address', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('general.address') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
                 {{ Form::checkbox('assigned_to', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('admin/licenses/table.assigned_to') }}
               </label>

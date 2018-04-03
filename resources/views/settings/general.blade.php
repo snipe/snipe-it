@@ -122,6 +122,22 @@
                         </div>
                     </div>
 
+                       <!-- Load images in emails -->
+                       <div class="form-group {{ $errors->has('show_images_in_email') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('show_images_in_email', trans('admin/settings/general.show_images_in_email')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('show_images_in_email', '1', Input::old('show_images_in_email', $setting->show_images_in_email),array('class' => 'minimal')) }}
+                               {{ trans('general.yes') }}
+                               {!! $errors->first('show_images_in_email', '<span class="alert-msg">:message</span>') !!}
+                               <p class="help-block">
+                                   {{ trans('admin/settings/general.show_images_in_email_help') }}
+                               </p>
+                           </div>
+                       </div>
+
+
                     <!-- Per Page -->
                     <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
                         <div class="col-md-3">

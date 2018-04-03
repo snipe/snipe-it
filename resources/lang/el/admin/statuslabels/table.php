@@ -5,6 +5,8 @@ return array(
     'archived'      	=> 'Αρχειοθετημένα',
     'create'      	=> 'Δημιουργία ετικέτας κατάστασης',
     'color'      	=> 'Χρώμα Γραφήματος',
+    'default_label' => 'Default Label',
+    'default_label_help' => 'This is used to ensure your most commonly used status labels appear at the top of the select box when creating/editing assets.',
     'deployable'      	=> 'Προς ανάπτυξη',
     'info'      	=> 'Οι ετικέτες κατάστασης χρησιμοποιούνται για να περιγράψουν τις διάφορες καταστάσεις στις οποίες θα μπορούσαν να βρίσκονται τα περιουσιακά στοιχεία σας. Μπορεί να είναι έξω για επισκευή, απώλεια / κλοπή κ.λπ. Μπορείτε να δημιουργήσετε νέες ετικέτες κατάστασης για αναπτυσσόμενα, εκκρεμή και αρχειοθετημένα στοιχεία ενεργητικού.',
     'name'      	=> 'Όνομα κατάστασης',

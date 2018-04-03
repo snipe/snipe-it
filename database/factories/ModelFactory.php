@@ -86,10 +86,10 @@ $factory->define(App\Models\Setting::class, function ($faker) {
         'site_name' => $faker->sentence,
         'auto_increment_assets' => false,
         'alert_email' => $faker->safeEmail(),
-        'alerts_enabled' => false,
+        'alerts_enabled' => true,
         'brand' => 1,
         'default_currency' => $faker->currencyCode,
         'locale' => $faker->locale,
-        'pwd_secure_min' => 5,
+        'pwd_secure_min' => 10, // Match web setup
     ];
 });

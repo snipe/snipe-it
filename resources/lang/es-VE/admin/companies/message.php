@@ -1,18 +1,18 @@
 <?php
 return array(
     'does_not_exist' => 'La compañía no existe.',
-    'assoc_users'    => 'Esta compañía ya está asociada con al menos un modelo y no puede eliminarse. Por favor, actualiza tus modelos para no referenciar esta compañía de nuevo y prueba otra vez. ',
+    'assoc_users'    => 'Esta compañía está actualmente asociada con al menos un modelo y no puede ser eliminada. Por favor, actualiza tus modelos para no referenciar más esta compañía e inténtalo de nuevo. ',
     'create' => array(
-        'error'   => 'Esta compañía no ha sido creada, por favor pruebe de nuevo.',
-        'success' => 'Compañía creada satisfactoriamente.'
+        'error'   => 'La compañía no ha sido creada, por favor intente de nuevo.',
+        'success' => 'Compañía creada con éxito.'
     ),
     'update' => array(
-        'error'   => 'Compañía no actualizada, por favor inténtelo de nuevo',
+        'error'   => 'La compañía no se ha actualizado, por favor inténtelo de nuevo',
         'success' => 'Compañía actualizada correctamente.'
     ),
     'delete' => array(
-        'confirm' => '¿Seguro que quieres eliminar esta compañía?',
-        'error'   => 'Hubo un problema eliminando esta compañía. Inténtelo de nuevo.',
-        'success' => 'Esta compañía se eliminó satisfactoriamente.'
+        'confirm' => '¿Estás seguro que deseas borrar esta compañía?',
+        'error'   => 'Hubo un problema borrando la compañía. Por favor inténtelo de nuevo.',
+        'success' => 'La compañía se ha borrado con éxito.'
     )
 );

@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Buat Model Aset',
+    'created_at' 			=> 'Dibuat di',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> 'Model nomor.',
+    'name'      			=> 'Nama model aset',
+    'numassets' 			=> 'Aset',
+    'title'					=> 'Model aset',
+    'update'				=> 'Perbarui model aset',
+    'view'					=> 'Lihat model aset',
+    'update'				=> 'Perbarui model aset',
+    'clone'				=> 'Gandakan model',
+    'edit'				=> 'Ubah model',
 );

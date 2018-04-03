@@ -3,34 +3,34 @@
 return array(
 
     'does_not_exist' => 'El accesorio no existe.',
-    'assoc_users'	 => 'Este accesorio actualmente tiene :count entregados a usuarios. Por favor ingrese los accesorios y vuelva a intentar. ',
+    'assoc_users'	 => 'El accesorio actual tiene :count elementos entregados a usuarios. Por favor ingresa los accesorios e intenta de nuevo. ',
 
     'create' => array(
-        'error'   => 'El accesorio no fue creado, por favor, inténtalo de nuevo.',
-        'success' => 'Accesorio creado correctamente.'
+        'error'   => 'El accesorio no se creó, inténtalo de nuevo.',
+        'success' => 'El accesorio se ha creado con éxito.'
     ),
 
     'update' => array(
-        'error'   => 'El accesorio no fue actualizado, por favor, inténtalo de nuevo',
-        'success' => 'Accesorio actualizado correctamente.'
+        'error'   => 'El accesorio no se actualizó, inténtalo de nuevo',
+        'success' => 'El accesorio se ha actualizado con éxito.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Estas seguro de borrar este accesorio?',
-        'error'   => 'Ha habido un problema eliminando este accesorio. Intentalo de nuevo.',
-        'success' => 'El accesorio fue borrado con éxito.'
+        'confirm'   => '¿Estás seguro que deseas borrar este accesorio?',
+        'error'   => 'Hubo un problema borrando este accesorio. Por favor inténtalo nuevamente.',
+        'success' => 'El accesorio se ha borrado con éxito.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'El accesorio no fue retirado, por favor vuelva a intentarlo',
-        'success' 		=> 'Accesorio retirado correctamente.',
-        'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
+        'error'   		=> 'Equipo no ha sido retirado, inténtalo de nuevo',
+        'success' 		=> 'El accesorio se ha retirado exitosamente.',
+        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'El accesorio no fue agregado, favor vuelva a intentarlo',
-        'success' 		=> 'Accesorio devuelto correctamente.',
-        'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
+        'error'   		=> 'El accesorio no fue ingresado, por favor inténtalo de nuevo',
+        'success' 		=> 'El accesorio se ha ingresado con éxito.',
+        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.'
     )
 
 

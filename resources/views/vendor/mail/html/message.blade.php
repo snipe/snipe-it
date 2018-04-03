@@ -2,7 +2,8 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            @if($snipeSettings::setupCompleted())
+            @if (($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
+
                 @if ($snipeSettings->brand == '3')
                     @if ($snipeSettings->logo!='')
                         <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
