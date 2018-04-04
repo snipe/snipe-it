@@ -23,6 +23,14 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'AssetsController@requestable'
             ]
         );
+
+        Route::get('requests',
+            [
+                'as' => 'api.assets.requested',
+                'uses' => 'ProfileController@requestedAssets'
+            ]
+        );
+
     });
 
     /*--- Accessories API ---*/
