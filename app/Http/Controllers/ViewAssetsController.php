@@ -118,8 +118,9 @@ class ViewAssetsController extends Controller
 
         $settings = Setting::getSettings();
 
-        if ($item->isRequestedBy($user)) {
+        if ($item_request = $item->isRequestedBy($user)) {
            $item->cancelRequest();
+           $data['item_quantity'] = $item_request->qty;
            $logaction->logaction('request_canceled');
 
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
@@ -162,11 +163,12 @@ class ViewAssetsController extends Controller
 
         $data['item'] = $asset;
         $data['target'] =  Auth::user();
+        $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
         $logaction = new Actionlog();
         $logaction->item_id = $data['asset_id'] = $asset->id;
-        $logaction->item_type = Asset::class;
+        $logaction->item_type = $data['item_type'] = Asset::class;
         $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
 
         if ($user->location_id) {
@@ -199,11 +201,8 @@ class ViewAssetsController extends Controller
 
     public function getRequestedAssets()
     {
-        $checkoutrequests = CheckoutRequest::all();
-
-        return view('account/requested-items', compact($checkoutrequests));
+        return view('account/requested');
     }
-
 
 
     // Get the acceptance screen

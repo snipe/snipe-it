@@ -19,8 +19,7 @@ trait Requestable
 
     public function isRequestedBy(User $user)
     {
-        $requests = $this->requests->where('canceled_at', NULL)->where('user_id', $user->id);
-        return $requests->count() > 0;
+        return $this->requests->where('canceled_at', NULL)->where('user_id', $user->id)->first();
     }
 
     public function scopeRequestedBy($query, User $user)
@@ -30,10 +29,10 @@ trait Requestable
         });
     }
 
-    public function request()
+    public function request($qty = 1)
     {
         $this->requests()->save(
-            new CheckoutRequest(['user_id' => Auth::id()])
+            new CheckoutRequest(['user_id' => Auth::id(), 'qty' => $qty])
         );
     }
 
