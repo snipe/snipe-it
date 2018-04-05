@@ -292,7 +292,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function checkoutRequests()
     {
-        return $this->belongsToMany(Asset::class, 'checkout_requests');
+        return $this->belongsToMany(Asset::class, 'checkout_requests', 'user_id', 'requestable_id')->whereNull('canceled_at');
     }
 
     public function throttle()

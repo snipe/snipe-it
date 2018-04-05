@@ -307,6 +307,16 @@
                              <i class="fa fa-check fa-fw"></i>
                              {{ trans('general.viewassets') }}
                        </a></li>
+
+                     <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
+                         <a href="{{ route('account.requested') }}">
+                             <i class="fa fa-check fa-disk"></i>
+                             Requested Assets
+                         </a></li>
+
+
+
+
                      <li>
                           <a href="{{ route('profile') }}">
                              <i class="fa fa-user fa-fw"></i>

@@ -160,4 +160,39 @@ class AssetsTransformer
             'type' => $asset->assignedType()
         ] : null;
     }
+
+
+    public function transformRequestedAssets(Collection $assets, $total)
+    {
+        $array = array();
+        foreach ($assets as $asset) {
+            $array[] = self::transformRequestedAsset($asset);
+        }
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformRequestedAsset(Asset $asset) {
+        $array = [
+            'id' => (int) $asset->id,
+            'name' => e($asset->name),
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+            'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
+            'model' => ($asset->model) ? e($asset->model->name) : null,
+            'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
+            'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
+            'location' => ($asset->location) ? e($asset->location->name) : null,
+            'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
+        ];
+
+        $permissions_array['available_actions'] = [
+            'cancel' => ($asset->isRequestedBy(\Auth::user())) ? true : false,
+            'request' => ($asset->isRequestedBy(\Auth::user())) ? false : true,
+
+        ];
+
+         $array += $permissions_array;
+        return $array;
+
+    }
 }
