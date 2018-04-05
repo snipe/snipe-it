@@ -741,37 +741,15 @@ class AssetsController extends Controller
 
 
     /**
-     * Returns JSON listing of all assets
+     * Returns JSON listing of all requestable assets
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $assetId
      * @since [v4.0]
      * @return JsonResponse
      */
     public function requestable(Request $request)
     {
-
-
-        $allowed_columns = [
-            'id',
-            'name',
-            'asset_tag',
-            'serial',
-            'model_number',
-            'last_checkout',
-            'notes',
-            'expected_checkin',
-            'order_number',
-            'image',
-            'assigned_to',
-            'created_at',
-            'updated_at',
-            'purchase_date',
-            'purchase_cost',
-            'warranty_months',
-        ];
-
-
+        
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier')->where('assets.requestable', '=', '1');
