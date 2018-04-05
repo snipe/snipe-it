@@ -16,7 +16,7 @@ class ProfileController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      *
-     * @return \Illuminate\Http\Response
+     * @return Array
      */
     public function requestedAssets()
     {
