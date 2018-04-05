@@ -1305,12 +1305,12 @@ class AssetsController extends Controller
         }
     }
 
-    public function getRequestedIndex($id = null)
+    public function getRequestedIndex($user_id = null)
     {
         $requestedItems = CheckoutRequest::with('user', 'requestedItem')->whereNull('canceled_at')->with('user', 'requestedItem');
 
-        if ($id) {
-            $requestedItems->where('user_id', $id)->get();
+        if ($user_id) {
+            $requestedItems->where('user_id', $user_id)->get();
         }
 
         $requestedItems = $requestedItems->orderBy('created_at', 'desc')->get();
