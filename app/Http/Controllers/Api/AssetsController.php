@@ -116,7 +116,6 @@ class AssetsController extends Controller
 
         if ($request->has('location_id')) {
             $assets->where('assets.location_id', '=', $request->input('location_id'));
-           // dd($assets->toSql());
         }
 
         if ($request->has('supplier_id')) {
