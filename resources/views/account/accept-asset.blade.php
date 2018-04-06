@@ -21,7 +21,7 @@
 
 #eula_div {
     width: 100%;
-    height: 200px;
+    height: auto;
     overflow: scroll;
 }
 
