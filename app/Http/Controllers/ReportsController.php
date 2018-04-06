@@ -503,6 +503,19 @@ class ReportsController extends Controller
                 $header[] = trans('general.zip');
             }
 
+            if ($request->has('rtd_location')) {
+                $header[] = trans('admin/hardware/form.default_location');
+            }
+            if ($request->has('rtd_location_address')) {
+                $header[] = trans('general.address');
+                $header[] = trans('general.address');
+                $header[] = trans('general.city');
+                $header[] = trans('general.state');
+                $header[] = trans('general.country');
+                $header[] = trans('general.zip');
+            }
+
+
             if ($request->has('assigned_to')) {
                 $header[] = trans('admin/hardware/table.checkoutto');
                 $header[] = trans('general.type');
@@ -671,12 +684,25 @@ class ReportsController extends Controller
                     }
 
                     if ($request->has('location_address')) {
-                        $row[] = ($asset->location) ? $asset->location->address : '';
-                        $row[] = ($asset->location) ? $asset->location->address2 : '';
-                        $row[] = ($asset->location) ? $asset->location->city : '';
-                        $row[] = ($asset->location) ? $asset->location->state : '';
-                        $row[] = ($asset->location) ? $asset->location->country : '';
-                        $row[] = ($asset->location) ? $asset->location->zip : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address2 : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->city : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->state : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->country : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->zip : '';
+                    }
+
+                    if ($request->has('rtd_location')) {
+                        $row[] = ($asset->location) ? $asset->defaultLoc->present()->name() : '';
+                    }
+
+                    if ($request->has('rtd_location_address')) {
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address2 : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->city : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->state : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->country : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->zip : '';
                     }
 
 
