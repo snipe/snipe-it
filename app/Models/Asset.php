@@ -355,9 +355,7 @@ class Asset extends Depreciable
      */
     public function checkouts()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', '=', Asset::class)
-            ->where('action_type', '=', 'checkout')
+        return $this->assetlog()->where('action_type', '=', 'checkout')
             ->orderBy('created_at', 'desc')
             ->withTrashed();
     }
@@ -367,8 +365,7 @@ class Asset extends Depreciable
      */
     public function checkins()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', '=', Asset::class)
+        return $this->assetlog()
             ->where('action_type', '=', 'checkin from')
             ->orderBy('created_at', 'desc')
             ->withTrashed();
@@ -379,8 +376,7 @@ class Asset extends Depreciable
      */
     public function userRequests()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', '=', Asset::class)
+        return $this->assetlog()
             ->where('action_type', '=', 'requested')
             ->orderBy('created_at', 'desc')
             ->withTrashed();
