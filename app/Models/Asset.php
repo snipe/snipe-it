@@ -350,6 +350,38 @@ class Asset extends Depreciable
                   ->withTrashed();
     }
 
+    /**
+     * Get checkouts
+     */
+    public function checkouts()
+    {
+        return $this->assetlog()->where('action_type', '=', 'checkout')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get checkins
+     */
+    public function checkins()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'checkin from')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get user requests
+     */
+    public function userRequests()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'requested')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
 
   /**
    * assetmaintenances
