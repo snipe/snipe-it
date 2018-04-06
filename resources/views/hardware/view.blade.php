@@ -465,6 +465,28 @@
                         </td>
                       </tr>
                     @endif
+
+                    <tr>
+                      <td>{{ trans('general.checkouts_count') }}</td>
+                      <td>
+                       {{ ($asset->checkouts) ? (int) $asset->checkouts->count() : '0' }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>{{ trans('general.checkins_count') }}</td>
+                      <td>
+                        {{ ($asset->checkins) ? (int) $asset->checkins->count() : '0' }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>{{ trans('general.user_requests_count') }}</td>
+                      <td>
+                        {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
+                      </td>
+                    </tr>
+
                   </tbody>
                 </table>
               </div> <!-- /table-responsive -->

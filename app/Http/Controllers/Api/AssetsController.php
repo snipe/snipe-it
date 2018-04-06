@@ -77,6 +77,9 @@ class AssetsController extends Controller
             'last_audit_date',
             'next_audit_date',
             'warranty_months',
+            'checkouts_count',
+            'checkins_count',
+            'user_requests_count',
         ];
 
         $filter = array();
@@ -92,7 +95,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-            'model.category', 'model.manufacturer', 'model.fieldset','supplier');
+            'model.category', 'model.manufacturer', 'model.fieldset','supplier')->withCount('checkins', 'checkouts', 'userRequests');
 
 
         // These are used by the API to query against specific ID numbers.
@@ -322,7 +325,7 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->findOrFail($id)) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->withCount('checkins', 'checkouts', 'userRequests')->findOrFail($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }

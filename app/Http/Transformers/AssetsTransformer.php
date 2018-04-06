@@ -77,6 +77,9 @@ class AssetsTransformer
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
+            'checkins_count' => (int) $asset->checkins_count,
+            'checkouts_count' => (int) $asset->checkouts_count,
+            'user_requests_count' => (int) $asset->user_requests_count,
             'user_can_checkout' => (bool) $asset->availableForCheckout(),
         ];
 
