@@ -715,5 +715,19 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         [ 'as' => 'api.activity.index', 'uses' => 'ReportsController@index' ]
     );
 
+    Route::resource('insurance', 'InsuranceController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.insurance.index',
+                    'show' => 'api.insurance.show',
+                    'store' => 'api.insurance.store',
+                    'update' => 'api.insurance.update',
+                    'destroy' => 'api.insurance.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['insurance' => 'insurance_id']
+        ]
+    ); // Insurance resource
 
 });

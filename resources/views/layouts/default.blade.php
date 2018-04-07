@@ -506,6 +506,20 @@
                   </a>
             </li>
             @endcan
+              @can('view', \App\Models\Agreements::class)
+              <li{!! (Request::is('agreements*') ? ' class="active"' : '') !!}>
+                  <a href="#"><i class="fa fa-file"></i>
+                      <span>{{ trans('general.agreements') }}</span>
+                      <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <a href="{{ route('agreements.index') }}">
+                      <span>{{ trans('all.agreements') }}</span>
+                  </a>
+                  <a href="{{ route('insurance.index') }}">
+                      <span>{{ trans('general.insurance') }}</span>
+                  </a>
+              </li>
+              @endcan
             @can('create', \App\Models\Asset::class)
                 <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
                     <a href="{{ route('imports.index') }}">

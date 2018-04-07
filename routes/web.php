@@ -75,6 +75,24 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::group(
+    ['prefix' => 'agreements',
+        'middleware' => ['auth']],
+        function () {
+            /*
+            * Insurance
+            */
+            Route::resource('insurance', 'InsuranceController', [
+                'parameters' => ['insurance' => 'insurance_id']
+            ]);
+        }
+);
+
+
+Route::resource('agreements', 'AgreementsController', [
+    'middleware' => ['auth'],
+]);
+
 
 /*
 |
