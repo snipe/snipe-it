@@ -21,11 +21,10 @@ class Agreement extends SnipeModel
 
     protected $rules = array(
         'name'  => 'required|string|unique_undeleted',
-        'started_at' => 'required|datetime',
-        'ended_at' => 'required|datetime',
-        'created_at' => 'required|datetime',
+        'started_at' => 'required|date',
+        'ended_at' => 'required|date',
+        'created_at' => 'date',
         'notes'   => 'string|nullable',
-        ''
     );
 
     protected $fillable = [

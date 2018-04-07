@@ -1,68 +1,39 @@
 @extends('layouts/edit-form', [
-    'createText' => trans('admin/manufacturers/table.create') ,
-    'updateText' => trans('admin/manufacturers/table.update'),
-    'helpTitle' => trans('admin/manufacturers/table.about_manufacturers_title'),
-    'helpText' => trans('admin/manufacturers/table.about_manufacturers_text'),
+    'createText' => trans('admin/insurance/table.create') ,
+    'updateText' => trans('admin/insurance/table.update'),
+    'helpTitle' => trans('admin/insurance/table.about_insurance_title'),
+    'helpText' => trans('admin/insurance/table.about_insurance_text'),
     'formAction' => ($item) ? route('insurance.update', ['insurance' => $item->id]) : route('insurance.store'),
 ])
 
 
 {{-- Page content --}}
 @section('inputFields')
-@include ('partials.forms.edit.name', ['translated_name' => trans('admin/manufacturers/table.name')])
-    <!-- URL -->
-    <div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
-        <label for="url" class="col-md-3 control-label">{{ trans('admin/insurance/table.url') }}
-        </label>
-        <div class="col-md-6">
-            <input class="form-control" type="text" name="url" id="url" value="{{ Input::old('url', $item->url) }}" />
-            {!! $errors->first('url', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-        </div>
-    </div>
-
-    <!-- Support URL -->
-    <div class="form-group {{ $errors->has('support_url') ? ' has-error' : '' }}">
-        <label for="support_url" class="col-md-3 control-label">{{ trans('admin/insurance/table.support_url') }}
-        </label>
-        <div class="col-md-6">
-            <input class="form-control" type="text" name="support_url" id="support_url" value="{{ Input::old('support_url', $item->support_url) }}" />
-            {!! $errors->first('support_url', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-        </div>
-    </div>
-
-    <!-- Support Phone -->
-    <div class="form-group {{ $errors->has('support_phone') ? ' has-error' : '' }}">
-        <label for="support_phone" class="col-md-3 control-label">{{ trans('admin/manufacturers/table.support_phone') }}
-        </label>
-        <div class="col-md-6">
-            <input class="form-control" type="text" name="support_phone" id="support_phone" value="{{ Input::old('support_phone', $item->support_phone) }}" />
-            {!! $errors->first('support_phone', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-        </div>
-    </div>
-
-    <!-- Support Email -->
-    <div class="form-group {{ $errors->has('support_email') ? ' has-error' : '' }}">
-        <label for="support_email" class="col-md-3 control-label">{{ trans('admin/manufacturers/table.support_email') }}
-        </label>
-        <div class="col-md-6">
-            <input class="form-control" type="email" name="support_email" id="support_email" value="{{ Input::old('support_email', $item->support_email) }}" />
-            {!! $errors->first('support_email', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-        </div>
-    </div>
-
-    <!-- Image -->
-    @if ($item->image)
-        <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-            <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
-            <div class="col-md-5">
-                {{ Form::checkbox('image_delete') }}
-                <img src="{{ url('/') }}/uploads/manufacturers/{{ $item->image }}" />
-                {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+@include ('partials.forms.edit.name', ['translated_name' => trans('admin/insurance/table.name')])
+    <!-- Started At -->
+    <div class="form-group {{ $errors->has('started_at') ? ' has-error' : '' }}">
+        <label for="started_at" class="col-md-3 control-label">{{ trans('admin/insurance/started.at') }}</label>
+        <div class="input-group col-md-3">
+            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="started_at" id="started_at" value="{{ Input::old('started_at', ($item->started_at) ? $item->started_at->format('Y-m-d') : '') }}">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
+            {!! $errors->first('started_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
         </div>
-    @endif
+    </div>
 
-@include ('partials.forms.edit.image-upload')
+    <!-- Ended At -->
+    <div class="form-group {{ $errors->has('ended_at') ? ' has-error' : '' }}">
+        <label for="ended_at" class="col-md-3 control-label">{{ trans('admin/insurance/ended.at') }}</label>
+        <div class="input-group col-md-3">
+            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="ended_at" id="ended_at" value="{{ Input::old('ended_at', ($item->ended_at) ? $item->ended_at->format('Y-m-d') : '') }}">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            </div>
+            {!! $errors->first('ended_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        </div>
+    </div>
+@include ('partials.forms.edit.notes')
 
 
 @stop

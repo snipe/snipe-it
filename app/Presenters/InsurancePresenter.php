@@ -70,7 +70,7 @@ class InsurancePresenter extends Presenter
                 "switchable" => false,
                 "title" => trans('table.actions'),
                 "visible" => true,
-                "formatter" => "insuranceActionFormatter",
+                "formatter" => "insuranceActionsFormatter",
             ]
         ];
 
@@ -80,7 +80,7 @@ class InsurancePresenter extends Presenter
 
 
     /**
-     * Link to this manufacturers name
+     * Link to this insurance name
      * @return string
      */
     public function nameUrl()

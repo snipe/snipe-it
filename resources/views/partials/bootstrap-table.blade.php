@@ -320,7 +320,9 @@
         'companies',
         'depreciations',
         'fieldsets',
-        'groups'
+        'groups',
+        'agreements',
+        'insurance'
     ];
 
     for (var i in formatters) {
