@@ -25,7 +25,6 @@ class InsuranceController extends Controller
      */
     public function index()
     {
-
         $this->authorize('view', Insurance::class);
         return view('insurance.index', compact('insurance'));
     }
@@ -100,6 +99,8 @@ class InsuranceController extends Controller
         $this->authorize('create', Insurance::class);
         $insurance = new Insurance;
         $insurance->name     = $request->input('name');
+        $insurance->provider     = $request->input('provider');
+        $insurance->policy_number     = $request->input('policy_number');
         $insurance->started_at     = $request->input('started_at');
         $insurance->ended_at     = $request->input('ended_at');
         $insurance->notes    = $request->input('notes');
@@ -147,6 +148,8 @@ class InsuranceController extends Controller
 
         // Save the  data
         $insurance->name     = $request->input('name');
+        $insurance->provider     = $request->input('provider');
+        $insurance->policy_number     = $request->input('policy_number');
         $insurance->started_at     = $request->input('started_at');
         $insurance->ended_at     = $request->input('ended_at');
         $insurance->notes    = $request->input('notes');

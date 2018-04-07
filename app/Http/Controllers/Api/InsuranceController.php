@@ -25,7 +25,7 @@ class InsuranceController extends Controller
         $allowed_columns = ['id','name','started_a','ended_at','created_at','notes','created_at'];
 
         $insurance = Insurance::select(
-            array('id','name','started_at','ended_at','created_at','notes','created_at'))->whereNotNull("name");
+            array('id','name','provider','policy_number','started_at','ended_at','created_at','notes','created_at'))->whereNotNull("name");
         //)->with('assets')->withCount('licenses')->withCount('consumables')->withCount('accessories');
 
         if ($request->input('deleted')=='true') {

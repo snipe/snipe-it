@@ -33,8 +33,23 @@ class InsurancePresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/insurance/table.name'),
                 "visible" => true,
-                "formatter" => "insuranceLinkFormatter"
+                "formatter" => "agreementInsuranceLinkFormatter"
             ],
+            [
+                "field" => "provider",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/insurance/provider'),
+                "visible" => true,
+            ],
+            [
+                "field" => "policy_number",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/insurance/policy_number'),
+                "visible" => true,
+            ],
+
             [
                 "field" => "started_at",
                 "searchable" => true,
@@ -70,7 +85,7 @@ class InsurancePresenter extends Presenter
                 "switchable" => false,
                 "title" => trans('table.actions'),
                 "visible" => true,
-                "formatter" => "insuranceActionsFormatter",
+                "formatter" => "agreementInsuranceActionsFormatter",
             ]
         ];
 

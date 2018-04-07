@@ -25,6 +25,8 @@ class InsuranceTransformer
             $array = [
                 'id' => (int) $insurance->id,
                 'name' => e($insurance->name),
+                'provider' => e($insurance->provider),
+                'policy_number' => e($insurance->policy_number),
                 'notes' => e($insurance->notes),
                 'started_at' => Helper::getFormattedDateObject($insurance->started_at, 'datetime'),
                 'ended_at' => Helper::getFormattedDateObject($insurance->ended_at, 'datetime'),

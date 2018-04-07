@@ -332,6 +332,21 @@
         window[formatters[i] + 'InOutFormatter'] = genericCheckinCheckoutFormatter(formatters[i]);
     }
 
+    var agreementFormatters = [
+        'insurance'
+    ];
+
+
+    for (var j in agreementFormatters) {
+        // Workaround to make sure our generated formatters have proper camelCase
+        var functionName = agreementFormatters[j].charAt(0).toUpperCase() + agreementFormatters[j].slice(1);
+        window['agreement' + functionName + 'LinkFormatter'] = genericRowLinkFormatter("agreements/" + agreementFormatters[j]);
+        window['agreement' + functionName + 'LinkObjFormatter'] = genericColumnObjLinkFormatter("agreements/" + agreementFormatters[j]);
+        window['agreement' + functionName + 'ActionsFormatter'] = genericActionsFormatter("agreements/" + agreementFormatters[j]);
+        window['agreement' + functionName + 'InOutFormatter'] = genericCheckinCheckoutFormatter("agreements/" + agreementFormatters[j]);
+    }
+
+
 
     // This is  gross, but necessary so that we can package the API response
     // for custom fields in a more useful way.
