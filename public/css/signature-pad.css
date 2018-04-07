@@ -44,11 +44,10 @@
 
 .m-signature-pad--body {
   position: absolute;
-  left: 20px;
-  right: 20px;
   top: 20px;
   bottom: 60px;
   border: 1px solid #f4f4f4;
+  background-color: white;
 }
 
 .m-signature-pad--body
