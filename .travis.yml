@@ -14,8 +14,6 @@ services:
 
 # list any PHP version you want to test against
 php:
-  - 5.6
-  - 7.0
   # - 7.2 DISABLE Temporarily until we fix the count(null) bugs
   - 7.1.4
 

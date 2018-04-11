@@ -23,7 +23,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\ContentSecurityPolicyHeader::class,
         \App\Http\Middleware\NosniffGuard::class,
         \App\Http\Middleware\CheckForSetup::class,
-        \Fideloper\Proxy\TrustProxies::class,
+        \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\CheckForDebug::class,
        // \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
