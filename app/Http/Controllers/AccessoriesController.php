@@ -86,7 +86,7 @@ class AccessoriesController extends Controller
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
 
-        if ($request->filledFile('image')) {
+        if ($request->hasFile('image')) {
 
             if (!config('app.lock_passwords')) {
                 $image = $request->file('image');
@@ -165,7 +165,7 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
 
-        if ($request->filledFile('image')) {
+        if ($request->hasFile('image')) {
             
             if (!config('app.lock_passwords')) {
                 

@@ -415,7 +415,7 @@ class SettingsController extends Controller
             $setting->brand = 1;
 
         // If they are uploading an image, validate it and upload it
-        } elseif ($request->filledFile('image')) {
+        } elseif ($request->hasFile('image')) {
 
             if (!config('app.lock_passwords')) {
                 $image = $request->file('image');
