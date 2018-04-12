@@ -44,6 +44,13 @@
     "symfony/css-selector": "3.1.*",
     "symfony/dom-crawler": "3.1.*"
   },
+  "extra": {
+    "laravel": {
+      "dont-discover": [
+        "rollbar/rollbar-laravel"
+      ]
+    }
+  },
     "autoload": {
         "classmap": [
             "database"
