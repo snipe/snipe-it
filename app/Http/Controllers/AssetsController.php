@@ -71,7 +71,7 @@ class AssetsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $company = Company::find($request->input('company_id'));
         } else {
             $company = null;
@@ -118,7 +118,7 @@ class AssetsController extends Controller
             ->with('category', Helper::categoryList('asset')) //handled in modal now?
             ->with('statuslabel_types', Helper::statusTypeList());
 
-        if ($request->has('model_id')) {
+        if ($request->filled('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
             $view->with('selected_model', $selected_model);
         }
@@ -165,7 +165,7 @@ class AssetsController extends Controller
         }
 
         // Create the image (if one was chosen.)
-        if ($request->has('image')) {
+        if ($request->filled('image')) {
             $image = $request->input('image');
 
             // After modification, the image is prefixed by mime info like the following:
@@ -293,22 +293,20 @@ class AssetsController extends Controller
         $asset->supplier_id = $request->input('supplier_id', null);
 
         // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->has('requestable');
+        $asset->requestable = $request->filled('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
 
         if ($asset->assigned_to=='') {
             $asset->location_id = $request->input('rtd_location_id', null);
         }
 
-
-        if ($request->has('image_delete')) {
+        if ($request->filled('image_delete')) {
             try {
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
             } catch (\Exception $e) {
                 \Log::error($e);
             }
-
         }
 
 
@@ -950,7 +948,7 @@ class AssetsController extends Controller
 
         $destinationPath = config('app.private_uploads').'/assets';
 
-        if ($request->hasFile('assetfile')) {
+        if ($request->filledFile('assetfile')) {
             foreach ($request->file('assetfile') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
@@ -1055,7 +1053,7 @@ class AssetsController extends Controller
     {
         $this->authorize('update', Asset::class);
 
-        if (!$request->has('ids')) {
+        if (!$request->filled('ids')) {
             return redirect()->back()->with('error', 'No assets selected');
         }
 
@@ -1065,7 +1063,7 @@ class AssetsController extends Controller
         }
 
 
-        if ($request->has('bulk_actions')) {
+        if ($request->filled('bulk_actions')) {
             if ($request->input('bulk_actions')=='labels') {
                 $count = 0;
                 return view('hardware/labels')
@@ -1106,62 +1104,62 @@ class AssetsController extends Controller
         
         \Log::debug($request->input('ids'));
         
-        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
+        if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
             $assets = $request->input('ids');
-            if (($request->has('purchase_date'))
-                ||  ($request->has('purchase_cost'))
-                ||  ($request->has('supplier_id'))
-                ||  ($request->has('order_number'))
-                || ($request->has('warranty_months'))
-                || ($request->has('rtd_location_id'))
-                || ($request->has('requestable'))
-                ||  ($request->has('company_id'))
-                || ($request->has('status_id'))
-                ||  ($request->has('model_id'))
+            if (($request->filled('purchase_date'))
+                ||  ($request->filled('purchase_cost'))
+                ||  ($request->filled('supplier_id'))
+                ||  ($request->filled('order_number'))
+                || ($request->filled('warranty_months'))
+                || ($request->filled('rtd_location_id'))
+                || ($request->filled('requestable'))
+                ||  ($request->filled('company_id'))
+                || ($request->filled('status_id'))
+                ||  ($request->filled('model_id'))
             ) {
                 foreach ($assets as $key => $value) {
                     $update_array = array();
 
-                    if ($request->has('purchase_date')) {
+                    if ($request->filled('purchase_date')) {
                         $update_array['purchase_date'] =  $request->input('purchase_date');
                     }
-                    if ($request->has('purchase_cost')) {
+                    if ($request->filled('purchase_cost')) {
                         $update_array['purchase_cost'] =  Helper::ParseFloat($request->input('purchase_cost'));
                     }
-                    if ($request->has('supplier_id')) {
+                    if ($request->filled('supplier_id')) {
                         $update_array['supplier_id'] =  $request->input('supplier_id');
                     }
-                    if ($request->has('model_id')) {
+                    if ($request->filled('model_id')) {
                         $update_array['model_id'] =  $request->input('model_id');
                     }
-                    if ($request->has('company_id')) {
+                    if ($request->filled('company_id')) {
                         if ($request->input('company_id')=="clear") {
                             $update_array['company_id'] =  null;
                         } else {
                             $update_array['company_id'] =  $request->input('company_id');
                         }
                     }
-                    if ($request->has('order_number')) {
+                    if ($request->filled('order_number')) {
                         $update_array['order_number'] =  $request->input('order_number');
                     }
-                    if ($request->has('warranty_months')) {
+                    if ($request->filled('warranty_months')) {
                         $update_array['warranty_months'] =  $request->input('warranty_months');
                     }
 
 
-                    if ($request->has('rtd_location_id')) {
+                    if ($request->filled('rtd_location_id')) {
                         $update_array['rtd_location_id'] = $request->input('rtd_location_id');
-                        if (($request->has('update_real_loc'))
+                        if (($request->filled('update_real_loc'))
                             && (($request->input('update_real_loc')) == '1'))
                         {
                             $update_array['location_id'] = $request->input('rtd_location_id');
                         }
                     }
                     
-                    if ($request->has('status_id')) {
+                    if ($request->filled('status_id')) {
                         $update_array['status_id'] = $request->input('status_id');
                     }
-                    if ($request->has('requestable')) {
+                    if ($request->filled('requestable')) {
                         $update_array['requestable'] = $request->input('requestable');
                     }
 

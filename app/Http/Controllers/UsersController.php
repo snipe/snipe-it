@@ -103,7 +103,7 @@ class UsersController extends Controller
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
         $user->email = $data['email'] = e($request->input('email'));
         $user->username = $data['username'] = e($request->input('username'));
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
             $data['password'] =  $request->input('password');
         }
@@ -135,13 +135,13 @@ class UsersController extends Controller
 
         if ($user->save()) {
 
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
                 $user->groups()->sync(array());
             }
 
-            if (($request->input('email_user') == 1) && ($request->has('email'))) {
+            if (($request->input('email_user') == 1) && ($request->filled('email'))) {
               // Send the credentials through email
                 $data = array();
                 $data['email'] = e($request->input('email'));
@@ -184,7 +184,7 @@ class UsersController extends Controller
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->department_id = $request->input('department_id', null);
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
         $user->activated = true;
@@ -306,7 +306,7 @@ class UsersController extends Controller
 
         // Only save groups if the user is a super user
         if (Auth::user()->isSuperUser()) {
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
                 $user->groups()->sync(array());
@@ -314,7 +314,7 @@ class UsersController extends Controller
         }
 
 
-        if ($request->has('username')) {
+        if ($request->filled('username')) {
             $user->username = $request->input('username');
         }
         $user->email = $request->input('email');
@@ -346,7 +346,7 @@ class UsersController extends Controller
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         // Do we want to update the user password?
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
 
@@ -472,22 +472,20 @@ class UsersController extends Controller
             $manager_conflict = false;
             $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
 
-            if ($request->has('location_id')) {
+            if ($request->filled('location_id')) {
                 $update_array['location_id'] = $request->input('location_id');
             }
-            if ($request->has('department_id')) {
+            if ($request->filled('department_id')) {
                 $update_array['department_id'] = $request->input('department_id');
             }
-            if ($request->has('company_id')) {
+            if ($request->filled('company_id')) {
                 $update_array['company_id'] = $request->input('company_id');
             }
-            if ($request->has('locale')) {
+            if ($request->filled('locale')) {
                 $update_array['locale'] = $request->input('locale');
             }
 
-
-            if ($request->has('manager_id')) {
-
+            if ($request->filled('manager_id')) {
                 // Do not allow a manager update if the selected manager is one of the users being
                 // edited.
                 if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
@@ -497,7 +495,7 @@ class UsersController extends Controller
                 }
 
             }
-            if ($request->has('activated')) {
+            if ($request->filled('activated')) {
                 $update_array['activated'] = $request->input('activated');
             }
 
@@ -507,7 +505,7 @@ class UsersController extends Controller
             }
 
             // Only sync groups if groups were selected
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 foreach ($users as $user) {
                     $user->groups()->sync($request->input('groups'));
                 }

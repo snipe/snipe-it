@@ -467,10 +467,10 @@ class AssetModelsController extends Controller
         $update_array = array();
 
 
-        if (($request->has('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
+        if (($request->filled('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
             $update_array['manufacturer_id'] = $request->input('manufacturer_id');
         }
-        if (($request->has('category_id') && ($request->input('category_id')!='NC'))) {
+        if (($request->filled('category_id') && ($request->input('category_id')!='NC'))) {
             $update_array['category_id'] = $request->input('category_id');
         }
         if ($request->input('fieldset_id')!='NC') {

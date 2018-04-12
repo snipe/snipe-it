@@ -269,7 +269,7 @@ class ViewAssetsController extends Controller
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
-        if ($request->has('signature_output')) {
+        if ($request->filled('signature_output')) {
             $path = config('app.private_uploads').'/signatures';
             $sig_filename = "siglog-".$findlog->id.'-'.date('Y-m-d-his').".png";
             $data_uri = e($request->get('signature_output'));

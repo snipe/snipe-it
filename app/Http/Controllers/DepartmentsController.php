@@ -30,7 +30,7 @@ class DepartmentsController extends Controller
     {
         $this->authorize('index', Department::class);
         $company = null;
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $company = Company::find($request->input('company_id'));
         }
         return view('departments/index')->with('company', $company);
@@ -51,7 +51,7 @@ class DepartmentsController extends Controller
         $department = new Department;
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
-        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -162,7 +162,7 @@ class DepartmentsController extends Controller
         $this->authorize('update', $department);
 
         $department->fill($request->all());
-        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
         $old_image = $department->image;
 

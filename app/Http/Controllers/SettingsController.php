@@ -326,7 +326,7 @@ class SettingsController extends Controller
 
         $setting->modellist_displays = '';
 
-        if (($request->has('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0))
+        if (($request->filled('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0))
         {
             $setting->modellist_displays = implode(',', $request->input('show_in_model_list'));
         }
@@ -417,7 +417,7 @@ class SettingsController extends Controller
             $setting->brand = 1;
 
         // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('image')) {
+        } elseif ($request->filledFile('image')) {
 
             if (!config('app.lock_passwords')) {
                 $image = $request->file('image');
@@ -494,7 +494,7 @@ class SettingsController extends Controller
         $setting->pwd_secure_complexity = '';
 
 
-        if ($request->has('pwd_secure_complexity')) {
+        if ($request->filled('pwd_secure_complexity')) {
             $setting->pwd_secure_complexity =  implode('|', $request->input('pwd_secure_complexity'));
         }
 

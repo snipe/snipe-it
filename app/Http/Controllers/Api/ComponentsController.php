@@ -27,15 +27,15 @@ class ComponentsController extends Controller
         $components = Company::scopeCompanyables(Component::select('components.*')->whereNull('components.deleted_at')
             ->with('company', 'location', 'category'));
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
         }
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $components->where('company_id','=',$request->input('company_id'));
         }
 
-        if ($request->has('category_id')) {
+        if ($request->filled('category_id')) {
             $components->where('category_id','=',$request->input('category_id'));
         }
 
