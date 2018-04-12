@@ -27,14 +27,12 @@ return [
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    'public/uploads',
-                    'storage/private_uploads',
-                    'storage/oauth-private.key',
-                    'storage/oauth-public.key',
-                    (env('BACKUP_ENV')=='true') ? '.env' : '.env.example',
-
-
-
+                    public_path('uploads'),
+                    storage_path('private_uploads'),
+                    storage_path('oauth-private.key'),
+                    storage_path('oauth-public.key'),
+                    (env('BACKUP_ENV')=='true') ? base_path('.env') : base_path('.env.example'),
+                    
                 ],
 
                 /*
