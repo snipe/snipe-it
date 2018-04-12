@@ -37,7 +37,7 @@ class CompaniesController extends Controller
 
         $companies = Company::withCount('assets','licenses','accessories','consumables','components','users');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $companies->TextSearch($request->input('search'));
         }
 
@@ -168,7 +168,7 @@ class CompaniesController extends Controller
             'companies.image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $companies = $companies->where('companies.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
