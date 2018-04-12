@@ -392,9 +392,9 @@ class UsersController extends Controller
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
             }
 
-            if (count($user->assets) > 0) {
+            if ($user->assets->count() >  0) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets) . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets->count() . ' assets associated with them.');
             }
 
             if ($user->licenses()->count() > 0) {
@@ -468,11 +468,11 @@ class UsersController extends Controller
     public function postBulkEditSave(Request $request)
     {
         $this->authorize('update', User::class);
-        if ((!Input::has('ids')) || (count(Input::input('ids')) == 0)) {
+        if ((!$request->filled('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         } else {
 
-            $user_raw_array = Input::get('ids');
+            $user_raw_array = $request->input('ids');
             $update_array = array();
             $manager_conflict = false;
 
