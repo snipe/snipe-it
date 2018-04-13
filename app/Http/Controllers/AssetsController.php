@@ -1198,22 +1198,31 @@ class AssetsController extends Controller
 
     public function postBulkCheckout(Request $request)
     {
-        $this->validate($request, [
-           "assigned_to"   => 'required'
-        ]);
-
-        $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
 
-        if (!$user) {
-            return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.user_does_not_exist'));
+        // Find checkout to type
+        if (request('checkout_to_type')=='location') {
+            $target = Location::find(request('assigned_location'));
+
+        } elseif (request('checkout_to_type')=='asset') {
+            $target = Asset::find(request('assigned_asset'));
+
+        } elseif (request('checkout_to_type')=='user') {
+            $target = User::find(request('assigned_user'));
         }
+
 
         if (!is_array(Input::get('selected_assets'))) {
             return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
         }
 
         $asset_ids = array_filter(Input::get('selected_assets'));
+
+        foreach ($asset_ids as $asset_id) {
+            if ($target->id == $asset_id) {
+                return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+            }
+        }
 
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
             $checkout_at = e(Input::get('checkout_at'));
@@ -1229,20 +1238,18 @@ class AssetsController extends Controller
 
 
         $errors = [];
-        DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
-          
+        DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
+
             foreach ($asset_ids as $asset_id) {
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);
-                $error = $asset->checkOut($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+                $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
 
-                if ($user->location_id!='') {
-                    $asset->location_id = $user->location_id;
+                if ($target->location_id!='') {
+                    $asset->location_id = $target->location_id;
                     $asset->unsetEventDispatcher();
                     $asset->save();
-
                 }
-
 
                 if ($error) {
                     array_merge_recursive($errors, $asset->getErrors()->toArray());
@@ -1251,11 +1258,11 @@ class AssetsController extends Controller
         });
 
         if (!$errors) {
-          // Redirect to the new asset page
+            // Redirect to the new asset page
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
         }
-          // Redirect to the asset management page with error
-            return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
+        // Redirect to the asset management page with error
+        return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
     }
 
 
