@@ -25,16 +25,14 @@ class ApiCategoriesCest
         $I->wantTo('Get a list of categories');
 
         // call
-        $I->sendGET('/categories?order_by=id&limit=10');
+        $I->sendGET('/categories?sort=id&limit=10');
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse(), true);
-        // dd($response);
         // sample verify
         $category = App\Models\Category::withCount('assets','accessories','consumables','components')
-            ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
-
+            ->orderByDesc('id')->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson((new CategoriesTransformer)->transformCategory($category));
     }
 
