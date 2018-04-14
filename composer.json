@@ -22,7 +22,7 @@
     "laravel/passport": "~6.0",
     "laravel/tinker": "^1.0",
     "laravelcollective/html": "^5.3",
-    "league/csv": "^8.1",
+    "league/csv": "^9.0",
     "maknz/slack": "^1.7",
     "neitanod/forceutf8": "^2.0",
     "patchwork/utf8": "~1.2",
