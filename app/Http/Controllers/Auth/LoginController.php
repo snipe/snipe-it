@@ -208,15 +208,20 @@ class LoginController extends Controller
         }
 
         $user = Auth::user();
-        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
+        $google2fa = app()->make('pragmarx.google2fa');
 
         if ($user->two_factor_secret=='') {
             $user->two_factor_secret = $google2fa->generateSecretKey(32);
             $user->save();
         }
 
+        // $google2fa_url = $google2fa->getQRCodeGoogleUrl(
+        //     urlencode(Setting::getSettings()->site_name),
+        //     urlencode($user->username),
+        //     $user->two_factor_secret
+        // );
 
-        $google2fa_url = $google2fa->getQRCodeGoogleUrl(
+        $google2fa_url = $google2fa->getQRCodeInline(
             urlencode(Setting::getSettings()->site_name),
             urlencode($user->username),
             $user->two_factor_secret
@@ -251,7 +256,7 @@ class LoginController extends Controller
 
         $user = Auth::user();
         $secret = $request->get('two_factor_secret');
-        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
+        $google2fa = app()->make('pragmarx.google2fa');
         $valid = $google2fa->verifyKey($user->two_factor_secret, $secret);
 
         if ($valid) {
