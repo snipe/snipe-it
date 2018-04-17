@@ -41,7 +41,7 @@
             {!! $errors->first('custom_fieldset', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
             <label class="m-l-xs">
                 {{ Form::checkbox('add_default_values', 1, Input::old('add_default_values'), ['class' => 'js-default-values-toggler']) }}
-                Add default values
+                {{ trans('admin/models/general.add_default_values') }}
             </label>
         </div>
     </div>
