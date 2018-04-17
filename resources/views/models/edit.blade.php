@@ -33,12 +33,25 @@
 </div>
 
 <!-- Custom Fieldset -->
-<div class="form-group {{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
-    <label for="custom_fieldset" class="col-md-3 control-label">{{ trans('admin/models/general.fieldset') }}</label>
-    <div class="col-md-7">
-        {{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),Input::old('custom_fieldset', $item->fieldset_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-        {!! $errors->first('custom_fieldset', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
+<div id="app">
+    <div class="form-group {{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
+        <label for="custom_fieldset" class="col-md-3 control-label">{{ trans('admin/models/general.fieldset') }}</label>
+        <div class="col-md-7">
+            {{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),Input::old('custom_fieldset', $item->fieldset_id), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px')) }}
+            {!! $errors->first('custom_fieldset', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
+            <label class="m-l-xs">
+                {{ Form::checkbox('add_default_values', 1, Input::old('add_default_values'), ['class' => 'js-default-values-toggler']) }}
+                Add default values
+            </label>
+        </div>
     </div>
+
+    <fieldset-default-values
+        model-id="{{ $item->id ?: '' }}"
+        fieldset-id="{{ !empty($item->fieldset) ? $item->fieldset->id : Input::old('custom_fieldset') }}"
+        previous-input="{{ json_encode(Input::old('default_values')) }}"
+    >
+    </fieldset-default-values>
 </div>
 
 @include ('partials.forms.edit.notes')
@@ -59,3 +72,11 @@
 @include ('partials.forms.edit.image-upload')
 
 @stop
+
+@section('moar_scripts')
+<script nonce="{{ csrf_token() }}">
+    new Vue({
+        el: '#app'
+    });
+</script>
+@endsection

@@ -8,7 +8,7 @@
               <!-- Listbox -->
               @if ($field->element=='listbox')
                   {{ Form::select($field->db_column_name(), $field->formatFieldValuesAsArray(),
-                  Input::old($field->db_column_name(),(isset($item) ? $item->{$field->db_column_name()} : "")), ['class'=>'format select2 form-control']) }}
+                  Input::old($field->db_column_name(),(isset($item) ? $item->{$field->db_column_name()} : $field->defaultValue($model->id))), ['class'=>'format select2 form-control']) }}
 
               @elseif ($field->element=='checkbox')
                     <!-- Checkboxes -->
@@ -39,7 +39,7 @@
 
                 @else
                     @if (($field->field_encrypted=='0') || (Gate::allows('admin')))
-                    <input type="text" value="{{ Input::old($field->db_column_name(),(isset($item) ? \App\Helpers\Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : "")) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
+                    <input type="text" value="{{ Input::old($field->db_column_name(),(isset($item) ? \App\Helpers\Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
                         @else
                             <input type="text" value="{{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}" class="form-control disabled" disabled>
                     @endif

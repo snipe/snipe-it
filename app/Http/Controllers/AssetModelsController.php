@@ -110,6 +110,10 @@ class AssetModelsController extends Controller
 
             // Was it created?
         if ($model->save()) {
+            if ($this->shouldAddDefaultValues($request->input())) {
+                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+            }
+
             // Redirect to the new model  page
             return redirect()->route("models.index")->with('success', trans('admin/models/message.create.success'));
         }
@@ -206,10 +210,16 @@ class AssetModelsController extends Controller
         $model->notes               = $request->input('notes');
         $model->requestable         = $request->input('requestable', '0');
 
+        $this->removeCustomFieldsDefaultValues($model);
+
         if ($request->input('custom_fieldset')=='') {
             $model->fieldset_id = null;
         } else {
             $model->fieldset_id = $request->input('custom_fieldset');
+
+            if ($this->shouldAddDefaultValues($request->input())) {
+                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+            }
         }
 
         $old_image = $model->image;
@@ -531,4 +541,43 @@ class AssetModelsController extends Controller
 
     }
 
+    /**
+     * Returns true if a fieldset is set, 'add default values' is ticked and if
+     * any default values were entered into the form.
+     *
+     * @param  array  $input
+     * @return boolean
+     */
+    private function shouldAddDefaultValues(array $input)
+    {
+        return !empty($input['add_default_values'])
+            && !empty($input['default_values'])
+            && !empty($input['custom_fieldset']);
+    }
+
+    /**
+     * Adds default values to a model (as long as they are truthy)
+     *
+     * @param  AssetModel $model
+     * @param  array      $defaultValues
+     * @return void
+     */
+    private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
+    {
+        foreach ($defaultValues as $customFieldId => $defaultValue) {
+            if ($defaultValue) {
+                $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
+            }
+        }
+    }
+
+    /**
+     * Removes all default values
+     *
+     * @return void
+     */
+    private function removeCustomFieldsDefaultValues(AssetModel $model)
+    {
+        $model->defaultValues()->detach();
+    }
 }

@@ -32,6 +32,11 @@ Vue.component(
     require('./components/importer/importer.vue')
 );
 
+Vue.component(
+    'fieldset-default-values',
+    require('./components/forms/asset-models/fieldset-default-values.vue')
+);
+
 // Commented out currently to avoid trying to load vue everywhere.
 // const app = new Vue({
 //     el: '#app'

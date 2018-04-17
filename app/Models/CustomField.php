@@ -146,6 +146,26 @@ class CustomField extends Model
         return $this->belongsTo('\App\Models\User');
     }
 
+    public function defaultValues()
+    {
+        return $this->belongsToMany('\App\Models\AssetModel', 'models_custom_fields')->withPivot('default_value');
+    }
+
+    /**
+     * Returns the default value for a given model using the defaultValues
+     * relationship
+     *
+     * @param  int $modelId
+     * @return string
+     */
+    public function defaultValue($modelId)
+    {
+        return $this->defaultValues->filter(function ($item) use ($modelId) {
+            return $item->pivot->asset_model_id = $modelId;
+        })->map(function ($item) {
+            return $item->pivot->default_value;
+        })->first();
+    }
 
     public function check_format($value)
     {

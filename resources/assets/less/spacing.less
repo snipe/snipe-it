@@ -1,0 +1,56 @@
+/*
+ * Helpers: Spacing
+ * Universal minor spacing classes to help space things out without
+ * use-dedicated classes
+ * -----------------
+ */
+
+@props: margin m, padding p;
+@spacers: xs 5px 10px,
+          sm 10px 20px,
+          md 20px 30px;
+
+.loop-props(@prop-index) when (@prop-index > 0){
+  @prop: extract(@props, @prop-index);
+  @prop-name: extract(@prop, 1);
+  @abbrev: extract(@prop, 2);
+
+  .loop-sizes(@prop-name; @abbrev; length(@spacers));
+
+  .loop-props(@prop-index - 1);
+}
+
+.loop-props(length(@props)) !important;
+
+.loop-sizes(@prop-name; @abbrev; @size-index) when (@size-index > 0){
+  @spacer: extract(@spacers, @size-index);
+  @size: extract(@spacer, 1);
+  @x: extract(@spacer, 2);
+  @y: extract(@spacer, 3);
+
+  .@{abbrev}-a-@{size} {
+    @{prop-name}: @y @x;
+  }
+  .@{abbrev}-t-@{size} {
+    @{prop-name}-top: @y;
+  }
+  .@{abbrev}-r-@{size} {
+    @{prop-name}-right: @x;
+  }
+  .@{abbrev}-b-@{size} {
+    @{prop-name}-bottom: @y;
+  }
+  .@{abbrev}-l-@{size} {
+    @{prop-name}-left: @x;
+  }
+  .@{abbrev}-x-@{size} {
+    @{prop-name}-right: @x;
+    @{prop-name}-left: @x;
+  }
+  .@{abbrev}-y-@{size} {
+    @{prop-name}-top: @y;
+    @{prop-name}-bottom: @y;
+  }
+
+  .loop-sizes(@prop-name; @abbrev; @size-index - 1);
+}
