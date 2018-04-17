@@ -8,9 +8,15 @@
 
     fieldset > div {
         background: #f4f4f4;
+        border: 1px solid #d3d6de;
         margin: 0 15px 15px;
         padding: 20px 20px 10px;
-        border: 1px solid #d3d6de;
+    }
+
+    @media (max-width: 992px) {
+        legend {
+            text-align: left !important;
+        }
     }
 
     @media (min-width: 992px) {
@@ -18,6 +24,8 @@
             width: 55%;
         }
     }
+
+
 </style>
 
 <template>
@@ -26,7 +34,7 @@
             <div class="form-group">
                 <fieldset>
                     <legend class="col-md-3 control-label">Default Values</legend>
-                    <div class="col-md-7">
+                    <div class="col-sm-8 col-xl-7">
                         <p v-if="error">
                             There was a problem retrieving the fields for this fieldset.
                         </p>
@@ -67,7 +75,7 @@
                     fieldset: null,
                     field: null,
                 },
-                fields: [],
+                fields: null,
                 show: false,
                 error: false,
             }
