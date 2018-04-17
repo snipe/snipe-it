@@ -168,7 +168,7 @@ class CustomFieldsetsController extends Controller
      * @param $fieldsetId
      * @return string JSON
      */
-    public function fieldsWithDefaultValues($modelId, $fieldsetId)
+    public function fieldsWithDefaultValues($fieldsetId, $modelId)
     {
         $this->authorize('view', CustomFieldset::class);
 

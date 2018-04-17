@@ -155,9 +155,9 @@
              */
             getUrl() {
                 if (this.identifiers.model) {
-                    return route('api.models.fieldsets', {
-                        model: this.identifiers.model,
+                    return route('api.fieldsets.fields-with-default-value', {
                         fieldset: this.identifiers.fieldset,
+                        model: this.identifiers.model,
                     })
                 }
 

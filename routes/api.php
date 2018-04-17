@@ -259,6 +259,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses' => 'CustomFieldsetsController@fields'
             ]
         );
+        Route::get('/{fieldset}/fields/{model}',
+            [
+                'as' => 'api.fieldsets.fields-with-default-value',
+                'uses' => 'CustomFieldsetsController@fieldsWithDefaultValues'
+            ]
+        );
     });
 
     Route::resource('fieldsets', 'CustomFieldsetsController',
@@ -520,12 +526,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             [
                 'as' => 'api.models.selectlist',
                 'uses'=> 'AssetModelsController@selectlist'
-            ]
-        );
-        Route::get('{model}/fieldsets/{fieldset}',
-            [
-                'as' => 'api.models.fieldsets',
-                'uses' => 'CustomFieldsetsController@fieldsWithDefaultValues'
             ]
         );
     }); // Models group

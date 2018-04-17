@@ -161,7 +161,7 @@ class CustomField extends Model
     public function defaultValue($modelId)
     {
         return $this->defaultValues->filter(function ($item) use ($modelId) {
-            return $item->pivot->asset_model_id = $modelId;
+            return $item->pivot->asset_model_id == $modelId;
         })->map(function ($item) {
             return $item->pivot->default_value;
         })->first();
