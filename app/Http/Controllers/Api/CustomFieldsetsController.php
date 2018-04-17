@@ -156,7 +156,7 @@ class CustomFieldsetsController extends Controller
     {
         $this->authorize('view', CustomFieldset::class);
         $set = CustomFieldset::findOrFail($id);
-        $fields = $set->fields->get();
+        $fields = $set->fields;
         return (new CustomFieldsTransformer)->transformCustomFields($fields, $fields->count());
     }
 
