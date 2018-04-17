@@ -96,11 +96,23 @@
         </div>
 
         <!-- Asset Maintenance Cost -->
+        <?php
+        $currency_type=null;
+        if ($item->asset && $item->asset->location) {
+            $currency_type = $item->asset->location->currency;
+        }
+        ?>
         <div class="form-group {{ $errors->has('cost') ? ' has-error' : '' }}">
           <label for="cost" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.cost') }}</label>
           <div class="col-md-2">
             <div class="input-group">
-              <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
+              <span class="input-group-addon">
+                @if (isset($currency_type))
+                  {{ $currency_type }}
+                @else
+                  {{ $snipeSettings->default_currency }}
+                @endif
+              </span>
               <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', \App\Helpers\Helper::formatCurrencyOutput($item->cost)) }}" />
               {!! $errors->first('cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
