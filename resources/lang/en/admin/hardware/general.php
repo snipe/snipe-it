@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
 	'archived'  				=> 'Archived',
     'asset'  					=> 'Asset',
-    'bulk_checkout'             => 'Checkout Assets to User',
+    'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Clone Asset',
