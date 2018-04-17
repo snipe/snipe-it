@@ -267,24 +267,24 @@ abstract class Importer
                 return $user;
             }
             $this->log('User with id'.$user_name.' does not exist.  Continuing through our processes');
-        } else {
-            $user_email_array = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $user_name);
-            $first_name = $user_email_array['first_name'];
-            $last_name = $user_email_array['last_name'];
+        }
+        // Generate data based on user name.
+        $user_email_array = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $user_name);
+        $first_name = $user_email_array['first_name'];
+        $last_name = $user_email_array['last_name'];
 
-            if ($user_email=='') {
-                if (Setting::getSettings()->email_domain) {
-                    $user_email = str_slug($user_email_array['username']).'@'.Setting::getSettings()->email_domain;
-                }
+        if (empty($user_email)) {
+            if (Setting::getSettings()->email_domain) {
+                $user_email = str_slug($user_email_array['username']).'@'.Setting::getSettings()->email_domain;
             }
+        }
 
-            if ($user_username=='') {
-                if ($this->usernameFormat =='email') {
-                    $user_username = $user_email;
-                } else {
-                    $user_name_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_name);
-                    $user_username = $user_name_array['username'];
-                }
+        if (empty($user_username)) {
+            if ($this->usernameFormat =='email') {
+                $user_username = $user_email;
+            } else {
+                $user_name_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_name);
+                $user_username = $user_name_array['username'];
             }
         }
         $user = new User;
