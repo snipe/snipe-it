@@ -96,19 +96,13 @@
         </div>
 
         <!-- Asset Maintenance Cost -->
-        <?php
-        $currency_type=null;
-        if ($item->asset && $item->asset->location) {
-            $currency_type = $item->asset->location->currency;
-        }
-        ?>
         <div class="form-group {{ $errors->has('cost') ? ' has-error' : '' }}">
           <label for="cost" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.cost') }}</label>
           <div class="col-md-2">
             <div class="input-group">
               <span class="input-group-addon">
-                @if (isset($currency_type))
-                  {{ $currency_type }}
+                @if (($item->asset) && ($item->asset->location) && ($item->asset->location->currency!=''))
+                  {{ $item->asset->location->currency }}
                 @else
                   {{ $snipeSettings->default_currency }}
                 @endif
@@ -132,8 +126,9 @@
       <div class="box-footer text-right">
         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
       </div>
+    </div> <!-- .box-default -->
     </form>
-    </div>
   </div>
+</div>
 
 @stop
