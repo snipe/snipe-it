@@ -1,26 +1,30 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AssetFileRequest;
 use App\Helpers\Helper;
+use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\SaveUserRequest;
 use App\Models\Accessory;
-use App\Models\LicenseSeat;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use App\Models\Group;
 use App\Models\Company;
-use App\Models\Location;
-use App\Models\License;
-use App\Models\Setting;
-use App\Http\Requests\SaveUserRequest;
-use Symfony\Component\HttpFoundation\StreamedResponse;
-use App\Models\User;
+use App\Models\Group;
 use App\Models\Ldap;
+use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\Location;
+use App\Models\Setting;
+use App\Models\User;
+use App\Notifications\WelcomeNotification;
+use Artisan;
 use Auth;
 use Config;
 use Crypt;
 use DB;
+use Gate;
 use HTML;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Input;
 use Lang;
 use League\Csv\Reader;
@@ -29,12 +33,9 @@ use Redirect;
 use Response;
 use Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use URL;
 use View;
-use Illuminate\Http\Request;
-use Gate;
-use Artisan;
-use App\Notifications\WelcomeNotification;
 
 /**
  * This controller handles all actions related to Users for
@@ -163,15 +164,7 @@ class UsersController extends Controller
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
-    /**
-     * Returns a view that displays the edit user form
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
-     * @param $permissions
-     * @return View
-     * @internal param int $id
-     */
+
 
     private function filterDisplayable($permissions)
     {
@@ -184,6 +177,15 @@ class UsersController extends Controller
         return $output;
     }
 
+    /**
+     * Returns a view that displays the edit user form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @param $permissions
+     * @return View
+     * @internal param int $id
+     */
     public function edit($id)
     {
 
@@ -329,7 +331,7 @@ class UsersController extends Controller
     {
         try {
             // Get user information
-            $user = User::find($id);
+            $user = User::findOrFail($id);
             // Authorize takes care of many of our logic checks now.
             $this->authorize('delete', User::class);
 
@@ -367,7 +369,7 @@ class UsersController extends Controller
 
             // Redirect to the user management page
             return redirect()->route('users.index')->with('success', $success);
-        } catch (UserNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
             // Redirect to the user management page
@@ -498,7 +500,7 @@ class UsersController extends Controller
             if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
                 unset($user_raw_array[$key]);
             }
-            
+
 
             if (!config('app.lock_passwords')) {
 
