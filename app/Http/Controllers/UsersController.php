@@ -164,59 +164,6 @@ class UsersController extends Controller
     }
 
     /**
-    * JSON handler for creating a user through a modal popup
-    *
-    * @todo Handle validation more graciously
-    * @author [B. Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return string JSON
-    */
-    public function apiStore(SaveUserRequest $request)
-    {
-        $this->authorize('create', User::class);
-
-        $user = new User;
-        $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
-        $inputs['activated'] = true;
-
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->department_id = $request->input('department_id', null);
-        if ($request->has('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
-        $user->activated = true;
-
-        // Was the user created?
-        if ($user->save()) {
-
-            if (Input::get('email_user') == 1) {
-                // Send the credentials through email
-                $data = array();
-                $data['email'] = $request->input('email');
-                $data['username'] = $request->input('username');
-                $data['first_name'] = $request->input('first_name');
-                $data['last_name'] = e($request->input('last_name'));
-                $data['password'] = $request->input('password');
-
-                $user->notify(new WelcomeNotification($data));
-
-                /*Mail::send('emails.send-login', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
-                });*/
-            }
-
-            return JsonResponse::create($user);
-
-        }
-        return JsonResponse::create(["error" => "Failed validation: " . print_r($user->getErrors(), true)], 500);
-    }
-
-    /**
      * Returns a view that displays the edit user form
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
