@@ -129,7 +129,7 @@
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
                   'pending': '{{ strtolower(trans('general.pending')) }}'
-                }
+                };
 
                 switch (value.status_meta) {
                     case 'deployed':
@@ -425,8 +425,7 @@
     }
 
     function assetTagLinkFormatter(value, row) {
-
-        if (value) {
+        if (row.asset && row.asset.asset_tag) {
             return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
         }
     }
