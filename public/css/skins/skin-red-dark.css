@@ -8,10 +8,15 @@
 }
 
 .main-header .navbar, .main-header .logo {
-background-color: #ad0c0c;
-background: -webkit-linear-gradient(top,  #ad0c0c 0%,#ad0c0c 100%);
-background: linear-gradient(to bottom, #ad0c0c 0%,#ad0c0c 100%);
-border-color: #ad0c0c;
+    background-color: var(--header);
+    background: -webkit-linear-gradient(top,  var(--header) 0%,var(--header) 100%);
+    background: linear-gradient(to bottom, var(--header) 0%,var(--header) 100%);
+    border-color: var(--header);
+}
+
+.modal-content {
+    background-color: var(--back-main);
+    color: var(--text-main);
 }
 
 a, a:link, a:visited, .btn-primary.hover {
