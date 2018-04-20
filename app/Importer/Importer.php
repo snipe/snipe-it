@@ -112,7 +112,7 @@ abstract class Importer
         $headerRow = $this->csv->fetchOne();
         $results = $this->normalizeInputArray($this->csv->fetchAssoc());
 
-        $this->populateCustomFields();
+        $this->populateCustomFields($headerRow);
 
         DB::transaction(function () use (&$results) {
             Model::unguard();
@@ -138,7 +138,7 @@ abstract class Importer
      * @author Daniel Meltzer
      * @since  5.0
      */
-    protected function populateCustomFields()
+    protected function populateCustomFields($headerRow)
     {
         // Stolen From https://adamwathan.me/2016/07/14/customizing-keys-when-mapping-collections/
         // This 'inverts' the fields such that we have a collection of fields indexed by name.
