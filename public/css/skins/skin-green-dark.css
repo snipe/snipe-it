@@ -7,13 +7,6 @@
   --text-sub: #BBB;
 }
 
-.main-header .navbar, .main-header .logo {
-    background-color: #18A452;
-    background: -webkit-linear-gradient(top,  #18A452 0%,#18A452 100%);
-    background: linear-gradient(to bottom, #18A452 0%,#18A452 100%);
-    border-color: #18A452;
-}
-
 a, a:link, a:visited, .btn-primary.hover {
     color: var(--header);
 }
@@ -105,6 +98,16 @@ input[type=text], input[type=search] {
     color: var(--text-main);
 }
 .main-footer {
+    background-color: var(--back-main);
+    color: var(--text-main);
+}
+.main-header .navbar, .main-header .logo {
+    background-color: var(--header);
+    background: -webkit-linear-gradient(top,  var(--header) 0%,var(--header) 100%);
+    background: linear-gradient(to bottom, var(--header) 0%,var(--header) 100%);
+    border-color: var(--header);
+}
+.modal-content {
     background-color: var(--back-main);
     color: var(--text-main);
 }
