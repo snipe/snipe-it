@@ -166,10 +166,8 @@ class AccessoriesController extends Controller
         $accessory->supplier_id             = request('supplier_id');
 
         if ($request->hasFile('image')) {
-            
+
             if (!config('app.lock_passwords')) {
-                
-                
                 $image = $request->file('image');
                 $ext = $image->getClientOriginalExtension();
                 $file_name = "accessory-".str_random(18).'.'.$ext;
