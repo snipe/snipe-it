@@ -23,7 +23,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
     protected $table = 'asset_maintenances';
     // Declaring rules for form validation
     protected $rules = [
-        'asset_id'               => 'required|integer',
+        'asset_id'               => 'integer',
         'supplier_id'            => 'required|integer',
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
