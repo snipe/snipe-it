@@ -118,28 +118,24 @@
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('location_address', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('general.address') }}
-              </label>
-            </div>
-            <div class="checkbox col-md-12">
-              <label>
-                {{ Form::checkbox('assigned_to', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/licenses/table.assigned_to') }}
-              </label>
-            </div>
-            <div class="checkbox col-md-12">
-              <label>
-                {{ Form::checkbox('username', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/users/table.username') }}
+                - {{ trans('general.address') }}
               </label>
             </div>
 
             <div class="checkbox col-md-12">
               <label>
-                {{ Form::checkbox('employee_num', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/users/table.employee_num') }}
+                {{ Form::checkbox('rtd_location', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/hardware/form.default_location') }}
               </label>
             </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('rtd_location_address', '1', '1', ['class' => 'minimal']) }}
+                - {{ trans('general.address') }}
+              </label>
+            </div>
+
+
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('status', '1', '1', ['class' => 'minimal']) }}
@@ -200,6 +196,40 @@
                 {{ trans('general.notes') }}
               </label>
             </div>
+
+            <!-- User fields -->
+            <div class="checkbox col-md-12">
+              <h4>Checked Out To Fields:</h4>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('assigned_to', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/licenses/table.assigned_to') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('username', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/users/table.username') }}
+              </label>
+            </div>
+
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('employee_num', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/users/table.employee_num') }}
+              </label>
+            </div>
+
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('department', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('general.department') }}
+              </label>
+            </div>
+
+
+
 
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">

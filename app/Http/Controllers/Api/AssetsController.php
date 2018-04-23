@@ -77,6 +77,9 @@ class AssetsController extends Controller
             'last_audit_date',
             'next_audit_date',
             'warranty_months',
+            'checkouts_count',
+            'checkins_count',
+            'user_requests_count',
         ];
 
         $filter = array();
@@ -92,11 +95,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-            'model.category', 'model.manufacturer', 'model.fieldset','supplier');
-
-
-
-
+            'model.category', 'model.manufacturer', 'model.fieldset','supplier')->withCount('checkins', 'checkouts', 'userRequests');
 
 
         // These are used by the API to query against specific ID numbers.
@@ -104,6 +103,10 @@ class AssetsController extends Controller
         // locations, etc.
         if ($request->has('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
+        }
+
+        if ($request->input('requestable')=='true') {
+            $assets->where('assets.requestable', '=', '1');
         }
 
         if ($request->has('model_id')) {
@@ -116,7 +119,6 @@ class AssetsController extends Controller
 
         if ($request->has('location_id')) {
             $assets->where('assets.location_id', '=', $request->input('location_id'));
-           // dd($assets->toSql());
         }
 
         if ($request->has('supplier_id')) {
@@ -322,7 +324,7 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->findOrFail($id)) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->withCount('checkins', 'checkouts', 'userRequests')->findOrFail($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
@@ -736,5 +738,50 @@ class AssetsController extends Controller
 
 
 
+    }
+
+
+
+    /**
+     * Returns JSON listing of all requestable assets
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return JsonResponse
+     */
+    public function requestable(Request $request)
+    {
+        
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
+            ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier')->where('assets.requestable', '=', '1');
+
+        $offset = request('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $assets->TextSearch($request->input('search'));
+
+        switch ($request->input('sort')) {
+            case 'model':
+                $assets->OrderModels($order);
+                break;
+            case 'model_number':
+                $assets->OrderModelNumber($order);
+                break;
+            case 'category':
+                $assets->OrderCategory($order);
+                break;
+            case 'manufacturer':
+                $assets->OrderManufacturer($order);
+                break;
+            default:
+                $assets->orderBy('assets.created_at', $order);
+                break;
+        }
+
+
+        $total = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
+        return (new AssetsTransformer)->transformRequestedAssets($assets, $total);
     }
 }

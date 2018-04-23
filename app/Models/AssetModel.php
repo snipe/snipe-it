@@ -98,6 +98,14 @@ class AssetModel extends SnipeModel
         return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
     }
 
+
+    public function getImageUrl() {
+        if ($this->image) {
+            return url('/').'/uploads/models/'.$this->image;
+        }
+        return false;
+    }
+
     /**
     * -----------------------------------------------
     * BEGIN QUERY SCOPES

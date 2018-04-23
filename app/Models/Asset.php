@@ -11,7 +11,6 @@ use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Notifications\Notifiable;
 use DB;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckoutAssetNotification;
@@ -95,6 +94,7 @@ class Asset extends Depreciable
         'assigned_type',
         'company_id',
         'image',
+        'location_id',
         'model_id',
         'name',
         'notes',
@@ -348,6 +348,38 @@ class Asset extends Depreciable
                   ->where('item_type', '=', Asset::class)
                   ->orderBy('created_at', 'desc')
                   ->withTrashed();
+    }
+
+    /**
+     * Get checkouts
+     */
+    public function checkouts()
+    {
+        return $this->assetlog()->where('action_type', '=', 'checkout')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get checkins
+     */
+    public function checkins()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'checkin from')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get user requests
+     */
+    public function userRequests()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'requested')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
     }
 
 

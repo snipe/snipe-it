@@ -100,9 +100,7 @@ tr {
                         {id: 'company', text: 'Company' },
                         {id: 'checkout_to', text: 'Checked out to' },
                         {id: 'email', text: 'Email' },
-                        {id: 'first_name', text: 'First Name' },
                         {id: 'item_name', text: 'Item Name' },
-                        {id: 'last_name', text: 'Last Name' },
                         {id: 'location', text: 'Location' },
                         {id: 'maintained', text: 'Maintained' },
                         {id: 'manufacturer', text: 'Manufacturer' },
@@ -135,8 +133,11 @@ tr {
                     ],
                     users: [
                         {id: 'employee_num', text: 'Employee Number' },
+                        {id: 'first_name', text: 'First Name' },
                         {id: 'jobtitle', text: 'Job Title' },
+                        {id: 'last_name', text: 'Last Name' },
                         {id: 'phone_number', text: 'Phone Number' },
+
                     ],
                     customFields: this.customFields,
                 },
@@ -150,13 +151,24 @@ tr {
         },
         computed: {
             columns() {
+                // function to sort objects by their display text.
+                function sorter(a,b) {
+                    if (a.text < b.text)
+                        return -1;
+                    if (a.text > b.text)
+                        return 1;
+                    return 0;
+                }
                 switch(this.options.importType) {
                     case 'asset':
-                        return this.columnOptions.general.concat(this.columnOptions.assets).concat(this.columnOptions.customFields);
+                        return this.columnOptions.general
+                                .concat(this.columnOptions.assets)
+                                .concat(this.columnOptions.customFields)
+                                .sort(sorter);
                     case 'license':
-                        return this.columnOptions.general.concat(this.columnOptions.licenses);
+                        return this.columnOptions.general.concat(this.columnOptions.licenses).sort(sorter);
                     case 'user':
-                        return this.columnOptions.general.concat(this.columnOptions.users);
+                        return this.columnOptions.general.concat(this.columnOptions.users).sort(sorter);
                 }
                 return this.columnOptions.general;
             },

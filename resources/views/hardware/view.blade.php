@@ -25,7 +25,7 @@
           @endcan
       @endif
     @endif
-      @can('edit', \App\Models\Asset::class)
+      @can('update', \App\Models\Asset::class)
     <li role="presentation"><a href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
       @endcan
       @can('create', \App\Models\Asset::class)
@@ -465,6 +465,28 @@
                         </td>
                       </tr>
                     @endif
+
+                    <tr>
+                      <td>{{ trans('general.checkouts_count') }}</td>
+                      <td>
+                       {{ ($asset->checkouts) ? (int) $asset->checkouts->count() : '0' }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>{{ trans('general.checkins_count') }}</td>
+                      <td>
+                        {{ ($asset->checkins) ? (int) $asset->checkins->count() : '0' }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>{{ trans('general.user_requests_count') }}</td>
+                      <td>
+                        {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
+                      </td>
+                    </tr>
+
                   </tbody>
                 </table>
               </div> <!-- /table-responsive -->

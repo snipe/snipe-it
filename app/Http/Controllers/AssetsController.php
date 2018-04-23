@@ -1305,12 +1305,16 @@ class AssetsController extends Controller
         }
     }
 
-    public function getRequestedIndex($id = null)
+    public function getRequestedIndex($user_id = null)
     {
-        if ($id) {
-            $requestedItems = CheckoutRequest::where('user_id', $id)->with('user', 'requestedItem')->get();
+        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->whereNull('canceled_at')->with('user', 'requestedItem');
+
+        if ($user_id) {
+            $requestedItems->where('user_id', $user_id)->get();
         }
-        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
+
+        $requestedItems = $requestedItems->orderBy('created_at', 'desc')->get();
+
         return view('hardware/requested', compact('requestedItems'));
     }
 

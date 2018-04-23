@@ -50,7 +50,7 @@
 .fixed-table-body {
     overflow-x: auto;
     overflow-y: auto;
-    height: 100%;
+    height: auto;
 }
 
 .fixed-table-container table {

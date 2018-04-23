@@ -266,7 +266,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 data-show-columns="true"
                 data-show-export="true"
                 data-show-refresh="true"
-                data-sort-order="asc"
+                data-sort-order="desc"
                 id="userActivityReport"
                 class="table table-striped snipe-table"
                 data-url="{{route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'User', 'order' => 'desc']) }}"
