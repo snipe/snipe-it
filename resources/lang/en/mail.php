@@ -23,6 +23,7 @@ return array(
     'Confirm_Asset_Checkin' => 'Confirm Asset Checkin.',
     'Confirm_Accessory_Checkin' => 'Confirm Accessory Checkin.',
     'Confirm_accessory_delivery' => 'Confirm accessory delivery.',
+    'Confirm_license_delivery' => 'Confirm license delivery.',
     'Confirm_asset_delivery' => 'Confirm asset delivery.',
     'Confirm_consumable_delivery' => 'Confirm consumable delivery.',
     'current_QTY' => 'Current QTY',
