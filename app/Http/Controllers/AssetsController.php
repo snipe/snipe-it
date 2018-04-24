@@ -1020,7 +1020,7 @@ class AssetsController extends Controller
             $file = $log->get_src('assets');
 
             if ($log->action_type =='audit') {
-                $file = $log->get_src('assets/audits');
+                $file = $log->get_src('audits');
             }
 
             $filetype = Helper::checkUploadIsImage($file);
@@ -1328,7 +1328,7 @@ class AssetsController extends Controller
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                     try {
-                     $destinationPath = config('app.private_uploads').'/assets/audits';
+                     $destinationPath = config('app.private_uploads').'/audits';
                      $extension = $file->getClientOriginalExtension();
                         $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                         $file->move($destinationPath, $filename);
