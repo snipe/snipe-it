@@ -354,6 +354,9 @@ class AssetsController extends Controller
             'assets.status_id'
             ])->with('model', 'assetstatus', 'assignedTo')->NotArchived());
 
+        if ($request->has('readyToDeploy')) {
+            $assets = $assets->RTD();
+        }
 
         if ($request->has('search')) {
             $assets = $assets->AssignedSearch($request->input('search'));

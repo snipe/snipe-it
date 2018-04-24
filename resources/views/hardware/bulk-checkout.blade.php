@@ -68,7 +68,12 @@
             </div>
           </div>
 
-              @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.assets'), 'fieldname' => 'selected_assets[]', 'multiple' => true])
+          @include ('partials.forms.edit.asset-select', [
+            'translated_name' => trans('general.assets'),
+            'fieldname' => 'selected_assets[]',
+            'multiple' => true,
+            'ready_to_deploy' => 'true',
+          ])
 
 
       </div> <!--./box-body-->
