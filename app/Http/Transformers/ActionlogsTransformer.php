@@ -26,6 +26,7 @@ class ActionlogsTransformer
             'id'          => (int) $actionlog->id,
             'icon'          => $actionlog->present()->icon(),
             'image' => (method_exists($actionlog->item, 'getImageUrl')) ? $actionlog->item->getImageUrl() : null,
+            'file' => ($actionlog->filename!='') ? route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]) : null,
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
                 'name' => e($actionlog->item->getDisplayNameAttribute()),

@@ -302,8 +302,13 @@ class AssetsController extends Controller
 
 
         if ($request->has('image_delete')) {
-            unlink(public_path().'/uploads/assets/'.$asset->image);
-            $asset->image = '';
+            try {
+                unlink(public_path().'/uploads/assets/'.$asset->image);
+                $asset->image = '';
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+
         }
 
 
@@ -1008,7 +1013,13 @@ class AssetsController extends Controller
             $this->authorize('view', $asset);
 
             $log = Actionlog::find($fileId);
+
             $file = $log->get_src('assets');
+
+            if ($log->action_type =='audit') {
+                $file = $log->get_src('assets/audits');
+            }
+
             $filetype = Helper::checkUploadIsImage($file);
 
             if ($filetype) {
@@ -1198,23 +1209,25 @@ class AssetsController extends Controller
 
     public function postBulkCheckout(Request $request)
     {
-        $this->validate($request, [
-           "assigned_to"   => 'required'
-        ]);
-
-        $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.user_does_not_exist'));
+        // Find checkout to type
+        if (request('checkout_to_type')=='location') {
+            $target = Location::find(request('assigned_location'));
+        } elseif (request('checkout_to_type')=='asset') {
+            $target = Asset::find(request('assigned_asset'));
+        } elseif (request('checkout_to_type')=='user') {
+            $target = User::find(request('assigned_user'));
         }
-
         if (!is_array(Input::get('selected_assets'))) {
             return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
         }
 
         $asset_ids = array_filter(Input::get('selected_assets'));
-
+        foreach ($asset_ids as $asset_id) {
+            if ($target->id == $asset_id) {
+                return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+            }
+        }
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
             $checkout_at = e(Input::get('checkout_at'));
         } else {
@@ -1229,20 +1242,18 @@ class AssetsController extends Controller
 
 
         $errors = [];
-        DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
+        DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
           
             foreach ($asset_ids as $asset_id) {
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);
-                $error = $asset->checkOut($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+                $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
 
-                if ($user->location_id!='') {
-                    $asset->location_id = $user->location_id;
+                if ($target->location_id!='') {
+                    $asset->location_id = $target->location_id;
                     $asset->unsetEventDispatcher();
                     $asset->save();
-
                 }
-
 
                 if ($error) {
                     array_merge_recursive($errors, $asset->getErrors()->toArray());
@@ -1278,7 +1289,7 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(Request $request, $id)
+    public function auditStore(AssetFileRequest $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
@@ -1288,11 +1299,13 @@ class AssetsController extends Controller
         );
 
         $validator = \Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
         }
 
         $asset = Asset::findOrFail($id);
+
         // We don't want to log this as a normal update, so let's bypass that
         $asset->unsetEventDispatcher();
 
@@ -1300,7 +1313,23 @@ class AssetsController extends Controller
         $asset->last_audit_date = date('Y-m-d h:i:s');
 
         if ($asset->save()) {
-            $asset->logAudit(request('note'), request('location_id'));
+
+
+            $filename = '';
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                    try {
+                     $destinationPath = config('app.private_uploads').'/assets/audits';
+                     $extension = $file->getClientOriginalExtension();
+                        $filename = 'audit-'.$asset->id.'-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                        $file->move($destinationPath, $filename);
+                    } catch (\Exception $e) {
+                        \Log::error($e);
+                    }
+            }
+
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $filename);
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }

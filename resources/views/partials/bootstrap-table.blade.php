@@ -501,7 +501,7 @@
     }
 
 
-   function imageFormatter(value, row) {
+   function imageFormatter(value) {
         if (value) {
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
         }
