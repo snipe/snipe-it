@@ -729,6 +729,8 @@
                       data-side-pagination="server"
                       data-show-columns="true"
                       data-show-refresh="true"
+                      data-sort-order="desc"
+                      data-sort-name="created_at"
                       data-show-export="true"
                       data-export-options='{
                          "fileName": "export{{ (Input::has('status')) ? '-'.str_slug(Input::get('status')) : '' }}-assets",
@@ -751,6 +753,7 @@
                   @if  ($snipeSettings->require_accept_signature=='1')
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
+                  <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.image') }}</th>
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
                 </tr>
                 </thead>

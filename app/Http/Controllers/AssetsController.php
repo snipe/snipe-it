@@ -302,8 +302,13 @@ class AssetsController extends Controller
 
 
         if ($request->has('image_delete')) {
-            unlink(public_path().'/uploads/assets/'.$asset->image);
-            $asset->image = '';
+            try {
+                unlink(public_path().'/uploads/assets/'.$asset->image);
+                $asset->image = '';
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+
         }
 
 
@@ -1008,7 +1013,13 @@ class AssetsController extends Controller
             $this->authorize('view', $asset);
 
             $log = Actionlog::find($fileId);
+
             $file = $log->get_src('assets');
+
+            if ($log->action_type =='audit') {
+                $file = $log->get_src('assets/audits');
+            }
+
             $filetype = Helper::checkUploadIsImage($file);
 
             if ($filetype) {
@@ -1278,7 +1289,7 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(Request $request, $id)
+    public function auditStore(AssetFileRequest $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
@@ -1288,11 +1299,13 @@ class AssetsController extends Controller
         );
 
         $validator = \Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
         }
 
         $asset = Asset::findOrFail($id);
+
         // We don't want to log this as a normal update, so let's bypass that
         $asset->unsetEventDispatcher();
 
@@ -1300,7 +1313,23 @@ class AssetsController extends Controller
         $asset->last_audit_date = date('Y-m-d h:i:s');
 
         if ($asset->save()) {
-            $asset->logAudit(request('note'), request('location_id'));
+
+
+            $filename = '';
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                    try {
+                     $destinationPath = config('app.private_uploads').'/assets/audits';
+                     $extension = $file->getClientOriginalExtension();
+                        $filename = 'audit-'.$asset->id.'-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                        $file->move($destinationPath, $filename);
+                    } catch (\Exception $e) {
+                        \Log::error($e);
+                    }
+            }
+
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $filename);
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
