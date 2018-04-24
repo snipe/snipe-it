@@ -953,8 +953,7 @@ class AssetsController extends Controller
         if ($request->hasFile('assetfile')) {
             foreach ($request->file('assetfile') as $file) {
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'hardware-'.$asset->id.'-'.str_random(8);
-                $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                $filename = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                 $file->move($destinationPath, $filename);
                 $asset->logUpload($filename, e(Input::get('notes')));
             }
@@ -1331,7 +1330,7 @@ class AssetsController extends Controller
                     try {
                      $destinationPath = config('app.private_uploads').'/assets/audits';
                      $extension = $file->getClientOriginalExtension();
-                        $filename = 'audit-'.$asset->id.'-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                        $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                         $file->move($destinationPath, $filename);
                     } catch (\Exception $e) {
                         \Log::error($e);
