@@ -4,7 +4,7 @@
 $factory->define(App\Models\CustomField::class, function (Faker\Generator $faker) {
     return [
     'name' => $faker->catchPhrase,
-    'format' => 'IP',
+    'format' => '',
     'element' => 'text',
     ];
 });
