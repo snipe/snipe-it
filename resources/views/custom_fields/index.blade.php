@@ -20,7 +20,22 @@
       </div><!-- /.box-header -->
 
       <div class="box-body">
-        <table name="fieldsets" id="table" class="table table-responsive table-no-bordered">
+        <table
+                data-cookie-id-table="customFieldsetsTable"
+                data-id-table="customFieldsetsTable"
+                data-search="true"
+                data-side-pagination="client"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                id="customFieldsTable"
+                class="table table-striped snipe-table"
+                data-export-options='{
+                "fileName": "export-fieldsets-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
           <thead>
             <tr>
               <th>{{ trans('general.name') }}</th>
@@ -79,18 +94,36 @@
         <div class="box-tools pull-right">
           <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new custom field">{{ trans('admin/custom_fields/general.create_field') }}</a>
         </div>
+
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table name="fieldsets" id="table" class="table table-responsive table-no-bordered">
+
+        <div class="table-responsive">
+        <table
+                data-cookie-id-table="customFieldsTable"
+                data-id-table="customFieldsTable"
+                data-search="true"
+                data-side-pagination="client"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                id="customFieldsTable"
+                class="table table-striped snipe-table"
+                data-export-options='{
+                "fileName": "export-fields-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
           <thead>
             <tr>
-              <th>{{ trans('general.name') }}</th>
-              <th>Help Text</th>
-              <th>Email</th>
-              <th>DB Field</th>
-              <th>{{ trans('admin/custom_fields/general.field_format') }}</th>
-              <th>{{ trans('admin/custom_fields/general.field_element_short') }}</th>
-              <th>{{ trans('admin/custom_fields/general.fieldsets') }}</th>
+              <th data-searchable="true">{{ trans('general.name') }}</th>
+              <th data-searchable="true">Help Text</th>
+              <th data-searchable="true">Email</th>
+              <th data-visible="false">DB Field</th>
+              <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
+              <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
+              <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
               <th></th>
             </tr>
           </thead>
@@ -131,9 +164,13 @@
             @endforeach
           </tbody>
         </table>
+        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div> <!-- /.col-md-9-->
 </div>
 
+@stop
+@section('moar_scripts')
+  @include ('partials.bootstrap-table')
 @stop
