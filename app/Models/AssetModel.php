@@ -98,6 +98,11 @@ class AssetModel extends SnipeModel
         return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
     }
 
+    public function defaultValues()
+    {
+        return $this->belongsToMany('\App\Models\CustomField', 'models_custom_fields')->withPivot('default_value');
+    }
+
 
     public function getImageUrl() {
         if ($this->image) {

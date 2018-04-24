@@ -156,8 +156,26 @@ class CustomFieldsetsController extends Controller
     {
         $this->authorize('view', CustomFieldset::class);
         $set = CustomFieldset::findOrFail($id);
-        $fields = $set->fields->get();
+        $fields = $set->fields;
         return (new CustomFieldsTransformer)->transformCustomFields($fields, $fields->count());
     }
 
+    /**
+     * Return JSON containing a list of fields belonging to a fieldset with the
+     * default values for a given model
+     *
+     * @param $modelId
+     * @param $fieldsetId
+     * @return string JSON
+     */
+    public function fieldsWithDefaultValues($fieldsetId, $modelId)
+    {
+        $this->authorize('view', CustomFieldset::class);
+
+        $set = CustomFieldset::findOrFail($fieldsetId);
+
+        $fields = $set->fields;
+
+        return (new CustomFieldsTransformer)->transformCustomFieldsWithDefaultValues($fields, $modelId, $fields->count());
+    }
 }
