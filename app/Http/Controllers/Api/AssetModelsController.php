@@ -30,7 +30,7 @@ class AssetModelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', AssetModel::class);
-        $allowed_columns = ['id','image','name','model_number','eol','notes','created_at','manufacturer','assets_count'];
+        $allowed_columns = ['id','image','name','model_number','eol','eol_support','notes','created_at','manufacturer','assets_count'];
 
         $assetmodels = AssetModel::select([
             'models.id',
@@ -38,6 +38,7 @@ class AssetModelsController extends Controller
             'models.name',
             'model_number',
             'eol',
+            'eol_support',
             'models.notes',
             'models.created_at',
             'category_id',

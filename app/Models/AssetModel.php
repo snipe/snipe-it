@@ -25,11 +25,12 @@ class AssetModel extends SnipeModel
 
     // Declare the rules for the model validation
     protected $rules = array(
-        'name'          => 'required|min:1|max:255',
+        'name'              => 'required|min:1|max:255',
         'model_number'      => 'max:255|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
-        'eol'   => 'integer:min:0|max:240|nullable',
+        'eol'               => 'integer:min:0|max:240|nullable',
+        'eol_support'       => 'date_format:"Y-m-d"|nullable',
     );
 
     /**
@@ -50,6 +51,15 @@ class AssetModel extends SnipeModel
 
         $this->attributes['eol'] = $value;
     }
+
+    public function setEolSupportAttribute($value)
+    {
+        if ($value == '' || $value == "0000-00-00") {
+            $value = null;
+        }
+
+        $this->attributes['eol_support'] = $value;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -59,6 +69,7 @@ class AssetModel extends SnipeModel
         'category_id',
         'depreciation_id',
         'eol',
+        'eol_support',
         'fieldset_id',
         'image',
         'manufacturer_id',

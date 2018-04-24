@@ -159,9 +159,15 @@
               </li>
               @endif
 
+              @if ($model->eol_support)
+              <li>{{ trans('general.eol_support') }}:
+                  {{ \App\Helpers\Helper::getFormattedDateObject($model->eol_support, 'date', false) }}
+              </li>
+              @endif
+
               @if ($model->fieldset)
               <li>{{ trans('admin/models/general.fieldset') }}:
-                <a href="{{ route('fieldsets.show', $model->fieldset->id) }}">{{ $model->fieldset->name }}</a>
+                  {{ $model->fieldset .' '. trans('general.months') }}
               </li>
               @endif
 
