@@ -9,7 +9,7 @@ Create a User ::
 {{-- Page content --}}
 @section('content')
 
-<p> This is the account information you'll use to access the site for the first time. All fields are required. </p>
+<p> This is the account information you'll use to access the site for the first time.  </p>
 
 <form action="{{ route('setup.user.save') }}" method="POST">
   {{ csrf_field() }}

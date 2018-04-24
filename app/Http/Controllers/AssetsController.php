@@ -953,8 +953,7 @@ class AssetsController extends Controller
         if ($request->hasFile('assetfile')) {
             foreach ($request->file('assetfile') as $file) {
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'hardware-'.$asset->id.'-'.str_random(8);
-                $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                $filename = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                 $file->move($destinationPath, $filename);
                 $asset->logUpload($filename, e(Input::get('notes')));
             }
@@ -1012,7 +1011,11 @@ class AssetsController extends Controller
         if (isset($asset->id)) {
             $this->authorize('view', $asset);
 
-            $log = Actionlog::find($fileId);
+            if (!$log = Actionlog::find($fileId)) {
+                return response('No matching record for that asset/file', 500)
+                    ->header('Content-Type', 'text/plain');
+
+            }
 
             $file = $log->get_src('assets');
 
@@ -1022,17 +1025,22 @@ class AssetsController extends Controller
 
             $filetype = Helper::checkUploadIsImage($file);
 
+            if (!file_exists($file)) {
+                return response('File '.$file.' not found on server', 404)
+                    ->header('Content-Type', 'text/plain');
+            }
+
             if ($filetype) {
-                  $contents = file_get_contents($file);
-                  return Response::make($contents)->header('Content-Type', $filetype);
+                  if ($contents = file_get_contents($file)) {
+                      return Response::make($contents)->header('Content-Type', $filetype);
+                  }
+                return JsonResponse::create(["error" => "Failed validation: "], 500);
             }
             return Response::download($file);
         }
-        // Prepare the error message
-        $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
         // Redirect to the hardware management page
-        return redirect()->route('hardware.index')->with('error', $error);
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
     }
 
     /**
@@ -1322,7 +1330,7 @@ class AssetsController extends Controller
                     try {
                      $destinationPath = config('app.private_uploads').'/assets/audits';
                      $extension = $file->getClientOriginalExtension();
-                        $filename = 'audit-'.$asset->id.'-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                        $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                         $file->move($destinationPath, $filename);
                     } catch (\Exception $e) {
                         \Log::error($e);
