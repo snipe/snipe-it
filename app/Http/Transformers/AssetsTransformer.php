@@ -84,7 +84,7 @@ class AssetsTransformer
         ];
 
 
-        if (($asset->model) && ($asset->model->fieldset) && (count($asset->model->fieldset->fields)> 0)) {
+        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {
             $fields_array = array();
 
             foreach ($asset->model->fieldset->fields as $field) {
