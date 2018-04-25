@@ -94,7 +94,6 @@
                   </div>
               </div><!-- /.box-header -->
           <div class="box-body">
-
               @if ($model->image)
                   <img src="{{ url('/') }}/uploads/models/{{ $model->image }}" class="img-responsive"></li>
               @endif
@@ -161,7 +160,7 @@
 
               @if ($model->eol_support)
               <li>{{ trans('general.eol_support') }}:
-                  {{ \App\Helpers\Helper::getFormattedDateObject($model->eol_support, 'date', false) }}
+                  {{ $model->eol_support }}
               </li>
               @endif
 
@@ -177,7 +176,6 @@
                       {{ $model->notes }}
                   </li>
               @endif
-
 
 
               @if  ($model->deleted_at!='')

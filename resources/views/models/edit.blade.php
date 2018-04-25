@@ -38,7 +38,7 @@
     <label for="eol" class="col-md-3 control-label">{{ trans('general.eol_support') }}</label>
     <div class="col-md-2">
         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="eol_support" id="eol_support" value="{{ Input::old('eol_support', ($item->eol_support) ? $item->eol_support->format('Y-m-d') : '') }}">
+            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="eol_support" id="eol_support" value="{{ Input::old('eol_support', ($item->eol_support) ? $item->eol_support : '') }}">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         </div>
     </div>
