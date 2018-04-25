@@ -395,14 +395,22 @@
 
                             {{ $asset->present()->months_until_eol()->m }}
                             {{ trans('general.months') }}
-                            )
+                            &puncsp;)
                           @endif
+                          &puncsp;)
 
                         </td>
                       </tr>
                     @endif
 
-
+                    @if (($asset->model) && ($asset->model->eol_support))
+                      <tr>
+                        <td>{{ trans('general.eol_support') }}</td>
+                        <td>
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->model->eol_support, 'date', false) }}
+                        </td>
+                      </tr>
+                    @endif
 
                     @if ($asset->expected_checkin!='')
                       <tr>
