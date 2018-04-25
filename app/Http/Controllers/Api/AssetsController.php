@@ -354,7 +354,7 @@ class AssetsController extends Controller
             'assets.status_id'
             ])->with('model', 'assetstatus', 'assignedTo')->NotArchived());
 
-        if ($request->has('readyToDeploy')) {
+        if ($request->has('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();
         }
 

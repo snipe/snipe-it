@@ -207,7 +207,7 @@ $(document).ready(function () {
                     var data = {
                         search: params.term,
                         page: params.page || 1,
-                        readyToDeploy: link.data("ready-to-deploy"),
+                        assetStatusType: link.data("asset-status-type"),
                     };
                     return data;
                 },

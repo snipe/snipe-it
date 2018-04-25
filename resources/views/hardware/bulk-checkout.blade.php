@@ -72,7 +72,7 @@
             'translated_name' => trans('general.assets'),
             'fieldname' => 'selected_assets[]',
             'multiple' => true,
-            'ready_to_deploy' => 'true',
+            'asset_status_type' => 'RTD',
           ])
 
 
