@@ -99,7 +99,7 @@ log () {
   fi
 }
 
-installpackages () {
+install_packages () {
   case $distro in
     ubuntu|debian)
       for p in $PACKAGES; do
@@ -134,7 +134,7 @@ installpackages () {
   esac
 }
 
-createvh () {
+create_virtualhost () {
   {
     echo "<VirtualHost *:80>"
     echo "  <Directory $webdir/$name/public>"
@@ -149,7 +149,7 @@ createvh () {
   } >> "$apachefile"
 }
 
-installsnipeit () {
+install_snipeit () {
   echo "* Creating MariaDB Database/User."
   echo "* Please Input your MariaDB root password:"
   mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
@@ -176,7 +176,7 @@ installsnipeit () {
 
   echo "* Setting permissions."
   for chmod_dir in "$webdir/$name/storage" "$webdir/$name/storage/private_uploads" "$webdir/$name/public/uploads"; do
-      chmod -R 755 "$chmod_dir"
+    chmod -R 755 "$chmod_dir"
   done
 
   chown -R "$ownergroup" "$webdir/$name"
@@ -191,7 +191,7 @@ installsnipeit () {
   (crontab -l ; echo "* * * * * /usr/bin/php $webdir/$name/artisan schedule:run >> /dev/null 2>&1") | crontab -
 }
 
-openfirewalld () {
+set_firewall () {
   if [ "$(firewall-cmd --state)" == "running" ]; then
     echo "* Configuring firewall to allow HTTP traffic only."
     log "firewall-cmd --zone=public --add-port=http/tcp --permanent"
@@ -199,7 +199,7 @@ openfirewalld () {
   fi
 }
 
-configureselinux () {
+set_selinux () {
   #Check if SELinux is enforcing
   if [ "$(getenforce)" == "Enforcing" ]; then
     echo "* Configuring SELinux."
@@ -210,7 +210,7 @@ configureselinux () {
   fi
 }
 
-sethostfile () {
+set_hosts () {
   echo "* Setting up hosts file."
   echo >> $hosts "127.0.0.1 $hostname $fqdn"
 }
@@ -318,19 +318,19 @@ case $distro in
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
-    installpackages
+    install_packages
 
     echo "* Configuring Apache."
-    createvh
+    create_virtualhost
     log "a2enmod rewrite"
     log "a2ensite $name.conf"
 
-    sethostfile
+    set_hosts
 
     echo "* Securing MariaDB."
     /usr/bin/mysql_secure_installation
 
-    installsnipeit
+    install_snipeit
 
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
@@ -357,19 +357,19 @@ case $distro in
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="mariadb-server mariadb-client php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
-    installpackages
+    install_packages
 
     echo "* Configuring Apache."
-    createvh
+    create_virtualhost
     log "a2enmod rewrite"
     log "a2ensite $name.conf"
 
-    sethostfile
+    set_hosts
 
     echo "* Securing MariaDB."
     /usr/bin/mysql_secure_installation
 
-    installsnipeit
+    install_snipeit
 
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
@@ -398,16 +398,16 @@ case $distro in
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
-    installpackages
+    install_packages
 
     echo "* Configuring Apache."
-    createvh
+    create_virtualhost
     log "phpenmod mcrypt"
     log "phpenmod mbstring"
     log "a2enmod rewrite"
     log "a2ensite $name.conf"
 
-    sethostfile
+    set_hosts
 
     echo "* Starting MariaDB."
     log "service mysql start"
@@ -415,7 +415,7 @@ case $distro in
     echo "* Securing MariaDB."
     /usr/bin/mysql_secure_installation
 
-    installsnipeit
+    install_snipeit
 
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
@@ -440,16 +440,16 @@ case $distro in
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="mariadb-server mariadb-client php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
-    installpackages
+    install_packages
 
     echo "* Configuring Apache."
-    createvh
+    create_virtualhost
     log "phpenmod mcrypt"
     log "phpenmod mbstring"
     log "a2enmod rewrite"
     log "a2ensite $name.conf"
 
-    sethostfile
+    set_hosts
 
     echo "* Starting MariaDB."
     log "service mysql start"
@@ -457,7 +457,7 @@ case $distro in
     echo "* Securing MariaDB."
     /usr/bin/mysql_secure_installation
 
-    installsnipeit
+    install_snipeit
 
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
@@ -492,21 +492,21 @@ case $distro in
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml php71u-process"
-    installpackages
+    install_packages
 
     echo "* Configuring Apache."
-    createvh
+    create_virtualhost
 
     echo "* Setting MariaDB to start on boot and starting MariaDB."
     log "chkconfig mysql on"
     log "/sbin/service mysql start"
 
-    sethostfile
+    set_hosts
 
     echo "* Securing MariaDB."
     /usr/bin/mysql_secure_installation
 
-    installsnipeit
+    install_snipeit
 
     if /sbin/service iptables status >/dev/null 2>&1; then
         echo "* Configuring iptables."
@@ -532,12 +532,12 @@ case $distro in
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="httpd mariadb-server git unzip php71u php71u-mysqlnd php71u-bcmath php71u-cli php71u-common php71u-embedded php71u-gd php71u-mbstring php71u-mcrypt php71u-ldap php71u-json php71u-simplexml php71u-process"
-    installpackages
+    install_packages
 
     echo "* Configuring Apache."
-    createvh
+    create_virtualhost
 
-    sethostfile
+    set_hosts
 
     echo "* Setting MariaDB to start on boot and starting MariaDB."
     log "systemctl enable mariadb.service"
@@ -546,11 +546,11 @@ case $distro in
     echo "* Securing MariaDB."
     /usr/bin/mysql_secure_installation
 
-    installsnipeit
+    install_snipeit
 
-    openfirewalld
+    set_firewall
 
-    configureselinux
+    set_selinux
 
     echo "* Setting Apache httpd to start on boot and starting service."
     log "systemctl enable httpd.service"
@@ -569,12 +569,12 @@ case $distro in
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-cli php-common php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml"
-    installpackages
+    install_packages
 
     echo "* Configuring Apache."
-    createvh
+    create_virtualhost
 
-    sethostfile
+    set_hosts
 
     echo "* Setting MariaDB to start on boot and starting MariaDB."
     log "systemctl enable mariadb.service"
@@ -585,9 +585,9 @@ case $distro in
 
     installsnipeit
 
-    openfirewalld
+    set_firewall
 
-    configureselinux
+    set_selinux
 
     echo "* Setting Apache httpd to start on boot and starting service."
     log "systemctl enable httpd.service"
