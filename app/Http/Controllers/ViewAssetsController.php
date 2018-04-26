@@ -61,7 +61,7 @@ class ViewAssetsController extends Controller
             $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
 
     }
