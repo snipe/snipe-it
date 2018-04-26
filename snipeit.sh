@@ -1,4 +1,11 @@
 #!/bin/bash
+#/ Usage: sniepit [-vh]
+#/
+#/ Install Snipe-IT open source asset management.
+#/
+#/ OPTIONS:
+#/   -v | --verbose    Enable verbose output.
+#/   -h | --help       Show this message.
 
 ######################################################
 #           Snipe-It Install Script                  #
@@ -12,6 +19,43 @@
 # Feel free to modify, but please give               #
 # credit where it's due. Thanks!                     #
 ######################################################
+
+# Parse arguments
+while true; do
+  case "$1" in
+    -h|--help)
+      show_help=true
+      shift
+      ;;
+    -v|--verbose)
+      set -x
+      verbose=true
+      shift
+      ;;
+    -*)
+      echo "Error: invalid argument: '$1'" 1>&2
+      exit 1
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+print_usage () {
+  grep '^#/' <"$0" | cut -c 4-
+  exit ${1:-1}
+}
+
+if [ -n "$show_help" ]; then
+  print_usage
+else
+  for x in "$@"; do
+    if [ "$x" = "--help" ] || [ "$x" = "-h" ]; then
+      print_usage
+    fi
+  done
+fi
 
 # ensure running as root
 if [ "$(id -u)" != "0" ]; then
@@ -27,7 +71,6 @@ fi
 clear
 
 name="snipeit"
-verbose="false"
 hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
 hosts=/etc/hosts
@@ -49,8 +92,8 @@ progress () {
 }
 
 log () {
-    if [ "$verbose" = true ]; then
-        eval "$@"
+    if [ -n "$verbose" ]; then
+        eval "$@" |& tee -a /var/log/snipeit-install.log
     else
         eval "$@" |& tee -a /var/log/snipeit-install.log >/dev/null 2>&1
     fi
