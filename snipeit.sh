@@ -73,7 +73,6 @@ clear
 name="snipeit"
 hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
-hosts=/etc/hosts
 
 progress () {
   spin[0]="-"
@@ -106,7 +105,7 @@ install_packages () {
         if dpkg -s "$p" >/dev/null 2>&1; then
           echo "  * $p already installed"
         else
-          echo "  * Installing $p ... "
+          echo "  * Installing $p"
           log "DEBIAN_FRONTEND=noninteractive apt-get install -y $p"
         fi
       done;
@@ -116,7 +115,7 @@ install_packages () {
         if yum list installed "$p" >/dev/null 2>&1; then
           echo "  * $p already installed"
         else
-          echo "  * Installing $p ... "
+          echo "  * Installing $p"
           log "yum -y install $p"
         fi
       done;
@@ -126,7 +125,7 @@ install_packages () {
         if dnf list installed "$p" >/dev/null 2>&1; then
           echo "  * $p already installed"
         else
-          echo "  * Installing $p ... "
+          echo "  * Installing $p"
           log "dnf -y install $p"
         fi
       done;
@@ -212,13 +211,13 @@ set_selinux () {
 
 set_hosts () {
   echo "* Setting up hosts file."
-  echo >> $hosts "127.0.0.1 $hostname $fqdn"
+  echo >> /etc/hosts "127.0.0.1 $hostname $fqdn"
 }
 
 if [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
-  distro="$(lsb_release -s -i)"
-  version="$(lsb_release -s -r)"
-  codename="$(lsb_release -c -s)"
+  distro="$(lsb_release -is)"
+  version="$(lsb_release -rs)"
+  codename="$(lsb_release -cs)"
 elif [ -f /etc/os-release ]; then
   distro="$(. /etc/os-release && echo $ID)"
   version="$(. /etc/os-release && echo $VERSION_ID)"
