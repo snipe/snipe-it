@@ -75,12 +75,12 @@ hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
 hosts=/etc/hosts
 
-spin[0]="-"
-spin[1]="\\"
-spin[2]="|"
-spin[3]="/"
-
 progress () {
+  spin[0]="-"
+  spin[1]="\\"
+  spin[2]="|"
+  spin[3]="/"
+  
   echo -n " "
   while kill -0 "$pid" > /dev/null 2>&1; do
     for i in "${spin[@]}"; do
