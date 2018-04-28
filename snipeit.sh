@@ -582,7 +582,7 @@ case $distro in
     echo "* Securing MariaDB."
     /usr/bin/mysql_secure_installation
 
-    installsnipeit
+    install_snipeit
 
     set_firewall
 
