@@ -550,7 +550,7 @@
           <div class="row">
             <div class="col-md-12">
               <!-- Licenses assets table -->
-              @if (count($asset->licenses) > 0)
+              @if ($asset->licenses->count() > 0)
                 <table class="table">
                   <thead>
                     <tr>
@@ -594,7 +594,7 @@
           <!-- checked out assets table -->
           <div class="row">
               <div class="col-md-12">
-                @if(count($asset->components) > 0)
+                @if($asset->components->count() > 0)
                   <table class="table table-striped">
                     <thead>
                       <th>{{ trans('general.name') }}</th>
@@ -804,7 +804,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @if (count($asset->uploads) > 0)
+                  @if ($asset->uploads->count() > 0)
                     @foreach ($asset->uploads as $file)
                       <tr>
                         <td>

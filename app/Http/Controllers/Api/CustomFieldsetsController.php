@@ -44,9 +44,7 @@ class CustomFieldsetsController extends Controller
     {
         $this->authorize('index', CustomFieldset::class);
         $fieldsets = CustomFieldset::withCount(['fields', 'models'])->get();
-
-        $total = count($fieldsets);
-        return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $total);
+        return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $fieldsets->count());
 
     }
 

@@ -77,7 +77,7 @@ class SendExpirationAlerts extends Command
         $this->info(count($expiring_licenses).' expiring licenses');
 
 
-        $license_data['count'] =  count($expiring_licenses);
+        $license_data['count'] =  $expiring_licenses->count();
         $license_data['email_content'] = '';
 
         foreach ($expiring_licenses as $license) {

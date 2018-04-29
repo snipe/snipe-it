@@ -293,7 +293,7 @@
               </tr>
             </thead>
             <tbody>
-            @if (count($license->uploads) > 0)
+            @if ($license->uploads->count()> 0)
               @foreach ($license->uploads as $file)
               <tr>
                 <td>{{ $file->filename }}</td>
