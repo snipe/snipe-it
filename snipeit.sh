@@ -310,13 +310,18 @@ case $distro in
     tzone=$(cat /etc/timezone)
     apachefile=/etc/apache2/sites-available/$name.conf
 
+    echo "* Adding PHP repository."
+    log "apt-get install -y apt-transport-https"
+    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+
     echo -n "* Updating installed packages."
     log "apt-get update"
     log "apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
@@ -341,11 +346,9 @@ case $distro in
     apachefile=/etc/apache2/sites-available/$name.conf
 
     echo "* Adding MariaDB and ppa:ondrej/php repositories."
-    log "apt-get install -y software-properties-common"
+    log "apt-get install -y software-properties-common apt-transport-https"
     log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db"
     log "add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/debian $codename main'"
-    #PHP7 repository
-    log "apt-get install -y apt-transport-https"
     log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
     echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
@@ -385,18 +388,18 @@ case $distro in
     tzone=$(cat /etc/timezone)
     apachefile=/etc/apache2/sites-available/$name.conf
 
-    echo "* Adding MariaDB repository."
+    echo "* Adding MariaDB and ppa:ondrej/php repositories."
     log "apt-get install -y software-properties-common"
     log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
     log "add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
+    log "add-apt-repository -y ppa:ondrej/php"
 
     echo -n "* Updating installed packages."
-    log "apt-get update"
-    log "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
@@ -429,7 +432,6 @@ case $distro in
     log "apt-get install -y software-properties-common"
     log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db"
     log "add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
-    #PHP7 repository
     log "add-apt-repository ppa:ondrej/php -y"
 
     echo -n "* Updating installed packages."
