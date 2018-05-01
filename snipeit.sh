@@ -304,7 +304,7 @@ done
 case $distro in
   debian)
   if [[ "$version" =~ ^9 ]]; then
-    #####################################  Install for Debian 9 ##############################################
+    # Install for Debian 9.x
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
@@ -339,7 +339,7 @@ case $distro in
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
   elif [[ "$version" =~ ^8 ]]; then
-    #####################################  Install for Debian 8 ##############################################
+    # Install for Debian 8.x
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
@@ -381,8 +381,8 @@ case $distro in
   fi
   ;;
   ubuntu)
-  if [[ "$version" =~ 1[6-7] ]]; then
-    #####################################  Install for Ubuntu 16-17  ##############################################
+  if [[ "$version" =~ 16.04 ]]; then
+    # Install for Ubuntu 16.04
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
@@ -421,8 +421,8 @@ case $distro in
 
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
-  elif [[ "$version" =~ 14 ]]; then
-    #####################################  Install for Ubuntu 14  ##############################################
+  elif [[ "$version" =~ 14.04 ]]; then
+    # Install for Ubuntu 14.04
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
@@ -469,7 +469,7 @@ case $distro in
   ;;
   centos)
   if [[ "$version" =~ ^6 ]]; then
-    #####################################  Install for CentOS/Redhat 6  ##############################################
+    # Install for CentOS/Redhat 6.x
     webdir=/var/www/html
     ownergroup=apache:apache
     tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
@@ -520,7 +520,7 @@ case $distro in
     log "chkconfig httpd on"
     log "/sbin/service httpd start"
   elif [[ "$version" =~ ^7 ]]; then
-    #####################################  Install for CentOS/Redhat 7  ##############################################
+    # Install for CentOS/Redhat 7
     webdir=/var/www/html
     ownergroup=apache:apache
     tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
@@ -562,7 +562,8 @@ case $distro in
   fi
   ;;
   fedora)
-    #####################################  Install for Fedora 25+  ##############################################
+  if [ "$version" -ge 26 ]; then
+    # Install for Fedora 26+
     webdir=/var/www/html
     ownergroup=apache:apache
     tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
@@ -593,6 +594,10 @@ case $distro in
     echo "* Setting Apache httpd to start on boot and starting service."
     log "systemctl enable httpd.service"
     log "systemctl restart httpd.service"
+  else
+    echo "Unsupported Fedora version. Version found: $version"
+    exit 1
+  fi
 esac
 
 setupmail=default
