@@ -507,6 +507,22 @@
         }
     }
 
+    function fileUploadFormatter(value) {
+        if ((value) && (value.url) && (value.inlineable)) {
+            return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
+        } else if ((value) && (value.url)) {
+            return '<a href="' + value.url + '" class="btn btn-default"><i class="fa fa-download"></i></a>';
+        }
+    }
+
+
+    function fileUploadNameFormatter(value) {
+        console.dir(value);
+        if ((value) && (value.filename) && (value.url)) {
+            return '<a href="' + value.url + '">' + value.filename + '</a>';
+        }
+    }
+
     function sumFormatter(data) {
         if (Array.isArray(data)) {
             var field = this.field;

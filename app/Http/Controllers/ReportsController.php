@@ -81,7 +81,7 @@ class ReportsController extends Controller
 
         return $response;
     }
-    
+
     /**
     * Show depreciation report for assets.
     *

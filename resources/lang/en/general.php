@@ -206,6 +206,7 @@
     'unknown_admin'			=> 'Unknown Admin',
     'username_format'		=> 'Username Format',
     'update'                => 'Update',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Uploaded',
     'user'					=> 'User',
     'accepted'			    => 'accepted',

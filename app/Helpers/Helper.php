@@ -787,6 +787,66 @@ class Helper
     }
 
 
+    public static function filetype_icon($filename) {
+
+        $extension = substr(strrchr($filename,'.'),1);
+
+        if ($extension) {
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                case 'png':
+                    return "fa fa-file-image-o";
+                    break;
+                case 'doc':
+                case 'docx':
+                    return "fa fa-file-word-o";
+                    break;
+                case 'xls':
+                case 'xlsx':
+                    return "fa fa-file-excel-o";
+                    break;
+                case 'zip':
+                case 'rar':
+                    return "fa fa-file-archive-o";
+                    break;
+                case 'pdf':
+                    return "fa fa-file-pdf-o";
+                    break;
+                case 'txt':
+                    return "fa fa-file-text-o";
+                    break;
+                case 'lic':
+                    return "fa fa-floppy-o";
+                    break;
+                default:
+                    return "fa fa-file-o";
+            }
+        }
+        return "fa fa-file-o";
+    }
+
+    public static function show_file_inline($filename) {
+
+        $extension = substr(strrchr($filename,'.'),1);
+
+        if ($extension) {
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                case 'png':
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        return false;
+    }
+
+
 
 
 }

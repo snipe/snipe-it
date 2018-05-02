@@ -316,7 +316,7 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/export/licenses',
         [ 'as' => 'reports/export/licenses', 'uses' => 'ReportsController@exportLicenseReport' ]
     );
-    
+
     Route::get('reports/accessories', [ 'as' => 'reports/accessories', 'uses' => 'ReportsController@getAccessoryReport' ]);
     Route::get(
         'reports/export/accessories',

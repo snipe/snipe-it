@@ -22,11 +22,20 @@ class ActionlogsTransformer
 
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
+        $icon = $actionlog->present()->icon();
+        if ($actionlog->filename!='') {
+            $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
+        }
         $array = [
             'id'          => (int) $actionlog->id,
-            'icon'          => $actionlog->present()->icon(),
-            'image' => (method_exists($actionlog->item, 'getImageUrl')) ? $actionlog->item->getImageUrl() : null,
-            'file' => ($actionlog->filename!='') ? route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]) : null,
+            'icon'          => $icon,
+            'file' => ($actionlog->filename!='') ?
+                [
+                    'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
+                    'filename' => $actionlog->filename,
+                    'inlineable' => (bool) \App\Helpers\Helper::show_file_inline($actionlog->filename),
+                ] : null,
+
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
                 'name' => e($actionlog->item->getDisplayNameAttribute()),
@@ -60,10 +69,9 @@ class ActionlogsTransformer
 
         ];
 
-
-
         return $array;
     }
+
 
 
     public function transformCheckedoutActionlog (Collection $accessories_users, $total)
