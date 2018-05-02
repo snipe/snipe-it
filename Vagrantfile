@@ -56,13 +56,21 @@ Vagrant.configure("2") do |config|
     stretch.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
   end
 
-  config.vm.define "fedora25" do |fedora25|
-    fedora25.vm.box = "fedora/25-cloud-base"
-    fedora25.vm.hostname = 'fedora25'
-    fedora25.vm.network "public_network", bridge: NETWORK_BRIDGE
-    fedora25.vm.provision :shell, :inline => "dnf -y update"
-    fedora25.vm.provision :shell, :inline => "dnf -y install wget"
-    fedora25.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
-    fedora25.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
+  config.vm.define "fedora27" do |fedora27|
+    fedora27.vm.box = "fedora/27-cloud-base"
+    fedora27.vm.hostname = 'fedora27'
+    fedora27.vm.network "public_network", bridge: NETWORK_BRIDGE
+    fedora27.vm.provision :shell, :inline => "dnf -y install wget"
+    fedora27.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
+    fedora27.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
+  end
+
+    config.vm.define "fedora26" do |fedora26|
+    fedora26.vm.box = "fedora/26-cloud-base"
+    fedora26.vm.hostname = 'fedora26'
+    fedora26.vm.network "public_network", bridge: NETWORK_BRIDGE
+    fedora26.vm.provision :shell, :inline => "dnf -y install wget"
+    fedora26.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
+    fedora26.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
   end
 end

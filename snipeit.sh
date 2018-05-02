@@ -304,11 +304,16 @@ done
 case $distro in
   debian)
   if [[ "$version" =~ ^9 ]]; then
-    #####################################  Install for Debian 9 ##############################################
+    # Install for Debian 9.x
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
     apachefile=/etc/apache2/sites-available/$name.conf
+
+    echo "* Adding PHP repository."
+    log "apt-get install -y apt-transport-https"
+    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
     echo -n "* Updating installed packages."
     log "apt-get update"
@@ -316,7 +321,7 @@ case $distro in
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
@@ -334,18 +339,16 @@ case $distro in
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
   elif [[ "$version" =~ ^8 ]]; then
-    #####################################  Install for Debian 8 ##############################################
+    # Install for Debian 8.x
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
     apachefile=/etc/apache2/sites-available/$name.conf
 
     echo "* Adding MariaDB and ppa:ondrej/php repositories."
-    log "apt-get install -y software-properties-common"
+    log "apt-get install -y software-properties-common apt-transport-https"
     log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db"
     log "add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/debian $codename main'"
-    #PHP7 repository
-    log "apt-get install -y apt-transport-https"
     log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
     echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
@@ -378,25 +381,25 @@ case $distro in
   fi
   ;;
   ubuntu)
-  if [[ "$version" =~ 1[6-7] ]]; then
-    #####################################  Install for Ubuntu 16-17  ##############################################
+  if [[ "$version" =~ 16.04 ]]; then
+    # Install for Ubuntu 16.04
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
     apachefile=/etc/apache2/sites-available/$name.conf
 
-    echo "* Adding MariaDB repository."
+    echo "* Adding MariaDB and ppa:ondrej/php repositories."
     log "apt-get install -y software-properties-common"
     log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8"
     log "add-apt-repository 'deb [arch=amd64,i386] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
+    log "add-apt-repository -y ppa:ondrej/php"
 
     echo -n "* Updating installed packages."
-    log "apt-get update"
-    log "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
@@ -418,8 +421,8 @@ case $distro in
 
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
-  elif [[ "$version" =~ 14 ]]; then
-    #####################################  Install for Ubuntu 14  ##############################################
+  elif [[ "$version" =~ 14.04 ]]; then
+    # Install for Ubuntu 14.04
     webdir=/var/www
     ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
@@ -429,7 +432,6 @@ case $distro in
     log "apt-get install -y software-properties-common"
     log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db"
     log "add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu $codename main'"
-    #PHP7 repository
     log "add-apt-repository ppa:ondrej/php -y"
 
     echo -n "* Updating installed packages."
@@ -467,7 +469,7 @@ case $distro in
   ;;
   centos)
   if [[ "$version" =~ ^6 ]]; then
-    #####################################  Install for CentOS/Redhat 6  ##############################################
+    # Install for CentOS/Redhat 6.x
     webdir=/var/www/html
     ownergroup=apache:apache
     tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
@@ -518,7 +520,7 @@ case $distro in
     log "chkconfig httpd on"
     log "/sbin/service httpd start"
   elif [[ "$version" =~ ^7 ]]; then
-    #####################################  Install for CentOS/Redhat 7  ##############################################
+    # Install for CentOS/Redhat 7
     webdir=/var/www/html
     ownergroup=apache:apache
     tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
@@ -560,7 +562,8 @@ case $distro in
   fi
   ;;
   fedora)
-    #####################################  Install for Fedora 25+  ##############################################
+  if [ "$version" -ge 26 ]; then
+    # Install for Fedora 26+
     webdir=/var/www/html
     ownergroup=apache:apache
     tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
@@ -591,6 +594,10 @@ case $distro in
     echo "* Setting Apache httpd to start on boot and starting service."
     log "systemctl enable httpd.service"
     log "systemctl restart httpd.service"
+  else
+    echo "Unsupported Fedora version. Version found: $version"
+    exit 1
+  fi
 esac
 
 setupmail=default
