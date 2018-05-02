@@ -235,6 +235,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="table-responsive">
                         <table
                                 data-cookie-id-table="dashCategorySummary"
                                 data-height="400"
@@ -256,6 +257,7 @@
                             </tr>
                             </thead>
                         </table>
+                        </div>
                     </div> <!-- /.col -->
                     <div class="col-md-12 text-center" style="padding-top: 10px;">
                         <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
