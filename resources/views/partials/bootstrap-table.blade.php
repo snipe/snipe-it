@@ -435,7 +435,7 @@
 
     }
 
-    function trueFalseFormatter(value, row) {
+    function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
             return '<i class="fa fa-check text-success"></i>';
         } else {
@@ -443,25 +443,25 @@
         }
     }
 
-    function dateDisplayFormatter(value, row) {
+    function dateDisplayFormatter(value) {
         if (value) {
             return  value.formatted;
         }
     }
 
-    function iconFormatter(value, row) {
+    function iconFormatter(value) {
         if (value) {
-            return '<i class="' + value + '"></i>';
+            return '<i class="' + value + '  icon-med"></i>';
         }
     }
 
-    function emailFormatter(value, row) {
+    function emailFormatter(value) {
         if (value) {
             return '<a href="mailto:' + value + '"> ' + value + '</a>';
         }
     }
 
-    function linkFormatter(value, row) {
+    function linkFormatter(value) {
         if (value) {
             return '<a href="' + value + '"> ' + value + '</a>';
         }
