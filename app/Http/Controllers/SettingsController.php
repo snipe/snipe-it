@@ -192,8 +192,7 @@ class SettingsController extends Controller
                 $data['username'] = $user->username;
                 $data['first_name'] = $user->first_name;
                 $data['last_name'] = $user->last_name;
-                $data['password'] = $user->password;
-
+                $data['password'] = $request->input('password');
                 $user->notify(new FirstAdminNotification($data));
 
                 /*Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
