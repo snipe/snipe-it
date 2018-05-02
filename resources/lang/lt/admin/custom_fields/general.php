@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nauja laukų grupė',
     'create_field'            => 'Naujas pritaikomas laukelis',
     'value_encrypted'      	        => 'Šio lauko vertė yra užkoduota duomenų bazėje. Tik admin vartotojai galės peržiūrėti iššifruotą vertę',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

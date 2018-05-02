@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'عرض الموديلات',
     'fieldset'                  => 'مجموعة حقول',
     'no_custom_field'           => 'لا يوجد حقول مخصصة',
-
+    'add_default_values'        => 'Add default values',
 );

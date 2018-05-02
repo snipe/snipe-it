@@ -285,18 +285,23 @@
                     }'>
             <thead>
               <tr>
+                <th></th>
                 <th class="col-md-4" data-field="file_name" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
                 <th class="col-md-4" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
-                <th class="col-md-4" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
+                <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
                 <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">Download</th>
                 <th class="col-md-2" data-field="delete" data-visible="true"  data-sortable="false" data-switchable="true">Delete</th>
               </tr>
             </thead>
             <tbody>
-            @if (count($license->uploads) > 0)
+            @if ($license->uploads->count()> 0)
               @foreach ($license->uploads as $file)
               <tr>
-                <td>{{ $file->filename }}</td>
+                <td><i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med"></i></td>
+                <td>
+                  {{ $file->filename }}
+
+                </td>
                 <td>
                   @if ($file->note)
                     {{ $file->note }}
@@ -304,11 +309,10 @@
                 </td>
                 <td>{{ $file->created_at }}</td>
                 <td>
-
                 @if ($file->filename)
-                  <a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">
-                    Download
-                  </a>
+                    @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('licenses')))
+                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                    @endif
                 @endif
                 </td>
                 <td>
@@ -379,8 +383,9 @@
       'method' => 'POST',
       'route' => ['upload/license', $license->id],
       'files' => true, 'class' => 'form-horizontal' ]) }}
+      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
-          <p>{{ trans('admin/licenses/general.filetype_info') }}</p>
+          <p>{{ trans('general.upload_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
           <div class="form-group col-md-12">
             <div class="input-group col-md-12">
               <input class="col-md-12 form-control" type="text" name="notes" id="notes" placeholder="Notes">

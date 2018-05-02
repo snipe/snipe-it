@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Setul de câmpuri noi',
     'create_field'            => 'Noul câmp personalizat',
     'value_encrypted'      	        => 'Valoarea acestui câmp este criptată în baza de date. Numai utilizatorii de administrare vor putea vizualiza valoarea decriptată',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'A kiválasztott :attribute étvénytelen.',
     'numeric'              => 'A :attribute csak szám lehet.',
     'present'              => 'A: attribútum mezőnek jelen kell lennie.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Ez nem érvényes regex kifejezés. ',
     'regex'                => 'Az :attribute formátuma érvénytelen.',
     'required'             => 'A :attribute mező kötelező.',
     'required_if'          => 'A :attribute mező kötelező ha :other egy :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'A :attribute már foglalt.',
     'uploaded'             => 'A: attribútum nem sikerült feltölteni.',
     'url'                  => 'Az :attribute formátuma érvénytelen.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "A(z) :attribute egyedinek kell lennie.",
 
     /*
     |--------------------------------------------------------------------------

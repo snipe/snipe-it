@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Zobrazit Modely',
     'fieldset'                  => 'Sada polí',
     'no_custom_field'           => 'Bez vlastních polí',
-
+    'add_default_values'        => 'Add default values',
 );

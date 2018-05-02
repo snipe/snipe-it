@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-2 col-sm-2 text-left">
 
-        @can('index', \App\Models\Statuslabel::class)
+        @can('create', \App\Models\Statuslabel::class)
             <a href='{{ route('modal.statuslabel') }}' data-toggle="modal"  data-target="#createModal" data-select='status_select_id' class="btn btn-sm btn-default">New</a>
         @endcan
 

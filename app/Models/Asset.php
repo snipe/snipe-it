@@ -649,7 +649,7 @@ class Asset extends Depreciable
 
     public function scopeRTD($query)
     {
-        return $query->whereNULL('assigned_to')
+        return $query->whereNULL('assets.assigned_to')
                    ->whereHas('assetstatus', function ($query) {
                        $query->where('deployable', '=', 1)
                              ->where('pending', '=', 0)
@@ -1050,9 +1050,17 @@ class Asset extends Depreciable
                         });
                     });
                 }
+
+                if ($fieldname =='supplier') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('supplier', function ($query) use ($search_val) {
+                            $query->where('suppliers.name', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
             }
 
-            if (($fieldname!='category')  && ($fieldname!='location')
+            if (($fieldname!='category')  && ($fieldname!='location') && ($fieldname!='supplier')
                 && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }

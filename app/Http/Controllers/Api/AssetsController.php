@@ -85,7 +85,7 @@ class AssetsController extends Controller
         $filter = array();
 
         if ($request->has('filter')) {
-            $filter = json_decode($request->input('filter'));
+            $filter = json_decode($request->input('filter'), true);
         }
 
         $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
@@ -217,7 +217,8 @@ class AssetsController extends Controller
 
         }
 
-        if (count($filter) > 0) {
+
+        if ((!is_null($filter)) && (count($filter)) > 0) {
             $assets->ByFilter($filter);
         } elseif ($request->has('search')) {
             $assets->TextSearch($request->input('search'));
@@ -354,6 +355,9 @@ class AssetsController extends Controller
             'assets.status_id'
             ])->with('model', 'assetstatus', 'assignedTo')->NotArchived());
 
+        if ($request->has('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
+            $assets = $assets->RTD();
+        }
 
         if ($request->has('search')) {
             $assets = $assets->AssignedSearch($request->input('search'));

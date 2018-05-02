@@ -206,7 +206,8 @@ $(document).ready(function () {
                 data: function (params) {
                     var data = {
                         search: params.term,
-                        page: params.page || 1
+                        page: params.page || 1,
+                        assetStatusType: link.data("asset-status-type"),
                     };
                     return data;
                 },

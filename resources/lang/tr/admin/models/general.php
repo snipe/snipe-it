@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Modelleri görüntüle',
     'fieldset'                  => 'Alan',
     'no_custom_field'           => 'Özel alan yok',
-
+    'add_default_values'        => 'Add default values',
 );

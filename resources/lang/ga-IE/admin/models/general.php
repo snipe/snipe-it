@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Amharc ar Mhúnlaí',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Uimh réimsí saincheaptha',
-
+    'add_default_values'        => 'Add default values',
 );

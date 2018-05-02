@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'عنصر',
     'field_format'            => 'شکل دادن',
     'field_custom_format'     => 'شکل دادن سفارشی',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'این فیلد اجازه می دهد تا شما از یک عبارت منظم( regex) برای اعتبار استفاده کنید. این باید با "regex:" شروع شود - برای مثال، برای تایید اینکه یک مقدار فیلد سفارشی شامل IMEI معتبر (15 رقم عددی) است، شما از <code>regex: / ^[0-9]{15}$ /</code> استفاده کنید.',
     'required'   		          => 'نیازمندی',
     'req'   		              => 'نیازمندی',
     'used_by_models'   		    => 'استفاده شده توسط مدل ها',
@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'تنظیمات فیلد جدید',
     'create_field'            => 'فیلد سفارشی جدید',
     'value_encrypted'      	        => 'ارزش این فیلد در پایگاه داده رمزگذاری شده است. فقط کاربران مدیریت قادر به مشاهده مقدار رمزگشایی خواهند شد',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

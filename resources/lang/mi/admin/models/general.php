@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Tirohia nga tauira',
     'fieldset'                  => 'Whakaputu',
     'no_custom_field'           => 'Karekau he mara ritenga',
-
+    'add_default_values'        => 'Add default values',
 );

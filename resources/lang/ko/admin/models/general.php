@@ -14,5 +14,5 @@ return array(
     'view_models'               => '모델 보기',
     'fieldset'                  => '항목세트',
     'no_custom_field'           => '사용자 정의 항목 없음',
-
+    'add_default_values'        => 'Add default values',
 );

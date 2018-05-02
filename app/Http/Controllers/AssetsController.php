@@ -1004,17 +1004,18 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function displayFile($assetId = null, $fileId = null)
+    public function displayFile($assetId = null, $fileId = null, $download = true)
     {
+
         $asset = Asset::find($assetId);
-        // the asset is valid
+
         if (isset($asset->id)) {
+
             $this->authorize('view', $asset);
 
             if (!$log = Actionlog::find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
-
             }
 
             $file = $log->get_src('assets');
@@ -1023,14 +1024,13 @@ class AssetsController extends Controller
                 $file = $log->get_src('audits');
             }
 
-            $filetype = Helper::checkUploadIsImage($file);
 
             if (!file_exists($file)) {
                 return response('File '.$file.' not found on server', 404)
                     ->header('Content-Type', 'text/plain');
             }
 
-            if ($filetype) {
+            if ($download != 'true') {
                   if ($contents = file_get_contents($file)) {
                       return Response::make($contents)->header('Content-Type', $filetype);
                   }

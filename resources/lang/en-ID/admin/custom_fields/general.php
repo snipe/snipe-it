@@ -29,4 +29,5 @@ return array(
     'create_fieldset'         => 'Atur bidang baru',
     'create_field'            => 'Kostum field baru',
     'value_encrypted'      	        => 'Nilai field ini dienkripsi dalam database. Hanya pengguna admin yang bisa melihat nilai dekripsi',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

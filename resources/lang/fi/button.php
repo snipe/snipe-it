@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Lähetä',
     'upload'                    => 'Lähetä',
 	'select_file'				=> 'Valitse tiedosto...',
+    'select_files'				=> 'Select Files...',
 );

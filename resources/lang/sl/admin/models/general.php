@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Ogled modelov',
     'fieldset'                  => 'Set polj',
     'no_custom_field'           => 'Ni polj po meri',
-
+    'add_default_values'        => 'Add default values',
 );

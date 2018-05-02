@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Jauns lauka laukums',
     'create_field'            => 'Jauna pielāgota lauks',
     'value_encrypted'      	        => 'Šī lauka vērtība ir šifrēta datu bāzē. Tikai admin lietotāji varēs apskatīt atšifrēto vērtību',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

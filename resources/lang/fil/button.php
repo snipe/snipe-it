@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'I-sumita',
     'upload'                    => 'I-upload',
 	'select_file'				=> 'Pumili ng File...',
+    'select_files'				=> 'Select Files...',
 );

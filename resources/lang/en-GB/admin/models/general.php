@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'View Models',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'No custom fields',
-
+    'add_default_values'        => 'Add default values',
 );

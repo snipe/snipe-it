@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Hantar',
     'upload'                    => 'Muat naik',
 	'select_file'				=> 'Pilih Fail ...',
+    'select_files'				=> 'Select Files...',
 );

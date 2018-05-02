@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Thumela',
     'upload'                    => 'Layisha',
 	'select_file'				=> 'Khetha Ifayela ...',
+    'select_files'				=> 'Select Files...',
 );

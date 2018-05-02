@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Tingnan ang mga Modelo',
     'fieldset'                  => 'Ang Fieldset',
     'no_custom_field'           => 'Walang nai-kustom na mga field',
-
+    'add_default_values'        => 'Add default values',
 );

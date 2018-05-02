@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Pošlji',
     'upload'                    => 'Naloži',
 	'select_file'				=> 'Izberite datoteko...',
+    'select_files'				=> 'Select Files...',
 );
