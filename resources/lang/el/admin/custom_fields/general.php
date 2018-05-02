@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Νέο σύνολο πεδίων',
     'create_field'            => 'Νέο προσαρμοσμένο πεδίο',
     'value_encrypted'      	        => 'Η τιμή αυτού του πεδίου είναι κρυπτογραφημένη στη βάση δεδομένων. Μόνο οι διαχειριστές θα μπορούν να δουν την αποκρυπτογραφημένη τιμή',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

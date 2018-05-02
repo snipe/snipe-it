@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Modelle anzeigen',
     'fieldset'                  => 'Feldsatz',
     'no_custom_field'           => 'Keine benutzerdefinierten Felder',
-
+    'add_default_values'        => 'Add default values',
 );

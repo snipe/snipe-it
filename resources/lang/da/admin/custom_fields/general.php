@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nyt Feltsæt',
     'create_field'            => 'Nyt Brugerdefinerede Felt',
     'value_encrypted'      	        => 'Værdien af dette felt er krypteret i databasen. Kun admins vil være i stand til at se den krypteret værdi',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

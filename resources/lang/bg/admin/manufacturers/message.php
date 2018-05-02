@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Производителят не беше възстановен. Моля, опитайте отново',
+        'success' => 'Производителят възстановен успешно.'
     ),
 
     'delete' => array(

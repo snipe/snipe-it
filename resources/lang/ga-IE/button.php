@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Cuir isteach',
     'upload'                    => 'Uaslódáil',
 	'select_file'				=> 'Roghnaigh Comhad ...',
+    'select_files'				=> 'Select Files...',
 );

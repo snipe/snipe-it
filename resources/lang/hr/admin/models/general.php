@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Pogledajte modele',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Nema prilagođenih polja',
-
+    'add_default_values'        => 'Add default values',
 );

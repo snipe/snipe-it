@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Lihat Model',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Field yang tidak bisa di rubah',
-
+    'add_default_values'        => 'Add default values',
 );

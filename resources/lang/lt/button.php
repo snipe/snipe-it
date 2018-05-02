@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Išsaugoti',
     'upload'                    => 'Įkelti',
 	'select_file'				=> 'Pasirinkite failą ...',
+    'select_files'				=> 'Select Files...',
 );

@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'A gyártó nem lett visszaállítva, próbálja újra',
+        'success' => 'Gyártó sikeresen visszaállítva.'
     ),
 
     'delete' => array(

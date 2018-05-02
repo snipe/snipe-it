@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Yeni alan kümesi',
     'create_field'            => 'Yeni özel alan',
     'value_encrypted'      	        => 'Bu alanın değeri veritabanında şifrelidir. Yalnızca yönetici kullanıcıları şifresi çözülen değeri görüntüleyebilir',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

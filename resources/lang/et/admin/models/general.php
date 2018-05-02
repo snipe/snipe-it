@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Vaata mudeleid',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Ei ole lisavälju',
-
+    'add_default_values'        => 'Add default values',
 );

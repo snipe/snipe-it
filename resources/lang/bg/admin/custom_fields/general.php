@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Елемент',
     'field_format'            => 'Формат',
     'field_custom_format'     => 'Персонализиран формат',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Това поле позволява да използвате регулярен израз за валидация. За да го използвате, валидацията трябва да започва с "regex:" - например, за да потвърдите, че стойността на персонализираното поле съдържа валиден IMEI (15 цифри), можете да използвате <code>regex: / ^[0-9]{15}$ /</code>.',
     'required'   		          => 'Задължителен',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Използвани от модели ',
@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Нов Fieldset',
     'create_field'            => 'Ново персонализирано поле',
     'value_encrypted'      	        => 'Стойността на това поле е криптирана в базата данни. Само администратор потребители ще бъде в състояние да видят дешифрираната стойност',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

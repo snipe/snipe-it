@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'மாதிரிகள் காண்க',
     'fieldset'                  => 'fieldset',
     'no_custom_field'           => 'விருப்ப துறைகள் இல்லை',
-
+    'add_default_values'        => 'Add default values',
 );

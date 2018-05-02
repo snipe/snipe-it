@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Προβολή μοντέλων',
     'fieldset'                  => 'Σύνολο πεδίων',
     'no_custom_field'           => 'Δεν υπάρχουν προσαρμοσμένα πεδία',
-
+    'add_default_values'        => 'Add default values',
 );

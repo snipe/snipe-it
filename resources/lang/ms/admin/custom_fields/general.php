@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Fieldset baru',
     'create_field'            => 'Padang Tersuai Baru',
     'value_encrypted'      	        => 'Nilai medan ini disulitkan dalam pangkalan data. Hanya pengguna admin sahaja yang dapat melihat nilai yang disahkrit',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

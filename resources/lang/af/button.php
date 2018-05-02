@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Indien',
     'upload'                    => 'oplaai',
 	'select_file'				=> 'Kies lêer ...',
+    'select_files'				=> 'Select Files...',
 );

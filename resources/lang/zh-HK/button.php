@@ -12,4 +12,5 @@ return array(
     'submit'  	                => '送出',
     'upload'                    => '上傳',
 	'select_file'				=> '選擇檔案…',
+    'select_files'				=> 'Select Files...',
 );

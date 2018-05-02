@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Send',
     'upload'                    => 'Last opp',
 	'select_file'				=> 'Velg fil...',
+    'select_files'				=> 'Select Files...',
 );

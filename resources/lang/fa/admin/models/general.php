@@ -15,5 +15,5 @@ return array(
     'fieldset'                  => 'تنظیمات فیلد',
     'no_custom_field'           => 'بدون زمینه های سفارشی
 ',
-
+    'add_default_values'        => 'Add default values',
 );
