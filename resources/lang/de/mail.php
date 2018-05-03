@@ -61,7 +61,7 @@ return array(
     'test_email' => 'Test E-Mail von Snipe-IT',
     'test_mail_text' => 'Dies ist ein Test von Snipe-IT-Asset-Management-System. Wenn Sie das erhalten haben, funktioniert das Senden von Mails :)',
     'the_following_item' => 'Der folgende Gegenstand wurde eingecheckt: ',
-    'There_are' => 'Es existiert {1} | [2, Inf] Es existieren',
+    'There_are' => '{1} Es existiert | [2, Inf] Es existieren',
     'to_reset' => 'Zum Zurücksetzen Ihres :web Passwortes, füllen Sie bitte dieses Formular aus:',
     'type' => 'Typ',
     'user' => 'User',
