@@ -41,7 +41,8 @@ class CustomField extends Model
         'format',
         'field_values',
         'field_encrypted',
-        'help_text'
+        'help_text',
+        'show_in_email',
     ];
 
     // This is confusing, since it's actually the custom fields table that
