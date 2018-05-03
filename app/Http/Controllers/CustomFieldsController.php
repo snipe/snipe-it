@@ -166,20 +166,19 @@ class CustomFieldsController extends Controller
     public function update(CustomFieldRequest $request, $id)
     {
         $field =  CustomField::find($id);
-
         $field->name = e($request->get("name"));
         $field->element = e($request->get("element"));
         $field->field_values = e($request->get("field_values"));
         $field->field_encrypted = e($request->get("field_encrypted", 0));
         $field->user_id = Auth::user()->id;
         $field->help_text = $request->get("help_text");
+        $field->show_in_email = $request->get("show_in_email", 0);
 
         if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));
         }
-
 
         if ($field->save()) {
            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.update.success'));
