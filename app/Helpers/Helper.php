@@ -330,7 +330,14 @@ class Helper
      */
     public static function categoryTypeList()
     {
-        $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
+        $category_types = array(
+            '' => '',
+            'accessory' => 'Accessory',
+            'asset' => 'Asset',
+            'consumable' => 'Consumable',
+            'component' => 'Component',
+            'license' => 'License'
+        );
         return $category_types;
     }
 
@@ -738,6 +745,7 @@ class Helper
         static $max_size = -1;
 
         if ($max_size < 0) {
+
             // Start with post_max_size.
             $post_max_size = Helper::parse_size(ini_get('post_max_size'));
             if ($post_max_size > 0) {
@@ -751,6 +759,7 @@ class Helper
                 $max_size = $upload_max;
             }
         }
+
         return $max_size;
     }
 

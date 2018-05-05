@@ -107,6 +107,7 @@ class LicensesController extends Controller
         $license->seats             = $request->input('seats');
         $license->serial            = $request->input('serial');
         $license->supplier_id       = $request->input('supplier_id');
+        $license->category_id       = $request->input('category_id');
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
 
@@ -182,6 +183,7 @@ class LicensesController extends Controller
         $license->seats             = e($request->input('seats'));
         $license->manufacturer_id   =  $request->input('manufacturer_id');
         $license->supplier_id       = $request->input('supplier_id');
+        $license->category_id       = $request->input('category_id');
 
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
@@ -420,7 +422,6 @@ class LicensesController extends Controller
             $return_to = Asset::find($licenseSeat->asset_id);
         }
 
-        \Log::debug($licenseSeat->assigned_to);
         // Update the asset data
         $licenseSeat->assigned_to                   = null;
         $licenseSeat->asset_id                      = null;

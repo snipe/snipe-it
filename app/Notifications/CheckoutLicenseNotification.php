@@ -33,6 +33,7 @@ class CheckoutLicenseNotification extends Notification
         $this->note = '';
         $this->target_type = $params['target_type'];
         $this->settings = $params['settings'];
+        $this->target_type = $params['target_type'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -56,7 +57,8 @@ class CheckoutLicenseNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-        if ($this->target_type == \App\Models\User::class) {
+        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        {
             $notifyBy[] = 'mail';
         }
 

@@ -34,6 +34,7 @@ class CategoriesTransformer
                 'accessories_count' => $category->accessories_count,
                 'consumables_count' => $category->consumables_count,
                 'components_count' => $category->components_count,
+                'licenses_count' => $category->licenses_count,
                 'created_at' => Helper::getFormattedDateObject($category->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($category->updated_at, 'datetime'),
             ];
