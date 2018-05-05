@@ -25,7 +25,24 @@ class SaveUserRequest extends Request
     public function rules()
     {
 
-        $rules = [];
+        $rules = [
+            'last_name' => 'min:1|max:191|nullable',
+            'locale' => 'max:10|nullable',
+            'employee_num' => 'nullable',
+            'activated' => 'boolean',
+            'jobtitle' => 'min:1|max:191|nullable',
+            'phone' => 'min:1|max:191|nullable',
+            'location_id' => 'nullable|exists:locations,id,1',
+            'department_id' => 'nullable|exists:departments,id,',
+            'company_id' => 'nullable|exists:companies,id,1',
+            'manager_id' => 'nullable|exists:users,id,1',
+            'notes' => 'nullable',
+            'address' => 'nullable|max:191',
+            'city' => 'nullable|max:191',
+            'state' => 'nullable|max:3',
+            'zip' => 'nullable|max:10',
+
+        ];
 
         switch($this->method())
         {

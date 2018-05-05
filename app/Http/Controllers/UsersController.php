@@ -108,23 +108,8 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
             $data['password'] =  $request->input('password');
         }
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->locale = $request->input('locale');
-        $user->employee_num = $request->input('employee_num');
-        $user->activated = $request->input('activated', $user->activated);
-        $user->jobtitle = $request->input('jobtitle');
-        $user->phone = $request->input('phone');
-        $user->location_id = $request->input('location_id', null);
-        $user->department_id = $request->input('department_id', null);
-        $user->company_id = Company::getIdForUser($request->input('company_id', null));
-        $user->manager_id = $request->input('manager_id', null);
-        $user->notes = $request->input('notes');
-        $user->address = $request->input('address', null);
-        $user->city = $request->input('city', null);
-        $user->state = $request->input('state', null);
-        $user->country = $request->input('country', null);
-        $user->zip = $request->input('zip', null);
+dd($request->validated());
+        $user->fill($request->validated());
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -152,12 +137,6 @@ class UsersController extends Controller
                 $data['password'] = e($request->input('password'));
 
                 $user->notify(new WelcomeNotification($data));
-
-/*                Mail::send('emails.send-login', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
-                });*/
             }
             return redirect::route('users.index')->with('success', trans('admin/users/message.success.create'));
         }
