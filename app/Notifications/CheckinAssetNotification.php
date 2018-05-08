@@ -76,7 +76,7 @@ class CheckinAssetNotification extends Notification
         $fields = [
             trans('general.administrator') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
             trans('general.status') => $item->assetstatus->name,
-            trans('general.location') => $item->location->name,
+            trans('general.location') => ($item->location) ? $item->location->name : '',
         ];
         
         return (new SlackMessage)

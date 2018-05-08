@@ -43,6 +43,7 @@ class Setting extends Model
           'audit_warning_days' => 'numeric|nullable',
           'audit_interval' => 'numeric|nullable',
           'custom_forgot_pass_url' => 'url|nullable',
+          'privacy_policy_link' => 'nullable|url'
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];

@@ -21,10 +21,10 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Category::class);
-        $allowed_columns = ['id', 'name','category_type', 'category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count', 'image'];
+        $allowed_columns = ['id', 'name','category_type', 'category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count','licenses_count', 'image'];
 
         $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email','image'])
-            ->withCount('assets', 'accessories', 'consumables', 'components');
+            ->withCount('assets', 'accessories', 'consumables', 'components','licenses');
 
         if ($request->has('search')) {
             $categories = $categories->TextSearch($request->input('search'));

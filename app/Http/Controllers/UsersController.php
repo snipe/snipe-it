@@ -539,9 +539,11 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
+
+
+        if ((!Input::has('ids')) || (count(Input::get('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
+        } elseif ((!Input::has('status_id')) || (Input::get('status_id')=='')) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         } else {
 

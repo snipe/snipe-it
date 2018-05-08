@@ -45,6 +45,8 @@
                 <table
                         data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayoutSeats() }}"
                         data-cookie-id-table="seatsTable"
+                        data-id-table="seatsTable"
+                        id="seatsTable"
                         data-pagination="true"
                         data-search="true"
                         data-side-pagination="server"
@@ -53,7 +55,6 @@
                         data-show-refresh="true"
                         data-sort-order="asc"
                         data-sort-name="name"
-                        id="seatsTable"
                         class="table table-striped snipe-table"
                         data-url="{{ route('api.license.seats',['license_id' => $license->id]) }}"
                         data-export-options='{
@@ -125,6 +126,15 @@
                         </td>
                       </tr>
                       @endif
+
+                    @if ($license->category)
+                      <tr>
+                        <td>{{ trans('general.category') }}: </td>
+                        <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">
+                          <a href="{{ route('categories.show', $license->category->id) }}">{{ $license->category->name }}</a>
+                        </td>
+                      </tr>
+                    @endif
 
 
                     @if ($license->license_name!='')
@@ -266,9 +276,10 @@
 
             <table
                 data-cookie-id-table="licenseUploadsTable"
-                data-pagination="true"
-                data-id-table="assetsListingTable"
+                data-id-table="licenseUploadsTable"
+                id="licenseUploadsTable"
                 data-search="true"
+                data-pagination="true"
                 data-side-pagination="client"
                 data-show-columns="true"
                 data-show-export="true"
@@ -277,7 +288,6 @@
                 data-show-refresh="true"
                 data-sort-order="asc"
                 data-sort-name="name"
-                id="licenseUploadsTable"
                 class="table table-striped snipe-table"
                 data-export-options='{
                     "fileName": "export-license-uploads-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
@@ -285,8 +295,8 @@
                     }'>
             <thead>
               <tr>
-                <th></th>
-                <th class="col-md-4" data-field="file_name" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
+                <th data-visible="true"></th>
+                <th class="col-md-4" data-field="file_name" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
                 <th class="col-md-4" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
                 <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
                 <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">Download</th>
@@ -294,7 +304,7 @@
               </tr>
             </thead>
             <tbody>
-            @if ($license->uploads->count()> 0)
+            @if ($license->uploads->count() > 0)
               @foreach ($license->uploads as $file)
               <tr>
                 <td><i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med"></i></td>
@@ -322,7 +332,7 @@
               @endforeach
             @else
               <tr>
-              <td colspan="4">{{ trans('general.no_results') }}</td>
+              <td colspan="6">{{ trans('general.no_results') }}</td>
               </tr>
             @endif
             </tbody>
@@ -336,7 +346,9 @@
               <div class="table-responsive">
               <table
                       class="table table-striped snipe-table"
-                      id="historyTable"
+                      data-cookie-id-table="dsffsdflicenseHistoryTable"
+                      data-id-table="dsffsdflicenseHistoryTable"
+                      id="dsffsdflicenseHistoryTable"
                       data-pagination="true"
                       data-show-columns="true"
                       data-side-pagination="server"
@@ -347,8 +359,7 @@
                        "fileName": "export-{{ str_slug($license->name) }}-history-{{ date('Y-m-d') }}",
                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                      }'
-                      data-url="{{ route('api.activity.index', ['item_id' => $license->id, 'item_type' => 'license']) }}"
-                      data-cookie-id-table="license-history">
+                      data-url="{{ route('api.activity.index', ['item_id' => $license->id, 'item_type' => 'license']) }}">
 
                 <thead>
                 <tr>
@@ -358,6 +369,9 @@
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>
+                  @if  ($snipeSettings->require_accept_signature=='1')
+                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                  @endif
                 </tr>
                 </thead>
               </table>

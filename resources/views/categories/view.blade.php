@@ -68,6 +68,15 @@
                       "fileName": "export-{{ str_slug($category->name) }}-components-{{ date('Y-m-d') }}",
                       "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                       }'
+                @elseif ($category->category_type=='license')
+                data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                data-cookie-id-table="categoryLicenseTable"
+                id="categoryLicenseTable"
+                data-id-table="categoryLicenseTable"
+                data-export-options='{
+                      "fileName": "export-{{ str_slug($category->name) }}-licenses-{{ date('Y-m-d') }}",
+                      "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                      }'
                 @endif
 
                 data-pagination="true"

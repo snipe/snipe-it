@@ -70,6 +70,12 @@ class CategoryPresenter extends Presenter
                 "title" => trans('general.components'),
                 "visible" => true
             ], [
+                "field" => "licenses_count",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('general.licenses'),
+                "visible" => true
+            ], [
                 "field" => "eula",
                 "searchable" => false,
                 "sortable" => false,

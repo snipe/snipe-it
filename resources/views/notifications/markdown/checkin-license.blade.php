@@ -13,6 +13,9 @@
 @if ($target->can('update', $item))
 | **Key** | {{ $item->serial }} |
 @endif
+@if (isset($item->category))
+| **{{ trans('general.category') }}** | {{ $item->category->name }} |
+@endif
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
 @endif
