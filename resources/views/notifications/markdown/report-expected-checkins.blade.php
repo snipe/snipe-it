@@ -4,13 +4,13 @@
 The following {{ $assets->count() }} items are due to be checked in soon:
 
 @component('mail::table')
-| Asset Name | Asset Tag | Checked Out to | Expected Checkin |
+| Asset | Checked Out to | Expected Checkin |
 | ------------- | ------------- |
 @foreach ($assets as $asset)
 @php
 $checkin = \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin, 'date');
 @endphp
-| {{ $asset->name }} | [{{ $asset->asset_tag }}]({{ route('hardware.show', ['assetId' => $asset->id]) }}) | [{{ $asset->assigned->first_name }}  {{ $asset->assigned->last_name }}]({{ route('users.show', ['user'=>$asset->assigned->id]) }})  | {{ $checkin['formatted'] }}
+| [{{ $asset->present()->name }}]({{ route('hardware.show', ['assetId' => $asset->id]) }}) | [{{ $asset->assigned->present()->fullName }}]({{ route('users.show', ['user'=>$asset->assigned->id]) }})  | {{ $checkin['formatted'] }}
 @endforeach
 @endcomponent
 
