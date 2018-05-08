@@ -376,6 +376,7 @@ class ReportsController extends Controller
             if ($request->has('rtd_location')) {
                 $header[] = trans('admin/hardware/form.default_location');
             }
+            
             if ($request->has('rtd_location_address')) {
                 $header[] = trans('general.address');
                 $header[] = trans('general.address');
@@ -462,6 +463,11 @@ class ReportsController extends Controller
                 $assets->where('assets.location_id', $request->input('by_location_id'));
             }
 
+            if ($request->has('by_rtd_location_id')) {
+                \Log::debug('RTD location should match: '.$request->input('by_rtd_location_id'));
+                $assets->where('assets.rtd_location_id', $request->input('by_rtd_location_id'));
+            }
+
             if ($request->has('by_supplier_id')) {
                 $assets->where('assets.supplier_id', $request->input('by_supplier_id'));
             }
@@ -496,6 +502,10 @@ class ReportsController extends Controller
 
             if (($request->has('created_start')) && ($request->has('created_end'))) {
                 $assets->whereBetween('assets.created_at', [$request->input('created_start'), $request->input('created_end')]);
+            }
+
+            if (($request->has('expected_checkin_start')) && ($request->has('expected_checkin_end'))) {
+                $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
             }
             
             $assets->orderBy('assets.created_at', 'ASC')->chunk(500, function($assets) use($handle, $customfields, $request) {
