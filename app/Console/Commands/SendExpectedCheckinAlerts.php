@@ -4,8 +4,10 @@ namespace App\Console\Commands;
 
 
 use App\Models\Asset;
+use App\Models\Setting;
 use Illuminate\Console\Command;
 use App\Notifications\ExpectedCheckinNotification;
+use App\Notifications\ExpectedCheckinAdminNotification;
 use Carbon\Carbon;
 
 class SendExpectedCheckinAlerts extends Command
@@ -42,18 +44,25 @@ class SendExpectedCheckinAlerts extends Command
      */
     public function fire()
     {
-
+        $settings = Setting::getSettings();
         $whenNotify = Carbon::now()->addDays(7);
-        $assets = Asset::with('assignedTo')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
+        $assets = Asset::with('assignedTo')->whereNotNull('assigned_to')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
 
         $this->info($whenNotify.' is deadline');
         $this->info($assets->count().' assets');
 
         foreach ($assets as $asset) {
-            if ($asset->assignedTo  && $asset->checkoutOutToUser()) {
-                $asset->assignedTo->notify((new ExpectedCheckinNotification($asset)));
-                //$this->info($asset);
+            if ($asset->assigned  && $asset->checkedOutToUser()) {
+                $asset->assigned->notify((new ExpectedCheckinNotification($asset)));
             }
+        }
+
+
+        // Send a rollup to the admin, if settings dictate
+        $recipient = new \App\Models\Recipients\AlertRecipient();
+
+        if ($settings->alert_email!='') {
+            $recipient->notify(new ExpectedCheckinAdminNotification($assets));
         }
 
 

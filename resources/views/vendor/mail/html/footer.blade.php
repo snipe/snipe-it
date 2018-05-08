@@ -4,6 +4,12 @@
             <tr>
                 <td class="content-cell" align="center">
                     {{ Illuminate\Mail\Markdown::parse($slot) }}
+
+                    @if ($snipeSettings->privacy_policy_link!='')
+                        <a href="{{ $snipeSettings->privacy_policy_link }}">{{ trans('admin/settings/general.privacy_policy') }}</a>
+                    @endif
+
+
                 </td>
             </tr>
         </table>
