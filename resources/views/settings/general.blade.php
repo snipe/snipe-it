@@ -268,7 +268,7 @@
                        </div>
                        <!-- /.form-group -->
 
-                       <!-- Privacy Polict Footer-->
+                       <!-- Privacy Policy Footer-->
                        <div class="form-group {{ $errors->has('privacy_policy_link') ? 'error' : '' }}">
                            <div class="col-md-3">
                                {{ Form::label('privacy_policy_link', trans('admin/settings/general.privacy_policy_link')) }}
