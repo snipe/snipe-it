@@ -126,6 +126,15 @@
                       </tr>
                       @endif
 
+                    @if ($license->category)
+                      <tr>
+                        <td>{{ trans('general.category') }}: </td>
+                        <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">
+                          <a href="{{ route('categories.show', $license->category->id) }}">{{ $license->category->name }}</a>
+                        </td>
+                      </tr>
+                    @endif
+
 
                     @if ($license->license_name!='')
                     <tr>

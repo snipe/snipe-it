@@ -16,6 +16,14 @@ use Watson\Validating\ValidatingTrait;
 class License extends Depreciable
 {
     protected $presenter = 'App\Presenters\LicensePresenter';
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutLicenseNotification::class;
+    public static $checkinClass = CheckinLicenseNotification::class;
+
+
     use SoftDeletes;
     use CompanyableTrait;
     use Loggable, Presentable;

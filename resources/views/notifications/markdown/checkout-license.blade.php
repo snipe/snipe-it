@@ -13,6 +13,9 @@
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
 @endif
+@if (isset($item->category))
+| **{{ trans('general.category') }}** | {{ $item->category->name }} |
+@endif
 @if ($target->can('update', $item))
 | **Key** | {{ $item->serial }} |
 @endif
