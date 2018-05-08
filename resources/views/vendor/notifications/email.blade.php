@@ -196,6 +196,13 @@ $style = [
                                             <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
                                             All rights reserved.
                                         </p>
+
+                                        @if ($snipeSettings->privacy_policy_link!='')
+                                            <p style="{{ $style['paragraph-sub'] }}">
+                                                <a href="{{ $snipeSettings->privacy_policy_link }}">{{ trans('admin/settings/general.privacy_policy') }}</a>
+                                            </p>
+
+                                        @endif
                                     </td>
                                 </tr>
                             </table>

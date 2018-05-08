@@ -45,7 +45,7 @@ Snipe-IT
 @endif
 
 @if ($snipeSettings->privacy_policy_link!='')
-[{{ $snipeSettings->privacy_policy_link }}]({{ trans('admin/settings/general.privacy_policy') }})
+<a href="{{ $snipeSettings->privacy_policy_link }}">{{ trans('admin/settings/general.privacy_policy') }}</a>
 @endif
 
 @endcomponent
