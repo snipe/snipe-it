@@ -50,6 +50,7 @@
                     </tr>
 
                     {{ $footer or '' }}
+
                 </table>
             </td>
         </tr>
