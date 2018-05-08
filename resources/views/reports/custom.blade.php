@@ -298,7 +298,7 @@
             </div>
 
             <!-- Expected Checkin Date -->
-            <div class="form-group purchase-range">
+            <div class="form-group expected_checkin-range">
               <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                 <input type="text" class="input-sm form-control" name="expected_checkin_start" />
@@ -338,6 +338,12 @@
           clearBtn: true,
           todayHighlight: true,
           endDate: '0d',
+          format: 'yyyy-mm-dd'
+      });
+
+      $('.expected_checkin-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
           format: 'yyyy-mm-dd'
       });
 
