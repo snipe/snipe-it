@@ -28,6 +28,25 @@
 @endcomponent
 
 
+@if (($req_accept == 1) && ($eula!=''))
+{{ trans('mail.read_the_terms_and_click') }}
+@elseif (($req_accept == 1) && ($eula==''))
+{{ trans('mail.click_on_the_link_asset') }}
+@elseif (($req_accept == 0) && ($eula!=''))
+{{ trans('mail.read_the_terms') }}
+@endif
+
+@if ($eula)
+@component('mail::panel')
+{!! $eula !!}
+@endcomponent
+@endif
+
+@if ($req_accept == 1)
+**[✔ {{ trans('mail.i_have_read') }}]({{ $accept_url }})**
+@endif
+
+
 Thanks,
 
 {{ $snipeSettings->site_name }}
