@@ -34,14 +34,19 @@
         @endslot
     @endisset
 
-    {{-- Footer --}}
-    @slot('footer')
-        @component('mail::footer')
-            @if($snipeSettings::setupCompleted())
-                © {{ date('Y') }} {{ $snipeSettings->site_name }}. All rights reserved.
-            @else
-                © {{ date('Y') }} Snipe-it. All rights reserved.
-            @endif
-        @endcomponent
-    @endslot
+{{-- Footer --}}
+@slot('footer')
+@component('mail::footer')
+@if($snipeSettings::setupCompleted())
+© {{ date('Y') }} {{ $snipeSettings->site_name }}. All rights reserved.
+@else
+© {{ date('Y') }} Snipe-it. All rights reserved.
+@endif
+
+@if ($snipeSettings->privacy_policy_link!='')
+[{{ $snipeSettings->privacy_policy_link }}]({{ trans('admin/settings/general.privacy_policy') }})
+@endif
+
+@endcomponent
+@endslot
 @endcomponent

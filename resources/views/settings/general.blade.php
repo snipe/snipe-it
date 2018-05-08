@@ -267,6 +267,18 @@
                            </div>
                        </div>
                        <!-- /.form-group -->
+
+                       <!-- Privacy Polict Footer-->
+                       <div class="form-group {{ $errors->has('privacy_policy_link') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('privacy_policy_link', trans('admin/settings/general.privacy_policy_link')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::text('privacy_policy_link', Input::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
+                               <span class="help-block">{{ trans('admin/settings/general.privacy_policy_link_help')  }}</span>
+                               {!! $errors->first('privacy_policy_link', '<span class="alert-msg">:message</span>') !!}
+                           </div>
+                       </div>
                    </div>
 
             </div> <!--/.box-body-->

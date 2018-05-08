@@ -347,6 +347,7 @@ class SettingsController extends Controller
 
         $setting->default_eula_text = $request->input('default_eula_text');
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
+        $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
         if (Input::get('per_page')!='') {
             $setting->per_page = $request->input('per_page');

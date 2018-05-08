@@ -76,7 +76,7 @@ trait Loggable
         $checkoutClass = null;
 
         if (method_exists($target, 'notify')) {
-            \Log::debug('This target is notifiable');
+            // \Log::debug('This target is notifiable');
             $target->notify(new static::$checkoutClass($params));
         }
 
@@ -84,7 +84,7 @@ trait Loggable
         $recipient = new \App\Models\Recipients\AdminRecipient();
 
         if (($settings->admin_cc_email!='') && (static::$checkoutClass!='')) {
-            \Log::debug('Send an email to the admin - '.$settings->admin_cc_email);
+            // \Log::debug('Send an email to the admin - '.$settings->admin_cc_email);
             $recipient->notify(new static::$checkoutClass($params));
         }
 
