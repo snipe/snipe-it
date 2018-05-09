@@ -36,7 +36,7 @@
 
 <div class="form-group {{ $errors->has('eos') ? ' has-error' : '' }}">
     <label for="eol" class="col-md-3 control-label">{{ trans('general.eos') }}</label>
-    <div class="col-md-2">
+    <div class="col-md-3">
         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="eos" id="eos" value="{{ Input::old('eos', ($item->eos) ? $item->eos : '') }}">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
