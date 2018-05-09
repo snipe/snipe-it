@@ -568,16 +568,16 @@ class ReportsController extends Controller
                     }
 
                     if ($request->has('location_address')) {
-                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address : '';
-                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address2 : '';
-                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->city : '';
-                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->state : '';
-                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->country : '';
-                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->zip : '';
+                        $row[] = ($asset->location) ? $asset->location->address : '';
+                        $row[] = ($asset->location) ? $asset->location->address2 : '';
+                        $row[] = ($asset->location) ? $asset->location->city : '';
+                        $row[] = ($asset->location) ? $asset->location->state : '';
+                        $row[] = ($asset->location) ? $asset->location->country : '';
+                        $row[] = ($asset->location) ? $asset->location->zip : '';
                     }
 
                     if ($request->has('rtd_location')) {
-                        $row[] = ($asset->location) ? $asset->defaultLoc->present()->name() : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->present()->name() : '';
                     }
 
                     if ($request->has('rtd_location_address')) {
