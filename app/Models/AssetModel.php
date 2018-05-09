@@ -30,7 +30,7 @@ class AssetModel extends SnipeModel
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
         'eol'               => 'integer:min:0|max:240|nullable',
-        'eol_support'       => 'date_format:"Y-m-d"|nullable',
+        'eos'       => 'date_format:"Y-m-d"|nullable',
     );
 
     /**
@@ -58,7 +58,7 @@ class AssetModel extends SnipeModel
             $value = null;
         }
 
-        $this->attributes['eol_support'] = $value;
+        $this->attributes['eos'] = $value;
     }
     /**
      * The attributes that are mass assignable.
@@ -69,7 +69,7 @@ class AssetModel extends SnipeModel
         'category_id',
         'depreciation_id',
         'eol',
-        'eol_support',
+        'eos',
         'fieldset_id',
         'image',
         'manufacturer_id',

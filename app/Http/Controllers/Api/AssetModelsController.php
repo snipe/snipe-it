@@ -38,7 +38,7 @@ class AssetModelsController extends Controller
             'models.name',
             'model_number',
             'eol',
-            'eol_support',
+            'eos',
             'models.notes',
             'models.created_at',
             'category_id',

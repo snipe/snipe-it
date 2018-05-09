@@ -79,7 +79,7 @@
     'depreciation'			=> 'Depreciation',
     'editprofile'  			=> 'Edit Your Profile',
     'eol'					=> 'EOL',
-    'eol_support'           => 'EOL Support',
+    'eos'                   => 'EOS',
     'email_domain'			=> 'Email Domain',
     'email_format'			=> 'Email Format',
     'email_domain_help'		=> 'This is used to generate email addresses when importing',

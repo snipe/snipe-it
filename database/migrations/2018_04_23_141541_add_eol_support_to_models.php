@@ -14,7 +14,7 @@ class AddEolSupportToModels extends Migration
     public function up()
     {
         Schema::table('models', function ($table) {
-            $table->date('eol_support')->nullable()->default(NULL)->after('eol');
+            $table->date('eos')->nullable()->default(NULL)->after('eol');
         });
     }
 
@@ -26,7 +26,7 @@ class AddEolSupportToModels extends Migration
     public function down()
     {
         Schema::table('models', function ($table) {
-            $table->dropColumn('eol_support');
+            $table->dropColumn('eos');
         });
     }
 }

@@ -32,18 +32,18 @@
     </div>
 </div>
 
-<!-- EOL Support -->
+<!-- EOS -->
 
-<div class="form-group {{ $errors->has('eol_support') ? ' has-error' : '' }}">
-    <label for="eol" class="col-md-3 control-label">{{ trans('general.eol_support') }}</label>
+<div class="form-group {{ $errors->has('eos') ? ' has-error' : '' }}">
+    <label for="eol" class="col-md-3 control-label">{{ trans('general.eos') }}</label>
     <div class="col-md-2">
         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="eol_support" id="eol_support" value="{{ Input::old('eol_support', ($item->eol_support) ? $item->eol_support : '') }}">
+            <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="eos" id="eos" value="{{ Input::old('eos', ($item->eos) ? $item->eos : '') }}">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         </div>
     </div>
     <div class="col-md-9 col-md-offset-3">
-        {!! $errors->first('eol_support', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
+        {!! $errors->first('eos', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>
 

@@ -403,11 +403,11 @@
                       </tr>
                     @endif
 
-                    @if (($asset->model) && ($asset->model->eol_support))
+                    @if (($asset->model) && ($asset->model->eos))
                       <tr>
-                        <td>{{ trans('general.eol_support') }}</td>
+                        <td>{{ trans('general.eos') }}</td>
                         <td>
-                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->model->eol_support, 'date', false) }}
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->model->eos, 'date', false) }}
                         </td>
                       </tr>
                     @endif

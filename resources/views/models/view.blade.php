@@ -158,9 +158,9 @@
               </li>
               @endif
 
-              @if ($model->eol_support)
-              <li>{{ trans('general.eol_support') }}:
-                  {{ $model->eol_support }}
+              @if ($model->eos)
+              <li>{{ trans('general.eos') }}:
+                  {{ $model->eos }}
               </li>
               @endif
 
