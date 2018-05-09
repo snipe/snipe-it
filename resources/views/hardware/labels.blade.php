@@ -82,6 +82,7 @@
     }
     .next-padding {
       margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
+      font-size: 0;
     }
   }
 
@@ -152,7 +153,7 @@
 
 @if ($count % $settings->labels_per_page == 0)
 <div class="page-break"></div>
-<div class="next-padding"></div>
+<div class="next-padding">&nbsp;</div>
 @endif
 
 @endforeach
