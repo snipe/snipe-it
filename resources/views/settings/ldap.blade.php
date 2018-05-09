@@ -359,6 +359,21 @@
                             </div>
                         </div>
 
+                        <!-- LDAP phone -->
+                        <div class="form-group {{ $errors->has('ldap_phone') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_phone', trans('admin/settings/general.ldap_phone')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    {{ Form::text('ldap_phone', Input::old('ldap_phone', $setting->ldap_phone), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}
+                                @else
+                                    {{ Form::text('ldap_phone', Input::old('ldap_phone', $setting->ldap_phone), array('class' => 'form-control','placeholder' => '')) }}
+                                @endif
+                                {!! $errors->first('ldap_phone', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div>
+
 
                         @if ($setting->ldap_enabled)
                         <!-- LDAP test -->

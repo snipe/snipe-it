@@ -860,6 +860,7 @@ class SettingsController extends Controller
         $setting->ldap_active_flag = $request->input('ldap_active_flag');
         $setting->ldap_emp_num = $request->input('ldap_emp_num');
         $setting->ldap_email = $request->input('ldap_email');
+        $setting->ldap_phone = $request->input('ldap_phone');
         $setting->ad_domain = $request->input('ad_domain');
         $setting->is_ad = $request->input('is_ad', '0');
         $setting->ldap_tls = $request->input('ldap_tls', '0');

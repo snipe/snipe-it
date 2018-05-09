@@ -166,6 +166,7 @@ class Ldap extends Model
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
         $ldap_result_email = Setting::getSettings()->ldap_email;
+        $ldap_result_phone = Setting::getSettings()->ldap_phone;
 
         // Get LDAP user data
         $item = array();
@@ -174,6 +175,7 @@ class Ldap extends Model
         $item["lastname"] = isset($ldapatttibutes[$ldap_result_last_name][0]) ? $ldapatttibutes[$ldap_result_last_name][0] : "";
         $item["firstname"] = isset($ldapatttibutes[$ldap_result_first_name][0]) ? $ldapatttibutes[$ldap_result_first_name][0] : "";
         $item["email"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
+        $item["phone"] = isset($ldapatttibutes[$ldap_result_phone][0]) ? $ldapatttibutes[$ldap_result_phone][0] : "" ;
 
         return $item;
 
