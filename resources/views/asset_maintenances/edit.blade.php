@@ -41,7 +41,7 @@
       </div><!-- /.box-header -->
 
       <div class="box-body">
-        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/asset_maintenances/table.asset_name'), 'fieldname' => 'asset_id'])
+        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/asset_maintenances/table.asset_name'), 'fieldname' => 'asset_id', 'required' => 'true'])
         @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id', 'required' => 'true'])
         @include ('partials.forms.edit.maintenance_type')
 
