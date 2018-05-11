@@ -113,6 +113,9 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->notes = e($request->input('notes'));
         $asset = Asset::find(e($request->input('asset_id')));
 
+        if ((!Company::isCurrentUserHasAccess($asset)) && ($asset!=null)) {
+            return static::getInsufficientPermissionsRedirect();
+        }
 
         // Save the asset maintenance data
         $assetMaintenance->asset_id               = $request->input('asset_id');
