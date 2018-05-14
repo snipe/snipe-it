@@ -117,23 +117,25 @@
             </div>
             <div class="checkbox col-md-12">
               <label>
-                {{ Form::checkbox('assigned_to', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/licenses/table.assigned_to') }}
-              </label>
-            </div>
-            <div class="checkbox col-md-12">
-              <label>
-                {{ Form::checkbox('username', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/users/table.username') }}
+                {{ Form::checkbox('location_address', '1', '1', ['class' => 'minimal']) }}
+                - {{ trans('general.address') }}
               </label>
             </div>
 
             <div class="checkbox col-md-12">
               <label>
-                {{ Form::checkbox('employee_num', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/users/table.employee_num') }}
+                {{ Form::checkbox('rtd_location', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/hardware/form.default_location') }}
               </label>
             </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('rtd_location_address', '1', '1', ['class' => 'minimal']) }}
+                - {{ trans('general.address') }}
+              </label>
+            </div>
+
+
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('status', '1', '1', ['class' => 'minimal']) }}
@@ -195,6 +197,40 @@
               </label>
             </div>
 
+            <!-- User fields -->
+            <div class="checkbox col-md-12">
+              <h4>Checked Out To Fields:</h4>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('assigned_to', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/licenses/table.assigned_to') }}
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('username', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/users/table.username') }}
+              </label>
+            </div>
+
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('employee_num', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/users/table.employee_num') }}
+              </label>
+            </div>
+
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('department', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('general.department') }}
+              </label>
+            </div>
+
+
+
+
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">
                 <h4>Custom Fields:</h4>
@@ -218,6 +254,7 @@
 
             @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'by_company_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'by_location_id', 'hide_new' => 'true'])
+            @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'by_rtd_location_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'by_supplier_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.model-select', ['translated_name' => trans('general.asset_model'), 'fieldname' => 'by_model_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'by_manufacturer_id', 'hide_new' => 'true'])
@@ -260,6 +297,16 @@
               </div>
             </div>
 
+            <!-- Expected Checkin Date -->
+            <div class="form-group expected_checkin-range">
+              <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
+              <div class="input-daterange input-group col-md-6" id="datepicker">
+                <input type="text" class="input-sm form-control" name="expected_checkin_start" />
+                <span class="input-group-addon">to</span>
+                <input type="text" class="input-sm form-control" name="expected_checkin_end" />
+              </div>
+            </div>
+
             
 
             <div class="col-md-9 col-md-offset-3">
@@ -291,6 +338,12 @@
           clearBtn: true,
           todayHighlight: true,
           endDate: '0d',
+          format: 'yyyy-mm-dd'
+      });
+
+      $('.expected_checkin-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
           format: 'yyyy-mm-dd'
       });
 

@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Хөрөнгийн шошго',
     'update'			=> 'Хөрөнгийн шинэчлэлт',
     'warranty'			=> 'Баталгаат',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'жил',
 )
 ;

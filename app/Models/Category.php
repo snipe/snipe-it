@@ -33,7 +33,7 @@ class Category extends SnipeModel
         'name'   => 'required|min:1|max:255|unique_undeleted',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
-        'category_type'   => 'required|in:asset,accessory,consumable,component',
+        'category_type'   => 'required|in:asset,accessory,consumable,component,license',
     );
 
     /**
@@ -53,7 +53,15 @@ class Category extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','category_type', 'user_id', 'use_default_eula','checkin_email','require_acceptance'];
+    protected $fillable = [
+        'category_type',
+        'checkin_email',
+        'eula_text',
+        'name',
+        'require_acceptance',
+        'use_default_eula',
+        'user_id',
+    ];
 
 
     public function has_models()
@@ -64,6 +72,11 @@ class Category extends SnipeModel
     public function accessories()
     {
         return $this->hasMany('\App\Models\Accessory');
+    }
+
+    public function licenses()
+    {
+        return $this->hasMany('\App\Models\License');
     }
 
     public function consumables()

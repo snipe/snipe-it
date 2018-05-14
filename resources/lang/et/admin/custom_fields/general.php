@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'Uus kohandatud väli',
     'value_encrypted'      	        => 'Selle välja väärtust krüpteeritakse andmebaasis. Dežrooveeritud väärtust saab vaadata ainult administraatoritel',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

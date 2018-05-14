@@ -12,6 +12,8 @@ use App\Models\Consumable;
 use App\Models\License;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\RequestAssetNotification;
+use App\Notifications\RequestAssetCancelationNotification;
 use Auth;
 use Config;
 use DB;
@@ -59,7 +61,7 @@ class ViewAssetsController extends Controller
             $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
-            return redirect()->route('users')->with('error', $error);
+            return redirect()->route('users.index')->with('error', $error);
         }
 
     }
@@ -80,116 +82,71 @@ class ViewAssetsController extends Controller
     {
         $item = null;
         $fullItemType = 'App\\Models\\' . studly_case($itemType);
+
         if ($itemType == "asset_model") {
             $itemType = "model";
         }
         $item = call_user_func(array($fullItemType, 'find'), $itemId);
+
         $user = Auth::user();
-        $quantity = $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
+
 
         $logaction = new Actionlog();
         $logaction->item_id = $data['asset_id'] = $item->id;
         $logaction->item_type = $fullItemType;
         $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
+
         if ($user->location_id) {
             $logaction->location_id = $user->location_id;
         }
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
+        $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
-        $data['item_name'] = $item->name;
+        $data['item'] = $item;
         $data['item_type'] = $itemType;
+        $data['target'] = Auth::user();
+
 
         if ($fullItemType == Asset::class) {
             $data['item_url'] = route('hardware.show', $item->id);
-            $slackMessage = ' Asset <'.url('/').'/hardware/'.$item->id.'/view'.'|'.$item->present()->name().'> requested by <'.url('/').'/users/'.$item->user_id.'/view'.'|'.$user->present()->fullName().'>.';
         } else {
             $data['item_url'] = route("view/${itemType}", $item->id);
-            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.url('/').'/user/'.$item->id.'/view'.'|'.$user->present()->fullName().'>.';
+
         }
 
         $settings = Setting::getSettings();
 
-        if ($settings->slack_endpoint) {
-
-            $slack_settings = [
-                'username' => $settings->botname,
-                'channel' => $settings->slack_channel,
-                'link_names' => true
-            ];
-
-            $slackClient = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-        }
-
-        if ($item->isRequestedBy($user)) {
-
-            $item->cancelRequest();
-            $log = $logaction->logaction('request_canceled');
+        if ($item_request = $item->isRequestedBy($user)) {
+           $item->cancelRequest();
+           $data['item_quantity'] = $item_request->qty;
+           $logaction->logaction('request_canceled');
 
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-canceled', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Item_Request_Canceled'));
-                });
-            }
-
-            if ($settings->slack_endpoint) {
-                try {
-                        $slackClient->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'CANCELED:',
-                                    'value' => $slackMessage
-                                ]
-
-                            ]
-                        ])->send('Item Request Canceled');
-
-                } catch (Exception $e) {
-
-                }
+                $settings->notify(new RequestAssetCancelationNotification($data));
             }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
 
         } else {
             $item->request();
-
-            $log = $logaction->logaction('requested');
-
-
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Item_Requested'));
-                });
+                $logaction->logaction('requested');
+                $settings->notify(new RequestAssetNotification($data));
             }
 
-            if ($settings->slack_endpoint) {
-                try {
-                        $slackClient->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'REQUESTED:',
-                                    'value' => $slackMessage
-                                ]
 
-                            ]
-                        ])->send('Item Requested');
-
-                } catch (Exception $e) {
-
-                }
-            }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
     }
+
+
+
+
+
+
     public function getRequestAsset($assetId = null)
     {
 
@@ -197,73 +154,44 @@ class ViewAssetsController extends Controller
 
         // Check if the asset exists and is requestable
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
-            // Redirect to the asset management page
-            return redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
+            return redirect()->route('requestable-assets')
+                ->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->route('requestable-assets')
+                ->with('error', trans('general.insufficient_permissions'));
         }
-        // If it's requested, cancel the request.
+
+        $data['item'] = $asset;
+        $data['target'] =  Auth::user();
+        $data['item_quantity'] = 1;
+        $settings = Setting::getSettings();
+
+        $logaction = new Actionlog();
+        $logaction->item_id = $data['asset_id'] = $asset->id;
+        $logaction->item_type = $data['item_type'] = Asset::class;
+        $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
+
+        if ($user->location_id) {
+            $logaction->location_id = $user->location_id;
+        }
+        $logaction->target_id = $data['user_id'] = Auth::user()->id;
+        $logaction->target_type = User::class;
+
+
+        // If it's already requested, cancel the request.
         if ($asset->isRequestedBy(Auth::user())) {
             $asset->cancelRequest();
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+            $logaction->logaction('request canceled');
+            $settings->notify(new RequestAssetCancelationNotification($data));
+            return redirect()->route('requestable-assets')
+                ->with('success')->with('success', trans('admin/hardware/message.requests.cancel-success'));
         } else {
 
-            $logaction = new Actionlog();
-            $logaction->item_id = $data['asset_id'] = $asset->id;
-            $logaction->item_type = Asset::class;
-            $logaction->created_at = $data['requested_date'] = date("Y-m-d H:i:s");
-            $data['asset_type'] = 'hardware';
-            if ($user->location_id) {
-                $logaction->location_id = $user->location_id;
-            }
-            $logaction->target_id = $data['user_id'] = Auth::user()->id;
-            $logaction->target_type = User::class;
-            $log = $logaction->logaction('requested');
-
-            $data['requested_by'] = $user->present()->fullName();
-            $data['asset_name'] = $asset->present()->name();
-
-            $settings = Setting::getSettings();
-
-            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
-                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.asset_requested'));
-                });
-            }
+            $logaction->logaction('requested');
 
             $asset->request();
+            $settings->notify(new RequestAssetNotification($data));
 
-
-            if ($settings->slack_endpoint) {
-
-
-                $slack_settings = [
-                    'username' => $settings->botname,
-                    'channel' => $settings->slack_channel,
-                    'link_names' => true
-                ];
-
-                $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
-
-                try {
-                        $client->attach([
-                            'color' => 'good',
-                            'fields' => [
-                                [
-                                    'title' => 'REQUESTED:',
-                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.$asset->present()->name().'> requested by <'.url('/').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->present()->fullName().'>.'
-                                ]
-
-                            ]
-                        ])->send('Asset Requested');
-
-                } catch (Exception $e) {
-
-                }
-
-            }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
@@ -273,11 +201,8 @@ class ViewAssetsController extends Controller
 
     public function getRequestedAssets()
     {
-        $checkoutrequests = CheckoutRequest::all();
-
-        return view('account/requested-items', compact($checkoutrequests));
+        return view('account/requested');
     }
-
 
 
     // Get the acceptance screen
@@ -297,9 +222,11 @@ class ViewAssetsController extends Controller
         $user = Auth::user();
 
 
-        if ($user->id != $findlog->item->assigned_to) {
+        // TODO - Fix this for non-assets
+        if (($findlog->item_type==Asset::class) && ($user->id != $findlog->item->assigned_to)) {
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
+
 
         $item = $findlog->item;
 
@@ -336,7 +263,7 @@ class ViewAssetsController extends Controller
 
         $user = Auth::user();
 
-        if ($user->id != $findlog->item->assigned_to) {
+        if (($findlog->item_type==Asset::class) && ($user->id != $findlog->item->assigned_to)) {
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
@@ -388,9 +315,11 @@ class ViewAssetsController extends Controller
         ->where('id', $findlog->id)
         ->update(array('accepted_id' => $logaction->id));
 
+        if (($findlog->item_id!='') && ($findlog->item_type==Asset::class)) {
             $affected_asset = $logaction->item;
             $affected_asset->accepted = $accepted;
             $affected_asset->save();
+        }
 
         if ($update_checkout) {
             return redirect()->to('account/view-assets')->with('success', $return_msg);

@@ -55,6 +55,7 @@ class ResetDemoSettings extends Command
         $settings->ldap_enabled = 0;
         $settings->full_multiple_companies_support = 1;
         $settings->alt_barcode = 'C128';
+        $settings->skin = '';
         $settings->email_domain = 'snipeitapp.com';
         $settings->email_format = 'filastname';
         $settings->username_format = 'filastname';

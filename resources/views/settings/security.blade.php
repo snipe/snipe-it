@@ -35,6 +35,7 @@
 
                     <div class="col-md-11 col-md-offset-1">
 
+
                         <!-- Two Factor -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
                             <div class="col-md-3">
@@ -114,6 +115,38 @@
                             </div>
                         </div>
                         <!-- /.form-group -->
+                        <hr>
+                        <!-- Remote User Authentication -->
+                        <div class="form-group {{ $errors->has('login_remote_user') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('login_remote_user', trans('admin/settings/general.login_remote_user_text')) }}
+                            </div>
+                            <div class="col-md-9">
+                                <!--  Enable Remote User Login -->
+                                {{ Form::checkbox('login_remote_user_enabled', '1', Input::old('login_remote_user_enabled', $setting->login_remote_user_enabled),array('class' => 'minimal')) }}
+                                {{ Form::label('login_remote_user_enabled',  trans('admin/settings/general.login_remote_user_enabled_text')) }}
+                                {!! $errors->first('login_remote_user_enabled', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.login_remote_user_enabled_help') }}
+                                </p>
+                                <!-- Custom logout url to redirect to authentication provider -->
+                                {{ Form::label('login_remote_user_custom_logout_url',  trans('admin/settings/general.login_remote_user_custom_logout_url_text')) }}
+                                {{ Form::text('login_remote_user_custom_logout_url', Input::old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url),array('class' => 'form-control')) }}
+
+                                {!! $errors->first('login_remote_user_custom_logout_url', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.login_remote_user_custom_logout_url_help') }}
+                                </p>
+                                <!--  Disable other logins mechanism -->
+                                {{ Form::checkbox('login_common_disabled', '1', Input::old('login_common_disabled', $setting->login_common_disabled),array('class' => 'minimal')) }}
+                                {{ Form::label('login_common_disabled',  trans('admin/settings/general.login_common_disabled_text')) }}
+                                {!! $errors->first('login_common_disabled', '<span class="alert-msg">:message</span>') !!}
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.login_common_disabled_help') }}
+                                </p>
+                            </div>
+                        </div>
+
 
 
                     </div>

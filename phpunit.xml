@@ -25,5 +25,10 @@
         <env name="QUEUE_DRIVER" value="sync"/>
 
         <env name="DB_CONNECTION" value="sqlite_testing" />
+
+        <server name="SERVER_NAME" value="http://testing.dev"/>
     </php>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
 </phpunit>

@@ -35,6 +35,10 @@ class ComponentsController extends Controller
             $components->where('company_id','=',$request->input('company_id'));
         }
 
+        if ($request->has('category_id')) {
+            $components->where('category_id','=',$request->input('category_id'));
+        }
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
@@ -93,13 +97,11 @@ class ComponentsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Component::class);
-        $component = Component::find($id);
+        $component = Component::findOrFail($id);
 
         if ($component) {
             return (new ComponentsTransformer)->transformComponent($component);
         }
-        
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.does_not_exist')));
     }
 
 

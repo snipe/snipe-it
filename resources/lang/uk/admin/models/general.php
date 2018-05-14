@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Переглянути моделі',
     'fieldset'                  => 'Набір полів',
     'no_custom_field'           => 'No custom fields',
-
+    'add_default_values'        => 'Add default values',
 );

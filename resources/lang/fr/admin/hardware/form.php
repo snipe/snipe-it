@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Numéro d\'inventaire',
     'update'			=> 'Mise à jour de l\'actif',
     'warranty'			=> 'Garantie',
+		'warranty_expires'		=> 'Expiration de garantie',
     'years'				=> 'années',
 )
 ;

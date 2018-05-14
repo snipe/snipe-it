@@ -15,6 +15,11 @@ return array(
         'success' => 'Gyártó sikeresen frissítve.'
     ),
 
+    'restore' => array(
+        'error'   => 'A gyártó nem lett visszaállítva, próbálja újra',
+        'success' => 'Gyártó sikeresen visszaállítva.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Biztosan törölni szeretnéd ezt a gyártót?',
         'error'   => 'Probléma adódott a gyártó törlése közben. Próbálkozz újra.',

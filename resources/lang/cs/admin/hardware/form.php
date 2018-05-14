@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Označení majetku',
     'update'			=> 'Úprava majetku',
     'warranty'			=> 'Záruka',
+		'warranty_expires'		=> 'Záruka končí',
     'years'				=> 'roky',
 )
 ;

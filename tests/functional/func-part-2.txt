@@ -1,0 +1,7 @@
+tests/functional/GroupsCest.php
+tests/functional/LicensesCest.php
+tests/functional/LocationsCest.php
+tests/functional/ManufacturersCest.php
+tests/functional/StatusLabelsCest.php
+tests/functional/SuppliersCest.php
+tests/functional/UsersCest.php

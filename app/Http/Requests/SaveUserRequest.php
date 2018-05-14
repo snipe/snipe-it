@@ -35,7 +35,10 @@ class SaveUserRequest extends Request
             {
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
-                $rules['password'] = Setting::passwordComplexityRulesSaving('store');
+                if ($this->request->get('ldap_import') == false)
+                {
+                    $rules['password'] = Setting::passwordComplexityRulesSaving('store');
+                }
                 break;
             }
 

@@ -21,7 +21,7 @@
 
 #eula_div {
     width: 100%;
-    height: 200px;
+    height: auto;
     overflow: scroll;
 }
 
@@ -66,13 +66,13 @@
 
               <h3>Sign below to indicate that you agree to the terms of service:</h3>
 
-              <div id="signature-pad" class="m-signature-pad col-md-12 col-sm-12">
-                <div class="m-signature-pad--body col-md-12 col-sm-12">
+              <div id="signature-pad" class="m-signature-pad">
+                <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">
                   <canvas></canvas>
                     <input type="hidden" name="signature_output" id="signature_output">
                 </div>
-                <div class="col-md-12 col-sm-12 text-center">
-                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear</button>
+               <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
+                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear Signature</button>
                 </div>
               </div>
             </div> <!-- .col-md-12.text-center-->

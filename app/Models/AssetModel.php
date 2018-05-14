@@ -55,7 +55,18 @@ class AssetModel extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','manufacturer_id','category_id','eol', 'user_id', 'fieldset_id', 'model_number', 'notes'];
+    protected $fillable = [
+        'category_id',
+        'depreciation_id',
+        'eol',
+        'fieldset_id',
+        'image',
+        'manufacturer_id',
+        'model_number',
+        'name',
+        'notes',
+        'user_id',
+    ];
 
     public function assets()
     {
@@ -85,6 +96,19 @@ class AssetModel extends SnipeModel
     public function fieldset()
     {
         return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
+    }
+
+    public function defaultValues()
+    {
+        return $this->belongsToMany('\App\Models\CustomField', 'models_custom_fields')->withPivot('default_value');
+    }
+
+
+    public function getImageUrl() {
+        if ($this->image) {
+            return url('/').'/uploads/models/'.$this->image;
+        }
+        return false;
     }
 
     /**

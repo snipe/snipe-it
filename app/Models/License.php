@@ -16,6 +16,14 @@ use Watson\Validating\ValidatingTrait;
 class License extends Depreciable
 {
     protected $presenter = 'App\Presenters\LicensePresenter';
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutLicenseNotification::class;
+    public static $checkinClass = CheckinLicenseNotification::class;
+
+
     use SoftDeletes;
     use CompanyableTrait;
     use Loggable, Presentable;
@@ -40,8 +48,8 @@ class License extends Depreciable
         'seats'   => 'required|min:1|max:1000000|integer',
         'license_email'   => 'email|nullable|max:120',
         'license_name'   => 'string|nullable|max:100',
-        'note'   => 'string|nullable',
         'notes'   => 'string|nullable',
+        'category_id' => 'integer',
         'company_id' => 'integer|nullable',
     );
 
@@ -51,25 +59,26 @@ class License extends Depreciable
     * @var array
     */
     protected $fillable = [
-        'name',
-        'serial',
-        'purchase_date',
-        'purchase_cost',
-        'order_number',
-        'seats',
-        'notes',
-        'user_id',
-        'depreciation_id',
-        'license_name', //actually licensed_to
-        'license_email',
-        'supplier_id',
-        'expiration_date',
-        'purchase_order',
-        'termination_date',
-        'maintained',
-        'reassignable',
         'company_id',
-        'manufacturer_id'
+        'depreciation_id',
+        'expiration_date',
+        'license_email',
+        'license_name', //actually licensed_to
+        'maintained',
+        'manufacturer_id',
+        'category_id',
+        'name',
+        'notes',
+        'order_number',
+        'purchase_cost',
+        'purchase_date',
+        'purchase_order',
+        'reassignable',
+        'seats',
+        'serial',
+        'supplier_id',
+        'termination_date',
+        'user_id',
     ];
 
     public static function boot()
@@ -84,7 +93,6 @@ class License extends Depreciable
         static::updating(function ($license) {
             $newSeatCount = $license->getAttributes()['seats'];
             $oldSeatCount = isset($license->getOriginal()['seats']) ? $license->getOriginal()['seats'] : 0;
-            // dd($oldSeatCount.' '.$newSeatCount);
             return static::adjustSeatCount($license, $oldSeatCount, $newSeatCount);
         });
     }
@@ -99,7 +107,7 @@ class License extends Depreciable
         $change = abs($oldSeats - $newSeats);
         if ($oldSeats > $newSeats) {
             $license->load('licenseseats.user');
-            // dd("Here");
+
             // Need to delete seats... lets see if if we have enough.
             $seatsAvailableForDelete = $license->licenseseats->reject(function ($seat) {
                 return (!! $seat->assigned_to) || (!! $seat->asset_id);
@@ -177,9 +185,37 @@ class License extends Depreciable
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    public function category()
+    {
+        return $this->belongsTo('\App\Models\Category', 'category_id');
+    }
+
     public function manufacturer()
     {
         return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+    }
+
+    public function checkin_email()
+    {
+        return $this->model->category->checkin_email;
+    }
+
+    public function requireAcceptance()
+    {
+        return $this->category->require_acceptance;
+    }
+
+    public function getEula()
+    {
+        $Parsedown = new \Parsedown();
+
+        if ($this->category->eula_text) {
+            return $Parsedown->text(e($this->category->eula_text));
+        } elseif ($this->category->use_default_eula == '1') {
+            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+        } else {
+            return false;
+        }
     }
 
     /**

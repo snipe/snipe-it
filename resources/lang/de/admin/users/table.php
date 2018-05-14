@@ -30,7 +30,7 @@ return array(
     'title' 				=> 'Titel',
 	'to_restore_them'		=> 'zum Wiederherstellen.',
     'updateuser' 			=> 'Benutzer aktualisieren',
-    'username' 				=> 'Benutzernamen',
+    'username' 				=> 'Benutzername',
 	'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',
     'username_note' 		=> '(Dies wird für den Bind an das Active Directory benutzt, nicht für die Anmeldung.)',
     'cloneuser'             => 'Benutzer kopieren',

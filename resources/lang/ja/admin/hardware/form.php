@@ -38,6 +38,7 @@ return array(
     'tag'				=> '資産タグ',
     'update'			=> '資産アップデート',
     'warranty'			=> '保証',
+		'warranty_expires'		=> '保証期限',
     'years'				=> '年',
 )
 ;

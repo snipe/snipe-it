@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Wybrany :attribute jest nieprawidłowy.',
     'numeric'              => ':attribute musi być liczbą.',
     'present'              => ':attribute nie może być puste.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Nieprawidłowe wyrażenie regularne. ',
     'regex'                => 'Format :attribute jest niewłaściwy.',
     'required'             => ':attribute nie może być puste.',
     'required_if'          => 'Pole :attribute jest wymagane gdy :other jest :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute został już wzięty.',
     'uploaded'             => 'Nie udało się przesłać atrybutu:.',
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "Wartość :attribute musi być unikalna.",
 
     /*
     |--------------------------------------------------------------------------

@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Оруулах',
     'upload'                    => 'Оруулах',
 	'select_file'				=> 'Файл сонгох...',
+    'select_files'				=> 'Select Files...',
 );

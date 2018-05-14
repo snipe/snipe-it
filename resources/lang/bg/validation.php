@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Избраният :attribute е невалиден.',
     'numeric'              => ':attribute трябва да бъде число.',
     'present'              => 'Полето на атрибута трябва да е налице.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Това не е валиден регулярен израз.',
     'regex'                => 'Форматът на :attribute е невалиден.',
     'required'             => 'Полето :attribute е задължително.',
     'required_if'          => 'Полето :attribute е задължително, когато :other е :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute вече е вписан.',
     'uploaded'             => 'Атрибутът: не успя да качи.',
     'url'                  => 'Форматът на :attribute е невалиден.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute трябва да бъде уникален.",
 
     /*
     |--------------------------------------------------------------------------

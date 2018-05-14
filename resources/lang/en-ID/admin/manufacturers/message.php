@@ -2,23 +2,28 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Produsen tidak ada.',
+    'assoc_users'	 => 'Produsen ini saat ini terkait dengan setidaknya satu model dan tidak dapat dihapus. Perbarui model Anda agar tidak lagi mereferensikan produsen ini dan coba lagi. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Produsen tidak dibuat, silahkan dicoba lagi.',
+        'success' => 'Produsen berhasil dibuat.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Produsen tidak diperbarui, silahkan coba lagi',
+        'success' => 'Produsen berhasil diperbarui.'
+    ),
+
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Anda yakin ingin menghapus produsen ini?',
+        'error'   => 'Terjadi masalah saat menghapus produsen. Silahkan coba lagi.',
+        'success' => 'Produsen berhasil dihapus.'
     )
 
 );

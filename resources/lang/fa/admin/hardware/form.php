@@ -52,6 +52,7 @@ return array(
     'update'			=> 'به روز رسانی دارایی
 ',
     'warranty'			=> 'گارانتی',
+		'warranty_expires'		=> 'انقضای ضمانت',
     'years'				=> 'سال ها',
 )
 ;

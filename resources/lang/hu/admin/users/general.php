@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Kattintson ide a visszaállításhoz.',
     'last_login'        => 'Utolsó bejelentkezés',
     'ldap_config_text'  => 'Az LDAP konfigurációs beállításai megtalálhatók az Adminisztrálás> Beállítások menüben. Az (opcionális) kiválasztott hely minden importált felhasználó számára be lesz állítva.',
+    'print_assigned'    => 'Az összes hozzárendelt nyomtatása',
     'software_user'     => 'Szoftver ellenőrzése: név',
     'view_user'         => 'Felhasználó megtekintése: név',
     'usercsv'           => 'CSV fájl',

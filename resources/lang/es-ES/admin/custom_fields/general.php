@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Elemento',
     'field_format'            => 'Formato',
     'field_custom_format'     => 'Formato personalizado',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Este campo te permite usar una expresión regex para la validación. Debería empezar con "regex:" - por ejemplo, para validar que un valor de campo personalizado contiene un IMEI válido (15 dígitos numéricos), podrías usar <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Obligatorio',
     'req'   		              => 'Obl.',
     'used_by_models'   		    => 'Usado Por Modelos',
@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nuevo grupo de campos',
     'create_field'            => 'Nuevo campo personalizado',
     'value_encrypted'      	        => 'El valor de este campo está encriptado en la base de datos. Solo los administradores pueden ver el valor desencriptado',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

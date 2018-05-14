@@ -32,7 +32,21 @@ class AssetModelsController extends Controller
         $this->authorize('view', AssetModel::class);
         $allowed_columns = ['id','image','name','model_number','eol','notes','created_at','manufacturer','assets_count'];
 
-        $assetmodels = AssetModel::select(['models.id','models.image','models.name','model_number','eol','models.notes','models.created_at','category_id','manufacturer_id','depreciation_id','fieldset_id', 'models.deleted_at'])
+        $assetmodels = AssetModel::select([
+            'models.id',
+            'models.image',
+            'models.name',
+            'model_number',
+            'eol',
+            'models.notes',
+            'models.created_at',
+            'category_id',
+            'manufacturer_id',
+            'depreciation_id',
+            'fieldset_id',
+            'models.deleted_at',
+            'models.updated_at',
+         ])
             ->with('category','depreciation', 'manufacturer','fieldset')
             ->withCount('assets');
 
@@ -137,7 +151,7 @@ class AssetModelsController extends Controller
         $assetmodel->fieldset_id = $request->get("custom_fieldset_id");
 
         if ($assetmodel->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/assetmodels/message.update.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/models/message.update.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $assetmodel->getErrors()));
@@ -170,7 +184,7 @@ class AssetModelsController extends Controller
         }
 
         $assetmodel->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/assetmodels/message.delete.success')));
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/models/message.delete.success')));
 
     }
 

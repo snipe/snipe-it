@@ -63,7 +63,7 @@ return array(
         'success' 		=> 'Majetek byl v pořádku předán.',
         'user_does_not_exist' => 'Tento uživatel je neplatný. Zkuste to prosím znovu.',
         'not_available' => 'Tento majetek není k dispozici pro výdej!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Je třeba vybrat ze seznamu alespoň jeden majetek'
     ),
 
     'checkin' => array(

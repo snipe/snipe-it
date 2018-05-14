@@ -26,9 +26,7 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('index', CustomFields::class);
         $fields = CustomField::get();
-
-        $total = count($fields);
-        return (new CustomFieldsTransformer)->transformCustomFields($fields, $total);
+        return (new CustomFieldsTransformer)->transformCustomFields($fields, $fields->count());
     }
 
     /**

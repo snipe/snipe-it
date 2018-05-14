@@ -13,15 +13,16 @@ class Setting extends Model
     use ValidatingTrait;
 
     protected $rules = [
-          "brand"     => 'required|min:1|numeric',
-          "qr_text"         => 'max:31|nullable',
-          "logo_img"        => 'mimes:jpeg,bmp,png,gif',
-          "alert_email"   => 'email_array|nullable',
-          "default_currency"   => 'required',
-          "locale"   => 'required',
-          "slack_endpoint"   => 'url|required_with:slack_channel|nullable',
-          "slack_channel"   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
-          "slack_botname"   => 'string|nullable',
+          'brand'     => 'required|min:1|numeric',
+          'qr_text'         => 'max:31|nullable',
+          'logo_img'        => 'mimes:jpeg,bmp,png,gif',
+          'alert_email'   => 'email_array|nullable',
+          'admin_cc_email'   => 'email|nullable',
+          'default_currency'   => 'required',
+          'locale'   => 'required',
+          'slack_endpoint'   => 'url|required_with:slack_channel|nullable',
+          'slack_channel'   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
+          'slack_botname'   => 'string|nullable',
           'labels_per_page' => 'numeric',
           'labels_width' => 'numeric',
           'labels_height' => 'numeric',
@@ -34,11 +35,15 @@ class Setting extends Model
           'labels_fontsize' => 'numeric|min:5',
           'labels_pagewidth' => 'numeric|nullable',
           'labels_pageheight' => 'numeric|nullable',
-          "thumbnail_max_h"     => 'numeric|max:500|min:25',
-          "pwd_secure_min" => "numeric|required|min:5",
-          "audit_warning_days" => "numeric|nullable",
-          "audit_interval" => "numeric|nullable",
-          "custom_forgot_pass_url" => "url|nullable",
+          'login_remote_user_enabled' => 'numeric|nullable',
+          'login_common_disabled' => 'numeric|nullable',
+          'login_remote_user_custom_logout_url' => 'string|nullable',
+          'thumbnail_max_h'     => 'numeric|max:500|min:25',
+          'pwd_secure_min' => 'numeric|required|min:5',
+          'audit_warning_days' => 'numeric|nullable',
+          'audit_interval' => 'numeric|nullable',
+          'custom_forgot_pass_url' => 'url|nullable',
+          'privacy_policy_link' => 'nullable|url'
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];
@@ -178,6 +183,13 @@ class Setting extends Model
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
         return $this->slack_endpoint;
+    }
+
+    public function routeNotificationForMail()
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        return config('mail.reply_to.address');
     }
 
     public static function passwordComplexityRulesSaving($action = 'update')

@@ -1,4 +1,7 @@
 addons:
+    code_climate:
+      repo_token:
+        secure: "C/bUAEpwfZB82dkzI2Nxx3PW5w/BzbKkSyCkp6YjT046jD2/QKvz6ngCFlt3tAWV11TXWFI6D8DzkMmdWOrQl3SGlPZXRD8QOvCiz0HiGMDvlxjAaPaQecGaQZdx/H4m6xTUXRNUVaYmxlMgkkFCWhAp+HZDs0iyOEVamp0Jszg="
     hosts:
         - localhost
 sudo: false
@@ -13,11 +16,12 @@ services:
 php:
   - 5.6
   - 7.0
-  - 7.2
+  - 7.2 
   - 7.1.4
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
+  - phpenv config-add .github/travis-memory.ini
   - phantomjs --webdriver=4444  &
   - sleep 4
   - mysql -e 'CREATE DATABASE snipeit_unit;'
@@ -47,9 +51,12 @@ before_script:
 script:
   - ./vendor/bin/codecept run unit
 #  - ./vendor/bin/codecept run acceptance --env=testing-ci
-  - ./vendor/bin/codecept run functional --env=functional-travis
-#script: ./vendor/bin/codecept run
-  - ./vendor/bin/codecept run api --env=testing-ci
+  - ./vendor/bin/codecept run functional --env=functional-travis -g func1
+  - ./vendor/bin/codecept run functional --env=functional-travis -g func2
+  - ./vendor/bin/codecept run api --env=functional-travis
+
+after_script:
+  - vendor/bin/test-reporter
 
 after_success:
   - codecov

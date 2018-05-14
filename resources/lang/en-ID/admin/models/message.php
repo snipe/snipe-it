@@ -2,41 +2,41 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Model tidak ada.',
+    'assoc_users'	 => 'Model ini saat ini dikaitkan dengan satu atau lebih aset dan tidak dapat dihapus. Harap hapus asetnya, lalu coba hapus lagi. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Model tidak dibuat, silahkan dicoba lagi.',
+        'success' => 'Model berhasil dibuat.',
+        'duplicate_set' => 'Model aset dengan nama, nama produsen dan nomor model yang sudah ada.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Model tidak diperbarui, silahkan dicoba lagi',
+        'success' => 'Model berhasil diperbarui.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Yakin ingin menghapus model aset ini?',
+        'error'   => 'Terjadi masalah saat menghapus model. Silahkan coba lagi.',
+        'success' => 'Model berhasil dihapus.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Aset tidak dikembalikan, coba lagi',
+        'success' 		=> 'Model berhasil dikembalikan.'
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'No fields were changed, so nothing was updated.',
-        'success' 		=> 'Models updated.'
+        'error'   		=> 'Tidak ada bidang yang berubah, jadi tidak ada yang diperbarui.',
+        'success' 		=> 'Model diperbarui.'
     ),
 
     'bulkdelete' => array(
-        'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'error'   		    => 'Tidak ada model yang dipilih, jadi tidak ada yang dihapus.',
+        'success' 		    => ':success_count model(s) dihapus!',
+        'success_partial' 	=> ':success_count model(s) telah dihapus, namun: fail_count tidak dapat dihapus karena mereka masih memiliki aset yang terkait dengannya.'
     ),
 
 );

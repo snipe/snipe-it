@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'לחץ כאן כדי לשחזר אותם.',
     'last_login'        => 'כניסה אחרונה',
     'ldap_config_text'  => 'הגדרות תצורה של LDAP נמצאות \'מנהל\'> \'הגדרות\'. המיקום הנבחר (אופציונלי) ייקבע עבור כל המשתמשים המיובאים.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'התוכנה נבדקה אל: שם',
     'view_user'         => 'הצג משתמש: שם',
     'usercsv'           => 'קובץ CSV',

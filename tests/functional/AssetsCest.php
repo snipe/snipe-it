@@ -6,8 +6,8 @@ class AssetsCest
     public function _before(FunctionalTester $I)
     {
         $I->amOnPage('/login');
-        $I->fillField('username', 'snipeit');
-        $I->fillField('password', 'snipeit');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
         $I->click('Login');
     }
     // tests
@@ -33,43 +33,48 @@ class AssetsCest
 
     public function passesCreateAndCheckout(FunctionalTester $I)
     {
-        $asset = factory(App\Models\Asset::class)->make();
+        $asset = factory(App\Models\Asset::class)->states('laptop-mbp')->make([
+            'asset_tag'=>'test tag',
+            'name'=> "test asset",
+            'company_id'=>1,
+            'warranty_months'=>15
+         ]);
         $userId = $I->getUserId();
         $values = [
-            'company_id'        => $asset->company_id,
             'asset_tag'         => $asset->asset_tag,
-            'model_id'          => $asset->model_id,
-            'status_id'         => $asset->status_id,
             'assigned_user'     => $userId,
-            'serial'            => $asset->serial,
+            'company_id'        => $asset->company_id,
+            'model_id'          => $asset->model_id,
             'name'              => $asset->name,
-            'purchase_date'     => '2016-01-01',
-            'supplier_id'       => $asset->supplier_id,
+            'notes'             => $asset->notes,
             'order_number'      => $asset->order_number,
             'purchase_cost'     => $asset->purchase_cost,
-            'warranty_months'   => $asset->warranty_months,
-            'notes'             => $asset->notes,
-            'rtd_location_id'   => $asset->rtd_location_id,
+            'purchase_date'     => '2016-01-01',
             'requestable'       => $asset->requestable,
+            'rtd_location_id'   => $asset->rtd_location_id,
+            'serial'            => $asset->serial,
+            'status_id'         => $asset->status_id,
+            'supplier_id'       => $asset->supplier_id,
+            'warranty_months'   => $asset->warranty_months,
         ];
 
         $seenValues = [
-            'company_id'        => $asset->company_id,
             'asset_tag'         => $asset->asset_tag,
-            'model_id'          => $asset->model_id,
-            'status_id'         => $asset->status_id,
             'assigned_to'       => $userId,
             'assigned_type'     => 'App\\Models\\User',
-            'serial'            => $asset->serial,
+            'company_id'        => $asset->company_id,
+            'model_id'          => $asset->model_id,
             'name'              => $asset->name,
-            'purchase_date'     => '2016-01-01',
-            'supplier_id'       => $asset->supplier_id,
+            'notes'             => $asset->notes,
             'order_number'      => $asset->order_number,
             'purchase_cost'     => $asset->purchase_cost,
-            'warranty_months'   => $asset->warranty_months,
-            'notes'             => $asset->notes,
-            'rtd_location_id'   => $asset->rtd_location_id,
+            'purchase_date'     => Carbon::parse('2016-01-01'),
             'requestable'       => $asset->requestable,
+            'rtd_location_id'   => $asset->rtd_location_id,
+            'serial'            => $asset->serial,
+            'status_id'         => $asset->status_id,
+            'supplier_id'       => $asset->supplier_id,
+            'warranty_months'   => $asset->warranty_months,
         ];
 
         $I->wantTo("Test Validation Succeeds");

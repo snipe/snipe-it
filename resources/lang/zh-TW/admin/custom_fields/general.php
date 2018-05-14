@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => '新增欄位集',
     'create_field'            => '新增欄位',
     'value_encrypted'      	        => '此欄位的值已被加密。只有管理員能夠查看原始資料。',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

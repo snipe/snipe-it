@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Clique aqui para restaurá-los.',
     'last_login'        => 'Último Login',
     'ldap_config_text'  => 'As configurações do LDAP podem ser encontradas em \'Administrador > Definições\'. A localização (opcional) selecionada será definida para todos os usuários importados.',
+    'print_assigned'    => 'Imprimir todos atribuídos',
     'software_user'     => 'Check-out de software para :name',
     'view_user'         => 'Ver Usuário :name',
     'usercsv'           => 'Arquivo CSV',

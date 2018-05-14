@@ -29,4 +29,5 @@ return array(
     'create_fieldset'         => '新しいフィールドセット',
     'create_field'            => '新しいユーザー設定フィールド',
     'value_encrypted'      	        => 'このフィールドの値は、データベースで暗号化されます。管理者ユーザーのみが復号化された値を表示することができます。',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

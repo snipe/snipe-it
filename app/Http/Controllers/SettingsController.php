@@ -22,6 +22,7 @@ use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
 use App\Helpers\Helper;
+use App\Notifications\FirstAdminNotification;
 
 /**
  * This controller handles all actions related to Settings for
@@ -57,9 +58,10 @@ class SettingsController extends Controller
 
         $protocol = array_key_exists('HTTPS', $_SERVER) && ( $_SERVER['HTTPS'] == "on") ? 'https://' : 'http://';
 
-        $host = $_SERVER['SERVER_NAME'];
-        if (($protocol === 'http://' && $_SERVER['SERVER_PORT'] != '80') || ($protocol === 'https://' && $_SERVER['SERVER_PORT'] != '443')) {
-            $host .= ':' . $_SERVER['SERVER_PORT'];
+        $host = array_key_exists('SERVER_NAME', $_SERVER) ? $_SERVER['SERVER_NAME'] : null;
+        $port = array_key_exists('SERVER_PORT', $_SERVER) ? $_SERVER['SERVER_PORT'] : null;
+        if (($protocol === 'http://' && $port != '80') || ($protocol === 'https://' && $port != '443')) {
+            $host .= ':' . $port;
         }
         $pageURL = $protocol . $host . $_SERVER['REQUEST_URI'];
 
@@ -185,11 +187,19 @@ class SettingsController extends Controller
             $settings->save();
 
             if (Input::get('email_creds')=='1') {
-                Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
+                $data = array();
+                $data['email'] = $user->email;
+                $data['username'] = $user->username;
+                $data['first_name'] = $user->first_name;
+                $data['last_name'] = $user->last_name;
+                $data['password'] = $request->input('password');
+                $user->notify(new FirstAdminNotification($data));
+
+                /*Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
                     $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
                     $m->subject(trans('mail.your_credentials'));
-                });
+                });*/
             }
 
 
@@ -324,6 +334,7 @@ class SettingsController extends Controller
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
         $setting->load_remote = $request->input('load_remote', '0');
+        $setting->show_images_in_email = $request->input('show_images_in_email', '0');
         $setting->show_archived_in_list = $request->input('show_archived_in_list', '0');
         $setting->dashboard_message = $request->input('dashboard_message');
         $setting->email_domain = $request->input('email_domain');
@@ -336,6 +347,7 @@ class SettingsController extends Controller
 
         $setting->default_eula_text = $request->input('default_eula_text');
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
+        $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
         if (Input::get('per_page')!='') {
             $setting->per_page = $request->input('per_page');
@@ -385,6 +397,7 @@ class SettingsController extends Controller
         $setting->header_color = $request->input('header_color');
         $setting->support_footer = $request->input('support_footer');
         $setting->footer_text = $request->input('footer_text');
+        $setting->skin = $request->input('skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
 
 
@@ -473,6 +486,11 @@ class SettingsController extends Controller
         $setting->pwd_secure_min = (int) $request->input('pwd_secure_min');
         $setting->pwd_secure_complexity = '';
 
+        # remote user login
+        $setting->login_remote_user_enabled = (int)$request->input('login_remote_user_enabled');
+        $setting->login_common_disabled= (int)$request->input('login_common_disabled');
+        $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
+
         if ($request->has('pwd_secure_complexity')) {
             $setting->pwd_secure_complexity =  implode('|', $request->input('pwd_secure_complexity'));
         }
@@ -560,8 +578,11 @@ class SettingsController extends Controller
 
         $alert_email = rtrim($request->input('alert_email'), ',');
         $alert_email = trim($alert_email);
+        $admin_cc_email = rtrim($request->input('admin_cc_email'), ',');
+        $admin_cc_email = trim($admin_cc_email);
 
         $setting->alert_email = $alert_email;
+        $setting->admin_cc_email = $admin_cc_email;
         $setting->alerts_enabled = $request->input('alerts_enabled', '0');
         $setting->alert_interval = $request->input('alert_interval');
         $setting->alert_threshold = $request->input('alert_threshold');

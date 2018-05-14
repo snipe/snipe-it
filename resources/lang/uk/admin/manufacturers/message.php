@@ -15,6 +15,11 @@ return array(
         'success' => 'Виробника успішно оновлено.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Ви впевнені що хочете видалити виробника?',
         'error'   => 'There was an issue deleting the manufacturer. Please try again.',

@@ -52,7 +52,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
         return [
             trans('admin/asset_maintenances/general.maintenance') => trans('admin/asset_maintenances/general.maintenance'),
             trans('admin/asset_maintenances/general.repair')      => trans('admin/asset_maintenances/general.repair'),
-            trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade')
+            trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade'),
+            'PAT test'      => 'PAT test',
         ];
     }
 
@@ -154,12 +155,12 @@ class AssetMaintenance extends Model implements ICompanyableChild
 
          return $query->where(function ($query) use ($search) {
 
-                $query->where('title', 'LIKE', '%'.$search.'%')
-                ->orWhere('notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenance_type', 'LIKE', '%'.$search.'%')
-                ->orWhere('cost', 'LIKE', '%'.$search.'%')
-                ->orWhere('start_date', 'LIKE', '%'.$search.'%')
-                ->orWhere('completion_date', 'LIKE', '%'.$search.'%');
+                $query->where('asset_maintenances.title', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.notes', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.asset_maintenance_type', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.cost', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.start_date', 'LIKE', '%'.$search.'%')
+                ->orWhere('asset_maintenances.completion_date', 'LIKE', '%'.$search.'%');
          });
     }
 
@@ -176,5 +177,33 @@ class AssetMaintenance extends Model implements ICompanyableChild
         return $query->leftJoin('users', 'asset_maintenances.user_id', '=', 'users.id')
             ->orderBy('users.first_name', $order)
             ->orderBy('users.last_name', $order);
+    }
+
+    /**
+     * Query builder scope to order on asset tag
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByTag($query, $order)
+    {
+        return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
+            ->orderBy('assets.asset_tag', $order);
+    }
+
+    /**
+     * Query builder scope to order on asset tag
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderByAssetName($query, $order)
+    {
+        return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
+            ->orderBy('assets.name', $order);
     }
 }

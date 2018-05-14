@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Se modeller',
     'fieldset'                  => 'Feltsæt',
     'no_custom_field'           => 'Ingen brugerdefinerede felter',
-
+    'add_default_values'        => 'Add default values',
 );

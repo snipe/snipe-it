@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nga Pakanga Hou',
     'create_field'            => 'Rawa Ritenga Hou',
     'value_encrypted'      	        => 'Ko te uara o tenei mara kei te whakamunatia i roto i te pātengi raraunga. Ka taea anake e nga kaiwhakahaere ka kite i te uara kua tohua',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

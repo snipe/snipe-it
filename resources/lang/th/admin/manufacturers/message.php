@@ -15,6 +15,11 @@ return array(
         'success' => 'ปรับปรุงผู้ผลิตเรียบร้อยแล้ว'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'คุณแน่ใจที่จะลบผู้ผลิตนี้?',
         'error'   => 'มีปัญหาระหว่างการลบผู้ผลิต กรุณาลองใหม่อีกครั้ง',

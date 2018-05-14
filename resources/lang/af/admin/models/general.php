@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Kyk Modelle',
     'fieldset'                  => 'fieldset',
     'no_custom_field'           => 'Geen persoonlike velde nie',
-
+    'add_default_values'        => 'Add default values',
 );

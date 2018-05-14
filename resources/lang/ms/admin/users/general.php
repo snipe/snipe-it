@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klik di sini untuk memulihkannya.',
     'last_login'        => 'Log masuk terakhir',
     'ldap_config_text'  => 'Tetapan konfigurasi LDAP boleh didapati Admin> Tetapan. Lokasi (pilihan) yang dipilih akan ditetapkan untuk semua pengguna yang diimport.',
+    'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Perisian diagihkan kepada :nama',
     'view_user'         => 'Papar Pengguna :nama',
     'usercsv'           => 'Fail CSV',

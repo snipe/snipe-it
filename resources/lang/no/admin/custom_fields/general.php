@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Element',
     'field_format'            => 'Format',
     'field_custom_format'     => 'Egendefinert Format',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Dette feltet lar deg bruke et regex-uttrykk for validering. Det skal begynne med "regex:" - for eksempel å validere at en egendefinert feltverdi inneholder en gyldig IMEI (15 numeriske siffer), vil du bruke <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Obligatorisk',
     'req'   		              => 'Obl.',
     'used_by_models'   		    => 'Brukes av modeller',
@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nytt Feltsett',
     'create_field'            => 'Nytt Egendefinert Felt',
     'value_encrypted'      	        => 'Verdien i dette feltet er kryptert i databasen. Bare administratorer kan se hva som står i dette feltet',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

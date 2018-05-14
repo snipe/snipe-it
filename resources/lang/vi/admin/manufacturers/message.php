@@ -15,6 +15,11 @@ return array(
         'success' => 'Hãng sản xuất được tạo thành công.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Bạn có chắc chắn muốn xoá hãng sản xuất này?',
         'error'   => 'Có vấn đề xảy ra khi xoá hãng sản xuất này. Bạn hãy thử lại.',

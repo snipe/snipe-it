@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Demirbaş Etiketi',
     'update'			=> 'Demirbaş Güncelle',
     'warranty'			=> 'Garanti',
+		'warranty_expires'		=> 'Garanti Süresi Sona Erdi',
     'years'				=> 'yıl',
 )
 ;

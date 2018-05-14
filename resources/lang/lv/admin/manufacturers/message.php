@@ -15,6 +15,11 @@ return array(
         'success' => 'Ražotājs tika veiksmīgi atjaunināts.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Vai tiešām vēlaties dzēst šo ražotāju?',
         'error'   => 'Radās problēma, izdzēšot ražotāju. Lūdzu mēģiniet vēlreiz.',

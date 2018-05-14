@@ -11,8 +11,9 @@ use Config;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Notifications\Notifiable;
 use DB;
+use App\Notifications\CheckinAssetNotification;
+use App\Notifications\CheckoutAssetNotification;
 
 /**
  * Model for Assets.
@@ -22,25 +23,33 @@ use DB;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
-    use Loggable, Requestable, Presentable, Notifiable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
+    use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
 
     const LOCATION = 'location';
     const ASSET = 'asset';
     const USER = 'user';
-  /**
-  * The database table used by the model.
-  *
-  * @var string
-  */
+
+    /**
+     * Set static properties to determine which checkout/checkin handlers we should use
+     */
+    public static $checkoutClass = CheckoutAssetNotification::class;
+    public static $checkinClass = CheckinAssetNotification::class;
+
+
+    /**
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'assets';
 
-  /**
-  * Whether the model should inject it's identifier to the unique
-  * validation rules before attempting validation. If this property
-  * is not set in the model it will default to true.
-  *
-  * @var boolean
-  */
+    /**
+    * Whether the model should inject it's identifier to the unique
+    * validation rules before attempting validation. If this property
+    * is not set in the model it will default to true.
+    *
+    * @var boolean
+    */
     protected $injectUniqueIdentifier = true;
 
     // We set these as protected dates so that they will be easily accessible via Carbon
@@ -85,6 +94,7 @@ class Asset extends Depreciable
         'assigned_type',
         'company_id',
         'image',
+        'location_id',
         'model_id',
         'name',
         'notes',
@@ -338,6 +348,38 @@ class Asset extends Depreciable
                   ->where('item_type', '=', Asset::class)
                   ->orderBy('created_at', 'desc')
                   ->withTrashed();
+    }
+
+    /**
+     * Get checkouts
+     */
+    public function checkouts()
+    {
+        return $this->assetlog()->where('action_type', '=', 'checkout')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get checkins
+     */
+    public function checkins()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'checkin from')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get user requests
+     */
+    public function userRequests()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'requested')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
     }
 
 
@@ -607,7 +649,7 @@ class Asset extends Depreciable
 
     public function scopeRTD($query)
     {
-        return $query->whereNULL('assigned_to')
+        return $query->whereNULL('assets.assigned_to')
                    ->whereHas('assetstatus', function ($query) {
                        $query->where('deployable', '=', 1)
                              ->where('pending', '=', 0)
@@ -1008,9 +1050,17 @@ class Asset extends Depreciable
                         });
                     });
                 }
+
+                if ($fieldname =='supplier') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('supplier', function ($query) use ($search_val) {
+                            $query->where('suppliers.name', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
             }
 
-            if (($fieldname!='category')  && ($fieldname!='location')
+            if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='location') && ($fieldname!='supplier')
                 && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }

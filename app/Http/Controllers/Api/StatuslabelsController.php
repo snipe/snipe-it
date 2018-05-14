@@ -22,7 +22,7 @@ class StatuslabelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Statuslabel::class);
-        $allowed_columns = ['id','name','created_at', 'assets_count'];
+        $allowed_columns = ['id','name','created_at', 'assets_count','color','default_label'];
 
         $statuslabels = Statuslabel::withCount('assets');
 
@@ -56,7 +56,7 @@ class StatuslabelsController extends Controller
         $request->except('deployable', 'pending','archived');
 
         if (!$request->has('type')) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, ["type" => ["Status label type is required."]]));
+            return response()->json(Helper::formatStandardApiResponse('error', null, ["type" => ["Status label type is required."]]),500);
         }
 
         $statuslabel = new Statuslabel;

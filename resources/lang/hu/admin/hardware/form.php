@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Eszköz azonosító',
     'update'			=> 'Eszköz frissítés',
     'warranty'			=> 'Garancia',
+		'warranty_expires'		=> 'Jótállás érvényessége',
     'years'				=> 'évek',
 )
 ;

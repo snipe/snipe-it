@@ -40,21 +40,33 @@
           <!-- User -->
             @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
 
-          @if ($consumable->category->require_acceptance=='1')
-          <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-              <p class="hint-block">{{ trans('admin/categories/general.required_acceptance') }}</p>
-            </div>
-          </div>
-          @endif
 
-          @if ($consumable->getEula())
-          <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-              <p class="hint-block">{{ trans('admin/categories/general.required_eula') }}</p>
-            </div>
-          </div>
-          @endif
+            @if ($consumable->requireAcceptance() || $consumable->getEula() || ($snipeSettings->slack_endpoint!=''))
+              <div class="form-group notification-callout">
+                <div class="col-md-8 col-md-offset-3">
+                  <div class="callout callout-info">
+
+                    @if ($consumable->category->require_acceptance=='1')
+                      <i class="fa fa-envelope"></i>
+                      {{ trans('admin/categories/general.required_acceptance') }}
+                      <br>
+                    @endif
+
+                    @if ($consumable->getEula())
+                      <i class="fa fa-envelope"></i>
+                      {{ trans('admin/categories/general.required_eula') }}
+                        <br>
+                    @endif
+
+                    @if ($snipeSettings->slack_endpoint!='')
+                        <i class="fa fa-slack"></i>
+                        A slack message will be sent
+                    @endif
+                  </div>
+                </div>
+              </div>
+            @endif
+
         </div> <!-- .box-body -->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>

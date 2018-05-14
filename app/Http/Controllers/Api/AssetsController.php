@@ -77,12 +77,15 @@ class AssetsController extends Controller
             'last_audit_date',
             'next_audit_date',
             'warranty_months',
+            'checkouts_count',
+            'checkins_count',
+            'user_requests_count',
         ];
 
         $filter = array();
 
         if ($request->has('filter')) {
-            $filter = json_decode($request->input('filter'));
+            $filter = json_decode($request->input('filter'), true);
         }
 
         $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
@@ -92,11 +95,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-            'model.category', 'model.manufacturer', 'model.fieldset','supplier');
-
-
-
-
+            'model.category', 'model.manufacturer', 'model.fieldset','supplier')->withCount('checkins', 'checkouts', 'userRequests');
 
 
         // These are used by the API to query against specific ID numbers.
@@ -104,6 +103,10 @@ class AssetsController extends Controller
         // locations, etc.
         if ($request->has('status_id')) {
             $assets->where('assets.status_id', '=', $request->input('status_id'));
+        }
+
+        if ($request->input('requestable')=='true') {
+            $assets->where('assets.requestable', '=', '1');
         }
 
         if ($request->has('model_id')) {
@@ -116,7 +119,6 @@ class AssetsController extends Controller
 
         if ($request->has('location_id')) {
             $assets->where('assets.location_id', '=', $request->input('location_id'));
-           // dd($assets->toSql());
         }
 
         if ($request->has('supplier_id')) {
@@ -215,7 +217,8 @@ class AssetsController extends Controller
 
         }
 
-        if (count($filter) > 0) {
+
+        if ((!is_null($filter)) && (count($filter)) > 0) {
             $assets->ByFilter($filter);
         } elseif ($request->has('search')) {
             $assets->TextSearch($request->input('search'));
@@ -274,6 +277,44 @@ class AssetsController extends Controller
     }
 
 
+    /**
+     * Returns JSON with information about an asset (by tag) for detail view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $tag
+     * @since [v4.2.1]
+     * @return JsonResponse
+     */
+    public function showByTag($tag)
+    {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->where('asset_tag',$tag)->first()) {
+            $this->authorize('view', $asset);
+            return (new AssetsTransformer)->transformAsset($asset);
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 404);
+
+    }
+
+    /**
+     * Returns JSON with information about an asset (by serial) for detail view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $serial
+     * @since [v4.2.1]
+     * @return JsonResponse
+     */
+    public function showBySerial($serial)
+    {
+        if ($assets = Asset::with('assetstatus')->with('assignedTo')
+            ->withTrashed()->where('serial',$serial)->get()) {
+                $this->authorize('view', $assets);
+                return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 404);
+
+    }
+
+
      /**
      * Returns JSON with information about an asset for detail view.
      *
@@ -284,10 +325,11 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->findOrFail($id)) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->withCount('checkins', 'checkouts', 'userRequests')->findOrFail($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
+
 
     }
 
@@ -313,6 +355,9 @@ class AssetsController extends Controller
             'assets.status_id'
             ])->with('model', 'assetstatus', 'assignedTo')->NotArchived());
 
+        if ($request->has('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
+            $assets = $assets->RTD();
+        }
 
         if ($request->has('search')) {
             $assets = $assets->AssignedSearch($request->input('search'));
@@ -420,7 +465,7 @@ class AssetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize('edit', Asset::class);
 
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?
@@ -629,42 +674,19 @@ class AssetsController extends Controller
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
-        $asset->name = e(Input::get('name'));
+        $asset->name = Input::get('name');
         $asset->location_id =  $asset->rtd_location_id;
 
         if ($request->has('location_id')) {
             $asset->location_id =  $request->input('location_id');
         }
 
-        $asset->location_id = $asset->rtd_location_id;
-
         if (Input::has('status_id')) {
-            $asset->status_id =  e(Input::get('status_id'));
+            $asset->status_id =  Input::get('status_id');
         }
 
-        // Was the asset updated?
         if ($asset->save()) {
-            $logaction = $asset->logCheckin($target, e(request('note')));
-
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
-            $data['item_name'] = $asset->present()->name();
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = $asset->asset_tag;
-            $data['item_serial'] = $asset->serial;
-            $data['note'] = $logaction->note;
-            $data['manufacturer_name'] = $asset->model->manufacturer->name;
-            $data['model_name'] = $asset->model->name;
-            $data['model_number'] = $asset->model->model_number;
-
-            if ((($asset->checkin_email()=='1')) && (isset($user)) && (!config('app.lock_passwords'))) {
-                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
-                });
-            }
-
+            $asset->logCheckin($target, e(request('note')));
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 
@@ -720,5 +742,50 @@ class AssetsController extends Controller
 
 
 
+    }
+
+
+
+    /**
+     * Returns JSON listing of all requestable assets
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return JsonResponse
+     */
+    public function requestable(Request $request)
+    {
+        
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
+            ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier')->where('assets.requestable', '=', '1');
+
+        $offset = request('offset', 0);
+        $limit = $request->input('limit', 50);
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $assets->TextSearch($request->input('search'));
+
+        switch ($request->input('sort')) {
+            case 'model':
+                $assets->OrderModels($order);
+                break;
+            case 'model_number':
+                $assets->OrderModelNumber($order);
+                break;
+            case 'category':
+                $assets->OrderCategory($order);
+                break;
+            case 'manufacturer':
+                $assets->OrderManufacturer($order);
+                break;
+            default:
+                $assets->orderBy('assets.created_at', $order);
+                break;
+        }
+
+
+        $total = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
+        return (new AssetsTransformer)->transformRequestedAssets($assets, $total);
     }
 }

@@ -302,8 +302,13 @@ class AssetsController extends Controller
 
 
         if ($request->has('image_delete')) {
-            unlink(public_path().'/uploads/assets/'.$asset->image);
-            $asset->image = '';
+            try {
+                unlink(public_path().'/uploads/assets/'.$asset->image);
+                $asset->image = '';
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+
         }
 
 
@@ -460,8 +465,14 @@ class AssetsController extends Controller
             $asset->location_id = ($target) ? $target->id : '';
 
         } elseif (request('checkout_to_type')=='asset') {
+
+            if (request('assigned_asset') == $assetId) {
+                return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+            }
+
             $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
+
             // Override with the asset's location_id if it has one
             if ($target->location_id!='') {
                 $asset->location_id = ($target) ? $target->location_id : '';
@@ -584,14 +595,6 @@ class AssetsController extends Controller
             $data['manufacturer_name'] = $asset->model->manufacturer->name;
             $data['model_name'] = $asset->model->name;
             $data['model_number'] = $asset->model->model_number;
-
-            if ((($asset->checkin_email()=='1')) && (isset($user)) && (!empty($user->email)) && (!config('app.lock_passwords'))) {
-                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Confirm_Asset_Checkin'));
-                });
-            }
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
@@ -950,8 +953,7 @@ class AssetsController extends Controller
         if ($request->hasFile('assetfile')) {
             foreach ($request->file('assetfile') as $file) {
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'hardware-'.$asset->id.'-'.str_random(8);
-                $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                $filename = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                 $file->move($destinationPath, $filename);
                 $asset->logUpload($filename, e(Input::get('notes')));
             }
@@ -1002,28 +1004,43 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function displayFile($assetId = null, $fileId = null)
+    public function displayFile($assetId = null, $fileId = null, $download = true)
     {
+
         $asset = Asset::find($assetId);
-        // the asset is valid
+
         if (isset($asset->id)) {
+
             $this->authorize('view', $asset);
 
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src('assets');
-            $filetype = Helper::checkUploadIsImage($file);
+            if (!$log = Actionlog::find($fileId)) {
+                return response('No matching record for that asset/file', 500)
+                    ->header('Content-Type', 'text/plain');
+            }
 
-            if ($filetype) {
-                  $contents = file_get_contents($file);
-                  return Response::make($contents)->header('Content-Type', $filetype);
+            $file = $log->get_src('assets');
+
+            if ($log->action_type =='audit') {
+                $file = $log->get_src('audits');
+            }
+
+
+            if (!file_exists($file)) {
+                return response('File '.$file.' not found on server', 404)
+                    ->header('Content-Type', 'text/plain');
+            }
+
+            if ($download != 'true') {
+                  if ($contents = file_get_contents($file)) {
+                      return Response::make($contents)->header('Content-Type', $filetype);
+                  }
+                return JsonResponse::create(["error" => "Failed validation: "], 500);
             }
             return Response::download($file);
         }
-        // Prepare the error message
-        $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
         // Redirect to the hardware management page
-        return redirect()->route('hardware.index')->with('error', $error);
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', compact('id')));
     }
 
     /**
@@ -1200,23 +1217,25 @@ class AssetsController extends Controller
 
     public function postBulkCheckout(Request $request)
     {
-        $this->validate($request, [
-           "assigned_to"   => 'required'
-        ]);
-
-        $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.user_does_not_exist'));
+        // Find checkout to type
+        if (request('checkout_to_type')=='location') {
+            $target = Location::find(request('assigned_location'));
+        } elseif (request('checkout_to_type')=='asset') {
+            $target = Asset::find(request('assigned_asset'));
+        } elseif (request('checkout_to_type')=='user') {
+            $target = User::find(request('assigned_user'));
         }
-
         if (!is_array(Input::get('selected_assets'))) {
             return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
         }
 
         $asset_ids = array_filter(Input::get('selected_assets'));
-
+        foreach ($asset_ids as $asset_id) {
+            if ($target->id == $asset_id) {
+                return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+            }
+        }
         if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
             $checkout_at = e(Input::get('checkout_at'));
         } else {
@@ -1231,20 +1250,18 @@ class AssetsController extends Controller
 
 
         $errors = [];
-        DB::transaction(function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
+        DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids) {
           
             foreach ($asset_ids as $asset_id) {
                 $asset = Asset::find($asset_id);
                 $this->authorize('checkout', $asset);
-                $error = $asset->checkOut($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+                $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
 
-                if ($user->location_id!='') {
-                    $asset->location_id = $user->location_id;
+                if ($target->location_id!='') {
+                    $asset->location_id = $target->location_id;
                     $asset->unsetEventDispatcher();
                     $asset->save();
-
                 }
-
 
                 if ($error) {
                     array_merge_recursive($errors, $asset->getErrors()->toArray());
@@ -1280,7 +1297,7 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(Request $request, $id)
+    public function auditStore(AssetFileRequest $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
@@ -1290,11 +1307,13 @@ class AssetsController extends Controller
         );
 
         $validator = \Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
         }
 
         $asset = Asset::findOrFail($id);
+
         // We don't want to log this as a normal update, so let's bypass that
         $asset->unsetEventDispatcher();
 
@@ -1302,17 +1321,37 @@ class AssetsController extends Controller
         $asset->last_audit_date = date('Y-m-d h:i:s');
 
         if ($asset->save()) {
-            $asset->logAudit(request('note'), request('location_id'));
+
+
+            $filename = '';
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                    try {
+                     $destinationPath = config('app.private_uploads').'/audits';
+                     $extension = $file->getClientOriginalExtension();
+                        $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+                        $file->move($destinationPath, $filename);
+                    } catch (\Exception $e) {
+                        \Log::error($e);
+                    }
+            }
+
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $filename);
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
 
-    public function getRequestedIndex($id = null)
+    public function getRequestedIndex($user_id = null)
     {
-        if ($id) {
-            $requestedItems = CheckoutRequest::where('user_id', $id)->with('user', 'requestedItem')->get();
+        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->whereNull('canceled_at')->with('user', 'requestedItem');
+
+        if ($user_id) {
+            $requestedItems->where('user_id', $user_id)->get();
         }
-        $requestedItems = CheckoutRequest::with('user', 'requestedItem')->get();
+
+        $requestedItems = $requestedItems->orderBy('created_at', 'desc')->get();
+
         return view('hardware/requested', compact('requestedItems'));
     }
 

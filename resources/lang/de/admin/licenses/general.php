@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'about_licenses_title'            => 'Lizenzen',
+    'about_licenses_title'            => 'Über Lizenzen',
     'about_licenses'                  => 'Lizenzen werden verwendet, um Software zu verfolgen.  Sie haben eine bestimmte Anzahl von Plätzen, die an Einzelpersonen ausgegeben werden können',
     'checkin'  					=> 'Lizenzaktivierung zurücknehmen',
     'checkout_history'  		=> 'Zuweisungsverlauf',
     'checkout'  				=> 'Lizenzaktivierung herausgeben',
-    'edit'  					=> 'Edit User',
+    'edit'  					=> 'Lizenz bearbeiten',
     'filetype_info'				=> 'Erlaubte Dateitypen sind png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, und rar.',
-    'clone'  					=> 'Clone User',
+    'clone'  					=> 'Lizenz duplizieren',
     'history_for'  				=> 'Verlauf für ',
     'in_out'  					=> 'Zurücknehmen/Herausgeben',
     'info'  					=> 'Lizenzinfo',

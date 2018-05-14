@@ -242,6 +242,32 @@ class ManufacturersController extends Controller
         return redirect()->route('manufacturers.index')->with('error', $error);
     }
 
+    /**
+     * Restore a given Manufacturer (mark as un-deleted)
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.1.15]
+     * @param int $manufacturers_id
+     * @return Redirect
+     */
+    public function restore($manufacturers_id)
+    {
+        $this->authorize('create', Manufacturer::class);
+        $manufacturer = Manufacturer::onlyTrashed()->where('id',$manufacturers_id)->first();
+
+        if ($manufacturer) {
+
+            // Not sure why this is necessary - it shouldn't fail validation here, but it fails without this, so....
+            $manufacturer->setValidating(false);
+            if ($manufacturer->restore()) {
+                return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.restore.success'));
+            }
+            return redirect()->back()->with('error', 'Could not restore.');
+        }
+        return redirect()->back()->with('error', trans('admin/manufacturers/message.does_not_exist'));
+
+    }
+
    
 
 

@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> '復元するには、ここをクリックします。',
     'last_login'        => '最終ログイン',
     'ldap_config_text'  => 'LDAP 構成設定 管理者 > 設定。 選択した場所は、インポートされたすべてのユーザーに対して設定されます。',
+    'print_assigned'    => '割り当て先をすべて印刷',
     'software_user'     => 'ソフトウェアは :name にチェックアウトしました。',
     'view_user'         => '利用者 :name を表示',
     'usercsv'           => 'CSVファイル',

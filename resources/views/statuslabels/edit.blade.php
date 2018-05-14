@@ -53,6 +53,15 @@
     </label>
 </div>
 
+<!-- Set as Default -->
+<div class="form-group{{ $errors->has('default_label') ? ' has-error' : '' }}">
+
+    <label class="col-md-offset-3" style="padding-left: 15px;">
+        <input type="checkbox" value="1" name="default_label" id="default_label" class="minimal" {{ Input::old('default_label', $item->default_label) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.default_label') }}
+    </label>
+    <p class="col-md-offset-3 help-block"> {{ trans('admin/statuslabels/table.default_label_help') }}</p>
+</div>
+
 @stop
 
 @section('moar_scripts')

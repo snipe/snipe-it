@@ -5,10 +5,10 @@ modules:
         - REST:
             url: /api/v1
             depends: Laravel5
+            timeout: 10
         - Asserts
     config:
         - Laravel5:
-            environment_file: .env.testing
+            environment_file: .env.tests
             disable_middleware: true
             cleanup: true
-

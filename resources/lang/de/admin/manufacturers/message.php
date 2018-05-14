@@ -15,6 +15,11 @@ return array(
         'success' => 'Der Hersteller wurde erfolgreich erstellt.'
     ),
 
+    'restore' => array(
+        'error'   => 'Der Hersteller wurde nicht wiederhergestellt. Bitte versuchen Sie es erneut',
+        'success' => 'Hersteller wurde erfolgreich wiederhergestellt.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Sind sie sicher, dass sie diesen Hersteller löschen wollen?',
         'error'   => 'Beim löschen des Herstellers ist ein Problem aufgetreten. Bitte versuchen sie es erneut.',

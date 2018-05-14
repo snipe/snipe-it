@@ -6,8 +6,8 @@ class ConsumablesCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
 
@@ -48,18 +48,23 @@ class ConsumablesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $consumable = factory(App\Models\Consumable::class)->make();
+        $consumable = factory(App\Models\Consumable::class)->states('cardstock')->make([
+            'name' => 'Test Consumable',
+            'model_number' => 23520
+        ]);
+        // dd($consumable);
         $values = [
-            'company_id'        => $consumable->company_id,
-            'name'              => $consumable->name,
             'category_id'       => $consumable->category_id,
-            'model_number'      => $consumable->model_number,
+            'company_id'        => $consumable->company_id,
             'item_no'           => $consumable->item_no,
-            'order_number'      => $consumable->order_number,
-            'purchase_date'     => '2016-01-01',
-            'purchase_cost'     => $consumable->purchase_cost,
-            'qty'               => $consumable->qty,
+            'manufacturer_id'   => $consumable->manufacturer_id,
             'min_amt'           => $consumable->min_amt,
+            'model_number'      => $consumable->model_number,
+            'name'              => $consumable->name,
+            'order_number'      => $consumable->order_number,
+            'purchase_cost'     => $consumable->purchase_cost,
+            'purchase_date'     => '2016-01-01',
+            'qty'               => $consumable->qty,
         ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage(route('consumables.create'));

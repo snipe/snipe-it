@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'Oznaka imovine',
     'update'			=> 'Ažuriranje aktiva',
     'warranty'			=> 'garancija',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'godina',
 )
 ;

@@ -32,7 +32,7 @@ class AccessoriesTransformer
             'notes' => ($accessory->notes) ? e($accessory->notes) : null,
             'qty' => ($accessory->qty) ? (int) $accessory->qty : null,
             'purchase_date' => ($accessory->purchase_date) ? Helper::getFormattedDateObject($accessory->purchase_date, 'date') : null,
-            'purchase_cost' => ($accessory->purchase_cost) ? e($accessory->purchase_cost) : null,
+            'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
             'remaining_qty' => $accessory->numRemaining(),

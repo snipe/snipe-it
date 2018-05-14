@@ -6,8 +6,9 @@ daysUntilClose: 7
 exemptLabels:
   - pinned
   - security
-  - ready for dev
-  - bounty
+  - :woman_technologist: ready for dev
+  - :moneybag: bounty
+  - :hand: bug
 # Label to use when marking an issue as stale
 staleLabel: stale
 # Comment to post when marking an issue as stale. Set to `false` to disable

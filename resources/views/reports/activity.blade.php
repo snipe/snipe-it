@@ -23,9 +23,12 @@
                         data-show-columns="true"
                         data-show-export="true"
                         data-show-refresh="true"
-                        data-sort-order="asc"
+                        data-sort-order="desc"
+                        data-sort-name="created_at"
                         id="activityReport"
                         data-url="{{ route('api.activity.index') }}"
+                        data-mobile-responsive="true"
+                        data-toggle="table"
                         class="table table-striped snipe-table"
                         data-export-options='{
                         "fileName": "activity-report-{{ date('Y-m-d') }}",

@@ -38,9 +38,17 @@
                 <div class="box-body">
 
 
-                    <div class="col-md-11 col-md-offset-1">
+                    <p style="border-bottom: 0px;">
+                        {!! trans('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook')) !!}
 
-                        <p class="help-block">{!! trans('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook')) !!}</p>
+                    @if (($setting->slack_channel=='') && ($setting->slack_endpoint==''))
+                           {{ trans('admin/settings/general.slack_integration_help_button') }}
+                    @endif
+                    </p>
+
+
+                    <div class="col-md-11 col-md-offset-1" style="border-top: 0px;">
+
 
                         <!-- slack endpoint -->
                         <div class="form-group {{ $errors->has('slack_endpoint') ? 'error' : '' }}">
@@ -87,10 +95,26 @@
                             </div>
                         </div>
 
+                        @if (($setting->slack_channel!='') && ($setting->slack_endpoint))
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('est_slack', 'Test Slack') }}
+                            </div>
+                            <div class="col-md-9" id="slacktestrow">
+                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test <i class="fa fa-slack"></i> Integration</a>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                <span id="slacktesticon"></span>
+                                <span id="slacktestresult"></span>
+                                <span id="slackteststatus"></span>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                <p class="help-block">{{ trans('admin/settings/general.slack_test_help') }}</p>
+                            </div>
 
-
-                    </div>
-
+                        </div>
+                         @endif
+                    </div> <!--/-->
                 </div> <!--/.box-body-->
                 <div class="box-footer">
                     <div class="text-left col-md-6">
@@ -106,5 +130,80 @@
     </div> <!-- /.row-->
 
     {{Form::close()}}
+
+@stop
+
+@section('moar_scripts')
+    <script nonce="{{ csrf_token() }}">
+        $("#slacktest").click(function() {
+            $("#slacktestrow").removeClass('text-success');
+            $("#slacktestrow").removeClass('text-danger');
+            $("#slackteststatus").removeClass('text-danger');
+            $("#slackteststatus").html('');
+            $("#slacktesticon").html('<i class="fa fa-spinner spin"></i> Sending Slack test message...');
+            $.ajax({
+                url: '{{ route('api.settings.slacktest') }}',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'ldaptest_user': $('#ldaptest_user').val(),
+                    'ldaptest_password': $('#ldaptest_password').val()
+                },
+
+                dataType: 'json',
+
+                success: function (data) {
+                    $("#slacktesticon").html('');
+                    $("#slacktestrow").addClass('text-success');
+                    $("#slackteststatus").addClass('text-success');
+                    $("#slackteststatus").html('<i class="fa fa-check text-success"></i> Success! Check the {{ $setting->slack_channel}} channel for your test message');
+                },
+
+                error: function (data) {
+
+                    if (data.responseJSON) {
+                        var errors = data.responseJSON.message;
+                    } else {
+                        var errors;
+                    }
+
+                    var error_text = '';
+
+                    $("#slacktesticon").html('');
+                    $("#slackteststatus").addClass('text-danger');
+                    $("#slacktesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+
+                    if (data.status == 500) {
+                        $('#slackteststatus').html('500 Server Error');
+                    } else if (data.status == 400) {
+
+                        if (typeof errors != 'string') {
+
+                            for (i = 0; i < errors.length; i++) {
+                                if (errors[i]) {
+                                    error_text += '<li>Error: ' + errors[i];
+                                }
+
+                            }
+
+                        } else {
+                            error_text = errors;
+                        }
+
+                        $('#slackteststatus').html(error_text);
+
+                    } else {
+                        $('#slackteststatus').html(data.responseText.message);
+                    }
+                }
+
+
+            });
+        });
+
+    </script>
 
 @stop

@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Skatīt modeļus',
     'fieldset'                  => 'Lauka laukums',
     'no_custom_field'           => 'Nav pielāgotu lauku',
-
+    'add_default_values'        => 'Add default values',
 );

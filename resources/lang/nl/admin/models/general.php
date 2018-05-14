@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Bekijk modelen',
     'fieldset'                  => 'Veldverzameling',
     'no_custom_field'           => 'Geen aangepaste velden',
-
+    'add_default_values'        => 'Add default values',
 );

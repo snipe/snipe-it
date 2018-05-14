@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'ثبت کردن',
     'upload'                    => 'بارگزاری',
 	'select_file'				=> 'فایل را انتخاب کنید...',
+    'select_files'				=> 'Select Files...',
 );

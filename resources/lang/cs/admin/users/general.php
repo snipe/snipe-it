@@ -16,6 +16,7 @@ return array(
     'restore_user'		=> 'Klikněte zde pro obnovení.',
     'last_login'        => 'Poslední přihlášení',
     'ldap_config_text'  => 'Nastavení konfigurace LDAP lze nalézt v menu Správce> Nastavení. Vybrané (volitelně) místo bude nastaven pro všechny importované uživatele.',
+    'print_assigned'    => 'Vypsat všechna přiřazení',
     'software_user'     => 'Software vydaný pro :name',
     'view_user'         => 'Zobraz uživatele',
     'usercsv'           => 'CSV soubor',

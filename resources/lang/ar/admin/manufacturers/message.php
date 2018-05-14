@@ -15,6 +15,11 @@ return array(
         'success' => 'تم تحديث الشركة المصنعة بنجاح.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'هل أنت متأكد من رغبتك في حذف هذه الشركة المصنعة؟',
         'error'   => 'لقد حدثت مشكلة اثناء عملية حذف الشركة المصنعة، الرجاء المحاولة مرة اخرى.',

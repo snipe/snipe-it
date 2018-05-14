@@ -6,8 +6,8 @@ class AccessoriesCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
          $I->seeAuthentication();
     }
@@ -53,18 +53,16 @@ class AccessoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $accessory = factory(App\Models\Accessory::class)->make();
+        $accessory = factory(App\Models\Accessory::class)->states('apple-bt-keyboard')->make();
         $values = [
-            'company_id'       => $accessory->company_id,
-            'name'          => $accessory->name,
             'category_id'   => $accessory->category_id,
-            'manufacturer_id'  => $accessory->manufacturer_id,
             'location_id'      => $accessory->location_id,
+            'manufacturer_id'  => $accessory->manufacturer_id,
+            'min_amt'       => $accessory->min_amt,
+            'name'          => 'Test Accessory',
             'order_number'  => $accessory->order_number,
             'purchase_date' => '2016-01-01',
-            'purchase_cost' => $accessory->purchase_cost,
             'qty'           => $accessory->qty,
-            'min_amt'       => $accessory->min_amt
         ];
 
         $I->wantTo("Test Validation Succeeds");

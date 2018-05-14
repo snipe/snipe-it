@@ -6,8 +6,8 @@ class CategoriesCest
     public function _before(FunctionalTester $I)
     {
          $I->amOnPage('/login');
-         $I->fillField('username', 'snipeit');
-         $I->fillField('password', 'snipeit');
+         $I->fillField('username', 'admin');
+         $I->fillField('password', 'password');
          $I->click('Login');
     }
 
@@ -37,13 +37,15 @@ class CategoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $category = factory(App\Models\Category::class)->make();
+        $category = factory(App\Models\Category::class)->states('asset-laptop-category')->make([
+            'name' => "Test Category"
+        ]);
         $values = [
-            'name'                  => $category->name,
             'category_type'         => $category->category_type,
-            'eula_text'             => $category->eula_text,
-            'require_acceptance'    => $category->require_acceptance,
             'checkin_email'         => $category->checkin_email,
+            'eula_text'             => $category->eula_text,
+            'name'                  => $category->name,
+            'require_acceptance'    => $category->require_acceptance,
         ];
         $I->wantTo("Test Validation Succeeds");
         $I->amOnPage(route('categories.create'));
@@ -55,7 +57,9 @@ class CategoriesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a category');
-        $category = factory(App\Models\Category::class)->create();
+        $category = factory(App\Models\Category::class)->states('asset-laptop-category')->create([
+            'name'=>"Deletable Test Category"
+        ]);
         $I->sendDelete(route('categories.destroy', $category->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

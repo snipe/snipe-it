@@ -1,15 +1,16 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Request',
-    'submit'  	                => 'Submit',
-    'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
+    'actions' 	                => 'Tindakan',
+    'add'    	                => 'Tambah Baru',
+    'cancel'                    => 'Batal',
+    'checkin_and_delete'  	    => 'Periksa dan hapus pengguna',
+    'delete'  	                => 'Hapus',
+    'edit'    	                => 'Sunting',
+    'restore' 	                => 'Kembalikan',
+    'request'                   => 'Permintaan',
+    'submit'  	                => 'Kirim',
+    'upload'                    => 'Unggah',
+	'select_file'				=> 'Pilih Berkas...',
+    'select_files'				=> 'Select Files...',
 );

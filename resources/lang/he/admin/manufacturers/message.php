@@ -15,6 +15,11 @@ return array(
         'success' => 'היצרן עודכן בהצלחה.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'האם אתה בטוח שברצונך למחוק יצרן זה?',
         'error'   => 'אירעה בעיה במחיקת היצרן. בבקשה נסה שוב.',

@@ -28,7 +28,6 @@ class ReportsController extends Controller
         if (($request->has('target_type'))  && ($request->has('target_id'))) {
             $actionlogs = $actionlogs->where('target_id','=',$request->input('target_id'))
                 ->where('target_type','=',"App\\Models\\".ucwords($request->input('target_type')));
-
         }
 
         if (($request->has('item_type'))  && ($request->has('item_id'))) {
@@ -38,6 +37,10 @@ class ReportsController extends Controller
 
         if ($request->has('action_type')) {
             $actionlogs = $actionlogs->where('action_type','=',$request->input('action_type'))->orderBy('created_at', 'desc');
+        }
+
+        if ($request->has('uploads')) {
+            $actionlogs = $actionlogs->whereNotNull('filename')->orderBy('created_at', 'desc');
         }
 
         $allowed_columns = [

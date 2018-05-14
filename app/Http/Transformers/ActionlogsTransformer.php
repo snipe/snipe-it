@@ -22,10 +22,20 @@ class ActionlogsTransformer
 
     public function transformActionlog (Actionlog $actionlog, $settings = null)
     {
+        $icon = $actionlog->present()->icon();
+        if ($actionlog->filename!='') {
+            $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
+        }
         $array = [
             'id'          => (int) $actionlog->id,
-            'icon'          => $actionlog->present()->icon(),
-            'image' => (method_exists($actionlog->item, 'getImageUrl')) ? $actionlog->item->getImageUrl() : null,
+            'icon'          => $icon,
+            'file' => ($actionlog->filename!='') ?
+                [
+                    'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
+                    'filename' => $actionlog->filename,
+                    'inlineable' => (bool) \App\Helpers\Helper::show_file_inline($actionlog->filename),
+                ] : null,
+
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
                 'name' => e($actionlog->item->getDisplayNameAttribute()),
@@ -37,7 +47,7 @@ class ActionlogsTransformer
             ] : null,
             'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
-            'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->calcNextAuditDate(), 'date'): null,
+            'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->calcNextAuditDate(null, $actionlog->item), 'date'): null,
             'days_to_next_audit' => $actionlog->daysUntilNextAudit($settings->audit_interval, $actionlog->item),
             'action_type'   => $actionlog->present()->actionType(),
             'admin' => ($actionlog->user) ? [
@@ -59,10 +69,9 @@ class ActionlogsTransformer
 
         ];
 
-
-
         return $array;
     }
+
 
 
     public function transformCheckedoutActionlog (Collection $accessories_users, $total)

@@ -4,9 +4,9 @@ return array(
     'about_models_title'     => 'Informazioni sui modelli di Asset',
     'about_models_text'           => 'I modelli sono un modo per raggruppare Asset identici. "MBP 2016", "IPhone 6s", etc.',
     'deleted'  					        => 'Questo modello è stato eliminato.<a href="/hardware/models/:model_id/restore">Clicca qui per ripristinarlo</a>.',
-    'bulk_delete'               => 'Bulk Delete Asset Models',
-    'bulk_delete_help'               => 'Use the checkboxes below to confirm the deletion of the selected asset models. Asset models that have assets associated with them cannot be deleted until the assets are associated with a different model.',
-    'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',
+    'bulk_delete'               => 'Eliminazione di massa di modelli Asset',
+    'bulk_delete_help'               => 'Utilizza le caselle di controllo in basso per confermare la cancellazione dei modelli di asset selezionati. I modelli di asset con asset ad essi associati non possono essere eliminati finché le risorse non sono associate a un modello diverso.',
+    'bulk_delete_warn'          => 'Stai per cancellare :asset_count assets.',
     'restore'                   => 'Ripristinare il modello',
     'requestable'               => 'Gli utenti possono richiedere questo modello',
 	'show_mac_address'			      => 'Mostra MAC Address dei beni in questo modello',
@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Visualizza i modelli',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Nessun campo personalizzato',
-
+    'add_default_values'        => 'Add default values',
 );

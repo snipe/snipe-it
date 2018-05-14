@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'مجموعة حقول جديدة',
     'create_field'            => 'حقل جديد مخصص',
     'value_encrypted'      	        => 'هذا الحقل مشفر في قاعدة البيانات. يمكن قرائته من قبل مدراء النظام فقط',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

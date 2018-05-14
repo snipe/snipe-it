@@ -19,9 +19,9 @@ return array(
         'confirm'   => 'Tem a certeza que pretende remover este fornecedor?',
         'error'   => 'Ocorreu um problema ao remover este fornecedor. Por favor, tente novamente.',
         'success' => 'Fornecedor removido com sucesso.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'Este fornecedor esta atualmente associado a :asset_count artigo(s) e não pode ser eliminado. Por favor, atualize os artigos para que não referenciem este fornecedor e tente novamente.',
+        'assoc_licenses'	 => 'Este fornecedor esta atualmente associado a :licenses_count licença(s) e não pode ser eliminado. Por favor, atualize as suas licenças para que não referenciem este fornecedor e tente novamente.',
+        'assoc_maintenances'	 => 'Este fornecedor esta atualmente associado a  :asset_maintenances_count manutenção(ões) e não pode ser eliminado. Por favor, atualize as suas manutenções de artigos para que não referenciem este fornecedor e tente novamente.',
     )
 
 );

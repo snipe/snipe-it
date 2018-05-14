@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_groups_title'            => 'About Groups',
-    'about_groups'                  => 'Groups are used to generalize user permissions.',
+    'about_groups_title'            => 'Tentang grup',
+    'about_groups'                  => 'Grup digunakan untuk menyamaratakan izin pengguna.',
     'group_management' 	 	=> 'Manajemen grup',
-    'create' 	 	 	    => 'Create New Group',
-    'update' 	 		        => 'Edit Group',
+    'create' 	 	 	    => 'Buat Grup Baru',
+    'update' 	 		        => 'Atur Grup',
     'group_name' 	 		=> 'Nama Grup',
     'group_admin' 	 		=> 'Admin Kelompok',
     'allow' 	 			=> 'Diijinkan',

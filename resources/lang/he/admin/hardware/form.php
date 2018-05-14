@@ -38,6 +38,7 @@ return array(
     'tag'				=> 'תג נכס',
     'update'			=> 'עדכון נכס',
     'warranty'			=> 'אַחֲרָיוּת',
+		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'שנים',
 )
 ;

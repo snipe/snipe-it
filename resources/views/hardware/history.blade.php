@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">
-                                <input type="file" name="user_import_csv" id="user_import_csv">
+                                <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
                             </div>
                         </div>
 
@@ -125,7 +125,16 @@
 
     <!-- Form Actions -->
     <div class="box-footer text-right">
-      <button type="submit" class="btn btn-default">{{ trans('button.submit') }}</button>
+        @if (config('app.lock_passwords')===true)
+            <div class="col-md-12">
+                <div class="callout callout-info">
+                    {{ trans('general.feature_disabled') }}
+                </div>
+            </div>
+
+        @else
+            <button type="submit" class="btn btn-default">{{ trans('button.submit') }}</button>
+         @endif
     </div>
 
 </form>

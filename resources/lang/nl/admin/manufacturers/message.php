@@ -15,6 +15,11 @@ return array(
         'success' => 'Fabrikant succesvol bijgewerkt.'
     ),
 
+    'restore' => array(
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   => 'Weet u zeker dat deze fabrikant verwijderd kan worden?',
         'error'   => 'Er was een probleem bij het verwijderen. Probeer opnieuw.',
