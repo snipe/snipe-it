@@ -48,7 +48,7 @@ class MarketingController extends Controller
                 \Artisan::call('passport:install');
             }
 
-            return view('marketing-dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
+            return view('marketing-dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts)->with('userinfo',Auth::user());
         } else {
         // Redirect to the profile page
             return redirect()->intended('account/view-assets');
