@@ -491,6 +491,12 @@
                   <span>{{ trans('general.accessories') }}</span>
                 </a>
               </li>
+              <li{!! (Request::is('marketing*') ? ' class="active"' : '') !!}>
+                <a href="{{ route('marketing.index') }}">
+                  <i class="fa fa-share-alt"></i>
+                  <span>{{ trans('general.marketing') }}</span>
+                </a>
+              </li>
               @endcan
               @can('view', \App\Models\Consumable::class)
             <li{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>

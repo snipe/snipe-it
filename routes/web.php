@@ -72,6 +72,13 @@ Route::group(['middleware' => 'auth'], function () {
         'parameters' => ['department' => 'department_id']
     ]);
 
+    /*
+    * Marketing 
+    */
+    Route::resource('marketing', 'MarketingController', [
+        'parameters' => ['user' => 'user_id']
+    ]);
+
 
 });
 
