@@ -23,7 +23,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
     protected $table = 'asset_maintenances';
     // Declaring rules for form validation
     protected $rules = [
-        'asset_id'               => 'required|integer',
+        'asset_id'               => 'integer',
         'supplier_id'            => 'required|integer',
         'asset_maintenance_type' => 'required',
         'title'                  => 'required|max:100',
@@ -53,7 +53,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
             trans('admin/asset_maintenances/general.maintenance') => trans('admin/asset_maintenances/general.maintenance'),
             trans('admin/asset_maintenances/general.repair')      => trans('admin/asset_maintenances/general.repair'),
             trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade'),
-            'PAT test'      => 'PAT test',
         ];
     }
 

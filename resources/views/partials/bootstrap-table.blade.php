@@ -129,7 +129,7 @@
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
                   'pending': '{{ strtolower(trans('general.pending')) }}'
-                }
+                };
 
                 switch (value.status_meta) {
                     case 'deployed':
@@ -231,7 +231,7 @@
                 item_destination = 'users';
                 item_icon = 'fa-user';
             } else if (value.type == 'location') {
-                item_destination = 'locations'
+                item_destination = 'locations';
                 item_icon = 'fa-map-marker';
             }
 
@@ -256,7 +256,7 @@
     // Convert line breaks to <br>
     function notesFormatter(value) {
         if (value) {
-            return value.replace(/(?:\r\n|\r|\n)/g, '<br />');;
+            return value.replace(/(?:\r\n|\r|\n)/g, '<br />');
         }
     }
 
@@ -425,7 +425,9 @@
     }
 
     function assetTagLinkFormatter(value, row) {
-        return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+        if (row.asset && row.asset.asset_tag) {
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+        }
     }
 
     function assetNameLinkFormatter(value, row) {

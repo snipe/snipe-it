@@ -101,9 +101,7 @@ final class Company extends SnipeModel
 
     public static function isCurrentUserHasAccess($companyable)
     {
-        if (is_null($companyable)) {
-            return false;
-        } elseif (!static::isFullMultipleCompanySupportEnabled()) {
+        if (!static::isFullMultipleCompanySupportEnabled()) {
             return true;
         } else {
             $current_user_company_id = Auth::user()->company_id;
