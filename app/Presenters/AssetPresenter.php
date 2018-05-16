@@ -182,21 +182,21 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.notes'),
 
             ], [
-                "field" => "checkouts_count",
+                "field" => "checkout_counter",
                 "searchable" => false,
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.checkouts_count')
 
             ],[
-                "field" => "checkins_count",
+                "field" => "checkin_counter",
                 "searchable" => false,
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.checkins_count')
 
             ], [
-                "field" => "user_requests_count",
+                "field" => "requests_counter",
                 "searchable" => false,
                 "sortable" => true,
                 "visible" => false,
