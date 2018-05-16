@@ -10,6 +10,7 @@
             <td><strong>{{ trans('mail.type') }}</strong></td>
             <td><strong>{{ trans('mail.current_QTY') }}</strong></td>
             <td><strong>{{ trans('mail.min_QTY') }}</strong></td>
+            <td><strong>Normal Re Order Amount</strong></td>
         </tr>
 
         @for($i=0; $count > $i; $i++)
@@ -20,6 +21,7 @@
                 <td>{{ $data[$i]['type'] }}</td>
                 <td>{{ $data[$i]['remaining'] }}</td>
                 <td>{{ $data[$i]['min_amt'] }}</td>
+                <td>{{ $data[$i]['normal_amt'] }}</td>
             </tr>
 
         @endfor

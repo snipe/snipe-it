@@ -35,6 +35,7 @@ class AccessoriesTransformer
             'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
+            'normal_qty' => ($accessory->normal_amt) ? (int) $accessory->normal_amt : null,
             'remaining_qty' => $accessory->numRemaining(),
             'image' => ($accessory->image) ? url('/').'/uploads/accessories/'.e($accessory->image) : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),

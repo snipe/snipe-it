@@ -24,6 +24,7 @@ $factory->state(App\Models\Accessory::class, 'apple-bt-keyboard', function ($fak
         'category_id' => 8,
         'manufacturer_id' => 1,
         'qty' => 10,
+        'normal_amt' => 5,
         'min_amt' => 2,
         'supplier_id' => rand(1,5)
     ];
@@ -37,6 +38,7 @@ $factory->state(App\Models\Accessory::class, 'apple-usb-keyboard', function ($fa
         'category_id' => 8,
         'manufacturer_id' => 1,
         'qty' => 15,
+        'normal_amt' => 5,
         'min_amt' => 2,
         'supplier_id' => rand(1,5)
     ];
@@ -50,6 +52,7 @@ $factory->state(App\Models\Accessory::class, 'apple-mouse', function ($faker) {
         'category_id' => 9,
         'manufacturer_id' => 1,
         'qty' => 13,
+        'normal_amt' => 5,
         'min_amt' => 2,
         'supplier_id' => rand(1,5)
     ];
@@ -63,6 +66,7 @@ $factory->state(App\Models\Accessory::class, 'microsoft-mouse', function ($faker
         'category_id' => 9,
         'manufacturer_id' => 2,
         'qty' => 13,
+        'normal_amt' =>5,
         'min_amt' => 2
     ];
 

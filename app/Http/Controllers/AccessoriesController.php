@@ -76,6 +76,7 @@ class AccessoriesController extends Controller
         $accessory->category_id             = request('category_id');
         $accessory->location_id             = request('location_id');
         $accessory->min_amt                 = request('min_amt');
+        $accessory->normal_amt                 = request('normal_amt');
         $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
         $accessory->order_number            = request('order_number');
         $accessory->manufacturer_id         = request('manufacturer_id');
@@ -155,6 +156,7 @@ class AccessoriesController extends Controller
         $accessory->name                    = request('name');
         $accessory->location_id             = request('location_id');
         $accessory->min_amt                 = request('min_amt');
+        $accessory->normal_amt                 = request('normal_amt');
         $accessory->category_id             = request('category_id');
         $accessory->company_id              = Company::getIdForCurrentUser(request('company_id'));
         $accessory->manufacturer_id         = request('manufacturer_id');
