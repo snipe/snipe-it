@@ -13,5 +13,5 @@ use App\Notifications\CheckoutAccessoryNotification;
 
 class Marketing extends SnipeModel
 {
-    //
+    // empty
 }
