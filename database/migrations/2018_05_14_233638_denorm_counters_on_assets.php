@@ -14,9 +14,9 @@ class DenormCountersOnAssets extends Migration
     public function up()
     {
         Schema::table('assets', function (Blueprint $table) {
-            $table->integer('checkin_count')->default(0);
-            $table->integer('checkout_count')->default(0);
-            $table->integer('requests_count')->default(0);
+            $table->integer('checkin_counter')->default(0);
+            $table->integer('checkout_counter')->default(0);
+            $table->integer('requests_counter')->default(0);
         });
     }
 
@@ -28,9 +28,9 @@ class DenormCountersOnAssets extends Migration
     public function down()
     {
         Schema::table('assets', function (Blueprint $table) {
-            $table->dropColumn('checkin_count');
-            $table->dropColumn('checkout_count');
-            $table->dropColumn('requests_count');
+            $table->dropColumn('checkin_counter');
+            $table->dropColumn('checkout_counter');
+            $table->dropColumn('requests_counter');
         });
     }
 }
