@@ -15,6 +15,7 @@ return array(
     'no_default_eula'					=> 'No primary default EULA found. Add one in Settings.',
     'total'  							=> 'Total',
     'remaining'  						=> 'Avail',
+    'normal_amt'                         => 'Normal Re-order Level',
     'update'  							=> 'Update Accessory',
     'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',
     'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',

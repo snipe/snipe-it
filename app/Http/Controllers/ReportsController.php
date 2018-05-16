@@ -58,7 +58,8 @@ class ReportsController extends Controller
             trans('admin/accessories/table.title'),
             trans('admin/accessories/general.accessory_category'),
             trans('admin/accessories/general.total'),
-            trans('admin/accessories/general.remaining')
+            trans('admin/accessories/general.remaining'),
+            trans('admin/accessories/general.normal_amt')
         );
         $header = array_map('trim', $header);
         $rows[] = implode($header, ', ');
@@ -70,7 +71,8 @@ class ReportsController extends Controller
             $row[] = e($accessory->accessory_category);
             $row[] = e($accessory->total);
             $row[] = e($accessory->remaining);
-
+            $row[] = e($accessory->normal_amt);
+            
             $rows[] = implode($row, ',');
         }
 

@@ -38,6 +38,7 @@
                                 <th class="col-sm-1">{{ trans('admin/accessories/table.title') }}</th>
                                 <th class="col-sm-1">{{ trans('admin/accessories/general.total') }}</th>
                                 <th class="col-sm-1">{{ trans('admin/accessories/general.remaining') }}</th>
+                                <th class="col-sm-1">{{ trans('admin/accessories/general.normal_amt') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,6 +48,7 @@
                                     <td>{{ $accessory->name }}</td>
                                     <td>{{ $accessory->qty }}</td>
                                     <td>{{ $accessory->numRemaining() }}</td>
+                                      <td>{{ $accessory->normal_amt }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
