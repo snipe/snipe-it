@@ -31,6 +31,7 @@ class LicensesCest
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
         $I->see('The seats field is required.', '.alert-msg');
+        $I->see('The category id field is required.', '.alert-msg');
     }
 
     public function failsShortValidation(FunctionalTester $I)
@@ -58,6 +59,7 @@ class LicensesCest
             'license_name'      => $license->license_name,
             'maintained'        => true,
             'manufacturer_id'   => $license->manufacturer_id,
+            'category_id'       => $license->category_id,
             'name'              => $license->name,
             'notes'             => $license->notes,
             'order_number'      => $license->order_number,

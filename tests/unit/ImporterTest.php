@@ -488,8 +488,8 @@ EOT;
     {
         $this->signIn();
         $csv = <<<'EOT'
-Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
-Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,category,notes
+Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Graphics Software,Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $this->import(new LicenseImporter($csv));
         // dd($this->tester->grabRecord('licenses'));
@@ -520,6 +520,10 @@ EOT;
 
         $this->tester->seeRecord('companies', [
             'name' => 'Haag, Schmidt and Farrell'
+        ]);
+
+        $this->tester->seeRecord('categories', [
+            'name' => 'Graphics Software'
         ]);
 
         $this->tester->seeNumRecords(80, 'license_seats');
