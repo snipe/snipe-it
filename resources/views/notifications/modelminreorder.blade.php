@@ -4,11 +4,11 @@
 	<title>{{$title}}</title>
 </head>
 <body>
-{{ trans('mail.hello') }},
+<p>{{ trans('mail.hello') }},</p>
 
-{{ $title }}
+<h3>{{ $title }}</h3>
 
-{{ trans('mail.min_amt_message') }}
+<p>{{ trans('mail.min_amt_message') }}</p>
 
 {{ trans('mail.best_regards') }} <br>
 @if ($snipeSettings->show_url_in_emails=='1')
