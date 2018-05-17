@@ -21,6 +21,8 @@ class CategorySeeder extends Seeder
         factory(Category::class, 1)->states('consumable-ink-category')->create(); // 11
         factory(Category::class, 1)->states('component-hdd-category')->create(); // 12
         factory(Category::class, 1)->states('component-ram-category')->create(); // 13
+        factory(Category::class, 1)->states('license-graphics-category')->create(); // 14
+        factory(Category::class, 1)->states('license-office-category')->create(); // 15
     }
 
 }

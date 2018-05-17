@@ -55,7 +55,7 @@ trait Loggable
         if ($log->target_type == Location::class) {
             $log->location_id = $target->id;
         } elseif ($log->target_type == Asset::class) {
-            $log->location_id = $target->rtd_location_id;
+            $log->location_id = $target->location_id;
         } else {
             $log->location_id = $target->location_id;
         }
@@ -121,8 +121,17 @@ trait Loggable
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
         } else {
+
             $log->item_type = static::class;
             $log->item_id = $this->id;
+
+            if (static::class == Asset::class) {
+                if ($asset = Asset::find($log->item_id)) {
+                    \Log::debug('Increment the checkin count for asset: '.$log->item_id);
+                    $asset->increment('checkin_counter', 1);
+                }
+            }
+
         }
 
 

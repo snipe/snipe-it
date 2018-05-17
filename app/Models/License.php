@@ -49,7 +49,7 @@ class License extends Depreciable
         'license_email'   => 'email|nullable|max:120',
         'license_name'   => 'string|nullable|max:100',
         'notes'   => 'string|nullable',
-        'category_id' => 'integer',
+        'category_id' => 'required|exists:categories,id',
         'company_id' => 'integer|nullable',
     );
 
