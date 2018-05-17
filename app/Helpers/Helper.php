@@ -20,6 +20,7 @@ use App\Models\Consumable;
 use App\Models\Asset;
 use App\Models\Setting;
 use Crypt;
+use Mail;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 class Helper
@@ -465,14 +466,17 @@ class Helper
      * @since [v3.0]
      * @return Array
      */
-    public function checkModelOrderLevels($model_id=0)
+    public static function checkModelOrderLevels($model_id=0)
     {
         if(!empty($model_id)) {
             $model = AssetModel::find($model_id);
-            $min_amt = $model->min_amt; //danger Re-order zone
-            $normal_amt = $model->normal_amt; // Normal Re order levels reached
-            $systemMail = '';
-            $alert_email = '';
+            $model_name     = $model->name;
+            $model_number   = $model->model_number;
+            $snipesettings  = \App\Models\Setting::getSettings();
+            $min_amt        = $model->min_amt; //danger Re-order zone
+            $normal_amt     = $model->normal_amt; // Normal Re order levels reached
+            $systemMail     = '';
+            $alert_email    = '';
             $admin_cc_email = '';
             if (is_null($setting = Setting::first())) {
                 return 'no settings found';
@@ -483,8 +487,8 @@ class Helper
             }
 
             $totalassets = Asset::where([
-                'model_id' => $model_id,
-                'deleted_at' => null,
+                'model_id'      => $model_id,
+                'deleted_at'    => null,
             ])->count();
 
             $totalcheckedout  = Asset::where('model_id', $model_id)
@@ -493,20 +497,67 @@ class Helper
                 ->count();
 
             $totalunassigned  = Asset::where([
-                'model_id' => $model_id,
-                'deleted_at' => null,
-                'assigned_to' => null
+                'model_id'      => $model_id,
+                'deleted_at'    => null,
+                'assigned_to'   => null
             ])->count();
 
             if($totalunassigned <= $min_amt ) {
                 // danger zone Bud
+                $title   = $model_name. ' Levels Critical';
+                $subject = $title;
+                $snipeSettings = $snipesettings;
+                $level = 3;
+
+                Mail::send('notifications.modelminreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level)
+                {
+                    $message->from($alert_email, $snipesettings->site_name);
+                    $message->to($alert_email);
+                    $message->cc($admin_cc_email, $name = null);
+                    //$message->bcc($address, $name = null);
+                    $message->replyTo($alert_email, $name = null);
+                    $message->subject($subject);
+                    $message->priority($level);
+                });
 
             } elseif ($totalunassigned <= $normal_amt && $totalunassigned > $min_amt) {
                 // no danger but reorder
+                // danger zone Bud
+                $title   = $model_name. ' Re-order Level';
+                $subject = $title;
+                $snipeSettings = $snipesettings;
+                $level = 3;
+
+                Mail::send('notifications.modelnormalreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level)
+                {
+                    $message->from($alert_email, $snipesettings->site_name);
+                    $message->to($alert_email);
+                    $message->cc($admin_cc_email, $name = null);
+                    //$message->bcc($address, $name = null);
+                    $message->replyTo($alert_email, $name = null);
+                    $message->subject($subject);
+                    $message->priority($level);
+                });
 
             } else {
                 // all good. Go along and sing Mkomboti 
                 // :)
+
+                $title   = $model_name. ' Re-order Level // test Mail';
+                $subject = $title;
+                $snipeSettings = $snipesettings;
+                $level = 3;
+
+                Mail::send('notifications.modelnormalreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level)
+                {
+                    $message->from($alert_email, $snipesettings->site_name);
+                    $message->to($alert_email);
+                    $message->cc($admin_cc_email, $name = null);
+                    //$message->bcc($address, $name = null);
+                    $message->replyTo($alert_email, $name = null);
+                    $message->subject($subject);
+                    $message->priority($level);
+                });
             }
 
         } else {

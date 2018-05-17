@@ -137,6 +137,10 @@ class CheckoutAssetNotification extends Notification
             ])
             ->subject(trans('mail.Confirm_asset_delivery'));
 
+            // get model levels and notify via mail
+            //dd($this->item->model);
+            $notifyLevel = \App\Helpers\Helper::checkModelOrderLevels($this->item->model->id);
+
 
         return $message;
 
