@@ -60,14 +60,6 @@ trait Loggable
             $log->location_id = $target->location_id;
         }
 
-        if ($log->item_type == Asset::class) {
-
-            if ($asset = Asset::find($log->item_id)) {
-                \Log::debug('Increment the checkout count for asset: '.$log->item_id);
-                $asset->increment('checkout_counter', 1);
-            }
-        }
-
         $log->note = $note;
         $log->logaction('checkout');
 
