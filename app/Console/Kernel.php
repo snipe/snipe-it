@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         Commands\ResetDemoSettings::class,
         Commands\SyncAssetLocations::class,
         Commands\RegenerateAssetTags::class,
+        Commands\SyncAssetCounters::class,
     ];
 
     /**
