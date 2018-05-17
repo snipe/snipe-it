@@ -538,8 +538,8 @@ class UsersController extends Controller
     public function postBulkSave(Request $request)
     {
         $this->authorize('update', User::class);
-        
-        if ((!$request->has('ids')) || (count($request->input('ids')) > 0)) {
+
+        if ((!$request->has('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         } elseif ((!$request->has('status_id')) || ($request->input('status_id')=='')) {
             return redirect()->route('users.index')->with('error', 'No status selected');
