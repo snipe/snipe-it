@@ -476,7 +476,7 @@ class Helper
             $min_amt        = $model->min_amt; //danger Re-order zone
             $normal_amt     = $model->normal_amt; // Normal Re order levels reached
             $systemMail     = '';
-            $alert_email    = '';
+            $alert_email    = 'patrick.mutwiri@poainternet.net';
             $admin_cc_email = '';
             if (is_null($setting = Setting::first())) {
                 return 'no settings found';
@@ -509,13 +509,13 @@ class Helper
                 $snipeSettings = $snipesettings;
                 $level = 3;
 
-                Mail::send('notifications.modelminreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level)
+                Mail::send('notifications.modelminreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level, $alert_email, $admin_cc_email, $snipesettings)
                 {
                     $message->from($alert_email, $snipesettings->site_name);
                     $message->to($alert_email);
-                    $message->cc($admin_cc_email, $name = null);
-                    //$message->bcc($address, $name = null);
-                    $message->replyTo($alert_email, $name = null);
+                    if(!empty($admin_cc_email)) { 
+                        $message->cc($admin_cc_email, $snipesettings->site_name); 
+                    }
                     $message->subject($subject);
                     $message->priority($level);
                 });
@@ -528,13 +528,13 @@ class Helper
                 $snipeSettings = $snipesettings;
                 $level = 3;
 
-                Mail::send('notifications.modelnormalreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level)
+                Mail::send('notifications.modelnormalreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level, $alert_email, $admin_cc_email, $snipesettings)
                 {
                     $message->from($alert_email, $snipesettings->site_name);
                     $message->to($alert_email);
-                    $message->cc($admin_cc_email, $name = null);
-                    //$message->bcc($address, $name = null);
-                    $message->replyTo($alert_email, $name = null);
+                    if(!empty($admin_cc_email)) { 
+                        $message->cc($admin_cc_email, $snipesettings->site_name); 
+                    }
                     $message->subject($subject);
                     $message->priority($level);
                 });
@@ -542,22 +542,6 @@ class Helper
             } else {
                 // all good. Go along and sing Mkomboti 
                 // :)
-
-                $title   = $model_name. ' Re-order Level // test Mail';
-                $subject = $title;
-                $snipeSettings = $snipesettings;
-                $level = 3;
-
-                Mail::send('notifications.modelnormalreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level)
-                {
-                    $message->from($alert_email, $snipesettings->site_name);
-                    $message->to($alert_email);
-                    $message->cc($admin_cc_email, $name = null);
-                    //$message->bcc($address, $name = null);
-                    $message->replyTo($alert_email, $name = null);
-                    $message->subject($subject);
-                    $message->priority($level);
-                });
             }
 
         } else {
