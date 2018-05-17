@@ -535,15 +535,13 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postBulkSave()
+    public function postBulkSave(Request $request)
     {
         $this->authorize('update', User::class);
 
-
-
-        if ((!Input::has('ids')) || (count(Input::get('ids')) == 0)) {
+        if ((!$request->has('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } elseif ((!Input::has('status_id')) || (Input::get('status_id')=='')) {
+        } elseif ((!$request->has('status_id')) || ($request->input('status_id')=='')) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         } else {
 
