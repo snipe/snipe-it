@@ -461,6 +461,64 @@ class Helper
      * This nasty little method gets the low inventory info for the
      * alert dropdown
      *
+     * @author [Patrick Mutwiri] [<patwiri@gmail.com>]
+     * @since [v3.0]
+     * @return Array
+     */
+    public function checkModelOrderLevels($model_id=0)
+    {
+        if(!empty($model_id)) {
+            $model = AssetModel::find($model_id);
+            $min_amt = $model->min_amt; //danger Re-order zone
+            $normal_amt = $model->normal_amt; // Normal Re order levels reached
+            $systemMail = '';
+            $alert_email = '';
+            $admin_cc_email = '';
+            if (is_null($setting = Setting::first())) {
+                return 'no settings found';
+            } else {
+                $alert_email = $setting->alert_email;
+                $admin_cc_email = $setting->admin_cc_email;
+                //can send mail
+            }
+
+            $totalassets = Asset::where([
+                'model_id' => $model_id,
+                'deleted_at' => null,
+            ])->count();
+
+            $totalcheckedout  = Asset::where('model_id', $model_id)
+                ->where('assigned_to', '!=', null)
+                ->where('deleted_at', null)
+                ->count();
+
+            $totalunassigned  = Asset::where([
+                'model_id' => $model_id,
+                'deleted_at' => null,
+                'assigned_to' => null
+            ])->count();
+
+            if($totalunassigned <= $min_amt ) {
+                // danger zone Bud
+
+            } elseif ($totalunassigned <= $normal_amt && $totalunassigned > $min_amt) {
+                // no danger but reorder
+
+            } else {
+                // all good. Go along and sing Mkomboti 
+                // :)
+            }
+
+        } else {
+            return 'Model not selected';
+        }
+    }
+    
+
+    /**
+     * This nasty little method gets the low inventory info for the
+     * alert dropdown
+     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @return Array

@@ -198,6 +198,15 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
+            /*
+                * get model order levels here
+                * send mail alert if levels are below Normal and minimum
+                * if minimum, Danger
+            */
+            $model = '';
+            $normal_amt = '';
+            $min_amt = '';
+            
             $this->logCheckout($note, $target);
             return true;
         }
