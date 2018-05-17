@@ -77,6 +77,8 @@ class AssetModelsController extends Controller
 
         // Save the model data
         $model->eol = $request->input('eol');
+        $model->min_amt = $request->input('min_amt');
+        $model->normal_amt = $request->input('normal_amt');
         $model->depreciation_id = $request->input('depreciation_id');
         $model->name                = $request->input('name');
         $model->model_number        = $request->input('model_number');
@@ -137,6 +139,9 @@ class AssetModelsController extends Controller
 
         $settings=Input::all();
         $settings['eol']= null;
+        $settings['min_amt']= null;
+        $settings['normal_amt']= null;
+
 
         $model->name=$request->input('name');
         $model->manufacturer_id = $request->input('manufacturer_id');
@@ -145,6 +150,9 @@ class AssetModelsController extends Controller
         $model->user_id = Auth::id();
         $model->notes            = $request->input('notes');
         $model->eol= null;
+        $model->min_amt= null;
+        $model->normal_amt= null;
+
 
         if ($request->input('fieldset_id')=='') {
             $model->fieldset_id = null;
@@ -203,6 +211,8 @@ class AssetModelsController extends Controller
 
         $model->depreciation_id     = $request->input('depreciation_id');
         $model->eol                 = $request->input('eol');
+        $model->min_amt                 = $request->input('min_amt');
+        $model->normal_amt                 = $request->input('normal_amt');
         $model->name                = $request->input('name');
         $model->model_number        = $request->input('model_number');
         $model->manufacturer_id     = $request->input('manufacturer_id');

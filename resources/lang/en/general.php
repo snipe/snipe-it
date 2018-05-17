@@ -12,6 +12,7 @@
     'administrator'			=> 'Administrator',
     'add_seats'             => 'Added seats',
     'all_assets'			=> 'All Assets',
+    'all_asset_report' => 'All Assets Report',
     'all'       			=> 'All',
     'archived'              => 'Archived',
     'asset_models'			=> 'Asset Models',
