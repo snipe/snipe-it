@@ -61,7 +61,7 @@ class SendExpectedCheckinAlerts extends Command
         // Send a rollup to the admin, if settings dictate
         $recipient = new \App\Models\Recipients\AlertRecipient();
 
-        if ($settings->alert_email!='') {
+        if (($assets) && ($assets->count() > 0) && ($settings->alert_email!='')) {
             $recipient->notify(new ExpectedCheckinAdminNotification($assets));
         }
 
