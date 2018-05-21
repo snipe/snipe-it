@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Нов Fieldset',
     'create_field'            => 'Ново персонализирано поле',
     'value_encrypted'      	        => 'Стойността на това поле е криптирана в базата данни. Само администратор потребители ще бъде в състояние да видят дешифрираната стойност',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Да се включи ли стойността на това поле в електронната поща, изпращана към потребителите? Криптираните полета не могат да бъдат включвани в изпращаните електронни пощи.',
 );

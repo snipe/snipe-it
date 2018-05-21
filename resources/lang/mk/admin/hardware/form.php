@@ -15,7 +15,7 @@ return array(
     'create'			=> 'Креирај основно средство',
     'date'				=> 'Датум на набавка',
     'depreciation'	    => 'Амортизационен план',
-    'depreciates_on'	=> 'Depreciates On',
+    'depreciates_on'	=> 'Се амортизира на',
     'default_location'	=> 'Стандардна локација',
     'eol_date'			=> 'EOL Дата',
     'eol_rate'			=> 'ЕОЛ стапка',

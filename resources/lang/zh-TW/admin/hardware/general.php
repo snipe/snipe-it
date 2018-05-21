@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => '資產是按序號或資產標籤追蹤的物品。 他們往往是高價值並標示為重要的物品。',
 	'archived'  				=> '已封存',
     'asset'  					=> '資產',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => '借出資產',
     'checkin'  					=> '資產繳回',
     'checkout'  				=> '借出資產',
     'clone'  					=> '複製資產',

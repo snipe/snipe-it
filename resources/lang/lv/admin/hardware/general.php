@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Aktīvi ir posteņi, ko izseko pēc sērijas numura vai aktīvu taga. Viņi mēdz būt augstākas vērtības priekšmeti, kad ir svarīgi noteikt konkrētu objektu.',
 	'archived'  				=> 'Arhivēts',
     'asset'  					=> 'Aktīvs',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Lielapjoma izsniegšana',
     'checkin'  					=> 'Reģistrēšanās aktīvs',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Clone Asset',

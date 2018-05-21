@@ -12,5 +12,5 @@ return array(
     'submit'  	                => 'Iesniegt',
     'upload'                    => 'Augšupielādēt',
 	'select_file'				=> 'Atlasiet failu ...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Atlasiet datnes...',
 );

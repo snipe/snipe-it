@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Neuer Feldsatz',
     'create_field'            => 'Neues benutzerdefiniertes Feld',
     'value_encrypted'      	        => 'Der Wert dieses Feldes ist in der Datenbank verschlüsselt. Nur Benutzer mit Administratorrechten können den entschlüsselten Wert anzeigen',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Feld miteinbeziehen bei Herausgabe-Emails an die Benutzer? Verschlüsselte Felder können nicht miteinbezogen werden.',
 );

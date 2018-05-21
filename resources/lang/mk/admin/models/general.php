@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Преглед на модели',
     'fieldset'                  => 'Група на полиња',
     'no_custom_field'           => 'Без полиња по желба',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Додајте default вредности',
 );

@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Преглед на моделите',
     'fieldset'                  => 'Полета',
     'no_custom_field'           => 'Няма потребителски полета',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Добавяне на стойности по подразбиране',
 );
