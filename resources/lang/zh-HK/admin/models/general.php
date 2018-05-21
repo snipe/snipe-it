@@ -14,5 +14,5 @@ return array(
     'view_models'               => '檢視型號',
     'fieldset'                  => '欄位集',
     'no_custom_field'           => '沒有自訂欄位',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => '新增預設值',
 );

@@ -199,7 +199,6 @@ class Asset extends Depreciable
 
         if ($this->save()) {
             $this->logCheckout($note, $target);
-            \Log::debug('Increment the checkout count for asset: '.$this->id);
             $this->increment('checkout_counter', 1);
             return true;
         }

@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => '新增字段集',
     'create_field'            => '新增字段',
     'value_encrypted'      	        => '此字段的值已被加密。只有管理员用户能够查看已解密的值',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => '是否在发送给用户的Email中包含此字段的值？邮件中不能包含加密的值。',
 );

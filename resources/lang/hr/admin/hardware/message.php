@@ -62,7 +62,7 @@ return array(
         'success' 		=> 'Asset je uspješno provjeren.',
         'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.',
         'not_available' => 'Taj materijal nije dostupan za naplatu!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Morate odabrati barem jednu imovinu s popisa'
     ),
 
     'checkin' => array(

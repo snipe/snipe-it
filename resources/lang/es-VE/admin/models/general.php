@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Ver Modelos',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Sin campos personalizados',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Agregar valores predeterminados',
 );

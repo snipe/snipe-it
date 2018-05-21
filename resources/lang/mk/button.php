@@ -12,5 +12,5 @@ return array(
     'submit'  	                => 'Поднеси',
     'upload'                    => 'Прикачи',
 	'select_file'				=> 'Избери датотека...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Избери датотека...',
 );

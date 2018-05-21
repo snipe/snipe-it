@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Ver Modelos',
     'fieldset'                  => 'Grupos de campo',
     'no_custom_field'           => 'No hay campos personalizados',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Agregar valores predeterminados',
 );
