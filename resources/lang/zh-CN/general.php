@@ -32,7 +32,7 @@
     'bulk_checkout'  		=> '批量借出',
     'cancel'  				=> '取消',
     'categories'			=> '目录',
-    'category'				=> '类别：',
+    'category'				=> '类别',
     'change' 		        => '归还/借出',
     'changeemail'  			=> '更改邮箱',
     'changepassword'  		=> '修改密码',
