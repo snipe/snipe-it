@@ -94,7 +94,6 @@
                   </div>
               </div><!-- /.box-header -->
           <div class="box-body">
-
               @if ($model->image)
                   <img src="{{ url('/') }}/uploads/models/{{ $model->image }}" class="img-responsive"></li>
               @endif
@@ -159,9 +158,15 @@
               </li>
               @endif
 
+              @if ($model->eos)
+              <li>{{ trans('general.eos') }}:
+                  {{ $model->eos }}
+              </li>
+              @endif
+
               @if ($model->fieldset)
               <li>{{ trans('admin/models/general.fieldset') }}:
-                <a href="{{ route('fieldsets.show', $model->fieldset->id) }}">{{ $model->fieldset->name }}</a>
+                  {{ $model->fieldset .' '. trans('general.months') }}
               </li>
               @endif
 
@@ -171,7 +176,6 @@
                       {{ $model->notes }}
                   </li>
               @endif
-
 
 
               @if  ($model->deleted_at!='')

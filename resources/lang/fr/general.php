@@ -80,6 +80,7 @@
     'depreciation'			=> 'Amortissement',
     'editprofile'  			=> 'Éditer votre profile',
     'eol'					=> 'Fin de vie',
+    'eos'                   => 'Fin de support',
     'email_domain'			=> 'Domaine de l\'e-mail',
     'email_format'			=> 'Format de l\'e-mail',
     'email_domain_help'		=> 'C\'est utilisé pour générer des adresses e-mail lors de l\'importation',

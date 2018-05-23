@@ -396,14 +396,22 @@
 
                             {{ $asset->present()->months_until_eol()->m }}
                             {{ trans('general.months') }}
-                            )
+                            &puncsp;)
                           @endif
+                          &puncsp;)
 
                         </td>
                       </tr>
                     @endif
 
-
+                    @if (($asset->model) && ($asset->model->eos))
+                      <tr>
+                        <td>{{ trans('general.eos') }}</td>
+                        <td>
+                          {{ \App\Helpers\Helper::getFormattedDateObject($asset->model->eos, 'date', false) }}
+                        </td>
+                      </tr>
+                    @endif
 
                     @if ($asset->expected_checkin!='')
                       <tr>
