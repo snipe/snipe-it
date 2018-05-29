@@ -1,5 +1,5 @@
 <tr>
-    <td class="header">
+    <td class="header"{!!  ($snipeSettings->header_color!='') ? ' style="background-color: '.e($snipeSettings->header_color).'"' : '' !!}>
         @if (($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
 
             @if ($snipeSettings->brand == '3')
