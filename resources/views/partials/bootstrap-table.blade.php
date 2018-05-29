@@ -155,7 +155,14 @@
 
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ status_meta[value.status_meta] + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + ' ' + text_help + ' </a> </nobr>';
             } else if ((value) && (value.name)) {
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a></span>';
+
+                // Add some overrides for any funny urls we have
+                var dest = destination;
+                if (destination=='fieldsets') {
+                    var dest = 'fields/fieldsets';
+                }
+
+                return '<nobr><a href="{{ url('/') }}/' + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
             }
         };
     }
@@ -166,10 +173,13 @@
 
             var actions = '<nobr>';
 
+            // Add some overrides for any funny urls we have
             var dest = destination;
+
             if (destination=='groups') {
                 var dest = 'admin/groups';
             }
+
             if (destination=='maintenances') {
                 var dest = 'hardware/maintenances';
             }
