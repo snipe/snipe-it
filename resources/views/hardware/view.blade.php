@@ -811,12 +811,13 @@
                       data-cookie-id-table="assetFileHistory">
                 <thead>
                   <tr>
-                    <th data-visible="true"></th>
-                    <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.notes') }}</th>
-                    <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.image') }}</th>
-                    <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.file_name') }}</th>
-                    <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.download') }}</th>
-                    <th class="col-md-1" data-searchable="true" data-visible="true">{{ trans('general.actions') }}</th>
+                    <th data-visible="true" data-field="icon"></th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes">{{ trans('general.notes') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename">{{ trans('general.file_name') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at">{{ trans('general.created_at') }}</th>
+                    <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -831,7 +832,9 @@
                         </td>
                         <td>
                           @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                              <img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
+                            </a>
                           @endif
                         </td>
                         <td>
@@ -842,6 +845,14 @@
                           <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default"><i class="fa fa-download"></i></a>
                           @endif
                         </td>
+
+                        <td>
+                          @if ($file->created_at)
+                            {{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
+                          @endif
+                        </td>
+
+
                         <td>
                           @can('update', \App\Models\Asset::class)
                             <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('delete_confirm', ['item' => $file->filename]) }}"><i class="fa fa-trash icon-white"></i></a>
