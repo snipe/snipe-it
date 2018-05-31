@@ -478,6 +478,11 @@ class SettingsController extends Controller
                 $setting->two_factor_enabled = null;
             } else {
                 $setting->two_factor_enabled = $request->input('two_factor_enabled');
+
+                # remote user login
+                $setting->login_remote_user_enabled = (int)$request->input('login_remote_user_enabled');
+                $setting->login_common_disabled= (int)$request->input('login_common_disabled');
+                $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
             }
 
         }
@@ -486,10 +491,6 @@ class SettingsController extends Controller
         $setting->pwd_secure_min = (int) $request->input('pwd_secure_min');
         $setting->pwd_secure_complexity = '';
 
-        # remote user login
-        $setting->login_remote_user_enabled = (int)$request->input('login_remote_user_enabled');
-        $setting->login_common_disabled= (int)$request->input('login_common_disabled');
-        $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
 
         if ($request->has('pwd_secure_complexity')) {
             $setting->pwd_secure_complexity =  implode('|', $request->input('pwd_secure_complexity'));
