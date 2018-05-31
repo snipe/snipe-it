@@ -61,7 +61,7 @@ class ExpectedCheckinNotification extends Notification
         return (new MailMessage)
             ->error()
             ->subject('Reminder: '.$this->params->present()->name().' checkin deadline approaching')
-            ->line('Hi, '.$this->params->assignedto->first_name)
+            ->line('Hi, '.$this->params->assignedto->first_name.' '.$this->params->assignedto->last_name)
             ->greeting('An asset checked out to you is due to be checked back in on '.$formatted_due.'.')
             ->line('Asset: '.$this->params->present()->name())
             ->line('Serial: '.$this->params->serial)

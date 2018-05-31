@@ -78,7 +78,7 @@ return [
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
             'prefix'    => env('DB_PREFIX', null),
             'strict'    => false,
-            'engine'    => null,
+            'engine'    => 'InnoDB',
             'unix_socket' => env('DB_SOCKET',''),
             'dump_command_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
             'dump_command_timeout' => 60 * 5, // 5 minute timeout

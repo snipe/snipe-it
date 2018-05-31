@@ -189,13 +189,7 @@ class Asset extends Depreciable
                 $this->location_id = $target->location->id;
             }
         }
-
-        if ($this->requireAcceptance()) {
-            if(get_class($target) != User::class) {
-                throw new CheckoutNotAllowed;
-            }
-            $this->accepted="pending";
-        }
+        
 
         if ($this->save()) {
             $this->logCheckout($note, $target);
