@@ -381,7 +381,41 @@ case $distro in
   fi
   ;;
   ubuntu)
-  if [[ "$version" =~ 16.04 ]]; then
+  if [ "$version" == "18.04" ]; then
+    # Install for Ubuntu 18.04
+    webdir=/var/www
+    ownergroup=www-data:www-data
+    tzone=$(cat /etc/timezone)
+    apachefile=/etc/apache2/sites-available/$name.conf
+
+    echo -n "* Updating installed packages."
+    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+    progress
+
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    install_packages
+
+    echo "* Configuring Apache."
+    create_virtualhost
+    log "phpenmod mcrypt"
+    log "phpenmod mbstring"
+    log "a2enmod rewrite"
+    log "a2ensite $name.conf"
+
+    set_hosts
+
+    echo "* Starting MariaDB."
+    log "systemctl start mariadb.service"
+
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
+
+    echo "* Restarting Apache httpd."
+    log "systemctl restart apache2"
+  elif [ "$version" == "16.04" ]; then
     # Install for Ubuntu 16.04
     webdir=/var/www
     ownergroup=www-data:www-data
@@ -421,7 +455,7 @@ case $distro in
 
     echo "* Restarting Apache httpd."
     log "service apache2 restart"
-  elif [[ "$version" =~ 14.04 ]]; then
+  elif [ "$version" == "14.04" ]; then
     # Install for Ubuntu 14.04
     webdir=/var/www
     ownergroup=www-data:www-data

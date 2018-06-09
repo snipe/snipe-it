@@ -5,6 +5,14 @@ SNIPEIT_SH_URL= "https://raw.githubusercontent.com/snipe/snipe-it/master/snipeit
 NETWORK_BRIDGE= "en0: Wi-Fi (AirPort)"
 
 Vagrant.configure("2") do |config|
+  config.vm.define "bionic" do |bionic|
+    bionic.vm.box = "ubuntu/bionic64"
+    bionic.vm.hostname = 'bionic'
+    bionic.vm.network "public_network", bridge: NETWORK_BRIDGE
+    bionic.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
+    bionic.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
+  end
+
   config.vm.define "xenial" do |xenial|
     xenial.vm.box = "ubuntu/xenial64"
     xenial.vm.hostname = 'xenial'
