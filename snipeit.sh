@@ -1,5 +1,5 @@
 #!/bin/bash
-#/ Usage: sniepit [-vh]
+#/ Usage: snipeit.sh [-vh]
 #/
 #/ Install Snipe-IT open source asset management.
 #/
@@ -11,10 +11,6 @@
 #           Snipe-It Install Script                  #
 #          Script created by Mike Tucker             #
 #            mtucker6784@gmail.com                   #
-# This script is just to help streamline the         #
-# install process for Debian and CentOS              #
-# based distributions. I assume you will be          #
-# installing as a subdomain on a fresh OS install.   #
 #                                                    #
 # Feel free to modify, but please give               #
 # credit where it's due. Thanks!                     #
@@ -44,7 +40,7 @@ done
 
 print_usage () {
   grep '^#/' <"$0" | cut -c 4-
-  exit ${1:-1}
+  exit 1
 }
 
 if [ -n "$show_help" ]; then
@@ -67,24 +63,23 @@ if [ "$(id -u)" != "0" ]; then
     fi
 fi
 
-#First things first, let's set some variables and find our distro.
 clear
 
-name="snipeit"
-hostname="$(hostname)"
-fqdn="$(hostname --fqdn)"
+readonly APP_USER="snipeitapp"
+readonly APP_NAME="snipeit"
+readonly APP_PATH="/var/www/$APP_NAME"
 
 progress () {
   spin[0]="-"
   spin[1]="\\"
   spin[2]="|"
   spin[3]="/"
-  
+
   echo -n " "
   while kill -0 "$pid" > /dev/null 2>&1; do
     for i in "${spin[@]}"; do
       echo -ne "\\b$i"
-      sleep .1
+      sleep .3
     done
   done
   echo ""
@@ -136,58 +131,103 @@ install_packages () {
 create_virtualhost () {
   {
     echo "<VirtualHost *:80>"
-    echo "  <Directory $webdir/$name/public>"
+    echo "  <Directory $APP_PATH/public>"
     echo "      Allow From All"
     echo "      AllowOverride All"
     echo "      Options +Indexes"
     echo "  </Directory>"
     echo ""
-    echo "  DocumentRoot $webdir/$name/public"
+    echo "  DocumentRoot $APP_PATH/public"
     echo "  ServerName $fqdn"
     echo "</VirtualHost>"
   } >> "$apachefile"
 }
 
+create_user () {
+  echo "* Creating Snipe-IT user."
+
+  if [ "$distro" == "ubuntu" ] || [ "$distro" == "debian" ] ; then
+    adduser --quiet --disabled-password --gecos '""' "$APP_USER"
+  else
+    adduser "$APP_USER"
+  fi
+
+  usermod -a -G "$apache_group" "$APP_USER"
+}
+
+run_as () {
+  if ! hash sudo 2>/dev/null; then
+      su -c "$@" $APP_USER
+  else
+      sudo -i -u $APP_USER "$@"
+  fi
+}
+
+install_composer () {
+  # https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
+  EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
+  run_as php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  ACTUAL_SIGNATURE="$(run_as php -r "echo hash_file('SHA384', 'composer-setup.php');")"
+
+  if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
+  then
+      >&2 echo 'ERROR: Invalid composer installer signature'
+      run_as rm composer-setup.php
+      exit 1
+  fi
+
+  run_as php composer-setup.php
+  run_as rm composer-setup.php
+
+  mv "$(eval echo ~$APP_USER)"/composer.phar /usr/local/bin/composer
+}
+
 install_snipeit () {
+  create_user
+
   echo "* Creating MariaDB Database/User."
   echo "* Please Input your MariaDB root password:"
   mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
   echo "* Cloning Snipe-IT from github to the web directory."
-  log "git clone https://github.com/snipe/snipe-it $webdir/$name"
+  log "git clone https://github.com/snipe/snipe-it $APP_PATH"
 
   echo "* Configuring .env file."
-  cp "$webdir/$name/.env.example" "$webdir/$name/.env"
+  cp "$APP_PATH/.env.example" "$APP_PATH/.env"
 
   #TODO escape SED delimiter in variables
-  sed -i '1 i\#Created By Snipe-it Installer' "$webdir/$name/.env"
-  sed -i "s|^\\(APP_TIMEZONE=\\).*|\\1$tzone|" "$webdir/$name/.env"
-  sed -i "s|^\\(DB_HOST=\\).*|\\1localhost|" "$webdir/$name/.env"
-  sed -i "s|^\\(DB_DATABASE=\\).*|\\1snipeit|" "$webdir/$name/.env"
-  sed -i "s|^\\(DB_USERNAME=\\).*|\\1snipeit|" "$webdir/$name/.env"
-  sed -i "s|^\\(DB_PASSWORD=\\).*|\\1$mysqluserpw|" "$webdir/$name/.env"
-  sed -i "s|^\\(APP_URL=\\).*|\\1http://$fqdn|" "$webdir/$name/.env"
+  sed -i '1 i\#Created By Snipe-it Installer' "$APP_PATH/.env"
+  sed -i "s|^\\(APP_TIMEZONE=\\).*|\\1$tzone|" "$APP_PATH/.env"
+  sed -i "s|^\\(DB_HOST=\\).*|\\1localhost|" "$APP_PATH/.env"
+  sed -i "s|^\\(DB_DATABASE=\\).*|\\1snipeit|" "$APP_PATH/.env"
+  sed -i "s|^\\(DB_USERNAME=\\).*|\\1snipeit|" "$APP_PATH/.env"
+  sed -i "s|^\\(DB_PASSWORD=\\).*|\\1$mysqluserpw|" "$APP_PATH/.env"
+  sed -i "s|^\\(APP_URL=\\).*|\\1http://$fqdn|" "$APP_PATH/.env"
 
-  echo "* Installing and running composer."
-  cd "$webdir/$name/"
-  curl -sS https://getcomposer.org/installer | php
-  php composer.phar install --no-dev --prefer-source
+  echo "* Installing composer."
+  install_composer
 
   echo "* Setting permissions."
-  for chmod_dir in "$webdir/$name/storage" "$webdir/$name/storage/private_uploads" "$webdir/$name/public/uploads"; do
-    chmod -R 755 "$chmod_dir"
+  for chmod_dir in "$APP_PATH/storage" "$APP_PATH/public/uploads"; do
+    chmod -R 775 "$chmod_dir"
   done
 
-  chown -R "$ownergroup" "$webdir/$name"
+  chown -R "$APP_USER":"$apache_group" "$APP_PATH"
+
+  echo "* Running composer."
+  # We specify the path to composer because CentOS lacks /usr/local/bin in $PATH when using sudo
+  run_as /usr/local/bin/composer install --no-dev --prefer-source --working-dir "$APP_PATH"
+
+  sudo chgrp -R "$apache_group" "$APP_PATH/vendor"
 
   echo "* Generating the application key."
-  log "php artisan key:generate --force"
+  log "php $APP_PATH/artisan key:generate --force"
 
   echo "* Artisan Migrate."
-  log "php artisan migrate --force"
+  log "php $APP_PATH/artisan migrate --force"
 
   echo "* Creating scheduler cron."
-  (crontab -l ; echo "* * * * * /usr/bin/php $webdir/$name/artisan schedule:run >> /dev/null 2>&1") | crontab -
+  (crontab -l ; echo "* * * * * /usr/bin/php $APP_PATH/artisan schedule:run >> /dev/null 2>&1") | crontab -
 }
 
 set_firewall () {
@@ -205,13 +245,13 @@ set_selinux () {
     #Required for ldap integration
     setsebool -P httpd_can_connect_ldap on
     #Sets SELinux context type so that scripts running in the web server process are allowed read/write access
-    chcon -R -h -t httpd_sys_script_rw_t "$webdir/$name/"
+    chcon -R -h -t httpd_sys_script_rw_t "$APP_PATH"
   fi
 }
 
 set_hosts () {
   echo "* Setting up hosts file."
-  echo >> /etc/hosts "127.0.0.1 $hostname $fqdn"
+  echo >> /etc/hosts "127.0.0.1 $(hostname) $fqdn"
 }
 
 if [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
@@ -219,27 +259,29 @@ if [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
   version="$(lsb_release -rs)"
   codename="$(lsb_release -cs)"
 elif [ -f /etc/os-release ]; then
-  distro="$(. /etc/os-release && echo $ID)"
-  version="$(. /etc/os-release && echo $VERSION_ID)"
+  # shellcheck disable=SC1091
+  distro="$(source /etc/os-release && echo "$ID")"
+  # shellcheck disable=SC1091
+  version="$(source /etc/os-release && echo "$VERSION_ID")"
   #Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
   #If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
   #so lets assume that it's version 6 (Plus, who would be doing a new install of anything on centos5 at this point..)
   #/etc/os-release properly detects fedora
 elif [ -f /etc/centos-release ]; then
-  distro="Centos"
+  distro="centos"
   version="6"
 else
   distro="unsupported"
 fi
 
-echo "
+echo '
        _____       _                  __________
       / ___/____  (_)___  ___        /  _/_  __/
       \__ \/ __ \/ / __ \/ _ \______ / /  / /
      ___/ / / / / / /_/ /  __/_____// /  / /
     /____/_/ /_/_/ .___/\___/     /___/ /_/
                 /_/
-"
+'
 
 echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Fedora, Debian and Ubuntu!"
@@ -249,30 +291,38 @@ case $distro in
   *ubuntu*)
     echo "  The installer has detected $distro version $version codename $codename."
     distro=ubuntu
+    apache_group=www-data
+    apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
   *debian*)
     echo "  The installer has detected $distro version $version codename $codename."
     distro=debian
+    apache_group=www-data
+    apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
   *centos*|*redhat*|*ol*|*rhel*)
     echo "  The installer has detected $distro version $version."
     distro=centos
+    apache_group=apache
+    apachefile=/etc/httpd/conf.d/$APP_NAME.conf
     ;;
   *fedora*)
     echo "  The installer has detected $distro version $version."
     distro=fedora
+    apache_group=apache
+    apachefile=/etc/httpd/conf.d/$APP_NAME.conf
     ;;
   *)
     echo "  The installer was unable to determine your OS. Exiting for safety."
-    exit
+    exit 1
     ;;
 esac
 shopt -u nocasematch
 
-echo -n "  Q. What is the FQDN of your server? ($fqdn): "
+echo -n "  Q. What is the FQDN of your server? ($(hostname --fqdn)): "
 read -r fqdn
 if [ -z "$fqdn" ]; then
-  fqdn="$(hostname --fqdn)"
+  readonly fqdn="$(hostname --fqdn)"
 fi
 echo "     Setting to $fqdn"
 echo ""
@@ -299,16 +349,11 @@ case $setpw in
 esac
 done
 
-#TODO: Lets not install snipeit application under root
-
 case $distro in
   debian)
   if [[ "$version" =~ ^9 ]]; then
     # Install for Debian 9.x
-    webdir=/var/www
-    ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
-    apachefile=/etc/apache2/sites-available/$name.conf
 
     echo "* Adding PHP repository."
     log "apt-get install -y apt-transport-https"
@@ -316,8 +361,7 @@ case $distro in
     echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
     echo -n "* Updating installed packages."
-    log "apt-get update"
-    log "apt-get -y upgrade" & pid=$!
+    log "apt-get update && apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
@@ -327,7 +371,7 @@ case $distro in
     echo "* Configuring Apache."
     create_virtualhost
     log "a2enmod rewrite"
-    log "a2ensite $name.conf"
+    log "a2ensite $APP_NAME.conf"
 
     set_hosts
 
@@ -340,10 +384,7 @@ case $distro in
     log "service apache2 restart"
   elif [[ "$version" =~ ^8 ]]; then
     # Install for Debian 8.x
-    webdir=/var/www
-    ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
-    apachefile=/etc/apache2/sites-available/$name.conf
 
     echo "* Adding MariaDB and ppa:ondrej/php repositories."
     log "apt-get install -y software-properties-common apt-transport-https"
@@ -353,8 +394,7 @@ case $distro in
     echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
     echo -n "* Updating installed packages."
-    log "apt-get update"
-    log "apt-get -y upgrade" & pid=$!
+    log "apt-get update && apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
@@ -364,7 +404,7 @@ case $distro in
     echo "* Configuring Apache."
     create_virtualhost
     log "a2enmod rewrite"
-    log "a2ensite $name.conf"
+    log "a2ensite $APP_NAME.conf"
 
     set_hosts
 
@@ -383,10 +423,7 @@ case $distro in
   ubuntu)
   if [ "$version" == "18.04" ]; then
     # Install for Ubuntu 18.04
-    webdir=/var/www
-    ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
-    apachefile=/etc/apache2/sites-available/$name.conf
 
     echo -n "* Updating installed packages."
     log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
@@ -401,7 +438,7 @@ case $distro in
     log "phpenmod mcrypt"
     log "phpenmod mbstring"
     log "a2enmod rewrite"
-    log "a2ensite $name.conf"
+    log "a2ensite $APP_NAME.conf"
 
     set_hosts
 
@@ -417,10 +454,7 @@ case $distro in
     log "systemctl restart apache2"
   elif [ "$version" == "16.04" ]; then
     # Install for Ubuntu 16.04
-    webdir=/var/www
-    ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
-    apachefile=/etc/apache2/sites-available/$name.conf
 
     echo "* Adding MariaDB and ppa:ondrej/php repositories."
     log "apt-get install -y software-properties-common"
@@ -441,7 +475,7 @@ case $distro in
     log "phpenmod mcrypt"
     log "phpenmod mbstring"
     log "a2enmod rewrite"
-    log "a2ensite $name.conf"
+    log "a2ensite $APP_NAME.conf"
 
     set_hosts
 
@@ -457,10 +491,7 @@ case $distro in
     log "service apache2 restart"
   elif [ "$version" == "14.04" ]; then
     # Install for Ubuntu 14.04
-    webdir=/var/www
-    ownergroup=www-data:www-data
     tzone=$(cat /etc/timezone)
-    apachefile=/etc/apache2/sites-available/$name.conf
 
     echo "* Adding MariaDB and ppa:ondrej/php repositories."
     log "apt-get install -y software-properties-common"
@@ -469,8 +500,7 @@ case $distro in
     log "add-apt-repository ppa:ondrej/php -y"
 
     echo -n "* Updating installed packages."
-    log "apt-get update"
-    log "DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
@@ -482,7 +512,7 @@ case $distro in
     log "phpenmod mcrypt"
     log "phpenmod mbstring"
     log "a2enmod rewrite"
-    log "a2ensite $name.conf"
+    log "a2ensite $APP_NAME.conf"
 
     set_hosts
 
@@ -504,10 +534,7 @@ case $distro in
   centos)
   if [[ "$version" =~ ^6 ]]; then
     # Install for CentOS/Redhat 6.x
-    webdir=/var/www/html
-    ownergroup=apache:apache
     tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
-    apachefile=/etc/httpd/conf.d/$name.conf
 
     echo "* Adding IUS, epel-release and MariaDB repositories."
     mariadbRepo=/etc/yum.repos.d/MariaDB.repo
@@ -555,10 +582,7 @@ case $distro in
     log "/sbin/service httpd start"
   elif [[ "$version" =~ ^7 ]]; then
     # Install for CentOS/Redhat 7
-    webdir=/var/www/html
-    ownergroup=apache:apache
     tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
-    apachefile=/etc/httpd/conf.d/$name.conf
 
     echo "* Adding IUS, epel-release and MariaDB repositories."
     log "yum -y install wget epel-release"
@@ -598,10 +622,7 @@ case $distro in
   fedora)
   if [ "$version" -ge 26 ]; then
     # Install for Fedora 26+
-    webdir=/var/www/html
-    ownergroup=apache:apache
     tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
-    apachefile=/etc/httpd/conf.d/$name.conf
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
     PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-cli php-common php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml"
@@ -643,40 +664,40 @@ case $setupmail in
   [yY] | [yY][Ee][Ss] )
     echo -n "  Outgoing mailserver address:"
     read -r mailhost
-    sed -i "s|^\\(MAIL_HOST=\\).*|\\1$mailhost|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_HOST=\\).*|\\1$mailhost|" "$APP_PATH/.env"
 
     echo -n "  Server port number:"
     read -r mailport
-    sed -i "s|^\\(MAIL_PORT=\\).*|\\1$mailport|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_PORT=\\).*|\\1$mailport|" "$APP_PATH/.env"
 
     echo -n "  Username:"
     read -r mailusername
-    sed -i "s|^\\(MAIL_USERNAME=\\).*|\\1$mailusername|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_USERNAME=\\).*|\\1$mailusername|" "$APP_PATH/.env"
 
     echo -n "  Password:"
     read -rs mailpassword
-    sed -i "s|^\\(MAIL_PASSWORD=\\).*|\\1$mailpassword|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_PASSWORD=\\).*|\\1$mailpassword|" "$APP_PATH/.env"
     echo ""
 
     echo -n "  Encryption(null/TLS/SSL):"
     read -r mailencryption
-    sed -i "s|^\\(MAIL_ENCRYPTION=\\).*|\\1$mailencryption|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_ENCRYPTION=\\).*|\\1$mailencryption|" "$APP_PATH/.env"
 
     echo -n "  From address:"
     read -r mailfromaddr
-    sed -i "s|^\\(MAIL_FROM_ADDR=\\).*|\\1$mailfromaddr|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_FROM_ADDR=\\).*|\\1$mailfromaddr|" "$APP_PATH/.env"
 
     echo -n "  From name:"
     read -r mailfromname
-    sed -i "s|^\\(MAIL_FROM_NAME=\\).*|\\1$mailfromname|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_FROM_NAME=\\).*|\\1$mailfromname|" "$APP_PATH/.env"
 
     echo -n "  Reply to address:"
     read -r mailreplytoaddr
-    sed -i "s|^\\(MAIL_REPLYTO_ADDR=\\).*|\\1$mailreplytoaddr|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_REPLYTO_ADDR=\\).*|\\1$mailreplytoaddr|" "$APP_PATH/.env"
 
     echo -n "  Reply to name:"
     read -r mailreplytoname
-    sed -i "s|^\\(MAIL_REPLYTO_NAME=\\).*|\\1$mailreplytoname|" "$webdir/$name/.env"
+    sed -i "s|^\\(MAIL_REPLYTO_NAME=\\).*|\\1$mailreplytoname|" "$APP_PATH/.env"
     setupmail="yes"
     ;;
   [nN] | [n|N][O|o] )
