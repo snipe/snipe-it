@@ -205,7 +205,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @endif
 
       <div class="box-body">
-        <!-- checked out licenses table -->
+        <!-- checked out Accessories table -->
 
         <div class="table-responsive">
           <table
