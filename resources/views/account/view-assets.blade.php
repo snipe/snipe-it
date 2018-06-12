@@ -126,7 +126,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 <td>{{ $license->name }}</td>
                 <td>
                   @can('viewKeys', $license)
-                    {{ mb_strimwidth($license->serial, 0, 50, "...") }}
+                    {{ $license->serial }}
                   @else
                     ------------
                   @endcan
