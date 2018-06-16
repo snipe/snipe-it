@@ -21,7 +21,7 @@ trait Loggable
 {
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
@@ -32,7 +32,7 @@ trait Loggable
     }
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
@@ -106,7 +106,7 @@ trait Loggable
         return $log;
     }
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
@@ -204,7 +204,7 @@ trait Loggable
 
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.5]
      * @return \App\Models\Actionlog
      */
@@ -231,7 +231,7 @@ trait Loggable
     }
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
