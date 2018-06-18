@@ -155,7 +155,7 @@ create_user () {
   usermod -a -G "$apache_group" "$APP_USER"
 }
 
-run_as () {
+run_as_app_user () {
   if ! hash sudo 2>/dev/null; then
       su -c "$@" $APP_USER
   else
@@ -166,18 +166,18 @@ run_as () {
 install_composer () {
   # https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
   EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
-  run_as php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  ACTUAL_SIGNATURE="$(run_as php -r "echo hash_file('SHA384', 'composer-setup.php');")"
+  run_as_app_user php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  ACTUAL_SIGNATURE="$(run_as_app_user php -r "echo hash_file('SHA384', 'composer-setup.php');")"
 
   if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
   then
       >&2 echo 'ERROR: Invalid composer installer signature'
-      run_as rm composer-setup.php
+      run_as_app_user rm composer-setup.php
       exit 1
   fi
 
-  run_as php composer-setup.php
-  run_as rm composer-setup.php
+  run_as_app_user php composer-setup.php
+  run_as_app_user rm composer-setup.php
 
   mv "$(eval echo ~$APP_USER)"/composer.phar /usr/local/bin/composer
 }
@@ -216,7 +216,7 @@ install_snipeit () {
 
   echo "* Running composer."
   # We specify the path to composer because CentOS lacks /usr/local/bin in $PATH when using sudo
-  run_as /usr/local/bin/composer install --no-dev --prefer-source --working-dir "$APP_PATH"
+  run_as_app_user /usr/local/bin/composer install --no-dev --prefer-source --working-dir "$APP_PATH"
 
   sudo chgrp -R "$apache_group" "$APP_PATH/vendor"
 
