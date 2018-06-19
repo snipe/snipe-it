@@ -674,6 +674,18 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
 
+    /*--- User API ---*/
+    Route::group(['prefix' => 'user'], function() {
+        Route::get('/',
+            [
+                'as'=>'api.user.index',
+                'uses'=>'UserController@getUserInfo'
+            ]
+        );
+    }); // User group
+
+
+
     /*--- Users API ---*/
 
 
