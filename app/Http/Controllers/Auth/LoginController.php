@@ -275,6 +275,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('2fa_authed');
+
         Auth::logout();
 
         $settings = Setting::getSettings();
