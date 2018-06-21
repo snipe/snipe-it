@@ -245,7 +245,8 @@ set_selinux () {
     #Required for ldap integration
     setsebool -P httpd_can_connect_ldap on
     #Sets SELinux context type so that scripts running in the web server process are allowed read/write access
-    chcon -R -h -t httpd_sys_script_rw_t "$APP_PATH"
+    chcon -R -h -t httpd_sys_rw_content_t "$APP_PATH/storage/"
+    chcon -R -h -t httpd_sys_rw_content_t "$APP_PATH/public/"
   fi
 }
 
