@@ -413,7 +413,7 @@ class Helper
     {
         $keys = array_keys(CustomField::$PredefinedFormats);
         $stuff = array_combine($keys, $keys);
-        return $stuff+["" => trans('admin/custom_fields/general.custom_format')];
+        return $stuff;
     }
 
     /**

@@ -4,11 +4,16 @@
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>
       <div class="col-md-7 col-sm-12{{ ($field->pivot->required=='1') ? ' required' : '' }}">
 
+
           @if ($field->element!='text')
               <!-- Listbox -->
               @if ($field->element=='listbox')
                   {{ Form::select($field->db_column_name(), $field->formatFieldValuesAsArray(),
                   Input::old($field->db_column_name(),(isset($item) ? $item->{$field->db_column_name()} : $field->defaultValue($model->id))), ['class'=>'format select2 form-control']) }}
+
+              @elseif ($field->element=='textarea')
+                      <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}" name="{{ $field->db_column_name() }}">{{ Input::old($field->db_column_name(),(isset($item) ? $item->{$field->db_column_name()} : $field->defaultValue($model->id))) }}</textarea>
+
 
               @elseif ($field->element=='checkbox')
                     <!-- Checkboxes -->
