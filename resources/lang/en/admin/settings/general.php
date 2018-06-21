@@ -121,7 +121,7 @@ return array(
     'slack_test_help'           => 'Test whether your Slack integration is configured correctly. YOU MUST SAVE YOUR UPDATED SLACK SETTINGS FIRST.',
     'snipe_version'  			=> 'Snipe-IT version',
     'support_footer'            => 'Support Footer Links ',
-    'support_footer_help'       => 'Specify who sees the links to the Snipe-IT Support info and Users Manual',
+    'support_footer_help'       => 'Specify who sees the links to the Snipe-IT Support info and Users Manual.',
     'version_footer'            => 'Version in Footer ',
     'version_footer_help'       => 'Specify who sees the Snipe-IT version and build number.',
     'system'                    => 'System Information',
