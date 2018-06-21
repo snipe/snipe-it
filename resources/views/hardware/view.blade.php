@@ -605,6 +605,8 @@
                     <tbody>
                       <?php $totalCost = 0; ?>
                       @foreach ($asset->components as $component)
+
+
                         @if (is_null($component->deleted_at))
                           <tr>
                             <td>
@@ -612,6 +614,7 @@
                             </td>
                             <td>{{ $component->pivot->assigned_qty }}</td>
                             <td>{{ $component->purchase_cost }}</td>
+                              <?php $totalCost = $totalCost + $component->purchase_cost ;?>
 
                           </tr>
                         @endif
@@ -620,7 +623,9 @@
 
                     <tfoot>
                       <tr>
-                        <td colspan="7" class="text-right">{{ $use_currency.$totalCost }}</td>
+                        <td colspan="2">
+                          </td>
+                          <td>{{ $totalCost }}</td>
                       </tr>
                     </tfoot>
                   </table>

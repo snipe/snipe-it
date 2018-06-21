@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: parallelgrapefruit
- * Date: 12/23/16
- * Time: 12:15 PM
- */
 
 namespace App\Presenters;
 
