@@ -396,6 +396,7 @@ class SettingsController extends Controller
         $setting->brand = $request->input('brand', '1');
         $setting->header_color = $request->input('header_color');
         $setting->support_footer = $request->input('support_footer');
+        $setting->version_footer = $request->input('version_footer');
         $setting->footer_text = $request->input('footer_text');
         $setting->skin = $request->input('skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
