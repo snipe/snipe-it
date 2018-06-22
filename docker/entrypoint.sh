@@ -23,6 +23,12 @@ done
 
 chown -R docker:root /var/lib/snipeit/data/*
 chown -R docker:root /var/lib/snipeit/dumps
+chown -R docker:root /var/lib/snipeit/keys
+
+# If the Oauth DB files are not present copy the vendor files over to the db migrations
+if [ ! -f "/var/www/html/database/migrations/*create_oauth*" ]; then
+  cp -ax /var/www/html/vendor/laravel/passport/database/migrations/* /var/www/html/database/migrations/
+fi
 
 . /etc/apache2/envvars 
 exec apache2 -DNO_DETACH < /dev/null
