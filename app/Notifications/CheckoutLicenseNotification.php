@@ -33,6 +33,7 @@ class CheckoutLicenseNotification extends Notification
         $this->note = '';
         $this->target_type = $params['target_type'];
         $this->settings = $params['settings'];
+        $this->target_type = $params['target_type'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -56,7 +57,8 @@ class CheckoutLicenseNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-        if ($this->target_type == \App\Models\User::class) {
+        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        {
             $notifyBy[] = 'mail';
         }
 
@@ -97,12 +99,18 @@ class CheckoutLicenseNotification extends Notification
     public function toMail($notifiable)
     {
 
+        $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
+        $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
+
         return (new MailMessage)->markdown('notifications.markdown.checkout-license',
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
                 'target'        => $this->target,
+                'eula'          => $eula,
+                'req_accept'    => $req_accept,
+                'accept_url'    =>  url('/').'/account/accept-asset/'.$this->log_id,
             ])
             ->subject(trans('mail.Confirm_license_delivery'));
 

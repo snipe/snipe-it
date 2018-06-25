@@ -262,13 +262,13 @@ class Ldap extends Model
             $search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
 
             if (!$search_results) {
-                return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
+                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
             }
 
             // Get results from page
             $results = ldap_get_entries($ldapconn, $search_results);
             if (!$results) {
-                return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
+                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
             }
 
             // Add results to result set

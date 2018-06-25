@@ -27,10 +27,14 @@
         <form class="form-horizontal" method="post" action="" autocomplete="off">
           {{ csrf_field() }}
 
-          <!-- User -->
-          @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_to'])
+          <!-- Checkout selector -->
+          @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
-              <!-- Checkout/Checkin Date -->
+          @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
+          @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
+          @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
+
+          <!-- Checkout/Checkin Date -->
               <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                   {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
                   <div class="col-md-8">
@@ -64,7 +68,12 @@
             </div>
           </div>
 
-              @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.assets'), 'fieldname' => 'selected_assets[]', 'multiple' => true])
+          @include ('partials.forms.edit.asset-select', [
+            'translated_name' => trans('general.assets'),
+            'fieldname' => 'selected_assets[]',
+            'multiple' => true,
+            'asset_status_type' => 'RTD',
+          ])
 
 
       </div> <!--./box-body-->

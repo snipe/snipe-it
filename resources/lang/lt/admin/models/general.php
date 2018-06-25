@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Peržiūrėti modelius',
     'fieldset'                  => 'Laukų grupė',
     'no_custom_field'           => 'Nėra pritaikytų laukų',
-
+    'add_default_values'        => 'Add default values',
 );

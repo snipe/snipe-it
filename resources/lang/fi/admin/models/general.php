@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Näytä mallit',
     'fieldset'                  => 'fieldset',
     'no_custom_field'           => 'Ei muokattuja kenttiä',
-
+    'add_default_values'        => 'Add default values',
 );

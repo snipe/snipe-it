@@ -155,7 +155,14 @@
 
                 return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ status_meta[value.status_meta] + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + ' ' + text_help + ' </a> </nobr>';
             } else if ((value) && (value.name)) {
-                return '<nobr><a href="{{ url('/') }}/' + destination + '/' + value.id + '"> ' + value.name + '</a></span>';
+
+                // Add some overrides for any funny urls we have
+                var dest = destination;
+                if (destination=='fieldsets') {
+                    var dest = 'fields/fieldsets';
+                }
+
+                return '<nobr><a href="{{ url('/') }}/' + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
             }
         };
     }
@@ -166,10 +173,13 @@
 
             var actions = '<nobr>';
 
+            // Add some overrides for any funny urls we have
             var dest = destination;
+
             if (destination=='groups') {
                 var dest = 'admin/groups';
             }
+
             if (destination=='maintenances') {
                 var dest = 'hardware/maintenances';
             }
@@ -297,6 +307,17 @@
 
         }
 
+
+    }
+
+
+    // This is only used by the requestable assets section
+    function assetRequestActionsFormatter (row, value) {
+        if (value.available_actions.cancel == true)  {
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-danger btn-sm" data-tooltip="true" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
+        } else if (value.available_actions.request == true)  {
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-primary btn-sm" data-tooltip="true" title="Request this item">{{ trans('button.request') }}</button></form>';
+        }
 
     }
 
@@ -441,7 +462,7 @@
 
     }
 
-    function trueFalseFormatter(value, row) {
+    function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
             return '<i class="fa fa-check text-success"></i>';
         } else {
@@ -449,25 +470,25 @@
         }
     }
 
-    function dateDisplayFormatter(value, row) {
+    function dateDisplayFormatter(value) {
         if (value) {
             return  value.formatted;
         }
     }
 
-    function iconFormatter(value, row) {
+    function iconFormatter(value) {
         if (value) {
-            return '<i class="' + value + '"></i>';
+            return '<i class="' + value + '  icon-med"></i>';
         }
     }
 
-    function emailFormatter(value, row) {
+    function emailFormatter(value) {
         if (value) {
             return '<a href="mailto:' + value + '"> ' + value + '</a>';
         }
     }
 
-    function linkFormatter(value, row) {
+    function linkFormatter(value) {
         if (value) {
             return '<a href="' + value + '"> ' + value + '</a>';
         }
@@ -507,9 +528,25 @@
     }
 
 
-   function imageFormatter(value, row) {
+   function imageFormatter(value) {
         if (value) {
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
+        }
+    }
+
+    function fileUploadFormatter(value) {
+        if ((value) && (value.url) && (value.inlineable)) {
+            return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
+        } else if ((value) && (value.url)) {
+            return '<a href="' + value.url + '" class="btn btn-default"><i class="fa fa-download"></i></a>';
+        }
+    }
+
+
+    function fileUploadNameFormatter(value) {
+        console.dir(value);
+        if ((value) && (value.filename) && (value.url)) {
+            return '<a href="' + value.url + '">' + value.filename + '</a>';
         }
     }
 

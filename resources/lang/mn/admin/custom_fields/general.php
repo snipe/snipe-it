@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Шинэ талбарт',
     'create_field'            => 'Шинэ Гаалийн талбар',
     'value_encrypted'      	        => 'Энэ талбарын үнэ цэнийг мэдээллийн санд шифрлэдэг. Зөвхөн админ хэрэглэгч нар нь буцаагдсан утгыг харах боломжтой байна',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

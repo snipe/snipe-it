@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'O fabricante não foi atualizado, tente novamente',
+        'success' => 'Fabricante atualizado com sucesso.'
     ),
 
     'delete' => array(

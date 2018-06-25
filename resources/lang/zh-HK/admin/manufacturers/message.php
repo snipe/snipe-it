@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => '製造商恢復失敗，請重試。',
+        'success' => '製造商恢復成功。'
     ),
 
     'delete' => array(

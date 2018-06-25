@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Odeslat',
     'upload'                    => 'Nahrát',
 	'select_file'				=> 'Vybrat soubor...',
+    'select_files'				=> 'Select Files...',
 );

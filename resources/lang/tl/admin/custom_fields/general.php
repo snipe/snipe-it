@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'New Custom Field',
     'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

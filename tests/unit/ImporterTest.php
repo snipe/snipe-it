@@ -488,8 +488,8 @@ EOT;
     {
         $this->signIn();
         $csv = <<<'EOT'
-Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
-Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,category,notes
+Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Graphics Software,Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $this->import(new LicenseImporter($csv));
         // dd($this->tester->grabRecord('licenses'));
@@ -522,22 +522,26 @@ EOT;
             'name' => 'Haag, Schmidt and Farrell'
         ]);
 
+        $this->tester->seeRecord('categories', [
+            'name' => 'Graphics Software'
+        ]);
+
         $this->tester->seeNumRecords(80, 'license_seats');
     }
 
     public function testDefaultLicenseUpdate()
     {
         $csv = <<<'EOT'
-Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
-Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,category,notes
+Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Graphics Software,Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $this->import(new LicenseImporter($csv));
         $this->tester->seeNumRecords(1, 'licenses');
 
 
         $updatedCSV = <<<'EOT'
-Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,notes
-Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",05/15/2019,$1865.34,63 ar,18334,A Legend,Legendary@gov.uk,04/27/2016,yes,true,64,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,category,notes
+Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",05/15/2019,$1865.34,63 ar,18334,A Legend,Legendary@gov.uk,04/27/2016,yes,true,64,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Graphics Software,Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
         $importer = new LicenseImporter($updatedCSV);
         $importer->setUserId(1)
@@ -546,7 +550,8 @@ EOT;
         // At this point we should still only have one record.
         $this->tester->seeNumRecords(1, 'licenses');
         // But instead these.
-        // dd($this->tester->grabRecord('licenses'));
+
+        \Log::debug($this->tester->grabRecord('licenses'));
         $this->tester->seeRecord('licenses', [
             'name' => 'Argentum Malachite Athletes Foot Relief',
             'purchase_date' => '2019-05-15 00:00:01',
@@ -569,8 +574,8 @@ EOT;
     public function testCustomLicenseImport()
     {
         $csv = <<<'EOT'
-Name,Email,Username,Object name,serial num,manuf,pur date,pur cost,purc order,order num,Licensed To,Licensed Email,expire date,maint,reass,seat,comp,supplier,note
-Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Name,Email,Username,Object name,serial num,manuf,pur date,pur cost,purc order,order num,Licensed To,Licensed Email,expire date,maint,reass,seat,comp,supplier,category,note
+Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Custom Graphics Software,Sed ante. Vivamus tortor. Duis mattis egestas metus.
 EOT;
 
         $customFieldMap = [
@@ -591,9 +596,9 @@ EOT;
             'requestable' => 'Request',
             'seats' => 'seat',
             'serial' => 'serial num',
+            'category' => 'category',
         ];
         $this->import(new LicenseImporter($csv), $customFieldMap);
-        // dd($this->tester->grabRecord('licenses'));
         $this->tester->seeRecord('licenses', [
             'name' => 'Argentum Malachite Athletes Foot Relief',
             'purchase_date' => '2012-07-13 00:00:01',

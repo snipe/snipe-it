@@ -330,7 +330,14 @@ class Helper
      */
     public static function categoryTypeList()
     {
-        $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
+        $category_types = array(
+            '' => '',
+            'accessory' => 'Accessory',
+            'asset' => 'Asset',
+            'consumable' => 'Consumable',
+            'component' => 'Component',
+            'license' => 'License'
+        );
         return $category_types;
     }
 
@@ -738,6 +745,7 @@ class Helper
         static $max_size = -1;
 
         if ($max_size < 0) {
+
             // Start with post_max_size.
             $post_max_size = Helper::parse_size(ini_get('post_max_size'));
             if ($post_max_size > 0) {
@@ -751,6 +759,7 @@ class Helper
                 $max_size = $upload_max;
             }
         }
+
         return $max_size;
     }
 
@@ -784,6 +793,66 @@ class Helper
         else {
             return round($size);
         }
+    }
+
+
+    public static function filetype_icon($filename) {
+
+        $extension = substr(strrchr($filename,'.'),1);
+
+        if ($extension) {
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                case 'png':
+                    return "fa fa-file-image-o";
+                    break;
+                case 'doc':
+                case 'docx':
+                    return "fa fa-file-word-o";
+                    break;
+                case 'xls':
+                case 'xlsx':
+                    return "fa fa-file-excel-o";
+                    break;
+                case 'zip':
+                case 'rar':
+                    return "fa fa-file-archive-o";
+                    break;
+                case 'pdf':
+                    return "fa fa-file-pdf-o";
+                    break;
+                case 'txt':
+                    return "fa fa-file-text-o";
+                    break;
+                case 'lic':
+                    return "fa fa-floppy-o";
+                    break;
+                default:
+                    return "fa fa-file-o";
+            }
+        }
+        return "fa fa-file-o";
+    }
+
+    public static function show_file_inline($filename) {
+
+        $extension = substr(strrchr($filename,'.'),1);
+
+        if ($extension) {
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                case 'png':
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        return false;
     }
 
 

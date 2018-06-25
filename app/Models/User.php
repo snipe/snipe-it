@@ -39,6 +39,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'first_name',
         'jobtitle',
         'last_name',
+        'ldap_import',
         'locale',
         'location_id',
         'manager_id',
@@ -292,7 +293,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function checkoutRequests()
     {
-        return $this->belongsToMany(Asset::class, 'checkout_requests');
+        return $this->belongsToMany(Asset::class, 'checkout_requests', 'user_id', 'requestable_id')->whereNull('canceled_at');
     }
 
     public function throttle()

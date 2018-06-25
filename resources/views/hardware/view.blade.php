@@ -8,6 +8,7 @@
 
 {{-- Right header --}}
 @section('header_right')
+
 @can('manage', \App\Models\Asset::class)
 <div class="dropdown pull-right">
   <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
@@ -465,6 +466,28 @@
                         </td>
                       </tr>
                     @endif
+
+                    <tr>
+                      <td>{{ trans('general.checkouts_count') }}</td>
+                      <td>
+                       {{ ($asset->checkouts) ? (int) $asset->checkouts->count() : '0' }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>{{ trans('general.checkins_count') }}</td>
+                      <td>
+                        {{ ($asset->checkins) ? (int) $asset->checkins->count() : '0' }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>{{ trans('general.user_requests_count') }}</td>
+                      <td>
+                        {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
+                      </td>
+                    </tr>
+
                   </tbody>
                 </table>
               </div> <!-- /table-responsive -->
@@ -528,7 +551,7 @@
           <div class="row">
             <div class="col-md-12">
               <!-- Licenses assets table -->
-              @if (count($asset->licenses) > 0)
+              @if ($asset->licenses->count() > 0)
                 <table class="table">
                   <thead>
                     <tr>
@@ -572,7 +595,7 @@
           <!-- checked out assets table -->
           <div class="row">
               <div class="col-md-12">
-                @if(count($asset->components) > 0)
+                @if($asset->components->count() > 0)
                   <table class="table table-striped">
                     <thead>
                       <th>{{ trans('general.name') }}</th>
@@ -582,6 +605,8 @@
                     <tbody>
                       <?php $totalCost = 0; ?>
                       @foreach ($asset->components as $component)
+
+
                         @if (is_null($component->deleted_at))
                           <tr>
                             <td>
@@ -589,6 +614,7 @@
                             </td>
                             <td>{{ $component->pivot->assigned_qty }}</td>
                             <td>{{ $component->purchase_cost }}</td>
+                              <?php $totalCost = $totalCost + $component->purchase_cost ;?>
 
                           </tr>
                         @endif
@@ -597,7 +623,9 @@
 
                     <tfoot>
                       <tr>
-                        <td colspan="7" class="text-right">{{ $use_currency.$totalCost }}</td>
+                        <td colspan="2">
+                          </td>
+                          <td>{{ $totalCost }}</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -707,28 +735,29 @@
                       data-side-pagination="server"
                       data-show-columns="true"
                       data-show-refresh="true"
+                      data-sort-order="desc"
+                      data-sort-name="created_at"
                       data-show-export="true"
                       data-export-options='{
-                         "fileName": "export{{ (Input::has('status')) ? '-'.str_slug(Input::get('status')) : '' }}-assets",
+                         "fileName": "export-asset-{{  $asset->id }}-history",
                          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                        }'
 
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
                       data-cookie-id-table="assetHistory">
-
-
                 <thead>
                 <tr>
-                  <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
-                  <th class="col-sm-2" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                  <th class="col-sm-1" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                  <th class="col-sm-1" data-field="action_type">{{ trans('general.action') }}</th>
-                  <th class="col-sm-2" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                  <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th data-field="icon" data-visible="true" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+                  <th class="col-sm-2" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
                   @if  ($snipeSettings->require_accept_signature=='1')
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
+                  <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
                 </tr>
                 </thead>
@@ -760,7 +789,7 @@
               </div>
 
               <div class="col-md-12">
-                <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
+                <p>{{ trans('general.upload_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
                 <hr>
               </div>
 
@@ -768,20 +797,39 @@
             @endcan
 
             <div class="col-md-12">
-              <table class="table table-hover">
+              <table
+                      class="table table-striped snipe-table"
+                      id="assetFileHistory"
+                      data-pagination="true"
+                      data-id-table="assetFileHistory"
+                      data-search="true"
+                      data-side-pagination="client"
+                      data-show-columns="true"
+                      data-show-refresh="true"
+                      data-sort-order="desc"
+                      data-sort-name="created_at"
+                      data-show-export="true"
+                      data-export-options='{
+                         "fileName": "export-asset-{{ $asset->id }}-files",
+                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                       }'
+                      data-cookie-id-table="assetFileHistory">
                 <thead>
                   <tr>
-                    <th class="col-md-4">{{ trans('general.notes') }}</th>
-                    <th class="col-md-2"></th>
-                    <th class="col-md-4">{{ trans('general.file_name') }}</th>
-                    <th class="col-md-2"></th>
-                    <th class="col-md-2"></th>
+                    <th data-visible="true" data-field="icon"></th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes">{{ trans('general.notes') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename">{{ trans('general.file_name') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
+                    <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at">{{ trans('general.created_at') }}</th>
+                    <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @if (count($asset->uploads) > 0)
+                  @if ($asset->uploads->count() > 0)
                     @foreach ($asset->uploads as $file)
                       <tr>
+                        <td><i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med"></i></td>
                         <td>
                           @if ($file->note)
                           {{ $file->note }}
@@ -789,7 +837,9 @@
                         </td>
                         <td>
                           @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                              <img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
+                            </a>
                           @endif
                         </td>
                         <td>
@@ -797,12 +847,20 @@
                         </td>
                         <td>
                           @if ($file->filename)
-                          <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">{{ trans('general.download') }}</a>
+                          <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default"><i class="fa fa-download"></i></a>
                           @endif
                         </td>
+
+                        <td>
+                          @if ($file->created_at)
+                            {{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
+                          @endif
+                        </td>
+
+
                         <td>
                           @can('update', \App\Models\Asset::class)
-                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="Are you sure you wish to delete {{$file->filename}}"><i class="fa fa-trash icon-white"></i></a>
+                            <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('delete_confirm', ['item' => $file->filename]) }}"><i class="fa fa-trash icon-white"></i></a>
                           @endcan
                         </td>
                       </tr>
@@ -828,11 +886,6 @@
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
 
-<script nonce="{{ csrf_token() }}">
-    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
-</script>
+
 
 @stop

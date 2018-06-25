@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nieuwe veldset',
     'create_field'            => 'Nieuw aangepast veld',
     'value_encrypted'      	        => 'De waarde van dit veld is versleuteld in de database. Alleen beheerders zullen de onversleutelde waarde kunnen weergeven.',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

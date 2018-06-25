@@ -107,6 +107,7 @@ class LicensesController extends Controller
         $license->seats             = $request->input('seats');
         $license->serial            = $request->input('serial');
         $license->supplier_id       = $request->input('supplier_id');
+        $license->category_id       = $request->input('category_id');
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
 
@@ -182,6 +183,7 @@ class LicensesController extends Controller
         $license->seats             = e($request->input('seats'));
         $license->manufacturer_id   =  $request->input('manufacturer_id');
         $license->supplier_id       = $request->input('supplier_id');
+        $license->category_id       = $request->input('category_id');
 
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
@@ -420,7 +422,6 @@ class LicensesController extends Controller
             $return_to = Asset::find($licenseSeat->asset_id);
         }
 
-        \Log::debug($licenseSeat->assigned_to);
         // Update the asset data
         $licenseSeat->assigned_to                   = null;
         $licenseSeat->asset_id                      = null;
@@ -508,7 +509,7 @@ class LicensesController extends Controller
                 foreach (Input::file('licensefile') as $file) {
 
                     $rules = array(
-                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic|max:2000'
+                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic'
                     );
                     $validator = Validator::make(array('licensefile'=> $file), $rules);
 
@@ -516,8 +517,7 @@ class LicensesController extends Controller
                          return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
                     }
                     $extension = $file->getClientOriginalExtension();
-                    $filename = 'license-'.$license->id.'-'.str_random(8);
-                    $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                    $filename = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                     $upload_success = $file->move($destinationPath, $filename);
 
                     //Log the upload to the log
@@ -583,7 +583,7 @@ class LicensesController extends Controller
     * @param int $fileId
     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function displayFile($licenseId = null, $fileId = null)
+    public function displayFile($licenseId = null, $fileId = null, $download = true)
     {
 
         $license = License::find($licenseId);
@@ -593,8 +593,31 @@ class LicensesController extends Controller
             $this->authorize('view', $license);
             $log = Actionlog::find($fileId);
             $file = $log->get_src('licenses');
+
+
+            if ($file =='') {
+                return response('File not found on server', 404)
+                    ->header('Content-Type', 'text/plain');
+            }
+
+            $mimetype = \File::mimeType($file);
+
+
+            if (!file_exists($file)) {
+                return response('File '.$file.' not found on server', 404)
+                    ->header('Content-Type', 'text/plain');
+            }
+
+            if ($download != 'true') {
+                if ($contents = file_get_contents($file)) {
+                    return Response::make($contents)->header('Content-Type', $mimetype);
+                }
+                return JsonResponse::create(["error" => "Failed validation: "], 500);
+            }
             return Response::download($file);
         }
+
+
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
     }
 

@@ -73,6 +73,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true,
+        "process-timeout":3000,
         "platform": {
           "php": "5.6.4"
         }

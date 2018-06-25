@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nowy zestaw pól',
     'create_field'            => 'Nowe pole niestandardowe',
     'value_encrypted'      	        => 'Wartość tego pola jest zaszyfrowana w bazie danych. Tylko admini będą mogli wyświetlić rozszyfrowaną wartość',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

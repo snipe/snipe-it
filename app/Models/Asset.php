@@ -189,16 +189,11 @@ class Asset extends Depreciable
                 $this->location_id = $target->location->id;
             }
         }
-
-        if ($this->requireAcceptance()) {
-            if(get_class($target) != User::class) {
-                throw new CheckoutNotAllowed;
-            }
-            $this->accepted="pending";
-        }
+        
 
         if ($this->save()) {
             $this->logCheckout($note, $target);
+            $this->increment('checkout_counter', 1);
             return true;
         }
         return false;
@@ -348,6 +343,38 @@ class Asset extends Depreciable
                   ->where('item_type', '=', Asset::class)
                   ->orderBy('created_at', 'desc')
                   ->withTrashed();
+    }
+
+    /**
+     * Get checkouts
+     */
+    public function checkouts()
+    {
+        return $this->assetlog()->where('action_type', '=', 'checkout')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get checkins
+     */
+    public function checkins()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'checkin from')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+    /**
+     * Get user requests
+     */
+    public function userRequests()
+    {
+        return $this->assetlog()
+            ->where('action_type', '=', 'requested')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
     }
 
 
@@ -617,7 +644,7 @@ class Asset extends Depreciable
 
     public function scopeRTD($query)
     {
-        return $query->whereNULL('assigned_to')
+        return $query->whereNULL('assets.assigned_to')
                    ->whereHas('assetstatus', function ($query) {
                        $query->where('deployable', '=', 1)
                              ->where('pending', '=', 0)
@@ -1018,9 +1045,17 @@ class Asset extends Depreciable
                         });
                     });
                 }
+
+                if ($fieldname =='supplier') {
+                    $query->where(function ($query) use ($search_val) {
+                        $query->whereHas('supplier', function ($query) use ($search_val) {
+                            $query->where('suppliers.name', 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
             }
 
-            if (($fieldname!='category')  && ($fieldname!='location')
+            if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='location') && ($fieldname!='supplier')
                 && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }

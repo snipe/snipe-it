@@ -133,8 +133,11 @@ class Actionlog extends SnipeModel
        **/
     public function get_src($type = 'assets', $fieldname = 'filename')
     {
-        $file = config('app.private_uploads') . '/' . $type . '/' . $this->{$fieldname};
-        return $file;
+        if ($this->filename!='') {
+            $file = config('app.private_uploads') . '/' . $type . '/' . $this->{$fieldname};
+            return $file;
+        }
+        return false;
     }
 
 

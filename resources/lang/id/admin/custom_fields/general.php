@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Set Kolom Baru',
     'create_field'            => 'Tambah Kolom Ubahan',
     'value_encrypted'      	        => 'Nilai dari kolom ini di database dienkripsi. hanya pengguna admin yang bisa melihat nilai deskripsinya',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

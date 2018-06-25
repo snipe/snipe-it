@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Gửi',
     'upload'                    => 'Tải lên',
 	'select_file'				=> 'Chọn tập tin...',
+    'select_files'				=> 'Select Files...',
 );

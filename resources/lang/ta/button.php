@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'சமர்ப்பி',
     'upload'                    => 'பதிவேற்றம்',
 	'select_file'				=> 'கோப்பு தேர்ந்தெடு ...',
+    'select_files'				=> 'Select Files...',
 );

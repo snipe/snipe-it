@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'Réimse Nua Chustaim',
     'value_encrypted'      	        => 'Tá luach an réimse seo criptithe sa bhunachar sonraí. Ní bheidh ach úsáideoirí riaracháin in ann an luach díchriptithe a fheiceáil',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

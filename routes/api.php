@@ -16,8 +16,24 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
-    /*--- Accessories API ---*/
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('requestable/hardware',
+            [
+                'as' => 'api.assets.requestable',
+                'uses' => 'AssetsController@requestable'
+            ]
+        );
 
+        Route::get('requests',
+            [
+                'as' => 'api.assets.requested',
+                'uses' => 'ProfileController@requestedAssets'
+            ]
+        );
+
+    });
+
+    /*--- Accessories API ---*/
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
@@ -241,6 +257,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             [
                 'as' => 'api.fieldsets.fields',
                 'uses' => 'CustomFieldsetsController@fields'
+            ]
+        );
+        Route::get('/{fieldset}/fields/{model}',
+            [
+                'as' => 'api.fieldsets.fields-with-default-value',
+                'uses' => 'CustomFieldsetsController@fieldsWithDefaultValues'
             ]
         );
     });
@@ -729,5 +751,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['insurance' => 'insurance_id']
         ]
     ); // Insurance resource
+
 
 });

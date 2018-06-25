@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Ny fältsamling',
     'create_field'            => 'Nytt anpassat fält',
     'value_encrypted'      	        => 'Värdet på det här fältet är krypterat i databasen. Endast adminanvändare kan se det dekrypterade värdet',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

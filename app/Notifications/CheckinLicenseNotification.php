@@ -31,6 +31,7 @@ class CheckinLicenseNotification extends Notification
         $this->admin = $params['admin'];
         $this->note = '';
         $this->settings = $params['settings'];
+        $this->target_type = $params['target_type'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -53,7 +54,10 @@ class CheckinLicenseNotification extends Notification
         }
 
 
-        $notifyBy[] = 'mail';
+        if (($this->target_type == \App\Models\User::class) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        {
+            $notifyBy[] = 'mail';
+        }
 
         return $notifyBy;
     }

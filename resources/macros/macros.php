@@ -41,6 +41,7 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'lt'=> "Lithuanian",
       'ms'=> "Malay",
       'mi'=> "Maori",
+      'mk'=> "Macedonian",
       'mn'=> "Mongolian",
       'no'=> "Norwegian",
       'fa'=> "Persian",
@@ -49,9 +50,12 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'pt-BR'=> "Portuguese, Brazilian",
       'ro'=> "Romanian",
       'ru'=> "Russian",
+      'sl'=> "Slovenian",
       'es-ES'=> "Spanish",
       'es-CO'=> "Spanish, Colombia",
+      'es-VE'=> "Spanish, Venezuela",
       'sv-SE'=> "Swedish",
+      'tl'=> "Tagalog",
       'ta'=> "Tamil",
       'th'=> "Thai",
       'tr'=> "Turkish",
@@ -362,12 +366,14 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
         'd M, Y',
         'm/d/Y',
         'n/d/y',
+        'd/m/Y',
         'm/j/Y',
         'd.m.Y',
     ];
 
     foreach ($formats as $format) {
-        $date_display_formats[$format] = Carbon::now()->format($format);
+
+        $date_display_formats[$format] = Carbon::parse(date('Y').'-'.date('m').'-25')->format($format);
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px">';
     foreach ($date_display_formats as $format => $date_display_format) {

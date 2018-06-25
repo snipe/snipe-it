@@ -98,6 +98,19 @@ class AssetModel extends SnipeModel
         return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
     }
 
+    public function defaultValues()
+    {
+        return $this->belongsToMany('\App\Models\CustomField', 'models_custom_fields')->withPivot('default_value');
+    }
+
+
+    public function getImageUrl() {
+        if ($this->image) {
+            return url('/').'/uploads/models/'.$this->image;
+        }
+        return false;
+    }
+
     /**
     * -----------------------------------------------
     * BEGIN QUERY SCOPES
@@ -140,7 +153,7 @@ class AssetModel extends SnipeModel
      * @param       $query
      *
      * @return $query
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @version v3.5
      */
     public function scopeRequestableModels($query)

@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Elem',
     'field_format'            => 'Formátum',
     'field_custom_format'     => 'Egyéni formátum',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Ez a mező lehetővé teszi a regex kifejezések használatát az érvényesítéshez. A kifejezésnek "regex:" -el kell kezdődnie - például, hogy ellenőrizze, hogy egy egyéni mezőérték érvényes IMEI-t tartalmaz-e ( ami 15 numerikus számjegy), akkor ezt használja <code>regex: / ^[0-9]{15}$ /</code>.',
     'required'   		          => 'Kötelező',
     'req'   		              => 'Kötelező.',
     'used_by_models'   		    => 'Modellek szerint ',
@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Új mezőcsoportok',
     'create_field'            => 'Új egyéni mező',
     'value_encrypted'      	        => 'A mező értéke titkosítva van az adatbázisban. Csak az adminisztrátor felhasználók láthatják a dekódolt értéket',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );

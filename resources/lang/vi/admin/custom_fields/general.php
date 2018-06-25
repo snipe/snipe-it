@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'Trường tùy chỉnh mới',
     'value_encrypted'      	        => 'Giá trị của trường này được mã hóa trong cơ sở dữ liệu. Chỉ những người dùng quản trị mới có thể xem được giá trị được giải mã',
+    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
 );
