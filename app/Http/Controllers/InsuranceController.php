@@ -192,4 +192,29 @@ class InsuranceController extends Controller
         }
         return redirect()->back()->withInput()->withErrors($insurance->getErrors());
     }
+
+    public function destroy($insuranceId = null) {
+        $this->authorize('destroy', Insurance::class);
+        if (is_null($insurance = Insurance::find($insuranceId))) {
+            // Redirect to the manufacturer  page
+            return redirect()->route('insurance.index')->with('error', trans('admin/insurance/message.does_not_exist'));
+        }
+
+/*
+        if ($insurance->image) {
+            try  {
+                unlink(public_path().'/uploads/insurance/'.$insurance->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
+*/
+
+        try  {
+            $insurance->delete();
+        } catch (\Exception $e) {
+            \Log::error($e);
+        }
+        return redirect()->route('insurance.index')->with('success', trans('admin/insurance/message.delete.success'));
+    }
 }

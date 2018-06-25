@@ -38,15 +38,29 @@
 
       <div class="tab-content">
         <div class="tab-pane fade in active" id="info">
-            <li>{{ $insurance->id}}</li>
-          </table>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="table-responsive" style="margin-top: 10px;">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>{{ trans('general.status') }}</td>
+                                <td>
+                                    <!-- -->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
         </div> <!-- /.tab-pane info -->
 
         <div class="tab-pane fade" id="devices">
 
           <table
-                  data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                  data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                   data-cookie-id-table="licensesTable"
                   data-pagination="true"
                   data-id-table="licensesTable"
@@ -72,7 +86,7 @@
         <div class="tab-pane fade" id="accessories">
 
           <table
-                  data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                  data-columns="{{ \App\Presenters\InsurancePresenter::dataTableLayout() }}"
                   data-cookie-id-table="accessoriesTable"
                   data-pagination="true"
                   data-id-table="accessoriesTable"

@@ -22,7 +22,7 @@ class InsuranceController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Insurance::class);
-        $allowed_columns = ['id','name','started_a','ended_at','created_at','notes','created_at'];
+        $allowed_columns = ['id','name','started_at','ended_at','created_at','notes'];
 
         $insurance = Insurance::select(
             array('id','name','provider','policy_number','started_at','ended_at','created_at','notes','created_at'))->whereNotNull("name");
@@ -35,9 +35,6 @@ class InsuranceController extends Controller
         if ($request->has('search')) {
             $insurance = $insurance->TextSearch($request->input('search'));
         }
-
-
-
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
@@ -61,7 +58,7 @@ class InsuranceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Manufacturer::class);
+        $this->authorize('create', Insurance::class);
         $manufacturer = new Manufacturer;
         $manufacturer->fill($request->all());
 
@@ -120,11 +117,11 @@ class InsuranceController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', Manufacturer::class);
-        $manufacturer = Manufacturer::findOrFail($id);
-        $this->authorize('delete', $manufacturer);
-        $manufacturer->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
+        $this->authorize('delete', Insurance::class);
+        $insurance = Insurance::findOrFail($id);
+        $this->authorize('delete', $insurance);
+        $insurance->delete();
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/insurance/message.delete.success')));
 
     }
 
