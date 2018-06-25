@@ -366,12 +366,14 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
         'd M, Y',
         'm/d/Y',
         'n/d/y',
+        'd/m/Y',
         'm/j/Y',
         'd.m.Y',
     ];
 
     foreach ($formats as $format) {
-        $date_display_formats[$format] = Carbon::now()->format($format);
+
+        $date_display_formats[$format] = Carbon::parse(date('Y').'-'.date('m').'-25')->format($format);
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px">';
     foreach ($date_display_formats as $format => $date_display_format) {

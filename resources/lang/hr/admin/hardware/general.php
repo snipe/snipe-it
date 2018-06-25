@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Imovina je stavka koja se prati serijskim brojem ili oznakom imovine. Oni imaju tendenciju da se stavke više vrijednosti gdje je identificiranje određenog predmeta pitanjima.',
 	'archived'  				=> 'Arhivirano',
     'asset'  					=> 'Imovina',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Provjera imovine',
     'checkin'  					=> 'Provjera imovine',
     'checkout'  				=> 'Asset Checkout',
     'clone'  					=> 'Klonska imovina',

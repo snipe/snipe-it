@@ -37,7 +37,6 @@ class UserImporter extends ItemImporter
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
-        $this->item['password'] = $this->tempPassword;
         $user = User::where('username', $this->item['username'])->first();
         if ($user) {
             if (!$this->updating) {
@@ -45,11 +44,14 @@ class UserImporter extends ItemImporter
                 return;
             }
             $this->log('Updating User');
-            // $user = $this->users[$userId];
             $user->update($this->sanitizeItemForUpdating($user));
             $user->save();
             return;
         }
+        // This needs to be applied after the update logic, otherwise we'll overwrite user passwords
+        // Issue #5408
+        $this->item['password'] = $this->tempPassword;
+
         $this->log("No matching user, creating one");
         $user = new User();
         $user->fill($this->sanitizeItemForStoring($user));

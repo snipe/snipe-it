@@ -62,7 +62,7 @@ return array(
         'success' 		=> 'Aktīvs pārbaudīts veiksmīgi.',
         'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.',
         'not_available' => 'Šis īpašums nav pieejams izrakstīšanai!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Jums jāizvēlas vismaz vienu aparatūru'
     ),
 
     'checkin' => array(

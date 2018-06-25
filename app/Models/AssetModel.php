@@ -158,7 +158,7 @@ class AssetModel extends SnipeModel
      * @param       $query
      *
      * @return $query
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @version v3.5
      */
     public function scopeRequestableModels($query)

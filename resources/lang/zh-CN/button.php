@@ -12,5 +12,5 @@ return array(
     'submit'  	                => '提交',
     'upload'                    => '上传',
 	'select_file'				=> '选择文件...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> '选择文件...',
 );

@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Assets sind Gegenstände die durch eine Seriennummer oder Bezeichnung identifiziert werden. Meistens sind diese von höherem Wert, wobei es Sinn macht diese spezifisch zu kennzeichnen.',
 	'archived'  				=> 'Archiviert',
     'asset'  					=> 'Asset',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Assets herausgeben',
     'checkin'  					=> 'Asset zurücknehmen',
     'checkout'  				=> 'Asset herausgeben',
     'clone'  					=> 'Asset duplizieren',

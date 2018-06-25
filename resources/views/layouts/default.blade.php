@@ -758,7 +758,11 @@
       <footer class="main-footer hidden-print">
 
         <div class="pull-right hidden-xs">
-          <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+          @if ($snipeSettings->version_footer!='off')
+              @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
+                <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+              @endif
+          @endif
 
           @if ($snipeSettings->support_footer!='off')
               @if (($snipeSettings->support_footer=='on') || (($snipeSettings->support_footer=='admin') && (Auth::user()->isSuperUser()=='1')))

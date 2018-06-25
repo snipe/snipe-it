@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Los activos son seguidos mediante el número del serial o la etiqueta del activo. Tienden a ser objetos de mayor valor en los que identificar un objeto específico importa.',
 	'archived'  				=> 'Archivado',
     'asset'  					=> 'Activo',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Activos Asignados',
     'checkin'  					=> 'Ingresar Activo',
     'checkout'  				=> 'Retirar Activo',
     'clone'  					=> 'Clonar Activo',

@@ -189,13 +189,7 @@ class Asset extends Depreciable
                 $this->location_id = $target->location->id;
             }
         }
-
-        if ($this->requireAcceptance()) {
-            if(get_class($target) != User::class) {
-                throw new CheckoutNotAllowed;
-            }
-            $this->accepted="pending";
-        }
+        
 
         if ($this->save()) {
             /*
@@ -208,6 +202,7 @@ class Asset extends Depreciable
             $min_amt = '';
             
             $this->logCheckout($note, $target);
+            $this->increment('checkout_counter', 1);
             return true;
         }
         return false;

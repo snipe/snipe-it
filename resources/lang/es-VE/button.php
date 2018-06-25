@@ -12,5 +12,5 @@ return array(
     'submit'  	                => 'Enviar',
     'upload'                    => 'Cargar',
 	'select_file'				=> 'Seleccionar Archivo...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Selecciona Archivos...',
 );

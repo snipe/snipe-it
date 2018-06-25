@@ -17,7 +17,7 @@ class CreateCustomFieldDefaultValuesTable extends Migration
             $table->increments('id');
             $table->integer('asset_model_id');
             $table->integer('custom_field_id');
-            $table->text('default_value')->nullable();
+            $table->text('default_value')->nullable()->default(null);
         });
     }
 

@@ -18,6 +18,7 @@ patch \
 curl \
 vim \
 git \
+cron \
 mysql-client \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

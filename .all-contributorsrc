@@ -920,6 +920,60 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "doekman",
+      "name": "Doeke Zanstra",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1086388?v=4",
+      "profile": "https://github.com/doekman",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "SjamonDaal",
+      "name": "Djamon Staal",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4325936?v=4",
+      "profile": "https://www.sdhd.nl/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "EarlRamirez",
+      "name": "Earl Ramirez",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/12306859?v=4",
+      "profile": "https://github.com/EarlRamirez",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "RichardRay",
+      "name": "Richard Ray Thomas",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8671456?v=4",
+      "profile": "https://github.com/RichardRay",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "thelamer",
+      "name": "Ryan Kuba",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1852688?v=4",
+      "profile": "https://www.taisun.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ParadoxGuitarist",
+      "name": "Brian Monroe",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6751928?v=4",
+      "profile": "https://github.com/ParadoxGuitarist",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

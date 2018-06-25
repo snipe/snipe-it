@@ -14,5 +14,5 @@ return array(
     'view_models'               => '查看已型号',
     'fieldset'                  => '字段集',
     'no_custom_field'           => '没有自定义字段',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => '添加默认值',
 );
