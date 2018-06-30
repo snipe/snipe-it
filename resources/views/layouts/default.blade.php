@@ -224,7 +224,7 @@
                        @can('create', \App\Models\Component::class)
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('components.create') }}">
-                           <i class="fa fa-hdd-o"></i>
+                           <i class="fa fa-hdd-o fa-fw"></i>
                            {{ trans('general.component') }}
                            </a>
                        </li>
@@ -310,7 +310,7 @@
 
                      <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.requested') }}">
-                             <i class="fa fa-check fa-disk"></i>
+                             <i class="fa fa-check fa-disk fa-fw"></i>
                              Requested Assets
                          </a></li>
 
