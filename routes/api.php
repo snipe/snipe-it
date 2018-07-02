@@ -674,28 +674,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
 
-    /*--- User API ---*/
-    Route::group(['prefix' => 'user'], function() {
-        Route::get('/',
-            [
-                'as'=>'api.user.index',
-                'uses'=>'UserController@getUserInfo'
-            ]
-        );
-    }); // User group
-
-
 
     /*--- Users API ---*/
 
-
-
+    
     Route::group([ 'prefix' => 'users' ], function () {
 
         Route::post('two_factor_reset',
             [
                 'as' => 'api.users.two_factor_reset',
                 'uses' => 'UsersController@postTwoFactorReset'
+            ]
+        );
+
+        Route::get('me',
+            [
+                'as' => 'api.users.me',
+                'uses' => 'UsersController@getCurrentUserInfo'
             ]
         );
 
