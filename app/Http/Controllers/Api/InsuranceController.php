@@ -51,7 +51,7 @@ class InsuranceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [M. Bowker] [<github@matthewbowker.net>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -59,36 +59,36 @@ class InsuranceController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', Insurance::class);
-        $manufacturer = new Manufacturer;
-        $manufacturer->fill($request->all());
+        $insurance = new Insurance;
+        $insurance->fill($request->all());
 
-        if ($manufacturer->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $manufacturer, trans('admin/manufacturers/message.create.success')));
+        if ($insurance->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $insurance, trans('admin/insurance/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $manufacturer->getErrors()));
+        return response()->json(Helper::formatStandardApiResponse('error', null, $insurance->getErrors()));
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [M. Bowker] [<github@matthewbowker.net>]
      * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $this->authorize('view', Manufacturer::class);
-        $manufacturer = Manufacturer::findOrFail($id);
-        return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
+        $this->authorize('view', Insurance::class);
+        $insurance = Insurance::findOrFail($id);
+        return (new InsuranceTranspromer)->transformInsurance($insurance);
     }
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [M. Bowker] [<github@matthewbowker.net>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -110,7 +110,7 @@ class InsuranceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [M. Bowker] [<github@matthewbowker.net>]
      * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -128,7 +128,7 @@ class InsuranceController extends Controller
     /**
      * Gets a paginated collection for the select2 menus
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [M. Bowker] [<github@matthewbowker.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      *
@@ -136,27 +136,27 @@ class InsuranceController extends Controller
     public function selectlist(Request $request)
     {
 
-        $manufacturers = Manufacturer::select([
+        $insurance = Insurance::select([
             'id',
             'name',
             'image',
         ]);
 
         if ($request->has('search')) {
-            $manufacturers = $manufacturers->where('name', 'LIKE', '%'.$request->get('search').'%');
+            $insurance = $insurance->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 
-        $manufacturers = $manufacturers->orderBy('name', 'ASC')->paginate(50);
+        $insurance = $insurance->orderBy('name', 'ASC')->paginate(50);
 
         // Loop through and set some custom properties for the transformer to use.
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
-        foreach ($manufacturers as $manufacturer) {
-            $manufacturer->use_text = $manufacturer->name;
-            $manufacturer->use_image = ($manufacturer->image) ? url('/').'/uploads/manufacturers/'.$manufacturer->image : null;
+        foreach ($insurance as $ins) {
+            $ins->use_text = $ins->name;
+            $ins->use_image = ($ins->image) ? url('/').'/uploads/insurance/'.$ins->image : null;
         }
 
-        return (new SelectlistTransformer)->transformSelectlist($manufacturers);
+        return (new SelectlistTransformer)->transformSelectlist($insurance);
 
     }
 }
