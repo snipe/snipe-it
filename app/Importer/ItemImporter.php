@@ -69,9 +69,34 @@ class ItemImporter extends Importer
         $this->item['serial'] = $this->findCsvMatch($row, "serial");
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
+        $this->item['checkout_class'] = $this->findCsvMatch($row, "checkout_class");
         if(get_class($this) !== UserImporter::class) {
-            $this->item["user"] = $this->createOrFetchUser($row);
+            // $this->item["user"] = $this->createOrFetchUser($row);
+            $this->item["checkout_target"] = $this->determineCheckout($row);
+
         }
+    }
+
+    /**
+     * Parse row to determine what (if anything) we should checkout to.
+     * @param  array $row CSV Row being parsed
+     * @return SnipeModel      Model to be checked out to
+     */ 
+    protected function determineCheckout($row)
+    {
+        // We only supporty checkout-to-location for asset, so short circuit otherw.
+        if(get_class($this) != AssetImporter::class) {
+            return $this->createOrFetchUser($row);
+        }
+
+        if ($this->item['checkout_class'] === 'location') {
+            // dd($this->findCsvMatch($row, 'checkout_location'));
+            return Location::findOrFail($this->createOrFetchLocation($this->findCsvMatch($row, 'checkout_location')));
+            // dd('here');
+        }
+
+        return $this->createOrFetchUser($row);
+
     }
 
     /**
