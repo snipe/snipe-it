@@ -34,6 +34,7 @@ abstract class Importer
         'checkout_location' => 'checkout location',
         'company' => 'company',
         'item_name' => 'item name',
+        'item_number' => "item number",
         'image' => 'image',
         'expiration_date' => 'expiration date',
         'location' => 'location',

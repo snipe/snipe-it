@@ -435,18 +435,19 @@ EOT;
     public function testDefaultConsumableImport()
     {
         $csv = <<<'EOT'
-Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
-eget,01/03/2011,$85.91,mauris blandit mattis.,Lycos,T295T06V,Triamterene/Hydrochlorothiazide,No,322
+Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity,Item Number,Model Number
+eget,01/03/2011,$85.91,mauris blandit mattis.,Lycos,T295T06V,Triamterene/Hydrochlorothiazide,No,322,3305,30123
 EOT;
         $this->import(new ConsumableImporter($csv));
-
         $this->tester->seeRecord('consumables', [
             'name' => 'eget',
             'purchase_date' => '2011-01-03 00:00:01',
             'purchase_cost' => 85.91,
             'order_number' => 'T295T06V',
             'requestable' => 0,
-            'qty' => 322
+            'qty' => 322,
+            'item_no' => 3305,
+            'model_number' => 30123
         ]);
 
         $this->tester->seeRecord('locations', [
