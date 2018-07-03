@@ -73,8 +73,8 @@ EOT;
             'asset_tag' => '970882174-8',
             'notes' => "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
             'purchase_date' => '2016-04-05 00:00:01',
-            'purchase_cost' => 133289.59,
-            'warranty_months' => 14,
+            'purchase_cost' => 133289.59
+,            'warranty_months' => 14,
             '_snipeit_weight_2' => 35
             ]);
     }

@@ -117,6 +117,8 @@ tr {
                     assets: [
                         {id: 'asset_tag', text: 'Asset Tag' },
                         {id: 'asset_model', text: 'Model Name' },
+                        {id: 'checkout_class', text: 'Checkout Type' },
+                        {id: 'checkout_location', text: 'Checkout Location' },
                         {id: 'image', text: 'Image Filename' },
                         {id: 'model_number', text: 'Model Number' },
                         {id: 'full_name', text: 'Full Name' },
@@ -234,7 +236,7 @@ tr {
                     for(var j=0; j < this.columns.length; j++) {
                         let column = this.columns[j];
                         let lower = this.file.header_row.map((value) => value.toLowerCase());
-                        console.dir(lower);
+                        // console.dir(lower);
                         let index = lower.indexOf(column.text.toLowerCase())
                         if(index != -1) {
                             this.$set(this.columnMappings, this.file.header_row[index], column.id)
