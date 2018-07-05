@@ -30,8 +30,11 @@ abstract class Importer
     private $defaultFieldMap = [
         'asset_tag' => 'asset tag',
         'category' => 'category',
+        'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
+        'checkout_location' => 'checkout location',
         'company' => 'company',
         'item_name' => 'item name',
+        'item_number' => "item number",
         'image' => 'image',
         'expiration_date' => 'expiration date',
         'location' => 'location',
@@ -89,11 +92,12 @@ abstract class Importer
     public function __construct($file)
     {
         $this->fieldMap = $this->defaultFieldMap;
-        // By default the importer passes a url to the file.
-        // However, for testing we also support passing a string directly
         if (! ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
+
+        // By default the importer passes a url to the file.
+        // However, for testing we also support passing a string directly
         if (is_file($file)) {
             $this->csv = Reader::createFromPath($file);
         } else {
@@ -179,9 +183,8 @@ abstract class Importer
      */
     public function lookupCustomKey($key)
     {
-        // dd($this->fieldMap);
         if (array_key_exists($key, $this->fieldMap)) {
-            $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
+            // $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
             return $this->fieldMap[$key];
         }
         // Otherwise no custom key, return original.
@@ -189,6 +192,8 @@ abstract class Importer
     }
 
     /**
+     * Used to lowercase header values to ensure we're comparing values properly.
+     * 
      * @param $results
      * @return array
      */
@@ -249,11 +254,11 @@ abstract class Importer
         $last_name = '';
         if(empty($user_name) && empty($user_email) && empty($user_username)) {
             $this->log('No user data provided - skipping user creation, just adding asset');
-            //$user_username = '';
             return false;
         }
-        // A username was given.
+
         if( !empty($user_username)) {
+            // A username was given.
             $user = User::where('username', $user_username)->first();
             if($user) {
                 return $user;
