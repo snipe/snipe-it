@@ -44,8 +44,10 @@
                             </div>
                             <div class="col-sm-12 col-lg-6">
                                 <input v-if="field.type == 'text'" class="form-control m-b-xs" type="text" :value="getValue(field)" :id="'default-value' + field.id" :name="'default_values[' + field.id + ']'">
+                                <textarea v-if="field.type == 'textarea'" class="form-control" :value="getValue(field)" :id="'default-value' + field.id" :name="'default_values[' + field.id + ']'"></textarea><br>
+
                                 <select v-if="field.type == 'listbox'" class="form-control m-b-xs" :name="'default_values[' + field.id + ']'">
-                                    <option value="0"></option>
+                                    <option value=""></option>
                                     <option v-for="field_value in field.field_values_array" :value="field_value" :selected="getValue(field) == field_value">{{ field_value }}</option>
                                 </select>
                             </div>

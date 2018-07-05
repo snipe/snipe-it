@@ -400,6 +400,10 @@ class ReportsController extends Controller
                 $header[] = 'Employee No.';
             }
 
+            if ($request->has('manager')) {
+                $header[] = trans('admin/users/table.manager');
+            }
+
             if ($request->has('department')) {
                 $header[] = trans('general.department');
             }
@@ -608,6 +612,14 @@ class ReportsController extends Controller
                         // Only works if we're checked out to a user, not anything else.
                         if ($asset->checkedOutToUser()) {
                             $row[] = ($asset->assignedto) ? $asset->assignedto->employee_num : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->has('manager')) {
+                        if ($asset->checkedOutToUser()) {
+                            $row[] = (($asset->assignedto) && ($asset->assignedto->manager)) ? $asset->assignedto->manager->present()->fullName : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }

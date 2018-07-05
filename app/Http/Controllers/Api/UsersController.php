@@ -320,4 +320,17 @@ class UsersController extends Controller
         return response()->json(['message' => 'No ID provided'], 500);
 
     }
+
+    /**
+     * Get info on the current user.
+     *
+     * @author [Juan Font] [<juanfontalonso@gmail.com>]
+     * @since [v4.4.2]
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getCurrentUserInfo(Request $request)
+    {
+        return response()->json($request->user());
+    }
 }

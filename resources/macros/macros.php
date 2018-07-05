@@ -504,6 +504,7 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
     $formats = array(
         'text' => 'Text Box',
         'listbox' => 'List Box',
+        'textarea' => 'Textarea (multi-line) ',
      //   'checkbox' => 'Checkbox',
      //   'radio' => 'Radio Buttons',
     );
