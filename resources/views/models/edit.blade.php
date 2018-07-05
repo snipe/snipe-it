@@ -49,8 +49,7 @@
     <fieldset-default-values
         model-id="{{ $item->id ?: '' }}"
         fieldset-id="{{ !empty($item->fieldset) ? $item->fieldset->id : Input::old('custom_fieldset') }}"
-        previous-input="{{ json_encode(Input::old('default_values')) }}"
-    >
+        previous-input="{{ json_encode(Input::old('default_values')) }}">
     </fieldset-default-values>
 </div>
 

@@ -167,7 +167,7 @@
         // Only display the custom format field if it's a custom format validation type
         $(".format").change(function(){
             $(this).find("option:selected").each(function(){
-                if (($(this).attr("value")=="") &&  $('.format').prop("selectedIndex") != 0) {
+                if ($('.format').prop("selectedIndex") == 1) {
                     $("#custom_regex").show();
                 } else{
                     $("#custom_regex").hide();
@@ -178,7 +178,7 @@
         // Only display the field element if the type is not text
         $(".field_element").change(function(){
             $(this).find("option:selected").each(function(){
-                if($(this).attr("value")!="text"){
+                if (($(this).attr("value")!="text") && ($(this).attr("value")!="textarea")){
                     $("#field_values_text").show();
                 } else{
                     $("#field_values_text").hide();
