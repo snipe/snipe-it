@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Exceptions\CheckoutNotAllowed;
+use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Presenters\Presentable;
 use AssetPresenter;
@@ -23,7 +24,7 @@ use App\Notifications\CheckoutAssetNotification;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
-    use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
+    use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';
     const ASSET = 'asset';
@@ -72,12 +73,13 @@ class Asset extends Depreciable
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable',
-        'physical'         => 'numeric|max:1|nullable',
+        'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
         'supplier_id'     => 'numeric|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
+        'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable',
         'next_audit_date'  => 'date|nullable',
         'last_audit_date'  => 'date|nullable',

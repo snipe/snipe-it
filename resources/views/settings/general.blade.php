@@ -137,8 +137,23 @@
                            </div>
                        </div>
 
+                       <!-- unique serial -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               {{ Form::label('unique_serial', trans('admin/settings/general.unique_serial')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('unique_serial', '1', Input::old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
+                               {{ trans('general.yes') }}
+                               {!! $errors->first('unique_serial', '<span class="alert-msg">:message</span>') !!}
+                               <p class="help-block">
+                               {{ trans('admin/settings/general.unique_serial_help_text') }}
+                               </p>
+                           </div>
+                       </div>
 
-                    <!-- Per Page -->
+
+                       <!-- Per Page -->
                     <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
                         <div class="col-md-3">
                             {{ Form::label('per_page', trans('admin/settings/general.per_page')) }}
