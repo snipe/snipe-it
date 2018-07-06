@@ -41,7 +41,7 @@ class CategoriesTransformer
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Category::class) ? true : false,
-                'delete' => (Gate::allows('delete', Category::class) && ($category->assets_count == 0) && ($category->accessories_count == 0) && ($category->consumables_count == 0) && ($category->components_count == 0)) ? true : false,
+                'delete' => (Gate::allows('delete', Category::class) && ($category->assets_count == 0) && ($category->accessories_count == 0) && ($category->consumables_count == 0) && ($category->components_count == 0) && ($category->licenses_count == 0)) ? true : false,
             ];
 
             $array += $permissions_array;
