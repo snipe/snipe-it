@@ -105,7 +105,7 @@
           <!-- Show in Email  -->
           <div class="form-group {{ $errors->has('show_in_email') ? ' has-error' : '' }}"  id="show_in_email">
               <div class="col-md-8 col-md-offset-4">
-                  <label for="field_encrypted">
+                  <label for="show_in_email">
                       <input type="checkbox" name="show_in_email" value="1" class="minimal"{{ (Input::old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_email') }}
                   </label>
