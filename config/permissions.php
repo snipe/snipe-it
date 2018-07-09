@@ -417,7 +417,32 @@ return array(
         ),
     ),
 
-
+    'Custom Fieldsets' => array(
+        array(
+            'permission' => 'customfieldsets.view',
+            'label'      => 'View',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfieldsets.create',
+            'label'      => 'Create',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfieldsets.edit',
+            'label'      => 'Edit',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'customfieldsets.delete',
+            'label'      => 'Delete',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),    
 
     'Suppliers' => array(
         array(
