@@ -534,13 +534,13 @@
                     </a>
 
                     <ul class="treeview-menu">
-                        @can('view', \App\Models\CustomField::class)
+                        @if(Gate::allows('view', App\Models\CustomField::class) || Gate::allows('view', App\Models\CustomFieldset::class))
                             <li {!! (Request::is('fields*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('fields.index') }}">
                                     {{ trans('admin/custom_fields/general.custom_fields') }}
                                 </a>
                             </li>
-                        @endcan
+                        @endif
 
                         @can('view', \App\Models\Statuslabel::class)
                             <li {!! (Request::is('statuslabels*') ? ' class="active"' : '') !!}>
