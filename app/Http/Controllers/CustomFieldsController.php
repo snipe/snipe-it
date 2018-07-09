@@ -11,8 +11,10 @@ use Redirect;
 use App\Models\AssetModel;
 use Lang;
 use Auth;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Gate;
 use Log;
 
 /**
@@ -37,6 +39,12 @@ class CustomFieldsController extends Controller
     */
     public function index()
     {
+        /**
+         * Since this is the overview for both CustomFields and CustomFieldsets, check for both permissions
+         */
+        if(Gate::denies('view', CustomField::class) && Gate::denies('view', CustomFieldset::class)) {
+            throw new AuthorizationException;
+        }
 
         $fieldsets = CustomFieldset::with("fields", "models")->get();
         $fields = CustomField::with("fieldset")->get();
@@ -57,6 +65,7 @@ class CustomFieldsController extends Controller
     */
     public function create()
     {
+        $this->authorize('create', CustomField::class);
 
         return view("custom_fields.fields.edit")->with('field', new CustomField());
     }
@@ -72,6 +81,8 @@ class CustomFieldsController extends Controller
     */
     public function store(CustomFieldRequest $request)
     {
+        $this->authorize('create', CustomField::class);
+
         $field = new CustomField([
             "name" => $request->get("name"),
             "element" => $request->get("element"),
@@ -110,6 +121,8 @@ class CustomFieldsController extends Controller
     {
         $field = CustomField::find($field_id);
 
+        $this->authorize('update', $field);
+
         if ($field->fieldset()->detach($fieldset_id)) {
             return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
@@ -127,6 +140,8 @@ class CustomFieldsController extends Controller
     public function destroy($field_id)
     {
         $field = CustomField::find($field_id);
+
+        $this->authorize('delete', $field);
 
         if ($field->fieldset->count()>0) {
             return redirect()->back()->withErrors(['message' => "Field is in-use"]);
@@ -149,6 +164,9 @@ class CustomFieldsController extends Controller
     public function edit($id)
     {
         $field = CustomField::find($id);
+
+        $this->authorize('update', $field);
+
         return view("custom_fields.fields.edit")->with('field', $field);
     }
 
@@ -166,6 +184,9 @@ class CustomFieldsController extends Controller
     public function update(CustomFieldRequest $request, $id)
     {
         $field =  CustomField::find($id);
+
+        $this->authorize('update', $field);
+
         $field->name = e($request->get("name"));
         $field->element = e($request->get("element"));
         $field->field_values = e($request->get("field_values"));
