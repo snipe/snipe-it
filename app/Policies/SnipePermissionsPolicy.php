@@ -2,6 +2,7 @@
 namespace App\Policies;
 
 use App\Models\Company;
+use App\Models\CustomFieldset;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -43,6 +44,24 @@ abstract class SnipePermissionsPolicy
         // If an admin, they can do all asset related tasks.
         if ($user->hasAccess('admin')) {
             return true;
+        }
+
+        /**
+         * Proxy the authorization for custom fieldsets down to custom fields.
+         * This allows us to use the existing permissions in use and have more 
+         * semantically correct authorization checks for custom fieldsets.
+         *
+         * See: https://github.com/snipe/snipe-it/pull/5795
+         */
+        if ($item instanceof CustomFieldset) {
+
+            // The permission is saved as "{column}.edit", but named "update" in the 
+            // authorization checks.
+            if ($ability == 'update') {
+                $ability = 'edit';
+            }
+
+            return $user->hasAccess('customfields.' . $ability);
         }
     }
 

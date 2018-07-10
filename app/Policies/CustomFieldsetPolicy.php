@@ -8,6 +8,12 @@ class CustomFieldsetPolicy extends SnipePermissionsPolicy
 {
     protected function columnName()
     {
-        return 'customfieldsets';
-    }
+        /**
+         * Authorization for custom fieldsets gets proxied down to custom fields
+         * in SnipePermissionsPolicy.
+         *
+         * See: https://github.com/snipe/snipe-it/pull/5795
+         */
+        return 'customfields';
+    }	
 }
