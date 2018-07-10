@@ -31,6 +31,8 @@ class DepreciationsController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Depreciation::class);
+
         // Show the page
         return view('depreciations/index', compact('depreciations'));
     }
@@ -46,6 +48,8 @@ class DepreciationsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Depreciation::class);
+
         // Show the page
         return view('depreciations/edit')->with('item', new Depreciation);
     }
@@ -62,6 +66,8 @@ class DepreciationsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Depreciation::class);
+
         // create a new instance
         $depreciation = new Depreciation();
         // Depreciation data
@@ -94,6 +100,8 @@ class DepreciationsController extends Controller
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
+        $this->authorize('edit', $item);
+
         return view('depreciations/edit', compact('item'));
     }
 
@@ -115,6 +123,8 @@ class DepreciationsController extends Controller
             // Redirect to the blogs management page
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
+
+        $this->authorize('edit', $depreciation);
 
         // Depreciation data
         $depreciation->name      = $request->input('name');
@@ -145,6 +155,8 @@ class DepreciationsController extends Controller
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.not_found'));
         }
 
+        $this->authorize('delete', $depreciation);
+
         if ($depreciation->has_models() > 0) {
             // Redirect to the asset management page
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.assoc_users'));
@@ -170,6 +182,8 @@ class DepreciationsController extends Controller
             // Redirect to the blogs management page
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
+
+        $this->authorize('view', $depreciation);
 
         return view('depreciations/view', compact('depreciation'));
     }
