@@ -106,6 +106,9 @@ class CustomFieldsController extends Controller
     public function postReorder(Request $request, $id)
     {
         $fieldset = CustomFieldset::find($id);
+
+        $this->authorize('update', $fieldset);
+
         $fields = array();
         $order_array = array();
 
@@ -168,6 +171,8 @@ class CustomFieldsController extends Controller
     public function destroy($field_id)
     {
         $field = CustomField::findOrFail($field_id);
+
+        $this->authorize('delete', $field);
 
         if ($field->fieldset->count() >0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Field is in use.'));

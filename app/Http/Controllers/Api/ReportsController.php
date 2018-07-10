@@ -18,7 +18,8 @@ class ReportsController extends Controller
      */
     public function index(Request $request)
     {
-
+        $this->authorize('reports.view');
+        
         $actionlogs = Actionlog::with('item', 'user', 'target','location');
 
         if ($request->has('search')) {

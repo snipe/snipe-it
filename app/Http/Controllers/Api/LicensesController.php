@@ -223,6 +223,8 @@ class LicensesController extends Controller
 
         if ($license = License::find($licenseId)) {
 
+            $this->authorize('view', $license);
+
             $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
 
             $offset = request('offset', 0);
