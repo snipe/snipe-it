@@ -97,7 +97,7 @@ final class CompaniesController extends Controller
                 ->with('error', trans('admin/companies/message.does_not_exist'));
         }
 
-        $this->authorize('edit', $item);
+        $this->authorize('update', $item);
 
         return view('companies/edit')->with('item', $item);
     }
@@ -117,7 +117,7 @@ final class CompaniesController extends Controller
             return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
         }
 
-        $this->authorize('edit', $company);
+        $this->authorize('update', $company);
 
         $company->name = $request->input('name');
 

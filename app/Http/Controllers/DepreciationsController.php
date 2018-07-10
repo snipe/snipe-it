@@ -100,7 +100,7 @@ class DepreciationsController extends Controller
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
-        $this->authorize('edit', $item);
+        $this->authorize('update', $item);
 
         return view('depreciations/edit', compact('item'));
     }
@@ -124,7 +124,7 @@ class DepreciationsController extends Controller
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
-        $this->authorize('edit', $depreciation);
+        $this->authorize('update', $depreciation);
 
         // Depreciation data
         $depreciation->name      = $request->input('name');
