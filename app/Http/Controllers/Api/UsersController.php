@@ -130,8 +130,7 @@ class UsersController extends Controller
      */
     public function selectlist(Request $request)
     {
-        $this->authorize('view', User::class);
-        
+
         $users = User::select(
             [
                 'users.id',

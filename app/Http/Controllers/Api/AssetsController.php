@@ -344,7 +344,6 @@ class AssetsController extends Controller
      */
     public function selectlist(Request $request)
     {
-        $this->authorize('view', Asset::class);
 
         $assets = Company::scopeCompanyables(Asset::select([
             'assets.id',
