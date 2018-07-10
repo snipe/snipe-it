@@ -29,6 +29,8 @@ final class CompaniesController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Company::class);
+
         return view('companies/index')->with('companies', Company::all());
     }
 
@@ -41,6 +43,8 @@ final class CompaniesController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Company::class);
+
         return view('companies/edit')->with('item', new Company);
     }
 
@@ -54,6 +58,8 @@ final class CompaniesController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
+        $this->authorize('create', Company::class);
+
         $company = new Company;
         $company->name = $request->input('name');
 
@@ -90,6 +96,9 @@ final class CompaniesController extends Controller
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
         }
+
+        $this->authorize('edit', $item);
+
         return view('companies/edit')->with('item', $item);
     }
 
@@ -107,6 +116,8 @@ final class CompaniesController extends Controller
         if (is_null($company = Company::find($companyId))) {
             return redirect()->route('companies.index')->with('error', trans('admin/companies/message.does_not_exist'));
         }
+
+        $this->authorize('edit', $company);
 
         $company->name = $request->input('name');
 
@@ -164,6 +175,9 @@ final class CompaniesController extends Controller
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.not_found'));
         } else {
+
+            $this->authorize('delete', $company);
+
             try {
                 $company->delete();
                 return redirect()->route('companies.index')
