@@ -192,7 +192,8 @@ class UsersController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
-        $this->authorize('view', User::class);
+        $this->authorize('create', User::class);
+
         $user = new User;
         $user->fill($request->all());
 
