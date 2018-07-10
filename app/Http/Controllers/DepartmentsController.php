@@ -83,6 +83,8 @@ class DepartmentsController extends Controller
     {
         $department = Department::find($id);
 
+        $this->authorize('view', $department);
+
         if (isset($department->id)) {
             return view('departments/view', compact('department'));
         }
@@ -100,6 +102,8 @@ class DepartmentsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Department::class);
+
         return view('departments/edit')->with('item', new Department);
     }
 
@@ -117,6 +121,8 @@ class DepartmentsController extends Controller
         if (is_null($department = Department::find($id))) {
             return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.not_found'));
         }
+
+        $this->authorize('delete', $department);
 
         if ($department->users->count() > 0) {
             return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.assoc_users'));
@@ -141,15 +147,19 @@ class DepartmentsController extends Controller
         if (is_null($item = Department::find($id))) {
             return redirect()->back()->with('error', trans('admin/locations/message.does_not_exist'));
         }
+
+        $this->authorize('update', $item);
+
         return view('departments/edit', compact('item'));
     }
 
     public function update(ImageUploadRequest $request, $id) {
 
-        $this->authorize('create', Department::class);
         if (is_null($department = Department::find($id))) {
             return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist'));
         }
+
+        $this->authorize('update', $department);
 
         $department->fill($request->all());
         $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
