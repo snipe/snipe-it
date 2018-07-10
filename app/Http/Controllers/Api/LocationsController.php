@@ -166,6 +166,7 @@ class LocationsController extends Controller
      */
     public function selectlist(Request $request)
     {
+        $this->authorize('view', Location::class);
 
         $locations = Location::select([
             'locations.id',

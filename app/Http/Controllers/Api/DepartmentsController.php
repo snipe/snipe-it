@@ -133,7 +133,8 @@ class DepartmentsController extends Controller
      */
     public function selectlist(Request $request)
     {
-
+        $this->authorize('view', Department::class);
+        
         $departments = Department::select([
             'id',
             'name',

@@ -198,7 +198,8 @@ class AssetModelsController extends Controller
      */
     public function selectlist(Request $request)
     {
-
+        $this->authorize('view', AssetModel::class);
+        
         $assetmodels = AssetModel::select([
             'models.id',
             'models.name',

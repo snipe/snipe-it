@@ -138,6 +138,7 @@ class ManufacturersController extends Controller
      */
     public function selectlist(Request $request)
     {
+        $this->authorize('view', Manufacturer::class);
 
         $manufacturers = Manufacturer::select([
             'id',
