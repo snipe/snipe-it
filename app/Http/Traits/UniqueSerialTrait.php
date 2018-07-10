@@ -13,11 +13,10 @@ trait UniqueSerialTrait
      */
     protected function prepareUniqueSerialRule($parameters, $field)
     {
-        $settings = \App\Models\Setting::first();
-
-        if ($settings->unique_serial=='1') {
-            return 'unique_undeleted:'.$this->table.','. $this->getKey();
+        if ($settings = \App\Models\Setting::first()) {
+            if ($settings->unique_serial=='1') {
+                return 'unique_undeleted:'.$this->table.','. $this->getKey();
+            }
         }
-
     }
 }
