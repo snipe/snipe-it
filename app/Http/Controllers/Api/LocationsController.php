@@ -122,7 +122,7 @@ class LocationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Location::class);
+        $this->authorize('update', Location::class);
         $location = Location::findOrFail($id);
         $location->fill($request->all());
 

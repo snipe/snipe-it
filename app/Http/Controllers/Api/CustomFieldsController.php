@@ -57,7 +57,7 @@ class CustomFieldsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', CustomField::class);
+        $this->authorize('update', CustomField::class);
         $field = CustomField::findOrFail($id);
         $data = $request->all();
 
@@ -125,7 +125,8 @@ class CustomFieldsController extends Controller
 
     public function associate(Request $request, $field_id)
     {
-        $this->authorize('edit', CustomFieldset::class);
+        $this->authorize('update', CustomFieldset::class);
+
         $field = CustomField::findOrFail($field_id);
 
         $fieldset_id = $request->input('fieldset_id');
@@ -142,7 +143,8 @@ class CustomFieldsController extends Controller
 
     public function disassociate(Request $request, $field_id)
     {
-        $this->authorize('edit', CustomFieldset::class);
+        $this->authorize('update', CustomFieldset::class);
+
         $field = CustomField::findOrFail($field_id);
 
         $fieldset_id = $request->input('fieldset_id');

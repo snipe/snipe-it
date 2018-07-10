@@ -99,7 +99,7 @@ class ManufacturersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Manufacturer::class);
+        $this->authorize('update', Manufacturer::class);
         $manufacturer = Manufacturer::findOrFail($id);
         $manufacturer->fill($request->all());
 

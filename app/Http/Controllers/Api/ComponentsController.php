@@ -116,7 +116,7 @@ class ComponentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Component::class);
+        $this->authorize('update', Component::class);
         $component = Component::findOrFail($id);
         $component->fill($request->all());
 

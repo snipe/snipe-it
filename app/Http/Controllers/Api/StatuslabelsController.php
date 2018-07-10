@@ -101,7 +101,7 @@ class StatuslabelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Statuslabel::class);
+        $this->authorize('update', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
         
         $request->except('deployable', 'pending','archived');

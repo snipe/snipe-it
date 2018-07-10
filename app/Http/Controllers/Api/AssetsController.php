@@ -465,7 +465,7 @@ class AssetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Asset::class);
+        $this->authorize('update', Asset::class);
 
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?

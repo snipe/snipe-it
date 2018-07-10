@@ -121,7 +121,7 @@ class ConsumablesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Consumable::class);
+        $this->authorize('update', Consumable::class);
         $consumable = Consumable::findOrFail($id);
         $consumable->fill($request->all());
 
