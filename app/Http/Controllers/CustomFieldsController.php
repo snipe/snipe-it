@@ -39,12 +39,7 @@ class CustomFieldsController extends Controller
     */
     public function index()
     {
-        /**
-         * Since this is the overview for both CustomFields and CustomFieldsets, check for both permissions
-         */
-        if(Gate::denies('view', CustomField::class) && Gate::denies('view', CustomFieldset::class)) {
-            throw new AuthorizationException;
-        }
+        $this->authorize('view', CustomField::class);
 
         $fieldsets = CustomFieldset::with("fields", "models")->get();
         $fields = CustomField::with("fieldset")->get();
