@@ -182,47 +182,13 @@ class CustomFieldsController extends Controller
          * Change the encryption status of the field
          */
         if ($request->input('field_encrypted') != $field->field_encrypted) {
+            if ($request->input('field_encrypted') == 0) {
+                $field->decryptValues();
+            }
 
-          /**
-           * Get all assets that use this specific custom field
-           */
-          $field->load('fieldset.models.assets');
-
-          $assets = $field->fieldset->flatMap(function($fieldset) {
-              return $fieldset->models;
-          })->flatMap(function($assetModel) {
-              return $assetModel->assets;
-          });
-
-          /**
-           * Decrypt the field in every asset if it should be unencrypted
-           */
-          if ($request->input('field_encrypted') == 0) {
-
-            $assets->each(function($asset) use($field) {
-              $currentValue = $asset->{$field->db_column};
-
-              $asset->{$field->db_column} = decrypt($currentValue);
-              
-              $asset->save();
-            });
-
-          }
-
-          /**
-           * Encrypt the field in every asset if it should be encrypted
-           */          
-          if($request->input('field_encrypted') == 1) {
-
-            $assets->each(function($asset) use($field) {
-              $currentValue = $asset->{$field->db_column};
-
-              $asset->{$field->db_column} = encrypt($currentValue);
-              
-              $asset->save();
-            });
-
-          }
+            if ($request->input('field_encrypted') == 1) {
+                $field->encryptValues();
+            }            
         }
 
         /**
