@@ -172,6 +172,13 @@ class CustomFieldsController extends Controller
         $field->show_in_email = $request->get("show_in_email", 0);
 
         /**
+         * Encrypted field should not be shown in emails
+         */
+        if ($request->input('field_encrypted') == 1) {
+            $field->show_in_email = 0;
+        }
+
+        /**
          * Change the encryption status of the field
          */
         if ($request->input('field_encrypted') != $field->field_encrypted) {
