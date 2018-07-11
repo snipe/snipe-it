@@ -103,7 +103,7 @@
           </div>
 
           <!-- Show in Email  -->
-          <div class="form-group {{ $errors->has('show_in_email') ? ' has-error' : '' }}"  id="show_in_email">
+          <div class="form-group {{ $errors->has('show_in_email') ? ' has-error' : '' }}"  id="show_in_email" style="display:{{ (Input::old('field_encrypted') || $field->field_encrypted) ? 'none' : 'block' }}">
               <div class="col-md-8 col-md-offset-4">
                   <label for="show_in_email">
                       <input type="checkbox" name="show_in_email" value="1" class="minimal"{{ (Input::old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
