@@ -66,6 +66,12 @@ class CustomFieldsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()));
         }
 
+        /**
+         * Encrypted field should not be shown in emails
+         */
+        if ($request->input('field_encrypted') == 1) {
+            $data['show_in_email'] = 0;
+        }        
 
         /**
          * Change the encryption status of the field
