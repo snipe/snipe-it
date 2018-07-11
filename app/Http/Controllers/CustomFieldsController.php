@@ -156,8 +156,6 @@ class CustomFieldsController extends Controller
     /**
     * Store the updated field
     *
-    * @todo Allow encrypting/decrypting if encryption status changes
-    *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param  int  $id
     * @since [v4.0]
@@ -169,11 +167,62 @@ class CustomFieldsController extends Controller
         $field->name = e($request->get("name"));
         $field->element = e($request->get("element"));
         $field->field_values = e($request->get("field_values"));
-        $field->field_encrypted = e($request->get("field_encrypted", 0));
         $field->user_id = Auth::user()->id;
         $field->help_text = $request->get("help_text");
         $field->show_in_email = $request->get("show_in_email", 0);
 
+        /**
+         * Change the encryption status of the field
+         */
+        if ($request->input('field_encrypted') != $field->field_encrypted) {
+
+          /**
+           * Get all assets that use this specific custom field
+           */
+          $field->load('fieldset.models.assets');
+
+          $assets = $field->fieldset->flatMap(function($fieldset) {
+              return $fieldset->models;
+          })->flatMap(function($assetModel) {
+              return $assetModel->assets;
+          });
+
+          /**
+           * Decrypt the field in every asset if it should be unencrypted
+           */
+          if ($request->input('field_encrypted') == 0) {
+
+            $assets->each(function($asset) use($field) {
+              $currentValue = $asset->{$field->db_column};
+
+              $asset->{$field->db_column} = decrypt($currentValue);
+              
+              $asset->save();
+            });
+
+          }
+
+          /**
+           * Encrypt the field in every asset if it should be encrypted
+           */          
+          if($request->input('field_encrypted') == 1) {
+
+            $assets->each(function($asset) use($field) {
+              $currentValue = $asset->{$field->db_column};
+
+              $asset->{$field->db_column} = encrypt($currentValue);
+              
+              $asset->save();
+            });
+
+          }
+        }
+
+        /**
+         * Sets the new encryption status
+         */
+        $field->field_encrypted = $request->input('field_encrypted', 0);
+        
         if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
             $field->format = e($request->get("custom_format"));
         } else {
