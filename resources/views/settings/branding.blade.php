@@ -73,7 +73,8 @@
                                     {{ trans('button.select_file')  }}
                                     <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
                                 </label>
-                                <p class="help-block">{{ trans('general.image_filetypes_help') }}</p>
+
+                                    <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
                                 
                                 {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
                                 {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal')) }} Remove

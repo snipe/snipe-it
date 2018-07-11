@@ -105,7 +105,7 @@
           <!-- Show in Email  -->
           <div class="form-group {{ $errors->has('show_in_email') ? ' has-error' : '' }}"  id="show_in_email">
               <div class="col-md-8 col-md-offset-4">
-                  <label for="field_encrypted">
+                  <label for="show_in_email">
                       <input type="checkbox" name="show_in_email" value="1" class="minimal"{{ (Input::old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_email') }}
                   </label>
@@ -167,7 +167,7 @@
         // Only display the custom format field if it's a custom format validation type
         $(".format").change(function(){
             $(this).find("option:selected").each(function(){
-                if (($(this).attr("value")=="") &&  $('.format').prop("selectedIndex") != 0) {
+                if ($('.format').prop("selectedIndex") == 1) {
                     $("#custom_regex").show();
                 } else{
                     $("#custom_regex").hide();
@@ -178,7 +178,7 @@
         // Only display the field element if the type is not text
         $(".field_element").change(function(){
             $(this).find("option:selected").each(function(){
-                if($(this).attr("value")!="text"){
+                if (($(this).attr("value")!="text") && ($(this).attr("value")!="textarea")){
                     $("#field_values_text").show();
                 } else{
                     $("#field_values_text").hide();

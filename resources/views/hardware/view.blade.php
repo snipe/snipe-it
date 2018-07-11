@@ -281,7 +281,7 @@
                               @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                 <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
                               @else
-                                {{ $asset->{$field->db_column_name()} }}
+                                {!! nl2br(e($asset->{$field->db_column_name()})) !!}
                               @endif
                             @endif
                            </td>

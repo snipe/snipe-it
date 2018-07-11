@@ -16,6 +16,7 @@ class CustomField extends Model
     public $guarded=["id"];
     public static $PredefinedFormats=[
         "ANY" => "",
+        "CUSTOM REGEX" => "",
         "ALPHA" => "alpha",
         "ALPHA-DASH" => "alpha_dash",
         "NUMERIC" => "numeric",

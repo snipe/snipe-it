@@ -223,10 +223,18 @@
 
             <div class="checkbox col-md-12">
               <label>
+                {{ Form::checkbox('manager', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/users/table.manager') }}
+              </label>
+            </div>
+
+            <div class="checkbox col-md-12">
+              <label>
                 {{ Form::checkbox('department', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('general.department') }}
               </label>
             </div>
+
 
 
 

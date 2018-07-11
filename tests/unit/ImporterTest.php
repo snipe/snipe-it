@@ -8,6 +8,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\CustomField;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -72,10 +73,59 @@ EOT;
             'asset_tag' => '970882174-8',
             'notes' => "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
             'purchase_date' => '2016-04-05 00:00:01',
-            'purchase_cost' => 133289.59,
-            'warranty_months' => 14,
+            'purchase_cost' => 133289.59
+,            'warranty_months' => 14,
             '_snipeit_weight_2' => 35
             ]);
+    }
+
+    public function testImportCheckoutToLocation()
+    {
+        $this->signIn();
+
+        // Testing in order:
+        // * Asset to user, no checkout type defined (default to user).
+        // * Asset to user, explicit user checkout type (Checkout to user)
+        // * Asset to location, location does not exist to begin with
+        // * Asset to preexisting location.
+        $csv = <<<'EOT'
+Full Name,Email,Username,Checkout Location,Checkout Type,item Name,Category,Model name,Manufacturer,Model Number,Serial,Asset Tag,Location,Notes,Purchase Date,Purchase Cost,Company,Status,Warranty,Supplier,Weight
+Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,,,eget nunc donec quis,quam,massa id,Linkbridge,6377018600094472,27aa8378-b0f4-4289-84a4-405da95c6147,970882174-8,Daping,"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",2016-04-05,133289.59,Alpha,Undeployable,14,Blogspan,35
+Mildred Gibson,mgibson2@wiley.com,mgibson2,,user,morbi quis tortor id,nunc nisl duis,convallis tortor risus,Lajo,374622546776765,2837ab20-8f0d-4935-8a52-226392f2b1b0,710141467-2,Shekou,In congue. Etiam justo. Etiam pretium iaculis justo.,2015-08-09,233.57,Konklab,Lost,,,
+,,,Planet Earth,location,dictumst maecenas ut,sem praesent,accumsan felis,Layo,30052522651756,4751495c-cee0-4961-b788-94a545b5643e,998233705-X,Dante Delgado,,2016-04-16,261.79,,Archived,15,Ntag,
+,,,Daping,location,viverra diam vitae,semper sapien,dapibus dolor vel,Flashset,3559785746335392,e287bb64-ff4f-434c-88ab-210ad433c77b,927820758-6,Achiaman,,2016-03-05,675.3,,Archived,22,Meevee,
+EOT;
+
+        $this->import(new AssetImporter($csv));
+        $user = User::where('username', 'bnelson0')->firstOrFail();
+
+        $this->tester->seeRecord('assets', [
+            'asset_tag' => '970882174-8',
+            'assigned_type' => User::class,
+            'assigned_to' => $user->id
+        ]);
+
+        $user = User::where('username', 'mgibson2')->firstOrFail();
+        $this->tester->seeRecord('assets', [
+            'asset_tag' => '710141467-2',
+            'assigned_type' => User::class,
+            'assigned_to' => $user->id
+        ]);
+
+        $location = Location::where('name', 'Planet Earth')->firstOrFail();
+        $this->tester->seeRecord('assets', [
+            'asset_tag' => '998233705-X',
+            'assigned_type' => Location::class,
+            'assigned_to' => $location->id
+        ]);
+
+        $location = Location::where('name', 'Daping')->firstOrFail();
+        $this->tester->seeRecord('assets', [
+            'asset_tag' => '927820758-6',
+            'assigned_type' => Location::class,
+            'assigned_to' => $location->id
+        ]);
+
     }
 
     public function testUpdateAssetIncludingCustomFields()
@@ -385,18 +435,19 @@ EOT;
     public function testDefaultConsumableImport()
     {
         $csv = <<<'EOT'
-Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
-eget,01/03/2011,$85.91,mauris blandit mattis.,Lycos,T295T06V,Triamterene/Hydrochlorothiazide,No,322
+Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity,Item Number,Model Number
+eget,01/03/2011,$85.91,mauris blandit mattis.,Lycos,T295T06V,Triamterene/Hydrochlorothiazide,No,322,3305,30123
 EOT;
         $this->import(new ConsumableImporter($csv));
-
         $this->tester->seeRecord('consumables', [
             'name' => 'eget',
             'purchase_date' => '2011-01-03 00:00:01',
             'purchase_cost' => 85.91,
             'order_number' => 'T295T06V',
             'requestable' => 0,
-            'qty' => 322
+            'qty' => 322,
+            'item_no' => 3305,
+            'model_number' => 30123
         ]);
 
         $this->tester->seeRecord('locations', [
