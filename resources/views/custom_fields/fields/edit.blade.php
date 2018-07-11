@@ -113,12 +113,6 @@
 
           </div>
 
-
-      @if (!$field->id)
-
-
-
-
           <!-- Encrypted  -->
           <div class="form-group {{ $errors->has('encrypted') ? ' has-error' : '' }}">
             <div class="col-md-8 col-md-offset-4">
@@ -128,13 +122,12 @@
               </label>
             </div>
 
-            <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
+            <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:{{ (Input::old('field_encrypted') || $field->field_encrypted) ? 'block' : 'none' }}">
               <div class="callout callout-danger">
                 <p><i class="fa fa-warning"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
               </div>
             </div>
           </div>
-          @endif
 
 
       </div> <!-- /.box-body-->
