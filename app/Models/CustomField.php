@@ -259,6 +259,59 @@ class CustomField extends Model
         return false;
     }
 
+    /**
+     * Get all assets that use this specific custom field
+     * 
+     * @return Collection
+     */
+    public function getAssets() 
+    {
+        $this->load('fieldset.models.assets');
+
+        $assets = $this->fieldset->flatMap(function($fieldset) {
+            return $fieldset->models;
+        })->flatMap(function($assetModel) {
+            return $assetModel->assets;
+        });
+
+        return $assets;
+    }
+
+    /**
+     * Decrypts all values for this field
+     *
+     * @return void
+     */
+    public function decryptValues()
+    {
+        $assets = $this->getAssets();
+
+        $assets->each(function($asset) {
+            $currentValue = $asset->{$this->db_column};
+
+            $asset->{$this->db_column} = decrypt($currentValue);
+            
+            $asset->save();
+        });
+    }
+
+    /**
+     * Encrypts all values for this field
+     *
+     * @return void
+     */
+    public function encryptValues()
+    {
+        $assets = $this->getAssets();
+
+        $assets->each(function($asset) {
+            $currentValue = $asset->{$this->db_column};
+
+            $asset->{$this->db_column} = encrypt($currentValue);
+            
+            $asset->save();
+        });
+    }
 
     /**
      * Convert non-UTF-8 or weirdly encoded text into something that
