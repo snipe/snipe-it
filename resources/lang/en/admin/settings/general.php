@@ -180,6 +180,6 @@ return array(
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
     'unique_serial'                => 'Unique serial numbers',
-    'unique_serial_help_text'                => 'Checking this box will enforce a uniqeness constraint on asset serials',
+    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Length of asset tags, including zerofill',
 );
