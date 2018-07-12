@@ -11,10 +11,8 @@ use Redirect;
 use App\Models\AssetModel;
 use Lang;
 use Auth;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
-use Illuminate\Support\Facades\Gate;
 use Log;
 
 /**
